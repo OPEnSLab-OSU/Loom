@@ -1,0 +1,15 @@
+The nRF flavor of IoA is comprised with the Nordic nRF24L01+ radio tranceiver.
+Uses RF24 and RF24Network libraries located here:
+-
+-
+Other Dependencies:
+-
+
+Significant code structure pulled from:
+2011 James Coliz, Jr. <maniacbug@ymail.com>
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ version 2 as published by the Free Software Foundation.
+ 
+ 
