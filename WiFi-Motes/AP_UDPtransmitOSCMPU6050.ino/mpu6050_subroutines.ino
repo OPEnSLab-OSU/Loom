@@ -139,7 +139,7 @@ void udp_mpu6050(void)
     bndl.add("/MPU6050/yaw").add((float)(ypr[0] * 180/M_PI));
     bndl.add("/MPU6050/pitch").add((float)(ypr[1] * 180/M_PI));
     bndl.add("/MPU6050/roll").add((float)(ypr[2] * 180/M_PI));
-    bndl.add("/MPU6050/ax").add(ax);
+    bndl.add("/MPU6050/ax").add((uint32_t)ax);
     bndl.add("/MPU6050/ay").add(ay);
     bndl.add("/MPU6050/az").add(az);
     bndl.add("/MPU6050/gx").add(gx);
