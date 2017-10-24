@@ -47,8 +47,8 @@ to
 #define VBATPIN A7       // Pin to check for battery voltage
 //#define CLIENT_REQUESTS_DATA 1 // Set to 1 if you only send data when requested by client, else, send data at sample/sleep rate
 
-#define STR_HELPER(x) #x
-#define STR(x) STR_HELPER(x) //to concatenate a predefined number to a string literal, use STR(x)
+#define STR_(x) #x
+#define STR(x) STR_(x) //to concatenate a predefined number to a string literal, use STR(x)
 
 #define FAMILY "/Loom"
 #define DEVICE "/IShield"
@@ -62,6 +62,9 @@ to
 #ifdef is_sleep_period
   #include <Adafruit_SleepyDog.h> // Include this if transmitting at timed intervals (use this one)
 #endif
+
+//ADD sparkfun library for is_sleep_interrupt
+
 const byte flashValidationValue = 99; // Value to test to see if flashMem has been written before
 
 int led =  LED_BUILTIN;
@@ -89,7 +92,7 @@ WiFiServer server(80);
 // OSC Address Builder String:
 //const String IDstring = "/LOOM/Ishield" + INSTANCE_NUM; // example "/LOOM/Ishield0"
 //uint8_t addrStringSize = sizeof(IDstring);
-char  IDbuffer[] = "/LOOM/Ishield0";
+//char  IDbuffer[] = "/LOOM/Ishield0";
 
 #ifdef is_analog
   #define num_measurements 4 // must be 1, 2, 4, or 8)! number of analog measurements to sample and average per channel
