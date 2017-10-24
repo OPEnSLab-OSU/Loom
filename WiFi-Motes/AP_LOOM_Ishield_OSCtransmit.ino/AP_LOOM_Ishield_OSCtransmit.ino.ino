@@ -38,7 +38,7 @@ to
 #include <WiFi101.h>
 #include <WiFiUdp.h>
 #include <OSCBundle.h>
-
+#include <FlashStorage.h>
 
 // Define your sensor type here by commenting and un-commenting
 #define is_analog 2      // also define number of channels
