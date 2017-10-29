@@ -140,13 +140,13 @@ void udp_mpu6050(void)
   // messages want an OSC address as first argument
   // compile bundle
   /*
-    bndl.add(IDString "/mac0").add((int)mac[0]);
-    bndl.add(IDString "/mac1").add((int)mac[1]);
-    bndl.add(IDString "/mac2").add((int)mac[2]);
-    bndl.add(IDString "/mac3").add((int)mac[3]);
-    bndl.add(IDString "/mac4").add((int)mac[4]);
-    bndl.add(IDString "/mac5").add((int)mac[5]);
-    bndl.add(IDString "/ip").add((String)ip);
+    bndl.add(IDString "/mac0").add((int)configuration.mac[0]);
+    bndl.add(IDString "/mac1").add((int)configuration.mac[1]);
+    bndl.add(IDString "/mac2").add((int)configuration.mac[2]);
+    bndl.add(IDString "/mac3").add((int)configuration.mac[3]);
+    bndl.add(IDString "/mac4").add((int)configuration.mac[4]);
+    bndl.add(IDString "/mac5").add((int)configuration.mac[5]);
+    bndl.add(IDString "/ip").add((String)configuration.ip);
  */
 // Assemble UDP Packet
 // IP1 IP2 Yaw Pitch Roll aX aY aZ gX gY gZ vBatt
@@ -169,7 +169,7 @@ void udp_mpu6050(void)
     bndl.add(IDString "/vbat").add(vbat);     // Tack battery voltage onto here. Will want to change this for other sensors
 
    // UDP Packet
-    Udp.beginPacket(ip_broadcast, 9436);
+    Udp.beginPacket(configuration.ip_broadcast, 9436);
       bndl.send(Udp); // send the bytes to the SLIP stream
     Udp.endPacket(); // mark the end of the OSC Packet
    
@@ -198,7 +198,7 @@ void calMPU6050()
   if (state==1) {
     Serial.println("\nCalculating offsets...");
     calibration();
-    configuration.written = flashValidationValue;
+    configuration.checksum = flashValidationValue;
     state++;
     delay(1000);
   }
