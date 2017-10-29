@@ -57,10 +57,14 @@ to
 #define IDString FAMILY DEVICE STR(INSTANCE_NUM) // C interprets subsequent string literals as concatenation: "/Loom" "/Ishield" "0" becomes "/Loom/Ishield0"
 // Set Sleep Mode Use one or the other or neither of the following 2 lines
 #define is_sleep_period 50  // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between
-//#define is_sleep_interrupt 11  // Uncoment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
+//#define is_sleep_interrupt 11  // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 
 #ifdef is_sleep_period
   #include <Adafruit_SleepyDog.h> // Include this if transmitting at timed intervals (use this one)
+#endif
+
+#ifdef is_sleep_interrupt
+  #include <LowPower.h> //Include this if transmitting on pin interrupt
 #endif
 
 //ADD sparkfun library for is_sleep_interrupt
