@@ -38,7 +38,7 @@ to
 #include <WiFi101.h>
 #include <WiFiUdp.h>
 #include <OSCBundle.h>
-
+#include <FlashStorage.h>
 
 // Define your sensor type here by commenting and un-commenting
 #define is_analog 2      // also define number of channels
@@ -47,8 +47,8 @@ to
 #define VBATPIN A7       // Pin to check for battery voltage
 //#define CLIENT_REQUESTS_DATA 1 // Set to 1 if you only send data when requested by client, else, send data at sample/sleep rate
 
-#define STR_HELPER(x) #x
-#define STR(x) STR_HELPER(x) //to concatenate a predefined number to a string literal, use STR(x)
+#define STR_(x) #x
+#define STR(x) STR_(x) //to concatenate a predefined number to a string literal, use STR(x)
 
 #define FAMILY "/Loom"
 #define DEVICE "/IShield"
@@ -57,11 +57,32 @@ to
 #define IDString FAMILY DEVICE STR(INSTANCE_NUM) // C interprets subsequent string literals as concatenation: "/Loom" "/Ishield" "0" becomes "/Loom/Ishield0"
 // Set Sleep Mode Use one or the other or neither of the following 2 lines
 #define is_sleep_period 50  // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between
-//#define is_sleep_interrupt 11  // Uncoment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
+//#define is_sleep_interrupt 11  // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 
 #ifdef is_sleep_period
   #include <Adafruit_SleepyDog.h> // Include this if transmitting at timed intervals (use this one)
 #endif
+
+#ifdef is_sleep_interrupt
+  #include <LowPower.h> //Include this if transmitting on pin interrupt
+#endif
+
+//ADD sparkfun library for is_sleep_interrupt
+struct config_t {
+  byte checksum;               //value is changed when flash memory is written to.
+  IPAddress ip;                //Device's IP Address
+  char* ssid;                //Created AP's name
+  char* pass;                //AP Password (10 or 26 characters long)
+  int   keyIndex;            //Key Index Number (needed only for WEP)
+  char* ip_broadcast;        //IP to Broadcast data
+  unsigned int localPort;      //Local port to listen on
+  byte  mac[6];                 //Device's MAC Address
+#ifdef is_i2c
+  int   ax_offset, ay_offset, az_offset, gx_offset, gy_offset, gz_offset; //mpu6050 config
+#endif
+};
+struct config_t configuration;
+FlashStorage(flash_config,config_t);
 const byte flashValidationValue = 99; // Value to test to see if flashMem has been written before
 
 int led =  LED_BUILTIN;
@@ -69,14 +90,14 @@ volatile bool ledState = LOW;
 
 float vbat = 3.3;    // Place to save measured battery voltage
 
-char ssid[] = "wifi101-network"; // created AP name
-char pass[] = "1234567890";      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
-int keyIndex = 0;                // your network key Index number (needed only for WEP)
-char ip_broadcast[] = "192.168.1.255"; // IP to Broadcast data 
-unsigned int localPort = 9436;      // local port to listen on
+/*configuration.ssid = "wifi101-network"; // created AP name
+configuration.pass = "1234567890";      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
+configuration.keyIndex = 0;                // your network key Index number (needed only for WEP)
+configuration.ip_broadcast[] = "192.168.1.255"; // IP to Broadcast data 
+configuration.localPort = 9436;      // local port to listen on*/
 
-byte mac[6]; // place to save and recall this devices MAC address
-IPAddress ip; // place to save and recall IP address
+//byte mac[6]; // place to save and recall this devices MAC address
+//IPAddress ip; // place to save and recall IP address
 
 char packetBuffer[255]; //buffer to hold incoming packet
 char  ReplyBuffer[] = "acknowledged";       // a string to send back
@@ -89,7 +110,7 @@ WiFiServer server(80);
 // OSC Address Builder String:
 //const String IDstring = "/LOOM/Ishield" + INSTANCE_NUM; // example "/LOOM/Ishield0"
 //uint8_t addrStringSize = sizeof(IDstring);
-char  IDbuffer[] = "/LOOM/Ishield0";
+//char  IDbuffer[] = "/LOOM/Ishield0";
 
 #ifdef is_analog
   #define num_measurements 4 // must be 1, 2, 4, or 8)! number of analog measurements to sample and average per channel
@@ -154,11 +175,11 @@ int giro_deadzone=1;     //Giro error allowed, make it lower to get more precisi
 // ===       Struct for saving MPU params       ===
 // ================================================================
 // see http://playground.arduino.cc/Code/EEPROMWriteAnything
-struct config_t
+/*struct config_t
 {
     int ax_offset,ay_offset,az_offset,gx_offset,gy_offset,gz_offset;
     byte written;
-} configuration;
+} configuration;*/
 #endif
 // ** End if i2c check
 
@@ -166,6 +187,22 @@ void setup() {
   //Initialize serial and wait for port to open:
   Serial.begin(9600);
   pinMode(led, OUTPUT);      // set the LED pin mode
+  
+  configuration = flash_config.read();                    // read from flash memory
+  if (configuration.checksum != flashValidationValue){    //
+        configuration.ssid = "wifi101-network";           // created AP name
+        configuration.pass = "1234567890";                // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
+        configuration.keyIndex = 0;                       // your network key Index number (needed only for WEP)
+        configuration.ip_broadcast = "192.168.1.255";     // IP to Broadcast data 
+        configuration.localPort = 9436;                   // local port to listen on
+        #ifdef is_i2c
+        calMPU6050();                                     // auto-calibrate the MPU6050; if this succeeds, it also writes configuration.checksum=flashValidationValue
+        #else
+        configuration.checksum = flashValidationValue;    // configuration has been written successfully, so we write the checksum
+        #endif
+        // flash_config.write(configuration); don't uncomment this line until we're pretty confident that this behaves how we want; flash memory has limited writes and we don't want to waste it on unnecessary tests
+  }
+  
 #ifdef transmit_butt
   pinMode(transmit_butt, INPUT_PULLUP);      // set the transmit_butt pin mode to input
 #endif
@@ -221,7 +258,6 @@ void setup() {
         Serial.println(F(")"));
     }
   // Auto Calibrate MPU6050 on startup. Change this to save calibration values in flash and only trigger function when received calibrate request from client
-  calMPU6050();
 // ** end serial stuff
  #endif 
 //----------------------------------------------------
@@ -247,10 +283,10 @@ void setup() {
 
   // print the network name (SSID);
   Serial.print("Creating access point named: ");
-  Serial.println(ssid);
+  Serial.println(configuration.ssid);
 
   // Create open network. Change this line if you want to create an WEP network:
-  status = WiFi.beginAP(ssid);
+  status = WiFi.beginAP(configuration.ssid);
   if (status != WL_AP_LISTENING) {
     Serial.println("Creating access point failed");
     // don't continue
@@ -268,7 +304,7 @@ void setup() {
 
   Serial.println("\nStarting UDP connection over server...");
   // if you get a connection, report back via serial:
-  Udp.begin(localPort);
+  Udp.begin(configuration.localPort);
 }
 
 
@@ -360,24 +396,24 @@ void printWiFiStatus() {
   Serial.println(WiFi.SSID());
 
   // print your WiFi shield's IP address:
-  ip = WiFi.localIP();
+  configuration.ip = WiFi.localIP();
   Serial.print("IP Address: ");
-  Serial.println(ip);
+  Serial.println(configuration.ip);
 
   // print your MAC address:
-  WiFi.macAddress(mac);
+  WiFi.macAddress(configuration.mac);
   Serial.print("MAC address: ");
-  Serial.print(mac[5], HEX);
+  Serial.print(configuration.mac[5], HEX);
   Serial.print(":");
-  Serial.print(mac[4], HEX);
+  Serial.print(configuration.mac[4], HEX);
   Serial.print(":");
-  Serial.print(mac[3], HEX);
+  Serial.print(configuration.mac[3], HEX);
   Serial.print(":");
-  Serial.print(mac[2], HEX);
+  Serial.print(configuration.mac[2], HEX);
   Serial.print(":");
-  Serial.print(mac[1], HEX);
+  Serial.print(configuration.mac[1], HEX);
   Serial.print(":");
-  Serial.println(mac[0], HEX);
+  Serial.println(configuration.mac[0], HEX);
 
   // print the received signal strength:
   long rssi = WiFi.RSSI();
@@ -386,6 +422,6 @@ void printWiFiStatus() {
   Serial.println(" dBm");
   // print where to go in a browser:
   Serial.print("To see this page in action, open a browser to http://");
-  Serial.println(ip);
+  Serial.println(configuration.ip);
 
 }
