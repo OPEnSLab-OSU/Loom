@@ -35,12 +35,12 @@
 //------------------------------------------------------------------------
 //#include <Arduino.h>
 #include <Wire.h>
-#include "Adafruit_SHT31.h" // https://github.com/adafruit/Adafruit_SHT31
+//#include "Adafruit_SHT31.h" // https://github.com/adafruit/Adafruit_SHT31
 // ------------------------------------------------------------------------
 // Infrared/Full Light Sensor Settings--------------------
 //------------------------------------------------------------------------
-#include <Adafruit_Sensor.h>
-#include "Adafruit_TSL2591.h" // https://github.com/adafruit/Adafruit_TSL2591_Library
+//#include <Adafruit_Sensor.h>
+//#include "Adafruit_TSL2591.h" // https://github.com/adafruit/Adafruit_TSL2591_Library
 //------------------------------------------------------------------------
 // Debug Mode, Set flag to 0 for normal operation
 //------------------------------------------------------------------------
@@ -78,7 +78,7 @@ const int ID = 100;
 uint16_t lightR, lightG, lightB, lightIR, lightFull;
 //char transmitBuf[23]; // this needs to be the length of the transmission buffer
 
-HX711 scale(DOUT, CLK);
+//HX711 scale(DOUT, CLK);
 
 // Change to 434.0 or other frequency, must match RX's freq!
 #define RF95_FREQ 915.0
