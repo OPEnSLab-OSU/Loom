@@ -67,7 +67,6 @@ to
   #include <LowPower.h> //Include this if transmitting on pin interrupt
 #endif
 
-//ADD sparkfun library for is_sleep_interrupt
 struct config_t {
   byte checksum;               //value is changed when flash memory is written to.
   IPAddress ip;                //Device's IP Address
@@ -90,15 +89,6 @@ volatile bool ledState = LOW;
 
 float vbat = 3.3;    // Place to save measured battery voltage
 
-/*configuration.ssid = "wifi101-network"; // created AP name
-configuration.pass = "1234567890";      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
-configuration.keyIndex = 0;                // your network key Index number (needed only for WEP)
-configuration.ip_broadcast[] = "192.168.1.255"; // IP to Broadcast data 
-configuration.localPort = 9436;      // local port to listen on*/
-
-//byte mac[6]; // place to save and recall this devices MAC address
-//IPAddress ip; // place to save and recall IP address
-
 char packetBuffer[255]; //buffer to hold incoming packet
 char  ReplyBuffer[] = "acknowledged";       // a string to send back
 
@@ -106,11 +96,6 @@ WiFiUDP Udp;
 
 int status = WL_IDLE_STATUS;
 WiFiServer server(80);
-
-// OSC Address Builder String:
-//const String IDstring = "/LOOM/Ishield" + INSTANCE_NUM; // example "/LOOM/Ishield0"
-//uint8_t addrStringSize = sizeof(IDstring);
-//char  IDbuffer[] = "/LOOM/Ishield0";
 
 #ifdef is_analog
   #define num_measurements 4 // must be 1, 2, 4, or 8)! number of analog measurements to sample and average per channel
@@ -425,3 +410,4 @@ void printWiFiStatus() {
   Serial.println(configuration.ip);
 
 }
+
