@@ -5,8 +5,15 @@
 #define CS_PIN 10
 
 //Thermocouple type definition
-#define TCTYPE MAX31856_TCTYPE_K
-//#define TCTYPE MAX31856_VMODE_G32
+//#define TCTYPE MAX31856_TCTYPE_K
+#define TCTYPE MAX31856_VMODE_G32
+//#define TCTYPE MAX31856_VMODE_G8
+
+#if TCTYPE == MAX31856_VMODE_G32
+#define GAIN 32
+#elif TCTYPE == MAX31856_VMODE_G8
+#define GAIN 8
+#endif
 
 //Thermocouple unit definition
 #define FAHRENHEIT
@@ -46,13 +53,25 @@ void measure_tcouple() {
     if (fault & MAX31856_FAULT_OPEN)    Serial.println("Thermocouple Open Fault");
   }
       
-#elif TCTYPE == MAX31856_VMODE_G32
-    //Type VMODE_G32 processing
+#elif (TCTYPE == MAX31856_VMODE_G32 || TCTYPE == MAX31856_VMODE_G8)
+  //Type VMODE_G32/VMODE_G8 processing
+  
+  int32_t temp24 = readRegister24(MAX31856_LTCBH_REG); //Grabs 24 bits from registers
+  if (temp24 & 0x800000) {
+    temp24 |= 0xFF000000; //This keeps the sign the same from the 24-bit signed int
+  }
+
+  temp24 >>= 5; //Only want the top 19 bits from the original data.
+
+  vin = temp24/((float)(GAIN * 209715.2)); //temp24 = GAIN * 1.6 * 2^17 * vin
+  
 #endif
 }
 
 void udp_tcouple() {
   OSCBundle bndl;
+
+#if TCTYPE == MAX31856_TCTYPE_K
 
 #ifdef CELCIUS
   bndl.add(IDString "/CJTemp_C").add((float)CJTemp);
@@ -63,6 +82,11 @@ void udp_tcouple() {
   bndl.add(IDString "/CJTemp_F").add((float)(CJTemp * 1.8 + 32));
   bndl.add(IDString "/TCTemp_F").add((float)(TCTemp * 1.8 + 32));
 #endif
+
+#elif (TCTYPE == MAX31856_VMODE_G32 || TCTYPE == MAX31856_VMODE_G8)
+  bndl.add(IDString "/voltage").add((float)(vin));
+#endif
+
 
   Udp.beginPacket(ip_broadcast, 9436);
     bndl.send(Udp);

@@ -173,7 +173,7 @@ struct config_t
 #include <Adafruit_MAX31856.h>
 float CJTemp;
 float TCTemp;
-
+float vin;
 #endif
 
 void setup() {
