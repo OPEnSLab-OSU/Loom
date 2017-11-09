@@ -4,14 +4,19 @@
 //Hardware SPI CS pin definition
 #define CS_PIN 10
 
-//Thermocouple type definition
-//#define TCTYPE MAX31856_TCTYPE_K
-#define TCTYPE MAX31856_VMODE_G32
-//#define TCTYPE MAX31856_VMODE_G8
+#define K_TYPE 0
+#define VMODE_G32 1
+#define VMODE_G8 2
 
-#if TCTYPE == MAX31856_VMODE_G32
+//Thermocouple type definition
+//#define TCTYPE K_TYPE
+#define TCTYPE VMODE_G32
+//#define TCTYPE VMODE_G8
+
+//Defines gain for calculating voltage for VMODEs
+#if TCTYPE == VMODE_G32
 #define GAIN 32
-#elif TCTYPE == MAX31856_VMODE_G8
+#elif TCTYPE == VMODE_G8
 #define GAIN 8
 #endif
 
@@ -19,6 +24,7 @@
 #define FAHRENHEIT
 #define CELCIUS
 
+//Library header file
 #include <Adafruit_MAX31856.h>
 
 //Provide CS pin to initialize hardward SPI
@@ -27,11 +33,17 @@ Adafruit_MAX31856 max = Adafruit_MAX31856(CS_PIN);
 //setup
 void tcouple_setup() {
   max.begin();
-  max.setThermocoupleType(TCTYPE);
+#if TCTYPE == K_TYPE
+  max.setThermocoupleType(MAX31856_TCTYPE_K);
+#elif TCTYPE == VMODE_G32
+  max.setThermocoupleType(MAX31856_VMODE_G32);
+#elif TCTYPE == VMODE_G8
+  max.setThermocoupleType(MAX31856_VMODE_G8);
+#endif
 }
 
 void measure_tcouple() {
-#if TCTYPE == MAX31856_TCTYPE_K
+#if TCTYPE == K_TYPE
   //Type K processing
   //Cold Junction Temp
   CJTemp = max.readCJTemperature();
@@ -52,26 +64,19 @@ void measure_tcouple() {
     if (fault & MAX31856_FAULT_OVUV)    Serial.println("Over/Under Voltage Fault");
     if (fault & MAX31856_FAULT_OPEN)    Serial.println("Thermocouple Open Fault");
   }
-      
-#elif (TCTYPE == MAX31856_VMODE_G32 || TCTYPE == MAX31856_VMODE_G8)
+
+#elif TCTYPE == VMODE_G32 || TCTYPE == VMODE_G8
   //Type VMODE_G32/VMODE_G8 processing
-  
-  int32_t temp24 = readRegister24(MAX31856_LTCBH_REG); //Grabs 24 bits from registers
-  if (temp24 & 0x800000) {
-    temp24 |= 0xFF000000; //This keeps the sign the same from the 24-bit signed int
-  }
+  //Note: readVoltage is a custom function NOT included in default max31856 library
+  tc_vin = max.readVoltage(GAIN);
 
-  temp24 >>= 5; //Only want the top 19 bits from the original data.
-
-  vin = temp24/((float)(GAIN * 209715.2)); //temp24 = GAIN * 1.6 * 2^17 * vin
-  
 #endif
 }
 
 void udp_tcouple() {
   OSCBundle bndl;
 
-#if TCTYPE == MAX31856_TCTYPE_K
+#if TCTYPE == K_TYPE
 
 #ifdef CELCIUS
   bndl.add(IDString "/CJTemp_C").add((float)CJTemp);
@@ -83,8 +88,8 @@ void udp_tcouple() {
   bndl.add(IDString "/TCTemp_F").add((float)(TCTemp * 1.8 + 32));
 #endif
 
-#elif (TCTYPE == MAX31856_VMODE_G32 || TCTYPE == MAX31856_VMODE_G8)
-  bndl.add(IDString "/voltage").add((float)(vin));
+#elif TCTYPE == VMODE_G32 || TCTYPE == VMODE_G8
+  bndl.add(IDString "/voltage").add((float)(tc_vin));
 #endif
 
 
