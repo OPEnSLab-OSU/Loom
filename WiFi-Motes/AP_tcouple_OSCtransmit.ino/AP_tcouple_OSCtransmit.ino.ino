@@ -173,7 +173,7 @@ struct config_t
 #include <Adafruit_MAX31856.h>
 float CJTemp;
 float TCTemp;
-float vin;
+float tc_vin;
 #endif
 
 void setup() {
@@ -363,9 +363,6 @@ void loop() {
     udp_tcouple();
 #endif
 
-#ifdef tcouple
-    // Measure da
-#endif
     
 #ifdef is_analog
     measure_analog();
