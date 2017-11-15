@@ -140,33 +140,33 @@ void udp_mpu6050(void)
   // messages want an OSC address as first argument
   // compile bundle
   /*
-    bndl.add(IDString "/mac0").add((int)mac[0]);
-    bndl.add(IDString "/mac1").add((int)mac[1]);
-    bndl.add(IDString "/mac2").add((int)mac[2]);
-    bndl.add(IDString "/mac3").add((int)mac[3]);
-    bndl.add(IDString "/mac4").add((int)mac[4]);
-    bndl.add(IDString "/mac5").add((int)mac[5]);
-    bndl.add(IDString "/ip").add((String)ip);
+    bndl.add("/LOOM/Ishield0/mac0").add((int)mac[0]);
+    bndl.add("/LOOM/Ishield0/mac1").add((int)mac[1]);
+    bndl.add("/LOOM/Ishield0/mac2").add((int)mac[2]);
+    bndl.add("/LOOM/Ishield0/mac3").add((int)mac[3]);
+    bndl.add("/LOOM/Ishield0/mac4").add((int)mac[4]);
+    bndl.add("/LOOM/Ishield0/mac5").add((int)mac[5]);
+    bndl.add("/LOOM/Ishield0/ip").add((String)ip);
  */
 // Assemble UDP Packet
 // IP1 IP2 Yaw Pitch Roll aX aY aZ gX gY gZ vBatt
 #ifdef OUTPUT_READABLE_YAWPITCHROLL
-    bndl.add(IDString "/yaw").add((float)(ypr[0] * 180/M_PI));
-    bndl.add(IDString "/roll").add((float)(ypr[1] * 180/M_PI));
-    bndl.add(IDString "/pitch").add((float)(ypr[2] * 180/M_PI));
+    bndl.add("/LOOM/Ishield0/yaw").add((float)(ypr[0] * 180/M_PI));
+    bndl.add("/LOOM/Ishield0/roll").add((float)(ypr[1] * 180/M_PI));
+    bndl.add("/LOOM/Ishield0/pitch").add((float)(ypr[2] * 180/M_PI));
 #endif
-    bndl.add(IDString "/accelX").add((float)ax/16000);
-    bndl.add(IDString "/accelY").add((float)ay/16000);
-    bndl.add(IDString "/accelZ").add((float)az/16000);
-    bndl.add(IDString "/gyroX").add((float)gx/16000);
-    bndl.add(IDString "/gyroY").add((float)gy/16000);
-    bndl.add(IDString "/gyroZ").add((float)gz/16000);
+    bndl.add("/LOOM/Ishield0/accelX").add((float)ax/16000);
+    bndl.add("/LOOM/Ishield0/accelY").add((float)ay/16000);
+    bndl.add("/LOOM/Ishield0/accelZ").add((float)az/16000);
+    bndl.add("/LOOM/Ishield0/gyroX").add((float)gx/16000);
+    bndl.add("/LOOM/Ishield0/gyroY").add((float)gy/16000);
+    bndl.add("/LOOM/Ishield0/gyroZ").add((float)gz/16000);
 #ifdef OUTPUT_READABLE_WORLDACCEL
-    bndl.add(IDString "/rwx").add(aaWorld.x);
-    bndl.add(IDString "/rwy").add(aaWorld.y);
-    bndl.add(IDString "/rwz").add(aaWorld.z);
+    bndl.add("/LOOM/Ishield0/rwx").add(aaWorld.x);
+    bndl.add("/LOOM/Ishield0/rwy").add(aaWorld.y);
+    bndl.add("/LOOM/Ishield0/rwz").add(aaWorld.z);
 #endif
-    bndl.add(IDString "/vbat").add(vbat);     // Tack battery voltage onto here. Will want to change this for other sensors
+    bndl.add("/LOOM/Ishield0/vbat").add(vbat);     // Tack battery voltage onto here. Will want to change this for other sensors
 
    // UDP Packet
     Udp.beginPacket(ip_broadcast, 9436);
