@@ -1,16 +1,9 @@
-#include <OSCBoards.h>
-#include <OSCBundle.h>
-#include <OSCData.h>
-#include <OSCMatch.h>
-#include <OSCMessage.h>
-#include <OSCTiming.h>
-#include <SLIPEncodedSerial.h>
-#include <SLIPEncodedUSBSerial.h>
-
 /*
-  WiFi Access Point
+  Connect to a wifi network
   Get MPU6050 DMP data
   Transmit OSC formatted data stream over UDP to other connected devices
+
+  Like the transmit UDP MPU6050 example, but only sends data upon request from a host computer
 
   created Aug 29, 2017
   by Chet Udell
@@ -47,23 +40,38 @@ to
 #include <WiFi101.h>
 #include <WiFiUdp.h>
 #include <OSCBundle.h>
+#include <Adafruit_SleepyDog.h> // Include this if transmitting at timed intervals (use this one)
+//#include "LowPower.h" // Include this if going to sleep forever and woken up by external interrupt (don't use)
 
-#define is_i2c = 0x68    // also define i2c address of device
+//------------------------------------------------------------------------------------------------------
+// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
+//------------------------------------------------------------------------------------------------------
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+#define OUTPUT_READABLE 1 // set to 1 for debug messages print to serial window
+#define is_i2c 0x68    // also define i2c address of device
+#define VBATPIN A7
 
 int led =  LED_BUILTIN;
-
-char ssid[] = "wifi101-network"; // created AP name
-char pass[] = "1234567890";      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
-int keyIndex = 0;                // your network key Index number (needed only for WEP)
+volatile bool ledState = LOW;
+char ssid[] = "OPEnS"; // created AP name
+char pass[] = "Replace_with_your_wifi_password";      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
+char ip_broadcast[] = "192.168.1.255"; // IP to Broadcast data 
+byte mac[6]; // place to save and recall this devices MAC address
+IPAddress ip; // place to save and recall IP address
+int status = WL_IDLE_STATUS;     // the WiFi radio's status
 
 unsigned int localPort = 9436;      // local port to listen on
 
-char  ReplyBuffer[] = "acknowledged";       // a string to send back
+char packetBuffer[255]; //buffer to hold incoming packet
+
+int transmitMS = 50; // milliseconds period to transmit data
+float vbat = 3.3;    // Place to save measured battery voltage
+//char packetBuffer[255]; //buffer to hold incoming packet
+//char  ReplyBuffer[] = "acknowledged";       // a string to send back
 
 WiFiUDP Udp;
-
-int status = WL_IDLE_STATUS;
-WiFiServer server(80);
 
 #ifdef is_i2c
 // Include libraries for serial and i2c devices
@@ -85,7 +93,6 @@ bool dmpReady = false;  // set true if DMP init was successful
 uint8_t mpuIntStatus;   // holds actual interrupt status byte from MPU
 uint8_t devStatus;      // return status after each device operation (0 = success, !0 = error)
 uint16_t packetSize;    // expected DMP packet size (default is 42 bytes)
-char packetBuffer[255]; //buffer to hold incoming packet
 uint16_t fifoCount;     // count of all bytes currently in FIFO
 uint8_t fifoBuffer[64]; // FIFO storage buffer
 
@@ -115,6 +122,17 @@ void dmpDataReady() {
 // ** End if i2c check
 
 void setup() {
+
+pinMode(led, OUTPUT);      // set the LED pin mode
+
+#ifdef OUTPUT_READABLE
+  //Initialize serial and wait for port to open:
+  Serial.begin(9600);
+  
+  while (!Serial) {
+    ; // wait for serial port to connect. Needed for native USB port only
+  }
+#endif
 #ifdef is_i2c
   // join I2C bus (I2Cdev library doesn't do this automatically)
     #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
@@ -140,19 +158,25 @@ void setup() {
         Serial.println(F("Enabling DMP..."));
         mpu.setDMPEnabled(true);
 
+#if DEBUG == 1
         // Uncomment following 2 lines if using enable Arduino Uno, MO, or Trinket interrupt detection
         Serial.println(F("Enabling MPU interrupt detection (Arduino external interrupt 0)..."));
+#endif
         attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), dmpDataReady, RISING);
 
         // Uncomment following 2 lines if using Adafruit Feather 32u4
         // enable interrupt for PCINT7...
+#if DEBUG == 1
         //Serial.println(F("Enabling MPU interrupt detection PCINT 7 (pin 11)"));
+#endif
         //pciSetup(INTERRUPT_PIN);
         
         mpuIntStatus = mpu.getIntStatus();
 
         // set our DMP Ready flag so the main loop() function knows it's okay to use it
+#if DEBUG == 1
         Serial.println(F("DMP ready! Waiting for first interrupt..."));
+#endif
         dmpReady = true;
 
         // get expected DMP packet size for later comparison
@@ -162,116 +186,75 @@ void setup() {
         // 1 = initial memory load failed
         // 2 = DMP configuration updates failed
         // (if it's going to break, usually the code will be 1)
+#if DEBUG == 1
         Serial.print(F("DMP Initialization failed (code "));
         Serial.print(devStatus);
         Serial.println(F(")"));
+#endif
     }
 
 // ** end serial stuff
  #endif 
 //----------------------------------------------------
-// -----              WiFi AP Setup              -----
+// -----              WiFi Setup              -----
 //----------------------------------------------------
   //Configure pins for Adafruit ATWINC1500 Feather
   WiFi.setPins(8,7,4,2);
 
-  //Initialize serial and wait for port to open:
-  Serial.begin(9600);
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
-  }
-
-  Serial.println("Access Point Web Server");
-
-  pinMode(led, OUTPUT);      // set the LED pin mode
+#if DEBUG == 1
+  Serial.println("Transmit UDP messages to a wireless router, WPA secured");
+#endif
 
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
+#if DEBUG == 1
     Serial.println("WiFi shield not present");
+#endif
     // don't continue
     while (true);
   }
 
-  // by default the local IP address of will be 192.168.1.1
-  // you can override it with the following:
-  // WiFi.config(IPAddress(10, 0, 0, 1));
+  // attempt to connect to WiFi network:
+  while ( status != WL_CONNECTED) {
+#if DEBUG == 1
+    Serial.print("Attempting to connect to WPA SSID: ");
+    Serial.println(ssid);
+#endif
+    // Connect to WPA/WPA2 network:
+    status = WiFi.begin(ssid, pass);
 
-  // print the network name (SSID);
-  Serial.print("Creating access point named: ");
-  Serial.println(ssid);
-
-  // Create open network. Change this line if you want to create an WEP network:
-  status = WiFi.beginAP(ssid);
-  if (status != WL_AP_LISTENING) {
-    Serial.println("Creating access point failed");
-    // don't continue
-    while (true);
+    // wait 1 seconds for connection:
+    delay(1000);
   }
+ 
+#if DEBUG == 1
+  // you're connected now, so print out the data:
+  Serial.print("You're connected to the network");
+  printCurrentNet();
+  printWiFiData();
+#endif
 
-  // wait 10 seconds for connection:
-  delay(10000);
-
-  // start the web server on port 80
-  server.begin();
-
-  // you're connected now, so print out the status
-  printWiFiStatus();
-
+  WiFi.lowPowerMode(); // Turn on low-power functions, May need to move this into the end of the loop transmission?
+  //WiFi.setSleepMode(M2M_PS_MANUAL, 1); // This function does not work, haven't figured it out yet.
+  
+#if DEBUG == 1
   Serial.println("\nStarting UDP connection over server...");
+#endif
   // if you get a connection, report back via serial:
   Udp.begin(localPort);
 }
 
 
 void loop() {
-  // compare the previous status to the current status
-  if (status != WiFi.status()) {
-    // it has changed update the variable
-    status = WiFi.status();
-
-    if (status == WL_AP_CONNECTED) {
-      byte remoteMac[6];
-
-      // a device has connected to the AP
-      Serial.print("Device connected to AP, MAC address: ");
-      WiFi.APClientMacAddress(remoteMac);
-      Serial.print(remoteMac[5], HEX);
-      Serial.print(":");
-      Serial.print(remoteMac[4], HEX);
-      Serial.print(":");
-      Serial.print(remoteMac[3], HEX);
-      Serial.print(":");
-      Serial.print(remoteMac[2], HEX);
-      Serial.print(":");
-      Serial.print(remoteMac[1], HEX);
-      Serial.print(":");
-      Serial.println(remoteMac[0], HEX);
-    } else {
-      // a device has disconnected from the AP, and we are back in listening mode
-      Serial.println("Device disconnected from AP");
-    }
-  }
-
-  // if there's data available, read a packet
-  int packetSize = Udp.parsePacket();
-  if (packetSize)
-  {
-    Serial.print("Received packet of size ");
-    Serial.println(packetSize);
-    Serial.print("From ");
-    IPAddress remoteIp = Udp.remoteIP();
-    Serial.print(remoteIp);
-    Serial.print(", port ");
-    Serial.println(Udp.remotePort());
-
-    // read the packet into packetBufffer
-    int len = Udp.read(packetBuffer, 255);
-    if (len > 0) packetBuffer[len] = 0;
-    Serial.println("Contents:");
-    Serial.println(packetBuffer);
-
-    
+// measure battery voltage
+  vbat = analogRead(VBATPIN);
+  vbat *= 2;    // we divided by 2, so multiply back
+  vbat *= 3.3;  // Multiply by 3.3V, our reference voltage
+  vbat /= 1024; // convert to voltage
+   
 #ifdef is_i2c
+    // flush MPU6050 FIFO to avoid overflows if using i2c
+    mpu.resetFIFO();
     // Update MPU6050 Data
     // Now measure MPU6050, update values in global registers
     measure_mpu6050();
@@ -288,32 +271,75 @@ void loop() {
     //the message wants an OSC address as first argument
     OSCMessage msg("/analog/0");
     msg.add((int32_t)analogRead(0));
-    Udp.beginPacket("192.168.1.100", 9436);
+    Udp.beginPacket("192.168.1.3", 9436);
     msg.send(Udp); // send the bytes to the SLIP stream
     Udp.endPacket(); // mark the end of the OSC Packet
     msg.empty(); // free space occupied by message
 #endif
-    
-  }
+
+#if DEBUG == 0
+   Watchdog.sleep(transmitMS); // sleep MCU for transmit period duration
+#else
+	delay(transmitMS);
+#endif
+  
 }
 
-void printWiFiStatus() {
+void printWiFiData() {
+  // print your WiFi shield's IP address:
+  ip = WiFi.localIP();
+  Serial.print("IP Address: ");
+  Serial.println(ip);
+
+  // print your MAC address:
+  
+  WiFi.macAddress(mac);
+  Serial.print("MAC address: ");
+  Serial.print(mac[5], HEX);
+  Serial.print(":");
+  Serial.print(mac[4], HEX);
+  Serial.print(":");
+  Serial.print(mac[3], HEX);
+  Serial.print(":");
+  Serial.print(mac[2], HEX);
+  Serial.print(":");
+  Serial.print(mac[1], HEX);
+  Serial.print(":");
+  Serial.println(mac[0], HEX);
+
+}
+
+void printCurrentNet() {
   // print the SSID of the network you're attached to:
   Serial.print("SSID: ");
   Serial.println(WiFi.SSID());
 
-  // print your WiFi shield's IP address:
-  IPAddress ip = WiFi.localIP();
-  Serial.print("IP Address: ");
-  Serial.println(ip);
+  // print the MAC address of the router you're attached to:
+  byte bssid[6];
+  WiFi.BSSID(bssid);
+  Serial.print("BSSID: ");
+  Serial.print(bssid[5], HEX);
+  Serial.print(":");
+  Serial.print(bssid[4], HEX);
+  Serial.print(":");
+  Serial.print(bssid[3], HEX);
+  Serial.print(":");
+  Serial.print(bssid[2], HEX);
+  Serial.print(":");
+  Serial.print(bssid[1], HEX);
+  Serial.print(":");
+  Serial.println(bssid[0], HEX);
 
   // print the received signal strength:
   long rssi = WiFi.RSSI();
   Serial.print("signal strength (RSSI):");
-  Serial.print(rssi);
-  Serial.println(" dBm");
-  // print where to go in a browser:
-  Serial.print("To see this page in action, open a browser to http://");
-  Serial.println(ip);
+  Serial.println(rssi);
 
+  // print the encryption type:
+  byte encryption = WiFi.encryptionType();
+  Serial.print("Encryption Type:");
+  Serial.println(encryption, HEX);
+  Serial.println();
 }
+
+

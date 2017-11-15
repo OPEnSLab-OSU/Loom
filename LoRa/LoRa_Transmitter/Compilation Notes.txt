@@ -1,0 +1,5 @@
+Comments say that the .ino file is incomplete.
+
+32u4 - Uncomment the old LoRa pins.
+
+M0 - Has same issues, with other issues on top of that. 

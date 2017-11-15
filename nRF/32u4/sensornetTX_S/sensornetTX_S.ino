@@ -12,6 +12,13 @@
 #include <SPI.h>
 #include "sleep.h"
 
+//------------------------------------------------------------------------------------------------------
+// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
+//------------------------------------------------------------------------------------------------------
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
 // Define your sensor type here by commenting and un-commenting
 //#define is_analog 3      // also define number of channels
 #define is_i2c = 0x68    // also define i2c address of device
@@ -31,6 +38,7 @@
   #include "S_message.h"
   #include "I2Cdev.h"
   #include "MPU6050_6Axis_MotionApps20.h"
+
   MPU6050 mpu; // create instance of MPU6050 called mpu
   MPU6050 accelgyro; // another called accelgyro
 // Uncoment one or more of these to determine which readings and format to send
@@ -111,11 +119,14 @@ uint16_t lost_packets = 0;
 //const short sleep_cycles_per_transmission = 16;
 
 const wdt_prescalar_e wdt_prescalar = wdt_16ms;
+const int sleep_cycle_delay_ms = 16;
 uint8_t sleep_cycles_per_transmission = 4;
 
 void setup(void)
 {
+#if DEBUG == 1
   Serial.begin(57600);
+#endif
   #ifdef is_i2c
   // join I2C bus (I2Cdev library doesn't do this automatically)
     #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
@@ -125,7 +136,9 @@ void setup(void)
         Fastwire::setup(400, true);
     #endif
     pinMode(INTERRUPT_PIN, INPUT);
+#if DEBUG == 1
   Serial.println("RF24Network/examples/sensornetTX_S/");
+#endif
 // *** Init MPU 6050 and serial stuff
   accelgyro.initialize();
   mpu.initialize();
@@ -142,12 +155,16 @@ void setup(void)
         mpu.setDMPEnabled(true);
 
         // enable Arduino interrupt detection
+#if DEBUG == 1
         Serial.println(F("Enabling interrupt detection (Arduino external interrupt 0)..."));
+#endif
         attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), dmpDataReady, RISING);
         mpuIntStatus = mpu.getIntStatus();
 
         // set our DMP Ready flag so the main loop() function knows it's okay to use it
+#if DEBUG == 1
         Serial.println(F("DMP ready! Waiting for first interrupt..."));
+#endif
         dmpReady = true;
 
         // get expected DMP packet size for later comparison
@@ -157,9 +174,11 @@ void setup(void)
         // 1 = initial memory load failed
         // 2 = DMP configuration updates failed
         // (if it's going to break, usually the code will be 1)
+#if DEBUG == 1
         Serial.print(F("DMP Initialization failed (code "));
         Serial.print(devStatus);
         Serial.println(F(")"));
+#endif
     }
 
 // ** end serial stuff
@@ -167,9 +186,11 @@ void setup(void)
   // Pull node address out of eeprom 
 
 // Analog Stuff if using:
+#if DEBUG == 1
 #ifdef is_analog
     Serial.println("RF24Network/examples/sensornetTX_A/");
 #endif // End Analog stuff
+#endif 
   // Which node are we?
 //  this_node = nodeconfig_read();
 
@@ -177,10 +198,13 @@ void setup(void)
   // Prepare sleep parameters
   //
 
-  // Only the leaves sleep.  
+  // Only the leaves sleep.
+#if DEBUG == 0  
   if ( this_node > 0 ) 
     Sleep.begin(wdt_prescalar,sleep_cycles_per_transmission);
-    
+#else
+  delay(sleep_cycle_delay_ms * (sleep_cycles_per_transmission-1));
+#endif
   //
   // Bring up the RF network
   //
@@ -262,8 +286,9 @@ void loop(void)
     // Set up packet transmit
     // By default send to the base
     uint16_t to_node = base_node;
-   
+#if DEBUG == 1 
    Serial.print("Sending...");
+#endif
    //delay(10);
    
    //Power up radio
@@ -273,13 +298,17 @@ void loop(void)
     bool ok = network.write(header,&message,sizeof(message));
     if (ok)
     {
+#if DEBUG == 1
       Serial.println("ok.");
+#endif
       lost_packets = 0;
       // blink green LED here eventually
     }
     else
     {
+#if DEBUG == 1
       Serial.println("transmit fail");
+#endif
       ++lost_packets;
       // blink red LED here eventually
     }
@@ -297,7 +326,11 @@ void loop(void)
     #endif
     // Sleep the MCU.  The watchdog timer will awaken in a short while, and
     // continue execution here.
+#if DEBUG == 0
     Sleep.go();
+#else
+  delay(sleep_cycle_delay_ms * (sleep_cycles_per_transmission-1));
+#endif
   }
 
 }

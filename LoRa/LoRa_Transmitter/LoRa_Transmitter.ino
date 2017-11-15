@@ -27,7 +27,7 @@
 
 #include <SPI.h>
 #include <RH_RF95.h> // Important Example code found at https://learn.adafruit.com/adafruit-rfm69hcw-and-rfm96-rfm95-rfm98-lora-packet-padio-breakouts/rfm9x-test
-//#include "HX711.h"  //https://learn.sparkfun.com/tutorials/load-cell-amplifier-hx711-breakout-hookup-guide
+#include "HX711.h"  //https://learn.sparkfun.com/tutorials/load-cell-amplifier-hx711-breakout-hookup-guide
 #include "LowPower.h" // from sparkfun low power library found here https://github.com/rocketscream/Low-Power
 #include "RTClibExtended.h"// from sparkfun low power library found here https://github.com/FabioCuomo/FabioCuomo-DS3231/
 //------------------------------------------------------------------------
@@ -41,16 +41,19 @@
 //------------------------------------------------------------------------
 #include <Adafruit_Sensor.h>
 #include "Adafruit_TSL2591.h" // https://github.com/adafruit/Adafruit_TSL2591_Library
+//------------------------------------------------------------------------------------------------------
+// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
+//------------------------------------------------------------------------------------------------------
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
 //------------------------------------------------------------------------
-// Debug Mode, Set flag to 0 for normal operation
+// OLD LORA pins - Uncomment for 32u4                 --------------------
 //------------------------------------------------------------------------
-#define DEBUG 1
-//------------------------------------------------------------------------
-// OLD LORA pins --------------------
-//------------------------------------------------------------------------
-//#define RFM95_CS 8
-//#define RFM95_RST 4
-//#define RFM95_INT 7
+/*#define RFM95_CS 8
+#define RFM95_RST 4
+#define RFM95_INT 7*/
 
 #if defined(ARDUINO_SAMD_FEATHER_M0) // Feather M0 w/Radio
   #define RFM69_CS      8
@@ -123,9 +126,9 @@ void setup()
   //LoRa transmission//
   pinMode(RFM95_RST, OUTPUT);
   digitalWrite(RFM95_RST, HIGH);
+#if DEBUG == 1
   Serial.begin(9600);
   //while (!Serial); // waits for serial hardware to start up
-#if DEBUG == 1
   //report all sensors present on system
   Serial.println(" LoRa Feather Transmitter Test!");
   Serial.println("HX711 scale");
@@ -191,8 +194,7 @@ void setup()
 }
 ////////////////////////// MAIN //////////////////////
 void loop() {
-  if (!DEBUG)
-  {
+#if DEBUG == 0
     // Sleep the radio until needed
     rf95.sleep();
     // Enable SQW pin interrupt
@@ -208,13 +210,12 @@ void loop() {
     PCICR = 0x00;         // Disable PCINT interrupt
     clearAlarmFunction(); // Clear RTC Alarm
     scale.power_up();
-  }
-  else
-  {
+#else
+
     delay(30000); // period in DEBUG mode to wait between samples
     scale.power_up();
     TakeSampleFlag = 1;
-  }
+#endif
   if (TakeSampleFlag)
   {
     // get RTC timestamp string
