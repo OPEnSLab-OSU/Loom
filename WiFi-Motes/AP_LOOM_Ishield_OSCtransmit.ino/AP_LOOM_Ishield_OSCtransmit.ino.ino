@@ -47,14 +47,8 @@ to
 #define VBATPIN A7       // Pin to check for battery voltage
 //#define CLIENT_REQUESTS_DATA 1 // Set to 1 if you only send data when requested by client, else, send data at sample/sleep rate
 
-#define STR_HELPER(x) #x
-#define STR(x) STR_HELPER(x) //to concatenate a predefined number to a string literal, use STR(x)
+#define INSTANCE_NUM 0  // Unique instance umber for this device, useful when using more than one of the same device type in same space
 
-#define FAMILY "/Loom"
-#define DEVICE "/IShield"
-#define INSTANCE_NUM 0  // Unique instance number for this device, useful when using more than one of the same device type in same space
-
-#define IDString FAMILY DEVICE STR(INSTANCE_NUM) // C interprets subsequent string literals as concatenation: "/Loom" "/Ishield" "0" becomes "/Loom/Ishield0"
 // Set Sleep Mode Use one or the other or neither of the following 2 lines
 #define is_sleep_period 50  // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between
 //#define is_sleep_interrupt 11  // Uncoment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
