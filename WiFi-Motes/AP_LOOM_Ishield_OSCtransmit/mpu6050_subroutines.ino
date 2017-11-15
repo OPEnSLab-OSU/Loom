@@ -5,87 +5,6 @@
 #define DEBUG 0
 #endif
 
-#ifdef is_analog
-// Generic subroutine for reading raw sensor data
-uint32_t measure_analog(uint8_t chnl)
-{
-    int i = num_measurements;
-    uint32_t reading = 0;
-    while(i--)
-      reading += analogRead(chnl);
-    
-    // Then divide by 4 to get average sample value
-    return (reading >> 2);
-}
-
-// Subroutine for reading FSR small sensor data
-// need 50k ohm resistor for voltage divider
-// add math to convert to some known force unit
-uint32_t measure_fsr_small(uint8_t chnl)
-{
-    int i = num_measurements;
-    uint32_t reading = 0;
-    while(i--)
-      reading += analogRead(chnl);
-    
-    // Then divide by 4 to get average sample value
-    return (reading >> 2);
-}
-
-/*************************************************
-Temperature Compensation when using the Analog Voltage Range output on the
-regular XL
-Tc is the temperature in degrees C
-Dcm is the distance in cm
-MaxSonar sensor outputs a voltage of one bit per cm.
-Dcm = (SonarVal) * (20.05*SQRT(Tc+273.15)/2)
-****************************************************/
-// Example subroutine for processing sonar XL sensor to Meters
-uint32_t measure_sonar(uint8_t chnl)
-{
-    int i = num_measurements;
-    uint32_t reading = 0;
-    while(i--)
-      reading += analogRead(chnl);
-    // Then divide by 4 to get average sample value
-    reading = reading >> 2;
-    // ***** If using Temp Compensation, be sure to take temp value before reading sonar! *******
- // reading = reading * (20.05*SQRT(Tc+273.15)/2);
-    // Send sample value
-    return (reading); 
-}
-
-// Example subroutine for processing Tempature sensor MCP9700
-uint32_t measure_temp()
-{
-    int i = num_measurements;
-    uint32_t reading = 0;
-    while(i--)
-      reading += analogRead(temp_pin);
-    
-    // Convert the reading to celcius*256
-    // This is the formula for MCP9700.
-    // C = reading * 1.1
-    // C = ( V - 1/2 ) * 100
-    //
-    // Then adjust for the calibation value on this sensor
-    return ( ( ( ( reading * 0x120 ) - 0x800000 ) * 0x64 ) >> 16 );
-}
-
-// Example subroutine for measuring battery voltage with internal 1.1V reference
-uint32_t measure_voltage()
-{
-    // Take the voltage reading 
-    int i = num_measurements;
-    uint32_t reading = 0;
-    while(i--)
-      reading += analogRead(voltage_pin);
-
-    // Convert the voltage reading to volts*256
-    return ( reading * voltage_reference ) >> 16; 
-}
-#endif // Finish Analog subroutines if used
-
 //If using serial i2c:
 #ifdef is_i2c
 // *** i2c subroutines ***
@@ -120,7 +39,9 @@ uint32_t measure_mpu6050(void)
     if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
         // reset so we can continue cleanly
         mpu.resetFIFO();
+#if DEBUG == 1
         Serial.println(F("FIFO overflow!"));
+#endif
         // NOTE: If you get this message, MPU6050 library, file "MPU6050_6Axis_MotionApps20.h" modify last byte of line 305 0x07 to 0x09
 
     // otherwise, check for DMP data ready interrupt (this should happen frequently)
@@ -191,12 +112,14 @@ uint32_t measure_mpu6050(void)
             mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
             mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
 #if DEBUG == 1
+          /*
             Serial.print("aworld\t");
             Serial.print(aaWorld.x);
             Serial.print("\t");
             Serial.print(aaWorld.y);
             Serial.print("\t");
             Serial.println(aaWorld.z);
+          */
 #endif
         #endif
 
@@ -227,4 +150,189 @@ uint32_t measure_mpu6050(void)
     
  //   return (void);
 }
+
+void udp_mpu6050(void)
+{
+ 
+  // Format MPU6050 data into OSC
+  // declare the bundle
+    OSCBundle bndl;
+  // messages want an OSC address as first argument
+  // compile bundle
+  /*
+    bndl.add(IDString "/mac0").add((int)configuration.mac[0]);
+    bndl.add(IDString "/mac1").add((int)configuration.mac[1]);
+    bndl.add(IDString "/mac2").add((int)configuration.mac[2]);
+    bndl.add(IDString "/mac3").add((int)configuration.mac[3]);
+    bndl.add(IDString "/mac4").add((int)configuration.mac[4]);
+    bndl.add(IDString "/mac5").add((int)configuration.mac[5]);
+    bndl.add(IDString "/ip").add((String)configuration.ip);
+ */
+// Assemble UDP Packet
+// IP1 IP2 Yaw Pitch Roll aX aY aZ gX gY gZ vBatt
+#ifdef OUTPUT_READABLE_YAWPITCHROLL
+    bndl.add(IDString "/yaw").add((float)(ypr[0] * 180/M_PI));
+    bndl.add(IDString "/roll").add((float)(ypr[1] * 180/M_PI));
+    bndl.add(IDString "/pitch").add((float)(ypr[2] * 180/M_PI));
+#endif
+    bndl.add(IDString "/accelX").add((float)ax/16000);
+    bndl.add(IDString "/accelY").add((float)ay/16000);
+    bndl.add(IDString "/accelZ").add((float)az/16000);
+    bndl.add(IDString "/gyroX").add((float)gx/16000);
+    bndl.add(IDString "/gyroY").add((float)gy/16000);
+    bndl.add(IDString "/gyroZ").add((float)gz/16000);
+#ifdef OUTPUT_READABLE_WORLDACCEL
+    bndl.add(IDString "/rwx").add(aaWorld.x);
+    bndl.add(IDString "/rwy").add(aaWorld.y);
+    bndl.add(IDString "/rwz").add(aaWorld.z);
+#endif
+    bndl.add(IDString "/vbat").add(vbat);     // Tack battery voltage onto here. Will want to change this for other sensors
+
+   // UDP Packet
+    Udp.beginPacket(configuration.ip_broadcast, 9436);
+      bndl.send(Udp); // send the bytes to the SLIP stream
+    Udp.endPacket(); // mark the end of the OSC Packet
+   
+   // empty the bundle to free room for a new one
+    bndl.empty(); 
+    
+}
+
+void calMPU6050()
+{
+   // reset offsets
+       accelgyro.setXAccelOffset(0);
+       accelgyro.setYAccelOffset(0);
+       accelgyro.setZAccelOffset(0);
+       accelgyro.setXGyroOffset(0);
+       accelgyro.setYGyroOffset(0);
+       accelgyro.setZGyroOffset(0);
+
+  if (state==0){
+#if DEBUG == 1
+    Serial.println("\nReading sensors for first time...");
+#endif
+    meansensors();
+    state++;
+    delay(1000);
+  }
+
+  if (state==1) {
+#if DEBUG == 1
+    Serial.println("\nCalculating offsets...");
+#endif
+    calibration();
+    configuration.checksum = flashValidationValue;
+    state++;
+    delay(1000);
+  }
+
+  if (state==2) {
+    meansensors();
+    // Save Sample Period into EEPROM for next power-up
+//    EEPROM_writeAnything(0, configuration);
+#if DEBUG == 1
+    Serial.println("\nFINISHED!");
+    Serial.print("\nSensor readings with offsets:\t");
+    Serial.print(mean_ax); 
+    Serial.print("\t");
+    Serial.print(mean_ay); 
+    Serial.print("\t");
+    Serial.print(mean_az); 
+    Serial.print("\t");
+    Serial.print(mean_gx); 
+    Serial.print("\t");
+    Serial.print(mean_gy); 
+    Serial.print("\t");
+    Serial.println(mean_gz);
+    Serial.print("Your offsets:\t");
+    Serial.print(configuration.ax_offset); 
+    Serial.print("\t");
+    Serial.print(configuration.ay_offset); 
+    Serial.print("\t");
+    Serial.print(configuration.az_offset); 
+    Serial.print("\t");
+    Serial.print(configuration.gx_offset); 
+    Serial.print("\t");
+    Serial.print(configuration.gy_offset); 
+    Serial.print("\t");
+    Serial.println(configuration.gz_offset);
+#endif
+  }
+}
+
+void meansensors()
+{
+  long i=0,buff_ax=0,buff_ay=0,buff_az=0,buff_gx=0,buff_gy=0,buff_gz=0;
+
+  while (i<(buffersize+101)){
+    // read raw accel/gyro measurements from device
+    accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+    
+    if (i>100 && i<=(buffersize+100)){ //First 100 measures are discarded
+      buff_ax=buff_ax+ax;
+      buff_ay=buff_ay+ay;
+      buff_az=buff_az+az;
+      buff_gx=buff_gx+gx;
+      buff_gy=buff_gy+gy;
+      buff_gz=buff_gz+gz;
+    }
+    if (i==(buffersize+100)){
+      mean_ax=buff_ax/buffersize;
+      mean_ay=buff_ay/buffersize;
+      mean_az=buff_az/buffersize;
+      mean_gx=buff_gx/buffersize;
+      mean_gy=buff_gy/buffersize;
+      mean_gz=buff_gz/buffersize;
+    }
+    i++;
+    delay(2); //Needed so we don't get repeated measures
+  }
+}
+
+void calibration(){
+  configuration.ax_offset=-mean_ax/8;
+  configuration.ay_offset=-mean_ay/8;
+  configuration.az_offset=(16384-mean_az)/8;
+
+  configuration.gx_offset=-mean_gx/4;
+  configuration.gy_offset=-mean_gy/4;
+  configuration.gz_offset=-mean_gz/4;
+  while (1){
+    int ready=0;
+    accelgyro.setXAccelOffset(configuration.ax_offset);
+    accelgyro.setYAccelOffset(configuration.ay_offset);
+    accelgyro.setZAccelOffset(configuration.az_offset);
+
+    accelgyro.setXGyroOffset(configuration.gx_offset);
+    accelgyro.setYGyroOffset(configuration.gy_offset);
+    accelgyro.setZGyroOffset(configuration.gz_offset);
+
+    meansensors();
+#if DEBUG == 1
+    Serial.println("...");
+#endif
+
+    if (abs(mean_ax)<=acel_deadzone) ready++;
+    else configuration.ax_offset=configuration.ax_offset-mean_ax/acel_deadzone;
+
+    if (abs(mean_ay)<=acel_deadzone) ready++;
+    else configuration.ay_offset=configuration.ay_offset-mean_ay/acel_deadzone;
+
+    if (abs(16384-mean_az)<=acel_deadzone) ready++;
+    else configuration.az_offset=configuration.az_offset+(16384-mean_az)/acel_deadzone;
+
+    if (abs(mean_gx)<=giro_deadzone) ready++;
+    else configuration.gx_offset=configuration.gx_offset-mean_gx/(giro_deadzone+1);
+
+    if (abs(mean_gy)<=giro_deadzone) ready++;
+    else configuration.gy_offset=configuration.gy_offset-mean_gy/(giro_deadzone+1);
+
+    if (abs(mean_gz)<=giro_deadzone) ready++;
+    else configuration.gz_offset=configuration.gz_offset-mean_gz/(giro_deadzone+1);
+
+    if (ready==6) break;
+  }
+}
+
 #endif // Send serial i2c subroutines

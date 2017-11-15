@@ -43,6 +43,12 @@ to
 #include <Adafruit_SleepyDog.h> // Include this if transmitting at timed intervals (use this one)
 //#include "LowPower.h" // Include this if going to sleep forever and woken up by external interrupt (don't use)
 
+//------------------------------------------------------------------------------------------------------
+// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
+//------------------------------------------------------------------------------------------------------
+#ifndef DEBUG
+#define DEBUG 0
+#endif
 #define OUTPUT_READABLE 1 // set to 1 for debug messages print to serial window
 #define is_i2c 0x68    // also define i2c address of device
 #define VBATPIN A7
@@ -152,19 +158,25 @@ pinMode(led, OUTPUT);      // set the LED pin mode
         Serial.println(F("Enabling DMP..."));
         mpu.setDMPEnabled(true);
 
+#if DEBUG == 1
         // Uncomment following 2 lines if using enable Arduino Uno, MO, or Trinket interrupt detection
         Serial.println(F("Enabling MPU interrupt detection (Arduino external interrupt 0)..."));
+#endif
         attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), dmpDataReady, RISING);
 
         // Uncomment following 2 lines if using Adafruit Feather 32u4
         // enable interrupt for PCINT7...
+#if DEBUG == 1
         //Serial.println(F("Enabling MPU interrupt detection PCINT 7 (pin 11)"));
+#endif
         //pciSetup(INTERRUPT_PIN);
         
         mpuIntStatus = mpu.getIntStatus();
 
         // set our DMP Ready flag so the main loop() function knows it's okay to use it
+#if DEBUG == 1
         Serial.println(F("DMP ready! Waiting for first interrupt..."));
+#endif
         dmpReady = true;
 
         // get expected DMP packet size for later comparison
@@ -174,9 +186,11 @@ pinMode(led, OUTPUT);      // set the LED pin mode
         // 1 = initial memory load failed
         // 2 = DMP configuration updates failed
         // (if it's going to break, usually the code will be 1)
+#if DEBUG == 1
         Serial.print(F("DMP Initialization failed (code "));
         Serial.print(devStatus);
         Serial.println(F(")"));
+#endif
     }
 
 // ** end serial stuff
@@ -187,35 +201,45 @@ pinMode(led, OUTPUT);      // set the LED pin mode
   //Configure pins for Adafruit ATWINC1500 Feather
   WiFi.setPins(8,7,4,2);
 
+#if DEBUG == 1
   Serial.println("Transmit UDP messages to a wireless router, WPA secured");
+#endif
 
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
+#if DEBUG == 1
     Serial.println("WiFi shield not present");
+#endif
     // don't continue
     while (true);
   }
 
   // attempt to connect to WiFi network:
   while ( status != WL_CONNECTED) {
+#if DEBUG == 1
     Serial.print("Attempting to connect to WPA SSID: ");
     Serial.println(ssid);
+#endif
     // Connect to WPA/WPA2 network:
     status = WiFi.begin(ssid, pass);
 
     // wait 1 seconds for connection:
     delay(1000);
   }
-
+ 
+#if DEBUG == 1
   // you're connected now, so print out the data:
   Serial.print("You're connected to the network");
   printCurrentNet();
   printWiFiData();
+#endif
 
   WiFi.lowPowerMode(); // Turn on low-power functions, May need to move this into the end of the loop transmission?
   //WiFi.setSleepMode(M2M_PS_MANUAL, 1); // This function does not work, haven't figured it out yet.
   
+#if DEBUG == 1
   Serial.println("\nStarting UDP connection over server...");
+#endif
   // if you get a connection, report back via serial:
   Udp.begin(localPort);
 }
@@ -252,8 +276,12 @@ void loop() {
     Udp.endPacket(); // mark the end of the OSC Packet
     msg.empty(); // free space occupied by message
 #endif
-  
+
+#if DEBUG == 0
    Watchdog.sleep(transmitMS); // sleep MCU for transmit period duration
+#else
+	delay(transmitMS);
+#endif
   
 }
 
