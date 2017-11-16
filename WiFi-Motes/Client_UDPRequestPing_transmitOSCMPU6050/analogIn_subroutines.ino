@@ -31,22 +31,22 @@ void measure_analog(void)
   // declare the bundle
     OSCBundle bndl;
 #if (is_analog > 0) //// Take a reading
-    bndl.add("/MPU6050/a0").add((int)read_analog(0));  
+    bndl.add("/MPU6050/a0").add((int32_t)read_analog(0));  
 #endif 
 #if (is_analog > 1) 
-    bndl.add("/MPU6050/a1").add((int)read_analog(1));
+    bndl.add("/MPU6050/a1").add((int32_t)read_analog(1));
 #endif 
 #if (is_analog > 2) 
-    bndl.add("/MPU6050/a2").add((int)read_analog(2));
+    bndl.add("/MPU6050/a2").add((int32_t)read_analog(2));
 #endif 
 #if (is_analog > 3) 
-    bndl.add("/MPU6050/a3").add((int)read_analog(3));
+    bndl.add("/MPU6050/a3").add((int32_t)read_analog(3));
 #endif 
 #if (is_analog > 4) 
-    bndl.add("/MPU6050/a4").add((int)read_analog(4));
+    bndl.add("/MPU6050/a4").add((int32_t)read_analog(4));
 #endif 
 #if (is_analog > 5) 
-    bndl.add("/MPU6050/a5").add((int)read_analog(5));
+    bndl.add("/MPU6050/a5").add((int32_t)read_analog(5));
 #endif 
 
  // UDP Packet

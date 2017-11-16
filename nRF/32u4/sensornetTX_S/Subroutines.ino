@@ -1,3 +1,10 @@
+//------------------------------------------------------------------------------------------------------
+// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
+//------------------------------------------------------------------------------------------------------
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
 #ifdef is_analog
 // Generic subroutine for reading raw sensor data
 uint32_t measure_analog(uint8_t chnl)
@@ -134,12 +141,14 @@ uint32_t measure_mpu6050(void)
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
+#if DEBUG == 1
 /*            Serial.print("ypr\t");
             Serial.print(ypr[0] * 180/M_PI);
             Serial.print("\t");
             Serial.print(ypr[1] * 180/M_PI);
             Serial.print("\t");
             Serial.println(ypr[2] * 180/M_PI); */
+#endif
         #endif
 
         #ifdef OUTPUT_BINARY_YAWPITCHROLL
@@ -150,9 +159,11 @@ uint32_t measure_mpu6050(void)
             yaw = ypr[0] * 180/M_PI;
             pitch = ypr[1] * 180/M_PI;
             roll = ypr[2] * 180/M_PI;
+#if DEBUG == 1
             Serial.write((uint8_t)(yaw >> 8)); Serial.write((uint8_t)(yaw & 0xFF));
             Serial.write((uint8_t)(pitch >> 8)); Serial.write((uint8_t)(pitch & 0xFF));
             Serial.write((uint8_t)(roll >> 8)); Serial.write((uint8_t)(roll & 0xFF));
+#endif
         #endif
 
         #ifdef OUTPUT_READABLE_REALACCEL
@@ -161,12 +172,14 @@ uint32_t measure_mpu6050(void)
             mpu.dmpGetAccel(&aa, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+#if DEBUG == 1
             Serial.print("areal\t");
             Serial.print(aaReal.x);
             Serial.print("\t");
             Serial.print(aaReal.y);
             Serial.print("\t");
             Serial.println(aaReal.z);
+#endif
         #endif
 
         #ifdef OUTPUT_READABLE_WORLDACCEL
@@ -177,16 +190,19 @@ uint32_t measure_mpu6050(void)
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
             mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
+#if DEBUG == 1
             Serial.print("aworld\t");
             Serial.print(aaWorld.x);
             Serial.print("\t");
             Serial.print(aaWorld.y);
             Serial.print("\t");
             Serial.println(aaWorld.z);
+#endif
         #endif
 
         #ifdef OUTPUT_READABLE_ACCELGYRO
         // display tab-separated accel/gyro x/y/z values
+#if DEBUG == 1
         Serial.print("a/g:\t");
         Serial.print(ax); Serial.print("\t");
         Serial.print(ay); Serial.print("\t");
@@ -194,15 +210,18 @@ uint32_t measure_mpu6050(void)
         Serial.print(gx); Serial.print("\t");
         Serial.print(gy); Serial.print("\t");
         Serial.println(gz);
+#endif
     #endif
 
     #ifdef OUTPUT_BINARY_ACCELGYRO
+#if DEBUG == 1
         Serial.write((uint8_t)(ax >> 8)); Serial.write((uint8_t)(ax & 0xFF));
         Serial.write((uint8_t)(ay >> 8)); Serial.write((uint8_t)(ay & 0xFF));
         Serial.write((uint8_t)(az >> 8)); Serial.write((uint8_t)(az & 0xFF));
         Serial.write((uint8_t)(gx >> 8)); Serial.write((uint8_t)(gx & 0xFF));
         Serial.write((uint8_t)(gy >> 8)); Serial.write((uint8_t)(gy & 0xFF));
         Serial.write((uint8_t)(gz >> 8)); Serial.write((uint8_t)(gz & 0xFF));
+#endif
     #endif
     }
     
