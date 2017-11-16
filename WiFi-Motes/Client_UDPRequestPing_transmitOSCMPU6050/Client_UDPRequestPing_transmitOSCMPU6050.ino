@@ -43,7 +43,18 @@ to
 #include <Adafruit_SleepyDog.h> // Include this if transmitting at timed intervals (use this one)
 //#include "LowPower.h" // Include this if going to sleep forever and woken up by external interrupt (don't use)
 
+//------------------------------------------------------------------------------------------------------
+// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
+//------------------------------------------------------------------------------------------------------
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
+
 #define OUTPUT_READABLE 1 // set to 1 for debug messages print to serial window
+
+// Define your sensor type here by commenting and un-commenting
+#define is_analog 3      // also define number of channels
 #define is_i2c 0x68    // also define i2c address of device
 #define VBATPIN A7
 
@@ -60,12 +71,17 @@ unsigned int localPort = 9436;      // local port to listen on
 
 char packetBuffer[255]; //buffer to hold incoming packet
 
-int transmitMS = 50; // milliseconds period to transmit data
+int transmitMS = 1000; // milliseconds period to transmit data
 float vbat = 3.3;    // Place to save measured battery voltage
 //char packetBuffer[255]; //buffer to hold incoming packet
 //char  ReplyBuffer[] = "acknowledged";       // a string to send back
 
 WiFiUDP Udp;
+
+#ifdef is_analog
+  #define num_measurements 4 // must be 1, 2, 4, or 8)! number of analog measurements to sample and average per channel
+  int16_t a0, a1, a2, a3, a4, a5; // Memory to store analog sensor values
+#endif
 
 #ifdef is_i2c
 // Include libraries for serial and i2c devices
@@ -79,7 +95,7 @@ WiFiUDP Udp;
   #define OUTPUT_READABLE_YAWPITCHROLL
   //#define OUTPUT_BINARY_YAWPITCHROLL
   //#define OUTPUT_READABLE_REALACCEL
-  //#define OUTPUT_READABLE_WORLDACCEL  // this is pretty cool
+//  #define OUTPUT_READABLE_WORLDACCEL  // this is pretty cool
   //#define OUTPUT_BINARY_ACCELGYRO
 #define INTERRUPT_PIN 11  // use pin 2 on Arduino Uno, pin 3 on Adafruit ProTrinket!
 // MPU control/status vars
@@ -151,20 +167,25 @@ pinMode(led, OUTPUT);      // set the LED pin mode
         // turn on the DMP, now that it's ready
         Serial.println(F("Enabling DMP..."));
         mpu.setDMPEnabled(true);
-
+#if DEBUG == 1
         // Uncomment following 2 lines if using enable Arduino Uno, MO, or Trinket interrupt detection
-        Serial.println(F("Enabling MPU interrupt detection (Arduino external interrupt 0)..."));
+        Serial.println(F("Enabling MPU interrupt detection (Feather pin 11)..."));
+#endif
         attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), dmpDataReady, RISING);
 
         // Uncomment following 2 lines if using Adafruit Feather 32u4
         // enable interrupt for PCINT7...
+#if DEBUG == 1
         //Serial.println(F("Enabling MPU interrupt detection PCINT 7 (pin 11)"));
+#endif
         //pciSetup(INTERRUPT_PIN);
         
         mpuIntStatus = mpu.getIntStatus();
 
         // set our DMP Ready flag so the main loop() function knows it's okay to use it
+#if DEBUG == 1
         Serial.println(F("DMP ready! Waiting for first interrupt..."));
+#endif
         dmpReady = true;
 
         // get expected DMP packet size for later comparison
@@ -174,9 +195,11 @@ pinMode(led, OUTPUT);      // set the LED pin mode
         // 1 = initial memory load failed
         // 2 = DMP configuration updates failed
         // (if it's going to break, usually the code will be 1)
+#if DEBUG == 1
         Serial.print(F("DMP Initialization failed (code "));
         Serial.print(devStatus);
         Serial.println(F(")"));
+#endif
     }
 
 // ** end serial stuff
@@ -187,41 +210,73 @@ pinMode(led, OUTPUT);      // set the LED pin mode
   //Configure pins for Adafruit ATWINC1500 Feather
   WiFi.setPins(8,7,4,2);
 
+#if DEBUG == 1
   Serial.println("Transmit UDP messages to a wireless router, WPA secured");
+#endif
 
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
+#if DEBUG == 1
     Serial.println("WiFi shield not present");
+#endif
     // don't continue
     while (true);
   }
 
   // attempt to connect to WiFi network:
   while ( status != WL_CONNECTED) {
+#if DEBUG == 1
     Serial.print("Attempting to connect to WPA SSID: ");
     Serial.println(ssid);
+#endif
     // Connect to WPA/WPA2 network:
     status = WiFi.begin(ssid, pass);
 
     // wait 1 seconds for connection:
     delay(1000);
   }
-
+ 
+#if DEBUG == 1
   // you're connected now, so print out the data:
   Serial.print("You're connected to the network");
   printCurrentNet();
   printWiFiData();
+#endif
 
   WiFi.lowPowerMode(); // Turn on low-power functions, May need to move this into the end of the loop transmission?
   //WiFi.setSleepMode(M2M_PS_MANUAL, 1); // This function does not work, haven't figured it out yet.
   
+#if DEBUG == 1
   Serial.println("\nStarting UDP connection over server...");
+#endif
   // if you get a connection, report back via serial:
   Udp.begin(localPort);
 }
 
 
 void loop() {
+ // if there's data available, read a packet
+  int packetSize = Udp.parsePacket();
+  if (packetSize)
+  {
+	IPAddress remoteIp = Udp.remoteIP();
+	int len = Udp.read(packetBuffer, 255);
+    if (len > 0) packetBuffer[len] = 0;
+#if DEBUG == 1
+    Serial.print("Received packet of size ");
+    Serial.println(packetSize);
+    Serial.print("From ");
+    Serial.print(remoteIp);
+    Serial.print(", port ");
+    Serial.println(Udp.remotePort());
+
+    // read the packet into packetBufffer
+
+    Serial.println("Contents:");
+    Serial.println(packetBuffer);
+#endif
+
+
 // measure battery voltage
   vbat = analogRead(VBATPIN);
   vbat *= 2;    // we divided by 2, so multiply back
@@ -243,6 +298,9 @@ void loop() {
 #endif
     
 #ifdef is_analog
+    measure_analog();
+
+/*
     // send a reply, to the IP address and port that sent us the packet we received
     //the message wants an OSC address as first argument
     OSCMessage msg("/analog/0");
@@ -251,9 +309,11 @@ void loop() {
     msg.send(Udp); // send the bytes to the SLIP stream
     Udp.endPacket(); // mark the end of the OSC Packet
     msg.empty(); // free space occupied by message
+*/
 #endif
   
-   Watchdog.sleep(transmitMS); // sleep MCU for transmit period duration
+  // Watchdog.sleep(transmitMS); // sleep MCU for transmit period duration
+  }
   
 }
 

@@ -16,6 +16,13 @@
 #include "S_message.h"
 #include "A_message.h"
 
+//------------------------------------------------------------------------------------------------------
+// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
+//------------------------------------------------------------------------------------------------------
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
 // uncoment one of these - which format do we want stuff output on serial?
 #define OUTPUT_BINARY
 //#define OUTPUT_READABLE
@@ -53,10 +60,12 @@ void setup(void)
   //
   // Print preamble
   //
-  
+#if DEBUG == 1
   Serial.begin(57600);
+
 #ifdef OUTPUT_READABLE
   Serial.println("RF24Network/examples/sensornetHub0/");
+#endif
 #endif
   //
   // Pull node address out of eeprom 
@@ -93,6 +102,7 @@ void loop(void)
       // Read S message struct
       S_message message;
       network.read(header,&message,sizeof(message));
+#if DEBUG == 1
     #ifdef OUTPUT_READABLE
       Serial.print("Received S Type packet from node #");
       Serial.println(header.from_node);
@@ -129,6 +139,7 @@ void loop(void)
   // ********** Get All Readings right!     ********
      
     #endif
+#endif
       // Consider Printing 'end transmission' code here to indicate software finished reading transmission
     }
     if ( header.type == 'A' ) // If header type 'A', then use 'A' structure
@@ -138,7 +149,8 @@ void loop(void)
       A_message message;
       network.read(header,&message,sizeof(message));
       num_readings = message.num_readings; // how many sensor readings does this transmission have?
-  
+	  
+#if DEBUG == 1
    #ifdef OUTPUT_READABLE  // output analog sensor ASCII 
       Serial.print("Received A Type packet from node #");
       Serial.println(header.from_node); 
@@ -194,6 +206,7 @@ void loop(void)
       }
     #endif    
     //Serial.println("STOP");// Consider Printing 'end transmission' code here to indicate software finished reading transmission
+#endif
     }
     
   }

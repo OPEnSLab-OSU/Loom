@@ -14,8 +14,13 @@
 #include <Ethernet2.h>
 #include <SD.h>
 
-// Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
+//------------------------------------------------------------------------------------------------------
+// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
+//------------------------------------------------------------------------------------------------------
+#ifndef DEBUG
 #define DEBUG 0
+#endif
+
 // set to 1 if using SD Breakout for data logging
 #define USE_SD 1
 // set to 1 if using Ethernet for data logging
@@ -81,7 +86,7 @@ void setup()
 #if USE_ETHERNET == 1
 // start the Ethernet connection:
 #if DEBUG == 0
-Ethernet.begin(mac);
+Ethernet.begin((unsigned char*)mac);
 #endif
 #if DEBUG == 1
   if (Ethernet.begin(mac) == 0) {
@@ -207,7 +212,7 @@ void loop()
 #endif 
 
       // Send a reply
-      rf95.send(array[0], sizeof(array[0])+1); // Send Device ID back to transmitter in reply
+      rf95.send((const unsigned char*)array[0], sizeof(array[0])+1); // Send Device ID back to transmitter in reply
       rf95.waitPacketSent();
 
 #if DEBUG == 1
@@ -246,7 +251,7 @@ void loop()
  /////////////////////////////////////////////////////////////
 #if USE_ETHERNET == 1
     // Send Pushingbox request here to upload data!
-    sendToPushingBox(DEVID1);
+    sendToPushingBox((char*)DEVID1);
 #endif 
   } // end if RF95.available
 
