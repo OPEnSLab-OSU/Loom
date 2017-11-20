@@ -212,7 +212,7 @@ void calMPU6050()
 #if DEBUG == 1
     Serial.println("\nReading sensors for first time...");
 #endif
-    //TODO UNCOMMENT meansensors();
+    meansensors();
     state++;
     delay(1000);
   }
@@ -221,14 +221,14 @@ void calMPU6050()
 #if DEBUG == 1
     Serial.println("\nCalculating offsets...");
 #endif
-    //TODO UNCOMMENT calibration();
+    calibration();
     configuration.checksum = memValidationValue;
     state++;
     delay(1000);
   }
 
   if (state==2) {
-    //TODO UNCOMMENT meansensors();
+    meansensors();
     // Save Sample Period into EEPROM for next power-up
 //    EEPROM_writeAnything(0, configuration);
 #if DEBUG == 1
