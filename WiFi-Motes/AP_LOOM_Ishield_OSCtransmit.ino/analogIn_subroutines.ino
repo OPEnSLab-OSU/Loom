@@ -31,20 +31,20 @@ void measure_analog(void)
   // declare the bundle
     OSCBundle bndl;
 #if (is_analog > 0) //// Take a reading
-    bndl.add("/LOOM/Ishield0/port1").add((int)read_analog(0));  
+    bndl.add(IDString "/port1").add((int32_t)read_analog(0));  
 #endif 
 #if (is_analog > 1) 
-    bndl.add("/LOOM/Ishield0/port2").add((int)read_analog(1));
+    bndl.add(IDString "/port2").add((int32_t)read_analog(1));
 #endif 
 #if (is_analog > 2) 
-    bndl.add("/LOOM/Ishield0/port3").add((int)read_analog(2));
+    bndl.add(IDString "/port3").add((int32_t)read_analog(2));
 #endif 
 #ifdef transmit_butt
-    bndl.add("/LOOM/Ishield0/butt").add((int)digitalRead(transmit_butt));
+    bndl.add(IDString "/butt").add((int32_t)digitalRead(transmit_butt));
 #endif
 
  // UDP Packet
-    Udp.beginPacket(ip_broadcast, 9436);
+    Udp.beginPacket(configuration.ip_broadcast, 9436);
       bndl.send(Udp); // send the bytes to the SLIP stream
     Udp.endPacket(); // mark the end of the OSC Packet
    
