@@ -527,5 +527,4 @@ void printWiFiStatus() {
   // print where to go in a browser:
   Serial.print("To see this page in action, open a browser to http://");
   Serial.println(configuration.ip);
-
 }
