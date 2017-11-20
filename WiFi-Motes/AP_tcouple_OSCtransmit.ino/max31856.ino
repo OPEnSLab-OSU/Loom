@@ -1,5 +1,5 @@
 
-#ifdef tcouple
+#ifdef is_tcouple
 
 //Hardware SPI CS pin definition
 #define CS_PIN 10
