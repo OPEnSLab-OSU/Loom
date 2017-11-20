@@ -1,3 +1,10 @@
+//------------------------------------------------------------------------------------------------------
+// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
+//------------------------------------------------------------------------------------------------------
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
 //If using serial i2c:
 #ifdef is_i2c
 // *** i2c subroutines ***
@@ -32,7 +39,9 @@ uint32_t measure_mpu6050(void)
     if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
         // reset so we can continue cleanly
         mpu.resetFIFO();
+#if DEBUG == 1
         Serial.println(F("FIFO overflow!"));
+#endif
         // NOTE: If you get this message, MPU6050 library, file "MPU6050_6Axis_MotionApps20.h" modify last byte of line 305 0x07 to 0x09
 
     // otherwise, check for DMP data ready interrupt (this should happen frequently)
@@ -53,12 +62,14 @@ uint32_t measure_mpu6050(void)
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
+#if DEBUG == 1
 /*            Serial.print("ypr\t");
             Serial.print(ypr[0] * 180/M_PI);
             Serial.print("\t");
             Serial.print(ypr[1] * 180/M_PI);
             Serial.print("\t");
             Serial.println(ypr[2] * 180/M_PI); */
+#endif
         #endif
 
         #ifdef OUTPUT_BINARY_YAWPITCHROLL
@@ -69,9 +80,11 @@ uint32_t measure_mpu6050(void)
             yaw = ypr[0] * 180/M_PI;
             pitch = ypr[1] * 180/M_PI;
             roll = ypr[2] * 180/M_PI;
+#if DEBUG == 1
             Serial.write((uint8_t)(yaw >> 8)); Serial.write((uint8_t)(yaw & 0xFF));
             Serial.write((uint8_t)(pitch >> 8)); Serial.write((uint8_t)(pitch & 0xFF));
             Serial.write((uint8_t)(roll >> 8)); Serial.write((uint8_t)(roll & 0xFF));
+#endif
         #endif
 
         #ifdef OUTPUT_READABLE_REALACCEL
@@ -80,12 +93,14 @@ uint32_t measure_mpu6050(void)
             mpu.dmpGetAccel(&aa, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+#if DEBUG == 1
             Serial.print("areal\t");
             Serial.print(aaReal.x);
             Serial.print("\t");
             Serial.print(aaReal.y);
             Serial.print("\t");
             Serial.println(aaReal.z);
+#endif
         #endif
 
         #ifdef OUTPUT_READABLE_WORLDACCEL
@@ -96,6 +111,7 @@ uint32_t measure_mpu6050(void)
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
             mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
+#if DEBUG == 1
           /*
             Serial.print("aworld\t");
             Serial.print(aaWorld.x);
@@ -104,10 +120,12 @@ uint32_t measure_mpu6050(void)
             Serial.print("\t");
             Serial.println(aaWorld.z);
           */
+#endif
         #endif
 
         #ifdef OUTPUT_READABLE_ACCELGYRO
         // display tab-separated accel/gyro x/y/z values
+#if DEBUG == 1
         Serial.print("a/g:\t");
         Serial.print(ax); Serial.print("\t");
         Serial.print(ay); Serial.print("\t");
@@ -115,21 +133,23 @@ uint32_t measure_mpu6050(void)
         Serial.print(gx); Serial.print("\t");
         Serial.print(gy); Serial.print("\t");
         Serial.println(gz);
+#endif
     #endif
 
     #ifdef OUTPUT_BINARY_ACCELGYRO
+#if DEBUG == 1
         Serial.write((uint8_t)(ax >> 8)); Serial.write((uint8_t)(ax & 0xFF));
         Serial.write((uint8_t)(ay >> 8)); Serial.write((uint8_t)(ay & 0xFF));
         Serial.write((uint8_t)(az >> 8)); Serial.write((uint8_t)(az & 0xFF));
         Serial.write((uint8_t)(gx >> 8)); Serial.write((uint8_t)(gx & 0xFF));
         Serial.write((uint8_t)(gy >> 8)); Serial.write((uint8_t)(gy & 0xFF));
         Serial.write((uint8_t)(gz >> 8)); Serial.write((uint8_t)(gz & 0xFF));
+#endif
     #endif
     }
     
  //   return (void);
 }
-
 
 void udp_mpu6050(void)
 {
@@ -140,36 +160,36 @@ void udp_mpu6050(void)
   // messages want an OSC address as first argument
   // compile bundle
   /*
-    bndl.add("/LOOM/Ishield0/mac0").add((int)mac[0]);
-    bndl.add("/LOOM/Ishield0/mac1").add((int)mac[1]);
-    bndl.add("/LOOM/Ishield0/mac2").add((int)mac[2]);
-    bndl.add("/LOOM/Ishield0/mac3").add((int)mac[3]);
-    bndl.add("/LOOM/Ishield0/mac4").add((int)mac[4]);
-    bndl.add("/LOOM/Ishield0/mac5").add((int)mac[5]);
-    bndl.add("/LOOM/Ishield0/ip").add((String)ip);
+    bndl.add(IDString "/mac0").add((int)configuration.mac[0]);
+    bndl.add(IDString "/mac1").add((int)configuration.mac[1]);
+    bndl.add(IDString "/mac2").add((int)configuration.mac[2]);
+    bndl.add(IDString "/mac3").add((int)configuration.mac[3]);
+    bndl.add(IDString "/mac4").add((int)configuration.mac[4]);
+    bndl.add(IDString "/mac5").add((int)configuration.mac[5]);
+    bndl.add(IDString "/ip").add((String)configuration.ip);
  */
 // Assemble UDP Packet
 // IP1 IP2 Yaw Pitch Roll aX aY aZ gX gY gZ vBatt
 #ifdef OUTPUT_READABLE_YAWPITCHROLL
-    bndl.add("/LOOM/Ishield0/yaw").add((float)(ypr[0] * 180/M_PI));
-    bndl.add("/LOOM/Ishield0/roll").add((float)(ypr[1] * 180/M_PI));
-    bndl.add("/LOOM/Ishield0/pitch").add((float)(ypr[2] * 180/M_PI));
+    bndl.add(IDString "/yaw").add((float)(ypr[0] * 180/M_PI));
+    bndl.add(IDString "/roll").add((float)(ypr[1] * 180/M_PI));
+    bndl.add(IDString "/pitch").add((float)(ypr[2] * 180/M_PI));
 #endif
-    bndl.add("/LOOM/Ishield0/accelX").add((float)ax/16000);
-    bndl.add("/LOOM/Ishield0/accelY").add((float)ay/16000);
-    bndl.add("/LOOM/Ishield0/accelZ").add((float)az/16000);
-    bndl.add("/LOOM/Ishield0/gyroX").add((float)gx/16000);
-    bndl.add("/LOOM/Ishield0/gyroY").add((float)gy/16000);
-    bndl.add("/LOOM/Ishield0/gyroZ").add((float)gz/16000);
+    bndl.add(IDString "/accelX").add((float)ax/16000);
+    bndl.add(IDString "/accelY").add((float)ay/16000);
+    bndl.add(IDString "/accelZ").add((float)az/16000);
+    bndl.add(IDString "/gyroX").add((float)gx/16000);
+    bndl.add(IDString "/gyroY").add((float)gy/16000);
+    bndl.add(IDString "/gyroZ").add((float)gz/16000);
 #ifdef OUTPUT_READABLE_WORLDACCEL
-    bndl.add("/LOOM/Ishield0/rwx").add(aaWorld.x);
-    bndl.add("/LOOM/Ishield0/rwy").add(aaWorld.y);
-    bndl.add("/LOOM/Ishield0/rwz").add(aaWorld.z);
+    bndl.add(IDString "/rwx").add(aaWorld.x);
+    bndl.add(IDString "/rwy").add(aaWorld.y);
+    bndl.add(IDString "/rwz").add(aaWorld.z);
 #endif
-    bndl.add("/LOOM/Ishield0/vbat").add(vbat);     // Tack battery voltage onto here. Will want to change this for other sensors
+    bndl.add(IDString "/vbat").add(vbat);     // Tack battery voltage onto here. Will want to change this for other sensors
 
    // UDP Packet
-    Udp.beginPacket(ip_broadcast, 9436);
+    Udp.beginPacket(configuration.ip_broadcast, 9436);
       bndl.send(Udp); // send the bytes to the SLIP stream
     Udp.endPacket(); // mark the end of the OSC Packet
    
@@ -189,16 +209,20 @@ void calMPU6050()
        accelgyro.setZGyroOffset(0);
 
   if (state==0){
+#if DEBUG == 1
     Serial.println("\nReading sensors for first time...");
+#endif
     meansensors();
     state++;
     delay(1000);
   }
 
   if (state==1) {
+#if DEBUG == 1
     Serial.println("\nCalculating offsets...");
+#endif
     calibration();
-    configuration.written = flashValidationValue;
+    configuration.checksum = flashValidationValue;
     state++;
     delay(1000);
   }
@@ -207,6 +231,7 @@ void calMPU6050()
     meansensors();
     // Save Sample Period into EEPROM for next power-up
 //    EEPROM_writeAnything(0, configuration);
+#if DEBUG == 1
     Serial.println("\nFINISHED!");
     Serial.print("\nSensor readings with offsets:\t");
     Serial.print(mean_ax); 
@@ -232,6 +257,7 @@ void calMPU6050()
     Serial.print(configuration.gy_offset); 
     Serial.print("\t");
     Serial.println(configuration.gz_offset);
+#endif
   }
 }
 
@@ -283,7 +309,9 @@ void calibration(){
     accelgyro.setZGyroOffset(configuration.gz_offset);
 
     meansensors();
+#if DEBUG == 1
     Serial.println("...");
+#endif
 
     if (abs(mean_ax)<=acel_deadzone) ready++;
     else configuration.ax_offset=configuration.ax_offset-mean_ax/acel_deadzone;
