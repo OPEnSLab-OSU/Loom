@@ -222,7 +222,7 @@ void calMPU6050()
     Serial.println("\nCalculating offsets...");
 #endif
     calibration();
-    configuration.checksum = flashValidationValue;
+    configuration.checksum = memValidationValue;
     state++;
     delay(1000);
   }
