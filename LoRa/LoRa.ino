@@ -123,9 +123,10 @@ void setup()
   //LoRa transmission//
   pinMode(RFM95_RST, OUTPUT);
   digitalWrite(RFM95_RST, HIGH);
+#if DEBUG == 1
   Serial.begin(9600);
   //while (!Serial); // waits for serial hardware to start up
-#if DEBUG == 1
+
   //report all sensors present on system
   Serial.println(" LoRa Feather Transmitter Test!");
   Serial.println("HX711 scale");

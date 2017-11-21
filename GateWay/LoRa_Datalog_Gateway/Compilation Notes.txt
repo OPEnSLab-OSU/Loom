@@ -1,5 +1,0 @@
-Casted several variables in LoRa_Datalog__Gateway.ino to const or non const equivalents
-due to compilation issues. However, there is a compilation issue being caused by one of
-the dependencies (RadioHead\RHHardwareSPI.cpp) as well.
-
-32u4 - Yes					M0 - Issues with RadioHead\RHHardwareSPI
