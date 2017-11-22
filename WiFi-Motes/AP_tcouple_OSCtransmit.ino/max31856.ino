@@ -55,6 +55,7 @@ void measure_tcouple() {
   // Check and print any faults
   uint8_t fault = max.readFault();
   if (fault) {
+    #if DEBUG == 1
     if (fault & MAX31856_FAULT_CJRANGE) Serial.println("Cold Junction Range Fault");
     if (fault & MAX31856_FAULT_TCRANGE) Serial.println("Thermocouple Range Fault");
     if (fault & MAX31856_FAULT_CJHIGH)  Serial.println("Cold Junction High Fault");
@@ -63,6 +64,7 @@ void measure_tcouple() {
     if (fault & MAX31856_FAULT_TCLOW)   Serial.println("Thermocouple Low Fault");
     if (fault & MAX31856_FAULT_OVUV)    Serial.println("Over/Under Voltage Fault");
     if (fault & MAX31856_FAULT_OPEN)    Serial.println("Thermocouple Open Fault");
+    #endif
   }
 
 #elif TCTYPE == VMODE_G32 || TCTYPE == VMODE_G8
