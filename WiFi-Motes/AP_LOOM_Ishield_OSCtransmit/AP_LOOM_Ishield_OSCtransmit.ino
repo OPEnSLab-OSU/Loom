@@ -62,21 +62,18 @@ to
 
 // Define your sensor type here by commenting and un-commenting
 #define is_analog 2      // also define number of channels
-//#define is_i2c 0x68      // also define i2c address of device
+#define is_i2c 0x68      // also define i2c address of device
 #define transmit_butt 10        // using on-board button, specify attached pin, transmitting 
 #define VBATPIN A7       // Pin to check for battery voltage
 //#define CLIENT_REQUESTS_DATA 1 // Set to 1 if you only send data when requested by client, else, send data at sample/sleep rate
+
 //------------------------------------------------------------------------------------------------------
 //OSC identification: convention is FAMILY = "/LOOM", DEVICE is something like "/IShield" (whatever the name of the device is), and INSTANCE_NUM is a number
 //------------------------------------------------------------------------------------------------------
-#define FAMILY "/LOOM"
-#define DEVICE "/Ishield"
-
-#define INSTANCE_NUM 0  // Unique instance umber for this device, useful when using more than one of the same device type in same space
-#define STR_(x) #x
-#define STR(x) STR_(x) //to concatenate a predefined number to a string literal, use STR(x)
-
-#define IDString FAMILY DEVICE STR(INSTANCE_NUM)
+#define FAMILY "LOOM"
+#define DEVICE "Ishield"
+#define INSTANCE_NUM 0  // Unique instance number for this device, useful when using more than one of the same device type in same space
+#include "LOOM_OSC_Scheme.h"
 
 // Set Sleep Mode Use one or the other or neither of the following 2 lines
 #define is_sleep_period 50  // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between
@@ -118,15 +115,6 @@ volatile bool ledState = LOW;
 
 float vbat = 3.3;    // Place to save measured battery voltage
 
-/*configuration.ssid = "wifi101-network"; // created AP name
-configuration.pass = "1234567890";      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
-configuration.keyIndex = 0;                // your network key Index number (needed only for WEP)
-configuration.ip_broadcast[] = "192.168.1.255"; // IP to Broadcast data 
-configuration.localPort = 9436;      // local port to listen on*/
-
-//byte mac[6]; // place to save and recall this devices MAC address
-//IPAddress ip; // place to save and recall IP address
-
 char packetBuffer[255]; //buffer to hold incoming packet
 char  ReplyBuffer[] = "acknowledged";       // a string to send back
 
@@ -134,11 +122,6 @@ WiFiUDP Udp;
 
 int status = WL_IDLE_STATUS;
 WiFiServer server(80);
-
-// OSC Address Builder String:
-//const String IDstring = "/LOOM/Ishield" + INSTANCE_NUM; // example "/LOOM/Ishield0"
-//uint8_t addrStringSize = sizeof(IDstring);
-//char  IDbuffer[] = "/LOOM/Ishield0";
 
 #ifdef is_analog
   #define num_measurements 4 // must be 1, 2, 4, or 8)! number of analog measurements to sample and average per channel
@@ -286,8 +269,6 @@ void setup() {
             Serial.println(F(")"));
         #endif
     }
-  // Auto Calibrate MPU6050 on startup. Change this to save calibration values in flash and only trigger function when received calibrate request from client  
-  //calMPU6050();
   // ** end serial stuff
 #endif 
 
@@ -302,7 +283,7 @@ void setup() {
     Serial.println(configuration.checksum);
   #endif
   if (configuration.checksum != memValidationValue){    //The memory has not been written to before. 
-    configuration.ssid = "wifi101-network";              // created AP name
+    configuration.ssid = IDString;
     configuration.pass = "1234567890";                // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
     configuration.keyIndex = 0;                       // your network key Index number (needed only for WEP)
     configuration.ip_broadcast = "192.168.1.255";     // IP to Broadcast data 
