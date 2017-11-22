@@ -159,6 +159,15 @@ void udp_mpu6050(void)
     OSCBundle bndl;
   // messages want an OSC address as first argument
   // compile bundle
+
+  float axf = (float)ax/16000;
+  float ayf = (float)ay/16000;
+  float azf = (float)az/16000;
+
+  bool freefall = false;
+  // Evaluate if accelerometers are all around zero-G, if so, set freefall bool to true
+  if((axf > -0.2 && axf < 0.2) && (ayf > -0.2 && ayf < 0.2) && (azf > -0.2 && azf < 0.2))
+    freefall = true;
   /*
     bndl.add(PacketHeaderString "/mac0").add((int)configuration.mac[0]);
     bndl.add(PacketHeaderString "/mac1").add((int)configuration.mac[1]);
@@ -175,9 +184,9 @@ void udp_mpu6050(void)
     bndl.add(PacketHeaderString "/roll").add((float)(ypr[1] * 180/M_PI));
     bndl.add(PacketHeaderString "/pitch").add((float)(ypr[2] * 180/M_PI));
 #endif
-    bndl.add(PacketHeaderString "/accelX").add((float)ax/16000);
-    bndl.add(PacketHeaderString "/accelY").add((float)ay/16000);
-    bndl.add(PacketHeaderString "/accelZ").add((float)az/16000);
+    bndl.add(PacketHeaderString "/accelX").add(axf);
+    bndl.add(PacketHeaderString "/accelY").add(ayf);
+    bndl.add(PacketHeaderString "/accelZ").add(azf);
     bndl.add(PacketHeaderString "/gyroX").add((float)gx/16000);
     bndl.add(PacketHeaderString "/gyroY").add((float)gy/16000);
     bndl.add(PacketHeaderString "/gyroZ").add((float)gz/16000);
@@ -187,7 +196,7 @@ void udp_mpu6050(void)
     bndl.add(PacketHeaderString "/rwz").add(aaWorld.z);
 #endif
     bndl.add(PacketHeaderString "/vbat").add(vbat);     // Tack battery voltage onto here. Will want to change this for other sensors
-
+    bndl.add(PacketHeaderString "/freefall").add(freefall);
    // UDP Packet
     Udp.beginPacket(configuration.ip_broadcast, 9436);
       bndl.send(Udp); // send the bytes to the SLIP stream
