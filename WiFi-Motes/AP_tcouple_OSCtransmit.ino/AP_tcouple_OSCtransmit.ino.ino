@@ -39,6 +39,26 @@ to
 #include <WiFiUdp.h>
 #include <OSCBundle.h>
 
+//------------------------------------------------------------------------------------------------------
+// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
+//------------------------------------------------------------------------------------------------------
+#ifndef DEBUG
+#define DEBUG 1
+#endif
+
+//------------------------------------------------------------------------------------------------------
+// MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
+//------------------------------------------------------------------------------------------------------
+#define MEM_FLASH 0
+#define MEM_EEPROM 1
+
+#ifndef MEM_TYPE
+#define MEM_TYPE MEM_FLASH
+#endif  
+
+#if MEM_TYPE == MEM_FLASH
+#include <FlashStorage.h>
+#endif 
 
 // Define your sensor type here by commenting and un-commenting
 #define is_analog 2      // also define number of channels
@@ -64,6 +84,10 @@ to
 
 #ifdef is_sleep_period
   #include <Adafruit_SleepyDog.h> // Include this if transmitting at timed intervals (use this one)
+#endif
+
+#ifdef is_sleep_interrupt
+  #include <LowPower.h> //Include this if transmitting on pin interrupt
 #endif
 const byte flashValidationValue = 99; // Value to test to see if flashMem has been written before
 
@@ -107,7 +131,10 @@ float tc_vin;
 
 void setup() {
   //Initialize serial and wait for port to open:
+#if DEBUG == 1
   Serial.begin(9600);
+  while(!Serial) { }     //Ensure Serial is ready to go before anything happens.
+#endif
   pinMode(led, OUTPUT);      // set the LED pin mode
 #ifdef transmit_butt
   pinMode(transmit_butt, INPUT_PULLUP);      // set the transmit_butt pin mode to input
@@ -118,14 +145,16 @@ void setup() {
 //----------------------------------------------------
   //Configure pins for Adafruit ATWINC1500 Feather
   WiFi.setPins(8,7,4,2);
-
+#if DEBUG == 1
   Serial.println("Access Point Web Server");
-
+#endif
   pinMode(led, OUTPUT);      // set the LED pin mode
 
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
+#if DEBUG == 1
     Serial.println("WiFi shield not present");
+#endif
     // don't continue
     while (true);
   }
@@ -135,13 +164,17 @@ void setup() {
   // WiFi.config(IPAddress(10, 0, 0, 1));
 
   // print the network name (SSID);
+#if DEBUG == 1
   Serial.print("Creating access point named: ");
   Serial.println(ssid);
+#endif
 
   // Create open network. Change this line if you want to create an WEP network:
   status = WiFi.beginAP(ssid);
   if (status != WL_AP_LISTENING) {
+    #if DEBUG == 1
     Serial.println("Creating access point failed");
+    #endif
     // don't continue
     while (true);
   }
@@ -154,8 +187,9 @@ void setup() {
 
   // you're connected now, so print out the status
   printWiFiStatus();
-
+  #if DEBUG == 1
   Serial.println("\nStarting UDP connection over server...");
+  #endif
   // if you get a connection, report back via serial:
   Udp.begin(localPort);
 
@@ -175,8 +209,9 @@ void loop() {
       byte remoteMac[6];
 
       // a device has connected to the AP
-      Serial.print("Device connected to AP, MAC address: ");
       WiFi.APClientMacAddress(remoteMac);
+      #if DEBUG == 1
+      Serial.print("Device connected to AP, MAC address: ");
       Serial.print(remoteMac[5], HEX);
       Serial.print(":");
       Serial.print(remoteMac[4], HEX);
@@ -188,9 +223,11 @@ void loop() {
       Serial.print(remoteMac[1], HEX);
       Serial.print(":");
       Serial.println(remoteMac[0], HEX);
+      
     } else {
       // a device has disconnected from the AP, and we are back in listening mode
       Serial.println("Device disconnected from AP");
+      #endif
     }
   }
 
@@ -199,6 +236,7 @@ void loop() {
   int packetSize = Udp.parsePacket();
   if (packetSize)
   {
+    #if DEBUG == 1
     Serial.print("Received packet of size ");
     Serial.println(packetSize);
     Serial.print("From ");
@@ -206,12 +244,14 @@ void loop() {
     Serial.print(remoteIp);
     Serial.print(", port ");
     Serial.println(Udp.remotePort());
-
+    #endif
     // read the packet into packetBufffer
     int len = Udp.read(packetBuffer, 255);
     if (len > 0) packetBuffer[len] = 0;
+    #if DEBUG == 1
     Serial.println("Contents:");
     Serial.println(packetBuffer);
+    #endif
 #endif
 
 // measure battery voltage
@@ -241,7 +281,7 @@ void loop() {
   // delay(is_sleep_period); // demo transmit every 1 second
 
 } // End loop section
-
+#if DEBUG == 1
 void printWiFiStatus() {
   // print the SSID of the network you're attached to:
   Serial.print("SSID: ");
@@ -277,3 +317,4 @@ void printWiFiStatus() {
   Serial.println(ip);
 
 }
+#endif
