@@ -75,6 +75,9 @@ to
 #define INSTANCE_NUM 0  // Unique instance number for this device, useful when using more than one of the same device type in same space
 #include "LOOM_OSC_Scheme.h"
 
+//Code used to return error information
+OSCErrorCode error;
+
 // Set Sleep Mode Use one or the other or neither of the following 2 lines
 #define is_sleep_period 50  // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between
 //#define is_sleep_interrupt 11  // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
@@ -383,7 +386,40 @@ void setup() {
 }
 
 
+void calMPU6050_OSC(OSCMessage &msg, int addrOffset) {
+  calMPU6050();
+  //Save calibrated values
+}
+
 void loop() {
+	OSCBundle bndl;
+ 
+	//parsePacket() returns 0 if unreadable, packetSize if readable.
+	//Must be called before Udp.read()
+	int packetSize = Udp.parsePacket();
+	
+	//Read packet byte by byte into the bundle.
+  if(packetSize > 0) {
+    bndl.empty();
+    Serial.println("=========================================");
+    Serial.print("received packet of size: ");
+    Serial.println(packetSize);
+    while (packetSize--){
+      bndl.fill(Udp.read());
+    }
+  	
+  	if(!bndl.hasError()) { 
+      #ifdef is_i2c
+        bndl.route(PacketHeaderString "/calMPU6050", calMPU6050_OSC);	
+      #endif
+  	}
+  	else {
+      error = bndl.getError();
+      Serial.print("error: ");
+      Serial.println(error);
+    }
+  }
+	
   // compare the previous status to the current status
   if (status != WiFi.status()) {
     // it has changed update the variable
