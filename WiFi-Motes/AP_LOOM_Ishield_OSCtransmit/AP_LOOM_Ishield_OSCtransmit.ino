@@ -65,7 +65,7 @@ to
 #define is_i2c 0x68      // also define i2c address of device
 #define transmit_butt 10        // using on-board button, specify attached pin, transmitting 
 #define VBATPIN A7       // Pin to check for battery voltage
-//#define CLIENT_REQUESTS_DATA 1 // Set to 1 if you only send data when requested by client, else, send data at sample/sleep rate
+#define CLIENT_REQUESTS_DATA 1 // Set to 1 if you only send data when requested by client, else, send data at sample/sleep rate
 
 //------------------------------------------------------------------------------------------------------
 //OSC identification: convention is FAMILY = "/LOOM", DEVICE is something like "/IShield" (whatever the name of the device is), and INSTANCE_NUM is a number
@@ -387,38 +387,22 @@ void setup() {
 
 
 void calMPU6050_OSC(OSCMessage &msg, int addrOffset) {
-  calMPU6050();
+  #if DEBUG == 1
+   Serial.println("Command received to calibrate MPU6050");
+  #endif
+  meansensors();
+  calibration();
+  flash_config.write(configuration); 
+  #if DEBUG == 1
+   Serial.println("New calibration values written to non-volatile memory");
+  #endif
+  
   //Save calibrated values
 }
 
 void loop() {
 	OSCBundle bndl;
- 
-	//parsePacket() returns 0 if unreadable, packetSize if readable.
-	//Must be called before Udp.read()
-	int packetSize = Udp.parsePacket();
-	
-	//Read packet byte by byte into the bundle.
-  if(packetSize > 0) {
-    bndl.empty();
-    Serial.println("=========================================");
-    Serial.print("received packet of size: ");
-    Serial.println(packetSize);
-    while (packetSize--){
-      bndl.fill(Udp.read());
-    }
-  	
-  	if(!bndl.hasError()) { 
-      #ifdef is_i2c
-        bndl.route(PacketHeaderString "/calMPU6050", calMPU6050_OSC);	
-      #endif
-  	}
-  	else {
-      error = bndl.getError();
-      Serial.print("error: ");
-      Serial.println(error);
-    }
-  }
+  char addressString[255];
 	
   // compare the previous status to the current status
   if (status != WiFi.status()) {
@@ -456,27 +440,64 @@ void loop() {
 
 #if (CLIENT_REQUESTS_DATA)
   // if there's data available, read a packet
+  //parsePacket() returns 0 if unreadable, packetSize if readable.
+  //Must be called before Udp.read()
   int packetSize = Udp.parsePacket();
-  if (packetSize)
+  
+  //Read packet byte by byte into the bundle.
+  if(packetSize > 0) {
+    bndl.empty();
+    #if DEBUG == 1
+      Serial.println("=========================================");
+      Serial.print("received packet of size: ");
+      Serial.println(packetSize);
+    #endif
+    while (packetSize--){
+      bndl.fill(Udp.read());
+    }
+    
+    if(!bndl.hasError()) { 
+      #ifdef is_i2c
+        #if DEBUG == 1
+          Serial.print("Number of items in bundle: ");
+          Serial.println(bndl.size());
+          Serial.print("First message address string: ");
+          bndl.getOSCMessage(0)->getAddress(addressString, 0);
+          Serial.println(addressString);
+          Serial.print("Expecting address to be: ");
+          Serial.println(PacketHeaderString "calMPU6050");
+        #endif
+        bndl.route(PacketHeaderString "calMPU6050", calMPU6050_OSC); 
+      #endif
+    }
+    else {
+      error = bndl.getError();
+      Serial.print("error: ");
+      Serial.println(error);
+    }
+  }
+
+/*if (packetSize)
   {
 	IPAddress remoteIp = Udp.remoteIP();
 	int len = Udp.read(packetBuffer, 255);
     if (len > 0) packetBuffer[len] = 0;
-#if DEBUG == 1
-    Serial.print("Received packet of size ");
-    Serial.println(packetSize);
-    Serial.print("From ");
-    Serial.print(remoteIp);
-    Serial.print(", port ");
-    Serial.println(Udp.remotePort());
-
-    // read the packet into packetBufffer
-
-    Serial.println("Contents:");
-    Serial.println(packetBuffer);
+  #if DEBUG == 1
+      Serial.print("Received packet of size ");
+      Serial.println(packetSize);
+      Serial.print("From ");
+      Serial.print(remoteIp);
+      Serial.print(", port ");
+      Serial.println(Udp.remotePort());
+  
+      // read the packet into packetBufffer
+  
+      Serial.println("Contents:");
+      Serial.println(packetBuffer);
+  #endif */
 #endif
-#endif
 
+/*
 // measure battery voltage
   vbat = analogRead(VBATPIN);
   vbat *= 2;    // we divided by 2, so multiply back
@@ -501,7 +522,7 @@ void loop() {
 
 #if (CLIENT_REQUESTS_DATA)
   } // end if(packetsize) check (true if client sends request for data)
-#endif
+#endif*/
 
 #ifdef is_sleep_period
 	#if DEBUG == 0
