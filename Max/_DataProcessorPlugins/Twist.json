@@ -1,0 +1,17 @@
+{
+	"eulerX" : "-1. 1.",
+	"eulerY" : "-1. 1.",
+	"eulerZ" : "-1. 1.",
+	"accelX" : "-1.5 1.5",
+	"accelY" : "-1.5 1.5",
+	"accelZ" : "-1.5 1.5",
+	"gyroX" : "-35. 35.",
+	"gyroY" : "-35. 35.",
+	"gyroZ" : "-35. 35.",
+	"magX" : "-1. 1.",
+	"magY" : "-1. 1.",
+	"magZ" : "-1. 1.",
+	"freeFallOnset" : "0. 1.",
+	"freeFallTime" : "0. 400.",
+	"orient" : "0. 360."
+}
