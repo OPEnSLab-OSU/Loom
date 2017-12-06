@@ -1,0 +1,11 @@
+{
+	"accelX" : "-1.5 1.5",
+	"accelY" : "-1.5 1.5",
+	"accelZ" : "-1.5 1.5",
+	"port1" : "0. 1.",
+	"port2" : "0. 1.",
+	"port3" : "0. 1.",
+	"port5v" : "0. 1.",
+	"freeFallOnset" : "0. 1.",
+	"freeFallTime" : "0 400"
+}
