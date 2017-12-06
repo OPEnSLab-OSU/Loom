@@ -5,4 +5,4 @@
 #define IDString FAMILY DEVICE STR(INSTANCE_NUM) 
 
 //Delimits the FAMILY, DEVICE, and INSTANCE_NUM with '/' for use in OSC Bundles
-#define PacketHeaderString STR(/) FAMILY STR(/) DEVICE STR(INSTANCE_NUM) STR(/)
+#define PacketHeaderString STR(/) FAMILY STR(/) DEVICE STR(INSTANCE_NUM) STR()

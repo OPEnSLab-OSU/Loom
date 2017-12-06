@@ -437,8 +437,7 @@ void loop() {
 #endif
     }
   }
-
-#if (CLIENT_REQUESTS_DATA)
+  
   // if there's data available, read a packet
   //parsePacket() returns 0 if unreadable, packetSize if readable.
   //Must be called before Udp.read()
@@ -464,10 +463,8 @@ void loop() {
           Serial.print("First message address string: ");
           bndl.getOSCMessage(0)->getAddress(addressString, 0);
           Serial.println(addressString);
-          Serial.print("Expecting address of form: ");
-          Serial.println(PacketHeaderString "<command>");
         #endif
-        bndl.route(PacketHeaderString "calMPU6050", calMPU6050_OSC); 
+        bndl.route(PacketHeaderString "/MPU6050/cal", calMPU6050_OSC); 
       #endif
     }
     else {
@@ -495,34 +492,29 @@ void loop() {
       Serial.println("Contents:");
       Serial.println(packetBuffer);
   #endif */
-#endif
 
-/*
-// measure battery voltage
+#if (CLIENT_REQUESTS_DATA)
+  // measure battery voltage
   vbat = analogRead(VBATPIN);
   vbat *= 2;    // we divided by 2, so multiply back
   vbat *= 3.3;  // Multiply by 3.3V, our reference voltage
   vbat /= 1024; // convert to voltage
 
-#ifdef is_i2c
-    // Update MPU6050 Data
-    // Now measure MPU6050, update values in global registers
-    measure_mpu6050();
-
-    udp_mpu6050();
-    
-    // flush MPU6050 FIFO to avoid overflows if using i2c
-    mpu.resetFIFO();
-
+  #ifdef is_i2c
+      // Update MPU6050 Data
+      // Now measure MPU6050, update values in global registers
+      measure_mpu6050();
+  
+      udp_mpu6050();
+      
+      // flush MPU6050 FIFO to avoid overflows if using i2c
+      mpu.resetFIFO();
+  #endif
 #endif
-    
+
 #ifdef is_analog
     measure_analog();
 #endif
-
-#if (CLIENT_REQUESTS_DATA)
-  } // end if(packetsize) check (true if client sends request for data)
-#endif*/
 
 #ifdef is_sleep_period
 	#if DEBUG == 0
