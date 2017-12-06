@@ -464,8 +464,8 @@ void loop() {
           Serial.print("First message address string: ");
           bndl.getOSCMessage(0)->getAddress(addressString, 0);
           Serial.println(addressString);
-          Serial.print("Expecting address to be: ");
-          Serial.println(PacketHeaderString "calMPU6050");
+          Serial.print("Expecting address of form: ");
+          Serial.println(PacketHeaderString "<command>");
         #endif
         bndl.route(PacketHeaderString "calMPU6050", calMPU6050_OSC); 
       #endif
