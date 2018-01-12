@@ -218,9 +218,7 @@ void calMPU6050()
        accelgyro.setZGyroOffset(0);
 
   if (state==0){
-#if DEBUG == 1
-    Serial.println("\nReading sensors for first time...");
-#endif
+
     meansensors();
     state++;
     delay(1000);
@@ -267,6 +265,7 @@ void calMPU6050()
     Serial.print("\t");
     Serial.println(configuration.gz_offset);
 #endif
+  state = 0; // reset state flag
   }
 }
 
