@@ -47,6 +47,9 @@ to
 #define VBATPIN A7       // Pin to check for battery voltage
 //#define CLIENT_REQUESTS_DATA 1 // Set to 1 if you only send data when requested by client, else, send data at sample/sleep rate
 
+#define TRANSMISSION_PERIOD 6000     //The number of milliseconds between when the decagon finishes transmitting
+                            // and starts the reading again   
+                                              
 #define STR_HELPER(x) #x
 #define STR(x) STR_HELPER(x) //to concatenate a predefined number to a string literal, use STR(x)
 
@@ -76,7 +79,7 @@ char ip_broadcast[] = "192.168.1.255"; // IP to Broadcast data
 unsigned int localPort = 9436;      // local port to listen on
 
 byte mac[6]; // place to save and recall this devices MAC address
-IPAddress ip; // place to save and recall IP address
+IPAddress ip; // place to save and recall IP addressse
 
 char packetBuffer[255]; //buffer to hold incoming packet
 char  ReplyBuffer[] = "acknowledged";       // a string to send back
@@ -364,6 +367,8 @@ void loop() {
     measure_decagon();
 
     udp_decagon();
+
+    delay((uint32_t)TRANSMISSION_PERIOD);
 #endif
     
 #ifdef is_analog
