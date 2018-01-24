@@ -57,7 +57,7 @@ int led =  LED_BUILTIN;
 // DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
 //------------------------------------------------------------------------------------------------------
 #ifndef DEBUG
-#define DEBUG 0
+#define DEBUG 1
 #endif
 
 //------------------------------------------------------------------------------------------------------
@@ -105,17 +105,20 @@ OSCErrorCode error;
 #endif
 
 //ADD sparkfun library for is_sleep_interrupt
-
+#define CLIENT true
+#define HOST false
 //Structure to store device configuration information
 struct config_t {
   byte checksum;               //value is changed when flash memory is written to.
   IPAddress ip;                //Device's IP Address
+  char* my_ssid;
   char* ssid;                //Created AP's name
   char* pass;                //AP Password (10 or 26 characters long)
   int   keyIndex;            //Key Index Number (needed only for WEP)
   char* ip_broadcast;        //IP to Broadcast data
   unsigned int localPort;      //Local port to listen on
   byte  mac[6];                 //Device's MAC Address
+  bool wifi_mode = CLIENT;
 #ifdef is_i2c
   int   ax_offset, ay_offset, az_offset, gx_offset, gy_offset, gz_offset; //mpu6050 config
 #endif
@@ -304,11 +307,13 @@ void setup() {
     Serial.println(configuration.checksum);
   #endif
   if (configuration.checksum != memValidationValue){    //The memory has not been written to before. 
-    configuration.ssid = IDString;
-    configuration.pass = "1234567890";                // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
+    configuration.my_ssid = IDString;
+    configuration.ssid = "OPEnS";
+    configuration.pass = "arduino101";                // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
     configuration.keyIndex = 0;                       // your network key Index number (needed only for WEP)
     configuration.ip_broadcast = "192.168.1.255";     // IP to Broadcast data 
     configuration.localPort = 9436;                   // local port to listen on
+    configuration.wifi_mode = HOST;
 #if DEBUG == 1
     Serial.println("\nReading sensors for first time...");
 #endif
@@ -379,25 +384,41 @@ void setup() {
 
 #if DEBUG == 1
   // print the network name (SSID);
-  Serial.print("Creating access point named: ");
-  Serial.println(configuration.ssid);
+  if (configuration.wifi_mode == CLIENT)
+    Serial.print("Attempting to connect to: ");
+  else 
+    Serial.print("Creating access point named: ");
+  Serial.println(configuration.my_ssid);
 #endif
 
   // Create open network. Change this line if you want to create an WEP network:
-  status = WiFi.beginAP(configuration.ssid);
-  if (status != WL_AP_LISTENING) {
-    #if DEBUG == 1
-      Serial.println("Creating access point failed");
-    #endif
-    // don't continue
-    while (true);
+  if (configuration.wifi_mode == CLIENT){
+    status = WiFi.begin(configuration.ssid, configuration.pass);
+    delay(10000);
+    
+    if (status != WL_CONNECTED) {
+      #if DEBUG == 1
+      Serial.println("Connecting to WPA host failed");
+      #endif
+    }
   }
+  else if (configuration.wifi_mode == HOST){
+    status = WiFi.beginAP(configuration.my_ssid);
+  
+    if (status != WL_AP_LISTENING) {
+      #if DEBUG == 1
+        Serial.println("Creating access point failed");
+      #endif
+      // don't continue
+      while (true);
+    }
+  
+    // wait 10 seconds for connection:
+    delay(10000);
 
-  // wait 10 seconds for connection:
-  delay(10000);
-
-  // start the web server on port 80
-  server.begin();
+    // start the web server on port 80
+    server.begin();
+  }
 #if DEBUG == 1
   // you're connected now, so print out the status
   printWiFiStatus();
@@ -448,7 +469,48 @@ void calMPU6050_OSC(OSCMessage &msg, int addrOffset) {
   //Save calibrated values
 }
 
+char new_ssid[50];
+char new_pass[50];
+
+void setSSID(OSCMessage &msg, int addrOffset){
+  msg.getString(0,new_ssid,49);
+}
+
+void setPassword(OSCMessage &msg, int addrOffset){
+  msg.getString(0,new_pass,49);
+}
+
+void connectToWPA(char ssid[], char pass[]){
+  Udp.stop();
+  WiFi.end();
+  status = WiFi.begin(ssid, pass);
+  delay(5000);
+  
+  if (status != WL_CONNECTED) {
+    #if DEBUG == 1
+    Serial.println("Connecting to WPA host failed");
+    
+    #endif
+    status = WiFi.beginAP(configuration.my_ssid);
+  }
+  else{
+    #if DEBUG == 1
+    Serial.println("Successfully connected to WPA host");
+    printWiFiStatus();
+    #endif
+    configuration.wifi_mode = CLIENT;
+    configuration.ssid = ssid;
+    configuration.pass = pass;
+    Udp.begin(configuration.localPort);
+  }
+  
+}
+
 void loop() {
+  for (int i = 0; i < 50; i++){
+    new_ssid[i] = '\0';
+    new_pass[i]= '\0';
+  }
   OSCBundle bndl;
   char addressString[255];
  
@@ -477,7 +539,17 @@ void loop() {
       bndl.route("/LOOM/Ishield0/Port0/Neopixel/Red",setRed);
       bndl.route("/LOOM/Ishield0/Port0/Neopixel/Green",setGreen);
       bndl.route("/LOOM/Ishield0/Port0/Neopixel/Blue",setBlue);
+      bndl.route("/LOOM/Ishield0/Connect/SSID",setSSID);
+      bndl.route("/LOOM/Ishield0/Connect/Password",setPassword);
 
+      if (new_ssid[0] != '\0' && new_pass[0] != '\0'){
+        Serial.print("Received command to connect to ");
+        Serial.print(new_ssid);
+        Serial.print(" with password ");
+        Serial.println(new_pass);
+        connectToWPA(new_ssid,new_pass);
+      }
+      
       pixels.setPixelColor(0, pixels.Color((redVal > 255) ? 255 : redVal, (greenVal > 255) ? 255 : greenVal, (blueVal > 255) ? 255: blueVal));
       pixels.show();
 #ifdef is_i2c

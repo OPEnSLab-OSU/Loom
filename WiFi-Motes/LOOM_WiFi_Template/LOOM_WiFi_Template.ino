@@ -1,17 +1,49 @@
 /*
-  LOOM WiFi Mote template
+  January 19, 2018. Author: Trevor Swope
+  This is the LOOM WiFi Mote template! Read this big 'ol comment for instructions on how to use the preprocessor statements in here to define the functionality of your board.
+ 
+  DEBUG MODE: define DEBUG as 1 or 0. If DEBUG is set, make sure the serial monitor is open; all serial calls should be wrapped in an #if DEBUG == 1 ... #endif
+
+  SEND_OSC: if the device is going to be sending readings from anything attached to it, set this to true
+  RECEIVE_OSC: if the device is going to receive any commands from the hub, set this to true
+  
  */
 
 #include <SPI.h>
 #include <WiFi101.h>
 #include <WiFiUdp.h>
-#include <OSCBundle.h>
 
-//------------------------------------------------------------------------------------------------------
-// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
-//------------------------------------------------------------------------------------------------------
+//--PREPROCESSOR STATEMENTS BEGIN HERE
+
 #ifndef DEBUG
-#define DEBUG 1
+#define DEBUG 1 //set to 1 if you want Serial statements from various functions to print
+#endif
+
+#define FAMILY "/LOOM"    // Should always be "/LOOM", you can change this if you are setting up your own network
+#define DEVICE "/Device"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "/RelayShield" or "/IShield"
+#define INSTANCE_NUM 0    // Unique instance number for this device, useful when using more than one of the same device type in same space
+
+#define SEND_OSC          // Comment this out to turn off sending of OSC messages
+#define RECEIVE_OSC       // Comment this out to turn off receiving of OSC messages
+
+#ifdef SEND_OSC
+  #define is_sleep_period 50 // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval
+  #define is_sleep_interrupt 11 // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
+#endif
+
+#ifdef is_sleep_period
+  #include <Adafruit_SleepyDog.h> // This must be included if you are transmitting at timed intervals
+#endif
+
+#ifdef is_sleep_interrupt
+  #include <LowPower.h> //Include this if transmitting on pin interrupt
+#endif
+
+#ifdef SEND_OSC or RECEIVE_OSC
+  #define STR_(x) #x //helper function
+  #define STR(x) STR_(x) //to concatenate a predefined number to a string literal, use STR(x)
+  #define IDString FAMILY DEVICE STR(INSTANCE_NUM) //results in a single string, i.e. /LOOM/Device0
+  #include <OSCBundle.h> // Use this to handle all OSC messaging behavior (sending or receiving)
 #endif
 
 //------------------------------------------------------------------------------------------------------
@@ -37,10 +69,7 @@
 //------------------------------------------------------------------------------------------------------
 //OSC identification: convention is FAMILY = "/LOOM", DEVICE is something like "/IShield" (whatever the name of the device is), and INSTANCE_NUM is a number
 //------------------------------------------------------------------------------------------------------
-#define FAMILY "/LOOM"
-#define DEVICE "/Device"
-#define INSTANCE_NUM 0  // Unique instance umber for this device, useful when using more than one of the same device type in same space
-#include "LOOM_OSC_Scheme.h"
+
 
 // Set Sleep Mode Use one or the other or neither of the following 2 lines
 #define is_sleep_period 50  // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between
