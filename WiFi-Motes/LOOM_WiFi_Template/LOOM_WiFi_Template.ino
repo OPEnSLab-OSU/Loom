@@ -58,7 +58,7 @@ enum WiFiMode{
   
   Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
   int redVal = 0, greenVal = 0, blueVal = 0;
-  void setRed(OSCMessage &msg, int addrOffset){
+  void setRed(OSCMessage &msg){
     redVal = msg.getInt(0);
   #if DEBUG == 1
     Serial.print("set redVal to ");
@@ -66,14 +66,14 @@ enum WiFiMode{
   #endif
   }
 
-  void setGreen(OSCMessage &msg, int addrOffset){
+  void setGreen(OSCMessage &msg){
     greenVal = msg.getInt(0);
   #if DEBUG == 1
     Serial.print("set greenVal to ");
     Serial.println(greenVal);
   #endif
   }
-  void setBlue(OSCMessage &msg, int addrOffset){
+  void setBlue(OSCMessage &msg){
     blueVal = msg.getInt(0);
   #if DEBUG == 1
     Serial.print("set blueVal to ");
@@ -529,6 +529,11 @@ void msg_router(OSCMessage &msg, int addrOffset){
   #ifdef is_mpu6050
   msg.dispatch("/MPU6050/cal",calMPU6050_OSC,addrOffset);
   #endif
+  #ifdef is_neopixel
+  msg.dispatch("/Port0/Neopixel/Red",setRed);
+  msg.dispatch("/Port0/Neopixel/Green",setGreen);
+  msg.dispatch("/Port0/Neopixel/Blue",setBlue);
+  #endif
   msg.dispatch("/Connect/SSID",set_ssid,addrOffset);
   msg.dispatch("/Connect/Password",set_pass,addrOffset);
   msg.dispatch("/wifiSetup/AP",switch_to_AP,addrOffset);
@@ -594,6 +599,11 @@ void loop() {
       }
     
       bndl.route(configuration.packet_header_string,msg_router);
+      #ifdef is_neopixel
+      pixels.setPixelColor(0, pixels.Color((redVal > 255) ? 255 : redVal, (greenVal > 255) ? 255 : greenVal, (blueVal > 255) ? 255: blueVal));
+      pixels.show();
+      #endif
+      
       if (ssid_set == true && pass_set == true){
         Serial.print("received command to connect to ");
         Serial.print(new_ssid);
