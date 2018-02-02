@@ -561,14 +561,12 @@ void loop() {
       
     #endif
       button_timer = 0;
-      if (configuration.wifi_mode != AP_MODE){
-        configuration.wifi_mode = AP_MODE;
-        
-        Udp.stop();
-        WiFi.disconnect();
-        WiFi.end();
-        start_AP();
-      }
+      configuration.wifi_mode = AP_MODE;
+      
+      Udp.stop();
+      WiFi.disconnect();
+      WiFi.end();
+      start_AP();
     }
   }
   // if there's data available, read a packet
@@ -599,10 +597,10 @@ void loop() {
       }
     
       bndl.route(configuration.packet_header_string,msg_router);
-      #ifdef is_neopixel
+      /*#ifdef is_neopixel
       pixels.setPixelColor(0, pixels.Color((redVal > 255) ? 255 : redVal, (greenVal > 255) ? 255 : greenVal, (blueVal > 255) ? 255: blueVal));
       pixels.show();
-      #endif
+      #endif*/
       
       if (ssid_set == true && pass_set == true){
         Serial.print("received command to connect to ");
