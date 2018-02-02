@@ -543,10 +543,13 @@ void loop() {
     #else
     button_time ++;
     #endif
+    if (button_time >= 8000){ //~about 8 seconds
     #if DEBUG == 1
-      Serial.print("button timer val: ");
+      Serial.print("button held or 8 seconds, resetting to AP mode");
       Serial.println(button_timer);
     #endif
+    //TODO: add reset function here (shouldn't be too hard)
+    }
   }
   // if there's data available, read a packet
   int packetSize = Udp.parsePacket();
