@@ -28,19 +28,24 @@ uint32_t read_analog(uint8_t chnl)
 
 void measure_analog(void)
 {
+  char addressString[255];
   // declare the bundle
     OSCBundle bndl;
 #if (is_analog > 0) //// Take a reading
-    bndl.add(PacketHeaderString "/port0").add((int32_t)read_analog(0));  
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/port0");
+    bndl.add(addressString).add((int32_t)read_analog(0));  
 #endif 
 #if (is_analog > 1) 
-    bndl.add(PacketHeaderString "/port1").add((int32_t)read_analog(1));
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/port1");
+    bndl.add(addressString).add((int32_t)read_analog(1));
 #endif 
-#if (is_analog > 2) 
-    bndl.add(PacketHeaderString "/port2").add((int32_t)read_analog(2));
+#if (is_analog > 2)
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/port2"); 
+    bndl.add(addressString).add((int32_t)read_analog(2));
 #endif 
 #ifdef transmit_butt
-    bndl.add(PacketHeaderString "/butt").add((int32_t)digitalRead(transmit_butt));
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/butt");
+    bndl.add(addressString).add((int32_t)digitalRead(transmit_butt));
 #endif
 
  // UDP Packet

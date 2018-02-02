@@ -153,7 +153,7 @@ uint32_t measure_mpu6050(void)
 
 void udp_mpu6050(void)
 {
- 
+  char addressString[255]; //declare address string buffer
   // Format MPU6050 data into OSC
   // declare the bundle
     OSCBundle bndl;
@@ -180,23 +180,37 @@ void udp_mpu6050(void)
 // Assemble UDP Packet
 // IP1 IP2 Yaw Pitch Roll aX aY aZ gX gY gZ vBatt
 #ifdef OUTPUT_READABLE_YAWPITCHROLL
-    bndl.add(PacketHeaderString "/yaw").add((float)(ypr[0] * 180/M_PI));
-    bndl.add(PacketHeaderString "/roll").add((float)(ypr[1] * 180/M_PI));
-    bndl.add(PacketHeaderString "/pitch").add((float)(ypr[2] * 180/M_PI));
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/yaw");
+    bndl.add(addressString).add((float)(ypr[0] * 180/M_PI));
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/roll");
+    bndl.add(addressString).add((float)(ypr[1] * 180/M_PI));
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/pitch");
+    bndl.add(addressString).add((float)(ypr[2] * 180/M_PI));
 #endif
-    bndl.add(PacketHeaderString "/accelX").add(axf);
-    bndl.add(PacketHeaderString "/accelY").add(ayf);
-    bndl.add(PacketHeaderString "/accelZ").add(azf);
-    bndl.add(PacketHeaderString "/gyroX").add((float)gx/16000);
-    bndl.add(PacketHeaderString "/gyroY").add((float)gy/16000);
-    bndl.add(PacketHeaderString "/gyroZ").add((float)gz/16000);
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/accelX");
+    bndl.add(addressString).add(axf);
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/accelY");
+    bndl.add(addressString).add(ayf);
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/accelZ");
+    bndl.add(addressString).add(azf);
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/gyroX");
+    bndl.add(addressString).add((float)gx/16000);
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/gyroY");
+    bndl.add(addressString).add((float)gy/16000);
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/gyroZ");
+    bndl.add(addressString).add((float)gz/16000);
 #ifdef OUTPUT_READABLE_WORLDACCEL
-    bndl.add(PacketHeaderString "/rwx").add(aaWorld.x);
-    bndl.add(PacketHeaderString "/rwy").add(aaWorld.y);
-    bndl.add(PacketHeaderString "/rwz").add(aaWorld.z);
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/rwx");
+    bndl.add(addressString).add(aaWorld.x);
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/rwy");
+    bndl.add(addressString).add(aaWorld.y);
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/rwz");
+    bndl.add(addressString).add(aaWorld.z);
 #endif
-    bndl.add(PacketHeaderString "/vbat").add(vbat);     // Tack battery voltage onto here. Will want to change this for other sensors
-    bndl.add(PacketHeaderString "/freefall").add(freefall);
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/vbat");
+    bndl.add(addressString).add(vbat);     // Tack battery voltage onto here. Will want to change this for other sensors
+    sprintf(addressString,"%s%s",configuration.packet_header_string,"/freefall");
+    bndl.add(addressString).add(freefall);
    // UDP Packet
     Udp.beginPacket(configuration.ip_broadcast, 9436);
       bndl.send(Udp); // send the bytes to the SLIP stream
