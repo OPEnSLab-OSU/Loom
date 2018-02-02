@@ -249,14 +249,15 @@ void start_AP(){
 }
 
 bool connect_to_WPA(char ssid[],char pass[]){
-status = WiFi.begin(configuration.ssid,configuration.pass);
+status = WiFi.begin(ssid,pass);
     int attempt_count = 0;
-      while (status != WL_CONNECTED && attempt_count < 10) {
-        status = WiFi.begin(configuration.ssid,configuration.pass);
-      #if DEBUG == 1
-      Serial.println("Connecting to WPA host failed, trying again in 3 seconds");
-      #endif
-        delay(3000);
+      while (status != WL_CONNECTED && attempt_count < 10) { //arbitrary, attempt the connection 10 times
+        #if DEBUG == 1
+        Serial.println("Connecting to WPA host failed, trying again");
+        #endif
+        
+        status = WiFi.begin(ssid,pass);
+     
         attempt_count++;
       }
       if (status != WL_CONNECTED){
@@ -265,10 +266,14 @@ status = WiFi.begin(configuration.ssid,configuration.pass);
         #endif
         return false;
       }
+      delay(8000);
       #if DEBUG == 1
     // you're connected now, so print out the status
     printWiFiStatus();
+    
+    
     Serial.println("Starting UDP connection over server...");
+    
     #endif
       // if you get a connection, report back via serial:
       server.begin();
@@ -482,9 +487,11 @@ void switch_to_AP(OSCMessage &msg){
   #if DEBUG == 1
     Serial.println("received command to switch to AP mode");
   #endif
-  Udp.stop();
-  WiFi.end();
-  start_AP();
+    Udp.stop();
+    WiFi.disconnect();
+    WiFi.end();
+    start_AP();
+    configuration.wifi_mode = AP_MODE;
   }
   #if DEBUG == 1
   else{
@@ -541,14 +548,22 @@ void loop() {
     #ifdef is_sleep_period
     button_timer += is_sleep_period;
     #else
-    button_time ++;
+    button_timer++;
     #endif
-    if (button_time >= 8000){ //~about 8 seconds
+    if (button_timer >= 8000){ //~about 8 seconds
     #if DEBUG == 1
-      Serial.print("button held or 8 seconds, resetting to AP mode");
-      Serial.println(button_timer);
+      Serial.println("button held for 8 seconds, resetting to AP mode");
+      
     #endif
-    //TODO: add reset function here (shouldn't be too hard)
+      button_timer = 0;
+      if (configuration.wifi_mode != AP_MODE){
+        configuration.wifi_mode = AP_MODE;
+        
+        Udp.stop();
+        WiFi.disconnect();
+        WiFi.end();
+        start_AP();
+      }
     }
   }
   // if there's data available, read a packet
@@ -573,18 +588,28 @@ void loop() {
           bndl.getOSCMessage(0)->getAddress(addressString, 0);
           Serial.println(addressString);
         #endif
-    for (int i = 0; i < 50; i++){ //We don't need to clear these buffers if there are no possible bundles
-      new_ssid[i] = '\0';
-      new_pass[i]= '\0';
+      for (int i = 0; i < 50; i++){ //We don't need to clear these buffers if there are no possible bundles
+        new_ssid[i] = '\0';
+        new_pass[i]= '\0';
+      }
+    
+      bndl.route(configuration.packet_header_string,msg_router);
+      if (ssid_set == true && pass_set == true){
+        Serial.print("received command to connect to ");
+        Serial.print(new_ssid);
+        Serial.print(" with password ");
+        Serial.println(new_pass);
+        WiFi.disconnect();
+        Udp.stop();
+        WiFi.end();
+        if(connect_to_WPA(new_ssid,new_pass)){
+          configuration.wifi_mode = WPA_CLIENT_MODE;
+          strcpy(configuration.ssid,new_ssid);
+          strcpy(configuration.pass,new_pass);
+        }
+      }
     }
-    if (ssid_set && pass_set){
-      Serial.print("received command to connect to ");
-      Serial.print(new_ssid);
-      Serial.print(" with password ");
-      Serial.println(new_pass);
-    }
-    bndl.route(configuration.packet_header_string,msg_router);
-    }
+    
     else {
       error = bndl.getError();
 #if DEBUG == 1
