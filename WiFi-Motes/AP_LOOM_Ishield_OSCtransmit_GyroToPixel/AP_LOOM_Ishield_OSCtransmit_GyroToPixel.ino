@@ -482,6 +482,7 @@ void setPassword(OSCMessage &msg, int addrOffset){
 
 void connectToWPA(char ssid[], char pass[]){
   Udp.stop();
+  WiFi.disconnect();
   WiFi.end();
   status = WiFi.begin(ssid, pass);
   delay(5000);
@@ -492,6 +493,12 @@ void connectToWPA(char ssid[], char pass[]){
     
     #endif
     status = WiFi.beginAP(configuration.my_ssid);
+    delay(5000);//delay for connection
+    Udp.begin(configuration.localPort);
+    #if DEBUG == 1
+    Serial.print("should now be listening on port ");
+    Serial.println(configuration.localPort);
+    #endif
   }
   else{
     #if DEBUG == 1

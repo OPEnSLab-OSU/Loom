@@ -6,6 +6,8 @@
 
   SEND_OSC: if the device is going to be sending readings from anything attached to it, set this to true
   RECEIVE_OSC: if the device is going to receive any commands from the hub, set this to true
+
+  //ADD MORE DESCRIPTION HERE
   
  */
 
@@ -28,7 +30,6 @@ enum WiFiMode{
 
 #define FAMILY "LOOM"    // Should always be "/LOOM", you can change this if you are setting up your own network
 #define DEVICE "Ishield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "/RelayShield" or "/IShield"
-#define INSTANCE_NUM 0    // Unique instance number for this device, useful when using more than one of the same device type in same space
 
 #define SEND_OSC          // Comment this out to turn off sending of OSC messages
 #define RECEIVE_OSC       // Comment this out to turn off receiving of OSC messages
@@ -158,7 +159,7 @@ enum WiFiMode{
 #ifdef SEND_OSC or RECEIVE_OSC
   #define STR_(x) #x //helper function
   #define STR(x) STR_(x) //to concatenate a predefined number to a string literal, use STR(x)
-  #define PacketHeaderString "/" FAMILY "/" DEVICE STR(INSTANCE_NUM) //results in a single string, i.e. /LOOM/Device0
+  #define PacketHeaderString STR(/) FAMILY STR(/) DEVICE //results in a single string, i.e. /LOOM/Device. the full prefix sent to this device should be /LOOM/Device#, but the number is parsed in the OSC bundle routing function
   #include <OSCBundle.h> // Use this to handle all OSC messaging behavior (sending or receiving)
   OSCErrorCode error;
 #endif
@@ -179,15 +180,17 @@ enum WiFiMode{
 
 struct config_t {
   byte checksum;               //value is changed when flash memory is written to.
+  uint8_t instance_number;     //default 0, should be set on startup from a patch
+  char packet_header_string[80];
   IPAddress ip;                //Device's IP Address
   char* my_ssid;               //Default AP name
-  char* ssid;                  //Host network name
-  char* pass;                  //Host network password
+  char ssid[32];                  //Host network name
+  char pass[32];                  //Host network password
   int   keyIndex;            //Key Index Number (needed only for WEP)
   char* ip_broadcast;        //IP to Broadcast data
   unsigned int localPort;      //Local port to listen on
   byte  mac[6];                 //Device's MAC Address
-  WiFiMode mode;
+  WiFiMode wifi_mode;
   //add any other stuff that needs to be stored based on the shields with a wrapped preprocessor statement HERE
 #ifdef is_mpu6050
   int   ax_offset, ay_offset, az_offset, gx_offset, gy_offset, gz_offset; //mpu6050 config
@@ -245,33 +248,32 @@ void start_AP(){
   Udp.begin(configuration.localPort);
 }
 
-bool connectToWPA(char new_ssid[],char new_pass[]){ //If Udp or WiFi has been initialized before this, call Udp.stop() and WiFi.end() before calling this function
-  status = WiFi.begin(new_ssid, new_pass);
-  delay(5000);
-  
-  if (status != WL_CONNECTED) {
-    #if DEBUG == 1
-    Serial.println("Connecting to WPA host failed, switching to Access Point mode");
-    #endif
-    start_AP();
-    return false;
-  }
-  else{
-    #if DEBUG == 1
-    Serial.println("Successfully connected to WPA host");
-    printWiFiStatus();
-    #endif
-    configuration.ssid = new_ssid;
-    configuration.pass = new_pass;if (new_ssid[0] != '\0' && new_pass[0] != '\0'){
-        Serial.print("Received command to connect to ");
-        Serial.print(new_ssid);
-        Serial.print(" with password ");
-        Serial.println(new_pass);
-        connectToWPA(new_ssid,new_pass);
+bool connect_to_WPA(char ssid[],char pass[]){
+status = WiFi.begin(configuration.ssid,configuration.pass);
+    int attempt_count = 0;
+      while (status != WL_CONNECTED && attempt_count < 10) {
+        status = WiFi.begin(configuration.ssid,configuration.pass);
+      #if DEBUG == 1
+      Serial.println("Connecting to WPA host failed, trying again in 3 seconds");
+      #endif
+        delay(3000);
+        attempt_count++;
       }
-    Udp.begin(configuration.localPort);
-    return true;
-  }
+      if (status != WL_CONNECTED){
+        #if DEBUG == 1
+        Serial.println("Connecting to WPA host failed completely");
+        #endif
+        return false;
+      }
+      #if DEBUG == 1
+    // you're connected now, so print out the status
+    printWiFiStatus();
+    Serial.println("Starting UDP connection over server...");
+    #endif
+      // if you get a connection, report back via serial:
+      server.begin();
+      Udp.begin(configuration.localPort);
+      return true;
 }
 
 void init_config(){
@@ -285,13 +287,15 @@ void init_config(){
     Serial.println(configuration.checksum);
   #endif
   if (configuration.checksum != memValidationValue){ //write default values to flash
+        configuration.instance_number = 0;
+        sprintf(configuration.packet_header_string,"%s%d",PacketHeaderString,configuration.instance_number);
         configuration.my_ssid = "featherM0"; //default AP name
-        configuration.ssid = "";               // created AP name
-        configuration.pass = "";                // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
+        strcpy(configuration.ssid,"OPEnS");               // created AP name
+        strcpy(configuration.pass,"Replace_with_your_wifi_password");                // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
         configuration.keyIndex = 0;                       // your network key Index number (needed only for WEP)
         configuration.ip_broadcast = "192.168.1.255";     // IP to Broadcast data 
         configuration.localPort = 9436;                   // local port to listen on
-        configuration.mode = AP_MODE;
+        configuration.wifi_mode = AP_MODE;
         //add any other behavior/calibration wrapped in an #ifdef is_Something preprocessor directive HERE
       #ifdef is_mpu6050
         calMPU6050(); //calibration writes memValidationValue for us
@@ -305,6 +309,8 @@ void init_config(){
   }
   #if DEBUG == 1          //If the read from memory is successful.
   else { //print out the files read from flash
+    Serial.print("OSC address header: ");
+    Serial.println(configuration.packet_header_string);
     Serial.print("AP SSID: ");
     Serial.println(configuration.my_ssid);
     Serial.print("SSID: ");
@@ -432,21 +438,29 @@ void setup() {
 
   // by default the local IP address of will be 192.168.1.1
   // you can override it with the following:
-  // WiFi.config(IPAddress(10, 0, 0, 1));
-  switch(configuration.mode){
+  //WiFi.config(IPAddress(192, 168, 1, 10));
+  switch(configuration.wifi_mode){
     case AP_MODE:
       start_AP();
     break;
     case WPA_CLIENT_MODE:
-      if (!connectToWPA(configuration.ssid,configuration.pass)){
-        configuration.mode = AP_MODE;
+      if (connect_to_WPA(configuration.ssid,configuration.pass)){
+        #if DEBUG == 1
+        Serial.println("Success!");
+        #endif
+      }
+      else {
+        #if DEBUG == 1
+        Serial.println("Failure :(");
+        #endif
+        while(true);
       }
     break;
   }
 }
 
 #ifdef is_mpu6050
-void calMPU6050_OSC(OSCMessage &msg, int addrOffset) {
+void calMPU6050_OSC(OSCMessage &msg) {
 #if DEBUG == 1
   Serial.println("Command received to calibrate MPU6050");
 #endif
@@ -458,52 +472,82 @@ void calMPU6050_OSC(OSCMessage &msg, int addrOffset) {
 }
 #endif
 
-char new_ssid[50];
-char new_pass[50];
+char new_ssid[32];
+char new_pass[32];
+bool ssid_set;
+bool pass_set;
 
-void setSSID(OSCMessage &msg, int addrOffset){
-  msg.getString(0,new_ssid,49);
-}
-
-void setPassword(OSCMessage &msg, int addrOffset){
-  msg.getString(0,new_pass,49);
-}
-
-void handle_controls(OSCBundle bndl){
-  for (int i = 0; i < 50; i++){
-    new_ssid[i] = '\0';
-    new_pass[i]= '\0';
+void switch_to_AP(OSCMessage &msg){
+  if (configuration.wifi_mode != AP_MODE){
+  #if DEBUG == 1
+    Serial.println("received command to switch to AP mode");
+  #endif
+  Udp.stop();
+  WiFi.end();
+  start_AP();
   }
-  bndl.route(PacketHeaderString "/Connect/SSID",setSSID);
-  bndl.route(PacketHeaderString "/Connect/Password",setPassword);
-#ifdef is_mpu6050
-  bndl.route(PacketHeaderString "/MPU6050/cal", calMPU6050_OSC); 
-#endif
-  if (new_ssid[0] != '\0' && new_pass[0] != '\0'){
-    Serial.print("Received command to connect to ");
-    Serial.print(new_ssid);
-    Serial.print(" with password ");
-    Serial.println(new_pass);
-    connectToWPA(new_ssid,new_pass);
+  #if DEBUG == 1
+  else{
+    Serial.println("already in AP mode, no need to switch");
   }
+  #endif
 }
 
-#ifdef is_neopixel
-void handle_neopixel(OSCBundle bndl){
-  bndl.route(PacketHeaderString "/Port0/Neopixel/Red",setRed);
-  bndl.route(PacketHeaderString "/Port0/Neopixel/Green",setGreen);
-  bndl.route(PacketHeaderString "/Port0/Neopixel/Blue",setBlue);
-  
-  pixels.setPixelColor(0, pixels.Color((redVal > 255) ? 255 : redVal, (greenVal > 255) ? 255 : greenVal, (blueVal > 255) ? 255: blueVal));
-  pixels.show();
+void set_instance_num(OSCMessage &msg){
+  configuration.instance_number = msg.getInt(0);
+  sprintf(configuration.packet_header_string,"%s%d",PacketHeaderString,configuration.instance_number);
+  #if DEBUG == 1
+  Serial.print("new address header: ");
+  Serial.println(configuration.packet_header_string);
+  #endif
 }
-#endif
+
+void set_ssid(OSCMessage &msg){
+  msg.getString(0,new_ssid,50);
+  ssid_set = true;
+}
+
+void set_pass(OSCMessage &msg){
+  msg.getString(0,new_pass,50);
+  pass_set = true;
+}
+
+void msg_router(OSCMessage &msg, int addrOffset){
+  #if DEBUG == 1
+  char buffer[100];
+  msg.getAddress(buffer,addrOffset);
+  Serial.print("Parsed ");
+  Serial.println(buffer);
+  #endif
+  #ifdef is_mpu6050
+  msg.dispatch("/MPU6050/cal",calMPU6050_OSC,addrOffset);
+  #endif
+  msg.dispatch("/Connect/SSID",set_ssid,addrOffset);
+  msg.dispatch("/Connect/Password",set_pass,addrOffset);
+  msg.dispatch("/wifiSetup/AP",switch_to_AP,addrOffset);
+  msg.dispatch("/SetID",set_instance_num,addrOffset);
+}
+
+uint32_t button_timer;
 
 void loop() {
-    
+  pass_set = ssid_set = false;
   OSCBundle bndl;
   char addressString[255];
- 
+  if ((uint32_t)digitalRead(transmit_butt)){
+    button_timer = 0;
+  }
+  else{
+    #ifdef is_sleep_period
+    button_timer += is_sleep_period;
+    #else
+    button_time ++;
+    #endif
+    #if DEBUG == 1
+      Serial.print("button timer val: ");
+      Serial.println(button_timer);
+    #endif
+  }
   // if there's data available, read a packet
   int packetSize = Udp.parsePacket();
 //  Serial.println(packetSize);
@@ -526,10 +570,17 @@ void loop() {
           bndl.getOSCMessage(0)->getAddress(addressString, 0);
           Serial.println(addressString);
         #endif
-    handle_controls(bndl);
-  #ifdef is_neopixel
-    handle_neopixel(bndl);
-  #endif
+    for (int i = 0; i < 50; i++){ //We don't need to clear these buffers if there are no possible bundles
+      new_ssid[i] = '\0';
+      new_pass[i]= '\0';
+    }
+    if (ssid_set && pass_set){
+      Serial.print("received command to connect to ");
+      Serial.print(new_ssid);
+      Serial.print(" with password ");
+      Serial.println(new_pass);
+    }
+    bndl.route(configuration.packet_header_string,msg_router);
     }
     else {
       error = bndl.getError();
