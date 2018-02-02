@@ -26,8 +26,6 @@ const unsigned long interval = 2000;
 unsigned long last_sent;
 unsigned long packets_sent;
 
-
-
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -42,18 +40,24 @@ void setup() {
 void loop() {
   //network.update();
 
-  Serial.println("In Loop");
-
   //unsigned long now = millis();
   //if (now - last_sent >= interval)
   //{
     //last_sent = now;
   OSCBundle bndl;
   bndl.add(IDString "/VWC").add((float)1.0);
-  bndl.add(IDString "/Temp").add((int32_t)2);
+  bndl.add(IDString "/Temp").add((int32_t)-1);
   bndl.add(IDString "/ElecCond").add((float)3.0);
 
-  get_OSC_string(bndl);
+  delay(2000);
+
+  char *string = get_OSC_string(bndl);
+  Serial.println(string);
+
+  delay(2000);
+
+  get_OSC_bundle(string, &bndl);
   delay(2000);
   //}
+  free(string);
 }
