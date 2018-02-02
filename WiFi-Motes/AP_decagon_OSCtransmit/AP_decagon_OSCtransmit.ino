@@ -1,48 +1,15 @@
-/*
-  WiFi Access Point
-  Get MPU6050 DMP data
-  Transmit OSC formatted data stream over UDP to other connected devices
-
-  created Aug 29, 2017
-  by Chet Udell
-  
-  Adapted from Tom Igoe
-  Adapted from WiFi AP by Adafruit
-
-  Dependencies:
-
-  !! Note I2CDdev library has issue compiling with Feather MO, Simple fix is to Change in I2Cdev.h:
-  #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
-    #include <Wire.h>
-#endif
-
-to
-#if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
-    #include <Wire.h>
-    #define BUFFER_LENGTH 32
-#endif
-
-
-  Pinouts:
-  MPU6050:
-  VCC => 3.3v
-  GND => GND
-  SCL => SCL
-  SDA =>SDA
-  INT => 11
-  
-  
- */
-
 #include <SPI.h>
 #include <WiFi101.h>
 #include <WiFiUdp.h>
 #include <OSCBundle.h>
 #include "LOOM_OSC_Scheme.h"
 
+//Code used to return error information
+OSCErrorCode error;
+
 // Define your sensor type here by commenting and un-commenting
 #define transmit_butt 10        // using on-board button, specify attached pin, transmitting 
-#define VBATPIN A7       // Pin to check for battery voltage
+#define VBATPIN A7              // Pin to check for battery voltage
 
 #define TRANSMISSION_PERIOD 6000     //The number of milliseconds between when the decagon finishes transmitting
                                      // and starts the reading again   
@@ -161,33 +128,47 @@ void setup() {
   Udp.begin(localPort);
 }
 
+void setTrans_OSC(OSCMessage &msg, int addrOffset) {
+  Serial.println("setTrans_OSC called");
+}
 
 void loop() {
-  // compare the previous status to the current status
-  if (status != WiFi.status()) {
-    // it has changed update the variable
-    status = WiFi.status();
-
-    if (status == WL_AP_CONNECTED) {
-      byte remoteMac[6];
-
-      // a device has connected to the AP
-      Serial.print("Device connected to AP, MAC address: ");
-      WiFi.APClientMacAddress(remoteMac);
-      Serial.print(remoteMac[5], HEX);
-      Serial.print(":");
-      Serial.print(remoteMac[4], HEX);
-      Serial.print(":");
-      Serial.print(remoteMac[3], HEX);
-      Serial.print(":");
-      Serial.print(remoteMac[2], HEX);
-      Serial.print(":");
-      Serial.print(remoteMac[1], HEX);
-      Serial.print(":");
-      Serial.println(remoteMac[0], HEX);
-    } else {
-      // a device has disconnected from the AP, and we are back in listening mode
-      Serial.println("Device disconnected from AP");
+  OSCBundle bndl;
+  char addressString[255];
+  
+  // if there's data available, read a packet
+  //parsePacket() returns 0 if unreadable, packetSize if readable.
+  //Must be called before Udp.read()
+  int packetSize = Udp.parsePacket();
+  
+  //Read packet byte by byte into the bundle.
+    if(packetSize > 0) {
+    bndl.empty();
+    #if DEBUG == 1
+      Serial.println("=========================================");
+      Serial.print("received packet of size: ");
+      Serial.println(packetSize);
+    #endif
+    while (packetSize--){
+      bndl.fill(Udp.read());
+    }
+    
+    if(!bndl.hasError()) { 
+      #ifdef is_i2c
+        #if DEBUG == 1
+          Serial.print("Number of items in bundle: ");
+          Serial.println(bndl.size());
+          Serial.print("First message address string: ");
+          bndl.getOSCMessage(0)->getAddress(addressString, 0);
+          Serial.println(addressString);
+        #endif
+        bndl.route(PacketHeaderString "/setTrans", setTrans_OSC); 
+      #endif
+    }
+    else {
+      error = bndl.getError();
+      Serial.print("error: ");
+      Serial.println(error);
     }
   }
 
@@ -196,18 +177,6 @@ void loop() {
   vbat *= 2;    // we divided by 2, so multiply back
   vbat *= 3.3;  // Multiply by 3.3V, our reference voltage
   vbat /= 1024; // convert to voltage
-
-#ifdef is_i2c
-    // Update MPU6050 Data
-    // Now measure MPU6050, update values in global registers
-    measure_mpu6050();
-
-    udp_mpu6050();
-    
-    // flush MPU6050 FIFO to avoid overflows if using i2c
-    mpu.resetFIFO();
-
-#endif
 
 #ifdef is_decagon
     measure_decagon();
