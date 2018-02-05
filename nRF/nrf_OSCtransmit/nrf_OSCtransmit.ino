@@ -1,9 +1,8 @@
 
+#include <RF24Network.h>
+#include <RF24.h>
 #include <SPI.h>
 #include <OSCBundle.h>
-//#include <RF24Network.h>
-//#include <RF24.h>
-
 
 #define STR_HELPER(x) #x
 #define STR(x) STR_HELPER(x) //to concatenate a predefined number to a string literal, use STR(x)
@@ -14,50 +13,62 @@
 
 #define IDString FAMILY DEVICE STR(INSTANCE_NUM) // C interprets subsequent string literals as concatenation: "/Loom" "/Ishield" "0" becomes "/Loom/Ishield0"
 
-//RF24 radio(5,6);
+RF24 radio(5,6);                    // nRF24L01(+) radio attached using Getting Started board 
 
-//RF24Network network(radio);
+RF24Network network(radio);          // Network uses that radio
 
-const uint16_t this_node = 00;
-const uint16_t other_node = 01;
+const uint16_t this_node = 00;        // Address of our node in Octal format
+const uint16_t other_node = 01;       // Address of the other node in Octal format
 
-const unsigned long interval = 2000;
+const unsigned long interval = 2000; //ms  // How often to send 'hello world to the other unit
 
-unsigned long last_sent;
-unsigned long packets_sent;
+unsigned long last_sent;             // When did we last send?
+unsigned long packets_sent;          // How many have we sent already
 
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
 
-  delay(1000);
-  Serial.print("Starting up...");
-  //SPI.begin();
-  //radio.begin();
-  //network.begin(90, this_node);
+void setup(void)
+{
+  Serial.begin(57600);
+  Serial.println("RF24Network/examples/helloworld_tx/");
+ 
+  SPI.begin();
+  radio.begin();
+  network.begin(/*channel*/ 90, /*node address*/ this_node);
 }
 
 void loop() {
-  //network.update();
+  
+  network.update();                          // Check the network regularly
 
-  //unsigned long now = millis();
-  //if (now - last_sent >= interval)
-  //{
-    //last_sent = now;
-  OSCBundle bndl;
-  bndl.add(IDString "/VWC").add((float)1.0);
-  bndl.add(IDString "/Temp").add((int32_t)-1);
-  bndl.add(IDString "/ElecCond").add((float)3.0);
+  
+  unsigned long now = millis();              // If it's time to send a message, send it!
+  if ( now - last_sent >= interval  )
+  {
+    last_sent = now;
 
-  delay(2000);
+    Serial.print("Sending...");
 
-  char *string = get_OSC_string(bndl);
-  Serial.println(string);
+    OSCBundle bndl;
+    bndl.add(IDString "/VWC").add((float)1.0);
+    bndl.add(IDString "/Temp").add((int32_t)-1);
+    bndl.add(IDString "/ElecCond").add((float)3.0);
 
-  delay(2000);
+    char *message = get_OSC_string(bndl);
+    //char msg[120];
+    //strcpy(msg, message);
 
-  get_OSC_bundle(string, &bndl);
-  delay(2000);
-  //}
-  free(string);
+    Serial.println(message);
+    Serial.println(strlen(message));
+    
+    RF24NetworkHeader header(/*to node*/ other_node);
+    bool ok = network.write(header,message,strlen(message));
+    if (ok)
+      Serial.println("ok.");
+    else
+      Serial.println("failed.");
+
+    free(message);
+  }
 }
+
+
