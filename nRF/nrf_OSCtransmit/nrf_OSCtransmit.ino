@@ -57,8 +57,8 @@ void loop() {
     //char msg[120];
     //strcpy(msg, message);
 
-    Serial.println(message);
-    Serial.println(strlen(message));
+    //Serial.println(message);
+    //Serial.println(strlen(message));
     
     RF24NetworkHeader header(/*to node*/ other_node);
     bool ok = network.write(header,message,strlen(message));

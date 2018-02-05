@@ -18,6 +18,7 @@
 #include <RF24Network.h>
 #include <RF24.h>
 #include <SPI.h>
+#include <OSCBundle.h>
 
 RF24 radio(5,6);                // nRF24L01(+) radio attached using Getting Started board 
 
@@ -53,8 +54,14 @@ void loop(void){
     Serial.println(payload.ms);
     Serial.print("Message: ");
     Serial.print(payload.message); */
-    Serial.print("Message: ");
-    Serial.println(message);
+    //Serial.print("Message: ");
+    //Serial.println(message);
+
+    OSCBundle bndl;
+    get_OSC_bundle(message, &bndl);
+
+    bndl.send(Serial);
+    Serial.println("");
   }
 }
 
