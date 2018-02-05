@@ -6,7 +6,7 @@ union data_vals {
   uint32_t u;
 };
 
-  char* get_OSC_string(OSCBundle bndl) {
+char* get_OSC_string(OSCBundle bndl) {
   char buf[50];
   char string[121];
   char type;
