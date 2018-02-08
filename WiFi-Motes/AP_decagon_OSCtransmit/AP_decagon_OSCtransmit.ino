@@ -8,17 +8,25 @@
 OSCErrorCode error;
 
 // Define your sensor type here by commenting and un-commenting
-#define transmit_butt 10        // using on-board button, specify attached pin, transmitting 
-#define VBATPIN A7              // Pin to check for battery voltage
+#define transmit_butt 10            // using on-board button, specify attached pin, transmitting 
+#define VBATPIN A7                  // Pin to check for battery voltage
 
-#define TRANSMISSION_PERIOD 6000     //The number of milliseconds between when the decagon finishes transmitting
-                                     // and starts the reading again   
+int TRANSMISSION_PERIOD = 2000;     //The number of milliseconds between when the decagon finishes transmitting
+                                    // and starts the reading again   
+
+//------------------------------------------------------------------------------------------------------
+// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
+//------------------------------------------------------------------------------------------------------
+#ifndef DEBUG
+#define DEBUG 1
+#endif
+                                     
 #define FAMILY "/LOOM"
 #define DEVICE "/Decagon"
 #define INSTANCE_NUM 0  // Unique instance number for this device, useful when using more than one of the same device type in same space
 
 // Set Sleep Mode Use one or the other or neither of the following 2 lines
-#define is_sleep_period 50  // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between
+//#define is_sleep_period 50  // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between
 //#define is_sleep_interrupt 11  // Uncoment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 
 #ifdef is_sleep_period
@@ -130,6 +138,9 @@ void setup() {
 
 void setTrans_OSC(OSCMessage &msg, int addrOffset) {
   Serial.println("setTrans_OSC called");
+  TRANSMISSION_PERIOD = msg.getInt(0);
+  Serial.print("trans period set to: ");
+  Serial.println(TRANSMISSION_PERIOD);
 }
 
 void loop() {
@@ -139,6 +150,8 @@ void loop() {
   // if there's data available, read a packet
   //parsePacket() returns 0 if unreadable, packetSize if readable.
   //Must be called before Udp.read()
+
+  Serial.println("Attempting to parse packet...");
   int packetSize = Udp.parsePacket();
   
   //Read packet byte by byte into the bundle.
@@ -154,16 +167,16 @@ void loop() {
     }
     
     if(!bndl.hasError()) { 
-      #ifdef is_i2c
-        #if DEBUG == 1
-          Serial.print("Number of items in bundle: ");
-          Serial.println(bndl.size());
-          Serial.print("First message address string: ");
-          bndl.getOSCMessage(0)->getAddress(addressString, 0);
-          Serial.println(addressString);
-        #endif
-        bndl.route(PacketHeaderString "/setTrans", setTrans_OSC); 
+      #if DEBUG == 1
+        Serial.print("Number of items in bundle: ");
+        Serial.println(bndl.size());
+        Serial.print("First message address string: ");
       #endif
+        bndl.getOSCMessage(0)->getAddress(addressString, 0);
+      #if DEBUG == 1
+        Serial.println(addressString);
+      #endif
+        bndl.route(PacketHeaderString "/setTrans", setTrans_OSC); 
     }
     else {
       error = bndl.getError();
@@ -179,18 +192,19 @@ void loop() {
   vbat /= 1024; // convert to voltage
 
 #ifdef is_decagon
-    measure_decagon();
+    /*measure_decagon();
 
-    udp_decagon();
+    udp_decagon(bndl);*/
+    Serial.println("Decagon stuff");
 
-    delay((uint32_t)TRANSMISSION_PERIOD);
+    //delay((uint32_t)TRANSMISSION_PERIOD);
 #endif
 
 #ifdef is_sleep_period
   int sleepMS = Watchdog.sleep(is_sleep_period); // sleep MCU for transmit period duration
 #endif  
   // delay(is_sleep_period); // demo transmit every 1 second
-
+  Serial.println("End of loop, starting again. ");
 } // End loop section
 
 void printWiFiStatus() {
