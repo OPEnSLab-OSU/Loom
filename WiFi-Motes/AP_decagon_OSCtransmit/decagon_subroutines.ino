@@ -40,6 +40,7 @@ void deca_gs3_setup() {
 }
 
 void measure_decagon() {
+  Serial.println("Measure Decagon");
 //first command to take a measurement
   myCommand = String(SENSOR_ADDRESS) + "M!";
   //Serial.println(myCommand);     // echo command to terminal
@@ -97,8 +98,9 @@ void measure_decagon() {
   mySDI12.clearBuffer();
 }
 
-void udp_decagon() {
-  OSCBundle bndl;
+void udp_decagon(OSCBundle bndl) {
+  Serial.println("UDP Decagon");
+  bndl.empty();
   bndl.add(IDString "/DielecPerm").add(dielec_p);
   bndl.add(IDString "/Temp").add(temp);
   bndl.add(IDString "/ElecCond").add(elec_c);
@@ -106,6 +108,7 @@ void udp_decagon() {
   Udp.beginPacket(ip_broadcast, 9436);
   bndl.send(Udp);
   Udp.endPacket();
+  bndl.empty();
 }
 
 #endif
