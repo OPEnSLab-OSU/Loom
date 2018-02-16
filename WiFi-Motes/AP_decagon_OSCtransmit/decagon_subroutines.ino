@@ -104,8 +104,10 @@ void udp_decagon() {
   bndl.add(IDString "/ElecCond").add(elec_c);
 
   Udp.beginPacket(ip_broadcast, 9436);
-  bndl.send(Udp);
+    bndl.send(Udp);
   Udp.endPacket();
+  
+  bndl.empty();
 }
 
 #endif
