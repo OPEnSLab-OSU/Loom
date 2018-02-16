@@ -11,7 +11,7 @@ OSCErrorCode error;
 #define transmit_butt 10            // using on-board button, specify attached pin, transmitting 
 #define VBATPIN A7                  // Pin to check for battery voltage
 
-int TRANSMISSION_PERIOD = 2000;     //The number of milliseconds between when the decagon finishes transmitting
+int transmission_period = 15000;     //The number of milliseconds between when the decagon finishes transmitting
                                     // and starts the reading again   
 
 //------------------------------------------------------------------------------------------------------
@@ -21,8 +21,8 @@ int TRANSMISSION_PERIOD = 2000;     //The number of milliseconds between when th
 #define DEBUG 1
 #endif
                                      
-#define FAMILY "/LOOM"
-#define DEVICE "/Decagon"
+#define FAMILY "LOOM"
+#define DEVICE "Decagon"
 #define INSTANCE_NUM 0  // Unique instance number for this device, useful when using more than one of the same device type in same space
 
 // Set Sleep Mode Use one or the other or neither of the following 2 lines
@@ -39,7 +39,7 @@ volatile bool ledState = LOW;
 
 float vbat = 3.3;    // Place to save measured battery voltage
 
-char ssid[] = "wifi101-network"; // created AP name
+char ssid[] = IDString; // created AP name
 char pass[] = "1234567890";      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
 int keyIndex = 0;                // your network key Index number (needed only for WEP)
 char ip_broadcast[] = "192.168.1.255"; // IP to Broadcast data 
@@ -96,6 +96,8 @@ void setup() {
   WiFi.setPins(8,7,4,2);
 
   Serial.println("Access Point Web Server");
+  Serial.print("Packet Header String: ");
+  Serial.println(PacketHeaderString);
 
   pinMode(led, OUTPUT);      // set the LED pin mode
 
@@ -137,10 +139,11 @@ void setup() {
 }
 
 void setTrans_OSC(OSCMessage &msg, int addrOffset) {
-  Serial.println("setTrans_OSC called");
-  TRANSMISSION_PERIOD = msg.getInt(0);
-  Serial.print("trans period set to: ");
-  Serial.println(TRANSMISSION_PERIOD);
+  transmission_period = msg.getInt(0);
+  #if DEBUG == 1
+  Serial.print("Transmission period set to: ");
+  Serial.println(transmission_period);
+  #endif
 }
 
 void loop() {
@@ -151,7 +154,6 @@ void loop() {
   //parsePacket() returns 0 if unreadable, packetSize if readable.
   //Must be called before Udp.read()
 
-  Serial.println("Attempting to parse packet...");
   int packetSize = Udp.parsePacket();
   
   //Read packet byte by byte into the bundle.
@@ -176,7 +178,7 @@ void loop() {
       #if DEBUG == 1
         Serial.println(addressString);
       #endif
-        bndl.route(PacketHeaderString "/setTrans", setTrans_OSC); 
+        bndl.route(PacketHeaderString "/setTrans", setTrans_OSC);
     }
     else {
       error = bndl.getError();
@@ -192,19 +194,23 @@ void loop() {
   vbat /= 1024; // convert to voltage
 
 #ifdef is_decagon
-    /*measure_decagon();
+    measure_decagon();
 
-    udp_decagon(bndl);*/
-    Serial.println("Decagon stuff");
+    udp_decagon();
 
-    //delay((uint32_t)TRANSMISSION_PERIOD);
+    #if DEBUG == 1
+    Serial.print("Delaying for ");
+    Serial.print(transmission_period);
+    Serial.println("ms.");
+    #endif
+    
+    delay((uint32_t)transmission_period);
 #endif
 
 #ifdef is_sleep_period
   int sleepMS = Watchdog.sleep(is_sleep_period); // sleep MCU for transmit period duration
 #endif  
   // delay(is_sleep_period); // demo transmit every 1 second
-  Serial.println("End of loop, starting again. ");
 } // End loop section
 
 void printWiFiStatus() {
