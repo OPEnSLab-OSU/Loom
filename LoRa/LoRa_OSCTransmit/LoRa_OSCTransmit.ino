@@ -5,7 +5,8 @@
  
 #define RFM95_CS 8
 #define RFM95_RST 4
-#define RFM95_INT 3
+//#define RFM95_INT 3 //Use this for the M0
+#define RFM95_INT 7 //Use this for the 32u4
 
 #define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 2
@@ -56,7 +57,11 @@ void loop() {
   bndl.add(IDString "/Temp").add((int32_t)-1);
   bndl.add(IDString "/ElecCond").add((float)3.0);
 
-  char *message = get_OSC_string(bndl);
+  char message[121];
+
+  memset(message, '\0', 121);
+  
+  get_OSC_string(&bndl, message);
 
   Serial.println(message);
   Serial.print("Message length: ");
@@ -72,6 +77,5 @@ void loop() {
   else
     Serial.println("failed");
 
-  free(message);
   delay(2000);
 }

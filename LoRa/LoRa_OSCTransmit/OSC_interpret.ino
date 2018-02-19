@@ -6,15 +6,12 @@ union data_vals {
   uint32_t u;
 };
 
-char* get_OSC_string(OSCBundle bndl) {
+void get_OSC_string(OSCBundle *bndl, char *string) {
   char buf[50];
-  char string[121];
   char type;
   int n = 0;
   data_vals value;
-  OSCMessage* msg = bndl.getOSCMessage(n);
-
-  memset(string, '\0', 121);
+  OSCMessage* msg = bndl->getOSCMessage(n);
   
   while(msg != NULL) {
     msg->getAddress(buf, 0);
@@ -48,13 +45,9 @@ char* get_OSC_string(OSCBundle bndl) {
       strcat(string, buf);
     }
     n++;
-    msg = bndl.getOSCMessage(n);
+    msg = bndl->getOSCMessage(n);
     if (msg != NULL) strcat(string, " ");
   }
-
-  char* ret_val = (char*)malloc((strlen(string) + 1) * sizeof(char));
-  strcpy(ret_val, string);
-  return ret_val;
 }
 
 void get_OSC_bundle(char *string, OSCBundle* bndl) {
