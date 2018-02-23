@@ -21,32 +21,82 @@ enum WiFiMode{
   WEP_CLIENT_MODE
   //more Wifi Modes?
 };
-
+#include "config.h"
 //--PREPROCESSOR STATEMENTS BEGIN HERE
-
-#ifndef DEBUG
-#define DEBUG 1 //set to 1 if you want Serial statements from various functions to print
-#endif
-
-#define FAMILY "LOOM"    // Should always be "/LOOM", you can change this if you are setting up your own network
-#define DEVICE "Ishield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "/RelayShield" or "/IShield"
-
-#define SEND_OSC          // Comment this out to turn off sending of OSC messages
-#define RECEIVE_OSC       // Comment this out to turn off receiving of OSC messages
 
 #ifdef SEND_OSC or RECEIVE_OSC
   #include <OSCBundle.h>
 #endif
 
-#define is_analog 2
-#define is_i2c 0x86
-#define transmit_butt 10        // using on-board button, specify attached pin, transmitting 
-#define VBATPIN A7       // Pin to check for battery voltage
 
-#ifdef is_i2c
-  #define is_mpu6050
-  #define is_neopixel
-#endif
+
+
+
+#ifdef is_servo
+  #include <Adafruit_PWMServoDriver.h>
+  Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
+  #define SERVOMIN  150 // this is the 'minimum' pulse length count (out of 4096)
+  #define SERVOMAX  600 // this is the 'maximum' pulse length count (out of 4096)
+  
+  #define num_servos 2
+  
+  #if (num_servos==1)
+    int predeg[1] = {0};
+    double pre_pulselength[1]= {0.0};
+  #elif (num_servos==2)
+    int predeg[2] = {0, 0};
+    double pre_pulselength[2] = {0.0,0.0};
+  #elif (num_servos==3)
+    int predeg[3] = {0, 0, 0};
+    double pre_pulselength[3] = {0.0,0.0,0.0};
+  #elif (num_servos==4)
+    int predeg[4] = {0, 0, 0, 0};
+    double pre_pulselength[4] = {0.0,0.0,0.0,0.0};
+  #elif (num_servos==5)
+    int predeg[5] = {0, 0, 0, 0, 0};
+    double pre_pulselength[5] = {0.0,0.0,0.0,0.0,0.0};
+  #elif (num_servos==6)
+    int predeg[6] = {0, 0, 0, 0, 0, 0};
+    double pre_pulselength[6] = {0.0,0.0,0.0,0.0,0.0,0.0};
+  #elif (num_servos==7)
+    int predeg[7] = {0, 0, 0, 0, 0, 0, 0};
+    double pre_pulselength[7] = {0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+  #elif (num_servos==8)
+    int predeg[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    double pre_pulselength[8] = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+  #endif
+  
+  void set_servo_degree(int set_degree, int servo_choice){
+    uint16_t pulselength = map(set_degree, 0, 180, SERVOMIN, SERVOMAX);
+    if(set_degree < predeg[servo_choice]){
+      for (double pulselen = pre_pulselength[servo_choice]; pulselen >= pulselength; pulselen--) {
+        pwm.setPWM(servo_choice, 0, pulselen);
+      }
+    }
+    //When input degree is greater than previous degree, it increases
+    if(set_degree > predeg[servo_choice]){
+      for (double pulselen = pre_pulselength[servo_choice]; pulselen < pulselength; pulselen++) {
+        pwm.setPWM(servo_choice, 0, pulselen);
+      }
+    }
+    predeg[servo_choice] = set_degree;
+    pre_pulselength[servo_choice] = pulselength;
+  }
+  
+  void set_servo(OSCMessage &msg){
+    int servo_num = msg.getInt(0);
+    int set_degree = msg.getInt(1);
+  
+    #if DEBUG == 1
+    Serial.print("received message for servo ");
+    Serial.print(servo_num);
+    Serial.print(" with degree ");
+    Serial.println(set_degree);
+    #endif
+    set_servo_degree(set_degree,servo_num); 
+  }
+
+#endif //END OF SERVO FUNCTIONS
 
 #ifdef is_neopixel
   #include <Adafruit_NeoPixel.h>
@@ -80,7 +130,7 @@ enum WiFiMode{
     Serial.println(blueVal);
   #endif
   }
-#endif
+#endif //END OF NEOPIXEL FUNCTIONS
 
 #ifdef is_analog
   #define num_measurements 4 // must be 1, 2, 4, or 8)! number of analog measurements to sample and average per channel
@@ -140,13 +190,8 @@ enum WiFiMode{
     int buffersize=1000;     //Amount of readings used to average, make it higher to get more precision but sketch will be slower  (default:1000)
     int acel_deadzone=8;     //Acelerometer error allowed, make it lower to get more precision, but sketch may not converge  (default:8)
     int giro_deadzone=1;     //Giro error allowed, make it lower to get more precision, but sketch may not converge  (default:1)
-  #endif
-#endif
-
-#ifdef SEND_OSC
-  #define is_sleep_period 50 // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval
-  //#define is_sleep_interrupt 11 // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
-#endif
+  #endif //END OF MPU6050 FUNCTIONS AND DECLARATIONS
+#endif //END OF I2C FUNCTIONS AND DECLARATIONS
 
 #ifdef is_sleep_period
   #include <Adafruit_SleepyDog.h> // This must be included if you are transmitting at timed intervals
@@ -293,7 +338,11 @@ void init_config(){
   #endif
   if (configuration.checksum != memValidationValue){ //write default values to flash
         configuration.instance_number = 0;
-        sprintf(configuration.packet_header_string,"%s%d",PacketHeaderString,configuration.instance_number);
+        sprintf(configuration.packet_header_string,"%s%d\0",PacketHeaderString,configuration.instance_number);
+        #if DEBUG == 1
+        Serial.print("expecting OSC header ");
+        Serial.println(configuration.packet_header_string);
+        #endif
         configuration.my_ssid = "featherM0"; //default AP name
         strcpy(configuration.ssid,"OPEnS");               // created AP name
         strcpy(configuration.pass,"arduino101");                // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
@@ -339,6 +388,12 @@ void setup() {
   #ifdef is_neopixel
     pixels.begin(); // This initializes the NeoPixel library.
     pixels.show(); // Initialize all pixels to 'off'
+  #endif
+
+  #ifdef is_servo
+    pwm.begin();
+  
+    pwm.setPWMFreq(60);
   #endif
   //Initialize serial and wait for port to open:
 #if DEBUG == 1
@@ -502,7 +557,7 @@ void switch_to_AP(OSCMessage &msg){
 
 void set_instance_num(OSCMessage &msg){
   configuration.instance_number = msg.getInt(0);
-  sprintf(configuration.packet_header_string,"%s%d",PacketHeaderString,configuration.instance_number);
+  sprintf(configuration.packet_header_string,"%s%d\0",PacketHeaderString,configuration.instance_number);
   #if DEBUG == 1
   Serial.print("new address header: ");
   Serial.println(configuration.packet_header_string);
@@ -526,18 +581,23 @@ void msg_router(OSCMessage &msg, int addrOffset){
   Serial.print("Parsed ");
   Serial.println(buffer);
   #endif
+  #ifdef is_servo
+  msg.dispatch("/Servo/Set",set_servo,addrOffset);
+  #endif
   #ifdef is_mpu6050
   msg.dispatch("/MPU6050/cal",calMPU6050_OSC,addrOffset);
   #endif
   #ifdef is_neopixel
-  msg.dispatch("/Port0/Neopixel/Red",setRed);
-  msg.dispatch("/Port0/Neopixel/Green",setGreen);
-  msg.dispatch("/Port0/Neopixel/Blue",setBlue);
+  msg.dispatch("/Port0/Neopixel/Red",setRed,addrOffset);
+  msg.dispatch("/Port0/Neopixel/Green",setGreen,addrOffset);
+  msg.dispatch("/Port0/Neopixel/Blue",setBlue,addrOffset);
   #endif
+  
   msg.dispatch("/Connect/SSID",set_ssid,addrOffset);
   msg.dispatch("/Connect/Password",set_pass,addrOffset);
   msg.dispatch("/wifiSetup/AP",switch_to_AP,addrOffset);
   msg.dispatch("/SetID",set_instance_num,addrOffset);
+  
 }
 
 uint32_t button_timer;
@@ -555,7 +615,7 @@ void loop() {
     #else
     button_timer++;
     #endif
-    if (button_timer >= 8000){ //~about 8 seconds
+    if (button_timer >= 5000){ //~about 5 seconds
     #if DEBUG == 1
       Serial.println("button held for 8 seconds, resetting to AP mode");
       
@@ -574,12 +634,13 @@ void loop() {
 //  Serial.println(packetSize);
   if (packetSize > 0)
   {
-    bndl.empty();
+    
 #if DEBUG == 1
     Serial.println("=========================================");
     Serial.print("received packet of size: ");
     Serial.println(packetSize);
 #endif
+    bndl.empty();
     while (packetSize--){
       bndl.fill(Udp.read());
     }
@@ -591,22 +652,25 @@ void loop() {
           bndl.getOSCMessage(0)->getAddress(addressString, 0);
           Serial.println(addressString);
         #endif
-      for (int i = 0; i < 50; i++){ //We don't need to clear these buffers if there are no possible bundles
+      for (int i = 0; i < 32; i++){ //We don't need to clear these buffers if there are no possible bundles
         new_ssid[i] = '\0';
         new_pass[i]= '\0';
       }
-    
+      
+      
       bndl.route(configuration.packet_header_string,msg_router);
-      /*#ifdef is_neopixel
+      #ifdef is_neopixel
       pixels.setPixelColor(0, pixels.Color((redVal > 255) ? 255 : redVal, (greenVal > 255) ? 255 : greenVal, (blueVal > 255) ? 255: blueVal));
       pixels.show();
-      #endif*/
+      #endif
       
       if (ssid_set == true && pass_set == true){
+        #if DEBUG == 1
         Serial.print("received command to connect to ");
         Serial.print(new_ssid);
         Serial.print(" with password ");
         Serial.println(new_pass);
+        #endif
         WiFi.disconnect();
         Udp.stop();
         WiFi.end();
