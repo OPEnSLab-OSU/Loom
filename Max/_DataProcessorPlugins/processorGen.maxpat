@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 156.0, 79.0, 716.0, 614.0 ],
+		"rect" : [ 156.0, 79.0, 782.0, 614.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -116,7 +116,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-4",
-					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.emote", ",", "em.LOOMin", ",", "em.oscIn", ",", "em.midiIn", ",", "em.arduinoIn", ",", "-PROCESS-", ",", "em.IshieldMonitor", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rangeSetter", ",", "em.rotaryDial", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.smooth", ",", "em.spring", ",", "em.threshold", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.midiOut", ",", "em.oscOut", ",", "em.DMX", ",", "em.switchblade", ",", "em.outlightsaber", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.instrumentPosition", ",", "em.neopixel" ],
+					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.emote", ",", "em.LOOMin", ",", "em.oscIn", ",", "em.midiIn", ",", "em.arduinoIn", ",", "-PROCESS-", ",", "em.IshieldMonitor", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rangeSetter", ",", "em.rotaryDial", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.smooth", ",", "em.spring", ",", "em.threshold", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.midiOut", ",", "em.oscOut", ",", "em.DMX", ",", "em.relay", ",", "em.servo", ",", "em.switchblade", ",", "em.outlightsaber", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.instrumentPosition", ",", "em.neopixel" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -393,7 +393,7 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "processor.js",
-				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPluginsV10.30.17",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
