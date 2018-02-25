@@ -5,11 +5,11 @@
 			"major" : 7,
 			"minor" : 3,
 			"revision" : 4,
-			"architecture" : "x86",
+			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 156.0, 79.0, 782.0, 614.0 ],
+		"rect" : [ 1923.0, -6.0, 660.0, 753.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -116,7 +116,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-4",
-					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.emote", ",", "em.LOOMin", ",", "em.oscIn", ",", "em.midiIn", ",", "em.arduinoIn", ",", "-PROCESS-", ",", "em.IshieldMonitor", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rangeSetter", ",", "em.rotaryDial", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.smooth", ",", "em.spring", ",", "em.threshold", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.midiOut", ",", "em.oscOut", ",", "em.DMX", ",", "em.relay", ",", "em.servo", ",", "em.switchblade", ",", "em.outlightsaber", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.instrumentPosition", ",", "em.neopixel" ],
+					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.arduinoIn", ",", "em.emote", ",", "em.LOOMin", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.IshieldMonitor", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rangeSetter", ",", "em.rotaryDial", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.smooth", ",", "em.spring", ",", "em.threshold", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.neopixel", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.relay", ",", "em.servo", ",", "em.switchblade", ",", "em.neopixel(old_OSC_format)", ",", "em.servo(old_OSC_format)", ",", "em.relay(old_OSC_format)" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,

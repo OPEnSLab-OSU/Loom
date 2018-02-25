@@ -5,11 +5,11 @@
 			"major" : 7,
 			"minor" : 3,
 			"revision" : 4,
-			"architecture" : "x64",
+			"architecture" : "x86",
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 34.0, 78.0, 1050.0, 787.0 ],
+		"rect" : [ 276.0, 78.0, 726.0, 787.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -198,9 +198,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 163.0, 441.0, 237.0, 22.0 ],
+					"patching_rect" : [ 163.0, 441.0, 225.0, 22.0 ],
 					"style" : "",
-					"text" : "/LOOM/Ishield0/Port0/Neopixel/Red 146"
+					"text" : "/LOOM/Ishield2/Port0/Neopixel/Red 193"
 				}
 
 			}
@@ -211,9 +211,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 163.0, 516.0, 263.0, 22.0 ],
+					"patching_rect" : [ 163.0, 516.0, 236.0, 22.0 ],
 					"style" : "",
-					"text" : "/LOOM/Ishield0/Port0/Neopixel/Green 185"
+					"text" : "/LOOM/Ishield2/Port0/Neopixel/Green 185"
 				}
 
 			}
@@ -224,9 +224,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 163.0, 586.5, 266.0, 22.0 ],
+					"patching_rect" : [ 163.0, 586.5, 227.0, 22.0 ],
 					"style" : "",
-					"text" : "/LOOM/Ishield0/Port0/Neopixel/Blue 185"
+					"text" : "/LOOM/Ishield2/Port0/Neopixel/Blue 185"
 				}
 
 			}
@@ -342,7 +342,7 @@
 							"major" : 7,
 							"minor" : 3,
 							"revision" : 4,
-							"architecture" : "x64",
+							"architecture" : "x86",
 							"modernui" : 1
 						}
 ,
@@ -742,7 +742,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 163.0, 556.5, 220.0, 22.0 ],
 					"style" : "",
-					"text" : "/LOOM/Ishield0/Port0/Neopixel/Blue $1"
+					"text" : "/LOOM/Ishield2/Port0/Neopixel/Blue $1"
 				}
 
 			}
@@ -755,7 +755,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 163.0, 487.0, 229.0, 22.0 ],
 					"style" : "",
-					"text" : "/LOOM/Ishield0/Port0/Neopixel/Green $1"
+					"text" : "/LOOM/Ishield2/Port0/Neopixel/Green $1"
 				}
 
 			}
@@ -768,7 +768,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 163.0, 411.0, 218.0, 22.0 ],
 					"style" : "",
-					"text" : "/LOOM/Ishield0/Port0/Neopixel/Red $1"
+					"text" : "/LOOM/Ishield2/Port0/Neopixel/Red $1"
 				}
 
 			}
@@ -881,7 +881,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 121.166626, 117.0, 35.0, 22.0 ],
 					"style" : "",
-					"text" : "146",
+					"text" : "193",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"textjustification" : 1
 				}
@@ -1630,7 +1630,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-45", 1 ],
-					"midpoints" : [ 172.5, 436.5, 390.5, 436.5 ],
+					"midpoints" : [ 172.5, 436.5, 378.5, 436.5 ],
 					"source" : [ "obj-79", 0 ]
 				}
 
@@ -1638,7 +1638,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-44", 1 ],
-					"midpoints" : [ 172.5, 512.0, 416.5, 512.0 ],
+					"midpoints" : [ 172.5, 512.0, 389.5, 512.0 ],
 					"source" : [ "obj-82", 0 ]
 				}
 
@@ -1646,7 +1646,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-43", 1 ],
-					"midpoints" : [ 172.5, 582.0, 419.5, 582.0 ],
+					"midpoints" : [ 172.5, 582.0, 380.5, 582.0 ],
 					"source" : [ "obj-83", 0 ]
 				}
 
