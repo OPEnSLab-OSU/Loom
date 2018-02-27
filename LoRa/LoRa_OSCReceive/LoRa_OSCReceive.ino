@@ -5,8 +5,8 @@
  
 #define RFM95_CS 8
 #define RFM95_RST 4
-#define RFM95_INT 3 //Use this for the M0
-//#define RFM95_INT 7 //Use this for the 32u4
+//#define RFM95_INT 3 //Use this for the M0
+#define RFM95_INT 7 //Use this for the 32u4
 
 #define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 2
@@ -43,7 +43,9 @@ void loop() {
     if (manager.recvfromAck(buf, &len, &from)) {
       OSCBundle bndl;
       get_OSC_bundle((char*)buf, &bndl);
-      Serial.print("Received message: ");
+      Serial.print("Received message from ");
+      Serial.print(from);
+      Serial.print(": ");
       //Serial.println((char*)buf);
       bndl.send(Serial);
       Serial.println("");
