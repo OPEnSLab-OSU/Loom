@@ -101,36 +101,46 @@ enum WiFiMode{
 #ifdef is_neopixel
   #include <Adafruit_NeoPixel.h>
   // Which pin on the Arduino is connected to the NeoPixels?
-  #define PIN            16 //A2
-  
-  // How many NeoPixels are attached to the Arduino?
-  #define NUMPIXELS      1
-  
-  Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
-  int redVal = 0, greenVal = 0, blueVal = 0;
-  void setRed(OSCMessage &msg){
-    redVal = msg.getInt(0);
-  #if DEBUG == 1
-    Serial.print("set redVal to ");
-    Serial.println(redVal);
-  #endif
-  }
+  #define A0            14 //A0
+  #define A1            15 //A1
+  #define A2            16 //A2
 
-  void setGreen(OSCMessage &msg){
-    greenVal = msg.getInt(0);
-  #if DEBUG == 1
-    Serial.print("set greenVal to ");
-    Serial.println(greenVal);
-  #endif
-  }
-  void setBlue(OSCMessage &msg){
-    blueVal = msg.getInt(0);
-  #if DEBUG == 1
-    Serial.print("set blueVal to ");
-    Serial.println(blueVal);
-  #endif
+  //Probably read these in from config eventually                            
+  Adafruit_NeoPixel pixels[3] = { Adafruit_NeoPixel(2, A0, NEO_GRB + NEO_KHZ800),
+                                  Adafruit_NeoPixel(2, A1, NEO_GRB + NEO_KHZ800),
+                                  Adafruit_NeoPixel(2, A2, NEO_GRB + NEO_KHZ800) };
+  int colorVals[3][3] = { {0,0,0},
+                          {0,0,0},
+                          {0,0,0} };
+  //port x (r,g,b)
+
+  void setColor(OSCMessage &msg){
+    int port     = msg.getInt(0);
+    int pixelNum = msg.getInt(1);
+    int color    = msg.getInt(2);
+    int val      = msg.getInt(3);
+  
+    Serial.println("========");
+    Serial.print("Port: ");
+    Serial.print(port);
+    Serial.print("  Num: ");
+    Serial.print(pixelNum);
+    Serial.print("  Color: ");
+    Serial.print(color);
+    Serial.print("  Val: ");
+    Serial.println(val);
+    Serial.println("========\n");
+
+    colorVals[port][color] = val;
+  
+    pixels[port].setPixelColor(pixelNum, pixels[port].Color(colorVals[port][0], colorVals[port][1], colorVals[port][2]));
+  
+    for (int i = 0; i < 3; i++)
+      pixels[i].show();
+   
   }
 #endif //END OF NEOPIXEL FUNCTIONS
+
 
 #ifdef is_analog
   #define num_measurements 4 // must be 1, 2, 4, or 8)! number of analog measurements to sample and average per channel
@@ -386,8 +396,10 @@ void init_config(){
 void setup() {
    // Neo Pixel Setup
   #ifdef is_neopixel
-    pixels.begin(); // This initializes the NeoPixel library.
-    pixels.show(); // Initialize all pixels to 'off'
+    for (int i = 0; i < 3; i++) {
+      pixels[i].begin(); // This initializes the NeoPixel library.
+      pixels[i].show(); // Initialize all pixels to 'off'
+    }
   #endif
 
   #ifdef is_servo
@@ -588,9 +600,12 @@ void msg_router(OSCMessage &msg, int addrOffset){
   msg.dispatch("/MPU6050/cal",calMPU6050_OSC,addrOffset);
   #endif
   #ifdef is_neopixel
-  msg.dispatch("/Port0/Neopixel/Red",setRed,addrOffset);
-  msg.dispatch("/Port0/Neopixel/Green",setGreen,addrOffset);
-  msg.dispatch("/Port0/Neopixel/Blue",setBlue,addrOffset);
+  msg.dispatch("/Neopixel",setColor,addrOffset);
+//  msg.dispatch("/Port1/Neopixel",setColor,addrOffset);
+//  msg.dispatch("/Port2/Neopixel",setColor,addrOffset);
+
+//  msg.dispatch("/Port0/Neopixel/Green",setGreen,addrOffset);
+//  msg.dispatch("/Port0/Neopixel/Blue",setBlue,addrOffset);
   #endif
   
   msg.dispatch("/Connect/SSID",set_ssid,addrOffset);
@@ -602,7 +617,7 @@ void msg_router(OSCMessage &msg, int addrOffset){
 
 uint32_t button_timer;
 
-void loop() {
+void loop() {  
   pass_set = ssid_set = false;
   OSCBundle bndl;
   char addressString[255];
@@ -659,10 +674,6 @@ void loop() {
       
       
       bndl.route(configuration.packet_header_string,msg_router);
-      #ifdef is_neopixel
-      pixels.setPixelColor(0, pixels.Color((redVal > 255) ? 255 : redVal, (greenVal > 255) ? 255 : greenVal, (blueVal > 255) ? 255: blueVal));
-      pixels.show();
-      #endif
       
       if (ssid_set == true && pass_set == true){
         #if DEBUG == 1
