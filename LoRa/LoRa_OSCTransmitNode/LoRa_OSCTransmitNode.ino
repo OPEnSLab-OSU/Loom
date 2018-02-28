@@ -1,0 +1,85 @@
+#include <SPI.h>
+#include <RH_RF95.h>
+#include <RHReliableDatagram.h>
+#include <OSCBundle.h>
+#include <Ethernet2.h>
+#include "LOOM_OSC_Scheme.h"
+ 
+#define RFM95_CS 8
+#define RFM95_RST 4
+//#define RFM95_INT 3 //Use this for the M0
+#define RFM95_INT 7 //Use this for the 32u4
+
+#define CLIENT_ADDRESS 1
+#define SERVER_ADDRESS 2
+
+#define FAMILY "/LOOM"
+#define DEVICE "/LoRaNode"
+#define INSTANCE_NUM 0  // Unique instance number for this device, useful when using more than one of the same device type in same space
+ 
+// Change to 434.0 or other frequency, must match RX's freq!
+#define RF95_FREQ 915.0
+#define MESSAGE_SIZE 240
+
+// Singleton instance of the radio driver
+RH_RF95 rf95(RFM95_CS, RFM95_INT);
+
+RHReliableDatagram manager(rf95, CLIENT_ADDRESS);
+
+void setup() {
+  Serial.begin(9600);
+  delay(2000);
+
+  Serial.println("Initializing manager...");
+  if (!manager.init())
+    Serial.println("init failed");
+
+  Serial.println("Setting Frequency...");
+  if (!rf95.setFrequency(RF95_FREQ)) {
+    Serial.println("setFrequency failed");
+    while (1);
+  }
+
+  Serial.println("Setting power...");
+  rf95.setTxPower(23, false);
+}
+
+void loop() {
+  OSCBundle bndl;
+  bndl.add(IDString "/IDtag").add((int32_t)CLIENT_ADDRESS);
+  bndl.add(IDString "/TimeStamp").add((int32_t)2018);
+  bndl.add(IDString "/TempC").add((float)4.0);
+  bndl.add(IDString "/Humidity").add((float)38.0);
+ /* bndl.add(IDString "/LoadCell").add((float)33.0);
+  bndl.add(IDString "/IRLight").add((float)32.0);
+  bndl.add(IDString "/FullLight").add((float)36.0);
+  bndl.add(IDString "/BatVolt").add((float)3.3);*/
+
+  char message[MESSAGE_SIZE];
+
+  memset(message, '\0', MESSAGE_SIZE);
+  get_OSC_string(&bndl, message);
+  for(int i = 0; i < MESSAGE_SIZE; i++) {
+    if(message[i] == '\0' || i == MESSAGE_SIZE-1) {
+      Serial.print("Message uses ");
+      Serial.print(i);
+      Serial.println(" byes of the message buffer.");
+      break;
+    }
+  }
+  
+
+  Serial.println(message);
+  /*Serial.print("Message length: ");
+  Serial.println(strlen(message));
+  Serial.print("Max message length: ");
+  Serial.println(RH_RF95_MAX_MESSAGE_LEN);*/
+  
+  Serial.print("Sending...");
+  if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS))
+    Serial.println("ok");
+  else
+    Serial.println("failed");
+
+  delay(10000);
+}
