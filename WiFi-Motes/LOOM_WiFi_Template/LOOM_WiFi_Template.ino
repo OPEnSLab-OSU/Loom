@@ -320,7 +320,15 @@ status = WiFi.begin(ssid,pass);
       if (status != WL_CONNECTED){
         #if DEBUG == 1
         Serial.println("Connecting to WPA host failed completely");
+        Serial.println("Reverting to AP mode");
         #endif
+
+        // Start AP up again
+        Udp.stop();
+        WiFi.disconnect();
+        WiFi.end();
+        start_AP();
+        configuration.wifi_mode = AP_MODE;
         return false;
       }
       delay(8000);
@@ -588,6 +596,30 @@ void set_pass(OSCMessage &msg){
   pass_set = true;
 }
 
+void broadcastIP(OSCMessage &msg){
+  char addressString[255];
+
+  sprintf(addressString,"%s%s",configuration.packet_header_string,"/NewIP");
+  
+  OSCBundle bndl;
+  bndl.add(addressString).add((int32_t)configuration.ip[0]).add((int32_t)configuration.ip[1]).add((int32_t)configuration.ip[2]).add((int32_t)configuration.ip[3]);
+
+
+  Udp.beginPacket(configuration.ip_broadcast, 9436);
+  bndl.send(Udp);  // send the bytes to the SLIP stream
+  Udp.endPacket(); // mark the end of the OSC Packet
+  bndl.empty();
+ 
+  // empty the bundle to free room for a new one
+  bndl.empty(); 
+  
+  #if DEBUG == 1
+  Serial.print("Broadcasted IP: ");
+  Serial.println(configuration.ip);
+  #endif
+  
+}
+
 void msg_router(OSCMessage &msg, int addrOffset){
   #if DEBUG == 1
   char buffer[100];
@@ -603,18 +635,13 @@ void msg_router(OSCMessage &msg, int addrOffset){
   #endif
   #ifdef is_neopixel
   msg.dispatch("/Neopixel",setColor,addrOffset);
-//  msg.dispatch("/Port1/Neopixel",setColor,addrOffset);
-//  msg.dispatch("/Port2/Neopixel",setColor,addrOffset);
-
-//  msg.dispatch("/Port0/Neopixel/Green",setGreen,addrOffset);
-//  msg.dispatch("/Port0/Neopixel/Blue",setBlue,addrOffset);
   #endif
   
   msg.dispatch("/Connect/SSID",set_ssid,addrOffset);
   msg.dispatch("/Connect/Password",set_pass,addrOffset);
   msg.dispatch("/wifiSetup/AP",switch_to_AP,addrOffset);
   msg.dispatch("/SetID",set_instance_num,addrOffset);
-  
+  msg.dispatch("/requestIP",broadcastIP,addrOffset);
 }
 
 uint32_t button_timer;
@@ -648,15 +675,14 @@ void loop() {
   }
   // if there's data available, read a packet
   int packetSize = Udp.parsePacket();
-//  Serial.println(packetSize);
   if (packetSize > 0)
   {
     
-#if DEBUG == 1
+    #if DEBUG == 1
     Serial.println("=========================================");
     Serial.print("received packet of size: ");
     Serial.println(packetSize);
-#endif
+    #endif
     bndl.empty();
     while (packetSize--){
       bndl.fill(Udp.read());
@@ -678,12 +704,29 @@ void loop() {
       bndl.route(configuration.packet_header_string,msg_router);
       
       if (ssid_set == true && pass_set == true){
+        // Replace '~'s with spaces - as spaces cannot be sent via Max and are replaced with '~'
+        int i = 0;
+        while (new_ssid[i] != '\0'){
+          if (new_ssid[i] == '~')
+            new_ssid[i] = ' ';
+          i++;
+        }
+        i = 0;
+        while (new_pass[i] != '\0'){
+          if (new_pass[i] == '~')
+            new_pass[i] = ' ';
+          i++;
+        }
+        
         #if DEBUG == 1
         Serial.print("received command to connect to ");
         Serial.print(new_ssid);
         Serial.print(" with password ");
         Serial.println(new_pass);
         #endif
+
+
+        
         WiFi.disconnect();
         Udp.stop();
         WiFi.end();
@@ -694,13 +737,12 @@ void loop() {
         }
       }
     }
-    
     else {
       error = bndl.getError();
-#if DEBUG == 1
+      #if DEBUG == 1
       Serial.print("error: ");
       Serial.println(error);
-#endif
+      #endif
     }
 
   }
