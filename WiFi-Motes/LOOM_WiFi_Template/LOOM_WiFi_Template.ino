@@ -113,13 +113,14 @@ enum WiFiMode{
                           {0,0,0},
                           {0,0,0} };
   //port x (r,g,b)
-
+  
   void setColor(OSCMessage &msg){
     int port     = msg.getInt(0);
     int pixelNum = msg.getInt(1);
     int color    = msg.getInt(2);
     int val      = msg.getInt(3);
   
+    #if DEBUG == 1
     Serial.println("========");
     Serial.print("Port: ");
     Serial.print(port);
@@ -130,6 +131,7 @@ enum WiFiMode{
     Serial.print("  Val: ");
     Serial.println(val);
     Serial.println("========\n");
+    #endif
 
     colorVals[port][color] = val;
   
