@@ -15,7 +15,7 @@
 
 //#define is_servo
 
-//#define is_analog 2
+#define is_analog 2
 #define is_i2c 0x86
 #ifdef is_i2c
   #define is_mpu6050
@@ -27,5 +27,6 @@
 #define is_sleep_period 50 // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval
 //#define is_sleep_interrupt 11 // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 
+#define INIT_PORT 9436
 
 
