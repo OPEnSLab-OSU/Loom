@@ -212,7 +212,7 @@ void udp_mpu6050(void)
     sprintf(addressString,"%s%s",configuration.packet_header_string,"/freefall");
     bndl.add(addressString).add(freefall);
    // UDP Packet
-    Udp.beginPacket(configuration.ip_broadcast, 9436);
+    Udp.beginPacket(configuration.ip_broadcast, configuration.localPort);
       bndl.send(Udp); // send the bytes to the SLIP stream
     Udp.endPacket(); // mark the end of the OSC Packet
    

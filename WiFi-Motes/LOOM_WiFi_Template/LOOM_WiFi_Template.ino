@@ -368,7 +368,7 @@ void init_config(){
         strcpy(configuration.pass,"arduino101");                // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
         configuration.keyIndex = 0;                       // your network key Index number (needed only for WEP)
         configuration.ip_broadcast = "192.168.1.255";     // IP to Broadcast data 
-        configuration.localPort = 9436;                   // local port to listen on
+        configuration.localPort = INIT_PORT;                   // local port to listen on
         configuration.wifi_mode = AP_MODE;
         //add any other behavior/calibration wrapped in an #ifdef is_Something preprocessor directive HERE
       #ifdef is_mpu6050
@@ -586,6 +586,23 @@ void set_instance_num(OSCMessage &msg){
   #endif
 }
 
+void set_port(OSCMessage &msg){
+  #if DEBUG == 1
+  Serial.print("Port changed from ");
+  Serial.print(configuration.localPort);
+  #endif
+  
+  configuration.localPort = msg.getInt(0);
+  Udp.stop();
+//  delay(500);
+  Udp.begin(configuration.localPort);
+  
+  #if DEBUG == 1
+  Serial.print(" to ");
+  Serial.println(configuration.localPort);
+  #endif
+}
+
 void set_ssid(OSCMessage &msg){
   msg.getString(0,new_ssid,50);
   ssid_set = true;
@@ -605,7 +622,7 @@ void broadcastIP(OSCMessage &msg){
   bndl.add(addressString).add((int32_t)configuration.ip[0]).add((int32_t)configuration.ip[1]).add((int32_t)configuration.ip[2]).add((int32_t)configuration.ip[3]);
 
 
-  Udp.beginPacket(configuration.ip_broadcast, 9436);
+  Udp.beginPacket(configuration.ip_broadcast, configuration.localPort);
   bndl.send(Udp);  // send the bytes to the SLIP stream
   Udp.endPacket(); // mark the end of the OSC Packet
   bndl.empty();
@@ -641,6 +658,7 @@ void msg_router(OSCMessage &msg, int addrOffset){
   msg.dispatch("/Connect/Password",set_pass,addrOffset);
   msg.dispatch("/wifiSetup/AP",switch_to_AP,addrOffset);
   msg.dispatch("/SetID",set_instance_num,addrOffset);
+  msg.dispatch("/SetPort",set_port,addrOffset);
   msg.dispatch("/requestIP",broadcastIP,addrOffset);
 }
 

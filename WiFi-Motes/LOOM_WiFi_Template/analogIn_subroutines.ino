@@ -49,7 +49,7 @@ void measure_analog(void)
 #endif
 
  // UDP Packet
-    Udp.beginPacket(configuration.ip_broadcast, 9436);
+    Udp.beginPacket(configuration.ip_broadcast, configuration.localPort);
       bndl.send(Udp); // send the bytes to the SLIP stream
     Udp.endPacket(); // mark the end of the OSC Packet
    
