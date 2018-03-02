@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 1801.0, -59.0, 1141.0, 919.0 ],
+		"rect" : [ 34.0, 78.0, 1406.0, 919.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -386,7 +386,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
+					"outlettype" : [ "bang", "" ],
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
@@ -824,7 +824,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
+					"outlettype" : [ "bang", "" ],
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
@@ -2562,7 +2562,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1141.0, 893.0 ],
+						"rect" : [ 0.0, 26.0, 1406.0, 893.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -3463,7 +3463,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 292.333344, 387.0, 232.0, 22.0 ],
 					"style" : "",
-					"text" : "/LOOM/RelayShield0/Relay/State 11 0"
+					"text" : "/LOOM/RelayShield0/Relay/State 5 0"
 				}
 
 			}
@@ -4291,7 +4291,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-92", 2 ],
-					"source" : [ "obj-115", 1 ]
+					"source" : [ "obj-115", 0 ]
 				}
 
 			}
