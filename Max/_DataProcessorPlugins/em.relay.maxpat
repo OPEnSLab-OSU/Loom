@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 34.0, 78.0, 1406.0, 919.0 ],
+		"rect" : [ 34.0, 78.0, 1040.0, 919.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -2562,7 +2562,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1406.0, 893.0 ],
+						"rect" : [ 0.0, 26.0, 1040.0, 893.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -3390,13 +3390,14 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-115",
-					"items" : [ 11, ",", 10, ",", 9, ",", "A0", ",", "A1", ",", "A2" ],
+					"items" : [ 9, ",", 10, ",", 11, ",", "A0", ",", "A1", ",", "A2" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 454.333344, 286.0, 70.0, 22.0 ],
+					"pattrmode" : 1,
 					"presentation" : 1,
 					"presentation_rect" : [ 202.0, 7.0, 38.5, 22.0 ],
 					"style" : ""
