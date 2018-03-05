@@ -20,7 +20,7 @@
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 const char DEVID[] = "v25CCAAB0F709665"; 
 char serverName[] = "api.pushingbox.com";
-IPAddress ip(192, 168, 1, 177);
+IPAddress ip(10, 248, 55, 154);
 EthernetClient client;
 String data[NUM_FIELDS];
 
@@ -75,7 +75,7 @@ void loop() {
       for(int i = 0; i < bndl.size(); i++) {
         data[i] = get_data_value(bndl.getOSCMessage(i), 0);
       }
-      for(int i = 0; i < NUM_FIELDS; i++) {
+      for(int i = 0; i < bndl.size(); i++) {
         Serial.print("Data["); 
         Serial.print(i); 
         Serial.print("]: ");

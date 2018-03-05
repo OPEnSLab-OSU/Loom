@@ -2,7 +2,6 @@
 #include <RH_RF95.h>
 #include <RHReliableDatagram.h>
 #include <OSCBundle.h>
-#include <Ethernet2.h>
 #include "LOOM_OSC_Scheme.h"
  
 #define RFM95_CS 8
@@ -10,7 +9,7 @@
 //#define RFM95_INT 3 //Use this for the M0
 #define RFM95_INT 7 //Use this for the 32u4
 
-#define CLIENT_ADDRESS 1
+#define CLIENT_ADDRESS 3
 #define SERVER_ADDRESS 2
 
 #define FAMILY "/LOOM"
@@ -59,6 +58,8 @@ void loop() {
 
   memset(message, '\0', MESSAGE_SIZE);
   get_OSC_string(&bndl, message);
+
+  /*
   for(int i = 0; i < MESSAGE_SIZE; i++) {
     if(message[i] == '\0' || i == MESSAGE_SIZE-1) {
       Serial.print("Message uses ");
@@ -66,7 +67,7 @@ void loop() {
       Serial.println(" byes of the message buffer.");
       break;
     }
-  }
+  }*/
   
 
   Serial.println(message);
