@@ -28,5 +28,6 @@
 //#define is_sleep_interrupt 11 // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 
 #define INIT_PORT 9436
-
+#define INIT_INST 0
+#define AP_NAME "featherM0"
 
