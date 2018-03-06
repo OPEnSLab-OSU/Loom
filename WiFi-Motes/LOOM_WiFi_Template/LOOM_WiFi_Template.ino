@@ -357,13 +357,13 @@ void init_config(){
     Serial.println(configuration.checksum);
   #endif
   if (configuration.checksum != memValidationValue){ //write default values to flash
-        configuration.instance_number = 0;
+        configuration.instance_number = INIT_INST;
         sprintf(configuration.packet_header_string,"%s%d\0",PacketHeaderString,configuration.instance_number);
         #if DEBUG == 1
         Serial.print("expecting OSC header ");
         Serial.println(configuration.packet_header_string);
         #endif
-        configuration.my_ssid = "featherM0"; //default AP name
+        configuration.my_ssid = AP_NAME; //default AP name
         strcpy(configuration.ssid,"OPEnS");               // created AP name
         strcpy(configuration.pass,"arduino101");                // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
         configuration.keyIndex = 0;                       // your network key Index number (needed only for WEP)
