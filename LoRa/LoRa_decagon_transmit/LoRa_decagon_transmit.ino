@@ -1,5 +1,3 @@
-//Notes: Currently UNTESTED
-
 
 #include <SPI.h>
 #include <RH_RF95.h>
@@ -12,17 +10,23 @@
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
-#define F_M0
-//#define F_32U4
+#ifdef __SAMD21G18A__
+#define is_M0
+#endif
+
+#ifdef __AVR_ATmega32U4__
+#define is_32U4
+#pragma message("Warning: 32u4 can only interface with one Decagon device on pin 11")
+#endif
 
 //===== Decagon Initializations =====
 
 #define DATAPIN1 A0  // change to the proper pin
 #define DATAPIN2 A1
-#define DATAPIN3 A2
-#define DATAPIN4 A3
-#define DATAPIN5 A4
-#define DATAPIN6 A5
+#define DATAPIN3 A3
+#define DATAPIN4 A4
+#define DATAPIN5 A5
+#define DATAPIN6 11
 #define SENSOR_ADDRESS "?"
 
 //Declare 6 SDI-12 objects initialized with DATAPIN1-6
@@ -35,13 +39,13 @@ String sdiResponse = "";
 
 //===== LoRa Initializations =====
 
-#ifdef F_M0
+#ifdef is_M0
 #define RFM95_CS 8
 #define RFM95_RST 4
 #define RFM95_INT 3
 #endif
 
-#ifdef F_32U4
+#ifdef is_32U4
 #define RFM95_CS 8
 #define RFM95_RST 4
 #define RFM95_INT 7
