@@ -96,7 +96,29 @@ enum WiFiMode{
     set_servo_degree(set_degree,servo_num); 
   }
 
-#endif //END OF SERVO FUNCTIONS
+#endif //END OF SERVO FUNCTIONS AND DECLARATIONS
+
+#ifdef is_relay
+  #define RELAY_PIN0 9
+  #define RELAY_PIN1 10
+  #define RELAY_PIN2 11
+  #define RELAY_PIN3 14 //A0
+  #define RELAY_PIN4 15 //A1
+  #define RELAY_PIN5 16 //A2
+  bool relay_on[6];
+  void handleRelay(OSCMessage &msg){
+    int relay;
+    int set_to;
+    relay = msg.getInt(0);
+    set_to = msg.getInt(1);
+    relay_on[relay] = (set_to==1);
+    Serial.print("set ");
+    Serial.print(relay);
+    Serial.print(" to ");
+    Serial.println((relay_on[relay]) ? "ON" : "OFF");
+    
+  }
+#endif //END OF RELAY FUNCTIONS AND DECLARATIONS
 
 #ifdef is_neopixel
   #include <Adafruit_NeoPixel.h>
@@ -417,6 +439,19 @@ void setup() {
   
     pwm.setPWMFreq(60);
   #endif
+
+  #ifdef is_relay
+    pinMode(RELAY_PIN0,OUTPUT);
+    pinMode(RELAY_PIN1,OUTPUT);
+    pinMode(RELAY_PIN2,OUTPUT);
+    pinMode(RELAY_PIN3,OUTPUT);
+    pinMode(RELAY_PIN4,OUTPUT);
+    pinMode(RELAY_PIN5,OUTPUT);
+    relay_on[0] = false;
+    relay_on[1] = false;
+    digitalWrite(RELAY_PIN1,HIGH);
+    digitalWrite(RELAY_PIN2,HIGH);
+  #endif
   //Initialize serial and wait for port to open:
 #if DEBUG == 1
   Serial.begin(9600);
@@ -647,6 +682,9 @@ void msg_router(OSCMessage &msg, int addrOffset){
   #ifdef is_servo
   msg.dispatch("/Servo/Set",set_servo,addrOffset);
   #endif
+  #ifdef is_relay
+  msg.dispatch("/Relay/State", handleRelay, addrOffset);
+  #endif 
   #ifdef is_mpu6050
   msg.dispatch("/MPU6050/cal",calMPU6050_OSC,addrOffset);
   #endif
@@ -668,6 +706,8 @@ void loop() {
   pass_set = ssid_set = false;
   OSCBundle bndl;
   char addressString[255];
+  #ifndef is_relay //pin 10 is shared by the relay output
+  #ifdef transmit_butt
   if ((uint32_t)digitalRead(transmit_butt)){
     button_timer = 0;
   }
@@ -679,7 +719,7 @@ void loop() {
     #endif
     if (button_timer >= 5000){ //~about 5 seconds
     #if DEBUG == 1
-      Serial.println("button held for 8 seconds, resetting to AP mode");
+      Serial.println("button held for 5 seconds, resetting to AP mode");
       
     #endif
       button_timer = 0;
@@ -691,6 +731,8 @@ void loop() {
       start_AP();
     }
   }
+  #endif
+  #endif
   // if there's data available, read a packet
   int packetSize = Udp.parsePacket();
   if (packetSize > 0)
@@ -764,7 +806,14 @@ void loop() {
     }
 
   }
-  
+  #ifdef is_relay
+      //digitalWrite(RELAY_PIN0,(relay_on[0]==true) ? HIGH : LOW); //NOTE: pin 9 is bad news
+      digitalWrite(RELAY_PIN1,(relay_on[1]==true) ? HIGH : LOW);
+      digitalWrite(RELAY_PIN2,(relay_on[2]==true) ? HIGH : LOW);
+      digitalWrite(RELAY_PIN3,(relay_on[3]==true) ? HIGH : LOW);
+      digitalWrite(RELAY_PIN4,(relay_on[4]==true) ? HIGH : LOW);
+      digitalWrite(RELAY_PIN5,(relay_on[5]==true) ? HIGH : LOW);
+  #endif
 
   
   // compare the previous status to the current status
