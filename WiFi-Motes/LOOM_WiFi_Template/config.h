@@ -29,6 +29,12 @@
 #define is_sleep_period 50 // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval
 //#define is_sleep_interrupt 11 // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 
+<<<<<<< HEAD
 #define INIT_PORT 9437
 
+=======
+#define INIT_PORT 9436
+#define INIT_INST 0
+#define AP_NAME "featherM0"
+>>>>>>> refs/remotes/origin/master
 
