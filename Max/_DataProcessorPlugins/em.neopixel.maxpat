@@ -625,7 +625,7 @@
 				"box" : 				{
 					"id" : "obj-60",
 					"maxclass" : "number",
-					"maximum" : 48,
+					"maximum" : 144,
 					"minimum" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 2,
@@ -767,7 +767,7 @@
 				"box" : 				{
 					"id" : "obj-28",
 					"maxclass" : "number",
-					"maximum" : 50,
+					"maximum" : 1000,
 					"minimum" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 2,
@@ -2651,8 +2651,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-					"fontsize" : [ 12.059008 ]
+					"fontsize" : [ 12.059008 ],
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
