@@ -4,9 +4,6 @@
  
   DEBUG MODE: define DEBUG as 1 or 0. If DEBUG is set, make sure the serial monitor is open; all serial calls should be wrapped in an #if DEBUG == 1 ... #endif
 
-  SEND_OSC: if the device is going to be sending readings from anything attached to it, set this to true
-  RECEIVE_OSC: if the device is going to receive any commands from the hub, set this to true
-
   //ADD MORE DESCRIPTION HERE
   
  */
@@ -34,8 +31,6 @@ enum WiFiMode{
   Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
   #define SERVOMIN  150 // this is the 'minimum' pulse length count (out of 4096)
   #define SERVOMAX  600 // this is the 'maximum' pulse length count (out of 4096)
-  
-  #define num_servos 2
   
   #if (num_servos==1)
     int predeg[1] = {0};
@@ -119,26 +114,9 @@ enum WiFiMode{
 
 #ifdef is_neopixel
   #include <Adafruit_NeoPixel.h>
-  // Which pin on the Arduino is connected to the NeoPixels?
-//  #define A0            14 //A0
-//  #define A1            15 //A1
-//  #define A2            16 //A2
 
-  //Probably read these in from config eventually                              
-//  Adafruit_NeoPixel pixels[3] = { Adafruit_NeoPixel(2, A0, NEO_GRB + NEO_KHZ800),
-//                                  Adafruit_NeoPixel(2, A1, NEO_GRB + NEO_KHZ800),
-//                                  Adafruit_NeoPixel(2, A2, NEO_GRB + NEO_KHZ800) };
-
-  Adafruit_NeoPixel pixels[3];
-  bool pixel_enabled[3] = {Neo0, Neo1, Neo2};
-//  pixel_enabled[0] = false;
-//  pixel_enabled[1] = false;
-//  pixel_enabled[2] = false;
-//  int i;
-//    for(int i = 0; i < 2; i++) {
-//      if (pixel_enabled[i])
-//        pixels[i] = Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
-//    }
+  Adafruit_NeoPixel * pixels[3];
+  bool pixel_enabled[3] = {NEO_0, NEO_1, NEO_2};
 
   int colorVals[3][3] = { {0,0,0},
                           {0,0,0},
@@ -164,18 +142,18 @@ enum WiFiMode{
     Serial.println("========\n");
     #endif
 
-//  if (pixel_enabled[port])
-//    colorVals[port][color] = val;
-//
-//    if (pixel_enabled[port])
-//      pixels[port].setPixelColor(pixelNum, pixels[port].Color(colorVals[port][0], colorVals[port][1], colorVals[port][2]));
-//
-//
-//    for(int i = 0; i < 2; i++) {
-//      if (pixel_enabled[i])
-//      pixels[0].show();
-//    }
-//  
+  if (pixel_enabled[port])
+    colorVals[port][color] = val;
+
+    if (pixel_enabled[port])
+      pixels[port]->setPixelColor(pixelNum, pixels[port]->Color(colorVals[port][0], colorVals[port][1], colorVals[port][2]));
+
+
+    for(int i = 0; i < 3; i++) {
+      if (pixel_enabled[i])
+        pixels[i]->show();
+    }
+  
    
   }
 #endif //END OF NEOPIXEL FUNCTIONS
@@ -250,13 +228,11 @@ enum WiFiMode{
   #include <LowPower.h> //Include this if transmitting on pin interrupt
 #endif
 
-#ifdef SEND_OSC or RECEIVE_OSC
-  #define STR_(x) #x //helper function
-  #define STR(x) STR_(x) //to concatenate a predefined number to a string literal, use STR(x)
-  #define PacketHeaderString STR(/) FAMILY STR(/) DEVICE //results in a single string, i.e. /LOOM/Device. the full prefix sent to this device should be /LOOM/Device#, but the number is parsed in the OSC bundle routing function
-  #include <OSCBundle.h> // Use this to handle all OSC messaging behavior (sending or receiving)
-  OSCErrorCode error;
-#endif
+#define STR_(x) #x //helper function
+#define STR(x) STR_(x) //to concatenate a predefined number to a string literal, use STR(x)
+#define PacketHeaderString STR(/) FAMILY STR(/) DEVICE //results in a single string, i.e. /LOOM/Device. the full prefix sent to this device should be /LOOM/Device#, but the number is parsed in the OSC bundle routing function
+#include <OSCBundle.h> // Use this to handle all OSC messaging behavior (sending or receiving)
+OSCErrorCode error;
 
 //------------------------------------------------------------------------------------------------------
 // MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
@@ -402,12 +378,12 @@ void init_config(){
         #endif
         configuration.my_ssid = AP_NAME; //default AP name
 //        sprintf(configuration.my_ssid,"featherM0-%d",configuration.instance_number);
-        strcpy(configuration.ssid,"OPEnS");               // created AP name
-        strcpy(configuration.pass,"Replace_with_your_wifi_password");                // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
+        strcpy(configuration.ssid,DEFAULT_NETWORK);               // created AP name
+        strcpy(configuration.pass,DEFAULT_PASSWORD);                // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
         configuration.keyIndex = 0;                       // your network key Index number (needed only for WEP)
         configuration.ip_broadcast = "192.168.1.255";     // IP to Broadcast data 
         configuration.localPort = INIT_PORT;                   // local port to listen on
-        configuration.wifi_mode = AP_MODE;
+        configuration.wifi_mode = DEFAULT_MODE;
         //add any other behavior/calibration wrapped in an #ifdef is_Something preprocessor directive HERE
       #ifdef is_mpu6050
         calMPU6050(); //calibration writes memValidationValue for us
@@ -417,7 +393,7 @@ void init_config(){
   #if DEBUG == 1
         Serial.println("Writing to flash for the first time.");
   #endif
-        //flash_config.write(configuration);                //don't uncomment this line until we're pretty confident that this behaves how we want; flash memory has limited writes and we don't want to waste it on unnecessary tests
+        flash_config.write(configuration);                //don't uncomment this line until we're pretty confident that this behaves how we want; flash memory has limited writes and we don't want to waste it on unnecessary tests
   }
   #if DEBUG == 1          //If the read from memory is successful.
   else { //print out the files read from flash
@@ -444,11 +420,11 @@ void init_config(){
 void setup() {
    // Neo Pixel Setup
   #ifdef is_neopixel
-    for(int i = 0; i < 2; i++) {
+    for(int i = 0; i < 3; i++) {
       if (pixel_enabled[i]){
-        pixels[i] = Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
-        pixels[i].begin(); // This initializes the NeoPixel library.
-        pixels[i].show(); // Initialize all pixels to 'off'
+        pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
+        pixels[i]->begin(); // This initializes the NeoPixel library.
+        pixels[i]->show(); // Initialize all pixels to 'off'
       }
     }
 
@@ -473,7 +449,6 @@ void setup() {
     relay_on[3] = false;
     relay_on[4] = false;
     relay_on[5] = false;
-    digitalWrite(RELAY_PIN1,HIGH);
   #endif
   //Initialize serial and wait for port to open:
 #if DEBUG == 1
@@ -597,6 +572,7 @@ void setup() {
       }
     break;
   }
+  configuration.ip = WiFi.localIP();
 }
 
 #ifdef is_mpu6050
@@ -605,7 +581,7 @@ void calMPU6050_OSC(OSCMessage &msg) {
   Serial.println("Command received to calibrate MPU6050");
 #endif
   calMPU6050();
-  //flash_config.write(configuration); //uncomment when flash writing is enabled
+  flash_config.write(configuration); //uncomment when flash writing is enabled
 #if DEBUG == 1
   Serial.println("New calibration values written to non-volatile memory");
 #endif
@@ -627,6 +603,7 @@ void switch_to_AP(OSCMessage &msg){
     WiFi.end();
     start_AP();
     configuration.wifi_mode = AP_MODE;
+    flash_config.write(configuration);
   }
   #if DEBUG == 1
   else{
@@ -642,6 +619,7 @@ void set_instance_num(OSCMessage &msg){
   Serial.print("new address header: ");
   Serial.println(configuration.packet_header_string);
   #endif
+  flash_config.write(configuration);
 }
 
 void set_port(OSCMessage &msg){
@@ -659,6 +637,7 @@ void set_port(OSCMessage &msg){
   Serial.print(" to ");
   Serial.println(configuration.localPort);
   #endif
+  flash_config.write(configuration);
 }
 
 void set_ssid(OSCMessage &msg){
@@ -672,6 +651,7 @@ void set_pass(OSCMessage &msg){
 }
 
 void broadcastIP(OSCMessage &msg){
+  configuration.ip = WiFi.localIP();
   char addressString[255];
 
   sprintf(addressString,"%s%s",configuration.packet_header_string,"/NewIP");
@@ -820,8 +800,10 @@ void loop() {
         WiFi.end();
         if(connect_to_WPA(new_ssid,new_pass)){
           configuration.wifi_mode = WPA_CLIENT_MODE;
+          configuration.ip = WiFi.localIP();
           strcpy(configuration.ssid,new_ssid);
           strcpy(configuration.pass,new_pass);
+          flash_config.write(configuration);
         }
       }
     }
@@ -876,7 +858,6 @@ void loop() {
   vbat *= 2;    // we divided by 2, so multiply back
   vbat *= 3.3;  // Multiply by 3.3V, our reference voltage
   vbat /= 1024; // convert to voltage
-#ifdef SEND_OSC
   #ifdef is_mpu6050
       // Update MPU6050 Data
       // Now measure MPU6050, update values in global registers
@@ -891,7 +872,6 @@ void loop() {
   #ifdef is_analog
       measure_analog();
   #endif
-#endif
 
 #ifdef is_sleep_period
   #if DEBUG == 0
