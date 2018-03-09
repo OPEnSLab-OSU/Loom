@@ -76,6 +76,7 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   delay(2000);
+  Serial.println("Beginning setup");
   lora_setup(&rf95, &manager);
 
   // Decagon Setup
@@ -141,7 +142,7 @@ void loop() {
 
   memset(message, '\0', 201);
 
-  get_OSC_string(&bndl, message);
+  get_OSC_string(&bndl, message, 251);
 
   delay(2000);
 
