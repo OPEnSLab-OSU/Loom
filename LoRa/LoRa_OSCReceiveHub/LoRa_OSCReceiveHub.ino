@@ -11,7 +11,6 @@
 #define RFM95_INT 3 //Use this for the M0
 //#define RFM95_INT 7 //Use this for the 32u4
 
-#define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 2
 #define NUM_FIELDS 16
 #define MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN
@@ -69,7 +68,7 @@ void loop() {
     memset(buf, '\0', MESSAGE_SIZE);
     if (manager.recvfromAck(buf, &len, &from)) {
       OSCBundle bndl;
-      get_OSC_bundle((char*)buf, &bndl, MESSAGE_SIZE);
+      get_OSC_bundle((char*)buf, &bndl);
       for(int i = 0; i < NUM_FIELDS; i++) {
         data[i] = get_data_value(bndl.getOSCMessage(0), i);
       }

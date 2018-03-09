@@ -4,78 +4,62 @@ union data_value {
   int32_t i;
   float f;
   uint32_t u;
-  char* c;
 };
 
 void get_OSC_string(OSCBundle *bndl, char *osc_string) {
-  char buf[50];
   char data_type;
-  int n = 0;
   data_value value;
-  
-  OSCMessage* msg = bndl->getOSCMessage(n);
-  memset(osc_string, '\0', strlen(osc_string));
-  
-  while(msg != NULL) {
-    msg->getAddress(buf, 0);
-    
-    /*Serial.print("Address ");
-    Serial.print(n+1);
-    Serial.print(": ");
-    Serial.println(buf);*/
+  int addr_len = 40;
+  OSCMessage* msg;
+  char addr_buf[addr_len];
 
-    strcat(osc_string, buf);
+  memset(osc_string, '\0', sizeof(osc_string));
 
-    int m = 0;
-    data_type = msg->getdata_type(m);
+  for (int i = 0; i < bndl->size(); i++) {
+    msg = bndl->getOSCMessage(i);
+    memset(addr_buf, '\0', addr_len);
+    msg->getAddress(addr_buf, 0);
+    strcat(osc_string, addr_buf);
 
-    while(data_type != '\0') {
+    for (int j = 0; j < msg->size(); j++) {
+      data_type = msg->getType(j);
+      switch (data_type) {
+        case 'f':
+          value.f = msg->getFloat(j);
+          snprintf(addr_buf, addr_len, ",f%lu", value.u);
+          strcat(osc_string, addr_buf);
+          break;
 
-      if (data_type == 'f') {
-        value.f = msg->getFloat(m);
-		
-        /*Serial.print("Value ");
-        Serial.print(n+1);
-        Serial.print(": ");
-        Serial.println(value);*/
+        case 'i':
+          value.i = msg->getInt(j);
+          snprintf(addr_buf, addr_len, ",i%lu", value.u);
+          strcat(osc_string, addr_buf);
+          break;
 
-        snprintf(buf, 50, ",f%lu", value.u);
-        strcat(osc_string, buf);
+        case 's':
+          char data_buf[40];
+          msg->getString(j, data_buf, sizeof(data_buf));
+          snprintf(addr_buf, addr_len, ",s%s", data_buf);
+          strcat(osc_string, addr_buf);
+          break;
+
+        default:
+          if (data_type != '\0')
+            Serial.print("Invalid message arg type");
+          break;
       }
-      else if (data_type == 'i') {
-        value.i = msg->getInt(m);
-		
-        /*Serial.print("Value ");
-        Serial.print(n+1);
-        Serial.print(": ");
-        Serial.println(value);*/
-
-        snprintf(buf, 50, ",i%lu", value.u);
-        strcat(osc_string, buf);
-      }
-      else if (data_type == 's') {
-        char val_buf[50];
-        msg->getString(m, val_buf, 50);
-
-        snprintf(buf, 50, ",s%s", val_buf);
-        strcat(osc_string, buf);
-      }
-      m++;
-      data_type = msg->getdata_type(m);
     }
-    n++;
-    msg = bndl->getOSCMessage(n);
     if (msg != NULL) strcat(osc_string, " ");
   }
 }
 
-void get_OSC_bundle(char *osc_string, OSCBundle* bndl) {
+void get_OSC_bundle(char *string, OSCBundle* bndl) {
   bndl->empty();
   data_value value_union;
-  char buf[msg_size];
+  char buf[strlen(string)+1];
   char *p = buf, *p2 = NULL;
   char *token = NULL, *msg_token = NULL;
-  strcpy(buf, osc_string);
+  strcpy(buf, string);
   OSCMessage *msg;
   msg_token = strtok_r(p, " ", &p);
   while (msg_token != NULL & strlen(msg_token) > 0) {
@@ -107,18 +91,18 @@ void print_bundle(OSCBundle *bndl) {
   char buf[50];
   char data_type;
   OSCMessage *msg = bndl->getOSCMessage(n);
-  while(msg != NULL) {
+  while (msg != NULL) {
     msg->getAddress(buf, 0);
     Serial.print("Address ");
-    Serial.print(n+1);
+    Serial.print(n + 1);
     Serial.print(": ");
     Serial.println(buf);
 
     int m = 0;
-    data_type = msg->getdata_type(m);
-    while(data_type != '\0') {
+    data_type = msg->getType(m);
+    while (data_type != '\0') {
       Serial.print("Value ");
-      Serial.print(m+1);
+      Serial.print(m + 1);
       Serial.print(": ");
       if (data_type == 'f') {
         Serial.println(msg->getFloat(m));
@@ -130,17 +114,17 @@ void print_bundle(OSCBundle *bndl) {
         msg->getString(m, buf, 50);
         Serial.println(buf);
       }
-      
+
       m++;
-      data_type = msg->getdata_type(m);
+      data_type = msg->getType(m);
     }
     n++;
     msg = bndl->getOSCMessage(n);
   }
 }
 
-String get_data_valueue(OSCMessage* msg, int pos) {
-  switch(msg->getdata_type(pos)) {
+String get_data_value(OSCMessage* msg, int pos) {
+  switch (msg->getType(pos)) {
     case 'i':
       return String(msg->getInt(pos));
       break;
