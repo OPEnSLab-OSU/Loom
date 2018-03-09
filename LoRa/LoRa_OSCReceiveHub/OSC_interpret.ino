@@ -37,13 +37,12 @@ void get_OSC_string(OSCBundle *bndl, char *osc_string) {
         break;
         
       case 's':
-      {
-        char data_buf[sizeof(osc_string) - addr_len];
+        char data_buf[40];
         msg->getString(j, data_buf, sizeof(data_buf));
         snprintf(addr_buf, addr_len, ",s%s", data_buf);
         strcat(osc_string, addr_buf);
         break;
-      }
+        
       default:
         if(data_type != '\0')
           Serial.print("Invalid message arg type");
@@ -63,13 +62,11 @@ void get_OSC_bundle(char *osc_string, OSCBundle* bndl) {
   strcpy(buf, osc_string);
   OSCMessage *msg;
   msg_token = strtok_r(p, " ", &p);
-  
   while (msg_token != NULL & strlen(msg_token) > 0) {
     p2 = msg_token;
     token = strtok_r(p2, ",", &p2);
     msg = &(bndl->add(token));
     token = strtok_r(NULL, ",", &p2);
-    int k = 1;
     while (token != NULL & strlen(token) > 0) {
       if (token[0] == 'f') {
         value_union.u = strtoul(&token[1], NULL, 0);
@@ -93,18 +90,18 @@ void print_bundle(OSCBundle *bndl) {
   char buf[50];
   char data_type;
   OSCMessage *msg = bndl->getOSCMessage(n);
-  while (msg != NULL) {
+  while(msg != NULL) {
     msg->getAddress(buf, 0);
     Serial.print("Address ");
-    Serial.print(n + 1);
+    Serial.print(n+1);
     Serial.print(": ");
     Serial.println(buf);
 
     int m = 0;
     data_type = msg->getType(m);
-    while (data_type != '\0') {
+    while(data_type != '\0') {
       Serial.print("Value ");
-      Serial.print(m + 1);
+      Serial.print(m+1);
       Serial.print(": ");
       if (data_type == 'f') {
         Serial.println(msg->getFloat(m));
@@ -116,7 +113,7 @@ void print_bundle(OSCBundle *bndl) {
         msg->getString(m, buf, 50);
         Serial.println(buf);
       }
-
+      
       m++;
       data_type = msg->getType(m);
     }
@@ -125,8 +122,8 @@ void print_bundle(OSCBundle *bndl) {
   }
 }
 
-String get_data_valueue(OSCMessage* msg, int pos) {
-  switch (msg->getType(pos)) {
+String get_data_value(OSCMessage* msg, int pos) {
+  switch(msg->getType(pos)) {
     case 'i':
       return String(msg->getInt(pos));
       break;

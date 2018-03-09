@@ -13,6 +13,14 @@ ir_light_v = "2000"
 full_light_v = "3000"
 bat_volt_v = "4.2"
 
+keyList = ['devid', 'IDtag', 'TimeStamp', 'TempC', 'Humid', 'loadcell', 'irlight', 'fullight',
+           'batvolt']
+valList = [devid_v, id_tag_v, timestamp_v, temp_c_v, humid_v, load_cell_v, ir_light_v,
+           full_light_v, bat_volt_v]
+
+param_dict = OrderedDict()
+
+
 payload = (('devid', devid_v), ('IDtag', id_tag_v), ('TimeStamp', timestamp_v),
            ('TempC', temp_c_v), ('Humid', humid_v), ('LoadCell', load_cell_v),
            ('IRLight', ir_light_v), ('FullLight', full_light_v), ('BatVolt', bat_volt_v))
