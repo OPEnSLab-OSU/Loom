@@ -51,9 +51,7 @@ void loop() {
   .add("BatVolt").add((float)4.2);
 
   char message[MESSAGE_SIZE];
-
-  memset(message, '\0', MESSAGE_SIZE);
-  get_OSC_string(&bndl, message, MESSAGE_SIZE);
+  get_OSC_string(&bndl, message);
 
   /*
   for(int i = 0; i < MESSAGE_SIZE; i++) {
