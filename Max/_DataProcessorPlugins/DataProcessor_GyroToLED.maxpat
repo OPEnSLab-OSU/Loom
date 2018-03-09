@@ -11032,7 +11032,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
 									"patching_rect" : [ 2.0, 5.0, 36.0, 34.0 ],
-									"pic" : "input.psd",
+									"pic" : "input.png",
 									"presentation" : 1,
 									"presentation_rect" : [ 1.0, 4.0, 25.0, 25.0 ]
 								}
@@ -12475,7 +12475,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
 									"patching_rect" : [ 2.0, 5.0, 36.0, 34.0 ],
-									"pic" : "input.psd",
+									"pic" : "input.png",
 									"presentation" : 1,
 									"presentation_rect" : [ 1.0, 4.0, 25.0, 25.0 ]
 								}
@@ -13920,7 +13920,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
 									"patching_rect" : [ 2.0, 5.0, 36.0, 34.0 ],
-									"pic" : "input.psd",
+									"pic" : "input.png",
 									"presentation" : 1,
 									"presentation_rect" : [ 1.0, 4.0, 25.0, 25.0 ]
 								}
@@ -15595,7 +15595,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
 									"patching_rect" : [ 2.0, 5.0, 36.0, 34.0 ],
-									"pic" : "input.psd"
+									"pic" : "input.png"
 								}
 
 							}
@@ -16454,10 +16454,10 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "input.psd",
+				"name" : "input.png",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPluginsV10.30.17",
 				"patcherrelativepath" : ".",
-				"type" : "8BPS",
+				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{
