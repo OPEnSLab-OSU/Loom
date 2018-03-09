@@ -13,8 +13,8 @@
 
 #define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 2
-#define NUM_FIELDS 8
-#define MESSAGE_SIZE 240
+#define NUM_FIELDS 16
+#define MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN
 
 //Ethernet / Hub Info
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
@@ -49,11 +49,11 @@ void setup() {
     while (1);
   }
 
-  if (Ethernet.begin(mac) == 0) {
+/*  if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to configure Ethernet using DHCP");
     // try to congifure using IP address instead of DHCP:
     Ethernet.begin(mac, ip);
-  }
+  }*/
   //Allow for time to connect
   delay(1000);
   
@@ -69,19 +69,17 @@ void loop() {
     memset(buf, '\0', MESSAGE_SIZE);
     if (manager.recvfromAck(buf, &len, &from)) {
       OSCBundle bndl;
-      get_OSC_bundle((char*)buf, &bndl);
-      Serial.print("Messages in bndl: ");
-      Serial.println(bndl.size());
-      for(int i = 0; i < bndl.size(); i++) {
-        data[i] = get_data_value(bndl.getOSCMessage(i), 0);
+      get_OSC_bundle((char*)buf, &bndl, MESSAGE_SIZE);
+      for(int i = 0; i < NUM_FIELDS; i++) {
+        data[i] = get_data_value(bndl.getOSCMessage(0), i);
       }
-      for(int i = 0; i < bndl.size(); i++) {
+      for(int i = 0; i < NUM_FIELDS; i++) {
         Serial.print("Data["); 
         Serial.print(i); 
         Serial.print("]: ");
         Serial.println(data[i]);
       }
-      sendToPushingBox();
+      //sendToPushingBox();
       Serial.println("");
     }
   }
@@ -93,7 +91,7 @@ void sendToPushingBox()
   client.stop();
   if (client.connect(serverName, 80)) {  
     client.print("GET /pushingbox?devid="); client.print(DEVID); 
-    client.print("&IDtag=");client.print(data[0]);
+    client.print("&keyOne=");client.print(data[0]);
     client.print("&TimeStamp=");client.print(data[1]);
     client.print("&TempC=");client.print(data[2]);
     client.print("&Humid=");client.print(data[3]);

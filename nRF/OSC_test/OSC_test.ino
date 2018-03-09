@@ -48,25 +48,28 @@ void loop() {
 
   //Serial.println("Creating bundle...");
 
+  char string[121];
+  memset(string, '\0', 121);
+
   OSCBundle bndl;
-  bndl.add(IDString "/VWC").add((float)1.0);
-  bndl.add(IDString "/Temp").add((int32_t)-1);
+  bndl.add(IDString "/VWC").add((float)1.0).add((int32_t)-4);
+  bndl.add(IDString "/Temp").add((int32_t)-1).add("/test/thing");
   bndl.add(IDString "/ElecCond").add((float)3.0);
 
   //Serial.println("Bundle created");
 
-  bndl.send(Serial);
+  //Serial.print("Original bundle: ");
+  //bndl.send(Serial);
+  //Serial.println("");
   //Serial.println("Decoding bundle...");
 
-  char *string = get_OSC_string(bndl);
+  get_OSC_string(&bndl, string);
   Serial.println(string);
 
   delay(2000);
 
   get_OSC_bundle(string, &bndl);
+
   delay(2000);
-  //}
-  free(string);
-  bndl.empty();
-  Serial.println("Why won't this work");
+  print_bundle(&bndl);
 }

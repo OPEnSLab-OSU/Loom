@@ -6,16 +6,17 @@ union data_vals {
   uint32_t u;
 };
 
-void get_OSC_string(OSCBundle *bndl, char *string) {
+void get_OSC_string(OSCBundle *bndl, char *string, int msg_size) {
   char buf[50];
   char type;
   int n = 0;
   data_vals value;
   OSCMessage* msg = bndl->getOSCMessage(n);
+
+  memset(string, '\0', msg_size);
   
   while(msg != NULL) {
     msg->getAddress(buf, 0);
-    type = msg->getType(0);
     
     /*Serial.print("Address ");
     Serial.print(n+1);
@@ -24,25 +25,40 @@ void get_OSC_string(OSCBundle *bndl, char *string) {
 
     strcat(string, buf);
 
-    if (type == 'f') {
-      value.f = msg->getFloat(0);
-      /*Serial.print("Value ");
-      Serial.print(n+1);
-      Serial.print(": ");
-      Serial.println(value);*/
+    int m = 0;
+    type = msg->getType(m);
 
-      snprintf(buf, 50, " f%lu", value.u);
-      strcat(string, buf);
-    }
-    else if (type == 'i') {
-      value.i = msg->getInt(0);
-      /*Serial.print("Value ");
-      Serial.print(n+1);
-      Serial.print(": ");
-      Serial.println(value);*/
+    while(type != '\0') {
 
-      snprintf(buf, 50, " i%lu", value.u);
-      strcat(string, buf);
+      if (type == 'f') {
+        value.f = msg->getFloat(m);
+        /*Serial.print("Value ");
+        Serial.print(n+1);
+        Serial.print(": ");
+        Serial.println(value);*/
+
+        snprintf(buf, 50, ",f%lu", value.u);
+        strcat(string, buf);
+      }
+      else if (type == 'i') {
+        value.i = msg->getInt(m);
+        /*Serial.print("Value ");
+        Serial.print(n+1);
+        Serial.print(": ");
+        Serial.println(value);*/
+
+        snprintf(buf, 50, ",i%lu", value.u);
+        strcat(string, buf);
+      }
+      else if (type == 's') {
+        char val_buf[50];
+        msg->getString(m, val_buf, 50);
+
+        snprintf(buf, 50, ",s%s", val_buf);
+        strcat(string, buf);
+      }
+      m++;
+      type = msg->getType(m);
     }
     n++;
     msg = bndl->getOSCMessage(n);
@@ -50,33 +66,91 @@ void get_OSC_string(OSCBundle *bndl, char *string) {
   }
 }
 
-void get_OSC_bundle(char *string, OSCBundle* bndl) {
+void get_OSC_bundle(char *string, OSCBundle* bndl, int msg_size) {
   bndl->empty();
   data_vals value_union;
-  char buf[121];
-  char *p = buf;
-  char *addr = NULL, *value = NULL;
+  char buf[msg_size];
+  char *p = buf, *p2 = NULL;
+  char *token = NULL, *msg_token = NULL;
   strcpy(buf, string);
-  addr = strtok_r(p, " ", &p);
-  while (addr != NULL & strlen(addr) > 0) {
-    value = strtok_r(NULL, " ", &p);
-    value_union.u = strtoul(&value[1], NULL, 0);
-    if (value[0] == 'f') {
-      bndl->add(addr).add(value_union.f);
-      /*Serial.print("Address: ");
-      Serial.println(addr);
-      Serial.print("Value: ");
-      Serial.println(value_union.f);*/
+  OSCMessage *msg;
+  msg_token = strtok_r(p, " ", &p);
+  while (msg_token != NULL & strlen(msg_token) > 0) {
+    p2 = msg_token;
+    token = strtok_r(p2, ",", &p2);
+    msg = &(bndl->add(token));
+    token = strtok_r(NULL, ",", &p2);
+    int k = 1;
+    while (token != NULL & strlen(token) > 0) {
+      if (token[0] == 'f') {
+        value_union.u = strtoul(&token[1], NULL, 0);
+        msg->add(value_union.f);
+      }
+      else if (token[0] == 'i') {
+        value_union.u = strtoul(&token[1], NULL, 0);
+        msg->add(value_union.i);
+      }
+      else if (token[0] == 's') {
+        msg->add(&token[1]);
+      }
+      token = strtok_r(p2, ",", &p2);
     }
-    else if (value[0] == 'i') {
-      bndl->add(addr).add(value_union.i);
-      /*Serial.print("Address: ");
-      Serial.println(addr);
-      Serial.print("Value: ");
-      Serial.println(value_union.i);*/
-    }
-
-    addr = strtok_r(p, " ", &p);
+    msg_token = strtok_r(p, " ", &p);
   }
 }
 
+void print_bundle(OSCBundle *bndl) {
+  int n = 0;
+  char buf[50];
+  char type;
+  OSCMessage *msg = bndl->getOSCMessage(n);
+  while(msg != NULL) {
+    msg->getAddress(buf, 0);
+    Serial.print("Address ");
+    Serial.print(n+1);
+    Serial.print(": ");
+    Serial.println(buf);
+
+    int m = 0;
+    type = msg->getType(m);
+    while(type != '\0') {
+      Serial.print("Value ");
+      Serial.print(m+1);
+      Serial.print(": ");
+      if (type == 'f') {
+        Serial.println(msg->getFloat(m));
+      }
+      else if (type == 'i') {
+        Serial.println(msg->getInt(m));
+      }
+      else if (type == 's') {
+        msg->getString(m, buf, 50);
+        Serial.println(buf);
+      }
+      
+      m++;
+      type = msg->getType(m);
+    }
+    n++;
+    msg = bndl->getOSCMessage(n);
+  }
+}
+
+String get_data_value(OSCMessage* msg, int pos) {
+  switch(msg->getType(pos)) {
+    case 'i':
+      return String(msg->getInt(pos));
+      break;
+    case 'f':
+      return String(msg->getFloat(pos));
+      break;
+    case 's':
+      char buf[80];
+      msg->getString(pos, buf, 80);
+      return String(buf);
+      break;
+    default:
+      Serial.println("Unsupported data type.");
+      return String("");
+  }
+}

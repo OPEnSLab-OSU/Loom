@@ -18,7 +18,7 @@
  
 // Change to 434.0 or other frequency, must match RX's freq!
 #define RF95_FREQ 915.0
-#define MESSAGE_SIZE 240
+#define MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN
 
 // Singleton instance of the radio driver
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
@@ -45,19 +45,15 @@ void setup() {
 
 void loop() {
   OSCBundle bndl;
-  bndl.add(IDString "/IDtag").add((int32_t)CLIENT_ADDRESS);
-  bndl.add(IDString "/TimeStamp").add((int32_t)2018);
-  bndl.add(IDString "/TempC").add((float)4.0);
-  bndl.add(IDString "/Humidity").add((float)38.0);
- /* bndl.add(IDString "/LoadCell").add((float)33.0);
-  bndl.add(IDString "/IRLight").add((float)32.0);
-  bndl.add(IDString "/FullLight").add((float)36.0);
-  bndl.add(IDString "/BatVolt").add((float)3.3);*/
+  bndl.add(IDString).add("Date").add("3/6/2018").add("IDtag").add((int32_t) INSTANCE_NUM)
+  .add("TimeStamp").add("2018").add("TempC").add((int32_t)32).add("Humidity").add((float)46.4)
+  .add("LoadCell").add((int32_t)1000).add("IRLight").add((int32_t)2000).add("FullLight").add((int32_t)3000)
+  .add("BatVolt").add((float)4.2);
 
   char message[MESSAGE_SIZE];
 
   memset(message, '\0', MESSAGE_SIZE);
-  get_OSC_string(&bndl, message);
+  get_OSC_string(&bndl, message, MESSAGE_SIZE);
 
   /*
   for(int i = 0; i < MESSAGE_SIZE; i++) {
