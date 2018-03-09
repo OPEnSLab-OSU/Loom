@@ -39,6 +39,20 @@
 		"showontab" : 1,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-26",
+					"linecount" : 3,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ -150.0, 324.0, 50.0, 49.0 ],
+					"style" : "",
+					"text" : "/LOOM/Ishield0/butt 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-220",
 					"linecount" : 3,
 					"maxclass" : "message",
@@ -47,7 +61,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ -69.0, 360.0, 50.0, 49.0 ],
 					"style" : "",
-					"text" : "/Ishield7 /butt 1"
+					"text" : "/Ishield0 /butt 1"
 				}
 
 			}
@@ -125,7 +139,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 931.0, 280.0, 98.0, 35.0 ],
 					"style" : "",
-					"text" : "host 192.168.1.12"
+					"text" : "host 192.168.1.18"
 				}
 
 			}
@@ -138,21 +152,21 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1102.0, 130.0, 60.0, 22.0 ],
 					"style" : "",
-					"text" : "port 9436"
+					"text" : "port 9410"
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"id" : "obj-204",
-					"linecount" : 6,
+					"linecount" : 7,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 553.200012, 226.0, 36.0, 89.0 ],
+					"patching_rect" : [ 553.200012, 226.0, 36.0, 102.0 ],
 					"style" : "",
-					"text" : "/LOOM/Ishield10/SetID 7"
+					"text" : "/LOOM/Ishield0/SetPort 9436"
 				}
 
 			}
@@ -3526,7 +3540,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 306.0, 220.213745, 50.0, 22.0 ],
 									"style" : "",
-									"text" : "7"
+									"text" : "0"
 								}
 
 							}
@@ -3647,7 +3661,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 86.0, 90.0, 50.0, 22.0 ],
 									"style" : "",
-									"text" : "7"
+									"text" : "0"
 								}
 
 							}
@@ -5389,7 +5403,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 5.0, 116.900002, 114.0, 21.0 ],
 					"style" : "",
-					"text" : "192.168.1.12"
+					"text" : "192.168.1.18"
 				}
 
 			}
@@ -6862,7 +6876,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1132.5, 401.0, 188.5, 22.0 ],
 					"style" : "",
-					"text" : "/LOOM/Ishield7/MPU6050/cal"
+					"text" : "/LOOM/Ishield1/MPU6050/cal"
 				}
 
 			}
@@ -7074,7 +7088,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 71.0, 63.5, 48.0, 21.0 ],
 					"style" : "",
-					"text" : "7",
+					"text" : "1",
 					"varname" : "textedit[2]"
 				}
 
@@ -7138,7 +7152,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 71.0, 37.5, 48.0, 21.0 ],
 					"style" : "",
-					"text" : "9436",
+					"text" : "9410",
 					"varname" : "textedit[1]"
 				}
 
@@ -9084,7 +9098,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-26", 1 ],
+					"order" : 1,
+					"source" : [ "obj-41", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-67", 0 ],
+					"order" : 0,
 					"source" : [ "obj-41", 0 ]
 				}
 
