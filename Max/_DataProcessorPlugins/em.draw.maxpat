@@ -339,7 +339,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "jit_matrix" ],
 					"patching_rect" : [ 14.0, 11.0, 36.0, 34.0 ],
-					"pic" : "input.psd",
+					"pic" : "input.png",
 					"presentation" : 1,
 					"presentation_rect" : [ 8.0, 11.5, 25.0, 25.0 ]
 				}
@@ -908,10 +908,10 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "input.psd",
+				"name" : "input.png",
 				"bootpath" : "./Max6.1/Cycling '74/eMotionV2.8/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
-				"type" : "8BPS",
+				"type" : "PNG",
 				"implicit" : 1
 			}
  ],

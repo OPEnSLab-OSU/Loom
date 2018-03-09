@@ -1089,7 +1089,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "jit_matrix" ],
 					"patching_rect" : [ 2.0, 5.0, 36.0, 34.0 ],
-					"pic" : "input.psd"
+					"pic" : "input.png"
 				}
 
 			}
@@ -1653,10 +1653,10 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "input.psd",
+				"name" : "input.png",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
-				"type" : "8BPS",
+				"type" : "PNG",
 				"implicit" : 1
 			}
 , 			{
