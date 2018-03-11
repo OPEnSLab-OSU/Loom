@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 34.0, 78.0, 1006.0, 788.0 ],
+		"rect" : [ 34.0, 78.0, 602.0, 788.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -510,7 +510,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 327.666626, 603.0, 141.0, 35.0 ],
 					"style" : "",
-					"text" : "/LOOM/Ishield0/Neopixel 1 0 2 0"
+					"text" : "/LOOM/Ishield0/Neopixel 0 0 1 0"
 				}
 
 			}
@@ -524,7 +524,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 486.5, 603.0, 140.0, 35.0 ],
 					"style" : "",
-					"text" : "/LOOM/Ishield0/Neopixel 1 0 3 0"
+					"text" : "/LOOM/Ishield0/Neopixel 0 0 2 0"
 				}
 
 			}
@@ -538,7 +538,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 172.166626, 603.0, 138.5, 35.0 ],
 					"style" : "",
-					"text" : "/LOOM/Ishield0/Neopixel 1 0 1 0"
+					"text" : "/LOOM/Ishield0/Neopixel 0 0 0 217"
 				}
 
 			}
@@ -1473,7 +1473,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 119.366615, 91.0, 35.0, 22.0 ],
 					"style" : "",
-					"text" : "0",
+					"text" : "217",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"textjustification" : 1
 				}
@@ -2605,7 +2605,7 @@
 				"name" : "input.png",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
-				"type" : "PNG",
+				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{
