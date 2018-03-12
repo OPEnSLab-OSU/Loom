@@ -48,11 +48,11 @@ void setup() {
     while (1);
   }
 
-/*  if (Ethernet.begin(mac) == 0) {
+  if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to configure Ethernet using DHCP");
     // try to congifure using IP address instead of DHCP:
     Ethernet.begin(mac, ip);
-  }*/
+  }
   //Allow for time to connect
   delay(1000);
   
@@ -67,21 +67,30 @@ void loop() {
     uint8_t from;
     memset(buf, '\0', MESSAGE_SIZE);
     if (manager.recvfromAck(buf, &len, &from)) {
+      char url_args[strlen((char*)buf) + 1];
       OSCBundle bndl;
       get_OSC_bundle((char*)buf, &bndl);
-      for(int i = 0; i < NUM_FIELDS; i++) {
+      for(int i = 0; i < NUM_FIELDS; i++)
         data[i] = get_data_value(bndl.getOSCMessage(0), i);
-      }
-      for(int i = 0; i < NUM_FIELDS; i++) {
-        Serial.print("Data["); 
-        Serial.print(i); 
-        Serial.print("]: ");
-        Serial.println(data[i]);
-      }
-      //sendToPushingBox();
+      getUrlArgString(bndl.getOSCMessage(0), url_args);
+      sendToPushingBox();
       Serial.println("");
     }
   }
+}
+
+void getUrlArgString(OSCMessage* msg, char url_buf[]) {
+  String url_string = String("");
+  for(int i = 0; i < NUM_FIELDS; i++) {
+    if(i % 2 == 0)
+      url_string.concat("&key" + String(i/2) + "=");
+    else
+      url_string.concat("&val" + String(i/2) + "=");
+    url_string.concat(get_data_value(msg, i));
+  }
+
+  Serial.println(url_string);
+  url_string.toCharArray(url_buf, sizeof(url_buf));
 }
 
 //Function for sending the request to PushingBox
@@ -90,14 +99,13 @@ void sendToPushingBox()
   client.stop();
   if (client.connect(serverName, 80)) {  
     client.print("GET /pushingbox?devid="); client.print(DEVID); 
-    client.print("&keyOne=");client.print(data[0]);
-    client.print("&TimeStamp=");client.print(data[1]);
-    client.print("&TempC=");client.print(data[2]);
-    client.print("&Humid=");client.print(data[3]);
-    client.print("&LoadCell=");client.print(data[4]);
-    client.print("&IRLight=");client.print(data[5]);
-    client.print("&FullLight=");client.print(data[6]);
-    client.print("&BatVolt=");client.print(data[7]);
+    for(int i = 0; i < NUM_FIELDS; i++) {
+      if((i % 2) == 0)
+        client.print("&key" + String(i/2) + "=");
+      else
+        client.print("&val" + String(i/2) + "=");
+      client.print(data[i]);
+    }
     client.println(" HTTP/1.1");
     client.print("Host: "); client.println(serverName);
     client.println("User-Agent: Arduino");
