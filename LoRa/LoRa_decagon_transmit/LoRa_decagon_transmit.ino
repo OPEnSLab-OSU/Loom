@@ -163,6 +163,7 @@ void loop() {
   {
     detachInterrupt(digitalPinToInterrupt(wakeUpPin)); //
     clearAlarmFunction(); // Clear RTC Alarm
+    
 #endif
   // ===== Poll Sensors =====
 
