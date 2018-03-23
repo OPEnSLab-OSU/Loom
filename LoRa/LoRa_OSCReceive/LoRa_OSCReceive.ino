@@ -5,10 +5,10 @@
  
 #define RFM95_CS 8
 #define RFM95_RST 4
-//#define RFM95_INT 3 //Use this for the M0
-#define RFM95_INT 7 //Use this for the 32u4
+#define RFM95_INT 3 //Use this for the M0
+//#define RFM95_INT 7 //Use this for the 32u4
 
-#define CLIENT_ADDRESS 1
+#define CLIENT_ADDRESS 0
 #define SERVER_ADDRESS 88
  
 // Change to 434.0 or other frequency, must match RX's freq!
