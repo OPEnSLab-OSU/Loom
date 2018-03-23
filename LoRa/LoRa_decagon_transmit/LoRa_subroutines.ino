@@ -23,6 +23,7 @@ void package_data(OSCBundle *bndl, struct SensorList data) {
   }
   while(i < data.count) {
     if (data.type[i] == D_GS3) {
+      msg->add("IDtag").add("Decagon" STR(INSTANCE_NUM));
       msg->add("VWC").add((float)data.readings[i][0]);
       msg->add("Temp").add((float)data.readings[i][1]);
       msg->add("ElecCond").add((float)data.readings[i][2]);

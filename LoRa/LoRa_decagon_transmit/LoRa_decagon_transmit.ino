@@ -62,7 +62,7 @@ String sdiResponse = "";
 #define RFM95_INT 7
 #endif
 
-#define SERVER_ADDRESS 88
+#define SERVER_ADDRESS 2
 
 //IDString constructor
 
