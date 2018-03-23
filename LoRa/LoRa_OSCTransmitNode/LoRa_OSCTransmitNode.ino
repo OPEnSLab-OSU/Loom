@@ -6,8 +6,8 @@
  
 #define RFM95_CS 8
 #define RFM95_RST 4
-#define RFM95_INT 3 //Use this for the M0
-//#define RFM95_INT 7 //Use this for the 32u4
+//#define RFM95_INT 3 //Use this for the M0
+#define RFM95_INT 7 //Use this for the 32u4
 
 #define CLIENT_ADDRESS 3
 #define SERVER_ADDRESS 2
@@ -24,6 +24,8 @@
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
 RHReliableDatagram manager(rf95, CLIENT_ADDRESS);
+
+String sendString = String("IDstring,RTC_timeString,tempString,humidityString,loadCellString,lightIRString,lightFullString,vbatString");
 
 void setup() {
   Serial.begin(9600);
@@ -44,14 +46,16 @@ void setup() {
 }
 
 void loop() {
-  OSCBundle bndl;
+  /*OSCBundle bndl;
   bndl.add(IDString).add("Date").add("3/6/2018").add("IDtag").add((int32_t) INSTANCE_NUM)
   .add("TimeStamp").add("2018").add("TempC").add((int32_t)32).add("Humidity").add((float)46.4)
   .add("LoadCell").add((int32_t)1000).add("IRLight").add((int32_t)2000).add("FullLight").add((int32_t)3000)
-  .add("BatVolt").add((float)4.2);
+  .add("BatVolt").add((float)4.2);*/
 
-  char message[MESSAGE_SIZE];
-  get_OSC_string(&bndl, message);
+  char message[RH_RF95_MAX_MESSAGE_LEN];
+  memset(message, '\0', sizeof(message));
+  sendString.toCharArray(message, sizeof(message)-1);
+  //get_OSC_string(&bndl, message);
 
   /*
   for(int i = 0; i < MESSAGE_SIZE; i++) {
