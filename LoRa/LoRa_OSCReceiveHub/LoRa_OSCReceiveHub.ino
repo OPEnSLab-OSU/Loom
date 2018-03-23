@@ -85,7 +85,6 @@ void loop() {
       else {
         char str[MESSAGE_SIZE];
         String((char*)buf).toCharArray(str, sizeof(str)-1);
-        Serial.println(str);
         char *token;
         char *savept = str;
         String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "lightIR", "lightFull", "vbat"};
@@ -95,9 +94,6 @@ void loop() {
             data[i] = cols[i/2];
             data[i+1] = String(token);
           }
-        }
-        for(int i = 0; i < NUM_FIELDS; i++) {
-          Serial.println(data[i]);   
         }
       } 
       sendToPushingBox();
