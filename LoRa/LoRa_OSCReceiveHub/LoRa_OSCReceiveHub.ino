@@ -16,10 +16,19 @@
 #define MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN
 
 //Ethernet / Hub Info
-byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+//byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+//Use this for OPEnS Lab
+byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
+
 const char DEVID[] = "v25CCAAB0F709665"; 
 char serverName[] = "api.pushingbox.com";
-IPAddress ip(10, 248, 55, 154);
+
+//IP Address
+//IPAddress ip(10, 248, 55, 154);
+//Use this for OPEnS Lab
+IPAddress ip(128,193,56,138);
+
+
 EthernetClient client;
 String data[NUM_FIELDS];
 
@@ -67,30 +76,30 @@ void loop() {
     uint8_t from;
     memset(buf, '\0', MESSAGE_SIZE);
     if (manager.recvfromAck(buf, &len, &from)) {
-      char url_args[strlen((char*)buf) + 1];
-      OSCBundle bndl;
-      get_OSC_bundle((char*)buf, &bndl);
-      for(int i = 0; i < NUM_FIELDS; i++)
-        data[i] = get_data_value(bndl.getOSCMessage(0), i);
-      getUrlArgString(bndl.getOSCMessage(0), url_args);
+      if(((char)(buf[0])) == '/') {
+        OSCBundle bndl;
+        get_OSC_bundle((char*)buf, &bndl); 
+        for(int i = 0; i < NUM_FIELDS; i++)
+          data[i] = get_data_value(bndl.getOSCMessage(0), i);
+      }
+      else {
+        char str[MESSAGE_SIZE];
+        String((char*)buf).toCharArray(str, sizeof(str)-1);
+        char *token;
+        char *savept = str;
+        String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "lightIR", "lightFull", "vbat"};
+        for(int i = 0; i < NUM_FIELDS; i+=2) {
+          token = strtok_r(savept, ",", &savept);
+          if(token != NULL) {
+            data[i] = cols[i/2];
+            data[i+1] = String(token);
+          }
+        }
+      } 
       sendToPushingBox();
       Serial.println("");
     }
   }
-}
-
-void getUrlArgString(OSCMessage* msg, char url_buf[]) {
-  String url_string = String("");
-  for(int i = 0; i < NUM_FIELDS; i++) {
-    if(i % 2 == 0)
-      url_string.concat("&key" + String(i/2) + "=");
-    else
-      url_string.concat("&val" + String(i/2) + "=");
-    url_string.concat(get_data_value(msg, i));
-  }
-
-  Serial.println(url_string);
-  url_string.toCharArray(url_buf, sizeof(url_buf));
 }
 
 //Function for sending the request to PushingBox
