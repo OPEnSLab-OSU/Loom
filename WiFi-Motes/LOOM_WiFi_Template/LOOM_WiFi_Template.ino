@@ -25,7 +25,7 @@ enum WiFiMode{
 
 
 
-
+// START OF SERVO FUNCTIONS AND DECLARATIONS
 #ifdef is_servo
   #include <Adafruit_PWMServoDriver.h>
   Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
@@ -90,6 +90,7 @@ enum WiFiMode{
 
 #endif //END OF SERVO FUNCTIONS AND DECLARATIONS
 
+// START OF RELAY FUNCTIONS AND DECLARATIONS
 #ifdef is_relay
   #define RELAY_PIN0 9
   #define RELAY_PIN1 10
@@ -98,20 +99,26 @@ enum WiFiMode{
   #define RELAY_PIN4 15 //A1
   #define RELAY_PIN5 16 //A2
   bool relay_on[6];
+
+  // Set relay state
   void handleRelay(OSCMessage &msg){
     int relay;
     int set_to;
     relay = msg.getInt(0);
     set_to = msg.getInt(1);
     relay_on[relay] = (set_to==1);
+    #if DEBUG == 1
     Serial.print("set ");
     Serial.print(relay);
     Serial.print(" to ");
     Serial.println((relay_on[relay]) ? "ON" : "OFF");
+    #endif
     
   }
 #endif //END OF RELAY FUNCTIONS AND DECLARATIONS
 
+
+//START OF NEOPIXEL FUNCTIONS AND DECLARATIONS
 #ifdef is_neopixel
   #include <Adafruit_NeoPixel.h>
 
@@ -142,19 +149,15 @@ enum WiFiMode{
     Serial.println("========\n");
     #endif
 
-  if (pixel_enabled[port])
-    colorVals[port][color] = val;
-
-    if (pixel_enabled[port])
+    if (pixel_enabled[port]) {
+      colorVals[port][color] = val;
       pixels[port]->setPixelColor(pixelNum, pixels[port]->Color(colorVals[port][0], colorVals[port][1], colorVals[port][2]));
-
+    }
 
     for(int i = 0; i < 3; i++) {
       if (pixel_enabled[i])
         pixels[i]->show();
     }
-  
-   
   }
 #endif //END OF NEOPIXEL FUNCTIONS
 
@@ -248,6 +251,7 @@ OSCErrorCode error;
 #include <FlashStorage.h>
 #endif 
 
+// DEVICE CONFIG SETTINGS
 struct config_t {
   byte checksum;               //value is changed when flash memory is written to.
   uint8_t instance_number;     //default 0, should be set on startup from a patch
@@ -327,7 +331,6 @@ status = WiFi.begin(ssid,pass);
         #endif
         
         status = WiFi.begin(ssid,pass);
-     
         attempt_count++;
       }
       if (status != WL_CONNECTED){
@@ -346,13 +349,10 @@ status = WiFi.begin(ssid,pass);
       }
       delay(8000);
       #if DEBUG == 1
-    // you're connected now, so print out the status
-    printWiFiStatus();
-    
-    
-    Serial.println("Starting UDP connection over server...");
-    
-    #endif
+      // you're connected now, so print out the status
+      printWiFiStatus();
+      Serial.println("Starting UDP connection over server..."); 
+      #endif
       // if you get a connection, report back via serial:
       server.begin();
       Udp.begin(configuration.localPort);
@@ -361,11 +361,9 @@ status = WiFi.begin(ssid,pass);
 
 void init_config(){
 #if MEM_TYPE == MEM_FLASH
-  #if DEBUG == 1
-    Serial.println("Reading from flash.");
-  #endif
   configuration = flash_config.read();                    // read from flash memory
   #if DEBUG == 1
+    Serial.println("Reading from flash.");
     Serial.print("Checksum: ");
     Serial.println(configuration.checksum);
   #endif
@@ -390,9 +388,9 @@ void init_config(){
       #else
         configuration.checksum = memValidationValue;      // configuration has been written successfully, so we write the checksum
       #endif
-  #if DEBUG == 1
+    #if DEBUG == 1
         Serial.println("Writing to flash for the first time.");
-  #endif
+    #endif
         flash_config.write(configuration);                //don't uncomment this line until we're pretty confident that this behaves how we want; flash memory has limited writes and we don't want to waste it on unnecessary tests
   }
   #if DEBUG == 1          //If the read from memory is successful.
@@ -414,7 +412,7 @@ void init_config(){
     //add any other debug outputs here, wrapped in a preprocessor #ifdef is_something directive
   }
   #endif
-#endif
+#endif //MEM_TYPE
 }
 
 void setup() {
@@ -424,15 +422,13 @@ void setup() {
       if (pixel_enabled[i]){
         pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
         pixels[i]->begin(); // This initializes the NeoPixel library.
-        pixels[i]->show(); // Initialize all pixels to 'off'
+        pixels[i]->show();  // Initialize all pixels to 'off'
       }
     }
-
   #endif
 
   #ifdef is_servo
     pwm.begin();
-  
     pwm.setPWMFreq(60);
   #endif
 
@@ -450,6 +446,7 @@ void setup() {
     relay_on[4] = false;
     relay_on[5] = false;
   #endif
+  
   //Initialize serial and wait for port to open:
 #if DEBUG == 1
   Serial.begin(9600);
@@ -544,9 +541,9 @@ void setup() {
   // check for the presence of the shield:
   
   if (WiFi.status() == WL_NO_SHIELD) {
-#if DEBUG == 1
-    Serial.println("WiFi shield not present, entering infinite loop");
-#endif
+    #if DEBUG == 1
+      Serial.println("WiFi shield not present, entering infinite loop");
+    #endif
     // don't continue
     while (true);
   }
@@ -577,14 +574,14 @@ void setup() {
 
 #ifdef is_mpu6050
 void calMPU6050_OSC(OSCMessage &msg) {
-#if DEBUG == 1
-  Serial.println("Command received to calibrate MPU6050");
-#endif
+  #if DEBUG == 1
+    Serial.println("Command received to calibrate MPU6050");
+  #endif
   calMPU6050();
   flash_config.write(configuration); //uncomment when flash writing is enabled
-#if DEBUG == 1
-  Serial.println("New calibration values written to non-volatile memory");
-#endif
+  #if DEBUG == 1
+    Serial.println("New calibration values written to non-volatile memory");
+  #endif
 }
 #endif
 
@@ -663,7 +660,6 @@ void broadcastIP(OSCMessage &msg){
   Udp.beginPacket(configuration.ip_broadcast, configuration.localPort);
   bndl.send(Udp);  // send the bytes to the SLIP stream
   Udp.endPacket(); // mark the end of the OSC Packet
-  bndl.empty();
  
   // empty the bundle to free room for a new one
   bndl.empty(); 
@@ -677,10 +673,10 @@ void broadcastIP(OSCMessage &msg){
 
 void msg_router(OSCMessage &msg, int addrOffset){
   #if DEBUG == 1
-  char buffer[100];
-  msg.getAddress(buffer,addrOffset);
-  Serial.print("Parsed ");
-  Serial.println(buffer);
+    char buffer[100];
+    msg.getAddress(buffer,addrOffset);
+    Serial.print("Parsed ");
+    Serial.println(buffer);
   #endif
   #ifdef is_servo
   msg.dispatch("/Servo/Set",set_servo,addrOffset);
@@ -720,10 +716,9 @@ void loop() {
     button_timer++;
     #endif
     if (button_timer >= 5000){ //~about 5 seconds
-    #if DEBUG == 1
-      Serial.println("button held for 8 seconds, resetting to AP mode");
-      
-    #endif
+      #if DEBUG == 1
+        Serial.println("button held for 8 seconds, resetting to AP mode");
+      #endif
       button_timer = 0;
       configuration.wifi_mode = AP_MODE;
       
@@ -738,11 +733,10 @@ void loop() {
   int packetSize = Udp.parsePacket();
   if (packetSize > 0)
   {
-    
     #if DEBUG == 1
-    Serial.println("=========================================");
-    Serial.print("received packet of size: ");
-    Serial.println(packetSize);
+      Serial.println("=========================================");
+      Serial.print("received packet of size: ");
+      Serial.println(packetSize);
     #endif
     bndl.empty();
     while (packetSize--){
@@ -760,8 +754,7 @@ void loop() {
         new_ssid[i] = '\0';
         new_pass[i]= '\0';
       }
-      
-      
+         
       bndl.route(configuration.packet_header_string,msg_router);
       #ifdef is_relay
           //digitalWrite(RELAY_PIN0,(relay_on[0]==true) ? HIGH : LOW); //NOTE: pin 9 is bad news
@@ -787,14 +780,12 @@ void loop() {
         }
         
         #if DEBUG == 1
-        Serial.print("received command to connect to ");
-        Serial.print(new_ssid);
-        Serial.print(" with password ");
-        Serial.println(new_pass);
+          Serial.print("received command to connect to ");
+          Serial.print(new_ssid);
+          Serial.print(" with password ");
+          Serial.println(new_pass);
         #endif
 
-
-        
         WiFi.disconnect();
         Udp.stop();
         WiFi.end();
@@ -810,8 +801,8 @@ void loop() {
     else {
       error = bndl.getError();
       #if DEBUG == 1
-      Serial.print("error: ");
-      Serial.println(error);
+        Serial.print("error: ");
+        Serial.println(error);
       #endif
     }
 
@@ -827,29 +818,29 @@ void loop() {
     if (status == WL_AP_CONNECTED) {
       byte remoteMac[6];
 
-#if DEBUG == 1
-      // a device has connected to the AP
-      Serial.print("Device connected to AP, MAC address: ");
-#endif
-      WiFi.APClientMacAddress(remoteMac);
-#if DEBUG == 1
-      Serial.print(remoteMac[5], HEX);
-      Serial.print(":");
-      Serial.print(remoteMac[4], HEX);
-      Serial.print(":");
-      Serial.print(remoteMac[3], HEX);
-      Serial.print(":");
-      Serial.print(remoteMac[2], HEX);
-      Serial.print(":");
-      Serial.print(remoteMac[1], HEX);
-      Serial.print(":");
-      Serial.println(remoteMac[0], HEX);
-#endif
+      #if DEBUG == 1
+        // a device has connected to the AP
+        Serial.print("Device connected to AP, MAC address: ");
+      #endif
+        WiFi.APClientMacAddress(remoteMac);
+      #if DEBUG == 1
+        Serial.print(remoteMac[5], HEX);
+        Serial.print(":");
+        Serial.print(remoteMac[4], HEX);
+        Serial.print(":");
+        Serial.print(remoteMac[3], HEX);
+        Serial.print(":");
+        Serial.print(remoteMac[2], HEX);
+        Serial.print(":");
+        Serial.print(remoteMac[1], HEX);
+        Serial.print(":");
+        Serial.println(remoteMac[0], HEX);
+      #endif
     } else {
       // a device has disconnected from the AP, and we are back in listening mode
-#if DEBUG == 1
-      Serial.println("Device disconnected from AP");
-#endif
+      #if DEBUG == 1
+        Serial.println("Device disconnected from AP");
+      #endif
     }
   }
 
