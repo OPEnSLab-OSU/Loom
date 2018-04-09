@@ -65,6 +65,15 @@ String sdiResponse = "";
 
 #define SERVER_ADDRESS 2
 
+//battery voltage read pin
+#ifdef is_M0
+#define VBATPIN A7
+#endif
+
+#ifdef is_32U4
+#define VBATPIN A9
+#endif
+
 //IDString constructor
 
 #define STR_HELPER(x) #x
@@ -86,7 +95,7 @@ RHReliableDatagram manager(rf95, INSTANCE_NUM);
 
 // ===== RTC Initializations =====
 
-#define RTC3231
+//#define RTC3231
 
 #ifdef RTC3231
 RTC_DS3231 RTC_DS;
@@ -173,7 +182,7 @@ void loop() {
 
 #ifdef RTC3231
   if(TakeSampleFlag)
-  { //RTC Open Bracket
+  { 
 
 #ifdef is_M0
     detachInterrupt(digitalPinToInterrupt(wakeUpPin));
@@ -213,33 +222,36 @@ void loop() {
     sdiResponse = "";
   }
 
-  // ===== Package data =====
+  // ===== Package and Transmit data =====
   OSCBundle bndl;
-  package_data(&bndl, data);
+  for(int sensor_number = 0; sensor_number < data.count; sensor_number++) {
+    package_data(&bndl, data, sensor_number);
 
-  // ===== Transmit =====
+    // Transmit
 
-  char message[201];
-
-  memset(message, '\0', 201);
-
-  get_OSC_string(&bndl, message);
-
-  delay(2000);
-
-  print_bundle(&bndl);
-
-  Serial.print("Sending...");
-  if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS))
-    Serial.println("ok");
-  else
-    Serial.println("failed");
+    char message[RH_RF95_MAX_MESSAGE_LEN + 1];
+    memset(message, '\0', RH_RF95_MAX_MESSAGE_LEN + 1);
+    get_OSC_string(&bndl, message);
+    delay(2000);
+    print_bundle(&bndl);
+#if DEBUG == 1
+    Serial.print("Sending...");
+#endif
+    if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS))
+#if DEBUG == 1
+      Serial.println("ok");
+#endif
+    else
+#if DEBUG == 1
+      Serial.println("failed");
+#endif
+  }
 
 #ifdef RTC3231
   setAlarmFunction();
   delay(75);  // delay so serial stuff has time to print out all the way
   TakeSampleFlag = false; // Clear Sample Flag
-  } //RTC Close Bracket
+  }
 #endif //RTC3231
   
 
