@@ -29,7 +29,7 @@
   #define num_servos 1
 #endif
 
-#define is_relay
+//#define is_relay
 
 // Pin names, Do not change
 #define A0     14 
@@ -38,7 +38,7 @@
 
 
 //#define is_analog 2
-#define is_i2c 0x86
+//#define is_i2c 0x86
 #ifdef is_i2c
   #define is_mpu6050
   #define is_neopixel
