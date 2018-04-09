@@ -251,6 +251,65 @@ void connect_to_new_network()
   } 
 }
 
+// Updates WiFi ssid with new ssid 
+void set_ssid(OSCMessage &msg) 
+{
+  msg.getString(0, new_ssid, 50);
+  ssid_set = true;
+}
+
+// Updates WiFi password with new password 
+void set_pass(OSCMessage &msg) 
+{
+  msg.getString(0, new_pass, 50);
+  pass_set = true;
+}
+
+// Broadcast IP address so that requesting computer can update IP
+// to send to if it only had device instance number
+void broadcastIP(OSCMessage &msg) {
+  configuration.ip = WiFi.localIP();
+  char addressString[255];
+  OSCBundle bndl;
+
+  sprintf(addressString, "%s%s", configuration.packet_header_string, "/NewIP");
+  bndl.add(addressString).add((int32_t)configuration.ip[0])
+                         .add((int32_t)configuration.ip[1])
+                         .add((int32_t)configuration.ip[2])
+                         .add((int32_t)configuration.ip[3]);
+
+  Udp.beginPacket(configuration.ip_broadcast, configuration.localPort);
+  bndl.send(Udp);     // Send the bytes to the SLIP stream
+  Udp.endPacket();    // Mark the end of the OSC Packet
+  bndl.empty();       // Empty the bundle to free room for a new one
+
+  #if DEBUG == 1
+    Serial.print("Broadcasted IP: ");
+    Serial.println(configuration.ip);
+  #endif
+}
+
+// Update device's communication port
+void set_port(OSCMessage &msg) 
+{
+  #if DEBUG == 1
+    Serial.print("Port changed from ");
+    Serial.print(configuration.localPort);
+  #endif
+
+  // Get new port, stop listening on old port, start on new port
+  configuration.localPort = msg.getInt(0);
+  Udp.stop();
+  Udp.begin(configuration.localPort);
+
+  #if DEBUG == 1
+    Serial.print(" to ");
+    Serial.println(configuration.localPort);
+  #endif
+
+  // Update saved port in configuration
+  flash_config.write(configuration);
+}
 
 
 

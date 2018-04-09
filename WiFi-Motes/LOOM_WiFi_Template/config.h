@@ -2,7 +2,14 @@
 #define DEVICE "ServoShield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
 #define INIT_INST 2
 
-#define is_wifi
+#ifdef __SAMD21G18A__
+	#define is_m0
+#endif
+#ifdef __AVR_ATmega32U4__
+	#define is_32u4
+#endif
+
+//#define is_wifi
 #ifdef is_wifi
 	#define DEFAULT_MODE      WPA_CLIENT_MODE //AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"
@@ -14,9 +21,16 @@
 #ifdef is_lora
 	#define SERVER_ADDRESS 0							//Use 0-9 for SERVER_ADDRESSes
 	#define CLIENT_ADDRESS 10							//10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
-														//10-19 for 0, 20 - 29 for 1, etc.
+																				//10-19 for 0, 20 - 29 for 1, etc.
 	#define MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN		//Defaults to 251 as 4 bytes are used for the header.
-	#define RF95_FREQ 915.0
+	#define RF95_FREQ 915.0								//Hardware specific, Tx must match Rx
+	
+	#define is_hub
+	#define is_node
+	
+	#ifdef is_hub
+	  #define NUM_FIELDS 16			//Maximum number of fields accepted by the PushingBox Scenario
+	#endif
 #endif
 
 //--OPTIONS--//
@@ -56,7 +70,7 @@
 
 #define VBATPIN A7                  // Pin to check for battery voltage
 
-#define is_sleep_period 50          // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval
+//#define is_sleep_period 50          // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval
 //#define is_sleep_interrupt 11       // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 
 

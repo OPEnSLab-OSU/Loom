@@ -7,22 +7,6 @@
   //ADD MORE DESCRIPTION HERE
   
  */
-
-// Necessary Includes
-#include <SPI.h>
-#include <WiFi101.h>
-#include <WiFiUdp.h>
-#include <OSCBundle.h>
-
-
-// Needed by config.h
-enum WiFiMode{
-  AP_MODE,
-  WPA_CLIENT_MODE,
-  WEP_CLIENT_MODE
-};
-
-
 // -------------------------------------------------------------
 // INCLUDE DECLARATIONS, STRUCTS, AND FUNCTIONS FROM OTHER FILES
 // -------------------------------------------------------------
@@ -66,7 +50,9 @@ void setup() {
   #endif
 
   init_config();
-  wifi_setup();
+  #ifdef is_wifi
+    wifi_setup();
+  #endif
   
 } // end of setup()
 
@@ -76,22 +62,26 @@ void setup() {
 //                          MAIN LOOP
 // -------------------------------------------------------------
 void loop() { 
-  // Loop variables and structures 
-  pass_set = ssid_set = false;
+  // Loop variables and structures
   OSCBundle bndl;
   char addressString[255];
-  int packetSize;
-
+  
+  #ifdef is_wifi
+    pass_set = ssid_set = false;
+    int packetSize;
+  #endif
 
   // Reset to AP mode if button held for ~5 seconds
-  #ifdef transmit_butt
+  #if defined(transmit_butt) && defined(is_wifi)
     check_button_held();      
   #endif
 
 
   // HANDLE BUNDLE
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-  
+
+
+  #ifdef is_wifi
   // If there's data available, read a packet
   packetSize = Udp.parsePacket();
   if (packetSize > 0) {
@@ -143,11 +133,14 @@ void loop() {
       #endif
     } // of else
   } // of (packetSize > 0)
+
+  #endif //is_wifi
   
   // END OF HANDLE BUNDLE
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
- 
+
+  #ifdef is_wifi
   // Compare the previous status to the current status
   if (status != WiFi.status()) {
     status = WiFi.status();              // It has changed, update the variable
@@ -160,7 +153,7 @@ void loop() {
       }
     #endif
   } // of if ( status != WiFi.status() )
-
+  #endif
 
   // Measure battery voltage
   vbat = analogRead(VBATPIN);
