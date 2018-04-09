@@ -15,13 +15,19 @@
   #include <LowPower.h>           //Include this if transmitting on pin interrupt
 #endif
 
+#ifdef is_lora
+	#include <RH_RF95.h>
+	#include <RHReliableDatagram.h>
+#endif
 
 // Packet header creation macro
 #define STR_(x) #x                // Helper function
 #define STR(x) STR_(x)            // To concatenate a predefined number to a string literal, use STR(x)
 #define PacketHeaderString STR(/) FAMILY STR(/) DEVICE // Results in a single string, i.e. /LOOM/Device. the full prefix sent to this device should be /LOOM/Device#, but the number is parsed in the OSC bundle routing function
 
-
+#ifdef is_wifi
+	#define AP_NAME   STR(FAMILY) STR(DEVICE) STR(INIT_INST)
+#endif
 
 // Common global variables
 int           led =  LED_BUILTIN;             // LED pin number
