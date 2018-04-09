@@ -13,22 +13,16 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
   rf95->setTxPower(23, false);
 }
 
-void package_data(OSCBundle *bndl, struct SensorList data) {
-  int i = 0;
-  char buf[5];
+void package_data(OSCBundle *bndl, struct SensorList data, int sensor_number) {
   bndl->empty();
   OSCMessage *msg;
-  if (data.count > 0) {
-    msg = &(bndl->add(IDString));
-  }
-  while(i < data.count) {
-    if (data.type[i] == D_GS3) {
-      msg->add("IDtag").add("Decagon" STR(INSTANCE_NUM));
-      msg->add("VWC").add((float)data.readings[i][0]);
-      msg->add("Temp").add((float)data.readings[i][1]);
-      msg->add("ElecCond").add((float)data.readings[i][2]);
-    }
-    i++;
+  msg = &(bndl->add(IDString));
+  if (data.type[sensor_number] == D_GS3) {
+    msg->add("IDtag").add("Decagon" STR(INSTANCE_NUM));
+    msg->add("Instance").add((int32_t)sensor_number);
+    msg->add("VWC").add((float)data.readings[sensor_number][0]);
+    msg->add("Temp").add((float)data.readings[sensor_number][1]);
+    msg->add("ElecCond").add((float)data.readings[sensor_number][2]);
   }
 }
 
