@@ -50,8 +50,13 @@ void setup() {
   #endif
 
   init_config();
+  
   #ifdef is_wifi
     wifi_setup();
+  #endif
+
+  #ifdef is_lora
+    lora_setup(&rf95, &manager);
   #endif
   
 } // end of setup()
@@ -77,9 +82,44 @@ void loop() {
   #endif
 
 
+
+  #ifdef is_lora
+    if (manager.available()) {
+      uint8_t len = LORA_MESSAGE_SIZE;
+      uint8_t from;
+      uint8_t buf[LORA_MESSAGE_SIZE];
+      memset(buf, '\0', LORA_MESSAGE_SIZE);
+      if (manager.recvfromAck(buf, &len, &from)) {
+        if (((char)(buf[0])) == '/') {
+          get_OSC_bundle((char*)buf, &bndl); 
+          for(int i = 0; i < NUM_FIELDS; i++)
+            data[i] = get_data_value(bndl.getOSCMessage(0), i);
+        } else {
+          char str[LORA_MESSAGE_SIZE];
+          String((char*)buf).toCharArray(str, sizeof(str)-1);
+          char *token;
+          char *savept = str;
+          String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "lightIR", "lightFull", "vbat"};
+          for(int i = 0; i < NUM_FIELDS; i+=2) {
+            token = strtok_r(savept, ",", &savept);
+            if(token != NULL) {
+              data[i] = cols[i/2];
+              data[i+1] = String(token);
+            }
+          }
+        } 
+//        sendToPushingBox();
+        #if DEBUG == 1
+          print_bundle(&bndl);
+        #endif
+      }
+    }
+  #endif // is_lora
+
+
+
   // HANDLE BUNDLE
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
 
   #ifdef is_wifi
   // If there's data available, read a packet

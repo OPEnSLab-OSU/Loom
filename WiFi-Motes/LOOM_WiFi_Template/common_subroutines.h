@@ -120,25 +120,4 @@ void check_button_held()
 
 
 
-// Given a string, replace all instances of 'orig' char with 'rep' char
-// Used primarily for replacing '~'s sent by Max, as it cannot send strings with spaces
-void replace_char(char *str, char orig, char rep) {
-    char *ix = str;
-    while((ix = strchr(ix, orig)) != NULL) {
-        *ix++ = rep;
-    }
-}
-// Previous non-generic solution - delete once the above is verified      
-//        int i = 0;
-//        while (new_ssid[i] != '\0'){
-//          if (new_ssid[i] == '~')
-//            new_ssid[i] = ' ';
-//          i++;
-//        }
-//        i = 0;
-//        while (new_pass[i] != '\0'){
-//          if (new_pass[i] == '~')
-//            new_pass[i] = ' ';
-//          i++;
-//        }
 
