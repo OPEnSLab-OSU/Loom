@@ -74,6 +74,8 @@ String sdiResponse = "";
 #define VBATPIN A9
 #endif
 
+float measuredvbat;
+
 //IDString constructor
 
 #define STR_HELPER(x) #x
@@ -95,10 +97,12 @@ RHReliableDatagram manager(rf95, INSTANCE_NUM);
 
 // ===== RTC Initializations =====
 
-//#define RTC3231
+#define RTC3231
 
 #ifdef RTC3231
 RTC_DS3231 RTC_DS;
+
+char TimeStamp[20];
 
 // declare/init RTC_DS variables//
 volatile bool TakeSampleFlag = false; // Flag is set with external Pin A0 Interrupt by RTC
@@ -194,10 +198,32 @@ void loop() {
 
     clearAlarmFunction(); // Clear RTC Alarm
     
+  // ===== Create RTC Timestamp =====
+  DateTime now = RTC_DS.now();
+  uint8_t mo = now.month();
+  uint8_t d = now.day();
+  uint8_t h = now.hour();
+  uint8_t mm = now.minute();
+
+  String RTC_monthString = String(mo, DEC);
+  String RTC_dayString = String(d, DEC);
+  String RTC_hrString = String(h, DEC);
+  String RTC_minString = String(mm, DEC);
+  String RTC_timeString = RTC_hrString + ":" + RTC_minString + "_" + RTC_monthString + "/" + RTC_dayString;
+  RTC_timeString.toCharArray(TimeStamp, 20);
+
 #endif //RTC3231
+
   // ===== Poll Sensors =====
 
   data = poll_sensors(mySDI12);
+
+  // ===== Get Battery Voltage =====
+
+  measuredvbat = analogRead(VBATPIN); // reading battery voltage
+  measuredvbat *= 2;    // we divided by 2, so multiply back
+  measuredvbat *= 3.3;  // Multiply by 3.3V, our reference voltage
+  measuredvbat /= 1024; // convert to voltage
   
   // ===== Send Measure to Active Sensors =====
 
