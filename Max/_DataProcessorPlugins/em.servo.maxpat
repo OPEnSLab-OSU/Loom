@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 34.0, 78.0, 1040.0, 788.0 ],
+		"rect" : [ 34.0, 78.0, 1002.0, 788.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -60,59 +60,6 @@
 					"patching_rect" : [ 1099.5, 689.0, 33.0, 22.0 ],
 					"style" : "",
 					"text" : "t b s"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-103",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 537.0, 550.0, 61.0, 22.0 ],
-					"style" : "",
-					"text" : "port 9436"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-99",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 598.0, 593.0, 107.0, 22.0 ],
-					"style" : "",
-					"text" : "host 192.168.1.13"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-95",
-					"linecount" : 5,
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 771.0, 677.0, 46.0, 76.0 ],
-					"style" : "",
-					"text" : "FullPacket 100 -2051957240"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-78",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 723.0, 596.0, 50.0, 22.0 ],
-					"style" : "",
-					"text" : "bang"
 				}
 
 			}
@@ -1030,7 +977,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 318.0, 220.213745, 50.0, 22.0 ],
 									"style" : "",
-									"text" : "8"
+									"text" : "0"
 								}
 
 							}
@@ -1151,7 +1098,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 86.0, 90.0, 50.0, 22.0 ],
 									"style" : "",
-									"text" : "8"
+									"text" : "0"
 								}
 
 							}
@@ -2670,7 +2617,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1040.0, 762.0 ],
+						"rect" : [ 0.0, 26.0, 1002.0, 762.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -3555,7 +3502,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 71.0, 368.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "8"
+					"text" : "169"
 				}
 
 			}
@@ -3646,7 +3593,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 439.5, 479.0, 232.0, 22.0 ],
 					"style" : "",
-					"text" : "/LOOM/ServoShield0/Servo/Set 0 0"
+					"text" : "/LOOM/ServoShield0/Servo/Set 0 169"
 				}
 
 			}
@@ -4412,13 +4359,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-41", 0 ],
-					"source" : [ "obj-103", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-74", 0 ],
 					"order" : 1,
 					"source" : [ "obj-106", 0 ]
@@ -4826,15 +4766,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-41", 0 ],
 					"midpoints" : [ 890.5, 672.0, 837.5, 672.0 ],
-					"order" : 0,
-					"source" : [ "obj-32", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-95", 1 ],
-					"order" : 1,
 					"source" : [ "obj-32", 0 ]
 				}
 
@@ -4894,14 +4825,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-51", 0 ],
 					"order" : 0,
-					"source" : [ "obj-40", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-78", 1 ],
-					"order" : 2,
 					"source" : [ "obj-40", 0 ]
 				}
 
@@ -5284,19 +5207,12 @@
 				}
 
 			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-41", 0 ],
-					"source" : [ "obj-99", 0 ]
-				}
-
-			}
  ],
 		"dependency_cache" : [ 			{
 				"name" : "input.png",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
-				"type" : "PNG",
+				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{

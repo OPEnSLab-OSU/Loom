@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 34.0, 78.0, 1066.0, 788.0 ],
+		"rect" : [ 34.0, 78.0, 1001.0, 788.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -2589,7 +2589,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1066.0, 762.0 ],
+						"rect" : [ 0.0, 26.0, 1001.0, 762.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -3008,8 +3008,7 @@
 									"patching_rect" : [ 718.333374, 219.0, 74.0, 21.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 87.0, 123.0, 144.0, 21.0 ],
-									"style" : "",
-									"text" : "arduino101"
+									"style" : ""
 								}
 
 							}
@@ -3109,8 +3108,7 @@
 									"patching_rect" : [ 472.333374, 219.0, 74.0, 21.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 87.0, 94.300003, 144.0, 21.0 ],
-									"style" : "",
-									"text" : "OPEnS"
+									"style" : ""
 								}
 
 							}
@@ -3434,7 +3432,7 @@
 				"box" : 				{
 					"id" : "obj-2",
 					"maxclass" : "number",
-					"maximum" : 100,
+					"maximum" : 1000,
 					"minimum" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 2,
@@ -5126,7 +5124,7 @@
 				"name" : "input.png",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
-				"type" : "PNG",
+				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{

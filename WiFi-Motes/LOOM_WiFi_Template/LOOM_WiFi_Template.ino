@@ -137,7 +137,7 @@ void loop() {
         Serial.println(addressString);
       #endif
         
-      for (int i = 0; i < 32; i++){ //We don't need to clear these buffers if there are no possible bundles
+      for (int i = 0; i < 32; i++){ //Clear the new_ssid and new_pass buffers
         new_ssid[i] = '\0';
         new_pass[i] = '\0';
       }
@@ -210,4 +210,5 @@ void loop() {
   #endif
   
 } // End loop section
+
 
