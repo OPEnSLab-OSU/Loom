@@ -6,6 +6,8 @@ union data_value {
   uint32_t u;
 };
 
+
+
 void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
   #ifdef is_hub
 		pinMode(8, INPUT_PULLUP);
@@ -43,6 +45,7 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
   #endif
   rf95->setTxPower(23, false);
 }
+
 
 #ifdef is_node
 	void get_OSC_string(OSCBundle *bndl, char *osc_string) {

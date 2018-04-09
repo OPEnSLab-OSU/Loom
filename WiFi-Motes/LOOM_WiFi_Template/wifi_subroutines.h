@@ -220,14 +220,21 @@ void print_remote_mac_addr()
 }
 
 
-
+// Given a string, replace all instances of 'orig' char with 'rep' char
+// Used primarily for replacing '~'s sent by Max, as it cannot send strings with spaces
+void replace_char(char *str, char orig, char rep) {
+    char *ix = str;
+    while((ix = strchr(ix, orig)) != NULL) {
+        *ix++ = rep;
+    }
+}
 
 
 void connect_to_new_network()
 {
   // Replace '~'s with spaces - as spaces cannot be sent via Max and are replaced with '~'
-  replace_char(new_ssid, '\0', '~');
-  replace_char(new_pass, '\0', '~');
+  replace_char(new_ssid, ' ', '~');
+  replace_char(new_pass, ' ', '~');
 
   #if DEBUG == 1
     Serial.print("received command to connect to ");

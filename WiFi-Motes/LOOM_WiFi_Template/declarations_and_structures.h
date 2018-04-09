@@ -30,8 +30,9 @@
 #ifdef is_lora
 	#include <RH_RF95.h>
 	#include <RHReliableDatagram.h>
+  
 	#include <OSCBundle.h>
-	
+	#define LORA_MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN    //Defaults to 251 as 4 bytes are used for the header.
 	#define RFM95_CS 8
 	#define RFM95_RST 4
 	#ifdef is_m0
