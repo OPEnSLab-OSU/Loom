@@ -21,7 +21,9 @@ void package_data(OSCBundle *bndl, struct SensorList data, int sensor_number) {
     msg->add("IDtag").add("Decagon" STR(INSTANCE_NUM));
     msg->add("Instance").add((int32_t)sensor_number);
     msg->add("SensorType").add("GS3");
-    //msg->add("Timestamp").add(TimeStamp);
+#ifdef RTC3231
+    msg->add("Timestamp").add(TimeStamp);
+#endif //RTC3231
     msg->add("BatVolt").add((float)measuredvbat);
     msg->add("VWC").add((float)data.readings[sensor_number][0]);
     msg->add("Temp").add((float)data.readings[sensor_number][1]);
@@ -31,7 +33,9 @@ void package_data(OSCBundle *bndl, struct SensorList data, int sensor_number) {
     msg->add("IDtag").add("Decagon" STR(INSTANCE_NUM));
     msg->add("Instance").add((int32_t)sensor_number);
     msg->add("SensorType").add("5TM");
-    //msg->add("Timestamp").add(TimeStamp);
+#ifdef RTC3231
+    msg->add("Timestamp").add(TimeStamp);
+#endif //RTC3231
     msg->add("BatVolt").add((float)measuredvbat);
     msg->add("VWC").add((float)data.readings[sensor_number][0]);
     msg->add("Temp").add((float)data.readings[sensor_number][1]);
