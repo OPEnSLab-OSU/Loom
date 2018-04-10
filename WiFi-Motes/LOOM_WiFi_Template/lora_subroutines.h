@@ -194,3 +194,29 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
 		}
 	}
 #endif
+
+#ifdef is_hub
+  void sendToPushingBox(int num_fields, char *server_name, char *devid) {
+    client.stop();
+    if (client.connect(server_name, 80)) {  
+      client.print("GET /pushingbox?devid="); client.print(devid); 
+      for(int i = 0; i < num_fields; i++) {
+        if((i % 2) == 0)
+          client.print("&key" + String(i/2) + "=");
+        else
+          client.print("&val" + String(i/2) + "=");
+        client.print(data[i]);
+      }
+      client.println(" HTTP/1.1");
+      client.print("Host: "); client.println(serverName);
+      client.println("User-Agent: Arduino");
+      client.println();
+     
+    } 
+    #if DEBUG == 1
+      else {
+        Serial.println("connection failed");
+      }
+    #endif
+  }
+#endif
