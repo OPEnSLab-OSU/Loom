@@ -26,7 +26,7 @@
 	#define RF95_FREQ 915.0								//Hardware specific, Tx must match Rx
 	
 	#define is_hub
-	#define is_node
+//#define is_node
 	
 	#ifdef is_hub
 	  #define NUM_FIELDS 16			//Maximum number of fields accepted by the PushingBox Scenario

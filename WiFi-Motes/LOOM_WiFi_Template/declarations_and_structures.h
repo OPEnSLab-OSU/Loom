@@ -43,12 +43,12 @@
 	#endif
 	
 	#ifdef is_hub
-		#include <Ethernet2.h>
-		byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
-		const char DEVID[] = "v25CCAAB0F709665"; 								//Required by PushingBox, specific to each scenario
-		char serverName[] = "api.pushingbox.com";
+		#include <Ethernet2.h> 
+    String data[NUM_FIELDS];
+		char device_id[] = "v25CCAAB0F709665"; 								//Required by PushingBox, specific to each scenario
+		char server_name[] = "api.pushingbox.com";
 		IPAddress ip(128,193,56,138);
-		String data[NUM_FIELDS];
+    byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
 	#endif
 	
 	RH_RF95 rf95(RFM95_CS, RFM95_INT);

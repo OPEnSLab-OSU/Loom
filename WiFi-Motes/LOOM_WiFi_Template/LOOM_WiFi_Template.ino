@@ -42,7 +42,7 @@ void setup() {
   //Initialize serial and wait for port to open:
   #if DEBUG == 1
     Serial.begin(9600);
-    while(!Serial);          // Ensure Serial is ready to go before anything happens in DEBUG mode.
+    while(!Serial);       ..3333   // Ensure Serial is ready to go before anything happens in DEBUG mode.
   #endif
  
   #ifdef is_i2c
@@ -108,7 +108,7 @@ void loop() {
             }
           }
         } 
-//        sendToPushingBox();
+        sendToPushingBox(int(NUM_FIELDS), server_name, device_id);
         #if DEBUG == 1
           print_bundle(&bndl);
         #endif
