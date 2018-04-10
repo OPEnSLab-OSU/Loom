@@ -97,7 +97,7 @@ RHReliableDatagram manager(rf95, INSTANCE_NUM);
 
 // ===== RTC Initializations =====
 
-#define RTC3231
+//#define RTC3231
 
 #ifdef RTC3231
 RTC_DS3231 RTC_DS;
