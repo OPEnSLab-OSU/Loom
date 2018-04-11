@@ -11,7 +11,7 @@
 #define RFM95_INT 3 //Use this for the M0
 //#define RFM95_INT 7 //Use this for the 32u4
 
-#define SERVER_ADDRESS 2
+#define SERVER_ADDRESS 0
 #define NUM_FIELDS 16
 #define MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN
 
@@ -27,7 +27,6 @@ char serverName[] = "api.pushingbox.com";
 //IPAddress ip(10, 248, 55, 154);
 //Use this for OPEnS Lab
 IPAddress ip(128,193,56,138);
-
 
 EthernetClient client;
 String data[NUM_FIELDS];
@@ -96,7 +95,7 @@ void loop() {
           }
         }
       } 
-      sendToPushingBox();
+      //sendToPushingBox();
       Serial.println("");
     }
   }
