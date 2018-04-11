@@ -44,11 +44,17 @@
 	
 	#ifdef is_hub
 		#include <Ethernet2.h> 
+    EthernetClient client;
     String data[NUM_FIELDS];
 		char device_id[] = "v25CCAAB0F709665"; 								//Required by PushingBox, specific to each scenario
 		char server_name[] = "api.pushingbox.com";
-		IPAddress ip(128,193,56,138);
-    byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
+		//Ethernet / Hub Info
+    //byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+    //IPAddress ip(10, 248, 55, 154);
+
+    //Use this for OPEnS Lab
+    byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
+    IPAddress ip(128,193,56,138);
 	#endif
 	
 	RH_RF95 rf95(RFM95_CS, RFM95_INT);

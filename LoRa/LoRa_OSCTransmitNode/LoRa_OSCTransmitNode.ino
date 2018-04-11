@@ -63,15 +63,15 @@ void setup() {
 
 void loop() {
   OSCBundle bndl;
-  /*bndl.add(IDString).add("Date").add("3/6/2018").add("IDtag").add((int32_t) INSTANCE_NUM)
+  bndl.add(IDString).add("Date").add("3/6/2018").add("IDtag").add((int32_t) INSTANCE_NUM)
   .add("TimeStamp").add("2018").add("TempC").add((int32_t)32).add("Humidity").add((float)46.4)
   .add("LoadCell").add((int32_t)1000).add("IRLight").add((int32_t)2000).add("FullLight").add((int32_t)3000)
-  .add("BatVolt").add((float)4.2);*/
+  .add("BatVolt").add((float)4.2);
 
   char message[RH_RF95_MAX_MESSAGE_LEN];
   memset(message, '\0', sizeof(message));
-  sendString.toCharArray(message, sizeof(message)-1);
-  //get_OSC_string(&bndl, message);
+  //sendString.toCharArray(message, sizeof(message)-1);
+  get_OSC_string(&bndl, message);
 
   #if DEBUG == 1 
     for(int i = 0; i < MESSAGE_SIZE; i++) {
