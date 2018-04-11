@@ -7,7 +7,6 @@ union data_value {
 };
 
 
-
 void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
   #ifdef is_hub
 		pinMode(8, INPUT_PULLUP);
@@ -44,6 +43,9 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
     Serial.println("Setting power...");
   #endif
   rf95->setTxPower(23, false);
+  #if DEBUG == 1
+    Serial.println("LoRa setup finished!");
+  #endif
 }
 
 
@@ -208,7 +210,7 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
         client.print(data[i]);
       }
       client.println(" HTTP/1.1");
-      client.print("Host: "); client.println(serverName);
+      client.print("Host: "); client.println(server_name);
       client.println("User-Agent: Arduino");
       client.println();
      

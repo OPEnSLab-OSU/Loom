@@ -15,8 +15,6 @@
 #include "config.h"
 #include "preamble.h"
 
-
-
 // -------------------------------------------------------------
 //                            SETUP 
 // -------------------------------------------------------------
@@ -42,7 +40,7 @@ void setup() {
   //Initialize serial and wait for port to open:
   #if DEBUG == 1
     Serial.begin(9600);
-    while(!Serial);       ..3333   // Ensure Serial is ready to go before anything happens in DEBUG mode.
+    while(!Serial);        // Ensure Serial is ready to go before anything happens in DEBUG mode.
   #endif
  
   #ifdef is_i2c
@@ -60,8 +58,6 @@ void setup() {
   #endif
   
 } // end of setup()
-
-
 
 // -------------------------------------------------------------
 //                          MAIN LOOP
@@ -81,42 +77,67 @@ void loop() {
     check_button_held();      
   #endif
 
-
-
   #ifdef is_lora
-    if (manager.available()) {
-      uint8_t len = LORA_MESSAGE_SIZE;
-      uint8_t from;
-      uint8_t buf[LORA_MESSAGE_SIZE];
-      memset(buf, '\0', LORA_MESSAGE_SIZE);
-      if (manager.recvfromAck(buf, &len, &from)) {
-        if (((char)(buf[0])) == '/') {
-          get_OSC_bundle((char*)buf, &bndl); 
-          for(int i = 0; i < NUM_FIELDS; i++)
-            data[i] = get_data_value(bndl.getOSCMessage(0), i);
-        } else {
-          char str[LORA_MESSAGE_SIZE];
-          String((char*)buf).toCharArray(str, sizeof(str)-1);
-          char *token;
-          char *savept = str;
-          String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "lightIR", "lightFull", "vbat"};
-          for(int i = 0; i < NUM_FIELDS; i+=2) {
-            token = strtok_r(savept, ",", &savept);
-            if(token != NULL) {
-              data[i] = cols[i/2];
-              data[i+1] = String(token);
+    #ifdef is_hub
+      if (manager.available()) {
+        uint8_t len = LORA_MESSAGE_SIZE;
+        uint8_t from;
+        uint8_t buf[LORA_MESSAGE_SIZE];
+        memset(buf, '\0', LORA_MESSAGE_SIZE);
+        if (manager.recvfromAck(buf, &len, &from)) {
+          if (((char)(buf[0])) == '/') {
+            get_OSC_bundle((char*)buf, &bndl); 
+            for(int i = 0; i < NUM_FIELDS; i++)
+              data[i] = get_data_value(bndl.getOSCMessage(0), i);
+          } else {
+            char str[LORA_MESSAGE_SIZE];
+            String((char*)buf).toCharArray(str, sizeof(str)-1);
+            char *token;
+            char *savept = str;
+            String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "lightIR", "lightFull", "vbat"};
+            for(int i = 0; i < NUM_FIELDS; i+=2) {
+              token = strtok_r(savept, ",", &savept);
+              if(token != NULL) {
+                data[i] = cols[i/2];
+                data[i+1] = String(token);
+              }
             }
-          }
-        } 
-        sendToPushingBox(int(NUM_FIELDS), server_name, device_id);
-        #if DEBUG == 1
-          print_bundle(&bndl);
-        #endif
+          } 
+          #if DEBUG == 1
+            print_bundle(&bndl);
+          #endif
+          sendToPushingBox(int(NUM_FIELDS), server_name, device_id);
+        }
       }
-    }
+    #endif //is_hub
+
+    #ifdef is_node
+      bndl.add(PacketHeaderString).add("Date").add("3/6/2018").add("IDtag").add((int32_t) INIT_INST)
+      .add("TimeStamp").add("2018").add("TempC").add((int32_t)32).add("Humidity").add((float)46.4)
+      .add("LoadCell").add((int32_t)1000).add("IRLight").add((int32_t)2000).add("FullLight").add((int32_t)3000)
+      .add("BatVolt").add((float)4.2);
+    
+      char message[RH_RF95_MAX_MESSAGE_LEN];
+      memset(message, '\0', sizeof(message));
+      get_OSC_string(&bndl, message);
+    
+      #if DEBUG == 1
+        Serial.println(message);
+        Serial.print("Message length: ");
+        Serial.println(strlen(message));
+        Serial.print("Max message length: ");
+        Serial.println(RH_RF95_MAX_MESSAGE_LEN);
+        Serial.print("Sending...");
+      #endif
+       
+      if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS))
+        Serial.println("ok");
+      else
+        Serial.println("failed");
+    
+      delay(10000);
+    #endif //is_node
   #endif // is_lora
-
-
 
   // HANDLE BUNDLE
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
