@@ -9,7 +9,7 @@
 #define VBATPIN A7                  // Pin to check for battery voltage
 
 #ifndef is_relay
-  #define transmit_butt 10          // Using on-board button, specify attached pin, transmitting
+  #define button 10          // Using on-board button, specify attached pin, transmitting
 #endif
 
 
@@ -69,7 +69,7 @@
 		#define RFM95_INT 7 //Use this for the 32u4
 	#endif
 	
-	#ifdef is_hub
+	#if lora_device_type == 0
 		#include <Ethernet2.h> 
     EthernetClient client;
     String data[NUM_FIELDS];

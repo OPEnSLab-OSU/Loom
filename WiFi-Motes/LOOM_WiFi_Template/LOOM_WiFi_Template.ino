@@ -39,12 +39,12 @@ void loop() {
   #endif
 
   // Reset to AP mode if button held for ~5 seconds
-  #if defined(transmit_butt) && defined(is_wifi)
+  #if defined(button) && defined(is_wifi)
     check_button_held();      
   #endif
 
   #ifdef is_lora
-    #ifdef is_hub
+    #if lora_device_type == 0
       if (manager.available()) {
         uint8_t len = LORA_MESSAGE_SIZE;
         uint8_t from;
@@ -77,7 +77,7 @@ void loop() {
       }
     #endif //is_hub
 
-    #ifdef is_node
+    #if lora_device_type == 1
       bndl.add(PacketHeaderString).add("Date").add("3/6/2018").add("IDtag").add((int32_t) INIT_INST)
       .add("TimeStamp").add("2018").add("TempC").add((int32_t)32).add("Humidity").add((float)46.4)
       .add("LoadCell").add((int32_t)1000).add("IRLight").add((int32_t)2000).add("FullLight").add((int32_t)3000)
