@@ -4,16 +4,21 @@
  
   DEBUG MODE: define DEBUG as 1 or 0. If DEBUG is set, make sure the serial monitor is open; all serial calls should be wrapped in an #if DEBUG == 1 ... #endif
 
-  //ADD MORE DESCRIPTION HERE
   
  */
+
+ 
 // -------------------------------------------------------------
 // INCLUDE DECLARATIONS, STRUCTS, AND FUNCTIONS FROM OTHER FILES
 // -------------------------------------------------------------
 
-// Config has to be first
+// Config has to be first has it hold all user specified options
 #include "config.h"
+
+// Preamble includes any relevant subroutine files based on options
+// specified in the above config
 #include "preamble.h"
+
 
 // -------------------------------------------------------------
 //                            SETUP 

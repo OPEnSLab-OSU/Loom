@@ -7,13 +7,16 @@
 #define DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
 #define num_servos 1
 //#define is_relay
+#define is_wifi
+//#define is_lora
+#define is_analog 2
 
 
 //------------------------------------------------------------------------------------------------------
 // MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
 //------------------------------------------------------------------------------------------------------
 #define MEM_FLASH 0
-#define MEM_EEPROM 1
+#define MEM_EEPROM 1      // maybe do check in other files based on 0 and 1 rather than MEM_X as to eliminate these two defines
 
 #ifdef __SAMD21G18A__
 	#define is_m0
@@ -25,7 +28,6 @@
 #endif
 
 
-#define is_wifi
 #ifdef is_wifi
 	#define DEFAULT_MODE      WPA_CLIENT_MODE //AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"
@@ -33,7 +35,6 @@
 	#define INIT_PORT 9422
 #endif
 
-//#define is_lora
 #ifdef is_lora
   #define is_hub
 //#define is_node
@@ -53,7 +54,6 @@
 
 
 
-#define is_analog 2
 #define is_i2c 0x86
 #ifdef is_i2c
   #define is_mpu6050

@@ -18,6 +18,8 @@ void set_instance_num(OSCMessage &msg)
   flash_config.write(configuration);
 }
 
+
+
 // Used to route messages to the correct function
 void msg_router(OSCMessage &msg, int addrOffset) {
   #if DEBUG == 1
@@ -48,6 +50,8 @@ void msg_router(OSCMessage &msg, int addrOffset) {
   #endif
   msg.dispatch("/SetID", set_instance_num, addrOffset);
 }
+
+
 
 void init_config()
 {
@@ -93,6 +97,7 @@ void init_config()
     }
   #endif // of MEM_TYPE
 }
+
 
 
 #ifdef transmit_butt
