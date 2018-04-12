@@ -6,8 +6,8 @@ extern void switch_to_AP(OSCMessage &msg);  // Reference to externally defined f
 
 // --- SET INSTANCE NUMBER ---
 // Updates device's identifying instance number
-// Arguments:
-// Return:
+// Arguments: msg (OSC message with new instance number)
+// Return:    none
 void set_instance_num(OSCMessage &msg) 
 {
   configuration.instance_number = msg.getInt(0);
@@ -26,8 +26,9 @@ void set_instance_num(OSCMessage &msg)
 
 // --- MESSAGE ROUTER ---
 // Used to route OSC messages to the correct function to handle it
-// Arguments:
-// Return:
+// Arguments: msg (OSC message to route subroutine that handles it), 
+//   addrOffset (used to determine where to start check of message header string)
+// Return:    none
 void msg_router(OSCMessage &msg, int addrOffset) {
   #if DEBUG == 1
     char buffer[100];
@@ -61,9 +62,10 @@ void msg_router(OSCMessage &msg, int addrOffset) {
 
 
 // --- INITIAL CONFIG ---
-// 
-// Arguments:
-// Return:
+// Handles configuration of reading device config from flash (if applicable)
+//   else uses config.h specific settings, and writes these to flash
+// Arguments: none
+// Return:    none
 void init_config()
 {
   #if MEM_TYPE == MEM_FLASH
@@ -112,9 +114,10 @@ void init_config()
 
 
 // --- CHECK BUTTON HELD ---
-// 
-// Arguments:
-// Return:
+// Checked each iteration of main loop if the device's button has been held
+// If so, restart in access point mode
+// Arguments: none
+// Return:    none
 #ifdef button
 void check_button_held()
 {
@@ -142,9 +145,10 @@ void check_button_held()
 
 
 // --- LOOM BEGIN ---
-// 
-// Arguments:
-// Return:
+// Called by setup(), handles calling of any LOOM specific individual device setups
+// Starts Wifi or Lora and serial if debugging prints are on
+// Arguments: none
+// Return:    none 
 void LOOM_begin()
 {
   // Set the button pin mode to input

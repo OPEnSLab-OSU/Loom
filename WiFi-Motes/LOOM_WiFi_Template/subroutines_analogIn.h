@@ -1,7 +1,7 @@
 // --- READ ANALOG ---
 // Generic subroutine for reading raw sensor data with averaging
-// Arguments:
-// Return:
+// Arguments: none
+// Return:    none
 uint32_t read_analog(uint8_t chnl)
 {
   int i = num_measurements;
@@ -26,9 +26,9 @@ uint32_t read_analog(uint8_t chnl)
 
 
 // --- MEASURE ANALOG ---
-// 
-// Arguments:
-// Return:
+// Gets analog reading from ports and button, as enabled
+// Arguments: none
+// Return:    none
 void measure_analog(void)
 { 
   // Get reading from relevant ports and the button if enabled          

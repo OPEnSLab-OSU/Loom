@@ -177,7 +177,7 @@
   #elif (num_servos==8)
     int predeg[8] = {0, 0, 0, 0, 0, 0, 0, 0};
     double pre_pulselength[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-  #endif
+  #endif // of if (num_servos==1) 
 #endif // of num_servos
 
 
@@ -196,6 +196,7 @@ char addressString[255];
 
 
 // Define struct to hold DEVICE CONFIG SETTINGS
+// The structure that gets stored in non-volatile memory to keep settings
 struct config_t {
   byte        checksum;                 // Value is changed when flash memory is written to.
   uint8_t     instance_number;          // Default 0, should be set on startup from a patch
@@ -221,10 +222,9 @@ struct config_t {
   
 }; //end of config_t
 
-// Instance of config_t
+
+// Instance of config_t to holding device current configuration
 struct config_t configuration;
-
-
 
 
 
