@@ -1,6 +1,6 @@
 
 
-// LORA SETUP
+// --- LORA SETUP ---
 // 
 // Arguments:
 // Return:
@@ -47,7 +47,7 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
 }
 
 
-// GET OSC STRING
+// --- GET OSC STRING ---
 // 
 // Arguments:
 // Return:
@@ -105,7 +105,7 @@ void get_OSC_string(OSCBundle *bndl, char *osc_string) {
 
 
 
-// GET OSC BUNDLE
+// --- GET OSC BUNDLE ---
 // 
 // Arguments:
 // Return:
@@ -146,7 +146,7 @@ void get_OSC_bundle(char *string, OSCBundle* bndl) {
 
 
 
-// PRINT BUNDLE
+// --- PRINT BUNDLE ---
 // 
 // Arguments:
 // Return:
@@ -191,7 +191,7 @@ void print_bundle(OSCBundle *bndl) {
 
 
 
-// GET DATA VALUE
+// --- GET DATA VALUE ---
 // 
 // Arguments:
 // Return:
@@ -221,7 +221,7 @@ String get_data_value(OSCMessage* msg, int pos) {
 
 
 
-// SEND TO PUSHINGBOX
+// --- SEND TO PUSHINGBOX ---
 // 
 // Arguments:
 // Return:

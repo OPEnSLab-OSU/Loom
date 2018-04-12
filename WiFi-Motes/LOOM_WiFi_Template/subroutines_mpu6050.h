@@ -65,7 +65,7 @@ int giro_deadzone = 1;   // Giro error allowed, make it lower to get more precis
 
 
 
-// I2C SETUP
+// --- I2C SETUP ---
 // Called by main setup
 // Arguments:
 // Return:
@@ -154,7 +154,7 @@ void i2c_setup()
 
 
 
-// MEASURE MPU6050
+// --- MEASURE MPU6050 ---
 // Generic subroutine for reading MPU6050 i2c Data
 // Arguments:
 // Return:
@@ -307,7 +307,7 @@ uint32_t measure_mpu6050(void)
 
 
 
-// MEAN SENSOR MEASUREMENTS
+// --- MEAN SENSOR MEASUREMENTS ---
 // 
 // Arguments:
 // Return:
@@ -341,7 +341,7 @@ void meansensors()
 
 
 
-// CALIBRATION
+// --- CALIBRATION ---
 // 
 // Arguments:
 // Return:
@@ -394,7 +394,7 @@ void calibration() {
 
 
 
-// UPD MPU6050
+// --- UPD MPU6050 ---
 // 
 // Arguments:
 // Return:
@@ -473,7 +473,7 @@ void udp_mpu6050(void)
 
 
 
-// CALIBRATE MPU6050
+// --- CALIBRATE MPU6050 ---
 // 
 // Arguments:
 // Return:
@@ -542,7 +542,7 @@ void calMPU6050()
 
 
 
-// CALIBRATE MPU6050 OSC
+// --- CALIBRATE MPU6050 OSC ---
 // 
 // Arguments:
 // Return:

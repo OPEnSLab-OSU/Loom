@@ -1,4 +1,4 @@
-// RELAY SETUP
+// --- RELAY SETUP ---
 // Called by main setup
 // Arguments:
 // Return:
@@ -11,7 +11,7 @@ void relay_setup()
 }
 
 
-// HANDLE RELAY
+// --- HANDLE RELAY ---
 // Updates stored state of relays
 // Arguments:
 // Return:
@@ -30,7 +30,7 @@ void handleRelay(OSCMessage &msg)
 }
 
 
-// WRTIE RELAY STATES
+// --- WRTIE RELAY STATES ---
 // Writes updated relay states to the physical relays
 // Arguments:
 // Return:

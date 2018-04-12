@@ -1,4 +1,4 @@
-// READ ANALOG
+// --- READ ANALOG ---
 // Generic subroutine for reading raw sensor data with averaging
 // Arguments:
 // Return:
@@ -25,7 +25,7 @@ uint32_t read_analog(uint8_t chnl)
 } 
 
 
-// MEASURE ANALOG
+// --- MEASURE ANALOG ---
 // 
 // Arguments:
 // Return:
