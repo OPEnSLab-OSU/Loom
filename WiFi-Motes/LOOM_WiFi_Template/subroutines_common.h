@@ -1,6 +1,10 @@
 
 extern void switch_to_AP(OSCMessage &msg);
-//extern transmit_butt;
+
+
+
+
+
 
 // Update device's instance number
 void set_instance_num(OSCMessage &msg) 
@@ -118,6 +122,45 @@ void check_button_held()
 #endif
 
 
+void LOOM_begin()
+{
+  #ifdef transmit_butt
+    pinMode(transmit_butt, INPUT_PULLUP); // Set the transmit_butt pin mode to input
+  #endif
+
+
+  // Actuator-specific setups
+  #ifdef is_neopixel
+    neopixel_setup();
+  #endif
+  #if num_servos > 0
+    servo_setup();
+  #endif
+  #ifdef is_relay
+    relay_setup();
+  #endif
+  
+  //Initialize serial and wait for port to open:
+  #if DEBUG == 1
+    Serial.begin(9600);
+    while(!Serial);        // Ensure Serial is ready to go before anything happens in DEBUG mode.
+  #endif
+ 
+  #ifdef is_i2c
+    i2c_setup();
+  #endif
+
+  init_config();
+  
+  #ifdef is_wifi
+    wifi_setup();
+  #endif
+
+  #ifdef is_lora
+    lora_setup(&rf95, &manager);
+  #endif
+  
+}
 
 
 

@@ -3,6 +3,11 @@
 #define INIT_INST 2
 
 
+//--OPTIONS--//
+#define DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
+#define num_servos 1
+//#define is_relay
+
 
 //------------------------------------------------------------------------------------------------------
 // MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
@@ -46,12 +51,6 @@
   #endif
 #endif
 
-//--OPTIONS--//
-#ifndef DEBUG
-  #define DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
-#endif
-
-#define num_servos 1
 
 
 #define is_analog 2
@@ -75,7 +74,6 @@
 
 
 
-//#define is_relay
 
 
 //#define is_sleep_period 50          // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval

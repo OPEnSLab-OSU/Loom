@@ -87,13 +87,19 @@
   WiFiUDP      Udp;
   WiFiServer   server(80);
   int status = WL_IDLE_STATUS;
+
   
   // Global variables to handle changes to WiFi ssid and password 
   char new_ssid[32];
   char new_pass[32];
   bool ssid_set;
   bool pass_set;
+
 #endif
+
+
+
+
 
 // Common global variables
 int           led =  LED_BUILTIN;             // LED pin number
@@ -102,8 +108,12 @@ float         vbat = 3.3;                     // Place to save measured battery 
 char          packetBuffer[255];              // Buffer to hold incoming packet
 char          ReplyBuffer[] = "acknowledged"; // A string to send back
 const byte    memValidationValue = 99;
+OSCBundle bndl;
 OSCErrorCode  error;                          // Hold errors from OSC
 uint32_t      button_timer;                   // For time button has been held
+char addressString[255];
+
+
 
 // Define struct to hold DEVICE CONFIG SETTINGS
 struct config_t {
