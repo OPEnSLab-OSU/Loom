@@ -5,26 +5,26 @@
 	#include <SPI.h>
 #endif
 #ifdef is_analog
-  #include "analogIn_subroutines.h"
+  #include "subroutines_analogIn.h"
 #endif
 #ifdef is_i2c
-  #include "mpu6050_subroutines.h"
+  #include "subroutines_mpu6050.h"
 #endif
 #ifdef is_neopixel
-  #include "neopixel_subroutines.h"
+  #include "subroutines_neopixel.h"
 #endif
 #ifdef is_servo  
-  #include "servo_subroutines.h"
+  #include "subroutines_servo.h"
 #endif
 #ifdef is_relay
-  #include "relay_subroutines.h"
+  #include "subroutines_relay.h"
 #endif
 #ifdef is_wifi
-	#include "wifi_subroutines.h"
+	#include "subroutines_wifi.h"
 #endif
 #ifdef is_lora
-	#include "lora_subroutines.h"
+	#include "subroutines_lora.h"
 #endif
 
 // These may refer to functions in above headers
-#include "common_subroutines.h"
+#include "subroutines_common.h"
