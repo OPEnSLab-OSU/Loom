@@ -108,6 +108,13 @@
 #endif //of is_lora
 
 
+#ifdef is_relay
+  #define RELAY_PIN0 5
+  #define RELAY_PIN1 6
+  
+  // Array to hold relay states (on/off)
+  bool relay_on[2];
+#endif // of is_relay
 
 
 
@@ -151,9 +158,10 @@ struct config_t {
   
 }; //end of config_t
 
-
 // Instance of config_t
 struct config_t configuration;
+
+
 
 
 
