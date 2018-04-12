@@ -1,3 +1,15 @@
+// Pin names, Do not change
+//#define A0     14 
+//#define A1     15 
+//#define A2     16
+
+#define VBATPIN A7                  // Pin to check for battery voltage
+
+#ifndef is_relay
+  #define transmit_butt 10          // Using on-board button, specify attached pin, transmitting
+#endif
+
+
 
 
 #ifdef is_analog
@@ -61,10 +73,12 @@
 	RHReliableDatagram manager(rf95, SERVER_ADDRESS);
 #endif
 
+
 // Packet header creation macro
 #define STR_(x) #x                // Helper function
 #define STR(x) STR_(x)            // To concatenate a predefined number to a string literal, use STR(x)
 #define PacketHeaderString STR(/) FAMILY STR(/) DEVICE // Results in a single string, i.e. /LOOM/Device. the full prefix sent to this device should be /LOOM/Device#, but the number is parsed in the OSC bundle routing function
+
 
 #ifdef is_wifi
 	#define AP_NAME   STR(FAMILY) STR(DEVICE) STR(INIT_INST)
