@@ -1,6 +1,3 @@
-// START OF SERVO FUNCTIONS AND DECLARATIONS
-//#ifdef is_servo
-
 
 #include <Adafruit_PWMServoDriver.h>
 
@@ -87,9 +84,5 @@ void set_servo(OSCMessage &msg)
   
   set_servo_degree(set_degree, servo_num);
 }
-
-
-//#endif //END OF SERVO FUNCTIONS AND DECLARATIONS
-
 
 

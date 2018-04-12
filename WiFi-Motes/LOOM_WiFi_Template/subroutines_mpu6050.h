@@ -1,13 +1,3 @@
-//------------------------------------------------------------------------------------------------------
-// DEBUG MODE: Set to 1 if you want to see serial printouts, else, set to 0 for field use to save memory
-//------------------------------------------------------------------------------------------------------
-#ifndef DEBUG
-  #define DEBUG 0
-#endif
-
-
-
-//#ifdef is_i2c
 
 
 // Include libraries for serial and i2c devices
@@ -561,10 +551,6 @@ void calMPU6050_OSC(OSCMessage &msg)
   #endif
 }
 #endif
-
-
-
-//#endif // Send serial i2c subroutines
 
 
 
