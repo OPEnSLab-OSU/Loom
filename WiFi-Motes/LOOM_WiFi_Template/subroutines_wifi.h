@@ -1,5 +1,3 @@
-
-
 // Function prototypes
 bool connect_to_WPA(char ssid[], char pass[]);
 void start_AP();
@@ -88,9 +86,8 @@ void printWiFiStatus()
 
 
 
-/* Start AP
-   Device will setup wifi access point for one computer to connect to
-*/
+// Start AP
+// Device will setup wifi access point for one computer to connect to
 void start_AP() 
 {
   #if DEBUG == 1
@@ -124,10 +121,8 @@ void start_AP()
 
 
 
-/*
-   Connect to WPA
-   Returns true is connection successful, false on failure (will revert to AP mode)
-*/
+// Connect to WPA
+// Returns true is connection successful, false on failure (will revert to AP mode)
 bool connect_to_WPA(char ssid[], char pass[]) 
 {
   status = WiFi.begin(ssid, pass);
@@ -176,7 +171,6 @@ bool connect_to_WPA(char ssid[], char pass[])
 
 // Switch to AP mode upon OSC command to do so
 void switch_to_AP(OSCMessage &msg) 
-//void switch_to_AP() 
 {
   if (configuration.wifi_mode != AP_MODE) {
     #if DEBUG == 1
@@ -232,8 +226,8 @@ void replace_char(char *str, char orig, char rep) {
 void connect_to_new_network()
 {
   // Replace '~'s with spaces - as spaces cannot be sent via Max and are replaced with '~'
-  replace_char(new_ssid, ' ', '~');
-  replace_char(new_pass, ' ', '~');
+  replace_char(new_ssid, '~', ' ');
+  replace_char(new_pass, '~', ' ');
 
   #if DEBUG == 1
     Serial.print("received command to connect to ");
@@ -278,8 +272,6 @@ void set_pass(OSCMessage &msg)
 // to send to if it only had device instance number
 void broadcastIP(OSCMessage &msg) {
   configuration.ip = WiFi.localIP();
-  char addressString[255];
-  OSCBundle bndl;
 
   sprintf(addressString, "%s%s", configuration.packet_header_string, "/NewIP");
   bndl.add(addressString).add((int32_t)configuration.ip[0])

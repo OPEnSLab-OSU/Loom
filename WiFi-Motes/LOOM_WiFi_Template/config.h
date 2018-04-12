@@ -5,28 +5,16 @@
 
 //--OPTIONS--//
 #define DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
+
+#define is_ishield
 #define num_servos 0
 //#define is_relay
-//#define is_wifi
-#define is_lora
-//#define is_analog 2
+#define is_wifi
+//#define is_lora
+#define is_analog 2
 
 
-//------------------------------------------------------------------------------------------------------
-// MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
-//------------------------------------------------------------------------------------------------------
-#define MEM_FLASH 0
-#define MEM_EEPROM 1      // maybe do check in other files based on 0 and 1 rather than MEM_X as to eliminate these two defines
-
-#ifdef __SAMD21G18A__
-	#define is_m0
-  #define MEM_TYPE MEM_FLASH
-#endif
-#ifdef __AVR_ATmega32U4__
-	#define is_32u4
-  #define MEM_TYPE MEM_EEPROM
-#endif
-
+ 
 
 #ifdef is_wifi
 	#define DEFAULT_MODE      WPA_CLIENT_MODE //AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
@@ -39,22 +27,16 @@
 
 // LoRa Device Type
 // 0: Hub, 1: Node, 2 = Repeater
-#define lora_node_type 0
-
+#define lora_device_type 0
 
 #ifdef is_lora
-//  //#define is_hub
-//#define is_node
-
   #define SERVER_ADDRESS 0					//Use 0-9 for SERVER_ADDRESSes
   #define RF95_FREQ 915.0           //Hardware specific, Tx must match Rx
-
   
   #if lora_device_type == 1
-    #define CLIENT_ADDRESS 10							//10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
-  #endif																	//10-19 for 0, 20 - 29 for 1, etc.
-	
-	
+    #define CLIENT_ADDRESS 10       //10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
+  #endif														//10-19 for 0, 20 - 29 for 1, etc.
+  
   #if lora_device_type == 0
     #define NUM_FIELDS 16			      //Maximum number of fields accepted by the PushingBox Scenario
   #endif
@@ -62,23 +44,19 @@
 
 
 
-//#define is_i2c 0x86
-#ifdef is_i2c
+#ifdef is_ishield
+  #define is_neopixel       // Toggle based on whether Neopixels are being used
+
   #define is_mpu6050
-  #define is_neopixel
+  #define is_i2c 0x86       // For MPU6050
+
+  #ifdef is_neopixel
+    #define NEO_0 false
+    #define NEO_1 false
+    #define NEO_2 true
+  #endif  
+
 #endif
-
-#ifdef is_neopixel
-  #define NEO_0 false
-  #define NEO_1 false
-  #define NEO_2 true
-#endif
-
-
-// Dont quite recall how Chet wanted this
-//#ifdef is_mpu6050
-//  #define is_i2c 0x86
-//#endif
 
 
 

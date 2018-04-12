@@ -55,7 +55,7 @@ void get_OSC_string(OSCBundle *bndl, char *osc_string) {
 	char data_type;
 	data_value value;
 	int addr_len = 40;
-	OSCMessage* msg;                                  // Can these be added to declarations file or merged with similar vars?
+	OSCMessage* msg;                                         // Can these be added to declarations file or merged with similar vars?
 	char addr_buf[addr_len];
 
 	memset(osc_string, '\0', sizeof(osc_string));

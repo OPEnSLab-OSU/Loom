@@ -6,10 +6,10 @@
 #define PacketHeaderString STR(/) FAMILY STR(/) DEVICE // Results in a single string, i.e. /LOOM/Device. the full prefix sent to this device should be /LOOM/Device#, but the number is parsed in the OSC bundle routing function
 
 
-#define VBATPIN A7                  // Pin to check for battery voltage
+#define VBATPIN A7                // Pin to check for battery voltage
 
 #ifndef is_relay
-  #define button 10          // Using on-board button, specify attached pin, transmitting
+  #define button 10               // Using on-board button, specify attached pin, transmitting
 #endif
 
 
@@ -25,7 +25,7 @@
 
 
 #ifdef is_sleep_interrupt
-  #include <LowPower.h>           //Include this if transmitting on pin interrupt
+  #include <LowPower.h>           // Include this if transmitting on pin interrupt
 #endif
 
 
@@ -59,21 +59,21 @@
 	#include <RH_RF95.h>
 	#include <RHReliableDatagram.h>
   
-	#define LORA_MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN    //Defaults to 251 as 4 bytes are used for the header.
+	#define LORA_MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN       // Defaults to 251 as 4 bytes are used for the header.
 	#define RFM95_CS 8
 	#define RFM95_RST 4
 	#ifdef is_m0
-		#define RFM95_INT 3 //Use this for the M0
+		#define RFM95_INT 3     // Use this for the M0
 	#endif
 	#ifdef is_32u4
-		#define RFM95_INT 7 //Use this for the 32u4
+		#define RFM95_INT 7     // Use this for the 32u4
 	#endif
 	
 	#if lora_device_type == 0
 		#include <Ethernet2.h> 
     EthernetClient client;
     String data[NUM_FIELDS];
-		char device_id[] = "v25CCAAB0F709665"; 								//Required by PushingBox, specific to each scenario
+		char device_id[] = "v25CCAAB0F709665"; 								// Required by PushingBox, specific to each scenario
 		char server_name[] = "api.pushingbox.com";
 		//Ethernet / Hub Info
     //byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
@@ -86,7 +86,7 @@
 	
 	RH_RF95 rf95(RFM95_CS, RFM95_INT);
 	RHReliableDatagram manager(rf95, SERVER_ADDRESS);
-#endif //or is_lora
+#endif //of is_lora
 
 
 
@@ -135,6 +135,25 @@ struct config_t {
 
 // Instance of config_t
 struct config_t configuration;
+
+
+
+
+//------------------------------------------------------------------------------------------------------
+// MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
+//------------------------------------------------------------------------------------------------------
+#define MEM_FLASH 0
+#define MEM_EEPROM 1  
+
+
+#ifdef __SAMD21G18A__
+  #define is_m0
+  #define MEM_TYPE MEM_FLASH
+#endif
+#ifdef __AVR_ATmega32U4__
+  #define is_32u4
+  #define MEM_TYPE MEM_EEPROM
+#endif
 
 
 #if MEM_TYPE == MEM_FLASH

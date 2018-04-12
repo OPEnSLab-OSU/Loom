@@ -67,15 +67,15 @@ void loop() {
                 data[i] = cols[i/2];
                 data[i+1] = String(token);
               }
-            }
-          } 
+            } // of for
+          } // of else 
           #if DEBUG == 1
             print_bundle(&bndl);
           #endif
           sendToPushingBox(int(NUM_FIELDS), server_name, device_id);
-        }
-      }
-    #endif //is_hub
+        } // of if (manager.recvfromAck(buf, &len, &from))
+      } // of if (manager.available()) 
+    #endif //of lora type is hub
 
     #if lora_device_type == 1
       bndl.add(PacketHeaderString).add("Date").add("3/6/2018").add("IDtag").add((int32_t) INIT_INST)
@@ -108,8 +108,8 @@ void loop() {
       }
     
       delay(10000);
-    #endif //is_node
-  #endif // is_lora
+    #endif // of lora type is_node
+  #endif // of is_lora 
 
 
   // HANDLE WIFI BUNDLE

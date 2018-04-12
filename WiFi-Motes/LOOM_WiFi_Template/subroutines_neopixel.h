@@ -18,7 +18,7 @@ int colorVals[3][3] = { {0, 0, 0},
 void neopixel_setup() 
 {
   for(int i = 0; i < 3; i++) {
-    if (pixel_enabled[i]){
+    if (pixel_enabled[i]) {
       pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
       pixels[i]->begin(); // This initializes the NeoPixel library.
       pixels[i]->show();  // Initialize all pixels to 'off'
