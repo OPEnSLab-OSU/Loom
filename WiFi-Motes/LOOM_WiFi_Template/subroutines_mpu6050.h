@@ -60,8 +60,6 @@ int giro_deadzone = 1;   // Giro error allowed, make it lower to get more precis
 #endif //END OF MPU6050 FUNCTIONS AND DECLARATIONS
 
 
-//#endif //END OF I2C FUNCTIONS AND DECLARATIONS
-
 
 
 
@@ -155,11 +153,6 @@ void i2c_setup()
 
 
 
-//If using serial i2c:
-//#ifdef is_i2c
-// *** i2c subroutines ***
-
-
 // Generic subroutine for reading MPU6050 i2c Data
 uint32_t measure_mpu6050(void)
 {
@@ -167,13 +160,9 @@ uint32_t measure_mpu6050(void)
   while (!mpuInterrupt && fifoCount < packetSize) {
     // other program behavior stuff here
     // .
-    // .
-    // .
     // if you are really paranoid you can frequently test in between other
     // stuff to see if mpuInterrupt is true, and if so, "break;" from the
     // while() loop to immediately process the MPU data
-    // .
-    // .
     // .
   }
 

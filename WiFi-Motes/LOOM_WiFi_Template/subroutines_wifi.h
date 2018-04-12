@@ -45,9 +45,8 @@ void wifi_setup()
 
 
 
-/* Print WiFi Status
-   If debug enabled, display WiFi settings / state to serial
-*/
+// Print WiFi Status
+// If debug enabled, display WiFi settings / state to serial
 void printWiFiStatus() 
 {
   #if DEBUG == 1
@@ -258,6 +257,7 @@ void connect_to_new_network()
   } 
 }
 
+
 // Updates WiFi ssid with new ssid 
 void set_ssid(OSCMessage &msg) 
 {
@@ -265,12 +265,14 @@ void set_ssid(OSCMessage &msg)
   ssid_set = true;
 }
 
+
 // Updates WiFi password with new password 
 void set_pass(OSCMessage &msg) 
 {
   msg.getString(0, new_pass, 50);
   pass_set = true;
 }
+
 
 // Broadcast IP address so that requesting computer can update IP
 // to send to if it only had device instance number
@@ -295,6 +297,7 @@ void broadcastIP(OSCMessage &msg) {
     Serial.println(configuration.ip);
   #endif
 }
+
 
 // Update device's communication port
 void set_port(OSCMessage &msg) 

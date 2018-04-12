@@ -1,4 +1,3 @@
-
 #include <Adafruit_PWMServoDriver.h>
 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
@@ -41,6 +40,7 @@ void servo_setup()
   pwm.begin();
   pwm.setPWMFreq(60);
 }
+
 
 
 // Set Servo Degree

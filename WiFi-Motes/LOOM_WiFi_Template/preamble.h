@@ -1,5 +1,6 @@
 #include "declarations_and_structures.h"
 
+
 // Using Config defines, check which headers to include
 #if DEBUG == 1
 	#include <SPI.h>
@@ -25,6 +26,7 @@
 #ifdef is_lora
 	#include "subroutines_lora.h"
 #endif
+
 
 // These may refer to functions in above headers
 #include "subroutines_common.h"
