@@ -1,10 +1,8 @@
 
-
-
 // -- SERVO SETUP --
 // Called by main setup
-// Arguments:
-// Return:
+// Arguments: none
+// Return:    none
 void servo_setup() 
 {
   pwm.begin();
@@ -14,8 +12,8 @@ void servo_setup()
 
 // -- SET SERVO DEGREE --
 // Changes specified servo (number) to provided position (degree)
-// Arguments:
-// Return:
+// Arguments: set_degree (angle to set servo to), servo_choice (which servo to set)
+// Return:    none
 void set_servo_degree(int set_degree, int servo_choice) 
 {
   uint16_t pulselength = map(set_degree, 0, 180, SERVOMIN, SERVOMAX);
@@ -40,9 +38,9 @@ void set_servo_degree(int set_degree, int servo_choice)
 
 
 // -- SET SERVO --
-// Parses OSC message for which servo and position to call set_servo_degree() with
-// Arguments:
-// Return:
+// Parses OSC message for which servo and position to call set_servo_degree() on
+// Arguments: msg (OSC message holding a servo number and angle)
+// Return:    none
 void set_servo(OSCMessage &msg) 
 {
   int servo_num  = msg.getInt(0);

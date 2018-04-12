@@ -7,8 +7,10 @@ void start_AP();
 
 // --- WIFI SETUP ---
 // Called by main setup
-// Arguments:
-// Return:
+// Sets WiFi pins, checks for shield with WiFi, 
+// starts AP mode or tries to connect to existing network
+// Arguments: none
+// Return:    none
 void wifi_setup()
 {
   // Configure pins for Adafruit ATWINC1500 Feather
@@ -47,10 +49,11 @@ void wifi_setup()
 }
 
 
+
 // --- PRINT WIFI STATUS ---
 // If debug enabled, display WiFi settings / state to serial
-// Arguments:
-// Return:
+// Arguments: none
+// Return:    none
 void printWiFiStatus() 
 {
   #if DEBUG == 1
@@ -93,9 +96,10 @@ void printWiFiStatus()
 
 
 // --- START ACCESS POINT ---
-// Device will setup wifi access point for one computer to connect to
-// Arguments:
-// Return:
+// Device will attempt to setup wifi access point that one computer to connect to
+// Called upon OSC command, button held, or connect to network failure
+// Arguments: none
+// Return:    none
 void start_AP() 
 {
   #if DEBUG == 1
@@ -129,9 +133,10 @@ void start_AP()
 
 
 // --- CONNECT TO WPA ---
-// Returns true is connection successful, false on failure (will revert to AP mode)
-// Arguments:
-// Return:
+// Device tries to connect to network with provide credentials 
+// Will revert to AP mode if this fails
+// Arguments: ssid (Wifi network name), pass (Wifi network password)
+// Return: bool (true is connection successful, false on failure )
 bool connect_to_WPA(char ssid[], char pass[]) 
 {
   status = WiFi.begin(ssid, pass);
@@ -181,8 +186,8 @@ bool connect_to_WPA(char ssid[], char pass[])
 
 // --- SWITCH TO ACCESS POINT ---
 // Switch to AP mode upon OSC command to do so
-// Arguments:
-// Return:
+// Arguments: msg (not used, only there for msg_router to work properly)
+// Return:    none
 void switch_to_AP(OSCMessage &msg) 
 {
   if (configuration.wifi_mode != AP_MODE) {
@@ -208,8 +213,8 @@ void switch_to_AP(OSCMessage &msg)
 
 // --- PRINT REMOVE MAC ADDRESS ---
 // Prints the MAC address of device connected to devices access point
-// Arguments:
-// Return:
+// Arguments: none
+// Return:    none
 void print_remote_mac_addr()
 {
   byte remoteMac[6];
@@ -234,8 +239,8 @@ void print_remote_mac_addr()
 // --- REPLACE CHARACTER ---
 // Given a string, replace all instances of 'orig' char with 'rep' char
 // Used primarily for replacing '~'s sent by Max, as it cannot send strings with spaces
-// Arguments:
-// Return:
+// Arguments: str (pointer to string to alter), orig (character to replace), rep (replacement character)
+// Return:    none
 void replace_char(char *str, char orig, char rep) {
     char *ix = str;
     while((ix = strchr(ix, orig)) != NULL) {
@@ -246,9 +251,12 @@ void replace_char(char *str, char orig, char rep) {
 
 
 // --- CONNECT TO NEW NETWORK ---
-// 
-// Arguments:
-// Return:
+// Attempt to connect WiFi network in client mode upon command to do so
+// and both ssid and password provided
+// Credentials stored in global variable
+// Reverts to AP mode upon failure
+// Arguments: none 
+// Return:    none
 void connect_to_new_network()
 {
   // Replace '~'s with spaces - as spaces cannot be sent via Max and are replaced with '~'
@@ -266,6 +274,7 @@ void connect_to_new_network()
   WiFi.disconnect();
   Udp.stop();
   WiFi.end();
+  
   // Try connecting on newly specified one
   // Will revert to AP Mode if this fails
   if(connect_to_WPA(new_ssid,new_pass)) {
@@ -280,9 +289,10 @@ void connect_to_new_network()
 
 
 // --- SET SSID ---
-// Updates WiFi ssid with new ssid 
-// Arguments:
-// Return:
+// Updates WiFi ssid global var with new ssid
+// Sets global bool to indicate this 
+// Arguments: msg (OSC message with network ssid)
+// Return:    none
 void set_ssid(OSCMessage &msg) 
 {
   msg.getString(0, new_ssid, 50);
@@ -292,9 +302,10 @@ void set_ssid(OSCMessage &msg)
 
 
 // SET PASSWORD
-// Updates WiFi password with new password 
-// Arguments:
-// Return:
+// Updates WiFi password global var with new password 
+// Sets global bool to indicate this 
+// Arguments: msg (OSC message with network password)
+// Return:    none
 void set_pass(OSCMessage &msg) 
 {
   msg.getString(0, new_pass, 50);
@@ -306,8 +317,8 @@ void set_pass(OSCMessage &msg)
 // --- BROADCAST IP ---
 // Broadcast IP address so that requesting computer can update IP
 // to send to if it only had device instance number 
-// Arguments:
-// Return:
+// Arguments: msg (OSC message with no data, only message header was needed by msg_router())
+// Return:    none
 void broadcastIP(OSCMessage &msg) {
   configuration.ip = WiFi.localIP();
 
@@ -332,8 +343,8 @@ void broadcastIP(OSCMessage &msg) {
 
 // --- SET PORT ---
 // Update device's communication port
-// Arguments:
-// Return:
+// Arguments: msg (OSC message of new port for device to communicate on)
+// Return:    none
 void set_port(OSCMessage &msg) 
 {
   #if DEBUG == 1
