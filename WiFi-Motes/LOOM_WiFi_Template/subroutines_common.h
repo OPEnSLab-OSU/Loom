@@ -100,10 +100,10 @@ void init_config()
 
 
 
-#ifdef transmit_butt
+#ifdef button
 void check_button_held()
 {
-  if ( (uint32_t)digitalRead(transmit_butt) ){
+  if ( (uint32_t)digitalRead(button) ){
       button_timer = 0;
     } else {
       #ifdef is_sleep_period
@@ -127,8 +127,8 @@ void check_button_held()
 
 void LOOM_begin()
 {
-  #ifdef transmit_butt
-    pinMode(transmit_butt, INPUT_PULLUP); // Set the transmit_butt pin mode to input
+  #ifdef button
+    pinMode(button, INPUT_PULLUP); // Set the button pin mode to input
   #endif
 
 

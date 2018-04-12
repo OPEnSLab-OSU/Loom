@@ -5,11 +5,11 @@
 
 //--OPTIONS--//
 #define DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
-#define num_servos 1
+#define num_servos 0
 //#define is_relay
-#define is_wifi
-//#define is_lora
-#define is_analog 2
+//#define is_wifi
+#define is_lora
+//#define is_analog 2
 
 
 //------------------------------------------------------------------------------------------------------
@@ -35,26 +35,34 @@
 	#define INIT_PORT 9422
 #endif
 
+
+
+// LoRa Device Type
+// 0: Hub, 1: Node, 2 = Repeater
+#define lora_node_type 0
+
+
 #ifdef is_lora
-  #define is_hub
+//  //#define is_hub
 //#define is_node
 
-  #define SERVER_ADDRESS 0							//Use 0-9 for SERVER_ADDRESSes
+  #define SERVER_ADDRESS 0					//Use 0-9 for SERVER_ADDRESSes
+  #define RF95_FREQ 915.0           //Hardware specific, Tx must match Rx
+
   
-  #ifdef is_node
+  #if lora_device_type == 1
     #define CLIENT_ADDRESS 10							//10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
   #endif																	//10-19 for 0, 20 - 29 for 1, etc.
 	
-	#define RF95_FREQ 915.0						//Hardware specific, Tx must match Rx
 	
-  #ifdef is_hub
+  #if lora_device_type == 0
     #define NUM_FIELDS 16			      //Maximum number of fields accepted by the PushingBox Scenario
   #endif
 #endif
 
 
 
-#define is_i2c 0x86
+//#define is_i2c 0x86
 #ifdef is_i2c
   #define is_mpu6050
   #define is_neopixel

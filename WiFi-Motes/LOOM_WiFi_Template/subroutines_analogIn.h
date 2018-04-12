@@ -42,9 +42,9 @@ void measure_analog(void)
     sprintf(addressString, "%s%s", configuration.packet_header_string, "/port2");
     bndl.add(addressString).add((int32_t)read_analog(2));
   #endif
-  #ifdef transmit_butt
+  #ifdef button
     sprintf(addressString, "%s%s", configuration.packet_header_string, "/butt");
-    bndl.add(addressString).add((int32_t)digitalRead(transmit_butt));
+    bndl.add(addressString).add((int32_t)digitalRead(button));
   #endif
 
   // UDP Packet
