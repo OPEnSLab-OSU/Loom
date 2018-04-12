@@ -6,12 +6,12 @@
 //--OPTIONS--//
 #define DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
 
-#define is_ishield
-#define num_servos 0
+//#define is_ishield
+//#define num_servos 0
 //#define is_relay
-#define is_wifi
-//#define is_lora
-#define is_analog 2
+//#define is_wifi
+#define is_lora
+//#define is_analog 2
 
 
  
@@ -27,19 +27,34 @@
 
 // LoRa Device Type
 // 0: Hub, 1: Node, 2 = Repeater
-#define lora_device_type 0
-
 #ifdef is_lora
+
+  #define lora_device_type 0
+  
   #define SERVER_ADDRESS 0					//Use 0-9 for SERVER_ADDRESSes
   #define RF95_FREQ 915.0           //Hardware specific, Tx must match Rx
+
+
+  #if lora_device_type == 0 // Hub
+    #define NUM_FIELDS 16            //Maximum number of fields accepted by the PushingBox Scenario
+
+    String data[NUM_FIELDS];
+    char device_id[]   = "v25CCAAB0F709665";                // Required by PushingBox, specific to each scenario
+    char server_name[] = "api.pushingbox.com";
+
+    //Use this for OPEnS Lab
+    byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
+        
+        
+    #include <Ethernet2.h>            // -- ideas on how to move this to declarations? (its needed for IPAddress but that is a user option)
+
+    IPAddress ip(128,193,56,138);
+  #endif
   
-  #if lora_device_type == 1
+  #if lora_device_type == 1 // Node
     #define CLIENT_ADDRESS 10       //10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
   #endif														//10-19 for 0, 20 - 29 for 1, etc.
   
-  #if lora_device_type == 0
-    #define NUM_FIELDS 16			      //Maximum number of fields accepted by the PushingBox Scenario
-  #endif
 #endif
 
 
