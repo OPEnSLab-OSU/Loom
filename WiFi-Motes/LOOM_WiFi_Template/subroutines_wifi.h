@@ -1,9 +1,14 @@
+
 // Function prototypes
 bool connect_to_WPA(char ssid[], char pass[]);
 void start_AP();
 
 
-// Function called by setup()
+
+// WIFI SETUP
+// Called by main setup
+// Arguments:
+// Return:
 void wifi_setup()
 {
   // Configure pins for Adafruit ATWINC1500 Feather
@@ -42,9 +47,10 @@ void wifi_setup()
 }
 
 
-
-// Print WiFi Status
+// PRINT WIFI STATUS
 // If debug enabled, display WiFi settings / state to serial
+// Arguments:
+// Return:
 void printWiFiStatus() 
 {
   #if DEBUG == 1
@@ -86,8 +92,10 @@ void printWiFiStatus()
 
 
 
-// Start AP
+// START ACCESS POINT
 // Device will setup wifi access point for one computer to connect to
+// Arguments:
+// Return:
 void start_AP() 
 {
   #if DEBUG == 1
@@ -120,9 +128,10 @@ void start_AP()
 
 
 
-
-// Connect to WPA
+// CONNECT TO WPA 
 // Returns true is connection successful, false on failure (will revert to AP mode)
+// Arguments:
+// Return:
 bool connect_to_WPA(char ssid[], char pass[]) 
 {
   status = WiFi.begin(ssid, pass);
@@ -169,7 +178,11 @@ bool connect_to_WPA(char ssid[], char pass[])
 }
 
 
+
+// SWITCH TO ACCESS POINT
 // Switch to AP mode upon OSC command to do so
+// Arguments:
+// Return:
 void switch_to_AP(OSCMessage &msg) 
 {
   if (configuration.wifi_mode != AP_MODE) {
@@ -192,7 +205,11 @@ void switch_to_AP(OSCMessage &msg)
   #endif
 }
 
+
+// PRINT REMOVE MAC ADDRESS
 // Prints the MAC address of device connected to devices access point
+// Arguments:
+// Return:
 void print_remote_mac_addr()
 {
   byte remoteMac[6];
@@ -213,8 +230,12 @@ void print_remote_mac_addr()
 }
 
 
+
+// REPLACE CHARACTER
 // Given a string, replace all instances of 'orig' char with 'rep' char
 // Used primarily for replacing '~'s sent by Max, as it cannot send strings with spaces
+// Arguments:
+// Return:
 void replace_char(char *str, char orig, char rep) {
     char *ix = str;
     while((ix = strchr(ix, orig)) != NULL) {
@@ -223,6 +244,11 @@ void replace_char(char *str, char orig, char rep) {
 }
 
 
+
+// CONNECT TO NEW NETWORK
+// 
+// Arguments:
+// Return:
 void connect_to_new_network()
 {
   // Replace '~'s with spaces - as spaces cannot be sent via Max and are replaced with '~'
@@ -252,7 +278,11 @@ void connect_to_new_network()
 }
 
 
+
+// SET SSID
 // Updates WiFi ssid with new ssid 
+// Arguments:
+// Return:
 void set_ssid(OSCMessage &msg) 
 {
   msg.getString(0, new_ssid, 50);
@@ -260,7 +290,11 @@ void set_ssid(OSCMessage &msg)
 }
 
 
+
+// SET PASSWORD
 // Updates WiFi password with new password 
+// Arguments:
+// Return:
 void set_pass(OSCMessage &msg) 
 {
   msg.getString(0, new_pass, 50);
@@ -268,8 +302,12 @@ void set_pass(OSCMessage &msg)
 }
 
 
+
+// BROADCAST IP
 // Broadcast IP address so that requesting computer can update IP
-// to send to if it only had device instance number
+// to send to if it only had device instance number 
+// Arguments:
+// Return:
 void broadcastIP(OSCMessage &msg) {
   configuration.ip = WiFi.localIP();
 
@@ -291,7 +329,11 @@ void broadcastIP(OSCMessage &msg) {
 }
 
 
+
+// SET PORT
 // Update device's communication port
+// Arguments:
+// Return:
 void set_port(OSCMessage &msg) 
 {
   #if DEBUG == 1

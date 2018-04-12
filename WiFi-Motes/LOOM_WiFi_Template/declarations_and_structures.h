@@ -81,6 +81,14 @@
 #ifdef is_lora
 	#include <RH_RF95.h>
 	#include <RHReliableDatagram.h>
+
+  #include <string.h>
+
+  union data_value {
+    int32_t i;
+    float f;
+    uint32_t u;
+  };
   
 	#define LORA_MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN       // Defaults to 251 as 4 bytes are used for the header.
 	#define RFM95_CS 8
@@ -108,6 +116,24 @@
 #endif //of is_lora
 
 
+
+#ifdef is_neopixel
+  #include <Adafruit_NeoPixel.h>
+  
+  // Neopixel Data Structures (one per Ishield port)
+  Adafruit_NeoPixel * pixels[3];
+  
+  // Based on config.h, enable Neopixel for specified ports
+  bool pixel_enabled[3] = {NEO_0, NEO_1, NEO_2};
+  
+  // Store RGB vals for up to 1 pixel per port on Ishield
+  int colorVals[3][3] = { {0, 0, 0},
+                          {0, 0, 0},
+                          {0, 0, 0}};
+#endif
+
+
+
 #ifdef is_relay
   #define RELAY_PIN0 5
   #define RELAY_PIN1 6
@@ -116,6 +142,43 @@
   bool relay_on[2];
 #endif // of is_relay
 
+
+
+
+#if num_servos > 0
+  #include <Adafruit_PWMServoDriver.h>
+  
+  Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
+  
+  #define SERVOMIN  150     // This is the 'minimum' pulse length count (out of 4096)
+  #define SERVOMAX  600     // This is the 'maximum' pulse length count (out of 4096)
+  
+  #if (num_servos==1)
+    int predeg[1] = {0};
+    double pre_pulselength[1] = {0.0};
+  #elif (num_servos==2)
+    int predeg[2] = {0, 0};
+    double pre_pulselength[2] = {0.0, 0.0};
+  #elif (num_servos==3)
+    int predeg[3] = {0, 0, 0};
+    double pre_pulselength[3] = {0.0, 0.0, 0.0};
+  #elif (num_servos==4)
+    int predeg[4] = {0, 0, 0, 0};
+    double pre_pulselength[4] = {0.0, 0.0, 0.0, 0.0};
+  #elif (num_servos==5)
+    int predeg[5] = {0, 0, 0, 0, 0};
+    double pre_pulselength[5] = {0.0, 0.0, 0.0, 0.0, 0.0};
+  #elif (num_servos==6)
+    int predeg[6] = {0, 0, 0, 0, 0, 0};
+    double pre_pulselength[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+  #elif (num_servos==7)
+    int predeg[7] = {0, 0, 0, 0, 0, 0, 0};
+    double pre_pulselength[7] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+  #elif (num_servos==8)
+    int predeg[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    double pre_pulselength[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+  #endif
+#endif // of num_servos
 
 
 // Common global variables

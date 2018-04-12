@@ -4,7 +4,10 @@ extern void switch_to_AP(OSCMessage &msg);  // Reference to externally defined f
 
 
 
-// Update device's instance number
+// SET INSTANCE NUMBER
+// Updates device's identifying instance number
+// Arguments:
+// Return:
 void set_instance_num(OSCMessage &msg) 
 {
   configuration.instance_number = msg.getInt(0);
@@ -20,7 +23,11 @@ void set_instance_num(OSCMessage &msg)
 
 
 
-// Used to route messages to the correct function
+
+// MESSAGE ROUTER
+// Used to route OSC messages to the correct function to handle it
+// Arguments:
+// Return:
 void msg_router(OSCMessage &msg, int addrOffset) {
   #if DEBUG == 1
     char buffer[100];
@@ -53,6 +60,10 @@ void msg_router(OSCMessage &msg, int addrOffset) {
 
 
 
+// INIT CONFIG
+// 
+// Arguments:
+// Return:
 void init_config()
 {
   #if MEM_TYPE == MEM_FLASH
@@ -100,6 +111,10 @@ void init_config()
 
 
 
+// CHECK BUTTON HELD
+// 
+// Arguments:
+// Return:
 #ifdef button
 void check_button_held()
 {
@@ -125,6 +140,11 @@ void check_button_held()
 #endif
 
 
+
+// LOOM BEGIN
+// 
+// Arguments:
+// Return:
 void LOOM_begin()
 {
   // Set the button pin mode to input

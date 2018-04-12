@@ -65,7 +65,10 @@ int giro_deadzone = 1;   // Giro error allowed, make it lower to get more precis
 
 
 
-// Function called by setup()
+// I2C SETUP
+// Called by main setup
+// Arguments:
+// Return:
 void i2c_setup()
 {
   #if DEBUG == 1
@@ -151,9 +154,10 @@ void i2c_setup()
 
 
 
-
-
+// MEASURE MPU6050
 // Generic subroutine for reading MPU6050 i2c Data
+// Arguments:
+// Return:
 uint32_t measure_mpu6050(void)
 {
   // wait for MPU interrupt or extra packet(s) available
@@ -303,7 +307,10 @@ uint32_t measure_mpu6050(void)
 
 
 
-// Mean Sensor Measurements
+// MEAN SENSOR MEASUREMENTS
+// 
+// Arguments:
+// Return:
 void meansensors()
 {
   long i = 0, buff_ax = 0, buff_ay = 0, buff_az = 0, buff_gx = 0, buff_gy = 0, buff_gz = 0;
@@ -334,7 +341,10 @@ void meansensors()
 
 
 
-// Calibration
+// CALIBRATION
+// 
+// Arguments:
+// Return:
 void calibration() {
   configuration.ax_offset = -mean_ax / 8;
   configuration.ay_offset = -mean_ay / 8;
@@ -384,6 +394,10 @@ void calibration() {
 
 
 
+// UPD MPU6050
+// 
+// Arguments:
+// Return:
 void udp_mpu6050(void)
 {
   char addressString[255];    // Declare address string buffer
@@ -459,7 +473,10 @@ void udp_mpu6050(void)
 
 
 
-// Calibrate MPU6050
+// CALIBRATE MPU6050
+// 
+// Arguments:
+// Return:
 void calMPU6050()
 {
   // Reset offsets
@@ -525,6 +542,10 @@ void calMPU6050()
 
 
 
+// CALIBRATE MPU6050 OSC
+// 
+// Arguments:
+// Return:
 #ifdef is_mpu6050
 void calMPU6050_OSC(OSCMessage &msg) 
 {

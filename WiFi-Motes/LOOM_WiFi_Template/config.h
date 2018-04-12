@@ -7,8 +7,8 @@
 #define DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
 
 //#define is_ishield
-//#define num_servos 0
-#define is_relay
+#define num_servos 1
+//#define is_relay
 #define is_wifi
 //#define is_lora
 //#define is_analog 2

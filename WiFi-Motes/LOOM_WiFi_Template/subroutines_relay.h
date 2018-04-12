@@ -1,5 +1,7 @@
-
-// Function called by setup()
+// RELAY SETUP
+// Called by main setup
+// Arguments:
+// Return:
 void relay_setup() 
 {
     pinMode(RELAY_PIN0,OUTPUT);
@@ -9,7 +11,10 @@ void relay_setup()
 }
 
 
-// Set relay state
+// HANDLE RELAY
+// Updates stored state of relays
+// Arguments:
+// Return:
 void handleRelay(OSCMessage &msg) 
 {
   int relay  = msg.getInt(0);
@@ -25,7 +30,10 @@ void handleRelay(OSCMessage &msg)
 }
 
 
-// Update relay states
+// WRTIE RELAY STATES
+// Writes updated relay states to the physical relays
+// Arguments:
+// Return:
 void write_relay_states()
 {
   digitalWrite(RELAY_PIN0,(relay_on[0]==true) ? HIGH : LOW);

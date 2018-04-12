@@ -1,12 +1,9 @@
-#include <string.h>
-
-union data_value {
-  int32_t i;
-  float f;
-  uint32_t u;
-};
 
 
+// LORA SETUP
+// 
+// Arguments:
+// Return:
 void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
   #if lora_device_type == 0
 		pinMode(8, INPUT_PULLUP);
@@ -50,6 +47,10 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
 }
 
 
+// GET OSC STRING
+// 
+// Arguments:
+// Return:
 #if lora_device_type == 1
 void get_OSC_string(OSCBundle *bndl, char *osc_string) {
 	char data_type;
@@ -102,6 +103,12 @@ void get_OSC_string(OSCBundle *bndl, char *osc_string) {
 #endif
 
 
+
+
+// GET OSC BUNDLE
+// 
+// Arguments:
+// Return:
 #if lora_device_type == 0
 void get_OSC_bundle(char *string, OSCBundle* bndl) {
 	bndl->empty();
@@ -137,6 +144,12 @@ void get_OSC_bundle(char *string, OSCBundle* bndl) {
 }
 #endif
 
+
+
+// PRINT BUNDLE
+// 
+// Arguments:
+// Return:
 #if DEBUG == 1
 void print_bundle(OSCBundle *bndl) {
 	int n = 0;
@@ -176,6 +189,12 @@ void print_bundle(OSCBundle *bndl) {
 }
 #endif
 
+
+
+// GET DATA VALUE
+// 
+// Arguments:
+// Return:
 #if lora_device_type == 0
 String get_data_value(OSCMessage* msg, int pos) {
 	switch (msg->getType(pos)) {
@@ -199,6 +218,13 @@ String get_data_value(OSCMessage* msg, int pos) {
 }
 #endif
 
+
+
+
+// SEND TO PUSHINGBOX
+// 
+// Arguments:
+// Return:
 #if lora_device_type == 0
 void sendToPushingBox(int num_fields, char *server_name, char *devid) {
   client.stop();
