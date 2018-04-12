@@ -18,8 +18,10 @@ void package_data(OSCBundle *bndl, struct SensorList data, int sensor_number) {
   OSCMessage *msg;
   msg = &(bndl->add(IDString));
   if (data.type[sensor_number] == D_GS3) {
-    msg->add("IDtag").add("Decagon" STR(INSTANCE_NUM));
-    msg->add("Instance").add((int32_t)sensor_number);
+    char buf[30];
+    String ID = String(IDString) + String("/Decagon") + String(sensor_number);
+    ID.toCharArray(buf, 30);
+    msg->add("IDtag").add(buf);
     msg->add("SensorType").add("GS3");
 #ifdef RTC3231
     msg->add("Timestamp").add(TimeStamp);
