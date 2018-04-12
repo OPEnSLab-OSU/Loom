@@ -1,40 +1,10 @@
-#include <Adafruit_PWMServoDriver.h>
-
-Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
-
-#define SERVOMIN  150     // This is the 'minimum' pulse length count (out of 4096)
-#define SERVOMAX  600     // This is the 'maximum' pulse length count (out of 4096)
-
-#if (num_servos==1)
-  int predeg[1] = {0};
-  double pre_pulselength[1] = {0.0};
-#elif (num_servos==2)
-  int predeg[2] = {0, 0};
-  double pre_pulselength[2] = {0.0, 0.0};
-#elif (num_servos==3)
-  int predeg[3] = {0, 0, 0};
-  double pre_pulselength[3] = {0.0, 0.0, 0.0};
-#elif (num_servos==4)
-  int predeg[4] = {0, 0, 0, 0};
-  double pre_pulselength[4] = {0.0, 0.0, 0.0, 0.0};
-#elif (num_servos==5)
-  int predeg[5] = {0, 0, 0, 0, 0};
-  double pre_pulselength[5] = {0.0, 0.0, 0.0, 0.0, 0.0};
-#elif (num_servos==6)
-  int predeg[6] = {0, 0, 0, 0, 0, 0};
-  double pre_pulselength[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-#elif (num_servos==7)
-  int predeg[7] = {0, 0, 0, 0, 0, 0, 0};
-  double pre_pulselength[7] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-#elif (num_servos==8)
-  int predeg[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-  double pre_pulselength[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-#endif
 
 
 
-
-// Function called by setup()
+// SERVO SETUP
+// Called by main setup
+// Arguments:
+// Return:
 void servo_setup() 
 {
   pwm.begin();
@@ -42,9 +12,10 @@ void servo_setup()
 }
 
 
-
-// Set Servo Degree
+//  SET SERVO DEGREE
 // Changes specified servo (number) to provided position (degree)
+// Arguments:
+// Return:
 void set_servo_degree(int set_degree, int servo_choice) 
 {
   uint16_t pulselength = map(set_degree, 0, 180, SERVOMIN, SERVOMAX);
@@ -68,8 +39,10 @@ void set_servo_degree(int set_degree, int servo_choice)
 
 
 
-// Set Servo
+// SET SERVO
 // Parses OSC message for which servo and position to call set_servo_degree() with
+// Arguments:
+// Return:
 void set_servo(OSCMessage &msg) 
 {
   int servo_num  = msg.getInt(0);

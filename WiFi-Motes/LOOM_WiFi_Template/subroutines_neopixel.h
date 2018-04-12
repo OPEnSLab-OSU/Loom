@@ -1,20 +1,9 @@
-#include <Adafruit_NeoPixel.h>
 
 
-// Neopixel Data Structures (one per Ishield port)
-Adafruit_NeoPixel * pixels[3];
-
-// Based on config.h, enable Neopixel for specified ports
-bool pixel_enabled[3] = {NEO_0, NEO_1, NEO_2};
-
-// Store RGB vals for up to 1 pixel per port on Ishield
-int colorVals[3][3] = { {0, 0, 0},
-                        {0, 0, 0},
-                        {0, 0, 0}};
-
-
-
-// Function called by setup()
+// NEOPIXEL SETUP
+// Called by main setup
+// Arguments:
+// Return:
 void neopixel_setup() 
 {
   for(int i = 0; i < 3; i++) {
@@ -27,8 +16,11 @@ void neopixel_setup()
 }
 
 
-// Set Color
+
+// SET COLOR
 // Handle OSC messages to set specified Neopixel to a given color
+// Arguments:
+// Return:
 void setColor(OSCMessage &msg) 
 {
   int port     = msg.getInt(0);
