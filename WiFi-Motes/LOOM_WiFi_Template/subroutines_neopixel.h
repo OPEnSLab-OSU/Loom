@@ -2,6 +2,7 @@
 
 // --- NEOPIXEL SETUP ---
 // Called by main setup
+// Creates an array to store Neopixel data, iterates through to initialize Neopixels
 // Arguments: none
 // Return:    none
 void neopixel_setup() 
@@ -19,8 +20,8 @@ void neopixel_setup()
 
 // --- SET COLOR ---
 // Handle OSC messages to set specified Neopixel to a given color
-// Arguments:
-// Return:
+// Arguments: msg (OSC message containing details of which Neopixel and what color)
+// Return:    none
 void setColor(OSCMessage &msg) 
 {
   int port     = msg.getInt(0);

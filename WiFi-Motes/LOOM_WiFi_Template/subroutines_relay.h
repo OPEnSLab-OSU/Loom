@@ -1,7 +1,9 @@
 // --- RELAY SETUP ---
 // Called by main setup
-// Arguments:
-// Return:
+// Sets pin modes for relays (on pins 5 and 6)
+// Initializes relays to off
+// Arguments: none
+// Return:    none
 void relay_setup() 
 {
     pinMode(RELAY_PIN0,OUTPUT);
@@ -13,8 +15,8 @@ void relay_setup()
 
 // --- HANDLE RELAY ---
 // Updates stored state of relays
-// Arguments:
-// Return:
+// Arguments: msg (OSC message with data of state to set particular relay to)
+// Return:    none
 void handleRelay(OSCMessage &msg) 
 {
   int relay  = msg.getInt(0);
@@ -31,9 +33,10 @@ void handleRelay(OSCMessage &msg)
 
 
 // --- WRTIE RELAY STATES ---
-// Writes updated relay states to the physical relays
-// Arguments:
-// Return:
+// Writes current relay states to the physical relays
+// Called after handleRelay, which sets the variables holding the state values
+// Arguments: none
+// Return:    none
 void write_relay_states()
 {
   digitalWrite(RELAY_PIN0,(relay_on[0]==true) ? HIGH : LOW);
