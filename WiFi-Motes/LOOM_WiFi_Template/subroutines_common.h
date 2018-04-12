@@ -83,18 +83,18 @@ void init_config()
           // Add any other behavior/calibration wrapped in an #ifdef is_something preprocessor directive HERE
           
           #ifdef is_mpu6050
-            calMPU6050();                                   // Calibration writes memValidationValue for us
+            calMPU6050();                                     // Calibration writes memValidationValue for us
           #else
-            configuration.checksum = memValidationValue;    // Configuration has been written successfully, so we write the checksum
+            configuration.checksum = memValidationValue;      // Configuration has been written successfully, so we write the checksum
           #endif
           
           #if DEBUG == 1
             Serial.println("Writing to flash for the first time.");
           #endif
           
-          flash_config.write(configuration);                // Don't uncomment this line until we're pretty confident that this behaves how we want; 
-                                                            // Flash memory has limited writes and we don't want to waste it on unnecessary tests
-    }
+          flash_config.write(configuration);                  // Don't uncomment this line until we're pretty confident that this behaves how we want; 
+                                                              // Flash memory has limited writes and we don't want to waste it on unnecessary tests
+    } // of if (configuration.checksum != memValidationValue)
   #endif // of MEM_TYPE
 }
 
@@ -104,32 +104,36 @@ void init_config()
 void check_button_held()
 {
   if ( (uint32_t)digitalRead(button) ){
-      button_timer = 0;
-    } else {
-      #ifdef is_sleep_period
-        button_timer += is_sleep_period;
-      #else
-        button_timer++;
+  button_timer = 0;
+  } else {
+    #ifdef is_sleep_period
+      button_timer += is_sleep_period;
+    #else
+      button_timer++;
+    #endif
+    if (button_timer >= 5000) { // ~about 8 seconds
+      #if DEBUG == 1
+        Serial.println("Button held for 8 seconds, resetting to AP mode");
       #endif
-      if (button_timer >= 5000) { // ~about 5 seconds
-        #if DEBUG == 1
-          Serial.println("Button held for 8 seconds, resetting to AP mode");
-        #endif
-        button_timer = 0;
-     
-        OSCMessage temp;          // Not used by function, but it expects an OSCMessage normally
-        switch_to_AP(temp);       // Change to AP mode
-      }
-    }
+      button_timer = 0;
+   
+      OSCMessage temp;          // Dummy message not used by function, but it expects an OSCMessage normally
+      switch_to_AP(temp);       // Change to AP mode
+    } 
+  } // of else 
 }
 #endif
 
 
 void LOOM_begin()
 {
+  // Set the button pin mode to input
   #ifdef button
-    pinMode(button, INPUT_PULLUP); // Set the button pin mode to input
+    pinMode(button, INPUT_PULLUP); 
   #endif
+
+  // Primary configuratation, such as writing config to non-volatile memory
+  init_config();
 
 
   // Actuator-specific setups
@@ -153,7 +157,6 @@ void LOOM_begin()
     i2c_setup();
   #endif
 
-  init_config();
   
   #ifdef is_wifi
     wifi_setup();

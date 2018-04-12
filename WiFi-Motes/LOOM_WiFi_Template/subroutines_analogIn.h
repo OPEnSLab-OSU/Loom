@@ -20,15 +20,12 @@ uint32_t read_analog(uint8_t chnl)
   #if (num_measurements == 8) // Take a reading    
     return (reading >> 3);    // Then divide by 8 to get average sample value
   #endif
-}
+} 
 
 
 
 void measure_analog(void)
-{
-  char addressString[255];
-  OSCBundle bndl; 
-
+{ 
   // Get reading from relevant ports and the button if enabled          
   #if (is_analog > 0) 
     sprintf(addressString, "%s%s", configuration.packet_header_string, "/port0");

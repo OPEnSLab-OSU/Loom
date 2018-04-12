@@ -10,8 +10,8 @@ bool dmpReady = false; //set true if DMP init was successful
 
 #ifdef is_mpu6050
 #include "MPU6050_6Axis_MotionApps20.h"
-MPU6050 mpu;            // Create instance of MPU6050 called mpu
-MPU6050 accelgyro;      // Another instance called accelgyro
+MPU6050 mpu;             // Create instance of MPU6050 called mpu
+MPU6050 accelgyro;       // Another instance called accelgyro
 
 // Uncoment one or more of these to determine which readings and format to send
 #define OUTPUT_READABLE_YAWPITCHROLL
@@ -74,10 +74,10 @@ void i2c_setup()
  
   // Join I2C bus (I2Cdev library doesn't do this automatically)
   #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
-      Wire.begin();
-      Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
+    Wire.begin();
+    Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
   #elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
-      Fastwire::setup(400, true);
+    Fastwire::setup(400, true);
   #endif
   
   pinMode(INTERRUPT_PIN, INPUT);
@@ -143,7 +143,7 @@ void i2c_setup()
         Serial.print(devStatus);
         Serial.println(F(")"));
       #endif
-    }
+    } // of else
   #endif // end of is_mpu6050
 }
 
@@ -205,12 +205,12 @@ uint32_t measure_mpu6050(void)
       mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
       
       #if DEBUG == 1
-      /*        Serial.print("ypr\t");
-                Serial.print(ypr[0] * 180/M_PI);
-                Serial.print("\t");
-                Serial.print(ypr[1] * 180/M_PI);
-                Serial.print("\t");
-                Serial.println(ypr[2] * 180/M_PI); */
+  /*      Serial.print("ypr\t");
+          Serial.print(ypr[0] * 180/M_PI);
+          Serial.print("\t");
+          Serial.print(ypr[1] * 180/M_PI);
+          Serial.print("\t");
+          Serial.println(ypr[2] * 180/M_PI); */
       #endif
     #endif
     
@@ -519,7 +519,7 @@ void calMPU6050()
       Serial.println(configuration.gz_offset);
     #endif
     state = 0; // reset state flag
-  }
+  } // of if (state == 2)
 } // of calMPU6050()
 
 
