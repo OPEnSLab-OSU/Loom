@@ -1,9 +1,9 @@
 
 
-// NEOPIXEL SETUP
+// --- NEOPIXEL SETUP ---
 // Called by main setup
-// Arguments:
-// Return:
+// Arguments: none
+// Return:    none
 void neopixel_setup() 
 {
   for(int i = 0; i < 3; i++) {
@@ -17,7 +17,7 @@ void neopixel_setup()
 
 
 
-// SET COLOR
+// --- SET COLOR ---
 // Handle OSC messages to set specified Neopixel to a given color
 // Arguments:
 // Return:

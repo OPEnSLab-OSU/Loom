@@ -1,7 +1,7 @@
 
 
 
-// SERVO SETUP
+// -- SERVO SETUP --
 // Called by main setup
 // Arguments:
 // Return:
@@ -12,7 +12,7 @@ void servo_setup()
 }
 
 
-//  SET SERVO DEGREE
+// -- SET SERVO DEGREE --
 // Changes specified servo (number) to provided position (degree)
 // Arguments:
 // Return:
@@ -39,7 +39,7 @@ void set_servo_degree(int set_degree, int servo_choice)
 
 
 
-// SET SERVO
+// -- SET SERVO --
 // Parses OSC message for which servo and position to call set_servo_degree() with
 // Arguments:
 // Return:

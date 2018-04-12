@@ -5,7 +5,7 @@ void start_AP();
 
 
 
-// WIFI SETUP
+// --- WIFI SETUP ---
 // Called by main setup
 // Arguments:
 // Return:
@@ -47,7 +47,7 @@ void wifi_setup()
 }
 
 
-// PRINT WIFI STATUS
+// --- PRINT WIFI STATUS ---
 // If debug enabled, display WiFi settings / state to serial
 // Arguments:
 // Return:
@@ -92,7 +92,7 @@ void printWiFiStatus()
 
 
 
-// START ACCESS POINT
+// --- START ACCESS POINT ---
 // Device will setup wifi access point for one computer to connect to
 // Arguments:
 // Return:
@@ -128,7 +128,7 @@ void start_AP()
 
 
 
-// CONNECT TO WPA 
+// --- CONNECT TO WPA ---
 // Returns true is connection successful, false on failure (will revert to AP mode)
 // Arguments:
 // Return:
@@ -179,7 +179,7 @@ bool connect_to_WPA(char ssid[], char pass[])
 
 
 
-// SWITCH TO ACCESS POINT
+// --- SWITCH TO ACCESS POINT ---
 // Switch to AP mode upon OSC command to do so
 // Arguments:
 // Return:
@@ -206,7 +206,7 @@ void switch_to_AP(OSCMessage &msg)
 }
 
 
-// PRINT REMOVE MAC ADDRESS
+// --- PRINT REMOVE MAC ADDRESS ---
 // Prints the MAC address of device connected to devices access point
 // Arguments:
 // Return:
@@ -231,7 +231,7 @@ void print_remote_mac_addr()
 
 
 
-// REPLACE CHARACTER
+// --- REPLACE CHARACTER ---
 // Given a string, replace all instances of 'orig' char with 'rep' char
 // Used primarily for replacing '~'s sent by Max, as it cannot send strings with spaces
 // Arguments:
@@ -245,7 +245,7 @@ void replace_char(char *str, char orig, char rep) {
 
 
 
-// CONNECT TO NEW NETWORK
+// --- CONNECT TO NEW NETWORK ---
 // 
 // Arguments:
 // Return:
@@ -279,7 +279,7 @@ void connect_to_new_network()
 
 
 
-// SET SSID
+// --- SET SSID ---
 // Updates WiFi ssid with new ssid 
 // Arguments:
 // Return:
@@ -303,7 +303,7 @@ void set_pass(OSCMessage &msg)
 
 
 
-// BROADCAST IP
+// --- BROADCAST IP ---
 // Broadcast IP address so that requesting computer can update IP
 // to send to if it only had device instance number 
 // Arguments:
@@ -330,7 +330,7 @@ void broadcastIP(OSCMessage &msg) {
 
 
 
-// SET PORT
+// --- SET PORT ---
 // Update device's communication port
 // Arguments:
 // Return:

@@ -4,7 +4,7 @@ extern void switch_to_AP(OSCMessage &msg);  // Reference to externally defined f
 
 
 
-// SET INSTANCE NUMBER
+// --- SET INSTANCE NUMBER ---
 // Updates device's identifying instance number
 // Arguments:
 // Return:
@@ -24,7 +24,7 @@ void set_instance_num(OSCMessage &msg)
 
 
 
-// MESSAGE ROUTER
+// --- MESSAGE ROUTER ---
 // Used to route OSC messages to the correct function to handle it
 // Arguments:
 // Return:
@@ -60,7 +60,7 @@ void msg_router(OSCMessage &msg, int addrOffset) {
 
 
 
-// INIT CONFIG
+// --- INITIAL CONFIG ---
 // 
 // Arguments:
 // Return:
@@ -111,7 +111,7 @@ void init_config()
 
 
 
-// CHECK BUTTON HELD
+// --- CHECK BUTTON HELD ---
 // 
 // Arguments:
 // Return:
@@ -141,7 +141,7 @@ void check_button_held()
 
 
 
-// LOOM BEGIN
+// --- LOOM BEGIN ---
 // 
 // Arguments:
 // Return:
