@@ -6,7 +6,30 @@
 #define PacketHeaderString STR(/) FAMILY STR(/) DEVICE // Results in a single string, i.e. /LOOM/Device. the full prefix sent to this device should be /LOOM/Device#, but the number is parsed in the OSC bundle routing function
 
 
+
+
 #define VBATPIN A7                // Pin to check for battery voltage
+
+
+
+//------------------------------------------------------------------------------------------------------
+// MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
+//------------------------------------------------------------------------------------------------------
+#define MEM_FLASH 0
+#define MEM_EEPROM 1  
+
+
+#ifdef __SAMD21G18A__
+  #define is_m0
+  #define MEM_TYPE MEM_FLASH
+#endif
+#ifdef __AVR_ATmega32U4__
+  #define is_32u4
+  #define MEM_TYPE MEM_EEPROM
+#endif
+
+
+
 
 #ifndef is_relay
   #define button 10               // Using on-board button, specify attached pin, transmitting
@@ -70,18 +93,14 @@
 	#endif
 	
 	#if lora_device_type == 0
-		#include <Ethernet2.h> 
-    EthernetClient client;
-    String data[NUM_FIELDS];
-		char device_id[] = "v25CCAAB0F709665"; 								// Required by PushingBox, specific to each scenario
-		char server_name[] = "api.pushingbox.com";
+//		#include <Ethernet2.h>            --- currently in config.h
+    EthernetClient client;            
+    
 		//Ethernet / Hub Info
     //byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
     //IPAddress ip(10, 248, 55, 154);
 
-    //Use this for OPEnS Lab
-    byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
-    IPAddress ip(128,193,56,138);
+//     IPAddress ip(128,193,56,138);    --- currently in config.h
 	#endif
 	
 	RH_RF95 rf95(RFM95_CS, RFM95_INT);
@@ -139,21 +158,6 @@ struct config_t configuration;
 
 
 
-//------------------------------------------------------------------------------------------------------
-// MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
-//------------------------------------------------------------------------------------------------------
-#define MEM_FLASH 0
-#define MEM_EEPROM 1  
-
-
-#ifdef __SAMD21G18A__
-  #define is_m0
-  #define MEM_TYPE MEM_FLASH
-#endif
-#ifdef __AVR_ATmega32U4__
-  #define is_32u4
-  #define MEM_TYPE MEM_EEPROM
-#endif
 
 
 #if MEM_TYPE == MEM_FLASH
