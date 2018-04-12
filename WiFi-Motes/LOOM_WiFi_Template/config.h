@@ -1,4 +1,4 @@
-#define FAMILY "LOOM"         // Should always be "LOOM", you can change this if you are setting up your own network
+#define FAMILY "LOOM"     // Should always be "LOOM", you can change this if you are setting up your own network
 #define DEVICE "Ishield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
 #define INIT_INST 2
 
@@ -71,8 +71,6 @@
 //#ifdef is_mpu6050
 //  #define is_i2c 0x86
 //#endif
-
-
 
 
 

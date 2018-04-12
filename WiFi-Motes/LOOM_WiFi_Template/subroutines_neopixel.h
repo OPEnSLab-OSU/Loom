@@ -1,5 +1,3 @@
-//START OF NEOPIXEL FUNCTIONS AND DECLARATIONS
-//#ifdef is_neopixel
 
 
 #include <Adafruit_NeoPixel.h>
@@ -65,10 +63,4 @@ void setColor(OSCMessage &msg)
       pixels[i]->show();
   }
 }
-
-
-//#endif //END OF NEOPIXEL FUNCTIONS
-
-
-
 

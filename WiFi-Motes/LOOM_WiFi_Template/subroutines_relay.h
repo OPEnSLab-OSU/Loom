@@ -1,7 +1,3 @@
-// START OF RELAY FUNCTIONS AND DECLARATIONS
-//#ifdef is_relay
-
-
 
 // Define which physical pins each relay would be plugged into 
 #define RELAY_PIN0 9
@@ -61,10 +57,4 @@ void write_relay_states()
   digitalWrite(RELAY_PIN4,(relay_on[4]==true) ? HIGH : LOW);
   digitalWrite(RELAY_PIN5,(relay_on[5]==true) ? HIGH : LOW);
 }
-
-
-
-//#endif //END OF RELAY FUNCTIONS AND DECLARATIONS
-
-
 

@@ -1,7 +1,5 @@
 
-extern void switch_to_AP(OSCMessage &msg);
-
-
+extern void switch_to_AP(OSCMessage &msg);  // Reference to externally defined function called by msg_router
 
 
 

@@ -19,47 +19,9 @@
 //                            SETUP 
 // -------------------------------------------------------------
 void setup() {
-  pinMode(led, OUTPUT);                   // Set the LED pin mode
-
-  LOOM_begin();
-
-//  #ifdef transmit_butt
-//    pinMode(transmit_butt, INPUT_PULLUP); // Set the transmit_butt pin mode to input
-//  #endif
-//
-//
-//  // Actuator-specific setups
-//  #ifdef is_neopixel
-//    neopixel_setup();
-//  #endif
-//  #if num_servos > 0
-//    servo_setup();
-//  #endif
-//  #ifdef is_relay
-//    relay_setup();
-//  #endif
-//  
-//  //Initialize serial and wait for port to open:
-//  #if DEBUG == 1
-//    Serial.begin(9600);
-//    while(!Serial);        // Ensure Serial is ready to go before anything happens in DEBUG mode.
-//  #endif
-// 
-//  #ifdef is_i2c
-//    i2c_setup();
-//  #endif
-//
-//  init_config();
-//  
-//  #ifdef is_wifi
-//    wifi_setup();
-//  #endif
-//
-//  #ifdef is_lora
-//    lora_setup(&rf95, &manager);
-//  #endif
-//  
-} // end of setup()
+  pinMode(led, OUTPUT);   // Set the LED pin mode
+  LOOM_begin();           // LOOM_begin calls any relevant (based on config) LOOM device setup functions
+}
 
 // -------------------------------------------------------------
 //                          MAIN LOOP
@@ -129,16 +91,23 @@ void loop() {
         Serial.print("Sending...");
       #endif
        
-      if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS))
-        Serial.println("ok");
-      else
-        Serial.println("failed");
+      if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)){
+         #if DEBUG == 1
+           Serial.println("ok");
+         #endif 
+      }
+      else {
+        #if DEBUG == 1
+          Serial.println("failed");
+        #endif
+      }
     
       delay(10000);
     #endif //is_node
   #endif // is_lora
 
-  // HANDLE BUNDLE
+
+  // HANDLE WIFI BUNDLE
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
   #ifdef is_wifi
@@ -196,7 +165,7 @@ void loop() {
 
   #endif //is_wifi
   
-  // END OF HANDLE BUNDLE
+  // END OF HANDLE WIFI BUNDLE
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 
@@ -213,7 +182,7 @@ void loop() {
       }
     #endif
   } // of if ( status != WiFi.status() )
-  #endif
+  #endif // of is_wifi
 
   // Measure battery voltage
   vbat = analogRead(VBATPIN);

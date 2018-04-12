@@ -1,8 +1,4 @@
 
-//#ifdef is_analog // Don't even include in compile if not in use
-
-
-
 // Generic subroutine for reading raw sensor data with averaging
 uint32_t read_analog(uint8_t chnl)
 {
@@ -57,8 +53,5 @@ void measure_analog(void)
   Udp.endPacket();    // Mark the end of the OSC Packet
   bndl.empty();       // Empty the bundle to free room for a new one
 }
-
-//#endif // end is_analog test
-
 
 
