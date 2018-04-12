@@ -24,7 +24,7 @@ void msg_router(OSCMessage &msg, int addrOffset) {
     Serial.print("Parsed ");
     Serial.println(buffer);
   #endif
-  #ifdef is_servo
+  #if num_servos > 0
     msg.dispatch("/Servo/Set", set_servo, addrOffset);
   #endif
   #ifdef is_relay

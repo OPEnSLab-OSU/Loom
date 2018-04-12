@@ -30,7 +30,7 @@ void setup() {
   #ifdef is_neopixel
     neopixel_setup();
   #endif
-  #ifdef is_servo
+  #if num_servos > 0
     servo_setup();
   #endif
   #ifdef is_relay

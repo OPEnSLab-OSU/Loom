@@ -13,7 +13,7 @@
 #ifdef is_neopixel
   #include "subroutines_neopixel.h"
 #endif
-#ifdef is_servo  
+#if num_servos > 0
   #include "subroutines_servo.h"
 #endif
 #ifdef is_relay
