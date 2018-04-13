@@ -11,8 +11,8 @@
 #define RFM95_INT 3 //Use this for the M0
 //#define RFM95_INT 7 //Use this for the 32u4
 
-#define SERVER_ADDRESS 0
-#define NUM_FIELDS 16
+#define SERVER_ADDRESS 2
+#define NUM_FIELDS 32
 #define MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN
 
 //Ethernet / Hub Info
@@ -97,7 +97,7 @@ void loop() {
         for(int i = 0; i < NUM_FIELDS; i++)
           Serial.println(data[i]);
       #endif
-      //sendToPushingBox();
+      sendToPushingBox();
     }
   }
 }
