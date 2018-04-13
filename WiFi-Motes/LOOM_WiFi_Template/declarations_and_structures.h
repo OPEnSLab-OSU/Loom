@@ -18,6 +18,9 @@
 #define MEM_FLASH 0
 #define MEM_EEPROM 1  
 
+#define is_m0
+#define MEM_TYPE MEM_FLASH
+
 
 #ifdef __SAMD21G18A__
   #define is_m0

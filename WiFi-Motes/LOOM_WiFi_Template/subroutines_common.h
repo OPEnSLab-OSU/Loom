@@ -86,7 +86,7 @@ void init_config()
           #endif
           #ifdef is_wifi
             configuration.my_ssid = AP_NAME;                  // Default AP name
-            strcpy(configuration.ssid,DEFAULT_NETWORK);       // Created AP name
+            strcpy(configuration.ssid,DEFAULT_NETWORK);       // Default network name
             strcpy(configuration.pass,DEFAULT_PASSWORD);      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
             configuration.keyIndex = 0;                       // Your network key Index number (needed only for WEP)
             configuration.ip_broadcast = "192.168.1.255";     // IP to Broadcast data 
@@ -100,7 +100,7 @@ void init_config()
           #else
             configuration.checksum = memValidationValue;      // Configuration has been written successfully, so we write the checksum
           #endif
-          
+
           #if DEBUG == 1
             Serial.println("Writing to flash for the first time.");
           #endif
@@ -151,10 +151,21 @@ void check_button_held()
 // Return:    none 
 void LOOM_begin()
 {
+  //Initialize serial and wait for port to open:
+  #if DEBUG == 1
+    Serial.begin(9600);
+    while(!Serial);        // Ensure Serial is ready to go before anything happens in DEBUG mode.
+  #endif
+  
   // Set the button pin mode to input
   #ifdef button
     pinMode(button, INPUT_PULLUP); 
   #endif
+
+  #ifdef is_i2c
+    i2c_setup();
+  #endif
+
 
   // Primary configuratation, such as writing config to non-volatile memory
   init_config();
@@ -171,16 +182,7 @@ void LOOM_begin()
     relay_setup();
   #endif
   
-  //Initialize serial and wait for port to open:
-  #if DEBUG == 1
-    Serial.begin(9600);
-    while(!Serial);        // Ensure Serial is ready to go before anything happens in DEBUG mode.
-  #endif
  
-  #ifdef is_i2c
-    i2c_setup();
-  #endif
-
   
   #ifdef is_wifi
     wifi_setup();
