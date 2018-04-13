@@ -1,27 +1,42 @@
 #define FAMILY "LOOM"     // Should always be "LOOM", you can change this if you are setting up your own network
 #define DEVICE "Ishield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
-#define INIT_INST 2
+#define INIT_INST 0
 
 
 //--OPTIONS--//
-#define DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
+#define DEBUG 0   // Set to 1 if you want Serial statements from various functions to print
 
-//#define is_ishield
-#define num_servos 1
+#define is_ishield
+//#define num_servos 1
 //#define is_relay
 #define is_wifi
 //#define is_lora
 //#define is_analog 2
 
-
  
+
+#ifdef is_ishield
+  #define is_neopixel       // Toggle based on whether Neopixels are being used
+
+  #define is_mpu6050
+  #define is_i2c 0x86       // For MPU6050
+
+  #ifdef is_neopixel
+    #define NEO_0 false
+    #define NEO_1 false
+    #define NEO_2 true
+  #endif  
+#endif
+
+
 
 #ifdef is_wifi
 	#define DEFAULT_MODE      WPA_CLIENT_MODE //AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"
 	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"
-	#define INIT_PORT 9422
+	#define INIT_PORT 9436
 #endif
+
 
 
 
@@ -59,19 +74,7 @@
 
 
 
-#ifdef is_ishield
-  #define is_neopixel       // Toggle based on whether Neopixels are being used
 
-  #define is_mpu6050
-  #define is_i2c 0x86       // For MPU6050
-
-  #ifdef is_neopixel
-    #define NEO_0 false
-    #define NEO_1 false
-    #define NEO_2 true
-  #endif  
-
-#endif
 
 
 

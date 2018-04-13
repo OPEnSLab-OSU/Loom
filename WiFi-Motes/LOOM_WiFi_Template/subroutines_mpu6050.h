@@ -8,7 +8,6 @@
 #define INTERRUPT_PIN 11
 bool dmpReady = false; //set true if DMP init was successful
 
-#ifdef is_mpu6050
 #include "MPU6050_6Axis_MotionApps20.h"
 MPU6050 mpu;             // Create instance of MPU6050 called mpu
 MPU6050 accelgyro;       // Another instance called accelgyro
@@ -57,7 +56,6 @@ int mean_ax, mean_ay, mean_az, mean_gx, mean_gy, mean_gz, state = 0;
 int buffersize = 1000;   // Amount of readings used to average, make it higher to get more precision but sketch will be slower  (default:1000)
 int acel_deadzone = 8;   // Acelerometer error allowed, make it lower to get more precision, but sketch may not converge  (default:8)
 int giro_deadzone = 1;   // Giro error allowed, make it lower to get more precision, but sketch may not converge  (default:1)
-#endif //END OF MPU6050 FUNCTIONS AND DECLARATIONS
 
 
 
@@ -546,7 +544,6 @@ void calMPU6050()
 // 
 // Arguments:
 // Return:
-#ifdef is_mpu6050
 void calMPU6050_OSC(OSCMessage &msg) 
 {
   #if DEBUG == 1
@@ -560,7 +557,6 @@ void calMPU6050_OSC(OSCMessage &msg)
     Serial.println("New calibration values written to non-volatile memory");
   #endif
 }
-#endif
 
 
 
