@@ -12,22 +12,19 @@
 //#define RFM95_INT 7 //Use this for the 32u4
 
 #define SERVER_ADDRESS 2
-#define NUM_FIELDS 16
+#define NUM_FIELDS 32
 #define MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN
 
 //Ethernet / Hub Info
 //byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+//IPAddress ip(10, 248, 55, 154);
+
 //Use this for OPEnS Lab
 byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
+IPAddress ip(128,193,56,138);
 
 const char DEVID[] = "v25CCAAB0F709665"; 
 char serverName[] = "api.pushingbox.com";
-
-//IP Address
-//IPAddress ip(10, 248, 55, 154);
-//Use this for OPEnS Lab
-IPAddress ip(128,193,56,138);
-
 
 EthernetClient client;
 String data[NUM_FIELDS];
@@ -96,8 +93,11 @@ void loop() {
           }
         }
       } 
+      #if DEBUG == 1
+        for(int i = 0; i < NUM_FIELDS; i++)
+          Serial.println(data[i]);
+      #endif
       sendToPushingBox();
-      Serial.println("");
     }
   }
 }
