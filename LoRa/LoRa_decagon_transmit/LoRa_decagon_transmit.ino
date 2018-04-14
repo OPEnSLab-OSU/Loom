@@ -25,7 +25,7 @@
 #pragma message("Warning: 32u4 can only interface with one Decagon device on pin 10")
 #endif
 
-#define DEBUG 1
+//#define DEBUG 1
 #ifndef DEBUG
 #define DEBUG 0
 #endif
@@ -83,7 +83,9 @@ float measuredvbat;
 
 #define FAMILY "/LOOM"
 #define DEVICE "/DShield"
-#define INSTANCE_NUM 1  // Unique instance number for this device, useful when using more than one of the same device type in same space
+#define INSTANCE_NUM 0  // Unique instance number for this device, useful when using more than one of the same device type in same space
+// $$$$$$$ NOTE: Change instance number for each device above ^ $$$$$$$$
+
 
 #define IDString FAMILY DEVICE STR(INSTANCE_NUM) // C interprets subsequent string literals as concatenation: "/Loom" "/Ishield" "0" becomes "/Loom/Ishield0"
  
@@ -93,11 +95,11 @@ float measuredvbat;
 // Singleton instance of the radio driver
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
-RHReliableDatagram manager(rf95, INSTANCE_NUM);
+RHReliableDatagram manager(rf95, INSTANCE_NUM + 10);
 
 // ===== RTC Initializations =====
 
-//#define RTC3231
+#define RTC3231
 
 #ifdef RTC3231
 RTC_DS3231 RTC_DS;
@@ -109,7 +111,7 @@ volatile bool TakeSampleFlag = false; // Flag is set with external Pin A0 Interr
 volatile bool LEDState = false; // flag t toggle LED
 volatile int HR = 8; // Hr of the day we want alarm to go off
 volatile int MIN = 0; // Min of each hour we want alarm to go off
-volatile int WakePeriodMin = 1;  // Period of time to take sample in Min, reset alarm based on this period (Bo - 5 min)
+volatile int WakePeriodMin = 15;  // Period of time to take sample in Min, reset alarm based on this period (Bo - 5 min)
 const byte wakeUpPin = 11;
 #endif
 
@@ -119,7 +121,6 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   delay(10000); //delay on start up so boards don't immediately sleep :)
-  Serial.println("Beginning setup");
   lora_setup(&rf95, &manager);
 
   // Decagon Setup
@@ -259,18 +260,20 @@ void loop() {
     memset(message, '\0', RH_RF95_MAX_MESSAGE_LEN + 1);
     get_OSC_string(&bndl, message);
     delay(2000);
-    print_bundle(&bndl);
 #if DEBUG == 1
+    print_bundle(&bndl);
     Serial.print("Sending...");
 #endif
-    if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS))
+    if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)) {
 #if DEBUG == 1
       Serial.println("ok");
 #endif
-    else
+    }
+    else {
 #if DEBUG == 1
       Serial.println("failed");
 #endif
+    }
   }
 
 #ifdef RTC3231

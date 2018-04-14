@@ -1,15 +1,26 @@
 void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
+#if DEBUG == 1
   Serial.println("Initializing manager...");
-  if (!manager->init())
+#endif
+  if (!manager->init()) {
+#if DEBUG == 1
     Serial.println("init failed");
+#endif
+  }
 
+#if DEBUG == 1
   Serial.println("Setting Frequency...");
+#endif
   if (!rf95->setFrequency(RF95_FREQ)) {
+#if DEBUG == 1
     Serial.println("setFrequency failed");
+#endif
     while (1);
   }
 
+#if DEBUG == 1
   Serial.println("Setting power...");
+#endif
   rf95->setTxPower(23, false);
 }
 
