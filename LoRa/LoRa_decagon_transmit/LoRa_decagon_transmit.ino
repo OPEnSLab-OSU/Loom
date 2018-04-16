@@ -107,19 +107,25 @@ RTC_DS3231 RTC_DS;
 char TimeStamp[20];
 
 // declare/init RTC_DS variables//
-volatile bool TakeSampleFlag = false; // Flag is set with external Pin A0 Interrupt by RTC
+volatile bool TakeSampleFlag = true; // Flag is set with external Pin A0 Interrupt by RTC
 volatile bool LEDState = false; // flag t toggle LED
 volatile int HR = 8; // Hr of the day we want alarm to go off
 volatile int MIN = 0; // Min of each hour we want alarm to go off
+#if DEBUG == 0
 volatile int WakePeriodMin = 15;  // Period of time to take sample in Min, reset alarm based on this period (Bo - 5 min)
+#elif DEBUG == 1
+volatile int WakePeriodMin = 1;
+#endif //DEBUG
 const byte wakeUpPin = 11;
-#endif
+#endif //RTC3231
 
 //===== Setup =====
 
 void setup() {
   // put your setup code here, to run once:
+#if DEBUG == 1
   Serial.begin(9600);
+#endif
   delay(10000); //delay on start up so boards don't immediately sleep :)
   lora_setup(&rf95, &manager);
 
@@ -160,7 +166,8 @@ void setup() {
 #if DEBUG == 1
     Serial.print("Alarm set to go off every "); Serial.print(WakePeriodMin); Serial.println("min from program time");
 #endif // DEBUG
-  delay(10000);
+  delay(10000); //Things break without this, I don't know why
+  TakeSampleFlag = true;
 #endif // RTC3231
 }
 
