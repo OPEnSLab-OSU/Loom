@@ -39,7 +39,7 @@ void msg_router(OSCMessage &msg, int addrOffset) {
   #if num_servos > 0
     msg.dispatch("/Servo/Set", set_servo, addrOffset);
   #endif
-  #ifdef is_relay
+  #if is_relay == 1
     msg.dispatch("/Relay/State", handleRelay, addrOffset);
   #endif
   #ifdef is_mpu6050
@@ -49,7 +49,7 @@ void msg_router(OSCMessage &msg, int addrOffset) {
     msg.dispatch("/Neopixel", setColor, addrOffset);
   #endif
 
-  #ifdef is_wifi
+  #if is_wifi == 1
     msg.dispatch("/Connect/SSID", set_ssid, addrOffset);
     msg.dispatch("/Connect/Password", set_pass, addrOffset);
     msg.dispatch("/wifiSetup/AP", switch_to_AP, addrOffset);
@@ -84,7 +84,7 @@ void init_config()
             Serial.print("expecting OSC header ");
             Serial.println(configuration.packet_header_string);
           #endif
-          #ifdef is_wifi
+          #if is_wifi == 1
             configuration.my_ssid = AP_NAME;                  // Default AP name
             strcpy(configuration.ssid,DEFAULT_NETWORK);       // Default network name
             strcpy(configuration.pass,DEFAULT_PASSWORD);      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
@@ -178,17 +178,17 @@ void LOOM_begin()
   #if num_servos > 0
     servo_setup();
   #endif
-  #ifdef is_relay
+  #if is_relay == 1
     relay_setup();
   #endif
   
  
   
-  #ifdef is_wifi
+  #if is_wifi == 1
     wifi_setup();
   #endif
 
-  #ifdef is_lora
+  #if is_lora == 1
     lora_setup(&rf95, &manager);
   #endif
   

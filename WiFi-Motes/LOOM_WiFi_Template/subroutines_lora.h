@@ -2,8 +2,8 @@
 
 // --- LORA SETUP ---
 // 
-// Arguments:
-// Return:
+// Arguments: 
+// Return: Nothing. Simply changes the state of the device to allow it to use LoRa.
 void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
   #if lora_device_type == 0
 		pinMode(8, INPUT_PULLUP);
@@ -49,8 +49,8 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
 
 // --- GET OSC STRING ---
 // 
-// Arguments:
-// Return:
+// Arguments: An OSCBundle to put into string format. A char * to fill with the OSCBundle's data.
+// Return: Nothing, but osc_string's contents will now include the OSCBundle's formatted data.
 #if lora_device_type == 1
 void get_OSC_string(OSCBundle *bndl, char *osc_string) {
 	char data_type;
@@ -107,8 +107,8 @@ void get_OSC_string(OSCBundle *bndl, char *osc_string) {
 
 // --- GET OSC BUNDLE ---
 // 
-// Arguments:
-// Return:
+// Arguments: A char * created through the use of get_OSC_string(), an OSCBundle to fill.
+// Return: Nothing, but the OSCBundle is filled with the data from the string.
 #if lora_device_type == 0
 void get_OSC_bundle(char *string, OSCBundle* bndl) {
 	bndl->empty();
@@ -148,8 +148,8 @@ void get_OSC_bundle(char *string, OSCBundle* bndl) {
 
 // --- PRINT BUNDLE ---
 // 
-// Arguments:
-// Return:
+// Arguments: An OSCBundle to be printed.
+// Return: Nothing. Prints the OSCBundle's contents to the Serial.
 #if DEBUG == 1
 void print_bundle(OSCBundle *bndl) {
 	int n = 0;
@@ -193,8 +193,8 @@ void print_bundle(OSCBundle *bndl) {
 
 // --- GET DATA VALUE ---
 // 
-// Arguments:
-// Return:
+// Arguments: An OSCMessage, the position of an argument inside the OSCMessage.
+// Return: The value of the argument as a string.
 #if lora_device_type == 0
 String get_data_value(OSCMessage* msg, int pos) {
 	switch (msg->getType(pos)) {
@@ -223,8 +223,9 @@ String get_data_value(OSCMessage* msg, int pos) {
 
 // --- SEND TO PUSHINGBOX ---
 // 
-// Arguments:
-// Return:
+// Arguments: The number fields in the PB scenario, the base address of the URL
+// the devid specifying the PB scenario.
+// Return: Nothing. Sends a get request to PB.
 #if lora_device_type == 0
 void sendToPushingBox(int num_fields, char *server_name, char *devid) {
   client.stop();
