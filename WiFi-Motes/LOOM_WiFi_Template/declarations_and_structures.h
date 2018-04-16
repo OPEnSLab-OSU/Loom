@@ -34,12 +34,12 @@
 
 
 
-#ifndef is_relay
+#if is_relay == 0
   #define button 10               // Using on-board button, specify attached pin, transmitting
 #endif
 
 
-#ifdef is_analog
+#if is_analog == 1
   #define num_measurements 4      // Must be 1, 2, 4, or 8 number of analog measurements to sample and average per channel
   int16_t a0, a1, a2, a3, a4, a5; // Memory to store analog sensor values
 #endif
@@ -55,7 +55,7 @@
 #endif
 
 
-#ifdef is_wifi
+#if is_wifi == 1
 	enum WiFiMode {
 		AP_MODE,
 		WPA_CLIENT_MODE,
@@ -81,7 +81,7 @@
 
 
 
-#ifdef is_lora
+#if is_lora == 1
 	#include <RH_RF95.h>
 	#include <RHReliableDatagram.h>
 
@@ -205,7 +205,7 @@ struct config_t {
   uint8_t     instance_number;          // Default 0, should be set on startup from a patch
   char        packet_header_string[80]; // String of expected packet header (dynamically formed based on config.h)
  
-  #ifdef is_wifi
+  #if is_wifi == 1
     IPAddress   ip;                     // Device's IP Address
     char*       my_ssid;                // Default AP name
     char        ssid[32];               // Host network name

@@ -6,16 +6,16 @@
 //--OPTIONS--//
 #define DEBUG 0   // Set to 1 if you want Serial statements from various functions to print
 
-#define is_ishield
-//#define num_servos 1
-//#define is_relay
-#define is_wifi
-//#define is_lora
-//#define is_analog 2
+#define is_ishield 1
+#define num_servos 0
+#define is_relay 0
+#define is_wifi 1
+#define is_lora 0
+#define is_analog 0
 
  
 
-#ifdef is_ishield
+#if is_ishield == 1
   #define is_neopixel       // Toggle based on whether Neopixels are being used
 
   #define is_mpu6050
@@ -30,7 +30,7 @@
 
 
 
-#ifdef is_wifi
+#if is_wifi == 1
 	#define DEFAULT_MODE      WPA_CLIENT_MODE //AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"
 	#define DEFAULT_PASSWORD  "arduino101"
@@ -42,7 +42,7 @@
 
 // LoRa Device Type
 // 0: Hub, 1: Node, 2 = Repeater
-#ifdef is_lora
+#if is_lora == 1
 
   #define lora_device_type 0
   
