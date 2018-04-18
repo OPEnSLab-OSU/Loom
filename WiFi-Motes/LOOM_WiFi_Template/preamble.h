@@ -5,13 +5,14 @@
 #if DEBUG == 1
 	#include <SPI.h>
 #endif
-#if is_analog == 1
+
+#if is_analog > 0
   #include "subroutines_analogIn.h"
 #endif
 #ifdef is_i2c 
   #include "subroutines_mpu6050.h"
 #endif
-#ifdef is_neopixel
+#if is_neopixel == 1
   #include "subroutines_neopixel.h"
 #endif
 #if num_servos > 0

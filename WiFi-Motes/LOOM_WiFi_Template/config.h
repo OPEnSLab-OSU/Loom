@@ -13,15 +13,13 @@
 #define is_lora 0
 #define is_analog 0
 
- 
-
 #if is_ishield == 1
-  #define is_neopixel       // Toggle based on whether Neopixels are being used
+  #define is_neopixel 1      // Toggle based on whether Neopixels are being used
 
-  #define is_mpu6050
+  #define is_mpu6050 1
   #define is_i2c 0x86       // For MPU6050
 
-  #ifdef is_neopixel
+  #if is_neopixel == 1
     #define NEO_0 false
     #define NEO_1 false
     #define NEO_2 true

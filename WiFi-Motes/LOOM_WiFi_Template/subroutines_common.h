@@ -42,10 +42,10 @@ void msg_router(OSCMessage &msg, int addrOffset) {
   #if is_relay == 1
     msg.dispatch("/Relay/State", handleRelay, addrOffset);
   #endif
-  #ifdef is_mpu6050
+  #if is_mpu6050 == 1
     msg.dispatch("/MPU6050/cal", calMPU6050_OSC, addrOffset);
   #endif
-  #ifdef is_neopixel
+  #if is_neopixel == 1
     msg.dispatch("/Neopixel", setColor, addrOffset);
   #endif
 
@@ -95,7 +95,7 @@ void init_config()
           #endif
           // Add any other behavior/calibration wrapped in an #ifdef is_something preprocessor directive HERE
           
-          #ifdef is_mpu6050
+          #if is_mpu6050 == 1
             calMPU6050();                                     // Calibration writes memValidationValue for us
           #else
             configuration.checksum = memValidationValue;      // Configuration has been written successfully, so we write the checksum
@@ -172,7 +172,7 @@ void LOOM_begin()
 
 
   // Actuator-specific setups
-  #ifdef is_neopixel
+  #if is_neopixel == 1
     neopixel_setup();
   #endif
   #if num_servos > 0

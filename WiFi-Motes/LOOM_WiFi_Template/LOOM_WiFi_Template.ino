@@ -40,7 +40,8 @@ void loop() {
   #endif
 
   // Reset to AP mode if button held for ~5 seconds
-  #if defined(button) && is_wifi == 1
+
+  #if defined(button) && (is_wifi == 1)
     check_button_held();      
   #endif
 
@@ -196,7 +197,7 @@ void loop() {
 
   
   // Update MPU6050 Data
-  #ifdef is_mpu6050
+  #if is_mpu6050 == 1
     measure_mpu6050();            // Now measure MPU6050, update values in global registers 
     udp_mpu6050();                // Build and send packet
     mpu.resetFIFO();              // Flush MPU6050 FIFO to avoid overflows if using i2c
