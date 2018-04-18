@@ -21,7 +21,7 @@
 #define is_m0
 #define MEM_TYPE MEM_FLASH
 
-
+// Still experimental
 #ifdef __SAMD21G18A__
   #define is_m0
   #define MEM_TYPE MEM_FLASH
@@ -34,12 +34,12 @@
 
 
 
-#ifndef is_relay
+#if is_relay == 0
   #define button 10               // Using on-board button, specify attached pin, transmitting
 #endif
 
 
-#ifdef is_analog
+#if is_analog > 0
   #define num_measurements 4      // Must be 1, 2, 4, or 8 number of analog measurements to sample and average per channel
   int16_t a0, a1, a2, a3, a4, a5; // Memory to store analog sensor values
 #endif
@@ -55,7 +55,7 @@
 #endif
 
 
-#ifdef is_wifi
+#if is_wifi == 1
 	enum WiFiMode {
 		AP_MODE,
 		WPA_CLIENT_MODE,
@@ -81,7 +81,7 @@
 
 
 
-#ifdef is_lora
+#if is_lora == 1
 	#include <RH_RF95.h>
 	#include <RHReliableDatagram.h>
 
@@ -120,7 +120,7 @@
 
 
 
-#ifdef is_neopixel
+#if is_neopixel == 1
   #include <Adafruit_NeoPixel.h>
   
   // Neopixel Data Structures (one per Ishield port)
@@ -137,7 +137,7 @@
 
 
 
-#ifdef is_relay
+#if is_relay == 1
   #define RELAY_PIN0 5
   #define RELAY_PIN1 6
   
@@ -205,7 +205,7 @@ struct config_t {
   uint8_t     instance_number;          // Default 0, should be set on startup from a patch
   char        packet_header_string[80]; // String of expected packet header (dynamically formed based on config.h)
  
-  #ifdef is_wifi
+  #if is_wifi == 1
     IPAddress   ip;                     // Device's IP Address
     char*       my_ssid;                // Default AP name
     char        ssid[32];               // Host network name
@@ -219,7 +219,7 @@ struct config_t {
   
   //add any other stuff that needs to be stored based on the shields with a wrapped preprocessor statement HERE
 
-  #ifdef is_mpu6050
+  #if is_mpu6050 == 1
     int   ax_offset, ay_offset, az_offset, gx_offset, gy_offset, gz_offset; // MPU6050 config if needed
   #endif
   

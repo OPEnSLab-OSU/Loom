@@ -5,25 +5,25 @@
 #if DEBUG == 1
 	#include <SPI.h>
 #endif
-#ifdef is_analog
+#if is_analog > 0
   #include "subroutines_analogIn.h"
 #endif
 #ifdef is_i2c 
   #include "subroutines_mpu6050.h"
 #endif
-#ifdef is_neopixel
+#if is_neopixel == 1
   #include "subroutines_neopixel.h"
 #endif
 #if num_servos > 0
   #include "subroutines_servo.h"
 #endif
-#ifdef is_relay
+#if is_relay == 1
   #include "subroutines_relay.h"
 #endif
-#ifdef is_wifi
+#if is_wifi == 1
 	#include "subroutines_wifi.h"
 #endif
-#ifdef is_lora
+#if is_lora == 1
 	#include "subroutines_lora.h"
 #endif
 

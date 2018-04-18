@@ -34,17 +34,17 @@ void setup() {
 // -------------------------------------------------------------
 void loop() { 
 
-  #ifdef is_wifi
+  #if is_wifi == 1
     int packetSize;
     pass_set = ssid_set = false;
   #endif
 
   // Reset to AP mode if button held for ~5 seconds
-  #if defined(button) && defined(is_wifi)
+  #if defined(button) && (is_wifi == 1)
     check_button_held();      
   #endif
 
-  #ifdef is_lora
+  #if is_lora == 1
     #if lora_device_type == 0
       if (manager.available()) {
         uint8_t len = LORA_MESSAGE_SIZE;
@@ -116,7 +116,7 @@ void loop() {
   // HANDLE WIFI BUNDLE
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-  #ifdef is_wifi
+  #if is_wifi == 1
   // If there's data available, read a packet
   packetSize = Udp.parsePacket();
   if (packetSize > 0) {
@@ -151,7 +151,7 @@ void loop() {
       bndl.route(configuration.packet_header_string,msg_router);
 
       // Write on/off values to connected relays
-      #ifdef is_relay
+      #if is_relay == 1
         write_relay_states();       
       #endif
       
@@ -175,7 +175,7 @@ void loop() {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 
-  #ifdef is_wifi
+  #if is_wifi == 1
   // Compare the previous status to the current status
   if (status != WiFi.status()) {
     status = WiFi.status();              // It has changed, update the variable
@@ -196,7 +196,7 @@ void loop() {
 
   
   // Update MPU6050 Data
-  #ifdef is_mpu6050
+  #if is_mpu6050 == 1
     measure_mpu6050();            // Now measure MPU6050, update values in global registers 
     udp_mpu6050();                // Build and send packet
     mpu.resetFIFO();              // Flush MPU6050 FIFO to avoid overflows if using i2c
