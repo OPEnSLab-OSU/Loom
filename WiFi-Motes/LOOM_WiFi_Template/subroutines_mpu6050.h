@@ -88,7 +88,7 @@ void i2c_setup()
   #endif
   
   // *** Init MPU 6050 and serial stuff
-  #ifdef is_mpu6050
+  #if is_mpu6050 == 1
     accelgyro.initialize();
     mpu.initialize();
     devStatus = mpu.dmpInitialize();
