@@ -2,7 +2,7 @@
 
 // --- LORA SETUP ---
 // 
-// Arguments: 
+// Arguments: An instance of the radio, and an instance of the manager, both to be initialized.
 // Return: Nothing. Simply changes the state of the device to allow it to use LoRa.
 void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
   #if lora_device_type == 0
