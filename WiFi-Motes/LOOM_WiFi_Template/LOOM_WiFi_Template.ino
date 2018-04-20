@@ -214,8 +214,12 @@ void loop() {
   #endif
 
   // Get analog readings
-  #if is_analog == 1
-      measure_analog();
+  #if is_analog >= 1
+      package_analog(&send_bndl,configuration.packet_header_string);
+      Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
+      send_bndl.send(Udp);   // Send the bytes to the SLIP stream
+      Udp.endPacket();  // Mark the end of the OSC Packet
+      send_bndl.empty();     // Empty the bundle to free room for a new one
   #endif
 
   // Delay between loop iterations
