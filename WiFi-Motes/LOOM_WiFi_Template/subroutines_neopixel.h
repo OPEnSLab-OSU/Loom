@@ -1,4 +1,17 @@
-
+#if is_neopixel == 1
+  #include <Adafruit_NeoPixel.h>
+  
+  // Neopixel Data Structures (one per Ishield port)
+  Adafruit_NeoPixel * pixels[3];
+  
+  // Based on config.h, enable Neopixel for specified ports
+  bool pixel_enabled[3] = {NEO_0, NEO_1, NEO_2};
+  
+  // Store RGB vals for up to 1 pixel per port on Ishield
+  int colorVals[3][3] = { {0, 0, 0},
+                          {0, 0, 0},
+                          {0, 0, 0}};
+#endif
 
 // --- NEOPIXEL SETUP ---
 // Called by main setup

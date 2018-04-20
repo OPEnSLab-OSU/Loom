@@ -1,4 +1,39 @@
+#if is_lora == 1
+  #include <RH_RF95.h>
+  #include <RHReliableDatagram.h>
 
+  #include <string.h>
+
+  union data_value {
+    int32_t i;
+    float f;
+    uint32_t u;
+  };
+  
+  #define LORA_MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN       // Defaults to 251 as 4 bytes are used for the header.
+  #define RFM95_CS 8
+  #define RFM95_RST 4
+  #ifdef is_m0
+    #define RFM95_INT 3     // Use this for the M0
+  #endif
+  #ifdef is_32u4
+    #define RFM95_INT 7     // Use this for the 32u4
+  #endif
+  
+  #if lora_device_type == 0
+//    #include <Ethernet2.h>            --- currently in config.h
+    EthernetClient client;            
+    
+    //Ethernet / Hub Info
+    //byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+    //IPAddress ip(10, 248, 55, 154);
+
+//     IPAddress ip(128,193,56,138);    --- currently in config.h
+  #endif
+  
+  RH_RF95 rf95(RFM95_CS, RFM95_INT);
+  RHReliableDatagram manager(rf95, SERVER_ADDRESS);
+#endif //of is_lora
 
 // --- LORA SETUP ---
 // 

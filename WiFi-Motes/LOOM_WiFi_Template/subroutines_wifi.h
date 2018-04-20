@@ -1,3 +1,42 @@
+#if is_wifi == 1
+  enum WiFiMode {
+    AP_MODE,
+    WPA_CLIENT_MODE,
+    WEP_CLIENT_MODE
+  };
+  
+  #include <WiFi101.h>
+  #include <WiFiUdp.h>
+
+  #define AP_NAME   STR(FAMILY) STR(DEVICE) STR(INIT_INST)
+  struct config_t_wifi{
+    IPAddress   ip;                     // Device's IP Address
+    char*       my_ssid;                // Default AP name
+    char        ssid[32];               // Host network name
+    char        pass[32];               // Host network password
+    int         keyIndex;               // Key Index Number (needed only for WEP)
+    char*       ip_broadcast;           // IP to Broadcast data
+    unsigned int localPort;             // Local port to listen on
+    byte        mac[6];                 // Device's MAC Address
+    WiFiMode    wifi_mode;              // Devices current wifi mode
+  };
+  struct config_t_wifi * config_wifi;
+  void link_config_wifi(struct config_t_wifi *flash_config_wifi){
+    config_wifi = flash_config_wifi;
+  }
+  char * packet_header_string;
+  // WiFi global vars/structs
+  WiFiUDP      Udp;
+  WiFiServer   server(80);
+  int status = WL_IDLE_STATUS;
+
+  // Global variables to handle changes to WiFi ssid and password 
+  char new_ssid[32];
+  char new_pass[32];
+  bool ssid_set;
+  bool pass_set;
+#endif // of is_wifi
+
 
 // Function prototypes
 bool connect_to_WPA(char ssid[], char pass[]);
@@ -27,12 +66,12 @@ void wifi_setup()
   // By default the local IP address of will be 192.168.1.1
   // You can override it with the following:
   // WiFi.config(IPAddress(192, 168, 1, 10));
-  switch(configuration.wifi_mode){
+  switch(config_wifi->wifi_mode){
     case AP_MODE:
       start_AP();
       break;
     case WPA_CLIENT_MODE:
-      if (connect_to_WPA(configuration.ssid,configuration.pass)){
+      if (connect_to_WPA(config_wifi->ssid,config_wifi->pass)){
         #if DEBUG == 1
         Serial.println("Success!");
         #endif
@@ -45,7 +84,7 @@ void wifi_setup()
       }
       break;
   }
-  configuration.ip = WiFi.localIP();
+  config_wifi->ip = WiFi.localIP();
 }
 
 
@@ -62,24 +101,24 @@ void printWiFiStatus()
     Serial.println(WiFi.SSID());
   
     // Print your WiFi shield's IP address:
-    configuration.ip = WiFi.localIP();
+    config_wifi->ip = WiFi.localIP();
     Serial.print("IP Address: ");
-    Serial.println(configuration.ip);
+    Serial.println(config_wifi->ip);
   
     // Print your MAC address:
-    WiFi.macAddress(configuration.mac);
+    WiFi.macAddress(config_wifi->mac);
     Serial.print("MAC address: ");
-    Serial.print(configuration.mac[5], HEX);
+    Serial.print(config_wifi->mac[5], HEX);
     Serial.print(":");
-    Serial.print(configuration.mac[4], HEX);
+    Serial.print(config_wifi->mac[4], HEX);
     Serial.print(":");
-    Serial.print(configuration.mac[3], HEX);
+    Serial.print(config_wifi->mac[3], HEX);
     Serial.print(":");
-    Serial.print(configuration.mac[2], HEX);
+    Serial.print(config_wifi->mac[2], HEX);
     Serial.print(":");
-    Serial.print(configuration.mac[1], HEX);
+    Serial.print(config_wifi->mac[1], HEX);
     Serial.print(":");
-    Serial.println(configuration.mac[0], HEX);
+    Serial.println(config_wifi->mac[0], HEX);
   
     // Print the received signal strength:
     long rssi = WiFi.RSSI();
@@ -89,7 +128,7 @@ void printWiFiStatus()
     
     // Print where to go in a browser:
     Serial.print("To see this page in action, open a browser to http://");
-    Serial.println(configuration.ip);
+    Serial.println(config_wifi->ip);
   #endif // of DEBUG
 }
 
@@ -105,11 +144,11 @@ void start_AP()
   #if DEBUG == 1
     // print the network name (SSID);
     Serial.print("Creating access point named: ");
-    Serial.println(configuration.my_ssid);
+    Serial.println(config_wifi->my_ssid);
   #endif
 
   // Create open network. Change this line if you want to create an WEP network:
-  status = WiFi.beginAP(configuration.my_ssid);
+  status = WiFi.beginAP(config_wifi->my_ssid);
   if (status != WL_AP_LISTENING) {
     #if DEBUG == 1
         Serial.println("Creating access point failed");
@@ -127,7 +166,7 @@ void start_AP()
   #endif
   
   // If you get a connection, report back via serial:
-  Udp.begin(configuration.localPort);
+  Udp.begin(config_wifi->localPort);
 }
 
 
@@ -164,7 +203,7 @@ bool connect_to_WPA(char ssid[], char pass[])
     WiFi.disconnect();
     WiFi.end();
     start_AP();
-    configuration.wifi_mode = AP_MODE;
+    config_wifi->wifi_mode = AP_MODE;
     return false;
   }
   
@@ -178,7 +217,7 @@ bool connect_to_WPA(char ssid[], char pass[])
   
   // If you get a connection, report back via serial:
   server.begin();
-  Udp.begin(configuration.localPort);
+  Udp.begin(config_wifi->localPort);
   return true;
 }
 
@@ -190,7 +229,7 @@ bool connect_to_WPA(char ssid[], char pass[])
 // Return:    none
 void switch_to_AP(OSCMessage &msg) 
 {
-  if (configuration.wifi_mode != AP_MODE) {
+  if (config_wifi->wifi_mode != AP_MODE) {
     #if DEBUG == 1
         Serial.println("Received command to switch to AP mode");
     #endif
@@ -199,8 +238,8 @@ void switch_to_AP(OSCMessage &msg)
     WiFi.disconnect();
     WiFi.end();
     start_AP();
-    configuration.wifi_mode = AP_MODE;
-    flash_config.write(configuration);
+    config_wifi->wifi_mode = AP_MODE;
+    //flash_config.write(configuration);
   }
   
   #if DEBUG == 1
@@ -278,11 +317,11 @@ void connect_to_new_network()
   // Try connecting on newly specified one
   // Will revert to AP Mode if this fails
   if(connect_to_WPA(new_ssid,new_pass)) {
-    configuration.wifi_mode = WPA_CLIENT_MODE;
-    configuration.ip = WiFi.localIP();
-    strcpy(configuration.ssid,new_ssid);
-    strcpy(configuration.pass,new_pass);
-    flash_config.write(configuration);
+    config_wifi->wifi_mode = WPA_CLIENT_MODE;
+    config_wifi->ip = WiFi.localIP();
+    strcpy(config_wifi->ssid,new_ssid);
+    strcpy(config_wifi->pass,new_pass);
+    //flash_config.write(configuration);
   } 
 }
 
@@ -320,22 +359,23 @@ void set_pass(OSCMessage &msg)
 // Arguments: msg (OSC message with no data, only message header was needed by msg_router())
 // Return:    none
 void broadcastIP(OSCMessage &msg) {
-  configuration.ip = WiFi.localIP();
+  OSCBundle bndl;
+  config_wifi->ip = WiFi.localIP();
+  char addressString[255];
+  sprintf(addressString, "%s%s", packet_header_string, "/NewIP");
+  bndl.add(addressString).add((int32_t)config_wifi->ip[0])
+                         .add((int32_t)config_wifi->ip[1])
+                         .add((int32_t)config_wifi->ip[2])
+                         .add((int32_t)config_wifi->ip[3]);
 
-  sprintf(addressString, "%s%s", configuration.packet_header_string, "/NewIP");
-  bndl.add(addressString).add((int32_t)configuration.ip[0])
-                         .add((int32_t)configuration.ip[1])
-                         .add((int32_t)configuration.ip[2])
-                         .add((int32_t)configuration.ip[3]);
-
-  Udp.beginPacket(configuration.ip_broadcast, configuration.localPort);
+  Udp.beginPacket(config_wifi->ip_broadcast, config_wifi->localPort);
   bndl.send(Udp);     // Send the bytes to the SLIP stream
   Udp.endPacket();    // Mark the end of the OSC Packet
   bndl.empty();       // Empty the bundle to free room for a new one
 
   #if DEBUG == 1
     Serial.print("Broadcasted IP: ");
-    Serial.println(configuration.ip);
+    Serial.println(config_wifi->ip);
   #endif
 }
 
@@ -349,21 +389,21 @@ void set_port(OSCMessage &msg)
 {
   #if DEBUG == 1
     Serial.print("Port changed from ");
-    Serial.print(configuration.localPort);
+    Serial.print(config_wifi->localPort);
   #endif
 
   // Get new port, stop listening on old port, start on new port
-  configuration.localPort = msg.getInt(0);
+  config_wifi->localPort = msg.getInt(0);
   Udp.stop();
-  Udp.begin(configuration.localPort);
+  Udp.begin(config_wifi->localPort);
 
   #if DEBUG == 1
     Serial.print(" to ");
-    Serial.println(configuration.localPort);
+    Serial.println(config_wifi->localPort);
   #endif
 
   // Update saved port in configuration
-  flash_config.write(configuration);
+  //flash_config.write(configuration);
 }
 
 
