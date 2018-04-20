@@ -11,7 +11,7 @@
 #define is_relay 0
 #define is_wifi 1
 #define is_lora 0
-#define is_analog 0
+#define is_analog 2
 
 #if is_ishield == 1
   #define is_neopixel 1      // Toggle based on whether Neopixels are being used
