@@ -1,3 +1,8 @@
+#if is_analog > 0
+  #define num_measurements 4      // Must be 1, 2, 4, or 8 number of analog measurements to sample and average per channel
+  int16_t a0, a1, a2, a3, a4, a5; // Memory to store analog sensor values
+#endif
+
 // --- READ ANALOG ---
 // Generic subroutine for reading raw sensor data with averaging
 // Arguments: none

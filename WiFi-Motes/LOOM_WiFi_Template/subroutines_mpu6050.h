@@ -1,5 +1,10 @@
-
-
+struct config_t_mpu6050{
+  int   ax_offset, ay_offset, az_offset, gx_offset, gy_offset, gz_offset;
+};
+struct config_t_mpu6050 * config_mpu6050;
+void link_config_mpu6050(struct config_t_mpu6050 *flash_config_mpu6050){
+    config_mpu6050 = flash_config_mpu6050;
+}
 // Include libraries for serial and i2c devices
 //#include "S_message.h"
 #include "I2Cdev.h"
@@ -344,23 +349,23 @@ void meansensors()
 // Arguments:
 // Return:
 void calibration() {
-  configuration.ax_offset = -mean_ax / 8;
-  configuration.ay_offset = -mean_ay / 8;
-  configuration.az_offset = (16384 - mean_az) / 8;
+  config_mpu6050->ax_offset = -mean_ax / 8;
+  config_mpu6050->ay_offset = -mean_ay / 8;
+  config_mpu6050->az_offset = (16384 - mean_az) / 8;
 
-  configuration.gx_offset = -mean_gx / 4;
-  configuration.gy_offset = -mean_gy / 4;
-  configuration.gz_offset = -mean_gz / 4;
+  config_mpu6050->gx_offset = -mean_gx / 4;
+  config_mpu6050->gy_offset = -mean_gy / 4;
+  config_mpu6050->gz_offset = -mean_gz / 4;
   
   while (1) {
     int ready = 0;
-    accelgyro.setXAccelOffset(configuration.ax_offset);
-    accelgyro.setYAccelOffset(configuration.ay_offset);
-    accelgyro.setZAccelOffset(configuration.az_offset);
+    accelgyro.setXAccelOffset(config_mpu6050->ax_offset);
+    accelgyro.setYAccelOffset(config_mpu6050->ay_offset);
+    accelgyro.setZAccelOffset(config_mpu6050->az_offset);
 
-    accelgyro.setXGyroOffset(configuration.gx_offset);
-    accelgyro.setYGyroOffset(configuration.gy_offset);
-    accelgyro.setZGyroOffset(configuration.gz_offset);
+    accelgyro.setXGyroOffset(config_mpu6050->gx_offset);
+    accelgyro.setYGyroOffset(config_mpu6050->gy_offset);
+    accelgyro.setZGyroOffset(config_mpu6050->gz_offset);
 
     meansensors();
     #if DEBUG == 1
@@ -368,22 +373,22 @@ void calibration() {
     #endif
 
     if (abs(mean_ax) <= acel_deadzone) ready++;
-    else configuration.ax_offset = configuration.ax_offset - mean_ax / acel_deadzone;
+    else config_mpu6050->ax_offset = config_mpu6050->ax_offset - mean_ax / acel_deadzone;
 
     if (abs(mean_ay) <= acel_deadzone) ready++;
-    else configuration.ay_offset = configuration.ay_offset - mean_ay / acel_deadzone;
+    else config_mpu6050->ay_offset = config_mpu6050->ay_offset - mean_ay / acel_deadzone;
 
     if (abs(16384 - mean_az) <= acel_deadzone) ready++;
-    else configuration.az_offset = configuration.az_offset + (16384 - mean_az) / acel_deadzone;
+    else config_mpu6050->az_offset = config_mpu6050->az_offset + (16384 - mean_az) / acel_deadzone;
 
     if (abs(mean_gx) <= giro_deadzone) ready++;
-    else configuration.gx_offset = configuration.gx_offset - mean_gx / (giro_deadzone + 1);
+    else config_mpu6050->gx_offset = config_mpu6050->gx_offset - mean_gx / (giro_deadzone + 1);
 
     if (abs(mean_gy) <= giro_deadzone) ready++;
-    else configuration.gy_offset = configuration.gy_offset - mean_gy / (giro_deadzone + 1);
+    else config_mpu6050->gy_offset = config_mpu6050->gy_offset - mean_gy / (giro_deadzone + 1);
 
     if (abs(mean_gz) <= giro_deadzone) ready++;
-    else configuration.gz_offset = configuration.gz_offset - mean_gz / (giro_deadzone + 1);
+    else config_mpu6050->gz_offset = config_mpu6050->gz_offset - mean_gz / (giro_deadzone + 1);
 
     if (ready == 6) break;
   }
@@ -396,12 +401,11 @@ void calibration() {
 // 
 // Arguments:
 // Return:
-void udp_mpu6050(void)
+void package_mpu6050(OSCBundle *bndl, char packet_header_string[])
 {
   char addressString[255];    // Declare address string buffer
   // Format MPU6050 data into OSC
-  
-  OSCBundle bndl;             // Declare the bundle
+
   // Messages want an OSC address as first argument
   // Compile bundle
 
@@ -427,46 +431,39 @@ void udp_mpu6050(void)
   // Assemble UDP Packet
   // IP1 IP2 Yaw Pitch Roll aX aY aZ gX gY gZ vBatt
   #ifdef OUTPUT_READABLE_YAWPITCHROLL
-    sprintf(addressString, "%s%s", configuration.packet_header_string, "/yaw");
-    bndl.add(addressString).add((float)(ypr[0] * 180 / M_PI));
-    sprintf(addressString, "%s%s", configuration.packet_header_string, "/roll");
-    bndl.add(addressString).add((float)(ypr[1] * 180 / M_PI));
-    sprintf(addressString, "%s%s", configuration.packet_header_string, "/pitch");
-    bndl.add(addressString).add((float)(ypr[2] * 180 / M_PI));
+    sprintf(addressString, "%s%s", packet_header_string, "/yaw");
+    bndl->add(addressString).add((float)(ypr[0] * 180 / M_PI));
+    sprintf(addressString, "%s%s", packet_header_string, "/roll");
+    bndl->add(addressString).add((float)(ypr[1] * 180 / M_PI));
+    sprintf(addressString, "%s%s", packet_header_string, "/pitch");
+    bndl->add(addressString).add((float)(ypr[2] * 180 / M_PI));
   #endif
   
-  sprintf(addressString, "%s%s", configuration.packet_header_string, "/accelX");
-  bndl.add(addressString).add(axf);
-  sprintf(addressString, "%s%s", configuration.packet_header_string, "/accelY");
-  bndl.add(addressString).add(ayf);
-  sprintf(addressString, "%s%s", configuration.packet_header_string, "/accelZ");
-  bndl.add(addressString).add(azf);
-  sprintf(addressString, "%s%s", configuration.packet_header_string, "/gyroX");
-  bndl.add(addressString).add((float)gx / 16000);
-  sprintf(addressString, "%s%s", configuration.packet_header_string, "/gyroY");
-  bndl.add(addressString).add((float)gy / 16000);
-  sprintf(addressString, "%s%s", configuration.packet_header_string, "/gyroZ");
-  bndl.add(addressString).add((float)gz / 16000);
+  sprintf(addressString, "%s%s", packet_header_string, "/accelX");
+  bndl->add(addressString).add(axf);
+  sprintf(addressString, "%s%s", packet_header_string, "/accelY");
+  bndl->add(addressString).add(ayf);
+  sprintf(addressString, "%s%s", packet_header_string, "/accelZ");
+  bndl->add(addressString).add(azf);
+  sprintf(addressString, "%s%s", packet_header_string, "/gyroX");
+  bndl->add(addressString).add((float)gx / 16000);
+  sprintf(addressString, "%s%s", packet_header_string, "/gyroY");
+  bndl->add(addressString).add((float)gy / 16000);
+  sprintf(addressString, "%s%s", packet_header_string, "/gyroZ");
+  bndl->add(addressString).add((float)gz / 16000);
   
   #ifdef OUTPUT_READABLE_WORLDACCEL
-    sprintf(addressString, "%s%s", configuration.packet_header_string, "/rwx");
-    bndl.add(addressString).add(aaWorld.x);
-    sprintf(addressString, "%s%s", configuration.packet_header_string, "/rwy");
-    bndl.add(addressString).add(aaWorld.y);
-    sprintf(addressString, "%s%s", configuration.packet_header_string, "/rwz");
-    bndl.add(addressString).add(aaWorld.z);
+    sprintf(addressString, "%s%s", packet_header_string, "/rwx");
+    bndl->add(addressString).add(aaWorld.x);
+    sprintf(addressString, "%s%s", packet_header_string, "/rwy");
+    bndl->add(addressString).add(aaWorld.y);
+    sprintf(addressString, "%s%s", packet_header_string, "/rwz");
+    bndl->add(addressString).add(aaWorld.z);
   #endif
   
-  sprintf(addressString, "%s%s", configuration.packet_header_string, "/vbat");
-  bndl.add(addressString).add(vbat);          // Tack battery voltage onto here. Will want to change this for other sensors
-  sprintf(addressString, "%s%s", configuration.packet_header_string, "/freefall");
-  bndl.add(addressString).add(freefall);
-  
-  // UDP Packet
-  Udp.beginPacket(configuration.ip_broadcast, configuration.localPort);
-  bndl.send(Udp);   // Send the bytes to the SLIP stream
-  Udp.endPacket();  // Mark the end of the OSC Packet
-  bndl.empty();     // Empty the bundle to free room for a new one
+  sprintf(addressString, "%s%s", packet_header_string, "/freefall");
+  bndl->add(addressString).add(freefall);
+
 }
 
 
@@ -496,7 +493,7 @@ void calMPU6050()
       Serial.println("\nCalculating offsets...");
     #endif
     calibration();
-    configuration.checksum = memValidationValue;
+    //configuration.checksum = memValidationValue;
     state++;
     delay(1000);
   }
@@ -521,17 +518,17 @@ void calMPU6050()
       Serial.print("\t");
       Serial.println(mean_gz);
       Serial.print("Your offsets:\t");
-      Serial.print(configuration.ax_offset);
+      Serial.print(config_mpu6050->ax_offset);
       Serial.print("\t");
-      Serial.print(configuration.ay_offset);
+      Serial.print(config_mpu6050->ay_offset);
       Serial.print("\t");
-      Serial.print(configuration.az_offset);
+      Serial.print(config_mpu6050->az_offset);
       Serial.print("\t");
-      Serial.print(configuration.gx_offset);
+      Serial.print(config_mpu6050->gx_offset);
       Serial.print("\t");
-      Serial.print(configuration.gy_offset);
+      Serial.print(config_mpu6050->gy_offset);
       Serial.print("\t");
-      Serial.println(configuration.gz_offset);
+      Serial.println(config_mpu6050->gz_offset);
     #endif
     state = 0; // reset state flag
   } // of if (state == 2)
@@ -551,7 +548,6 @@ void calMPU6050_OSC(OSCMessage &msg)
   #endif
   
   calMPU6050();
-  flash_config.write(configuration);      // Uncomment when flash writing is enabled
   
   #if DEBUG == 1
     Serial.println("New calibration values written to non-volatile memory");
