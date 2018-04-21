@@ -1,8 +1,8 @@
-struct config_t_mpu6050{
+struct config_mpu6050_t {
   int   ax_offset, ay_offset, az_offset, gx_offset, gy_offset, gz_offset;
 };
-struct config_t_mpu6050 * config_mpu6050;
-void link_config_mpu6050(struct config_t_mpu6050 *flash_config_mpu6050){
+struct config_mpu6050_t * config_mpu6050;
+void link_config_mpu6050(struct config_mpu6050_t *flash_config_mpu6050){
     config_mpu6050 = flash_config_mpu6050;
 }
 // Include libraries for serial and i2c devices
@@ -72,10 +72,10 @@ int giro_deadzone = 1;   // Giro error allowed, make it lower to get more precis
 // Called by main setup
 // Arguments:
 // Return:
-void i2c_setup()
+void setup_mpu6050()
 {
   #if DEBUG == 1
-    Serial.println("starting i2c initialization");
+    Serial.println("starting mpu6050 initialization");
   #endif
  
   // Join I2C bus (I2Cdev library doesn't do this automatically)

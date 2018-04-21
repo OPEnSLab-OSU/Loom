@@ -17,7 +17,7 @@
 
 // Preamble includes any relevant subroutine files based on options
 // specified in the above config
-#include "preamble.h"
+#include "loom_preamble.h"
 
 
 // -------------------------------------------------------------
@@ -62,7 +62,7 @@ void loop() {
             String((char*)buf).toCharArray(str, sizeof(str)-1);
             char *token;
             char *savept = str;
-            String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "lightIR", "lightFull", "vbat"};
+            String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
             for(int i = 0; i < NUM_FIELDS; i+=2) {
               token = strtok_r(savept, ",", &savept);
               if(token != NULL) {
@@ -177,50 +177,50 @@ void loop() {
 
 
   #if is_wifi == 1
-  // Compare the previous status to the current status
-  if (status != WiFi.status()) {
-    status = WiFi.status();              // It has changed, update the variable
-    
-    #if DEBUG == 1
-      if (status == WL_AP_CONNECTED) {   // A device has connected to the AP
-          print_remote_mac_addr();                            
-      } else {                           // A device has disconnected from the AP, and we are back in listening mode 
-        Serial.println("Device disconnected from AP");
-      }
-    #endif
-  } // of if ( status != WiFi.status() )
-  #endif // of is_wifi
-  //BEGIN SENDING OF DATA
+		// Compare the previous status to the current status
+		if (status != WiFi.status()) {
+			status = WiFi.status();              // It has changed, update the variable
+			
+			#if DEBUG == 1
+				if (status == WL_AP_CONNECTED) {   // A device has connected to the AP
+						print_remote_mac_addr();                            
+				} else {                           // A device has disconnected from the AP, and we are back in listening mode 
+					Serial.println("Device disconnected from AP");
+				}
+			#endif
+		} // of if ( status != WiFi.status() )
 
-  OSCBundle send_bndl;
-  send_bndl.empty();
-  // Measure battery voltage
-  vbat = analogRead(VBATPIN);
-  vbat = (vbat * 2 * 3.3) / 1024; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
+		//BEGIN SENDING OF DATA
+		OSCBundle send_bndl;
+		send_bndl.empty();
+		// Measure battery voltage
+		vbat = analogRead(VBATPIN);
+		vbat = (vbat * 2 * 3.3) / 1024; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
 
-  sprintf(addressString, "%s%s", configuration.packet_header_string, "/vbat");
-  send_bndl.add(addressString).add(vbat);          // Tack battery voltage onto here. Will want to change this for other sensors
-  
-  // Update MPU6050 Data
-  #if is_mpu6050 == 1
-    measure_mpu6050();            // Now measure MPU6050, update values in global registers 
-    package_mpu6050(&send_bndl,configuration.packet_header_string);                // Build and send packet
-    // UDP Packet
-    Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
-    send_bndl.send(Udp);   // Send the bytes to the SLIP stream
-    Udp.endPacket();  // Mark the end of the OSC Packet
-    send_bndl.empty();     // Empty the bundle to free room for a new one
-    mpu.resetFIFO();              // Flush MPU6050 FIFO to avoid overflows if using i2c
-  #endif
+		sprintf(addressString, "%s%s", configuration.packet_header_string, "/vbat");
+		send_bndl.add(addressString).add(vbat);          // Tack battery voltage onto here. Will want to change this for other sensors
+		
+		// Update MPU6050 Data
+		#if is_mpu6050 == 1
+			measure_mpu6050();            // Now measure MPU6050, update values in global registers 
+			package_mpu6050(&send_bndl,configuration.packet_header_string);                // Build and send packet
+			// UDP Packet
+			Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
+			send_bndl.send(Udp);   // Send the bytes to the SLIP stream
+			Udp.endPacket();  // Mark the end of the OSC Packet
+			send_bndl.empty();     // Empty the bundle to free room for a new one
+			mpu.resetFIFO();              // Flush MPU6050 FIFO to avoid overflows if using i2c
+		#endif
 
-  // Get analog readings
-  #if is_analog >= 1
-      package_analog(&send_bndl,configuration.packet_header_string);
-      Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
-      send_bndl.send(Udp);   // Send the bytes to the SLIP stream
-      Udp.endPacket();  // Mark the end of the OSC Packet
-      send_bndl.empty();     // Empty the bundle to free room for a new one
-  #endif
+		// Get analog readings
+		#if is_analog >= 1
+				package_analog(&send_bndl,configuration.packet_header_string);
+				Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
+				send_bndl.send(Udp);   // Send the bytes to the SLIP stream
+				Udp.endPacket();  // Mark the end of the OSC Packet
+				send_bndl.empty();     // Empty the bundle to free room for a new one
+		#endif
+	#endif // of is_wifi
 
   // Delay between loop iterations
   #ifdef is_sleep_period

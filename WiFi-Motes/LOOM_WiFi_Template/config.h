@@ -13,11 +13,36 @@
 #define is_lora 0
 #define is_analog 2
 
+//Multiplexer
+#define is_tca9548a 1
+
+#if is_tca9548a == 1
+	//Lux Sensor
+	#define is_tsl2591 1
+
+	//Accelerometer / Magnetometer
+	#define is_fxos8700 1
+
+	//Gyroscope
+	#define is_fxas21002 1
+
+	//ZX_Distance Sensor
+	#define is_zxgesturesensor 1
+
+	//Temperature / Humidity
+	#define is_sht31d 1
+
+	//Sonar
+	#define is_mb1232 1
+
+	//Accelerometer / Gyroscope
+	#define is_mpu6050 1
+#endif
+
 #if is_ishield == 1
   #define is_neopixel 1      // Toggle based on whether Neopixels are being used
 
   #define is_mpu6050 1
-  #define is_i2c 0x86       // For MPU6050
 
   #if is_neopixel == 1
     #define NEO_0 false

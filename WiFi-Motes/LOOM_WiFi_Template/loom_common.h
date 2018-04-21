@@ -178,8 +178,8 @@ void LOOM_begin()
     pinMode(button, INPUT_PULLUP); 
   #endif
 
-  #ifdef is_i2c
-    i2c_setup();
+  #ifdef is_mpu6050
+    setup_mpu6050();
   #endif
 
 

@@ -9,7 +9,7 @@
   #include <WiFiUdp.h>
 
   #define AP_NAME   STR(FAMILY) STR(DEVICE) STR(INIT_INST)
-  struct config_t_wifi{
+  struct config_wifi_t{
     IPAddress   ip;                     // Device's IP Address
     char*       my_ssid;                // Default AP name
     char        ssid[32];               // Host network name
@@ -20,8 +20,8 @@
     byte        mac[6];                 // Device's MAC Address
     WiFiMode    wifi_mode;              // Devices current wifi mode
   };
-  struct config_t_wifi * config_wifi;
-  void link_config_wifi(struct config_t_wifi *flash_config_wifi){
+  struct config_wifi_t * config_wifi;
+  void link_config_wifi(struct config_wifi_t *flash_config_wifi){
     config_wifi = flash_config_wifi;
   }
   char * packet_header_string;

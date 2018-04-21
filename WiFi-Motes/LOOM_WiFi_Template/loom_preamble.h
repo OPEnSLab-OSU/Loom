@@ -40,27 +40,49 @@
 #endif
 
 #if is_analog > 0
-  #include "subroutines_analogIn.h"
-#endif
-#ifdef is_i2c 
-  #include "subroutines_mpu6050.h"
+  #include "loom_analogIn.h"
 #endif
 #if is_neopixel == 1
-  #include "subroutines_neopixel.h"
+  #include "loom_neopixel.h"
 #endif
 #if num_servos > 0
-  #include "subroutines_servo.h"
+  #include "loom_servo.h"
 #endif
 #if is_relay == 1
-  #include "subroutines_relay.h"
+  #include "loom_relay.h"
 #endif
 #if is_wifi == 1
-	#include "subroutines_wifi.h"
+	#include "loom_wifi.h"
 #endif
 #if is_lora == 1
-	#include "subroutines_lora.h"
+	#include "loom_lora.h"
 #endif
-#include "subroutines_flash.h"
+#if is_mpu6050 == 1
+  #include "loom_mpu6050.h"
+#endif
+#if is_tca9548a == 1
+	#include "loom_tca9548a.h"
+#endif
+#if is_tsl2591 == 1
+	#include "loom_tsl2591.h"
+#endif
+#if is_fxos8700 == 1
+	#include "loom_fxos8700.h"
+#endif
+#if is_fxas21002 == 1
+	#include "loom_fxas21002.h"
+#endif
+#if is_zxgesturesensor == 1
+	#include "loom_zxgesturesensor.h"
+#endif
+#if is_sht31d == 1
+	#include "loom_sht31d.h"
+#endif
+#if is_mb1232 == 1
+	#include "loom_mb1232.h"
+#endif
+
+#include "loom_flash.h"
 
 // These may refer to functions in above headers
-#include "subroutines_common.h"
+#include "loom_common.h"
