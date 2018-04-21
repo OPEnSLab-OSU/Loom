@@ -32,8 +32,8 @@ struct config_mpu6050_t {
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 struct config_mpu6050_t * config_mpu6050;
-void link_config_mpu6050(struct config_mpu6050_t *flash_config_mpu6050){
-    config_mpu6050 = flash_config_mpu6050;
+void link_config_mpu6050(struct config_mpu6050_t *flash_setup_mpu6050){
+    config_mpu6050 = flash_setup_mpu6050;
 }
 
 

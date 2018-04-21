@@ -12,7 +12,7 @@ char addressString[255];
 
 
 
-extern void switch_to_AP(OSCMessage &msg);  // Reference to externally defined function called by msg_router
+//extern void switch_to_AP(OSCMessage &msg);  // Reference to externally defined function called by msg_router
 
 
 // ================================================================
@@ -33,7 +33,7 @@ void set_instance_num(OSCMessage &msg)
     Serial.println(configuration.packet_header_string);
   #endif
   write_non_volatile();
-  //flash_config.write(configuration);
+  //flash_setup.write(configuration);
 }
 
 // --- MESSAGE ROUTER ---
@@ -48,25 +48,26 @@ void msg_router(OSCMessage &msg, int addrOffset) {
     Serial.print("Parsed ");
     Serial.println(buffer);
   #endif
-  #if num_servos > 0
-    msg.dispatch("/Servo/Set", set_servo, addrOffset);
+  
+  #if num_servos > 0  
+    msg.dispatch("/Servo/Set",    set_servo,      addrOffset);
   #endif
   #if is_relay == 1
-    msg.dispatch("/Relay/State", handleRelay, addrOffset);
+    msg.dispatch("/Relay/State",  handleRelay,    addrOffset);
   #endif
   #if is_mpu6050 == 1
-    msg.dispatch("/MPU6050/cal", calMPU6050_OSC, addrOffset);
+    msg.dispatch("/MPU6050/cal",  calMPU6050_OSC, addrOffset);
   #endif
   #if is_neopixel == 1
-    msg.dispatch("/Neopixel", setColor, addrOffset);
+    msg.dispatch("/Neopixel",     setColor,       addrOffset);
   #endif
 
   #if is_wifi == 1
-    msg.dispatch("/Connect/SSID", set_ssid, addrOffset);
-    msg.dispatch("/Connect/Password", set_pass, addrOffset);
-    msg.dispatch("/wifiSetup/AP", switch_to_AP, addrOffset);
-    msg.dispatch("/SetPort", set_port, addrOffset);
-    msg.dispatch("/requestIP", broadcastIP, addrOffset);
+    msg.dispatch("/Connect/SSID",     set_ssid,     addrOffset);
+    msg.dispatch("/Connect/Password", set_pass,     addrOffset);
+    msg.dispatch("/wifiSetup/AP",     switch_to_AP, addrOffset);
+    msg.dispatch("/SetPort",          set_port,     addrOffset);
+    msg.dispatch("/requestIP",        broadcastIP,  addrOffset);
   #endif
   
   msg.dispatch("/SetID", set_instance_num, addrOffset);
@@ -80,8 +81,8 @@ void msg_router(OSCMessage &msg, int addrOffset) {
 #ifdef button
 void check_button_held()
 {
-  if ( (uint32_t)digitalRead(button) ){
-  button_timer = 0;
+  if ( (uint32_t)digitalRead(button) ) {
+    button_timer = 0;
   } else {
     #ifdef is_sleep_period
       button_timer += is_sleep_period;
@@ -99,7 +100,7 @@ void check_button_held()
     } 
   } // of else 
 }
-#endif
+#endif // of ifdef button
 
 
 // ================================================================
@@ -122,6 +123,10 @@ void LOOM_begin()
     pinMode(button, INPUT_PULLUP); 
   #endif
 
+  // Primary reading and writing config to non-volatile memory
+  flash_config_setup();
+
+  // Sensor/Actuator specific setups
   #ifdef is_mpu6050
     setup_mpu6050();
   #endif
@@ -129,12 +134,6 @@ void LOOM_begin()
   #ifdef is_max31856
     setup_max31856();
   #endif
-
-  // Primary configuratation, such as writing config to non-volatile memory
-  init_config();
-
-
-  // Actuator-specific setups
   #if is_neopixel == 1
     setup_neopixel();
   #endif
@@ -144,9 +143,8 @@ void LOOM_begin()
   #if is_relay == 1
     setup_relay();
   #endif
-  
- 
-  
+
+  // Communication Platform specific setups
   #if is_wifi == 1
     wifi_setup();
   #endif
