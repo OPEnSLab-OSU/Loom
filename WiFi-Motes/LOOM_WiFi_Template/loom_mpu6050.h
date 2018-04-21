@@ -5,6 +5,21 @@
 //#include "S_message.h"
 #include "I2Cdev.h"
 #include "Wire.h"
+#include "MPU6050_6Axis_MotionApps20.h"
+
+
+// ================================================================ 
+// ===                         DEFINES                          === 
+// ================================================================
+#define INTERRUPT_PIN 11
+
+// Uncoment one or more of these to determine which readings and format to send
+#define OUTPUT_READABLE_YAWPITCHROLL
+//#define OUTPUT_BINARY_YAWPITCHROLL
+//#define OUTPUT_READABLE_REALACCEL
+//#define OUTPUT_READABLE_WORLDACCEL  // this is pretty cool
+//#define OUTPUT_BINARY_ACCELGYRO
+
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -22,19 +37,11 @@ void link_config_mpu6050(struct config_mpu6050_t *flash_config_mpu6050){
 }
 
 
-#define INTERRUPT_PIN 11
 bool dmpReady = false; //set true if DMP init was successful
 
-#include "MPU6050_6Axis_MotionApps20.h"
 MPU6050 mpu;             // Create instance of MPU6050 called mpu
 MPU6050 accelgyro;       // Another instance called accelgyro
 
-// Uncoment one or more of these to determine which readings and format to send
-#define OUTPUT_READABLE_YAWPITCHROLL
-//#define OUTPUT_BINARY_YAWPITCHROLL
-//#define OUTPUT_READABLE_REALACCEL
-//#define OUTPUT_READABLE_WORLDACCEL  // this is pretty cool
-//#define OUTPUT_BINARY_ACCELGYRO
 
 uint8_t  mpuIntStatus;   // Holds actual interrupt status byte from MPU
 uint8_t  devStatus;      // Return status after each device operation (0 = success, !0 = error)

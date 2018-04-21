@@ -50,9 +50,6 @@ void setup_neopixel() {
 // ===                        FUNCTIONS                         === 
 // ================================================================
 
-
-
-
 // --- SET COLOR ---
 // Handle OSC messages to set specified Neopixel to a given color
 // Arguments: msg (OSC message containing details of which Neopixel and what color)

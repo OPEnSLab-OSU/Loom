@@ -78,10 +78,11 @@ void init_config()
             strcpy(configuration.config_wifi.ssid,DEFAULT_NETWORK);       // Default network name
             strcpy(configuration.config_wifi.pass,DEFAULT_PASSWORD);      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
             configuration.config_wifi.keyIndex = 0;                       // Your network key Index number (needed only for WEP)
-            configuration.config_wifi.ip_broadcast = "255.255.255.255";     // IP to Broadcast data 
+            configuration.config_wifi.ip_broadcast = "255.255.255.255";   // IP to Broadcast data 
             configuration.config_wifi.localPort = INIT_PORT;              // Local port to listen on
             configuration.config_wifi.wifi_mode = DEFAULT_MODE;           // WiFi mode to start in (AP_MODE, WPA_CLIENT_MODE, WEP_CLIENT_MODE)
           #endif
+          
           // Add any other behavior/calibration wrapped in an #ifdef is_something preprocessor directive HERE
           
           #if is_mpu6050 == 1
@@ -89,7 +90,6 @@ void init_config()
           #endif
           
           configuration.checksum = memValidationValue;      // Configuration has been written successfully, so we write the checksum
-          
 
           #if DEBUG == 1
             Serial.println("Writing to flash for the first time.");

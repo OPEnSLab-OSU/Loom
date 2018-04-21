@@ -1,4 +1,6 @@
-// Common global variables
+// ================================================================
+// ===                 COMMON GLOBAL VARIABLES                  ===
+// ================================================================
 int           led =  LED_BUILTIN;             // LED pin number
 volatile bool ledState = LOW;                 // State of LED
 float         vbat = 3.3;                     // Place to save measured battery voltage (3.3V max)
@@ -8,10 +10,14 @@ OSCErrorCode  error;                          // Hold errors from OSC
 uint32_t      button_timer;                   // For time button has been held
 char addressString[255];
 
+
+
 extern void switch_to_AP(OSCMessage &msg);  // Reference to externally defined function called by msg_router
 
 
-
+// ================================================================
+// ===                        FUNCTIONS                         ===
+// ================================================================
 
 // --- SET INSTANCE NUMBER ---
 // Updates device's identifying instance number
@@ -29,9 +35,6 @@ void set_instance_num(OSCMessage &msg)
   write_non_volatile();
   //flash_config.write(configuration);
 }
-
-
-
 
 // --- MESSAGE ROUTER ---
 // Used to route OSC messages to the correct function to handle it
@@ -65,6 +68,7 @@ void msg_router(OSCMessage &msg, int addrOffset) {
     msg.dispatch("/SetPort", set_port, addrOffset);
     msg.dispatch("/requestIP", broadcastIP, addrOffset);
   #endif
+  
   msg.dispatch("/SetID", set_instance_num, addrOffset);
 }
 
@@ -98,8 +102,9 @@ void check_button_held()
 #endif
 
 
-
-// --- LOOM BEGIN ---
+// ================================================================
+// ===                        LOOM BEGIN                        ===
+// ================================================================
 // Called by setup(), handles calling of any LOOM specific individual device setups
 // Starts Wifi or Lora and serial if debugging prints are on
 // Arguments: none
