@@ -190,22 +190,36 @@ void loop() {
     #endif
   } // of if ( status != WiFi.status() )
   #endif // of is_wifi
+  //BEGIN SENDING OF DATA
 
+  OSCBundle send_bndl;
+  send_bndl.empty();
   // Measure battery voltage
   vbat = analogRead(VBATPIN);
   vbat = (vbat * 2 * 3.3) / 1024; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
 
+  sprintf(addressString, "%s%s", configuration.packet_header_string, "/vbat");
+  send_bndl.add(addressString).add(vbat);          // Tack battery voltage onto here. Will want to change this for other sensors
   
   // Update MPU6050 Data
   #if is_mpu6050 == 1
     measure_mpu6050();            // Now measure MPU6050, update values in global registers 
-    udp_mpu6050();                // Build and send packet
+    package_mpu6050(&send_bndl,configuration.packet_header_string);                // Build and send packet
+    // UDP Packet
+    Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
+    send_bndl.send(Udp);   // Send the bytes to the SLIP stream
+    Udp.endPacket();  // Mark the end of the OSC Packet
+    send_bndl.empty();     // Empty the bundle to free room for a new one
     mpu.resetFIFO();              // Flush MPU6050 FIFO to avoid overflows if using i2c
   #endif
 
   // Get analog readings
-  #if is_analog == 1
-      measure_analog();
+  #if is_analog >= 1
+      package_analog(&send_bndl,configuration.packet_header_string);
+      Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
+      send_bndl.send(Udp);   // Send the bytes to the SLIP stream
+      Udp.endPacket();  // Mark the end of the OSC Packet
+      send_bndl.empty();     // Empty the bundle to free room for a new one
   #endif
 
   // Delay between loop iterations

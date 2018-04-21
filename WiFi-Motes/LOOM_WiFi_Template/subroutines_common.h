@@ -1,3 +1,14 @@
+// Common global variables
+int           led =  LED_BUILTIN;             // LED pin number
+volatile bool ledState = LOW;                 // State of LED
+float         vbat = 3.3;                     // Place to save measured battery voltage (3.3V max)
+char          packetBuffer[255];              // Buffer to hold incoming packet
+char          ReplyBuffer[] = "acknowledged"; // A string to send back
+const byte    memValidationValue = 99;        // Used to check if configuration has been written to (number will only be 99 if mem has been written to)
+OSCBundle     bndl;                           // Hold OSC bundle to received
+OSCErrorCode  error;                          // Hold errors from OSC
+uint32_t      button_timer;                   // For time button has been held
+char addressString[255];
 
 extern void switch_to_AP(OSCMessage &msg);  // Reference to externally defined function called by msg_router
 
@@ -84,22 +95,27 @@ void init_config()
             Serial.print("expecting OSC header ");
             Serial.println(configuration.packet_header_string);
           #endif
+          
           #if is_wifi == 1
-            configuration.my_ssid = AP_NAME;                  // Default AP name
-            strcpy(configuration.ssid,DEFAULT_NETWORK);       // Default network name
-            strcpy(configuration.pass,DEFAULT_PASSWORD);      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
-            configuration.keyIndex = 0;                       // Your network key Index number (needed only for WEP)
-            configuration.ip_broadcast = "192.168.1.255";     // IP to Broadcast data 
-            configuration.localPort = INIT_PORT;              // Local port to listen on
-            configuration.wifi_mode = DEFAULT_MODE;           // WiFi mode to start in (AP_MODE, WPA_CLIENT_MODE, WEP_CLIENT_MODE)
+            packet_header_string = configuration.packet_header_string;
+            link_config_wifi(&configuration.config_wifi);
+            configuration.config_wifi.my_ssid = AP_NAME;                  // Default AP name
+            strcpy(configuration.config_wifi.ssid,DEFAULT_NETWORK);       // Default network name
+            strcpy(configuration.config_wifi.pass,DEFAULT_PASSWORD);      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
+            configuration.config_wifi.keyIndex = 0;                       // Your network key Index number (needed only for WEP)
+            configuration.config_wifi.ip_broadcast = "192.168.1.255";     // IP to Broadcast data 
+            configuration.config_wifi.localPort = INIT_PORT;              // Local port to listen on
+            configuration.config_wifi.wifi_mode = DEFAULT_MODE;           // WiFi mode to start in (AP_MODE, WPA_CLIENT_MODE, WEP_CLIENT_MODE)
           #endif
           // Add any other behavior/calibration wrapped in an #ifdef is_something preprocessor directive HERE
           
           #if is_mpu6050 == 1
+            link_config_mpu6050(&configuration.config_mpu6050);
             calMPU6050();                                     // Calibration writes memValidationValue for us
-          #else
-            configuration.checksum = memValidationValue;      // Configuration has been written successfully, so we write the checksum
           #endif
+          
+          configuration.checksum = memValidationValue;      // Configuration has been written successfully, so we write the checksum
+          
 
           #if DEBUG == 1
             Serial.println("Writing to flash for the first time.");
