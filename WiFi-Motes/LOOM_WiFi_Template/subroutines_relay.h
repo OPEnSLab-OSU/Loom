@@ -1,3 +1,11 @@
+#if is_relay == 1
+  #define RELAY_PIN0 5
+  #define RELAY_PIN1 6
+  
+  // Array to hold relay states (on/off)
+  bool relay_on[2];
+#endif // of is_relay
+
 // --- RELAY SETUP ---
 // Called by main setup
 // Sets pin modes for relays (on pins 5 and 6)
