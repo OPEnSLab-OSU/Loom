@@ -8,11 +8,7 @@ char          packetBuffer[255];              // Buffer to hold incoming packet
 char          ReplyBuffer[] = "acknowledged"; // A string to send back
 OSCErrorCode  error;                          // Hold errors from OSC
 uint32_t      button_timer;                   // For time button has been held
-char addressString[255];
-
-
-
-//extern void switch_to_AP(OSCMessage &msg);  // Reference to externally defined function called by msg_router
+char          addressString[255];
 
 
 // ================================================================

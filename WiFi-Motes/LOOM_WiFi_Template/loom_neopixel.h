@@ -77,7 +77,11 @@ void setColor(OSCMessage &msg)
   // Update color values stored for specified Neopixel and write them to the Neopixels color
   if (state_neopixel->enabled[port]) {
     state_neopixel->colorVals[port][color] = val;
-    state_neopixel->pixels[port]->setPixelColor(pixelNum, state_neopixel->pixels[port]->Color(state_neopixel->colorVals[port][0], state_neopixel->colorVals[port][1], state_neopixel->colorVals[port][2]));
+    state_neopixel->pixels[port]->setPixelColor(pixelNum, 
+                                                state_neopixel->pixels[port]->Color(
+                                                  state_neopixel->colorVals[port][0], 
+                                                  state_neopixel->colorVals[port][1], 
+                                                  state_neopixel->colorVals[port][2]));
   }
 
   // Update colors displayed by enabled Neopixels
