@@ -121,6 +121,9 @@ void LOOM_begin()
     setup_mpu6050();
   #endif
 
+  #ifdef is_max31856
+    setup_max31856();
+  #endif
 
   // Primary configuratation, such as writing config to non-volatile memory
   init_config();

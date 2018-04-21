@@ -60,6 +60,9 @@
 #if is_mpu6050 == 1
   #include "loom_mpu6050.h"
 #endif
+#if is_max31856 == 1
+  #include "loom_max31856.h"
+#endif
 #if is_tca9548a == 1
 	#include "loom_tca9548a.h"
 #endif
