@@ -417,16 +417,6 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[])
   // Evaluate if accelerometers are all around zero-G, if so, set freefall bool to true
   if ((axf > -0.2 && axf < 0.2) && (ayf > -0.2 && ayf < 0.2) && (azf > -0.2 && azf < 0.2))
     freefall = true;
-    
-  /*
-    bndl.add(PacketHeaderString "/mac0").add((int)configuration.mac[0]);
-    bndl.add(PacketHeaderString "/mac1").add((int)configuration.mac[1]);
-    bndl.add(PacketHeaderString "/mac2").add((int)configuration.mac[2]);
-    bndl.add(PacketHeaderString "/mac3").add((int)configuration.mac[3]);
-    bndl.add(PacketHeaderString "/mac4").add((int)configuration.mac[4]);
-    bndl.add(PacketHeaderString "/mac5").add((int)configuration.mac[5]);
-    bndl.add(PacketHeaderString "/ip").add((String)configuration.ip);
-  */
   
   // Assemble UDP Packet
   // IP1 IP2 Yaw Pitch Roll aX aY aZ gX gY gZ vBatt
