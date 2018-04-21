@@ -28,6 +28,12 @@ struct state_neopixel_t *state_neopixel;
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
+
+// --- NEOPIXEL SETUP ---
+// Called by main setup
+// Creates an array to store Neopixel data, iterates through to initialize Neopixels
+// Arguments: none
+// Return:    none
 void setup_neopixel() {
   //Setup Here
   for(int i = 0; i < 3; i++) {
@@ -38,30 +44,6 @@ void setup_neopixel() {
     }
   }
 }
-
-
-
-
-
-
-  
-
-// --- NEOPIXEL SETUP ---
-// Called by main setup
-// Creates an array to store Neopixel data, iterates through to initialize Neopixels
-// Arguments: none
-// Return:    none
-//void setup_neopixel() 
-//{
-//  for(int i = 0; i < 3; i++) {
-//    if (enabled[i]) {
-//      pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
-//      pixels[i]->begin(); // This initializes the NeoPixel library.
-//      pixels[i]->show();  // Initialize all pixels to 'off'
-//    }
-//  }
-//}
-
 
 
 // --- SET COLOR ---

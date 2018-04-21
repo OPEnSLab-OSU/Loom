@@ -137,7 +137,7 @@ void LOOM_begin()
     servo_setup();
   #endif
   #if is_relay == 1
-    relay_setup();
+    setup_relay();
   #endif
   
  
