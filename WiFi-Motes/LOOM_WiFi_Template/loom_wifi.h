@@ -37,12 +37,14 @@ struct config_wifi_t{
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-//struct state_<module>_t *state_<module>;
 
 struct config_wifi_t * config_wifi;
-void link_config_wifi(struct config_wifi_t *flash_config_wifi){
-  config_wifi = flash_config_wifi;
+void link_config_wifi(struct config_wifi_t *flash_setup_wifi){
+  config_wifi = flash_setup_wifi;
 }
+
+//struct state_<module>_t *state_<module>;
+
 
 char * packet_header_string;
 // WiFi global vars/structs
@@ -264,7 +266,7 @@ void switch_to_AP(OSCMessage &msg)
     WiFi.end();
     start_AP();
     config_wifi->wifi_mode = AP_MODE;
-    //flash_config.write(configuration);
+    //flash_setup.write(configuration);
   }
   
   #if DEBUG == 1
@@ -346,7 +348,7 @@ void connect_to_new_network()
     config_wifi->ip = WiFi.localIP();
     strcpy(config_wifi->ssid,new_ssid);
     strcpy(config_wifi->pass,new_pass);
-    //flash_config.write(configuration);
+    //flash_setup.write(configuration);
   } 
 }
 
@@ -428,7 +430,7 @@ void set_port(OSCMessage &msg)
   #endif
 
   // Update saved port in configuration
-  //flash_config.write(configuration);
+  //flash_setup.write(configuration);
 }
 
 

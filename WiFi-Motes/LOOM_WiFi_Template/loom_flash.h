@@ -24,12 +24,12 @@ void write_non_volatile();
 void read_non_volatile();
 #if MEM_TYPE == MEM_FLASH
   #include <FlashStorage.h>
-  FlashStorage(flash_config,config_flash_t);    // Setup the flash storage for the structure
+  FlashStorage(flash_setup,config_flash_t);    // Setup the flash storage for the structure
   void read_non_volatile(){
-    configuration = flash_config.read();
+    configuration = flash_setup.read();
   }
   void write_non_volatile(){
-    flash_config.write(configuration);
+    flash_setup.write(configuration);
   }
 #elif MEM_TYPE == MEM_EEPROM
   #include <EEPROM.h>
@@ -42,12 +42,12 @@ void read_non_volatile();
   }
 #endif
 
-// --- INITIAL CONFIG ---
+// --- FLASH SETUP ---
 // Handles configuration of reading device config from flash (if applicable)
 //   else uses config.h specific settings, and writes these to flash
 // Arguments: none
 // Return:    none
-void init_config()
+void flash_config_setup()
 {
   #if is_wifi == 1
     packet_header_string = configuration.packet_header_string;
