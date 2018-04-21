@@ -48,7 +48,7 @@ struct state_servo_t *state_servo;
 
 
 // ================================================================ 
-// ===                        FUNCTIONS                         === 
+// ===                          SETUP                           === 
 // ================================================================
 
 // -- SERVO SETUP --
@@ -60,6 +60,10 @@ void setup_servo() {
   state_servo->pwm.setPWMFreq(60);
 }
 
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
 
 // -- SET SERVO DEGREE --
 // Changes specified servo (number) to provided position (degree)

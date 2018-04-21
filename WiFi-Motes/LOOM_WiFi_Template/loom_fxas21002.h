@@ -25,12 +25,18 @@ struct config_fxas21002_t *config_fxas21002;
 struct state_fxas21002_t *state_fxas21002;
 
 
+
+// ================================================================ 
+// ===                          SETUP                           === 
+// ================================================================
+void setup_fxas21002() {
+  //Setup Here
+}
+
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
-void setup_fxas21002() {
-	//Setup Here
-}
+
 
 void package_data_fxas21002(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl

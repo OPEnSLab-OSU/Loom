@@ -1,14 +1,26 @@
-struct config_mpu6050_t {
-  int   ax_offset, ay_offset, az_offset, gx_offset, gy_offset, gz_offset;
-};
-struct config_mpu6050_t * config_mpu6050;
-void link_config_mpu6050(struct config_mpu6050_t *flash_config_mpu6050){
-    config_mpu6050 = flash_config_mpu6050;
-}
+// ================================================================ 
+// ===                        LIBRARIES                         === 
+// ================================================================
 // Include libraries for serial and i2c devices
 //#include "S_message.h"
 #include "I2Cdev.h"
 #include "Wire.h"
+
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================
+struct config_mpu6050_t {
+  int   ax_offset, ay_offset, az_offset, gx_offset, gy_offset, gz_offset;
+};
+
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
+struct config_mpu6050_t * config_mpu6050;
+void link_config_mpu6050(struct config_mpu6050_t *flash_config_mpu6050){
+    config_mpu6050 = flash_config_mpu6050;
+}
+
 
 #define INTERRUPT_PIN 11
 bool dmpReady = false; //set true if DMP init was successful
@@ -43,16 +55,6 @@ float       ypr[3];      // [yaw, pitch, roll]   yaw/pitch/roll container and gr
 int16_t ax, ay, az;
 int16_t gx, gy, gz;
 
-
-// ================================================================
-// ===               INTERRUPT DETECTION ROUTINE                ===
-// ================================================================
-
-volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
-void dmpDataReady() {
-  mpuInterrupt = true;
-}
-
 // MPU calibration vars:
 int mean_ax, mean_ay, mean_az, mean_gx, mean_gy, mean_gz, state = 0;
 //int ax_offset,ay_offset,az_offset,gx_offset,gy_offset,gz_offset;
@@ -62,6 +64,16 @@ int buffersize = 1000;   // Amount of readings used to average, make it higher t
 int acel_deadzone = 8;   // Acelerometer error allowed, make it lower to get more precision, but sketch may not converge  (default:8)
 int giro_deadzone = 1;   // Giro error allowed, make it lower to get more precision, but sketch may not converge  (default:1)
 
+
+// ================================================================ 
+// ===                          SETUP                           === 
+// ================================================================
+
+// INTERRUPT DETECTION ROUTINE 
+volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
+void dmpDataReady() {
+  mpuInterrupt = true;
+}
 
 
 
@@ -152,6 +164,12 @@ void setup_mpu6050()
     } // of else
   #endif // end of is_mpu6050
 }
+
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
+
 
 
 
