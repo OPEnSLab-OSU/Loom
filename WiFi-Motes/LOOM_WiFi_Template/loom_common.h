@@ -5,7 +5,6 @@ float         vbat = 3.3;                     // Place to save measured battery 
 char          packetBuffer[255];              // Buffer to hold incoming packet
 char          ReplyBuffer[] = "acknowledged"; // A string to send back
 const byte    memValidationValue = 99;        // Used to check if configuration has been written to (number will only be 99 if mem has been written to)
-OSCBundle     bndl;                           // Hold OSC bundle to received
 OSCErrorCode  error;                          // Hold errors from OSC
 uint32_t      button_timer;                   // For time button has been held
 char addressString[255];
@@ -103,7 +102,7 @@ void init_config()
             strcpy(configuration.config_wifi.ssid,DEFAULT_NETWORK);       // Default network name
             strcpy(configuration.config_wifi.pass,DEFAULT_PASSWORD);      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
             configuration.config_wifi.keyIndex = 0;                       // Your network key Index number (needed only for WEP)
-            configuration.config_wifi.ip_broadcast = "192.168.1.255";     // IP to Broadcast data 
+            configuration.config_wifi.ip_broadcast = "10.0.0.255";     // IP to Broadcast data 
             configuration.config_wifi.localPort = INIT_PORT;              // Local port to listen on
             configuration.config_wifi.wifi_mode = DEFAULT_MODE;           // WiFi mode to start in (AP_MODE, WPA_CLIENT_MODE, WEP_CLIENT_MODE)
           #endif
