@@ -1,11 +1,18 @@
-#if num_servos > 0
-  #include <Adafruit_PWMServoDriver.h>
-  
+// ================================================================
+// ===                        LIBRARIES                         ===
+// ================================================================
+#include <Adafruit_PWMServoDriver.h>
+
+
+#define SERVOMIN  150     // This is the 'minimum' pulse length count (out of 4096)
+#define SERVOMAX  600     // This is the 'maximum' pulse length count (out of 4096)
+
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================
+struct state_servo_t {
   Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
-  
-  #define SERVOMIN  150     // This is the 'minimum' pulse length count (out of 4096)
-  #define SERVOMAX  600     // This is the 'maximum' pulse length count (out of 4096)
-  
+
   #if (num_servos==1)
     int predeg[1] = {0};
     double pre_pulselength[1] = {0.0};
@@ -31,16 +38,26 @@
     int predeg[8] = {0, 0, 0, 0, 0, 0, 0, 0};
     double pre_pulselength[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
   #endif // of if (num_servos==1) 
-#endif // of num_servos
+};
+
+
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
+struct state_servo_t *state_servo;
+
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
 
 // -- SERVO SETUP --
 // Called by main setup
 // Arguments: none
 // Return:    none
-void servo_setup() 
-{
-  pwm.begin();
-  pwm.setPWMFreq(60);
+void setup_servo() {
+  state_servo->pwm.begin();
+  state_servo->pwm.setPWMFreq(60);
 }
 
 
@@ -52,21 +69,21 @@ void set_servo_degree(int set_degree, int servo_choice)
 {
   uint16_t pulselength = map(set_degree, 0, 180, SERVOMIN, SERVOMAX);
   
-  if (set_degree < predeg[servo_choice]) {
-    for (double pulselen = pre_pulselength[servo_choice]; pulselen >= pulselength; pulselen--) {
-      pwm.setPWM(servo_choice, 0, pulselen);
+  if (set_degree < state_servo->predeg[servo_choice]) {
+    for (double pulselen = state_servo->pre_pulselength[servo_choice]; pulselen >= pulselength; pulselen--) {
+      state_servo->pwm.setPWM(servo_choice, 0, pulselen);
     }
   }
   
   //When input degree is greater than previous degree, it increases
-  if (set_degree > predeg[servo_choice]) {
-    for (double pulselen = pre_pulselength[servo_choice]; pulselen < pulselength; pulselen++) {
-      pwm.setPWM(servo_choice, 0, pulselen);
+  if (set_degree > state_servo->predeg[servo_choice]) {
+    for (double pulselen = state_servo->pre_pulselength[servo_choice]; pulselen < pulselength; pulselen++) {
+      state_servo->pwm.setPWM(servo_choice, 0, pulselen);
     }
   }
   
-  predeg[servo_choice] = set_degree;
-  pre_pulselength[servo_choice] = pulselength;
+  state_servo->predeg[servo_choice] = set_degree;
+  state_servo->pre_pulselength[servo_choice] = pulselength;
 }
 
 

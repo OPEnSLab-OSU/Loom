@@ -134,7 +134,7 @@ void LOOM_begin()
     setup_neopixel();
   #endif
   #if num_servos > 0
-    servo_setup();
+    setup_servo();
   #endif
   #if is_relay == 1
     setup_relay();
