@@ -1,14 +1,12 @@
+// ================================================================ 
+// ===                         DEFINES                          === 
 // ================================================================
-// ===                        LIBRARIES                         ===
-// ================================================================
+#define num_measurements 4      // Must be 1, 2, 4, or 8 number of analog measurements to sample and average per channel
 
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
-//struct config_<module>_t {
-//
-//};
 
 struct state_analog_t {
   int16_t a0, a1, a2, a3, a4, a5; // Memory to store analog sensor values
@@ -19,16 +17,6 @@ struct state_analog_t {
 // ================================================================
 //struct config_<module>_t *config_<module>;
 struct state_analog_t *state_analog;
-
-
-#define num_measurements 4      // Must be 1, 2, 4, or 8 number of analog measurements to sample and average per channel
-
-// ================================================================ 
-// ===                          SETUP                           === 
-// ================================================================
-//void setup_<module>() {
-//  //Setup Here
-//}
 
 
 // ================================================================ 

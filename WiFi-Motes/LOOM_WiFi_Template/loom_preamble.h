@@ -1,5 +1,12 @@
+// ================================================================ 
+// ===                        LIBRARIES                         === 
+// ================================================================
 #include <OSCBundle.h> //all LOOM devices rely on the Arduino OSC library in some way
 
+
+// ================================================================ 
+// ===                         DEFINES                          === 
+// ================================================================
 // Packet header creation macro
 #define STR_(x) #x                // Helper function
 #define STR(x) STR_(x)            // To concatenate a predefined number to a string literal, use STR(x)
@@ -8,9 +15,10 @@
 #define VBATPIN A7                // Pin to check for battery voltage
 //#include "declarations_and_structures.h"
 
-//------------------------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------
 // MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
-//------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 #define MEM_FLASH 0
 #define MEM_EEPROM 1  
 
@@ -39,6 +47,11 @@
 	#include <SPI.h>
 #endif
 
+
+
+// ================================================================ 
+// ===                  INCLUDE DEVICE FILES                    === 
+// ================================================================
 #if is_analog > 0
   #include "loom_analogIn.h"
 #endif
@@ -85,7 +98,7 @@
 	#include "loom_mb1232.h"
 #endif
 
-#include "loom_flash.h"
 
-// These may refer to functions in above headers
-#include "loom_common.h"
+
+#include "loom_flash.h"
+#include "loom_common.h"  // These may refer to functions in above headers
