@@ -27,8 +27,8 @@ void set_instance_num(OSCMessage &msg)
     Serial.print("new address header: ");
     Serial.println(configuration.packet_header_string);
   #endif
-  
-  flash_config.write(configuration);
+  write_non_volatile();
+  //flash_config.write(configuration);
 }
 
 
@@ -85,12 +85,11 @@ void init_config()
   #if is_mpu6050 == 1
     link_config_mpu6050(&configuration.config_mpu6050);
   #endif
-  
-  #if MEM_TYPE == MEM_FLASH
-    configuration = flash_config.read();                    // Read from flash memory
+  #if MEM_TYPE == MEM_FLASH || MEM_TYPE == MEM_EEPROM
+    read_non_volatile(); //reads configuration from non_volatile memory
     
     #if DEBUG == 1
-      Serial.println("Reading from flash.");
+      Serial.println("Reading from non-volatile memory...");
       Serial.print("Checksum: ");
       Serial.println(configuration.checksum);
     #endif
@@ -124,11 +123,10 @@ void init_config()
           #if DEBUG == 1
             Serial.println("Writing to flash for the first time.");
           #endif
-          
-          flash_config.write(configuration);                  // Don't uncomment this line until we're pretty confident that this behaves how we want; 
+          write_non_volatile();
                                                               // Flash memory has limited writes and we don't want to waste it on unnecessary tests
     } // of if (configuration.checksum != memValidationValue)
-  #endif // of MEM_TYPE
+    #endif //of MEM_TYPE
 }
 
 

@@ -14,7 +14,6 @@
 
 // Config has to be first has it hold all user specified options
 #include "config.h"
-
 // Preamble includes any relevant subroutine files based on options
 // specified in the above config
 #include "loom_preamble.h"
@@ -24,7 +23,6 @@
 //                            SETUP 
 // -------------------------------------------------------------
 void setup() {
-
   pinMode(led, OUTPUT);   // Set the LED pin mode
   LOOM_begin();           // LOOM_begin calls any relevant (based on config) LOOM device setup functions
 }

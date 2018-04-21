@@ -19,8 +19,27 @@ struct config_flash_t {
 
 // Instance of config to holding device current configuration
 struct config_flash_t configuration;
-
+void write_non_volatile();
+void read_non_volatile();
 #if MEM_TYPE == MEM_FLASH
   #include <FlashStorage.h>
   FlashStorage(flash_config,config_flash_t);    // Setup the flash storage for the structure
+  void read_non_volatile(){
+    configuration = flash_config.read();
+  }
+  void write_non_volatile(){
+    flash_config.write(configuration);
+  }
+#elif MEM_TYPE == MEM_EEPROM
+  #include <EEPROM.h>
+  #include "EEPROMAnything.h"
+  void read_non_volatile(){
+    EEPROM_readAnything(0,configuration);
+  }
+  void write_non_volatile(){
+    EEPROM_writeAnything(0,configuration);
+  }
 #endif
+
+
+
