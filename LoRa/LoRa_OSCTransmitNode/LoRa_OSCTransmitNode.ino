@@ -25,7 +25,7 @@ RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
 RHReliableDatagram manager(rf95, CLIENT_ADDRESS);
 
-String sendString = String("IDstring,RTC_timeString,tempString,humidityString,loadCellString,lightIRString,lightFullString,vbatString");
+String stringTransmit = String("4,5,6,8,76,3402");//concates all strings into a big string
 
 void setup() {
   Serial.begin(9600);
@@ -54,28 +54,17 @@ void loop() {
 
   char message[RH_RF95_MAX_MESSAGE_LEN];
   memset(message, '\0', sizeof(message));
-  sendString.toCharArray(message, sizeof(message)-1);
+  //sendString.toCharArray(message, sizeof(message)-1);
   //get_OSC_string(&bndl, message);
-
-  /*
-  for(int i = 0; i < MESSAGE_SIZE; i++) {
-    if(message[i] == '\0' || i == MESSAGE_SIZE-1) {
-      Serial.print("Message uses ");
-      Serial.print(i);
-      Serial.println(" byes of the message buffer.");
-      break;
-    }
-  }*/
-  
-
-  Serial.println(message);
-  /*Serial.print("Message length: ");
-  Serial.println(strlen(message));
-  Serial.print("Max message length: ");
-  Serial.println(RH_RF95_MAX_MESSAGE_LEN);*/
+	
+	int transmitBufLen = 1 + (char)stringTransmit.length(); // add 2 here to include last actual char
+	// instantiate a transmit buffer of x len based on len of concat string above
+	char transmitBuf[transmitBufLen];
+	// converts long string of data into a character array to be transmitted
+	stringTransmit.toCharArray(transmitBuf, transmitBufLen);
   
   Serial.print("Sending...");
-  if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS))
+  if (manager.sendtoWait((uint8_t*)transmitBuf, transmitBufLen, SERVER_ADDRESS))
     Serial.println("ok");
   else
     Serial.println("failed");

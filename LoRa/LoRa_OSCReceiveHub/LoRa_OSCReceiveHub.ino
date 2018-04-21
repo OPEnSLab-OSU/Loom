@@ -44,18 +44,27 @@ void setup() {
   //On a LoRa or RFM board.
   pinMode(8, INPUT_PULLUP);
   
-  Serial.begin(9600);
+	#if DEBUG == 1
+		Serial.begin(9600);
+	#endif
   delay(10000);
-  if (!manager.init())
-    Serial.println("init failed");
+  if (!manager.init()) {
+		#if DEBUG == 1
+			Serial.println("init failed");
+		#endif
+	}
 
   if (!rf95.setFrequency(RF95_FREQ)) {
-    Serial.println("setFrequency failed");
+		#if DEBUG == 1
+			Serial.println("setFrequency failed");
+		#endif
     while (1);
   }
 
   if (Ethernet.begin(mac) == 0) {
-    Serial.println("Failed to configure Ethernet using DHCP");
+		#if DEBUG == 1
+			Serial.println("Failed to configure Ethernet using DHCP");
+		#endif
     // try to congifure using IP address instead of DHCP:
     Ethernet.begin(mac, ip);
   }
@@ -63,7 +72,9 @@ void setup() {
   delay(1000);
   
   rf95.setTxPower(23, false);
-  Serial.println("Finished setup!");
+	#if DEBUG == 1
+		Serial.println("Finished setup!");
+	#endif
 }
 
 void loop() {
@@ -72,7 +83,12 @@ void loop() {
     uint8_t len = MESSAGE_SIZE;
     uint8_t from;
     memset(buf, '\0', MESSAGE_SIZE);
+		for(int i = 0; i < NUM_FIELDS; i++)
+			data[i] = "";
     if (manager.recvfromAck(buf, &len, &from)) {
+			#if DEBUG == 1
+				Serial.println("Received packet");
+			#endif
       if(((char)(buf[0])) == '/') {
         OSCBundle bndl;
         get_OSC_bundle((char*)buf, &bndl); 
@@ -82,9 +98,12 @@ void loop() {
       else {
         char str[MESSAGE_SIZE];
         String((char*)buf).toCharArray(str, sizeof(str)-1);
+				#if DEBUG == 1
+					Serial.println(str);
+				#endif
         char *token;
         char *savept = str;
-        String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "lightIR", "lightFull", "vbat"};
+        String cols[6] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
         for(int i = 0; i < NUM_FIELDS; i+=2) {
           token = strtok_r(savept, ",", &savept);
           if(token != NULL) {
@@ -122,6 +141,8 @@ void sendToPushingBox()
    
   } 
   else {
-    if(DEBUG){Serial.println("connection failed");}
+    #if DEBUG == 1
+			Serial.println("connection failed");
+		#endif
   }
 }
