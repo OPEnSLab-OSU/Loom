@@ -78,6 +78,14 @@ void msg_router(OSCMessage &msg, int addrOffset) {
 // Return:    none
 void init_config()
 {
+  #if is_wifi == 1
+    packet_header_string = configuration.packet_header_string;
+    link_config_wifi(&configuration.config_wifi);
+  #endif
+  #if is_mpu6050 == 1
+    link_config_mpu6050(&configuration.config_mpu6050);
+  #endif
+  
   #if MEM_TYPE == MEM_FLASH
     configuration = flash_config.read();                    // Read from flash memory
     
@@ -96,8 +104,6 @@ void init_config()
           #endif
           
           #if is_wifi == 1
-            packet_header_string = configuration.packet_header_string;
-            link_config_wifi(&configuration.config_wifi);
             configuration.config_wifi.my_ssid = AP_NAME;                  // Default AP name
             strcpy(configuration.config_wifi.ssid,DEFAULT_NETWORK);       // Default network name
             strcpy(configuration.config_wifi.pass,DEFAULT_PASSWORD);      // AP password (needed only for WEP, must be exactly 10 or 26 characters in length)
@@ -109,7 +115,6 @@ void init_config()
           // Add any other behavior/calibration wrapped in an #ifdef is_something preprocessor directive HERE
           
           #if is_mpu6050 == 1
-            link_config_mpu6050(&configuration.config_mpu6050);
             calMPU6050();                                     // Calibration writes memValidationValue for us
           #endif
           
