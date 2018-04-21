@@ -36,8 +36,6 @@ void setup_fxas21002() {
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
-
-
 void package_data_fxas21002(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl
 }
