@@ -1,8 +1,12 @@
-//Libraries
+// ================================================================ 
+// ===                        LIBRARIES                         === 
+// ================================================================
 #include <Wire.h>
 #include <ZX_Sensor.h>
 
-//Structures 
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================ 
 struct config_zxgesturesensor_t {
 
 };
@@ -11,12 +15,16 @@ struct state_zxgesturesensor_t {
 
 };
 
-//Global Declarations
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
 struct config_zxgesturesensor_t *config_zxgesturesensor;
 struct state_zxgesturesensor_t *state_zxgesturesensor;
 
 
-//Functions
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
 void setup_zxgesturesensor() {
 	//Setup Here
 }
