@@ -1,10 +1,27 @@
-#if is_relay == 1
-  #define RELAY_PIN0 5
-  #define RELAY_PIN1 6
-  
+// ================================================================
+// ===                        LIBRARIES                         ===
+// ================================================================
+
+
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================
+struct state_relay_t {
   // Array to hold relay states (on/off)
-  bool relay_on[2];
-#endif // of is_relay
+  bool on[2];
+};
+
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
+struct state_relay_t *state_relay;
+#define RELAY_PIN0 5
+#define RELAY_PIN1 6
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
+
 
 // --- RELAY SETUP ---
 // Called by main setup
@@ -12,12 +29,11 @@
 // Initializes relays to off
 // Arguments: none
 // Return:    none
-void relay_setup() 
-{
-    pinMode(RELAY_PIN0,OUTPUT);
-    pinMode(RELAY_PIN1,OUTPUT);
-    relay_on[0] = false;
-    relay_on[1] = false;
+void setup_relay() {
+  pinMode(RELAY_PIN0,OUTPUT);
+  pinMode(RELAY_PIN1,OUTPUT);
+  state_relay->on[0] = false;
+  state_relay->on[1] = false;
 }
 
 
@@ -29,13 +45,13 @@ void handleRelay(OSCMessage &msg)
 {
   int relay  = msg.getInt(0);
   int set_to = msg.getInt(1);
-  relay_on[relay] = (set_to == 1);
+  state_relay->on[relay] = (set_to == 1);
   
   #if DEBUG == 1
     Serial.print("Set ");
     Serial.print(relay);
     Serial.print(" to ");
-    Serial.println((relay_on[relay]) ? "ON" : "OFF");
+    Serial.println((state_relay->on[relay]) ? "ON" : "OFF");
   #endif
 }
 
@@ -47,7 +63,7 @@ void handleRelay(OSCMessage &msg)
 // Return:    none
 void write_relay_states()
 {
-  digitalWrite(RELAY_PIN0,(relay_on[0]==true) ? HIGH : LOW);
-  digitalWrite(RELAY_PIN1,(relay_on[1]==true) ? HIGH : LOW);
+  digitalWrite(RELAY_PIN0,(state_relay->on[0]==true) ? HIGH : LOW);
+  digitalWrite(RELAY_PIN1,(state_relay->on[1]==true) ? HIGH : LOW);
 }
 
