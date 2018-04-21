@@ -131,7 +131,7 @@ void LOOM_begin()
 
   // Actuator-specific setups
   #if is_neopixel == 1
-    neopixel_setup();
+    setup_neopixel();
   #endif
   #if num_servos > 0
     servo_setup();
