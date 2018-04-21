@@ -1,33 +1,58 @@
-#if is_neopixel == 1
-  #include <Adafruit_NeoPixel.h>
-  
+//Libraries
+#include <Adafruit_NeoPixel.h>
+
+//Structures 
+struct state_neopixel_t {
   // Neopixel Data Structures (one per Ishield port)
   Adafruit_NeoPixel * pixels[3];
   
   // Based on config.h, enable Neopixel for specified ports
-  bool pixel_enabled[3] = {NEO_0, NEO_1, NEO_2};
+  bool enabled[3] = {NEO_0, NEO_1, NEO_2};
   
   // Store RGB vals for up to 1 pixel per port on Ishield
   int colorVals[3][3] = { {0, 0, 0},
                           {0, 0, 0},
                           {0, 0, 0}};
-#endif
+};
+
+//Global Declarations
+struct state_neopixel_t *state_neopixel;
+
+
+//Functions
+void setup_neopixel() {
+  //Setup Here
+  for(int i = 0; i < 3; i++) {
+    if (state_neopixel->enabled[i]) {
+      state_neopixel->pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
+      state_neopixel->pixels[i]->begin(); // This initializes the NeoPixel library.
+      state_neopixel->pixels[i]->show();  // Initialize all pixels to 'off'
+    }
+  }
+}
+
+
+
+
+
+
+  
 
 // --- NEOPIXEL SETUP ---
 // Called by main setup
 // Creates an array to store Neopixel data, iterates through to initialize Neopixels
 // Arguments: none
 // Return:    none
-void neopixel_setup() 
-{
-  for(int i = 0; i < 3; i++) {
-    if (pixel_enabled[i]) {
-      pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
-      pixels[i]->begin(); // This initializes the NeoPixel library.
-      pixels[i]->show();  // Initialize all pixels to 'off'
-    }
-  }
-}
+//void setup_neopixel() 
+//{
+//  for(int i = 0; i < 3; i++) {
+//    if (enabled[i]) {
+//      pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
+//      pixels[i]->begin(); // This initializes the NeoPixel library.
+//      pixels[i]->show();  // Initialize all pixels to 'off'
+//    }
+//  }
+//}
 
 
 
@@ -56,15 +81,16 @@ void setColor(OSCMessage &msg)
   #endif
 
   // Update color values stored for specified Neopixel and write them to the Neopixels color
-  if (pixel_enabled[port]) {
-    colorVals[port][color] = val;
-    pixels[port]->setPixelColor(pixelNum, pixels[port]->Color(colorVals[port][0], colorVals[port][1], colorVals[port][2]));
+  if (state_neopixel->enabled[port]) {
+    state_neopixel->colorVals[port][color] = val;
+    state_neopixel->pixels[port]->setPixelColor(pixelNum, state_neopixel->pixels[port]->Color(state_neopixel->colorVals[port][0], state_neopixel->colorVals[port][1], state_neopixel->colorVals[port][2]));
   }
 
   // Update colors displayed by enabled Neopixels
   for (int i = 0; i < 3; i++) {
-    if (pixel_enabled[i])
-      pixels[i]->show();
+    if (state_neopixel->enabled[i])
+      state_neopixel->pixels[i]->show();
   }
 }
+
 
