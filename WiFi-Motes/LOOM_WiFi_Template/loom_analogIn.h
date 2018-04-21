@@ -1,7 +1,49 @@
-#if is_analog > 0
-  #define num_measurements 4      // Must be 1, 2, 4, or 8 number of analog measurements to sample and average per channel
+// ================================================================
+// ===                        LIBRARIES                         ===
+// ================================================================
+
+
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================
+//struct config_<module>_t {
+//
+//};
+
+struct state_analog_t {
   int16_t a0, a1, a2, a3, a4, a5; // Memory to store analog sensor values
-#endif
+};
+
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
+//struct config_<module>_t *config_<module>;
+struct state_analog_t *state_analog;
+
+
+#define num_measurements 4      // Must be 1, 2, 4, or 8 number of analog measurements to sample and average per channel
+
+// ================================================================ 
+// ===                          SETUP                           === 
+// ================================================================
+//void setup_<module>() {
+//  //Setup Here
+//}
+
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
+
+
+//void measure_<module>() {
+//  //Measure data and change the state here. 
+//  //Potentially uses the config data
+//}
+//
+
+
+
 
 // --- READ ANALOG ---
 // Generic subroutine for reading raw sensor data with averaging
@@ -31,7 +73,7 @@ uint32_t read_analog(uint8_t chnl)
 
 
 
-// --- MEASURE ANALOG ---
+// --- PACKAGE ANALOG ---
 // Gets analog reading from pors and button, as enabled
 // Arguments: none
 // Return:    none
