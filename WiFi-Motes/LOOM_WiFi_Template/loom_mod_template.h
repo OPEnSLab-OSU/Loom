@@ -22,12 +22,16 @@ struct state_<module>_t *state_<module>;
 
 
 // ================================================================ 
-// ===                        FUNCTIONS                         === 
+// ===                          SETUP                           === 
 // ================================================================
 void setup_<module>() {
-	//Setup Here
+  //Setup Here
 }
 
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
 void package_data_<module>(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl
 }

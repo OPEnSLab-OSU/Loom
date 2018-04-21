@@ -23,11 +23,16 @@ struct state_sht31d_t *state_sht31d;
 
 
 // ================================================================ 
-// ===                        FUNCTIONS                         === 
+// ===                          SETUP                           === 
 // ================================================================
 void setup_sht31d() {
-	//Setup Here
+  //Setup Here
 }
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
+
 
 void package_data_sht31d(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl

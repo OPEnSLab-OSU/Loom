@@ -24,11 +24,17 @@ struct state_mb1232_t *state_mb1232;
 
 
 // ================================================================ 
-// ===                        FUNCTIONS                         === 
+// ===                          SETUP                           === 
 // ================================================================
 void setup_mb1232() {
-	//Setup Here
+  //Setup Here
 }
+
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
+
 
 void package_data_mb1232(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl

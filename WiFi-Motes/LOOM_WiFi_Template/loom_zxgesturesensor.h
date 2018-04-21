@@ -23,12 +23,16 @@ struct state_zxgesturesensor_t *state_zxgesturesensor;
 
 
 // ================================================================ 
-// ===                        FUNCTIONS                         === 
+// ===                          SETUP                           === 
 // ================================================================
 void setup_zxgesturesensor() {
-	//Setup Here
+  //Setup Here
 }
 
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
 void package_data_zxgesturesensor(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl
 }

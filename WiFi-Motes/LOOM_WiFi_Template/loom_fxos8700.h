@@ -25,12 +25,19 @@ struct config_fxos8700_t *config_fxos8700;
 struct state_fxos8700_t *state_fxos8700;
 
 
+
+// ================================================================ 
+// ===                          SETUP                           === 
+// ================================================================
+void setup_fxos8700() {
+  //Setup Here
+}
+
+
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
-void setup_fxos8700() {
-	//Setup Here
-}
+
 
 void package_data_fxos8700(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl

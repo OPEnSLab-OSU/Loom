@@ -23,11 +23,17 @@ struct state_tca9548a_t *state_tca9548a;
 
 
 // ================================================================ 
-// ===                        FUNCTIONS                         === 
+// ===                          SETUP                           === 
 // ================================================================
 void setup_tca9548a() {
-	//Setup Here
+  //Setup Here
 }
+
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
+
 
 void package_data_tca9548a(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl
