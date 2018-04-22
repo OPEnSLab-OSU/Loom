@@ -60,6 +60,23 @@ bool pass_set;
 
 
 // ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+void wifi_setup();
+void printWiFiStatus();
+void start_AP();
+bool connect_to_WPA(char ssid[], char pass[]);
+void switch_to_AP(OSCMessage &msg);
+void print_remote_mac_addr();
+void replace_char(char *str, char orig, char rep);
+void connect_to_new_network();
+void set_ssid(OSCMessage &msg);
+void set_pass(OSCMessage &msg);
+void broadcastIP(OSCMessage &msg);
+void set_port(OSCMessage &msg);
+
+
+// ================================================================ 
 // ===                          SETUP                           === 
 // ================================================================
 // Function prototypes

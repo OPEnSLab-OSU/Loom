@@ -50,6 +50,13 @@ struct state_servo_t {
 // ================================================================
 struct state_servo_t *state_servo;
 
+// ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+void setup_servo();
+void set_servo_degree(int set_degree, int servo_choice);
+void set_servo(OSCMessage &msg);
+
 
 // ================================================================ 
 // ===                          SETUP                           === 

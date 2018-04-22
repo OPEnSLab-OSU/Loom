@@ -73,6 +73,17 @@ int giro_deadzone = 1;   // Giro error allowed, make it lower to get more precis
 
 
 // ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+void setup_mpu6050();
+uint32_t measure_mpu6050(void);
+void meansensors();
+void calibration();
+void package_mpu6050(OSCBundle *bndl, char packet_header_string[]);
+void calMPU6050();
+void calMPU6050_OSC(OSCMessage &msg) 
+
+// ================================================================ 
 // ===                          SETUP                           === 
 // ================================================================
 

@@ -10,6 +10,21 @@ OSCErrorCode  error;                          // Hold errors from OSC
 uint32_t      button_timer;                   // For time button has been held
 char          addressString[255];
 
+// ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+void set_instance_num(OSCMessage &msg);
+void msg_router(OSCMessage &msg, int addrOffset);
+
+
+#if is_wifi == 1
+  #ifdef button
+    void check_button_held();
+  #endif // of ifdef button
+#endif //is_wifi == 1
+
+
+void LOOM_begin();
 
 // ================================================================
 // ===                        FUNCTIONS                         ===
