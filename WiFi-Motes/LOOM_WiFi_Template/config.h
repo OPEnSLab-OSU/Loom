@@ -24,7 +24,7 @@
 	#define is_fxos8700 1
 
 	//Gyroscope
-	#define is_fxas21002 0
+	#define is_fxas21002 1
 
 	//ZX_Distance Sensor
 	#define is_zxgesturesensor 0

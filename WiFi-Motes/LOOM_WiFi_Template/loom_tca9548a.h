@@ -97,6 +97,14 @@ void measure_sensor(uint8_t i2c_addr){
 			} 
 		}
 	#endif
+	#ifdef i2c_addr_fxas21002
+		if((i2c_addr == 0x20 || (i2c_addr == 0x21))){
+			if (setup_fxas21002()) {
+				measure_fxas21002();
+				return;
+			} 
+		}
+	#endif
 	#if DEBUG == 1
 		Serial.println("This sensor is not currently supported by the Project LOOM sytem");
 	#endif
