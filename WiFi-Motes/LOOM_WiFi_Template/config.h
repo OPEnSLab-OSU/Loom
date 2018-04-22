@@ -21,19 +21,19 @@
 	#define is_tsl2591 1
 
 	//Accelerometer / Magnetometer
-	#define is_fxos8700 1
+	#define is_fxos8700 0
 
 	//Gyroscope
-	#define is_fxas21002 1
+	#define is_fxas21002 0
 
 	//ZX_Distance Sensor
-	#define is_zxgesturesensor 1
+	#define is_zxgesturesensor 0
 
 	//Temperature / Humidity
-	#define is_sht31d 1
+	#define is_sht31d 0
 
 	//Sonar
-	#define is_mb1232 1
+	#define is_mb1232 0
 
 	//Accelerometer / Gyroscope
 	#define is_mpu6050 0
