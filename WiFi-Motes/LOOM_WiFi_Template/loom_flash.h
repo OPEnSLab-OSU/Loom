@@ -49,12 +49,20 @@ struct config_flash_t {
 struct config_flash_t configuration;
 
 
+
+// ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+void write_non_volatile();
+void read_non_volatile();
+void flash_config_setup();
+
+
 // ================================================================
 // ===                          SETUP                           ===
 // ================================================================
 
-void write_non_volatile();
-void read_non_volatile();
+
 #if MEM_TYPE == MEM_FLASH
 //  #include <FlashStorage.h>
   FlashStorage(flash_setup,config_flash_t);    // Setup the flash storage for the structure

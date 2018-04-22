@@ -43,6 +43,22 @@ RH_RF95 rf95(RFM95_CS, RFM95_INT);
 RHReliableDatagram manager(rf95, SERVER_ADDRESS);
 
 
+// ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager);
+#if lora_device_type == 1
+  void get_OSC_string(OSCBundle *bndl, char *osc_string);
+#endif
+#if lora_device_type == 0
+  void get_OSC_bundle(char *string, OSCBundle* bndl);
+  String get_data_value(OSCMessage* msg, int pos);
+  void sendToPushingBox(int num_fields, char *server_name, char *devid);
+#endif
+#if DEBUG == 1
+  void print_bundle(OSCBundle *bndl);
+#endif
+
 // ================================================================
 // ===                          SETUP                           ===
 // ================================================================
@@ -150,7 +166,7 @@ void get_OSC_string(OSCBundle *bndl, char *osc_string) {
 	if (msg != NULL) strcat(osc_string, " ");
 	}
 }
-#endif
+#endif // of lora_device_type == 1
 
 
 
@@ -192,7 +208,7 @@ void get_OSC_bundle(char *string, OSCBundle* bndl) {
 		msg_token = strtok_r(p, " ", &p);
 	}
 }
-#endif
+#endif // of lora_device_type == 0
 
 
 
@@ -237,7 +253,7 @@ void print_bundle(OSCBundle *bndl) {
 		msg = bndl->getOSCMessage(n);
 	}
 }
-#endif
+#endif // of DEBUG == 1
 
 
 
@@ -266,7 +282,7 @@ String get_data_value(OSCMessage* msg, int pos) {
 			return String("");
 	}
 }
-#endif
+#endif // of #if lora_device_type == 0
 
 
 
@@ -300,4 +316,4 @@ void sendToPushingBox(int num_fields, char *server_name, char *devid) {
     }
   #endif
 }
-#endif
+#endif // of #if lora_device_type == 0

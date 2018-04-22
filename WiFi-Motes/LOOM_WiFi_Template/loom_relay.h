@@ -24,6 +24,13 @@ struct state_relay_t *state_relay;
 #define RELAY_PIN0 5
 #define RELAY_PIN1 6
 
+// ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+void setup_relay();
+void handleRelay(OSCMessage &msg);
+void write_relay_states();
+
 
 // ================================================================ 
 // ===                          SETUP                           === 

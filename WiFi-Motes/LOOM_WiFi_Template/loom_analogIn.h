@@ -18,6 +18,11 @@ struct state_analog_t {
 //struct config_<module>_t *config_<module>;
 struct state_analog_t *state_analog;
 
+// ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+uint32_t read_analog(uint8_t chnl);
+void package_analog(OSCBundle *bndl, char packet_header_string[]);
 
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
