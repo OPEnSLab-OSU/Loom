@@ -28,6 +28,7 @@ struct config_mpu6050_t {
   int   ax_offset, ay_offset, az_offset, gx_offset, gy_offset, gz_offset;
 };
 
+
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
@@ -82,6 +83,7 @@ void calibration();
 void package_mpu6050(OSCBundle *bndl, char packet_header_string[]);
 void calMPU6050();
 void calMPU6050_OSC(OSCMessage &msg) 
+
 
 // ================================================================ 
 // ===                          SETUP                           === 

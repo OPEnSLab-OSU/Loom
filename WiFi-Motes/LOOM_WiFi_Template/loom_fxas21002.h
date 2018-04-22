@@ -11,6 +11,7 @@
 // ================================================================
 #define i2c_addr_fxas21002 0x20 //0x20, 0x21
 
+
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
@@ -61,9 +62,9 @@ bool setup_fxas21002() {
 			Serial.println("Failed to initialize fxas21002.");
 		#endif
 	}
-	
 	return is_setup;
 }
+
 
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
@@ -71,6 +72,7 @@ bool setup_fxas21002() {
 void package_data_fxas21002(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl
 }
+
 
 void measure_fxas21002() {
 	/* Get a new sensor event */
@@ -89,19 +91,20 @@ void measure_fxas21002() {
 	#endif
 }
 
+
 #if DEBUG == 1
-	void details_fxas21002() {
-		sensor_t sensor;
-		state_fxas21002.inst_fxas21002.getSensor(&sensor);
-		Serial.println("------------------------------------");
-		Serial.print  ("Sensor:       "); Serial.println(sensor.name);
-		Serial.print  ("Driver Ver:   "); Serial.println(sensor.version);
-		Serial.print  ("Unique ID:    0x"); Serial.println(sensor.sensor_id, HEX);
-		Serial.print  ("Max Value:    "); Serial.print(sensor.max_value); Serial.println(" rad/s");
-		Serial.print  ("Min Value:    "); Serial.print(sensor.min_value); Serial.println(" rad/s");
-		Serial.print  ("Resolution:   "); Serial.print(sensor.resolution); Serial.println(" rad/s");
-		Serial.println("------------------------------------");
-		Serial.println("");
-		delay(500);
-	}
+void details_fxas21002() {
+	sensor_t sensor;
+	state_fxas21002.inst_fxas21002.getSensor(&sensor);
+	Serial.println("------------------------------------");
+	Serial.print  ("Sensor:       ");   Serial.println(sensor.name);
+	Serial.print  ("Driver Ver:   ");   Serial.println(sensor.version);
+	Serial.print  ("Unique ID:    0x"); Serial.println(sensor.sensor_id, HEX);
+	Serial.print  ("Max Value:    ");   Serial.print(sensor.max_value);  Serial.println(" rad/s");
+	Serial.print  ("Min Value:    ");   Serial.print(sensor.min_value);  Serial.println(" rad/s");
+	Serial.print  ("Resolution:   ");   Serial.print(sensor.resolution); Serial.println(" rad/s");
+	Serial.println("------------------------------------");
+	Serial.println("");
+	delay(500);
+}
 #endif

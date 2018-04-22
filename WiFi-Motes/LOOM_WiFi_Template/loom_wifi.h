@@ -79,11 +79,6 @@ void set_port(OSCMessage &msg);
 // ================================================================ 
 // ===                          SETUP                           === 
 // ================================================================
-// Function prototypes
-bool connect_to_WPA(char ssid[], char pass[]);
-void start_AP();
-
-
 
 // --- WIFI SETUP ---
 // Called by main setup

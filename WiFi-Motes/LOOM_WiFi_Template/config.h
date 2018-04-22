@@ -8,10 +8,10 @@
 
 #define is_ishield 0
 #define num_servos 0
-#define is_relay 0
-#define is_wifi 0
-#define is_lora 0
-#define is_analog 0
+#define is_relay   0
+#define is_wifi    0
+#define is_lora    0
+#define is_analog  0
 
 //Multiplexer
 #define is_tca9548a 1
@@ -42,7 +42,7 @@
 #if is_ishield == 1
   #define is_neopixel 1      // Toggle based on whether Neopixels are being used
 
-  #define is_mpu6050 1
+  #define is_mpu6050  1
 
   #if is_neopixel == 1
     #define NEO_0 false
@@ -62,19 +62,17 @@
 
 
 
-
 // LoRa Device Type
 // 0: Hub, 1: Node, 2 = Repeater
 #if is_lora == 1
 
   #define lora_device_type 0
   
-  #define SERVER_ADDRESS 0					//Use 0-9 for SERVER_ADDRESSes
-  #define RF95_FREQ 915.0           //Hardware specific, Tx must match Rx
-
+  #define SERVER_ADDRESS 0          //Use 0-9 for SERVER_ADDRESSes
+  #define RF95_FREQ      915.0      //Hardware specific, Tx must match Rx
 
   #if lora_device_type == 0 // Hub
-    #define NUM_FIELDS 16            //Maximum number of fields accepted by the PushingBox Scenario
+    #define NUM_FIELDS 16           //Maximum number of fields accepted by the PushingBox Scenario
 
     String data[NUM_FIELDS];
     char device_id[]   = "v25CCAAB0F709665";                // Required by PushingBox, specific to each scenario
@@ -82,7 +80,6 @@
 
     //Use this for OPEnS Lab
     byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
-        
         
     #include <Ethernet2.h>            // -- ideas on how to move this to declarations? (its needed for IPAddress but that is a user option)
 
@@ -94,9 +91,6 @@
   #endif														//10-19 for 0, 20 - 29 for 1, etc.
   
 #endif
-
-
-
 
 
 

@@ -33,7 +33,7 @@ struct state_tca9548a_t {
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 struct config_tca9548a_t *config_tca9548a;
-struct state_tca9548a_t *state_tca9548a;
+struct state_tca9548a_t  *state_tca9548a;
 
 
 // ================================================================ 
