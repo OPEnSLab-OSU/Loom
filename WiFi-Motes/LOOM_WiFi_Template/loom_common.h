@@ -1,7 +1,7 @@
 // ================================================================
 // ===                 COMMON GLOBAL VARIABLES                  ===
 // ================================================================
-int           led =  LED_BUILTIN;             // LED pin number
+int           led = LED_BUILTIN;             // LED pin number
 volatile bool ledState = LOW;                 // State of LED
 float         vbat = 3.3;                     // Place to save measured battery voltage (3.3V max)
 char          packetBuffer[255];              // Buffer to hold incoming packet
@@ -10,21 +10,17 @@ OSCErrorCode  error;                          // Hold errors from OSC
 uint32_t      button_timer;                   // For time button has been held
 char          addressString[255];
 
+
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void set_instance_num(OSCMessage &msg);
 void msg_router(OSCMessage &msg, int addrOffset);
-
-
-#if is_wifi == 1
-  #ifdef button
-    void check_button_held();
-  #endif // of ifdef button
-#endif //is_wifi == 1
-
-
+#if (is_wifi == 1) && defined(button)
+  void check_button_held();
+#endif
 void LOOM_begin();
+
 
 // ================================================================
 // ===                        FUNCTIONS                         ===
@@ -46,7 +42,7 @@ void set_instance_num(OSCMessage &msg)
   write_non_volatile();
   //flash_setup.write(configuration);
 }
-
+ 
 // --- MESSAGE ROUTER ---
 // Used to route OSC messages to the correct function to handle it
 // Arguments: msg (OSC message to route subroutine that handles it), 
@@ -141,14 +137,12 @@ void LOOM_begin()
 	#if is_tca9548a == 1
 		setup_tca9548a();
 	#endif
-
   #if is_mpu6050 > 0
     setup_mpu6050();
-  #endif
-
+  #endif 
   #ifdef is_max31856
     setup_max31856();
-  #endif
+  #endif 
   #if is_neopixel == 1
     setup_neopixel();
   #endif

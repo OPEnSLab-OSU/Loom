@@ -48,6 +48,7 @@ void package_data_fxos8700(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl
 }
 
+
 void measure_fxos8700() {
 	//Measure data and change the state here. 
 	//Potentially uses the config data

@@ -102,7 +102,6 @@ void set_servo_degree(int set_degree, int servo_choice)
 }
 
 
-
 // -- SET SERVO --
 // Parses OSC message for which servo and position to call set_servo_degree() on
 // Arguments: msg (OSC message holding a servo number and angle)

@@ -19,11 +19,13 @@ struct state_<module>_t {
 
 };
 
+
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 struct config_<module>_t *config_<module>;
 struct state_<module>_t *state_<module>;
+
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
@@ -31,6 +33,7 @@ struct state_<module>_t *state_<module>;
 bool setup_<module>();
 void package_data_<module>(OSCBundle *, char[]);
 void measure_<module>();
+
 
 // ================================================================ 
 // ===                          SETUP                           === 
