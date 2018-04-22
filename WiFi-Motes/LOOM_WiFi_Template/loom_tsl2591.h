@@ -84,7 +84,7 @@ void measure_tsl2591() {
 		Serial.print(F("[ ")); Serial.print(millis()); Serial.print(F(" ms ] "));
 		Serial.print(F("IR: ")); Serial.print(state_tsl2591.ir);  Serial.print(F("  "));
 		Serial.print(F("Full: ")); Serial.print(state_tsl2591.full); Serial.print(F("  "));
-		Serial.print(F("Visible: ")); Serial.print(state_tsl2591.vis); Serial.print(F("  "));
+		Serial.print(F("Visible: ")); Serial.print(state_tsl2591.vis); Serial.println(F("  "));
 	#endif
 }
 

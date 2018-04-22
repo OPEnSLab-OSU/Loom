@@ -126,6 +126,7 @@ void LOOM_begin()
   #if DEBUG == 1
     Serial.begin(9600);
     while(!Serial);        // Ensure Serial is ready to go before anything happens in DEBUG mode.
+		delay(5000);
 		Serial.println("Initialized Serial!");
   #endif
   
