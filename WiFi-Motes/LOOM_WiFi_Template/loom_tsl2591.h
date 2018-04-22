@@ -30,7 +30,7 @@ struct state_tsl2591_t {
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 struct config_tsl2591_t config_tsl2591;
-struct state_tsl2591_t state_tsl2591;
+struct state_tsl2591_t  state_tsl2591;
 
 
 // ================================================================ 
