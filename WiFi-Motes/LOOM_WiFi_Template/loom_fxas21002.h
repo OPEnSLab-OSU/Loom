@@ -19,9 +19,7 @@ struct config_fxas21002_t {
 
 struct state_fxas21002_t {
 	Adafruit_FXAS21002C inst_fxas21002;
-	float x;
-	float y;
-	float z;
+	float gyro[3];
 };
 
 // ================================================================ 
@@ -50,11 +48,13 @@ bool setup_fxas21002() {
 	state_fxas21002.inst_fxas21002 = Adafruit_FXAS21002C(0x0021002C);
 	
 	if(state_fxas21002.inst_fxas21002.begin()) {
+		is_setup = true;
 		#if DEBUG == 1
 			Serial.println("Initialized fxas21002.");
 		#endif
 	}
 	else {
+		is_setup = false;
 		#if DEBUG == 1
 			Serial.println("Failed to initialize fxas21002.");
 		#endif
@@ -75,14 +75,14 @@ void measure_fxas21002() {
   sensors_event_t event;
   state_fxas21002.inst_fxas21002.getEvent(&event);
 
-  state_fxas21002.x = event.gyro.x;
-  state_fxas21002.y = event.gyro.y;
-  state_fxas21002.z = event.gyro.z;
+  state_fxas21002.gyro[0] = event.gyro.x;
+  state_fxas21002.gyro[1] = event.gyro.y;
+  state_fxas21002.gyro[2] = event.gyro.z;
 	
 	#if DEBUG == 1
-		Serial.print("X: "); Serial.print(state_fxas21002.x); Serial.print("  ");
-		Serial.print("Y: "); Serial.print(state_fxas21002.y); Serial.print("  ");
-		Serial.print("Z: "); Serial.print(state_fxas21002.z); Serial.print("  ");
+		Serial.print("X: "); Serial.print(state_fxas21002.gyro[0]); Serial.print("  ");
+		Serial.print("Y: "); Serial.print(state_fxas21002.gyro[1]); Serial.print("  ");
+		Serial.print("Z: "); Serial.print(state_fxas21002.gyro[2]); Serial.print("  ");
 		Serial.println("rad/s ");
 	#endif
 }
