@@ -6,12 +6,12 @@
 //--OPTIONS--//
 #define DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
 
-#define is_ishield 1
+#define is_ishield 0
 #define num_servos 0
 #define is_relay 0
-#define is_wifi 1
+#define is_wifi 0
 #define is_lora 0
-#define is_analog 2
+#define is_analog 0
 
 //Multiplexer
 #define is_tca9548a 1
@@ -36,7 +36,7 @@
 	#define is_mb1232 1
 
 	//Accelerometer / Gyroscope
-	#define is_mpu6050 1
+	#define is_mpu6050 0
 #endif
 
 #if is_ishield == 1

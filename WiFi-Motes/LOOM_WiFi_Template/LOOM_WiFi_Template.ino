@@ -24,7 +24,6 @@
 //                            SETUP 
 // -------------------------------------------------------------
 void setup() {
-
   pinMode(led, OUTPUT);   // Set the LED pin mode
   LOOM_begin();           // LOOM_begin calls any relevant (based on config) LOOM device setup functions
 }
@@ -35,6 +34,10 @@ void setup() {
 void loop() {
   OSCBundle bndl; 
 
+	#if is_tca9548a == 1
+		measure_tca9548a();
+	#endif
+	
   #if is_wifi == 1
     int packetSize;
     pass_set = ssid_set = false;

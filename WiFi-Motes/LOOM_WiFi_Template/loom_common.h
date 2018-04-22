@@ -174,15 +174,21 @@ void LOOM_begin()
   //Initialize serial and wait for port to open:
   #if DEBUG == 1
     Serial.begin(9600);
-    while(!Serial);        // Ensure Serial is ready to go before anything happens in DEBUG mode.
+    //while(!Serial);        // Ensure Serial is ready to go before anything happens in DEBUG mode.
+		delay(2000);
+		Serial.println("Initialized Serial!");
   #endif
   
   // Set the button pin mode to input
   #ifdef button
     pinMode(button, INPUT_PULLUP); 
   #endif
+	
+	#if is_tca9548a == 1
+		setup_tca9548a();
+	#endif
 
-  #ifdef is_mpu6050
+  #if is_mpu6050 > 0
     setup_mpu6050();
   #endif
 
