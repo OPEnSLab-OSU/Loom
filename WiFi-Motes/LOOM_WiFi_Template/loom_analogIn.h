@@ -1,5 +1,5 @@
 // ================================================================ 
-// ===                         DEFINES                          === 
+// ===                       DEFINITIONS                        === 
 // ================================================================
 #define num_measurements 4      // Must be 1, 2, 4, or 8 number of analog measurements to sample and average per channel
 

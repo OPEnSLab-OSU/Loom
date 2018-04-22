@@ -6,8 +6,8 @@
 #include <string.h>
 
 // ================================================================ 
-// ===                         DEFINES                          === 
-// ================================================================ 
+// ===                       DEFINITIONS                        === 
+// ================================================================
 #define LORA_MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN       // Defaults to 251 as 4 bytes are used for the header.
 #define RFM95_CS 8
 #define RFM95_RST 4

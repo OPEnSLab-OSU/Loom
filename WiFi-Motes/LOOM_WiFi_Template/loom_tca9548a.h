@@ -10,8 +10,8 @@
 
 
 // ================================================================ 
-// ===                        DEFINITIONS                       === 
-// ================================================================ 
+// ===                       DEFINITIONS                        === 
+// ================================================================
 //The i2c address of the tca9548a is 0x70, but can be physically changed to 0x71
 //It was necessary to do this because the i2c address of the mb1232 is also
 //0x70, and i2c addresses must be unique.
