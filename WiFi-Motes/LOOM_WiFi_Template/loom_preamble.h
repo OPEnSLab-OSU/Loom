@@ -60,9 +60,6 @@
 #if is_mpu6050 == 1
   #include "loom_mpu6050.h"
 #endif
-#if is_tca9548a == 1
-	#include "loom_tca9548a.h"
-#endif
 #if is_tsl2591 == 1
 	#include "loom_tsl2591.h"
 #endif
@@ -80,6 +77,9 @@
 #endif
 #if is_mb1232 == 1
 	#include "loom_mb1232.h"
+#endif
+#if is_tca9548a == 1
+	#include "loom_tca9548a.h"
 #endif
 
 #include "loom_flash.h"
