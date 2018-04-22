@@ -21,7 +21,7 @@
 	#define is_tsl2591 1
 
 	//Accelerometer / Magnetometer
-	#define is_fxos8700 0
+	#define is_fxos8700 1
 
 	//Gyroscope
 	#define is_fxas21002 0

@@ -32,8 +32,8 @@ struct state_tca9548a_t {
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-struct config_tca9548a_t *config_tca9548a;
-struct state_tca9548a_t *state_tca9548a;
+struct config_tca9548a_t config_tca9548a;
+struct state_tca9548a_t state_tca9548a;
 
 
 // ================================================================ 
@@ -82,14 +82,21 @@ void measure_sensor(uint8_t i2c_addr){
 	#endif 
 	
 	#ifdef i2c_addr_tsl2591
-		if(i2c_addr == i2c_addr_tsl2591){
+		if(i2c_addr == 0x29){
 			if (setup_tsl2591()) {
 				measure_tsl2591();
 				return;
 			} 
 		}
 	#endif
-	
+	#ifdef i2c_addr_fxos8700
+		if((i2c_addr == 0x1C || (i2c_addr == 0x1D) || (i2c_addr == 0x1E) || (i2c_addr == 0x1F))){
+			if (setup_fxos8700()) {
+				measure_fxos8700();
+				return;
+			} 
+		}
+	#endif
 	#if DEBUG == 1
 		Serial.println("This sensor is not currently supported by the Project LOOM sytem");
 	#endif
