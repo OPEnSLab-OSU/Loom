@@ -9,8 +9,8 @@
 #endif
 
 
-// ================================================================ 
-// ===                       DEFINITIONS                        === 
+// ================================================================
+// ===                       DEFINITIONS                        ===
 // ================================================================
 //The i2c address of the tca9548a is 0x70, but can be physically changed to 0x71
 //It was necessary to do this because the i2c address of the mb1232 is also
@@ -90,7 +90,7 @@ void measure_sensor(uint8_t i2c_addr){
 		}
 	#endif
 	#ifdef i2c_addr_fxos8700
-		if((i2c_addr == 0x1C || (i2c_addr == 0x1D) || (i2c_addr == 0x1E) || (i2c_addr == 0x1F))){
+		if((i2c_addr == 0x1C) || (i2c_addr == 0x1D) || (i2c_addr == 0x1E) || (i2c_addr == 0x1F)){
 			if (setup_fxos8700()) {
 				measure_fxos8700();
 				return;
@@ -98,9 +98,25 @@ void measure_sensor(uint8_t i2c_addr){
 		}
 	#endif
 	#ifdef i2c_addr_fxas21002
-		if((i2c_addr == 0x20 || (i2c_addr == 0x21))){
+		if((i2c_addr == 0x20) || (i2c_addr == 0x21)){
 			if (setup_fxas21002()) {
 				measure_fxas21002();
+				return;
+			} 
+		}
+	#endif
+	#ifdef i2c_addr_zxgesturesensor
+		if((i2c_addr == 0x10) || (i2c_addr == 0x11)){
+			if (setup_zxgesturesensor()) {
+				measure_zxgesturesensor();
+				return;
+			} 
+		}
+	#endif
+	#ifdef i2c_addr_sht31d
+		if((i2c_addr == 0x44) || (i2c_addr == 0x45)){
+			if (setup_sht31d()) {
+				measure_sht31d();
 				return;
 			} 
 		}

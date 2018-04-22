@@ -30,7 +30,7 @@
 	#define is_zxgesturesensor 0
 
 	//Temperature / Humidity
-	#define is_sht31d 0
+	#define is_sht31d 1
 
 	//Sonar
 	#define is_mb1232 0
