@@ -1,43 +1,67 @@
-#if is_wifi == 1
-  enum WiFiMode {
-    AP_MODE,
-    WPA_CLIENT_MODE,
-    WEP_CLIENT_MODE
-  };
-  
-  #include <WiFi101.h>
-  #include <WiFiUdp.h>
+// ================================================================
+// ===                        LIBRARIES                         ===
+// ================================================================
+#include <WiFi101.h>
+#include <WiFiUdp.h>
 
-  #define AP_NAME   STR(FAMILY) STR(DEVICE) STR(INIT_INST)
-  struct config_wifi_t{
-    IPAddress   ip;                     // Device's IP Address
-    char*       my_ssid;                // Default AP name
-    char        ssid[32];               // Host network name
-    char        pass[32];               // Host network password
-    int         keyIndex;               // Key Index Number (needed only for WEP)
-    char*       ip_broadcast;           // IP to Broadcast data
-    unsigned int localPort;             // Local port to listen on
-    byte        mac[6];                 // Device's MAC Address
-    WiFiMode    wifi_mode;              // Devices current wifi mode
-  };
-  struct config_wifi_t * config_wifi;
-  void link_config_wifi(struct config_wifi_t *flash_config_wifi){
-    config_wifi = flash_config_wifi;
-  }
-  char * packet_header_string;
-  // WiFi global vars/structs
-  WiFiUDP      Udp;
-  WiFiServer   server(80);
-  int status = WL_IDLE_STATUS;
+// ================================================================ 
+// ===                         DEFINES                          === 
+// ================================================================ 
+enum WiFiMode {
+  AP_MODE,
+  WPA_CLIENT_MODE,
+  WEP_CLIENT_MODE
+};
 
-  // Global variables to handle changes to WiFi ssid and password 
-  char new_ssid[32];
-  char new_pass[32];
-  bool ssid_set;
-  bool pass_set;
-#endif // of is_wifi
+#define AP_NAME   STR(FAMILY) STR(DEVICE) STR(INIT_INST)
+
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================
+struct config_wifi_t{
+  IPAddress   ip;                     // Device's IP Address
+  char*       my_ssid;                // Default AP name
+  char        ssid[32];               // Host network name
+  char        pass[32];               // Host network password
+  int         keyIndex;               // Key Index Number (needed only for WEP)
+  char*       ip_broadcast;           // IP to Broadcast data
+  unsigned int localPort;             // Local port to listen on
+  byte        mac[6];                 // Device's MAC Address
+  WiFiMode    wifi_mode;              // Devices current wifi mode
+};
+
+//struct state_<module>_t {
+//
+//};
+
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
+
+struct config_wifi_t * config_wifi;
+void link_config_wifi(struct config_wifi_t *flash_setup_wifi){
+  config_wifi = flash_setup_wifi;
+}
+
+//struct state_<module>_t *state_<module>;
 
 
+char * packet_header_string;
+// WiFi global vars/structs
+WiFiUDP      Udp;
+WiFiServer   server(80);
+int status = WL_IDLE_STATUS;
+
+// Global variables to handle changes to WiFi ssid and password 
+char new_ssid[32];
+char new_pass[32];
+bool ssid_set;
+bool pass_set;
+
+
+// ================================================================ 
+// ===                          SETUP                           === 
+// ================================================================
 // Function prototypes
 bool connect_to_WPA(char ssid[], char pass[]);
 void start_AP();
@@ -88,6 +112,9 @@ void wifi_setup()
 }
 
 
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
 
 // --- PRINT WIFI STATUS ---
 // If debug enabled, display WiFi settings / state to serial
@@ -239,7 +266,7 @@ void switch_to_AP(OSCMessage &msg)
     WiFi.end();
     start_AP();
     config_wifi->wifi_mode = AP_MODE;
-    //flash_config.write(configuration);
+    //flash_setup.write(configuration);
   }
   
   #if DEBUG == 1
@@ -321,7 +348,7 @@ void connect_to_new_network()
     config_wifi->ip = WiFi.localIP();
     strcpy(config_wifi->ssid,new_ssid);
     strcpy(config_wifi->pass,new_pass);
-    //flash_config.write(configuration);
+    //flash_setup.write(configuration);
   } 
 }
 
@@ -403,7 +430,7 @@ void set_port(OSCMessage &msg)
   #endif
 
   // Update saved port in configuration
-  //flash_config.write(configuration);
+  //flash_setup.write(configuration);
 }
 
 

@@ -1,11 +1,19 @@
-//Libraries
+// ================================================================ 
+// ===                        LIBRARIES                         === 
+// ================================================================
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include "Adafruit_TSL2591.h"
 
+// ================================================================ 
+// ===                        DEFINITIONS                       === 
+// ================================================================ 
 #define i2c_addr_tsl2591 0x29
 
-//Structures 
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================ 
+
 struct config_tsl2591_t {
 	uint8_t gain_level;
 	uint8_t timing_level;	
@@ -19,11 +27,51 @@ struct state_tsl2591_t {
 	uint16_t full;
 };
 
-//Global Declarations
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
 struct config_tsl2591_t config_tsl2591;
 struct state_tsl2591_t state_tsl2591;
 
 
+// ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+bool setup_tsl2591();
+void package_data_tsl2591(OSCBundle *, char[]);
+void measure_tsl2591();
+void configure_tsl2591(uint8_t, uint8_t);
+
+#if DEBUG == 1
+	void details_tsl2591();
+#endif
+
+// ================================================================ 
+// ===                          SETUP                           === 
+// ================================================================
+bool setup_tsl2591() {
+	bool is_setup;
+	state_tsl2591.inst_tsl2591 = Adafruit_TSL2591(2591);
+	if(state_tsl2591.inst_tsl2591.begin()) {
+		is_setup = true;
+		#if DEBUG == 1
+			Serial.println("Initialized tsl2591");
+		#endif
+		configure_tsl2591(1, 2); //Medium gain and timing
+	}
+	else {
+		is_setup = false;
+		#if DEBUG == 1
+			Serial.println("Failed to initialize tsl2591");
+		#endif
+	}
+	
+	return is_setup;
+}
+
+// ================================================================ 
+// ===                        FUNCTION DECLARATIONS             === 
+// ================================================================
 void package_data_tsl2591(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl
 }
@@ -117,27 +165,6 @@ void configure_tsl2591(uint8_t gain_level, uint8_t timing_level) {
 		Serial.println(F("------------------------------------"));
 		Serial.println(F(""));
 	#endif //if DEBUG == 1
-}
-
-//Functions
-bool setup_tsl2591() {
-	bool is_setup;
-	state_tsl2591.inst_tsl2591 = Adafruit_TSL2591(2591);
-	if(state_tsl2591.inst_tsl2591.begin()) {
-		is_setup = true;
-		#if DEBUG == 1
-			Serial.println("Initialized tsl2591");
-		#endif
-		configure_tsl2591(1, 2); //Medium gain and timing
-	}
-	else {
-		is_setup = false;
-		#if DEBUG == 1
-			Serial.println("Failed to initialize tsl2591");
-		#endif
-	}
-	
-	return is_setup;
 }
 
 #if DEBUG == 1

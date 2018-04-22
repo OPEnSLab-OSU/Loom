@@ -1,11 +1,18 @@
-//Libraries
+// ================================================================ 
+// ===                        LIBRARIES                         === 
+// ================================================================
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_FXAS21002C.h>
 
+// ================================================================ 
+// ===                        DEFINITIONS                       === 
+// ================================================================ 
 #define i2c_addr_fxas21002 0x20 //0x20, 0x21
 
-//Structures 
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================
 struct config_fxas21002_t {
 
 };
@@ -17,12 +24,28 @@ struct state_fxas21002_t {
 	float z;
 };
 
-//Global Declarations
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
 struct config_fxas21002_t config_fxas21002;
 struct state_fxas21002_t state_fxas21002;
 
-//Functions
-void setup_fxas21002() {
+// ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+bool setup_fxas21002();
+void package_data_fxas21002(OSCBundle *, char[]);
+void measure_fxas21002();
+#if DEBUG == 1
+	void details_fxas21002();
+#endif
+
+
+
+// ================================================================ 
+// ===                          SETUP                           === 
+// ================================================================
+bool setup_fxas21002() {
 	bool is_setup;
 	state_fxas21002.inst_fxas21002 = Adafruit_FXAS21002C(0x0021002C);
 	
@@ -36,8 +59,13 @@ void setup_fxas21002() {
 			Serial.println("Failed to initialize fxas21002.");
 		#endif
 	}
+	
+	return is_setup;
 }
 
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
 void package_data_fxas21002(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl
 }
