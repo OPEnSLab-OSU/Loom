@@ -21,8 +21,7 @@ struct config_tsl2591_t {
 
 struct state_tsl2591_t {
 	Adafruit_TSL2591 inst_tsl2591;
-	float lux;
-	uint32_t vis;
+	uint16_t vis;
 	uint16_t ir;
 	uint16_t full;
 };
@@ -77,18 +76,15 @@ void package_data_tsl2591(OSCBundle *bndl, char packet_header_string[]) {
 }
 
 void measure_tsl2591() {
-	uint32_t lum = state_tsl2591.inst_tsl2591.getFullLuminosity();
-	state_tsl2591.ir = lum >> 16;
-	state_tsl2591.full = lum & 0xFFFF;
-	state_tsl2591.vis = state_tsl2591.full - state_tsl2591.ir;
-	state_tsl2591.lux = state_tsl2591.inst_tsl2591.calculateLux(state_tsl2591.full, state_tsl2591.ir);
+	state_tsl2591.ir = state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_INFRARED);
+	state_tsl2591.full = state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_FULLSPECTRUM);
+	state_tsl2591.vis =  state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_VISIBLE);
 	
 	#if DEBUG ==1 
 		Serial.print(F("[ ")); Serial.print(millis()); Serial.print(F(" ms ] "));
 		Serial.print(F("IR: ")); Serial.print(state_tsl2591.ir);  Serial.print(F("  "));
 		Serial.print(F("Full: ")); Serial.print(state_tsl2591.full); Serial.print(F("  "));
 		Serial.print(F("Visible: ")); Serial.print(state_tsl2591.vis); Serial.print(F("  "));
-		Serial.print(F("Lux: ")); Serial.println(state_tsl2591.lux, 6);
 	#endif
 }
 

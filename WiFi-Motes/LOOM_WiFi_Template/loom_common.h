@@ -114,8 +114,7 @@ void LOOM_begin()
   //Initialize serial and wait for port to open:
   #if DEBUG == 1
     Serial.begin(9600);
-    //while(!Serial);        // Ensure Serial is ready to go before anything happens in DEBUG mode.
-		delay(2000);
+    while(!Serial);        // Ensure Serial is ready to go before anything happens in DEBUG mode.
 		Serial.println("Initialized Serial!");
   #endif
   
