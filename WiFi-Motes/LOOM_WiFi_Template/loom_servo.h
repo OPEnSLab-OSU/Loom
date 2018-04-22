@@ -5,7 +5,7 @@
 
 
 // ================================================================ 
-// ===                         DEFINES                          === 
+// ===                       DEFINITIONS                        === 
 // ================================================================
 #define SERVOMIN  150     // This is the 'minimum' pulse length count (out of 4096)
 #define SERVOMAX  600     // This is the 'maximum' pulse length count (out of 4096)
@@ -50,6 +50,13 @@ struct state_servo_t {
 // ================================================================
 struct state_servo_t *state_servo;
 
+// ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+void setup_servo();
+void set_servo_degree(int set_degree, int servo_choice);
+void set_servo(OSCMessage &msg);
+
 
 // ================================================================ 
 // ===                          SETUP                           === 
@@ -93,7 +100,6 @@ void set_servo_degree(int set_degree, int servo_choice)
   state_servo->predeg[servo_choice] = set_degree;
   state_servo->pre_pulselength[servo_choice] = pulselength;
 }
-
 
 
 // -- SET SERVO --

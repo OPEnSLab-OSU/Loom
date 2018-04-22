@@ -9,7 +9,7 @@
 
 
 // ================================================================ 
-// ===                         DEFINES                          === 
+// ===                       DEFINITIONS                        === 
 // ================================================================
 #define INTERRUPT_PIN 11
 
@@ -27,6 +27,7 @@
 struct config_mpu6050_t {
   int   ax_offset, ay_offset, az_offset, gx_offset, gy_offset, gz_offset;
 };
+
 
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
@@ -70,6 +71,18 @@ int mean_ax, mean_ay, mean_az, mean_gx, mean_gy, mean_gz, state = 0;
 int buffersize = 1000;   // Amount of readings used to average, make it higher to get more precision but sketch will be slower  (default:1000)
 int acel_deadzone = 8;   // Acelerometer error allowed, make it lower to get more precision, but sketch may not converge  (default:8)
 int giro_deadzone = 1;   // Giro error allowed, make it lower to get more precision, but sketch may not converge  (default:1)
+
+
+// ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+void setup_mpu6050();
+uint32_t measure_mpu6050(void);
+void meansensors();
+void calibration();
+void package_mpu6050(OSCBundle *bndl, char packet_header_string[]);
+void calMPU6050();
+void calMPU6050_OSC(OSCMessage &msg) 
 
 
 // ================================================================ 
