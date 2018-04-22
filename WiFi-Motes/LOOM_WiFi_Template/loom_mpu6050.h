@@ -1,21 +1,17 @@
-struct config_mpu6050_t {
-  int   ax_offset, ay_offset, az_offset, gx_offset, gy_offset, gz_offset;
-};
-struct config_mpu6050_t * config_mpu6050;
-void link_config_mpu6050(struct config_mpu6050_t *flash_config_mpu6050){
-    config_mpu6050 = flash_config_mpu6050;
-}
+// ================================================================ 
+// ===                        LIBRARIES                         === 
+// ================================================================
 // Include libraries for serial and i2c devices
 //#include "S_message.h"
 #include "I2Cdev.h"
 #include "Wire.h"
-
-#define INTERRUPT_PIN 11
-bool dmpReady = false; //set true if DMP init was successful
-
 #include "MPU6050_6Axis_MotionApps20.h"
-MPU6050 mpu;             // Create instance of MPU6050 called mpu
-MPU6050 accelgyro;       // Another instance called accelgyro
+
+
+// ================================================================ 
+// ===                         DEFINES                          === 
+// ================================================================
+#define INTERRUPT_PIN 11
 
 // Uncoment one or more of these to determine which readings and format to send
 #define OUTPUT_READABLE_YAWPITCHROLL
@@ -23,6 +19,29 @@ MPU6050 accelgyro;       // Another instance called accelgyro
 //#define OUTPUT_READABLE_REALACCEL
 //#define OUTPUT_READABLE_WORLDACCEL  // this is pretty cool
 //#define OUTPUT_BINARY_ACCELGYRO
+
+
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================
+struct config_mpu6050_t {
+  int   ax_offset, ay_offset, az_offset, gx_offset, gy_offset, gz_offset;
+};
+
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
+struct config_mpu6050_t * config_mpu6050;
+void link_config_mpu6050(struct config_mpu6050_t *flash_setup_mpu6050){
+    config_mpu6050 = flash_setup_mpu6050;
+}
+
+
+bool dmpReady = false; //set true if DMP init was successful
+
+MPU6050 mpu;             // Create instance of MPU6050 called mpu
+MPU6050 accelgyro;       // Another instance called accelgyro
+
 
 uint8_t  mpuIntStatus;   // Holds actual interrupt status byte from MPU
 uint8_t  devStatus;      // Return status after each device operation (0 = success, !0 = error)
@@ -43,16 +62,6 @@ float       ypr[3];      // [yaw, pitch, roll]   yaw/pitch/roll container and gr
 int16_t ax, ay, az;
 int16_t gx, gy, gz;
 
-
-// ================================================================
-// ===               INTERRUPT DETECTION ROUTINE                ===
-// ================================================================
-
-volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
-void dmpDataReady() {
-  mpuInterrupt = true;
-}
-
 // MPU calibration vars:
 int mean_ax, mean_ay, mean_az, mean_gx, mean_gy, mean_gz, state = 0;
 //int ax_offset,ay_offset,az_offset,gx_offset,gy_offset,gz_offset;
@@ -62,6 +71,16 @@ int buffersize = 1000;   // Amount of readings used to average, make it higher t
 int acel_deadzone = 8;   // Acelerometer error allowed, make it lower to get more precision, but sketch may not converge  (default:8)
 int giro_deadzone = 1;   // Giro error allowed, make it lower to get more precision, but sketch may not converge  (default:1)
 
+
+// ================================================================ 
+// ===                          SETUP                           === 
+// ================================================================
+
+// INTERRUPT DETECTION ROUTINE 
+volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
+void dmpDataReady() {
+  mpuInterrupt = true;
+}
 
 
 
@@ -152,6 +171,12 @@ void setup_mpu6050()
     } // of else
   #endif // end of is_mpu6050
 }
+
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
+
 
 
 
@@ -417,16 +442,6 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[])
   // Evaluate if accelerometers are all around zero-G, if so, set freefall bool to true
   if ((axf > -0.2 && axf < 0.2) && (ayf > -0.2 && ayf < 0.2) && (azf > -0.2 && azf < 0.2))
     freefall = true;
-    
-  /*
-    bndl.add(PacketHeaderString "/mac0").add((int)configuration.mac[0]);
-    bndl.add(PacketHeaderString "/mac1").add((int)configuration.mac[1]);
-    bndl.add(PacketHeaderString "/mac2").add((int)configuration.mac[2]);
-    bndl.add(PacketHeaderString "/mac3").add((int)configuration.mac[3]);
-    bndl.add(PacketHeaderString "/mac4").add((int)configuration.mac[4]);
-    bndl.add(PacketHeaderString "/mac5").add((int)configuration.mac[5]);
-    bndl.add(PacketHeaderString "/ip").add((String)configuration.ip);
-  */
   
   // Assemble UDP Packet
   // IP1 IP2 Yaw Pitch Roll aX aY aZ gX gY gZ vBatt

@@ -1,8 +1,12 @@
-//Libraries
+// ================================================================ 
+// ===                        LIBRARIES                         === 
+// ================================================================
 #include <Wire.h>
 #include <ZX_Sensor.h>
 
-//Structures 
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================ 
 struct config_zxgesturesensor_t {
 
 };
@@ -11,16 +15,24 @@ struct state_zxgesturesensor_t {
 
 };
 
-//Global Declarations
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
 struct config_zxgesturesensor_t *config_zxgesturesensor;
 struct state_zxgesturesensor_t *state_zxgesturesensor;
 
 
-//Functions
+// ================================================================ 
+// ===                          SETUP                           === 
+// ================================================================
 void setup_zxgesturesensor() {
-	//Setup Here
+  //Setup Here
 }
 
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
 void package_data_zxgesturesensor(OSCBundle *bndl, char packet_header_string[]) {
 	//Create a message and fill it here, then add it to the bndl
 }
