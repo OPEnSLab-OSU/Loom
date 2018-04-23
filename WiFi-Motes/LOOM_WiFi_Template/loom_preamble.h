@@ -43,7 +43,7 @@
 #endif
 
 // Using Config defines, check which headers to include
-#if DEBUG == 1
+#if LOOM_DEBUG == 1
 	#include <SPI.h>
 #endif
 

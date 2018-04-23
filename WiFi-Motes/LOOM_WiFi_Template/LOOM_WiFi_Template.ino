@@ -2,7 +2,7 @@
   January 19, 2018. Author: Trevor Swope
   This is the LOOM WiFi Mote template! Read this big 'ol comment for instructions on how to use the preprocessor statements in here to define the functionality of your board.
  
-  DEBUG MODE: define DEBUG as 1 or 0. If DEBUG is set, make sure the serial monitor is open; all serial calls should be wrapped in an #if DEBUG == 1 ... #endif
+  LOOM_DEBUG MODE: define LOOM_DEBUG as 1 or 0. If LOOM_DEBUG is set, make sure the serial monitor is open; all serial calls should be wrapped in an #if LOOM_DEBUG == 1 ... #endif
 
   
  */
@@ -76,7 +76,7 @@ void loop() {
 //              }
 //            } // of for
 //          } // of else 
-//          #if DEBUG == 1
+//          #if LOOM_DEBUG == 1
 //            print_bundle(&bndl);
 //          #endif
 //          sendToPushingBox(int(NUM_FIELDS), server_name, device_id);
@@ -94,7 +94,7 @@ void loop() {
 //      memset(message, '\0', sizeof(message));
 //      get_OSC_string(&bndl, message);
 //    
-//      #if DEBUG == 1
+//      #if LOOM_DEBUG == 1
 //        Serial.println(message);
 //        Serial.print("Message length: ");
 //        Serial.println(strlen(message));
@@ -104,12 +104,12 @@ void loop() {
 //      #endif
 //       
 //      if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)){
-//         #if DEBUG == 1
+//         #if LOOM_DEBUG == 1
 //           Serial.println("ok");
 //         #endif 
 //      }
 //      else {
-//        #if DEBUG == 1
+//        #if LOOM_DEBUG == 1
 //          Serial.println("failed");
 //        #endif
 //      }
@@ -140,7 +140,7 @@ void loop() {
 //  // If there's data available, read a packet
 //  packetSize = Udp.parsePacket();
 //  if (packetSize > 0) {
-//    #if DEBUG == 1
+//    #if LOOM_DEBUG == 1
 //      Serial.println("=========================================");
 //      Serial.print("Received packet of size: ");
 //      Serial.println(packetSize);
@@ -153,7 +153,7 @@ void loop() {
 //
 //    // If no error
 //    if (!bndl.hasError()){
-//      #if DEBUG == 1
+//      #if LOOM_DEBUG == 1
 //        Serial.print("Number of items in bundle: ");
 //        Serial.println(bndl.size());
 //        Serial.print("First message address string: ");
@@ -182,7 +182,7 @@ void loop() {
 //
 //    } else { // of !bndl.hasError()
 //      error = bndl.getError();
-//      #if DEBUG == 1
+//      #if LOOM_DEBUG == 1
 //        Serial.print("error: ");
 //        Serial.println(error);
 //      #endif
@@ -207,7 +207,7 @@ void loop() {
 		if (status != WiFi.status()) {
 			status = WiFi.status();              // It has changed, update the variable
 			
-			#if DEBUG == 1
+			#if LOOM_DEBUG == 1
 				if (status == WL_AP_CONNECTED) {   // A device has connected to the AP
 						print_remote_mac_addr();                            
 				} else {                           // A device has disconnected from the AP, and we are back in listening mode 

@@ -65,7 +65,7 @@ void handleRelay(OSCMessage &msg)
   int set_to = msg.getInt(1);
   state_relay->on[relay] = (set_to == 1);
   
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.print("Set ");
     Serial.print(relay);
     Serial.print(" to ");

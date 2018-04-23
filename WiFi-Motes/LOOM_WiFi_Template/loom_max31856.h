@@ -87,7 +87,7 @@ void measure_max31856()
     // Check and print any faults
     uint8_t fault = max.readFault();
     if (fault) {
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
       if (fault & MAX31856_FAULT_CJRANGE) Serial.println("Cold Junction Range Fault");
       if (fault & MAX31856_FAULT_TCRANGE) Serial.println("Thermocouple Range Fault");
       if (fault & MAX31856_FAULT_CJHIGH)  Serial.println("Cold Junction High Fault");

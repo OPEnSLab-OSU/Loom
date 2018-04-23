@@ -91,7 +91,7 @@ void wifi_setup()
     
   // Check for the presence of the shield, else don't continue:
   if (WiFi.status() == WL_NO_SHIELD) {
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
       Serial.println("WiFi shield not present, entering infinite loop");
     #endif
     while (true); 
@@ -106,12 +106,12 @@ void wifi_setup()
       break;
     case WPA_CLIENT_MODE:
       if (connect_to_WPA(config_wifi->ssid,config_wifi->pass)){
-        #if DEBUG == 1
+        #if LOOM_DEBUG == 1
           Serial.println("Success!");
         #endif
       }
       else {
-        #if DEBUG == 1
+        #if LOOM_DEBUG == 1
           Serial.println("Failure :(");
         #endif
         while(true);
@@ -132,7 +132,7 @@ void wifi_setup()
 // Return:    none
 void printWiFiStatus() 
 {
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     // Print the SSID of the network you're attached to:
     Serial.print("SSID: "); 
     Serial.println(WiFi.SSID());
@@ -166,7 +166,7 @@ void printWiFiStatus()
     // Print where to go in a browser:
     Serial.print("To see this page in action, open a browser to http://");
     Serial.println(config_wifi->ip);
-  #endif // of DEBUG
+  #endif // of LOOM_DEBUG
 }
 
 
@@ -178,7 +178,7 @@ void printWiFiStatus()
 // Return:    none
 void start_AP() 
 {
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     // print the network name (SSID);
     Serial.print("Creating access point named: ");
     Serial.println(config_wifi->my_ssid);
@@ -187,7 +187,7 @@ void start_AP()
   // Create open network. Change this line if you want to create an WEP network:
   status = WiFi.beginAP(config_wifi->my_ssid);
   if (status != WL_AP_LISTENING) {
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
         Serial.println("Creating access point failed");
     #endif
     while (true);   // Don't continue
@@ -197,7 +197,7 @@ void start_AP()
   
   server.begin();   // Start the web server on port 80
 
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     printWiFiStatus();   // You're connected now, so print out the status
     Serial.println("\nStarting UDP connection over server...");
   #endif
@@ -220,7 +220,7 @@ bool connect_to_WPA(char ssid[], char pass[])
 
   // Try to connect, attempting the connection up to 10 times (this number is arbitrary)
   while (status != WL_CONNECTED && attempt_count < 10) {
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
       Serial.println("Connecting to WPA host failed, trying again");
     #endif
     
@@ -230,7 +230,7 @@ bool connect_to_WPA(char ssid[], char pass[])
 
   // If not successfully connected
   if (status != WL_CONNECTED) {
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
       Serial.println("Connecting to WPA host failed completely");
       Serial.println("Reverting to AP mode");
     #endif
@@ -246,7 +246,7 @@ bool connect_to_WPA(char ssid[], char pass[])
   
   delay(8000); 
   
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     // You're connected now, so print out the status
     printWiFiStatus();
     Serial.println("Starting UDP connection over server...");
@@ -267,7 +267,7 @@ bool connect_to_WPA(char ssid[], char pass[])
 void switch_to_AP(OSCMessage &msg) 
 {
   if (config_wifi->wifi_mode != AP_MODE) {
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
         Serial.println("Received command to switch to AP mode");
     #endif
     
@@ -279,7 +279,7 @@ void switch_to_AP(OSCMessage &msg)
     //flash_setup.write(configuration);
   }
   
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
   else {
     Serial.println("Already in AP mode, no need to switch");
   }
@@ -339,7 +339,7 @@ void connect_to_new_network()
   replace_char(state_wifi->new_ssid, '~', ' ');
   replace_char(state_wifi->new_pass, '~', ' ');
 
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.print("received command to connect to ");
     Serial.print(state_wifi->new_ssid);
     Serial.print(" with password ");
@@ -410,7 +410,7 @@ void broadcastIP(OSCMessage &msg) {
   Udp.endPacket();    // Mark the end of the OSC Packet
   bndl.empty();       // Empty the bundle to free room for a new one
 
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.print("Broadcasted IP: ");
     Serial.println(config_wifi->ip);
   #endif
@@ -424,7 +424,7 @@ void broadcastIP(OSCMessage &msg) {
 // Return:    none
 void set_port(OSCMessage &msg) 
 {
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.print("Port changed from ");
     Serial.print(config_wifi->localPort);
   #endif
@@ -434,7 +434,7 @@ void set_port(OSCMessage &msg)
   Udp.stop();
   Udp.begin(config_wifi->localPort);
 
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.print(" to ");
     Serial.println(config_wifi->localPort);
   #endif

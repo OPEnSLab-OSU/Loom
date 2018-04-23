@@ -46,13 +46,13 @@ bool setup_zxgesturesensor() {
 	
 	if(state_zxgesturesensor.inst_zxgesturesensor.init()) {
 		is_setup = true;
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Initialized zxgesturesensor");
 		#endif
 	}
 	else {
 		is_setup = false;
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Failed to initialize zxgesturesensor");
 		#endif
 	}
@@ -60,12 +60,12 @@ bool setup_zxgesturesensor() {
 	ver = state_zxgesturesensor.inst_zxgesturesensor.getModelVersion();
 	if(ver != ZX_MODEL_VER) {
 		is_setup = false;
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Incorrect Model Version or unable to read Model Version.");
 		#endif
 	}
 	else {
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.print("Model Version: ");
 			Serial.println(ver);
 		#endif
@@ -75,12 +75,12 @@ bool setup_zxgesturesensor() {
   ver = state_zxgesturesensor.inst_zxgesturesensor.getRegMapVersion();
 	if(ver != ZX_REG_MAP_VER) {
 		is_setup = false;
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Incorrect Register Map Version or unable to read Register Map Version.");
 		#endif
 	}
 	else {
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.print("Register Map Version: ");
 			Serial.println(ver);
 		#endif
@@ -106,7 +106,7 @@ void measure_zxgesturesensor() {
 		z = state_zxgesturesensor.inst_zxgesturesensor.readZ();
   }
 	else {
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Position data unavailable for zxgesturesensor");
 		#endif
 	}
@@ -114,7 +114,7 @@ void measure_zxgesturesensor() {
 	if((x != ZX_ERROR) && (z != ZX_ERROR)) {
 		state_zxgesturesensor.pos[0] = x;
 		state_zxgesturesensor.pos[1] = z;
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.print("zxgesturesensor X: ");
 			Serial.println(state_zxgesturesensor.pos[0]);
 			Serial.print("zxgesturesensor Z: ");
@@ -122,7 +122,7 @@ void measure_zxgesturesensor() {
 		#endif
 	}
 	else {
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Error occurred while reading position data");
 		#endif
 	}
@@ -131,7 +131,7 @@ void measure_zxgesturesensor() {
     state_zxgesturesensor.gesture = state_zxgesturesensor.inst_zxgesturesensor.readGesture();
     state_zxgesturesensor.gesture_speed = state_zxgesturesensor.inst_zxgesturesensor.readGestureSpeed();
 		
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			switch (state_zxgesturesensor.gesture) {
 				case NO_GESTURE:
 						Serial.println("No Gesture");
@@ -151,7 +151,7 @@ void measure_zxgesturesensor() {
 		#endif
   }
 	else {
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Gesture data unavailable for zxgesturesensor");
 		#endif
 	}

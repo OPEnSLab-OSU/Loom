@@ -35,7 +35,7 @@ void set_instance_num(OSCMessage &msg)
   configuration.instance_number = msg.getInt(0);
   sprintf(configuration.packet_header_string, "%s%d\0", PacketHeaderString, configuration.instance_number);
   
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.print("new address header: ");
     Serial.println(configuration.packet_header_string);
   #endif
@@ -49,7 +49,7 @@ void set_instance_num(OSCMessage &msg)
 //   addrOffset (used to determine where to start check of message header string)
 // Return:    none
 void msg_router(OSCMessage &msg, int addrOffset) {
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     char buffer[100];
     msg.getAddress(buffer, addrOffset);
     Serial.print("Parsed ");
@@ -100,7 +100,7 @@ void msg_router(OSCMessage &msg, int addrOffset) {
 				button_timer++;
 			#endif
 			if (button_timer >= 5000) { // ~about 8 seconds
-				#if DEBUG == 1
+				#if LOOM_DEBUG == 1
 					Serial.println("Button held for 8 seconds, resetting to AP mode");
 				#endif
 				button_timer = 0;
@@ -124,9 +124,9 @@ void msg_router(OSCMessage &msg, int addrOffset) {
 void LOOM_begin()
 {
   //Initialize serial and wait for port to open:
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.begin(9600);
-    while(!Serial);        // Ensure Serial is ready to go before anything happens in DEBUG mode.
+    while(!Serial);        // Ensure Serial is ready to go before anything happens in LOOM_DEBUG mode.
 		delay(5000);
 		Serial.println("Initialized Serial!");
   #endif
@@ -181,7 +181,7 @@ void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[])
   // If there's data available, read a packet
   packetSize = Udp.parsePacket();
   if (packetSize > 0) {
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
       Serial.println("=========================================");
       Serial.print("Received packet of size: ");
       Serial.println(packetSize);
@@ -194,7 +194,7 @@ void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[])
 
     // If no error
     if (!bndl->hasError()){
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         char addressString[255];      
         Serial.print("Number of items in bundle: ");
         Serial.println(bndl->size());
@@ -221,7 +221,7 @@ void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[])
 
     } else { // of !bndl.hasError()
       error = bndl->getError();
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         Serial.print("error: ");
         Serial.println(error);
       #endif
@@ -236,7 +236,7 @@ void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[])
 #ifdef is_sleep_period
 void loop_sleep()
 {
-  #if DEBUG == 0
+  #if LOOM_DEBUG == 0
     int sleepMS = Watchdog.sleep(is_sleep_period); // Sleep MCU for transmit period duration
   #else
     delay(is_sleep_period);                        // Demo transmit every 1 second

@@ -54,7 +54,7 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager);
   String get_data_value(OSCMessage* msg, int pos);
   void sendToPushingBox(int num_fields, char *server_name, char *devid);
 #endif
-#if DEBUG == 1
+#if LOOM_DEBUG == 1
   void print_bundle(OSCBundle *bndl);
 #endif
 void lora_receive_bundle(OSCBundle *bndl);
@@ -71,20 +71,20 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
   #if lora_device_type == 0
 		pinMode(8, INPUT_PULLUP);
   #endif
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
 		Serial.println("Initializing manager...");
   #endif
   if (!manager->init()){
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
 			Serial.println("init failed");
 		#endif
   }
 
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.println("Setting Frequency...");
   #endif
   if (!rf95->setFrequency(RF95_FREQ)) {
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("setFrequency failed");
 		#endif
     while (1);
@@ -92,7 +92,7 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
 
   #if lora_device_type == 0
     if (Ethernet.begin(mac) == 0) {
-			#if DEBUG == 1
+			#if LOOM_DEBUG == 1
 				Serial.println("Failed to configure Ethernet using DHCP");
 			#endif
       // Try to congifure using IP address instead of DHCP:
@@ -100,11 +100,11 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
     }
   #endif
   
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.println("Setting power...");
   #endif
   rf95->setTxPower(23, false);
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.println("LoRa setup finished!");
   #endif
 }
@@ -158,7 +158,7 @@ void get_OSC_string(OSCBundle *bndl, char *osc_string)
 
 		default:
 			if (data_type != '\0')
-			#if DEBUG == 1
+			#if LOOM_DEBUG == 1
 				Serial.print("Invalid message arg type");
 			#endif
 			break;
@@ -218,7 +218,7 @@ void get_OSC_bundle(char *string, OSCBundle* bndl)
 // 
 // Arguments: An OSCBundle to be printed.
 // Return: Nothing. Prints the OSCBundle's contents to the Serial.
-#if DEBUG == 1
+#if LOOM_DEBUG == 1
 void print_bundle(OSCBundle *bndl)
 {
 	int n = 0;
@@ -256,7 +256,7 @@ void print_bundle(OSCBundle *bndl)
 		msg = bndl->getOSCMessage(n);
 	}
 }
-#endif // of DEBUG == 1
+#endif // of LOOM_DEBUG == 1
 
 
 
@@ -280,7 +280,7 @@ String get_data_value(OSCMessage* msg, int pos)
 			return String(buf);
 			break;
 		default:
-			#if DEBUG == 1
+			#if LOOM_DEBUG == 1
 				Serial.println("Unsupported data data_type.");
 			#endif
 			return String("");
@@ -315,7 +315,7 @@ void sendToPushingBox(int num_fields, char *server_name, char *devid)
     client.println();
    
   } 
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     else {
       Serial.println("connection failed");
     }
@@ -357,7 +357,7 @@ void lora_receive_bundle(OSCBundle *bndl)
             }
           } // of for
         } // of else 
-        #if DEBUG == 1
+        #if LOOM_DEBUG == 1
           print_bundle(bndl);
         #endif
         sendToPushingBox(int(NUM_FIELDS), server_name, device_id);
@@ -375,7 +375,7 @@ void lora_receive_bundle(OSCBundle *bndl)
     memset(message, '\0', sizeof(message));
     get_OSC_string(bndl, message);
   
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
       Serial.println(message);
       Serial.print("Message length: ");
       Serial.println(strlen(message));
@@ -385,12 +385,12 @@ void lora_receive_bundle(OSCBundle *bndl)
     #endif
      
     if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)){
-       #if DEBUG == 1
+       #if LOOM_DEBUG == 1
          Serial.println("ok");
        #endif 
     }
     else {
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         Serial.println("failed");
       #endif
     }

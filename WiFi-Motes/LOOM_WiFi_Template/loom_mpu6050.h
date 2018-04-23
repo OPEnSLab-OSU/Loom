@@ -106,7 +106,7 @@ void dmpDataReady() {
 // Return:
 void setup_mpu6050()
 {
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.println("starting mpu6050 initialization");
   #endif
  
@@ -120,7 +120,7 @@ void setup_mpu6050()
   
   pinMode(INTERRUPT_PIN, INPUT);
   
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.println("Using i2c");
   #endif
   
@@ -139,14 +139,14 @@ void setup_mpu6050()
     // Make sure it worked (returns 0 if so)
     if (devStatus == 0) {
       // turn on the DMP, now that it's ready
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         Serial.println(F("Enabling DMP..."));
       #endif
       
       mpu.setDMPEnabled(true);
 
         // Uncomment following 2 lines if using enable Arduino Uno, MO, or Trinket interrupt detection
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         Serial.println(F("Enabling MPU interrupt detection (Arduino external interrupt 0)..."));
       #endif
       
@@ -154,7 +154,7 @@ void setup_mpu6050()
 
       // Uncomment following 2 lines if using Adafruit Feather 32u4
       // enable interrupt for PCINT7...
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         //Serial.println(F("Enabling MPU interrupt detection PCINT 7 (pin 11)"));
       #endif
       
@@ -163,7 +163,7 @@ void setup_mpu6050()
         mpuIntStatus = mpu.getIntStatus();
 
       // Set our DMP Ready flag so the main loop() function knows it's okay to use it
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
           Serial.println(F("DMP ready! Waiting for first interrupt..."));
       #endif
       dmpReady = true;
@@ -176,7 +176,7 @@ void setup_mpu6050()
       // 2 = DMP configuration updates failed
       // (if it's going to break, usually the code will be 1)
       
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         Serial.print(F("DMP Initialization failed (code "));
         Serial.print(devStatus);
         Serial.println(F(")"));
@@ -225,7 +225,7 @@ uint32_t measure_mpu6050(void)
   if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
     mpu.resetFIFO();      // Reset so we can continue cleanly
     
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
       Serial.println(F("FIFO overflow!"));    // NOTE: If you get this message, MPU6050 library, file "MPU6050_6Axis_MotionApps20.h" modify last byte of line 305 0x07 to 0x09
     #endif
     
@@ -249,7 +249,7 @@ uint32_t measure_mpu6050(void)
       mpu.dmpGetGravity(&gravity, &q);
       mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
       
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
   /*      Serial.print("ypr\t");
           Serial.print(ypr[0] * 180/M_PI);
           Serial.print("\t");
@@ -269,7 +269,7 @@ uint32_t measure_mpu6050(void)
       pitch = ypr[1] * 180 / M_PI;
       roll  = ypr[2] * 180 / M_PI;
       
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         Serial.write((uint8_t)(yaw >> 8));   Serial.write((uint8_t)(yaw & 0xFF));
         Serial.write((uint8_t)(pitch >> 8)); Serial.write((uint8_t)(pitch & 0xFF));
         Serial.write((uint8_t)(roll >> 8));  Serial.write((uint8_t)(roll & 0xFF));
@@ -284,7 +284,7 @@ uint32_t measure_mpu6050(void)
       mpu.dmpGetGravity(&gravity, &q);
       mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
       
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         Serial.print("areal\t");
         Serial.print(aaReal.x);
         Serial.print("\t");
@@ -304,7 +304,7 @@ uint32_t measure_mpu6050(void)
       mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
       mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
       
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         /*
           Serial.print("aworld\t");
           Serial.print(aaWorld.x);
@@ -319,7 +319,7 @@ uint32_t measure_mpu6050(void)
 
     #ifdef OUTPUT_READABLE_ACCELGYRO
       // Display tab-separated accel/gyro x/y/z values
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         Serial.print("a/g:\t");
         Serial.print(ax); Serial.print("\t");
         Serial.print(ay); Serial.print("\t");
@@ -332,7 +332,7 @@ uint32_t measure_mpu6050(void)
 
 
     #ifdef OUTPUT_BINARY_ACCELGYRO
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         Serial.write((uint8_t)(ax >> 8)); Serial.write((uint8_t)(ax & 0xFF));
         Serial.write((uint8_t)(ay >> 8)); Serial.write((uint8_t)(ay & 0xFF));
         Serial.write((uint8_t)(az >> 8)); Serial.write((uint8_t)(az & 0xFF));
@@ -406,7 +406,7 @@ void calibration() {
     accelgyro.setZGyroOffset(config_mpu6050->gz_offset);
 
     meansensors();
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
       Serial.println("...");
     #endif
 
@@ -517,7 +517,7 @@ void calMPU6050()
   }
 
   if (state == 1) {
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
       Serial.println("\nCalculating offsets...");
     #endif
     calibration();
@@ -531,7 +531,7 @@ void calMPU6050()
     // Save Sample Period into EEPROM for next power-up
     //    EEPROM_writeAnything(0, configuration);
     
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
       Serial.println("\nFINISHED!");
       Serial.print("\nSensor readings with offsets:\t");
       Serial.print(mean_ax);
@@ -571,13 +571,13 @@ void calMPU6050()
 // Return:
 void calMPU6050_OSC(OSCMessage &msg) 
 {
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.println("Command received to calibrate MPU6050");
   #endif
   
   calMPU6050();
   
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.println("New calibration values written to non-volatile memory");
   #endif
 }

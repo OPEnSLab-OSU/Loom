@@ -60,13 +60,13 @@ bool setup_mb1232() {
 	Wire.requestFrom(i2c_addr_mb1232, byte(2));
 	if(Wire.available() >= 2) {
 		is_setup = true;
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Initialized mb1232");
 		#endif
 	}
 	else {
 		is_setup = false;
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Failed to initialize mb1232");
 		#endif
 	}
@@ -96,7 +96,7 @@ void measure_mb1232() {
 		state_mb1232.low = Wire.read();
 		byte tmp = Wire.read();
 		state_mb1232.range = (state_mb1232.high * 256) + state_mb1232.low;
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.print("High Byte: ");
 			Serial.println(state_mb1232.high);
 			Serial.print("Low Byte: ");
@@ -106,7 +106,7 @@ void measure_mb1232() {
 		#endif
 	}
 	else {
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Error reading from mb1232 (range)");
 		#endif
 	}       

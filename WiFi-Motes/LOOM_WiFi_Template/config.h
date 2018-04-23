@@ -4,12 +4,12 @@
 
 
 //--OPTIONS--//
-#define DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
 
 #define is_ishield 0
 #define num_servos 0
-#define is_relay   1
-#define is_wifi    1
+#define is_relay   0
+#define is_wifi    0
 #define is_lora    0
 #define is_analog  0
 
@@ -27,7 +27,7 @@
 	#define is_fxas21002 1
 
 	//ZX_Distance Sensor
-	#define is_zxgesturesensor 0
+	#define is_zxgesturesensor 1
 
 	//Temperature / Humidity
 	#define is_sht31d 1
