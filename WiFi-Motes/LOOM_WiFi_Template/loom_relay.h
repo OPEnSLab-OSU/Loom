@@ -55,9 +55,6 @@ void setup_relay() {
 // ================================================================
 
 
-
-
-
 // --- HANDLE RELAY ---
 // Updates stored state of relays
 // Arguments: msg (OSC message with data of state to set particular relay to)
@@ -74,6 +71,8 @@ void handleRelay(OSCMessage &msg)
     Serial.print(" to ");
     Serial.println((state_relay->on[relay]) ? "ON" : "OFF");
   #endif
+
+  write_relay_states();
 }
 
 

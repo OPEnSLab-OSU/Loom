@@ -57,7 +57,8 @@ void measure_max31856();
 // ================================================================
 // ===                          SETUP                           ===
 // ================================================================
-void setup_max31856() {
+void setup_max31856() 
+{
   max.begin();
   #if TCTYPE == K_TYPE
     max.setThermocoupleType(MAX31856_TCTYPE_K);
@@ -72,7 +73,8 @@ void setup_max31856() {
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
-void measure_max31856() {
+void measure_max31856() 
+{
   #if TCTYPE == K_TYPE
     //Type K processing
     //Cold Junction Temp
@@ -106,7 +108,8 @@ void measure_max31856() {
 }
 
 
-void package_max31856(OSCBundle *bndl, char packet_header_string[]) {
+void package_max31856(OSCBundle *bndl, char packet_header_string[]) 
+{
   char addressString[255];
   #if TCTYPE == K_TYPE
   
