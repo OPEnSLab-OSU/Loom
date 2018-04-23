@@ -57,7 +57,7 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager);
 #if DEBUG == 1
   void print_bundle(OSCBundle *bndl);
 #endif
-
+void lora_receive_bundle(OSCBundle *bndl);
 
 // ================================================================
 // ===                          SETUP                           ===
@@ -66,7 +66,8 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager);
 // 
 // Arguments: An instance of the radio, and an instance of the manager, both to be initialized.
 // Return: Nothing. Simply changes the state of the device to allow it to use LoRa.
-void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
+void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) 
+{
   #if lora_device_type == 0
 		pinMode(8, INPUT_PULLUP);
   #endif
@@ -117,7 +118,8 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) {
 // Arguments: An OSCBundle to put into string format. A char * to fill with the OSCBundle's data.
 // Return: Nothing, but osc_string's contents will now include the OSCBundle's formatted data.
 #if lora_device_type == 1
-void get_OSC_string(OSCBundle *bndl, char *osc_string) {
+void get_OSC_string(OSCBundle *bndl, char *osc_string) 
+{
 	char data_type;
 	data_value value;
 	int addr_len = 40;
@@ -175,7 +177,8 @@ void get_OSC_string(OSCBundle *bndl, char *osc_string) {
 // Arguments: A char * created through the use of get_OSC_string(), an OSCBundle to fill.
 // Return: Nothing, but the OSCBundle is filled with the data from the string.
 #if lora_device_type == 0
-void get_OSC_bundle(char *string, OSCBundle* bndl) {
+void get_OSC_bundle(char *string, OSCBundle* bndl) 
+{
 	bndl->empty();
 	data_value value_union;
 	char buf[strlen(string)+1];
@@ -216,7 +219,8 @@ void get_OSC_bundle(char *string, OSCBundle* bndl) {
 // Arguments: An OSCBundle to be printed.
 // Return: Nothing. Prints the OSCBundle's contents to the Serial.
 #if DEBUG == 1
-void print_bundle(OSCBundle *bndl) {
+void print_bundle(OSCBundle *bndl)
+{
 	int n = 0;
 	char buf[50];
 	char data_type;
@@ -261,7 +265,8 @@ void print_bundle(OSCBundle *bndl) {
 // Arguments: An OSCMessage, the position of an argument inside the OSCMessage.
 // Return: The value of the argument as a string.
 #if lora_device_type == 0
-String get_data_value(OSCMessage* msg, int pos) {
+String get_data_value(OSCMessage* msg, int pos) 
+{
 	switch (msg->getType(pos)) {
 		case 'i':
 			return String(msg->getInt(pos));
@@ -292,7 +297,8 @@ String get_data_value(OSCMessage* msg, int pos) {
 // the devid specifying the PB scenario.
 // Return: Nothing. Sends a get request to PB.
 #if lora_device_type == 0
-void sendToPushingBox(int num_fields, char *server_name, char *devid) {
+void sendToPushingBox(int num_fields, char *server_name, char *devid) 
+{
   client.stop();
   if (client.connect(server_name, 80)) {  
     client.print("GET /pushingbox?devid="); client.print(devid); 
@@ -316,3 +322,83 @@ void sendToPushingBox(int num_fields, char *server_name, char *devid) {
   #endif
 }
 #endif // of #if lora_device_type == 0
+
+
+
+
+
+
+
+
+void lora_receive_bundle(OSCBundle *bndl)
+{
+  #if lora_device_type == 0
+    if (manager.available()) {
+      uint8_t len = LORA_MESSAGE_SIZE;
+      uint8_t from;
+      uint8_t buf[LORA_MESSAGE_SIZE];
+      memset(buf, '\0', LORA_MESSAGE_SIZE);
+      if (manager.recvfromAck(buf, &len, &from)) {
+        if (((char)(buf[0])) == '/') {
+          get_OSC_bundle((char*)buf, bndl); 
+          for(int i = 0; i < NUM_FIELDS; i++)
+            data[i] = get_data_value(bndl->getOSCMessage(0), i);
+        } else {
+          char str[LORA_MESSAGE_SIZE];
+          String((char*)buf).toCharArray(str, sizeof(str)-1);
+          char *token;
+          char *savept = str;
+          String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
+          for(int i = 0; i < NUM_FIELDS; i+=2) {
+            token = strtok_r(savept, ",", &savept);
+            if(token != NULL) {
+              data[i] = cols[i/2];
+              data[i+1] = String(token);
+            }
+          } // of for
+        } // of else 
+        #if DEBUG == 1
+          print_bundle(bndl);
+        #endif
+        sendToPushingBox(int(NUM_FIELDS), server_name, device_id);
+      } // of if (manager.recvfromAck(buf, &len, &from))
+    } // of if (manager.available()) 
+  #endif //of lora type is hub
+
+  #if lora_device_type == 1
+    bndl.add(PacketHeaderString).add("Date").add("3/6/2018").add("IDtag").add((int32_t) INIT_INST)
+    .add("TimeStamp").add("2018").add("TempC").add((int32_t)32).add("Humidity").add((float)46.4)
+    .add("LoadCell").add((int32_t)1000).add("IRLight").add((int32_t)2000).add("FullLight").add((int32_t)3000)
+    .add("BatVolt").add((float)4.2);
+  
+    char message[RH_RF95_MAX_MESSAGE_LEN];
+    memset(message, '\0', sizeof(message));
+    get_OSC_string(bndl, message);
+  
+    #if DEBUG == 1
+      Serial.println(message);
+      Serial.print("Message length: ");
+      Serial.println(strlen(message));
+      Serial.print("Max message length: ");
+      Serial.println(RH_RF95_MAX_MESSAGE_LEN);
+      Serial.print("Sending...");
+    #endif
+     
+    if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)){
+       #if DEBUG == 1
+         Serial.println("ok");
+       #endif 
+    }
+    else {
+      #if DEBUG == 1
+        Serial.println("failed");
+      #endif
+    }
+  
+    delay(10000);
+  #endif // of lora type is_node
+}
+
+
+
+

@@ -37,12 +37,10 @@ void package_analog(OSCBundle *bndl, char packet_header_string[]);
 //
 
 
-
-
 // --- READ ANALOG ---
 // Generic subroutine for reading raw sensor data with averaging
 // Arguments: none
-// Return:    none
+// Return:    uint32_t measured sensor value
 uint32_t read_analog(uint8_t chnl)
 {
   int i = num_measurements;
@@ -68,7 +66,8 @@ uint32_t read_analog(uint8_t chnl)
 
 
 // --- PACKAGE ANALOG ---
-// Gets analog reading from pors and button, as enabled
+// Gets analog reading from pors and button, as enabled,
+//  and forms an OSC bundle out of them
 // Arguments: none
 // Return:    none
 void package_analog(OSCBundle *bndl, char packet_header_string[])

@@ -30,9 +30,13 @@ struct config_wifi_t{
   WiFiMode    wifi_mode;              // Devices current wifi mode
 };
 
-//struct state_<module>_t {
-//
-//};
+struct state_wifi_t {
+  // Global variables to handle changes to WiFi ssid and password 
+  char new_ssid[32];
+  char new_pass[32];
+  bool ssid_set;
+  bool pass_set;
+};
 
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
@@ -43,8 +47,7 @@ void link_config_wifi(struct config_wifi_t *flash_setup_wifi){
   config_wifi = flash_setup_wifi;
 }
 
-//struct state_<module>_t *state_<module>;
-
+struct state_wifi_t *state_wifi;
 
 char * packet_header_string;
 // WiFi global vars/structs
@@ -52,11 +55,6 @@ WiFiUDP      Udp;
 WiFiServer   server(80);
 int status = WL_IDLE_STATUS;
 
-// Global variables to handle changes to WiFi ssid and password 
-char new_ssid[32];
-char new_pass[32];
-bool ssid_set;
-bool pass_set;
 
 
 // ================================================================ 
@@ -74,6 +72,7 @@ void set_ssid(OSCMessage &msg);
 void set_pass(OSCMessage &msg);
 void broadcastIP(OSCMessage &msg);
 void set_port(OSCMessage &msg);
+void wifi_receive_bundle(OSCBundle *bndl);
 
 
 // ================================================================ 
@@ -109,12 +108,12 @@ void wifi_setup()
     case WPA_CLIENT_MODE:
       if (connect_to_WPA(config_wifi->ssid,config_wifi->pass)){
         #if DEBUG == 1
-        Serial.println("Success!");
+          Serial.println("Success!");
         #endif
       }
       else {
         #if DEBUG == 1
-        Serial.println("Failure :(");
+          Serial.println("Failure :(");
         #endif
         while(true);
       }
@@ -338,14 +337,14 @@ void replace_char(char *str, char orig, char rep) {
 void connect_to_new_network()
 {
   // Replace '~'s with spaces - as spaces cannot be sent via Max and are replaced with '~'
-  replace_char(new_ssid, '~', ' ');
-  replace_char(new_pass, '~', ' ');
+  replace_char(state_wifi->new_ssid, '~', ' ');
+  replace_char(state_wifi->new_pass, '~', ' ');
 
   #if DEBUG == 1
     Serial.print("received command to connect to ");
-    Serial.print(new_ssid);
+    Serial.print(state_wifi->new_ssid);
     Serial.print(" with password ");
-    Serial.println(new_pass);
+    Serial.println(state_wifi->new_pass);
   #endif
 
   // Disconnect from current WiFi network
@@ -355,11 +354,11 @@ void connect_to_new_network()
   
   // Try connecting on newly specified one
   // Will revert to AP Mode if this fails
-  if(connect_to_WPA(new_ssid,new_pass)) {
+  if(connect_to_WPA(state_wifi->new_ssid,state_wifi->new_pass)) {
     config_wifi->wifi_mode = WPA_CLIENT_MODE;
     config_wifi->ip = WiFi.localIP();
-    strcpy(config_wifi->ssid,new_ssid);
-    strcpy(config_wifi->pass,new_pass);
+    strcpy(config_wifi->ssid, state_wifi->new_ssid);
+    strcpy(config_wifi->pass, state_wifi->new_pass);
     //flash_setup.write(configuration);
   } 
 }
@@ -373,8 +372,8 @@ void connect_to_new_network()
 // Return:    none
 void set_ssid(OSCMessage &msg) 
 {
-  msg.getString(0, new_ssid, 50);
-  ssid_set = true;
+  msg.getString(0, state_wifi->new_ssid, 50);
+  state_wifi->ssid_set = true;
 }
 
 
@@ -386,8 +385,8 @@ void set_ssid(OSCMessage &msg)
 // Return:    none
 void set_pass(OSCMessage &msg) 
 {
-  msg.getString(0, new_pass, 50);
-  pass_set = true;
+  msg.getString(0, state_wifi->new_pass, 50);
+  state_wifi->pass_set = true;
 }
 
 
@@ -444,6 +443,10 @@ void set_port(OSCMessage &msg)
   // Update saved port in configuration
   //flash_setup.write(configuration);
 }
+
+
+
+
 
 
 

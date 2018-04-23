@@ -43,8 +43,8 @@ void setColor(OSCMessage &msg);
 // Creates an array to store Neopixel data, iterates through to initialize Neopixels
 // Arguments: none
 // Return:    none
-void setup_neopixel() {
-  //Setup Here
+void setup_neopixel() 
+{
   for(int i = 0; i < 3; i++) {
     if (state_neopixel->enabled[i]) {
       state_neopixel->pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
