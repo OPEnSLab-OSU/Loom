@@ -55,9 +55,6 @@ void setup_relay() {
 // ================================================================
 
 
-
-
-
 // --- HANDLE RELAY ---
 // Updates stored state of relays
 // Arguments: msg (OSC message with data of state to set particular relay to)
