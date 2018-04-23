@@ -5,7 +5,7 @@ struct SensorList poll_sensors(SDI12 *mySDI12) {
   struct SensorList data;
   String id = "";
   data.count = 0;
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < SENSORCOUNT; i++) {
     id = get_identity(&mySDI12[i]);
     if (id.length() > 0) {
       data.type[data.count] = get_type(id);

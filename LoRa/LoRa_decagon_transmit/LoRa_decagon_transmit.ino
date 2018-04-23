@@ -22,16 +22,17 @@
 
 #ifdef __AVR_ATmega32U4__
 #define is_32U4
-#pragma message("Warning: 32u4 can only interface with one Decagon device on pin 11")
+#pragma message("Warning: 32u4 can only interface with one Decagon device on pin 10")
 #endif
 
-#define DEBUG 1
+//#define DEBUG 1
 #ifndef DEBUG
 #define DEBUG 0
 #endif
 
 //===== Decagon Initializations =====
 
+#define SENSORCOUNT 6 //Determines how many pins you actually want to poll for sensors
 #define DATAPIN1 A0  // change to the proper pin
 #define DATAPIN2 A1
 #define DATAPIN3 A3
@@ -64,6 +65,17 @@ String sdiResponse = "";
 
 #define SERVER_ADDRESS 2
 
+//battery voltage read pin
+#ifdef is_M0
+#define VBATPIN A7
+#endif
+
+#ifdef is_32U4
+#define VBATPIN A9
+#endif
+
+float measuredvbat;
+
 //IDString constructor
 
 #define STR_HELPER(x) #x
@@ -72,6 +84,8 @@ String sdiResponse = "";
 #define FAMILY "/LOOM"
 #define DEVICE "/DShield"
 #define INSTANCE_NUM 0  // Unique instance number for this device, useful when using more than one of the same device type in same space
+// $$$$$$$ NOTE: Change instance number for each device above ^ $$$$$$$$
+
 
 #define IDString FAMILY DEVICE STR(INSTANCE_NUM) // C interprets subsequent string literals as concatenation: "/Loom" "/Ishield" "0" becomes "/Loom/Ishield0"
  
@@ -81,7 +95,7 @@ String sdiResponse = "";
 // Singleton instance of the radio driver
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
-RHReliableDatagram manager(rf95, INSTANCE_NUM);
+RHReliableDatagram manager(rf95, INSTANCE_NUM + 10);
 
 // ===== RTC Initializations =====
 
@@ -90,22 +104,29 @@ RHReliableDatagram manager(rf95, INSTANCE_NUM);
 #ifdef RTC3231
 RTC_DS3231 RTC_DS;
 
+char TimeStamp[20];
+
 // declare/init RTC_DS variables//
-volatile bool TakeSampleFlag = false; // Flag is set with external Pin A0 Interrupt by RTC
+volatile bool TakeSampleFlag = true; // Flag is set with external Pin A0 Interrupt by RTC
 volatile bool LEDState = false; // flag t toggle LED
 volatile int HR = 8; // Hr of the day we want alarm to go off
 volatile int MIN = 0; // Min of each hour we want alarm to go off
-volatile int WakePeriodMin = 1;  // Period of time to take sample in Min, reset alarm based on this period (Bo - 5 min)
+#if DEBUG == 0
+volatile int WakePeriodMin = 15;  // Period of time to take sample in Min, reset alarm based on this period (Bo - 5 min)
+#elif DEBUG == 1
+volatile int WakePeriodMin = 1;
+#endif //DEBUG
 const byte wakeUpPin = 11;
-#endif
+#endif //RTC3231
 
 //===== Setup =====
 
 void setup() {
   // put your setup code here, to run once:
+#if DEBUG == 1
   Serial.begin(9600);
-  delay(2000);
-  Serial.println("Beginning setup");
+#endif
+  delay(10000); //delay on start up so boards don't immediately sleep :)
   lora_setup(&rf95, &manager);
 
   // Decagon Setup
@@ -133,41 +154,84 @@ void setup() {
   // RTC Setup
 
 #ifdef RTC3231
+
+
   pinMode(wakeUpPin, INPUT_PULLUP);
+
+#ifdef is_M0
   attachInterrupt(wakeUpPin, wake, FALLING);
+#endif // is_M0
 
   InitalizeRTC();
 #if DEBUG == 1
     Serial.print("Alarm set to go off every "); Serial.print(WakePeriodMin); Serial.println("min from program time");
-#endif
-  delay(10000);
-#endif
+#endif // DEBUG
+  delay(10000); //Things break without this, I don't know why
+  TakeSampleFlag = true;
+#endif // RTC3231
 }
 
 void loop() {
+  
 #ifdef RTC3231
-  attachInterrupt(digitalPinToInterrupt(wakeUpPin), wake, FALLING);  
-  // Enter power down state with ADC and BOD module disabled.
-  // Wake up when wake up pin is low.
-  LowPower.idle(IDLE_2);
-  // <----  Wait in sleep here until pin interrupt
-    
-  // On Wakeup, proceed from here:
-  //detachInterrupt(digitalPinToInterrupt(wakeUpPin)); //
-  //clearAlarmFunction(); // Clear RTC Alarm
 
-#endif
+#ifdef is_M0
+  attachInterrupt(digitalPinToInterrupt(wakeUpPin), wake, FALLING);
+
+  LowPower.idle(IDLE_2);
+
+#endif //is_M0
+
+#ifdef is_32U4
+  pinMode(wakeUpPin, INPUT_PULLUP);
+  enableInterrupt(wakeUpPin, wake, FALLING);
+  
+  LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
+  
+#endif //is_32U4
+
+#endif //RTC3231
 
 #ifdef RTC3231
   if(TakeSampleFlag)
-  {
-    detachInterrupt(digitalPinToInterrupt(wakeUpPin)); //
+  { 
+
+#ifdef is_M0
+    detachInterrupt(digitalPinToInterrupt(wakeUpPin));
+#endif //is_M0
+
+#ifdef is_32U4
+    disableInterrupt(wakeUpPin);
+#endif //is_32U4
+
     clearAlarmFunction(); // Clear RTC Alarm
     
-#endif
+  // ===== Create RTC Timestamp =====
+  DateTime now = RTC_DS.now();
+  uint8_t mo = now.month();
+  uint8_t d = now.day();
+  uint8_t h = now.hour();
+  uint8_t mm = now.minute();
+
+  String RTC_monthString = String(mo, DEC);
+  String RTC_dayString = String(d, DEC);
+  String RTC_hrString = String(h, DEC);
+  String RTC_minString = String(mm, DEC);
+  String RTC_timeString = RTC_hrString + ":" + RTC_minString + "_" + RTC_monthString + "/" + RTC_dayString;
+  RTC_timeString.toCharArray(TimeStamp, 20);
+
+#endif //RTC3231
+
   // ===== Poll Sensors =====
 
   data = poll_sensors(mySDI12);
+
+  // ===== Get Battery Voltage =====
+
+  measuredvbat = analogRead(VBATPIN); // reading battery voltage
+  measuredvbat *= 2;    // we divided by 2, so multiply back
+  measuredvbat *= 3.3;  // Multiply by 3.3V, our reference voltage
+  measuredvbat /= 1024; // convert to voltage
   
   // ===== Send Measure to Active Sensors =====
 
@@ -192,34 +256,39 @@ void loop() {
     sdiResponse = "";
   }
 
-  // ===== Package data =====
+  // ===== Package and Transmit data =====
   OSCBundle bndl;
-  package_data(&bndl, data);
+  for(int sensor_number = 0; sensor_number < data.count; sensor_number++) {
+    package_data(&bndl, data, sensor_number);
 
-  // ===== Transmit =====
+    // Transmit
 
-  char message[201];
-
-  memset(message, '\0', 201);
-
-  get_OSC_string(&bndl, message);
-
-  delay(2000);
-
-  print_bundle(&bndl);
-
-  Serial.print("Sending...");
-  if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS))
-    Serial.println("ok");
-  else
-    Serial.println("failed");
+    char message[RH_RF95_MAX_MESSAGE_LEN + 1];
+    memset(message, '\0', RH_RF95_MAX_MESSAGE_LEN + 1);
+    get_OSC_string(&bndl, message);
+    delay(2000);
+#if DEBUG == 1
+    print_bundle(&bndl);
+    Serial.print("Sending...");
+#endif
+    if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)) {
+#if DEBUG == 1
+      Serial.println("ok");
+#endif
+    }
+    else {
+#if DEBUG == 1
+      Serial.println("failed");
+#endif
+    }
+  }
 
 #ifdef RTC3231
   setAlarmFunction();
   delay(75);  // delay so serial stuff has time to print out all the way
   TakeSampleFlag = false; // Clear Sample Flag
   }
-#endif
+#endif //RTC3231
   
 
   delay(2000);
