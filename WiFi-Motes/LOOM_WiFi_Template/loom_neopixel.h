@@ -70,7 +70,7 @@ void setColor(OSCMessage &msg)
   int color    = msg.getInt(2);
   int val      = msg.getInt(3);
 
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.println("========");
     Serial.print("Port: ");
     Serial.print(port);

@@ -98,7 +98,7 @@ void flash_config_setup()
   #if MEM_TYPE == MEM_FLASH || MEM_TYPE == MEM_EEPROM
     read_non_volatile(); //reads configuration from non_volatile memory
     
-    #if DEBUG == 1
+    #if LOOM_DEBUG == 1
       Serial.println("Reading from non-volatile memory...");
       Serial.print("Checksum: ");
       Serial.println(configuration.checksum);
@@ -107,7 +107,7 @@ void flash_config_setup()
     if (configuration.checksum != memValidationValue) {     // Write default values to flash
         configuration.instance_number = INIT_INST;
         sprintf(configuration.packet_header_string,"%s%d\0",PacketHeaderString,configuration.instance_number);
-        #if DEBUG == 1
+        #if LOOM_DEBUG == 1
           Serial.print("expecting OSC header ");
           Serial.println(configuration.packet_header_string);
         #endif
@@ -130,7 +130,7 @@ void flash_config_setup()
         
         configuration.checksum = memValidationValue;      // Configuration has been written successfully, so we write the checksum
 
-        #if DEBUG == 1
+        #if LOOM_DEBUG == 1
           Serial.println("Writing to flash for the first time.");
         #endif
         write_non_volatile();

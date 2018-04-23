@@ -52,7 +52,7 @@ void tcaseselect(uint8_t);
 bool setup_tca9548a() {
   delay(2000);
   Wire.begin();
-	#if DEBUG == 1
+	#if LOOM_DEBUG == 1
 		Serial.println("initialized tca9548a (multiplexer).");
 	#endif
 }
@@ -76,7 +76,7 @@ void package_data_tca9548a(OSCBundle *bndl, char packet_header_string[]) {
 }
 
 void measure_sensor(uint8_t i2c_addr){
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
 		Serial.print("Attempting to measure data from sensor with address: ");
 		Serial.println(i2c_addr);
 	#endif 
@@ -129,13 +129,13 @@ void measure_sensor(uint8_t i2c_addr){
 		} 
 	}
 	#endif
-	#if DEBUG == 1
+	#if LOOM_DEBUG == 1
 		Serial.println("This sensor is not currently supported by the Project LOOM sytem");
 	#endif
 }
 
 void measure_tca9548a() {
-	#if DEBUG == 1
+	#if LOOM_DEBUG == 1
 		Serial.println("Measuring data from devices connected to tca9548a (Multiplexer).");
 	#endif
   for (uint8_t t=0; t<8; t++) {
@@ -161,8 +161,7 @@ void measure_tca9548a() {
 				}
 			#endif // is_m0
 		}
+		delay(3000);
 	}
-	
-	delay(5000);
 }
 

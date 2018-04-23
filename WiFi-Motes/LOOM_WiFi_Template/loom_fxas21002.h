@@ -38,7 +38,7 @@ struct state_fxas21002_t state_fxas21002;
 bool setup_fxas21002();
 void package_data_fxas21002(OSCBundle *, char[]);
 void measure_fxas21002();
-#if DEBUG == 1
+#if LOOM_DEBUG == 1
 	void details_fxas21002();
 #endif
 
@@ -52,13 +52,13 @@ bool setup_fxas21002() {
 	
 	if(state_fxas21002.inst_fxas21002.begin()) {
 		is_setup = true;
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Initialized fxas21002.");
 		#endif
 	}
 	else {
 		is_setup = false;
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Failed to initialize fxas21002.");
 		#endif
 	}
@@ -83,7 +83,7 @@ void measure_fxas21002() {
   state_fxas21002.gyro[1] = event.gyro.y;
   state_fxas21002.gyro[2] = event.gyro.z;
 	
-	#if DEBUG == 1
+	#if LOOM_DEBUG == 1
 		Serial.print("X: "); Serial.print(state_fxas21002.gyro[0]); Serial.print("  ");
 		Serial.print("Y: "); Serial.print(state_fxas21002.gyro[1]); Serial.print("  ");
 		Serial.print("Z: "); Serial.print(state_fxas21002.gyro[2]); Serial.print("  ");
@@ -92,7 +92,7 @@ void measure_fxas21002() {
 }
 
 
-#if DEBUG == 1
+#if LOOM_DEBUG == 1
 void details_fxas21002() {
 	sensor_t sensor;
 	state_fxas21002.inst_fxas21002.getSensor(&sensor);

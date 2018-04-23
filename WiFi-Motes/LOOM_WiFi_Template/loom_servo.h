@@ -111,7 +111,7 @@ void set_servo(OSCMessage &msg)
   int servo_num  = msg.getInt(0);
   int set_degree = msg.getInt(1);
   
-  #if DEBUG == 1
+  #if LOOM_DEBUG == 1
     Serial.print("received message for servo ");
     Serial.print(servo_num);
     Serial.print(" with degree ");

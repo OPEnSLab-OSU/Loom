@@ -31,7 +31,7 @@ struct state_fxos8700_t {
 bool setup_fxos8700();
 void package_data_fxos8700(OSCBundle *, char[]);
 void measure_fxos8700();
-#if DEBUG == 1
+#if LOOM_DEBUG == 1
 	void details_fxos8700();
 #endif
 
@@ -49,13 +49,13 @@ bool setup_fxos8700() {
 	state_fxos8700.inst_fxos8700 = Adafruit_FXOS8700(0x8700A, 0x8700B);
 	if(state_fxos8700.inst_fxos8700.begin(ACCEL_RANGE_4G)) {
 		is_setup = true;
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 			Serial.println("Initialzed fxos8700 (accel/mag)");
 		#endif
 	}
 	else {
 		is_setup = false;
-		#if DEBUG == 1
+		#if LOOM_DEBUG == 1
 		 Serial.println("Failed to initialize fxos8700 (accel/mag)");
 		#endif
 	}
@@ -84,7 +84,7 @@ void measure_fxos8700() {
 	state_fxos8700.mag[1] = mevent.magnetic.y;
 	state_fxos8700.mag[2] = mevent.magnetic.z;
 	
-	#if DEBUG == 1
+	#if LOOM_DEBUG == 1
 		/* Display the accel results (acceleration is measured in m/s^2) */
 		Serial.print("A ");
 		Serial.print("X: "); Serial.print(state_fxos8700.accel[0], 4); Serial.print("  ");
@@ -103,7 +103,7 @@ void measure_fxos8700() {
 	#endif 
 }
 
-#if DEBUG == 1
+#if LOOM_DEBUG == 1
 	void details_fxos8700() {
 		sensor_t accel, mag;
 		state_fxos8700.inst_fxos8700.getSensor(&accel, &mag);
@@ -133,5 +133,5 @@ void measure_fxos8700() {
 		Serial.println("");
 		delay(500);
 	}
-#endif //if DEBUG == 1
+#endif //if LOOM_DEBUG == 1
 
