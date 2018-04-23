@@ -1,7 +1,7 @@
 // ================================================================
 // ===                 COMMON GLOBAL VARIABLES                  ===
 // ================================================================
-int           led = LED_BUILTIN;             // LED pin number
+int           led = LED_BUILTIN;              // LED pin number
 volatile bool ledState = LOW;                 // State of LED
 float         vbat = 3.3;                     // Place to save measured battery voltage (3.3V max)
 char          packetBuffer[255];              // Buffer to hold incoming packet
@@ -20,7 +20,7 @@ void msg_router(OSCMessage &msg, int addrOffset);
   void check_button_held();
 #endif
 void LOOM_begin();
-
+void loop_sleep();
 
 // ================================================================
 // ===                        FUNCTIONS                         ===
@@ -92,7 +92,8 @@ void msg_router(OSCMessage &msg, int addrOffset) {
 	{
 		if ( (uint32_t)digitalRead(button) ) {
 			button_timer = 0;
-		} else {
+		} 
+		else {
 			#ifdef is_sleep_period
 				button_timer += is_sleep_period;
 			#else
@@ -167,5 +168,80 @@ void LOOM_begin()
   
 }
 
+
+
+
+
+#if is_wifi == 1
+void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[])
+{
+  int packetSize;
+  state_wifi->pass_set = state_wifi->ssid_set = false;
+
+  // If there's data available, read a packet
+  packetSize = Udp.parsePacket();
+  if (packetSize > 0) {
+    #if DEBUG == 1
+      Serial.println("=========================================");
+      Serial.print("Received packet of size: ");
+      Serial.println(packetSize);
+    #endif
+    
+    bndl->empty();             // Empty previous bundle
+    while (packetSize--){     // Read in new bundle
+      bndl->fill(Udp.read());
+    }
+
+    // If no error
+    if (!bndl->hasError()){
+      #if DEBUG == 1
+        char addressString[255];      
+        Serial.print("Number of items in bundle: ");
+        Serial.println(bndl->size());
+        Serial.print("First message address string: ");
+        bndl->getOSCMessage(0)->getAddress(addressString, 0);
+        Serial.println(addressString);
+      #endif
+        
+      for (int i = 0; i < 32; i++){ //Clear the new_ssid and new_pass buffers
+        state_wifi->new_ssid[i] = '\0';
+        state_wifi->new_pass[i] = '\0';
+      }
+
+      // Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
+      // Most commands will be finished once control returns here (WiFi changes being handled below)
+      bndl->route(packet_header_string,msg_router);
+
+      
+      
+      // If new ssid and password have been received, try to connect to that network
+      if (state_wifi->ssid_set == true && state_wifi->pass_set == true){
+        connect_to_new_network();   
+      }
+
+    } else { // of !bndl.hasError()
+      error = bndl->getError();
+      #if DEBUG == 1
+        Serial.print("error: ");
+        Serial.println(error);
+      #endif
+    } // of else
+  } // of (packetSize > 0)
+}
+#endif // of if is_wifi == 1
+
+
+
+
+#ifdef is_sleep_period
+void loop_sleep()
+{
+  #if DEBUG == 0
+    int sleepMS = Watchdog.sleep(is_sleep_period); // Sleep MCU for transmit period duration
+  #else
+    delay(is_sleep_period);                        // Demo transmit every 1 second
+  #endif
+}
+#endif
 
 
