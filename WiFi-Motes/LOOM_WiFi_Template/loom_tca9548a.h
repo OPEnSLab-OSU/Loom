@@ -121,6 +121,14 @@ void measure_sensor(uint8_t i2c_addr){
 			} 
 		}
 	#endif
+	#ifdef i2c_addr_mb1232
+	if((i2c_addr == 0x70)){
+		if (setup_mb1232()) {
+			measure_mb1232();
+			return;
+		} 
+	}
+	#endif
 	#if DEBUG == 1
 		Serial.println("This sensor is not currently supported by the Project LOOM sytem");
 	#endif

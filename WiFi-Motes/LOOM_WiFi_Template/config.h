@@ -33,7 +33,7 @@
 	#define is_sht31d 1
 
 	//Sonar
-	#define is_mb1232 0
+	#define is_mb1232 1
 
 	//Accelerometer / Gyroscope
 	#define is_mpu6050 0
