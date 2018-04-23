@@ -20,7 +20,7 @@ void msg_router(OSCMessage &msg, int addrOffset);
   void check_button_held();
 #endif
 void LOOM_begin();
-
+void loop_sleep();
 
 // ================================================================
 // ===                        FUNCTIONS                         ===
@@ -173,7 +173,7 @@ void LOOM_begin()
 
 
 #if is_wifi == 1
-void wifi_receive_bundle(OSCBundle *bndl)
+void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[])
 {
   int packetSize;
   state_wifi->pass_set = state_wifi->ssid_set = false;
@@ -210,7 +210,7 @@ void wifi_receive_bundle(OSCBundle *bndl)
 
       // Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
       // Most commands will be finished once control returns here (WiFi changes being handled below)
-      bndl->route(configuration.packet_header_string,msg_router);
+      bndl->route(packet_header_string,msg_router);
 
       
       
@@ -233,7 +233,15 @@ void wifi_receive_bundle(OSCBundle *bndl)
 
 
 
-
-
+#ifdef is_sleep_period
+void loop_sleep()
+{
+  #if DEBUG == 0
+    int sleepMS = Watchdog.sleep(is_sleep_period); // Sleep MCU for transmit period duration
+  #else
+    delay(is_sleep_period);                        // Demo transmit every 1 second
+  #endif
+}
+#endif
 
 
