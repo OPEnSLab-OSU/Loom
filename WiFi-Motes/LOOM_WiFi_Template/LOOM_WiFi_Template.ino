@@ -124,12 +124,10 @@ void loop() {
   // HANDLE WIFI BUNDLE
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-
   #if is_wifi == 1
 //    state_wifi->pass_set = state_wifi->ssid_set = false;
-    wifi_receive_bundle(&bndl);                             // NOT tested yet - function is currently in loom_common, should probably be moved to wifi file, but it requires configuration struct defined in loom_flash.h
+    wifi_receive_bundle(&bndl, configuration.packet_header_string);                             // NOT tested yet - function is currently in loom_common, should probably be moved to wifi file, but it requires msg_router defined in loom_common
   #endif
-
 
 
 
@@ -196,11 +194,12 @@ void loop() {
 //  // END OF HANDLE WIFI BUNDLE
 //  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-
+                           // Currently commented out as write_relay_states is called at end of handle_relay after bundle to change state
+                           // Uncomment if this needs to be set each loop iteration
   // Write on/off values to connected relays
-  #if is_relay == 1
-    write_relay_states();       
-  #endif
+//  #if is_relay == 1
+//    write_relay_states();                              
+//  #endif
 
 
   #if is_wifi == 1
@@ -217,6 +216,7 @@ void loop() {
 			#endif
 		} // of if ( status != WiFi.status() )
 
+
 		//BEGIN SENDING OF DATA
 		OSCBundle send_bndl;
 		send_bndl.empty();
@@ -226,44 +226,45 @@ void loop() {
 
 		sprintf(addressString, "%s%s", configuration.packet_header_string, "/vbat");
 		send_bndl.add(addressString).add(vbat);          // Tack battery voltage onto here. Will want to change this for other sensors
+  #endif // of if is_wifi == 1
 
-    
+
+
+  #if is_wifi == 1
 		// Update MPU6050 Data
 		#if is_mpu6050 == 1
-			measure_mpu6050();            // Now measure MPU6050, update values in global registers 
+			measure_mpu6050();      // Now measure MPU6050, update values in global registers 
 			package_mpu6050(&send_bndl,configuration.packet_header_string);                // Build and send packet
 			// UDP Packet
 			Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
-			send_bndl.send(Udp);   // Send the bytes to the SLIP stream
-			Udp.endPacket();  // Mark the end of the OSC Packet
-			send_bndl.empty();     // Empty the bundle to free room for a new one
-			mpu.resetFIFO();              // Flush MPU6050 FIFO to avoid overflows if using i2c
+			send_bndl.send(Udp);    // Send the bytes to the SLIP stream
+			Udp.endPacket();        // Mark the end of the OSC Packet
+			send_bndl.empty();      // Empty the bundle to free room for a new one
+			mpu.resetFIFO();        // Flush MPU6050 FIFO to avoid overflows if using i2c
 		#endif
     #if is_max31856 == 1
       measure_max31856();
       package_max31856(&send_bndl,configuration.packet_header_string);
       Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
-      send_bndl.send(Udp);   // Send the bytes to the SLIP stream
-      Udp.endPacket();  // Mark the end of the OSC Packet
-      send_bndl.empty();     // Empty the bundle to free room for a new one
+      send_bndl.send(Udp);    // Send the bytes to the SLIP stream
+      Udp.endPacket();        // Mark the end of the OSC Packet
+      send_bndl.empty();      // Empty the bundle to free room for a new one
     #endif
 		// Get analog readings
 		#if is_analog >= 1
 			package_analog(&send_bndl,configuration.packet_header_string);
 			Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
-			send_bndl.send(Udp);   // Send the bytes to the SLIP stream
-			Udp.endPacket();  // Mark the end of the OSC Packet
-			send_bndl.empty();     // Empty the bundle to free room for a new one
+			send_bndl.send(Udp);    // Send the bytes to the SLIP stream
+			Udp.endPacket();        // Mark the end of the OSC Packet
+			send_bndl.empty();      // Empty the bundle to free room for a new one
 		#endif
 	#endif // of is_wifi
 
+
+
   // Delay between loop iterations
   #ifdef is_sleep_period
-    #if DEBUG == 0
-      int sleepMS = Watchdog.sleep(is_sleep_period); // Sleep MCU for transmit period duration
-    #else
-      delay(is_sleep_period);                        // Demo transmit every 1 second
-    #endif
+    loop_sleep();
   #endif
   
 } // End loop section

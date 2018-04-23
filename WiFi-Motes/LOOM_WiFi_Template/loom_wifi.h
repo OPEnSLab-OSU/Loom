@@ -72,7 +72,6 @@ void set_ssid(OSCMessage &msg);
 void set_pass(OSCMessage &msg);
 void broadcastIP(OSCMessage &msg);
 void set_port(OSCMessage &msg);
-void wifi_receive_bundle(OSCBundle *bndl);
 
 
 // ================================================================ 

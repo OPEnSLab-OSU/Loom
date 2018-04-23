@@ -71,6 +71,8 @@ void handleRelay(OSCMessage &msg)
     Serial.print(" to ");
     Serial.println((state_relay->on[relay]) ? "ON" : "OFF");
   #endif
+
+  write_relay_states();
 }
 
 
