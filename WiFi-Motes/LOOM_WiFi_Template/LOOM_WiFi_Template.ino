@@ -119,8 +119,6 @@ void loop() {
 //  #endif // of is_lora 
 
 
-
-
   // HANDLE WIFI BUNDLE
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
@@ -128,7 +126,6 @@ void loop() {
 //    state_wifi->pass_set = state_wifi->ssid_set = false;
     wifi_receive_bundle(&bndl, configuration.packet_header_string);                             // NOT tested yet - function is currently in loom_common, should probably be moved to wifi file, but it requires msg_router defined in loom_common
   #endif
-
 
 
 //  #if is_wifi == 1
@@ -229,7 +226,6 @@ void loop() {
   #endif // of if is_wifi == 1
 
 
-
   #if is_wifi == 1
 		// Update MPU6050 Data
 		#if is_mpu6050 == 1
@@ -259,8 +255,6 @@ void loop() {
 			send_bndl.empty();      // Empty the bundle to free room for a new one
 		#endif
 	#endif // of is_wifi
-
-
 
   // Delay between loop iterations
   #ifdef is_sleep_period
