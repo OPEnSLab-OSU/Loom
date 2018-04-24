@@ -72,6 +72,7 @@ void set_ssid(OSCMessage &msg);
 void set_pass(OSCMessage &msg);
 void broadcastIP(OSCMessage &msg);
 void set_port(OSCMessage &msg);
+void wifi_check_status();
 
 
 // ================================================================ 
@@ -446,6 +447,19 @@ void set_port(OSCMessage &msg)
 
 
 
-
-
+void wifi_check_status()
+{
+    // Compare the previous status to the current status
+    if (status != WiFi.status()) {
+      status = WiFi.status();              // It has changed, update the variable
+      
+      #if LOOM_DEBUG == 1
+        if (status == WL_AP_CONNECTED) {   // A device has connected to the AP
+            print_remote_mac_addr();                            
+        } else {                           // A device has disconnected from the AP, and we are back in listening mode 
+          Serial.println("Device disconnected from AP");
+        }
+      #endif
+    } // of if ( status != WiFi.status() )
+}
 
