@@ -47,7 +47,7 @@ void link_config_wifi(struct config_wifi_t *flash_setup_wifi){
   config_wifi = flash_setup_wifi;
 }
 
-struct state_wifi_t *state_wifi;
+struct state_wifi_t state_wifi;
 
 char * packet_header_string;
 // WiFi global vars/structs
@@ -336,14 +336,14 @@ void replace_char(char *str, char orig, char rep) {
 void connect_to_new_network()
 {
   // Replace '~'s with spaces - as spaces cannot be sent via Max and are replaced with '~'
-  replace_char(state_wifi->new_ssid, '~', ' ');
-  replace_char(state_wifi->new_pass, '~', ' ');
+  replace_char(state_wifi.new_ssid, '~', ' ');
+  replace_char(state_wifi.new_pass, '~', ' ');
 
   #if LOOM_DEBUG == 1
     Serial.print("received command to connect to ");
-    Serial.print(state_wifi->new_ssid);
+    Serial.print(state_wifi.new_ssid);
     Serial.print(" with password ");
-    Serial.println(state_wifi->new_pass);
+    Serial.println(state_wifi.new_pass);
   #endif
 
   // Disconnect from current WiFi network
@@ -353,11 +353,11 @@ void connect_to_new_network()
   
   // Try connecting on newly specified one
   // Will revert to AP Mode if this fails
-  if(connect_to_WPA(state_wifi->new_ssid,state_wifi->new_pass)) {
+  if(connect_to_WPA(state_wifi.new_ssid,state_wifi.new_pass)) {
     config_wifi->wifi_mode = WPA_CLIENT_MODE;
     config_wifi->ip = WiFi.localIP();
-    strcpy(config_wifi->ssid, state_wifi->new_ssid);
-    strcpy(config_wifi->pass, state_wifi->new_pass);
+    strcpy(config_wifi->ssid, state_wifi.new_ssid);
+    strcpy(config_wifi->pass, state_wifi.new_pass);
     //flash_setup.write(configuration);
   } 
 }
@@ -371,8 +371,8 @@ void connect_to_new_network()
 // Return:    none
 void set_ssid(OSCMessage &msg) 
 {
-  msg.getString(0, state_wifi->new_ssid, 50);
-  state_wifi->ssid_set = true;
+  msg.getString(0, state_wifi.new_ssid, 50);
+  state_wifi.ssid_set = true;
 }
 
 
@@ -384,8 +384,8 @@ void set_ssid(OSCMessage &msg)
 // Return:    none
 void set_pass(OSCMessage &msg) 
 {
-  msg.getString(0, state_wifi->new_pass, 50);
-  state_wifi->pass_set = true;
+  msg.getString(0, state_wifi.new_pass, 50);
+  state_wifi.pass_set = true;
 }
 
 

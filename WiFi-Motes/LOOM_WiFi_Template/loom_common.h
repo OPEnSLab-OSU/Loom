@@ -155,16 +155,16 @@ void LOOM_begin()
     setup_relay();
   #endif
 
+  flash_config_setup();
+
   // Communication Platform specific setups
   #if is_wifi == 1
     wifi_setup();
   #endif
-
   #if is_lora == 1
     lora_setup(&rf95, &manager);
   #endif
 	
-	flash_config_setup();
   
 }
 
@@ -174,12 +174,14 @@ void LOOM_begin()
 
 #if is_wifi == 1
 void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[])
-{
-  int packetSize;
-  state_wifi->pass_set = state_wifi->ssid_set = false;
-
+{  
+  int packetSize;  
+  state_wifi.pass_set = false;
+  state_wifi.ssid_set = false;
+  
   // If there's data available, read a packet
   packetSize = Udp.parsePacket();
+  
   if (packetSize > 0) {
     #if LOOM_DEBUG == 1
       Serial.println("=========================================");
@@ -202,20 +204,18 @@ void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[])
         bndl->getOSCMessage(0)->getAddress(addressString, 0);
         Serial.println(addressString);
       #endif
-        
+      
       for (int i = 0; i < 32; i++){ //Clear the new_ssid and new_pass buffers
-        state_wifi->new_ssid[i] = '\0';
-        state_wifi->new_pass[i] = '\0';
+        state_wifi.new_ssid[i] = '\0';
+        state_wifi.new_pass[i] = '\0';
       }
 
       // Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
       // Most commands will be finished once control returns here (WiFi changes being handled below)
       bndl->route(packet_header_string,msg_router);
-
-      
       
       // If new ssid and password have been received, try to connect to that network
-      if (state_wifi->ssid_set == true && state_wifi->pass_set == true){
+      if (state_wifi.ssid_set == true && state_wifi.pass_set == true){
         connect_to_new_network();   
       }
 

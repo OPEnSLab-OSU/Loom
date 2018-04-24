@@ -61,12 +61,12 @@ void flash_config_setup();
 
 #if MEM_TYPE == MEM_FLASH
 //  #include <FlashStorage.h>
-  FlashStorage(flash_setup,config_flash_t);    // Setup the flash storage for the structure
+  FlashStorage(flash_config,config_flash_t);    // Setup the flash storage for the structure
   void read_non_volatile(){
-    configuration = flash_setup.read();
+    configuration = flash_config.read();
   }
   void write_non_volatile(){
-    flash_setup.write(configuration);
+    flash_config.write(configuration);
   }
 #elif MEM_TYPE == MEM_EEPROM
 //  #include <EEPROM.h>

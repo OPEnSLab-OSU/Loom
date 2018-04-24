@@ -8,7 +8,7 @@
 // ================================================================
 struct state_neopixel_t {
   // Neopixel Data Structures (one per Ishield port)
-  Adafruit_NeoPixel * pixels[3];
+  Adafruit_NeoPixel pixels[3];
   
   // Based on config.h, enable Neopixel for specified ports
   bool enabled[3] = {NEO_0, NEO_1, NEO_2};
@@ -23,7 +23,7 @@ struct state_neopixel_t {
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-struct state_neopixel_t *state_neopixel;
+struct state_neopixel_t state_neopixel;
 
 
 
@@ -45,13 +45,23 @@ void setColor(OSCMessage &msg);
 // Return:    none
 void setup_neopixel() 
 {
+
+  
+//  state_neopixel.pixels[0] = Adafruit_NeoPixel(1, 14, NEO_GRB + NEO_KHZ800);
+//  state_neopixel.pixels[1] = Adafruit_NeoPixel(1, 15, NEO_GRB + NEO_KHZ800);
+//  state_neopixel.pixels[2] = Adafruit_NeoPixel(1, 16, NEO_GRB + NEO_KHZ800);
+
   for(int i = 0; i < 3; i++) {
-    if (state_neopixel->enabled[i]) {
-      state_neopixel->pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
-      state_neopixel->pixels[i]->begin(); // This initializes the NeoPixel library.
-      state_neopixel->pixels[i]->show();  // Initialize all pixels to 'off'
+    if (state_neopixel.enabled[i]) {
+//      Serial.println("REACHED C");
+      state_neopixel.pixels[i] = Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
+//      Serial.println("REACHED D");
+      state_neopixel.pixels[i].begin(); // This initializes the NeoPixel library.
+//      Serial.println("REACHED E");
+      state_neopixel.pixels[i].show();  // Initialize all pixels to 'off'
     }
   }
+//  Serial.println("REACHED F");
 }
 
 
@@ -84,19 +94,19 @@ void setColor(OSCMessage &msg)
   #endif
 
   // Update color values stored for specified Neopixel and write them to the Neopixels color
-  if (state_neopixel->enabled[port]) {
-    state_neopixel->colorVals[port][color] = val;
-    state_neopixel->pixels[port]->setPixelColor(pixelNum, 
-                                                state_neopixel->pixels[port]->Color(
-                                                  state_neopixel->colorVals[port][0], 
-                                                  state_neopixel->colorVals[port][1], 
-                                                  state_neopixel->colorVals[port][2]));
+  if (state_neopixel.enabled[port]) {
+    state_neopixel.colorVals[port][color] = val;
+    state_neopixel.pixels[port].setPixelColor(pixelNum, 
+                                                state_neopixel.pixels[port].Color(
+                                                  state_neopixel.colorVals[port][0], 
+                                                  state_neopixel.colorVals[port][1], 
+                                                  state_neopixel.colorVals[port][2]));
   }
 
   // Update colors displayed by enabled Neopixels
   for (int i = 0; i < 3; i++) {
-    if (state_neopixel->enabled[i])
-      state_neopixel->pixels[i]->show();
+    if (state_neopixel.enabled[i])
+      state_neopixel.pixels[i].show();
   }
 }
 
