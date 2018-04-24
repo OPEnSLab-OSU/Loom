@@ -21,7 +21,7 @@ struct state_relay_t {
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-struct state_relay_t *state_relay;
+struct state_relay_t state_relay;
 
 
 // ================================================================ 
@@ -45,8 +45,8 @@ void write_relay_states();
 void setup_relay() {
   pinMode(RELAY_PIN0,OUTPUT);
   pinMode(RELAY_PIN1,OUTPUT);
-  state_relay->on[0] = false;
-  state_relay->on[1] = false;
+  state_relay.on[0] = false;
+  state_relay.on[1] = false;
 }
 
 
@@ -63,13 +63,13 @@ void handleRelay(OSCMessage &msg)
 {
   int relay  = msg.getInt(0);
   int set_to = msg.getInt(1);
-  state_relay->on[relay] = (set_to == 1);
+  state_relay.on[relay] = (set_to == 1);
   
   #if LOOM_DEBUG == 1
     Serial.print("Set ");
     Serial.print(relay);
     Serial.print(" to ");
-    Serial.println((state_relay->on[relay]) ? "ON" : "OFF");
+    Serial.println((state_relay.on[relay]) ? "ON" : "OFF");
   #endif
 
   write_relay_states();
@@ -83,7 +83,7 @@ void handleRelay(OSCMessage &msg)
 // Return:    none
 void write_relay_states()
 {
-  digitalWrite(RELAY_PIN0,(state_relay->on[0]==true) ? HIGH : LOW);
-  digitalWrite(RELAY_PIN1,(state_relay->on[1]==true) ? HIGH : LOW);
+  digitalWrite(RELAY_PIN0,(state_relay.on[0]==true) ? HIGH : LOW);
+  digitalWrite(RELAY_PIN1,(state_relay.on[1]==true) ? HIGH : LOW);
 }
 
