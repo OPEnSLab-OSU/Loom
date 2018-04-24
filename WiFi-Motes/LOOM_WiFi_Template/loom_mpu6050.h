@@ -82,7 +82,7 @@ void meansensors();
 void calibration();
 void package_mpu6050(OSCBundle *bndl, char packet_header_string[]);
 void calMPU6050();
-void calMPU6050_OSC(OSCMessage &msg) 
+void calMPU6050_OSC(OSCMessage &msg);
 
 
 // ================================================================ 
