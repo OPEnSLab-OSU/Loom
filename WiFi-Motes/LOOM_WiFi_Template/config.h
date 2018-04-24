@@ -8,7 +8,7 @@
 
 #define is_ishield 1
 #define num_servos 0
-#define is_relay   0
+#define is_relay   1
 #define is_wifi    1
 #define is_lora    0
 #define is_analog  0
