@@ -54,6 +54,7 @@ void loop() {
                            
     // Compare the previous status to the current status
     wifi_check_status();
+
     
 		//BEGIN SENDING OF DATA
 		OSCBundle send_bndl;
@@ -64,10 +65,7 @@ void loop() {
 
 		sprintf(addressString, "%s%s", configuration.packet_header_string, "/vbat");
 		send_bndl.add(addressString).add(vbat);          // Tack battery voltage onto here. Will want to change this for other sensors
-  #endif // of if is_wifi == 1
 
-
-  #if is_wifi == 1
 		// Update MPU6050 Data
 		#if is_mpu6050 == 1
 			measure_mpu6050();      // Now measure MPU6050, update values in global registers 

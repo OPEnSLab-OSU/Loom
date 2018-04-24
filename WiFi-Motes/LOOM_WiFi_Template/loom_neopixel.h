@@ -45,23 +45,13 @@ void setColor(OSCMessage &msg);
 // Return:    none
 void setup_neopixel() 
 {
-
-  
-//  state_neopixel.pixels[0] = Adafruit_NeoPixel(1, 14, NEO_GRB + NEO_KHZ800);
-//  state_neopixel.pixels[1] = Adafruit_NeoPixel(1, 15, NEO_GRB + NEO_KHZ800);
-//  state_neopixel.pixels[2] = Adafruit_NeoPixel(1, 16, NEO_GRB + NEO_KHZ800);
-
   for(int i = 0; i < 3; i++) {
     if (state_neopixel.enabled[i]) {
-//      Serial.println("REACHED C");
       state_neopixel.pixels[i] = Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
-//      Serial.println("REACHED D");
       state_neopixel.pixels[i].begin(); // This initializes the NeoPixel library.
-//      Serial.println("REACHED E");
       state_neopixel.pixels[i].show();  // Initialize all pixels to 'off'
     }
   }
-//  Serial.println("REACHED F");
 }
 
 
