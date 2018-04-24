@@ -48,7 +48,7 @@ struct state_servo_t {
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-struct state_servo_t *state_servo;
+struct state_servo_t state_servo;
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
@@ -67,8 +67,8 @@ void set_servo(OSCMessage &msg);
 // Arguments: none
 // Return:    none
 void setup_servo() {
-  state_servo->pwm.begin();
-  state_servo->pwm.setPWMFreq(60);
+  state_servo.pwm.begin();
+  state_servo.pwm.setPWMFreq(60);
 }
 
 
@@ -84,21 +84,21 @@ void set_servo_degree(int set_degree, int servo_choice)
 {
   uint16_t pulselength = map(set_degree, 0, 180, SERVOMIN, SERVOMAX);
   
-  if (set_degree < state_servo->predeg[servo_choice]) {
-    for (double pulselen = state_servo->pre_pulselength[servo_choice]; pulselen >= pulselength; pulselen--) {
-      state_servo->pwm.setPWM(servo_choice, 0, pulselen);
+  if (set_degree < state_servo.predeg[servo_choice]) {
+    for (double pulselen = state_servo.pre_pulselength[servo_choice]; pulselen >= pulselength; pulselen--) {
+      state_servo.pwm.setPWM(servo_choice, 0, pulselen);
     }
   }
   
   //When input degree is greater than previous degree, it increases
-  if (set_degree > state_servo->predeg[servo_choice]) {
-    for (double pulselen = state_servo->pre_pulselength[servo_choice]; pulselen < pulselength; pulselen++) {
-      state_servo->pwm.setPWM(servo_choice, 0, pulselen);
+  if (set_degree > state_servo.predeg[servo_choice]) {
+    for (double pulselen = state_servo.pre_pulselength[servo_choice]; pulselen < pulselength; pulselen++) {
+      state_servo.pwm.setPWM(servo_choice, 0, pulselen);
     }
   }
   
-  state_servo->predeg[servo_choice] = set_degree;
-  state_servo->pre_pulselength[servo_choice] = pulselength;
+  state_servo.predeg[servo_choice] = set_degree;
+  state_servo.pre_pulselength[servo_choice] = pulselength;
 }
 
 
