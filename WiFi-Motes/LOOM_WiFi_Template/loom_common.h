@@ -173,25 +173,29 @@ void LOOM_begin()
 
 
 #if is_wifi == 1
-void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[])
+void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[], WiFiUDP *Udp, unsigned int port)
 {  
-  int packetSize;  
+  int packetSize; 
   state_wifi.pass_set = false;
   state_wifi.ssid_set = false;
   
   // If there's data available, read a packet
-  packetSize = Udp.parsePacket();
-  
+  packetSize = Udp->parsePacket();
+
   if (packetSize > 0) {
     #if LOOM_DEBUG == 1
-      Serial.println("=========================================");
-      Serial.print("Received packet of size: ");
-      Serial.println(packetSize);
+      if (packetSize > 0){
+          Serial.println("=========================================");
+          Serial.print("Received packet of size: ");
+          Serial.print(packetSize);
+          Serial.print(" on port " );
+          Serial.println(port);
+      }
     #endif
     
     bndl->empty();             // Empty previous bundle
     while (packetSize--){     // Read in new bundle
-      bndl->fill(Udp.read());
+      bndl->fill(Udp->read());
     }
 
     // If no error

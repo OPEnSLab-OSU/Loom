@@ -1,6 +1,6 @@
 #define FAMILY "LOOM"     // Should always be "LOOM", you can change this if you are setting up your own network
 #define DEVICE "Ishield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
-#define INIT_INST 0
+#define INIT_INST 1
 
 
 //--OPTIONS--//
@@ -57,7 +57,8 @@
 	#define DEFAULT_MODE      WPA_CLIENT_MODE //AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"
 	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"
-	#define INIT_PORT 9436
+  #define COMMON_PORT       9440
+	#define INIT_PORT         9441
 #endif
 
 
