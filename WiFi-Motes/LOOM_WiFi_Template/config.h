@@ -14,7 +14,7 @@
 #define is_wifi    0
 #define is_lora    0
 #define is_analog  0
-
+#define is_decagon 1
 //Multiplexer
 #define is_tca9548a 1
 
