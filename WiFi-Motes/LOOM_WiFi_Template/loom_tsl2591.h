@@ -72,7 +72,15 @@ bool setup_tsl2591() {
 // ===                        FUNCTION DECLARATIONS             === 
 // ================================================================
 void package_data_tsl2591(OSCBundle *bndl, char packet_header_string[]) {
-	//Create a message and fill it here, then add it to the bndl
+	char address_string[255];
+	sprintf(address_string, "%s%s", packet_header_string, "/t_data");
+	
+	OSCMessage msg = OSCMessage(address_string);
+	msg.add("vis").add((int32_t)state_tsl2591.vis);
+	msg.add("ir").add((int32_t)state_tsl2591.ir);
+	msg.add("full").add((int32_t)state_tsl2591.full);
+	
+	bndl->add(msg);
 }
 
 void measure_tsl2591() {

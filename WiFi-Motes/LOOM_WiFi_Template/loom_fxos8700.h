@@ -68,7 +68,19 @@ bool setup_fxos8700() {
 // ===                        FUNCTIONS                         === 
 // ================================================================
 void package_data_fxos8700(OSCBundle *bndl, char packet_header_string[]) {
-	//Create a message and fill it here, then add it to the bndl
+	char address_string[255];
+	sprintf(address_string, "%s%s", packet_header_string, "/fxos8700_data");
+	
+	OSCMessage msg = OSCMessage(address_string);
+	msg.add("ax").add(state_fxos8700.accel[0]);
+	msg.add("ay").add(state_fxos8700.accel[1]);
+	msg.add("az").add(state_fxos8700.accel[2]);
+	
+	msg.add("mx").add(state_fxos8700.mag[0]);
+	msg.add("my").add(state_fxos8700.mag[1]);
+	msg.add("mz").add(state_fxos8700.mag[2]);
+	
+	bndl->add(msg);
 }
 
 
