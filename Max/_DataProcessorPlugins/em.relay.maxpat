@@ -5,7 +5,7 @@
 			"major" : 7,
 			"minor" : 3,
 			"revision" : 4,
-			"architecture" : "x86",
+			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
@@ -111,7 +111,7 @@
 					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 527.0, 47.5, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 202.0, 147.600006, 22.0, 22.0 ],
+					"presentation_rect" : [ 202.0, 142.600006, 22.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -137,7 +137,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 527.0, 22.5, 51.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 190.654053, 122.0, 50.0, 21.0 ],
+					"presentation_rect" : [ 190.654053, 117.0, 50.0, 21.0 ],
 					"style" : "",
 					"text" : "Defaults",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -347,7 +347,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 666.425049, 778.786255, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 93.621246, 147.600006, 50.0, 22.0 ],
+					"presentation_rect" : [ 93.621246, 142.600006, 50.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -361,7 +361,7 @@
 					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 588.425049, 778.786255, 22.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 148.621246, 147.600006, 22.0, 22.0 ],
+					"presentation_rect" : [ 148.621246, 142.600006, 22.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -387,7 +387,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 666.425049, 690.5, 72.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 93.621246, 122.0, 77.0, 21.0 ],
+					"presentation_rect" : [ 93.621246, 117.0, 77.0, 21.0 ],
 					"style" : "",
 					"text" : "Change Port",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -419,7 +419,7 @@
 							"major" : 7,
 							"minor" : 3,
 							"revision" : 4,
-							"architecture" : "x86",
+							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
@@ -798,8 +798,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -857,7 +857,7 @@
 							"major" : 7,
 							"minor" : 3,
 							"revision" : 4,
-							"architecture" : "x86",
+							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
@@ -1237,8 +1237,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -1281,7 +1281,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 461.799988, 774.75, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 147.600006, 50.0, 22.0 ],
+					"presentation_rect" : [ 5.0, 142.600006, 50.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -1295,7 +1295,7 @@
 					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 375.299988, 756.75, 22.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 62.0, 147.600006, 22.0, 22.0 ],
+					"presentation_rect" : [ 62.0, 142.600006, 22.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -1321,7 +1321,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 425.049988, 688.75, 105.25, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 122.0, 77.0, 21.0 ],
+					"presentation_rect" : [ 5.0, 117.0, 77.0, 21.0 ],
 					"style" : "",
 					"text" : "Change Inst",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -1413,7 +1413,7 @@
 							"major" : 7,
 							"minor" : 3,
 							"revision" : 4,
-							"architecture" : "x86",
+							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
@@ -1773,8 +1773,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -2167,7 +2167,7 @@
 					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 1044.720093, 315.5, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 148.621246, 178.0, 22.0, 22.0 ],
+					"presentation_rect" : [ 148.621246, 171.0, 22.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -2192,7 +2192,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1078.220093, 315.5, 80.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 176.375, 178.0, 68.483185, 22.0 ],
+					"presentation_rect" : [ 176.375, 171.0, 68.483185, 22.0 ],
 					"style" : "",
 					"text" : "Request IP",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -2317,7 +2317,7 @@
 							"major" : 7,
 							"minor" : 3,
 							"revision" : 4,
-							"architecture" : "x86",
+							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
@@ -2481,8 +2481,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -2526,7 +2526,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1044.720093, 52.5, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 41.0, 179.0, 21.0, 21.0 ],
+					"presentation_rect" : [ 41.0, 172.0, 21.0, 21.0 ],
 					"style" : ""
 				}
 
@@ -2552,7 +2552,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1075.720093, 52.5, 68.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 67.685623, 179.0, 66.628754, 21.0 ],
+					"presentation_rect" : [ 67.685623, 172.0, 66.628754, 21.0 ],
 					"style" : "",
 					"text" : "Wi-Fi Setup",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -2585,7 +2585,7 @@
 							"major" : 7,
 							"minor" : 3,
 							"revision" : 4,
-							"architecture" : "x86",
+							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
@@ -3344,7 +3344,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-140", 2 ],
-									"midpoints" : [ 481.833374, 279.0, 561.833374, 279.0 ],
+									"midpoints" : [ 481.833374, 279.0, 561.833344, 279.0 ],
 									"source" : [ "obj-75", 0 ]
 								}
 
@@ -3395,8 +3395,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -3747,7 +3747,7 @@
 							"major" : 7,
 							"minor" : 3,
 							"revision" : 4,
-							"architecture" : "x86",
+							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
@@ -4257,7 +4257,7 @@
 					"patching_rect" : [ 2.0, 186.0, 36.0, 34.0 ],
 					"pic" : "output.png",
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 179.0, 25.0, 25.0 ]
+					"presentation_rect" : [ 5.0, 172.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -4301,7 +4301,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 408.100037, 40.0, 33.5, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 250.0, 207.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 250.0, 200.0 ],
 					"proportion" : 0.39,
 					"style" : ""
 				}
@@ -5025,7 +5025,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-92", 3 ],
-					"midpoints" : [ 110.5, 282.0, 327.0, 282.0, 327.0, 339.0, 514.833374, 339.0 ],
+					"midpoints" : [ 110.5, 282.0, 327.0, 282.0, 327.0, 339.0, 514.833344, 339.0 ],
 					"order" : 0,
 					"source" : [ "obj-75", 0 ]
 				}
@@ -5170,8 +5170,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",
