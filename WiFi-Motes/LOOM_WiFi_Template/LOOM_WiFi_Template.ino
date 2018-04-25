@@ -50,7 +50,8 @@ void loop() {
 
   #if is_wifi == 1
     // Handle wifi bundle if it exists
-    wifi_receive_bundle(&bndl, configuration.packet_header_string);                             
+    wifi_receive_bundle(&bndl, configuration.packet_header_string, &Udp, configuration.config_wifi.localPort); 
+    wifi_receive_bundle(&bndl, configuration.packet_header_string, &UdpCommon, configuration.config_wifi.commonPort);                             
                            
     // Compare the previous status to the current status
     wifi_check_status();
