@@ -94,6 +94,9 @@
 #if is_mb1232 == 1
 	#include "loom_mb1232.h"
 #endif
+#if is_decagon == 1
+  #include "loom_decagon.h"
+#endif
 #if is_tca9548a == 1
 	#include "loom_tca9548a.h"
 #endif
