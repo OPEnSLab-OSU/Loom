@@ -29,6 +29,7 @@ struct config_wifi_t{
   unsigned int commonPort; 
   byte        mac[6];                 // Device's MAC Address
   WiFiMode    wifi_mode;              // Devices current wifi mode
+  bool        request_settings;        // True if device should request new channel settings on startup
 };
 
 struct state_wifi_t {
@@ -75,6 +76,8 @@ void set_pass(OSCMessage &msg);
 void broadcastIP(OSCMessage &msg);
 void set_port(OSCMessage &msg);
 void wifi_check_status();
+void request_settings_from_Max();
+void new_channel(OSCMessage &msg);
 
 
 // ================================================================ 
@@ -112,6 +115,11 @@ void wifi_setup()
         #if LOOM_DEBUG == 1
           Serial.println("Success!");
         #endif
+
+        // If set to request channel settings
+        if (config_wifi->request_settings == 1) {
+          request_settings_from_Max();
+        }
       }
       else {
         #if LOOM_DEBUG == 1
@@ -402,7 +410,8 @@ void set_pass(OSCMessage &msg)
 // to send to if it only had device instance number 
 // Arguments: msg (OSC message with no data, only message header was needed by msg_router())
 // Return:    none
-void broadcastIP(OSCMessage &msg) {
+void broadcastIP(OSCMessage &msg) 
+{
   OSCBundle bndl;
   config_wifi->ip = WiFi.localIP();
   char addressString[255];
@@ -468,4 +477,44 @@ void wifi_check_status()
       #endif
     } // of if ( status != WiFi.status() )
 }
+
+
+
+
+void request_settings_from_Max()
+{
+  OSCBundle bndl;
+  char addressString[255];
+  sprintf(addressString, "%s%s", packet_header_string, "/RequestSettings");
+
+  bndl.add(addressString).add((int32_t)config_wifi->ip[0])
+                         .add((int32_t)config_wifi->ip[1])
+                         .add((int32_t)config_wifi->ip[2])
+                         .add((int32_t)config_wifi->ip[3]);
+
+  UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
+  bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
+  UdpCommon.endPacket();    // Mark the end of the OSC Packet
+  bndl.empty();             // Empty the bundle to free room for a new one
+
+  #if LOOM_DEBUG == 1
+    Serial.println("Requested New Channel Settings");
+  #endif
+}
+
+
+
+void new_channel(OSCMessage &msg)
+{
+  #if LOOM_DEBUG == 1
+    Serial.println("Received Command to get new channel settings");
+  #endif
+  request_settings_from_Max();
+}
+
+
+
+
+
+
 
