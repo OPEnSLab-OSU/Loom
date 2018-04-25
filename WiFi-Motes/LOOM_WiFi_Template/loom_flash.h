@@ -119,6 +119,7 @@ void flash_config_setup()
           configuration.config_wifi.keyIndex = 0;                       // Your network key Index number (needed only for WEP)
           configuration.config_wifi.ip_broadcast = "255.255.255.255";   // IP to Broadcast data 
           configuration.config_wifi.localPort = INIT_PORT;              // Local port to listen on
+          configuration.config_wifi.commonPort = COMMON_PORT;
           configuration.config_wifi.wifi_mode = DEFAULT_MODE;           // WiFi mode to start in (AP_MODE, WPA_CLIENT_MODE, WEP_CLIENT_MODE)
         #endif
         
