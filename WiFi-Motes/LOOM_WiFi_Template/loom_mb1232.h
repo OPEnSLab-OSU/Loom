@@ -80,7 +80,15 @@ bool setup_mb1232() {
 // ================================================================
 
 void package_data_mb1232(OSCBundle *bndl, char packet_header_string[]) {
-	//Create a message and fill it here, then add it to the bndl
+	char address_string[255];
+	sprintf(address_string, "%s%s", packet_header_string, "/mb1232_data");
+	
+	OSCMessage msg = OSCMessage(address_string);
+	msg.add("low").add((int32_t)state_mb1232.low);
+	msg.add("high").add((int32_t)state_mb1232.high);
+	msg.add("range").add((int32_t)state_mb1232.range);
+	
+	bndl->add(msg);
 }
 
 void measure_mb1232() {

@@ -66,7 +66,14 @@ bool setup_sht31d() {
 
 
 void package_data_sht31d(OSCBundle *bndl, char packet_header_string[]) {
-	//Create a message and fill it here, then add it to the bndl
+	char address_string[255];
+	sprintf(address_string, "%s%s", packet_header_string, "/sht31d_data");
+	
+	OSCMessage msg = OSCMessage(address_string);
+	msg.add("temp").add(state_sht31d.temp);
+	msg.add("humid").add(state_sht31d.humid);
+	
+	bndl->add(msg);
 }
 
 void measure_sht31d() {

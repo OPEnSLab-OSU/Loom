@@ -17,8 +17,10 @@ struct config_zxgesturesensor_t {
 };
 
 struct state_zxgesturesensor_t {
+	//Cannot declare a ZX_Sensor and not initialize
 	ZX_Sensor inst_zxgesturesensor = ZX_Sensor(i2c_addr_zxgesturesensor);
 	GestureType gesture;
+	String gesture_type;
 	uint8_t gesture_speed;
 	float pos[2];
 };
@@ -94,7 +96,16 @@ bool setup_zxgesturesensor() {
 // ===                        FUNCTIONS                         === 
 // ================================================================
 void package_data_zxgesturesensor(OSCBundle *bndl, char packet_header_string[]) {
-	//Create a message and fill it here, then add it to the bndl
+	char address_string[255];
+	sprintf(address_string, "%s%s", packet_header_string, "/zxgesturesensor_data");
+	
+	OSCMessage msg = OSCMessage(address_string);
+	msg.add("type").add(state_zxgesturesensor.gesture_type);
+	msg.add("speed").add((int32_t)state_zxgesturesensor.gesture_speed);
+	msg.add("px").add(state_zxgesturesensor.pos[0]);
+	msg.add("pz").add(state_zxgesturesensor.pos[1]);
+	
+	bndl->add(msg);
 }
 
 void measure_zxgesturesensor() {
@@ -131,22 +142,25 @@ void measure_zxgesturesensor() {
     state_zxgesturesensor.gesture = state_zxgesturesensor.inst_zxgesturesensor.readGesture();
     state_zxgesturesensor.gesture_speed = state_zxgesturesensor.inst_zxgesturesensor.readGestureSpeed();
 		
-		#if LOOM_DEBUG == 1
-			switch (state_zxgesturesensor.gesture) {
-				case NO_GESTURE:
-						Serial.println("No Gesture");
-					break;
-				case RIGHT_SWIPE:
-						Serial.println("Right Swipe");
-					break;
-				case LEFT_SWIPE:
-						Serial.println("Left Swipe");
-					break;
-				case UP_SWIPE:
-						Serial.println("Up Swipe");
-				default:
-					break;
-			}
+		switch (state_zxgesturesensor.gesture) {
+			case NO_GESTURE:
+					state_zxgesturesensor.gesture_type = "No Gesture";
+				break;
+			case RIGHT_SWIPE:
+					state_zxgesturesensor.gesture_type = "Right Swipe";
+				break;
+			case LEFT_SWIPE:
+					state_zxgesturesensor.gesture_type = "Left Swipe";
+				break;
+			case UP_SWIPE:
+					state_zxgesturesensor.gesture_type = "Up Swipe";
+			default:
+				break;
+		}
+		#if DEBUG == 1
+			Serial.print("Gesture type: ");
+			Serial.println(state_zxgesturesensor.gesture_type);
+			Serial.print("Gesture speed: ");
 			Serial.println(state_zxgesturesensor.gesture_speed, DEC);
 		#endif
   }

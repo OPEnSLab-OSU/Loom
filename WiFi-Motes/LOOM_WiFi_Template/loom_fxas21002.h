@@ -70,7 +70,15 @@ bool setup_fxas21002() {
 // ===                        FUNCTIONS                         === 
 // ================================================================
 void package_data_fxas21002(OSCBundle *bndl, char packet_header_string[]) {
-	//Create a message and fill it here, then add it to the bndl
+	char address_string[255];
+	sprintf(address_string, "%s%s", packet_header_string, "/fxas21002_data");
+	
+	OSCMessage msg = OSCMessage(address_string);
+	msg.add("gx").add(state_fxas21002.gyro[0]);
+	msg.add("gy").add(state_fxas21002.gyro[1]);
+	msg.add("gz").add(state_fxas21002.gyro[2]);
+	
+	bndl->add(msg);
 }
 
 
