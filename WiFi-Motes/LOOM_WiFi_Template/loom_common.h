@@ -75,6 +75,7 @@ void msg_router(OSCMessage &msg, int addrOffset) {
     msg.dispatch("/wifiSetup/AP",     switch_to_AP, addrOffset);
     msg.dispatch("/SetPort",          set_port,     addrOffset);
     msg.dispatch("/requestIP",        broadcastIP,  addrOffset);
+    msg.dispatch("/getNewChannel",    new_channel,  addrOffset);
   #endif
   
   msg.dispatch("/SetID", set_instance_num, addrOffset);

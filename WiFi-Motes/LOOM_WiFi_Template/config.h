@@ -3,6 +3,8 @@
 #define INIT_INST 1
 
 
+#define REQUEST_SETTINGS 1
+
 //--OPTIONS--//
 #define LOOM_DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
 
@@ -54,11 +56,11 @@
 
 
 #if is_wifi == 1
-	#define DEFAULT_MODE      WPA_CLIENT_MODE //AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
-	#define DEFAULT_NETWORK   "OPEnS"
-	#define DEFAULT_PASSWORD  "arduino101"
+  #define DEFAULT_MODE      WPA_CLIENT_MODE //AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
+  #define DEFAULT_NETWORK   "OPEnS"
+  #define DEFAULT_PASSWORD  "arduino101"
   #define COMMON_PORT       9440
-	#define INIT_PORT         9441
+  #define INIT_PORT         9441
 #endif
 
 

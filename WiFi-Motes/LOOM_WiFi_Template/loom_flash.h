@@ -121,6 +121,7 @@ void flash_config_setup()
           configuration.config_wifi.localPort = INIT_PORT;              // Local port to listen on
           configuration.config_wifi.commonPort = COMMON_PORT;
           configuration.config_wifi.wifi_mode = DEFAULT_MODE;           // WiFi mode to start in (AP_MODE, WPA_CLIENT_MODE, WEP_CLIENT_MODE)
+          configuration.config_wifi.request_settings = REQUEST_SETTINGS; // Bool of whether or not to request new channel settings on startup
         #endif
         
         // Add any other behavior/calibration wrapped in an #ifdef is_something preprocessor directive HERE
