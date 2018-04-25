@@ -94,6 +94,13 @@ void loop() {
 			Udp.endPacket();        // Mark the end of the OSC Packet
 			send_bndl.empty();      // Empty the bundle to free room for a new one
 		#endif
+    #if is_decagon == 1
+      package_decagon(&send_bndl,configuration.packet_header_string);
+      Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
+      send_bndl.send(Udp);    // Send the bytes to the SLIP stream
+      Udp.endPacket();        // Mark the end of the OSC Packet
+      send_bndl.empty();      // Empty the bundle to free room for a new one
+    #endif
 	#endif // of is_wifi
 
   // Delay between loop iterations

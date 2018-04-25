@@ -140,6 +140,9 @@ void LOOM_begin()
 	#if is_tca9548a == 1
 		setup_tca9548a();
 	#endif
+  #if is_decagon == 1
+    deca_gs3_setup(); //rename this
+  #endif
   #if is_mpu6050 > 0
     setup_mpu6050();
   #endif 
