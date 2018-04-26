@@ -5,7 +5,7 @@
 			"major" : 7,
 			"minor" : 3,
 			"revision" : 4,
-			"architecture" : "x64",
+			"architecture" : "x86",
 			"modernui" : 1
 		}
 ,
@@ -116,7 +116,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-4",
-					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.arduinoIn", ",", "em.emote", ",", "em.LOOMin", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.IshieldMonitor", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rangeSetter", ",", "em.rotaryDial", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.smooth", ",", "em.spring", ",", "em.threshold", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.neopixel", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.relay", ",", "em.servo", ",", "em.switchblade", ",", "em.neopixel(old_OSC_format)", ",", "em.servo(old_OSC_format)", ",", "em.relay(old_OSC_format)" ],
+					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.arduinoIn", ",", "em.emote", ",", "em.LOOMin", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.IshieldMonitor", ",", "em.(simplified)IshieldMonitor", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rangeSetter", ",", "em.rotaryDial", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.smooth", ",", "em.spring", ",", "em.threshold", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.neopixel", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.relay", ",", "em.servo", ",", "em.switchblade", ",", "em.(simplified)neopixel", ",", "em.(simplified)servo", ",", "em.(simplified)relay" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
