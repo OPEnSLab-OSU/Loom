@@ -289,7 +289,5 @@ void loop() {
   TakeSampleFlag = false; // Clear Sample Flag
   }
 #endif //RTC3231
-  
 
-  delay(2000);
 }
