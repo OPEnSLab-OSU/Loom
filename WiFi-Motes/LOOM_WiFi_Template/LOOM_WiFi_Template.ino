@@ -49,6 +49,7 @@ void loop() {
   #endif
 
   #if is_wifi == 1
+  
     // Handle wifi bundle if it exists
     wifi_receive_bundle(&bndl, configuration.packet_header_string, &Udp, configuration.config_wifi.localPort); 
     wifi_receive_bundle(&bndl, configuration.packet_header_string, &UdpCommon, configuration.config_wifi.commonPort);                             
