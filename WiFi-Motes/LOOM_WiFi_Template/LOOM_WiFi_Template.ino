@@ -45,7 +45,11 @@ void loop() {
   #endif
 
   #if is_lora == 1
-    lora_receive_bundle(&bndl);                      // Not tested yet - code that was here is now in loom_lora.h under func lora_receive_bundle
+    #if lora_device_type == 0
+      lora_receive_bundle(&bndl);                      // Not tested yet - code that was here is now in loom_lora.h under func lora_receive_bundle
+    #elif lora_device_type == 2
+      //TODO: repeater functionality here
+    #endif
   #endif
 
   #if is_wifi == 1
