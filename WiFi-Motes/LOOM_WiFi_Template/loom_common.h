@@ -204,20 +204,30 @@ void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[], WiFiUDP *
 
     // If no error
     if (!bndl->hasError()){
+      char addressString[255];
+      bndl->getOSCMessage(0)->getAddress(addressString, 0);
+
       #if LOOM_DEBUG == 1
-        char addressString[255];      
         Serial.print("Number of items in bundle: ");
         Serial.println(bndl->size());
         Serial.print("First message address string: ");
-        bndl->getOSCMessage(0)->getAddress(addressString, 0);
         Serial.println(addressString);
       #endif
+
+      if (strcmp(addressString, "/LOOM/ChannelPoll") == 0) {
+        #if LOOM_DEBUG == 1
+          Serial.println("Received channel poll request");
+        #endif
+        response_to_poll_request();
+        return;
+      }
       
       for (int i = 0; i < 32; i++){ //Clear the new_ssid and new_pass buffers
         state_wifi.new_ssid[i] = '\0';
         state_wifi.new_pass[i] = '\0';
       }
 
+      
       // Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
       // Most commands will be finished once control returns here (WiFi changes being handled below)
       bndl->route(packet_header_string,msg_router);

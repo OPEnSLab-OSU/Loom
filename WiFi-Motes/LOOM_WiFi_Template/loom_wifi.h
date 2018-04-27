@@ -78,7 +78,7 @@ void set_port(OSCMessage &msg);
 void wifi_check_status();
 void request_settings_from_Max();
 void new_channel(OSCMessage &msg);
-
+void response_to_poll_request();
 
 // ================================================================ 
 // ===                          SETUP                           === 
@@ -515,6 +515,22 @@ void new_channel(OSCMessage &msg)
 
 
 
+void response_to_poll_request()
+{
+  OSCBundle bndl;
+  char addressString[255];
+  sprintf(addressString, "%s%s", packet_header_string, "/PollResponse");
 
+  bndl.add(addressString);
+
+  UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
+  bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
+  UdpCommon.endPacket();    // Mark the end of the OSC Packet
+  bndl.empty();             // Empty the bundle to free room for a new one
+
+  #if LOOM_DEBUG == 1
+    Serial.println("Responsed to poll request");
+  #endif
+}
 
 
