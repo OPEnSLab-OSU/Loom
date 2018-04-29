@@ -78,7 +78,7 @@ void set_port(OSCMessage &msg);
 void wifi_check_status();
 void request_settings_from_Max();
 void new_channel(OSCMessage &msg);
-void response_to_poll_request();
+void response_to_poll_request(char packet_header_string[]);
 
 // ================================================================ 
 // ===                          SETUP                           === 
@@ -515,7 +515,7 @@ void new_channel(OSCMessage &msg)
 
 
 
-void response_to_poll_request()
+void response_to_poll_request(char packet_header_string[])
 {
   OSCBundle bndl;
   char addressString[255];

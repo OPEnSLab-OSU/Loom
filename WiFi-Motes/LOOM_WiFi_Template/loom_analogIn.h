@@ -86,10 +86,10 @@ void package_analog(OSCBundle *bndl, char packet_header_string[])
     sprintf(addressString, "%s%s", packet_header_string, "/port2");
     bndl->add(addressString).add((int32_t)read_analog(2));
   #endif
-  #ifdef button
-    sprintf(addressString, "%s%s", packet_header_string, "/butt");
-    bndl->add(addressString).add((int32_t)digitalRead(button));
-  #endif
+//  #ifdef button
+//    sprintf(addressString, "%s%s", packet_header_string, "/butt");
+//    bndl->add(addressString).add((int32_t)digitalRead(button));
+//  #endif
 }
 
 
