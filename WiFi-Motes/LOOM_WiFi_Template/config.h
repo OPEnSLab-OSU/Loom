@@ -18,7 +18,6 @@
 //Multiplexer
 #define is_tca9548a 0
 
-
 #if is_tca9548a == 1
 	//Lux Sensor
 	#define is_tsl2591 1
@@ -70,7 +69,7 @@
 // 0: Hub, 1: Node, 2 = Repeater
 #if is_lora == 1
 
-  #define lora_device_type 0
+  #define lora_device_type 1
   
   #define SERVER_ADDRESS 0          //Use 0-9 for SERVER_ADDRESSes
   #define RF95_FREQ      915.0      //Hardware specific, Tx must match Rx
