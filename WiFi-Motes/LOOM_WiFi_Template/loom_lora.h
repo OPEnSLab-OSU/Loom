@@ -329,52 +329,49 @@ void sendToPushingBox(int num_fields, char *server_name, char *devid)
 
 
 
+#if lora_device_type == 0
+  void lora_receive_bundle(OSCBundle *bndl)
+  {
+      if (manager.available()) {
+        uint8_t len = LORA_MESSAGE_SIZE;
+        uint8_t from;
+        uint8_t buf[LORA_MESSAGE_SIZE];
+        memset(buf, '\0', LORA_MESSAGE_SIZE);
+        if (manager.recvfromAck(buf, &len, &from)) {
+          if (((char)(buf[0])) == '/') {
+            get_OSC_bundle((char*)buf, bndl); 
+            for(int i = 0; i < NUM_FIELDS; i++)
+              data[i] = get_data_value(bndl->getOSCMessage(0), i);
+          } else {
+            char str[LORA_MESSAGE_SIZE];
+            String((char*)buf).toCharArray(str, sizeof(str)-1);
+            char *token;
+            char *savept = str;
+            String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
+            for(int i = 0; i < NUM_FIELDS; i+=2) {
+              token = strtok_r(savept, ",", &savept);
+              if(token != NULL) {
+                data[i] = cols[i/2];
+                data[i+1] = String(token);
+              }
+            } // of for
+          } // of else 
+          #if LOOM_DEBUG == 1
+            print_bundle(bndl);
+          #endif
+          //sendToPushingBox(int(NUM_FIELDS), server_name, device_id); REMOVE MERCILESSLY
+        } // of if (manager.recvfromAck(buf, &len, &from))
+      } // of if (manager.available()) 
+  }
+#endif
 
-void lora_receive_bundle(OSCBundle *bndl)
-{
-  #if lora_device_type == 0
-    if (manager.available()) {
-      uint8_t len = LORA_MESSAGE_SIZE;
-      uint8_t from;
-      uint8_t buf[LORA_MESSAGE_SIZE];
-      memset(buf, '\0', LORA_MESSAGE_SIZE);
-      if (manager.recvfromAck(buf, &len, &from)) {
-        if (((char)(buf[0])) == '/') {
-          get_OSC_bundle((char*)buf, bndl); 
-          for(int i = 0; i < NUM_FIELDS; i++)
-            data[i] = get_data_value(bndl->getOSCMessage(0), i);
-        } else {
-          char str[LORA_MESSAGE_SIZE];
-          String((char*)buf).toCharArray(str, sizeof(str)-1);
-          char *token;
-          char *savept = str;
-          String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
-          for(int i = 0; i < NUM_FIELDS; i+=2) {
-            token = strtok_r(savept, ",", &savept);
-            if(token != NULL) {
-              data[i] = cols[i/2];
-              data[i+1] = String(token);
-            }
-          } // of for
-        } // of else 
-        #if LOOM_DEBUG == 1
-          print_bundle(bndl);
-        #endif
-        sendToPushingBox(int(NUM_FIELDS), server_name, device_id);
-      } // of if (manager.recvfromAck(buf, &len, &from))
-    } // of if (manager.available()) 
-  #endif //of lora type is hub
-
-  #if lora_device_type == 1
-    bndl.add(PacketHeaderString).add("Date").add("3/6/2018").add("IDtag").add((int32_t) INIT_INST)
-    .add("TimeStamp").add("2018").add("TempC").add((int32_t)32).add("Humidity").add((float)46.4)
-    .add("LoadCell").add((int32_t)1000).add("IRLight").add((int32_t)2000).add("FullLight").add((int32_t)3000)
-    .add("BatVolt").add((float)4.2);
-  
+#if lora_device_type == 1
+  bool lora_send_bundle(OSCBundle *bndl)
+  {
     char message[RH_RF95_MAX_MESSAGE_LEN];
     memset(message, '\0', sizeof(message));
+    //sendString.toCharArray(message, sizeof(message)-1);
     get_OSC_string(bndl, message);
-  
     #if LOOM_DEBUG == 1
       Serial.println(message);
       Serial.print("Message length: ");
@@ -385,20 +382,19 @@ void lora_receive_bundle(OSCBundle *bndl)
     #endif
      
     if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)){
-       #if LOOM_DEBUG == 1
-         Serial.println("ok");
-       #endif 
-    }
-    else {
-      #if LOOM_DEBUG == 1
-        Serial.println("failed");
+      #if DEBUG == 1
+        Serial.println("sent!");
       #endif
+      return true;
     }
-  
-    delay(10000);
-  #endif // of lora type is_node
-}
-
-
+    else
+    {
+      #if DEBUG == 1
+        Serial.println("failed :(");
+      #endif
+      return false;
+    }
+  }
+#endif
 
 
