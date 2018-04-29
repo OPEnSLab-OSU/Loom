@@ -218,7 +218,7 @@ void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[], WiFiUDP *
         #if LOOM_DEBUG == 1
           Serial.println("Received channel poll request");
         #endif
-        response_to_poll_request();
+        response_to_poll_request(packet_header_string);
         return;
       }
       
