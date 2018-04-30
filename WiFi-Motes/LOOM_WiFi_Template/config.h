@@ -6,14 +6,14 @@
 #define REQUEST_SETTINGS 0
 
 //--OPTIONS--//
-#define LOOM_DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG 0   // Set to 1 if you want Serial statements from various functions to print
 
 #define is_ishield 1
 #define num_servos 0
 #define is_relay   0
 #define is_wifi    1
 #define is_lora    0
-#define is_analog  0
+#define is_analog  2
 #define is_decagon 0
 //Multiplexer
 #define is_tca9548a 0
@@ -98,7 +98,7 @@
 
 
 
-//#define is_sleep_period 50          // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval
+#define is_sleep_period 50          // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval
 //#define is_sleep_interrupt 11       // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 
 

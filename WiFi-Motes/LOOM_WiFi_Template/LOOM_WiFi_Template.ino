@@ -80,9 +80,7 @@ void loop() {
     #endif
 
     // UDP Packet
-    Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
-    send_bndl.send(Udp);    // Send the bytes to the SLIP stream
-    Udp.endPacket();        // Mark the end of the OSC Packet
+    wifi_send_bundle(&send_bndl);
     send_bndl.empty();      // Empty the bundle to free room for a new one
 
     
@@ -90,34 +88,25 @@ void loop() {
     #if is_mpu6050 == 1
       measure_mpu6050();      // Now measure MPU6050, update values in global registers 
       package_mpu6050(&send_bndl,configuration.packet_header_string);                // Build and send packet
-      // UDP Packet
-      Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
-      send_bndl.send(Udp);    // Send the bytes to the SLIP stream
-      Udp.endPacket();        // Mark the end of the OSC Packet
+      wifi_send_bundle(&send_bndl);
       send_bndl.empty();      // Empty the bundle to free room for a new one
       mpu.resetFIFO();        // Flush MPU6050 FIFO to avoid overflows if using i2c
     #endif
     #if is_max31856 == 1
       measure_max31856();
       package_max31856(&send_bndl,configuration.packet_header_string);
-      Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
-      send_bndl.send(Udp);    // Send the bytes to the SLIP stream
-      Udp.endPacket();        // Mark the end of the OSC Packet
+      wifi_send_bundle(&send_bndl);
       send_bndl.empty();      // Empty the bundle to free room for a new one
     #endif
     // Get analog readings
     #if is_analog >= 1
       package_analog(&send_bndl,configuration.packet_header_string);
-      Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
-      send_bndl.send(Udp);    // Send the bytes to the SLIP stream
-      Udp.endPacket();        // Mark the end of the OSC Packet
+      wifi_send_bundle(&send_bndl);
       send_bndl.empty();      // Empty the bundle to free room for a new one
     #endif
     #if is_decagon == 1
       package_decagon(&send_bndl,configuration.packet_header_string);
-      Udp.beginPacket(configuration.config_wifi.ip_broadcast, configuration.config_wifi.localPort);
-      send_bndl.send(Udp);    // Send the bytes to the SLIP stream
-      Udp.endPacket();        // Mark the end of the OSC Packet
+      wifi_send_bundle(&send_bndl);
       send_bndl.empty();      // Empty the bundle to free room for a new one
     #endif
 	#endif // of is_wifi

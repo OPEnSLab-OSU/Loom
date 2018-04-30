@@ -533,4 +533,11 @@ void response_to_poll_request(char packet_header_string[])
   #endif
 }
 
+void wifi_send_bundle(OSCBundle *bndl)
+{
+  Udp.beginPacket(config_wifi->ip_broadcast, config_wifi->localPort);
+  bndl->send(Udp);    // Send the bytes to the SLIP stream
+  Udp.endPacket();        // Mark the end of the OSC Packet
+}
+
 
