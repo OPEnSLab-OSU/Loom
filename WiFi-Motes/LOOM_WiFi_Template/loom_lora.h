@@ -382,14 +382,14 @@ void sendToPushingBox(int num_fields, char *server_name, char *devid)
     #endif
      
     if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)){
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         Serial.println("sent!");
       #endif
       return true;
     }
     else
     {
-      #if DEBUG == 1
+      #if LOOM_DEBUG == 1
         Serial.println("failed :(");
       #endif
       return false;
