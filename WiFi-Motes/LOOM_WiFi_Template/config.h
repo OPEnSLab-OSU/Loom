@@ -53,8 +53,6 @@
   #endif  
 #endif
 
-
-
 #if is_wifi == 1
   #define DEFAULT_MODE      WPA_CLIENT_MODE //AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
   #define DEFAULT_NETWORK   "OPEnS"
@@ -62,8 +60,6 @@
   #define COMMON_PORT       9440
   #define INIT_PORT         9441
 #endif
-
-
 
 // LoRa Device Type
 // 0: Hub, 1: Node, 2 = Repeater
@@ -75,18 +71,8 @@
   #define RF95_FREQ      915.0      //Hardware specific, Tx must match Rx
 
   #if lora_device_type == 0 // Hub
-    #define NUM_FIELDS 16           //Maximum number of fields accepted by the PushingBox Scenario
-
-    String data[NUM_FIELDS];
-    char device_id[]   = "v25CCAAB0F709665";                // Required by PushingBox, specific to each scenario
-    char server_name[] = "api.pushingbox.com";
-
-    //Use this for OPEnS Lab
-    byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
-        
+    #define NUM_FIELDS 16           	//Maximum number of fields accepted by the PushingBox Scenario    
     #include <Ethernet2.h>            // -- ideas on how to move this to declarations? (its needed for IPAddress but that is a user option)
-
-    IPAddress ip(128,193,56,138);
   #endif
   
   #if lora_device_type == 1 // Node
