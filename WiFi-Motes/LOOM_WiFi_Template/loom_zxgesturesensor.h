@@ -35,7 +35,7 @@ struct state_zxgesturesensor_t state_zxgesturesensor;
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 bool setup_zxgesturesensor();
-void package_data_zxgesturesensor(OSCBundle *bndl, char packet_header_string[]);
+void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8_t port);
 void measure_zxgesturesensor();
 
 
@@ -95,9 +95,9 @@ bool setup_zxgesturesensor() {
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
-void package_data_zxgesturesensor(OSCBundle *bndl, char packet_header_string[]) {
+void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8_t port){
 	char address_string[255];
-	sprintf(address_string, "%s%s", packet_header_string, "/zxgesturesensor_data");
+	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/zxgesturesensor/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
 	msg.add("type").add(state_zxgesturesensor.gesture_type);

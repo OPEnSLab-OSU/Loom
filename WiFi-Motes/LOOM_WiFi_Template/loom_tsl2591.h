@@ -71,9 +71,9 @@ bool setup_tsl2591() {
 // ================================================================ 
 // ===                        FUNCTION DECLARATIONS             === 
 // ================================================================
-void package_data_tsl2591(OSCBundle *bndl, char packet_header_string[]) {
+void package_tsl2591(OSCBundle *bndl, char packet_header_string[], uint8_t port) {
 	char address_string[255];
-	sprintf(address_string, "%s%s", packet_header_string, "/t_data");
+	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/tsl2591/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
 	msg.add("vis").add((int32_t)state_tsl2591.vis);
