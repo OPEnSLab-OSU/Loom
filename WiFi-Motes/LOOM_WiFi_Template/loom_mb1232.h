@@ -44,7 +44,7 @@ struct state_mb1232_t state_mb1232;
 // ================================================================
 bool setup_mb1232();
 void measure_mb1232();
-void package_data_mb1232(OSCBundle *, char[]);
+void package_mb1232(OSCBundle *bndl, char packet_header_string[], uint8_t port);
 
 // ================================================================ 
 // ===                          SETUP                           === 
@@ -79,9 +79,9 @@ bool setup_mb1232() {
 // ===                        FUNCTIONS                         === 
 // ================================================================
 
-void package_data_mb1232(OSCBundle *bndl, char packet_header_string[]) {
+void package_mb1232(OSCBundle *bndl, char packet_header_string[], uint8_t port) {
 	char address_string[255];
-	sprintf(address_string, "%s%s", packet_header_string, "/mb1232_data");
+	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/mb1232/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
 	msg.add("low").add((int32_t)state_mb1232.low);

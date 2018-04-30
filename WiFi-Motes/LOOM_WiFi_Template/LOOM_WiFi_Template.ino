@@ -35,9 +35,7 @@ void setup() {
 void loop() {
   OSCBundle bndl; 
 
-	#if is_tca9548a == 1
-		measure_tca9548a();
-	#endif
+	
 
   // Reset to AP mode if button held for ~5 seconds
   #if defined(button) && (is_wifi == 1)
@@ -84,7 +82,13 @@ void loop() {
     wifi_send_bundle(&send_bndl);
     send_bndl.empty();      // Empty the bundle to free room for a new one
 
-    
+
+    #if is_tca9548a == 1
+      
+      package_tca9548a(&send_bndl,configuration.packet_header_string);
+      wifi_send_bundle(&send_bndl);
+      send_bndl.empty();
+    #endif
 		// Update MPU6050 Data
     #if is_mpu6050 == 1
       measure_mpu6050();      // Now measure MPU6050, update values in global registers 

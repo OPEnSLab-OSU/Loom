@@ -34,7 +34,7 @@ struct state_sht31d_t state_sht31d;
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 bool setup_sht31d();
-void package_data_sht31d(OSCBundle *bndl, char packet_header_string[]);
+void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port);
 void measure_sht31d();
 
 
@@ -65,9 +65,9 @@ bool setup_sht31d() {
 // ================================================================
 
 
-void package_data_sht31d(OSCBundle *bndl, char packet_header_string[]) {
+void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port){
 	char address_string[255];
-	sprintf(address_string, "%s%s", packet_header_string, "/sht31d_data");
+	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/sht31d/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
 	msg.add("temp").add(state_sht31d.temp);
