@@ -36,7 +36,7 @@ struct state_fxas21002_t state_fxas21002;
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 bool setup_fxas21002();
-void package_data_fxas21002(OSCBundle *, char[]);
+void package_fxas21002(OSCBundle *bndl, char packet_header_string[], uint8_t port);
 void measure_fxas21002();
 #if LOOM_DEBUG == 1
 	void details_fxas21002();
@@ -69,9 +69,9 @@ bool setup_fxas21002() {
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
-void package_data_fxas21002(OSCBundle *bndl, char packet_header_string[]) {
+void package_fxas21002(OSCBundle *bndl, char packet_header_string[], uint8_t port) {
 	char address_string[255];
-	sprintf(address_string, "%s%s", packet_header_string, "/fxas21002_data");
+	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/fxas21002/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
 	msg.add("gx").add(state_fxas21002.gyro[0]);
