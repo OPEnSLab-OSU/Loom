@@ -33,6 +33,13 @@ union data_value {
   uint32_t u;
 };
 
+String data[NUM_FIELDS];
+char device_id[]   = "v25CCAAB0F709665";                // Required by PushingBox, specific to each scenario
+char server_name[] = "api.pushingbox.com";
+
+//Use this for OPEnS Lab
+byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
+
 
 #if lora_device_type == 0
   EthernetClient client;            
@@ -46,18 +53,21 @@ RHReliableDatagram manager(rf95, SERVER_ADDRESS);
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager);
-#if lora_device_type == 1
-  void get_OSC_string(OSCBundle *bndl, char *osc_string);
-#endif
+
 #if lora_device_type == 0
   void get_OSC_bundle(char *string, OSCBundle* bndl);
+	void lora_receive_bundle(OSCBundle *bndl);
   String get_data_value(OSCMessage* msg, int pos);
   void sendToPushingBox(int num_fields, char *server_name, char *devid);
 #endif
+
+#if lora_device_type == 1
+  void get_OSC_string(OSCBundle *bndl, char *osc_string);
+#endif
+
 #if LOOM_DEBUG == 1
   void print_bundle(OSCBundle *bndl);
 #endif
-void lora_receive_bundle(OSCBundle *bndl);
 
 // ================================================================
 // ===                          SETUP                           ===
@@ -168,7 +178,6 @@ void get_OSC_string(OSCBundle *bndl, char *osc_string)
 	}
 }
 #endif // of lora_device_type == 1
-
 
 
 
@@ -325,44 +334,39 @@ void sendToPushingBox(int num_fields, char *server_name, char *devid)
 
 
 
-
-
-
-
 #if lora_device_type == 0
-  void lora_receive_bundle(OSCBundle *bndl)
-  {
-      if (manager.available()) {
-        uint8_t len = LORA_MESSAGE_SIZE;
-        uint8_t from;
-        uint8_t buf[LORA_MESSAGE_SIZE];
-        memset(buf, '\0', LORA_MESSAGE_SIZE);
-        if (manager.recvfromAck(buf, &len, &from)) {
-          if (((char)(buf[0])) == '/') {
-            get_OSC_bundle((char*)buf, bndl); 
-            for(int i = 0; i < NUM_FIELDS; i++)
-              data[i] = get_data_value(bndl->getOSCMessage(0), i);
-          } else {
-            char str[LORA_MESSAGE_SIZE];
-            String((char*)buf).toCharArray(str, sizeof(str)-1);
-            char *token;
-            char *savept = str;
-            String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
-            for(int i = 0; i < NUM_FIELDS; i+=2) {
-              token = strtok_r(savept, ",", &savept);
-              if(token != NULL) {
-                data[i] = cols[i/2];
-                data[i+1] = String(token);
-              }
-            } // of for
-          } // of else 
-          #if LOOM_DEBUG == 1
-            print_bundle(bndl);
-          #endif
-          //sendToPushingBox(int(NUM_FIELDS), server_name, device_id); REMOVE MERCILESSLY
-        } // of if (manager.recvfromAck(buf, &len, &from))
-      } // of if (manager.available()) 
-  }
+void lora_receive_bundle(OSCBundle *bndl)
+{
+	if (manager.available()) {
+		uint8_t len = LORA_MESSAGE_SIZE;
+		uint8_t from;
+		uint8_t buf[LORA_MESSAGE_SIZE];
+		memset(buf, '\0', LORA_MESSAGE_SIZE);
+		if (manager.recvfromAck(buf, &len, &from)) {
+			if (((char)(buf[0])) == '/') {
+				get_OSC_bundle((char*)buf, bndl); 
+				for(int i = 0; i < NUM_FIELDS; i++)
+					data[i] = get_data_value(bndl->getOSCMessage(0), i);
+			} else {
+				char str[LORA_MESSAGE_SIZE];
+				String((char*)buf).toCharArray(str, sizeof(str)-1);
+				char *token;
+				char *savept = str;
+				String cols[6] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
+				for(int i = 0; i < NUM_FIELDS; i+=2) {
+					token = strtok_r(savept, ",", &savept);
+					if(token != NULL) {
+						data[i] = cols[i/2];
+						data[i+1] = String(token);
+					}
+				} // of for
+			} // of else 
+			#if LOOM_DEBUG == 1
+				print_bundle(bndl);
+			#endif
+		} // of if (manager.recvfromAck(buf, &len, &from))
+	} // of if (manager.available()) 
+}
 #endif
 
 #if lora_device_type == 1
