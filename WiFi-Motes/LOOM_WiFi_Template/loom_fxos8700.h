@@ -29,7 +29,7 @@ struct state_fxos8700_t {
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 bool setup_fxos8700();
-void package_data_fxos8700(OSCBundle *, char[]);
+void package_fxos8700(OSCBundle *bndl, char packet_header_string[], uint8_t port);
 void measure_fxos8700();
 #if LOOM_DEBUG == 1
 	void details_fxos8700();
@@ -67,9 +67,9 @@ bool setup_fxos8700() {
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
-void package_data_fxos8700(OSCBundle *bndl, char packet_header_string[]) {
+void package_fxos8700(OSCBundle *bndl, char packet_header_string[], uint8_t port) {
 	char address_string[255];
-	sprintf(address_string, "%s%s", packet_header_string, "/fxos8700_data");
+	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/fxos8700/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
 	msg.add("ax").add(state_fxos8700.accel[0]);

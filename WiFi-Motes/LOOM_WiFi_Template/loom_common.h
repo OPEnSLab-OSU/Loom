@@ -55,7 +55,17 @@ void msg_router(OSCMessage &msg, int addrOffset) {
     Serial.print("Parsed ");
     Serial.println(buffer);
   #endif
-  
+
+  #if is_tca9548a
+    if (msg.fullMatch("/GetSensors", addrOffset)){
+      msg.add(configuration.packet_header_string);
+      #if LOOM_DEBUG == 1
+        Serial.println("Got a request for sensor list");
+      #endif
+    }
+    
+    msg.dispatch("/GetSensors",   send_sensor_list, addrOffset);
+  #endif
   #if num_servos > 0  
     msg.dispatch("/Servo/Set",    set_servo,      addrOffset);
   #endif
