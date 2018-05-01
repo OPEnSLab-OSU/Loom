@@ -29,6 +29,7 @@ void setup() {
   LOOM_begin();           // LOOM_begin calls any relevant (based on config) LOOM device setup functions
 }
 
+int ctr;
 // ================================================================ 
 // ===                        MAIN LOOP                         ===
 // ================================================================ 
@@ -86,8 +87,13 @@ void loop() {
 
 
     #if is_tca9548a == 1
-      
+      ctr++;
+      if (ctr > 10){
+        update_sensors();
+        ctr = 0;
+      }
       package_tca9548a(&send_bndl,configuration.packet_header_string);
+      
       #if is_wifi == 1
         wifi_send_bundle(&send_bndl);
       #endif
