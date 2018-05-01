@@ -26,8 +26,8 @@ struct config_tca9548a_t {
 
 struct state_tca9548a_t {
 	int measurement_count;
+  byte devices[16][2];
 };
-
 
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
@@ -45,6 +45,7 @@ void get_sensor_data(uint8_t,OSCBundle *, char[], uint8_t);
 void measure_tca9548a();
 void tcaseselect(uint8_t);
 void get_sensors(OSCBundle *, char[]);
+void update_sensors();
 
 	
 // ================================================================ 
@@ -56,6 +57,7 @@ bool setup_tca9548a() {
 	#if LOOM_DEBUG == 1
 		Serial.println("initialized tca9548a (multiplexer).");
 	#endif
+  update_sensors();
 }
 
 
@@ -153,9 +155,54 @@ void send_sensor_list(OSCMessage &msg){
   #endif
 }
 
+void update_sensors()
+{
+  uint8_t current_ind = 0;
+  for (uint8_t t=0; t<8; t++){
+    tcaseselect(t);
+    for (uint8_t i2c_addr = 0; i2c_addr<=127; i2c_addr++) {
+      if (i2c_addr == i2c_addr_tca9548a)
+        continue;
+
+      #ifdef is_32u4
+        uint8_t data;
+        if (! twi_writeTo(i2c_addr, &data, 0, 1, 1)) {
+      #endif
+      #ifdef is_m0
+        Wire.beginTransmission(i2c_addr);
+        byte error = Wire.endTransmission();
+
+        if (error == 0) {
+      #endif
+          if (i2c_addr != 0x00){
+            state_tca9548a.devices[current_ind][0] = t;
+            state_tca9548a.devices[current_ind][1] = i2c_addr;
+            current_ind++;
+          }
+        }
+        
+    }
+    for (uint8_t ind = current_ind; ind < 16; ind++){
+        state_tca9548a.devices[ind][0] = 8;
+    }
+    #if LOOM_DEBUG == 1
+    for (int i = 0; i < 16; i++){
+      
+      if (!(state_tca9548a.devices[i][0] > 7)){
+        Serial.print("Port ");
+        Serial.print(state_tca9548a.devices[i][0]);
+        Serial.print(": ");
+        Serial.println(state_tca9548a.devices[i][1]); 
+      }
+    }
+    #endif
+  }
+}
+
 void get_sensors(OSCBundle *bndl, char packet_header_string[])
 {
   char addressString[255];
+  
   for (uint8_t t=0; t<8; t++){
     tcaseselect(t);
     for (uint8_t i2c_addr = 0; i2c_addr<=127; i2c_addr++) {
@@ -209,7 +256,15 @@ void package_tca9548a(OSCBundle *bndl, char packet_header_string[]) {
 	#if LOOM_DEBUG == 1
 		Serial.println("Measuring data from devices connected to tca9548a (Multiplexer).");
 	#endif
-  for (uint8_t t=0; t<8; t++) {
+  for (int device = 0; device < 16; device++){
+    
+    if (!(state_tca9548a.devices[device][0] > 7)){
+      tcaseselect(state_tca9548a.devices[device][0]);
+    
+      get_sensor_data(state_tca9548a.devices[device][1],bndl,packet_header_string,state_tca9548a.devices[device][0]);
+    }
+  }
+  /*for (uint8_t t=0; t<8; t++) {
      tcaseselect(t);
 
 		for (uint8_t i2c_addr = 0; i2c_addr<=127; i2c_addr++) {
@@ -233,6 +288,6 @@ void package_tca9548a(OSCBundle *bndl, char packet_header_string[]) {
 			#endif // is_m0
 		}
 		//delay(3000);
-	}
+	}*/
 }
 

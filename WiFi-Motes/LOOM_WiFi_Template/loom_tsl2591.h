@@ -56,7 +56,7 @@ bool setup_tsl2591() {
 		#if LOOM_DEBUG == 1
 			Serial.println("Initialized tsl2591");
 		#endif
-		configure_tsl2591(1, 2); //Medium gain and timing
+		configure_tsl2591(1, 0); //Medium gain and timing
 	}
 	else {
 		is_setup = false;
