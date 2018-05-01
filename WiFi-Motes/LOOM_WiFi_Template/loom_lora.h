@@ -38,7 +38,8 @@ char device_id[]   = "v25CCAAB0F709665";                // Required by PushingBo
 char server_name[] = "api.pushingbox.com";
 
 //Use this for OPEnS Lab
-byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
+byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};
+IPAddress ip(128,193,56,138); 
 
 
 #if lora_device_type == 0
@@ -374,7 +375,6 @@ void lora_receive_bundle(OSCBundle *bndl)
   {
     char message[RH_RF95_MAX_MESSAGE_LEN];
     memset(message, '\0', sizeof(message));
-    //sendString.toCharArray(message, sizeof(message)-1);
     get_OSC_string(bndl, message);
     #if LOOM_DEBUG == 1
       Serial.println(message);
@@ -387,14 +387,14 @@ void lora_receive_bundle(OSCBundle *bndl)
      
     if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)){
       #if LOOM_DEBUG == 1
-        Serial.println("sent!");
+        Serial.println("Sent bundle through LoRa!");
       #endif
       return true;
     }
     else
     {
       #if LOOM_DEBUG == 1
-        Serial.println("failed :(");
+        Serial.println("Failed to send bundle!");
       #endif
       return false;
     }

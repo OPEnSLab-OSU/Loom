@@ -78,7 +78,10 @@ void msg_router(OSCMessage &msg, int addrOffset) {
   #if is_neopixel == 1
     msg.dispatch("/Neopixel",     setColor,       addrOffset);
   #endif
-
+	#if is_lora == 1 && lora_device_type == 1
+		msg.dispatch("/SendToPB", 				
+  #endif
+	
   #if is_wifi == 1
     msg.dispatch("/Connect/SSID",     set_ssid,     addrOffset);
     msg.dispatch("/Connect/Password", set_pass,     addrOffset);
@@ -87,7 +90,9 @@ void msg_router(OSCMessage &msg, int addrOffset) {
     msg.dispatch("/requestIP",        broadcastIP,  addrOffset);
     msg.dispatch("/getNewChannel",    new_channel,  addrOffset);
   #endif
-  
+	
+
+	
   msg.dispatch("/SetID", set_instance_num, addrOffset);
 }
 
