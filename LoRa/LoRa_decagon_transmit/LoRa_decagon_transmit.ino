@@ -173,6 +173,7 @@ void setup() {
 
 void loop() {
   rf95.sleep();
+
 #ifdef RTC3231
 
 #ifdef is_M0
@@ -289,5 +290,7 @@ void loop() {
   TakeSampleFlag = false; // Clear Sample Flag
   }
 #endif //RTC3231
+
+  
 
 }

@@ -45,7 +45,9 @@ void get_OSC_string(OSCBundle *bndl, char *osc_string) {
 
         default:
           if (data_type != '\0')
-            Serial.print("Invalid message arg type");
+						#if DEBUG == 1
+							Serial.print("Invalid message arg type");
+						#endif
           break;
       }
     }
@@ -86,42 +88,44 @@ void get_OSC_bundle(char *string, OSCBundle* bndl) {
   }
 }
 
-void print_bundle(OSCBundle *bndl) {
-  int n = 0;
-  char buf[50];
-  char data_type;
-  OSCMessage *msg = bndl->getOSCMessage(n);
-  while (msg != NULL) {
-    msg->getAddress(buf, 0);
-    Serial.print("Address ");
-    Serial.print(n + 1);
-    Serial.print(": ");
-    Serial.println(buf);
+#if DEBUG == 1
+	void print_bundle(OSCBundle *bndl) {
+		int n = 0;
+		char buf[50];
+		char data_type;
+		OSCMessage *msg = bndl->getOSCMessage(n);
+		while (msg != NULL) {
+			msg->getAddress(buf, 0);
+			Serial.print("Address ");
+			Serial.print(n + 1);
+			Serial.print(": ");
+			Serial.println(buf);
 
-    int m = 0;
-    data_type = msg->getType(m);
-    while (data_type != '\0') {
-      Serial.print("Value ");
-      Serial.print(m + 1);
-      Serial.print(": ");
-      if (data_type == 'f') {
-        Serial.println(msg->getFloat(m));
-      }
-      else if (data_type == 'i') {
-        Serial.println(msg->getInt(m));
-      }
-      else if (data_type == 's') {
-        msg->getString(m, buf, 50);
-        Serial.println(buf);
-      }
+			int m = 0;
+			data_type = msg->getType(m);
+			while (data_type != '\0') {
+				Serial.print("Value ");
+				Serial.print(m + 1);
+				Serial.print(": ");
+				if (data_type == 'f') {
+					Serial.println(msg->getFloat(m));
+				}
+				else if (data_type == 'i') {
+					Serial.println(msg->getInt(m));
+				}
+				else if (data_type == 's') {
+					msg->getString(m, buf, 50);
+					Serial.println(buf);
+				}
 
-      m++;
-      data_type = msg->getType(m);
-    }
-    n++;
-    msg = bndl->getOSCMessage(n);
-  }
-}
+				m++;
+				data_type = msg->getType(m);
+			}
+			n++;
+			msg = bndl->getOSCMessage(n);
+		}
+	}
+#endif
 
 String get_data_value(OSCMessage* msg, int pos) {
   switch (msg->getType(pos)) {
@@ -137,7 +141,9 @@ String get_data_value(OSCMessage* msg, int pos) {
       return String(buf);
       break;
     default:
-      Serial.println("Unsupported data data_type.");
+			#if DEBUG == 1
+				Serial.println("Unsupported data data_type.");
+			#endif
       return String("");
   }
 }
