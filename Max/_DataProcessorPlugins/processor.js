@@ -29,27 +29,50 @@ function init(num)
 
 function createBpatcher(file)
 {
-if(numtracks<=255)
-  {
-   // offset = (numtracks*175); // Use this offset if desiring scrolling
-	offset = 1; //use this offset if bpatchers to spawn in same place
-    thebpatchers[numtracks] = this.patcher.parentpatcher.newdefault(offset,0,
-    "bpatcher",
-    "@varname", 
-    "obj["+numtracks+"]",
-	"@name", file,
-    "@patching_rect", "300", (offset+10), "250", "150",
-    "@presentation_rect", "10", (offset+50), "250", "150",
-    "@border", "1",
-	"@clickthrough", "1",
-    "@orderfront", "1",
-    "@embed", "1",
-    "@presentation", "1");
 
-    // increment numtracks
-    numtracks++;
-    outlet(0,numtracks);    // output to int box to preserve
-  }
+	if(numtracks<=255)
+	{
+		switch (file) {
+			case "em.IshieldMonitor_(Expert)": 
+				dimensions = ["250", "425"]; break;
+			case "em.relay_(Expert)":
+			case "em.servo_(Expert)": 
+				dimensions = ["250", "200"]; break;
+			case "em.servo": 
+				dimensions = ["160", "140"]; break;
+			case "em.relay": 
+				dimensions = ["160", "125"]; break;
+			case "em.neopixel": 
+				dimensions = ["200", "160"]; break;
+			case "em.IshieldMonitor": 
+				dimensions = ["250", "230"]; break;
+			case "em.LOOM_Channel_Manager":
+				dimensions = ["250", "185"]; break;
+			case "em.LOOMin":
+				dimensions = ["200", "160"]; break;
+			default: 
+				dimensions = ["250", "150"]; break;
+		}
+
+		// offset = (numtracks*175); // Use this offset if desiring scrolling
+		offset = 1; //use this offset if bpatchers to spawn in same place
+		thebpatchers[numtracks] = this.patcher.parentpatcher.newdefault(offset,0,
+		"bpatcher",
+		"@varname", 
+		"obj["+numtracks+"]",
+		"@name", file,
+		"@patching_rect", "300", (offset+10), dimensions[0], dimensions[1],
+		"@presentation_rect", "10", (offset+50), dimensions[0], dimensions[1],
+		"@border", "1",
+		"@clickthrough", "1",
+		"@orderfront", "1",
+		"@embed", "1",
+		"@presentation", "1");
+
+		// increment numtracks
+		numtracks++;
+		outlet(0,numtracks);    // output to int box to preserve
+	}
 //post(numtracks); post(); // for debug
 } 
 

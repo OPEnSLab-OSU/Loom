@@ -1,0 +1,59 @@
+{
+	"fxas21002" : 	{
+		"common_name" : "Gryoscope",
+		"fields" : [ "X", "Y", "Z" ],
+		"ranges" : 		{
+			"X" : "0 100",
+			"Y" : "1 100",
+			"Z" : "2 100"
+		}
+
+	}
+,
+	"fxos8700" : 	{
+		"common_name" : "Accel/Magnetometer",
+		"fields" : [ "ax", "ay", "az", "mx", "my", "mz" ],
+		"ranges" : 		{
+			"ax" : "0 100",
+			"ay" : "0 100",
+			"az" : "0 100",
+			"mx" : "0 100",
+			"my" : "0 100",
+			"mz" : "0 100"
+		}
+
+	}
+,
+	"mb1232" : 	{
+		"common_name" : "Sonar",
+		"fields" : [ "high", "low", "range" ],
+		"ranges" : 		{
+			"high" : "0 100",
+			"low" : "0 100",
+			"range" : "0 100"
+		}
+
+	}
+,
+	"sht31d" : 	{
+		"common_name" : "Temp/Humidity",
+		"fields" : [ "temp", "humidity" ],
+		"ranges" : 		{
+			"temp" : "0 100",
+			"humid" : "0 100"
+		}
+
+	}
+,
+	"tsl2591" : 	{
+		"common_name" : "Lux",
+		"fields" : [ "vis", "ir", "full" ],
+		"ranges" : 		{
+			"vis" : "0 1000",
+			"ir" : "0 100",
+			"full" : "0 100"
+		}
+
+	}
+
+}
