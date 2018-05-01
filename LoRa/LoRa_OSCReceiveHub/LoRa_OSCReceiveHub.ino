@@ -16,12 +16,12 @@
 #define MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN
 
 //Ethernet / Hub Info
-//byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-//IPAddress ip(10, 248, 55, 154);
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+IPAddress ip(192, 168, 1, 177);
 
 //Use this for OPEnS Lab
-byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
-IPAddress ip(128,193,56,138);
+// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
+// IPAddress ip(128,193,56,138);
 
 const char DEVID[] = "v25CCAAB0F709665"; 
 char serverName[] = "api.pushingbox.com";
@@ -46,8 +46,9 @@ void setup() {
   
 	#if DEBUG == 1
 		Serial.begin(9600);
+		while(!Serial);
+		Serial.println("Initialized Serial");
 	#endif
-  delay(10000);
   if (!manager.init()) {
 		#if DEBUG == 1
 			Serial.println("init failed");
@@ -58,16 +59,14 @@ void setup() {
 		#if DEBUG == 1
 			Serial.println("setFrequency failed");
 		#endif
-    while (1);
   }
-
-  if (Ethernet.begin(mac) == 0) {
+	
+	if(!setup_ethernet()) {
 		#if DEBUG == 1
-			Serial.println("Failed to configure Ethernet using DHCP");
+			Serial.println("Failed to setup ethernet");
 		#endif
-    // try to congifure using IP address instead of DHCP:
-    Ethernet.begin(mac, ip);
-  }
+	}
+
   //Allow for time to connect
   delay(1000);
   
@@ -113,6 +112,33 @@ void loop() {
   }
 }
 
+bool setup_ethernet() {
+	bool is_setup;
+	if (Ethernet.begin(mac) == 0) {
+		#if DEBUG == 1
+			Serial.println("Failed to configure Ethernet using DHCP");
+		#endif
+    // try to congifure using IP address instead of DHCP:
+    Ethernet.begin(mac, ip);
+  }
+	
+	if(client.connect("www.google.com", 80)) {
+		is_setup = true;
+		#if DEBUG == 1
+			Serial.println("Successfully connected to internet");
+		#endif
+		client.stop();
+	}
+	else {
+		is_setup = false;
+		#if DEBUG == 1
+			Serial.println("Failed to connect to internet");
+		#endif
+	}
+	
+	return is_setup;
+}
+
 //Function for sending the request to PushingBox
 void sendToPushingBox()
 {
@@ -133,8 +159,18 @@ void sendToPushingBox()
    
   } 
   else {
-    #if DEBUG == 1
-			Serial.println("connection failed");
+		 #if DEBUG == 1
+			Serial.println("Failed to connect to PB, attempting to re-setup ethernet.");
+		#endif
+		if(setup_ethernet()) {
+			#if DEBUG == 1
+				Serial.println("Successfully re-setup ethernet.");
+			#endif
+		}
+		#if DEBUG == 1 
+			else {
+				Serial.println("Failed to re-setup ethernet.");
+			}
 		#endif
   }
 }
