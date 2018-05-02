@@ -154,6 +154,7 @@ void LOOM_begin()
 	
 	#if is_tca9548a == 1
 		setup_tca9548a();
+    
 	#endif
   #if is_decagon == 1
     deca_gs3_setup(); //rename this
