@@ -158,10 +158,6 @@ void setup() {
 
   pinMode(wakeUpPin, INPUT_PULLUP);
 
-#ifdef is_M0
-  attachInterrupt(wakeUpPin, wake, FALLING);
-#endif // is_M0
-
   InitalizeRTC();
 #if DEBUG == 1
     Serial.print("Alarm set to go off every "); Serial.print(WakePeriodMin); Serial.println("min from program time");
