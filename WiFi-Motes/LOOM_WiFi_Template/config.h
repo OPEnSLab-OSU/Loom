@@ -6,7 +6,7 @@
 #define REQUEST_SETTINGS 0
 
 //--OPTIONS--//
-#define LOOM_DEBUG 0   // Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
 
 #define is_ishield 0
 #define num_servos 0
