@@ -5,7 +5,7 @@
 #include <OSCBundle.h>
 #include "LOOM_OSC_Scheme.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #define RFM95_CS 8
 #define RFM95_RST 4
 #define RFM95_INT 3 //Use this for the M0
@@ -16,12 +16,12 @@
 #define MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN
 
 //Ethernet / Hub Info
-//byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-//IPAddress ip(10, 248, 55, 154);
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+IPAddress ip(192, 168, 1, 177);
 
 //Use this for OPEnS Lab
-byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
-IPAddress ip(128,193,56,138);
+// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
+// IPAddress ip(128,193,56,138);
 
 const char DEVID[] = "v25CCAAB0F709665"; 
 char serverName[] = "api.pushingbox.com";
@@ -44,26 +44,36 @@ void setup() {
   //On a LoRa or RFM board.
   pinMode(8, INPUT_PULLUP);
   
-  Serial.begin(9600);
-  delay(10000);
-  if (!manager.init())
-    Serial.println("init failed");
+	#if DEBUG == 1
+		Serial.begin(9600);
+		while(!Serial);
+		Serial.println("Initialized Serial");
+	#endif
+  if (!manager.init()) {
+		#if DEBUG == 1
+			Serial.println("init failed");
+		#endif
+	}
 
   if (!rf95.setFrequency(RF95_FREQ)) {
-    Serial.println("setFrequency failed");
-    while (1);
+		#if DEBUG == 1
+			Serial.println("setFrequency failed");
+		#endif
   }
-
-  if (Ethernet.begin(mac) == 0) {
-    Serial.println("Failed to configure Ethernet using DHCP");
-    // try to congifure using IP address instead of DHCP:
-    Ethernet.begin(mac, ip);
-  }
+	
+	if(!setup_ethernet()) {
+		#if DEBUG == 1
+			Serial.println("Failed to setup ethernet");
+		#endif
+	}
+	
   //Allow for time to connect
   delay(1000);
   
   rf95.setTxPower(23, false);
-  Serial.println("Finished setup!");
+	#if DEBUG == 1
+		Serial.println("Finished setup!");
+	#endif
 }
 
 void loop() {
@@ -72,7 +82,12 @@ void loop() {
     uint8_t len = MESSAGE_SIZE;
     uint8_t from;
     memset(buf, '\0', MESSAGE_SIZE);
+		for(int i = 0; i < NUM_FIELDS; i++)
+			data[i] = "";
     if (manager.recvfromAck(buf, &len, &from)) {
+			#if DEBUG == 1
+				Serial.println("Received packet");
+			#endif
       if(((char)(buf[0])) == '/') {
         OSCBundle bndl;
         get_OSC_bundle((char*)buf, &bndl); 
@@ -82,9 +97,12 @@ void loop() {
       else {
         char str[MESSAGE_SIZE];
         String((char*)buf).toCharArray(str, sizeof(str)-1);
+				#if DEBUG == 1
+					Serial.println(str);
+				#endif
         char *token;
         char *savept = str;
-        String cols[8] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "lightIR", "lightFull", "vbat"};
+        String cols[6] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
         for(int i = 0; i < NUM_FIELDS; i+=2) {
           token = strtok_r(savept, ",", &savept);
           if(token != NULL) {
@@ -100,6 +118,33 @@ void loop() {
       sendToPushingBox();
     }
   }
+}
+
+bool setup_ethernet() {
+	bool is_setup;
+	if (Ethernet.begin(mac) == 0) {
+		#if DEBUG == 1
+			Serial.println("Failed to configure Ethernet using DHCP");
+		#endif
+    // try to congifure using IP address instead of DHCP:
+    Ethernet.begin(mac, ip);
+  }
+	
+	if(client.connect("www.google.com", 80)) {
+		is_setup = true;
+		#if DEBUG == 1
+			Serial.println("Successfully connected to internet");
+		#endif
+		client.stop();
+	}
+	else {
+		is_setup = false;
+		#if DEBUG == 1
+			Serial.println("Failed to connect to internet");
+		#endif
+	}
+	
+	return is_setup;
 }
 
 //Function for sending the request to PushingBox
@@ -122,6 +167,18 @@ void sendToPushingBox()
    
   } 
   else {
-    if(DEBUG){Serial.println("connection failed");}
+		 #if DEBUG == 1
+			Serial.println("Failed to connect to PB, attempting to re-setup ethernet.");
+		#endif
+		if(setup_ethernet()) {
+			#if DEBUG == 1
+				Serial.println("Successfully re-setup ethernet.");
+			#endif
+		}
+		#if DEBUG == 1 
+			else {
+				Serial.println("Failed to re-setup ethernet.");
+			}
+		#endif
   }
 }
