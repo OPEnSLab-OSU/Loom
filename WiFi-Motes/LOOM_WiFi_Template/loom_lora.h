@@ -33,17 +33,15 @@ union data_value {
   uint32_t u;
 };
 
-String data[NUM_FIELDS];
-char device_id[]   = "v25CCAAB0F709665";                // Required by PushingBox, specific to each scenario
-char server_name[] = "api.pushingbox.com";
-
-//Use this for OPEnS Lab
-byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};
-IPAddress ip(128,193,56,138); 
-
-
 #if lora_device_type == 0
-  EthernetClient client;            
+	String data[NUM_FIELDS];
+	char device_id[]   = "v25CCAAB0F709665";                // Required by PushingBox, specific to each scenario
+	char server_name[] = "api.pushingbox.com";
+
+	//Use this for OPEnS Lab
+	byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};
+	IPAddress ip(128,193,56,138); 
+	EthernetClient client;            
 #endif
 
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
@@ -60,6 +58,7 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager);
 	void lora_receive_bundle(OSCBundle *bndl);
   String get_data_value(OSCMessage* msg, int pos);
   void sendToPushingBox(int num_fields, char *server_name, char *devid);
+	bool setup_ethernet();
 #endif
 
 #if lora_device_type == 1
@@ -98,17 +97,17 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
 		#if LOOM_DEBUG == 1
 			Serial.println("setFrequency failed");
 		#endif
-    while (1);
   }
 
+	#if LOOM_DEBUG == 1
+		Serial.println("Setting up ethernet");
+	#endif
   #if lora_device_type == 0
-    if (Ethernet.begin(mac) == 0) {
+		if(!setup_ethernet()) {
 			#if LOOM_DEBUG == 1
-				Serial.println("Failed to configure Ethernet using DHCP");
+				Serial.println("Failed to setup ethernet");
 			#endif
-      // Try to congifure using IP address instead of DHCP:
-      Ethernet.begin(mac, ip);
-    }
+		}
   #endif
   
   #if LOOM_DEBUG == 1
@@ -124,253 +123,243 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
 // ================================================================
 // ===                        FUNCTIONS                         ===
 // ================================================================
-// --- GET OSC STRING ---
-// 
-// Arguments: An OSCBundle to put into string format. A char * to fill with the OSCBundle's data.
-// Return: Nothing, but osc_string's contents will now include the OSCBundle's formatted data.
-#if lora_device_type == 1
-void get_OSC_string(OSCBundle *bndl, char *osc_string) 
-{
-	char data_type;
-	data_value value;
-	int addr_len = 40;
-	OSCMessage* msg;                                         // Can these be added to declarations file or merged with similar vars?
-	char addr_buf[addr_len];
-
-	memset(osc_string, '\0', sizeof(osc_string));
-
-	for (int i = 0; i < bndl->size(); i++) {
-	msg = bndl->getOSCMessage(i);
-	memset(addr_buf, '\0', addr_len);
-	msg->getAddress(addr_buf, 0);
-	strcat(osc_string, addr_buf);
-
-	for (int j = 0; j < msg->size(); j++) {
-		data_type = msg->getType(j);
-		switch (data_type) {
-		case 'f':
-			value.f = msg->getFloat(j);
-			snprintf(addr_buf, addr_len, ",f%lu", value.u);
-			strcat(osc_string, addr_buf);
-			break;
-
-		case 'i':
-			value.i = msg->getInt(j);
-			snprintf(addr_buf, addr_len, ",i%lu", value.u);
-			strcat(osc_string, addr_buf);
-			break;
-
-		case 's':
-			char data_buf[40];
-			msg->getString(j, data_buf, sizeof(data_buf));
-			snprintf(addr_buf, addr_len, ",s%s", data_buf);
-			strcat(osc_string, addr_buf);
-			break;
-
-		default:
-			if (data_type != '\0')
-			#if LOOM_DEBUG == 1
-				Serial.print("Invalid message arg type");
-			#endif
-			break;
-		}
-	}
-	if (msg != NULL) strcat(osc_string, " ");
-	}
-}
-#endif // of lora_device_type == 1
 
 
 
-// --- GET OSC BUNDLE ---
-// 
-// Arguments: A char * created through the use of get_OSC_string(), an OSCBundle to fill.
-// Return: Nothing, but the OSCBundle is filled with the data from the string.
 #if lora_device_type == 0
-void get_OSC_bundle(char *string, OSCBundle* bndl) 
-{
-	bndl->empty();
-	data_value value_union;
-	char buf[strlen(string)+1];
-	char *p = buf, *p2 = NULL;
-	char *token = NULL, *msg_token = NULL; 
-	strcpy(buf, string);
-	OSCMessage *msg;
-	msg_token = strtok_r(p, " ", &p);
-	while (msg_token != NULL & strlen(msg_token) > 0) {
-		p2 = msg_token;
-		token = strtok_r(p2, ",", &p2);
-		msg = &(bndl->add(token));
-		token = strtok_r(NULL, ",", &p2);
-		int k = 1;
-		while (token != NULL & strlen(token) > 0) {
-			if (token[0] == 'f') {
-				value_union.u = strtoul(&token[1], NULL, 0);
-				msg->add(value_union.f);
-			}
-			else if (token[0] == 'i') {
-				value_union.u = strtoul(&token[1], NULL, 0);
-				msg->add(value_union.i);
-			}
-			else if (token[0] == 's') {
-				msg->add(&token[1]);
-			}
-			token = strtok_r(p2, ",", &p2);
+	// --- GET DATA VALUE ---
+	// 
+	// Arguments: An OSCMessage, the position of an argument inside the OSCMessage.
+	// Return: The value of the argument as a string.
+
+	String get_data_value(OSCMessage* msg, int pos) {
+		switch (msg->getType(pos)) {
+			case 'i':
+				return String(msg->getInt(pos));
+				break;
+			case 'f':
+				return String(msg->getFloat(pos));
+				break;
+			case 's':
+				char buf[80];
+				msg->getString(pos, buf, 80);
+				return String(buf);
+				break;
+			default:
+				#if LOOM_DEBUG == 1
+					Serial.println("Unsupported data data_type.");
+				#endif
+				return String("");
 		}
+	}
+
+	// --- GET OSC BUNDLE ---
+	// 
+	// Arguments: A char * created through the use of get_OSC_string(), an OSCBundle to fill.
+	// Return: Nothing, but the OSCBundle is filled with the data from the string.
+	void get_OSC_bundle(char *string, OSCBundle* bndl) {
+		bndl->empty();
+		data_value value_union;
+		char buf[strlen(string)+1];
+		char *p = buf, *p2 = NULL;
+		char *token = NULL, *msg_token = NULL; 
+		strcpy(buf, string);
+		OSCMessage *msg;
 		msg_token = strtok_r(p, " ", &p);
-	}
-}
-#endif // of lora_device_type == 0
-
-
-
-// --- PRINT BUNDLE ---
-// 
-// Arguments: An OSCBundle to be printed.
-// Return: Nothing. Prints the OSCBundle's contents to the Serial.
-#if LOOM_DEBUG == 1
-void print_bundle(OSCBundle *bndl)
-{
-	int n = 0;
-	char buf[50];
-	char data_type;
-	OSCMessage *msg = bndl->getOSCMessage(n);
-	while (msg != NULL) {
-		msg->getAddress(buf, 0);
-		Serial.print("Address ");
-		Serial.print(n + 1);
-		Serial.print(": ");
-		Serial.println(buf);
-
-		int m = 0;
-		data_type = msg->getType(m);
-		while (data_type != '\0') {
-			Serial.print("Value ");
-			Serial.print(m + 1);
-			Serial.print(": ");
-			if (data_type == 'f') {
-				Serial.println(msg->getFloat(m));
+		while (msg_token != NULL & strlen(msg_token) > 0) {
+			p2 = msg_token;
+			token = strtok_r(p2, ",", &p2);
+			msg = &(bndl->add(token));
+			token = strtok_r(NULL, ",", &p2);
+			int k = 1;
+			while (token != NULL & strlen(token) > 0) {
+				if (token[0] == 'f') {
+					value_union.u = strtoul(&token[1], NULL, 0);
+					msg->add(value_union.f);
+				}
+				else if (token[0] == 'i') {
+					value_union.u = strtoul(&token[1], NULL, 0);
+					msg->add(value_union.i);
+				}
+				else if (token[0] == 's') {
+					msg->add(&token[1]);
+				}
+				token = strtok_r(p2, ",", &p2);
 			}
-			else if (data_type == 'i') {
-				Serial.println(msg->getInt(m));
-			}
-			else if (data_type == 's') {
-				msg->getString(m, buf, 50);
-				Serial.println(buf);
-			}
-
-			m++;
-			data_type = msg->getType(m);
+			msg_token = strtok_r(p, " ", &p);
 		}
-		n++;
-		msg = bndl->getOSCMessage(n);
 	}
-}
-#endif // of LOOM_DEBUG == 1
 
-
-
-// --- GET DATA VALUE ---
-// 
-// Arguments: An OSCMessage, the position of an argument inside the OSCMessage.
-// Return: The value of the argument as a string.
-#if lora_device_type == 0
-String get_data_value(OSCMessage* msg, int pos) 
-{
-	switch (msg->getType(pos)) {
-		case 'i':
-			return String(msg->getInt(pos));
-			break;
-		case 'f':
-			return String(msg->getFloat(pos));
-			break;
-		case 's':
-			char buf[80];
-			msg->getString(pos, buf, 80);
-			return String(buf);
-			break;
-		default:
+	// --- SEND TO PUSHINGBOX ---
+	// 
+	// Arguments: The number fields in the PB scenario, the base address of the URL
+	// the devid specifying the PB scenario.
+	// Return: Nothing. Sends a get request to PB.
+	
+	void sendToPushingBox(int num_fields, char *server_name, char *devid) {
+		client.stop();
+		if (client.connect(server_name, 80)) {  
+			client.print("GET /pushingbox?devid="); client.print(devid); 
+			for(int i = 0; i < num_fields; i++) {
+				if((i % 2) == 0)
+					client.print("&key" + String(i/2) + "=");
+				else
+					client.print("&val" + String(i/2) + "=");
+				client.print(data[i]);
+			}
+			client.println(" HTTP/1.1");
+			client.print("Host: "); client.println(server_name);
+			client.println("User-Agent: Arduino");
+			client.println();
+		 
+		} 
+		else {
 			#if LOOM_DEBUG == 1
-				Serial.println("Unsupported data data_type.");
+				Serial.println("Failed to connect to PB, attempting to re-setup ethernet.");
 			#endif
-			return String("");
+			if(setup_ethernet()) {
+				#if LOOM_DEBUG == 1
+					Serial.println("Successfully re-setup ethernet.");
+				#endif
+			}
+			#if LOOM_DEBUG == 1 
+				else {
+					Serial.println("Failed to re-setup ethernet.");
+				}
+			#endif
+		}
 	}
-}
-#endif // of #if lora_device_type == 0
 
+	// --- LoRa Receive Bundle ---
+	// 
+	// Arguments: An OSCBundle pointer to the OSCBundle to be filled.
+	// Return: Nothing, but changes the state/contents of the bundle.
 
+	void lora_receive_bundle(OSCBundle *bndl)
+	{
+		if (manager.available()) {
+			uint8_t len = LORA_MESSAGE_SIZE;
+			uint8_t from;
+			uint8_t buf[LORA_MESSAGE_SIZE];
+			memset(buf, '\0', LORA_MESSAGE_SIZE);
+			if (manager.recvfromAck(buf, &len, &from)) {
+				//If true, then the data being received is from the evaporimeter, which
+				//is formatted differently as they use code not written by the CS Capstone team.
+				if (((char)(buf[0])) == '/') {
+					get_OSC_bundle((char*)buf, bndl); 
+					for(int i = 0; i < NUM_FIELDS; i++)
+						data[i] = get_data_value(bndl->getOSCMessage(0), i);
+				} else {
+					char str[LORA_MESSAGE_SIZE];
+					String((char*)buf).toCharArray(str, sizeof(str)-1);
+					char *token;
+					char *savept = str;
+					String cols[6] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
+					for(int i = 0; i < NUM_FIELDS; i+=2) {
+						token = strtok_r(savept, ",", &savept);
+						if(token != NULL) {
+							data[i] = cols[i/2];
+							data[i+1] = String(token);
+						}
+					} // of for
+				} // of else 
+				#if LOOM_DEBUG == 1
+					print_bundle(bndl);
+				#endif
+			} // of if (manager.recvfromAck(buf, &len, &from))
+		} // of if (manager.available()) 
+	}
 
+	// --- Setup Ethernet ---
+	// 
+	// Arguments: None
+	// Return: None. Configures ethernet capabilities.
 
-// --- SEND TO PUSHINGBOX ---
-// 
-// Arguments: The number fields in the PB scenario, the base address of the URL
-// the devid specifying the PB scenario.
-// Return: Nothing. Sends a get request to PB.
-#if lora_device_type == 0
-void sendToPushingBox(int num_fields, char *server_name, char *devid) 
-{
-  client.stop();
-  if (client.connect(server_name, 80)) {  
-    client.print("GET /pushingbox?devid="); client.print(devid); 
-    for(int i = 0; i < num_fields; i++) {
-      if((i % 2) == 0)
-        client.print("&key" + String(i/2) + "=");
-      else
-        client.print("&val" + String(i/2) + "=");
-      client.print(data[i]);
-    }
-    client.println(" HTTP/1.1");
-    client.print("Host: "); client.println(server_name);
-    client.println("User-Agent: Arduino");
-    client.println();
-   
-  } 
-  #if LOOM_DEBUG == 1
-    else {
-      Serial.println("connection failed");
-    }
-  #endif
-}
-#endif // of #if lora_device_type == 0
-
-
-
-#if lora_device_type == 0
-void lora_receive_bundle(OSCBundle *bndl)
-{
-	if (manager.available()) {
-		uint8_t len = LORA_MESSAGE_SIZE;
-		uint8_t from;
-		uint8_t buf[LORA_MESSAGE_SIZE];
-		memset(buf, '\0', LORA_MESSAGE_SIZE);
-		if (manager.recvfromAck(buf, &len, &from)) {
-			if (((char)(buf[0])) == '/') {
-				get_OSC_bundle((char*)buf, bndl); 
-				for(int i = 0; i < NUM_FIELDS; i++)
-					data[i] = get_data_value(bndl->getOSCMessage(0), i);
-			} else {
-				char str[LORA_MESSAGE_SIZE];
-				String((char*)buf).toCharArray(str, sizeof(str)-1);
-				char *token;
-				char *savept = str;
-				String cols[6] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
-				for(int i = 0; i < NUM_FIELDS; i+=2) {
-					token = strtok_r(savept, ",", &savept);
-					if(token != NULL) {
-						data[i] = cols[i/2];
-						data[i+1] = String(token);
-					}
-				} // of for
-			} // of else 
+	bool setup_ethernet() {
+		bool is_setup;
+		if (Ethernet.begin(mac) == 0) {
 			#if LOOM_DEBUG == 1
-				print_bundle(bndl);
+				Serial.println("Failed to configure Ethernet using DHCP");
 			#endif
-		} // of if (manager.recvfromAck(buf, &len, &from))
-	} // of if (manager.available()) 
-}
+			// try to congifure using IP address instead of DHCP:
+			Ethernet.begin(mac, ip);
+		}
+		
+		if(client.connect("www.google.com", 80)) {
+			is_setup = true;
+			#if LOOM_DEBUG == 1
+				Serial.println("Successfully connected to internet");
+			#endif
+			client.stop();
+		}
+		else {
+			is_setup = false;
+			#if LOOM_DEBUG == 1
+				Serial.println("Failed to connect to internet");
+			#endif
+		}
+		
+		return is_setup;
+	}
+
 #endif
 
 #if lora_device_type == 1
+	// --- GET OSC STRING ---
+	// 
+	// Arguments: An OSCBundle to put into string format. A char * to fill with the OSCBundle's data.
+	// Return: Nothing, but osc_string's contents will now include the OSCBundle's formatted data.
+	
+	void get_OSC_string(OSCBundle *bndl, char *osc_string) 
+	{
+		char data_type;
+		data_value value;
+		int addr_len = 40;
+		OSCMessage* msg;                                         // Can these be added to declarations file or merged with similar vars?
+		char addr_buf[addr_len];
+
+		memset(osc_string, '\0', sizeof(osc_string));
+
+		for (int i = 0; i < bndl->size(); i++) {
+		msg = bndl->getOSCMessage(i);
+		memset(addr_buf, '\0', addr_len);
+		msg->getAddress(addr_buf, 0);
+		strcat(osc_string, addr_buf);
+
+		for (int j = 0; j < msg->size(); j++) {
+			data_type = msg->getType(j);
+			switch (data_type) {
+			case 'f':
+				value.f = msg->getFloat(j);
+				snprintf(addr_buf, addr_len, ",f%lu", value.u);
+				strcat(osc_string, addr_buf);
+				break;
+
+			case 'i':
+				value.i = msg->getInt(j);
+				snprintf(addr_buf, addr_len, ",i%lu", value.u);
+				strcat(osc_string, addr_buf);
+				break;
+
+			case 's':
+				char data_buf[40];
+				msg->getString(j, data_buf, sizeof(data_buf));
+				snprintf(addr_buf, addr_len, ",s%s", data_buf);
+				strcat(osc_string, addr_buf);
+				break;
+
+			default:
+				if (data_type != '\0')
+				#if LOOM_DEBUG == 1
+					Serial.print("Invalid message arg type");
+				#endif
+				break;
+			}
+		}
+		if (msg != NULL) strcat(osc_string, " ");
+		}
+	}
+
   bool lora_send_bundle(OSCBundle *bndl)
   {
     char message[RH_RF95_MAX_MESSAGE_LEN];
@@ -400,5 +389,50 @@ void lora_receive_bundle(OSCBundle *bndl)
     }
   }
 #endif
+
+#if LOOM_DEBUG == 1
+	// --- PRINT BUNDLE ---
+	// 
+	// Arguments: An OSCBundle to be printed.
+	// Return: Nothing. Prints the OSCBundle's contents to the Serial.
+
+	void print_bundle(OSCBundle *bndl)
+	{
+		int n = 0;
+		char buf[50];
+		char data_type;
+		OSCMessage *msg = bndl->getOSCMessage(n);
+		while (msg != NULL) {
+			msg->getAddress(buf, 0);
+			Serial.print("Address ");
+			Serial.print(n + 1);
+			Serial.print(": ");
+			Serial.println(buf);
+
+			int m = 0;
+			data_type = msg->getType(m);
+			while (data_type != '\0') {
+				Serial.print("Value ");
+				Serial.print(m + 1);
+				Serial.print(": ");
+				if (data_type == 'f') {
+					Serial.println(msg->getFloat(m));
+				}
+				else if (data_type == 'i') {
+					Serial.println(msg->getInt(m));
+				}
+				else if (data_type == 's') {
+					msg->getString(m, buf, 50);
+					Serial.println(buf);
+				}
+
+				m++;
+				data_type = msg->getType(m);
+			}
+			n++;
+			msg = bndl->getOSCMessage(n);
+		}
+	}
+#endif // of LOOM_DEBUG == 1
 
 
