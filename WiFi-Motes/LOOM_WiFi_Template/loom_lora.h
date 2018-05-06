@@ -133,24 +133,31 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
 	// Return: The value of the argument as a string.
 
 	String get_data_value(OSCMessage* msg, int pos) {
-		switch (msg->getType(pos)) {
-			case 'i':
-				return String(msg->getInt(pos));
-				break;
-			case 'f':
-				return String(msg->getFloat(pos));
-				break;
-			case 's':
-				char buf[80];
-				msg->getString(pos, buf, 80);
-				return String(buf);
-				break;
-			default:
-				#if LOOM_DEBUG == 1
-					Serial.println("Unsupported data data_type.");
-				#endif
-				return String("");
+		if(pos < msg->size()) {
+			switch (msg->getType(pos)) {
+				case 'i':
+					return String(msg->getInt(pos));
+					break;
+				case 'f':
+					return String(msg->getFloat(pos));
+					break;
+				case 's':
+					char buf[80];
+					msg->getString(pos, buf, 80);
+					return String(buf);
+					break;
+				default:
+					#if LOOM_DEBUG == 1
+						Serial.println("Unsupported data data_type.");
+					#endif
+					return String("");
+			}
 		}
+		#if LOOM_DEBUG == 1
+			Serial.print("Message does not have an argument with position: ");
+			Serial.println(pos);
+		#endif
+		return String("");
 	}
 
 	// --- GET OSC BUNDLE ---
@@ -192,20 +199,22 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
 
 	// --- SEND TO PUSHINGBOX ---
 	// 
-	// Arguments: The number fields in the PB scenario, the base address of the URL
-	// the devid specifying the PB scenario.
+	// Arguments: The message containing the infor to send to PB.
 	// Return: Nothing. Sends a get request to PB.
 	
-	void sendToPushingBox(int num_fields, char *server_name, char *devid) {
+	void sendToPushingBox(OSCMessage &msg) {
+		#if LOOM_DEBUG == 1
+			Serial.println("Sending to pushing box");
+		#endif
 		client.stop();
 		if (client.connect(server_name, 80)) {  
-			client.print("GET /pushingbox?devid="); client.print(devid); 
-			for(int i = 0; i < num_fields; i++) {
+			client.print("GET /pushingbox?devid="); client.print(device_id); 
+			for(int i = 0; i < NUM_FIELDS; i++) {
 				if((i % 2) == 0)
 					client.print("&key" + String(i/2) + "=");
 				else
 					client.print("&val" + String(i/2) + "=");
-				client.print(data[i]);
+				client.print(get_data_value(&msg, i));
 			}
 			client.println(" HTTP/1.1");
 			client.print("Host: "); client.println(server_name);
@@ -233,7 +242,8 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
 	// --- LoRa Receive Bundle ---
 	// 
 	// Arguments: An OSCBundle pointer to the OSCBundle to be filled.
-	// Return: Nothing, but changes the state/contents of the bundle.
+	// Return: Nothing, but changes the state/contents of the bundle
+	// and of the String Array, data.
 
 	void lora_receive_bundle(OSCBundle *bndl)
 	{
@@ -263,9 +273,6 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
 						}
 					} // of for
 				} // of else 
-				#if LOOM_DEBUG == 1
-					print_bundle(bndl);
-				#endif
 			} // of if (manager.recvfromAck(buf, &len, &from))
 		} // of if (manager.available()) 
 	}
@@ -401,6 +408,8 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
 		int n = 0;
 		char buf[50];
 		char data_type;
+		Serial.println("Bundle Size: ");
+		Serial.println(bndl->size());
 		OSCMessage *msg = bndl->getOSCMessage(n);
 		while (msg != NULL) {
 			msg->getAddress(buf, 0);

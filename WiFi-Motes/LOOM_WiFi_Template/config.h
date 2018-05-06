@@ -1,5 +1,5 @@
 #define FAMILY "LOOM"     // Should always be "LOOM", you can change this if you are setting up your own network
-#define DEVICE "MuxShield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
+#define DEVICE "HubShield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
 #define INIT_INST 1
 
 
@@ -71,7 +71,7 @@
   #define RF95_FREQ      915.0      //Hardware specific, Tx must match Rx
 
   #if lora_device_type == 0 // Hub
-    #define NUM_FIELDS 16           	//Maximum number of fields accepted by the PushingBox Scenario    
+    #define NUM_FIELDS 32           	//Maximum number of fields accepted by the PushingBox Scenario    
     #include <Ethernet2.h>            // -- ideas on how to move this to declarations? (its needed for IPAddress but that is a user option)
   #endif
   

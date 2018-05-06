@@ -43,8 +43,10 @@ void loop() {
 
   #if is_lora == 1
     #if lora_device_type == 0
-      lora_receive_bundle(&bndl);                      // Not tested yet - code that was here is now in loom_lora.h under func lora_receive_bundle
-			
+      lora_receive_bundle(&bndl);
+			if(bndl.size() > 0) {
+				lora_process_bundle(&bndl, configuration.packet_header_string);
+			}
 		#elif lora_device_type == 2
       //TODO: repeater functionality here
     #endif
