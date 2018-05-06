@@ -78,7 +78,9 @@ void msg_router(OSCMessage &msg, int addrOffset) {
   #if is_neopixel == 1
     msg.dispatch("/Neopixel",     setColor,       addrOffset);
   #endif
-	
+	#if is_lora == 1 && lora_device_type == 0
+		msg.dispatch("/SendToPB", 				sendToPushingBox, addrOffset);
+	#endif
   #if is_wifi == 1
     msg.dispatch("/Connect/SSID",     set_ssid,     addrOffset);
     msg.dispatch("/Connect/Password", set_pass,     addrOffset);
@@ -261,6 +263,31 @@ void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[], WiFiUDP *
 }
 #endif // of if is_wifi == 1
 
+
+void lora_process_bundle(OSCBundle *bndl, char packet_header_string[]) {
+    if (!bndl->hasError()) {
+      char addressString[255];
+      bndl->getOSCMessage(0)->getAddress(addressString, 0);
+
+      #if LOOM_DEBUG == 1
+        Serial.print("Number of items in bundle: ");
+        Serial.println(bndl->size());
+        Serial.print("First message address string: ");
+        Serial.println(addressString);
+      #endif
+      
+      // Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
+      // Most commands will be finished once control returns here (WiFi changes being handled below)
+      bndl->route(packet_header_string,msg_router);
+    } 
+		else { // of !bndl.hasError()
+			error = bndl->getError();
+			#if LOOM_DEBUG == 1
+				Serial.print("error: ");
+				Serial.println(error);
+			#endif
+		}	 // of else
+}	
 
 
 
