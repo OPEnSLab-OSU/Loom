@@ -77,8 +77,10 @@ void broadcastIP(OSCMessage &msg);
 void set_port(OSCMessage &msg);
 void wifi_check_status();
 void request_settings_from_Max();
+void set_request_settings(OSCMessage &msg);
 void new_channel(OSCMessage &msg);
-void response_to_poll_request(char packet_header_string[]);
+void respond_to_poll_request(char packet_header_string[]);
+
 
 // ================================================================ 
 // ===                          SETUP                           === 
@@ -249,6 +251,7 @@ bool connect_to_WPA(char ssid[], char pass[])
 
     // Start AP up again instead
     Udp.stop();
+    UdpCommon.stop();
     WiFi.disconnect();
     WiFi.end();
     start_AP();
@@ -290,7 +293,8 @@ void switch_to_AP(OSCMessage &msg)
     WiFi.end();
     start_AP();
     config_wifi->wifi_mode = AP_MODE;
-    //flash_setup.write(configuration);
+    write_non_volatile();
+//    flash_config.write(configuration);
   }
   
   #if LOOM_DEBUG == 1
@@ -373,7 +377,8 @@ void connect_to_new_network()
     config_wifi->ip = WiFi.localIP();
     strcpy(config_wifi->ssid, state_wifi.new_ssid);
     strcpy(config_wifi->pass, state_wifi.new_pass);
-    //flash_config.write(configuration);
+    write_non_volatile();
+//    flash_config.write(configuration);
   } 
 }
 
@@ -455,8 +460,8 @@ void set_port(OSCMessage &msg)
     Serial.println(config_wifi->localPort);
   #endif
 
-  // Update saved port in configuration
-  //flash_setup.write(configuration);
+  config_wifi->request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
+                                      // Note that configuration needs to be saved for this to take effect
 }
 
 
@@ -503,6 +508,15 @@ void request_settings_from_Max()
 }
 
 
+void set_request_settings(OSCMessage &msg)
+{
+  config_wifi->request_settings = 1; // Setting to 1 means that device will request new port settings on restart. 
+                                      // Note that configuration needs to be saved for this to take effect
+  #if LOOM_DEBUG == 1
+    Serial.println("Setting Request Settings True (Note, configuration needs to be saved for change to take effect");
+  #endif                                    
+}
+
 
 void new_channel(OSCMessage &msg)
 {
@@ -514,10 +528,10 @@ void new_channel(OSCMessage &msg)
 
 
 
-
-void response_to_poll_request(char packet_header_string[])
+void respond_to_poll_request(char packet_header_string[])
 {
   OSCBundle bndl;
+  bndl.empty();
   char addressString[255];
   sprintf(addressString, "%s%s", packet_header_string, "/PollResponse");
 
@@ -529,7 +543,7 @@ void response_to_poll_request(char packet_header_string[])
   bndl.empty();             // Empty the bundle to free room for a new one
 
   #if LOOM_DEBUG == 1
-    Serial.println("Responsed to poll request");
+    Serial.println("Responded to poll request");
   #endif
 }
 
