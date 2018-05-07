@@ -35,8 +35,7 @@ int ctr;
 // ================================================================ 
 void loop() {
   OSCBundle bndl; 
-  
-  
+
   // Reset to AP mode if button held for ~5 seconds
   #if defined(button) && (is_wifi == 1)
     check_button_held();      
@@ -44,8 +43,11 @@ void loop() {
 
   #if is_lora == 1
     #if lora_device_type == 0
-      lora_receive_bundle(&bndl);                      // Not tested yet - code that was here is now in loom_lora.h under func lora_receive_bundle
-    #elif lora_device_type == 2
+      lora_receive_bundle(&bndl);
+			if(bndl.size() > 0) {
+				lora_process_bundle(&bndl, configuration.packet_header_string);
+			}
+		#elif lora_device_type == 2
       //TODO: repeater functionality here
     #endif
   #endif
@@ -154,6 +156,7 @@ void loop() {
     #endif
     send_bndl.empty();      // Empty the bundle to free room for a new one
   #endif
+
 
   // Delay between loop iterations
   #ifdef is_sleep_period

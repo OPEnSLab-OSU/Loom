@@ -22,7 +22,7 @@ struct state_zxgesturesensor_t {
 	GestureType gesture;
 	String gesture_type;
 	uint8_t gesture_speed;
-	float pos[2];
+	int32_t pos[2];
 };
 
 // ================================================================ 
@@ -115,26 +115,26 @@ void measure_zxgesturesensor() {
 	if(state_zxgesturesensor.inst_zxgesturesensor.positionAvailable()) {
     x = state_zxgesturesensor.inst_zxgesturesensor.readX();
 		z = state_zxgesturesensor.inst_zxgesturesensor.readZ();
-  }
+		
+		if((x != ZX_ERROR) && (z != ZX_ERROR)) {
+			state_zxgesturesensor.pos[0] = (int32_t)x;
+			state_zxgesturesensor.pos[1] = (int32_t)z;
+			#if LOOM_DEBUG == 1
+				Serial.print("zxgesturesensor X: ");
+				Serial.println(state_zxgesturesensor.pos[0]);
+				Serial.print("zxgesturesensor Z: ");
+				Serial.println(state_zxgesturesensor.pos[1]);
+			#endif
+		}
+		else {
+			#if LOOM_DEBUG == 1
+				Serial.println("Error occurred while reading position data");
+			#endif
+		}	
+	}
 	else {
 		#if LOOM_DEBUG == 1
 			Serial.println("Position data unavailable for zxgesturesensor");
-		#endif
-	}
-	
-	if((x != ZX_ERROR) && (z != ZX_ERROR)) {
-		state_zxgesturesensor.pos[0] = x;
-		state_zxgesturesensor.pos[1] = z;
-		#if LOOM_DEBUG == 1
-			Serial.print("zxgesturesensor X: ");
-			Serial.println(state_zxgesturesensor.pos[0]);
-			Serial.print("zxgesturesensor Z: ");
-			Serial.println(state_zxgesturesensor.pos[1]);
-		#endif
-	}
-	else {
-		#if LOOM_DEBUG == 1
-			Serial.println("Error occurred while reading position data");
 		#endif
 	}
 	

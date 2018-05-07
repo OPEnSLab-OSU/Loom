@@ -1,22 +1,22 @@
 #define FAMILY "LOOM"     // Should always be "LOOM", you can change this if you are setting up your own network
-#define DEVICE "MuxShield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
+#define DEVICE "HubShield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
 #define INIT_INST 1
 
 
 #define REQUEST_SETTINGS 0
 
 //--OPTIONS--//
-#define LOOM_DEBUG 0   // Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
 
 #define is_ishield 0
 #define num_servos 0
 #define is_relay   0
-#define is_wifi    1
-#define is_lora    0
+#define is_wifi    0
+#define is_lora    1
 #define is_analog  0
 #define is_decagon 0
 //Multiplexer
-#define is_tca9548a 1
+#define is_tca9548a 0
 
 #if is_tca9548a == 1
 	//Lux Sensor
@@ -53,8 +53,6 @@
   #endif  
 #endif
 
-
-
 #if is_wifi == 1
   #define DEFAULT_MODE      WPA_CLIENT_MODE //AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
   #define DEFAULT_NETWORK   "OPEnS"
@@ -63,30 +61,18 @@
   #define INIT_PORT         9441
 #endif
 
-
-
 // LoRa Device Type
 // 0: Hub, 1: Node, 2 = Repeater
 #if is_lora == 1
 
-  #define lora_device_type 1
+  #define lora_device_type 0
   
   #define SERVER_ADDRESS 0          //Use 0-9 for SERVER_ADDRESSes
   #define RF95_FREQ      915.0      //Hardware specific, Tx must match Rx
 
   #if lora_device_type == 0 // Hub
-    #define NUM_FIELDS 16           //Maximum number of fields accepted by the PushingBox Scenario
-
-    String data[NUM_FIELDS];
-    char device_id[]   = "v25CCAAB0F709665";                // Required by PushingBox, specific to each scenario
-    char server_name[] = "api.pushingbox.com";
-
-    //Use this for OPEnS Lab
-    byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};  
-        
+    #define NUM_FIELDS 32           	//Maximum number of fields accepted by the PushingBox Scenario    
     #include <Ethernet2.h>            // -- ideas on how to move this to declarations? (its needed for IPAddress but that is a user option)
-
-    IPAddress ip(128,193,56,138);
   #endif
   
   #if lora_device_type == 1 // Node
