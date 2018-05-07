@@ -13,7 +13,7 @@ enum WiFiMode {
   WEP_CLIENT_MODE
 };
 
-#define AP_NAME   STR(FAMILY) STR(DEVICE) STR(INIT_INST)
+#define AP_NAME   FAMILY DEVICE STR(INIT_INST)
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 

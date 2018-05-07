@@ -14,8 +14,8 @@
 #define DEBUG 1
 
 #define FAMILY "/LOOM"
-#define DEVICE "/LoRaNode"
-#define INSTANCE_NUM 10  // Unique instance number for this device, useful when using more than one of the same device type in same space
+#define DEVICE "/HubShield"
+#define INSTANCE_NUM 1  // Unique instance number for this device, useful when using more than one of the same device type in same space
  
 // Change to 434.0 or other frequency, must match RX's freq!
 #define RF95_FREQ 915.0
@@ -63,7 +63,7 @@ void setup() {
 
 void loop() {
   OSCBundle bndl;
-  bndl.add(IDString).add("Date").add("3/6/2018").add("IDtag").add((int32_t) INSTANCE_NUM)
+  bndl.add(IDString "/SendToPB").add("Date").add("3/6/2018").add("IDtag").add("TestNode")
   .add("TimeStamp").add("2018").add("TempC").add((int32_t)32).add("Humidity").add((float)46.4)
   .add("LoadCell").add((int32_t)1000).add("IRLight").add((int32_t)2000).add("FullLight").add((int32_t)3000)
   .add("BatVolt").add((float)4.2);
