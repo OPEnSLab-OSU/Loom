@@ -48,6 +48,8 @@
 #endif
 
 
+void read_non_volatile();
+void write_non_volatile();
 
 // ================================================================ 
 // ===                  INCLUDE DEVICE FILES                    === 

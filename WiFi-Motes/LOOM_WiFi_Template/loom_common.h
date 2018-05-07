@@ -21,6 +21,7 @@ void msg_router(OSCMessage &msg, int addrOffset);
 #endif
 void LOOM_begin();
 void loop_sleep();
+void save_config(OSCMessage &msg);
 
 // ================================================================
 // ===                        FUNCTIONS                         ===
@@ -39,8 +40,11 @@ void set_instance_num(OSCMessage &msg)
     Serial.print("new address header: ");
     Serial.println(configuration.packet_header_string);
   #endif
-  write_non_volatile();
-  //flash_setup.write(configuration);
+
+  #if is_wifi == 1
+    configuration.config_wifi.request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
+                                        // Note that configuration needs to be saved for this to take effect
+  #endif
 }
  
 // --- MESSAGE ROUTER ---
@@ -63,7 +67,6 @@ void msg_router(OSCMessage &msg, int addrOffset) {
         Serial.println("Got a request for sensor list");
       #endif
     }
-    
     msg.dispatch("/GetSensors",   send_sensor_list, addrOffset);
   #endif
   #if num_servos > 0  
@@ -86,9 +89,11 @@ void msg_router(OSCMessage &msg, int addrOffset) {
     msg.dispatch("/SetPort",          set_port,     addrOffset);
     msg.dispatch("/requestIP",        broadcastIP,  addrOffset);
     msg.dispatch("/getNewChannel",    new_channel,  addrOffset);
+    msg.dispatch("/setRequestSettings",set_request_settings,  addrOffset);
   #endif
   
   msg.dispatch("/SetID", set_instance_num, addrOffset);
+  msg.dispatch("/SaveConfig", save_config, addrOffset);
 }
 
 
@@ -175,6 +180,7 @@ void LOOM_begin()
   // Communication Platform specific setups
   #if is_wifi == 1
     wifi_setup();
+    respond_to_poll_request(configuration.packet_header_string);
   #endif
   #if is_lora == 1
     lora_setup(&rf95, &manager);
@@ -229,7 +235,7 @@ void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[], WiFiUDP *
         #if LOOM_DEBUG == 1
           Serial.println("Received channel poll request");
         #endif
-        response_to_poll_request(packet_header_string);
+        respond_to_poll_request(packet_header_string);
         return;
       }
       
@@ -273,4 +279,15 @@ void loop_sleep()
 }
 #endif
 
+
+void save_config(OSCMessage &msg) {
+  #if LOOM_DEBUG == 1
+    Serial.println("Saving Configuration Settings");
+    Serial.println("...");
+  #endif
+  write_non_volatile();
+  #if LOOM_DEBUG == 1
+    Serial.println("Done");
+  #endif
+}
 

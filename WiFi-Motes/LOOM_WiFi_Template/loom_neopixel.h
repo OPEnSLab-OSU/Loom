@@ -8,7 +8,7 @@
 // ================================================================
 struct state_neopixel_t {
   // Neopixel Data Structures (one per Ishield port)
-  Adafruit_NeoPixel pixels[3];
+  Adafruit_NeoPixel * pixels[3];
   
   // Based on config.h, enable Neopixel for specified ports
   bool enabled[3] = {NEO_0, NEO_1, NEO_2};
@@ -47,9 +47,9 @@ void setup_neopixel()
 {
   for(int i = 0; i < 3; i++) {
     if (state_neopixel.enabled[i]) {
-      state_neopixel.pixels[i] = Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
-      state_neopixel.pixels[i].begin(); // This initializes the NeoPixel library.
-      state_neopixel.pixels[i].show();  // Initialize all pixels to 'off'
+      state_neopixel.pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
+      state_neopixel.pixels[i]->begin(); // This initializes the NeoPixel library.
+      state_neopixel.pixels[i]->show();  // Initialize all pixels to 'off'
     }
   }
 }
@@ -86,8 +86,8 @@ void setColor(OSCMessage &msg)
   // Update color values stored for specified Neopixel and write them to the Neopixels color
   if (state_neopixel.enabled[port]) {
     state_neopixel.colorVals[port][color] = val;
-    state_neopixel.pixels[port].setPixelColor(pixelNum, 
-                                                state_neopixel.pixels[port].Color(
+    state_neopixel.pixels[port]->setPixelColor(pixelNum, 
+                                                state_neopixel.pixels[port]->Color(
                                                   state_neopixel.colorVals[port][0], 
                                                   state_neopixel.colorVals[port][1], 
                                                   state_neopixel.colorVals[port][2]));
@@ -96,7 +96,7 @@ void setColor(OSCMessage &msg)
   // Update colors displayed by enabled Neopixels
   for (int i = 0; i < 3; i++) {
     if (state_neopixel.enabled[i])
-      state_neopixel.pixels[i].show();
+      state_neopixel.pixels[i]->show();
   }
 }
 
