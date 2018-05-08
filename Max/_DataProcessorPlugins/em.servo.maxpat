@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 1586.0, -102.0, 1508.0, 968.0 ],
+		"rect" : [ 34.0, 78.0, 1028.0, 788.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -1042,8 +1042,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -1480,8 +1480,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -1733,6 +1733,7 @@
 						"tags" : "",
 						"style" : "",
 						"subpatcher_template" : "",
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"comment" : "instance",
@@ -1870,7 +1871,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 67.0, 311.700012, 167.0, 22.0 ],
 									"style" : "",
-									"text" : "udpsend 192.168.1.255 9436"
+									"text" : "udpsend 192.168.1.255 9440"
 								}
 
 							}
@@ -2020,8 +2021,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -2647,8 +2648,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -2755,7 +2756,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1508.0, 942.0 ],
+						"rect" : [ 0.0, 26.0, 1028.0, 762.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -3538,8 +3539,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -3621,7 +3622,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 71.0, 368.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "2"
+					"text" : "7"
 				}
 
 			}
@@ -3700,7 +3701,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 439.5, 479.0, 232.0, 22.0 ],
 					"style" : "",
-					"text" : "/LOOM/ServoShield2/Servo/Set 0 38"
+					"text" : "/LOOM/ServoShield7/Servo/Set 0 42"
 				}
 
 			}
@@ -4345,7 +4346,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 930.0, 389.0, 75.0, 27.0 ],
 					"style" : "",
-					"text" : "9442"
+					"text" : "9447"
 				}
 
 			}
@@ -5470,8 +5471,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",
