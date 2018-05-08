@@ -47,7 +47,7 @@ function createBpatcher(file)
 			case "em.IshieldMonitor": 
 				dimensions = ["250", "230"]; break;
 			case "em.LOOM_Channel_Manager":
-				dimensions = ["325", "280"]; break;
+				dimensions = ["325", "315"]; break;
 			case "em.LOOMin":
 				dimensions = ["200", "160"]; break;
 			default: 

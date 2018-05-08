@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 1474.0, -102.0, 1582.0, 968.0 ],
+		"rect" : [ 34.0, 78.0, 1372.0, 788.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -37,6 +37,84 @@
 		"style" : "",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-225",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1219.70166, 193.5, 195.0, 22.0 ],
+					"style" : "",
+					"text" : "/LOOM/MuxShield1/port7/mb1232"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-103",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1278.001587, 128.0, 198.0, 22.0 ],
+					"style" : "",
+					"text" : "/LOOM/MuxShield1/port3/fxos8700"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-104",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1297.70166, 104.0, 205.0, 22.0 ],
+					"style" : "",
+					"text" : "/LOOM/MuxShield1/port2/fxas21002"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-101",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1248.70166, 169.5, 185.0, 22.0 ],
+					"style" : "",
+					"text" : "/LOOM/MuxShield1/port6/sht31d"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-8",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1306.20166, 70.0, 188.0, 22.0 ],
+					"style" : "",
+					"text" : "/LOOM/MuxShield1/port0/tsl2591"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-97",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1351.70166, 38.0, 182.0, 22.0 ],
+					"style" : "",
+					"text" : "/LOOM/MuxShield1/GetSensors"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-133",
 					"maxclass" : "newobj",
@@ -121,7 +199,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 513.5, 459.5, 50.0, 35.0 ],
 					"style" : "",
-					"text" : "/button 1"
+					"text" : "/port6/sht31d"
 				}
 
 			}
@@ -658,8 +736,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -1046,7 +1124,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 107.0, 63.199997, 137.0, 22.0 ],
 					"style" : "",
-					"text" : "Accel/Magnetometer",
+					"text" : "Lux",
 					"textcolor" : [ 0.239216, 0.254902, 0.278431, 1.0 ]
 				}
 
@@ -1152,7 +1230,7 @@
 					"patching_rect" : [ 782.200012, 647.699951, 234.000061, 33.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.000002, 115.5, 239.0, 28.500004 ],
-					"setminmax" : [ 0.0, 100.0 ],
+					"setminmax" : [ 0.0, 3000.0 ],
 					"setstyle" : 3,
 					"settype" : 0,
 					"slidercolor" : [ 0.811765, 0.372549, 0.372549, 1.0 ],
@@ -1368,7 +1446,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 970.200073, 976.0, 207.0, 22.0 ],
 					"style" : "",
-					"text" : "get fxos8700::ranges::ax"
+					"text" : "get tsl2591::ranges::vis"
 				}
 
 			}
@@ -1821,7 +1899,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-140",
-					"items" : [ "ax", ",", "ay", ",", "az", ",", "mx", ",", "my", ",", "mz" ],
+					"items" : [ "vis", ",", "ir", ",", "full" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -1844,7 +1922,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 199.087494, 824.0, 72.825012, 22.0 ],
 					"style" : "",
-					"text" : "fxos8700"
+					"text" : "tsl2591"
 				}
 
 			}
@@ -1950,7 +2028,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ -14.0, 553.25, 72.0, 22.0 ],
 					"style" : "",
-					"text" : "tsl2591"
+					"text" : "sht31d"
 				}
 
 			}
@@ -2043,7 +2121,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 29.0, 324.0, 53.0, 35.0 ],
 					"style" : "",
-					"text" : "/button 1"
+					"text" : "/port6/sht31d"
 				}
 
 			}
@@ -2150,7 +2228,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-57",
-					"items" : [ "6:", "fxos8700", ",", "6:", "fxas21002", ",", "7:", "tsl2591" ],
+					"items" : [ "0:", "tsl2591", ",", "2:", "fxas21002", ",", "3:", "fxos8700", ",", "6:", "sht31d" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -2310,7 +2388,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 398.650024, 147.399994, 29.0, 21.0 ],
 					"style" : "",
-					"text" : "2",
+					"text" : "1",
 					"varname" : "textedit[2]"
 				}
 
@@ -2407,7 +2485,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 173.0, 147.399994, 53.0, 24.200001 ],
 					"style" : "",
-					"text" : "9442",
+					"text" : "9441",
 					"varname" : "textedit[1]"
 				}
 
@@ -2502,8 +2580,29 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"source" : [ "obj-101", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-100", 0 ],
 					"source" : [ "obj-102", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"source" : [ "obj-103", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"source" : [ "obj-104", 0 ]
 				}
 
 			}
@@ -2778,6 +2877,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-23", 0 ],
 					"source" : [ "obj-22", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"source" : [ "obj-225", 0 ]
 				}
 
 			}
@@ -3442,6 +3548,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-82", 0 ],
 					"source" : [ "obj-81", 0 ]
 				}
@@ -3527,6 +3640,13 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
+					"source" : [ "obj-97", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
 					"source" : [ "obj-98", 0 ]
 				}
 
@@ -3579,8 +3699,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",
