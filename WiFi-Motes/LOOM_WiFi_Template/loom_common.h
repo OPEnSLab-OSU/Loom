@@ -91,7 +91,7 @@ void msg_router(OSCMessage &msg, int addrOffset) {
     msg.dispatch("/SetPort",          set_port,     addrOffset);
     msg.dispatch("/requestIP",        broadcastIP,  addrOffset);
     msg.dispatch("/getNewChannel",    new_channel,  addrOffset);
-    msg.dispatch("/setRequestSettings",set_request_settings,  addrOffset);
+    msg.dispatch("/SetRequestSettings",set_request_settings,  addrOffset);
   #endif
 	
 
