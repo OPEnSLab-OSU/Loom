@@ -67,6 +67,13 @@ bool setup_fxos8700() {
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
+
+// --- PACKAGE FXOS8700 ---
+// Adds last read Fxas21002 sensor readings to provided OSC bundle
+// Arguments: bndl (pointer to the bundle to be added to)
+//            packet_header_string (header string to send messages with)
+//            port (which port of the multiplexer the device is plugged into)
+// Return:    none
 void package_fxos8700(OSCBundle *bndl, char packet_header_string[], uint8_t port) {
 	char address_string[255];
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/fxos8700/data");
@@ -84,6 +91,11 @@ void package_fxos8700(OSCBundle *bndl, char packet_header_string[], uint8_t port
 }
 
 
+
+// --- MEASURE FXOS8700 ---
+// Gets the current sensor readings of the Fxas21002 and stores into its state struct
+// Arguments: none
+// Return:    none
 void measure_fxos8700() {
 	sensors_event_t aevent, mevent;
   state_fxos8700.inst_fxos8700.getEvent(&aevent, &mevent);
@@ -115,6 +127,13 @@ void measure_fxos8700() {
 	#endif 
 }
 
+
+
+// --- DETAILS FXOS8700 ---
+// With Loom debug enabled, allows for the printing of the FX0S8700 details to be 
+// printed to the Serial monitor
+// Arguments: none
+// Return:    none
 #if LOOM_DEBUG == 1
 	void details_fxos8700() {
 		sensor_t accel, mag;

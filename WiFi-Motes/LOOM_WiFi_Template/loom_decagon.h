@@ -1,9 +1,24 @@
+// ================================================================ 
+// ===                        LIBRARIES                         === 
+// ================================================================
 #include "SDI12.h"
 #include <string.h>
 
+
+// ================================================================ 
+// ===                       DEFINITIONS                        === 
+// ================================================================
 #define DATAPIN 11         // change to the proper pin
 #define SENSOR_ADDRESS "?" //"?" broadcasts message
 
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================ 
+
+
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
 SDI12 mySDI12(DATAPIN);
 
 String sdiResponse = "";
@@ -14,6 +29,23 @@ float dielec_p = 0;
 float temp = 0;
 float elec_c = 0;
 
+
+// ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
+void deca_gs3_setup();
+void measure_decagon();
+void package_decagon(OSCBundle * bndl, char packet_header_string[]);
+
+
+// ================================================================
+// ===                          SETUP                           ===
+// ================================================================
+
+// --- DECAOGN GS3 SETUP ---
+//
+// Arguments: 
+// Return:    none
 void deca_gs3_setup() {
   mySDI12.begin();
   delay(2000);
@@ -38,6 +70,17 @@ void deca_gs3_setup() {
   sdiResponse = "";           // clear the response string
 }
 
+
+
+// ================================================================ 
+// ===                        FUNCTIONS                         === 
+// ================================================================
+
+
+// --- MEASURE DECAGON ---
+//
+// Arguments: 
+// Return:    none
 void measure_decagon() {
 //first command to take a measurement
   myCommand = String(SENSOR_ADDRESS) + "M!";
@@ -96,6 +139,12 @@ void measure_decagon() {
   mySDI12.clearBuffer();
 }
 
+
+
+// --- PACKAGE DECAGON ---
+//
+// Arguments: 
+// Return:    none
 void package_decagon(OSCBundle * bndl, char packet_header_string[]) {
   char addressString[255];
   sprintf(addressString, "%s%s", packet_header_string, "/DielecPerm");
