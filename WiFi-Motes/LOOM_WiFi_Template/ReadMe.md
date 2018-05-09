@@ -4,7 +4,7 @@ This is the primary location of the Project LOOM code, consolidated into place w
 
 ## Max/MSP
 
-The associated Loom data processors and control modules are made as patches in Max/MSP
+The associated Loom data processors and control modules are made as patches in Max/MSP.
 
 ## Librarary Architecture
 
@@ -16,9 +16,10 @@ New sensors and actuator support can be added by filling out the loom_mod_templa
 
 ## Device Support
 
-**Adafruit Feather M0**
+- **Adafruit Feather M0**
 
-**Adafruit Feather 32u4**
+- **Adafruit Feather 32u4**
+
 
 ## Device Configuration
 
@@ -28,14 +29,12 @@ Currently changes to the config need to be done manually in the file itself. A s
 
 ## Channels
 
-The LOOM library and associated Max/MSP processors are designed to use channel based interfaces by default. Channel interfaces abstract device instance number, UDP port, and IP address into a single letter A, B, C ... H. 
+The LOOM library and associated Max/MSP processors are designed to use channel based interfaces by default. Channel interfaces abstract device instance number, UDP port, and IP address into a single letter A, B, C, … H. 
 
 ### Implementation
 A common port is used for the communication of device settings, in order to allow the Max patches to communicate with devices in a consistent manner if the instance number, UDP port, or IP address are unknown.
 
-**Common Port:** 
-
-9440 
+**Common Port:** 9440 
 
 **Device Unique Channnel Data:**
 
@@ -43,13 +42,15 @@ Channel A:	Instance # = 1		UDP Port = 9441
 Channel B:	Instance # = 2		UDP Port = 9442
 • • •
 
-**IP Address:** 
-
-Automatically assigned to devices by router. Max interfaces will automatically fetch IP address of selected device.
+**IP Address:** Automatically assigned to devices by router. Max interfaces will automatically fetch IP address of selected device.
 
 ### Additional Devices
 
-The Max interfaces presently support 8 concurrent channels, the library itself poses no restrictions and using the Expert Loom Max interfaces can allow control of more devices
+The Max interfaces presently support 8 concurrent channels, the library itself poses no such restrictions and using the Expert Loom Max interfaces can allow for the control of more devices
+
+## Glossary
+
+- **Patch:** a Max/MSP control interface or processor
 
 ## Troubleshooting
 
