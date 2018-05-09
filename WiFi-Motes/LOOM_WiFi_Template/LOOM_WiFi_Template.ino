@@ -82,11 +82,10 @@ void loop() {
 
 
   #if is_tca9548a == 1
-    ctr++;
-    if (ctr > 10){
-      update_sensors();
-      ctr = 0;
-    }
+    if (millis()-state_tca9548a.last_update_time < state_tca9548a.mux_update_period){
+			update_sensors();
+			state_tca9548a.last_update_time = millis();
+		}
     package_tca9548a(&send_bndl,configuration.packet_header_string);
     
     #if is_wifi == 1
