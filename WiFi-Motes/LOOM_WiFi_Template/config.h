@@ -1,17 +1,17 @@
 #define FAMILY "LOOM"     // Should always be "LOOM", you can change this if you are setting up your own network
-#define DEVICE "HubShield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
+#define DEVICE "MuxShield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
 #define INIT_INST 1
 
 
-#define REQUEST_SETTINGS 0
+#define REQUEST_SETTINGS 1
 
 //--OPTIONS--//
-#define LOOM_DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG 0   // Set to 1 if you want Serial statements from various functions to print
 
 #define is_ishield 0
 #define num_servos 0
 #define is_relay   0
-#define is_wifi    0
+#define is_wifi    1
 #define is_lora    0
 #define is_analog  0
 #define is_decagon 0
