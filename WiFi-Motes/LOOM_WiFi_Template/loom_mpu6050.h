@@ -13,6 +13,8 @@
 // ================================================================
 #define INTERRUPT_PIN 11
 
+#define i2c_addr_mpu6050 0x68													 //0x68, 0x69
+
 // Uncoment one or more of these to determine which readings and format to send
 #define OUTPUT_READABLE_YAWPITCHROLL
 //#define OUTPUT_BINARY_YAWPITCHROLL
@@ -76,13 +78,13 @@ int giro_deadzone = 1;   // Giro error allowed, make it lower to get more precis
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-void setup_mpu6050();
-uint32_t measure_mpu6050(void);
+bool setup_mpu6050();
+void measure_mpu6050();
 void meansensors();
 void calibration();
-void package_mpu6050(OSCBundle *bndl, char packet_header_string[]);
+void package_mpu6050(OSCBundle *, char[], uint8_t);
 void calMPU6050();
-void calMPU6050_OSC(OSCMessage &msg);
+void calMPU6050_OSC(OSCMessage &);
 
 
 // ================================================================ 
@@ -104,7 +106,7 @@ void dmpDataReady() {
 // Called by main setup
 // Arguments:
 // Return:
-void setup_mpu6050()
+bool setup_mpu6050()
 {
   #if LOOM_DEBUG == 1
     Serial.println("starting mpu6050 initialization");
@@ -125,7 +127,6 @@ void setup_mpu6050()
   #endif
   
   // *** Init MPU 6050 and serial stuff
-  #if is_mpu6050 == 1
     accelgyro.initialize();
     mpu.initialize();
     devStatus = mpu.dmpInitialize();
@@ -182,7 +183,7 @@ void setup_mpu6050()
         Serial.println(F(")"));
       #endif
     } // of else
-  #endif // end of is_mpu6050
+		return dmpReady;
 }
 
 
@@ -199,7 +200,7 @@ void setup_mpu6050()
 // Generic subroutine for reading MPU6050 i2c Data
 // Arguments:
 // Return:
-uint32_t measure_mpu6050(void)
+void measure_mpu6050(void)
 {
   // wait for MPU interrupt or extra packet(s) available
   while (!mpuInterrupt && fifoCount < packetSize) {
@@ -407,6 +408,7 @@ void calibration() {
 
     meansensors();
     #if LOOM_DEBUG == 1
+			
       Serial.println("...");
     #endif
 
@@ -427,7 +429,8 @@ void calibration() {
 
     if (abs(mean_gz) <= giro_deadzone) ready++;
     else config_mpu6050->gz_offset = config_mpu6050->gz_offset - mean_gz / (giro_deadzone + 1);
-
+		
+		
     if (ready == 6) break;
   }
 } // pf calibration
@@ -439,9 +442,10 @@ void calibration() {
 // 
 // Arguments:
 // Return:
-void package_mpu6050(OSCBundle *bndl, char packet_header_string[])
+void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
   char addressString[255];    // Declare address string buffer
+	sprintf(addressString, "%s%s%d%s", packet_header_string, "/port", port, "/tsl2591/data");
   // Format MPU6050 data into OSC
 
   // Messages want an OSC address as first argument

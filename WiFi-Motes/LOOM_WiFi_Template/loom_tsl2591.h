@@ -37,7 +37,7 @@ struct state_tsl2591_t  state_tsl2591;
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 bool setup_tsl2591();
-void package_data_tsl2591(OSCBundle *, char[]);
+void package_data_tsl2591(OSCBundle *, char[], uint8_t);
 void measure_tsl2591();
 void configure_tsl2591(uint8_t, uint8_t);
 #if LOOM_DEBUG == 1
