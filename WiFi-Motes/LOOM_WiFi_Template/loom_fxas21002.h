@@ -69,6 +69,14 @@ bool setup_fxas21002() {
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
+
+
+// --- PACKAGE FXAS21002 ---
+// Adds last read Fxas21002 sensor readings to provided OSC bundle
+// Arguments: bndl (pointer to the bundle to be added to)
+//            packet_header_string (header string to send messages with)
+//            port (which port of the multiplexer the device is plugged into)
+// Return:    none
 void package_fxas21002(OSCBundle *bndl, char packet_header_string[], uint8_t port) {
 	char address_string[255];
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/fxas21002/data");
@@ -82,6 +90,11 @@ void package_fxas21002(OSCBundle *bndl, char packet_header_string[], uint8_t por
 }
 
 
+
+// --- MEASURE FXAS21002 ---
+// Gets the current sensor readings of the Fxas21002 and stores into its state struct
+// Arguments: none
+// Return:    none
 void measure_fxas21002() {
 	/* Get a new sensor event */
   sensors_event_t event;
@@ -100,6 +113,12 @@ void measure_fxas21002() {
 }
 
 
+
+// --- DETAILS FXAS21002 ---
+// With Loom debug enabled, allows for the printing of the Fxas21002 details to be 
+// printed to the Serial monitor
+// Arguments: none
+// Return:    none
 #if LOOM_DEBUG == 1
 void details_fxas21002() {
 	sensor_t sensor;

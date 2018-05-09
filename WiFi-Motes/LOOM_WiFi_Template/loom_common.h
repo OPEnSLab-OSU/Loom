@@ -46,7 +46,9 @@ void set_instance_num(OSCMessage &msg)
                                         // Note that configuration needs to be saved for this to take effect
   #endif
 }
- 
+
+
+
 // --- MESSAGE ROUTER ---
 // Used to route OSC messages to the correct function to handle it
 // Arguments: msg (OSC message to route subroutine that handles it), 
@@ -94,11 +96,10 @@ void msg_router(OSCMessage &msg, int addrOffset) {
     msg.dispatch("/SetRequestSettings",set_request_settings,  addrOffset);
   #endif
 	
-
-	
   msg.dispatch("/SetID", set_instance_num, addrOffset);
   msg.dispatch("/SaveConfig", save_config, addrOffset);
 }
+
 
 
 #if is_wifi == 1
@@ -132,6 +133,7 @@ void msg_router(OSCMessage &msg, int addrOffset) {
 	}
 	#endif // of ifdef button
 #endif //is_wifi == 1
+
 
 
 // ================================================================
@@ -195,8 +197,14 @@ void LOOM_begin()
 
 
 
-
-
+// --- WIFI RECEIVE BUNDLE ---
+// Function that fills an OSC Bundle with packets from UDP
+// Routes messages to correct function via msg_router if message header string matches expected
+// Arguments: bndl (OSC bundle to be filled)
+//            packet_header_string (header string to route messages on)
+//            Udp (which WiFIUdp structure to read packets from
+//            port (which port the packet was received on, used mostly for debug prints)
+// Return:    none
 #if is_wifi == 1
 void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[], WiFiUDP *Udp, unsigned int port)
 {  
@@ -270,6 +278,12 @@ void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[], WiFiUDP *
 #endif // of if is_wifi == 1
 
 
+
+// --- LORA PROCESS BUNDLE ---
+// Updates device's identifying instance number
+// Arguments: bndl (pointer to the bundle to be processed)
+//            packet_header_string (header string to route messages on)
+// Return:    none
 void lora_process_bundle(OSCBundle *bndl, char packet_header_string[]) {
     if (!bndl->hasError()) {
       char addressString[255];
@@ -297,6 +311,11 @@ void lora_process_bundle(OSCBundle *bndl, char packet_header_string[]) {
 
 
 
+// --- LOOM SLEEP ---
+// Delay between iterations of the main loop
+// Needed to ensure that bundles are fully sent and received
+// Arguments: none
+// Return:    none
 #ifdef is_sleep_period
 void loop_sleep()
 {
@@ -309,6 +328,10 @@ void loop_sleep()
 #endif
 
 
+// --- SAVE CONFIG ---
+// Saves the current configuration to non-volatile memory
+// Arguments: msg (just header string routed from msg_router)
+// Return:    none
 void save_config(OSCMessage &msg) {
   #if LOOM_DEBUG == 1
     Serial.println("Saving Configuration Settings");

@@ -1,13 +1,4 @@
-/*
-  January 19, 2018. Author: Trevor Swope
-  This is the LOOM WiFi Mote template! Read this big 'ol comment for instructions on how to use the preprocessor statements in here to define the functionality of your board.
- 
-  LOOM_DEBUG MODE: define LOOM_DEBUG as 1 or 0. If LOOM_DEBUG is set, make sure the serial monitor is open; all serial calls should be wrapped in an #if LOOM_DEBUG == 1 ... #endif
 
-  
- */
-
- 
 // ================================================================ 
 // ===    INCLUDE DECLARATIONS, STRUCTS, AND FUNCTIONS FROM     === 
 // ===            OTHER FILES AS SET IN CONFIG.H                ===

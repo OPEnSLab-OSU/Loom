@@ -95,6 +95,14 @@ bool setup_zxgesturesensor() {
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
+
+
+// --- PACKAGE ZXGESTURESENSOR ---
+// Adds last read Zxgesturesensor readings to provided OSC bundle
+// Arguments: bndl (pointer to the bundle to be added to)
+//            packet_header_string (header string to send messages with)
+//            port (which port of the multiplexer the device is plugged into)
+// Return:    none
 void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8_t port){
 	char address_string[255];
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/zxgesturesensor/data");
@@ -108,6 +116,12 @@ void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8
 	bndl->add(msg);
 }
 
+
+
+// --- MEASURE ZXGESTURESENSOR ---
+// Gets the current sensor readings of the Zxgeesturesensor and stores into its state struct
+// Arguments: none
+// Return:    none
 void measure_zxgesturesensor() {
 	uint8_t x;
 	uint8_t z;
