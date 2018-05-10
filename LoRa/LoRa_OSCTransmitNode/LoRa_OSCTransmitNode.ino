@@ -26,7 +26,7 @@ RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
 RHReliableDatagram manager(rf95, CLIENT_ADDRESS);
 
-String sendString = String("IDstring,RTC_timeString,tempString,humidityString,loadCellString,lightIRString,lightFullString,vbatString");
+String stringTransmit = String("4,5,6,8,76,3402");//concates all strings into a big string
 
 void setup() {
   Serial.begin(9600);
