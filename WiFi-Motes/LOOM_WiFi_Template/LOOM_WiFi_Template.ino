@@ -82,8 +82,11 @@ void loop() {
 
 
   #if is_tca9548a == 1
-    if (millis()-state_tca9548a.last_update_time < state_tca9548a.mux_update_period){
+    if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
 			update_sensors();
+			#if LOOM_DEBUG == 1
+				Serial.println("Update MUXShield Sensorlist");
+			#endif
 			state_tca9548a.last_update_time = millis();
 		}
     package_tca9548a(&send_bndl,configuration.packet_header_string);
@@ -101,7 +104,7 @@ void loop() {
   #endif
   
 	// Update MPU6050 Data
-  #if is_mpu6050 == 1
+  #if is_ishield == 1 && is_mpu6050 == 1
     measure_mpu6050();      // Now measure MPU6050, update values in global registers 
     package_mpu6050(&send_bndl,configuration.packet_header_string);                // Build and send packet
     #if is_wifi == 1
