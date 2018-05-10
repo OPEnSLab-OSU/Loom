@@ -20,7 +20,6 @@ void setup() {
   LOOM_begin();           // LOOM_begin calls any relevant (based on config) LOOM device setup functions
 }
 
-int ctr;
 // ================================================================ 
 // ===                        MAIN LOOP                         ===
 // ================================================================ 
