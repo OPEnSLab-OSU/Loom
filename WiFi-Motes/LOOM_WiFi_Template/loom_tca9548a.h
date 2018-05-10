@@ -139,6 +139,15 @@ void get_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_strin
 		} 
 	}
 	#endif
+	// #ifdef i2c_addr_mpu6050
+	// if((i2c_addr == 0x68 || i2c_addr == 0x69)){
+		// if (setup_mpu6050()) {
+			// measure_mpu6050();
+      // package_mpu6050(bndl,packet_header_string,port);
+			// return;
+		// } 
+	// }
+	// #endif
 	#if LOOM_DEBUG == 1
     if (i2c_addr != 0x00) //sht31d hardware bug
 		Serial.println("This sensor is not currently supported by the Project LOOM sytem");
@@ -218,6 +227,10 @@ void get_sensors(OSCBundle *bndl, char packet_header_string[]) {
 		}
 		else if (i2c_addr == 0x70){
 			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/mb1232");
+			bndl->add(addressString);
+		}
+		else if (i2c_addr == 0x68 || i2c_addr == 0x69){
+			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/mpu6050");
 			bndl->add(addressString);
 		}
 		else if (i2c_addr != 0x00){

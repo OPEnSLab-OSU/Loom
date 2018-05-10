@@ -1,12 +1,12 @@
 #define FAMILY "LOOM"     // Should always be "LOOM", you can change this if you are setting up your own network
-#define DEVICE "StepperShield"  // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
+#define DEVICE "StepperShield" // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
 #define INIT_INST 1
 
 
 #define REQUEST_SETTINGS 1
 
 //--OPTIONS--//
-#define LOOM_DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG 0   // Set to 1 if you want Serial statements from various functions to print
 
 #define is_ishield 0
 #define num_servos 0

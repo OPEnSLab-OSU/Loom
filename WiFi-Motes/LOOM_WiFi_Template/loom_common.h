@@ -80,7 +80,7 @@ void msg_router(OSCMessage &msg, int addrOffset) {
   #if is_relay == 1
     msg.dispatch("/Relay/State",  handleRelay,    addrOffset);
   #endif
-  #if is_mpu6050 == 1
+  #if is_mpu6050 == 1 && is_ishield == 1
     msg.dispatch("/MPU6050/cal",  calMPU6050_OSC, addrOffset);
   #endif
   #if is_neopixel == 1
@@ -164,12 +164,11 @@ void LOOM_begin()
 	
 	#if is_tca9548a == 1
 		setup_tca9548a();
-    
 	#endif
   #if is_decagon == 1
     deca_gs3_setup(); //rename this
   #endif
-  #if is_mpu6050 > 0
+  #if is_mpu6050 > 0 && is_ishield == 1
     setup_mpu6050();
   #endif 
   #ifdef is_max31856
