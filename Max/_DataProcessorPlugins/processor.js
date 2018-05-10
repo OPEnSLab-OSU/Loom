@@ -33,19 +33,23 @@ function createBpatcher(file)
 	if(numtracks<=255)
 	{
 		switch (file) {
-			case "em.IshieldMonitor": 
+			case "em.IshieldMonitor_(Expert)": 
 				dimensions = ["250", "425"]; break;
-			case "em.relay":
-			case "em.servo": 
+			case "em.relay_(Expert)":
+			case "em.servo_(Expert)": 
 				dimensions = ["250", "200"]; break;
-			case "em.(simplified)servo": 
+			case "em.servo": 
 				dimensions = ["160", "140"]; break;
-			case "em.(simplified)relay": 
+			case "em.relay": 
 				dimensions = ["160", "125"]; break;
-			case "em.(simplified)neopixel": 
+			case "em.neopixel": 
 				dimensions = ["200", "160"]; break;
-			case "em.(simplified)IshieldMonitor": 
+			case "em.IshieldMonitor": 
 				dimensions = ["250", "230"]; break;
+			case "em.LOOM_Channel_Manager":
+				dimensions = ["325", "315"]; break;
+			case "em.LOOMin":
+				dimensions = ["200", "160"]; break;
 			default: 
 				dimensions = ["250", "150"]; break;
 		}
