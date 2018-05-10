@@ -74,6 +74,9 @@ void msg_router(OSCMessage &msg, int addrOffset) {
   #if num_servos > 0  
     msg.dispatch("/Servo/Set",    set_servo,      addrOffset);
   #endif
+  #if num_steppers > 0
+    msg.dispatch("/Stepper/Set",  handleStepper,  addrOffset);
+  #endif
   #if is_relay == 1
     msg.dispatch("/Relay/State",  handleRelay,    addrOffset);
   #endif
@@ -86,6 +89,7 @@ void msg_router(OSCMessage &msg, int addrOffset) {
 	#if is_lora == 1 && lora_device_type == 0
 		msg.dispatch("/SendToPB", 				sendToPushingBox, addrOffset);
 	#endif
+  
   #if is_wifi == 1
     msg.dispatch("/Connect/SSID",     set_ssid,     addrOffset);
     msg.dispatch("/Connect/Password", set_pass,     addrOffset);
@@ -176,6 +180,9 @@ void LOOM_begin()
   #endif
   #if num_servos > 0
     setup_servo();
+  #endif
+  #if num_steppers > 0
+    setup_stepper();
   #endif
   #if is_relay == 1
     setup_relay();

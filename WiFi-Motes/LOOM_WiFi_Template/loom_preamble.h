@@ -63,6 +63,9 @@ void write_non_volatile();
 #if num_servos > 0
   #include "loom_servo.h"
 #endif
+#if num_steppers > 0
+  #include "loom_stepper.h"
+#endif
 #if is_relay == 1
   #include "loom_relay.h"
 #endif
