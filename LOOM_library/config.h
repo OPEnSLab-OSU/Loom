@@ -1,23 +1,24 @@
 #define FAMILY "LOOM"     // Should always be "LOOM", you can change this if you are setting up your own network
-#define DEVICE "Ishield"  // The device name, should be an unbroken string with no slashes i.e. "RelayShield" or "Ishield"
-#define INIT_INST 5
+#define DEVICE "MuxShield" // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
+#define INIT_INST 1
 
 
 #define REQUEST_SETTINGS 1
 
 //--OPTIONS--//
-#define LOOM_DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
 
-#define is_ishield 1
+#define LOOM_DEBUG 1	  // Set to 1 if you want Serial statements from various functions to print
+
+#define is_ishield 0
 #define num_servos 0
 #define num_steppers 0
 #define is_relay   0
 #define is_wifi    1
 #define is_lora    0
-#define is_analog  2
+#define is_analog  0
 #define is_decagon 0
 //Multiplexer
-#define is_tca9548a 0
+#define is_tca9548a 1
 
 #if is_tca9548a == 1
 	#define UPDATE_PERIOD 5000 //milliseconds
@@ -40,7 +41,7 @@
 	#define is_mb1232 1
 
 	//Accelerometer / Gyroscope
-	#define is_mpu6050 0
+	#define is_mpu6050 1
 #endif
 
 #if is_ishield == 1
