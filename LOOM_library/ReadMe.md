@@ -51,7 +51,7 @@ Channel B:	Instance # = 2		UDP Port = 9442
 
 ### Additional Devices
 
-The Max interfaces presently support 8 concurrent channels, the library itself poses no such restrictions and using the Expert Loom Max interfaces can allow for the control of more devices
+The Max interfaces presently support 8 concurrent channels, the library itself poses no such restrictions and using custom Max interfaces can allow for the control of more devices.
 
 ## Arduino IDE Setup
 
