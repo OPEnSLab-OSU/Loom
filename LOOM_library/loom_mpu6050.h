@@ -82,6 +82,7 @@ bool setup_mpu6050();
 void measure_mpu6050();
 void meansensors();
 void calibration();
+void package_mpu6050(OSCBundle *, char[]);
 void package_mpu6050(OSCBundle *, char[], uint8_t);
 void calMPU6050();
 void calMPU6050_OSC(OSCMessage &);
@@ -437,6 +438,15 @@ void calibration() {
 
 
 
+// --- UPD MPU6050 ---
+// 
+// Arguments:
+// Return:
+void package_mpu6050(OSCBundle *bndl, char packet_header_string[])
+{
+  package_mpu6050(bndl, packet_header_string, NULL); 
+}
+
 
 // --- UPD MPU6050 ---
 // 
@@ -445,8 +455,12 @@ void calibration() {
 void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
   char addressString[255];    // Declare address string buffer
-	sprintf(addressString, "%s%s%d%s", packet_header_string, "/port", port, "/tsl2591/data");
-  // Format MPU6050 data into OSC
+	if (port != NULL) {
+		sprintf(addressString, "%s%s%d%s", packet_header_string, "/port", port, "/tsl2591/data");
+	}
+	else {
+		sprintf(addressString, "%s%s", packet_header_string, "/tsl2591/data");
+	}
 
   // Messages want an OSC address as first argument
   // Compile bundle
@@ -495,7 +509,6 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
   
   sprintf(addressString, "%s%s", packet_header_string, "/freefall");
   bndl->add(addressString).add(freefall);
-
 }
 
 
