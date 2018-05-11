@@ -84,8 +84,6 @@ void package_mb1232(OSCBundle *bndl, char packet_header_string[], uint8_t port) 
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/mb1232/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
-	msg.add("low").add((int32_t)state_mb1232.low);
-	msg.add("high").add((int32_t)state_mb1232.high);
 	msg.add("range").add((int32_t)state_mb1232.range);
 	
 	bndl->add(msg);
@@ -100,6 +98,10 @@ void measure_mb1232() {
 	
 	Wire.requestFrom(i2c_addr_mb1232, byte(2));
 	if(Wire.available() >= 2){
+		// The sensor communicates two bytes, each a range. The
+		// high byte is typically zero, in which case the low
+		// byte is equal to the range, so only the range is transmitted.
+		// The low byte will not be less than 20.
 		state_mb1232.high = Wire.read();
 		state_mb1232.low = Wire.read();
 		byte tmp = Wire.read();
