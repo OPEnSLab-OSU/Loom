@@ -492,11 +492,7 @@ void request_settings_from_Max()
   char addressString[255];
   sprintf(addressString, "%s%s", packet_header_string, "/RequestSettings");
 
-  bndl.add(addressString).add((int32_t)config_wifi->ip[0])
-                         .add((int32_t)config_wifi->ip[1])
-                         .add((int32_t)config_wifi->ip[2])
-                         .add((int32_t)config_wifi->ip[3]);
-
+  bndl.add(addressString);
   UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
   bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
   UdpCommon.endPacket();    // Mark the end of the OSC Packet
