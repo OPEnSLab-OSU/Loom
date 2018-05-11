@@ -44,6 +44,7 @@ void set_instance_num(OSCMessage &msg)
   #if is_wifi == 1
     configuration.config_wifi.request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
                                         // Note that configuration needs to be saved for this to take effect
+    respond_to_poll_request(configuration.packet_header_string);
   #endif
 }
 
@@ -191,8 +192,7 @@ void LOOM_begin()
 
   // Communication Platform specific setups
   #if is_wifi == 1
-    wifi_setup();
-    respond_to_poll_request(configuration.packet_header_string);
+    wifi_setup(configuration.packet_header_string);
   #endif
   #if is_lora == 1
     lora_setup(&rf95, &manager);

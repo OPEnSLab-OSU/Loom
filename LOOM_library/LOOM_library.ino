@@ -105,7 +105,7 @@ void loop() {
 	// Update MPU6050 Data
   #if is_ishield == 1 && is_mpu6050 == 1
     measure_mpu6050();      // Now measure MPU6050, update values in global registers 
-    package_mpu6050(&send_bndl,configuration.packet_header_string);                // Build and send packet
+    package_mpu6050(&send_bndl,configuration.packet_header_string, 0);                // Build and send packet
     #if is_wifi == 1
       wifi_send_bundle(&send_bndl);
     #endif

@@ -1,20 +1,20 @@
 #define FAMILY "LOOM"     // Should always be "LOOM", you can change this if you are setting up your own network
-#define DEVICE "StepperShield" // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
-#define INIT_INST 1
+#define DEVICE "Ishield"  // The device name, should be an unbroken string with no slashes i.e. "RelayShield" or "Ishield"
+#define INIT_INST 5
 
 
 #define REQUEST_SETTINGS 1
 
 //--OPTIONS--//
-#define LOOM_DEBUG 0   // Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG 1   // Set to 1 if you want Serial statements from various functions to print
 
-#define is_ishield 0
+#define is_ishield 1
 #define num_servos 0
-#define num_steppers 2
+#define num_steppers 0
 #define is_relay   0
 #define is_wifi    1
 #define is_lora    0
-#define is_analog  0
+#define is_analog  2
 #define is_decagon 0
 //Multiplexer
 #define is_tca9548a 0
@@ -60,7 +60,7 @@
   #define DEFAULT_NETWORK   "OPEnS"
   #define DEFAULT_PASSWORD  "arduino101"
   #define COMMON_PORT       9440
-  #define INIT_PORT         9441
+  #define INIT_PORT         9445
 #endif
 
 // LoRa Device Type
@@ -83,5 +83,5 @@
   
 #endif
 
-#define is_sleep_period 50          // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval
+#define is_sleep_period 80          // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval
 //#define is_sleep_interrupt 11       // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt

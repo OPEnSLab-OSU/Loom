@@ -63,7 +63,7 @@ int status = WL_IDLE_STATUS;
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-void wifi_setup();
+void wifi_setup(char packet_header_string[]);
 void printWiFiStatus();
 void start_AP();
 bool connect_to_WPA(char ssid[], char pass[]);
@@ -92,7 +92,7 @@ void respond_to_poll_request(char packet_header_string[]);
 // starts AP mode or tries to connect to existing network
 // Arguments: none
 // Return:    none
-void wifi_setup()
+void wifi_setup(char packet_header_string[])
 {
   // Configure pins for Adafruit ATWINC1500 Feather
   WiFi.setPins(8,7,4,2);      
@@ -121,6 +121,9 @@ void wifi_setup()
         // If set to request channel settings
         if (config_wifi->request_settings == 1) {
           request_settings_from_Max();
+        } 
+        else {
+          respond_to_poll_request(packet_header_string);
         }
       }
       else {
@@ -462,6 +465,8 @@ void set_port(OSCMessage &msg)
 
   config_wifi->request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
                                       // Note that configuration needs to be saved for this to take effect
+
+  //respond_to_poll_request(packet_header_string);
 }
 
 
@@ -492,7 +497,13 @@ void request_settings_from_Max()
   char addressString[255];
   sprintf(addressString, "%s%s", packet_header_string, "/RequestSettings");
 
-  bndl.add(addressString);
+  bndl.add(addressString)
+      .add((int32_t)config_wifi->ip[0])
+      .add((int32_t)config_wifi->ip[1])
+      .add((int32_t)config_wifi->ip[2])
+      .add((int32_t)config_wifi->ip[3]);
+
+  
   UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
   bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
   UdpCommon.endPacket();    // Mark the end of the OSC Packet
