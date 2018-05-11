@@ -1,20 +1,44 @@
+// ================================================================ 
+// ===                        LIBRARIES                         === 
+// ================================================================
 #include <Wire.h>
 #include <Adafruit_MotorShield.h>
 #include <Adafruit_PWMServoDriver.h>
 
+
+// ================================================================ 
+// ===                       DEFINITIONS                        === 
+// ================================================================
 #define num_steppers 2
 
+
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================
 struct state_stepper_t {
   Adafruit_MotorShield *AFMS;
   Adafruit_StepperMotor *myMotors[num_steppers];
   int rpms[num_steppers];
 };
 
+
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
 state_stepper_t state_stepper;
+
+
+// ================================================================ 
+// ===                   FUNCTION PROTOTYPES                    === 
+// ================================================================
 void setup_stepper();
 void handleStepper(OSCMessage &);
 void set_stepper_degree(int, int, int, int);
 
+
+// ================================================================
+// ===                          SETUP                           ===
+// ================================================================
 void setup_stepper(){
   state_stepper.AFMS = new Adafruit_MotorShield();
   for (int i = 0; i < num_steppers; i++){
@@ -29,6 +53,10 @@ void setup_stepper(){
   set_stepper_degree(1,0,60,50);
 }
 
+
+// ================================================================
+// ===                        FUNCTIONS                         ===
+// ================================================================
 void set_stepper_degree(int motor_choice, int stepper_direction, int degree, int stepper_speed){
   
   Serial.println("setting stepper...");
