@@ -1,46 +1,46 @@
 #define FAMILY "LOOM"     // Should always be "LOOM", you can change this if you are setting up your own network
-#define DEVICE "StepperShield" // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
+#define DEVICE "MuxShield" // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
 #define INIT_INST 1
 
 
 #define REQUEST_SETTINGS 1
 
 //--OPTIONS--//
-#define LOOM_DEBUG 0   // Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG 1	  // Set to 1 if you want Serial statements from various functions to print
 
 #define is_ishield 0
 #define num_servos 0
-#define num_steppers 2
+#define num_steppers 0
 #define is_relay   0
 #define is_wifi    1
 #define is_lora    0
 #define is_analog  0
 #define is_decagon 0
 //Multiplexer
-#define is_tca9548a 0
+#define is_tca9548a 1
 
 #if is_tca9548a == 1
 	#define UPDATE_PERIOD 5000 //milliseconds
 	//Lux Sensor
-	#define is_tsl2591 1
+	#define is_tsl2591 0
 
 	//Accelerometer / Magnetometer
-	#define is_fxos8700 1
+	#define is_fxos8700 0
 
 	//Gyroscope
-	#define is_fxas21002 1
+	#define is_fxas21002 0
 
 	//ZX_Distance Sensor
-	#define is_zxgesturesensor 1
+	#define is_zxgesturesensor 0
 
 	//Temperature / Humidity
 	#define is_sht31d 1
 
 	//Sonar
-	#define is_mb1232 1
+	#define is_mb1232 0
 
 	//Accelerometer / Gyroscope
-	#define is_mpu6050 0
+	#define is_mpu6050 1
 #endif
 
 #if is_ishield == 1

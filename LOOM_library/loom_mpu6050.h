@@ -11,7 +11,11 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define INTERRUPT_PIN 11
+#define use_interrupt 0
+
+#if use_interrupt == 1
+	#define INTERRUPT_PIN 11
+#endif
 
 #define i2c_addr_mpu6050 0x68													 //0x68, 0x69
 
@@ -41,12 +45,15 @@ void link_config_mpu6050(struct config_mpu6050_t *flash_setup_mpu6050){
 
 
 bool dmpReady = false; //set true if DMP init was successful
+bool is_calibrated = false;
 
 MPU6050 mpu;             // Create instance of MPU6050 called mpu
 MPU6050 accelgyro;       // Another instance called accelgyro
 
 
-uint8_t  mpuIntStatus;   // Holds actual interrupt status byte from MPU
+#if use_interrupt == 1
+	uint8_t  mpuIntStatus;   // Holds actual interrupt status byte from MPU
+#endif
 uint8_t  devStatus;      // Return status after each device operation (0 = success, !0 = error)
 uint16_t packetSize;     // Expected DMP packet size (default is 42 bytes)
 uint16_t fifoCount;      // Count of all bytes currently in FIFO
@@ -81,7 +88,7 @@ int giro_deadzone = 1;   // Giro error allowed, make it lower to get more precis
 bool setup_mpu6050();
 void measure_mpu6050();
 void meansensors();
-void calibration();
+void calibrate();
 void package_mpu6050(OSCBundle *, char[]);
 void package_mpu6050(OSCBundle *, char[], uint8_t);
 void calMPU6050();
@@ -92,11 +99,13 @@ void calMPU6050_OSC(OSCMessage &);
 // ===                          SETUP                           === 
 // ================================================================
 
-// INTERRUPT DETECTION ROUTINE 
-volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
-void dmpDataReady() {
-  mpuInterrupt = true;
-}
+#if use_interrupt == 1
+	// INTERRUPT DETECTION ROUTINE 
+	volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
+	void dmpDataReady() {
+		mpuInterrupt = true;
+	}
+#endif
 
 
 
@@ -121,7 +130,9 @@ bool setup_mpu6050()
     Fastwire::setup(400, true);
   #endif
   
-  pinMode(INTERRUPT_PIN, INPUT);
+	#if use_interrupt == 1
+		pinMode(INTERRUPT_PIN, INPUT);
+	#endif
   
   #if LOOM_DEBUG == 1
     Serial.println("Using i2c");
@@ -147,28 +158,38 @@ bool setup_mpu6050()
       
       mpu.setDMPEnabled(true);
 
-        // Uncomment following 2 lines if using enable Arduino Uno, MO, or Trinket interrupt detection
-      #if LOOM_DEBUG == 1
-        Serial.println(F("Enabling MPU interrupt detection (Arduino external interrupt 0)..."));
-      #endif
-      
-      attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), dmpDataReady, RISING);
+			
+			#if use_interrupt == 1
+				#if is_m0
+					// Uncomment following 2 lines if using enable Arduino Uno, MO, or Trinket interrupt detection
+					#if LOOM_DEBUG == 1
+						Serial.println(F("Enabling MPU interrupt detection (Arduino external interrupt 0)..."));
+					#endif
+					attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), dmpDataReady, RISING);
+				#endif //m0
 
-      // Uncomment following 2 lines if using Adafruit Feather 32u4
-      // enable interrupt for PCINT7...
-      #if LOOM_DEBUG == 1
-        //Serial.println(F("Enabling MPU interrupt detection PCINT 7 (pin 11)"));
-      #endif
-      
-      //pciSetup(INTERRUPT_PIN);
+				#if is_32u4
+					// Uncomment following 2 lines if using Adafruit Feather 32u4
+					// enable interrupt for PCINT7...
+					#if LOOM_DEBUG == 1
+						//Serial.println(F("Enabling MPU interrupt detection PCINT 7 (pin 11)"));
+					#endif
+					
+					//pciSetup(INTERRUPT_PIN);
+				#endif //32u4
         
-        mpuIntStatus = mpu.getIntStatus();
+				mpuIntStatus = mpu.getIntStatus();
+			 #endif //use_interrupt
 
       // Set our DMP Ready flag so the main loop() function knows it's okay to use it
       #if LOOM_DEBUG == 1
           Serial.println(F("DMP ready! Waiting for first interrupt..."));
       #endif
       dmpReady = true;
+			if(!is_calibrated) {
+				calMPU6050();
+				is_calibrated = true;
+			}
 
       // get expected DMP packet size for later comparison
       packetSize = mpu.dmpGetFIFOPacketSize();
@@ -203,36 +224,38 @@ bool setup_mpu6050()
 // Return:
 void measure_mpu6050(void)
 {
-  // wait for MPU interrupt or extra packet(s) available
-  while (!mpuInterrupt && fifoCount < packetSize) {
-    // other program behavior stuff here
-    // .
-    // if you are really paranoid you can frequently test in between other
-    // stuff to see if mpuInterrupt is true, and if so, "break;" from the
-    // while() loop to immediately process the MPU data
-    // .
-  }
-
   // Read raw accel/gyro measurements from device
   accelgyro.getMotion6(&ax, &ay, &az, &gy, &gx, &gz);
 
-  // Reset interrupt flag and get INT_STATUS byte
-  mpuInterrupt = false;
-  mpuIntStatus = mpu.getIntStatus();
+	#if use_interrupt == 1
+		// Reset interrupt flag and get INT_STATUS byte
+		mpuInterrupt = false;
+		mpuIntStatus = mpu.getIntStatus();
+	#endif
+  
 
   // Get current FIFO count
   fifoCount = mpu.getFIFOCount();
 
-  // Check for overflow (this should never happen unless our code is too inefficient)
-  if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
+	#if use_interrupt == 1
+		if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
+	#else
+		if (fifoCount == 1024) {
+	#endif
+		// Check for overflow (this should never happen unless our code is too inefficient)
     mpu.resetFIFO();      // Reset so we can continue cleanly
     
     #if LOOM_DEBUG == 1
-      Serial.println(F("FIFO overflow!"));    // NOTE: If you get this message, MPU6050 library, file "MPU6050_6Axis_MotionApps20.h" modify last byte of line 305 0x07 to 0x09
+      Serial.println(F("	!"));    // NOTE: If you get this message, MPU6050 library, file "MPU6050_6Axis_MotionApps20.h" modify last byte of line 305 0x07 to 0x09
     #endif
     
-    // Otherwise, check for DMP data ready interrupt (this should happen frequently)
-  } else if (mpuIntStatus & 0x02) {
+		
+	#if use_interrupt == 1	
+		// Otherwise, check for DMP data ready interrupt (this should happen frequently)
+		} else if (mpuIntStatus & 0x02) {
+	#else 
+		} else {
+	#endif
     // Wait for correct available data length, should be a VERY short wait
     while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
 
@@ -252,12 +275,12 @@ void measure_mpu6050(void)
       mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
       
       #if LOOM_DEBUG == 1
-  /*      Serial.print("ypr\t");
+					Serial.print("ypr\t");
           Serial.print(ypr[0] * 180/M_PI);
           Serial.print("\t");
           Serial.print(ypr[1] * 180/M_PI);
           Serial.print("\t");
-          Serial.println(ypr[2] * 180/M_PI); */
+          Serial.println(ypr[2] * 180/M_PI); 
       #endif
     #endif
     
@@ -307,14 +330,12 @@ void measure_mpu6050(void)
       mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
       
       #if LOOM_DEBUG == 1
-        /*
           Serial.print("aworld\t");
           Serial.print(aaWorld.x);
           Serial.print("\t");
           Serial.print(aaWorld.y);
           Serial.print("\t");
           Serial.println(aaWorld.z);
-        */
       #endif
     #endif
 
@@ -384,11 +405,11 @@ void meansensors()
 
 
 
-// --- CALIBRATION ---
+// --- calibrate ---
 // 
 // Arguments:
 // Return:
-void calibration() {
+void calibrate() {
   config_mpu6050->ax_offset = -mean_ax / 8;
   config_mpu6050->ay_offset = -mean_ay / 8;
   config_mpu6050->az_offset = (16384 - mean_az) / 8;
@@ -434,7 +455,7 @@ void calibration() {
 		
     if (ready == 6) break;
   }
-} // pf calibration
+} // pf calibrate
 
 
 
@@ -461,7 +482,8 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	else {
 		sprintf(addressString, "%s%s", packet_header_string, "/tsl2591/data");
 	}
-
+	
+	Serial.println(addressString);
   // Messages want an OSC address as first argument
   // Compile bundle
 
@@ -537,7 +559,7 @@ void calMPU6050()
     #if LOOM_DEBUG == 1
       Serial.println("\nCalculating offsets...");
     #endif
-    calibration();
+    calibrate();
     //configuration.checksum = memValidationValue;
     state++;
     delay(1000);
