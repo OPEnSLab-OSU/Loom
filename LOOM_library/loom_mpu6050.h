@@ -476,11 +476,6 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[])
 void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
   char addressString[255];    // Declare address string buffer
-<<<<<<< HEAD
-	sprintf(addressString, "%s%s%d%s", packet_header_string, "/port", port, "/mpu6050/data");
-  // Format MPU6050 data into OSC
-
-=======
 	if (port != NULL) {
 		sprintf(addressString, "%s%s%d%s", packet_header_string, "/port", port, "/tsl2591/data");
 	}
@@ -489,7 +484,6 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	}
 	
 	Serial.println(addressString);
->>>>>>> preamble
   // Messages want an OSC address as first argument
   // Compile bundle
 
