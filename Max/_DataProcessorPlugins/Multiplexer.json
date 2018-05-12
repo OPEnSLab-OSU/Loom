@@ -1,11 +1,11 @@
 {
 	"fxas21002" : 	{
 		"common_name" : "Gryoscope",
-		"fields" : [ "X", "Y", "Z" ],
+		"fields" : [ "gx", "gy", "gz" ],
 		"ranges" : 		{
-			"X" : "0 100",
-			"Y" : "1 100",
-			"Z" : "2 100"
+			"gx" : "-0.01 0.01",
+			"gy" : "-0.01 0.01",
+			"gz" : "-0.01 0.01"
 		}
 
 	}
@@ -14,12 +14,12 @@
 		"common_name" : "Accel/Magnetometer",
 		"fields" : [ "ax", "ay", "az", "mx", "my", "mz" ],
 		"ranges" : 		{
-			"ax" : "0 100",
-			"ay" : "0 100",
-			"az" : "0 100",
-			"mx" : "0 100",
-			"my" : "0 100",
-			"mz" : "0 100"
+			"ax" : "-20 20",
+			"ay" : "-20 20",
+			"az" : "-20 20",
+			"mx" : "-1200 1200",
+			"my" : "-1200 1200",
+			"mz" : "-1200 1200"
 		}
 
 	}
@@ -28,16 +28,15 @@
 		"common_name" : "Sonar",
 		"fields" : [ "high", "low", "range" ],
 		"ranges" : 		{
-			"high" : "0 100",
-			"low" : "0 100",
-			"range" : "0 100"
+			"range" : "0 800",
+			"low" : "0 800"
 		}
 
 	}
 ,
 	"sht31d" : 	{
 		"common_name" : "Temp/Humidity",
-		"fields" : [ "temp", "humidity" ],
+		"fields" : [ "temp", "humid" ],
 		"ranges" : 		{
 			"temp" : "0 100",
 			"humid" : "0 100"
@@ -49,11 +48,34 @@
 		"common_name" : "Lux",
 		"fields" : [ "vis", "ir", "full" ],
 		"ranges" : 		{
-			"vis" : "0 1000",
-			"ir" : "0 100",
-			"full" : "0 100"
+			"vis" : "0 10000",
+			"ir" : "0 10000",
+			"full" : "0 10000"
 		}
 
 	}
+,
+	"mpu6050" : 	{
+		"common_name" : "MPU 6050",
+		"fields" : ["roll", "pitch", "yaw", "accelX", "accelY", "accelZ", "gyroX", "gyroY", "gyroZ", "port0", "port1", "port2", "button", "vbat", "freefall"], 
+		"ranges" : {
+			"roll" : "-90. 90.",
+			"pitch" : "-90. 90.",
+			"yaw" : "-180. 180.",
+			"accelX" : "-1.2 1.2",
+			"accelY" : "-1.2 1.2",
+			"accelZ" : "-1.2 1.2",
+			"gyroX" : "-1.0 1.0",
+			"gyroY" : "-1.0 1.0",
+			"gyroZ" : "-1.0 1.0",
+			"port0" : "0. 1023.",
+			"port1" : "0. 1023.",
+			"port2" : "0. 1023.",
+			"button" : "0. 1.",
+			"vbat" : "0. 4.7",
+			"freefall" : "0. 1."
+		}
+	}
 
 }
+
