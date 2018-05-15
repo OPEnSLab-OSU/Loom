@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 1923.0, -6.0, 660.0, 753.0 ],
+		"rect" : [ 525.0, 78.0, 417.0, 788.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -46,7 +46,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 34.0, 89.197998, 152.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 34.0, 88.197998, 152.0, 20.0 ],
+					"presentation_rect" : [ 34.0, 85.197998, 152.0, 20.0 ],
 					"style" : "",
 					"text" : "<< Clear All in this session"
 				}
@@ -62,7 +62,8 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 137.0, 23.093994, 125.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 137.0, 22.093994, 125.0, 20.0 ],
+					"presentation_linecount" : 2,
+					"presentation_rect" : [ 144.0, 9.593994, 71.0, 33.0 ],
 					"style" : "",
 					"text" : "<< Choose a Process"
 				}
@@ -78,7 +79,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 34.0, 54.48999, 152.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 34.0, 53.48999, 152.0, 20.0 ],
+					"presentation_rect" : [ 34.0, 50.48999, 152.0, 20.0 ],
 					"style" : "",
 					"text" : "<< Clear Recent Track"
 				}
@@ -93,7 +94,7 @@
 					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 14.0, 89.197998, 20.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 14.0, 88.197998, 20.0, 20.0 ],
+					"presentation_rect" : [ 14.0, 85.197998, 20.0, 20.0 ],
 					"style" : ""
 				}
 
@@ -107,7 +108,7 @@
 					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 14.0, 54.48999, 20.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 14.0, 53.48999, 20.0, 20.0 ],
+					"presentation_rect" : [ 14.0, 50.48999, 20.0, 20.0 ],
 					"style" : ""
 				}
 
@@ -116,7 +117,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-4",
-					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.arduinoIn", ",", "em.emote", ",", "em.LOOMin", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.IshieldMonitor", ",", "em.(simplified)IshieldMonitor", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rangeSetter", ",", "em.rotaryDial", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.smooth", ",", "em.spring", ",", "em.threshold", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.neopixel", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.relay", ",", "em.servo", ",", "em.switchblade", ",", "em.(simplified)neopixel", ",", "em.(simplified)servo", ",", "em.(simplified)relay" ],
+					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.arduinoIn", ",", "em.Decagon", ",", "em.emote", ",", "em.MuxShieldMonitor", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.IshieldMonitor", ",", "em.LOOM_Channel_Manager", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rangeSetter", ",", "em.rotaryDial", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.smooth", ",", "em.spring", ",", "em.threshold", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.neopixel", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.relay", ",", "em.servo", ",", "em.stepper_motor", ",", "em.switchblade" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -126,7 +127,7 @@
 					"prefix" : "Macintosh HD:/Applications/Max6.1/Cycling '74/DataProcessorPlugins/",
 					"prefix_mode" : 2,
 					"presentation" : 1,
-					"presentation_rect" : [ 14.0, 22.093994, 124.5, 22.0 ],
+					"presentation_rect" : [ 14.0, 15.093994, 124.5, 22.0 ],
 					"style" : ""
 				}
 
@@ -158,7 +159,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 6.5, 5.593994, 255.5, 118.604004 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 6.5, 4.593994, 255.5, 116.604004 ],
+					"presentation_rect" : [ 0.0, 0.0, 220.0, 115.0 ],
 					"proportion" : 0.39,
 					"rounded" : 16,
 					"style" : ""
