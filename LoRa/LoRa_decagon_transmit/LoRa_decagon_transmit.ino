@@ -25,20 +25,27 @@
 #pragma message("Warning: 32u4 can only interface with one Decagon device on pin 10")
 #endif
 
-//#define DEBUG 1
+#define DEBUG 1
 #ifndef DEBUG
 #define DEBUG 0
 #endif
 
 //===== Decagon Initializations =====
 
+#ifdef is_M0
 #define SENSORCOUNT 6 //Determines how many pins you actually want to poll for sensors
-#define DATAPIN1 A0  // change to the proper pin
-#define DATAPIN2 A1
-#define DATAPIN3 A3
-#define DATAPIN4 A4
-#define DATAPIN5 A5
-#define DATAPIN6 10
+#endif //is_M0
+
+#ifdef is_32U4
+#define SENSORCOUNT 1
+#endif //is_32U4
+
+#define DATAPIN1 10  // change to the proper pin
+#define DATAPIN2 A0
+#define DATAPIN3 A1
+#define DATAPIN4 A3
+#define DATAPIN5 A4
+#define DATAPIN6 A5
 #define SENSOR_ADDRESS "?"
 
 //Declare 6 SDI-12 objects initialized with DATAPIN1-6
@@ -139,6 +146,7 @@ void setup() {
 #ifdef SDI12_EXTERNAL_PCINT
   pinMode(DATAPIN1, INPUT_PULLUP);
   enableInterrupt(DATAPIN1, SDI12::handleInterrupt, CHANGE);
+#ifndef is_32U4
   pinMode(DATAPIN2, INPUT_PULLUP);
   enableInterrupt(DATAPIN2, SDI12::handleInterrupt, CHANGE);
   pinMode(DATAPIN3, INPUT_PULLUP);
@@ -149,6 +157,7 @@ void setup() {
   enableInterrupt(DATAPIN5, SDI12::handleInterrupt, CHANGE);
   pinMode(DATAPIN6, INPUT_PULLUP);
   enableInterrupt(DATAPIN6, SDI12::handleInterrupt, CHANGE);
+#endif //not is_32U4
 #endif
 
   // RTC Setup
@@ -172,9 +181,9 @@ void loop() {
 #ifdef RTC3231
 
 #ifdef is_M0
-  attachInterrupt(digitalPinToInterrupt(wakeUpPin), wake, FALLING);
+  attachInterrupt(digitalPinToInterrupt(wakeUpPin), wake, LOW);
 
-  LowPower.idle(IDLE_2);
+  LowPower.standby();
 
 #endif //is_M0
 
@@ -193,11 +202,11 @@ void loop() {
   { 
 
 #ifdef is_M0
-    detachInterrupt(digitalPinToInterrupt(wakeUpPin));
+    //detachInterrupt(digitalPinToInterrupt(wakeUpPin));
 #endif //is_M0
 
 #ifdef is_32U4
-    disableInterrupt(wakeUpPin);
+    //disableInterrupt(wakeUpPin);
 #endif //is_32U4
 
     clearAlarmFunction(); // Clear RTC Alarm

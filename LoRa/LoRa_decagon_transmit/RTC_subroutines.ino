@@ -75,6 +75,13 @@ void clearAlarmFunction()
 void wake()
 {
   TakeSampleFlag = true;
+#ifdef is_M0
+  detachInterrupt(digitalPinToInterrupt(wakeUpPin));
+#endif //is_M0
+
+#ifdef is_32U4
+  disableInterrupt(wakeUpPin);
+#endif //is_32U4
 }
 
 
