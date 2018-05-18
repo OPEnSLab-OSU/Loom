@@ -1,24 +1,24 @@
 #define FAMILY "LOOM"     // Should always be "LOOM", you can change this if you are setting up your own network
-#define DEVICE "MuxShield" // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
-#define INIT_INST 1
+#define DEVICE "Ishield" // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
+#define INIT_INST 3
 
 
-#define REQUEST_SETTINGS 1
+#define REQUEST_SETTINGS 0
 
 //--OPTIONS--//
 
-#define LOOM_DEBUG 1	  // Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG 0	  // Set to 1 if you want Serial statements from various functions to print
 
-#define is_ishield 0
+#define is_ishield 1
 #define num_servos 0
 #define num_steppers 0
 #define is_relay   0
 #define is_wifi    1
 #define is_lora    0
-#define is_analog  0
+#define is_analog  2
 #define is_decagon 0
 //Multiplexer
-#define is_tca9548a 1
+#define is_tca9548a 0
 
 #if is_tca9548a == 1
 	#define UPDATE_PERIOD 5000 //milliseconds
@@ -49,6 +49,8 @@
 
   #define is_mpu6050  1
 
+//  #define button 10
+
   #if is_neopixel == 1
     #define NEO_0 false
     #define NEO_1 false
@@ -61,7 +63,7 @@
   #define DEFAULT_NETWORK   "OPEnS"
   #define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"
   #define COMMON_PORT       9440
-  #define INIT_PORT         9445
+  #define INIT_PORT         9443
 #endif
 
 // LoRa Device Type
