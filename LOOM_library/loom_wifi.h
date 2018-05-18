@@ -135,6 +135,9 @@ void wifi_setup(char packet_header_string[])
       break;
   }
   config_wifi->ip = WiFi.localIP();
+	#if LOOM_DEBUG == 1
+		Serial.println("Finished setting up WiFi.");
+	#endif
 }
 
 

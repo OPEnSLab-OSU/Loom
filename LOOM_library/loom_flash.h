@@ -137,6 +137,9 @@ void flash_config_setup()
           Serial.println("Writing to flash for the first time.");
         #endif
         write_non_volatile();
+				#if LOOM_DEBUG == 1
+          Serial.println("Done writing to flash.");
+        #endif
                                                               // Flash memory has limited writes and we don't want to waste it on unnecessary tests
     } // of if (configuration.checksum != memValidationValue)
     #endif //of MEM_TYPE
