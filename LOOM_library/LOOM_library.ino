@@ -40,7 +40,7 @@ void loop() {
 		#elif lora_device_type == 2
       //TODO: repeater functionality here
     #endif
-  #endif
+  #endif //is_lora
 
   #if is_wifi == 1
     // Handle wifi bundle if it exists
@@ -50,7 +50,9 @@ void loop() {
     // Compare the previous status to the current status
     wifi_check_status();
   #endif
+	
   #if is_lora == 1
+		//Receive LoRa Bundles
   #endif
 
     
@@ -100,7 +102,7 @@ void loop() {
       lora_send_bundle(&send_bndl);
     #endif
     send_bndl.empty();
-  #endif
+  #endif //is_tca9548a
   
 	// Update MPU6050 Data
   #if is_ishield == 1 && is_mpu6050 == 1
@@ -114,7 +116,8 @@ void loop() {
     #endif
     send_bndl.empty();      // Empty the bundle to free room for a new one
     mpu.resetFIFO();        // Flush MPU6050 FIFO to avoid overflows if using i2c
-  #endif
+  #endif //is_ishield && is_mpu6050
+	
   #if is_max31856 == 1
     measure_max31856();
     package_max31856(&send_bndl,configuration.packet_header_string);
