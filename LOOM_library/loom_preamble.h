@@ -31,9 +31,9 @@
   #define is_32u4
   #define MEM_TYPE MEM_EEPROM
 #endif
-
-#define button 10               // Using on-board button, specify attached pin, transmitting
-
+#ifndef is_relay
+  #define button 10               // Using on-board button, specify attached pin, transmitting
+#endif
 #ifdef is_sleep_period
   #include <Adafruit_SleepyDog.h> // This must be included if you are transmitting at timed intervals
 #endif

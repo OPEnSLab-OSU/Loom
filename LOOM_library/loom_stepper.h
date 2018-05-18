@@ -57,14 +57,14 @@ void setup_stepper(){
 // ================================================================
 // ===                        FUNCTIONS                         ===
 // ================================================================
-void set_stepper_degree(int motor_choice, int stepper_direction, int degree, int stepper_speed){
+void set_stepper_degree(int motor_choice, int stepper_direction, int steps, int stepper_speed){
   
   Serial.println("setting stepper...");
-  int set_degree = map(degree,0,360,0,200);
+  //int set_degree = map(degree,0,360,0,200);
   if (stepper_speed > 0){
     state_stepper.myMotors[motor_choice]->setSpeed(stepper_speed);
   }
-  state_stepper.myMotors[motor_choice]->step(set_degree,stepper_direction == 0 ? FORWARD : BACKWARD,SINGLE);
+  state_stepper.myMotors[motor_choice]->step(steps,stepper_direction == 0 ? FORWARD : BACKWARD,SINGLE);
   yield();
 }
   
