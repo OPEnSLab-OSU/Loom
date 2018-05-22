@@ -26,7 +26,7 @@ RF24Network network(radio);      // Network uses that radio
 const uint16_t this_node = 01;    // Address of our node in Octal format ( 04,031, etc)
 const uint16_t other_node = 00;   // Address of the other node in Octal format
 
-char message[121];
+char message[300];
 
 void setup(void)
 {
@@ -46,22 +46,21 @@ void loop(void){
   while ( network.available() ) {     // Is there anything ready for us?
     
     RF24NetworkHeader header;        // If so, grab it and print it out
-    memset(message, '\0', 121);
-    network.read(header,&message,120);
+    memset(message, '\0', 300);
+    network.read(header,&message,299);
  /*   Serial.print("Received packet #");
     Serial.print(payload.counter);
     Serial.print(" at ");
     Serial.println(payload.ms);
     Serial.print("Message: ");
     Serial.print(payload.message); */
-    //Serial.print("Message: ");
-    //Serial.println(message);
+    Serial.print("Message size: ");
+    Serial.println(strlen(message));
 
     OSCBundle bndl;
     get_OSC_bundle(message, &bndl);
 
-    bndl.send(Serial);
-    Serial.println("");
+    print_bundle(&bndl);
   }
 }
 
