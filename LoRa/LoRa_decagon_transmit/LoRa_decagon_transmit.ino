@@ -102,7 +102,7 @@ float measuredvbat;
 // Singleton instance of the radio driver
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
-RHReliableDatagram manager(rf95, INSTANCE_NUM + 10);
+RHReliableDatagram manager(rf95, INSTANCE_NUM + 10); //LoRa device addresses currently based on instance numbers
 
 // ===== RTC Initializations =====
 
@@ -177,37 +177,10 @@ void setup() {
 }
 
 void loop() {
-  rf95.sleep();
-#ifdef RTC3231
-
-#ifdef is_M0
-  attachInterrupt(digitalPinToInterrupt(wakeUpPin), wake, LOW);
-
-  LowPower.standby();
-
-#endif //is_M0
-
-#ifdef is_32U4
-  pinMode(wakeUpPin, INPUT_PULLUP);
-  enableInterrupt(wakeUpPin, wake, FALLING);
-  
-  LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
-  
-#endif //is_32U4
-
-#endif //RTC3231
 
 #ifdef RTC3231
   if(TakeSampleFlag)
   { 
-
-#ifdef is_M0
-    //detachInterrupt(digitalPinToInterrupt(wakeUpPin));
-#endif //is_M0
-
-#ifdef is_32U4
-    //disableInterrupt(wakeUpPin);
-#endif //is_32U4
 
     clearAlarmFunction(); // Clear RTC Alarm
     
@@ -293,6 +266,28 @@ void loop() {
   delay(75);  // delay so serial stuff has time to print out all the way
   TakeSampleFlag = false; // Clear Sample Flag
   }
+#endif //RTC3231
+
+// Sleep Functionality
+
+  rf95.sleep(); //Sleeps the radio
+#ifdef RTC3231
+
+#ifdef is_M0
+  attachInterrupt(digitalPinToInterrupt(wakeUpPin), wake, LOW);
+
+  LowPower.standby();
+
+#endif //is_M0
+
+#ifdef is_32U4
+  pinMode(wakeUpPin, INPUT_PULLUP);
+  enableInterrupt(wakeUpPin, wake, FALLING);
+  
+  LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
+  
+#endif //is_32U4
+
 #endif //RTC3231
 
 }
