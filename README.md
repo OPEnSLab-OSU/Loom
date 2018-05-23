@@ -7,6 +7,8 @@
 1. [Wireless Capabilities](#wireless-capabilities)
     1. [WiFi](#wifi)
     2. [LoRa](#lora)
+        1. [LoRa Dependencies](#lora-dependencies)
+        2. [EnableInterrupt.h and RH\_RF95.h compatibility](#enableinterrupt.h-and-rh_rf95h-compatibility)
     3. [nRF](#nRF)
 2. [Sensors](#sensors)
     1. [I2C Sensors](#i2c-sensors)
@@ -24,13 +26,65 @@
 
 ### Adafruit Feather M0
 
+Resources:
+* [Adafruit M0 Documentation](https://learn.adafruit.com/adafruit-feather-m0-basic-proto/overview)
+* [ATSAMD21 Datasheet](https://cdn-shop.adafruit.com/product-files/2772/atmel-42181-sam-d21_datasheet.pdf)
+
+The compiler macro `__SAMD21G18A__` can be used to define code blocks specifically for the Feather M0.
+For readability, we typically use this macro to define our own, more readable preprocessor
+definition `is_M0`.  This can be done by including the following lines in your source code:
+
+``` cpp
+#ifdef __SAMD21G18A__
+#define is_M0
+#endif
+```
+
 ### Adafruit Feather 32u4
+
+Resources:
+* [Adafruit 32u4 Documentation](https://learn.adafruit.com/adafruit-feather-32u4-basic-proto?view=all)
+* [ATMega32U4 Datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf)
+
+The compiler macro `__AVR_ATmega32U4__` can be used to define code blocks specifically for the Feather 32u4.
+For readability, we typically use this macro to define our own, more readable preprocessor
+definition `is_32U4`.  This can be done by including the following lines in your source code:
+
+``` cpp
+#ifdef __AVR_ATmega32U4__
+#define is_32U4
+#endif
+```
 
 ## Wireless Capabilities
 
 ### WiFi
 
 ### LoRa
+
+LoRa wireless communication is supported by both the Adafruit Feather M0 and the
+Adafruit Feather 32u4.
+
+Features:
+* Send messages up to 2 km line-of-sight.
+* LoRa devices can be addressed with any value between 0 and 255.
+* Can send messages of length up to 251 bytes.
+
+#### LoRa Dependencies
+All LoRa modules used by Project Loom are provided by the 
+[RadioHead library](https://github.com/adafruit/RadioHead). This library
+provides both the radio drivers (i.e. `RH_RF95.h`) and a network manager
+(i.e. `RHReliableDatagram.h`).
+
+#### EnableInterrupt.h and RH\_RF95.h compatibility
+
+EnableInterrupt.h and RH\_RF95.h both try to define the same interrupt vectors.
+To use both of these libraries in the same file, include the following definition
+in your source code:
+
+``` cpp
+#define EI_NOTEXTERNAL
+```
 
 ### nRF
 
@@ -39,6 +93,10 @@
 ### I2C Sensors
 
 ### SDI-12 Sensors
+
+The following SDI-12 sensors are currently supported by Project Loom:
+* [Decagon GS3](http://manuals.decagon.com/Integration%20Guides/GS3%20Integrators%20Guide.pdf)
+* [Decagon 5TM](http://www.ictinternational.com/content/uploads/2014/03/5TM-Integrators-Guide.pdf)
 
 #### SDI-12 Dependencies
 * [Enable Interrupt](https://github.com/GreyGnome/EnableInterrupt)

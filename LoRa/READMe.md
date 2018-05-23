@@ -36,7 +36,7 @@ the file SDI12.h must be uncommented so that external interrupts can be defined:
 ### EnableInterrupt.h and RH\_RF95.h compatibility
 
 EnableInterrupt.h and RH\_RF95.h both try to define the same interrupt vectors.
-To use both of these libraries in the same file, included the following definition
+To use both of these libraries in the same file, include the following definition
 in your source code:
 
 ``` cpp
