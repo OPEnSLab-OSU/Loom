@@ -8,8 +8,10 @@
     1. [WiFi](#wifi)
     2. [LoRa](#lora)
         1. [LoRa Dependencies](#lora-dependencies)
-        2. [EnableInterrupt.h and RH\_RF95.h compatibility](#enableinterrupt.h-and-rh_rf95h-compatibility)
+        2. [EnableInterrupt.h and RH\_RF95.h compatibility](#enableinterrupth-and-rhrf95h-compatibility)
     3. [nRF](#nRF)
+        1. [nRF Dependencies](#nrf-dependencies)
+        2. [Configuring Maximum Message Length](#configuring-maximum-message-length)
 2. [Sensors](#sensors)
     1. [I2C Sensors](#i2c-sensors)
     2. [SDI-12 Sensors](#sdi-12-sensors)
@@ -71,6 +73,7 @@ Features:
 * Can send messages of length up to 251 bytes.
 
 #### LoRa Dependencies
+
 All LoRa modules used by Project Loom are provided by the 
 [RadioHead library](https://github.com/adafruit/RadioHead). This library
 provides both the radio drivers (i.e. `RH_RF95.h`) and a network manager
@@ -87,6 +90,24 @@ in your source code:
 ```
 
 ### nRF
+
+The nRF flavor of IoA is comprised with the Nordic nRF24L01+ radio tranceiver.
+nRF is supported by both the Adafruit Feather M0 and the Adafruit Feather 32u4.
+
+Features:
+* nRF devices can be addressed with any value between 0 and 7.
+* Fragmentation allows for messages of any length to be sent with some configuration.
+* Multi-hopping is supported.
+
+#### nRF Dependencies
+
+* [RF24](https://github.com/nRF24/RF24)
+* [RF24Network](https://github.com/nRF24/RF24Network)
+
+#### Configuring Maximum Message Length
+
+The maximum message length can be adjusted by editing the value of `MAIN_BUFFER_SIZE`,
+a variable found in the `RF24Network_config.h` file.
 
 ## Sensors
 
@@ -174,3 +195,17 @@ float Adafruit_MAX31856::readVoltage(int gain) {
 ### RTC and Low Power Functionality
 
 ### OSC Interpreter
+
+Open Sound Control (OSC) is the transmission protocol used by Project Loom.  The
+Arduino OSC implementation, along with more information about OSC,
+can be found [here](https://github.com/CNMAT/OSC).  
+
+While OSC Bundles can be sent directly using WiFi, bundles must be reencoded to
+transmit them via LoRa or nRF.  The OSC Interpreter allows OSC Bundles to be
+translated into strings and allows strings to be translated back into OSC Bundles.
+Each message address, along with corresponding data values, are concatenated into
+a comma delimited string, and all messages in the bundle are concatenated into a
+space delimited string.  Individual data values are encoded as 32-bit unsigned longs.
+The following shows how the supported data values (i.e. float, int32\_t, and strings):
+
+
