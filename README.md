@@ -14,6 +14,7 @@
         1. [SDI-12 Dependencies](#sdi-12-dependencies)
         2. [Supported SDI-12 Pins](#supported-sdi-12-pins)
     3. [SPI Sensors](#spi-sensors)
+        1. [Adafruit Universal Thermocouple Amplifier](#adafruit-universal-thermocouple-amplifier)
 3. [Actuators](#actuators)
 4. [Miscellaneous Functionality](#miscellaneous-functionality)
     1. [RTC and Low Power Functionality](#rtc-and-low-power-functionality)
@@ -69,6 +70,44 @@ enableInterrupt(10, handler_function, CHANGE);
 ```
 
 ### SPI Sensors
+
+#### Adafruit Universal Thermocouple Amplifier
+
+Project Loom currently supports operation of the Adafruit MAX31856 Universal
+Thermocouple Amplifier in both K-type thermocouple operation and generic voltage
+operation.  K-type thermocouple operation allows the user to directly measure
+temperatures, when the amplifier is used in conjunction with a K-type thermocouple,
+and the generic voltage operation allows the user to measure the voltage across any
+thermocouple attached to the amplifier.
+
+Dependencies and Documentation:
+* [Adafruit MAX31856 Github](https://github.com/adafruit/Adafruit_MAX31856)
+* [Adafruit MAX31856 Overview](https://learn.adafruit.com/adafruit-max31856-thermocouple-amplifier/overview)
+
+**IMPORTANT NOTE:** The Adafruit thermocouple library has been modified to include functionality
+to read the thermocouple voltage directly.  The modified library can be found
+[here](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/Dependencies/Adafruit_MAX31856.zip).
+
+Alternatively, the following function can be added as a public member to the Adafruit\_MAX31856
+class in the Adafruit\_MAX31856 library:
+
+``` cpp
+float Adafruit_MAX31856::readVoltage(int gain) {
+  oneShotTemperature();
+
+  int32_t temp24 = readRegister24(MAX31856_LTCBH_REG);
+  if (temp24 & 0x800000) {
+    temp24 |= 0xFF000000;
+  }
+
+  temp24 >>= 5;
+
+  float tempfloat = temp24/((float)(gain * 209715.2)); //temp24 = gain * 1.6 * 2^17 * vin
+  
+  return tempfloat;
+}
+
+```
 
 ## Actuators
 
