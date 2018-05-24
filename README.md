@@ -22,6 +22,8 @@
 3. [Actuators](#actuators)
 4. [Miscellaneous Functionality](#miscellaneous-functionality)
     1. [RTC and Low Power Functionality](#rtc-and-low-power-functionality)
+        1. [RTC and Low Power Dependencies](#rtc-and-low-power-dependencies)
+        2. [Standby Operation](#standby-operation)
     2. [OSC Interpreter](#osc-interpreter)
 
 ## Processors
@@ -182,7 +184,7 @@ float Adafruit_MAX31856::readVoltage(int gain) {
   temp24 >>= 5;
 
   float tempfloat = temp24/((float)(gain * 209715.2)); //temp24 = gain * 1.6 * 2^17 * vin
-  
+
   return tempfloat;
 }
 
@@ -194,6 +196,61 @@ float Adafruit_MAX31856::readVoltage(int gain) {
 
 ### RTC and Low Power Functionality
 
+Project Loom currently supports sleep functionality for both the Adafruit Feather M0 and
+the Adafruit Feather 32u4.  The RTC used to wake both the M0 and the 32u4 is the 
+[Adafruit DS3231 Precision RTC Breakout](https://learn.adafruit.com/adafruit-ds3231-precision-rtc-breakout/).
+
+#### RTC and Low Power Dependencies
+
+* [DS3231 Extended Library](https://github.com/FabioCuomo/FabioCuomo-DS3231)
+* [Low Power Library](https://github.com/rocketscream/Low-Power)
+* [Enable Interrupt](https://github.com/GreyGnome/EnableInterrupt)
+
+#### Sleep Modes
+
+Project Loom supports two sleep modes for the Feather M0 and one sleep mode for the Feather 32u4.
+Here are some details on the various modes:
+
+| Mode           | Supported board      | Current Draw           |
+| -------------- | -------------------- | ---------------------- |
+| Idle\_2        | Feather M0           | ~5 mA                  |
+| Standby        | Feather M0           | ~0.7 mA                |
+| SLEEP\_FOREVER | Feather 32U4         | Untested               |
+
+#### Standby Operation
+
+Due to some incompatibilities between Standby mode and falling interrupts, a very particular
+scheme must be followed to use Standby mode on the Feather M0.  The following code is an
+example of how standby mode can be set up on the M0 with a wakeup interrupt on pin 11:
+
+``` cpp
+void setup() {
+    pinMode(11, INPUT_PULLUP);
+    bool OperationFlag = false;
+    delay(10000); //It's important to leave a delay so the board can more easily
+                  //be reprogrammed
+}
+
+void loop() {
+    if (OperationFlag) {
+
+        // Whatever you want the board to do while awake goes here
+
+        OperationFlag = false; //reset the flag
+    }
+
+    attachInterrupt(digitalPinToInterrupt(11), wake, LOW);
+
+    LowPower.standby();
+}
+
+void wake() {
+    OperationFlag = true;
+    detachInterrupt(digitalPinToInterrupt(11)); //detach the interrupt in the ISR so that
+                                                //multiple ISRs are not called
+}
+```
+
 ### OSC Interpreter
 
 Open Sound Control (OSC) is the transmission protocol used by Project Loom.  The
@@ -203,9 +260,36 @@ can be found [here](https://github.com/CNMAT/OSC).
 While OSC Bundles can be sent directly using WiFi, bundles must be reencoded to
 transmit them via LoRa or nRF.  The OSC Interpreter allows OSC Bundles to be
 translated into strings and allows strings to be translated back into OSC Bundles.
-Each message address, along with corresponding data values, are concatenated into
-a comma delimited string, and all messages in the bundle are concatenated into a
-space delimited string.  Individual data values are encoded as 32-bit unsigned longs.
-The following shows how the supported data values (i.e. float, int32\_t, and strings):
+Bundles are encoded by taking each message address, along with corresponding data 
+values, are concatenated into a comma delimited string, and all messages in the 
+bundle are concatenated into a space delimited string.  
 
+Currently, only three data values are supported by the interpreter: int32\_t, 
+float, and C strings.  The following shows how the supported data values are 
+encoded:
 
+| Type        | Encoding                         | Example Input  | Example Encoding  |
+|:-----------:|:--------------------------------:|:--------------:|:-----------------:|
+| int32\_t    | 'i' + raw bits to unsigned long  | 12001          | i12001            |
+| float       | 'f' + raw bits to unsigned long  | 6.0            | f1086324736       |
+| c string    | 's' + string                     | Hello          | sHello            |
+
+Let's look at an example of how an entire bundle is encoded.  Here is the original bundle:
+
+```
+OSCBundle
+    Message 1 Address: '/LOOM/D1'
+        Data 1: (float) 6.0
+        Data 2: (int32_t) 84
+    Message 2 Address: '/LOOM/D2'
+        Data 1: (c string) 'temp'
+```
+
+Here is what that same bundle looks like when encoded with the interpreter:
+
+```
+'/LOOM/D1,f1086324736,i84 /LOOM/D2,stemp'
+```
+
+**NOTE:** The OSC Interpreter does not currently support the encoding of OSCBundles which
+contain spaces or commas in either message addresses or string data values.
