@@ -1,5 +1,24 @@
 # Project LOOM: Library
 
+## Table of Contents
+1. [Device Support](#device-support)
+    1. [Adafruit Feather M0](#adafruit-feather-m0)
+    2. [Adafruit Feather 32u4](#adafruit-feather-32u4)
+2. [Wireless Capabilities](#wireless-capabilities)
+3. [Max/MSP](#max/msp)
+4. [Library Architecture](#library-architecture)
+    1. [Adding to the Library](#adding-to-the-library)
+5.  [Channels](#channels)
+    1.  [Implementation](#implementation)
+    2. [Additional Devices](#additional-devices)
+6. [Configuration File](#configuration-file)
+7. [Arduino IDE Setup](#arduino-ide-setup)
+8. [Glossary](#glossary)
+9. [Troubleshooting](#troubleshooting)
+10. [Other](#other)
+
+
+
 This is the primary location of the Project LOOM code, consolidated into place with a single Arduino .ino sketch built with code selected by the preprocessor based on the configuration file. 
 
 ## Device Support
@@ -20,7 +39,7 @@ Currently changes to the config need to be done manually in the file itself. A s
 
 ## Max/MSP
 
-The associated Loom data processors and control modules are made as patches in Max/MSP.
+The associated [Loom Data Processors](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Max) and control modules are made as patches in Max/MSP.
 
 ## Librarary Architecture
 
@@ -28,7 +47,7 @@ The LOOM Library is the answer to the growing set of code to drive Project LOOM'
 
 ### Adding to the Library
 
-New sensors and actuator support can be added by filling out the loom_mod_template.h file with relevant code. This template ensures that the code for each piece of hardware conforms to a standard format, making it easier to read and understand.
+New sensor and actuator support can be added by filling out the loom_mod_template.h file with relevant code. This template ensures that the code for each piece of hardware conforms to a standard format, making it easier to read and understand.
 
 ## Channels
 
@@ -52,6 +71,10 @@ Channel B:	Instance # = 2		UDP Port = 9442
 ### Additional Devices
 
 The Max interfaces presently support 8 concurrent channels, the library itself poses no such restrictions and using custom Max interfaces can allow for the control of more devices.
+
+## Configuration File
+
+
 
 ## Arduino IDE Setup
 
