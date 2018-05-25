@@ -49,6 +49,11 @@ void package_mb1232(OSCBundle *bndl, char packet_header_string[], uint8_t port);
 // ================================================================ 
 // ===                          SETUP                           === 
 // ================================================================
+//
+// Runs any MB1232 setup
+//
+// @return  Whether or not sensor initialization was successful
+//
 bool setup_mb1232() {
 	bool is_setup;
 	
@@ -79,6 +84,15 @@ bool setup_mb1232() {
 // ===                        FUNCTIONS                         === 
 // ================================================================
 
+
+// --- PACKAGE MB1232 ---
+//
+// Adds OSC Message of last read MB1232 sensor readings to provided OSC bundle
+//
+// @param bndl                  The OSC bundle to be added to
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+// @param port                  Which port of the multiplexer the device is plugged into
+//
 void package_mb1232(OSCBundle *bndl, char packet_header_string[], uint8_t port) {
 	char address_string[255];
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/mb1232/data");
@@ -89,6 +103,12 @@ void package_mb1232(OSCBundle *bndl, char packet_header_string[], uint8_t port) 
 	bndl->add(msg);
 }
 
+
+
+// --- MEASURE MB1232 ---
+//
+// Gets the current sensor readings of the MB1232 and stores into its state struct
+//
 void measure_mb1232() {
 	Wire.beginTransmission(i2c_addr_mb1232);
   Wire.write(RangeCommand);

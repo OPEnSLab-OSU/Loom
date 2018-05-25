@@ -101,12 +101,13 @@ void dmpDataReady() {
 
 
 
-
-
 // --- I2C SETUP ---
+//
 // Called by main setup
-// Arguments:
-// Return:
+// Runs any MPU6050 setup and initialization
+//
+// @return  Whether or not sensor initialization was successful
+//
 bool setup_mpu6050()
 {
   #if LOOM_DEBUG == 1
@@ -198,9 +199,9 @@ bool setup_mpu6050()
 
 
 // --- MEASURE MPU6050 ---
+//
 // Generic subroutine for reading MPU6050 i2c Data
-// Arguments:
-// Return:
+//
 void measure_mpu6050(void)
 {
   // wait for MPU interrupt or extra packet(s) available
@@ -352,8 +353,6 @@ void measure_mpu6050(void)
 
 // --- MEAN SENSOR MEASUREMENTS ---
 // 
-// Arguments:
-// Return:
 void meansensors()
 {
   long i = 0, buff_ax = 0, buff_ay = 0, buff_az = 0, buff_gx = 0, buff_gy = 0, buff_gz = 0;
@@ -438,20 +437,28 @@ void calibration() {
 
 
 
-// --- UPD MPU6050 ---
-// 
-// Arguments:
-// Return:
+// --- PACKAGE MPU6050 ---
+//
+// Wrapper without Udp port, calls regular package function with port of NULL
+//
+// @param bndl                  The OSC bundle to be added to
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+//
 void package_mpu6050(OSCBundle *bndl, char packet_header_string[])
 {
   package_mpu6050(bndl, packet_header_string, NULL); 
 }
 
 
-// --- UPD MPU6050 ---
+
+// --- PACKAGE MPU6050 ---
 // 
-// Arguments:
-// Return:
+// Adds OSC Message of last read MPU6050 sensor readings to provided OSC bundle
+//
+// @param bndl                  The OSC bundle to be added to
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+// @param port                  Which port of the multiplexer the device is plugged into
+//
 void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
   char addressString[255];    // Declare address string buffer
@@ -515,8 +522,8 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 
 // --- CALIBRATE MPU6050 ---
 // 
-// Arguments:
-// Return:
+//
+//
 void calMPU6050()
 {
   // Reset offsets
@@ -584,8 +591,8 @@ void calMPU6050()
 
 // --- CALIBRATE MPU6050 OSC ---
 // 
-// Arguments:
-// Return:
+// 
+//
 void calMPU6050_OSC(OSCMessage &msg) 
 {
   #if LOOM_DEBUG == 1

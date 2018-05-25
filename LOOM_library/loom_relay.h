@@ -28,20 +28,18 @@ struct state_relay_t state_relay;
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void setup_relay();
-void handleRelay(OSCMessage &msg);
+void handle_relay_msg(OSCMessage &msg);
 void write_relay_states();
 
 
 // ================================================================ 
 // ===                          SETUP                           === 
 // ================================================================
-
-// --- RELAY SETUP ---
+//
 // Called by main setup
 // Sets pin modes for relays (on pins 5 and 6)
 // Initializes relays to off
-// Arguments: none
-// Return:    none
+// 
 void setup_relay() {
   pinMode(RELAY_PIN0,OUTPUT);
   pinMode(RELAY_PIN1,OUTPUT);
@@ -55,11 +53,14 @@ void setup_relay() {
 // ================================================================
 
 
-// --- HANDLE RELAY ---
-// Updates stored state of relays
-// Arguments: msg (OSC message with data of state to set particular relay to)
-// Return:    none
-void handleRelay(OSCMessage &msg) 
+// --- HANDLE RELAY MSG ---
+//
+// Updates stored state of relays, then calls write_relay_states()
+// to set relays to those states
+//
+// @param msg  OSC message with data of state and relay to set 
+//
+void handle_relay_msg(OSCMessage &msg) 
 {
   int relay  = msg.getInt(0);
   int set_to = msg.getInt(1);
@@ -76,11 +77,12 @@ void handleRelay(OSCMessage &msg)
 }
 
 
+
 // --- WRTIE RELAY STATES ---
+//
 // Writes current relay states to the physical relays
-// Called after handleRelay, which sets the variables holding the state values
-// Arguments: none
-// Return:    none
+// Called after handle_relay_msg, which sets the variables holding the state values
+// 
 void write_relay_states()
 {
   digitalWrite(RELAY_PIN0,(state_relay.on[0]==true) ? HIGH : LOW);
