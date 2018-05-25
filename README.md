@@ -8,7 +8,7 @@
     1. [WiFi](#wifi)
     2. [LoRa](#lora)
         1. [LoRa Dependencies](#lora-dependencies)
-        2. [EnableInterrupt.h and RH\_RF95.h compatibility](#enableinterrupth-and-rhrf95h-compatibility)
+        2. [EnableInterrupt.h and RH\_RF95.h compatibility](#enableinterrupth-and-rh_rf95h-compatibility)
     3. [nRF](#nRF)
         1. [nRF Dependencies](#nrf-dependencies)
         2. [Configuring Maximum Message Length](#configuring-maximum-message-length)
@@ -206,6 +206,13 @@ the Adafruit Feather 32u4.  The RTC used to wake both the M0 and the 32u4 is the
 * [DS3231 Extended Library](https://github.com/FabioCuomo/FabioCuomo-DS3231)
 * [Low Power Library](https://github.com/rocketscream/Low-Power)
 * [Enable Interrupt](https://github.com/GreyGnome/EnableInterrupt)
+
+**NOTE:** To use the DS3231 extended library with the Feather M0,
+the following line must be added to `RTClibExtended.h`:
+
+``` cpp
+#define _BV(bit) (1 << (bit))
+```
 
 #### Sleep Modes
 
