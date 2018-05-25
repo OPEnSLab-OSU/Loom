@@ -1,5 +1,20 @@
 # Project LOOM: Library
 
+## Table of Contents
+1. [Device Support](#device-support)
+    1. [Adafruit Feather M0](#adafruit-feather-m0)
+    2. [Adafruit Feather 32u4](#adafruit-feather-32u4)
+2. [Wireless Capabilities](#wireless-capabilities)
+3. [Max/MSP](#max/msp)
+4. [Library Architecture](#library-architecture)
+    1. [Adding to the Library](#adding-to-the-library)
+5.  [Channels](#channels)
+    1.  [Implementation](#implementation)
+    2. [Additional Devices](#additional-devices)
+6. [Arduino IDE Setup](#arduino-ide-setup)
+
+
+
 This is the primary location of the Project LOOM code, consolidated into place with a single Arduino .ino sketch built with code selected by the preprocessor based on the configuration file. 
 
 ## Device Support
