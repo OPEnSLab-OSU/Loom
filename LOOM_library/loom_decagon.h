@@ -41,11 +41,9 @@ void package_decagon(OSCBundle * bndl, char packet_header_string[]);
 // ================================================================
 // ===                          SETUP                           ===
 // ================================================================
-
-// --- DECAOGN GS3 SETUP ---
 //
-// Arguments: 
-// Return:    none
+// Runs any Decagon setup
+//
 void deca_gs3_setup() {
   mySDI12.begin();
   delay(2000);
@@ -79,16 +77,16 @@ void deca_gs3_setup() {
 
 // --- MEASURE DECAGON ---
 //
-// Arguments: 
-// Return:    none
+// Gets Decagon sensor readings
+//
 void measure_decagon() {
-//first command to take a measurement
+  // First command to take a measurement
   myCommand = String(SENSOR_ADDRESS) + "M!";
   //Serial.println(myCommand);     // echo command to terminal
-
+  
   mySDI12.sendCommand(myCommand);
   delay(30);                     // wait a while for a response
-
+  
   while (mySDI12.available()) {  // build response string
     char c = mySDI12.read();
     if ((c != '\n') && (c != '\r')) {
@@ -98,19 +96,19 @@ void measure_decagon() {
   }
   //if (sdiResponse.length() > 1) Serial.println(sdiResponse); //write the response to the screen
   mySDI12.clearBuffer();
-
-
+  
+  
   delay(1000);                 // delay between taking reading and requesting data
   sdiResponse = "";           // clear the response string
-
-
-// next command to request data from last measurement
+  
+  
+  // next command to request data from last measurement
   myCommand = String(SENSOR_ADDRESS) + "D0!";
   //Serial.println(myCommand);  // echo command to terminal
-
+  
   mySDI12.sendCommand(myCommand);
   delay(30);                     // wait a while for a response
-
+  
   while (mySDI12.available()) {  // build string from response
     char c = mySDI12.read();
     if ((c != '\n') && (c != '\r')) {
@@ -118,11 +116,11 @@ void measure_decagon() {
       delay(5);
     }
   }
-
+  
   sdiResponse.toCharArray(buf, sizeof(buf));
-
+  
   p = buf;
-
+  
   strtok_r(p, "+", &p);
   dielec_p = atof(strtok_r(NULL, "+", &p));
   temp = atof(strtok_r(NULL, "+", &p));
@@ -143,8 +141,11 @@ void measure_decagon() {
 
 // --- PACKAGE DECAGON ---
 //
-// Arguments: 
-// Return:    none
+// Populates OSC bundle with last Decagon readings
+//
+// @param bndl                  The OSC bundle to be populated
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+//
 void package_decagon(OSCBundle * bndl, char packet_header_string[]) {
   char addressString[255];
   sprintf(addressString, "%s%s", packet_header_string, "/DielecPerm");

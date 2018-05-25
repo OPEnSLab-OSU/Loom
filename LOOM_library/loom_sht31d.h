@@ -41,6 +41,11 @@ void measure_sht31d();
 // ================================================================ 
 // ===                          SETUP                           === 
 // ================================================================
+//
+// Runs any SHT31D setup
+//
+// @return  Whether or not sensor initialization was successful
+//
 bool setup_sht31d() {
   bool is_setup;
 	if(state_sht31d.inst_sht31d.begin(i2c_addr_sht31d)) {
@@ -66,11 +71,13 @@ bool setup_sht31d() {
 
 
 // --- PACKAGE SHT31D ---
-// Adds last read Sht31d sensor readings to provided OSC bundle
-// Arguments: bndl (pointer to the bundle to be added to)
-//            packet_header_string (header string to send messages with)
-//            port (which port of the multiplexer the device is plugged into)
-// Return:    none
+// 
+// Adds last read SHT31D sensor readings to provided OSC bundle
+//
+// @param bndl                  The OSC bundle to be added to
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+// @param port                  Which port of the multiplexer the device is plugged into
+//
 void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port){
 	char address_string[255];
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/sht31d/data");
@@ -85,9 +92,9 @@ void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port){
 
 
 // --- MEASURE SHT31D ---
-// Gets the current sensor readings of the Sht31d and stores into its state struct
-// Arguments: none
-// Return:    none
+//
+// Gets the current sensor readings of the SHT31D and stores into its state struct
+// 
 void measure_sht31d() {
 	float t = state_sht31d.inst_sht31d.readTemperature();
   float h = state_sht31d.inst_sht31d.readHumidity();

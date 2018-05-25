@@ -55,17 +55,16 @@ struct state_servo_t state_servo;
 // ================================================================
 void setup_servo();
 void set_servo_degree(int set_degree, int servo_choice);
-void set_servo(OSCMessage &msg);
+void handle_servo_msg(OSCMessage &msg);
 
 
 // ================================================================ 
 // ===                          SETUP                           === 
 // ================================================================
-
-// -- SERVO SETUP --
+//
 // Called by main setup
-// Arguments: none
-// Return:    none
+// Begins servo driver
+//
 void setup_servo() {
   state_servo.pwm.begin();
   state_servo.pwm.setPWMFreq(60);
@@ -76,10 +75,14 @@ void setup_servo() {
 // ===                        FUNCTIONS                         === 
 // ================================================================
 
+
 // -- SET SERVO DEGREE --
+//
 // Changes specified servo (number) to provided position (degree)
-// Arguments: set_degree (angle to set servo to), servo_choice (which servo to set)
-// Return:    none
+//
+// @param set_degree    Angle to set servo to
+// @param servo_choice  Which servo to set
+// 
 void set_servo_degree(int set_degree, int servo_choice) 
 {
   uint16_t pulselength = map(set_degree, 0, 180, SERVOMIN, SERVOMAX);
@@ -102,11 +105,14 @@ void set_servo_degree(int set_degree, int servo_choice)
 }
 
 
-// -- SET SERVO --
+
+// -- SET SERVO MSG --
+//
 // Parses OSC message for which servo and position to call set_servo_degree() on
-// Arguments: msg (OSC message holding a servo number and angle)
-// Return:    none
-void set_servo(OSCMessage &msg) 
+//
+// @param msg  OSC message holding a servo number and angle
+// 
+void handle_servo_msg(OSCMessage &msg) 
 {
   int servo_num  = msg.getInt(0);
   int set_degree = msg.getInt(1);
