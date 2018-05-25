@@ -11,7 +11,11 @@
 5.  [Channels](#channels)
     1.  [Implementation](#implementation)
     2. [Additional Devices](#additional-devices)
-6. [Arduino IDE Setup](#arduino-ide-setup)
+6. [Configuration File](#configuration-file)
+7. [Arduino IDE Setup](#arduino-ide-setup)
+8. [Glossary](#glossary)
+9. [Troubleshooting](#troubleshooting)
+10. [Other](#other)
 
 
 
@@ -35,7 +39,7 @@ Currently changes to the config need to be done manually in the file itself. A s
 
 ## Max/MSP
 
-The associated Loom data processors and control modules are made as patches in Max/MSP.
+The associated [Loom Data Processors](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Max) and control modules are made as patches in Max/MSP.
 
 ## Librarary Architecture
 
@@ -43,7 +47,7 @@ The LOOM Library is the answer to the growing set of code to drive Project LOOM'
 
 ### Adding to the Library
 
-New sensors and actuator support can be added by filling out the loom_mod_template.h file with relevant code. This template ensures that the code for each piece of hardware conforms to a standard format, making it easier to read and understand.
+New sensor and actuator support can be added by filling out the loom_mod_template.h file with relevant code. This template ensures that the code for each piece of hardware conforms to a standard format, making it easier to read and understand.
 
 ## Channels
 
@@ -67,6 +71,10 @@ Channel B:	Instance # = 2		UDP Port = 9442
 ### Additional Devices
 
 The Max interfaces presently support 8 concurrent channels, the library itself poses no such restrictions and using custom Max interfaces can allow for the control of more devices.
+
+## Configuration File
+
+
 
 ## Arduino IDE Setup
 
