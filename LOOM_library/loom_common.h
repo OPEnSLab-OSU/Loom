@@ -23,14 +23,19 @@ void LOOM_begin();
 void loop_sleep();
 void save_config(OSCMessage &msg);
 
+
 // ================================================================
 // ===                        FUNCTIONS                         ===
 // ================================================================
 
 // --- SET INSTANCE NUMBER ---
-// Updates device's identifying instance number
-// Arguments: msg (OSC message with new instance number)
-// Return:    none
+//
+// Updates device's identifying instance number.
+// Device will not request new channel settings on startup if config is saved
+// Device announces presence so running Channel Manager can track it
+//
+// @param msg  Received OSC message with new instance number
+//
 void set_instance_num(OSCMessage &msg) 
 {
   configuration.instance_number = msg.getInt(0);
@@ -51,10 +56,13 @@ void set_instance_num(OSCMessage &msg)
 
 
 // --- MESSAGE ROUTER ---
+//
 // Used to route OSC messages to the correct function to handle it
-// Arguments: msg (OSC message to route subroutine that handles it), 
-//   addrOffset (used to determine where to start check of message header string)
-// Return:    none
+// Preprocessor only includes routing for available functionality
+//
+// @param msg         OSC message to route subroutine that handles it
+// @param addrOffset  used to determine where to start check of message header string
+//
 void msg_router(OSCMessage &msg, int addrOffset) {
   #if LOOM_DEBUG == 1
     char buffer[100];
@@ -73,19 +81,19 @@ void msg_router(OSCMessage &msg, int addrOffset) {
     msg.dispatch("/GetSensors",   send_sensor_list, addrOffset);
   #endif
   #if num_servos > 0  
-    msg.dispatch("/Servo/Set",    set_servo,      addrOffset);
+    msg.dispatch("/Servo/Set",    handle_servo_msg,      addrOffset);
   #endif
   #if num_steppers > 0
-    msg.dispatch("/Stepper/Set",  handleStepper,  addrOffset);
+    msg.dispatch("/Stepper/Set",  handle_stepper_msg,  addrOffset);
   #endif
   #if is_relay == 1
-    msg.dispatch("/Relay/State",  handleRelay,    addrOffset);
+    msg.dispatch("/Relay/State",  handle_relay_msg,    addrOffset);
   #endif
   #if is_mpu6050 == 1 && is_ishield == 1
     msg.dispatch("/MPU6050/cal",  calMPU6050_OSC, addrOffset);
   #endif
   #if is_neopixel == 1
-    msg.dispatch("/Neopixel",     setColor,       addrOffset);
+    msg.dispatch("/Neopixel",     set_color,       addrOffset);
   #endif
 	#if is_lora == 1 && lora_device_type == 0
 		msg.dispatch("/SendToPB", 				sendToPushingBox, addrOffset);
@@ -107,47 +115,46 @@ void msg_router(OSCMessage &msg, int addrOffset) {
 
 
 
-#if is_wifi == 1
-	// --- CHECK BUTTON HELD ---
-	// Checked each iteration of main loop if the device's button has been held
-	// If so, restart in access point mode
-	// Arguments: none
-	// Return:    none
-	#ifdef button
-	void check_button_held()
-	{
-		if ( (uint32_t)digitalRead(button) ) {
-			button_timer = 0;
-		} 
-		else {
-			#ifdef is_sleep_period
-				button_timer += is_sleep_period;
-			#else
-				button_timer++;
+// --- CHECK BUTTON HELD ---
+//
+// Checked each iteration of main loop if the device's button has been held
+// If so, restart in access point mode
+//
+#if defined(button) && (is_wifi == 1)
+void check_button_held()
+{
+	if ( (uint32_t)digitalRead(button) ) {
+		button_timer = 0;
+	} 
+	else {
+		#ifdef is_sleep_period
+			button_timer += is_sleep_period;
+		#else
+			button_timer++;
+		#endif
+		if (button_timer >= 5000) { // ~about 8 seconds
+			#if LOOM_DEBUG == 1
+				Serial.println("Button held for 8 seconds, resetting to AP mode");
 			#endif
-			if (button_timer >= 5000) { // ~about 8 seconds
-				#if LOOM_DEBUG == 1
-					Serial.println("Button held for 8 seconds, resetting to AP mode");
-				#endif
-				button_timer = 0;
-		 
-				OSCMessage temp;          // Dummy message not used by function, but it expects an OSCMessage normally
-				switch_to_AP(temp);       // Change to AP mode
-			} 
-		} // of else 
-	}
-	#endif // of ifdef button
-#endif //is_wifi == 1
+			button_timer = 0;
+	 
+			OSCMessage temp;          // Dummy message not used by function, but it expects an OSCMessage normally
+			switch_to_AP(temp);       // Change to AP mode
+		} 
+	} // of else 
+}
+#endif 
 
 
 
 // ================================================================
 // ===                        LOOM BEGIN                        ===
 // ================================================================
+//
 // Called by setup(), handles calling of any LOOM specific individual device setups
 // Starts Wifi or Lora and serial if debugging prints are on
-// Arguments: none
-// Return:    none 
+// Runs flash setup to read device settings from memory if available
+// 
 void LOOM_begin()
 {
   //Initialize serial and wait for port to open:
@@ -204,13 +211,15 @@ void LOOM_begin()
 
 
 // --- WIFI RECEIVE BUNDLE ---
+//
 // Function that fills an OSC Bundle with packets from UDP
 // Routes messages to correct function via msg_router if message header string matches expected
-// Arguments: bndl (OSC bundle to be filled)
-//            packet_header_string (header string to route messages on)
-//            Udp (which WiFIUdp structure to read packets from
-//            port (which port the packet was received on, used mostly for debug prints)
-// Return:    none
+//
+// @param bndl                  OSC bundle to be filled
+// @param packet_header_string  Header string to route messages on, as there are unique ports and a common port
+// @param Udp                   Which WiFIUdp structure to read packets from
+// @param port                  Which port the packet was received on, used primarily for debug prints
+//
 #if is_wifi == 1
 void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[], WiFiUDP *Udp, unsigned int port)
 {  
@@ -286,11 +295,14 @@ void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[], WiFiUDP *
 
 
 // --- LORA PROCESS BUNDLE ---
+//
 // Updates device's identifying instance number
-// Arguments: bndl (pointer to the bundle to be processed)
-//            packet_header_string (header string to route messages on)
-// Return:    none
-void lora_process_bundle(OSCBundle *bndl, char packet_header_string[]) {
+//
+// @param bndl                  Pointer to the bundle to be processed
+// @param packet_header_string  Header string to route messages on
+//
+void lora_process_bundle(OSCBundle *bndl, char packet_header_string[]) 
+{
     if (!bndl->hasError()) {
       char addressString[255];
       bndl->getOSCMessage(0)->getAddress(addressString, 0);
@@ -318,10 +330,10 @@ void lora_process_bundle(OSCBundle *bndl, char packet_header_string[]) {
 
 
 // --- LOOM SLEEP ---
+//
 // Delay between iterations of the main loop
 // Needed to ensure that bundles are fully sent and received
-// Arguments: none
-// Return:    none
+//
 #ifdef is_sleep_period
 void loop_sleep()
 {
@@ -334,11 +346,15 @@ void loop_sleep()
 #endif
 
 
+
 // --- SAVE CONFIG ---
+//
 // Saves the current configuration to non-volatile memory
-// Arguments: msg (just header string routed from msg_router)
-// Return:    none
-void save_config(OSCMessage &msg) {
+//
+// @param msg  Just header string routed from msg_router, not used here
+//
+void save_config(OSCMessage &msg) 
+{
   #if LOOM_DEBUG == 1
     Serial.println("Saving Configuration Settings");
     Serial.println("...");

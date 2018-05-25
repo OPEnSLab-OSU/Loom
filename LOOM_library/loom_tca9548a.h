@@ -54,6 +54,11 @@ void send_sensor_list(OSCMessage &);
 // ================================================================ 
 // ===                          SETUP                           === 
 // ================================================================
+//
+// Runs any TCA9548a multiplexer setup and initialization
+//
+// @return  Whether or not initialization was successful
+//
 bool setup_tca9548a() {
   delay(2000);
   Wire.begin();
@@ -71,6 +76,13 @@ bool setup_tca9548a() {
 // ===                        FUNCTIONS                         === 
 // ================================================================
 
+
+// --- TCASESELECT --- 
+//
+// . . .
+// 
+// @param port_num
+//
 void tcaseselect(uint8_t port_num) {
   if (port_num < 8) {
 		Wire.beginTransmission(i2c_addr_tca9548a);
@@ -79,6 +91,19 @@ void tcaseselect(uint8_t port_num) {
 	}
 }
 
+
+
+// --- GET SENSOR DATA ---
+//
+// Called by package_tca9548a(), which calls this in a loop through i2c addresses
+// Checks for specified sensor (via i2c address) 
+// Calls measure and package for that sensor
+//
+// @param i2c_addr              I2C address specifying which sensor to get and send readings from
+// @param bndl                  The OSC bundle to be added to (forwarded to sensor package functions)
+// @param packet_header_string  The device-identifying string to prepend to OSC messages  (forwarded to sensor package functions)
+// @param port                  Which port the sensor being checked would be plugged into
+//
 void get_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_string[], uint8_t port){
   #if LOOM_DEBUG == 1
 		Serial.print("Attempting to measure data from sensor with address: ");
@@ -154,6 +179,15 @@ void get_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_strin
 	#endif
 }
 
+
+
+// --- SEND SENSOR LIST ---
+//
+// Message router parsed command to reply with current multiplexer sensors
+// 
+// @param msg  OSC message requesting the list of sensors currently plugged 
+//               be transmitted
+//
 void send_sensor_list(OSCMessage &msg) {
   OSCBundle send_bndl;
   char header_string[255];
@@ -165,6 +199,13 @@ void send_sensor_list(OSCMessage &msg) {
   #endif
 }
 
+
+
+// --- UPDATE SENSORS --- 
+//
+// Updates state with devices that are currently plugged in
+// and to which port
+//
 void update_sensors() {
   uint8_t current_ind = 0;
   for (uint8_t t=0; t<8; t++){
@@ -197,6 +238,16 @@ void update_sensors() {
 	}
 }
 
+
+
+// --- GET SENSORS ---
+//
+// Fills OSC bundle with list of sensors currently plugged into multiplexer
+// Calls update_sensors()
+//
+// @param bndl                  The OSC bundle to be added to
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+//
 void get_sensors(OSCBundle *bndl, char packet_header_string[]) {
   char addressString[255];
   update_sensors();
@@ -240,6 +291,16 @@ void get_sensors(OSCBundle *bndl, char packet_header_string[]) {
 	}
 }
 
+
+
+// --- PACKAGE TCA9548A ---
+//
+// Calls package functions of any devices plugged into to multiplexer
+// Adds each devices msgs to single bundle of mulitplexer sensor readings
+//
+// @param bndl                  The OSC bundle to be added to
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+//
 void package_tca9548a(OSCBundle *bndl, char packet_header_string[]) {
 	#if LOOM_DEBUG == 1
 		Serial.println("Measuring data from devices connected to tca9548a (Multiplexer).");

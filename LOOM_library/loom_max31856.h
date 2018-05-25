@@ -51,12 +51,17 @@ Adafruit_MAX31856 max = Adafruit_MAX31856(CS_PIN);
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void setup_max31856();
+void package_max31856(OSCBundle *bndl, char packet_header_string[]);
 void measure_max31856();
 
 
 // ================================================================
 // ===                          SETUP                           ===
 // ================================================================
+//
+// Runs any MAX31856 setup
+// Begins the device and configures to it specified setting
+//
 void setup_max31856() 
 {
   max.begin();
@@ -73,6 +78,48 @@ void setup_max31856()
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
+
+
+
+// --- PACKAGE MAX31856 ---
+//
+// Adds OSC Message of last read MAX31856 sensor readings to provided OSC bundle
+//
+// @param bndl                  The OSC bundle to be added to
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+//
+void package_max31856(OSCBundle *bndl, char packet_header_string[]) 
+{
+  char addressString[255];
+  #if TCTYPE == K_TYPE
+  
+  #ifdef CELCIUS
+    sprintf(addressString, "%s%s", packet_header_string, "/CJTemp_C");
+    bndl->add(addressString).add((float)CJTemp);
+    sprintf(addressString, "%s%s", packet_header_string, "/TCTemp_C");
+    bndl->add(addressString ).add((float)TCTemp);
+  #endif
+  
+  #ifdef FAHRENHEIT
+    sprintf(addressString, "%s%s", packet_header_string, "/CJTemp_F");
+    bndl->add(addresString).add((float)(CJTemp * 1.8 + 32));
+    sprintf(addressString, "%s%s", packet_header_string, "/TCTemp_F");
+    bndl->add(addressString).add((float)(TCTemp * 1.8 + 32));
+  #endif
+  
+  #elif TCTYPE == VMODE_G32 || TCTYPE == VMODE_G8
+    sprintf(addressString, "%s%s", packet_header_string, "/voltage");
+    bndl->add(addressString).add((float)(tc_vin));
+  #endif
+}
+
+
+
+// --- MEASURE MAX31856 ---
+//
+// Gets the current sensor readings of the MAX31856 and stores into variables
+// If debug prints are enabled, will print any faults 
+//
 void measure_max31856() 
 {
   #if TCTYPE == K_TYPE
@@ -108,27 +155,3 @@ void measure_max31856()
 }
 
 
-void package_max31856(OSCBundle *bndl, char packet_header_string[]) 
-{
-  char addressString[255];
-  #if TCTYPE == K_TYPE
-  
-  #ifdef CELCIUS
-    sprintf(addressString, "%s%s", packet_header_string, "/CJTemp_C");
-    bndl->add(addressString).add((float)CJTemp);
-    sprintf(addressString, "%s%s", packet_header_string, "/TCTemp_C");
-    bndl->add(addressString ).add((float)TCTemp);
-  #endif
-  
-  #ifdef FAHRENHEIT
-    sprintf(addressString, "%s%s", packet_header_string, "/CJTemp_F");
-    bndl->add(addresString).add((float)(CJTemp * 1.8 + 32));
-    sprintf(addressString, "%s%s", packet_header_string, "/TCTemp_F");
-    bndl->add(addressString).add((float)(TCTemp * 1.8 + 32));
-  #endif
-  
-  #elif TCTYPE == VMODE_G32 || TCTYPE == VMODE_G8
-    sprintf(addressString, "%s%s", packet_header_string, "/voltage");
-    bndl->add(addressString).add((float)(tc_vin));
-  #endif
-}

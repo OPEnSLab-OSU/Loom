@@ -80,6 +80,7 @@ void request_settings_from_Max();
 void set_request_settings(OSCMessage &msg);
 void new_channel(OSCMessage &msg);
 void respond_to_poll_request(char packet_header_string[]);
+void wifi_send_bundle(OSCBundle *bndl);
 
 
 // ================================================================ 
@@ -90,7 +91,7 @@ void respond_to_poll_request(char packet_header_string[]);
 // Called by main setup
 // Sets WiFi pins, checks for shield with WiFi, 
 // starts AP mode or tries to connect to existing network
-// Arguments: none
+// @param none
 // Return:    none
 void wifi_setup(char packet_header_string[])
 {
@@ -147,7 +148,7 @@ void wifi_setup(char packet_header_string[])
 
 // --- PRINT WIFI STATUS ---
 // If debug enabled, display WiFi settings / state to serial
-// Arguments: none
+// @param none
 // Return:    none
 void printWiFiStatus() 
 {
@@ -193,7 +194,7 @@ void printWiFiStatus()
 // --- START ACCESS POINT ---
 // Device will attempt to setup wifi access point that one computer to connect to
 // Called upon OSC command, button held, or connect to network failure
-// Arguments: none
+// @param none
 // Return:    none
 void start_AP() 
 {
@@ -231,7 +232,7 @@ void start_AP()
 // --- CONNECT TO WPA ---
 // Device tries to connect to network with provide credentials 
 // Will revert to AP mode if this fails
-// Arguments: ssid (Wifi network name), pass (Wifi network password)
+// @param ssid (Wifi network name), pass (Wifi network password)
 // Return: bool (true is connection successful, false on failure )
 bool connect_to_WPA(char ssid[], char pass[]) 
 {
@@ -284,7 +285,7 @@ bool connect_to_WPA(char ssid[], char pass[])
 
 // --- SWITCH TO ACCESS POINT ---
 // Switch to AP mode upon OSC command to do so
-// Arguments: msg (not used, only there for msg_router to work properly)
+// @param msg (not used, only there for msg_router to work properly)
 // Return:    none
 void switch_to_AP(OSCMessage &msg) 
 {
@@ -313,7 +314,7 @@ void switch_to_AP(OSCMessage &msg)
 
 // --- PRINT REMOVE MAC ADDRESS ---
 // Prints the MAC address of device connected to devices access point
-// Arguments: none
+// @param none
 // Return:    none
 void print_remote_mac_addr()
 {
@@ -339,7 +340,7 @@ void print_remote_mac_addr()
 // --- REPLACE CHARACTER ---
 // Given a string, replace all instances of 'orig' char with 'rep' char
 // Used primarily for replacing '~'s sent by Max, as it cannot send strings with spaces
-// Arguments: str (pointer to string to alter), orig (character to replace), rep (replacement character)
+// @param str (pointer to string to alter), orig (character to replace), rep (replacement character)
 // Return:    none
 void replace_char(char *str, char orig, char rep) {
     char *ix = str;
@@ -355,7 +356,7 @@ void replace_char(char *str, char orig, char rep) {
 // and both ssid and password provided
 // Credentials stored in global variable
 // Reverts to AP mode upon failure
-// Arguments: none 
+// @param none 
 // Return:    none
 void connect_to_new_network()
 {
@@ -393,7 +394,7 @@ void connect_to_new_network()
 // --- SET SSID ---
 // Updates WiFi ssid global var with new ssid
 // Sets global bool to indicate this 
-// Arguments: msg (OSC message with network ssid)
+// @param msg (OSC message with network ssid)
 // Return:    none
 void set_ssid(OSCMessage &msg) 
 {
@@ -406,7 +407,7 @@ void set_ssid(OSCMessage &msg)
 // SET PASSWORD
 // Updates WiFi password global var with new password 
 // Sets global bool to indicate this 
-// Arguments: msg (OSC message with network password)
+// @param msg (OSC message with network password)
 // Return:    none
 void set_pass(OSCMessage &msg) 
 {
@@ -419,7 +420,7 @@ void set_pass(OSCMessage &msg)
 // --- BROADCAST IP ---
 // Broadcast IP address so that requesting computer can update IP
 // to send to if it only had device instance number 
-// Arguments: msg (OSC message with no data, only message header was needed by msg_router())
+// @param msg (OSC message with no data, only message header was needed by msg_router())
 // Return:    none
 void broadcastIP(OSCMessage &msg) 
 {
@@ -447,7 +448,7 @@ void broadcastIP(OSCMessage &msg)
 
 // --- SET PORT ---
 // Update device's communication port
-// Arguments: msg (OSC message of new port for device to communicate on)
+// @param msg (OSC message of new port for device to communicate on)
 // Return:    none
 void set_port(OSCMessage &msg) 
 {

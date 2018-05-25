@@ -60,6 +60,7 @@ void flash_config_setup();
 
 // Select how to read from and write to non volatile memory
 // based on which device is bieng used
+
 #if MEM_TYPE == MEM_FLASH
 //  #include <FlashStorage.h>
   FlashStorage(flash_config,config_flash_t);    // Setup the flash storage for the structure
@@ -83,10 +84,10 @@ void flash_config_setup();
 
 
 // --- FLASH SETUP ---
-// Handles configuration of reading device config from flash (if applicable)
-//   else uses config.h specific settings, and writes these to flash
-// Arguments: none
-// Return:    none
+//
+// Handles configuration of reading device configuration settings from flash (if applicable)
+// else uses config.h specified settings, and then writes these to flash
+// 
 void flash_config_setup()
 {
   #if is_wifi == 1
