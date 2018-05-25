@@ -1,5 +1,25 @@
 # Project LOOM: Max Interfaces
 
+## Table of Contents
+
+1. [Max/MSP Setup](#max/msp-setup)
+    1. [Max Installation](#max-installation)
+    2. [LOOM Data Processors Setup](#loom-data-processors-setup)
+2. [Existing Max Patches](#existing-max-patches)
+    1. [Input](#input)
+    2. [Output](#output)
+    3. [Processing](#processing)
+    4. [Monitors](#monitors)
+4. [Running Max Interfaces](#running-max-interfaces)
+6. [Channel Manager](#channel-manager)
+7. [Developing New Max Patches](#developing-new-max-interfaces)
+    1. [Modifying Existing Patches](#modifying-existing-patches) 
+    2. [Developing Patches from Scratch](#developing-patches-from-scratch) 
+    3. [Adding as option to ProcessorGen](#adding-as-option-to-processorgen) 
+    4. [Dynamic Window Size](#dynamic-window-size) 
+8. [Troubleshooting](#troubleshooting)
+
+
 These are the Max/MSP interfaces for the control, monitoring, and processing of devices and data of a LOOM network.
 
 Each module contains a set of similar functions and can receive, process, and output streams of data. Modules can be linked together to pass information from one to another. The set of data processor plugins include various means of reading any information from a network, a variety of modules to process, convert, or display this information, and modules to send data back out to the network. 
@@ -99,6 +119,8 @@ The LOOM Channel Manager keeps track of the which devices are on using which cha
 - **Reassign Channel:**  Changes the channel of a given running device to a specified available channel. Note that this will not persist after device restart if no 'Save Config' command is sent.
 - **Remove:** Disconnects the specified device from the network. It will switch WiFi to AP mode. Note that this will not persist after device restart if no 'Save Config' command is sent.
 
+Devices that go to sleep will be remembered (and thus preventing that channel from being assgined to another device) unless 'Clear Memory' is pressed. For devices with buttons, pressing the button will light an indicator next to the corresponding device and channel information.
+
 ## Developing New Max Patches
 
 Users are free to modify existing and create new Max patches to achieve the desired functionality.
@@ -110,6 +132,8 @@ Open the patch you wish to modify (recommeded that you modify a copy of the patc
 ### Developing Patches from Scratch
 
 Refer the the Max Help, Reference, and Examples which can be found under the Help menu
+
+Some patchers in existing patches are self contained and can simply be copied into a new patch to add the functionality as a tab. The 'WiFi config' tab / patcher is an example of this.
 
 ### Adding as option to ProcessorGen
 
