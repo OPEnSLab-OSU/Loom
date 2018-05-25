@@ -26,23 +26,20 @@ struct state_neopixel_t {
 struct state_neopixel_t state_neopixel;
 
 
-
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void setup_neopixel();
-void setColor(OSCMessage &msg);
+void set_color(OSCMessage &msg);
 
 
 // ================================================================ 
 // ===                          SETUP                           === 
 // ================================================================
-
-// --- NEOPIXEL SETUP ---
+//
 // Called by main setup
 // Creates an array to store Neopixel data, iterates through to initialize Neopixels
-// Arguments: none
-// Return:    none
+// 
 void setup_neopixel() 
 {
   for(int i = 0; i < 3; i++) {
@@ -60,10 +57,13 @@ void setup_neopixel()
 // ================================================================
 
 // --- SET COLOR ---
+//
 // Handle OSC messages to set specified Neopixel to a given color
-// Arguments: msg (OSC message containing details of which Neopixel and what color)
-// Return:    none
-void setColor(OSCMessage &msg) 
+// Each message only holds one of R, G, B values
+//
+// @param msg  OSC message containing details of which Neopixel and what color)
+//
+void set_color(OSCMessage &msg) 
 {
   int port     = msg.getInt(0);
   int pixelNum = msg.getInt(1);
@@ -93,7 +93,7 @@ void setColor(OSCMessage &msg)
                                                   state_neopixel.colorVals[port][2]));
   }
 
-  // Update colors displayed by enabled Neopixels
+  // Update colors displayed by any enabled Neopixels
   for (int i = 0; i < 3; i++) {
     if (state_neopixel.enabled[i])
       state_neopixel.pixels[i]->show();

@@ -47,6 +47,11 @@ void configure_tsl2591(uint8_t, uint8_t);
 // ================================================================ 
 // ===                          SETUP                           === 
 // ================================================================
+// 
+// Runs any TSL2591 setup and initialization
+//
+// @return Whether or not setup was successful
+//
 bool setup_tsl2591() {
 	bool is_setup;
 	state_tsl2591.inst_tsl2591 = Adafruit_TSL2591(2591);
@@ -73,11 +78,13 @@ bool setup_tsl2591() {
 
 
 // --- PACKAGE TSL2591 ---
-// Adds last read Tsl2591 sensor readings to provided OSC bundle
-// Arguments: bndl (pointer to the bundle to be added to)
-//            packet_header_string (header string to send messages with)
-//            port (which port of the multiplexer the device is plugged into)
-// Return:    none
+//
+// Adds OSC Message of last read TSL2591 sensor readings to provided OSC bundle
+//
+// @param bndl                  The OSC bundle to be added to
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+// @param port                  Which port of the multiplexer the device is plugged into
+//
 void package_tsl2591(OSCBundle *bndl, char packet_header_string[], uint8_t port) {
 	char address_string[255];
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/tsl2591/data");
@@ -93,9 +100,9 @@ void package_tsl2591(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 
 
 // --- MEASURE TSL2591 ---
+//
 // Gets the current sensor readings of the Tsl2591 and stores into its state struct
-// Arguments: none
-// Return:    none
+//
 void measure_tsl2591() {
 	state_tsl2591.ir = state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_INFRARED);
 	state_tsl2591.full = state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_FULLSPECTRUM);
@@ -111,7 +118,13 @@ void measure_tsl2591() {
 
 
 
-
+// --- CONFIGURE TSL2591 ---
+//
+// 
+//
+// @param gain_level    
+// @param timing_level  
+//
 void configure_tsl2591(uint8_t gain_level, uint8_t timing_level) {
 	switch(gain_level) {
 		case 0:
@@ -190,23 +203,23 @@ void configure_tsl2591(uint8_t gain_level, uint8_t timing_level) {
 
 
 // --- DETAILS TSL2591 ---
+//
 // With Loom debug enabled, allows for the printing of the TSl2591 details to be 
 // printed to the Serial monitor
-// Arguments: none
-// Return:    none
+// 
 #if LOOM_DEBUG == 1
-	void details_tsl2591() {
-		sensor_t sensor;
-		state_tsl2591.inst_tsl2591.getSensor(&sensor);
-		Serial.println(F("------------------------------------"));
-		Serial.print  (F("Sensor:       ")); Serial.println(sensor.name);
-		Serial.print  (F("Driver Ver:   ")); Serial.println(sensor.version);
-		Serial.print  (F("Unique ID:    ")); Serial.println(sensor.sensor_id);
-		Serial.print  (F("Max Value:    ")); Serial.print(sensor.max_value); Serial.println(F(" lux"));
-		Serial.print  (F("Min Value:    ")); Serial.print(sensor.min_value); Serial.println(F(" lux"));
-		Serial.print  (F("Resolution:   ")); Serial.print(sensor.resolution, 4); Serial.println(F(" lux"));  
-		Serial.println(F("------------------------------------"));
-		Serial.println(F(""));
-		delay(500);
-	}
+void details_tsl2591() {
+	sensor_t sensor;
+	state_tsl2591.inst_tsl2591.getSensor(&sensor);
+	Serial.println(F("------------------------------------"));
+	Serial.print  (F("Sensor:       ")); Serial.println(sensor.name);
+	Serial.print  (F("Driver Ver:   ")); Serial.println(sensor.version);
+	Serial.print  (F("Unique ID:    ")); Serial.println(sensor.sensor_id);
+	Serial.print  (F("Max Value:    ")); Serial.print(sensor.max_value); Serial.println(F(" lux"));
+	Serial.print  (F("Min Value:    ")); Serial.print(sensor.min_value); Serial.println(F(" lux"));
+	Serial.print  (F("Resolution:   ")); Serial.print(sensor.resolution, 4); Serial.println(F(" lux"));  
+	Serial.println(F("------------------------------------"));
+	Serial.println(F(""));
+	delay(500);
+}
 #endif
