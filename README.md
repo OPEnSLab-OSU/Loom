@@ -25,6 +25,7 @@
         1. [RTC and Low Power Dependencies](#rtc-and-low-power-dependencies)
         2. [Standby Operation](#standby-operation)
     2. [OSC Interpreter](#osc-interpreter)
+        1. [OSC Issues](#osc-issues)
 
 ## Processors
 
@@ -293,3 +294,70 @@ Here is what that same bundle looks like when encoded with the interpreter:
 
 **NOTE:** The OSC Interpreter does not currently support the encoding of OSCBundles which
 contain spaces or commas in either message addresses or string data values.
+
+#### OSC Issues
+
+OSC Bundles can cause some difficult to diagnose issues.  One of the main issues we have
+encountered is that multiple OSC Bundles can cause programs to run once through a loop but
+stop on the second iteration through a loop.  Here are some methods to avoid some of these
+issues:
+
+**Avoid Declaring Multiple OSC Bundles**
+
+Declaring multiple OSC bundles can cause both the M0 and the 32u4 to hang.  The best practice
+for sending multiple OSC bundles is to declare a single bundle object and empty it in between
+uses.
+
+DO:
+
+``` cpp
+void loop() {
+    OSCBundle bndl;
+    bndl.add('addr1').add(6.0);
+
+    // Do whatever you want with bundle 1 here
+
+    bndl.empty();
+    bndl.add('addr2').add('data').add('more-data');
+
+    // Do whatver you want with bundle 2 here
+}
+```
+
+DON'T:
+
+``` cpp
+void loop() {
+    OSCBundle bndl1;
+    OSCBundle bndl2; // Declaring multiple OSC bundles is BAD!
+    bndl1.add('addr1').add(6.0);
+    bndl2.add('addr2').add('data').add('more-data');
+}
+```
+
+**Always Pass OSC Bundles to Functions By Pointers**
+
+Passing OSC bundles by value can cause the Feather 32u4 to hang.  Furthermore, functions with 
+an OSC bundle return type may causes issues as well.  Although the Feather M0 functions
+properly when passing OSC bundles by value, it is still best practice to pass the address of the
+OSC bundle instead.  
+
+DO:
+
+``` cpp
+void package_data(OSCBundle *bndl) {
+    // Whatever you want the function to do
+}
+```
+
+DON'T:
+
+``` cpp
+OSCBundle package_data() {
+    // OSCBundle return types are BAD!
+}
+
+void process(OSCBundle bndl) {
+    // Passing OSCBundles by value is also BAD!
+}
+```
