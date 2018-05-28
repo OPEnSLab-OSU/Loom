@@ -52,7 +52,8 @@ void configure_tsl2591(uint8_t, uint8_t);
 //
 // @return Whether or not setup was successful
 //
-bool setup_tsl2591() {
+bool setup_tsl2591() 
+{
 	bool is_setup;
 	state_tsl2591.inst_tsl2591 = Adafruit_TSL2591(2591);
 	if(state_tsl2591.inst_tsl2591.begin()) {
@@ -85,7 +86,8 @@ bool setup_tsl2591() {
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
 // @param port                  Which port of the multiplexer the device is plugged into
 //
-void package_tsl2591(OSCBundle *bndl, char packet_header_string[], uint8_t port) {
+void package_tsl2591(OSCBundle *bndl, char packet_header_string[], uint8_t port) 
+{
 	char address_string[255];
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/tsl2591/data");
 	
@@ -103,7 +105,8 @@ void package_tsl2591(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 //
 // Gets the current sensor readings of the Tsl2591 and stores into its state struct
 //
-void measure_tsl2591() {
+void measure_tsl2591() 
+{
 	state_tsl2591.ir = state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_INFRARED);
 	state_tsl2591.full = state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_FULLSPECTRUM);
 	state_tsl2591.vis =  state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_VISIBLE);
@@ -125,7 +128,8 @@ void measure_tsl2591() {
 // @param gain_level    
 // @param timing_level  
 //
-void configure_tsl2591(uint8_t gain_level, uint8_t timing_level) {
+void configure_tsl2591(uint8_t gain_level, uint8_t timing_level) 
+{
 	switch(gain_level) {
 		case 0:
 			state_tsl2591.inst_tsl2591.setGain(TSL2591_GAIN_LOW);    // 1x gain (bright light)
@@ -208,7 +212,8 @@ void configure_tsl2591(uint8_t gain_level, uint8_t timing_level) {
 // printed to the Serial monitor
 // 
 #if LOOM_DEBUG == 1
-void details_tsl2591() {
+void details_tsl2591() 
+{
 	sensor_t sensor;
 	state_tsl2591.inst_tsl2591.getSensor(&sensor);
 	Serial.println(F("------------------------------------"));

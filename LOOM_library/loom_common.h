@@ -17,7 +17,7 @@ char          addressString[255];
 void set_instance_num(OSCMessage &msg);
 void msg_router(OSCMessage &msg, int addrOffset);
 #if (is_wifi == 1) && defined(button)
-  void check_button_held();
+	void check_button_held();
 #endif
 void LOOM_begin();
 void loop_sleep();
@@ -38,19 +38,19 @@ void save_config(OSCMessage &msg);
 //
 void set_instance_num(OSCMessage &msg) 
 {
-  configuration.instance_number = msg.getInt(0);
-  sprintf(configuration.packet_header_string, "%s%d\0", PacketHeaderString, configuration.instance_number);
-  
-  #if LOOM_DEBUG == 1
-    Serial.print("new address header: ");
-    Serial.println(configuration.packet_header_string);
-  #endif
+	configuration.instance_number = msg.getInt(0);
+	sprintf(configuration.packet_header_string, "%s%d\0", PacketHeaderString, configuration.instance_number);
+	
+	#if LOOM_DEBUG == 1
+		Serial.print("new address header: ");
+		Serial.println(configuration.packet_header_string);
+	#endif
 
-  #if is_wifi == 1
-    configuration.config_wifi.request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
-                                        // Note that configuration needs to be saved for this to take effect
-    respond_to_poll_request(configuration.packet_header_string);
-  #endif
+	#if is_wifi == 1
+		configuration.config_wifi.request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
+														// Note that configuration needs to be saved for this to take effect
+		respond_to_poll_request(configuration.packet_header_string);
+	#endif
 }
 
 
@@ -64,53 +64,53 @@ void set_instance_num(OSCMessage &msg)
 // @param addrOffset  used to determine where to start check of message header string
 //
 void msg_router(OSCMessage &msg, int addrOffset) {
-  #if LOOM_DEBUG == 1
-    char buffer[100];
-    msg.getAddress(buffer, addrOffset);
-    Serial.print("Parsed ");
-    Serial.println(buffer);
-  #endif
-
-  #if is_tca9548a
-    if (msg.fullMatch("/GetSensors", addrOffset)){
-      msg.add(configuration.packet_header_string);
-      #if LOOM_DEBUG == 1
-        Serial.println("Got a request for sensor list");
-      #endif
-    }
-    msg.dispatch("/GetSensors",   send_sensor_list, addrOffset);
-  #endif
-  #if num_servos > 0  
-    msg.dispatch("/Servo/Set",    handle_servo_msg,      addrOffset);
-  #endif
-  #if num_steppers > 0
-    msg.dispatch("/Stepper/Set",  handle_stepper_msg,  addrOffset);
-  #endif
-  #if is_relay == 1
-    msg.dispatch("/Relay/State",  handle_relay_msg,    addrOffset);
-  #endif
-  #if is_mpu6050 == 1 && is_ishield == 1
-    msg.dispatch("/MPU6050/cal",  calMPU6050_OSC, addrOffset);
-  #endif
-  #if is_neopixel == 1
-    msg.dispatch("/Neopixel",     set_color,       addrOffset);
-  #endif
-	#if is_lora == 1 && lora_device_type == 0
-		msg.dispatch("/SendToPB", 				sendToPushingBox, addrOffset);
+	#if LOOM_DEBUG == 1
+		char buffer[100];
+		msg.getAddress(buffer, addrOffset);
+		Serial.print("Parsed ");
+		Serial.println(buffer);
 	#endif
-  
-  #if is_wifi == 1
-    msg.dispatch("/Connect/SSID",     set_ssid,     addrOffset);
-    msg.dispatch("/Connect/Password", set_pass,     addrOffset);
-    msg.dispatch("/wifiSetup/AP",     switch_to_AP, addrOffset);
-    msg.dispatch("/SetPort",          set_port,     addrOffset);
-    msg.dispatch("/requestIP",        broadcastIP,  addrOffset);
-    msg.dispatch("/getNewChannel",    new_channel,  addrOffset);
-    msg.dispatch("/SetRequestSettings",set_request_settings,  addrOffset);
-  #endif
+
+	#if is_tca9548a
+		if (msg.fullMatch("/GetSensors", addrOffset)){
+			msg.add(configuration.packet_header_string);
+			#if LOOM_DEBUG == 1
+				Serial.println("Got a request for sensor list");
+			#endif
+		}
+		msg.dispatch("/GetSensors",   send_sensor_list,	addrOffset);
+	#endif
+	#if num_servos > 0  
+		msg.dispatch("/Servo/Set",    handle_servo_msg,	addrOffset);
+	#endif
+	#if num_steppers > 0
+		msg.dispatch("/Stepper/Set",  handle_stepper_msg, addrOffset);
+	#endif
+	#if is_relay == 1
+		msg.dispatch("/Relay/State",  handle_relay_msg,	addrOffset);
+	#endif
+	#if is_mpu6050 == 1 && is_ishield == 1
+		msg.dispatch("/MPU6050/cal",  calMPU6050_OSC,	addrOffset);
+	#endif
+	#if is_neopixel == 1
+		msg.dispatch("/Neopixel",     set_color,		addrOffset);
+	#endif
+	#if is_lora == 1 && lora_device_type == 0
+		msg.dispatch("/SendToPB", sendToPushingBox, addrOffset);
+	#endif
 	
-  msg.dispatch("/SetID", set_instance_num, addrOffset);
-  msg.dispatch("/SaveConfig", save_config, addrOffset);
+	#if is_wifi == 1
+		msg.dispatch("/Connect/SSID",     set_ssid,     addrOffset);
+		msg.dispatch("/Connect/Password", set_pass,     addrOffset);
+		msg.dispatch("/wifiSetup/AP",     switch_to_AP, addrOffset);
+		msg.dispatch("/SetPort",          set_port,     addrOffset);
+		msg.dispatch("/requestIP",        broadcastIP,  addrOffset);
+		msg.dispatch("/getNewChannel",    new_channel,  addrOffset);
+		msg.dispatch("/SetRequestSettings",set_request_settings,  addrOffset);
+	#endif
+	
+	msg.dispatch("/SetID", set_instance_num, addrOffset);
+	msg.dispatch("/SaveConfig", save_config, addrOffset);
 }
 
 
@@ -157,55 +157,55 @@ void check_button_held()
 // 
 void LOOM_begin()
 {
-  //Initialize serial and wait for port to open:
-  #if LOOM_DEBUG == 1
-    Serial.begin(9600);
-    while(!Serial);        // Ensure Serial is ready to go before anything happens in LOOM_DEBUG mode.
+	//Initialize serial and wait for port to open:
+	#if LOOM_DEBUG == 1
+		Serial.begin(9600);
+		while(!Serial);        // Ensure Serial is ready to go before anything happens in LOOM_DEBUG mode.
 		delay(5000);
 		Serial.println("Initialized Serial!");
-  #endif
-  
-  // Set the button pin mode to input
-  #ifdef button
-    pinMode(button, INPUT_PULLUP); 
-  #endif
+	#endif
+	
+	// Set the button pin mode to input
+	#ifdef button
+		pinMode(button, INPUT_PULLUP); 
+	#endif
 	
 	#if is_tca9548a == 1
 		setup_tca9548a();
 	#endif
-  #if is_decagon == 1
-    deca_gs3_setup(); //rename this
-  #endif
-  #if is_mpu6050 > 0 && is_ishield == 1
-    setup_mpu6050();
-  #endif 
-  #ifdef is_max31856
-    setup_max31856();
-  #endif 
-  #if is_neopixel == 1
-    setup_neopixel();
-  #endif
-  #if num_servos > 0
-    setup_servo();
-  #endif
-  #if num_steppers > 0
-    setup_stepper();
-  #endif
-  #if is_relay == 1
-    setup_relay();
-  #endif
+	#if is_decagon == 1
+		deca_gs3_setup(); //rename this
+	#endif
+	#if is_mpu6050 > 0 && is_ishield == 1
+		setup_mpu6050();
+	#endif 
+	#ifdef is_max31856
+		setup_max31856();
+	#endif 
+	#if is_neopixel == 1
+		setup_neopixel();
+	#endif
+	#if num_servos > 0
+		setup_servo();
+	#endif
+	#if num_steppers > 0
+		setup_stepper();
+	#endif
+	#if is_relay == 1
+		setup_relay();
+	#endif
 
-  flash_config_setup();
+	flash_config_setup();
 
-  // Communication Platform specific setups
-  #if is_wifi == 1
-    wifi_setup(configuration.packet_header_string);
-  #endif
-  #if is_lora == 1
-    lora_setup(&rf95, &manager);
-  #endif
+	// Communication Platform specific setups
+	#if is_wifi == 1
+		wifi_setup(configuration.packet_header_string);
+	#endif
+	#if is_lora == 1
+		lora_setup(&rf95, &manager);
+	#endif
 	
-  
+	
 }
 
 
@@ -223,72 +223,72 @@ void LOOM_begin()
 #if is_wifi == 1
 void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[], WiFiUDP *Udp, unsigned int port)
 {  
-  int packetSize; 
-  state_wifi.pass_set = false;
-  state_wifi.ssid_set = false;
-  
-  // If there's data available, read a packet
-  packetSize = Udp->parsePacket();
+	int packetSize; 
+	state_wifi.pass_set = false;
+	state_wifi.ssid_set = false;
+	
+	// If there's data available, read a packet
+	packetSize = Udp->parsePacket();
 
-  if (packetSize > 0) {
-    #if LOOM_DEBUG == 1
-      if (packetSize > 0){
-          Serial.println("=========================================");
-          Serial.print("Received packet of size: ");
-          Serial.print(packetSize);
-          Serial.print(" on port " );
-          Serial.println(port);
-      }
-    #endif
-    
-    bndl->empty();             // Empty previous bundle
-    while (packetSize--){     // Read in new bundle
-      bndl->fill(Udp->read());
-    }
+	if (packetSize > 0) {
+		#if LOOM_DEBUG == 1
+			if (packetSize > 0) {
+					Serial.println("=========================================");
+					Serial.print("Received packet of size: ");
+					Serial.print(packetSize);
+					Serial.print(" on port " );
+					Serial.println(port);
+			}
+		#endif
+		
+		bndl->empty();             // Empty previous bundle
+		while (packetSize--){     // Read in new bundle
+			bndl->fill(Udp->read());
+		}
 
-    // If no error
-    if (!bndl->hasError()){
-      char addressString[255];
-      bndl->getOSCMessage(0)->getAddress(addressString, 0);
+		// If no error
+		if (!bndl->hasError()){
+			char addressString[255];
+			bndl->getOSCMessage(0)->getAddress(addressString, 0);
 
-      #if LOOM_DEBUG == 1
-        Serial.print("Number of items in bundle: ");
-        Serial.println(bndl->size());
-        Serial.print("First message address string: ");
-        Serial.println(addressString);
-      #endif
+			#if LOOM_DEBUG == 1
+				Serial.print("Number of items in bundle: ");
+				Serial.println(bndl->size());
+				Serial.print("First message address string: ");
+				Serial.println(addressString);
+			#endif
 
-      if (strcmp(addressString, "/LOOM/ChannelPoll") == 0) {
-        #if LOOM_DEBUG == 1
-          Serial.println("Received channel poll request");
-        #endif
-        respond_to_poll_request(packet_header_string);
-        return;
-      }
-      
-      for (int i = 0; i < 32; i++){ //Clear the new_ssid and new_pass buffers
-        state_wifi.new_ssid[i] = '\0';
-        state_wifi.new_pass[i] = '\0';
-      }
+			if (strcmp(addressString, "/LOOM/ChannelPoll") == 0) {
+				#if LOOM_DEBUG == 1
+					Serial.println("Received channel poll request");
+				#endif
+				respond_to_poll_request(packet_header_string);
+				return;
+			}
+			
+			for (int i = 0; i < 32; i++){ //Clear the new_ssid and new_pass buffers
+				state_wifi.new_ssid[i] = '\0';
+				state_wifi.new_pass[i] = '\0';
+			}
 
-      
-      // Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
-      // Most commands will be finished once control returns here (WiFi changes being handled below)
-      bndl->route(packet_header_string,msg_router);
-      
-      // If new ssid and password have been received, try to connect to that network
-      if (state_wifi.ssid_set == true && state_wifi.pass_set == true){
-        connect_to_new_network();   
-      }
+			
+			// Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
+			// Most commands will be finished once control returns here (WiFi changes being handled below)
+			bndl->route(packet_header_string,msg_router);
+			
+			// If new ssid and password have been received, try to connect to that network
+			if (state_wifi.ssid_set == true && state_wifi.pass_set == true){
+				connect_to_new_network();   
+			}
 
-    } else { // of !bndl.hasError()
-      error = bndl->getError();
-      #if LOOM_DEBUG == 1
-        Serial.print("error: ");
-        Serial.println(error);
-      #endif
-    } // of else
-  } // of (packetSize > 0)
+		} else { // of !bndl.hasError()
+			error = bndl->getError();
+			#if LOOM_DEBUG == 1
+				Serial.print("error: ");
+				Serial.println(error);
+			#endif
+		} // of else
+	} // of (packetSize > 0)
 }
 #endif // of if is_wifi == 1
 
@@ -303,28 +303,29 @@ void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[], WiFiUDP *
 //
 void lora_process_bundle(OSCBundle *bndl, char packet_header_string[]) 
 {
-    if (!bndl->hasError()) {
-      char addressString[255];
-      bndl->getOSCMessage(0)->getAddress(addressString, 0);
+	if (!bndl->hasError()) {
+		char addressString[255];
+		bndl->getOSCMessage(0)->getAddress(addressString, 0);
 
-      #if LOOM_DEBUG == 1
-        Serial.print("Number of items in bundle: ");
-        Serial.println(bndl->size());
-        Serial.print("First message address string: ");
-        Serial.println(addressString);
-      #endif
-      
-      // Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
-      // Most commands will be finished once control returns here (WiFi changes being handled below)
-      bndl->route(packet_header_string,msg_router);
-    } 
-		else { // of !bndl.hasError()
-			error = bndl->getError();
-			#if LOOM_DEBUG == 1
-				Serial.print("error: ");
-				Serial.println(error);
-			#endif
-		}	 // of else
+		#if LOOM_DEBUG == 1
+			Serial.print("Number of items in bundle: ");
+			Serial.println(bndl->size());
+			Serial.print("First message address string: ");
+			Serial.println(addressString);
+		#endif
+		
+		// Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
+		// Most commands will be finished once control returns here (WiFi changes being handled below)
+		bndl->route(packet_header_string,msg_router);
+		
+	} // of if
+	else { // of !bndl.hasError()
+		error = bndl->getError();
+		#if LOOM_DEBUG == 1
+			Serial.print("error: ");
+			Serial.println(error);
+		#endif
+	} // of else
 }	
 
 
@@ -337,11 +338,11 @@ void lora_process_bundle(OSCBundle *bndl, char packet_header_string[])
 #ifdef is_sleep_period
 void loop_sleep()
 {
-  #if LOOM_DEBUG == 0
-    int sleepMS = Watchdog.sleep(is_sleep_period); // Sleep MCU for transmit period duration
-  #else
-    delay(is_sleep_period);                        // Demo transmit every 1 second
-  #endif
+	#if LOOM_DEBUG == 0
+		int sleepMS = Watchdog.sleep(is_sleep_period); // Sleep MCU for transmit period duration
+	#else
+		delay(is_sleep_period);                        // Demo transmit every 1 second
+	#endif
 }
 #endif
 
@@ -355,13 +356,13 @@ void loop_sleep()
 //
 void save_config(OSCMessage &msg) 
 {
-  #if LOOM_DEBUG == 1
-    Serial.println("Saving Configuration Settings");
-    Serial.println("...");
-  #endif
-  write_non_volatile();
-  #if LOOM_DEBUG == 1
-    Serial.println("Done");
-  #endif
+	#if LOOM_DEBUG == 1
+		Serial.println("Saving Configuration Settings");
+		Serial.println("...");
+	#endif
+	write_non_volatile();
+	#if LOOM_DEBUG == 1
+		Serial.println("Done");
+	#endif
 }
 
