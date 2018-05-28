@@ -101,12 +101,15 @@ void handle_stepper_msg(OSCMessage &msg)
 	int stepper_direction = msg.getInt(1);
 	int degree = msg.getInt(2);
 	int stepper_speed = msg.getInt(3);
+
 	#if LOOM_DEBUG == 1
 		Serial.print("received message to move the motor ");
 		Serial.print(degree);
 		Serial.println(" degrees");
 	#endif
+
 	set_stepper_steps(motor,stepper_direction,degree,stepper_speed);
+	
 	#if LOOM_DEBUG == 1
 		Serial.println("processed stepper request");
 	#endif

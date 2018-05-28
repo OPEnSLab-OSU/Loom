@@ -63,7 +63,8 @@ void set_instance_num(OSCMessage &msg)
 // @param msg         OSC message to route subroutine that handles it
 // @param addrOffset  used to determine where to start check of message header string
 //
-void msg_router(OSCMessage &msg, int addrOffset) {
+void msg_router(OSCMessage &msg, int addrOffset) 
+{
 	#if LOOM_DEBUG == 1
 		char buffer[100];
 		msg.getAddress(buffer, addrOffset);
@@ -72,7 +73,7 @@ void msg_router(OSCMessage &msg, int addrOffset) {
 	#endif
 
 	#if is_tca9548a
-		if (msg.fullMatch("/GetSensors", addrOffset)){
+		if (msg.fullMatch("/GetSensors", addrOffset)) {
 			msg.add(configuration.packet_header_string);
 			#if LOOM_DEBUG == 1
 				Serial.println("Got a request for sensor list");
@@ -170,6 +171,8 @@ void LOOM_begin()
 		pinMode(button, INPUT_PULLUP); 
 	#endif
 	
+	// Setup sensors and actuators by calling the respective setups
+
 	#if is_tca9548a == 1
 		setup_tca9548a();
 	#endif
@@ -195,6 +198,8 @@ void LOOM_begin()
 		setup_relay();
 	#endif
 
+	// Read configuration from flash, or write config.h settings 
+	// if no settings are currently saved
 	flash_config_setup();
 
 	// Communication Platform specific setups

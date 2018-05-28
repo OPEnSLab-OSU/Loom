@@ -46,12 +46,13 @@ void measure_zxgesturesensor();
 // Runs any ZXgesturesensor setup and initialization
 // 
 // @return Whether or not setup was successful
+//
 bool setup_zxgesturesensor() 
 {
 	bool is_setup;
 	uint8_t ver;
 	
-	if(state_zxgesturesensor.inst_zxgesturesensor.init()) {
+	if (state_zxgesturesensor.inst_zxgesturesensor.init()) {
 		is_setup = true;
 		#if LOOM_DEBUG == 1
 			Serial.println("Initialized zxgesturesensor");
@@ -65,7 +66,7 @@ bool setup_zxgesturesensor()
 	}
 	
 	ver = state_zxgesturesensor.inst_zxgesturesensor.getModelVersion();
-	if(ver != ZX_MODEL_VER) {
+	if (ver != ZX_MODEL_VER) {
 		is_setup = false;
 		#if LOOM_DEBUG == 1
 			Serial.println("Incorrect Model Version or unable to read Model Version.");
@@ -80,7 +81,7 @@ bool setup_zxgesturesensor()
 	
 	// Read the register map version and ensure the library will work
 	ver = state_zxgesturesensor.inst_zxgesturesensor.getRegMapVersion();
-	if(ver != ZX_REG_MAP_VER) {
+	if (ver != ZX_REG_MAP_VER) {
 		is_setup = false;
 		#if LOOM_DEBUG == 1
 			Serial.println("Incorrect Register Map Version or unable to read Register Map Version.");

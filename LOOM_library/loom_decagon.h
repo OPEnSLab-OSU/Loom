@@ -11,6 +11,7 @@
 #define DATAPIN 11         // change to the proper pin
 #define SENSOR_ADDRESS "?" //"?" broadcasts message
 
+
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================ 
@@ -44,7 +45,8 @@ void package_decagon(OSCBundle * bndl, char packet_header_string[]);
 //
 // Runs any Decagon setup
 //
-void deca_gs3_setup() {
+void deca_gs3_setup() 
+{
 	mySDI12.begin();
 	delay(2000);
 	//first command to take a measurement
@@ -79,7 +81,8 @@ void deca_gs3_setup() {
 //
 // Gets Decagon sensor readings
 //
-void measure_decagon() {
+void measure_decagon() 
+{
 	// First command to take a measurement
 	myCommand = String(SENSOR_ADDRESS) + "M!";
 	//Serial.println(myCommand);     // echo command to terminal
@@ -146,7 +149,8 @@ void measure_decagon() {
 // @param bndl                  The OSC bundle to be populated
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
 //
-void package_decagon(OSCBundle * bndl, char packet_header_string[]) {
+void package_decagon(OSCBundle * bndl, char packet_header_string[]) 
+{
 	char addressString[255];
 	sprintf(addressString, "%s%s", packet_header_string, "/DielecPerm");
 	bndl->add(addressString).add(dielec_p);

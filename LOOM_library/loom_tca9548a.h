@@ -12,6 +12,7 @@
 // ================================================================
 // ===                       DEFINITIONS                        ===
 // ================================================================
+
 //The i2c address of the tca9548a is 0x70, but can be physically changed to 0x71
 //It was necessary to do this because the i2c address of the mb1232 is also
 //0x70, and i2c addresses must be unique.
@@ -245,7 +246,6 @@ void update_sensors()
 
 
 
-
 // --- GET SENSORS ---
 //
 // Fills OSC bundle with list of sensors currently plugged into multiplexer
@@ -258,6 +258,7 @@ void get_sensors(OSCBundle *bndl, char packet_header_string[])
 {
 	char addressString[255];
 	update_sensors();
+
 	for (int i = 0; i < 16; i++){
 		uint8_t t = state_tca9548a.devices[i][0];
 		if (t > 7)
@@ -313,6 +314,7 @@ void package_tca9548a(OSCBundle *bndl, char packet_header_string[])
 	#if LOOM_DEBUG == 1
 		Serial.println("Measuring data from devices connected to tca9548a (Multiplexer).");
 	#endif
+		
 	for (int device = 0; device < 16; device++){
 		if (state_tca9548a.devices[device][0] <= 7) {
 			tcaseselect(state_tca9548a.devices[device][0]);

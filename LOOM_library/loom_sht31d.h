@@ -48,7 +48,8 @@ void measure_sht31d();
 //
 bool setup_sht31d() {
 	bool is_setup;
-	if(state_sht31d.inst_sht31d.begin(i2c_addr_sht31d)) {
+
+	if (state_sht31d.inst_sht31d.begin(i2c_addr_sht31d)) {
 		is_setup = true;
 		#if LOOM_DEBUG == 1
 			Serial.println("Initialized sht31d (temp/humid)");
@@ -101,7 +102,7 @@ void measure_sht31d()
 	float t = state_sht31d.inst_sht31d.readTemperature();
 	float h = state_sht31d.inst_sht31d.readHumidity();
 
-	if((!isnan(t)) && (!isnan(h))) {
+	if ((!isnan(t)) && (!isnan(h))) {
 		state_sht31d.temp = t;
 		state_sht31d.humid = h;
 		#if LOOM_DEBUG == 1

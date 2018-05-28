@@ -51,7 +51,8 @@ void measure_fxas21002();
 //
 // @return  Whether or not sensor initialization was successful
 //
-bool setup_fxas21002() {
+bool setup_fxas21002() 
+{
 	bool is_setup;
 	state_fxas21002.inst_fxas21002 = Adafruit_FXAS21002C(0x0021002C);
 	
@@ -84,7 +85,8 @@ bool setup_fxas21002() {
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
 // @param port                  Which port of the multiplexer the device is plugged into
 //
-void package_fxas21002(OSCBundle *bndl, char packet_header_string[], uint8_t port) {
+void package_fxas21002(OSCBundle *bndl, char packet_header_string[], uint8_t port) 
+{
 	char address_string[255];
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/fxas21002/data");
 	
@@ -102,7 +104,8 @@ void package_fxas21002(OSCBundle *bndl, char packet_header_string[], uint8_t por
 //
 // Gets the current sensor readings of the Fxas21002 and stores into its state struct
 //
-void measure_fxas21002() {
+void measure_fxas21002() 
+{
 	/* Get a new sensor event */
 	sensors_event_t event;
 	state_fxas21002.inst_fxas21002.getEvent(&event);
@@ -127,7 +130,8 @@ void measure_fxas21002() {
 // printed to the Serial monitor
 //
 #if LOOM_DEBUG == 1
-void details_fxas21002() {
+void details_fxas21002() 
+{
 	sensor_t sensor;
 	state_fxas21002.inst_fxas21002.getSensor(&sensor);
 	Serial.println("------------------------------------");

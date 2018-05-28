@@ -52,6 +52,7 @@ void link_config_wifi(struct config_wifi_t *flash_setup_wifi){
 struct state_wifi_t state_wifi;
 
 char * packet_header_string;
+
 // WiFi global vars/structs
 WiFiUDP      Udp;
 WiFiUDP      UdpCommon;
@@ -88,11 +89,15 @@ void wifi_send_bundle(OSCBundle *bndl);
 // ================================================================
 
 // --- WIFI SETUP ---
+//
 // Called by main setup
 // Sets WiFi pins, checks for shield with WiFi, 
 // starts AP mode or tries to connect to existing network
-// @param none
-// Return:    none
+// Requests channel settings from if Request Settings is set
+// Otherwise it broadcasts its channel information
+//
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+//
 void wifi_setup(char packet_header_string[])
 {
 	// Configure pins for Adafruit ATWINC1500 Feather
@@ -147,9 +152,10 @@ void wifi_setup(char packet_header_string[])
 // ================================================================
 
 // --- PRINT WIFI STATUS ---
+//
 // If debug enabled, display WiFi settings / state to serial
-// @param none
-// Return:    none
+// Does nothing else
+//
 void printWiFiStatus() 
 {
 	#if LOOM_DEBUG == 1
@@ -192,10 +198,10 @@ void printWiFiStatus()
 
 
 // --- START ACCESS POINT ---
+//
 // Device will attempt to setup wifi access point that one computer to connect to
 // Called upon OSC command, button held, or connect to network failure
-// @param none
-// Return:    none
+//
 void start_AP() 
 {
 	#if LOOM_DEBUG == 1
@@ -230,10 +236,14 @@ void start_AP()
 
 
 // --- CONNECT TO WPA ---
+//
 // Device tries to connect to network with provide credentials 
 // Will revert to AP mode if this fails
+//
 // @param ssid (Wifi network name), pass (Wifi network password)
-// Return: bool (true is connection successful, false on failure )
+//
+// @return  Whether connection was successful
+//
 bool connect_to_WPA(char ssid[], char pass[]) 
 {
 	status = WiFi.begin(ssid, pass);
@@ -284,8 +294,12 @@ bool connect_to_WPA(char ssid[], char pass[])
 
 
 // --- SWITCH TO ACCESS POINT ---
+//
 // Switch to AP mode upon OSC command to do so
-// @param msg (not used, only there for msg_router to work properly)
+// A wrapper for Start_AP  
+// Saves AP_MODE as wifi_mode 
+//
+// @param msg  Not used, only there for msg_router to work properly
 // Return:    none
 void switch_to_AP(OSCMessage &msg) 
 {
@@ -301,7 +315,6 @@ void switch_to_AP(OSCMessage &msg)
 		start_AP();
 		config_wifi->wifi_mode = AP_MODE;
 		write_non_volatile();
-		// flash_config.write(configuration);
 	}
 	
 	#if LOOM_DEBUG == 1
@@ -312,10 +325,11 @@ void switch_to_AP(OSCMessage &msg)
 }
 
 
+
 // --- PRINT REMOVE MAC ADDRESS ---
+//
 // Prints the MAC address of device connected to devices access point
-// @param none
-// Return:    none
+// 
 void print_remote_mac_addr()
 {
 	byte remoteMac[6];
@@ -338,11 +352,17 @@ void print_remote_mac_addr()
 
 
 // --- REPLACE CHARACTER ---
+//
 // Given a string, replace all instances of 'orig' char with 'rep' char
-// Used primarily for replacing '~'s sent by Max, as it cannot send strings with spaces
-// @param str (pointer to string to alter), orig (character to replace), rep (replacement character)
-// Return:    none
-void replace_char(char *str, char orig, char rep) {
+// Used primarily for replacing '~'s sent by Max
+// as it cannot send strings with spaces
+//
+// @param str   Pointer to string to alter
+// @param orig  Character to replace
+// @param rep   Replacement character
+// 
+void replace_char(char *str, char orig, char rep) 
+{
 	char *ix = str;
 	while((ix = strchr(ix, orig)) != NULL) {
 		*ix++ = rep;
@@ -352,12 +372,13 @@ void replace_char(char *str, char orig, char rep) {
 
 
 // --- CONNECT TO NEW NETWORK ---
+//
 // Attempt to connect WiFi network in client mode upon command to do so
 // and both ssid and password provided
-// Credentials stored in global variable
+// Credentials stored in global wifi variable
+// and copied into configuration struct and saved to non-volatile memory
 // Reverts to AP mode upon failure
-// @param none 
-// Return:    none
+// 
 void connect_to_new_network()
 {
 	// Replace '~'s with spaces - as spaces cannot be sent via Max and are replaced with '~'
@@ -385,17 +406,18 @@ void connect_to_new_network()
 		strcpy(config_wifi->ssid, state_wifi.new_ssid);
 		strcpy(config_wifi->pass, state_wifi.new_pass);
 		write_non_volatile();
-//    flash_config.write(configuration);
 	} 
 }
 
 
 
 // --- SET SSID ---
+//
 // Updates WiFi ssid global var with new ssid
 // Sets global bool to indicate this 
-// @param msg (OSC message with network ssid)
-// Return:    none
+//
+// @param msg  OSC message with network ssid
+//
 void set_ssid(OSCMessage &msg) 
 {
 	msg.getString(0, state_wifi.new_ssid, 50);
@@ -404,11 +426,13 @@ void set_ssid(OSCMessage &msg)
 
 
 
-// SET PASSWORD
+// --- SET PASSWORD ---
+//
 // Updates WiFi password global var with new password 
 // Sets global bool to indicate this 
-// @param msg (OSC message with network password)
-// Return:    none
+//
+// @param msg  OSC message with network password)
+//
 void set_pass(OSCMessage &msg) 
 {
 	msg.getString(0, state_wifi.new_pass, 50);
@@ -418,10 +442,12 @@ void set_pass(OSCMessage &msg)
 
 
 // --- BROADCAST IP ---
-// Broadcast IP address so that requesting computer can update IP
+//
+// Broadcasts IP address so that requesting computer can update IP
 // to send to if it only had device instance number 
-// @param msg (OSC message with no data, only message header was needed by msg_router())
-// Return:    none
+//
+// @param msg  OSC message with no data, only message header was needed by msg_router()
+// 
 void broadcastIP(OSCMessage &msg) 
 {
 	OSCBundle bndl;
@@ -447,9 +473,12 @@ void broadcastIP(OSCMessage &msg)
 
 
 // --- SET PORT ---
-// Update device's communication port
-// @param msg (OSC message of new port for device to communicate on)
-// Return:    none
+//
+// Update device's UDP communication port
+// Port in configuration struct is update but not saved
+//
+// @param msg  OSC message of new port for device to communicate on
+// 
 void set_port(OSCMessage &msg) 
 {
 	#if LOOM_DEBUG == 1
@@ -467,24 +496,28 @@ void set_port(OSCMessage &msg)
 		Serial.println(config_wifi->localPort);
 	#endif
 
-	config_wifi->request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
-																			// Note that configuration needs to be saved for this to take effect
+	config_wifi->request_settings = 0;  // Setting to 0 means that device will not request new port settings on restart. 
+										// Note that configuration needs to be saved for this to take effect
 
-	//respond_to_poll_request(packet_header_string);
 }
 
 
 
+// --- WIFI CHECK STATUS --- 
+//
+// Used to check if remote computer is still 
+// connected to this device's access point
+//
 void wifi_check_status()
 {
 	// Compare the previous status to the current status
 	if (status != WiFi.status()) {
-		status = WiFi.status();              // It has changed, update the variable
+		status = WiFi.status();					// It has changed, update the variable
 		
 		#if LOOM_DEBUG == 1
-			if (status == WL_AP_CONNECTED) {   // A device has connected to the AP
+			if (status == WL_AP_CONNECTED) { 	// A device has connected to the AP
 					print_remote_mac_addr();                            
-			} else {                           // A device has disconnected from the AP, and we are back in listening mode 
+			} else {							// A device has disconnected from the AP, and we are back in listening mode 
 				Serial.println("Device disconnected from AP");
 			}
 		#endif
@@ -493,6 +526,12 @@ void wifi_check_status()
 
 
 
+// --- REQUEST SETTINGS FROM MAX ---
+//
+// Used to request channel settings from Max Channel Manager
+// Sends IP address so that Max can target response at this device
+// Setting response will entail SetID and SetPort commands 
+//
 void request_settings_from_Max()
 {
 	OSCBundle bndl;
@@ -518,17 +557,35 @@ void request_settings_from_Max()
 
 
 
+// --- SET REQUEST SETTINGS --- 
+//
+// Sets the 'Request_Settings' option in the configuration
+// On next startup, device will request channel settings from Max
+//
+// @param msg  OSC messages that had header ending in '/SetRequestSettings'
+//				only used by msg_router(), not used here
+//
 void set_request_settings(OSCMessage &msg)
 {
 	config_wifi->request_settings = 1; // Setting to 1 means that device will request new port settings on restart. 
-																			// Note that configuration needs to be saved for this to take effect
+	write_non_volatile();
+
 	#if LOOM_DEBUG == 1
-		Serial.println("Setting Request Settings True (Note, configuration needs to be saved for change to take effect");
+		Serial.println("Setting Request Settings True");
 	#endif                                    
 }
 
 
 
+// --- NEW CHANNEL ---
+//
+// Called if device received command to request
+// channel settings from Max Channel Manager
+// Setting response will entail SetID and SetPort commands 
+//
+// @param msg  OSC messages that had header ending in '/getNewChannel'
+//				only used by msg_router(), not used here
+//
 void new_channel(OSCMessage &msg)
 {
 	#if LOOM_DEBUG == 1
@@ -539,6 +596,15 @@ void new_channel(OSCMessage &msg)
 
 
 
+// --- RESPOND TO POLL REQUEST ---
+// 
+// Device received poll request from Max Channel Manager to respond presence
+// The function is not routed to by msg_router() but directly from 
+// wifi_receive_bundle() as a poll request comes on the common UDP port, 9440, 
+// not the device unique port
+// 
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+// 
 void respond_to_poll_request(char packet_header_string[])
 {
 	OSCBundle bndl;
@@ -560,6 +626,15 @@ void respond_to_poll_request(char packet_header_string[])
 
 
 
+// --- WIFI SEND BUNDLE ---
+//
+// This is a simple helper function to encapsulate the 
+// common sequence of commands to send an OSC bundle
+// Note that this send on the device unique UDP port, localPort,
+// not the common port, 9440
+//
+// @param bndl  The OSC bundle to send on the device unique port
+//
 void wifi_send_bundle(OSCBundle *bndl)
 {
 	Udp.beginPacket(config_wifi->ip_broadcast, config_wifi->localPort);

@@ -131,7 +131,7 @@ void loop() {
 	#endif
 	
 	// Get analog readings
-	#if is_analog >= 1
+	#if num_analog >= 1
 		package_analog(&send_bndl,configuration.packet_header_string);
 		#if is_wifi == 1
 			wifi_send_bundle(&send_bndl);
