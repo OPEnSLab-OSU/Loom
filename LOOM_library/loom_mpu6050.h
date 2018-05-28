@@ -116,7 +116,7 @@ bool setup_mpu6050()
 	#endif
  
 	// Join I2C bus (I2Cdev library doesn't do this automatically)
-	#if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
+	#if I2CDEV_IMPLEMENTATION   == I2CDEV_ARDUINO_WIRE
 		Wire.begin();
 		Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
 	#elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
@@ -129,7 +129,7 @@ bool setup_mpu6050()
 		Serial.println("Using i2c");
 	#endif
 	
-	// *** Init MPU 6050 and serial stuff
+	// Init MPU 6050 and serial stuff
 	accelgyro.initialize();
 	mpu.initialize();
 	devStatus = mpu.dmpInitialize();
@@ -142,14 +142,14 @@ bool setup_mpu6050()
 	
 	// Make sure it worked (returns 0 if so)
 	if (devStatus == 0) {
-		// turn on the DMP, now that it's ready
+		// Turn on the DMP, now that it's ready
 		#if LOOM_DEBUG == 1
 			Serial.println(F("Enabling DMP..."));
 		#endif
 		
 		mpu.setDMPEnabled(true);
 
-			// Uncomment following 2 lines if using enable Arduino Uno, MO, or Trinket interrupt detection
+		// Uncomment following 2 lines if using enable Arduino Uno, MO, or Trinket interrupt detection
 		#if LOOM_DEBUG == 1
 			Serial.println(F("Enabling MPU interrupt detection (Arduino external interrupt 0)..."));
 		#endif
@@ -164,17 +164,19 @@ bool setup_mpu6050()
 		
 		//pciSetup(INTERRUPT_PIN);
 			
-			mpuIntStatus = mpu.getIntStatus();
+		mpuIntStatus = mpu.getIntStatus();
 
 		// Set our DMP Ready flag so the main loop() function knows it's okay to use it
 		#if LOOM_DEBUG == 1
-				Serial.println(F("DMP ready! Waiting for first interrupt..."));
+			Serial.println(F("DMP ready! Waiting for first interrupt..."));
 		#endif
 		dmpReady = true;
 
 		// get expected DMP packet size for later comparison
 		packetSize = mpu.dmpGetFIFOPacketSize();
-	} else { // of if(defStatus == 0)
+
+	} // of if(defStatus == 0)
+	else { 
 		// ERROR!
 		// 1 = initial memory load failed
 		// 2 = DMP configuration updates failed
@@ -186,6 +188,7 @@ bool setup_mpu6050()
 			Serial.println(F(")"));
 		#endif
 	} // of else
+
 	return dmpReady;
 }
 
@@ -254,12 +257,12 @@ void measure_mpu6050(void)
 			mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
 			
 			#if LOOM_DEBUG == 1
-			/*      Serial.print("ypr\t");
-					Serial.print(ypr[0] * 180/M_PI);
-					Serial.print("\t");
-					Serial.print(ypr[1] * 180/M_PI);
-					Serial.print("\t");
-					Serial.println(ypr[2] * 180/M_PI); */
+				// Serial.print("ypr\t");
+				// Serial.print(ypr[0] * 180/M_PI);
+				// Serial.print("\t");
+				// Serial.print(ypr[1] * 180/M_PI);
+				// Serial.print("\t");
+				// Serial.println(ypr[2] * 180/M_PI); 
 			#endif
 		#endif
 		
@@ -309,14 +312,12 @@ void measure_mpu6050(void)
 			mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
 			
 			#if LOOM_DEBUG == 1
-				/*
-					Serial.print("aworld\t");
-					Serial.print(aaWorld.x);
-					Serial.print("\t");
-					Serial.print(aaWorld.y);
-					Serial.print("\t");
-					Serial.println(aaWorld.z);
-				*/
+				// Serial.print("aworld\t");
+				// Serial.print(aaWorld.x);
+				// Serial.print("\t");
+				// Serial.print(aaWorld.y);
+				// Serial.print("\t");
+				// Serial.println(aaWorld.z);
 			#endif
 		#endif
 
@@ -353,6 +354,8 @@ void measure_mpu6050(void)
 
 
 // --- MEAN SENSOR MEASUREMENTS ---
+//
+// . . .
 // 
 void meansensors()
 {
@@ -386,8 +389,8 @@ void meansensors()
 
 // --- CALIBRATION ---
 // 
-// Arguments:
-// Return:
+// . . . 
+//
 void calibration() {
 	config_mpu6050->ax_offset = -mean_ax / 8;
 	config_mpu6050->ay_offset = -mean_ay / 8;
@@ -433,7 +436,7 @@ void calibration() {
 		
 		if (ready == 6) break;
 	}
-} // pf calibration
+} // of calibration
 
 
 
@@ -594,7 +597,7 @@ void calMPU6050()
 // Wrapper function to call calMPU6050 if device received
 // OSC command to calibrate MPU6050 
 //
-// @param msg  OSC messgage routed from msg_router, not actually used
+// @param msg  OSC messgage routed from msg_router, not actually used here
 //
 void calMPU6050_OSC(OSCMessage &msg) 
 {

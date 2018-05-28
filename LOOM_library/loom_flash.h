@@ -97,6 +97,7 @@ void flash_config_setup()
 		link_config_mpu6050(&configuration.config_mpu6050);
 	#endif
 	#if MEM_TYPE == MEM_FLASH || MEM_TYPE == MEM_EEPROM
+
 		read_non_volatile(); //reads configuration from non_volatile memory
 		
 		#if LOOM_DEBUG == 1
@@ -106,8 +107,10 @@ void flash_config_setup()
 		#endif
 		
 		if (configuration.checksum != memValidationValue) {     // Write default values to flash
+
 			configuration.instance_number = INIT_INST;
 			sprintf(configuration.packet_header_string,"%s%d\0",PacketHeaderString,configuration.instance_number);
+
 			#if LOOM_DEBUG == 1
 				Serial.print("expecting OSC header ");
 				Serial.println(configuration.packet_header_string);
@@ -128,7 +131,7 @@ void flash_config_setup()
 			// Add any other behavior/calibration wrapped in an #ifdef is_something preprocessor directive HERE
 			
 			#if is_mpu6050 == 1 && is_ishield == 1
-				calMPU6050();                                     // Calibration writes memValidationValue for us
+				calMPU6050();                                 // Calibration writes memValidationValue for us
 			#endif
 			
 			configuration.checksum = memValidationValue;      // Configuration has been written successfully, so we write the checksum
@@ -136,7 +139,9 @@ void flash_config_setup()
 			#if LOOM_DEBUG == 1
 				Serial.println("Writing to flash for the first time.");
 			#endif
+
 			write_non_volatile();
+			
 			#if LOOM_DEBUG == 1
 				Serial.println("Done writing to flash.");
 			#endif

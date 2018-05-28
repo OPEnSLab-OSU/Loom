@@ -3,6 +3,7 @@
 // ================================================================
 #include <Adafruit_NeoPixel.h>
 
+
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
@@ -36,11 +37,12 @@ void set_color(OSCMessage &msg);
 // ================================================================
 //
 // Called by main setup
-// Creates an array to store Neopixel data, iterates through to initialize Neopixels
+// Creates an array to store Neopixel data,
+// iterates through to initialize Neopixels
 // 
 void setup_neopixel() 
 {
-	for(int i = 0; i < 3; i++) {
+	for (int i = 0; i < 3; i++) {
 		if (state_neopixel.enabled[i]) {
 			state_neopixel.pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
 			state_neopixel.pixels[i]->begin(); // This initializes the NeoPixel library.
@@ -57,18 +59,20 @@ void setup_neopixel()
 // --- SET COLOR ---
 //
 // Handle OSC messages to set specified Neopixel to a given color
-// Each message only holds one of R, G, B values
+// Each message holds the port of the Neopixel being targetting,
+// which number is in a chain, and R, G, and B values from 0 to 255 
 //
-// @param msg  OSC message containing details of which Neopixel and what color)
+// @param msg  OSC message containing details of which Neopixel and what color to set it to
 //
 void set_color(OSCMessage &msg) 
 {
-	int port     = msg.getInt(0);
-	int pixelNum = msg.getInt(1);
-	int red      = msg.getInt(2);
-	int green    = msg.getInt(3);
-	int blue     = msg.getInt(4);
+	int port     = msg.getInt(0); // 0-2 corresponding to A0-A2
+	int pixelNum = msg.getInt(1); // Which number in a daisy chain, starting at 0
+	int red      = msg.getInt(2); // Val 0-255
+	int green    = msg.getInt(3); // Val 0-255
+	int blue     = msg.getInt(4); // Val 0-255
 
+	// Print received values if debug enabled
 	#if LOOM_DEBUG == 1
 		Serial.println("========");
 		Serial.print("Port: ");  Serial.print(port);
