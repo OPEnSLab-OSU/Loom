@@ -131,7 +131,8 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
 //
 // Configures ethernet capabilities.
 // 
-bool setup_ethernet() {
+bool setup_ethernet() 
+{
 	bool is_setup;
 	if (Ethernet.begin(mac) == 0) {
 		#if LOOM_DEBUG == 1
@@ -175,7 +176,8 @@ bool setup_ethernet() {
 //
 // @return The value of the argument as a string.
 //
-String get_data_value(OSCMessage* msg, int pos) {
+String get_data_value(OSCMessage* msg, int pos) 
+{
 	if(pos < msg->size()) {
 		switch (msg->getType(pos)) {
 			case 'i':
@@ -212,7 +214,8 @@ String get_data_value(OSCMessage* msg, int pos) {
 // @param string  A char * created through the use of get_OSC_string(), 
 // @param bndl    The OSC bundle to be populated
 //
-void get_OSC_bundle(char *string, OSCBundle* bndl) {
+void get_OSC_bundle(char *string, OSCBundle* bndl) 
+{
 	bndl->empty();
 	data_value value_union;
 	char buf[strlen(string)+1];
@@ -253,7 +256,8 @@ void get_OSC_bundle(char *string, OSCBundle* bndl) {
 //
 // @param msg  The message containing the information to send to PB.
 //
-void sendToPushingBox(OSCMessage &msg) {
+void sendToPushingBox(OSCMessage &msg) 
+{
 	#if LOOM_DEBUG == 1
 		Serial.println("Sending to pushing box");
 	#endif

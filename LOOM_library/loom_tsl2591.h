@@ -80,7 +80,7 @@ bool setup_tsl2591()
 
 // --- PACKAGE TSL2591 ---
 //
-// Adds OSC Message of last read TSL2591 sensor readings to provided OSC bundle
+// Adds an OSC Message of last read TSL2591 sensor readings to provided OSC bundle
 //
 // @param bndl                  The OSC bundle to be added to
 // @param packet_header_string  The device-identifying string to prepend to OSC messages

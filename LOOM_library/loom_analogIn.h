@@ -82,15 +82,15 @@ void package_analog(OSCBundle *bndl, char packet_header_string[])
 { 
 	char addressString[255];
 	// Get reading from relevant ports and the button if enabled          
-	#if (is_analog > 0) 
+	#if (num_analog > 0) 
 		sprintf(addressString, "%s%s", packet_header_string, "/port0");
 		bndl->add(addressString).add((int32_t)read_analog(0));
 	#endif
-	#if (is_analog > 1)
+	#if (num_analog > 1)
 		sprintf(addressString, "%s%s", packet_header_string, "/port1");
 		bndl->add(addressString).add((int32_t)read_analog(1));
 	#endif
-	#if (is_analog > 2)
+	#if (num_analog > 2)
 		sprintf(addressString, "%s%s", packet_header_string, "/port2");
 		bndl->add(addressString).add((int32_t)read_analog(2));
 	#endif

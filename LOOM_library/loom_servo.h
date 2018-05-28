@@ -100,7 +100,7 @@ void set_servo_degree(int set_degree, int servo_choice)
 		}
 	}
 	
-	state_servo.predeg[servo_choice] = set_degree;
+	state_servo.predeg[servo_choice]          = set_degree;
 	state_servo.pre_pulselength[servo_choice] = pulselength;
 }
 
