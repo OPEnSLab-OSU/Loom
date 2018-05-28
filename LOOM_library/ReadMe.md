@@ -44,6 +44,10 @@ The associated [Loom Data Processors](https://github.com/OPEnSLab-OSU/InternetOf
 
 The LOOM Library is the answer to the growing set of code to drive Project LOOM's supported devices, hardware, and communication platforms. The set of possible combinations of device configurations makes it unfeasable for LOOM developers and users alike to manage sketches with desired functionality. Instead, a configuration file effectively creates the desired sketch dynamically. A loom_preamble file selects entire files to include, each of which may also contain additional preprocessor statements.
 
+### Overall Structure
+
+The LOOM Library is effectively an aggregate of all of the functionality possible with the entirety of the supported devices, sensors, and actuators. The user then specifies the needs of their sketch inside the config.h. Based on the needs of the sketch, the requisite files, functions, and logic will be dynamically included such that only what is needed by the sketch is uploaded to the device. loom_preamble.h uses config.h to know which files to include, these files in turn then include the libraries they need. loom_common.h is also always present as it has the LOOM_begin() function, which sets up all the modules and sensors being used by the sketch. 
+
 ### Adding to the Library
 
 New sensor and actuator support can be added by filling out the loom_mod_template.h file with relevant code. This template ensures that the code for each piece of hardware conforms to a standard format, making it easier to read and understand.
