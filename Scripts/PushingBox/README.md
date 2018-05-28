@@ -11,10 +11,11 @@ This is a python script that will build the string used by the PushingBox Scenar
 
 ## fake_get.py -
 This is the python script used to test the PushingBox and Google Script functionality without needing to set up a LoRa Hub. It can be run in 3 ways:
-** "python fake_get.py <num_cols>" - Where <num_cols> is the number of columns/key-value pairs being sent (including IDtag).
+
+- "python fake_get.py <num_cols>" - Where <num_cols> is the number of columns/key-value pairs being sent (including IDtag).
 	
-** "python fake_get.py <num_cols> <IDtag>" - Where <IDtag> is the desired name of the sheet/tab.
+- "python fake_get.py <num_cols> <IDtag>" - Where <IDtag> is the desired name of the sheet/tab.
 	
-** "python fake_get.py <num_cols> <IDtag> <Device ID>" - Where <Device ID> is the unique identifier of the PushingBox Scenario. 
+- "python fake_get.py <num_cols> <IDtag> <Device ID>" - Where <Device ID> is the unique identifier of the PushingBox Scenario. 
 	
 The script will query the user for the information that is not supplied.
