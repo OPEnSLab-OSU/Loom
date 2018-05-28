@@ -13,10 +13,10 @@
 #define RFM95_RST 4
 
 #ifdef is_m0
-  #define RFM95_INT 3     // Use this for the M0
+	#define RFM95_INT 3     // Use this for the M0
 #endif
 #ifdef is_32u4
-  #define RFM95_INT 7     // Use this for the 32u4
+	#define RFM95_INT 7     // Use this for the 32u4
 #endif
 
 // ================================================================ 
@@ -28,9 +28,9 @@
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 union data_value {
-  int32_t i;
-  float f;
-  uint32_t u;
+	int32_t i;
+	float f;
+	uint32_t u;
 };
 
 #if lora_device_type == 0
@@ -54,19 +54,19 @@ RHReliableDatagram manager(rf95, SERVER_ADDRESS);
 void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager);
 
 #if lora_device_type == 0
-  void get_OSC_bundle(char *string, OSCBundle* bndl);
+	void get_OSC_bundle(char *string, OSCBundle* bndl);
 	void lora_receive_bundle(OSCBundle *bndl);
-  String get_data_value(OSCMessage* msg, int pos);
-  void sendToPushingBox(int num_fields, char *server_name, char *devid);
+	String get_data_value(OSCMessage* msg, int pos);
+	void sendToPushingBox(int num_fields, char *server_name, char *devid);
 	bool setup_ethernet();
 #endif
 
 #if lora_device_type == 1
-  void get_OSC_string(OSCBundle *bndl, char *osc_string);
+	void get_OSC_string(OSCBundle *bndl, char *osc_string);
 #endif
 
 #if LOOM_DEBUG == 1
-  void print_bundle(OSCBundle *bndl);
+	void print_bundle(OSCBundle *bndl);
 #endif
 
 
@@ -84,45 +84,45 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager);
 //
 void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager) 
 {
-  #if lora_device_type == 0
+	#if lora_device_type == 0
 		pinMode(8, INPUT_PULLUP);
-  #endif
-  #if LOOM_DEBUG == 1
+	#endif
+	#if LOOM_DEBUG == 1
 		Serial.println("Initializing manager...");
-  #endif
-  if (!manager->init()){
-    #if LOOM_DEBUG == 1
+	#endif
+	if (!manager->init()){
+		#if LOOM_DEBUG == 1
 			Serial.println("init failed");
 		#endif
-  }
+	}
 
-  #if LOOM_DEBUG == 1
-    Serial.println("Setting Frequency...");
-  #endif
-  if (!rf95->setFrequency(RF95_FREQ)) {
+	#if LOOM_DEBUG == 1
+		Serial.println("Setting Frequency...");
+	#endif
+	if (!rf95->setFrequency(RF95_FREQ)) {
 		#if LOOM_DEBUG == 1
 			Serial.println("setFrequency failed");
 		#endif
-  }
+	}
 
 	#if LOOM_DEBUG == 1
 		Serial.println("Setting up ethernet");
 	#endif
-  #if lora_device_type == 0
+	#if lora_device_type == 0
 		if(!setup_ethernet()) {
 			#if LOOM_DEBUG == 1
 				Serial.println("Failed to setup ethernet");
 			#endif
 		}
-  #endif
-  
-  #if LOOM_DEBUG == 1
-    Serial.println("Setting power...");
-  #endif
-  rf95->setTxPower(23, false);
-  #if LOOM_DEBUG == 1
-    Serial.println("LoRa setup finished!");
-  #endif
+	#endif
+	
+	#if LOOM_DEBUG == 1
+		Serial.println("Setting power...");
+	#endif
+	rf95->setTxPower(23, false);
+	#if LOOM_DEBUG == 1
+		Serial.println("LoRa setup finished!");
+	#endif
 }
 
 
@@ -132,30 +132,30 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
 // Configures ethernet capabilities.
 // 
 bool setup_ethernet() {
-  bool is_setup;
-  if (Ethernet.begin(mac) == 0) {
-    #if LOOM_DEBUG == 1
-      Serial.println("Failed to configure Ethernet using DHCP");
-    #endif
-    // try to congifure using IP address instead of DHCP:
-    Ethernet.begin(mac, ip);
-  }
-  
-  if(client.connect("www.google.com", 80)) {
-    is_setup = true;
-    #if LOOM_DEBUG == 1
-      Serial.println("Successfully connected to internet");
-    #endif
-    client.stop();
-  }
-  else {
-    is_setup = false;
-    #if LOOM_DEBUG == 1
-      Serial.println("Failed to connect to internet");
-    #endif
-  }
-  
-  return is_setup;
+	bool is_setup;
+	if (Ethernet.begin(mac) == 0) {
+		#if LOOM_DEBUG == 1
+			Serial.println("Failed to configure Ethernet using DHCP");
+		#endif
+		// try to congifure using IP address instead of DHCP:
+		Ethernet.begin(mac, ip);
+	}
+	
+	if(client.connect("www.google.com", 80)) {
+		is_setup = true;
+		#if LOOM_DEBUG == 1
+			Serial.println("Successfully connected to internet");
+		#endif
+		client.stop();
+	}
+	else {
+		is_setup = false;
+		#if LOOM_DEBUG == 1
+			Serial.println("Failed to connect to internet");
+		#endif
+	}
+	
+	return is_setup;
 }
 
 
@@ -358,42 +358,42 @@ void get_OSC_string(OSCBundle *bndl, char *osc_string)
 	memset(osc_string, '\0', sizeof(osc_string));
 
 	for (int i = 0; i < bndl->size(); i++) {
-	msg = bndl->getOSCMessage(i);
-	memset(addr_buf, '\0', addr_len);
-	msg->getAddress(addr_buf, 0);
-	strcat(osc_string, addr_buf);
+		msg = bndl->getOSCMessage(i);
+		memset(addr_buf, '\0', addr_len);
+		msg->getAddress(addr_buf, 0);
+		strcat(osc_string, addr_buf);
 
-	for (int j = 0; j < msg->size(); j++) {
-		data_type = msg->getType(j);
-		switch (data_type) {
-		case 'f':
-			value.f = msg->getFloat(j);
-			snprintf(addr_buf, addr_len, ",f%lu", value.u);
-			strcat(osc_string, addr_buf);
-			break;
+		for (int j = 0; j < msg->size(); j++) {
+			data_type = msg->getType(j);
+			switch (data_type) {
+			case 'f':
+				value.f = msg->getFloat(j);
+				snprintf(addr_buf, addr_len, ",f%lu", value.u);
+				strcat(osc_string, addr_buf);
+				break;
 
-		case 'i':
-			value.i = msg->getInt(j);
-			snprintf(addr_buf, addr_len, ",i%lu", value.u);
-			strcat(osc_string, addr_buf);
-			break;
+			case 'i':
+				value.i = msg->getInt(j);
+				snprintf(addr_buf, addr_len, ",i%lu", value.u);
+				strcat(osc_string, addr_buf);
+				break;
 
-		case 's':
-			char data_buf[40];
-			msg->getString(j, data_buf, sizeof(data_buf));
-			snprintf(addr_buf, addr_len, ",s%s", data_buf);
-			strcat(osc_string, addr_buf);
-			break;
+			case 's':
+				char data_buf[40];
+				msg->getString(j, data_buf, sizeof(data_buf));
+				snprintf(addr_buf, addr_len, ",s%s", data_buf);
+				strcat(osc_string, addr_buf);
+				break;
 
-		default:
-			if (data_type != '\0')
-			#if LOOM_DEBUG == 1
-				Serial.print("Invalid message arg type");
-			#endif
-			break;
+			default:
+				if (data_type != '\0')
+				#if LOOM_DEBUG == 1
+					Serial.print("Invalid message arg type");
+				#endif
+				break;
+			}
 		}
-	}
-	if (msg != NULL) strcat(osc_string, " ");
+		if (msg != NULL) strcat(osc_string, " ");
 	}
 }
 
@@ -410,31 +410,30 @@ void get_OSC_string(OSCBundle *bndl, char *osc_string)
 //
 bool lora_send_bundle(OSCBundle *bndl)
 {
-  char message[RH_RF95_MAX_MESSAGE_LEN];
-  memset(message, '\0', sizeof(message));
-  get_OSC_string(bndl, message);
-  #if LOOM_DEBUG == 1
-    Serial.println(message);
-    Serial.print("Message length: ");
-    Serial.println(strlen(message));
-    Serial.print("Max message length: ");
-    Serial.println(RH_RF95_MAX_MESSAGE_LEN);
-    Serial.print("Sending...");
-  #endif
-   
-  if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)){
-    #if LOOM_DEBUG == 1
-      Serial.println("Sent bundle through LoRa!");
-    #endif
-    return true;
-  }
-  else
-  {
-    #if LOOM_DEBUG == 1
-      Serial.println("Failed to send bundle!");
-    #endif
-    return false;
-  }
+	char message[RH_RF95_MAX_MESSAGE_LEN];
+	memset(message, '\0', sizeof(message));
+	get_OSC_string(bndl, message);
+	#if LOOM_DEBUG == 1
+		Serial.println(message);
+		Serial.print("Message length: ");
+		Serial.println(strlen(message));
+		Serial.print("Max message length: ");
+		Serial.println(RH_RF95_MAX_MESSAGE_LEN);
+		Serial.print("Sending...");
+	#endif
+	 
+	if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)) {
+		#if LOOM_DEBUG == 1
+			Serial.println("Sent bundle through LoRa!");
+		#endif
+		return true;
+	}
+	else {
+		#if LOOM_DEBUG == 1
+			Serial.println("Failed to send bundle!");
+		#endif
+		return false;
+	}
 }
 #endif // of lora_device_type == 1
 
@@ -456,6 +455,7 @@ void print_bundle(OSCBundle *bndl)
 	Serial.println("Bundle Size: ");
 	Serial.println(bndl->size());
 	OSCMessage *msg = bndl->getOSCMessage(n);
+	
 	while (msg != NULL) {
 		msg->getAddress(buf, 0);
 		Serial.print("Address ");

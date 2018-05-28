@@ -24,22 +24,22 @@
 
 // Still experimental
 #ifdef __SAMD21G18A__
-  #define is_m0
-  #define MEM_TYPE MEM_FLASH
+	#define is_m0
+	#define MEM_TYPE MEM_FLASH
 #endif
 #ifdef __AVR_ATmega32U4__
-  #define is_32u4
-  #define MEM_TYPE MEM_EEPROM
+	#define is_32u4
+	#define MEM_TYPE MEM_EEPROM
 #endif
 #if is_relay == 0
-  #define button 10               // Using on-board button, specify attached pin, transmitting
+	#define button 10               // Using on-board button, specify attached pin, transmitting
 #endif
 #ifdef is_sleep_period
-  #include <Adafruit_SleepyDog.h> // This must be included if you are transmitting at timed intervals
+	#include <Adafruit_SleepyDog.h> // This must be included if you are transmitting at timed intervals
 #endif
 
 #ifdef is_sleep_interrupt
-  #include <LowPower.h>           // Include this if transmitting on pin interrupt
+	#include <LowPower.h>           // Include this if transmitting on pin interrupt
 #endif
 
 // Using Config defines, check which headers to include
@@ -56,19 +56,19 @@ void write_non_volatile();
 // ===                  INCLUDE DEVICE FILES                    === 
 // ================================================================
 #if is_analog > 0
-  #include "loom_analogIn.h"
+	#include "loom_analogIn.h"
 #endif
 #if is_neopixel == 1
-  #include "loom_neopixel.h"
+	#include "loom_neopixel.h"
 #endif
 #if num_servos > 0
-  #include "loom_servo.h"
+	#include "loom_servo.h"
 #endif
 #if num_steppers > 0
-  #include "loom_stepper.h"
+	#include "loom_stepper.h"
 #endif
 #if is_relay == 1
-  #include "loom_relay.h"
+	#include "loom_relay.h"
 #endif
 #if is_wifi == 1
 	#include "loom_wifi.h"
@@ -77,10 +77,10 @@ void write_non_volatile();
 	#include "loom_lora.h"
 #endif
 #if is_mpu6050 == 1
-  #include "loom_mpu6050.h"
+	#include "loom_mpu6050.h"
 #endif
 #if is_max31856 == 1
-  #include "loom_max31856.h"
+	#include "loom_max31856.h"
 #endif
 #if is_tsl2591 == 1
 	#include "loom_tsl2591.h"
@@ -101,7 +101,7 @@ void write_non_volatile();
 	#include "loom_mb1232.h"
 #endif
 #if is_decagon == 1
-  #include "loom_decagon.h"
+	#include "loom_decagon.h"
 #endif
 #if is_tca9548a == 1
 	#include "loom_tca9548a.h"

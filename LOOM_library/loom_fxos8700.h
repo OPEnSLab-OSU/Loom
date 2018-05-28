@@ -50,7 +50,7 @@ struct state_fxos8700_t state_fxos8700;
 // @return  Whether or not sensor initialization was successful
 //
 bool setup_fxos8700() {
-  bool is_setup;
+	bool is_setup;
 	state_fxos8700.inst_fxos8700 = Adafruit_FXOS8700(0x8700A, 0x8700B);
 	if(state_fxos8700.inst_fxos8700.begin(ACCEL_RANGE_4G)) {
 		is_setup = true;
@@ -106,9 +106,9 @@ void package_fxos8700(OSCBundle *bndl, char packet_header_string[], uint8_t port
 //
 void measure_fxos8700() {
 	sensors_event_t aevent, mevent;
-  state_fxos8700.inst_fxos8700.getEvent(&aevent, &mevent);
+	state_fxos8700.inst_fxos8700.getEvent(&aevent, &mevent);
 
-  state_fxos8700.accel[0] = aevent.acceleration.x;
+	state_fxos8700.accel[0] = aevent.acceleration.x;
 	state_fxos8700.accel[1] = aevent.acceleration.y;
 	state_fxos8700.accel[2] = aevent.acceleration.z;
 

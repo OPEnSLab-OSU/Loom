@@ -4,8 +4,8 @@
 #include <Wire.h>
 #ifdef is_32u4
 	extern "C" { 
-    #include "utility/twi.h"  // from Wire library, so we can do bus scanning
-  }
+		#include "utility/twi.h"  // from Wire library, so we can do bus scanning
+	}
 #endif
 
 
@@ -28,7 +28,7 @@ struct state_tca9548a_t {
 	int measurement_count;
 	long last_update_time;
 	long mux_update_period;
-  byte devices[16][2];
+	byte devices[16][2];
 };
 
 // ================================================================ 
@@ -59,14 +59,15 @@ void send_sensor_list(OSCMessage &);
 //
 // @return  Whether or not initialization was successful
 //
-bool setup_tca9548a() {
-  delay(2000);
-  Wire.begin();
+bool setup_tca9548a() 
+{
+	delay(2000);
+	Wire.begin();
 	#if LOOM_DEBUG == 1
 		Serial.println("initialized tca9548a (multiplexer).");
 	#endif
 	state_tca9548a.mux_update_period = UPDATE_PERIOD;
-  update_sensors();
+	update_sensors();
 	state_tca9548a.last_update_time = millis();
 }
 
@@ -83,8 +84,9 @@ bool setup_tca9548a() {
 // 
 // @param port_num
 //
-void tcaseselect(uint8_t port_num) {
-  if (port_num < 8) {
+void tcaseselect(uint8_t port_num) 
+{
+	if (port_num < 8) {
 		Wire.beginTransmission(i2c_addr_tca9548a);
 		Wire.write(1 << port_num);
 		Wire.endTransmission();  
@@ -104,8 +106,9 @@ void tcaseselect(uint8_t port_num) {
 // @param packet_header_string  The device-identifying string to prepend to OSC messages  (forwarded to sensor package functions)
 // @param port                  Which port the sensor being checked would be plugged into
 //
-void get_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_string[], uint8_t port){
-  #if LOOM_DEBUG == 1
+void get_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_string[], uint8_t port)
+{
+	#if LOOM_DEBUG == 1
 		Serial.print("Attempting to measure data from sensor with address: ");
 		Serial.println(i2c_addr);
 	#endif 
@@ -114,7 +117,7 @@ void get_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_strin
 		if(i2c_addr == 0x29){
 			if (setup_tsl2591()) {
 				measure_tsl2591();
-        package_tsl2591(bndl,packet_header_string,port);
+				package_tsl2591(bndl,packet_header_string,port);
 				return;
 			} 
 		}
@@ -123,7 +126,7 @@ void get_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_strin
 		if((i2c_addr == 0x1C) || (i2c_addr == 0x1D) || (i2c_addr == 0x1E) || (i2c_addr == 0x1F)){
 			if (setup_fxos8700()) {
 				measure_fxos8700();
-        package_fxos8700(bndl,packet_header_string,port);
+				package_fxos8700(bndl,packet_header_string,port);
 				return;
 			} 
 		}
@@ -132,7 +135,7 @@ void get_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_strin
 		if((i2c_addr == 0x20) || (i2c_addr == 0x21)){
 			if (setup_fxas21002()) {
 				measure_fxas21002();
-        package_fxas21002(bndl,packet_header_string,port);
+				package_fxas21002(bndl,packet_header_string,port);
 				return;
 			} 
 		}
@@ -141,7 +144,7 @@ void get_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_strin
 		if((i2c_addr == 0x10) || (i2c_addr == 0x11)){
 			if (setup_zxgesturesensor()) {
 				measure_zxgesturesensor();
-        package_zxgesturesensor(bndl,packet_header_string,port);
+				package_zxgesturesensor(bndl,packet_header_string,port);
 				return;
 			} 
 		}
@@ -150,32 +153,32 @@ void get_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_strin
 		if((i2c_addr == 0x44) || (i2c_addr == 0x45)){
 			if (setup_sht31d()) {
 				measure_sht31d();
-        package_sht31d(bndl,packet_header_string,port);
+				package_sht31d(bndl,packet_header_string,port);
 				return;
 			} 
 		}
 	#endif
 	#ifdef i2c_addr_mb1232
-	if((i2c_addr == 0x70)){
-		if (setup_mb1232()) {
-			measure_mb1232();
-      package_mb1232(bndl,packet_header_string,port);
-			return;
-		} 
-	}
+		if((i2c_addr == 0x70)){
+			if (setup_mb1232()) {
+				measure_mb1232();
+				package_mb1232(bndl,packet_header_string,port);
+				return;
+			} 
+		}
 	#endif
 	#ifdef i2c_addr_mpu6050
-	if((i2c_addr == 0x68 || i2c_addr == 0x69)){
-		if(setup_mpu6050()) {
-			measure_mpu6050();
-      package_mpu6050(bndl,packet_header_string,port);
-			return;
-		} 
-	}
+		if((i2c_addr == 0x68 || i2c_addr == 0x69)){
+			if(setup_mpu6050()) {
+				measure_mpu6050();
+				package_mpu6050(bndl,packet_header_string,port);
+				return;
+			} 
+		}
 	#endif
 	#if LOOM_DEBUG == 1
-    if (i2c_addr != 0x00) //sht31d hardware bug
-		Serial.println("This sensor is not currently supported by the Project LOOM sytem");
+		if (i2c_addr != 0x00) //sht31d hardware bug
+			Serial.println("This sensor is not currently supported by the Project LOOM sytem");
 	#endif
 }
 
@@ -188,15 +191,16 @@ void get_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_strin
 // @param msg  OSC message requesting the list of sensors currently plugged 
 //               be transmitted
 //
-void send_sensor_list(OSCMessage &msg) {
-  OSCBundle send_bndl;
-  char header_string[255];
-  msg.getString(0,header_string,255);
-  get_sensors(&send_bndl,header_string);
-  #if is_wifi
-    wifi_send_bundle(&send_bndl);
-    send_bndl.empty();
-  #endif
+void send_sensor_list(OSCMessage &msg) 
+{
+	OSCBundle send_bndl;
+	char header_string[255];
+	msg.getString(0,header_string,255);
+	get_sensors(&send_bndl,header_string);
+	#if is_wifi
+		wifi_send_bundle(&send_bndl);
+		send_bndl.empty();
+	#endif
 }
 
 
@@ -206,37 +210,39 @@ void send_sensor_list(OSCMessage &msg) {
 // Updates state with devices that are currently plugged in
 // and to which port
 //
-void update_sensors() {
-  uint8_t current_ind = 0;
-  for (uint8_t t=0; t<8; t++){
-    tcaseselect(t);
-    for (uint8_t i2c_addr = 0; i2c_addr<=127; i2c_addr++) {
-      if (i2c_addr == i2c_addr_tca9548a)
-        continue;
+void update_sensors() 
+{
+	uint8_t current_ind = 0;
+	for (uint8_t t=0; t<8; t++){
+		tcaseselect(t);
+		for (uint8_t i2c_addr = 0; i2c_addr<=127; i2c_addr++) {
+			if (i2c_addr == i2c_addr_tca9548a)
+				continue;
 
-      #ifdef is_32u4
-        uint8_t data;
-        if (! twi_writeTo(i2c_addr, &data, 0, 1, 1)) {
-      #endif
-      #ifdef is_m0
-        Wire.beginTransmission(i2c_addr);
-        byte error = Wire.endTransmission();
+			#ifdef is_32u4
+				uint8_t data;
+				if (! twi_writeTo(i2c_addr, &data, 0, 1, 1)) {
+			#endif
+			#ifdef is_m0
+				Wire.beginTransmission(i2c_addr);
+				byte error = Wire.endTransmission();
 
-        if (error == 0) {
-      #endif
-          if (i2c_addr != 0x00){
-            state_tca9548a.devices[current_ind][0] = t;
-            state_tca9548a.devices[current_ind][1] = i2c_addr;
-            current_ind++;
-          }
-        }
-        
-    }
-    for (uint8_t ind = current_ind; ind < 16; ind++){
-        state_tca9548a.devices[ind][0] = 8;
+				if (error == 0) {
+			#endif
+					if (i2c_addr != 0x00){
+						state_tca9548a.devices[current_ind][0] = t;
+						state_tca9548a.devices[current_ind][1] = i2c_addr;
+						current_ind++;
+					}
+				}
+				
+		}
+		for (uint8_t ind = current_ind; ind < 16; ind++){
+				state_tca9548a.devices[ind][0] = 8;
 		}
 	}
 }
+
 
 
 
@@ -248,10 +254,11 @@ void update_sensors() {
 // @param bndl                  The OSC bundle to be added to
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
 //
-void get_sensors(OSCBundle *bndl, char packet_header_string[]) {
-  char addressString[255];
-  update_sensors();
-  for (int i = 0; i < 16; i++){
+void get_sensors(OSCBundle *bndl, char packet_header_string[]) 
+{
+	char addressString[255];
+	update_sensors();
+	for (int i = 0; i < 16; i++){
 		uint8_t t = state_tca9548a.devices[i][0];
 		if (t > 7)
 			continue;
@@ -301,17 +308,17 @@ void get_sensors(OSCBundle *bndl, char packet_header_string[]) {
 // @param bndl                  The OSC bundle to be added to
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
 //
-void package_tca9548a(OSCBundle *bndl, char packet_header_string[]) {
+void package_tca9548a(OSCBundle *bndl, char packet_header_string[])
+{
 	#if LOOM_DEBUG == 1
 		Serial.println("Measuring data from devices connected to tca9548a (Multiplexer).");
 	#endif
-  for (int device = 0; device < 16; device++){
-    
-    if (state_tca9548a.devices[device][0] <= 7) {
-      tcaseselect(state_tca9548a.devices[device][0]);
-    
-      get_sensor_data(state_tca9548a.devices[device][1],bndl,packet_header_string,state_tca9548a.devices[device][0]);
-    }
-  }
+	for (int device = 0; device < 16; device++){
+		if (state_tca9548a.devices[device][0] <= 7) {
+			tcaseselect(state_tca9548a.devices[device][0]);
+		
+			get_sensor_data(state_tca9548a.devices[device][1],bndl,packet_header_string,state_tca9548a.devices[device][0]);
+		}
+	}
 }
 
