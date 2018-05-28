@@ -46,7 +46,7 @@ The LOOM Library is the answer to the growing set of code to drive Project LOOM'
 
 ### Overall Structure
 
-The LOOM Library is effectively an aggregate of all of the functionality possible with the entirety of the supported devices, sensors, and actuators. The user then specifies the needs of their sketch inside the config.h. Based on the needs of the sketch, the requisite files, functions, and logic will be dynamically included such that only what is needed by the sketch is uploaded to the device. loom_preamble.h uses config.h to know which files to include, these files in turn then include the libraries they need. loom_common.h is also always present as it has the LOOM_begin() function, which sets up all the modules and sensors being used by the sketch. 
+The LOOM Library is effectively an aggregate of all of the functionality possible within the entirety of the supported devices, sensors, and actuators. The user then specifies the needs of their sketch inside the config.h. Based on the needs of the sketch, the requisite files, functions, and logic will be dynamically included such that only what is needed by the sketch is uploaded to the device. loom_preamble.h uses config.h to know which files to include, these files in turn then include the libraries they need. loom_common.h is also always present as it has the LOOM_begin() function, which sets up all the modules and sensors being used by the sketch. 
 
 ### Adding to the Library
 
