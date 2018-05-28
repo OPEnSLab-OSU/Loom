@@ -41,7 +41,7 @@ function createBpatcher(file)
 			case "em.relay": 
 				dimensions = ["150", "100"]; break;
 			case "em.neopixel": 
-				dimensions = ["200", "160"]; break;
+				dimensions = ["200", "145"]; break;
 			case "em.IshieldMonitor": 
 				dimensions = ["145", "220"]; break;
 			case "em.LOOM_Channel_Manager":
@@ -52,6 +52,10 @@ function createBpatcher(file)
 				dimensions = ["160", "135"]; break;
 			case "em.MuxShieldMonitor":
 				dimensions = ["170", "180"]; break;
+			case "em.stepper_motor":
+				dimensions = ["200", "150"]; break;	
+			case "em.stepper_motor_extension":
+				dimensions = ["270", "225"]; break;	
 			default: 
 				dimensions = ["250", "150"]; break;
 		}
