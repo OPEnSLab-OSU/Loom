@@ -104,12 +104,12 @@ void package_fxas21002(OSCBundle *bndl, char packet_header_string[], uint8_t por
 //
 void measure_fxas21002() {
 	/* Get a new sensor event */
-  sensors_event_t event;
-  state_fxas21002.inst_fxas21002.getEvent(&event);
+	sensors_event_t event;
+	state_fxas21002.inst_fxas21002.getEvent(&event);
 
-  state_fxas21002.gyro[0] = event.gyro.x;
-  state_fxas21002.gyro[1] = event.gyro.y;
-  state_fxas21002.gyro[2] = event.gyro.z;
+	state_fxas21002.gyro[0] = event.gyro.x;
+	state_fxas21002.gyro[1] = event.gyro.y;
+	state_fxas21002.gyro[2] = event.gyro.z;
 	
 	#if LOOM_DEBUG == 1
 		Serial.print("X: "); Serial.print(state_fxas21002.gyro[0]); Serial.print("  ");
