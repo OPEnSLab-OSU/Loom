@@ -13,7 +13,6 @@
 #define PacketHeaderString STR(/) FAMILY STR(/) DEVICE // Results in a single string, i.e. /LOOM/Device. the full prefix sent to this device should be /LOOM/Device#, but the number is parsed in the OSC bundle routing function
 
 #define VBATPIN A7                // Pin to check for battery voltage
-//#include "declarations_and_structures.h"
 
 
 //---------------------------------------------------------------------------
@@ -55,7 +54,7 @@ void write_non_volatile();
 // ================================================================ 
 // ===                  INCLUDE DEVICE FILES                    === 
 // ================================================================
-#if is_analog > 0
+#if num_analog > 0
 	#include "loom_analogIn.h"
 #endif
 #if is_neopixel == 1
@@ -108,6 +107,6 @@ void write_non_volatile();
 #endif
 
 
-
+// Files of functions that are not specific to sensors / actuators
 #include "loom_flash.h"
 #include "loom_common.h"  // These may refer to functions in above headers

@@ -129,7 +129,7 @@ void measure_max31856()
 		TCTemp = max.readThermocoupleTemperature();
 	
 		//Serial.print("Cold Junction Temp: "); Serial.println(CJTemp);
-		//Serial.print("Thermocouple Temp: "); Serial.println(TCTemp);
+		//Serial.print("Thermocouple Temp: ");  Serial.println(TCTemp);
 		
 		// Check and print any faults
 		uint8_t fault = max.readFault();
@@ -150,7 +150,6 @@ void measure_max31856()
 		//Type VMODE_G32/VMODE_G8 processing
 		//Note: readVoltage is a custom function NOT included in default max31856 library
 		tc_vin = max.readVoltage(GAIN);
-		
 	#endif
 }
 

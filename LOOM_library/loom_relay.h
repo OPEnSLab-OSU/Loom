@@ -64,13 +64,12 @@ void handle_relay_msg(OSCMessage &msg)
 {
 	int relay  = msg.getInt(0);
 	int set_to = msg.getInt(1);
+
 	state_relay.on[relay] = (set_to == 1);
 	
 	#if LOOM_DEBUG == 1
-		Serial.print("Set ");
-		Serial.print(relay);
-		Serial.print(" to ");
-		Serial.println((state_relay.on[relay]) ? "ON" : "OFF");
+		Serial.print("Set "); Serial.print(relay);
+		Serial.print(" to "); Serial.println((state_relay.on[relay]) ? "ON" : "OFF");
 	#endif
 
 	write_relay_states();
