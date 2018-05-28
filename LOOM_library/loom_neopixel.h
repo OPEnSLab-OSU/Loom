@@ -67,8 +67,9 @@ void set_color(OSCMessage &msg)
 {
   int port     = msg.getInt(0);
   int pixelNum = msg.getInt(1);
-  int color    = msg.getInt(2);
-  int val      = msg.getInt(3);
+  int red      = msg.getInt(2);
+  int green    = msg.getInt(3);
+  int blue     = msg.getInt(4);
 
   #if LOOM_DEBUG == 1
     Serial.println("========");
@@ -76,16 +77,20 @@ void set_color(OSCMessage &msg)
     Serial.print(port);
     Serial.print("  Num: ");
     Serial.print(pixelNum);
-    Serial.print("  Color: ");
-    Serial.print(color);
-    Serial.print("  Val: ");
-    Serial.println(val);
+    Serial.print("  R: ");
+    Serial.print(red);
+    Serial.print("  G: ");
+    Serial.print(green);
+    Serial.print("  B: ");
+    Serial.println(blue);
     Serial.println("========\n");
   #endif
 
   // Update color values stored for specified Neopixel and write them to the Neopixels color
   if (state_neopixel.enabled[port]) {
-    state_neopixel.colorVals[port][color] = val;
+    state_neopixel.colorVals[port][0] = red;
+    state_neopixel.colorVals[port][1] = green;
+    state_neopixel.colorVals[port][2] = blue;
     state_neopixel.pixels[port]->setPixelColor(pixelNum, 
                                                 state_neopixel.pixels[port]->Color(
                                                   state_neopixel.colorVals[port][0], 
