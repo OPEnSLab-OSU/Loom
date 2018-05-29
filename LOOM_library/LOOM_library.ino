@@ -1,8 +1,8 @@
 
-// ================================================================ 
-// ===    INCLUDE DECLARATIONS, STRUCTS, AND FUNCTIONS FROM     === 
+// ================================================================
+// ===    INCLUDE DECLARATIONS, STRUCTS, AND FUNCTIONS FROM     ===
 // ===            OTHER FILES AS SET IN CONFIG.H                ===
-// ================================================================ 
+// ================================================================
 
 // Config has to be first has it hold all user specified options
 #include "config.h"
@@ -16,9 +16,10 @@
 // ===                           SETUP                          ===
 // ================================================================ 
 void setup() {
-	pinMode(led, OUTPUT);   // Set the LED pin mode
+//	pinMode(led, OUTPUT);   // Set the LED pin mode
 	LOOM_begin();           // LOOM_begin calls any relevant (based on config) LOOM device setup functions
 }
+
 
 // ================================================================ 
 // ===                        MAIN LOOP                         ===
@@ -26,9 +27,15 @@ void setup() {
 void loop() {
 	OSCBundle bndl; 
 
-	// Reset to AP mode if button held for ~5 seconds
-	#if defined(button) && (is_wifi == 1)
-		check_button_held();      
+// Receive bundles
+
+	#if is_wifi == 1
+		// Handle wifi bundle if it exists
+		wifi_receive_bundle(&bndl, configuration.packet_header_string, &Udp,       configuration.config_wifi.localPort); 
+		wifi_receive_bundle(&bndl, configuration.packet_header_string, &UdpCommon, configuration.config_wifi.commonPort);                             
+													 
+		// Compare the previous status to the current status
+		wifi_check_status();
 	#endif
 
 	#if is_lora == 1
@@ -42,24 +49,16 @@ void loop() {
 		#endif
 	#endif //is_lora
 
-	#if is_wifi == 1
-		// Handle wifi bundle if it exists
-		wifi_receive_bundle(&bndl, configuration.packet_header_string, &Udp, configuration.config_wifi.localPort); 
-		wifi_receive_bundle(&bndl, configuration.packet_header_string, &UdpCommon, configuration.config_wifi.commonPort);                             
-													 
-		// Compare the previous status to the current status
-		wifi_check_status();
-	#endif
-	
-	#if is_lora == 1
-		//Receive LoRa Bundles
-	#endif
+
 
 		
-	//BEGIN SENDING OF DATA
+// Begin sending data
 	OSCBundle send_bndl;
 	send_bndl.empty();
 
+
+
+// Send battery and button values
 	
 	// Measure battery voltage
 	vbat = analogRead(VBATPIN);
@@ -73,6 +72,7 @@ void loop() {
 		send_bndl.add(addressString).add((int32_t)digitalRead(button));
 	#endif
 
+
 	#if is_wifi == 1
 		wifi_send_bundle(&send_bndl);
 	#endif
@@ -80,6 +80,9 @@ void loop() {
 		lora_send_bundle(&send_bndl);
 	#endif
 	send_bndl.empty();      // Empty the bundle to free room for a new one
+
+
+// Update Sensors, package, send
 
 
 	#if is_tca9548a == 1
@@ -103,6 +106,7 @@ void loop() {
 		#endif
 		send_bndl.empty();
 	#endif //is_tca9548a
+
 	
 	// Update MPU6050 Data
 	#if is_ishield == 1 && is_mpu6050 == 1
@@ -117,6 +121,7 @@ void loop() {
 		send_bndl.empty();      // Empty the bundle to free room for a new one
 		mpu.resetFIFO();        // Flush MPU6050 FIFO to avoid overflows if using i2c
 	#endif //is_ishield && is_mpu6050
+
 	
 	#if is_max31856 == 1
 		measure_max31856();
@@ -129,9 +134,11 @@ void loop() {
 		#endif
 		send_bndl.empty();      // Empty the bundle to free room for a new one
 	#endif
+
 	
 	// Get analog readings
 	#if num_analog >= 1
+		measure_analog();
 		package_analog(&send_bndl,configuration.packet_header_string);
 		#if is_wifi == 1
 			wifi_send_bundle(&send_bndl);
@@ -141,6 +148,8 @@ void loop() {
 		#endif
 		send_bndl.empty();      // Empty the bundle to free room for a new one
 	#endif
+
+	
 	#if is_decagon == 1
 		package_decagon(&send_bndl,configuration.packet_header_string);
 		#if is_wifi == 1
@@ -153,10 +162,20 @@ void loop() {
 	#endif
 
 
+
+// Loop checks and sleep
+
+	// Reset to AP mode if button held for ~5 seconds
+	#if defined(button) && (is_wifi == 1)
+		check_button_held();      
+	#endif
+
 	// Delay between loop iterations
 	#ifdef is_sleep_period
 		loop_sleep();
 	#endif
+
+
 	
 } // End loop section
 

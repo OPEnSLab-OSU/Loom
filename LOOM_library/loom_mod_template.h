@@ -23,8 +23,8 @@ struct state_<module>_t {
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-struct config_<module>_t *config_<module>;
-struct state_<module>_t *state_<module>;
+struct config_<module>_t config_<module>;
+struct state_<module>_t state_<module>;
 
 
 // ================================================================ 
