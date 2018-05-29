@@ -14,19 +14,88 @@ char          addressString[255];
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
+void LOOM_begin();
 void set_instance_num(OSCMessage &msg);
 void msg_router(OSCMessage &msg, int addrOffset);
 #if (is_wifi == 1) && defined(button)
 	void check_button_held();
 #endif
-void LOOM_begin();
 void loop_sleep();
 void save_config(OSCMessage &msg);
+
+
+
+// ================================================================
+// ===                        LOOM BEGIN                        ===
+// ================================================================
+//
+// Called by setup(), handles calling of any LOOM specific individual device setups
+// Starts Wifi or Lora and serial if debugging prints are on
+// Runs flash setup to read device settings from memory if available
+// 
+void LOOM_begin()
+{
+	pinMode(led, OUTPUT);   // Set the LED pin mode
+
+	//Initialize serial and wait for port to open:
+	#if LOOM_DEBUG == 1
+		Serial.begin(9600);
+		while(!Serial);        // Ensure Serial is ready to go before anything happens in LOOM_DEBUG mode.
+		delay(5000);
+		Serial.println("Initialized Serial!");
+	#endif
+	
+	// Set the button pin mode to input
+	#ifdef button
+		pinMode(button, INPUT_PULLUP); 
+	#endif
+	
+	// Setup sensors and actuators by calling the respective setups
+
+	#if is_tca9548a == 1
+		setup_tca9548a();
+	#endif
+	#if is_decagon == 1
+		deca_gs3_setup(); //rename this
+	#endif
+	#if is_mpu6050 > 0 && is_ishield == 1
+		setup_mpu6050();
+	#endif 
+	#ifdef is_max31856
+		setup_max31856();
+	#endif 
+	#if is_neopixel == 1
+		setup_neopixel();
+	#endif
+	#if num_servos > 0
+		setup_servo();
+	#endif
+	#if num_steppers > 0
+		setup_stepper();
+	#endif
+	#if is_relay == 1
+		setup_relay();
+	#endif
+
+	// Read configuration from flash, or write config.h settings 
+	// if no settings are currently saved
+	flash_config_setup();
+
+	// Communication Platform specific setups
+	#if is_wifi == 1
+		wifi_setup(configuration.packet_header_string);
+	#endif
+	#if is_lora == 1
+		lora_setup(&rf95, &manager);
+	#endif	
+}
 
 
 // ================================================================
 // ===                        FUNCTIONS                         ===
 // ================================================================
+
+
 
 // --- SET INSTANCE NUMBER ---
 //
@@ -79,35 +148,35 @@ void msg_router(OSCMessage &msg, int addrOffset)
 				Serial.println("Got a request for sensor list");
 			#endif
 		}
-		msg.dispatch("/GetSensors",   send_sensor_list,	addrOffset);
+		msg.dispatch("/GetSensors",   send_sensor_list, addrOffset);
 	#endif
 	#if num_servos > 0  
-		msg.dispatch("/Servo/Set",    handle_servo_msg,	addrOffset);
+		msg.dispatch("/Servo/Set",    handle_servo_msg, addrOffset);
 	#endif
 	#if num_steppers > 0
 		msg.dispatch("/Stepper/Set",  handle_stepper_msg, addrOffset);
 	#endif
 	#if is_relay == 1
-		msg.dispatch("/Relay/State",  handle_relay_msg,	addrOffset);
+		msg.dispatch("/Relay/State",  handle_relay_msg, addrOffset);
 	#endif
 	#if is_mpu6050 == 1 && is_ishield == 1
-		msg.dispatch("/MPU6050/cal",  calMPU6050_OSC,	addrOffset);
+		msg.dispatch("/MPU6050/cal",  calMPU6050_OSC, addrOffset);
 	#endif
 	#if is_neopixel == 1
-		msg.dispatch("/Neopixel",     set_color,		addrOffset);
+		msg.dispatch("/Neopixel",     set_color, addrOffset);
 	#endif
 	#if is_lora == 1 && lora_device_type == 0
 		msg.dispatch("/SendToPB", sendToPushingBox, addrOffset);
 	#endif
 	
 	#if is_wifi == 1
-		msg.dispatch("/Connect/SSID",     set_ssid,     addrOffset);
-		msg.dispatch("/Connect/Password", set_pass,     addrOffset);
-		msg.dispatch("/wifiSetup/AP",     switch_to_AP, addrOffset);
-		msg.dispatch("/SetPort",          set_port,     addrOffset);
-		msg.dispatch("/requestIP",        broadcastIP,  addrOffset);
-		msg.dispatch("/getNewChannel",    new_channel,  addrOffset);
-		msg.dispatch("/SetRequestSettings",set_request_settings,  addrOffset);
+		msg.dispatch("/Connect/SSID",     	set_ssid,     			addrOffset);
+		msg.dispatch("/Connect/Password", 	set_pass,				addrOffset);
+		msg.dispatch("/wifiSetup/AP",     	switch_to_AP, 			addrOffset);
+		msg.dispatch("/SetPort",          	set_port,     			addrOffset);
+		msg.dispatch("/requestIP",        	broadcastIP,  			addrOffset);
+		msg.dispatch("/getNewChannel",		new_channel,  			addrOffset);
+		msg.dispatch("/SetRequestSettings",	set_request_settings, 	addrOffset);
 	#endif
 	
 	msg.dispatch("/SetID", set_instance_num, addrOffset);
@@ -145,73 +214,6 @@ void check_button_held()
 	} // of else 
 }
 #endif 
-
-
-
-// ================================================================
-// ===                        LOOM BEGIN                        ===
-// ================================================================
-//
-// Called by setup(), handles calling of any LOOM specific individual device setups
-// Starts Wifi or Lora and serial if debugging prints are on
-// Runs flash setup to read device settings from memory if available
-// 
-void LOOM_begin()
-{
-	//Initialize serial and wait for port to open:
-	#if LOOM_DEBUG == 1
-		Serial.begin(9600);
-		while(!Serial);        // Ensure Serial is ready to go before anything happens in LOOM_DEBUG mode.
-		delay(5000);
-		Serial.println("Initialized Serial!");
-	#endif
-	
-	// Set the button pin mode to input
-	#ifdef button
-		pinMode(button, INPUT_PULLUP); 
-	#endif
-	
-	// Setup sensors and actuators by calling the respective setups
-
-	#if is_tca9548a == 1
-		setup_tca9548a();
-	#endif
-	#if is_decagon == 1
-		deca_gs3_setup(); //rename this
-	#endif
-	#if is_mpu6050 > 0 && is_ishield == 1
-		setup_mpu6050();
-	#endif 
-	#ifdef is_max31856
-		setup_max31856();
-	#endif 
-	#if is_neopixel == 1
-		setup_neopixel();
-	#endif
-	#if num_servos > 0
-		setup_servo();
-	#endif
-	#if num_steppers > 0
-		setup_stepper();
-	#endif
-	#if is_relay == 1
-		setup_relay();
-	#endif
-
-	// Read configuration from flash, or write config.h settings 
-	// if no settings are currently saved
-	flash_config_setup();
-
-	// Communication Platform specific setups
-	#if is_wifi == 1
-		wifi_setup(configuration.packet_header_string);
-	#endif
-	#if is_lora == 1
-		lora_setup(&rf95, &manager);
-	#endif
-	
-	
-}
 
 
 
