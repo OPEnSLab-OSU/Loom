@@ -45,10 +45,9 @@ void loop() {
       get_OSC_bundle((char*)buf, &bndl);
       Serial.print("Received message from ");
       Serial.print(from);
-      Serial.print(": ");
+      Serial.println(": ");
       //Serial.println((char*)buf);
-      bndl.send(Serial);
-      Serial.println("");
+      print_bundle(&bndl);
     }
   }
 }
