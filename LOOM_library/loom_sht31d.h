@@ -7,7 +7,7 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define i2c_addr_sht31d 0x44													 //0x44, 0x45
+#define i2c_addr_sht31d 0x44	//0x44, 0x45
 
 
 // ================================================================ 
@@ -47,8 +47,9 @@ void measure_sht31d();
 // @return  Whether or not sensor initialization was successful
 //
 bool setup_sht31d() {
-  bool is_setup;
-	if(state_sht31d.inst_sht31d.begin(i2c_addr_sht31d)) {
+	bool is_setup;
+
+	if (state_sht31d.inst_sht31d.begin(i2c_addr_sht31d)) {
 		is_setup = true;
 		#if LOOM_DEBUG == 1
 			Serial.println("Initialized sht31d (temp/humid)");
@@ -78,7 +79,8 @@ bool setup_sht31d() {
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
 // @param port                  Which port of the multiplexer the device is plugged into
 //
-void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port){
+void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port)
+{
 	char address_string[255];
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/sht31d/data");
 	
@@ -95,11 +97,12 @@ void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port){
 //
 // Gets the current sensor readings of the SHT31D and stores into its state struct
 // 
-void measure_sht31d() {
+void measure_sht31d() 
+{
 	float t = state_sht31d.inst_sht31d.readTemperature();
-  float h = state_sht31d.inst_sht31d.readHumidity();
+	float h = state_sht31d.inst_sht31d.readHumidity();
 
-	if((!isnan(t)) && (!isnan(h))) {
+	if ((!isnan(t)) && (!isnan(h))) {
 		state_sht31d.temp = t;
 		state_sht31d.humid = h;
 		#if LOOM_DEBUG == 1

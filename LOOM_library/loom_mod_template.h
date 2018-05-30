@@ -23,8 +23,8 @@ struct state_<module>_t {
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-struct config_<module>_t *config_<module>;
-struct state_<module>_t *state_<module>;
+struct config_<module>_t config_<module>;
+struct state_<module>_t state_<module>;
 
 
 // ================================================================ 
@@ -43,8 +43,9 @@ void measure_<module>();
 // 
 // @return  Whether or not sensor initialization was successful
 //
-bool setup_<module>() {
-  //Setup Here
+bool setup_<module>() 
+{
+	//Setup Here
 }
 
 
@@ -62,7 +63,8 @@ bool setup_<module>() {
 //   if I2C multiplexer sensor, then also
 // [@param port                  Which port of the multiplexer the device is plugged into]
 //
-void package_<module>(OSCBundle *bndl, char packet_header_string[]) {
+void package_<module>(OSCBundle *bndl, char packet_header_string[]) 
+{
 	//Create a message and fill it here, then add it to the bndl
 }
 
@@ -73,7 +75,8 @@ void package_<module>(OSCBundle *bndl, char packet_header_string[]) {
 // Gets the current sensor readings of the <Module and stores into variables
 // If debug prints are enabled, can also print any relevant information 
 //
-void measure_<module>() {
+void measure_<module>() 
+{
 	//Measure data and change the state here. 
 	//Potentially uses the config data
 }

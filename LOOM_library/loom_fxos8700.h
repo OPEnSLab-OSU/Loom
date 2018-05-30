@@ -49,8 +49,9 @@ struct state_fxos8700_t state_fxos8700;
 //
 // @return  Whether or not sensor initialization was successful
 //
-bool setup_fxos8700() {
-  bool is_setup;
+bool setup_fxos8700() 
+{
+	bool is_setup;
 	state_fxos8700.inst_fxos8700 = Adafruit_FXOS8700(0x8700A, 0x8700B);
 	if(state_fxos8700.inst_fxos8700.begin(ACCEL_RANGE_4G)) {
 		is_setup = true;
@@ -82,7 +83,8 @@ bool setup_fxos8700() {
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
 // @param port                  Which port of the multiplexer the device is plugged into
 //
-void package_fxos8700(OSCBundle *bndl, char packet_header_string[], uint8_t port) {
+void package_fxos8700(OSCBundle *bndl, char packet_header_string[], uint8_t port) 
+{
 	char address_string[255];
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/fxos8700/data");
 	
@@ -104,11 +106,12 @@ void package_fxos8700(OSCBundle *bndl, char packet_header_string[], uint8_t port
 //
 // Gets the current sensor readings of the FXAS8700 and stores into its state struct
 //
-void measure_fxos8700() {
+void measure_fxos8700() 
+{
 	sensors_event_t aevent, mevent;
-  state_fxos8700.inst_fxos8700.getEvent(&aevent, &mevent);
+	state_fxos8700.inst_fxos8700.getEvent(&aevent, &mevent);
 
-  state_fxos8700.accel[0] = aevent.acceleration.x;
+	state_fxos8700.accel[0] = aevent.acceleration.x;
 	state_fxos8700.accel[1] = aevent.acceleration.y;
 	state_fxos8700.accel[2] = aevent.acceleration.z;
 
@@ -143,34 +146,35 @@ void measure_fxos8700() {
 // printed to the Serial monitor
 // 
 #if LOOM_DEBUG == 1
-	void details_fxos8700() {
-		sensor_t accel, mag;
-		state_fxos8700.inst_fxos8700.getSensor(&accel, &mag);
-		Serial.println("------------------------------------");
-		Serial.println("ACCELEROMETER");
-		Serial.println("------------------------------------");
-		Serial.print  ("Sensor:       ");   Serial.println(accel.name);
-		Serial.print  ("Driver Ver:   ");   Serial.println(accel.version);
-		Serial.print  ("Unique ID:    0x"); Serial.println(accel.sensor_id, HEX);
-		Serial.print  ("Min Delay:    ");   Serial.print(accel.min_delay);     Serial.println(" s");
-		Serial.print  ("Max Value:    ");   Serial.print(accel.max_value, 4);  Serial.println(" m/s^2");
-		Serial.print  ("Min Value:    ");   Serial.print(accel.min_value, 4);  Serial.println(" m/s^2");
-		Serial.print  ("Resolution:   ");   Serial.print(accel.resolution, 8); Serial.println(" m/s^2");
-		Serial.println("------------------------------------");
-		Serial.println("");
-		Serial.println("------------------------------------");
-		Serial.println("MAGNETOMETER");
-		Serial.println("------------------------------------");
-		Serial.print  ("Sensor:       ");   Serial.println(mag.name);
-		Serial.print  ("Driver Ver:   ");   Serial.println(mag.version);
-		Serial.print  ("Unique ID:    0x"); Serial.println(mag.sensor_id, HEX);
-		Serial.print  ("Min Delay:    ");   Serial.print(accel.min_delay); Serial.println(" s");
-		Serial.print  ("Max Value:    ");   Serial.print(mag.max_value);   Serial.println(" uT");
-		Serial.print  ("Min Value:    ");   Serial.print(mag.min_value);   Serial.println(" uT");
-		Serial.print  ("Resolution:   ");   Serial.print(mag.resolution);  Serial.println(" uT");
-		Serial.println("------------------------------------");
-		Serial.println("");
-		delay(500);
-	}
+void details_fxos8700() 
+{
+	sensor_t accel, mag;
+	state_fxos8700.inst_fxos8700.getSensor(&accel, &mag);
+	Serial.println("------------------------------------");
+	Serial.println("ACCELEROMETER");
+	Serial.println("------------------------------------");
+	Serial.print  ("Sensor:       ");   Serial.println(accel.name);
+	Serial.print  ("Driver Ver:   ");   Serial.println(accel.version);
+	Serial.print  ("Unique ID:    0x"); Serial.println(accel.sensor_id, HEX);
+	Serial.print  ("Min Delay:    ");   Serial.print(accel.min_delay);     Serial.println(" s");
+	Serial.print  ("Max Value:    ");   Serial.print(accel.max_value, 4);  Serial.println(" m/s^2");
+	Serial.print  ("Min Value:    ");   Serial.print(accel.min_value, 4);  Serial.println(" m/s^2");
+	Serial.print  ("Resolution:   ");   Serial.print(accel.resolution, 8); Serial.println(" m/s^2");
+	Serial.println("------------------------------------");
+	Serial.println("");
+	Serial.println("------------------------------------");
+	Serial.println("MAGNETOMETER");
+	Serial.println("------------------------------------");
+	Serial.print  ("Sensor:       ");   Serial.println(mag.name);
+	Serial.print  ("Driver Ver:   ");   Serial.println(mag.version);
+	Serial.print  ("Unique ID:    0x"); Serial.println(mag.sensor_id, HEX);
+	Serial.print  ("Min Delay:    ");   Serial.print(accel.min_delay); Serial.println(" s");
+	Serial.print  ("Max Value:    ");   Serial.print(mag.max_value);   Serial.println(" uT");
+	Serial.print  ("Min Value:    ");   Serial.print(mag.min_value);   Serial.println(" uT");
+	Serial.print  ("Resolution:   ");   Serial.print(mag.resolution);  Serial.println(" uT");
+	Serial.println("------------------------------------");
+	Serial.println("");
+	delay(500);
+}
 #endif //if LOOM_DEBUG == 1
 

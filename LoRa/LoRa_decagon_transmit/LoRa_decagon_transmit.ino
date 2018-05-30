@@ -25,7 +25,7 @@
 #pragma message("Warning: 32u4 can only interface with one Decagon device on pin 10")
 #endif
 
-#define DEBUG 1
+#define DEBUG 0
 #ifndef DEBUG
 #define DEBUG 0
 #endif
@@ -90,7 +90,7 @@ float measuredvbat;
 
 #define FAMILY "/LOOM"
 #define DEVICE "/DShield"
-#define INSTANCE_NUM 0  // Unique instance number for this device, useful when using more than one of the same device type in same space
+#define INSTANCE_NUM 2  // Unique instance number for this device, useful when using more than one of the same device type in same space
 // $$$$$$$ NOTE: Change instance number for each device above ^ $$$$$$$$
 
 
