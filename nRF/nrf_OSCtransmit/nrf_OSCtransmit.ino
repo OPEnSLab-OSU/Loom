@@ -20,7 +20,7 @@ RF24Network network(radio);          // Network uses that radio
 const uint16_t this_node = 00;        // Address of our node in Octal format
 const uint16_t other_node = 01;       // Address of the other node in Octal format
 
-const unsigned long interval = 2000; //ms  // How often to send 'hello world to the other unit
+const unsigned long interval = 5000; //ms  // How often to send 'hello world to the other unit
 
 unsigned long last_sent;             // When did we last send?
 unsigned long packets_sent;          // How many have we sent already
@@ -49,11 +49,7 @@ void loop() {
     Serial.print("Sending...");
 
     OSCBundle bndl;
-    bndl.add(IDString "/VWC").add((float)1.0);
-    bndl.add(IDString "/Temp").add((int32_t)-1);
-    bndl.add(IDString "/ElecCond").add((float)3.0);
-    bndl.add(IDString "/TestVal").add("OkayOkayOkayOkay").add("MoreValuesHere");
-    bndl.add(IDString "/WowMoreValues").add((float)6);
+    bndl.add("addr").add("IDtag").add("six").add("VWC").add((float)1.0).add("Temp").add((int32_t)-1).add("ElecCond").add((float)3.0);
 
     char message[300];
 
@@ -63,8 +59,7 @@ void loop() {
     //char msg[120];
     //strcpy(msg, message);
 
-    Serial.println(message);
-    Serial.println(strlen(message));
+    print_bundle(&bndl);
     
     RF24NetworkHeader header(/*to node*/ other_node);
     bool ok = network.write(header,message,strlen(message));
