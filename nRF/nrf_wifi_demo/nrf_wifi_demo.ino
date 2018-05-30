@@ -132,9 +132,7 @@ void loop(void){
     
     Serial.println("Received Transmission");
 
-    //bndl.add("addr").add("IDtag").add("six").add("VWC").add((float)1.0).add("Temp").add((int32_t)-1).add("ElecCond").add((float)3.0);
-
-    //print_bundle(&bndl);
+    //Do NOT call: print_bundle(&bndl).  This function breaks something when trying to naturally send via UDP?;
 
     Udp.beginPacket(ip_broadcast, 9436);
     bndl.send(Udp);
