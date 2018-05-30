@@ -8,9 +8,9 @@
 // ===                       DEFINITIONS                        === 
 // ================================================================ 
 enum WiFiMode {
-  AP_MODE,
-  WPA_CLIENT_MODE,
-  WEP_CLIENT_MODE
+	AP_MODE,
+	WPA_CLIENT_MODE,
+	WEP_CLIENT_MODE
 };
 
 #define AP_NAME   FAMILY DEVICE STR(INIT_INST)
@@ -19,25 +19,25 @@ enum WiFiMode {
 // ===                        STRUCTURES                        === 
 // ================================================================
 struct config_wifi_t{
-  IPAddress   ip;                     // Device's IP Address
-  char*       my_ssid;                // Default AP name
-  char        ssid[32];               // Host network name
-  char        pass[32];               // Host network password
-  int         keyIndex;               // Key Index Number (needed only for WEP)
-  char*       ip_broadcast;           // IP to Broadcast data
-  unsigned int localPort;             // Local port to listen on
-  unsigned int commonPort; 
-  byte        mac[6];                 // Device's MAC Address
-  WiFiMode    wifi_mode;              // Devices current wifi mode
-  bool        request_settings;        // True if device should request new channel settings on startup
+	IPAddress   ip;                     // Device's IP Address
+	char*       my_ssid;                // Default AP name
+	char        ssid[32];               // Host network name
+	char        pass[32];               // Host network password
+	int         keyIndex;               // Key Index Number (needed only for WEP)
+	char*       ip_broadcast;           // IP to Broadcast data
+	unsigned int localPort;             // Local port to listen on
+	unsigned int commonPort; 
+	byte        mac[6];                 // Device's MAC Address
+	WiFiMode    wifi_mode;              // Devices current wifi mode
+	bool        request_settings;        // True if device should request new channel settings on startup
 };
 
 struct state_wifi_t {
-  // Global variables to handle changes to WiFi ssid and password 
-  char new_ssid[32];
-  char new_pass[32];
-  bool ssid_set;
-  bool pass_set;
+	// Global variables to handle changes to WiFi ssid and password 
+	char new_ssid[32];
+	char new_pass[32];
+	bool ssid_set;
+	bool pass_set;
 };
 
 // ================================================================ 
@@ -46,12 +46,13 @@ struct state_wifi_t {
 
 struct config_wifi_t * config_wifi;
 void link_config_wifi(struct config_wifi_t *flash_setup_wifi){
-  config_wifi = flash_setup_wifi;
+	config_wifi = flash_setup_wifi;
 }
 
 struct state_wifi_t state_wifi;
 
 char * packet_header_string;
+
 // WiFi global vars/structs
 WiFiUDP      Udp;
 WiFiUDP      UdpCommon;
@@ -88,54 +89,58 @@ void wifi_send_bundle(OSCBundle *bndl);
 // ================================================================
 
 // --- WIFI SETUP ---
+//
 // Called by main setup
 // Sets WiFi pins, checks for shield with WiFi, 
 // starts AP mode or tries to connect to existing network
-// @param none
-// Return:    none
+// Requests channel settings from if Request Settings is set
+// Otherwise it broadcasts its channel information
+//
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+//
 void wifi_setup(char packet_header_string[])
 {
-  // Configure pins for Adafruit ATWINC1500 Feather
-  WiFi.setPins(8,7,4,2);      
-    
-  // Check for the presence of the shield, else don't continue:
-  if (WiFi.status() == WL_NO_SHIELD) {
-    #if LOOM_DEBUG == 1
-      Serial.println("WiFi shield not present, entering infinite loop");
-    #endif
-    while (true); 
-  }
+	// Configure pins for Adafruit ATWINC1500 Feather
+	WiFi.setPins(8,7,4,2);      
+		
+	// Check for the presence of the shield, else don't continue:
+	if (WiFi.status() == WL_NO_SHIELD) {
+		#if LOOM_DEBUG == 1
+			Serial.println("WiFi shield not present, entering infinite loop");
+		#endif
+		while (true); 
+	}
 
-  // By default the local IP address of will be 192.168.1.1
-  // You can override it with the following:
-  // WiFi.config(IPAddress(192, 168, 1, 10));
-  switch(config_wifi->wifi_mode){
-    case AP_MODE:
-      start_AP();
-      break;
-    case WPA_CLIENT_MODE:
-      if (connect_to_WPA(config_wifi->ssid,config_wifi->pass)){
-        #if LOOM_DEBUG == 1
-          Serial.println("Success!");
-        #endif
+	// By default the local IP address of will be 192.168.1.1
+	// You can override it with the following:
+	// WiFi.config(IPAddress(192, 168, 1, 10));
+	switch(config_wifi->wifi_mode) {
+		case AP_MODE:
+			start_AP();
+			break;
+		case WPA_CLIENT_MODE:
+			if (connect_to_WPA(config_wifi->ssid,config_wifi->pass)){
+				#if LOOM_DEBUG == 1
+					Serial.println("Success!");
+				#endif
 
-        // If set to request channel settings
-        if (config_wifi->request_settings == 1) {
-          request_settings_from_Max();
-        } 
-        else {
-          respond_to_poll_request(packet_header_string);
-        }
-      }
-      else {
-        #if LOOM_DEBUG == 1
-          Serial.println("Failure :(");
-        #endif
-        while(true);
-      }
-      break;
-  }
-  config_wifi->ip = WiFi.localIP();
+				// If set to request channel settings
+				if (config_wifi->request_settings == 1) {
+					request_settings_from_Max();
+				} 
+				else {
+					respond_to_poll_request(packet_header_string);
+				}
+			}
+			else {
+				#if LOOM_DEBUG == 1
+					Serial.println("Failure :(");
+				#endif
+				while(true);
+			}
+			break;
+	}
+	config_wifi->ip = WiFi.localIP();
 	#if LOOM_DEBUG == 1
 		Serial.println("Finished setting up WiFi.");
 	#endif
@@ -147,422 +152,494 @@ void wifi_setup(char packet_header_string[])
 // ================================================================
 
 // --- PRINT WIFI STATUS ---
+//
 // If debug enabled, display WiFi settings / state to serial
-// @param none
-// Return:    none
+// Does nothing else
+//
 void printWiFiStatus() 
 {
-  #if LOOM_DEBUG == 1
-    // Print the SSID of the network you're attached to:
-    Serial.print("SSID: "); 
-    Serial.println(WiFi.SSID());
-  
-    // Print your WiFi shield's IP address:
-    config_wifi->ip = WiFi.localIP();
-    Serial.print("IP Address: ");
-    Serial.println(config_wifi->ip);
-  
-    // Print your MAC address:
-    WiFi.macAddress(config_wifi->mac);
-    Serial.print("MAC address: ");
-    Serial.print(config_wifi->mac[5], HEX);
-    Serial.print(":");
-    Serial.print(config_wifi->mac[4], HEX);
-    Serial.print(":");
-    Serial.print(config_wifi->mac[3], HEX);
-    Serial.print(":");
-    Serial.print(config_wifi->mac[2], HEX);
-    Serial.print(":");
-    Serial.print(config_wifi->mac[1], HEX);
-    Serial.print(":");
-    Serial.println(config_wifi->mac[0], HEX);
-  
-    // Print the received signal strength:
-    long rssi = WiFi.RSSI();
-    Serial.print("signal strength (RSSI):");
-    Serial.print(rssi);
-    Serial.println(" dBm");
-    
-    // Print where to go in a browser:
-    Serial.print("To see this page in action, open a browser to http://");
-    Serial.println(config_wifi->ip);
-  #endif // of LOOM_DEBUG
+	#if LOOM_DEBUG == 1
+		// Print the SSID of the network you're attached to:
+		Serial.print("SSID: "); 
+		Serial.println(WiFi.SSID());
+	
+		// Print your WiFi shield's IP address:
+		config_wifi->ip = WiFi.localIP();
+		Serial.print("IP Address: ");
+		Serial.println(config_wifi->ip);
+	
+		// Print your MAC address:
+		WiFi.macAddress(config_wifi->mac);
+		Serial.print("MAC address: ");
+		Serial.print(config_wifi->mac[5], HEX);
+		Serial.print(":");
+		Serial.print(config_wifi->mac[4], HEX);
+		Serial.print(":");
+		Serial.print(config_wifi->mac[3], HEX);
+		Serial.print(":");
+		Serial.print(config_wifi->mac[2], HEX);
+		Serial.print(":");
+		Serial.print(config_wifi->mac[1], HEX);
+		Serial.print(":");
+		Serial.println(config_wifi->mac[0], HEX);
+	
+		// Print the received signal strength:
+		long rssi = WiFi.RSSI();
+		Serial.print("signal strength (RSSI):");
+		Serial.print(rssi);
+		Serial.println(" dBm");
+		
+		// Print where to go in a browser:
+		Serial.print("To see this page in action, open a browser to http://");
+		Serial.println(config_wifi->ip);
+	#endif // of LOOM_DEBUG
 }
 
 
 
 // --- START ACCESS POINT ---
+//
 // Device will attempt to setup wifi access point that one computer to connect to
 // Called upon OSC command, button held, or connect to network failure
-// @param none
-// Return:    none
+//
 void start_AP() 
 {
-  #if LOOM_DEBUG == 1
-    // print the network name (SSID);
-    Serial.print("Creating access point named: ");
-    Serial.println(config_wifi->my_ssid);
-  #endif
+	#if LOOM_DEBUG == 1
+		// print the network name (SSID);
+		Serial.print("Creating access point named: ");
+		Serial.println(config_wifi->my_ssid);
+	#endif
 
-  // Create open network. Change this line if you want to create an WEP network:
-  status = WiFi.beginAP(config_wifi->my_ssid);
-  if (status != WL_AP_LISTENING) {
-    #if LOOM_DEBUG == 1
-        Serial.println("Creating access point failed");
-    #endif
-    while (true);   // Don't continue
-  }
+	// Create open network. Change this line if you want to create an WEP network:
+	status = WiFi.beginAP(config_wifi->my_ssid);
+	if (status != WL_AP_LISTENING) {
+		#if LOOM_DEBUG == 1
+				Serial.println("Creating access point failed");
+		#endif
+		while (true);   // Don't continue
+	}
 
-  delay(10000);     // Wait 10 seconds for connection:
-  
-  server.begin();   // Start the web server on port 80
+	delay(10000);     // Wait 10 seconds for connection:
+	
+	server.begin();   // Start the web server on port 80
 
-  #if LOOM_DEBUG == 1
-    printWiFiStatus();   // You're connected now, so print out the status
-    Serial.println("\nStarting UDP connection over server...");
-  #endif
-  
-  // If you get a connection, report back via serial:
-  Udp.begin(config_wifi->localPort);
-  UdpCommon.begin(config_wifi->commonPort);
+	#if LOOM_DEBUG == 1
+		printWiFiStatus();   // You're connected now, so print out the status
+		Serial.println("\nStarting UDP connection over server...");
+	#endif
+	
+	// If you get a connection, report back via serial:
+	Udp.begin(config_wifi->localPort);
+	UdpCommon.begin(config_wifi->commonPort);
 }
 
 
 
 // --- CONNECT TO WPA ---
+//
 // Device tries to connect to network with provide credentials 
 // Will revert to AP mode if this fails
+//
 // @param ssid (Wifi network name), pass (Wifi network password)
-// Return: bool (true is connection successful, false on failure )
+//
+// @return  Whether connection was successful
+//
 bool connect_to_WPA(char ssid[], char pass[]) 
 {
-  status = WiFi.begin(ssid, pass);
-  int attempt_count = 0;
+	status = WiFi.begin(ssid, pass);
+	int attempt_count = 0;
 
-  // Try to connect, attempting the connection up to 10 times (this number is arbitrary)
-  while (status != WL_CONNECTED && attempt_count < 10) {
-    #if LOOM_DEBUG == 1
-      Serial.println("Connecting to WPA host failed, trying again");
-    #endif
-    
-    status = WiFi.begin(ssid, pass);
-    attempt_count++;
-  }
+	// Try to connect, attempting the connection up to 10 times (this number is arbitrary)
+	while (status != WL_CONNECTED && attempt_count < 10) {
+		#if LOOM_DEBUG == 1
+			Serial.println("Connecting to WPA host failed, trying again");
+		#endif
+		
+		status = WiFi.begin(ssid, pass);
+		attempt_count++;
+	}
 
-  // If not successfully connected
-  if (status != WL_CONNECTED) {
-    #if LOOM_DEBUG == 1
-      Serial.println("Connecting to WPA host failed completely");
-      Serial.println("Reverting to AP mode");
-    #endif
+	// If not successfully connected
+	if (status != WL_CONNECTED) {
+		#if LOOM_DEBUG == 1
+			Serial.println("Connecting to WPA host failed completely");
+			Serial.println("Reverting to AP mode");
+		#endif
 
-    // Start AP up again instead
-    Udp.stop();
-    UdpCommon.stop();
-    WiFi.disconnect();
-    WiFi.end();
-    start_AP();
-    config_wifi->wifi_mode = AP_MODE;
-    return false;
-  }
-  
-  delay(8000); 
-  
-  #if LOOM_DEBUG == 1
-    // You're connected now, so print out the status
-    printWiFiStatus();
-    Serial.println("Starting UDP connection over server...");
-  #endif
-  
-  // If you get a connection, report back via serial:
-  server.begin();
-  Udp.begin(config_wifi->localPort);
-  UdpCommon.begin(config_wifi->commonPort);
-  return true;
+		// Start AP up again instead
+		Udp.stop();
+		UdpCommon.stop();
+		WiFi.disconnect();
+		WiFi.end();
+		start_AP();
+		config_wifi->wifi_mode = AP_MODE;
+		return false;
+	}
+	
+	delay(8000); 
+	
+	#if LOOM_DEBUG == 1
+		// You're connected now, so print out the status
+		printWiFiStatus();
+		Serial.println("Starting UDP connection over server...");
+	#endif
+	
+	// If you get a connection, report back via serial:
+	server.begin();
+	Udp.begin(config_wifi->localPort);
+	UdpCommon.begin(config_wifi->commonPort);
+	return true;
 }
 
 
 
 // --- SWITCH TO ACCESS POINT ---
+//
 // Switch to AP mode upon OSC command to do so
-// @param msg (not used, only there for msg_router to work properly)
+// A wrapper for Start_AP  
+// Saves AP_MODE as wifi_mode 
+//
+// @param msg  Not used, only there for msg_router to work properly
 // Return:    none
 void switch_to_AP(OSCMessage &msg) 
 {
-  if (config_wifi->wifi_mode != AP_MODE) {
-    #if LOOM_DEBUG == 1
-        Serial.println("Received command to switch to AP mode");
-    #endif
-    
-    Udp.stop();
-    UdpCommon.stop();
-    WiFi.disconnect();
-    WiFi.end();
-    start_AP();
-    config_wifi->wifi_mode = AP_MODE;
-    write_non_volatile();
-//    flash_config.write(configuration);
-  }
-  
-  #if LOOM_DEBUG == 1
-  else {
-    Serial.println("Already in AP mode, no need to switch");
-  }
-  #endif
+	if (config_wifi->wifi_mode != AP_MODE) {
+		#if LOOM_DEBUG == 1
+			Serial.println("Received command to switch to AP mode");
+		#endif
+		
+		Udp.stop();
+		UdpCommon.stop();
+		WiFi.disconnect();
+		WiFi.end();
+		start_AP();
+		config_wifi->wifi_mode = AP_MODE;
+		write_non_volatile();
+	}
+	
+	#if LOOM_DEBUG == 1
+	else {
+		Serial.println("Already in AP mode, no need to switch");
+	}
+	#endif
 }
 
 
+
 // --- PRINT REMOVE MAC ADDRESS ---
+//
 // Prints the MAC address of device connected to devices access point
-// @param none
-// Return:    none
+// 
 void print_remote_mac_addr()
 {
-  byte remoteMac[6];
-  WiFi.APClientMacAddress(remoteMac);
-      
-  Serial.print("Device connected to AP, MAC address: ");
-  Serial.print(remoteMac[5], HEX);
-  Serial.print(":");
-  Serial.print(remoteMac[4], HEX);
-  Serial.print(":");
-  Serial.print(remoteMac[3], HEX);
-  Serial.print(":");
-  Serial.print(remoteMac[2], HEX);
-  Serial.print(":");
-  Serial.print(remoteMac[1], HEX);
-  Serial.print(":");
-  Serial.println(remoteMac[0], HEX); 
+	byte remoteMac[6];
+	WiFi.APClientMacAddress(remoteMac);
+			
+	Serial.print("Device connected to AP, MAC address: ");
+	Serial.print(remoteMac[5], HEX);
+	Serial.print(":");
+	Serial.print(remoteMac[4], HEX);
+	Serial.print(":");
+	Serial.print(remoteMac[3], HEX);
+	Serial.print(":");
+	Serial.print(remoteMac[2], HEX);
+	Serial.print(":");
+	Serial.print(remoteMac[1], HEX);
+	Serial.print(":");
+	Serial.println(remoteMac[0], HEX); 
 }
 
 
 
 // --- REPLACE CHARACTER ---
+//
 // Given a string, replace all instances of 'orig' char with 'rep' char
-// Used primarily for replacing '~'s sent by Max, as it cannot send strings with spaces
-// @param str (pointer to string to alter), orig (character to replace), rep (replacement character)
-// Return:    none
-void replace_char(char *str, char orig, char rep) {
-    char *ix = str;
-    while((ix = strchr(ix, orig)) != NULL) {
-        *ix++ = rep;
-    }
+// Used primarily for replacing '~'s sent by Max
+// as it cannot send strings with spaces
+//
+// @param str   Pointer to string to alter
+// @param orig  Character to replace
+// @param rep   Replacement character
+// 
+void replace_char(char *str, char orig, char rep) 
+{
+	char *ix = str;
+	while((ix = strchr(ix, orig)) != NULL) {
+		*ix++ = rep;
+	}
 }
 
 
 
 // --- CONNECT TO NEW NETWORK ---
+//
 // Attempt to connect WiFi network in client mode upon command to do so
 // and both ssid and password provided
-// Credentials stored in global variable
+// Credentials stored in global wifi variable
+// and copied into configuration struct and saved to non-volatile memory
 // Reverts to AP mode upon failure
-// @param none 
-// Return:    none
+// 
 void connect_to_new_network()
 {
-  // Replace '~'s with spaces - as spaces cannot be sent via Max and are replaced with '~'
-  replace_char(state_wifi.new_ssid, '~', ' ');
-  replace_char(state_wifi.new_pass, '~', ' ');
+	// Replace '~'s with spaces - as spaces cannot be sent via Max and are replaced with '~'
+	replace_char(state_wifi.new_ssid, '~', ' ');
+	replace_char(state_wifi.new_pass, '~', ' ');
 
-  #if LOOM_DEBUG == 1
-    Serial.print("received command to connect to ");
-    Serial.print(state_wifi.new_ssid);
-    Serial.print(" with password ");
-    Serial.println(state_wifi.new_pass);
-  #endif
+	#if LOOM_DEBUG == 1
+		Serial.print("received command to connect to ");
+		Serial.print(state_wifi.new_ssid);
+		Serial.print(" with password ");
+		Serial.println(state_wifi.new_pass);
+	#endif
 
-  // Disconnect from current WiFi network
-  WiFi.disconnect();
-  Udp.stop();
-  UdpCommon.stop();
-  WiFi.end();
-  
-  // Try connecting on newly specified one
-  // Will revert to AP Mode if this fails
-  if(connect_to_WPA(state_wifi.new_ssid,state_wifi.new_pass)) {
-    config_wifi->wifi_mode = WPA_CLIENT_MODE;
-    config_wifi->ip = WiFi.localIP();
-    strcpy(config_wifi->ssid, state_wifi.new_ssid);
-    strcpy(config_wifi->pass, state_wifi.new_pass);
-    write_non_volatile();
-//    flash_config.write(configuration);
-  } 
+	// Disconnect from current WiFi network
+	WiFi.disconnect();
+	Udp.stop();
+	UdpCommon.stop();
+	WiFi.end();
+	
+	// Try connecting on newly specified one
+	// Will revert to AP Mode if this fails
+	if(connect_to_WPA(state_wifi.new_ssid,state_wifi.new_pass)) {
+		config_wifi->wifi_mode = WPA_CLIENT_MODE;
+		config_wifi->ip = WiFi.localIP();
+		strcpy(config_wifi->ssid, state_wifi.new_ssid);
+		strcpy(config_wifi->pass, state_wifi.new_pass);
+		write_non_volatile();
+	} 
 }
 
 
 
 // --- SET SSID ---
+//
 // Updates WiFi ssid global var with new ssid
 // Sets global bool to indicate this 
-// @param msg (OSC message with network ssid)
-// Return:    none
+//
+// @param msg  OSC message with network ssid
+//
 void set_ssid(OSCMessage &msg) 
 {
-  msg.getString(0, state_wifi.new_ssid, 50);
-  state_wifi.ssid_set = true;
+	msg.getString(0, state_wifi.new_ssid, 50);
+	state_wifi.ssid_set = true;
 }
 
 
 
-// SET PASSWORD
+// --- SET PASSWORD ---
+//
 // Updates WiFi password global var with new password 
 // Sets global bool to indicate this 
-// @param msg (OSC message with network password)
-// Return:    none
+//
+// @param msg  OSC message with network password)
+//
 void set_pass(OSCMessage &msg) 
 {
-  msg.getString(0, state_wifi.new_pass, 50);
-  state_wifi.pass_set = true;
+	msg.getString(0, state_wifi.new_pass, 50);
+	state_wifi.pass_set = true;
 }
 
 
 
 // --- BROADCAST IP ---
-// Broadcast IP address so that requesting computer can update IP
+//
+// Broadcasts IP address so that requesting computer can update IP
 // to send to if it only had device instance number 
-// @param msg (OSC message with no data, only message header was needed by msg_router())
-// Return:    none
+//
+// @param msg  OSC message with no data, only message header was needed by msg_router()
+// 
 void broadcastIP(OSCMessage &msg) 
 {
-  OSCBundle bndl;
-  config_wifi->ip = WiFi.localIP();
-  char addressString[255];
-  sprintf(addressString, "%s%s", packet_header_string, "/NewIP");
-  bndl.add(addressString).add((int32_t)config_wifi->ip[0])
-                         .add((int32_t)config_wifi->ip[1])
-                         .add((int32_t)config_wifi->ip[2])
-                         .add((int32_t)config_wifi->ip[3]);
+	OSCBundle bndl;
+	config_wifi->ip = WiFi.localIP();
+	char addressString[255];
+	sprintf(addressString, "%s%s", packet_header_string, "/NewIP");
+	bndl.add(addressString).add((int32_t)config_wifi->ip[0])
+							.add((int32_t)config_wifi->ip[1])
+							.add((int32_t)config_wifi->ip[2])
+							.add((int32_t)config_wifi->ip[3]);
 
-  UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
-  bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
-  UdpCommon.endPacket();    // Mark the end of the OSC Packet
-  bndl.empty();             // Empty the bundle to free room for a new one
+	UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
+	bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
+	UdpCommon.endPacket();    // Mark the end of the OSC Packet
+	bndl.empty();             // Empty the bundle to free room for a new one
 
-  #if LOOM_DEBUG == 1
-    Serial.print("Broadcasted IP: ");
-    Serial.println(config_wifi->ip);
-  #endif
+	#if LOOM_DEBUG == 1
+		Serial.print("Broadcasted IP: ");
+		Serial.println(config_wifi->ip);
+	#endif
 }
 
 
 
 // --- SET PORT ---
-// Update device's communication port
-// @param msg (OSC message of new port for device to communicate on)
-// Return:    none
+//
+// Update device's UDP communication port
+// Port in configuration struct is update but not saved
+//
+// @param msg  OSC message of new port for device to communicate on
+// 
 void set_port(OSCMessage &msg) 
 {
-  #if LOOM_DEBUG == 1
-    Serial.print("Port changed from ");
-    Serial.print(config_wifi->localPort);
-  #endif
+	#if LOOM_DEBUG == 1
+		Serial.print("Port changed from ");
+		Serial.print(config_wifi->localPort);
+	#endif
 
-  // Get new port, stop listening on old port, start on new port
-  config_wifi->localPort = msg.getInt(0);
-  Udp.stop();
-  Udp.begin(config_wifi->localPort);
+	// Get new port, stop listening on old port, start on new port
+	config_wifi->localPort = msg.getInt(0);
+	Udp.stop();
+	Udp.begin(config_wifi->localPort);
 
-  #if LOOM_DEBUG == 1
-    Serial.print(" to ");
-    Serial.println(config_wifi->localPort);
-  #endif
+	#if LOOM_DEBUG == 1
+		Serial.print(" to ");
+		Serial.println(config_wifi->localPort);
+	#endif
 
-  config_wifi->request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
-                                      // Note that configuration needs to be saved for this to take effect
+	config_wifi->request_settings = 0;  // Setting to 0 means that device will not request new port settings on restart. 
+										// Note that configuration needs to be saved for this to take effect
 
-  //respond_to_poll_request(packet_header_string);
 }
 
 
 
-
+// --- WIFI CHECK STATUS --- 
+//
+// Used to check if remote computer is still 
+// connected to this device's access point
+//
 void wifi_check_status()
 {
-    // Compare the previous status to the current status
-    if (status != WiFi.status()) {
-      status = WiFi.status();              // It has changed, update the variable
-      
-      #if LOOM_DEBUG == 1
-        if (status == WL_AP_CONNECTED) {   // A device has connected to the AP
-            print_remote_mac_addr();                            
-        } else {                           // A device has disconnected from the AP, and we are back in listening mode 
-          Serial.println("Device disconnected from AP");
-        }
-      #endif
-    } // of if ( status != WiFi.status() )
+	// Compare the previous status to the current status
+	if (status != WiFi.status()) {
+		status = WiFi.status();					// It has changed, update the variable
+		
+		#if LOOM_DEBUG == 1
+			if (status == WL_AP_CONNECTED) { 	// A device has connected to the AP
+					print_remote_mac_addr();                            
+			} else {							// A device has disconnected from the AP, and we are back in listening mode 
+				Serial.println("Device disconnected from AP");
+			}
+		#endif
+	} // of if ( status != WiFi.status() )
 }
 
 
 
-
+// --- REQUEST SETTINGS FROM MAX ---
+//
+// Used to request channel settings from Max Channel Manager
+// Sends IP address so that Max can target response at this device
+// Setting response will entail SetID and SetPort commands 
+//
 void request_settings_from_Max()
 {
-  OSCBundle bndl;
-  char addressString[255];
-  sprintf(addressString, "%s%s", packet_header_string, "/RequestSettings");
+	OSCBundle bndl;
+	char addressString[255];
+	sprintf(addressString, "%s%s", packet_header_string, "/RequestSettings");
 
-  bndl.add(addressString)
-      .add((int32_t)config_wifi->ip[0])
-      .add((int32_t)config_wifi->ip[1])
-      .add((int32_t)config_wifi->ip[2])
-      .add((int32_t)config_wifi->ip[3]);
+	bndl.add(addressString)
+			.add((int32_t)config_wifi->ip[0])
+			.add((int32_t)config_wifi->ip[1])
+			.add((int32_t)config_wifi->ip[2])
+			.add((int32_t)config_wifi->ip[3]);
 
-  
-  UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
-  bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
-  UdpCommon.endPacket();    // Mark the end of the OSC Packet
-  bndl.empty();             // Empty the bundle to free room for a new one
+	
+	UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
+	bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
+	UdpCommon.endPacket();    // Mark the end of the OSC Packet
+	bndl.empty();             // Empty the bundle to free room for a new one
 
-  #if LOOM_DEBUG == 1
-    Serial.println("Requested New Channel Settings");
-  #endif
+	#if LOOM_DEBUG == 1
+		Serial.println("Requested New Channel Settings");
+	#endif
 }
 
 
+
+// --- SET REQUEST SETTINGS --- 
+//
+// Sets the 'Request_Settings' option in the configuration
+// On next startup, device will request channel settings from Max
+//
+// @param msg  OSC messages that had header ending in '/SetRequestSettings'
+//				only used by msg_router(), not used here
+//
 void set_request_settings(OSCMessage &msg)
 {
-  config_wifi->request_settings = 1; // Setting to 1 means that device will request new port settings on restart. 
-                                      // Note that configuration needs to be saved for this to take effect
-  #if LOOM_DEBUG == 1
-    Serial.println("Setting Request Settings True (Note, configuration needs to be saved for change to take effect");
-  #endif                                    
+	config_wifi->request_settings = 1; // Setting to 1 means that device will request new port settings on restart. 
+	write_non_volatile();
+
+	#if LOOM_DEBUG == 1
+		Serial.println("Setting Request Settings True");
+	#endif                                    
 }
 
 
+
+// --- NEW CHANNEL ---
+//
+// Called if device received command to request
+// channel settings from Max Channel Manager
+// Setting response will entail SetID and SetPort commands 
+//
+// @param msg  OSC messages that had header ending in '/getNewChannel'
+//				only used by msg_router(), not used here
+//
 void new_channel(OSCMessage &msg)
 {
-  #if LOOM_DEBUG == 1
-    Serial.println("Received Command to get new channel settings");
-  #endif
-  request_settings_from_Max();
+	#if LOOM_DEBUG == 1
+		Serial.println("Received Command to get new channel settings");
+	#endif
+	request_settings_from_Max();
 }
 
 
 
+// --- RESPOND TO POLL REQUEST ---
+// 
+// Device received poll request from Max Channel Manager to respond presence
+// The function is not routed to by msg_router() but directly from 
+// wifi_receive_bundle() as a poll request comes on the common UDP port, 9440, 
+// not the device unique port
+// 
+// @param packet_header_string  The device-identifying string to prepend to OSC messages
+// 
 void respond_to_poll_request(char packet_header_string[])
 {
-  OSCBundle bndl;
-  bndl.empty();
-  char addressString[255];
-  sprintf(addressString, "%s%s", packet_header_string, "/PollResponse");
+	OSCBundle bndl;
+	bndl.empty();
+	char addressString[255];
+	sprintf(addressString, "%s%s", packet_header_string, "/PollResponse");
 
-  bndl.add(addressString);
+	bndl.add(addressString);
 
-  UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
-  bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
-  UdpCommon.endPacket();    // Mark the end of the OSC Packet
-  bndl.empty();             // Empty the bundle to free room for a new one
+	UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
+	bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
+	UdpCommon.endPacket();    // Mark the end of the OSC Packet
+	bndl.empty();             // Empty the bundle to free room for a new one
 
-  #if LOOM_DEBUG == 1
-    Serial.println("Responded to poll request");
-  #endif
+	#if LOOM_DEBUG == 1
+		Serial.println("Responded to poll request");
+	#endif
 }
 
+
+
+// --- WIFI SEND BUNDLE ---
+//
+// This is a simple helper function to encapsulate the 
+// common sequence of commands to send an OSC bundle
+// Note that this send on the device unique UDP port, localPort,
+// not the common port, 9440
+//
+// @param bndl  The OSC bundle to send on the device unique port
+//
 void wifi_send_bundle(OSCBundle *bndl)
 {
-  Udp.beginPacket(config_wifi->ip_broadcast, config_wifi->localPort);
-  bndl->send(Udp);    // Send the bytes to the SLIP stream
-  Udp.endPacket();        // Mark the end of the OSC Packet
+	Udp.beginPacket(config_wifi->ip_broadcast, config_wifi->localPort);
+	bndl->send(Udp);    // Send the bytes to the SLIP stream
+	Udp.endPacket();        // Mark the end of the OSC Packet
 }
 
 

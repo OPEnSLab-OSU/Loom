@@ -16,9 +16,9 @@
 // ===                        STRUCTURES                        === 
 // ================================================================
 struct state_stepper_t {
-  Adafruit_MotorShield *AFMS;
-  Adafruit_StepperMotor *myMotors[num_steppers];
-  int rpms[num_steppers];
+	Adafruit_MotorShield *AFMS;
+	Adafruit_StepperMotor *myMotors[num_steppers];
+	int rpms[num_steppers];
 };
 
 
@@ -43,18 +43,19 @@ void set_stepper_steps(int, int, int, int);
 // Creates new object to manage stepper motors
 // Sets initial speed for stepper motors
 //
-void setup_stepper(){
-  state_stepper.AFMS = new Adafruit_MotorShield();
-  for (int i = 0; i < num_steppers; i++){
-    state_stepper.myMotors[i] = state_stepper.AFMS->getStepper(200, i+1);
-  }
-  state_stepper.AFMS->begin();
-  for (int i = 0; i < num_steppers; i++){
-    state_stepper.myMotors[i]->setSpeed(50);
-  }
-  yield();
-  set_stepper_steps(0,0,60,50);
-  set_stepper_steps(1,0,60,50);
+void setup_stepper()
+{
+	state_stepper.AFMS = new Adafruit_MotorShield();
+	for (int i = 0; i < num_steppers; i++){
+		state_stepper.myMotors[i] = state_stepper.AFMS->getStepper(200, i+1);
+	}
+	state_stepper.AFMS->begin();
+	for (int i = 0; i < num_steppers; i++){
+		state_stepper.myMotors[i]->setSpeed(50);
+	}
+	yield();
+	set_stepper_steps(0,0,60,50);
+	set_stepper_steps(1,0,60,50);
 }
 
 
@@ -75,15 +76,15 @@ void setup_stepper(){
 //
 void set_stepper_steps(int motor_choice, int stepper_direction, int steps, int stepper_speed)
 {
-  #if LOOM_DEBUG == 1
-    Serial.println("setting stepper...");
-  #endif
-  //int set_degree = map(degree,0,360,0,200);
-  if (stepper_speed > 0){
-    state_stepper.myMotors[motor_choice]->setSpeed(stepper_speed);
-  }
-  state_stepper.myMotors[motor_choice]->step(steps,stepper_direction == 0 ? FORWARD : BACKWARD,SINGLE);
-  yield();
+	#if LOOM_DEBUG == 1
+		Serial.println("setting stepper...");
+	#endif
+	//int set_degree = map(degree,0,360,0,200);
+	if (stepper_speed > 0){
+		state_stepper.myMotors[motor_choice]->setSpeed(stepper_speed);
+	}
+	state_stepper.myMotors[motor_choice]->step(steps,stepper_direction == 0 ? FORWARD : BACKWARD,SINGLE);
+	yield();
 }
 
 
@@ -96,17 +97,20 @@ void set_stepper_steps(int motor_choice, int stepper_direction, int steps, int s
 // 
 void handle_stepper_msg(OSCMessage &msg)
 {
-  int motor = msg.getInt(0);
-  int stepper_direction = msg.getInt(1);
-  int degree = msg.getInt(2);
-  int stepper_speed = msg.getInt(3);
-  #if LOOM_DEBUG == 1
-    Serial.print("received message to move the motor ");
-    Serial.print(degree);
-    Serial.println(" degrees");
-  #endif
-  set_stepper_steps(motor,stepper_direction,degree,stepper_speed);
-  #if LOOM_DEBUG == 1
-    Serial.println("processed stepper request");
-  #endif
+	int motor = msg.getInt(0);
+	int stepper_direction = msg.getInt(1);
+	int degree = msg.getInt(2);
+	int stepper_speed = msg.getInt(3);
+
+	#if LOOM_DEBUG == 1
+		Serial.print("received message to move the motor ");
+		Serial.print(degree);
+		Serial.println(" degrees");
+	#endif
+
+	set_stepper_steps(motor,stepper_direction,degree,stepper_speed);
+	
+	#if LOOM_DEBUG == 1
+		Serial.println("processed stepper request");
+	#endif
 }

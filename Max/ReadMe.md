@@ -1,5 +1,11 @@
 # Project LOOM: Max Interfaces
 
+These are the Max/MSP interfaces for the control, monitoring, and processing of devices and data of a LOOM network.
+
+Each module contains a set of related functions and can receive, process, and output streams of data. Modules can be linked together to pass information from one to another. The set of data processor plugins include various means of reading any information from a network, a variety of modules to process, convert, or display this information, and modules to send data back out to devices on the network. 
+
+As more hardware is added or specialized needs arise, users can make modules to provide relevant displays, processing, and I/O, tailored to their needs.
+
 ## Table of Contents
 
 1. [Max/MSP Setup](#max/msp-setup)
@@ -19,13 +25,6 @@
     4. [Dynamic Window Size](#dynamic-window-size) 
 8. [Troubleshooting](#troubleshooting)
 
-
-These are the Max/MSP interfaces for the control, monitoring, and processing of devices and data of a LOOM network.
-
-Each module contains a set of similar functions and can receive, process, and output streams of data. Modules can be linked together to pass information from one to another. The set of data processor plugins include various means of reading any information from a network, a variety of modules to process, convert, or display this information, and modules to send data back out to the network. 
-
-As more hardware is added or specialized needs arise, users can make modules to provide relevant displays, processing, and I/O, tailored to their needs.
-
 ## Max/MSP Setup
 
 ### Max Installation
@@ -40,7 +39,7 @@ As more hardware is added or specialized needs arise, users can make modules to 
     - Mac: In Finder, navigate to Application > Max; press Cmd+I; Check "Open in 32-bit mode"
 - Activate Max
   - In Max, go to Help Menu > User Account and Licenses 
-  - Create Cycling '74 account
+  - Create a Cycling '74 account if you haven't already
   - Put in activation code
 
 ### LOOM Data Processors Setup
@@ -51,13 +50,13 @@ The Data Processor Plugins folder needs to be placed in the Max library in order
 
 **Max 6:**  [user] / Applications / Max6 / Cycling74 / 
 
-***Note:***  DataProcessor Plugins **Must** be in the same folder as the master DataProcessor.maxpat file and processor.js file
+***Note:***  DataProcessor Plugins currently **Must** be in the same folder as the master DataProcessor.maxpat file and processor.js file
 
 ## Existing Max Patches
 
-LOOM provides a number of patches for monitoring, receiving, sending, processing, and displaying information of the devices connected to the LOOM network
+LOOM provides a number of patches for monitoring, receiving, sending, processing, and displaying information of the devices connected to the LOOM network. Current Max patches are the following:
 
-### Input
+### Network Input 
 
 - Arduino In
 - Emote
@@ -86,7 +85,7 @@ LOOM provides a number of patches for monitoring, receiving, sending, processing
 - Threshold
 - Tap Tempo
 
-### Output
+### Network Output
 
 - App 3D Pan 
 - App VST
@@ -106,20 +105,24 @@ LOOM provides a number of patches for monitoring, receiving, sending, processing
 - Ishield Monitor
 - LOOM Channel Manager
 
-## Running Max Interfaces
+### Other
 
-The simplest way to test or run the devices on your network is to open the DataProcessor.maxpat file. This patch contains a drop down menu of all the LOOM Max modules / patches, and selecting one will generate an instance of it. Multiple instances can exist of the same Max patch, each controlling or monitoring different data flow. This Data Processor also already contains an instance of the LOOM Channel Manager, described below.
+- Stepper Motor Extension
+
+## Running Max Module Interfaces
+
+The simplest way to test or run the devices on your network is to open the DataProcessor.maxpat file. This patch contains a drop down menu of all the LOOM Max modules / patches, and selecting one will generate an instance of it. Multiple instances can exist of the same Max patch, each controlling or monitoring different data flow. This Data Processor also already contains an instance of the LOOM Channel Manager, described below. One can also add normal, non-prebuilt Max objects to the Data Processor like any other .patch file
 
 ## Channel Manager 
 
 The LOOM Channel Manager keeps track of the which devices are on using which channel (A – H), whether they are currently active, their battery levels, and allows for the following reconfiguration options:
 
 - **Save Config:** Save any changes that have been made to the device. Without saving, restarting the device will start in its previously saved state (which may be desirable if making temporary changes)
-- **Set Request Settings:** Enables a flag on the given device to, on startup, ignore any stored channel and instead request a new one from a channel manager (which needs to be open for any automatic channel assignment to occur). Note that a 'Save Config' command needs to be sent to the device for the set to take effect.
+- **Set Request Settings:** Enables a flag on the given device, instructing it to, on startup, ignore any stored channel and instead request a new one from a channel manager (which needs to be open for any automatic channel assignment to occur). Note that a 'Save Config' command needs to be sent to the device for the set to take effect.
 - **Reassign Channel:**  Changes the channel of a given running device to a specified available channel. Note that this will not persist after device restart if no 'Save Config' command is sent.
 - **Remove:** Disconnects the specified device from the network. It will switch WiFi to AP mode. Note that this will not persist after device restart if no 'Save Config' command is sent.
 
-Devices that go to sleep will be remembered (and thus preventing that channel from being assgined to another device) unless 'Clear Memory' is pressed. For devices with buttons, pressing the button will light an indicator next to the corresponding device and channel information.
+Devices that go to sleep will be remembered (and thus preventing that channel from being assigned to another device) unless 'Clear Memory' is pressed. For devices with buttons, pressing the button will light an indicator next to the corresponding device and channel information.
 
 ## Developing New Max Patches
 
@@ -133,7 +136,7 @@ Open the patch you wish to modify (recommeded that you modify a copy of the patc
 
 Refer the the Max Help, Reference, and Examples which can be found under the Help menu
 
-Some patchers in existing patches are self contained and can simply be copied into a new patch to add the functionality as a tab. The 'WiFi config' tab / patcher is an example of this.
+Some patchers in existing patches are self contained and can simply be copied into a new patch to add the functionality as a tab. The 'WiFi config' tab / patcher is an example of this. Any other subpatch can also be set to appear as a tab by setting it to do so in the Inspector.
 
 ### Adding as option to ProcessorGen
 
@@ -151,11 +154,15 @@ Follow these steps if you would like to be able to access a custom patch from th
 
 ### Dynamic Window Size
 
-If your custom patch does not fit inside the standard 250x150 dimensions that most LOOM patches are sized at, you may want to adjust the size of the patch generated to avoid having to resized it manually. The process of doing this is as follows:
+If your custom patch does not fit inside the standard 250x150 dimensions that most LOOM patches are sized at, you may want to adjust the size of the border around the generated instance of a patch to avoid having to resized it manually. The process of doing this is as follows:
 
 - Open processor.js in the DataProcessorPlugins folder
+
 - Locate the createBpatcher function
-- In the ```switch(file)``` add another case in the same format, using the dimensions of your custom patch 
+
+- 
+
+  In the ```switch(file)``` add another case in the same format, using the name and dimensions of your custom patch 
 
 ## Troubleshooting
 

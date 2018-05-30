@@ -7,7 +7,7 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define i2c_addr_zxgesturesensor 0x10 								 //0x10, 0x11
+#define i2c_addr_zxgesturesensor 0x10 		 //0x10, 0x11
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -46,11 +46,13 @@ void measure_zxgesturesensor();
 // Runs any ZXgesturesensor setup and initialization
 // 
 // @return Whether or not setup was successful
-bool setup_zxgesturesensor() {
-  bool is_setup;
+//
+bool setup_zxgesturesensor() 
+{
+	bool is_setup;
 	uint8_t ver;
 	
-	if(state_zxgesturesensor.inst_zxgesturesensor.init()) {
+	if (state_zxgesturesensor.inst_zxgesturesensor.init()) {
 		is_setup = true;
 		#if LOOM_DEBUG == 1
 			Serial.println("Initialized zxgesturesensor");
@@ -64,7 +66,7 @@ bool setup_zxgesturesensor() {
 	}
 	
 	ver = state_zxgesturesensor.inst_zxgesturesensor.getModelVersion();
-	if(ver != ZX_MODEL_VER) {
+	if (ver != ZX_MODEL_VER) {
 		is_setup = false;
 		#if LOOM_DEBUG == 1
 			Serial.println("Incorrect Model Version or unable to read Model Version.");
@@ -76,10 +78,10 @@ bool setup_zxgesturesensor() {
 			Serial.println(ver);
 		#endif
 	}
-  
-  // Read the register map version and ensure the library will work
-  ver = state_zxgesturesensor.inst_zxgesturesensor.getRegMapVersion();
-	if(ver != ZX_REG_MAP_VER) {
+	
+	// Read the register map version and ensure the library will work
+	ver = state_zxgesturesensor.inst_zxgesturesensor.getRegMapVersion();
+	if (ver != ZX_REG_MAP_VER) {
 		is_setup = false;
 		#if LOOM_DEBUG == 1
 			Serial.println("Incorrect Register Map Version or unable to read Register Map Version.");
@@ -109,7 +111,8 @@ bool setup_zxgesturesensor() {
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
 // @param port                  Which port of the multiplexer the device is plugged into
 //
-void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8_t port){
+void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8_t port)
+{
 	char address_string[255];
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/zxgesturesensor/data");
 	
@@ -128,12 +131,13 @@ void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8
 //
 // Gets the current sensor readings of the ZXGESTURESENSOR and stores into its state struct
 // 
-void measure_zxgesturesensor() {
+void measure_zxgesturesensor() 
+{
 	uint8_t x;
 	uint8_t z;
 	
 	if(state_zxgesturesensor.inst_zxgesturesensor.positionAvailable()) {
-    x = state_zxgesturesensor.inst_zxgesturesensor.readX();
+		x = state_zxgesturesensor.inst_zxgesturesensor.readX();
 		z = state_zxgesturesensor.inst_zxgesturesensor.readZ();
 		
 		if((x != ZX_ERROR) && (z != ZX_ERROR)) {
@@ -159,8 +163,8 @@ void measure_zxgesturesensor() {
 	}
 	
 	if(state_zxgesturesensor.inst_zxgesturesensor.gestureAvailable()) {
-    state_zxgesturesensor.gesture = state_zxgesturesensor.inst_zxgesturesensor.readGesture();
-    state_zxgesturesensor.gesture_speed = state_zxgesturesensor.inst_zxgesturesensor.readGestureSpeed();
+		state_zxgesturesensor.gesture = state_zxgesturesensor.inst_zxgesturesensor.readGesture();
+		state_zxgesturesensor.gesture_speed = state_zxgesturesensor.inst_zxgesturesensor.readGestureSpeed();
 		
 		switch (state_zxgesturesensor.gesture) {
 			case NO_GESTURE:
@@ -183,7 +187,7 @@ void measure_zxgesturesensor() {
 			Serial.print("Gesture speed: ");
 			Serial.println(state_zxgesturesensor.gesture_speed, DEC);
 		#endif
-  }
+	}
 	else {
 		#if LOOM_DEBUG == 1
 			Serial.println("Gesture data unavailable for zxgesturesensor");
