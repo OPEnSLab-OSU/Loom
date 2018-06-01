@@ -21,7 +21,7 @@ As more hardware is added or specialized needs arise, users can make modules to 
 7. [Developing New Max Patches](#developing-new-max-interfaces)
     1. [Modifying Existing Patches](#modifying-existing-patches) 
     2. [Developing Patches from Scratch](#developing-patches-from-scratch) 
-    3. [Adding as option to ProcessorGen](#adding-as-option-to-processorgen) 
+    3. [Adding an option to ProcessorGen](#adding-as-option-to-processorgen) 
     4. [Dynamic Window Size](#dynamic-window-size) 
 8. [Troubleshooting](#troubleshooting)
 
@@ -31,7 +31,7 @@ As more hardware is added or specialized needs arise, users can make modules to 
 
 - Download Max from [Cycling '74](https://cycling74.com/downloads)
 - Install Max with downloaded installer
-- If you plan on using 32 bit peripherals with Max 
+- If you plan on using 32-bit peripherals with Max 
   - Download and install 32-bit legacy Java (if not already installed)
     - For [Mac users](https://support.apple.com/kb/dl1572?locale=en_US)
     - For [Windows / other users](https://java.com/en/download/manual.jsp)
@@ -160,9 +160,7 @@ If your custom patch does not fit inside the standard 250x150 dimensions that mo
 
 - Locate the createBpatcher function
 
-- 
-
-  In the ```switch(file)``` add another case in the same format, using the name and dimensions of your custom patch 
+- In the ```switch(file)``` add another case in the same format, using the name and dimensions of your custom patch 
 
 ## Troubleshooting
 
