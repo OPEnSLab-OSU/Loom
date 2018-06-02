@@ -14,6 +14,14 @@
 
 #define VBATPIN A7                // Pin to check for battery voltage
 
+#if is_wifi == 1
+	#define WIFI_PLAT 1
+#endif
+#if is_lora == 1
+	#define LORA_PLAT 2
+#endif
+
+
 
 //---------------------------------------------------------------------------
 // MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
@@ -47,6 +55,8 @@
 #endif
 
 
+// Prototypes of functions from loom_flash.h and loom_common.h
+// That are referenced by device .h files
 void read_non_volatile();
 void write_non_volatile();
 
@@ -109,4 +119,4 @@ void write_non_volatile();
 
 // Files of functions that are not specific to sensors / actuators
 #include "loom_flash.h"
-#include "loom_common.h"  // These may refer to functions in above headers
+#include "loom_common.h"  		// These may refer to functions in above headers

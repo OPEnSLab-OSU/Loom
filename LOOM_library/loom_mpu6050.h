@@ -15,13 +15,6 @@
 
 #define i2c_addr_mpu6050 0x68													 //0x68, 0x69
 
-// Uncoment one or more of these to determine which readings and format to send
-#define OUTPUT_READABLE_YAWPITCHROLL
-//#define OUTPUT_BINARY_YAWPITCHROLL
-//#define OUTPUT_READABLE_REALACCEL
-//#define OUTPUT_READABLE_WORLDACCEL  // this is pretty cool
-//#define OUTPUT_BINARY_ACCELGYRO
-
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -249,102 +242,18 @@ void measure_mpu6050(void)
 		fifoCount -= packetSize;
 
 
-		// Now format and compile readings based on definitions from top of sketch
-		#ifdef OUTPUT_READABLE_YAWPITCHROLL
-			// display Euler angles in degrees
-			mpu.dmpGetQuaternion(&q, fifoBuffer);
-			mpu.dmpGetGravity(&gravity, &q);
-			mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-			
-			#if LOOM_DEBUG == 1
-				// Serial.print("ypr\t");
-				// Serial.print(ypr[0] * 180/M_PI);
-				// Serial.print("\t");
-				// Serial.print(ypr[1] * 180/M_PI);
-				// Serial.print("\t");
-				// Serial.println(ypr[2] * 180/M_PI); 
-			#endif
-		#endif
+		// display Euler angles in degrees
+		mpu.dmpGetQuaternion(&q, fifoBuffer);
+		mpu.dmpGetGravity(&gravity, &q);
+		mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
 		
-
-		#ifdef OUTPUT_BINARY_YAWPITCHROLL
-			// Display Euler angles in degrees
-			mpu.dmpGetQuaternion(&q, fifoBuffer);
-			mpu.dmpGetGravity(&gravity, &q);
-			mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-			yaw   = ypr[0] * 180 / M_PI;
-			pitch = ypr[1] * 180 / M_PI;
-			roll  = ypr[2] * 180 / M_PI;
-			
-			#if LOOM_DEBUG == 1
-				Serial.write((uint8_t)(yaw >> 8));   Serial.write((uint8_t)(yaw & 0xFF));
-				Serial.write((uint8_t)(pitch >> 8)); Serial.write((uint8_t)(pitch & 0xFF));
-				Serial.write((uint8_t)(roll >> 8));  Serial.write((uint8_t)(roll & 0xFF));
-			#endif
-		#endif
-
-
-		#ifdef OUTPUT_READABLE_REALACCEL
-			// Display real acceleration, adjusted to remove gravity
-			mpu.dmpGetQuaternion(&q, fifoBuffer);
-			mpu.dmpGetAccel(&aa, fifoBuffer);
-			mpu.dmpGetGravity(&gravity, &q);
-			mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
-			
-			#if LOOM_DEBUG == 1
-				Serial.print("areal\t");
-				Serial.print(aaReal.x);
-				Serial.print("\t");
-				Serial.print(aaReal.y);
-				Serial.print("\t");
-				Serial.println(aaReal.z);
-			#endif
-		#endif
-
-
-		#ifdef OUTPUT_READABLE_WORLDACCEL
-			// Display initial world-frame acceleration, adjusted to remove gravity
-			// and rotated based on known orientation from quaternion
-			mpu.dmpGetQuaternion(&q, fifoBuffer);
-			mpu.dmpGetAccel(&aa, fifoBuffer);
-			mpu.dmpGetGravity(&gravity, &q);
-			mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
-			mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
-			
-			#if LOOM_DEBUG == 1
-				// Serial.print("aworld\t");
-				// Serial.print(aaWorld.x);
-				// Serial.print("\t");
-				// Serial.print(aaWorld.y);
-				// Serial.print("\t");
-				// Serial.println(aaWorld.z);
-			#endif
-		#endif
-
-
-		#ifdef OUTPUT_READABLE_ACCELGYRO
-			// Display tab-separated accel/gyro x/y/z values
-			#if LOOM_DEBUG == 1
-				Serial.print("a/g:\t");
-				Serial.print(ax); Serial.print("\t");
-				Serial.print(ay); Serial.print("\t");
-				Serial.print(az); Serial.print("\t");
-				Serial.print(gx); Serial.print("\t");
-				Serial.print(gy); Serial.print("\t");
-				Serial.println(gz);
-			#endif
-		#endif
-
-
-		#ifdef OUTPUT_BINARY_ACCELGYRO
-			#if LOOM_DEBUG == 1
-				Serial.write((uint8_t)(ax >> 8)); Serial.write((uint8_t)(ax & 0xFF));
-				Serial.write((uint8_t)(ay >> 8)); Serial.write((uint8_t)(ay & 0xFF));
-				Serial.write((uint8_t)(az >> 8)); Serial.write((uint8_t)(az & 0xFF));
-				Serial.write((uint8_t)(gx >> 8)); Serial.write((uint8_t)(gx & 0xFF));
-				Serial.write((uint8_t)(gy >> 8)); Serial.write((uint8_t)(gy & 0xFF));
-				Serial.write((uint8_t)(gz >> 8)); Serial.write((uint8_t)(gz & 0xFF));
-			#endif
+		#if LOOM_DEBUG == 1
+			// Serial.print("ypr\t");
+			// Serial.print(ypr[0] * 180/M_PI);
+			// Serial.print("\t");
+			// Serial.print(ypr[1] * 180/M_PI);
+			// Serial.print("\t");
+			// Serial.println(ypr[2] * 180/M_PI); 
 		#endif
 	} // of else if
 	//   return (void);
@@ -364,7 +273,7 @@ void meansensors()
 	while (i < (buffersize + 101)) {
 		accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);   // Read raw accel/gyro measurements from device
 		
-		if (i > 100 && i <= (buffersize + 100)) {             //First 100 measures are discarded
+		if (i > 100 && i <= (buffersize + 100)) {             // First 100 measures are discarded
 			buff_ax = buff_ax + ax;
 			buff_ay = buff_ay + ay;
 			buff_az = buff_az + az;
@@ -411,8 +320,8 @@ void calibration() {
 		accelgyro.setZGyroOffset(config_mpu6050->gz_offset);
 
 		meansensors();
+		
 		#if LOOM_DEBUG == 1
-			
 			Serial.println("...");
 		#endif
 
@@ -435,7 +344,8 @@ void calibration() {
 		else config_mpu6050->gz_offset = config_mpu6050->gz_offset - mean_gz / (giro_deadzone + 1);
 		
 		if (ready == 6) break;
-	}
+	} // of while(1)
+	
 } // of calibration
 
 
@@ -466,10 +376,10 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
 	char addressString[255];    // Declare address string buffer
 	if (port != NULL) {
-		sprintf(addressString, "%s%s%d%s", packet_header_string, "/port", port, "/tsl2591/data");
+		sprintf(addressString, "%s%s%d%s", packet_header_string, "/port", port, "/mpu6050/data");
 	}
 	else {
-		sprintf(addressString, "%s%s", packet_header_string, "/tsl2591/data");
+		sprintf(addressString, "%s%s", packet_header_string, "/mpu6050/data");
 	}
 
 	// Messages want an OSC address as first argument
@@ -486,14 +396,12 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	
 	// Assemble UDP Packet
 	// IP1 IP2 Yaw Pitch Roll aX aY aZ gX gY gZ vBatt
-	#ifdef OUTPUT_READABLE_YAWPITCHROLL
-		sprintf(addressString, "%s%s", packet_header_string, "/yaw");
-		bndl->add(addressString).add((float)(ypr[0] * 180 / M_PI));
-		sprintf(addressString, "%s%s", packet_header_string, "/roll");
-		bndl->add(addressString).add((float)(ypr[1] * 180 / M_PI));
-		sprintf(addressString, "%s%s", packet_header_string, "/pitch");
-		bndl->add(addressString).add((float)(ypr[2] * 180 / M_PI));
-	#endif
+	sprintf(addressString, "%s%s", packet_header_string, "/yaw");
+	bndl->add(addressString).add((float)(ypr[0] * 180 / M_PI));
+	sprintf(addressString, "%s%s", packet_header_string, "/roll");
+	bndl->add(addressString).add((float)(ypr[1] * 180 / M_PI));
+	sprintf(addressString, "%s%s", packet_header_string, "/pitch");
+	bndl->add(addressString).add((float)(ypr[2] * 180 / M_PI));
 	
 	sprintf(addressString, "%s%s", packet_header_string, "/accelX");
 	bndl->add(addressString).add(axf);
@@ -507,15 +415,6 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	bndl->add(addressString).add((float)gy / 16000);
 	sprintf(addressString, "%s%s", packet_header_string, "/gyroZ");
 	bndl->add(addressString).add((float)gz / 16000);
-	
-	#ifdef OUTPUT_READABLE_WORLDACCEL
-		sprintf(addressString, "%s%s", packet_header_string, "/rwx");
-		bndl->add(addressString).add(aaWorld.x);
-		sprintf(addressString, "%s%s", packet_header_string, "/rwy");
-		bndl->add(addressString).add(aaWorld.y);
-		sprintf(addressString, "%s%s", packet_header_string, "/rwz");
-		bndl->add(addressString).add(aaWorld.z);
-	#endif
 	
 	sprintf(addressString, "%s%s", packet_header_string, "/freefall");
 	bndl->add(addressString).add(freefall);
@@ -561,28 +460,18 @@ void calMPU6050()
 		#if LOOM_DEBUG == 1
 			Serial.println("\nFINISHED!");
 			Serial.print("\nSensor readings with offsets:\t");
-			Serial.print(mean_ax);
-			Serial.print("\t");
-			Serial.print(mean_ay);
-			Serial.print("\t");
-			Serial.print(mean_az);
-			Serial.print("\t");
-			Serial.print(mean_gx);
-			Serial.print("\t");
-			Serial.print(mean_gy);
-			Serial.print("\t");
+			Serial.print(mean_ax); Serial.print("\t");
+			Serial.print(mean_ay); Serial.print("\t");
+			Serial.print(mean_az); Serial.print("\t");
+			Serial.print(mean_gx); Serial.print("\t");
+			Serial.print(mean_gy); Serial.print("\t");
 			Serial.println(mean_gz);
 			Serial.print("Your offsets:\t");
-			Serial.print(config_mpu6050->ax_offset);
-			Serial.print("\t");
-			Serial.print(config_mpu6050->ay_offset);
-			Serial.print("\t");
-			Serial.print(config_mpu6050->az_offset);
-			Serial.print("\t");
-			Serial.print(config_mpu6050->gx_offset);
-			Serial.print("\t");
-			Serial.print(config_mpu6050->gy_offset);
-			Serial.print("\t");
+			Serial.print(config_mpu6050->ax_offset); Serial.print("\t");
+			Serial.print(config_mpu6050->ay_offset); Serial.print("\t");
+			Serial.print(config_mpu6050->az_offset); Serial.print("\t");
+			Serial.print(config_mpu6050->gx_offset); Serial.print("\t");
+			Serial.print(config_mpu6050->gy_offset); Serial.print("\t");
 			Serial.println(config_mpu6050->gz_offset);
 		#endif
 		state = 0; // reset state flag
