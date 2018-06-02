@@ -108,7 +108,7 @@
 
 
 // Make sure only one device type is enabled
-#if ( (is_ishield) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_tca9548a) ) != 1
+#if ( (is_ishield) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_tca9548a) ) > 1
 	device_type_error // this will force an error
 #endif
 
@@ -125,6 +125,8 @@
 	#define DEVICE "Decagon"
 #elif is_tca9548a
 	#define DEVICE "MuxShield"
+#else
+	#define DEVICE "Generic"
 #endif
 
 
