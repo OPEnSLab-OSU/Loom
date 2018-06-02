@@ -7,7 +7,7 @@ struct SensorList poll_sensors(SDI12 *mySDI12) {
   data.count = 0;
   for (int i = 0; i < SENSORCOUNT; i++) {
     id = get_identity(&mySDI12[i]);
-    if (id.length() > 0) {
+    if (id.length() > 0 && get_type(id) != -1) {
       data.type[data.count] = get_type(id);
       data.list[data.count] = i;
       data.count++;
