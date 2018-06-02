@@ -1,5 +1,5 @@
 #define FAMILY "LOOM"     // Should always be "LOOM", you can change this if you are setting up your own network
-#define DEVICE "Ishield" // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
+//#define DEVICE "Ishield" // The device name, should begin with a slash followed by an unbroken string with no more slashes i.e. "RelayShield" or "IShield"
 #define INIT_INST 3
 
 
@@ -102,3 +102,29 @@
 										// Do not use with LoRa
 #endif
 //#define is_sleep_interrupt 11       	// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
+
+
+
+
+
+// Make sure only one device type is enabled
+#if ( (is_ishield) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_tca9548a) ) != 1
+	device_type_error // this will force an error
+#endif
+
+// Automatically set device name
+#if   is_ishield
+	#define DEVICE "Ishield"
+#elif num_servos
+	#define DEVICE "ServoShield"
+#elif num_steppers
+	#define DEVICE "StepperShield"
+#elif is_relay
+	#define DEVICE "RelayShield"
+#elif is_decagon
+	#define DEVICE "Decagon"
+#elif is_tca9548a
+	#define DEVICE "MuxShield"
+#endif
+
+
