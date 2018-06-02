@@ -540,7 +540,9 @@ void send_bundle(OSCBundle *send_bndl, int platform)
 		#if is_lora == 1 && lora_device_type == 1
 			case LORA_PLAT :
 				if (!lora_bundle_fragment) {
+					
 					lora_send_bundle(send_bndl);
+					
 				} else {
 					#if LOOM_DEBUG == 1
 						Serial.print("Bundle of size ");
@@ -557,7 +559,7 @@ void send_bundle(OSCBundle *send_bndl, int platform)
 						tmp_bndl.empty();
 						tmp_bndl.add(*tmp_msg);
 
-						wifi_send_bundle(&tmp_bndl);
+						lora_send_bundle(&tmp_bndl);
 					}
 				}
 				break;
