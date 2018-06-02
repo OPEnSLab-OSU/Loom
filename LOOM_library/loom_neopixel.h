@@ -15,7 +15,7 @@ struct state_neopixel_t {
 	bool enabled[3] = {NEO_0, NEO_1, NEO_2};
 	
 	// Store RGB vals for up to 1 pixel per port on Ishield
-	int colorVals[3][3] = { {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+	int colorVals[3][3] = { {0, 0, 0}, {0, 0, 0}, {0, 0, 0} };
 };
 
 
@@ -93,7 +93,7 @@ void set_color(OSCMessage &msg)
 											state_neopixel.colorVals[port][0], 
 											state_neopixel.colorVals[port][1], 
 											state_neopixel.colorVals[port][2]));
-	}
+	} // of if
 
 	// Update colors displayed by any enabled Neopixels
 	for (int i = 0; i < 3; i++) {

@@ -126,8 +126,8 @@ void measure_decagon()
 	
 	strtok_r(p, "+", &p);
 	dielec_p = atof(strtok_r(NULL, "+", &p));
-	temp = atof(strtok_r(NULL, "+", &p));
-	elec_c = atof(strtok_r(NULL, "+", &p));
+	temp     = atof(strtok_r(NULL, "+", &p));
+	elec_c   = atof(strtok_r(NULL, "+", &p));
 	
 	
 	//if (sdiResponse.length() > 1) Serial.println(sdiResponse); //write the response to the screen

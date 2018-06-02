@@ -88,7 +88,7 @@ void measure_analog()
 
 // --- PACKAGE ANALOG ---
 //
-// Gets analog reading from pors and button, as enabled,
+// Gets analog reading from ports, as enabled,
 // and forms an OSC bundle out of them.
 //
 // @param bndl                  The OSC bundle to be populated
@@ -112,7 +112,6 @@ void package_analog(OSCBundle *bndl, char packet_header_string[])
 		sprintf(addressString, "%s%s", packet_header_string, "/port2");
 //		bndl->add(addressString).add((int32_t)read_analog(2));
 		bndl->add(addressString).add((int32_t)state_analog.a2);
-
 	#endif
 }
 

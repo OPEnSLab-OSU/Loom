@@ -8,6 +8,7 @@ char          packetBuffer[255];              // Buffer to hold incoming packet
 char          ReplyBuffer[] = "acknowledged"; // A string to send back
 OSCErrorCode  error;                          // Hold errors from OSC
 uint32_t      button_timer;                   // For time button has been held
+int 		  button_state;
 char          addressString[255];
 
 
@@ -16,13 +17,21 @@ char          addressString[255];
 // ================================================================
 void LOOM_begin();
 void set_instance_num(OSCMessage &msg);
-void msg_router(OSCMessage &msg, int addrOffset);
+//void msg_router(OSCMessage &msg, int addrOffset);       currently moved to top of loom_preamble
 #if (is_wifi == 1) && defined(button)
 	void check_button_held();
 #endif
 void loop_sleep();
 void save_config(OSCMessage &msg);
+int get_bundle_bytes(OSCBundle *bndl);
 
+// Main loop interface functions
+void receive_bundle(OSCBundle *bndl, int platform);
+void process_bundle(OSCBundle *bndl);
+void measure_sensors();
+void package_data(OSCBundle *send_bndl);
+void send_bundle(OSCBundle *send_bndl, int platform);
+void additional_loop_checks();
 
 
 // ================================================================
@@ -217,126 +226,6 @@ void check_button_held()
 
 
 
-// --- WIFI RECEIVE BUNDLE ---
-//
-// Function that fills an OSC Bundle with packets from UDP
-// Routes messages to correct function via msg_router if message header string matches expected
-//
-// @param bndl                  OSC bundle to be filled
-// @param packet_header_string  Header string to route messages on, as there are unique ports and a common port
-// @param Udp                   Which WiFIUdp structure to read packets from
-// @param port                  Which port the packet was received on, used primarily for debug prints
-//
-#if is_wifi == 1
-void wifi_receive_bundle(OSCBundle *bndl, char packet_header_string[], WiFiUDP *Udp, unsigned int port)
-{  
-	int packetSize; 
-	state_wifi.pass_set = false;
-	state_wifi.ssid_set = false;
-	
-	// If there's data available, read a packet
-	packetSize = Udp->parsePacket();
-
-	if (packetSize > 0) {
-		#if LOOM_DEBUG == 1
-			if (packetSize > 0) {
-					Serial.println("=========================================");
-					Serial.print("Received packet of size: ");
-					Serial.print(packetSize);
-					Serial.print(" on port " );
-					Serial.println(port);
-			}
-		#endif
-		
-		bndl->empty();             // Empty previous bundle
-		while (packetSize--){     // Read in new bundle
-			bndl->fill(Udp->read());
-		}
-
-		// If no error
-		if (!bndl->hasError()){
-			char addressString[255];
-			bndl->getOSCMessage(0)->getAddress(addressString, 0);
-
-			#if LOOM_DEBUG == 1
-				Serial.print("Number of items in bundle: ");
-				Serial.println(bndl->size());
-				Serial.print("First message address string: ");
-				Serial.println(addressString);
-			#endif
-
-			if (strcmp(addressString, "/LOOM/ChannelPoll") == 0) {
-				#if LOOM_DEBUG == 1
-					Serial.println("Received channel poll request");
-				#endif
-				respond_to_poll_request(packet_header_string);
-				return;
-			}
-			
-			for (int i = 0; i < 32; i++){ //Clear the new_ssid and new_pass buffers
-				state_wifi.new_ssid[i] = '\0';
-				state_wifi.new_pass[i] = '\0';
-			}
-
-			
-			// Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
-			// Most commands will be finished once control returns here (WiFi changes being handled below)
-			bndl->route(packet_header_string,msg_router);
-			
-			// If new ssid and password have been received, try to connect to that network
-			if (state_wifi.ssid_set == true && state_wifi.pass_set == true){
-				connect_to_new_network();   
-			}
-
-		} else { // of !bndl.hasError()
-			error = bndl->getError();
-			#if LOOM_DEBUG == 1
-				Serial.print("error: ");
-				Serial.println(error);
-			#endif
-		} // of else
-	} // of (packetSize > 0)
-}
-#endif // of if is_wifi == 1
-
-
-
-// --- LORA PROCESS BUNDLE ---
-//
-// Updates device's identifying instance number
-//
-// @param bndl                  Pointer to the bundle to be processed
-// @param packet_header_string  Header string to route messages on
-//
-void lora_process_bundle(OSCBundle *bndl, char packet_header_string[]) 
-{
-	if (!bndl->hasError()) {
-		char addressString[255];
-		bndl->getOSCMessage(0)->getAddress(addressString, 0);
-
-		#if LOOM_DEBUG == 1
-			Serial.print("Number of items in bundle: ");
-			Serial.println(bndl->size());
-			Serial.print("First message address string: ");
-			Serial.println(addressString);
-		#endif
-		
-		// Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
-		// Most commands will be finished once control returns here (WiFi changes being handled below)
-		bndl->route(packet_header_string,msg_router);
-		
-	} // of if
-	else { // of !bndl.hasError()
-		error = bndl->getError();
-		#if LOOM_DEBUG == 1
-			Serial.print("error: ");
-			Serial.println(error);
-		#endif
-	} // of else
-}	
-
-
-
 // --- LOOM SLEEP ---
 //
 // Delay between iterations of the main loop
@@ -370,6 +259,336 @@ void save_config(OSCMessage &msg)
 	write_non_volatile();
 	#if LOOM_DEBUG == 1
 		Serial.println("Done");
+	#endif
+}
+
+
+
+// --- GET BUNDLE BYTES ---
+//
+// Gets the size of a bundle in bytes
+//
+// @param bndl  The bndl to get the size of
+// 
+// @return The size of the bundle in bytes
+// 
+int get_bundle_bytes(OSCBundle *bndl)
+{
+	int total = 0;
+	for (int i = 0; i < bndl->size(); i++) {
+		total += bndl->getOSCMessage(i)->bytes();
+	}
+}
+
+
+
+
+// ================================================================ 
+// ===                   INTERFACE FUNCTIONS                    === 
+// ================================================================
+
+
+
+// --- SEND BUNDLE ---
+//
+// Fills an OSC bundle with packets received the specified platform
+// if data exists and platform is enabled
+// 
+// @param bndl       The bundle to fill
+// @param platform   The wireless platform to receive on, the values are
+//                    encoded to #define names to be easier for users to use
+// 
+void receive_bundle(OSCBundle *bndl, int platform)
+{
+	bndl->empty();
+
+	switch(platform) {
+		#if is_wifi == 1
+			case WIFI_PLAT :
+				// Handle wifi bundle if it exists
+				wifi_receive_bundle(bndl, &Udp,       configuration.config_wifi.localPort); 
+				wifi_receive_bundle(bndl, &UdpCommon, configuration.config_wifi.commonPort);                             
+															 
+				// Compare the previous status to the current status
+				wifi_check_status();
+				break;
+		#endif
+
+		#if is_lora == 1 && lora_device_type == 0
+			case LORA_PLAT :
+				lora_receive_bundle(bndl);
+				break;
+		#endif
+
+		#if is_lora == 1 && lora_device_type == 2
+			case LORA_PLAT :
+				//TODO: repeater functionality here
+				break;
+		#endif
+		
+//		default : 
+	} // of switch
+}
+
+
+
+
+
+
+
+
+// --- PROCESS BUNDLE --- 
+// 
+// Examine the provided OSC bundle (presumably filled via receive_bundle()
+// If bundle is not empty,  has no errors, and is addressed to this device, then
+// Attempt to perform action specified
+// 
+// @param bndl  The OSC bundle to be processed 
+//
+void process_bundle(OSCBundle *bndl)
+{
+	if (bndl->size()){
+		// If no bundle error
+		if (!bndl->hasError()) {
+			char addressString[255];
+			bndl->getOSCMessage(0)->getAddress(addressString, 0);
+	
+			#if LOOM_DEBUG == 1
+				Serial.print("Number of items in bundle: ");
+				Serial.println(bndl->size());
+				Serial.print("First message address string: ");
+				Serial.println(addressString);
+			#endif
+	
+			#if is_wifi == 1
+				// Channel manager polls without device name so check is performed here
+				// rather than in msg_router()
+				if (strcmp(addressString, "/LOOM/ChannelPoll") == 0) {
+					#if LOOM_DEBUG == 1
+						Serial.println("Received channel poll request");
+					#endif
+					respond_to_poll_request(configuration.packet_header_string);
+					return;
+				}
+			#endif
+	
+			#if is_wifi == 1
+				//Clear the new_ssid and new_pass buffers
+				for (int i = 0; i < 32; i++){  
+					state_wifi.new_ssid[i] = '\0';
+					state_wifi.new_pass[i] = '\0';
+				}
+			#endif
+	
+	
+			// Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
+			// Most commands will be finished once control returns here (WiFi changes being handled below)
+			bndl->route(configuration.packet_header_string, msg_router);
+
+	
+			#if is_wifi == 1
+				// If new ssid and password have been received, try to connect to that network
+				if (state_wifi.ssid_set == true && state_wifi.pass_set == true) {
+					connect_to_new_network();   
+				}
+			#endif
+	
+		} else { // of !bndl.hasError()
+			error = bndl->getError();
+			#if LOOM_DEBUG == 1
+				Serial.print("error: ");
+				Serial.println(error);
+			#endif
+		} // of else
+	} // of if (bndl->size())
+
+	bndl->empty();
+}
+
+
+
+
+
+
+
+
+// --- MEASURE SENSORS ---
+//
+// Update stored readings from sensors by calling measure 
+// on each enabled sensor
+//
+void measure_sensors()
+{
+	// Get battery voltage
+	vbat = analogRead(VBATPIN);
+	vbat = (vbat * 2 * 3.3) / 1024; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
+
+	//	Get button state
+	#ifdef button
+		button_state = digitalRead(button);
+	#endif
+	
+	//	Measure multiplexer sennsors
+	#if is_tca9548a == 1
+		measure_tca9548a();
+		if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
+			update_sensors();
+			#if LOOM_DEBUG == 1
+				Serial.println("Update MUXShield Sensorlist");
+			#endif
+			state_tca9548a.last_update_time = millis();
+		}
+	#endif //is_tca9548a
+	
+	// Update MPU6050 Data
+	#if is_ishield == 1 && is_mpu6050 == 1
+		measure_mpu6050();      // Now measure MPU6050, update values in global registers 
+		mpu.resetFIFO();        // Flush MPU6050 FIFO to avoid overflows if using i2c
+	#endif //is_ishield && is_mpu6050
+
+	// Update Thermocouple
+	#if is_max31856 == 1
+		measure_max31856();
+	#endif
+
+	// Get analog readings
+	#if num_analog >= 1
+		measure_analog();
+	#endif
+
+	// Get decagon readings
+	#if is_decagon == 1
+		measure_decagon();
+	#endif
+}
+
+
+
+
+
+
+
+
+// --- PACKAGE DATA ---
+// 
+// Fill the provided OSC bundle with latest stored sensor readings
+//
+// @param send_bndl  The OSC bundle to be filled
+//
+void package_data(OSCBundle *send_bndl)
+{
+	// Clear any previous contents
+	send_bndl->empty();
+
+	// Add battery data 
+	sprintf(addressString, "%s%s", configuration.packet_header_string, "/vbat");
+	send_bndl->add(addressString).add(vbat); 
+	
+	// Add button state
+	#ifdef button
+		sprintf(addressString, "%s%s", configuration.packet_header_string, "/button");
+		send_bndl->add(addressString).add((int32_t)button_state);
+	#endif
+
+	//	Add multiplexer sensor data
+	#if is_tca9548a == 1
+		package_tca9548a(send_bndl,configuration.packet_header_string);
+	#endif //is_tca9548a
+
+	// Update MPU6050 Data
+	#if is_ishield == 1 && is_mpu6050 == 1
+		package_mpu6050(send_bndl,configuration.packet_header_string, 0);                // Build and send packet
+	#endif //is_ishield && is_mpu6050
+
+	#if is_max31856 == 1
+		package_max31856(send_bndl,configuration.packet_header_string);
+	#endif
+	
+	// Get analog readings
+	#if num_analog >= 1
+		package_analog(send_bndl,configuration.packet_header_string);
+	#endif
+
+	#if is_decagon == 1
+		package_decagon(&send_bndl,configuration.packet_header_string);
+	#endif
+}
+
+
+
+
+
+
+
+// --- SEND BUNDLE ---
+//
+// Sends a packaged bundle on the specified platform
+// 
+// @param send_bndl  The bundle to be sent
+// @param platform   The wireless platform to send on, the values are
+//                    encoded to #define names to be easier for users to use
+// 
+void send_bundle(OSCBundle *send_bndl, int platform)
+{
+	switch(platform) {
+		#if is_wifi == 1
+			case WIFI_PLAT :
+				wifi_send_bundle(send_bndl);
+				break;
+		#endif
+
+		#if is_lora == 1 && lora_device_type == 1
+			case LORA_PLAT :
+				if (!lora_bundle_fragment) {
+					lora_send_bundle(send_bndl);
+				} else {
+					#if LOOM_DEBUG == 1
+						Serial.print("Bundle of size ");
+						Serial.println(get_bundle_bytes(send_bndl));
+						Serial.print(" Being split into smaller bundles");
+					#endif
+					
+					// Separate bundle into smaller pieces
+					OSCBundle tmp_bndl;
+					OSCMessage *tmp_msg;
+					
+					for (int i = 0; i < send_bndl->size(); i++) {
+						tmp_msg = send_bndl->getOSCMessage(i);
+						tmp_bndl.empty();
+						tmp_bndl.add(*tmp_msg);
+
+						wifi_send_bundle(&tmp_bndl);
+					}
+				}
+				break;
+		#endif
+		
+//		default : 
+	} // of switch
+}
+
+
+
+
+
+
+
+
+// --- ADDITIONAL LOOP CHECKS ---
+//
+// Performs any miscellaneous Loom tasks that happen each loop iteration
+// but are not handled by any of the other 5 interface functions
+//
+void additional_loop_checks()
+{
+	// Reset to AP mode if button held for ~5 seconds
+	#if defined(button) && (is_wifi == 1)
+		check_button_held();      
+	#endif
+
+	// Delay between loop iterations
+	#ifdef is_sleep_period
+		loop_sleep();
 	#endif
 }
 

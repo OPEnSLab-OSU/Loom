@@ -83,6 +83,10 @@ void new_channel(OSCMessage &msg);
 void respond_to_poll_request(char packet_header_string[]);
 void wifi_send_bundle(OSCBundle *bndl);
 
+void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port);
+//void wifi_process_bundle(OSCBundle *bndl, char packet_header_string[]);
+
+
 
 // ================================================================ 
 // ===                          SETUP                           === 
@@ -641,5 +645,50 @@ void wifi_send_bundle(OSCBundle *bndl)
 	bndl->send(Udp);    // Send the bytes to the SLIP stream
 	Udp.endPacket();        // Mark the end of the OSC Packet
 }
+
+
+
+
+
+
+// --- WIFI RECEIVE BUNDLE ---
+//
+// Function that fills an OSC Bundle with packets from UDP
+// Routes messages to correct function via msg_router if message header string matches expected
+//
+// @param bndl                  OSC bundle to be filled
+// @param packet_header_string  Header string to route messages on, as there are unique ports and a common port
+// @param Udp                   Which WiFIUdp structure to read packets from
+// @param port                  Which port the packet was received on, used primarily for debug prints
+//
+#if is_wifi == 1
+void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port)
+{  
+	int packetSize; 
+	state_wifi.pass_set = false;
+	state_wifi.ssid_set = false;
+	
+	// If there's data available, read a packet
+	packetSize = Udp->parsePacket();
+
+	if (packetSize > 0) {
+		#if LOOM_DEBUG == 1
+			if (packetSize > 0) {
+					Serial.println("=========================================");
+					Serial.print("Received packet of size: ");
+					Serial.print(packetSize);
+					Serial.print(" on port " );
+					Serial.println(port);
+			}
+		#endif
+		
+		bndl->empty();             // Empty previous bundle
+		while (packetSize--){      // Read in new bundle
+			bndl->fill(Udp->read());
+		}
+	} // of (packetSize > 0)
+}
+#endif // of if is_wifi == 1
+
 
 

@@ -43,11 +43,12 @@ struct state_tca9548a_t state_tca9548a;
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 bool setup_tca9548a();
-void get_sensor_data(uint8_t,OSCBundle *, char[], uint8_t);
+void package_sensor_data(uint8_t,OSCBundle *, char[], uint8_t);
 void measure_tca9548a();
 void tcaseselect(uint8_t);
 void get_sensors(OSCBundle *, char[]);
 void update_sensors();
+void measure_tca9548a();
 void package_tca9548a(OSCBundle *, char[]);
 void send_sensor_list(OSCMessage &);
 
@@ -96,7 +97,7 @@ void tcaseselect(uint8_t port_num)
 
 
 
-// --- GET SENSOR DATA ---
+// --- MEASURE SENSOR DATA ---
 //
 // Called by package_tca9548a(), which calls this in a loop through i2c addresses
 // Checks for specified sensor (via i2c address) 
@@ -107,7 +108,69 @@ void tcaseselect(uint8_t port_num)
 // @param packet_header_string  The device-identifying string to prepend to OSC messages  (forwarded to sensor package functions)
 // @param port                  Which port the sensor being checked would be plugged into
 //
-void get_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_string[], uint8_t port)
+void measure_sensor_data(uint8_t i2c_addr)
+{
+	#if LOOM_DEBUG == 1
+		Serial.print("Attempting to measure data from sensor with address: ");
+		Serial.println(i2c_addr);
+	#endif 
+	
+	#ifdef i2c_addr_tsl2591
+		if ((i2c_addr == 0x29) && (setup_tsl2591())) {
+			measure_tsl2591(); return;
+		} 
+	#endif
+	#ifdef i2c_addr_fxos8700
+		if (((i2c_addr == 0x1C) || (i2c_addr == 0x1D) || (i2c_addr == 0x1E) || (i2c_addr == 0x1F)) && (setup_fxos8700())) {
+			measure_fxos8700(); return;
+		}
+	#endif
+	#ifdef i2c_addr_fxas21002
+		if (((i2c_addr == 0x20) || (i2c_addr == 0x21)) && (setup_fxas21002())) {
+			measure_fxas21002(); return;
+		}
+	#endif
+	#ifdef i2c_addr_zxgesturesensor
+		if (((i2c_addr == 0x10) || (i2c_addr == 0x11)) && (setup_zxgesturesensor())) {
+			measure_zxgesturesensor(); return;
+		}
+	#endif
+	#ifdef i2c_addr_sht31d
+		if (((i2c_addr == 0x44) || (i2c_addr == 0x45)) && (setup_sht31d())) {
+			measure_sht31d(); return;
+		}
+	#endif
+	#ifdef i2c_addr_mb1232
+		if (((i2c_addr == 0x70)) && (setup_mb1232())) {
+			measure_mb1232(); return;
+		}
+	#endif
+	#ifdef i2c_addr_mpu6050
+		if (((i2c_addr == 0x68) || (i2c_addr == 0x69)) && (setup_mpu6050())) {
+			measure_mpu6050(); return;
+		}
+	#endif
+	
+	#if LOOM_DEBUG == 1
+		if (i2c_addr != 0x00) //sht31d hardware bug
+			Serial.println("This sensor is not currently supported by the Project LOOM sytem");
+	#endif
+}
+
+
+
+// --- PACKAGE SENSOR DATA ---
+//
+// Called by package_tca9548a(), which calls this in a loop through i2c addresses
+// Checks for specified sensor (via i2c address) 
+// Calls package for that sensor
+//
+// @param i2c_addr              I2C address specifying which sensor to get and send readings from
+// @param bndl                  The OSC bundle to be added to (forwarded to sensor package functions)
+// @param packet_header_string  The device-identifying string to prepend to OSC messages  (forwarded to sensor package functions)
+// @param port                  Which port the sensor being checked would be plugged into
+//
+void package_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
 	#if LOOM_DEBUG == 1
 		Serial.print("Attempting to measure data from sensor with address: ");
@@ -301,6 +364,27 @@ void get_sensors(OSCBundle *bndl, char packet_header_string[])
 
 
 
+// --- MEASURE TCA9548a ---
+// 
+// Calls measure_<sensor> of any sensors currently plugged in
+//
+void measure_tca9548a()
+{
+	#if LOOM_DEBUG == 1
+		Serial.println("Measuring data from devices connected to tca9548a (Multiplexer).");
+	#endif	
+
+	for (int device = 0; device < 16; device++) {
+		if (state_tca9548a.devices[device][0] <= 7) {
+			tcaseselect(state_tca9548a.devices[device][0]);
+		
+			measure_sensor_data(state_tca9548a.devices[device][1]);
+		}
+	}
+}
+
+
+
 // --- PACKAGE TCA9548A ---
 //
 // Calls package functions of any devices plugged into to multiplexer
@@ -312,14 +396,14 @@ void get_sensors(OSCBundle *bndl, char packet_header_string[])
 void package_tca9548a(OSCBundle *bndl, char packet_header_string[])
 {
 	#if LOOM_DEBUG == 1
-		Serial.println("Measuring data from devices connected to tca9548a (Multiplexer).");
+		Serial.println("Packaging data from devices connected to tca9548a (Multiplexer).");
 	#endif
 		
-	for (int device = 0; device < 16; device++){
+	for (int device = 0; device < 16; device++) {
 		if (state_tca9548a.devices[device][0] <= 7) {
 			tcaseselect(state_tca9548a.devices[device][0]);
 		
-			get_sensor_data(state_tca9548a.devices[device][1],bndl,packet_header_string,state_tca9548a.devices[device][0]);
+			package_sensor_data(state_tca9548a.devices[device][1],bndl,packet_header_string,state_tca9548a.devices[device][0]);
 		}
 	}
 }

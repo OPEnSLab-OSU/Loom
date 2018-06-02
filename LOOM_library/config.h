@@ -7,14 +7,15 @@
 
 //--OPTIONS--//
 
-#define LOOM_DEBUG 0	  // Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG 1	  // Set to 1 if you want Serial statements from various functions to print
+
+#define is_wifi    1
+#define is_lora    0
 
 #define is_ishield 1
 #define num_servos 0
 #define num_steppers 0
 #define is_relay   0
-#define is_wifi    1
-#define is_lora    0
 #define num_analog  2
 #define is_decagon 0
 //Multiplexer
@@ -49,7 +50,7 @@
 
 	#define is_mpu6050  1
 
-	//  #define button 10
+//	#define button 10
 
 	#if is_neopixel == 1
 		#define NEO_0 false
@@ -69,15 +70,25 @@
 // LoRa Device Type
 // 0: Hub, 1: Node, 2 = Repeater
 #if is_lora == 1
+	#define lora_bundle_fragment 0		// splits bundles into smaller bundles to avoid overflowing size LoRa can send
 
 	#define lora_device_type 0
 	
-	#define SERVER_ADDRESS 0          //Use 0-9 for SERVER_ADDRESSes
-	#define RF95_FREQ      915.0      //Hardware specific, Tx must match Rx
+	#define SERVER_ADDRESS 0          	// Use 0-9 for SERVER_ADDRESSes
+	#define RF95_FREQ      915.0      	// Hardware specific, Tx must match Rx
 
 	#if lora_device_type == 0 // Hub
-		#define NUM_FIELDS 32           	//Maximum number of fields accepted by the PushingBox Scenario    
-		#include <Ethernet2.h>            // -- ideas on how to move this to declarations? (its needed for IPAddress but that is a user option)
+		#define NUM_FIELDS 32           // Maximum number of fields accepted by the PushingBox Scenario    
+		#include <Ethernet2.h>			// -- ideas on how to move this to declarations? (its needed for IPAddress but that is a user option)
+		
+//		String data[NUM_FIELDS];
+		char device_id[]   = "v25CCAAB0F709665";     // Required by PushingBox, specific to each scenario
+		char server_name[] = "api.pushingbox.com";
+	
+		//Use this for OPEnS Lab
+		byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};
+		IPAddress ip(128,193,56,138); 
+//		EthernetClient client;            
 	#endif
 	
 	#if lora_device_type == 1 // Node
@@ -86,5 +97,8 @@
 	
 #endif
 
-#define is_sleep_period 80          // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval
-//#define is_sleep_interrupt 11       // Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
+#if is_lora == 0
+	#define is_sleep_period 80          // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. Change the value according to the length of your desired transmission interval
+										// Do not use with LoRa
+#endif
+//#define is_sleep_interrupt 11       	// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt

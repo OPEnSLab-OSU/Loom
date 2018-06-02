@@ -4,6 +4,7 @@
 #include <RH_RF95.h>
 #include <RHReliableDatagram.h>
 #include <string.h>
+#include <Ethernet2.h>
 
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
@@ -35,12 +36,12 @@ union data_value {
 
 #if lora_device_type == 0
 	String data[NUM_FIELDS];
-	char device_id[]   = "v25CCAAB0F709665";     // Required by PushingBox, specific to each scenario
-	char server_name[] = "api.pushingbox.com";
+//	char device_id[]   = "v25CCAAB0F709665";     // Required by PushingBox, specific to each scenario
+//	char server_name[] = "api.pushingbox.com";
 
 	//Use this for OPEnS Lab
-	byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};
-	IPAddress ip(128,193,56,138); 
+//	byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};
+//	IPAddress ip(128,193,56,138); 
 	EthernetClient client;            
 #endif
 
@@ -54,15 +55,18 @@ RHReliableDatagram manager(rf95, SERVER_ADDRESS);
 void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager);
 
 #if lora_device_type == 0
-	void get_OSC_bundle(char *string, OSCBundle* bndl);
+	bool setup_ethernet();
+	void translate_string_to_OSC(char *string, OSCBundle* bndl);
 	void lora_receive_bundle(OSCBundle *bndl);
+//	void lora_process_bundle(OSCBundle *bndl, char packet_header_string[]);
+
 	String get_data_value(OSCMessage* msg, int pos);
 	void sendToPushingBox(int num_fields, char *server_name, char *devid);
-	bool setup_ethernet();
 #endif
 
 #if lora_device_type == 1
-	void get_OSC_string(OSCBundle *bndl, char *osc_string);
+	void translate_OSC_to_string(OSCBundle *bndl, char *osc_string);
+	bool lora_send_bundle(OSCBundle *bndl);
 #endif
 
 #if LOOM_DEBUG == 1
@@ -127,6 +131,18 @@ void lora_setup(RH_RF95 *rf95, RHReliableDatagram *manager)
 
 
 
+
+
+
+
+// ================================================================
+// ===                        FUNCTIONS                         ===
+// ================================================================
+
+
+
+#if lora_device_type == 0
+
 // --- SETUP ETHERNET ---
 //
 // Configures ethernet capabilities.
@@ -159,15 +175,6 @@ bool setup_ethernet()
 	return is_setup;
 }
 
-
-
-// ================================================================
-// ===                        FUNCTIONS                         ===
-// ================================================================
-
-
-
-#if lora_device_type == 0
 
 // --- GET DATA VALUE ---
 // 
@@ -211,10 +218,10 @@ String get_data_value(OSCMessage* msg, int pos)
 // 
 // Converts string used by LoRa to an equivalent OSCBundle 
 //
-// @param string  A char * created through the use of get_OSC_string(), 
+// @param string  A char * created through the use of translate_OSC_to_string(), 
 // @param bndl    The OSC bundle to be populated
 //
-void get_OSC_bundle(char *string, OSCBundle* bndl) 
+void translate_string_to_OSC(char *string, OSCBundle* bndl) 
 {
 	bndl->empty();
 	data_value value_union;
@@ -315,7 +322,7 @@ void lora_receive_bundle(OSCBundle *bndl)
 			//If true, then the data being received is from the evaporimeter, which
 			//is formatted differently as they use code not written by the CS Capstone team.
 			if (((char)(buf[0])) == '/') {
-				get_OSC_bundle((char*)buf, bndl); 
+				translate_string_to_OSC((char*)buf, bndl); 
 				for(int i = 0; i < NUM_FIELDS; i++)
 					data[i] = get_data_value(bndl->getOSCMessage(0), i);
 			} else {
@@ -351,7 +358,7 @@ void lora_receive_bundle(OSCBundle *bndl)
 // @param bndl        An OSCBundle to put into string format.
 // @param osc_string  A char * to fill with the OSCBundle's data.
 //
-void get_OSC_string(OSCBundle *bndl, char *osc_string) 
+void translate_OSC_to_string(OSCBundle *bndl, char *osc_string) 
 {
 	char data_type;
 	data_value value;
@@ -416,7 +423,7 @@ bool lora_send_bundle(OSCBundle *bndl)
 {
 	char message[RH_RF95_MAX_MESSAGE_LEN];
 	memset(message, '\0', sizeof(message));
-	get_OSC_string(bndl, message);
+	translate_OSC_to_string(bndl, message);
 	#if LOOM_DEBUG == 1
 		Serial.println(message);
 		Serial.print("Message length: ");
@@ -439,6 +446,10 @@ bool lora_send_bundle(OSCBundle *bndl)
 		return false;
 	}
 }
+
+
+
+
 #endif // of lora_device_type == 1
 
 
@@ -492,5 +503,8 @@ void print_bundle(OSCBundle *bndl)
 	}
 }
 #endif // of LOOM_DEBUG == 1
+
+
+
 
 
