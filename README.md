@@ -14,7 +14,13 @@
         2. [Configuring Maximum Message Length](#configuring-maximum-message-length)
 2. [Sensors](#sensors)
     1. [I2C Sensors](#i2c-sensors)
-       
+        1. [TSL2591 Lux Sensor](#tsl2591-lux-sensor)
+        2. [FXOS8700 3-Axis Accelerometer/Magentometer](#fxos8700-3-axis-accelerometer/magentometer)
+        3. [FXAS21002 3-Axis Gyroscope](#fxas21002-3-axis-gyroscope)
+        4. [Sparkfun ZX](#sparkfun-zx)
+        5. [SHT31-D](#sht31-d)
+        6. [MB1232](#mb1232)
+        7. [TCA9548A Multiplexer](#tca9548a-multiplexer)   
     2. [SDI-12 Sensors](#sdi-12-sensors)
         1. [SDI-12 Dependencies](#sdi-12-dependencies)
         2. [Supported SDI-12 Pins](#supported-sdi-12-pins)
@@ -201,7 +207,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 **Datasheet:** [FXAS21002 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056)
 
-#### SPARKFUN ZX
+#### Sparkfun ZX
 **Technical Details**
 * 2-3.6V Supply
 * I2C 7-bit address 0x10, 0x11 
