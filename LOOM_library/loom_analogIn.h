@@ -31,9 +31,6 @@ void package_analog(OSCBundle *bndl, char packet_header_string[]);
 
 
 
-
-
-
 // --- READ ANALOG ---
 //
 // Generic subroutine for reading raw sensor data with averaging
@@ -100,17 +97,14 @@ void package_analog(OSCBundle *bndl, char packet_header_string[])
 	// Get reading from relevant ports and the button if enabled          
 	#if (num_analog > 0) 
 		sprintf(addressString, "%s%s", packet_header_string, "/port0");
-//		bndl->add(addressString).add((int32_t)read_analog(0));
 		bndl->add(addressString).add((int32_t)state_analog.a0);
 	#endif
 	#if (num_analog > 1)
 		sprintf(addressString, "%s%s", packet_header_string, "/port1");
-//		bndl->add(addressString).add((int32_t)read_analog(1));
 		bndl->add(addressString).add((int32_t)state_analog.a1);
 	#endif
 	#if (num_analog > 2)
 		sprintf(addressString, "%s%s", packet_header_string, "/port2");
-//		bndl->add(addressString).add((int32_t)read_analog(2));
 		bndl->add(addressString).add((int32_t)state_analog.a2);
 	#endif
 }

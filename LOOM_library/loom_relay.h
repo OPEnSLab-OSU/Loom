@@ -40,7 +40,8 @@ void write_relay_states();
 // Sets pin modes for relays (on pins 5 and 6)
 // Initializes relays to off
 // 
-void setup_relay() {
+void setup_relay() 
+{
 	pinMode(RELAY_PIN0,OUTPUT);
 	pinMode(RELAY_PIN1,OUTPUT);
 	state_relay.on[0] = false;

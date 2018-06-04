@@ -54,8 +54,7 @@ bool setup_sht31d() {
 		#if LOOM_DEBUG == 1
 			Serial.println("Initialized sht31d (temp/humid)");
 		#endif
-	}
-	else {
+	} else {
 		is_setup = false;
 		#if LOOM_DEBUG == 1
 			Serial.println("Failed to initialize sht31d (temp/humid");
@@ -111,8 +110,7 @@ void measure_sht31d()
 			Serial.print("Humidity: ");
 			Serial.println(state_sht31d.humid);
 		#endif
-	}
-	else {
+	} else {
 		#if LOOM_DEBUG == 1
 			Serial.println("Failed to read temperature or humidity");
 		#endif

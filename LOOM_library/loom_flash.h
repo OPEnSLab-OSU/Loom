@@ -61,7 +61,6 @@ void flash_config_setup();
 // based on which device is bieng used
 
 #if MEM_TYPE == MEM_FLASH
-	//  #include <FlashStorage.h>
 	FlashStorage(flash_config,config_flash_t);    // Setup the flash storage for the structure
 	void read_non_volatile(){
 		configuration = flash_config.read();
@@ -70,8 +69,6 @@ void flash_config_setup();
 		flash_config.write(configuration);
 	}
 #elif MEM_TYPE == MEM_EEPROM
-	//  #include <EEPROM.h>
-	//  #include "EEPROMAnything.h"
 	void read_non_volatile(){
 		EEPROM_readAnything(0,configuration);
 	}
@@ -82,9 +79,9 @@ void flash_config_setup();
 
 
 
-// --- FLASH SETUP ---
+// --- FLASH CONFIG SETUP ---
 //
-// Handles configuration of reading device configuration settings from flash (if applicable)
+// Handles configuration of reading device configuration settings from flash (if config is saved)
 // else uses config.h specified settings, and then writes these to flash
 // 
 void flash_config_setup()
@@ -96,6 +93,7 @@ void flash_config_setup()
 	#if is_mpu6050 == 1
 		link_config_mpu6050(&configuration.config_mpu6050);
 	#endif
+
 	#if MEM_TYPE == MEM_FLASH || MEM_TYPE == MEM_EEPROM
 
 		read_non_volatile(); //reads configuration from non_volatile memory

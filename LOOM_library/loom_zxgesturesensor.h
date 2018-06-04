@@ -162,7 +162,8 @@ void measure_zxgesturesensor()
 		#endif
 	}
 	
-	if(state_zxgesturesensor.inst_zxgesturesensor.gestureAvailable()) {
+	if (state_zxgesturesensor.inst_zxgesturesensor.gestureAvailable()) {
+
 		state_zxgesturesensor.gesture = state_zxgesturesensor.inst_zxgesturesensor.readGesture();
 		state_zxgesturesensor.gesture_speed = state_zxgesturesensor.inst_zxgesturesensor.readGestureSpeed();
 		

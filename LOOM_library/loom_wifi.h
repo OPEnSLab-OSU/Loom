@@ -82,9 +82,7 @@ void set_request_settings(OSCMessage &msg);
 void new_channel(OSCMessage &msg);
 void respond_to_poll_request(char packet_header_string[]);
 void wifi_send_bundle(OSCBundle *bndl);
-
 void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port);
-//void wifi_process_bundle(OSCBundle *bndl, char packet_header_string[]);
 
 
 
