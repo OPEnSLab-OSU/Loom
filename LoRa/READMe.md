@@ -1,4 +1,4 @@
-# Project LOOM: LoRa
+# Project Loom: LoRa
 
 This is the Section corresponding to the LoRa flavor of wireless COM for IoA.
 Supports both the Adafruit Feather M0 and Adafruit Feather 32u4.

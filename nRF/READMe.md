@@ -1,4 +1,4 @@
-# Project LOOM: Nordic RF
+# Project Loom: Nordic RF
 
 The nRF flavor of IoA is comprised with the Nordic nRF24L01+ radio tranceiver.
 
@@ -16,5 +16,5 @@ Significant code structure pulled from:
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
  version 2 as published by the Free Software Foundation.
- 
+
  

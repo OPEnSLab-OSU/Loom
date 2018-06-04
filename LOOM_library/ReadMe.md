@@ -1,34 +1,50 @@
-# Project LOOM: Library
+# Project Loom: Library
 
 This is the primary location of the Project LOOM code, consolidated into place with a single Arduino .ino sketch built with code selected by the preprocessor based on the configuration file. 
 
 ## Table of Contents
 
-1. [Device Support](#device-support)
-    1. [Adafruit Feather M0](#adafruit-feather-m0)
-    2. [Adafruit Feather 32u4](#adafruit-feather-32u4)
-2. [Wireless Capabilities](#wireless-capabilities)
-3. [Max/MSP](#max/msp)
-4. [Library Architecture](#library-architecture)
-    1. [Adding to the Library](#adding-to-the-library)
-5.  [Channels](#channels)
-    1.  [Implementation](#implementation)
+1. [Installation](#installation)
+2. [Device Support](#device-support)
+3. [Wireless Capabilities](#wireless-capabilities)
+4. [Max/MSP](#max/msp)
+5. [Library Architecture](#library-architecture)
+    1. [Overall Structure](#overall-structure)
+        1. [Example Library Include Hierarchy](#example-library-include-hierarchy)
+    2. [Adding to the Library](#adding-to-the-library)
+6. [Channels](#channels)
+    1. [Implementation](#implementation)
     2. [Additional Devices](#additional-devices)
-6. [Configuration File](#configuration-file)
-7. [Arduino IDE Setup](#arduino-ide-setup)
-8. [Glossary](#glossary)
-9. [Troubleshooting](#troubleshooting)
-10. [Other](#other)
+7. [Configuration File](#configuration-file)
+8. [API](#api)
+    1. [Includes](#includes)
+    2. [Setup](#setup)
+    3. [Main Loop Functions](#main-loop-functions)
+        1. [Receive Bundle](#receive-bundle)
+        2. [Process Bundle](#process-bundle)
+        3. [Measure Sensors](#measure-sensors)
+        4. [Package Data](#package-data)
+        5. [Send Bundle](#send-bundle)
+        6. [Additional Loop Checks](#additional-loop-checks)
+    		 [Minimal Working Example](#minimal-working-example)	
+9. [Arduino IDE Setup](#arduino-ide-setup)
+10. [Glossary](#glossary)
+
+## Installation
+
+The Loom Library, and any dependencies, need to be placed into the Arduino libraries folder, i.e:
+
+Document > Arduino > Libraries
 
 ## Device Support
 
-- **Adafruit Feather M0**
-- **Adafruit Feather 32u4**
+- Adafruit Feather M0
+- Adafruit Feather 32u4
 
 ## Communication Platforms
 
-- **WiFi**
-- **LoRa**
+- WiFi
+- LoRa
 
 ## Device Configuration
 
@@ -38,7 +54,7 @@ Currently changes to the config need to be done manually in the file itself. A s
 
 ## Max/MSP
 
-The associated [Loom Data Processors](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Max) and control modules are made as patches in Max/MSP.
+The associated [Loom Data Processors](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Max) and control modules are made as patches in Max/MSP. The Max interfaces are not strictly necessary for using this library, but provide convenient features and means of interacting with your Loom devices / network.
 
 ## Librarary Architecture
 
@@ -47,6 +63,32 @@ The LOOM Library is the answer to the growing set of code to drive Project LOOM'
 ### Overall Structure
 
 The LOOM Library is effectively an aggregate of all of the functionality possible within the entirety of the supported devices, sensors, and actuators. The user then specifies the needs of their sketch inside the config.h. Based on the needs of the sketch, the requisite files, functions, and logic will be dynamically included such that only what is needed by the sketch is uploaded to the device. loom_preamble.h uses config.h to know which files to include, these files in turn then include the libraries they need. loom_common.h is also always present as it has the LOOM_begin() function, which sets up all the modules and sensors being used by the sketch. 
+
+#### Example Library Include Hierarchy
+
+The hierarchy of included files looks something like the following (example if building for Ishield device on Feather M0 WiFi). 
+
+**Note** – bolded are files that are always necessary and thus included, independent of config.h. In angle brackets are non-Loom dependencies.
+
+- Ishield_Example.ino
+  - **Config.h**
+  - **Loom_preamble.h** (likely to be renamed)
+    - **<OSCBundle.h>**
+    - <Adafruit_SleepyDog.h>
+    - <SPI.h>
+    - loom_analog.h
+    - loom_neopixel.h
+      - <Adafruit_NeoPixel.h>
+    - loom_mpu6050.h
+      - <I2Cdev.h>
+      - <Wire.h>
+      - <MPU6050_6Axis_MotionApps20.h>
+    - loom_wifi.h
+      - <WiFi101.h>
+      - <WiFiUDP.h>
+    - **loom_flash.h**
+      - <FlashStorage.h>
+    - **loom_common.h**
 
 ### Adding to the Library
 
@@ -85,11 +127,170 @@ The Max interfaces presently support 8 concurrent channels, the library itself p
 
 The configuration file is used in conjunction with preprocessor statements to essentially built the specified sketch. Any options that can be set or toggled, or any specification of hardware (e.g. sensors and actuators) being used occur in (and only in) this config.h.
 
-Any options for custom additions to the library should be added only to the configuratoin file.
+Any options for custom additions to the library should be added only to the configuration file.
+
+The config.h file needs to be included before the library itself, so that the configuration can be used to define the necessary subset of the library.
 
 ## Configuration File Generation Script
 
 Work is currently be done on implementing a script that will build the config.h file from the command line, taking the options as arguments. A corresponding Max interface will be made to provide a GUI to these options. The interface will pair with the one to subsequently build and upload code to devices.
+
+## API
+
+### Includes
+
+Only the configuration and the library are necessary in the .ino sketch. All necessary dependecies of the Loom Library are automatically included. 
+
+**Note:** The config.h file must precede the library
+
+```cpp
+#include "config.h"
+#include "loom_preamble.h"
+```
+
+### Setup
+
+All Loom and device setup is called dynamically within Loom_begin(). A simple setup function would simply be:
+
+```cpp
+void setup() 
+{
+	Loom_begin();	
+    
+    // Any custom setup code
+}
+```
+
+### Main Loop Functions
+
+The Loom Library has six primary interface function to call. With just these, a fully functional sketch can be made. Custom code can be inserted before, between, and after any of the interface functions, but changing the relative ordering of the interface functions is not recommended unless you know what you are doing.
+
+#### Receive Bundle
+
+Fills an OSC bundle with packets received the specified platform if data exists and platform is enabled.
+
+```cpp
+// Receive bundles
+//  takes bundle to be filled and wireless platforms [WIFI_PLAT, LORA_PLAT, NRF_PLAT]
+receive_bundle(&bndl, WIFI_PLAT);
+```
+
+- **bndl** – The bundle to fill
+- **platform** – The wireless platform to receive on, the values are encoded to #define names to be easier for users to use
+
+#### Process Bundle
+
+Examine the provided OSC bundle (presumably filled via receive_bundle(). If bundle is not empty,  has no errors, and is addressed to this device, then attempt to perform action specified.
+
+```cpp
+// Process bundle (nothing will happen if bndl is empty), bundle is emptied after processing
+process_bundle(&bndl);
+```
+
+- **bndl** – The bundle to be processed
+
+#### Measure Sensors
+
+Update stored readings from sensors by calling measure on each enabled sensor.
+
+```cpp
+// Update stored readings from sensors
+measure_sensors();
+```
+
+#### Package Data
+
+Fill the provided OSC bundle with latest stored sensor readings
+
+```cpp
+// Populate bundle to send with sensor values
+package_data(&send_bndl);
+```
+
+- **send_bndl** – The OSC bundle to be filled
+
+#### Send Bundle
+
+Sends a packaged bundle on the specified platform
+
+```cpp
+// Send the bundle
+//  takes bundle to be filled and wireless platforms [WIFI_PLAT, LORA_PLAT, NRF_PLAT]
+send_bundle(&send_bndl, WIFI_PLAT);
+```
+
+- **bndl** – The bundle to be sent
+- **platform** – The wireless platform to send on, the values are encoded to #define names to be easier for users to use
+
+#### Additional Loop Checks
+
+Performs any miscellaneous Loom tasks that happen each loop iteration, but are not handled by any of the other 5 interface functions, such as delays between loop iterations and checking a device button has been held for a set amount of time.
+
+```cpp
+// Loop checks and sleep between iterations if enabled
+additional_loop_checks();
+```
+
+### Minimal Working Example
+
+This example is fully functional. It assumes that WiFi has been specified as a wireless communication platform in the config.h file
+
+```cpp
+// ================================================================
+// ===              INCLUDE CONFIGURATION FILE                  ===
+// ===    INCLUDE DECLARATIONS, STRUCTS, AND FUNCTIONS FROM     ===
+// ===            OTHER FILES AS SET IN CONFIG.H                ===
+// ================================================================
+
+// Config has to be first has it hold all user specified options
+#include "config.h"
+
+// Preamble includes any relevant subroutine files based on options
+// specified in the above config
+#include "loom_preamble.h"
+
+// ================================================================ 
+// ===                           SETUP                          ===
+// ================================================================ 
+void setup() 
+{
+	Loom_begin(); // LOOM_begin calls any relevant (based on config) LOOM device setup functions
+    
+	// Any custom setup code
+}
+
+
+// ================================================================ 
+// ===                        MAIN LOOP                         ===
+// ================================================================ 
+void loop() 
+{
+	OSCBundle bndl, send_bndl; 
+
+	// Receive bundles
+	//  takes bundle to be filled and wireless platforms [WIFI_PLAT, LORA_PLAT, NRF_PLAT]
+	receive_bundle(&bndl, WIFI_PLAT);
+
+	// Process bundle (nothing will happen if bndl is empty), bundle is emptied after processing
+	process_bundle(&bndl);
+
+	// Update stored readings from sensors
+	measure_sensors();
+
+	// Populate bundle to send with sensor values
+	package_data(&send_bndl);
+
+	// Send the bundle
+	//  takes bundle to be filled and wireless platforms [WIFI_PLAT, LORA_PLAT, NRF_PLAT]
+	send_bundle(&send_bndl, WIFI_PLAT);
+	
+	// Loop checks and sleep between iterations if enabled
+	additional_loop_checks();
+	
+} // End loop section
+```
+
+
 
 ## Arduino IDE Setup
 
@@ -101,6 +302,4 @@ How to build and upload the code from the command line is currently being invest
 
 - **Patch:** a Max/MSP control interface or processor
 
-## Troubleshooting
-
-## Other
+## 

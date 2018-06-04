@@ -15,7 +15,7 @@ char          addressString[255];
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-void LOOM_begin();
+void Loom_begin();
 void set_instance_num(OSCMessage &msg);
 //void msg_router(OSCMessage &msg, int addrOffset);       currently moved to top of loom_preamble
 #if (is_wifi == 1) && defined(button)
@@ -42,7 +42,7 @@ void additional_loop_checks();
 // Starts Wifi or Lora and serial if debugging prints are on
 // Runs flash setup to read device settings from memory if available
 // 
-void LOOM_begin()
+void Loom_begin()
 {
 	pinMode(led, OUTPUT);   // Set the LED pin mode
 

@@ -1,8 +1,8 @@
-# Project LOOM: Max Interfaces
+# Project Loom: Max Interfaces
 
-These are the Max/MSP interfaces for the control, monitoring, and processing of devices and data of a LOOM network.
+These are the Max/MSP interfaces for the control, monitoring, and processing of devices and data of a Loom network.
 
-Each module contains a set of related functions and can receive, process, and output streams of data. Modules can be linked together to pass information from one to another. The set of data processor plugins include various means of reading any information from a network, a variety of modules to process, convert, or display this information, and modules to send data back out to devices on the network. 
+Each module contains a set of related functions and can receive, process, or output streams of data. Modules can be linked together to pass information from one to another. The set of data processor plugins include various means of reading any information from a network, a variety of modules to process, convert, or display this information, and modules to send data back out to devices on the network. 
 
 As more hardware is added or specialized needs arise, users can make modules to provide relevant displays, processing, and I/O, tailored to their needs.
 
@@ -10,7 +10,7 @@ As more hardware is added or specialized needs arise, users can make modules to 
 
 1. [Max/MSP Setup](#max/msp-setup)
     1. [Max Installation](#max-installation)
-    2. [LOOM Data Processors Setup](#loom-data-processors-setup)
+    2. [Loom Data Processors Setup](#loom-data-processors-setup)
 2. [Existing Max Patches](#existing-max-patches)
     1. [Input](#input)
     2. [Output](#output)
@@ -42,7 +42,7 @@ As more hardware is added or specialized needs arise, users can make modules to 
   - Create a Cycling '74 account if you haven't already
   - Put in activation code
 
-### LOOM Data Processors Setup
+### Loom Data Processors Setup
 
 The Data Processor Plugins folder needs to be placed in the Max library in order to properly function. The specific location is as follows:
 
@@ -54,7 +54,7 @@ The Data Processor Plugins folder needs to be placed in the Max library in order
 
 ## Existing Max Patches
 
-LOOM provides a number of patches for monitoring, receiving, sending, processing, and displaying information of the devices connected to the LOOM network. Current Max patches are the following:
+Loom provides a number of patches for monitoring, receiving, sending, processing, and displaying information of the devices connected to the LOOM network. Current Max patches are the following:
 
 ### Network Input 
 
@@ -111,11 +111,11 @@ LOOM provides a number of patches for monitoring, receiving, sending, processing
 
 ## Running Max Module Interfaces
 
-The simplest way to test or run the devices on your network is to open the DataProcessor.maxpat file. This patch contains a drop down menu of all the LOOM Max modules / patches, and selecting one will generate an instance of it. Multiple instances can exist of the same Max patch, each controlling or monitoring different data flow. This Data Processor also already contains an instance of the LOOM Channel Manager, described below. One can also add normal, non-prebuilt Max objects to the Data Processor like any other .patch file
+The simplest way to test or run the devices on your network is to open the DataProcessor.maxpat file. This patch contains a drop down menu of all the Loom Max modules / patches, and selecting one will generate an instance of it. Multiple instances can exist of the same Max patch, each controlling or monitoring different data flow. This Data Processor also already contains an instance of the Loom Channel Manager, described below. One can also add normal, non-prebuilt Max objects to the Data Processor like any other .patch file
 
 ## Channel Manager 
 
-The LOOM Channel Manager keeps track of the which devices are on using which channel (A – H), whether they are currently active, their battery levels, and allows for the following reconfiguration options:
+The Loom Channel Manager keeps track of the which devices are on using which channel (A – H), whether they are currently active, their battery levels, and allows for the following reconfiguration options:
 
 - **Save Config:** Save any changes that have been made to the device. Without saving, restarting the device will start in its previously saved state (which may be desirable if making temporary changes)
 - **Set Request Settings:** Enables a flag on the given device, instructing it to, on startup, ignore any stored channel and instead request a new one from a channel manager (which needs to be open for any automatic channel assignment to occur). Note that a 'Save Config' command needs to be sent to the device for the set to take effect.
