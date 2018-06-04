@@ -14,6 +14,7 @@
         2. [Configuring Maximum Message Length](#configuring-maximum-message-length)
 2. [Sensors](#sensors)
     1. [I2C Sensors](#i2c-sensors)
+       
     2. [SDI-12 Sensors](#sdi-12-sensors)
         1. [SDI-12 Dependencies](#sdi-12-dependencies)
         2. [Supported SDI-12 Pins](#supported-sdi-12-pins)
@@ -115,6 +116,168 @@ a variable found in the `RF24Network_config.h` file.
 ## Sensors
 
 ### I2C Sensors
+
+The following I2C Sensors are currently supported by Project Loom:
+* [TSL2591](https://learn.adafruit.com/adafruit-tsl2591/overview)
+* [FXOS8700](https://learn.adafruit.com/nxp-precision-9dof-breakout/overview)
+* [FXAS21002](https://learn.adafruit.com/nxp-precision-9dof-breakout/overview)
+* [SPARKFUN ZX](https://learn.adafruit.com/adafruit-sht31-d-temperature-and-humidity-sensor-breakout)
+* [SHT31-D](https://www.sparkfun.com/products/13162)
+* [MB1232](https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm)
+
+The system also supports the following multiplexer in order to allow the use of multiple sensors with the same address:
+* [TCA9548A](https://learn.adafruit.com/adafruit-tca9548a-1-to-8-i2c-multiplexer-breakout/overview)
+
+#### TSL2591 Lux Sensor
+**Technical Details**
+* Approximates Human eye Response
+* Extremely wide dynamic range 1 to 600,000,000 Counts
+* Lux Range: 188 uLux sensitivity, up to 88,000 Lux input measurements.
+* Temperature range: -30 to 80 C
+* Voltage range: 3.3-5V into onboard regulator
+* I2C 7-bit address 0x29 
+
+**Dependencies Required**
+* [Adafruit_TSL2591](https://github.com/adafruit/Adafruit_TSL2591_Library)
+* [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+
+**Available Functions**
+* displaySensorDetails: Displays basic info about the sensor
+* configureSensor: Sets the gain and integration time
+* simpleRead: Grabs a simple read of the luminosity
+* advancedRead: Reads both IR and Full Specrtum and converts to lux
+* unifiedSensorAPIRead: Reads the data using the unified sensor API
+
+**Additional Notes**
+* Settable gain depending on light conditions
+* Settable integration time for collecting light
+
+**Datasheet:** [TSL2591 Datasheet](http://www.adafruit.com/datasheets/TSL25911_Datasheet_EN_v1.pdf)
+
+#### FXOS8700 3-Axis Accelerometer/Magentometer
+**Technical Details**
+* 2-3.6V Supply
+* ±2 g/±4 g/±8 g adjustable acceleration range
+* ±1200 µT magnetic sensor range
+* Output data rates (ODR) from 1.563 Hz to 800 Hz
+* 14-bit ADC resolution for acceleration measurements
+* 16-bit ADC resolution for magnetic measurements
+* I2C 7-bit address 0x1C, 0x1D, 0x1E, 0x1F 
+
+**Dependencies Required**
+* [Adafruit_FXOS8700](https://github.com/adafruit/Adafruit_FXOS8700)
+* [Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS)
+* [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+
+**Available Functions**
+* displaySensorDetails_FXOS: Displays the max and min values of the accelrometer and magnetometer
+* fxos_sensor_read: Displays accelrometer data in m/s^2 and magnetometer data in uTesla in X,Y,Z direction
+
+**Additional Notes**
+* Contained in the same sensor with FXAS21002
+
+**Datasheet:** [FXOS8700 Datasheet]https://cdn-learn.adafruit.com/assets/assets/000/043/458/original/FXOS8700CQ.pdf?1499125614)
+
+#### FXAS21002 3-Axis Gyroscope
+**Technical Details**
+* 2-3.6V Supply
+* ±250/500/1000/2000°/s configurable range
+* Output Data Rates (ODR) from 12.5 to 800 Hz
+* 16-bit digital output resolution
+* 192 bytes FIFO buffer (32 X/Y/Z samples)
+* I2C 7-bit address 0x20, 0x21 
+
+**Dependencies Required**
+* [Adafruit_FXAS21002C](https://github.com/adafruit/Adafruit_FXAS21002C)
+* [Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS)
+* [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+
+**Available Functions**
+* displaySensorDetails_FXAS: Displays the max and min values
+* fxas_sensor_read: Displays the gyrscope speed in reference to X,Y,and Z coordinates in rad/s
+
+**Additional Notes**
+* Contained in the same sensor with FXOS8700
+
+**Datasheet:** [FXAS21002 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056)
+
+#### SPARKFUN ZX
+**Technical Details**
+* 2-3.6V Supply
+* I2C 7-bit address 0x10, 0x11 
+
+**Dependencies Required**
+* [SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library](https://github.com/sparkfun/SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library/archive/master.zip)
+
+**Available Functions**
+* displaySensorDetails_ZX: Displays the model version of the sensor
+* zx_sensor_read_pos: Displays the position both in X and Z coordinates of the object in front of the sensor
+* zx_sensor_read_gesture: Displays the direction (up, down, left, right) of the object movement
+
+**Additional Notes**
+* Can only use either the gesture function or the read function but can't use both at the same time
+* Has UART capabilities
+
+**Datasheet:** [Sparkfun ZX Datasheet](https://cdn.sparkfun.com/assets/learn_tutorials/3/4/5/XYZ_Interactive_Technologies_-_ZX_SparkFun_Sensor_Datasheet.pdf)
+
+#### SHT31-D
+**Technical Details**
+* 2.4-5.5V Supply
+* Temperature: -10-125 °C ±0.3°C 
+* Relative Humidity:0-100% ±2%
+* I2C 7-bit address 0x44, 0x45 
+
+**Dependencies Required**
+* [Adafruit_SHT31](https://github.com/adafruit/Adafruit_SHT31)
+
+**Available Functions**
+* readTemperature(): Reads in the temperature at the time 
+* reatHumidity(): Reads in the humidity at the time
+* sht31_sensor_read: Grabs and displays the temperature in Celsius and the humidity percentage
+* heater(): Turns on the heater to remove condensation
+
+**Additional Notes**
+* Has a heater function to remove condensation
+
+**Datasheet:** [SHT3x-DIS Datasheet](https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf)
+
+#### MB1232
+**Technical Details**
+* Operates from 3.0-5.5V
+* Range: 0-625cm
+* Resolution of 1 cm
+* Up to 40Hz reading rate
+* 42kHz Ultrasonic sensor measures distance to objects
+* I2C 7-bit address 0x70 
+
+**Dependencies Required**
+* None
+
+**Available Functions**
+* takeRangeReading(): Sends the range command to the sensor to take a reading
+* requestRange(): Returns the last range that the sensor read in centimeters
+
+**Additional Notes**
+* Same address as multiplexer (0x70)
+* **Multiplexer must use another address if being used with this sensor**
+
+**Datasheet:** [MB1232 Datahsheet](https://www.maxbotix.com/documents/I2CXL-MaxSonar-EZ_Datasheet.pdf)
+
+#### TCA9548A Multiplexer
+**Technical Details**
+* 1.8V - 5V Supply
+* Use up to 8 multiplexer simultaneously
+* Use up to 64 I2C sensors with the same address (8 per multiplexer)
+* I2C 7-bit address 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77 
+
+**Dependencies Required**
+* None
+
+**Additional Notes**
+* Address can be changed by using solder bridges on the back of the board
+* **Initial Multiplexer address (0x70) conflicts with MB1232**
+
+**Datasheet:** [TCA9548A Datasheet](http://www.adafruit.com/datasheets/tca9548a.pdf)
 
 ### SDI-12 Sensors
 
