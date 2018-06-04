@@ -239,13 +239,11 @@ This example is fully functional. It assumes that WiFi has been specified as a w
 #include "config.h"
 #include "loom_preamble.h"
 
-
 void setup() 
 {
 	Loom_begin(); // LOOM_begin calls any relevant (based on config) LOOM device setup functions
 	// Any custom setup code
 }
-
 
 void loop() 
 {
