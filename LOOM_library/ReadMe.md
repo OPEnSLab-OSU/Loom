@@ -297,9 +297,3 @@ void loop()
 ## Building and Uploading Code Without The IDE
 
 How to build and upload the code from the command line is currently being investigated and will eventually be implemented as runnable script. This script will then have a corresponding Max interface for uploading code to devices.
-
-## Glossary
-
-- **Patch:** a Max/MSP control interface or processor
-
-## 
