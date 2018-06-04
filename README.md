@@ -15,7 +15,7 @@
 2. [Sensors](#sensors)
     1. [I2C Sensors](#i2c-sensors)
         1. [TSL2591 Lux Sensor](#tsl2591-lux-sensor)
-        2. [FXOS8700 3-Axis Accelerometer/Magentometer](#fxos8700-3-axis-accelerometer/magentometer)
+        2. [FXOS8700 3-Axis Accelerometer/Magentometer](#fxos8700-3-axis-accelerometermagentometer)
         3. [FXAS21002 3-Axis Gyroscope](#fxas21002-3-axis-gyroscope)
         4. [Sparkfun ZX](#sparkfun-zx)
         5. [SHT31-D](#sht31-d)
