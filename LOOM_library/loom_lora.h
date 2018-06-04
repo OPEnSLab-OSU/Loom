@@ -158,7 +158,7 @@ bool setup_ethernet()
 		Ethernet.begin(mac, ip);
 	}
 	
-	if(client.connect("www.google.com", 80)) {
+	if (client.connect("www.google.com", 80)) {
 		is_setup = true;
 		#if LOOM_DEBUG == 1
 			Serial.println("Successfully connected to internet");
@@ -185,7 +185,7 @@ bool setup_ethernet()
 //
 String get_data_value(OSCMessage* msg, int pos) 
 {
-	if(pos < msg->size()) {
+	if (pos < msg->size()) {
 		switch (msg->getType(pos)) {
 			case 'i':
 				return String(msg->getInt(pos));

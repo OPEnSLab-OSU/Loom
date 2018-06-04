@@ -257,6 +257,9 @@ void measure_mpu6050(void)
 		#endif
 	} // of else if
 	//   return (void);
+
+	mpu.resetFIFO();        // Flush MPU6050 FIFO to avoid overflows if using i2c
+
 } // of measure_mpu6050() 
 
 

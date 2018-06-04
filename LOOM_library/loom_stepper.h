@@ -49,10 +49,13 @@ void setup_stepper()
 	for (int i = 0; i < num_steppers; i++){
 		state_stepper.myMotors[i] = state_stepper.AFMS->getStepper(200, i+1);
 	}
+
 	state_stepper.AFMS->begin();
+
 	for (int i = 0; i < num_steppers; i++){
 		state_stepper.myMotors[i]->setSpeed(50);
 	}
+	
 	yield();
 	set_stepper_steps(0,0,60,50);
 	set_stepper_steps(1,0,60,50);

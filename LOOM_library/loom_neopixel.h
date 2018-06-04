@@ -88,12 +88,10 @@ void set_color(OSCMessage &msg)
 		state_neopixel.colorVals[port][0] = red;
 		state_neopixel.colorVals[port][1] = green;
 		state_neopixel.colorVals[port][2] = blue;
+
 		state_neopixel.pixels[port]->setPixelColor(pixelNum, 
-										state_neopixel.pixels[port]->Color(
-											state_neopixel.colorVals[port][0], 
-											state_neopixel.colorVals[port][1], 
-											state_neopixel.colorVals[port][2]));
-	} // of if
+			state_neopixel.pixels[port]->Color(red, green, blue));
+	} 
 
 	// Update colors displayed by any enabled Neopixels
 	for (int i = 0; i < 3; i++) {

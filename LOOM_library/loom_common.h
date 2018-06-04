@@ -17,7 +17,7 @@ char          addressString[255];
 // ================================================================
 void Loom_begin();
 void set_instance_num(OSCMessage &msg);
-//void msg_router(OSCMessage &msg, int addrOffset);       currently moved to top of loom_preamble
+//void msg_router(OSCMessage &msg, int addrOffset);       currently moved prototype to top of loom_preamble
 #if (is_wifi == 1) && defined(button)
 	void check_button_held();
 #endif
@@ -246,7 +246,7 @@ void loop_sleep()
 
 // --- SAVE CONFIG ---
 //
-// Saves the current configuration to non-volatile memory
+// Saves the current configuration struct to non-volatile memory
 //
 // @param msg  Just header string routed from msg_router, not used here
 //
@@ -256,7 +256,9 @@ void save_config(OSCMessage &msg)
 		Serial.println("Saving Configuration Settings");
 		Serial.println("...");
 	#endif
+
 	write_non_volatile();
+
 	#if LOOM_DEBUG == 1
 		Serial.println("Done");
 	#endif
@@ -306,6 +308,7 @@ void receive_bundle(OSCBundle *bndl, int platform)
 		#if is_wifi == 1
 			case WIFI_PLAT :
 				// Handle wifi bundle if it exists
+				// Checks device unique UDP port and common UDP port
 				wifi_receive_bundle(bndl, &Udp,       configuration.config_wifi.localPort); 
 				wifi_receive_bundle(bndl, &UdpCommon, configuration.config_wifi.commonPort);                             
 															 
@@ -326,12 +329,9 @@ void receive_bundle(OSCBundle *bndl, int platform)
 				break;
 		#endif
 		
-//		default : 
+		// default : 
 	} // of switch
 }
-
-
-
 
 
 
@@ -341,7 +341,7 @@ void receive_bundle(OSCBundle *bndl, int platform)
 // 
 // Examine the provided OSC bundle (presumably filled via receive_bundle()
 // If bundle is not empty,  has no errors, and is addressed to this device, then
-// Attempt to perform action specified
+// attempt to perform action bundle specifies
 // 
 // @param bndl  The OSC bundle to be processed 
 //
@@ -374,7 +374,7 @@ void process_bundle(OSCBundle *bndl)
 	
 			#if is_wifi == 1
 				//Clear the new_ssid and new_pass buffers
-				for (int i = 0; i < 32; i++){  
+				for (int i = 0; i < 32; i++) {  
 					state_wifi.new_ssid[i] = '\0';
 					state_wifi.new_pass[i] = '\0';
 				}
@@ -404,9 +404,6 @@ void process_bundle(OSCBundle *bndl)
 
 	bndl->empty();
 }
-
-
-
 
 
 
@@ -443,7 +440,6 @@ void measure_sensors()
 	// Update MPU6050 Data
 	#if is_ishield == 1 && is_mpu6050 == 1
 		measure_mpu6050();      // Now measure MPU6050, update values in global registers 
-		mpu.resetFIFO();        // Flush MPU6050 FIFO to avoid overflows if using i2c
 	#endif //is_ishield && is_mpu6050
 
 	// Update Thermocouple
@@ -461,9 +457,6 @@ void measure_sensors()
 		measure_decagon();
 	#endif
 }
-
-
-
 
 
 
@@ -497,7 +490,7 @@ void package_data(OSCBundle *send_bndl)
 
 	// Update MPU6050 Data
 	#if is_ishield == 1 && is_mpu6050 == 1
-		package_mpu6050(send_bndl,configuration.packet_header_string, 0);                // Build and send packet
+		package_mpu6050(send_bndl,configuration.packet_header_string, 0);
 	#endif //is_ishield && is_mpu6050
 
 	#if is_max31856 == 1
@@ -513,8 +506,6 @@ void package_data(OSCBundle *send_bndl)
 		package_decagon(&send_bndl,configuration.packet_header_string);
 	#endif
 }
-
-
 
 
 
@@ -543,14 +534,13 @@ void send_bundle(OSCBundle *send_bndl, int platform)
 					
 					lora_send_bundle(send_bndl);
 					
-				} else {
+				} else { // Separate bundle into smaller pieces
 					#if LOOM_DEBUG == 1
 						Serial.print("Bundle of size ");
 						Serial.println(get_bundle_bytes(send_bndl));
 						Serial.print(" Being split into smaller bundles");
 					#endif
 					
-					// Separate bundle into smaller pieces
 					OSCBundle tmp_bndl;
 					OSCMessage *tmp_msg;
 					
@@ -565,12 +555,9 @@ void send_bundle(OSCBundle *send_bndl, int platform)
 				break;
 		#endif
 		
-//		default : 
+	// default : 
 	} // of switch
 }
-
-
-
 
 
 

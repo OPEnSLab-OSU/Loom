@@ -65,7 +65,8 @@ void handle_servo_msg(OSCMessage &msg);
 // Called by main setup
 // Begins servo driver
 //
-void setup_servo() {
+void setup_servo() 
+{
 	state_servo.pwm.begin();
 	state_servo.pwm.setPWMFreq(60);
 }

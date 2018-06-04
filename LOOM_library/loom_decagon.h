@@ -67,7 +67,7 @@ void deca_gs3_setup()
 	mySDI12.clearBuffer();
 
 	delay(1000);                 // delay between taking reading and requesting data
-	sdiResponse = "";           // clear the response string
+	sdiResponse = "";            // clear the response string
 }
 
 
@@ -102,7 +102,7 @@ void measure_decagon()
 	
 	
 	delay(1000);                 // delay between taking reading and requesting data
-	sdiResponse = "";           // clear the response string
+	sdiResponse = "";            // clear the response string
 	
 	
 	// next command to request data from last measurement
