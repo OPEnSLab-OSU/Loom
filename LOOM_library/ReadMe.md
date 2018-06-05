@@ -241,7 +241,7 @@ This example is fully functional. It assumes that WiFi has been specified as a w
 
 void setup() 
 {
-	Loom_begin(); // LOOM_begin calls any relevant (based on config) LOOM device setup functions
+	Loom_begin(); // LOOM_begin calls any relevant LOOM device setup functions
 	// Any custom setup code
 }
 
@@ -255,14 +255,18 @@ void loop()
 	package_data(&send_bndl);
 	send_bundle(&send_bndl, WIFI);
 	additional_loop_checks();
-	
 } 
 ```
-
-
 
 ## Arduino IDE Setup
 
 ## Building and Uploading Code Without The IDE
 
 How to build and upload the code from the command line is currently being investigated and will eventually be implemented as runnable script. This script will then have a corresponding Max interface for uploading code to devices.
+
+## Configuration Conflicts
+
+The following combinations of options in the configuration file result in various conflicts (e.g. of dependencies) that are known to result in errors or undefined behavior:
+
+- LoRa + nRF
+- is_sleep_period + LoRa (Adafruit_ASFcore-master/tc_interrupt.c:140: multiple definition of 'TC3_Handler')
