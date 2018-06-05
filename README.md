@@ -27,6 +27,8 @@
     3. [SPI Sensors](#spi-sensors)
         1. [Adafruit Universal Thermocouple Amplifier](#adafruit-universal-thermocouple-amplifier)
 3. [Actuators](#actuators)
+    1. [SG92R Servo](#sg92r-servo)
+    2. [SM-42BYG011-25 Stepper Motor](#sm-42byg011-25 stepper motor)
 4. [Miscellaneous Functionality](#miscellaneous-functionality)
     1. [RTC and Low Power Functionality](#rtc-and-low-power-functionality)
         1. [RTC and Low Power Dependencies](#rtc-and-low-power-dependencies)
