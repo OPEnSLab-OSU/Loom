@@ -6,10 +6,10 @@
 
 // --- EEPROM WRITE ANYTHING ---
 //
-// . . . 
+// Write to EEPROM any data structure or variable
 //
 // @param ee     
-// @param value  
+// @param value   to to write
 //
 // @return 
 //
@@ -25,10 +25,10 @@ template <class T> int EEPROM_writeAnything(int ee, const T& value)
 
 // --- EEPROM READ ANYTHING ---
 //
-// . . . 
+// Read from EEPROM a stored data structure or variable
 //
-// @param ee     
-// @param value  
+// @param ee     Starting   
+// @param value  Struct to read into
 //
 // @return 
 //

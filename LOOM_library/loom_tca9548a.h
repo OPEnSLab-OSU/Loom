@@ -82,9 +82,9 @@ bool setup_tca9548a()
 
 // --- TCASESELECT --- 
 //
-// . . .
+// Set port to begin reading from
 // 
-// @param port_num
+// @param port_num  Port to read from
 //
 void tcaseselect(uint8_t port_num) 
 {
