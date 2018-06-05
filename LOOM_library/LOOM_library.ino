@@ -31,8 +31,8 @@ void loop()
 	OSCBundle bndl, send_bndl; 
 
 	// Receive bundles
-	//  takes bundle to be filled and wireless platforms [WIFI_PLAT, LORA_PLAT, NRF_PLAT]
-	receive_bundle(&bndl, WIFI_PLAT);
+	//  takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
+	receive_bundle(&bndl, WIFI);
 
 	// Process bundle (nothing will happen if bndl is empty), bundle is emptied after processing
 	process_bundle(&bndl);
@@ -45,7 +45,7 @@ void loop()
 
 	// Send the bundle
 	//  takes bundle to be filled and wireless platforms [WIFI_PLAT, LORA_PLAT, NRF_PLAT]
-	send_bundle(&send_bndl, WIFI_PLAT);
+	send_bundle(&send_bndl, WIFI);
 	
 	// Loop checks and sleep between iterations if enabled
 	additional_loop_checks();

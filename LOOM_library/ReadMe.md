@@ -171,12 +171,12 @@ Fills an OSC bundle with packets received the specified platform if data exists 
 
 ```cpp
 // Receive bundles
-//  takes bundle to be filled and wireless platforms [WIFI_PLAT, LORA_PLAT, NRF_PLAT]
-receive_bundle(&bndl, WIFI_PLAT);
+//  takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
+receive_bundle(&bndl, WIFI);
 ```
 
 - **bndl** – The bundle to fill
-- **platform** – The wireless platform to receive on, the values are encoded to #define names to be easier for users to use
+- **platform** – The wireless platform to receive on, the values are encoded to a Platform enum to reduce chance for errors
 
 #### Process Bundle
 
@@ -215,12 +215,12 @@ Sends a packaged bundle on the specified platform
 
 ```cpp
 // Send the bundle
-//  takes bundle to be filled and wireless platforms [WIFI_PLAT, LORA_PLAT, NRF_PLAT]
-send_bundle(&send_bndl, WIFI_PLAT);
+//  takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
+send_bundle(&send_bndl, WIFI);
 ```
 
 - **bndl** – The bundle to be sent
-- **platform** – The wireless platform to send on, the values are encoded to #define names to be easier for users to use
+- **platform** – The wireless platform to send on, the values are encoded to a Platform enum to reduce chance for errors
 
 #### Additional Loop Checks
 
@@ -233,7 +233,7 @@ additional_loop_checks();
 
 ### Minimal Working Example
 
-This example is fully functional. It assumes that WiFi has been specified as a wireless communication platform in the config.h file
+This example is fully functional. It assumes that WiFi has been specified as a wireless communication platform in the config.h file.
 
 ```cpp
 #include "config.h"
@@ -249,11 +249,11 @@ void loop()
 {
 	OSCBundle bndl, send_bndl; 
 	
-	receive_bundle(&bndl, WIFI_PLAT);
+	receive_bundle(&bndl, WIFI);
 	process_bundle(&bndl);
 	measure_sensors();
 	package_data(&send_bndl);
-	send_bundle(&send_bndl, WIFI_PLAT);
+	send_bundle(&send_bndl, WIFI);
 	additional_loop_checks();
 	
 } 

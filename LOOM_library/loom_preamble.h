@@ -14,14 +14,13 @@
 
 #define VBATPIN A7                // Pin to check for battery voltage
 
-#if is_wifi == 1
-	#define WIFI_PLAT 1
-#endif
-#if is_lora == 1
-	#define LORA_PLAT 2
-#endif
 
-
+// Enumerate possible platform types
+enum Platform {
+	WIFI,
+	LORA,
+	NRF
+};
 
 //---------------------------------------------------------------------------
 // MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
