@@ -23,7 +23,7 @@ void set_instance_num(OSCMessage &msg);
 #endif
 void loop_sleep();
 void save_config(OSCMessage &msg);
-int get_bundle_bytes(OSCBundle *bndl);
+int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 
 // Main loop interface functions
 void receive_bundle(OSCBundle *bndl, int platform);
@@ -284,7 +284,6 @@ int get_bundle_bytes(OSCBundle *bndl)
 
 
 
-
 // ================================================================ 
 // ===                   INTERFACE FUNCTIONS                    === 
 // ================================================================
@@ -298,15 +297,15 @@ int get_bundle_bytes(OSCBundle *bndl)
 // 
 // @param bndl       The bundle to fill
 // @param platform   The wireless platform to receive on, the values are
-//                    encoded to #define names to be easier for users to use
+//                    encoded to a Platform enum to reduce chance for errors
 // 
-void receive_bundle(OSCBundle *bndl, int platform)
+void receive_bundle(OSCBundle *bndl, Platform platform)
 {
 	bndl->empty();
 
 	switch(platform) {
 		#if is_wifi == 1
-			case WIFI_PLAT :
+			case WIFI :
 				// Handle wifi bundle if it exists
 				// Checks device unique UDP port and common UDP port
 				wifi_receive_bundle(bndl, &Udp,       configuration.config_wifi.localPort); 
@@ -318,13 +317,13 @@ void receive_bundle(OSCBundle *bndl, int platform)
 		#endif
 
 		#if is_lora == 1 && lora_device_type == 0
-			case LORA_PLAT :
+			case LORA :
 				lora_receive_bundle(bndl);
 				break;
 		#endif
 
 		#if is_lora == 1 && lora_device_type == 2
-			case LORA_PLAT :
+			case LORA :
 				//TODO: repeater functionality here
 				break;
 		#endif
@@ -416,6 +415,9 @@ void process_bundle(OSCBundle *bndl)
 //
 void measure_sensors()
 {
+//	for (int i = 0 i < 
+
+	
 	// Get battery voltage
 	vbat = analogRead(VBATPIN);
 	vbat = (vbat * 2 * 3.3) / 1024; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
@@ -517,19 +519,19 @@ void package_data(OSCBundle *send_bndl)
 // 
 // @param send_bndl  The bundle to be sent
 // @param platform   The wireless platform to send on, the values are
-//                    encoded to #define names to be easier for users to use
+//                    encoded to Platform enum to reduce chance for errors
 // 
-void send_bundle(OSCBundle *send_bndl, int platform)
+void send_bundle(OSCBundle *send_bndl, Platform platform)
 {
 	switch(platform) {
 		#if is_wifi == 1
-			case WIFI_PLAT :
+			case WIFI :
 				wifi_send_bundle(send_bndl);
 				break;
 		#endif
 
 		#if is_lora == 1 && lora_device_type == 1
-			case LORA_PLAT :
+			case LORA :
 				if (!lora_bundle_fragment) {
 					
 					lora_send_bundle(send_bndl);
