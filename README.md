@@ -391,7 +391,7 @@ SG92R servo uses a 50Hz signal giving a period of 20 ms to control the position 
 
 **Datasheet:** [PCA9685 PWM controller Datasheet](https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf)
 
-### SM-42BYG011-25 Stepper Motor
+### SM_42BYG011_25 Stepper Motor
 **Technical Details**
 * Use [Adafruit DC Motor+Stepper FeatherWing](https://learn.adafruit.com/adafruit-stepper-dc-motor-featherwing)
 * Up to 2 connections for SM-42BYG011-25
