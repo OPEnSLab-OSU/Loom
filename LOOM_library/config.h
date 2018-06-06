@@ -9,17 +9,20 @@
 
 #define LOOM_DEBUG 1	  // Set to 1 if you want Serial statements from various functions to print
 
-#define is_wifi    1
+#define is_wifi    0
 #define is_lora    0
+#define is_nrf		 1
 
-#define is_ishield 1
+#define is_ishield 0
 #define num_servos 0
 #define num_steppers 0
 #define is_relay   0
-#define num_analog  2
+#define num_analog  0
 #define is_decagon 0
 //Multiplexer
 #define is_tca9548a 0
+
+#define is_rtc3231 0
 
 #if is_tca9548a == 1
 	#define UPDATE_PERIOD 5000 //milliseconds
@@ -103,13 +106,14 @@
 #endif
 //#define is_sleep_interrupt 11       	// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 
-
-
-
-
 // Make sure only one device type is enabled
 #if ( (is_ishield) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_tca9548a) ) > 1
 	device_type_error // this will force an error
+#endif
+
+#if is_nrf == 1
+	const uint16_t NRF_NODE_ADDRESS = 01;    // Address of our node in Octal format ( 04,031, etc)
+	const uint16_t NRF_HUB_ADDRESS = 00;   // Address of the other node in Octal format
 #endif
 
 // Automatically set device name
