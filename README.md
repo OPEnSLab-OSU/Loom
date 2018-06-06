@@ -6,6 +6,7 @@
     2. [Adafruit Feather 32u4](#adafruit-feather-32u4)
 1. [Wireless Capabilities](#wireless-capabilities)
     1. [WiFi](#wifi)
+        1. [WiFi Dependencies](#wifi-dependencies)
     2. [LoRa](#lora)
         1. [LoRa Dependencies](#lora-dependencies)
         2. [EnableInterrupt.h and RH\_RF95.h compatibility](#enableinterrupth-and-rh_rf95h-compatibility)
@@ -35,6 +36,7 @@
         2. [Standby Operation](#standby-operation)
     2. [OSC Interpreter](#osc-interpreter)
         1. [OSC Issues](#osc-issues)
+    3. [Non-Volatile Flash and EEPROM memory](#non-volatile-memory)
 
 ## Processors
 
@@ -73,6 +75,15 @@ definition `is_32U4`.  This can be done by including the following lines in your
 ## Wireless Capabilities
 
 ### WiFi
+
+WiFi is supported by both the Adafruit Feather M0 and the Adafruit Feather 32u4.
+Features:
+* Send and receive arbitrary length Udp packets
+* Works in Access Point mode as well as WPA-protected client mode
+
+#### WiFi Dependencies
+
+WiFi is dependent on the Arduino [WiFi101 library](https://github.com/arduino-libraries/WiFi101). This library provides the WiFiUdp object.
 
 ### LoRa
 
@@ -590,3 +601,11 @@ void process(OSCBundle bndl) {
     // Passing OSCBundles by value is also BAD!
 }
 ```
+
+### Non-Volatile Flash and EEPROM memory
+For storing configurations, both the Feather M0 and the Feather 32u4 boards are capable of storing a
+struct in non-volatile memory. The functions related to non-volatile memory can be found in loom_flash.h,
+and are automatically compatible with your board. If you modify the contents of the configuration structure,
+you can save them with write_non_volatile(). If you need to read from flash memory, you can read into the
+configuration structure with read_non_volatile(). Do not excessively write, as each board supports about
+~10000 flash writesin its lifetime; the cells in flash memory wear out over time.
