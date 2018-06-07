@@ -1,7 +1,7 @@
 // ================================================================
 // ===                        LIBRARIES                         ===
 // ================================================================
-
+// #include <ExampleLibrary.h>
 
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
@@ -12,10 +12,13 @@
 // ===                        STRUCTURES                        === 
 // ================================================================
 struct config_<module>_t {
-
+	// int  stored_int;
+	// char stored_string[32];
 };
 
 struct state_<module>_t {
+	// float some_value;
+	// int   array_example[3];
 
 };
 
@@ -46,6 +49,26 @@ void measure_<module>();
 bool setup_<module>() 
 {
 	//Setup Here
+
+
+	// Example of what setup might look like:
+
+	// bool is_setup;
+	// state_<module>.float = 1.2345;
+	
+	// if(<some setup condition>) {
+	// 	is_setup = true;
+	// 	#if LOOM_DEBUG == 1
+	// 		Serial.println("Setup <module> successful.");
+	// 	#endif
+	// }
+	// else {
+	// 	is_setup = false;
+	// 	#if LOOM_DEBUG == 1
+	// 		Serial.println("Failed to setup <module>.");
+	// 	#endif
+	// }
+	// return is_setup;
 }
 
 
@@ -65,7 +88,17 @@ bool setup_<module>()
 //
 void package_<module>(OSCBundle *bndl, char packet_header_string[]) 
 {
-	//Create a message and fill it here, then add it to the bndl
+	// Create a message and fill it here, then add it to the bndl
+
+	// Example of what measure might look like:
+
+	// char address_string[255];
+	// sprintf(address_string, "%s%s%d%s", packet_header_string, /<module");
+	// OSCMessage msg = OSCMessage(address_string);
+	// msg.add("ex1").add(state_<module>.array_example[0]);
+	// msg.add("ex2").add(state_<module>.array_example[1]);
+	// msg.add("ex3").add(state_<module>.array_example[2]);
+	// bndl->add(msg);
 }
 
 
@@ -77,7 +110,14 @@ void package_<module>(OSCBundle *bndl, char packet_header_string[])
 //
 void measure_<module>() 
 {
-	//Measure data and change the state here. 
-	//Potentially uses the config data
+	// Measure data and change the state here. 
+	// Potentially uses the config data
+
+	// Example of what measure might look like:
+
+	// state_<module>.some_value = ReadSensorValue
+	// for (int i = 0; i < 3) {
+	// 		state_<module>.array_example[i] = ReadOtherValue
+	// }
 }
 
