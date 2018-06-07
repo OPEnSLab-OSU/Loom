@@ -34,7 +34,7 @@ union data_value {
 	uint32_t u;
 };
 
-#if lora_device_type == 0
+#if lora_device_type == 0 // If Hub
 	String data[NUM_FIELDS];
 //	char device_id[]   = "v25CCAAB0F709665";     // Required by PushingBox, specific to each scenario
 //	char server_name[] = "api.pushingbox.com";
