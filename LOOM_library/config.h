@@ -22,18 +22,18 @@
 // ================================================================
 
 // --- Device Identification --- 
-#define FAMILY "LOOM"     	// Will usually be "LOOM", you can change this if you are setting up your own network
-#define CHANNEL          7  // Channel to use. Set to 1-8 for channels A-H, respectively. Alternatively can define to -1 to used advanced option INIT_INST
+#define FAMILY "LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
+#define CHANNEL          7	// Channel to use. Set to 1-8 for channels A-H, respectively. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0	// 1 to request channel settings from Max Channel Manager, 0 to not
-#define AUTO_NAME		 1  // 1 to enable naming device based on configured settings (if not set manual name in advanced options)
+#define AUTO_NAME        1	// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 
 // --- Debugging --- 
-#define LOOM_DEBUG   1	  	// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG   1		// Set to 1 if you want Serial statements from various functions to print
 
 // --- Enabled Communication Platform(s) --- 
-#define is_wifi      1 		// 1 to enable WiFi
+#define is_wifi      1		// 1 to enable WiFi
 #define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
-#define is_nrf       0      // 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
+#define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 
 // --- Enabled Actuators --- 
 #define num_servos   0		// Number of servos being used
@@ -46,14 +46,14 @@
 #define is_tca9548a 0		// 1 if Multiplexer is being used. (Further customization in advanced options)
 
 // --- Prebuilt Devices ---
-#define is_ishield  1 		// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_ishield  1		// 1 to specify using Ishield (should enable only wifi as communication platform)
 
 
 
 // --- WiFi Settings ---
 // Requires is_wifi to be set to 1 to take effect
 #if is_wifi == 1
-	#define DEFAULT_MODE      WPA_CLIENT_MODE  	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
+	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
 	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"		// Network password
 #endif
@@ -94,7 +94,7 @@
 	#define INIT_PORT 9448
 
 // If not using channels, then the following intial port will be used
-#elif CHANNEL == -1		
+#elif CHANNEL == -1
 	#define INIT_INST    3	// Initial device instance number (normally 1-8 when using channels)
 	#define INIT_PORT 9443	// Initial device UDP port (normally 1-8 when using channels)
 #endif
@@ -103,7 +103,7 @@
 
 // --- WiFi UDP Ports ---
 #if is_wifi == 1
-	#define COMMON_PORT     9440 	// Expected by Max to be 9440, don't change unless using custom Max patches
+	#define COMMON_PORT     9440	// Expected by Max to be 9440, don't change unless using custom Max patches
 #endif
 
 
@@ -112,7 +112,7 @@
 #if AUTO_NAME == 1
 	// Make sure only one device type is enabled
 	#if ( (is_ishield) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_tca9548a) ) > 1
-		autoname_device_type_error  // this will force an error if too many sensor/actuator were defined (needs to be < 1 for autoname to work)
+		autoname_device_type_error	// this will force an error if too many sensor/actuator were defined (needs to be < 1 for autoname to work)
 	#endif
 
 	// Automatically set device name
@@ -140,7 +140,7 @@
 
 // --- Multiplexer Options ---
 #if is_tca9548a == 1
-	#define UPDATE_PERIOD 5000 		// Milliseconds between multiplexer sensor list being updated
+	#define UPDATE_PERIOD 5000		// Milliseconds between multiplexer sensor list being updated
 	
 	// 1 to enable sensor type
 	#define is_tsl2591  1			// Lux Sensor
@@ -156,7 +156,7 @@
 // --- Ishield Options ---
 #if is_ishield == 1
 	#define is_mpu6050  1			// Enables MPU6050 on Ishield
-	#define is_neopixel 1   		// Toggle based on whether Neopixels are being used 
+	#define is_neopixel 1			// Toggle based on whether Neopixels are being used 
 	// #define button 10			// Usually automatically defined, uncomment if that does not happen		
 
 	#if is_neopixel == 1			// Which Ishield ports to enable Neopixels for 
@@ -172,15 +172,15 @@
 	#define lora_device_type     0 		// 0: Hub, 1: Node, 2 = Repeater
 	#define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 
-	#define SERVER_ADDRESS 0          	// Use 0-9 for SERVER_ADDRESSes
-	#define RF95_FREQ      915.0      	// Hardware specific, Tx must match Rx
+	#define SERVER_ADDRESS 0			// Use 0-9 for SERVER_ADDRESSes
+	#define RF95_FREQ      915.0		// Hardware specific, Tx must match Rx
 
 	#if lora_device_type == 0			// If Hub
-		#define NUM_FIELDS 32           // Maximum number of fields accepted by the PushingBox Scenario    
+		#define NUM_FIELDS 32			// Maximum number of fields accepted by the PushingBox Scenario    
 		#include <Ethernet2.h>			// (this is needed for IPAddress, do not remove)
 		
 		// String data[NUM_FIELDS];
-		char device_id[]   = "v25CCAAB0F709665";    // Required by PushingBox, specific to each scenario
+		char device_id[]   = "v25CCAAB0F709665";	// Required by PushingBox, specific to each scenario
 		char server_name[] = "api.pushingbox.com";	// PushingBox server, probably don't need to change
 	
 		//Use this for OPEnS Lab
@@ -189,19 +189,19 @@
 	#endif
 	
 	#if lora_device_type == 1 			// If Node
-		#define CLIENT_ADDRESS 10       // 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
+		#define CLIENT_ADDRESS 10		// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
 	#endif								// 10-19 for 0, 20 - 29 for 1, etc.
 #endif
 
 
 // --- Delay between loops
 #if is_lora == 0 						// Cannot not use with LoRa
-	#define is_sleep_period 80          // Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
+	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
 										// Change the value according to the length of your desired transmission interval
 										// 80 seems to be a good amount, around 50 and lower may result in lost packets over WiFi
 #endif
 
-//#define is_sleep_interrupt 11       	// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
+// #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 
 
 
