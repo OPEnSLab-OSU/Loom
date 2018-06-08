@@ -84,6 +84,9 @@ void write_non_volatile();
 #if is_lora == 1
 	#include "loom_lora.h"
 #endif
+#if is_nrf == 1
+	#include "loom_nrf.h"
+#endif
 #if is_mpu6050 == 1
 	#include "loom_mpu6050.h"
 #endif

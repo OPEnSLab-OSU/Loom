@@ -97,6 +97,9 @@ void Loom_begin()
 	#if is_lora == 1
 		lora_setup(&rf95, &manager);
 	#endif	
+	#if is_nrf == 1
+		nrf_setup();
+	#endif
 }
 
 

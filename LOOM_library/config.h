@@ -31,9 +31,9 @@
 #define LOOM_DEBUG   1		// Set to 1 if you want Serial statements from various functions to print
 
 // --- Enabled Communication Platform(s) --- 
-#define is_wifi      1		// 1 to enable WiFi
+#define is_wifi      0		// 1 to enable WiFi
 #define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
-#define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
+#define is_nrf       1		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 
 // --- Enabled Actuators --- 
 #define num_servos   0		// Number of servos being used
@@ -41,12 +41,12 @@
 #define is_relay     0		// 1 if relays are being used (enables two, on pins 5 and 6)
 
 // --- Enabled Sensors --- 
-#define num_analog  2		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
+#define num_analog  0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
 #define is_decagon  0		// 1 if GS3 Decagon is being used
 #define is_tca9548a 0		// 1 if Multiplexer is being used. (Further customization in advanced options)
 
 // --- Prebuilt Devices ---
-#define is_ishield  1		// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_ishield  0		// 1 to specify using Ishield (should enable only wifi as communication platform)
 
 
 
@@ -189,6 +189,17 @@
 	#endif								// 10-19 for 0, 20 - 29 for 1, etc.
 #endif
 
+#if is_nrf == 1
+	#define nrf_device_type     0 		// 0: Hub, 1: Node, 2 = Repeater
+	#define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
+
+	
+	#define NRF_HUB_ADDRESS 1		// Use 0-9 for SERVER_ADDRESSes
+	
+	#if nrf_device_type == 1
+		#define NRF_NODE_ADDRESS 0
+	#endif
+#endif
 
 // --- Delay between loops
 #if is_lora == 0 						// Cannot not use with LoRa
