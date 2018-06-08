@@ -11,17 +11,16 @@
 // specified in the above config
 #include "loom_preamble.h"
 
-
 // ================================================================ 
 // ===                           SETUP                          ===
 // ================================================================ 
 void setup() 
 {
-	Loom_begin();		// LOOM_begin calls any relevant (based on config) LOOM device setup functions
+	// LOOM_begin calls any relevant (based on config) LOOM device setup functions
+	Loom_begin();	
 
 	// Any custom setup code
 }
-
 
 // ================================================================ 
 // ===                        MAIN LOOP                         ===
@@ -30,8 +29,7 @@ void loop()
 {
 	OSCBundle bndl, send_bndl; 
 
-	// Receive bundles
-	//  takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
+	// Receive bundles, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
 	receive_bundle(&bndl, WIFI);
 
 	// Process bundle (nothing will happen if bndl is empty), bundle is emptied after processing
@@ -43,13 +41,10 @@ void loop()
 	// Populate bundle to send with sensor values
 	package_data(&send_bndl);
 
-	// Send the bundle
-	//  takes bundle to be filled and wireless platforms [WIFI_PLAT, LORA_PLAT, NRF_PLAT]
+	// Send the bundle, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
 	send_bundle(&send_bndl, WIFI);
 	
 	// Loop checks and sleep between iterations if enabled
 	additional_loop_checks();
 	
 } // End loop section
-
-

@@ -5,18 +5,27 @@ This is the primary location of the Project LOOM code, consolidated into place w
 ## Table of Contents
 
 1. [Installation](#installation)
+
 2. [Device Support](#device-support)
-3. [Wireless Capabilities](#wireless-capabilities)
-4. [Max/MSP](#max/msp)
-5. [Library Architecture](#library-architecture)
+
+3. [Communication Platforms](#communication-platforms)
+
+4. [Device Configuration](#)(#device-configuration)
+
+5. [Max/MSP](#max/msp)
+
+6. [Library Architecture](#library-architecture)
     1. [Overall Structure](#overall-structure)
         1. [Example Library Include Hierarchy](#example-library-include-hierarchy)
     2. [Adding to the Library](#adding-to-the-library)
-6. [Channels](#channels)
+
+7. [Channels](#channels)
     1. [Implementation](#implementation)
     2. [Additional Devices](#additional-devices)
-7. [Configuration File](#configuration-file)
-8. [API](#api)
+
+8. [Configuration File](#configuration-file)
+
+9. [API](#api)
     1. [Includes](#includes)
     2. [Setup](#setup)
     3. [Main Loop Functions](#main-loop-functions)
@@ -27,8 +36,14 @@ This is the primary location of the Project LOOM code, consolidated into place w
         5. [Send Bundle](#send-bundle)
         6. [Additional Loop Checks](#additional-loop-checks)
     		 [Minimal Working Example](#minimal-working-example)	
-9. [Arduino IDE Setup](#arduino-ide-setup)
-10. [Glossary](#glossary)
+
+10. [Arduino IDE Setup](#arduino-ide-setup)
+
+11. [Building and Uploading Code Without The IDE](#building-and-uploading-code-without-the-ide)
+
+12. [Configuration Conflicts](#configuration-conflicts)
+
+     
 
 ## Installation
 
@@ -130,10 +145,6 @@ The configuration file is used in conjunction with preprocessor statements to es
 Any options for custom additions to the library should be added only to the configuration file.
 
 The config.h file needs to be included before the library itself, so that the configuration can be used to define the necessary subset of the library.
-
-## Configuration File Generation Script
-
-Work is currently be done on implementing a script that will build the config.h file from the command line, taking the options as arguments. A corresponding Max interface will be made to provide a GUI to these options. The interface will pair with the one to subsequently build and upload code to devices.
 
 ## API
 
@@ -260,13 +271,31 @@ void loop()
 
 ## Arduino IDE Setup
 
+Make sure to download the dependencies of the Loom Library from:
+
+https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Dependencies 
+
+and install the libraries with the Arduino IDE, as described here:
+
+https://www.arduino.cc/en/guide/libraries
+
 ## Building and Uploading Code Without The IDE
 
-How to build and upload the code from the command line is currently being investigated and will eventually be implemented as runnable script. This script will then have a corresponding Max interface for uploading code to devices.
+Work is currently be done on investigating and implementing a script that will build the config.h file from the command line, taking the options as arguments. A corresponding Max interface will be made to provide a GUI to these options. The interface will pair with the one to subsequently build and upload code to devices.
+
+The design is planned to be as follows:
+
+- Generate the config file from command line 
+  - Arguments to used set options, have default values if none specified
+  - Sent to a Python script, inserting the parameters in the relevant locations of the config file
+- Be able to call this script from Max
+- Use Max to create a graphical interface of toggles / inputs corresponding to the script arguments.
+  - Error checking (i.e., of selection conflicts) can be performed in the script or Max, but would doing so in Max would give users immediate feedback on invalid combinations
+
 
 ## Configuration Conflicts
 
-The following combinations of options in the configuration file result in various conflicts (e.g. of dependencies) that are known to result in errors or undefined behavior:
+The following combinations of options in the configuration file result in various conflicts (e.g. of dependencies) that are known to result in errors or undefined behavior. Such conflicts are also mentioned in the config.h file itself.
 
 - LoRa + nRF
 - is_sleep_period + LoRa (Adafruit_ASFcore-master/tc_interrupt.c:140: multiple definition of 'TC3_Handler')
