@@ -58,9 +58,6 @@
 	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"		// Network password
 #endif
 
-
-
-
 // ================================================================ 
 // ===                    ADVANCED OPTIONS                      === 
 // ================================================================
@@ -98,7 +95,6 @@
 	#define INIT_INST    3	// Initial device instance number (normally 1-8 when using channels)
 	#define INIT_PORT 9443	// Initial device UDP port (normally 1-8 when using channels)
 #endif
-
 
 
 // --- WiFi UDP Ports ---
@@ -202,11 +198,6 @@
 #endif
 
 // #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
-
-
-
-
-
 
 
 

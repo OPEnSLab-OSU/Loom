@@ -114,6 +114,9 @@ void write_non_volatile();
 #if is_tca9548a == 1
 	#include "loom_tca9548a.h"
 #endif
+#if is_rtc3231 == 1
+	#include "loom_rtc3231.h"
+#endif
 
 
 // Files of functions that are not specific to sensors / actuators
