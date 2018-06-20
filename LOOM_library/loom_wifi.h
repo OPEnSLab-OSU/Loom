@@ -64,7 +64,7 @@ int status = WL_IDLE_STATUS;
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-void wifi_setup(char packet_header_string[]);
+void setup_wifi(char packet_header_string[]);
 void printWiFiStatus();
 void start_AP();
 bool connect_to_WPA(char ssid[], char pass[]);
@@ -90,7 +90,7 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port);
 // ===                          SETUP                           === 
 // ================================================================
 
-// --- WIFI SETUP ---
+// --- SETUP WIFI ---
 //
 // Called by main setup
 // Sets WiFi pins, checks for shield with WiFi, 
@@ -100,7 +100,7 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port);
 //
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
 //
-void wifi_setup(char packet_header_string[])
+void setup_wifi(char packet_header_string[])
 {
 	// Configure pins for Adafruit ATWINC1500 Feather
 	WiFi.setPins(8,7,4,2);      
@@ -687,6 +687,10 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port)
 	} // of (packetSize > 0)
 }
 #endif // of if is_wifi == 1
+
+
+
+
 
 
 

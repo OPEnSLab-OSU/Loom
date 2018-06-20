@@ -19,7 +19,8 @@
 enum Platform {
 	WIFI,
 	LORA,
-	NRF
+	NRF,
+	SDCARD
 };
 
 //---------------------------------------------------------------------------
@@ -54,11 +55,13 @@ enum Platform {
 #endif
 
 
-// Prototypes of functions from loom_flash.h and loom_common.h
+// Prototypes of functions from loom_flash.h, loom_common.h, and loom_OSC_translator.h
 // That are referenced by device .h files
 void read_non_volatile();
 void write_non_volatile();
-
+void translate_string_to_OSC(char *string, OSCBundle* bndl);
+void translate_OSC_to_string(OSCBundle *bndl, char *string);
+String get_data_value(OSCMessage* msg, int pos);
 
 // ================================================================ 
 // ===                  INCLUDE DEVICE FILES                    === 
@@ -120,8 +123,15 @@ void write_non_volatile();
 #if is_rtc3231 == 1
 	#include "loom_rtc3231.h"
 #endif
+#if is_sd == 1
+	#include "loom_sd.h"
+#endif
 
 
 // Files of functions that are not specific to sensors / actuators
 #include "loom_flash.h"
 #include "loom_common.h"  		// These may refer to functions in above headers
+
+
+
+
