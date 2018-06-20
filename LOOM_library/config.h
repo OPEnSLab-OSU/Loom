@@ -29,11 +29,12 @@
 
 // --- Debugging --- 
 #define LOOM_DEBUG   1		// Set to 1 if you want Serial statements from various functions to print
+							// NOTE: serial monitor must be opened for device to setup
 
 // --- Enabled Communication Platform(s) --- 
-#define is_wifi      0		// 1 to enable WiFi
+#define is_wifi      1		// 1 to enable WiFi
 #define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
-#define is_nrf       1		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
+#define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 
 // --- Enabled Actuators --- 
 #define num_servos   0		// Number of servos being used
@@ -41,12 +42,12 @@
 #define is_relay     0		// 1 if relays are being used (enables two, on pins 5 and 6)
 
 // --- Enabled Sensors --- 
-#define num_analog  0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
+#define num_analog  2		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
 #define is_decagon  0		// 1 if GS3 Decagon is being used
 #define is_tca9548a 0		// 1 if Multiplexer is being used. (Further customization in advanced options)
 
 // --- Prebuilt Devices ---
-#define is_ishield  0		// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_ishield  1		// 1 to specify using Ishield (should enable only wifi as communication platform)
 
 
 
