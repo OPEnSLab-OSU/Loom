@@ -35,6 +35,7 @@
 #define is_wifi      1		// 1 to enable WiFi
 #define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
+#define is_sd        1		// 1 to enable SD card 
 
 // --- Enabled Actuators --- 
 #define num_servos   0		// Number of servos being used
@@ -47,7 +48,7 @@
 #define is_tca9548a 0		// 1 if Multiplexer is being used. (Further customization in advanced options)
 
 // --- Prebuilt Devices ---
-#define is_ishield  1		// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_ishield  0		// 1 to specify using Ishield (should enable only wifi as communication platform)
 
 
 
@@ -195,7 +196,7 @@
 	#define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 
 	
-	#define NRF_HUB_ADDRESS 1		// Use 0-9 for SERVER_ADDRESSes
+	#define NRF_HUB_ADDRESS 1			// Use 0-9 for SERVER_ADDRESSes
 	
 	#if nrf_device_type == 1
 		#define NRF_NODE_ADDRESS 0
@@ -210,6 +211,10 @@
 #endif
 
 // #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
+
+
+
+
 
 
 

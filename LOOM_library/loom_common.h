@@ -92,20 +92,24 @@ void Loom_begin()
 
 	// Communication Platform specific setups
 	#if is_wifi == 1
-		wifi_setup(configuration.packet_header_string);
+		setup_wifi(configuration.packet_header_string);
 	#endif
 	#if is_lora == 1
-		lora_setup(&rf95, &manager);
+		setup_lora(&rf95, &manager);
 	#endif	
 	#if is_nrf == 1
-		nrf_setup();
+		setup_nrf();
+	#endif
+	#if is_sd == 1
+		setup_sd();
 	#endif
 
-	for (int i = 0; i < 5; i++) {
+	// Flash the build in LED indicating setup complete
+	for (int i = 0; i < 8; i++) {
 		digitalWrite(led, HIGH);  
-		delay(120);                       
+		delay(80);                       
 		digitalWrite(led, LOW);   
-		delay(80);  
+		delay(60);  
 	} 
 	digitalWrite(led, HIGH);
 	
@@ -339,6 +343,16 @@ void receive_bundle(OSCBundle *bndl, Platform platform)
 				//TODO: repeater functionality here
 				break;
 		#endif
+
+		#if is_nrf == 1
+			case NRF : 
+				Serial.println("Not yet implemented");
+		#endif
+
+		#if is_sd == 1
+			case SDCARD : 
+				Serial.println("Not yet implemented");
+		#endif
 		
 		// default : 
 	} // of switch
@@ -568,6 +582,16 @@ void send_bundle(OSCBundle *send_bndl, Platform platform)
 				}
 				break;
 		#endif
+
+		#if is_nrf == 1
+			case NRF : 
+				Serial.println("Not yet implemented");
+		#endif
+
+		#if is_sd == 1
+			case SDCARD : 
+				Serial.println("Not yet implemented");
+		#endif
 		
 	// default : 
 	} // of switch
@@ -594,4 +618,8 @@ void additional_loop_checks()
 		loop_sleep();
 	#endif
 }
+
+
+
+
 
