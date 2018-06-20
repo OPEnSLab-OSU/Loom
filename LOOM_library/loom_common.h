@@ -100,6 +100,15 @@ void Loom_begin()
 	#if is_nrf == 1
 		nrf_setup();
 	#endif
+
+	for (int i = 0; i < 5; i++) {
+		digitalWrite(led, HIGH);  
+		delay(120);                       
+		digitalWrite(led, LOW);   
+		delay(80);  
+	} 
+	digitalWrite(led, HIGH);
+	
 }
 
 
