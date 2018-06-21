@@ -43,17 +43,23 @@ void loop()
 
 	// Send the bundle, takes bundle to be filled and platform to send it over [WIFI, LORA, NRF, SDCARD]
 	send_bundle(&send_bndl, WIFI);
-
+//
 //	if (get_bundle_bytes(&bndl)){
 //		send_bundle(&bndl, SDCARD, "test2.txt");
-//		read_from_file("test2.txt");
-//		while(1);
+//		read_all_from_file("test2.txt");
+////		while(1);
 //	}
 	
 	// Loop checks and sleep between iterations if enabled
 	additional_loop_checks();
 	
 } // End loop section
+
+
+
+
+
+
 
 
 

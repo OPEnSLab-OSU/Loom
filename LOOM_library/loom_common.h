@@ -165,6 +165,13 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		Serial.println(buffer);
 	#endif
 
+//	#if is_sd == 1
+//		if (SD_logging) {
+//			sd_log_msg(&msg, "test_log");
+//		}
+//	#endif
+
+
 	#if is_tca9548a
 		if (msg.fullMatch("/GetSensors", addrOffset)) {
 			msg.add(configuration.packet_header_string);
@@ -201,6 +208,10 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		msg.dispatch("/requestIP",        	broadcastIP,  			addrOffset);
 		msg.dispatch("/getNewChannel",		new_channel,  			addrOffset);
 		msg.dispatch("/SetRequestSettings",	set_request_settings, 	addrOffset);
+	#endif
+
+	#if is_sd == 1
+		msg.dispatch("/enableSDlogging", enable_SD_logging, 		addrOffset);
 	#endif
 	
 	msg.dispatch("/SetID", set_instance_num, addrOffset);
@@ -382,7 +393,29 @@ void process_bundle(OSCBundle *bndl)
 				Serial.print("First message address string: ");
 				Serial.println(addressString);
 			#endif
-	
+
+			// If SD logging is enabled and message was to this device, save bundle
+			#if is_sd == 1 
+				if ((SD_logging == 1) && (strncmp(addressString, packet_header_string, strlen(packet_header_string)) == 0)) {
+					#if LOOM_DEBUG == 1
+						Serial.println("Logging bundle");
+					#endif
+//					char fileName[50];
+//					memset(fileName, '\0', sizeof(fileName));
+//				 	sprintf(fileName, "%s%s", "data", "_log.txt");
+//				 	replace_char(fileName, '/', '_');
+//					String tmp = String(fileName);
+//					memset(fileName, '\0', sizeof(fileName));
+//					tmp.toCharArray(fileName, 30);
+//					sd_save_bundle(fileName, bndl);
+					sd_save_bundle("data_log.txt", bndl);
+
+				}
+			#endif
+
+// void replace_char(char *str, char orig, char rep) 
+
+
 			#if is_wifi == 1
 				// Channel manager polls without device name so check is performed here
 				// rather than in msg_router()
@@ -632,6 +665,11 @@ void additional_loop_checks()
 		loop_sleep();
 	#endif
 }
+
+
+
+
+
 
 
 
