@@ -1,15 +1,27 @@
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-// void translate_string_to_OSC(char *string, OSCBundle* bndl);
-// void translate_OSC_to_string(OSCBundle *bndl, char *string);
-// String get_data_value(OSCMessage* msg, int pos);
+void translate_string_to_OSC(char *osc_string, OSCBundle* bndl);
+void translate_OSC_to_string(OSCBundle *bndl, char *osc_string);
+String get_data_value(OSCMessage* msg, int pos);
+#if LOOM_DEBUG == 1
+	void print_bundle(OSCBundle *bndl);
+#endif
+int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 
+
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================
+union data_value {
+	int32_t i;
+	float f;
+	uint32_t u;
+};
 
 // ================================================================
 // ===                        FUNCTIONS                         ===
 // ================================================================
-
 
 
 
@@ -55,17 +67,17 @@ String get_data_value(OSCMessage* msg, int pos)
 // 
 // Converts string used by LoRa to an equivalent OSCBundle 
 //
-// @param string  A char * created through the use of translate_OSC_to_string(), 
-// @param bndl    The OSC bundle to be populated
+// @param osc_string  A char * created through the use of translate_OSC_to_string(), 
+// @param bndl        The OSC bundle to be populated
 //
-void translate_string_to_OSC(char *string, OSCBundle* bndl) 
+void translate_string_to_OSC(char *osc_string, OSCBundle* bndl) 
 {
 	bndl->empty();
 	data_value value_union;
-	char buf[strlen(string)+1];
+	char buf[strlen(osc_string)+1];
 	char *p = buf, *p2 = NULL;
 	char *token = NULL, *msg_token = NULL; 
-	strcpy(buf, string);
+	strcpy(buf, osc_string);
 	OSCMessage *msg;
 	msg_token = strtok_r(p, " ", &p);
 	while (msg_token != NULL & strlen(msg_token) > 0) {
@@ -98,10 +110,10 @@ void translate_string_to_OSC(char *string, OSCBundle* bndl)
 // Converts an OSC Bundle to equivalent string to be used in LoRa transmissions
 // Osc_string's contents will now include the OSCBundle's formatted data.
 //
-// @param bndl    An OSCBundle to put into string format.
-// @param string  A char * to fill with the OSCBundle's data.
+// @param bndl        An OSCBundle to put into string format.
+// @param osc_string  A char * to fill with the OSCBundle's data.
 //
-void translate_OSC_to_string(OSCBundle *bndl, char *string) 
+void translate_OSC_to_string(OSCBundle *bndl, char *osc_string) 
 {
 	char data_type;
 	data_value value;
@@ -197,6 +209,21 @@ void print_bundle(OSCBundle *bndl)
 
 
 
+// --- GET BUNDLE BYTES ---
+//
+// Gets the size of a bundle in bytes
+//
+// @param bndl  The bndl to get the size of
+// 
+// @return The size of the bundle in bytes
+// 
+int get_bundle_bytes(OSCBundle *bndl)
+{
+	int total = 0;
+	for (int i = 0; i < bndl->size(); i++) {
+		total += bndl->getOSCMessage(i)->bytes();
+	}
+}
 
 
 

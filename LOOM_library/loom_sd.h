@@ -68,8 +68,8 @@ void setup_sd()
 //
 // @param file  The name of the file to read from
 //
-//
 // @return True if no error
+//
 bool read_from_file(char* file) 
 {
 	sdFile = SD.open(file);
@@ -95,16 +95,81 @@ bool read_from_file(char* file)
 	}
 }
 
-// --- READ OSCBUNDLE FROM FILE
-bool read_OSCBundle_from_file(char *file, OSCBundle *bndl)
+
+// --- SD WRITE TO FILE --- 
+//
+// Attempts to write text to a file on the SD card
+//
+// @param file  The name of the file to write to
+//
+// @return True if no error
+//
+bool write_to_file(char* file, char* text) 
+{
+	Serial.print("writing to file :");
+	Serial.println(text);
+	sdFile = SD.open(file, FILE_WRITE);
+	if (sdFile) {
+
+		#if LOOM_DEBUG == 1
+			Serial.print("Writing to ");
+			Serial.print(file);
+			Serial.print("...");
+		#endif
+
+		sdFile.println(text);
+
+		#if LOOM_DEBUG == 1
+			Serial.println("done");
+		#endif
+		// close the file:
+		sdFile.close();
+
+	} else {
+		// if the file didn't open, print an error:
+		#if LOOM_DEBUG == 1
+			Serial.print("Error writing to ");
+			Serial.println(file);
+		#endif
+	}
+}
+
+
+
+
+
+// --- SD READ BUNDLE
+bool sd_read_bundle(char *file, OSCBundle *bndl)
 {
 
 }
 
-// --- READ OSCBUNDLE FROM FILE
-bool write_OSCBundle_to_file(char *file, OSCBundle *bndl)
+// --- SD SAVE BUNDLE
+bool sd_save_bundle(char *file, OSCBundle *bndl)
 {
+	Serial.println("sd save bundle");
+	char osc_str[255];
+	memset(osc_str, '\0', sizeof(osc_str));
+	translate_OSC_to_string(bndl, osc_str);
+	#if LOOM_DEBUG == 1
+		Serial.println(osc_str);
+		Serial.print("osc_str length: ");
+		Serial.println(strlen(osc_str));
+	#endif
 
+	write_to_file(file, osc_str);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 

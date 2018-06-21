@@ -23,14 +23,15 @@ void set_instance_num(OSCMessage &msg);
 #endif
 void loop_sleep();
 void save_config(OSCMessage &msg);
-int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 
 // Main loop interface functions
-void receive_bundle(OSCBundle *bndl, int platform);
+void receive_bundle(OSCBundle *bndl, Platform platform);
 void process_bundle(OSCBundle *bndl);
 void measure_sensors();
 void package_data(OSCBundle *send_bndl);
-void send_bundle(OSCBundle *send_bndl, int platform);
+void send_bundle(OSCBundle *send_bndl, Platform platform, char* file);
+void send_bundle(OSCBundle *send_bndl, Platform platform);
+
 void additional_loop_checks();
 
 
@@ -282,23 +283,6 @@ void save_config(OSCMessage &msg)
 
 
 
-// --- GET BUNDLE BYTES ---
-//
-// Gets the size of a bundle in bytes
-//
-// @param bndl  The bndl to get the size of
-// 
-// @return The size of the bundle in bytes
-// 
-int get_bundle_bytes(OSCBundle *bndl)
-{
-	int total = 0;
-	for (int i = 0; i < bndl->size(); i++) {
-		total += bndl->getOSCMessage(i)->bytes();
-	}
-}
-
-
 
 // ================================================================ 
 // ===                   INTERFACE FUNCTIONS                    === 
@@ -346,15 +330,21 @@ void receive_bundle(OSCBundle *bndl, Platform platform)
 
 		#if is_nrf == 1
 			case NRF : 
-				Serial.println("Not yet implemented");
+				#if LOOM_DEBUG == 1
+					Serial.println("Not yet implemented");
+				#endif
+				break;
 		#endif
 
-		#if is_sd == 1
-			case SDCARD : 
-				Serial.println("Not yet implemented");
-		#endif
+		// #if is_sd == 1
+		// 	case SDCARD : 
+		// 		Serial.println("Not yet implemented");
+		// #endif
 		
-		// default : 
+		default :
+			#if LOOM_DEBUG == 1
+				Serial.println("That platform is not enabled");
+			#endif 
 	} // of switch
 }
 
@@ -542,12 +532,14 @@ void package_data(OSCBundle *send_bndl)
 // --- SEND BUNDLE ---
 //
 // Sends a packaged bundle on the specified platform
+// Is overloaded, 
 // 
 // @param send_bndl  The bundle to be sent
 // @param platform   The wireless platform to send on, the values are
 //                    encoded to Platform enum to reduce chance for errors
+// @param file       The file name when saving to SD card
 // 
-void send_bundle(OSCBundle *send_bndl, Platform platform)
+void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 {
 	switch(platform) {
 		#if is_wifi == 1
@@ -585,17 +577,31 @@ void send_bundle(OSCBundle *send_bndl, Platform platform)
 
 		#if is_nrf == 1
 			case NRF : 
-				Serial.println("Not yet implemented");
+				#if LOOM_DEBUG == 1
+					Serial.println("Not yet implemented");
+				#endif
+				break;
 		#endif
 
 		#if is_sd == 1
 			case SDCARD : 
-				Serial.println("Not yet implemented");
+				Serial.println("saving bundle");
+				sd_save_bundle(file, send_bndl);
+				break;
 		#endif
-		
-	// default : 
+
+		default :
+			#if LOOM_DEBUG == 1
+				Serial.println("That platform is not enabled");
+			#endif 
 	} // of switch
 }
+
+void send_bundle(OSCBundle *send_bndl, Platform platform)
+{
+	send_bundle(send_bndl, platform, NULL);	
+}
+
 
 
 
@@ -618,6 +624,19 @@ void additional_loop_checks()
 		loop_sleep();
 	#endif
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
