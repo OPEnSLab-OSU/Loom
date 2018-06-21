@@ -59,9 +59,13 @@ enum Platform {
 // That are referenced by device .h files
 void read_non_volatile();
 void write_non_volatile();
-void translate_string_to_OSC(char *string, OSCBundle* bndl);
-void translate_OSC_to_string(OSCBundle *bndl, char *string);
+void translate_string_to_OSC(char *osc_string, OSCBundle* bndl);
+void translate_OSC_to_string(OSCBundle *bndl, char *osc_string);
 String get_data_value(OSCMessage* msg, int pos);
+#if LOOM_DEBUG == 1
+	void print_bundle(OSCBundle *bndl);
+#endif
+int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 
 // ================================================================ 
 // ===                  INCLUDE DEVICE FILES                    === 
@@ -130,7 +134,20 @@ String get_data_value(OSCMessage* msg, int pos);
 
 // Files of functions that are not specific to sensors / actuators
 #include "loom_flash.h"
+#include "loom_OSC_translator.h"
 #include "loom_common.h"  		// These may refer to functions in above headers
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

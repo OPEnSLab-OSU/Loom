@@ -29,10 +29,8 @@ void loop()
 {
 	OSCBundle bndl, send_bndl; 
 
-	read_from_file("test.txt");
-
 	// Receive bundles, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
-//	receive_bundle(&bndl, WIFI);
+	receive_bundle(&bndl, WIFI);
 
 	// Process bundle (nothing will happen if bndl is empty), bundle is emptied after processing
 //	process_bundle(&bndl);
@@ -44,12 +42,32 @@ void loop()
 //	package_data(&send_bndl);
 
 	// Send the bundle, takes bundle to be filled and platform to send it over [WIFI, LORA, NRF, SDCARD]
-//	send_bundle(&send_bndl, WIFI);
+	send_bundle(&send_bndl, WIFI);
+
+
+//	if (get_bundle_bytes(&bndl)){
+//		send_bundle(&bndl, SDCARD, "test2.txt");
+//		read_from_file("test2.txt");
+//		while(1);
+//	}
 	
 	// Loop checks and sleep between iterations if enabled
 	additional_loop_checks();
 	
 } // End loop section
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

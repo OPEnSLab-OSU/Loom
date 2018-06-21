@@ -48,7 +48,7 @@
 #define is_tca9548a 0		// 1 if Multiplexer is being used. (Further customization in advanced options)
 
 // --- Prebuilt Devices ---
-#define is_ishield  0		// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_ishield  1		// 1 to specify using Ishield (should enable only wifi as communication platform)
 
 
 
@@ -153,7 +153,7 @@
 
 // --- Ishield Options ---
 #if is_ishield == 1
-	#define is_mpu6050  1			// Enables MPU6050 on Ishield
+	#define is_mpu6050  0			// Enables MPU6050 on Ishield
 	#define is_neopixel 1			// Toggle based on whether Neopixels are being used 
 	// #define button 10			// Usually automatically defined, uncomment if that does not happen		
 
@@ -167,7 +167,7 @@
 
 // --- LoRa Device Type ---
 #if is_lora == 1
-	#define lora_device_type     0 		// 0: Hub, 1: Node, 2 = Repeater
+	#define lora_device_type     1 		// 0: Hub, 1: Node, 2 = Repeater
 	#define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 
 	#define SERVER_ADDRESS 0			// Use 0-9 for SERVER_ADDRESSes
@@ -205,12 +205,25 @@
 
 // --- Delay between loops
 #if is_lora == 0 						// Cannot not use with LoRa
-	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
+	#define is_sleep_period 1000			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
 										// Change the value according to the length of your desired transmission interval
 										// 80 seems to be a good amount, around 50 and lower may result in lost packets over WiFi
 #endif
 
 // #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
