@@ -17,26 +17,23 @@
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-RF24 radio(5,6);               	  // nRF24L01(+) radio attached using Getting Started board 
-RF24Network network(radio);      	// Network uses that radio
-// union data_value {
-// 	int32_t i;
-// 	float f;
-// 	uint32_t u;
-// };
+RF24 radio(5,6);                 // nRF24L01(+) radio attached using Getting Started board 
+RF24Network network(radio);      // Network uses that radio
+
+
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void setup_nrf();
 void nrf_receive_bundle(OSCBundle *);
 bool nrf_send_bundle(OSCBundle *);
-void print_bundle(OSCBundle *bndl);
 
 // ================================================================
 // ===                          SETUP                           ===
 // ================================================================
 
-void setup_nrf() {
+void setup_nrf() 
+{
 	pinMode(8, INPUT_PULLUP);
  
 	SPI.begin();
@@ -52,10 +49,20 @@ void setup_nrf() {
 // ===                        FUNCTIONS                         ===
 // ================================================================
 
-void nrf_receive_bundle(OSCBundle *bndl) {
-	network.update();                  // Check the network regularly
-	while ( network.available() ) {     // Is there anything ready for us?
-		RF24NetworkHeader header;        // If so, grab it and print it out
+
+// --- NRF RECEIVE BUNDLE ---
+//
+// Checks if any data has been received via nRF,
+// is so, reads it in, converts it to a bundle and stores it in
+// the bundle passed in
+//
+// @param bndl  The OSC bundle to be filled
+//
+void nrf_receive_bundle(OSCBundle *bndl) 
+{
+	network.update();                      // Check the network regularly
+	while ( network.available() ) {        // Is there anything ready for us?
+		RF24NetworkHeader header;          // If so, grab it and print it out
 		char message[NRF_MESSAGE_SIZE];
 		memset(message, '\0', NRF_MESSAGE_SIZE);
 		network.read(header,&message,NRF_MESSAGE_SIZE-1);
@@ -67,7 +74,16 @@ void nrf_receive_bundle(OSCBundle *bndl) {
 	}
 }
 
-bool nrf_send_bundle(OSCBundle *bndl) {
+
+// --- NRF SEND BUNDLE ---
+//
+// Takes an OSC bundle to send over nRF
+// after conversion to the proper format
+//
+// @param bndl  The OSC bundle to send (will be converted to string)
+//
+bool nrf_send_bundle(OSCBundle *bndl) 
+{
 	char message[NRF_MESSAGE_SIZE];
 	memset(message, '\0', NRF_MESSAGE_SIZE);
 	translate_OSC_to_string(bndl, message);
@@ -84,17 +100,6 @@ bool nrf_send_bundle(OSCBundle *bndl) {
 	#endif
 	return is_sent;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

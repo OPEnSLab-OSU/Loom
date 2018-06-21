@@ -70,6 +70,11 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 // ================================================================ 
 // ===                  INCLUDE DEVICE FILES                    === 
 // ================================================================
+
+#if is_pushingbox == 1
+	#include "loom_ethernet.h"
+	#include "loom_pushingbox.h"
+#endif
 #if num_analog > 0
 	#include "loom_analogIn.h"
 #endif
@@ -136,6 +141,8 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #include "loom_flash.h"
 #include "loom_OSC_translator.h"
 #include "loom_common.h"  		// These may refer to functions in above headers
+
+
 
 
 

@@ -3,7 +3,7 @@
 // ================================================================
 #include <RH_RF95.h>
 #include <RHReliableDatagram.h>
-#include <string.h>
+// #include <string.h>
 #include <Ethernet2.h>
 
 // ================================================================ 
@@ -29,17 +29,6 @@
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 
-#if lora_device_type == 0 // If Hub
-	String data[NUM_FIELDS];
-//	char device_id[]   = "v25CCAAB0F709665";     // Required by PushingBox, specific to each scenario
-//	char server_name[] = "api.pushingbox.com";
-
-	//Use this for OPEnS Lab
-//	byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};
-//	IPAddress ip(128,193,56,138); 
-	EthernetClient client;            
-#endif
-
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 RHReliableDatagram manager(rf95, SERVER_ADDRESS);
 
@@ -50,17 +39,10 @@ RHReliableDatagram manager(rf95, SERVER_ADDRESS);
 void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager);
 
 #if lora_device_type == 0
-	bool setup_ethernet();
 	void lora_receive_bundle(OSCBundle *bndl);
-	void sendToPushingBox(int num_fields, char *server_name, char *devid);
 #endif
-
 #if lora_device_type == 1
 	bool lora_send_bundle(OSCBundle *bndl);
-#endif
-
-#if LOOM_DEBUG == 1
-	void print_bundle(OSCBundle *bndl);
 #endif
 
 
@@ -129,86 +111,6 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 
 
 #if lora_device_type == 0
-
-// --- SETUP ETHERNET ---
-//
-// Configures ethernet capabilities.
-// 
-bool setup_ethernet() 
-{
-	bool is_setup;
-	if (Ethernet.begin(mac) == 0) {
-		#if LOOM_DEBUG == 1
-			Serial.println("Failed to configure Ethernet using DHCP");
-		#endif
-		// try to congifure using IP address instead of DHCP:
-		Ethernet.begin(mac, ip);
-	}
-	
-	if (client.connect("www.google.com", 80)) {
-		is_setup = true;
-		#if LOOM_DEBUG == 1
-			Serial.println("Successfully connected to internet");
-		#endif
-		client.stop();
-	}
-	else {
-		is_setup = false;
-		#if LOOM_DEBUG == 1
-			Serial.println("Failed to connect to internet");
-		#endif
-	}
-	
-	return is_setup;
-}
-
-
-
-// --- SEND TO PUSHINGBOX ---
-// 
-// Sends a get request to PushingBox
-//
-// @param msg  The message containing the information to send to PB.
-//
-void sendToPushingBox(OSCMessage &msg) 
-{
-	#if LOOM_DEBUG == 1
-		Serial.println("Sending to pushing box");
-	#endif
-	client.stop();
-	if (client.connect(server_name, 80)) {  
-		client.print("GET /pushingbox?devid="); client.print(device_id); 
-		for(int i = 0; i < NUM_FIELDS; i++) {
-			if((i % 2) == 0)
-				client.print("&key" + String(i/2) + "=");
-			else
-				client.print("&val" + String(i/2) + "=");
-			client.print(get_data_value(&msg, i));
-		}
-		client.println(" HTTP/1.1");
-		client.print("Host: "); client.println(server_name);
-		client.println("User-Agent: Arduino");
-		client.println();
-	 
-	} 
-	else {
-		#if LOOM_DEBUG == 1
-			Serial.println("Failed to connect to PB, attempting to re-setup ethernet.");
-		#endif
-		if(setup_ethernet()) {
-			#if LOOM_DEBUG == 1
-				Serial.println("Successfully re-setup ethernet.");
-			#endif
-		}
-		#if LOOM_DEBUG == 1 
-			else {
-				Serial.println("Failed to re-setup ethernet.");
-			}
-		#endif
-	}
-}
-
-
 
 // --- LoRa Receive Bundle ---
 //
@@ -295,17 +197,6 @@ bool lora_send_bundle(OSCBundle *bndl)
 }
 
 #endif // of lora_device_type == 1
-
-
-
-
-
-
-
-
-
-
-
 
 
 

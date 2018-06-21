@@ -104,6 +104,9 @@ void Loom_begin()
 	#if is_sd == 1
 		setup_sd();
 	#endif
+	#if is_pushingbox == 1
+		setup_pushingbox();
+	#endif
 
 	// Flash the build in LED indicating setup complete
 	for (int i = 0; i < 8; i++) {
@@ -624,6 +627,8 @@ void additional_loop_checks()
 		loop_sleep();
 	#endif
 }
+
+
 
 
 
