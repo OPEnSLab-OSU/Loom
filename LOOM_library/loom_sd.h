@@ -13,11 +13,11 @@
 // ===                        STRUCTURES                        === 
 // ================================================================ 
 
-struct config_sd_t {
-}; 
+// struct config_sd_t {
+// }; 
 
-struct state_sd_t {
-};
+// struct state_sd_t {
+// };
 
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
@@ -25,6 +25,8 @@ struct state_sd_t {
 // struct config_sd_t configuration;
 // struct state_sd_t state_sd;
 File sdFile;
+
+
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
@@ -70,7 +72,7 @@ void setup_sd()
 //
 // @return True if no error
 //
-bool read_from_file(char* file) 
+bool read_all_from_file(char* file) 
 {
 	sdFile = SD.open(file);
 	if (sdFile) {
@@ -159,6 +161,7 @@ bool sd_save_bundle(char *file, OSCBundle *bndl)
 
 	write_to_file(file, osc_str);
 }
+
 
 
 

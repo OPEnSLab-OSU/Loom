@@ -38,12 +38,12 @@ RHReliableDatagram manager(rf95, SERVER_ADDRESS);
 // ================================================================
 void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager);
 
-#if lora_device_type == 0
+// #if lora_device_type == 0
 	void lora_receive_bundle(OSCBundle *bndl);
-#endif
-#if lora_device_type == 1
+// #endif
+// #if lora_device_type == 1
 	bool lora_send_bundle(OSCBundle *bndl);
-#endif
+// #endif
 
 
 // ================================================================
@@ -110,7 +110,7 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 
 
 
-#if lora_device_type == 0
+// #if lora_device_type == 0
 
 // --- LoRa Receive Bundle ---
 //
@@ -152,12 +152,12 @@ void lora_receive_bundle(OSCBundle *bndl)
 	} // of if (manager.available()) 
 }
 
-#endif // of lora_device_type == 0
+// #endif // of lora_device_type == 0
 
 
 
 
-#if lora_device_type == 1
+// #if lora_device_type == 1
 
 // --- LORA SEND BUNDLE
 //
@@ -196,7 +196,8 @@ bool lora_send_bundle(OSCBundle *bndl)
 	}
 }
 
-#endif // of lora_device_type == 1
+// #endif // of lora_device_type == 1
+
 
 
 

@@ -33,7 +33,7 @@ void loop()
 	receive_bundle(&bndl, WIFI);
 
 	// Process bundle (nothing will happen if bndl is empty), bundle is emptied after processing
-//	process_bundle(&bndl);
+	process_bundle(&bndl);
 
 	// Update stored readings from sensors
 //	measure_sensors();
@@ -43,7 +43,6 @@ void loop()
 
 	// Send the bundle, takes bundle to be filled and platform to send it over [WIFI, LORA, NRF, SDCARD]
 	send_bundle(&send_bndl, WIFI);
-
 
 //	if (get_bundle_bytes(&bndl)){
 //		send_bundle(&bndl, SDCARD, "test2.txt");
@@ -55,6 +54,7 @@ void loop()
 	additional_loop_checks();
 	
 } // End loop section
+
 
 
 

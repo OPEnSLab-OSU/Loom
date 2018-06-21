@@ -23,6 +23,7 @@ void set_instance_num(OSCMessage &msg);
 #endif
 void loop_sleep();
 void save_config(OSCMessage &msg);
+void flash_led();
 
 // Main loop interface functions
 void receive_bundle(OSCBundle *bndl, Platform platform);
@@ -109,13 +110,7 @@ void Loom_begin()
 	#endif
 
 	// Flash the build in LED indicating setup complete
-	for (int i = 0; i < 8; i++) {
-		digitalWrite(led, HIGH);  
-		delay(80);                       
-		digitalWrite(led, LOW);   
-		delay(60);  
-	} 
-	digitalWrite(led, HIGH);
+	flash_led();
 	
 }
 
@@ -284,6 +279,17 @@ void save_config(OSCMessage &msg)
 	#endif
 }
 
+// Flash the build in LED 
+void flash_led()
+{
+	for (int i = 0; i < 8; i++) {
+		digitalWrite(led, HIGH);  
+		delay(80);                       
+		digitalWrite(led, LOW);   
+		delay(60);  
+	} 
+	digitalWrite(led, HIGH);
+}
 
 
 
@@ -343,11 +349,10 @@ void receive_bundle(OSCBundle *bndl, Platform platform)
 		// 	case SDCARD : 
 		// 		Serial.println("Not yet implemented");
 		// #endif
-		
+		#if LOOM_DEBUG == 1
 		default :
-			#if LOOM_DEBUG == 1
 				Serial.println("That platform is not enabled");
-			#endif 
+		#endif 
 	} // of switch
 }
 
@@ -592,9 +597,9 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 				sd_save_bundle(file, send_bndl);
 				break;
 		#endif
-
+		
+		#if LOOM_DEBUG == 1
 		default :
-			#if LOOM_DEBUG == 1
 				Serial.println("That platform is not enabled");
 			#endif 
 	} // of switch
@@ -627,6 +632,7 @@ void additional_loop_checks()
 		loop_sleep();
 	#endif
 }
+
 
 
 
