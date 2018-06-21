@@ -32,10 +32,11 @@
 							// NOTE: serial monitor must be opened for device to setup
 
 // --- Enabled Communication Platform(s) --- 
-#define is_wifi      1		// 1 to enable WiFi
-#define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_wifi      0		// 1 to enable WiFi
+#define is_lora      1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
-#define is_sd        1		// 1 to enable SD card 
+#define is_sd        0		// 1 to enable SD card 
+#define is_pushingbox 0     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub)
 
 // --- Enabled Actuators --- 
 #define num_servos   0		// Number of servos being used
@@ -167,25 +168,15 @@
 
 // --- LoRa Device Type ---
 #if is_lora == 1
-	#define lora_device_type     1 		// 0: Hub, 1: Node, 2 = Repeater
+	#define lora_device_type     0 		// 0: Hub, 1: Node, 2 = Repeater
 	#define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 
 	#define SERVER_ADDRESS 0			// Use 0-9 for SERVER_ADDRESSes
 	#define RF95_FREQ      915.0		// Hardware specific, Tx must match Rx
 
-	#if lora_device_type == 0			// If Hub
-		#define NUM_FIELDS 32			// Maximum number of fields accepted by the PushingBox Scenario    
-		#include <Ethernet2.h>			// (this is needed for IPAddress, do not remove)
-		
-		// String data[NUM_FIELDS];
-		char device_id[]   = "v25CCAAB0F709665";	// Required by PushingBox, specific to each scenario
-		char server_name[] = "api.pushingbox.com";	// PushingBox server, probably don't need to change
-	
-		//Use this for OPEnS Lab
-		byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
-		IPAddress ip(128,193,56,138); 
+	#if lora_device_type == 0
+		#define is_pushingbox 1
 	#endif
-	
 	#if lora_device_type == 1 			// If Node
 		#define CLIENT_ADDRESS 10		// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
 	#endif								// 10-19 for 0, 20 - 29 for 1, etc.
@@ -203,14 +194,31 @@
 	#endif
 #endif
 
+#if is_pushingbox == 1			
+	#define NUM_FIELDS 32			// Maximum number of fields accepted by the PushingBox Scenario    
+	#include <Ethernet2.h>			// (this is needed for IPAddress, do not remove)
+	
+	// String data[NUM_FIELDS];
+	char device_id[]   = "v25CCAAB0F709665";	// Required by PushingBox, specific to each scenario
+	char server_name[] = "api.pushingbox.com";	// PushingBox server, probably don't need to change
+
+	//Use this for OPEnS Lab
+	byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
+	IPAddress ip(128,193,56,138); 
+#endif
+
+
+
 // --- Delay between loops
 #if is_lora == 0 						// Cannot not use with LoRa
-	#define is_sleep_period 1000			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
+	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
 										// Change the value according to the length of your desired transmission interval
 										// 80 seems to be a good amount, around 50 and lower may result in lost packets over WiFi
 #endif
 
 // #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
+
+
 
 
 
