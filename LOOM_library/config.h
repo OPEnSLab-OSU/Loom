@@ -35,7 +35,7 @@
 #define is_wifi      1		// 1 to enable WiFi
 #define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
-#define is_sd        0		// 1 to enable SD card 
+#define is_sd        1		// 1 to enable SD card 
 #define is_pushingbox 0     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub)
 
 // --- Enabled Actuators --- 
@@ -217,6 +217,12 @@
 #endif
 
 // #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
+
+
+
+
+
+
 
 
 

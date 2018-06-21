@@ -25,7 +25,7 @@
 // struct config_sd_t configuration;
 // struct state_sd_t state_sd;
 File sdFile;
-
+int SD_logging = 0; // 0: off, 1: log bundles received
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
@@ -61,6 +61,12 @@ void setup_sd()
 		Serial.println("initialization done.");
 	#endif
 }
+
+
+
+// ================================================================
+// ===                        FUNCTIONS                         ===
+// ================================================================
 
 
 // --- SD READ FROM FILE --- 
@@ -165,16 +171,29 @@ bool sd_save_bundle(char *file, OSCBundle *bndl)
 
 
 
+// --- ENABLE SD LOGGING ---
+//
+// 
+//
+// @param msg  OSC messages that had header ending in '/enableSDlogging'
+//
+void enable_SD_logging(OSCMessage &msg)
+{
+	int setting = msg.getInt(0);
 
-
-
-
-
-
-
-
-
-
-
-
+	switch (setting) {
+		case 0:
+			SD_logging = 0;
+			Loom_Debug_Println("Disabled SD logging");
+			break;
+		case 1:
+			SD_logging = 1;
+			Loom_Debug_Println("Enabled SD logging of received bundles");
+			break;
+		#if LOOM_DEBUG == 1
+		default:
+			Serial.println("Not a valid SD logging setting");
+		#endif
+	}
+}
 
