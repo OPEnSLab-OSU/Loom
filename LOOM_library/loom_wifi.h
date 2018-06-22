@@ -125,8 +125,7 @@ void setup_wifi(char packet_header_string[])
 				// If set to request channel settings
 				if (config_wifi->request_settings == 1) {
 					request_settings_from_Max();
-				} 
-				else {
+				} else {
 					respond_to_poll_request(packet_header_string);
 				}
 			}

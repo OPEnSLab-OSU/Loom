@@ -68,8 +68,8 @@ void sendToPushingBox(OSCMessage &msg)
 	client.stop();
 	if (client.connect(server_name, 80)) {  
 		client.print("GET /pushingbox?devid="); client.print(device_id); 
-		for(int i = 0; i < NUM_FIELDS; i++) {
-			if((i % 2) == 0)
+		for (int i = 0; i < NUM_FIELDS; i++) {
+			if ((i % 2) == 0)
 				client.print("&key" + String(i/2) + "=");
 			else
 				client.print("&val" + String(i/2) + "=");
@@ -80,17 +80,16 @@ void sendToPushingBox(OSCMessage &msg)
 		client.println("User-Agent: Arduino");
 		client.println();
 	 
-	} 
-	else {
+	} else {
 		LOOM_DEBUG_Println("Failed to connect to PB, attempting to re-setup ethernet.");
 
-		if(setup_ethernet()) {
+		if (setup_ethernet()) {
 			LOOM_DEBUG_Println("Successfully re-setup ethernet.");
 		}
 		#if LOOM_DEBUG == 1 
-			else {
-				Serial.println("Failed to re-setup ethernet.");
-			}
+		else {
+			Serial.println("Failed to re-setup ethernet.");
+		}
 		#endif
 	}
 }
