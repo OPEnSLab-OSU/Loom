@@ -79,7 +79,7 @@ void setup_stepper()
 //
 void set_stepper_steps(int motor_choice, int stepper_direction, int steps, int stepper_speed)
 {
-	LOOM_DEBUG_Println("setting stepper...");
+	LOOM_DEBUG_Println("Setting stepper...");
 
 	//int set_degree = map(degree,0,360,0,200);
 	if (stepper_speed > 0){
@@ -104,13 +104,31 @@ void handle_stepper_msg(OSCMessage &msg)
 	int degree = msg.getInt(2);
 	int stepper_speed = msg.getInt(3);
 
-	LOOM_DEBUG_Print("received message to move the motor ");
+	LOOM_DEBUG_Print("Received message to move the motor ");
 	LOOM_DEBUG_Println2(degree, " degrees");
 
 	set_stepper_steps(motor,stepper_direction,degree,stepper_speed);
 	
-	LOOM_DEBUG_Println("processed stepper request");
+	LOOM_DEBUG_Println("Processed stepper request");
+
+	// Replay that stepper is done
+	OSCBundle bndl;
+	bndl.empty();
+	char addressString[255];
+	sprintf(addressString, "%s%s", global_packet_header_string, "/StepperDone");
+	bndl.add(addressString);
+	#if is_wifi == 1
+		wifi_send_bundle(&bndl);
+	#endif
+	#if is_lora == 1
+		lora_send_bundle(&bndl);
+	#endif
+	#if is_nrf == 1
+		nrf_send_bundle(&bndl);
+	#endif
 }
+
+
 
 
 
