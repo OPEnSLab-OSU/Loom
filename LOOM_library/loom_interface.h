@@ -181,7 +181,7 @@ void measure_sensors()
 		measure_tca9548a();
 		if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
 			update_sensors();
-			LOOM_DEBUG_Println("Update MUXShield Sensorlist");
+			LOOM_DEBUG_Println("Update MuxShield Sensorlist");
 			state_tca9548a.last_update_time = millis();
 		}
 	#endif //is_tca9548a
@@ -311,8 +311,15 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 
 		#if is_sd == 1
 			case SDCARD : 
-				LOOM_DEBUG_Println("saving bundle");
+				LOOM_DEBUG_Println("Saving bundle");
 				sd_save_bundle(file, send_bndl);
+				break;
+		#endif
+
+		#if is_pushingbox == 1
+			case PUSHINGBOX : 
+				LOOM_DEBUG_Println("Sending bundle data to PushingBox");
+				sendToPushingBox(send_bndl);
 				break;
 		#endif
 		
@@ -350,6 +357,8 @@ void additional_loop_checks()
 		loop_sleep();
 	#endif
 }
+
+
 
 
 
