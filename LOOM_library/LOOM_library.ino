@@ -41,8 +41,8 @@ void loop()
 	// Populate bundle to send with sensor values
 //	package_data(&send_bndl);
 
-	// Send the bundle, takes bundle to be filled and platform to send it over [WIFI, LORA, NRF, SDCARD]
-	send_bundle(&send_bndl, WIFI);
+	// Send the bundle, takes bundle to be filled and platform to send it over [WIFI, LORA, NRF, SDCARD, PUSHINGBOX]
+	send_bundle(&send_bndl, PUSHINGBOX);
 //
 //	if (get_bundle_bytes(&bndl)){
 //		send_bundle(&bndl, SDCARD, "test2.txt");
@@ -54,6 +54,8 @@ void loop()
 	additional_loop_checks();
 	
 } // End loop section
+
+
 
 
 

@@ -24,8 +24,9 @@ String data[NUM_FIELDS];
 // ================================================================
 void setup_pushingbox();
 bool setup_ethernet();
-void sendToPushingBox(int num_fields, char *server_name, char *devid);
-
+// void sendToPushingBox(int num_fields, char *server_name, char *devid);
+void sendToPushingBox(OSCMessage $msg);
+void sendToPushingBox(OSCBundle *bndl);
 
 // ================================================================
 // ===                          SETUP                           ===
@@ -58,6 +59,10 @@ void setup_pushingbox()
 // Sends a get request to PushingBox
 // Expects arguments of OSC message to be formated as:
 // key, value, key, value...
+// As the message router forwards messages not bundles, this is called by msg_router
+// If you need to send a bundle, simply call the function (which is overloaded)
+// with a correctly formatted OSCBundle
+//
 //
 // @param msg  The message containing the information to send to PB.
 //
@@ -94,6 +99,21 @@ void sendToPushingBox(OSCMessage &msg)
 	}
 }
 
+
+// --- SEND TO PUSHINGBOX ---
+// 
+// Sends a get request to PushingBox
+// Expects OSC bundle to only have 1 message and its arguments to be formated as:
+// key, value, key, value...
+// Simple a wrapper for the version of this function that takes a message
+// As the message router forwards messages not bundles
+//
+// @param msg  The message containing the information to send to PB.
+//
+void sendToPushingBox(OSCBundle *bndl) 
+{
+	sendToPushingBox(*(bndl->getOSCMessage(0)));
+}
 
 
 
