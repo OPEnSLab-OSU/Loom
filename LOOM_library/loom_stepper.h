@@ -79,9 +79,8 @@ void setup_stepper()
 //
 void set_stepper_steps(int motor_choice, int stepper_direction, int steps, int stepper_speed)
 {
-	#if LOOM_DEBUG == 1
-		Serial.println("setting stepper...");
-	#endif
+	LOOM_DEBUG_Println("setting stepper...");
+
 	//int set_degree = map(degree,0,360,0,200);
 	if (stepper_speed > 0){
 		state_stepper.myMotors[motor_choice]->setSpeed(stepper_speed);
@@ -105,18 +104,18 @@ void handle_stepper_msg(OSCMessage &msg)
 	int degree = msg.getInt(2);
 	int stepper_speed = msg.getInt(3);
 
-	#if LOOM_DEBUG == 1
-		Serial.print("received message to move the motor ");
-		Serial.print(degree);
-		Serial.println(" degrees");
-	#endif
+	LOOM_DEBUG_Print("received message to move the motor ");
+	LOOM_DEBUG_Println2(degree, " degrees");
 
 	set_stepper_steps(motor,stepper_direction,degree,stepper_speed);
 	
-	#if LOOM_DEBUG == 1
-		Serial.println("processed stepper request");
-	#endif
+	LOOM_DEBUG_Println("processed stepper request");
 }
+
+
+
+
+
 
 
 

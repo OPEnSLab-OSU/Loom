@@ -104,9 +104,7 @@ void dmpDataReady() {
 //
 bool setup_mpu6050()
 {
-	#if LOOM_DEBUG == 1
-		Serial.println("starting mpu6050 initialization");
-	#endif
+	LOOM_DEBUG_Println("starting mpu6050 initialization");
  
 	// Join I2C bus (I2Cdev library doesn't do this automatically)
 	#if I2CDEV_IMPLEMENTATION   == I2CDEV_ARDUINO_WIRE
@@ -118,9 +116,7 @@ bool setup_mpu6050()
 	
 	pinMode(INTERRUPT_PIN, INPUT);
 	
-	#if LOOM_DEBUG == 1
-		Serial.println("Using i2c");
-	#endif
+	LOOM_DEBUG_Println("Using i2c");
 	
 	// Init MPU 6050 and serial stuff
 	accelgyro.initialize();
@@ -136,33 +132,27 @@ bool setup_mpu6050()
 	// Make sure it worked (returns 0 if so)
 	if (devStatus == 0) {
 		// Turn on the DMP, now that it's ready
-		#if LOOM_DEBUG == 1
-			Serial.println(F("Enabling DMP..."));
-		#endif
+		LOOM_DEBUG_Println(F("Enabling DMP..."));
 		
 		mpu.setDMPEnabled(true);
 
 		// Uncomment following 2 lines if using enable Arduino Uno, MO, or Trinket interrupt detection
-		#if LOOM_DEBUG == 1
-			Serial.println(F("Enabling MPU interrupt detection (Arduino external interrupt 0)..."));
-		#endif
+		LOOM_DEBUG_Println(F("Enabling MPU interrupt detection (Arduino external interrupt 0)..."));
 		
 		attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), dmpDataReady, RISING);
 
 		// Uncomment following 2 lines if using Adafruit Feather 32u4
 		// enable interrupt for PCINT7...
-		#if LOOM_DEBUG == 1
+		// #if LOOM_DEBUG == 1
 			//Serial.println(F("Enabling MPU interrupt detection PCINT 7 (pin 11)"));
-		#endif
+		// #endif
 		
 		//pciSetup(INTERRUPT_PIN);
 			
 		mpuIntStatus = mpu.getIntStatus();
 
 		// Set our DMP Ready flag so the main loop() function knows it's okay to use it
-		#if LOOM_DEBUG == 1
-			Serial.println(F("DMP ready! Waiting for first interrupt..."));
-		#endif
+		LOOM_DEBUG_Println(F("DMP ready! Waiting for first interrupt..."));
 		dmpReady = true;
 
 		// get expected DMP packet size for later comparison
@@ -174,12 +164,8 @@ bool setup_mpu6050()
 		// 1 = initial memory load failed
 		// 2 = DMP configuration updates failed
 		// (if it's going to break, usually the code will be 1)
-		
-		#if LOOM_DEBUG == 1
-			Serial.print(F("DMP Initialization failed (code "));
-			Serial.print(devStatus);
-			Serial.println(F(")"));
-		#endif
+		LOOM_DEBUG_Print(F("DMP Initialization failed (code "));
+		LOOM_DEBUG_Println2(devStatus, F(")"));
 	} // of else
 
 	return dmpReady;
@@ -225,9 +211,7 @@ void measure_mpu6050(void)
 	if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
 		mpu.resetFIFO();      // Reset so we can continue cleanly
 		
-		#if LOOM_DEBUG == 1
-			Serial.println(F("FIFO overflow!"));    // NOTE: If you get this message, MPU6050 library, file "MPU6050_6Axis_MotionApps20.h" modify last byte of line 305 0x07 to 0x09
-		#endif
+		LOOM_DEBUG_Println(F("FIFO overflow!"));    // NOTE: If you get this message, MPU6050 library, file "MPU6050_6Axis_MotionApps20.h" modify last byte of line 305 0x07 to 0x09
 		
 		// Otherwise, check for DMP data ready interrupt (this should happen frequently)
 	} else if (mpuIntStatus & 0x02) {
@@ -324,9 +308,7 @@ void calibration() {
 
 		meansensors();
 		
-		#if LOOM_DEBUG == 1
-			Serial.println("...");
-		#endif
+		LOOM_DEBUG_Println("...");
 
 		if (abs(mean_ax) <= acel_deadzone) ready++;
 		else config_mpu6050->ax_offset = config_mpu6050->ax_offset - mean_ax / acel_deadzone;
@@ -380,8 +362,7 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	char addressString[255];    // Declare address string buffer
 	if (port != NULL) {
 		sprintf(addressString, "%s%s%d%s", packet_header_string, "/port", port, "/mpu6050/data");
-	}
-	else {
+	} else {
 		sprintf(addressString, "%s%s", packet_header_string, "/mpu6050/data");
 	}
 
@@ -446,9 +427,7 @@ void calMPU6050()
 	}
 
 	if (state == 1) {
-		#if LOOM_DEBUG == 1
-			Serial.println("\nCalculating offsets...");
-		#endif
+		LOOM_DEBUG_Println("\nCalculating offsets...");
 		calibration();
 		//configuration.checksum = memValidationValue;
 		state++;
@@ -493,16 +472,17 @@ void calMPU6050()
 //
 void calMPU6050_OSC(OSCMessage &msg) 
 {
-	#if LOOM_DEBUG == 1
-		Serial.println("Command received to calibrate MPU6050");
-	#endif
+	LOOM_DEBUG_Println("Command received to calibrate MPU6050");
 	
 	calMPU6050();
 	
-	#if LOOM_DEBUG == 1
-		Serial.println("New calibration values written to non-volatile memory");
-	#endif
+	LOOM_DEBUG_Println("New calibration values written to non-volatile memory");
 }
+
+
+
+
+
 
 
 

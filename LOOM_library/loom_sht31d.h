@@ -51,14 +51,10 @@ bool setup_sht31d() {
 
 	if (state_sht31d.inst_sht31d.begin(i2c_addr_sht31d)) {
 		is_setup = true;
-		#if LOOM_DEBUG == 1
-			Serial.println("Initialized sht31d (temp/humid)");
-		#endif
+		LOOM_DEBUG_Println("Initialized sht31d (temp/humid)");
 	} else {
 		is_setup = false;
-		#if LOOM_DEBUG == 1
-			Serial.println("Failed to initialize sht31d (temp/humid");
-		#endif
+		LOOM_DEBUG_Println("Failed to initialize sht31d (temp/humid");
 	}
 	
 	return is_setup;
@@ -104,18 +100,17 @@ void measure_sht31d()
 	if ((!isnan(t)) && (!isnan(h))) {
 		state_sht31d.temp = t;
 		state_sht31d.humid = h;
-		#if LOOM_DEBUG == 1
-			Serial.print("Temp: ");
-			Serial.println(state_sht31d.temp);
-			Serial.print("Humidity: ");
-			Serial.println(state_sht31d.humid);
-		#endif
+		LOOM_DEBUG_Println2("Temp: ",     state_sht31d.temp);
+		LOOM_DEBUG_Println2("Humidity: ", state_sht31d.humid);
 	} else {
-		#if LOOM_DEBUG == 1
-			Serial.println("Failed to read temperature or humidity");
-		#endif
+		LOOM_DEBUG_Println("Failed to read temperature or humidity");
 	}
 }
+
+
+
+
+
 
 
 

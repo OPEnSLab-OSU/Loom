@@ -159,11 +159,9 @@ bool sd_save_bundle(char *file, OSCBundle *bndl)
 	char osc_str[255];
 	memset(osc_str, '\0', sizeof(osc_str));
 	translate_OSC_to_string(bndl, osc_str);
-	#if LOOM_DEBUG == 1
-		Serial.println(osc_str);
-		Serial.print("osc_str length: ");
-		Serial.println(strlen(osc_str));
-	#endif
+
+	LOOM_DEBUG_Println(osc_str);
+	LOOM_DEBUG_Println2("osc_str length: ", osc_str);
 
 	write_to_file(file, osc_str);
 }
@@ -177,18 +175,18 @@ bool sd_save_bundle(char *file, OSCBundle *bndl)
 //
 // @param msg  OSC messages that had header ending in '/enableSDlogging'
 //
-void enable_SD_logging(OSCMessage &msg)
+void set_SD_logging(OSCMessage &msg)
 {
 	int setting = msg.getInt(0);
 
 	switch (setting) {
 		case 0:
 			SD_logging = 0;
-			Loom_Debug_Println("Disabled SD logging");
+			LOOM_DEBUG_Println("Disabled SD logging");
 			break;
 		case 1:
 			SD_logging = 1;
-			Loom_Debug_Println("Enabled SD logging of received bundles");
+			LOOM_DEBUG_Println("Enabled SD logging of received bundles");
 			break;
 		#if LOOM_DEBUG == 1
 		default:
@@ -196,4 +194,9 @@ void enable_SD_logging(OSCMessage &msg)
 		#endif
 	}
 }
+
+
+
+
+
 

@@ -40,13 +40,9 @@ void sendToPushingBox(int num_fields, char *server_name, char *devid);
 //
 void setup_pushingbox() 
 {
-	#if LOOM_DEBUG == 1
-		Serial.println("Setting up ethernet");
-	#endif
+	LOOM_DEBUG_Println("Setting up ethernet");
 	if(!setup_ethernet()) {
-		#if LOOM_DEBUG == 1
-			Serial.println("Failed to setup ethernet");
-		#endif
+		LOOM_DEBUG_Println("Failed to setup ethernet");
 	}
 }
 
@@ -60,14 +56,15 @@ void setup_pushingbox()
 // --- SEND TO PUSHINGBOX ---
 // 
 // Sends a get request to PushingBox
+// Expects arguments of OSC message to be formated as:
+// key, value, key, value...
 //
 // @param msg  The message containing the information to send to PB.
 //
 void sendToPushingBox(OSCMessage &msg) 
 {
-	#if LOOM_DEBUG == 1
-		Serial.println("Sending to pushing box");
-	#endif
+	LOOM_DEBUG_Println("Sending to pushing box");
+
 	client.stop();
 	if (client.connect(server_name, 80)) {  
 		client.print("GET /pushingbox?devid="); client.print(device_id); 
@@ -85,13 +82,10 @@ void sendToPushingBox(OSCMessage &msg)
 	 
 	} 
 	else {
-		#if LOOM_DEBUG == 1
-			Serial.println("Failed to connect to PB, attempting to re-setup ethernet.");
-		#endif
+		LOOM_DEBUG_Println("Failed to connect to PB, attempting to re-setup ethernet.");
+
 		if(setup_ethernet()) {
-			#if LOOM_DEBUG == 1
-				Serial.println("Successfully re-setup ethernet.");
-			#endif
+			LOOM_DEBUG_Println("Successfully re-setup ethernet.");
 		}
 		#if LOOM_DEBUG == 1 
 			else {
@@ -100,6 +94,11 @@ void sendToPushingBox(OSCMessage &msg)
 		#endif
 	}
 }
+
+
+
+
+
 
 
 

@@ -67,7 +67,7 @@ void Loom_begin()
 		setup_tca9548a();
 	#endif
 	#if is_decagon == 1
-		deca_gs3_setup(); //rename this
+		setup_decagon(); 
 	#endif
 	#if is_mpu6050 > 0 && is_ishield == 1
 		setup_mpu6050();
@@ -90,7 +90,7 @@ void Loom_begin()
 
 	// Read configuration from flash, or write config.h settings 
 	// if no settings are currently saved
-	flash_config_setup();
+	setup_flash_config();
 
 	// Communication Platform specific setups
 	#if is_wifi == 1
@@ -121,33 +121,6 @@ void Loom_begin()
 
 
 
-// --- SET INSTANCE NUMBER ---
-//
-// Updates device's identifying instance number.
-// Device will not request new channel settings on startup if config is saved
-// Device announces presence so running Channel Manager can track it
-//
-// @param msg  Received OSC message with new instance number
-//
-void set_instance_num(OSCMessage &msg) 
-{
-	configuration.instance_number = msg.getInt(0);
-	sprintf(configuration.packet_header_string, "%s%d\0", PacketHeaderString, configuration.instance_number);
-	
-	#if LOOM_DEBUG == 1
-		Serial.print("new address header: ");
-		Serial.println(configuration.packet_header_string);
-	#endif
-
-	#if is_wifi == 1
-		configuration.config_wifi.request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
-														// Note that configuration needs to be saved for this to take effect
-		respond_to_poll_request(configuration.packet_header_string);
-	#endif
-}
-
-
-
 // --- MESSAGE ROUTER ---
 //
 // Used to route OSC messages to the correct function to handle it
@@ -165,39 +138,30 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		Serial.println(buffer);
 	#endif
 
-//	#if is_sd == 1
-//		if (SD_logging) {
-//			sd_log_msg(&msg, "test_log");
-//		}
-//	#endif
-
-
 	#if is_tca9548a
 		if (msg.fullMatch("/GetSensors", addrOffset)) {
 			msg.add(configuration.packet_header_string);
-			#if LOOM_DEBUG == 1
-				Serial.println("Got a request for sensor list");
-			#endif
+			LOOM_DEBUG_Println("Got a request for sensor list");
 		}
-		msg.dispatch("/GetSensors",   send_sensor_list, addrOffset);
+		msg.dispatch("/GetSensors",   		send_sensor_list, 		addrOffset);
 	#endif
 	#if num_servos > 0  
-		msg.dispatch("/Servo/Set",    handle_servo_msg, addrOffset);
+		msg.dispatch("/Servo/Set",    		handle_servo_msg, 		addrOffset);
 	#endif
 	#if num_steppers > 0
-		msg.dispatch("/Stepper/Set",  handle_stepper_msg, addrOffset);
+		msg.dispatch("/Stepper/Set",  		handle_stepper_msg, 	addrOffset);
 	#endif
 	#if is_relay == 1
-		msg.dispatch("/Relay/State",  handle_relay_msg, addrOffset);
+		msg.dispatch("/Relay/State",  		handle_relay_msg, 		addrOffset);
 	#endif
 	#if is_mpu6050 == 1 && is_ishield == 1
-		msg.dispatch("/MPU6050/cal",  calMPU6050_OSC, addrOffset);
+		msg.dispatch("/MPU6050/cal",  		calMPU6050_OSC, 		addrOffset);
 	#endif
 	#if is_neopixel == 1
-		msg.dispatch("/Neopixel",     set_color, addrOffset);
+		msg.dispatch("/Neopixel",     		set_color, 				addrOffset);
 	#endif
 	#if is_lora == 1 && lora_device_type == 0
-		msg.dispatch("/SendToPB", sendToPushingBox, addrOffset);
+		msg.dispatch("/SendToPB", 			sendToPushingBox, 		addrOffset);
 	#endif
 	
 	#if is_wifi == 1
@@ -211,11 +175,35 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	#endif
 
 	#if is_sd == 1
-		msg.dispatch("/enableSDlogging", enable_SD_logging, 		addrOffset);
+		msg.dispatch("/setSDlogging",	 	set_SD_logging, 		addrOffset);
 	#endif
 	
-	msg.dispatch("/SetID", set_instance_num, addrOffset);
-	msg.dispatch("/SaveConfig", save_config, addrOffset);
+	msg.dispatch("/SetID", 					set_instance_num, 		addrOffset);
+	msg.dispatch("/SaveConfig", 			save_config, 			addrOffset);
+}
+
+
+
+// --- SET INSTANCE NUMBER ---
+//
+// Updates device's identifying instance number.
+// Device will not request new channel settings on startup if config is saved
+// Device announces presence so running Channel Manager can track it
+//
+// @param msg  Received OSC message with new instance number
+//
+void set_instance_num(OSCMessage &msg) 
+{
+	configuration.instance_number = msg.getInt(0);
+	sprintf(configuration.packet_header_string, "%s%d\0", PacketHeaderString, configuration.instance_number);
+	
+	LOOM_DEBUG_Println2("New address header: ", configuration.packet_header_string);
+
+	#if is_wifi == 1
+		configuration.config_wifi.request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
+														// Note that configuration needs to be saved for this to take effect
+		respond_to_poll_request(configuration.packet_header_string);
+	#endif
 }
 
 
@@ -238,9 +226,7 @@ void check_button_held()
 			button_timer++;
 		#endif
 		if (button_timer >= 5000) { // ~about 8 seconds
-			#if LOOM_DEBUG == 1
-				Serial.println("Button held for 8 seconds, resetting to AP mode");
-			#endif
+			LOOM_DEBUG_Println("Button held for 8 seconds, resetting to AP mode");
 			button_timer = 0;
 	 
 			OSCMessage temp;          // Dummy message not used by function, but it expects an OSCMessage normally
@@ -278,16 +264,12 @@ void loop_sleep()
 //
 void save_config(OSCMessage &msg) 
 {
-	#if LOOM_DEBUG == 1
-		Serial.println("Saving Configuration Settings");
-		Serial.println("...");
-	#endif
+	LOOM_DEBUG_Println("Saving Configuration Settings");
+	LOOM_DEBUG_Println("...");
 
 	write_non_volatile();
 
-	#if LOOM_DEBUG == 1
-		Serial.println("Done");
-	#endif
+	LOOM_DEBUG_Println("Done");
 }
 
 // Flash the build in LED 
@@ -350,9 +332,7 @@ void receive_bundle(OSCBundle *bndl, Platform platform)
 
 		#if is_nrf == 1
 			case NRF : 
-				#if LOOM_DEBUG == 1
-					Serial.println("Not yet implemented");
-				#endif
+				LOOM_DEBUG_Println("Not yet implemented");
 				break;
 		#endif
 
@@ -387,19 +367,13 @@ void process_bundle(OSCBundle *bndl)
 			char addressString[255];
 			bndl->getOSCMessage(0)->getAddress(addressString, 0);
 	
-			#if LOOM_DEBUG == 1
-				Serial.print("Number of items in bundle: ");
-				Serial.println(bndl->size());
-				Serial.print("First message address string: ");
-				Serial.println(addressString);
-			#endif
+			LOOM_DEBUG_Println2("Number of items in bundle: ", bndl->size());
+			LOOM_DEBUG_Println2("First message address string: ", addressString);
 
 			// If SD logging is enabled and message was to this device, save bundle
 			#if is_sd == 1 
-				if ((SD_logging == 1) && (strncmp(addressString, packet_header_string, strlen(packet_header_string)) == 0)) {
-					#if LOOM_DEBUG == 1
-						Serial.println("Logging bundle");
-					#endif
+				if ((SD_logging == 1) && (strncmp(addressString, configuration.packet_header_string, strlen(configuration.packet_header_string)) == 0)) {
+					LOOM_DEBUG_Println("Logging bundle");
 //					char fileName[50];
 //					memset(fileName, '\0', sizeof(fileName));
 //				 	sprintf(fileName, "%s%s", "data", "_log.txt");
@@ -420,9 +394,7 @@ void process_bundle(OSCBundle *bndl)
 				// Channel manager polls without device name so check is performed here
 				// rather than in msg_router()
 				if (strcmp(addressString, "/LOOM/ChannelPoll") == 0) {
-					#if LOOM_DEBUG == 1
-						Serial.println("Received channel poll request");
-					#endif
+					LOOM_DEBUG_Println("Received channel poll request");
 					respond_to_poll_request(configuration.packet_header_string);
 					return;
 				}
@@ -451,10 +423,7 @@ void process_bundle(OSCBundle *bndl)
 	
 		} else { // of !bndl.hasError()
 			error = bndl->getError();
-			#if LOOM_DEBUG == 1
-				Serial.print("error: ");
-				Serial.println(error);
-			#endif
+			LOOM_DEBUG_Println2("Error: ", error);
 		} // of else
 	} // of if (bndl->size())
 
@@ -472,9 +441,6 @@ void process_bundle(OSCBundle *bndl)
 //
 void measure_sensors()
 {
-//	for (int i = 0 i < 
-
-	
 	// Get battery voltage
 	vbat = analogRead(VBATPIN);
 	vbat = (vbat * 2 * 3.3) / 1024; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
@@ -489,9 +455,7 @@ void measure_sensors()
 		measure_tca9548a();
 		if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
 			update_sensors();
-			#if LOOM_DEBUG == 1
-				Serial.println("Update MUXShield Sensorlist");
-			#endif
+			LOOM_DEBUG_Println("Update MUXShield Sensorlist");
 			state_tca9548a.last_update_time = millis();
 		}
 	#endif //is_tca9548a
@@ -596,11 +560,8 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 					lora_send_bundle(send_bndl);
 					
 				} else { // Separate bundle into smaller pieces
-					#if LOOM_DEBUG == 1
-						Serial.print("Bundle of size ");
-						Serial.println(get_bundle_bytes(send_bndl));
-						Serial.print(" Being split into smaller bundles");
-					#endif
+					LOOM_DEBUG_Println2("Bundle of size ", get_bundle_bytes(send_bndl));
+					LOOM_DEBUG_Println(" Being split into smaller bundles");
 					
 					OSCBundle tmp_bndl;
 					OSCMessage *tmp_msg;
@@ -618,15 +579,13 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 
 		#if is_nrf == 1
 			case NRF : 
-				#if LOOM_DEBUG == 1
-					Serial.println("Not yet implemented");
-				#endif
+				LOOM_DEBUG_Println("Not yet implemented");
 				break;
 		#endif
 
 		#if is_sd == 1
 			case SDCARD : 
-				Serial.println("saving bundle");
+				LOOM_DEBUG_Println("saving bundle");
 				sd_save_bundle(file, send_bndl);
 				break;
 		#endif
@@ -665,6 +624,11 @@ void additional_loop_checks()
 		loop_sleep();
 	#endif
 }
+
+
+
+
+
 
 
 

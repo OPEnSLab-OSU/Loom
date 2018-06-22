@@ -118,15 +118,18 @@ void handle_servo_msg(OSCMessage &msg)
 	int servo_num  = msg.getInt(0);
 	int set_degree = msg.getInt(1);
 	
-	#if LOOM_DEBUG == 1
-		Serial.print("received message for servo ");
-		Serial.print(servo_num);
-		Serial.print(" with degree ");
-		Serial.println(set_degree);
-	#endif
+	LOOM_DEBUG_Print("received message for servo ");
+	LOOM_DEBUG_Print(servo_num);
+	LOOM_DEBUG_Print(" with degree ");
+	LOOM_DEBUG_Println(set_degree);
 	
 	set_servo_degree(set_degree, servo_num);
 }
+
+
+
+
+
 
 
 

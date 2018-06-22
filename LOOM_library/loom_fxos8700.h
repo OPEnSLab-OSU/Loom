@@ -55,15 +55,10 @@ bool setup_fxos8700()
 	state_fxos8700.inst_fxos8700 = Adafruit_FXOS8700(0x8700A, 0x8700B);
 	if(state_fxos8700.inst_fxos8700.begin(ACCEL_RANGE_4G)) {
 		is_setup = true;
-		#if LOOM_DEBUG == 1
-			Serial.println("Initialzed fxos8700 (accel/mag)");
-		#endif
-	}
-	else {
+		LOOM_DEBUG_Println("Initialzed fxos8700 (accel/mag)");
+	} else {
 		is_setup = false;
-		#if LOOM_DEBUG == 1
-		 Serial.println("Failed to initialize fxos8700 (accel/mag)");
-		#endif
+		LOOM_DEBUG_Println("Failed to initialize fxos8700 (accel/mag)");
 	}
 	
 	return is_setup;
@@ -177,6 +172,11 @@ void details_fxos8700()
 	delay(500);
 }
 #endif //if LOOM_DEBUG == 1
+
+
+
+
+
 
 
 

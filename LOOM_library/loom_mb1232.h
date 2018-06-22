@@ -65,15 +65,11 @@ bool setup_mb1232() {
 	Wire.requestFrom(i2c_addr_mb1232, byte(2));
 	if(Wire.available() >= 2) {
 		is_setup = true;
-		#if LOOM_DEBUG == 1
-			Serial.println("Initialized mb1232");
-		#endif
+		LOOM_DEBUG_Println("Initialized mb1232");
 	}
 	else {
 		is_setup = false;
-		#if LOOM_DEBUG == 1
-			Serial.println("Failed to initialize mb1232");
-		#endif
+		LOOM_DEBUG_Println("Failed to initialize mb1232");
 	}
 	
 	return is_setup;
@@ -100,7 +96,7 @@ void package_mb1232(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	
 	OSCMessage msg = OSCMessage(address_string);
 	msg.add("range").add((int32_t)state_mb1232.range);
-	
+
 	bndl->add(msg);
 }
 
@@ -119,7 +115,7 @@ void measure_mb1232()
 	delay(100);
 	
 	Wire.requestFrom(i2c_addr_mb1232, byte(2));
-	if (Wire.available() >= 2){
+	if (Wire.available() >= 2) {
 		// The sensor communicates two bytes, each a range. The
 		// high byte is typically zero, in which case the low
 		// byte is equal to the range, so only the range is transmitted.
@@ -136,13 +132,15 @@ void measure_mb1232()
 			Serial.print("Range: ");
 			Serial.println(state_mb1232.range);
 		#endif
-	}
-	else {
-		#if LOOM_DEBUG == 1
-			Serial.println("Error reading from mb1232 (range)");
-		#endif
+	} else {
+		LOOM_DEBUG_Println("Error reading from mb1232 (range)");
 	}       
 }
+
+
+
+
+
 
 
 
