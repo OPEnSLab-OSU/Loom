@@ -74,7 +74,7 @@ void nrf_receive_bundle(OSCBundle *bndl)
 // --- NRF SEND BUNDLE ---
 //
 // Takes an OSC bundle to send over nRF
-// after conversion to the proper format
+// after conversion to the proper format (string)
 //
 // @param bndl  The OSC bundle to send (will be converted to string)
 //
@@ -88,12 +88,10 @@ bool nrf_send_bundle(OSCBundle *bndl)
 	RF24NetworkHeader header(NRF_HUB_ADDRESS);
 	bool is_sent = network.write(header,message,strlen(message));
 	#if LOOM_DEBUG == 1
-		if(is_sent) {
+		if (is_sent) 
 			Serial.println("NRF Bundle Send Suceeded!");
-		}
-		else {
+		else 		
 			Serial.println("NRF Bundle Send Failed!");
-		}
 	#endif
 	return is_sent;
 }

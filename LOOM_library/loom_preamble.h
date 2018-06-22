@@ -48,6 +48,8 @@ enum Platform {
 	#define is_32u4
 	#define MEM_TYPE MEM_EEPROM
 #endif
+//#if is_nrf == 
+
 #if is_relay == 0
 	#define button 10               // Using on-board button, specify attached pin, transmitting
 #endif

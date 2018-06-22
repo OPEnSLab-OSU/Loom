@@ -58,7 +58,7 @@ void receive_bundle(OSCBundle *bndl, Platform platform)
 
 		#if is_nrf == 1
 			case NRF : 
-				LOOM_DEBUG_Println("Not yet implemented");
+				nrf_receive_bundle(bndl);
 				break;
 		#endif
 
@@ -113,9 +113,6 @@ void process_bundle(OSCBundle *bndl)
 				}
 			#endif
 
-// void replace_char(char *str, char orig, char rep) 
-
-
 			#if is_wifi == 1
 				// Channel manager polls without device name so check is performed here
 				// rather than in msg_router()
@@ -124,10 +121,8 @@ void process_bundle(OSCBundle *bndl)
 					respond_to_poll_request(configuration.packet_header_string);
 					return;
 				}
-			#endif
-	
-			#if is_wifi == 1
-				//Clear the new_ssid and new_pass buffers
+
+				//Clear the new_ssid and new_pass buffers in case new wifi settings were received
 				for (int i = 0; i < 32; i++) {  
 					state_wifi.new_ssid[i] = '\0';
 					state_wifi.new_pass[i] = '\0';
@@ -305,7 +300,7 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 
 		#if is_nrf == 1
 			case NRF : 
-				LOOM_DEBUG_Println("Not yet implemented");
+				nrf_send_bundle(send_bndl);
 				break;
 		#endif
 
