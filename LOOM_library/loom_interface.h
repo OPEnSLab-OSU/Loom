@@ -351,7 +351,14 @@ void additional_loop_checks()
 	#ifdef is_sleep_period
 		loop_sleep();
 	#endif
+
+
+	#ifdef is_adafruitio
+		adafruitio_subscribe();
+		adafruitio_publish();
+	#endif
 }
+
 
 
 

@@ -59,7 +59,9 @@ WiFiUDP      UdpCommon;
 WiFiServer   server(80);
 int status = WL_IDLE_STATUS;
 
-
+#if is_adafruitio == 1
+	WiFiClient wifiClient;
+#endif
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
@@ -648,6 +650,7 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port)
 	} // of (packetSize > 0)
 }
 #endif // of if is_wifi == 1
+
 
 
 

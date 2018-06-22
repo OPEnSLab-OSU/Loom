@@ -33,11 +33,13 @@
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform(s) --- 
-#define is_wifi      0		// 1 to enable WiFi
+#define is_wifi      1		// 1 to enable WiFi
 #define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
-#define is_nrf       1		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
+#define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
+
 #define is_sd        0		// 1 to enable SD card 
 #define is_pushingbox 0     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
+#define is_adafruitio 1		// 1 to enable Adafruit IO (currently requires WiFi)
 
 // --- Enabled Actuators --- 
 #define num_servos   0		// Number of servos being used
@@ -166,8 +168,7 @@
 	#endif  
 #endif
 
-
-// --- LoRa Device Type ---
+// --- LoRa Options ---
 #if is_lora == 1
 	#define lora_device_type     0 		// 0: Hub, 1: Node, 2 = Repeater
 	#define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
@@ -183,10 +184,10 @@
 	#endif								// 10-19 for 0, 20 - 29 for 1, etc.
 #endif
 
+// --- nRF Options --- 
 #if is_nrf == 1
 	#define nrf_device_type     0 		// 0: Hub, 1: Node, 2 = Repeater
 	#define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
-
 	
 	#define NRF_HUB_ADDRESS 1			// Use 0-9 for SERVER_ADDRESSes
 	
@@ -195,6 +196,7 @@
 	#endif
 #endif
 
+// --- PushingBox Options ---
 #if is_pushingbox == 1			
 	#define NUM_FIELDS 32			// Maximum number of fields accepted by the PushingBox Scenario    
 	#include <Ethernet2.h>			// (this is needed for IPAddress, do not remove)
@@ -208,16 +210,22 @@
 	IPAddress ip(128,193,56,138); 
 #endif
 
+// --- Adafruit IO Options
+#if is_adafruitio == 1
+	#define AIO_USERNAME    "Goertzel"
+	#define AIO_KEY         ""
+#endif
+
 
 
 // --- Delay between loops
 #if is_lora == 0 						// Cannot not use with LoRa
-//	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
+	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
 										// Change the value according to the length of your desired transmission interval
 										// 80 seems to be a good amount, around 50 and lower may result in lost packets over WiFi
 #endif
-
 // #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
+
 
 
 
