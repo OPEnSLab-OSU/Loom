@@ -35,9 +35,9 @@
 // --- Enabled Communication Platform(s) --- 
 #define is_wifi      0		// 1 to enable WiFi
 #define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
-#define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
+#define is_nrf       1		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_sd        0		// 1 to enable SD card 
-#define is_pushingbox 1     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
+#define is_pushingbox 0     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 
 // --- Enabled Actuators --- 
 #define num_servos   0		// Number of servos being used
@@ -133,7 +133,7 @@
 	#endif
 #else
 	// --- Custom Device Identification --- 
-	#define DEVICE "Ishield" // The device name, used only if not using automatic device name
+	#define DEVICE "Generic" // The device name (can be changed), used only if not using automatic device name
 #endif
 
 
@@ -212,7 +212,7 @@
 
 // --- Delay between loops
 #if is_lora == 0 						// Cannot not use with LoRa
-	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
+//	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
 										// Change the value according to the length of your desired transmission interval
 										// 80 seems to be a good amount, around 50 and lower may result in lost packets over WiFi
 #endif
