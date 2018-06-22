@@ -55,8 +55,7 @@ bool setup_zxgesturesensor()
 	if (state_zxgesturesensor.inst_zxgesturesensor.init()) {
 		is_setup = true;
 		LOOM_DEBUG_Println("Initialized zxgesturesensor");
-	}
-	else {
+	} else {
 		is_setup = false;
 		LOOM_DEBUG_Println("Failed to initialize zxgesturesensor");
 	}
@@ -65,8 +64,7 @@ bool setup_zxgesturesensor()
 	if (ver != ZX_MODEL_VER) {
 		is_setup = false;
 		LOOM_DEBUG_Println("Incorrect Model Version or unable to read Model Version.");
-	}
-	else {
+	} else {
 		LOOM_DEBUG_Println2("Model Version: ", ver);
 	}
 	
@@ -75,8 +73,7 @@ bool setup_zxgesturesensor()
 	if (ver != ZX_REG_MAP_VER) {
 		is_setup = false;
 		LOOM_DEBUG_Println("Incorrect Register Map Version or unable to read Register Map Version.");
-	}
-	else {
+	} else {
 		LOOM_DEBUG_Println2("Register Map Version: ", ver);
 	}
 	
