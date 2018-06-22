@@ -30,6 +30,7 @@
 // --- Debugging --- 
 #define LOOM_DEBUG   1		// Set to 1 if you want Serial statements from various functions to print
 							// NOTE: serial monitor must be opened for device to setup
+							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform(s) --- 
 #define is_wifi      1		// 1 to enable WiFi
@@ -132,7 +133,7 @@
 	#endif
 #else
 	// --- Custom Device Identification --- 
-	#define DEVICE "Generic" // The device name, used only if not using automatic device name
+	#define DEVICE "Ishield" // The device name, used only if not using automatic device name
 #endif
 
 
@@ -217,6 +218,8 @@
 #endif
 
 // #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
+
+
 
 
 

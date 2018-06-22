@@ -51,7 +51,7 @@ void setup_decagon()
 	delay(2000);
 	//first command to take a measurement
 	myCommand = String(SENSOR_ADDRESS) + "I!";
-	Serial.println(myCommand);     // echo command to terminal
+	LOOM_DEBUG_Println(myCommand);     // echo command to terminal
 
 	mySDI12.sendCommand(myCommand);
 	delay(30);                     // wait a while for a response
@@ -63,7 +63,7 @@ void setup_decagon()
 			delay(5);
 		}
 	}
-	Serial.println(sdiResponse); //write the response to the screen
+	LOOM_DEBUG_Println(sdiResponse); //write the response to the screen
 	mySDI12.clearBuffer();
 
 	delay(1000);                 // delay between taking reading and requesting data
@@ -157,6 +157,8 @@ void package_decagon(OSCBundle * bndl, char packet_header_string[])
 	sprintf(addressString, "%s%s", packet_header_string, "/ElecCond");
 	bndl->add(addressString).add(elec_c);
 }
+
+
 
 
 

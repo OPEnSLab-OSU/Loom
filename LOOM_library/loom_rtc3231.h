@@ -117,7 +117,7 @@ void setAlarmFunction() {
 	// Calculate new time
 	MIN = (now.minute() + WakePeriodMin) % 60; // wrap-around using modulo every 60 sec
 	HR  = (now.hour() + ((now.minute() + WakePeriodMin) / 60)) % 24; // quotient of now.min+periodMin added to now.hr, wraparound every 24hrs
-	#if DEBUG == 1
+	#if LOOM_DEBUG == 1
 		Serial.print("Resetting Alarm 1 for: "); Serial.print(HR); Serial.print(":"); Serial.println(MIN);
 	#endif
 
@@ -150,6 +150,8 @@ void wake() {
 	disableInterrupt(wakeUpPin);
 	#endif //is_32U4
 }
+
+
 
 
 

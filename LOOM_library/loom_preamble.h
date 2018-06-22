@@ -15,6 +15,9 @@
 #define VBATPIN A7                // Pin to check for battery voltage
 
 
+char global_packet_header_string[80]; // Sometimes functions need to access the header string but are declared before loom_flash.h is included
+
+
 // Enumerate possible platform types
 enum Platform {
 	WIFI,
@@ -27,7 +30,6 @@ enum Platform {
 #define LOOM_DEBUG_Println(X)  (LOOM_DEBUG==0) ?: Serial.println(X)
 #define LOOM_DEBUG_Print(X)    (LOOM_DEBUG==0) ?: Serial.print(X)
 #define LOOM_DEBUG_Println2(X, Y) LOOM_DEBUG_Print(X); LOOM_DEBUG_Println(Y)
-
 
 //---------------------------------------------------------------------------
 // MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
@@ -77,6 +79,15 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 // ===                  INCLUDE DEVICE FILES                    === 
 // ================================================================
 
+#if is_wifi == 1
+	#include "loom_wifi.h"
+#endif
+#if is_lora == 1
+	#include "loom_lora.h"
+#endif
+#if is_nrf == 1
+	#include "loom_nrf.h"
+#endif
 #if is_pushingbox == 1
 	#include "loom_ethernet.h"
 	#include "loom_pushingbox.h"
@@ -95,15 +106,6 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #endif
 #if is_relay == 1
 	#include "loom_relay.h"
-#endif
-#if is_wifi == 1
-	#include "loom_wifi.h"
-#endif
-#if is_lora == 1
-	#include "loom_lora.h"
-#endif
-#if is_nrf == 1
-	#include "loom_nrf.h"
 #endif
 #if is_mpu6050 == 1
 	#include "loom_mpu6050.h"
@@ -147,6 +149,8 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #include "loom_flash.h"
 #include "loom_OSC_translator.h"
 #include "loom_common.h"  		// These may refer to functions in above headers
+
+
 
 
 

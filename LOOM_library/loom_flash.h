@@ -86,6 +86,7 @@ void setup_flash_config();
 // 
 void setup_flash_config()
 {
+	
 	// Link module configuration structures
 	#if is_wifi == 1
 		packet_header_string = configuration.packet_header_string;
@@ -106,7 +107,7 @@ void setup_flash_config()
 
 			configuration.instance_number = INIT_INST;
 			sprintf(configuration.packet_header_string,"%s%d\0",PacketHeaderString,configuration.instance_number);
-
+			
 			LOOM_DEBUG_Println2("Expecting OSC header: ", configuration.packet_header_string);
 			
 			#if is_wifi == 1
@@ -137,7 +138,13 @@ void setup_flash_config()
 			// Flash memory has limited writes and we don't want to waste it on unnecessary tests
 		} // of if (configuration.checksum != memValidationValue)
 	#endif //of MEM_TYPE
+
+//	packet_header_string = configuration.packet_header_string;
+	sprintf(global_packet_header_string,"%s",configuration.packet_header_string);
+
 }
+
+
 
 
 

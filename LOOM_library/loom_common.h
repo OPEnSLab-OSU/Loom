@@ -196,6 +196,7 @@ void set_instance_num(OSCMessage &msg)
 {
 	configuration.instance_number = msg.getInt(0);
 	sprintf(configuration.packet_header_string, "%s%d\0", PacketHeaderString, configuration.instance_number);
+	sprintf(global_packet_header_string,"%s",configuration.packet_header_string);
 	
 	LOOM_DEBUG_Println2("New address header: ", configuration.packet_header_string);
 
@@ -624,6 +625,8 @@ void additional_loop_checks()
 		loop_sleep();
 	#endif
 }
+
+
 
 
 

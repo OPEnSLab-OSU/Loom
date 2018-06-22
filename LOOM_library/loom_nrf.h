@@ -38,7 +38,7 @@ void setup_nrf()
  
 	SPI.begin();
 	radio.begin();
-	network.begin(90,NRF_HUB_ADDRESS);
+	network.begin(90, NRF_HUB_ADDRESS);
 	
 	LOOM_DEBUG_Println("Setup nrf!");
 }
@@ -66,9 +66,7 @@ void nrf_receive_bundle(OSCBundle *bndl)
 		network.read(header,&message,NRF_MESSAGE_SIZE-1);
 
 		translate_string_to_OSC(message, bndl);
-		#if LOOM_DEBUG ==1 
-			Serial.println(message);
-		#endif 
+		LOOM_DEBUG_Println(message);
 	}
 }
 
@@ -84,6 +82,7 @@ bool nrf_send_bundle(OSCBundle *bndl)
 {
 	char message[NRF_MESSAGE_SIZE];
 	memset(message, '\0', NRF_MESSAGE_SIZE);
+	
 	translate_OSC_to_string(bndl, message);
 	
 	RF24NetworkHeader header(NRF_HUB_ADDRESS);
@@ -98,6 +97,8 @@ bool nrf_send_bundle(OSCBundle *bndl)
 	#endif
 	return is_sent;
 }
+
+
 
 
 
