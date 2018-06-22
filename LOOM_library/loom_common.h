@@ -1,15 +1,3 @@
-// ================================================================
-// ===                 COMMON GLOBAL VARIABLES                  ===
-// ================================================================
-int           led = LED_BUILTIN;              // LED pin number
-volatile bool ledState = LOW;                 // State of LED
-float         vbat = 3.3;                     // Place to save measured battery voltage (3.3V max)
-char          packetBuffer[255];              // Buffer to hold incoming packet
-char          ReplyBuffer[] = "acknowledged"; // A string to send back
-OSCErrorCode  error;                          // Hold errors from OSC
-uint32_t      button_timer;                   // For time button has been held
-int 		  button_state;
-char          addressString[255];
 
 
 // ================================================================ 
@@ -264,7 +252,13 @@ void save_config(OSCMessage &msg)
 	LOOM_DEBUG_Println("Done");
 }
 
+
+
+// --- FLASH LED ---
+//
 // Flash the build in LED 
+// Helpful for indicating completion of events when debug is off
+//
 void flash_led()
 {
 	for (int i = 0; i < 8; i++) {
@@ -275,5 +269,6 @@ void flash_led()
 	} 
 	digitalWrite(led, HIGH);
 }
+
 
 

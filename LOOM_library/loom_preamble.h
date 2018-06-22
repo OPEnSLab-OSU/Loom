@@ -14,10 +14,6 @@
 
 #define VBATPIN A7                // Pin to check for battery voltage
 
-
-char global_packet_header_string[80]; // Sometimes functions need to access the header string but are declared before loom_flash.h is included
-
-
 // Enumerate possible platform types
 enum Platform {
 	WIFI,
@@ -27,11 +23,27 @@ enum Platform {
 	PUSHINGBOX
 };
 
-
 // Macros for printing to Serial iff Loom Debug is enabled
 #define LOOM_DEBUG_Println(X)  (LOOM_DEBUG==0) ?: Serial.println(X)
 #define LOOM_DEBUG_Print(X)    (LOOM_DEBUG==0) ?: Serial.print(X)
 #define LOOM_DEBUG_Println2(X, Y) LOOM_DEBUG_Print(X); LOOM_DEBUG_Println(Y)
+
+
+// ================================================================
+// ===                 COMMON GLOBAL VARIABLES                  ===
+// ================================================================
+int           led = LED_BUILTIN;              // LED pin number
+volatile bool ledState = LOW;                 // State of LED
+float         vbat = 3.3;                     // Place to save measured battery voltage (3.3V max)
+char          packetBuffer[255];              // Buffer to hold incoming packet
+char          ReplyBuffer[] = "acknowledged"; // A string to send back
+OSCErrorCode  error;                          // Hold errors from OSC
+uint32_t      button_timer;                   // For time button has been held
+int 		  button_state;
+char          addressString[255];
+
+char global_packet_header_string[80]; // Sometimes functions need to access the header string but are declared before loom_flash.h is included
+
 
 //---------------------------------------------------------------------------
 // MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
@@ -48,7 +60,6 @@ enum Platform {
 	#define is_32u4
 	#define MEM_TYPE MEM_EEPROM
 #endif
-//#if is_nrf == 
 
 #if is_relay == 0
 	#define button 10               // Using on-board button, specify attached pin, transmitting
@@ -89,7 +100,7 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #if is_lora == 1
 	#include "loom_lora.h"
 #endif
-#if is_nrf == 1
+#if is_nrf == 1	
 	#include "loom_nrf.h"
 #endif
 #if is_pushingbox == 1
@@ -147,6 +158,9 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #if is_sd == 1
 	#include "loom_sd.h"
 #endif
+#if is_adafruitio == 1
+	#include "loom_adafruit_io.h"
+#endif
 
 
 // Files of functions that are not specific to sensors / actuators
@@ -154,6 +168,7 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #include "loom_OSC_translator.h"
 #include "loom_common.h"  		// These may refer to functions in above headers
 #include "loom_interface.h"
+
 
 
 
