@@ -58,15 +58,11 @@ bool setup_fxas21002()
 	
 	if(state_fxas21002.inst_fxas21002.begin()) {
 		is_setup = true;
-		#if LOOM_DEBUG == 1
-			Serial.println("Initialized fxas21002.");
-		#endif
+		LOOM_DEBUG_Println("Initialized fxas21002.");
 	}
 	else {
 		is_setup = false;
-		#if LOOM_DEBUG == 1
-			Serial.println("Failed to initialize fxas21002.");
-		#endif
+		LOOM_DEBUG_Println("Failed to initialize fxas21002.");
 	}
 	return is_setup;
 }
@@ -146,6 +142,11 @@ void details_fxas21002()
 	delay(500);
 }
 #endif
+
+
+
+
+
 
 
 

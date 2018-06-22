@@ -107,9 +107,7 @@ void setup_wifi(char packet_header_string[])
 		
 	// Check for the presence of the shield, else don't continue:
 	if (WiFi.status() == WL_NO_SHIELD) {
-		#if LOOM_DEBUG == 1
-			Serial.println("WiFi shield not present, entering infinite loop");
-		#endif
+		LOOM_DEBUG_Println("WiFi shield not present, entering infinite loop");
 		while (true); 
 	}
 
@@ -122,9 +120,7 @@ void setup_wifi(char packet_header_string[])
 			break;
 		case WPA_CLIENT_MODE:
 			if (connect_to_WPA(config_wifi->ssid,config_wifi->pass)){
-				#if LOOM_DEBUG == 1
-					Serial.println("Success!");
-				#endif
+				LOOM_DEBUG_Println("Success!");
 
 				// If set to request channel settings
 				if (config_wifi->request_settings == 1) {
@@ -135,17 +131,13 @@ void setup_wifi(char packet_header_string[])
 				}
 			}
 			else {
-				#if LOOM_DEBUG == 1
-					Serial.println("Failure :(");
-				#endif
+				LOOM_DEBUG_Println("Failure :(");
 				while(true);
 			}
 			break;
 	}
 	config_wifi->ip = WiFi.localIP();
-	#if LOOM_DEBUG == 1
-		Serial.println("Finished setting up WiFi.");
-	#endif
+	LOOM_DEBUG_Println("Finished setting up WiFi.");
 }
 
 
@@ -206,18 +198,13 @@ void printWiFiStatus()
 //
 void start_AP() 
 {
-	#if LOOM_DEBUG == 1
-		// print the network name (SSID);
-		Serial.print("Creating access point named: ");
-		Serial.println(config_wifi->my_ssid);
-	#endif
+	// Print the network name (SSID);
+	LOOM_DEBUG_Println2("Creating access point named: ", config_wifi->my_ssid);
 
 	// Create open network. Change this line if you want to create an WEP network:
 	status = WiFi.beginAP(config_wifi->my_ssid);
 	if (status != WL_AP_LISTENING) {
-		#if LOOM_DEBUG == 1
-				Serial.println("Creating access point failed");
-		#endif
+		LOOM_DEBUG_Println("Creating access point failed");
 		while (true);   // Don't continue
 	}
 
@@ -253,9 +240,7 @@ bool connect_to_WPA(char ssid[], char pass[])
 
 	// Try to connect, attempting the connection up to 10 times (this number is arbitrary)
 	while (status != WL_CONNECTED && attempt_count < 10) {
-		#if LOOM_DEBUG == 1
-			Serial.println("Connecting to WPA host failed, trying again");
-		#endif
+		LOOM_DEBUG_Println("Connecting to WPA host failed, trying again");
 		
 		status = WiFi.begin(ssid, pass);
 		attempt_count++;
@@ -263,10 +248,8 @@ bool connect_to_WPA(char ssid[], char pass[])
 
 	// If not successfully connected
 	if (status != WL_CONNECTED) {
-		#if LOOM_DEBUG == 1
-			Serial.println("Connecting to WPA host failed completely");
-			Serial.println("Reverting to AP mode");
-		#endif
+		LOOM_DEBUG_Println("Connecting to WPA host failed completely");
+		LOOM_DEBUG_Println("Reverting to AP mode");
 
 		// Start AP up again instead
 		Udp.stop();
@@ -306,9 +289,7 @@ bool connect_to_WPA(char ssid[], char pass[])
 void switch_to_AP(OSCMessage &msg) 
 {
 	if (config_wifi->wifi_mode != AP_MODE) {
-		#if LOOM_DEBUG == 1
-			Serial.println("Received command to switch to AP mode");
-		#endif
+		LOOM_DEBUG_Println("Received command to switch to AP mode");
 		
 		Udp.stop();
 		UdpCommon.stop();
@@ -387,12 +368,9 @@ void connect_to_new_network()
 	replace_char(state_wifi.new_ssid, '~', ' ');
 	replace_char(state_wifi.new_pass, '~', ' ');
 
-	#if LOOM_DEBUG == 1
-		Serial.print("received command to connect to ");
-		Serial.print(state_wifi.new_ssid);
-		Serial.print(" with password ");
-		Serial.println(state_wifi.new_pass);
-	#endif
+	LOOM_DEBUG_Print("Received command to connect to ");
+	LOOM_DEBUG_Print(state_wifi.new_ssid);
+	LOOM_DEBUG_Println2(" with password ", state_wifi.new_pass);
 
 	// Disconnect from current WiFi network
 	WiFi.disconnect();
@@ -466,10 +444,7 @@ void broadcastIP(OSCMessage &msg)
 	UdpCommon.endPacket();    // Mark the end of the OSC Packet
 	bndl.empty();             // Empty the bundle to free room for a new one
 
-	#if LOOM_DEBUG == 1
-		Serial.print("Broadcasted IP: ");
-		Serial.println(config_wifi->ip);
-	#endif
+	LOOM_DEBUG_Println2("Broadcasted IP: ", config_wifi->ip);
 }
 
 
@@ -483,20 +458,15 @@ void broadcastIP(OSCMessage &msg)
 // 
 void set_port(OSCMessage &msg) 
 {
-	#if LOOM_DEBUG == 1
-		Serial.print("Port changed from ");
-		Serial.print(config_wifi->localPort);
-	#endif
+	LOOM_DEBUG_Print("Port changed from ");
+	LOOM_DEBUG_Print(config_wifi->localPort);
 
 	// Get new port, stop listening on old port, start on new port
 	config_wifi->localPort = msg.getInt(0);
 	Udp.stop();
 	Udp.begin(config_wifi->localPort);
 
-	#if LOOM_DEBUG == 1
-		Serial.print(" to ");
-		Serial.println(config_wifi->localPort);
-	#endif
+	LOOM_DEBUG_Println2(" to ", config_wifi->localPort);
 
 	config_wifi->request_settings = 0;  // Setting to 0 means that device will not request new port settings on restart. 
 										// Note that configuration needs to be saved for this to take effect
@@ -518,7 +488,7 @@ void wifi_check_status()
 		
 		#if LOOM_DEBUG == 1
 			if (status == WL_AP_CONNECTED) { 	// A device has connected to the AP
-					print_remote_mac_addr();                            
+				print_remote_mac_addr();                            
 			} else {							// A device has disconnected from the AP, and we are back in listening mode 
 				Serial.println("Device disconnected from AP");
 			}
@@ -552,9 +522,7 @@ void request_settings_from_Max()
 	UdpCommon.endPacket();    // Mark the end of the OSC Packet
 	bndl.empty();             // Empty the bundle to free room for a new one
 
-	#if LOOM_DEBUG == 1
-		Serial.println("Requested New Channel Settings");
-	#endif
+	LOOM_DEBUG_Println("Requested New Channel Settings");
 }
 
 
@@ -572,9 +540,7 @@ void set_request_settings(OSCMessage &msg)
 	config_wifi->request_settings = 1; // Setting to 1 means that device will request new port settings on restart. 
 	write_non_volatile();
 
-	#if LOOM_DEBUG == 1
-		Serial.println("Setting Request Settings True");
-	#endif                                    
+	LOOM_DEBUG_Println("Setting Request Settings True");
 }
 
 
@@ -590,9 +556,7 @@ void set_request_settings(OSCMessage &msg)
 //
 void new_channel(OSCMessage &msg)
 {
-	#if LOOM_DEBUG == 1
-		Serial.println("Received Command to get new channel settings");
-	#endif
+	LOOM_DEBUG_Println("Received Command to get new channel settings");
 	request_settings_from_Max();
 }
 
@@ -621,9 +585,7 @@ void respond_to_poll_request(char packet_header_string[])
 	UdpCommon.endPacket();    // Mark the end of the OSC Packet
 	bndl.empty();             // Empty the bundle to free room for a new one
 
-	#if LOOM_DEBUG == 1
-		Serial.println("Responded to poll request");
-	#endif
+	LOOM_DEBUG_Println("Responded to poll request");
 }
 
 
@@ -672,11 +634,11 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port)
 	if (packetSize > 0) {
 		#if LOOM_DEBUG == 1
 			if (packetSize > 0) {
-					Serial.println("=========================================");
-					Serial.print("Received packet of size: ");
-					Serial.print(packetSize);
-					Serial.print(" on port " );
-					Serial.println(port);
+				Serial.println("=========================================");
+				Serial.print("Received packet of size: ");
+				Serial.print(packetSize);
+				Serial.print(" on port " );
+				Serial.println(port);
 			}
 		#endif
 		
@@ -687,19 +649,6 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port)
 	} // of (packetSize > 0)
 }
 #endif // of if is_wifi == 1
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

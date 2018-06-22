@@ -50,7 +50,7 @@ struct config_flash_t configuration;
 // ================================================================
 void write_non_volatile();
 void read_non_volatile();
-void flash_config_setup();
+void setup_flash_config();
 
 
 // ================================================================
@@ -79,13 +79,14 @@ void flash_config_setup();
 
 
 
-// --- FLASH CONFIG SETUP ---
+// --- SETUP FLASH CONFIG ---
 //
 // Handles configuration of reading device configuration settings from flash (if config is saved)
 // else uses config.h specified settings, and then writes these to flash
 // 
-void flash_config_setup()
+void setup_flash_config()
 {
+	// Link module configuration structures
 	#if is_wifi == 1
 		packet_header_string = configuration.packet_header_string;
 		link_config_wifi(&configuration.config_wifi);
@@ -98,21 +99,15 @@ void flash_config_setup()
 
 		read_non_volatile(); //reads configuration from non_volatile memory
 		
-		#if LOOM_DEBUG == 1
-			Serial.println("Reading from non-volatile memory...");
-			Serial.print("Checksum: ");
-			Serial.println(configuration.checksum);
-		#endif
+		LOOM_DEBUG_Println("Reading from non-volatile memory...");
+		LOOM_DEBUG_Println2("Checksum: ", configuration.checksum);
 		
 		if (configuration.checksum != memValidationValue) {     // Write default values to flash
 
 			configuration.instance_number = INIT_INST;
 			sprintf(configuration.packet_header_string,"%s%d\0",PacketHeaderString,configuration.instance_number);
 
-			#if LOOM_DEBUG == 1
-				Serial.print("expecting OSC header ");
-				Serial.println(configuration.packet_header_string);
-			#endif
+			LOOM_DEBUG_Println2("Expecting OSC header: ", configuration.packet_header_string);
 			
 			#if is_wifi == 1
 				configuration.config_wifi.my_ssid = AP_NAME;                  // Default AP name
@@ -134,19 +129,20 @@ void flash_config_setup()
 			
 			configuration.checksum = memValidationValue;      // Configuration has been written successfully, so we write the checksum
 
-			#if LOOM_DEBUG == 1
-				Serial.println("Writing to flash for the first time.");
-			#endif
+			LOOM_DEBUG_Println("Writing to flash for the first time.");
 
 			write_non_volatile();
 			
-			#if LOOM_DEBUG == 1
-				Serial.println("Done writing to flash.");
-			#endif
+			LOOM_DEBUG_Println("Done writing to flash.");
 			// Flash memory has limited writes and we don't want to waste it on unnecessary tests
 		} // of if (configuration.checksum != memValidationValue)
 	#endif //of MEM_TYPE
 }
+
+
+
+
+
 
 
 

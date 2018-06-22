@@ -68,10 +68,10 @@ void handle_relay_msg(OSCMessage &msg)
 
 	state_relay.on[relay] = (set_to == 1);
 	
-	#if LOOM_DEBUG == 1
-		Serial.print("Set "); Serial.print(relay);
-		Serial.print(" to "); Serial.println((state_relay.on[relay]) ? "ON" : "OFF");
-	#endif
+	LOOM_DEBUG_Print("Set "); 
+	LOOM_DEBUG_Print(relay);
+	LOOM_DEBUG_Print(" to ");
+	LOOM_DEBUG_Println((state_relay.on[relay]) ? "ON" : "OFF");
 
 	write_relay_states();
 }
@@ -88,6 +88,11 @@ void write_relay_states()
 	digitalWrite(RELAY_PIN0,(state_relay.on[0]==true) ? HIGH : LOW);
 	digitalWrite(RELAY_PIN1,(state_relay.on[1]==true) ? HIGH : LOW);
 }
+
+
+
+
+
 
 
 

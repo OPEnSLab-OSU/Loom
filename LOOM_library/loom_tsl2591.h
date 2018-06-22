@@ -58,16 +58,12 @@ bool setup_tsl2591()
 	state_tsl2591.inst_tsl2591 = Adafruit_TSL2591(2591);
 	if(state_tsl2591.inst_tsl2591.begin()) {
 		is_setup = true;
-		#if LOOM_DEBUG == 1
-			Serial.println("Initialized tsl2591");
-		#endif
+		LOOM_DEBUG_Println("Initialized tsl2591");
 		configure_tsl2591(1, 0); //Medium gain and timing
 	}
 	else {
 		is_setup = false;
-		#if LOOM_DEBUG == 1
-			Serial.println("Failed to initialize tsl2591");
-		#endif
+		LOOM_DEBUG_Println("Failed to initialize tsl2591");
 	}
 	
 	return is_setup;
@@ -92,8 +88,8 @@ void package_tsl2591(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/tsl2591/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
-	msg.add("vis").add((int32_t)state_tsl2591.vis);
-	msg.add("ir").add((int32_t)state_tsl2591.ir);
+	msg.add("vis" ).add((int32_t)state_tsl2591.vis);
+	msg.add("ir"  ).add((int32_t)state_tsl2591.ir);
 	msg.add("full").add((int32_t)state_tsl2591.full);
 	
 	bndl->add(msg);
@@ -112,10 +108,10 @@ void measure_tsl2591()
 	state_tsl2591.vis =  state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_VISIBLE);
 	
 	#if LOOM_DEBUG ==1 
-		Serial.print(F("[ ")); Serial.print(millis()); Serial.print(F(" ms ] "));
-		Serial.print(F("IR: ")); Serial.print(state_tsl2591.ir);  Serial.print(F("  "));
-		Serial.print(F("Full: ")); Serial.print(state_tsl2591.full); Serial.print(F("  "));
-		Serial.print(F("Visible: ")); Serial.print(state_tsl2591.vis); Serial.println(F("  "));
+		Serial.print(F("[ "));			Serial.print(millis());				Serial.print(F(" ms ] "));
+		Serial.print(F("IR: "));		Serial.print(state_tsl2591.ir);		Serial.print(F("  "));
+		Serial.print(F("Full: "));		Serial.print(state_tsl2591.full);	Serial.print(F("  "));
+		Serial.print(F("Visible: "));	Serial.print(state_tsl2591.vis);	Serial.println(F("  "));
 	#endif
 }
 
@@ -144,9 +140,7 @@ void configure_tsl2591(uint8_t gain_level, uint8_t timing_level)
 			state_tsl2591.inst_tsl2591.setGain(TSL2591_GAIN_MAX);   // 9876x gain
 			break;
 		default:
-			#if LOOM_DEBUG == 1
-				Serial.println("Invalid gain level.");
-			#endif
+			LOOM_DEBUG_Println("Invalid gain level.");
 			break;
 	}
   
@@ -170,9 +164,7 @@ void configure_tsl2591(uint8_t gain_level, uint8_t timing_level)
 			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_600MS);  // longest integration time (dim light)
 			break;
 		default:
-			#if LOOM_DEBUG == 1
-				Serial.println("Invalid timing level");
-			#endif
+			LOOM_DEBUG_Println("Invalid timing level");
 			break;
 	}
 	
@@ -228,6 +220,11 @@ void details_tsl2591()
 	delay(500);
 }
 #endif
+
+
+
+
+
 
 
 

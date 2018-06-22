@@ -65,9 +65,7 @@ bool setup_tca9548a()
 {
 	delay(2000);
 	Wire.begin();
-	#if LOOM_DEBUG == 1
-		Serial.println("initialized tca9548a (multiplexer).");
-	#endif
+	LOOM_DEBUG_Println("initialized tca9548a (multiplexer).");
 	state_tca9548a.mux_update_period = UPDATE_PERIOD;
 	update_sensors();
 	state_tca9548a.last_update_time = millis();
@@ -110,10 +108,7 @@ void tcaseselect(uint8_t port_num)
 //
 void measure_sensor_data(uint8_t i2c_addr)
 {
-	#if LOOM_DEBUG == 1
-		Serial.print("Attempting to measure data from sensor with address: ");
-		Serial.println(i2c_addr);
-	#endif 
+	LOOM_DEBUG_Println2("Attempting to measure data from sensor with address: ", i2c_addr);
 	
 	#ifdef i2c_addr_tsl2591
 		if ((i2c_addr == 0x29) && (setup_tsl2591())) {
@@ -172,10 +167,7 @@ void measure_sensor_data(uint8_t i2c_addr)
 //
 void package_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
-	#if LOOM_DEBUG == 1
-		Serial.print("Attempting to measure data from sensor with address: ");
-		Serial.println(i2c_addr);
-	#endif 
+	LOOM_DEBUG_Println2("Attempting to measure data from sensor with address: ", i2c_addr);
 	
 	#ifdef i2c_addr_tsl2591
 		if(i2c_addr == 0x29){
@@ -370,14 +362,11 @@ void get_sensors(OSCBundle *bndl, char packet_header_string[])
 //
 void measure_tca9548a()
 {
-	#if LOOM_DEBUG == 1
-		Serial.println("Measuring data from devices connected to tca9548a (Multiplexer).");
-	#endif	
+	LOOM_DEBUG_Println("Measuring data from devices connected to tca9548a (Multiplexer).");
 
 	for (int device = 0; device < 16; device++) {
 		if (state_tca9548a.devices[device][0] <= 7) {
 			tcaseselect(state_tca9548a.devices[device][0]);
-		
 			measure_sensor_data(state_tca9548a.devices[device][1]);
 		}
 	}
@@ -395,18 +384,20 @@ void measure_tca9548a()
 //
 void package_tca9548a(OSCBundle *bndl, char packet_header_string[])
 {
-	#if LOOM_DEBUG == 1
-		Serial.println("Packaging data from devices connected to tca9548a (Multiplexer).");
-	#endif
+	LOOM_DEBUG_Println("Packaging data from devices connected to tca9548a (Multiplexer).");
 		
 	for (int device = 0; device < 16; device++) {
 		if (state_tca9548a.devices[device][0] <= 7) {
 			tcaseselect(state_tca9548a.devices[device][0]);
-		
 			package_sensor_data(state_tca9548a.devices[device][1],bndl,packet_header_string,state_tca9548a.devices[device][0]);
 		}
 	}
 }
+
+
+
+
+
 
 
 

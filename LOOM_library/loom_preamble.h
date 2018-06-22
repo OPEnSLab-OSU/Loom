@@ -24,8 +24,10 @@ enum Platform {
 };
 
 
-#define Loom_Debug_Println(X)  (LOOM_DEBUG==0) ?: Serial.println(X)
-#define Loom_Debug_Print(X)  (LOOM_DEBUG==0) ?: Serial.print(X)
+#define LOOM_DEBUG_Println(X)  (LOOM_DEBUG==0) ?: Serial.println(X)
+#define LOOM_DEBUG_Print(X)    (LOOM_DEBUG==0) ?: Serial.print(X)
+#define LOOM_DEBUG_Println2(X, Y) LOOM_DEBUG_Print(X); LOOM_DEBUG_Println(Y)
+
 
 //---------------------------------------------------------------------------
 // MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
@@ -145,20 +147,6 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #include "loom_flash.h"
 #include "loom_OSC_translator.h"
 #include "loom_common.h"  		// These may refer to functions in above headers
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

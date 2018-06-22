@@ -54,16 +54,12 @@ String get_data_value(OSCMessage* msg, int pos)
 				return String(buf);
 				break;
 			default:
-				#if LOOM_DEBUG == 1
-					Serial.println("Unsupported data data_type.");
-				#endif
+				LOOM_DEBUG_Println("Unsupported data data_type.");
 				return String("");
 		}
 	}
-	#if LOOM_DEBUG == 1
-		Serial.print("Message does not have an argument with position: ");
-		Serial.println(pos);
-	#endif
+	LOOM_DEBUG_Println2("Message does not have an argument with position: ", pos);
+
 	return String("");
 }
 
@@ -230,6 +226,11 @@ int get_bundle_bytes(OSCBundle *bndl)
 		total += bndl->getOSCMessage(i)->bytes();
 	}
 }
+
+
+
+
+
 
 
 

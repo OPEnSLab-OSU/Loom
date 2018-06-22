@@ -34,7 +34,7 @@ float elec_c = 0;
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-void deca_gs3_setup();
+void setup_decagon();
 void measure_decagon();
 void package_decagon(OSCBundle * bndl, char packet_header_string[]);
 
@@ -45,7 +45,7 @@ void package_decagon(OSCBundle * bndl, char packet_header_string[]);
 //
 // Runs any Decagon setup
 //
-void deca_gs3_setup() 
+void setup_decagon() 
 {
 	mySDI12.begin();
 	delay(2000);
@@ -100,10 +100,8 @@ void measure_decagon()
 	//if (sdiResponse.length() > 1) Serial.println(sdiResponse); //write the response to the screen
 	mySDI12.clearBuffer();
 	
-	
 	delay(1000);                 // delay between taking reading and requesting data
 	sdiResponse = "";            // clear the response string
-	
 	
 	// next command to request data from last measurement
 	myCommand = String(SENSOR_ADDRESS) + "D0!";
@@ -159,6 +157,11 @@ void package_decagon(OSCBundle * bndl, char packet_header_string[])
 	sprintf(addressString, "%s%s", packet_header_string, "/ElecCond");
 	bndl->add(addressString).add(elec_c);
 }
+
+
+
+
+
 
 
 

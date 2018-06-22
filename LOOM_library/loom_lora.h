@@ -63,42 +63,27 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 	#if lora_device_type == 0
 		pinMode(8, INPUT_PULLUP);
 	#endif
-	#if LOOM_DEBUG == 1
-		Serial.println("Initializing manager...");
-	#endif
+
+	LOOM_DEBUG_Println("Initializing manager...");
 	if (!manager->init()){
-		#if LOOM_DEBUG == 1
-			Serial.println("init failed");
-		#endif
+		LOOM_DEBUG_Println("init failed");
 	}
-
-	#if LOOM_DEBUG == 1
-		Serial.println("Setting Frequency...");
-	#endif
+	
+	LOOM_DEBUG_Println("Setting Frequency...");
 	if (!rf95->setFrequency(RF95_FREQ)) {
-		#if LOOM_DEBUG == 1
-			Serial.println("setFrequency failed");
-		#endif
+		LOOM_DEBUG_Println("setFrequency failed");
 	}
 
-	#if LOOM_DEBUG == 1
-		Serial.println("Setting up ethernet");
-	#endif
+	LOOM_DEBUG_Println("Setting up ethernet");
 	#if lora_device_type == 0
 		if(!setup_ethernet()) {
-			#if LOOM_DEBUG == 1
-				Serial.println("Failed to setup ethernet");
-			#endif
+			LOOM_DEBUG_Println("Failed to setup ethernet");
 		}
 	#endif
 	
-	#if LOOM_DEBUG == 1
-		Serial.println("Setting power...");
-	#endif
+	LOOM_DEBUG_Println("Setting power...");
 	rf95->setTxPower(23, false);
-	#if LOOM_DEBUG == 1
-		Serial.println("LoRa setup finished!");
-	#endif
+	LOOM_DEBUG_Println("LoRa setup finished!");
 }
 
 
@@ -173,30 +158,27 @@ bool lora_send_bundle(OSCBundle *bndl)
 	char message[RH_RF95_MAX_MESSAGE_LEN];
 	memset(message, '\0', sizeof(message));
 	translate_OSC_to_string(bndl, message);
-	#if LOOM_DEBUG == 1
-		Serial.println(message);
-		Serial.print("Message length: ");
-		Serial.println(strlen(message));
-		Serial.print("Max message length: ");
-		Serial.println(RH_RF95_MAX_MESSAGE_LEN);
-		Serial.print("Sending...");
-	#endif
+
+	LOOM_DEBUG_Println(message);
+	LOOM_DEBUG_Println2("Message length: ", message);
+	LOOM_DEBUG_Println2("Max message length: ", RH_RF95_MAX_MESSAGE_LEN);
+	LOOM_DEBUG_Print("Sending...");
 	 
 	if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)) {
-		#if LOOM_DEBUG == 1
-			Serial.println("Sent bundle through LoRa!");
-		#endif
+		LOOM_DEBUG_Println("Sent bundle through LoRa!");
 		return true;
-	}
-	else {
-		#if LOOM_DEBUG == 1
-			Serial.println("Failed to send bundle!");
-		#endif
+	} else {
+		LOOM_DEBUG_Println("Failed to send bundle!");
 		return false;
 	}
 }
 
 // #endif // of lora_device_type == 1
+
+
+
+
+
 
 
 

@@ -40,9 +40,7 @@ void setup_nrf()
 	radio.begin();
 	network.begin(90,NRF_HUB_ADDRESS);
 	
-	#if LOOM_DEBUG == 1
-		Serial.println("Setup nrf!");
-	#endif
+	LOOM_DEBUG_Println("Setup nrf!");
 }
 
 // ================================================================
@@ -100,6 +98,11 @@ bool nrf_send_bundle(OSCBundle *bndl)
 	#endif
 	return is_sent;
 }
+
+
+
+
+
 
 
 

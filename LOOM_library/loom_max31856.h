@@ -135,14 +135,14 @@ void measure_max31856()
 		uint8_t fault = max.readFault();
 		if (fault) {
 			#if LOOM_DEBUG == 1
-			if (fault & MAX31856_FAULT_CJRANGE) Serial.println("Cold Junction Range Fault");
-			if (fault & MAX31856_FAULT_TCRANGE) Serial.println("Thermocouple Range Fault");
-			if (fault & MAX31856_FAULT_CJHIGH)  Serial.println("Cold Junction High Fault");
-			if (fault & MAX31856_FAULT_CJLOW)   Serial.println("Cold Junction Low Fault");
-			if (fault & MAX31856_FAULT_TCHIGH)  Serial.println("Thermocouple High Fault");
-			if (fault & MAX31856_FAULT_TCLOW)   Serial.println("Thermocouple Low Fault");
-			if (fault & MAX31856_FAULT_OVUV)    Serial.println("Over/Under Voltage Fault");
-			if (fault & MAX31856_FAULT_OPEN)    Serial.println("Thermocouple Open Fault");
+				if (fault & MAX31856_FAULT_CJRANGE) Serial.println("Cold Junction Range Fault");
+				if (fault & MAX31856_FAULT_TCRANGE) Serial.println("Thermocouple Range Fault");
+				if (fault & MAX31856_FAULT_CJHIGH)  Serial.println("Cold Junction High Fault");
+				if (fault & MAX31856_FAULT_CJLOW)   Serial.println("Cold Junction Low Fault");
+				if (fault & MAX31856_FAULT_TCHIGH)  Serial.println("Thermocouple High Fault");
+				if (fault & MAX31856_FAULT_TCLOW)   Serial.println("Thermocouple Low Fault");
+				if (fault & MAX31856_FAULT_OVUV)    Serial.println("Over/Under Voltage Fault");
+				if (fault & MAX31856_FAULT_OPEN)    Serial.println("Thermocouple Open Fault");
 			#endif
 		}
 		
@@ -152,6 +152,11 @@ void measure_max31856()
 		tc_vin = max.readVoltage(GAIN);
 	#endif
 }
+
+
+
+
+
 
 
 

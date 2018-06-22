@@ -59,16 +59,13 @@ void wake();
 void setup_rtc3231() {
 	// RTC Timer settings here
 	if (! state_rtc3231.inst_rtc3231.begin()) {
-	#if DEBUG == 1
-		Serial.println("Couldn't find RTC");
-	#endif
+		LOOM_DEBUG_Println("Couldn't find RTC");
 		while (1);
 	}
 	// This may end up causing a problem in practice - what if RTC looses power in field? Shouldn't happen with coin cell batt backup
 	if (state_rtc3231.inst_rtc3231.lostPower()) {
-		#if DEBUG == 1
-			Serial.println("RTC lost power, lets set the time!");
-		#endif
+		LOOM_DEBUG_Println("RTC lost power, lets set the time!");
+
 		// following line sets the RTC to the date & time this sketch was compiled
 		state_rtc3231.inst_rtc3231.adjust(DateTime(F(__DATE__), F(__TIME__)));
 	}
@@ -77,7 +74,7 @@ void setup_rtc3231() {
 
 	// Querry Time and print
 	DateTime now = state_rtc3231.inst_rtc3231.now();
-	#if DEBUG == 1
+	#if LOOM_DEBUG == 1
 		Serial.print("RTC Time is: ");
 		Serial.print(now.hour(), DEC); Serial.print(':'); Serial.print(now.minute(), DEC); Serial.print(':'); Serial.print(now.second(), DEC); Serial.println();
 	#endif
@@ -153,6 +150,11 @@ void wake() {
 	disableInterrupt(wakeUpPin);
 	#endif //is_32U4
 }
+
+
+
+
+
 
 
 
