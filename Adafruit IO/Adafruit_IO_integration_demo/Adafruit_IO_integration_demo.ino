@@ -46,7 +46,7 @@ uint32_t photo_val;
 #define AIO_SERVER      "io.adafruit.com"
 #define AIO_SERVERPORT  1883
 #define AIO_USERNAME    "Goertzel"
-#define AIO_KEY         ""
+#define AIO_KEY         "a88b68f52b5a412393c94faf83401b86"
 
 /************ Global State (you don't need to change this!) ******************/
 

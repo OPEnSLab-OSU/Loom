@@ -353,7 +353,7 @@ void additional_loop_checks()
 	#endif
 
 
-	#ifdef is_adafruitio
+	#if is_adafruitio == 1
 		adafruitio_subscribe();
 		adafruitio_publish();
 	#endif
