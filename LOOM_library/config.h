@@ -33,13 +33,13 @@
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform(s) --- 
-#define is_wifi      1		// 1 to enable WiFi
-#define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_wifi      0		// 1 to enable WiFi
+#define is_lora      1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 
-#define is_sd        0		// 1 to enable SD card 
+#define is_sd         0		// 1 to enable SD card 
 #define is_pushingbox 0     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
-#define is_adafruitio 1		// 1 to enable Adafruit IO (currently requires WiFi)
+#define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 // --- Enabled Actuators --- 
 #define num_servos   0		// Number of servos being used
@@ -47,12 +47,12 @@
 #define is_relay     0		// 1 if relays are being used (enables two, on pins 5 and 6)
 
 // --- Enabled Sensors --- 
-#define num_analog  2		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
+#define num_analog  0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
 #define is_decagon  0		// 1 if GS3 Decagon is being used
 #define is_tca9548a 0		// 1 if Multiplexer is being used. (Further customization in advanced options)
 
 // --- Prebuilt Devices ---
-#define is_ishield  1		// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_ishield  0		// 1 to specify using Ishield (should enable only wifi as communication platform)
 
 
 
@@ -202,7 +202,7 @@
 	#include <Ethernet2.h>			// (this is needed for IPAddress, do not remove)
 	
 	// String data[NUM_FIELDS];
-	char device_id[]   = "v25CCAAB0F709665";	// Required by PushingBox, specific to each scenario
+	char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
 	char server_name[] = "api.pushingbox.com";	// PushingBox server, probably don't need to change
 
 	//Use this for OPEnS Lab
@@ -220,7 +220,7 @@
 
 // --- Delay between loops
 #if is_lora == 0 						// Cannot not use with LoRa
-	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
+//	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
 										// Change the value according to the length of your desired transmission interval
 										// 80 seems to be a good amount, around 50 and lower may result in lost packets over WiFi
 #endif

@@ -25,7 +25,7 @@ String data[NUM_FIELDS];
 void setup_pushingbox();
 bool setup_ethernet();
 // void sendToPushingBox(int num_fields, char *server_name, char *devid);
-void sendToPushingBox(OSCMessage $msg);
+void sendToPushingBox(OSCMessage &msg);
 void sendToPushingBox(OSCBundle *bndl);
 
 // ================================================================
