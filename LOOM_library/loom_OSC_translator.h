@@ -4,11 +4,27 @@
 #include <string.h>
 
 
+
+// ================================================================ 
+// ===                       DEFINITIONS                        === 
+// ================================================================
+enum DATA_FORMAT {
+	BUNDLE_MULTI,
+	BUNDLE_SINGLE,
+	STRING_MULTI,
+	STRING_SINGLE,
+	ARRAY_KEY_VALUE,
+	ASSOC_ARRAY,
+	INVALID
+};
+
+
+
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-void translate_string_to_OSC(char *osc_string, OSCBundle* bndl);
-void translate_OSC_to_string(OSCBundle *bndl, char *osc_string);
+void convert_string_to_OSC(char *osc_string, OSCBundle* bndl);
+void convert_OSC_to_string(OSCBundle *bndl, char *osc_string);
 String get_data_value(OSCMessage* msg, int pos);
 #if LOOM_DEBUG == 1
 	void print_bundle(OSCBundle *bndl);
@@ -19,7 +35,7 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
-union data_value {
+union data_value { // Used in translation between OSC and strings
 	int32_t i;
 	float f;
 	uint32_t u;
@@ -65,14 +81,14 @@ String get_data_value(OSCMessage* msg, int pos)
 
 
 
-// --- GET OSC BUNDLE ---
+// --- CONVERT STRING TO OSC ---
 // 
 // Converts string used by LoRa to an equivalent OSCBundle 
 //
-// @param osc_string  A char * created through the use of translate_OSC_to_string(), 
+// @param osc_string  A char * created through the use of convert_OSC_to_string(), 
 // @param bndl        The OSC bundle to be populated
 //
-void translate_string_to_OSC(char *osc_string, OSCBundle* bndl) 
+void convert_string_to_OSC(char *osc_string, OSCBundle* bndl) 
 {
 	bndl->empty();
 	data_value value_union;
@@ -107,7 +123,7 @@ void translate_string_to_OSC(char *osc_string, OSCBundle* bndl)
 }
 
 
-// --- GET OSC STRING ---
+// --- CONVERT OSC TO STRING ---
 // 
 // Converts an OSC Bundle to equivalent string to be used in LoRa transmissions
 // Osc_string's contents will now include the OSCBundle's formatted data.
@@ -115,7 +131,7 @@ void translate_string_to_OSC(char *osc_string, OSCBundle* bndl)
 // @param bndl        An OSCBundle to put into string format.
 // @param osc_string  A char * to fill with the OSCBundle's data.
 //
-void translate_OSC_to_string(OSCBundle *bndl, char *osc_string) 
+void convert_OSC_to_string(OSCBundle *bndl, char *osc_string) 
 {
 	char data_type;
 	data_value value;
@@ -134,31 +150,30 @@ void translate_OSC_to_string(OSCBundle *bndl, char *osc_string)
 		for (int j = 0; j < msg->size(); j++) {
 			data_type = msg->getType(j);
 			switch (data_type) {
-			case 'f':
-				value.f = msg->getFloat(j);
-				snprintf(addr_buf, addr_len, ",f%lu", value.u);
-				strcat(osc_string, addr_buf);
-				break;
+				case 'f':
+					value.f = msg->getFloat(j);
+					snprintf(addr_buf, addr_len, ",f%lu", value.u);
+					strcat(osc_string, addr_buf);
+					break;
 
-			case 'i':
-				value.i = msg->getInt(j);
-				snprintf(addr_buf, addr_len, ",i%lu", value.u);
-				strcat(osc_string, addr_buf);
-				break;
+				case 'i':
+					value.i = msg->getInt(j);
+					snprintf(addr_buf, addr_len, ",i%lu", value.u);
+					strcat(osc_string, addr_buf);
+					break;
 
-			case 's':
-				char data_buf[40];
-				msg->getString(j, data_buf, sizeof(data_buf));
-				snprintf(addr_buf, addr_len, ",s%s", data_buf);
-				strcat(osc_string, addr_buf);
-				break;
+				case 's':
+					char data_buf[40];
+					msg->getString(j, data_buf, sizeof(data_buf));
+					snprintf(addr_buf, addr_len, ",s%s", data_buf);
+					strcat(osc_string, addr_buf);
+					break;
 
-			default:
-				if (data_type != '\0')
-				#if LOOM_DEBUG == 1
-					Serial.print("Invalid message arg type");
-				#endif
-				break;
+				default:
+					if (data_type != '\0') {
+						LOOM_DEBUG_Println("Invalid message arg type");
+					}
+					break;
 			}
 		}
 		if (msg != NULL) strcat(osc_string, " ");
@@ -166,6 +181,15 @@ void translate_OSC_to_string(OSCBundle *bndl, char *osc_string)
 }
 
 
+
+// --- PRINT BUNDLE ---
+//
+// *NOTE* Can make bundles unreadable after printing, use with caution
+//
+// Print out the contents and structure of an OSC bundle
+//
+// @param bndl  An OSC bundle to be printed
+//
 #if LOOM_DEBUG == 1
 void print_bundle(OSCBundle *bndl)
 {
@@ -229,8 +253,192 @@ int get_bundle_bytes(OSCBundle *bndl)
 
 
 
+// void convert_OSC_multiMes_to_singleMes(OSCBundle *bndl)
+// {
+// 	// Check that bundle is in expected multi-message format
+// 	if (bndl->size() == 1) { // Already in single message format
+// 		LOOM_DEBUG_Println("Bundle already in single-message format");
+
+// 		// Verify format and return
+
+// 		// Else error
+// 		return;
+// 	}
+
+// 	// Get packet header (will use address of first message)
+// 	char buffer[50];
+// 	char data_type;
+// 	bndl->getAddress(buffer);
 
 
+// 	// OSCBundle *newBndl;
+// 	// OSCMessage msg = OSCMessage(address_string);
+// 	// msg.add("gx").add(state_fxas21002.gyro[0]);
+
+
+// 	OSCMessage newMsg = OSCMessage(buffer);
+// 	OSCMessage* msg;     // Temporarily hold message of bundle
+
+// 	// bndl->add(msg);
+// 	// newBndl->add(buffer);
+
+// 	// Copy data of messages into new bundle
+// 	for (int i = 0; i < bndl->size(); i++){
+// 		// Get ith messsage
+// 		msg = bndl->getOSCMessage(i);
+// 		msg->getAddress(buffer);
+// 		newMes.add(buffer); // need to fix to only grab last section of the string
+
+// 		// Get ith message data and add to new message
+// 		switch (msg->getType(0)) {
+// 			case 'f':
+// 				Serial.println(msg->getFloat(0));
+// 				newMes.add(msg->getFloat(0));
+// 				break;
+// 			case 'i':
+// 				Serial.println(msg->getInt(0));
+// 				newMes.add(msg->getInt(0));
+// 				break;
+// 			case 's': 
+// 				msg->getString(0, buffer, 50);
+// 				newMes.add(msg->getString(0, buffer, 50));
+// 				Serial.println(buffer);
+// 				break;
+// 		}
+// 	}
+
+// 	bndl->empty(); 		// Empty bundle 
+// 	bndl->add(newMes); 	// Add the converted message back
+// }
+
+
+
+
+void convert_OSC_singleMes_to_multiMes(OSCBundle *bndl, OSCBundle *outBndl)
+{
+	// Check that bundle is in expected single-message format
+	// Also needs to be in key - value pairs
+	if (bndl->size() != 1) {
+		// Error
+		LOOM_DEBUG_Println("Bundle not in single-message format");
+		return;
+	}
+	
+	outBndl->empty();
+ 	OSCMessage *msg = bndl->getOSCMessage(0); 
+	OSCMessage tmpMsg;
+ 	char address[50];
+ 	char newAddress[50];
+	char keyBuf[50];
+
+	// Save old packet header address
+ 	msg->getAddress(address);
+
+	// Copy flat data into messages of '/some/address/key value' format
+ 	for (int i = 1; i < msg->size(); i+=2) {
+ 		switch (msg->getType(i)) {
+ 			case 'i':
+ 				tmpMsg.add(msg->getInt(i));
+ 				break;
+ 			case 'f':
+ 				tmpMsg.add(msg->getFloat(i));
+ 				break;
+ 			case 's':
+ 				char buf[80];
+ 				msg->getString(i, buf, 80);
+ 				tmpMsg.add(buf);
+ 				break;
+ 			default:
+ 				LOOM_DEBUG_Println("Unsupported data data_type.");
+ 		}
+
+		// Add message as /address/key value
+		snprintf(newAddress, strrchr(address,'/')-address+1, "%s", address);
+		msg->getString(i-1, keyBuf, 80);
+		sprintf(newAddress, "%s%s%s", newAddress, "/", keyBuf);
+		tmpMsg.setAddress(newAddress);
+
+		outBndl->add(tmpMsg);
+		tmpMsg.empty();	
+ 	} 
+}
+
+
+
+
+// Convert to one format of OSC bundle first
+// void convert_OSC_to_array(OSCBundle *bndl, some sort of array)
+// {
+// 	if (bndl->size ...) {
+// 		convert...
+// 	}
+
+
+// }
+
+
+// Choose which format output bundle should be in
+// void convert_array_to_OSC(char [] packet_header, some sort of array)
+// {
+// 
+// }
+
+
+
+
+// Will need to be overloaded for bundle, string? (probably just convert to bundle first), array
+// DATA_FORMAT detect_DATA_FORMAT(OSCBundle *bndl)
+// {
+// 	// Check number of 
+// }
+
+
+
+
+
+// Will need to be overloaded for bundle, string, array
+	// DATA_FORMAT inFormat = detect_DATA_FORMAT()
+
+// Main function
+void OSC_converter(OSCBundle *bndl, DATA_FORMAT outFormat)
+{
+	// Determine input format (to select which function to run conversion)
+
+	// Translate input to common intermediate format
+
+	// Translate intermediate to requested output
+}
+
+void OSC_converter(char *osc_string, DATA_FORMAT outFormat)
+{
+	// Bundle to be filled
+	OSCBundle bndl; 
+
+	// Convert string to bundle
+//	convert_string_to_OSC(osc_string, bndl);
+
+	// Convert bundle to outFormat
+	// OSC_converter(bndl, outFormat);
+
+}
+
+// void OSC_converter(some array, DATA_FORMAT outFormat)
+// {
+
+// }
+
+
+
+
+// void helper_OSC_converter_input_to_intermediate()
+// {
+
+// }
+
+// void helper_OSC_converter_intermediate_to_ouptut(OSCBundle ir, DATA_FORMAT outFormat)
+// {
+
+// }
 
 
 

@@ -52,6 +52,10 @@ void setup_sd()
 		Serial.print("Initializing SD card...");
 	#endif
 
+	#if is_lora == 1
+		digitalWrite(8, HIGH); 	// if using LoRa
+	#endif
+
 	if (!SD.begin(chipSelect)) {
 		#if LOOM_DEBUG == 1
 			Serial.println("initialization failed!");
@@ -158,7 +162,7 @@ bool sd_save_bundle(char *file, OSCBundle *bndl)
 	Serial.println("sd save bundle");
 	char osc_str[255];
 	memset(osc_str, '\0', sizeof(osc_str));
-	translate_OSC_to_string(bndl, osc_str);
+	convert_OSC_to_string(bndl, osc_str);
 
 	LOOM_DEBUG_Println(osc_str);
 	LOOM_DEBUG_Println2("osc_str length: ", osc_str);
@@ -194,6 +198,10 @@ void set_SD_logging(OSCMessage &msg)
 		#endif
 	}
 }
+
+
+
+
 
 
 
