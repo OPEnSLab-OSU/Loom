@@ -32,6 +32,9 @@ String get_data_value(OSCMessage* msg, int pos);
 int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 
 
+void convert_OSC_multiMsg_to_singleMsg(OSCBundle *bndl, OSCBundle *outBndl);
+void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl, OSCBundle *outBndl);
+
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
@@ -253,68 +256,51 @@ int get_bundle_bytes(OSCBundle *bndl)
 
 
 
-// void convert_OSC_multiMes_to_singleMes(OSCBundle *bndl)
-// {
-// 	// Check that bundle is in expected multi-message format
-// 	if (bndl->size() == 1) { // Already in single message format
-// 		LOOM_DEBUG_Println("Bundle already in single-message format");
+void convert_OSC_multiMsg_to_singleMsg(OSCBundle *bndl, OSCBundle *outBndl)
+{
+	// Check that bundle is in expected multi-message format
+	if (bndl->size() == 1) { // Already in single message format
+		LOOM_DEBUG_Println("Bundle already in single-message format");
 
-// 		// Verify format and return
+		// Verify format and return
+		// Else error
+		return;
+	}
+	outBndl->empty();
 
-// 		// Else error
-// 		return;
-// 	}
+	// Get packet header (will use address of first message)
+	char address[50];
+	bndl->getOSCMessage(0)->getAddress(address);
+	snprintf(address, strrchr(address,'/')-address+1, "%s", address);
+	sprintf(address, "%s%s", address, "/data");
+	OSCMessage newMsg = OSCMessage(address);
+	OSCMessage* msg;     // Temporarily hold message of bundle
+	
+	// Copy data of messages into new bundle
+	for (int i = 0; i < bndl->size(); i++){
+		msg = bndl->getOSCMessage(i); 	// Get ith messsage
 
-// 	// Get packet header (will use address of first message)
-// 	char buffer[50];
-// 	char data_type;
-// 	bndl->getAddress(buffer);
+		// Get ith messsage key and add to new message
+		char tmpBuf[50], keyBuf[50];
+		msg->getAddress(tmpBuf);
+		strncpy(keyBuf, strrchr(tmpBuf,'/')+1, 49);
+		newMsg.add(keyBuf);
 
-
-// 	// OSCBundle *newBndl;
-// 	// OSCMessage msg = OSCMessage(address_string);
-// 	// msg.add("gx").add(state_fxas21002.gyro[0]);
-
-
-// 	OSCMessage newMsg = OSCMessage(buffer);
-// 	OSCMessage* msg;     // Temporarily hold message of bundle
-
-// 	// bndl->add(msg);
-// 	// newBndl->add(buffer);
-
-// 	// Copy data of messages into new bundle
-// 	for (int i = 0; i < bndl->size(); i++){
-// 		// Get ith messsage
-// 		msg = bndl->getOSCMessage(i);
-// 		msg->getAddress(buffer);
-// 		newMes.add(buffer); // need to fix to only grab last section of the string
-
-// 		// Get ith message data and add to new message
-// 		switch (msg->getType(0)) {
-// 			case 'f':
-// 				Serial.println(msg->getFloat(0));
-// 				newMes.add(msg->getFloat(0));
-// 				break;
-// 			case 'i':
-// 				Serial.println(msg->getInt(0));
-// 				newMes.add(msg->getInt(0));
-// 				break;
-// 			case 's': 
-// 				msg->getString(0, buffer, 50);
-// 				newMes.add(msg->getString(0, buffer, 50));
-// 				Serial.println(buffer);
-// 				break;
-// 		}
-// 	}
-
-// 	bndl->empty(); 		// Empty bundle 
-// 	bndl->add(newMes); 	// Add the converted message back
-// }
+		// Get ith message data and add to new message
+		switch (msg->getType(0)) {
+			case 'f': newMsg.add(msg->getFloat(0));	break;
+			case 'i': newMsg.add(msg->getInt(0));	break;
+			case 's': char buf[80];  msg->getString(0, buf, 50);  newMsg.add(buf);  break;
+			default: LOOM_DEBUG_Println("Unsupported data data_type.");
+		}
+	}
+	outBndl->add(newMsg);
+}
 
 
 
 
-void convert_OSC_singleMes_to_multiMes(OSCBundle *bndl, OSCBundle *outBndl)
+void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl, OSCBundle *outBndl)
 {
 	// Check that bundle is in expected single-message format
 	// Also needs to be in key - value pairs
@@ -327,9 +313,7 @@ void convert_OSC_singleMes_to_multiMes(OSCBundle *bndl, OSCBundle *outBndl)
 	outBndl->empty();
  	OSCMessage *msg = bndl->getOSCMessage(0); 
 	OSCMessage tmpMsg;
- 	char address[50];
- 	char newAddress[50];
-	char keyBuf[50];
+ 	char address[50], newAddress[50], keyBuf[50];
 
 	// Save old packet header address
  	msg->getAddress(address);
@@ -337,19 +321,10 @@ void convert_OSC_singleMes_to_multiMes(OSCBundle *bndl, OSCBundle *outBndl)
 	// Copy flat data into messages of '/some/address/key value' format
  	for (int i = 1; i < msg->size(); i+=2) {
  		switch (msg->getType(i)) {
- 			case 'i':
- 				tmpMsg.add(msg->getInt(i));
- 				break;
- 			case 'f':
- 				tmpMsg.add(msg->getFloat(i));
- 				break;
- 			case 's':
- 				char buf[80];
- 				msg->getString(i, buf, 80);
- 				tmpMsg.add(buf);
- 				break;
- 			default:
- 				LOOM_DEBUG_Println("Unsupported data data_type.");
+ 			case 'i': tmpMsg.add(msg->getInt(i));	break;
+ 			case 'f': tmpMsg.add(msg->getFloat(i));	break;
+ 			case 's': char buf[80];  msg->getString(i, buf, 80);  tmpMsg.add(buf);  break;
+ 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
  		}
 
 		// Add message as /address/key value
@@ -439,6 +414,10 @@ void OSC_converter(char *osc_string, DATA_FORMAT outFormat)
 // {
 
 // }
+
+
+
+
 
 
 

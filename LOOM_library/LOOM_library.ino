@@ -33,12 +33,30 @@ void loop()
 	receive_bundle(&bndl, WIFI);
 
 
+//
+//	// Single to multi test
+//	if (get_bundle_bytes(&bndl)) {
+//		LOOM_DEBUG_Println("Got a bundle");
+//		convert_OSC_singleMsg_to_multiMsg(&bndl, &send_bndl);
+//
+//		bndl.send(Serial);
+//		Serial.println();
+//		send_bndl.send(Serial);
+//		Serial.println();
+//
+//		LOOM_DEBUG_Println("\nOUT OLD");
+//		print_bundle(&bndl);
+//		LOOM_DEBUG_Println("\nOUT NEW");
+//		print_bundle(&send_bndl);
+//		
+//		while(1);
+//	}
 
 
+	// Mutli to single test
 	if (get_bundle_bytes(&bndl)) {
-		bndl.send(Serial);
 		LOOM_DEBUG_Println("Got a bundle");
-		convert_OSC_singleMes_to_multiMes(&bndl, &send_bndl);
+		convert_OSC_multiMsg_to_singleMsg(&bndl, &send_bndl);
 
 		bndl.send(Serial);
 		Serial.println();
@@ -49,7 +67,6 @@ void loop()
 		print_bundle(&bndl);
 		LOOM_DEBUG_Println("\nOUT NEW");
 		print_bundle(&send_bndl);
-		
 		
 		while(1);
 	}
@@ -76,6 +93,10 @@ void loop()
 	additional_loop_checks();
 	
 } // End loop section
+
+
+
+
 
 
 
