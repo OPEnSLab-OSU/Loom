@@ -35,6 +35,10 @@ bool setup_ethernet();
 // 
 bool setup_ethernet() 
 {
+	#if is_lora == 1
+		digitalWrite(8, HIGH);
+	#endif
+		
 	bool is_setup;
 	if (Ethernet.begin(mac) == 0) {
 		LOOM_DEBUG_Println("Failed to configure Ethernet using DHCP");
@@ -59,6 +63,10 @@ bool setup_ethernet()
 // ================================================================
 // ===                        FUNCTIONS                         ===
 // ================================================================
+
+
+
+
 
 
 

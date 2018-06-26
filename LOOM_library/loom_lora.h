@@ -116,7 +116,7 @@ void lora_receive_bundle(OSCBundle *bndl)
 			//If true, then the data being received is from the evaporimeter, which
 			//is formatted differently as they use code not written by the CS Capstone team.
 			if (((char)(buf[0])) == '/') {
-				translate_string_to_OSC((char*)buf, bndl); 
+				convert_string_to_OSC((char*)buf, bndl); 
 				for(int i = 0; i < NUM_FIELDS; i++)
 					data[i] = get_data_value(bndl->getOSCMessage(0), i);
 			} else {
@@ -157,7 +157,7 @@ bool lora_send_bundle(OSCBundle *bndl)
 {
 	char message[RH_RF95_MAX_MESSAGE_LEN];
 	memset(message, '\0', sizeof(message));
-	translate_OSC_to_string(bndl, message);
+	convert_OSC_to_string(bndl, message);
 
 	LOOM_DEBUG_Println(message);
 	LOOM_DEBUG_Println2("Message length: ", message);
@@ -174,6 +174,10 @@ bool lora_send_bundle(OSCBundle *bndl)
 }
 
 // #endif // of lora_device_type == 1
+
+
+
+
 
 
 

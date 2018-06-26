@@ -32,6 +32,28 @@ void loop()
 	// Receive bundles, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
 	receive_bundle(&bndl, WIFI);
 
+
+
+
+	if (get_bundle_bytes(&bndl)) {
+		bndl.send(Serial);
+		LOOM_DEBUG_Println("Got a bundle");
+		convert_OSC_singleMes_to_multiMes(&bndl, &send_bndl);
+
+		bndl.send(Serial);
+		Serial.println();
+		send_bndl.send(Serial);
+		Serial.println();
+
+		LOOM_DEBUG_Println("\nOUT OLD");
+		print_bundle(&bndl);
+		LOOM_DEBUG_Println("\nOUT NEW");
+		print_bundle(&send_bndl);
+		
+		
+		while(1);
+	}
+
 	// Process bundle (nothing will happen if bndl is empty), bundle is emptied after processing
 	process_bundle(&bndl);
 
@@ -42,7 +64,7 @@ void loop()
 //	package_data(&send_bndl);
 
 	// Send the bundle, takes bundle to be filled and platform to send it over [WIFI, LORA, NRF, SDCARD, PUSHINGBOX]
-	send_bundle(&send_bndl, PUSHINGBOX);
+//	send_bundle(&send_bndl, PUSHINGBOX);
 //
 //	if (get_bundle_bytes(&bndl)){
 //		send_bundle(&bndl, SDCARD, "test2.txt");
@@ -54,6 +76,10 @@ void loop()
 	additional_loop_checks();
 	
 } // End loop section
+
+
+
+
 
 
 
