@@ -256,6 +256,28 @@ int get_bundle_bytes(OSCBundle *bndl)
 
 
 
+// --- CONVERT OSC MULTIMSG TO SINGLEMSG ---
+//
+// This converts an OSC bundle formated in multiple messages, 
+// the end of each address being a key, and only 
+// one argument, the corresponding value:
+// 		Bundle Size: 3
+// 		Address 1: /LOOM/Device7/abc
+// 		Value 1: 1
+// 		Address 2: /LOOM/Device7/def
+// 		Value 1: 2.00
+// 		Address 3: /LOOM/Unknown7/ghi
+// 		Value 1: 3.20
+//
+// to an OSC bundle with a single message, in the format:
+// 		Bundle Size: 1
+//		Address 1 /LOOM/Device7/data abc 1 def 2.0 ghi 3.2 
+//
+// This is the inverse of convert_OSC_singleMsg_to_multiMsg()
+//
+// @param bndl     The OSC bundle to be converted
+// @param outBndl  Where to store the converted bundle
+//
 void convert_OSC_multiMsg_to_singleMsg(OSCBundle *bndl, OSCBundle *outBndl)
 {
 	// Check that bundle is in expected multi-message format
@@ -299,7 +321,29 @@ void convert_OSC_multiMsg_to_singleMsg(OSCBundle *bndl, OSCBundle *outBndl)
 
 
 
-
+// --- CONVERT OSC SINGLEMSG TO MULTIMSG ---
+//
+// This converts an OSC bundle formated as an 
+// OSC bundle with a single message, in the format:
+// 		Bundle Size: 1
+//		Address 1 /LOOM/Device7/data abc 1 def 2.0 ghi 3.2 
+//
+// to an OSC bundle with multiple messages, 
+// the end of each address being a key, and only 
+// one argument, the corresponding value:
+// 		Bundle Size: 3
+// 		Address 1: /LOOM/Device7/abc
+// 		Value 1: 1
+// 		Address 2: /LOOM/Device7/def
+// 		Value 1: 2.00
+// 		Address 3: /LOOM/Unknown7/ghi
+// 		Value 1: 3.20
+//
+// This is the inverse of convert_OSC_multiMsg_to_singleMsg()
+//
+// @param bndl     The OSC bundle to be converted
+// @param outBndl  Where to store the converted bundle
+//
 void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl, OSCBundle *outBndl)
 {
 	// Check that bundle is in expected single-message format
@@ -340,16 +384,69 @@ void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl, OSCBundle *outBndl)
 
 
 
+// --- CONVERT OSC TO ARRAY KEY VALUE --- 
+//
+// Converts an OSC bundle to an array formated as:
+// 	 [key1, value1, key2, value2, key3, value3, ...]
+// Converts bundle to flat single message if not already
+//
+// @param bndl        The bundle to use to fill the key value array
+// @param key_values  The array to be populated
+//
+void convert_OSC_to_array_key_value(OSCBundle *bndl, String key_values[])
+{	
+	// Convert bundle to flat single message if not already
+	OSCBundle convertedBndl;	
+	if (bndl->size() > 1)  {
+		convert_OSC_multiMsg_to_singleMsg(bndl, &convertedBndl); 
+	} else {
+		convertedBndl = *bndl;
+	} 
 
-// Convert to one format of OSC bundle first
-// void convert_OSC_to_array(OSCBundle *bndl, some sort of array)
-// {
-// 	if (bndl->size ...) {
-// 		convert...
-// 	}
+	// Fill key-value array
+	OSCMessage* msg = convertedBndl.getOSCMessage(0);	
+	for (int i = 0; i < msg->size(); i++) {
+		key_values[i] = get_data_value(msg, i); 
+	}
+}
 
 
-// }
+
+// --- CONVERT OSC TO ARRAYS ASSOC --- 
+//
+// Converts an OSC bundle to two associated arrays,
+// formated as:
+// 	 [key1,   key2,   key3]
+//   [value1, value2, value3]
+// Converts bundle to flat single message if not already
+//
+// @param bndl   The bundle to use to fill the arrays
+// @param keys   The array of keys be populated
+// @param value  The array of values to be populated
+//
+void convert_OSC_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[])
+{
+		// Convert bundle to flat single message if not already
+	OSCBundle convertedBndl;	
+	if (bndl->size() > 1) {
+		convert_OSC_multiMsg_to_singleMsg(bndl, &convertedBndl);
+	} else {
+		convertedBndl = *bndl;
+	}
+
+	// Fill key and value arrays
+	OSCMessage* msg = convertedBndl.getOSCMessage(0);
+	for (int i = 0; i < msg->size(); i+=2) {
+		keys[i/2]   = get_data_value(msg, i);
+		values[i/2] = get_data_value(msg, i+1); 
+	}
+}
+
+
+
+
+
+
 
 
 // Choose which format output bundle should be in
@@ -375,19 +472,19 @@ void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl, OSCBundle *outBndl)
 	// DATA_FORMAT inFormat = detect_DATA_FORMAT()
 
 // Main function
-void OSC_converter(OSCBundle *bndl, DATA_FORMAT outFormat)
-{
+// void OSC_converter(OSCBundle *bndl, DATA_FORMAT outFormat)
+// {
 	// Determine input format (to select which function to run conversion)
 
 	// Translate input to common intermediate format
 
 	// Translate intermediate to requested output
-}
+// }
 
-void OSC_converter(char *osc_string, DATA_FORMAT outFormat)
-{
+// void OSC_converter(char *osc_string, DATA_FORMAT outFormat)
+// {
 	// Bundle to be filled
-	OSCBundle bndl; 
+	// OSCBundle bndl; 
 
 	// Convert string to bundle
 //	convert_string_to_OSC(osc_string, bndl);
@@ -395,7 +492,7 @@ void OSC_converter(char *osc_string, DATA_FORMAT outFormat)
 	// Convert bundle to outFormat
 	// OSC_converter(bndl, outFormat);
 
-}
+// }
 
 // void OSC_converter(some array, DATA_FORMAT outFormat)
 // {
@@ -414,6 +511,12 @@ void OSC_converter(char *osc_string, DATA_FORMAT outFormat)
 // {
 
 // }
+
+
+
+
+
+
 
 
 
