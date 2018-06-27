@@ -29,14 +29,33 @@ int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
 String get_data_value(OSCMessage* msg, int pos);
 void   deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
 
+// Conversions between bundles and strings
 void convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl);
 void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
+
+// Conversion between bundle formats
 void convert_OSC_multiMsg_to_singleMsg(OSCBundle *bndl, OSCBundle *outBndl);
 void convert_OSC_multiMsg_to_singleMsg(OSCBundle *bndl);
 void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl, OSCBundle *outBndl);
 void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl);
+
+// Conversion from bundle to array formats
 void convert_OSC_to_array_key_value(OSCBundle *bndl, String key_values[], int kv_len);
 void convert_OSC_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[], int assoc_len);
+
+// Conversion from array to bundle formats
+void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, int interpret);
+void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len);
+void convert_OSC_key_value_array_to_multiMsg( String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, int interpret);
+void convert_OSC_key_value_array_to_multiMsg( String key_values [], OSCBundle *bndl, char packet_header[], int kv_len);
+void convert_OSC_assoc_arrays_to_singleMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, int interpret);
+void convert_OSC_assoc_arrays_to_singleMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len);
+void convert_OSC_assoc_arrays_to_multiMsg( String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, int interpret);
+void convert_OSC_assoc_arrays_to_multiMsg( String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len);
+
+// Conversion between array formats
+void convert_array_key_value_to_assoc(String key_values [], String keys [], String values [], int kv_len, int assoc_len);
+void convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len);
 
 
 // ================================================================ 
@@ -49,7 +68,7 @@ union data_value { // Used in translation between OSC and strings
 };
 
 // ================================================================
-// ===                        FUNCTIONS                         ===
+// ===                    GENERAL FUNCTIONS                     ===
 // ================================================================
 
 
@@ -195,6 +214,12 @@ void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl) {
 
 
 
+// ================================================================
+// ===         CONVERSIONS BETWEEN BUNDLES AND STRINGS          ===
+// ================================================================
+
+
+
 // --- CONVERT STRING TO OSC ---
 // 
 // Converts string used by LoRa to an equivalent OSCBundle 
@@ -294,6 +319,11 @@ void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string)
 	}
 }
 
+
+
+// ================================================================
+// ===            CONVERSION BETWEEN BUNDLE FORMATS             ===
+// ================================================================
 
 
 
@@ -461,6 +491,13 @@ void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl)
 
 
 
+// ================================================================
+// ===         CONVERSION FROM BUNDLE TO ARRAY FORMATS          ===
+// ================================================================
+
+
+
+
 // --- CONVERT OSC TO ARRAY KEY VALUE --- 
 //
 // Converts an OSC bundle to an array formated as:
@@ -533,6 +570,101 @@ void convert_OSC_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[]
 
 
 
+// ================================================================
+// ===         CONVERSION FROM ARRAY TO BUNDLE FORMATS          ===
+// ================================================================
+
+// Interpret is an optional parameter in the following array to bundle functions
+// The encoding is as follows:
+//   0:  Smart Interpret (int->int, float->float, other->string) 
+//                         [This is the default if interpret is not specified]
+//   1:  Int             (non-ints will become 0)
+//   2:  Float           (non-floats will become 0)
+//   3:  String          (does no extra manipulation, leaves as strings)
+
+
+
+
+
+void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, int interpret)
+{
+	bndl->empty();
+	OSCMessage tmpMsg;// = bndl->add(packet_header);
+
+	// for (int i = 0; i < kv_len; i++) {
+	// 	LOOM_DEBUG_Println(key_values[i]);
+	// }
+
+	char buf[50];
+	for (int i = 0; i < kv_len; i++) {
+		key_values[i].toCharArray(buf, 50);
+		tmpMsg.add(buf);
+	}
+
+	char address[80];
+	sprintf(address, "%s/data", packet_header);
+	tmpMsg.setAddress(address);
+	bndl->add(tmpMsg);
+}
+
+void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len) { 
+	convert_OSC_key_value_array_to_singleMsg(key_values, bndl, packet_header, kv_len, 0); 
+}
+
+
+
+void convert_OSC_key_value_array_to_multiMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, int interpret)
+{
+	// Convert to single message
+	convert_OSC_key_value_array_to_singleMsg(key_values, bndl, packet_header, kv_len, interpret);
+	// Then convert bundle to multiple messages
+	convert_OSC_singleMsg_to_multiMsg(bndl);
+}
+
+void convert_OSC_key_value_array_to_multiMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len) { 
+	convert_OSC_key_value_array_to_multiMsg(key_values, bndl, packet_header, kv_len, 0); 
+}
+
+
+
+void convert_OSC_assoc_arrays_to_singleMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, int interpret)
+{
+	// Convert to single array first 
+	int kv_len = 2*assoc_len;
+	String key_values[kv_len];
+	convert_array_assoc_to_key_value(keys, values, key_values, assoc_len, kv_len);
+	// Then convert to single message bundle
+	convert_OSC_key_value_array_to_singleMsg(key_values, bndl, packet_header, kv_len, interpret);
+}
+
+void convert_OSC_assoc_arrays_to_singleMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len) { 
+	convert_OSC_assoc_arrays_to_singleMsg(keys, values, bndl, packet_header, assoc_len, 0); 
+}
+
+
+
+void convert_OSC_assoc_arrays_to_multiMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, int interpret)
+{
+	// Convert to single array first 
+	int kv_len = 2*assoc_len;
+	String key_values[kv_len];
+	convert_array_assoc_to_key_value(keys, values, key_values, assoc_len, kv_len);
+	// Then convert to single then multi-message bundle
+	convert_OSC_key_value_array_to_multiMsg(key_values, bndl, packet_header, kv_len, interpret);
+}
+
+void convert_OSC_assoc_arrays_to_multiMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len) { 
+	convert_OSC_assoc_arrays_to_multiMsg(keys, values, bndl, packet_header, assoc_len, 0); 
+}
+
+
+
+// ================================================================
+// ===             CONVERSION BETWEEN ARRAY FORMATS             ===
+// ================================================================
+
+
+
 // --- CONVERT ARRAY KEY VALUES TO ASSOC ---
 // 
 // Converts and array formatted as:
@@ -588,120 +720,6 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 		key_values[i*2+1] = values[i];
 	}
 }
-
-
-// add option to try to convert to correct types
-void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len)
-{
-	bndl->empty();
-	OSCMessage tmpMsg;// = bndl->add(packet_header);
-
-	// for (int i = 0; i < kv_len; i++) {
-	// 	LOOM_DEBUG_Println(key_values[i]);
-	// }
-
-	char buf[50];
-	for (int i = 0; i < kv_len; i++) {
-		key_values[i].toCharArray(buf, 50);
-		tmpMsg.add(buf);
-	}
-
-	char address[80];
-	sprintf(address, "%s/data", packet_header);
-	tmpMsg.setAddress(address);
-	bndl->add(tmpMsg);
-}
-
-void convert_OSC_key_value_array_to_multiMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len)
-{
-	// Convert to single message
-	convert_OSC_key_value_array_to_singleMsg(key_values, bndl, packet_header, kv_len);
-	
-	// Then convert bundle to multiple messages
-	convert_OSC_singleMsg_to_multiMsg(bndl);
-}
-
-void convert_OSC_assoc_arrays_to_singleMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len)
-{
-	// Convert to single array first 
-	int kv_len = 2*assoc_len;
-	String key_values[kv_len];
-	convert_array_assoc_to_key_value(keys, values, key_values, assoc_len, kv_len);
-	// Then convert to single message bundle
-	convert_OSC_key_value_array_to_singleMsg(key_values, bndl, packet_header, kv_len);
-}
-
-void convert_OSC_assoc_arrays_to_multiMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len)
-{
-	// Convert to single array first 
-	int kv_len = 2*assoc_len;
-	String key_values[kv_len];
-	convert_array_assoc_to_key_value(keys, values, key_values, assoc_len, kv_len);
-	// Then convert to single then multi-message bundle
-	convert_OSC_key_value_array_to_multiMsg(key_values, bndl, packet_header, kv_len);
-}
-
-
-
-
-
-
-// Will need to be overloaded for bundle, string? (probably just convert to bundle first), array
-// DATA_FORMAT detect_DATA_FORMAT(OSCBundle *bndl)
-// {
-// 	// Check number of 
-// }
-
-
-
-
-
-// Will need to be overloaded for bundle, string, array
-	// DATA_FORMAT inFormat = detect_DATA_FORMAT()
-
-// Main function
-// void OSC_converter(OSCBundle *bndl, DATA_FORMAT outFormat)
-// {
-	// Determine input format (to select which function to run conversion)
-
-	// Translate input to common intermediate format
-
-	// Translate intermediate to requested output
-// }
-
-// void OSC_converter(char *osc_string, DATA_FORMAT outFormat)
-// {
-	// Bundle to be filled
-	// OSCBundle bndl; 
-
-	// Convert string to bundle
-//	convert_OSC_string_to_bundle(osc_string, bndl);
-
-	// Convert bundle to outFormat
-	// OSC_converter(bndl, outFormat);
-
-// }
-
-// void OSC_converter(some array, DATA_FORMAT outFormat)
-// {
-
-// }
-
-
-
-
-// void helper_OSC_converter_input_to_intermediate()
-// {
-
-// }
-
-// void helper_OSC_converter_intermediate_to_ouptut(OSCBundle ir, DATA_FORMAT outFormat)
-// {
-
-// }
-
-
-
 
 
 
