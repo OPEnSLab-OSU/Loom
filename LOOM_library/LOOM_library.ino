@@ -30,7 +30,27 @@ void loop()
 	OSCBundle bndl, send_bndl; 
 
 	// Receive bundles, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
-	// receive_bundle(&bndl, WIFI);
+	 receive_bundle(&bndl, WIFI);
+
+
+	// Single to multi test
+	if (get_bundle_bytes(&bndl)) {
+		LOOM_DEBUG_Println("Got a bundle");
+
+//		LOOM_DEBUG_Println("\nOLD");
+//		print_bundle(&bndl);
+
+//		convert_OSC_singleMsg_to_multiMsg(&bndl, &send_bndl);
+//		convert_OSC_singleMsg_to_multiMsg_in_place(&bndl);
+		deep_copy_bundle(&bndl, &send_bndl);
+
+		LOOM_DEBUG_Println("\nOLD");
+		print_bundle(&bndl);
+		LOOM_DEBUG_Println("\nNEW");
+		print_bundle(&send_bndl);
+		
+		while(1);
+	}
 
 
 
@@ -58,6 +78,12 @@ void loop()
 	additional_loop_checks();
 	
 } // End loop section
+
+
+
+
+
+
 
 
 

@@ -385,12 +385,48 @@ void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl, OSCBundle *outBndl)
  	} 
 }
 
+// void convert_OSC_singleMsg_to_multiMsg_in_place(OSCBundle *bndl)
+// {
+// 	LOOM_DEBUG_Println("In Place convert");
+// 	OSCBundle* outBndl;
+// 	LOOM_DEBUG_Println("Created outBndl");
+// 	convert_OSC_singleMsg_to_multiMsg(bndl, outBndl);
+// 	LOOM_DEBUG_Println("After conversion");
+// 	LOOM_DEBUG_Println("OLD BUNDLE");
+// 	print_bundle(bndl);
+// 	LOOM_DEBUG_Println("NEW OUT BUNDLE");
+// 	print_bundle(outBndl);
+// }
+
+void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl) {
+	destBndl->empty();
+	OSCMessage *msg;
+	OSCMessage tmpMsg;
+	char buf[50];
+	for (int i = 0; i < srcBndl->size(); i++) { 	// for each message
+		msg = srcBndl->getOSCMessage(i);
+		for (int j = 0; j < msg->size(); j++) { 	// for each argument 
+
+			switch (msg->getType(j)) {
+	 			case 'i': tmpMsg.add(msg->getInt(j));	break;
+	 			case 'f': tmpMsg.add(msg->getFloat(j));	break;
+	 			case 's': char buf[80];  msg->getString(j, buf, 80);  tmpMsg.add(buf);  break;
+	 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
+	 		}
+ 		}
+ 		msg->getAddress(buf);
+		tmpMsg.setAddress(buf);
+
+		destBndl->add(tmpMsg);
+		tmpMsg.empty();		
+	} 
+}
 
 
 // --- CONVERT OSC TO ARRAY KEY VALUE --- 
 //
 // Converts an OSC bundle to an array formated as:
-// 	 [key1, value1, key2, value2, key3, value3, ...]
+// 	 [key1, value1, key2, value2, key3, value3]
 // Converts bundle to flat single message if not already
 //
 // @param bndl        The bundle to use to fill the key value array
@@ -425,7 +461,7 @@ void convert_OSC_to_array_key_value(OSCBundle *bndl, String key_values[], int kv
 //
 // Converts an OSC bundle to two associated arrays,
 // formated as:
-// 	 [key1,   key2,   key3]
+//   [key1,   key2,   key3]
 //   [value1, value2, value3]
 // Converts bundle to flat single message if not already
 //
@@ -435,7 +471,7 @@ void convert_OSC_to_array_key_value(OSCBundle *bndl, String key_values[], int kv
 //
 void convert_OSC_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[], int assoc_len)
 {
-		// Convert bundle to flat single message if not already
+	// Convert bundle to flat single message if not already
 	OSCBundle convertedBndl;	
 	if (bndl->size() > 1) {
 		convert_OSC_multiMsg_to_singleMsg(bndl, &convertedBndl);
@@ -461,7 +497,7 @@ void convert_OSC_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[]
 
 
 
-void convert_OSC_array_to_singleMsg(String key_values [], OSCBundle *bndl, char packet_header[])
+void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *bndl, char packet_header[])
 {
 	// bndl->empty();
 	// OSCMessage tmpMsg = bndl->add(packet_header);
@@ -471,8 +507,9 @@ void convert_OSC_array_to_singleMsg(String key_values [], OSCBundle *bndl, char 
 	// }
 }
 
-void convert_OSC_array_to_multiMsg(String key_values [], OSCBundle *bndl, char packet_header[])
+void convert_OSC_key_value_array_to_multiMsg(String key_values [], OSCBundle *bndl, char packet_header[])
 {
+	// convert_OSC_key_value_array_to_singleMsg(key_values, bndl, packet_header);
 
 }
 
@@ -488,8 +525,20 @@ void convert_OSC_assoc_arrays_to_multiMsg(String keys [], String values [], OSCB
 
 
 
-
-// Can go to bundle then to assoc, but it isnt hard to just bypass the bundle intermediate 
+// --- CONVERT ARRAY KEY VALUES TO ASSOC ---
+// 
+// Converts and array formatted as:
+//   [key1, value1, key2, value2, key3, value3]
+// to two associated arrays formatted as:
+//   [key1,   key2,   key3]
+//   [value1, value2, value3]
+// 
+// @param key_values  The flat array of keys and values
+// @param keys        The array to be filled with the keys from 'key_values'
+// @param values      The array to be filled with the values for 'key_values'
+// @param kv_len      The length of the 'key_value' array
+// @param assoc_len   The length of the 'keys' and 'values' arrays (should be the same)
+//
 void convert_array_key_value_to_assoc(String key_values [], String keys [], String values [], int kv_len, int assoc_len)
 {
 	if (kv_len > 2*assoc_len) {
@@ -503,6 +552,22 @@ void convert_array_key_value_to_assoc(String key_values [], String keys [], Stri
 	}
 }
 
+
+
+// --- CONVERT ARRAY KEY VALUES TO ASSOC ---
+// 
+// Converts two associated arrays formatted as:
+//   [key1,   key2,   key3]
+//   [value1, value2, value3]:
+// to single array formatted as:
+//   [key1, value1, key2, value2, key3, value3]
+// 
+// @param keys        The array of keys  
+// @param values      The array to values
+// @param key_values  The flat array of keys and values to be filled by combining 'keys' and 'values'
+// @param assoc_len   The length of the 'keys' and 'values' arrays (should be the same)
+// @param kv_len      The length of the 'key_value' array
+//
 void convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len)
 {
 	if ( kv_len < 2*assoc_len ) {
@@ -515,6 +580,10 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 		key_values[i*2+1] = values[i];
 	}
 }
+
+
+
+
 
 
 
@@ -572,34 +641,6 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 // {
 
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
