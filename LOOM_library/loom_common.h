@@ -69,7 +69,7 @@ void Loom_begin()
 
 	// Read configuration from flash, or write config.h settings 
 	// if no settings are currently saved
-//	setup_flash_config();
+	setup_flash_config();
 
 	// Communication Platform specific setups
 	#if is_wifi == 1
@@ -269,6 +269,12 @@ void flash_led()
 	} 
 	digitalWrite(led, HIGH);
 }
+
+
+
+
+
+
 
 
 
