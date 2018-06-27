@@ -24,9 +24,14 @@ enum Platform {
 };
 
 // Macros for printing to Serial iff Loom Debug is enabled
-#define LOOM_DEBUG_Println(X)  (LOOM_DEBUG==0) ?: Serial.println(X)
-#define LOOM_DEBUG_Print(X)    (LOOM_DEBUG==0) ?: Serial.print(X)
-#define LOOM_DEBUG_Println2(X, Y) LOOM_DEBUG_Print(X); LOOM_DEBUG_Println(Y)
+#define LOOM_DEBUG_Print(X)          (LOOM_DEBUG==0) ? :  Serial.print(X)
+#define LOOM_DEBUG_Println(X)        (LOOM_DEBUG==0) ? :  Serial.println(X)
+#define LOOM_DEBUG_Print2(X,Y)       LOOM_DEBUG_Print(X); LOOM_DEBUG_Print(Y)
+#define LOOM_DEBUG_Println2(X,Y)     LOOM_DEBUG_Print(X); LOOM_DEBUG_Println(Y)
+#define LOOM_DEBUG_Print3(X,Y,Z)     LOOM_DEBUG_Print(X); LOOM_DEBUG_Print(Y); LOOM_DEBUG_Print(Z)
+#define LOOM_DEBUG_Println3(X,Y,Z)   LOOM_DEBUG_Print(X); LOOM_DEBUG_Print(Y); LOOM_DEBUG_Println(Z)
+#define LOOM_DEBUG_Print4(W,X,Y,Z)   LOOM_DEBUG_Print(W); LOOM_DEBUG_Print(X); LOOM_DEBUG_Print(Y); LOOM_DEBUG_Print(Z)
+#define LOOM_DEBUG_Println4(W,X,Y,Z) LOOM_DEBUG_Print(W); LOOM_DEBUG_Print(X); LOOM_DEBUG_Print(Y); LOOM_DEBUG_Println(Z)
 
 
 // ================================================================
@@ -168,6 +173,14 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #include "loom_OSC_translator.h"
 #include "loom_common.h"  		// These may refer to functions in above headers
 #include "loom_interface.h"
+
+
+
+
+
+
+
+
 
 
 

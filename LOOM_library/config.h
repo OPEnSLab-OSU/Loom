@@ -33,7 +33,7 @@
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform(s) --- 
-#define is_wifi      1		// 1 to enable WiFi
+#define is_wifi      0		// 1 to enable WiFi
 #define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 
@@ -225,49 +225,6 @@
 										// 80 seems to be a good amount, around 50 and lower may result in lost packets over WiFi
 #endif
 // #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

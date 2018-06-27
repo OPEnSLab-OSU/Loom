@@ -30,80 +30,11 @@ void loop()
 	OSCBundle bndl, send_bndl; 
 
 	// Receive bundles, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
-	receive_bundle(&bndl, WIFI);
+	// receive_bundle(&bndl, WIFI);
 
 
-//
-//	// Single to multi test
-//	if (get_bundle_bytes(&bndl)) {
-//		LOOM_DEBUG_Println("Got a bundle");
-//		convert_OSC_singleMsg_to_multiMsg(&bndl, &send_bndl);
-//
-//		bndl.send(Serial);
-//		Serial.println();
-//		send_bndl.send(Serial);
-//		Serial.println();
-//
-//		LOOM_DEBUG_Println("\nOUT OLD");
-//		print_bundle(&bndl);
-//		LOOM_DEBUG_Println("\nOUT NEW");
-//		print_bundle(&send_bndl);
-//		
-//		while(1);
-//	}
 
 
-	// Multi to single test
-//	if (get_bundle_bytes(&bndl)) {
-//		LOOM_DEBUG_Println("Got a bundle");
-//		convert_OSC_multiMsg_to_singleMsg(&bndl, &send_bndl);
-//
-//		bndl.send(Serial);
-//		Serial.println();
-//		send_bndl.send(Serial);
-//		Serial.println();
-//
-//		LOOM_DEBUG_Println("\nOUT OLD");
-//		print_bundle(&bndl);
-//		LOOM_DEBUG_Println("\nOUT NEW");
-//		print_bundle(&send_bndl);
-//		
-//		while(1);
-//	}
-
-//	// Bundle to key_value array test
-//	if (get_bundle_bytes(&bndl)) {
-//		LOOM_DEBUG_Println("Got a bundle");
-//		String key_values[20];
-//		convert_OSC_to_array_key_value(&bndl, key_values);
-//
-//		for (int i = 0; i < 20; i++) {
-//			LOOM_DEBUG_Print("i=");
-//			LOOM_DEBUG_Print(i);
-//			LOOM_DEBUG_Println2(": ", key_values[i]); 
-//		}
-//		
-//		while(1);
-//	}
-
-
-	// Bundle to key_value array test
-	if (get_bundle_bytes(&bndl)) {
-		LOOM_DEBUG_Println("Got a bundle");
-		String keys[10], values[10];
-		convert_OSC_to_arrays_assoc(&bndl, keys, values);
-
-		for (int i = 0; i < 10; i++) {
-			LOOM_DEBUG_Print("i=");
-			LOOM_DEBUG_Print(i);
-			LOOM_DEBUG_Print(": ");
-			LOOM_DEBUG_Print(keys[i]);
-			LOOM_DEBUG_Print(", ");
-			LOOM_DEBUG_Println(values[i]);
-		}
-		
-		while(1);
-	}
 
 	// Process bundle (nothing will happen if bndl is empty), bundle is emptied after processing
 //	process_bundle(&bndl);
@@ -127,54 +58,6 @@ void loop()
 	additional_loop_checks();
 	
 } // End loop section
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
