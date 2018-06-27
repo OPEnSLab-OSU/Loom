@@ -7,15 +7,16 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-// enum DATA_FORMAT {
-// 	BUNDLE_MULTI,
-// 	BUNDLE_SINGLE,
-// 	STRING_MULTI,
-// 	STRING_SINGLE,
-// 	ARRAY_KEY_VALUE,
-// 	ASSOC_ARRAY,
-// 	INVALID
-// };
+
+
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================
+union data_value { // Used in translation between OSC and strings
+	int32_t i;
+	float f;
+	uint32_t u;
+};
 
 
 // ================================================================ 
@@ -58,14 +59,6 @@ void convert_array_key_value_to_assoc(String key_values [], String keys [], Stri
 void convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len);
 
 
-// ================================================================ 
-// ===                        STRUCTURES                        === 
-// ================================================================
-union data_value { // Used in translation between OSC and strings
-	int32_t i;
-	float f;
-	uint32_t u;
-};
 
 // ================================================================
 // ===                    GENERAL FUNCTIONS                     ===
@@ -574,45 +567,119 @@ void convert_OSC_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[]
 // ===         CONVERSION FROM ARRAY TO BUNDLE FORMATS          ===
 // ================================================================
 
-// Interpret is an optional parameter in the following array to bundle functions
+// Interpret is an optional parameter in the following 4 array to 
+// bundle functions (8 if counting overloaded versions)
+// 
 // The encoding is as follows:
-//   0:  Smart Interpret (int->int, float->float, other->string) 
-//                         [This is the default if interpret is not specified]
-//   1:  Int             (non-ints will become 0)
-//   2:  Float           (non-floats will become 0)
-//   3:  String          (does no extra manipulation, leaves as strings)
+//  0 - 3 assume elements are in [key1, value1, key2, value2...] format,
+//        with even indexes being keys, and will be left as strings
+//        and odd indexes being data, and will be interpreted as specified
+//   0:  Smart   (int->int, float->float, other->string) 
+//                 [This is the default if interpret is not specified]
+//   1: Int     (non-ints will become 0)
+//   2: Float   (non-floats will become 0)
+//   3: String  (does no extra manipulation, leaves as strings)
+//
+//  4-6 do NOT assume key value pairs and will also interpret even indexes as specified,
+//      use with caution
+//      *Note: likely will be issues when making multi-message bundles with below option
+//   4: Smart-All 
+//   5: Int-All
+//   6: Float-All
 
 
 
-
-
+// --- CONVERT OSC KEY VALUE ARRAY TO SINGLE MSG --- 
+//	
+// Convert an array formatted as:
+//   [key1, value1, key2, value2 ...]
+// to an OSC message with a single message, with multiple arguments
+// 
+// @param keys_values    The flat array of keys and values  
+// @param bndl           The flat array of keys and values to be filled by combining 'keys' and 'values'
+// @param packet_header  The address to add to bundle/messages 
+// @param kv_len         The length of the 'keys_values' array 
+// @param interprt       (see comment at start of section above for details about the parameter)
+//
 void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, int interpret)
 {
-	bndl->empty();
-	OSCMessage tmpMsg;// = bndl->add(packet_header);
-
-	// for (int i = 0; i < kv_len; i++) {
-	// 	LOOM_DEBUG_Println(key_values[i]);
-	// }
-
-	char buf[50];
-	for (int i = 0; i < kv_len; i++) {
-		key_values[i].toCharArray(buf, 50);
-		tmpMsg.add(buf);
+	if ((interpret < 0) || (interpret > 6)) {
+		LOOM_DEBUG_Println3("'", interpret, "' is not a valid way to interpret array when converting to bundle");
+		LOOM_DEBUG_Println("Use: 0=Smart, 1=Int, 2=Float, 3=String, 4=Smart-All, 5=Int-All, 6=Float-All");
+		LOOM_DEBUG_Println("Omitting 'interpret' argument will default to 'Smart' (recommended)");
+		return;
 	}
 
+	bndl->empty();
+	OSCMessage tmpMsg;
+	const char *number;    
+	char *end;      
+	char data[50];
+	int32_t tmpInt; 
+	float tmpFloat;
+
+	for (int i = 0; i < kv_len; i++) {
+		key_values[i].toCharArray(data, 50);
+
+		// If all are stringm, or assuming keys as strings, add data as a string
+		if ( (interpret == 3) || ((interpret <= 3) && (i%2==0)) ) {
+			tmpMsg.add(data);
+		} else {
+			switch (interpret) {
+				case 0: case 4: 	// Smart [All]
+				case 1: case 5: 	// Int [All]
+					tmpInt = (int32_t)strtol(data, &end, 10);
+					if ( (interpret == 1) ||  (interpret == 5) || !(end == data || *end != '\0') ) {
+						tmpMsg.add( tmpInt ); 
+						break;
+					}
+				case 2: case 6: 	// Float [All]
+					tmpFloat = strtof(data, &end);
+					if ( (interpret == 2) || (interpret == 6) || !(end == data || *end != '\0') ) {
+						tmpMsg.add( tmpFloat ); 
+						break;
+					}
+				default: 			// String
+					tmpMsg.add(data);
+			} // of switch
+		} // of else
+	} // of for
+
+	// Add address string to message
 	char address[80];
-	sprintf(address, "%s/data", packet_header);
+	if (packet_header[0] == '/') {
+		sprintf(address, "%s/data", packet_header);
+	} else {
+		sprintf(address, "/%s/data", packet_header);
+	}
+
 	tmpMsg.setAddress(address);
 	bndl->add(tmpMsg);
 }
 
+// OVERLOADED version of the previous function
+// Simply calls the previous function with an 'interpret' value of 0
+// (see comment at start of section above for details about the parameter)
 void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len) { 
 	convert_OSC_key_value_array_to_singleMsg(key_values, bndl, packet_header, kv_len, 0); 
 }
 
 
 
+// --- CONVERT OSC KEY VALUE ARRAY TO MULTIMSG ---
+//
+// Convert an array formatted as:
+//   [key1, value1, key2, value2 ...]
+// to an OSC message with multiple messages, 
+// the end of each address being a key,
+// with a single argument each as the corresponding value
+// 
+// @param keys_values    The flat array of keys and values  
+// @param bndl           The flat array of keys and values to be filled by combining 'keys' and 'values'
+// @param packet_header  The address to add to bundle/messages 
+// @param kv_len         The length of the 'keys_values' array 
+// @param interprt       (see comment at start of section above for details about the parameter)
+//
 void convert_OSC_key_value_array_to_multiMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, int interpret)
 {
 	// Convert to single message
@@ -621,12 +688,29 @@ void convert_OSC_key_value_array_to_multiMsg(String key_values [], OSCBundle *bn
 	convert_OSC_singleMsg_to_multiMsg(bndl);
 }
 
+// OVERLOADED version of the previous function
+// Simply calls the previous function with an 'interpret' value of 0
+// (see comment at start of section above for details about the parameter)
 void convert_OSC_key_value_array_to_multiMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len) { 
 	convert_OSC_key_value_array_to_multiMsg(key_values, bndl, packet_header, kv_len, 0); 
 }
 
 
 
+// --- CONVERT OSC ASSOC ARRAYS TO SINGLEMSG ---
+//	
+// Convert associated arrays formatted as:
+//   [key1, key2 ...]
+//   [value1, value2 ...]
+// to an OSC message with a single message, with multiple arguments
+//
+// @param keys           The array of keys  
+// @param values         The array to values
+// @param bndl           The flat array of keys and values to be filled by combining 'keys' and 'values'
+// @param packet_header  The address to add to bundle/messages 
+// @param assoc_len      The length of the 'keys' and 'values' arrays (should be the same)
+// @param interprt       (see comment at start of section above for details about the parameter)
+//
 void convert_OSC_assoc_arrays_to_singleMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, int interpret)
 {
 	// Convert to single array first 
@@ -637,12 +721,31 @@ void convert_OSC_assoc_arrays_to_singleMsg(String keys [], String values [], OSC
 	convert_OSC_key_value_array_to_singleMsg(key_values, bndl, packet_header, kv_len, interpret);
 }
 
+// OVERLOADED version of the previous function
+// Simply calls the previous function with an 'interpret' value of 0
+// (see comment at start of section above for details about the parameter)
 void convert_OSC_assoc_arrays_to_singleMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len) { 
 	convert_OSC_assoc_arrays_to_singleMsg(keys, values, bndl, packet_header, assoc_len, 0); 
 }
 
 
 
+// --- CONVERT OSC ASSOC ARRAYS TO MULTIMSG ---
+//
+// Convert an array formatted as:
+//   [key1, key2 ...]
+//   [value1, value2 ...]
+// to an OSC message with multiple messages, 
+// the end of each address being a key,
+// with a single argument each as the corresponding value
+// 
+// @param keys           The array of keys  
+// @param values         The array to values
+// @param bndl           The flat array of keys and values to be filled by combining 'keys' and 'values'
+// @param packet_header  The address to add to bundle/messages 
+// @param assoc_len      The length of the 'keys' and 'values' arrays (should be the same)
+// @param interprt       (see comment at start of section above for details about the parameter)
+//
 void convert_OSC_assoc_arrays_to_multiMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, int interpret)
 {
 	// Convert to single array first 
@@ -653,6 +756,9 @@ void convert_OSC_assoc_arrays_to_multiMsg(String keys [], String values [], OSCB
 	convert_OSC_key_value_array_to_multiMsg(key_values, bndl, packet_header, kv_len, interpret);
 }
 
+// OVERLOADED version of the previous function
+// Simply calls the previous function with an 'interpret' value of 0
+// (see comment at start of section above for details about the parameter)
 void convert_OSC_assoc_arrays_to_multiMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len) { 
 	convert_OSC_assoc_arrays_to_multiMsg(keys, values, bndl, packet_header, assoc_len, 0); 
 }
@@ -720,6 +826,13 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 		key_values[i*2+1] = values[i];
 	}
 }
+
+
+
+
+
+
+
 
 
 
