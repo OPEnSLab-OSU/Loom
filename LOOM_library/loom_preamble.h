@@ -82,8 +82,8 @@ char global_packet_header_string[80]; // Sometimes functions need to access the 
 // That are referenced by device .h files
 void read_non_volatile();
 void write_non_volatile();
-void convert_string_to_OSC(char *osc_string, OSCBundle* bndl);
-void convert_OSC_to_string(OSCBundle *bndl, char *osc_string);
+void convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl);
+void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
 String get_data_value(OSCMessage* msg, int pos);
 #if LOOM_DEBUG == 1
 	void print_bundle(OSCBundle *bndl);
@@ -168,6 +168,8 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #include "loom_OSC_translator.h"
 #include "loom_common.h"  		// These may refer to functions in above headers
 #include "loom_interface.h"
+
+
 
 
 

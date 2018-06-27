@@ -65,7 +65,7 @@ void nrf_receive_bundle(OSCBundle *bndl)
 		memset(message, '\0', NRF_MESSAGE_SIZE);
 		network.read(header,&message,NRF_MESSAGE_SIZE-1);
 
-		convert_string_to_OSC(message, bndl);
+		convert_OSC_string_to_bundle(message, bndl);
 		LOOM_DEBUG_Println(message);
 	}
 }
@@ -83,7 +83,7 @@ bool nrf_send_bundle(OSCBundle *bndl)
 	char message[NRF_MESSAGE_SIZE];
 	memset(message, '\0', NRF_MESSAGE_SIZE);
 	
-	convert_OSC_to_string(bndl, message);
+	convert_OSC_bundle_to_string(bndl, message);
 	
 	RF24NetworkHeader header(NRF_HUB_ADDRESS);
 	bool is_sent = network.write(header,message,strlen(message));
@@ -95,6 +95,8 @@ bool nrf_send_bundle(OSCBundle *bndl)
 	#endif
 	return is_sent;
 }
+
+
 
 
 
