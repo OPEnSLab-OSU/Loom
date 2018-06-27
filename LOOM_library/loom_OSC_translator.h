@@ -4,7 +4,6 @@
 #include <string.h>
 
 
-
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
@@ -18,7 +17,6 @@
 // 	INVALID
 // };
 
-// #define ARR_LEN(A) (sizeof(A)/sizeof((A)[0]))
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
@@ -27,14 +25,16 @@
 #if LOOM_DEBUG == 1
 	void print_bundle(OSCBundle *bndl);
 #endif
-int get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
+int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
 String get_data_value(OSCMessage* msg, int pos);
-void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
+void   deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
 
 void convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl);
 void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
 void convert_OSC_multiMsg_to_singleMsg(OSCBundle *bndl, OSCBundle *outBndl);
+void convert_OSC_multiMsg_to_singleMsg(OSCBundle *bndl);
 void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl, OSCBundle *outBndl);
+void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl);
 void convert_OSC_to_array_key_value(OSCBundle *bndl, String key_values[], int kv_len);
 void convert_OSC_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[], int assoc_len);
 
@@ -85,12 +85,15 @@ void print_bundle(OSCBundle *bndl)
 			Serial.print(m + 1);
 			Serial.print(": ");
 			if (data_type == 'f') {
+				Serial.print("(f) ");
 				Serial.println(msg->getFloat(m));
 			}
 			else if (data_type == 'i') {
+				Serial.print("(i) ");
 				Serial.println(msg->getInt(m));
 			}
 			else if (data_type == 's') {
+				Serial.print("(s) ");
 				msg->getString(m, buf, 50);
 				Serial.println(buf);
 			}
@@ -359,6 +362,25 @@ void convert_OSC_multiMsg_to_singleMsg(OSCBundle *bndl, OSCBundle *outBndl)
 
 
 
+// OVERLOADED version of the above function
+//
+// This one is for converting bundles 'in-place',
+// that is, only one bundle needs to be provided,
+// rather than a source and destination of the conversion
+//
+// See above function for further details on conversion
+//
+// @param bndl  The bundle to be converted 
+// 
+void convert_OSC_multiMsg_to_singleMsg(OSCBundle *bndl)
+{
+	OSCBundle outBndl;
+	convert_OSC_multiMsg_to_singleMsg(bndl, &outBndl);
+	deep_copy_bundle(&outBndl, bndl);
+}
+
+
+
 // --- CONVERT OSC SINGLEMSG TO MULTIMSG ---
 //
 // This converts an OSC bundle formated as an 
@@ -420,22 +442,22 @@ void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl, OSCBundle *outBndl)
  	} 
 }
 
-void convert_OSC_singleMsg_to_multiMsg_in_place(OSCBundle *bndl)
+// OVERLOADED version of the above function
+//
+// This one is for converting bundles 'in-place',
+// that is, only one bundle needs to be provided,
+// rather than a source and destination of the conversion
+//
+// See above function for further details on conversion
+//
+// @param bndl  The bundle to be converted 
+// 
+void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl)
 {
-	LOOM_DEBUG_Println("In Place convert");
 	OSCBundle outBndl;
-	LOOM_DEBUG_Println("Created outBndl");
 	convert_OSC_singleMsg_to_multiMsg(bndl, &outBndl);
-	LOOM_DEBUG_Println("After conversion");
-	LOOM_DEBUG_Println("Running deep copy");
 	deep_copy_bundle(&outBndl, bndl);
-	LOOM_DEBUG_Println("Finished deep copy");
-//	LOOM_DEBUG_Println("\nOLD BUNDLE");
-//	print_bundle(bndl);
-//	LOOM_DEBUG_Println("\nNEW OUT BUNDLE");
-//	print_bundle(&outBndl);
 }
-
 
 
 
@@ -459,7 +481,7 @@ void convert_OSC_to_array_key_value(OSCBundle *bndl, String key_values[], int kv
 	} 
 
 	// Make sure key_values array is large enough
-	if ( bndl->getOSCMessage(0)->size() > kv_len ) {
+	if ( convertedBndl.getOSCMessage(0)->size() > kv_len ) {
 		LOOM_DEBUG_Println("Key-values array not large enough to hold all of bundle data, cannot convert");
 		return;
 	}
@@ -496,7 +518,7 @@ void convert_OSC_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[]
 	}
 
 	// Make sure keys and values arrays are large enough
-	if ( bndl->getOSCMessage(0)->size() > 2*assoc_len ) {
+	if ( convertedBndl.getOSCMessage(0)->size() > 2*assoc_len ) {
 		LOOM_DEBUG_Println("Key-values array not large enough to hold all of bundle data, cannot convert");
 		return;
 	}
@@ -507,36 +529,6 @@ void convert_OSC_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[]
 		keys[i/2]   = get_data_value(msg, i);
 		values[i/2] = get_data_value(msg, i+1); 
 	}
-}
-
-
-
-
-
-void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *bndl, char packet_header[])
-{
-	// bndl->empty();
-	// OSCMessage tmpMsg = bndl->add(packet_header);
-
-	// for (int i = 0; i < (sizeof(key_values)/sizeof(key_values[0])); i++) {
-	// 	tmpMsg.add(key_values[i]);
-	// }
-}
-
-void convert_OSC_key_value_array_to_multiMsg(String key_values [], OSCBundle *bndl, char packet_header[])
-{
-	// convert_OSC_key_value_array_to_singleMsg(key_values, bndl, packet_header);
-
-}
-
-void convert_OSC_assoc_arrays_to_singleMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[])
-{
-	// Convert to single array first 
-}
-
-void convert_OSC_assoc_arrays_to_multiMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[])
-{
-	// Convert to single array first ? ?
 }
 
 
@@ -598,6 +590,56 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 }
 
 
+// add option to try to convert to correct types
+void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len)
+{
+	bndl->empty();
+	OSCMessage tmpMsg;// = bndl->add(packet_header);
+
+	// for (int i = 0; i < kv_len; i++) {
+	// 	LOOM_DEBUG_Println(key_values[i]);
+	// }
+
+	char buf[50];
+	for (int i = 0; i < kv_len; i++) {
+		key_values[i].toCharArray(buf, 50);
+		tmpMsg.add(buf);
+	}
+
+	char address[80];
+	sprintf(address, "%s/data", packet_header);
+	tmpMsg.setAddress(address);
+	bndl->add(tmpMsg);
+}
+
+void convert_OSC_key_value_array_to_multiMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len)
+{
+	// Convert to single message
+	convert_OSC_key_value_array_to_singleMsg(key_values, bndl, packet_header, kv_len);
+	
+	// Then convert bundle to multiple messages
+	convert_OSC_singleMsg_to_multiMsg(bndl);
+}
+
+void convert_OSC_assoc_arrays_to_singleMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len)
+{
+	// Convert to single array first 
+	int kv_len = 2*assoc_len;
+	String key_values[kv_len];
+	convert_array_assoc_to_key_value(keys, values, key_values, assoc_len, kv_len);
+	// Then convert to single message bundle
+	convert_OSC_key_value_array_to_singleMsg(key_values, bndl, packet_header, kv_len);
+}
+
+void convert_OSC_assoc_arrays_to_multiMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len)
+{
+	// Convert to single array first 
+	int kv_len = 2*assoc_len;
+	String key_values[kv_len];
+	convert_array_assoc_to_key_value(keys, values, key_values, assoc_len, kv_len);
+	// Then convert to single then multi-message bundle
+	convert_OSC_key_value_array_to_multiMsg(key_values, bndl, packet_header, kv_len);
+}
 
 
 
@@ -657,6 +699,13 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 // {
 
 // }
+
+
+
+
+
+
+
 
 
 
