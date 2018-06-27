@@ -29,6 +29,7 @@
 #endif
 int get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
 String get_data_value(OSCMessage* msg, int pos);
+void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
 
 void convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl);
 void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
@@ -153,6 +154,40 @@ String get_data_value(OSCMessage* msg, int pos)
 	LOOM_DEBUG_Println2("Message does not have an argument with position: ", pos);
 
 	return String("");
+}
+
+
+
+// --- DEEP COPY BUNDLE ---
+// 
+// Takes two bundle pointers,
+// Copies the data of the first into the second
+// 
+// @param srcBndl   The source bundle to be copied
+// @param destBndl  The bundle to copied into
+//
+void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl) {
+	destBndl->empty();
+	OSCMessage *msg;
+	OSCMessage tmpMsg;
+	char buf[50];
+	for (int i = 0; i < srcBndl->size(); i++) { 	// for each message
+		msg = srcBndl->getOSCMessage(i);
+		for (int j = 0; j < msg->size(); j++) { 	// for each argument 
+
+			switch (msg->getType(j)) {
+	 			case 'i': tmpMsg.add(msg->getInt(j));	break;
+	 			case 'f': tmpMsg.add(msg->getFloat(j));	break;
+	 			case 's': char buf[80];  msg->getString(j, buf, 80);  tmpMsg.add(buf);  break;
+	 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
+	 		}
+ 		}
+ 		msg->getAddress(buf);
+		tmpMsg.setAddress(buf);
+
+		destBndl->add(tmpMsg);
+		tmpMsg.empty();		
+	} 
 }
 
 
@@ -385,42 +420,23 @@ void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl, OSCBundle *outBndl)
  	} 
 }
 
-// void convert_OSC_singleMsg_to_multiMsg_in_place(OSCBundle *bndl)
-// {
-// 	LOOM_DEBUG_Println("In Place convert");
-// 	OSCBundle* outBndl;
-// 	LOOM_DEBUG_Println("Created outBndl");
-// 	convert_OSC_singleMsg_to_multiMsg(bndl, outBndl);
-// 	LOOM_DEBUG_Println("After conversion");
-// 	LOOM_DEBUG_Println("OLD BUNDLE");
-// 	print_bundle(bndl);
-// 	LOOM_DEBUG_Println("NEW OUT BUNDLE");
-// 	print_bundle(outBndl);
-// }
-
-void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl) {
-	destBndl->empty();
-	OSCMessage *msg;
-	OSCMessage tmpMsg;
-	char buf[50];
-	for (int i = 0; i < srcBndl->size(); i++) { 	// for each message
-		msg = srcBndl->getOSCMessage(i);
-		for (int j = 0; j < msg->size(); j++) { 	// for each argument 
-
-			switch (msg->getType(j)) {
-	 			case 'i': tmpMsg.add(msg->getInt(j));	break;
-	 			case 'f': tmpMsg.add(msg->getFloat(j));	break;
-	 			case 's': char buf[80];  msg->getString(j, buf, 80);  tmpMsg.add(buf);  break;
-	 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
-	 		}
- 		}
- 		msg->getAddress(buf);
-		tmpMsg.setAddress(buf);
-
-		destBndl->add(tmpMsg);
-		tmpMsg.empty();		
-	} 
+void convert_OSC_singleMsg_to_multiMsg_in_place(OSCBundle *bndl)
+{
+	LOOM_DEBUG_Println("In Place convert");
+	OSCBundle outBndl;
+	LOOM_DEBUG_Println("Created outBndl");
+	convert_OSC_singleMsg_to_multiMsg(bndl, &outBndl);
+	LOOM_DEBUG_Println("After conversion");
+	LOOM_DEBUG_Println("Running deep copy");
+	deep_copy_bundle(&outBndl, bndl);
+	LOOM_DEBUG_Println("Finished deep copy");
+//	LOOM_DEBUG_Println("\nOLD BUNDLE");
+//	print_bundle(bndl);
+//	LOOM_DEBUG_Println("\nNEW OUT BUNDLE");
+//	print_bundle(&outBndl);
 }
+
+
 
 
 // --- CONVERT OSC TO ARRAY KEY VALUE --- 
@@ -641,6 +657,8 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 // {
 
 // }
+
+
 
 
 

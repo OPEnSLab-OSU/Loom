@@ -41,8 +41,8 @@ void loop()
 //		print_bundle(&bndl);
 
 //		convert_OSC_singleMsg_to_multiMsg(&bndl, &send_bndl);
-//		convert_OSC_singleMsg_to_multiMsg_in_place(&bndl);
-		deep_copy_bundle(&bndl, &send_bndl);
+		convert_OSC_singleMsg_to_multiMsg_in_place(&bndl);
+//		deep_copy_bundle(&bndl, &send_bndl);
 
 		LOOM_DEBUG_Println("\nOLD");
 		print_bundle(&bndl);
@@ -78,6 +78,8 @@ void loop()
 	additional_loop_checks();
 	
 } // End loop section
+
+
 
 
 
