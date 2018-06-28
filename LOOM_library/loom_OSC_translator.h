@@ -58,6 +58,18 @@ void convert_OSC_assoc_arrays_to_multiMsg( String keys [], String values [], OSC
 void convert_array_key_value_to_assoc(String key_values [], String keys [], String values [], int kv_len, int assoc_len);
 void convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len);
 
+// Appending to single-message bundles
+void append_OSC_singleMsg(OSCBundle *bndl, int    elem);
+void append_OSC_singleMsg(OSCBundle *bndl, float  elem);
+void append_OSC_singleMsg(OSCBundle *bndl, char * elem);
+void append_OSC_singleMsg(OSCBundle *bndl, String elem);
+void append_OSC_singleMsg(OSCBundle *bndl, int    elements [], int count);
+void append_OSC_singleMsg(OSCBundle *bndl, float  elements [], int count);
+void append_OSC_singleMsg(OSCBundle *bndl, char * elements [], int count);
+void append_OSC_singleMsg(OSCBundle *bndl, String elements [], int count);
+
+
+ 
 
 
 // ================================================================
@@ -611,6 +623,7 @@ void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *b
 	}
 
 	bndl->empty();
+
 	OSCMessage tmpMsg;
 	const char *number;    
 	char *end;      
@@ -829,7 +842,34 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 
 
 
+// ================================================================
+// ===          APPENDING DATA TO EXISTING STRUCTURES           ===
+// ================================================================
 
+// OVERLOADED function for appending to a single-message OSC bundle
+void append_OSC_singleMsg(OSCBundle *bndl, int elem)
+{ bndl->getOSCMessage(0)->add((int32_t)elem); }
+
+void append_OSC_singleMsg(OSCBundle *bndl, float elem)
+{ bndl->getOSCMessage(0)->add(elem); }
+
+void append_OSC_singleMsg(OSCBundle *bndl, char * elem)
+{ bndl->getOSCMessage(0)->add(elem); }
+
+void append_OSC_singleMsg(OSCBundle *bndl, String elem)
+{ bndl->getOSCMessage(0)->add(elem); }
+//
+void append_OSC_singleMsg(OSCBundle *bndl, int elements [], int count)
+{ for (int i = 0; i < count; i++) { bndl->getOSCMessage(0)->add((int32_t)elements[i]); } }
+
+void append_OSC_singleMsg(OSCBundle *bndl, float elements [], int count)
+{ for (int i = 0; i < count; i++) { bndl->getOSCMessage(0)->add(elements[i]); } }
+
+void append_OSC_singleMsg(OSCBundle *bndl, char * elements [], int count)
+{ for (int i = 0; i < count; i++) { bndl->getOSCMessage(0)->add(elements[i]); } }
+
+void append_OSC_singleMsg(OSCBundle *bndl, String elements [], int count)
+{ for (int i = 0; i < count; i++) { bndl->getOSCMessage(0)->add(elements[i]); } }
 
 
 

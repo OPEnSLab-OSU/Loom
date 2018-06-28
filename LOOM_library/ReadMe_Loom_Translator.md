@@ -46,7 +46,14 @@ The Loom Translator (or converter) is used to convert data in one format into an
 | **Array–Array Conversions**          |                                      |          |       |
 | Array (key-value, interleaved)       | Arrays (key-value, associated)       |          |       |
 | Arrays (key-value, associated)       | Array (key-value, interleaved)       |          |       |
-|                                      |                                      |          |       |
+
+### Conversion Notes
+
+**In Place Conversion**
+
+Some of the conversions that keep the same data structure just organized in a different way (namely between bundles with single and multiple messages) can optionally be done 'in-place'. The default means of calling the conversion functions is to provide a source data structure, and a destination data structure, the later of which will be emptied if not already, and filled with the translated data. The source data structure will remain unchanged
+
+If instead, one omits the destination structure (to a function that supports it), the source data structure itself will be filled with the translated data. 
 
 ## Details about OSC Bundles
 
