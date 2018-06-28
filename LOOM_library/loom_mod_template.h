@@ -93,7 +93,7 @@ void package_<module>(OSCBundle *bndl, char packet_header_string[])
 	// Example of what measure might look like:
 
 	// char address_string[255];
-	// sprintf(address_string, "%s%s%d%s", packet_header_string, /<module");
+	// sprintf(address_string, "%s%s", packet_header_string, "/<module>");
 	// OSCMessage msg = OSCMessage(address_string);
 	// msg.add("ex1").add(state_<module>.array_example[0]);
 	// msg.add("ex2").add(state_<module>.array_example[1]);
