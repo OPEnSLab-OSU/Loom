@@ -229,4 +229,6 @@
 // #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 
 
-
+#if is_sapflow == 1
+	#define num_analog 2
+#endif 

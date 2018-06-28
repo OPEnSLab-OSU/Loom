@@ -94,13 +94,13 @@ void loop()
 //	process_bundle(&bndl);
 
 	// Update stored readings from sensors
-//	measure_sensors();
+	measure_sensors();
 
 	// Populate bundle to send with sensor values
-//	package_data(&send_bndl);
+	package_data(&send_bndl);
 
 	// Send the bundle, takes bundle to be filled and platform to send it over [WIFI, LORA, NRF, SDCARD, PUSHINGBOX]
-//	send_bundle(&send_bndl, PUSHINGBOX);
+	send_bundle(&send_bndl, LORA);
 //
 //	if (get_bundle_bytes(&bndl)){
 //		send_bundle(&bndl, SDCARD, "test2.txt");
