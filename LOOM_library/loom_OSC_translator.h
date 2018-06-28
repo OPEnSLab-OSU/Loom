@@ -49,14 +49,47 @@ void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *b
 void convert_OSC_key_value_array_to_singleMsg(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len);
 void convert_OSC_key_value_array_to_multiMsg( String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, int interpret);
 void convert_OSC_key_value_array_to_multiMsg( String key_values [], OSCBundle *bndl, char packet_header[], int kv_len);
+
 void convert_OSC_assoc_arrays_to_singleMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, int interpret);
 void convert_OSC_assoc_arrays_to_singleMsg(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len);
 void convert_OSC_assoc_arrays_to_multiMsg( String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, int interpret);
 void convert_OSC_assoc_arrays_to_multiMsg( String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len);
 
+//Add interpet? (Nope convert to string, call main function with interpret setting)?
+		void convert_OSC_assoc_arrays_to_singleMsg(String keys [], int    values [], OSCBundle *bndl, char packet_header[], int assoc_len);
+		void convert_OSC_assoc_arrays_to_singleMsg(String keys [], float  values [], OSCBundle *bndl, char packet_header[], int assoc_len);
+		void convert_OSC_assoc_arrays_to_singleMsg(String keys [], char*  values [], OSCBundle *bndl, char packet_header[], int assoc_len);
+		void convert_OSC_assoc_arrays_to_multiMsg( String keys [], int    values [], OSCBundle *bndl, char packet_header[], int assoc_len);
+		void convert_OSC_assoc_arrays_to_multiMsg( String keys [], float  values [], OSCBundle *bndl, char packet_header[], int assoc_len);
+		void convert_OSC_assoc_arrays_to_multiMsg( String keys [], char*  values [], OSCBundle *bndl, char packet_header[], int assoc_len);
+
+// Conversion from array of non-Strings to single message bundle      
+		void convert_OSC_array_to_singleMsg(int   data [], OSCBundle *bndl, char packet_header[], int len);
+		void convert_OSC_array_to_singleMsg(float data [], OSCBundle *bndl, char packet_header[], int len);
+		void convert_OSC_array_to_singleMsg(char* data [], OSCBundle *bndl, char packet_header[], int len);
+
+
 // Conversion between array formats
 void convert_array_key_value_to_assoc(String key_values [], String keys [], String values [], int kv_len, int assoc_len);
 void convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len);
+
+// Conversion between array types
+		void convert_array(int src [], float  dest [], int count);
+		void convert_array(int src [], char*  dest [], int count);
+		void convert_array(int src [], String dest [], int count);
+
+		void convert_array(float src [], int    dest [], int count);
+		void convert_array(float src [], char*  dest [], int count);
+		void convert_array(float src [], String dest [], int count);
+
+		void convert_array(char* src [], int    dest [], int count);
+		void convert_array(char* src [], float  dest [], int count);
+		void convert_array(char* src [], String dest [], int count);
+
+		void convert_array(String src [], int   dest [], int count);
+		void convert_array(String src [], float dest [], int count);
+		void convert_array(String src [], char* dest [], int count);
+
 
 // Appending to single-message bundles
 void append_OSC_singleMsg(OSCBundle *bndl, int    elem);
@@ -193,7 +226,8 @@ String get_data_value(OSCMessage* msg, int pos)
 // @param srcBndl   The source bundle to be copied
 // @param destBndl  The bundle to copied into
 //
-void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl) {
+void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl) 
+{
 	destBndl->empty();
 	OSCMessage *msg;
 	OSCMessage tmpMsg;
@@ -874,11 +908,47 @@ void append_OSC_singleMsg(OSCBundle *bndl, String elements [], int count)
 
 
 
+// ================================================================
+// ===              CONVERSION BETWEEN ARRAY TYPES              ===
+// ================================================================
+void convert_array(int src [], float dest [], int count)
+{ for (int i = 0 ; i < count; i++) { dest[i] = (float)src[i]; } }
+
+void convert_array(int src [], char* dest [], int count)
+{ char buf[10]; for (int i = 0 ; i < count; i++) { itoa(src[i], buf, 10);  dest[i] = buf; } }
+
+void convert_array(int src [], String dest [], int count)
+{ for (int i = 0 ; i < count; i++) { dest[i] = String(src[i]); } }
 
 
+void convert_array(float src [], int dest [], int count)
+{ for (int i = 0 ; i < count; i++) { dest[i] = (int)src[i]; } }
+
+void convert_array(float src [], char* dest [], int count)
+{ char buf[10]; for (int i = 0 ; i < count; i++) { strtof(buf, NULL); dest[i] = buf; } }
+
+void convert_array(float src [], String dest [], int count)
+{ for (int i = 0 ; i < count; i++) { dest[i] = String(src[i]); } }
 
 
+void convert_array(char* src [], int dest [], int count)
+{ for (int i = 0; i < count; i++) { dest[i] = (int)strtol(src[i], NULL, 10); } }
 
+void convert_array(char* src [], float dest [], int count)
+{ for (int i = 0; i < count; i++) { dest[i] = strtof(src[i], NULL); } }
+
+void convert_array(char* src [], String dest [], int count)
+{ for (int i = 0; i < count; i++) { dest[i] = String(src[i]); } }
+
+
+void convert_array(String src [], int dest [], int count)
+{ char buf[20]; for (int i = 0; i < count; i++) { src[i].toCharArray(buf, 20); dest[i] = (int)strtol(buf, NULL, 10); } }
+
+void convert_array(String src [], float dest [], int count)
+{ char buf[20]; for (int i = 0; i < count; i++) { src[i].toCharArray(buf, 20); dest[i] = strtof(buf, NULL); } }
+
+void convert_array(String src [], char* dest [], int count)
+{ char buf[30]; for (int i = 0; i < count; i++) { src[i].toCharArray(buf, 30); dest[i] = buf; } }
 
 
 
