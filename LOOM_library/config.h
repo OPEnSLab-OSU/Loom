@@ -210,12 +210,14 @@
 	IPAddress ip(128,193,56,138); 
 #endif
 
-// --- Adafruit IO Options
+// --- Adafruit IO Options ---
 #if is_adafruitio == 1
 	#define AIO_USERNAME    "Goertzel"
 	#define AIO_KEY         ""
 #endif
 
+// --- Loom Translator Options ---
+#define COMPLETE_TRANSLATOR 1			// 1 to include all Loom translator functions, 0 to include just the basics
 
 
 // --- Delay between loops
@@ -225,41 +227,6 @@
 										// 80 seems to be a good amount, around 50 and lower may result in lost packets over WiFi
 #endif
 // #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

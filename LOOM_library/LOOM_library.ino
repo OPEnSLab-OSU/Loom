@@ -54,11 +54,11 @@ void loop()
 	key_values[9] = "0.9567";
 
 
-	convert_OSC_key_value_array_to_singleMsg(key_values, &bndl, "some_packet_header", 10, 0);
+	// convert_OSC_key_value_array_to_singleMsg(key_values, &bndl, "some_packet_header", 10, 0);
 	LOOM_DEBUG_Println("\n\nSingle Message Bundle:");
 	print_bundle(&bndl);
 
-	convert_OSC_key_value_array_to_multiMsg(key_values, &bndl, "/some_packet_header", 10, 0);
+	// convert_OSC_key_value_array_to_multiMsg(key_values, &bndl, "/some_packet_header", 10, 0);
 	LOOM_DEBUG_Println("\n\nMulti Message Bundle");
 	print_bundle(&bndl);
 
@@ -76,11 +76,11 @@ void loop()
 	keys[4] = "5.0";
 	values[4] = "0.9567";
 
-	convert_OSC_assoc_arrays_to_singleMsg(keys, values, &bndl, "/some_packet_header", 5, 0);
+	// convert_OSC_assoc_arrays_to_singleMsg(keys, values, &bndl, "/some_packet_header", 5, 0);
 	LOOM_DEBUG_Println("\n\nSingle Message Bundle:");
 	print_bundle(&bndl);
 
-	convert_OSC_assoc_arrays_to_multiMsg(keys, values, &bndl, "some_packet_header", 5, 0);
+	// convert_OSC_assoc_arrays_to_multiMsg(keys, values, &bndl, "some_packet_header", 5, 0);
 	LOOM_DEBUG_Println("\n\nMulti Message Bundle");
 	print_bundle(&bndl);
 
@@ -112,31 +112,6 @@ void loop()
 	additional_loop_checks();
 	
 } // End loop section
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
