@@ -25,6 +25,11 @@ union data_value { // Used in translation between OSC and strings
 
 #if LOOM_DEBUG == 1
 	void print_bundle(OSCBundle *bndl);
+
+			void print_array(int    data [], int len, int format);
+			void print_array(float  data [], int len, int format);
+			void print_array(char*  data [], int len, int format);
+			void print_array(String data [], int len, int format);
 #endif
 int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
 String get_data_value(OSCMessage* msg, int pos);
@@ -166,6 +171,45 @@ void print_bundle(OSCBundle *bndl)
 		msg = bndl->getOSCMessage(n);
 	}
 }
+
+// 3 Options
+//   1: every element on different line
+//   2: every element on same line
+//   3: 5 elements per line
+void print_array(int data [], int len, int format)
+{
+	for (int i = 0; i < len; i++) {
+		if (format == 1) Serial.println(data[i]);
+		if (format > 1) Serial.print(data[i]); Serial.print(" ");
+		if ((format > 2) && (i%5==0)) Serial.println();
+	}
+}
+void print_array(float data [], int len, int format)
+{
+	for (int i = 0; i < len; i++) {
+		if (format == 1) Serial.println(data[i]);
+		if (format > 1) Serial.print(data[i]); Serial.print(" ");
+		if ((format > 2) && (i%5==0)) Serial.println();
+	}
+}
+void print_array(char*  data [], int len, int format)
+{
+	for (int i = 0; i < len; i++) {
+		if (format == 1) Serial.println(data[i]);
+		if (format > 1) Serial.print(data[i]); Serial.print(" ");
+		if ((format > 2) && (i%5==0)) Serial.println();
+	}
+}
+void print_array(String data [], int len, int format)
+{
+	for (int i = 0; i < len; i++) {
+		if (format == 1) Serial.println(data[i]);
+		if (format > 1) Serial.print(data[i]); Serial.print(" ");
+		if ((format > 2) && (i%5==0)) Serial.println();
+	}
+}
+
+
 #endif // of LOOM_DEBUG == 1
 
 
