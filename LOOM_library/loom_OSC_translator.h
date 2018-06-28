@@ -329,13 +329,13 @@ void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string)
 // 		Address 1: /LOOM/Device7/abc
 // 		Value 1: 1
 // 		Address 2: /LOOM/Device7/def
-// 		Value 1: 2.00
-// 		Address 3: /LOOM/Unknown7/ghi
-// 		Value 1: 3.20
+// 		Value 1: 2.34
+// 		Address 3: /LOOM/Device7/ghi
+// 		Value 1: "five"
 //
 // to an OSC bundle with a single message, in the format:
 // 		Bundle Size: 1
-//		Address 1 /LOOM/Device7/data abc 1 def 2.0 ghi 3.2 
+//		Address 1: /LOOM/Device7/data "abc" 1 "def" 2.0 "ghi" 3.2 
 //
 // This is the inverse of convert_OSC_singleMsg_to_multiMsg()
 //
@@ -409,7 +409,7 @@ void convert_OSC_multiMsg_to_singleMsg(OSCBundle *bndl)
 // This converts an OSC bundle formated as an 
 // OSC bundle with a single message, in the format:
 // 		Bundle Size: 1
-//		Address 1 /LOOM/Device7/data abc 1 def 2.0 ghi 3.2 
+//		Address 1: /LOOM/Device7/data "abc" 1 "def" 2.0 "ghi" 3.2 
 //
 // to an OSC bundle with multiple messages, 
 // the end of each address being a key, and only 
@@ -418,9 +418,9 @@ void convert_OSC_multiMsg_to_singleMsg(OSCBundle *bndl)
 // 		Address 1: /LOOM/Device7/abc
 // 		Value 1: 1
 // 		Address 2: /LOOM/Device7/def
-// 		Value 1: 2.00
+// 		Value 1: 2.34
 // 		Address 3: /LOOM/Unknown7/ghi
-// 		Value 1: 3.20
+// 		Value 1: "five"
 //
 // This is the inverse of convert_OSC_multiMsg_to_singleMsg()
 //

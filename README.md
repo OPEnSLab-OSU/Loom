@@ -494,6 +494,8 @@ void wake() {
 
 ### OSC Interpreter
 
+**Note:** This section is a subset of the much more comprehensive Loom Translator documentation, which can be found in the ReadMe_Loom_Translator.h file of the library.
+
 Open Sound Control (OSC) is the transmission protocol used by Project Loom.  The
 Arduino OSC implementation, along with more information about OSC,
 can be found [here](https://github.com/CNMAT/OSC).  
