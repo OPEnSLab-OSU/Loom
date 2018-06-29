@@ -60,11 +60,8 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, ch
 void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, BundleStructure format);
 
 void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format, int interpret);
-void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format);
-
-		void convert_assoc_arrays_to_bundle(String keys [], int    values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format);
-		void convert_assoc_arrays_to_bundle(String keys [], float  values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format);
-		void convert_assoc_arrays_to_bundle(String keys [], char*  values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format);
+template <typename T>
+void convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format);
 
 template <typename T>
 void convert_array_to_bundle(T data [], OSCBundle *bndl, char packet_header[], int len);
@@ -718,32 +715,41 @@ void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle 
 // OVERLOADED version of the previous function
 // Simply calls the previous function with an 'interpret' value of 0
 // (see comment at start of section above for details about the parameter)
-void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format) { 
-	convert_assoc_arrays_to_bundle(keys, values, bndl, packet_header, assoc_len, format, 0); 
+// void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format) { 
+// 	convert_assoc_arrays_to_bundle(keys, values, bndl, packet_header, assoc_len, format, 0); 
+// }
+
+template <typename T>
+void convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format)
+{
+	String converted_values[assoc_len];
+	convert_array(values, converted_values, assoc_len);
+	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, packet_header, assoc_len, format, 0);
+
 }
 
 
 // Conversions for other types
-void convert_assoc_arrays_to_bundle(String keys [], int values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format)
-{
-	String converted_values[assoc_len];
-	convert_array(values, converted_values, assoc_len);
-	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, packet_header, assoc_len, format, 1);
-}
+// void convert_assoc_arrays_to_bundle(String keys [], int values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format)
+// {
+// 	String converted_values[assoc_len];
+// 	convert_array(values, converted_values, assoc_len);
+// 	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, packet_header, assoc_len, format, 1);
+// }
 
-void convert_assoc_arrays_to_bundle(String keys [], float values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format)
-{
-	String converted_values[assoc_len];
-	convert_array(values, converted_values, assoc_len);
-	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, packet_header, assoc_len, format, 2);
-}
+// void convert_assoc_arrays_to_bundle(String keys [], float values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format)
+// {
+// 	String converted_values[assoc_len];
+// 	convert_array(values, converted_values, assoc_len);
+// 	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, packet_header, assoc_len, format, 2);
+// }
 
-void convert_assoc_arrays_to_bundle(String keys [], char* values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format)
-{
-	String converted_values[assoc_len];
-	convert_array(values, converted_values, assoc_len);
-	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, packet_header, assoc_len, format, 3);
-}
+// void convert_assoc_arrays_to_bundle(String keys [], char* values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format)
+// {
+// 	String converted_values[assoc_len];
+// 	convert_array(values, converted_values, assoc_len);
+// 	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, packet_header, assoc_len, format, 3);
+// }
 
 
 
