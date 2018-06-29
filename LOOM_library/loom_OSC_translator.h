@@ -25,13 +25,13 @@ union data_value { // Used in translation between OSC and strings
 
 #if LOOM_DEBUG == 1
 	void print_bundle(OSCBundle *bndl);
-
-			void print_array(int    data [], int len, int format);
-			void print_array(float  data [], int len, int format);
-			void print_array(char*  data [], int len, int format);
-			void print_array(String data [], int len, int format);
+	void print_array(int    data [], int len, int format);
+	void print_array(float  data [], int len, int format);
+	void print_array(char * data [], int len, int format);
+	void print_array(char data [][20], int len, int format);
+	void print_array(String data [], int len, int format);
 #endif
-int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
+	int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
 String get_data_value(OSCMessage* msg, int pos);
 void   deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
 
@@ -51,10 +51,10 @@ void convert_OSC_singleMsg_to_multiMsg(OSCBundle *bndl);
 void convert_OSC_to_array_key_value(OSCBundle *bndl, String key_values[], int kv_len);
 void convert_OSC_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[], int assoc_len);
 
-		void convert_OSC_to_array(OSCBundle *bndl, int    data[], int len);
-		void convert_OSC_to_array(OSCBundle *bndl, float  data[], int len);
+void convert_OSC_to_array(OSCBundle *bndl, int    data[], int len);
+void convert_OSC_to_array(OSCBundle *bndl, float  data[], int len);
 		void convert_OSC_to_array(OSCBundle *bndl, char*  data[], int len);
-		void convert_OSC_to_array(OSCBundle *bndl, String data[], int len);
+void convert_OSC_to_array(OSCBundle *bndl, String data[], int len);
 
 
 // Conversion from array to bundle formats
@@ -76,9 +76,9 @@ void convert_OSC_assoc_arrays_to_multiMsg( String keys [], String values [], OSC
 		void convert_OSC_assoc_arrays_to_multiMsg( String keys [], char*  values [], OSCBundle *bndl, char packet_header[], int assoc_len);
 
 // Conversion from unspecified to single message bundle      
-		void convert_OSC_array_to_singleMsg(int    data [], OSCBundle *bndl, char packet_header[], int len);
-		void convert_OSC_array_to_singleMsg(float  data [], OSCBundle *bndl, char packet_header[], int len);
-		void convert_OSC_array_to_singleMsg(char*  data [], OSCBundle *bndl, char packet_header[], int len);
+void convert_OSC_array_to_singleMsg(int    data [], OSCBundle *bndl, char packet_header[], int len);
+void convert_OSC_array_to_singleMsg(float  data [], OSCBundle *bndl, char packet_header[], int len);
+void convert_OSC_array_to_singleMsg(char*  data [], OSCBundle *bndl, char packet_header[], int len);
 		void convert_OSC_array_to_singleMsg(String data [], OSCBundle *bndl, char packet_header[], int len);
 
 
@@ -87,18 +87,21 @@ void convert_array_key_value_to_assoc(String key_values [], String keys [], Stri
 void convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len);
 
 // Conversion between array types
-		void convert_array(int    src [], float  dest [], int count);
-		void convert_array(int    src [], char*  dest [], int count);
-		void convert_array(int    src [], String dest [], int count);
-		void convert_array(float  src [], int    dest [], int count);
-		void convert_array(float  src [], char*  dest [], int count);
-		void convert_array(float  src [], String dest [], int count);
-		void convert_array(char*  src [], int    dest [], int count);
-		void convert_array(char*  src [], float  dest [], int count);
-		void convert_array(char*  src [], String dest [], int count);
-		void convert_array(String src [], int    dest [], int count);
-		void convert_array(String src [], float  dest [], int count);
-		void convert_array(String src [], char*  dest [], int count);
+void convert_array(int    src [], float  dest [], int count);
+void convert_array(int    src [], char*  dest [], int count);
+void convert_array(int    src [], String dest [], int count);
+
+void convert_array(float  src [], int    dest [], int count);
+void convert_array(float  src [], char*  dest [], int count);
+void convert_array(float  src [], String dest [], int count);
+
+void convert_array(char*  src [], int    dest [], int count);
+void convert_array(char*  src [], float  dest [], int count);
+void convert_array(char*  src [], String dest [], int count);
+
+void convert_array(String src [], int    dest [], int count);
+void convert_array(String src [], float  dest [], int count);
+void convert_array(String src [], char*  dest [], int count);
 
 
 // Appending to single-message bundles
@@ -179,33 +182,42 @@ void print_bundle(OSCBundle *bndl)
 void print_array(int data [], int len, int format)
 {
 	for (int i = 0; i < len; i++) {
-		if (format == 1) Serial.println(data[i]);
-		if (format > 1) Serial.print(data[i]); Serial.print(" ");
-		if ((format > 2) && (i%5==0)) Serial.println();
+		if (format == 1) { Serial.println(data[i]); }
+		if (format > 1) { Serial.print(data[i]); Serial.print(" "); }
+		if ((format > 2) && (i%5==0)) { Serial.println(); }
 	}
 }
 void print_array(float data [], int len, int format)
 {
 	for (int i = 0; i < len; i++) {
-		if (format == 1) Serial.println(data[i]);
-		if (format > 1) Serial.print(data[i]); Serial.print(" ");
-		if ((format > 2) && (i%5==0)) Serial.println();
+		if (format == 1) { Serial.println(data[i]); }
+		if (format > 1) { Serial.print(data[i]); Serial.print(" "); }
+		if ((format > 2) && (i%5==0)) { Serial.println(); }
 	}
 }
-void print_array(char*  data [], int len, int format)
+void print_array(char * data [], int len, int format)
 {
 	for (int i = 0; i < len; i++) {
-		if (format == 1) Serial.println(data[i]);
-		if (format > 1) Serial.print(data[i]); Serial.print(" ");
-		if ((format > 2) && (i%5==0)) Serial.println();
+		if (format == 1) { Serial.println(data[i]); }
+		if (format > 1) { Serial.print(data[i]); Serial.print(" "); }
+		if ((format > 2) && (i%5==0)) { Serial.println(); }
 	}
 }
+void print_array(char data [][20], int len, int format)
+{
+	for (int i = 0; i < len; i++) {
+		if (format == 1) { Serial.println(data[i]); }
+		if (format > 1) { Serial.print(data[i]); Serial.print(" "); }
+		if ((format > 2) && (i%5==0)) { Serial.println(); }
+	}
+}
+
 void print_array(String data [], int len, int format)
 {
 	for (int i = 0; i < len; i++) {
-		if (format == 1) Serial.println(data[i]);
-		if (format > 1) Serial.print(data[i]); Serial.print(" ");
-		if ((format > 2) && (i%5==0)) Serial.println();
+		if (format == 1) { Serial.println(data[i]); }
+		if (format > 1) { Serial.print(data[i]); Serial.print(" "); }
+		if ((format > 2) && (i%5==0)) { Serial.println(); }
 	}
 }
 
@@ -1079,32 +1091,29 @@ void append_OSC_singleMsg(OSCBundle *bndl, String elements [], int count)
 void convert_array(int src [], float dest [], int count)
 { for (int i = 0 ; i < count; i++) { dest[i] = (float)src[i]; } }
 
-void convert_array(int src [], char* dest [], int count)
-{ char buf[10]; for (int i = 0 ; i < count; i++) { itoa(src[i], buf, 10);  dest[i] = buf; } }
+void convert_array(int src [], char dest [][20], int count)
+{ for (int i = 0 ; i < count; i++) { sprintf(dest[i], "%d\0", src[i]); } }
 
 void convert_array(int src [], String dest [], int count)
 { for (int i = 0 ; i < count; i++) { dest[i] = String(src[i]); } }
 
-
 void convert_array(float src [], int dest [], int count)
 { for (int i = 0 ; i < count; i++) { dest[i] = (int)src[i]; } }
 
-void convert_array(float src [], char* dest [], int count)
-{ char buf[10]; for (int i = 0 ; i < count; i++) { strtof(buf, NULL); dest[i] = buf; } }
+void convert_array(float src [], char dest [][20], int count)
+{ for (int i = 0 ; i < count; i++) { sprintf(dest[i], "%f\0", src[i]); } }
 
 void convert_array(float src [], String dest [], int count)
 { for (int i = 0 ; i < count; i++) { dest[i] = String(src[i]); } }
 
-
-void convert_array(char* src [], int dest [], int count)
+void convert_array(char * src [], int dest [], int count)
 { for (int i = 0; i < count; i++) { dest[i] = (int)strtol(src[i], NULL, 10); } }
 
-void convert_array(char* src [], float dest [], int count)
+void convert_array(char * src [], float dest [], int count)
 { for (int i = 0; i < count; i++) { dest[i] = strtof(src[i], NULL); } }
 
-void convert_array(char* src [], String dest [], int count)
+void convert_array(char * src [], String dest [], int count)
 { for (int i = 0; i < count; i++) { dest[i] = String(src[i]); } }
-
 
 void convert_array(String src [], int dest [], int count)
 { char buf[20]; for (int i = 0; i < count; i++) { src[i].toCharArray(buf, 20); dest[i] = (int)strtol(buf, NULL, 10); } }
@@ -1112,8 +1121,18 @@ void convert_array(String src [], int dest [], int count)
 void convert_array(String src [], float dest [], int count)
 { char buf[20]; for (int i = 0; i < count; i++) { src[i].toCharArray(buf, 20); dest[i] = strtof(buf, NULL); } }
 
-void convert_array(String src [], char* dest [], int count)
-{ char buf[30]; for (int i = 0; i < count; i++) { src[i].toCharArray(buf, 30); dest[i] = buf; } }
+void convert_array(String src [], char dest [][20], int count)
+{ 
+	// char buf[10]; 
+	// char tmp[count][10];
+	for (int i = 0; i < count; i++) { 
+		src[i].toCharArray(dest[i], 10); 
+
+		// sprintf(dest[i], "%s\0", src[i].c_str()); 
+		// LOOM_DEBUG_Println(buf);
+		// LOOM_DEBUG_Println(tmp[i]);
+	} 
+}
 
 
 
