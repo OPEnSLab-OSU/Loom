@@ -37,38 +37,55 @@ void loop()
 	// Test key-value array to both bundle formats
 	// String key_values[10] = {"key1","-2","key2","0","key3","1.234","key4","42","key5","3.9567"};
 	// String keys[5] = {"key1", "key2", "key3", "key4", "key5"};
-	// int ints[5] = {1,2,3,4,5};
-	int ints[5]; 
+	
+	// convert_OSC_key_value_array_to_singleMsg(key_values, &bndl, "test/packet/header", 10);
+	// append_OSC_singleMsg(&bndl, (int)42);
+	// append_OSC_singleMsg(&bndl, (float)67.8);
+	// append_OSC_singleMsg(&bndl, "c_string");
+
+	// String tmp = String("actual_str");
+	// append_OSC_singleMsg(&bndl, tmp);
+
+
+
+	int ints[5] = {1,2,3,4,5};
+	// int ints[5]; 
 	// float floats[5] = {1.1,2.2,3.3,4.4,5.5}; 
-	float floats[5];
+	// float floats[5];
 	// char c_strs[5][20] = {"abc", "1", "2.34", ".5", "6.0"}; 
 	// char * c_strs[5] = {"abc", "1", "2.34", ".5", "6.0"};
-	char c_strs[5][20];
 	// char c_strs[5][20];
-	String strings[5] = {"abc", "1", "2.34", ".5", "6.0"};
+	// char c_strs[5][20];
+	// String strings[5] = {"abc", "1", "2.34", ".5", "6.0"};
 	// String strings[5]; 
-	// convert_OSC_key_value_array_to_singleMsg(key_values, &bndl, "test/packet/header", 10);
+
+	convert_OSC_array_to_singleMsg
+
 
 	// print_array(c_strs, 5, 1);
 	// while(1);
 
+	// LOOM_DEBUG_Println(test_add_template(3.4,5));
 
-	convert_array(strings, ints, 5);
-	Serial.println("\nInts");
-	print_array(ints, 5, 1);
+	// convert_array(c_strs, ints, 5);
+	// Serial.println("\nInts");
+	// print_array(ints, 5, 1);
 
-	convert_array(strings, floats, 5);
-	Serial.println("\nFloats");
-	print_array(floats, 5, 1);
+	// convert_array(c_strs, floats, 5);
+	// Serial.println("\nFloats");
+	// print_array(floats, 5, 1);
 
-	convert_array(strings, c_strs, 5);
-	LOOM_DEBUG_Println("test");
-	Serial.println("\nC-strs");
-	print_array(c_strs, 5, 1);
+	// convert_array(c_strs, strings, 5);
+	// // LOOM_DEBUG_Println("test");
+	// Serial.println("\nC-strs");
+	// print_array(c_strs, 5, 1);
 
 
-	Serial.println("\nStrings");
-	print_array(strings, 5, 1);
+	// Serial.println("\nStrings");
+	// print_array(strings, 5, 1);
+
+	// append_to_bundle(&bndl, strings, 5);
+	print_bundle(&bndl);
 
 	while(1);
 
