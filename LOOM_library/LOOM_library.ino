@@ -35,88 +35,63 @@ void loop()
 
 
 	// Test key-value array to both bundle formats
-	// String key_values[10] = {"key1","-2","key2","0","key3","1.234","key4","42","key5","3.9567"};
-	// String keys[5] = {"key1", "key2", "key3", "key4", "key5"};
-	
-	// convert_OSC_key_value_array_to_singleMsg(key_values, &bndl, "test/packet/header", 10);
-	// append_OSC_singleMsg(&bndl, (int)42);
-	// append_OSC_singleMsg(&bndl, (float)67.8);
-	// append_OSC_singleMsg(&bndl, "c_string");
+	String key_values[10], keys[5], values[5];
+	char buf[10];
+//	for (int i = 0; i < 5; i++) {
+//		sprintf(buf, "id%d", i);
+//		key_values[i*2]   = buf;
+//		sprintf(buf, "data%d", i);
+//		key_values[i*2+1] = buf;
+//	}
+	key_values[0] = "key1";
+	key_values[1] = "0.0";
+	key_values[2] = "key2";
+	key_values[3] = "0";
+	key_values[4] = "key3";
+	key_values[5] = "1.234";
+	key_values[6] = "key4";
+	key_values[7] = "42";
+	key_values[8] = "5";
+	key_values[9] = "0.9567";
 
-	// String tmp = String("actual_str");
-	// append_OSC_singleMsg(&bndl, tmp);
+	convert_key_value_array_to_bundle(key_values, &bndl, "some_packet_header", 10, SINGLEMSG);
 
-
-
-	int ints[5] = {1,2,3,4,5};
-	// int ints[5]; 
-	// float floats[5] = {1.1,2.2,3.3,4.4,5.5}; 
-	// float floats[5];
-	// char c_strs[5][20] = {"abc", "1", "2.34", ".5", "6.0"}; 
-	// char * c_strs[5] = {"abc", "1", "2.34", ".5", "6.0"};
-	// char c_strs[5][20];
-	// char c_strs[5][20];
-	// String strings[5] = {"abc", "1", "2.34", ".5", "6.0"};
-	// String strings[5]; 
-
-	convert_OSC_array_to_singleMsg
-
-
-	// print_array(c_strs, 5, 1);
-	// while(1);
-
-	// LOOM_DEBUG_Println(test_add_template(3.4,5));
-
-	// convert_array(c_strs, ints, 5);
-	// Serial.println("\nInts");
-	// print_array(ints, 5, 1);
-
-	// convert_array(c_strs, floats, 5);
-	// Serial.println("\nFloats");
-	// print_array(floats, 5, 1);
-
-	// convert_array(c_strs, strings, 5);
-	// // LOOM_DEBUG_Println("test");
-	// Serial.println("\nC-strs");
-	// print_array(c_strs, 5, 1);
-
-
-	// Serial.println("\nStrings");
-	// print_array(strings, 5, 1);
-
-	// append_to_bundle(&bndl, strings, 5);
+	// convert_key_value_array_to_single_msg_bundle(key_values, &bndl, "some_packet_header", 10);
+	LOOM_DEBUG_Println("\n\nSingle Message Bundle:");
 	print_bundle(&bndl);
-
 	while(1);
+	// convert_bundle_structure(&bndl, &send_bndl, MULTIMSG);
+	// print_bundle(&send_bndl);
 
-	convert_OSC_array_to_singleMsg(ints, &bndl, "some/int/header", 5);
+	convert_bundle_structure(&bndl, MULTIMSG);
 	print_bundle(&bndl);
 
 
-	convert_OSC_array_to_singleMsg(floats, &bndl, "some/float/header", 5);
-	print_bundle(&bndl);
-
-	// convert_OSC_array_to_singleMsg(c_strs, &bndl, "some/cstring/header", 5);
+	// convert_key_value_array_to_multi_msg_bundle(key_values, &bndl, "/some_packet_header", 10, 0);
+	// LOOM_DEBUG_Println("\n\nMulti Message Bundle");
 	// print_bundle(&bndl);
 
-	convert_OSC_array_to_singleMsg(strings, &bndl, "some/string/header", 5);
-	print_bundle(&bndl);
+	
+// 	// Test assoc arrays to both bundle formats
+// 	bndl.empty(); send_bndl.empty();
+// 	keys[0] = "key1";
+// 	values[0] = "0.0";
+// 	keys[1] = "key2";
+// 	values[1] = "0";
+// 	keys[2] = "key3";
+// 	values[2] = "1.234";
+// 	keys[3] = "key4";
+// 	values[3] = "42";
+// 	keys[4] = "5.0";
+// 	values[4] = "0.9567";
 
-	// int data_ints[10] = {1,2,3,4,5,6,7,8,9,10};
+// 	convert_OSC_assoc_arrays_to_singleMsg(keys, values, &bndl, "/some_packet_header", 5, 0);
+// 	LOOM_DEBUG_Println("\n\nSingle Message Bundle:");
+// 	print_bundle(&bndl);
 
-	// convert_OSC_to_array(&bndl, ints, 10);
-	// Serial.println("\nInts:"); 
-	// print_array(ints, 10, 1);
-	// convert_OSC_to_array(&bndl, floats, 10);
-	// Serial.println("\nFloats:"); 
-	// print_array(floats, 10, 1);
-	// convert_OSC_to_array(&bndl, c_strs, 10);
-	// Serial.println("\nC-strs:"); 
-	// print_array(c_strs, 10, 1);
-	// convert_OSC_to_array(&bndl, strings, 10);
-	// Serial.println("\nStrings:"); 
-	// print_array(strings, 10, 1);
-
+// 	convert_OSC_assoc_arrays_to_multiMsg(keys, values, &bndl, "some_packet_header", 5, 0);
+// 	LOOM_DEBUG_Println("\n\nMulti Message Bundle");
+// 	print_bundle(&bndl);
 
 
 	while(1);
