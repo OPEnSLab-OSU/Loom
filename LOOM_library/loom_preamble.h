@@ -99,10 +99,7 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 // ===                  INCLUDE DEVICE FILES                    === 
 // ================================================================
 
-#if is_pushingbox == 1
-	#include "loom_ethernet.h"
-	#include "loom_pushingbox.h"
-#endif
+
 #if is_wifi == 1
 	#include "loom_wifi.h"
 #endif
@@ -111,6 +108,10 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #endif
 #if is_nrf == 1	
 	#include "loom_nrf.h"
+#endif
+#if is_pushingbox == 1
+	// #include "loom_ethernet.h"
+	#include "loom_pushingbox.h"
 #endif
 #if num_analog > 0
 	#include "loom_analogIn.h"

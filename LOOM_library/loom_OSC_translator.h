@@ -107,47 +107,47 @@ template <typename T> void append_to_bundle(OSCBundle *bndl, T elements [], int 
 #if LOOM_DEBUG == 1
 void print_bundle(OSCBundle *bndl)
 {
-	int n = 0;
 	char buf[50];
 	char data_type;
 	Serial.println("Bundle Size: ");
 	Serial.println(bndl->size());
-	OSCMessage *msg = bndl->getOSCMessage(n);
+	OSCMessage *msg;
 	
-	while (msg != NULL) {
+	for (int i = 0; i < bndl->size(); i++) {
+		msg = bndl->getOSCMessage(i);
+
 		msg->getAddress(buf, 0);
 		Serial.print("Address ");
-		Serial.print(n + 1);
+		Serial.print(i + 1);
 		Serial.print(": ");
 		Serial.println(buf);
 
-		int m = 0;
-		data_type = msg->getType(m);
-		while (data_type != '\0') {
+		for (int j = 0; j < msg->size(); j++) {
+			data_type = msg->getType(j);
 			Serial.print("Value ");
-			Serial.print(m + 1);
+			Serial.print(j + 1);
 			Serial.print(": ");
-			if (data_type == 'f') {
-				Serial.print("(f) ");
-				Serial.println(msg->getFloat(m));
+			switch(data_type) {
+				case 'f':
+					Serial.print("(f) ");
+					Serial.println(msg->getFloat(j));
+					break;
+				case 'i':
+					Serial.print("(i) ");
+					Serial.println(msg->getInt(j));
+					break;
+				case 's':
+					Serial.print("(s) ");
+					msg->getString(j, buf, 50);
+					Serial.println(buf);
+					break;
+				default:
+					break;
 			}
-			else if (data_type == 'i') {
-				Serial.print("(i) ");
-				Serial.println(msg->getInt(m));
-			}
-			else if (data_type == 's') {
-				Serial.print("(s) ");
-				msg->getString(m, buf, 50);
-				Serial.println(buf);
-			}
-
-			m++;
-			data_type = msg->getType(m);
 		}
-		n++;
-		msg = bndl->getOSCMessage(n);
 	}
 }
+
 
 // 3 Options
 //   1: every element on different line

@@ -33,11 +33,12 @@
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform(s) --- 
-#define is_wifi      0		// 1 to enable WiFi
+#define is_wifi      0 		// 1 to enable WiFi
 #define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
+#define is_ethernet  0
 
-#define is_sd         0		// 1 to enable SD card 
+#define is_sd         1		// 1 to enable SD card 
 #define is_pushingbox 0     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
@@ -199,12 +200,15 @@
 // --- PushingBox Options ---
 #if is_pushingbox == 1			
 	#define NUM_FIELDS 32			// Maximum number of fields accepted by the PushingBox Scenario    
-	#include <Ethernet2.h>			// (this is needed for IPAddress, do not remove)
 	
 	// String data[NUM_FIELDS];
 	char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
 	char server_name[] = "api.pushingbox.com";	// PushingBox server, probably don't need to change
+#endif
 
+#if is_ethernet == 1
+	#include <Ethernet2.h>			// (this is needed for IPAddress, do not remove)
+	
 	//Use this for OPEnS Lab
 	byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
 	IPAddress ip(128,193,56,138); 
