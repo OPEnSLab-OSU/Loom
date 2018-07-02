@@ -59,8 +59,8 @@ WiFiUDP      UdpCommon;
 WiFiServer   server(80);
 int status = WL_IDLE_STATUS;
 
-#if is_adafruitio == 1
-	WiFiClient wifiClient;
+#if is_adafruitio == 1 || is_pushingbox == 1
+	WiFiClient client;
 #endif
 
 // ================================================================ 
@@ -135,6 +135,11 @@ void setup_wifi(char packet_header_string[])
 				LOOM_DEBUG_Println("Failure :(");
 				while(true);
 			}
+
+
+			// This is being used for pushingbox testing
+			WiFi.begin(config_wifi->ssid, config_wifi->pass);
+
 			break;
 	}
 	config_wifi->ip = WiFi.localIP();

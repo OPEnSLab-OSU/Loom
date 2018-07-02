@@ -23,7 +23,7 @@ String data[NUM_FIELDS];
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void setup_pushingbox();
-bool setup_ethernet();
+// bool setup_ethernet();
 // void sendToPushingBox(int num_fields, char *server_name, char *devid);
 void sendToPushingBox(OSCMessage &msg);
 void sendToPushingBox(OSCBundle *bndl);
@@ -42,9 +42,11 @@ void sendToPushingBox(OSCBundle *bndl);
 void setup_pushingbox() 
 {
 	LOOM_DEBUG_Println("Setting up ethernet");
-	if(!setup_ethernet()) {
-		LOOM_DEBUG_Println("Failed to setup ethernet");
-	}
+	#if is_ethernet == 1
+		if(!setup_ethernet()) {
+			LOOM_DEBUG_Println("Failed to setup ethernet");
+		}
+	#endif
 }
 
 
@@ -68,10 +70,11 @@ void setup_pushingbox()
 //
 void sendToPushingBox(OSCMessage &msg) 
 {
-	LOOM_DEBUG_Println("Sending to pushing box");
+	LOOM_DEBUG_Println("Sending to PushingBox");
 
 	client.stop();
 	if (client.connect(server_name, 80)) {  
+		LOOM_DEBUG_Println("Connection good");
 		client.print("GET /pushingbox?devid="); client.print(device_id); 
 		for (int i = 0; i < NUM_FIELDS; i++) {
 			if ((i % 2) == 0)
@@ -86,15 +89,18 @@ void sendToPushingBox(OSCMessage &msg)
 		client.println();
 	 
 	} else {
-		LOOM_DEBUG_Println("Failed to connect to PB, attempting to re-setup ethernet.");
+		LOOM_DEBUG_Println("No Connection");
+		#if is_ethernet == 1
+			LOOM_DEBUG_Println("Failed to connect to PB, attempting to re-setup ethernet.");
 
-		if (setup_ethernet()) {
-			LOOM_DEBUG_Println("Successfully re-setup ethernet.");
-		}
-		#if LOOM_DEBUG == 1 
-		else {
-			Serial.println("Failed to re-setup ethernet.");
-		}
+			if (setup_ethernet()) {
+				LOOM_DEBUG_Println("Successfully re-setup ethernet.");
+			}
+			#if LOOM_DEBUG == 1 
+			else {
+				Serial.println("Failed to re-setup ethernet.");
+			}
+			#endif
 		#endif
 	}
 }

@@ -116,24 +116,19 @@ bool read_all_from_file(char* file)
 //
 // @return True if no error
 //
-bool write_to_file(char* file, char* text) 
+bool write_string_to_file(char* file, char* text) 
 {
 	Serial.print("writing to file :");
 	Serial.println(text);
 	sdFile = SD.open(file, FILE_WRITE);
 	if (sdFile) {
 
-		#if LOOM_DEBUG == 1
-			Serial.print("Writing to ");
-			Serial.print(file);
-			Serial.print("...");
-		#endif
+		LOOM_DEBUG_Print3("Writing to ", file, "...");
 
 		sdFile.println(text);
 
-		#if LOOM_DEBUG == 1
-			Serial.println("done");
-		#endif
+		LOOM_DEBUG_Println(" done");
+
 		// close the file:
 		sdFile.close();
 
@@ -150,14 +145,14 @@ bool write_to_file(char* file, char* text)
 
 
 
-// --- SD READ BUNDLE
-bool sd_read_bundle(char *file, OSCBundle *bndl)
-{
+// // --- SD READ BUNDLE
+// bool sd_read_bundle(char *file, OSCBundle *bndl)
+// {
 
-}
+// }
 
 // --- SD SAVE BUNDLE
-bool sd_save_bundle(char *file, OSCBundle *bndl)
+bool sd_save(char *file, OSCBundle *bndl)
 {
 	Serial.println("sd save bundle");
 	char osc_str[255];
@@ -167,8 +162,48 @@ bool sd_save_bundle(char *file, OSCBundle *bndl)
 	LOOM_DEBUG_Println(osc_str);
 	LOOM_DEBUG_Println2("osc_str length: ", osc_str);
 
-	write_to_file(file, osc_str);
+	write_string_to_file(file, osc_str);
 }
+
+
+template <typename T>
+bool sd_save_elem(char *file, T data, char endchar)
+{
+	LOOM_DEBUG_Println4("Saving ", data, " to SD file: ", file);
+	sdFile = SD.open(file, FILE_WRITE);
+
+	sdFile.print(data);
+	sdFile.print(endchar);
+}
+
+
+// Have a macro call this function with correct length?
+
+template <typename T>
+bool sd_save_array(char *file, T data [], int len, char delimiter) 
+{
+	LOOM_DEBUG_Println2("Saving array to SD file: ", file);
+	sdFile = SD.open(file, FILE_WRITE);
+
+	for (int i = 0; i < len; i++) {
+		sdFile.print(data[i]);
+		sdFile.print(delimiter);
+	}
+	sdFile.println();
+}
+
+
+// Could convert to array first
+// Print as OSC string
+// Could print in hierarchical format like print_bundle
+bool sd_save_bundle(char * file, OSCBundle *bndl)
+{
+
+}
+
+
+
+
 
 
 
