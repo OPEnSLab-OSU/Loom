@@ -99,6 +99,7 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 // ================================================================ 
 // ===                  INCLUDE DEVICE FILES                    === 
 // ================================================================
+#include "loom_OSC_translator.h"
 
 
 #if is_wifi == 1
@@ -173,7 +174,6 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 
 // Files of functions that are not specific to sensors / actuators
 #include "loom_flash.h"
-#include "loom_OSC_translator.h"
 #include "loom_common.h"  		// These may refer to functions in above headers
 #include "loom_interface.h"
 

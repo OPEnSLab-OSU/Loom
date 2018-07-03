@@ -100,16 +100,7 @@ void process_bundle(OSCBundle *bndl)
 			#if is_sd == 1 
 				if ((SD_logging == 1) && (strncmp(addressString, configuration.packet_header_string, strlen(configuration.packet_header_string)) == 0)) {
 					LOOM_DEBUG_Println("Logging bundle");
-//					char fileName[50];
-//					memset(fileName, '\0', sizeof(fileName));
-//				 	sprintf(fileName, "%s%s", "data", "_log.txt");
-//				 	replace_char(fileName, '/', '_');
-//					String tmp = String(fileName);
-//					memset(fileName, '\0', sizeof(fileName));
-//					tmp.toCharArray(fileName, 30);
-//					sd_save_bundle(fileName, bndl);
-					sd_save_bundle("data_log.txt", bndl, 2);
-
+					sd_save_bundle("bndl_log.txt", bndl, 2, 2);
 				}
 			#endif
 
@@ -129,11 +120,9 @@ void process_bundle(OSCBundle *bndl)
 				}
 			#endif
 	
-	
 			// Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
 			// Most commands will be finished once control returns here (WiFi changes being handled below)
 			bndl->route(configuration.packet_header_string, msg_router);
-
 	
 			#if is_wifi == 1
 				// If new ssid and password have been received, try to connect to that network
@@ -313,7 +302,7 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 		#if is_sd == 1
 			case SDCARD : 
 				LOOM_DEBUG_Println("Saving bundle");
-				sd_save_bundle(file, send_bndl, 1);
+				sd_save_bundle(file, send_bndl, 1, 4);
 				break;
 		#endif
 

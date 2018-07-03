@@ -53,6 +53,7 @@ void convert_bundle_to_arrays_assoc(OSCBundle *bndl, String keys[], String value
 
 template <typename T>
 void convert_bundle_to_array(OSCBundle *bndl, T data [], int len);
+void convert_bundle_to_array_w_header(OSCBundle *bndl, String data [], int len);
 
 
 // Conversion from array to bundle formats
@@ -517,25 +518,37 @@ void convert_bundle_structure(OSCBundle *bndl, BundleStructure format)
 //
 void convert_bundle_to_array_key_value(OSCBundle *bndl, String key_values[], int kv_len)
 {	
+	// LOOM_DEBUG_Println("In convert_bundle_to_array_key_value");
+
+
 	// Convert bundle to flat single message if not already
 	OSCBundle convertedBndl;	
+
+	// LOOM_DEBUG_Println("Created convertedBndl");
+
 	if (bndl->size() > 1)  {
 		convert_bundle_structure(bndl, &convertedBndl, SINGLEMSG); 
 	} else {
 		convertedBndl = *bndl;
 	} 
 
+	// LOOM_DEBUG_Println("After bndl size check");
+
 	// Make sure key_values array is large enough
 	if ( convertedBndl.getOSCMessage(0)->size() > kv_len ) {
-		LOOM_DEBUG_Println("Key-values array not large enough to hold all of bundle data, cannot convert");
+		// LOOM_DEBUG_Println("Key-values array not large enough to hold all of bundle data, cannot convert");
 		return;
 	}
 
 	// Fill key-value array
 	OSCMessage* msg = convertedBndl.getOSCMessage(0);	
 	for (int i = 0; i < msg->size(); i++) {
-		key_values[i] = get_data_value(msg, i); 
+		key_values[i] = get_data_value(msg, i);
+		// key_values[i] = String(i); 
 	}
+
+	// LOOM_DEBUG_Println("Done with convert_bundle_to_array_key_value");
+
 }
 
 
@@ -580,12 +593,59 @@ void convert_bundle_to_arrays_assoc(OSCBundle *bndl, String keys[], String value
 template <typename T>
 void convert_bundle_to_array(OSCBundle *bndl, T data [], int len)
 {
+	// LOOM_DEBUG_Println("In convert bundle to array");
+
 	String tmp_strings[len];
+
+	// LOOM_DEBUG_Println("Created tmp_strings");
+
 	convert_bundle_to_array_key_value(bndl, tmp_strings, len);
+
+	// LOOM_DEBUG_Println("Before convert array");
+
 	convert_array(tmp_strings, data, len);
+
+	// LOOM_DEBUG_Println("Done with convert array");
 }
 
 
+// Not verified to be fully functional yet
+void convert_bundle_to_array_w_header(OSCBundle *bndl, String data [], int len)
+{
+	// LOOM_DEBUG_Println("In convert bundle to array w header");
+	String tmpStrs[len-1];
+	char buf[50];
+
+	OSCMessage *msg;
+	
+	msg = bndl->getOSCMessage(0);
+	msg->getAddress(buf, 0);
+	// Serial.print("Address ");
+	// Serial.println(buf);
+
+	// print_bundle(bndl);
+	// bndl->getOSCMessage(0)->getAddress(tmp);
+
+	convert_bundle_to_array(bndl, tmpStrs, len-1);
+
+	LOOM_DEBUG_Println("Done convert_bundle_to_array");
+
+	// print_bundle(bndl);
+
+
+
+	LOOM_DEBUG_Println("Done getting address");
+
+	data[0] = String(buf);
+
+	LOOM_DEBUG_Println("Done setting data 0");
+
+	for (int i = 1; i < len; i++) {
+		data[i] = tmpStrs[i-1];
+	}
+
+	LOOM_DEBUG_Println("Done copying");
+}
 
 
 // ================================================================

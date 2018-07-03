@@ -29,6 +29,7 @@ void loop()
 {
 	OSCBundle bndl, send_bndl; 
 
+	bndl.empty();
 	// Receive bundles, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
 	// receive_bundle(&bndl, WIFI);
 
@@ -40,25 +41,44 @@ void loop()
 	String data[7] = {"abc", "4.27", "23.0", "25.2", "2.2", "30.0", "14"};
 
 
-// 	convert_assoc_arrays_to_bundle(parameters, data, &bndl, "/some/packet/header", 7, SINGLEMSG);
+	convert_assoc_arrays_to_bundle(parameters, data, &bndl, "/some/packet/header", 7, SINGLEMSG);
+	print_bundle(&bndl);
 
-// 	print_bundle(&bndl);
+	// deep_copy_bundle(&bndl, &bndl);
+	print_bundle(&bndl);
 
-	sd_save_array("time0.txt", data, 7, ',', 0);
-	read_all_from_file("time0.txt");
 
-	sd_save_array("time1.txt", data, 7, ',', 1);
-	read_all_from_file("time1.txt");
+	// sd_save_bundle("bndl40.csv", &bndl, 1, 0);
+	// read_all_from_file("bndl40.csv");
 
-	sd_save_array("time2.txt", data, 7, ',', 2);
-	read_all_from_file("time2.txt");
+	// print_bundle(&bndl);
 
-	sd_save_array("time3.txt", data, 7, ',', 3);
-	read_all_from_file("time3.txt");
+	// // deep_copy_bundle(&bndl, &bndl);
+	// sd_save_bundle("bndl41.csv", &bndl, 1, 1);
+	// read_all_from_file("bndl41.csv");
 
-	sd_save_array("time4.txt", data, 7, ',', 4);
-	read_all_from_file("time4.txt");
+	// print_bundle(&bndl);
 
+	// // deep_copy_bundle(&bndl, &bndl);
+	// sd_save_bundle("bndl42.csv", &bndl, 1, 2);
+	// read_all_from_file("bndl42.csv");
+
+	// print_bundle(&bndl);
+
+	// // deep_copy_bundle(&bndl, &bndl);
+	// sd_save_bundle("bndl43.csv", &bndl, 1, 3);
+	// read_all_from_file("bndl43.csv");
+
+	// print_bundle(&bndl);
+
+	// // deep_copy_bundle(&bndl, &bndl);
+	// sd_save_bundle("bndl44.csv", &bndl, 1, 4);
+	// read_all_from_file("bndl44.csv");
+
+	// print_bundle(&bndl);
+
+
+	// LOOM_DEBUG_Println("DONE");
 	while(1);
 
 	// sd_save_bundle("example.txt", &bndl, 1);
@@ -68,14 +88,6 @@ void loop()
 // 	sd_empty_file("example.txt");
 	// read_all_from_file("example8.txt");
 
-	// Node
-	send_bundle(&send_bndl, SDCARD);
-	send_bundle(&send_bndl, LORA);
-
-
-	// HUB
-	receive_bundle(&bndl);
-	send_bundle(&bndl, SDCARD);
 // 	while(1);
 
 	// Update stored readings from sensors

@@ -191,7 +191,7 @@ bool read_all_from_file(char* file)
 //
 // @return True if no error
 //
-bool write_string_to_file(char* file, char* text) 
+void sd_write_string(char* file, char* text) 
 {
 	sdFile = SD.open(file, FILE_WRITE);
 	if (sdFile) {
@@ -204,6 +204,30 @@ bool write_string_to_file(char* file, char* text)
 	} else {
 		LOOM_DEBUG_Println2("Error opening: ", file);
 	}
+}
+
+// This is just a helper function,
+// expects file to be open already
+void sd_write_timestamp(char* file, int timestamp, char delimiter)
+{
+	switch (timestamp) {
+		case 1:
+			sdFile.print(get_datestring());
+			break;
+		case 2:
+			sdFile.print(get_timestring());
+			break;
+		case 3:
+			sdFile.print(get_datestring());
+			sdFile.print(delimiter);
+			sdFile.print(get_timestring());
+			break;
+		case 4:
+			sdFile.print(get_datestring());
+			sdFile.print('_');
+			sdFile.print(get_timestring());
+	}
+	sdFile.print(delimiter);
 }
 
 
@@ -227,7 +251,7 @@ bool write_string_to_file(char* file, char* text)
 // 	LOOM_DEBUG_Println(osc_str);
 // 	LOOM_DEBUG_Println2("osc_str length: ", osc_str);
 
-// 	write_string_to_file(file, osc_str);
+// 	sd_write_string(file, osc_str);
 // }
 
 
@@ -262,29 +286,12 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 	sdFile = SD.open(file, FILE_WRITE);
 
 	if (sdFile) {
-		LOOM_DEBUG_Println2("Saving array to SD file: ", file);
+		LOOM_DEBUG_Print3("Saving array to SD file: ", file, " ...");
 
 		// Optionally add some form of timestamp
 		#if is_rtc == 1
-			switch (timestamp) {
-				case 1:
-					sdFile.print(get_datestring());
-					sdFile.print(delimiter);
-					break;
-				case 2:
-					sdFile.print(get_timestring());
-					sdFile.print(delimiter);
-					break;
-				case 3:
-					sdFile.print(get_datestring());
-					sdFile.print(delimiter);
-					sdFile.print(get_timestring());
-					break;
-				case 4:
-					sdFile.print(get_datestring());
-					sdFile.print('_');
-					sdFile.print(get_timestring());
-					sdFile.print(delimiter);
+			if ((timestamp > 0) && (timestamp <= 4)) {
+				sd_write_timestamp(file, timestamp, delimiter);
 			}
 		#endif
 
@@ -298,6 +305,7 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 		LOOM_DEBUG_Println2("Error opening: ", file);
 	}
 	sdFile.close();
+	LOOM_DEBUG_Println("Done");
 }
 
 
@@ -306,17 +314,70 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 // Could print in hierarchical format like print_bundle
 
 // Format options
-//  1: Hierarchical output (best for visually understanding bundle)
-//  2: Save as comma separated array
+//  1: Save as comma separated array of data on (if in key-value single/mulit-msg or single message format)
+//  2: Hierarchical output (best for visually understanding bundle)
 //  3: Save as osc translated to string
-bool sd_save_bundle(char * file, OSCBundle *bndl, int format)
+bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 {
 	sdFile = SD.open(file, FILE_WRITE);
 	if (sdFile) {
 		LOOM_DEBUG_Println2("Saving bundle to SD file: ", file);
 
+		// Optionally add some form of timestamp
+		#if is_rtc == 1
+			if ((timestamp > 0) && (timestamp <= 4)) {
+				sd_write_timestamp(file, timestamp, ',');
+			}
+		#endif
+
 		switch(format) {
-			case 1: 
+			case 1: {
+				// OSCBundle tmpBndl;
+				// deep_copy_bundle(bndl, &tmpBndl);
+				// print
+				// String tmpStrings[20];
+				// convert_bundle_to_array_w_header(bndl, tmpStrings, 20);
+				// // print_array(tmpStrings, 20, 1);
+				// // convert_bundle_to_array(bndl, tmpStrings, 20);
+				// sd_save_array(file, tmpStrings, 20, ',', timestamp);
+				// LOOM_DEBUG_Println("HERE1");
+				char buf[50];
+				char data_type;
+				OSCMessage *msg;
+				for (int i = 0; i < bndl->size(); i++) {
+					msg = bndl->getOSCMessage(i);
+					msg->getAddress(buf, 0);
+					sdFile.print(buf);
+					sdFile.print(',');
+
+					for (int j = 0; j < msg->size(); j++) {
+						data_type = msg->getType(j);
+
+						switch(data_type) {
+							case 'f':
+								sdFile.print(msg->getFloat(j));
+								break;
+							case 'i':
+								sdFile.print(msg->getInt(j));
+								break;
+							case 's':
+								msg->getString(j, buf, 50);
+								sdFile.print(buf);
+								break;
+							default:
+								break;
+						}
+						if (j < msg->size()-1) {
+							sdFile.print(',');
+						} else {
+							sdFile.println();
+						}
+					}
+					
+				}
+				break;
+			}
+			case 2: {
 				char buf[50];
 				char data_type;
 				sdFile.print("\nBundle Size: ");
@@ -358,23 +419,23 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format)
 				}
 				sdFile.println();
 				break;
-
-			case 2:
+			}
+			case 3: {
 				char osc_str[255];
 				memset(osc_str, '\0', sizeof(osc_str));
 				convert_OSC_bundle_to_string(bndl, osc_str);
-				write_string_to_file(file, osc_str);
+				sd_write_string(file, osc_str);
 				break;
-
-			default:
+			}
+			default: {
 				LOOM_DEBUG_Println("Invalid bundle printing format");
 				break;
+			}
 		}
 	} else {
 		LOOM_DEBUG_Println2("Error opening: ", file);
 	}
 	sdFile.close();
-	
 }
 
 
