@@ -1,4 +1,12 @@
 // ================================================================ 
+// ===                          NOTES                           === 
+// ================================================================
+
+// It appears that file names need to be limited to 8 characters
+//  (not including the extension)
+
+
+// ================================================================ 
 // ===                        LIBRARIES                         === 
 // ================================================================
 #include <SD.h>
@@ -166,16 +174,10 @@ bool read_all_from_file(char* file)
 		// read from the file until there's nothing else in it:
 		while (sdFile.available()) 
 			Serial.write(sdFile.read());
-		
-		// close the file:
-		sdFile.close();
-
+		Serial.println();
 	} else {
 		// if the file didn't open, print an error:
-		#if LOOM_DEBUG == 1
-			Serial.print("Error opening ");
-			Serial.println(file);
-		#endif
+		LOOM_DEBUG_Println2("Error opening ", file);
 	}
 	sdFile.close();
 }
@@ -247,31 +249,50 @@ bool sd_save_elem(char *file, T data, char endchar)
 
 // Have a macro call this function with correct length?
 
+
+// timestamp options:
+//   0: no timestamp added
+//   1: only date added
+//   2: only time added
+//   3: both date and time added (two fields)
+//   4: both date and time added (combined field)
 template <typename T>
 bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp) 
 {
-	LOOM_DEBUG_Println2("Saving array to SD file: ", file);
 	sdFile = SD.open(file, FILE_WRITE);
 
-	#if is_rtc3231 == 1
-		if (timestamp == 1) {
-			char * tempTime = get_timestring(false);
-			Serial.println(tempTime);
-			sdFile.print(get_timestring(false));
-			sdFile.print(delimiter);
-		} else if (timestamp == 2) {
-			// char * tempTime = get_timestring_full();
-			// Serial.println(tempTime);
-			// sdFile.print(get_timestring());
-			// sdFile.print(delimiter);
-		}
-	#endif
-
 	if (sdFile) {
-		for (int i = 0; i < len; i++) {
+		LOOM_DEBUG_Println2("Saving array to SD file: ", file);
+
+		// Optionally add some form of timestamp
+		#if is_rtc == 1
+			switch (timestamp) {
+				case 1:
+					sdFile.print(get_datestring());
+					sdFile.print(delimiter);
+					break;
+				case 2:
+					sdFile.print(get_timestring());
+					sdFile.print(delimiter);
+					break;
+				case 3:
+					sdFile.print(get_datestring());
+					sdFile.print(delimiter);
+					sdFile.print(get_timestring());
+					break;
+				case 4:
+					sdFile.print(get_datestring());
+					sdFile.print('_');
+					sdFile.print(get_timestring());
+					sdFile.print(delimiter);
+			}
+		#endif
+
+		for (int i = 0; i < len-1; i++) {
 			sdFile.print(data[i]);
 			sdFile.print(delimiter);
 		}
+		sdFile.print(data[len-1]);
 		sdFile.println();
 	} else {		
 		LOOM_DEBUG_Println2("Error opening: ", file);
@@ -287,11 +308,13 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 // Format options
 //  1: Hierarchical output (best for visually understanding bundle)
 //  2: Save as comma separated array
+//  3: Save as osc translated to string
 bool sd_save_bundle(char * file, OSCBundle *bndl, int format)
 {
-	LOOM_DEBUG_Println2("Saving bundle to SD file: ", file);
 	sdFile = SD.open(file, FILE_WRITE);
 	if (sdFile) {
+		LOOM_DEBUG_Println2("Saving bundle to SD file: ", file);
+
 		switch(format) {
 			case 1: 
 				char buf[50];
