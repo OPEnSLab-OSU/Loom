@@ -44,7 +44,23 @@ void loop()
 
 // 	print_bundle(&bndl);
 
-	// sd_save_array("example9.txt", data, 7, ',', 1);
+	sd_save_array("time0.txt", data, 7, ',', 0);
+	read_all_from_file("time0.txt");
+
+	sd_save_array("time1.txt", data, 7, ',', 1);
+	read_all_from_file("time1.txt");
+
+	sd_save_array("time2.txt", data, 7, ',', 2);
+	read_all_from_file("time2.txt");
+
+	sd_save_array("time3.txt", data, 7, ',', 3);
+	read_all_from_file("time3.txt");
+
+	sd_save_array("time4.txt", data, 7, ',', 4);
+	read_all_from_file("time4.txt");
+
+	while(1);
+
 	// sd_save_bundle("example.txt", &bndl, 1);
 
 // 	read_all_from_file("example.txt");
@@ -52,8 +68,14 @@ void loop()
 // 	sd_empty_file("example.txt");
 	// read_all_from_file("example8.txt");
 
+	// Node
+	send_bundle(&send_bndl, SDCARD);
+	send_bundle(&send_bndl, LORA);
 
-	
+
+	// HUB
+	receive_bundle(&bndl);
+	send_bundle(&bndl, SDCARD);
 // 	while(1);
 
 	// Update stored readings from sensors

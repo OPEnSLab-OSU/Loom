@@ -145,14 +145,17 @@ void measure_rtc() {
 }
 
 char* get_datestring() {
+	measure_rtc();
 	return state_rtc.datestring;
 }
 
 char* get_timestring() {
+	measure_rtc();
 	return state_rtc.timestring;
 }
 
 char* get_weekday() {
+	measure_rtc();
 	return state_rtc.weekday;
 }
 
