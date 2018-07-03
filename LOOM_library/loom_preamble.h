@@ -159,8 +159,8 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #if is_tca9548a == 1
 	#include "loom_tca9548a.h"
 #endif
-#if is_rtc3231 == 1
-	#include "loom_rtc3231.h"
+#if is_rtc == 1
+	#include "loom_rtc.h"
 #endif
 #if is_sd == 1
 	#include "loom_sd.h"

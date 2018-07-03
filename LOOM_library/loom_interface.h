@@ -200,6 +200,11 @@ void measure_sensors()
 	#if is_decagon == 1
 		measure_decagon();
 	#endif
+
+	// Update time
+	#if is_rtc == 1
+		measure_rtc();
+	#endif
 }
 
 

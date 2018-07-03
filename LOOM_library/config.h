@@ -38,9 +38,11 @@
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet  0
 
-#define is_sd         0		// 1 to enable SD card 
 #define is_pushingbox 0     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
+
+#define is_sd         1		// 1 to enable SD card 
+#define is_rtc        1		// Enable RTC functionality
 
 // --- Enabled Actuators --- 
 #define num_servos   0		// Number of servos being used
@@ -218,6 +220,13 @@
 #if is_adafruitio == 1
 	#define AIO_USERNAME    "Goertzel"
 	#define AIO_KEY         ""
+#endif
+
+// --- RTC Options ---
+#if is_rtc == 1
+	// Select only one of the below options
+	#define is_rtc3231 0 	// RTC DS 3231 Featherwing
+	#define is_rtc8523 1	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
 #endif
 
 // --- Loom Translator Options ---
