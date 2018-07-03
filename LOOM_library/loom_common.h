@@ -41,7 +41,9 @@ void Loom_begin()
 	#endif
 	
 	// Setup sensors and actuators by calling the respective setups
-
+	#if num_analog > 0
+		setup_analog();
+	#endif
 	#if is_tca9548a == 1
 		setup_tca9548a();
 	#endif
@@ -269,5 +271,8 @@ void flash_led()
 	} 
 	digitalWrite(led, HIGH);
 }
+
+
+
 
 

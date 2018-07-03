@@ -108,7 +108,7 @@ void process_bundle(OSCBundle *bndl)
 //					memset(fileName, '\0', sizeof(fileName));
 //					tmp.toCharArray(fileName, 30);
 //					sd_save_bundle(fileName, bndl);
-					sd_save_bundle("data_log.txt", bndl);
+					sd_save_bundle("data_log.txt", bndl, 2);
 
 				}
 			#endif
@@ -308,7 +308,7 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 		#if is_sd == 1
 			case SDCARD : 
 				LOOM_DEBUG_Println("Saving bundle");
-				sd_save_bundle(file, send_bndl);
+				sd_save_bundle(file, send_bndl, 1);
 				break;
 		#endif
 
@@ -318,6 +318,9 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 				sendToPushingBox(send_bndl);
 				break;
 		#endif
+
+		case SERIAL :
+			print_bundle(send_bndl);
 		
 		#if LOOM_DEBUG == 1
 		default :
@@ -359,6 +362,9 @@ void additional_loop_checks()
 		adafruitio_publish();
 	#endif
 }
+
+
+
 
 
 

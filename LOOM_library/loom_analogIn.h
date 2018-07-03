@@ -1,8 +1,8 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define num_measurements 4      // Must be 1, 2, 4, or 8 number of analog measurements to sample and average per channel
-
+#define num_measurements 1      // Must be 1, 2, 4, or 8 number of analog measurements to sample and average per channel
+#define analog_resolution 12
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -20,9 +20,20 @@ struct state_analog_t state_analog;
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
+void     setup_analog();
 uint32_t read_analog(uint8_t chnl);
-void measure_analog();
-void package_analog(OSCBundle *bndl, char packet_header_string[]);
+void     measure_analog();
+void     package_analog(OSCBundle *bndl, char packet_header_string[]);
+
+
+
+// ================================================================ 
+// ===                          SETUP                           === 
+// ================================================================
+
+void setup_analog() {
+	analogReadResolution(analog_resolution);
+}
 
 
 // ================================================================ 
@@ -45,8 +56,9 @@ uint32_t read_analog(uint8_t chnl)
 	int i = num_measurements;
 	uint32_t reading = 0;
 
-	while (i--) 
-	reading += analogRead(chnl);
+	while (i--) {
+		reading += analogRead(chnl);
+	}
 
 	#if (num_measurements == 1) // Take a reading    
 		return (reading);
@@ -72,6 +84,7 @@ void measure_analog()
 {
 	#if (num_analog > 0) 
 		state_analog.a0 = read_analog(0);
+		Serial.println(read_analog(0));
 	#endif
 	#if (num_analog > 1)
 		state_analog.a1 = read_analog(1);
@@ -108,6 +121,31 @@ void package_analog(OSCBundle *bndl, char packet_header_string[])
 		bndl->add(addressString).add((int32_t)state_analog.a2);
 	#endif
 }
+
+
+
+
+// Example code for adjusting analog reading resolution
+
+// analogReadResolution(10);
+// Serial.print("ADC 10-bit (default) : ");
+// Serial.print(analogRead(A0));
+
+// // change the resolution to 12 bits and read A0
+// analogReadResolution(12);
+// Serial.print(", 12-bit : ");
+// Serial.print(analogRead(A0));
+
+// // change the resolution to 16 bits and read A0
+// analogReadResolution(16);
+// Serial.print(", 16-bit : ");
+// Serial.print(analogRead(A0));
+
+// // change the resolution to 8 bits and read A0
+// analogReadResolution(8);
+// Serial.print(", 8-bit : ");
+// Serial.println(analogRead(A0));
+
 
 
 

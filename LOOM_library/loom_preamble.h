@@ -19,6 +19,7 @@ enum Platform {
 	WIFI,
 	LORA,
 	NRF,
+	CELLULAR,
 	SDCARD,
 	PUSHINGBOX
 };
@@ -175,6 +176,9 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #include "loom_OSC_translator.h"
 #include "loom_common.h"  		// These may refer to functions in above headers
 #include "loom_interface.h"
+
+
+
 
 
 

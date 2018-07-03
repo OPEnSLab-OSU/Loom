@@ -38,7 +38,7 @@
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet  0
 
-#define is_sd         1		// 1 to enable SD card 
+#define is_sd         0		// 1 to enable SD card 
 #define is_pushingbox 0     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
@@ -48,7 +48,7 @@
 #define is_relay     0		// 1 if relays are being used (enables two, on pins 5 and 6)
 
 // --- Enabled Sensors --- 
-#define num_analog  0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
+#define num_analog  1		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
 #define is_decagon  0		// 1 if GS3 Decagon is being used
 #define is_tca9548a 0		// 1 if Multiplexer is being used. (Further customization in advanced options)
 
@@ -236,3 +236,6 @@
 #if is_sapflow == 1
 	#define num_analog 2
 #endif 
+
+
+

@@ -46,7 +46,7 @@ volatile int MIN = 0; // Min of each hour we want alarm to go off
 // ================================================================
 void setup_rtc3231();
 void measure_rtc3231();
-void get_timestring();
+char* get_timestring();
 void setAlarmFunction();
 void clearAlarmFunction();
 void wake();
@@ -107,6 +107,13 @@ void measure_rtc3231() {
 	RTC_timeString.toCharArray(state_rtc3231.timestring, 24);
 }
 
+
+char* get_timestring() {
+	measure_rtc3231();
+	return state_rtc3231.timestring;
+}
+
+
 // *********
 // RTC helper function
 // Function to query current RTC time and add the period to set next alarm cycle
@@ -150,6 +157,9 @@ void wake() {
 	disableInterrupt(wakeUpPin);
 	#endif //is_32U4
 }
+
+
+
 
 
 
