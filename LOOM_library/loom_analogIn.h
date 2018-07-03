@@ -1,8 +1,9 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define num_measurements 1      // Must be 1, 2, 4, or 8 number of analog measurements to sample and average per channel
-#define analog_resolution 12
+#define num_measurements 4      // Must be 1, 2, 4, or 8 number of analog measurements to sample and average per channel
+#define analog_resolution 12	// How many bits to read (normally defaults to 10, but M0 supports 12)
+								//   Other devices will just zero pad the least significant bits beyond the supported number of bits
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -84,7 +85,6 @@ void measure_analog()
 {
 	#if (num_analog > 0) 
 		state_analog.a0 = read_analog(0);
-		Serial.println(read_analog(0));
 	#endif
 	#if (num_analog > 1)
 		state_analog.a1 = read_analog(1);

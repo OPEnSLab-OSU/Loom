@@ -34,49 +34,30 @@ void loop()
 
 	// Process bundle (nothing will happen if bndl is empty), bundle is emptied after processing
 	// process_bundle(&bndl);
-// 	sd_card_info();
 
 // 	// Dummy Sapflow Data
-// 	String parameters[7] = {"Time", "Battery", "Temp1", "Temp2", "Temp_Diff", "Temp_SHT31D", "Humidity_SHT31D"};
-// 	String data[7] = {"2018/7/2", "4.27", "23.0", "25.2", "2.2", "30.0", "14"};
+	String parameters[7] = {"Test", "Battery", "Temp1", "Temp2", "Temp_Diff", "Temp_SHT31D", "Humidity_SHT31D"};
+	String data[7] = {"abc", "4.27", "23.0", "25.2", "2.2", "30.0", "14"};
+
 
 // 	convert_assoc_arrays_to_bundle(parameters, data, &bndl, "/some/packet/header", 7, SINGLEMSG);
 
 // 	print_bundle(&bndl);
 
-// //	sd_save_array("example.txt", data, 7, '');
-// 	sd_save_bundle("example.txt", &bndl, 1);
+	// sd_save_array("example9.txt", data, 7, ',', 1);
+	// sd_save_bundle("example.txt", &bndl, 1);
 
 // 	read_all_from_file("example.txt");
 
 // 	sd_empty_file("example.txt");
-// 	read_all_from_file("example.txt");
+	// read_all_from_file("example8.txt");
 
-
-	// analogReadResolution(10);
-	// Serial.print("ADC 10-bit (default) : ");
-	// Serial.print(analogRead(A0));
-
-	// // change the resolution to 12 bits and read A0
-	// analogReadResolution(12);
-	// Serial.print(", 12-bit : ");
-	// Serial.print(analogRead(A0));
-
-	// // change the resolution to 16 bits and read A0
-	// analogReadResolution(16);
-	// Serial.print(", 16-bit : ");
-	// Serial.print(analogRead(A0));
-
-	// // change the resolution to 8 bits and read A0
-	// analogReadResolution(8);
-	// Serial.print(", 8-bit : ");
-	// Serial.println(analogRead(A0));
 
 	
 // 	while(1);
 
 	// Update stored readings from sensors
-	measure_sensors();
+	// measure_sensors();
 
 	// Populate bundle to send with sensor values
 	// package_data(&send_bndl);

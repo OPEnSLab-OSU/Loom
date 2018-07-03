@@ -191,8 +191,6 @@ bool read_all_from_file(char* file)
 //
 bool write_string_to_file(char* file, char* text) 
 {
-	LOOM_DEBUG_Println2("Writing to file: ", file);
-
 	sdFile = SD.open(file, FILE_WRITE);
 	if (sdFile) {
 		LOOM_DEBUG_Print3("Writing to ", file, "...");
@@ -234,10 +232,10 @@ bool write_string_to_file(char* file, char* text)
 template <typename T>
 bool sd_save_elem(char *file, T data, char endchar)
 {
-	LOOM_DEBUG_Println4("Saving ", data, " to SD file: ", file);
 	sdFile = SD.open(file, FILE_WRITE);
 
 	if (sdFile) {
+		LOOM_DEBUG_Println4("Saving ", data, " to SD file: ", file);
 		sdFile.print(data);
 		sdFile.print(endchar);
 	} else {
@@ -250,10 +248,24 @@ bool sd_save_elem(char *file, T data, char endchar)
 // Have a macro call this function with correct length?
 
 template <typename T>
-bool sd_save_array(char *file, T data [], int len, char delimiter) 
+bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp) 
 {
 	LOOM_DEBUG_Println2("Saving array to SD file: ", file);
 	sdFile = SD.open(file, FILE_WRITE);
+
+	#if is_rtc3231 == 1
+		if (timestamp == 1) {
+			char * tempTime = get_timestring(false);
+			Serial.println(tempTime);
+			sdFile.print(get_timestring(false));
+			sdFile.print(delimiter);
+		} else if (timestamp == 2) {
+			// char * tempTime = get_timestring_full();
+			// Serial.println(tempTime);
+			// sdFile.print(get_timestring());
+			// sdFile.print(delimiter);
+		}
+	#endif
 
 	if (sdFile) {
 		for (int i = 0; i < len; i++) {
