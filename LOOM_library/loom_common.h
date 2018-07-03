@@ -69,11 +69,6 @@ void Loom_begin()
 		setup_relay();
 	#endif
 	#if is_rtc == 1
-		// #if is_rtc3231 == 1
-		// 	setup_rtc3231(); 
-		// #elif is_rtc8523 == 1
-		// 	setup_rtc8532();
-		// #endif
 		setup_rtc();
 	#endif
 

@@ -90,5 +90,29 @@ void write_relay_states()
 }
 
 
+// unsigned long lastUpdate;
+// unsigned long currentTime;
+// bool on = false;
+
+// setup() {
+// 	lastUpdate = millis();
+// 	if (!on) {
+// 		digitalWrite(5, HIGH);
+// 	} 
+// }
+
+
+// main() {
+// 	currentTime = millis();
+// 	if ((currentTime - lastUpdate) > 2500) {
+// 		digitalWrite(5, on ? LOW : HIGH);
+// 		on = !on;
+// 		lastUpdate = currentTime;
+// 	}
+
+// 	// do other stuff
+// }
+
+
 
 
