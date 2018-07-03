@@ -72,7 +72,82 @@ void setup_sd()
 // ===                        FUNCTIONS                         ===
 // ================================================================
 
+void sd_card_info()
+{
+	// Sd2Card card;
+	// SdVolume volume;
+	// SdFile root;
+	// Serial.print("Card type:         ");
+	// switch (card.type()) {
+	// 	case SD_CARD_TYPE_SD1:
+	// 		Serial.println("SD1");
+	// 		break;
+	// 	case SD_CARD_TYPE_SD2:
+	// 		Serial.println("SD2");
+	// 		break;
+	// 	case SD_CARD_TYPE_SDHC:
+	// 		Serial.println("SDHC");
+	// 		break;
+	// 	default:
+	// 		Serial.println("Unknown");
+	// }
 
+	// // Now we will try to open the 'volume'/'partition' - it should be FAT16 or FAT32
+	// if (!volume.init(card)) {
+	// 	Serial.println("Could not find FAT16/FAT32 partition.\nMake sure you've formatted the card");
+	// 	while (1);
+	// }
+
+	// Serial.print("Clusters:          ");
+	// Serial.println(volume.clusterCount());
+	// Serial.print("Blocks x Cluster:  ");
+	// Serial.println(volume.blocksPerCluster());
+
+	// Serial.print("Total Blocks:      ");
+	// Serial.println(volume.blocksPerCluster() * volume.clusterCount());
+	// Serial.println();
+
+	// // print the type and size of the first FAT-type volume
+	// uint32_t volumesize;
+	// Serial.print("Volume type is:    FAT");
+	// Serial.println(volume.fatType(), DEC);
+
+	// volumesize = volume.blocksPerCluster();    // clusters are collections of blocks
+	// volumesize *= volume.clusterCount();       // we'll have a lot of clusters
+	// volumesize /= 2;                           // SD card blocks are always 512 bytes (2 blocks are 1KB)
+	// Serial.print("Volume size (Kb):  ");
+	// Serial.println(volumesize);
+	// Serial.print("Volume size (Mb):  ");
+	// volumesize /= 1024;
+	// Serial.println(volumesize);
+	// Serial.print("Volume size (Gb):  ");
+	// Serial.println((float)volumesize / 1024.0);
+
+	// Serial.println("\nFiles found on the card (name, date and size in bytes): ");
+	// root.openRoot(volume);
+
+	// // list all files in the card with date and size
+	// root.ls(LS_R | LS_DATE | LS_SIZE);
+}
+
+// Delete a file on SD card if it exists
+void sd_delete_file(char* file) 
+{
+	SD.remove(file);
+}
+
+// Empty a file on SD card
+void sd_empty_file(char* file)
+{
+	SD.remove(file);
+	sdFile = SD.open(file, FILE_WRITE);
+	sdFile.close();
+}
+
+void sd_list_files()
+{
+
+}
 // --- SD READ FROM FILE --- 
 //
 // Attempts to read all of the contents of a file
@@ -86,10 +161,7 @@ bool read_all_from_file(char* file)
 {
 	sdFile = SD.open(file);
 	if (sdFile) {
-		#if LOOM_DEBUG == 1
-			Serial.print(file); 
-			Serial.println(": ");
-		#endif
+		LOOM_DEBUG_Println2("Contents of file: ", file);
 
 		// read from the file until there's nothing else in it:
 		while (sdFile.available()) 
@@ -105,6 +177,7 @@ bool read_all_from_file(char* file)
 			Serial.println(file);
 		#endif
 	}
+	sdFile.close();
 }
 
 
@@ -118,26 +191,18 @@ bool read_all_from_file(char* file)
 //
 bool write_string_to_file(char* file, char* text) 
 {
-	Serial.print("writing to file :");
-	Serial.println(text);
+	LOOM_DEBUG_Println2("Writing to file: ", file);
+
 	sdFile = SD.open(file, FILE_WRITE);
 	if (sdFile) {
-
 		LOOM_DEBUG_Print3("Writing to ", file, "...");
 
 		sdFile.println(text);
 
 		LOOM_DEBUG_Println(" done");
-
-		// close the file:
 		sdFile.close();
-
 	} else {
-		// if the file didn't open, print an error:
-		#if LOOM_DEBUG == 1
-			Serial.print("Error writing to ");
-			Serial.println(file);
-		#endif
+		LOOM_DEBUG_Println2("Error opening: ", file);
 	}
 }
 
@@ -152,18 +217,18 @@ bool write_string_to_file(char* file, char* text)
 // }
 
 // --- SD SAVE BUNDLE
-bool sd_save(char *file, OSCBundle *bndl)
-{
-	Serial.println("sd save bundle");
-	char osc_str[255];
-	memset(osc_str, '\0', sizeof(osc_str));
-	convert_OSC_bundle_to_string(bndl, osc_str);
+// bool sd_save(char *file, OSCBundle *bndl)
+// {
+// 	Serial.println("sd save bundle");
+// 	char osc_str[255];
+// 	memset(osc_str, '\0', sizeof(osc_str));
+// 	convert_OSC_bundle_to_string(bndl, osc_str);
 
-	LOOM_DEBUG_Println(osc_str);
-	LOOM_DEBUG_Println2("osc_str length: ", osc_str);
+// 	LOOM_DEBUG_Println(osc_str);
+// 	LOOM_DEBUG_Println2("osc_str length: ", osc_str);
 
-	write_string_to_file(file, osc_str);
-}
+// 	write_string_to_file(file, osc_str);
+// }
 
 
 template <typename T>
@@ -172,8 +237,13 @@ bool sd_save_elem(char *file, T data, char endchar)
 	LOOM_DEBUG_Println4("Saving ", data, " to SD file: ", file);
 	sdFile = SD.open(file, FILE_WRITE);
 
-	sdFile.print(data);
-	sdFile.print(endchar);
+	if (sdFile) {
+		sdFile.print(data);
+		sdFile.print(endchar);
+	} else {
+		LOOM_DEBUG_Println2("Error opening: ", file);
+	}
+	sdFile.close();
 }
 
 
@@ -185,20 +255,91 @@ bool sd_save_array(char *file, T data [], int len, char delimiter)
 	LOOM_DEBUG_Println2("Saving array to SD file: ", file);
 	sdFile = SD.open(file, FILE_WRITE);
 
-	for (int i = 0; i < len; i++) {
-		sdFile.print(data[i]);
-		sdFile.print(delimiter);
+	if (sdFile) {
+		for (int i = 0; i < len; i++) {
+			sdFile.print(data[i]);
+			sdFile.print(delimiter);
+		}
+		sdFile.println();
+	} else {		
+		LOOM_DEBUG_Println2("Error opening: ", file);
 	}
-	sdFile.println();
+	sdFile.close();
 }
 
 
 // Could convert to array first
 // Print as OSC string
 // Could print in hierarchical format like print_bundle
-bool sd_save_bundle(char * file, OSCBundle *bndl)
-{
 
+// Format options
+//  1: Hierarchical output (best for visually understanding bundle)
+//  2: Save as comma separated array
+bool sd_save_bundle(char * file, OSCBundle *bndl, int format)
+{
+	LOOM_DEBUG_Println2("Saving bundle to SD file: ", file);
+	sdFile = SD.open(file, FILE_WRITE);
+	if (sdFile) {
+		switch(format) {
+			case 1: 
+				char buf[50];
+				char data_type;
+				sdFile.print("\nBundle Size: ");
+				sdFile.println(bndl->size());
+				OSCMessage *msg;
+				
+				for (int i = 0; i < bndl->size(); i++) {
+					msg = bndl->getOSCMessage(i);
+
+					msg->getAddress(buf, 0);
+					sdFile.print("Address ");
+					sdFile.print(i + 1);
+					sdFile.print(": ");
+					sdFile.println(buf);
+
+					for (int j = 0; j < msg->size(); j++) {
+						data_type = msg->getType(j);
+						sdFile.print("Value ");
+						sdFile.print(j + 1);
+						sdFile.print(": ");
+						switch(data_type) {
+							case 'f':
+								sdFile.print("(f) ");
+								sdFile.println(msg->getFloat(j));
+								break;
+							case 'i':
+								sdFile.print("(i) ");
+								sdFile.println(msg->getInt(j));
+								break;
+							case 's':
+								sdFile.print("(s) ");
+								msg->getString(j, buf, 50);
+								sdFile.println(buf);
+								break;
+							default:
+								break;
+						}
+					}
+				}
+				sdFile.println();
+				break;
+
+			case 2:
+				char osc_str[255];
+				memset(osc_str, '\0', sizeof(osc_str));
+				convert_OSC_bundle_to_string(bndl, osc_str);
+				write_string_to_file(file, osc_str);
+				break;
+
+			default:
+				LOOM_DEBUG_Println("Invalid bundle printing format");
+				break;
+		}
+	} else {
+		LOOM_DEBUG_Println2("Error opening: ", file);
+	}
+	sdFile.close();
+	
 }
 
 
@@ -210,7 +351,9 @@ bool sd_save_bundle(char * file, OSCBundle *bndl)
 
 // --- ENABLE SD LOGGING ---
 //
-// 
+// Used if message routed from Max instructs
+// device to start or stop logging the bundles 
+// that it receives
 //
 // @param msg  OSC messages that had header ending in '/enableSDlogging'
 //
@@ -233,6 +376,9 @@ void set_SD_logging(OSCMessage &msg)
 		#endif
 	}
 }
+
+
+
 
 
 

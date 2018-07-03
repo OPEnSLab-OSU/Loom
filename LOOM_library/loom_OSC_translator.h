@@ -109,7 +109,7 @@ void print_bundle(OSCBundle *bndl)
 {
 	char buf[50];
 	char data_type;
-	Serial.println("Bundle Size: ");
+	Serial.print("\nBundle Size: ");
 	Serial.println(bndl->size());
 	OSCMessage *msg;
 	
@@ -146,6 +146,7 @@ void print_bundle(OSCBundle *bndl)
 			}
 		}
 	}
+	Serial.println();
 }
 
 
@@ -909,3 +910,6 @@ void convert_array(Tin src [], Tout dest[], int count)
 
 
 #endif // of COMPLETE_TRANSLATOR == 1
+
+
+
