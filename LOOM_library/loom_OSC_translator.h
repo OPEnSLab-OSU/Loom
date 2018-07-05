@@ -34,6 +34,7 @@ union data_value { // Used in translation between OSC and strings
 	int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
 	bool bundle_empty(OSCBundle *bndl);
 String get_data_value(OSCMessage* msg, int pos);
+String get_address_string(OSCMessage *msg);
 void   deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
 
 // Conversions between bundles and strings
@@ -224,6 +225,15 @@ String get_data_value(OSCMessage* msg, int pos)
 	LOOM_DEBUG_Println2("Message does not have an argument with position: ", pos);
 
 	return String("");
+}
+
+
+
+String get_address_string(OSCMessage *msg)
+{
+	char buf[50];
+	msg->getAddress(buf, 0);
+	return String(buf);
 }
 
 
@@ -474,12 +484,12 @@ void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructu
 	
 	// If already in requested message format
 	if ((format == SINGLEMSG) && (bndl->size() == 1)) { 
-		LOOM_DEBUG_Println("Bundle already in single-message format");
+		// LOOM_DEBUG_Println("Bundle already in single-message format");
 		deep_copy_bundle(bndl, outBndl);
 		return;
 	}
 	if ((format == MULTIMSG) && (bndl->size() > 1)) {
-		LOOM_DEBUG_Println("Bundle already in multi-message format");
+		// LOOM_DEBUG_Println("Bundle already in multi-message format");
 		deep_copy_bundle(bndl, outBndl);
 		return; 
 	}

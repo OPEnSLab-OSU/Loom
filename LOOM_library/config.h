@@ -34,11 +34,11 @@
 
 // --- Enabled Communication Platform(s) --- 
 #define is_wifi      0 		// 1 to enable WiFi
-#define is_lora      1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet  0
 
-#define is_pushingbox 1     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
+#define is_pushingbox 0     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         1		// 1 to enable SD card 
@@ -50,13 +50,13 @@
 #define is_relay     0		// 1 if relays are being used (enables two, on pins 5 and 6)
 
 // --- Enabled Sensors --- 
-#define num_analog  1		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
+#define num_analog  0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
 #define is_decagon  0		// 1 if GS3 Decagon is being used
 #define is_tca9548a 0		// 1 if Multiplexer is being used. (Further customization in advanced options)
 
 // --- Prebuilt Devices ---
 #define is_ishield  0		// 1 to specify using Ishield (should enable only wifi as communication platform)
-#define is_sapflow  1
+#define is_sapflow  0
 
 
 // --- WiFi Settings ---
@@ -249,6 +249,12 @@
 
 // --- SD Options ---
 #if is_sd
+	// timestamp options:
+	//   0: no timestamp added
+	//   1: only date added
+	//   2: only time added
+	//   3: both date and time added (two fields)
+	//   4: both date and time added (combined field)
 	#define sd_save_time_format 3
 #endif
 
