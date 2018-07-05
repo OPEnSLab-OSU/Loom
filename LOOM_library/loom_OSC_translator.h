@@ -32,6 +32,7 @@ union data_value { // Used in translation between OSC and strings
 	void print_array(T data [], int len, int format);
 #endif
 	int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
+	bool bundle_empty(OSCBundle *bndl);
 String get_data_value(OSCMessage* msg, int pos);
 void   deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
 
@@ -183,6 +184,12 @@ int get_bundle_bytes(OSCBundle *bndl)
 	for (int i = 0; i < bndl->size(); i++) {
 		total += bndl->getOSCMessage(i)->bytes();
 	}
+}
+
+
+bool bundle_empty(OSCBundle *bndl)
+{
+	return get_bundle_bytes(bndl) == 0;
 }
 
 
