@@ -153,7 +153,7 @@ void measure_sensors()
 {
 	// Get battery voltage
 	vbat = analogRead(VBATPIN);
-	vbat = (vbat * 2 * 3.3) / 1024; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
+	vbat = (vbat * 2 * 3.3) / 4096; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
 
 	//	Get button state
 	#ifdef button
@@ -181,7 +181,7 @@ void measure_sensors()
 	#endif
 
 	// Get analog readings
-	#if num_analog >= 1
+	#if (num_analog >= 1) && (is_sapflow != 1)
 		measure_analog();
 	#endif
 
@@ -193,6 +193,15 @@ void measure_sensors()
 	// Update time
 	#if is_rtc == 1
 		measure_rtc();
+	#endif
+
+	 // Get analog readings
+	#if is_sapflow == 1
+		measure_sapflow();
+		#if hub_node_type == 1
+			measure_sht31d();
+			heat(heatpulse);
+		#endif
 	#endif
 }
 
@@ -236,7 +245,7 @@ void package_data(OSCBundle *send_bndl)
 	#endif
 	
 	// Get analog readings
-	#if num_analog >= 1
+	#if (num_analog >= 1) && (is_sapflow != 1)
 		package_analog(send_bndl,configuration.packet_header_string);
 	#endif
 
@@ -244,6 +253,12 @@ void package_data(OSCBundle *send_bndl)
 		package_decagon(&send_bndl,configuration.packet_header_string);
 	#endif
 
+	#if is_sapflow == 1
+		package_sapflow(send_bndl,configuration.packet_header_string);
+		#if hub_node_type == 1
+			package_sht31d(send_bndl,configuration.packet_header_string);
+		#endif
+	#endif
 }
 
 
@@ -319,7 +334,7 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 		#if LOOM_DEBUG == 1
 		default :
 				Serial.println("That platform is not enabled");
-			#endif 
+		#endif 
 	} // of switch
 }
 

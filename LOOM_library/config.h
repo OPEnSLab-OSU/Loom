@@ -34,11 +34,11 @@
 
 // --- Enabled Communication Platform(s) --- 
 #define is_wifi      0 		// 1 to enable WiFi
-#define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_lora      1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet  0
 
-#define is_pushingbox 0     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
+#define is_pushingbox 1     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         1		// 1 to enable SD card 
@@ -56,7 +56,7 @@
 
 // --- Prebuilt Devices ---
 #define is_ishield  0		// 1 to specify using Ishield (should enable only wifi as communication platform)
-
+#define is_sapflow  1
 
 
 // --- WiFi Settings ---
@@ -173,38 +173,58 @@
 
 // --- LoRa Options ---
 #if is_lora == 1
-	#define lora_device_type     0 		// 0: Hub, 1: Node, 2 = Repeater
+	#define hub_node_type     0 		// 0: Hub, 1: Node, 2 = Repeater
 	#define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 
 	#define SERVER_ADDRESS 0			// Use 0-9 for SERVER_ADDRESSes
 	#define RF95_FREQ      915.0		// Hardware specific, Tx must match Rx
 
-	#if lora_device_type == 0
-		#define is_pushingbox 1
-	#endif
-	#if lora_device_type == 1 			// If Node
+	// #if hub_node_type == 0
+	// 	#define is_pushingbox 1
+	// #endif
+	#if hub_node_type == 1 			// If Node
 		#define CLIENT_ADDRESS 10		// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
 	#endif								// 10-19 for 0, 20 - 29 for 1, etc.
 #endif
 
 // --- nRF Options --- 
 #if is_nrf == 1
-	#define nrf_device_type     0 		// 0: Hub, 1: Node, 2 = Repeater
+	#define hub_node_type     0 		// 0: Hub, 1: Node, 2 = Repeater
 	#define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 	
 	#define NRF_HUB_ADDRESS 1			// Use 0-9 for SERVER_ADDRESSes
 	
-	#if nrf_device_type == 1
+	#if hub_node_type == 1
 		#define NRF_NODE_ADDRESS 0
 	#endif
 #endif
 
+// --- Sapflowmeter Options ---
+#if is_sapflow
+	#define hub_node_type 1          // 0: hub, 1: node
+	#define is_lora       1          // enable LoRa
+
+	#if hub_node_type == 0
+		#define is_ethernet   1
+		#define is_pushingbox 1
+	#elif hub_node_type == 1
+		#define num_analog    2      // two temperature sensors
+		#define heatpulse     0      // 0:TDM, 1<: HRM (e.g 2500:2.5 sec)
+		#define num_analog    2      // A0, A1
+		#define is_sht31d     1      // Temperature / Humidity
+		#define senddelay     3000   // send data every 3sec
+	#endif
+#endif 
+
 // --- PushingBox Options ---
-#if is_pushingbox == 1			
+#if is_pushingbox == 1	
+	#define is_ethernet 1		
 	#define NUM_FIELDS 32			// Maximum number of fields accepted by the PushingBox Scenario    
 	
 	// String data[NUM_FIELDS];
 	char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
+	// char device_id[]   = "vFE8D4461E0D6CEF";
+	// char device_id[]   = "v2FDB7D5504B3697";
 	char server_name[] = "api.pushingbox.com";	// PushingBox server, probably don't need to change
 #endif
 
@@ -212,7 +232,9 @@
 	#include <Ethernet2.h>			// (this is needed for IPAddress, do not remove)
 	
 	//Use this for OPEnS Lab
-	byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
+	// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
+
+	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};
 	IPAddress ip(128,193,56,138); 
 #endif
 
@@ -232,7 +254,6 @@
 // --- Loom Translator Options ---
 #define COMPLETE_TRANSLATOR 1			// 1 to include all Loom translator functions, 0 to include just the basics
 
-
 // --- Delay between loops
 #if is_lora == 0 						// Cannot not use with LoRa
 	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
@@ -240,11 +261,4 @@
 										// 80 seems to be a good amount, around 50 and lower may result in lost packets over WiFi
 #endif
 // #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
-
-
-#if is_sapflow == 1
-	#define num_analog 2
-#endif 
-
-
 

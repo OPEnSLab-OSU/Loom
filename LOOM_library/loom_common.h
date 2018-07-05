@@ -71,6 +71,9 @@ void Loom_begin()
 	#if is_rtc == 1
 		setup_rtc();
 	#endif
+	#if is_sapflow == 1
+		setup_sapflow();
+	#endif
 
 	// Read configuration from flash, or write config.h settings 
 	// if no settings are currently saved
@@ -144,7 +147,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	#if is_neopixel == 1
 		msg.dispatch("/Neopixel",     		set_color, 				addrOffset);
 	#endif
-	#if is_lora == 1 && lora_device_type == 0
+	#if is_pushingbox == 1 && hub_node_type == 0
 		msg.dispatch("/SendToPB", 			sendToPushingBox, 		addrOffset);
 	#endif
 	

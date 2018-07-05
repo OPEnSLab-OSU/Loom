@@ -40,66 +40,26 @@ void loop()
 	String parameters[7] = {"Test", "Battery", "Temp1", "Temp2", "Temp_Diff", "Temp_SHT31D", "Humidity_SHT31D"};
 	String data[7] = {"abc", "4.27", "23.0", "25.2", "2.2", "30.0", "14"};
 
-
 	convert_assoc_arrays_to_bundle(parameters, data, &bndl, "/some/packet/header", 7, SINGLEMSG);
+	// convert_array_to_bundle(data, &bndl, "/some/packet/header", 7);
 	print_bundle(&bndl);
 
-	// deep_copy_bundle(&bndl, &bndl);
-	print_bundle(&bndl);
 
 
-	// sd_save_bundle("bndl40.csv", &bndl, 1, 0);
-	// read_all_from_file("bndl40.csv");
-
-	// print_bundle(&bndl);
-
-	// // deep_copy_bundle(&bndl, &bndl);
-	// sd_save_bundle("bndl41.csv", &bndl, 1, 1);
-	// read_all_from_file("bndl41.csv");
-
-	// print_bundle(&bndl);
-
-	// // deep_copy_bundle(&bndl, &bndl);
-	// sd_save_bundle("bndl42.csv", &bndl, 1, 2);
-	// read_all_from_file("bndl42.csv");
-
-	// print_bundle(&bndl);
-
-	// // deep_copy_bundle(&bndl, &bndl);
-	// sd_save_bundle("bndl43.csv", &bndl, 1, 3);
-	// read_all_from_file("bndl43.csv");
-
-	// print_bundle(&bndl);
-
-	// // deep_copy_bundle(&bndl, &bndl);
-	// sd_save_bundle("bndl44.csv", &bndl, 1, 4);
-	// read_all_from_file("bndl44.csv");
-
-	// print_bundle(&bndl);
-
-
-	// LOOM_DEBUG_Println("DONE");
 	while(1);
 
-	// sd_save_bundle("example.txt", &bndl, 1);
+	send_bundle(&bndl, PUSHINGBOX);
 
-// 	read_all_from_file("example.txt");
+	delay(2000);
 
-// 	sd_empty_file("example.txt");
-	// read_all_from_file("example8.txt");
+	send_bundle(&bndl, PUSHINGBOX);
 
-// 	while(1);
+	delay(2000);
 
-	// Update stored readings from sensors
-	// measure_sensors();
+	send_bundle(&bndl, PUSHINGBOX);
 
-	// Populate bundle to send with sensor values
-	// package_data(&send_bndl);
+	while(1);
 
-	// Send the bundle, takes bundle to be filled and platform to send it over [WIFI, LORA, NRF, SDCARD, PUSHINGBOX]
-	// send_bundle(&bndl, SD);
-
-	// while(1);
 
 
 	delay(2000);

@@ -56,22 +56,16 @@ void setup_sd();
 // 
 void setup_sd()
 {
-	#if LOOM_DEBUG == 1
-		Serial.print("Initializing SD card...");
-	#endif
+	LOOM_DEBUG_Println("Initializing SD card...");
 
 	#if is_lora == 1
 		digitalWrite(8, HIGH); 	// if using LoRa
 	#endif
 
 	if (!SD.begin(chipSelect)) {
-		#if LOOM_DEBUG == 1
-			Serial.println("initialization failed!");
-		#endif
+		LOOM_DEBUG_Println("initialization failed!");
 	}
-	#if LOOM_DEBUG == 1
-		Serial.println("initialization done.");
-	#endif
+	LOOM_DEBUG_Println("initialization done.");
 }
 
 
