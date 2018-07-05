@@ -76,60 +76,7 @@ void setup_sd()
 
 void sd_card_info()
 {
-	// Sd2Card card;
-	// SdVolume volume;
-	// SdFile root;
-	// Serial.print("Card type:         ");
-	// switch (card.type()) {
-	// 	case SD_CARD_TYPE_SD1:
-	// 		Serial.println("SD1");
-	// 		break;
-	// 	case SD_CARD_TYPE_SD2:
-	// 		Serial.println("SD2");
-	// 		break;
-	// 	case SD_CARD_TYPE_SDHC:
-	// 		Serial.println("SDHC");
-	// 		break;
-	// 	default:
-	// 		Serial.println("Unknown");
-	// }
 
-	// // Now we will try to open the 'volume'/'partition' - it should be FAT16 or FAT32
-	// if (!volume.init(card)) {
-	// 	Serial.println("Could not find FAT16/FAT32 partition.\nMake sure you've formatted the card");
-	// 	while (1);
-	// }
-
-	// Serial.print("Clusters:          ");
-	// Serial.println(volume.clusterCount());
-	// Serial.print("Blocks x Cluster:  ");
-	// Serial.println(volume.blocksPerCluster());
-
-	// Serial.print("Total Blocks:      ");
-	// Serial.println(volume.blocksPerCluster() * volume.clusterCount());
-	// Serial.println();
-
-	// // print the type and size of the first FAT-type volume
-	// uint32_t volumesize;
-	// Serial.print("Volume type is:    FAT");
-	// Serial.println(volume.fatType(), DEC);
-
-	// volumesize = volume.blocksPerCluster();    // clusters are collections of blocks
-	// volumesize *= volume.clusterCount();       // we'll have a lot of clusters
-	// volumesize /= 2;                           // SD card blocks are always 512 bytes (2 blocks are 1KB)
-	// Serial.print("Volume size (Kb):  ");
-	// Serial.println(volumesize);
-	// Serial.print("Volume size (Mb):  ");
-	// volumesize /= 1024;
-	// Serial.println(volumesize);
-	// Serial.print("Volume size (Gb):  ");
-	// Serial.println((float)volumesize / 1024.0);
-
-	// Serial.println("\nFiles found on the card (name, date and size in bytes): ");
-	// root.openRoot(volume);
-
-	// // list all files in the card with date and size
-	// root.ls(LS_R | LS_DATE | LS_SIZE);
 }
 
 // Delete a file on SD card if it exists
@@ -202,6 +149,7 @@ void sd_write_string(char* file, char* text)
 
 // This is just a helper function,
 // expects file to be open already
+#if is_rtc == 1
 void sd_write_timestamp(char* file, int timestamp, char delimiter)
 {
 	switch (timestamp) {
@@ -223,7 +171,7 @@ void sd_write_timestamp(char* file, int timestamp, char delimiter)
 	}
 	sdFile.print(delimiter);
 }
-
+#endif
 
 
 
@@ -308,6 +256,9 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 // Could print in hierarchical format like print_bundle
 
 // Format options
+//  0: Smart Save as comma separated array of data on (if in key-value single/mulit-msg or single message format)
+//       First row becomes a header, subsequent rows line up beneath columns
+//       (assumes data fields and timestamp format do not change over the course of writing to the file)
 //  1: Save as comma separated array of data on (if in key-value single/mulit-msg or single message format)
 //  2: Hierarchical output (best for visually understanding bundle)
 //  3: Save as osc translated to string
@@ -319,55 +270,71 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 
 		// Optionally add some form of timestamp
 		#if is_rtc == 1
-			if ((timestamp > 0) && (timestamp <= 4)) {
+			if ((format != 0) && (timestamp > 0) && (timestamp <= 4)) {
 				sd_write_timestamp(file, timestamp, ',');
 			}
 		#endif
 
 		switch(format) {
-			case 1: {
-				// OSCBundle tmpBndl;
-				// deep_copy_bundle(bndl, &tmpBndl);
-				// print
-				// String tmpStrings[20];
-				// convert_bundle_to_array_w_header(bndl, tmpStrings, 20);
-				// // print_array(tmpStrings, 20, 1);
-				// // convert_bundle_to_array(bndl, tmpStrings, 20);
-				// sd_save_array(file, tmpStrings, 20, ',', timestamp);
-				// LOOM_DEBUG_Println("HERE1");
-				char buf[50];
-				char data_type;
+			case 0: {
 				OSCMessage *msg;
-				for (int i = 0; i < bndl->size(); i++) {
-					msg = bndl->getOSCMessage(i);
-					msg->getAddress(buf, 0);
-					sdFile.print(buf);
-					sdFile.print(',');
+				OSCBundle tmpBndl;
+				convert_bundle_structure(bndl, &tmpBndl, SINGLEMSG);
 
-					for (int j = 0; j < msg->size(); j++) {
-						data_type = msg->getType(j);
+				switch(sdFile.position()) {
+					case 0 : // Create Header
+					{ 
+						// Timestamp field(s)
+						#if is_rtc == 1
+							switch (timestamp) {
+								case 1: sdFile.print("Date,");      break;
+								case 2: sdFile.print("Time,");      break;
+								case 3: sdFile.print("Date,Time,"); break;
+								case 4:	sdFile.print("Date_Time,"); break;
+								default: break;
+							}
+						#endif
 
-						switch(data_type) {
-							case 'f':
-								sdFile.print(msg->getFloat(j));
-								break;
-							case 'i':
-								sdFile.print(msg->getInt(j));
-								break;
-							case 's':
-								msg->getString(j, buf, 50);
-								sdFile.print(buf);
-								break;
-							default:
-								break;
-						}
-						if (j < msg->size()-1) {
-							sdFile.print(',');
-						} else {
-							sdFile.println();
+						// Address field
+						sdFile.print("Address,");
+
+						// Data fields
+						msg = bndl->getOSCMessage(0);
+						for (int i = 0; i < msg->size(); i+=2) {
+							sdFile.print(get_data_value(msg, i));
+							sdFile.print( (i <= msg->size()-3) ? ',' : '\n' );
 						}
 					}
-					
+
+					 // No break
+					default : 
+					{
+						#if is_rtc == 1
+							if ((timestamp > 0) && (timestamp <= 4)) {
+								sd_write_timestamp(file, timestamp, ',');
+							}
+						#endif	
+						msg = bndl->getOSCMessage(0);
+						sdFile.print(get_address_string(msg)+',');
+						for (int i = 1; i < msg->size(); i+=2) {
+							sdFile.print(get_data_value(msg, i));
+							sdFile.print( (i < msg->size()-1) ? ',' : '\n' );
+						}
+					}
+
+				} // of switch sdFile.position()
+				break;
+			} // of case 0:
+			case 1: {
+				OSCMessage *msg;
+				OSCBundle tmpBndl;
+				convert_bundle_structure(bndl, &tmpBndl, SINGLEMSG);
+
+				msg = tmpBndl.getOSCMessage(0);
+				sdFile.print(get_address_string(msg)+',');
+				for (int i = 0; i < msg->size(); i++) {
+					sdFile.print(get_data_value(msg, i));
+					sdFile.print( (i < msg->size()-1) ? ',' : '\n' );
 				}
 				break;
 			}

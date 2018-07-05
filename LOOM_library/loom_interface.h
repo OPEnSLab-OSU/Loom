@@ -68,7 +68,7 @@ void receive_bundle(OSCBundle *bndl, Platform platform)
 		// #endif
 		#if LOOM_DEBUG == 1
 		default :
-				Serial.println("That platform is not enabled");
+				Serial.println("That platform is not enabled to receiving");
 		#endif 
 	} // of switch
 }
@@ -317,7 +317,7 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 		#if is_sd == 1
 			case SDCARD : 
 				LOOM_DEBUG_Println("Saving bundle");
-				sd_save_bundle(file, send_bndl, 1, sd_save_time_format);
+				sd_save_bundle(file, send_bndl, 0, sd_save_time_format);
 				break;
 		#endif
 
@@ -328,12 +328,12 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 				break;
 		#endif
 
-		case SERIAL :
-			print_bundle(send_bndl);
+		// case SERIAL :
+		// 	print_bundle(send_bndl);
 		
 		#if LOOM_DEBUG == 1
 		default :
-				Serial.println("That platform is not enabled");
+				Serial.println("That platform is not enabled for sending");
 		#endif 
 	} // of switch
 }
