@@ -201,12 +201,15 @@
 
 // --- Sapflowmeter Options ---
 #if is_sapflow
-	#define hub_node_type 1          // 0: hub, 1: node
+	#define hub_node_type 0          // 0: hub, 1: node
 	#define is_lora       1          // enable LoRa
+	#define is_rtc        1
+	#define is_sd         1
 
 	#if hub_node_type == 0
 		#define is_ethernet   1
 		#define is_pushingbox 1
+
 	#elif hub_node_type == 1
 		#define num_analog    2      // two temperature sensors
 		#define heatpulse     0      // 0:TDM, 1<: HRM (e.g 2500:2.5 sec)
