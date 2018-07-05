@@ -47,6 +47,8 @@ void heat(uint16_t pulse);
 //
 void setup_sapflow() 
 {
+	setup_sht31d();
+
 	pinMode(HEATPIN,OUTPUT);
 	lastUpdate = millis();
 }
@@ -129,13 +131,11 @@ void measure_sapflow()
 
 	temp = read_analog(0);  //analog Read gives values from 0-1023 based on 0-3.3V
 	temp = map(temp, 0, 4095, 0, 3300);//map these to mV value
-	state_sapflow.temp1 = voltTotemp(temp);
-	state_sapflow.temp1 = temp;
+	state_sapflow.temp0 = voltTotemp(temp);
 
 	temp = read_analog(1);  //analog Read gives values from 0-1023 based on 0-3.3V
 	temp = map(temp, 0, 4095, 0, 3300);//map these to mV value
 	state_sapflow.temp1 = voltTotemp(temp);
-	state_sapflow.temp1 = temp;
 
 	state_sapflow.diff = state_sapflow.temp0 - state_sapflow.temp1;
 	if (state_sapflow.diff < 0) {
