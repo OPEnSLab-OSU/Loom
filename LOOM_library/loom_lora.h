@@ -37,13 +37,8 @@ RHReliableDatagram manager(rf95, SERVER_ADDRESS);
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager);
-
-// #if lora_device_type == 0
-	void lora_receive_bundle(OSCBundle *bndl);
-// #endif
-// #if lora_device_type == 1
-	bool lora_send_bundle(OSCBundle *bndl);
-// #endif
+void lora_receive_bundle(OSCBundle *bndl);
+bool lora_send_bundle(OSCBundle *bndl);
 
 
 // ================================================================
@@ -60,7 +55,7 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager);
 //
 void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager) 
 {
-	#if lora_device_type == 0
+	#if hub_node_type == 0 // if hub
 		pinMode(8, INPUT_PULLUP);
 	#endif
 
@@ -75,7 +70,7 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 	}
 
 	LOOM_DEBUG_Println("Setting up ethernet");
-	#if lora_device_type == 0
+	#if hub_node_type == 0
 		if(!setup_ethernet()) {
 			LOOM_DEBUG_Println("Failed to setup ethernet");
 		}
@@ -105,6 +100,8 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 //
 // @param bndl  A pointer to the OSCBundle to be filled
 //
+// String data[NUM_FIELDS];
+
 void lora_receive_bundle(OSCBundle *bndl)
 {
 	if (manager.available()) {
@@ -113,26 +110,31 @@ void lora_receive_bundle(OSCBundle *bndl)
 		uint8_t buf[LORA_MESSAGE_SIZE];
 		memset(buf, '\0', LORA_MESSAGE_SIZE);
 		if (manager.recvfromAck(buf, &len, &from)) {
-			//If true, then the data being received is from the evaporimeter, which
-			//is formatted differently as they use code not written by the CS Capstone team.
-			if (((char)(buf[0])) == '/') {
-				convert_OSC_string_to_bundle((char*)buf, bndl); 
-				for(int i = 0; i < NUM_FIELDS; i++)
-					data[i] = get_data_value(bndl->getOSCMessage(0), i);
-			} else {
-				char str[LORA_MESSAGE_SIZE];
-				String((char*)buf).toCharArray(str, sizeof(str)-1);
-				char *token;
-				char *savept = str;
-				String cols[6] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
-				for(int i = 0; i < NUM_FIELDS; i+=2) {
-					token = strtok_r(savept, ",", &savept);
-					if(token != NULL) {
-						data[i] = cols[i/2];
-						data[i+1] = String(token);
-					}
-				} // of for
-			} // of else 
+
+			convert_OSC_string_to_bundle((char*)buf, bndl); 
+
+			#if is_pushingbox == 1
+				//If true, then the data being received is from the evaporimeter, which
+				//is formatted differently as they use code not written by the CS Capstone team.
+				if (((char)(buf[0])) == '/') {
+					// convert_OSC_string_to_bundle((char*)buf, bndl); 
+					for(int i = 0; i < NUM_FIELDS; i++)
+						data[i] = get_data_value(bndl->getOSCMessage(0), i);
+				} else {
+					char str[LORA_MESSAGE_SIZE];
+					String((char*)buf).toCharArray(str, sizeof(str)-1);
+					char *token;
+					char *savept = str;
+					String cols[6] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
+					for(int i = 0; i < NUM_FIELDS; i+=2) {
+						token = strtok_r(savept, ",", &savept);
+						if(token != NULL) {
+							data[i] = cols[i/2];
+							data[i+1] = String(token);
+						}
+					} // of for
+				} // of else 
+			#endif
 		} // of if (manager.recvfromAck(buf, &len, &from))
 	} // of if (manager.available()) 
 }

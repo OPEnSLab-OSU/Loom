@@ -23,7 +23,7 @@ String data[NUM_FIELDS];
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void setup_pushingbox();
-// bool setup_ethernet();
+// bool setup_ethernet();,
 // void sendToPushingBox(int num_fields, char *server_name, char *devid);
 void sendToPushingBox(OSCMessage &msg);
 void sendToPushingBox(OSCBundle *bndl);
@@ -76,18 +76,22 @@ void sendToPushingBox(OSCMessage &msg)
 	if (client.connect(server_name, 80)) {  
 		LOOM_DEBUG_Println("Connection good");
 		client.print("GET /pushingbox?devid="); client.print(device_id); 
-		for (int i = 0; i < NUM_FIELDS; i++) {
+		LOOM_DEBUG_Print(".");
+		for (int i = 0; i < msg.size(); i++) {
 			if ((i % 2) == 0)
 				client.print("&key" + String(i/2) + "=");
 			else
 				client.print("&val" + String(i/2) + "=");
 			client.print(get_data_value(&msg, i));
+			LOOM_DEBUG_Print(".");
 		}
+		LOOM_DEBUG_Println(".");
 		client.println(" HTTP/1.1");
 		client.print("Host: "); client.println(server_name);
 		client.println("User-Agent: Arduino");
 		client.println();
-	 
+
+		LOOM_DEBUG_Println("Data done sending");	 
 	} else {
 		LOOM_DEBUG_Println("No Connection");
 		#if is_ethernet == 1

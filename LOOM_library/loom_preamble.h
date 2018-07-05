@@ -101,7 +101,13 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 // ================================================================
 #include "loom_OSC_translator.h"
 
-
+#if is_ethernet == 1
+	#include "loom_ethernet.h"
+#endif
+#if is_pushingbox == 1
+	// #include "loom_ethernet.h"
+	#include "loom_pushingbox.h"
+#endif
 #if is_wifi == 1
 	#include "loom_wifi.h"
 #endif
@@ -111,10 +117,8 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #if is_nrf == 1	
 	#include "loom_nrf.h"
 #endif
-#if is_pushingbox == 1
-	// #include "loom_ethernet.h"
-	#include "loom_pushingbox.h"
-#endif
+
+
 #if num_analog > 0
 	#include "loom_analogIn.h"
 #endif
@@ -168,6 +172,9 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #endif
 #if is_adafruitio == 1
 	#include "loom_adafruit_io.h"
+#endif
+#if is_sapflow == 1
+  #include "loom_sapflowmeter.h"
 #endif
 
 

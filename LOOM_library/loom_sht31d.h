@@ -66,7 +66,7 @@ bool setup_sht31d() {
 // ================================================================
 
 
-// --- PACKAGE SHT31D ---
+// --- PACKAGE SHT31D --- (Multiplexer Version)
 // 
 // Adds last read SHT31D sensor readings to provided OSC bundle
 //
@@ -86,6 +86,23 @@ void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	bndl->add(msg);
 }
 
+void package_sht31d(OSCBundle *bndl, char packet_header_string[])
+{
+	char address_string[255];
+	OSCMessage msg;
+
+	sprintf(address_string, "%s%s\0", packet_header_string, "/sht31d_temp");
+	msg.add(state_sht31d.temp);
+	msg.setAddress(address_string);
+	bndl->add(msg);
+	msg.empty();
+	
+	sprintf(address_string, "%s%s\0", packet_header_string, "/sht31d_temp");
+	msg.add(state_sht31d.humid);
+	msg.setAddress(address_string);
+	bndl->add(msg);
+	msg.empty();	
+}
 
 
 // --- MEASURE SHT31D ---
