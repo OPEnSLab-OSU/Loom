@@ -247,6 +247,11 @@
 	#define AIO_KEY         ""
 #endif
 
+// --- SD Options ---
+#if is_sd
+	#define sd_save_time_format 3
+#endif
+
 // --- RTC Options ---
 #if is_rtc == 1
 	// Select only one of the below options

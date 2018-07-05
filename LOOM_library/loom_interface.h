@@ -44,7 +44,7 @@ void receive_bundle(OSCBundle *bndl, Platform platform)
 				break;
 		#endif
 
-		#if is_lora == 1 && lora_device_type == 0
+		#if is_lora == 1
 			case LORA :
 				lora_receive_bundle(bndl);
 				break;
@@ -284,7 +284,7 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 				break;
 		#endif
 
-		#if is_lora == 1 && lora_device_type == 1
+		#if is_lora == 1
 			case LORA :
 				if (!lora_bundle_fragment) {
 					
@@ -317,7 +317,7 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 		#if is_sd == 1
 			case SDCARD : 
 				LOOM_DEBUG_Println("Saving bundle");
-				sd_save_bundle(file, send_bndl, 1, 4);
+				sd_save_bundle(file, send_bndl, 1, sd_save_time_format);
 				break;
 		#endif
 

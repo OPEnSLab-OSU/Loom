@@ -97,7 +97,7 @@ void package_sht31d(OSCBundle *bndl, char packet_header_string[])
 	bndl->add(msg);
 	msg.empty();
 	
-	sprintf(address_string, "%s%s\0", packet_header_string, "/sht31d_temp");
+	sprintf(address_string, "%s%s\0", packet_header_string, "/sht31d_humid");
 	msg.add(state_sht31d.humid);
 	msg.setAddress(address_string);
 	bndl->add(msg);
