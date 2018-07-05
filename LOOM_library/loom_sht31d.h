@@ -35,6 +35,7 @@ struct state_sht31d_t state_sht31d;
 // ================================================================
 bool setup_sht31d();
 void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port);
+void package_sht31d(OSCBundle *bndl, char packet_header_string[]);
 void measure_sht31d();
 
 
@@ -89,19 +90,11 @@ void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 void package_sht31d(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
-	OSCMessage msg;
 
-	sprintf(address_string, "%s%s\0", packet_header_string, "/sht31d_temp");
-	msg.add(state_sht31d.temp);
-	msg.setAddress(address_string);
-	bndl->add(msg);
-	msg.empty();
-	
-	sprintf(address_string, "%s%s\0", packet_header_string, "/sht31d_humid");
-	msg.add(state_sht31d.humid);
-	msg.setAddress(address_string);
-	bndl->add(msg);
-	msg.empty();	
+	sprintf(addressString, "%s%s", packet_header_string, "/sht31d_temp");
+	bndl->add(addressString).add(state_sht31d.temp);
+	sprintf(addressString, "%s%s", packet_header_string, "/sht31d_humid");
+	bndl->add(addressString ).add(state_sht31d.humid);
 }
 
 

@@ -362,10 +362,7 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	char addressString[255];    // Declare address string buffer
 	if (port != NULL) {
 		sprintf(addressString, "%s%s%d%s", packet_header_string, "/port", port, "/mpu6050/data");
-	} else {
-		sprintf(addressString, "%s%s", packet_header_string, "/mpu6050/data");
-	}
-
+	} 
 	// Messages want an OSC address as first argument
 	// Compile bundle
 

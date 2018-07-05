@@ -37,7 +37,8 @@ struct state_tsl2591_t  state_tsl2591;
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 bool setup_tsl2591();
-void package_data_tsl2591(OSCBundle *, char[], uint8_t);
+void package_data_tsl2591(OSCBundle *bndl, char packet_header_string[], uint8_t port);
+void package_tsl2591(OSCBundle *bndl, char packet_header_string[])
 void measure_tsl2591();
 void configure_tsl2591(uint8_t, uint8_t);
 #if LOOM_DEBUG == 1
@@ -95,6 +96,17 @@ void package_tsl2591(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	bndl->add(msg);
 }
 
+void package_tsl2591(OSCBundle *bndl, char packet_header_string[])
+{
+	char address_string[255];
+
+	sprintf(addressString, "%s%s", packet_header_string, "/tsl2591_vis");
+	bndl->add(addressString).add(state_tsl2591.vis);
+	sprintf(addressString, "%s%s", packet_header_string, "/tsl2591_ir");
+	bndl->add(addressString).add(state_tsl2591.ir);
+	sprintf(addressString, "%s%s", packet_header_string, "/tsl2591_full");
+	bndl->add(addressString).add(state_tsl2591.full);
+}
 
 
 // --- MEASURE TSL2591 ---
