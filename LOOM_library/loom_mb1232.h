@@ -45,6 +45,8 @@ struct state_mb1232_t state_mb1232;
 bool setup_mb1232();
 void measure_mb1232();
 void package_mb1232(OSCBundle *bndl, char packet_header_string[], uint8_t port);
+void package_mb1232(OSCBundle *bndl, char packet_header_string[]);
+
 
 // ================================================================ 
 // ===                          SETUP                           === 
@@ -100,6 +102,13 @@ void package_mb1232(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	bndl->add(msg);
 }
 
+void package_mb1232(OSCBundle *bndl, char packet_header_string[])
+{
+	char address_string[255];
+
+	sprintf(addressString, "%s%s", packet_header_string, "/mb1232_range");
+	bndl->add(addressString).add(state_mb1232.range);
+}
 
 
 // --- MEASURE MB1232 ---

@@ -30,6 +30,7 @@ struct state_fxos8700_t {
 // ================================================================
 bool setup_fxos8700();
 void package_fxos8700(OSCBundle *bndl, char packet_header_string[], uint8_t port);
+void package_fxos8700(OSCBundle *bndl, char packet_header_string[]);
 void measure_fxos8700();
 #if LOOM_DEBUG == 1
 	void details_fxos8700();
@@ -95,6 +96,23 @@ void package_fxos8700(OSCBundle *bndl, char packet_header_string[], uint8_t port
 	bndl->add(msg);
 }
 
+void package_fxos8700(OSCBundle *bndl, char packet_header_string[])
+{
+	char address_string[255];
+
+	sprintf(addressString, "%s%s", packet_header_string, "/fxos8700_gx");
+	bndl->add(addressString).add(state_fxos8700.accel[0]);
+	sprintf(addressString, "%s%s", packet_header_string, "/fxos8700_gy");
+	bndl->add(addressString).add(state_fxos8700.accel[1]);
+	sprintf(addressString, "%s%s", packet_header_string, "/fxos8700_gz");
+	bndl->add(addressString).add(state_fxos8700.accel[2]);
+	sprintf(addressString, "%s%s", packet_header_string, "/fxos8700_mx");
+	bndl->add(addressString).add(state_fxos8700.mag[0]);
+	sprintf(addressString, "%s%s", packet_header_string, "/fxos8700_my");
+	bndl->add(addressString).add(state_fxos8700.mag[1]);
+	sprintf(addressString, "%s%s", packet_header_string, "/fxos8700_mz");
+	bndl->add(addressString).add(state_fxos8700.mag[2]);
+}
 
 
 // --- MEASURE FXOS8700 ---

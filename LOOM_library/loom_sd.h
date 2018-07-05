@@ -299,7 +299,7 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 						sdFile.print("Address,");
 
 						// Data fields
-						msg = bndl->getOSCMessage(0);
+						msg = tmpBndl.getOSCMessage(0);
 						for (int i = 0; i < msg->size(); i+=2) {
 							sdFile.print(get_data_value(msg, i));
 							sdFile.print( (i <= msg->size()-3) ? ',' : '\n' );
@@ -314,7 +314,7 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 								sd_write_timestamp(file, timestamp, ',');
 							}
 						#endif	
-						msg = bndl->getOSCMessage(0);
+						msg = tmpBndl.getOSCMessage(0);
 						sdFile.print(get_address_string(msg)+',');
 						for (int i = 1; i < msg->size(); i+=2) {
 							sdFile.print(get_data_value(msg, i));

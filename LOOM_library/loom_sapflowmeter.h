@@ -99,25 +99,13 @@ void heat(uint16_t pulse)
 void package_sapflow(OSCBundle *bndl, char packet_header_string[]) 
 {
 	char address_string[255];
-	OSCMessage msg;
-
-	sprintf(address_string, "%s%s\0", packet_header_string, "/temp0");
-	msg.add(state_sapflow.temp0);
-	msg.setAddress(address_string);
-	bndl->add(msg);
-	msg.empty();
-
-	sprintf(address_string, "%s%s\0", packet_header_string, "/temp1");
-	msg.add(state_sapflow.temp1);
-	msg.setAddress(address_string);
-	bndl->add(msg);
-	msg.empty();
-		
-	sprintf(address_string, "%s%s\0", packet_header_string, "/temp_diff");
-	msg.add(state_sapflow.diff);
-	msg.setAddress(address_string);
-	bndl->add(msg);
-	msg.empty();
+	
+	sprintf(addressString, "%s%s", packet_header_string, "/temp0");
+	bndl->add(addressString).add(state_sapflow.temp0);
+	sprintf(addressString, "%s%s", packet_header_string, "/temp1");
+	bndl->add(addressString ).add(state_sapflow.temp1);
+	sprintf(addressString, "%s%s", packet_header_string, "/temp_diff");
+	bndl->add(addressString).add(state_sapflow.temp_diff);
 }
 
 

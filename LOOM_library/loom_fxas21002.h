@@ -37,6 +37,7 @@ struct state_fxas21002_t state_fxas21002;
 // ================================================================
 bool setup_fxas21002();
 void package_fxas21002(OSCBundle *bndl, char packet_header_string[], uint8_t port);
+void package_fxas21002(OSCBundle *bndl, char packet_header_string[]);
 void measure_fxas21002();
 #if LOOM_DEBUG == 1
 	void details_fxas21002();
@@ -94,6 +95,41 @@ void package_fxas21002(OSCBundle *bndl, char packet_header_string[], uint8_t por
 	bndl->add(msg);
 }
 
+void package_fxas21002(OSCBundle *bndl, char packet_header_string[])
+{
+	char address_string[255];
+	OSCMessage msg;
+
+	sprintf(address_string, "%s%s\0", packet_header_string, "/gx");
+	msg.add(state_sht31d.state_fxas21002.gyro[0]);
+	msg.setAddress(address_string);
+	bndl->add(msg);
+	msg.empty();
+	
+	sprintf(address_string, "%s%s\0", packet_header_string, "/gy");
+	msg.add(state_sht31d.state_fxas21002.gyro[1]);
+	msg.setAddress(address_string);
+	bndl->add(msg);
+	msg.empty();	
+
+	sprintf(address_string, "%s%s\0", packet_header_string, "/gz");
+	msg.add(state_sht31d.state_fxas21002.gyro[2]);
+	msg.setAddress(address_string);
+	bndl->add(msg);
+	msg.empty();
+}
+
+void package_fxas21002(OSCBundle *bndl, char packet_header_string[])
+{
+	char address_string[255];
+
+	sprintf(addressString, "%s%s", packet_header_string, "/fxas21002_gx");
+	bndl->add(addressString).add(state_fxas21002.gyro[0]);
+	sprintf(addressString, "%s%s", packet_header_string, "/fxas21002_gy");
+	bndl->add(addressString).add(state_fxas21002.gyro[1]);
+	sprintf(addressString, "%s%s", packet_header_string, "/fxas21002_gz");
+	bndl->add(addressString).add(state_fxas21002.gyro[2]);
+}
 
 
 // --- MEASURE FXAS21002 ---

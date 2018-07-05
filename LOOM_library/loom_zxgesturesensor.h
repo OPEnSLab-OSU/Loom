@@ -36,6 +36,7 @@ struct state_zxgesturesensor_t state_zxgesturesensor;
 // ================================================================
 bool setup_zxgesturesensor();
 void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8_t port);
+void package_tsl2591(OSCBundle *bndl, char packet_header_string[])
 void measure_zxgesturesensor();
 
 
@@ -108,6 +109,19 @@ void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8
 	bndl->add(msg);
 }
 
+void package_tsl2591(OSCBundle *bndl, char packet_header_string[])
+{
+	char address_string[255];
+
+	sprintf(addressString, "%s%s", packet_header_string, "/zxgesture_type");
+	bndl->add(addressString).add(state_zxgesturesensor.type);
+	sprintf(addressString, "%s%s", packet_header_string, "/zxgesture_speed");
+	bndl->add(addressString).add(state_zxgesturesensor.speed);
+	sprintf(addressString, "%s%s", packet_header_string, "/zxgesture_px");
+	bndl->add(addressString).add(state_zxgesturesensor.px);
+	sprintf(addressString, "%s%s", packet_header_string, "/zxgesture_pz");
+	bndl->add(addressString).add(state_zxgesturesensor.pz);
+}
 
 
 // --- MEASURE ZXGESTURESENSOR ---
