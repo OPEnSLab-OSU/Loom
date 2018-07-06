@@ -27,7 +27,6 @@ void     measure_analog();
 void     package_analog(OSCBundle *bndl, char packet_header_string[]);
 
 
-
 // ================================================================ 
 // ===                          SETUP                           === 
 // ================================================================
@@ -107,7 +106,7 @@ void measure_analog()
 void package_analog(OSCBundle *bndl, char packet_header_string[])
 { 
 	char addressString[255];
-	// Get reading from relevant ports and the button if enabled          
+	// Get readings from enabled ports           
 	#if (num_analog > 0) 
 		sprintf(addressString, "%s%s", packet_header_string, "/port0");
 		bndl->add(addressString).add((int32_t)state_analog.a0);

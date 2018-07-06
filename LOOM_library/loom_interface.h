@@ -7,7 +7,7 @@ void receive_bundle(OSCBundle *bndl, Platform platform);
 void process_bundle(OSCBundle *bndl);
 void measure_sensors();
 void package_data(OSCBundle *send_bndl);
-void send_bundle(OSCBundle *send_bndl, Platform platform, char* file);
+// void send_bundle(OSCBundle *send_bndl, Platform platform, char* file);
 void send_bundle(OSCBundle *send_bndl, Platform platform);
 void additional_loop_checks();
 
@@ -50,11 +50,17 @@ void receive_bundle(OSCBundle *bndl, Platform platform)
 				break;
 		#endif
 
-		#if is_lora == 1 && lora_device_type == 2
-			case LORA :
-				//TODO: repeater functionality here
-				break;
-		#endif
+		// #if is_lora == 1 && is_repeater == 1
+		// 	case LORA :
+		// 		//TODO: repeater functionality here
+		// 		break;
+		// #endif
+
+		// #if is_nrf == 1 && is_repeater == 1
+		// 	case NRF :
+		// 		//TODO: repeater functionality here
+		// 		break;
+		// #endif
 
 		#if is_nrf == 1
 			case NRF : 
@@ -68,7 +74,7 @@ void receive_bundle(OSCBundle *bndl, Platform platform)
 		// #endif
 		#if LOOM_DEBUG == 1
 		default :
-				Serial.println("That platform is not enabled to receiving");
+				LOOM_DEBUG_Println("That platform (", platform, ") is not enabled to receiving");
 		#endif 
 	} // of switch
 }
@@ -120,10 +126,13 @@ void process_bundle(OSCBundle *bndl)
 				}
 			#endif
 	
+			// This is the most important part of this function 
 			// Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
 			// Most commands will be finished once control returns here (WiFi changes being handled below)
 			bndl->route(configuration.packet_header_string, msg_router);
 	
+
+
 			#if is_wifi == 1
 				// If new ssid and password have been received, try to connect to that network
 				if (state_wifi.ssid_set == true && state_wifi.pass_set == true) {
@@ -198,7 +207,7 @@ void measure_sensors()
 	 // Get analog readings
 	#if is_sapflow == 1
 		measure_sapflow();
-		#if hub_node_type == 1
+		#if is_node == 1
 			measure_sht31d();
 			heat(heatpulse);
 		#endif
@@ -255,7 +264,7 @@ void package_data(OSCBundle *send_bndl)
 
 	#if is_sapflow == 1
 		package_sapflow(send_bndl,configuration.packet_header_string);
-		#if hub_node_type == 1
+		#if is_node == 1
 			package_sht31d(send_bndl,configuration.packet_header_string);
 		#endif
 	#endif
@@ -275,7 +284,8 @@ void package_data(OSCBundle *send_bndl)
 //                    encoded to Platform enum to reduce chance for errors
 // @param file       The file name when saving to SD card
 // 
-void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
+// void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
+void send_bundle(OSCBundle *send_bndl, Platform platform)
 {
 	switch(platform) {
 		#if is_wifi == 1
@@ -328,10 +338,10 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 	} // of switch
 }
 
-void send_bundle(OSCBundle *send_bndl, Platform platform)
-{
-	send_bundle(send_bndl, platform, NULL);	
-}
+// void send_bundle(OSCBundle *send_bndl, Platform platform)
+// {
+// 	send_bundle(send_bndl, platform, NULL);	
+// }
 
 
 
