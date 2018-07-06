@@ -274,9 +274,6 @@
 	#define is_rtc8523 1	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
 #endif
 
-// --- Loom Translator Options ---
-#define COMPLETE_TRANSLATOR 1			// 1 to include all Loom translator functions, 0 to include just the basics
-
 // --- Delay between loops
 #if is_lora == 0 						// Cannot not use with LoRa
 	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 

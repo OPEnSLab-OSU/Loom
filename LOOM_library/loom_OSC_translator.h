@@ -38,11 +38,10 @@ String get_address_string(OSCMessage *msg);
 void   deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
 
 // Conversions between bundles and strings
-void convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl);
+void convert_OSC_string_to_bundle(char *osc_string, OSCBundle*bndl);
 void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
 
 
-#if COMPLETE_TRANSLATOR == 1
 
 // Conversion between bundle formats
 void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructure format);
@@ -73,7 +72,8 @@ void convert_array_to_bundle(T data [], OSCBundle *bndl, char packet_header[], i
 // Conversion between array formats
 void convert_array_key_value_to_assoc(String key_values [], String keys [], String values [], int kv_len, int assoc_len);
 void convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len);
-
+template <typename T>
+void convert_array_assoc_to_key_value(String keys [], T values [], String key_values [], int assoc_len, int kv_len);
 
 // Conversion between array element types
 void convert_array(String src [], int    dest [],   int count);
@@ -88,10 +88,11 @@ void convert_array(Tin src [], Tout dest[], int count);
 // Appending single element or array to single-message format bundles
 void append_to_bundle(OSCBundle *bndl, int    elem);
 void append_to_bundle(OSCBundle *bndl, String elem);
-template <typename T> void append_to_bundle(OSCBundle *bndl, T elem);
-template <typename T> void append_to_bundle(OSCBundle *bndl, T elements [], int count);
+template <typename T> 
+void append_to_bundle(OSCBundle *bndl, T elem);
+template <typename T> 
+void append_to_bundle(OSCBundle *bndl, T elements [], int count);
 
-#endif // of COMPLETE_TRANSLATOR == 1
 
 
 // ================================================================
@@ -382,7 +383,6 @@ void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string)
 
 
 
-#if COMPLETE_TRANSLATOR == 1
 
 
 
@@ -907,34 +907,17 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 	}
 }
 
-
-
-// ================================================================
-// ===          APPENDING DATA TO EXISTING STRUCTURES           ===
-// ================================================================
-
-// OVERLOADED function for appending to a single-message format OSC bundle
-void append_to_bundle(OSCBundle *bndl, int elem) 
-{ 
-	bndl->getOSCMessage(0)->add((int32_t)elem); 
-}
-
-void append_to_bundle(OSCBundle *bndl, String elem)
-{ 
-	bndl->getOSCMessage(0)->add(elem.c_str()); 
-}
-
-template <typename T> 
-void append_to_bundle(OSCBundle *bndl, T elem)
-{ 
-	bndl->getOSCMessage(0)->add(elem);
-}
-
 template <typename T>
-void append_to_bundle(OSCBundle *bndl, T elements [], int count)
-{ 
-	for (int i = 0; i < count; i++) 
-		append_to_bundle(bndl, elements[i]); 
+void convert_array_assoc_to_key_value(String keys [], T values [], String key_values [], int assoc_len, int kv_len)
+{
+	if ( kv_len < 2*assoc_len ) {
+		LOOM_DEBUG_Println("Key-values array is not at least twice the size of keys and values arrays, cannot merge");
+		return;
+	}
+	for (int i = 0; i < assoc_len; i++) {
+		key_values[i*2]   = keys[i];
+		key_values[i*2+1] = String(values[i]);
+	}
 }
 
 
@@ -983,10 +966,39 @@ void convert_array(Tin src [], Tout dest[], int count)
 }
 
 
+// ================================================================
+// ===          APPENDING DATA TO EXISTING STRUCTURES           ===
+// ================================================================
+
+// OVERLOADED function for appending to a single-message format OSC bundle
+void append_to_bundle(OSCBundle *bndl, int elem) 
+{ 
+	bndl->getOSCMessage(0)->add((int32_t)elem); 
+}
+
+void append_to_bundle(OSCBundle *bndl, String elem)
+{ 
+	bndl->getOSCMessage(0)->add(elem.c_str()); 
+}
+
+template <typename T> 
+void append_to_bundle(OSCBundle *bndl, T elem)
+{ 
+	bndl->getOSCMessage(0)->add(elem);
+}
+
+template <typename T>
+void append_to_bundle(OSCBundle *bndl, T elements [], int count)
+{ 
+	for (int i = 0; i < count; i++) 
+		append_to_bundle(bndl, elements[i]); 
+}
 
 
 
-#endif // of COMPLETE_TRANSLATOR == 1
+
+
+
 
 
 
