@@ -47,6 +47,20 @@ The Loom Translator (or converter) is used to convert data in one format into an
 | Array (key-value, interleaved)       | Arrays (key-value, associated)       |          |       |
 | Arrays (key-value, associated)       | Array (key-value, interleaved)       |          |       |
 
+### List of Fuctions
+
+These are the functions to perform the above conversions and other functions located in the translator. Note that most of them are overloaded and/or use templates.
+
+- Miscellaneous
+  - print_bundle
+- Bundle – String conversions
+- Bundle conversions
+- Bundle to Array(s) conversions
+- Array(s) to Bundle conversions
+- Array conversions
+- Array type conversions
+- Appending functions
+
 ### Conversion Notes
 
 **In Place Conversion**
@@ -113,15 +127,24 @@ Value 1: "five"
 
 There are three formats of arrays supported by the translator, with a focus on the two key-value formats. The formats are: unspecified, key-value interleaved, key-value associated arrays.
 
-To match the bundles, three data types are permitted: ints, floats, and strings.
+To match the bundles, four data types are permitted: ints, floats, and strings, and c-strings. Strings are preferred to c-strings and have slightly more support. 
 
 **Array: Unspecified**
 
-This array format does not have as much support as the key-value arrays, but can be converted to an unspecified format bundle with a single message
+This array format does not have as much support as the key-value arrays, but can be converted to an unspecified format bundle with a single message.
+
+Can be of type:
+
+- Int
+- Float
+- C-string
+- String
 
 **Array: Key-Value Interleaved**
 
 This array format closely corresponded to the key-value, single message bundle format. It is a flat array that is assumed to be alternating keys and values:
+
+Can only be of type `String` (as keys are assumed to be strings)
 
 ```
 [key1, value1, key2, value2, key3, value3]
@@ -136,11 +159,20 @@ This format uses two associated arrays (expected to be the same size), one of ke
 [value1, value2, value3]
 ```
 
+Keys can only be of type `String` (as keys are assumed to be strings)
+
+Values can be of type:
+
+- Int
+- Float
+- C-string
+- String
+
 ### Conversion from Array to Bundle
 
 When converting to a bundle from an array, there are options to try to interpret the individiual elements as one of three supported data types, as bundles, unlike arrays (in Arduino C/C++), can support mixed data types. This can also be forced, in which un-convertable data becomes something like 0, or 0.0, or "".
 
-These settings are controlled by the optional ```interpret``` parameter. If omitted to the function calls, interpret defaults to the recommended settings of 0.
+These settings are controlled by the optional ```interpret``` parameter. If omitted to the function calls, interpret defaults to the recommended setting of 0.
 
 ####Encoding of Interpret Settings
 
@@ -166,8 +198,7 @@ These settings are controlled by the optional ```interpret``` parameter. If omit
 ## Details about Bundle-String Translator 
 
 Open Sound Control (OSC) is the transmission protocol used by Project Loom.  The
-Arduino OSC implementation, along with more information about OSC,
-can be found [here](https://github.com/CNMAT/OSC).  The functions to convert between strings and OSC bundles was formerly referred to as the OSC interpreter (and was the base translator), and any references to that name specifically means these conversions.
+Arduino OSC implementation, along with more information about OSC, can be found [here](https://github.com/CNMAT/OSC).  The functions to convert between strings and OSC bundles was formerly referred to as the OSC interpreter (and was the base translator), and any references to that name specifically means these conversions.
 
 While OSC Bundles can be sent directly using WiFi, bundles must be reencoded to
 transmit them via LoRa or nRF.  The OSC Interpreter allows OSC Bundles to be
@@ -176,7 +207,7 @@ Bundles are encoded by taking each message address, along with corresponding dat
 values, are concatenated into a comma delimited string, and all messages in the 
 bundle are concatenated into a space delimited string.  
 
-Currently, only three data values are supported by the interpreter: int32\_t, 
+Currently, only three core data values are supported by the interpreter: int32\_t, 
 float, and C strings.  The following shows how the supported data values are 
 encoded:
 
@@ -211,7 +242,7 @@ contain spaces or commas in either message addresses or string data values.
 OSC Bundles can cause some difficult to diagnose issues.  One of the main issues we have
 encountered is that multiple OSC Bundles can cause programs to run once through a loop but
 stop on the second iteration through a loop.  Below are some methods to avoid some of these
-issues (or look at the loom_OSC_translator.h file for our method implementation):
+issues (or look at the loom_OSC_translator.h file for our method implementation): 
 
 **Avoid Declaring Multiple OSC Bundles**
 

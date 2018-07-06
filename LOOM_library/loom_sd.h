@@ -43,7 +43,7 @@ void sd_card_info();
 void sd_delete_file(char* file);
 void sd_list_files();
 bool sd_read_all_from_file(char* file);
-void sd_write_string(char* file, char* text);
+// void sd_write_string(char* file, char* text);
 void sd_write_timestamp(char* file, int timestamp, char delimiter);
 template <typename T>
 bool sd_save_elem(char *file, T data, char endchar);
@@ -144,20 +144,20 @@ bool sd_read_all_from_file(char* file)
 //
 // @return True if no error
 //
-void sd_write_string(char* file, char* text) 
-{
-	sdFile = SD.open(file, FILE_WRITE);
-	if (sdFile) {
-		LOOM_DEBUG_Print3("Writing to ", file, "...");
+// void sd_write_string(char* file, char* text) 
+// {
+// 	sdFile = SD.open(file, FILE_WRITE);
+// 	if (sdFile) {
+// 		LOOM_DEBUG_Print3("Writing to ", file, "...");
 
-		sdFile.println(text);
+// 		sdFile.println(text);
 
-		LOOM_DEBUG_Println(" done");
-		sdFile.close();
-	} else {
-		LOOM_DEBUG_Println2("Error opening: ", file);
-	}
-}
+// 		LOOM_DEBUG_Println(" done");
+// 		sdFile.close();
+// 	} else {
+// 		LOOM_DEBUG_Println2("Error opening: ", file);
+// 	}
+// }
 
 // This is just a helper function,
 // expects file to be open already
@@ -397,7 +397,8 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 				char osc_str[255];
 				memset(osc_str, '\0', sizeof(osc_str));
 				convert_OSC_bundle_to_string(bndl, osc_str);
-				sd_write_string(file, osc_str);
+				// sd_write_string(file, osc_str);
+				sd_save_elem(file, osc_str, '\n');
 				break;
 			}
 			default: {

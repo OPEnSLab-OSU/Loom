@@ -269,6 +269,29 @@ void loop()
 } 
 ```
 
+## SD Card Support
+
+The Loom library extends the Arduino SD library to have more features, mostly tailored towards using common data structures used by the library.
+
+Namely, support for printing:
+
+- Single elements (int, floats, c-strings, Strings)
+- Arrays (ints, floats, c-strings, Strings)
+- Bundles (single or multi-msg format)
+
+Additionally, if used with MaxMSP, there is support for sending commands to enable / disable the logging of bundles the device receives (also works without Max).
+
+## Real-Time Clock Support
+
+The Loom library supports two RTC devices:
+
+- Adafruit DS3231 
+- Adafruit PCF8523
+
+Currently, interrupts are only supported via the DS3231, with the PCF8523 mostly being used in conjunction with an SD card (as Adafruit Adalogger featherwing has PCF8523 and SD card holder) to provide timestamps.
+
+The Loom Library has support for both devices for returning strings of the date, time, or weekday. Additional timer functions are provided for the DS3231.
+
 ## Arduino IDE Setup
 
 Make sure to download the dependencies of the Loom Library from:
