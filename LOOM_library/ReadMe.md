@@ -68,7 +68,7 @@ WiFi and LoRa have had the most attention in development and thus have the most 
 | -------------- | --------------------------- | ------------------------------------------------------------ |
 | **WiFi**       | **WiFi**                    | Implemented                                                  |
 | **LoRa**       | **LoRa**                    | Implemented                                                  |
-| nRF*           | nRF*                        | Needs more testing                                           |
+| nRF*           | nRF*                        | May need more testing                                        |
 | Ethernet       | Ethernet*                   | Currently only used with hubs                                |
 | GSM            | GSM*                        | Currently only one device, so outputs MQTT via GSM, but no GSM receiving |
 | Bluetooth      | Bluetooth                   | Planned                                                      |
