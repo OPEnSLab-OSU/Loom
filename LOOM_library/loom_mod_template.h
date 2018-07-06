@@ -77,7 +77,7 @@ bool setup_<module>()
 // ================================================================
 
 
-// --- PACKAGE <MODULE> ---
+// --- PACKAGE <MODULE> --- (Multiplexer Version)
 //
 // Adds OSC Message of most recent sensor readings to a provided OSC bundle
 //
@@ -86,7 +86,7 @@ bool setup_<module>()
 //   if I2C multiplexer sensor, then also
 // [@param port                  Which port of the multiplexer the device is plugged into]
 //
-void package_<module>(OSCBundle *bndl, char packet_header_string[]) 
+void package_<module>(OSCBundle *bndl, char packet_header_string[], int port) 
 {
 	// Create a message and fill it here, then add it to the bndl
 
@@ -99,6 +99,16 @@ void package_<module>(OSCBundle *bndl, char packet_header_string[])
 	// msg.add("ex2").add(state_<module>.array_example[1]);
 	// msg.add("ex3").add(state_<module>.array_example[2]);
 	// bndl->add(msg);
+}
+
+void package_sht31d(OSCBundle *bndl, char packet_header_string[])
+{
+	char address_string[255];
+
+	sprintf(addressString, "%s%s", packet_header_string, "/module_example0");
+	bndl->add(addressString).add(state_<module>.array_example[0]);
+	sprintf(addressString, "%s%s", packet_header_string, "/module_example1");
+	bndl->add(addressString ).add(state_<module>.array_example[1]);
 }
 
 

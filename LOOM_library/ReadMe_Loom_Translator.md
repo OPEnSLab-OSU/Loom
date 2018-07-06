@@ -51,15 +51,119 @@ The Loom Translator (or converter) is used to convert data in one format into an
 
 These are the functions to perform the above conversions and other functions located in the translator. Note that most of them are overloaded and/or use templates.
 
-- Miscellaneous
-  - print_bundle
-- Bundle – String conversions
-- Bundle conversions
-- Bundle to Array(s) conversions
-- Array(s) to Bundle conversions
-- Array conversions
-- Array type conversions
-- Appending functions
+- **Miscellaneous**
+
+  - **`void print_bundle(OSCBundle *bndl)`**
+    - Prints a bundle in any format
+    - Takes bundle pointer
+  - **`void print_array(T data [], int len, int format)`**
+    - Prints an array of ints, floats, c-strings, or Strings
+    - Len is size of array / number of elements
+    - Format is: 
+      - 1: every element printed on separate lines
+      - 2: every element printed on same line
+      - 3: five elements printed per line
+  - **`int get_bundle_bytes(OSCBundle *bndl)`**
+    - Returns the size of a bundle in bytes
+  - **`bool bundle_empty(OSCBundle *bndl)`**
+    - True if size of bundle is zero, else false
+  - **`String get_data_value(OSCMessage* msg, int pos)`**
+    - Returns a String of the argument of `msg` at position `pos`, zero indexed
+  - **`String get_address_string(OSCMessage *msg)`**
+    - Returns a String of the provided OSC message's address
+  - **`void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl)`**
+    - Copies a bundle (`srcBndl`) into another bundle (`destBndl`) 
+    - Needed because OSCBundle pointers cannot just be pointed at a different bundle without losing data / causing errors
+
+- **Bundle – String conversions**
+
+  - **`void convert_OSC_string_to_bundle(char *osc_string, OSCBundle *bndl)`**
+    - Translates c-string encoding of a bundle into an equivalent bundle, storing the result in `bndl`
+    - Generally used after receiving string over LoRa / nRF
+  - **`void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string)`**
+    - Translates a bundle into the an equivalent encoding as c-string, storing result in `osc_string`
+    - Generally used before sending bundle over LoRa / nRF
+
+- **Bundle conversions**
+
+  - **`void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructure format)`**
+    - Converts a bundle (`bndl`) in either single or multi message key-value format into a bundle (`outBndl`) formated as `format` where format is either `SINGLEMSG` or `MULTIMSG`
+  - **`void convert_bundle_structure(OSCBundle *bndl, BundleStructure format)`**
+    - Same as above with the exception that there is no separate output bundle. The conversion is done "in-place", and the provided bundle will be altered
+
+- **Bundle to Array(s) conversions**
+
+  - **`void convert_bundle_to_array_key_value(OSCBundle *bndl, String key_values[], int kv_len)`**
+    - Fills the provided array of Strings with interleaved keys and values from the bundle
+    - Bundle is assumed to be in either single or multi message format following a key-value structure
+    - kv_len is the size of the `key_values` array
+  - **`void convert_bundle_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[], int assoc_len)`**
+    - Similar to the above function but instead fills two String arrays, one with the keys, and one with the values of the bundle in either key-value format
+  - **`template <typename T> void convert_bundle_to_array(OSCBundle *bndl, T data [], int len)`**
+    - Convert a bundle in either key-value format into an array of ints, floats, c-strings, or Strings
+    - Data type conversions/casts that do not work default to 0, 0.0, "", and "" respectively
+    - Len is the size of the `data` array
+  - **`void convert_bundle_to_array_w_header(OSCBundle *bndl, String data [], int len)`**
+    - Convert a bundle in either key-value format into an array of Strings where the first element is the address of the first message in the bundle (converted to single message format if not already)
+    - Len is the size of the `data` array
+
+- **Array(s) to Bundle conversions**
+
+  - **`void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, BundleStructure format, int interpret)`**
+    - Takes an array of Strings assumed to be interleaved keys and values and build a bundle with the data
+    - Bundle can be `SINGLEMSG` or `MULTIMSG`, as specified by format
+    - Packet header is the address of the message(s) in the bundle
+    - kv_len is the length of the source array
+    - interpret is an option specifying how to cast the String data when building a bundle 
+      - 0 - 3 assume elements are in [key1, value1, key2, value2...] format, with even indexes being keys, and will be left as strings and odd indexes being data, and will be interpreted as specified
+        - 0: Smart   (int->int, float->float, other->string)  [This is the default if interpret is not specified]
+        - 1: Int (non-ints will become 0)
+        - 2: Float   (non-floats will become 0)
+        - 3: String  (does no extra manipulation, leaves as strings)
+      - 4-6 do NOT assume key value pairs and will also interpret even indexes as specified, use with caution. **Note**: likely will be issues when making multi-message bundles with below option
+        - 4: Smart-All 
+        - 5: Int-All
+        - 6: Float-All
+  - **`void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, BundleStructure format)`**
+    - Same as the function above, but with interpret implicitly set to 0 (the recommend setting for most purposes)
+  - **`void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format, int interpret)`**
+    - Similar to the above two functions, but takes the source data as two separate String arrays of keys and values
+    - Other parameters have the same meaning as the above two functions
+  - **`template <typename T> void convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format)`**
+    - Same as the above function with the exception that the values array can be of type int, float, c-string or String
+    - Interpret is implicity set to 0 (see above for meaning)
+  - **`template <typename T> void convert_array_to_bundle(T data [], OSCBundle *bndl, char packet_header[], int len)`**
+    - Builds a single message bundle from an array of ints, floats, c-strings, or Strings
+    - packet_header is the address the be used for the single message in the bundle
+    - len is the size of the data array
+    - Bundle is ***not*** assumed be in any key-value format (but if it is, it can be converted a multi-message bundle / used with other key-value formatted bundle functions)
+
+- **Array conversions**
+
+  - **`void convert_array_key_value_to_assoc(String key_values [], String keys [], String values [], int kv_len, int assoc_len)`**
+    - Takes an array Strings of interleaved keys and values and fills the provided keys and values String arrays with the corresponding data
+    - kv_len is the length of the source array, assoc_len is the length of the destination arrays (assumed to be of the same size)
+      - The destination arrays must be at least half the length of the souce array
+  - **`template <typename T> void convert_array_assoc_to_key_value(String keys [], T values [], String key_values [], int assoc_len, int kv_len)`**
+    - The inverse of the above function, builds interleaved key-value array of Strings from two arrays
+    - The values array can be of type int, float, c-string, or String
+
+- **Array type conversions**
+
+  - **`template <typename Tin, typename Tout> void convert_array(Tin src [], Tout dest[], int count)`**
+    - Converts an array of ints, floats, c-strings, or Strings to array of one of the other types
+      - Data type conversions/casts that do not work default to 0, 0.0, "", and "" respectively
+    - count is size of the arrays (assumed to be of the same size or destination larger than source)
+
+- **Appending functions**
+
+  - **`template <typename T> void append_to_bundle(OSCBundle *bndl, T elem)`**
+    - Appends an int, float, c-string, or String as an argument to the first message in a bundle
+    - Will work with multi-message bundles as well, but breaks the key-value format if the bundle was being used as such
+      - Conversions from a multi-message bundle after appending to another key-value format is undefined, but will likely just result in the appended element(s) being ignored
+  - **`template <typename T> void append_to_bundle(OSCBundle *bndl, T elements [], int count)`**
+    - The same as above, but takes an array (of the same types as above) instead of a single element
+    - Count is the length the of elements array
 
 ### Conversion Notes
 
