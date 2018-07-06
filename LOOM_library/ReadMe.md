@@ -68,14 +68,14 @@ WiFi and LoRa have had the most attention in development and thus have the most 
 | -------------- | --------------------------- | ------------------------------------------------------------ |
 | **WiFi**       | **WiFi**                    | Implemented                                                  |
 | **LoRa**       | **LoRa**                    | Implemented                                                  |
-| nRF*           | nRF*                        | May need more testing                                        |
-| Ethernet       | Ethernet*                   | Currently only used with hubs                                |
-| GSM            | GSM*                        | Currently only one device, so outputs MQTT via GSM, but no GSM receiving |
+| nRF*           | nRF*                        | May need more testing to be 'proven'                         |
+| Ethernet       | Ethernet*                   | Currently only used with hubs, expansion in progress         |
+| GSM            | GSM*                        | Currently only one device, so outputs MQTT via GSM, but no GSM receiving yet |
 | Bluetooth      | Bluetooth                   | Planned                                                      |
 |                |                             |                                                              |
 | Google Sheets? | Google Sheets (PushingBox)* | Works as output, looking for ways of improving the pipline   |
-| Adafruit IO*   | Adafruit IO*                | Needs more robust integration                                |
-| IFTTT?         | IFTTT?                      | Current IFTTT works only as output though Adafruit IO        |
+| Adafruit IO*   | Adafruit IO*                | Could use more robust integration                            |
+| IFTTT?         | IFTTT?                      | Currently, IFTTT works only as output though Adafruit IO     |
 | SD card?       | **SD card**                 | Works as output, considering as input                        |
 | Serial?        | **Serial**                  | Works for output. Serial as input may or may not be useful (is how Fona is tested) |
 
