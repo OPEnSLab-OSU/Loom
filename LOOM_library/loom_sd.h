@@ -39,6 +39,18 @@ int SD_logging = 0; // 0: off, 1: log bundles received
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void setup_sd();
+void sd_card_info();
+void sd_delete_file(char* file);
+void sd_list_files();
+bool sd_read_all_from_file(char* file);
+void sd_write_string(char* file, char* text);
+void sd_write_timestamp(char* file, int timestamp, char delimiter);
+template <typename T>
+bool sd_save_elem(char *file, T data, char endchar);
+template <typename T>
+bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp);
+bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp);
+void set_SD_logging(OSCMessage &msg);
 
 // ================================================================
 // ===                          SETUP                           ===
@@ -106,7 +118,7 @@ void sd_list_files()
 //
 // @return True if no error
 //
-bool read_all_from_file(char* file) 
+bool sd_read_all_from_file(char* file) 
 {
 	sdFile = SD.open(file);
 	if (sdFile) {
@@ -398,7 +410,6 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 	}
 	sdFile.close();
 }
-
 
 
 

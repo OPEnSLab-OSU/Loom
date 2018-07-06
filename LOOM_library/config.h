@@ -34,7 +34,7 @@
 
 // --- Enabled Communication Platform(s) --- 
 #define is_wifi      0 		// 1 to enable WiFi
-#define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_lora      1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet  0
 
@@ -43,6 +43,9 @@
 
 #define is_sd         1		// 1 to enable SD card 
 #define is_rtc        1		// Enable RTC functionality
+
+// --- Device Type: Hub, Node, Repeater ---
+#define hub_node_type     1 		// 0: Hub, 1: Node, 2 = Repeater
 
 // --- Enabled Actuators --- 
 #define num_servos   0		// Number of servos being used
@@ -173,7 +176,7 @@
 
 // --- LoRa Options ---
 #if is_lora == 1
-	#define hub_node_type     0 		// 0: Hub, 1: Node, 2 = Repeater
+	// #define hub_node_type     0 		// 0: Hub, 1: Node, 2 = Repeater
 	#define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 
 	#define SERVER_ADDRESS 0			// Use 0-9 for SERVER_ADDRESSes
@@ -189,7 +192,7 @@
 
 // --- nRF Options --- 
 #if is_nrf == 1
-	#define hub_node_type     0 		// 0: Hub, 1: Node, 2 = Repeater
+	// #define hub_node_type     0 		// 0: Hub, 1: Node, 2 = Repeater
 	#define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 	
 	#define NRF_HUB_ADDRESS 1			// Use 0-9 for SERVER_ADDRESSes
@@ -199,18 +202,24 @@
 	#endif
 #endif
 
+// --- Hub Options ---
+#if hub_node_type == 0
+	#define is_ethernet   1
+	#define is_pushingbox 1
+#endif
+
 // --- Sapflowmeter Options ---
 #if is_sapflow
-	#define hub_node_type 0          // 0: hub, 1: node
+	// #define hub_node_type 0          // 0: hub, 1: node
 	#define is_lora       1          // enable LoRa
 	#define is_rtc        1
 	#define is_sd         1
 
-	#if hub_node_type == 0
-		#define is_ethernet   1
-		#define is_pushingbox 1
+	// #if hub_node_type == 0
+	// 	#define is_ethernet   1
+	// 	#define is_pushingbox 1
 
-	#elif hub_node_type == 1
+	#if hub_node_type == 1
 		#define num_analog    2      // two temperature sensors
 		#define heatpulse     0      // 0:TDM, 1<: HRM (e.g 2500:2.5 sec)
 		#define num_analog    2      // A0, A1
