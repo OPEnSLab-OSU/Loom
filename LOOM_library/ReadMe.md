@@ -10,7 +10,7 @@ This is the primary location of the Project LOOM code, consolidated into place w
 
 3. [Communication Platforms](#communication-platforms)
 
-4. [Device Configuration](#)(#device-configuration)
+4. [Device Configuration](#device-configuration)
 
 5. [Max/MSP](#max/msp)
 
@@ -37,13 +37,17 @@ This is the primary location of the Project LOOM code, consolidated into place w
         6. [Additional Loop Checks](#additional-loop-checks)
     		 [Minimal Working Example](#minimal-working-example)	
 
-10. [Arduino IDE Setup](#arduino-ide-setup)
+10. [SD Card Support](#sd-card-support)
 
-11. [Building and Uploading Code Without The IDE](#building-and-uploading-code-without-the-ide)
+11. [Real-Time Clock Support](#real-time-clock-support)
 
-12. [Configuration Conflicts](#configuration-conflicts)
+12. [Arduino IDE Setup](#arduino-ide-setup)
 
-     
+13. [Building and Uploading Code Without The IDE](#building-and-uploading-code-without-the-ide)
+
+14. [Configuration Conflicts](#configuration-conflicts)
+
+  ​      
 
 ## Installation
 
@@ -58,8 +62,22 @@ Document > Arduino > Libraries
 
 ## Communication Platforms
 
-- WiFi
-- LoRa
+WiFi and LoRa have had the most attention in development and thus have the most support and options, especially WiFi, as that is currently the only to communicate with a computer running Max/MSP. Other platforms have been implemented however. Below is the table of device inputs and outputs currently implemented, planned, or in consideration (bold for well implemented, * if partially implemented or in need of testing to be considered well implemented, plaintext if planned but not implemented, ? if in consideration). The top section is device-device communication platforms, and the bottom section are platforms that do not necessarily transmit directly to another Loom device
+
+| Inputs         | Outputs                     | Comments                                                     |
+| -------------- | --------------------------- | ------------------------------------------------------------ |
+| **WiFi**       | **WiFi**                    | Implemented                                                  |
+| **LoRa**       | **LoRa**                    | Implemented                                                  |
+| nRF*           | nRF*                        | Needs more testing                                           |
+| Ethernet       | Ethernet*                   | Currently only used with hubs                                |
+| GSM            | GSM*                        | Currently only one device, so outputs MQTT via GSM, but no GSM receiving |
+| Bluetooth      | Bluetooth                   | Planned                                                      |
+|                |                             |                                                              |
+| Google Sheets? | Google Sheets (PushingBox)* | Works as output, looking for ways of improving the pipline   |
+| Adafruit IO*   | Adafruit IO*                | Needs more robust integration                                |
+| IFTTT?         | IFTTT?                      | Current IFTTT works only as output though Adafruit IO        |
+| SD card?       | **SD card**                 | Works as output, considering as input                        |
+| Serial?        | **Serial**                  | Works for output. Serial as input may or may not be useful (is how Fona is tested) |
 
 ## Device Configuration
 
@@ -89,6 +107,7 @@ The hierarchy of included files looks something like the following (example if b
   - **Config.h**
   - **Loom_preamble.h** (likely to be renamed)
     - **<OSCBundle.h>**
+    - Loom_translator.h
     - <Adafruit_SleepyDog.h>
     - <SPI.h>
     - loom_analog.h
@@ -110,6 +129,8 @@ The hierarchy of included files looks something like the following (example if b
 New sensor and actuator support can be added by filling out the loom_mod_template.h file with relevant code. This template ensures that the code for each piece of hardware conforms to a standard format, making it easier to read and understand.
 
 New files should be added #included in the loom_preamble.h file after config.h but generally before loom_flash.h and loom_common.h.
+
+There are plans/consideration for a script that will handle most of the additions for a user based on various provided parameters / needs as current additions generally need to modify the config, preamble, loom_commom (sometimes), and loom_interface files in a mostly boiler plate fashion in addition to the new device-specific file.
 
 ## Channels
 

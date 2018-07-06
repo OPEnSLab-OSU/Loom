@@ -131,8 +131,10 @@ bool sd_read_all_from_file(char* file)
 	} else {
 		// if the file didn't open, print an error:
 		LOOM_DEBUG_Println2("Error opening ", file);
+		return false;
 	}
 	sdFile.close();
+	return true;
 }
 
 
@@ -220,8 +222,10 @@ bool sd_save_elem(char *file, T data, char endchar)
 		sdFile.print(endchar);
 	} else {
 		LOOM_DEBUG_Println2("Error opening: ", file);
+		return false;
 	}
 	sdFile.close();
+	return true;
 }
 
 
@@ -257,9 +261,11 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 		sdFile.println();
 	} else {		
 		LOOM_DEBUG_Println2("Error opening: ", file);
+		return false;
 	}
 	sdFile.close();
 	LOOM_DEBUG_Println("Done");
+	return true;
 }
 
 
@@ -408,8 +414,10 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 		}
 	} else {
 		LOOM_DEBUG_Println2("Error opening: ", file);
+		return false;
 	}
 	sdFile.close();
+	return true;
 }
 
 
