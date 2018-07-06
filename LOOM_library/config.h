@@ -32,20 +32,26 @@
 							// NOTE: serial monitor must be opened for device to setup
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
-// --- Enabled Communication Platform(s) --- 
+// --- Enabled Communication Platform --- 
 #define is_wifi      0 		// 1 to enable WiFi
 #define is_lora      1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
-#define is_ethernet  0
+#define is_ethernet  0      // 1 to enable Ethernet (a number of options below might enable this anyway though)
+#define is_gsm       0      // Sorry, GSM is not integrated yet
+#define is_bluetooth 0      // Sorry, Bluetooth is not implemented yet
 
+// --- Additional Platforms ---
 #define is_pushingbox 0     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         1		// 1 to enable SD card 
 #define is_rtc        1		// Enable RTC functionality
 
-// --- Device Type: Hub, Node, Repeater ---
-#define hub_node_type     1 		// 0: Hub, 1: Node, 2 = Repeater
+// --- Device Telemetry Type ---
+#define hub_node_type     1 		// 0: Hub, 1: Node, 2 = Repeater   (this is going to be removed in the future, replaced with the following 3 options)
+#define is_hub       1
+#define is_node      1
+#define is_repeater  0		// Sorry, this doesn't do anything yet
 
 // --- Enabled Actuators --- 
 #define num_servos   0		// Number of servos being used
@@ -206,6 +212,11 @@
 #if hub_node_type == 0
 	#define is_ethernet   1
 	#define is_pushingbox 1
+
+	// The following two defines are planned to be implemented,
+	// but are not in use currently
+	// #define hub_input LORA
+	// #define hub_output ETHERNET
 #endif
 
 // --- Sapflowmeter Options ---
@@ -230,7 +241,7 @@
 
 // --- PushingBox Options ---
 #if is_pushingbox == 1	
-	#define is_ethernet 1		
+	#define is_ethernet 1		// in the process of getting this working on WiFi/GSM
 	#define NUM_FIELDS 32			// Maximum number of fields accepted by the PushingBox Scenario    
 	
 	// String data[NUM_FIELDS];

@@ -5,8 +5,8 @@
 // ================================================================
 void Loom_begin();
 void set_instance_num(OSCMessage &msg);
-//void msg_router(OSCMessage &msg, int addrOffset);       currently moved prototype to top of loom_preamble
-#if (is_wifi == 1) && defined(button)
+void msg_router(OSCMessage &msg, int addrOffset);       
+#if (is_wifi == 1) && defined(button)    // look into other behaviors if other platforms are enabled instead
 	void check_button_held();
 #endif
 void loop_sleep();
@@ -20,6 +20,7 @@ void flash_led();
 // ================================================================
 //
 // Called by setup(), handles calling of any LOOM specific individual device setups
+// Runs on startup or upon device firmware upload
 // Starts Wifi or Lora and serial if debugging prints are on
 // Runs flash setup to read device settings from memory if available
 // 
@@ -71,12 +72,19 @@ void Loom_begin()
 	#if is_rtc == 1
 		setup_rtc();
 	#endif
+
+	// I2C Sensor setup if no mulitplexer
+	#if is_tca9548a != 1
+		// call setups of enabled sensors
+	#endif
+
+	// Prebuild device setup
 	#if is_sapflow == 1
 		setup_sapflow();
 	#endif
 
 	// Read configuration from flash, or write config.h settings 
-	// if no settings are currently saved
+	// if no settings are already saved
 	setup_flash_config();
 
 	// Communication Platform specific setups
@@ -89,6 +97,8 @@ void Loom_begin()
 	#if is_nrf == 1
 		setup_nrf();
 	#endif
+
+	// Additional Platform setups
 	#if is_sd == 1
 		setup_sd();
 	#endif
@@ -96,9 +106,8 @@ void Loom_begin()
 		setup_pushingbox();
 	#endif
 
-	// Flash the build in LED indicating setup complete
+	// Flash the built-in LED indicating setup complete
 	flash_led();
-	
 }
 
 
@@ -147,7 +156,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	#if is_neopixel == 1
 		msg.dispatch("/Neopixel",     		set_color, 				addrOffset);
 	#endif
-	#if is_pushingbox == 1 && hub_node_type == 0
+	#if is_pushingbox == 1 && hub == 1
 		msg.dispatch("/SendToPB", 			sendToPushingBox, 		addrOffset);
 	#endif
 	
