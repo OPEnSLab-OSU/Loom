@@ -39,7 +39,7 @@ RHReliableDatagram manager(rf95, SERVER_ADDRESS);
 void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager);
 void lora_receive_bundle(OSCBundle *bndl);
 bool lora_send_bundle(OSCBundle *bndl);
-
+bool lora_send_bundle_fragment(OSCBundle *bndl);
 
 // ================================================================
 // ===                          SETUP                           ===
@@ -90,8 +90,6 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 
 
 
-// #if lora_device_type == 0
-
 // --- LoRa Receive Bundle ---
 //
 // Fills an OSC bundle with messages converted from strings as
@@ -139,12 +137,10 @@ void lora_receive_bundle(OSCBundle *bndl)
 	} // of if (manager.available()) 
 }
 
-// #endif // of lora_device_type == 0
 
 
 
 
-// #if lora_device_type == 1
 
 // --- LORA SEND BUNDLE
 //
@@ -175,7 +171,23 @@ bool lora_send_bundle(OSCBundle *bndl)
 	}
 }
 
-// #endif // of lora_device_type == 1
+bool lora_send_bundle_fragment(OSCBundle *bndl)
+{
+	LOOM_DEBUG_Println2("Bundle of size ", get_bundle_bytes(bndl));
+	LOOM_DEBUG_Println(" Being split into smaller bundles");
+
+	OSCBundle tmp_bndl;
+	OSCMessage *tmp_msg;
+
+	for (int i = 0; i < bndl->size(); i++) {
+		tmp_msg = bndl->getOSCMessage(i);
+		tmp_bndl.empty();
+		tmp_bndl.add(*tmp_msg);
+		lora_send_bundle(&tmp_bndl);
+	}
+}
+
+
 
 
 

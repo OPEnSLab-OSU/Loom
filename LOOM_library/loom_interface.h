@@ -287,30 +287,20 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 		#if is_lora == 1
 			case LORA :
 				if (!lora_bundle_fragment) {
-					
-					lora_send_bundle(send_bndl);
-					
+					lora_send_bundle(send_bndl);					
 				} else { // Separate bundle into smaller pieces
-					LOOM_DEBUG_Println2("Bundle of size ", get_bundle_bytes(send_bndl));
-					LOOM_DEBUG_Println(" Being split into smaller bundles");
-					
-					OSCBundle tmp_bndl;
-					OSCMessage *tmp_msg;
-					
-					for (int i = 0; i < send_bndl->size(); i++) {
-						tmp_msg = send_bndl->getOSCMessage(i);
-						tmp_bndl.empty();
-						tmp_bndl.add(*tmp_msg);
-
-						lora_send_bundle(&tmp_bndl);
-					}
+					lora_send_bundle_fragment(send_bndl);
 				}
 				break;
 		#endif
 
 		#if is_nrf == 1
 			case NRF : 
-				nrf_send_bundle(send_bndl);
+				if (!nrf_bundle_fragment) {
+					nrf_send_bundle(send_bndl);					
+				} else { // Separate bundle into smaller pieces
+					nrf_send_bundle_fragment(send_bndl);
+				}
 				break;
 		#endif
 

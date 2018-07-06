@@ -27,6 +27,7 @@ RF24Network network(radio);      // Network uses that radio
 void setup_nrf();
 void nrf_receive_bundle(OSCBundle *);
 bool nrf_send_bundle(OSCBundle *);
+bool nrf_send_bundle_fragment(OSCBundle *bndl);
 
 // ================================================================
 // ===                          SETUP                           ===
@@ -95,6 +96,23 @@ bool nrf_send_bundle(OSCBundle *bndl)
 	#endif
 	return is_sent;
 }
+
+bool nrf_send_bundle_fragment(OSCBundle *bndl)
+{
+	LOOM_DEBUG_Println2("Bundle of size ", get_bundle_bytes(bndl));
+	LOOM_DEBUG_Println(" Being split into smaller bundles");
+
+	OSCBundle tmp_bndl;
+	OSCMessage *tmp_msg;
+
+	for (int i = 0; i < bndl->size(); i++) {
+		tmp_msg = bndl->getOSCMessage(i);
+		tmp_bndl.empty();
+		tmp_bndl.add(*tmp_msg);
+		nrf_send_bundle(&tmp_bndl);
+	}
+}
+
 
 
 
