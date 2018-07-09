@@ -99,7 +99,7 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 // ================================================================ 
 // ===                  INCLUDE DEVICE FILES                    === 
 // ================================================================
-#include "loom_OSC_translator.h"
+#include "loom_translator.h"
 
 #if is_ethernet == 1
 	#include "loom_ethernet.h"

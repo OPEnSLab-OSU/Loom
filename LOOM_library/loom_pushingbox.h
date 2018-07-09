@@ -16,7 +16,7 @@
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-String data[NUM_FIELDS];
+String data[MAX_FIELDS];
 
 
 // ================================================================ 
@@ -73,26 +73,36 @@ void sendToPushingBox(OSCMessage &msg)
 	LOOM_DEBUG_Println("Sending to PushingBox");
 
 	client.stop();
-	if (client.connect(server_name, 80)) {  
+	if (client.connect("api.pushingbox.com", 80)) {  
 		LOOM_DEBUG_Println("Connection good");
 		client.print("GET /pushingbox?devid="); client.print(device_id); 
-		LOOM_DEBUG_Print(".");
-		for (int i = 0; i < msg.size(); i++) {
-			if ((i % 2) == 0)
-				client.print("&key" + String(i/2) + "=");
-			else
-				client.print("&val" + String(i/2) + "=");
-			client.print(get_data_value(&msg, i));
-			LOOM_DEBUG_Print(".");
+
+		// Send information that should always be sent
+		client.print("&key0=sheetID");
+		client.print("&val0=" + String(spreadsheet_id));
+		client.print("&key1=tabID");
+		client.print("&val1=" + String(tab_id));
+		client.print("&key2=deviceID");
+		client.print("&val2=" + String(DEVICE) + String(INIT_INST));  // this will currently break if device number is altered via Max
+
+		int i = 6; // offset by 6 to account for sheetId, tabID, deviceID
+
+		for (; i < MAX_FIELDS; i++) {
+			if ((i % 2) == 0) client.print("&key" + String(i/2) + "=");
+			else              client.print("&val" + String(i/2) + "=");
+			
+			if (i-6 < msg.size()) client.print(get_data_value(&msg, i-6));
+			else client.print("null");
 		}
-		LOOM_DEBUG_Println(".");
+
 		client.println(" HTTP/1.1");
-		client.print("Host: "); client.println(server_name);
+		client.print("Host: "); client.println("api.pushingbox.com");
 		client.println("User-Agent: Arduino");
 		client.println();
 
 		LOOM_DEBUG_Println("Data done sending");	 
 	} else {
+
 		LOOM_DEBUG_Println("No Connection");
 		#if is_ethernet == 1
 			LOOM_DEBUG_Println("Failed to connect to PB, attempting to re-setup ethernet.");
@@ -122,6 +132,8 @@ void sendToPushingBox(OSCMessage &msg)
 //
 void sendToPushingBox(OSCBundle *bndl) 
 {
+	LOOM_DEBUG_Println("Bundle going to PushingBox");
+	// print_bundle(bndl);
 	sendToPushingBox(*(bndl->getOSCMessage(0)));
 }
 

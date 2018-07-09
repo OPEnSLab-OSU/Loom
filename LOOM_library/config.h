@@ -34,18 +34,18 @@
 
 // --- Enabled Communication Platform --- 
 #define is_wifi      0 		// 1 to enable WiFi
-#define is_lora      1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
-#define is_ethernet  0      // 1 to enable Ethernet (a number of options below might enable this anyway though)
+#define is_ethernet  1      // 1 to enable Ethernet (a number of options below might enable this anyway though)
 #define is_gsm       0      // Sorry, GSM is not integrated yet
 #define is_bluetooth 0      // Sorry, Bluetooth is not implemented yet
 
 // --- Additional Platforms ---
-#define is_pushingbox 0     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
+#define is_pushingbox 1     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
-#define is_sd         1		// 1 to enable SD card 
-#define is_rtc        1		// Enable RTC functionality
+#define is_sd         0		// 1 to enable SD card 
+#define is_rtc        0		// Enable RTC functionality
 
 // --- Device Telemetry Type ---
 #define hub_node_type     1 		// 0: Hub, 1: Node, 2 = Repeater   (this is going to be removed in the future, replaced with the following 3 options)
@@ -59,13 +59,13 @@
 #define is_relay     0		// 1 if relays are being used (enables two, on pins 5 and 6)
 
 // --- Enabled Sensors --- 
-#define num_analog  0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
-#define is_decagon  0		// 1 if GS3 Decagon is being used
-#define is_tca9548a 0		// 1 if Multiplexer is being used. (Further customization in advanced options)
+#define num_analog   0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
+#define is_decagon   0		// 1 if GS3 Decagon is being used
+#define is_tca9548a  0		// 1 if Multiplexer is being used. (Further customization in advanced options)
 
 // --- Prebuilt Devices ---
-#define is_ishield  0		// 1 to specify using Ishield (should enable only wifi as communication platform)
-#define is_sapflow  0
+#define is_ishield   0		// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_sapflow   0
 
 
 // --- WiFi Settings ---
@@ -242,13 +242,24 @@
 // --- PushingBox Options ---
 #if is_pushingbox == 1	
 	#define is_ethernet 1		// in the process of getting this working on WiFi/GSM
-	#define NUM_FIELDS 32			// Maximum number of fields accepted by the PushingBox Scenario    
+	#define MAX_FIELDS 32			// Maximum number of fields accepted by the PushingBox Scenario    
+
+	#define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	   // Google Spreadsheet ID 
+								// (found betweeen the "docs.google.com/spreadsheets/d/" and 
+								// "/edit..." in the URL; random string of characters)
+	#define tab_id     13   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
+								// can be number or string
+
 	
 	// String data[NUM_FIELDS];
-	char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
+	// char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
 	// char device_id[]   = "vFE8D4461E0D6CEF";
-	// char device_id[]   = "v2FDB7D5504B3697";
-	char server_name[] = "api.pushingbox.com";	// PushingBox server, probably don't need to change
+	// char device_id[]   = "v4BED6AAFAB87221";
+	// char device_id[]   = "vAB0AFBBA90F16BC";
+	// char device_id[]   = "vDF13A5020F18224";
+	char device_id[]   = "v7ECCEF7A460E57A";
+
+	// char server_name[] = "api.pushingbox.com";	// PushingBox server, probably don't need to change
 #endif
 
 #if is_ethernet == 1
