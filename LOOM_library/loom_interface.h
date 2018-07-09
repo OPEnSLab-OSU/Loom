@@ -9,6 +9,9 @@ void measure_sensors();
 void package_data(OSCBundle *send_bndl);
 // void send_bundle(OSCBundle *send_bndl, Platform platform, char* file);
 void send_bundle(OSCBundle *send_bndl, Platform platform);
+void export_bundle(OSCBundle *send_bundle, Platform platform, char* file);
+void export_bundle(OSCBundle *send_bundle, Platform platform);
+
 void additional_loop_checks();
 
 
@@ -50,31 +53,15 @@ void receive_bundle(OSCBundle *bndl, Platform platform)
 				break;
 		#endif
 
-		// #if is_lora == 1 && is_repeater == 1
-		// 	case LORA :
-		// 		//TODO: repeater functionality here
-		// 		break;
-		// #endif
-
-		// #if is_nrf == 1 && is_repeater == 1
-		// 	case NRF :
-		// 		//TODO: repeater functionality here
-		// 		break;
-		// #endif
-
 		#if is_nrf == 1
 			case NRF : 
 				nrf_receive_bundle(bndl);
 				break;
 		#endif
 
-		// #if is_sd == 1
-		// 	case SDCARD : 
-		// 		Serial.println("Not yet implemented");
-		// #endif
 		#if LOOM_DEBUG == 1
 		default :
-				LOOM_DEBUG_Println("That platform (", platform, ") is not enabled to receiving");
+				LOOM_DEBUG_Println3("That platform (", platform, ") is not enabled to receiving");
 		#endif 
 	} // of switch
 }
@@ -314,12 +301,12 @@ void send_bundle(OSCBundle *send_bndl, Platform platform)
 				break;
 		#endif
 
-		#if is_sd == 1
-			case SDCARD : 
-				LOOM_DEBUG_Println("Saving bundle");
-				sd_save_bundle(file, send_bndl, 0, sd_save_time_format);
-				break;
-		#endif
+		// #if is_sd == 1
+		// 	case SDCARD : 
+		// 		LOOM_DEBUG_Println("Saving bundle");
+		// 		sd_save_bundle(file, send_bndl, 0, sd_save_time_format);
+		// 		break;
+		// #endif
 
 		#if is_pushingbox == 1
 			case PUSHINGBOX : 
@@ -344,8 +331,37 @@ void send_bundle(OSCBundle *send_bndl, Platform platform)
 // }
 
 
+void export_bundle(OSCBundle *send_bndl, Platform platform, char* file)
+{
+	switch(platform) {
+		#if is_sd == 1
+			case SDCARD : 
+				LOOM_DEBUG_Println("Saving bundle");
+				sd_save_bundle(file, send_bndl, 0, sd_save_time_format);
+				break;
+		#endif
 
+		#if is_pushingbox == 1
+			case PUSHINGBOX : 
+				LOOM_DEBUG_Println("Sending bundle data to PushingBox");
+				sendToPushingBox(send_bndl);
+				break;
+		#endif
 
+		// case SERIAL :
+		// 	print_bundle(send_bndl);
+		
+		#if LOOM_DEBUG == 1
+		default :
+				Serial.println("That platform is not enabled for exporting");
+		#endif 
+	} // of switch
+}
+
+void export_bundle(OSCBundle *send_bndl, Platform platform)
+{
+	export_bundle(send_bndl, platform, NULL);	
+}
 
 
 // --- ADDITIONAL LOOP CHECKS ---
