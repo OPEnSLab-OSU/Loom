@@ -7,10 +7,16 @@ void receive_bundle(OSCBundle *bndl, Platform platform);
 void process_bundle(OSCBundle *bndl);
 void measure_sensors();
 void package_data(OSCBundle *send_bndl);
-// void send_bundle(OSCBundle *send_bndl, Platform platform, char* file);
+void send_bundle(OSCBundle *send_bndl, Platform platform, char* file);
 void send_bundle(OSCBundle *send_bndl, Platform platform);
-void export_bundle(OSCBundle *send_bundle, Platform platform, char* file);
-void export_bundle(OSCBundle *send_bundle, Platform platform);
+
+
+// void export_data(OSCBundle *send_bndl, Platform platform, char* file);
+// void export_data(OSCBundle *send_bndl, Platform platform);
+// void export_data(String key_values [], int len, Platform platform, char* file);
+// void export_data(String key_values [], int len, Platform platform);
+// template <typename T>
+// void export_data(String keys [], T values [], int len, Platform platform);
 
 void additional_loop_checks();
 
@@ -271,8 +277,8 @@ void package_data(OSCBundle *send_bndl)
 //                    encoded to Platform enum to reduce chance for errors
 // @param file       The file name when saving to SD card
 // 
-// void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
-void send_bundle(OSCBundle *send_bndl, Platform platform)
+void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
+// void send_bundle(OSCBundle *send_bndl, Platform platform)
 {
 	switch(platform) {
 		#if is_wifi == 1
@@ -300,40 +306,8 @@ void send_bundle(OSCBundle *send_bndl, Platform platform)
 				}
 				break;
 		#endif
-
-		// #if is_sd == 1
-		// 	case SDCARD : 
-		// 		LOOM_DEBUG_Println("Saving bundle");
-		// 		sd_save_bundle(file, send_bndl, 0, sd_save_time_format);
-		// 		break;
-		// #endif
-
-		#if is_pushingbox == 1
-			case PUSHINGBOX : 
-				LOOM_DEBUG_Println("Sending bundle data to PushingBox");
-				sendToPushingBox(send_bndl);
-				break;
-		#endif
-
-		// case SERIAL :
-		// 	print_bundle(send_bndl);
 		
-		#if LOOM_DEBUG == 1
-		default :
-				Serial.println("That platform is not enabled for sending");
-		#endif 
-	} // of switch
-}
 
-// void send_bundle(OSCBundle *send_bndl, Platform platform)
-// {
-// 	send_bundle(send_bndl, platform, NULL);	
-// }
-
-
-void export_bundle(OSCBundle *send_bndl, Platform platform, char* file)
-{
-	switch(platform) {
 		#if is_sd == 1
 			case SDCARD : 
 				LOOM_DEBUG_Println("Saving bundle");
@@ -348,26 +322,115 @@ void export_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 				break;
 		#endif
 
-		// case SERIAL :
-		// 	print_bundle(send_bndl);
-		
+
 		#if LOOM_DEBUG == 1
 		default :
-				Serial.println("That platform is not enabled for exporting");
+				Serial.println("That platform is not enabled for sending");
 		#endif 
 	} // of switch
 }
 
-void export_bundle(OSCBundle *send_bndl, Platform platform)
+void send_bundle(OSCBundle *send_bndl, Platform platform)
 {
-	export_bundle(send_bndl, platform, NULL);	
+	send_bundle(send_bndl, platform, NULL);
 }
 
-// Overload to take arrays as well
 
 
 
+// void export_data(OSCBundle *send_bndl, Platform platform, char* file)
+// {
+// 	switch(platform) {
+// 		#if is_sd == 1
+// 			case SDCARD : 
+// 				LOOM_DEBUG_Println("Saving bundle");
+// 				sd_save_bundle(file, send_bndl, 0, sd_save_time_format); 
+// 				return;
+// 		#endif
 
+// 		#if is_pushingbox == 1
+// 			case PUSHINGBOX : LOOM_DEBUG_Println("Error: PushingBox doesn't take a filename"); return;	
+// 		#endif
+// 	} // of switch
+// 	LOOM_DEBUG_Println("That platform is not enabled for exporting");
+// }
+
+// void export_data(OSCBundle *send_bndl, Platform platform)
+// {
+// 	switch(platform) {
+// 		#if is_sd == 1
+// 			case SDCARD : LOOM_DEBUG_Println("Error: Saving to SD card requires filename"); return;
+// 		#endif
+
+// 		#if is_pushingbox == 1
+// 			case PUSHINGBOX : 
+// 				LOOM_DEBUG_Println("Sending bundle data to PushingBox");
+// 				sendToPushingBox(send_bndl);
+// 				return;
+// 		#endif
+// 	} // of switch
+// 	LOOM_DEBUG_Println("That platform is not enabled for exporting");
+// }
+
+
+// void export_data(String key_values [], int len, Platform platform, char* file)
+// {
+// 	switch(platform) {
+// 		#if is_sd == 1
+// 			case SDCARD : 
+// 				LOOM_DEBUG_Println("Saving bundle");
+// 				sd_save_array(file, key_values, len, ',', sd_save_time_format);
+// 				return;
+// 		#endif
+
+// 		#if is_pushingbox == 1
+// 			case PUSHINGBOX : LOOM_DEBUG_Println("Error: PushingBox doesn't take a filename"); return;
+// 		#endif
+// 	} // of switch
+// 	LOOM_DEBUG_Println("That platform is not enabled for exporting");
+// }
+
+
+
+// void export_data(String key_values [], int len, Platform platform)
+// {
+// 	switch(platform) {
+// 		#if is_sd == 1
+// 			case SDCARD : LOOM_DEBUG_Println("Error: Saving to SD card requires filename"); return;
+// 		#endif
+
+// 		#if is_pushingbox == 1
+// 			case PUSHINGBOX : 
+// 				LOOM_DEBUG_Println("Sending bundle data to PushingBox");
+// 				OSCBundle tmpBndl;
+// 				convert_key_value_array_to_bundle(key_values, &tmpBndl, "/packet/header", len, SINGLEMSG);
+// 				sendToPushingBox(&tmpBndl);
+// 				return;
+// 		#endif
+// 	} // of switch
+// 	LOOM_DEBUG_Println("That platform is not enabled for exporting");
+// }
+
+
+// template <typename T>
+// void export_data(String keys [], T values [], int len, Platform platform)
+// {
+// 	switch(platform) {
+// 		#if is_sd == 1
+// 			case SDCARD : LOOM_DEBUG_Println("Error: Saving to SD takes only one array at a time"); return;
+// 		#endif
+
+// 		#if is_pushingbox == 1
+// 			case PUSHINGBOX : 
+// 				LOOM_DEBUG_Println("Sending bundle data to PushingBox");
+// 				OSCBundle tmpBndl;
+// 				convert_assoc_arrays_to_bundle(keys, values, &tmpBndl, "/packet/header", len, SINGLEMSG);
+// 				sendToPushingBox(&tmpBndl);
+// 				return;
+// 		#endif
+// 	} // of switch
+// 	LOOM_DEBUG_Println("That platform is not enabled for exporting");
+// }
 
 
 
