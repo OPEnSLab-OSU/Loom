@@ -242,25 +242,20 @@
 // --- PushingBox Options ---
 #if is_pushingbox == 1	
 	#define is_ethernet 1		// in the process of getting this working on WiFi/GSM
-	#define MAX_FIELDS 32			// Maximum number of fields accepted by the PushingBox Scenario    
 
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	   // Google Spreadsheet ID 
 	#define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"
 								// (found betweeen the "docs.google.com/spreadsheets/d/" and 
 								// "/edit..." in the URL; random string of characters)
-	#define tab_id     "Sheet12"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
+	#define tab_id  "Sheet12"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
 								// can be number or string
 
-	
-	// String data[NUM_FIELDS];
-	// char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
+		// char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
 	// char device_id[]   = "vFE8D4461E0D6CEF";
 	// char device_id[]   = "v4BED6AAFAB87221";
 	// char device_id[]   = "vAB0AFBBA90F16BC";
 	// char device_id[]   = "vDF13A5020F18224";
 	char device_id[]   = "v7ECCEF7A460E57A";
-
-	// char server_name[] = "api.pushingbox.com";	// PushingBox server, probably don't need to change
 #endif
 
 #if is_ethernet == 1

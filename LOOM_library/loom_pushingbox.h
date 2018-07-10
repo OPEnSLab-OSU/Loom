@@ -138,24 +138,29 @@ void sendToPushingBox(OSCBundle *bndl)
 	sendToPushingBox(*(bndl->getOSCMessage(0)));
 }
 
-// Sends key-value interleaved array of strings to PushingBox
-// Converts to bundle first
-void sendToPushingBox(String key_values [], int len)
-{
-	OSCBundle tmpBndl;
-	convert_key_value_array_to_bundle(key_values, &tmpBndl, "/packet/header", len, SINGLEMSG);
-	sendToPushingBox(&tmpBndl);
-}
 
-// Sends key and value associated arrays of strings to PushingBox
-// Converts to bundle first
-template <typename T>
-void sendToPushingBox(String keys [], T values [], int len)
-{
-	OSCBundle tmpBndl;
-	convert_assoc_arrays_to_bundle(keys, values, &tmpBndl, "/packet/header", len, SINGLEMSG);
-	sendToPushingBox(&tmpBndl);
-}
+
+
+
+
+// // Sends key-value interleaved array of strings to PushingBox
+// // Converts to bundle first
+// void sendToPushingBox(String key_values [], int len)
+// {
+// 	OSCBundle tmpBndl;
+// 	convert_key_value_array_to_bundle(key_values, &tmpBndl, "/packet/header", len, SINGLEMSG);
+// 	sendToPushingBox(&tmpBndl);
+// }
+
+// // Sends key and value associated arrays of strings to PushingBox
+// // Converts to bundle first
+// template <typename T>
+// void sendToPushingBox(String keys [], T values [], int len)
+// {
+// 	OSCBundle tmpBndl;
+// 	convert_assoc_arrays_to_bundle(keys, values, &tmpBndl, "/packet/header", len, SINGLEMSG);
+// 	sendToPushingBox(&tmpBndl);
+// }
 
 
 
