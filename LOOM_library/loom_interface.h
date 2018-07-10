@@ -363,6 +363,14 @@ void export_bundle(OSCBundle *send_bndl, Platform platform)
 	export_bundle(send_bndl, platform, NULL);	
 }
 
+// Overload to take arrays as well
+
+
+
+
+
+
+
 
 // --- ADDITIONAL LOOP CHECKS ---
 //
