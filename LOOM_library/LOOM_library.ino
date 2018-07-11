@@ -45,10 +45,16 @@ void loop()
 	// String data[7] = {"abc", "4.27", "23.0", "25.2", "2.2", "30.0", "1024"};
 	// convert_assoc_arrays_to_bundle(parameters, data, &bndl, "/some/packet/header", 7, SINGLEMSG);
 	// print_bundle(&bndl);
+	LOOM_DEBUG_Println("Starting main loop");
+	// LOOM_DEBUG_Println("Delaying to allow Fona to connect");
+	// delay(15000);
+	// LOOM_DEBUG_Println("Done delaying");
 
-
-	fona_test_loop(); // will enter the Fona test loop, which doesn't return until 'Q' is entered into the Fona REPL
+	send_bundle(&bndl, PUSHINGBOX);
 	while(1);
+
+	// fona_test_loop(); // will enter the Fona test loop, which doesn't return until 'Q' is entered into the Fona REPL
+	// while(1);
 
 
 
