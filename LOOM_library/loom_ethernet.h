@@ -35,6 +35,8 @@ bool setup_ethernet();
 // 
 bool setup_ethernet() 
 {
+	LOOM_DEBUG_Println("Setting up ethernet");
+
 	#if is_lora == 1
 		digitalWrite(8, HIGH);
 	#endif
@@ -54,7 +56,7 @@ bool setup_ethernet()
 		is_setup = false;
 		LOOM_DEBUG_Println("Failed to connect to internet");
 	}
-	
+
 	return is_setup;
 }
 

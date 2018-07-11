@@ -73,10 +73,16 @@ void Loom_begin()
 		setup_rtc();
 	#endif
 
-	// I2C Sensor setup if no mulitplexer
+
+
+
+												// I2C Sensor setup if no mulitplexer
 	#if is_tca9548a != 1
 		// call setups of enabled sensors
 	#endif
+
+
+
 
 	// Prebuild device setup
 	#if is_sapflow == 1
@@ -96,6 +102,12 @@ void Loom_begin()
 	#endif	
 	#if is_nrf == 1
 		setup_nrf();
+	#endif
+	#if is_ethernet == 1
+		setup_ethernet();
+	#endif
+	#if is_fona == 1
+		setup_fona();
 	#endif
 
 	// Additional Platform setups

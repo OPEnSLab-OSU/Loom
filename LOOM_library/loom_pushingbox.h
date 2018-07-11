@@ -42,12 +42,18 @@ void sendToPushingBox(OSCBundle *bndl);
 //
 void setup_pushingbox() 
 {
-	LOOM_DEBUG_Println("Setting up ethernet");
-	#if is_ethernet == 1
-		if(!setup_ethernet()) {
-			LOOM_DEBUG_Println("Failed to setup ethernet");
-		}
-	#endif
+	// This should probably just be moved to Ethernet setup,
+	// that way Ethernet, WiFi, and cellular all handle their own setup
+	// -- Correction:
+	// This calls setup_ethernet, and should be moved to Loom_begin()
+
+	// #if is_ethernet == 1
+	// 	LOOM_DEBUG_Println("Setting up ethernet");
+
+	// 	if(!setup_ethernet()) {
+	// 		LOOM_DEBUG_Println("Failed to setup ethernet");
+	// 	}
+	// #endif
 }
 
 
@@ -73,51 +79,54 @@ void sendToPushingBox(OSCMessage &msg)
 {
 	LOOM_DEBUG_Println("Sending to PushingBox");
 
-	client.stop();
-	if (client.connect("api.pushingbox.com", 80)) {  
-		LOOM_DEBUG_Println("Connection good");
-		client.print("GET /pushingbox?devid="); client.print(device_id); 
 
-		// Send information that should always be sent
-		client.print("&key0=sheetID");
-		client.print("&val0=" + String(spreadsheet_id));
-		client.print("&key1=tabID");
-		client.print("&val1=" + String(tab_id));
-		client.print("&key2=deviceID");
-		client.print("&val2=" + String(DEVICE) + String(INIT_INST));  // this will currently break if device number is altered via Max
+	#if is_ethernet == 1
+		client.stop();
+		if (client.connect("api.pushingbox.com", 80)) {  
+			LOOM_DEBUG_Println("Connection good");
+			client.print("GET /pushingbox?devid="); client.print(device_id); 
 
-		int i = 6; // offset by 6 to account for sheetId, tabID, deviceID
+			// Send information that should always be sent
+			client.print("&key0=sheetID");
+			client.print("&val0=" + String(spreadsheet_id));
+			client.print("&key1=tabID");
+			client.print("&val1=" + String(tab_id));
+			client.print("&key2=deviceID");
+			client.print("&val2=" + String(DEVICE) + String(INIT_INST));  // this will currently break if device number is altered via Max
 
-		for (; i < MAX_FIELDS; i++) {
-			if ((i % 2) == 0) client.print("&key" + String(i/2) + "=");
-			else              client.print("&val" + String(i/2) + "=");
-			
-			if (i-6 < msg.size()) client.print(get_data_value(&msg, i-6));
-			else client.print("null");
-		}
+			int i = 6; // offset by 6 to account for sheetId, tabID, deviceID
 
-		client.println(" HTTP/1.1");
-		client.print("Host: "); client.println("api.pushingbox.com");
-		client.println("User-Agent: Arduino");
-		client.println();
-
-		LOOM_DEBUG_Println("Data done sending");	 
-	} else {
-
-		LOOM_DEBUG_Println("No Connection");
-		#if is_ethernet == 1
-			LOOM_DEBUG_Println("Failed to connect to PB, attempting to re-setup ethernet.");
-
-			if (setup_ethernet()) {
-				LOOM_DEBUG_Println("Successfully re-setup ethernet.");
+			for (; i < MAX_FIELDS; i++) {
+				if ((i % 2) == 0) client.print("&key" + String(i/2) + "=");
+				else              client.print("&val" + String(i/2) + "=");
+				
+				if (i-6 < msg.size()) client.print(get_data_value(&msg, i-6));
+				else client.print("null");
 			}
-			#if LOOM_DEBUG == 1 
-			else {
-				Serial.println("Failed to re-setup ethernet.");
-			}
+
+			client.println(" HTTP/1.1");
+			client.print("Host: "); client.println("api.pushingbox.com");
+			client.println("User-Agent: Arduino");
+			client.println();
+
+			LOOM_DEBUG_Println("Data done sending");	 
+		} else {
+
+			LOOM_DEBUG_Println("No Connection");
+			#if is_ethernet == 1
+				LOOM_DEBUG_Println("Failed to connect to PB, attempting to re-setup ethernet.");
+
+				if (setup_ethernet()) {
+					LOOM_DEBUG_Println("Successfully re-setup ethernet.");
+				}
+				#if LOOM_DEBUG == 1 
+				else {
+					Serial.println("Failed to re-setup ethernet.");
+				}
+				#endif
 			#endif
-		#endif
-	}
+		}
+	#endif // of #if is_ethernet == 1
 }
 
 

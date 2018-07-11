@@ -14,6 +14,35 @@
 
 #define VBATPIN A7                // Pin to check for battery voltage
 
+// If using channels
+#if   CHANNEL == 1
+	#define INIT_INST 1
+	#define INIT_PORT 9441
+#elif CHANNEL == 2
+	#define INIT_INST 2
+	#define INIT_PORT 9442
+#elif CHANNEL == 3
+	#define INIT_INST 3
+	#define INIT_PORT 9443
+#elif CHANNEL == 4
+	#define INIT_INST 4
+	#define INIT_PORT 9444
+#elif CHANNEL == 5
+	#define INIT_INST 5
+	#define INIT_PORT 9445
+#elif CHANNEL == 6
+	#define INIT_INST 6
+	#define INIT_PORT 9446
+#elif CHANNEL == 7
+	#define INIT_INST 7
+	#define INIT_PORT 9447
+#elif CHANNEL == 8
+	#define INIT_INST 8
+	#define INIT_PORT 9448
+#endif
+
+
+
 // Enumerate possible platform types
 enum Platform {
 	WIFI,
@@ -116,6 +145,9 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #endif
 #if is_nrf == 1	
 	#include "loom_nrf.h"
+#endif
+#if is_fona == 1
+	#include "loom_fona.h"
 #endif
 
 

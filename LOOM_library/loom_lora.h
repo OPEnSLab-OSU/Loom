@@ -30,7 +30,7 @@
 // ================================================================
 
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
-RHReliableDatagram manager(rf95, SERVER_ADDRESS);
+RHReliableDatagram manager(rf95, LORA_HUB_ADDRESS);
 
 
 // ================================================================ 
@@ -162,7 +162,7 @@ bool lora_send_bundle(OSCBundle *bndl)
 	LOOM_DEBUG_Println2("Max message length: ", RH_RF95_MAX_MESSAGE_LEN);
 	LOOM_DEBUG_Print("Sending...");
 	 
-	if (manager.sendtoWait((uint8_t*)message, strlen(message), SERVER_ADDRESS)) {
+	if (manager.sendtoWait((uint8_t*)message, strlen(message), LORA_HUB_ADDRESS)) {
 		LOOM_DEBUG_Println("Sent bundle through LoRa!");
 		return true;
 	} else {
