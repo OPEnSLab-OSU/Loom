@@ -105,11 +105,13 @@ void sendToPushingBox(OSCMessage &msg)
 			int i = 6; // offset by 6 to account for sheetId, tabID, deviceID
 
 			for (; i < MAX_FIELDS; i++) {
+				if (i >= msg.size()) break;
+				
 				if ((i % 2) == 0)     client.print("&key" + String(i/2) + "=");
 				else                  client.print("&val" + String(i/2) + "=");
 				
-				if (i-6 < msg.size()) client.print(get_data_value(&msg, i-6));
-				else                  client.print("null");
+				// if (i-6 < msg.size()) client.print(get_data_value(&msg, i-6));
+				// else                  client.print("null");
 			}
 
 			client.println(" HTTP/1.1");
@@ -177,7 +179,8 @@ void sendToPushingBox(OSCMessage &msg)
 
 
 		sprintf(url, "http://api.pushingbox.com/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s%d&key3=FonaArg1&val3=%s&key4=FonaArg2&val4=%s", device_id, spreadsheet_id, tab_id, DEVICE, INIT_INST, "fona_data", "more_fona_data"); 
-		for (int i = 5; i < 16; i++) {
+		// for (int i = 5; i < 16; i++) {
+		for (int i = 5; i < 10; i++) {
 			sprintf(url, "%s&key%d=null&val%d=null", url, i, i);
 		}
 		LOOM_DEBUG_Println("URL: ");

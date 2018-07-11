@@ -8,6 +8,21 @@ Code:*/
 //-----------------------------------------------
 
 
+//Run this in order to test the doGet(e) function
+function fakeGet() {
+  var eventObject = 
+    {
+      "parameter": {
+        "key0": "sheetID",
+        "val0": "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"
+      },
+      "contextPath": "",
+      "contentLength": -1,
+      "queryString": "action=view&page=3",
+    }
+  doGet(eventObject);
+}
+
 // Automatically called whenever the linked PushingBox Scenario
 // has data sent to it in the form of key-value pairs. 
 function doGet(e) { 
@@ -18,14 +33,12 @@ function doGet(e) {
     result = 'No Parameters';
   }
   else {    
-    var ignore_keys = ["sheetID", "tabID", "null"];    
-    
     // Turn the Get Request arguments into a dictionary using the key-value pairs from the request.
     // Adds Date and Time fields to start of dictionary 
     var data_dict   = getDataDict(e.parameter);
     
     // The keys from data_dict is the set of columns in the spreadsheet.
-    // var column_set  = Object.keys(data_dict);
+    var ignore_keys = ["sheetID", "tabID", "null"];    
     var column_set = difference(Object.keys(data_dict), ignore_keys);
     
     // The name of the sheet for the data to go to is the IDtag field that is sent.
@@ -35,7 +48,7 @@ function doGet(e) {
     var sheet       = spreadsheet.getSheetByName(sheet_id);
     
     // If the tabID is new, then create a sheet for it.
-    if(sheet == undefined) {
+    if (sheet == undefined) {
       sheet = spreadsheet.insertSheet(sheet_id);
       sheet_list = spreadsheet.getSheets();
       sheet.appendRow(column_set);
@@ -49,7 +62,7 @@ function doGet(e) {
     
     // If the set of data received is different than previous for the sheet
     // Put a break between the two data sets and label the columns accurately.
-    if(!arraysEqual(column_set, getSheetColumnList(sheet.getName()))) {
+    if (!arraysEqual(column_set, getSheetColumnList(sheet.getName()))) {
       if (new_row > 1) new_row += 1;
       new_range = sheet.getRange(new_row, 1, 1, column_set.length);
       new_range.setValues([column_set]);
@@ -58,7 +71,7 @@ function doGet(e) {
     }
    
     // The data from the rows are the values from the dictionary where the key is the column name.
-    for(i = 0; i < column_set.length; i++) {
+    for (i = 0; i < column_set.length; i++) {
       row_data.push(data_dict[column_set[i]]);
     }
     
@@ -85,8 +98,8 @@ function getDataDict(get_args) {
   data_dict["Date"] = d.toLocaleDateString();
   data_dict["Time"] = d.toLocaleTimeString();
   
-  for(i = 0; i < col_list.length; i++) {
-    if(val_list[i] != "null")
+  for (i = 0; i < col_list.length; i++) {
+    if (val_list[i] != "null")
       data_dict[col_list[i]] = val_list[i];
   }
   return data_dict;
@@ -100,7 +113,7 @@ function getMatches(args, patt) {
   var key_list = Object.keys(args);
   var match_patt = new RegExp(patt);
   
-  for(var key in key_list) {
+  for (var key in key_list) {
     if(match_patt.test(key_list[key]))
       match_order.push(key_list[key]);
   }
@@ -164,6 +177,8 @@ function arraysEqual(a, b) {
 function difference(a1, a2) {
   var result = [];
   for (var i = 0; i < a1.length; i++) 
-    if (a2.indexOf(a1[i]) === -1) result.push(a1[i]);
+    if ((a2.indexOf(a1[i]) === -1) && (a1[i][0] != '$'))
+      result.push(a1[i]);
   return result;
 }
+
