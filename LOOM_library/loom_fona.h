@@ -11,10 +11,11 @@
 // ================================================================
 
 // These defines are for use with the Feather M0
-#define FONA_RX 1
-#define FONA_TX 2
+#define FONA_RX  1
+#define FONA_TX  2
 #define FONA_RST A0		// Pretty arbitrary, think it justs needs to be an availalble digital out pin
 
+#define APN "wholesale"
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
@@ -111,7 +112,7 @@ bool setup_fona()
 
 	// APN of 'wholesale' is used with a Ting Sim card
 	// other Sim card were not working, so are not yet tested
-	fona.setGPRSNetworkSettings(F("wholesale"), F(""), F(""));
+	fona.setGPRSNetworkSettings(F(APN), F(""), F(""));
 
 	// Optionally configure HTTP gets to follow redirects over SSL.
 	// Default is not to follow SSL redirects, however if you uncomment
@@ -122,6 +123,19 @@ bool setup_fona()
 																		// improved version of the Fona library
 
 	// printMenu();
+
+	LOOM_DEBUG_Println("Delaying 15 seconds to allow Fona to connnect to network");
+	delay(15000);
+	LOOM_DEBUG_Println("Done delaying, attempting to turn on GPRS");
+
+	// Turn GPRS on as this is generally wanted for internet connection
+	if (!fona.enableGPRS(true)) {
+		#if LOOM_DEBUG == 1
+			Serial.println(F("Failed to turn on"));
+		#endif
+	} else {
+		LOOM_DEBUG_Println("GPRS successfully enabled");
+	}
 }
 
 
