@@ -130,6 +130,9 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 // ================================================================
 #include "loom_translator.h"
 
+#if is_fona == 1
+	#include "loom_fona.h"
+#endif
 #if is_ethernet == 1
 	#include "loom_ethernet.h"
 #endif
@@ -145,9 +148,6 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #endif
 #if is_nrf == 1	
 	#include "loom_nrf.h"
-#endif
-#if is_fona == 1
-	#include "loom_fona.h"
 #endif
 
 
