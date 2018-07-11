@@ -36,8 +36,8 @@
 #define is_wifi      0 		// 1 to enable WiFi
 #define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
-#define is_ethernet  1      // 1 to enable Ethernet (a number of options below might enable this anyway though)
-#define is_gsm       0      // Sorry, GSM is not integrated yet
+#define is_ethernet  0      // 1 to enable Ethernet (a number of options below might enable this anyway though)
+#define is_fona      1      // Fona is currently being integrated
 #define is_bluetooth 0      // Sorry, Bluetooth is not implemented yet
 
 // --- Additional Platforms ---
@@ -48,9 +48,9 @@
 #define is_rtc        0		// Enable RTC functionality
 
 // --- Device Telemetry Type ---
-#define hub_node_type     1 		// 0: Hub, 1: Node, 2 = Repeater   (this is going to be removed in the future, replaced with the following 3 options)
-#define is_hub       1
-#define is_node      1
+// #define hub_node_type     1 		// 0: Hub, 1: Node, 2 = Repeater   (this is going to be removed in the future, replaced with the following 3 options)
+#define is_hub       0
+#define is_node      0
 #define is_repeater  0		// Sorry, this doesn't do anything yet
 
 // --- Enabled Actuators --- 
@@ -82,44 +82,16 @@
 
 // --- Set Instance Number and UDP Port
 // (do not modify the A-H cases, only the X case, if not using channels)
-// If using channels 
-#if   CHANNEL == 1
-	#define INIT_INST 1
-	#define INIT_PORT 9441
-#elif CHANNEL == 2
-	#define INIT_INST 2
-	#define INIT_PORT 9442
-#elif CHANNEL == 3
-	#define INIT_INST 3
-	#define INIT_PORT 9443
-#elif CHANNEL == 4
-	#define INIT_INST 4
-	#define INIT_PORT 9444
-#elif CHANNEL == 5
-	#define INIT_INST 5
-	#define INIT_PORT 9445
-#elif CHANNEL == 6
-	#define INIT_INST 6
-	#define INIT_PORT 9446
-#elif CHANNEL == 7
-	#define INIT_INST 7
-	#define INIT_PORT 9447
-#elif CHANNEL == 8
-	#define INIT_INST 8
-	#define INIT_PORT 9448
-
 // If not using channels, then the following intial port will be used
-#elif CHANNEL == -1
+#if CHANNEL == -1
 	#define INIT_INST    3	// Initial device instance number (normally 1-8 when using channels)
 	#define INIT_PORT 9443	// Initial device UDP port (normally 1-8 when using channels)
 #endif
-
 
 // --- WiFi UDP Ports ---
 #if is_wifi == 1
 	#define COMMON_PORT     9440	// Expected by Max to be 9440, don't change unless using custom Max patches
 #endif
-
 
 
 // --- Set Device Name ---
@@ -132,16 +104,18 @@
 	// Automatically set device name
 	#if   is_ishield 
 		#define DEVICE "Ishield"
-	#elif num_servos
+	#elif num_servos > 0
 		#define DEVICE "ServoShield"
-	#elif num_steppers
-		#define DEVICE "StepperShield"
+	#elif num_steppers > 0
+		#define DEVICE "Stepper"
 	#elif is_relay
 		#define DEVICE "RelayShield"
 	#elif is_decagon
 		#define DEVICE "Decagon"
 	#elif is_tca9548a
 		#define DEVICE "MuxShield"
+	#elif is_sapflow
+		#define DEVICE "Sapflow"
 	#else
 		#define DEVICE "Unknown"
 	#endif
@@ -157,13 +131,13 @@
 	#define UPDATE_PERIOD 5000		// Milliseconds between multiplexer sensor list being updated
 	
 	// 1 to enable sensor type
-	#define is_tsl2591  1			// Lux Sensor
-	#define is_fxos8700 1			// Accelerometer / Magnetometer
-	#define is_fxas21002 1			// Gyroscope
+	#define is_tsl2591         1	// Lux Sensor
+	#define is_fxos8700        1	// Accelerometer / Magnetometer
+	#define is_fxas21002       1	// Gyroscope
 	#define is_zxgesturesensor 1	// ZX_Distance Sensor
-	#define is_sht31d 1				// Temperature / Humidity
-	#define is_mb1232 1				// Sonar
-	#define is_mpu6050 1			// Accelerometer / Gyroscope
+	#define is_sht31d          1	// Temperature / Humidity
+	#define is_mb1232          1	// Sonar
+	#define is_mpu6050         1	// Accelerometer / Gyroscope
 #endif
 
 
@@ -182,42 +156,48 @@
 
 // --- LoRa Options ---
 #if is_lora == 1
-	// #define hub_node_type     0 		// 0: Hub, 1: Node, 2 = Repeater
-	#define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
-
-	#define SERVER_ADDRESS 0			// Use 0-9 for SERVER_ADDRESSes
+	#define LORA_HUB_ADDRESS 0			// Use 0-9 for SERVER_ADDRESSes
 	#define RF95_FREQ      915.0		// Hardware specific, Tx must match Rx
 
-	// #if hub_node_type == 0
-	// 	#define is_pushingbox 1
-	// #endif
-	#if hub_node_type == 1 			// If Node
-		#define CLIENT_ADDRESS 10		// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
+	#if is_node == 1 					// If Node
+		#define NODE_ADDRESS 10			// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
 	#endif								// 10-19 for 0, 20 - 29 for 1, etc.
+	
+	#define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 #endif
 
 // --- nRF Options --- 
 #if is_nrf == 1
-	// #define hub_node_type     0 		// 0: Hub, 1: Node, 2 = Repeater
-	#define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
-	
 	#define NRF_HUB_ADDRESS 1			// Use 0-9 for SERVER_ADDRESSes
 	
-	#if hub_node_type == 1
+	#if is_node == 1
 		#define NRF_NODE_ADDRESS 0
 	#endif
+
+	#define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 #endif
 
+
+// --- FONA Options ---
+#if is_fona == 1
+	#define LOOM_DEBUG 1	// This is just temporary for now, as all Fona tests are done interactively through serial monitor
+	#define fona_test  1    // This enables the Fona interactive testing Loop, note that this will override normal 
+							//  Loom loop behavior until command to exit testing loop is issued
+	#define fona_type 2G 	// Can be '2G' (808) or '3G' (5320A), currently only 2G is supported
+#endif
+
+
 // --- Hub Options ---
-#if hub_node_type == 0
-	#define is_ethernet   1
-	#define is_pushingbox 1
+#if is_hub == 1
+	#define is_ethernet   1	// not necessarily always true
+	#define is_pushingbox 1 // only if Ethernet, WiFi, or cellular
 
 	// The following two defines are planned to be implemented,
 	// but are not in use currently
-	// #define hub_input LORA
+	// #define hub_input  LORA
 	// #define hub_output ETHERNET
 #endif
+
 
 // --- Sapflowmeter Options ---
 #if is_sapflow
@@ -241,7 +221,7 @@
 
 // --- PushingBox Options ---
 #if is_pushingbox == 1	
-	#define is_ethernet 1		// in the process of getting this working on WiFi/GSM
+	#define is_ethernet 0		// in the process of getting this working on WiFi/GSM
 
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	   // Google Spreadsheet ID 
 	#define spreadsheet_id "***REMOVED***"
@@ -250,12 +230,17 @@
 	#define tab_id  "Sheet12"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
 								// can be number or string
 
-		// char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
-	// char device_id[]   = "vFE8D4461E0D6CEF";
-	// char device_id[]   = "v4BED6AAFAB87221";
-	// char device_id[]   = "vAB0AFBBA90F16BC";
-	// char device_id[]   = "vDF13A5020F18224";
+	// char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
 	char device_id[]   = "***REMOVED***";
+
+
+
+	// In the event that a device has multiple means of connecting to the internet (WiFi, Ethernet, and cellular), 
+	// I'll probably have an order in which the device attempts to connect to internet: 
+	// Ethernet being highest preference, then WiFi, then cellular. 
+
+	// This way, PushingBox (or Adafruit IO for that matter) do not also need to have a communication platform specified, 
+	// and just take the first available platform from a list of decreasing optimality.
 #endif
 
 #if is_ethernet == 1
@@ -277,11 +262,7 @@
 // --- SD Options ---
 #if is_sd
 	// timestamp options:
-	//   0: no timestamp added
-	//   1: only date added
-	//   2: only time added
-	//   3: both date and time added (two fields)
-	//   4: both date and time added (combined field)
+	// 0: none, 1: date, 2: time, 3: date+time two fields, 4: data+time combined field
 	#define sd_save_time_format 3
 #endif
 
@@ -297,6 +278,6 @@
 	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
 										// Change the value according to the length of your desired transmission interval
 										// 80 seems to be a good amount, around 50 and lower may result in lost packets over WiFi
+#else
+	#define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 #endif
-// #define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
-

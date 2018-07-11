@@ -101,7 +101,7 @@ void package_<module>(OSCBundle *bndl, char packet_header_string[], int port)
 	// bndl->add(msg);
 }
 
-void package_sht31d(OSCBundle *bndl, char packet_header_string[])
+void package_<module>(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 

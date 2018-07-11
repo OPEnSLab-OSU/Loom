@@ -43,22 +43,20 @@ void sd_card_info();
 void sd_delete_file(char* file);
 void sd_list_files();
 bool sd_read_all_from_file(char* file);
-// void sd_write_string(char* file, char* text);
+
 void sd_write_timestamp(char* file, int timestamp, char delimiter);
+
 template <typename T>
 bool sd_save_elem(char *file, T data, char endchar);
 template <typename T>
 bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp);
 bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp);
+
 void set_SD_logging(OSCMessage &msg);
 
 // ================================================================
 // ===                          SETUP                           ===
 // ================================================================
-
-// Select how to read from and write to non volatile memory
-// based on which device is bieng used
-
 
 
 // --- SETUP SD ---
@@ -75,7 +73,8 @@ void setup_sd()
 	#endif
 
 	if (!SD.begin(chipSelect)) {
-		LOOM_DEBUG_Println("initialization failed!");
+		LOOM_DEBUG_Println("SD Initialization failed!");
+		LOOM_DEBUG_Println("Will continue anyway, but SD fuctions wont work");
 	}
 	LOOM_DEBUG_Println("initialization done.");
 }
@@ -138,28 +137,6 @@ bool sd_read_all_from_file(char* file)
 }
 
 
-// --- SD WRITE TO FILE --- 
-//
-// Attempts to write text to a file on the SD card
-//
-// @param file  The name of the file to write to
-//
-// @return True if no error
-//
-// void sd_write_string(char* file, char* text) 
-// {
-// 	sdFile = SD.open(file, FILE_WRITE);
-// 	if (sdFile) {
-// 		LOOM_DEBUG_Print3("Writing to ", file, "...");
-
-// 		sdFile.println(text);
-
-// 		LOOM_DEBUG_Println(" done");
-// 		sdFile.close();
-// 	} else {
-// 		LOOM_DEBUG_Println2("Error opening: ", file);
-// 	}
-// }
 
 // This is just a helper function,
 // expects file to be open already

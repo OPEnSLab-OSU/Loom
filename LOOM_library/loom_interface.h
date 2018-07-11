@@ -322,7 +322,6 @@ void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 				break;
 		#endif
 
-
 		#if LOOM_DEBUG == 1
 		default :
 				Serial.println("That platform is not enabled for sending");
