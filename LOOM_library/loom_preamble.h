@@ -136,12 +136,12 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #if is_ethernet == 1
 	#include "loom_ethernet.h"
 #endif
+#if is_wifi == 1
+	#include "loom_wifi.h"
+#endif
 #if is_pushingbox == 1
 	// #include "loom_ethernet.h"
 	#include "loom_pushingbox.h"
-#endif
-#if is_wifi == 1
-	#include "loom_wifi.h"
 #endif
 #if is_lora == 1
 	#include "loom_lora.h"

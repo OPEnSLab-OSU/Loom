@@ -77,90 +77,75 @@ void setup_pushingbox()
 //
 void sendToPushingBox(OSCMessage &msg) 
 {
-	if (msg.size() > 32) {
+	if (msg.size() > 32) { // This also catches empty msgs, which seem to have a size around 1493 for some reason
 		LOOM_DEBUG_Println("Message to large to send to PushingBox");
+		return;
 	}
 
 	LOOM_DEBUG_Println("Sending to PushingBox");
 
-	// should probably first build the string that is being sent, as that will be independent of platform
-	// this will make the code shorter and cleaner
+	// Build url arguments from bundle
+	char args[1024], buf1[30], buf2[30];
+	sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s%d", 
+		device_id, spreadsheet_id, tab_id, DEVICE, INIT_INST); 
 
-
-	// client object can probably just be a pointer to an ethernet or wifi client,
-	// assume the code is otherwise the same (this way I don't have to deal will having 
-	// an Ethernet of wifi client named the same thing (which doesn't work if you are trying to use both))
+	for (int i = 0, j = 3; (i < MAX_FIELDS-6) && (i < msg.size()); i+=2, j++) {
+		(get_data_value(&msg, i  )).toCharArray(buf1, 30); 
+		(get_data_value(&msg, i+1)).toCharArray(buf2, 30);
+		sprintf(args, "%s&key%d=%s&val%d=%s", args, j, buf1, j, buf2);
+	}
+	LOOM_DEBUG_Println2("URL get args: ", args);
 
 
 	#if is_ethernet == 1
 		LOOM_DEBUG_Println("Running PushingBox for Ethernet");
 
-		client.stop();
-		if (client.connect("api.pushingbox.com", 80)) {  
+		ethernet_client.stop();
+		if (ethernet_client.connect("api.pushingbox.com", 80)) {  
 			LOOM_DEBUG_Println("Connection good");
-			client.print("GET /pushingbox?devid="); client.print(device_id); 
 
-			// Send information that should always be sent
-			client.print("&key0=sheetID");
-			client.print("&val0=" + String(spreadsheet_id));
-			client.print("&key1=tabID");
-			client.print("&val1=" + String(tab_id));
-			client.print("&key2=deviceID");
-			client.print("&val2=" + String(DEVICE) + String(INIT_INST));  // this will currently break if device number is altered via Max
+			ethernet_client.print("GET ");
+			ethernet_client.print(args);
+			ethernet_client.println(" HTTP/1.1\nHost: api.pushingbox.com\nUser-Agent: Arduino\n");
 
-			int i = 6; // offset by 6 to account for sheetId, tabID, deviceID
-
-			// for (; i < MAX_FIELDS; i++) {  
-			for (; i < (i < MAX_FIELDS) && (i < msg.size()); i++) {
-				if (i >= msg.size()) break;
-
-				if ((i % 2) == 0)     client.print("&key" + String(i/2) + "=");
-				else                  client.print("&val" + String(i/2) + "=");
-				
-				if (i-6 < msg.size()) client.print(get_data_value(&msg, i-6));
-				// else                  client.print("null");
-			}
-
-			client.println(" HTTP/1.1");
-
-			// client.print("Host: "); client.println("api.pushingbox.com");
-			client.println("Host: api.pushingbox.com"); 			// need to make sure this works
-
-			client.println("User-Agent: Arduino");
-			client.println();
-
-			LOOM_DEBUG_Println("Data done sending");	 
+			LOOM_DEBUG_Println("Data done sending");
 
 			return;  // data sent successfully, no need to try another platform
 
 		} else {
-
 			LOOM_DEBUG_Println("No Connection");
-			#if is_ethernet == 1
-				LOOM_DEBUG_Println("Failed to connect to PB, attempting to re-setup ethernet.");
+			LOOM_DEBUG_Println("Failed to connect to PB, attempting to re-setup ethernet.");
 
-				if (setup_ethernet()) {
-					LOOM_DEBUG_Println("Successfully re-setup ethernet.");
-				}
-				#if LOOM_DEBUG == 1 
-				else {
-					Serial.println("Failed to re-setup ethernet.");
-				}
-				#endif
+			if (setup_ethernet()) {
+				LOOM_DEBUG_Println("Successfully re-setup ethernet.");
+			}
+			#if LOOM_DEBUG == 1 
+			else {
+				Serial.println("Failed to re-setup ethernet.");
+			}
 			#endif
 		}
-
 	#endif // of #if is_ethernet == 1
 
 
 	#if is_wifi == 1
 		LOOM_DEBUG_Println("Running PushingBox for WiFi");
 
-		// Still need to implement this, might just make a function that takes
-		// either an Ethernet or Wifi client to handle the two platforms,
-		// as these two will probably be fairly similar.
-		// Fona will have to have its own code though
+		wifi_client.stop();
+		if (wifi_client.connect("api.pushingbox.com", 80)) {  
+			LOOM_DEBUG_Println("Connection good");
 
+			wifi_client.print("GET "); 
+			wifi_client.print(args);
+			wifi_client.println(" HTTP/1.1\nHost: api.pushingbox.com\nUser-Agent: Arduino\n");
+
+			LOOM_DEBUG_Println("Data done sending");	 
+			
+			return;  // data sent successfully, no need to try another platform
+
+		} else {
+			LOOM_DEBUG_Println("No WiFi Connection");
+		}
 	#endif // of #if is_wifi == 1 
 
 
@@ -169,28 +154,18 @@ void sendToPushingBox(OSCMessage &msg)
 
 		uint16_t statuscode;
 		int16_t  length;
-		char     url[1024];
+		char     fona_url[1049];
 
-		sprintf(url, "http://api.pushingbox.com/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s%d", 
-			device_id, spreadsheet_id, tab_id, DEVICE, INIT_INST); 
-
-		for (int i = 0, j = 3; (i < MAX_FIELDS-6) && (i < msg.size()); i+=2, j++) {
-			char buf1[30], buf2[30];
-			(get_data_value(&msg, i  )).toCharArray(buf1, 30); 
-			(get_data_value(&msg, i+1)).toCharArray(buf2, 30);
-			sprintf(url, "%s&key%d=%s&val%d=%s", url, j, buf1, j, buf2);
-		}
-
-		LOOM_DEBUG_Println2("URL: ", url);
+		sprintf(fona_url, "http://api.pushingbox.com%s", args);
+		LOOM_DEBUG_Println2("URL: ", fona_url);
 
 		flushSerial();
-
-		if (!fona.HTTP_GET_start(url, &statuscode, (uint16_t *)&length)) {
-			LOOM_DEBUG_Println("Failed!");
+		if (!fona.HTTP_GET_start(fona_url, &statuscode, (uint16_t *)&length)) {
+			LOOM_DEBUG_Println("Fona PushingBox failed!");
 			return;
 		}
 
-	// Prints Fona reading of response, which doesn't show anything particularly interesting
+		// Prints Fona reading of response, which doesn't show anything particularly interesting
 		while (length > 0) {
 			while (fona.available()) {
 				char c = fona.read();
@@ -223,8 +198,6 @@ void sendToPushingBox(OSCMessage &msg)
 //
 void sendToPushingBox(OSCBundle *bndl) 
 {
-	LOOM_DEBUG_Println("Bundle going to PushingBox");
-	// print_bundle(bndl);
 	sendToPushingBox(*(bndl->getOSCMessage(0)));
 }
 

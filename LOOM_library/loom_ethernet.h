@@ -15,8 +15,8 @@
 
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
-// ================================================================
-EthernetClient client;            
+// ===============================================================
+EthernetClient ethernet_client;            
 
 
 // ================================================================ 
@@ -48,10 +48,10 @@ bool setup_ethernet()
 		Ethernet.begin(mac, ip);
 	}
 	
-	if (client.connect("www.google.com", 80)) {
+	if (ethernet_client.connect("www.google.com", 80)) {
 		is_setup = true;
 		LOOM_DEBUG_Println("Successfully connected to internet");
-		client.stop();
+		ethernet_client.stop();
 	} else {
 		is_setup = false;
 		LOOM_DEBUG_Println("Failed to connect to internet");
