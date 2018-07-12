@@ -64,6 +64,15 @@ enum Platform {
 #define LOOM_DEBUG_Println4(W,X,Y,Z) LOOM_DEBUG_Print(W); LOOM_DEBUG_Print(X); LOOM_DEBUG_Print(Y); LOOM_DEBUG_Println(Z)
 
 
+void receive_bundle(OSCBundle *bndl, Platform platform);
+void process_bundle(OSCBundle *bndl);
+void measure_sensors();
+void package_data(OSCBundle *send_bndl);
+void send_bundle(OSCBundle *send_bndl, Platform platform, char* file);
+void send_bundle(OSCBundle *send_bndl, Platform platform);
+
+
+
 // ================================================================
 // ===                 COMMON GLOBAL VARIABLES                  ===
 // ================================================================

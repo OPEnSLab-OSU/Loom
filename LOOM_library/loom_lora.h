@@ -116,7 +116,7 @@ void lora_receive_bundle(OSCBundle *bndl)
 				//is formatted differently as they use code not written by the CS Capstone team.
 				if (((char)(buf[0])) == '/') {
 					// convert_OSC_string_to_bundle((char*)buf, bndl); 
-					for(int i = 0; i < NUM_FIELDS; i++)
+					for(int i = 0; i < MAX_FIELDS; i++)
 						data[i] = get_data_value(bndl->getOSCMessage(0), i);
 				} else {
 					char str[LORA_MESSAGE_SIZE];
@@ -124,7 +124,7 @@ void lora_receive_bundle(OSCBundle *bndl)
 					char *token;
 					char *savept = str;
 					String cols[6] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
-					for(int i = 0; i < NUM_FIELDS; i+=2) {
+					for(int i = 0; i < MAX_FIELDS; i+=2) {
 						token = strtok_r(savept, ",", &savept);
 						if(token != NULL) {
 							data[i] = cols[i/2];
