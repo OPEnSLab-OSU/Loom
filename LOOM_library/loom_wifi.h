@@ -60,7 +60,7 @@ WiFiServer   server(80);
 int status = WL_IDLE_STATUS;
 
 #if is_adafruitio == 1 || is_pushingbox == 1
-	WiFiClient client;
+	WiFiClient wifi_client;
 #endif
 
 // ================================================================ 

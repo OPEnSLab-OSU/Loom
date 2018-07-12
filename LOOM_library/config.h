@@ -33,11 +33,11 @@
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform --- 
-#define is_wifi      0 		// 1 to enable WiFi
+#define is_wifi      1 		// 1 to enable WiFi
 #define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet  0      // 1 to enable Ethernet (a number of options below might enable this anyway though)
-#define is_fona      1      // Fona is currently being integrated
+#define is_fona      0      // Fona is currently being integrated
 #define is_bluetooth 0      // Sorry, Bluetooth is not implemented yet
 
 // --- Additional Platforms ---
@@ -72,8 +72,10 @@
 // Requires is_wifi to be set to 1 to take effect
 #if is_wifi == 1
 	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
-	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
-	#define DEFAULT_PASSWORD  "arduino101"		// Network password
+	// #define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
+	// #define DEFAULT_PASSWORD  "arduino101"		// Network password
+	#define DEFAULT_NETWORK   "Visitor"			// Network SSID / name
+	#define DEFAULT_PASSWORD  ""		// Network password
 #endif
 
 // ================================================================ 
@@ -221,13 +223,13 @@
 
 // --- PushingBox Options ---
 #if is_pushingbox == 1	
-	#define is_ethernet 0		// in the process of getting this working on WiFi/GSM
+	// #define is_ethernet 1		// in the process of getting this working on WiFi/GSM
 
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	   // Google Spreadsheet ID 
 	#define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"
 								// (found betweeen the "docs.google.com/spreadsheets/d/" and 
 								// "/edit..." in the URL; random string of characters)
-	#define tab_id  "Sheet12"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
+	#define tab_id  "3"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
 								// can be number or string
 
 	// char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
