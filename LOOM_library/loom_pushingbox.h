@@ -200,11 +200,12 @@ void sendToPushingBox(OSCMessage &msg)
 //
 void sendToPushingBox(OSCBundle *bndl) 
 {
-  OSCBundle tmpBndl;
-  deep_copy_bundle(bndl, &tmpBndl);
-  convert_bundle_structure(&tmpBndl, SINGLEMSG);
-  print_bundle(&tmpBndl);
-	sendToPushingBox(*(tmpBndl.getOSCMessage(0)));
+    OSCBundle tmpBndl;
+    deep_copy_bundle(bndl, &tmpBndl);
+    convert_bundle_structure(&tmpBndl, SINGLEMSG);
+    print_bundle(&tmpBndl);
+    sendToPushingBox(*(tmpBndl.getOSCMessage(0)));
+
 }
 
 

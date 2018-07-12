@@ -2,7 +2,6 @@
 // ===                        LIBRARIES                         ===
 // ================================================================
 
-// test comment
 
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
@@ -55,6 +54,7 @@ void setup_sapflow()
   	pinMode(HEATPIN,OUTPUT);
   	lastUpdate = millis();
   #endif
+
 }
 
 
@@ -170,3 +170,4 @@ void run_sapflowmeter(OSCBundle *bndl)
 }
 
 
+#endif // of #if is_node == 1
