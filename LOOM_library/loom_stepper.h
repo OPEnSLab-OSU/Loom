@@ -120,12 +120,12 @@ void handle_stepper_msg(OSCMessage &msg)
 	#if is_wifi == 1
 		wifi_send_bundle(&bndl);
 	#endif
-	#if is_lora == 1
-		lora_send_bundle(&bndl);
-	#endif
-	#if is_nrf == 1
-		nrf_send_bundle(&bndl);
-	#endif
+	// #if is_lora == 1
+	// 	lora_send_bundle(&bndl);
+	// #endif
+	// #if is_nrf == 1
+	// 	nrf_send_bundle(&bndl);
+	// #endif
 }
 
 

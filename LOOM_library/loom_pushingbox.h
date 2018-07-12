@@ -24,8 +24,6 @@ String data[MAX_FIELDS];
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void setup_pushingbox();
-// bool setup_ethernet();,
-// void sendToPushingBox(int num_fields, char *server_name, char *devid); // not sure what this is
 void sendToPushingBox(OSCMessage &msg);
 void sendToPushingBox(OSCBundle *bndl);
 
@@ -36,18 +34,7 @@ void sendToPushingBox(OSCBundle *bndl);
 
 void setup_pushingbox() 
 {
-	// This should probably just be moved to Ethernet setup,
-	// that way Ethernet, WiFi, and cellular all handle their own setup
-	// -- Correction:
-	// This calls setup_ethernet, and should be moved to Loom_begin()
 
-	// #if is_ethernet == 1
-	// 	LOOM_DEBUG_Println("Setting up ethernet");
-
-	// 	if(!setup_ethernet()) {
-	// 		LOOM_DEBUG_Println("Failed to setup ethernet");
-	// 	}
-	// #endif
 }
 
 
@@ -77,7 +64,6 @@ void setup_pushingbox()
 //
 void sendToPushingBox(OSCMessage &msg) 
 {
-  LOOM_DEBUG_Println2("msg size: ", msg.size());
 	if (msg.size() > 32) { // This also catches empty msgs, which seem to have a size around 1493 for some reason
 		LOOM_DEBUG_Println("Message to large to send to PushingBox");
 		return;
@@ -200,12 +186,11 @@ void sendToPushingBox(OSCMessage &msg)
 //
 void sendToPushingBox(OSCBundle *bndl) 
 {
-    OSCBundle tmpBndl;
-    deep_copy_bundle(bndl, &tmpBndl);
-    convert_bundle_structure(&tmpBndl, SINGLEMSG);
-    print_bundle(&tmpBndl);
-    sendToPushingBox(*(tmpBndl.getOSCMessage(0)));
-
+	OSCBundle tmpBndl;
+	deep_copy_bundle(bndl, &tmpBndl);
+	convert_bundle_structure(&tmpBndl, SINGLEMSG);
+	print_bundle(&tmpBndl);
+	sendToPushingBox(*(tmpBndl.getOSCMessage(0)));
 }
 
 

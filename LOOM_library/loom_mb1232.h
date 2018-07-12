@@ -13,7 +13,7 @@
 #define I2C_TIMEOUT 100 				//Define a timeout of 100 ms -- do not wait for clock stretching longer than this time 
 
 #define i2c_addr_mb1232 0x70 			//The Sensor ranging command has a value of 0x51
-#define RangeCommand 0x51
+#define RangeCommand    0x51
 #define ChangeAddressCommand1 0xAA		//These are the two commands that need to be sent in sequence to change the sensor address
 #define ChangeAddressCommand2 0xA5
 
@@ -21,9 +21,9 @@
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
-struct config_mb1232_t {
+// struct config_mb1232_t {
 
-};
+// };
 
 struct state_mb1232_t {
 	byte high;
@@ -35,8 +35,8 @@ struct state_mb1232_t {
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-struct config_mb1232_t config_mb1232;
-struct state_mb1232_t state_mb1232;
+// struct config_mb1232_t config_mb1232;
+struct state_mb1232_t  state_mb1232;
 
 
 // ================================================================ 
@@ -133,14 +133,10 @@ void measure_mb1232()
 		state_mb1232.low = Wire.read();
 		byte tmp = Wire.read();
 		state_mb1232.range = (state_mb1232.high * 256) + state_mb1232.low;
-		#if LOOM_DEBUG == 1
-			Serial.print("High Byte: ");
-			Serial.println(state_mb1232.high);
-			Serial.print("Low Byte: ");
-			Serial.println(state_mb1232.low);
-			Serial.print("Range: ");
-			Serial.println(state_mb1232.range);
-		#endif
+
+		LOOM_DEBUG_Println2("High Byte: ", state_mb1232.high);
+		LOOM_DEBUG_Println2("Low Byte: ",  state_mb1232.low);
+		LOOM_DEBUG_Println2("Range:",      state_mb1232.range);
 	} else {
 		LOOM_DEBUG_Println("Error reading from mb1232 (range)");
 	}       

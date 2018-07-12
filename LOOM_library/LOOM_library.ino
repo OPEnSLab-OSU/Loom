@@ -29,7 +29,6 @@ void loop()
 {
 	OSCBundle bndl, send_bndl; 
 
-    run_sapflowmeter(&bndl);
 
 	// Loop checks and sleep between iterations if enabled
 	additional_loop_checks();

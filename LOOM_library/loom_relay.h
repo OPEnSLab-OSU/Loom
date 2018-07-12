@@ -68,9 +68,7 @@ void handle_relay_msg(OSCMessage &msg)
 
 	state_relay.on[relay] = (set_to == 1);
 	
-	LOOM_DEBUG_Print("Set "); 
-	LOOM_DEBUG_Print(relay);
-	LOOM_DEBUG_Print(" to ");
+	LOOM_DEBUG_Print3("Set ", relay, " to "); 
 	LOOM_DEBUG_Println((state_relay.on[relay]) ? "ON" : "OFF");
 
 	write_relay_states();
@@ -88,31 +86,4 @@ void write_relay_states()
 	digitalWrite(RELAY_PIN0,(state_relay.on[0]==true) ? HIGH : LOW);
 	digitalWrite(RELAY_PIN1,(state_relay.on[1]==true) ? HIGH : LOW);
 }
-
-
-// unsigned long lastUpdate;
-// unsigned long currentTime;
-// bool on = false;
-
-// setup() {
-// 	lastUpdate = millis();
-// 	if (!on) {
-// 		digitalWrite(5, HIGH);
-// 	} 
-// }
-
-
-// main() {
-// 	currentTime = millis();
-// 	if ((currentTime - lastUpdate) > 2500) {
-// 		digitalWrite(5, on ? LOW : HIGH);
-// 		on = !on;
-// 		lastUpdate = currentTime;
-// 	}
-
-// 	// do other stuff
-// }
-
-
-
 

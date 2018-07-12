@@ -10,9 +10,9 @@
 //Hardware SPI CS pin definition
 #define CS_PIN 10
 
-#define K_TYPE 0
+#define K_TYPE    0
 #define VMODE_G32 1
-#define VMODE_G8 2
+#define VMODE_G8  2
 
 //Thermocouple type definition
 //#define TCTYPE K_TYPE
@@ -20,7 +20,7 @@
 //#define TCTYPE VMODE_G8
 
 //Defines gain for calculating voltage for VMODEs
-#if TCTYPE == VMODE_G32
+#if   TCTYPE == VMODE_G32
 	#define GAIN 32
 #elif TCTYPE == VMODE_G8
 	#define GAIN 8
@@ -34,13 +34,16 @@
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
-struct config_max31856_t{
+// struct config_max31856_t{
 	
-};
+// };
 struct state_max31856_t{
 	
 };
 
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
 float tc_vin;
 
 //Provide CS pin to initialize hardward SPI

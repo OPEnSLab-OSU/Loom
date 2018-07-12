@@ -43,10 +43,10 @@ struct state_rtc_t state_rtc;
 	RTC_PCF8523 rtc_inst;
 #endif
 
-volatile bool alarm_flag = true; // Flag is set with external Pin A0 Interrupt by RTC
-volatile bool LEDState = false; // flag to toggle LED
-volatile int HR = 8; // Hr of the day we want alarm to go off
-volatile int MIN = 0; // Min of each hour we want alarm to go off
+volatile bool alarm_flag = true;  // Flag is set with external Pin A0 Interrupt by RTC
+volatile bool LEDState   = false; // flag to toggle LED
+volatile int  HR  = 8;            // Hr of the day we want alarm to go off
+volatile int  MIN = 0;            // Min of each hour we want alarm to go off
 
 #if LOOM_DEBUG == 0
 	volatile int WakePeriodMin = 15;  // Period of time to take sample in Min, reset alarm based on this period (Bo - 5 min)
@@ -57,8 +57,8 @@ volatile int MIN = 0; // Min of each hour we want alarm to go off
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-void setup_rtc();
-void measure_rtc();
+void  setup_rtc();
+void  measure_rtc();
 char* get_datestring();
 char* get_timestring();
 char* get_weekday();
