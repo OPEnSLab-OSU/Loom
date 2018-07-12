@@ -38,8 +38,8 @@ struct state_sapflow_t state_sapflow;
 void package_sapflow(OSCBundle *bndl, char packet_header_string[]);
 void measure_sapflow();
 double voltTotemp(double vout);
-void heat(uint16_t pulse);
-void senddata(uint16_t senddelay);
+void heat();
+void senddata();
 #endif
 void run_sapflowmeter();
 
@@ -58,6 +58,7 @@ void setup_sapflow()
   
   	pinMode(HEATPIN,OUTPUT);
   	lastUpdate = millis();
+    startMillis = millis();
   #endif
 
 }
@@ -88,14 +89,15 @@ double voltTotemp( double vout )
 void senddata()
 { //heatpulse = 0: TDM, heatpulse > 1: HRM
 //  int heatpulse = 1000; //http://www.open-sensing.org/sapflowmeter-blog/2018/6/4/sap-flux-heat-calculations
-
+  OSCBundle bndl;
+ 
   currentMillis = millis();
   if (currentMillis - startMillis > senddelay) {
     measure_sensors();
-    package_data(bndl);
-    print_bundle(bndl);
-    send_bundle(bndl, LORA);
-    sd_save_bundle("Log0711.csv", bndl, 0, 3);
+    package_data(&bndl);
+    print_bundle(&bndl);
+    send_bundle(&bndl, LORA);
+    sd_save_bundle("Log0711.csv", &bndl, 0, 3);
     //  read_all_from_file("newlog");
     startMillis = currentMillis;  
   }
