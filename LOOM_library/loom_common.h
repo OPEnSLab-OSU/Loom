@@ -54,7 +54,7 @@ void Loom_begin()
 	#if is_mpu6050 > 0 && is_ishield == 1
 		setup_mpu6050();
 	#endif 
-	#ifdef is_max31856
+	#if is_max31856 == 1
 		setup_max31856();
 	#endif 
 	#if is_neopixel == 1
@@ -74,14 +74,31 @@ void Loom_begin()
 	#endif
 
 
-
-
-												// I2C Sensor setup if no mulitplexer
+	// I2C Sensor setup if no mulitplexer
 	#if is_tca9548a != 1
 		// call setups of enabled sensors
+		#if is_fxas21002 == 1 
+			setup_fxas21002();
+		#endif
+		#if is_fxos8700 == 1
+			setup_fxos8700();
+		#endif
+		#if is_mb1232 == 1
+			setup_mb1232();
+		#endif
+		#if is_mpu6050 == 1
+			// setup_mpu6050();
+		#endif
+		#if is_sht31d == 1
+			setup_sht31d();
+		#endif
+		#if is_tsl2591 == 1
+			setup_tsl2591();
+		#endif
+		#if is_zxgesturesensor == 1
+			setup_zxgesturesensor();
+		#endif
 	#endif
-
-
 
 
 	// Prebuild device setup
@@ -89,11 +106,14 @@ void Loom_begin()
 		setup_sapflow();
 	#endif
 
+
 	// Read configuration from flash, or write config.h settings 
 	// if no settings are already saved
 	setup_flash_config();
 
+
 	// Communication Platform specific setups
+	// after flash setup as network info may be saved
 	#if is_wifi == 1
 		setup_wifi(configuration.packet_header_string);
 	#endif

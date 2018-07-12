@@ -181,10 +181,10 @@ void details_fxos8700()
 	Serial.print  ("Sensor:       ");   Serial.println(mag.name);
 	Serial.print  ("Driver Ver:   ");   Serial.println(mag.version);
 	Serial.print  ("Unique ID:    0x"); Serial.println(mag.sensor_id, HEX);
-	Serial.print  ("Min Delay:    ");   Serial.print(accel.min_delay); Serial.println(" s");
-	Serial.print  ("Max Value:    ");   Serial.print(mag.max_value);   Serial.println(" uT");
-	Serial.print  ("Min Value:    ");   Serial.print(mag.min_value);   Serial.println(" uT");
-	Serial.print  ("Resolution:   ");   Serial.print(mag.resolution);  Serial.println(" uT");
+	Serial.print  ("Min Delay:    ");   Serial.print(accel.min_delay);   Serial.println(" s");
+	Serial.print  ("Max Value:    ");   Serial.print(mag.max_value);     Serial.println(" uT");
+	Serial.print  ("Min Value:    ");   Serial.print(mag.min_value);     Serial.println(" uT");
+	Serial.print  ("Resolution:   ");   Serial.print(mag.resolution);    Serial.println(" uT");
 	Serial.println("------------------------------------");
 	Serial.println("");
 	delay(500);

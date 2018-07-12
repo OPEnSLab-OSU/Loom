@@ -42,7 +42,6 @@ void convert_OSC_string_to_bundle(char *osc_string, OSCBundle*bndl);
 void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
 
 
-
 // Conversion between bundle formats
 void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructure format);
 void convert_bundle_structure(OSCBundle *bndl, BundleStructure format);
@@ -113,37 +112,28 @@ void print_bundle(OSCBundle *bndl)
 {
 	char buf[50];
 	char data_type;
-	Serial.print("\nBundle Size: ");
-	Serial.println(bndl->size());
+	LOOM_DEBUG_Println2("\nBundle Size: ", bndl->size());
 	OSCMessage *msg;
 	
 	for (int i = 0; i < bndl->size(); i++) {
 		msg = bndl->getOSCMessage(i);
-
 		msg->getAddress(buf, 0);
-		Serial.print("Address ");
-		Serial.print(i + 1);
-		Serial.print(": ");
-		Serial.println(buf);
+		LOOM_DEBUG_Println4("Address ", i+1, ": ", buf);
 
 		for (int j = 0; j < msg->size(); j++) {
 			data_type = msg->getType(j);
-			Serial.print("Value ");
-			Serial.print(j + 1);
-			Serial.print(": ");
+			LOOM_DEBUG_Print3("Value ", j+1, ": ");
+
 			switch(data_type) {
 				case 'f':
-					Serial.print("(f) ");
-					Serial.println(msg->getFloat(j));
+					LOOM_DEBUG_Println2("(f) ", msg->getFloat(j));
 					break;
 				case 'i':
-					Serial.print("(i) ");
-					Serial.println(msg->getInt(j));
+					LOOM_DEBUG_Println2("(i) ", msg->getInt(j));
 					break;
 				case 's':
-					Serial.print("(s) ");
 					msg->getString(j, buf, 50);
-					Serial.println(buf);
+					LOOM_DEBUG_Println2("(s) ", buf);
 					break;
 				default:
 					break;
@@ -163,7 +153,7 @@ void print_array(T data [], int len, int format)
 {
 	for (int i = 0; i < len; i++) {
 		if (format == 1) { Serial.println(data[i]); }
-		if (format > 1)  { Serial.print(data[i]); Serial.print(" "); }
+		if (format  > 1) { Serial.print(data[i]); Serial.print(" "); }
 		if ((format > 2) && (i%5==0)) { Serial.println(); }
 	}
 }
@@ -223,7 +213,7 @@ String get_data_value(OSCMessage* msg, int pos)
 				return String("");
 		}
 	}
-	LOOM_DEBUG_Println2("Message does not have an argument with position: ", pos);
+	LOOM_DEBUG_Println2("Message does not have an argument at position: ", pos);
 
 	return String("");
 }

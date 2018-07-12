@@ -73,15 +73,13 @@ void set_color(OSCMessage &msg)
 	int blue     = msg.getInt(4); // Val 0-255
 
 	// Print received values if debug enabled
-	#if LOOM_DEBUG == 1
-		Serial.println("========");
-		Serial.print("Port: ");  Serial.print(port);
-		Serial.print("  Num: "); Serial.print(pixelNum);
-		Serial.print("  R: ");   Serial.print(red);
-		Serial.print("  G: ");   Serial.print(green);
-		Serial.print("  B: ");   Serial.println(blue);
-		Serial.println("========\n");
-	#endif
+	LOOM_DEBUG_Println("========");
+	LOOM_DEBUG_Print2(  "Port: " , port);
+	LOOM_DEBUG_Print2(  "  Num: ", pixelNum);
+	LOOM_DEBUG_Print2(  "  R: "  , red);
+	LOOM_DEBUG_Print2(  "  G: "  , green);
+	LOOM_DEBUG_Println2("  B:"   , blue);
+	LOOM_DEBUG_Println("========\n")
 
 	// Update color values stored for specified Neopixel and write them to the Neopixels color
 	if (state_neopixel.enabled[port]) {

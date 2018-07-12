@@ -227,11 +227,11 @@
 #if is_pushingbox == 1	
 
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	   // Google Spreadsheet ID 
-//	#define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
-  #define spreadsheet_id "***REMOVED***"
+	// #define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
+	#define spreadsheet_id "***REMOVED***"
 								// (found betweeen the "docs.google.com/spreadsheets/d/" and 
 								// "/edit..." in the URL; random string of characters)
-	#define tab_id  "temp_data"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
+	#define tab_id  "15"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
 								// can be number or string
 
 	// char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario

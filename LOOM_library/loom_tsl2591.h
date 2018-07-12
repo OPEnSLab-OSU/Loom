@@ -61,8 +61,7 @@ bool setup_tsl2591()
 		is_setup = true;
 		LOOM_DEBUG_Println("Initialized tsl2591");
 		configure_tsl2591(1, 0); //Medium gain and timing
-	}
-	else {
+	} else {
 		is_setup = false;
 		LOOM_DEBUG_Println("Failed to initialize tsl2591");
 	}
@@ -140,44 +139,32 @@ void configure_tsl2591(uint8_t gain_level, uint8_t timing_level)
 {
 	switch(gain_level) {
 		case 0:
-			state_tsl2591.inst_tsl2591.setGain(TSL2591_GAIN_LOW);    // 1x gain (bright light)
-			break;
+			state_tsl2591.inst_tsl2591.setGain(TSL2591_GAIN_LOW);  break;   // 1x gain (bright light)
 		case 1:
-			state_tsl2591.inst_tsl2591.setGain(TSL2591_GAIN_MED);    // 25x gain
-			break;
+			state_tsl2591.inst_tsl2591.setGain(TSL2591_GAIN_MED);  break;   // 25x gain
 		case 2:
-			state_tsl2591.inst_tsl2591.setGain(TSL2591_GAIN_HIGH);   // 428x gain
-			break;
+			state_tsl2591.inst_tsl2591.setGain(TSL2591_GAIN_HIGH); break;  // 428x gain
 		case 3:
-			state_tsl2591.inst_tsl2591.setGain(TSL2591_GAIN_MAX);   // 9876x gain
-			break;
+			state_tsl2591.inst_tsl2591.setGain(TSL2591_GAIN_MAX);  break;  // 9876x gain
 		default:
-			LOOM_DEBUG_Println("Invalid gain level.");
-			break;
+			LOOM_DEBUG_Println("Invalid gain level."); break;
 	}
   
 	switch(timing_level) {
 		case 0:
-			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_100MS);  // shortest integration time (bright light)
-			break;
+			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_100MS); break; // shortest integration time (bright light)
 		case 1:
-			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_200MS);
-			break;
+			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_200MS); break;
 		case 2:
-			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_300MS);
-			break;
+			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_300MS); break;
 		case 3:
-			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_400MS);
-			break;
+			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_400MS); break;
 		case 4:
-			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_500MS);
-			break;
+			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_500MS); break;
 		case 5:
-			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_600MS);  // longest integration time (dim light)
-			break;
+			state_tsl2591.inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_600MS);  // longest integration time (dim light) break;
 		default:
-			LOOM_DEBUG_Println("Invalid timing level");
-			break;
+			LOOM_DEBUG_Println("Invalid timing level"); break;
 	}
 	
 	#if LOOM_DEBUG == 1
@@ -188,17 +175,13 @@ void configure_tsl2591(uint8_t gain_level, uint8_t timing_level)
 		switch(gain)
 		{
 			case TSL2591_GAIN_LOW:
-				Serial.println(F("1x (Low)"));
-				break;
+				Serial.println(F("1x (Low)")); 		break;
 			case TSL2591_GAIN_MED:
-				Serial.println(F("25x (Medium)"));
-				break;
+				Serial.println(F("25x (Medium)")); 	break;
 			case TSL2591_GAIN_HIGH:
-				Serial.println(F("428x (High)"));
-				break;
+				Serial.println(F("428x (High)")); 	break;
 			case TSL2591_GAIN_MAX:
-				Serial.println(F("9876x (Max)"));
-				break;
+				Serial.println(F("9876x (Max)")); 	break;
 		}
 		Serial.print  (F("Timing:       "));
 		Serial.print((state_tsl2591.inst_tsl2591.getTiming() + 1) * 100, DEC); 
