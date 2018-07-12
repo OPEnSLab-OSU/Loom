@@ -208,19 +208,12 @@
 	#define is_rtc        1
 	#define is_sd         1
 
-<<<<<<< HEAD
-	 #if is_hub == 1
+
+	#if is_hub == 1
 	 	#define is_ethernet   1
 	 	#define is_pushingbox 1
-  #endif
-    
-=======
-	#if is_hub == 1
-	// 	#define is_ethernet   1
-	// 	#define is_pushingbox 1
 	#endif
 
->>>>>>> 1011c59b4a66201ebd48d9284cfdb72ce6a27095
 	#if is_node == 1
 		#define num_analog    2      // two temperature sensors
 		#define heatpulse     0      // 0:TDM, 1<: HRM (e.g 2500:2.5 sec)
