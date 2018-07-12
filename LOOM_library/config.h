@@ -33,10 +33,10 @@
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform --- 
-#define is_wifi      1 		// 1 to enable WiFi
-#define is_lora      0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_wifi      0 		// 1 to enable WiFi
+#define is_lora      1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
-#define is_ethernet  0      // 1 to enable Ethernet (a number of options below might enable this anyway though)
+#define is_ethernet  1      // 1 to enable Ethernet (a number of options below might enable this anyway though)
 #define is_fona      0      // Fona is currently being integrated
 #define is_bluetooth 0      // Sorry, Bluetooth is not implemented yet
 
@@ -44,13 +44,13 @@
 #define is_pushingbox 1     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
-#define is_sd         0		// 1 to enable SD card 
-#define is_rtc        0		// Enable RTC functionality
+#define is_sd         1		// 1 to enable SD card 
+#define is_rtc        1		// Enable RTC functionality
 
 // --- Device Telemetry Type ---
 // #define hub_node_type     1 		// 0: Hub, 1: Node, 2 = Repeater   (this is going to be removed in the future, replaced with the following 3 options)
 #define is_hub       0
-#define is_node      0
+#define is_node      1
 #define is_repeater  0		// Sorry, this doesn't do anything yet
 
 // --- Enabled Actuators --- 
@@ -65,7 +65,7 @@
 
 // --- Prebuilt Devices ---
 #define is_ishield   0		// 1 to specify using Ishield (should enable only wifi as communication platform)
-#define is_sapflow   0
+#define is_sapflow   1
 
 
 // --- WiFi Settings ---
@@ -208,11 +208,12 @@
 	#define is_rtc        1
 	#define is_sd         1
 
-	// #if hub_node_type == 0
-	// 	#define is_ethernet   1
-	// 	#define is_pushingbox 1
-
-	#if hub_node_type == 1
+	 #if is_hub == 1
+	 	#define is_ethernet   1
+	 	#define is_pushingbox 1
+  #endif
+    
+	#if is_node == 1
 		#define num_analog    2      // two temperature sensors
 		#define heatpulse     0      // 0:TDM, 1<: HRM (e.g 2500:2.5 sec)
 		#define num_analog    2      // A0, A1
@@ -223,13 +224,13 @@
 
 // --- PushingBox Options ---
 #if is_pushingbox == 1	
-	// #define is_ethernet 1		// in the process of getting this working on WiFi/GSM
 
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	   // Google Spreadsheet ID 
-	#define spreadsheet_id "***REMOVED***"
+//	#define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
+  #define spreadsheet_id "***REMOVED***"
 								// (found betweeen the "docs.google.com/spreadsheets/d/" and 
 								// "/edit..." in the URL; random string of characters)
-	#define tab_id  "3"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
+	#define tab_id  "temp_data"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
 								// can be number or string
 
 	// char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario

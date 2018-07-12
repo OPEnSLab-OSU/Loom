@@ -77,6 +77,7 @@ void setup_pushingbox()
 //
 void sendToPushingBox(OSCMessage &msg) 
 {
+  LOOM_DEBUG_Println2("msg size: ", msg.size());
 	if (msg.size() > 32) { // This also catches empty msgs, which seem to have a size around 1493 for some reason
 		LOOM_DEBUG_Println("Message to large to send to PushingBox");
 		return;
@@ -85,11 +86,12 @@ void sendToPushingBox(OSCMessage &msg)
 	LOOM_DEBUG_Println("Sending to PushingBox");
 
 	// Build url arguments from bundle
-	char args[1024], buf1[30], buf2[30];
+	char args[1024]; 
 	sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s%d", 
 		device_id, spreadsheet_id, tab_id, DEVICE, INIT_INST); 
 
 	for (int i = 0, j = 3; (i < MAX_FIELDS-6) && (i < msg.size()); i+=2, j++) {
+    char buf1[30], buf2[30];
 		(get_data_value(&msg, i  )).toCharArray(buf1, 30); 
 		(get_data_value(&msg, i+1)).toCharArray(buf2, 30);
 		sprintf(args, "%s&key%d=%s&val%d=%s", args, j, buf1, j, buf2);
@@ -198,7 +200,11 @@ void sendToPushingBox(OSCMessage &msg)
 //
 void sendToPushingBox(OSCBundle *bndl) 
 {
-	sendToPushingBox(*(bndl->getOSCMessage(0)));
+  OSCBundle tmpBndl;
+  deep_copy_bundle(bndl, &tmpBndl);
+  convert_bundle_structure(&tmpBndl, SINGLEMSG);
+  print_bundle(&tmpBndl);
+	sendToPushingBox(*(tmpBndl.getOSCMessage(0)));
 }
 
 
