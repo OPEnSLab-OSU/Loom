@@ -100,10 +100,13 @@ void senddata()
     startMillis = currentMillis;  
   }
 }
-
+// --- HEAT ---
+//
+// Turn on heater every "heatpulse" seconds
+//
 void heat()
-{ //heatpulse = 0: TDM, heatpulse > 1: HRM
-//  int heatpulse = 1000; //http://www.open-sensing.org/sapflowmeter-blog/2018/6/4/sap-flux-heat-calculations
+{
+//int heatpulse = 1000; //http://www.open-sensing.org/sapflowmeter-blog/2018/6/4/sap-flux-heat-calculations
 
 	currentTime = millis();
 	if (currentTime - lastUpdate > heatpulse) {
@@ -113,16 +116,7 @@ void heat()
 	}
 
 }
-	
-// --- PACKAGE <MODULE> ---
-//
-// Adds OSC Message of most recent sensor readings to a provided OSC bundle
-//
-// @param bndl                  The OSC bundle to be added to
-// @param packet_header_string  The device-identifying string to prepend to OSC messages
-//   if I2C multiplexer sensor, then also
-// [@param port                  Which port of the multiplexer the device is plugged into]
-//
+
 void package_sapflow(OSCBundle *bndl, char packet_header_string[]) 
 {
 	char address_string[255];
@@ -136,7 +130,7 @@ void package_sapflow(OSCBundle *bndl, char packet_header_string[])
 }
 
 
-// --- MEASURE ANALOG ---
+// --- MEASURE Temperature ---
 //
 // Measure analog data and update analog state to most recent readings. 
 //
@@ -144,7 +138,7 @@ void measure_sapflow()
 {
 	double temp;
 
-	temp = read_analog(0);  //analog Read gives values from 0-1023 based on 0-3.3V
+	temp = read_analog(0);  //analog Read gives values from 0-1023(or 4095 at 12bit) based on 0-3.3V
 	temp = map(temp, 0, 4095, 0, 3300);//map these to mV value
 	state_sapflow.temp0 = voltTotemp(temp);
 
@@ -165,31 +159,22 @@ void measure_sapflow()
 void run_sapflowmeter(OSCBundle *bndl)
 {
     #if is_hub == 1
-  
     // Receive bundles, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
       receive_bundle(bndl, LORA);
   
     if (!bundle_empty(bndl)) {
       print_bundle(bndl);
       send_bundle(bndl, PUSHINGBOX);
-  
     }
   #endif // of is_hub
 
   #if is_node == 1
     senddata();
-//    measure_sensors();
-//    package_data(bndl);
-//    print_bundle(bndl);
-//    send_bundle(bndl, LORA);
-//    sd_save_bundle("Log0711.csv", bndl, 0, 3);
-//    //  read_all_from_file("newlog");
     
     #if probe_type  == 1      // 0:TDM, 1: HRM    
       heat();
     #endif // of probe_type
 
-  
   #endif // of is_node
 }
 
