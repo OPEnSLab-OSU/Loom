@@ -216,10 +216,10 @@
 
 	#if is_node == 1
 		#define num_analog    2      // two temperature sensors
-		#define heatpulse     0      // 0:TDM, 1<: HRM (e.g 2500:2.5 sec)
-		#define num_analog    2      // A0, A1
+    #define probe_type    0      // 0:TDM, 1: HRM
+		#define heatpulse     2500   // For HRM probe heat pulse (e.g 2500:2.5 sec)
 		#define is_sht31d     1      // Temperature / Humidity
-		#define senddelay     3000   // send data every 3sec
+		#define senddelay     60000   // send data every 1 min
 	#endif
 #endif 
 
