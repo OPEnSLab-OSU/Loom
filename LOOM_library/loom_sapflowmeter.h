@@ -20,8 +20,12 @@ struct state_sapflow_t {
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 
-unsigned long lastUpdate;
-unsigned long currentTime;
+unsigned long lastUpdate;//heat pulse
+unsigned long currentTime;//heat pulse
+
+unsigned long startMillis;//send data
+unsigned long currentMillis;//send data
+
 bool sapflow_relay_on = false;
 
 struct state_sapflow_t state_sapflow;
@@ -35,6 +39,7 @@ void package_sapflow(OSCBundle *bndl, char packet_header_string[]);
 void measure_sapflow();
 double voltTotemp(double vout);
 void heat(uint16_t pulse);
+void senddata(uint16_t senddelay);
 #endif
 void run_sapflowmeter();
 
@@ -80,12 +85,28 @@ double voltTotemp( double vout )
 	return T;
 }
 
-void heat(uint16_t pulse)
+void senddata()
+{ //heatpulse = 0: TDM, heatpulse > 1: HRM
+//  int heatpulse = 1000; //http://www.open-sensing.org/sapflowmeter-blog/2018/6/4/sap-flux-heat-calculations
+
+  currentMillis = millis();
+  if (currentMillis - startMillis > senddelay) {
+    measure_sensors();
+    package_data(bndl);
+    print_bundle(bndl);
+    send_bundle(bndl, LORA);
+    sd_save_bundle("Log0711.csv", bndl, 0, 3);
+    //  read_all_from_file("newlog");
+    startMillis = currentMillis;  
+  }
+}
+
+void heat()
 { //heatpulse = 0: TDM, heatpulse > 1: HRM
 //  int heatpulse = 1000; //http://www.open-sensing.org/sapflowmeter-blog/2018/6/4/sap-flux-heat-calculations
 
 	currentTime = millis();
-	if (currentTime - lastUpdate > pulse) {
+	if (currentTime - lastUpdate > heatpulse) {
 		digitalWrite(HEATPIN, sapflow_relay_on ? HIGH : LOW);
 		sapflow_relay_on = !sapflow_relay_on;
 		lastUpdate = currentTime;  
@@ -156,18 +177,18 @@ void run_sapflowmeter(OSCBundle *bndl)
   #endif // of is_hub
 
   #if is_node == 1
-    measure_sensors();
-    package_data(bndl);
-    print_bundle(bndl);
-    send_bundle(bndl, LORA);
-    sd_save_bundle("Log0711.csv", bndl, 0, 3);
-    //  read_all_from_file("newlog");
+    senddata();
+//    measure_sensors();
+//    package_data(bndl);
+//    print_bundle(bndl);
+//    send_bundle(bndl, LORA);
+//    sd_save_bundle("Log0711.csv", bndl, 0, 3);
+//    //  read_all_from_file("newlog");
     
     #if probe_type  == 1      // 0:TDM, 1: HRM    
-      heat(heatpulse);
+      heat();
     #endif // of probe_type
-   
-   delay(senddelay); //send data per 1 min
+
   
   #endif // of is_node
 }
