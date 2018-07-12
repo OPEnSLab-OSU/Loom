@@ -198,6 +198,9 @@ void sendToPushingBox(OSCMessage &msg)
 //
 void sendToPushingBox(OSCBundle *bndl) 
 {
+	OSCBundle tmpBndl;
+	deep_copy_bundle(bndl, &tmpBndl);
+	convert_bundle_structure(SINGLEMSG);
 	sendToPushingBox(*(bndl->getOSCMessage(0)));
 }
 
