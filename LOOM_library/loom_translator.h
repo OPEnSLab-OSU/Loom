@@ -118,11 +118,11 @@ void print_bundle(OSCBundle *bndl)
 	for (int i = 0; i < bndl->size(); i++) {
 		msg = bndl->getOSCMessage(i);
 		msg->getAddress(buf, 0);
-		LOOM_DEBUG_Println4("Address ", i+1, ": ", buf);
+		LOOM_DEBUG_Println4("Address ", i, ": ", buf);
 
 		for (int j = 0; j < msg->size(); j++) {
 			data_type = msg->getType(j);
-			LOOM_DEBUG_Print3("Value ", j+1, ": ");
+			LOOM_DEBUG_Print3("Value ", j, ": ");
 
 			switch(data_type) {
 				case 'f':

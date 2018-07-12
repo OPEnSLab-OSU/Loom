@@ -103,7 +103,9 @@ void setup_rtc() {
 	#endif
 
 	// Query Time and print
-	print_time();
+	#if LOOM_DEBUG == 1
+		print_time();
+	#endif
 
 	#if is_rtc3231 == 1
 		//Set SQW pin to OFF (in my case it was set by default to 1Hz)

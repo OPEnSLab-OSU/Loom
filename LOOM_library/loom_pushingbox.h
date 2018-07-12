@@ -189,7 +189,9 @@ void sendToPushingBox(OSCBundle *bndl)
 	OSCBundle tmpBndl;
 	deep_copy_bundle(bndl, &tmpBndl);
 	convert_bundle_structure(&tmpBndl, SINGLEMSG);
-	print_bundle(&tmpBndl);
+	#if LOOM_DEBUG == 1
+		print_bundle(&tmpBndl);
+	#endif
 	sendToPushingBox(*(tmpBndl.getOSCMessage(0)));
 }
 
