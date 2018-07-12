@@ -48,12 +48,12 @@ void run_sapflowmeter();
 //
 void setup_sapflow() 
 {
-  #if is_node == 1
-  	setup_sht31d();
-  
-  	pinMode(HEATPIN,OUTPUT);
-  	lastUpdate = millis();
-  #endif
+	#if is_node == 1
+		setup_sht31d();
+	
+		pinMode(HEATPIN,OUTPUT);
+		lastUpdate = millis();
+	#endif
 
 }
 
@@ -143,30 +143,28 @@ void measure_sapflow()
 
 void run_sapflowmeter(OSCBundle *bndl)
 {
-    #if is_hub == 1
-  
-    // Receive bundles, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
-      receive_bundle(bndl, LORA);
-  
-    if (!bundle_empty(bndl)) {
-      print_bundle(bndl);
-      send_bundle(bndl, PUSHINGBOX);
-  
-    }
-  #endif // of is_hub
+	#if is_hub == 1
+		// Receive bundles, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
+		receive_bundle(bndl, LORA);
+		
+		if (!bundle_empty(bndl)) {
+			print_bundle(bndl);
+			send_bundle(bndl, PUSHINGBOX);
+			
+		}
+	#endif // of is_hub
 
-  #if is_node == 1
-    measure_sensors();
-    package_data(bndl);
-    print_bundle(bndl);
-    send_bundle(bndl, LORA);
-    sd_save_bundle("Log0711.csv", bndl, 0, 3);
-    //  read_all_from_file("newlog");
-    
-    //  heat(2500);
-   delay(6000); //send data per 1 min
-  
-  #endif // of is_node
+	#if is_node == 1
+	measure_sensors();
+	package_data(bndl);
+	print_bundle(bndl);
+	send_bundle(bndl, LORA);
+	sd_save_bundle("Log0711.csv", bndl, 0, 3);
+	
+	//  heat(2500);
+	delay(60000); //send data per 1 min
+	 
+	#endif // of is_node
 }
 
 
