@@ -14,7 +14,7 @@
 // ================================================================
 
 struct state_sapflow_t {
-	float temp0, temp1, diff;
+	float temp0, temp1, temp_diff;
 };
 
 // ================================================================ 
@@ -31,12 +31,13 @@ struct state_sapflow_t state_sapflow;
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-
+#if is_node == 1
 void package_sapflow(OSCBundle *bndl, char packet_header_string[]);
 void measure_sapflow();
 double voltTotemp(double vout);
 void heat(uint16_t pulse);
-
+#endif
+void run_sapflowmeter();
 
 // ================================================================ 
 // ===                          SETUP                           === 
@@ -48,16 +49,20 @@ void heat(uint16_t pulse);
 //
 void setup_sapflow() 
 {
-	setup_sht31d();
-
-	pinMode(HEATPIN,OUTPUT);
-	lastUpdate = millis();
+  #if is_node == 1
+  	setup_sht31d();
+  
+  	pinMode(HEATPIN,OUTPUT);
+  	lastUpdate = millis();
+  #endif
 }
 
 
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
+
+#if is_node == 1
 
 // --- SAP FLOW METER
 //Convert voltage output to temperature value
@@ -126,8 +131,42 @@ void measure_sapflow()
 	temp = map(temp, 0, 4095, 0, 3300);//map these to mV value
 	state_sapflow.temp1 = voltTotemp(temp);
 
-	state_sapflow.diff = state_sapflow.temp0 - state_sapflow.temp1;
-	if (state_sapflow.diff < 0) {
-		state_sapflow.diff *= -1;
+	state_sapflow.temp_diff = state_sapflow.temp0 - state_sapflow.temp1;
+	if (state_sapflow.temp_diff < 0) {
+		state_sapflow.temp_diff *= -1;
 	}
 }
+
+
+#endif // of is_node == 1
+
+
+void run_sapflowmeter(OSCBundle *bndl)
+{
+    #if is_hub == 1
+  
+    // Receive bundles, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
+      receive_bundle(bndl, LORA);
+  
+    if (!bundle_empty(bndl)) {
+      print_bundle(bndl);
+      send_bundle(bndl, PUSHINGBOX);
+  
+    }
+  #endif // of is_hub
+
+  #if is_node == 1
+    measure_sensors();
+    package_data(bndl);
+    print_bundle(bndl);
+    send_bundle(bndl, LORA);
+    sd_save_bundle("Log0711.csv", bndl, 0, 3);
+    //  read_all_from_file("newlog");
+    
+    //  heat(2500);
+   delay(6000); //send data per 1 min
+  
+  #endif // of is_node
+}
+
+
