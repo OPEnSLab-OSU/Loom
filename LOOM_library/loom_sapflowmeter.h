@@ -2,7 +2,6 @@
 // ===                        LIBRARIES                         ===
 // ================================================================
 
-// test comment
 
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
@@ -14,7 +13,7 @@
 // ================================================================
 
 struct state_sapflow_t {
-	float temp0, temp1, diff;
+	float temp0, temp1, temp_diff;
 };
 
 // ================================================================ 
@@ -48,16 +47,20 @@ void heat(uint16_t pulse);
 //
 void setup_sapflow() 
 {
-	setup_sht31d();
+	#if is_node == 1
+		setup_sht31d();
 
-	pinMode(HEATPIN,OUTPUT);
-	lastUpdate = millis();
+		pinMode(HEATPIN,OUTPUT);
+		lastUpdate = millis();
+	#endif
 }
 
 
 // ================================================================ 
 // ===                        FUNCTIONS                         === 
 // ================================================================
+
+#if is_node == 1
 
 // --- SAP FLOW METER
 //Convert voltage output to temperature value
@@ -131,3 +134,6 @@ void measure_sapflow()
 		state_sapflow.diff *= -1;
 	}
 }
+
+
+#endif // of #if is_node == 1

@@ -41,15 +41,19 @@ void loop()
 
 
 // 	// Dummy Sapflow Data
-	// String parameters[7] = {"Test", "Battery", "Temp1", "Temp2", "Temp_Diff", "Temp_SHT31D", "Humidity_SHT31D"};
-	// String data[7] = {"abc", "4.27", "23.0", "25.2", "2.2", "30.0", "1024"};
-	// convert_assoc_arrays_to_bundle(parameters, data, &bndl, "/some/packet/header", 7, SINGLEMSG);
-	// print_bundle(&bndl);
+	String parameters[7] = {"Test", "Battery", "Temp1", "Temp2", "Temp_Diff", "Temp_SHT31D", "Humidity_SHT31D"};
+	String data[7] = {"abc", "4.27", "23.0", "25.2", "2.2", "30.0", "1024"};
+	convert_assoc_arrays_to_bundle(parameters, data, &bndl, "/some/packet/header", 7, SINGLEMSG);
+	print_bundle(&bndl);
 	LOOM_DEBUG_Println("Starting main loop");
 	// LOOM_DEBUG_Println("Delaying to allow Fona to connect");
 	// delay(15000);
 	// LOOM_DEBUG_Println("Done delaying");
 
+	send_bundle(&bndl, PUSHINGBOX);
+	delay(5000);
+	send_bundle(&bndl, PUSHINGBOX);
+	delay(5000);
 	send_bundle(&bndl, PUSHINGBOX);
 	while(1);
 
