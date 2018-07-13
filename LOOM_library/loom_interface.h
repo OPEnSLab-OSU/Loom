@@ -9,6 +9,7 @@ void measure_sensors();
 void package_data(OSCBundle *send_bndl);
 void send_bundle(OSCBundle *send_bndl, Platform platform, char* file);
 void send_bundle(OSCBundle *send_bndl, Platform platform);
+bool bundle_empty(OSCBundle *bndl);
 
 
 // void export_data(OSCBundle *send_bndl, Platform platform, char* file);
@@ -163,14 +164,14 @@ void measure_sensors()
 	#endif
 	
 	//	Measure multiplexer sennsors
-	#if is_tca9548a == 1
+	#if is_multiplexer == 1
 		measure_tca9548a();
 		if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
 			update_sensors();
 			LOOM_DEBUG_Println("Update MuxShield Sensorlist");
 			state_tca9548a.last_update_time = millis();
 		}
-	#endif //is_tca9548a
+	#endif //is_multiplexer
 	
 	// Update MPU6050 Data
 	#if is_ishield == 1 && is_mpu6050 == 1
@@ -233,9 +234,9 @@ void package_data(OSCBundle *send_bndl)
 	#endif
 
 	//	Add multiplexer sensor data
-	#if is_tca9548a == 1
+	#if is_multiplexer == 1
 		package_tca9548a(send_bndl,configuration.packet_header_string);
-	#endif //is_tca9548a
+	#endif //is_multiplexer
 
 	// Update MPU6050 Data
 	#if is_ishield == 1 && is_mpu6050 == 1
