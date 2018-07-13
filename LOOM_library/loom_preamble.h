@@ -81,13 +81,18 @@
 
 
 // Enumerate possible platform types
-enum Platform {
+enum CommPlatform {
 	WIFI,
 	LORA,
-	NRF,
-	CELLULAR,
+	NRF
+	// CELLULAR  
+};
+
+enum LogPlatform {
 	SDCARD,
-	PUSHINGBOX
+	PUSHINGBOX,
+	// ADAFRUITIO,
+	SERIAL_MON
 };
 
 // Macros for printing to Serial iff Loom Debug is enabled
@@ -101,13 +106,13 @@ enum Platform {
 #define LOOM_DEBUG_Println4(W,X,Y,Z) LOOM_DEBUG_Print(W); LOOM_DEBUG_Print(X); LOOM_DEBUG_Print(Y); LOOM_DEBUG_Println(Z)
 
 
-void receive_bundle(OSCBundle *bndl, Platform platform);
+void receive_bundle(OSCBundle *bndl, CommPlatform platform);
 void process_bundle(OSCBundle *bndl);
 void measure_sensors();
 void package_data(OSCBundle *send_bndl);
-void send_bundle(OSCBundle *send_bndl, Platform platform, char* file);
-void send_bundle(OSCBundle *send_bndl, Platform platform);
-
+void send_bundle(OSCBundle *send_bndl, CommPlatform platform);
+void log_bundle(OSCBundle *log_bndl, LogPlatform, char* file);
+void log_bundle(OSCBundle *log_bndl, LogPlatform);
 
 
 // ================================================================

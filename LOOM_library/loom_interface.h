@@ -3,19 +3,16 @@
 // ================================================================
 
 // Main loop interface functions
-void receive_bundle(OSCBundle *bndl, Platform platform);
+void receive_bundle(OSCBundle *bndl, CommPlatform platform);
 void process_bundle(OSCBundle *bndl);
 void measure_sensors();
 void package_data(OSCBundle *send_bndl);
-// void send_bundle(OSCBundle *send_bndl, Platform platform, char* file);
-void send_bundle(OSCBundle *send_bndl, Platform platform);
-void log_bundle(OSCBundle *send_bndl, Platform platform, char* file);
-void log_bundle(OSCBundle *send_bndl, Platform platform);
+void send_bundle(OSCBundle *send_bndl, CommPlatform platform);
+void log_bundle(OSCBundle *send_bndl, LogPlatform platform, char* file);
+void log_bundle(OSCBundle *send_bndl, LogPlatform platform);
 bool bundle_empty(OSCBundle *bndl);
 
 
-// void export_data(OSCBundle *send_bndl, Platform platform, char* file);
-// void export_data(OSCBundle *send_bndl, Platform platform);
 // void export_data(String key_values [], int len, Platform platform, char* file);
 // void export_data(String key_values [], int len, Platform platform);
 // template <typename T>
@@ -39,7 +36,7 @@ void additional_loop_checks();
 // @param platform   The wireless platform to receive on, the values are
 //                    encoded to a Platform enum to reduce chance for errors
 // 
-void receive_bundle(OSCBundle *bndl, Platform platform)
+void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 {
 	bndl->empty();
 
@@ -173,12 +170,12 @@ void measure_sensors()
 			LOOM_DEBUG_Println("Update MuxShield Sensorlist");
 			state_tca9548a.last_update_time = millis();
 		}
-	#endif //is_multiplexer
+	#endif
 	
 	// Update MPU6050 Data
 	#if is_ishield == 1 && is_mpu6050 == 1
 		measure_mpu6050();      // Now measure MPU6050, update values in global registers 
-	#endif //is_ishield && is_mpu6050
+	#endif 
 
 	// Update Thermocouple
 	#if is_max31856 == 1
@@ -273,7 +270,6 @@ void package_data(OSCBundle *send_bndl)
 // --- SEND BUNDLE ---
 //
 // Sends a packaged bundle on the specified platform
-// Is overloaded, 
 // 
 // @param send_bndl  The bundle to be sent
 // @param platform   The wireless platform to send on, the values are
@@ -281,7 +277,7 @@ void package_data(OSCBundle *send_bndl)
 // @param file       The file name when saving to SD card
 // 
 // void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
-void send_bundle(OSCBundle *send_bndl, Platform platform)
+void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
 {
 	switch(platform) {
 		#if is_wifi == 1
@@ -310,21 +306,6 @@ void send_bundle(OSCBundle *send_bndl, Platform platform)
 				break;
 		#endif
 		
-
-		// #if is_sd == 1
-		// 	case SDCARD : 
-		// 		LOOM_DEBUG_Println("Saving bundle");
-		// 		sd_save_bundle(file, send_bndl, 0, sd_save_time_format);
-		// 		break;
-		// #endif
-
-		// #if is_pushingbox == 1
-		// 	case PUSHINGBOX : 
-		// 		LOOM_DEBUG_Println("Sending bundle data to PushingBox");
-		// 		sendToPushingBox(send_bndl);
-		// 		break;
-		// #endif
-
 		#if LOOM_DEBUG == 1
 		default :
 				Serial.println("That platform is not enabled for sending");
@@ -332,112 +313,64 @@ void send_bundle(OSCBundle *send_bndl, Platform platform)
 	} // of switch
 }
 
-// void send_bundle(OSCBundle *send_bndl, Platform platform)
-// {
-// 	send_bundle(send_bndl, platform, NULL);
-// }
 
 
-
-
-void log_bundle(OSCBundle *send_bndl, Platform platform, char* file)
+// --- LOG BUNDLE ---
+//
+// Used to log a bundle to SD card, Google sheets,
+// Adafruit IO, or the serial monitor
+//
+// @param log_bndl  The bndl to be logged
+// @param platform  On which platform to log the bundle
+// @param file      If logging to SD card, name of file to save to
+//
+void log_bundle(OSCBundle *log_bndl, LogPlatform platform, char* file)
 {
+	if ( (!file) && (platform == SDCARD) ) { 
+		LOOM_DEBUG_Println("Logging to SD card requires filename");
+		return;
+	}
+
 	switch(platform) {
 		#if is_sd == 1
 			case SDCARD : 
 				LOOM_DEBUG_Println("Saving bundle");
-				sd_save_bundle(file, send_bndl, 0, sd_save_time_format); 
-				return;
-		#endif
-
-		#if is_pushingbox == 1
-			case PUSHINGBOX : LOOM_DEBUG_Println("Error: PushingBox doesn't take a filename"); 
-			return;	
-		#endif
-	} // of switch
-	LOOM_DEBUG_Println("That platform is not enabled for exporting");
-}
-
-
-void log_bundle(OSCBundle *send_bndl, Platform platform)
-{
-	switch(platform) {
-		#if is_sd == 1
-			case SDCARD : 
-				LOOM_DEBUG_Println("Error: Saving to SD card requires filename"); 
+				sd_save_bundle(file, log_bndl, 0, sd_save_time_format); 
 				return;
 		#endif
 
 		#if is_pushingbox == 1
 			case PUSHINGBOX : 
 				LOOM_DEBUG_Println("Sending bundle data to PushingBox");
-				sendToPushingBox(send_bndl);
+				sendToPushingBox(log_bndl);
+				return;	
+		#endif
+
+		// #if is_adafruitio == 1
+		// 	case ADAFRUITIO : 
+		// 		LOOM_DEBUG_Println("Error: Adafruit IO doesn't take a filename"); 
+		// 		return;	
+		// #endif
+
+		#if LOOM_DEBUG == 1
+			case SERIAL_MON :
+				print_bundle(log_bndl);
 				return;
 		#endif
+
+		#if LOOM_DEBUG == 1
+		default :
+				Serial.println("That platform is not enabled for logging");
+		#endif 
 	} // of switch
 	LOOM_DEBUG_Println("That platform is not enabled for exporting");
 }
 
 
-// void export_data(String key_values [], int len, Platform platform, char* file)
-// {
-// 	switch(platform) {
-// 		#if is_sd == 1
-// 			case SDCARD : 
-// 				LOOM_DEBUG_Println("Saving bundle");
-// 				sd_save_array(file, key_values, len, ',', sd_save_time_format);
-// 				return;
-// 		#endif
-
-// 		#if is_pushingbox == 1
-// 			case PUSHINGBOX : LOOM_DEBUG_Println("Error: PushingBox doesn't take a filename"); return;
-// 		#endif
-// 	} // of switch
-// 	LOOM_DEBUG_Println("That platform is not enabled for exporting");
-// }
-
-
-
-// void export_data(String key_values [], int len, Platform platform)
-// {
-// 	switch(platform) {
-// 		#if is_sd == 1
-// 			case SDCARD : LOOM_DEBUG_Println("Error: Saving to SD card requires filename"); return;
-// 		#endif
-
-// 		#if is_pushingbox == 1
-// 			case PUSHINGBOX : 
-// 				LOOM_DEBUG_Println("Sending bundle data to PushingBox");
-// 				OSCBundle tmpBndl;
-// 				convert_key_value_array_to_bundle(key_values, &tmpBndl, "/packet/header", len, SINGLEMSG);
-// 				sendToPushingBox(&tmpBndl);
-// 				return;
-// 		#endif
-// 	} // of switch
-// 	LOOM_DEBUG_Println("That platform is not enabled for exporting");
-// }
-
-
-// template <typename T>
-// void export_data(String keys [], T values [], int len, Platform platform)
-// {
-// 	switch(platform) {
-// 		#if is_sd == 1
-// 			case SDCARD : LOOM_DEBUG_Println("Error: Saving to SD takes only one array at a time"); return;
-// 		#endif
-
-// 		#if is_pushingbox == 1
-// 			case PUSHINGBOX : 
-// 				LOOM_DEBUG_Println("Sending bundle data to PushingBox");
-// 				OSCBundle tmpBndl;
-// 				convert_assoc_arrays_to_bundle(keys, values, &tmpBndl, "/packet/header", len, SINGLEMSG);
-// 				sendToPushingBox(&tmpBndl);
-// 				return;
-// 		#endif
-// 	} // of switch
-// 	LOOM_DEBUG_Println("That platform is not enabled for exporting");
-// }
-
+void log_bundle(OSCBundle *log_bndl, LogPlatform platform)
+{
+	log_bundle(log_bndl, platform, NULL);
+}
 
 
 
