@@ -16,22 +16,17 @@
 // ===                       DEFINITIONS                        === 
 // ================================================================
 #define chipSelect 10 	// Adafruit Feathers use GPIO 10
+						// This can be changed if also using Ethernet 
+						// Featherwing which uses the same CS pin
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================ 
 
-// struct config_sd_t {
-// }; 
-
-// struct state_sd_t {
-// };
-
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-// struct config_sd_t configuration;
-// struct state_sd_t state_sd;
+
 File sdFile;
 int SD_logging = 0; // 0: off, 1: log bundles received
 
@@ -39,11 +34,10 @@ int SD_logging = 0; // 0: off, 1: log bundles received
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void setup_sd();
-void sd_card_info();
 void sd_delete_file(char* file);
 void sd_list_files();
-bool sd_read_all_from_file(char* file);
-
+bool sd_dump_file(char* file);
+void printDirectory(File dir, int numTabs);
 void sd_write_timestamp(char* file, int timestamp, char delimiter);
 
 template <typename T>
@@ -85,18 +79,25 @@ void setup_sd()
 // ===                        FUNCTIONS                         ===
 // ================================================================
 
-void sd_card_info()
-{
 
-}
-
+// --- SD DELETE FILE ---
+//
 // Delete a file on SD card if it exists
+//
+// @param file  The file to be deleted
+// 
 void sd_delete_file(char* file) 
 {
 	SD.remove(file);
 }
 
+
+// --- SD EMPTY FILE ---
+//
 // Empty a file on SD card
+//
+// @param file  The file to be emptied
+// 
 void sd_empty_file(char* file)
 {
 	SD.remove(file);
@@ -104,11 +105,18 @@ void sd_empty_file(char* file)
 	sdFile.close();
 }
 
+
+// --- SD LIST FILES
+// 
+// Lists all the files on the SD card
+// 
 void sd_list_files()
 {
-
+	printDirectory(SD.open("/"), 0);
 }
-// --- SD READ FROM FILE --- 
+
+
+// --- SD DUMP FILE --- 
 //
 // Attempts to read all of the contents of a file
 // on the SD card
@@ -117,7 +125,7 @@ void sd_list_files()
 //
 // @return True if no error
 //
-bool sd_read_all_from_file(char* file) 
+bool sd_dump_file(char* file) 
 {
 	sdFile = SD.open(file);
 	if (sdFile) {
@@ -138,9 +146,19 @@ bool sd_read_all_from_file(char* file)
 
 
 
-// This is just a helper function,
-// expects file to be open already
+
 #if is_rtc == 1
+// --- 	SD WRITE TIMESTAMP ---
+//	
+// Writes a timestamp to a currently opened file
+//  This is just a helper function,
+//  expects file to be open already
+// Also requires that RTC be enabled
+// 
+// @param file       File to write timestamp to
+// @param timestamp  Formatting of timestamp
+// @delimiter        Delimiter if timestamp is two fields
+//
 void sd_write_timestamp(char* file, int timestamp, char delimiter)
 {
 	switch (timestamp) {
@@ -164,28 +182,6 @@ void sd_write_timestamp(char* file, int timestamp, char delimiter)
 }
 #endif
 
-
-
-
-// // --- SD READ BUNDLE
-// bool sd_read_bundle(char *file, OSCBundle *bndl)
-// {
-
-// }
-
-// --- SD SAVE BUNDLE
-// bool sd_save(char *file, OSCBundle *bndl)
-// {
-// 	Serial.println("sd save bundle");
-// 	char osc_str[255];
-// 	memset(osc_str, '\0', sizeof(osc_str));
-// 	convert_OSC_bundle_to_string(bndl, osc_str);
-
-// 	LOOM_DEBUG_Println(osc_str);
-// 	LOOM_DEBUG_Println2("osc_str length: ", osc_str);
-
-// 	sd_write_string(file, osc_str);
-// }
 
 
 template <typename T>
@@ -246,10 +242,11 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 }
 
 
-// Could convert to array first
-// Print as OSC string
-// Could print in hierarchical format like print_bundle
 
+// --- SD SAVE BUNDLE --- 
+//
+// Saves a bundle to SD card in 1 of 4 formats
+//
 // Format options
 //  0: Smart Save as comma separated array of data on (if in key-value single/mulit-msg or single message format)
 //       First row becomes a header, subsequent rows line up beneath columns
@@ -257,6 +254,11 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 //  1: Save as comma separated array of data on (if in key-value single/mulit-msg or single message format)
 //  2: Hierarchical output (best for visually understanding bundle)
 //  3: Save as osc translated to string
+//
+// @param file       The file to save bundle to
+// @param bndl       The bunlde to be saved
+// @param format     How to format the saved bundle in the SD card file
+// @param timestamp  Format of timestamp (if any)
 bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 {
 	sdFile = SD.open(file, FILE_WRITE);
@@ -399,10 +401,6 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 
 
 
-
-
-
-
 // --- ENABLE SD LOGGING ---
 //
 // Used if message routed from Max instructs
@@ -433,8 +431,33 @@ void set_SD_logging(OSCMessage &msg)
 
 
 
-
-
+// --- PRINT DIRECTORY
+//
+// Helper function to list files on SD card
+//
+void printDirectory(File dir, int numTabs) 
+{
+	while (true) {
+		File entry =  dir.openNextFile();
+		if (! entry) {
+			// no more files
+			break;
+		}
+		for (uint8_t i = 0; i < numTabs; i++) {
+			Serial.print('\t');
+		}
+		Serial.print(entry.name());
+		if (entry.isDirectory()) {
+			Serial.println("/");
+			printDirectory(entry, numTabs + 1);
+		} else {
+			// files have sizes, directories do not
+			Serial.print("\t\t");
+			Serial.println(entry.size(), DEC);
+		}
+		entry.close();
+	}
+}
 
 
 
