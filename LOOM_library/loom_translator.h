@@ -26,11 +26,11 @@ union data_value { // Used in translation between OSC and strings
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 
-#if LOOM_DEBUG == 1
+// #if LOOM_DEBUG == 1
 	void print_bundle(OSCBundle *bndl);
 	template<typename T> 
 	void print_array(T data [], int len, int format);
-#endif
+// #endif
 	int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
 	bool bundle_empty(OSCBundle *bndl);
 String get_data_value(OSCMessage* msg, int pos);
@@ -107,40 +107,41 @@ void append_to_bundle(OSCBundle *bndl, T elements [], int count);
 //
 // @param bndl  An OSC bundle to be printed
 //
-#if LOOM_DEBUG == 1
 void print_bundle(OSCBundle *bndl)
 {
-	char buf[50];
-	char data_type;
-	LOOM_DEBUG_Println2("\nBundle Size: ", bndl->size());
-	OSCMessage *msg;
-	
-	for (int i = 0; i < bndl->size(); i++) {
-		msg = bndl->getOSCMessage(i);
-		msg->getAddress(buf, 0);
-		LOOM_DEBUG_Println4("Address ", i, ": ", buf);
+	#if LOOM_DEBUG == 1
+		char buf[50];
+		char data_type;
+		LOOM_DEBUG_Println2("\nBundle Size: ", bndl->size());
+		OSCMessage *msg;
+		
+		for (int i = 0; i < bndl->size(); i++) {
+			msg = bndl->getOSCMessage(i);
+			msg->getAddress(buf, 0);
+			LOOM_DEBUG_Println4("Address ", i, ": ", buf);
 
-		for (int j = 0; j < msg->size(); j++) {
-			data_type = msg->getType(j);
-			LOOM_DEBUG_Print3("Value ", j, ": ");
+			for (int j = 0; j < msg->size(); j++) {
+				data_type = msg->getType(j);
+				LOOM_DEBUG_Print3("Value ", j, ": ");
 
-			switch(data_type) {
-				case 'f':
-					LOOM_DEBUG_Println2("(f) ", msg->getFloat(j));
-					break;
-				case 'i':
-					LOOM_DEBUG_Println2("(i) ", msg->getInt(j));
-					break;
-				case 's':
-					msg->getString(j, buf, 50);
-					LOOM_DEBUG_Println2("(s) ", buf);
-					break;
-				default:
-					break;
+				switch(data_type) {
+					case 'f':
+						LOOM_DEBUG_Println2("(f) ", msg->getFloat(j));
+						break;
+					case 'i':
+						LOOM_DEBUG_Println2("(i) ", msg->getInt(j));
+						break;
+					case 's':
+						msg->getString(j, buf, 50);
+						LOOM_DEBUG_Println2("(s) ", buf);
+						break;
+					default:
+						break;
+				}
 			}
 		}
-	}
-	Serial.println();
+		Serial.println();
+	#endif
 }
 
 
@@ -151,14 +152,16 @@ void print_bundle(OSCBundle *bndl)
 template<typename T> 
 void print_array(T data [], int len, int format)
 {
-	for (int i = 0; i < len; i++) {
-		if (format == 1) { Serial.println(data[i]); }
-		if (format  > 1) { Serial.print(data[i]); Serial.print(" "); }
-		if ((format > 2) && (i%5==0)) { Serial.println(); }
-	}
+	#if LOOM_DEBUG == 1
+		for (int i = 0; i < len; i++) {
+			if (format == 1) { Serial.println(data[i]); }
+			if (format  > 1) { Serial.print(data[i]); Serial.print(" "); }
+			if ((format > 2) && (i%5==0)) { Serial.println(); }
+		}
+	#endif
 }
 
-#endif // of LOOM_DEBUG == 1
+// #endif // of LOOM_DEBUG == 1
 
 
 
