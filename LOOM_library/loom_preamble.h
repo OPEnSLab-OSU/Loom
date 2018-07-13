@@ -41,6 +41,43 @@
 	#define INIT_PORT 9448
 #endif
 
+// --- WiFi UDP Ports ---
+#if is_wifi == 1
+	#define COMMON_PORT     9440	// Expected by Max to be 9440, don't change unless using custom Max patches
+#endif
+
+
+// --- Automatically Set Device Name ---
+#if AUTO_NAME == 1
+	// Make sure only one device type is enabled
+	#if ( (is_ishield) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_multiplexer) ) > 1
+		autoname_device_type_error	// this will force an error if too many sensor/actuator were defined (needs to be = 1 for autoname to work)
+	#endif
+
+	// Automatically set device name
+	#if   is_ishield 
+		#define DEVICE "Ishield"
+	#elif num_servos > 0
+		#define DEVICE "ServoShield"
+	#elif num_steppers > 0
+		#define DEVICE "Stepper"
+	#elif is_relay
+		#define DEVICE "RelayShield"
+	#elif is_decagon
+		#define DEVICE "Decagon"
+	#elif is_multiplexer
+		#define DEVICE "MuxShield"
+	#elif is_sapflow
+		#define DEVICE "Sapflow"
+	#else
+		#define DEVICE "Unknown"
+	#endif
+#else
+	// --- Custom Device Identification --- 
+	#define DEVICE CUSTOM_NAME // The device name (can be changed), used only if not using automatic device name
+#endif
+
+
 
 
 // Enumerate possible platform types
@@ -106,7 +143,7 @@ char global_packet_header_string[80]; // Sometimes functions need to access the 
 #endif
 
 #if is_relay == 0
-	#define button 10               // Using on-board button, specify attached pin, transmitting
+	#define button BUTTON_PIN               // Using on-board button, specify attached pin, transmitting
 #endif
 #ifdef is_sleep_period
 	#include <Adafruit_SleepyDog.h> // This must be included if you are transmitting at timed intervals
