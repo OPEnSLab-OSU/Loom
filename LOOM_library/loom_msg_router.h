@@ -4,6 +4,15 @@
 
 void msg_router(OSCMessage &msg, int addrOffset);       
 
+// ================================================================ 
+// ===               CUSTOM FUNCTION PROTOTYPES                 === 
+// ================================================================
+
+// Add the prototypes of any custom functions that you want to be 
+// callable by the message router when it finds a message with 
+// the corresponding address
+
+
 // ================================================================
 // ===                     MESSAGE ROUTER                       ===
 // ================================================================
@@ -84,6 +93,6 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	msg.dispatch("/SaveConfig", 			save_config, 			addrOffset);
 
 
-	
+
 }
 
