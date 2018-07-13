@@ -70,7 +70,7 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 	}
 
 	LOOM_DEBUG_Println("Setting up ethernet");
-	#if hub_node_type == 0 // if hub
+	#if hub_node_type == 0 && is_ethernet == 1 // if hub
 		if(!setup_ethernet()) {
 			LOOM_DEBUG_Println("Failed to setup ethernet");
 		}
