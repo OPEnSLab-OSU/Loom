@@ -89,10 +89,8 @@ bool nrf_send_bundle(OSCBundle *bndl)
 	RF24NetworkHeader header(NRF_HUB_ADDRESS);
 	bool is_sent = network.write(header,message,strlen(message));
 	#if LOOM_DEBUG == 1
-		if (is_sent) 
-			Serial.println("NRF Bundle Send Suceeded!");
-		else 		
-			Serial.println("NRF Bundle Send Failed!");
+		if (is_sent) Serial.println("NRF Bundle Send Suceeded!");
+		else 	     Serial.println("NRF Bundle Send Failed!");
 	#endif
 	return is_sent;
 }
