@@ -132,7 +132,9 @@ String get_data_value(OSCMessage* msg, int pos);
 #if LOOM_DEBUG == 1
 	void print_bundle(OSCBundle *bndl);
 #endif
-int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
+int get_bundle_bytes(OSCBundle *bndl); 			
+
+
 
 // ================================================================ 
 // ===                  INCLUDE DEVICE FILES                    === 

@@ -34,7 +34,7 @@ struct state_sapflow_t state_sapflow;
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-#if is_node == 1
+#if hub_node_type == 1
 void package_sapflow(OSCBundle *bndl, char packet_header_string[]);
 void measure_sapflow();
 double voltTotemp(double vout);
@@ -53,7 +53,7 @@ void run_sapflowmeter();
 //
 void setup_sapflow() 
 {
-  #if is_node == 1
+  #if hub_node_type == 1
   	setup_sht31d();
   
   	pinMode(HEATPIN,OUTPUT);
@@ -68,7 +68,7 @@ void setup_sapflow()
 // ===                        FUNCTIONS                         === 
 // ================================================================
 
-#if is_node == 1
+#if hub_node_type == 1
 
 // --- SAP FLOW METER
 //Convert voltage output to temperature value
@@ -160,7 +160,7 @@ void measure_sapflow()
 
 void run_sapflowmeter(OSCBundle *bndl)
 {
-    #if is_hub == 1
+    #if hub_node_type == 0 // if hub
     // Receive bundles, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
       receive_bundle(bndl, LORA);
   
@@ -170,7 +170,7 @@ void run_sapflowmeter(OSCBundle *bndl)
     }
   #endif // of is_hub
 
-  #if is_node == 1
+  #if hub_node_type == 1 // if node
     senddata();
     
     #if probe_type  == 1      // 0:TDM, 1: HRM    

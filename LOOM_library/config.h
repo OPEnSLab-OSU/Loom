@@ -48,9 +48,9 @@
 #define is_rtc        1		// Enable RTC functionality
 
 // --- Device Telemetry Type ---
-// #define hub_node_type     1 		// 0: Hub, 1: Node, 2 = Repeater   (this is going to be removed in the future, replaced with the following 3 options)
-#define is_hub       0		// make these two options mutually exclusive
-#define is_node      1
+#define hub_node_type     1 		// 0: Hub, 1: Node
+// #define is_hub       0		// make these two options mutually exclusive
+// #define is_node      1
 #define is_repeater  0		// Sorry, this doesn't do anything yet
 
 // --- Enabled Actuators --- 
@@ -159,7 +159,7 @@
 	#define LORA_HUB_ADDRESS 0			// Use 0-9 for SERVER_ADDRESSes
 	#define RF95_FREQ      915.0		// Hardware specific, Tx must match Rx
 
-	#if is_node == 1 					// If Node
+	#if hub_node_type == 1 					// If Node
 		#define NODE_ADDRESS 10			// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
 	#endif								// 10-19 for 0, 20 - 29 for 1, etc.
 	
@@ -170,7 +170,7 @@
 #if is_nrf == 1
 	#define NRF_HUB_ADDRESS 1			// Use 0-9 for SERVER_ADDRESSes
 	
-	#if is_node == 1
+	#if hub_node_type == 1
 		#define NRF_NODE_ADDRESS 0
 	#endif
 
@@ -182,13 +182,13 @@
 #if is_fona == 1
 	#define LOOM_DEBUG 1	// This is just temporary for now, as all Fona tests are done interactively through serial monitor
 	#define fona_test  1    // This enables the Fona interactive testing Loop, note that this will override normal 
-							//  Loom loop behavior until command to exit testing loop is issued
+							//   Loom loop behavior until command to exit testing loop is issued
 	#define fona_type 2G 	// Can be '2G' (808) or '3G' (5320A), currently only 2G is supported
 #endif
 
 
 // --- Hub Options ---
-#if is_hub == 1
+#if hub_node_type == 0
 	#define is_ethernet   1	// not necessarily always true
 	#define is_pushingbox 1 // only if Ethernet, WiFi, or cellular
 
@@ -207,17 +207,15 @@
 	#define is_sd         1
 
 
-	#if is_hub == 1
-	 	#define is_ethernet   1
-	 	#define is_pushingbox 1
-	#endif
-
-	#if is_node == 1
+	#if hub_node_type == 0       // if is hub
+		#define is_ethernet   1
+		#define is_pushingbox 1
+	#elif hub_node_type == 1     // if is node
 		#define num_analog    2      // two temperature sensors
-    #define probe_type    0      // 0:TDM, 1: HRM
+		#define probe_type    0      // 0:TDM, 1: HRM
 		#define heatpulse     2500   // For HRM probe heat pulse (e.g 2500:2.5 sec) 
 		#define is_sht31d     1      // Temperature / Humidity
-		#define senddelay     60000   // send data every 1 min
+		#define senddelay     60000  // send data every 1 min
 	#endif
 #endif 
 

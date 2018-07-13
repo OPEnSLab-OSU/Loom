@@ -24,11 +24,9 @@ SDI12 mySDI12(DATAPIN);
 
 String sdiResponse = "";
 String myCommand = "";
-char buf[20];
-char *p;
-float dielec_p = 0;
-float temp = 0;
-float elec_c = 0;
+char   buf[20];
+char   *p;
+float  dielec_p = 0, temp = 0, elec_c = 0;
 
 
 // ================================================================ 

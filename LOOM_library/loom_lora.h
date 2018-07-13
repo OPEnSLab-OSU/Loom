@@ -55,7 +55,7 @@ bool lora_send_bundle_fragment(OSCBundle *bndl);
 //
 void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager) 
 {
-	#if is_hub == 0 // if hub
+	#if hub_node_type == 0 // if hub
 		pinMode(8, INPUT_PULLUP);
 	#endif
 
@@ -70,7 +70,7 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 	}
 
 	LOOM_DEBUG_Println("Setting up ethernet");
-	#if is_hub == 0
+	#if hub_node_type == 0 // if hub
 		if(!setup_ethernet()) {
 			LOOM_DEBUG_Println("Failed to setup ethernet");
 		}
