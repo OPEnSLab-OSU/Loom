@@ -217,7 +217,7 @@
 	#if is_node == 1
 		#define num_analog    2      // two temperature sensors
     #define probe_type    0      // 0:TDM, 1: HRM
-		#define heatpulse     2500   // For HRM probe heat pulse (e.g 2500:2.5 sec)
+		#define heatpulse     2500   // For HRM probe heat pulse (e.g 2500:2.5 sec) 
 		#define is_sht31d     1      // Temperature / Humidity
 		#define senddelay     60000   // send data every 1 min
 	#endif
@@ -227,11 +227,11 @@
 #if is_pushingbox == 1	
 
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	   // Google Spreadsheet ID 
-	// #define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
-	#define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"
+	#define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
+//  #define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"
 								// (found betweeen the "docs.google.com/spreadsheets/d/" and 
 								// "/edit..." in the URL; random string of characters)
-	#define tab_id  "15"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
+	#define tab_id  "temp_data"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
 								// can be number or string
 
 	// char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
