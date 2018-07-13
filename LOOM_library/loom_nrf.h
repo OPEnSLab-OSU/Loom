@@ -100,7 +100,7 @@ bool nrf_send_bundle_fragment(OSCBundle *bndl)
 	LOOM_DEBUG_Println2("Bundle of size ", get_bundle_bytes(bndl));
 	LOOM_DEBUG_Println(" Being split into smaller bundles");
 
-	OSCBundle tmp_bndl;
+	OSCBundle  tmp_bndl;
 	OSCMessage *tmp_msg;
 
 	for (int i = 0; i < bndl->size(); i++) {
