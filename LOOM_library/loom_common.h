@@ -5,7 +5,7 @@
 // ================================================================
 void Loom_begin();
 void set_instance_num(OSCMessage &msg);
-void msg_router(OSCMessage &msg, int addrOffset);       
+// void msg_router(OSCMessage &msg, int addrOffset);       
 #if (is_wifi == 1) && defined(button)    // look into other behaviors if other platforms are enabled instead
 	void check_button_held();
 #endif
@@ -149,66 +149,66 @@ void Loom_begin()
 
 
 
-// --- MESSAGE ROUTER ---
-//
-// Used to route OSC messages to the correct function to handle it
-// Preprocessor only includes routing for available functionality
-//
-// @param msg         OSC message to route subroutine that handles it
-// @param addrOffset  used to determine where to start check of message header string
-//
-void msg_router(OSCMessage &msg, int addrOffset) 
-{
-	#if LOOM_DEBUG == 1
-		char buffer[100];
-		msg.getAddress(buffer, addrOffset);
-		Serial.print("Parsed ");
-		Serial.println(buffer);
-	#endif
+// // --- MESSAGE ROUTER ---
+// //
+// // Used to route OSC messages to the correct function to handle it
+// // Preprocessor only includes routing for available functionality
+// //
+// // @param msg         OSC message to route subroutine that handles it
+// // @param addrOffset  used to determine where to start check of message header string
+// //
+// void msg_router(OSCMessage &msg, int addrOffset) 
+// {
+// 	#if LOOM_DEBUG == 1
+// 		char buffer[100];
+// 		msg.getAddress(buffer, addrOffset);
+// 		Serial.print("Parsed ");
+// 		Serial.println(buffer);
+// 	#endif
 
-	#if is_multiplexer
-		if (msg.fullMatch("/GetSensors", addrOffset)) {
-			msg.add(configuration.packet_header_string);
-			LOOM_DEBUG_Println("Got a request for sensor list");
-		}
-		msg.dispatch("/GetSensors",   		send_sensor_list, 		addrOffset);
-	#endif
-	#if num_servos > 0  
-		msg.dispatch("/Servo/Set",    		handle_servo_msg, 		addrOffset);
-	#endif
-	#if num_steppers > 0
-		msg.dispatch("/Stepper/Set",  		handle_stepper_msg, 	addrOffset);
-	#endif
-	#if is_relay == 1
-		msg.dispatch("/Relay/State",  		handle_relay_msg, 		addrOffset);
-	#endif
-	#if is_mpu6050 == 1 && is_ishield == 1
-		msg.dispatch("/MPU6050/cal",  		calMPU6050_OSC, 		addrOffset);
-	#endif
-	#if is_neopixel == 1
-		msg.dispatch("/Neopixel",     		set_color, 				addrOffset);
-	#endif
-	#if is_pushingbox == 1 && hub == 1
-		msg.dispatch("/SendToPB", 			sendToPushingBox, 		addrOffset);
-	#endif
+// 	#if is_multiplexer
+// 		if (msg.fullMatch("/GetSensors", addrOffset)) {
+// 			msg.add(configuration.packet_header_string);
+// 			LOOM_DEBUG_Println("Got a request for sensor list");
+// 		}
+// 		msg.dispatch("/GetSensors",   		send_sensor_list, 		addrOffset);
+// 	#endif
+// 	#if num_servos > 0  
+// 		msg.dispatch("/Servo/Set",    		handle_servo_msg, 		addrOffset);
+// 	#endif
+// 	#if num_steppers > 0
+// 		msg.dispatch("/Stepper/Set",  		handle_stepper_msg, 	addrOffset);
+// 	#endif
+// 	#if is_relay == 1
+// 		msg.dispatch("/Relay/State",  		handle_relay_msg, 		addrOffset);
+// 	#endif
+// 	#if is_mpu6050 == 1 && is_ishield == 1
+// 		msg.dispatch("/MPU6050/cal",  		calMPU6050_OSC, 		addrOffset);
+// 	#endif
+// 	#if is_neopixel == 1
+// 		msg.dispatch("/Neopixel",     		set_color, 				addrOffset);
+// 	#endif
+// 	#if is_pushingbox == 1 && hub == 1
+// 		msg.dispatch("/SendToPB", 			sendToPushingBox, 		addrOffset);
+// 	#endif
 	
-	#if is_wifi == 1
-		msg.dispatch("/Connect/SSID",     	set_ssid,     			addrOffset);
-		msg.dispatch("/Connect/Password", 	set_pass,				addrOffset);
-		msg.dispatch("/wifiSetup/AP",     	switch_to_AP, 			addrOffset);
-		msg.dispatch("/SetPort",          	set_port,     			addrOffset);
-		msg.dispatch("/requestIP",        	broadcastIP,  			addrOffset);
-		msg.dispatch("/getNewChannel",		new_channel,  			addrOffset);
-		msg.dispatch("/SetRequestSettings",	set_request_settings, 	addrOffset);
-	#endif
+// 	#if is_wifi == 1
+// 		msg.dispatch("/Connect/SSID",     	set_ssid,     			addrOffset);
+// 		msg.dispatch("/Connect/Password", 	set_pass,				addrOffset);
+// 		msg.dispatch("/wifiSetup/AP",     	switch_to_AP, 			addrOffset);
+// 		msg.dispatch("/SetPort",          	set_port,     			addrOffset);
+// 		msg.dispatch("/requestIP",        	broadcastIP,  			addrOffset);
+// 		msg.dispatch("/getNewChannel",		new_channel,  			addrOffset);
+// 		msg.dispatch("/SetRequestSettings",	set_request_settings, 	addrOffset);
+// 	#endif
 
-	#if is_sd == 1
-		msg.dispatch("/setSDlogging",	 	set_SD_logging, 		addrOffset);
-	#endif
+// 	#if is_sd == 1
+// 		msg.dispatch("/setSDlogging",	 	set_SD_logging, 		addrOffset);
+// 	#endif
 	
-	msg.dispatch("/SetID", 					set_instance_num, 		addrOffset);
-	msg.dispatch("/SaveConfig", 			save_config, 			addrOffset);
-}
+// 	msg.dispatch("/SetID", 					set_instance_num, 		addrOffset);
+// 	msg.dispatch("/SaveConfig", 			save_config, 			addrOffset);
+// }
 
 
 
