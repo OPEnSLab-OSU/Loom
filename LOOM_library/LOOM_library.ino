@@ -28,12 +28,16 @@ void setup()
 void loop() 
 {
 	OSCBundle bndl, send_bndl; 
-
-
-	// Loop checks and sleep between iterations if enabled
+	
+	// receive_bundle(&bndl, WIFI);
+	// process_bundle(&bndl);
+	// measure_sensors();
+	// package_data(&send_bndl);
+	// send_bundle(&send_bndl, WIFI);
 	additional_loop_checks();
 	
 } // End loop section
+
 
 
 

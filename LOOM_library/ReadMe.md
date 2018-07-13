@@ -35,7 +35,7 @@ This is the primary location of the Project LOOM code, consolidated into place w
         4. [Package Data](#package-data)
         5. [Send Bundle](#send-bundle)
         6. [Additional Loop Checks](#additional-loop-checks)
-    		 [Minimal Working Example](#minimal-working-example)	
+        7. [Minimal Working Example](#minimal-working-example)	
 
 10. [SD Card Support](#sd-card-support)
 
@@ -47,7 +47,7 @@ This is the primary location of the Project LOOM code, consolidated into place w
 
 14. [Configuration Conflicts](#configuration-conflicts)
 
-  ​      
+   ​      
 
 ## Installation
 

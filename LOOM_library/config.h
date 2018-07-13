@@ -1,5 +1,5 @@
 // ================================================================ 
-// ===                         CONFIG                           === 
+// ===                   CONFIGURATION FILE                     === 
 // ================================================================
 //
 // Use this file to configure the device you are flashing the firmware of
@@ -8,11 +8,11 @@
 //
 //  Options: The top half that can be modified to change common settings
 //
-//  Advanced Options: the bottom half that is at least partially set based on  
+//  Advanced Options: the bottom section that is at least partially set based on  
 //    the top half but may be modified for more specific behavior. 
-//    Also contains other specific options that don't need to change usually
+//    Also contains other specific options that don't need to change as frequently
 //
-// defines that should not be modified by the user are
+// Definitions that should not be modified by the user are
 //   located in the library and are not present here
 
 
@@ -21,51 +21,49 @@
 // ================================================================
 
 // --- Device Identification --- 
-#define FAMILY "LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
-#define CHANNEL          7	// Channel to use. Set to 1-8 for channels A-H, respectively. Alternatively can define to -1 to used advanced option INIT_INST
-#define REQUEST_SETTINGS 0	// 1 to request channel settings from Max Channel Manager, 0 to not
-#define AUTO_NAME        1	// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
-#define CUSTOM_NAME "Custom" // This is only used if Auto_name is set to be 0
+#define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
+#define CHANNEL          7		// Channel to use. Set to 1-8 for channels A-H, respectively. Alternatively can define to -1 to used advanced option INIT_INST
+#define REQUEST_SETTINGS 0		// 1 to request channel settings from Max Channel Manager, 0 to not
+#define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
+#define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
 
 // --- Debugging --- 
-#define LOOM_DEBUG   1		// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG    1		// Set to 1 if you want Serial statements from various functions to print
 							// NOTE: serial monitor must be opened for device to setup
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform --- 
-#define is_wifi      0 		// 1 to enable WiFi
-#define is_lora      1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
-#define is_nrf       0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
-#define is_ethernet  1      // 1 to enable Ethernet (a number of options below might enable this anyway though)
-#define is_fona      0      // Fona is currently being integrated
-#define is_bluetooth 0      // Sorry, Bluetooth is not implemented yet
+#define is_wifi       0		// 1 to enable WiFi
+#define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
+#define is_ethernet   1		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
+#define is_fona       0		// 1 to enable cellular via Fona (808)
+#define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
 // --- Data Logging Platforms ---
-#define is_pushingbox 1     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
+#define is_pushingbox 1		// 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         1		// 1 to enable SD card 
 #define is_rtc        1		// Enable RTC functionality
 
 // --- Device Telemetry Type ---
-#define hub_node_type     1 		// 0: Hub, 1: Node
-// #define is_hub       0		// make these two options mutually exclusive
-// #define is_node      1
-#define is_repeater  0		// Sorry, this doesn't do anything yet
+#define hub_node_type 1		// 0: Hub, 1: Node
+#define is_repeater   0		// Sorry, this doesn't do anything yet
 
 // --- Enabled Actuators --- 
-#define num_servos   0 		// Number of servos being used (up to 8 per shield, testing has generally only been through 1 shield)
-#define num_steppers 0		// Number of stepper motors being used 
-#define is_relay     0		// 1 if relays are being used (enables two, on pins 5 and 6)
+#define num_servos    0 	// Number of servos being used (up to 8 per shield, testing has generally only been through 1 shield)
+#define num_steppers  0		// Number of stepper motors being used 
+#define is_relay      0		// 1 if relays are being used (enables two, on pins 5 and 6)
 
 // --- Enabled Sensors --- 
-#define num_analog   0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
-#define is_decagon   0		// 1 if GS3 Decagon is being used
+#define num_analog    0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
+#define is_decagon    0		// 1 if GS3 Decagon is being used
 
 // --- Prebuilt Devices ---
-#define is_ishield   0		// 1 to specify using Ishield (should enable only wifi as communication platform)
-#define is_multiplexer  0		// 1 if Multiplexer is being used. (Further customization in advanced options)
-#define is_sapflow   1
+#define is_ishield     0	// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_multiplexer 0	// 1 if Multiplexer is being used. (Further customization in advanced options)
+#define is_sapflow     0
 
 
 // --- WiFi Settings ---
@@ -76,61 +74,40 @@
 	#define DEFAULT_PASSWORD  "arduino101"		// Network password
 #endif
 
+
+
+// ================================================================
 // ================================================================ 
 // ===                    ADVANCED OPTIONS                      === 
 // ================================================================
+// ================================================================
 
-// --- Set Instance Number and UDP Port
-// (do not modify the A-H cases, only the X case, if not using channels)
-// If not using channels, then the following intial port will be used
+
+// --- Set Instance Number and UDP Port ---
+// If not using channels, then the following 
+// intial instance number port will be used
 #if CHANNEL == -1
 	#define INIT_INST    3	// Initial device instance number (normally 1-8 when using channels)
 	#define INIT_PORT 9443	// Initial device UDP port (normally 1-8 when using channels)
 #endif
 
-// --- WiFi UDP Ports ---
-#if is_wifi == 1
-	#define COMMON_PORT     9440	// Expected by Max to be 9440, don't change unless using custom Max patches
-#endif
+// --- BUTTON OPTIONS ---
+#define BUTTON_PIN 10               // Using on-board button, specify attached pin, transmitting
+									// Button is on most feathers, but may not work on 
+									// relay shield if pin 10 is used for relay
 
 
-// --- Set Device Name ---
-#if AUTO_NAME == 1
-	// Make sure only one device type is enabled
-	#if ( (is_ishield) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_multiplexer) ) > 1
-		autoname_device_type_error	// this will force an error if too many sensor/actuator were defined (needs to be < 1 for autoname to work)
-	#endif
-
-	// Automatically set device name
-	#if   is_ishield 
-		#define DEVICE "Ishield"
-	#elif num_servos > 0
-		#define DEVICE "ServoShield"
-	#elif num_steppers > 0
-		#define DEVICE "Stepper"
-	#elif is_relay
-		#define DEVICE "RelayShield"
-	#elif is_decagon
-		#define DEVICE "Decagon"
-	#elif is_multiplexer
-		#define DEVICE "MuxShield"
-	#elif is_sapflow
-		#define DEVICE "Sapflow"
-	#else
-		#define DEVICE "Unknown"
-	#endif
-#else
-	// --- Custom Device Identification --- 
-	#define DEVICE CUSTOM_NAME // The device name (can be changed), used only if not using automatic device name
-#endif
-
+// ================================================================
+// ===                PREBUILT DEVICE OPTIONS                   === 
+// ================================================================
+// These may override setting above to ensure all features of device are enabled
 
 
 // --- Multiplexer Options ---
 #if is_multiplexer == 1
 	#define UPDATE_PERIOD 5000		// Milliseconds between multiplexer sensor list being updated
 	
-	// 1 to enable sensor type
+	// 1 to enable supported sensor type
 	#define is_tsl2591         1	// Lux Sensor
 	#define is_fxos8700        1	// Accelerometer / Magnetometer
 	#define is_fxas21002       1	// Gyroscope
@@ -145,14 +122,38 @@
 #if is_ishield == 1
 	#define is_mpu6050  0			// Enables MPU6050 on Ishield
 	#define is_neopixel 1			// Toggle based on whether Neopixels are being used 
-	// #define button 10			// Usually automatically defined, uncomment if that does not happen		
 
 	#if is_neopixel == 1			// Which Ishield ports to enable Neopixels for 
-		#define NEO_0 0				// Port 0 (A0, closest to end of Ishield)
-		#define NEO_1 0				// Port 1 (A1, middle port)
-		#define NEO_2 1				// Port 2 (A2, port closest to MPU6050)
+		#define NEO_0   0			// Port 0 (A0, closest to end of Ishield)
+		#define NEO_1   0			// Port 1 (A1, middle port)
+		#define NEO_2   1			// Port 2 (A2, port closest to MPU6050)
 	#endif  
 #endif
+
+
+// --- Sapflowmeter Options ---
+#if is_sapflow
+	// #define hub_node_type 0       // 0: hub, 1: node
+	#define is_lora           1      // enable LoRa
+	#define is_rtc            1
+	#define is_sd             1
+
+	#if hub_node_type == 0       // if is hub
+		#define is_ethernet   1
+		#define is_pushingbox 1
+	#elif hub_node_type == 1     // if is node
+		#define num_analog    2      // two temperature sensors
+		#define probe_type    0      // 0:TDM, 1: HRM
+		#define heatpulse     2500   // For HRM probe heat pulse (e.g 2500:2.5 sec) 
+		#define is_sht31d     1      // Temperature / Humidity
+		#define senddelay     60000  // send data every 1 min
+	#endif
+#endif 
+
+
+// ================================================================ 
+// ===             COMMUNICATION PLATFORM OPTIONS               === 
+// ================================================================
 
 // --- LoRa Options ---
 #if is_lora == 1
@@ -177,6 +178,16 @@
 	#define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 #endif
 
+#if is_ethernet == 1
+	#include <Ethernet2.h>			// (this is needed for IPAddress object below, do not remove)
+	
+	//Use this for OPEnS Lab
+	// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
+
+	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // mac address of Ethernet port
+	IPAddress ip(128,193,56,138); 						  // device's IP address  								try to make this a string, so #include can be move to ethernet file
+#endif
+
 
 // --- FONA Options ---
 #if is_fona == 1
@@ -187,60 +198,38 @@
 #endif
 
 
+// ================================================================ 
+// ===                   TELEMETRY OPTIONS                      === 
+// ================================================================
+
 // --- Hub Options ---
 #if hub_node_type == 0
 	#define is_ethernet   1	// not necessarily always true
 	#define is_pushingbox 1 // only if Ethernet, WiFi, or cellular
 
-	// The following two defines are planned to be implemented,
-	// but are not in use currently
+	// The following two defines are planned to be implemented, but are not in use currently
 	// #define hub_input  LORA
 	// #define hub_output ETHERNET
 #endif
 
 
-// --- Sapflowmeter Options ---
-#if is_sapflow
-	// #define hub_node_type 0          // 0: hub, 1: node
-	#define is_lora       1          // enable LoRa
-	#define is_rtc        1
-	#define is_sd         1
-
-
-	#if hub_node_type == 0       // if is hub
-		#define is_ethernet   1
-		#define is_pushingbox 1
-	#elif hub_node_type == 1     // if is node
-		#define num_analog    2      // two temperature sensors
-		#define probe_type    0      // 0:TDM, 1: HRM
-		#define heatpulse     2500   // For HRM probe heat pulse (e.g 2500:2.5 sec) 
-		#define is_sht31d     1      // Temperature / Humidity
-		#define senddelay     60000  // send data every 1 min
-	#endif
-#endif 
+// ================================================================ 
+// ===                 DATA LOGGING OPTIONS                     === 
+// ================================================================
 
 // --- PushingBox Options ---
 #if is_pushingbox == 1	
-
-	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	   // Google Spreadsheet ID 
+	// Google Spreadsheet ID
+	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; random string of characters)
 	#define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
-//  #define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"
-								// (found betweeen the "docs.google.com/spreadsheets/d/" and 
-								// "/edit..." in the URL; random string of characters)
-	#define tab_id  "sheet3"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
+	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	    
+	// #define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"
 
-	// char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
+	// Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
+	#define tab_id  "sheet3"   
+
+	// Required by PushingBox, specific to each scenario
 	char device_id[]   = "v7ECCEF7A460E57A";
-#endif
-
-#if is_ethernet == 1
-	#include <Ethernet2.h>			// (this is needed for IPAddress, do not remove)
-	
-	//Use this for OPEnS Lab
-	// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
-
-	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // mac address of Ethernet port
-	IPAddress ip(128,193,56,138); 						  // device's IP address
 #endif
 
 // --- Adafruit IO Options ---
@@ -251,7 +240,7 @@
 
 // --- SD Options ---
 #if is_sd
-	// timestamp options:
+	// Timestamp formatting options:
 	// 0: none, 1: date, 2: time, 3: date+time two fields, 4: data+time combined field
 	#define sd_save_time_format 3
 #endif
@@ -263,7 +252,12 @@
 	#define is_rtc8523 1	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
 #endif
 
-// --- Delay between loops
+
+// ================================================================
+// ===              BETWEEN LOOP SLEEP OPTIONS                  === 
+// ================================================================
+
+// --- Delay between loops ---
 #if is_lora == 0 						// Cannot not use with LoRa
 	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
 										// Change the value according to the length of your desired transmission interval
@@ -271,3 +265,4 @@
 #else
 	#define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 #endif
+
