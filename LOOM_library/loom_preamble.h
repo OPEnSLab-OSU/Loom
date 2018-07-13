@@ -215,7 +215,7 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 	#include "loom_adafruit_io.h"
 #endif
 #if is_sapflow == 1
-  #include "loom_sapflowmeter.h"
+	#include "loom_sapflowmeter.h"
 #endif
 
 
@@ -223,6 +223,7 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 // Files of functions that are not specific to sensors / actuators
 #include "loom_flash.h"
 #include "loom_common.h"  		// These may refer to functions in above headers
+#include "loom_msg_router.h"
 #include "loom_interface.h"
 
 
