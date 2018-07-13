@@ -20,8 +20,12 @@ struct state_sapflow_t {
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 
-unsigned long lastUpdate;
-unsigned long currentTime;
+unsigned long lastUpdate;//heat pulse
+unsigned long currentTime;//heat pulse
+
+unsigned long startMillis;//send data
+unsigned long currentMillis;//send data
+
 bool sapflow_relay_on = false;
 
 struct state_sapflow_t state_sapflow;
@@ -34,7 +38,8 @@ struct state_sapflow_t state_sapflow;
 void package_sapflow(OSCBundle *bndl, char packet_header_string[]);
 void measure_sapflow();
 double voltTotemp(double vout);
-void heat(uint16_t pulse);
+void heat();
+void senddata();
 #endif
 void run_sapflowmeter();
 
@@ -53,6 +58,7 @@ void setup_sapflow()
   
   	pinMode(HEATPIN,OUTPUT);
   	lastUpdate = millis();
+    startMillis = millis();
   #endif
 
 }
@@ -80,28 +86,39 @@ double voltTotemp( double vout )
 	return T;
 }
 
-void heat(uint16_t pulse)
+void senddata()
 { //heatpulse = 0: TDM, heatpulse > 1: HRM
 //  int heatpulse = 1000; //http://www.open-sensing.org/sapflowmeter-blog/2018/6/4/sap-flux-heat-calculations
+  OSCBundle bndl;
+ 
+  currentMillis = millis();
+  if (currentMillis - startMillis > senddelay) {
+    measure_sensors();
+    package_data(&bndl);
+    print_bundle(&bndl);
+    send_bundle(&bndl, LORA);
+    sd_save_bundle("Log0711.csv", &bndl, 0, 3);
+    //  read_all_from_file("newlog");
+    startMillis = currentMillis;  
+  }
+}
+// --- HEAT ---
+//
+// Turn on heater every "heatpulse" seconds
+//
+void heat()
+{
+//int heatpulse = 1000; //http://www.open-sensing.org/sapflowmeter-blog/2018/6/4/sap-flux-heat-calculations
 
 	currentTime = millis();
-	if (currentTime - lastUpdate > pulse) {
+	if (currentTime - lastUpdate > heatpulse) {
 		digitalWrite(HEATPIN, sapflow_relay_on ? HIGH : LOW);
 		sapflow_relay_on = !sapflow_relay_on;
 		lastUpdate = currentTime;  
 	}
 
 }
-	
-// --- PACKAGE <MODULE> ---
-//
-// Adds OSC Message of most recent sensor readings to a provided OSC bundle
-//
-// @param bndl                  The OSC bundle to be added to
-// @param packet_header_string  The device-identifying string to prepend to OSC messages
-//   if I2C multiplexer sensor, then also
-// [@param port                  Which port of the multiplexer the device is plugged into]
-//
+
 void package_sapflow(OSCBundle *bndl, char packet_header_string[]) 
 {
 	char address_string[255];
@@ -115,7 +132,7 @@ void package_sapflow(OSCBundle *bndl, char packet_header_string[])
 }
 
 
-// --- MEASURE ANALOG ---
+// --- MEASURE Temperature ---
 //
 // Measure analog data and update analog state to most recent readings. 
 //
@@ -123,7 +140,7 @@ void measure_sapflow()
 {
 	double temp;
 
-	temp = read_analog(0);  //analog Read gives values from 0-1023 based on 0-3.3V
+	temp = read_analog(0);  //analog Read gives values from 0-1023(or 4095 at 12bit) based on 0-3.3V
 	temp = map(temp, 0, 4095, 0, 3300);//map these to mV value
 	state_sapflow.temp0 = voltTotemp(temp);
 
@@ -144,31 +161,22 @@ void measure_sapflow()
 void run_sapflowmeter(OSCBundle *bndl)
 {
     #if is_hub == 1
-  
     // Receive bundles, takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
       receive_bundle(bndl, LORA);
   
     if (!bundle_empty(bndl)) {
       print_bundle(bndl);
       send_bundle(bndl, PUSHINGBOX);
-  
     }
   #endif // of is_hub
 
   #if is_node == 1
-    measure_sensors();
-    package_data(bndl);
-    print_bundle(bndl);
-    send_bundle(bndl, LORA);
-    sd_save_bundle("Log0711.csv", bndl, 0, 3);
-    //  read_all_from_file("newlog");
+    senddata();
     
     #if probe_type  == 1      // 0:TDM, 1: HRM    
-      heat(heatpulse);
+      heat();
     #endif // of probe_type
-   
-   delay(senddelay); //send data per 1 min
-  
+
   #endif // of is_node
 }
 

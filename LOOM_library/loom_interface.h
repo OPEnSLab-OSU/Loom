@@ -200,10 +200,10 @@ void measure_sensors()
 
 	 // Get analog readings
 	#if is_sapflow == 1
-		measure_sapflow();
 		#if is_node == 1
+      measure_sapflow();
 			measure_sht31d();
-			heat(heatpulse);
+			heat();
 		#endif
 	#endif
 }
@@ -257,8 +257,8 @@ void package_data(OSCBundle *send_bndl)
 	#endif
 
 	#if is_sapflow == 1
-		package_sapflow(send_bndl,configuration.packet_header_string);
 		#if is_node == 1
+      package_sapflow(send_bndl,configuration.packet_header_string);
 			package_sht31d(send_bndl,configuration.packet_header_string);
 		#endif
 	#endif
