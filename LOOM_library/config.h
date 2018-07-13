@@ -29,7 +29,8 @@
 
 // --- Debugging --- 
 #define LOOM_DEBUG    1		// Set to 1 if you want Serial statements from various functions to print
-							// NOTE: serial monitor must be opened for device to setup
+							// NOTE: Serial monitor must be opened for device to setup if this is enabled
+							//   Device will freeze if this in abled and device does not get plugged into Serial
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform --- 
@@ -179,13 +180,13 @@
 #endif
 
 #if is_ethernet == 1
-	#include <Ethernet2.h>			// (this is needed for IPAddress object below, do not remove)
+	#include <Ethernet2.h>				// (this is needed for IPAddress object below, do not remove)
 	
 	//Use this for OPEnS Lab
 	// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
 
 	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // mac address of Ethernet port
-	IPAddress ip(128,193,56,138); 						  // device's IP address  								try to make this a string, so #include can be move to ethernet file
+	IPAddress ip(128,193,56,138); 						  // device's IP address  				try to make this a string, so #include can be move to ethernet file
 #endif
 
 
