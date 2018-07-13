@@ -16,7 +16,6 @@
 //   located in the library and are not present here
 
 
-
 // ================================================================ 
 // ===                         OPTIONS                          === 
 // ================================================================
@@ -26,6 +25,7 @@
 #define CHANNEL          7	// Channel to use. Set to 1-8 for channels A-H, respectively. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0	// 1 to request channel settings from Max Channel Manager, 0 to not
 #define AUTO_NAME        1	// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
+#define CUSTOM_NAME "Custom" // This is only used if Auto_name is set to be 0
 
 // --- Debugging --- 
 #define LOOM_DEBUG   1		// Set to 1 if you want Serial statements from various functions to print
@@ -40,7 +40,7 @@
 #define is_fona      0      // Fona is currently being integrated
 #define is_bluetooth 0      // Sorry, Bluetooth is not implemented yet
 
-// --- Additional Platforms ---
+// --- Data Logging Platforms ---
 #define is_pushingbox 1     // 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
@@ -49,22 +49,22 @@
 
 // --- Device Telemetry Type ---
 // #define hub_node_type     1 		// 0: Hub, 1: Node, 2 = Repeater   (this is going to be removed in the future, replaced with the following 3 options)
-#define is_hub       0
+#define is_hub       0		// make these two options mutually exclusive
 #define is_node      1
 #define is_repeater  0		// Sorry, this doesn't do anything yet
 
 // --- Enabled Actuators --- 
-#define num_servos   0		// Number of servos being used
-#define num_steppers 0		// Number of stepper motors being used
+#define num_servos   0 		// Number of servos being used (up to 8 per shield, testing has generally only been through 1 shield)
+#define num_steppers 0		// Number of stepper motors being used 
 #define is_relay     0		// 1 if relays are being used (enables two, on pins 5 and 6)
 
 // --- Enabled Sensors --- 
 #define num_analog   0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
 #define is_decagon   0		// 1 if GS3 Decagon is being used
-#define is_tca9548a  0		// 1 if Multiplexer is being used. (Further customization in advanced options)
 
 // --- Prebuilt Devices ---
 #define is_ishield   0		// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_multiplexer  0		// 1 if Multiplexer is being used. (Further customization in advanced options)
 #define is_sapflow   1
 
 
@@ -99,7 +99,7 @@
 // --- Set Device Name ---
 #if AUTO_NAME == 1
 	// Make sure only one device type is enabled
-	#if ( (is_ishield) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_tca9548a) ) > 1
+	#if ( (is_ishield) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_multiplexer) ) > 1
 		autoname_device_type_error	// this will force an error if too many sensor/actuator were defined (needs to be < 1 for autoname to work)
 	#endif
 
@@ -114,7 +114,7 @@
 		#define DEVICE "RelayShield"
 	#elif is_decagon
 		#define DEVICE "Decagon"
-	#elif is_tca9548a
+	#elif is_multiplexer
 		#define DEVICE "MuxShield"
 	#elif is_sapflow
 		#define DEVICE "Sapflow"
@@ -123,13 +123,13 @@
 	#endif
 #else
 	// --- Custom Device Identification --- 
-	#define DEVICE "Generic" // The device name (can be changed), used only if not using automatic device name
+	#define DEVICE CUSTOM_NAME // The device name (can be changed), used only if not using automatic device name
 #endif
 
 
 
 // --- Multiplexer Options ---
-#if is_tca9548a == 1
+#if is_multiplexer == 1
 	#define UPDATE_PERIOD 5000		// Milliseconds between multiplexer sensor list being updated
 	
 	// 1 to enable sensor type
@@ -231,20 +231,11 @@
 	#define spreadsheet_id "***REMOVED***"
 								// (found betweeen the "docs.google.com/spreadsheets/d/" and 
 								// "/edit..." in the URL; random string of characters)
-	#define tab_id  "15"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
+	#define tab_id  "sheet3"   // Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
 								// can be number or string
 
 	// char device_id[]   = "vF8786ECBD85A1AE";	// Required by PushingBox, specific to each scenario
 	char device_id[]   = "***REMOVED***";
-
-
-
-	// In the event that a device has multiple means of connecting to the internet (WiFi, Ethernet, and cellular), 
-	// I'll probably have an order in which the device attempts to connect to internet: 
-	// Ethernet being highest preference, then WiFi, then cellular. 
-
-	// This way, PushingBox (or Adafruit IO for that matter) do not also need to have a communication platform specified, 
-	// and just take the first available platform from a list of decreasing optimality.
 #endif
 
 #if is_ethernet == 1
@@ -253,8 +244,8 @@
 	//Use this for OPEnS Lab
 	// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
 
-	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};
-	IPAddress ip(128,193,56,138); 
+	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // mac address of Ethernet port
+	IPAddress ip(128,193,56,138); 						  // device's IP address
 #endif
 
 // --- Adafruit IO Options ---

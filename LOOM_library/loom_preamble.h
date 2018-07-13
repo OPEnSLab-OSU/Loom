@@ -202,7 +202,7 @@ int get_bundle_bytes(OSCBundle *bndl); 			// relatively untested
 #if is_decagon == 1
 	#include "loom_decagon.h"
 #endif
-#if is_tca9548a == 1
+#if is_multiplexer == 1
 	#include "loom_tca9548a.h"
 #endif
 #if is_rtc == 1

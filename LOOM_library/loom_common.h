@@ -45,7 +45,7 @@ void Loom_begin()
 	#if num_analog > 0
 		setup_analog();
 	#endif
-	#if is_tca9548a == 1
+	#if is_multiplexer == 1
 		setup_tca9548a();
 	#endif
 	#if is_decagon == 1
@@ -75,7 +75,7 @@ void Loom_begin()
 
 
 	// I2C Sensor setup if no mulitplexer
-	#if is_tca9548a != 1
+	#if is_multiplexer != 1
 		// call setups of enabled sensors
 		#if is_fxas21002 == 1 
 			setup_fxas21002();
@@ -166,7 +166,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		Serial.println(buffer);
 	#endif
 
-	#if is_tca9548a
+	#if is_multiplexer
 		if (msg.fullMatch("/GetSensors", addrOffset)) {
 			msg.add(configuration.packet_header_string);
 			LOOM_DEBUG_Println("Got a request for sensor list");
