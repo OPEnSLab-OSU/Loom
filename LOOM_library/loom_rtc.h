@@ -2,6 +2,8 @@
 // ===                        LIBRARIES                         ===
 // ================================================================
 #include <RTClibExtended.h>
+// NOTE: Must include the following line in the RTClibExtended.h file to use with M0:
+// #define _BV(bit) (1 << (bit))
 
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
@@ -9,8 +11,7 @@
 // ===                       DEFINITIONS                        === 
 // ================================================================
 
-// NOTE: Must include the following line in the RTClibExtended.h file to use with M0:
-// #define _BV(bit) (1 << (bit))
+
 const byte wakeUpPin = 11;
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
@@ -174,9 +175,8 @@ void setAlarmFunction() {
 	// Calculate new time
 	MIN = (now.minute() + WakePeriodMin) % 60; // wrap-around using modulo every 60 sec
 	HR  = (now.hour() + ((now.minute() + WakePeriodMin) / 60)) % 24; // quotient of now.min+periodMin added to now.hr, wraparound every 24hrs
-	#if LOOM_DEBUG == 1
-		Serial.print("Resetting Alarm 1 for: "); Serial.print(HR); Serial.print(":"); Serial.println(MIN);
-	#endif
+	
+	LOOM_DEBUG_println4("Resetting Alarm 1 for: ", HR, ":", MIN);
 
 	//Set alarm1
 	rtc_inst.setAlarm(ALM1_MATCH_HOURS, MIN, HR, 0);   //set your wake-up time here
