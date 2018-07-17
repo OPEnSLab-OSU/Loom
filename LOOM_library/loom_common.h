@@ -213,7 +213,7 @@ void loop_sleep()
 {
 	#if LOOM_DEBUG == 0
 		int sleepMS = Watchdog.sleep(is_sleep_period); // Sleep MCU for transmit period duration
-	#else
+	#else // don't actually sleep if Debug mode on
 		delay(is_sleep_period);                        // Demo transmit every 1 second
 	#endif
 }
@@ -246,11 +246,11 @@ void save_config(OSCMessage &msg)
 //
 void flash_led()
 {
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 14; i++) {
 		digitalWrite(led, HIGH);  
-		delay(80);                       
+		delay(40);                       
 		digitalWrite(led, LOW);   
-		delay(60);  
+		delay(30);  
 	} 
 	digitalWrite(led, HIGH);
 }

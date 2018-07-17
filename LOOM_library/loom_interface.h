@@ -8,15 +8,9 @@ void process_bundle(OSCBundle *bndl);
 void measure_sensors();
 void package_data(OSCBundle *send_bndl);
 void send_bundle(OSCBundle *send_bndl, CommPlatform platform);
-void log_bundle(OSCBundle *send_bndl, LogPlatform platform, char* file);
+void log_bundle(OSCBundle *send_bndl, LogPlatform platform, char* file); //filename for SD files
 void log_bundle(OSCBundle *send_bndl, LogPlatform platform);
 bool bundle_empty(OSCBundle *bndl);
-
-
-// void export_data(String key_values [], int len, Platform platform, char* file);
-// void export_data(String key_values [], int len, Platform platform);
-// template <typename T>
-// void export_data(String keys [], T values [], int len, Platform platform);
 
 void additional_loop_checks();
 
@@ -42,32 +36,29 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 
 	switch(platform) {
 		#if is_wifi == 1
-			case WIFI :
-				// Handle wifi bundle if it exists
-				// Checks device unique UDP port and common UDP port
-				wifi_receive_bundle(bndl, &Udp,       configuration.config_wifi.localPort); 
-				wifi_receive_bundle(bndl, &UdpCommon, configuration.config_wifi.commonPort);                             
-															 
-				// Compare the previous status to the current status
-				wifi_check_status();
-				break;
+		case WIFI :
+			// Handle wifi bundle if it exists
+			// Checks device unique UDP port and common UDP port
+			wifi_receive_bundle(bndl, &Udp,       configuration.config_wifi.localPort); 
+			wifi_receive_bundle(bndl, &UdpCommon, configuration.config_wifi.commonPort);                             
+			break;
 		#endif
 
 		#if is_lora == 1
-			case LORA :
-				lora_receive_bundle(bndl);
-				break;
+		case LORA :
+			lora_receive_bundle(bndl);
+			break;
 		#endif
 
 		#if is_nrf == 1
-			case NRF : 
-				nrf_receive_bundle(bndl);
-				break;
+		case NRF : 
+			nrf_receive_bundle(bndl);
+			break;
 		#endif
 
 		#if LOOM_DEBUG == 1
 		default :
-				LOOM_DEBUG_Println3("That platform (", platform, ") is not enabled to receiving");
+			LOOM_DEBUG_Println3("That platform (", platform, ") is not enabled to receiving");
 		#endif 
 	} // of switch
 }
@@ -103,20 +94,15 @@ void process_bundle(OSCBundle *bndl)
 				}
 			#endif
 
+
 			#if is_wifi == 1
 				// Channel manager polls without device name so check is performed here
-				// rather than in msg_router()
-				if (strcmp(addressString, "/LOOM/ChannelPoll") == 0) {
-					LOOM_DEBUG_Println("Received channel poll request");
-					respond_to_poll_request(configuration.packet_header_string);
-					return;
-				}
+				
+				// or should I do bndl->route(/LOOM) to handle generic messages like this (currently only one)
+				if (check_channel_poll(addressString, configuration.packet_header_string)) return; // no need to also send to message router
 
 				//Clear the new_ssid and new_pass buffers in case new wifi settings were received
-				for (int i = 0; i < 32; i++) {  
-					state_wifi.new_ssid[i] = '\0';
-					state_wifi.new_pass[i] = '\0';
-				}
+				clear_new_wifi_setting_buffers();
 			#endif
 	
 			// This is the most important part of this function 
@@ -125,17 +111,19 @@ void process_bundle(OSCBundle *bndl)
 			bndl->route(configuration.packet_header_string, msg_router);
 	
 
+			// char dev_family_str[20];
+			// sprintf(dev_family_str, "/%s", FAMILY);
+			// bndl->route(dev_family_str, common_msg_router);
+
 
 			#if is_wifi == 1
 				// If new ssid and password have been received, try to connect to that network
-				if (state_wifi.ssid_set == true && state_wifi.pass_set == true) {
-					connect_to_new_network();   
-				}
+				check_connect_to_new_network();
 			#endif
 	
 		} else { // of !bndl.hasError()
 			error = bndl->getError();
-			LOOM_DEBUG_Println2("Error: ", error);
+			LOOM_DEBUG_Println2("Bundle Error: ", error);
 		} // of else
 	} // of if (bndl->size())
 
@@ -198,12 +186,10 @@ void measure_sensors()
 	#endif
 
 	 // Get analog readings
-	#if is_sapflow == 1
-		#if hub_node_type == 1
-			measure_sapflow();
-			measure_sht31d();
-			heat();
-		#endif
+	#if is_sapflow == 1 && hub_node_type == 1
+		measure_sapflow();
+		measure_sht31d();
+		heat();
 	#endif
 }
 
@@ -255,11 +241,9 @@ void package_data(OSCBundle *send_bndl)
 		package_decagon(&send_bndl,configuration.packet_header_string);
 	#endif
 
-	#if is_sapflow == 1
-		#if hub_node_type == 1
-			package_sapflow(send_bndl,configuration.packet_header_string);
-			package_sht31d(send_bndl,configuration.packet_header_string);
-		#endif
+	#if is_sapflow == 1 && hub_node_type == 1
+		package_sapflow(send_bndl,configuration.packet_header_string);
+		package_sht31d(send_bndl,configuration.packet_header_string);
 	#endif
 }
 
@@ -281,34 +265,34 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
 {
 	switch(platform) {
 		#if is_wifi == 1
-			case WIFI :
-				wifi_send_bundle(send_bndl);
-				break;
+		case WIFI :
+			wifi_send_bundle(send_bndl);
+			break;
 		#endif
 
 		#if is_lora == 1
-			case LORA :
-				if (!lora_bundle_fragment) {
-					lora_send_bundle(send_bndl);					
-				} else { // Separate bundle into smaller pieces
-					lora_send_bundle_fragment(send_bndl);
-				}
-				break;
+		case LORA :
+			if (!lora_bundle_fragment) {
+				lora_send_bundle(send_bndl);					
+			} else { // Separate bundle into smaller pieces
+				lora_send_bundle_fragment(send_bndl);
+			}
+			break;
 		#endif
 
 		#if is_nrf == 1
-			case NRF : 
-				if (!nrf_bundle_fragment) {
-					nrf_send_bundle(send_bndl);					
-				} else { // Separate bundle into smaller pieces
-					nrf_send_bundle_fragment(send_bndl);
-				}
-				break;
+		case NRF : 
+			if (!nrf_bundle_fragment) {
+				nrf_send_bundle(send_bndl);					
+			} else { // Separate bundle into smaller pieces
+				nrf_send_bundle_fragment(send_bndl);
+			}
+			break;
 		#endif
 		
 		#if LOOM_DEBUG == 1
 		default :
-				Serial.println("That platform is not enabled for sending");
+			Serial.println("That platform is not enabled for sending");
 		#endif 
 	} // of switch
 }
@@ -333,17 +317,17 @@ void log_bundle(OSCBundle *log_bndl, LogPlatform platform, char* file)
 
 	switch(platform) {
 		#if is_sd == 1
-			case SDCARD : 
-				LOOM_DEBUG_Println("Saving bundle");
-				sd_save_bundle(file, log_bndl, 0, sd_save_time_format); 
-				return;
+		case SDCARD : 
+			LOOM_DEBUG_Println("Saving bundle");
+			sd_save_bundle(file, log_bndl, 0, sd_save_time_format); 
+			return;
 		#endif
 
 		#if is_pushingbox == 1
-			case PUSHINGBOX : 
-				LOOM_DEBUG_Println("Sending bundle data to PushingBox");
-				sendToPushingBox(log_bndl);
-				return;	
+		case PUSHINGBOX : 
+			LOOM_DEBUG_Println("Sending bundle data to PushingBox");
+			sendToPushingBox(log_bndl);
+			return;	
 		#endif
 
 		// #if is_adafruitio == 1
@@ -353,14 +337,14 @@ void log_bundle(OSCBundle *log_bndl, LogPlatform platform, char* file)
 		// #endif
 
 		#if LOOM_DEBUG == 1
-			case SERIAL_MON :
-				print_bundle(log_bndl);
-				return;
+		case SERIAL_MON :
+			print_bundle(log_bndl);
+			return;
 		#endif
 
 		#if LOOM_DEBUG == 1
 		default :
-				Serial.println("That platform is not enabled for logging");
+			Serial.println("That platform is not enabled for logging");
 		#endif 
 	} // of switch
 	LOOM_DEBUG_Println("That platform is not enabled for exporting");
@@ -384,6 +368,11 @@ void additional_loop_checks()
 	// Reset to AP mode if button held for ~5 seconds
 	#if defined(button) && (is_wifi == 1)
 		check_button_held();      
+	#endif
+
+	#if is_wifi == 1
+		// Compare the previous status to the current status
+		wifi_check_status();
 	#endif
 
 	// Delay between loop iterations

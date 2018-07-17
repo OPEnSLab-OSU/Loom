@@ -85,7 +85,9 @@ void new_channel(OSCMessage &msg);
 void respond_to_poll_request(char packet_header_string[]);
 void wifi_send_bundle(OSCBundle *bndl);
 void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port);
-
+void clear_new_wifi_setting_buffers();
+bool check_channel_poll(char * addressString, char * packet_header_string);
+void check_connect_to_new_network();
 
 
 // ================================================================ 
@@ -657,7 +659,31 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port)
 
 
 
+void clear_new_wifi_setting_buffers() 
+{
+	for (int i = 0; i < 32; i++) {  
+		state_wifi.new_ssid[i] = '\0';
+		state_wifi.new_pass[i] = '\0';
+	}
+}
 
 
+bool check_channel_poll(char * addressString, char * packet_header_string) 
+{
+	if (strcmp(addressString, "/LOOM/ChannelPoll") == 0) {
+		LOOM_DEBUG_Println("Received channel poll request");
+		respond_to_poll_request(packet_header_string);
+		return true;
+	} else {
+		return false;
+	}
+}
 
+void check_connect_to_new_network()
+{
+	if (state_wifi.ssid_set == true && state_wifi.pass_set == true) {
+		connect_to_new_network();   
+	}
+}
+	
 
