@@ -68,9 +68,7 @@ void sendToPushingBox(OSCMessage &msg)
 		LOOM_DEBUG_Println("Message to large to send to PushingBox");
 		return;
 	}
-
 	LOOM_DEBUG_Println("Sending to PushingBox");
-
 
 
 	// Build url arguments from bundle
@@ -79,12 +77,13 @@ void sendToPushingBox(OSCMessage &msg)
 		device_id, spreadsheet_id, tab_id, DEVICE, INIT_INST); 
 
 	for (int i = 0, j = 3; (i < MAX_FIELDS-6) && (i < msg.size()); i+=2, j++) {
-    char buf1[30], buf2[30];
+	    char buf1[30], buf2[30];
 		(get_data_value(&msg, i  )).toCharArray(buf1, 30); 
 		(get_data_value(&msg, i+1)).toCharArray(buf2, 30);
 		sprintf(args, "%s&key%d=%s&val%d=%s", args, j, buf1, j, buf2);
 	}
 	LOOM_DEBUG_Println2("URL get args: ", args);
+
 
 
 	#if is_ethernet == 1
@@ -118,6 +117,7 @@ void sendToPushingBox(OSCMessage &msg)
 	#endif // of #if is_ethernet == 1
 
 
+
 	#if is_wifi == 1
 		LOOM_DEBUG_Println("Running PushingBox for WiFi");
 
@@ -137,6 +137,7 @@ void sendToPushingBox(OSCMessage &msg)
 			LOOM_DEBUG_Println("No WiFi Connection");
 		}
 	#endif // of #if is_wifi == 1 
+
 
 
 	#if is_fona == 1
