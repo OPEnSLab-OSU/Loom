@@ -101,11 +101,33 @@ char          packetBuffer[255];              // Buffer to hold incoming packet
 char          ReplyBuffer[] = "acknowledged"; // A string to send back
 OSCErrorCode  error;                          // Hold errors from OSC
 uint32_t      button_timer;                   // Time that the button has been held
-int 		  button_state;					  // Variable to hold the state of the button
+int           button_state;					  // Variable to hold the state of the button
 char          addressString[255];			  // A place to hold the address string of the current message being examined
-char global_packet_header_string[80]; // Sometimes functions need to access the header string but are declared before loom_flash.h is included
+char          global_packet_header_string[80]; // Sometimes functions need to access the header string but are declared before loom_flash.h is included
 
 
+
+struct device_info
+{
+	char device_id[20];
+	int  inst_num; 
+
+	CommPlatform platform; // should this perhaps be an array?
+
+	// For targetted WiFi messages
+	int  ip_addr[4]; 
+	int  udp_port;
+
+	// For LoRa / nRF
+	int  dev_address; 
+
+};
+typedef struct device_info DeviceInfo;
+
+DeviceInfo known_devices[10];    
+int num_known_devices = 0;
+// Array to store other devices on the network that this device can see 
+// To be moved into a struct within the struct that gets saved to flash
 
 // ================================================================ 
 // ===               MISCELLANEOUS DEFINITIONS                  === 
@@ -266,7 +288,7 @@ int    get_bundle_bytes(OSCBundle *bndl);
 
 // Files of functions that are not specific to sensors / actuators
 #include "loom_flash.h"
-#include "loom_common.h"  		// These may refer to functions in above headers
+#include "loom_common_functions.h" 
 #include "loom_msg_router.h"
 #include "loom_interface.h"
 

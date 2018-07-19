@@ -84,6 +84,10 @@ void set_request_settings(OSCMessage &msg);
 void new_channel(OSCMessage &msg);
 // void respond_to_poll_request(char packet_header_string[]);
 void wifi_send_bundle(OSCBundle *bndl);
+void wifi_send_bundle(OSCBundle *bndl, int port);
+void wifi_send_bundle_common(OSCBundle *bndl);
+
+
 void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port);
 void clear_new_wifi_setting_buffers();
 bool check_channel_poll(char * addressString, char * packet_header_string);
@@ -455,9 +459,10 @@ void broadcastIP(OSCMessage &msg)
 						   .add((int32_t)config_wifi->ip[2])
 						   .add((int32_t)config_wifi->ip[3]);
 
-	UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
-	bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
-	UdpCommon.endPacket();    // Mark the end of the OSC Packet
+	// UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
+	// bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
+	// UdpCommon.endPacket();    // Mark the end of the OSC Packet
+	wifi_send_bundle_common(&bndl);
 	bndl.empty();             // Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println2("Broadcasted IP: ", config_wifi->ip);
@@ -533,9 +538,10 @@ void request_settings_from_Max()
 		.add((int32_t)config_wifi->ip[3]);
 
 	
-	UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
-	bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
-	UdpCommon.endPacket();    // Mark the end of the OSC Packet
+	// UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
+	// bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
+	// UdpCommon.endPacket();    // Mark the end of the OSC Packet
+	wifi_send_bundle_common(&bndl);
 	bndl.empty();             // Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println("Requested New Channel Settings");
@@ -593,7 +599,6 @@ void respond_to_poll_request(OSCMessage &msg)
 	OSCBundle bndl;
 	bndl.empty();
 	char addressString[255];
-	// sprintf(addressString, "%s%s", packet_header_string, "/PollResponse");
 	sprintf(addressString, "%s%s", packet_header_string, "/PollResponse");
 
 	bndl.add(addressString);
@@ -632,7 +637,12 @@ void wifi_send_bundle(OSCBundle *bndl, int port)
 	Udp.endPacket();        // Mark the end of the OSC Packet
 }
 
-
+void wifi_send_bundle_common(OSCBundle *bndl)
+{
+	UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
+	bndl->send(UdpCommon);    // Send the bytes to the SLIP stream
+	UdpCommon.endPacket();        // Mark the end of the OSC Packet
+}
 
 
 // --- WIFI RECEIVE BUNDLE ---
