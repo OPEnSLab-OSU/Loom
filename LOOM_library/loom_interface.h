@@ -86,6 +86,7 @@ void process_bundle(OSCBundle *bndl)
 			LOOM_DEBUG_Println2("Number of items in bundle: ", bndl->size());
 			LOOM_DEBUG_Println2("First message address string: ", addressString);
 
+
 			// If SD logging is enabled and message was to this device, save bundle
 			#if is_sd == 1 
 				if ((SD_logging == 1) && (strncmp(addressString, configuration.packet_header_string, strlen(configuration.packet_header_string)) == 0)) {
