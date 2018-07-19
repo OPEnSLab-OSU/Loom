@@ -82,12 +82,15 @@ void wifi_check_status();
 void request_settings_from_Max();
 void set_request_settings(OSCMessage &msg);
 void new_channel(OSCMessage &msg);
-void respond_to_poll_request(char packet_header_string[]);
+// void respond_to_poll_request(char packet_header_string[]);
 void wifi_send_bundle(OSCBundle *bndl);
 void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port);
 void clear_new_wifi_setting_buffers();
 bool check_channel_poll(char * addressString, char * packet_header_string);
 void check_connect_to_new_network();
+
+
+void respond_to_poll_request(OSCMessage &msg);
 
 
 // ================================================================ 
@@ -130,7 +133,8 @@ void setup_wifi(char packet_header_string[])
 				if (config_wifi->request_settings == 1) {
 					request_settings_from_Max();
 				} else {
-					respond_to_poll_request(packet_header_string);
+					OSCMessage tmp = new OSCMessage("tmp");
+					respond_to_poll_request(tmp);
 				}
 			}
 			else {
@@ -145,6 +149,9 @@ void setup_wifi(char packet_header_string[])
 	}
 	config_wifi->ip = WiFi.localIP();
 	LOOM_DEBUG_Println("Finished setting up WiFi.");
+
+
+	// printWiFiStatus();
 }
 
 
@@ -223,7 +230,11 @@ void start_AP()
 		printWiFiStatus();   // You're connected now, so print out the status
 		Serial.println("\nStarting UDP connection over server...");
 	#endif
-	
+		
+	LOOM_DEBUG_Println2("localPort: ", config_wifi->localPort);
+	LOOM_DEBUG_Println2("commonPort: ", config_wifi->commonPort);
+
+
 	// If you get a connection, report back via serial:
 	Udp.begin(config_wifi->localPort);
 	UdpCommon.begin(config_wifi->commonPort);
@@ -375,9 +386,7 @@ void connect_to_new_network()
 	replace_char(state_wifi.new_ssid, '~', ' ');
 	replace_char(state_wifi.new_pass, '~', ' ');
 
-	LOOM_DEBUG_Print("Received command to connect to ");
-	LOOM_DEBUG_Print(state_wifi.new_ssid);
-	LOOM_DEBUG_Println2(" with password ", state_wifi.new_pass);
+	LOOM_DEBUG_Print4("Received command to connect to ", state_wifi.new_ssid, " with password ", state_wifi.new_pass);
 
 	// Disconnect from current WiFi network
 	WiFi.disconnect();
@@ -578,11 +587,13 @@ void new_channel(OSCMessage &msg)
 // 
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
 // 
-void respond_to_poll_request(char packet_header_string[])
+// void respond_to_poll_request(char packet_header_string[])
+void respond_to_poll_request(OSCMessage &msg)
 {
 	OSCBundle bndl;
 	bndl.empty();
 	char addressString[255];
+	// sprintf(addressString, "%s%s", packet_header_string, "/PollResponse");
 	sprintf(addressString, "%s%s", packet_header_string, "/PollResponse");
 
 	bndl.add(addressString);
@@ -667,17 +678,6 @@ void clear_new_wifi_setting_buffers()
 	}
 }
 
-
-bool check_channel_poll(char * addressString, char * packet_header_string) 
-{
-	if (strcmp(addressString, "/LOOM/ChannelPoll") == 0) {
-		LOOM_DEBUG_Println("Received channel poll request");
-		respond_to_poll_request(packet_header_string);
-		return true;
-	} else {
-		return false;
-	}
-}
 
 void check_connect_to_new_network()
 {

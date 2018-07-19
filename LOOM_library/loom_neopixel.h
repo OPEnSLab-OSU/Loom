@@ -79,7 +79,7 @@ void set_color(OSCMessage &msg)
 	LOOM_DEBUG_Print2(  "  R: "  , red);
 	LOOM_DEBUG_Print2(  "  G: "  , green);
 	LOOM_DEBUG_Println2("  B:"   , blue);
-	LOOM_DEBUG_Println("========\n")
+	LOOM_DEBUG_Println("========\n");
 
 	// Update color values stored for specified Neopixel and write them to the Neopixels color
 	if (state_neopixel.enabled[port]) {
