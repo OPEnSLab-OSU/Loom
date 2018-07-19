@@ -162,6 +162,15 @@ bool lora_send_bundle(OSCBundle *bndl)
 	LOOM_DEBUG_Println2("Max message length: ", RH_RF95_MAX_MESSAGE_LEN);
 	LOOM_DEBUG_Print("Sending...");
 	 
+
+// Sending to RH_BROADCAST_ADDRESS (255) might allow for broadcasting,
+// these arent acknowledged though, so not sure if I'll have to change anything,
+// such as not using 'sendtoWait' if there even is an alternative
+//   probably use the 'sendto' function
+//   might also just be able to temporarily set retries / timeout to 0 or something ? ...
+// lora send bundle could then take an address as well, and overload so that if none is provided,
+//   default to broadcasting with the other function
+
 	if (manager.sendtoWait((uint8_t*)message, strlen(message), LORA_HUB_ADDRESS)) {  // this should be better generalized, as to be able to send to nodes
 		LOOM_DEBUG_Println("Sent bundle through LoRa!");
 		return true;

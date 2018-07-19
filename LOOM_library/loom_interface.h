@@ -41,25 +41,19 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 			// Checks device unique UDP port and common UDP port
 			wifi_receive_bundle(bndl, &Udp,       configuration.config_wifi.localPort); 
 			wifi_receive_bundle(bndl, &UdpCommon, configuration.config_wifi.commonPort); 
-			if (!bundle_empty) print_bundle(bndl);
 			break;
 		#endif
 
 		#if is_lora == 1
-		case LORA :
-			lora_receive_bundle(bndl);
-			break;
+		case LORA : lora_receive_bundle(bndl); break;
 		#endif
 
 		#if is_nrf == 1
-		case NRF : 
-			nrf_receive_bundle(bndl);
-			break;
+		case NRF : nrf_receive_bundle(bndl); break;
 		#endif
 
 		#if LOOM_DEBUG == 1
-		default :
-			LOOM_DEBUG_Println3("That platform (", platform, ") is not enabled to receiving");
+		default : LOOM_DEBUG_Println3("That platform (", platform, ") is not enabled to receiving");
 		#endif 
 	} // of switch
 }
@@ -234,6 +228,11 @@ void package_data(OSCBundle *send_bndl)
 		package_sapflow(send_bndl,configuration.packet_header_string);
 		package_sht31d(send_bndl,configuration.packet_header_string);
 	#endif
+
+
+
+	// Should add the other I2C sensor package functions here 
+	// for when they are called without the multiplexer
 }
 
 
@@ -254,34 +253,31 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
 {
 	switch(platform) {
 		#if is_wifi == 1
-		case WIFI :
-			wifi_send_bundle(send_bndl);
-			break;
+		case WIFI : wifi_send_bundle(send_bndl); break;
 		#endif
 
 		#if is_lora == 1
-		case LORA :
-			if (!lora_bundle_fragment) {
-				lora_send_bundle(send_bndl);					
-			} else { // Separate bundle into smaller pieces
-				lora_send_bundle_fragment(send_bndl);
-			}
-			break;
+		case LORA : (!lora_bundle_fragment) ? lora_send_bundle(send_bndl) : lora_send_bundle_fragment(send_bndl); break;
+			// if (!lora_bundle_fragment) {
+			// 	lora_send_bundle(send_bndl);					
+			// } else { // Separate bundle into smaller pieces
+			// 	lora_send_bundle_fragment(send_bndl);
+			// }
+			// break;
 		#endif
 
 		#if is_nrf == 1
-		case NRF : 
-			if (!nrf_bundle_fragment) {
-				nrf_send_bundle(send_bndl);					
-			} else { // Separate bundle into smaller pieces
-				nrf_send_bundle_fragment(send_bndl);
-			}
-			break;
+		case NRF : (!nrf_bundle_fragment) ? nrf_send_bundle(send_bndl) : nrf_send_bundle_fragment(send_bndl); break;
+			// if (!nrf_bundle_fragment) {
+			// 	nrf_send_bundle(send_bndl);					
+			// } else { // Separate bundle into smaller pieces
+			// 	nrf_send_bundle_fragment(send_bndl);
+			// }
+			// break;
 		#endif
 		
 		#if LOOM_DEBUG == 1
-		default :
-			Serial.println("That platform is not enabled for sending");
+		default : Serial.println("That platform is not enabled for sending");
 		#endif 
 	} // of switch
 }
@@ -381,8 +377,6 @@ void additional_loop_checks()
 		adafruitio_publish();
 	#endif
 }
-
-
 
 
 

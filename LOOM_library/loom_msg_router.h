@@ -109,10 +109,18 @@ void common_msg_router(OSCMessage &msg, int addrOffset)
 		LOOM_DEBUG_Println2("Parsed ", buffer); 
 	#endif
 
+	// If Max has polled for devices on the WiFi network 
+	msg.dispatch("/ChannelPoll", 		respond_to_poll_request, 	addrOffset);
 
-	// Set the instance number of this device
-	msg.dispatch("/ChannelPoll", 	respond_to_poll_request, 		addrOffset);
 
+
+
+
+	// If a hub device has polled for devices on the network
+	//     This might be merged with the above dispatch later
+	msg.dispatch("/DeviceChannelPoll", 	respond_to_device_poll, 	addrOffset);	// node receiving from hub
+
+	msg.dispatch("/DevicePollResponse", update_known_devices, 		addrOffset);	// hub receiving from node
 
 			// Probably also do a msg.dispatch("PollResponse", populate_known_devices, addrOffset + #) 
 			// where # is the number of characters taken up by the device name, number, and '/'' 

@@ -198,6 +198,7 @@ void parseProgram(OSCMessage* msg)
 	Serial.println(stack[stackPtr-1]);
 	Serial.println();
 
+	// These just print out the register contents for debugging purposes
 	Serial.print("R: ");
 	for (int i = 0; i < 10; i++) {
 		Serial.print(i); Serial.print(": "); Serial.print(reg[0][i]); Serial.print(", "); 
