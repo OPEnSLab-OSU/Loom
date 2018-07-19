@@ -1,11 +1,11 @@
 // ================================================================ 
 // ===                        LIBRARIES                         === 
 // ================================================================
-#include <OSCBundle.h> //all LOOM devices rely on the Arduino OSC library in some way
+#include <OSCBundle.h> // All LOOM devices rely on the Arduino OSC library in some way
 
 
 // ================================================================ 
-// ===                       DEFINITIONS                        === 
+// ===               DEFINITIONS BASED ON CONFIG                === 
 // ================================================================
 // Packet header creation macro
 #define STR_(x) #x                // Helper function
@@ -20,12 +20,10 @@
 	#define INIT_PORT 9440+CHANNEL
 #endif
 
-
 // --- WiFi UDP Ports ---
 #if is_wifi == 1
 	#define COMMON_PORT     9440	// Expected by Max to be 9440, don't change unless using custom Max patches
 #endif
-
 
 // --- Automatically Set Device Name ---
 #if AUTO_NAME == 1
@@ -58,7 +56,9 @@
 #endif
 
 
-
+// ================================================================ 
+// ===                      ENUMERATIONS                        === 
+// ================================================================
 
 // Enumerate possible platform types
 enum CommPlatform {
@@ -75,6 +75,11 @@ enum LogPlatform {
 	SERIAL_MON
 };
 
+
+// ================================================================ 
+// ===                    PRINTING MACROS                       === 
+// ================================================================
+
 // Macros for printing to Serial iff Loom Debug is enabled
 #define LOOM_DEBUG_Print(X)          (LOOM_DEBUG==0) ? :  Serial.print(X)
 #define LOOM_DEBUG_Println(X)        (LOOM_DEBUG==0) ? :  Serial.println(X)
@@ -86,15 +91,6 @@ enum LogPlatform {
 #define LOOM_DEBUG_Println4(W,X,Y,Z) LOOM_DEBUG_Print(W); LOOM_DEBUG_Print(X); LOOM_DEBUG_Print(Y); LOOM_DEBUG_Println(Z)
 
 
-void receive_bundle(OSCBundle *bndl, CommPlatform platform);
-void process_bundle(OSCBundle *bndl);
-void measure_sensors();
-void package_data(OSCBundle *send_bndl);
-void send_bundle(OSCBundle *send_bndl, CommPlatform platform);
-void log_bundle(OSCBundle *log_bndl, LogPlatform, char* file);
-void log_bundle(OSCBundle *log_bndl, LogPlatform);
-
-
 // ================================================================
 // ===                 COMMON GLOBAL VARIABLES                  ===
 // ================================================================
@@ -104,16 +100,18 @@ float         vbat = 3.3;                     // Place to save measured battery 
 char          packetBuffer[255];              // Buffer to hold incoming packet
 char          ReplyBuffer[] = "acknowledged"; // A string to send back
 OSCErrorCode  error;                          // Hold errors from OSC
-uint32_t      button_timer;                   // For time button has been held
-int 		  button_state;
-char          addressString[255];
-
+uint32_t      button_timer;                   // Time that the button has been held
+int 		  button_state;					  // Variable to hold the state of the button
+char          addressString[255];			  // A place to hold the address string of the current message being examined
 char global_packet_header_string[80]; // Sometimes functions need to access the header string but are declared before loom_flash.h is included
 
 
-//---------------------------------------------------------------------------
+
+// ================================================================ 
+// ===               MISCELLANEOUS DEFINITIONS                  === 
+// ================================================================
+
 // MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
-//---------------------------------------------------------------------------
 #define MEM_FLASH 0
 #define MEM_EEPROM 1  
 
@@ -130,10 +128,10 @@ char global_packet_header_string[80]; // Sometimes functions need to access the 
 #if is_relay == 0
 	#define button BUTTON_PIN               // Using on-board button, specify attached pin, transmitting
 #endif
+
 #ifdef is_sleep_period
 	#include <Adafruit_SleepyDog.h> // This must be included if you are transmitting at timed intervals
 #endif
-
 #ifdef is_sleep_interrupt
 	#include <LowPower.h>           // Include this if transmitting on pin interrupt
 #endif
@@ -144,24 +142,41 @@ char global_packet_header_string[80]; // Sometimes functions need to access the 
 #endif
 
 
+// ================================================================ 
+// ===                       PROTOTYPES                         === 
+// ================================================================
 // Prototypes of functions from loom_flash.h, loom_common.h, and loom_OSC_translator.h
 // That are referenced by device .h files
-void read_non_volatile();
-void write_non_volatile();
-void convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl);
-void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
-String get_data_value(OSCMessage* msg, int pos);
-#if LOOM_DEBUG == 1
-	void print_bundle(OSCBundle *bndl);
-#endif
-int get_bundle_bytes(OSCBundle *bndl); 			
 
+void   receive_bundle(OSCBundle *bndl, CommPlatform platform);
+void   process_bundle(OSCBundle *bndl);
+void   measure_sensors();
+void   package_data(OSCBundle *send_bndl);
+void   send_bundle(OSCBundle *send_bndl, CommPlatform platform);
+void   log_bundle(OSCBundle *log_bndl, LogPlatform, char* file);
+void   log_bundle(OSCBundle *log_bndl, LogPlatform);
+
+void   read_non_volatile();
+void   write_non_volatile();
+void   convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl);
+void   convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
+String get_data_value(OSCMessage* msg, int pos);
+void   print_bundle(OSCBundle *bndl);
+int    get_bundle_bytes(OSCBundle *bndl); 			
+
+
+// ================================================================ 
+// ===                   INCLUDE TRANSLATOR                     === 
+// ================================================================
+// Include the translator early, as many of the device files
+// can reference various functions it contains
+#include "loom_translator.h"
 
 
 // ================================================================ 
 // ===                  INCLUDE DEVICE FILES                    === 
 // ================================================================
-#include "loom_translator.h"
+
 
 #if is_fona == 1
 	#include "loom_fona.h"
@@ -173,7 +188,6 @@ int get_bundle_bytes(OSCBundle *bndl);
 	#include "loom_wifi.h"
 #endif
 #if is_pushingbox == 1
-	// #include "loom_ethernet.h"
 	#include "loom_pushingbox.h"
 #endif
 #if is_lora == 1
@@ -246,6 +260,9 @@ int get_bundle_bytes(OSCBundle *bndl);
 #endif
 
 
+// ================================================================ 
+// ===                INCLUDE ESSENTIAL FILES                   === 
+// ================================================================
 
 // Files of functions that are not specific to sensors / actuators
 #include "loom_flash.h"

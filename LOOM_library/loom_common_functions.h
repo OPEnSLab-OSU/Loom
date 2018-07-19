@@ -5,7 +5,6 @@
 // ================================================================
 void Loom_begin();
 void set_instance_num(OSCMessage &msg);
-// void msg_router(OSCMessage &msg, int addrOffset);       
 #if (is_wifi == 1) && defined(button)    // look into other behaviors if other platforms are enabled instead
 	void check_button_held();
 #endif

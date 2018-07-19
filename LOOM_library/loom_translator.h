@@ -26,11 +26,9 @@ union data_value { // Used in translation between OSC and strings
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 
-// #if LOOM_DEBUG == 1
-	void print_bundle(OSCBundle *bndl);
-	template<typename T> 
-	void print_array(T data [], int len, int format);
-// #endif
+void print_bundle(OSCBundle *bndl);
+template<typename T> 
+void print_array(T data [], int len, int format);
 	int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
 	bool bundle_empty(OSCBundle *bndl);
 String get_data_value(OSCMessage* msg, int pos);
