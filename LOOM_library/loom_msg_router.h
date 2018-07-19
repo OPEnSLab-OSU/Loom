@@ -113,5 +113,9 @@ void common_msg_router(OSCMessage &msg, int addrOffset)
 	// Set the instance number of this device
 	msg.dispatch("/ChannelPoll", 	respond_to_poll_request, 		addrOffset);
 
+
+			// Probably also do a msg.dispatch("PollResponse", populate_known_devices, addrOffset + #) 
+			// where # is the number of characters taken up by the device name, number, and '/'' 
+
 }
 

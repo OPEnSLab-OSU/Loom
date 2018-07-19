@@ -624,7 +624,13 @@ void wifi_send_bundle(OSCBundle *bndl)
 	Udp.endPacket();        // Mark the end of the OSC Packet
 }
 
-
+// Version of wifi_send_bundle that will send on an arbitrary port
+void wifi_send_bundle(OSCBundle *bndl, int port)
+{
+	Udp.beginPacket(config_wifi->ip_broadcast, port);
+	bndl->send(Udp);    // Send the bytes to the SLIP stream
+	Udp.endPacket();        // Mark the end of the OSC Packet
+}
 
 
 

@@ -86,7 +86,7 @@ bool nrf_send_bundle(OSCBundle *bndl)
 	
 	convert_OSC_bundle_to_string(bndl, message);
 	
-	RF24NetworkHeader header(NRF_HUB_ADDRESS);
+	RF24NetworkHeader header(NRF_HUB_ADDRESS);							// This should be better generalized, as to be able to send to nodes
 	bool is_sent = network.write(header,message,strlen(message));
 	#if LOOM_DEBUG == 1
 		if (is_sent) Serial.println("NRF Bundle Send Suceeded!");
