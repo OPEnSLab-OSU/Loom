@@ -3,6 +3,7 @@
 // ================================================================
 
 void msg_router(OSCMessage &msg, int addrOffset);       
+void common_msg_router(OSCMessage &msg, int addrOffset);       
 
 // ================================================================ 
 // ===               CUSTOM FUNCTION PROTOTYPES                 === 
@@ -28,8 +29,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	#if LOOM_DEBUG == 1
 		char buffer[100];
 		msg.getAddress(buffer, addrOffset);
-		Serial.print("Parsed ");
-		Serial.println(buffer);
+		LOOM_DEBUG_Println2("Parsed ", buffer); 
 	#endif
 
 	#if is_multiplexer
@@ -92,7 +92,26 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	// Save the configuration struct as it is currently
 	msg.dispatch("/SaveConfig", 			save_config, 			addrOffset);
 
+}
 
+
+
+
+
+
+// For messages sent as "/<FAMILY>...", i.e.: "/LOOM..."
+// rather than providing a device identifier
+void common_msg_router(OSCMessage &msg, int addrOffset) 
+{
+	#if LOOM_DEBUG == 1
+		char buffer[100];
+		msg.getAddress(buffer, addrOffset);
+		LOOM_DEBUG_Println2("Parsed ", buffer); 
+	#endif
+
+
+	// Set the instance number of this device
+	msg.dispatch("/ChannelPoll", 	respond_to_poll_request, 		addrOffset);
 
 }
 

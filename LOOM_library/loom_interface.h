@@ -40,7 +40,8 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 			// Handle wifi bundle if it exists
 			// Checks device unique UDP port and common UDP port
 			wifi_receive_bundle(bndl, &Udp,       configuration.config_wifi.localPort); 
-			wifi_receive_bundle(bndl, &UdpCommon, configuration.config_wifi.commonPort);                             
+			wifi_receive_bundle(bndl, &UdpCommon, configuration.config_wifi.commonPort); 
+			if (!bundle_empty) print_bundle(bndl);
 			break;
 		#endif
 
@@ -86,6 +87,19 @@ void process_bundle(OSCBundle *bndl)
 			LOOM_DEBUG_Println2("Number of items in bundle: ", bndl->size());
 			LOOM_DEBUG_Println2("First message address string: ", addressString);
 
+			// --- Message Routing ---
+	
+			// This is the most important part of this function 
+			// Send the bndle to the routing function,
+			// which will route/dispatch messages to the currect handling functions
+			// Most commands will be finished once control returns here 
+			bndl->route(configuration.packet_header_string, msg_router);
+			
+			// Also route on messages that were broadcasted without device identifier, only the Family
+			bndl->route(STR(/) FAMILY, common_msg_router);
+
+
+			// --- Miscellaneous Processing ---
 
 			// If SD logging is enabled and message was to this device, save bundle
 			#if is_sd == 1 
@@ -95,33 +109,6 @@ void process_bundle(OSCBundle *bndl)
 				}
 			#endif
 
-
-			#if is_wifi == 1
-				// Channel manager polls without device name so check is performed here
-				
-				// or should I do bndl->route(/LOOM) to handle generic messages like this (currently only one)
-				if (check_channel_poll(addressString, configuration.packet_header_string)) return; // no need to also send to message router
-
-				//Clear the new_ssid and new_pass buffers in case new wifi settings were received
-				clear_new_wifi_setting_buffers();
-			#endif
-	
-			// This is the most important part of this function 
-			// Send the bndle to the routing function, which will route/dispatch messages to the currect handling functions
-			// Most commands will be finished once control returns here (WiFi changes being handled below)
-			bndl->route(configuration.packet_header_string, msg_router);
-	
-
-			// char dev_family_str[20];
-			// sprintf(dev_family_str, "/%s", FAMILY);
-			// bndl->route(dev_family_str, common_msg_router);
-
-
-			#if is_wifi == 1
-				// If new ssid and password have been received, try to connect to that network
-				check_connect_to_new_network();
-			#endif
-	
 		} else { // of !bndl.hasError()
 			error = bndl->getError();
 			LOOM_DEBUG_Println2("Bundle Error: ", error);
@@ -143,7 +130,8 @@ void process_bundle(OSCBundle *bndl)
 void measure_sensors()
 {
 	// Get battery voltage
-	vbat = analogRead(VBATPIN);
+	// vbat = analogRead(VBATPIN);
+	vbat = read_analog(VBATPIN);
 	vbat = (vbat * 2 * 3.3) / 4096; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
 
 	//	Get button state
@@ -372,8 +360,14 @@ void additional_loop_checks()
 	#endif
 
 	#if is_wifi == 1
+		// If new ssid and password have been received, try to connect to that network
+		check_connect_to_new_network();
+
 		// Compare the previous status to the current status
 		wifi_check_status();
+
+		//Clear the new_ssid and new_pass buffers in case new wifi settings were received
+		clear_new_wifi_setting_buffers();
 	#endif
 
 	// Delay between loop iterations

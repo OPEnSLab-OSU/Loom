@@ -168,7 +168,9 @@ void set_instance_num(OSCMessage &msg)
 	#if is_wifi == 1
 		configuration.config_wifi.request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
 														// Note that configuration needs to be saved for this to take effect
-		respond_to_poll_request(configuration.packet_header_string);
+		// respond_to_poll_request(configuration.packet_header_string);
+		OSCMessage tmp = new OSCMessage("tmp");
+		respond_to_poll_request(tmp);
 	#endif
 }
 
