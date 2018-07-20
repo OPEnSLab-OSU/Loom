@@ -64,7 +64,8 @@
 enum CommPlatform {
 	WIFI,
 	LORA,
-	NRF
+	NRF,
+	ETHERNET // in testing for inter-device communication
 	// CELLULAR  
 };
 
@@ -112,11 +113,12 @@ struct device_info
 	char device_id[20];
 	int  inst_num; 
 
-	CommPlatform platform; // should this perhaps be an array?
+	int num_platforms;
+	CommPlatform platforms[4]; // should this perhaps be an array?
 
 	// For targetted WiFi messages
-	int  ip_addr[4]; 
 	int  udp_port;
+	int  ip_addr[4]; 
 
 	// For LoRa / nRF
 	int  dev_address; 
@@ -288,7 +290,8 @@ int    get_bundle_bytes(OSCBundle *bndl);
 
 // Files of functions that are not specific to sensors / actuators
 #include "loom_flash.h"
-#include "loom_common_functions.h" 
+#include "loom_common_functions.h"
+#include "loom_interdev_comm.h" 
 #include "loom_msg_router.h"
 #include "loom_interface.h"
 
