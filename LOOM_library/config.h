@@ -209,7 +209,7 @@
 #if hub_node_type == 0
 	#define is_pushingbox 1 // only if Ethernet, WiFi, or cellular
 
-	#define device_poll_refresh 15  // Seconds between re-searching for devices on the network
+	#define device_poll_refresh 60  // Seconds between re-searching for devices on the network
 
 	// The following two defines are planned to be implemented, but are not in use currently
 	// #define hub_input  LORA
