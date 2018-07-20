@@ -347,11 +347,22 @@ void update_known_devices(OSCMessage &msg)
 	msg.getAddress(buf); // this gets the complete address
 
 	char device_id[20]; 
-	// now we need to select only the device idenfier
-	// Ex: "/LOOM/<device_id>"/DevicePollResponse
-	// Search for 'devicePollResponse' or the last instance of '/'
-	// Also need to eliminate the family, 
-	// maybe just start at length of FAMILY + 2 (for the two '/')?
+// 	// now we need to select only the device idenfier
+// 	// Ex: "/LOOM/<device_id>"/DevicePollResponse
+// 	// Search for 'devicePollResponse' or the last instance of '/'
+// 	// Also need to eliminate the family, 
+// 	// maybe just start at length of FAMILY + 2 (for the two '/')?
+
+
+// 	// snprintf(address, strrchr(address,'/')-address+1, "%s", address);
+
+// 	snprintf(device_id, n, "%s", buf+len(FAMILY)+2)  // something vaguely like this
+
+// // where I think n is last occurance of '/' - ( len(Family)+2 )
+// // the 'buf+len(FAMILY)+2' could probably also be 'strchr' of buf+1
+
+	// This grabs the device type and instance number from the message address
+	snprintf(device_id, (strrchr(buf,'/') - strchr(buf+1,'/')), "%s", strchr(buf+1,'/')+1);
 
 
 	for (int i = 0; i < num_known_devices; i++) {
