@@ -108,29 +108,6 @@ char          global_packet_header_string[80]; // Sometimes functions need to ac
 
 
 
-struct device_info
-{
-	char device_id[20];
-	int  inst_num; 
-
-	int num_platforms;
-	CommPlatform platforms[4]; // should this perhaps be an array?
-
-	// For targetted WiFi messages
-	int  udp_port;
-	int  ip_addr[4]; 
-
-	// For LoRa / nRF
-	int  dev_address; 
-
-};
-typedef struct device_info DeviceInfo;
-
-DeviceInfo known_devices[10];    
-int num_known_devices = 0;
-// Array to store other devices on the network that this device can see 
-// To be moved into a struct within the struct that gets saved to flash
-
 // ================================================================ 
 // ===               MISCELLANEOUS DEFINITIONS                  === 
 // ================================================================
@@ -290,8 +267,8 @@ int    get_bundle_bytes(OSCBundle *bndl);
 
 // Files of functions that are not specific to sensors / actuators
 #include "loom_flash.h"
-#include "loom_common_functions.h"
 #include "loom_interdev_comm.h" 
+#include "loom_common_functions.h"
 #include "loom_msg_router.h"
 #include "loom_interface.h"
 

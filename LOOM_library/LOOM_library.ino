@@ -29,8 +29,8 @@ void loop()
 {
 	OSCBundle bndl, send_bndl; 
 	
-	// receive_bundle(&bndl, WIFI);
-	// process_bundle(&bndl);
+	receive_bundle(&bndl, WIFI);
+	process_bundle(&bndl);
 	// measure_sensors();
 	// package_data(&send_bndl);
 	// send_bundle(&send_bndl, WIFI);

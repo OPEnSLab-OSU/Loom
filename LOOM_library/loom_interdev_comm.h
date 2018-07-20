@@ -1,14 +1,61 @@
+// ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================ 
+
+#if hub_node_type == 0
+	struct device_info
+	{
+		char device_id[20];
+		int  inst_num; 
+		int num_platforms;
+		CommPlatform platforms[4]; // should this perhaps be an array?
+		// For targetted WiFi messages
+		int  udp_port;
+		int  ip_addr[4]; 
+		// For LoRa / nRF
+		int  dev_address; 
+	}; 
+	typedef struct device_info DeviceInfo;
+#endif
+
+
+// ================================================================ 
+// ===                   GLOBAL DECLARATIONS                    === 
+// ================================================================
+
+#if hub_node_type == 0
+	DeviceInfo known_devices[10];    
+	int num_known_devices = 0;
+
+	unsigned long last_device_poll_time = 0;    // used with millis() to periodically poll for device on the network
+#endif
 
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
+#if hub_node_type == 0
 void print_known_devices();
-void broadcast_all_platforms(OSCBundle* bndl);
 void send_to_known_devices(OSCBundle* bndl);
 void device_search();
-void respond_to_device_poll(OSCMessage &msg);
 void update_known_devices(OSCMessage &msg);
+void check_device_refresh_interval();
+#endif
+void setup_network_info();
+void broadcast_all_platforms(OSCBundle* bndl);
+void respond_to_device_poll(OSCMessage &msg);
+
+
+// ================================================================
+// ===                          SETUP                           ===
+// ================================================================
+void setup_network_info()
+{
+	// #if hub_node_type == 0
+	// 	device_search();
+	// #endif
+}
+
 
 // ================================================================
 // ===                        FUNCTIONS                         ===
@@ -20,15 +67,17 @@ void update_known_devices(OSCMessage &msg);
 // Prints the information about all of the devices 
 // that this device knows and can communicate with
 //
+#if hub_node_type == 0
 void print_known_devices()
 {
 	#if LOOM_DEBUG == 1
+		LOOM_DEBUG_Println("= = = = =");
 		LOOM_DEBUG_Println("Known Devices:");
 		for (int i = 0; i < num_known_devices; i++) {
 			LOOM_DEBUG_Println2("\tDevice ID: ",     known_devices[i].device_id);
 			LOOM_DEBUG_Println2("\tInstance #: ",    known_devices[i].inst_num);
 			LOOM_DEBUG_Println2("\tNum Platforms: ", known_devices[i].num_platforms);
-			LOOM_DEBUG_Println("= = = = =");
+			LOOM_DEBUG_Println("\t- - - - -");
 			for (int j = 0; j < known_devices[i].num_platforms; j++) {
 				switch (known_devices[i].platforms[j]) {
 					case WIFI :
@@ -54,9 +103,10 @@ void print_known_devices()
 				}	
 			}
 		}
-
+		LOOM_DEBUG_Println("= = = = =");
 	#endif
 }
+#endif
 
 
 
@@ -98,11 +148,12 @@ void broadcast_all_platforms(OSCBundle* bndl)
 //
 // @param bndl  The bundle to send to known devices
 // 
+#if hub_node_type == 0
 void send_to_known_devices(OSCBundle* bndl)
 {
 	LOOM_DEBUG_Println("Sending to all known devices");
 }
-
+#endif
 
 
 // --- DEVICE SEARCH ---
@@ -111,6 +162,7 @@ void send_to_known_devices(OSCBundle* bndl)
 // searching for devices by sending out a poll request
 // Calls broadcast_all_platforms to do this 
 //
+#if hub_node_type == 0
 void device_search() 
 {
 	LOOM_DEBUG_Println("Searching for devices");
@@ -127,6 +179,7 @@ void device_search()
 	// now call broadcast_all_platforms
 	broadcast_all_platforms(&bndl);
 }
+#endif
 
 
 
@@ -200,6 +253,7 @@ void respond_to_device_poll(OSCMessage &msg)
 //
 // @param msg  The poll response from a node device
 //
+#if hub_node_type == 0
 void update_known_devices(OSCMessage &msg)
 {
 	LOOM_DEBUG_Println("Updating known devices");
@@ -225,7 +279,7 @@ void update_known_devices(OSCMessage &msg)
 
 			// dont do anything currently, assume rest of data is up to date, might change this in the future
 
-			LOOM_DEBUG_Println3("Device: ", msgDevID, "already in list of known devices");
+			LOOM_DEBUG_Println3("Device: '", msgDevID, "'already in list of known devices");
 			found = true;
 			break;
 		}
@@ -235,7 +289,7 @@ void update_known_devices(OSCMessage &msg)
 	// Handle if message was from is a new device
 	// Add new entry to 'known_devices'
 	if (!found) {
-		LOOM_DEBUG_Println3("Device: ", msgDevID, " is new, adding to known device list");
+		LOOM_DEBUG_Println3("Device: '", msgDevID, "'' is new, adding to known device list");
 
 		DeviceInfo new_entry;
 
@@ -281,4 +335,28 @@ void update_known_devices(OSCMessage &msg)
 		// Add to list
 		known_devices[num_known_devices++] = new_entry;
 	}
+
+	#if LOOM_DEBUG == 1
+		print_known_devices();
+	#endif
 }
+#endif
+
+
+
+// --- CHECK DEVICE REFRESH INTERVAL ---
+//
+// Periodically update the list of known devices
+// by calling device search
+// Interval is provided in seconds by device_poll_refresh
+//
+#if hub_node_type == 0
+void check_device_refresh_interval()
+{
+	unsigned long time = millis();
+	if (time - last_device_poll_time > (device_poll_refresh*1000) ) {
+		device_search();
+		last_device_poll_time = time;
+	}
+}
+#endif

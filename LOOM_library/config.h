@@ -45,12 +45,14 @@
 #define is_pushingbox 1		// 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
-#define is_sd         1		// 1 to enable SD card 
-#define is_rtc        1		// Enable RTC functionality
+#define is_sd         0		// 1 to enable SD card 
+#define is_rtc        0		// Enable RTC functionality
 
 // --- Device Telemetry Type ---
-#define hub_node_type 1		// 0: Hub, 1: Node
+#define hub_node_type 0		// 0: Hub, 1: Node
 #define is_repeater   0		// Sorry, this doesn't do anything yet
+
+
 
 // --- Enabled Actuators --- 
 #define num_servos    0 	// Number of servos being used (up to 8 per shield, testing has generally only been through 1 shield)
@@ -205,8 +207,9 @@
 
 // --- Hub Options ---
 #if hub_node_type == 0
-	#define is_ethernet   1	// not necessarily always true
 	#define is_pushingbox 1 // only if Ethernet, WiFi, or cellular
+
+	#define device_poll_refresh 15  // Seconds between re-searching for devices on the network
 
 	// The following two defines are planned to be implemented, but are not in use currently
 	// #define hub_input  LORA
@@ -222,9 +225,9 @@
 #if is_pushingbox == 1	
 	// Google Spreadsheet ID
 	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; random string of characters)
-	#define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
+	// #define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	    
-	// #define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"
+	#define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"
 
 	// Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
 	#define tab_id  "sheet3"   

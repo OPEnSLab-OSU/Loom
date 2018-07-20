@@ -360,7 +360,9 @@ void additional_loop_checks()
 		check_connect_to_new_network();
 
 		// Compare the previous status to the current status
-		wifi_check_status();
+		if (config_wifi->wifi_mode == AP_MODE) {
+			wifi_check_status();
+		}
 
 		//Clear the new_ssid and new_pass buffers in case new wifi settings were received
 		clear_new_wifi_setting_buffers();
@@ -375,6 +377,10 @@ void additional_loop_checks()
 	#if is_adafruitio == 1
 		adafruitio_subscribe();
 		adafruitio_publish();
+	#endif
+
+	#if hub_node_type == 0
+		check_device_refresh_interval();
 	#endif
 }
 

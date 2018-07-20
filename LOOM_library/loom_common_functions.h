@@ -137,6 +137,11 @@ void Loom_begin()
 		setup_pushingbox();
 	#endif
 
+	// If hub, poll for devices on network(s)
+	#if hub_node_type == 0
+		setup_network_info();
+	#endif
+
 	// Flash the built-in LED indicating setup complete
 	flash_led();
 }
