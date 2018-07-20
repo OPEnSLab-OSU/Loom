@@ -120,7 +120,9 @@ void common_msg_router(OSCMessage &msg, int addrOffset)
 	//     This might be merged with the above dispatch later
 	msg.dispatch("/DeviceChannelPoll", 	respond_to_device_poll, 	addrOffset);	// node receiving from hub
 
-	msg.dispatch("/DevicePollResponse", update_known_devices, 		addrOffset);	// hub receiving from node
+	#if hub_node_type == 0
+		msg.dispatch("/DevicePollResponse", update_known_devices, 		addrOffset);	// hub receiving from node
+	#endif
 
 			// Probably also do a msg.dispatch("PollResponse", populate_known_devices, addrOffset + #) 
 			// where # is the number of characters taken up by the device name, number, and '/'' 
