@@ -28,6 +28,8 @@ char  data_type;
 char  buf[20];
 bool  takingElseBranch = false;
 
+float reg[3][10];
+
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
@@ -40,6 +42,14 @@ void  parseProgram(OSCMessage* msg);
 // ===                      MINI FUNCTIONS                      === 
 // ================================================================
 
+float load_R(int i) { return reg[0][i]; }
+float load_S(int i) { return reg[1][i]; }
+float load_T(int i) { return reg[2][i]; }
+void  store_R(int i, float val) { reg[0][i] = val; }
+void  store_S(int i, float val) { reg[1][i] = val; }
+void  store_T(int i, float val) { reg[2][i] = val; }
+
+
 // Single value math
 float inc(float x, float n) { return x+1; } 
 float dec(float x, float n) { return x-1; }
@@ -50,7 +60,7 @@ float addition(float x, float y) { return x + y; }
 float subtract(float x, float y) { return x - y; }
 float multiply(float x, float y) { return x * y; }
 float divide(  float x, float y) { return x / y; }
-float power(   float x, float y) { return pow(x, y); }
+float exp(   float x, float y) { return pow(x, y); }
 
 // Comparisons
 float equal(        float x, float y) { return x == y; }
@@ -103,27 +113,33 @@ void setup_hub_scripts()
 
 void parseProgram(OSCMessage* msg)
 {
-	for (int i = 0; i < msg.size(); i++) {
+	for (int i = 0; i < msg->size(); i++) {
 
-		data_type = msg.getType(i);
+		data_type = msg->getType(i);
 		Serial.print("Data Type: "); Serial.print(data_type); Serial.print(" : ");
 
 		switch(data_type) {
 			// Number or boolean literals
 			case 'd': case 'f': case 'i': case 'b':
-				Serial.println(     msgGetLiteral(&msg, i));
-				stack[stackPtr++] = msgGetLiteral(&msg, i);
+				Serial.println(     msgGetLiteral(msg, i));
+				stack[stackPtr++] = msgGetLiteral(msg, i);
 				break;
 
 			// Commands and Functions and If Statements
 			case 's':
-				msg.getString(i, buf, 20);
+				msg->getString(i, buf, 20);
 				Serial.println(buf);
 
 				// Pop one value
 				if ( strcmp(buf, "pop") == 0 ) {  
 					stackPtr--;  break;  
 				}
+
+				// Duplicate the value on the top of the stack
+				if ( strcmp(buf, "dup") == 0 ) {  
+					stack[stackPtr] = stack[stackPtr-1]; stackPtr++;  break;  
+				}
+
 
 				// Unary Math operators
 				if ( (strcmp(buf, "++") == 0) || (strcmp(buf, "--") == 0) || (strcmp(buf, "sqr") == 0) ) {  
@@ -136,7 +152,7 @@ void parseProgram(OSCMessage* msg)
 				}
 
 				// Reading from External Variables 
-				if (strncmp(buf, "read_", 5) == 0) {  
+				if (strncmp(buf, "load_", 5) == 0) {  
 					stack[stackPtr++] = reg[ buf[5]-114 ][ (int)strtol(buf+6,NULL,10) ];  break;  
 				}
 				
@@ -152,9 +168,9 @@ void parseProgram(OSCMessage* msg)
 					if (!stack[--stackPtr]) {
 						Serial.println("Taking Else branch");
 						takingElseBranch = true;
-						msg.getString(++i, buf, 20);
+						msg->getString(++i, buf, 20);
 						while ( (strcmp(buf, "else") != 0) && (strcmp(buf, "endif") != 0) ) {
-							msg.getString(++i, buf, 20);
+							msg->getString(++i, buf, 20);
 						}
 					} else {
 						Serial.println("Taking Then branch");
@@ -165,9 +181,9 @@ void parseProgram(OSCMessage* msg)
 					// If taking the else branch, just continue
     				// Otherwise skip to 'endif'
 					if (!takingElseBranch) {
-						msg.getString(++i, buf, 20);
+						msg->getString(++i, buf, 20);
 						while( strcmp(buf, "endif") != 0 ) {
-							msg.getString(++i, buf, 20);
+							msg->getString(++i, buf, 20);
 						}
 					}
 					takingElseBranch = false;
@@ -246,11 +262,11 @@ retFuncPtr strToFunc(char * str) {
 	if ( (strcmp(str, "dec") == 0)    || (strcmp(str, "--")  == 0) ) return dec;
 	if ( (strcmp(str, "square") == 0) || (strcmp(str, "sqr") == 0) ) return square;
 	
-	if ( (strcmp(str, "addition") == 0)      || (strcmp(str, "+") == 0 ) ) return addition;
+	if ( (strcmp(str, "add") == 0)           || (strcmp(str, "+") == 0 ) ) return addition;
 	if ( (strcmp(str, "subtract") == 0)      || (strcmp(str, "-") == 0 ) ) return subtract;
 	if ( (strcmp(str, "multiply") == 0)      || (strcmp(str, "*") == 0 ) ) return multiply;
 	if ( (strcmp(str, "divide") == 0)        || (strcmp(str, "/") == 0 ) ) return divide;
-	if ( (strcmp(str, "power") == 0)         || (strcmp(str, "^") == 0 ) ) return power;	
+	if ( (strcmp(str, "exp") == 0)           || (strcmp(str, "^") == 0 ) ) return exp;	
 
 	if ( (strcmp(str, "equal") == 0)         || (strcmp(str, "==") == 0) ) return equal;
 	if ( (strcmp(str, "notEqual") == 0)      || (strcmp(str, "!=") == 0) ) return notEqual;
@@ -259,12 +275,12 @@ retFuncPtr strToFunc(char * str) {
 	if ( (strcmp(str, "lessThanEq") == 0)    || (strcmp(str, "<=") == 0) ) return lessThanEq;
 	if ( (strcmp(str, "greaterThanEq") == 0) || (strcmp(str, ">=") == 0) ) return greaterThanEq;
 	
-	if ( (strcmp(str, "logical_not")  == 0)  || (strcmp(str, "!")  == 0) ) return logical_not;
-	if ( (strcmp(str, "logical_or")   == 0)  || (strcmp(str, "||") == 0) ) return logical_or;
-	if ( (strcmp(str, "logical_and")  == 0)  || (strcmp(str, "&&") == 0) ) return logical_and;
-	if ( (strcmp(str, "logical_nor")  == 0)  || (strcmp(str, "!|") == 0) ) return logical_nor;
-	if ( (strcmp(str, "logical_nand") == 0)  || (strcmp(str, "!&") == 0) ) return logical_nand;
-	if ( (strcmp(str, "logical_xor")  == 0)  || (strcmp(str, "e|") == 0) ) return logical_xor;
+	if ( (strcmp(str, "not")  == 0)  || (strcmp(str, "!")  == 0) ) return logical_not;
+	if ( (strcmp(str, "or")   == 0)  || (strcmp(str, "||") == 0) ) return logical_or;
+	if ( (strcmp(str, "and")  == 0)  || (strcmp(str, "&&") == 0) ) return logical_and;
+	if ( (strcmp(str, "nor")  == 0)  || (strcmp(str, "!|") == 0) ) return logical_nor;
+	if ( (strcmp(str, "nand") == 0)  || (strcmp(str, "!&") == 0) ) return logical_nand;
+	if ( (strcmp(str, "xor")  == 0)  || (strcmp(str, "x|") == 0) ) return logical_xor;
 	
 	if ( (strcmp(str, "ifFuncEval") == 0) ) return ifFuncEval;
 	if ( (strcmp(str, "elFuncEval") == 0) ) return elFuncEval;
@@ -274,3 +290,6 @@ retFuncPtr strToFunc(char * str) {
 
 	return NULL;
 }
+
+
+
