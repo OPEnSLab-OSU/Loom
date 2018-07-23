@@ -170,7 +170,12 @@ void setup_hub_scripts()
 // ===                        FUNCTIONS                         ===
 // ================================================================
 
-// Runs all scripts
+
+// --- RUN ALL SCRIPTS --- 
+//
+// Runs all scripts,
+// static and dynamic
+//
 void run_all_scripts()
 {
 	run_all_static_scripts();
@@ -178,6 +183,11 @@ void run_all_scripts()
 }
 
 
+
+// --- RUN ALL STATIC SCRIPTS --- 
+// 
+// Runs all static scripts
+//
 void run_all_static_scripts()
 {
 	LOOM_DEBUG_Println("Running static scripts");
@@ -193,6 +203,12 @@ void run_all_static_scripts()
 	}
 }
 
+
+
+// --- RUN ALL DYNAMIC SCRIPTS ---
+//  
+// Runs all dynamic scripts
+//
 void run_all_dynamic_scripts()
 {
 	LOOM_DEBUG_Println("Running dynamic scripts");
@@ -200,6 +216,7 @@ void run_all_dynamic_scripts()
 		parseScript(dynamic_msg_scripts[i]);
 	}
 }
+
 
 
 // Gets the length of the script in String[] format
@@ -214,7 +231,12 @@ int get_script_len(String script[])
 }
 
 
+
+// --- MESSAGE TO SCRIPT ---
+//
 // Turns a received message into a runnable script
+//
+// @param msg  The message forwarded from msg_router, contains script 
 void message_to_script(OSCMessage &msg)
 {
 	LOOM_DEBUG_Println("Received Script");
@@ -256,6 +278,12 @@ void message_to_script(OSCMessage &msg)
 
 
 
+// --- DELETE SCRIPT---
+//
+// Deletes the specified script if it exists
+// 
+// @param msg  The message forwarded from msg_router, 
+// 				contains name of script to delete
 void delete_script(OSCMessage &msg)
 {
 	char script_name[20], buf[20];
@@ -284,15 +312,33 @@ void delete_script(OSCMessage &msg)
 
 
 
+// --- SAVE DYNAMIC SCRIPTS ---
+//
+// Saves dynamic scripts to flash,
+// they are lost upon restart if not saved
+// 
+// @param msg  Message forward by msg_router, required parameter, not used
+//
+void save_dynamic_scripts(OSCMessage &msg)
+{
+	
+}
 
 // ================================================================
 // ===                      SCRIPT PARSER                       ===
 // ================================================================
 
 
+
+// --- PARSE SCRIPT ---
+//
+// Takes a script in the form of an OSC message
+// and executes it
+//
+// @param msg  The encoding of the script
+//
 void parseScript(OSCMessage* msg)
 {
-	// print_message(msg);
 	stackPtr = 0;
 
 	char buf[50];
@@ -425,6 +471,8 @@ void parseScript(OSCMessage* msg)
 
 }
 
+// Overloaded version that takes a bundle instead of a message
+// Simply calls the normal parseScript with the message in the bundle
 void parseScript(OSCBundle* bndl)
 {
 	if (bndl->size() != 1) {
@@ -447,6 +495,9 @@ void parseScript(OSCBundle* bndl)
 // value from a message and return it as a float.
 // It works if the value is a double, float, int, or bool
 //
+// @param msg  The message to read from
+// @param pos  Which parameter of the message to read
+//
 float msgGetLiteral(OSCMessage* msg, int pos) 
 {
 	switch(msg->getType(pos)) {
@@ -459,6 +510,11 @@ float msgGetLiteral(OSCMessage* msg, int pos)
 }
 
 
+
+// --- PRINT REGISTERS ---
+//	
+// Prints the contents of the 3 register banks
+//
 void print_registers()
 {
 	#if LOOM_DEBUG == 1
@@ -484,6 +540,8 @@ void print_registers()
 // represents a function, and returns a pointer of 
 // the corresponding function
 //
+// @param str  The string to find the matching function for
+// 
 retFuncPtr strToFunc(char * str) {
 	// Math Unary
 	if ( (strcmp(str, "inc") == 0)    || (strcmp(str, "++")  == 0) ) return inc;
@@ -515,8 +573,6 @@ retFuncPtr strToFunc(char * str) {
 
 	// Custom functions get called here
 	return custom_strToFunc(str);
-
-	// return NULL;
 }
 
 
