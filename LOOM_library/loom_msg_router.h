@@ -89,8 +89,12 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	
 
 	#if enable_hub_scripts == 1
+		// Creates a new script from a received message
 		msg.dispatch("/newHubScript",		message_to_script, 		addrOffset);
+		// Deletes the specified dynamic script if it exists
 		msg.dispatch("/deleteHubScript",	delete_script, 			addrOffset);
+		// Saves any current dynamic scripts to flash
+		msg.dispatch("/saveDynamicScripts", save_dynamic_scripts, 	addrOffset);
 	#endif
 
 	// Set the instance number of this device

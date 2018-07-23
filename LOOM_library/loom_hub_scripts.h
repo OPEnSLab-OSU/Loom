@@ -66,6 +66,8 @@ int  get_script_len(String script[]);
 // Message router functions
 void message_to_script(OSCMessage &msg);
 void delete_script(OSCMessage &msg);
+void save_dynamic_scripts(OSCMessage &msg);
+
 
 // Parser and aux functions
 void  parseScript(OSCMessage* msg);
