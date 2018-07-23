@@ -11,12 +11,15 @@
 // when returning function pointers
 typedef float (*retFuncPtr)(float,float); 
 
-#define max_script_len 20
+#define max_static_scripts  10
+#define max_dynamic_scripts 10
+#define max_script_len      20
+
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================ 
 
-// Used to save 
+// Will be sed to save script to flash
 struct config_dynamic_scripts_t {
 	int num_dynamic_scripts;
 	char* dynamic_scripts[5][max_script_len]; // currently up to 5 scripts with as many as 20 commands (arbitrary numbers right now)
@@ -31,10 +34,17 @@ struct config_dynamic_scripts_t config_dynamic_scripts;
 
 // Scripts that are preloaded and are saved in program memory not flash
 int num_static_scripts;
+int num_dynamic_scripts;
 // char* static_scripts[10][20];
 // String static_scripts[10][20];
 
-OSCMessage* static_msg_scripts[10];
+OSCMessage* static_msg_scripts[max_static_scripts];
+OSCMessage* dynamic_msg_scripts[max_dynamic_scripts];  
+		// maybe something like this is populated by reading from flash, 
+		// rather that converting everytime from strings 
+		// has better continuity with the static verision then
+		// easy to fill directly from received bundle
+
 
 // Used by parser
 float stack[50];    
@@ -66,10 +76,10 @@ void  parseScript(OSCBundle* bndl);
 // ===                      MINI FUNCTIONS                      === 
 // ================================================================
 
-// Returns the value in the ith register of the R (0), S (1), or T (2) bank
-float load_reg(int r, int i) { return reg[r][i]; }
-// Sets the value in the ith register of the R (0), S (1), or T (2) bank to be val	
-void  store_reg(int r, int i, float val) { reg[r][i] = val; }
+// Returns the value in the rth register of the R (b=0), S (b=1), or T (b=2) bank
+float load_reg(int b, int r) { return reg[b][r]; }
+// Sets the value in the rth register of the R (b=0), S (b=1), or T (b=2) bank to be val
+void  store_reg(int b, int r, float val) { reg[b][r] = val; }
 
 
 // Single value math
@@ -100,23 +110,45 @@ float logical_nor( float a, float b) { return !((bool)a || (bool)b); }
 float logical_nand(float a, float b) { return !((bool)a && (bool)b); }
 float logical_xor( float a, float b) { return ( ((bool)a && !(bool)b) || (!(bool)a && (bool)b) ); } 
 
-// Printing / Void fuctions
-float ifFuncEval(float y, float z) { Serial.println("Evaluated True");  return 0; }
-float elFuncEval(float y, float z) { Serial.println("Evaluated False"); return 0; }
-float termFunc(  float y, float z) { Serial.println("Function chain terminated"); return 0; }
-float errorFunc( float y, float z) { Serial.println("Function pointer was null"); return 0; }
-float printVal(  float y, float z) { Serial.print("Value: "); Serial.println(y);  return 0; }
-
 // Wrapper for any 'float(*ptr)(float,float)' functions
 float wrapper(float x, float y, float (*fPtr)(float,float)) {
 	return fPtr(x, y);
 }
 
+// ================================================================
+// ===                    PRELOADED SCRIPTS                     ===
+// ================================================================
+
+// This function is where you define any scripts that are loaded to
+// the device without needing to be saved to flash (i.e. static scripts)
+// Use these for scripts that more or less permanently used on the 
+// device until reflashing
+void preload_scripts() 
+{
+
+	// Setup static scripts 
+	// i.e. num_static_scripts
+	// static_scripts[0][0] = "8"; //"150", "blink_ex", "done"};
+	// static_scripts[0][1] = "150";
+	// static_scripts[0][2] = "blink_ex";
+	// static_scripts[0][3] = "done";
+
+
+	static_msg_scripts[0] = new OSCMessage("/test");
+	static_msg_scripts[0]->add(10.0).add(300.0).add("blink_ex");
+	num_static_scripts++;
+
+	static_msg_scripts[1] = new OSCMessage("/test2");
+	static_msg_scripts[1]->add(4.0).add(1000.0).add("blink_ex");
+	num_static_scripts++;
+
+}
+
+
 
 // ================================================================
 // ===                          SETUP                           ===
 // ================================================================
-
 
 void setup_hub_scripts()
 {
@@ -129,22 +161,11 @@ void setup_hub_scripts()
 		}
 	}
 
-	// Setup static scripts 
-	// i.e. num_static_scripts
-	// static_scripts[0][0] = "8"; //"150", "blink_ex", "done"};
-	// static_scripts[0][1] = "150";
-	// static_scripts[0][2] = "blink_ex";
-	// static_scripts[0][3] = "done";
-
-
-	static_msg_scripts[0] = new OSCMessage("/test");
-	static_msg_scripts[0]->add(10.0).add(300.0).add("blink_ex");
-
-	static_msg_scripts[1] = new OSCMessage("/test2");
-	static_msg_scripts[1]->add(4.0).add(1000.0).add("blink_ex");
-
-	num_static_scripts = 2;
-
+	num_static_scripts  = 0;
+	num_dynamic_scripts = 0;
+	preload_scripts();
+	
+	
 	// Setup dynamic scripts
 	// i.e. read in from flash
 }
@@ -164,7 +185,7 @@ void run_all_scripts()
 void run_all_static_scripts()
 {
 	LOOM_DEBUG_Println("In run_all_static_scripts");
-	OSCBundle scriptBndl;
+	// OSCBundle scriptBndl;
 	for (int i = 0; i < num_static_scripts; i++) {
 
 	// BUNDLE ARRAY VERSION
@@ -187,21 +208,65 @@ void run_all_dynamic_scripts()
 	// for (int i = 0; i < config_dynamic_scripts.num_dynamic_scripts; i++) {
 		
 	// }
+
+	LOOM_DEBUG_Println("In run_all_static_scripts");
+	for (int i = 0; i < num_dynamic_scripts; i++) {
+		parseScript(dynamic_msg_scripts[i]);
+	}
 }
 
 
-
+// Gets the length of the script in String[] format
+// as it may not be the max size of the array
 int get_script_len(String script[])
 {
 	for (int i = 0; i < max_script_len; i++) {
-		LOOM_DEBUG_Println2("\t", script[i]);
-		if (script[i] == "done")  
-			return i;
+		if (script[i] == "done")  return i;
 	}
 
 	return max_script_len;
 }
 
+
+
+void message_to_script(OSCMessage &msg)
+{
+	LOOM_DEBUG_Println("Received Script");
+	// OSCBundle tmpBndl;
+	// tmpBndl.add(msg);
+	// print_bundle(&tmpBndl);
+
+
+	if (num_dynamic_scripts >= max_dynamic_scripts)
+		return;
+
+	char script_name[20], buf2[20];
+
+	// Get the script name
+	msg.getString(0, script_name, 20);
+
+	for (int i = 0; i < num_dynamic_scripts; i++) {
+		dynamic_msg_scripts[i]->getAddress(buf2);
+		// LOOM_DEBUG_Println4("Name: ", script_name, "\tBuf2: ", buf2);
+		if ( strcmp(script_name, buf2) == 0 ) {
+			LOOM_DEBUG_Println("Script already on device");
+			return;
+		}
+	}
+
+	dynamic_msg_scripts[num_dynamic_scripts] = new OSCMessage(script_name);
+
+	for (int i = 1; i < msg.size() && i <= max_script_len; i++) {
+		switch (msg.getType(i)) {
+ 			case 'i': dynamic_msg_scripts[num_dynamic_scripts]->add(msg.getInt(i));		break;
+ 			case 'f': dynamic_msg_scripts[num_dynamic_scripts]->add(msg.getFloat(i));	break;
+ 			case 's': char buf[80];  msg.getString(i, buf, 80);  dynamic_msg_scripts[num_dynamic_scripts]->add(buf);  break;
+ 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
+ 		}
+	}
+
+	num_dynamic_scripts++;
+}
 
 
 // ================================================================
@@ -212,6 +277,7 @@ int get_script_len(String script[])
 void parseScript(OSCMessage* msg)
 {
 	// print_message(msg);
+	stackPtr = 0;
 
 	char buf[50];
 	msg->getAddress(buf, 0);
@@ -422,14 +488,6 @@ retFuncPtr strToFunc(char * str) {
 	if ( (strcmp(str, "nor")  == 0)  || (strcmp(str, "!|") == 0) ) return logical_nor;
 	if ( (strcmp(str, "nand") == 0)  || (strcmp(str, "!&") == 0) ) return logical_nand;
 	if ( (strcmp(str, "xor")  == 0)  || (strcmp(str, "x|") == 0) ) return logical_xor;
-	
-	// Other
-	if ( (strcmp(str, "ifFuncEval") == 0) ) return ifFuncEval;
-	if ( (strcmp(str, "elFuncEval") == 0) ) return elFuncEval;
-	if ( (strcmp(str, "termFunc")   == 0) ) return termFunc;
-	if ( (strcmp(str, "errorFunc")  == 0) ) return errorFunc;
-	if ( (strcmp(str, "printVal")   == 0) ) return printVal;
-
 
 	// Custom functions get called here
 	return custom_strToFunc(str);

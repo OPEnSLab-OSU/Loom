@@ -182,16 +182,8 @@ The 3 register banks, R, S, and T each have 10 registers. The can be modified an
 
 **Reading**
 
-`float Load_R(int i)` returns the value in the `ith` register of R bank
-
-`float Load_S(int i)` returns the value in the `ith` register of S bank
-
-`float Load_T(int i)` returns the value in the `ith` register of T bank
+`float load_reg(int b, int r)` Returns the value in the rth register of the R (b=0), S (b=1), or T (b=2) bank.
 
 **Writing**
 
-`void store_R(int i, float val)` sets the value in the `ith` register of R bank to be `val`
-
-`void store_S(int i, float val)` sets the value in the `ith` register of S bank to be `val`
-
-`void store_T(int i, float val)` sets the value in the `ith` register of T bank to be `val`
+`void store_reg(int b, int r, float val)` Sets the value in the rth register of the R (b=0), S (b=1), or T (b=2) bank to be `val`.

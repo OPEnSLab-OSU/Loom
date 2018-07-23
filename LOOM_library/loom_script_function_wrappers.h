@@ -57,10 +57,10 @@ typedef float (*retFuncPtr)(float,float);
 // Generally useful for if wrapper functions need more data that 
 // the two floats as parameters can provide
 
-// Returns the value in the ith register of the R (0), S (1), or T (2) bank
-float load_reg(int r, int i); 			
-// Sets the value in the ith register of the R (0), S (1), or T (2) bank to be val	
-void  store_reg(int r, int i, float val); 
+// Returns the value in the rth register of the R (b=0), S (b=1), or T (b=2) bank
+float load_reg(int b, int r); 			
+// Sets the value in the rth register of the R (b=0), S (b=1), or T (b=2) bank to be val
+void  store_reg(int b, int r, float val); 
 
 
 // ================================================================ 
