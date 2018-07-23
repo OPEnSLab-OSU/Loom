@@ -37,19 +37,17 @@ float reg[3][10];
 // ================================================================
 retFuncPtr strToFunc(char * str);
 float msgGetLiteral(OSCMessage* msg, int pos);
-void  parseProgram(OSCMessage* msg);
+void  parseScript(OSCMessage* msg);
 
 
 // ================================================================ 
 // ===                      MINI FUNCTIONS                      === 
 // ================================================================
 
-float load_R(int i) { return reg[0][i]; }
-float load_S(int i) { return reg[1][i]; }
-float load_T(int i) { return reg[2][i]; }
-void  store_R(int i, float val) { reg[0][i] = val; }
-void  store_S(int i, float val) { reg[1][i] = val; }
-void  store_T(int i, float val) { reg[2][i] = val; }
+// Returns the value in the ith register of the R (0), S (1), or T (2) bank
+float load_reg(int r, int i) { return reg[r][i]; }
+// Sets the value in the ith register of the R (0), S (1), or T (2) bank to be val	
+void  store_reg(int r, int i, float val) { reg[r][i] = val; }
 
 
 // Single value math
@@ -87,7 +85,6 @@ float termFunc(  float y, float z) { Serial.println("Function chain terminated")
 float errorFunc( float y, float z) { Serial.println("Function pointer was null"); return 0; }
 float printVal(  float y, float z) { Serial.print("Value: "); Serial.println(y);  return 0; }
 
-
 // Wrapper for any 'float(*ptr)(float,float)' functions
 float wrapper(float x, float y, float (*fPtr)(float,float)) {
 	return fPtr(x, y);
@@ -113,7 +110,7 @@ void setup_hub_scripts()
 // ================================================================
 
 
-void parseProgram(OSCMessage* msg)
+void parseScript(OSCMessage* msg)
 {
 	for (int i = 0; i < msg->size(); i++) {
 
@@ -128,7 +125,7 @@ void parseProgram(OSCMessage* msg)
 				break;
 
 			// Commands and Functions and If Statements
-			case 's':
+			case 's': {
 				msg->getString(i, buf, 20);
 				Serial.println(buf);
 
@@ -177,6 +174,7 @@ void parseProgram(OSCMessage* msg)
 					} else {
 						Serial.println("Taking Then branch");
 					}
+					break;
 				}
 
 				if ( strcmp(buf, "else") == 0 ) {  
@@ -189,21 +187,46 @@ void parseProgram(OSCMessage* msg)
 						}
 					}
 					takingElseBranch = false;
+					break;
 				}
 
 				if ( strcmp(buf, "endif") == 0) {
 					// probably don't need to do anything here
 					// takingElseBranch = false;
+					break;
 				}
 
-				break;
+				if ( strcmp(buf, "printStack") == 0) {
+					#if LOOM_DEBUG == 1
+						Serial.println();
+						for (int j = 0; j < stackPtr; j++) {
+							LOOM_DEBUG_Print2("  ", stack[j]); 
+						}
+						Serial.println();
+					#endif
+					break;
+				}
+
+
+
+				// If none of the above commands matched, try seaching external functions
+				float (*fPtr)(float,float) = strToFunc(buf);
+				if ( fPtr ) {
+					stack[stackPtr-2] = fPtr(stack[stackPtr-2], stack[stackPtr-1]);  stackPtr--;  
+					break;
+				}
+
+
+				// No 'break' so if error, fallthrough to 'default' case
+			} // of case 's':
 
 			default:
-				Serial.print("Parser error, invalid program detected at symbol #: ");
-				Serial.println(i);
+				LOOM_DEBUG_Println2("Parser error, invalid program detected at symbol #: ", i);
 				break;
 		}
 
+
+// This is just for debugging purposes for now
 		Serial.print("Stack ("); Serial.print(i); Serial.print("):");
 		for (int j = 0; j < stackPtr; j++) {
 			Serial.print("  "); Serial.print(stack[j]);
@@ -217,20 +240,28 @@ void parseProgram(OSCMessage* msg)
 	Serial.println();
 
 	// These just print out the register contents for debugging purposes
-	Serial.print("R: ");
-	for (int i = 0; i < 10; i++) {
-		Serial.print(i); Serial.print(": "); Serial.print(reg[0][i]); Serial.print(", "); 
-	}
-	Serial.print("S: ");
-	for (int i = 0; i < 10; i++) {
-		Serial.print(i); Serial.print(": "); Serial.print(reg[1][i]); Serial.print(", "); 
-	}
-	Serial.print("T: ");
-	for (int i = 0; i < 10; i++) {
-		Serial.print(i); Serial.print(": "); Serial.print(reg[2][i]); Serial.print(", "); 
-	}
+	// Serial.print("R: ");
+	// for (int i = 0; i < 10; i++) {
+	// 	Serial.print(i); Serial.print(": "); Serial.print(reg[0][i]); Serial.print(", "); 
+	// }
+	// Serial.print("S: ");
+	// for (int i = 0; i < 10; i++) {
+	// 	Serial.print(i); Serial.print(": "); Serial.print(reg[1][i]); Serial.print(", "); 
+	// }
+	// Serial.print("T: ");
+	// for (int i = 0; i < 10; i++) {
+	// 	Serial.print(i); Serial.print(": "); Serial.print(reg[2][i]); Serial.print(", "); 
+	// }
 }
 
+void parseScript(OSCBundle* bndl)
+{
+	if (bndl->size() != 1) {
+		LOOM_DEBUG_Println("Bundle not in the correct format for script parser");
+		LOOM_DEBUG_Println("Call with either message or bundle containing single message");
+	}
+	parseScript(bndl->getOSCMessage(0));
+}
 
 
 
@@ -260,16 +291,19 @@ float msgGetLiteral(OSCMessage* msg, int pos)
 // the corresponding function
 //
 retFuncPtr strToFunc(char * str) {
+	// Math Unary
 	if ( (strcmp(str, "inc") == 0)    || (strcmp(str, "++")  == 0) ) return inc;
 	if ( (strcmp(str, "dec") == 0)    || (strcmp(str, "--")  == 0) ) return dec;
 	if ( (strcmp(str, "square") == 0) || (strcmp(str, "sqr") == 0) ) return square;
 	
+	// Math 
 	if ( (strcmp(str, "add") == 0)           || (strcmp(str, "+") == 0 ) ) return addition;
 	if ( (strcmp(str, "subtract") == 0)      || (strcmp(str, "-") == 0 ) ) return subtract;
 	if ( (strcmp(str, "multiply") == 0)      || (strcmp(str, "*") == 0 ) ) return multiply;
 	if ( (strcmp(str, "divide") == 0)        || (strcmp(str, "/") == 0 ) ) return divide;
 	if ( (strcmp(str, "exp") == 0)           || (strcmp(str, "^") == 0 ) ) return exp;	
 
+	// Comparison
 	if ( (strcmp(str, "equal") == 0)         || (strcmp(str, "==") == 0) ) return equal;
 	if ( (strcmp(str, "notEqual") == 0)      || (strcmp(str, "!=") == 0) ) return notEqual;
 	if ( (strcmp(str, "lessThan") == 0)      || (strcmp(str, "<")  == 0) ) return lessThan;
@@ -277,6 +311,7 @@ retFuncPtr strToFunc(char * str) {
 	if ( (strcmp(str, "lessThanEq") == 0)    || (strcmp(str, "<=") == 0) ) return lessThanEq;
 	if ( (strcmp(str, "greaterThanEq") == 0) || (strcmp(str, ">=") == 0) ) return greaterThanEq;
 	
+	// Logic
 	if ( (strcmp(str, "not")  == 0)  || (strcmp(str, "!")  == 0) ) return logical_not;
 	if ( (strcmp(str, "or")   == 0)  || (strcmp(str, "||") == 0) ) return logical_or;
 	if ( (strcmp(str, "and")  == 0)  || (strcmp(str, "&&") == 0) ) return logical_and;
@@ -284,13 +319,18 @@ retFuncPtr strToFunc(char * str) {
 	if ( (strcmp(str, "nand") == 0)  || (strcmp(str, "!&") == 0) ) return logical_nand;
 	if ( (strcmp(str, "xor")  == 0)  || (strcmp(str, "x|") == 0) ) return logical_xor;
 	
+	// Other
 	if ( (strcmp(str, "ifFuncEval") == 0) ) return ifFuncEval;
 	if ( (strcmp(str, "elFuncEval") == 0) ) return elFuncEval;
 	if ( (strcmp(str, "termFunc")   == 0) ) return termFunc;
 	if ( (strcmp(str, "errorFunc")  == 0) ) return errorFunc;
 	if ( (strcmp(str, "printVal")   == 0) ) return printVal;
 
-	return NULL;
+
+	// Custom functions get called here
+	return custom_strToFunc(str);
+
+	// return NULL;
 }
 
 
