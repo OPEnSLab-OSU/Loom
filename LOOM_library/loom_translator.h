@@ -26,8 +26,8 @@ union data_value { // Used in translation between OSC and strings
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 
-void print_message(OSCMessage* msg, int i);
-void print_message(OSCMessage* msg);
+// void print_message(OSCMessage* msg, int i);
+// void print_message(OSCMessage* msg);
 void print_bundle(OSCBundle *bndl);
 template<typename T> 
 void print_array(T data [], int len, int format);
@@ -36,6 +36,8 @@ void print_array(T data [], int len, int format);
 String get_data_value(OSCMessage* msg, int pos);
 String get_address_string(OSCMessage *msg);
 void   deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
+// void   deep_copy_message(OSCMessage *scrMsg, OSCMessage *destMsg);
+
 
 // Conversions between bundles and strings
 void convert_OSC_string_to_bundle(char *osc_string, OSCBundle*bndl);
@@ -299,6 +301,20 @@ void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl)
 	} 
 }
 
+// void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
+// {
+// 	char buf[50];
+// 	for (int i = 0; i < srcMsg->size(); i++) {
+// 		switch (srcMsg->getType(i)) {
+//  			case 'i': destMsg->add(srcMsg->getInt(i));	break;
+//  			case 'f': destMsg->add(srcMsg->getFloat(i));	break;
+//  			case 's': char buf[80];  srcMsg->getString(i, buf, 80);  destMsg->add(buf);  break;
+//  			default: LOOM_DEBUG_Println("Unsupported data data_type.");
+//  		}
+// 	}
+// 	srcMsg->getAddress(buf);
+// 	destMsg->setAddress(buf);
+// }
 
 
 // ================================================================

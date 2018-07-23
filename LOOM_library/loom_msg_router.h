@@ -87,6 +87,11 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		msg.dispatch("/setSDlogging",	 	set_SD_logging, 		addrOffset);
 	#endif
 	
+
+	#if enable_hub_scripts == 1
+		msg.dispatch("/newHubScript",		message_to_script, 		addrOffset);
+	#endif
+
 	// Set the instance number of this device
 	msg.dispatch("/SetID", 					set_instance_num, 		addrOffset);
 	// Save the configuration struct as it is currently
