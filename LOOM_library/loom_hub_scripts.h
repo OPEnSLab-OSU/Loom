@@ -11,33 +11,55 @@
 // when returning function pointers
 typedef float (*retFuncPtr)(float,float); 
 
-
+#define max_script_len 20
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================ 
+
+// Used to save 
+struct config_dynamic_scripts_t {
+	int num_dynamic_scripts;
+	char* dynamic_scripts[5][max_script_len]; // currently up to 5 scripts with as many as 20 commands (arbitrary numbers right now)
+};
 
 
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 
-// Some struct used to be saved to flash
+struct config_dynamic_scripts_t config_dynamic_scripts;
 
+// Scripts that are preloaded and are saved in program memory not flash
+int num_static_scripts;
+// char* static_scripts[10][20];
+// String static_scripts[10][20];
 
+OSCMessage* static_msg_scripts[10];
+
+// Used by parser
 float stack[50];    
 int   stackPtr = 0;
 char  data_type;
 char  buf[20];
 bool  takingElseBranch = false;
 
+// Data registers that persist outside of parser
 float reg[3][10];
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
+
+void run_all_scripts();
+void run_all_static_scripts();
+void run_all_dynamic_scripts();
+int  get_script_len(String script[]);
+
 retFuncPtr strToFunc(char * str);
 float msgGetLiteral(OSCMessage* msg, int pos);
 void  parseScript(OSCMessage* msg);
+void  parseScript(OSCBundle* bndl);
+
 
 
 // ================================================================ 
@@ -98,10 +120,33 @@ float wrapper(float x, float y, float (*fPtr)(float,float)) {
 
 void setup_hub_scripts()
 {
-	// Probably will just entail reading the scripts (and maybe registers)
-	// from flash memory
+	LOOM_DEBUG_Println("Setting up hub scripts");
 
 	// Clear out 'registers'
+	for (int b = 0; b < 3; b++) {
+		for (int r = 0; r < 10; r++) {
+			reg[b][r] = 0.0;
+		}
+	}
+
+	// Setup static scripts 
+	// i.e. num_static_scripts
+	// static_scripts[0][0] = "8"; //"150", "blink_ex", "done"};
+	// static_scripts[0][1] = "150";
+	// static_scripts[0][2] = "blink_ex";
+	// static_scripts[0][3] = "done";
+
+
+	static_msg_scripts[0] = new OSCMessage("/test");
+	static_msg_scripts[0]->add(10.0).add(300.0).add("blink_ex");
+
+	static_msg_scripts[1] = new OSCMessage("/test2");
+	static_msg_scripts[1]->add(4.0).add(1000.0).add("blink_ex");
+
+	num_static_scripts = 2;
+
+	// Setup dynamic scripts
+	// i.e. read in from flash
 }
 
 
@@ -109,9 +154,68 @@ void setup_hub_scripts()
 // ===                        FUNCTIONS                         ===
 // ================================================================
 
+// Runs all scripts
+void run_all_scripts()
+{
+	run_all_static_scripts();
+	run_all_dynamic_scripts();
+}
+
+void run_all_static_scripts()
+{
+	LOOM_DEBUG_Println("In run_all_static_scripts");
+	OSCBundle scriptBndl;
+	for (int i = 0; i < num_static_scripts; i++) {
+
+	// BUNDLE ARRAY VERSION
+		// print_bundle(&static_msg_scripts[i]);
+		parseScript(static_msg_scripts[i]);
+
+	// STRING ARRAY VERSION
+
+		// // ‘Not actually a key-value array, but this allows the interpret functionality to be used (essential)
+		// convert_key_value_array_to_bundle(static_scripts[i], &scriptBndl, "/addr", get_script_len(static_scripts[i]), SINGLEMSG, 4);
+	
+		// // print_bundle(&scriptBndl);
+
+		// parseScript(&scriptBndl);
+	}
+}
+
+void run_all_dynamic_scripts()
+{
+	// for (int i = 0; i < config_dynamic_scripts.num_dynamic_scripts; i++) {
+		
+	// }
+}
+
+
+
+int get_script_len(String script[])
+{
+	for (int i = 0; i < max_script_len; i++) {
+		LOOM_DEBUG_Println2("\t", script[i]);
+		if (script[i] == "done")  
+			return i;
+	}
+
+	return max_script_len;
+}
+
+
+
+// ================================================================
+// ===                      SCRIPT PARSER                       ===
+// ================================================================
+
 
 void parseScript(OSCMessage* msg)
 {
+	// print_message(msg);
+
+	char buf[50];
+	msg->getAddress(buf, 0);
+	LOOM_DEBUG_Println2("Running Script: ", buf );
 	for (int i = 0; i < msg->size(); i++) {
 
 		data_type = msg->getType(i);

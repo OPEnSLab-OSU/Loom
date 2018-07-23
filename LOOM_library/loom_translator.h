@@ -26,6 +26,8 @@ union data_value { // Used in translation between OSC and strings
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 
+void print_message(OSCMessage* msg, int i);
+void print_message(OSCMessage* msg);
 void print_bundle(OSCBundle *bndl);
 template<typename T> 
 void print_array(T data [], int len, int format);
@@ -97,6 +99,38 @@ void append_to_bundle(OSCBundle *bndl, T elements [], int count);
 // ================================================================
 
 
+// void print_message(OSCMessage* msg, int i) 
+// {
+// 	char buf[50];
+// 	char data_type;
+// 	msg->getAddress(buf, 0);
+// 	LOOM_DEBUG_Println4("Address ", i, ": ", buf);
+
+// 	for (int j = 0; j < msg->size(); j++) {
+// 		data_type = msg->getType(j);
+// 		LOOM_DEBUG_Print3("Value ", j, ": ");
+
+// 		switch(data_type) {
+// 			case 'f':
+// 				LOOM_DEBUG_Println2("(f) ", msg->getFloat(j));
+// 				break;
+// 			case 'i':
+// 				LOOM_DEBUG_Println2("(i) ", msg->getInt(j));
+// 				break;
+// 			case 's':
+// 				msg->getString(j, buf, 50);
+// 				LOOM_DEBUG_Println2("(s) ", buf);
+// 				break;
+// 			default:
+// 				break;
+// 		}
+// 	}
+// }
+// void print_message(OSCMessage* msg) {
+// 	print_message(msg, 0);
+// }
+
+
 // --- PRINT BUNDLE ---
 //
 // ** NOTE: Can make bundles unreadable after printing, use with caution **
@@ -137,6 +171,8 @@ void print_bundle(OSCBundle *bndl)
 						break;
 				}
 			}
+
+			// print_message(bndl->getOSCMessage(i), i);
 		}
 		Serial.println();
 	#endif
