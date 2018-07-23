@@ -110,8 +110,9 @@ void common_msg_router(OSCMessage &msg, int addrOffset)
 	#endif
 
 	// If Max has polled for devices on the WiFi network 
-	msg.dispatch("/ChannelPoll", 		respond_to_poll_request, 	addrOffset);
-
+	#if is_wifi
+		msg.dispatch("/ChannelPoll", 		respond_to_poll_request, 	addrOffset);
+	#endif
 
 
 

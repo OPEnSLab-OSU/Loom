@@ -271,7 +271,11 @@ int    get_bundle_bytes(OSCBundle *bndl);
 #include "loom_common_functions.h"
 #include "loom_msg_router.h"
 #include "loom_interface.h"
-#include "loom_hub_scripts.h"
+
+#if enable_hub_scripts == 1
+	#include "loom_script_function_wrappers.h"
+	#include "loom_hub_scripts.h"
+#endif
 
 
 
