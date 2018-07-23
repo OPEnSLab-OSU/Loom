@@ -28,6 +28,16 @@ struct config_flash_t {
 	#if is_wifi == 1
 		struct config_wifi_t config_wifi;
 	#endif
+
+
+	// maybe move this to its own struct in the future?
+	// #if enable_hub_scripts == 1
+	// 	struct config_scripts_t config_scripts;
+	// 	// uint8_t num_scripts;   // as to only run scripts that are defined
+	// 	// char*   scripts[5][30];
+
+	// #endif
+
 	
 	//add any other stuff that needs to be stored based on the shields with a wrapped preprocessor statement HERE
 
@@ -96,6 +106,8 @@ void setup_flash_config()
 		link_config_mpu6050(&configuration.config_mpu6050);
 	#endif
 
+
+
 	#if MEM_TYPE == MEM_FLASH || MEM_TYPE == MEM_EEPROM
 
 		read_non_volatile(); //reads configuration from non_volatile memory
@@ -122,6 +134,18 @@ void setup_flash_config()
 				configuration.config_wifi.request_settings = REQUEST_SETTINGS; // Bool of whether or not to request new channel settings on startup
 			#endif
 			
+
+
+
+			// #if enable_hub_scripts == 1
+			// 	configuration.config_scripts.num_scripts = 0; // If nothing was in flash, there are no saved scripts
+			// #endif
+
+
+
+
+
+
 			// Add any other behavior/calibration wrapped in an #ifdef is_something preprocessor directive HERE
 			
 			#if is_mpu6050 == 1 && is_ishield == 1

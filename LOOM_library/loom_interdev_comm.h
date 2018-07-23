@@ -7,8 +7,8 @@
 	{
 		char device_id[20];
 		int  inst_num; 
-		int num_platforms;
-		CommPlatform platforms[4]; // should this perhaps be an array?
+		int  num_platforms;
+		CommPlatform platforms[4];
 		// For targetted WiFi messages
 		int  udp_port;
 		int  ip_addr[4]; 

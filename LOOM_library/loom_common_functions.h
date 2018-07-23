@@ -142,6 +142,11 @@ void Loom_begin()
 		setup_network_info();
 	#endif
 
+
+	#if enable_hub_scripts == 1
+		setup_hub_scripts();
+	#endif
+
 	// Flash the built-in LED indicating setup complete
 	flash_led();
 }
