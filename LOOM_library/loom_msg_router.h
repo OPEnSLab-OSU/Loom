@@ -90,6 +90,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 
 	#if enable_hub_scripts == 1
 		msg.dispatch("/newHubScript",		message_to_script, 		addrOffset);
+		msg.dispatch("/deleteHubScript",	delete_script, 			addrOffset);
 	#endif
 
 	// Set the instance number of this device
