@@ -19,7 +19,9 @@ typedef float (*retFuncPtr)(float,float);
 // ===                        STRUCTURES                        === 
 // ================================================================ 
 
-// Will be sed to save script to flash
+// Will be saved to save script to flash
+
+// Do I even need to convert to strings...? probably, if only because the OSCmessage arrays are pointers
 struct config_dynamic_scripts_t {
 	int num_dynamic_scripts;
 	char* dynamic_scripts[5][max_script_len]; // currently up to 5 scripts with as many as 20 commands (arbitrary numbers right now)
@@ -32,19 +34,13 @@ struct config_dynamic_scripts_t {
 
 struct config_dynamic_scripts_t config_dynamic_scripts;
 
-// Scripts that are preloaded and are saved in program memory not flash
 int num_static_scripts;
 int num_dynamic_scripts;
-// char* static_scripts[10][20];
-// String static_scripts[10][20];
 
+// Scripts that are preloaded and are saved in program memory not flash
 OSCMessage* static_msg_scripts[max_static_scripts];
+// Scripts that are deleted between restarts unless saved to flash
 OSCMessage* dynamic_msg_scripts[max_dynamic_scripts];  
-		// maybe something like this is populated by reading from flash, 
-		// rather that converting everytime from strings 
-		// has better continuity with the static verision then
-		// easy to fill directly from received bundle
-
 
 // Used by parser
 float stack[50];    
@@ -56,20 +52,48 @@ bool  takingElseBranch = false;
 // Data registers that persist outside of parser
 float reg[3][10];
 
+
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 
+// Used for running scripts
 void run_all_scripts();
 void run_all_static_scripts();
 void run_all_dynamic_scripts();
 int  get_script_len(String script[]);
 
-retFuncPtr strToFunc(char * str);
-float msgGetLiteral(OSCMessage* msg, int pos);
+// Message router functions
+void message_to_script(OSCMessage &msg);
+void delete_script(OSCMessage &msg);
+
+// Parser and aux functions
 void  parseScript(OSCMessage* msg);
 void  parseScript(OSCBundle* bndl);
+float msgGetLiteral(OSCMessage* msg, int pos);
+void  print_registers();
+retFuncPtr strToFunc(char * str);
 
+
+// ================================================================
+// ===                    PRELOADED SCRIPTS                     ===
+// ================================================================
+
+// This function is where you define any scripts that are loaded to
+// the device without needing to be saved to flash (i.e. static scripts)
+// Use these for scripts that more or less permanently used on the 
+// device until reflashing
+void preload_scripts() 
+{
+	// static_msg_scripts[0] = new OSCMessage("/test");
+	// static_msg_scripts[0]->add(10.0).add(300.0).add("blink_ex");
+	// num_static_scripts++;
+
+	// static_msg_scripts[1] = new OSCMessage("/test2");
+	// static_msg_scripts[1]->add(4.0).add(1000.0).add("blink_ex");
+	// num_static_scripts++;
+
+}
 
 
 // ================================================================ 
@@ -115,35 +139,6 @@ float wrapper(float x, float y, float (*fPtr)(float,float)) {
 	return fPtr(x, y);
 }
 
-// ================================================================
-// ===                    PRELOADED SCRIPTS                     ===
-// ================================================================
-
-// This function is where you define any scripts that are loaded to
-// the device without needing to be saved to flash (i.e. static scripts)
-// Use these for scripts that more or less permanently used on the 
-// device until reflashing
-void preload_scripts() 
-{
-
-	// Setup static scripts 
-	// i.e. num_static_scripts
-	// static_scripts[0][0] = "8"; //"150", "blink_ex", "done"};
-	// static_scripts[0][1] = "150";
-	// static_scripts[0][2] = "blink_ex";
-	// static_scripts[0][3] = "done";
-
-
-	static_msg_scripts[0] = new OSCMessage("/test");
-	static_msg_scripts[0]->add(10.0).add(300.0).add("blink_ex");
-	num_static_scripts++;
-
-	static_msg_scripts[1] = new OSCMessage("/test2");
-	static_msg_scripts[1]->add(4.0).add(1000.0).add("blink_ex");
-	num_static_scripts++;
-
-}
-
 
 
 // ================================================================
@@ -182,34 +177,25 @@ void run_all_scripts()
 	run_all_dynamic_scripts();
 }
 
+
 void run_all_static_scripts()
 {
-	LOOM_DEBUG_Println("In run_all_static_scripts");
-	// OSCBundle scriptBndl;
+	LOOM_DEBUG_Println("Running static scripts");
 	for (int i = 0; i < num_static_scripts; i++) {
-
-	// BUNDLE ARRAY VERSION
-		// print_bundle(&static_msg_scripts[i]);
 		parseScript(static_msg_scripts[i]);
 
-	// STRING ARRAY VERSION
-
+		// STRING ARRAY VERSION
+		// OSCBundle scriptBndl;
 		// // ‘Not actually a key-value array, but this allows the interpret functionality to be used (essential)
 		// convert_key_value_array_to_bundle(static_scripts[i], &scriptBndl, "/addr", get_script_len(static_scripts[i]), SINGLEMSG, 4);
-	
-		// // print_bundle(&scriptBndl);
-
+		// print_bundle(&scriptBndl);
 		// parseScript(&scriptBndl);
 	}
 }
 
 void run_all_dynamic_scripts()
 {
-	// for (int i = 0; i < config_dynamic_scripts.num_dynamic_scripts; i++) {
-		
-	// }
-
-	LOOM_DEBUG_Println("In run_all_static_scripts");
+	LOOM_DEBUG_Println("Running dynamic scripts");
 	for (int i = 0; i < num_dynamic_scripts; i++) {
 		parseScript(dynamic_msg_scripts[i]);
 	}
@@ -282,7 +268,7 @@ void delete_script(OSCMessage &msg)
 		dynamic_msg_scripts[i]->getAddress(buf);
 
 		if ( strcmp(script_name, buf) == 0) {
-			
+
 			for (int j = i; j < num_dynamic_scripts-1; j++) {
 				dynamic_msg_scripts[j] = dynamic_msg_scripts[j+1];
 			}	
@@ -295,6 +281,8 @@ void delete_script(OSCMessage &msg)
 
 	LOOM_DEBUG_Println3("Script: ", script_name, " does not exist");
 }
+
+
 
 
 // ================================================================
@@ -363,14 +351,14 @@ void parseScript(OSCMessage* msg)
 					// Grab the condition value from the stack
 					// If taking the 'else' branch, skip the 'then' branch
 					if (!stack[--stackPtr]) {
-						Serial.println("Taking Else branch");
+						LOOM_DEBUG_Println("Taking Else branch");
 						takingElseBranch = true;
 						msg->getString(++i, buf, 20);
 						while ( (strcmp(buf, "else") != 0) && (strcmp(buf, "endif") != 0) ) {
 							msg->getString(++i, buf, 20);
 						}
 					} else {
-						Serial.println("Taking Then branch");
+						LOOM_DEBUG_Println("Taking Then branch");
 					}
 					break;
 				}
@@ -405,15 +393,12 @@ void parseScript(OSCMessage* msg)
 					break;
 				}
 
-
-
 				// If none of the above commands matched, try seaching external functions
 				float (*fPtr)(float,float) = strToFunc(buf);
 				if ( fPtr ) {
 					stack[stackPtr-2] = fPtr(stack[stackPtr-2], stack[stackPtr-1]);  stackPtr--;  
 					break;
 				}
-
 
 				// No 'break' so if error, fallthrough to 'default' case
 			} // of case 's':
@@ -437,19 +422,7 @@ void parseScript(OSCMessage* msg)
 	Serial.println(stack[stackPtr-1]);
 	Serial.println();
 
-	// These just print out the register contents for debugging purposes
-	// Serial.print("R: ");
-	// for (int i = 0; i < 10; i++) {
-	// 	Serial.print(i); Serial.print(": "); Serial.print(reg[0][i]); Serial.print(", "); 
-	// }
-	// Serial.print("S: ");
-	// for (int i = 0; i < 10; i++) {
-	// 	Serial.print(i); Serial.print(": "); Serial.print(reg[1][i]); Serial.print(", "); 
-	// }
-	// Serial.print("T: ");
-	// for (int i = 0; i < 10; i++) {
-	// 	Serial.print(i); Serial.print(": "); Serial.print(reg[2][i]); Serial.print(", "); 
-	// }
+
 }
 
 void parseScript(OSCBundle* bndl)
@@ -461,6 +434,11 @@ void parseScript(OSCBundle* bndl)
 	parseScript(bndl->getOSCMessage(0));
 }
 
+
+
+// ================================================================
+// ===               AUXILIARY PARSER FUNCTIONS                 ===
+// ================================================================
 
 
 // --- MESSAGE GET LITERAL ---
@@ -480,6 +458,24 @@ float msgGetLiteral(OSCMessage* msg, int pos)
 	}
 }
 
+
+void print_registers()
+{
+	#if LOOM_DEBUG == 1
+		Serial.print("R: ");
+		for (int i = 0; i < 10; i++) { 
+			Serial.print(i); Serial.print(": "); Serial.print(reg[0][i]); Serial.print(", "); 
+		}
+		Serial.print("S: ");
+		for (int i = 0; i < 10; i++) { 
+			Serial.print(i); Serial.print(": "); Serial.print(reg[1][i]); Serial.print(", "); 
+		}
+		Serial.print("T: ");
+		for (int i = 0; i < 10; i++) { 
+			Serial.print(i); Serial.print(": "); Serial.print(reg[2][i]); Serial.print(", "); 
+		}
+	#endif
+}
 
 
 // --- STRING TO FUNCTION ---
