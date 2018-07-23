@@ -228,7 +228,7 @@ int get_script_len(String script[])
 }
 
 
-
+// Turns a received message into a runnable script
 void message_to_script(OSCMessage &msg)
 {
 	LOOM_DEBUG_Println("Received Script");
@@ -240,15 +240,15 @@ void message_to_script(OSCMessage &msg)
 	if (num_dynamic_scripts >= max_dynamic_scripts)
 		return;
 
-	char script_name[20], buf2[20];
+	char script_name[20], buf[20];
 
 	// Get the script name
 	msg.getString(0, script_name, 20);
 
 	for (int i = 0; i < num_dynamic_scripts; i++) {
-		dynamic_msg_scripts[i]->getAddress(buf2);
-		// LOOM_DEBUG_Println4("Name: ", script_name, "\tBuf2: ", buf2);
-		if ( strcmp(script_name, buf2) == 0 ) {
+		dynamic_msg_scripts[i]->getAddress(buf);
+		// LOOM_DEBUG_Println4("Name: ", script_name, "\tBuf2: ", buf);
+		if ( strcmp(script_name, buf) == 0 ) {
 			LOOM_DEBUG_Println("Script already on device");
 			return;
 		}
@@ -260,12 +260,40 @@ void message_to_script(OSCMessage &msg)
 		switch (msg.getType(i)) {
  			case 'i': dynamic_msg_scripts[num_dynamic_scripts]->add(msg.getInt(i));		break;
  			case 'f': dynamic_msg_scripts[num_dynamic_scripts]->add(msg.getFloat(i));	break;
- 			case 's': char buf[80];  msg.getString(i, buf, 80);  dynamic_msg_scripts[num_dynamic_scripts]->add(buf);  break;
+ 			case 's': char tmp[80];  msg.getString(i, tmp, 80);  dynamic_msg_scripts[num_dynamic_scripts]->add(tmp);  break;
  			default: LOOM_DEBUG_Println("Unsupported data data_type.");
  		}
 	}
 
 	num_dynamic_scripts++;
+}
+
+
+
+void delete_script(OSCMessage &msg)
+{
+	char script_name[20], buf[20];
+	msg.getString(0, script_name, 20);
+	LOOM_DEBUG_Println2("Command to delete script: ", script_name);
+
+
+	int i = 0;
+	for (int i = 0; i < num_dynamic_scripts; i++) {
+		dynamic_msg_scripts[i]->getAddress(buf);
+
+		if ( strcmp(script_name, buf) == 0) {
+			
+			for (int j = i; j < num_dynamic_scripts-1; j++) {
+				dynamic_msg_scripts[j] = dynamic_msg_scripts[j+1];
+			}	
+			dynamic_msg_scripts[--num_dynamic_scripts] = NULL;
+
+			LOOM_DEBUG_Println2("Deleted script: ", script_name);
+			return;
+		}
+	}
+
+	LOOM_DEBUG_Println3("Script: ", script_name, " does not exist");
 }
 
 
