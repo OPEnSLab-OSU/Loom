@@ -7,7 +7,9 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-typedef float (*retFuncPtr)(float,float);
+// Used to make function signatures easier to read 
+// when returning function pointers
+typedef float (*retFuncPtr)(float,float); 
 
 
 // ================================================================ 
