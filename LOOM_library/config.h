@@ -42,7 +42,7 @@
 #define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
 // --- Data Logging Platforms ---
-#define is_pushingbox 1		// 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
+#define is_pushingbox 0		// 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         0		// 1 to enable SD card 
@@ -77,7 +77,7 @@
 	#define DEFAULT_PASSWORD  "arduino101"		// Network password
 #endif
 
-
+#define enable_hub_scripts 1
 
 // ================================================================
 // ================================================================ 
