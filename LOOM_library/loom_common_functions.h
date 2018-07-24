@@ -88,6 +88,11 @@ void Loom_begin()
 		#if is_mpu6050 == 1
 			// setup_mpu6050();
 		#endif
+
+		#if is_ms5803 == 1
+			setup_ms5803();
+		#endif
+
 		#if is_sht31d == 1
 			setup_sht31d();
 		#endif

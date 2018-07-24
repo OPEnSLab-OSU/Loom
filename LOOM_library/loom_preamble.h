@@ -65,7 +65,7 @@ enum CommPlatform {
 	WIFI,
 	LORA,
 	NRF,
-	ETHERNET // in testing for inter-device communication
+	ETHERNET 		// in testing for inter-device communication
 	// CELLULAR  
 };
 
@@ -244,6 +244,12 @@ int    get_bundle_bytes(OSCBundle *bndl);
 #if is_decagon == 1
 	#include "loom_decagon.h"
 #endif
+
+#if is_ms5803 == 1
+	#include "loom_ms5803.h"
+#endif
+
+
 #if is_multiplexer == 1
 	#include "loom_tca9548a.h"
 #endif
