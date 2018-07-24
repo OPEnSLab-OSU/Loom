@@ -63,9 +63,11 @@
 #define num_analog    0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
 #define is_decagon    0		// 1 if GS3 Decagon is being used
 
+#define is_ms5803	  1
+
 // --- Prebuilt Devices ---
 #define is_ishield     0	// 1 to specify using Ishield (should enable only wifi as communication platform)
-#define is_multiplexer 0	// 1 if Multiplexer is being used. (Further customization in advanced options)
+#define is_multiplexer 0	// 1 if tca9548a Multiplexer is being used. (Further customization in advanced options)
 #define is_sapflow     0
 
 

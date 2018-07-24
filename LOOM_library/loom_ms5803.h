@@ -2,7 +2,6 @@
 // ===                        LIBRARIES                         === 
 // ================================================================
 #include <Wire.h>
-#include "Adafruit_SHT31.h"
 
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
@@ -144,18 +143,21 @@ void measure_ms5803()
 
 
 
-bool readPressure(){
-	Wire.beginTransmission(MS_ADDRESS);//start a transmission sequence
+bool readPressure()
+{
+	unsigned long pressures[3];
+
+	Wire.beginTransmission(i2c_addr_ms5803);//start a transmission sequence
 	Wire.write(MS_CONVERTD1_4096);
 	Wire.endTransmission();
 
 	delay(10); //4096 OSR conversion requires 9ms max.
 	
-	Wire.beginTransmission(MS_ADDRESS);
+	Wire.beginTransmission(i2c_addr_ms5803);
 	Wire.write(MS_ADCREAD);
 	Wire.endTransmission();
 
-	Wire.requestFrom(MS_ADDRESS, 3);
+	Wire.requestFrom(i2c_addr_ms5803, 3);
 	if(!Wire.available()) return false;
 	else{
 		
@@ -169,30 +171,32 @@ bool readPressure(){
 		//p1 represents the MSB, p3 represents the LSB
 		unsigned long p0 = pressures[0] << (2*8);
 		unsigned long p1 = pressures[1] << (8);
-		pressureNC = p0 + p1 + pressures[2];
+		state_ms5803.pressureNC = p0 + p1 + pressures[2];
 		
 		return true; 
 	}
 
 }
 
-bool readTemp(){
+bool readTemp()
+{
+	unsigned long temperatures[3];
 
 	// tell the sensor to compensate and convert the temperature values
 	// and store them on the ADC register.
-	Wire.beginTransmission(MS_ADDRESS);//start a transmission sequence
+	Wire.beginTransmission(i2c_addr_ms5803);//start a transmission sequence
 	Wire.write(MS_CONVERTD2_4096);
 	Wire.endTransmission();
 
 	delay(10); //4096 OSR conversion requires 9ms max.
 
 	// tell the sensor we want to prepare to send the ADC values
-	Wire.beginTransmission(MS_ADDRESS);
+	Wire.beginTransmission(i2c_addr_ms5803);
 	Wire.write(MS_ADCREAD);
 	Wire.endTransmission();
 	
 	// tell the sensor to send over the ADC values
-	Wire.requestFrom(MS_ADDRESS, 3);
+	Wire.requestFrom(i2c_addr_ms5803, 3);
 	if(!Wire.available()) return false;
 	else{
 		int i = 0;
@@ -203,7 +207,7 @@ bool readTemp(){
 		
 		unsigned long t0 = temperatures[0] << (2*8);
 		unsigned long t1 = temperatures[1] << (8);
-		tempNC = (t0 + t1 + temperatures[2]);
+		state_ms5803.tempNC = (t0 + t1 + temperatures[2]);
 		
 		return true;
 	}
@@ -211,8 +215,9 @@ bool readTemp(){
 
 
 
-void PSreset(){
-	Wire.beginTransmission(MS_ADDRESS);
+void PSreset()
+{
+	Wire.beginTransmission(i2c_addr_ms5803);
 	Wire.write(MS_RESET);
 	Wire.endTransmission();
 	delay(10);
@@ -220,12 +225,12 @@ void PSreset(){
 	//get PROM values
 	for(int i=0; i<8; i++){
 		//we want to read PROM variable 'i'
-		Wire.beginTransmission(MS_ADDRESS);
+		Wire.beginTransmission(i2c_addr_ms5803);
 		Wire.write(MS_PROMREAD0 + 2*i);
 		Wire.endTransmission();
 
 		//each PROM variable is stored in two bytes
-		Wire.requestFrom(MS_ADDRESS, 2);
+		Wire.requestFrom(i2c_addr_ms5803, 2);
 		/*if(Wire.available()){
 			MS_PROM[i] = Wire.read();
 		}
