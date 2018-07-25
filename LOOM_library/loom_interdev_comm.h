@@ -357,7 +357,7 @@ void update_known_devices(OSCMessage &msg)
 void check_device_refresh_interval()
 {
 	unsigned long time = millis();
-	if (time - last_device_poll_time > (device_poll_refresh*1000) ) {
+	if ( (device_poll_refresh > 0) && (time - last_device_poll_time > (device_poll_refresh*1000) ) ) {
 		device_search();
 		last_device_poll_time = time;
 	}

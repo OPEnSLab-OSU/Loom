@@ -26,17 +26,16 @@ union data_value { // Used in translation between OSC and strings
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 
-// void print_message(OSCMessage* msg, int i);
-// void print_message(OSCMessage* msg);
+void print_message(OSCMessage* msg);
 void print_bundle(OSCBundle *bndl);
 template<typename T> 
 void print_array(T data [], int len, int format);
-	int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
-	bool bundle_empty(OSCBundle *bndl);
+int  get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
+bool bundle_empty(OSCBundle *bndl);
 String get_data_value(OSCMessage* msg, int pos);
 String get_address_string(OSCMessage *msg);
 void   deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
-// void   deep_copy_message(OSCMessage *scrMsg, OSCMessage *destMsg);
+void   deep_copy_message(OSCMessage *scrMsg, OSCMessage *destMsg);
 
 
 // Conversions between bundles and strings
@@ -101,36 +100,21 @@ void append_to_bundle(OSCBundle *bndl, T elements [], int count);
 // ================================================================
 
 
-// void print_message(OSCMessage* msg, int i) 
-// {
-// 	char buf[50];
-// 	char data_type;
-// 	msg->getAddress(buf, 0);
-// 	LOOM_DEBUG_Println4("Address ", i, ": ", buf);
+void print_message(OSCMessage* msg) 
+{
+	LOOM_DEBUG_Println2("Address: ", get_address_string(msg).c_str() );
+	char buf[50];
+	for (int i = 0; i < msg->size(); i++) {
+		LOOM_DEBUG_Print3("Value (", i, ") ");
+		switch(msg->getType(i)) {
+			case 'f': LOOM_DEBUG_Println2("(f) ", msg->getFloat(i)); break;
+			case 'i': LOOM_DEBUG_Println2("(i) ", msg->getInt(i));   break;
+			case 's': msg->getString(i, buf, 50); LOOM_DEBUG_Println2("(s) ", buf); break;
+			default: break;
+		}
+	}
+}
 
-// 	for (int j = 0; j < msg->size(); j++) {
-// 		data_type = msg->getType(j);
-// 		LOOM_DEBUG_Print3("Value ", j, ": ");
-
-// 		switch(data_type) {
-// 			case 'f':
-// 				LOOM_DEBUG_Println2("(f) ", msg->getFloat(j));
-// 				break;
-// 			case 'i':
-// 				LOOM_DEBUG_Println2("(i) ", msg->getInt(j));
-// 				break;
-// 			case 's':
-// 				msg->getString(j, buf, 50);
-// 				LOOM_DEBUG_Println2("(s) ", buf);
-// 				break;
-// 			default:
-// 				break;
-// 		}
-// 	}
-// }
-// void print_message(OSCMessage* msg) {
-// 	print_message(msg, 0);
-// }
 
 
 // --- PRINT BUNDLE ---
@@ -149,30 +133,35 @@ void print_bundle(OSCBundle *bndl)
 		LOOM_DEBUG_Println2("\nBundle Size: ", bndl->size());
 		OSCMessage *msg;
 		
+
 		for (int i = 0; i < bndl->size(); i++) {
-			msg = bndl->getOSCMessage(i);
-			msg->getAddress(buf, 0);
-			LOOM_DEBUG_Println4("Address ", i, ": ", buf);
 
-			for (int j = 0; j < msg->size(); j++) {
-				data_type = msg->getType(j);
-				LOOM_DEBUG_Print3("Value ", j, ": ");
+			LOOM_DEBUG_Println2("Message: ", i);
+			print_message(bndl->getOSCMessage(i));
 
-				switch(data_type) {
-					case 'f':
-						LOOM_DEBUG_Println2("(f) ", msg->getFloat(j));
-						break;
-					case 'i':
-						LOOM_DEBUG_Println2("(i) ", msg->getInt(j));
-						break;
-					case 's':
-						msg->getString(j, buf, 50);
-						LOOM_DEBUG_Println2("(s) ", buf);
-						break;
-					default:
-						break;
-				}
-			}
+			// msg = bndl->getOSCMessage(i);
+			// msg->getAddress(buf, 0);
+			// LOOM_DEBUG_Println4("Address ", i, ": ", buf);
+
+			// for (int j = 0; j < msg->size(); j++) {
+			// 	data_type = msg->getType(j);
+			// 	LOOM_DEBUG_Print3("Value ", j, ": ");
+
+			// 	switch(data_type) {
+			// 		case 'f':
+			// 			LOOM_DEBUG_Println2("(f) ", msg->getFloat(j));
+			// 			break;
+			// 		case 'i':
+			// 			LOOM_DEBUG_Println2("(i) ", msg->getInt(j));
+			// 			break;
+			// 		case 's':
+			// 			msg->getString(j, buf, 50);
+			// 			LOOM_DEBUG_Println2("(s) ", buf);
+			// 			break;
+			// 		default:
+			// 			break;
+			// 	}
+			// }
 
 			// print_message(bndl->getOSCMessage(i), i);
 		}
@@ -301,20 +290,21 @@ void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl)
 	} 
 }
 
-// void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
-// {
-// 	char buf[50];
-// 	for (int i = 0; i < srcMsg->size(); i++) {
-// 		switch (srcMsg->getType(i)) {
-//  			case 'i': destMsg->add(srcMsg->getInt(i));	break;
-//  			case 'f': destMsg->add(srcMsg->getFloat(i));	break;
-//  			case 's': char buf[80];  srcMsg->getString(i, buf, 80);  destMsg->add(buf);  break;
-//  			default: LOOM_DEBUG_Println("Unsupported data data_type.");
-//  		}
-// 	}
-// 	srcMsg->getAddress(buf);
-// 	destMsg->setAddress(buf);
-// }
+void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
+{
+	LOOM_DEBUG_Println();
+	char buf[50];
+	for (int i = 0; i < srcMsg->size(); i++) {
+		switch (srcMsg->getType(i)) {
+ 			case 'i': destMsg->add(srcMsg->getInt(i));	    break;
+ 			case 'f': destMsg->add(srcMsg->getFloat(i));	break;
+ 			case 's': char buf[80];  srcMsg->getString(i, buf, 80);  destMsg->add(buf);  break;
+ 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
+ 		}
+	}
+	srcMsg->getAddress(buf);
+	destMsg->setAddress(buf);
+}
 
 
 // ================================================================

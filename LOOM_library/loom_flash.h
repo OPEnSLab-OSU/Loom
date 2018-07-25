@@ -31,12 +31,12 @@ struct config_flash_t {
 
 
 	// maybe move this to its own struct in the future?
-	// #if enable_hub_scripts == 1
-	// 	struct config_scripts_t config_scripts;
-	// 	// uint8_t num_scripts;   // as to only run scripts that are defined
-	// 	// char*   scripts[5][30];
+	#if enable_hub_scripts == 1
+		struct config_dynamic_scripts_t config_dynamic_scripts;
+		// uint8_t num_scripts;   // as to only run scripts that are defined
+		// char*   scripts[5][30];
 
-	// #endif
+	#endif
 
 	
 	//add any other stuff that needs to be stored based on the shields with a wrapped preprocessor statement HERE
@@ -104,6 +104,10 @@ void setup_flash_config()
 	#endif
 	#if is_mpu6050 == 1
 		link_config_mpu6050(&configuration.config_mpu6050);
+	#endif
+
+	#if enable_hub_scripts == 1
+		link_config_dynamic_scripts(&configuration.config_dynamic_scripts);
 	#endif
 
 
