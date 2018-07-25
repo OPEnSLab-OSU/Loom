@@ -23,8 +23,9 @@ typedef float (*retFuncPtr)(float,float);
 
 // Do I even need to convert to strings...? probably, if only because the OSCmessage arrays are pointers
 struct config_dynamic_scripts_t {
-	int num_dynamic_scripts;
-	char* dynamic_scripts[5][max_script_len]; // currently up to 5 scripts with as many as 20 commands (arbitrary numbers right now)
+	int num_scripts;
+	char dynamic_scripts[max_dynamic_scripts][max_script_len+1][16]; // currently up to 5 scripts with as many as 20 commands (arbitrary numbers right now)
+	// OSCMessage dyn_scripts[10];  this one caused weird numbers
 };
 
 
@@ -32,7 +33,11 @@ struct config_dynamic_scripts_t {
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 
-struct config_dynamic_scripts_t config_dynamic_scripts;
+struct config_dynamic_scripts_t * config_dynamic_scripts;
+void link_config_dynamic_scripts(struct config_dynamic_scripts_t *flash_setup_dynamic_scripts){
+	config_dynamic_scripts = flash_setup_dynamic_scripts;
+}
+
 
 int num_static_scripts;
 int num_dynamic_scripts;
@@ -62,12 +67,12 @@ void run_all_scripts();
 void run_all_static_scripts();
 void run_all_dynamic_scripts();
 int  get_script_len(String script[]);
+void load_dynamic_scripts();
 
 // Message router functions
 void message_to_script(OSCMessage &msg);
 void delete_script(OSCMessage &msg);
 void save_dynamic_scripts(OSCMessage &msg);
-
 
 // Parser and aux functions
 void  parseScript(OSCMessage* msg);
@@ -85,7 +90,7 @@ retFuncPtr strToFunc(char * str);
 // the device without needing to be saved to flash (i.e. static scripts)
 // Use these for scripts that more or less permanently used on the 
 // device until reflashing
-void preload_scripts() 
+void preload_static_scripts() 
 {
 	// static_msg_scripts[0] = new OSCMessage("/test");
 	// static_msg_scripts[0]->add(10.0).add(300.0).add("blink_ex");
@@ -149,7 +154,7 @@ float wrapper(float x, float y, float (*fPtr)(float,float)) {
 
 void setup_hub_scripts()
 {
-	LOOM_DEBUG_Println("Setting up hub scripts");
+	LOOM_DEBUG_Print("Setting up hub scripts...");
 
 	// Clear out 'registers'
 	for (int b = 0; b < 3; b++) {
@@ -160,11 +165,12 @@ void setup_hub_scripts()
 
 	num_static_scripts  = 0;
 	num_dynamic_scripts = 0;
-	preload_scripts();
+	preload_static_scripts();
 	
-	
-	// Setup dynamic scripts
-	// i.e. read in from flash
+	// Read dynamic scripts from flash
+	load_dynamic_scripts();
+
+	LOOM_DEBUG_Println("Done");
 }
 
 
@@ -195,13 +201,6 @@ void run_all_static_scripts()
 	LOOM_DEBUG_Println("Running static scripts");
 	for (int i = 0; i < num_static_scripts; i++) {
 		parseScript(static_msg_scripts[i]);
-
-		// STRING ARRAY VERSION
-		// OSCBundle scriptBndl;
-		// // ‘Not actually a key-value array, but this allows the interpret functionality to be used (essential)
-		// convert_key_value_array_to_bundle(static_scripts[i], &scriptBndl, "/addr", get_script_len(static_scripts[i]), SINGLEMSG, 4);
-		// print_bundle(&scriptBndl);
-		// parseScript(&scriptBndl);
 	}
 }
 
@@ -225,10 +224,9 @@ void run_all_dynamic_scripts()
 // as it may not be the max size of the array
 int get_script_len(String script[])
 {
-	for (int i = 0; i < max_script_len; i++) {
-		if (script[i] == "done")  return i;
+	for (int i = 0; i < max_script_len; i++) { 
+		if (script[i] == "done") return i;
 	}
-
 	return max_script_len;
 }
 
@@ -241,12 +239,10 @@ int get_script_len(String script[])
 // @param msg  The message forwarded from msg_router, contains script 
 void message_to_script(OSCMessage &msg)
 {
-	LOOM_DEBUG_Println("Received Script");
-	// OSCBundle tmpBndl;
-	// tmpBndl.add(msg);
-	// print_bundle(&tmpBndl);
+	LOOM_DEBUG_Println("Received Script Message");
+	print_message(&msg);
 
-
+	// If at maximum allow scripts, return
 	if (num_dynamic_scripts >= max_dynamic_scripts)
 		return;
 
@@ -255,17 +251,18 @@ void message_to_script(OSCMessage &msg)
 	// Get the script name
 	msg.getString(0, script_name, 20);
 
+	// Check if script already exists
 	for (int i = 0; i < num_dynamic_scripts; i++) {
 		dynamic_msg_scripts[i]->getAddress(buf);
-		// LOOM_DEBUG_Println4("Name: ", script_name, "\tBuf2: ", buf);
+		LOOM_DEBUG_Println4("Name: ", script_name, "\tBuf2: ", buf);
 		if ( strcmp(script_name, buf) == 0 ) {
 			LOOM_DEBUG_Println("Script already on device");
 			return;
 		}
 	}
 
+	// Allocate memory and copy script into 
 	dynamic_msg_scripts[num_dynamic_scripts] = new OSCMessage(script_name);
-
 	for (int i = 1; i < msg.size() && i <= max_script_len; i++) {
 		switch (msg.getType(i)) {
  			case 'i': dynamic_msg_scripts[num_dynamic_scripts]->add(msg.getInt(i));		break;
@@ -292,8 +289,6 @@ void delete_script(OSCMessage &msg)
 	msg.getString(0, script_name, 20);
 	LOOM_DEBUG_Println2("Command to delete script: ", script_name);
 
-
-	int i = 0;
 	for (int i = 0; i < num_dynamic_scripts; i++) {
 		dynamic_msg_scripts[i]->getAddress(buf);
 
@@ -308,8 +303,6 @@ void delete_script(OSCMessage &msg)
 			return;
 		}
 	}
-
-	LOOM_DEBUG_Println3("Script: ", script_name, " does not exist");
 }
 
 
@@ -318,13 +311,80 @@ void delete_script(OSCMessage &msg)
 //
 // Saves dynamic scripts to flash,
 // they are lost upon restart if not saved
+// This converts the array of OSC messages into 
+// an 2d array of strings encoding the scripts
 // 
 // @param msg  Message forward by msg_router, required parameter, not used
 //
 void save_dynamic_scripts(OSCMessage &msg)
 {
-	
+	LOOM_DEBUG_Println("Received command to save dynamic scripts");
+
+	// For each dynamic script
+	for (int i = 0; i < num_dynamic_scripts; i++) {
+
+		int script_len = dynamic_msg_scripts[i]->size();
+
+		// Save script name
+		dynamic_msg_scripts[i]->getAddress(config_dynamic_scripts->dynamic_scripts[i][0]);
+
+		// For each command, write to char arrays in config struct
+		for (int j = 0; j < script_len; j++) {
+			sprintf(config_dynamic_scripts->dynamic_scripts[i][j+1], "%s", get_data_value(dynamic_msg_scripts[i], j).c_str() );
+		}
+
+		// If the script is not exactly 'max_script_len' add end indicator
+		if (script_len < max_script_len) {
+			sprintf(config_dynamic_scripts->dynamic_scripts[i][script_len+1], "%s", "end");
+		}
+	}
+
+	config_dynamic_scripts->num_scripts = num_dynamic_scripts;
+
+	// Save the configuration structure to flash
+	write_non_volatile();
 }
+
+
+
+// Load dynamic scripts from flash config struct, where they are
+// stored as string arrays, and convert into messages
+void load_dynamic_scripts() 
+{
+	LOOM_DEBUG_Println2("Num Saved Scripts: ", config_dynamic_scripts->num_scripts);
+
+	// For each script in the flash struct
+	for (int i = 0; i < config_dynamic_scripts->num_scripts; i++) {
+
+		LOOM_DEBUG_Println2("\tScript: ", config_dynamic_scripts->dynamic_scripts[i][0]);
+
+		String tmpStrs[max_script_len];
+
+		// Copy C-string arrays in flash struct to String arrays, ignore script name for now
+		convert_array(config_dynamic_scripts->dynamic_scripts[i]+1, tmpStrs, max_script_len);
+
+		// Find length of script, by checking which command is 'done'
+		int len = 0;
+		while (len < max_script_len) {
+			if (tmpStrs[len] == "end") break;
+			len++;
+		}
+
+		// Convert String array to bundle with auto type interpretting
+		OSCBundle tmpBndl;
+		convert_key_value_array_to_bundle(tmpStrs, &tmpBndl, "/addr", len, SINGLEMSG, 4);
+		tmpBndl.getOSCMessage(0)->setAddress(config_dynamic_scripts->dynamic_scripts[i][0]);
+
+		// Get the single message from the bundle
+		dynamic_msg_scripts[i] = new OSCMessage(config_dynamic_scripts->dynamic_scripts[i][0]);
+		deep_copy_message(tmpBndl.getOSCMessage(0), dynamic_msg_scripts[i]);
+	}
+
+	// Update count of scripts loaded from flash 
+	num_dynamic_scripts = config_dynamic_scripts->num_scripts;
+}
+
+
 
 // ================================================================
 // ===                      SCRIPT PARSER                       ===
@@ -341,6 +401,9 @@ void save_dynamic_scripts(OSCMessage &msg)
 //
 void parseScript(OSCMessage* msg)
 {
+	LOOM_DEBUG_Println("In parseScript");
+	// print_message(msg);
+
 	stackPtr = 0;
 
 	char buf[50];
@@ -457,7 +520,7 @@ void parseScript(OSCMessage* msg)
 		}
 
 
-// This is just for debugging purposes for now
+		// This is just for debugging purposes for now
 		Serial.print("Stack ("); Serial.print(i); Serial.print("):");
 		for (int j = 0; j < stackPtr; j++) {
 			Serial.print("  "); Serial.print(stack[j]);

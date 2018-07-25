@@ -272,14 +272,17 @@ int    get_bundle_bytes(OSCBundle *bndl);
 // ================================================================
 
 // Files of functions that are not specific to sensors / actuators
-#include "loom_flash.h"
-#include "loom_interdev_comm.h" 
-
 
 #if enable_hub_scripts == 1
 	#include "loom_script_function_wrappers.h"
 	#include "loom_hub_scripts.h"
 #endif
+
+
+#include "loom_flash.h"
+#include "loom_interdev_comm.h" 
+
+
 
 
 

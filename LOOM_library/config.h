@@ -63,7 +63,7 @@
 #define num_analog    0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
 #define is_decagon    0		// 1 if GS3 Decagon is being used
 
-#define is_ms5803	  1
+#define is_ms5803	  0
 
 // --- Prebuilt Devices ---
 #define is_ishield     0	// 1 to specify using Ishield (should enable only wifi as communication platform)
@@ -211,7 +211,8 @@
 #if hub_node_type == 0
 	#define is_pushingbox 1 // only if Ethernet, WiFi, or cellular
 
-	#define device_poll_refresh 60  // Seconds between re-searching for devices on the network
+	#define device_poll_refresh 0  // Seconds between re-searching for devices on the network
+									// Set 0 or negative to disable
 
 	// The following two defines are planned to be implemented, but are not in use currently
 	// #define hub_input  LORA
