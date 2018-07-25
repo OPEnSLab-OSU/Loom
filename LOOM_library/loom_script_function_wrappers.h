@@ -89,6 +89,36 @@ float blink_ex(float x, float y)
 		digitalWrite(led, LOW);  
 		delay( (int)y ); 
 	}
+	return 0.0;
+}
+
+
+// Where x is the pin to read from
+float analog_read(float x, float y)
+{
+	return (float)read_analog( (int)x );
+}
+
+// Where x is interpreted as true (High) or false (Low)
+float set_builtin_led(float x, float y)
+{
+	digitalWrite(led, (x) ? HIGH : LOW );
+	return 0.0;
+}
+
+float set_neopixel_red(float x, float y)
+{
+	set_color( OSCMessage("/tmp").add( (int32_t)2 ).add( (int32_t)0 ).add( (int32_t)255 ).add( (int32_t)0 ).add( (int32_t)0) );
+}
+
+float set_neopixel_green(float x, float y)
+{
+	set_color( OSCMessage("/tmp").add( (int32_t)2 ).add( (int32_t)0 ).add( (int32_t)0 ).add( (int32_t)255 ).add( (int32_t)0) );
+}
+
+float set_neopixel_blue(float x, float y)
+{
+	set_color( OSCMessage("/tmp").add( (int32_t)2 ).add( (int32_t)0 ).add( (int32_t)0 ).add( (int32_t)0 ).add( (int32_t)255) );
 }
 
 
@@ -116,6 +146,12 @@ retFuncPtr custom_strToFunc(char * str) {
 
 	if (strcmp(str, "blink_ex") == 0)  return blink_ex;
 	
+	if (strcmp(str, "analog_read") == 0)  	 return analog_read;
+	if (strcmp(str, "set_builtin_led") == 0) return set_builtin_led;
+
+	if (strcmp(str, "set_neopixel_red") == 0)   return set_neopixel_red;
+	if (strcmp(str, "set_neopixel_green") == 0) return set_neopixel_green;
+	if (strcmp(str, "set_neopixel_blue") == 0)  return set_neopixel_blue;
 
 
 	return NULL; // Return Null if no match found, do not change

@@ -13,7 +13,7 @@ typedef float (*retFuncPtr)(float,float);
 
 #define max_static_scripts  10
 #define max_dynamic_scripts 10
-#define max_script_len      20
+#define max_script_len      30
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -24,7 +24,7 @@ typedef float (*retFuncPtr)(float,float);
 // Do I even need to convert to strings...? probably, if only because the OSCmessage arrays are pointers
 struct config_dynamic_scripts_t {
 	int num_scripts;
-	char dynamic_scripts[max_dynamic_scripts][max_script_len+1][16]; // currently up to 5 scripts with as many as 20 commands (arbitrary numbers right now)
+	char dynamic_scripts[max_dynamic_scripts][max_script_len+1][24]; // currently up to 5 scripts with as many as 20 commands (arbitrary numbers right now)
 	// OSCMessage dyn_scripts[10];  this one caused weird numbers
 };
 
@@ -82,6 +82,9 @@ void  print_registers();
 retFuncPtr strToFunc(char * str);
 
 
+
+
+
 // ================================================================
 // ===                    PRELOADED SCRIPTS                     ===
 // ================================================================
@@ -90,17 +93,51 @@ retFuncPtr strToFunc(char * str);
 // the device without needing to be saved to flash (i.e. static scripts)
 // Use these for scripts that more or less permanently used on the 
 // device until reflashing
+//
 void preload_static_scripts() 
 {
+	// Blink
 	// static_msg_scripts[0] = new OSCMessage("/test");
 	// static_msg_scripts[0]->add(10.0).add(300.0).add("blink_ex");
 	// num_static_scripts++;
 
+	// Fast Blink
 	// static_msg_scripts[1] = new OSCMessage("/test2");
 	// static_msg_scripts[1]->add(4.0).add(1000.0).add("blink_ex");
 	// num_static_scripts++;
 
+	// Buildin LED toggle
+	// static_msg_scripts[0] = new OSCMessage("/analog_led_toggle");
+	// static_msg_scripts[0]->add((int32_t)16).add(0.0).add("analog_read").add(500.0).add(">").add("if").add(1.0).add("else").add(0.0).add("endif").add("set_builtin_led");
+	// num_static_scripts++;
+
+	// 2 Color toggle
+	// static_msg_scripts[0] = new OSCMessage("/neopixel_2color");
+	// static_msg_scripts[0]->add((int32_t)14).add(0.0).add("analog_read").add(500.0).add(">").add("if").add("set_neopixel_blue").add("else").add("set_neopixel_red").add("endif");
+	// num_static_scripts++;
+
+	// 3 Color
+	// static_msg_scripts[0] = new OSCMessage("/neopixel_3color");
+	// static_msg_scripts[0]->add((int32_t)14).add(0.0).add("analog_read").add("store_r0")
+	// 						.add(900.0).add(">").add("if").add("set_neopixel_blue").add("done").add("endif")
+	// 						.add("load_r0")
+	// 						.add(500.0).add(">").add("if").add("set_neopixel_green").add("done").add("endif")
+	// 						.add("set_neopixel_red");
+	// num_static_scripts++;
+
+	// Alternate version 3 color
+	// static_msg_scripts[0] = new OSCMessage("/neopixel_3color");
+	// static_msg_scripts[0]->add((int32_t)14).add(0.0).add("analog_read").add("dup")
+	// 						.add(900.0).add(">").add("if").add(0.0).add(0.0).add("set_neopixel_blue" ).add("done").add("endif")
+	// 						.add(500.0).add(">").add("if").add(0.0).add(0.0).add("set_neopixel_green").add("done").add("endif")
+	// 						.add("set_neopixel_red");
+	// num_static_scripts++;
+
 }
+
+
+
+
 
 
 // ================================================================ 
@@ -154,7 +191,7 @@ float wrapper(float x, float y, float (*fPtr)(float,float)) {
 
 void setup_hub_scripts()
 {
-	LOOM_DEBUG_Print("Setting up hub scripts...");
+	LOOM_DEBUG_Println("Setting up hub scripts...");
 
 	// Clear out 'registers'
 	for (int b = 0; b < 3; b++) {
@@ -165,12 +202,14 @@ void setup_hub_scripts()
 
 	num_static_scripts  = 0;
 	num_dynamic_scripts = 0;
+
+	// Load and enable static scripts
 	preload_static_scripts();
 	
-	// Read dynamic scripts from flash
+	// Read any dynamic scripts saved in flash
 	load_dynamic_scripts();
 
-	LOOM_DEBUG_Println("Done");
+	LOOM_DEBUG_Println("Hub Script Setup Done");
 }
 
 
@@ -222,6 +261,7 @@ void run_all_dynamic_scripts()
 
 // Gets the length of the script in String[] format
 // as it may not be the max size of the array
+// Used when building message script from array
 int get_script_len(String script[])
 {
 	for (int i = 0; i < max_script_len; i++) { 
@@ -247,21 +287,22 @@ void message_to_script(OSCMessage &msg)
 		return;
 
 	char script_name[20], buf[20];
+	bool exists = false;
+	int  loc;
 
 	// Get the script name
 	msg.getString(0, script_name, 20);
 
-	// Check if script already exists
+	// Check if script already exists, as to not make duplicate
 	for (int i = 0; i < num_dynamic_scripts; i++) {
 		dynamic_msg_scripts[i]->getAddress(buf);
 		LOOM_DEBUG_Println4("Name: ", script_name, "\tBuf2: ", buf);
 		if ( strcmp(script_name, buf) == 0 ) {
-			LOOM_DEBUG_Println("Script already on device");
-			return;
+			LOOM_DEBUG_Println("Script already on device, updating it with most recently received version");
+			delete_script(OSCMessage("/delete").add(buf));
 		}
 	}
 
-	// Allocate memory and copy script into 
 	dynamic_msg_scripts[num_dynamic_scripts] = new OSCMessage(script_name);
 	for (int i = 1; i < msg.size() && i <= max_script_len; i++) {
 		switch (msg.getType(i)) {
@@ -289,14 +330,17 @@ void delete_script(OSCMessage &msg)
 	msg.getString(0, script_name, 20);
 	LOOM_DEBUG_Println2("Command to delete script: ", script_name);
 
+	// Check if name matches any saved script
 	for (int i = 0; i < num_dynamic_scripts; i++) {
 		dynamic_msg_scripts[i]->getAddress(buf);
 
+		// If match found
 		if ( strcmp(script_name, buf) == 0) {
-
+			// Delete and shift other scripts over the gap
 			for (int j = i; j < num_dynamic_scripts-1; j++) {
 				dynamic_msg_scripts[j] = dynamic_msg_scripts[j+1];
 			}	
+			dynamic_msg_scripts[num_dynamic_scripts-1]->empty();
 			dynamic_msg_scripts[--num_dynamic_scripts] = NULL;
 
 			LOOM_DEBUG_Println2("Deleted script: ", script_name);
@@ -327,6 +371,7 @@ void save_dynamic_scripts(OSCMessage &msg)
 
 		// Save script name
 		dynamic_msg_scripts[i]->getAddress(config_dynamic_scripts->dynamic_scripts[i][0]);
+		LOOM_DEBUG_Println2("Saving script: ", config_dynamic_scripts->dynamic_scripts[i][0]);
 
 		// For each command, write to char arrays in config struct
 		for (int j = 0; j < script_len; j++) {
@@ -343,6 +388,8 @@ void save_dynamic_scripts(OSCMessage &msg)
 
 	// Save the configuration structure to flash
 	write_non_volatile();
+
+	LOOM_DEBUG_Println3("Saved ", num_dynamic_scripts, " dynamic scripts");
 }
 
 
@@ -409,6 +456,8 @@ void parseScript(OSCMessage* msg)
 	char buf[50];
 	msg->getAddress(buf, 0);
 	LOOM_DEBUG_Println2("Running Script: ", buf );
+
+	// For each command in the script
 	for (int i = 0; i < msg->size(); i++) {
 
 		data_type = msg->getType(i);
@@ -504,6 +553,11 @@ void parseScript(OSCMessage* msg)
 					break;
 				}
 
+				if ( strcmp(buf, "done") == 0) {
+					LOOM_DEBUG_Println("Ending script");
+					return;
+				}
+
 				// If none of the above commands matched, try seaching external functions
 				float (*fPtr)(float,float) = strToFunc(buf);
 				if ( fPtr ) {
@@ -533,7 +587,7 @@ void parseScript(OSCMessage* msg)
 	Serial.println(stack[stackPtr-1]);
 	Serial.println();
 
-
+	// print_registers();
 }
 
 // Overloaded version that takes a bundle instead of a message
