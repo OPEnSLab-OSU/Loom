@@ -34,7 +34,7 @@
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform --- 
-#define is_wifi       1		// 1 to enable WiFi
+#define is_wifi       0		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
@@ -63,7 +63,8 @@
 #define num_analog    0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
 #define is_decagon    0		// 1 if GS3 Decagon is being used
 
-#define is_ms5803	  0
+#define is_ms5803     0		// 1 to enable MS5803 Altimeter
+#define is_lis3dh     1		// 1 to enable LIS3DH Accelerometer
 
 // --- Prebuilt Devices ---
 #define is_ishield     0	// 1 to specify using Ishield (should enable only wifi as communication platform)
@@ -79,7 +80,7 @@
 	#define DEFAULT_PASSWORD  "arduino101"		// Network password
 #endif
 
-#define enable_hub_scripts 1
+#define enable_hub_scripts 0
 
 // ================================================================
 // ================================================================ 

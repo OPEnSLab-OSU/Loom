@@ -82,6 +82,9 @@ void Loom_begin()
 		#if is_fxos8700 == 1
 			setup_fxos8700();
 		#endif
+		#if is_lis3dh == 1
+			setup_lis3dh();
+		#endif
 		#if is_mb1232 == 1
 			setup_mb1232();
 		#endif

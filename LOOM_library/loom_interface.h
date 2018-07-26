@@ -168,6 +168,15 @@ void measure_sensors()
 		measure_rtc();
 	#endif
 
+
+	// If using I2C sensor without multiplexer
+	#if is_multiplexer == 0
+		#if is_lis3dh == 1
+			measure_lis3dh();
+		#endif
+	#endif
+
+
 	 // Get analog readings
 	#if is_sapflow == 1 && hub_node_type == 1
 		measure_sapflow();
@@ -233,6 +242,12 @@ void package_data(OSCBundle *send_bndl)
 
 	// Should add the other I2C sensor package functions here 
 	// for when they are called without the multiplexer
+
+	#if is_multiplexer != 1
+		#if is_lis3dh == 1
+			package_lis3dh(send_bndl,configuration.packet_header_string);
+		#endif
+	#endif
 }
 
 
