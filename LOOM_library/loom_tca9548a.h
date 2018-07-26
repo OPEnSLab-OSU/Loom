@@ -147,14 +147,20 @@ void measure_sensor_data(uint8_t i2c_addr)
 	#endif
 	
 	#ifdef i2c_addr_ms5803
-		if ((i2c_addr == 0x77)  && setup_ms5803) {
+		if ((i2c_addr == 0x77)  && setup_ms5803()) {
 			measure_ms5803(); return;
+		}
+	#endif
+
+	#ifdef i2c_addr_lis3dh
+		if ((i2c_addr == 0x19)  && setup_lis3dh()) {
+			measure_lis3dh(); return;
 		}
 	#endif
 
 	#if LOOM_DEBUG == 1
 		if (i2c_addr != 0x00) //sht31d hardware bug
-			Serial.println("This sensor is not currently supported by the Project LOOM sytem");
+			Serial.println("This sensor is not currently supported by the Loom sytem");
 	#endif
 }
 
@@ -244,6 +250,16 @@ void package_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_s
 			if (setup_ms5803()) {
 				measure_ms5803();
 				package_ms5803(bndl,packet_header_string,port);
+				return;
+			} 
+		}
+	#endif
+
+	#ifdef i2c_addr_lis3dh
+		if (i2c_addr == 0x19){
+			if (setup_lis3dh()) {
+				measure_lis3dh();
+				package_lis3dh(bndl,packet_header_string,port);
 				return;
 			} 
 		}
@@ -369,6 +385,11 @@ void get_sensors(OSCBundle *bndl, char packet_header_string[])
 			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/ms5803");
 			bndl->add(addressString);
 		}
+		else if (i2c_addr == 0x19){
+			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/lis3dh");
+			bndl->add(addressString);
+		}
+
 
 		else if (i2c_addr != 0x00){
 			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/unsupported");

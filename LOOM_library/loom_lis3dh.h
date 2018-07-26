@@ -47,13 +47,13 @@ void measure_lis3dh();
 //
 bool setup_lis3dh() 
 {
-	// inst_lis3dh.settings.adcEnabled      = 1;
-	// inst_lis3dh.settings.tempEnabled     = 1;
-	// inst_lis3dh.settings.accelSampleRate = 50;  //Hz.  Can be: 0,1,10,25,50,100,200,400,1600,5000 Hz
-	// inst_lis3dh.settings.accelRange      = 16;  //Max G force readable.  Can be: 2, 4, 8, 16
-	// inst_lis3dh.settings.xAccelEnabled   = 1;
-	// inst_lis3dh.settings.yAccelEnabled   = 1;
-	// inst_lis3dh.settings.zAccelEnabled   = 1;
+	inst_lis3dh.settings.adcEnabled      = 1;
+	inst_lis3dh.settings.tempEnabled     = 1;
+	inst_lis3dh.settings.accelSampleRate = 50;  //Hz.  Can be: 0,1,10,25,50,100,200,400,1600,5000 Hz
+	inst_lis3dh.settings.accelRange      = 16;  //Max G force readable.  Can be: 2, 4, 8, 16
+	inst_lis3dh.settings.xAccelEnabled   = 1;
+	inst_lis3dh.settings.yAccelEnabled   = 1;
+	inst_lis3dh.settings.zAccelEnabled   = 1;
   
 	inst_lis3dh.begin();
 }
@@ -108,10 +108,15 @@ void measure_lis3dh()
 	float y = inst_lis3dh.readFloatAccelY();
 	float z = inst_lis3dh.readFloatAccelZ();
 
-	LOOM_DEBUG_Println2("LIS3DH Accel X: ", x);
-	LOOM_DEBUG_Println2("LIS3DH Accel Y: ", y);
-	LOOM_DEBUG_Println2("LIS3DH Accel Z: ", z);
-
+	#if LOOM_DEBUG == 1
+		Serial.print("LIS3DH Accel X: ");
+		Serial.println(x, 4);
+		Serial.print("LIS3DH Accel Y: ");
+		Serial.println(y, 4);
+		Serial.print("LIS3DH Accel Z: ");
+		Serial.println(z, 4);
+	#endif
+	
 	state_lis3dh.accel_x = x;
 	state_lis3dh.accel_y = y;
 	state_lis3dh.accel_z = z;
