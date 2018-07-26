@@ -1,11 +1,13 @@
 // ================================================================ 
 // ===                        LIBRARIES                         === 
 // ================================================================
+#include <Wire.h>
+#include "SparkFunLIS3DH.h"
 
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define i2c_addr_lis3dh 0x44	//0x44, 0x45
+#define i2c_addr_lis3dh 0x19	
 
 
 // ================================================================ 
@@ -16,9 +18,7 @@ struct config_lis3dh_t {
 };
 
 struct state_lis3dh_t {
-	Adafruit_SHT31 inst_lis3dh;
-	// float temp;
-	// float humid;
+	float accel_x, accel_y, accel_z;
 };
 
 // ================================================================ 
@@ -26,7 +26,7 @@ struct state_lis3dh_t {
 // ================================================================
 // struct config_lis3dh_t config_lis3dh;
 struct state_lis3dh_t state_lis3dh;
-
+LIS3DH inst_lis3dh(I2C_MODE, i2c_addr_lis3dh); //Default constructor is I2C, addr 0x19.
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
@@ -41,22 +41,21 @@ void measure_lis3dh();
 // ===                          SETUP                           === 
 // ================================================================
 //
-// Runs any SHT31D setup
+// Runs any LIS3DH setup
 //
 // @return  Whether or not sensor initialization was successful
 //
-bool setup_lis3dh() {
-	// bool is_setup;
-
-	// if (state_lis3dh.inst_lis3dh.begin(i2c_addr_lis3dh)) {
-	// 	is_setup = true;
-	// 	LOOM_DEBUG_Println("Initialized lis3dh (temp/humid)");
-	// } else {
-	// 	is_setup = false;
-	// 	LOOM_DEBUG_Println("Failed to initialize lis3dh (temp/humid");
-	// }
-	
-	// return is_setup;
+bool setup_lis3dh() 
+{
+	// inst_lis3dh.settings.adcEnabled      = 1;
+	// inst_lis3dh.settings.tempEnabled     = 1;
+	// inst_lis3dh.settings.accelSampleRate = 50;  //Hz.  Can be: 0,1,10,25,50,100,200,400,1600,5000 Hz
+	// inst_lis3dh.settings.accelRange      = 16;  //Max G force readable.  Can be: 2, 4, 8, 16
+	// inst_lis3dh.settings.xAccelEnabled   = 1;
+	// inst_lis3dh.settings.yAccelEnabled   = 1;
+	// inst_lis3dh.settings.zAccelEnabled   = 1;
+  
+	inst_lis3dh.begin();
 }
 
 
@@ -65,9 +64,9 @@ bool setup_lis3dh() {
 // ================================================================
 
 
-// --- PACKAGE SHT31D --- (Multiplexer Version)
+// --- PACKAGE LIS3DH --- (Multiplexer Version)
 // 
-// Adds last read SHT31D sensor readings to provided OSC bundle
+// Adds last read LIS3DH sensor readings to provided OSC bundle
 //
 // @param bndl                  The OSC bundle to be added to
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
@@ -75,44 +74,47 @@ bool setup_lis3dh() {
 //
 void package_lis3dh(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
-// 	char address_string[255];
-// 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/lis3dh/data");
+	char address_string[255];
+	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/lis3dh/data");
 	
-// 	OSCMessage msg = OSCMessage(address_string);
-// 	msg.add("temp").add(state_lis3dh.temp);
-// 	msg.add("humid").add(state_lis3dh.humid);
+	OSCMessage msg = OSCMessage(address_string);
+	msg.add("accel_x").add(state_lis3dh.accel_x);
+	msg.add("accel_y").add(state_lis3dh.accel_y);
+	msg.add("accel_z").add(state_lis3dh.accel_z);
 	
-// 	bndl->add(msg);
+	bndl->add(msg);
 }
 
 void package_lis3dh(OSCBundle *bndl, char packet_header_string[])
 {
-	// char address_string[255];
+	char address_string[255];
 
-	// sprintf(addressString, "%s%s", packet_header_string, "/lis3dh_temp");
-	// bndl->add(addressString).add(state_lis3dh.temp);
-	// sprintf(addressString, "%s%s", packet_header_string, "/lis3dh_humid");
-	// bndl->add(addressString ).add(state_lis3dh.humid);
+	sprintf(addressString, "%s%s", packet_header_string, "/lis3dh_accel_x");
+	bndl->add(addressString).add(state_lis3dh.accel_x);
+	sprintf(addressString, "%s%s", packet_header_string, "/lis3dh_accel_y");
+	bndl->add(addressString).add(state_lis3dh.accel_y);
+	sprintf(addressString, "%s%s", packet_header_string, "/lis3dh_accel_z");
+	bndl->add(addressString).add(state_lis3dh.accel_z);
 }
 
 
-// --- MEASURE SHT31D ---
+// --- MEASURE LIS3DH ---
 //
-// Gets the current sensor readings of the SHT31D and stores into its state struct
+// Gets the current sensor readings of the LIS3DH and stores into its state struct
 // 
 void measure_lis3dh() 
 {
-	// float t = state_lis3dh.inst_lis3dh.readTemperature();
-	// float h = state_lis3dh.inst_lis3dh.readHumidity();
+	float x = inst_lis3dh.readFloatAccelX();
+	float y = inst_lis3dh.readFloatAccelY();
+	float z = inst_lis3dh.readFloatAccelZ();
 
-	// if ((!isnan(t)) && (!isnan(h))) {
-	// 	state_lis3dh.temp = t;
-	// 	state_lis3dh.humid = h;
-	// 	LOOM_DEBUG_Println2("Temp: ",     state_lis3dh.temp);
-	// 	LOOM_DEBUG_Println2("Humidity: ", state_lis3dh.humid);
-	// } else {
-	// 	LOOM_DEBUG_Println("Failed to read temperature or humidity");
-	// }
+	LOOM_DEBUG_Println2("LIS3DH Accel X: ", x);
+	LOOM_DEBUG_Println2("LIS3DH Accel Y: ", y);
+	LOOM_DEBUG_Println2("LIS3DH Accel Z: ", z);
+
+	state_lis3dh.accel_x = x;
+	state_lis3dh.accel_y = y;
+	state_lis3dh.accel_z = z;
 }
 
 

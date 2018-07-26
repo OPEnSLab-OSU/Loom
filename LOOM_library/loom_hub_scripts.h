@@ -523,6 +523,7 @@ void parseScript(OSCMessage* msg)
 					break;
 				}
 
+				// Keyword indicating start of an else branch
 				if ( strcmp(buf, "else") == 0 ) {  
 					// If taking the else branch, just continue
     				// Otherwise skip to 'endif'
@@ -536,12 +537,14 @@ void parseScript(OSCMessage* msg)
 					break;
 				}
 
+				// Keyword indicating end of if / else statement
 				if ( strcmp(buf, "endif") == 0) {
 					// probably don't need to do anything here
 					// takingElseBranch = false;
 					break;
 				}
 
+				// Print the stack to Serial Monitor
 				if ( strcmp(buf, "printStack") == 0) {
 					#if LOOM_DEBUG == 1
 						Serial.println();
@@ -553,6 +556,7 @@ void parseScript(OSCMessage* msg)
 					break;
 				}
 
+				// Terminate script early
 				if ( strcmp(buf, "done") == 0) {
 					LOOM_DEBUG_Println("Ending script");
 					return;
@@ -565,7 +569,8 @@ void parseScript(OSCMessage* msg)
 					break;
 				}
 
-				// No 'break' so if error, fallthrough to 'default' case
+				// No 'break' so if there was an error, fallthrough to 'default' case
+
 			} // of case 's':
 
 			default:
@@ -583,9 +588,10 @@ void parseScript(OSCMessage* msg)
 
 	}
 
-	Serial.print("Result: ");
-	Serial.println(stack[stackPtr-1]);
-	Serial.println();
+	// Print the value on the top of the stack
+	// Serial.print("Result: ");
+	// Serial.println(stack[stackPtr-1]);
+	// Serial.println();
 
 	// print_registers();
 }

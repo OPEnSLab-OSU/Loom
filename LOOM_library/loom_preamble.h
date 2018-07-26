@@ -248,6 +248,9 @@ int    get_bundle_bytes(OSCBundle *bndl);
 #if is_ms5803 == 1
 	#include "loom_ms5803.h"
 #endif
+#if is_lis3dh == 1
+	#include "loom_lis3dh.h"
+#endif
 
 
 #if is_multiplexer == 1
