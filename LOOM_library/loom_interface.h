@@ -7,6 +7,7 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform);
 void process_bundle(OSCBundle *bndl);
 void measure_sensors();
 void package_data(OSCBundle *send_bndl);
+void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port);
 void send_bundle(OSCBundle *send_bndl, CommPlatform platform);
 void log_bundle(OSCBundle *send_bndl, LogPlatform platform, char* file); //filename for SD files
 void log_bundle(OSCBundle *send_bndl, LogPlatform platform);
@@ -40,7 +41,9 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 			// Handle wifi bundle if it exists
 			// Checks device unique UDP port and common UDP port
 			wifi_receive_bundle(bndl, &Udp,       configuration.config_wifi.localPort); 
-			wifi_receive_bundle(bndl, &UdpCommon, configuration.config_wifi.commonPort); 
+			// wifi_receive_bundle(bndl, &UdpCommon, configuration.config_wifi.subnetPort); 
+			wifi_receive_bundle(bndl, &Udp, SUBNET_PORT);
+			wifi_receive_bundle(bndl, &Udp, GLOBAL_PORT);
 			break;
 		#endif
 
@@ -83,14 +86,23 @@ void process_bundle(OSCBundle *bndl)
 
 			// --- Message Routing ---
 	
-			// This is the most important part of this function 
+			// These are the most important part of this function 
 			// Send the bndle to the routing function,
 			// which will route/dispatch messages to the currect handling functions
 			// Most commands will be finished once control returns here 
+			
+
+			// Device Specific Message
 			bndl->route(configuration.packet_header_string, msg_router);
 			
-			// Also route on messages that were broadcasted without device identifier, only the Family
-			bndl->route(STR(/) FAMILY, common_msg_router);
+			// Family Subnet Message
+			bndl->route(STR(/) STR(FAMILY) STR(FAMILY_NUM), common_msg_router);
+
+			// Family Global Message
+			bndl->route(STR(/) STR(FAMILY) , common_msg_router);
+
+
+
 
 
 			// --- Miscellaneous Processing ---
@@ -170,9 +182,33 @@ void measure_sensors()
 
 
 	// If using I2C sensor without multiplexer
-	#if is_multiplexer == 0
+	#if is_multiplexer != 1
+		#if is_fxas21002 == 1 
+			measure_fxas21002();
+		#endif
+		#if is_fxos8700 == 1
+			measure_fxos8700();
+		#endif
 		#if is_lis3dh == 1
 			measure_lis3dh();
+		#endif
+		#if is_mb1232 == 1
+			measure_mb1232();
+		#endif
+		#if is_mpu6050 == 1
+			measure_mpu6050(); 
+		#endif
+		#if is_ms5803 == 1
+			measure_ms5803();
+		#endif
+		#if is_sht31d == 1
+			measure_sht31d();
+		#endif
+		#if is_tsl2591 == 1
+			measure_tsl2591();
+		#endif
+		#if is_zxgesturesensor == 1
+			measure_zxgesturesensor();
 		#endif
 	#endif
 
@@ -264,7 +300,9 @@ void package_data(OSCBundle *send_bndl)
 // @param file       The file name when saving to SD card
 // 
 // void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
-void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
+
+void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port)
+// void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
 {
 	switch(platform) {
 		#if is_wifi == 1
@@ -295,6 +333,13 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
 		default : Serial.println("That platform is not enabled for sending");
 		#endif 
 	} // of switch
+}
+
+// Overloaded version that doesn't take the optional UDP port 
+// If WiFi, calling this function will default to Device Unique port
+void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
+{
+	send_bundle(send_bndl, platform, configuration.instance_number);
 }
 
 

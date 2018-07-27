@@ -29,13 +29,8 @@ struct config_flash_t {
 		struct config_wifi_t config_wifi;
 	#endif
 
-
-	// maybe move this to its own struct in the future?
 	#if enable_hub_scripts == 1
 		struct config_dynamic_scripts_t config_dynamic_scripts;
-		// uint8_t num_scripts;   // as to only run scripts that are defined
-		// char*   scripts[5][30];
-
 	#endif
 
 	
@@ -133,7 +128,7 @@ void setup_flash_config()
 				configuration.config_wifi.keyIndex     = 0;                    // Your network key Index number (needed only for WEP)
 				configuration.config_wifi.ip_broadcast = "255.255.255.255";    // IP to Broadcast data 
 				configuration.config_wifi.localPort    = INIT_PORT;            // Local port to listen on
-				configuration.config_wifi.commonPort   = COMMON_PORT;          // Port that all wifi devices also check
+				configuration.config_wifi.subnetPort   = SUBNET_PORT;          // Port that all wifi devices also check
 				configuration.config_wifi.wifi_mode    = DEFAULT_MODE;         // WiFi mode to start in (AP_MODE, WPA_CLIENT_MODE, WEP_CLIENT_MODE)
 				configuration.config_wifi.request_settings = REQUEST_SETTINGS; // Bool of whether or not to request new channel settings on startup
 			#endif
@@ -150,7 +145,7 @@ void setup_flash_config()
 
 
 
-			// Add any other behavior/calibration wrapped in an #ifdef is_something preprocessor directive HERE
+			// Add any other behavior/calibration wrapped in an '#ifdef is_something' preprocessor directive HERE
 			
 			#if is_mpu6050 == 1 && is_ishield == 1
 				calMPU6050();                                 // Calibration writes memValidationValue for us

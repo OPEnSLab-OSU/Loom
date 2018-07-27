@@ -22,6 +22,7 @@
 
 // --- Device Identification --- 
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
+#define FAMILY_NUM       0		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
 #define CHANNEL          7		// Channel to use. Set to 1-8 for channels A-H, respectively. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request channel settings from Max Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
@@ -63,8 +64,15 @@
 #define num_analog    0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
 #define is_decagon    0		// 1 if GS3 Decagon is being used
 
-#define is_ms5803     0		// 1 to enable MS5803 Altimeter
-#define is_lis3dh     1		// 1 to enable LIS3DH Accelerometer
+#define is_tsl2591         0	// Lux Sensor
+#define is_fxos8700        0	// Accelerometer / Magnetometer
+#define is_fxas21002       0	// Gyroscope
+#define is_zxgesturesensor 0	// ZX_Distance Sensor
+#define is_sht31d          0	// Temperature / Humidity
+#define is_mb1232          0	// Sonar
+#define is_mpu6050         0	// Accelerometer / Gyroscope
+#define is_lis3dh          0	// Accelerometer
+#define is_ms5803          1	// Pressure Sensor
 
 // --- Prebuilt Devices ---
 #define is_ishield     0	// 1 to specify using Ishield (should enable only wifi as communication platform)
@@ -92,6 +100,8 @@
 // --- Set Instance Number and UDP Port ---
 // If not using channels, then the following 
 // intial instance number port will be used
+// Interdevice communication is undefined and less supported
+// if not using channels
 #if CHANNEL == -1
 	#define INIT_INST    3	// Initial device instance number (normally 1-8 when using channels)
 	#define INIT_PORT 9443	// Initial device UDP port (normally 1-8 when using channels)
@@ -121,6 +131,8 @@
 	#define is_sht31d          1	// Temperature / Humidity
 	#define is_mb1232          1	// Sonar
 	#define is_mpu6050         1	// Accelerometer / Gyroscope
+	#define is_lis3dh          1    // Accelerometer
+	#define is_ms5803          1	// Pressure Sensor
 #endif
 
 

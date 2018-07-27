@@ -26,7 +26,7 @@ struct config_wifi_t{
 	int         keyIndex;               // Key Index Number (needed only for WEP)
 	char*       ip_broadcast;           // IP to Broadcast data
 	unsigned int localPort;             // Local port to listen on
-	unsigned int commonPort; 
+	unsigned int subnetPort; 
 	byte        mac[6];                 // Device's MAC Address
 	WiFiMode    wifi_mode;              // Devices current wifi mode
 	bool        request_settings;        // True if device should request new channel settings on startup
@@ -55,7 +55,7 @@ char * packet_header_string;
 
 // WiFi global vars/structs
 WiFiUDP      Udp;
-WiFiUDP      UdpCommon;
+WiFiUDP      UdpCommon;			// Maybe I dont even need 2 of these, let alone 3
 WiFiServer   server(80);
 int status = WL_IDLE_STATUS;
 
@@ -85,7 +85,7 @@ void new_channel(OSCMessage &msg);
 // void respond_to_poll_request(char packet_header_string[]);
 void wifi_send_bundle(OSCBundle *bndl);
 void wifi_send_bundle(OSCBundle *bndl, int port);
-void wifi_send_bundle_common(OSCBundle *bndl);
+void wifi_send_bundle_subnet(OSCBundle *bndl);
 
 
 void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port);
@@ -154,9 +154,93 @@ void setup_wifi(char packet_header_string[])
 	config_wifi->ip = WiFi.localIP();
 	LOOM_DEBUG_Println("Finished setting up WiFi.");
 
-
 	// printWiFiStatus();
 }
+
+
+
+
+// ================================================================ 
+// ===              WIFI SEND AND RECEIVE BUNDLE                === 
+// ================================================================
+// --- WIFI SEND BUNDLE ---
+//
+// This is a simple helper function to encapsulate the 
+// common sequence of commands to send an OSC bundle
+// Note that this send on the device unique UDP port, localPort,
+// not the common port, 9440
+//
+// @param bndl  The OSC bundle to send on the device unique port
+//
+void wifi_send_bundle(OSCBundle *bndl)
+{
+	Udp.beginPacket(config_wifi->ip_broadcast, config_wifi->localPort);
+	bndl->send(Udp);    // Send the bytes to the SLIP stream
+	Udp.endPacket();        // Mark the end of the OSC Packet
+}
+
+// Version of wifi_send_bundle that will send on an arbitrary port
+void wifi_send_bundle(OSCBundle *bndl, int port)
+{
+	Udp.beginPacket(config_wifi->ip_broadcast, port);
+	bndl->send(Udp);    // Send the bytes to the SLIP stream
+	Udp.endPacket();        // Mark the end of the OSC Packet
+}
+
+// THE FOLLOWING TWO FUNCTIONS WILL  'HOPEFULLY' BECOME OBSOLETE 
+
+void wifi_send_bundle_subnet(OSCBundle *bndl)
+{
+	UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
+	bndl->send(UdpCommon);    // Send the bytes to the SLIP stream
+	UdpCommon.endPacket();        // Mark the end of the OSC Packet
+}
+
+void wifi_send_bundle_global(OSCBundle *bndl)
+{
+	UdpCommon.beginPacket(config_wifi->ip_broadcast, GLOBAL_PORT);				// Maybe this is called with new UDP object
+	bndl->send(UdpCommon);    // Send the bytes to the SLIP stream
+	UdpCommon.endPacket();        // Mark the end of the OSC Packet
+}
+
+// --- WIFI RECEIVE BUNDLE ---
+//
+// Function that fills an OSC Bundle with packets from UDP
+// Routes messages to correct function via msg_router if message header string matches expected
+//
+// @param bndl                  OSC bundle to be filled
+// @param packet_header_string  Header string to route messages on, as there are unique ports and a common port
+// @param Udp                   Which WiFIUdp structure to read packets from
+// @param port                  Which port the packet was received on, used primarily for debug prints
+//
+#if is_wifi == 1
+void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port)
+{  
+	int packetSize; 
+	state_wifi.pass_set = false;
+	state_wifi.ssid_set = false;
+	
+	// If there's data available, read a packet
+	packetSize = Udp->parsePacket();
+
+	if (packetSize > 0) {
+		#if LOOM_DEBUG == 1
+			if (packetSize > 0) {
+				Serial.println("=========================================");
+				Serial.print("Received packet of size: ");
+				Serial.print(packetSize);
+				Serial.print(" on port " );
+				Serial.println(port);
+			}
+		#endif
+		
+		bndl->empty();             // Empty previous bundle
+		while (packetSize--){      // Read in new bundle
+			bndl->fill(Udp->read());
+		}
+	} // of (packetSize > 0)
+}
+#endif // of if is_wifi == 1
 
 
 // ================================================================ 
@@ -236,12 +320,12 @@ void start_AP()
 	#endif
 		
 	LOOM_DEBUG_Println2("localPort: ", config_wifi->localPort);
-	LOOM_DEBUG_Println2("commonPort: ", config_wifi->commonPort);
+	LOOM_DEBUG_Println2("subnetPort: ", config_wifi->subnetPort);
 
 
 	// If you get a connection, report back via serial:
 	Udp.begin(config_wifi->localPort);
-	UdpCommon.begin(config_wifi->commonPort);
+	UdpCommon.begin(config_wifi->subnetPort);
 }
 
 
@@ -294,7 +378,7 @@ bool connect_to_WPA(char ssid[], char pass[])
 	// If you get a connection, report back via serial:
 	server.begin();
 	Udp.begin(config_wifi->localPort);
-	UdpCommon.begin(config_wifi->commonPort);
+	UdpCommon.begin(config_wifi->subnetPort);
 	return true;
 }
 
@@ -459,10 +543,10 @@ void broadcastIP(OSCMessage &msg)
 						   .add((int32_t)config_wifi->ip[2])
 						   .add((int32_t)config_wifi->ip[3]);
 
-	// UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
+	// UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
 	// bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
 	// UdpCommon.endPacket();    // Mark the end of the OSC Packet
-	wifi_send_bundle_common(&bndl);
+	wifi_send_bundle_subnet(&bndl);
 	bndl.empty();             // Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println2("Broadcasted IP: ", config_wifi->ip);
@@ -538,10 +622,10 @@ void request_settings_from_Max()
 		.add((int32_t)config_wifi->ip[3]);
 
 	
-	// UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
+	// UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
 	// bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
 	// UdpCommon.endPacket();    // Mark the end of the OSC Packet
-	wifi_send_bundle_common(&bndl);
+	wifi_send_bundle_subnet(&bndl);
 	bndl.empty();             // Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println("Requested New Channel Settings");
@@ -603,86 +687,13 @@ void respond_to_poll_request(OSCMessage &msg)
 
 	bndl.add(addressString);
 
-	UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
+	UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
 	bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
 	UdpCommon.endPacket();    // Mark the end of the OSC Packet
 	bndl.empty();             // Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println("Responded to poll request");
 }
-
-
-
-// --- WIFI SEND BUNDLE ---
-//
-// This is a simple helper function to encapsulate the 
-// common sequence of commands to send an OSC bundle
-// Note that this send on the device unique UDP port, localPort,
-// not the common port, 9440
-//
-// @param bndl  The OSC bundle to send on the device unique port
-//
-void wifi_send_bundle(OSCBundle *bndl)
-{
-	Udp.beginPacket(config_wifi->ip_broadcast, config_wifi->localPort);
-	bndl->send(Udp);    // Send the bytes to the SLIP stream
-	Udp.endPacket();        // Mark the end of the OSC Packet
-}
-
-// Version of wifi_send_bundle that will send on an arbitrary port
-void wifi_send_bundle(OSCBundle *bndl, int port)
-{
-	Udp.beginPacket(config_wifi->ip_broadcast, port);
-	bndl->send(Udp);    // Send the bytes to the SLIP stream
-	Udp.endPacket();        // Mark the end of the OSC Packet
-}
-
-void wifi_send_bundle_common(OSCBundle *bndl)
-{
-	UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->commonPort);
-	bndl->send(UdpCommon);    // Send the bytes to the SLIP stream
-	UdpCommon.endPacket();        // Mark the end of the OSC Packet
-}
-
-
-// --- WIFI RECEIVE BUNDLE ---
-//
-// Function that fills an OSC Bundle with packets from UDP
-// Routes messages to correct function via msg_router if message header string matches expected
-//
-// @param bndl                  OSC bundle to be filled
-// @param packet_header_string  Header string to route messages on, as there are unique ports and a common port
-// @param Udp                   Which WiFIUdp structure to read packets from
-// @param port                  Which port the packet was received on, used primarily for debug prints
-//
-#if is_wifi == 1
-void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port)
-{  
-	int packetSize; 
-	state_wifi.pass_set = false;
-	state_wifi.ssid_set = false;
-	
-	// If there's data available, read a packet
-	packetSize = Udp->parsePacket();
-
-	if (packetSize > 0) {
-		#if LOOM_DEBUG == 1
-			if (packetSize > 0) {
-				Serial.println("=========================================");
-				Serial.print("Received packet of size: ");
-				Serial.print(packetSize);
-				Serial.print(" on port " );
-				Serial.println(port);
-			}
-		#endif
-		
-		bndl->empty();             // Empty previous bundle
-		while (packetSize--){      // Read in new bundle
-			bndl->fill(Udp->read());
-		}
-	} // of (packetSize > 0)
-}
-#endif // of if is_wifi == 1
 
 
 

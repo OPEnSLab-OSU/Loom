@@ -61,7 +61,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		// Sets a specified Neopixel's color
 		msg.dispatch("/Neopixel",     		set_color, 				addrOffset);
 	#endif
-	#if is_pushingbox == 1 && hub == 1
+	#if is_pushingbox == 1 && hub_node_type == 0
 		// Sends data to Google sheets via PushingBox
 		msg.dispatch("/SendToPB", 			sendToPushingBox, 		addrOffset);
 	#endif

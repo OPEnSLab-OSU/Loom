@@ -15,7 +15,7 @@
 #define FONA_TX  2
 #define FONA_RST A0		// Pretty arbitrary, think it justs needs to be an availalble digital out pin
 
-#define APN "wholesale"
+#define APN "wholesale" // For use with Ting SIM card
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
@@ -78,7 +78,7 @@ bool setup_fona()
 	Serial.println(F("Initializing....(May take 3 seconds)"));
 
 	fonaSerial->begin(4800);
-	if (! fona.begin(*fonaSerial)) {
+	if (!fona.begin(*fonaSerial)) {
 		Serial.println(F("Couldn't find FONA"));
 		while (1);
 	}
@@ -89,11 +89,11 @@ bool setup_fona()
 	switch (type) {						// only 808 is currently supported by Loom
 		case FONA800L   : Serial.println(F("FONA 800L")); 			break;
 		case FONA800H   : Serial.println(F("FONA 800H")); 			break;
-		case FONA808_V1 : Serial.println(F("FONA 808 (v1)"));	 	break;
+		case FONA808_V1 : Serial.println(F("FONA 808 (v1)")); 		break;
 		case FONA808_V2 : Serial.println(F("FONA 808 (v2)")); 		break;
 		case FONA3G_A   : Serial.println(F("FONA 3G (American)")); 	break;
 		case FONA3G_E   : Serial.println(F("FONA 3G (European)")); 	break;
-		default: 		 Serial.println(F("???")); 					break;
+		default         : Serial.println(F("???")); 				break;
 	}
 
 	// Print module IMEI number.
