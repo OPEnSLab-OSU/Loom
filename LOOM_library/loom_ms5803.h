@@ -6,7 +6,7 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define i2c_addr_ms5803 0x77	//0x44, 0x45
+#define i2c_addr_ms5803 0x77	
 
 
 //I2C commands, ripped from the datasheet's "figure 2".
@@ -119,7 +119,12 @@ void package_ms5803(OSCBundle *bndl, char packet_header_string[])
 // 
 void measure_ms5803() 
 {
-	if ( readTemp() && readPressure() ) { 
+	readTemp();
+	readPressure(); 
+
+	if (1 ) { 
+	// if ( readTemp() && readPressure() ) { 
+
 		// calc_Temp_Press(); //calculate the compensated pressure and temperature
 		int32_t dT = 0;
 		state_ms5803.pressureNC = 0;
@@ -139,12 +144,21 @@ void measure_ms5803()
 		int64_t SENS = MS_PROM[1]* uint16_t(1<<15) + (MS_PROM[3]*dT)/ uint16_t(1<<8); 
 		state_ms5803.pressureC = (((state_ms5803.pressureNC * SENS / uint32_t(1<<21)) - OFF) / uint16_t(1<<15));
 	}
+
+	#if LOOM_DEBUG == 1
+		Serial.print("Temperature NC: "); Serial.println(state_ms5803.tempNC, 4);
+		Serial.print("Temperature C: ");  Serial.println(state_ms5803.tempC,  4);
+		Serial.print("Pressure NC: ");    Serial.println(state_ms5803.pressureNC, 4);
+		Serial.print("Pressure C: ");     Serial.println(state_ms5803.pressureC,  4);
+	#endif
 }
 
 
 
 bool readPressure()
 {
+	LOOM_DEBUG_Println("Reading Pressure");
+
 	unsigned long pressures[3];
 
 	Wire.beginTransmission(i2c_addr_ms5803);//start a transmission sequence
@@ -158,9 +172,11 @@ bool readPressure()
 	Wire.endTransmission();
 
 	Wire.requestFrom(i2c_addr_ms5803, 3);
-	if(!Wire.available()) return false;
-	else{
-		
+	if (!Wire.available()) {
+		LOOM_DEBUG_Println("Wire not available");
+		return false;
+	} else {
+		LOOM_DEBUG_Println("Wire available");
 		int i = 0;
 		while(Wire.available() && i<3){
 			pressures[i] = Wire.read();
@@ -171,6 +187,11 @@ bool readPressure()
 		//p1 represents the MSB, p3 represents the LSB
 		unsigned long p0 = pressures[0] << (2*8);
 		unsigned long p1 = pressures[1] << (8);
+		
+		LOOM_DEBUG_Println2("p0:", p0);
+		LOOM_DEBUG_Println2("p1:", p1);
+		LOOM_DEBUG_Println2("p2:", pressures[2]);
+
 		state_ms5803.pressureNC = p0 + p1 + pressures[2];
 		
 		return true; 
@@ -180,6 +201,8 @@ bool readPressure()
 
 bool readTemp()
 {
+	LOOM_DEBUG_Println("Reading Temperature");
+
 	unsigned long temperatures[3];
 
 	// tell the sensor to compensate and convert the temperature values
@@ -197,8 +220,11 @@ bool readTemp()
 	
 	// tell the sensor to send over the ADC values
 	Wire.requestFrom(i2c_addr_ms5803, 3);
-	if(!Wire.available()) return false;
-	else{
+	if (!Wire.available()) {
+		LOOM_DEBUG_Println("Wire not available");
+		return false;
+	} else {
+		LOOM_DEBUG_Println("Wire available");
 		int i = 0;
 		while(Wire.available() && i<3){
 			temperatures[i] = Wire.read();
@@ -207,6 +233,11 @@ bool readTemp()
 		
 		unsigned long t0 = temperatures[0] << (2*8);
 		unsigned long t1 = temperatures[1] << (8);
+
+		LOOM_DEBUG_Println2("t0:", t0);
+		LOOM_DEBUG_Println2("t1:", t1);
+		LOOM_DEBUG_Println2("t2:", temperatures[2]);
+
 		state_ms5803.tempNC = (t0 + t1 + temperatures[2]);
 		
 		return true;
@@ -246,7 +277,7 @@ void PSreset()
 		if(Wire.available()){
 			MS_PROM[i] += Wire.read();
 		}
-		if(Serial) Serial.println(MS_PROM[i]);
+		// if(Serial) Serial.println(MS_PROM[i]);
 	}
 }
 

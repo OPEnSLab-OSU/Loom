@@ -89,13 +89,11 @@ void Loom_begin()
 			setup_mb1232();
 		#endif
 		#if is_mpu6050 == 1
-			// setup_mpu6050();
+			// setup_mpu6050();   not sure why this is commented out
 		#endif
-
 		#if is_ms5803 == 1
 			setup_ms5803();
 		#endif
-
 		#if is_sht31d == 1
 			setup_sht31d();
 		#endif
@@ -137,7 +135,7 @@ void Loom_begin()
 		setup_fona();
 	#endif
 
-	// Additional Platform setups
+	// Data Logging Platform setups
 	#if is_sd == 1
 		setup_sd();
 	#endif
@@ -150,10 +148,22 @@ void Loom_begin()
 		setup_network_info();
 	#endif
 
-
+	// Setup scripts if enabled
 	#if enable_hub_scripts == 1
 		setup_hub_scripts();
 	#endif
+
+
+	LOOM_DEBUG_Println2("DEVICE ID: ", configuration.packet_header_string );
+	
+	// Family Subnet Message
+	LOOM_DEBUG_Println2("FAMILY SUBNET: ", STR(/) STR(FAMILY) STR(FAMILY_NUM) );
+
+	// Family Global Message
+	LOOM_DEBUG_Println2("FAMILY: ", STR(/) STR(FAMILY) );
+
+
+
 
 	// Flash the built-in LED indicating setup complete
 	flash_led();

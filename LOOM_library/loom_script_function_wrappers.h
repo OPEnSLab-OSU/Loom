@@ -109,16 +109,19 @@ float set_builtin_led(float x, float y)
 float set_neopixel_red(float x, float y)
 {
 	set_color( OSCMessage("/tmp").add( (int32_t)2 ).add( (int32_t)0 ).add( (int32_t)255 ).add( (int32_t)0 ).add( (int32_t)0) );
+	return 0.0;
 }
 
 float set_neopixel_green(float x, float y)
 {
 	set_color( OSCMessage("/tmp").add( (int32_t)2 ).add( (int32_t)0 ).add( (int32_t)0 ).add( (int32_t)255 ).add( (int32_t)0) );
+	return 0.0;
 }
 
 float set_neopixel_blue(float x, float y)
 {
 	set_color( OSCMessage("/tmp").add( (int32_t)2 ).add( (int32_t)0 ).add( (int32_t)0 ).add( (int32_t)0 ).add( (int32_t)255) );
+	return 0.0;
 }
 
 

@@ -109,14 +109,11 @@ void measure_lis3dh()
 	float z = inst_lis3dh.readFloatAccelZ();
 
 	#if LOOM_DEBUG == 1
-		Serial.print("LIS3DH Accel X: ");
-		Serial.println(x, 4);
-		Serial.print("LIS3DH Accel Y: ");
-		Serial.println(y, 4);
-		Serial.print("LIS3DH Accel Z: ");
-		Serial.println(z, 4);
+		Serial.print("LIS3DH Accel X: "); Serial.println(x, 4);
+		Serial.print("LIS3DH Accel Y: "); Serial.println(y, 4);
+		Serial.print("LIS3DH Accel Z: "); Serial.println(z, 4);
 	#endif
-	
+
 	state_lis3dh.accel_x = x;
 	state_lis3dh.accel_y = y;
 	state_lis3dh.accel_z = z;

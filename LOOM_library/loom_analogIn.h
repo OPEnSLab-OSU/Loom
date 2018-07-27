@@ -10,6 +10,7 @@
 // ================================================================
 struct state_analog_t {
 	int16_t a0, a1, a2, a3, a4, a5; // Memory to store analog sensor values
+													// Add other ports ? put these in #defines based on which ports are enabled
 };
 
 // ================================================================ 

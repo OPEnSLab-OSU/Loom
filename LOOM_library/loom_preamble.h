@@ -7,6 +7,7 @@
 // ================================================================ 
 // ===               DEFINITIONS BASED ON CONFIG                === 
 // ================================================================
+
 // Packet header creation macro
 #define STR_(x) #x                // Helper function
 #define STR(x) STR_(x)            // To concatenate a predefined number to a string literal, use STR(x)
@@ -14,16 +15,21 @@
 
 #define VBATPIN A7                // Pin to check for battery voltage
 
-// If using channels
-#if CHANNEL >= 1 && CHANNEL <= 8
-	#define INIT_INST CHANNEL
-	#define INIT_PORT 9440+CHANNEL
-#endif
+// Global UDP port
+// Should not be changed
+#define GLOBAL_PORT 9440
 
 // --- WiFi UDP Ports ---
 #if is_wifi == 1
-	#define COMMON_PORT     9440	// Expected by Max to be 9440, don't change unless using custom Max patches
+	#define SUBNET_PORT     GLOBAL_PORT+(10*FAMILY_NUM)	
 #endif
+
+// If using channels
+#if CHANNEL >= 1 && CHANNEL <= 8
+	#define INIT_INST CHANNEL
+	#define INIT_PORT SUBNET_PORT+CHANNEL
+#endif
+
 
 // --- Automatically Set Device Name ---
 #if AUTO_NAME == 1
@@ -281,14 +287,8 @@ int    get_bundle_bytes(OSCBundle *bndl);
 	#include "loom_hub_scripts.h"
 #endif
 
-
 #include "loom_flash.h"
 #include "loom_interdev_comm.h" 
-
-
-
-
-
 #include "loom_common_functions.h"
 #include "loom_msg_router.h"
 #include "loom_interface.h"
