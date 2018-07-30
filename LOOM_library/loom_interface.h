@@ -40,10 +40,16 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 		case WIFI :
 			// Handle wifi bundle if it exists
 			// Checks device unique UDP port and common UDP port
-			wifi_receive_bundle(bndl, &Udp,       configuration.config_wifi.localPort); 
-			// wifi_receive_bundle(bndl, &UdpCommon, configuration.config_wifi.subnetPort); 
-			wifi_receive_bundle(bndl, &Udp, SUBNET_PORT);
-			wifi_receive_bundle(bndl, &Udp, GLOBAL_PORT);
+			wifi_receive_bundle(bndl, &UdpDevice, configuration.config_wifi.localPort, "Local"); 
+			wifi_receive_bundle(bndl, &UdpSubnet, configuration.config_wifi.subnetPort, "Subnet"); 
+			wifi_receive_bundle(bndl, &UdpGlobal, GLOBAL_PORT, "Global");
+
+		// Add if to not check global if it is same as subnet
+
+			// wifi_receive_bundle(bndl, &Udp, SUBNET_PORT);
+			// wifi_receive_bundle(bndl, &Udp, configuration.config_wifi.subnetPort); 
+			
+			// wifi_receive_bundle(bndl);
 			break;
 		#endif
 
@@ -96,10 +102,10 @@ void process_bundle(OSCBundle *bndl)
 			bndl->route(configuration.packet_header_string, msg_router);
 			
 			// Family Subnet Message
-			bndl->route(STR(/) STR(FAMILY) STR(FAMILY_NUM), common_msg_router);
+			bndl->route(STR(/) FAMILY STR(FAMILY_NUM), msg_router);
 
 			// Family Global Message
-			bndl->route(STR(/) STR(FAMILY) , common_msg_router);
+			bndl->route(STR(/) FAMILY , msg_router);
 
 
 

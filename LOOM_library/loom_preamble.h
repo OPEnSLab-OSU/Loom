@@ -11,13 +11,13 @@
 // Packet header creation macro
 #define STR_(x) #x                // Helper function
 #define STR(x) STR_(x)            // To concatenate a predefined number to a string literal, use STR(x)
-#define PacketHeaderString STR(/) FAMILY STR(/) DEVICE // Results in a single string, i.e. /LOOM/Device. the full prefix sent to this device should be /LOOM/Device#, but the number is parsed in the OSC bundle routing function
+#define PacketHeaderString STR(/) FAMILY STR(FAMILY_NUM) STR(/) DEVICE // Results in a single string, i.e. /LOOM/Device. the full prefix sent to this device should be /LOOM/Device#, but the number is parsed in the OSC bundle routing function
 
 #define VBATPIN A7                // Pin to check for battery voltage
 
 // Global UDP port
 // Should not be changed
-#define GLOBAL_PORT 9440
+#define GLOBAL_PORT 9400
 
 // --- WiFi UDP Ports ---
 #if is_wifi == 1

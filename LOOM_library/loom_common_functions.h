@@ -157,10 +157,15 @@ void Loom_begin()
 	LOOM_DEBUG_Println2("DEVICE ID: ", configuration.packet_header_string );
 	
 	// Family Subnet Message
-	LOOM_DEBUG_Println2("FAMILY SUBNET: ", STR(/) STR(FAMILY) STR(FAMILY_NUM) );
+	LOOM_DEBUG_Println2("FAMILY SUBNET: ", STR(/) FAMILY STR(FAMILY_NUM) );
 
 	// Family Global Message
-	LOOM_DEBUG_Println2("FAMILY: ", STR(/) STR(FAMILY) );
+	LOOM_DEBUG_Println2("FAMILY: ", STR(/) FAMILY );
+
+	LOOM_DEBUG_Println2("Global Port: ", GLOBAL_PORT);
+	LOOM_DEBUG_Println2("Subnet Port: ", SUBNET_PORT);
+	LOOM_DEBUG_Println2("Device Port: ", configuration.config_wifi.localPort);
+	
 
 
 
