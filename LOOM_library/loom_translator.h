@@ -102,7 +102,7 @@ void append_to_bundle(OSCBundle *bndl, T elements [], int count);
 
 void print_message(OSCMessage* msg) 
 {
-	LOOM_DEBUG_Println2("Address: ", get_address_string(msg).c_str() );
+	LOOM_DEBUG_Println2("Message Address: ", get_address_string(msg).c_str() );
 	char buf[50];
 	for (int i = 0; i < msg->size(); i++) {
 		LOOM_DEBUG_Print3("Value (", i, ") ");

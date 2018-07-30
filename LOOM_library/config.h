@@ -35,7 +35,7 @@
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform --- 
-#define is_wifi       0		// 1 to enable WiFi
+#define is_wifi       1		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
@@ -72,10 +72,10 @@
 #define is_mb1232          0	// Sonar
 #define is_mpu6050         0	// Accelerometer / Gyroscope
 #define is_lis3dh          0	// Accelerometer
-#define is_ms5803          1	// Pressure Sensor
+#define is_ms5803          0	// Pressure Sensor
 
 // --- Prebuilt Devices ---
-#define is_ishield     0	// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_ishield     1	// 1 to specify using Ishield (should enable only wifi as communication platform)
 #define is_multiplexer 0	// 1 if tca9548a Multiplexer is being used. (Further customization in advanced options)
 #define is_sapflow     0
 

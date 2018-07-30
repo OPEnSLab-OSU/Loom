@@ -26,6 +26,12 @@ void common_msg_router(OSCMessage &msg, int addrOffset);
 //
 void msg_router(OSCMessage &msg, int addrOffset) 
 {
+	LOOM_DEBUG_Println("MESSAGE:");
+	print_message(&msg);
+
+	// bool found = false;
+
+
 	#if LOOM_DEBUG == 1
 		char buffer[100];
 		msg.getAddress(buffer, addrOffset);
@@ -38,105 +44,133 @@ void msg_router(OSCMessage &msg, int addrOffset)
 			LOOM_DEBUG_Println("Got a request for sensor list");
 		}
 		// Multiplexer builds list of plugged in sensors and replys to Max
-		msg.dispatch("/GetSensors",   		send_sensor_list, 		addrOffset);
+		if (msg.dispatch("/GetSensors",   		send_sensor_list, 		addrOffset) ) return;
 	#endif
 
 	#if num_servos > 0  
 		// Sets a specified servos to a specified position / degree
-		msg.dispatch("/Servo/Set",    		handle_servo_msg, 		addrOffset);
+		if (msg.dispatch("/Servo/Set",    		handle_servo_msg, 		addrOffset) ) return;
 	#endif
 	#if num_steppers > 0
 		// Moves a specified stepper motor to a specified number of steps in a particular direction
-		msg.dispatch("/Stepper/Set",  		handle_stepper_msg, 	addrOffset);
+		if (msg.dispatch("/Stepper/Set",  		handle_stepper_msg, 	addrOffset) ) return;
 	#endif
 	#if is_relay == 1
 		// Sets the state of the specified relay
-		msg.dispatch("/Relay/State",  		handle_relay_msg, 		addrOffset);
+		if (msg.dispatch("/Relay/State",  		handle_relay_msg, 		addrOffset) ) return;
 	#endif
 	#if is_mpu6050 == 1 && is_ishield == 1
 		// Instructs an device to recalibrate its MPU6050
-		msg.dispatch("/MPU6050/cal",  		calMPU6050_OSC, 		addrOffset);
+		if (msg.dispatch("/MPU6050/cal",  		calMPU6050_OSC, 		addrOffset) ) return;
 	#endif
 	#if is_neopixel == 1
 		// Sets a specified Neopixel's color
-		msg.dispatch("/Neopixel",     		set_color, 				addrOffset);
+		if (msg.dispatch("/Neopixel",     		set_color, 				addrOffset) ) return;
 	#endif
 	#if is_pushingbox == 1 && hub_node_type == 0
 		// Sends data to Google sheets via PushingBox
-		msg.dispatch("/SendToPB", 			sendToPushingBox, 		addrOffset);
+		if (msg.dispatch("/SendToPB", 			sendToPushingBox, 		addrOffset) ) return;
 	#endif
 	
 	#if is_wifi == 1
 		// Credentials to connect to a WiFi network
-		msg.dispatch("/Connect/SSID",     	set_ssid,     			addrOffset);
-		msg.dispatch("/Connect/Password", 	set_pass,				addrOffset);
+		if (msg.dispatch("/Connect/SSID",     	set_ssid,     			addrOffset) ) return;
+		if (msg.dispatch("/Connect/Password", 	set_pass,				addrOffset) ) return;
 		// Switch device to become WiFi access point
-		msg.dispatch("/wifiSetup/AP",     	switch_to_AP, 			addrOffset);
+		if (msg.dispatch("/wifiSetup/AP",     	switch_to_AP, 			addrOffset) ) return;
 		// Sets the unique port for device to look for WiFi packets on
-		msg.dispatch("/SetPort",          	set_port,     			addrOffset);
+		if (msg.dispatch("/SetPort",          	set_port,     			addrOffset) ) return;
 		// If Max has requested the IP address of this device, response with IP
-		msg.dispatch("/requestIP",        	broadcastIP,  			addrOffset);
+		if (msg.dispatch("/requestIP",        	broadcastIP,  			addrOffset) ) return;
 		// Command instructing device to request settings from Max (requires Channel Manager)
-		msg.dispatch("/getNewChannel",		new_channel,  			addrOffset);
+		if (msg.dispatch("/getNewChannel",		new_channel,  			addrOffset) ) return;
 		// Set whether or not to request settings from Max Channel Manager on startup
-		msg.dispatch("/SetRequestSettings",	set_request_settings, 	addrOffset);
+		if (msg.dispatch("/SetRequestSettings",	set_request_settings, 	addrOffset) ) return;
 	#endif
 
 	#if is_sd == 1
 		// Set whether or not to log received bundles to SD card
-		msg.dispatch("/setSDlogging",	 	set_SD_logging, 		addrOffset);
+		if (msg.dispatch("/setSDlogging",	 	set_SD_logging, 		addrOffset) ) return;
 	#endif
 	
 
 	#if enable_hub_scripts == 1
 		// Creates a new script from a received message
-		msg.dispatch("/newHubScript",		message_to_script, 		addrOffset);
+		if (msg.dispatch("/newHubScript",		message_to_script, 		addrOffset) ) return;
 		// Deletes the specified dynamic script if it exists
-		msg.dispatch("/deleteHubScript",	delete_script, 			addrOffset);
+		if (msg.dispatch("/deleteHubScript",	delete_script, 			addrOffset) ) return;
 		// Saves any current dynamic scripts to flash
-		msg.dispatch("/saveDynamicScripts", save_dynamic_scripts, 	addrOffset);
+		if (msg.dispatch("/saveDynamicScripts", save_dynamic_scripts, 	addrOffset) ) return;
 	#endif
 
 	// Set the instance number of this device
-	msg.dispatch("/SetID", 					set_instance_num, 		addrOffset);
+	if (msg.dispatch("/SetID", 					set_instance_num, 		addrOffset) ) return;
 	// Save the configuration struct as it is currently
-	msg.dispatch("/SaveConfig", 			save_config, 			addrOffset);
-
-}
+	if (msg.dispatch("/SaveConfig", 			save_config, 			addrOffset) ) return;
 
 
 
 
 
 
-// For messages sent as "/<FAMILY>...", i.e.: "/LOOM..."
-// rather than providing a device identifier
-void common_msg_router(OSCMessage &msg, int addrOffset) 
-{
-	#if LOOM_DEBUG == 1
-		char buffer[100];
-		msg.getAddress(buffer, addrOffset);
-		LOOM_DEBUG_Println2("Parsed ", buffer); 
-	#endif
+// THESE ARE MORE GNERAL COMMANDS, MOSTLY FROM SUBNET / GLOBAL 
+
 
 	// If Max has polled for devices on the WiFi network 
 	#if is_wifi
-		msg.dispatch("/ChannelPoll", 		respond_to_poll_request, 	addrOffset);
+		if (msg.dispatch("/ChannelPoll", 		respond_to_poll_request, 	addrOffset) ) return;
 	#endif
-
-
 
 
 	// If a hub device has polled for devices on the network
 	//     This might be merged with the above dispatch later
-	msg.dispatch("/DeviceChannelPoll", 	respond_to_device_poll, 	addrOffset);	// node receiving from hub
+	if (msg.dispatch("/DeviceChannelPoll", 	respond_to_device_poll, 	addrOffset) ) return;	// node receiving from hub 
 
 	#if hub_node_type == 0
-		msg.dispatch("/DevicePollResponse", update_known_devices, 		addrOffset);	// hub receiving from node
+		if (msg.dispatch("/DevicePollResponse", update_known_devices, 		addrOffset) ) return;	// hub receiving from node 
 	#endif
 
 			// Probably also do a msg.dispatch("PollResponse", populate_known_devices, addrOffset + #) 
 			// where # is the number of characters taken up by the device name, number, and '/'' 
 
+
+
+	LOOM_DEBUG_Println3("No Message Routing Match Found for '", buffer, "'");
 }
+
+
+
+
+
+
+// // For messages sent as "/<FAMILY>...", i.e.: "/LOOM..."
+// // rather than providing a device identifier
+// void common_msg_router(OSCMessage &msg, int addrOffset) 
+// {
+// 	#if LOOM_DEBUG == 1
+// 		char buffer[100];
+// 		msg.getAddress(buffer, addrOffset);
+// 		LOOM_DEBUG_Println2("Parsed ", buffer); 
+// 	#endif
+
+// 	// If Max has polled for devices on the WiFi network 
+// 	#if is_wifi
+// 		msg.dispatch("/ChannelPoll", 		respond_to_poll_request, 	addrOffset);
+// 	#endif
+
+
+
+
+// 	// If a hub device has polled for devices on the network
+// 	//     This might be merged with the above dispatch later
+// 	msg.dispatch("/DeviceChannelPoll", 	respond_to_device_poll, 	addrOffset);	// node receiving from hub
+
+// 	#if hub_node_type == 0
+// 		msg.dispatch("/DevicePollResponse", update_known_devices, 		addrOffset);	// hub receiving from node
+// 	#endif
+
+// 			// Probably also do a msg.dispatch("PollResponse", populate_known_devices, addrOffset + #) 
+// 			// where # is the number of characters taken up by the device name, number, and '/'' 
+
+// }
 

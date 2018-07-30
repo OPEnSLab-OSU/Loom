@@ -239,7 +239,8 @@ void respond_to_device_poll(OSCMessage &msg)
 // Respond on the platform that the poll was made on, should probably just be one of the msg arguments (can use the enum)
 
 	#if is_wifi == 1
-		wifi_send_bundle_common(&bndl);  // MAYBE CHANGE TO: wifi_send_bundle(&bndl, SUBNET_PORT);
+//		wifi_send_bundle_common(&bndl);  // MAYBE CHANGE TO: wifi_send_bundle(&bndl, SUBNET_PORT);
+	wifi_send_bundle(&bndl, SUBNET_PORT);
 	#endif
 
 	bndl.empty();             // Empty the bundle to free room for a new one

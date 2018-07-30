@@ -54,8 +54,9 @@ struct state_wifi_t state_wifi;
 char * packet_header_string;
 
 // WiFi global vars/structs
-WiFiUDP      Udp;
-WiFiUDP      UdpCommon;			// Maybe I dont even need 2 of these, let alone 3
+WiFiUDP 	UdpDevice;
+WiFiUDP 	UdpSubnet;			
+WiFiUDP 	UdpGlobal;
 WiFiServer   server(80);
 int status = WL_IDLE_STATUS;
 
@@ -174,34 +175,35 @@ void setup_wifi(char packet_header_string[])
 //
 void wifi_send_bundle(OSCBundle *bndl)
 {
-	Udp.beginPacket(config_wifi->ip_broadcast, config_wifi->localPort);
-	bndl->send(Udp);    // Send the bytes to the SLIP stream
-	Udp.endPacket();        // Mark the end of the OSC Packet
+	UdpDevice.beginPacket(config_wifi->ip_broadcast, config_wifi->localPort);
+	bndl->send(UdpDevice);    // Send the bytes to the SLIP stream
+	UdpDevice.endPacket();        // Mark the end of the OSC Packet
 }
 
 // Version of wifi_send_bundle that will send on an arbitrary port
 void wifi_send_bundle(OSCBundle *bndl, int port)
 {
-	Udp.beginPacket(config_wifi->ip_broadcast, port);
-	bndl->send(Udp);    // Send the bytes to the SLIP stream
-	Udp.endPacket();        // Mark the end of the OSC Packet
+	UdpDevice.beginPacket(config_wifi->ip_broadcast, port);
+	bndl->send(UdpDevice);    // Send the bytes to the SLIP stream
+	UdpDevice.endPacket();        // Mark the end of the OSC Packet
 }
 
 // THE FOLLOWING TWO FUNCTIONS WILL  'HOPEFULLY' BECOME OBSOLETE 
 
 void wifi_send_bundle_subnet(OSCBundle *bndl)
 {
-	UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
-	bndl->send(UdpCommon);    // Send the bytes to the SLIP stream
-	UdpCommon.endPacket();        // Mark the end of the OSC Packet
+	UdpSubnet.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
+	bndl->send(UdpSubnet);    // Send the bytes to the SLIP stream
+	UdpSubnet.endPacket();        // Mark the end of the OSC Packet
 }
 
 void wifi_send_bundle_global(OSCBundle *bndl)
 {
-	UdpCommon.beginPacket(config_wifi->ip_broadcast, GLOBAL_PORT);				// Maybe this is called with new UDP object
-	bndl->send(UdpCommon);    // Send the bytes to the SLIP stream
-	UdpCommon.endPacket();        // Mark the end of the OSC Packet
+	UdpGlobal.beginPacket(config_wifi->ip_broadcast, GLOBAL_PORT);				// Maybe this is called with new UDP object
+	bndl->send(UdpGlobal);    // Send the bytes to the SLIP stream
+	UdpGlobal.endPacket();        // Mark the end of the OSC Packet
 }
+
 
 // --- WIFI RECEIVE BUNDLE ---
 //
@@ -213,8 +215,7 @@ void wifi_send_bundle_global(OSCBundle *bndl)
 // @param Udp                   Which WiFIUdp structure to read packets from
 // @param port                  Which port the packet was received on, used primarily for debug prints
 //
-#if is_wifi == 1
-void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port)
+void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port, char * type)
 {  
 	int packetSize; 
 	state_wifi.pass_set = false;
@@ -230,7 +231,10 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port)
 				Serial.print("Received packet of size: ");
 				Serial.print(packetSize);
 				Serial.print(" on port " );
-				Serial.println(port);
+				Serial.print(port);
+				Serial.print(" (");
+				Serial.print(type);
+				Serial.println(")");
 			}
 		#endif
 		
@@ -240,7 +244,6 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port)
 		}
 	} // of (packetSize > 0)
 }
-#endif // of if is_wifi == 1
 
 
 // ================================================================ 
@@ -324,8 +327,9 @@ void start_AP()
 
 
 	// If you get a connection, report back via serial:
-	Udp.begin(config_wifi->localPort);
-	UdpCommon.begin(config_wifi->subnetPort);
+	UdpDevice.begin(config_wifi->localPort);
+	UdpSubnet.begin(config_wifi->subnetPort);
+	UdpGlobal.begin(GLOBAL_PORT);
 }
 
 
@@ -358,8 +362,10 @@ bool connect_to_WPA(char ssid[], char pass[])
 		LOOM_DEBUG_Println("Reverting to AP mode");
 
 		// Start AP up again instead
-		Udp.stop();
-		UdpCommon.stop();
+		UdpDevice.stop();
+		UdpSubnet.stop();
+		UdpGlobal.stop();
+
 		WiFi.disconnect();
 		WiFi.end();
 		start_AP();
@@ -377,8 +383,11 @@ bool connect_to_WPA(char ssid[], char pass[])
 	
 	// If you get a connection, report back via serial:
 	server.begin();
-	Udp.begin(config_wifi->localPort);
-	UdpCommon.begin(config_wifi->subnetPort);
+
+	UdpDevice.begin(config_wifi->localPort);
+	UdpSubnet.begin(config_wifi->subnetPort);
+	UdpGlobal.begin(GLOBAL_PORT);
+
 	return true;
 }
 
@@ -397,8 +406,10 @@ void switch_to_AP(OSCMessage &msg)
 	if (config_wifi->wifi_mode != AP_MODE) {
 		LOOM_DEBUG_Println("Received command to switch to AP mode");
 		
-		Udp.stop();
-		UdpCommon.stop();
+		UdpDevice.stop();
+		UdpSubnet.stop();
+		UdpGlobal.stop();
+
 		WiFi.disconnect();
 		WiFi.end();
 		start_AP();
@@ -478,8 +489,10 @@ void connect_to_new_network()
 
 	// Disconnect from current WiFi network
 	WiFi.disconnect();
-	Udp.stop();
-	UdpCommon.stop();
+	UdpDevice.stop();
+	UdpSubnet.stop();
+	UdpGlobal.stop();
+
 	WiFi.end();
 	
 	// Try connecting on newly specified one
@@ -543,9 +556,10 @@ void broadcastIP(OSCMessage &msg)
 						   .add((int32_t)config_wifi->ip[2])
 						   .add((int32_t)config_wifi->ip[3]);
 
-	// UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
-	// bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
-	// UdpCommon.endPacket();    // Mark the end of the OSC Packet
+	// UdpSubnet.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
+	// bndl.send(UdpSubnet);     // Send the bytes to the SLIP stream
+	// UdpSubnet.endPacket();    // Mark the end of the OSC Packet
+	
 	wifi_send_bundle_subnet(&bndl);
 	bndl.empty();             // Empty the bundle to free room for a new one
 
@@ -568,8 +582,8 @@ void set_port(OSCMessage &msg)
 
 	// Get new port, stop listening on old port, start on new port
 	config_wifi->localPort = msg.getInt(0);
-	Udp.stop();
-	Udp.begin(config_wifi->localPort);
+	UdpDevice.stop();
+	UdpDevice.begin(config_wifi->localPort);
 
 	LOOM_DEBUG_Println2(" to ", config_wifi->localPort);
 
@@ -622,9 +636,9 @@ void request_settings_from_Max()
 		.add((int32_t)config_wifi->ip[3]);
 
 	
-	// UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
-	// bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
-	// UdpCommon.endPacket();    // Mark the end of the OSC Packet
+	// UdpSubnet.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
+	// bndl.send(UdpSubnet);     // Send the bytes to the SLIP stream
+	// UdpSubnet.endPacket();    // Mark the end of the OSC Packet
 	wifi_send_bundle_subnet(&bndl);
 	bndl.empty();             // Empty the bundle to free room for a new one
 
@@ -687,9 +701,9 @@ void respond_to_poll_request(OSCMessage &msg)
 
 	bndl.add(addressString);
 
-	UdpCommon.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
-	bndl.send(UdpCommon);     // Send the bytes to the SLIP stream
-	UdpCommon.endPacket();    // Mark the end of the OSC Packet
+	UdpSubnet.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
+	bndl.send(UdpSubnet);     // Send the bytes to the SLIP stream
+	UdpSubnet.endPacket();    // Mark the end of the OSC Packet
 	bndl.empty();             // Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println("Responded to poll request");
