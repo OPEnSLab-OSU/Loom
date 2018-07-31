@@ -132,9 +132,9 @@ char          global_packet_header_string[80]; // Sometimes functions need to ac
 	#define MEM_TYPE MEM_EEPROM
 #endif
 
-#if is_relay == 0
-	#define button BUTTON_PIN               // Using on-board button, specify attached pin, transmitting
-#endif
+// #if is_button == 1
+// 	#define button button_pin               // Using on-board button, specify attached pin, transmitting
+// #endif
 
 #ifdef is_sleep_period
 	#include <Adafruit_SleepyDog.h> // This must be included if you are transmitting at timed intervals
@@ -206,11 +206,13 @@ int    get_bundle_bytes(OSCBundle *bndl);
 
 
 // #if num_analog > 0     
-// always include, because battery uses analog read, 
-// numbers would change due to 12bit ADC if this was removed, 
-// it is a small file anyway
+	// always include, because battery uses analog read, 
+	// numbers would change due to 12bit ADC if this was removed, 
+	// it is a small file anyway
 	#include "loom_analogIn.h"
 // #endif
+
+
 #if is_neopixel == 1
 	#include "loom_neopixel.h"
 #endif

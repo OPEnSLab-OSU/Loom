@@ -162,10 +162,11 @@ void Loom_begin()
 	// Family Global Message
 	LOOM_DEBUG_Println2("FAMILY: ", STR(/) FAMILY );
 
-	LOOM_DEBUG_Println2("Global Port: ", GLOBAL_PORT);
-	LOOM_DEBUG_Println2("Subnet Port: ", SUBNET_PORT);
-	LOOM_DEBUG_Println2("Device Port: ", configuration.config_wifi.localPort);
-	
+	#if is_wifi
+		LOOM_DEBUG_Println2("Global Port: ", GLOBAL_PORT);
+		LOOM_DEBUG_Println2("Subnet Port: ", SUBNET_PORT);
+		LOOM_DEBUG_Println2("Device Port: ", configuration.config_wifi.localPort);
+	#endif
 
 
 

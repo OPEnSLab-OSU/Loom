@@ -1,47 +1,50 @@
 // ================================================================ 
+// ===                          NOTES                           === 
+// ================================================================
+
+// Code found at: https://github.com/millerlp/MS5803_02
+
+// CSB (Pin 3) Should be tied to 3.3V to set I2C Addr to 0x76
+// PS (Pin 6) Needs to be tied to 3.3V to enable I2C
+
+// Units:
+// - Pressure: mbar
+// - Temperature: Celcius
+//
+
+// ================================================================ 
 // ===                        LIBRARIES                         === 
 // ================================================================
 #include <Wire.h>
+#include <MS5803_02.h> 
+
 
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define i2c_addr_ms5803 0x77	
+#define i2c_addr_ms5803 0x76	// 0x76 if CSB (pin 3) is High, 0x77 if CSB is Low
 
 
-//I2C commands, ripped from the datasheet's "figure 2".
-const byte MS_RESET =              0x1E;
-const byte MS_CONVERTD1_256 =      0x40;
-const byte MS_CONVERTD1_512 =      0x42;
-const byte MS_CONVERTD1_1024 =     0x44;
-const byte MS_CONVERTD1_2048 =     0x46;
-const byte MS_CONVERTD1_4096 =     0x48;
-const byte MS_CONVERTD2_256 =      0x50;
-const byte MS_CONVERTD2_512 =      0x52;
-const byte MS_CONVERTD2_1024 =     0x54;
-const byte MS_CONVERTD2_2048 =     0x56;
-const byte MS_CONVERTD2_4096 =     0x58;
-const byte MS_ADCREAD =            0x00;
-const byte MS_PROMREAD0 =          0xA0;
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
-// struct config_ms5803_t {
-
-// };
 
 struct state_ms5803_t {
-	float 			tempC;		//compensated, final temperature
-	unsigned long 	tempNC;		//uncompensated, raw temp value
-	float 			pressureC;	//compensated, final pressure
-	unsigned long 	pressureNC;	//uncompensated, raw pressure value
+	float 			temp;		//compensated, final temperature
+	// unsigned long 	tempNC;		//uncompensated, raw temp value
+	float 			pressure;	//compensated, final pressure
+	// unsigned long 	pressureNC;	//uncompensated, raw pressure value
 };
 
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-// struct config_ms5803_t config_ms5803;
+
+// Declare 'sensor' as the object that will refer to your MS5803 in the sketch
+// Enter the oversampling value as an argument. Valid choices are
+// 256, 512, 1024, 2048, 4096. Library default = 512.
+MS_5803 sensor = MS_5803(512);
 
 struct state_ms5803_t state_ms5803;
 
@@ -56,10 +59,6 @@ void package_ms5803(OSCBundle *bndl, char packet_header_string[], uint8_t port);
 void package_ms5803(OSCBundle *bndl, char packet_header_string[]);
 void measure_ms5803();
 
-void PSreset();
-bool readPressure();
-bool readTemp();
-
 
 // ================================================================ 
 // ===                          SETUP                           === 
@@ -69,9 +68,22 @@ bool readTemp();
 //
 // @return  Whether or not sensor initialization was successful
 //
-bool setup_ms5803() {
-	Wire.begin();
-	PSreset();
+bool setup_ms5803() 
+{
+	LOOM_DEBUG_Println("Initializing MS_5803 pressure sensor");
+
+  // Initialize the MS5803 sensor. This will report the
+  // conversion coefficients to the Serial terminal if present.
+  // If you don't want all the coefficients printed out, 
+  // set sensor.initializeMS_5803(false).
+	LOOM_DEBUG_Println("MS5803 conversion coefficients:");
+	if (sensor.initializeMS_5803()) {
+		LOOM_DEBUG_Println("MS5803 CRC check OK.");
+	} else {
+		LOOM_DEBUG_Println("MS5803 CRC check FAILED!");
+		LOOM_DEBUG_Println("(but it might work anyway...)");
+	}
+	delay(3000);
 
 	LOOM_DEBUG_Println("Initialized MS_5803 pressure sensor");
 }
@@ -96,8 +108,8 @@ void package_ms5803(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/ms5803/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
-	msg.add("temp").add(state_ms5803.tempC);
-	msg.add("pressure").add(state_ms5803.pressureC);
+	msg.add("pressure").add(state_ms5803.pressure);
+	msg.add("temp").add(state_ms5803.temp);
 	
 	bndl->add(msg);
 }
@@ -106,10 +118,10 @@ void package_ms5803(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(addressString, "%s%s", packet_header_string, "/ms5803_temp");
-	bndl->add(addressString).add(state_ms5803.tempC);
 	sprintf(addressString, "%s%s", packet_header_string, "/ms5803_pressure");
-	bndl->add(addressString ).add(state_ms5803.pressureC);
+	bndl->add(addressString ).add(state_ms5803.pressure);
+	sprintf(addressString, "%s%s", packet_header_string, "/ms5803_temp");
+	bndl->add(addressString).add(state_ms5803.temp);
 }
 
 
@@ -119,166 +131,19 @@ void package_ms5803(OSCBundle *bndl, char packet_header_string[])
 // 
 void measure_ms5803() 
 {
-	readTemp();
-	readPressure(); 
+	// Get sensor readings
+	sensor.readSensor();
 
-	if (1 ) { 
-	// if ( readTemp() && readPressure() ) { 
+	// LOOM_DEBUG_Println("D1 = ", sensor.D1val());
+	// LOOM_DEBUG_Println("D2 = ", sensor.D2val());
 
-		// calc_Temp_Press(); //calculate the compensated pressure and temperature
-		int32_t dT = 0;
-		state_ms5803.pressureNC = 0;
-		state_ms5803.tempNC = 0;
-		
-		readTemp();
-		
-		//calculate compensated temperature
-		dT = state_ms5803.tempNC - MS_PROM[5] * uint16_t(1<<8);
-		state_ms5803.tempC = (2000 + (dT * MS_PROM[6]) / uint32_t(1<<23))/100.00;
-
-		readPressure();
-
-		//calculate temperature-compensated pressure
-		int64_t OFF = MS_PROM[2]* uint32_t(1<<16) + (MS_PROM[4]*dT)/ uint16_t(1<<7);
-		
-		int64_t SENS = MS_PROM[1]* uint16_t(1<<15) + (MS_PROM[3]*dT)/ uint16_t(1<<8); 
-		state_ms5803.pressureC = (((state_ms5803.pressureNC * SENS / uint32_t(1<<21)) - OFF) / uint16_t(1<<15));
-	}
+	state_ms5803.pressure = sensor.pressure();
+	state_ms5803.temp = sensor.temperature();
 
 	#if LOOM_DEBUG == 1
-		Serial.print("Temperature NC: "); Serial.println(state_ms5803.tempNC, 4);
-		Serial.print("Temperature C: ");  Serial.println(state_ms5803.tempC,  4);
-		Serial.print("Pressure NC: ");    Serial.println(state_ms5803.pressureNC, 4);
-		Serial.print("Pressure C: ");     Serial.println(state_ms5803.pressureC,  4);
+		Serial.print("MS5803 Pressure: ");     Serial.print(state_ms5803.pressure,  4);	Serial.println(" mbar");
+		Serial.print("MS5803 Temperature: ");  Serial.print(state_ms5803.temp,  4);		Serial.println(" C");
 	#endif
-}
-
-
-
-bool readPressure()
-{
-	LOOM_DEBUG_Println("Reading Pressure");
-
-	unsigned long pressures[3];
-
-	Wire.beginTransmission(i2c_addr_ms5803);//start a transmission sequence
-	Wire.write(MS_CONVERTD1_4096);
-	Wire.endTransmission();
-
-	delay(10); //4096 OSR conversion requires 9ms max.
-	
-	Wire.beginTransmission(i2c_addr_ms5803);
-	Wire.write(MS_ADCREAD);
-	Wire.endTransmission();
-
-	Wire.requestFrom(i2c_addr_ms5803, 3);
-	if (!Wire.available()) {
-		LOOM_DEBUG_Println("Wire not available");
-		return false;
-	} else {
-		LOOM_DEBUG_Println("Wire available");
-		int i = 0;
-		while(Wire.available() && i<3){
-			pressures[i] = Wire.read();
-			i++;
-		}
-		
-		//concatenate the three sets of seven bits
-		//p1 represents the MSB, p3 represents the LSB
-		unsigned long p0 = pressures[0] << (2*8);
-		unsigned long p1 = pressures[1] << (8);
-		
-		LOOM_DEBUG_Println2("p0:", p0);
-		LOOM_DEBUG_Println2("p1:", p1);
-		LOOM_DEBUG_Println2("p2:", pressures[2]);
-
-		state_ms5803.pressureNC = p0 + p1 + pressures[2];
-		
-		return true; 
-	}
-
-}
-
-bool readTemp()
-{
-	LOOM_DEBUG_Println("Reading Temperature");
-
-	unsigned long temperatures[3];
-
-	// tell the sensor to compensate and convert the temperature values
-	// and store them on the ADC register.
-	Wire.beginTransmission(i2c_addr_ms5803);//start a transmission sequence
-	Wire.write(MS_CONVERTD2_4096);
-	Wire.endTransmission();
-
-	delay(10); //4096 OSR conversion requires 9ms max.
-
-	// tell the sensor we want to prepare to send the ADC values
-	Wire.beginTransmission(i2c_addr_ms5803);
-	Wire.write(MS_ADCREAD);
-	Wire.endTransmission();
-	
-	// tell the sensor to send over the ADC values
-	Wire.requestFrom(i2c_addr_ms5803, 3);
-	if (!Wire.available()) {
-		LOOM_DEBUG_Println("Wire not available");
-		return false;
-	} else {
-		LOOM_DEBUG_Println("Wire available");
-		int i = 0;
-		while(Wire.available() && i<3){
-			temperatures[i] = Wire.read();
-			i++;
-		}
-		
-		unsigned long t0 = temperatures[0] << (2*8);
-		unsigned long t1 = temperatures[1] << (8);
-
-		LOOM_DEBUG_Println2("t0:", t0);
-		LOOM_DEBUG_Println2("t1:", t1);
-		LOOM_DEBUG_Println2("t2:", temperatures[2]);
-
-		state_ms5803.tempNC = (t0 + t1 + temperatures[2]);
-		
-		return true;
-	}
-}
-
-
-
-void PSreset()
-{
-	Wire.beginTransmission(i2c_addr_ms5803);
-	Wire.write(MS_RESET);
-	Wire.endTransmission();
-	delay(10);
-	
-	//get PROM values
-	for(int i=0; i<8; i++){
-		//we want to read PROM variable 'i'
-		Wire.beginTransmission(i2c_addr_ms5803);
-		Wire.write(MS_PROMREAD0 + 2*i);
-		Wire.endTransmission();
-
-		//each PROM variable is stored in two bytes
-		Wire.requestFrom(i2c_addr_ms5803, 2);
-		/*if(Wire.available()){
-			MS_PROM[i] = Wire.read();
-		}
-		Serial.print("PROM: " + String(MS_PROM[i]) + ", ");
-		if(Wire.available()){
-			MS_PROM[i] = uint16_t(MS_PROM[i]<<8) + uint16_t(Wire.read());
-			Serial.println(String(MS_PROM[i]));
-		}
-		*/
-		if(Wire.available()){
-			MS_PROM[i] = Wire.read()<<8;
-		}
-		if(Wire.available()){
-			MS_PROM[i] += Wire.read();
-		}
-		// if(Serial) Serial.println(MS_PROM[i]);
-	}
 }
 
 

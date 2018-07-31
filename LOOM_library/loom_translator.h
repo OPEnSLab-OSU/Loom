@@ -127,6 +127,8 @@ void print_message(OSCMessage* msg)
 //
 void print_bundle(OSCBundle *bndl)
 {
+	if (bundle_empty(bndl)) return;
+
 	#if LOOM_DEBUG == 1
 		char buf[50];
 		char data_type;
@@ -183,6 +185,7 @@ void print_array(T data [], int len, int format)
 			if (format  > 1) { Serial.print(data[i]); Serial.print(" "); }
 			if ((format > 2) && (i%5==0)) { Serial.println(); }
 		}
+		Serial.println();
 	#endif
 }
 

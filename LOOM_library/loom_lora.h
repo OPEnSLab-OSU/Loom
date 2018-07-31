@@ -111,28 +111,28 @@ void lora_receive_bundle(OSCBundle *bndl)
 
 			convert_OSC_string_to_bundle((char*)buf, bndl); 
 
-			#if is_pushingbox == 1
-				//If true, then the data being received is from the evaporimeter, which
-				//is formatted differently as they use code not written by the CS Capstone team.
-				if (((char)(buf[0])) == '/') {
-					// convert_OSC_string_to_bundle((char*)buf, bndl); 
-					for(int i = 0; i < MAX_FIELDS; i++)
-						data[i] = get_data_value(bndl->getOSCMessage(0), i);
-				} else {
-					char str[LORA_MESSAGE_SIZE];
-					String((char*)buf).toCharArray(str, sizeof(str)-1);
-					char *token;
-					char *savept = str;
-					String cols[6] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
-					for(int i = 0; i < MAX_FIELDS; i+=2) {
-						token = strtok_r(savept, ",", &savept);
-						if(token != NULL) {
-							data[i] = cols[i/2];
-							data[i+1] = String(token);
-						}
-					} // of for
-				} // of else 
-			#endif
+			// #if is_pushingbox == 1
+			// 	//If true, then the data being received is from the evaporimeter, which
+			// 	//is formatted differently as they use code not written by the CS Capstone team.
+			// 	if (((char)(buf[0])) == '/') {
+			// 		// convert_OSC_string_to_bundle((char*)buf, bndl); 
+			// 		for(int i = 0; i < MAX_FIELDS; i++)
+			// 			data[i] = get_data_value(bndl->getOSCMessage(0), i);
+			// 	} else {
+			// 		char str[LORA_MESSAGE_SIZE];
+			// 		String((char*)buf).toCharArray(str, sizeof(str)-1);
+			// 		char *token;
+			// 		char *savept = str;
+			// 		String cols[6] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
+			// 		for(int i = 0; i < MAX_FIELDS; i+=2) {
+			// 			token = strtok_r(savept, ",", &savept);
+			// 			if(token != NULL) {
+			// 				data[i] = cols[i/2];
+			// 				data[i+1] = String(token);
+			// 			}
+			// 		} // of for
+			// 	} // of else 
+			// #endif
 		} // of if (manager.recvfromAck(buf, &len, &from))
 	} // of if (manager.available()) 
 }
@@ -188,14 +188,38 @@ bool lora_send_bundle_fragment(OSCBundle *bndl)
 	OSCBundle tmp_bndl;
 	OSCMessage *tmp_msg;
 
-	for (int i = 0; i < bndl->size(); i++) {
-		tmp_msg = bndl->getOSCMessage(i);
-		tmp_bndl.empty();
-		tmp_bndl.add(*tmp_msg);
+
+	for (int i = 0; i < bndl->size(); i+=5) {
+		for (int j = 0; j < 5; j++) {
+			if ((i+j) >= bndl->size()) break;
+			tmp_msg = bndl->getOSCMessage(i+j);
+			tmp_bndl.add(*tmp_msg);	
+		}
+		print_bundle(&tmp_bndl);
 		lora_send_bundle(&tmp_bndl);
+		tmp_bndl.empty();
 	}
 }
 
+
+
+
+
+// bool lora_send_bundle_fragment(OSCBundle *bndl)
+// {
+// 	LOOM_DEBUG_Println2("Bundle of size ", get_bundle_bytes(bndl));
+// 	LOOM_DEBUG_Println(" Being split into smaller bundles");
+
+// 	OSCBundle tmp_bndl;
+// 	OSCMessage *tmp_msg;
+
+// 	for (int i = 0; i < bndl->size(); i++) {
+// 		tmp_msg = bndl->getOSCMessage(i);
+// 		tmp_bndl.empty();
+// 		tmp_bndl.add(*tmp_msg);
+// 		lora_send_bundle(&tmp_bndl);
+// 	}
+// }
 
 
 

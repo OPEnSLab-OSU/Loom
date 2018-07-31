@@ -90,6 +90,7 @@ void process_bundle(OSCBundle *bndl)
 			LOOM_DEBUG_Println2("Number of items in bundle: ", bndl->size());
 			LOOM_DEBUG_Println2("First message address string: ", addressString);
 
+
 			// --- Message Routing ---
 	
 			// These are the most important part of this function 
@@ -97,7 +98,6 @@ void process_bundle(OSCBundle *bndl)
 			// which will route/dispatch messages to the currect handling functions
 			// Most commands will be finished once control returns here 
 			
-
 			// Device Specific Message
 			bndl->route(configuration.packet_header_string, msg_router);
 			
@@ -147,8 +147,8 @@ void measure_sensors()
 	vbat = (vbat * 2 * 3.3) / 4096; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
 
 	//	Get button state
-	#ifdef button
-		button_state = digitalRead(button);
+	#if is_button == 1
+		button_state = digitalRead(button_pin);
 	#endif
 	
 	//	Measure multiplexer sennsors
@@ -247,37 +247,37 @@ void package_data(OSCBundle *send_bndl)
 	send_bndl->add(addressString).add(vbat); 
 	
 	// Add button state
-	#ifdef button
+	#if is_button == 1
 		sprintf(addressString, "%s%s", configuration.packet_header_string, "/button");
 		send_bndl->add(addressString).add((int32_t)button_state);
 	#endif
 
 	//	Add multiplexer sensor data
 	#if is_multiplexer == 1
-		package_tca9548a(send_bndl,configuration.packet_header_string);
+		package_tca9548a(send_bndl, configuration.packet_header_string);
 	#endif //is_multiplexer
 
 	// Update MPU6050 Data
 	#if is_ishield == 1 && is_mpu6050 == 1
-		package_mpu6050(send_bndl,configuration.packet_header_string, 0);
+		package_mpu6050(send_bndl, configuration.packet_header_string, 0);
 	#endif //is_ishield && is_mpu6050
 
 	#if is_max31856 == 1
-		package_max31856(send_bndl,configuration.packet_header_string);
+		package_max31856(send_bndl, configuration.packet_header_string);
 	#endif
 	
 	// Get analog readings
 	#if (num_analog >= 1) && (is_sapflow != 1)
-		package_analog(send_bndl,configuration.packet_header_string);
+		package_analog(send_bndl, configuration.packet_header_string);
 	#endif
 
 	#if is_decagon == 1
-		package_decagon(&send_bndl,configuration.packet_header_string);
+		package_decagon(&send_bndl, configuration.packet_header_string);
 	#endif
 
 	#if is_sapflow == 1 && hub_node_type == 1
-		package_sapflow(send_bndl,configuration.packet_header_string);
-		package_sht31d(send_bndl,configuration.packet_header_string);
+		package_sapflow(send_bndl, configuration.packet_header_string);
+		package_sht31d(send_bndl, configuration.packet_header_string);
 	#endif
 
 
@@ -287,7 +287,10 @@ void package_data(OSCBundle *send_bndl)
 
 	#if is_multiplexer != 1
 		#if is_lis3dh == 1
-			package_lis3dh(send_bndl,configuration.packet_header_string);
+			package_lis3dh(send_bndl, configuration.packet_header_string);
+		#endif
+		#if is_ms5803 == 1
+			package_ms5803(send_bndl, configuration.packet_header_string);
 		#endif
 	#endif
 }
@@ -417,7 +420,7 @@ void log_bundle(OSCBundle *log_bndl, LogPlatform platform)
 void additional_loop_checks()
 {
 	// Reset to AP mode if button held for ~5 seconds
-	#if defined(button) && (is_wifi == 1)
+	#if (is_button == 1) && (is_wifi == 1)
 		check_button_held();      
 	#endif
 
