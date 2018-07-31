@@ -74,10 +74,10 @@
 #define is_mb1232          0	// Sonar
 #define is_mpu6050         0	// Accelerometer / Gyroscope
 #define is_lis3dh          0	// Accelerometer
-#define is_ms5803          1	// Atmospheric Pressure / Temperature Sensor
+#define is_ms5803          0	// Atmospheric Pressure / Temperature Sensor
 
 // --- Button Options ---
-#define is_button 		0	// 1 to enable button
+#define is_button 		1	// 1 to enable button
 #define button_pin 		10	// Using on-board button, specify attached pin, transmitting
 							// Button is on most feathers, but may not work on 
 							// relay shield if pin 10 is used for relay
@@ -253,6 +253,13 @@
 
 	// Required by PushingBox, specific to each scenario
 	char device_id[]   = "v7ECCEF7A460E57A";
+
+	// Currently works by only sending a bundle from 
+	// log_bundle/sendToPushingBox if the delay has passed
+	// Does NOT automatically upload a bundle, you still have to call sendToPushingBox
+	// This works more like a filter than an automator
+	#define pushMillisFilter 1 // 1 to enable a millis delay to uploading to PushingBox
+	#define pushMillisDelay 5  // delay in seconds
 #endif
 
 // --- Adafruit IO Options ---
