@@ -19,6 +19,8 @@
 // ================================================================
 String data[MAX_FIELDS];
 
+unsigned long lastPushMillis, currentPushMillis;  
+
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
@@ -64,6 +66,18 @@ void setup_pushingbox()
 //
 void sendToPushingBox(OSCMessage &msg) 
 {
+	// Only send bundles if a minimum time (pushMillisDelay) has passed
+	#if pushMillisFilter == 1
+		currentPushMillis = millis();
+		if ( (currentPushMillis - lastPushMillis) < (1000*pushMillisDelay) ) {
+			LOOM_DEBUG_Println("not yet");	
+			return; // has not been long enough yet, just return
+		} else {
+			lastPushMillis = currentPushMillis;
+		}
+	#endif // of pushMillisFilter
+
+
 	if (msg.size() > 32) { // This also catches empty msgs, which seem to have a size around 1493 for some reason
 		LOOM_DEBUG_Println("Message to large to send to PushingBox");
 		return;
@@ -192,9 +206,9 @@ void sendToPushingBox(OSCBundle *bndl)
 	OSCBundle tmpBndl;
 	deep_copy_bundle(bndl, &tmpBndl);
 	convert_bundle_structure(&tmpBndl, SINGLEMSG);
-	#if LOOM_DEBUG == 1
-		print_bundle(&tmpBndl);
-	#endif
+	// #if LOOM_DEBUG == 1
+	// 	print_bundle(&tmpBndl);
+	// #endif
 	sendToPushingBox(*(tmpBndl.getOSCMessage(0)));
 }
 

@@ -25,11 +25,11 @@ struct state_sapflow_t {
 // ===                   GLOBAL DECLARATIONS                    ===
 // ================================================================
 
-unsigned long lastUpdate;//heat pulse
-unsigned long currentTime;//heat pulse
+unsigned long lastUpdate;   // heat pulse
+unsigned long currentTime;  // heat pulse
 
-unsigned long startMillis;//send data
-unsigned long currentMillis;//send data
+unsigned long startMillis;  // send data
+unsigned long currentMillis;// send data
 
 bool sapflow_relay_on = false;
 
