@@ -35,15 +35,15 @@
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform --- 
-#define is_wifi       1		// 1 to enable WiFi
+#define is_wifi       0		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
-#define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
+#define is_ethernet   1		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808)
 #define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
 // --- Data Logging Platforms ---
-#define is_pushingbox 0		// 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
+#define is_pushingbox 1		// 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         0		// 1 to enable SD card 
@@ -64,6 +64,8 @@
 #define num_analog    0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
 #define is_decagon    0		// 1 if GS3 Decagon is being used
 
+// --- I2C Sensors ---
+// Multiplexer may override these settings
 #define is_tsl2591         0	// Lux Sensor
 #define is_fxos8700        0	// Accelerometer / Magnetometer
 #define is_fxas21002       0	// Gyroscope
@@ -72,10 +74,16 @@
 #define is_mb1232          0	// Sonar
 #define is_mpu6050         0	// Accelerometer / Gyroscope
 #define is_lis3dh          0	// Accelerometer
-#define is_ms5803          0	// Pressure Sensor
+#define is_ms5803          1	// Atmospheric Pressure / Temperature Sensor
+
+// --- Button Options ---
+#define is_button 		0	// 1 to enable button
+#define button_pin 		10	// Using on-board button, specify attached pin, transmitting
+							// Button is on most feathers, but may not work on 
+							// relay shield if pin 10 is used for relay
 
 // --- Prebuilt Devices ---
-#define is_ishield     1	// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_ishield     0	// 1 to specify using Ishield (should enable only wifi as communication platform)
 #define is_multiplexer 0	// 1 if tca9548a Multiplexer is being used. (Further customization in advanced options)
 #define is_sapflow     0
 
@@ -106,11 +114,6 @@
 	#define INIT_INST    3	// Initial device instance number (normally 1-8 when using channels)
 	#define INIT_PORT 9443	// Initial device UDP port (normally 1-8 when using channels)
 #endif
-
-// --- BUTTON OPTIONS ---
-#define BUTTON_PIN 10               // Using on-board button, specify attached pin, transmitting
-									// Button is on most feathers, but may not work on 
-									// relay shield if pin 10 is used for relay
 
 
 // ================================================================
@@ -178,9 +181,9 @@
 	#define LORA_HUB_ADDRESS 0			// Use 0-9 for SERVER_ADDRESSes
 	#define RF95_FREQ      915.0		// Hardware specific, Tx must match Rx
 
-	#if hub_node_type == 1 					// If Node
-		#define NODE_ADDRESS 10			// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
-	#endif								// 10-19 for 0, 20 - 29 for 1, etc.
+	// #if hub_node_type == 1 					// If Node
+		#define LORA_NODE_ADDRESS 10			// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
+	// #endif								// 10-19 for 0, 20 - 29 for 1, etc.
 	
 	#define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 #endif
@@ -243,10 +246,10 @@
 	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; random string of characters)
 	// #define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	    
-	#define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"
+	#define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"  // This is Luke's Arduino Test spreadsheet
 
 	// Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
-	#define tab_id  "sheet3"   
+	#define tab_id  "ms5803_test"   
 
 	// Required by PushingBox, specific to each scenario
 	char device_id[]   = "v7ECCEF7A460E57A";

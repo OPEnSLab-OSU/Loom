@@ -127,6 +127,11 @@ void sd_list_files()
 //
 bool sd_dump_file(char* file) 
 {
+	#if is_lora == 1
+		digitalWrite(8, HIGH); 	// if using LoRa
+	#endif
+	SD.begin(chipSelect) // It seems that SD card may become 'unsetup' sometimes, so re-setup
+
 	sdFile = SD.open(file);
 	if (sdFile) {
 		LOOM_DEBUG_Println2("Contents of file: ", file);
@@ -186,7 +191,12 @@ void sd_write_timestamp(char* file, int timestamp, char delimiter)
 
 template <typename T>
 bool sd_save_elem(char *file, T data, char endchar)
-{
+{	
+	#if is_lora == 1
+		digitalWrite(8, HIGH); 	// if using LoRa
+	#endif
+	SD.begin(chipSelect) // It seems that SD card may become 'unsetup' sometimes, so re-setup
+	
 	sdFile = SD.open(file, FILE_WRITE);
 
 	if (sdFile) {
@@ -214,6 +224,11 @@ bool sd_save_elem(char *file, T data, char endchar)
 template <typename T>
 bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp) 
 {
+	#if is_lora == 1
+		digitalWrite(8, HIGH); 	// if using LoRa
+	#endif
+	SD.begin(chipSelect) // It seems that SD card may become 'unsetup' sometimes, so re-setup
+	
 	sdFile = SD.open(file, FILE_WRITE);
 
 	if (sdFile) {
@@ -261,6 +276,11 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 // @param timestamp  Format of timestamp (if any)
 bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 {
+	#if is_lora == 1
+		digitalWrite(8, HIGH); 	// if using LoRa
+	#endif
+	SD.begin(chipSelect) // It seems that SD card may become 'unsetup' sometimes, so re-setup
+
 	sdFile = SD.open(file, FILE_WRITE);
 	if (sdFile) {
 		LOOM_DEBUG_Println2("Saving bundle to SD file: ", file);

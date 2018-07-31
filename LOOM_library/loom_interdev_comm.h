@@ -221,11 +221,11 @@ void respond_to_device_poll(OSCMessage &msg)
 	#endif
 	#if is_lora == 1
 		tmpMsg.add( (int32_t) LORA );
-		tmpMsg.add( (hub_node_type) ? LORA_NODE_ADDRESS : LORA_HUB_ADDRESS );
+		tmpMsg.add( (hub_node_type) ? (int32_t)LORA_NODE_ADDRESS : (int32_t)LORA_HUB_ADDRESS );
 	#endif
 	#if is_nrf == 1
 		tmpMsg.add( (int32_t) NRF );
-		tmpMsg.add( (hub_node_type) ? NRF_NODE_ADDRESS : NRF_HUB_ADDRESS );
+		tmpMsg.add( (hub_node_type) ? (int32_t)NRF_NODE_ADDRESS : (int32_t)NRF_HUB_ADDRESS );
 	#endif
 	#if is_ethernet == 1
 		// tmpMsg.add( (int32_t) ETHERNET );
