@@ -43,7 +43,7 @@ void convert_OSC_string_to_bundle(char *osc_string, OSCBundle*bndl);
 void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
 void original_convert_OSC_string_to_bundle(char *osc_string, OSCBundle*bndl);
 void original_convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
-void restore_OSC_string_shortening(char *osc_string);
+void uncompress_OSC_string(char *osc_string);
 void str_replace(char *target, const char *needle, const char *replacement);
 const char* nth_strchr(const char* s, char c, int n);
 
@@ -328,13 +328,13 @@ void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string)
 //
 void convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl) 
 {
-	restore_OSC_string_shortening(osc_string); 
+	uncompress_OSC_string(osc_string); 
 	original_convert_OSC_string_to_bundle(osc_string, bndl);
 }
 
 
 
-void restore_OSC_string_shortening(char* osc_string) 
+void uncompress_OSC_string(char* osc_string) 
 {
 	// LOOM_DEBUG_Println4("Before Restore – [Len: ", strlen(osc_string), "]\n", osc_string);
 
