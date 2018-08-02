@@ -22,7 +22,7 @@
 
 // --- Device Identification --- 
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       0		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define FAMILY_NUM       4		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
 #define CHANNEL          7		// Channel to use. Set to 1-8 for channels A-H, respectively. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request channel settings from Max Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
@@ -35,15 +35,15 @@
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 // --- Enabled Communication Platform --- 
-#define is_wifi       0		// 1 to enable WiFi
+#define is_wifi       1		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
-#define is_ethernet   1		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
+#define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808)
 #define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
 // --- Data Logging Platforms ---
-#define is_pushingbox 1		// 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
+#define is_pushingbox 0		// 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         0		// 1 to enable SD card 
@@ -83,7 +83,7 @@
 							// relay shield if pin 10 is used for relay
 
 // --- Prebuilt Devices ---
-#define is_ishield     0	// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_ishield     1	// 1 to specify using Ishield (should enable only wifi as communication platform)
 #define is_multiplexer 0	// 1 if tca9548a Multiplexer is being used. (Further customization in advanced options)
 #define is_sapflow     0
 

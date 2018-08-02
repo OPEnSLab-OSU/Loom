@@ -5,7 +5,7 @@
 // ================================================================
 void Loom_begin();
 void set_instance_num(OSCMessage &msg);
-#if (is_wifi == 1) && defined(button)    // look into other behaviors if other platforms are enabled instead
+#if (is_wifi == 1) && (is_button)    // look into other behaviors if other platforms are enabled instead
 	void check_button_held();
 #endif
 void loop_sleep();
@@ -153,19 +153,16 @@ void Loom_begin()
 		setup_hub_scripts();
 	#endif
 
-
-	LOOM_DEBUG_Println2("DEVICE ID: ", configuration.packet_header_string );
-	
-	// Family Subnet Message
-	LOOM_DEBUG_Println2("FAMILY SUBNET: ", STR(/) FAMILY STR(FAMILY_NUM) );
-
-	// Family Global Message
-	LOOM_DEBUG_Println2("FAMILY: ", STR(/) FAMILY );
+	LOOM_DEBUG_Println("Routing:");
+	LOOM_DEBUG_Println2("  Global: ", STR(/) FAMILY);
+	LOOM_DEBUG_Println2("  Subnet: ", STR(/) FAMILY STR(FAMILY_NUM));
+	LOOM_DEBUG_Println2("  Device: ", configuration.packet_header_string);
 
 	#if is_wifi
-		LOOM_DEBUG_Println2("Global Port: ", GLOBAL_PORT);
-		LOOM_DEBUG_Println2("Subnet Port: ", SUBNET_PORT);
-		LOOM_DEBUG_Println2("Device Port: ", configuration.config_wifi.localPort);
+		LOOM_DEBUG_Println("UDP Ports");
+		LOOM_DEBUG_Println2("  Global: ", GLOBAL_PORT);
+		LOOM_DEBUG_Println2("  Subnet: ", SUBNET_PORT);
+		LOOM_DEBUG_Println2("  Device: ", configuration.config_wifi.localPort);
 	#endif
 
 
@@ -214,10 +211,10 @@ void set_instance_num(OSCMessage &msg)
 // Checked each iteration of main loop if the device's button has been held
 // If so, restart in access point mode
 //
-#if defined(button) && (is_wifi == 1)
+#if (is_button) && (is_wifi == 1)
 void check_button_held()
 {
-	if ( (uint32_t)digitalRead(button) ) {
+	if ( (uint32_t)digitalRead(button_pin) ) {
 		button_timer = 0;
 	} else {
 		#ifdef is_sleep_period

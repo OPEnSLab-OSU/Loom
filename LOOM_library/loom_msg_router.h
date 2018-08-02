@@ -13,7 +13,6 @@ void common_msg_router(OSCMessage &msg, int addrOffset);
 // callable by the message router when it finds a message with 
 // the corresponding address
 
-
 // ================================================================
 // ===                     MESSAGE ROUTER                       ===
 // ================================================================
@@ -26,8 +25,8 @@ void common_msg_router(OSCMessage &msg, int addrOffset);
 //
 void msg_router(OSCMessage &msg, int addrOffset) 
 {
-	LOOM_DEBUG_Println("MESSAGE:");
-	print_message(&msg);
+	LOOM_DEBUG_Print("Message:  ");
+	print_message(&msg, 0);
 
 	// bool found = false;
 
@@ -35,7 +34,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	#if LOOM_DEBUG == 1
 		char buffer[100];
 		msg.getAddress(buffer, addrOffset);
-		LOOM_DEBUG_Println2("Parsed ", buffer); 
+		LOOM_DEBUG_Println3("Will try to route on: '", buffer, "'"); 
 	#endif
 
 	#if is_multiplexer
@@ -135,7 +134,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 
 
 
-	LOOM_DEBUG_Println3("No Message Routing Match Found for '", buffer, "'");
+	LOOM_DEBUG_Println3("No Message Routing Match Found for: '", buffer, "'");
 }
 
 
