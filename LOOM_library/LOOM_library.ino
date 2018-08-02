@@ -31,10 +31,11 @@ void loop()
 	
 	receive_bundle(&bndl, WIFI);
 	process_bundle(&bndl);
-	// measure_sensors();
-	// package_data(&send_bndl);
-	// send_bundle(&send_bndl, WIFI);
+	measure_sensors();
+	package_data(&send_bndl);
+	send_bundle(&send_bndl, WIFI);
 	additional_loop_checks();
+
 	
 } // End loop section
 

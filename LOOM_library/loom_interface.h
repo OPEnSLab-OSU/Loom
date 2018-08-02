@@ -40,7 +40,7 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 		case WIFI :
 			// Handle wifi bundle if it exists
 			// Checks device unique UDP port and common UDP port
-			wifi_receive_bundle(bndl, &UdpDevice, configuration.config_wifi.localPort, "Local"); 
+			wifi_receive_bundle(bndl, &UdpDevice, configuration.config_wifi.localPort, "Device"); 
 			wifi_receive_bundle(bndl, &UdpSubnet, configuration.config_wifi.subnetPort, "Subnet"); 
 			wifi_receive_bundle(bndl, &UdpGlobal, GLOBAL_PORT, "Global");
 
@@ -82,6 +82,7 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 void process_bundle(OSCBundle *bndl)
 {
 	if (bndl->size()){
+
 		// If no bundle error
 		if (!bndl->hasError()) {
 			char addressString[255];
@@ -90,6 +91,7 @@ void process_bundle(OSCBundle *bndl)
 			LOOM_DEBUG_Println2("Number of items in bundle: ", bndl->size());
 			LOOM_DEBUG_Println2("First message address string: ", addressString);
 
+			print_bundle(bndl);
 
 			// --- Message Routing ---
 	

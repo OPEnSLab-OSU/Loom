@@ -27,6 +27,7 @@ union data_value { // Used in translation between OSC and strings
 // ================================================================
 
 void print_message(OSCMessage* msg);
+void print_message(OSCMessage* msg, bool detail);
 void print_bundle(OSCBundle *bndl);
 template<typename T> 
 void print_array(T data [], int len, int format);
@@ -103,20 +104,45 @@ void append_to_bundle(OSCBundle *bndl, T elements [], int count);
 // ===                    GENERAL FUNCTIONS                     ===
 // ================================================================
 
+// --- PRINT MESSAGE ---
+//
+// Prints an OSC Message
+// 
+// @param msg     The message to be printed
+// @param detail  The formatting (0 for 1 line, 1 for detailed mulitple lines)
+void print_message(OSCMessage* msg, bool detail) 
+{
+	char buf[50];
+
+	if (!detail) {
+		LOOM_DEBUG_Print(get_address_string(msg).c_str());
+		for (int i = 0; i < msg->size(); i++) {
+			LOOM_DEBUG_Print("  ");
+			switch(msg->getType(i)) {
+				case 'f': LOOM_DEBUG_Print(msg->getFloat(i) ); break;
+				case 'i': LOOM_DEBUG_Print(msg->getInt(i)   ); break;
+				case 's': msg->getString(i, buf, 50); LOOM_DEBUG_Print(buf); break;
+				default: break;
+			}
+		}
+		LOOM_DEBUG_Println();
+	} else {
+		LOOM_DEBUG_Println2("Address: ", get_address_string(msg).c_str());
+		for (int i = 0; i < msg->size(); i++) {
+			LOOM_DEBUG_Print3("Value (", i, ") ");
+			switch(msg->getType(i)) {
+				case 'f': LOOM_DEBUG_Println2("(f) ", msg->getFloat(i) ); break;
+				case 'i': LOOM_DEBUG_Println2("(i) ", msg->getInt(i) );   break;
+				case 's': msg->getString(i, buf, 50); LOOM_DEBUG_Println2("(s) ", buf ); break;
+				default: break;
+			}
+		}
+	}
+}
 
 void print_message(OSCMessage* msg) 
 {
-	LOOM_DEBUG_Println2("Address: ", get_address_string(msg).c_str() );
-	char buf[50];
-	for (int i = 0; i < msg->size(); i++) {
-		LOOM_DEBUG_Print3("Value (", i, ") ");
-		switch(msg->getType(i)) {
-			case 'f': LOOM_DEBUG_Println2("(f) ", msg->getFloat(i)); break;
-			case 'i': LOOM_DEBUG_Println2("(i) ", msg->getInt(i));   break;
-			case 's': msg->getString(i, buf, 50); LOOM_DEBUG_Println2("(s) ", buf); break;
-			default: break;
-		}
-	}
+	print_message(msg, 1);
 }
 
 

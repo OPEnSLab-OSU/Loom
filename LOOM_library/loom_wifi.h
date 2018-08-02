@@ -436,16 +436,11 @@ void print_remote_mac_addr()
 	WiFi.APClientMacAddress(remoteMac);
 			
 	Serial.print("Device connected to AP, MAC address: ");
-	Serial.print(remoteMac[5], HEX);
-	Serial.print(":");
-	Serial.print(remoteMac[4], HEX);
-	Serial.print(":");
-	Serial.print(remoteMac[3], HEX);
-	Serial.print(":");
-	Serial.print(remoteMac[2], HEX);
-	Serial.print(":");
-	Serial.print(remoteMac[1], HEX);
-	Serial.print(":");
+	Serial.print(  remoteMac[5], HEX); Serial.print(":");
+	Serial.print(  remoteMac[4], HEX); Serial.print(":");
+	Serial.print(  remoteMac[3], HEX); Serial.print(":");
+	Serial.print(  remoteMac[2], HEX); Serial.print(":");
+	Serial.print(  remoteMac[1], HEX); Serial.print(":");
 	Serial.println(remoteMac[0], HEX); 
 }
 
@@ -507,6 +502,8 @@ void connect_to_new_network()
 }
 
 
+// CAN PROBABLY NOW JIOIN THESE FUNCTIONS
+
 
 // --- SET SSID ---
 //
@@ -520,7 +517,6 @@ void set_ssid(OSCMessage &msg)
 	msg.getString(0, state_wifi.new_ssid, 50);
 	state_wifi.ssid_set = true;
 }
-
 
 
 // --- SET PASSWORD ---
@@ -555,6 +551,8 @@ void broadcastIP(OSCMessage &msg)
 						   .add((int32_t)config_wifi->ip[1])
 						   .add((int32_t)config_wifi->ip[2])
 						   .add((int32_t)config_wifi->ip[3]);
+// Wonder if I could just use append_bundle(&bndl,config_wifi->ip);
+
 
 	// UdpSubnet.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
 	// bndl.send(UdpSubnet);     // Send the bytes to the SLIP stream
