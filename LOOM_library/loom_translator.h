@@ -38,10 +38,14 @@ void   deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
 void   deep_copy_message(OSCMessage *scrMsg, OSCMessage *destMsg);
 
 
-// Conversions between bundles and strings
+// Conversions between bundles and strings (and auxiliary functions)
 void convert_OSC_string_to_bundle(char *osc_string, OSCBundle*bndl);
 void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
-
+void original_convert_OSC_string_to_bundle(char *osc_string, OSCBundle*bndl);
+void original_convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
+void restore_OSC_string_shortening(char *osc_string);
+void str_replace(char *target, const char *needle, const char *replacement);
+const char* nth_strchr(const char* s, char c, int n);
 
 // Conversion between bundle formats
 void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructure format);
@@ -102,7 +106,7 @@ void append_to_bundle(OSCBundle *bndl, T elements [], int count);
 
 void print_message(OSCMessage* msg) 
 {
-	LOOM_DEBUG_Println2("Message Address: ", get_address_string(msg).c_str() );
+	LOOM_DEBUG_Println2("Address: ", get_address_string(msg).c_str() );
 	char buf[50];
 	for (int i = 0; i < msg->size(); i++) {
 		LOOM_DEBUG_Print3("Value (", i, ") ");
@@ -134,38 +138,10 @@ void print_bundle(OSCBundle *bndl)
 		char data_type;
 		LOOM_DEBUG_Println2("\nBundle Size: ", bndl->size());
 		OSCMessage *msg;
-		
 
 		for (int i = 0; i < bndl->size(); i++) {
-
 			LOOM_DEBUG_Println2("Message: ", i);
 			print_message(bndl->getOSCMessage(i));
-
-			// msg = bndl->getOSCMessage(i);
-			// msg->getAddress(buf, 0);
-			// LOOM_DEBUG_Println4("Address ", i, ": ", buf);
-
-			// for (int j = 0; j < msg->size(); j++) {
-			// 	data_type = msg->getType(j);
-			// 	LOOM_DEBUG_Print3("Value ", j, ": ");
-
-			// 	switch(data_type) {
-			// 		case 'f':
-			// 			LOOM_DEBUG_Println2("(f) ", msg->getFloat(j));
-			// 			break;
-			// 		case 'i':
-			// 			LOOM_DEBUG_Println2("(i) ", msg->getInt(j));
-			// 			break;
-			// 		case 's':
-			// 			msg->getString(j, buf, 50);
-			// 			LOOM_DEBUG_Println2("(s) ", buf);
-			// 			break;
-			// 		default:
-			// 			break;
-			// 	}
-			// }
-
-			// print_message(bndl->getOSCMessage(i), i);
 		}
 		Serial.println();
 	#endif
@@ -189,7 +165,6 @@ void print_array(T data [], int len, int format)
 	#endif
 }
 
-// #endif // of LOOM_DEBUG == 1
 
 
 
@@ -316,14 +291,132 @@ void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
 
 
 
+
+
+
+// --- CONVERT OSC TO STRING ---
+// 
+// Converts an OSC Bundle to equivalent string to be used in LoRa transmissions
+// Osc_string's contents will now include the OSCBundle's formatted data.
+//
+// @param bndl        An OSCBundle to put into string format.
+// @param osc_string  A char * to fill with the OSCBundle's data.
+//
+void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string) 
+{
+	original_convert_OSC_bundle_to_string(bndl, osc_string);
+
+	// LOOM_DEBUG_Println4("Before Compression – [Len: ", strlen(osc_string), "]\n", osc_string);
+
+	const char* cPtr = nth_strchr(osc_string, '/', 3);
+	char buf[30];
+	snprintf(buf, cPtr-osc_string+2, "%s", osc_string);
+	str_replace((char*)cPtr, buf, "%");
+
+	// LOOM_DEBUG_Println4("After Compression – [Len: ", strlen(osc_string), "]\n", osc_string);
+}
+
+
+
 // --- CONVERT STRING TO OSC ---
 // 
-// Converts string used by LoRa to an equivalent OSCBundle 
+// Converts string (generally used by LoRa/nRF) to an equivalent OSCBundle 
+// Added compression over original version
 //
 // @param osc_string  A char * created through the use of convert_OSC_bundle_to_string(), 
 // @param bndl        The OSC bundle to be populated
 //
 void convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl) 
+{
+	restore_OSC_string_shortening(osc_string); 
+	original_convert_OSC_string_to_bundle(osc_string, bndl);
+}
+
+
+
+void restore_OSC_string_shortening(char* osc_string) 
+{
+	// LOOM_DEBUG_Println4("Before Restore – [Len: ", strlen(osc_string), "]\n", osc_string);
+
+
+	char* restored_str = new char[255];
+
+	char buf[30];
+	const char* cPtr = nth_strchr(osc_string, '/', 3);
+	
+	snprintf(buf, cPtr-osc_string+2, "%s", osc_string);
+	// LOOM_DEBUG_Print3(" (", buf, ")");
+	// LOOM_DEBUG_Println3(" + (", cPtr+1, ")");
+
+	str_replace((char*)cPtr, "%", buf);	
+
+	// LOOM_DEBUG_Println2("Len in function: ", strlen(osc_string));
+	// LOOM_DEBUG_Println2("FIXED?\n", osc_string); // This one is fine
+	// sprintf(osc_string_out, "%s\0", osc_string);
+
+	strcpy(restored_str, osc_string);
+	osc_string = restored_str;
+	// return restored_str;
+	// LOOM_DEBUG_Println2("\nRESTORE?\n", restored_str);
+	// osc_string = restored_str;
+
+
+	// LOOM_DEBUG_Println4("After Restore – [Len: ", strlen(osc_string), "]\n", osc_string);
+}
+
+
+// Finds nth instance of a character in a string
+// Auxiliary function for OSC string compression
+const char* nth_strchr(const char* s, char c, int n)
+{
+	int c_count;
+	char* nth_ptr;
+
+	for (c_count=1,nth_ptr=strchr(s,c);  nth_ptr != NULL && c_count < n && c!=0; c_count++) { 
+		nth_ptr = strchr(nth_ptr+1, c); 
+	}
+
+	return nth_ptr;
+}
+
+
+// Replaces substrings with other substrings in a string
+// Auxiliary function for OSC string compression
+void str_replace(char *target, const char *needle, const char *replacement)
+{
+	char buffer[1024] = { 0 };
+	char *insert_point = &buffer[0];
+	const char *tmp = target;
+	size_t needle_len = strlen(needle);
+	size_t repl_len = strlen(replacement);
+
+	while (1) {
+		const char *p = strstr(tmp, needle);
+
+		// walked past last occurrence of needle; copy remaining part
+		if (p == NULL) {
+			strcpy(insert_point, tmp);
+			break;
+		}
+
+		// copy part before needle
+		memcpy(insert_point, tmp, p - tmp);
+		insert_point += p - tmp;
+
+		// copy replacement string
+		memcpy(insert_point, replacement, repl_len);
+		insert_point += repl_len;
+
+		// adjust pointers, move on
+		tmp = p + needle_len;
+	}
+
+    // write altered string back to target
+	strcpy(target, buffer);
+}
+
+
+void original_convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl) 
 {
 	bndl->empty();
 	data_value value_union;
@@ -359,16 +452,7 @@ void convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl)
 	}
 }
 
-
-// --- CONVERT OSC TO STRING ---
-// 
-// Converts an OSC Bundle to equivalent string to be used in LoRa transmissions
-// Osc_string's contents will now include the OSCBundle's formatted data.
-//
-// @param bndl        An OSCBundle to put into string format.
-// @param osc_string  A char * to fill with the OSCBundle's data.
-//
-void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string) 
+void original_convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string) 
 {
 	char data_type;
 	data_value value;
