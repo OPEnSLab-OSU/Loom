@@ -127,11 +127,6 @@ void Loom_begin()
 		setup_wifi(configuration.packet_header_string);
 	#endif
 
-	LOOM_DEBUG_Print("IP1: ");
-	LOOM_DEBUG_Println(config_wifi->ip);
-	LOOM_DEBUG_Print("IP2: ");
-	LOOM_DEBUG_Println(configuration.config_wifi.ip);
-		
 	#if is_lora == 1
 		setup_lora(&rf95, &manager);
 	#endif	
@@ -172,7 +167,7 @@ void Loom_begin()
 		LOOM_DEBUG_Println("UDP Ports");
 		LOOM_DEBUG_Println2("  Global: ", GLOBAL_PORT);
 		LOOM_DEBUG_Println2("  Subnet: ", SUBNET_PORT);
-		LOOM_DEBUG_Println2("  Device: ", configuration.config_wifi.localPort);
+		LOOM_DEBUG_Println2("  Device: ", configuration.config_wifi.devicePort);
 	#endif
 
 
@@ -213,6 +208,44 @@ void set_instance_num(OSCMessage &msg)
 		respond_to_poll_request(tmp);
 	#endif
 }
+
+
+// --- SET CHANNEL NUMBER ---
+//
+// Updates device's channel (instance number and port)
+//
+// @param msg  Received OSC message with new channel 
+//
+void set_channel(OSCMessage &msg) 
+{
+	int new_channel = msg.getInt(0);
+
+	if ( (new_channel < 1) || (new_channel > 8) ) {
+		LOOM_DEBUG_Println("Invalid new channel");
+		return;
+	}
+
+	LOOM_DEBUG_Println4("Received command to change channel from '", (char)new_channel+64, "' to '", (char)new_channel+64);
+
+	configuration.instance_number        = new_channel;
+	#if is_wifi == 1
+		configuration.config_wifi.devicePort = configuration.config_wifi.subnetPort + new_channel;
+	#endif
+
+	LOOM_DEBUG_Println2("New Inst: ", configuration.instance_number);
+	#if is_wifi == 1
+		LOOM_DEBUG_Println2("New Port: ", configuration.config_wifi.devicePort);
+	#endif
+
+	sprintf(configuration.packet_header_string, "%s%d\0", PacketHeaderString, configuration.instance_number);
+	sprintf(global_packet_header_string,"%s",configuration.packet_header_string);
+	
+	LOOM_DEBUG_Println2("New address header: ", configuration.packet_header_string);
+
+
+	// Reply to Max
+}
+
 
 
 
