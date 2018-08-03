@@ -215,7 +215,7 @@ void respond_to_device_poll(OSCMessage &msg)
 	// Platforms and Addressing
 	#if is_wifi == 1
 		tmpMsg.add( (int32_t) WIFI );
-		tmpMsg.add( (int32_t)configuration.config_wifi.localPort );
+		tmpMsg.add( (int32_t)configuration.config_wifi.devicePort );
 		for (int i=0; i<4; i++) 
 			tmpMsg.add( (int32_t)configuration.config_wifi.ip[i] );
 	#endif

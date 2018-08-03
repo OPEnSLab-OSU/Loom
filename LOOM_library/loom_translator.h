@@ -347,7 +347,7 @@ void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string)
 	snprintf(buf, cPtr-larger_buf+2, "%s", larger_buf);
 	str_replace((char*)cPtr, buf, "%");
 
-	snprintf(osc_string, 251, "%s," larger_buf);
+	snprintf(osc_string, 251, "%s", larger_buf);
 
 	// LOOM_DEBUG_Println4("After Compression – [Len: ", strlen(osc_string), "]\n", osc_string);
 }

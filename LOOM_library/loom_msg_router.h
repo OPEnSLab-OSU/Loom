@@ -102,11 +102,13 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		if (msg.dispatch("/saveDynamicScripts", save_dynamic_scripts, 	addrOffset) ) return;
 	#endif
 
+
 	// Set the instance number of this device
 	if (msg.dispatch("/SetID", 					set_instance_num, 		addrOffset) ) return;
 	// Save the configuration struct as it is currently
 	if (msg.dispatch("/SaveConfig", 			save_config, 			addrOffset) ) return;
-
+	// Set the channel of this device
+	if (msg.dispatch("/ChangeChannel", 			set_channel, 			addrOffset) ) return;
 
 
 

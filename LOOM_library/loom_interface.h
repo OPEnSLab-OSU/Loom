@@ -40,7 +40,7 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 		case WIFI :
 			// Handle wifi bundle if it exists
 			// Checks device unique UDP port and common UDP port
-			wifi_receive_bundle(bndl, &UdpDevice, configuration.config_wifi.localPort, "Device"); 
+			wifi_receive_bundle(bndl, &UdpDevice, configuration.config_wifi.devicePort, "Device"); 
 			wifi_receive_bundle(bndl, &UdpSubnet, configuration.config_wifi.subnetPort, "Subnet"); 
 			wifi_receive_bundle(bndl, &UdpGlobal, GLOBAL_PORT, "Global");
 

@@ -25,7 +25,7 @@ struct config_wifi_t{
 	char        pass[32];               // Host network password
 	int         keyIndex;               // Key Index Number (needed only for WEP)
 	char*       ip_broadcast;           // IP to Broadcast data
-	unsigned int localPort;             // Local port to listen on
+	unsigned int devicePort;             // Local port to listen on
 	unsigned int subnetPort; 
 	byte        mac[6];                 // Device's MAC Address
 	WiFiMode    wifi_mode;              // Devices current wifi mode
@@ -177,14 +177,14 @@ void setup_wifi(char packet_header_string[])
 //
 // This is a simple helper function to encapsulate the 
 // common sequence of commands to send an OSC bundle
-// Note that this send on the device unique UDP port, localPort,
+// Note that this send on the device unique UDP port, devicePort,
 // not the common port, 9440
 //
 // @param bndl  The OSC bundle to send on the device unique port
 //
 void wifi_send_bundle(OSCBundle *bndl)
 {
-	UdpDevice.beginPacket(config_wifi->ip_broadcast, config_wifi->localPort);
+	UdpDevice.beginPacket(config_wifi->ip_broadcast, config_wifi->devicePort);
 	bndl->send(UdpDevice);    // Send the bytes to the SLIP stream
 	UdpDevice.endPacket();        // Mark the end of the OSC Packet
 }
@@ -331,12 +331,12 @@ void start_AP()
 		Serial.println("\nStarting UDP connection over server...");
 	#endif
 		
-	LOOM_DEBUG_Println2("localPort: ", config_wifi->localPort);
+	LOOM_DEBUG_Println2("devicePort: ", config_wifi->devicePort);
 	LOOM_DEBUG_Println2("subnetPort: ", config_wifi->subnetPort);
 
 
 	// If you get a connection, report back via serial:
-	UdpDevice.begin(config_wifi->localPort);
+	UdpDevice.begin(config_wifi->devicePort);
 	UdpSubnet.begin(config_wifi->subnetPort);
 	UdpGlobal.begin(GLOBAL_PORT);
 }
@@ -393,26 +393,13 @@ bool connect_to_WPA(char ssid[], char pass[])
 	#endif
 	
 
-Serial.print("IP Address: ");
-Serial.println(config_wifi->ip);
 
 	// If you get a connection, report back via serial:
 	server.begin();
 
-	UdpDevice.begin(config_wifi->localPort);
-
-Serial.print("IP Address: ");
-Serial.println(config_wifi->ip);
-
+	UdpDevice.begin(config_wifi->devicePort);
 	UdpSubnet.begin(config_wifi->subnetPort);
-
-Serial.print("IP Address: ");
-Serial.println(config_wifi->ip);
-
 	UdpGlobal.begin(GLOBAL_PORT);
-
-Serial.print("IP Address: ");
-Serial.println(config_wifi->ip);
 
 	return true;
 }
@@ -528,8 +515,9 @@ void connect_to_new_network()
 }
 
 
-// CAN PROBABLY NOW JIOIN THESE FUNCTIONS
+//////////////////////////////////////////////////////
 
+// CAN (SHOULD) PROBABLY NOW JOIN THESE FUNCTIONS
 
 // --- SET SSID ---
 //
@@ -544,7 +532,6 @@ void set_ssid(OSCMessage &msg)
 	state_wifi.ssid_set = true;
 }
 
-
 // --- SET PASSWORD ---
 //
 // Updates WiFi password global var with new password 
@@ -557,6 +544,10 @@ void set_pass(OSCMessage &msg)
 	msg.getString(0, state_wifi.new_pass, 50);
 	state_wifi.pass_set = true;
 }
+
+//////////////////////////////////////////////////////
+
+
 
 
 
@@ -572,13 +563,13 @@ void broadcastIP(OSCMessage &msg)
 	OSCBundle bndl;
 	config_wifi->ip = WiFi.localIP();
 	char addressString[255];
-	sprintf(addressString, "%s%s", packet_header_string, "/NewIP");
-	bndl.add(addressString).add((int32_t)config_wifi->ip[0])
-						   .add((int32_t)config_wifi->ip[1])
-						   .add((int32_t)config_wifi->ip[2])
-						   .add((int32_t)config_wifi->ip[3]);
-// Wonder if I could just use append_bundle(&bndl,config_wifi->ip);
+	sprintf(addressString, "/%s%d%s", FAMILY, FAMILY_NUM, "/NewIP");
 
+	bndl.add(addressString).add( packet_header_string )
+						   .add( (int32_t)config_wifi->ip[0] )
+						   .add( (int32_t)config_wifi->ip[1] )
+						   .add( (int32_t)config_wifi->ip[2] )
+						   .add( (int32_t)config_wifi->ip[3] ) ;
 
 	// UdpSubnet.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
 	// bndl.send(UdpSubnet);     // Send the bytes to the SLIP stream
@@ -602,14 +593,14 @@ void broadcastIP(OSCMessage &msg)
 void set_port(OSCMessage &msg) 
 {
 	LOOM_DEBUG_Print("Port changed from ");
-	LOOM_DEBUG_Print(config_wifi->localPort);
+	LOOM_DEBUG_Print(config_wifi->devicePort);
 
 	// Get new port, stop listening on old port, start on new port
-	config_wifi->localPort = msg.getInt(0);
+	config_wifi->devicePort = msg.getInt(0);
 	UdpDevice.stop();
-	UdpDevice.begin(config_wifi->localPort);
+	UdpDevice.begin(config_wifi->devicePort);
 
-	LOOM_DEBUG_Println2(" to ", config_wifi->localPort);
+	LOOM_DEBUG_Println2(" to ", config_wifi->devicePort);
 
 	config_wifi->request_settings = 0;  // Setting to 0 means that device will not request new port settings on restart. 
 										// Note that configuration needs to be saved for this to take effect
