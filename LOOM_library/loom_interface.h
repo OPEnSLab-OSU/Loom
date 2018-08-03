@@ -422,9 +422,9 @@ void log_bundle(OSCBundle *log_bndl, LogPlatform platform)
 void additional_loop_checks()
 {
 	// Reset to AP mode if button held for ~5 seconds
-	#if (is_button == 1) && (is_wifi == 1)
-		check_button_held();      
-	#endif
+	// #if (is_button == 1) && (is_wifi == 1)
+	// 	check_button_held();      
+	// #endif
 
 	#if is_wifi == 1
 		// If new ssid and password have been received, try to connect to that network

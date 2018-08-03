@@ -109,30 +109,13 @@ void lora_receive_bundle(OSCBundle *bndl)
 		memset(buf, '\0', LORA_MESSAGE_SIZE);
 		if (manager.recvfromAck(buf, &len, &from)) {
 
-			convert_OSC_string_to_bundle((char*)buf, bndl); 
+			// This is done just in case the compressed string
+			// uncompresses to more than 251 characters
+			char larger_buf[512];
+			strcpy(larger_buf, (const char*)buf)
+			convert_OSC_string_to_bundle((char*)larger_buf, bndl); 
 
-			// #if is_pushingbox == 1
-			// 	//If true, then the data being received is from the evaporimeter, which
-			// 	//is formatted differently as they use code not written by the CS Capstone team.
-			// 	if (((char)(buf[0])) == '/') {
-			// 		// convert_OSC_string_to_bundle((char*)buf, bndl); 
-			// 		for(int i = 0; i < MAX_FIELDS; i++)
-			// 			data[i] = get_data_value(bndl->getOSCMessage(0), i);
-			// 	} else {
-			// 		char str[LORA_MESSAGE_SIZE];
-			// 		String((char*)buf).toCharArray(str, sizeof(str)-1);
-			// 		char *token;
-			// 		char *savept = str;
-			// 		String cols[6] = {"IDtag", "RTC_time", "temp", "humidity", "loadCell", "vbat"};
-			// 		for(int i = 0; i < MAX_FIELDS; i+=2) {
-			// 			token = strtok_r(savept, ",", &savept);
-			// 			if(token != NULL) {
-			// 				data[i] = cols[i/2];
-			// 				data[i+1] = String(token);
-			// 			}
-			// 		} // of for
-			// 	} // of else 
-			// #endif
+			// convert_OSC_string_to_bundle((char*)buf, bndl); 
 		} // of if (manager.recvfromAck(buf, &len, &from))
 	} // of if (manager.available()) 
 }
@@ -158,7 +141,7 @@ bool lora_send_bundle(OSCBundle *bndl)
 	convert_OSC_bundle_to_string(bndl, message);
 
 	LOOM_DEBUG_Println(message);
-	LOOM_DEBUG_Println2("Message length: ", message);
+	LOOM_DEBUG_Println2("Message length: ", strlen(message));
 	LOOM_DEBUG_Println2("Max message length: ", RH_RF95_MAX_MESSAGE_LEN);
 	LOOM_DEBUG_Print("Sending...");
 	 

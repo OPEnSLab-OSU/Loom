@@ -49,7 +49,7 @@ void setup_decagon()
 	delay(2000);
 	//first command to take a measurement
 	myCommand = String(SENSOR_ADDRESS) + "I!";
-	LOOM_DEBUG_Println(myCommand);     // echo command to terminal
+	LOOM_DEBUG_Println2("Decagon: ", myCommand);     // echo command to terminal
 
 	mySDI12.sendCommand(myCommand);
 	delay(30);                     // wait a while for a response
