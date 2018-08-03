@@ -34,6 +34,13 @@
 							//   Device will freeze if this in abled and device does not get plugged into Serial
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
+#define dynamic_serial_output 0 // 0 is standard operation 
+								// 1 Allows serial monitor to re-continue even after device has been unplugged from USB then plugged back in
+								//   - Note that you need to reopen the Serial monitor if it was open before the device was plugged back in
+								//   - Note that you probably want to have the serial monitor open before uploading to the device, else you may miss 
+								//     the first Serial prints, as enabling this option means that the device does not wait for you to open Serial
+								// These only make a difference if LOOM_DEBUG is enabled
+
 // --- Enabled Communication Platform --- 
 #define is_wifi       1		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
