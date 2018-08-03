@@ -375,7 +375,7 @@ void uncompress_OSC_string(char* osc_string)
 	// LOOM_DEBUG_Println4("Before Restore – [Len: ", strlen(osc_string), "]\n", osc_string);
 
 
-	char* restored_str = new char[512];
+	// char* restored_str = new char[512];
 
 	char buf[30];
 	const char* cPtr = nth_strchr(osc_string, '/', 3);
@@ -390,8 +390,8 @@ void uncompress_OSC_string(char* osc_string)
 	// LOOM_DEBUG_Println2("FIXED?\n", osc_string); // This one is fine
 	// sprintf(osc_string_out, "%s\0", osc_string);
 
-	strcpy(restored_str, osc_string);
-	osc_string = restored_str;
+	// strcpy(restored_str, osc_string);
+	// osc_string = restored_str;
 	// return restored_str;
 	// LOOM_DEBUG_Println2("\nRESTORE?\n", restored_str);
 	// osc_string = restored_str;

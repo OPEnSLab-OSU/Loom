@@ -30,8 +30,12 @@ void Loom_begin()
 	//Initialize serial and wait for port to open:
 	#if LOOM_DEBUG == 1
 		Serial.begin(9600);
-		while(!Serial);        // Ensure Serial is ready to go before anything happens in LOOM_DEBUG mode.
-		delay(5000);
+
+		#if dynamic_serial_output != 1
+			while(!Serial);        // Ensure Serial is ready to go before anything happens in LOOM_DEBUG mode.
+			delay(2000);
+		#endif
+
 		Serial.println("Initialized Serial!");
 	#endif
 	
