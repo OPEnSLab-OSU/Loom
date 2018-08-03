@@ -122,6 +122,12 @@ void Loom_begin()
 	#if is_wifi == 1
 		setup_wifi(configuration.packet_header_string);
 	#endif
+
+	LOOM_DEBUG_Print("IP1: ");
+	LOOM_DEBUG_Println(config_wifi->ip);
+	LOOM_DEBUG_Print("IP2: ");
+	LOOM_DEBUG_Println(configuration.config_wifi.ip);
+		
 	#if is_lora == 1
 		setup_lora(&rf95, &manager);
 	#endif	

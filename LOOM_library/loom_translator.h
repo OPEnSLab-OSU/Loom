@@ -330,14 +330,24 @@ void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
 //
 void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string) 
 {
-	original_convert_OSC_bundle_to_string(bndl, osc_string);
+	// This is done in case the bundle converts to a string larger than
+	// 251 characters before compression
+	char larger_buf[512];
+	original_convert_OSC_bundle_to_string(bndl, (char*)larger_buf);
+	// strcpy(osc_string, (const char*)larger_buf);
+	// original_convert_OSC_bundle_to_string(bndl, osc_string);
+
+	// LOOM_DEBUG_Println4("Larger Buf – [Len: ", strlen(larger_buf), "]\n", larger_buf);
+
 
 	// LOOM_DEBUG_Println4("Before Compression – [Len: ", strlen(osc_string), "]\n", osc_string);
 
-	const char* cPtr = nth_strchr(osc_string, '/', 3);
+	const char* cPtr = nth_strchr(larger_buf, '/', 3);
 	char buf[30];
-	snprintf(buf, cPtr-osc_string+2, "%s", osc_string);
+	snprintf(buf, cPtr-larger_buf+2, "%s", larger_buf);
 	str_replace((char*)cPtr, buf, "%");
+
+	snprintf(osc_string, 251, "%s," larger_buf);
 
 	// LOOM_DEBUG_Println4("After Compression – [Len: ", strlen(osc_string), "]\n", osc_string);
 }
@@ -365,7 +375,7 @@ void uncompress_OSC_string(char* osc_string)
 	// LOOM_DEBUG_Println4("Before Restore – [Len: ", strlen(osc_string), "]\n", osc_string);
 
 
-	char* restored_str = new char[255];
+	char* restored_str = new char[512];
 
 	char buf[30];
 	const char* cPtr = nth_strchr(osc_string, '/', 3);

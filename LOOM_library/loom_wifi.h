@@ -148,10 +148,19 @@ void setup_wifi(char packet_header_string[])
 			}
 
 			// This is being used for pushingbox testing
-			WiFi.begin(config_wifi->ssid, config_wifi->pass);
+	// This is commented out because it was causing deleted ip addresses
+	// Maybe I can just move it up
+	// Or maybe this 'WiFi' class has an IP member as well that is preserved
+			// WiFi.begin(config_wifi->ssid, config_wifi->pass);
 
 			break;
 	}
+
+// This was being used to check if the IP address still existed after WiFi.begin()
+	// IPAddress ip = WiFi.localIP();                
+	// LOOM_DEBUG_Print("WIFI IP: ");
+	// Serial.println(ip);
+
 	config_wifi->ip = WiFi.localIP();
 	LOOM_DEBUG_Println("Finished setting up WiFi.");
 
@@ -375,18 +384,35 @@ bool connect_to_WPA(char ssid[], char pass[])
 	
 	delay(8000); 
 	
+
+
 	#if LOOM_DEBUG == 1
 		// You're connected now, so print out the status
 		printWiFiStatus();
 		Serial.println("Starting UDP connection over server...");
 	#endif
 	
+
+Serial.print("IP Address: ");
+Serial.println(config_wifi->ip);
+
 	// If you get a connection, report back via serial:
 	server.begin();
 
 	UdpDevice.begin(config_wifi->localPort);
+
+Serial.print("IP Address: ");
+Serial.println(config_wifi->ip);
+
 	UdpSubnet.begin(config_wifi->subnetPort);
+
+Serial.print("IP Address: ");
+Serial.println(config_wifi->ip);
+
 	UdpGlobal.begin(GLOBAL_PORT);
+
+Serial.print("IP Address: ");
+Serial.println(config_wifi->ip);
 
 	return true;
 }
