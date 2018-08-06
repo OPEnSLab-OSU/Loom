@@ -42,15 +42,15 @@
 	#if   is_ishield 
 		#define DEVICE "Ishield"
 	#elif num_servos > 0
-		#define DEVICE "ServoShield"
+		#define DEVICE "Servo"
 	#elif num_steppers > 0
 		#define DEVICE "Stepper"
 	#elif is_relay
-		#define DEVICE "RelayShield"
+		#define DEVICE "Relay"
 	#elif is_decagon
 		#define DEVICE "Decagon"
 	#elif is_multiplexer
-		#define DEVICE "MuxShield"
+		#define DEVICE "Mux"
 	#elif is_sapflow
 		#define DEVICE "Sapflow"
 	#else

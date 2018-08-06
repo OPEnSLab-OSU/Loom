@@ -147,6 +147,7 @@ void measure_sensors()
 	// vbat = analogRead(VBATPIN);
 	vbat = read_analog(VBATPIN);
 	vbat = (vbat * 2 * 3.3) / 4096; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
+	// vbat = (vbat * 2 * 3.3) / 1024; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
 
 	//	Get button state
 	#if is_button == 1
@@ -321,7 +322,9 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port)
 		#endif
 
 		#if is_lora == 1
-		case LORA : (!lora_bundle_fragment) ? lora_send_bundle(send_bndl) : lora_send_bundle_fragment(send_bndl); break;
+		case LORA : lora_send_bundle(send_bndl); break;
+			// (!lora_bundle_fragment) ? lora_send_bundle(send_bndl) : lora_send_bundle_fragment(send_bndl); break;
+
 			// if (!lora_bundle_fragment) {
 			// 	lora_send_bundle(send_bndl);					
 			// } else { // Separate bundle into smaller pieces
@@ -331,7 +334,9 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port)
 		#endif
 
 		#if is_nrf == 1
-		case NRF : (!nrf_bundle_fragment) ? nrf_send_bundle(send_bndl) : nrf_send_bundle_fragment(send_bndl); break;
+		case NRF : nrf_send_bundle(send_bndl); break;
+			// (!nrf_bundle_fragment) ? nrf_send_bundle(send_bndl) : nrf_send_bundle_fragment(send_bndl); break;
+
 			// if (!nrf_bundle_fragment) {
 			// 	nrf_send_bundle(send_bndl);					
 			// } else { // Separate bundle into smaller pieces
