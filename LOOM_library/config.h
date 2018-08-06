@@ -34,7 +34,7 @@
 							//   Device will freeze if this in abled and device does not get plugged into Serial
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
-#define dynamic_serial_output 0 // 0 is standard operation 
+#define dynamic_serial_output 1 // 0 is standard operation 
 								// 1 Allows serial monitor to re-continue even after device has been unplugged from USB then plugged back in
 								//   - Note that you need to reopen the Serial monitor if it was open before the device was plugged back in
 								//   - Note that you probably want to have the serial monitor open before uploading to the device, else you may miss 
@@ -90,8 +90,8 @@
 							// relay shield if pin 10 is used for relay
 
 // --- Prebuilt Devices ---
-#define is_ishield     1	// 1 to specify using Ishield (should enable only wifi as communication platform)
-#define is_multiplexer 0	// 1 if tca9548a Multiplexer is being used. (Further customization in advanced options)
+#define is_ishield     0	// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_multiplexer 1	// 1 if tca9548a Multiplexer is being used. (Further customization in advanced options)
 #define is_sapflow     0
 
 
@@ -103,7 +103,11 @@
 	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"		// Network password
 #endif
 
+// --- Scripts ---
 #define enable_hub_scripts 0
+
+// --- 
+
 
 // ================================================================
 // ================================================================ 
@@ -148,6 +152,8 @@
 
 // --- Ishield Options ---
 #if is_ishield == 1
+	#define is_button   1			// 1 to enable button
+	#define button_pin  10
 	#define is_mpu6050  0			// Enables MPU6050 on Ishield
 	#define is_neopixel 1			// Toggle based on whether Neopixels are being used 
 
@@ -192,7 +198,7 @@
 		#define LORA_NODE_ADDRESS 10			// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
 	// #endif								// 10-19 for 0, 20 - 29 for 1, etc.
 	
-	#define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
+	// #define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 #endif
 
 // --- nRF Options --- 
@@ -203,7 +209,7 @@
 		#define NRF_NODE_ADDRESS 0
 	#endif
 
-	#define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
+	// #define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 #endif
 
 #if is_ethernet == 1

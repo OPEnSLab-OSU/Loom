@@ -36,7 +36,7 @@ struct state_zxgesturesensor_t state_zxgesturesensor;
 // ================================================================
 bool setup_zxgesturesensor();
 void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8_t port);
-void package_tsl2591(OSCBundle *bndl, char packet_header_string[])
+void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[]);
 void measure_zxgesturesensor();
 
 
@@ -109,18 +109,18 @@ void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8
 	bndl->add(msg);
 }
 
-void package_tsl2591(OSCBundle *bndl, char packet_header_string[])
+void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
 	sprintf(addressString, "%s%s", packet_header_string, "/zxgesture_type");
-	bndl->add(addressString).add(state_zxgesturesensor.type);
+	bndl->add(addressString).add(state_zxgesturesensor.gesture_type);
 	sprintf(addressString, "%s%s", packet_header_string, "/zxgesture_speed");
-	bndl->add(addressString).add(state_zxgesturesensor.speed);
+	bndl->add(addressString).add((int32_t)state_zxgesturesensor.gesture_speed);
 	sprintf(addressString, "%s%s", packet_header_string, "/zxgesture_px");
-	bndl->add(addressString).add(state_zxgesturesensor.px);
+	bndl->add(addressString).add(state_zxgesturesensor.pos[0]);
 	sprintf(addressString, "%s%s", packet_header_string, "/zxgesture_pz");
-	bndl->add(addressString).add(state_zxgesturesensor.pz);
+	bndl->add(addressString).add(state_zxgesturesensor.pos[1]);
 }
 
 

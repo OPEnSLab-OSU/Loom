@@ -40,14 +40,14 @@ void Loom_begin()
 	#endif
 	
 	// Set the button pin mode to input
-	#ifdef button
-		pinMode(button, INPUT_PULLUP); 
+	#ifdef is_button
+		pinMode(button_pin, INPUT_PULLUP); 
 	#endif
 	
 	// Setup sensors and actuators by calling the respective setups
-	#if num_analog > 0
-		setup_analog();
-	#endif
+	// #if num_analog > 0
+	setup_analog();
+	// #endif
 	#if is_multiplexer == 1
 		setup_tca9548a();
 	#endif

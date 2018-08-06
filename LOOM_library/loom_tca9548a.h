@@ -354,46 +354,46 @@ void get_sensors(OSCBundle *bndl, char packet_header_string[])
 			continue;
 		uint8_t i2c_addr = state_tca9548a.devices[i][1];
 		if(i2c_addr == 0x29){
-			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/tsl2591");
-			bndl->add(addressString);
+			sprintf(addressString,"%s%s",packet_header_string,"/port");
+			bndl->add(addressString).add((int32_t)t).add("tsl2591");
 		}
 		else if (i2c_addr == 0x1C || i2c_addr == 0x1D || i2c_addr == 0x1E || i2c_addr == 0x1F){
-			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/fxos8700");
-			bndl->add(addressString);
+			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port");
+			bndl->add(addressString).add((int32_t)t).add("fxos8700");
 		}
 		else if (i2c_addr == 0x20 || i2c_addr == 0x21){
-			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/fxas21002");
-			bndl->add(addressString);
+			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port");
+			bndl->add(addressString).add((int32_t)t).add("fxas21002");
 		}
 		else if (i2c_addr == 0x10 || i2c_addr == 0x11){
-			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/zxgesturesensor");
-			bndl->add(addressString);
+			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port");
+			bndl->add(addressString).add((int32_t)t).add("zxgesturesensor");
 		}
 		else if (i2c_addr == 0x44 || i2c_addr == 0x45){
-			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/sht31d");
-			bndl->add(addressString);
+			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port");
+			bndl->add(addressString).add((int32_t)t).add("sht31d");
 		}
 		else if (i2c_addr == 0x70){
-			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/mb1232");
-			bndl->add(addressString);
+			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port");
+			bndl->add(addressString).add((int32_t)t).add("mb1232");
 		}
 		else if (i2c_addr == 0x68 || i2c_addr == 0x69){
-			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/mpu6050");
-			bndl->add(addressString);
+			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port");
+			bndl->add(addressString).add((int32_t)t).add("mpu6050");
 		}
 		else if (i2c_addr == 0x77){
-			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/ms5803");
-			bndl->add(addressString);
+			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port");
+			bndl->add(addressString).add((int32_t)t).add("ms5803");
 		}
 		else if (i2c_addr == 0x19){
-			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/lis3dh");
-			bndl->add(addressString);
+			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port");
+			bndl->add(addressString).add((int32_t)t).add("lis3dh");
 		}
 
 
 		else if (i2c_addr != 0x00){
-			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port",t,"/unsupported");
-			bndl->add(addressString);
+			sprintf(addressString,"%s%s%d%s",packet_header_string,"/port");
+			bndl->add(addressString).add((int32_t)t).add("unsupported");;
 		}
 	}
 }
