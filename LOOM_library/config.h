@@ -43,10 +43,10 @@
 
 // --- Enabled Communication Platform --- 
 #define is_wifi       0		// 1 to enable WiFi
-#define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_lora       1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
-#define is_fona       0		// 1 to enable cellular via Fona (808)
+#define is_fona       1		// 1 to enable cellular via Fona (808)
 #define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
 // --- Data Logging Platforms ---
@@ -104,7 +104,7 @@
 #define is_ishield      0	// 1 to specify using Ishield (should enable only wifi as communication platform)
 #define is_multiplexer  0	// 1 if tca9548a Multiplexer is being used. (Further customization in advanced options)
 #define is_sapflow      0 
-#define is_evaporimeter 1
+#define is_evaporimeter 0
 
 
 // --- WiFi Settings ---
@@ -316,7 +316,7 @@
 	#define spreadsheet_id "***REMOVED***"  // This is Luke's Arduino Test spreadsheet
 
 	// Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
-	#define tab_id  "ms5803_test"   
+	#define tab_id  "SS_Fona"   
 
 	// Required by PushingBox, specific to each scenario
 	char device_id[]   = "***REMOVED***";
