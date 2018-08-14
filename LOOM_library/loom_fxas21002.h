@@ -100,12 +100,12 @@ void package_fxas21002(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(addressString, "%s%s", packet_header_string, "/fxas21002_gx");
-	bndl->add(addressString).add(state_fxas21002.gyro[0]);
-	sprintf(addressString, "%s%s", packet_header_string, "/fxas21002_gy");
-	bndl->add(addressString).add(state_fxas21002.gyro[1]);
-	sprintf(addressString, "%s%s", packet_header_string, "/fxas21002_gz");
-	bndl->add(addressString).add(state_fxas21002.gyro[2]);
+	sprintf(address_string, "%s%s", packet_header_string, "/fxas21002_gx");
+	bndl->add(address_string).add(state_fxas21002.gyro[0]);
+	sprintf(address_string, "%s%s", packet_header_string, "/fxas21002_gy");
+	bndl->add(address_string).add(state_fxas21002.gyro[1]);
+	sprintf(address_string, "%s%s", packet_header_string, "/fxas21002_gz");
+	bndl->add(address_string).add(state_fxas21002.gyro[2]);
 }
 
 

@@ -91,7 +91,7 @@ void wifi_send_bundle_subnet(OSCBundle *bndl);
 
 void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port);
 void clear_new_wifi_setting_buffers();
-bool check_channel_poll(char * addressString, char * packet_header_string);
+bool check_channel_poll(char * address_string, char * packet_header_string);
 void check_connect_to_new_network();
 
 
@@ -334,7 +334,6 @@ void start_AP()
 	LOOM_DEBUG_Println2("devicePort: ", config_wifi->devicePort);
 	LOOM_DEBUG_Println2("subnetPort: ", config_wifi->subnetPort);
 
-
 	// If you get a connection, report back via serial:
 	UdpDevice.begin(config_wifi->devicePort);
 	UdpSubnet.begin(config_wifi->subnetPort);
@@ -562,10 +561,10 @@ void broadcastIP(OSCMessage &msg)
 {
 	OSCBundle bndl;
 	config_wifi->ip = WiFi.localIP();
-	char addressString[255];
-	sprintf(addressString, "/%s%d%s", FAMILY, FAMILY_NUM, "/NewIP");
+	char address_string[255];
+	sprintf(address_string, "/%s%d%s", FAMILY, FAMILY_NUM, "/NewIP");
 
-	bndl.add(addressString).add( packet_header_string )
+	bndl.add(address_string).add( packet_header_string )
 						   .add( (int32_t)config_wifi->ip[0] )
 						   .add( (int32_t)config_wifi->ip[1] )
 						   .add( (int32_t)config_wifi->ip[2] )
@@ -635,25 +634,16 @@ void wifi_check_status()
 // --- REQUEST SETTINGS FROM MAX ---
 //
 // Used to request channel settings from Max Channel Manager
-// Sends IP address so that Max can target response at this device
-// Setting response will entail SetID and SetPort commands 
+// Setting response will entail a SetChannel command 
 //
 void request_settings_from_Max()
 {
 	OSCBundle bndl;
-	char addressString[255];
-	sprintf(addressString, "%s%s", packet_header_string, "/RequestSettings");
+	char address_string[255];
+	sprintf(address_string, "%s%s", packet_header_string, "/RequestSettings");
 
-	bndl.add(addressString)
-		.add((int32_t)config_wifi->ip[0])
-		.add((int32_t)config_wifi->ip[1])
-		.add((int32_t)config_wifi->ip[2])
-		.add((int32_t)config_wifi->ip[3]);
+	bndl.add(address_string);
 
-	
-	// UdpSubnet.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
-	// bndl.send(UdpSubnet);     // Send the bytes to the SLIP stream
-	// UdpSubnet.endPacket();    // Mark the end of the OSC Packet
 	wifi_send_bundle_subnet(&bndl);
 	bndl.empty();             // Empty the bundle to free room for a new one
 
@@ -711,10 +701,10 @@ void respond_to_poll_request(OSCMessage &msg)
 {
 	OSCBundle bndl;
 	bndl.empty();
-	char addressString[255];
-	sprintf(addressString, "%s%s", packet_header_string, "/PollResponse");
+	char address_string[255];
+	sprintf(address_string, "%s%s", packet_header_string, "/PollResponse");
 
-	bndl.add(addressString);
+	bndl.add(address_string);
 
 	UdpSubnet.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
 	bndl.send(UdpSubnet);     // Send the bytes to the SLIP stream

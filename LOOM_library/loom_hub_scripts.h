@@ -13,7 +13,7 @@ typedef float (*retFuncPtr)(float,float);
 
 #define max_static_scripts  10
 #define max_dynamic_scripts 10
-#define max_script_len      30
+#define max_script_len      25
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 

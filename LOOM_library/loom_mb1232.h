@@ -106,8 +106,8 @@ void package_mb1232(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(addressString, "%s%s", packet_header_string, "/mb1232_range");
-	bndl->add(addressString).add((int32_t)state_mb1232.range);
+	sprintf(address_string, "%s%s", packet_header_string, "/mb1232_range");
+	bndl->add(address_string).add((int32_t)state_mb1232.range);
 }
 
 

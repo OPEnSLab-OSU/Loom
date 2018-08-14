@@ -106,6 +106,7 @@ float set_builtin_led(float x, float y)
 	return 0.0;
 }
 
+#if is_neopixel == 1
 float set_neopixel_red(float x, float y)
 {
 	set_color( OSCMessage("/tmp").add( (int32_t)2 ).add( (int32_t)0 ).add( (int32_t)255 ).add( (int32_t)0 ).add( (int32_t)0) );
@@ -123,6 +124,7 @@ float set_neopixel_blue(float x, float y)
 	set_color( OSCMessage("/tmp").add( (int32_t)2 ).add( (int32_t)0 ).add( (int32_t)0 ).add( (int32_t)0 ).add( (int32_t)255) );
 	return 0.0;
 }
+#endif
 
 
 
@@ -152,10 +154,11 @@ retFuncPtr custom_strToFunc(char * str) {
 	if (strcmp(str, "analog_read") == 0)  	 return analog_read;
 	if (strcmp(str, "set_builtin_led") == 0) return set_builtin_led;
 
-	if (strcmp(str, "set_neopixel_red") == 0)   return set_neopixel_red;
-	if (strcmp(str, "set_neopixel_green") == 0) return set_neopixel_green;
-	if (strcmp(str, "set_neopixel_blue") == 0)  return set_neopixel_blue;
-
+	#if is_neopixel == 1
+		if (strcmp(str, "set_neopixel_red") == 0)   return set_neopixel_red;
+		if (strcmp(str, "set_neopixel_green") == 0) return set_neopixel_green;
+		if (strcmp(str, "set_neopixel_blue") == 0)  return set_neopixel_blue;
+	#endif
 
 	return NULL; // Return Null if no match found, do not change
 }

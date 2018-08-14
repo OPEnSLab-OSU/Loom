@@ -99,12 +99,12 @@ void package_tsl2591(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(addressString, "%s%s", packet_header_string, "/tsl2591_vis");
-	bndl->add(addressString).add((int32_t)state_tsl2591.vis);
-	sprintf(addressString, "%s%s", packet_header_string, "/tsl2591_ir");
-	bndl->add(addressString).add((int32_t)state_tsl2591.ir);
-	sprintf(addressString, "%s%s", packet_header_string, "/tsl2591_full");
-	bndl->add(addressString).add((int32_t)state_tsl2591.full);
+	sprintf(address_string, "%s%s", packet_header_string, "/tsl2591_vis");
+	bndl->add(address_string).add((int32_t)state_tsl2591.vis);
+	sprintf(address_string, "%s%s", packet_header_string, "/tsl2591_ir");
+	bndl->add(address_string).add((int32_t)state_tsl2591.ir);
+	sprintf(address_string, "%s%s", packet_header_string, "/tsl2591_full");
+	bndl->add(address_string).add((int32_t)state_tsl2591.full);
 }
 
 
@@ -114,9 +114,9 @@ void package_tsl2591(OSCBundle *bndl, char packet_header_string[])
 //
 void measure_tsl2591() 
 {
-	state_tsl2591.ir = state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_INFRARED);
+	state_tsl2591.ir   = state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_INFRARED);
 	state_tsl2591.full = state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_FULLSPECTRUM);
-	state_tsl2591.vis =  state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_VISIBLE);
+	state_tsl2591.vis  =  state_tsl2591.inst_tsl2591.getLuminosity(TSL2591_VISIBLE);
 	
 	#if LOOM_DEBUG ==1 
 		Serial.print(F("[ "));			Serial.print(millis());				Serial.print(F(" ms ] "));

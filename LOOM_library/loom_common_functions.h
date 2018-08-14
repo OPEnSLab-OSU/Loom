@@ -46,8 +46,9 @@ void Loom_begin()
 	
 	// Setup sensors and actuators by calling the respective setups
 	// #if num_analog > 0
-	setup_analog();
-	// #endif
+	#if (num_analog > 0) || (is_m0 == 1)
+		setup_analog();
+	#endif
 	#if is_multiplexer == 1
 		setup_tca9548a();
 	#endif
@@ -86,6 +87,9 @@ void Loom_begin()
 		#if is_fxos8700 == 1
 			setup_fxos8700();
 		#endif
+		#if is_hx711 == 1
+			setup_hx711();
+		#endif
 		#if is_lis3dh == 1
 			setup_lis3dh();
 		#endif
@@ -103,6 +107,9 @@ void Loom_begin()
 		#endif
 		#if is_tsl2591 == 1
 			setup_tsl2591();
+		#endif
+		#if is_tsl2561 == 1
+			setup_tsl2561();
 		#endif
 		#if is_zxgesturesensor == 1
 			setup_zxgesturesensor();
@@ -149,7 +156,7 @@ void Loom_begin()
 	#endif
 
 	// If hub, poll for devices on network(s)
-	#if hub_node_type == 0
+	#if (hub_node_type == 0) && (advanced_interdev_comm == 1)
 		setup_network_info();
 	#endif
 
@@ -158,10 +165,12 @@ void Loom_begin()
 		setup_hub_scripts();
 	#endif
 
-	LOOM_DEBUG_Println("Routing:");
-	LOOM_DEBUG_Println2("  Global: ", STR(/) FAMILY);
-	LOOM_DEBUG_Println2("  Subnet: ", STR(/) FAMILY STR(FAMILY_NUM));
-	LOOM_DEBUG_Println2("  Device: ", configuration.packet_header_string);
+	#if advanced_interdev_comm == 1
+		LOOM_DEBUG_Println("Routing:");
+		LOOM_DEBUG_Println2("  Global: ", STR(/) FAMILY);
+		LOOM_DEBUG_Println2("  Subnet: ", STR(/) FAMILY STR(FAMILY_NUM));
+		LOOM_DEBUG_Println2("  Device: ", configuration.packet_header_string);
+	#endif
 
 	#if is_wifi
 		LOOM_DEBUG_Println("UDP Ports");
@@ -169,8 +178,6 @@ void Loom_begin()
 		LOOM_DEBUG_Println2("  Subnet: ", SUBNET_PORT);
 		LOOM_DEBUG_Println2("  Device: ", configuration.config_wifi.devicePort);
 	#endif
-
-
 
 
 	// Flash the built-in LED indicating setup complete
@@ -183,7 +190,7 @@ void Loom_begin()
 // ================================================================
 
 
-
+#if advanced_interdev_comm == 1
 // --- SET INSTANCE NUMBER ---
 //
 // Updates device's identifying instance number.
@@ -225,7 +232,7 @@ void set_channel(OSCMessage &msg)
 		return;
 	}
 
-	LOOM_DEBUG_Println4("Received command to change channel from '", (char)new_channel+64, "' to '", (char)new_channel+64);
+	LOOM_DEBUG_Println4("Received command to change channel from ", (char)(configuration.instance_number + 64), " to ", (char)(new_channel + 64) );
 
 	configuration.instance_number        = new_channel;
 	#if is_wifi == 1
@@ -244,8 +251,14 @@ void set_channel(OSCMessage &msg)
 
 
 	// Reply to Max
+	#if is_wifi == 1
+		OSCMessage tmp = OSCMessage("tmp");
+		respond_to_poll_request(tmp);
+	#endif
+
 }
 
+#endif // of if advanced_interdev_comm == 1
 
 
 
@@ -300,7 +313,7 @@ void loop_sleep()
 //
 // Saves the current configuration struct to non-volatile memory
 //
-// @param msg  Just header string routed from msg_router, not used here
+// @param msg  Just the header string routed from msg_router, not used here
 //
 void save_config(OSCMessage &msg) 
 {

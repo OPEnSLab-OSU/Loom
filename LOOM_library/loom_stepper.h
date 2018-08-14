@@ -114,9 +114,11 @@ void handle_stepper_msg(OSCMessage &msg)
 	// Replay that stepper is done
 	OSCBundle bndl;
 	bndl.empty();
-	char addressString[255];
-	sprintf(addressString, "%s%s", global_packet_header_string, "/StepperDone");
-	bndl.add(addressString);
+	char address_string[255];
+	sprintf(address_string, "%s%s", global_packet_header_string, "/StepperDone");
+	// sprintf(address_string, "%s%s", configuration.packet_header_string, "/StepperDone");
+
+	bndl.add(address_string);
 	#if is_wifi == 1
 		wifi_send_bundle(&bndl);
 	#endif

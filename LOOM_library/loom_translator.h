@@ -827,6 +827,8 @@ void convert_bundle_to_array_w_header(OSCBundle *bndl, String data [], int len)
 
 // Interpret is an optional parameter in the following 4 array to 
 // bundle functions (8 if counting overloaded versions)
+//
+// Floats may not work correctly with 32u4
 // 
 // The encoding is as follows:
 //  0 - 3 assume elements are in [key1, value1, key2, value2...] format,
@@ -888,7 +890,11 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, ch
 						tmpMsg.add( tmpInt );   break;
 					}
 				case 2: case 6: 	// Float [All]
-					tmpFloat = strtof(data, &end);
+					#if is_m0 == 1
+						tmpFloat = strtof(data, &end);
+					#else
+						tmpFloat = 0;
+					#endif
 					if ( (interpret == 2) || (interpret == 6) || !(end == data || *end != '\0') ) {
 						tmpMsg.add( tmpFloat ); break;
 					}
@@ -961,31 +967,6 @@ void convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle *bndl
 	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, packet_header, assoc_len, format, 0);
 
 }
-
-
-// Conversions for other types
-// void convert_assoc_arrays_to_bundle(String keys [], int values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format)
-// {
-// 	String converted_values[assoc_len];
-// 	convert_array(values, converted_values, assoc_len);
-// 	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, packet_header, assoc_len, format, 1);
-// }
-
-// void convert_assoc_arrays_to_bundle(String keys [], float values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format)
-// {
-// 	String converted_values[assoc_len];
-// 	convert_array(values, converted_values, assoc_len);
-// 	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, packet_header, assoc_len, format, 2);
-// }
-
-// void convert_assoc_arrays_to_bundle(String keys [], char* values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format)
-// {
-// 	String converted_values[assoc_len];
-// 	convert_array(values, converted_values, assoc_len);
-// 	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, packet_header, assoc_len, format, 3);
-// }
-
-
 
 // Conversion from array of non-Strings to single message bundle   
 template <typename T>   
@@ -1091,6 +1072,7 @@ void convert_array(String src [], int dest [], int count)
 	} 
 }
 
+#if is_m0 == 1
 void convert_array(String src [], float dest [], int count)
 { 
 	char buf[20]; 
@@ -1099,6 +1081,7 @@ void convert_array(String src [], float dest [], int count)
 		dest[i] = strtof(buf, NULL); 
 	} 
 }
+#endif
 
 void convert_array(String src [], char dest [][20], int count)
 { 

@@ -93,26 +93,26 @@ void setup_max31856()
 //
 void package_max31856(OSCBundle *bndl, char packet_header_string[]) 
 {
-	char addressString[255];
+	char addres_string[255];
 	#if TCTYPE == K_TYPE
 	
 	#ifdef CELCIUS
-		sprintf(addressString, "%s%s", packet_header_string, "/CJTemp_C");
-		bndl->add(addressString).add((float)CJTemp);
-		sprintf(addressString, "%s%s", packet_header_string, "/TCTemp_C");
-		bndl->add(addressString ).add((float)TCTemp);
+		sprintf(addres_string, "%s%s", packet_header_string, "/CJTemp_C");
+		bndl->add(addres_string).add((float)CJTemp);
+		sprintf(addres_string, "%s%s", packet_header_string, "/TCTemp_C");
+		bndl->add(addres_string ).add((float)TCTemp);
 	#endif
 	
 	#ifdef FAHRENHEIT
-		sprintf(addressString, "%s%s", packet_header_string, "/CJTemp_F");
+		sprintf(addres_string, "%s%s", packet_header_string, "/CJTemp_F");
 		bndl->add(addresString).add((float)(CJTemp * 1.8 + 32));
-		sprintf(addressString, "%s%s", packet_header_string, "/TCTemp_F");
-		bndl->add(addressString).add((float)(TCTemp * 1.8 + 32));
+		sprintf(addres_string, "%s%s", packet_header_string, "/TCTemp_F");
+		bndl->add(addres_string).add((float)(TCTemp * 1.8 + 32));
 	#endif
 	
 	#elif TCTYPE == VMODE_G32 || TCTYPE == VMODE_G8
-		sprintf(addressString, "%s%s", packet_header_string, "/voltage");
-		bndl->add(addressString).add((float)(tc_vin));
+		sprintf(addres_string, "%s%s", packet_header_string, "/voltage");
+		bndl->add(addres_string).add((float)(tc_vin));
 	#endif
 }
 

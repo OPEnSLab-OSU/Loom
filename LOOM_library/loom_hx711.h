@@ -1,42 +1,38 @@
 // ================================================================ 
 // ===                        LIBRARIES                         === 
 // ================================================================
-#include <Wire.h>
-#include "Adafruit_SHT31.h"
+// #include <Wire.h>
+#include "HX711.h"
 
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define i2c_addr_sht31d 0x44	//0x44, 0x45
 
+#define DOUT 12 //connecting the out and clock pins for the load cell
+#define CLK  13
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
-struct config_sht31d_t {
 
-};
-
-struct state_sht31d_t {
-	Adafruit_SHT31 inst_sht31d;
-	float temp;
-	float humid;
+struct state_hx711_t {
+	float loadcell;
 };
 
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-struct config_sht31d_t config_sht31d;
-struct state_sht31d_t state_sht31d;
+struct state_hx711_t state_hx711;
 
+HX711 inst_hx711(DOUT, CLK);
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-bool setup_sht31d();
-void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port);
-void package_sht31d(OSCBundle *bndl, char packet_header_string[]);
-void measure_sht31d();
+bool setup_hx711();
+void package_hx711(OSCBundle *bndl, char packet_header_string[], uint8_t port);
+void package_hx711(OSCBundle *bndl, char packet_header_string[]);
+void measure_hx711();
 
 
 // ================================================================ 
@@ -47,17 +43,23 @@ void measure_sht31d();
 //
 // @return  Whether or not sensor initialization was successful
 //
-bool setup_sht31d() {
+bool setup_hx711() {
+
+	LOOM_DEBUG_Println("Setting up HX711");
+
 	bool is_setup;
 
-	if (state_sht31d.inst_sht31d.begin(i2c_addr_sht31d)) {
-		is_setup = true;
-		LOOM_DEBUG_Println("Initialized sht31d (temp/humid)");
-	} else {
-		is_setup = false;
-		LOOM_DEBUG_Println("Failed to initialize sht31d (temp/humid");
-	}
-	
+	//This value is obtained by using the Calibration sketch
+	inst_hx711.set_scale(hx711_calibration);
+
+	 //Assuming there is no weight on the scale at start up, reset the scale to 0
+	inst_hx711.tare();
+
+	// Go into low power mode
+	inst_hx711.power_down(); 
+
+	LOOM_DEBUG_Println("HX711 setup complete");
+
 	return is_setup;
 }
 
@@ -75,27 +77,24 @@ bool setup_sht31d() {
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
 // @param port                  Which port of the multiplexer the device is plugged into
 //
-void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port)
+void package_hx711(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
 	char address_string[255];
-	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/sht31d/data");
+	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/hx711/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
-	msg.add("temp").add(state_sht31d.temp);
-	msg.add("humid").add(state_sht31d.humid);
+	msg.add("loadcell").add(state_hx711.loadcell);
 	
 	bndl->add(msg);
 }
 
 // Package function when not using multiplexer
-void package_sht31d(OSCBundle *bndl, char packet_header_string[])
+void package_hx711(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(address_string, "%s%s", packet_header_string, "/sht31d_temp");
-	bndl->add(address_string).add(state_sht31d.temp);
-	sprintf(address_string, "%s%s", packet_header_string, "/sht31d_humid");
-	bndl->add(address_string ).add(state_sht31d.humid);
+	sprintf(address_string, "%s%s", packet_header_string, "/hx711_loadcell");
+	bndl->add(address_string).add(state_hx711.loadcell);
 }
 
 
@@ -103,19 +102,11 @@ void package_sht31d(OSCBundle *bndl, char packet_header_string[])
 //
 // Gets the current sensor readings of the SHT31D and stores into its state struct
 // 
-void measure_sht31d() 
+void measure_hx711() 
 {
-	float t = state_sht31d.inst_sht31d.readTemperature();
-	float h = state_sht31d.inst_sht31d.readHumidity();
-
-	if ((!isnan(t)) && (!isnan(h))) {
-		state_sht31d.temp = t;
-		state_sht31d.humid = h;
-		// LOOM_DEBUG_Println2("Temp: ",     state_sht31d.temp);
-		// LOOM_DEBUG_Println2("Humidity: ", state_sht31d.humid);
-	} else {
-		LOOM_DEBUG_Println("Failed to read temperature or humidity");
-	}
+    inst_hx711.power_up();
+	state_hx711.loadcell = inst_hx711.get_units(5);
+	inst_hx711.power_down();
 }
 
 

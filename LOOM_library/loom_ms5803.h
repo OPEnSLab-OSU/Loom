@@ -118,10 +118,10 @@ void package_ms5803(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(addressString, "%s%s", packet_header_string, "/ms5803_pressure");
-	bndl->add(addressString ).add(state_ms5803.pressure);
-	sprintf(addressString, "%s%s", packet_header_string, "/ms5803_temp");
-	bndl->add(addressString).add(state_ms5803.temp);
+	sprintf(address_string, "%s%s", packet_header_string, "/ms5803_pressure");
+	bndl->add(address_string ).add(state_ms5803.pressure);
+	sprintf(address_string, "%s%s", packet_header_string, "/ms5803_temp");
+	bndl->add(address_string).add(state_ms5803.temp);
 }
 
 
