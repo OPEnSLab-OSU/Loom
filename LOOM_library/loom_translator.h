@@ -332,7 +332,8 @@ void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string)
 {
 	// This is done in case the bundle converts to a string larger than
 	// 251 characters before compression
-	char larger_buf[512];
+	char larger_buf[384];
+	memset(larger_buf, '\0', sizeof(larger_buf));
 	original_convert_OSC_bundle_to_string(bndl, (char*)larger_buf);
 	// strcpy(osc_string, (const char*)larger_buf);
 	// original_convert_OSC_bundle_to_string(bndl, osc_string);
@@ -344,10 +345,45 @@ void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string)
 
 	const char* cPtr = nth_strchr(larger_buf, '/', 3);
 	char buf[30];
-	snprintf(buf, cPtr-larger_buf+2, "%s", larger_buf);
+	snprintf(buf, cPtr-larger_buf+2, "%s\0", larger_buf); // Copy compressable header to buf
 	str_replace((char*)cPtr, buf, "%");
 
-	snprintf(osc_string, 251, "%s", larger_buf);
+	snprintf(osc_string, 250, "%s\0", larger_buf);
+
+	// LOOM_DEBUG_Print4("Last Char-1: [", strlen(osc_string), "] ", osc_string[strlen(osc_string)-2]); 
+	// LOOM_DEBUG_Print(" (");
+	// Serial.print(osc_string[strlen(osc_string)-2], HEX);
+	// LOOM_DEBUG_Println(")");
+
+	// LOOM_DEBUG_Print4("Last Char: [", strlen(osc_string), "] ", osc_string[strlen(osc_string)-1]); 
+	// LOOM_DEBUG_Print(" (");
+	// Serial.print(osc_string[strlen(osc_string)-1], HEX);
+	// LOOM_DEBUG_Println(")");
+
+	// LOOM_DEBUG_Print4("Last Char+1: [", strlen(osc_string), "] ", osc_string[strlen(osc_string)]); 
+	// LOOM_DEBUG_Print(" (");
+	// Serial.print(osc_string[strlen(osc_string)], HEX);
+	// LOOM_DEBUG_Println(")");
+
+	// Remove occasional trailing space
+	if (osc_string[strlen(osc_string)-1] == 32 ) {
+		osc_string[strlen(osc_string)-1] = '\0';
+	}
+
+	// LOOM_DEBUG_Print4("Last Char-1: [", strlen(osc_string), "] ", osc_string[strlen(osc_string)-2]); 
+	// LOOM_DEBUG_Print(" (");
+	// Serial.print(osc_string[strlen(osc_string)-2], HEX);
+	// LOOM_DEBUG_Println(")");
+
+	// LOOM_DEBUG_Print4("Last Char: [", strlen(osc_string), "] ", osc_string[strlen(osc_string)-1]); 
+	// LOOM_DEBUG_Print(" (");
+	// Serial.print(osc_string[strlen(osc_string)-1], HEX);
+	// LOOM_DEBUG_Println(")");
+
+	// LOOM_DEBUG_Print4("Last Char+1: [", strlen(osc_string), "] ", osc_string[strlen(osc_string)]); 
+	// LOOM_DEBUG_Print(" (");
+	// Serial.print(osc_string[strlen(osc_string)], HEX);
+	// LOOM_DEBUG_Println(")");
 
 	// LOOM_DEBUG_Println4("After Compression – [Len: ", strlen(osc_string), "]\n", osc_string);
 }
@@ -420,7 +456,7 @@ const char* nth_strchr(const char* s, char c, int n)
 // Auxiliary function for OSC string compression
 void str_replace(char *target, const char *needle, const char *replacement)
 {
-	char buffer[1024] = { 0 };
+	char buffer[384] = { 0 };
 	char *insert_point = &buffer[0];
 	const char *tmp = target;
 	size_t needle_len = strlen(needle);

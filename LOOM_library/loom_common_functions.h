@@ -39,6 +39,12 @@ void Loom_begin()
 		Serial.println("Initialized Serial!");
 	#endif
 	
+	#if hub_node_type == 0
+		LOOM_DEBUG_Println("Running as Hub");
+	#else
+		LOOM_DEBUG_Println("Running and Node");
+	#endif
+
 	// Set the button pin mode to input
 	#ifdef is_button
 		pinMode(button_pin, INPUT_PULLUP); 
@@ -178,6 +184,7 @@ void Loom_begin()
 		LOOM_DEBUG_Println2("  Subnet: ", SUBNET_PORT);
 		LOOM_DEBUG_Println2("  Device: ", configuration.config_wifi.devicePort);
 	#endif
+
 
 
 	// Flash the built-in LED indicating setup complete

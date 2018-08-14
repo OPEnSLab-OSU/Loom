@@ -213,11 +213,11 @@
 
 // --- Evaporimeter Options --- 
 #if is_evaporimeter == 1
-
+	#define hub_node_type 1
 	#define is_lora 1
 
 	// Lux Sensor
-	#define is_tsl2561 1
+	#define is_tsl2561 0
 		#define is_tsl2561_low   1 
 		#define is_tsl2561_float 1
 		#define is_tsl2561_high  0
@@ -246,13 +246,12 @@
 
 // --- LoRa Options ---
 #if is_lora == 1
-	#define LORA_HUB_ADDRESS 0			// Use 0-9 for SERVER_ADDRESSes
+	#define LORA_HUB_ADDRESS  1			// Use 0-9 for SERVER_ADDRESSes
+	#define LORA_NODE_ADDRESS 2			// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
+										// 10-19 for 0, 20 - 29 for 1, etc.
+
 	#define RF95_FREQ      915.0		// Hardware specific, Tx must match Rx
 
-	// #if hub_node_type == 1 					// If Node
-		#define LORA_NODE_ADDRESS 10			// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
-	// #endif								// 10-19 for 0, 20 - 29 for 1, etc.
-	
 	// #define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 #endif
 

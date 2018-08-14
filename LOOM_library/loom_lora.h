@@ -73,8 +73,8 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 		LOOM_DEBUG_Println("setFrequency failed");
 	}
 
-	LOOM_DEBUG_Println("Setting up ethernet");
 	#if hub_node_type == 0 && is_ethernet == 1 // if hub
+		LOOM_DEBUG_Println("Setting up ethernet");
 		if(!setup_ethernet()) {
 			LOOM_DEBUG_Println("Failed to setup ethernet");
 		}
@@ -111,10 +111,16 @@ void lora_receive_bundle(OSCBundle *bndl)
 		memset(buf, '\0', LORA_MESSAGE_SIZE);
 		if (manager.recvfromAck(buf, &len, &from)) {
 
+			// LOOM_DEBUG_Println("Receiving");
 			// This is done just in case the compressed string
 			// uncompresses to more than 251 characters
-			char larger_buf[512];
+			char larger_buf[384];
+			memset(larger_buf, '\0', sizeof(larger_buf));
 			strcpy(larger_buf, (const char*)buf);
+
+			LOOM_DEBUG_Println2("Received: ", larger_buf);
+			LOOM_DEBUG_Println2("Len: ", strlen((const char*)larger_buf));
+
 			convert_OSC_string_to_bundle((char*)larger_buf, bndl); 
 
 			// convert_OSC_string_to_bundle((char*)buf, bndl); 
@@ -138,13 +144,13 @@ void lora_receive_bundle(OSCBundle *bndl)
 //
 bool lora_send_bundle(OSCBundle *bndl)
 {
-	char message[RH_RF95_MAX_MESSAGE_LEN];
+	char message[LORA_MESSAGE_SIZE];
 	memset(message, '\0', sizeof(message));
 	convert_OSC_bundle_to_string(bndl, message);
 
 	LOOM_DEBUG_Println(message);
 	LOOM_DEBUG_Println2("Message length: ", strlen(message));
-	LOOM_DEBUG_Println2("Max message length: ", RH_RF95_MAX_MESSAGE_LEN);
+	LOOM_DEBUG_Println2("Max message length: ", LORA_MESSAGE_SIZE);
 	LOOM_DEBUG_Print("Sending...");
 	 
 
@@ -155,14 +161,31 @@ bool lora_send_bundle(OSCBundle *bndl)
 //   might also just be able to temporarily set retries / timeout to 0 or something ? ...
 // lora send bundle could then take an address as well, and overload so that if none is provided,
 //   default to broadcasting with the other function
+	// Serial.println();
+	// for (int i = 0; i < strlen(message); i++) {
+	// 	Serial.print(message[i], HEX);
+	// 	Serial.print(" ");
+	// 	if ((i != 0) && (i % 16 == 0))
+	// 		Serial.println();
+	// }
+	// Serial.println();
+	RH_RF95::printBuffer("Contents: ", (const uint8_t*)message, strlen(message)+1);
 
-	if (manager.sendtoWait((uint8_t*)message, strlen(message), LORA_HUB_ADDRESS)) {  // this should be better generalized, as to be able to send to nodes
+	#if hub_node_type == 0
+		LOOM_DEBUG_Println("Sending to node");
+		if (manager.sendtoWait((uint8_t*)message, strlen(message)+1, LORA_NODE_ADDRESS)) {  // this should be better generalized, as to be able to send to nodes
+	#else
+		LOOM_DEBUG_Println("Sending to server");
+		if (manager.sendtoWait((uint8_t*)message, strlen(message)+1, LORA_HUB_ADDRESS)) {  // this should be better generalized, as to be able to send to nodes
+	#endif
 		LOOM_DEBUG_Println("Sent bundle through LoRa!");
 		return true;
 	} else {
 		LOOM_DEBUG_Println("Failed to send bundle!");
 		return false;
 	}
+
+	// Use 'recvfromAckTimeout' from reliable client example for ack confirmation
 }
 
 bool lora_send_bundle_fragment(OSCBundle *bndl)
@@ -185,29 +208,6 @@ bool lora_send_bundle_fragment(OSCBundle *bndl)
 		tmp_bndl.empty();
 	}
 }
-
-
-
-
-
-// bool lora_send_bundle_fragment(OSCBundle *bndl)
-// {
-// 	LOOM_DEBUG_Println2("Bundle of size ", get_bundle_bytes(bndl));
-// 	LOOM_DEBUG_Println(" Being split into smaller bundles");
-
-// 	OSCBundle tmp_bndl;
-// 	OSCMessage *tmp_msg;
-
-// 	for (int i = 0; i < bndl->size(); i++) {
-// 		tmp_msg = bndl->getOSCMessage(i);
-// 		tmp_bndl.empty();
-// 		tmp_bndl.add(*tmp_msg);
-// 		lora_send_bundle(&tmp_bndl);
-// 	}
-// }
-
-
-
 
 
 
