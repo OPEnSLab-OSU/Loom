@@ -3,8 +3,6 @@
 // ================================================================
 #include <RH_RF95.h>
 #include <RHReliableDatagram.h>
-// #include <string.h>
-// #include <Ethernet2.h>
 
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
@@ -151,7 +149,7 @@ bool lora_send_bundle(OSCBundle *bndl)
 	LOOM_DEBUG_Println(message);
 	LOOM_DEBUG_Println2("Message length: ", strlen(message));
 	LOOM_DEBUG_Println2("Max message length: ", LORA_MESSAGE_SIZE);
-	LOOM_DEBUG_Print("Sending...");
+	// LOOM_DEBUG_Print("Sending...");
 	 
 
 // Sending to RH_BROADCAST_ADDRESS (255) might allow for broadcasting,
@@ -169,13 +167,13 @@ bool lora_send_bundle(OSCBundle *bndl)
 	// 		Serial.println();
 	// }
 	// Serial.println();
-	RH_RF95::printBuffer("Contents: ", (const uint8_t*)message, strlen(message)+1);
+	// RH_RF95::printBuffer("Contents: ", (const uint8_t*)message, strlen(message)+1);
 
 	#if hub_node_type == 0
-		LOOM_DEBUG_Println("Sending to node");
+		LOOM_DEBUG_Println("Sending to node...");
 		if (manager.sendtoWait((uint8_t*)message, strlen(message)+1, LORA_NODE_ADDRESS)) {  // this should be better generalized, as to be able to send to nodes
 	#else
-		LOOM_DEBUG_Println("Sending to server");
+		LOOM_DEBUG_Println("Sending to server...");
 		if (manager.sendtoWait((uint8_t*)message, strlen(message)+1, LORA_HUB_ADDRESS)) {  // this should be better generalized, as to be able to send to nodes
 	#endif
 		LOOM_DEBUG_Println("Sent bundle through LoRa!");

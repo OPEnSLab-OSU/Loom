@@ -42,7 +42,7 @@ void Loom_begin()
 	#if hub_node_type == 0
 		LOOM_DEBUG_Println("Running as Hub");
 	#else
-		LOOM_DEBUG_Println("Running and Node");
+		LOOM_DEBUG_Println("Running as Node");
 	#endif
 
 	// Set the button pin mode to input
@@ -189,6 +189,10 @@ void Loom_begin()
 
 	// Flash the built-in LED indicating setup complete
 	flash_led();
+
+	#if fona_test == 1
+		fona_test_loop();
+	#endif
 }
 
 
