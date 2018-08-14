@@ -53,6 +53,8 @@
 		#define DEVICE "Mux"
 	#elif is_sapflow
 		#define DEVICE "Sapflow"
+	#elif is_evaporimeter
+		#define DEVICE "Evap"
 	#else
 		#define DEVICE "Unknown"
 	#endif
@@ -104,12 +106,12 @@ enum LogPlatform {
 int           led = LED_BUILTIN;              // LED pin number
 volatile bool ledState = LOW;                 // State of LED
 float         vbat = 3.3;                     // Place to save measured battery voltage (3.3V max)
-char          packetBuffer[255];              // Buffer to hold incoming packet
+// char          packetBuffer[255];              // Buffer to hold incoming packet
 char          ReplyBuffer[] = "acknowledged"; // A string to send back
 OSCErrorCode  error;                          // Hold errors from OSC
 uint32_t      button_timer;                   // Time that the button has been held
 int           button_state;					  // Variable to hold the state of the button
-char          addressString[255];			  // A place to hold the address string of the current message being examined
+// char          addressString[255];			  // A place to hold the address string of the current message being examined
 char          global_packet_header_string[80]; // Sometimes functions need to access the header string but are declared before loom_flash.h is included
 
 
@@ -124,17 +126,16 @@ char          global_packet_header_string[80]; // Sometimes functions need to ac
 
 // Still experimental
 #ifdef __SAMD21G18A__
-	#define is_m0
+	#define is_m0 1
 	#define MEM_TYPE MEM_FLASH
 #endif
 #ifdef __AVR_ATmega32U4__
-	#define is_32u4
+	#define is_32u4 1
 	#define MEM_TYPE MEM_EEPROM
 #endif
 
-// #if is_button == 1
-// 	#define button button_pin               // Using on-board button, specify attached pin, transmitting
-// #endif
+
+
 
 #ifdef is_sleep_period
 	#include <Adafruit_SleepyDog.h> // This must be included if you are transmitting at timed intervals
@@ -205,14 +206,9 @@ int    get_bundle_bytes(OSCBundle *bndl);
 #endif
 
 
-// #if num_analog > 0     
-	// always include, because battery uses analog read, 
-	// numbers would change due to 12bit ADC if this was removed, 
-	// it is a small file anyway
+#if (num_analog > 0) || (is_m0 == 1)
 	#include "loom_analogIn.h"
-// #endif
-
-
+#endif
 #if is_neopixel == 1
 	#include "loom_neopixel.h"
 #endif
@@ -233,6 +229,9 @@ int    get_bundle_bytes(OSCBundle *bndl);
 #endif
 #if is_tsl2591 == 1
 	#include "loom_tsl2591.h"
+#endif
+#if is_tsl2561 == 1
+	#include "loom_tsl2561.h"
 #endif
 #if is_fxos8700 == 1
 	#include "loom_fxos8700.h"
@@ -258,6 +257,9 @@ int    get_bundle_bytes(OSCBundle *bndl);
 #endif
 #if is_lis3dh == 1
 	#include "loom_lis3dh.h"
+#endif
+#if is_hx711 == 1
+	#include "loom_hx711.h"
 #endif
 
 
@@ -290,7 +292,9 @@ int    get_bundle_bytes(OSCBundle *bndl);
 #endif
 
 #include "loom_flash.h"
-#include "loom_interdev_comm.h" 
+#if advanced_interdev_comm == 1
+	#include "loom_interdev_comm.h" 
+#endif
 #include "loom_common_functions.h"
 #include "loom_msg_router.h"
 #include "loom_interface.h"

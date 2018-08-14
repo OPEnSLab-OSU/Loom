@@ -44,7 +44,7 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 			wifi_receive_bundle(bndl, &UdpSubnet, configuration.config_wifi.subnetPort, "Subnet"); 
 			wifi_receive_bundle(bndl, &UdpGlobal, GLOBAL_PORT, "Global");
 
-		// Add if to not check global if it is same as subnet
+// Add if to not check global if it is same as subnet
 
 			// wifi_receive_bundle(bndl, &Udp, SUBNET_PORT);
 			// wifi_receive_bundle(bndl, &Udp, configuration.config_wifi.subnetPort); 
@@ -85,11 +85,11 @@ void process_bundle(OSCBundle *bndl)
 
 		// If no bundle error
 		if (!bndl->hasError()) {
-			char addressString[255];
-			bndl->getOSCMessage(0)->getAddress(addressString, 0);
+			char address_string[255];
+			bndl->getOSCMessage(0)->getAddress(address_string, 0);
 	
 			LOOM_DEBUG_Println2("Number of items in bundle: ", bndl->size());
-			LOOM_DEBUG_Println2("First message address string: ", addressString);
+			LOOM_DEBUG_Println2("First message address string: ", address_string);
 
 			print_bundle(bndl);
 
@@ -101,12 +101,15 @@ void process_bundle(OSCBundle *bndl)
 			// Most commands will be finished once control returns here 
 			
 			// Device Specific Message
+			LOOM_DEBUG_Println3("##Device Routing (", configuration.packet_header_string, ")");
 			bndl->route(configuration.packet_header_string, msg_router);
 			
 			// Family Subnet Message
+			LOOM_DEBUG_Println3("##Subnet Routing (", STR(/) FAMILY STR(FAMILY_NUM), ")");
 			bndl->route(STR(/) FAMILY STR(FAMILY_NUM), msg_router);
 
 			// Family Global Message
+			LOOM_DEBUG_Println3("##Global Routing (", STR(/) FAMILY, ")");
 			bndl->route(STR(/) FAMILY , msg_router);
 
 
@@ -117,7 +120,7 @@ void process_bundle(OSCBundle *bndl)
 
 			// If SD logging is enabled and message was to this device, save bundle
 			#if is_sd == 1 
-				if ((SD_logging == 1) && (strncmp(addressString, configuration.packet_header_string, strlen(configuration.packet_header_string)) == 0)) {
+				if ((SD_logging == 1) && (strncmp(address_string, configuration.packet_header_string, strlen(configuration.packet_header_string)) == 0)) {
 					LOOM_DEBUG_Println("Logging bundle");
 					sd_save_bundle("bndl_log.txt", bndl, 2, 2);
 				}
@@ -144,10 +147,13 @@ void process_bundle(OSCBundle *bndl)
 void measure_sensors()
 {
 	// Get battery voltage
-	// vbat = analogRead(VBATPIN);
-	vbat = read_analog(VBATPIN);
-	vbat = (vbat * 2 * 3.3) / 4096; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
-	// vbat = (vbat * 2 * 3.3) / 1024; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
+	#if (num_analog > 0) || (is_m0 == 1)
+		vbat = read_analog(VBATPIN);
+		vbat = (vbat * 2 * 3.3) / 4096; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
+	#else
+		vbat = analogRead(VBATPIN);
+		vbat = (vbat * 2 * 3.3) / 1024; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
+	#endif
 
 	//	Get button state
 	#if is_button == 1
@@ -198,6 +204,9 @@ void measure_sensors()
 		#if is_fxos8700 == 1
 			measure_fxos8700();
 		#endif
+		#if is_hx711 == 1
+			measure_hx711();
+		#endif
 		#if is_lis3dh == 1
 			measure_lis3dh();
 		#endif
@@ -215,6 +224,9 @@ void measure_sensors()
 		#endif
 		#if is_tsl2591 == 1
 			measure_tsl2591();
+		#endif
+		#if is_tsl2561 == 1
+			measure_tsl2561();
 		#endif
 		#if is_zxgesturesensor == 1
 			measure_zxgesturesensor();
@@ -245,14 +257,15 @@ void package_data(OSCBundle *send_bndl)
 	// Clear any previous contents
 	send_bndl->empty();
 
-	// Add battery data 
-	sprintf(addressString, "%s%s", configuration.packet_header_string, "/vbat");
-	send_bndl->add(addressString).add(vbat); 
+	// Add battery data
+	char address_string[80]; 
+	sprintf(address_string, "%s%s", configuration.packet_header_string, "/vbat");
+	send_bndl->add(address_string).add(vbat); 
 	
 	// Add button state
 	#if is_button == 1
-		sprintf(addressString, "%s%s", configuration.packet_header_string, "/button");
-		send_bndl->add(addressString).add((int32_t)button_state);
+		sprintf(address_string, "%s%s", configuration.packet_header_string, "/button");
+		send_bndl->add(address_string).add((int32_t)button_state);
 	#endif
 
 	//	Add multiplexer sensor data
@@ -288,12 +301,48 @@ void package_data(OSCBundle *send_bndl)
 	// Should add the other I2C sensor package functions here 
 	// for when they are called without the multiplexer
 
+	// #if is_multiplexer != 1
+	// 	#if is_lis3dh == 1
+	// 		package_lis3dh(send_bndl, configuration.packet_header_string);
+	// 	#endif
+	// 	#if is_ms5803 == 1
+	// 		package_ms5803(send_bndl, configuration.packet_header_string);
+	// 	#endif
+	// #endif
+			// If using I2C sensor without multiplexer
 	#if is_multiplexer != 1
+		#if is_fxas21002 == 1 
+			package_fxas21002(send_bndl, configuration.packet_header_string);
+		#endif
+		#if is_fxos8700 == 1
+			package_fxos8700(send_bndl, configuration.packet_header_string);
+		#endif
+		#if is_hx711 == 1
+			package_hx711(send_bndl, configuration.packet_header_string);
+		#endif
 		#if is_lis3dh == 1
 			package_lis3dh(send_bndl, configuration.packet_header_string);
 		#endif
+		#if is_mb1232 == 1
+			package_mb1232(send_bndl, configuration.packet_header_string);
+		#endif
+		// #if is_mpu6050 == 1
+		// 	package_mpu6050(send_bndl, configuration.packet_header_string); 
+		// #endif
 		#if is_ms5803 == 1
 			package_ms5803(send_bndl, configuration.packet_header_string);
+		#endif
+		#if is_sht31d == 1
+			package_sht31d(send_bndl, configuration.packet_header_string);
+		#endif
+		#if is_tsl2591 == 1
+			package_tsl2591(send_bndl, configuration.packet_header_string);
+		#endif
+		#if is_tsl2561 == 1
+			package_tsl2561(send_bndl, configuration.packet_header_string);
+		#endif
+		#if is_zxgesturesensor == 1
+			package_zxgesturesensor(send_bndl, configuration.packet_header_string);
 		#endif
 	#endif
 }
@@ -324,25 +373,11 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port)
 		#if is_lora == 1
 		case LORA : lora_send_bundle(send_bndl); break;
 			// (!lora_bundle_fragment) ? lora_send_bundle(send_bndl) : lora_send_bundle_fragment(send_bndl); break;
-
-			// if (!lora_bundle_fragment) {
-			// 	lora_send_bundle(send_bndl);					
-			// } else { // Separate bundle into smaller pieces
-			// 	lora_send_bundle_fragment(send_bndl);
-			// }
-			// break;
 		#endif
 
 		#if is_nrf == 1
 		case NRF : nrf_send_bundle(send_bndl); break;
 			// (!nrf_bundle_fragment) ? nrf_send_bundle(send_bndl) : nrf_send_bundle_fragment(send_bndl); break;
-
-			// if (!nrf_bundle_fragment) {
-			// 	nrf_send_bundle(send_bndl);					
-			// } else { // Separate bundle into smaller pieces
-			// 	nrf_send_bundle_fragment(send_bndl);
-			// }
-			// break;
 		#endif
 		
 		#if LOOM_DEBUG == 1
@@ -455,7 +490,7 @@ void additional_loop_checks()
 		adafruitio_publish();
 	#endif
 
-	#if hub_node_type == 0
+	#if (hub_node_type == 0) && (advanced_interdev_comm == 1)
 		check_device_refresh_interval();
 	#endif
 }

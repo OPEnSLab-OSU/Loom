@@ -100,18 +100,18 @@ void package_fxos8700(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(addressString, "%s%s", packet_header_string, "/fxos8700_gx");
-	bndl->add(addressString).add(state_fxos8700.accel[0]);
-	sprintf(addressString, "%s%s", packet_header_string, "/fxos8700_gy");
-	bndl->add(addressString).add(state_fxos8700.accel[1]);
-	sprintf(addressString, "%s%s", packet_header_string, "/fxos8700_gz");
-	bndl->add(addressString).add(state_fxos8700.accel[2]);
-	sprintf(addressString, "%s%s", packet_header_string, "/fxos8700_mx");
-	bndl->add(addressString).add(state_fxos8700.mag[0]);
-	sprintf(addressString, "%s%s", packet_header_string, "/fxos8700_my");
-	bndl->add(addressString).add(state_fxos8700.mag[1]);
-	sprintf(addressString, "%s%s", packet_header_string, "/fxos8700_mz");
-	bndl->add(addressString).add(state_fxos8700.mag[2]);
+	sprintf(address_string, "%s%s", packet_header_string, "/fxos8700_gx");
+	bndl->add(address_string).add(state_fxos8700.accel[0]);
+	sprintf(address_string, "%s%s", packet_header_string, "/fxos8700_gy");
+	bndl->add(address_string).add(state_fxos8700.accel[1]);
+	sprintf(address_string, "%s%s", packet_header_string, "/fxos8700_gz");
+	bndl->add(address_string).add(state_fxos8700.accel[2]);
+	sprintf(address_string, "%s%s", packet_header_string, "/fxos8700_mx");
+	bndl->add(address_string).add(state_fxos8700.mag[0]);
+	sprintf(address_string, "%s%s", packet_header_string, "/fxos8700_my");
+	bndl->add(address_string).add(state_fxos8700.mag[1]);
+	sprintf(address_string, "%s%s", packet_header_string, "/fxos8700_mz");
+	bndl->add(address_string).add(state_fxos8700.mag[2]);
 }
 
 

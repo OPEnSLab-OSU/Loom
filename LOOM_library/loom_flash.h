@@ -132,17 +132,6 @@ void setup_flash_config()
 				configuration.config_wifi.wifi_mode    = DEFAULT_MODE;         // WiFi mode to start in (AP_MODE, WPA_CLIENT_MODE, WEP_CLIENT_MODE)
 				configuration.config_wifi.request_settings = REQUEST_SETTINGS; // Bool of whether or not to request new channel settings on startup
 			#endif
-			
-
-
-
-			// #if enable_hub_scripts == 1
-			// 	configuration.config_scripts.num_scripts = 0; // If nothing was in flash, there are no saved scripts
-			// #endif
-
-
-
-
 
 
 			// Add any other behavior/calibration wrapped in an '#ifdef is_something' preprocessor directive HERE

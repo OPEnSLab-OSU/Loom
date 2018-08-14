@@ -176,7 +176,7 @@ void setAlarmFunction() {
 	MIN = (now.minute() + WakePeriodMin) % 60; // wrap-around using modulo every 60 sec
 	HR  = (now.hour() + ((now.minute() + WakePeriodMin) / 60)) % 24; // quotient of now.min+periodMin added to now.hr, wraparound every 24hrs
 	
-	LOOM_DEBUG_println4("Resetting Alarm 1 for: ", HR, ":", MIN);
+	LOOM_DEBUG_Println4("Resetting Alarm 1 for: ", HR, ":", MIN);
 
 	//Set alarm1
 	rtc_inst.setAlarm(ALM1_MATCH_HOURS, MIN, HR, 0);   //set your wake-up time here

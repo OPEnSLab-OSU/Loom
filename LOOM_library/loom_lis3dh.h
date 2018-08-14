@@ -89,12 +89,12 @@ void package_lis3dh(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(addressString, "%s%s", packet_header_string, "/lis3dh_accel_x");
-	bndl->add(addressString).add(state_lis3dh.accel_x);
-	sprintf(addressString, "%s%s", packet_header_string, "/lis3dh_accel_y");
-	bndl->add(addressString).add(state_lis3dh.accel_y);
-	sprintf(addressString, "%s%s", packet_header_string, "/lis3dh_accel_z");
-	bndl->add(addressString).add(state_lis3dh.accel_z);
+	sprintf(address_string, "%s%s", packet_header_string, "/lis3dh_accel_x");
+	bndl->add(address_string).add(state_lis3dh.accel_x);
+	sprintf(address_string, "%s%s", packet_header_string, "/lis3dh_accel_y");
+	bndl->add(address_string).add(state_lis3dh.accel_y);
+	sprintf(address_string, "%s%s", packet_header_string, "/lis3dh_accel_z");
+	bndl->add(address_string).add(state_lis3dh.accel_z);
 }
 
 

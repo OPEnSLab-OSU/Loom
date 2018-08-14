@@ -102,15 +102,15 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		if (msg.dispatch("/saveDynamicScripts", save_dynamic_scripts, 	addrOffset) ) return;
 	#endif
 
-
-	// Set the instance number of this device
-	if (msg.dispatch("/SetID", 					set_instance_num, 		addrOffset) ) return;
 	// Save the configuration struct as it is currently
 	if (msg.dispatch("/SaveConfig", 			save_config, 			addrOffset) ) return;
-	// Set the channel of this device
-	if (msg.dispatch("/ChangeChannel", 			set_channel, 			addrOffset) ) return;
 
-
+	#if advanced_interdev_comm == 1
+		// Set the instance number of this device
+		if (msg.dispatch("/SetID", 					set_instance_num, 		addrOffset) ) return;
+		// Set the channel of this device
+		if (msg.dispatch("/SetChannel", 			set_channel, 			addrOffset) ) return;
+	#endif
 
 
 
@@ -125,9 +125,11 @@ void msg_router(OSCMessage &msg, int addrOffset)
 
 	// If a hub device has polled for devices on the network
 	//     This might be merged with the above dispatch later
-	if (msg.dispatch("/DeviceChannelPoll", 	respond_to_device_poll, 	addrOffset) ) return;	// node receiving from hub 
+	#if advanced_interdev_comm == 1
+		if (msg.dispatch("/DeviceChannelPoll", 	respond_to_device_poll, 	addrOffset) ) return;	// node receiving from hub 
+	#endif
 
-	#if hub_node_type == 0
+	#if (hub_node_type == 0) && (advanced_interdev_comm == 1)
 		if (msg.dispatch("/DevicePollResponse", update_known_devices, 		addrOffset) ) return;	// hub receiving from node 
 	#endif
 
@@ -135,8 +137,9 @@ void msg_router(OSCMessage &msg, int addrOffset)
 			// where # is the number of characters taken up by the device name, number, and '/'' 
 
 
-
-	LOOM_DEBUG_Println3("No Message Routing Match Found for: '", buffer, "'");
+	#if LOOM_DEBUG == 1
+		LOOM_DEBUG_Println3("No Message Routing Match Found for: '", buffer, "'");
+	#endif
 }
 
 

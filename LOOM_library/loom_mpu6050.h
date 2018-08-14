@@ -359,9 +359,9 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[])
 //
 void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
-	char addressString[255];    // Declare address string buffer
+	char address_string[255];    // Declare address string buffer
 	if (port != NULL) {
-		sprintf(addressString, "%s%s%d%s", packet_header_string, "/port", port, "/mpu6050/data");
+		sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/mpu6050/data");
 	} 
 	// Messages want an OSC address as first argument
 	// Compile bundle
@@ -377,28 +377,28 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	
 	// Assemble UDP Packet
 	// IP1 IP2 Yaw Pitch Roll aX aY aZ gX gY gZ vBatt
-	sprintf(addressString, "%s%s", packet_header_string, "/yaw");
-	bndl->add(addressString).add((float)(ypr[0] * 180 / M_PI));
-	sprintf(addressString, "%s%s", packet_header_string, "/roll");
-	bndl->add(addressString).add((float)(ypr[1] * 180 / M_PI));
-	sprintf(addressString, "%s%s", packet_header_string, "/pitch");
-	bndl->add(addressString).add((float)(ypr[2] * 180 / M_PI));
+	sprintf(address_string, "%s%s", packet_header_string, "/yaw");
+	bndl->add(address_string).add((float)(ypr[0] * 180 / M_PI));
+	sprintf(address_string, "%s%s", packet_header_string, "/roll");
+	bndl->add(address_string).add((float)(ypr[1] * 180 / M_PI));
+	sprintf(address_string, "%s%s", packet_header_string, "/pitch");
+	bndl->add(address_string).add((float)(ypr[2] * 180 / M_PI));
 	
-	sprintf(addressString, "%s%s", packet_header_string, "/accelX");
-	bndl->add(addressString).add(axf);
-	sprintf(addressString, "%s%s", packet_header_string, "/accelY");
-	bndl->add(addressString).add(ayf);
-	sprintf(addressString, "%s%s", packet_header_string, "/accelZ");
-	bndl->add(addressString).add(azf);
-	sprintf(addressString, "%s%s", packet_header_string, "/gyroX");
-	bndl->add(addressString).add((float)gx / 16000);
-	sprintf(addressString, "%s%s", packet_header_string, "/gyroY");
-	bndl->add(addressString).add((float)gy / 16000);
-	sprintf(addressString, "%s%s", packet_header_string, "/gyroZ");
-	bndl->add(addressString).add((float)gz / 16000);
+	sprintf(address_string, "%s%s", packet_header_string, "/accelX");
+	bndl->add(address_string).add(axf);
+	sprintf(address_string, "%s%s", packet_header_string, "/accelY");
+	bndl->add(address_string).add(ayf);
+	sprintf(address_string, "%s%s", packet_header_string, "/accelZ");
+	bndl->add(address_string).add(azf);
+	sprintf(address_string, "%s%s", packet_header_string, "/gyroX");
+	bndl->add(address_string).add((float)gx / 16000);
+	sprintf(address_string, "%s%s", packet_header_string, "/gyroY");
+	bndl->add(address_string).add((float)gy / 16000);
+	sprintf(address_string, "%s%s", packet_header_string, "/gyroZ");
+	bndl->add(address_string).add((float)gz / 16000);
 	
-	sprintf(addressString, "%s%s", packet_header_string, "/freefall");
-	bndl->add(addressString).add(freefall);
+	sprintf(address_string, "%s%s", packet_header_string, "/freefall");
+	bndl->add(address_string).add(freefall);
 }
 
 

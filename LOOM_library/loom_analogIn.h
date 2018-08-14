@@ -33,7 +33,9 @@ void     package_analog(OSCBundle *bndl, char packet_header_string[]);
 // ================================================================
 
 void setup_analog() {
-	analogReadResolution(analog_resolution);
+	#ifdef is_m0
+		analogReadResolution(analog_resolution);
+	#endif
 }
 
 
@@ -106,19 +108,19 @@ void measure_analog()
 //
 void package_analog(OSCBundle *bndl, char packet_header_string[])
 { 
-	char addressString[255];
+	char address_string[255];
 	// Get readings from enabled ports           
 	#if (num_analog > 0) 
-		sprintf(addressString, "%s%s", packet_header_string, "/port0");
-		bndl->add(addressString).add((int32_t)state_analog.a0);
+		sprintf(address_string, "%s%s", packet_header_string, "/port0");
+		bndl->add(address_string).add((int32_t)state_analog.a0);
 	#endif
 	#if (num_analog > 1)
-		sprintf(addressString, "%s%s", packet_header_string, "/port1");
-		bndl->add(addressString).add((int32_t)state_analog.a1);
+		sprintf(address_string, "%s%s", packet_header_string, "/port1");
+		bndl->add(address_string).add((int32_t)state_analog.a1);
 	#endif
 	#if (num_analog > 2)
-		sprintf(addressString, "%s%s", packet_header_string, "/port2");
-		bndl->add(addressString).add((int32_t)state_analog.a2);
+		sprintf(address_string, "%s%s", packet_header_string, "/port2");
+		bndl->add(address_string).add((int32_t)state_analog.a2);
 	#endif
 }
 

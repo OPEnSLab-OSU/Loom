@@ -4,7 +4,7 @@
 #include <RH_RF95.h>
 #include <RHReliableDatagram.h>
 // #include <string.h>
-#include <Ethernet2.h>
+// #include <Ethernet2.h>
 
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
@@ -30,7 +30,11 @@
 // ================================================================
 
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
-RHReliableDatagram manager(rf95, LORA_HUB_ADDRESS);
+#if hub_node_type == 0
+	RHReliableDatagram manager(rf95, LORA_HUB_ADDRESS);
+#else
+	RHReliableDatagram manager(rf95, LORA_NODE_ADDRESS);
+#endif
 
 
 // ================================================================ 
@@ -98,8 +102,6 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 //
 // @param bndl  A pointer to the OSCBundle to be filled
 //
-// String data[NUM_FIELDS];
-
 void lora_receive_bundle(OSCBundle *bndl)
 {
 	if (manager.available()) {
@@ -112,7 +114,7 @@ void lora_receive_bundle(OSCBundle *bndl)
 			// This is done just in case the compressed string
 			// uncompresses to more than 251 characters
 			char larger_buf[512];
-			strcpy(larger_buf, (const char*)buf)
+			strcpy(larger_buf, (const char*)buf);
 			convert_OSC_string_to_bundle((char*)larger_buf, bndl); 
 
 			// convert_OSC_string_to_bundle((char*)buf, bndl); 

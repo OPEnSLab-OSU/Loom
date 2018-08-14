@@ -105,10 +105,10 @@ void package_<module>(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(addressString, "%s%s", packet_header_string, "/module_example0");
-	bndl->add(addressString).add(state_<module>.array_example[0]);
-	sprintf(addressString, "%s%s", packet_header_string, "/module_example1");
-	bndl->add(addressString ).add(state_<module>.array_example[1]);
+	sprintf(address_string, "%s%s", packet_header_string, "/module_example0");
+	bndl->add(address_string).add(state_<module>.array_example[0]);
+	sprintf(address_string, "%s%s", packet_header_string, "/module_example1");
+	bndl->add(address_string ).add(state_<module>.array_example[1]);
 }
 
 

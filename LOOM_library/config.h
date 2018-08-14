@@ -22,7 +22,7 @@
 
 // --- Device Identification --- 
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       4		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
 #define CHANNEL          7		// Channel to use. Set to 1-8 for channels A-H, respectively. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request channel settings from Max Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
@@ -34,7 +34,7 @@
 							//   Device will freeze if this in abled and device does not get plugged into Serial
 							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
-#define dynamic_serial_output 1 // 0 is standard operation 
+#define dynamic_serial_output 0 // 0 is standard operation 
 								// 1 Allows serial monitor to re-continue even after device has been unplugged from USB then plugged back in
 								//   - Note that you need to reopen the Serial monitor if it was open before the device was plugged back in
 								//   - Note that you probably want to have the serial monitor open before uploading to the device, else you may miss 
@@ -42,7 +42,7 @@
 								// These only make a difference if LOOM_DEBUG is enabled
 
 // --- Enabled Communication Platform --- 
-#define is_wifi       1		// 1 to enable WiFi
+#define is_wifi       0		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
@@ -74,6 +74,13 @@
 // --- I2C Sensors ---
 // Multiplexer may override these settings
 #define is_tsl2591         0	// Lux Sensor
+#define is_tsl2561         0	// Lux Sensor
+#if is_tsl2561 == 1
+	#define tsl2561_res 2 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
+	#define is_tsl2561_low   1 
+	#define is_tsl2561_float 1
+	#define is_tsl2561_high  1
+#endif
 #define is_fxos8700        0	// Accelerometer / Magnetometer
 #define is_fxas21002       0	// Gyroscope
 #define is_zxgesturesensor 0	// ZX_Distance Sensor
@@ -82,6 +89,10 @@
 #define is_mpu6050         0	// Accelerometer / Gyroscope
 #define is_lis3dh          0	// Accelerometer
 #define is_ms5803          0	// Atmospheric Pressure / Temperature Sensor
+#define is_hx711           0    // Load Cell
+#if is_hx711 == 1
+	#define hx711_calibration 961.275
+#endif
 
 // --- Button Options ---
 #define is_button 		1	// 1 to enable button
@@ -90,9 +101,10 @@
 							// relay shield if pin 10 is used for relay
 
 // --- Prebuilt Devices ---
-#define is_ishield     0	// 1 to specify using Ishield (should enable only wifi as communication platform)
-#define is_multiplexer 1	// 1 if tca9548a Multiplexer is being used. (Further customization in advanced options)
-#define is_sapflow     0
+#define is_ishield      0	// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_multiplexer  0	// 1 if tca9548a Multiplexer is being used. (Further customization in advanced options)
+#define is_sapflow      0 
+#define is_evaporimeter 1
 
 
 // --- WiFi Settings ---
@@ -106,8 +118,10 @@
 // --- Scripts ---
 #define enable_hub_scripts 0
 
-// --- 
 
+// --- Advanced Interdev Communication ---
+// Used for Max-like functionality
+#define advanced_interdev_comm 0
 
 // ================================================================
 // ================================================================ 
@@ -128,6 +142,18 @@
 
 
 // ================================================================
+// ===                       RTC OPTIONS                        === 
+// ================================================================
+// --- RTC Options ---
+#if is_rtc == 1
+	// Select only one of the below options
+	#define is_rtc3231 0 	// RTC DS 3231 Featherwing
+	#define is_rtc8523 1	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
+#endif
+
+
+
+// ================================================================
 // ===                PREBUILT DEVICE OPTIONS                   === 
 // ================================================================
 // These may override setting above to ensure all features of device are enabled
@@ -139,6 +165,7 @@
 	
 	// 1 to enable supported sensor type
 	#define is_tsl2591         1	// Lux Sensor
+	#define is_tsl2561         1	// Lux Sensor
 	#define is_fxos8700        1	// Accelerometer / Magnetometer
 	#define is_fxas21002       1	// Gyroscope
 	#define is_zxgesturesensor 1	// ZX_Distance Sensor
@@ -166,7 +193,7 @@
 
 
 // --- Sapflowmeter Options ---
-#if is_sapflow
+#if is_sapflow == 1
 	// #define hub_node_type 0       // 0: hub, 1: node
 	#define is_lora           1      // enable LoRa
 	#define is_rtc            1
@@ -184,6 +211,34 @@
 	#endif
 #endif 
 
+// --- Evaporimeter Options --- 
+#if is_evaporimeter == 1
+
+	#define is_lora 1
+
+	// Lux Sensor
+	#define is_tsl2561 1
+		#define is_tsl2561_low   1 
+		#define is_tsl2561_float 1
+		#define is_tsl2561_high  0
+
+	// Load Cell
+	#define is_hx711 0 
+	#if is_hx711 == 1
+		#define hx711_calibration 961.275 // grams
+	#endif
+
+	// Temp / Humidity
+	#define is_sht31d 1
+
+	#define is_rtc 0
+	#if is_rtc == 1
+		#define is_rtc3231 1
+		#define is_rtc8523 0
+	#endif
+
+	#define is_button  0
+#endif
 
 // ================================================================ 
 // ===             COMMUNICATION PLATFORM OPTIONS               === 
@@ -237,7 +292,7 @@
 // ================================================================
 
 // --- Hub Options ---
-#if hub_node_type == 0
+#if (hub_node_type == 0) && ((is_wifi == 1) || (is_ethernet == 1) || (is_fona == 1))
 	#define is_pushingbox 1 // only if Ethernet, WiFi, or cellular
 
 	#define device_poll_refresh 0  // Seconds between re-searching for devices on the network
@@ -288,12 +343,6 @@
 	#define sd_save_time_format 3
 #endif
 
-// --- RTC Options ---
-#if is_rtc == 1
-	// Select only one of the below options
-	#define is_rtc3231 0 	// RTC DS 3231 Featherwing
-	#define is_rtc8523 1	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
-#endif
 
 
 // ================================================================
