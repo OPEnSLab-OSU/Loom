@@ -3,7 +3,7 @@
 // ================================================================
 
 void msg_router(OSCMessage &msg, int addrOffset);       
-void common_msg_router(OSCMessage &msg, int addrOffset);       
+// void common_msg_router(OSCMessage &msg, int addrOffset);       
 
 // ================================================================ 
 // ===               CUSTOM FUNCTION PROTOTYPES                 === 

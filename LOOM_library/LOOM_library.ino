@@ -31,7 +31,7 @@ void setup()
 void loop() 
 {
 	OSCBundle bndl, send_bndl;
-
+	
 	receive_bundle(&bndl, WIFI);
 	process_bundle(&bndl);
 	measure_sensors();
