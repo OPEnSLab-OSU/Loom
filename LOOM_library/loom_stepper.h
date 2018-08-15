@@ -99,15 +99,15 @@ void set_stepper_steps(int motor_choice, int stepper_direction, int steps, int s
 // 
 void handle_stepper_msg(OSCMessage &msg)
 {
-	int motor = msg.getInt(0);
-	int stepper_direction = msg.getInt(1);
-	int degree = msg.getInt(2);
-	int stepper_speed = msg.getInt(3);
+	int motor     = msg.getInt(0);
+	int direction = msg.getInt(1);
+	int steps     = msg.getInt(2);
+	int speed     = msg.getInt(3);
 
 	LOOM_DEBUG_Print("Received message to move the motor ");
-	LOOM_DEBUG_Println2(degree, " degrees");
+	LOOM_DEBUG_Println2(steps, " stepss");
 
-	set_stepper_steps(motor,stepper_direction,degree,stepper_speed);
+	set_stepper_steps(motor,direction,steps,speed);
 	
 	LOOM_DEBUG_Println("Processed stepper request");
 

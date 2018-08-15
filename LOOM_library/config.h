@@ -43,10 +43,10 @@
 
 // --- Enabled Communication Platform --- 
 #define is_wifi       0		// 1 to enable WiFi
-#define is_lora       1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
-#define is_fona       1		// 1 to enable cellular via Fona (808)
+#define is_fona       0		// 1 to enable cellular via Fona (808)
 #define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
 // --- Data Logging Platforms ---
@@ -120,8 +120,9 @@
 
 
 // --- Advanced Interdev Communication ---
-// Used for Max-like functionality
-#define advanced_interdev_comm 0
+#define advanced_interdev_comm   0	// Used for Max-like functionality
+#define build_actuator_cmd_funcs 1  // 1 to include file to make commands for Loom actuators
+
 
 // ================================================================
 // ================================================================ 
@@ -147,8 +148,8 @@
 // --- RTC Options ---
 #if is_rtc == 1
 	// Select only one of the below options
-	#define is_rtc3231 0 	// RTC DS 3231 Featherwing
-	#define is_rtc8523 1	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
+	#define is_rtc3231 1 	// RTC DS 3231 Featherwing
+	#define is_rtc8523 0	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
 #endif
 
 
