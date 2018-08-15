@@ -22,7 +22,7 @@
 
 // --- Device Identification --- 
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define FAMILY_NUM       4		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
 #define CHANNEL          7		// Channel to use. Set to 1-8 for channels A-H, respectively. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request channel settings from Max Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
@@ -76,7 +76,7 @@
 #define is_tsl2591         0	// Lux Sensor
 #define is_tsl2561         0	// Lux Sensor
 #if is_tsl2561 == 1
-	#define tsl2561_res 2 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
+	#define tsl2561_res 3 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
 	#define is_tsl2561_low   1 
 	#define is_tsl2561_float 1
 	#define is_tsl2561_high  1
@@ -121,7 +121,7 @@
 
 // --- Advanced Interdev Communication ---
 #define advanced_interdev_comm   0	// Used for Max-like functionality
-#define build_actuator_cmd_funcs 1  // 1 to include file to make commands for Loom actuators
+#define build_actuator_cmd_funcs 0  // 1 to include file to make commands for Loom actuators
 
 
 // ================================================================
@@ -141,6 +141,9 @@
 	#define INIT_PORT 9443	// Initial device UDP port (normally 1-8 when using channels)
 #endif
 
+#if is_wifi == 1
+	#define advanced_interdev_comm 1  // Enable for full Max support 
+#endif
 
 // ================================================================
 // ===                       RTC OPTIONS                        === 

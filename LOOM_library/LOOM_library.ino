@@ -30,7 +30,7 @@ void setup()
 // ================================================================ 
 void loop() 
 {
-	// OSCBundle bndl;
+	OSCBundle bndl, send_bndl;
 
 
 	// bndl.empty();
@@ -54,12 +54,12 @@ void loop()
 
 
 	
-// 	// receive_bundle(&bndl, LORA);
-// 	// process_bundle(&bndl);
+	receive_bundle(&bndl, WIFI);
+	process_bundle(&bndl);
 // 	// /LOOM1/Evap7/vbat,f1082848768 %sht31d_temp,f1102572024 %sht31d_humid,f1115684704 %tsl2561_ir_low,i1506 %tsl2561_full_low,i4438 %tsl2561_ir_float,i168 %tsl2561_full_float,i426
-// 	measure_sensors();
+	measure_sensors();
 // // 
-// 	package_data(&send_bndl);
+	package_data(&send_bndl);
 
 // 	// send_bndl.add("/test").add("data");
 
@@ -71,7 +71,7 @@ void loop()
 // 	// print_array(vals, 8, 2);
 // 	// LOOM_DEBUG_Println();
 
-// 	send_bundle(&send_bndl, LORA);
+	send_bundle(&send_bndl, WIFI);
 // 	delay(5000);
 
 	additional_loop_checks();

@@ -9,7 +9,6 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define num_steppers 2
 
 
 // ================================================================ 
@@ -111,14 +110,17 @@ void handle_stepper_msg(OSCMessage &msg)
 	
 	LOOM_DEBUG_Println("Processed stepper request");
 
-	// Replay that stepper is done
+	// Reply that stepper is done
 	OSCBundle bndl;
 	bndl.empty();
-	char address_string[255];
+	char address_string[80];
 	sprintf(address_string, "%s%s", global_packet_header_string, "/StepperDone");
 	// sprintf(address_string, "%s%s", configuration.packet_header_string, "/StepperDone");
 
 	bndl.add(address_string);
+
+	// delay(5000);
+
 	#if is_wifi == 1
 		wifi_send_bundle(&bndl);
 	#endif
