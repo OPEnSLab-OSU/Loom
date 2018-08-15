@@ -101,7 +101,7 @@
 							// relay shield if pin 10 is used for relay
 
 // --- Prebuilt Devices ---
-#define is_ishield      0	// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_ishield      1	// 1 to specify using Ishield (should enable only wifi as communication platform)
 #define is_multiplexer  0	// 1 if tca9548a Multiplexer is being used. (Further customization in advanced options)
 #define is_sapflow      0 
 #define is_evaporimeter 0
