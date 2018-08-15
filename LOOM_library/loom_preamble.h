@@ -185,6 +185,9 @@ int    get_bundle_bytes(OSCBundle *bndl);
 // ===                  INCLUDE DEVICE FILES                    === 
 // ================================================================
 
+#if build_actuator_cmd_funcs == 1
+	#include "loom_create_device_commands.h"
+#endif
 
 #if is_fona == 1
 	#include "loom_fona.h"

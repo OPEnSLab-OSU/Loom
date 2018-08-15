@@ -30,13 +30,17 @@ void setup()
 // ================================================================ 
 void loop() 
 {
-	OSCBundle bndl, send_bndl; 
+	// OSCBundle bndl;
 
-	bndl.empty();
-	bndl.add("/header").add("test");
-	log_bundle(&bndl, PUSHINGBOX);
 
-	delay(20000);
+	// bndl.empty();
+	// bndl.add("/header").add("key").add(your_c_string);
+	// log_bundle(&bndl, PUSHINGBOX);
+	// LOOM_DEBUG_Println2("Time: ", get_timestring());
+	// delay(5000);
+
+	// additional_loop_checks();
+
 
 	// String key_values[10] = {"key1","-2","key2","0","key3","1.234","key4","42","key5","3.9567"};
 	// convert_key_value_array_to_bundle(key_values, &bndl, "test/packet/header", 10, SINGLEMSG);
