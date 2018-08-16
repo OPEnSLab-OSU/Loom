@@ -498,3 +498,105 @@ void additional_loop_checks()
 
 
 
+// Standby is lower power than idle
+enum SleepMode { IDLE, STANDBY, SLEEPYDOG };
+enum TimeUnits { MILLIS, SEC, MIN };
+
+
+
+void sleep_for(int amount, TimeUnits units, SleepMode mode) 
+{
+
+
+	int duration; // length of time to sleep in milli seconds
+	switch (units) {
+		case MILLIS: duration = amount;			break;
+		case SEC:    duration = 1000  * amount; break;
+		case MIN:	 duration = 60000 * amount; break;
+	}
+
+	// #if LOOM_DEBUG == 1
+	// 	LOOM_DEBUG_Println("LOOM_DEBUG is enabled, sleeps will be replaced with delay");
+	// 	delay(duration);
+	// 	return;
+	// #endif
+
+	switch(mode) {
+		case IDLE: {
+			LOOM_DEBUG_Println("Sleep in 'Idle' mode");
+		}
+
+		case STANDBY: {
+			LOOM_DEBUG_Println("Sleep in 'Standby' mode");
+		}
+
+		case SLEEPYDOG: {
+			LOOM_DEBUG_Println("Sleep in 'Sleepydog' mode");
+
+			// calculate number of iterations of 16s sleep
+
+			int iterations = duration / 16000;
+			int remainder  = duration % 16000;
+			int total = 0;
+
+			LOOM_DEBUG_Println3("Will sleep for a total of: ", duration, " milliseconds");
+			LOOM_DEBUG_Print3("Using ", iterations, " blocks of 16 seconds");
+			LOOM_DEBUG_Println3(" and ", remainder, " milliseconds");
+
+			#if LOOM_DEBUG == 1
+				USBDevice.detach();
+			#endif
+
+			LOOM_DEBUG_Println("Going to sleep in 16 second blocks");
+			for (int i = 0; i < iterations; i++) {
+				int sleepMS = Watchdog.sleep(duration);
+				LOOM_DEBUG_Println3("Just slept for: ", sleepMS, " milliseconds");
+				total += sleepMS;
+				LOOM_DEBUG_Println3("Slept a total of: ", total, " milliseconds");
+
+				digitalWrite(led, HIGH);  
+				delay(100);                       
+				digitalWrite(led, LOW);   
+			}
+
+			if (remainder > 0) {
+				LOOM_DEBUG_Println3("Sleeping the remaining ", remainder, " milliseconds");
+				int sleepMS = Watchdog.sleep(remainder);
+			}
+
+			LOOM_DEBUG_Println3("Done sleeping a total of: ", total, " milliseconds");
+
+			for (int i = 0; i < 5; i++) {
+				digitalWrite(led, HIGH);
+				delay(40);
+				digitalWrite(led, LOW);
+				delay(30);
+			}
+ 
+ 			#if LOOM_DEBUG == 1
+				USBDevice.attach();
+			#endif
+		}
+
+	}
+}
+
+void sleep_until(SleepMode mode) 
+{
+
+}
+
+// Should take an array of pins that will be used
+void sleep_until_interrupt(int interrupts, SleepMode mode)
+{
+
+}
+
+
+
+
+
+
+
+
+

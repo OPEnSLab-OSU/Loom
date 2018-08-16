@@ -30,14 +30,30 @@ void setup()
 // ================================================================ 
 void loop() 
 {
-	OSCBundle bndl, send_bndl;
-	
-	receive_bundle(&bndl, WIFI);
-	process_bundle(&bndl);
-	measure_sensors();
-	package_data(&send_bndl);
-	send_bundle(&send_bndl, WIFI);
-	additional_loop_checks();
+	// OSCBundle bndl, send_bndl;
+
+	// receive_bundle(&bndl, WIFI);
+	// process_bundle(&bndl);
+	// measure_sensors();
+	// package_data(&send_bndl);
+	// send_bundle(&send_bndl, WIFI);
+	// additional_loop_checks();
+	digitalWrite(led, HIGH);
+	LOOM_DEBUG_Println("\nIn Main Loop");
+	delay(5000);
+	LOOM_DEBUG_Println("Still in main loop");
+	delay(1000);
+	LOOM_DEBUG_Println("About to sleep");
+	digitalWrite(led, LOW);
+	sleep_for(6, SEC, SLEEPYDOG);
+
+
+	for (int i = 0; i < 3; i++) {
+		digitalWrite(led, HIGH);
+		delay(500);
+		digitalWrite(led, LOW);
+		delay(300);
+	}
 	
 } // End loop section
 

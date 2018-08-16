@@ -38,6 +38,9 @@ void Loom_begin()
 
 		Serial.println("Initialized Serial!");
 	#endif
+
+	LOOM_DEBUG_Println("Delaying 5 seconds");
+	delay(5000);
 	
 	#if hub_node_type == 0
 		LOOM_DEBUG_Println("Running as Hub");
@@ -131,8 +134,8 @@ void Loom_begin()
 
 	// Read configuration from flash, or write config.h settings 
 	// if no settings are already saved
-	setup_flash_config();
-
+	// setup_flash_config();
+LOOM_DEBUG_Println("Flash currently disabled for testing!");
 
 	// Communication Platform specific setups
 	// after flash setup as network info may be saved
@@ -351,7 +354,7 @@ void flash_led()
 		digitalWrite(led, LOW);   
 		delay(30);  
 	} 
-	digitalWrite(led, HIGH);
+	// digitalWrite(led, HIGH);
 }
 
 
