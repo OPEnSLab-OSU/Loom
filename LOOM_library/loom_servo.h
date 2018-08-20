@@ -123,7 +123,11 @@ void handle_servo_msg(OSCMessage &msg)
 	LOOM_DEBUG_Print(" with degree ");
 	LOOM_DEBUG_Println(set_degree);
 	
-	set_servo_degree(set_degree, servo_num);
+	if (servo_num < num_servos) {
+		set_servo_degree(set_degree, servo_num);
+	} else {
+		LOOM_DEBUG_Println("Servo number out of range");
+	}
 }
 
 

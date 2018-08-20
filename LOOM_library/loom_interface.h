@@ -44,7 +44,7 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 			wifi_receive_bundle(bndl, &UdpSubnet, configuration.config_wifi.subnetPort, "Subnet"); 
 			wifi_receive_bundle(bndl, &UdpGlobal, GLOBAL_PORT, "Global");
 
-// Add if to not check global if it is same as subnet
+		// Add if to not check global if it is same as subnet
 
 			// wifi_receive_bundle(bndl, &Udp, SUBNET_PORT);
 			// wifi_receive_bundle(bndl, &Udp, configuration.config_wifi.subnetPort); 
@@ -500,20 +500,34 @@ void additional_loop_checks()
 
 // Standby is lower power than idle
 enum SleepMode { IDLE, STANDBY, SLEEPYDOG };
-enum TimeUnits { MILLIS, SEC, MIN };
+enum TimeUnits { MILLIS, SECONDS, MINUTES };
+
+void setRTCAlarm_Relative(int hours, int minutes, int seconds);
+
+int milli_duration(int amount, TimeUnits units) {
+	switch (units) {
+		case MILLIS:  return amount;		 break;
+		case SECONDS: return 1000  * amount; break;
+		case MINUTES: return 60000 * amount; break;
+		default:      return 0;
+	}
+}
 
 
+void print_DateTime(DateTime time) 
+{
+	#if LOOM_DEBUG == 1
+		Serial.print(time.year(), DEC);   Serial.print('/');
+		Serial.print(time.month(), DEC);  Serial.print('/');
+		Serial.print(time.day(), DEC);    Serial.print(' ');
+		Serial.print(time.hour(), DEC);   Serial.print(':');
+		Serial.print(time.minute(), DEC); Serial.print(':');
+		Serial.print(time.second(), DEC); Serial.println();
+	#endif
+}
 
 void sleep_for(int amount, TimeUnits units, SleepMode mode) 
 {
-
-
-	int duration; // length of time to sleep in milli seconds
-	switch (units) {
-		case MILLIS: duration = amount;			break;
-		case SEC:    duration = 1000  * amount; break;
-		case MIN:	 duration = 60000 * amount; break;
-	}
 
 	// #if LOOM_DEBUG == 1
 	// 	LOOM_DEBUG_Println("LOOM_DEBUG is enabled, sleeps will be replaced with delay");
@@ -524,13 +538,36 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 	switch(mode) {
 		case IDLE: {
 			LOOM_DEBUG_Println("Sleep in 'Idle' mode");
+			
+			// Get current time from RTC
+
+
+			// Calculate duration into the future
+
+			// Sleep 
+
+			// Return from sleep
+
+			break;
 		}
 
 		case STANDBY: {
 			LOOM_DEBUG_Println("Sleep in 'Standby' mode");
+
+			switch (units) {
+				case MILLIS:  setRTCAlarm_Relative(0, 0, amount/1000); break; 
+				case SECONDS: setRTCAlarm_Relative(0, 0, amount);      break; 
+				case MINUTES: setRTCAlarm_Relative(0, amount, 0);      break; 
+			}
+		    break;
 		}
 
+	#if is_lora != 1
 		case SLEEPYDOG: {
+			int duration = milli_duration(amount, units);
+
+			// Checking millis might give higher precision
+
 			LOOM_DEBUG_Println("Sleep in 'Sleepydog' mode");
 
 			// calculate number of iterations of 16s sleep
@@ -576,27 +613,166 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
  			#if LOOM_DEBUG == 1
 				USBDevice.attach();
 			#endif
+
+			break;
+		}
+	#endif // of '#if is_lora != 1'
+
+	}
+}
+
+void sleep_until_time(SleepMode mode) 
+{
+	switch(mode) {
+		case IDLE: {
+			break;
+		}
+
+		case STANDBY: {
+			// DateTime now = rtc_inst.now();
+
+			// Create futue DateTime class with constructor
+			// Takes Days, Hours, Minutes, Seconds
+		    // DateTime future(now + TimeSpan(0,4,3,30));
+			break;
+		}
+
+		case SLEEPYDOG: {
+			// Check compile time and millis?
+			//  would only work the first time...
+
+			// Could work if using SD wing RTC 
+			break;
 		}
 
 	}
 }
 
-void sleep_until(SleepMode mode) 
+
+
+// void sleep_for_repeating(int amount, TimeUnits units, SleepMode mode)
+// {
+// 	switch(mode) {
+// 	case IDLE: {
+
+// 	}
+
+// 	case STANDBY: {
+// 		// Set interrupt pins
+// 		pinMode(wakeUpPin, INPUT_PULLUP);
+// 	    attachInterrupt(digitalPinToInterrupt(wakeUpPin), wakeUp, RISING);
+
+// 		// Go to sleep
+// 		LowPower.standby();
+
+// 		flash_led(4, 100, 400);
+// 	}
+
+// 	case SLEEPYDOG: {
+// 	}
+// }
+
+
+// const int wakeUpPin = 11;
+// void wakeUp();
+
+// Should take an array of pins that will be used ?
+// void sleep_until_interrupt(int interrupts, SleepMode mode)
+// {
+// 	switch(mode) {
+// 		case IDLE: {
+// 			// Set interrupt pins
+// 			pinMode(wakeUpPin, INPUT_PULLUP);
+// 		    attachInterrupt(digitalPinToInterrupt(wakeUpPin), wakeUp, LOW);
+
+// 		    // Turn of LED
+//     		digitalWrite(led, LOW);
+//     		delay(200);
+//     		digitalWrite(led, HIGH);
+//     		delay(200);
+//     		digitalWrite(led, LOW);
+
+// 			// Go to sleep
+// 			LowPower.standby();
+
+// 			flash_led(4, 100, 400);
+
+// 		}
+
+// 		case STANDBY: {
+// 		}
+
+// 		case SLEEPYDOG: {
+// 		}
+
+// 	}
+// }
+
+
+void setRTCAlarm_Relative(int hours, int minutes, int seconds)
 {
+	// // Calculate new time
+	// int current_min = (now.minute() + minutes) % 60; // wrap-around using modulo every 60 sec
+	// int current_hr  = (now.hour() + ((now.minute() + minutes) / 60)) % 24; // quotient of now.min+periodMin added to now.hr, wraparound every 24hrs
+	
+	LOOM_DEBUG_Println("Current Time:"); //Serial.print(HR); Serial.print(":"); Serial.println(MIN);
+	print_DateTime( rtc_inst.now() );
+
+	DateTime future( rtc_inst.now() + TimeSpan(0,hours,minutes,seconds) );
+
+	LOOM_DEBUG_Println("Resetting Alarm 1 for:"); //Serial.print(HR); Serial.print(":"); Serial.println(MIN);
+	print_DateTime(future);
+
+	//Set alarm1
+	// rtc_inst.setAlarm(ALM1_MATCH_HOURS, MIN, HR, 0);   //set your wake-up time here
+    // void setAlarm(Ds3231_ALARM_TYPES_t alarmType, byte seconds, byte minutes, byte hours, 0);
+	rtc_inst.setAlarm(ALM1_MATCH_HOURS, future.second(), future.minute(), future.hour(), 0); 
+    								// not sure if this 0 is correct
+// rtc_inst.alarmInterrupt(1, true);
 
 }
 
-// Should take an array of pins that will be used
-void sleep_until_interrupt(int interrupts, SleepMode mode)
-{
-
-}
 
 
 
 
 
 
+// attachInterrupt(digitalPinToInterrupt(wakeUpPin), wakeUp, LOW);
+// detachInterrupt(digitalPinToInterrupt(wakeUpPin));
+
+
+// These 4 might be mergable later
+// This is called when the device wakes up from low power
+// void wakeUp()
+// {
+// 	// Must detach interrupt within ISR on M0
+// 	detachInterrupt(digitalPinToInterrupt(wakeUpPin)); 
+
+// 	// Turn on LED
+// 	digitalWrite(led, HIGH);
+
+// }
+
+// void fromIdle_WakeUp()
+// {
+// 	flash_led(7, 100, 30);
+// }
+
+// void fromIdle_IntWakeUp()
+// {
+// 	flash_led(7, 100, 30);
+// }
+
+// void fromStandby_WakeUp()
+// {
+// 	flash_led(7, 100, 30);
+// }
+
+// void fromStandby_IntWakeUp()
+// {
+// 	flash_led(7, 100, 30);
+// }
 
 
 

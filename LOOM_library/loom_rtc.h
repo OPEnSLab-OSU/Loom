@@ -12,7 +12,9 @@
 // ================================================================
 
 
-const byte wakeUpPin = 11;
+const byte wakeUpPin = 9;  // shouldn't be hardcoded
+
+
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 
@@ -44,6 +46,9 @@ struct state_rtc_t state_rtc;
 	RTC_PCF8523 rtc_inst;
 #endif
 
+
+	// Some of these should be deleted 
+
 volatile bool alarm_flag = true;  // Flag is set with external Pin A0 Interrupt by RTC
 volatile bool LEDState   = false; // flag to toggle LED
 volatile int  HR  = 8;            // Hr of the day we want alarm to go off
@@ -65,7 +70,7 @@ char* get_timestring();
 char* get_weekday();
 #if  is_rtc3231 == 1
 	void setAlarmFunction();
-	void clearAlarmFunction();
+	void clearAlarms();
 	void wake();
 #endif
 #if LOOM_DEBUG == 1
@@ -78,7 +83,7 @@ char* get_weekday();
 
 
 void setup_rtc() {
-	if (! rtc_inst.begin()) {
+	if (!rtc_inst.begin()) {
 		LOOM_DEBUG_Println("Couldn't find RTC");
 		while (1);
 	}
@@ -92,7 +97,7 @@ void setup_rtc() {
 			rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
 		}
 	#elif is_rtc8523 == 1
-		if (! rtc_inst.initialized()) {
+		if (!rtc_inst.initialized()) {
 			LOOM_DEBUG_Println("RTC is NOT running!");
 			rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
 		}
@@ -100,7 +105,7 @@ void setup_rtc() {
 
 	//clear any pending alarms
 	#if  is_rtc3231 == 1
-		clearAlarmFunction();
+		clearAlarms();
 	#endif
 
 	// Query Time and print
@@ -115,7 +120,7 @@ void setup_rtc() {
 		rtc_inst.writeSqwPinMode(DS3231_OFF);
 
 		//Set alarm1
-		setAlarmFunction();
+		// setAlarmFunction();
 	#endif	
 }
 
@@ -187,7 +192,7 @@ void setAlarmFunction() {
 // RTC helper function
 // When exiting the sleep mode we clear the alarm
 //*********
-void clearAlarmFunction() {
+void clearAlarms() {
 	//clear any pending alarms
 	rtc_inst.armAlarm(1, false);
 	rtc_inst.clearAlarm(1);
@@ -221,6 +226,13 @@ void print_time()
 }
 #endif
 
+
+// void pciSetup(byte pin)
+// {
+// 	*digitalPinToPCMSK(pin) |= bit (digitalPinToPCMSKbit(pin));  // enable pin
+// 	PCIFR  |= bit (digitalPinToPCICRbit(pin)); // clear any outstanding interrupt
+// 	PCICR  |= bit (digitalPinToPCICRbit(pin)); // enable interrupt for the group
+// }
 
 
 

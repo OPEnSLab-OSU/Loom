@@ -10,6 +10,7 @@ void set_instance_num(OSCMessage &msg);
 #endif
 void loop_sleep();
 void save_config(OSCMessage &msg);
+void flash_led(int num, int time_high, int time_low);
 void flash_led();
 
 
@@ -248,7 +249,7 @@ void set_channel(OSCMessage &msg)
 
 	LOOM_DEBUG_Println4("Received command to change channel from ", (char)(configuration.instance_number + 64), " to ", (char)(new_channel + 64) );
 
-	configuration.instance_number        = new_channel;
+	configuration.instance_number = new_channel;
 	#if is_wifi == 1
 		configuration.config_wifi.devicePort = configuration.config_wifi.subnetPort + new_channel;
 	#endif
@@ -256,6 +257,8 @@ void set_channel(OSCMessage &msg)
 	LOOM_DEBUG_Println2("New Inst: ", configuration.instance_number);
 	#if is_wifi == 1
 		LOOM_DEBUG_Println2("New Port: ", configuration.config_wifi.devicePort);
+		UdpDevice.stop();
+		UdpDevice.begin(configuration.config_wifi.devicePort);
 	#endif
 
 	sprintf(configuration.packet_header_string, "%s%d\0", PacketHeaderString, configuration.instance_number);
@@ -346,17 +349,55 @@ void save_config(OSCMessage &msg)
 // Flash the build in LED 
 // Helpful for indicating completion of events when debug is off
 //
-void flash_led()
+void flash_led(int num, int time_high, int time_low)
 {
-	for (int i = 0; i < 14; i++) {
+	for (int i = 0; i < num; i++) {
 		digitalWrite(led, HIGH);  
-		delay(40);                       
+		delay(time_high);                       
 		digitalWrite(led, LOW);   
-		delay(30);  
+		delay(time_low);  
 	} 
 	// digitalWrite(led, HIGH);
 }
 
+void flash_led() 
+{
+	flash_led(14, 40, 30);
+}
 
+
+
+
+// --- PING REPLY ---
+// 
+// Respond to ping
+// 
+void ping_reply(OSCMessage &msg)
+{
+	OSCBundle bndl;
+	char address_string[80];
+	sprintf(address_string, "/%s%d%s", FAMILY, FAMILY_NUM, "/PingResponse");
+
+
+	#if is_wifi == 1
+		wifi_send_bundle_subnet(&bndl);
+	#endif
+
+// Lora should have broadcast function in the future
+	#if is_lora == 1
+		bndl.add(address_string).add( (int32_t)lora_last_rssi );
+		lora_send_bundle(&bndl);
+	#endif
+
+// Nrf should have broadcast function in the future
+	#if is_nrf == 1
+		nrf_send_bundle(&bndl);
+	#endif
+
+	bndl.empty();            
+	LOOM_DEBUG_Println("Responded to ping");
+}
+
+	
 
 
