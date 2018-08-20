@@ -7,19 +7,17 @@
 
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
+
+
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
 
-
-const byte wakeUpPin = 9;  // shouldn't be hardcoded
-
-
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 
-const int hour_adjustment   = 0;
-const int minute_adjustment = 0;
+// const int hour_adjustment   = 0;
+// const int minute_adjustment = 0;
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -29,8 +27,6 @@ struct state_rtc_t {
 	int     year;
 	uint8_t month, day, hour, minute, second;
 };
-
-		
 
 
 // ================================================================ 
@@ -51,31 +47,31 @@ struct state_rtc_t state_rtc;
 
 volatile bool alarm_flag = true;  // Flag is set with external Pin A0 Interrupt by RTC
 volatile bool LEDState   = false; // flag to toggle LED
-volatile int  HR  = 8;            // Hr of the day we want alarm to go off
-volatile int  MIN = 0;            // Min of each hour we want alarm to go off
+// volatile int  HR  = 8;            // Hr of the day we want alarm to go off
+// volatile int  MIN = 0;            // Min of each hour we want alarm to go off
 
-#if LOOM_DEBUG == 0
-	volatile int WakePeriodMin = 15;  // Period of time to take sample in Min, reset alarm based on this period (Bo - 5 min)
-#elif  LOOM_DEBUG == 1
-	volatile int WakePeriodMin = 1;
-#endif // LOOM_DEBUG
+// #if LOOM_DEBUG == 0
+// 	volatile int WakePeriodMin = 15;  // Period of time to take sample in Min, reset alarm based on this period (Bo - 5 min)
+// #elif  LOOM_DEBUG == 1
+// 	volatile int WakePeriodMin = 1;
+// #endif // LOOM_DEBUG
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void  setup_rtc();
 void  measure_rtc();
-char* get_datestring();
+char* get_datestring(); 
 char* get_timestring();
 char* get_weekday();
 #if  is_rtc3231 == 1
 	void setAlarmFunction();
-	void clearAlarms();
-	void wake();
+	void clearRTCAlarms();
+	void wake_RTC_ISR();
 #endif
-#if LOOM_DEBUG == 1
-	void print_time();
-#endif
+void print_time();
+void print_DateTime(DateTime time);
+
 
 // ================================================================
 // ===                          SETUP                           ===
@@ -103,25 +99,23 @@ void setup_rtc() {
 		}
 	#endif
 
-	//clear any pending alarms
 	#if  is_rtc3231 == 1
-		clearAlarms();
-	#endif
+		clearRTCAlarms(); 	//clear any pending alarms
+
+		//Set SQW pin to OFF (in my case it was set by default to 1Hz)
+		//The output of the DS3231 INT pin is connected to this pin
+		rtc_inst.writeSqwPinMode(DS3231_OFF);
+
+		// Configure RTC Interrupt pin to be input
+		pinMode(RTC_pin, INPUT_PULLUP);
+
+	#endif	
 
 	// Query Time and print
 	#if LOOM_DEBUG == 1
 		print_time();
 	#endif
 
-	#if is_rtc3231 == 1
-		//Set SQW pin to OFF (in my case it was set by default to 1Hz)
-		//The output of the DS3231 INT pin is connected to this pin
-		//It must be connected to arduino Interrupt pin for wake-up
-		rtc_inst.writeSqwPinMode(DS3231_OFF);
-
-		//Set alarm1
-		// setAlarmFunction();
-	#endif	
 }
 
 
@@ -170,30 +164,46 @@ char* get_weekday() {
 
 
 #if  is_rtc3231 == 1
-// *********
-// RTC helper function
-// Function to query current RTC time and add the period to set next alarm cycle
-// *********
-void setAlarmFunction() {
-	DateTime now = rtc_inst.now(); // Check the current time
+// void setAlarmFunction() {
+// 	DateTime now = rtc_inst.now(); // Check the current time
+
+// 	// Calculate new time
+// 	MIN = (now.minute() + WakePeriodMin) % 60; // wrap-around using modulo every 60 sec
+// 	HR  = (now.hour() + ((now.minute() + WakePeriodMin) / 60)) % 24; // quotient of now.min+periodMin added to now.hr, wraparound every 24hrs
+	
+// 	LOOM_DEBUG_Println4("Resetting Alarm 1 for: ", HR, ":", MIN);
+
+// 	//Set alarm1
+// 	rtc_inst.setAlarm(ALM1_MATCH_HOURS, MIN, HR, 0);   //set your wake-up time here
+// 	rtc_inst.alarmInterrupt(1, true);
+// }
+
+
+// --- SET RTC ALARM RELATIVE
+void setRTCAlarm_Relative(int hours, int minutes, int seconds)
+{
+	// Display current time
+	LOOM_DEBUG_Println("Current Time:"); //Serial.print(HR); Serial.print(":"); Serial.println(MIN);
+	print_DateTime( rtc_inst.now() );
 
 	// Calculate new time
-	MIN = (now.minute() + WakePeriodMin) % 60; // wrap-around using modulo every 60 sec
-	HR  = (now.hour() + ((now.minute() + WakePeriodMin) / 60)) % 24; // quotient of now.min+periodMin added to now.hr, wraparound every 24hrs
-	
-	LOOM_DEBUG_Println4("Resetting Alarm 1 for: ", HR, ":", MIN);
+	DateTime future( rtc_inst.now() + TimeSpan(0,hours,minutes,seconds) );
+	LOOM_DEBUG_Println("Resetting Alarm 1 for:"); //Serial.print(HR); Serial.print(":"); Serial.println(MIN);
+	print_DateTime(future);
 
-	//Set alarm1
-	rtc_inst.setAlarm(ALM1_MATCH_HOURS, MIN, HR, 0);   //set your wake-up time here
+	// Set alarm 1
+	rtc_inst.setAlarm(ALM1_MATCH_HOURS, future.second(), future.minute(), future.hour(), 0); 
+			    								// not sure if this 0 is correct
 	rtc_inst.alarmInterrupt(1, true);
 }
 
-//*********
-// RTC helper function
-// When exiting the sleep mode we clear the alarm
-//*********
-void clearAlarms() {
-	//clear any pending alarms
+
+
+// --- CLEAR RTC ALARMS ---
+//
+// Clear any pending alarms on the RTC
+//
+void clearRTCAlarms() {
 	rtc_inst.armAlarm(1, false);
 	rtc_inst.clearAlarm(1);
 	rtc_inst.alarmInterrupt(1, false);
@@ -202,21 +212,26 @@ void clearAlarms() {
 	rtc_inst.alarmInterrupt(2, false);
 }
 
-void wake() {
-	alarm_flag = true;
-	#ifdef is_m0
-	detachInterrupt(digitalPinToInterrupt(wakeUpPin));
-	#endif //is_M0
 
-	#ifdef is_32u4
-	disableInterrupt(wakeUpPin);
-	#endif //is_32U4
+
+// --- WAKE RTC ISR ---
+//
+// The interrupt service routine called when a device 
+// wakes from sleep via an RTC interrupt
+//
+void wake_RTC_ISR()
+{
+	detachInterrupt(digitalPinToInterrupt(RTC_pin));
 }
+
 #endif // of is_rtc3231 == 1
 
 
 
-#if LOOM_DEBUG == 1
+// --- PRINT TIME ---
+//
+// Prints the time according to the RTC clock
+//
 void print_time()
 {
 	measure_rtc();
@@ -224,17 +239,23 @@ void print_time()
 	LOOM_DEBUG_Println2("Time: ", get_timestring());
 	LOOM_DEBUG_Println2("Day : ", get_weekday());
 }
-#endif
 
 
-// void pciSetup(byte pin)
-// {
-// 	*digitalPinToPCMSK(pin) |= bit (digitalPinToPCMSKbit(pin));  // enable pin
-// 	PCIFR  |= bit (digitalPinToPCICRbit(pin)); // clear any outstanding interrupt
-// 	PCICR  |= bit (digitalPinToPCICRbit(pin)); // enable interrupt for the group
-// }
-
-
+// --- PRINT DATETIME ---
+//
+// Prints a DateTime object
+//
+void print_DateTime(DateTime time) 
+{
+	#if LOOM_DEBUG == 1
+		Serial.print(time.year()); Serial.print('/');
+		Serial.print(time.month()); Serial.print('/');
+		Serial.print(time.day()); Serial.print(' ');
+		Serial.print(time.hour()); Serial.print(':');
+		Serial.print(time.minute()); Serial.print(':');
+		Serial.print(time.second()); Serial.println();
+	#endif
+}
 
 
 

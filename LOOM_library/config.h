@@ -43,7 +43,7 @@
 
 // --- Enabled Communication Platform --- 
 #define is_wifi       0		// 1 to enable WiFi
-#define is_lora       1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808)
@@ -130,6 +130,9 @@
 // ================================================================
 // ================================================================
 
+// --- Sleep Options --- 
+#define wake_delay 0	// 1 to enable wait 5 seconds upon awaking from sleep to start serial
+
 
 // --- Set Instance Number and UDP Port ---
 // If not using channels, then the following 
@@ -150,6 +153,8 @@
 // ================================================================
 // --- RTC Options ---
 #if is_rtc == 1
+	#define RTC_pin 12
+
 	// Select only one of the below options
 	#define is_rtc3231 1 	// RTC DS 3231 Featherwing
 	#define is_rtc8523 0	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
