@@ -77,7 +77,7 @@ bool setup_sht31d() {
 //
 void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
-	char address_string[255];
+	char address_string[80];
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/sht31d/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
@@ -90,7 +90,7 @@ void package_sht31d(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 // Package function when not using multiplexer
 void package_sht31d(OSCBundle *bndl, char packet_header_string[])
 {
-	char address_string[255];
+	char address_string[80];
 
 	sprintf(address_string, "%s%s", packet_header_string, "/sht31d_temp");
 	bndl->add(address_string).add(state_sht31d.temp);
