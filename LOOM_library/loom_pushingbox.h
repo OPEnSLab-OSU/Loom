@@ -70,7 +70,7 @@ void sendToPushingBox(OSCMessage &msg)
 	#if pushMillisFilter == 1
 		currentPushMillis = millis();
 		if ( (currentPushMillis - lastPushMillis) < (1000*pushMillisDelay) ) {
-			LOOM_DEBUG_Println("not yet");	
+			LOOM_DEBUG_Println("Not uploading to spreadsheet yet");	
 			return; // has not been long enough yet, just return
 		} else {
 			lastPushMillis = currentPushMillis;

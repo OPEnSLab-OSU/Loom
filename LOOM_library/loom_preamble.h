@@ -140,9 +140,9 @@ char          global_packet_header_string[80]; // Sometimes functions need to ac
 #ifdef is_sleep_period
 	#include <Adafruit_SleepyDog.h> // This must be included if you are transmitting at timed intervals
 #endif
-#ifdef is_sleep_interrupt
+// #ifdef is_sleep_interrupt
 	#include <LowPower.h>           // Include this if transmitting on pin interrupt
-#endif
+// #endif
 
 // Using Config defines, check which headers to include
 #if LOOM_DEBUG == 1

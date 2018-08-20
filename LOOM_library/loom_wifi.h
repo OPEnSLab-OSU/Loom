@@ -561,7 +561,7 @@ void broadcastIP(OSCMessage &msg)
 {
 	OSCBundle bndl;
 	config_wifi->ip = WiFi.localIP();
-	char address_string[255];
+	char address_string[80];
 	sprintf(address_string, "/%s%d%s", FAMILY, FAMILY_NUM, "/NewIP");
 
 	bndl.add(address_string).add( packet_header_string )
@@ -639,7 +639,7 @@ void wifi_check_status()
 void request_settings_from_Max()
 {
 	OSCBundle bndl;
-	char address_string[255];
+	char address_string[80];
 	sprintf(address_string, "%s%s", packet_header_string, "/RequestSettings");
 
 	bndl.add(address_string);
@@ -701,7 +701,7 @@ void respond_to_poll_request(OSCMessage &msg)
 {
 	OSCBundle bndl;
 	bndl.empty();
-	char address_string[255];
+	char address_string[80];
 	sprintf(address_string, "%s%s", packet_header_string, "/PollResponse");
 
 	bndl.add(address_string);

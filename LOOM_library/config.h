@@ -43,7 +43,7 @@
 
 // --- Enabled Communication Platform --- 
 #define is_wifi       0		// 1 to enable WiFi
-#define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_lora       1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808)
@@ -54,7 +54,7 @@
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         0		// 1 to enable SD card 
-#define is_rtc        0		// Enable RTC functionality
+#define is_rtc        1		// Enable RTC functionality
 
 // --- Device Telemetry Type ---
 #define hub_node_type 0		// 0: Hub, 1: Node

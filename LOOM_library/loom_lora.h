@@ -34,6 +34,7 @@ RH_RF95 rf95(RFM95_CS, RFM95_INT);
 	RHReliableDatagram manager(rf95, LORA_NODE_ADDRESS);
 #endif
 
+int lora_last_rssi;
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
@@ -108,6 +109,8 @@ void lora_receive_bundle(OSCBundle *bndl)
 		uint8_t buf[LORA_MESSAGE_SIZE];
 		memset(buf, '\0', LORA_MESSAGE_SIZE);
 		if (manager.recvfromAck(buf, &len, &from)) {
+
+			lora_last_rssi = rf95.lastRssi();
 
 			// LOOM_DEBUG_Println("Receiving");
 			// This is done just in case the compressed string

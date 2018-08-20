@@ -102,15 +102,16 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		if (msg.dispatch("/saveDynamicScripts", save_dynamic_scripts, 	addrOffset) ) return;
 	#endif
 
-	// Save the configuration struct as it is currently
-	if (msg.dispatch("/SaveConfig", 			save_config, 			addrOffset) ) return;
 
-	#if advanced_interdev_comm == 1
-		// Set the instance number of this device
-		if (msg.dispatch("/SetID", 					set_instance_num, 		addrOffset) ) return;
-		// Set the channel of this device
-		if (msg.dispatch("/SetChannel", 			set_channel, 			addrOffset) ) return;
-	#endif
+
+	// Save the configuration struct as it is currently
+	if (msg.dispatch("/SaveConfig", 	save_config, 			addrOffset) ) return;
+
+	// Received ping message, reply
+	if (msg.dispatch("/Ping", 			ping_reply, 			addrOffset) ) return;
+
+
+
 
 
 
@@ -127,6 +128,10 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	//     This might be merged with the above dispatch later
 	#if advanced_interdev_comm == 1
 		if (msg.dispatch("/DeviceChannelPoll", 	respond_to_device_poll, 	addrOffset) ) return;	// node receiving from hub 
+		// Set the instance number of this device
+		if (msg.dispatch("/SetID", 					set_instance_num, 		addrOffset) ) return;
+		// Set the channel of this device
+		if (msg.dispatch("/SetChannel", 			set_channel, 			addrOffset) ) return;
 	#endif
 
 	#if (hub_node_type == 0) && (advanced_interdev_comm == 1)
