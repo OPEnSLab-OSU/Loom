@@ -26,9 +26,7 @@ unsigned long lastPushMillis, currentPushMillis;
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void setup_pushingbox();
-void sendToPushingBox(OSCMessage &msg, bool useHubTabID);
 void sendToPushingBox(OSCMessage &msg);
-void sendToPushingBox(OSCBundle *bndl, bool useHubTabID);
 void sendToPushingBox(OSCBundle *bndl);
 void pushingbox_ethernet(char* args);
 void pushingbox_wifi(char* args);
@@ -68,7 +66,7 @@ void setup_pushingbox()
 //
 // @param msg  The message containing the information to send to PB.
 //
-void sendToPushingBox(OSCMessage &msg, bool useHubTabID) 
+void sendToPushingBox(OSCMessage &msg) 
 {
 	// Only send bundles if a minimum time (pushMillisDelay seconds) has passed since last upload
 	#if pushMillisFilter == 1
@@ -100,19 +98,19 @@ void sendToPushingBox(OSCMessage &msg, bool useHubTabID)
 	// Build url arguments from bundle
 	char args[1024];
 
-	if (!useHubTabID) { 
-		// Use bundle source to define spreadsheet tab suffix
-		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
-			device_id, spreadsheet_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 		
-	} else { 
+	#if useHubTabID == 1
 		// Use hub's stored tab ID (in config file) to define spreadsheet tab
 		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s", 
 			device_id, spreadsheet_id, tab_id_complete, bundle_deviceID);
 		// sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%d&key2=deviceID&val2=%s%d", 
 		// 	device_id, spreadsheet_id, tab_id_prefix, DEVICE, INIT_INST, ); 
-	}
+	#else
+		// Use bundle source to define spreadsheet tab suffix
+		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
+			device_id, spreadsheet_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
+	#endif
 
-
+	// Populate URL with the bundle kesy and values
 	for (int i = 0, j = 3; (i < MAX_FIELDS-6) && (i < msg.size()); i+=2, j++) {
 	    char buf1[30], buf2[30];
 		(get_data_value(&msg, i  )).toCharArray(buf1, 30); 
@@ -139,16 +137,6 @@ void sendToPushingBox(OSCMessage &msg, bool useHubTabID)
 	#endif
 }
 
-// Overloaded version of sendToPushingBox
-//
-// This one forwards the message to the normal version
-// specifying that the sheet suffix comes from the bundle's source
-// not the uploading device
-// This is the default behavior
-void sendToPushingBox(OSCMessage &msg) 
-{
-	sendToPushingBox(msg, false);
-}
 
 // --- SEND TO PUSHINGBOX ---
 // 
@@ -160,7 +148,7 @@ void sendToPushingBox(OSCMessage &msg)
 //
 // @param msg  The message containing the information to send to PB.
 //
-void sendToPushingBox(OSCBundle *bndl, bool useHubTabID) 
+void sendToPushingBox(OSCBundle *bndl) 
 {
 	OSCBundle tmpBndl;
 	deep_copy_bundle(bndl, &tmpBndl);
@@ -168,18 +156,19 @@ void sendToPushingBox(OSCBundle *bndl, bool useHubTabID)
 	// #if LOOM_DEBUG == 1
 	// 	print_bundle(&tmpBndl);
 	// #endif
-	sendToPushingBox( *(tmpBndl.getOSCMessage(0)) , useHubTabID);
-}
-
-void sendToPushingBox(OSCBundle *bndl) 
-{
-	sendToPushingBox(bndl, false);
+	sendToPushingBox( *(tmpBndl.getOSCMessage(0)) );
 }
 
 
 
 
 #if is_ethernet == 1
+// --- PUSHINGBOX ETHERNET ---	
+// 
+// Handles the Ethernet specific sending to PushingBox
+//
+// @param args  The URL to be sent to PushingBox 
+//
 void pushingbox_ethernet(char* args)
 {
 	LOOM_DEBUG_Println("Running PushingBox for Ethernet");
@@ -213,7 +202,14 @@ void pushingbox_ethernet(char* args)
 #endif // of #if is_ethernet == 1
 
 
+
 #if is_wifi == 1
+// --- PUSHINGBOX WIFI ---	
+// 
+// Handles the wifi specific sending to PushingBox
+//
+// @param args  The URL to be sent to PushingBox 
+//
 void pushingbox_wifi(char* args) 
 {
 	LOOM_DEBUG_Println("Running PushingBox for WiFi");
@@ -239,6 +235,13 @@ void pushingbox_wifi(char* args)
 
 
 #if is_fona == 1
+// --- PUSHINGBOX FONA ---	
+// 
+// Handles the Fona specific sending to PushingBox
+//
+// @param args  The most of the URL to be sent to PushingBox 
+// 					This function adds a prefix to it
+//
 void pushingbox_fona(char* args)
 {
 	LOOM_DEBUG_Println("Running PushingBox for Fona");
