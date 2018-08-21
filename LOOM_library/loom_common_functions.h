@@ -39,8 +39,10 @@ void Loom_begin()
 		Serial.println("Initialized Serial!");
 	#endif
 
-	LOOM_DEBUG_Println("Delaying 5 seconds");
-	delay(5000);
+	#if wake_delay == 1
+		LOOM_DEBUG_Println("Delaying 5 seconds");
+		delay(5000);
+	#endif
 	
 	#if hub_node_type == 0
 		LOOM_DEBUG_Println("Running as Hub");
@@ -134,8 +136,8 @@ void Loom_begin()
 
 	// Read configuration from flash, or write config.h settings 
 	// if no settings are already saved
-	// setup_flash_config();
-LOOM_DEBUG_Println("Flash currently disabled for testing!");
+	setup_flash_config();
+// LOOM_DEBUG_Println("Flash currently disabled for testing!");
 
 	// Communication Platform specific setups
 	// after flash setup as network info may be saved
@@ -403,11 +405,10 @@ void ping_reply(OSCMessage &msg)
 //
 // Returns millisecond equivalent to provided 
 // minutes, seconds, or milliseconds 
-int milli_duration(int amount, TimeUnits units) {
+int second_duration(int amount, TimeUnits units) {
 	switch (units) {
-		case MILLIS:  return amount;		 break;
-		case SECONDS: return 1000  * amount; break;
-		case MINUTES: return 60000 * amount; break;
+		case SECONDS: return amount; break;
+		case MINUTES: return 60 * amount; break;
 		default:      return 0;
 	}
 }

@@ -5,9 +5,11 @@
 // NOTE: Must include the following line in the RTClibExtended.h file to use with M0:
 // #define _BV(bit) (1 << (bit))
 
-#define EI_NOTEXTERNAL
-#include <EnableInterrupt.h>
 
+#if is_rtc3231 == 1
+	#define EI_NOTEXTERNAL
+	#include <EnableInterrupt.h>
+#endif
 
 // ================================================================ 
 // ===                       DEFINITIONS                        === 

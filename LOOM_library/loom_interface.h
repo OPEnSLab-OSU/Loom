@@ -297,19 +297,7 @@ void package_data(OSCBundle *send_bndl)
 	#endif
 
 
-
-	// Should add the other I2C sensor package functions here 
-	// for when they are called without the multiplexer
-
-	// #if is_multiplexer != 1
-	// 	#if is_lis3dh == 1
-	// 		package_lis3dh(send_bndl, configuration.packet_header_string);
-	// 	#endif
-	// 	#if is_ms5803 == 1
-	// 		package_ms5803(send_bndl, configuration.packet_header_string);
-	// 	#endif
-	// #endif
-			// If using I2C sensor without multiplexer
+	// If using I2C sensor without multiplexer
 	#if is_multiplexer != 1
 		#if is_fxas21002 == 1 
 			package_fxas21002(send_bndl, configuration.packet_header_string);
@@ -504,8 +492,7 @@ void additional_loop_checks()
 
 
 
-
-
+#if is_rtc3231 == 1
 
 void prep_before_sleep()
 {
@@ -543,6 +530,7 @@ void prep_after_sleep()
 	#endif
 }
 
+#endif // of '#if is_rtc3231 == 1'
 
 
 
@@ -573,7 +561,6 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 
 			// Set alarm specified time into the future
 			switch (units) {
-				case MILLIS:  setRTCAlarm_Relative(0, 0, amount/1000); break; 
 				case SECONDS: setRTCAlarm_Relative(0, 0, amount);      break; 
 				case MINUTES: setRTCAlarm_Relative(0, amount, 0);      break; 
 			}
@@ -581,11 +568,12 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 		    // Prepare for sleep
 			prep_before_sleep();
 
+			digitalWrite(led, LOW);
 			// Go to sleep
 			LowPower.standby();
-			// LowPower.idle(IDLE_1);
 
-			
+			digitalWrite(led, HIGH);
+
 			// Will wait until RTC interrupt
 
 			// Any necessary management when returning from sleep
@@ -598,27 +586,76 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 
 	#if is_lora != 1
 		case SLEEPYDOG: {
-			int duration = milli_duration(amount, units);
+			int duration = second_duration(amount, units); // time in seconds
 
-			LOOM_DEBUG_Println("Sleep in 'Sleepydog' mode");
+			// LOOM_DEBUG_Println("Sleep in 'Sleepydog' mode");
 
-			// calculate number of iterations of 16s sleep
+			// LOOM_DEBUG_Println2("Amount: ", amount);
+			// switch (units) {
+			// 	case SECONDS:
 
-			int iterations = duration / 16000;
-			int remainder  = duration % 16000;
+			// 		break; 
+			// 	case MINUTES:
+			// 		int count = amount << 2;
+			// 		int arr[count];
+
+			// 		LOOM_DEBUG_Println3("Will sleep for a total of: ", amount, " minutes");
+			// 		digitalWrite(led, LOW);
+			// 		for (int i = 0; i < count; i++) {
+			// 			int sleepMS = Watchdog.sleep(20000);
+			// 			arr[i] = sleepMS;
+			// 			#if LOOM_DEBUG == 1
+			// 				LOOM_DEBUG_Println(i);
+			// 				digitalWrite(led, HIGH);
+			// 				delay(100);
+			// 				digitalWrite(led, LOW);  
+			// 			#endif
+			// 		}
+			// 		LOOM_DEBUG_Println3("Done sleeping ", amount, " minutes");
+			// 		digitalWrite(led, HIGH);
+
+			// 		delay(5000);
+			// 		for (int i = 0; i < count; i++) {
+			// 			LOOM_DEBUG_Println(arr[i]);
+			// 		}
+			// 		break; 
+			// }
+
+
+			// int duration = 0;
+			// if (duration > 60) {
+				
+			// 	int temp = duration >> 4;
+			// 	temp = temp << 2;
+
+			// 	LOOM_DEBUG_Println4("Sleep for: ", duration, " | ", temp);
+
+
+			// } else {
+			// 	LOOM_DEBUG_Println2("Sleep for: ", duration);
+			// }
+
+			// return;
+
+			// calculate number of iterations of 15s sleep
+
+			int iterations = duration / 16;
+			int remainder  = duration % 16;
 			int total = 0;
 
-			LOOM_DEBUG_Println3("Will sleep for a total of: ", duration, " milliseconds");
-			LOOM_DEBUG_Print3("Using ", iterations, " blocks of 16 seconds");
+			LOOM_DEBUG_Println3("Will sleep for a total of: ", duration, " seconds");
+			LOOM_DEBUG_Print3("Using ", iterations, " blocks of 15 seconds");
 			LOOM_DEBUG_Println3(" and ", remainder, " milliseconds");
 
 			#if LOOM_DEBUG == 1
 				USBDevice.detach();
 			#endif
 
-			LOOM_DEBUG_Println("Going to sleep in 16 second blocks");
+			digitalWrite(led, LOW);
+
+			LOOM_DEBUG_Println("Going to sleep in 15 second blocks");
 			for (int i = 0; i < iterations; i++) {
-				int sleepMS = Watchdog.sleep(duration);
+				int sleepMS = Watchdog.sleep(16000);
 				LOOM_DEBUG_Println3("Just slept for: ", sleepMS, " milliseconds");
 				total += sleepMS;
 				LOOM_DEBUG_Println3("Slept a total of: ", total, " milliseconds");
