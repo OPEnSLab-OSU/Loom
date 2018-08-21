@@ -325,9 +325,16 @@
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	    
 	#define spreadsheet_id "***REMOVED***"  // This is Luke's Arduino Test spreadsheet
 
-	// Google Spreadsheet Sheet/Tab prefix, suffix will be obtained from bundle header. Sent as parameter to PushingBox/Google Scripts
-	#define tab_id_prefix   "E_"		// Used as a prefix if bundle source is being used to define tab
-	#define tab_id_complete "Sheet1"    // Defines tab if hub is defining tab instead of bundle source
+	// Google Spreadsheet Sheet/Tab. Sent as parameter to PushingBox/Google Scripts
+	#define useHubTabID 0
+	#if useHubTabID == 1
+		// The hub defines tab ID regardless of bundle source
+		#define tab_id_complete "Sheet1"    // Defines tab if hub is defining tab instead of bundle source
+	#else
+		// Use bundle source and below prefix to define tab ID
+		#define tab_id_prefix   "E_"		// Used as a prefix if bundle source is being used to define tab
+	#endif
+
 
 	// Required by PushingBox, specific to each scenario
 	char device_id[]   = "***REMOVED***";
