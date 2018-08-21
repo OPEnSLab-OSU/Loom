@@ -36,11 +36,15 @@ void loop()
 {
 
 	flash_led(x++, 400, 100);
+	x %= 10;
 	digitalWrite(LED_BUILTIN, HIGH);
 	delay(1000);
 	flash_led(8, 80, 30);
+
+
 	sleep_for(5, SECONDS, STANDBY);
 
+	sleep_for(5, SECONDS, SLEEPYDOG);
 
 
 
