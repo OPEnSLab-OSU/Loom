@@ -501,40 +501,10 @@ void additional_loop_checks()
 
 
 
-// Move some of this to the RTC file
-// Basically anything that wouldnt be called
-// from the main loop
 
 
-void wakeUp_RTC()
-{
-	detachInterrupt(digitalPinToInterrupt(RTC_pin));
-}
 
 
-// Standby is lower power than idle
-enum SleepMode { IDLE, STANDBY, SLEEPYDOG };
-enum TimeUnits { MILLIS, SECONDS, MINUTES };
-
-void setRTCAlarm_Relative(int hours, int minutes, int seconds);
-
-int milli_duration(int amount, TimeUnits units) {
-	switch (units) {
-		case MILLIS:  return amount;		 break;
-		case SECONDS: return 1000  * amount; break;
-		case MINUTES: return 60000 * amount; break;
-		default:      return 0;
-	}
-}
-
-
-void interrupt_reset()
-{
-	// Clears any interrupts that may be pending on M0
-	detachInterrupt(digitalPinToInterrupt(RTC_pin));
-	delay(20);
-	attachInterrupt(digitalPinToInterrupt(RTC_pin), wake_RTC_ISR, LOW);
-}
 
 
 void prep_before_sleep()
@@ -542,33 +512,35 @@ void prep_before_sleep()
 	LOOM_DEBUG_Println("Entering STANDBY");
 	Serial.end();
 	USBDevice.detach();
-	interrupt_reset(); //clear interrupt registers, attach interrupts
+	rtc_interrupt_reset(); //clear interrupt registers, attach interrupts
 	delay(50);
 	#if LOOM_DEBUG == 1
 		digitalWrite(LED_BUILTIN, LOW);
 	#endif
-
 }
 
 void prep_after_sleep()
 {
 	#if LOOM_DEBUG == 1
 		digitalWrite(LED_BUILTIN, HIGH);
-	// 	delay(5000); // give user 5s to close and reopen serial monitor!
+		#if wake_delay == 1
+			delay(5000); // give user 5s to close and reopen serial monitor!
+		#endif
 	#endif
-	interrupt_reset(); //clear interrupt registers, attach interrupts
+	rtc_interrupt_reset(); //clear interrupt registers, attach interrupts
 	clearRTCAlarms(); //prevent double trigger of alarm interrupt
 	USBDevice.attach();
 	Serial.begin(9600);
 	LOOM_DEBUG_Println("WAKE");
-	interrupt_reset();
+
+	// Not sure why these have to be repeated but it seems to make a difference
+	rtc_interrupt_reset();
 	clearRTCAlarms();
 
 	#if LOOM_DEBUG == 1
 		print_DateTime(rtc_inst.now());
 		delay(50);  // delay so serial stuff has time to print out all the way
 	#endif
-
 }
 
 
@@ -611,6 +583,8 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 
 			// Go to sleep
 			LowPower.standby();
+			// LowPower.idle(IDLE_1);
+
 			
 			// Will wait until RTC interrupt
 
@@ -641,7 +615,7 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 			#if LOOM_DEBUG == 1
 				USBDevice.detach();
 			#endif
-				
+
 			LOOM_DEBUG_Println("Going to sleep in 16 second blocks");
 			for (int i = 0; i < iterations; i++) {
 				int sleepMS = Watchdog.sleep(duration);
@@ -691,9 +665,6 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 // 		}
 
 // 		case SLEEPYDOG: {
-// 			// Check compile time and millis?
-// 			//  would only work the first time...
-
 // 			// Could work if using SD wing RTC 
 // 			return;
 // 		}

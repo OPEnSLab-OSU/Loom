@@ -67,6 +67,7 @@ char* get_weekday();
 #if  is_rtc3231 == 1
 	void setAlarmFunction();
 	void clearRTCAlarms();
+	void rtc_interrupt_reset();
 	void wake_RTC_ISR();
 #endif
 void print_time();
@@ -212,6 +213,15 @@ void clearRTCAlarms() {
 	rtc_inst.alarmInterrupt(2, false);
 }
 
+
+
+void rtc_interrupt_reset()
+{
+	// Clears any interrupts that may be pending on M0
+	detachInterrupt(digitalPinToInterrupt(RTC_pin));
+	delay(20);
+	attachInterrupt(digitalPinToInterrupt(RTC_pin), wake_RTC_ISR, LOW);
+}
 
 
 // --- WAKE RTC ISR ---

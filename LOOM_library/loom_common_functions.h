@@ -12,8 +12,7 @@ void loop_sleep();
 void save_config(OSCMessage &msg);
 void flash_led(int num, int time_high, int time_low);
 void flash_led();
-
-
+int milli_duration(int amount, TimeUnits units);
 
 // ================================================================
 // ===                        LOOM BEGIN                        ===
@@ -399,5 +398,19 @@ void ping_reply(OSCMessage &msg)
 }
 
 	
+
+// --- MILLI DURATION --- 
+//
+// Returns millisecond equivalent to provided 
+// minutes, seconds, or milliseconds 
+int milli_duration(int amount, TimeUnits units) {
+	switch (units) {
+		case MILLIS:  return amount;		 break;
+		case SECONDS: return 1000  * amount; break;
+		case MINUTES: return 60000 * amount; break;
+		default:      return 0;
+	}
+}
+
 
 

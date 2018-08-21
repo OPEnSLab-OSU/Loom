@@ -84,6 +84,9 @@ enum LogPlatform {
 	SERIAL_MON
 };
 
+enum SleepMode { IDLE, STANDBY, SLEEPYDOG };
+enum TimeUnits { MILLIS, SECONDS, MINUTES };
+
 
 // ================================================================ 
 // ===                    PRINTING MACROS                       === 
