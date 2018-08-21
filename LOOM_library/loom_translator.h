@@ -26,18 +26,23 @@ union data_value { // Used in translation between OSC and strings
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 
-void print_message(OSCMessage* msg);
-void print_message(OSCMessage* msg, bool detail);
-void print_bundle(OSCBundle *bndl);
+// Printing and data extraction functions
+void   print_message(OSCMessage* msg);
+void   print_message(OSCMessage* msg, bool detail);
+void   print_bundle(OSCBundle *bndl);
 template<typename T> 
-void print_array(T data [], int len, int format);
-int  get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
-bool bundle_empty(OSCBundle *bndl);
+void   print_array(T data [], int len, int format);
+int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
+bool   bundle_empty(OSCBundle *bndl);
 String get_data_value(OSCMessage* msg, int pos);
 String get_address_string(OSCMessage *msg);
+void   osc_extract_header_section(OSCMessage* msg, int section, char* result);
+void   osc_extract_header_to_section(OSCMessage* msg, int section, char* result);
+void   osc_extract_header_from_section(OSCMessage* msg, int section, char* result);
+
+// Deep copy functions
 void   deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
 void   deep_copy_message(OSCMessage *scrMsg, OSCMessage *destMsg);
-
 
 // Conversions between bundles and strings (and auxiliary functions)
 void convert_OSC_string_to_bundle(char *osc_string, OSCBundle*bndl);
@@ -251,12 +256,76 @@ String get_data_value(OSCMessage* msg, int pos)
 }
 
 
-
+// --- GET ADDRESS STRING ---
+//
+// Returns a string object of the provided
+// message's address string
+//
 String get_address_string(OSCMessage *msg)
 {
 	char buf[50];
 	msg->getAddress(buf, 0);
 	return String(buf);
+}
+
+
+
+// --- OSC EXTRACT HEADER SECTION ---
+//
+// Select a single part of an OSC Message header
+// Sections are separated by '/'s
+// Result does not include '/'s
+//
+// @param msg      The message to parse the header of 
+// @param section  Which section to extract (1 indexed)
+// @param result   Pointer to the char array to be filled
+//
+void osc_extract_header_section(OSCMessage* msg, int section, char* result)
+{
+	msg->getAddress(result);
+	const char* cPtr_start = nth_strchr(result, '/', section);
+	const char* cPtr_end   = nth_strchr(result, '/', section+1);
+	if (cPtr_end == NULL) {
+		cPtr_end = result + strlen(result);
+	}
+	snprintf(result, cPtr_end-cPtr_start, "%s\0", cPtr_start+1); 
+}
+
+// --- OSC EXTRACT HEADER TO SECTION ---
+//
+// Select up to and including the specified section of an osc message
+// 
+// @param msg      The message to parse the header of 
+// @param section  Which section to extract up to (inclusive) (1 indexed)
+// @param result   Pointer to the char array to be filled
+//
+void osc_extract_header_to_section(OSCMessage* msg, int section, char* result)
+{
+	msg->getAddress(result);
+	const char* cPtr_end   = nth_strchr(result, '/', section+1);
+	if (cPtr_end == NULL) {
+		cPtr_end = result + strlen(result);
+	}
+	snprintf(result, cPtr_end-result+1, "%s\0", result); 
+}
+
+// --- OSC EXTRACT HEADER FROM SECTION ---  
+//
+// Select from a section of an OSC message to the end
+//
+// @param msg      The message to parse the header of 
+// @param section  Which section to start extracting from (inclusive) (1 indexed)
+// @param result   Pointer to the char array to be filled
+//
+void osc_extract_header_from_section(OSCMessage* msg, int section, char* result)
+{
+	msg->getAddress(result);
+	const char* cPtr_start = nth_strchr(result, '/', section);
+	if (cPtr_start == NULL) {
+		sprintf(result, "\0"); 
+	} else {
+		sprintf(result, "%s\0", cPtr_start); 
+	}
 }
 
 
