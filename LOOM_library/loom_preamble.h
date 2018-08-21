@@ -85,7 +85,7 @@ enum LogPlatform {
 };
 
 enum SleepMode { IDLE, STANDBY, SLEEPYDOG };
-enum TimeUnits { MILLIS, SECONDS, MINUTES };
+enum TimeUnits { SECONDS, MINUTES };
 
 
 // ================================================================ 

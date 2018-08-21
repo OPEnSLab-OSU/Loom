@@ -22,11 +22,11 @@
 
 // --- Device Identification --- 
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       4		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
-#define CHANNEL          7		// Channel to use. Set to 1-8 for channels A-H, respectively. Alternatively can define to -1 to used advanced option INIT_INST
+#define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request channel settings from Max Channel Manager, 0 to not
-#define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
-#define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
+#define AUTO_NAME        0		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
+#define CUSTOM_NAME "Evap"	// This is only used if Auto_name is set to be 0
 
 // --- Debugging --- 
 #define LOOM_DEBUG    1		// Set to 1 if you want Serial statements from various functions to print
@@ -50,11 +50,11 @@
 #define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
 // --- Data Logging Platforms ---
-#define is_pushingbox 0		// 1 to enable PushingBox (currently requires Ethernet) (Auto enabled if using LoRa hub) (currently does not appear to work with WiFi)
+#define is_pushingbox 1		// 1 to enable PushingBox (Auto enabled if using LoRa hub) 
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         0		// 1 to enable SD card 
-#define is_rtc        1		// Enable RTC functionality
+#define is_rtc        0		// Enable RTC functionality
 
 // --- Device Telemetry Type ---
 #define hub_node_type 0		// 0: Hub, 1: Node
@@ -101,7 +101,7 @@
 							// relay shield if pin 10 is used for relay
 
 // --- Prebuilt Devices ---
-#define is_ishield      1	// 1 to specify using Ishield (should enable only wifi as communication platform)
+#define is_ishield      0	// 1 to specify using Ishield (should enable only wifi as communication platform)
 #define is_multiplexer  0	// 1 if tca9548a Multiplexer is being used. (Further customization in advanced options)
 #define is_sapflow      0 
 #define is_evaporimeter 0
@@ -153,7 +153,7 @@
 // ================================================================
 // --- RTC Options ---
 #if is_rtc == 1
-	#define RTC_pin 12
+	#define RTC_pin 6
 
 	// Select only one of the below options
 	#define is_rtc3231 1 	// RTC DS 3231 Featherwing
@@ -226,13 +226,13 @@
 	#define is_lora 1
 
 	// Lux Sensor
-	#define is_tsl2561 0
+	#define is_tsl2561 1
 		#define is_tsl2561_low   1 
 		#define is_tsl2561_float 1
 		#define is_tsl2561_high  0
 
 	// Load Cell
-	#define is_hx711 0 
+	#define is_hx711 1
 	#if is_hx711 == 1
 		#define hx711_calibration 961.275 // grams
 	#endif
@@ -240,8 +240,9 @@
 	// Temp / Humidity
 	#define is_sht31d 1
 
-	#define is_rtc 0
+	#define is_rtc 1
 	#if is_rtc == 1
+		#define RTC_pin    6
 		#define is_rtc3231 1
 		#define is_rtc8523 0
 	#endif
@@ -324,8 +325,9 @@
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	    
 	#define spreadsheet_id "***REMOVED***"  // This is Luke's Arduino Test spreadsheet
 
-	// Google Spreadsheet Sheet/Tab number. Sent as parameter to PushingBox/Google Scripts
-	#define tab_id  "SS_Fona"   
+	// Google Spreadsheet Sheet/Tab prefix, suffix will be obtained from bundle header. Sent as parameter to PushingBox/Google Scripts
+	#define tab_id_prefix   "E_"		// Used as a prefix if bundle source is being used to define tab
+	#define tab_id_complete "Sheet1"    // Defines tab if hub is defining tab instead of bundle source
 
 	// Required by PushingBox, specific to each scenario
 	char device_id[]   = "***REMOVED***";
@@ -334,7 +336,7 @@
 	// log_bundle/sendToPushingBox if the delay has passed
 	// Does NOT automatically upload a bundle, you still have to call sendToPushingBox
 	// This works more like a filter than an automator
-	#define pushMillisFilter 1 // 1 to enable a millis delay to uploading to PushingBox
+	#define pushMillisFilter 0 // 1 to enable a millis delay to uploading to PushingBox
 	#define pushMillisDelay 5  // delay in seconds
 #endif
 
