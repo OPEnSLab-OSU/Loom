@@ -22,39 +22,24 @@ void setup()
 	// LOOM_begin calls any relevant (based on config) LOOM device setup functions
 	Loom_begin();	
 
-	digitalWrite(led, HIGH);
-
 	// Any custom setup code
 
 }
 
-int x = 1;
+
 // ================================================================ 
 // ===                        MAIN LOOP                         ===
 // ================================================================ 
 void loop() 
 {
+	OSCBundle bndl; 
+	// OSCBundle send_bndl;
 
-	flash_led(x++, 400, 100);
-	x %= 10;
-	digitalWrite(LED_BUILTIN, HIGH);
-	delay(1000);
-	flash_led(8, 80, 30);
+	receive_bundle(&bndl, LORA);
+	print_bundle(&bndl);
 
+	log_bundle(&bndl, PUSHINGBOX);
 
-	sleep_for(5, SECONDS, STANDBY);
-
-	sleep_for(5, SECONDS, SLEEPYDOG);
-
-
-
-	// OSCBundle bndl, send_bndl;
-
-	// receive_bundle(&bndl, WIFI);
-	// process_bundle(&bndl);
-	// measure_sensors();
-	// package_data(&send_bndl);
-	// send_bundle(&send_bndl, WIFI);
-	// additional_loop_checks();
+	additional_loop_checks();
 
 }

@@ -84,6 +84,16 @@ void sendToPushingBox(OSCMessage &msg)
 		return;
 	}
 
+	#if verify_family_match == 1
+		char source[32];
+		osc_extract_header_section(&msg, 1, source);
+		if (strcmp(FAMILY STR(FAMILY_NUM), source) != 0) {
+			LOOM_DEBUG_Println("Source device family did not match");
+			return;
+		}
+	#endif
+
+
 	LOOM_DEBUG_Println("Sending to PushingBox");
 
 

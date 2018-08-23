@@ -243,8 +243,8 @@ String get_data_value(OSCMessage* msg, int pos)
 				return String(msg->getFloat(pos));
 				break;
 			case 's':
-				char buf[80];
-				msg->getString(pos, buf, 80);
+				char buf[256];
+				msg->getString(pos, buf, 256);
 				return String(buf);
 				break;
 			default:

@@ -318,7 +318,7 @@
 
 // --- PushingBox Options ---
 #if (is_ethernet != 1) && (is_wifi != 1) && (is_fona != 1)
-	#define is_pushingbox == 0
+	#define is_pushingbox 0
 #endif
 #if is_pushingbox == 1	
 	// Google Spreadsheet ID
@@ -326,6 +326,9 @@
 	// #define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	    
 	#define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"  // This is Luke's Arduino Test spreadsheet
+
+	// Required by PushingBox, specific to each scenario
+	char device_id[]   = "v7ECCEF7A460E57A";
 
 	// Google Spreadsheet Sheet/Tab. Sent as parameter to PushingBox/Google Scripts
 	#define useHubTabID 0
@@ -335,11 +338,9 @@
 	#else
 		// Use bundle source and below prefix to define tab ID
 		#define tab_id_prefix   "E_"		// Used as a prefix if bundle source is being used to define tab
-	#endif
+	#endif	
 
-
-	// Required by PushingBox, specific to each scenario
-	char device_id[]   = "v7ECCEF7A460E57A";
+	#define verify_family_match 1
 
 	// Currently works by only sending a bundle from 
 	// log_bundle/sendToPushingBox if the delay has passed
