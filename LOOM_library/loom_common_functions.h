@@ -36,11 +36,14 @@ void Loom_begin()
 			delay(2000);
 		#endif
 
-		Serial.println("Initialized Serial!");
+		Serial.println("Initialized Serial!\n");
 	#endif
 
+	LOOM_DEBUG_Println3("Device: ", DEVICE, INIT_INST);
+	LOOM_DEBUG_Println3("Family: ", FAMILY, FAMILY_NUM);
+
 	#if wake_delay == 1
-		LOOM_DEBUG_Println("Delaying 5 seconds");
+		// LOOM_DEBUG_Println("Delaying 5 seconds");
 		delay(5000);
 	#endif
 	
@@ -49,6 +52,8 @@ void Loom_begin()
 	#else
 		LOOM_DEBUG_Println("Running as Node");
 	#endif
+
+	LOOM_DEBUG_Println();
 
 	// Set the button pin mode to input
 	#ifdef is_button
@@ -292,7 +297,7 @@ void check_button_held()
 		button_timer = 0;
 	} else {
 		#ifdef is_sleep_period
-			button_timer += is_sleep_period;
+			button_timer += is_sleep_period;  // this should be done with millis
 		#else
 			button_timer++;
 		#endif

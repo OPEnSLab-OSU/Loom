@@ -89,11 +89,8 @@ void sendToPushingBox(OSCMessage &msg)
 
 	// Get the device source from bundle header 
 	char bundle_deviceID[20];
-	if (msg.size() >= 3) {
-		osc_extract_header_section(&msg, 2, bundle_deviceID);
-	} else {
-		sprintf(bundle_deviceID, "%s\0", "UnknownDevice");
-	}
+	osc_extract_header_section(&msg, 2, bundle_deviceID);
+
 
 	// Build url arguments from bundle
 	char args[1024];
@@ -120,7 +117,7 @@ void sendToPushingBox(OSCMessage &msg)
 	LOOM_DEBUG_Println2("URL get args: ", args);
 
 
-
+	// Send to PushingBox with enabled internet connection
 	#if is_ethernet == 1
 		pushingbox_ethernet(args);
 		return;

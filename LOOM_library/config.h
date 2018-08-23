@@ -41,6 +41,11 @@
 								//     the first Serial prints, as enabling this option means that the device does not wait for you to open Serial
 								// These only make a difference if LOOM_DEBUG is enabled
 
+
+// --- Device Telemetry Type ---
+#define hub_node_type 0		// 0: Hub, 1: Node
+#define is_repeater   0		// Sorry, this doesn't do anything yet
+
 // --- Enabled Communication Platform --- 
 #define is_wifi       0		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
@@ -55,12 +60,6 @@
 
 #define is_sd         0		// 1 to enable SD card 
 #define is_rtc        0		// Enable RTC functionality
-
-// --- Device Telemetry Type ---
-#define hub_node_type 0		// 0: Hub, 1: Node
-#define is_repeater   0		// Sorry, this doesn't do anything yet
-
-
 
 // --- Enabled Actuators --- 
 #define num_servos    0 	// Number of servos being used (up to 8 per shield, testing has generally only been through 1 shield)
@@ -318,6 +317,9 @@
 // ================================================================
 
 // --- PushingBox Options ---
+#if (is_ethernet != 1) && (is_wifi != 1) && (is_fona != 1)
+	#define is_pushingbox == 0
+#endif
 #if is_pushingbox == 1	
 	// Google Spreadsheet ID
 	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; random string of characters)

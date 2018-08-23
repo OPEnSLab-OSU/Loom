@@ -189,6 +189,8 @@ bool lora_send_bundle(OSCBundle *bndl)
 	// Use 'recvfromAckTimeout' from reliable client example for ack confirmation
 }
 
+
+
 bool lora_send_bundle_fragment(OSCBundle *bndl)
 {
 	LOOM_DEBUG_Println2("Bundle of size ", get_bundle_bytes(bndl));
