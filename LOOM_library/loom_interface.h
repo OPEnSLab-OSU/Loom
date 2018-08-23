@@ -470,8 +470,9 @@ void additional_loop_checks()
 	// Delay between loop iterations
 	#ifdef is_sleep_period
 		loop_sleep();
+	#elif defined(is_sleep_interrupt)
+		delay(50);
 	#endif
-
 
 	#if is_adafruitio == 1
 		adafruitio_subscribe();
@@ -497,13 +498,15 @@ void additional_loop_checks()
 void prep_before_sleep()
 {
 	LOOM_DEBUG_Println("Entering STANDBY");
-	Serial.end();
-	USBDevice.detach();
+	#if LOOM_DEBUG == 1
+		Serial.end();
+		USBDevice.detach(); 
+	#endif
 	rtc_interrupt_reset(); //clear interrupt registers, attach interrupts
 	delay(50);
-	#if LOOM_DEBUG == 1
+	// #if LOOM_DEBUG == 1
 		digitalWrite(LED_BUILTIN, LOW);
-	#endif
+	// #endif
 }
 
 void prep_after_sleep()
@@ -516,15 +519,15 @@ void prep_after_sleep()
 	#endif
 	rtc_interrupt_reset(); //clear interrupt registers, attach interrupts
 	clearRTCAlarms(); //prevent double trigger of alarm interrupt
-	USBDevice.attach();
-	Serial.begin(9600);
-	LOOM_DEBUG_Println("WAKE");
 
 	// Not sure why these have to be repeated but it seems to make a difference
 	rtc_interrupt_reset();
 	clearRTCAlarms();
 
 	#if LOOM_DEBUG == 1
+		USBDevice.attach();
+		Serial.begin(9600);
+		LOOM_DEBUG_Println("WAKE");
 		print_DateTime(rtc_inst.now());
 		delay(50);  // delay so serial stuff has time to print out all the way
 	#endif
@@ -546,13 +549,6 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 
 	switch(mode) {
 		// case IDLE: {
-		// 	LOOM_DEBUG_Println("Sleep in 'Idle' mode");
-			
-		// 	// Get current time from RTC
-		// 	// Calculate duration into the future
-		// 	// Sleep 
-		// 	// Return from sleep
-
 		// 	return;
 		// }
 	#if is_rtc3231 == 1
@@ -561,23 +557,37 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 
 			// Set alarm specified time into the future
 			switch (units) {
-				case SECONDS: setRTCAlarm_Relative(0, 0, amount);      break; 
+				case SECONDS: {
+					if (amount < 255) {
+						setRTCAlarm_Relative(0, 0, amount);       
+					} else {
+						setRTCAlarm_Relative(0, amount/60, amount%60);  
+					}
+					break;
+				}
+
 				case MINUTES: setRTCAlarm_Relative(0, amount, 0);      break; 
 			}
 
 		    // Prepare for sleep
 			prep_before_sleep();
 
-			digitalWrite(led, LOW);
+			// #if LOOM_DEBUG == 1
+				digitalWrite(led, LOW);
+			// #endif
+
 			// Go to sleep
+			// Will here wait until RTC interrupt
 			LowPower.standby();
 
-			digitalWrite(led, HIGH);
-
-			// Will wait until RTC interrupt
+			// #if LOOM_DEBUG == 1
+			// 	digitalWrite(led, HIGH);
+			// #endif
 
 			// Any necessary management when returning from sleep
 			prep_after_sleep();
+
+			LOOM_DEBUG_Println("Done with standby");
 
 			return;
 		}
@@ -681,26 +691,22 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 			return;
 		}
 	#endif // of '#if is_lora != 1'
-
+		default: {
+			LOOM_DEBUG_Println("Cannot sleep with a mode that is not enabled");
+		}
 	}
 }
 
 // void sleep_until_time(SleepMode mode) 
 // {
 // 	switch(mode) {
-// 		case IDLE: {
-// 			return;
-// 		}
-
 // 		case STANDBY: {
 // 			// DateTime now = rtc_inst.now();
-
 // 			// Create futue DateTime class with constructor
 // 			// Takes Days, Hours, Minutes, Seconds
 // 		    // DateTime future(now + TimeSpan(0,4,3,30));
 // 			return;
 // 		}
-
 // 		case SLEEPYDOG: {
 // 			// Could work if using SD wing RTC 
 // 			return;
@@ -716,25 +722,6 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 // void sleep_until_interrupt(int interrupts, SleepMode mode)
 // {
 // 	switch(mode) {
-// 		case IDLE: {
-// 			// Set interrupt pins
-// 			pinMode(RTC_pin, INPUT_PULLUP);
-// 		    attachInterrupt(digitalPinToInterrupt(RTC_pin), wakeUp, LOW);
-
-// 		    // Turn of LED
-//     		digitalWrite(led, LOW);
-//     		delay(200);
-//     		digitalWrite(led, HIGH);
-//     		delay(200);
-//     		digitalWrite(led, LOW);
-
-// 			// Go to sleep
-// 			LowPower.standby();
-
-// 			flash_led(4, 100, 400);
-
-// 		}
-
 // 		case STANDBY: {
 // 		}
 

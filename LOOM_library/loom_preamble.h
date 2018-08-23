@@ -83,8 +83,16 @@ enum LogPlatform {
 	// ADAFRUITIO,
 	SERIAL_MON
 };
+ 
+// enum SleepMode { IDLE, STANDBY, SLEEPYDOG };
+		// Also, Idle may be a keyword already in use
+enum SleepMode { 
+	#if is_rtc3231 == 1
+		STANDBY, 
+	#endif
+	SLEEPYDOG 
+};
 
-enum SleepMode { IDLE, STANDBY, SLEEPYDOG };
 enum TimeUnits { SECONDS, MINUTES };
 
 
