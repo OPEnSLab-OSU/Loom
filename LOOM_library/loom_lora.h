@@ -72,12 +72,12 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 		LOOM_DEBUG_Println("setFrequency failed");
 	}
 
-	#if hub_node_type == 0 && is_ethernet == 1 // if hub
-		LOOM_DEBUG_Println("Setting up ethernet");
-		if(!setup_ethernet()) {
-			LOOM_DEBUG_Println("Failed to setup ethernet");
-		}
-	#endif
+	// #if hub_node_type == 0 && is_ethernet == 1 // if hub
+	// 	LOOM_DEBUG_Println("Setting up ethernet");
+	// 	if(!setup_ethernet()) {
+	// 		LOOM_DEBUG_Println("Failed to setup ethernet");
+	// 	}
+	// #endif
 	
 	LOOM_DEBUG_Println("Setting power...");
 	rf95->setTxPower(23, false);

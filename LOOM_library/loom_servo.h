@@ -56,7 +56,7 @@ struct state_servo_t state_servo;
 void setup_servo();
 void set_servo_degree(int set_degree, int servo_choice);
 void handle_servo_msg(OSCMessage &msg);
-
+void package_servo(OSCBundle *bndl, char packet_header_string[]);
 
 // ================================================================ 
 // ===                          SETUP                           === 
@@ -89,16 +89,16 @@ void set_servo_degree(int set_degree, int servo_choice)
 	uint16_t pulselength = map(set_degree, 0, 180, SERVOMIN, SERVOMAX);
 	
 	if (set_degree < state_servo.predeg[servo_choice]) {
-		for (double pulselen = state_servo.pre_pulselength[servo_choice]; pulselen >= pulselength; pulselen--) {
+		// for (double pulselen = state_servo.pre_pulselength[servo_choice]; pulselen >= pulselength; pulselen--) {
 			state_servo.pwm.setPWM(servo_choice, 0, pulselen);
-		}
+		// }
 	}
 	
 	//When input degree is greater than previous degree, it increases
 	if (set_degree > state_servo.predeg[servo_choice]) {
-		for (double pulselen = state_servo.pre_pulselength[servo_choice]; pulselen < pulselength; pulselen++) {
+		// for (double pulselen = state_servo.pre_pulselength[servo_choice]; pulselen < pulselength; pulselen++) {
 			state_servo.pwm.setPWM(servo_choice, 0, pulselen);
-		}
+		// }
 	}
 	
 	state_servo.predeg[servo_choice]          = set_degree;
@@ -130,6 +130,24 @@ void handle_servo_msg(OSCMessage &msg)
 	}
 }
 
+
+
+// // --- PACKAGE SERVO --- 
+// // 
+// // Adds servo state to provided OSC bundle
+// //
+// // @param bndl                  The OSC bundle to be added to
+// // @param packet_header_string  The device-identifying string to prepend to OSC messages
+// //
+// void package_servo(OSCBundle *bndl, char packet_header_string[])
+// {
+// 	char address_string[80];
+
+// 	for (int i = 0; i < num_servos; i++) {
+// 		sprintf(address_string, "%s%s%d", packet_header_string, "/servo", i);
+// 		bndl->a]dd(address_string).add();
+// 	}
+// }
 
 
 

@@ -30,6 +30,8 @@ struct state_relay_t state_relay;
 void setup_relay();
 void handle_relay_msg(OSCMessage &msg);
 void write_relay_states();
+void package_relay(OSCBundle *bndl, char packet_header_string[]);
+
 
 
 // ================================================================ 
@@ -86,4 +88,24 @@ void write_relay_states()
 	digitalWrite(RELAY_PIN0,(state_relay.on[0]==true) ? HIGH : LOW);
 	digitalWrite(RELAY_PIN1,(state_relay.on[1]==true) ? HIGH : LOW);
 }
+
+
+
+// // --- PACKAGE RELAY --- 
+// // 
+// // Adds relay state to provided OSC bundle
+// //
+// // @param bndl                  The OSC bundle to be added to
+// // @param packet_header_string  The device-identifying string to prepend to OSC messages
+// //
+// void package_relay(OSCBundle *bndl, char packet_header_string[])
+// {
+// 	char address_string[80];
+
+// 	sprintf(address_string, "%s%s", packet_header_string, "/relay0");
+// 	bndl->add(address_string).add(state_relay.on[0]);
+// 	sprintf(address_string, "%s%s", packet_header_string, "/relay1");
+// 	bndl->add(address_string ).add(state_relay.on[0]);
+// }
+
 
