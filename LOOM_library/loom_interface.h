@@ -17,7 +17,7 @@ void additional_loop_checks();
 
 
 // ================================================================ 
-// ===                   INTERFACE FUNCTIONS                    === 
+// ===               GENERAL INTERFACE FUNCTIONS                === 
 // ================================================================
 
 
@@ -113,11 +113,9 @@ void process_bundle(OSCBundle *bndl)
 			bndl->route(STR(/) FAMILY , msg_router);
 
 
-
-
-
 			// --- Miscellaneous Processing ---
 
+		// can probably be removed from here, just use 'sd_save_bundle' function
 			// If SD logging is enabled and message was to this device, save bundle
 			#if is_sd == 1 
 				if ((SD_logging == 1) && (strncmp(address_string, configuration.packet_header_string, strlen(configuration.packet_header_string)) == 0)) {
@@ -488,8 +486,9 @@ void additional_loop_checks()
 
 
 
-
-
+// ================================================================ 
+// ===                 RTC INTERFACE FUNCTIONS                  === 
+// ================================================================
 
 
 

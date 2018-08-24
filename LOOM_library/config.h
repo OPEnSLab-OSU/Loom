@@ -55,7 +55,7 @@
 #define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
 // --- Data Logging Platforms ---
-#define is_pushingbox 1		// 1 to enable PushingBox (Auto enabled if using LoRa hub) 
+#define is_pushingbox 1		// 1 to enable PushingBox  
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         0		// 1 to enable SD card 
@@ -64,7 +64,7 @@
 // --- Enabled Actuators --- 
 #define num_servos    0 	// Number of servos being used (up to 8 per shield, testing has generally only been through 1 shield)
 #define num_steppers  0		// Number of stepper motors being used 
-#define is_relay      0		// 1 if relays are being used (enables two, on pins 5 and 6)
+#define is_relay      1		// 1 if relays are being used (enables two, on pins 5 and 6)
 
 // --- Enabled Sensors --- 
 #define num_analog    0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
@@ -281,7 +281,7 @@
 	//Use this for OPEnS Lab
 	// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
 
-	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // mac address of Ethernet port
+	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // mac address of Ethernet Luke's port
 	IPAddress ip(128,193,56,138); 						  // device's IP address  				try to make this a string, so #include can be move to ethernet file
 #endif
 

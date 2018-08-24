@@ -345,7 +345,7 @@ void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl)
 	destBndl->empty();
 	OSCMessage *msg;
 	OSCMessage tmpMsg;
-	char buf[50];
+	char addr[50];
 	for (int i = 0; i < srcBndl->size(); i++) { 	// for each message
 		msg = srcBndl->getOSCMessage(i);
 		for (int j = 0; j < msg->size(); j++) { 	// for each argument 
@@ -353,12 +353,12 @@ void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl)
 			switch (msg->getType(j)) {
 	 			case 'i': tmpMsg.add(msg->getInt(j));	break;
 	 			case 'f': tmpMsg.add(msg->getFloat(j));	break;
-	 			case 's': char buf[80];  msg->getString(j, buf, 80);  tmpMsg.add(buf);  break;
+	 			case 's': char buf[256];  msg->getString(j, buf, 256);  tmpMsg.add(buf);  break;
 	 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
 	 		}
  		}
- 		msg->getAddress(buf);
-		tmpMsg.setAddress(buf);
+ 		msg->getAddress(addr);
+		tmpMsg.setAddress(addr);
 
 		destBndl->add(tmpMsg);
 		tmpMsg.empty();		
@@ -368,17 +368,17 @@ void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl)
 void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
 {
 	LOOM_DEBUG_Println();
-	char buf[50];
+	char addr[50];
 	for (int i = 0; i < srcMsg->size(); i++) {
 		switch (srcMsg->getType(i)) {
  			case 'i': destMsg->add(srcMsg->getInt(i));	    break;
  			case 'f': destMsg->add(srcMsg->getFloat(i));	break;
- 			case 's': char buf[80];  srcMsg->getString(i, buf, 80);  destMsg->add(buf);  break;
+ 			case 's': char buf[256];  srcMsg->getString(i, buf, 256);  destMsg->add(buf);  break;
  			default: LOOM_DEBUG_Println("Unsupported data data_type.");
  		}
 	}
-	srcMsg->getAddress(buf);
-	destMsg->setAddress(buf);
+	srcMsg->getAddress(addr);
+	destMsg->setAddress(addr);
 }
 
 
@@ -406,13 +406,6 @@ void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string)
 	char larger_buf[384];
 	memset(larger_buf, '\0', sizeof(larger_buf));
 	original_convert_OSC_bundle_to_string(bndl, (char*)larger_buf);
-	// strcpy(osc_string, (const char*)larger_buf);
-	// original_convert_OSC_bundle_to_string(bndl, osc_string);
-
-	// LOOM_DEBUG_Println4("Larger Buf – [Len: ", strlen(larger_buf), "]\n", larger_buf);
-
-
-	// LOOM_DEBUG_Println4("Before Compression – [Len: ", strlen(osc_string), "]\n", osc_string);
 
 	const char* cPtr = nth_strchr(larger_buf, '/', 3);
 	char buf[30];
@@ -421,42 +414,10 @@ void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string)
 
 	snprintf(osc_string, 250, "%s\0", larger_buf);
 
-	// LOOM_DEBUG_Print4("Last Char-1: [", strlen(osc_string), "] ", osc_string[strlen(osc_string)-2]); 
-	// LOOM_DEBUG_Print(" (");
-	// Serial.print(osc_string[strlen(osc_string)-2], HEX);
-	// LOOM_DEBUG_Println(")");
-
-	// LOOM_DEBUG_Print4("Last Char: [", strlen(osc_string), "] ", osc_string[strlen(osc_string)-1]); 
-	// LOOM_DEBUG_Print(" (");
-	// Serial.print(osc_string[strlen(osc_string)-1], HEX);
-	// LOOM_DEBUG_Println(")");
-
-	// LOOM_DEBUG_Print4("Last Char+1: [", strlen(osc_string), "] ", osc_string[strlen(osc_string)]); 
-	// LOOM_DEBUG_Print(" (");
-	// Serial.print(osc_string[strlen(osc_string)], HEX);
-	// LOOM_DEBUG_Println(")");
-
 	// Remove occasional trailing space
 	if (osc_string[strlen(osc_string)-1] == 32 ) {
 		osc_string[strlen(osc_string)-1] = '\0';
 	}
-
-	// LOOM_DEBUG_Print4("Last Char-1: [", strlen(osc_string), "] ", osc_string[strlen(osc_string)-2]); 
-	// LOOM_DEBUG_Print(" (");
-	// Serial.print(osc_string[strlen(osc_string)-2], HEX);
-	// LOOM_DEBUG_Println(")");
-
-	// LOOM_DEBUG_Print4("Last Char: [", strlen(osc_string), "] ", osc_string[strlen(osc_string)-1]); 
-	// LOOM_DEBUG_Print(" (");
-	// Serial.print(osc_string[strlen(osc_string)-1], HEX);
-	// LOOM_DEBUG_Println(")");
-
-	// LOOM_DEBUG_Print4("Last Char+1: [", strlen(osc_string), "] ", osc_string[strlen(osc_string)]); 
-	// LOOM_DEBUG_Print(" (");
-	// Serial.print(osc_string[strlen(osc_string)], HEX);
-	// LOOM_DEBUG_Println(")");
-
-	// LOOM_DEBUG_Println4("After Compression – [Len: ", strlen(osc_string), "]\n", osc_string);
 }
 
 
@@ -479,32 +440,10 @@ void convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl)
 
 void uncompress_OSC_string(char* osc_string) 
 {
-	// LOOM_DEBUG_Println4("Before Restore – [Len: ", strlen(osc_string), "]\n", osc_string);
-
-
-	// char* restored_str = new char[512];
-
 	char buf[30];
 	const char* cPtr = nth_strchr(osc_string, '/', 3);
-	
 	snprintf(buf, cPtr-osc_string+2, "%s", osc_string);
-	// LOOM_DEBUG_Print3(" (", buf, ")");
-	// LOOM_DEBUG_Println3(" + (", cPtr+1, ")");
-
 	str_replace((char*)cPtr, "%", buf);	
-
-	// LOOM_DEBUG_Println2("Len in function: ", strlen(osc_string));
-	// LOOM_DEBUG_Println2("FIXED?\n", osc_string); // This one is fine
-	// sprintf(osc_string_out, "%s\0", osc_string);
-
-	// strcpy(restored_str, osc_string);
-	// osc_string = restored_str;
-	// return restored_str;
-	// LOOM_DEBUG_Println2("\nRESTORE?\n", restored_str);
-	// osc_string = restored_str;
-
-
-	// LOOM_DEBUG_Println4("After Restore – [Len: ", strlen(osc_string), "]\n", osc_string);
 }
 
 
@@ -677,7 +616,7 @@ void aux_convert_bundle_structure_to_single(OSCBundle *bndl, OSCBundle *outBndl)
 		switch (msg->getType(0)) {
 			case 'f': newMsg.add(msg->getFloat(0));	break;
 			case 'i': newMsg.add(msg->getInt(0));	break;
-			case 's': char buf[80];  msg->getString(0, buf, 50);  newMsg.add(buf);  break;
+			case 's': char buf[256];  msg->getString(0, buf, 256);  newMsg.add(buf);  break;
 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
 		}
 	}
@@ -698,13 +637,13 @@ void aux_convert_bundle_structure_to_multi(OSCBundle *bndl, OSCBundle *outBndl)
 		switch (msg->getType(i)) {
 			case 'i': tmpMsg.add(msg->getInt(i));	break;
 			case 'f': tmpMsg.add(msg->getFloat(i));	break;
-			case 's': char buf[80];  msg->getString(i, buf, 80);  tmpMsg.add(buf);  break;
+			case 's': char buf[256];  msg->getString(i, buf, 256);  tmpMsg.add(buf);  break;
 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
 		}
 
 		// Add message as /address/key value
 		snprintf(newAddress, strrchr(address,'/')-address+1, "%s", address);
-		msg->getString(i-1, keyBuf, 80);
+		msg->getString(i-1, keyBuf, 50);
 		sprintf(newAddress, "%s%s%s", newAddress, "/", keyBuf);
 		tmpMsg.setAddress(newAddress);
 

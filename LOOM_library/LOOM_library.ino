@@ -23,6 +23,7 @@ void setup()
 	Loom_begin();	
 
 	// Any custom setup code
+	LOOM_DEBUG_Println("Starting");
 
 }
 
@@ -32,14 +33,19 @@ void setup()
 // ================================================================ 
 void loop() 
 {
-	OSCBundle bndl; 
+
+
+
+
+
+	// OSCBundle bndl; 
 	// OSCBundle send_bndl;
 
-	receive_bundle(&bndl, LORA);
-	print_bundle(&bndl);
+	// receive_bundle(&bndl, LORA);
+	// print_bundle(&bndl);
 
-	log_bundle(&bndl, PUSHINGBOX);
+	// log_bundle(&bndl, PUSHINGBOX);
 
-	additional_loop_checks();
+	// additional_loop_checks();
 
 }
