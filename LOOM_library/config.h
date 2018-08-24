@@ -213,9 +213,11 @@
 	#elif hub_node_type == 1     // if is node
 		#define num_analog    2      // two temperature sensors
 		#define probe_type    0      // 0:TDM, 1: HRM
+    #define is_sht31d     1      // Temperature / Humidity
+    #define is_decagon    1      // Soil moisture
 		#define heatpulse     2500   // For HRM probe heat pulse (e.g 2500:2.5 sec) 
-		#define is_sht31d     1      // Temperature / Humidity
 		#define senddelay     60000  // send data every 1 min
+    #define heatduration  30000  // Turn on heater for 30 sec
 	#endif
 #endif 
 
