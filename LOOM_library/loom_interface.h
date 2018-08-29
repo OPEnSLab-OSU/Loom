@@ -91,7 +91,6 @@ void process_bundle(OSCBundle *bndl)
 			LOOM_DEBUG_Println2("Number of items in bundle: ", bndl->size());
 			LOOM_DEBUG_Println2("First message address string: ", address_string);
 
-			// print_bundle(bndl);
 
 			// --- Message Routing ---
 	
@@ -106,29 +105,17 @@ void process_bundle(OSCBundle *bndl)
 			// LOOM_DEBUG_Println3("##Device Routing (", configuration.packet_header_string, ")");
 			bndl->route(configuration.packet_header_string, msg_router);
 
+			// Family Subnet Message
 			if (!routing_match) {
-				// Family Subnet Message
 				// LOOM_DEBUG_Println3("##Subnet Routing (", STR(/) FAMILY STR(FAMILY_NUM), ")");
 				bndl->route(STR(/) FAMILY STR(FAMILY_NUM), msg_router);
 			}
-			
+
+			// Family Global Message
 			if (!routing_match) {
-				// Family Global Message
 				// LOOM_DEBUG_Println3("##Global Routing (", STR(/) FAMILY, ")");
 				bndl->route(STR(/) FAMILY , msg_router);
 			}
-
-
-			// --- Miscellaneous Processing ---
-
-		// can probably be removed from here, just use 'sd_save_bundle' function
-			// If SD logging is enabled and message was to this device, save bundle
-			#if is_sd == 1 
-				if ((SD_logging == 1) && (strncmp(address_string, configuration.packet_header_string, strlen(configuration.packet_header_string)) == 0)) {
-					LOOM_DEBUG_Println("Logging bundle");
-					sd_save_bundle("bndl_log.txt", bndl, 2, 2);
-				}
-			#endif
 
 		} else { // of !bndl.hasError()
 			error = bndl->getError();

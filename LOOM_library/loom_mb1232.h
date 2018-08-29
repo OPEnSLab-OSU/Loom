@@ -6,14 +6,16 @@
 // ================================================================
 // ===                       DEFINITIONS                        ===
 // ================================================================
+
+#define i2c_addr_mb1232 0x70 			
+
 #define SCL_PIN 5 						//Default SDA is Pin5 PORTC for the UNO -- you can set this to any tristate pin
 #define SCL_PORT PORTC
 #define SDA_PIN 4 						//Default SCL is Pin4 PORTC for the UNO -- you can set this to any tristate pin
 #define SDA_PORT PORTC
 #define I2C_TIMEOUT 100 				//Define a timeout of 100 ms -- do not wait for clock stretching longer than this time 
 
-#define i2c_addr_mb1232 0x70 			//The Sensor ranging command has a value of 0x51
-#define RangeCommand    0x51
+#define RangeCommand    0x51			//The Sensor ranging command has a value of 0x51
 #define ChangeAddressCommand1 0xAA		//These are the two commands that need to be sent in sequence to change the sensor address
 #define ChangeAddressCommand2 0xA5
 

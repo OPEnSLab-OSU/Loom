@@ -187,7 +187,7 @@
 
 #if is_wifi == 1
 	#define advanced_interdev_comm 1 	// Enable for full Max support 
-									 	// Default is for this to be 1 when using WiFi
+										// Default is for this to be 1 when using WiFi
 #endif
 
 // ================================================================
@@ -233,6 +233,7 @@
 	#define is_ms5803          1	// Pressure Sensor
 #endif
 
+
 // ================================================================
 // ===                         ISHIELD                          === 
 // ================================================================
@@ -266,13 +267,14 @@
 	#elif hub_node_type == 1     // if is node
 		#define num_analog    2      // two temperature sensors
 		#define probe_type    0      // 0:TDM, 1: HRM
-    #define is_sht31d     1      // Temperature / Humidity
-    #define is_decagon    1      // Soil moisture
+		#define is_sht31d     1      // Temperature / Humidity
+		#define is_decagon    1      // Soil moisture
 		#define heatpulse     2500   // For HRM probe heat pulse (e.g 2500:2.5 sec) 
 		#define senddelay     60000  // send data every 1 min
-    #define heatduration  30000  // Turn on heater for 30 sec
+		#define heatduration  30000  // Turn on heater for 30 sec
 	#endif
 #endif 
+
 
 // ================================================================
 // ===                       EVAPOROMETER                       === 
@@ -307,6 +309,7 @@
 	#define is_button  0  // To prevent data from non-existent button to be sent
 #endif
 
+
 // ================================================================ 
 // ===             COMMUNICATION PLATFORM OPTIONS               === 
 // ================================================================
@@ -334,15 +337,19 @@
 
 // --- nRF Options --- 
 #if is_nrf == 1
-	#define NRF_HUB_ADDRESS 1			// Use 0-9 for SERVER_ADDRESSes
-	
-	#if hub_node_type == 1
-		#define NRF_NODE_ADDRESS 0
+	#if hub_node_type == 0 	// If is hub
+		#define LORA_HUB_ADDRESS  CHANNEL
+		#define LORA_NODE_ADDRESS 1
+	#else 					// If is node
+		#define LORA_HUB_ADDRESS  1			
+		#define LORA_NODE_ADDRESS CHANNEL
 	#endif
 
 	// #define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
+											// Currently unused
 #endif
 
+// --- Ethernet Options ---
 #if is_ethernet == 1
 	#include <Ethernet2.h>				// (this is needed for IPAddress object below, do not remove)
 	
@@ -359,25 +366,20 @@
 #if is_fona == 1
 	#define LOOM_DEBUG 1	// This is just temporary for now, as all Fona tests are done interactively through serial monitor
 	#define fona_test  1    // This enables the Fona interactive testing Loop, note that this will override normal 
-							//   Loom loop behavior until command to exit testing loop is issued
+							//    Loom loop behavior until command to exit testing loop is issued
 	#define fona_type 2G 	// Can be '2G' (808) or '3G' (5320A), currently only 2G is supported
 #endif
 
 
 // ================================================================ 
-// ===                   TELEMETRY OPTIONS                      === 
+// ===                       HUB OPTIONS                        === 
 // ================================================================
 
-// --- Hub Options ---
 #if (hub_node_type == 0) && ((is_wifi == 1) || (is_ethernet == 1) || (is_fona == 1))
-	#define is_pushingbox 1 // only if Ethernet, WiFi, or cellular
+	#define is_pushingbox 1     	// Auto enable PushingBox if Ethernet, WiFi, or cellular
 
-	#define device_poll_refresh 0  // Seconds between re-searching for devices on the network
+	#define device_poll_refresh 0 	// Seconds between re-searching for devices on the network
 									// Set 0 or negative to disable
-
-	// The following two defines are planned to be implemented, but are not in use currently
-	// #define hub_input  LORA
-	// #define hub_output ETHERNET
 #endif
 
 
