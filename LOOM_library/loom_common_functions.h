@@ -25,7 +25,9 @@ int milli_duration(int amount, TimeUnits units);
 // 
 void Loom_begin()
 {
-	pinMode(led, OUTPUT);   // Set the LED pin mode
+	#if LOOM_DEBUG == 1
+		pinMode(led, OUTPUT);   // Set the LED pin mode
+	#endif
 
 	//Initialize serial and wait for port to open:
 	#if LOOM_DEBUG == 1

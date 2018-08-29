@@ -23,7 +23,7 @@
 // --- Device Identification --- 
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
 #define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
-#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively. Alternatively can define to -1 to used advanced option INIT_INST
+#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request channel settings from Max Channel Manager, 0 to not
 #define AUTO_NAME        0		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Evap"	// This is only used if Auto_name is set to be 0
@@ -55,16 +55,16 @@
 #define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
 // --- Data Logging Platforms ---
-#define is_pushingbox 1		// 1 to enable PushingBox  
+#define is_pushingbox 0		// 1 to enable PushingBox  
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         0		// 1 to enable SD card 
-#define is_rtc        0		// Enable RTC functionality
+#define is_rtc        1		// Enable RTC functionality
 
 // --- Enabled Actuators --- 
 #define num_servos    0 	// Number of servos being used (up to 8 per shield, testing has generally only been through 1 shield)
 #define num_steppers  0		// Number of stepper motors being used 
-#define is_relay      1		// 1 if relays are being used (enables two, on pins 5 and 6)
+#define is_relay      0		// 1 if relays are being used (enables two, on pins 5 and 6)
 
 // --- Enabled Sensors --- 
 #define num_analog    0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
@@ -140,7 +140,9 @@
 // if not using channels
 #if CHANNEL == -1
 	#define INIT_INST    3	// Initial device instance number (normally 1-8 when using channels)
-	#define INIT_PORT 9443	// Initial device UDP port (normally 1-8 when using channels)
+	#if is_wifi == 1
+		#define INIT_PORT 9443	// Initial device UDP port (normally 1-8 when using channels)
+	#endif
 #endif
 
 #if is_wifi == 1
@@ -257,9 +259,25 @@
 
 // --- LoRa Options ---
 #if is_lora == 1
-	#define LORA_HUB_ADDRESS  1			// Use 0-9 for SERVER_ADDRESSes
-	#define LORA_NODE_ADDRESS 2			// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
+	// #define LORA_HUB_ADDRESS  1			// Use 0-9 for SERVER_ADDRESSes
+	// #if hub_node_type == 0
+	// 	#define LORA_NODE_ADDRESS CHANNEL
+	// #else
+	// 	#define LORA_NODE_ADDRESS 2			// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
+	// #endif
+	// 									// 10-19 for 0, 20 - 29 for 1, etc.
+//	#define LORA_HUB_ADDRESS  1			// Use 0-9 for SERVER_ADDRESSes
+	
+	#if hub_node_type == 0 // is hub
+		#define LORA_HUB_ADDRESS  CHANNEL
+		#define LORA_NODE_ADDRESS 1
+	#else // is node
+		#define LORA_HUB_ADDRESS  1			// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
+		#define LORA_NODE_ADDRESS CHANNEL
+	#endif
 										// 10-19 for 0, 20 - 29 for 1, etc.
+
+		
 
 	#define RF95_FREQ      915.0		// Hardware specific, Tx must match Rx
 

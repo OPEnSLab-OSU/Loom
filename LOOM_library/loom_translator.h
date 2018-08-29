@@ -164,7 +164,7 @@ void print_message(OSCMessage* msg)
 //
 void print_bundle(OSCBundle *bndl)
 {
-	if (bundle_empty(bndl)) return;
+	if (!bndl->size()) return;
 
 	#if LOOM_DEBUG == 1
 		char buf[50];
@@ -399,27 +399,71 @@ void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
 // @param bndl        An OSCBundle to put into string format.
 // @param osc_string  A char * to fill with the OSCBundle's data.
 //
+// void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string) 
+// {
+// 	// This is done in case the bundle converts to a string larger than
+// 	// 251 characters before compression
+// 	char larger_buf[384];
+// 	memset(larger_buf, '\0', sizeof(larger_buf));
+// 	original_convert_OSC_bundle_to_string(bndl, (char*)larger_buf);
+
+// 	const char* cPtr = nth_strchr(larger_buf, '/', 3);
+// 	char buf[30];
+// 	snprintf(buf, cPtr-larger_buf+2, "%s\0", larger_buf); // Copy compressable header to buf
+// 	str_replace((char*)cPtr, buf, "%");
+
+// 	snprintf(osc_string, 250, "%s\0", larger_buf);
+
+// 	// Remove occasional trailing space
+// 	if (osc_string[strlen(osc_string)-1] == 32 ) {
+// 		osc_string[strlen(osc_string)-1] = '\0';
+// 	}
+// }
+
+
 void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string) 
 {
+//	LOOM_DEBUG_Println("1");
+
+	
 	// This is done in case the bundle converts to a string larger than
 	// 251 characters before compression
 	char larger_buf[384];
 	memset(larger_buf, '\0', sizeof(larger_buf));
+
+//	LOOM_DEBUG_Println("2");
+	
 	original_convert_OSC_bundle_to_string(bndl, (char*)larger_buf);
 
-	const char* cPtr = nth_strchr(larger_buf, '/', 3);
-	char buf[30];
-	snprintf(buf, cPtr-larger_buf+2, "%s\0", larger_buf); // Copy compressable header to buf
-	str_replace((char*)cPtr, buf, "%");
+//	LOOM_DEBUG_Println("3");
 
+	const char* cPtr = nth_strchr(larger_buf, '/', 3);
+
+	// Only try to compress if possible 
+	int third_slash = cPtr - (char*)larger_buf;
+	if ( (third_slash > 0) && (third_slash < 30) ) {
+//		Serial.println(third_slash);
+		
+		char buf[30];
+		snprintf(buf, cPtr-larger_buf+2, "%s\0", larger_buf); // Copy compressable header to buf
+//		LOOM_DEBUG_Println("4");
+		str_replace((char*)cPtr, buf, "%");
+	}
+
+//	char buf[30];
+//	snprintf(buf, cPtr-larger_buf+2, "%s\0", larger_buf); // Copy compressable header to buf
+//  LOOM_DEBUG_Println("4");
+//	str_replace((char*)cPtr, buf, "%");
+//	LOOM_DEBUG_Println("5");
 	snprintf(osc_string, 250, "%s\0", larger_buf);
 
 	// Remove occasional trailing space
 	if (osc_string[strlen(osc_string)-1] == 32 ) {
 		osc_string[strlen(osc_string)-1] = '\0';
 	}
-}
 
+//	LOOM_DEBUG_Println("6");
+}
 
 
 // --- CONVERT STRING TO OSC ---
@@ -440,10 +484,13 @@ void convert_OSC_string_to_bundle(char *osc_string, OSCBundle* bndl)
 
 void uncompress_OSC_string(char* osc_string) 
 {
-	char buf[30];
-	const char* cPtr = nth_strchr(osc_string, '/', 3);
-	snprintf(buf, cPtr-osc_string+2, "%s", osc_string);
-	str_replace((char*)cPtr, "%", buf);	
+	// Only try to uncompress if it was compressed
+	if (strstr(osc_string, "%")) {
+		char buf[30];
+		const char* cPtr = nth_strchr(osc_string, '/', 3);
+		snprintf(buf, cPtr-osc_string+2, "%s", osc_string);
+		str_replace((char*)cPtr, "%", buf);		
+	}
 }
 
 

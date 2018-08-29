@@ -25,17 +25,19 @@
 #endif
 
 // If using channels
-#if CHANNEL >= 1 && CHANNEL <= 8
+#if CHANNEL >= 1 && CHANNEL <= 9
 	#define INIT_INST CHANNEL
-	#define INIT_PORT SUBNET_PORT+CHANNEL
+	#if is_wifi == 1
+		#define INIT_PORT SUBNET_PORT+CHANNEL
+	#endif
 #endif
 
 
 // --- Automatically Set Device Name ---
 #if AUTO_NAME == 1
 	// Make sure only one device type is enabled
-	#if ( (is_ishield) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_multiplexer) ) > 1
-		autoname_device_type_error	// this will force an error if too many sensor/actuator were defined (needs to be = 1 for autoname to work)
+	#if ( (is_ishield) + (is_evaporimeter) + (is_sapflow) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_multiplexer) ) > 1
+		autoname_device_type_error_probably_incompatible_devices_defined_in_config // this will force an error if too many sensor/actuator were defined (needs to be = 1 for autoname to work)
 	#endif
 
 	// Automatically set device name
@@ -124,6 +126,7 @@ uint32_t      button_timer;                   // Time that the button has been h
 int           button_state;					  // Variable to hold the state of the button
 // char          addressString[255];			  // A place to hold the address string of the current message being examined
 char          global_packet_header_string[80]; // Sometimes functions need to access the header string but are declared before loom_flash.h is included
+bool 		  routing_match;
 
 
 

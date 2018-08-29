@@ -84,6 +84,7 @@ void sendToPushingBox(OSCMessage &msg)
 		return;
 	}
 
+	// If option enabled, make sure device is in the same family
 	#if verify_family_match == 1
 		char source[32];
 		osc_extract_header_section(&msg, 1, source);
@@ -93,6 +94,13 @@ void sendToPushingBox(OSCMessage &msg)
 		}
 	#endif
 
+	// Make sure this bundle wasn't ping related
+	char check_ping[50];
+	osc_extract_header_section(&msg, 2, check_ping);
+	if ( strstr(get_address_string(&msg).c_str(), "Ping") ) {
+		LOOM_DEBUG_Println("Message was a ping related, don't upload");
+		return;
+	}
 
 	LOOM_DEBUG_Println("Sending to PushingBox");
 

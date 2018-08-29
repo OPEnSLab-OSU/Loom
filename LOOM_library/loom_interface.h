@@ -91,7 +91,7 @@ void process_bundle(OSCBundle *bndl)
 			LOOM_DEBUG_Println2("Number of items in bundle: ", bndl->size());
 			LOOM_DEBUG_Println2("First message address string: ", address_string);
 
-			print_bundle(bndl);
+			// print_bundle(bndl);
 
 			// --- Message Routing ---
 	
@@ -100,17 +100,23 @@ void process_bundle(OSCBundle *bndl)
 			// which will route/dispatch messages to the currect handling functions
 			// Most commands will be finished once control returns here 
 			
-			// Device Specific Message
-			LOOM_DEBUG_Println3("##Device Routing (", configuration.packet_header_string, ")");
-			bndl->route(configuration.packet_header_string, msg_router);
+			routing_match = false;
 			
-			// Family Subnet Message
-			LOOM_DEBUG_Println3("##Subnet Routing (", STR(/) FAMILY STR(FAMILY_NUM), ")");
-			bndl->route(STR(/) FAMILY STR(FAMILY_NUM), msg_router);
+			// Device Specific Message
+			// LOOM_DEBUG_Println3("##Device Routing (", configuration.packet_header_string, ")");
+			bndl->route(configuration.packet_header_string, msg_router);
 
-			// Family Global Message
-			LOOM_DEBUG_Println3("##Global Routing (", STR(/) FAMILY, ")");
-			bndl->route(STR(/) FAMILY , msg_router);
+			if (!routing_match) {
+				// Family Subnet Message
+				// LOOM_DEBUG_Println3("##Subnet Routing (", STR(/) FAMILY STR(FAMILY_NUM), ")");
+				bndl->route(STR(/) FAMILY STR(FAMILY_NUM), msg_router);
+			}
+			
+			if (!routing_match) {
+				// Family Global Message
+				// LOOM_DEBUG_Println3("##Global Routing (", STR(/) FAMILY, ")");
+				bndl->route(STR(/) FAMILY , msg_router);
+			}
 
 
 			// --- Miscellaneous Processing ---
@@ -130,7 +136,7 @@ void process_bundle(OSCBundle *bndl)
 		} // of else
 	} // of if (bndl->size())
 
-	bndl->empty();
+	// bndl->empty();
 }
 
 
@@ -429,7 +435,6 @@ void log_bundle(OSCBundle *log_bndl, LogPlatform platform, char* file)
 			Serial.println("That platform is not enabled for logging");
 		#endif 
 	} // of switch
-	LOOM_DEBUG_Println("That platform is not enabled for exporting");
 }
 
 
@@ -540,11 +545,6 @@ void prep_after_sleep()
 
 void sleep_for(int amount, TimeUnits units, SleepMode mode) 
 {
-	// #if LOOM_DEBUG == 1
-	// 	LOOM_DEBUG_Println("LOOM_DEBUG is enabled, sleeps will be replaced with delay");
-	// 	delay(duration);
-	// 	return;
-	// #endif
 
 	switch(mode) {
 		// case IDLE: {
@@ -552,7 +552,7 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 		// }
 	#if is_rtc3231 == 1
 		case STANDBY: {
-			LOOM_DEBUG_Println("Sleep in 'Standby' mode");
+			LOOM_DEBUG_Println("Sleep for time in 'Standby' mode");
 
 			// Set alarm specified time into the future
 			switch (units) {
@@ -564,30 +564,19 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 					}
 					break;
 				}
-
 				case MINUTES: setRTCAlarm_Relative(0, amount, 0);      break; 
 			}
 
-		    // Prepare for sleep
-			prep_before_sleep();
+			prep_before_sleep();		// Prepare for sleep
+			digitalWrite(led, LOW);
 
-			// #if LOOM_DEBUG == 1
-				digitalWrite(led, LOW);
-			// #endif
+			LowPower.standby(); 		// Go to sleep, will here wait until RTC interrupt
 
-			// Go to sleep
-			// Will here wait until RTC interrupt
-			LowPower.standby();
-
-			// #if LOOM_DEBUG == 1
-			// 	digitalWrite(led, HIGH);
-			// #endif
-
-			// Any necessary management when returning from sleep
-			prep_after_sleep();
-
+			#if LOOM_DEBUG == 1
+				digitalWrite(led, HIGH);
+			#endif
+			prep_after_sleep();			// Any necessary management when returning from sleep
 			LOOM_DEBUG_Println("Done with standby");
-
 			return;
 		}
 	#endif // of 'is_rtc3231 == 1'
@@ -696,23 +685,52 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 	}
 }
 
-// void sleep_until_time(SleepMode mode) 
-// {
-// 	switch(mode) {
-// 		case STANDBY: {
-// 			// DateTime now = rtc_inst.now();
-// 			// Create futue DateTime class with constructor
-// 			// Takes Days, Hours, Minutes, Seconds
-// 		    // DateTime future(now + TimeSpan(0,4,3,30));
-// 			return;
-// 		}
-// 		case SLEEPYDOG: {
-// 			// Could work if using SD wing RTC 
-// 			return;
-// 		}
 
-// 	}
-// }
+// Could take DateTime object (probably with overloading)
+// there should be a global datetime (lastWake) that gets updated upon device wake
+	// maybe hava a timespan for consistent increments
+// Or could take Hour, Min, Sec 
+	// would assume to trigger first occurance of that regardless of day
+void sleep_until_time(SleepMode mode, int hour, int min, int sec) 
+{
+	switch(mode) {
+		#if is_rtc3231 == 1
+		case STANDBY: {
+			// DateTime now = rtc_inst.now();
+			// Create futue DateTime class with constructor
+			// Takes Days, Hours, Minutes, Seconds
+		    // DateTime future(now + TimeSpan(0,4,3,30));
+			
+			LOOM_DEBUG_Println("Sleep until time in 'Standby' mode");
+
+			// Set alarm specified time into the future
+			setRTCAlarm_Absolute(hour, min, sec);
+
+			prep_before_sleep();		// Prepare for sleep
+			digitalWrite(led, LOW);
+
+			LowPower.standby(); 		// Go to sleep, will here wait until RTC interrupt
+
+			#if LOOM_DEBUG == 1
+				digitalWrite(led, HIGH);
+			#endif
+			prep_after_sleep();			// Any necessary management when returning from sleep
+			LOOM_DEBUG_Println("Done with standby");
+			return;	
+		}
+		#endif // of '#if is_rtc3231 == 1'
+
+		case SLEEPYDOG: {
+			// might work if using SD wing RTC 
+			return;
+		}
+
+		default: {
+			LOOM_DEBUG_Println("Cannot sleep with a mode that is not enabled");
+		}
+
+	}
+}
 
 
 
@@ -728,6 +746,14 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 // 		}
 
 // 	}
+// }
+
+ 
+
+// ?? 
+// void configure_interrupts() 
+// {
+
 // }
 
 

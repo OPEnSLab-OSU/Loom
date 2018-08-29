@@ -8,7 +8,6 @@
 #include "config.h"
 
 
-//#define hub_node_type 1
 // Preamble includes any relevant subroutine files based 
 // on options specified in the above config
 #include "loom_preamble.h"
@@ -23,8 +22,6 @@ void setup()
 	Loom_begin();	
 
 	// Any custom setup code
-	LOOM_DEBUG_Println("Starting");
-
 }
 
 
@@ -34,18 +31,19 @@ void setup()
 void loop() 
 {
 
+	OSCBundle bndl, send_bndl;
 
+	receive_bundle(&bndl, LORA);
+	if (bndl.size()) {
+		print_bundle(&bndl);
+	}
+	process_bundle(&bndl);
+	log_bundle(&bndl, PUSHINGBOX);
 
+	measure_sensors();
+	package_data(&send_bndl);
+	send_bundle(&send_bndl, LORA);
 
-
-	// OSCBundle bndl; 
-	// OSCBundle send_bndl;
-
-	// receive_bundle(&bndl, LORA);
-	// print_bundle(&bndl);
-
-	// log_bundle(&bndl, PUSHINGBOX);
-
-	// additional_loop_checks();
+	additional_loop_checks();
 
 }

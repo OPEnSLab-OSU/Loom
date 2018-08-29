@@ -186,17 +186,44 @@ char* get_weekday() {
 void setRTCAlarm_Relative(int hours, int minutes, int seconds)
 {
 	// Display current time
-	LOOM_DEBUG_Println("Current Time:"); //Serial.print(HR); Serial.print(":"); Serial.println(MIN);
+	LOOM_DEBUG_Println("Current Time:");
 	print_DateTime( rtc_inst.now() );
 
 	// Calculate new time
 	DateTime future( rtc_inst.now() + TimeSpan(0,hours,minutes,seconds) );
-	LOOM_DEBUG_Println("Resetting Alarm 1 for:"); //Serial.print(HR); Serial.print(":"); Serial.println(MIN);
+	LOOM_DEBUG_Println("Resetting Alarm 1 for:"); 
 	print_DateTime(future);
 
-	// Set alarm 1
+	// Set alarm 1																	// not sure if this 0 is correct
 	rtc_inst.setAlarm(ALM1_MATCH_HOURS, future.second(), future.minute(), future.hour(), 0); 
-			    								// not sure if this 0 is correct
+	rtc_inst.alarmInterrupt(1, true);
+}
+
+
+// --- SET RTC ALARM RELATIVE
+void setRTCAlarm_Absolute(int hour, int minute, int second)
+{
+	DateTime now = rtc_inst.now();
+
+	// Display current time
+	LOOM_DEBUG_Println("Current Time:");
+	print_DateTime( now );
+
+	// Calculate new time (checking to make sure alarm is not set in past)
+	DateTime future = DateTime(now.year(), now.month(), now.day(), hour, minute, second);
+
+	// If that time has already passed on current day, set for next day
+	// Using Timespan of 24 hours to prevent errors
+	if ( (future - now).totalseconds() < 0 ) {
+		LOOM_DEBUG_Println("Time already passed, setting for next day");
+		future = future + TimeSpan(1,0,0,0);
+	} 
+
+	LOOM_DEBUG_Println("Resetting Alarm 1 for:"); 
+	print_DateTime(future);
+
+	// Set alarm 1																	// not sure if this 0 is correct
+	rtc_inst.setAlarm(ALM1_MATCH_HOURS, future.second(), future.minute(), future.hour(), 0); 	    								
 	rtc_inst.alarmInterrupt(1, true);
 }
 
