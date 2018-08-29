@@ -28,7 +28,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	LOOM_DEBUG_Print("Message:  ");
 	print_message(&msg, 0);
 
-	// bool found = false;
+	routing_match = true;  // will be reset to false if the end of the function is reached
 
 
 	#if LOOM_DEBUG == 1
@@ -112,10 +112,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 
 
 
-
-
-
-// THESE ARE MORE GNERAL COMMANDS, MOSTLY FROM SUBNET / GLOBAL 
+// THESE ARE MORE GENERAL COMMANDS, MOSTLY FROM SUBNET / GLOBAL 
 
 
 	// If Max has polled for devices on the WiFi network 
@@ -145,6 +142,9 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	#if LOOM_DEBUG == 1
 		LOOM_DEBUG_Println3("No Message Routing Match Found for: '", buffer, "'");
 	#endif
+
+	routing_match = false;  // no match found
+
 }
 
 
