@@ -47,3 +47,18 @@ void loop()
 	additional_loop_checks();
 
 }
+
+
+
+// --- High-Level API Functions  --- 
+//
+// void receive_bundle(OSCBundle *bndl, CommPlatform platform);
+// void process_bundle(OSCBundle *bndl);
+// void measure_sensors();
+// void package_data(OSCBundle *send_bndl);
+// void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port);
+// void send_bundle(OSCBundle *send_bndl, CommPlatform platform);
+// void log_bundle(OSCBundle *send_bndl, LogPlatform platform, char* file); //filename for SD files
+// void log_bundle(OSCBundle *send_bndl, LogPlatform platform);
+// bool bundle_empty(OSCBundle *bndl);
+// void additional_loop_checks();

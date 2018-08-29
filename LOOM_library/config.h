@@ -15,11 +15,17 @@
 // Definitions that should not be modified by the user are
 //   located in the library and are not present here
 
-
+// ================================================================
 // ================================================================ 
-// ===                         OPTIONS                          === 
+// ===                     PRIMARY OPTIONS                      === 
+// ================================================================
 // ================================================================
 
+
+
+// ================================================================ 
+// ===                  IDENTIFICATION OPTIONS                  === 
+// ================================================================
 // --- Device Identification --- 
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
 #define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
@@ -28,25 +34,38 @@
 #define AUTO_NAME        0		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Evap"	// This is only used if Auto_name is set to be 0
 
-// --- Debugging --- 
-#define LOOM_DEBUG    1		// Set to 1 if you want Serial statements from various functions to print
-							// NOTE: Serial monitor must be opened for device to setup if this is enabled
-							//   Device will freeze if this in abled and device does not get plugged into Serial
-							// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
-#define dynamic_serial_output 0 // 0 is standard operation 
-								// 1 Allows serial monitor to re-continue even after device has been unplugged from USB then plugged back in
-								//   - Note that you need to reopen the Serial monitor if it was open before the device was plugged back in
+// ================================================================ 
+// ===                      SERIAL OPTIONS                      === 
+// ================================================================
+// --- Debugging --- 
+#define LOOM_DEBUG    0			// Set to 1 if you want Serial statements from various functions to print
+								// NOTE: Serial monitor must be opened for device to setup if this is enabled
+								//   Device will freeze if this in abled and device does not get plugged into Serial
+								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
+
+#define dynamic_serial_output 0 // These only apply if LOOM_DEBUG is enabled
+								// 0 is standard operation 
+								//   - Serial monitor needs to start / be open for device to setup
+								//   - Serial (USB) can generally be detached after setup without issue 
+								//   - Note that you may need to reopen the Serial monitor if it was open before the device was plugged back in
+								// 1 Allows serial monitor to device to setup when LOOM_DEBUG is enabled without Serial (USB) being attached 
 								//   - Note that you probably want to have the serial monitor open before uploading to the device, else you may miss 
 								//     the first Serial prints, as enabling this option means that the device does not wait for you to open Serial
-								// These only make a difference if LOOM_DEBUG is enabled
+
+#define wake_delay 0			// 1 to enable wait 5 seconds upon awaking from sleep to (re)start Serial
 
 
-// --- Device Telemetry Type ---
+// ================================================================ 
+// ===                  DEVICE TELEMETRY TYPE                   === 
+// ================================================================
 #define hub_node_type 0		// 0: Hub, 1: Node
 #define is_repeater   0		// Sorry, this doesn't do anything yet
 
-// --- Enabled Communication Platform --- 
+
+// ================================================================ 
+// ===                 COMMUNICATION PLATFORMS                  === 
+// ================================================================
 #define is_wifi       0		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
@@ -54,32 +73,43 @@
 #define is_fona       0		// 1 to enable cellular via Fona (808)
 #define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
-// --- Data Logging Platforms ---
+
+// ================================================================ 
+// ===                  DATA LOGGING PLATFORMS                  === 
+// ================================================================
 #define is_pushingbox 0		// 1 to enable PushingBox  
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         0		// 1 to enable SD card 
 #define is_rtc        1		// Enable RTC functionality
 
+
+// ================================================================ 
+// ===                        ACTUATORS                         === 
+// ================================================================
 // --- Enabled Actuators --- 
 #define num_servos    0 	// Number of servos being used (up to 8 per shield, testing has generally only been through 1 shield)
 #define num_steppers  0		// Number of stepper motors being used 
 #define is_relay      0		// 1 if relays are being used (enables two, on pins 5 and 6)
 
+
+// ================================================================ 
+// ===                         SENSORS                          === 
+// ================================================================
 // --- Enabled Sensors --- 
 #define num_analog    0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
 #define is_decagon    0		// 1 if GS3 Decagon is being used
 
 // --- I2C Sensors ---
-// Multiplexer may override these settings
+// Multiplexer / aggregate device may override these settings
 #define is_tsl2591         0	// Lux Sensor
 #define is_tsl2561         0	// Lux Sensor
-#if is_tsl2561 == 1
-	#define tsl2561_res 3 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
-	#define is_tsl2561_low   1 
-	#define is_tsl2561_float 1
-	#define is_tsl2561_high  1
-#endif
+	#if is_tsl2561 == 1
+		#define tsl2561_res 3 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
+		#define is_tsl2561_low   1 
+		#define is_tsl2561_float 1
+		#define is_tsl2561_high  1
+	#endif
 #define is_fxos8700        0	// Accelerometer / Magnetometer
 #define is_fxas21002       0	// Gyroscope
 #define is_zxgesturesensor 0	// ZX_Distance Sensor
@@ -89,9 +119,9 @@
 #define is_lis3dh          0	// Accelerometer
 #define is_ms5803          0	// Atmospheric Pressure / Temperature Sensor
 #define is_hx711           0    // Load Cell
-#if is_hx711 == 1
-	#define hx711_calibration 961.275
-#endif
+	#if is_hx711 == 1
+		#define hx711_calibration 961.275
+	#endif
 
 // --- Button Options ---
 #define is_button 		1	// 1 to enable button
@@ -99,13 +129,21 @@
 							// Button is on most feathers, but may not work on 
 							// relay shield if pin 10 is used for relay
 
-// --- Prebuilt Devices ---
-#define is_ishield      0	// 1 to specify using Ishield (should enable only wifi as communication platform)
-#define is_multiplexer  0	// 1 if tca9548a Multiplexer is being used. (Further customization in advanced options)
-#define is_sapflow      0 
-#define is_evaporimeter 0
+
+// ================================================================ 
+// ===              PREDEFINED AGGREGATE DEVICES                === 
+// ================================================================
+// Enable specified devices, typically mutually exclusive
+// Further options in the advanced settings
+#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
+#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_sapflow      0	// 1 to specify Sapflow  
+#define is_evaporimeter 0	// 1 to specify Evaporimeter
 
 
+// ================================================================ 
+// ===                     WIFI SETTINGS                        === 
+// ================================================================
 // --- WiFi Settings ---
 // Requires is_wifi to be set to 1 to take effect
 #if is_wifi == 1
@@ -114,9 +152,14 @@
 	#define DEFAULT_PASSWORD  "arduino101"		// Network password
 #endif
 
+
+
+// ================================================================ 
+// ===                 MORE ADVANCED FUNCTIONS                  === 
+// ================================================================
+
 // --- Scripts ---
 #define enable_hub_scripts 0
-
 
 // --- Advanced Interdev Communication ---
 #define advanced_interdev_comm   0	// Used for Max-like functionality
@@ -129,30 +172,29 @@
 // ================================================================
 // ================================================================
 
-// --- Sleep Options --- 
-#define wake_delay 0	// 1 to enable wait 5 seconds upon awaking from sleep to start serial
-
 
 // --- Set Instance Number and UDP Port ---
 // If not using channels, then the following 
-// intial instance number port will be used
+// intial instance number and port (if WiFi) will be used
 // Interdevice communication is undefined and less supported
-// if not using channels
+// when not using channels
 #if CHANNEL == -1
-	#define INIT_INST    3	// Initial device instance number (normally 1-8 when using channels)
+	#define INIT_INST   	 3	// Initial device instance number (normally 1-9 when using channels)
 	#if is_wifi == 1
-		#define INIT_PORT 9443	// Initial device UDP port (normally 1-8 when using channels)
+		#define INIT_PORT 9443	// Initial device UDP port (normally 1-9 when using channels)
 	#endif
 #endif
 
 #if is_wifi == 1
-	#define advanced_interdev_comm 1  // Enable for full Max support 
+	#define advanced_interdev_comm 1 	// Enable for full Max support 
+									 	// Default is for this to be 1 when using WiFi
 #endif
 
 // ================================================================
 // ===                       RTC OPTIONS                        === 
 // ================================================================
-// --- RTC Options ---
+// Used to select which RTC and interrupt pin are being used
+
 #if is_rtc == 1
 	#define RTC_pin 6
 
@@ -164,12 +206,17 @@
 
 
 // ================================================================
-// ===                PREBUILT DEVICE OPTIONS                   === 
 // ================================================================
-// These may override setting above to ensure all features of device are enabled
+// ===            AGGREGATE DEVICE CONFIGURATIONS               === 
+// ================================================================
+// ================================================================
+
+// These may override settings defined above 
 
 
-// --- Multiplexer Options ---
+// ================================================================
+// ===                       MULTIPLEXER                        === 
+// ================================================================
 #if is_multiplexer == 1
 	#define UPDATE_PERIOD 5000		// Milliseconds between multiplexer sensor list being updated
 	
@@ -186,23 +233,27 @@
 	#define is_ms5803          1	// Pressure Sensor
 #endif
 
-
-// --- Ishield Options ---
+// ================================================================
+// ===                         ISHIELD                          === 
+// ================================================================
 #if is_ishield == 1
-	#define is_button   1			// 1 to enable button
-	#define button_pin  10
-	#define is_mpu6050  0			// Enables MPU6050 on Ishield
-	#define is_neopixel 1			// Toggle based on whether Neopixels are being used 
+	#define is_button     1			// 1 to enable button
+	#define button_pin    10		// Pin that the button uses
+	#define is_mpu6050    0 		// Enables MPU6050 on Ishield
+	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 
 
 	#if is_neopixel == 1			// Which Ishield ports to enable Neopixels for 
-		#define NEO_0   0			// Port 0 (A0, closest to end of Ishield)
-		#define NEO_1   0			// Port 1 (A1, middle port)
-		#define NEO_2   1			// Port 2 (A2, port closest to MPU6050)
+		#define NEO_0     0			// Port 0 (A0, closest to end of Ishield)
+		#define NEO_1     0			// Port 1 (A1, middle port)
+		#define NEO_2     1			// Port 2 (A2, port closest to MPU6050)
 	#endif  
 #endif
 
 
-// --- Sapflowmeter Options ---
+// ================================================================
+// ===                      SAPFLOW METER                       === 
+// ================================================================
+
 #if is_sapflow == 1
 	// #define hub_node_type 0       // 0: hub, 1: node
 	#define is_lora           1      // enable LoRa
@@ -223,26 +274,29 @@
 	#endif
 #endif 
 
-// --- Evaporimeter Options --- 
+// ================================================================
+// ===                       EVAPOROMETER                       === 
+// ================================================================
 #if is_evaporimeter == 1
-	#define hub_node_type 1
-	#define is_lora 1
+	#define hub_node_type 1			// Don't change, as all Evaporimeters are nodes, hubs are not Evaporometers
+	#define is_lora       1		
 
 	// Lux Sensor
 	#define is_tsl2561 1
-		#define is_tsl2561_low   1 
-		#define is_tsl2561_float 1
-		#define is_tsl2561_high  0
+		#define is_tsl2561_low   1 	// Generally the upper light sensor
+		#define is_tsl2561_float 1  // Generally the lower light sensor
+		#define is_tsl2561_high  0  
 
 	// Load Cell
 	#define is_hx711 1
 	#if is_hx711 == 1
-		#define hx711_calibration 961.275 // grams
+		#define hx711_calibration 961.275 // The weight of the bucket with wick (grams)
 	#endif
 
 	// Temp / Humidity
 	#define is_sht31d 1
 
+	// RTC
 	#define is_rtc 1
 	#if is_rtc == 1
 		#define RTC_pin    6
@@ -250,7 +304,7 @@
 		#define is_rtc8523 0
 	#endif
 
-	#define is_button  0
+	#define is_button  0  // To prevent data from non-existent button to be sent
 #endif
 
 // ================================================================ 
@@ -259,29 +313,23 @@
 
 // --- LoRa Options ---
 #if is_lora == 1
-	// #define LORA_HUB_ADDRESS  1			// Use 0-9 for SERVER_ADDRESSes
-	// #if hub_node_type == 0
-	// 	#define LORA_NODE_ADDRESS CHANNEL
-	// #else
-	// 	#define LORA_NODE_ADDRESS 2			// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
-	// #endif
-	// 									// 10-19 for 0, 20 - 29 for 1, etc.
-//	#define LORA_HUB_ADDRESS  1			// Use 0-9 for SERVER_ADDRESSes
-	
-	#if hub_node_type == 0 // is hub
+
+	// Address of hub / node
+	// Self and corresponding device 
+	// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS,
+	// 10-19 for 0, 20 - 29 for 1, etc. 
+	#if hub_node_type == 0 	// If is hub
 		#define LORA_HUB_ADDRESS  CHANNEL
 		#define LORA_NODE_ADDRESS 1
-	#else // is node
-		#define LORA_HUB_ADDRESS  1			// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS, 
+	#else 					// If is node
+		#define LORA_HUB_ADDRESS  1			
 		#define LORA_NODE_ADDRESS CHANNEL
 	#endif
-										// 10-19 for 0, 20 - 29 for 1, etc.
-
-		
-
-	#define RF95_FREQ      915.0		// Hardware specific, Tx must match Rx
+										
+	#define RF95_FREQ      915.0			// Hardware specific, Tx must match Rx
 
 	// #define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
+											// Currently unused
 #endif
 
 // --- nRF Options --- 
@@ -302,6 +350,7 @@
 	// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
 
 	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // mac address of Ethernet Luke's port
+	
 	IPAddress ip(128,193,56,138); 						  // device's IP address  				try to make this a string, so #include can be move to ethernet file
 #endif
 
@@ -343,6 +392,7 @@
 #if is_pushingbox == 1	
 	// Google Spreadsheet ID
 	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; random string of characters)
+
 	// #define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	    
 	#define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"  // This is Luke's Arduino Test spreadsheet
@@ -360,15 +410,17 @@
 		#define tab_id_prefix   "E_"		// Used as a prefix if bundle source is being used to define tab
 	#endif	
 
-	#define verify_family_match 1
+	#define verify_family_match 1			// 1 to only upload to spreadsheet if source device family matches hub 
+
 
 	// Currently works by only sending a bundle from 
 	// log_bundle/sendToPushingBox if the delay has passed
 	// Does NOT automatically upload a bundle, you still have to call sendToPushingBox
 	// This works more like a filter than an automator
-	#define pushMillisFilter 0 // 1 to enable a millis delay to uploading to PushingBox
-	#define pushMillisDelay 5  // delay in seconds
+	#define pushMillisFilter   0 	// 1 to enable a millis delay to uploading to PushingBox
+	#define pushMillisDelay    5  	// delay in seconds
 #endif
+
 
 // --- Adafruit IO Options ---
 #if is_adafruitio == 1
@@ -376,13 +428,13 @@
 	#define AIO_KEY         ""
 #endif
 
+
 // --- SD Options ---
 #if is_sd
 	// Timestamp formatting options:
 	// 0: none, 1: date, 2: time, 3: date+time two fields, 4: data+time combined field
 	#define sd_save_time_format 3
 #endif
-
 
 
 // ================================================================
