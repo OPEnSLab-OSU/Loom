@@ -97,7 +97,7 @@
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 #define is_sd         0		// 1 to enable SD card 
-#define is_rtc        1		// Enable RTC functionality
+#define is_rtc        0		// Enable RTC functionality
 
 
 // ================================================================ 
@@ -112,9 +112,17 @@
 // ================================================================ 
 // ===                         SENSORS                          === 
 // ================================================================
-// --- Enabled Sensors --- 
-#define num_analog     0	// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
+// --- Analog Setting --- 
+#define is_analog     1	// 1 if analog input is being used, 0 if not
+	#define is_analog_a0 1
+	#define is_analog_a1 1
+	#define is_analog_a2 1
+	#define is_analog_a3 1
+	#define is_analog_a4 1
+	#define is_analog_a5 1
+
 #define analog_samples 4 	// Must be 1, 2, 4, 8, or 16 number of analog measurements to sample and average
+
 
 
 #define is_decagon    0		// 1 if GS3 Decagon is being used

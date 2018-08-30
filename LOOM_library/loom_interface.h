@@ -137,7 +137,7 @@ void process_bundle(OSCBundle *bndl)
 void measure_sensors()
 {
 	// Get battery voltage
-	#if (num_analog > 0) || (is_m0 == 1)
+	#if (is_analog == 1) || (is_m0 == 1)
 		vbat = read_analog(VBATPIN);
 		vbat = (vbat * 2 * 3.3) / 4096; // We divided by 2, so multiply back, multiply by 3.3V, our reference voltage, div by 1024 to convert to voltage
 	#else
@@ -171,7 +171,7 @@ void measure_sensors()
 	#endif
 
 	// Get analog readings
-	#if (num_analog >= 1) && (is_sapflow != 1)
+	#if (is_analog == 1) && (is_sapflow != 1)
 		measure_analog();
 	#endif
 
@@ -273,7 +273,7 @@ void package_data(OSCBundle *send_bndl)
 	#endif
 	
 	// Get analog readings
-	#if (num_analog >= 1) && (is_sapflow != 1)
+	#if (is_analog == 1) && (is_sapflow != 1)
 		package_analog(send_bndl, configuration.packet_header_string);
 	#endif
 
