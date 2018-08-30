@@ -1,7 +1,6 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define analog_samples 4      // Must be 1, 2, 4, 8, or 16 number of analog measurements to sample and average per channel
 #define analog_resolution 12	// How many bits to read (normally defaults to 10, but M0 supports 12)
 								//   Other devices will just zero pad the least significant bits beyond the supported number of bits
 

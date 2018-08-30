@@ -16,7 +16,7 @@ void Loom_begin();
 void Loom_begin()
 {
 	#if LOOM_DEBUG == 1
-		pinMode(led, OUTPUT);   // Set the LED pin mode
+		pinMode(LED_BUILTIN, OUTPUT);   // Set the LED pin mode
 	#endif
 
 	//Initialize serial and wait for port to open:

@@ -6,19 +6,12 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define MAX_FIELDS 32			// Maximum number of fields accepted by the PushingBox Scenario    
-
-
-// ================================================================ 
-// ===                        STRUCTURES                        === 
-// ================================================================ 
+#define MAX_FIELDS 32	// Maximum number of fields accepted by the PushingBox Scenario    
 
 
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-String data[MAX_FIELDS];
-
 unsigned long lastPushMillis, currentPushMillis;  
 
 
@@ -35,8 +28,6 @@ void pushingbox_fona(char* args);
 // ================================================================
 // ===                          SETUP                           ===
 // ================================================================
-
-
 void setup_pushingbox() 
 {
 
