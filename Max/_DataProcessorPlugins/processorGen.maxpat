@@ -185,7 +185,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-4",
-					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.arduinoIn", ",", "em.decagon", ",", "em.emote", ",", "em.multiplexer", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.IshieldMonitor", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rangeSetter", ",", "em.rotaryDial", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.smooth", ",", "em.spring", ",", "em.threshold", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.neopixel", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.relay", ",", "em.servo", ",", "em.stepper_motor", ",", "em.stepper_motor_extension", ",", "em.switchblade" ],
+					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.analog_monitor", ",", "em.decagon", ",", "em.emote", ",", "em.multiplexer", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.IshieldMonitor", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rangeSetter", ",", "em.rotaryDial", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.smooth", ",", "em.spring", ",", "em.threshold", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.neopixel", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.relay", ",", "em.servo", ",", "em.stepper_motor", ",", "em.stepper_motor_extension", ",", "em.switchblade" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -517,8 +517,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",

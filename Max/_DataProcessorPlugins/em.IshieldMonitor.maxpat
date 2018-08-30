@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 160.0, 79.0, 906.0, 787.0 ],
+		"rect" : [ 124.0, 79.0, 901.0, 787.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -44,7 +44,7 @@
 					"ignoreclick" : 1,
 					"interp" : 1,
 					"maxclass" : "jit.pwindow",
-					"name" : "grapher76",
+					"name" : "grapher38",
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
@@ -496,8 +496,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -533,7 +533,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-54",
-					"items" : [ "roll", ",", "pitch", ",", "yaw", ",", "-", "-", "-", ",", "accelX", ",", "accelY", ",", "accelZ", ",", "-", "-", "-", ",", "gyroX", ",", "gyroY", ",", "gyroZ", ",", "-", "-", "-", ",", "port0", ",", "port1", ",", "port2", ",", "-", "-", "-", ",", "button", ",", "vbat", ",", "freefall" ],
+					"items" : [ "roll", ",", "pitch", ",", "yaw", ",", "-", "-", "-", ",", "accelX", ",", "accelY", ",", "accelZ", ",", "-", "-", "-", ",", "gyroX", ",", "gyroY", ",", "gyroZ", ",", "-", "-", "-", ",", "pin_A0", ",", "pin_A1", ",", "pin_A2", ",", "-", "-", "-", ",", "button", ",", "vbat", ",", "freefall" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -1080,8 +1080,8 @@
 , 											{
 												"name" : "newobjYellow-1",
 												"default" : 												{
-													"fontsize" : [ 12.059008 ],
-													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+													"fontsize" : [ 12.059008 ]
 												}
 ,
 												"parentstyle" : "",
@@ -1343,8 +1343,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -1460,7 +1460,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 906.0, 761.0 ],
+						"rect" : [ 0.0, 26.0, 901.0, 761.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1914,8 +1914,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -2041,7 +2041,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 906.0, 761.0 ],
+						"rect" : [ 0.0, 26.0, 901.0, 761.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2495,8 +2495,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -2544,7 +2544,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 906.0, 761.0 ],
+						"rect" : [ 0.0, 26.0, 901.0, 761.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2995,8 +2995,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -3044,7 +3044,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 906.0, 761.0 ],
+						"rect" : [ 0.0, 26.0, 901.0, 761.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -3498,8 +3498,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -3542,9 +3542,9 @@
 					"numinlets" : 14,
 					"numoutlets" : 14,
 					"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 578.0, 72.999985, 506.0, 22.0 ],
+					"patching_rect" : [ 578.0, 72.999985, 536.0, 22.0 ],
 					"style" : "",
-					"text" : "route /roll /pitch /yaw /accelX /accelY /accelZ /gyroX /gyroY /gyroZ /port0 /port1 /port2 /freefall"
+					"text" : "route /roll /pitch /yaw /accelX /accelY /accelZ /gyroX /gyroY /gyroZ /pin_A0 /pin_A1 /pin_A2 /freefall"
 				}
 
 			}
@@ -3772,8 +3772,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -4528,8 +4528,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -4865,7 +4865,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-7", 2 ],
-					"midpoints" : [ 662.423096, 120.0, 564.0, 120.0, 564.0, 282.0, 632.128235, 282.0 ],
+					"midpoints" : [ 667.038452, 120.0, 564.0, 120.0, 564.0, 282.0, 632.128235, 282.0 ],
 					"order" : 1,
 					"source" : [ "obj-6", 2 ]
 				}
@@ -4874,7 +4874,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-7", 1 ],
-					"midpoints" : [ 624.961548, 120.0, 564.0, 120.0, 564.0, 282.0, 617.794861, 282.0 ],
+					"midpoints" : [ 627.269226, 120.0, 564.0, 120.0, 564.0, 282.0, 617.794861, 282.0 ],
 					"order" : 1,
 					"source" : [ "obj-6", 1 ]
 				}
@@ -5052,28 +5052,28 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "Controller.maxpat",
-				"bootpath" : "~/Desktop",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Controller.js",
-				"bootpath" : "~/Desktop",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "WiFi_Setup.maxpat",
-				"bootpath" : "~/Desktop",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Status_Bar_Narrow.maxpat",
-				"bootpath" : "~/Desktop",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
@@ -5081,7 +5081,7 @@
 , 			{
 				"name" : "runningAvg.maxpat",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : "../Documents/Max 7/Library/_DataProcessorPlugins",
+				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -5125,8 +5125,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",
