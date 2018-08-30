@@ -49,8 +49,6 @@ struct state_rtc_t state_rtc;
 
 volatile bool alarm_flag = true;  // Flag is set with external Pin A0 Interrupt by RTC
 volatile bool LEDState   = false; // flag to toggle LED
-// volatile int  HR  = 8;            // Hr of the day we want alarm to go off
-// volatile int  MIN = 0;            // Min of each hour we want alarm to go off
 
 // #if LOOM_DEBUG == 0
 // 	volatile int WakePeriodMin = 15;  // Period of time to take sample in Min, reset alarm based on this period (Bo - 5 min)
@@ -66,12 +64,14 @@ void  measure_rtc();
 char* get_datestring(); 
 char* get_timestring();
 char* get_weekday();
+
 #if  is_rtc3231 == 1
 	void setAlarmFunction();
 	void clearRTCAlarms();
 	void rtc_interrupt_reset();
 	void wake_RTC_ISR();
 #endif
+
 void print_time();
 void print_DateTime(DateTime time);
 

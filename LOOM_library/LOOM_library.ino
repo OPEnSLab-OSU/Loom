@@ -49,8 +49,10 @@ void loop()
 }
 
 
+// ================================================================ 
+// ===                 High-Level API Functions                 === 
+// ================================================================ 
 
-// --- High-Level API Functions  --- 
 //
 // void receive_bundle(OSCBundle *bndl, CommPlatform platform);
 // void process_bundle(OSCBundle *bndl);
