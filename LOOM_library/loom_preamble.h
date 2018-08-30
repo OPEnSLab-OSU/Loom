@@ -265,7 +265,7 @@ int    get_bundle_bytes(OSCBundle *bndl);
 // ================================================================ 
 // ===            INCLUDE SENSOR / ACTUATOR FILES               === 
 // ================================================================
-#if (num_analog > 0) || (is_m0 == 1)
+#if (is_analog == 1) || (is_m0 == 1)
 	#include "loom_analogIn.h"
 #endif
 #if is_neopixel == 1

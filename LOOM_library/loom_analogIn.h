@@ -35,6 +35,25 @@ void setup_analog() {
 	#ifdef is_m0
 		analogReadResolution(analog_resolution);
 	#endif
+
+	#if is_analog_a0 == 1
+		pinMode(A0, INPUT);
+	#endif
+	#if is_analog_a1 == 1
+		pinMode(A1, INPUT);
+	#endif
+	#if is_analog_a2 == 1
+		pinMode(A2, INPUT);
+	#endif
+	#if is_analog_a3 == 1
+		pinMode(A3, INPUT);
+	#endif
+	#if is_analog_a4 == 1
+		pinMode(A4, INPUT);
+	#endif
+	#if is_analog_a5 == 1
+		pinMode(A5, INPUT);
+	#endif
 }
 
 
@@ -59,7 +78,7 @@ uint32_t read_analog(uint8_t chnl)
 	uint32_t reading = 0;
 
 	while (i--) {
-		reading += analogRead(chnl);
+		reading += analogRead(chnl); 
 	}
 
 	#if (analog_samples == 1) 	// Take a reading    
@@ -87,15 +106,36 @@ uint32_t read_analog(uint8_t chnl)
 //
 void measure_analog() 
 {
-	#if (num_analog > 0) 
+	// #if (num_analog > 0) 
+	// 	state_analog.a0 = read_analog(0);
+	// #endif
+	// #if (num_analog > 1)
+	// 	state_analog.a1 = read_analog(1);
+	// #endif
+	// #if (num_analog > 2)
+	// 	state_analog.a2 = read_analog(2);
+	// #endif
+
+	#if (is_analog_a0 == 1) 
 		state_analog.a0 = read_analog(0);
 	#endif
-	#if (num_analog > 1)
+	#if (is_analog_a1 == 1)
 		state_analog.a1 = read_analog(1);
 	#endif
-	#if (num_analog > 2)
+	#if (is_analog_a2 == 1) 
 		state_analog.a2 = read_analog(2);
 	#endif
+	#if (is_analog_a3 == 1)
+		state_analog.a3 = read_analog(3);
+	#endif
+	#if (is_analog_a4 == 1) 
+		state_analog.a4 = read_analog(4);
+	#endif
+	#if (is_analog_a5 == 1)
+		state_analog.a5 = read_analog(5);
+	#endif
+
+
 }
 
 
@@ -111,18 +151,45 @@ void measure_analog()
 void package_analog(OSCBundle *bndl, char packet_header_string[])
 { 
 	char address_string[80];
+
 	// Get readings from enabled ports           
-	#if (num_analog > 0) 
-		sprintf(address_string, "%s%s", packet_header_string, "/port0");
+	// #if (num_analog > 0) 
+	// 	sprintf(address_string, "%s%s", packet_header_string, "/port0");
+	// 	bndl->add(address_string).add((int32_t)state_analog.a0);
+	// #endif
+	// #if (num_analog > 1)
+	// 	sprintf(address_string, "%s%s", packet_header_string, "/port1");
+	// 	bndl->add(address_string).add((int32_t)state_analog.a1);
+	// #endif
+	// #if (num_analog > 2)
+	// 	sprintf(address_string, "%s%s", packet_header_string, "/port2");
+	// 	bndl->add(address_string).add((int32_t)state_analog.a2);
+	// #endif
+
+
+	#if (is_analog_a0 == 1) 
+		sprintf(address_string, "%s%s", packet_header_string, "/pin_A0");
 		bndl->add(address_string).add((int32_t)state_analog.a0);
 	#endif
-	#if (num_analog > 1)
-		sprintf(address_string, "%s%s", packet_header_string, "/port1");
+	#if (is_analog_a1 == 1)
+		sprintf(address_string, "%s%s", packet_header_string, "/pin_A1");
 		bndl->add(address_string).add((int32_t)state_analog.a1);
 	#endif
-	#if (num_analog > 2)
-		sprintf(address_string, "%s%s", packet_header_string, "/port2");
+	#if (is_analog_a2 == 1) 
+		sprintf(address_string, "%s%s", packet_header_string, "/pin_A2");
 		bndl->add(address_string).add((int32_t)state_analog.a2);
+	#endif
+	#if (is_analog_a3 == 1)
+		sprintf(address_string, "%s%s", packet_header_string, "/pin_A3");
+		bndl->add(address_string).add((int32_t)state_analog.a3);
+	#endif
+	#if (is_analog_a4 == 1) 
+		sprintf(address_string, "%s%s", packet_header_string, "/pin_A4");
+		bndl->add(address_string).add((int32_t)state_analog.a4);
+	#endif
+	#if (is_analog_a5 == 1)
+		sprintf(address_string, "%s%s", packet_header_string, "/pin_A5");
+		bndl->add(address_string).add((int32_t)state_analog.a5);
 	#endif
 }
 
