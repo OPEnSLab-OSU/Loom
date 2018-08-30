@@ -21,7 +21,7 @@ void Loom_begin()
 
 	//Initialize serial and wait for port to open:
 	#if LOOM_DEBUG == 1
-		Serial.begin(9600);
+		Serial.begin(SERIAL_BAUD);
 
 		#if dynamic_serial_output != 1
 			while(!Serial);        // Ensure Serial is ready to go before anything happens in LOOM_DEBUG mode.
@@ -34,26 +34,27 @@ void Loom_begin()
 	LOOM_DEBUG_Println3("Device: ", DEVICE, INIT_INST);
 	LOOM_DEBUG_Println3("Family: ", FAMILY, FAMILY_NUM);
 
+
 	#if wake_delay == 1
 		// LOOM_DEBUG_Println("Delaying 5 seconds");
 		delay(5000);
 	#endif
 	
+
 	#if hub_node_type == 0
-		LOOM_DEBUG_Println("Running as Hub");
+		LOOM_DEBUG_Println("Running as Hub\n");
 	#else
-		LOOM_DEBUG_Println("Running as Node");
+		LOOM_DEBUG_Println("Running as Node\n");
 	#endif
 
-	LOOM_DEBUG_Println();
 
 	// Set the button pin mode to input
 	#ifdef is_button
 		pinMode(button_pin, INPUT_PULLUP); 
 	#endif
 	
+
 	// Setup sensors and actuators by calling the respective setups
-	// #if num_analog > 0
 	#if (num_analog > 0) || (is_m0 == 1)
 		setup_analog();
 	#endif
@@ -87,8 +88,8 @@ void Loom_begin()
 
 
 	// I2C Sensor setup if no mulitplexer
+	// call setups of enabled sensors individually
 	#if is_multiplexer != 1
-		// call setups of enabled sensors
 		#if is_fxas21002 == 1 
 			setup_fxas21002();
 		#endif
@@ -125,23 +126,22 @@ void Loom_begin()
 	#endif
 
 
-	// Prebuild device setup
+	// Aggregate device setup
 	#if is_sapflow == 1
 		setup_sapflow();
 	#endif
 
 
 	// Read configuration from flash, or write config.h settings 
-	// if no settings are already saved
+	//   if no settings are already saved
 	setup_flash_config();
-// LOOM_DEBUG_Println("Flash currently disabled for testing!");
+
 
 	// Communication Platform specific setups
-	// after flash setup as network info may be saved
+	//   after flash setup as network info may be saved
 	#if is_wifi == 1
 		setup_wifi(configuration.packet_header_string);
 	#endif
-
 	#if is_lora == 1
 		setup_lora(&rf95, &manager);
 	#endif	
@@ -155,6 +155,7 @@ void Loom_begin()
 		setup_fona();
 	#endif
 
+
 	// Data Logging Platform setups
 	#if is_sd == 1
 		setup_sd();
@@ -163,15 +164,19 @@ void Loom_begin()
 		setup_pushingbox();
 	#endif
 
-	// If hub, poll for devices on network(s)
+
+	// If hub and advanced interdev. comm., 
+	// poll for devices on network(s)
 	#if (hub_node_type == 0) && (advanced_interdev_comm == 1)
 		setup_network_info();
 	#endif
+
 
 	// Setup scripts if enabled
 	#if enable_hub_scripts == 1
 		setup_hub_scripts();
 	#endif
+
 
 	#if advanced_interdev_comm == 1
 		LOOM_DEBUG_Println("Routing:");
@@ -179,6 +184,7 @@ void Loom_begin()
 		LOOM_DEBUG_Println2("  Subnet: ", STR(/) FAMILY STR(FAMILY_NUM));
 		LOOM_DEBUG_Println2("  Device: ", configuration.packet_header_string);
 	#endif
+
 
 	#if is_wifi
 		LOOM_DEBUG_Println("UDP Ports");
@@ -188,10 +194,12 @@ void Loom_begin()
 	#endif
 
 
-
 	// Flash the built-in LED indicating setup complete
 	flash_led();
 
+
+	// This runs the Fona test loop 
+	// Press 'Q' in the loop to continue on to normal operation
 	#if fona_test == 1
 		fona_test_loop();
 	#endif

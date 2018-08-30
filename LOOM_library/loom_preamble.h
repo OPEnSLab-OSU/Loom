@@ -1,4 +1,13 @@
 // ================================================================ 
+// ===                    FILE DESCRIPTION                      === 
+// ================================================================
+
+// This file uses the config.h file to define various other constants
+//  and to select with files to include.
+// This file also includes a various macros and function prototypes
+//  that are used throughout the code
+
+// ================================================================ 
 // ===                        LIBRARIES                         === 
 // ================================================================
 #include <OSCBundle.h> // All LOOM devices rely on the Arduino OSC library in some way
@@ -8,23 +17,17 @@
 // ===               DEFINITIONS BASED ON CONFIG                === 
 // ================================================================
 
-// Packet header creation macro
-#define STR_(x) #x                // Helper function
-#define STR(x) STR_(x)            // To concatenate a predefined number to a string literal, use STR(x)
-#define PacketHeaderString STR(/) FAMILY STR(FAMILY_NUM) STR(/) DEVICE // Results in a single string, i.e. /LOOM/Device. the full prefix sent to this device should be /LOOM/Device#, but the number is parsed in the OSC bundle routing function
 
 #define VBATPIN A7                // Pin to check for battery voltage
 
-// Global UDP port
-// Should not be changed
-#define GLOBAL_PORT 9400
 
 // --- WiFi UDP Ports ---
 #if is_wifi == 1
+	#define GLOBAL_PORT 	9400
 	#define SUBNET_PORT     GLOBAL_PORT+(10*FAMILY_NUM)	
 #endif
 
-// If using channels
+// --- Instance and port if using channels ---
 #if CHANNEL >= 1 && CHANNEL <= 9
 	#define INIT_INST CHANNEL
 	#if is_wifi == 1
@@ -32,8 +35,10 @@
 	#endif
 #endif
 
+// ================================================================
+// ===              AUTOMATICALLY SET DEVICE NAME               ===
+// ================================================================
 
-// --- Automatically Set Device Name ---
 #if AUTO_NAME == 1
 	// Make sure only one device type is enabled
 	#if ( (is_ishield) + (is_evaporimeter) + (is_sapflow) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_multiplexer) ) > 1
@@ -66,23 +71,50 @@
 #endif
 
 
+// ================================================================
+// ===                 COMMON GLOBAL VARIABLES                  ===
+// ================================================================
+int           led = LED_BUILTIN;              	// LED pin number
+float         vbat;                    	 		// Place to save measured battery voltage (3.3V max)
+char          ReplyBuffer[] = "acknowledged"; 	// A string to send back
+uint32_t      button_timer;                   	// Time that the button has been held
+int           button_state;					  	// Variable to hold the state of the button
+char          global_packet_header_string[80]; 	// Sometimes functions need to access the header string but are declared before loom_flash.h is included
+bool 		  routing_match; 					// Used to end msg_routing early if match was found
+OSCErrorCode  error;                          	// Hold errors from OSC
+
+
 // ================================================================ 
-// ===                      ENUMERATIONS                        === 
+// ===                ENUMERATION DEFINITIONS                   === 
 // ================================================================
 
 // Enumerate possible platform types
 enum CommPlatform {
-	WIFI,
-	LORA,
-	NRF,
-	ETHERNET 		// in testing for inter-device communication
-	// CELLULAR  
+	#if (is_wifi == 1) || (prevent_platform_compile_error == 1)
+		WIFI,
+	#endif
+	#if (is_lora == 1) || (prevent_platform_compile_error == 1)
+		LORA,
+	#endif
+	#if (is_nrf == 1) || (prevent_platform_compile_error == 1)
+		NRF, 
+	#endif
+	// in testing for inter-device communication
+	// #if (is_ethernet == 1) || (prevent_platform_compile_error == 1)
+	// ETHERNET 		
+	// #endif
 };
 
 enum LogPlatform {
-	SDCARD,
-	PUSHINGBOX,
-	// ADAFRUITIO,
+	#if (is_sd == 1) || (prevent_platform_compile_error == 1)
+		SDCARD,
+	#endif
+	#if (is_pushingbox == 1) || (prevent_platform_compile_error == 1)
+		PUSHINGBOX,
+	#endif
+	#if (is_adafruitio == 1) || (prevent_platform_compile_error == 1)
+		// ADAFRUITIO,
+	#endif
 	SERIAL_MON
 };
  
@@ -99,10 +131,37 @@ enum TimeUnits { SECONDS, MINUTES };
 
 
 // ================================================================ 
-// ===                    PRINTING MACROS                       === 
+// ===               MISCELLANEOUS DEFINITIONS                  === 
 // ================================================================
 
+// MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
+#define MEM_FLASH 0
+#define MEM_EEPROM 1  
+
+#ifdef __SAMD21G18A__
+	#define is_m0 1
+	#define MEM_TYPE MEM_FLASH
+#endif
+#ifdef __AVR_ATmega32U4__
+	#define is_32u4 1
+	#define MEM_TYPE MEM_EEPROM
+#endif
+
+// ================================================================ 
+// ===                          MACROS                          === 
+// ================================================================
+
+// Packet header creation macro
+#define STR_(x) #x                // Helper function
+#define STR(x) STR_(x)            // To concatenate a predefined number to a string literal, use STR(x)
+#define PacketHeaderString STR(/) FAMILY STR(FAMILY_NUM) STR(/) DEVICE // Results in a single string, i.e. /LOOM/Device. the full prefix sent to this device should be /LOOM/Device#, but the number is parsed in the OSC bundle routing function
+
+
+// ================================================================ 
+// ===                    PRINTING MACROS                       === 
+// ================================================================
 // Macros for printing to Serial iff Loom Debug is enabled
+
 #define LOOM_DEBUG_Print(X)          (LOOM_DEBUG==0) ? :  Serial.print(X)
 #define LOOM_DEBUG_Println(X)        (LOOM_DEBUG==0) ? :  Serial.println(X)
 #define LOOM_DEBUG_Print2(X,Y)       LOOM_DEBUG_Print(X); LOOM_DEBUG_Print(Y)
@@ -113,62 +172,12 @@ enum TimeUnits { SECONDS, MINUTES };
 #define LOOM_DEBUG_Println4(W,X,Y,Z) LOOM_DEBUG_Print(W); LOOM_DEBUG_Print(X); LOOM_DEBUG_Print(Y); LOOM_DEBUG_Println(Z)
 
 
-// ================================================================
-// ===                 COMMON GLOBAL VARIABLES                  ===
-// ================================================================
-int           led = LED_BUILTIN;              // LED pin number
-volatile bool ledState = LOW;                 // State of LED
-float         vbat = 3.3;                     // Place to save measured battery voltage (3.3V max)
-// char          packetBuffer[255];              // Buffer to hold incoming packet
-char          ReplyBuffer[] = "acknowledged"; // A string to send back
-OSCErrorCode  error;                          // Hold errors from OSC
-uint32_t      button_timer;                   // Time that the button has been held
-int           button_state;					  // Variable to hold the state of the button
-// char          addressString[255];			  // A place to hold the address string of the current message being examined
-char          global_packet_header_string[80]; // Sometimes functions need to access the header string but are declared before loom_flash.h is included
-bool 		  routing_match;
-
-
-
-// ================================================================ 
-// ===               MISCELLANEOUS DEFINITIONS                  === 
-// ================================================================
-
-// MEMORY TYPE: M0 uses flash (MEM_TYPE = 0), 32u4 uses EEPROM (MEM_TYPE = 1)
-#define MEM_FLASH 0
-#define MEM_EEPROM 1  
-
-// Still experimental
-#ifdef __SAMD21G18A__
-	#define is_m0 1
-	#define MEM_TYPE MEM_FLASH
-#endif
-#ifdef __AVR_ATmega32U4__
-	#define is_32u4 1
-	#define MEM_TYPE MEM_EEPROM
-#endif
-
-
-
-
-#ifdef is_sleep_period
-	#include <Adafruit_SleepyDog.h> // This must be included if you are transmitting at timed intervals
-#endif
-// #ifdef is_sleep_interrupt
-	#include <LowPower.h>           // Include this if transmitting on pin interrupt
-// #endif
-
-// Using Config defines, check which headers to include
-#if LOOM_DEBUG == 1
-	#include <SPI.h>
-#endif
-
-
 // ================================================================ 
 // ===                       PROTOTYPES                         === 
 // ================================================================
-// Prototypes of functions from loom_flash.h, loom_common.h, and loom_OSC_translator.h
-// That are referenced by device .h files
+// Prototypes of functions from loom_flash.h, loom_common.h, and 
+// loom_OSC_translator.h that are referenced by device .h files
+// included below
 
 void   receive_bundle(OSCBundle *bndl, CommPlatform platform);
 void   process_bundle(OSCBundle *bndl);
@@ -187,16 +196,46 @@ void   print_bundle(OSCBundle *bndl);
 int    get_bundle_bytes(OSCBundle *bndl); 			
 
 
+
+
+// ================================================================ 
+// ================================================================ 
+// ===             INCLUDE RELEVANT LIBRARY FILES               === 
+// ================================================================
+// ================================================================ 
+
+
+
 // ================================================================ 
 // ===                   INCLUDE TRANSLATOR                     === 
 // ================================================================
 // Include the translator early, as many of the device files
-// can reference various functions it contains
+// reference various functions it contains
 #include "loom_translator.h"
 
 
 // ================================================================ 
-// ===                  INCLUDE DEVICE FILES                    === 
+// ===                 INCLUDE LOWPOWER FILES                   === 
+// ================================================================
+
+#ifdef is_sleep_period
+	#include <Adafruit_SleepyDog.h> // This must be included if you are transmitting at timed intervals
+#endif
+#include <LowPower.h>           // Include this if transmitting on pin interrupt
+
+
+// ================================================================ 
+// ===                    INCLUDE SPI FILES                     === 
+// ================================================================
+
+// Using Config defines, check which headers to include
+#if LOOM_DEBUG == 1
+	#include <SPI.h>
+#endif
+
+
+// ================================================================ 
+// ===                 INCLUDE PLATFORM FILES                   === 
 // ================================================================
 
 #if build_actuator_cmd_funcs == 1
@@ -223,6 +262,9 @@ int    get_bundle_bytes(OSCBundle *bndl);
 #endif
 
 
+// ================================================================ 
+// ===            INCLUDE SENSOR / ACTUATOR FILES               === 
+// ================================================================
 #if (num_analog > 0) || (is_m0 == 1)
 	#include "loom_analogIn.h"
 #endif
@@ -309,9 +351,11 @@ int    get_bundle_bytes(OSCBundle *bndl);
 #endif
 
 #include "loom_flash.h"
+
 #if advanced_interdev_comm == 1
 	#include "loom_interdev_comm.h" 
 #endif
+
 #include "loom_common_functions.h"
 #include "loom_begin.h"
 #include "loom_msg_router.h"

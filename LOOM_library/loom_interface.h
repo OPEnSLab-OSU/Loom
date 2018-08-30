@@ -385,10 +385,12 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
 //
 void log_bundle(OSCBundle *log_bndl, LogPlatform platform, char* file)
 {
-	if ( (!file) && (platform == SDCARD) ) { 
-		LOOM_DEBUG_Println("Logging to SD card requires filename");
-		return;
-	}
+	#if is_sd == 1
+		if (!file)  { 
+			LOOM_DEBUG_Println("Logging to SD card requires filename");
+			return;
+		}
+	#endif
 
 	switch(platform) {
 		#if is_sd == 1
@@ -517,7 +519,7 @@ void prep_after_sleep()
 
 	#if LOOM_DEBUG == 1
 		USBDevice.attach();
-		Serial.begin(9600);
+		Serial.begin(SERIAL_BAUD);
 		LOOM_DEBUG_Println("WAKE");
 		print_DateTime(rtc_inst.now());
 		delay(50);  // delay so serial stuff has time to print out all the way
@@ -555,12 +557,12 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 			}
 
 			prep_before_sleep();		// Prepare for sleep
-			digitalWrite(led, LOW);
+			digitalWrite(LED_BUILTIN, LOW);
 
 			LowPower.standby(); 		// Go to sleep, will here wait until RTC interrupt
 
 			#if LOOM_DEBUG == 1
-				digitalWrite(led, HIGH);
+				digitalWrite(LED_BUILTIN, HIGH);
 			#endif
 			prep_after_sleep();			// Any necessary management when returning from sleep
 			LOOM_DEBUG_Println("Done with standby");
@@ -585,19 +587,19 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 			// 		int arr[count];
 
 			// 		LOOM_DEBUG_Println3("Will sleep for a total of: ", amount, " minutes");
-			// 		digitalWrite(led, LOW);
+			// 		digitalWrite(LED_BUILTIN, LOW);
 			// 		for (int i = 0; i < count; i++) {
 			// 			int sleepMS = Watchdog.sleep(20000);
 			// 			arr[i] = sleepMS;
 			// 			#if LOOM_DEBUG == 1
 			// 				LOOM_DEBUG_Println(i);
-			// 				digitalWrite(led, HIGH);
+			// 				digitalWrite(LED_BUILTIN, HIGH);
 			// 				delay(100);
-			// 				digitalWrite(led, LOW);  
+			// 				digitalWrite(LED_BUILTIN, LOW);  
 			// 			#endif
 			// 		}
 			// 		LOOM_DEBUG_Println3("Done sleeping ", amount, " minutes");
-			// 		digitalWrite(led, HIGH);
+			// 		digitalWrite(LED_BUILTIN, HIGH);
 
 			// 		delay(5000);
 			// 		for (int i = 0; i < count; i++) {
@@ -636,7 +638,7 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 				USBDevice.detach();
 			#endif
 
-			digitalWrite(led, LOW);
+			digitalWrite(LED_BUILTIN, LOW);
 
 			LOOM_DEBUG_Println("Going to sleep in 15 second blocks");
 			for (int i = 0; i < iterations; i++) {
@@ -645,9 +647,9 @@ void sleep_for(int amount, TimeUnits units, SleepMode mode)
 				total += sleepMS;
 				LOOM_DEBUG_Println3("Slept a total of: ", total, " milliseconds");
 
-				digitalWrite(led, HIGH);  
+				digitalWrite(LED_BUILTIN, HIGH);  
 				delay(100);                       
-				digitalWrite(led, LOW);   
+				digitalWrite(LED_BUILTIN, LOW);   
 			}
 
 			if (remainder > 0) {
@@ -694,12 +696,12 @@ void sleep_until_time(SleepMode mode, int hour, int min, int sec)
 			setRTCAlarm_Absolute(hour, min, sec);
 
 			prep_before_sleep();		// Prepare for sleep
-			digitalWrite(led, LOW);
+			digitalWrite(LED_BUILTIN, LOW);
 
 			LowPower.standby(); 		// Go to sleep, will here wait until RTC interrupt
 
 			#if LOOM_DEBUG == 1
-				digitalWrite(led, HIGH);
+				digitalWrite(LED_BUILTIN, HIGH);
 			#endif
 			prep_after_sleep();			// Any necessary management when returning from sleep
 			LOOM_DEBUG_Println("Done with standby");

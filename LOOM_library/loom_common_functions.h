@@ -166,12 +166,11 @@ void save_config(OSCMessage &msg)
 void flash_led(int num, int time_high, int time_low)
 {
 	for (int i = 0; i < num; i++) {
-		digitalWrite(led, HIGH);  
+		digitalWrite(LED_BUILTIN, HIGH);  
 		delay(time_high);                       
-		digitalWrite(led, LOW);   
+		digitalWrite(LED_BUILTIN, LOW);   
 		delay(time_low);  
 	} 
-	// digitalWrite(led, HIGH);
 }
 
 void flash_led() 
