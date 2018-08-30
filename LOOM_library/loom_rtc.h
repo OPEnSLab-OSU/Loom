@@ -167,20 +167,6 @@ char* get_weekday() {
 
 
 #if  is_rtc3231 == 1
-// void setAlarmFunction() {
-// 	DateTime now = rtc_inst.now(); // Check the current time
-
-// 	// Calculate new time
-// 	MIN = (now.minute() + WakePeriodMin) % 60; // wrap-around using modulo every 60 sec
-// 	HR  = (now.hour() + ((now.minute() + WakePeriodMin) / 60)) % 24; // quotient of now.min+periodMin added to now.hr, wraparound every 24hrs
-	
-// 	LOOM_DEBUG_Println4("Resetting Alarm 1 for: ", HR, ":", MIN);
-
-// 	//Set alarm1
-// 	rtc_inst.setAlarm(ALM1_MATCH_HOURS, MIN, HR, 0);   //set your wake-up time here
-// 	rtc_inst.alarmInterrupt(1, true);
-// }
-
 
 // --- SET RTC ALARM RELATIVE
 void setRTCAlarm_Relative(int hours, int minutes, int seconds)
@@ -287,10 +273,10 @@ void print_time()
 void print_DateTime(DateTime time) 
 {
 	#if LOOM_DEBUG == 1
-		Serial.print(time.year()); Serial.print('/');
-		Serial.print(time.month()); Serial.print('/');
-		Serial.print(time.day()); Serial.print(' ');
-		Serial.print(time.hour()); Serial.print(':');
+		Serial.print(time.year());   Serial.print('/');
+		Serial.print(time.month());  Serial.print('/');
+		Serial.print(time.day());    Serial.print(' ');
+		Serial.print(time.hour());   Serial.print(':');
 		Serial.print(time.minute()); Serial.print(':');
 		Serial.print(time.second()); Serial.println();
 	#endif

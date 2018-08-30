@@ -3,7 +3,6 @@
 // ================================================================
 
 void msg_router(OSCMessage &msg, int addrOffset);       
-// void common_msg_router(OSCMessage &msg, int addrOffset);       
 
 // ================================================================ 
 // ===               CUSTOM FUNCTION PROTOTYPES                 === 
@@ -146,40 +145,4 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	routing_match = false;  // no match found
 
 }
-
-
-
-
-
-
-// // For messages sent as "/<FAMILY>...", i.e.: "/LOOM..."
-// // rather than providing a device identifier
-// void common_msg_router(OSCMessage &msg, int addrOffset) 
-// {
-// 	#if LOOM_DEBUG == 1
-// 		char buffer[100];
-// 		msg.getAddress(buffer, addrOffset);
-// 		LOOM_DEBUG_Println2("Parsed ", buffer); 
-// 	#endif
-
-// 	// If Max has polled for devices on the WiFi network 
-// 	#if is_wifi
-// 		msg.dispatch("/ChannelPoll", 		respond_to_poll_request, 	addrOffset);
-// 	#endif
-
-
-
-
-// 	// If a hub device has polled for devices on the network
-// 	//     This might be merged with the above dispatch later
-// 	msg.dispatch("/DeviceChannelPoll", 	respond_to_device_poll, 	addrOffset);	// node receiving from hub
-
-// 	#if hub_node_type == 0
-// 		msg.dispatch("/DevicePollResponse", update_known_devices, 		addrOffset);	// hub receiving from node
-// 	#endif
-
-// 			// Probably also do a msg.dispatch("PollResponse", populate_known_devices, addrOffset + #) 
-// 			// where # is the number of characters taken up by the device name, number, and '/'' 
-
-// }
 

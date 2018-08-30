@@ -31,15 +31,15 @@
 #define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
 #define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request channel settings from Max Channel Manager, 0 to not
-#define AUTO_NAME        0		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
-#define CUSTOM_NAME "Evap"	// This is only used if Auto_name is set to be 0
+#define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
+#define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
 
 
 // ================================================================ 
 // ===                      SERIAL OPTIONS                      === 
 // ================================================================
 // --- Debugging --- 
-#define LOOM_DEBUG    0			// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG    1			// Set to 1 if you want Serial statements from various functions to print
 								// NOTE: Serial monitor must be opened for device to setup if this is enabled
 								//   Device will freeze if this in abled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
@@ -56,11 +56,27 @@
 #define wake_delay 0			// 1 to enable wait 5 seconds upon awaking from sleep to (re)start Serial
 
 
+#define prevent_platform_compile_error 1  	// 0: Allow errors to be triggered if the program calls 
+											//     functionality of platforms / devices that are not enabled
+											// 1: Permits the code to compile and the device will skip functionality
+											//     of platforms / devices that are not enabled, informing the user of such
+
 // ================================================================ 
 // ===                  DEVICE TELEMETRY TYPE                   === 
 // ================================================================
-#define hub_node_type 0		// 0: Hub, 1: Node
+#define hub_node_type 1		// 0: Hub, 1: Node
 #define is_repeater   0		// Sorry, this doesn't do anything yet
+
+
+// ================================================================ 
+// ===              PREDEFINED AGGREGATE DEVICES                === 
+// ================================================================
+// Enable specified devices, typically mutually exclusive
+// Further options in the advanced settings
+#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
+#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_sapflow      0	// 1 to specify Sapflow  
+#define is_evaporimeter 0	// 1 to specify Evaporimeter
 
 
 // ================================================================ 
@@ -97,7 +113,10 @@
 // ===                         SENSORS                          === 
 // ================================================================
 // --- Enabled Sensors --- 
-#define num_analog    0		// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
+#define num_analog     0	// Number of analog inputs being used (0=None ; 1=A0 ; 2=A0,A1 ; 3=A0,A1,A2)
+#define analog_samples 4 	// Must be 1, 2, 4, 8, or 16 number of analog measurements to sample and average
+
+
 #define is_decagon    0		// 1 if GS3 Decagon is being used
 
 // --- I2C Sensors ---
@@ -128,17 +147,6 @@
 #define button_pin 		10	// Using on-board button, specify attached pin, transmitting
 							// Button is on most feathers, but may not work on 
 							// relay shield if pin 10 is used for relay
-
-
-// ================================================================ 
-// ===              PREDEFINED AGGREGATE DEVICES                === 
-// ================================================================
-// Enable specified devices, typically mutually exclusive
-// Further options in the advanced settings
-#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
-#define is_sapflow      0	// 1 to specify Sapflow  
-#define is_evaporimeter 0	// 1 to specify Evaporimeter
 
 
 // ================================================================ 
@@ -188,6 +196,11 @@
 #if is_wifi == 1
 	#define advanced_interdev_comm 1 	// Enable for full Max support 
 										// Default is for this to be 1 when using WiFi
+#endif
+
+#if LOOM_DEBUG == 1
+	#define SERIAL_BAUD 115200 			// Select Serial baudrate, only used supported rates (i.e. 9600, or 115200, etc.)
+										// Make sure the Serial monitor is set to the same baud
 #endif
 
 // ================================================================
