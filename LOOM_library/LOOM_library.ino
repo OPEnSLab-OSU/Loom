@@ -30,21 +30,32 @@ void setup()
 // ================================================================ 
 void loop() 
 {
-
-	OSCBundle bndl, send_bndl;
-
-	receive_bundle(&bndl, LORA);
-	if (bndl.size()) {
-		print_bundle(&bndl);
-	}
-	process_bundle(&bndl);
-	log_bundle(&bndl, PUSHINGBOX);
+	OSCBundle bndl;
 
 	measure_sensors();
-	package_data(&send_bndl);
-	send_bundle(&send_bndl, LORA);
+	package_data(&bndl);
+	print_bundle(&bndl);
+	send_bundle(&bndl, WIFI);
 
-	additional_loop_checks();
+	delay(1000);
+
+
+	// --- Common Example ---
+	// OSCBundle bndl, send_bndl;
+
+	// receive_bundle(&bndl, LORA);
+	// if (bndl.size()) {
+	// 	print_bundle(&bndl);
+	// }
+	// process_bundle(&bndl);
+	// log_bundle(&bndl, PUSHINGBOX);
+
+	// measure_sensors();
+	// package_data(&send_bndl);
+	// send_bundle(&send_bndl, LORA);
+
+	// additional_loop_checks();
+	// --- End Example ---
 
 }
 

@@ -39,8 +39,8 @@ function createBpatcher(file)
 				dimensions = ["150", "220"]; break;
 			// case "em.channel_manager":
 				// dimensions = ["325", "250"]; break;
-			case "em.LOOMin":
-				dimensions = ["200", "160"]; break;
+			case "em.analog_monitor":
+				dimensions = ["150", "140"]; break;
 			case "em.relay":
 				dimensions = ["150", "125"]; break;
 			case "em.servo":
