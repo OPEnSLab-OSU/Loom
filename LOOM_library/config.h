@@ -73,7 +73,7 @@
 // ================================================================
 // Enable specified devices, typically mutually exclusive
 // Further options in the advanced settings
-#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
+#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
 #define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
@@ -117,11 +117,11 @@
 	#define is_analog_a0 1
 	#define is_analog_a1 1
 	#define is_analog_a2 1
-	#define is_analog_a3 1
-	#define is_analog_a4 1
-	#define is_analog_a5 1
+	#define is_analog_a3 0
+	#define is_analog_a4 0
+	#define is_analog_a5 0
 
-#define analog_samples 4 	// Must be 1, 2, 4, 8, or 16 number of analog measurements to sample and average
+#define analog_samples 16 	// Must be 1, 2, 4, 8, or 16 number of analog measurements to sample and average
 
 
 
@@ -151,10 +151,9 @@
 	#endif
 
 // --- Button Options ---
-#define is_button 		1	// 1 to enable button
-#define button_pin 		10	// Using on-board button, specify attached pin, transmitting
-							// Button is on most feathers, but may not work on 
-							// relay shield if pin 10 is used for relay
+#define is_button 		0	// 1 to enable button
+#define button_pin 		10	// Pin button is attached to 
+
 
 
 // ================================================================ 
@@ -262,7 +261,7 @@
 	#define is_button     1			// 1 to enable button
 	#define button_pin    10		// Pin that the button uses
 	#define is_mpu6050    0 		// Enables MPU6050 on Ishield
-	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 
+	#define is_neopixel   0			// Toggle based on whether Neopixels are being used 
 
 	#if is_neopixel == 1			// Which Ishield ports to enable Neopixels for 
 		#define NEO_0     0			// Port 0 (A0, closest to end of Ishield)
@@ -466,7 +465,7 @@
 
 // --- Delay between loops ---
 #if is_lora == 0 						// Cannot not use with LoRa
-	#define is_sleep_period 80			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
+	#define is_sleep_period 50			// Uncomment to use SleepyDog to transmit at intervals up to 16s and sleep in between. 
 										// Change the value according to the length of your desired transmission interval
 										// 80 seems to be a good amount, around 50 and lower may result in lost packets over WiFi
 #else

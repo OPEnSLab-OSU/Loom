@@ -42,6 +42,9 @@ void set_color(OSCMessage &msg);
 // 
 void setup_neopixel() 
 {
+
+	// Plan to set digital output here on relevant pins
+
 	for (int i = 0; i < 3; i++) {
 		if (state_neopixel.enabled[i]) {
 			state_neopixel.pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
