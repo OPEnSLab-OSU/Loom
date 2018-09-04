@@ -30,14 +30,19 @@ void setup()
 // ================================================================ 
 void loop() 
 {
-	OSCBundle bndl;
+	OSCBundle bndl, send_bndl;
+
+	receive_bundle(&bndl, WIFI);
+	process_bundle(&bndl);
 
 	measure_sensors();
-	package_data(&bndl);
-	print_bundle(&bndl);
-	send_bundle(&bndl, WIFI);
+	package_data(&send_bndl);
+	print_bundle(&send_bndl);
+	send_bundle(&send_bndl, WIFI);
 
-	delay(1000);
+	additional_loop_checks();
+
+
 
 
 	// --- Common Example ---
