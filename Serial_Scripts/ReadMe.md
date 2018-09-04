@@ -18,10 +18,11 @@ The scripts and commands are designed for use with a Unix (Mac / Linux) terminal
 
 If all you need to do is get past the 'while(!Serial);' part of your code, and don't need to see the device's output, you can just send a message to the device over serial. 
 
+- Run the script by right-clicking and opening the script file with the Mac Terminal app (or Linux  command line equivalent)
+- *or*
 - Open the Terminal app
 - Then do either of the following:
   - Run the 'continue_serial.sh' provided
-    - Download the script
     - Navigate to the script (e.g. `cd /Desktop` if you saved it to the desktop)
     - Enter `./continue_serial.sh`
   - Manually check which serial port the Arduino is connected to
