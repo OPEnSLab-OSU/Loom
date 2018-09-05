@@ -186,103 +186,190 @@ void package_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_s
 {
 	LOOM_DEBUG_Println2("Attempting to measure data from sensor with address: ", i2c_addr);
 	
-	#ifdef i2c_addr_tsl2591
-		if (i2c_addr == 0x29){
-			if (setup_tsl2591()) {
-				measure_tsl2591();
-				package_tsl2591(bndl, packet_header_string, port);
-				return;
-			} 
-		}
-	#endif
-	#ifdef i2c_addr_tsl2561
-		if ((i2c_addr == 0x29) ||(i2c_addr == 0x39) || (i2c_addr == 0x49)){
-			if (setup_tsl2561()) {
-				measure_tsl2561();
-				package_tsl2561(bndl, packet_header_string, port);
-				return;
-			} 
-		}
-	#endif
-	#ifdef i2c_addr_fxos8700
-		if ((i2c_addr == 0x1C) || (i2c_addr == 0x1D) || (i2c_addr == 0x1E) || (i2c_addr == 0x1F)){
-			if (setup_fxos8700()) {
-				measure_fxos8700();
-				package_fxos8700(bndl, packet_header_string, port);
-				return;
-			} 
-		}
-	#endif
-	#ifdef i2c_addr_fxas21002
-		if ((i2c_addr == 0x20) || (i2c_addr == 0x21)){
-			if (setup_fxas21002()) {
-				measure_fxas21002();
-				package_fxas21002(bndl, packet_header_string, port);
-				return;
-			} 
-		}
-	#endif
-	#ifdef i2c_addr_zxgesturesensor
-		if ((i2c_addr == 0x10) || (i2c_addr == 0x11)){
-			if (setup_zxgesturesensor()) {
-				measure_zxgesturesensor();
-				package_zxgesturesensor(bndl, packet_header_string, port);
-				return;
-			} 
-		}
-	#endif
-	#ifdef i2c_addr_sht31d
-		if ((i2c_addr == 0x44) || (i2c_addr == 0x45)){
-			if (setup_sht31d()) {
-				measure_sht31d();
-				package_sht31d(bndl, packet_header_string, port);
-				return;
-			} 
-		}
-	#endif
-	#ifdef i2c_addr_mb1232
-		if ((i2c_addr == 0x70)){
-			if (setup_mb1232()) {
-				measure_mb1232();
-				package_mb1232(bndl, packet_header_string, port);
-				return;
-			} 
-		}
-	#endif
-	#ifdef i2c_addr_mpu6050
-		if ((i2c_addr == 0x68 || i2c_addr == 0x69)){
-			if (setup_mpu6050()) {
-				measure_mpu6050();
-				package_mpu6050(bndl, packet_header_string, port);
-				return;
-			} 
-		}
-	#endif
+		switch (i2c_addr) {
+			#ifdef i2c_addr_tsl2561
+				case 0x29: case 0x39: case 0x49: 
+					if (setup_tsl2561()) {
+						measure_tsl2561();
+						package_tsl2561(bndl, packet_header_string, port);
+					} 
+					return;
+			#endif
+			#ifdef i2c_addr_tsl2591
+				case 0x29: 
+					if (setup_tsl2591()) {
+						measure_tsl2591();
+						package_tsl2591(bndl, packet_header_string, port);
+					} 
+					return;
+			#endif
+			#ifdef i2c_addr_fxos8700
+				case 0x1C: case 0x1D: case 0x1E: case 0x1F:
+					if (setup_fxos8700()) {
+						measure_fxos8700();
+						package_fxos8700(bndl, packet_header_string, port);
+					}
+					return;
+			#endif
+			#ifdef i2c_addr_fxas21002	
+				case 0x20: case 0x21:
+					if (setup_fxas21002()) {
+						measure_fxas21002();
+						package_fxas21002(bndl, packet_header_string, port);
+					} 
+					return;
+			#endif
+			#ifdef i2c_addr_zxgesturesensor
+				case 0x10: case 0x11:
+					if (setup_zxgesturesensor()) {
+						measure_zxgesturesensor();
+						package_zxgesturesensor(bndl, packet_header_string, port);
+					} 
+					return;
+			#endif
+			#ifdef i2c_addr_sht31d		
+				case 0x44: case 0x45:
+					if (setup_sht31d()) {
+						measure_sht31d();
+						package_sht31d(bndl, packet_header_string, port);
+					} 
+					return;
+			#endif
+			#ifdef i2c_addr_mb1232		
+				case 0x70:
+					if (setup_mb1232()) {
+						measure_mb1232();
+						package_mb1232(bndl, packet_header_string, port);
+					}
+					return;
+			#endif
+			#ifdef i2c_addr_mpu6050		
+				case 0x68: case 0x69:
+					if (setup_mpu6050()) {
+						measure_mpu6050();
+						package_mpu6050(bndl, packet_header_string, port);
+					} 
+					return;
+			#endif
+			#ifdef i2c_addr_ms5803		
+				case 0x77:
+					if (setup_ms5803()) {
+						measure_ms5803();
+						package_ms5803(bndl, packet_header_string, port);
+					} 
+					return;
+			#endif
+			#ifdef i2c_addr_lis3dh		
+				case 0x19:
+					if (setup_lis3dh()) {
+						measure_lis3dh();
+						package_lis3dh(bndl, packet_header_string, port);
+					} 
+					return;
+			#endif
 
-	#ifdef i2c_addr_ms5803
-		if (i2c_addr == 0x77){
-			if (setup_ms5803()) {
-				measure_ms5803();
-				package_ms5803(bndl, packet_header_string, port);
-				return;
-			} 
+			case 0x00: default:
+				Serial.println("This sensor is not currently supported by the Project LOOM sytem");
 		}
-	#endif
 
-	#ifdef i2c_addr_lis3dh
-		if (i2c_addr == 0x19){
-			if (setup_lis3dh()) {
-				measure_lis3dh();
-				package_lis3dh(bndl, packet_header_string, port);
-				return;
-			} 
-		}
-	#endif
 
-	#if LOOM_DEBUG == 1
-		if (i2c_addr != 0x00) //sht31d hardware bug
-			Serial.println("This sensor is not currently supported by the Project LOOM sytem");
-	#endif
+	// #ifdef i2c_addr_tsl2591
+	// 	if (i2c_addr == 0x29){
+	// 		if (setup_tsl2591()) {
+	// 			measure_tsl2591();
+	// 			package_tsl2591(bndl, packet_header_string, port);
+	// 			return;
+	// 		} 
+	// 	}
+	// #endif
+	// #ifdef i2c_addr_tsl2561
+	// 	if ((i2c_addr == 0x29) ||(i2c_addr == 0x39) || (i2c_addr == 0x49)){
+	// 		if (setup_tsl2561()) {
+	// 			measure_tsl2561();
+	// 			package_tsl2561(bndl, packet_header_string, port);
+	// 			return;
+	// 		} 
+	// 	}
+	// #endif
+	// #ifdef i2c_addr_fxos8700
+	// 	if ((i2c_addr == 0x1C) || (i2c_addr == 0x1D) || (i2c_addr == 0x1E) || (i2c_addr == 0x1F)){
+	// 		if (setup_fxos8700()) {
+	// 			measure_fxos8700();
+	// 			package_fxos8700(bndl, packet_header_string, port);
+	// 			return;
+	// 		} 
+	// 	}
+	// #endif
+	// #ifdef i2c_addr_fxas21002
+	// 	if ((i2c_addr == 0x20) || (i2c_addr == 0x21)){
+	// 		if (setup_fxas21002()) {
+	// 			measure_fxas21002();
+	// 			package_fxas21002(bndl, packet_header_string, port);
+	// 			return;
+	// 		} 
+	// 	}
+	// #endif
+	// #ifdef i2c_addr_zxgesturesensor
+	// 	if ((i2c_addr == 0x10) || (i2c_addr == 0x11)){
+	// 		if (setup_zxgesturesensor()) {
+	// 			measure_zxgesturesensor();
+	// 			package_zxgesturesensor(bndl, packet_header_string, port);
+	// 			return;
+	// 		} 
+	// 	}
+	// #endif
+	// #ifdef i2c_addr_sht31d
+	// 	if ((i2c_addr == 0x44) || (i2c_addr == 0x45)){
+	// 		if (setup_sht31d()) {
+	// 			measure_sht31d();
+	// 			package_sht31d(bndl, packet_header_string, port);
+	// 			return;
+	// 		} 
+	// 	}
+	// #endif
+	// #ifdef i2c_addr_mb1232
+	// 	if ((i2c_addr == 0x70)){
+	// 		if (setup_mb1232()) {
+	// 			measure_mb1232();
+	// 			package_mb1232(bndl, packet_header_string, port);
+	// 			return;
+	// 		} 
+	// 	}
+	// #endif
+	// #ifdef i2c_addr_mpu6050
+	// 	if ((i2c_addr == 0x68 || i2c_addr == 0x69)){
+	// 		if (setup_mpu6050()) {
+	// 			measure_mpu6050();
+	// 			package_mpu6050(bndl, packet_header_string, port);
+	// 			return;
+	// 		} 
+	// 	}
+	// #endif
+
+	// #ifdef i2c_addr_ms5803
+	// 	if (i2c_addr == 0x77){
+	// 		if (setup_ms5803()) {
+	// 			measure_ms5803();
+	// 			package_ms5803(bndl, packet_header_string, port);
+	// 			return;
+	// 		} 
+	// 	}
+	// #endif
+
+	// #ifdef i2c_addr_lis3dh
+	// 	if (i2c_addr == 0x19){
+	// 		if (setup_lis3dh()) {
+	// 			measure_lis3dh();
+	// 			package_lis3dh(bndl, packet_header_string, port);
+	// 			return;
+	// 		} 
+	// 	}
+	// #endif
+
+	// #if LOOM_DEBUG == 1
+	// 	if (i2c_addr != 0x00) //sht31d hardware bug
+	// 		Serial.println("This sensor is not currently supported by the Project LOOM sytem");
+	// #endif
 }
 
 
@@ -378,9 +465,9 @@ void get_sensors(OSCBundle *bndl, char packet_header_string[])
 
 		// Add the sensor name
 		switch (i2c_addr) {
-			case 0x29:
-				msg.add("tsl25X1"); 		break;
-			case 0x39: case 0x49: 
+			// case 0x29:   				// needs to be better implemented, as to not conflict with tsl2591
+			// 	msg.add("tsl2561"); 		break;
+			case 0x29: case 0x39: case 0x49: 
 				msg.add("tsl2591"); 		break;
 			case 0x1C: case 0x1D: case 0x1E: case 0x1F:
 				msg.add("fxos8700"); 		break;

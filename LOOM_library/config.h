@@ -28,8 +28,8 @@
 // ================================================================
 // --- Device Identification --- 
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
-#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
+#define FAMILY_NUM       8		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define CHANNEL          4		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request channel settings from Max Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
@@ -39,7 +39,7 @@
 // ===                      SERIAL OPTIONS                      === 
 // ================================================================
 // --- Debugging --- 
-#define LOOM_DEBUG    1			// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG    0			// Set to 1 if you want Serial statements from various functions to print
 								// NOTE: Serial monitor must be opened for device to setup if this is enabled
 								//   Device will freeze if this in abled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
@@ -73,8 +73,8 @@
 // ================================================================
 // Enable specified devices, typically mutually exclusive
 // Further options in the advanced settings
-#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
+#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -106,14 +106,15 @@
 // --- Enabled Actuators --- 
 #define num_servos    0 	// Number of servos being used (up to 8 per shield, testing has generally only been through 1 shield)
 #define num_steppers  0		// Number of stepper motors being used 
-#define is_relay      0		// 1 if relays are being used (enables two, on pins 5 and 6)
+#define is_relay      0		// 1 if relays are being used (enables two, on pins 10 and 11)
 
 
 // ================================================================ 
 // ===                         SENSORS                          === 
 // ================================================================
 // --- Analog Setting --- 
-#define is_analog     1	// 1 if analog input is being used, 0 if not
+#define is_analog     0		// 1 if analog input is being used, 0 if not
+
 	#define is_analog_a0 1
 	#define is_analog_a1 1
 	#define is_analog_a2 1
@@ -125,6 +126,7 @@
 
 
 
+// --- Decagon Soil Moisture ---
 #define is_decagon    0		// 1 if GS3 Decagon is being used
 
 // --- I2C Sensors ---
@@ -248,9 +250,12 @@
 	#define is_zxgesturesensor 1	// ZX_Distance Sensor
 	#define is_sht31d          1	// Temperature / Humidity
 	#define is_mb1232          1	// Sonar
-	#define is_mpu6050         1	// Accelerometer / Gyroscope
+	#define is_mpu6050         0	// Accelerometer / Gyroscope (better supported on Ishield)
 	#define is_lis3dh          1    // Accelerometer
 	#define is_ms5803          1	// Pressure Sensor
+
+	#define is_button 		   1	// 1 to enable button
+
 #endif
 
 
@@ -260,14 +265,22 @@
 #if is_ishield == 1
 	#define is_button     1			// 1 to enable button
 	#define button_pin    10		// Pin that the button uses
-	#define is_mpu6050    0 		// Enables MPU6050 on Ishield
-	#define is_neopixel   0			// Toggle based on whether Neopixels are being used 
+	#define is_mpu6050    1 		// Enables MPU6050 on Ishield
+	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 
+	#define is_analog     1
 
 	#if is_neopixel == 1			// Which Ishield ports to enable Neopixels for 
 		#define NEO_0     0			// Port 0 (A0, closest to end of Ishield)
 		#define NEO_1     0			// Port 1 (A1, middle port)
 		#define NEO_2     1			// Port 2 (A2, port closest to MPU6050)
 	#endif  
+
+	#define is_analog_a0 1
+	#define is_analog_a1 1
+	#define is_analog_a2 0
+	#define is_analog_a3 0
+	#define is_analog_a4 0
+	#define is_analog_a5 0
 #endif
 
 

@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 172.0, 183.0, 718.0, 683.0 ],
+		"rect" : [ 172.0, 183.0, 779.0, 683.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -52,12 +52,11 @@
 					"gradient" : 1,
 					"id" : "obj-18",
 					"ignoreclick" : 1,
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 82.0, 190.0, 82.0, 40.0 ],
+					"patching_rect" : [ 8.0, 8.197998, 111.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 7.0, 7.0, 181.0, 24.0 ],
 					"style" : "",
@@ -78,7 +77,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 355.0, 308.0, 118.0, 25.0 ],
+					"patching_rect" : [ 205.0, 293.0, 118.0, 25.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 11.0, 97.0, 169.0, 24.0 ],
 					"rounded" : 15.0,
@@ -102,7 +101,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 355.0, 213.0, 118.0, 25.0 ],
+					"patching_rect" : [ 428.0, 293.0, 118.0, 25.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 11.0, 69.0, 169.0, 24.0 ],
 					"rounded" : 15.0,
@@ -117,81 +116,15 @@
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-31",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 34.0, 89.197998, 152.0, 20.0 ],
-					"style" : "",
-					"text" : "<< Clear All in this session"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-37",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 137.0, 23.093994, 125.0, 20.0 ],
-					"style" : "",
-					"text" : "<< Choose a Process"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-32",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 34.0, 54.48999, 152.0, 20.0 ],
-					"style" : "",
-					"text" : "<< Clear Recent Track"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-366",
-					"maxclass" : "button",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 14.0, 89.197998, 20.0, 20.0 ],
-					"style" : ""
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-2",
-					"maxclass" : "button",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 14.0, 54.48999, 20.0, 20.0 ],
-					"style" : ""
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-4",
-					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.analog_monitor", ",", "em.decagon", ",", "em.emote", ",", "em.multiplexer", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.IshieldMonitor", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rangeSetter", ",", "em.rotaryDial", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.smooth", ",", "em.spring", ",", "em.threshold", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.neopixel", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.relay", ",", "em.servo", ",", "em.stepper_motor", ",", "em.stepper_motor_extension", ",", "em.switchblade" ],
+					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.analog_monitor", ",", "em.decagon", ",", "em.multiplexer", ",", "em.IshieldMonitor", ",", "-PROCESS-", ",", "em.analog_to_uv", ",", "em.rangeSetter", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.smooth", ",", "em.threshold", ",", "-OUTPUT-", ",", "em.neopixel", ",", "em.relay", ",", "em.servo", ",", "em.stepper_motor", ",", "em.stepper_motor_extension", ",", "-", "-", "LEGACY", "-", "-", ",", "-INPUT-", ",", "em.emote", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rotaryDial", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.spring", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.neopixel", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.switchblade" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 129.5, 197.093994, 124.5, 22.0 ],
+					"patching_rect" : [ 111.0, 196.093994, 124.5, 22.0 ],
 					"prefix" : "Macintosh HD:/Applications/Max6.1/Cycling '74/DataProcessorPlugins/",
 					"prefix_mode" : 2,
 					"presentation" : 1,
@@ -210,25 +143,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 129.5, 286.0, 106.0, 22.0 ],
+					"patching_rect" : [ 111.0, 238.0, 106.0, 22.0 ],
 					"style" : "",
 					"text" : "sprintf %s.maxpat"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 0.0,
-					"bgcolor" : [ 0.219851, 0.751554, 0.823202, 1.0 ],
-					"id" : "obj-19",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 6.5, 5.593994, 255.5, 118.604004 ],
-					"proportion" : 0.39,
-					"rounded" : 16,
-					"style" : ""
 				}
 
 			}
@@ -242,7 +159,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 5,
 					"outlettype" : [ "", "", "", "", "" ],
-					"patching_rect" : [ 252.0, 430.0, 181.0, 22.0 ],
+					"patching_rect" : [ 181.0, 406.0, 181.0, 22.0 ],
 					"style" : "",
 					"text" : "regexp .maxpat @substitute %0"
 				}
@@ -287,7 +204,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 294.0, 151.0, 25.0, 25.0 ],
+					"patching_rect" : [ 389.0, 115.0, 25.0, 25.0 ],
 					"style" : ""
 				}
 
@@ -302,7 +219,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 45.0, 151.0, 25.0, 25.0 ],
+					"patching_rect" : [ 88.0, 115.0, 25.0, 25.0 ],
 					"style" : ""
 				}
 
@@ -317,7 +234,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 137.0, 458.0, 91.0, 22.0 ],
+					"patching_rect" : [ 389.0, 434.0, 91.0, 22.0 ],
 					"style" : "",
 					"text" : "deleteBpatcher"
 				}
@@ -333,7 +250,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 252.0, 458.0, 109.0, 22.0 ],
+					"patching_rect" : [ 181.0, 434.0, 109.0, 22.0 ],
 					"style" : "",
 					"text" : "createBpatcher $1"
 				}
@@ -372,7 +289,7 @@
 					"mode" : 1,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 294.0, 14.343994, 60.5, 37.5 ],
+					"patching_rect" : [ 8.0, 48.343994, 60.5, 37.5 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.0, 0.0, 195.0, 130.0 ],
 					"proportion" : 0.39,
@@ -517,8 +434,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-					"fontsize" : [ 12.059008 ]
+					"fontsize" : [ 12.059008 ],
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 				}
 ,
 				"parentstyle" : "",

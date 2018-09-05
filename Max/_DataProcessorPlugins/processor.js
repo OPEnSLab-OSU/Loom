@@ -53,6 +53,8 @@ function createBpatcher(file)
 				dimensions = ["150", "225"]; break;
 			case "em.stepper_motor_extension":
 				dimensions = ["270", "225"]; break;	
+			case "em.analog_to_uv":
+				dimensions = ["80", "120"]; break;	
 			default: 
 				dimensions = ["250", "150"]; break;
 		}
