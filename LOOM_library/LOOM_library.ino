@@ -43,8 +43,6 @@ void loop()
 	additional_loop_checks();
 
 
-
-
 	// --- Common Example ---
 	// OSCBundle bndl, send_bndl;
 

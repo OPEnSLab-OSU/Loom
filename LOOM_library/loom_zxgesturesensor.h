@@ -22,7 +22,7 @@ struct state_zxgesturesensor_t {
 	GestureType gesture;
 	String gesture_type;
 	uint8_t gesture_speed;
-	int32_t pos[2];
+	int pos[2];
 };
 
 // ================================================================ 
@@ -101,10 +101,10 @@ void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/zxgesturesensor/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
-	msg.add("type").add(state_zxgesturesensor.gesture_type);
+	msg.add("type" ).add(state_zxgesturesensor.gesture_type.c_str());
 	msg.add("speed").add((int32_t)state_zxgesturesensor.gesture_speed);
-	msg.add("px").add(state_zxgesturesensor.pos[0]);
-	msg.add("pz").add(state_zxgesturesensor.pos[1]);
+	msg.add("px").add((int32_t)state_zxgesturesensor.pos[0]);
+	msg.add("pz").add((int32_t)state_zxgesturesensor.pos[1]);
 	
 	bndl->add(msg);
 }
@@ -114,13 +114,13 @@ void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[])
 	char address_string[255];
 
 	sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_type");
-	bndl->add(address_string).add(state_zxgesturesensor.gesture_type);
+	bndl->add(address_string).add(state_zxgesturesensor.gesture_type.c_str());
 	sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_speed");
 	bndl->add(address_string).add((int32_t)state_zxgesturesensor.gesture_speed);
 	sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_px");
-	bndl->add(address_string).add(state_zxgesturesensor.pos[0]);
+	bndl->add(address_string).add((int32_t)state_zxgesturesensor.pos[0]);
 	sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_pz");
-	bndl->add(address_string).add(state_zxgesturesensor.pos[1]);
+	bndl->add(address_string).add((int32_t)state_zxgesturesensor.pos[1]);
 }
 
 
@@ -133,13 +133,13 @@ void measure_zxgesturesensor()
 	uint8_t x;
 	uint8_t z;
 	
-	if(state_zxgesturesensor.inst_zxgesturesensor.positionAvailable()) {
+	if (state_zxgesturesensor.inst_zxgesturesensor.positionAvailable()) {
 		x = state_zxgesturesensor.inst_zxgesturesensor.readX();
 		z = state_zxgesturesensor.inst_zxgesturesensor.readZ();
 		
 		if((x != ZX_ERROR) && (z != ZX_ERROR)) {
-			state_zxgesturesensor.pos[0] = (int32_t)x;
-			state_zxgesturesensor.pos[1] = (int32_t)z;
+			state_zxgesturesensor.pos[0] = x;
+			state_zxgesturesensor.pos[1] = z;
 			LOOM_DEBUG_Println2("zxgesturesensor X: ", state_zxgesturesensor.pos[0]);
 			LOOM_DEBUG_Println2("zxgesturesensor Z: ", state_zxgesturesensor.pos[1]);
 		} else {
@@ -150,14 +150,13 @@ void measure_zxgesturesensor()
 	}
 	
 	if (state_zxgesturesensor.inst_zxgesturesensor.gestureAvailable()) {
-
-		state_zxgesturesensor.gesture = state_zxgesturesensor.inst_zxgesturesensor.readGesture();
+		state_zxgesturesensor.gesture       = state_zxgesturesensor.inst_zxgesturesensor.readGesture();
 		state_zxgesturesensor.gesture_speed = state_zxgesturesensor.inst_zxgesturesensor.readGestureSpeed();
 		
 		switch (state_zxgesturesensor.gesture) {
-			case NO_GESTURE:
-				state_zxgesturesensor.gesture_type = "No Gesture";
-				break;
+			// case NO_GESTURE:
+			// 	state_zxgesturesensor.gesture_type = "No Gesture";
+			// 	break;
 			case RIGHT_SWIPE:
 				state_zxgesturesensor.gesture_type = "Right Swipe";
 				break;
@@ -166,17 +165,21 @@ void measure_zxgesturesensor()
 				break;
 			case UP_SWIPE:
 				state_zxgesturesensor.gesture_type = "Up Swipe";
-			default:
+			case NO_GESTURE: default:
+				state_zxgesturesensor.gesture_type = "No Gesture";
 				break;
 		}
+
 		#if DEBUG == 1
-			Serial.print("Gesture type: ");
-			Serial.println(state_zxgesturesensor.gesture_type);
-			Serial.print("Gesture speed: ");
+			LOOM_DEBUG_Println2("Gesture type: ", state_zxgesturesensor.gesture_type);
+			LOOM_DEBUG_Print("Gesture speed: ");
 			Serial.println(state_zxgesturesensor.gesture_speed, DEC);
 		#endif
+
 	} else {
 		LOOM_DEBUG_Println("Gesture data unavailable for zxgesturesensor");
+		state_zxgesturesensor.gesture_type  = "No Gesture";
+		state_zxgesturesensor.gesture_speed = 0;
 	}
 }
 

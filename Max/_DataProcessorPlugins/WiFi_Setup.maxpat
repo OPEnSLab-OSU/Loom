@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 321.0, 163.0, 626.0, 717.0 ],
+		"rect" : [ 321.0, 149.0, 626.0, 717.0 ],
 		"bgcolor" : [ 0.878431, 0.878431, 0.858824, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -40,6 +40,34 @@
 		"showontab" : 1,
 		"boxes" : [ 			{
 				"box" : 				{
+					"bgcolor" : [ 0.376471, 0.384314, 0.4, 1.0 ],
+					"bgcolor2" : [ 0.376471, 0.384314, 0.4, 1.0 ],
+					"bgfillcolor_angle" : 270.0,
+					"bgfillcolor_autogradient" : 0.0,
+					"bgfillcolor_color" : [ 1.0, 1.0, 1.0, 0.37 ],
+					"bgfillcolor_color1" : [ 0.376471, 0.384314, 0.4, 1.0 ],
+					"bgfillcolor_color2" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+					"bgfillcolor_proportion" : 0.39,
+					"bgfillcolor_type" : "color",
+					"fontsize" : 12.0,
+					"gradient" : 1,
+					"id" : "obj-32",
+					"ignoreclick" : 1,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 416.0, 188.0, 120.0, 22.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 141.0, 39.300003, 115.0, 22.0 ],
+					"style" : "",
+					"text" : "Client Mode Config",
+					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"bgcolor" : [ 0.239216, 0.254902, 0.278431, 1.0 ],
 					"bgoncolor" : [ 0.439216, 0.74902, 0.254902, 1.0 ],
 					"id" : "obj-1",
@@ -50,7 +78,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 221.0, 82.0, 39.0, 25.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 63.5, 49.0, 31.0 ],
+					"presentation_rect" : [ 23.0, 97.0, 58.0, 25.0 ],
 					"rounded" : 15.0,
 					"style" : "",
 					"text" : "Send",
@@ -298,7 +326,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 384.0, 47.0, 200.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 37.300003, 236.75, 23.0 ],
+					"presentation_rect" : [ 7.0, 38.300003, 90.0, 47.0 ],
 					"style" : "",
 					"tabs" : [ "Access Point", "Client" ]
 				}
@@ -486,7 +514,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 16.5, 12.833374, 82.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 7.0, 236.0, 24.0 ],
+					"presentation_rect" : [ 7.0, 8.0, 281.0, 24.0 ],
 					"style" : "",
 					"text" : "WiFi Setup",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
@@ -561,34 +589,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.376471, 0.384314, 0.4, 1.0 ],
-					"bgcolor2" : [ 0.376471, 0.384314, 0.4, 1.0 ],
-					"bgfillcolor_angle" : 270.0,
-					"bgfillcolor_autogradient" : 0.0,
-					"bgfillcolor_color" : [ 1.0, 1.0, 1.0, 0.37 ],
-					"bgfillcolor_color1" : [ 0.376471, 0.384314, 0.4, 1.0 ],
-					"bgfillcolor_color2" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-					"bgfillcolor_proportion" : 0.39,
-					"bgfillcolor_type" : "color",
-					"fontsize" : 12.0,
-					"gradient" : 1,
-					"id" : "obj-32",
-					"ignoreclick" : 1,
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 416.0, 188.0, 120.0, 22.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 128.0, 72.5, 115.0, 22.0 ],
-					"style" : "",
-					"text" : "Client Mode Config",
-					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-7",
 					"keymode" : 1,
 					"maxclass" : "textedit",
@@ -598,7 +598,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 479.333344, 257.0, 74.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 89.0, 137.0, 146.0, 22.0 ],
+					"presentation_rect" : [ 180.0, 99.0, 99.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -608,14 +608,14 @@
 					"bgcolor" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgcolor2" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgfillcolor_angle" : 270.0,
-					"bgfillcolor_autogradient" : 0,
+					"bgfillcolor_autogradient" : 0.0,
 					"bgfillcolor_color" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
 					"bgfillcolor_color1" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgfillcolor_color2" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
 					"bgfillcolor_proportion" : 0.39,
 					"bgfillcolor_type" : "color",
 					"fontface" : 1,
-					"fontsize" : 12.0,
+					"fontsize" : 11.0,
 					"gradient" : 1,
 					"id" : "obj-6",
 					"ignoreclick" : 1,
@@ -623,9 +623,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 395.333344, 223.0, 60.0, 22.0 ],
+					"patching_rect" : [ 395.333344, 223.0, 58.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 15.5, 108.300003, 68.0, 22.0 ],
+					"presentation_rect" : [ 114.5, 73.300003, 61.0, 21.0 ],
 					"style" : "",
 					"text" : "Network",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
@@ -638,14 +638,14 @@
 					"bgcolor" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgcolor2" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgfillcolor_angle" : 270.0,
-					"bgfillcolor_autogradient" : 0,
+					"bgfillcolor_autogradient" : 0.0,
 					"bgfillcolor_color" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
 					"bgfillcolor_color1" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgfillcolor_color2" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
 					"bgfillcolor_proportion" : 0.39,
 					"bgfillcolor_type" : "color",
 					"fontface" : 1,
-					"fontsize" : 12.0,
+					"fontsize" : 11.0,
 					"gradient" : 1,
 					"id" : "obj-5",
 					"ignoreclick" : 1,
@@ -653,9 +653,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 479.333344, 223.0, 69.0, 22.0 ],
+					"patching_rect" : [ 479.333344, 223.0, 66.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 15.5, 137.0, 68.0, 22.0 ],
+					"presentation_rect" : [ 114.5, 99.0, 60.0, 21.0 ],
 					"style" : "",
 					"text" : "Password",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
@@ -674,7 +674,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 395.333344, 257.0, 74.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 89.0, 108.300003, 146.0, 22.0 ],
+					"presentation_rect" : [ 180.0, 73.300003, 99.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -692,7 +692,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 384.0, 124.0, 33.5, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 100.0, 236.0, 67.0 ],
+					"presentation_rect" : [ 107.0, 65.0, 179.0, 63.0 ],
 					"proportion" : 0.39,
 					"style" : ""
 				}
@@ -711,7 +711,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 16.5, 47.0, 33.5, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 250.0, 175.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 295.0, 135.0 ],
 					"proportion" : 0.39,
 					"style" : ""
 				}

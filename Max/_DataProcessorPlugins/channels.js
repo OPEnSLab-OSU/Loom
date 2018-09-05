@@ -1,6 +1,6 @@
 
 inlets = 1;
-outlets = 9;
+outlets = 10;
 // 0  : gate for functions when no devices
 // 1  : device display
 // 2  : awake devices
@@ -10,7 +10,7 @@ outlets = 9;
 // 6  : set UDP ports
 // 7  : set subnet routing 
 // 8  : enable individual battery and button displays
-
+// 9  : device targeting output
 
 // Current state of the devices on the channels
 var json = {
@@ -30,7 +30,7 @@ var json = {
 var global_port = 9400;
 
 // Current subnet to manage
-var family = 'LOOM';
+var family = "LOOM";
 var family_num = 1;
 var subnet_prefix = '/' + family + family_num;
 
@@ -121,6 +121,13 @@ function display()
 		if (json.devices[i].awake == 1) {
 			outlet(1, '/text', i, 'textcolor', 0., 0., 0., 1.);
 			outlet(1, '/led', i, 1);
+			
+			//outlet(9, i, family, family_num, json.devices[i].type, i+1);	
+			//outlet(9, i, 0, family);
+			outlet(9, i, 1, family_num);
+			outlet(9, i, 2, json.devices[i].type);
+			outlet(9, i, 3, i+1);
+			
 		} else {
 			outlet(1, '/text', i, 'textcolor', 0., 0., 0., 0.4);
 			outlet(1, '/led', i, 0);

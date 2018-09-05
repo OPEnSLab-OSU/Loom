@@ -118,6 +118,7 @@ void measure_analog()
 
 	#if (is_analog_a0 == 1) 
 		state_analog.a0 = read_analog(0);
+		LOOM_DEBUG_Println2("UV Index: ", (3.3/409.6)*state_analog.a0);
 	#endif
 	#if (is_analog_a1 == 1)
 		state_analog.a1 = read_analog(1);
