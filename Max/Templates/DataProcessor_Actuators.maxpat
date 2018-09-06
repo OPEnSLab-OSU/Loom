@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 178.0, 79.0, 933.0, 787.0 ],
+		"rect" : [ 34.0, 79.0, 1372.0, 787.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -88,7 +88,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 933.0, 761.0 ],
+						"rect" : [ 0.0, 26.0, 1372.0, 761.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1784,7 +1784,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 933.0, 761.0 ],
+						"rect" : [ 0.0, 26.0, 1372.0, 761.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -3499,7 +3499,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 933.0, 761.0 ],
+						"rect" : [ 0.0, 26.0, 1372.0, 761.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -5329,70 +5329,70 @@
 		"dependency_cache" : [ 			{
 				"name" : "processorGen.maxpat",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../../../../Max 7/Library/_DataProcessorPlugins",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "processor.js",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../../../../Max 7/Library/_DataProcessorPlugins",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "em.channel_manager.maxpat",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../../../../Max 7/Library/_DataProcessorPlugins",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "channels.js",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../../../../Max 7/Library/_DataProcessorPlugins",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "em.servo.maxpat",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../../../../Max 7/Library/_DataProcessorPlugins",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Controller.maxpat",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../../../../Max 7/Library/_DataProcessorPlugins",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Controller.js",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../../../../Max 7/Library/_DataProcessorPlugins",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "WiFi_Setup.maxpat",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../../../../Max 7/Library/_DataProcessorPlugins",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Status_Bar_Narrow.maxpat",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../../../../Max 7/Library/_DataProcessorPlugins",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "em.relay.maxpat",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../../../../Max 7/Library/_DataProcessorPlugins",
 				"type" : "JSON",
 				"implicit" : 1
 			}
