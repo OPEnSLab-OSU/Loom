@@ -6,15 +6,13 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define RELAY_PIN0 10
-#define RELAY_PIN1 11
 
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
 struct state_relay_t {
-	bool on[2]; // Array to hold relay states (on/off)
+	bool on; // Array to hold relay states (on/off)
 };
 
 
@@ -29,7 +27,6 @@ struct state_relay_t state_relay;
 // ================================================================
 void setup_relay();
 void handle_relay_msg(OSCMessage &msg);
-void write_relay_states();
 void package_relay(OSCBundle *bndl, char packet_header_string[]);
 
 
@@ -44,10 +41,8 @@ void package_relay(OSCBundle *bndl, char packet_header_string[]);
 // 
 void setup_relay() 
 {
-	pinMode(RELAY_PIN0,OUTPUT);
-	pinMode(RELAY_PIN1,OUTPUT);
-	state_relay.on[0] = false;
-	state_relay.on[1] = false;
+	pinMode(relay_pin, OUTPUT);
+	state_relay.on = false;
 }
 
 
@@ -66,28 +61,19 @@ void setup_relay()
 void handle_relay_msg(OSCMessage &msg) 
 {
 	int relay  = msg.getInt(0);
-	int set_to = msg.getInt(1);
 
-	state_relay.on[relay] = (set_to == 1);
-	
-	LOOM_DEBUG_Print3("Set ", relay, " to "); 
-	LOOM_DEBUG_Println((state_relay.on[relay]) ? "ON" : "OFF");
+	if (relay == relay_pin) {
+		int set_to = msg.getInt(1);
 
-	write_relay_states();
+		state_relay.on = (set_to == 1);
+		
+		LOOM_DEBUG_Print("Set relay to "); 
+		LOOM_DEBUG_Println((state_relay.on) ? "ON" : "OFF");
+
+		digitalWrite(relay_pin, (state_relay.on == true) ? HIGH : LOW);
+	}	
 }
 
-
-
-// --- WRTIE RELAY STATES ---
-//
-// Writes current relay states to the physical relays
-// Called after handle_relay_msg, which sets the variables holding the state values
-// 
-void write_relay_states()
-{
-	digitalWrite(RELAY_PIN0,(state_relay.on[0]==true) ? HIGH : LOW);
-	digitalWrite(RELAY_PIN1,(state_relay.on[1]==true) ? HIGH : LOW);
-}
 
 
 

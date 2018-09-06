@@ -39,7 +39,7 @@
 // ===                      SERIAL OPTIONS                      === 
 // ================================================================
 // --- Debugging --- 
-#define LOOM_DEBUG    0			// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG    1			// Set to 1 if you want Serial statements from various functions to print
 								// NOTE: Serial monitor must be opened for device to setup if this is enabled
 								//   Device will freeze if this in abled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
@@ -74,7 +74,7 @@
 // Enable specified devices, typically mutually exclusive
 // Further options in the advanced settings
 #define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -106,7 +106,11 @@
 // --- Enabled Actuators --- 
 #define num_servos    0 	// Number of servos being used (up to 8 per shield, testing has generally only been through 1 shield)
 #define num_steppers  0		// Number of stepper motors being used 
-#define is_relay      0		// 1 if relays are being used (enables two, on pins 10 and 11)
+#define is_relay      1		// 1 if a relay is being used
+#if is_relay == 1
+	#define relay_pin 10	// Digital pin connected to the relay
+#endif
+
 
 
 // ================================================================ 
