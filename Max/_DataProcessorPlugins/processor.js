@@ -35,7 +35,7 @@ function createBpatcher(file)
 		switch (file) {
 			case "em.neopixel": 
 				dimensions = ["150", "200"]; break;
-			case "em.IshieldMonitor": 
+			case "em.ishield_monitor": 
 				dimensions = ["150", "220"]; break;
 			// case "em.channel_manager":
 				// dimensions = ["325", "250"]; break;
@@ -54,7 +54,17 @@ function createBpatcher(file)
 			case "em.stepper_motor_extension":
 				dimensions = ["270", "225"]; break;	
 			case "em.analog_to_uv":
-				dimensions = ["80", "120"]; break;	
+				dimensions = ["80", "120"]; break;
+			case "em.threshold":
+				dimensions = ["105", "145"]; break;
+			case "em.scaleLin":
+				dimensions = ["175", "145"]; break;
+			case "em.rangeSetter":
+				dimensions = ["160", "115"]; break;
+			case "em.scaleCurve":
+				dimensions = ["155", "220"]; break;
+			case "em.smooth":
+				dimensions = ["175", "130"]; break;
 			default: 
 				dimensions = ["250", "150"]; break;
 		}
