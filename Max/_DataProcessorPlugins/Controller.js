@@ -95,7 +95,7 @@ function target_prefix(i)
 function targeting(i) { 
 	if (verify(i, 1, 3)) {
 		device_targeting = i; 
-		outlet(0, 'device targeting', i);
+		//outlet(0, 'device targeting', i);
 		update_ui();
 	} else { 
 		outlet(1, i + ' is an invalid targeting option');
@@ -128,13 +128,16 @@ function build_msg(suffix, args)
 // Set device type
 function new_device_type(s)
 {
-	device_type = s;
+	// Only update if it a new device type
+	if (device_type != s) {
+		device_type = s;
 
-	act_port = act_num =  0;
-	val0 = val1 = val2 = val3 = val4 = 0;
-
-	update_ui();
-	request_ip();
+		act_port = act_num =  0;
+		val0 = val1 = val2 = val3 = val4 = 0;
+	
+		update_ui();
+		request_ip();	
+	}
 }
 
 // Set family
@@ -227,7 +230,7 @@ function update_ip(device_id,a,b,c,d)
 function request_ip()
 {
 	str = target_prefix(1) + '/requestIP';
-	outlet(0, 'Requesting device IP of ' + target_prefix(1));
+	//outlet(0, 'Requesting device IP of ' + target_prefix(1));
 	outlet(3, str);
 }
 
@@ -292,7 +295,7 @@ function dump()
 // Set actuator port 
 function set_act_port(i) 
 { 
-	if (verify(i, 0, 7)) act_port = i; 
+	if (verify(i, 0, 12)) act_port = i; 
 	else outlet(1, i + ' is an invalid port number');
 }
 

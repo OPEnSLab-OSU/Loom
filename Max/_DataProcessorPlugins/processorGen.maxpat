@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 172.0, 183.0, 779.0, 683.0 ],
+		"rect" : [ 58.0, 116.0, 433.0, 683.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -37,6 +37,22 @@
 		"style" : "",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"id" : "obj-15",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 168.0, 269.0, 106.0, 22.0 ],
+					"style" : "",
+					"text" : "sprintf %s.maxpat"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"bgcolor" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgcolor2" : [ 0.376471, 0.384314, 0.4, 1.0 ],
@@ -118,7 +134,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-4",
-					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.analog_monitor", ",", "em.decagon", ",", "em.multiplexer", ",", "em.IshieldMonitor", ",", "-PROCESS-", ",", "em.analog_to_uv", ",", "em.rangeSetter", ",", "em.scaleCurve", ",", "em.scaleDegree", ",", "em.scaleLin", ",", "em.smooth", ",", "em.threshold", ",", "-OUTPUT-", ",", "em.neopixel", ",", "em.relay", ",", "em.servo", ",", "em.stepper_motor", ",", "em.stepper_motor_extension", ",", "-", "-", "LEGACY", "-", "-", ",", "-INPUT-", ",", "em.emote", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rotaryDial", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.spring", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.neopixel", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.switchblade" ],
+					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.analog_monitor", ",", "em.decagon", ",", "em.multiplexer", ",", "em.ishield_monitor", ",", "-PROCESS-", ",", "em.analog_to_uv", ",", "em.rangeSetter", ",", "em.scaleCurve", ",", "em.scaleLin", ",", "em.smooth", ",", "em.threshold", ",", "-OUTPUT-", ",", "em.neopixel", ",", "em.relay", ",", "em.servo", ",", "em.stepper_motor", ",", "em.stepper_motor_extension", ",", "-", "-", "LEGACY", "-", "-", ",", "-INPUT-", ",", "em.emote", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rotaryDial", ",", "em.scaleDegree", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.spring", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.switchblade" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
