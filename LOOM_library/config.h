@@ -169,9 +169,7 @@
 // --- WiFi Settings ---
 // Requires is_wifi to be set to 1 to take effect
 #if is_wifi == 1
-	// #define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
-	#define DEFAULT_MODE      AP_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
-
+	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
 	#define DEFAULT_PASSWORD  "arduino101"		// Network password
 #endif

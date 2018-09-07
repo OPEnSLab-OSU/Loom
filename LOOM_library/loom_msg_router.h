@@ -75,7 +75,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	
 	#if is_wifi == 1
 		// Credentials to connect to a WiFi network
-		if (msg.dispatch("/wifiSetup/client", set_new_wifi_network,		addrOffset) ) return;
+		if (msg.dispatch("/wifiSetup/client", 	connect_to_new_wifi_network,	addrOffset) ) return;
 		// Switch device to become WiFi access point
 		if (msg.dispatch("/wifiSetup/AP",     	switch_to_AP, 			addrOffset) ) return;
 		// If Max has requested the IP address of this device, response with IP

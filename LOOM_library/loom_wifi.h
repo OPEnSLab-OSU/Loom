@@ -329,6 +329,7 @@ void start_AP()
 	// If you get a connection, report back via serial:
 	UdpDevice.begin(config_wifi->devicePort);
 
+	LOOM_DEBUG_Println("Done");
 	flash_led(6, 50, 50);
 }
 
