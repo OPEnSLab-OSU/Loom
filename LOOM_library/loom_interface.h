@@ -344,6 +344,7 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port)
 	switch(platform) {
 		#if is_wifi == 1
 		case WIFI : wifi_send_bundle(send_bndl); break;
+		// case WIFI : wifi_send_bundle(send_bndl, port); break;
 		#endif
 
 		#if is_lora == 1
@@ -444,16 +445,10 @@ void additional_loop_checks()
 	// #endif
 
 	#if is_wifi == 1
-		// If new ssid and password have been received, try to connect to that network
-		// check_connect_to_new_network();
-
 		// Compare the previous status to the current status
 		if (config_wifi->wifi_mode == AP_MODE) {
 			wifi_check_status();
 		}
-
-		//Clear the new_ssid and new_pass buffers in case new wifi settings were received
-		// clear_new_wifi_setting_buffers();
 	#endif
 
 	// Delay between loop iterations
