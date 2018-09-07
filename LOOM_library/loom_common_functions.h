@@ -196,7 +196,8 @@ void ping_reply(OSCMessage &msg)
 
 
 	#if is_wifi == 1
-		wifi_send_bundle_subnet(&bndl);
+		// wifi_send_bundle_subnet(&bndl); config_wifi->subnetPort
+		wifi_send_bundle(&bndl, configuration.config_wifi.subnetPort); 
 	#endif
 
 // Lora should have broadcast function in the future

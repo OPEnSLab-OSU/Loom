@@ -4,6 +4,7 @@
 #include <WiFi101.h>
 #include <WiFiUdp.h>
 
+
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================ 
@@ -15,6 +16,7 @@ enum WiFiMode {
 
 #define AP_NAME   FAMILY STR(FAMILY_NUM) STR(_) DEVICE STR(INIT_INST)
 
+
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================
@@ -25,11 +27,11 @@ struct config_wifi_t{
 	char        pass[32];               // Host network password
 	int         keyIndex;               // Key Index Number (needed only for WEP)
 	char*       ip_broadcast;           // IP to Broadcast data
-	unsigned int devicePort;             // Local port to listen on
-	unsigned int subnetPort; 
+	unsigned int devicePort;            // Local port to listen device specific messages on
+	unsigned int subnetPort; 			// Local port to listen for family subnet messages on	
 	byte        mac[6];                 // Device's MAC Address
 	WiFiMode    wifi_mode;              // Devices current wifi mode
-	bool        request_settings;        // True if device should request new channel settings on startup
+	bool        request_settings;       // True if device should request new channel settings on startup
 };
 
 struct state_wifi_t {
@@ -37,6 +39,7 @@ struct state_wifi_t {
 	char new_ssid[32];
 	char new_pass[32];
 };
+
 
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
@@ -62,6 +65,7 @@ int status = WL_IDLE_STATUS;
 	WiFiClient wifi_client;
 #endif
 
+
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
@@ -70,22 +74,18 @@ void printWiFiStatus();
 void start_AP();
 bool connect_to_WPA(char ssid[], char pass[]);
 void connect_to_new_wifi_network(OSCMessage &msg);
-void switch_to_AP(OSCMessage &msg);
 void print_remote_mac_addr();
 void replace_char(char *str, char orig, char rep);
-void broadcastIP(OSCMessage &msg);
 void wifi_check_status();
-void set_request_settings(OSCMessage &msg);
-void get_new_channel(OSCMessage &msg);
 void wifi_send_bundle(OSCBundle *bndl);
 void wifi_send_bundle(OSCBundle *bndl, int port);
-void wifi_send_bundle_subnet(OSCBundle *bndl);
-
 void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port);
-void clear_new_wifi_setting_buffers();
-bool check_channel_poll(char * address_string, char * packet_header_string);
 
-
+// Routed from msg_router
+void switch_to_AP(OSCMessage &msg);
+void broadcastIP(OSCMessage &msg);
+void get_new_channel(OSCMessage &msg);
+void set_request_settings(OSCMessage &msg);
 void respond_to_poll_request(OSCMessage &msg);
 
 
@@ -127,7 +127,6 @@ void setup_wifi(char packet_header_string[])
 
 				// If set to request channel settings
 				if (config_wifi->request_settings == 1) {
-					// request_settings_from_Max();
 					OSCMessage tmp = new OSCMessage("tmp");
 					get_new_channel(tmp);
 				} else {
@@ -178,32 +177,16 @@ void setup_wifi(char packet_header_string[])
 void wifi_send_bundle(OSCBundle *bndl)
 {
 	UdpDevice.beginPacket(config_wifi->ip_broadcast, config_wifi->devicePort);
-	bndl->send(UdpDevice);    // Send the bytes to the SLIP stream
-	UdpDevice.endPacket();        // Mark the end of the OSC Packet
+	bndl->send(UdpDevice);    	// Send the bytes to the SLIP stream
+	UdpDevice.endPacket();		// Mark the end of the OSC Packet
 }
 
-// Version of wifi_send_bundle that will send on an arbitrary port
+// Version of wifi_send_bundle that will send on a specified port
 void wifi_send_bundle(OSCBundle *bndl, int port)
 {
 	UdpDevice.beginPacket(config_wifi->ip_broadcast, port);
-	bndl->send(UdpDevice);    // Send the bytes to the SLIP stream
-	UdpDevice.endPacket();        // Mark the end of the OSC Packet
-}
-
-// THE FOLLOWING TWO FUNCTIONS WILL  'HOPEFULLY' BECOME OBSOLETE 
-
-void wifi_send_bundle_subnet(OSCBundle *bndl)
-{
-	UdpSubnet.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
-	bndl->send(UdpSubnet);    // Send the bytes to the SLIP stream
-	UdpSubnet.endPacket();        // Mark the end of the OSC Packet
-}
-
-void wifi_send_bundle_global(OSCBundle *bndl)
-{
-	UdpGlobal.beginPacket(config_wifi->ip_broadcast, GLOBAL_PORT);				// Maybe this is called with new UDP object
-	bndl->send(UdpGlobal);    // Send the bytes to the SLIP stream
-	UdpGlobal.endPacket();        // Mark the end of the OSC Packet
+	bndl->send(UdpDevice);    	// Send the bytes to the SLIP stream
+	UdpDevice.endPacket();		// Mark the end of the OSC Packet
 }
 
 
@@ -220,25 +203,15 @@ void wifi_send_bundle_global(OSCBundle *bndl)
 void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port, char * type)
 {  
 	int packetSize; 
-	// state_wifi.pass_set = false;
-	// state_wifi.ssid_set = false;
 	
 	// If there's data available, read a packet
 	packetSize = Udp->parsePacket();
 
 	if (packetSize > 0) {
-		#if LOOM_DEBUG == 1
-			if (packetSize > 0) {
-				Serial.println("=========================================");
-				Serial.print("Received packet of size: ");
-				Serial.print(packetSize);
-				Serial.print(" on port " );
-				Serial.print(port);
-				Serial.print(" (");
-				Serial.print(type);
-				Serial.println(")");
-			}
-		#endif
+		LOOM_DEBUG_Println("=========================================");
+		LOOM_DEBUG_Println2("Received packet of size: ", packetSize);
+		LOOM_DEBUG_Println2(" on port ", port);
+		LOOM_DEBUG_Println3(" (", type, ")");
 		
 		bndl->empty();             // Empty previous bundle
 		while (packetSize--){      // Read in new bundle
@@ -276,16 +249,11 @@ void printWiFiStatus()
 		// Print your MAC address:
 		WiFi.macAddress(config_wifi->mac);
 		Serial.print("MAC address: ");
-		Serial.print(config_wifi->mac[5], HEX);
-		Serial.print(":");
-		Serial.print(config_wifi->mac[4], HEX);
-		Serial.print(":");
-		Serial.print(config_wifi->mac[3], HEX);
-		Serial.print(":");
-		Serial.print(config_wifi->mac[2], HEX);
-		Serial.print(":");
-		Serial.print(config_wifi->mac[1], HEX);
-		Serial.print(":");
+		Serial.print(config_wifi->mac[5], HEX); Serial.print(":");
+		Serial.print(config_wifi->mac[4], HEX); Serial.print(":");
+		Serial.print(config_wifi->mac[3], HEX); Serial.print(":");
+		Serial.print(config_wifi->mac[2], HEX); Serial.print(":");
+		Serial.print(config_wifi->mac[1], HEX); Serial.print(":");
 		Serial.println(config_wifi->mac[0], HEX);
 	
 		// Print the received signal strength:
@@ -366,7 +334,6 @@ bool connect_to_WPA(char ssid[], char pass[])
 		UdpDevice.stop();
 		UdpSubnet.stop();
 		UdpGlobal.stop();
-
 		WiFi.disconnect();
 		WiFi.end();
 
@@ -396,7 +363,6 @@ bool connect_to_WPA(char ssid[], char pass[])
 
 	// If you get a connection, report back via serial:
 	server.begin();
-
 
 	UdpDevice.begin(config_wifi->devicePort);
 	UdpSubnet.begin(config_wifi->subnetPort);
@@ -433,11 +399,10 @@ void connect_to_new_wifi_network(OSCMessage &msg)
 	LOOM_DEBUG_Println3("' with password '", state_wifi.new_pass, "'");
 
 	// Disconnect from current WiFi network
-	WiFi.disconnect();
 	UdpDevice.stop();
 	UdpSubnet.stop();
 	UdpGlobal.stop();
-
+	WiFi.disconnect();
 	WiFi.end();
 	
 	// Try connecting on newly specified one
@@ -461,7 +426,7 @@ void connect_to_new_wifi_network(OSCMessage &msg)
 // Saves AP_MODE as wifi_mode 
 //
 // @param msg  Not used, only there for msg_router to work properly
-// Return:    none
+//
 void switch_to_AP(OSCMessage &msg) 
 {
 	if (config_wifi->wifi_mode != AP_MODE) {
@@ -470,10 +435,11 @@ void switch_to_AP(OSCMessage &msg)
 		UdpDevice.stop();
 		UdpSubnet.stop();
 		UdpGlobal.stop();
-
 		WiFi.disconnect();
 		WiFi.end();
+
 		start_AP();
+
 		config_wifi->wifi_mode = AP_MODE;
 		write_non_volatile();
 	}
@@ -549,12 +515,8 @@ void broadcastIP(OSCMessage &msg)
 						    .add( (int32_t)config_wifi->ip[2] )
 						    .add( (int32_t)config_wifi->ip[3] ) ;
 
-	// UdpSubnet.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
-	// bndl.send(UdpSubnet);     // Send the bytes to the SLIP stream
-	// UdpSubnet.endPacket();    // Mark the end of the OSC Packet
-	
-	wifi_send_bundle_subnet(&bndl);
-	bndl.empty();             // Empty the bundle to free room for a new one
+	wifi_send_bundle(&bndl, config_wifi->subnetPort);
+	bndl.empty();		// Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println2("Broadcasted IP: ", config_wifi->ip);
 }
@@ -576,7 +538,7 @@ void wifi_check_status()
 			if (status == WL_AP_CONNECTED) { 	// A device has connected to the AP
 				print_remote_mac_addr();                            
 			} else {							// A device has disconnected from the AP, and we are back in listening mode 
-				Serial.println("Device disconnected from AP");
+				LOOM_DEBUG_Println("Device disconnected from AP");
 			}
 		#endif
 	} // of if ( status != WiFi.status() )
@@ -596,7 +558,6 @@ void set_request_settings(OSCMessage &msg)
 {
 	config_wifi->request_settings = 1; // Setting to 1 means that device will request new port settings on restart. 
 	write_non_volatile();
-
 	LOOM_DEBUG_Println("Setting Request Settings True");
 }
 
@@ -614,16 +575,14 @@ void set_request_settings(OSCMessage &msg)
 void get_new_channel(OSCMessage &msg)
 {
 	LOOM_DEBUG_Println("Received Command to get new channel settings");
-	// request_settings_from_Max();
 
 	OSCBundle bndl;
 	char address_string[80];
 	sprintf(address_string, "%s%s", packet_header_string, "/RequestSettings");
-
 	bndl.add(address_string);
 
-	wifi_send_bundle_subnet(&bndl);
-	bndl.empty();             // Empty the bundle to free room for a new one
+	wifi_send_bundle(&bndl, config_wifi->subnetPort);
+	bndl.empty();		// Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println("Requested New Channel Settings");
 }
@@ -639,20 +598,16 @@ void get_new_channel(OSCMessage &msg)
 // 
 // @param packet_header_string  The device-identifying string to prepend to OSC messages
 // 
-// void respond_to_poll_request(char packet_header_string[])
 void respond_to_poll_request(OSCMessage &msg)
 {
 	OSCBundle bndl;
 	bndl.empty();
 	char address_string[80];
 	sprintf(address_string, "%s%s", packet_header_string, "/PollResponse");
-
 	bndl.add(address_string);
 
-	UdpSubnet.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
-	bndl.send(UdpSubnet);     // Send the bytes to the SLIP stream
-	UdpSubnet.endPacket();    // Mark the end of the OSC Packet
-	bndl.empty();             // Empty the bundle to free room for a new one
+	wifi_send_bundle(&bndl, config_wifi->subnetPort);
+	bndl.empty();		// Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println("Responded to poll request");
 }
