@@ -13,7 +13,7 @@ enum WiFiMode {
 	WEP_CLIENT_MODE
 };
 
-#define AP_NAME   FAMILY DEVICE STR(INIT_INST)
+#define AP_NAME   FAMILY STR(FAMILY_NUM) STR(_) DEVICE STR(INIT_INST)
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -36,8 +36,6 @@ struct state_wifi_t {
 	// Global variables to handle changes to WiFi ssid and password 
 	char new_ssid[32];
 	char new_pass[32];
-	bool ssid_set;
-	bool pass_set;
 };
 
 // ================================================================ 
@@ -71,28 +69,21 @@ void setup_wifi(char packet_header_string[]);
 void printWiFiStatus();
 void start_AP();
 bool connect_to_WPA(char ssid[], char pass[]);
+void connect_to_new_wifi_network(OSCMessage &msg);
 void switch_to_AP(OSCMessage &msg);
 void print_remote_mac_addr();
 void replace_char(char *str, char orig, char rep);
-void connect_to_new_network();
-void set_ssid(OSCMessage &msg);
-void set_pass(OSCMessage &msg);
 void broadcastIP(OSCMessage &msg);
-void set_port(OSCMessage &msg);
 void wifi_check_status();
-void request_settings_from_Max();
 void set_request_settings(OSCMessage &msg);
-void new_channel(OSCMessage &msg);
-// void respond_to_poll_request(char packet_header_string[]);
+void get_new_channel(OSCMessage &msg);
 void wifi_send_bundle(OSCBundle *bndl);
 void wifi_send_bundle(OSCBundle *bndl, int port);
 void wifi_send_bundle_subnet(OSCBundle *bndl);
 
-
 void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port);
 void clear_new_wifi_setting_buffers();
 bool check_channel_poll(char * address_string, char * packet_header_string);
-void check_connect_to_new_network();
 
 
 void respond_to_poll_request(OSCMessage &msg);
@@ -136,7 +127,9 @@ void setup_wifi(char packet_header_string[])
 
 				// If set to request channel settings
 				if (config_wifi->request_settings == 1) {
-					request_settings_from_Max();
+					// request_settings_from_Max();
+					OSCMessage tmp = new OSCMessage("tmp");
+					get_new_channel(tmp);
 				} else {
 					OSCMessage tmp = new OSCMessage("tmp");
 					respond_to_poll_request(tmp);
@@ -227,8 +220,8 @@ void wifi_send_bundle_global(OSCBundle *bndl)
 void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port, char * type)
 {  
 	int packetSize; 
-	state_wifi.pass_set = false;
-	state_wifi.ssid_set = false;
+	// state_wifi.pass_set = false;
+	// state_wifi.ssid_set = false;
 	
 	// If there's data available, read a packet
 	packetSize = Udp->parsePacket();
@@ -251,6 +244,10 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port, char 
 		while (packetSize--){      // Read in new bundle
 			bndl->fill(Udp->read());
 		}
+
+		LOOM_DEBUG_Println("Bundle contents:");
+		print_bundle(bndl);
+
 	} // of (packetSize > 0)
 }
 
@@ -319,25 +316,20 @@ void start_AP()
 	status = WiFi.beginAP(config_wifi->my_ssid);
 	if (status != WL_AP_LISTENING) {
 		LOOM_DEBUG_Println("Creating access point failed");
-		while (true);   // Don't continue
+		while (true);   	// Don't continue
 	}
 
-	delay(10000);     // Wait 10 seconds for connection:
+	delay(10000);     		// Wait 10 seconds for connection:
 	
-	server.begin();   // Start the web server on port 80
+	server.begin();   		// Start the web server on port 80
 
-	#if LOOM_DEBUG == 1
-		printWiFiStatus();   // You're connected now, so print out the status
-		Serial.println("\nStarting UDP connection over server...");
-	#endif
+	printWiFiStatus();   	// You're connected now, so print out the status
+	LOOM_DEBUG_Println("\nStarting UDP connection over server...");
 		
-	LOOM_DEBUG_Println2("devicePort: ", config_wifi->devicePort);
-	LOOM_DEBUG_Println2("subnetPort: ", config_wifi->subnetPort);
-
 	// If you get a connection, report back via serial:
 	UdpDevice.begin(config_wifi->devicePort);
-	UdpSubnet.begin(config_wifi->subnetPort);
-	UdpGlobal.begin(GLOBAL_PORT);
+
+	flash_led(6, 50, 50);
 }
 
 
@@ -367,7 +359,7 @@ bool connect_to_WPA(char ssid[], char pass[])
 	// If not successfully connected
 	if (status != WL_CONNECTED) {
 		LOOM_DEBUG_Println("Connecting to WPA host failed completely");
-		LOOM_DEBUG_Println("Reverting to AP mode");
+		LOOM_DEBUG_Println("Reverting to previous wifi network, else AP mode");
 
 		// Start AP up again instead
 		UdpDevice.stop();
@@ -376,31 +368,87 @@ bool connect_to_WPA(char ssid[], char pass[])
 
 		WiFi.disconnect();
 		WiFi.end();
-		start_AP();
-		config_wifi->wifi_mode = AP_MODE;
-		return false;
+
+		// Restart in previous configuration
+		if (config_wifi->wifi_mode == AP_MODE) {
+			LOOM_DEBUG_Println("Try to revert to AP");
+			start_AP();
+			return false;
+
+		} else {
+			LOOM_DEBUG_Println("Try to revert to WPA");
+			status = WiFi.begin(config_wifi->ssid, config_wifi->pass);
+			if (status != WL_CONNECTED) {
+				LOOM_DEBUG_Println("Revert to previous WPA network failed");
+				start_AP();
+				return false;
+			}
+		}
+
 	}
 	
 	delay(8000); 
-	
 
-
-	#if LOOM_DEBUG == 1
-		// You're connected now, so print out the status
-		printWiFiStatus();
-		Serial.println("Starting UDP connection over server...");
-	#endif
-	
-
+	// You're connected now, so print out the status
+	printWiFiStatus();
+	LOOM_DEBUG_Println("Starting UDP connection over server...");
 
 	// If you get a connection, report back via serial:
 	server.begin();
+
 
 	UdpDevice.begin(config_wifi->devicePort);
 	UdpSubnet.begin(config_wifi->subnetPort);
 	UdpGlobal.begin(GLOBAL_PORT);
 
+	LOOM_DEBUG_Println("Done");
+	flash_led(6, 50, 50);
+
 	return true;
+}
+
+
+
+// --- CONNECT TO NEW WIFI NETWORK ---
+//
+// Updates WiFi password global var with new password 
+// Sets global bool to indicate this 
+//
+// @param msg  OSC message with network password)
+//
+void connect_to_new_wifi_network(OSCMessage &msg) 
+{
+	memset(state_wifi.new_ssid, '\0', sizeof(state_wifi.new_ssid));
+	memset(state_wifi.new_pass, '\0', sizeof(state_wifi.new_pass));
+
+	msg.getString(0, state_wifi.new_ssid, sizeof(state_wifi.new_ssid));
+	msg.getString(1, state_wifi.new_pass, sizeof(state_wifi.new_ssid));
+
+	// Replace '~'s with spaces - as spaces cannot be sent via Max and are replaced with '~'
+	replace_char(state_wifi.new_ssid, '~', ' ');
+	replace_char(state_wifi.new_pass, '~', ' ');
+
+	LOOM_DEBUG_Print2("Received command to connect to '", state_wifi.new_ssid);
+	LOOM_DEBUG_Println3("' with password '", state_wifi.new_pass, "'");
+
+	// Disconnect from current WiFi network
+	WiFi.disconnect();
+	UdpDevice.stop();
+	UdpSubnet.stop();
+	UdpGlobal.stop();
+
+	WiFi.end();
+	
+	// Try connecting on newly specified one
+	// Will revert to AP Mode if this fails
+	// Only save the new settings if they worked
+	if (connect_to_WPA(state_wifi.new_ssid,state_wifi.new_pass)) {
+		config_wifi->wifi_mode = WPA_CLIENT_MODE;
+		config_wifi->ip = WiFi.localIP();
+		strcpy(config_wifi->ssid, state_wifi.new_ssid);
+		strcpy(config_wifi->pass, state_wifi.new_pass);
+		write_non_volatile();
+	} 
 }
 
 
@@ -444,16 +492,18 @@ void switch_to_AP(OSCMessage &msg)
 // 
 void print_remote_mac_addr()
 {
-	byte remoteMac[6];
-	WiFi.APClientMacAddress(remoteMac);
-			
-	Serial.print("Device connected to AP, MAC address: ");
-	Serial.print(  remoteMac[5], HEX); Serial.print(":");
-	Serial.print(  remoteMac[4], HEX); Serial.print(":");
-	Serial.print(  remoteMac[3], HEX); Serial.print(":");
-	Serial.print(  remoteMac[2], HEX); Serial.print(":");
-	Serial.print(  remoteMac[1], HEX); Serial.print(":");
-	Serial.println(remoteMac[0], HEX); 
+	#if LOOM_DEBUG == 1
+		byte remoteMac[6];
+		WiFi.APClientMacAddress(remoteMac);
+				
+		Serial.print("Device connected to AP, MAC address: ");
+		Serial.print(  remoteMac[5], HEX); Serial.print(":");
+		Serial.print(  remoteMac[4], HEX); Serial.print(":");
+		Serial.print(  remoteMac[3], HEX); Serial.print(":");
+		Serial.print(  remoteMac[2], HEX); Serial.print(":");
+		Serial.print(  remoteMac[1], HEX); Serial.print(":");
+		Serial.println(remoteMac[0], HEX); 
+	#endif
 }
 
 
@@ -478,78 +528,6 @@ void replace_char(char *str, char orig, char rep)
 
 
 
-// --- CONNECT TO NEW NETWORK ---
-//
-// Attempt to connect WiFi network in client mode upon command to do so
-// and both ssid and password provided
-// Credentials stored in global wifi variable
-// and copied into configuration struct and saved to non-volatile memory
-// Reverts to AP mode upon failure
-// 
-void connect_to_new_network()
-{
-	// Replace '~'s with spaces - as spaces cannot be sent via Max and are replaced with '~'
-	replace_char(state_wifi.new_ssid, '~', ' ');
-	replace_char(state_wifi.new_pass, '~', ' ');
-
-	LOOM_DEBUG_Print4("Received command to connect to ", state_wifi.new_ssid, " with password ", state_wifi.new_pass);
-
-	// Disconnect from current WiFi network
-	WiFi.disconnect();
-	UdpDevice.stop();
-	UdpSubnet.stop();
-	UdpGlobal.stop();
-
-	WiFi.end();
-	
-	// Try connecting on newly specified one
-	// Will revert to AP Mode if this fails
-	if(connect_to_WPA(state_wifi.new_ssid,state_wifi.new_pass)) {
-		config_wifi->wifi_mode = WPA_CLIENT_MODE;
-		config_wifi->ip = WiFi.localIP();
-		strcpy(config_wifi->ssid, state_wifi.new_ssid);
-		strcpy(config_wifi->pass, state_wifi.new_pass);
-		write_non_volatile();
-	} 
-}
-
-
-//////////////////////////////////////////////////////
-
-// CAN (SHOULD) PROBABLY NOW JOIN THESE FUNCTIONS
-
-// --- SET SSID ---
-//
-// Updates WiFi ssid global var with new ssid
-// Sets global bool to indicate this 
-//
-// @param msg  OSC message with network ssid
-//
-void set_ssid(OSCMessage &msg) 
-{
-	msg.getString(0, state_wifi.new_ssid, 50);
-	state_wifi.ssid_set = true;
-}
-
-// --- SET PASSWORD ---
-//
-// Updates WiFi password global var with new password 
-// Sets global bool to indicate this 
-//
-// @param msg  OSC message with network password)
-//
-void set_pass(OSCMessage &msg) 
-{
-	msg.getString(0, state_wifi.new_pass, 50);
-	state_wifi.pass_set = true;
-}
-
-//////////////////////////////////////////////////////
-
-
-
-
-
 // --- BROADCAST IP ---
 //
 // Broadcasts IP address so that requesting computer can update IP
@@ -565,10 +543,10 @@ void broadcastIP(OSCMessage &msg)
 	sprintf(address_string, "/%s%d%s", FAMILY, FAMILY_NUM, "/NewIP");
 
 	bndl.add(address_string).add( packet_header_string )
-						   .add( (int32_t)config_wifi->ip[0] )
-						   .add( (int32_t)config_wifi->ip[1] )
-						   .add( (int32_t)config_wifi->ip[2] )
-						   .add( (int32_t)config_wifi->ip[3] ) ;
+						    .add( (int32_t)config_wifi->ip[0] )
+						    .add( (int32_t)config_wifi->ip[1] )
+						    .add( (int32_t)config_wifi->ip[2] )
+						    .add( (int32_t)config_wifi->ip[3] ) ;
 
 	// UdpSubnet.beginPacket(config_wifi->ip_broadcast, config_wifi->subnetPort);
 	// bndl.send(UdpSubnet);     // Send the bytes to the SLIP stream
@@ -578,32 +556,6 @@ void broadcastIP(OSCMessage &msg)
 	bndl.empty();             // Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println2("Broadcasted IP: ", config_wifi->ip);
-}
-
-
-
-// --- SET PORT ---
-//
-// Update device's UDP communication port
-// Port in configuration struct is update but not saved
-//
-// @param msg  OSC message of new port for device to communicate on
-// 
-void set_port(OSCMessage &msg) 
-{
-	LOOM_DEBUG_Print("Port changed from ");
-	LOOM_DEBUG_Print(config_wifi->devicePort);
-
-	// Get new port, stop listening on old port, start on new port
-	config_wifi->devicePort = msg.getInt(0);
-	UdpDevice.stop();
-	UdpDevice.begin(config_wifi->devicePort);
-
-	LOOM_DEBUG_Println2(" to ", config_wifi->devicePort);
-
-	config_wifi->request_settings = 0;  // Setting to 0 means that device will not request new port settings on restart. 
-										// Note that configuration needs to be saved for this to take effect
-
 }
 
 
@@ -627,27 +579,6 @@ void wifi_check_status()
 			}
 		#endif
 	} // of if ( status != WiFi.status() )
-}
-
-
-
-// --- REQUEST SETTINGS FROM MAX ---
-//
-// Used to request channel settings from Max Channel Manager
-// Setting response will entail a SetChannel command 
-//
-void request_settings_from_Max()
-{
-	OSCBundle bndl;
-	char address_string[80];
-	sprintf(address_string, "%s%s", packet_header_string, "/RequestSettings");
-
-	bndl.add(address_string);
-
-	wifi_send_bundle_subnet(&bndl);
-	bndl.empty();             // Empty the bundle to free room for a new one
-
-	LOOM_DEBUG_Println("Requested New Channel Settings");
 }
 
 
@@ -679,10 +610,21 @@ void set_request_settings(OSCMessage &msg)
 // @param msg  OSC messages that had header ending in '/getNewChannel'
 //				only used by msg_router(), not used here
 //
-void new_channel(OSCMessage &msg)
+void get_new_channel(OSCMessage &msg)
 {
 	LOOM_DEBUG_Println("Received Command to get new channel settings");
-	request_settings_from_Max();
+	// request_settings_from_Max();
+
+	OSCBundle bndl;
+	char address_string[80];
+	sprintf(address_string, "%s%s", packet_header_string, "/RequestSettings");
+
+	bndl.add(address_string);
+
+	wifi_send_bundle_subnet(&bndl);
+	bndl.empty();             // Empty the bundle to free room for a new one
+
+	LOOM_DEBUG_Println("Requested New Channel Settings");
 }
 
 
@@ -713,23 +655,3 @@ void respond_to_poll_request(OSCMessage &msg)
 
 	LOOM_DEBUG_Println("Responded to poll request");
 }
-
-
-
-void clear_new_wifi_setting_buffers() 
-{
-	for (int i = 0; i < 32; i++) {  
-		state_wifi.new_ssid[i] = '\0';
-		state_wifi.new_pass[i] = '\0';
-	}
-}
-
-
-void check_connect_to_new_network()
-{
-	if (state_wifi.ssid_set == true && state_wifi.pass_set == true) {
-		connect_to_new_network();   
-	}
-}
-	
-

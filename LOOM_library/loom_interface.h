@@ -40,8 +40,12 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 			// Handle wifi bundle if it exists
 			// Checks device unique UDP port and common UDP port
 			wifi_receive_bundle(bndl, &UdpDevice, configuration.config_wifi.devicePort, "Device"); 
-			wifi_receive_bundle(bndl, &UdpSubnet, configuration.config_wifi.subnetPort, "Subnet"); 
-			wifi_receive_bundle(bndl, &UdpGlobal, GLOBAL_PORT, "Global");
+
+			// AP mode only uses the device port
+			if (configuration.config_wifi.wifi_mode != AP_MODE)	{
+				wifi_receive_bundle(bndl, &UdpSubnet, configuration.config_wifi.subnetPort, "Subnet"); 
+				wifi_receive_bundle(bndl, &UdpGlobal, GLOBAL_PORT, "Global");
+			}
 
 		// Add if to not check global if it is same as subnet
 
@@ -101,20 +105,14 @@ void process_bundle(OSCBundle *bndl)
 			routing_match = false;
 			
 			// Device Specific Message
-			// LOOM_DEBUG_Println3("##Device Routing (", configuration.packet_header_string, ")");
 			bndl->route(configuration.packet_header_string, msg_router);
 
 			// Family Subnet Message
-			if (!routing_match) {
-				// LOOM_DEBUG_Println3("##Subnet Routing (", STR(/) FAMILY STR(FAMILY_NUM), ")");
-				bndl->route(STR(/) FAMILY STR(FAMILY_NUM), msg_router);
-			}
+			if (!routing_match) { bndl->route(STR(/) FAMILY STR(FAMILY_NUM), msg_router); }
 
 			// Family Global Message
-			if (!routing_match) {
-				// LOOM_DEBUG_Println3("##Global Routing (", STR(/) FAMILY, ")");
-				bndl->route(STR(/) FAMILY , msg_router);
-			}
+			if (!routing_match) { bndl->route(STR(/) FAMILY , msg_router); }
+
 
 		} else { // of !bndl.hasError()
 			error = bndl->getError();
@@ -447,7 +445,7 @@ void additional_loop_checks()
 
 	#if is_wifi == 1
 		// If new ssid and password have been received, try to connect to that network
-		check_connect_to_new_network();
+		// check_connect_to_new_network();
 
 		// Compare the previous status to the current status
 		if (config_wifi->wifi_mode == AP_MODE) {
@@ -455,7 +453,7 @@ void additional_loop_checks()
 		}
 
 		//Clear the new_ssid and new_pass buffers in case new wifi settings were received
-		clear_new_wifi_setting_buffers();
+		// clear_new_wifi_setting_buffers();
 	#endif
 
 	// Delay between loop iterations

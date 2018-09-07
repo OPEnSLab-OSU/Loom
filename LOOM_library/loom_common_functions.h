@@ -3,7 +3,7 @@
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-void set_instance_num(OSCMessage &msg);
+// void set_instance_num(OSCMessage &msg);
 #if (is_wifi == 1) && (is_button)    // look into other behaviors if other platforms are enabled instead
 	void check_button_held();
 #endif
@@ -20,6 +20,9 @@ int milli_duration(int amount, TimeUnits units);
 
 
 #if advanced_interdev_comm == 1
+
+// This is probably made obsolete by set channel
+
 // --- SET INSTANCE NUMBER ---
 //
 // Updates device's identifying instance number.
@@ -28,22 +31,22 @@ int milli_duration(int amount, TimeUnits units);
 //
 // @param msg  Received OSC message with new instance number
 //
-void set_instance_num(OSCMessage &msg) 
-{
-	configuration.instance_number = msg.getInt(0);
-	sprintf(configuration.packet_header_string, "%s%d\0", PacketHeaderString, configuration.instance_number);
-	sprintf(global_packet_header_string,"%s",configuration.packet_header_string);
+// void set_instance_num(OSCMessage &msg) 
+// {
+// 	configuration.instance_number = msg.getInt(0);
+// 	sprintf(configuration.packet_header_string, "%s%d\0", PacketHeaderString, configuration.instance_number);
+// 	sprintf(global_packet_header_string,"%s",configuration.packet_header_string);
 	
-	LOOM_DEBUG_Println2("New address header: ", configuration.packet_header_string);
+// 	LOOM_DEBUG_Println2("New address header: ", configuration.packet_header_string);
 
-	#if is_wifi == 1
-		configuration.config_wifi.request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
-														// Note that configuration needs to be saved for this to take effect
-		// respond_to_poll_request(configuration.packet_header_string);
-		OSCMessage tmp = new OSCMessage("tmp");
-		respond_to_poll_request(tmp);
-	#endif
-}
+// 	#if is_wifi == 1
+// 		configuration.config_wifi.request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
+// 														// Note that configuration needs to be saved for this to take effect
+// 		// respond_to_poll_request(configuration.packet_header_string);
+// 		OSCMessage tmp = new OSCMessage("tmp");
+// 		respond_to_poll_request(tmp);
+// 	#endif
+// }
 
 
 // --- SET CHANNEL NUMBER ---

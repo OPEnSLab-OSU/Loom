@@ -106,19 +106,8 @@ uint32_t read_analog(uint8_t chnl)
 //
 void measure_analog() 
 {
-	// #if (num_analog > 0) 
-	// 	state_analog.a0 = read_analog(0);
-	// #endif
-	// #if (num_analog > 1)
-	// 	state_analog.a1 = read_analog(1);
-	// #endif
-	// #if (num_analog > 2)
-	// 	state_analog.a2 = read_analog(2);
-	// #endif
-
 	#if (is_analog_a0 == 1) 
 		state_analog.a0 = read_analog(0);
-		LOOM_DEBUG_Println2("UV Index: ", (3.3/409.6)*state_analog.a0);
 	#endif
 	#if (is_analog_a1 == 1)
 		state_analog.a1 = read_analog(1);
@@ -135,8 +124,6 @@ void measure_analog()
 	#if (is_analog_a5 == 1)
 		state_analog.a5 = read_analog(5);
 	#endif
-
-
 }
 
 
@@ -154,20 +141,6 @@ void package_analog(OSCBundle *bndl, char packet_header_string[])
 	char address_string[80];
 
 	// Get readings from enabled ports           
-	// #if (num_analog > 0) 
-	// 	sprintf(address_string, "%s%s", packet_header_string, "/port0");
-	// 	bndl->add(address_string).add((int32_t)state_analog.a0);
-	// #endif
-	// #if (num_analog > 1)
-	// 	sprintf(address_string, "%s%s", packet_header_string, "/port1");
-	// 	bndl->add(address_string).add((int32_t)state_analog.a1);
-	// #endif
-	// #if (num_analog > 2)
-	// 	sprintf(address_string, "%s%s", packet_header_string, "/port2");
-	// 	bndl->add(address_string).add((int32_t)state_analog.a2);
-	// #endif
-
-
 	#if (is_analog_a0 == 1) 
 		sprintf(address_string, "%s%s", packet_header_string, "/pin_A0");
 		bndl->add(address_string).add((int32_t)state_analog.a0);

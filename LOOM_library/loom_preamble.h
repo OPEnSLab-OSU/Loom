@@ -195,7 +195,8 @@ String get_data_value(OSCMessage* msg, int pos);
 void   print_bundle(OSCBundle *bndl);
 int    get_bundle_bytes(OSCBundle *bndl); 			
 
-
+void flash_led(int num, int time_high, int time_low);
+void flash_led();
 
 
 // ================================================================ 
