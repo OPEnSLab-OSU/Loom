@@ -75,16 +75,13 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	
 	#if is_wifi == 1
 		// Credentials to connect to a WiFi network
-		if (msg.dispatch("/Connect/SSID",     	set_ssid,     			addrOffset) ) return;
-		if (msg.dispatch("/Connect/Password", 	set_pass,				addrOffset) ) return;
+		if (msg.dispatch("/wifiSetup/client", set_new_wifi_network,		addrOffset) ) return;
 		// Switch device to become WiFi access point
 		if (msg.dispatch("/wifiSetup/AP",     	switch_to_AP, 			addrOffset) ) return;
-		// Sets the unique port for device to look for WiFi packets on
-		if (msg.dispatch("/SetPort",          	set_port,     			addrOffset) ) return;
 		// If Max has requested the IP address of this device, response with IP
 		if (msg.dispatch("/requestIP",        	broadcastIP,  			addrOffset) ) return;
 		// Command instructing device to request settings from Max (requires Channel Manager)
-		if (msg.dispatch("/getNewChannel",		new_channel,  			addrOffset) ) return;
+		if (msg.dispatch("/getNewChannel",		get_new_channel,  		addrOffset) ) return;
 		// Set whether or not to request settings from Max Channel Manager on startup
 		if (msg.dispatch("/SetRequestSettings",	set_request_settings, 	addrOffset) ) return;
 	#endif
@@ -128,7 +125,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	#if advanced_interdev_comm == 1
 		if (msg.dispatch("/DeviceChannelPoll", 	respond_to_device_poll, 	addrOffset) ) return;	// node receiving from hub 
 		// Set the instance number of this device
-		if (msg.dispatch("/SetID", 					set_instance_num, 		addrOffset) ) return;
+		// if (msg.dispatch("/SetID", 					set_instance_num, 		addrOffset) ) return;
 		// Set the channel of this device
 		if (msg.dispatch("/SetChannel", 			set_channel, 			addrOffset) ) return;
 	#endif

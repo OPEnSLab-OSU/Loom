@@ -180,19 +180,25 @@ void Loom_begin()
 
 	#if advanced_interdev_comm == 1
 		LOOM_DEBUG_Println("Routing:");
-		LOOM_DEBUG_Println2("  Global: ", STR(/) FAMILY);
-		LOOM_DEBUG_Println2("  Subnet: ", STR(/) FAMILY STR(FAMILY_NUM));
+		if (configuration.config_wifi.wifi_mode != AP_MODE)	{
+			LOOM_DEBUG_Println2("  Global: ", STR(/) FAMILY);
+			LOOM_DEBUG_Println2("  Subnet: ", STR(/) FAMILY STR(FAMILY_NUM));
+		}
 		LOOM_DEBUG_Println2("  Device: ", configuration.packet_header_string);
 	#endif
 
 
 	#if is_wifi
 		LOOM_DEBUG_Println("UDP Ports");
-		LOOM_DEBUG_Println2("  Global: ", GLOBAL_PORT);
-		LOOM_DEBUG_Println2("  Subnet: ", SUBNET_PORT);
+		if (configuration.config_wifi.wifi_mode != AP_MODE)	{
+			LOOM_DEBUG_Println2("  Global: ", GLOBAL_PORT);
+			LOOM_DEBUG_Println2("  Subnet: ", SUBNET_PORT);
+		}
 		LOOM_DEBUG_Println2("  Device: ", configuration.config_wifi.devicePort);
 	#endif
 
+
+	LOOM_DEBUG_Println("\n-- Setup Complete --\n");
 
 	// Flash the built-in LED indicating setup complete
 	flash_led();

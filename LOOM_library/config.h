@@ -29,7 +29,7 @@
 // --- Device Identification --- 
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
 #define FAMILY_NUM       8		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
-#define CHANNEL          4		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
+#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request channel settings from Max Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
@@ -73,7 +73,7 @@
 // ================================================================
 // Enable specified devices, typically mutually exclusive
 // Further options in the advanced settings
-#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
+#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
 #define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
@@ -106,7 +106,7 @@
 // --- Enabled Actuators --- 
 #define num_servos    0 	// Number of servos being used (up to 8 per shield, testing has generally only been through 1 shield)
 #define num_steppers  0		// Number of stepper motors being used 
-#define is_relay      1		// 1 if a relay is being used
+#define is_relay      0		// 1 if a relay is being used
 #if is_relay == 1
 	#define relay_pin 10	// Digital pin connected to the relay
 #endif
@@ -116,6 +116,7 @@
 // ================================================================ 
 // ===                         SENSORS                          === 
 // ================================================================
+
 // --- Analog Setting --- 
 #define is_analog     0		// 1 if analog input is being used, 0 if not
 
@@ -168,16 +169,22 @@
 // --- WiFi Settings ---
 // Requires is_wifi to be set to 1 to take effect
 #if is_wifi == 1
-	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
+	// #define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
+	#define DEFAULT_MODE      AP_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
+
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
 	#define DEFAULT_PASSWORD  "arduino101"		// Network password
 #endif
 
 
 
-// ================================================================ 
-// ===                 MORE ADVANCED FUNCTIONS                  === 
 // ================================================================
+// ================================================================ 
+// ===                    ADVANCED OPTIONS                      === 
+// ================================================================
+// ================================================================
+
+
 
 // --- Scripts ---
 #define enable_hub_scripts 0
@@ -186,12 +193,6 @@
 #define advanced_interdev_comm   0	// Used for Max-like functionality
 #define build_actuator_cmd_funcs 0  // 1 to include file to make commands for Loom actuators
 
-
-// ================================================================
-// ================================================================ 
-// ===                    ADVANCED OPTIONS                      === 
-// ================================================================
-// ================================================================
 
 
 // --- Set Instance Number and UDP Port ---
@@ -269,7 +270,7 @@
 #if is_ishield == 1
 	#define is_button     1			// 1 to enable button
 	#define button_pin    10		// Pin that the button uses
-	#define is_mpu6050    1 		// Enables MPU6050 on Ishield
+	#define is_mpu6050    0 		// Enables MPU6050 on Ishield
 	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 
 	#define is_analog     1
 
