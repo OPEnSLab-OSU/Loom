@@ -15,9 +15,7 @@ void Loom_begin();
 // 
 void Loom_begin()
 {
-	// #if LOOM_DEBUG == 1
 	pinMode(LED_BUILTIN, OUTPUT);   // Set the LED pin mode
-	// #endif
 
 	//Initialize serial and wait for port to open:
 	#if LOOM_DEBUG == 1
@@ -34,6 +32,12 @@ void Loom_begin()
 	LOOM_DEBUG_Println3("Device: ", DEVICE, INIT_INST);
 	LOOM_DEBUG_Println3("Family: ", FAMILY, FAMILY_NUM);
 
+	#if hub_node_type == 0
+		LOOM_DEBUG_Println("Running as Hub\n");
+	#else
+		LOOM_DEBUG_Println("Running as Node\n");
+	#endif
+
 
 	#if wake_delay == 1
 		// LOOM_DEBUG_Println("Delaying 5 seconds");
@@ -41,11 +45,11 @@ void Loom_begin()
 	#endif
 	
 
-	#if hub_node_type == 0
-		LOOM_DEBUG_Println("Running as Hub\n");
-	#else
-		LOOM_DEBUG_Println("Running as Node\n");
+
+	#if (display_config == 1) && (LOOM_DEBUG == 1)
+		print_config();
 	#endif
+
 
 
 	// Set the button pin mode to input

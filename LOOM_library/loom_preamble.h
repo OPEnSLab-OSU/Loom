@@ -346,6 +346,10 @@ void flash_led();
 
 // Files of functions that are not specific to sensors / actuators
 
+#if (display_config == 1) && (LOOM_DEBUG == 1)
+	#include "loom_display_config.h"
+#endif
+
 #if enable_hub_scripts == 1
 	#include "loom_script_function_wrappers.h"
 	#include "loom_hub_scripts.h"
