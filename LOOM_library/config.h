@@ -61,6 +61,8 @@
 											// 1: Permits the code to compile and the device will skip functionality
 											//     of platforms / devices that are not enabled, informing the user of such
 
+#define display_config 1		// 1 to print the uploaded configuration at start of setup
+
 // ================================================================ 
 // ===                  DEVICE TELEMETRY TYPE                   === 
 // ================================================================
