@@ -17,7 +17,7 @@
 #define is_rtc3231 1
 #define is_rtc8523 0
 
-#define second_adjustment 0 // seems to be a second behind, so add 1
+#define second_adjustment 0 
 
 
 ////////////////////////////////
