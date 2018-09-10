@@ -46,14 +46,8 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform)
 				wifi_receive_bundle(bndl, &UdpSubnet, configuration.config_wifi.subnetPort, "Subnet"); 
 				wifi_receive_bundle(bndl, &UdpGlobal, GLOBAL_PORT, "Global");
 			}
-
-		// Add if to not check global if it is same as subnet
-
-			// wifi_receive_bundle(bndl, &Udp, SUBNET_PORT);
-			// wifi_receive_bundle(bndl, &Udp, configuration.config_wifi.subnetPort); 
-			
-			// wifi_receive_bundle(bndl);
 			break;
+			
 		#endif
 
 		#if is_lora == 1

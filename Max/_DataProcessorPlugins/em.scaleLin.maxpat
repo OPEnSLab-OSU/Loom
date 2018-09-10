@@ -65,7 +65,7 @@
 					"bgcolor" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgcolor2" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgfillcolor_angle" : 270.0,
-					"bgfillcolor_autogradient" : 0,
+					"bgfillcolor_autogradient" : 0.0,
 					"bgfillcolor_color" : [ 0.862745, 0.870588, 0.878431, 0.32 ],
 					"bgfillcolor_color1" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgfillcolor_color2" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -95,7 +95,7 @@
 					"bgcolor" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgcolor2" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgfillcolor_angle" : 270.0,
-					"bgfillcolor_autogradient" : 0,
+					"bgfillcolor_autogradient" : 0.0,
 					"bgfillcolor_color" : [ 0.862745, 0.870588, 0.878431, 0.32 ],
 					"bgfillcolor_color1" : [ 0.376471, 0.384314, 0.4, 1.0 ],
 					"bgfillcolor_color2" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -241,7 +241,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 203.25, 98.0, 36.0, 23.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 99.75, 89.0, 51.5, 23.0 ],
+					"presentation_rect" : [ 99.75, 89.0, 52.0, 23.0 ],
 					"style" : "",
 					"text" : "127."
 				}
@@ -324,7 +324,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 203.25, 73.0, 36.0, 23.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 99.75, 60.0, 51.5, 23.0 ],
+					"presentation_rect" : [ 99.75, 60.0, 52.0, 23.0 ],
 					"style" : "",
 					"text" : "1."
 				}
@@ -936,8 +936,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",
