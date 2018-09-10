@@ -124,13 +124,21 @@ function display()
 			
 			//outlet(9, i, family, family_num, json.devices[i].type, i+1);	
 			//outlet(9, i+1, 0, family);
-			outlet(9, i+1, 1, family_num);
-			outlet(9, i+1, 2, json.devices[i].type);
-			outlet(9, i+1, 3, i+1);
+//			outlet(9, i+1, 1, family_num);
+//			outlet(9, i+1, 2, json.devices[i].type);
+//			outlet(9, i+1, 3, i+1);
 			
 		} else {
 			outlet(1, '/text', i+1, 'textcolor', 0., 0., 0., 0.4);
 			outlet(1, '/led', i+1, 0);
+		}
+	}
+	
+	for (i=0; i<8; i++) {
+		if (!json.devices[i].free) {
+			outlet(9, i+1, 1, family_num);
+			outlet(9, i+1, 2, json.devices[i].type);
+			outlet(9, i+1, 3, i+1);
 		}
 	}
 }

@@ -217,10 +217,6 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port, char 
 		while (packetSize--){      // Read in new bundle
 			bndl->fill(Udp->read());
 		}
-
-		LOOM_DEBUG_Println("Bundle contents:");
-		print_bundle(bndl);
-
 	} // of (packetSize > 0)
 }
 
