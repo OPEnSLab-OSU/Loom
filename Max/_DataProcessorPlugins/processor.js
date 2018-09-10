@@ -45,6 +45,8 @@ function createBpatcher(file)
 				dimensions = ["150", "125"]; break;
 			case "em.servo":
 				dimensions = ["150", "160"]; break;
+			case "em.servo_pan_tilt":
+				dimensions = ["150", "180"]; break;
 			case "em.decagon":
 				dimensions = ["150", "140"]; break;
 			case "em.stepper_motor":

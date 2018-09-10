@@ -29,6 +29,12 @@ void Loom_begin()
 		Serial.println("Initialized Serial!\n");
 	#endif
 
+
+	#if wake_delay == 1
+		delay(5000);
+	#endif
+	
+
 	LOOM_DEBUG_Println3("Device: ", DEVICE, INIT_INST);
 	LOOM_DEBUG_Println3("Family: ", FAMILY, FAMILY_NUM);
 
@@ -39,13 +45,7 @@ void Loom_begin()
 	#endif
 
 
-	#if wake_delay == 1
-		// LOOM_DEBUG_Println("Delaying 5 seconds");
-		delay(5000);
-	#endif
-	
-
-
+	// Print uploaded configuration
 	#if (display_config == 1) && (LOOM_DEBUG == 1)
 		print_config();
 	#endif
