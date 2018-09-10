@@ -39,6 +39,56 @@
 		"showontab" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-21",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-19",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 0.0, 33.5, 66.0, 33.0 ],
+					"style" : "",
+					"text" : "Device Messages"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-17",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 804.033081, 818.5, 90.0, 33.0 ],
+					"style" : "",
+					"text" : "Bang when 'Send' pressed"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"comment" : "Bang when 'Send' pressed",
+					"id" : "obj-18",
+					"index" : 0,
+					"maxclass" : "outlet",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 804.033081, 785.0, 30.0, 30.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-15",
 					"maxclass" : "newobj",
 					"numinlets" : 4,
@@ -551,8 +601,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-									"fontsize" : [ 12.059008 ]
+									"fontsize" : [ 12.059008 ],
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -597,9 +647,9 @@
 					"maxclass" : "bpatcher",
 					"name" : "Status_Bar.maxpat",
 					"numinlets" : 3,
-					"numoutlets" : 2,
+					"numoutlets" : 3,
 					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "", "int" ],
+					"outlettype" : [ "", "int", "" ],
 					"patching_rect" : [ 28.0, 229.333344, 147.0, 66.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.5, 0.5, 150.0, 66.0 ],
@@ -800,8 +850,16 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-15", 1 ],
-					"midpoints" : [ 165.5, 308.0, 383.833344, 308.0 ],
+					"midpoints" : [ 101.5, 308.0, 383.833344, 308.0 ],
 					"source" : [ "obj-65", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-18", 0 ],
+					"midpoints" : [ 165.5, 299.666687, 813.533081, 299.666687 ],
+					"source" : [ "obj-65", 2 ]
 				}
 
 			}
@@ -838,28 +896,28 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "Controller.maxpat",
-				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Controller.js",
-				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "WiFi_Setup.maxpat",
-				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Status_Bar.maxpat",
-				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
@@ -904,8 +962,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-					"fontsize" : [ 12.059008 ]
+					"fontsize" : [ 12.059008 ],
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
