@@ -357,9 +357,9 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 18.0, 159.0, 50.0, 22.0 ],
+									"patching_rect" : [ 18.0, 159.0, 43.0, 22.0 ],
 									"style" : "",
-									"text" : "del 500"
+									"text" : "del 50"
 								}
 
 							}
@@ -4891,8 +4891,6 @@
 			}
 , 			{
 				"name" : "runningAvg.maxpat",
-				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4902,6 +4900,42 @@
 			}
 , 			{
 				"name" : "OSC-route.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "iter.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "split.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "unjoin.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "join.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "append.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "metro.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "timer.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "line.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "regexp.mxo",
 				"type" : "iLaX"
 			}
  ],

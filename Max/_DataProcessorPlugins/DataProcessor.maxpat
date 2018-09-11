@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 187.0, 79.0, 931.0, 782.0 ],
+		"rect" : [ 34.0, 79.0, 931.0, 782.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -79,31 +79,35 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "processorGen.maxpat",
-				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "processor.js",
-				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "em.channel_manager.maxpat",
-				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "channels.js",
-				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
+			}
+, 			{
+				"name" : "regexp.mxo",
+				"type" : "iLaX"
 			}
 , 			{
 				"name" : "OSC-route.mxo",
@@ -111,6 +115,14 @@
 			}
 , 			{
 				"name" : "OpenSoundControl.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "metro.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "atoi.mxo",
 				"type" : "iLaX"
 			}
  ],
@@ -145,8 +157,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",

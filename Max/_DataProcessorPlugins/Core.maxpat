@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 195.0, 79.0, 836.0, 787.0 ],
+		"rect" : [ 352.0, 79.0, 836.0, 787.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -38,56 +38,6 @@
 		"subpatcher_template" : "",
 		"showontab" : 0,
 		"boxes" : [ 			{
-				"box" : 				{
-					"id" : "obj-21",
-					"maxclass" : "button",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
-					"style" : ""
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-19",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 0.0, 33.5, 66.0, 33.0 ],
-					"style" : "",
-					"text" : "Device Messages"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-17",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 804.033081, 818.5, 90.0, 33.0 ],
-					"style" : "",
-					"text" : "Bang when 'Send' pressed"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"comment" : "Bang when 'Send' pressed",
-					"id" : "obj-18",
-					"index" : 0,
-					"maxclass" : "outlet",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 804.033081, 785.0, 30.0, 30.0 ],
-					"style" : ""
-				}
-
-			}
-, 			{
 				"box" : 				{
 					"id" : "obj-15",
 					"maxclass" : "newobj",
@@ -601,8 +551,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -647,9 +597,9 @@
 					"maxclass" : "bpatcher",
 					"name" : "Status_Bar.maxpat",
 					"numinlets" : 3,
-					"numoutlets" : 3,
+					"numoutlets" : 2,
 					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "", "int", "" ],
+					"outlettype" : [ "", "int" ],
 					"patching_rect" : [ 28.0, 229.333344, 147.0, 66.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.5, 0.5, 150.0, 66.0 ],
@@ -705,9 +655,9 @@
 					"maxclass" : "bpatcher",
 					"name" : "Controller.maxpat",
 					"numinlets" : 4,
-					"numoutlets" : 7,
+					"numoutlets" : 8,
 					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "list", "", "", "", "", "", "" ],
+					"outlettype" : [ "list", "", "", "", "", "", "", "int" ],
 					"patching_rect" : [ 28.0, 335.666656, 295.0, 185.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.5, 320.0, 295.0, 185.0 ],
@@ -749,8 +699,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-15", 1 ],
+					"midpoints" : [ 313.5, 533.333313, 383.833344, 533.333313 ],
+					"source" : [ "obj-3", 7 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-15", 2 ],
-					"midpoints" : [ 313.5, 540.833313, 395.166656, 540.833313 ],
+					"midpoints" : [ 274.071442, 540.833313, 395.166656, 540.833313 ],
 					"source" : [ "obj-3", 6 ]
 				}
 
@@ -776,7 +734,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
-					"midpoints" : [ 83.5, 562.0, 37.5, 562.0 ],
+					"midpoints" : [ 76.928574, 562.0, 37.5, 562.0 ],
 					"source" : [ "obj-3", 1 ]
 				}
 
@@ -784,7 +742,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-65", 2 ],
-					"midpoints" : [ 129.5, 530.666626, 339.700012, 530.666626, 339.700012, 218.333344, 165.5, 218.333344 ],
+					"midpoints" : [ 116.35714, 530.666626, 339.700012, 530.666626, 339.700012, 218.333344, 165.5, 218.333344 ],
 					"order" : 1,
 					"source" : [ "obj-3", 2 ]
 				}
@@ -793,7 +751,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-84", 0 ],
-					"midpoints" : [ 129.5, 566.0, 493.5, 566.0 ],
+					"midpoints" : [ 116.35714, 566.0, 493.5, 566.0 ],
 					"order" : 0,
 					"source" : [ "obj-3", 2 ]
 				}
@@ -802,7 +760,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-86", 0 ],
-					"midpoints" : [ 221.5, 566.0, 652.941895, 566.0 ],
+					"midpoints" : [ 195.214279, 566.0, 652.941895, 566.0 ],
 					"source" : [ "obj-3", 4 ]
 				}
 
@@ -810,7 +768,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-88", 0 ],
-					"midpoints" : [ 175.5, 566.0, 570.0, 566.0 ],
+					"midpoints" : [ 155.785721, 566.0, 570.0, 566.0 ],
 					"source" : [ "obj-3", 3 ]
 				}
 
@@ -818,7 +776,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-89", 0 ],
-					"midpoints" : [ 267.5, 566.0, 733.533081, 566.0 ],
+					"midpoints" : [ 234.642853, 566.0, 733.533081, 566.0 ],
 					"source" : [ "obj-3", 5 ]
 				}
 
@@ -850,16 +808,8 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-15", 1 ],
-					"midpoints" : [ 101.5, 308.0, 383.833344, 308.0 ],
+					"midpoints" : [ 165.5, 308.0, 383.833344, 308.0 ],
 					"source" : [ "obj-65", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-18", 0 ],
-					"midpoints" : [ 165.5, 299.666687, 813.533081, 299.666687 ],
-					"source" : [ "obj-65", 2 ]
 				}
 
 			}
@@ -896,28 +846,28 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "Controller.maxpat",
-				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Controller.js",
-				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "WiFi_Setup.maxpat",
-				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Status_Bar.maxpat",
-				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
@@ -962,8 +912,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",
