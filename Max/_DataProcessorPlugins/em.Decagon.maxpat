@@ -46,7 +46,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 391.587524, 418.799927, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "1"
+					"text" : "0"
 				}
 
 			}
@@ -271,7 +271,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 507.0, 354.0, 50.0, 22.0 ],
+									"patching_rect" : [ 507.0, 354.0, 50.0, 35.0 ],
 									"style" : "",
 									"text" : "Decagon"
 								}
@@ -384,9 +384,9 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 18.0, 159.0, 50.0, 22.0 ],
+									"patching_rect" : [ 18.0, 159.0, 43.0, 22.0 ],
 									"style" : "",
-									"text" : "del 500"
+									"text" : "del 50"
 								}
 
 							}
@@ -941,7 +941,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 241.150024, 277.499817, 111.5, 22.0 ],
 									"style" : "",
-									"text" : "range -40. 140."
+									"text" : "range 0. 90."
 								}
 
 							}
@@ -1264,7 +1264,7 @@
 					"patching_rect" : [ 311.587524, 502.966736, 220.0, 32.699982 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 8.000002, 99.034393, 134.0, 32.500004 ],
-					"setminmax" : [ -40.0, 140.0 ],
+					"setminmax" : [ 0.0, 90.0 ],
 					"setstyle" : 3,
 					"slidercolor" : [ 0.811765, 0.372549, 0.372549, 1.0 ],
 					"style" : ""
@@ -1692,8 +1692,6 @@
 			}
 , 			{
 				"name" : "runningAvg.maxpat",
-				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
-				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -1703,6 +1701,14 @@
 			}
 , 			{
 				"name" : "OSC-route.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "timer.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "line.mxo",
 				"type" : "iLaX"
 			}
  ],

@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 234.0, 79.0, 1100.0, 787.0 ],
+		"rect" : [ 204.0, 79.0, 837.0, 787.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -37,6 +37,96 @@
 		"style" : "",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-90",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"patching_rect" : [ 1213.858154, 670.0, 24.0, 22.0 ],
+					"style" : "",
+					"text" : "t 0"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-91",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1252.52478, 752.0, 84.0, 33.0 ],
+					"style" : "",
+					"text" : "0 to reset to defaults"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"comment" : "0 to reset to defaults",
+					"id" : "obj-92",
+					"index" : 0,
+					"maxclass" : "outlet",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1213.858154, 752.0, 30.0, 30.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.239216, 0.254902, 0.278431, 1.0 ],
+					"bgoncolor" : [ 0.439216, 0.74902, 0.254902, 1.0 ],
+					"blinktime" : 200,
+					"fontsize" : 10.0,
+					"id" : "obj-94",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1213.858154, 626.666626, 39.0, 25.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 249.0, 8.0, 39.0, 24.0 ],
+					"rounded" : 15.0,
+					"style" : "",
+					"text" : "Default",
+					"textoncolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
+					"usebgoncolor" : 1,
+					"usetextovercolor" : 1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-81",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 1061.574951, 631.0, 50.0, 22.0 ],
+					"style" : "",
+					"text" : "del 100"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-10",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 1061.574951, 594.0, 60.0, 22.0 ],
+					"style" : "",
+					"text" : "loadbang"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-97",
 					"maxclass" : "message",
@@ -113,9 +203,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1061.574951, 640.0, 70.0, 24.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 234.416672, 8.0, 53.583332, 25.0 ],
+					"patching_rect" : [ 1061.574951, 668.0, 70.0, 24.0 ],
 					"rounded" : 15.0,
 					"style" : "",
 					"text" : "Load Saved Dev",
@@ -5291,7 +5379,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 10.5, 11.833374, 122.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 8.0, 223.333344, 24.0 ],
+					"presentation_rect" : [ 7.0, 8.0, 238.0, 24.0 ],
 					"style" : "",
 					"text" : "Device Targeting",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
@@ -5442,6 +5530,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-44", 0 ],
 					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-81", 0 ],
+					"source" : [ "obj-10", 0 ]
 				}
 
 			}
@@ -6307,8 +6402,29 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-21", 0 ],
+					"source" : [ "obj-81", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-19", 0 ],
 					"source" : [ "obj-85", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-92", 0 ],
+					"source" : [ "obj-90", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-90", 0 ],
+					"source" : [ "obj-94", 0 ]
 				}
 
 			}
@@ -6322,7 +6438,7 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "Controller.js",
-				"bootpath" : "~/Documents/Loom/InternetOfAg/Max/_DataProcessorPlugins",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
