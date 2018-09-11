@@ -4,7 +4,7 @@
 1. [Processors](#processors)
     1. [Adafruit Feather M0](#adafruit-feather-m0)
     2. [Adafruit Feather 32u4](#adafruit-feather-32u4)
-1. [Wireless Capabilities](#wireless-capabilities)
+2. [Wireless Capabilities](#wireless-capabilities)
     1. [WiFi](#wifi)
         1. [WiFi Dependencies](#wifi-dependencies)
     2. [LoRa](#lora)
@@ -13,7 +13,7 @@
     3. [nRF](#nRF)
         1. [nRF Dependencies](#nrf-dependencies)
         2. [Configuring Maximum Message Length](#configuring-maximum-message-length)
-2. [Sensors](#sensors)
+3. [Sensors](#sensors)
     1. [I2C Sensors](#i2c-sensors)
         1. [TSL2591 Lux Sensor](#tsl2591-lux-sensor)
         2. [FXOS8700 3-Axis Accelerometer/Magentometer](#fxos8700-3-axis-accelerometermagentometer)
@@ -27,16 +27,17 @@
         2. [Supported SDI-12 Pins](#supported-sdi-12-pins)
     3. [SPI Sensors](#spi-sensors)
         1. [Adafruit Universal Thermocouple Amplifier](#adafruit-universal-thermocouple-amplifier)
-3. [Actuators](#actuators)
+4. [Actuators](#actuators)
     1. [SG92R Servo](#sg92r-servo)
     2. [SM_42BYG011_25 Stepper Motor](#sm_42byg011_25-stepper-motor)
-4. [Miscellaneous Functionality](#miscellaneous-functionality)
+5. [Miscellaneous Functionality](#miscellaneous-functionality)
     1. [RTC and Low Power Functionality](#rtc-and-low-power-functionality)
         1. [RTC and Low Power Dependencies](#rtc-and-low-power-dependencies)
         2. [Standby Operation](#standby-operation)
     2. [OSC Interpreter](#osc-interpreter)
         1. [OSC Issues](#osc-issues)
     3. [Non-Volatile Flash and EEPROM memory](#non-volatile-memory)
+6. [32u4 Limitations](#32u4-limitations)
 
 ## Processors
 
@@ -611,3 +612,21 @@ and are automatically compatible with your board. If you modify the contents of 
 you can save them with write_non_volatile(). If you need to read from flash memory, you can read into the
 configuration structure with read_non_volatile(). Do not excessively write, as each board supports about
 ~10000 flash writesin its lifetime; the cells in flash memory wear out over time.
+
+## 32u4 Limitations
+
+The 32u4 has a number of limitations in comparision to the M0 processors, which are documented below.
+
+**Program Storage**
+
+The 32u4 has limited program storage, generally not enough to fit a moderately complex Loom project.
+
+**Issues with Floats**
+
+When compiling for the 32u4, the Arduino IDE seems to use a smaller subset of standard C functions. This is most apparent when using floats. For example, `strtof` is not provided (but is for M0), and `sprintf` does not work with floats (often requiring cumbersome work-arounds / using the String library).
+
+**RAM**
+
+It seems that exceeding the provided RAM causes freezing. In the LOOM library, it is not unusual for for a 32u4 to run normally until receiving a bundle, likely due to declaration of more variables exceeding RAM.
+
+ 
