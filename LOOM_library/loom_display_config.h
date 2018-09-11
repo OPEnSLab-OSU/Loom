@@ -5,7 +5,7 @@
 
 void print_config()
 {
-	LOOM_DEBUG_Println("\n\n= = = = = Start Configuration Display = = = = =");
+	LOOM_DEBUG_Println("\n\n= = = = = Start Configuration Display = = = = =\n");
 
 
 	LOOM_DEBUG_Println("Device Identification");
@@ -200,6 +200,6 @@ void print_config()
 
 	LOOM_DEBUG_Println2("Loop Delay / Sleep: ", is_sleep_period);
 
-	LOOM_DEBUG_Println("= = = = = End Configuration Display = = = = =\n\n");
+	LOOM_DEBUG_Println("\n= = = = = End Configuration Display = = = = =\n\n");
 
 }

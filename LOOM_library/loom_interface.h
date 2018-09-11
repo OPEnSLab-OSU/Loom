@@ -387,6 +387,7 @@ void log_bundle(OSCBundle *log_bndl, LogPlatform platform, char* file)
 	switch(platform) {
 		#if is_sd == 1
 		case SDCARD : 
+			if (!SD_working) return;
 			LOOM_DEBUG_Println("Saving bundle");
 			sd_save_bundle(file, log_bndl, 0, sd_save_time_format); 
 			return;

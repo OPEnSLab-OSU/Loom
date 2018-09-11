@@ -12,7 +12,9 @@
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-unsigned long lastPushMillis, currentPushMillis;  
+#if pushMillisFilter == 1 
+	unsigned long lastPushMillis, currentPushMillis;  
+#endif
 
 
 // ================================================================ 
