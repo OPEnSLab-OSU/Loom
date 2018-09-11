@@ -27,8 +27,13 @@
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 
+#if sdMillisFilter == 1 
+	unsigned long lastSdMillis, currentSdMillis;  
+#endif
+
 File sdFile;
-int SD_logging = 0; // 0: off, 1: log bundles received
+int  SD_logging = 0; // 0: off, 1: log bundles received
+bool SD_working;
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
@@ -60,7 +65,7 @@ void set_SD_logging(OSCMessage &msg);
 // 
 void setup_sd()
 {
-	LOOM_DEBUG_Println("Initializing SD card...");
+	LOOM_DEBUG_Print("Initializing SD card...");
 
 	#if is_lora == 1
 		digitalWrite(8, HIGH); 	// if using LoRa
@@ -68,9 +73,12 @@ void setup_sd()
 
 	if (!SD.begin(chipSelect)) {
 		LOOM_DEBUG_Println("SD Initialization failed!");
-		LOOM_DEBUG_Println("Will continue anyway, but SD fuctions wont work");
+		LOOM_DEBUG_Println("Will continue anyway, but SD fuctions will be skipped");
+		SD_working = false;
+	} else {
+		LOOM_DEBUG_Println("done");
+		SD_working = true;
 	}
-	LOOM_DEBUG_Println("initialization done.");
 }
 
 
@@ -88,6 +96,8 @@ void setup_sd()
 // 
 void sd_delete_file(char* file) 
 {
+	if (!SD_working) return;
+
 	SD.remove(file);
 }
 
@@ -100,6 +110,8 @@ void sd_delete_file(char* file)
 // 
 void sd_empty_file(char* file)
 {
+	if (!SD_working) return;
+
 	SD.remove(file);
 	sdFile = SD.open(file, FILE_WRITE);
 	sdFile.close();
@@ -112,6 +124,8 @@ void sd_empty_file(char* file)
 // 
 void sd_list_files()
 {
+	if (!SD_working) return;
+
 	printDirectory(SD.open("/"), 0);
 }
 
@@ -127,6 +141,8 @@ void sd_list_files()
 //
 bool sd_dump_file(char* file) 
 {
+	if (!SD_working) return false;
+
 	#if is_lora == 1
 		digitalWrite(8, HIGH); 	// if using LoRa
 	#endif
@@ -192,6 +208,8 @@ void sd_write_timestamp(char* file, int timestamp, char delimiter)
 template <typename T>
 bool sd_save_elem(char *file, T data, char endchar)
 {	
+	if (!SD_working) return false;
+
 	#if is_lora == 1
 		digitalWrite(8, HIGH); 	// if using LoRa
 	#endif
@@ -224,6 +242,19 @@ bool sd_save_elem(char *file, T data, char endchar)
 template <typename T>
 bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp) 
 {
+	if (!SD_working) return false;
+
+	// Only save if a minimum time (sdMillisDelay seconds) has passed since last save
+	#if sdMillisFilter == 1
+		currentSdMillis = millis();
+		if ( (currentSdMillis - lastSdMillis) < (1000*sdMillisDelay) ) {
+			return; // has not been long enough yet, just return
+		} else {
+			lastSdMillis = currentSdMillis;
+		}
+	#endif // of pushMillisFilter
+
+
 	#if is_lora == 1
 		digitalWrite(8, HIGH); 	// if using LoRa
 	#endif
@@ -276,6 +307,19 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 // @param timestamp  Format of timestamp (if any)
 bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 {
+	if (!SD_working) return false;
+
+	// Only save if a minimum time (sdMillisDelay seconds) has passed since last save
+	#if sdMillisFilter == 1
+		currentSdMillis = millis();
+		if ( (currentSdMillis - lastSdMillis) < (1000*sdMillisDelay) ) {
+			return; // has not been long enough yet, just return
+		} else {
+			lastSdMillis = currentSdMillis;
+		}
+	#endif // of pushMillisFilter
+
+
 	#if is_lora == 1
 		digitalWrite(8, HIGH); 	// if using LoRa
 	#endif
@@ -431,6 +475,8 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 //
 void set_SD_logging(OSCMessage &msg)
 {
+	if (!SD_working) return;
+
 	int setting = msg.getInt(0);
 
 	switch (setting) {
@@ -457,6 +503,8 @@ void set_SD_logging(OSCMessage &msg)
 //
 void printDirectory(File dir, int numTabs) 
 {
+	if (!SD_working) return;
+
 	while (true) {
 		File entry =  dir.openNextFile();
 		if (! entry) {

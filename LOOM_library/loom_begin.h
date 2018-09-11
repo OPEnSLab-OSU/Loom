@@ -202,7 +202,7 @@ void Loom_begin()
 	#endif
 
 
-	LOOM_DEBUG_Println("\n-- Setup Complete --\n");
+	LOOM_DEBUG_Println("\n= = = = = Setup Complete = = = = =\n");
 
 	// Flash the built-in LED indicating setup complete
 	flash_led();

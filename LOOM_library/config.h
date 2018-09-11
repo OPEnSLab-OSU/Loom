@@ -39,7 +39,7 @@
 // ===                      SERIAL OPTIONS                      === 
 // ================================================================
 // --- Debugging --- 
-#define LOOM_DEBUG    0			// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG    1			// Set to 1 if you want Serial statements from various functions to print
 								// NOTE: Serial monitor must be opened for device to setup if this is enabled
 								//   Device will freeze if this in abled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
@@ -98,9 +98,25 @@
 #define is_pushingbox 0		// 1 to enable PushingBox  
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
-#define is_sd         0		// 1 to enable SD card 
-#define is_rtc        0		// Enable RTC functionality
+// --- RTC Options ---
+#define is_rtc        1		// Enable RTC functionality
+#if is_rtc == 1
+	#define RTC_pin 6
 
+	// Select only one of the below options
+	#define is_rtc3231 1 	// RTC DS 3231 Featherwing
+	#define is_rtc8523 0	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
+#endif
+
+// --- SD Options ---
+#define is_sd         1		// 1 to enable SD card 
+#if is_sd == 1
+	// Currently works by only sending a bundle from 
+	// Does NOT automatically upload save to SD
+	// This works more like a filter than an automator
+	#define sdMillisFilter   0 	// 1 to enable a millis delay to uploading to PushingBox
+	#define sdMillisDelay    5  // delay in seconds
+#endif
 
 // ================================================================ 
 // ===                        ACTUATORS                         === 
@@ -217,18 +233,6 @@
 										// Make sure the Serial monitor is set to the same baud
 #endif
 
-// ================================================================
-// ===                       RTC OPTIONS                        === 
-// ================================================================
-// Used to select which RTC and interrupt pin are being used
-
-#if is_rtc == 1
-	#define RTC_pin 6
-
-	// Select only one of the below options
-	#define is_rtc3231 1 	// RTC DS 3231 Featherwing
-	#define is_rtc8523 0	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
-#endif
 
 
 
@@ -270,7 +274,7 @@
 #if is_ishield == 1
 	#define is_button     1			// 1 to enable button
 	#define button_pin    10		// Pin that the button uses
-	#define is_mpu6050    1 		// Enables MPU6050 on Ishield
+	#define is_mpu6050    0 		// Enables MPU6050 on Ishield
 	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 
 	#define is_analog     1
 
@@ -298,6 +302,7 @@
 	#define is_lora           1      // enable LoRa
 	#define is_rtc            1
 	#define is_sd             1
+
 
 	#if hub_node_type == 0       // if is hub
 		#define is_ethernet   1

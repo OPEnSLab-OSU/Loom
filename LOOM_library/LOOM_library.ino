@@ -42,6 +42,7 @@ void loop()
 	package_data(&send_bndl);
 	// print_bundle(&send_bndl);
 	send_bundle(&send_bndl, WIFI);
+	log_bundle(&send_bndl, SDCARD, "log.csv");
 
 	additional_loop_checks();
 
