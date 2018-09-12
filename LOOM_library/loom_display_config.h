@@ -31,9 +31,9 @@ void print_config()
 
 	LOOM_DEBUG_Println("Telemetry Options");
 	#if hub_node_type == 0
-		LOOM_DEBUG_Println("\tRunning as Hub\n");
+		LOOM_DEBUG_Println("\tRunning as Hub");
 	#else
-		LOOM_DEBUG_Println("\tRunning as Node\n");
+		LOOM_DEBUG_Println("\tRunning as Node");
 	#endif
 	#if is_repeater == 1
 		LOOM_DEBUG_Println("\tIs Repeater");							
@@ -102,9 +102,9 @@ void print_config()
 	#if is_rtc == 1
 		LOOM_DEBUG_Print("\tRTC enabled");
 		#if is_rtc3231 == 1
-			LOOM_DEBUG_Println("(via DS3231)");
+			LOOM_DEBUG_Println(" (via DS3231)");
 		#elif is_rtc8523 == 1
-			LOOM_DEBUG_Println("(via PCF8523)");
+			LOOM_DEBUG_Println(" (via PCF8523)");
 		#endif							
 	#endif	
 
@@ -200,6 +200,6 @@ void print_config()
 
 	LOOM_DEBUG_Println2("Loop Delay / Sleep: ", is_sleep_period);
 
-	LOOM_DEBUG_Println("\n= = = = = End Configuration Display = = = = =\n\n");
+	LOOM_DEBUG_Println("\n= = = = = End Configuration Display = = = = =\n");
 
 }

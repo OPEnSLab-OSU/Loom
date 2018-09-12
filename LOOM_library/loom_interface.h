@@ -377,17 +377,14 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
 //
 void log_bundle(OSCBundle *log_bndl, LogPlatform platform, char* file)
 {
-	#if is_sd == 1
-		if (!file)  { 
-			LOOM_DEBUG_Println("Logging to SD card requires filename");
-			return;
-		}
-	#endif
-
 	switch(platform) {
 		#if is_sd == 1
 		case SDCARD : 
 			if (!SD_working) return;
+			if (!file)  { 
+				LOOM_DEBUG_Println("Logging to SD card requires filename");
+				return;
+			}
 			LOOM_DEBUG_Println("Saving bundle");
 			sd_save_bundle(file, log_bndl, 0, sd_save_time_format); 
 			return;
