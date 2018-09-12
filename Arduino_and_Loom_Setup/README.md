@@ -81,3 +81,4 @@ Try to compile your program (check mark icon at the top left of the Arduino IDE)
 
 **Modifying the .ino functionality**
 
+It is recommeded that you base your code off the example provided / use the High-Level API Functions listed at the bottom of the .ino file to for more basic Loom setups.
