@@ -136,9 +136,9 @@ void setup_flash_config()
 
 			// Add any other behavior/calibration wrapped in an '#ifdef is_something' preprocessor directive HERE
 			
-			#if is_mpu6050 == 1 && is_ishield == 1
-				calMPU6050();                                 // Calibration writes memValidationValue for us
-			#endif
+			// #if is_mpu6050 == 1 && is_ishield == 1
+			// 	calMPU6050();                                 // Calibration writes memValidationValue for us
+			// #endif
 			
 			configuration.checksum = memValidationValue;      // Configuration has been written successfully, so we write the checksum
 
