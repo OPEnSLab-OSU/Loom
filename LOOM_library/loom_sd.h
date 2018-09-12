@@ -73,7 +73,7 @@ void setup_sd()
 
 	if (!SD.begin(chipSelect)) {
 		LOOM_DEBUG_Println("SD Initialization failed!");
-		LOOM_DEBUG_Println("Will continue anyway, but SD fuctions will be skipped");
+		LOOM_DEBUG_Println("Will continue anyway, but SD functions will be skipped");
 		SD_working = false;
 	} else {
 		LOOM_DEBUG_Println("done");

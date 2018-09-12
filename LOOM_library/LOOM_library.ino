@@ -32,20 +32,26 @@ void loop()
 {
 	OSCBundle bndl, send_bndl;
 
-	receive_bundle(&bndl, WIFI);
-	if (bndl.size()) {
-		print_bundle(&bndl);
-	}
-	process_bundle(&bndl);
+	// receive_bundle(&bndl, WIFI);
+	// if (bndl.size()) {
+	// 	print_bundle(&bndl);
+	// }
+	// process_bundle(&bndl);
 
 	measure_sensors();
 	package_data(&send_bndl);
-	// print_bundle(&send_bndl);
-	send_bundle(&send_bndl, WIFI);
-	log_bundle(&send_bndl, SDCARD, "log.csv");
+	print_bundle(&send_bndl);
+	// send_bundle(&send_bndl, WIFI);
+	log_bundle(&send_bndl, SDCARD, "test20.csv");
+
+	print_time();
 
 	additional_loop_checks();
 
+
+	delay(500);
+
+	// LOOM_DEBUG_Println("*");
 
 	// --- Common Example ---
 	// OSCBundle bndl, send_bndl;
