@@ -56,3 +56,28 @@ The Arduino IDE editor is a bit limited, so if you want to use a different edito
 
 ## Loom Setup and Usage
 
+**Opening the Code**
+
+Open the `Loom_Library.ino` file from the Loom_Library folder (note that the Arduino IDE requires that any .ino files be in a folder of the same name). This currently opens all of the files of the Loom Library, but there are only two that are of primary concern.
+
+- The .ino file -- this is where you will define the high-level behavior of your device 
+
+- The config.h file -- this is where you will define the hardware your device uses and various behavior options.
+
+*Both files can be renamed, but the .ino file has to match the name of the name of the folder it is within, and the config.h file name should match what is on line 8 of the .ino file (e.g. the '#include "config.h"')*
+
+**Using the Configuration File (config.h)**
+
+- Read the description at the top of the configuration file to understand how it is used
+- To start, use the top section of the file to define you best match of your hardware, or some subset (if trying to narrow down issues)
+
+All options have a description to the right
+
+Try to compile your program (check mark icon at the top left of the Arduino IDE)
+
+- If the code does not compile, the reason may be:
+  - That you don't have all of the relevant libraries (which shouldn't be the case if you installed all of the libraries following the instructions above)
+  - The are some conflicting options set in the configuration file
+
+**Modifying the .ino functionality**
+
