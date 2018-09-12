@@ -729,11 +729,13 @@ void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructu
 	}
 	
 	// If already in requested message format
-	if ((format == SINGLEMSG) && (bndl->size() == 1)) { 
-		// LOOM_DEBUG_Println("Bundle already in single-message format");
-		deep_copy_bundle(bndl, outBndl);
-		return;
-	}
+
+// Seemed to actually cause issues when bundle only had one piece of data
+	// if ((format == SINGLEMSG) && (bndl->size() == 1)) { 
+	// 	// LOOM_DEBUG_Println("Bundle already in single-message format");
+	// 	deep_copy_bundle(bndl, outBndl);
+	// 	return;
+	// }
 	if ((format == MULTIMSG) && (bndl->size() > 1)) {
 		// LOOM_DEBUG_Println("Bundle already in multi-message format");
 		deep_copy_bundle(bndl, outBndl);

@@ -248,7 +248,7 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 	#if sdMillisFilter == 1
 		currentSdMillis = millis();
 		if ( (currentSdMillis - lastSdMillis) < (1000*sdMillisDelay) ) {
-			return; // has not been long enough yet, just return
+			return false; // has not been long enough yet, just return
 		} else {
 			lastSdMillis = currentSdMillis;
 		}
@@ -313,7 +313,7 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 	#if sdMillisFilter == 1
 		currentSdMillis = millis();
 		if ( (currentSdMillis - lastSdMillis) < (1000*sdMillisDelay) ) {
-			return; // has not been long enough yet, just return
+			return false; // has not been long enough yet, just return
 		} else {
 			lastSdMillis = currentSdMillis;
 		}
@@ -381,6 +381,7 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 							sdFile.print(get_data_value(msg, i));
 							sdFile.print( (i < msg->size()-1) ? ',' : '\n' );
 						}
+						// sdFile.println();
 					}
 
 				} // of switch sdFile.position()

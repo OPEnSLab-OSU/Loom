@@ -75,7 +75,7 @@
 // ================================================================
 // Enable specified devices, typically mutually exclusive
 // Further options in the advanced settings
-#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
+#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
 #define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
@@ -84,7 +84,7 @@
 // ================================================================ 
 // ===                 COMMUNICATION PLATFORMS                  === 
 // ================================================================
-#define is_wifi       1		// 1 to enable WiFi
+#define is_wifi       0		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
@@ -104,8 +104,8 @@
 	#define RTC_pin 6
 
 	// Select only one of the below options
-	#define is_rtc3231 1 	// RTC DS 3231 Featherwing
-	#define is_rtc8523 0	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
+	#define is_rtc3231 0 	// RTC DS 3231 Featherwing
+	#define is_rtc8523 1	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
 #endif
 
 // --- SD Options ---
@@ -115,7 +115,7 @@
 	// Does NOT automatically upload save to SD
 	// This works more like a filter than an automator
 	#define sdMillisFilter   0 	// 1 to enable a millis delay to uploading to PushingBox
-	#define sdMillisDelay    5  // delay in seconds
+	#define sdMillisDelay    3  // delay in seconds
 #endif
 
 // ================================================================ 
@@ -134,6 +134,10 @@
 // ================================================================ 
 // ===                         SENSORS                          === 
 // ================================================================
+
+// --- Button Options ---
+#define is_button 		0	// 1 to enable button
+#define button_pin 		10	// Pin button is attached to 
 
 // --- Analog Setting --- 
 #define is_analog     0		// 1 if analog input is being used, 0 if not
@@ -174,11 +178,6 @@
 	#if is_hx711 == 1
 		#define hx711_calibration 961.275
 	#endif
-
-// --- Button Options ---
-#define is_button 		0	// 1 to enable button
-#define button_pin 		10	// Pin button is attached to 
-
 
 
 // ================================================================ 
@@ -272,7 +271,7 @@
 // ===                         ISHIELD                          === 
 // ================================================================
 #if is_ishield == 1
-	#define is_button     1			// 1 to enable button
+	#define is_button     0			// 1 to enable button
 	#define button_pin    10		// Pin that the button uses
 	#define is_mpu6050    0 		// Enables MPU6050 on Ishield
 	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 

@@ -102,6 +102,9 @@ void setup_rtc() {
 		}
 	#endif
 
+	// rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
+
+
 	#if  is_rtc3231 == 1
 		clearRTCAlarms(); 	//clear any pending alarms
 
