@@ -134,7 +134,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-4",
-					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.analog_monitor", ",", "em.decagon", ",", "em.multiplexer", ",", "em.ishield_monitor", ",", "-PROCESS-", ",", "em.analog_to_uv", ",", "em.rangeSetter", ",", "em.scaleCurve", ",", "em.scaleLin", ",", "em.smooth", ",", "em.threshold", ",", "-OUTPUT-", ",", "em.neopixel", ",", "em.relay", ",", "em.servo", ",", "em.stepper_motor", ",", "em.stepper_motor_extension", ",", "-", "-", "LEGACY", "-", "-", ",", "-INPUT-", ",", "em.emote", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rotaryDial", ",", "em.scaleDegree", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.spring", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.switchblade" ],
+					"items" : [ "<Select", "Module>", ",", "-INPUT-", ",", "em.analog_monitor", ",", "em.decagon", ",", "em.multiplexer", ",", "em.ishield_monitor", ",", "-PROCESS-", ",", "em.analog_to_uv", ",", "em.rangeSetter", ",", "em.scaleCurve", ",", "em.scaleLin", ",", "em.smooth", ",", "em.threshold", ",", "-OUTPUT-", ",", "em.neopixel", ",", "em.relay", ",", "em.servo", ",", "em.stepper_motor", ",", "em.stepper_motor_extension", ",", "em.save_to_csv", ",", "-", "-", "LEGACY", "-", "-", ",", "-INPUT-", ",", "em.emote", ",", "em.midiIn", ",", "em.oscIn", ",", "-PROCESS-", ",", "em.3Dpan", ",", "em.chordDegree", ",", "em.concatenate", ",", "em.drumKit", ",", "em.movement", ",", "em.musicbox", ",", "em.rotaryDial", ",", "em.scaleDegree", ",", "em.sequencer", ",", "em.simpleSamp", ",", "em.spring", ",", "em.tapTempo", ",", "-OUTPUT-", ",", "em.App3DPan", ",", "em.AppVST", ",", "em.DMX", ",", "em.instrumentPosition", ",", "em.midiOut", ",", "em.oscOut", ",", "em.outlightsaber", ",", "em.switchblade" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -418,6 +418,38 @@
 				"type" : "TEXT",
 				"implicit" : 1
 			}
+, 			{
+				"name" : "panel.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "js.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "message.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "button.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "regexp.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "sprintf.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "umenu.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "textbutton.mxo",
+				"type" : "iLaX"
+			}
  ],
 		"autosave" : 0,
 		"styles" : [ 			{
@@ -450,8 +482,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",
