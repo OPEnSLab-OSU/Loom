@@ -81,4 +81,12 @@ Try to compile your program (check mark icon at the top left of the Arduino IDE)
 
 **Modifying the .ino functionality**
 
-It is recommeded that you base your code off the example provided / use the High-Level API Functions listed at the bottom of the .ino file to for more basic Loom setups.
+It is recommeded that you base your code off the example provided / use the High-Level API Functions listed at the bottom of the .ino file to for more basic Loom setups. The `loom_interface.h` file describes each of those functions in further detail.
+
+## Extending Loom Functionality 
+
+This section will describe some of the ways that you can extend Loom without formally integrating code into the library. 
+
+****
+
+**Adding Message Router Options**
