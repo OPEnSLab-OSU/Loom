@@ -102,6 +102,8 @@ void setup_rtc() {
 		}
 	#endif
 
+
+// Maybe add a check to set the time if it is way off
 	// rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
 
 
