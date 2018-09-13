@@ -68,16 +68,28 @@ void setup_flash_config();
 #if MEM_TYPE == MEM_FLASH
 	FlashStorage(flash_config,config_flash_t);    // Setup the flash storage for the structure
 	void read_non_volatile(){
+		#if disable_flash == 1
+			return;
+		#endif
 		configuration = flash_config.read();
 	}
 	void write_non_volatile(){
+		#if disable_flash == 1
+			return;
+		#endif
 		flash_config.write(configuration);
 	}
 #elif MEM_TYPE == MEM_EEPROM
 	void read_non_volatile(){
+		#if disable_flash == 1
+			return;
+		#endif
 		EEPROM_readAnything(0,configuration);
 	}
 	void write_non_volatile(){
+		#if disable_flash == 1
+			return;
+		#endif
 		EEPROM_writeAnything(0,configuration);
 	}
 #endif
@@ -109,12 +121,14 @@ void setup_flash_config()
 
 	#if MEM_TYPE == MEM_FLASH || MEM_TYPE == MEM_EEPROM
 
-		read_non_volatile(); //reads configuration from non_volatile memory
 		
-		LOOM_DEBUG_Println("Reading from non-volatile memory...");
-		LOOM_DEBUG_Println2("Checksum: ", configuration.checksum);
+		#if disable_flash != 1
+			read_non_volatile(); //reads configuration from non_volatile memory
+			LOOM_DEBUG_Println("Reading from non-volatile memory...");
+			LOOM_DEBUG_Println2("Checksum: ", configuration.checksum);
+		#endif
 		
-		if (configuration.checksum != memValidationValue) {     // Write default values to flash
+		if ((configuration.checksum != memValidationValue) || (disable_flash)) {     // Write default values to flash
 
 			configuration.instance_number = INIT_INST;
 			sprintf(configuration.packet_header_string,"%s%d\0",PacketHeaderString,configuration.instance_number);
@@ -136,17 +150,17 @@ void setup_flash_config()
 
 			// Add any other behavior/calibration wrapped in an '#ifdef is_something' preprocessor directive HERE
 			
-			// #if is_mpu6050 == 1 && is_ishield == 1
-			// 	calMPU6050();                                 // Calibration writes memValidationValue for us
-			// #endif
 			
 			configuration.checksum = memValidationValue;      // Configuration has been written successfully, so we write the checksum
 
-			LOOM_DEBUG_Println("Writing to flash for the first time.");
 
-			write_non_volatile();
-			
-			LOOM_DEBUG_Println("Done writing to flash.");
+
+			#if disable_flash != 1
+				LOOM_DEBUG_Println("Writing to flash for the first time.");
+				write_non_volatile();
+				LOOM_DEBUG_Println("Done writing to flash.");
+			#endif
+
 			// Flash memory has limited writes and we don't want to waste it on unnecessary tests
 		} // of if (configuration.checksum != memValidationValue)
 	#endif //of MEM_TYPE
