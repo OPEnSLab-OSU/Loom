@@ -65,6 +65,8 @@ function createBpatcher(file)
 				dimensions = ["155", "220"]; break;
 			case "em.smooth":
 				dimensions = ["175", "130"]; break;
+			case "em.save_to_csv":
+				dimensions = ["140", "165"]; break;
 			default: 
 				dimensions = ["250", "150"]; break;
 		}

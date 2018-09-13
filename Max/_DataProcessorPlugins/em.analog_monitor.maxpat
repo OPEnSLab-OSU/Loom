@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 326.0, 79.0, 817.0, 770.0 ],
+		"rect" : [ 326.0, 79.0, 619.0, 770.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -38,6 +38,61 @@
 		"subpatcher_template" : "",
 		"showontab" : 1,
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontface" : 0,
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-25",
+					"maxclass" : "newobj",
+					"numinlets" : 6,
+					"numoutlets" : 6,
+					"outlettype" : [ "", "", "", "", "", "" ],
+					"patching_rect" : [ 502.0, 598.0, 239.0, 22.0 ],
+					"style" : "",
+					"text" : "route /vbat /button /pin_A0 /pin_A1 /pin_A2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-23",
+					"maxclass" : "newobj",
+					"numinlets" : 5,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 502.0, 630.666687, 195.0, 22.0 ],
+					"style" : "",
+					"text" : "pak 0. 1 0. 0. 0."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-15",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 545.412476, 662.0, 150.0, 33.0 ],
+					"style" : "",
+					"text" : "Outgoing data of all parameters as list"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"comment" : "Outgoing data of all parameters as list (vbat, button, pin_A0, pin_A1, pin_A2)",
+					"id" : "obj-17",
+					"index" : 0,
+					"maxclass" : "outlet",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 502.0, 665.0, 30.0, 30.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-20",
 					"maxclass" : "newobj",
@@ -1241,6 +1296,48 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-17", 0 ],
+					"source" : [ "obj-23", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-23", 4 ],
+					"source" : [ "obj-25", 4 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-23", 3 ],
+					"source" : [ "obj-25", 3 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-23", 2 ],
+					"source" : [ "obj-25", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-23", 1 ],
+					"source" : [ "obj-25", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-23", 0 ],
+					"source" : [ "obj-25", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-69", 0 ],
 					"source" : [ "obj-30", 0 ]
 				}
@@ -1298,6 +1395,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-12", 0 ],
 					"midpoints" : [ 168.5, 368.666687, 369.5, 368.666687 ],
+					"order" : 1,
 					"source" : [ "obj-6", 5 ]
 				}
 
@@ -1313,6 +1411,15 @@
 				"patchline" : 				{
 					"destination" : [ "obj-20", 0 ],
 					"source" : [ "obj-6", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-25", 0 ],
+					"midpoints" : [ 168.5, 574.0, 511.5, 574.0 ],
+					"order" : 0,
+					"source" : [ "obj-6", 5 ]
 				}
 
 			}
@@ -1389,11 +1496,107 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "panel.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "comment.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "textedit.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "message.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "number.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "umenu.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "loadmess.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "prepend.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "js.mxo",
+				"type" : "iLaX"
+			}
+, 			{
 				"name" : "OpenSoundControl.mxo",
 				"type" : "iLaX"
 			}
 , 			{
+				"name" : "fromsymbol.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "udpsend.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "funnel.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "led.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "button.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "zl.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "delay.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "textbutton.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "tab.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "attrui.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "speedlim.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "udpreceive.mxo",
+				"type" : "iLaX"
+			}
+, 			{
 				"name" : "OSC-route.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "sprintf.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "multislider.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "scale.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -1402,6 +1605,10 @@
 			}
 , 			{
 				"name" : "line.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "pak.mxo",
 				"type" : "iLaX"
 			}
  ],
