@@ -36,8 +36,8 @@ void link_config_mpu6050(struct config_mpu6050_t *flash_setup_mpu6050)
 
 bool dmpReady = false; //set true if DMP init was successful
 
-MPU6050 mpu;             // Create instance of MPU6050 called mpu
-MPU6050 accelgyro;       // Another instance called accelgyro
+MPU6050 mpu(i2c_addr_mpu6050);             // Create instance of MPU6050 called mpu
+MPU6050 accelgyro(i2c_addr_mpu6050);       // Another instance called accelgyro
 
 
 uint8_t  mpuIntStatus;   // Holds actual interrupt status byte from MPU
