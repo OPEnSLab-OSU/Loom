@@ -4,6 +4,7 @@
 1. [Processors](#processors)
     1. [Adafruit Feather M0](#adafruit-feather-m0)
     2. [Adafruit Feather 32u4](#adafruit-feather-32u4)
+
 2. [Wireless Capabilities](#wireless-capabilities)
     1. [WiFi](#wifi)
         1. [WiFi Dependencies](#wifi-dependencies)
@@ -13,6 +14,7 @@
     3. [nRF](#nRF)
         1. [nRF Dependencies](#nrf-dependencies)
         2. [Configuring Maximum Message Length](#configuring-maximum-message-length)
+
 3. [Sensors](#sensors)
     1. [I2C Sensors](#i2c-sensors)
         1. [TSL2591 Lux Sensor](#tsl2591-lux-sensor)
@@ -27,9 +29,11 @@
         2. [Supported SDI-12 Pins](#supported-sdi-12-pins)
     3. [SPI Sensors](#spi-sensors)
         1. [Adafruit Universal Thermocouple Amplifier](#adafruit-universal-thermocouple-amplifier)
+
 4. [Actuators](#actuators)
     1. [SG92R Servo](#sg92r-servo)
     2. [SM_42BYG011_25 Stepper Motor](#sm_42byg011_25-stepper-motor)
+
 5. [Miscellaneous Functionality](#miscellaneous-functionality)
     1. [RTC and Low Power Functionality](#rtc-and-low-power-functionality)
         1. [RTC and Low Power Dependencies](#rtc-and-low-power-dependencies)
@@ -37,7 +41,10 @@
     2. [OSC Interpreter](#osc-interpreter)
         1. [OSC Issues](#osc-issues)
     3. [Non-Volatile Flash and EEPROM memory](#non-volatile-memory)
+
 6. [32u4 Limitations](#32u4-limitations)
+
+7. ## [Other Notes](#other-notes)
 
 ## Processors
 
@@ -629,4 +636,16 @@ When compiling for the 32u4, the Arduino IDE seems to use a smaller subset of st
 
 It seems that exceeding the provided RAM causes freezing. In the LOOM library, it is not unusual for for a 32u4 to run normally until receiving a bundle, likely due to declaration of more variables exceeding RAM.
 
- 
+## Other Notes
+
+**MPU6050 library bug** 
+
+The default MPU6050 library has a bug preventing the alternate I2C address (0x69 instead of 0x68) from being used. Namely, line 375 of 'MPU6050_6Axis_MotionApps20.h' needed to be changed from:
+
+    setSlaveAddress(0, 0x68);
+to:
+
+```
+setSlaveAddress(0, devAddr);
+```
+
