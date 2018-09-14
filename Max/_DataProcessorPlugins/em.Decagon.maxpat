@@ -1421,7 +1421,7 @@
 					"outlettype" : [ "list", "list", "", "", "", "" ],
 					"patching_rect" : [ 28.0, 261.0, 150.0, 68.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 295.0, 655.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 440.0, 655.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -1792,123 +1792,17 @@
 			}
 , 			{
 				"name" : "runningAvg.maxpat",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
+				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
-			}
-, 			{
-				"name" : "panel.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "comment.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "textedit.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "message.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "number.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "umenu.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "loadmess.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "prepend.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "js.mxo",
-				"type" : "iLaX"
 			}
 , 			{
 				"name" : "OpenSoundControl.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "fromsymbol.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "udpsend.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "funnel.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "led.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "button.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "zl.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "delay.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "textbutton.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "tab.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "attrui.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "speedlim.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "udpreceive.mxo",
-				"type" : "iLaX"
-			}
-, 			{
 				"name" : "OSC-route.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "sprintf.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "multislider.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "scale.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "timer.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "line.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "pak.mxo",
 				"type" : "iLaX"
 			}
  ],

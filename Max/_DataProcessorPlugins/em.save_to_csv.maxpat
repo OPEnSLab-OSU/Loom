@@ -461,8 +461,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-									"fontsize" : [ 12.059008 ]
+									"fontsize" : [ 12.059008 ],
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -1182,7 +1182,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 375.428558, 486.5, 468.428589, 22.0 ],
 					"style" : "",
-					"text" : "9/13/2018& 12:1:41& & & & & & & & & & & & & & & &"
+					"text" : "9/14/2018& 14:9:57& & & & & & & & & & & & & & & &"
 				}
 
 			}
@@ -1357,7 +1357,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "Column 1",
+					"comment" : "Column 8",
 					"id" : "obj-10",
 					"index" : 0,
 					"maxclass" : "inlet",
@@ -1371,7 +1371,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "Column 1",
+					"comment" : "Column 7",
 					"id" : "obj-11",
 					"index" : 0,
 					"maxclass" : "inlet",
@@ -1385,7 +1385,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "Column 1",
+					"comment" : "Column 6",
 					"id" : "obj-12",
 					"index" : 0,
 					"maxclass" : "inlet",
@@ -1399,7 +1399,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "Column 1",
+					"comment" : "Column 5",
 					"id" : "obj-13",
 					"index" : 0,
 					"maxclass" : "inlet",
@@ -1413,7 +1413,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "Column 1",
+					"comment" : "Column 4",
 					"id" : "obj-8",
 					"index" : 0,
 					"maxclass" : "inlet",
@@ -1427,7 +1427,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "Column 1",
+					"comment" : "Column 3",
 					"id" : "obj-7",
 					"index" : 0,
 					"maxclass" : "inlet",
@@ -1441,7 +1441,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "Column 1",
+					"comment" : "Column 2",
 					"id" : "obj-5",
 					"index" : 0,
 					"maxclass" : "inlet",
@@ -2364,63 +2364,7 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "panel.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "message.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "text.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "button.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "number.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "sprintf.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "loadmess.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "textbutton.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "regexp.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "textedit.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "toggle.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "metro.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "date.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "led.mxo",
-				"type" : "iLaX"
-			}
- ],
+		"dependency_cache" : [  ],
 		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "AudioStatus_Menu",
@@ -2452,8 +2396,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-					"fontsize" : [ 12.059008 ]
+					"fontsize" : [ 12.059008 ],
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 				}
 ,
 				"parentstyle" : "",

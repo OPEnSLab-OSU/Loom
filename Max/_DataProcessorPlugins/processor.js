@@ -65,6 +65,8 @@ function createBpatcher(file)
 				dimensions = ["155", "220"]; break;
 			case "em.smooth":
 				dimensions = ["175", "130"]; break;
+			case "em.servo_pan_tilt":
+				dimensions = ["150", "180"]; break;
 			case "em.save_to_csv":
 				dimensions = ["140", "165"]; break;
 			default: 

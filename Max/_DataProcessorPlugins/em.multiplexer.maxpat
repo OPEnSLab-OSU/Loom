@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 716.0, 79.0, 669.0, 722.0 ],
+		"rect" : [ 716.0, 79.0, 406.0, 722.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -4440,7 +4440,7 @@
 					"outlettype" : [ "list", "list", "", "", "", "" ],
 					"patching_rect" : [ 28.0, 261.0, 150.0, 68.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 295.0, 655.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 440.0, 655.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -4891,6 +4891,8 @@
 			}
 , 			{
 				"name" : "runningAvg.maxpat",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
+				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4900,42 +4902,6 @@
 			}
 , 			{
 				"name" : "OSC-route.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "iter.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "split.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "unjoin.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "join.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "append.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "metro.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "timer.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "line.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "regexp.mxo",
 				"type" : "iLaX"
 			}
  ],

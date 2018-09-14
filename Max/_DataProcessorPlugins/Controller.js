@@ -36,6 +36,7 @@ var blue_val  = 0;
 
 // --- Generic variables ---
 var act_port = 0;
+var act_port2 = 0;
 var act_num  = 0;
 
 var val0 = 0;
@@ -44,6 +45,7 @@ var val2 = 0;
 var val3 = 0;
 var val4 = 0;
 
+var act_port2_in_use = false; 
 
 
 
@@ -299,6 +301,15 @@ function set_act_port(i)
 	else outlet(1, i + ' is an invalid port number');
 }
 
+function set_act_port2(i) 		
+{ 		
+	if (verify(i, 0, 12)) {
+		act_port2 = i;
+		act_port2_in_use = true; 		
+	}
+	else outlet(1, i + ' is an invalid port number');		
+}
+
 // Set actuator number in chain 
 function set_act_num(i) 
 { 
@@ -336,6 +347,9 @@ function relay_cmd()
 function servo_cmd()
 {
 	send( build_msg( '/Servo/Set', [act_port, val0] ) );
+	if (act_port2_in_use) {		
+ 		send( build_msg( '/Servo/Set', [act_port2, val1] ) );		
+ 	}
 }
 
 // Output command to set stepper
