@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 271.0, 79.0, 929.0, 787.0 ],
+		"rect" : [ 271.0, 79.0, 666.0, 787.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -781,8 +781,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-									"fontsize" : [ 12.059008 ]
+									"fontsize" : [ 12.059008 ],
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -968,7 +968,7 @@
 				"box" : 				{
 					"id" : "obj-28",
 					"maxclass" : "number",
-					"maximum" : 160,
+					"maximum" : 155,
 					"minimum" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 2,
@@ -993,7 +993,7 @@
 					"patching_rect" : [ 564.75, 167.833374, 63.0, 63.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 84.824181, 72.844688, 50.310623, 50.310623 ],
-					"size" : 161.0,
+					"size" : 156.0,
 					"style" : ""
 				}
 
@@ -1106,7 +1106,7 @@
 					"outlettype" : [ "list", "list", "", "", "", "" ],
 					"patching_rect" : [ 28.0, 261.0, 150.0, 68.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 295.0, 655.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 440.0, 655.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -1481,10 +1481,6 @@
 				"name" : "OSC-route.mxo",
 				"type" : "iLaX"
 			}
-, 			{
-				"name" : "dial.mxo",
-				"type" : "iLaX"
-			}
  ],
 		"autosave" : 0,
 		"styles" : [ 			{
@@ -1517,8 +1513,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-					"fontsize" : [ 12.059008 ]
+					"fontsize" : [ 12.059008 ],
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
