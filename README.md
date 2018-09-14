@@ -44,7 +44,7 @@
 
 6. [32u4 Limitations](#32u4-limitations)
 
-7. ## [Other Notes](#other-notes)
+7. [Other Notes](#other-notes)
 
 ## Processors
 
