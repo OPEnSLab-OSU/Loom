@@ -13,7 +13,7 @@
 // ================================================================
 #define INTERRUPT_PIN 11
 
-#define i2c_addr_mpu6050 0x68				//0x68, 0x69
+#define i2c_addr_mpu6050 0x69				//0x68, 0x69
 
 
 // ================================================================ 
@@ -372,8 +372,9 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 
 	bool freefall = false;
 	// Evaluate if accelerometers are all around zero-G, if so, set freefall bool to true
-	if ((axf > -0.2 && axf < 0.2) && (ayf > -0.2 && ayf < 0.2) && (azf > -0.2 && azf < 0.2))
+	if ((axf > -0.2 && axf < 0.2) && (ayf > -0.2 && ayf < 0.2) && (azf > -0.2 && azf < 0.2)) {
 		freefall = true;
+	}
 	
 	// Assemble UDP Packet
 	// IP1 IP2 Yaw Pitch Roll aX aY aZ gX gY gZ vBatt
@@ -398,7 +399,7 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	bndl->add(address_string).add((float)gz / 16000);
 	
 	sprintf(address_string, "%s%s", packet_header_string, "/freefall");
-	bndl->add(address_string).add(freefall);
+	bndl->add(address_string).add( (freefall) ? (int32_t)1 : (int32_t)0);
 }
 
 
