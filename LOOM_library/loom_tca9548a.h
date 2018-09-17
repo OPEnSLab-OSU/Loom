@@ -145,11 +145,14 @@ void measure_sensor_data(uint8_t i2c_addr)
 			measure_mb1232(); return;
 		}
 	#endif
-	#ifdef i2c_addr_mpu6050
-		if (((i2c_addr == 0x68) || (i2c_addr == 0x69)) && setup_mpu6050()) {
-			measure_mpu6050(); return;
-		}
-	#endif
+	// #ifdef i2c_addr_mpu6050
+	// 	#if is_rtc == 1
+	// 		return;
+	// 	#endif
+	// 	if (((i2c_addr == 0x68) || (i2c_addr == 0x69)) && setup_mpu6050()) {
+	// 		measure_mpu6050(); return;
+	// 	}
+	// #endif
 	
 	#ifdef i2c_addr_ms5803
 		if ((i2c_addr == 0x77)  && setup_ms5803()) {
@@ -243,14 +246,17 @@ void package_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_s
 					}
 					return;
 			#endif
-			#ifdef i2c_addr_mpu6050		
-				case 0x68: case 0x69:
-					if (setup_mpu6050()) {
-						measure_mpu6050();
-						package_mpu6050(bndl, packet_header_string, port);
-					} 
-					return;
-			#endif
+			// #ifdef i2c_addr_mpu6050	
+			// 	#if is_rtc == 1
+			// 		return;
+			// 	#endif
+			// 	case 0x68: case 0x69:
+			// 		if (setup_mpu6050()) {
+			// 			measure_mpu6050();
+			// 			package_mpu6050(bndl, packet_header_string, port);
+			// 		} 
+			// 		return;
+			// #endif
 			#ifdef i2c_addr_ms5803		
 				case 0x77:
 					if (setup_ms5803()) {
@@ -407,8 +413,9 @@ void update_sensors()
 	for (uint8_t t=0; t<8; t++){
 		tcaseselect(t);
 		for (uint8_t i2c_addr = 0; i2c_addr<=127; i2c_addr++) {
-			if (i2c_addr == i2c_addr_tca9548a)
+			if ((i2c_addr == i2c_addr_tca9548a) || (i2c_addr == 0x68)) { // skip Multiplexer and 0x68 (MPU and RTC)
 				continue;
+			}
 
 			#ifdef is_32u4
 				uint8_t data;
@@ -479,8 +486,10 @@ void get_sensors(OSCBundle *bndl, char packet_header_string[])
 				msg.add("sht31d"); 			break;
 			case 0x70:
 				msg.add("mb1232"); 			break;
-			case 0x68: case 0x69:
-				msg.add("mpu6050"); 		break;
+			// #if is_rtc != 1
+			// 	case 0x68: case 0x69:
+			// 		msg.add("mpu6050"); 		break;
+			// #endif
 			case 0x77:
 				msg.add("ms5803"); 			break;
 			case 0x19:

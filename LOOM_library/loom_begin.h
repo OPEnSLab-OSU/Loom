@@ -202,10 +202,6 @@ void Loom_begin()
 	#endif
 
 
-	#if is_mpu6050 == 1 && is_ishield == 1
-		calMPU6050();                                 // Calibration writes memValidationValue for us
-	#endif
-
 
 	LOOM_DEBUG_Println("\n= = = = = Setup Complete = = = = =\n");
 

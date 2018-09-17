@@ -133,6 +133,10 @@ void check_button_held()
 #ifdef is_sleep_period
 void loop_sleep()
 {
+	#if is_multiplexer == 1
+		return;
+	#endif
+
 	#if LOOM_DEBUG == 0
 		int sleepMS = Watchdog.sleep(is_sleep_period); // Sleep MCU for transmit period duration
 	#else // don't actually sleep if Debug mode on

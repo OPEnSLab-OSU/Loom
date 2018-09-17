@@ -43,6 +43,8 @@ void setup_relay()
 {
 	pinMode(relay_pin, OUTPUT);
 	state_relay.on = false;
+	digitalWrite(relay_pin, LOW);
+
 }
 
 

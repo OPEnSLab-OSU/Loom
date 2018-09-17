@@ -637,6 +637,39 @@ void original_convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string)
 // ===            CONVERSION BETWEEN BUNDLE FORMATS             ===
 // ================================================================
 
+// void aux_convert_bundle_structure_to_single(OSCBundle *bndl, OSCBundle *outBndl)
+// {
+// 	char address[50];
+// 	bndl->getOSCMessage(0)->getAddress(address);
+// 	snprintf(address, strrchr(address,'/')-address+1, "%s", address);
+// 	sprintf(address, "%s%s", address, "/data");
+// 	OSCMessage newMsg = OSCMessage(address);
+// 	OSCMessage* msg;     // Temporarily hold message of bundle
+	
+// 	// Copy data of messages into new bundle
+// 	for (int i = 0; i < bndl->size(); i++) {
+// 		msg = bndl->getOSCMessage(i); 	// Get ith messsage
+
+// 		// Get ith messsage key and add to new message
+// 		char tmpBuf[50], keyBuf[50];
+// 		msg->getAddress(tmpBuf);
+// 		strncpy(keyBuf, strrchr(tmpBuf,'/')+1, 49);
+// 		newMsg.add(keyBuf);
+
+// 		// Get ith message data and add to new message
+// 		switch (msg->getType(0)) {
+// 			case 'f': newMsg.add(msg->getFloat(0));	break;
+// 			case 'i': newMsg.add(msg->getInt(0));	break;
+// 			case 's': char buf[256];  msg->getString(0, buf, 256);  newMsg.add(buf);  break;
+// 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
+// 		}
+// 	}
+// 	outBndl->add(newMsg);
+// }
+
+// void aux_convert_message_structure_to_single(OSCMessage *msg, OSCMessage *outMsg);
+
+
 void aux_convert_bundle_structure_to_single(OSCBundle *bndl, OSCBundle *outBndl)
 {
 	char address[50];
@@ -648,24 +681,55 @@ void aux_convert_bundle_structure_to_single(OSCBundle *bndl, OSCBundle *outBndl)
 	
 	// Copy data of messages into new bundle
 	for (int i = 0; i < bndl->size(); i++) {
+
 		msg = bndl->getOSCMessage(i); 	// Get ith messsage
 
-		// Get ith messsage key and add to new message
-		char tmpBuf[50], keyBuf[50];
-		msg->getAddress(tmpBuf);
-		strncpy(keyBuf, strrchr(tmpBuf,'/')+1, 49);
-		newMsg.add(keyBuf);
+		// If the message only has one value
+		if (msg->size() == 1) {
+			// Get ith messsage key and add to new message
+			char tmpBuf[50], keyBuf[50];
+			msg->getAddress(tmpBuf);
+			strncpy(keyBuf, strrchr(tmpBuf,'/')+1, 49);
+			newMsg.add(keyBuf);
 
-		// Get ith message data and add to new message
-		switch (msg->getType(0)) {
-			case 'f': newMsg.add(msg->getFloat(0));	break;
-			case 'i': newMsg.add(msg->getInt(0));	break;
-			case 's': char buf[256];  msg->getString(0, buf, 256);  newMsg.add(buf);  break;
-			default: LOOM_DEBUG_Println("Unsupported data data_type.");
-		}
-	}
+			// Get ith message data and add to new message
+			switch (msg->getType(0)) {
+				case 'f': newMsg.add(msg->getFloat(0));	break;
+				case 'i': newMsg.add(msg->getInt(0));	break;
+				case 's': char buf[256];  msg->getString(0, buf, 256);  newMsg.add(buf);  break;
+				default: LOOM_DEBUG_Println("Unsupported data data_type.");
+			}
+
+		// If the message has multiple keys and values
+		} else if (msg->size() > 1) { 
+
+			char addr_buf[50], addr_end[20];
+			osc_extract_header_section(msg, 5, addr_end);
+			osc_extract_header_from_section(msg, 3, addr_buf); 
+
+			// If in multiplexer format
+			if ( strcmp("data", addr_end) == 0) {
+				addr_buf[ strlen((char*)addr_buf)-5 ] = '\0';
+			} 
+
+			for (int i = 0; i < msg->size(); i+=2) {
+				newMsg.add( ( String(addr_buf+1) + "/" + get_data_value(msg, i) ).c_str());
+				switch (msg->getType(i+1)) {
+					case 'f': newMsg.add(msg->getFloat(i+1));	break;
+					case 'i': newMsg.add(msg->getInt(i+1));	break;
+					case 's': char buf[256];  msg->getString(i+1, buf, 256);  newMsg.add(buf);  break;
+					default: LOOM_DEBUG_Println("Unsupported data data_type.");
+				}
+			}
+
+		} // of if-else
+	} // of for
 	outBndl->add(newMsg);
 }
+
+
+
+// This function should support the multiplexer complex bundles as well
 
 void aux_convert_bundle_structure_to_multi(OSCBundle *bndl, OSCBundle *outBndl)
 {
@@ -728,16 +792,7 @@ void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructu
 		LOOM_DEBUG_Println("Bundle has no valid contents, cannot be converted");
 	}
 	
-	// If already in requested message format
-
-// Seemed to actually cause issues when bundle only had one piece of data
-	// if ((format == SINGLEMSG) && (bndl->size() == 1)) { 
-	// 	// LOOM_DEBUG_Println("Bundle already in single-message format");
-	// 	deep_copy_bundle(bndl, outBndl);
-	// 	return;
-	// }
 	if ((format == MULTIMSG) && (bndl->size() > 1)) {
-		// LOOM_DEBUG_Println("Bundle already in multi-message format");
 		deep_copy_bundle(bndl, outBndl);
 		return; 
 	}

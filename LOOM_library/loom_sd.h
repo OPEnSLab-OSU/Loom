@@ -341,6 +341,8 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 				OSCMessage *msg;
 				OSCBundle tmpBndl;
 				convert_bundle_structure(bndl, &tmpBndl, SINGLEMSG);
+				// LOOM_DEBUG_Println("Converted Bundle:");
+				// print_bundle(&tmpBndl);
 
 				switch(sdFile.position()) {
 					case 0 : // Create Header

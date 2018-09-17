@@ -57,7 +57,7 @@ function new_family(f) {
 
 // New family number (subnet) was set
 function new_family_num(i) {
-	if (verify(i, 0, 9)) {
+	if (verify(i, 0, 12)) {
 		family_num = i;
 		subnet_prefix = '/' + family + family_num;
 	}
