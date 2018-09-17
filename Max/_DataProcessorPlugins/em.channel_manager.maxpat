@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 338.0, 79.0, 910.0, 821.0 ],
+		"rect" : [ 338.0, 79.0, 647.0, 821.0 ],
 		"bgcolor" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -9454,7 +9454,7 @@
 				"box" : 				{
 					"id" : "obj-75",
 					"maxclass" : "number",
-					"maximum" : 9,
+					"maximum" : 12,
 					"minimum" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 2,

@@ -153,7 +153,7 @@ function new_family(f)
 // Set family number
 function new_family_num(i)
 {
-	if (verify(i, 0, 9)) {
+	if (verify(i, 0, 12)) {
 		family_num = i; 
 		subnet_port = global_port + 10*family_num;
 		device_port = subnet_port + inst_num;

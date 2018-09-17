@@ -88,7 +88,32 @@ void set_servo_degree(int set_degree, int servo_choice)
 {
 	uint16_t pulselength = map(set_degree, 0, 180, SERVOMIN, SERVOMAX);
 	
-	state_servo.pwm.setPWM(servo_choice, 0, pulselength);
+	
+	// state_servo.pwm.setPWM(servo_choice, 0, pulselength);
+
+
+	// for (uint16_t pulselen = SERVOMIN; pulselen < SERVOMAX; pulselen++) {
+	// 	state_servo.pwm.setPWM(servo_choice, 0, pulselength);
+	// }
+
+
+
+
+	if (set_degree < state_servo.predeg[servo_choice]) {		 
+		for (double pulselen = state_servo.pre_pulselength[servo_choice]; pulselen >= pulselength; pulselen--) {		
+			state_servo.pwm.setPWM(servo_choice, 0, pulselen);		
+		}		
+	}		
+
+ 	//When input degree is greater than previous degree, it increases		
+	if (set_degree > state_servo.predeg[servo_choice]) {		
+ 		for (double pulselen = state_servo.pre_pulselength[servo_choice]; pulselen < pulselength; pulselen++) {		
+			state_servo.pwm.setPWM(servo_choice, 0, pulselen);		
+ 		}		
+	}		
+
+	state_servo.predeg[servo_choice]          = set_degree;		
+	state_servo.pre_pulselength[servo_choice] = pulselength;
 
 }
 
