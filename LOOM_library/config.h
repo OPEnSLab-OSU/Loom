@@ -39,7 +39,7 @@
 // ===                      SERIAL OPTIONS                      === 
 // ================================================================
 // --- Debugging --- 
-#define LOOM_DEBUG    1			// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG    0			// Set to 1 if you want Serial statements from various functions to print
 								// NOTE: Serial monitor must be opened for device to setup if this is enabled
 								//   Device will freeze if this in abled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
@@ -99,7 +99,7 @@
 #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
 
 // --- RTC Options ---
-#define is_rtc        1		// Enable RTC functionality
+#define is_rtc        0		// Enable RTC functionality
 #if is_rtc == 1
 	#define RTC_pin 6
 
@@ -109,7 +109,7 @@
 #endif
 
 // --- SD Options ---
-#define is_sd         1		// 1 to enable SD card 
+#define is_sd         0		// 1 to enable SD card 
 #if is_sd == 1
 	// Currently works by only sending a bundle from 
 	// Does NOT automatically upload save to SD
@@ -252,7 +252,7 @@
 #if is_ishield == 1
 	#define is_button     1			// 1 to enable button
 	#define button_pin    10		// Pin that the button uses
-	#define is_mpu6050    0 		// Enables MPU6050 on Ishield
+	#define is_mpu6050    1 		// Enables MPU6050 on Ishield
 	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 
 	#define is_analog     1
 
@@ -398,9 +398,9 @@
 	#include <Ethernet2.h>				// (this is needed for IPAddress object below, do not remove)
 	
 	//Use this for OPEnS Lab
-	// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
+	byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
 
-	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // mac address of Ethernet Luke's port
+	// byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // MAC address of Ethernet Luke's port
 	
 	IPAddress ip(128,193,56,138); 						  // device's IP address  				try to make this a string, so #include can be move to ethernet file
 #endif
