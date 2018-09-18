@@ -637,38 +637,6 @@ void original_convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string)
 // ===            CONVERSION BETWEEN BUNDLE FORMATS             ===
 // ================================================================
 
-// void aux_convert_bundle_structure_to_single(OSCBundle *bndl, OSCBundle *outBndl)
-// {
-// 	char address[50];
-// 	bndl->getOSCMessage(0)->getAddress(address);
-// 	snprintf(address, strrchr(address,'/')-address+1, "%s", address);
-// 	sprintf(address, "%s%s", address, "/data");
-// 	OSCMessage newMsg = OSCMessage(address);
-// 	OSCMessage* msg;     // Temporarily hold message of bundle
-	
-// 	// Copy data of messages into new bundle
-// 	for (int i = 0; i < bndl->size(); i++) {
-// 		msg = bndl->getOSCMessage(i); 	// Get ith messsage
-
-// 		// Get ith messsage key and add to new message
-// 		char tmpBuf[50], keyBuf[50];
-// 		msg->getAddress(tmpBuf);
-// 		strncpy(keyBuf, strrchr(tmpBuf,'/')+1, 49);
-// 		newMsg.add(keyBuf);
-
-// 		// Get ith message data and add to new message
-// 		switch (msg->getType(0)) {
-// 			case 'f': newMsg.add(msg->getFloat(0));	break;
-// 			case 'i': newMsg.add(msg->getInt(0));	break;
-// 			case 's': char buf[256];  msg->getString(0, buf, 256);  newMsg.add(buf);  break;
-// 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
-// 		}
-// 	}
-// 	outBndl->add(newMsg);
-// }
-
-// void aux_convert_message_structure_to_single(OSCMessage *msg, OSCMessage *outMsg);
-
 
 void aux_convert_bundle_structure_to_single(OSCBundle *bndl, OSCBundle *outBndl)
 {

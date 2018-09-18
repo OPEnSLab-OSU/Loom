@@ -531,9 +531,9 @@ void wifi_check_status()
 		status = WiFi.status();					// It has changed, update the variable
 		
 		#if LOOM_DEBUG == 1
-			if (status == WL_AP_CONNECTED) { 	// A device has connected to the AP
+			if (status == WL_AP_CONNECTED) { 	// A computer has connected to the AP
 				print_remote_mac_addr();                            
-			} else {							// A device has disconnected from the AP, and we are back in listening mode 
+			} else {							// A computer has disconnected from the AP, and we are back in listening mode 
 				LOOM_DEBUG_Println("Device disconnected from AP");
 			}
 		#endif

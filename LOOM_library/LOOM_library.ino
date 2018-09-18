@@ -33,7 +33,7 @@ void setup()
 // ================================================================ 
 void loop() 
 {
-	OSCBundle bndl, send_bndl;
+	// OSCBundle bndl, send_bndl;
 
 	// receive_bundle(&bndl, WIFI);
 	// if (bndl.size()) {
@@ -41,29 +41,29 @@ void loop()
 	// }
 	// process_bundle(&bndl);
 
-	measure_sensors();
-	package_data(&send_bndl);
-	LOOM_DEBUG_Println("Original Bundle:");
-	print_bundle(&send_bndl);
+	// measure_sensors();
+	// package_data(&send_bndl);
+	// LOOM_DEBUG_Println("Original Bundle:");
+	// print_bundle(&send_bndl);
 
 
-	#if is_sd == 1
-		log_bundle(&send_bndl, SDCARD, "ishield.csv");
-	#endif
+	// #if is_sd == 1
+		// log_bundle(&send_bndl, SDCARD, "ishield2.csv");
+	// #endif
 
-	// print_time();
+	// // print_time();
 
-	convert_bundle_structure(&send_bndl, &bndl, SINGLEMSG);
-	LOOM_DEBUG_Println("Converted Bundle:");
-	print_bundle(&bndl);
-
-
-	// LOOM_DEBUG_Println("DONE");
-
-	additional_loop_checks();
+	// convert_bundle_structure(&send_bndl, &bndl, SINGLEMSG);
+	// LOOM_DEBUG_Println("Converted Bundle:");
+	// print_bundle(&bndl);
 
 
-	delay(1000);
+	// // LOOM_DEBUG_Println("DONE");
+
+	// additional_loop_checks();
+
+
+	// delay(250);
 
 	// x++;
 
@@ -75,21 +75,21 @@ void loop()
 	// LOOM_DEBUG_Println("*");
 
 	// --- Common Example ---
-	// OSCBundle bndl, send_bndl;
+	OSCBundle bndl, send_bndl;
 
-	// receive_bundle(&bndl, WIFI);
-	// if (bndl.size()) {
-	// 	print_bundle(&bndl);
-	// }
-	// process_bundle(&bndl);
-	// // log_bundle(&bndl, PUSHINGBOX);
+	receive_bundle(&bndl, WIFI);
+	if (bndl.size()) {
+		print_bundle(&bndl);
+	}
+	process_bundle(&bndl);
+	// log_bundle(&bndl, PUSHINGBOX);
 
-	// measure_sensors();
-	// package_data(&send_bndl);
-	// send_bundle(&send_bndl, WIFI);
+	measure_sensors();
+	package_data(&send_bndl);
+	send_bundle(&send_bndl, WIFI);
 
-	// additional_loop_checks();
-	// // --- End Example ---
+	additional_loop_checks();
+	// --- End Example ---
 
 }
 
