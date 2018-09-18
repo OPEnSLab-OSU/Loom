@@ -33,13 +33,14 @@ void loop()
 	// --- Common Example ---
 	OSCBundle bndl, send_bndl;
 
+	// Get and process messages
 	receive_bundle(&bndl, WIFI);
 	if (bndl.size()) {
 		print_bundle(&bndl);
 	}
 	process_bundle(&bndl);
-	// log_bundle(&bndl, PUSHINGBOX);
 
+	// Measure and send data
 	measure_sensors();
 	package_data(&send_bndl);
 	send_bundle(&send_bndl, WIFI);
