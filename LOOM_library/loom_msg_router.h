@@ -88,7 +88,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 
 	#if is_sd == 1
 		// Set whether or not to log received bundles to SD card
-		if (msg.dispatch("/setSDlogging",	 	set_SD_logging, 		addrOffset) ) return;
+		if (msg.dispatch("/EnableSD",	 	set_SD_logging, 		addrOffset) ) return;
 	#endif
 	
 

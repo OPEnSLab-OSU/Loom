@@ -61,7 +61,7 @@
 											// 1: Permits the code to compile and the device will skip functionality
 											//     of platforms / devices that are not enabled, informing the user of such
 
-#define display_config 1		// 1 to print the uploaded configuration at start of setup
+#define display_config 1		// 1 to print the uploaded configuration at start of setup, 0 to not
 
 // ================================================================ 
 // ===                  DEVICE TELEMETRY TYPE                   === 
@@ -75,8 +75,8 @@
 // ================================================================
 // Enable specified devices, typically mutually exclusive
 // Further options in the advanced settings
-#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
+#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -84,11 +84,11 @@
 // ================================================================ 
 // ===                 COMMUNICATION PLATFORMS                  === 
 // ================================================================
-#define is_wifi       0		// 1 to enable WiFi
+#define is_wifi       1		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
-#define is_fona       0		// 1 to enable cellular via Fona (808)
+#define is_fona       0		// 1 to enable cellular via Fona (808 version)
 #define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
 
@@ -114,8 +114,10 @@
 	// Currently works by only sending a bundle from 
 	// Does NOT automatically upload save to SD
 	// This works more like a filter than an automator
-	#define sdMillisFilter   1 	// 1 to enable a millis delay to SD 
+	#define sdMillisFilter   0 	// 1 to enable a millis delay to SD 
 	#define sdMillisDelay    3  // delay in seconds
+
+	#define sdBroadcastSave  1  // 1 to broadcast on communication platforms when data is saved, 0 to not
 #endif
 
 // ================================================================ 
@@ -126,7 +128,7 @@
 #define num_steppers  0		// Number of stepper motors being used 
 #define is_relay      0		// 1 if a relay is being used
 #if is_relay == 1
-	#define relay_pin 10	// Digital pin connected to the relay
+	#define relay_pin 10	// Digital pin connected to the relay enable 
 #endif
 
 
@@ -206,12 +208,12 @@
 #define enable_hub_scripts 0
 
 // --- Advanced Interdev Communication ---
-#define advanced_interdev_comm   0	// Used for Max-like functionality
+#define advanced_interdev_comm   0	// 1 to use Max-like functionality
 #define build_actuator_cmd_funcs 0  // 1 to include file to make commands for Loom actuators
 
 
 
-// --- Set Instance Number and UDP Port ---
+// --- Set Custom Instance Number and UDP Port ---
 // If not using channels, then the following 
 // intial instance number and port (if WiFi) will be used
 // Interdevice communication is undefined and less supported
@@ -250,7 +252,7 @@
 #if is_ishield == 1
 	#define is_button     1			// 1 to enable button
 	#define button_pin    10		// Pin that the button uses
-	#define is_mpu6050    1 		// Enables MPU6050 on Ishield
+	#define is_mpu6050    0 		// Enables MPU6050 on Ishield
 	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 
 	#define is_analog     1
 
@@ -260,7 +262,7 @@
 		#define NEO_2     1			// Port 2 (A2, port closest to MPU6050)
 	#endif  
 
-	#define is_analog_a0 1
+	#define is_analog_a0 1			// 1 to enable Feather A_ ports as analog inputs 
 	#define is_analog_a1 1
 	#define is_analog_a2 0
 	#define is_analog_a3 0
@@ -461,14 +463,14 @@
 	// log_bundle/sendToPushingBox if the delay has passed
 	// Does NOT automatically upload a bundle, you still have to call sendToPushingBox
 	// This works more like a filter than an automator
-	#define pushMillisFilter   0 	// 1 to enable a millis delay to uploading to PushingBox
+	#define pushMillisFilter   1 	// 1 to enable a millis delay to uploading to PushingBox
 	#define pushMillisDelay    5  	// delay in seconds
 #endif
 
 
 // --- Adafruit IO Options ---
 #if is_adafruitio == 1
-	#define AIO_USERNAME    "Goertzel"
+	#define AIO_USERNAME    ""
 	#define AIO_KEY         ""
 #endif
 
@@ -477,6 +479,7 @@
 #if is_sd
 	// Timestamp formatting options:
 	// 0: none, 1: date, 2: time, 3: date+time two fields, 4: data+time combined field
+	// Times are only added if RTC is also enabled
 	#define sd_save_time_format 3
 #endif
 

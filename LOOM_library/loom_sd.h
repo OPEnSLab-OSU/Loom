@@ -32,7 +32,7 @@
 #endif
 
 File sdFile;
-int  SD_logging = 0; // 0: off, 1: log bundles received
+bool SD_logging = true; // 0: off, 1: log bundles received
 bool SD_working;
 
 // ================================================================ 
@@ -67,6 +67,7 @@ void setup_sd()
 {
 	LOOM_DEBUG_Print("Initializing SD card...");
 
+	// Remove the #if if you are using a LoRa M0, but don't have LoRa enabled
 	#if is_lora == 1
 		digitalWrite(8, HIGH); 	// if using LoRa
 	#endif
@@ -96,7 +97,7 @@ void setup_sd()
 // 
 void sd_delete_file(char* file) 
 {
-	if (!SD_working) return;
+	if ( (!SD_working) || (!SD_logging) ) return;
 
 	SD.remove(file);
 }
@@ -110,7 +111,7 @@ void sd_delete_file(char* file)
 // 
 void sd_empty_file(char* file)
 {
-	if (!SD_working) return;
+	if ( (!SD_working) || (!SD_logging) ) return;
 
 	SD.remove(file);
 	sdFile = SD.open(file, FILE_WRITE);
@@ -124,7 +125,7 @@ void sd_empty_file(char* file)
 // 
 void sd_list_files()
 {
-	if (!SD_working) return;
+	if ( (!SD_working) || (!SD_logging) ) return;
 
 	printDirectory(SD.open("/"), 0);
 }
@@ -462,7 +463,25 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 		LOOM_DEBUG_Println2("Error opening: ", file);
 		return false;
 	}
+
 	sdFile.close();
+
+	#if sdBroadcastSave == 1 
+		#if is_wifi == 1
+			OSCBundle out_bndl;
+			out_bndl.empty();
+			char address_string[80];
+			sprintf(address_string, "%s%s", packet_header_string, "/SD_save");
+			out_bndl.add(address_string);
+			// wifi_send_bundle(&out_bndl, configuration.config_wifi->devicePort);
+			// configuration.config_wifi.subnetPort
+			wifi_send_bundle(&out_bndl, config_wifi->devicePort);
+
+			out_bndl.empty();		// Empty the bundle to free room for a new one
+		#endif
+		// Maybe add LoRa / nRF here late
+	#endif
+
 	return true;
 }
 
@@ -478,18 +497,16 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 //
 void set_SD_logging(OSCMessage &msg)
 {
-	if (!SD_working) return;
-
 	int setting = msg.getInt(0);
 
 	switch (setting) {
 		case 0:
-			SD_logging = 0;
-			LOOM_DEBUG_Println("Disabled SD logging");
+			SD_logging = false;
+			LOOM_DEBUG_Println("Disabled SD");
 			break;
 		case 1:
-			SD_logging = 1;
-			LOOM_DEBUG_Println("Enabled SD logging of received bundles");
+			SD_logging = true;
+			LOOM_DEBUG_Println("Enabled SD");
 			break;
 		#if LOOM_DEBUG == 1
 		default:
@@ -506,7 +523,7 @@ void set_SD_logging(OSCMessage &msg)
 //
 void printDirectory(File dir, int numTabs) 
 {
-	if (!SD_working) return;
+	if ( (!SD_working) || (!SD_logging) ) return;
 
 	while (true) {
 		File entry =  dir.openNextFile();

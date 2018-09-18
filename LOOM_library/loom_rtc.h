@@ -87,18 +87,33 @@ void setup_rtc() {
 		while (1);
 	}
 
+	#if LOOM_DEBUG == 1
+		print_time();
+		LOOM_DEBUG_Println();
+	#endif
+
 	// The following section checks if RTC is running, else sets 
 	// the time to the time that the sketch was compiled
 	#if is_rtc3231 == 1
 		// This may end up causing a problem in practice - what if RTC looses power in field? Shouldn't happen with coin cell batt backup
 		if (rtc_inst.lostPower()) {
-			LOOM_DEBUG_Println("RTC lost power, lets set the time!");
+			LOOM_DEBUG_Println("RTC lost power, setting the time to compile time");
 			rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
+			#if LOOM_DEBUG == 1
+				LOOM_DEBUG_Println("Time set to:");
+				print_time();
+			#endif
 		}
+
 	#elif is_rtc8523 == 1
 		if (!rtc_inst.initialized()) {
-			LOOM_DEBUG_Println("RTC is NOT running!");
+			LOOM_DEBUG_Println("RTC was not initialized, setting the time to compile time");
 			rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
+			#if LOOM_DEBUG == 1
+				LOOM_DEBUG_Println("Time set to:");
+				print_time();
+				LOOM_DEBUG_Println();
+			#endif
 		}
 	#endif
 
@@ -120,9 +135,9 @@ void setup_rtc() {
 	#endif	
 
 	// Query Time and print
-	#if LOOM_DEBUG == 1
-		print_time();
-	#endif
+	// #if LOOM_DEBUG == 1
+	// 	print_time();
+	// #endif
 
 }
 
