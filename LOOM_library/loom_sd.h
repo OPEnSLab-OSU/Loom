@@ -27,7 +27,7 @@
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 
-#if sdMillisFilter == 1 
+#if sdSaveFilter == 1 
 	unsigned long lastSdMillis, currentSdMillis;  
 #endif
 
@@ -245,15 +245,15 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 {
 	if (!SD_working) return false;
 
-	// Only save if a minimum time (sdMillisDelay seconds) has passed since last save
-	#if sdMillisFilter == 1
+	// Only save if a minimum time (sdSaveMinDelay seconds) has passed since last save
+	#if sdSaveFilter == 1
 		currentSdMillis = millis();
-		if ( (currentSdMillis - lastSdMillis) < (1000*sdMillisDelay) ) {
+		if ( (currentSdMillis - lastSdMillis) < (1000*sdSaveMinDelay) ) {
 			return false; // has not been long enough yet, just return
 		} else {
 			lastSdMillis = currentSdMillis;
 		}
-	#endif // of pushMillisFilter
+	#endif // of pushUploadFilter
 
 
 	#if is_lora == 1
@@ -310,15 +310,15 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 {
 	if (!SD_working) return false;
 
-	// Only save if a minimum time (sdMillisDelay seconds) has passed since last save
-	#if sdMillisFilter == 1
+	// Only save if a minimum time (sdSaveMinDelay seconds) has passed since last save
+	#if sdSaveFilter == 1
 		currentSdMillis = millis();
-		if ( (currentSdMillis - lastSdMillis) < (1000*sdMillisDelay) ) {
+		if ( (currentSdMillis - lastSdMillis) < (1000*sdSaveMinDelay) ) {
 			return false; // has not been long enough yet, just return
 		} else {
 			lastSdMillis = currentSdMillis;
 		}
-	#endif // of pushMillisFilter
+	#endif // of pushUploadFilter
 
 
 	#if is_lora == 1
