@@ -59,7 +59,7 @@ void Loom_begin()
 	
 
 	// Setup sensors and actuators by calling the respective setups
-	#if (num_analog > 0) || (is_m0 == 1)
+	#if (is_analog == 1) || (is_m0 == 1)
 		setup_analog();
 	#endif
 	#if is_multiplexer == 1
@@ -68,7 +68,7 @@ void Loom_begin()
 	#if is_decagon == 1
 		setup_decagon(); 
 	#endif
-	#if is_mpu6050 > 0 && is_ishield == 1
+	#if is_mpu6050 == 1
 		setup_mpu6050();
 	#endif 
 	#if is_max31856 == 1

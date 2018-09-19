@@ -153,7 +153,7 @@ void measure_sensors()
 	#endif
 	
 	// Update MPU6050 Data
-	#if is_ishield == 1 && is_mpu6050 == 1
+	#if is_mpu6050 == 1
 		measure_mpu6050();      // Now measure MPU6050, update values in global registers 
 	#endif 
 
@@ -256,9 +256,9 @@ void package_data(OSCBundle *send_bndl)
 	#endif //is_multiplexer
 
 	// Update MPU6050 Data
-	#if is_ishield == 1 && is_mpu6050 == 1
+	#if is_mpu6050 == 1
 		package_mpu6050(send_bndl, configuration.packet_header_string, 0);
-	#endif //is_ishield && is_mpu6050
+	#endif //is_mpu6050
 
 	#if is_max31856 == 1
 		package_max31856(send_bndl, configuration.packet_header_string);

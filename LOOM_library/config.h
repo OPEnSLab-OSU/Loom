@@ -30,7 +30,7 @@
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
 #define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
 #define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
-#define REQUEST_SETTINGS 0		// 1 t	o request channel settings from Max Channel Manager, 0 to not
+#define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
 
@@ -39,9 +39,9 @@
 // ===                      SERIAL OPTIONS                      === 
 // ================================================================
 // --- Debugging --- 
-#define LOOM_DEBUG    0			// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG    1			// Set to 1 if you want Serial statements from various functions to print
 								// NOTE: Serial monitor must be opened for device to setup if this is enabled
-								//   Device will freeze if this in abled and device does not get plugged into Serial
+								//   Device will freeze if this in enabled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
 #define dynamic_serial_output 0 // These only apply if LOOM_DEBUG is enabled
@@ -53,7 +53,7 @@
 								//   - Note that you probably want to have the serial monitor open before uploading to the device, else you may miss 
 								//     the first Serial prints, as enabling this option means that the device does not wait for you to open Serial
 
-#define wake_delay 0			// 1 to enable wait 5 seconds upon awaking from sleep to (re)start Serial
+#define wake_delay 0			// 1 to enable wait 5 seconds upon awaking from sleep to (re)start Serial before program continue (useful for reprogramming if device quickly goes back to sleep)
 
 
 #define prevent_platform_compile_error 1  	// 0: Allow errors to be triggered if the program calls 
@@ -75,7 +75,9 @@
 // ================================================================
 // Enable specified devices, typically mutually exclusive
 // Further options in the advanced settings
-#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
+// Can override settings defined before the aggregate devices
+
+#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
 #define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
@@ -89,19 +91,19 @@
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808 version)
-#define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
+// #define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
 
 // ================================================================ 
 // ===                  DATA LOGGING PLATFORMS                  === 
 // ================================================================
 #define is_pushingbox 0		// 1 to enable PushingBox  
-#define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi)
+// #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi) [not much support yet]
 
 // --- RTC Options ---
 #define is_rtc        0		// Enable RTC functionality
 #if is_rtc == 1
-	#define RTC_pin 6
+	#define RTC_pin 6		// What pin the RTC interrupt is connected to
 
 	// Select only one of the below options
 	#define is_rtc3231 0 	// RTC DS 3231 Featherwing
@@ -112,17 +114,19 @@
 #define is_sd         0		// 1 to enable SD card 
 #if is_sd == 1
 	// Currently works by only sending a bundle from 
-	// Does NOT automatically upload save to SD
+	// Does NOT automatically save to SD
 	// This works more like a filter than an automator
 	#define sdMillisFilter   0 	// 1 to enable a millis delay to SD 
-	#define sdMillisDelay    3  // delay in seconds
+	#define sdMillisDelay    3  // minimum delay in seconds between saves (only applies sdMillisFilter is 1)
 
-	#define sdBroadcastSave  1  // 1 to broadcast on communication platforms when data is saved, 0 to not
+	#define sdBroadcastSave  1  // 1 to broadcast on communication platforms when data is saved to SD, 0 to not 
 #endif
+
 
 // ================================================================ 
 // ===                        ACTUATORS                         === 
 // ================================================================
+
 // --- Enabled Actuators --- 
 #define num_servos    0 	// Number of servos being used (up to 8 per shield, testing has generally only been through 1 shield)
 #define num_steppers  0		// Number of stepper motors being used 
@@ -138,15 +142,15 @@
 // ================================================================
 
 // --- Button Options ---
-#define is_button 		0	// 1 to enable button
+#define is_button 		1	// 1 to enable button
 #define button_pin 		10	// Pin button is attached to 
 
 // --- Analog Setting --- 
-#define is_analog     0		// 1 if analog input is being used, 0 if not
+#define is_analog     1		// 1 if analog input is being used, 0 if not
 
-	#define is_analog_a0 1
+	#define is_analog_a0 1 
 	#define is_analog_a1 1
-	#define is_analog_a2 1
+	#define is_analog_a2 0
 	#define is_analog_a3 0
 	#define is_analog_a4 0
 	#define is_analog_a5 0
@@ -159,6 +163,7 @@
 #define is_decagon    0		// 1 if GS3 Decagon is being used
 
 // --- I2C Sensors ---
+// Using I2C sensors without the multiplexer
 // Multiplexer / aggregate device may override these settings
 #define is_tsl2591         0	// Lux Sensor
 #define is_tsl2561         0	// Lux Sensor
@@ -195,6 +200,7 @@
 
 
 
+
 // ================================================================
 // ================================================================ 
 // ===                    ADVANCED OPTIONS                      === 
@@ -202,10 +208,10 @@
 // ================================================================
 
 // --- Flash Options ---
-#define disable_flash 0   			// 1 To turn of reading and writing to flash/EEPROM memory 
+#define enable_flash 0   			// 1 is the default, 0 to turn of reading and writing to flash/EEPROM memory 
 
 // --- Scripts ---
-#define enable_hub_scripts 0
+#define enable_hub_scripts 0		// RPN script parser
 
 // --- Advanced Interdev Communication ---
 #define advanced_interdev_comm   0	// 1 to use Max-like functionality
@@ -256,18 +262,18 @@
 	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 
 	#define is_analog     1
 
-	#if is_neopixel == 1			// Which Ishield ports to enable Neopixels for 
-		#define NEO_0     0			// Port 0 (A0, closest to end of Ishield)
-		#define NEO_1     0			// Port 1 (A1, middle port)
-		#define NEO_2     1			// Port 2 (A2, port closest to MPU6050)
-	#endif  
-
 	#define is_analog_a0 1			// 1 to enable Feather A_ ports as analog inputs 
 	#define is_analog_a1 1
 	#define is_analog_a2 0
 	#define is_analog_a3 0
 	#define is_analog_a4 0
 	#define is_analog_a5 0
+
+	#if is_neopixel == 1			// Which Ishield ports to enable Neopixels for 
+		#define NEO_0     0			// Port 0 (A0, closest to end of Ishield)
+		#define NEO_1     0			// Port 1 (A1, middle port)
+		#define NEO_2     1			// Port 2 (A2, port closest to MPU6050)
+	#endif  
 #endif
 
 
@@ -290,7 +296,6 @@
 	#define is_ms5803          1	// Pressure Sensor
 
 	#define is_button 		   1	// 1 to enable button
-
 #endif
 
 
@@ -367,7 +372,7 @@
 	// 10-19 for 0, 20 - 29 for 1, etc. 
 	#if hub_node_type == 0 	// If is hub
 		#define LORA_HUB_ADDRESS  CHANNEL
-		#define LORA_NODE_ADDRESS 1
+		// #define LORA_NODE_ADDRESS 1
 	#else 					// If is node
 		#define LORA_HUB_ADDRESS  1			
 		#define LORA_NODE_ADDRESS CHANNEL
@@ -382,11 +387,11 @@
 // --- nRF Options --- 
 #if is_nrf == 1
 	#if hub_node_type == 0 	// If is hub
-		#define LORA_HUB_ADDRESS  CHANNEL
-		#define LORA_NODE_ADDRESS 1
+		#define NRF_HUB_ADDRESS  CHANNEL
+		// #define NRF_NODE_ADDRESS 1
 	#else 					// If is node
-		#define LORA_HUB_ADDRESS  1			
-		#define LORA_NODE_ADDRESS CHANNEL
+		#define NRF_HUB_ADDRESS  1			
+		#define NRF_NODE_ADDRESS CHANNEL
 	#endif
 
 	// #define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
@@ -433,7 +438,7 @@
 
 // --- PushingBox Options ---
 #if (is_ethernet != 1) && (is_wifi != 1) && (is_fona != 1)
-	#define is_pushingbox 0
+	#define is_pushingbox 0   // Prevent PushingBox if no means of internet access
 #endif
 #if is_pushingbox == 1	
 	// Google Spreadsheet ID
@@ -444,16 +449,18 @@
 	#define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"  // This is Luke's Arduino Test spreadsheet
 
 	// Required by PushingBox, specific to each scenario
-	char device_id[]   = "v7ECCEF7A460E57A";
+	char device_id[] = "v7ECCEF7A460E57A";
 
 	// Google Spreadsheet Sheet/Tab. Sent as parameter to PushingBox/Google Scripts
-	#define useHubTabID 0
+	// Generally 0 is the preferred setting (i.e. nodes get there own tab),
+	//   use 1 to force all node data to go to a single hub-defined sheet
+	#define useHubTabID 0  // Toggle option for below settings
 	#if useHubTabID == 1
 		// The hub defines tab ID regardless of bundle source
-		#define tab_id_complete "Sheet1"    // Defines tab if hub is defining tab instead of bundle source
+		#define tab_id_complete "Sheet1"    // Defines tab if hub is defining tab instead of node
 	#else
 		// Use bundle source and below prefix to define tab ID
-		#define tab_id_prefix   "E_"		// Used as a prefix if bundle source is being used to define tab
+		#define tab_id_prefix   "E_"		// Used as a prefix if node is being used to define tab
 	#endif	
 
 	#define verify_family_match 1			// 1 to only upload to spreadsheet if source device family matches hub 
@@ -463,6 +470,7 @@
 	// log_bundle/sendToPushingBox if the delay has passed
 	// Does NOT automatically upload a bundle, you still have to call sendToPushingBox
 	// This works more like a filter than an automator
+	// Uses millis
 	#define pushMillisFilter   1 	// 1 to enable a millis delay to uploading to PushingBox
 	#define pushMillisDelay    5  	// delay in seconds
 #endif
