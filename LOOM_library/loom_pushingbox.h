@@ -12,7 +12,7 @@
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-#if pushMillisFilter == 1 
+#if pushUploadFilter == 1 
 	unsigned long lastPushMillis, currentPushMillis;  
 #endif
 
@@ -61,16 +61,16 @@ void setup_pushingbox()
 //
 void sendToPushingBox(OSCMessage &msg) 
 {
-	// Only send bundles if a minimum time (pushMillisDelay seconds) has passed since last upload
-	#if pushMillisFilter == 1
+	// Only send bundles if a minimum time (pushUploadMinDelay seconds) has passed since last upload
+	#if pushUploadFilter == 1
 		currentPushMillis = millis();
-		if ( (currentPushMillis - lastPushMillis) < (1000*pushMillisDelay) ) {
+		if ( (currentPushMillis - lastPushMillis) < (1000*pushUploadMinDelay) ) {
 			LOOM_DEBUG_Println("Hasn't been long enough since last PushingBox upload, skipping this one");	
 			return; // has not been long enough yet, just return
 		} else {
 			lastPushMillis = currentPushMillis;
 		}
-	#endif // of pushMillisFilter
+	#endif // of pushUploadFilter
 
 	if (msg.size() > 32) { // This also catches empty msgs, which seem to have a size around 1493 for some reason
 		LOOM_DEBUG_Println("Message to large to send to PushingBox");

@@ -91,7 +91,6 @@
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808 version)
-// #define is_bluetooth  0		// Sorry, Bluetooth is not implemented yet
 
 
 // ================================================================ 
@@ -116,8 +115,8 @@
 	// Currently works by only sending a bundle from 
 	// Does NOT automatically save to SD
 	// This works more like a filter than an automator
-	#define sdMillisFilter   0 	// 1 to enable a millis delay to SD 
-	#define sdMillisDelay    3  // minimum delay in seconds between saves (only applies sdMillisFilter is 1)
+	#define sdSaveFilter  	 0 	// 1 to enable a millis delay to SD 
+	#define sdSaveMinDelay    3  // minimum delay in seconds between saves (only applies sdSaveFilter is 1)
 
 	#define sdBroadcastSave  1  // 1 to broadcast on communication platforms when data is saved to SD, 0 to not 
 #endif
@@ -471,8 +470,8 @@
 	// Does NOT automatically upload a bundle, you still have to call sendToPushingBox
 	// This works more like a filter than an automator
 	// Uses millis
-	#define pushMillisFilter   1 	// 1 to enable a millis delay to uploading to PushingBox
-	#define pushMillisDelay    5  	// delay in seconds
+	#define pushUploadFilter   	1 	// 1 to enable a millis delay to uploading to PushingBox
+	#define pushUploadMinDelay  5  	// delay in seconds
 #endif
 
 
