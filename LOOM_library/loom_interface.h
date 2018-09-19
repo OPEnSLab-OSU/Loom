@@ -385,14 +385,14 @@ void log_bundle(OSCBundle *log_bndl, LogPlatform platform, char* file)
 				LOOM_DEBUG_Println("Logging to SD card requires filename");
 				return;
 			}
-			LOOM_DEBUG_Println("Saving bundle");
+			// LOOM_DEBUG_Println("Saving bundle");
 			sd_save_bundle(file, log_bndl, 0, sd_save_time_format); 
 			return;
 		#endif
 
 		#if is_pushingbox == 1
 		case PUSHINGBOX : 
-			LOOM_DEBUG_Println("Sending bundle data to PushingBox");
+			// LOOM_DEBUG_Println("Sending bundle data to PushingBox");
 			sendToPushingBox(log_bndl);
 			return;	
 		#endif

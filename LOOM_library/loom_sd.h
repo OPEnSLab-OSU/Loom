@@ -52,6 +52,8 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp);
 
 void set_SD_logging(OSCMessage &msg);
+void broadcastSaved();
+
 
 // ================================================================
 // ===                          SETUP                           ===
@@ -209,7 +211,7 @@ void sd_write_timestamp(char* file, int timestamp, char delimiter)
 template <typename T>
 bool sd_save_elem(char *file, T data, char endchar)
 {	
-	if (!SD_working) return false;
+	if ( (!SD_working) || (!SD_logging) ) return false;
 
 	#if is_lora == 1
 		digitalWrite(8, HIGH); 	// if using LoRa
@@ -243,8 +245,8 @@ bool sd_save_elem(char *file, T data, char endchar)
 template <typename T>
 bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp) 
 {
-	if (!SD_working) return false;
-
+	if ( (!SD_working) || (!SD_logging) ) return false;
+ 
 	// Only save if a minimum time (sdSaveMinDelay seconds) has passed since last save
 	#if sdSaveFilter == 1
 		currentSdMillis = millis();
@@ -285,6 +287,11 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 	}
 	sdFile.close();
 	LOOM_DEBUG_Println("Done");
+
+
+	#if sdBroadcastSave == 1 
+		broadcastSaved();
+	#endif
 	return true;
 }
 
@@ -300,7 +307,7 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 //       (assumes data fields and timestamp format do not change over the course of writing to the file)
 //  1: Save as comma separated array of data on (if in key-value single/mulit-msg or single message format)
 //  2: Hierarchical output (best for visually understanding bundle)
-//  3: Save as osc translated to string
+//  3: Save as OSC bundle translated to string used in LoRa/nRF transmissions 
 //
 // @param file       The file to save bundle to
 // @param bndl       The bunlde to be saved
@@ -308,7 +315,7 @@ bool sd_save_array(char *file, T data [], int len, char delimiter, int timestamp
 // @param timestamp  Format of timestamp (if any)
 bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 {
-	if (!SD_working) return false;
+	if ( (!SD_working) || (!SD_logging) ) return false;
 
 	// Only save if a minimum time (sdSaveMinDelay seconds) has passed since last save
 	#if sdSaveFilter == 1
@@ -467,19 +474,7 @@ bool sd_save_bundle(char * file, OSCBundle *bndl, int format, int timestamp)
 	sdFile.close();
 
 	#if sdBroadcastSave == 1 
-		#if is_wifi == 1
-			OSCBundle out_bndl;
-			out_bndl.empty();
-			char address_string[80];
-			sprintf(address_string, "%s%s", packet_header_string, "/SD_save");
-			out_bndl.add(address_string);
-			// wifi_send_bundle(&out_bndl, configuration.config_wifi->devicePort);
-			// configuration.config_wifi.subnetPort
-			wifi_send_bundle(&out_bndl, config_wifi->devicePort);
-
-			out_bndl.empty();		// Empty the bundle to free room for a new one
-		#endif
-		// Maybe add LoRa / nRF here late
+		broadcastSaved();
 	#endif
 
 	return true;
@@ -545,6 +540,32 @@ void printDirectory(File dir, int numTabs)
 		}
 		entry.close();
 	}
+}
+
+
+void broadcastSaved() 
+{
+	OSCBundle out_bndl;
+	out_bndl.empty();
+	char address_string[80];
+	sprintf(address_string, "%s%s", packet_header_string, "/SD_save");
+	out_bndl.add(address_string);
+
+	#if is_wifi == 1
+		wifi_send_bundle(&out_bndl);
+		// wifi_send_bundle(&out_bndl, config_wifi->devicePort);
+	#endif
+
+	#if is_lora == 1
+		lora_send_bundle(&out_bndl);
+	#endif
+
+	#if is_nrf == 1
+		nrf_send_bundle(&out_bndl);
+	#endif
+
+	out_bndl.empty();		// Empty the bundle to free room for a new one
+
 }
 
 

@@ -77,7 +77,7 @@
 // Further options in the advanced settings
 // Can override settings defined before the aggregate devices
 
-#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
+#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
 #define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
@@ -100,7 +100,7 @@
 // #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi) [not much support yet]
 
 // --- RTC Options ---
-#define is_rtc        0		// Enable RTC functionality
+#define is_rtc        1		// Enable RTC functionality
 #if is_rtc == 1
 	#define RTC_pin 6		// What pin the RTC interrupt is connected to
 
@@ -110,13 +110,14 @@
 #endif
 
 // --- SD Options ---
-#define is_sd         0		// 1 to enable SD card 
+#define is_sd         1		// 1 to enable SD card 
 #if is_sd == 1
-	// Currently works by only sending a bundle from 
 	// Does NOT automatically save to SD
-	// This works more like a filter than an automator
-	#define sdSaveFilter  	 0 	// 1 to enable a millis delay to SD 
-	#define sdSaveMinDelay    3  // minimum delay in seconds between saves (only applies sdSaveFilter is 1)
+	// This works more like a filter than an automator,
+	// with a minimum of sdSaveMinDelay between saves
+	// Uses millis
+	#define sdSaveFilter  	 1 	// 1 to enable a millis delay to SD 
+	#define sdSaveMinDelay   2  // minimum delay in seconds between saves (only applies sdSaveFilter is 1)
 
 	#define sdBroadcastSave  1  // 1 to broadcast on communication platforms when data is saved to SD, 0 to not 
 #endif
@@ -207,7 +208,7 @@
 // ================================================================
 
 // --- Flash Options ---
-#define enable_flash 0   			// 1 is the default, 0 to turn of reading and writing to flash/EEPROM memory 
+#define enable_flash 1   			// 1 is the default, 0 to turn of reading and writing to flash/EEPROM memory 
 
 // --- Scripts ---
 #define enable_hub_scripts 0		// RPN script parser
@@ -257,7 +258,7 @@
 #if is_ishield == 1
 	#define is_button     1			// 1 to enable button
 	#define button_pin    10		// Pin that the button uses
-	#define is_mpu6050    1 		// Enables MPU6050 on Ishield
+	#define is_mpu6050    0 		// Enables MPU6050 on Ishield
 	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 
 	#define is_analog     1
 
@@ -370,11 +371,11 @@
 	// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS,
 	// 10-19 for 0, 20 - 29 for 1, etc. 
 	#if hub_node_type == 0 	// If is hub
-		#define LORA_HUB_ADDRESS  CHANNEL
+		// #define LORA_HUB_ADDRESS  CHANNEL
 		// #define LORA_NODE_ADDRESS 1
 	#else 					// If is node
 		#define LORA_HUB_ADDRESS  1			
-		#define LORA_NODE_ADDRESS CHANNEL
+		// #define LORA_NODE_ADDRESS CHANNEL
 	#endif
 										
 	#define RF95_FREQ      915.0			// Hardware specific, Tx must match Rx
@@ -386,11 +387,11 @@
 // --- nRF Options --- 
 #if is_nrf == 1
 	#if hub_node_type == 0 	// If is hub
-		#define NRF_HUB_ADDRESS  CHANNEL
+		// #define NRF_HUB_ADDRESS  CHANNEL
 		// #define NRF_NODE_ADDRESS 1
 	#else 					// If is node
 		#define NRF_HUB_ADDRESS  1			
-		#define NRF_NODE_ADDRESS CHANNEL
+		// #define NRF_NODE_ADDRESS CHANNEL
 	#endif
 
 	// #define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
@@ -468,7 +469,8 @@
 	// Currently works by only sending a bundle from 
 	// log_bundle/sendToPushingBox if the delay has passed
 	// Does NOT automatically upload a bundle, you still have to call sendToPushingBox
-	// This works more like a filter than an automator
+	// This works more like a filter than an automator,
+	// with a minimum of pushUploadMinDelay between uploads
 	// Uses millis
 	#define pushUploadFilter   	1 	// 1 to enable a millis delay to uploading to PushingBox
 	#define pushUploadMinDelay  5  	// delay in seconds

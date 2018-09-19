@@ -120,6 +120,21 @@ void setup_rtc() {
 
 // Maybe add a check to set the time if it is way off
 	// rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
+	DateTime time_check = rtc_inst.now();
+	int y = time_check.year();
+	int m = time_check.month();
+	int d = time_check.day();
+
+	if ( (y < 2018) || (y > 2025) || (m < 1) || (m > 12) || (d < 1) || (d > 31) ) {
+		LOOM_DEBUG_Println("RTC Time is invalid, setting the time to compile time");
+		rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
+		#if LOOM_DEBUG == 1
+			LOOM_DEBUG_Println("Time set to:");
+			print_time();
+			LOOM_DEBUG_Println();
+		#endif
+	}
+
 
 
 	#if  is_rtc3231 == 1
