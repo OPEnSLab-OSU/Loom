@@ -364,4 +364,11 @@ function refresh_mux()
 	send( build_msg( '/GetSensors', [] ) );	
 }
 
+// SD control function
+// Takes on/off value directly
+function enable_SD(s)
+{
+	send( build_msg( '/EnableSD', [s] ) );	
+}
+
 

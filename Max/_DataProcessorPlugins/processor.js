@@ -69,6 +69,8 @@ function createBpatcher(file)
 				dimensions = ["150", "180"]; break;
 			case "em.save_to_csv":
 				dimensions = ["140", "165"]; break;
+			case "em.sd_controller":
+				dimensions = ["150", "100"]; break;
 			default: 
 				dimensions = ["250", "150"]; break;
 		}

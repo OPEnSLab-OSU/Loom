@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 34.0, 79.0, 860.0, 787.0 ],
+		"rect" : [ 299.0, 79.0, 731.0, 787.0 ],
 		"bgcolor" : [ 0.878431, 0.878431, 0.858824, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -137,7 +137,6 @@
 						"tags" : "",
 						"style" : "",
 						"subpatcher_template" : "",
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontname" : "Arial",
@@ -199,7 +198,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 2.5, 7.0, 339.0, 181.0 ],
+									"patching_rect" : [ 2.5, 7.0, 343.0, 181.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 13,
 									"presentation_rect" : [ 2.5, 7.0, 356.0, 181.0 ],
@@ -749,7 +748,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 318.166687, 363.0, 272.333313, 22.0 ],
 					"style" : "",
-					"text" : "/wifiSetup/client OPENs Arduino"
+					"text" : "/wifiSetup/client laskdfj sdfl"
 				}
 
 			}
@@ -1124,8 +1123,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-23", 1 ],
-					"midpoints" : [ 307.833344, 401.5, 90.5, 401.5 ],
+					"destination" : [ "obj-38", 0 ],
 					"order" : 2,
 					"source" : [ "obj-140", 0 ]
 				}
@@ -1339,7 +1337,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-23", 0 ],
+					"destination" : [ "obj-38", 0 ],
 					"order" : 2,
 					"source" : [ "obj-67", 0 ]
 				}
