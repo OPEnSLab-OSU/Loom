@@ -30,14 +30,55 @@ void setup()
 // ================================================================ 
 void loop() 
 {
+	// OSCBundle bndl, send_bndl;
+
+	// receive_bundle(&bndl, WIFI);
+	// if (bndl.size()) {
+	// 	print_bundle(&bndl);
+	// }
+	// process_bundle(&bndl);
+
+	// measure_sensors();
+	// package_data(&send_bndl);
+	// LOOM_DEBUG_Println("Original Bundle:");
+	// print_bundle(&send_bndl);
+
+
+	// #if is_sd == 1
+	// 	log_bundle(&send_bndl, SDCARD, "ishield2.csv");
+	// #endif
+
+	// // print_time();
+
+	// convert_bundle_structure(&send_bndl, &bndl, SINGLEMSG);
+	// LOOM_DEBUG_Println("Converted Bundle:");
+	// print_bundle(&bndl);
+
+
+	// // LOOM_DEBUG_Println("DONE");
+
+	// additional_loop_checks();
+
+
+	// delay(250);
+
+	// x++;
+
+	// if (x > 1) {
+	// 	while(1);
+	// // }
+
+	
+	// LOOM_DEBUG_Println("*");
+
 	// --- Common Example ---
-	OSCBundle bndl, send_bndl;
+	OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
 
 	receive_bundle(&bndl, WIFI);
 	if (bndl.size()) {
 		print_bundle(&bndl);
 	}
-	process_bundle(&bndl);
+	process_bundle(&bndl);				// Dispatch mes
 	// log_bundle(&bndl, PUSHINGBOX);
 
 	measure_sensors();
@@ -46,6 +87,7 @@ void loop()
 
 	additional_loop_checks();
 	// --- End Example ---
+
 }
 
 
