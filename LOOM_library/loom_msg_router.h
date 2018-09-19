@@ -60,7 +60,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		// Sets the state of the specified relay
 		if (msg.dispatch("/Relay/State",  		handle_relay_msg, 		addrOffset) ) return;
 	#endif
-	#if is_mpu6050 == 1 && is_ishield == 1
+	#if is_mpu6050 == 1
 		// Instructs an device to recalibrate its MPU6050
 		if (msg.dispatch("/MPU6050/cal",  		calMPU6050_OSC, 		addrOffset) ) return;
 	#endif
