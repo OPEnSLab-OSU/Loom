@@ -28,7 +28,7 @@
 // ================================================================
 // --- Device Identification --- 
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define FAMILY_NUM       12		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
 #define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
@@ -39,7 +39,7 @@
 // ===                      SERIAL OPTIONS                      === 
 // ================================================================
 // --- Debugging --- 
-#define LOOM_DEBUG    1			// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG    0			// Set to 1 if you want Serial statements from various functions to print
 								// NOTE: Serial monitor must be opened for device to setup if this is enabled
 								//   Device will freeze if this in enabled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
@@ -100,7 +100,7 @@
 // #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi) [not much support yet]
 
 // --- RTC Options ---
-#define is_rtc        1		// Enable RTC functionality
+#define is_rtc        0		// Enable RTC functionality
 #if is_rtc == 1
 	#define RTC_pin 6		// What pin the RTC interrupt is connected to
 
@@ -110,16 +110,16 @@
 #endif
 
 // --- SD Options ---
-#define is_sd         1		// 1 to enable SD card 
+#define is_sd         0		// 1 to enable SD card 
 #if is_sd == 1
 	// Does NOT automatically save to SD
 	// This works more like a filter than an automator,
 	// with a minimum of sdSaveMinDelay between saves
 	// Uses millis
 	#define sdSaveFilter  	 1 	// 1 to enable a millis delay to SD 
-	#define sdSaveMinDelay   2  // minimum delay in seconds between saves (only applies sdSaveFilter is 1)
+	#define sdSaveMinDelay   1  // minimum delay in seconds between saves (only applies sdSaveFilter is 1)
 
-	#define sdBroadcastSave  1  // 1 to broadcast on communication platforms when data is saved to SD, 0 to not 
+	#define sdBroadcastSave  0  // 1 to broadcast on communication platforms when data is saved to SD, 0 to not 
 #endif
 
 
@@ -146,7 +146,7 @@
 #define button_pin 		10	// Pin button is attached to 
 
 // --- Analog Setting --- 
-#define is_analog     1		// 1 if analog input is being used, 0 if not
+#define is_analog     0		// 1 if analog input is being used, 0 if not
 
 	#define is_analog_a0 1 
 	#define is_analog_a1 1
@@ -193,8 +193,8 @@
 // --- WiFi Settings ---
 // Requires is_wifi to be set to 1 to take effect
 #if is_wifi == 1
-	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
-	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
+	#define DEFAULT_MODE      AP_MODE			// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
+	#define DEFAULT_NETWORK   "HC407"			// Network SSID / name
 	#define DEFAULT_PASSWORD  "arduino101"		// Network password
 #endif
 
@@ -258,7 +258,7 @@
 #if is_ishield == 1
 	#define is_button     1			// 1 to enable button
 	#define button_pin    10		// Pin that the button uses
-	#define is_mpu6050    0 		// Enables MPU6050 on Ishield
+	#define is_mpu6050    1 		// Enables MPU6050 on Ishield
 	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 
 	#define is_analog     1
 
@@ -291,7 +291,7 @@
 	#define is_zxgesturesensor 1	// ZX_Distance Sensor
 	#define is_sht31d          1	// Temperature / Humidity
 	#define is_mb1232          1	// Sonar
-	#define is_mpu6050         0	// Accelerometer / Gyroscope (better supported on Ishield)
+	#define is_mpu6050         0	// Accelerometer / Gyroscope (NOTE* I2C address conflicts with RTC if not manually changed) (much better supported on Ishield)
 	#define is_lis3dh          1    // Accelerometer
 	#define is_ms5803          1	// Pressure Sensor
 

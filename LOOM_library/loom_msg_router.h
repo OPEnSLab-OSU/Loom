@@ -109,6 +109,8 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	// Received ping message, reply
 	if (msg.dispatch("/Ping", 			ping_reply, 			addrOffset) ) return;
 
+	// Change sample rate (i.e. is_sleep_period Watchdog sleep time)
+	if (msg.dispatch("/SetSampleRate", 	set_sleep_period, 		addrOffset) ) return;
 
 
 // THESE ARE MORE GENERAL COMMANDS, MOSTLY FROM SUBNET / GLOBAL 

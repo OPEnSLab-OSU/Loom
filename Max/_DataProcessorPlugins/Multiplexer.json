@@ -94,12 +94,10 @@
 ,
 	"zxgesturesensor" : 	{
 		"common_name" : "Gesture Sensor",
-		"fields" : [ "px", "pz", "type", "speed" ],
+		"fields" : [ "px", "pz" ],
 		"ranges" : 		{
 			"px" : "0 240",
-			"pz" : "0 240",			
-			"type" : "0 3",
-			"speed" : "0 256"
+			"pz" : "0 240"			
 		}
 
 	}

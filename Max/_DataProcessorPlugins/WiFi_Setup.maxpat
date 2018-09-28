@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 299.0, 79.0, 731.0, 787.0 ],
+		"rect" : [ 366.0, 124.0, 731.0, 787.0 ],
 		"bgcolor" : [ 0.878431, 0.878431, 0.858824, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -39,6 +39,59 @@
 		"subpatcher_template" : "",
 		"showontab" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-21",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 361.000061, 647.0, 67.0, 33.0 ],
+					"style" : "",
+					"text" : "WiFi Save Mode Out"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"comment" : "WiFi Mode Out",
+					"id" : "obj-15",
+					"index" : 0,
+					"maxclass" : "outlet",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 318.166687, 647.0, 30.0, 30.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-8",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 422.5, 12.833374, 56.0, 33.0 ],
+					"style" : "",
+					"text" : "Wifi Mode In"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"comment" : "WiFi Mode In",
+					"id" : "obj-10",
+					"index" : 0,
+					"maxclass" : "inlet",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 384.0, 12.833374, 30.0, 30.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"bgcolor" : [ 0.239216, 0.254902, 0.278431, 1.0 ],
 					"bgoncolor" : [ 0.439216, 0.74902, 0.254902, 1.0 ],
@@ -263,7 +316,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "list" ],
-					"patching_rect" : [ 47.0, 479.0, 53.0, 22.0 ],
+					"patching_rect" : [ 47.0, 514.0, 53.0, 22.0 ],
 					"style" : "",
 					"text" : "funnel 2"
 				}
@@ -276,7 +329,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "list" ],
-					"patching_rect" : [ 47.0, 570.0, 53.0, 22.0 ],
+					"patching_rect" : [ 47.0, 605.0, 53.0, 22.0 ],
 					"style" : "",
 					"text" : "funnel 2"
 				}
@@ -289,7 +342,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 391.333344, 510.0, 69.0, 33.0 ],
+					"patching_rect" : [ 391.333344, 545.0, 69.0, 33.0 ],
 					"style" : "",
 					"text" : "WiFi Mode Out"
 				}
@@ -302,7 +355,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 648.0, 164.0, 20.0, 22.0 ],
+					"patching_rect" : [ 648.0, 199.0, 20.0, 22.0 ],
 					"style" : "",
 					"text" : "t i"
 				}
@@ -315,7 +368,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 102.0, 473.5, 93.0, 33.0 ],
+					"patching_rect" : [ 102.0, 508.5, 93.0, 33.0 ],
 					"style" : "",
 					"text" : "WiFi Setting Commands Out"
 				}
@@ -341,7 +394,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 671.0, 124.0, 24.0, 22.0 ],
+					"patching_rect" : [ 671.0, 159.0, 24.0, 22.0 ],
 					"style" : "",
 					"text" : "t 1"
 				}
@@ -354,7 +407,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 621.0, 124.0, 24.0, 22.0 ],
+					"patching_rect" : [ 621.0, 159.0, 24.0, 22.0 ],
 					"style" : "",
 					"text" : "t 2"
 				}
@@ -367,7 +420,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 671.0, 93.0, 36.0, 22.0 ],
+					"patching_rect" : [ 671.0, 128.0, 36.0, 22.0 ],
 					"style" : "",
 					"text" : "sel 1"
 				}
@@ -380,7 +433,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 621.0, 93.0, 36.0, 22.0 ],
+					"patching_rect" : [ 621.0, 128.0, 36.0, 22.0 ],
 					"style" : "",
 					"text" : "sel 0"
 				}
@@ -392,7 +445,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 252.0, 415.0, 99.0, 22.0 ],
+					"patching_rect" : [ 252.0, 450.0, 99.0, 22.0 ],
 					"style" : "",
 					"text" : "print WiFi_Setup"
 				}
@@ -417,7 +470,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 416.0, 188.0, 120.0, 22.0 ],
+					"patching_rect" : [ 416.0, 223.0, 120.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 141.0, 39.300003, 115.0, 22.0 ],
 					"style" : "",
@@ -436,7 +489,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 221.0, 82.0, 39.0, 25.0 ],
+					"patching_rect" : [ 221.0, 117.0, 39.0, 25.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 23.0, 97.0, 58.0, 25.0 ],
 					"rounded" : 15.0,
@@ -446,19 +499,6 @@
 					"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
 					"usebgoncolor" : 1,
 					"usetextovercolor" : 1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-22",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 384.0, 16.0, 72.0, 22.0 ],
-					"style" : "",
-					"text" : "loadmess 1"
 				}
 
 			}
@@ -662,7 +702,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 384.0, 93.0, 89.0, 22.0 ],
+					"patching_rect" : [ 384.0, 128.0, 89.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -684,7 +724,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 384.0, 47.0, 200.0, 24.0 ],
+					"patching_rect" : [ 384.0, 69.0, 200.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 7.0, 38.300003, 90.0, 47.0 ],
 					"style" : "",
@@ -699,7 +739,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 69.0, 363.0, 184.0, 22.0 ],
+					"patching_rect" : [ 69.0, 398.0, 184.0, 22.0 ],
 					"style" : "",
 					"text" : "/wifiSetup/AP 1"
 				}
@@ -712,7 +752,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 47.0, 286.0, 61.0, 22.0 ],
+					"patching_rect" : [ 47.0, 321.0, 61.0, 22.0 ],
 					"style" : "",
 					"text" : "route text"
 				}
@@ -732,7 +772,7 @@
 					"outlettype" : [ "", "int", "", "" ],
 					"outputmode" : 1,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 47.0, 257.0, 61.0, 22.0 ],
+					"patching_rect" : [ 47.0, 292.0, 61.0, 22.0 ],
 					"style" : "",
 					"text" : "\\",
 					"wordwrap" : 0
@@ -746,7 +786,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 318.166687, 363.0, 272.333313, 22.0 ],
+					"patching_rect" : [ 318.166687, 398.0, 272.333313, 22.0 ],
 					"style" : "",
 					"text" : "/wifiSetup/client laskdfj sdfl"
 				}
@@ -759,7 +799,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 298.333344, 286.0, 61.0, 22.0 ],
+					"patching_rect" : [ 298.333344, 321.0, 61.0, 22.0 ],
 					"style" : "",
 					"text" : "route text"
 				}
@@ -779,7 +819,7 @@
 					"outlettype" : [ "", "int", "", "" ],
 					"outputmode" : 1,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 298.333344, 257.0, 61.0, 22.0 ],
+					"patching_rect" : [ 298.333344, 292.0, 61.0, 22.0 ],
 					"style" : "",
 					"text" : "\\",
 					"wordwrap" : 0
@@ -793,7 +833,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 273.333344, 82.0, 29.5, 22.0 ],
+					"patching_rect" : [ 273.333344, 117.0, 29.5, 22.0 ],
 					"style" : "",
 					"text" : "+ 1"
 				}
@@ -806,7 +846,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 273.333344, 120.5, 44.0, 22.0 ],
+					"patching_rect" : [ 273.333344, 155.5, 44.0, 22.0 ],
 					"style" : "",
 					"text" : "gate 2"
 				}
@@ -819,7 +859,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 561.0, 223.0, 29.5, 22.0 ],
+					"patching_rect" : [ 561.0, 258.0, 29.5, 22.0 ],
 					"style" : "",
 					"text" : "set"
 				}
@@ -832,7 +872,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 561.0, 188.0, 60.0, 22.0 ],
+					"patching_rect" : [ 561.0, 223.0, 60.0, 22.0 ],
 					"style" : "",
 					"text" : "loadbang"
 				}
@@ -890,7 +930,7 @@
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 47.0, 612.0, 30.0, 30.0 ],
+					"patching_rect" : [ 47.0, 647.0, 30.0, 30.0 ],
 					"style" : ""
 				}
 
@@ -902,7 +942,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 479.333344, 286.0, 61.0, 22.0 ],
+					"patching_rect" : [ 479.333344, 321.0, 61.0, 22.0 ],
 					"style" : "",
 					"text" : "route text"
 				}
@@ -915,7 +955,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 395.333344, 286.0, 61.0, 22.0 ],
+					"patching_rect" : [ 395.333344, 321.0, 61.0, 22.0 ],
 					"style" : "",
 					"text" : "route text"
 				}
@@ -928,7 +968,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 47.0, 321.0, 161.0, 22.0 ],
+					"patching_rect" : [ 47.0, 356.0, 161.0, 22.0 ],
 					"style" : "",
 					"text" : "sprintf %s%s/wifiSetup/AP 1"
 				}
@@ -941,7 +981,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 298.333344, 321.0, 212.0, 22.0 ],
+					"patching_rect" : [ 298.333344, 356.0, 212.0, 22.0 ],
 					"style" : "",
 					"text" : "sprintf \"%s%s/wifiSetup/client %s %s\""
 				}
@@ -956,7 +996,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 479.333344, 257.0, 74.0, 21.0 ],
+					"patching_rect" : [ 479.333344, 292.0, 74.0, 21.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 180.0, 99.0, 99.0, 22.0 ],
 					"style" : ""
@@ -983,7 +1023,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 395.333344, 223.0, 58.0, 21.0 ],
+					"patching_rect" : [ 395.333344, 258.0, 58.0, 21.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 114.5, 73.300003, 61.0, 21.0 ],
 					"style" : "",
@@ -1013,7 +1053,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 479.333344, 223.0, 66.0, 21.0 ],
+					"patching_rect" : [ 479.333344, 258.0, 66.0, 21.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 114.5, 99.0, 60.0, 21.0 ],
 					"style" : "",
@@ -1032,7 +1072,7 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 395.333344, 257.0, 74.0, 21.0 ],
+					"patching_rect" : [ 395.333344, 292.0, 74.0, 21.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 180.0, 73.300003, 99.0, 22.0 ],
 					"style" : ""
@@ -1050,7 +1090,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 384.0, 129.0, 33.5, 24.0 ],
+					"patching_rect" : [ 384.0, 164.0, 33.5, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 107.0, 65.0, 179.0, 63.0 ],
 					"proportion" : 0.39,
@@ -1082,6 +1122,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-27", 1 ],
 					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
+					"source" : [ "obj-10", 0 ]
 				}
 
 			}
@@ -1153,13 +1200,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
-					"source" : [ "obj-22", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-38", 0 ],
 					"source" : [ "obj-23", 0 ]
 				}
@@ -1168,7 +1208,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-140", 1 ],
-					"midpoints" : [ 147.0, 243.0, 372.166687, 243.0 ],
+					"midpoints" : [ 147.0, 276.0, 372.166687, 276.0 ],
 					"order" : 0,
 					"source" : [ "obj-24", 0 ]
 				}
@@ -1177,7 +1217,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-67", 1 ],
-					"midpoints" : [ 147.0, 243.0, 198.5, 243.0 ],
+					"midpoints" : [ 147.0, 275.0, 198.5, 275.0 ],
 					"order" : 1,
 					"source" : [ "obj-24", 0 ]
 				}
@@ -1186,7 +1226,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
-					"midpoints" : [ 570.5, 251.0, 404.833344, 251.0 ],
+					"midpoints" : [ 570.5, 286.0, 404.833344, 286.0 ],
 					"order" : 1,
 					"source" : [ "obj-25", 0 ]
 				}
@@ -1195,7 +1235,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
-					"midpoints" : [ 570.5, 251.0, 488.833344, 251.0 ],
+					"midpoints" : [ 570.5, 286.0, 488.833344, 286.0 ],
 					"order" : 0,
 					"source" : [ "obj-25", 0 ]
 				}
@@ -1239,7 +1279,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
-					"midpoints" : [ 393.5, 81.5, 630.5, 81.5 ],
+					"midpoints" : [ 393.5, 116.5, 630.5, 116.5 ],
 					"order" : 1,
 					"source" : [ "obj-3", 0 ]
 				}
@@ -1248,7 +1288,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-12", 0 ],
-					"midpoints" : [ 393.5, 81.5, 680.5, 81.5 ],
+					"midpoints" : [ 393.5, 116.5, 680.5, 116.5 ],
 					"order" : 0,
 					"source" : [ "obj-3", 0 ]
 				}
@@ -1264,7 +1304,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-45", 0 ],
+					"destination" : [ "obj-15", 0 ],
+					"midpoints" : [ 393.5, 106.0, 741.0, 106.0, 741.0, 627.0, 327.666687, 627.0 ],
 					"order" : 3,
 					"source" : [ "obj-3", 0 ]
 				}
@@ -1272,8 +1313,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-45", 0 ],
+					"order" : 4,
+					"source" : [ "obj-3", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-38", 1 ],
-					"midpoints" : [ 657.5, 554.0, 90.5, 554.0 ],
+					"midpoints" : [ 657.5, 589.0, 90.5, 589.0 ],
 					"source" : [ "obj-35", 0 ]
 				}
 

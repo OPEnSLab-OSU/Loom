@@ -71,6 +71,8 @@ function createBpatcher(file)
 				dimensions = ["140", "165"]; break;
 			case "em.sd_controller":
 				dimensions = ["150", "100"]; break;
+			case "em.channel_manager":
+				dimensions = ["195", "470"]; break;
 			default: 
 				dimensions = ["250", "150"]; break;
 		}
