@@ -383,3 +383,8 @@ function save_config()
 	send( build_msg( '/SaveConfig', [] ) );	
 }
 
+function cal_mpu()
+{
+	send( build_msg( '/cal_MPU6050', [] ) );	
+}
+
