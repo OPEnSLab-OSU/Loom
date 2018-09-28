@@ -65,7 +65,7 @@ bool setup_tsl2591()
 		is_setup = false;
 		LOOM_DEBUG_Println("Failed to initialize tsl2591");
 	}
-	
+
 	return is_setup;
 }
 

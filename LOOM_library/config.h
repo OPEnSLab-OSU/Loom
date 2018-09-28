@@ -28,8 +28,8 @@
 // ================================================================
 // --- Device Identification --- 
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       12		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
-#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
+#define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define CHANNEL          4		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
@@ -39,7 +39,7 @@
 // ===                      SERIAL OPTIONS                      === 
 // ================================================================
 // --- Debugging --- 
-#define LOOM_DEBUG    0			// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG    1			// Set to 1 if you want Serial statements from various functions to print
 								// NOTE: Serial monitor must be opened for device to setup if this is enabled
 								//   Device will freeze if this in enabled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
@@ -77,8 +77,8 @@
 // Further options in the advanced settings
 // Can override settings defined before the aggregate devices
 
-#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
+#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -193,8 +193,8 @@
 // --- WiFi Settings ---
 // Requires is_wifi to be set to 1 to take effect
 #if is_wifi == 1
-	#define DEFAULT_MODE      AP_MODE			// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
-	#define DEFAULT_NETWORK   "HC407"			// Network SSID / name
+	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
+	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
 	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"		// Network password
 #endif
 
@@ -217,6 +217,8 @@
 #define advanced_interdev_comm   0	// 1 to use Max-like functionality
 #define build_actuator_cmd_funcs 0  // 1 to include file to make commands for Loom actuators
 
+// --- MPU6050 Options
+#define skip_mpu_cal 1
 
 
 // --- Set Custom Instance Number and UDP Port ---

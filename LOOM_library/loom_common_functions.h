@@ -133,14 +133,10 @@ void check_button_held()
 #ifdef is_sleep_period
 void loop_sleep()
 {
-	// #if is_multiplexer == 1
-	// 	return;
-	// #endif
-
 	#if LOOM_DEBUG == 0
 		int sleepMS = Watchdog.sleep(configuration.sample_rate); // Sleep MCU for transmit period duration
 	#else // don't actually sleep if Debug mode on
-		delay(is_sleep_period);                        // Dont actually go to sleep if connected to serial
+		delay(configuration.sample_rate);                        // Dont actually go to sleep if connected to serial
 	#endif
 
 	// #if LOOM_DEBUG == 0
@@ -164,6 +160,8 @@ void set_sleep_period(OSCMessage &msg)
 		}
 
 		configuration.sample_rate = rate;
+
+		LOOM_DEBUG_Println3("Set the sample rate to ", rate, " milliseconds");
 	#endif
 }
 

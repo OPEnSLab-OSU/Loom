@@ -62,7 +62,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 	#endif
 	#if is_mpu6050 == 1
 		// Instructs an device to recalibrate its MPU6050
-		if (msg.dispatch("/MPU6050/cal",  		calMPU6050_OSC, 		addrOffset) ) return;
+		if (msg.dispatch("/cal_MPU6050",  		calMPU6050_OSC, 		addrOffset) ) return;
 	#endif
 	#if is_neopixel == 1
 		// Sets a specified Neopixel's color

@@ -230,14 +230,14 @@ void measure_mpu6050(void)
 		mpu.dmpGetGravity(&gravity, &q);
 		mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
 		
-		#if LOOM_DEBUG == 1
+		// #if LOOM_DEBUG == 1
 			// Serial.print("ypr\t");
 			// Serial.print(ypr[0] * 180/M_PI);
 			// Serial.print("\t");
 			// Serial.print(ypr[1] * 180/M_PI);
 			// Serial.print("\t");
 			// Serial.println(ypr[2] * 180/M_PI); 
-		#endif
+		// #endif
 	} // of else if
 	//   return (void);
 
@@ -365,6 +365,7 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 		sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/mpu6050/data");
 	} 
 	// Messages want an OSC address as first argument
+	
 	// Compile bundle
 
 	float axf = (float)ax / 16000;
@@ -375,7 +376,7 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	// Evaluate if accelerometers are all around zero-G, if so, set freefall bool to true
 	if ((axf > -0.2 && axf < 0.2) && (ayf > -0.2 && ayf < 0.2) && (azf > -0.2 && azf < 0.2)) {
 		freefall = true;
-	}
+	} 
 	
 	// Assemble UDP Packet
 	// IP1 IP2 Yaw Pitch Roll aX aY aZ gX gY gZ vBatt
@@ -459,6 +460,8 @@ void calMPU6050()
 		#endif
 		state = 0; // reset state flag
 	} // of if (state == 2)
+
+	write_non_volatile();
 } // of calMPU6050()
 
 
@@ -474,9 +477,12 @@ void calMPU6050()
 void calMPU6050_OSC(OSCMessage &msg) 
 {
 	LOOM_DEBUG_Println("Command received to calibrate MPU6050");
+	flash_led(3, 100, 30);
+	digitalWrite(LED_BUILTIN, HIGH);  
 	
 	calMPU6050();
 	
+	flash_led(6, 100, 30);
 	LOOM_DEBUG_Println("New calibration values written to non-volatile memory");
 }
 
