@@ -13,7 +13,7 @@
 // ================================================================
 #define INTERRUPT_PIN 11
 
-#define i2c_addr_mpu6050 0x69				//0x68, 0x69
+#define i2c_addr_mpu6050 0x68				//0x68, 0x69
 
 
 // ================================================================ 
@@ -56,8 +56,7 @@ float       euler[3];    // [psi, theta, phi]    Euler angle container
 float       ypr[3];      // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
 
 // Place to save accel gyro mpu6050 readings
-int16_t ax, ay, az;
-int16_t gx, gy, gz;
+int16_t ax, ay, az, gx, gy, gz;
 
 // MPU calibration vars:
 int mean_ax, mean_ay, mean_az, mean_gx, mean_gy, mean_gz, state = 0;
@@ -288,6 +287,8 @@ void meansensors()
 // . . . 
 //
 void calibration() {
+
+	// return;
 	config_mpu6050->ax_offset = -mean_ax / 8;
 	config_mpu6050->ay_offset = -mean_ay / 8;
 	config_mpu6050->az_offset = (16384 - mean_az) / 8;
@@ -410,6 +411,8 @@ void package_mpu6050(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 //
 void calMPU6050()
 {
+
+	// return;
 	// Reset offsets
 	accelgyro.setXAccelOffset(0);
 	accelgyro.setYAccelOffset(0);

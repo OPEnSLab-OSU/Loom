@@ -135,11 +135,11 @@ function display()
 	}
 	
 	for (i=0; i<8; i++) {
-		if (!json.devices[i].free) {
+		// if (!json.devices[i].free) {
 			outlet(9, i+1, 1, family_num);
 			outlet(9, i+1, 2, json.devices[i].type);
 			outlet(9, i+1, 3, i+1);
-		}
+		// }
 	}
 }
 

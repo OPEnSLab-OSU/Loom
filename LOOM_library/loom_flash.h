@@ -25,6 +25,8 @@ struct config_flash_t {
 	uint8_t     instance_number;          // Default 0, should be set on startup from a patch
 	char        packet_header_string[80]; // String of expected packet header (dynamically formed based on config.h)
  
+	uint16_t sample_rate;
+
 	#if is_wifi == 1
 		struct config_wifi_t config_wifi;
 	#endif
@@ -135,6 +137,9 @@ void setup_flash_config()
 			
 			LOOM_DEBUG_Println2("Expecting OSC header: ", configuration.packet_header_string);
 			
+			configuration.sample_rate = is_sleep_period;
+
+
 			#if is_wifi == 1
 				configuration.config_wifi.my_ssid = AP_NAME;                   // Default AP name
 				strcpy(configuration.config_wifi.ssid,DEFAULT_NETWORK);        // Default network name
@@ -150,6 +155,7 @@ void setup_flash_config()
 
 			// Add any other behavior/calibration wrapped in an '#ifdef is_something' preprocessor directive HERE
 			#if is_mpu6050 == 1
+			// #if (is_mpu6050 == 1) && (is_multiplexer != 1)
 				calMPU6050();                                 // Calibration writes memValidationValue for us
 			#endif
 			

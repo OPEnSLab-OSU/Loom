@@ -68,9 +68,10 @@ void Loom_begin()
 	#if is_decagon == 1
 		setup_decagon(); 
 	#endif
-	#if is_mpu6050 == 1
-		setup_mpu6050();
-	#endif 
+	// #if is_mpu6050 == 1 
+	// #if (is_mpu6050 == 1) && (is_multiplexer != 1)
+	// 	setup_mpu6050();
+	// #endif 
 	#if is_max31856 == 1
 		setup_max31856();
 	#endif 
@@ -110,7 +111,7 @@ void Loom_begin()
 			setup_mb1232();
 		#endif
 		#if is_mpu6050 == 1
-			// setup_mpu6050();   not sure why this is commented out
+			setup_mpu6050();   //not sure why this is commented out
 		#endif
 		#if is_ms5803 == 1
 			setup_ms5803();

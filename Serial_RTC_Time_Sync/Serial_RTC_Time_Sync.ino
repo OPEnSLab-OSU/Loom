@@ -14,10 +14,10 @@
 #include "RTClib.h"
 
 
-#define is_rtc3231 1
-#define is_rtc8523 0
+#define is_rtc3231 0
+#define is_rtc8523 1
 
-#define second_adjustment 0 
+#define second_adjustment -25200 
 
 
 ////////////////////////////////
@@ -72,8 +72,8 @@ void loop(){
 		processSyncMessage();
 	}
 	if (timeStatus()!= timeNotSet) {
-		Serial.println("Arduino Time");
-		digitalClockDisplay();  
+//		Serial.println("Arduino Time");
+//		digitalClockDisplay();  
 		Serial.println("RTC Time");
 		rtcTime();
 		

@@ -511,7 +511,8 @@ void broadcastIP(OSCMessage &msg)
 						    .add( (int32_t)config_wifi->ip[2] )
 						    .add( (int32_t)config_wifi->ip[3] ) ;
 
-	wifi_send_bundle(&bndl, config_wifi->subnetPort);
+wifi_send_bundle(&bndl, config_wifi->subnetPort);
+    // wifi_send_bundle(&bndl);
 	bndl.empty();		// Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println2("Broadcasted IP: ", config_wifi->ip);
@@ -577,7 +578,9 @@ void get_new_channel(OSCMessage &msg)
 	sprintf(address_string, "%s%s", packet_header_string, "/RequestSettings");
 	bndl.add(address_string);
 
-	wifi_send_bundle(&bndl, config_wifi->subnetPort);
+wifi_send_bundle(&bndl, config_wifi->subnetPort);
+	// wifi_send_bundle(&bndl);
+
 	bndl.empty();		// Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println("Requested New Channel Settings");
@@ -603,6 +606,7 @@ void respond_to_poll_request(OSCMessage &msg)
 	bndl.add(address_string);
 
 	wifi_send_bundle(&bndl, config_wifi->subnetPort);
+	// wifi_send_bundle(&bndl);
 	bndl.empty();		// Empty the bundle to free room for a new one
 
 	LOOM_DEBUG_Println("Responded to poll request");

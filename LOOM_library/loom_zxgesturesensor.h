@@ -101,10 +101,11 @@ void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/zxgesturesensor/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
-	msg.add("type" ).add(state_zxgesturesensor.gesture_type.c_str());
-	msg.add("speed").add((int32_t)state_zxgesturesensor.gesture_speed);
 	msg.add("px").add((int32_t)state_zxgesturesensor.pos[0]);
 	msg.add("pz").add((int32_t)state_zxgesturesensor.pos[1]);
+
+	// msg.add("type" ).add(state_zxgesturesensor.gesture_type.c_str());
+	// msg.add("speed").add((int32_t)state_zxgesturesensor.gesture_speed);
 	
 	bndl->add(msg);
 }
@@ -113,14 +114,16 @@ void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_type");
-	bndl->add(address_string).add(state_zxgesturesensor.gesture_type.c_str());
-	sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_speed");
-	bndl->add(address_string).add((int32_t)state_zxgesturesensor.gesture_speed);
 	sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_px");
 	bndl->add(address_string).add((int32_t)state_zxgesturesensor.pos[0]);
 	sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_pz");
 	bndl->add(address_string).add((int32_t)state_zxgesturesensor.pos[1]);
+
+	// sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_type");
+	// bndl->add(address_string).add(state_zxgesturesensor.gesture_type.c_str());
+	// sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_speed");
+	// bndl->add(address_string).add((int32_t)state_zxgesturesensor.gesture_speed);
+
 }
 
 
@@ -130,8 +133,7 @@ void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[])
 // 
 void measure_zxgesturesensor() 
 {
-	uint8_t x;
-	uint8_t z;
+	uint8_t x, z;
 	
 	if (state_zxgesturesensor.inst_zxgesturesensor.positionAvailable()) {
 		x = state_zxgesturesensor.inst_zxgesturesensor.readX();
@@ -147,40 +149,46 @@ void measure_zxgesturesensor()
 		}	
 	} else {
 		LOOM_DEBUG_Println("Position data unavailable for zxgesturesensor");
+		
+		// Send 255 to indicate that no object is detected
+		state_zxgesturesensor.pos[0] = 255; 
+		state_zxgesturesensor.pos[1] = 255;
 	}
 	
-	if (state_zxgesturesensor.inst_zxgesturesensor.gestureAvailable()) {
-		state_zxgesturesensor.gesture       = state_zxgesturesensor.inst_zxgesturesensor.readGesture();
-		state_zxgesturesensor.gesture_speed = state_zxgesturesensor.inst_zxgesturesensor.readGestureSpeed();
+// Commented out because type and speed are currently not used / there were some issues with them 
+
+	// if (state_zxgesturesensor.inst_zxgesturesensor.gestureAvailable()) {
+	// 	state_zxgesturesensor.gesture       = state_zxgesturesensor.inst_zxgesturesensor.readGesture();
+	// 	state_zxgesturesensor.gesture_speed = state_zxgesturesensor.inst_zxgesturesensor.readGestureSpeed();
 		
-		switch (state_zxgesturesensor.gesture) {
-			// case NO_GESTURE:
-			// 	state_zxgesturesensor.gesture_type = "No Gesture";
-			// 	break;
-			case RIGHT_SWIPE:
-				state_zxgesturesensor.gesture_type = "Right Swipe";
-				break;
-			case LEFT_SWIPE:
-				state_zxgesturesensor.gesture_type = "Left Swipe";
-				break;
-			case UP_SWIPE:
-				state_zxgesturesensor.gesture_type = "Up Swipe";
-			case NO_GESTURE: default:
-				state_zxgesturesensor.gesture_type = "No Gesture";
-				break;
-		}
+	// 	switch (state_zxgesturesensor.gesture) {
+	// 		// case NO_GESTURE:
+	// 		// 	state_zxgesturesensor.gesture_type = "No Gesture";
+	// 		// 	break;
+	// 		case RIGHT_SWIPE:
+	// 			state_zxgesturesensor.gesture_type = "Right Swipe";
+	// 			break;
+	// 		case LEFT_SWIPE:
+	// 			state_zxgesturesensor.gesture_type = "Left Swipe";
+	// 			break;
+	// 		case UP_SWIPE:
+	// 			state_zxgesturesensor.gesture_type = "Up Swipe";
+	// 		case NO_GESTURE: default:
+	// 			state_zxgesturesensor.gesture_type = "No Gesture";
+	// 			break;
+	// 	}
 
-		#if DEBUG == 1
-			LOOM_DEBUG_Println2("Gesture type: ", state_zxgesturesensor.gesture_type);
-			LOOM_DEBUG_Print("Gesture speed: ");
-			Serial.println(state_zxgesturesensor.gesture_speed, DEC);
-		#endif
+	// 	#if DEBUG == 1
+	// 		LOOM_DEBUG_Println2("Gesture type: ", state_zxgesturesensor.gesture_type);
+	// 		LOOM_DEBUG_Print("Gesture speed: ");
+	// 		Serial.println(state_zxgesturesensor.gesture_speed, DEC);
+	// 	#endif
 
-	} else {
-		LOOM_DEBUG_Println("Gesture data unavailable for zxgesturesensor");
-		state_zxgesturesensor.gesture_type  = "No Gesture";
-		state_zxgesturesensor.gesture_speed = 0;
-	}
+	// } else {
+	// 	LOOM_DEBUG_Println("Gesture data unavailable for zxgesturesensor");
+	// 	state_zxgesturesensor.gesture_type  = "No Gesture";
+	// 	state_zxgesturesensor.gesture_speed = 0;
+	// }
 }
 
 

@@ -371,4 +371,15 @@ function enable_SD(s)
 	send( build_msg( '/EnableSD', [s] ) );	
 }
 
+// Change the sample rate / loop sleep period
+function set_sample_rate(t)
+{
+	send( build_msg( '/SetSampleRate', [t] ) );
+}
+
+// Save config
+function save_config()
+{
+	send( build_msg( '/SaveConfig', [] ) );	
+}
 

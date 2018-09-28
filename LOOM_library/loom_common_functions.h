@@ -133,18 +133,39 @@ void check_button_held()
 #ifdef is_sleep_period
 void loop_sleep()
 {
-	#if is_multiplexer == 1
-		return;
-	#endif
+	// #if is_multiplexer == 1
+	// 	return;
+	// #endif
 
 	#if LOOM_DEBUG == 0
-		int sleepMS = Watchdog.sleep(is_sleep_period); // Sleep MCU for transmit period duration
+		int sleepMS = Watchdog.sleep(configuration.sample_rate); // Sleep MCU for transmit period duration
 	#else // don't actually sleep if Debug mode on
-		delay(is_sleep_period);                        // Demo transmit every 1 second
+		delay(is_sleep_period);                        // Dont actually go to sleep if connected to serial
 	#endif
+
+	// #if LOOM_DEBUG == 0
+	// 	int sleepMS = Watchdog.sleep(is_sleep_period); // Sleep MCU for transmit period duration
+	// #else // don't actually sleep if Debug mode on
+	// 	delay(is_sleep_period);                        // Dont actually go to sleep if connected to serial
+	// #endif
 }
 #endif
 
+
+// Change the sleep period / sample rate (milliseconds)
+void set_sleep_period(OSCMessage &msg)
+{	
+	// Currently only care about changing sample 
+	//  rate of workshop devices with sensors
+	#if (is_ishield == 1) || (is_multiplexer == 1) 
+		int rate = msg.getInt(0);
+		if ((rate < 20) || (rate > 16000)) {
+			return;
+		}
+
+		configuration.sample_rate = rate;
+	#endif
+}
 
 
 // --- SAVE CONFIG ---

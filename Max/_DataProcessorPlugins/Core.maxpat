@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 246.0, 79.0, 942.0, 787.0 ],
+		"rect" : [ 34.0, 79.0, 842.0, 787.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,14 +39,90 @@
 		"showontab" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-21",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 693.549438, 12.0, 56.0, 33.0 ],
+					"style" : "",
+					"text" : "WiFi Mode In"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"comment" : "WiFi Mode In",
+					"id" : "obj-22",
+					"index" : 0,
+					"maxclass" : "inlet",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 693.549438, 56.0, 30.0, 30.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgmode" : 0,
+					"border" : 0,
+					"clickthrough" : 0,
+					"enablehscroll" : 0,
+					"enablevscroll" : 0,
+					"id" : "obj-20",
+					"lockeddragscroll" : 0,
+					"maxclass" : "bpatcher",
+					"name" : "Additional_Settings.maxpat",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"offset" : [ 0.0, 0.0 ],
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 560.5, 330.0, 128.0, 128.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 203.5, 139.0, 92.0, 160.0 ],
+					"viewvisibility" : 1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-18",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 603.549438, 12.0, 80.0, 33.0 ],
+					"style" : "",
+					"text" : "Send 1 if sensor type"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"comment" : "Send 1 if sensor type",
+					"id" : "obj-19",
+					"index" : 0,
+					"maxclass" : "inlet",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 603.549438, 56.0, 30.0, 30.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-15",
 					"maxclass" : "newobj",
-					"numinlets" : 4,
+					"numinlets" : 5,
 					"numoutlets" : 1,
 					"outlettype" : [ "list" ],
-					"patching_rect" : [ 363.0, 723.0, 53.0, 22.0 ],
+					"patching_rect" : [ 363.0, 723.0, 61.0, 22.0 ],
 					"style" : "",
-					"text" : "funnel 4"
+					"text" : "funnel 5"
 				}
 
 			}
@@ -632,10 +708,10 @@
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
 					"name" : "WiFi_Setup.maxpat",
-					"numinlets" : 1,
-					"numoutlets" : 1,
+					"numinlets" : 2,
+					"numoutlets" : 2,
 					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "list" ],
+					"outlettype" : [ "list", "int" ],
 					"patching_rect" : [ 28.0, 578.166687, 296.0, 135.5 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.5, 520.0, 295.0, 135.0 ],
@@ -699,8 +775,31 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-20", 0 ],
+					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-3", 2 ],
+					"midpoints" : [ 570.0, 459.0, 531.0, 459.0, 531.0, 321.0, 221.5, 321.0 ],
+					"source" : [ "obj-20", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 1 ],
+					"midpoints" : [ 703.049438, 559.0, 314.5, 559.0 ],
+					"source" : [ "obj-22", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-15", 1 ],
-					"midpoints" : [ 313.5, 533.333313, 383.833344, 533.333313 ],
+					"midpoints" : [ 313.5, 533.333313, 383.0, 533.333313 ],
 					"source" : [ "obj-3", 7 ]
 				}
 
@@ -708,7 +807,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-15", 2 ],
-					"midpoints" : [ 274.071442, 540.833313, 395.166656, 540.833313 ],
+					"midpoints" : [ 274.071442, 540.833313, 393.5, 540.833313 ],
 					"source" : [ "obj-3", 6 ]
 				}
 
@@ -716,7 +815,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-15", 3 ],
-					"midpoints" : [ 37.5, 551.0, 406.5, 551.0 ],
+					"midpoints" : [ 37.5, 551.0, 404.0, 551.0 ],
 					"order" : 0,
 					"source" : [ "obj-3", 0 ]
 				}
@@ -783,6 +882,14 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-15", 4 ],
+					"midpoints" : [ 314.5, 717.0, 414.5, 717.0 ],
+					"source" : [ "obj-4", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-3", 1 ],
 					"midpoints" : [ 37.5, 721.0, 10.0, 721.0, 10.0, 326.0, 129.5, 326.0 ],
 					"source" : [ "obj-4", 0 ]
@@ -808,7 +915,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-15", 1 ],
-					"midpoints" : [ 165.5, 308.0, 383.833344, 308.0 ],
+					"midpoints" : [ 165.5, 308.0, 383.0, 308.0 ],
 					"source" : [ "obj-65", 1 ]
 				}
 
@@ -867,6 +974,13 @@
 			}
 , 			{
 				"name" : "Status_Bar.maxpat",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "Additional_Settings.maxpat",
 				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
