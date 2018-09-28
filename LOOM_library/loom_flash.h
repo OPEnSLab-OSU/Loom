@@ -154,7 +154,7 @@ void setup_flash_config()
 
 
 			// Add any other behavior/calibration wrapped in an '#ifdef is_something' preprocessor directive HERE
-			#if is_mpu6050 == 1
+			#if (is_mpu6050 == 1) && (skip_mpu_cal != 1)
 			// #if (is_mpu6050 == 1) && (is_multiplexer != 1)
 				calMPU6050();                                 // Calibration writes memValidationValue for us
 			#endif
