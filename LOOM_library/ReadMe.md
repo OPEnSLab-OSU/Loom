@@ -15,6 +15,7 @@ This is the primary location of the Project LOOM code, consolidated into place w
 5. [Max/MSP](#max/msp)
 
 6. [Library Architecture](#library-architecture)
+
     1. [Overall Structure](#overall-structure)
         1. [Example Library Include Hierarchy](#example-library-include-hierarchy)
     2. [Adding to the Library](#adding-to-the-library)
@@ -27,6 +28,7 @@ This is the primary location of the Project LOOM code, consolidated into place w
 8. [Configuration File](#configuration-file)
 
 9. [API](#api)
+
     1. [Includes](#includes)
     2. [Setup](#setup)
     3. [Main Loop Functions](#main-loop-functions)
@@ -47,6 +49,10 @@ This is the primary location of the Project LOOM code, consolidated into place w
 13. [Building and Uploading Code Without The IDE](#building-and-uploading-code-without-the-ide)
 
 14. [Configuration Conflicts](#configuration-conflicts)
+
+15. [Device Identification Hierarchy](#device-identification-hierarchy)
+
+16. 
 
    ​      
 
@@ -427,3 +433,63 @@ The following combinations of options in the configuration file result in variou
 
 - LoRa + nRF
 - is_sleep_period + LoRa (Adafruit_ASFcore-master/tc_interrupt.c:140: multiple definition of 'TC3_Handler')
+
+## Device Identification Hierarchy
+
+In Loom, a device is uniquely identified by 4 elements, from broad to precise identification:
+
+- Family
+- Family number
+- Device type
+- Device number
+
+The OSC messages and bundles send to and from devices are address/signed with their ID string, in the following format:
+
+`/<Family><Family-Num>/<Device-Type><Device-Num>/<the-rest-of-the-address>`
+
+For example, Ishield 7 in the 3 'Loom' subnet would be:
+
+`/Loom3/Ishield7`
+
+**Family**
+
+A family is generally a complete network of a given functionality under a single person or group
+
+**Family Number**
+
+A family number is used to distinguish subnets between a family. This is typically used to seperate devices into groups by purpose, location, etc. In Max/MSP, you are generally only observing one subnet at a time. Family numbers should be 0 or greater.
+
+**Device Type**
+
+The Loom Library supports an autoname feature to try to name your device if it fits into a common hardware / functionality set. These include devices like Ishields, multiplexers, servo controllers, etc. and name the device accordingly. Alternatively, you can use custom names for your devices if you want. 
+
+**Device Number / Channel**
+
+A device number is used to distinguish the devices on the same subnet (family number) that have the same device type. Device numbers are sometimes also referred to as channels. Device numbers are expected to be between 1 and 8, inclusive (channels A-H).
+
+### WiFi UDP Ports
+
+If using WiFi, the family number and device number will determine the UDP ports that the device will expect messages from. The device will check and send on 3 ports, one for global messages, one for subnet, and one for device specific messages. The calculation of the specific ports are shown below. The reason for different ports fro various devices/purposes is to reduce the number of messages a device may recieve that were not intended for it.
+
+### Device Targetting Scope
+
+The message routing function of the Loom Library supports receiving messages addressed at a global, subnet, or device level. Max/MSP can send on any of the 3 formats as well.
+
+**Global** 
+
+Broadcast the OSC bundle to all devices. Those with the matching family name can see/react to the message. If using WiFi the message is sent on UDP port `9400`.
+
+`/<Family>/<command>`
+
+**Subnet**
+
+Broadcast to a single subnet of a given family. Those with the matching family name and family number can see/react to the message. If using WiFi the message is sent on UDP port `9400+10*(family-num)`.
+
+`/<Family><Family-Num>/<command>`
+
+**Device**
+
+Target a message at a single device, i.e. the one with the matching family, family number, device type, and device number. If using WiFi the message is sent on UDP port `9400+10*(family-num)+(device-num)`.
+
+`/<Family><Family-Num>/<Device-Type><Device-Num>/<command`
+
