@@ -52,7 +52,7 @@ This is the primary location of the Project LOOM code, consolidated into place w
 
 15. [Device Identification Hierarchy](#device-identification-hierarchy)
 
-16. 
+16. [Using the Loom Library](#using-the-loom-library)
 
    ​      
 
@@ -493,3 +493,19 @@ Target a message at a single device, i.e. the one with the matching family, fami
 
 `/<Family><Family-Num>/<Device-Type><Device-Num>/<command`
 
+## Using the Loom Library
+
+This section assumes that you want to use the Loom Library without integrating your code, software, or hardware formally into the library's official code. This means that your code and modifications will exist almost exclusively in the main .ino file and config.h file.
+
+**Config.h**
+
+The configuration file is where you will define which Loom supported components are being used, and various associated options and behaviors. Any functionality you need beyond Loom will be defined in the .ino file or your own addition files to #include.
+
+ **.ino Sketch**
+
+By default, the .ino sketch is fairly sparse – the config.h and Loom preamble are #included (which together define what parts of the library should be used). The `setup()` function simply calls `Loom_begin()`  to handle any of the setup of the Loom components. The `loop()` function declares an OSC Bundle or two and uses the [API functions](#api). 
+
+- Any global variables you need that are not already availalbe in Loom can be added above the `setup()` function
+- Add any additional setup you need after the call to `Loom_begin()` in `setup()`
+- Use the API to interface with the supported components of Loom at a high level
+- Put your own code into the `loop()` function as needed to support your additional functionality / components
