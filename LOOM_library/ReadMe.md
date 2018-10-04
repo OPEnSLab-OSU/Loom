@@ -503,8 +503,6 @@ By default, the .ino sketch is fairly sparse – the config.h and Loom preamble 
 
 This section will describe some of the ways that you can extend Loom without officially integrating code into the library. 
 
-------
-
 **Adding Message Router Options**
 
 If you have a non-Loom actuator that you would like to be able to respond to OSC Bundles, refer to the `loom_mod_template_actuator.h` for how to setup a function to handle messages forwarded from the message router, which directs messages to the correct 'driver' function for processing. 
