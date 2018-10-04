@@ -438,11 +438,11 @@ For example, Ishield 7 in the 3 'Loom' subnet would be:
 
 **Family**
 
-A family is generally a complete network of a given functionality under a single person or group
+A family is generally a complete network of a given functionality under a single person or group.
 
 **Family Number**
 
-A family number is used to distinguish subnets between a family. This is typically used to seperate devices into groups by purpose, location, etc. In Max/MSP, you are generally only observing one subnet at a time. Family numbers should be 0 or greater.
+A family number is used to distinguish subnets between a family. This is typically used to seperate devices into groups by purpose, location, etc. In Max/MSP, you will generally only be observing a single subnet at a time. Family numbers should be 0 or greater.
 
 **Device Type**
 
