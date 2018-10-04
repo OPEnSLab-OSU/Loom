@@ -5,28 +5,20 @@ This is the primary location of the Project LOOM code, consolidated into place w
 ## Table of Contents
 
 1. [Installation](#installation)
-
 2. [Device Support](#device-support)
-
 3. [Communication Platforms](#communication-platforms)
-
 4. [Device Configuration](#device-configuration)
-
 5. [Max/MSP](#max/msp)
-
 6. [Library Architecture](#library-architecture)
 
     1. [Overall Structure](#overall-structure)
         1. [Example Library Include Hierarchy](#example-library-include-hierarchy)
     2. [Adding to the Library](#adding-to-the-library)
     3. [Adding to the Message Router](adding-to-the-message-router)
-
 7. [Channels](#channels)
     1. [Implementation](#implementation)
     2. [Additional Devices](#additional-devices)
-
 8. [Configuration File](#configuration-file)
-
 9. [API](#api)
 
     1. [Includes](#includes)
@@ -39,22 +31,15 @@ This is the primary location of the Project LOOM code, consolidated into place w
         5. [Send Bundle](#send-bundle)
         6. [Additional Loop Checks](#additional-loop-checks)
         	. [Minimal Working Example](#minimal-working-example)	
-
 10. [SD Card Support](#sd-card-support)
-
 11. [Real-Time Clock Support](#real-time-clock-support)
-
 12. [Arduino IDE Setup](#arduino-ide-setup)
-
 13. [Building and Uploading Code Without The IDE](#building-and-uploading-code-without-the-ide)
-
 14. [Configuration Conflicts](#configuration-conflicts)
-
 15. [Device Identification Hierarchy](#device-identification-hierarchy)
-
 16. [Using the Loom Library](#using-the-loom-library)
-
-   ​      
+17. [Extending Loom Functionality](#extending-loom-functionality)
+18. ​      
 
 ## Installation
 
@@ -509,3 +494,20 @@ By default, the .ino sketch is fairly sparse – the config.h and Loom preamble 
 - Add any additional setup you need after the call to `Loom_begin()` in `setup()`
 - Use the API to interface with the supported components of Loom at a high level
 - Put your own code into the `loop()` function as needed to support your additional functionality / components
+
+## Extending Loom Functionality 
+
+This section will describe some of the ways that you can extend Loom without officially integrating code into the library. 
+
+------
+
+**Adding Message Router Options**
+
+If you have a non-Loom actuator that you would like to be able to respond to OSC Bundles, refer to the `loom_mod_template_actuator.h` for how to setup a function to handle messages forwarded from the message router, which directs messages to the correct 'driver' function for processing. 
+
+Then you need to add routing to your function in the message router (in `loom_msg_router.h`. Follow the format of the other dispatches in the function, i.e:
+
+```
+if (msg.dispatch("/<some-command>", <function-to-call>, addrOffset) ) return;
+```
+
