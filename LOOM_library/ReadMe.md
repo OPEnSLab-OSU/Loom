@@ -478,6 +478,10 @@ Target a message at a single device, i.e. the one with the matching family, fami
 
 `/<Family><Family-Num>/<Device-Type><Device-Num>/<command`
 
+### Diagram of Device Scope
+
+![Loom_Hierarchy_Diagram](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/Images_for_Readmes/Loom_Hierarchy_Diagram.png)
+
 ## Using the Loom Library
 
 This section assumes that you want to use the Loom Library without integrating your code, software, or hardware formally into the library's official code. This means that your code and modifications will exist almost exclusively in the main .ino file and config.h file.
