@@ -7,7 +7,9 @@
 // ===                       DEFINITIONS                        ===
 // ================================================================
 
-#define i2c_addr_mb1232 0x70 			
+// #define i2c_addr_mb1232 0x70 			
+
+
 
 #define SCL_PIN 5 						//Default SDA is Pin5 PORTC for the UNO -- you can set this to any tristate pin
 #define SCL_PORT PORTC
@@ -61,12 +63,14 @@ void package_mb1232(OSCBundle *bndl, char packet_header_string[]);
 bool setup_mb1232() {
 	bool is_setup;
 	
-	Wire.beginTransmission(i2c_addr_mb1232);
+	// Wire.beginTransmission(i2c_addr_mb1232);
+	Wire.beginTransmission(0x70);
+
 	Wire.write(RangeCommand);
 	Wire.endTransmission();
 	delay(100);
 	
-	Wire.requestFrom(i2c_addr_mb1232, byte(2));
+	Wire.requestFrom(0x70, byte(2));
 	if(Wire.available() >= 2) {
 		is_setup = true;
 		LOOM_DEBUG_Println("Initialized mb1232");
@@ -104,13 +108,15 @@ void package_mb1232(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	bndl->add(msg);
 }
 
+#if is_multiplexer != 1
 void package_mb1232(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(address_string, "%s%s", packet_header_string, "/mb1232_range");
+	sprintf(address_string, "%s%s%s%s", packet_header_string, "/", mb1232_0x70_name, "_range");
 	bndl->add(address_string).add((int32_t)state_mb1232.range);
 }
+#endif
 
 
 // --- MEASURE MB1232 ---
@@ -119,13 +125,15 @@ void package_mb1232(OSCBundle *bndl, char packet_header_string[])
 //
 void measure_mb1232() 
 {
-	Wire.beginTransmission(i2c_addr_mb1232);
+	// Wire.beginTransmission(i2c_addr_mb1232);
+	Wire.beginTransmission(0x70);
+
 	Wire.write(RangeCommand);
 	Wire.endTransmission();
 	
 	delay(100);
 	
-	Wire.requestFrom(i2c_addr_mb1232, byte(2));
+	Wire.requestFrom(0x70, byte(2));
 	if (Wire.available() >= 2) {
 		// The sensor communicates two bytes, each a range. The
 		// high byte is typically zero, in which case the low

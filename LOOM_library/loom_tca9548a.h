@@ -26,8 +26,11 @@ byte possible_addresses[] = {0x00
 		#if is_tsl2591 == 1
 			, 0x29
 		#endif
+		#if is_tsl2561 == 1 && is_tsl2591 != 1
+			, 0x29
+		#endif
 		#if is_tsl2561 == 1
-			, 0x29, 0x39, 0x49
+			, 0x39, 0x49
 		#endif
 		#if is_fxos8700 == 1
 			, 0x1C, 0x1D, 0x1E, 0x1F
@@ -175,42 +178,45 @@ void measure_sensor_data(uint8_t i2c_addr)
 	LOOM_DEBUG_Println2("Attempting to measure data from sensor with address: ", i2c_addr);
 	
 	switch (i2c_addr) {
-		#ifdef i2c_addr_tsl2561
-			case 0x29: case 0x39: case 0x49:   // Note that the 0x29 conflicts with the tsl2591 below
+		#if is_tsl2561 == 1 && is_tsl2591 != 1
+			case 0x29: 
+		#endif
+		#if is_tsl2561 == 1
+			case 0x39: case 0x49:   // Note that the 0x29 conflicts with the tsl2591 below
 				measure_tsl2561();
 				return;
 		#endif
-		#ifdef i2c_addr_tsl2591
+		#if is_tsl2591 == 1
 			case 0x29: 
 				measure_tsl2591();
 				return;
 		#endif
-		#ifdef i2c_addr_fxos8700
+		#if is_fxos8700 == 1
 			case 0x1C: case 0x1D: case 0x1E: case 0x1F:
 				measure_fxos8700();
 				return;
 		#endif
-		#ifdef i2c_addr_fxas21002	
+		#if is_fxas21002 == 1	
 			case 0x20: case 0x21:
 				measure_fxas21002();
 				return;
 		#endif
-		#ifdef i2c_addr_zxgesturesensor
+		#if is_zxgesturesensor == 1
 			case 0x10: case 0x11:
 				measure_zxgesturesensor();
 				return;
 		#endif
-		#ifdef i2c_addr_sht31d		
+		#if is_sht31d == 1		
 			case 0x44: case 0x45:
 				measure_sht31d();
 				return;
 		#endif
-		#ifdef i2c_addr_mb1232		
+		#if is_mb1232 == 1		
 			case 0x70:
 				measure_mb1232();
 				return;
 		#endif
-		// #ifdef i2c_addr_mpu6050	
+		// #if is_mpu6050 == 1	
 		
 		// 		case 0x68: // Only check for MPU // 	#endif
 		// 	case
@@ -218,12 +224,12 @@ void measure_sensor_data(uint8_t i2c_addr)
 		// 			measure_mpu6050(/ 		} 
 		// 		return;
 		// #endif
-		#ifdef i2c_addr_ms5803		
+		#if is_ms5803 == 1		
 			case 0x77:
 				measure_ms5803();
 				return;
 		#endif
-		#ifdef i2c_addr_lis3dh		
+		#if is_lis3dh == 1		
 			case 0x19:
 				measure_lis3dh();
 				return;
@@ -256,42 +262,45 @@ void package_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_s
 	LOOM_DEBUG_Println(")");
 
 	switch (i2c_addr) {
-		#ifdef i2c_addr_tsl2561
-			case 0x29: case 0x39: case 0x49:   // Note that the 0x29 conflicts with the tsl2591 below
+		#if is_tsl2561 == 1 && is_tsl2591 != 1
+			case 0x29: 
+		#endif
+		#if is_tsl2561 == 1
+			case 0x39: case 0x49:   // Note that the 0x29 conflicts with the tsl2591 below
 				package_tsl2561(bndl, packet_header_string, port);
 				return;
 		#endif
-		#ifdef i2c_addr_tsl2591
+		#if is_tsl2591 == 1
 			case 0x29: 
 				package_tsl2591(bndl, packet_header_string, port);
 				return;
 		#endif
-		#ifdef i2c_addr_fxos8700
+		#if is_fxos8700 == 1
 			case 0x1C: case 0x1D: case 0x1E: case 0x1F:
 				package_fxos8700(bndl, packet_header_string, port);
 				return;
 		#endif
-		#ifdef i2c_addr_fxas21002	
+		#if is_fxas21002 == 1	
 			case 0x20: case 0x21:
 				package_fxas21002(bndl, packet_header_string, port);
 				return;
 		#endif
-		#ifdef i2c_addr_zxgesturesensor
+		#if is_zxgesturesensor == 1
 			case 0x10: case 0x11:
 				package_zxgesturesensor(bndl, packet_header_string, port);
 				return;
 		#endif
-		#ifdef i2c_addr_sht31d		
+		#if is_sht31d == 1		
 			case 0x44: case 0x45:
 				package_sht31d(bndl, packet_header_string, port);
 				return;
 		#endif
-		#ifdef i2c_addr_mb1232		
+		#if is_mb1232 == 1		
 			case 0x70:
 				package_mb1232(bndl, packet_header_string, port);
 				return;
 		#endif
-		// #ifdef i2c_addr_mpu6050	
+		// #if is_mpu6050 == 1
 		
 		// 		case 0x68: // Only check for MPU // 	#endif
 		// 	case
@@ -299,12 +308,12 @@ void package_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_s
 		// 			package_mpu6050(bndl, packet_header_string, por// 		} 
 		// 		return;
 		// #endif
-		#ifdef i2c_addr_ms5803		
+		#if is_ms5803 == 1		
 			case 0x77:
 				package_ms5803(bndl, packet_header_string, port);
 				return;
 		#endif
-		#ifdef i2c_addr_lis3dh		
+		#if is_lis3dh == 1		
 			case 0x19:
 				package_lis3dh(bndl, packet_header_string, port);
 				return;
@@ -393,13 +402,6 @@ void update_sensors()
 
 	setup_mux_sensors();
 
-	// OSCBundle send_bndl;
-	// send_sensors(&send_bndl, packet_header_string);
-	// #if is_wifi
-	// 	wifi_send_bundle(&send_bndl);
-	// 	send_bndl.empty();
-	// #endif
-
 }
 
 
@@ -429,32 +431,49 @@ void send_sensors(OSCBundle *bndl, char packet_header_string[])
 
 			// Add the sensor name
 			switch (state_tca9548a.devices[i]) {
-				// case 0x29:   				// needs to be better implemented, as to not conflict with tsl2591
-				// 	msg.add("tsl2561"); 		break;
-				case 0x29: case 0x39: case 0x49: 
-					msg.add("tsl2591"); 		break;
-				case 0x1C: case 0x1D: case 0x1E: case 0x1F:
-					msg.add("fxos8700"); 		break;
-				case 0x20: case 0x21:
-					msg.add("fxas21002"); 		break;
-				case 0x10: case 0x11:
-					msg.add("zxgesturesensor"); break;
-				case 0x44: case 0x45:
-					msg.add("sht31d"); 			break;
-				case 0x70:
-					msg.add("mb1232"); 			break;
+				#if is_tsl2561 == 1 && is_tsl2591 != 1
+					case 0x29:  				
+						msg.add("tsl2561"); 		break;
+				#endif
+				#if is_tsl25691 == 1
+					case 0x29: case 0x39: case 0x49: 
+						msg.add("tsl2591"); 		break;
+				#endif
+				#if is_fxos8700 == 1
+					case 0x1C: case 0x1D: case 0x1E: case 0x1F:
+						msg.add("fxos8700"); 		break;
+				#endif
+				#if is_fxas21002 == 1
+					case 0x20: case 0x21:
+						msg.add("fxas21002"); 		break;
+				#endif
+				#if is_zxgesturesensor == 1
+					case 0x10: case 0x11:
+						msg.add("zxgesturesensor"); break;
+				#endif
+				#if is_sht31d == 1
+					case 0x44: case 0x45:
+						msg.add("sht31d"); 			break;
+				#endif
+				#if is_mb1232 == 1
+					case 0x70:
+						msg.add("mb1232"); 			break;
+				#endif
 				// #if is_rtc != 1
 				// 	case 0x68: // only check for MPU6050 on 0x68 if no RTC
 				// #endif
 				// 	case 0x69:
 				// 		msg.add("mpu6050"); 		break;
-
-				case 0x77:
-					msg.add("ms5803"); 			break;
-				case 0x19:
-					msg.add("lis3dh"); 			break;
+				#if is_ms5803 == 1
+					case 0x77:
+						msg.add("ms5803"); 			break;
+				#endif
+				#if is_lis3dh == 1
+					case 0x19:
+						msg.add("lis3dh"); 			break;
+				#endif
 				default:
-					msg.add("unknown"); 		break;
+					msg.add("unknown"); 			break;
 			} // of switch
 		} // of if
 	}
@@ -522,47 +541,50 @@ void setup_mux_sensors()
 		tcaseselect(i);
 
 		switch (state_tca9548a.devices[i]) {
-			#ifdef i2c_addr_tsl2561
-				case 0x29: case 0x39: case 0x49:   // Note that the 0x29 conflicts with the tsl2591 below
+			#if is_tsl2561 == 1 && is_tsl2591 != 1
+				case 0x29: 
+			#endif
+			#if is_tsl2561 == 1
+				case 0x39: case 0x49:   // Note that the 0x29 conflicts with the tsl2591 below
 					setup_tsl2561();
 					break;
 			#endif
-			#ifdef i2c_addr_tsl2591
+			#if is_tsl2591 == 1
 				case 0x29: 
 					setup_tsl2591();
 					break;
 			#endif
-			#ifdef i2c_addr_fxos8700
+			#if is_fxos8700 == 1
 				case 0x1C: case 0x1D: case 0x1E: case 0x1F:
 					setup_fxos8700();
 					break;
 			#endif
-			#ifdef i2c_addr_fxas21002	
+			#if is_fxas21002 == 1	
 				case 0x20: case 0x21:
 					setup_fxas21002();
 					break;
 			#endif
-			#ifdef i2c_addr_zxgesturesensor
+			#if is_zxgesturesensor == 1
 				case 0x10: case 0x11:
 					setup_zxgesturesensor();
 					break;
 			#endif
-			#ifdef i2c_addr_sht31d		
+			#if is_sht31d == 1		
 				case 0x44: case 0x45:
 					setup_sht31d();
 					break;
 			#endif
-			#ifdef i2c_addr_mb1232		
+			#if is_mb1232 == 1		
 				case 0x70:
 					setup_mb1232();
 					break;
 			#endif
-			#ifdef i2c_addr_ms5803		
+			#if is_ms5803 == 1		
 				case 0x77:
 					setup_ms5803();
 					break;
 			#endif
-			#ifdef i2c_addr_lis3dh		
+			#if is_lis3dh == 1		
 				case 0x19:
 					setup_lis3dh();
 					break;

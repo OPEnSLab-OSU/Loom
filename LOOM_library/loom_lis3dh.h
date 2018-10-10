@@ -7,7 +7,7 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define i2c_addr_lis3dh 0x19	
+// #define i2c_addr_lis3dh 0x19	
 
 
 // ================================================================ 
@@ -26,7 +26,7 @@ struct state_lis3dh_t {
 // ================================================================
 // struct config_lis3dh_t config_lis3dh;
 struct state_lis3dh_t state_lis3dh;
-LIS3DH inst_lis3dh(I2C_MODE, i2c_addr_lis3dh); //Default constructor is I2C, addr 0x19.
+LIS3DH inst_lis3dh(I2C_MODE, 0x19); //Default constructor is I2C, addr 0x19.
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
@@ -85,18 +85,19 @@ void package_lis3dh(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	bndl->add(msg);
 }
 
+#if is_multiplexer != 1
 void package_lis3dh(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(address_string, "%s%s", packet_header_string, "/lis3dh_accel_x");
+	sprintf(address_string, "%s%s%s%s", packet_header_string, "/", lis3dh_0x19_name, "_accel_x");
 	bndl->add(address_string).add(state_lis3dh.accel_x);
-	sprintf(address_string, "%s%s", packet_header_string, "/lis3dh_accel_y");
+	sprintf(address_string, "%s%s%s%s", packet_header_string, "/", lis3dh_0x19_name, "_accel_y");
 	bndl->add(address_string).add(state_lis3dh.accel_y);
-	sprintf(address_string, "%s%s", packet_header_string, "/lis3dh_accel_z");
+	sprintf(address_string, "%s%s%s%s", packet_header_string, "/", lis3dh_0x19_name, "_accel_z");
 	bndl->add(address_string).add(state_lis3dh.accel_z);
 }
-
+#endif
 
 // --- MEASURE LIS3DH ---
 //
