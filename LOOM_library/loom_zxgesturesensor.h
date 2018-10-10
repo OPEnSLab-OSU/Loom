@@ -7,29 +7,32 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define i2c_addr_zxgesturesensor 0x10 		 //0x10, 0x11
+// #define i2c_addr_zxgesturesensor 0x10 		 //0x10, 0x11
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================ 
-struct config_zxgesturesensor_t {
-
-};
 
 struct state_zxgesturesensor_t {
 	//Cannot declare a ZX_Sensor and not initialize
-	ZX_Sensor inst_zxgesturesensor = ZX_Sensor(i2c_addr_zxgesturesensor);
 	GestureType gesture;
 	String gesture_type;
 	uint8_t gesture_speed;
 	int pos[2];
 };
 
+
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-struct config_zxgesturesensor_t config_zxgesturesensor;
-struct state_zxgesturesensor_t state_zxgesturesensor;
+#if i2c_addr_zxgesturesensor_0x10 == 1
+	ZX_Sensor inst_zxgesturesensor_0x10 = ZX_Sensor(0x10);
+	struct state_zxgesturesensor_t state_zxgesturesensor_0x10;
+#endif
+#if i2c_addr_zxgesturesensor_0x11 == 1
+	ZX_Sensor inst_zxgesturesensor_0x11 = ZX_Sensor(0x11);
+	struct state_zxgesturesensor_t state_zxgesturesensor_0x11;
+#endif
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
@@ -53,31 +56,61 @@ bool setup_zxgesturesensor()
 	bool is_setup;
 	uint8_t ver;
 	
-	if (state_zxgesturesensor.inst_zxgesturesensor.init()) {
-		is_setup = true;
-		LOOM_DEBUG_Println("Initialized zxgesturesensor");
-	} else {
-		is_setup = false;
-		LOOM_DEBUG_Println("Failed to initialize zxgesturesensor");
-	}
-	
-	ver = state_zxgesturesensor.inst_zxgesturesensor.getModelVersion();
-	if (ver != ZX_MODEL_VER) {
-		is_setup = false;
-		LOOM_DEBUG_Println("Incorrect Model Version or unable to read Model Version.");
-	} else {
-		LOOM_DEBUG_Println2("Model Version: ", ver);
-	}
-	
-	// Read the register map version and ensure the library will work
-	ver = state_zxgesturesensor.inst_zxgesturesensor.getRegMapVersion();
-	if (ver != ZX_REG_MAP_VER) {
-		is_setup = false;
-		LOOM_DEBUG_Println("Incorrect Register Map Version or unable to read Register Map Version.");
-	} else {
-		LOOM_DEBUG_Println2("Register Map Version: ", ver);
-	}
-	
+
+	#if i2c_addr_zxgesturesensor_0x10 == 1
+		if (inst_zxgesturesensor_0x10.init()) {
+			is_setup = true;
+			LOOM_DEBUG_Println("Initialized zxgesturesensor");
+		} else {
+			is_setup = false;
+			LOOM_DEBUG_Println("Failed to initialize zxgesturesensor");
+		}
+		
+		ver = inst_zxgesturesensor_0x10.getModelVersion();
+		if (ver != ZX_MODEL_VER) {
+			is_setup = false;
+			LOOM_DEBUG_Println("Incorrect Model Version or unable to read Model Version.");
+		} else {
+			LOOM_DEBUG_Println2("Model Version: ", ver);
+		}
+		
+		// Read the register map version and ensure the library will work
+		ver = inst_zxgesturesensor_0x10.getRegMapVersion();
+		if (ver != ZX_REG_MAP_VER) {
+			is_setup = false;
+			LOOM_DEBUG_Println("Incorrect Register Map Version or unable to read Register Map Version.");
+		} else {
+			LOOM_DEBUG_Println2("Register Map Version: ", ver);
+		}
+	#endif
+
+	#if i2c_addr_zxgesturesensor_0x11 == 1
+		if (inst_zxgesturesensor_0x11.init()) {
+			is_setup = true;
+			LOOM_DEBUG_Println("Initialized zxgesturesensor");
+		} else {
+			is_setup = false;
+			LOOM_DEBUG_Println("Failed to initialize zxgesturesensor");
+		}
+		
+		ver = inst_zxgesturesensor_0x11.getModelVersion();
+		if (ver != ZX_MODEL_VER) {
+			is_setup = false;
+			LOOM_DEBUG_Println("Incorrect Model Version or unable to read Model Version.");
+		} else {
+			LOOM_DEBUG_Println2("Model Version: ", ver);
+		}
+		
+		// Read the register map version and ensure the library will work
+		ver = inst_zxgesturesensor_0x11.getRegMapVersion();
+		if (ver != ZX_REG_MAP_VER) {
+			is_setup = false;
+			LOOM_DEBUG_Println("Incorrect Register Map Version or unable to read Register Map Version.");
+		} else {
+			LOOM_DEBUG_Println2("Register Map Version: ", ver);
+		}
+	#endif
+
 	return is_setup;
 }
 
@@ -101,30 +134,42 @@ void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/zxgesturesensor/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
-	msg.add("px").add((int32_t)state_zxgesturesensor.pos[0]);
-	msg.add("pz").add((int32_t)state_zxgesturesensor.pos[1]);
+	msg.add("px").add((int32_t)state_zxgesturesensor_0x10.pos[0]);
+	msg.add("pz").add((int32_t)state_zxgesturesensor_0x10.pos[1]);
 
-	// msg.add("type" ).add(state_zxgesturesensor.gesture_type.c_str());
-	// msg.add("speed").add((int32_t)state_zxgesturesensor.gesture_speed);
+	// msg.add("type" ).add(state_zxgesturesensor_0x10.gesture_type.c_str());
+	// msg.add("speed").add((int32_t)state_zxgesturesensor_0x10.gesture_speed);
 	
 	bndl->add(msg);
 }
 
+#if is_multiplexer != 1
 void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_px");
-	bndl->add(address_string).add((int32_t)state_zxgesturesensor.pos[0]);
-	sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_pz");
-	bndl->add(address_string).add((int32_t)state_zxgesturesensor.pos[1]);
+	#if i2c_addr_zxgesturesensor_0x10 == 1
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", zxgesturesensor_0x10_name, "_px");
+		bndl->add(address_string).add((int32_t)state_zxgesturesensor_0x10.pos[0]);
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", zxgesturesensor_0x10_name, "_pz");
+		bndl->add(address_string).add((int32_t)state_zxgesturesensor_0x10.pos[1]);
+	#endif
+
+
+	#if i2c_addr_zxgesturesensor_0x11 == 1
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", zxgesturesensor_0x11_name, "_px");
+		bndl->add(address_string).add((int32_t)state_zxgesturesensor_0x11.pos[0]);
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", zxgesturesensor_0x11_name, "_pz");
+		bndl->add(address_string).add((int32_t)state_zxgesturesensor_0x11.pos[1]);
+	#endif
 
 	// sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_type");
-	// bndl->add(address_string).add(state_zxgesturesensor.gesture_type.c_str());
+	// bndl->add(address_string).add(state_zxgesturesensor_0x10.gesture_type.c_str());
 	// sprintf(address_string, "%s%s", packet_header_string, "/zxgesture_speed");
-	// bndl->add(address_string).add((int32_t)state_zxgesturesensor.gesture_speed);
+	// bndl->add(address_string).add((int32_t)state_zxgesturesensor_0x10.gesture_speed);
 
 }
+#endif
 
 
 // --- MEASURE ZXGESTURESENSOR ---
@@ -135,59 +180,85 @@ void measure_zxgesturesensor()
 {
 	uint8_t x, z;
 	
-	if (state_zxgesturesensor.inst_zxgesturesensor.positionAvailable()) {
-		x = state_zxgesturesensor.inst_zxgesturesensor.readX();
-		z = state_zxgesturesensor.inst_zxgesturesensor.readZ();
-		
-		if((x != ZX_ERROR) && (z != ZX_ERROR)) {
-			state_zxgesturesensor.pos[0] = x;
-			state_zxgesturesensor.pos[1] = z;
-			LOOM_DEBUG_Println2("zxgesturesensor X: ", state_zxgesturesensor.pos[0]);
-			LOOM_DEBUG_Println2("zxgesturesensor Z: ", state_zxgesturesensor.pos[1]);
+	#if i2c_addr_zxgesturesensor_0x10 == 1
+
+		if (inst_zxgesturesensor_0x10.positionAvailable()) {
+			x = inst_zxgesturesensor_0x10.readX();
+			z = inst_zxgesturesensor_0x10.readZ();
+			
+			if((x != ZX_ERROR) && (z != ZX_ERROR)) {
+				state_zxgesturesensor_0x10.pos[0] = x;
+				state_zxgesturesensor_0x10.pos[1] = z;
+				LOOM_DEBUG_Println2("zxgesturesensor X: ", state_zxgesturesensor_0x10.pos[0]);
+				LOOM_DEBUG_Println2("zxgesturesensor Z: ", state_zxgesturesensor_0x10.pos[1]);
+			} else {
+				LOOM_DEBUG_Println("Error occurred while reading position data");
+			}	
 		} else {
-			LOOM_DEBUG_Println("Error occurred while reading position data");
-		}	
-	} else {
-		LOOM_DEBUG_Println("Position data unavailable for zxgesturesensor");
-		
-		// Send 255 to indicate that no object is detected
-		state_zxgesturesensor.pos[0] = 255; 
-		state_zxgesturesensor.pos[1] = 255;
-	}
-	
+			LOOM_DEBUG_Println("Position data unavailable for zxgesturesensor");
+			
+			// Send 255 to indicate that no object is detected
+			state_zxgesturesensor_0x10.pos[0] = 255; 
+			state_zxgesturesensor_0x10.pos[1] = 255;
+		}
+	#endif
+
+	#if i2c_addr_zxgesturesensor_0x11 == 1
+
+		if (inst_zxgesturesensor_0x11.positionAvailable()) {
+			x = inst_zxgesturesensor_0x11.readX();
+			z = inst_zxgesturesensor_0x11.readZ();
+			
+			if((x != ZX_ERROR) && (z != ZX_ERROR)) {
+				state_zxgesturesensor_0x11.pos[0] = x;
+				state_zxgesturesensor_0x11.pos[1] = z;
+				LOOM_DEBUG_Println2("zxgesturesensor X: ", state_zxgesturesensor_0x11.pos[0]);
+				LOOM_DEBUG_Println2("zxgesturesensor Z: ", state_zxgesturesensor_0x11.pos[1]);
+			} else {
+				LOOM_DEBUG_Println("Error occurred while reading position data");
+			}	
+		} else {
+			LOOM_DEBUG_Println("Position data unavailable for zxgesturesensor");
+			
+			// Send 255 to indicate that no object is detected
+			state_zxgesturesensor_0x11.pos[0] = 255; 
+			state_zxgesturesensor_0x11.pos[1] = 255;
+		}
+	#endif
+
 // Commented out because type and speed are currently not used / there were some issues with them 
 
-	// if (state_zxgesturesensor.inst_zxgesturesensor.gestureAvailable()) {
-	// 	state_zxgesturesensor.gesture       = state_zxgesturesensor.inst_zxgesturesensor.readGesture();
-	// 	state_zxgesturesensor.gesture_speed = state_zxgesturesensor.inst_zxgesturesensor.readGestureSpeed();
+	// if (state_zxgesturesensor_0x10.inst_zxgesturesensor_0x10.gestureAvailable()) {
+	// 	state_zxgesturesensor_0x10.gesture       = state_zxgesturesensor_0x10.inst_zxgesturesensor_0x10.readGesture();
+	// 	state_zxgesturesensor_0x10.gesture_speed = state_zxgesturesensor_0x10.inst_zxgesturesensor_0x10.readGestureSpeed();
 		
-	// 	switch (state_zxgesturesensor.gesture) {
+	// 	switch (state_zxgesturesensor_0x10.gesture) {
 	// 		// case NO_GESTURE:
-	// 		// 	state_zxgesturesensor.gesture_type = "No Gesture";
+	// 		// 	state_zxgesturesensor_0x10.gesture_type = "No Gesture";
 	// 		// 	break;
 	// 		case RIGHT_SWIPE:
-	// 			state_zxgesturesensor.gesture_type = "Right Swipe";
+	// 			state_zxgesturesensor_0x10.gesture_type = "Right Swipe";
 	// 			break;
 	// 		case LEFT_SWIPE:
-	// 			state_zxgesturesensor.gesture_type = "Left Swipe";
+	// 			state_zxgesturesensor_0x10.gesture_type = "Left Swipe";
 	// 			break;
 	// 		case UP_SWIPE:
-	// 			state_zxgesturesensor.gesture_type = "Up Swipe";
+	// 			state_zxgesturesensor_0x10.gesture_type = "Up Swipe";
 	// 		case NO_GESTURE: default:
-	// 			state_zxgesturesensor.gesture_type = "No Gesture";
+	// 			state_zxgesturesensor_0x10.gesture_type = "No Gesture";
 	// 			break;
 	// 	}
 
 	// 	#if DEBUG == 1
-	// 		LOOM_DEBUG_Println2("Gesture type: ", state_zxgesturesensor.gesture_type);
+	// 		LOOM_DEBUG_Println2("Gesture type: ", state_zxgesturesensor_0x10.gesture_type);
 	// 		LOOM_DEBUG_Print("Gesture speed: ");
-	// 		Serial.println(state_zxgesturesensor.gesture_speed, DEC);
+	// 		Serial.println(state_zxgesturesensor_0x10.gesture_speed, DEC);
 	// 	#endif
 
 	// } else {
 	// 	LOOM_DEBUG_Println("Gesture data unavailable for zxgesturesensor");
-	// 	state_zxgesturesensor.gesture_type  = "No Gesture";
-	// 	state_zxgesturesensor.gesture_speed = 0;
+	// 	state_zxgesturesensor_0x10.gesture_type  = "No Gesture";
+	// 	state_zxgesturesensor_0x10.gesture_speed = 0;
 	// }
 }
 

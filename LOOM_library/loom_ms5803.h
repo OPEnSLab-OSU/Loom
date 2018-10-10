@@ -22,7 +22,7 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define i2c_addr_ms5803 0x76	// 0x76 if CSB (pin 3) is High, 0x77 if CSB is Low
+// #define i2c_addr_ms5803 0x76	// 0x76 if CSB (pin 3) is High, 0x77 if CSB is Low
 
 
 
@@ -32,10 +32,9 @@
 
 struct state_ms5803_t {
 	float 			temp;		//compensated, final temperature
-	// unsigned long 	tempNC;		//uncompensated, raw temp value
 	float 			pressure;	//compensated, final pressure
-	// unsigned long 	pressureNC;	//uncompensated, raw pressure value
 };
+
 
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
@@ -44,9 +43,15 @@ struct state_ms5803_t {
 // Declare 'sensor' as the object that will refer to your MS5803 in the sketch
 // Enter the oversampling value as an argument. Valid choices are
 // 256, 512, 1024, 2048, 4096. Library default = 512.
-MS_5803 sensor = MS_5803(512);
 
-struct state_ms5803_t state_ms5803;
+#if i2c_addr_ms5803_0x76 == 1
+	struct state_ms5803_t state_ms5803_0x76;
+	MS_5803 sensor_0x76 = MS_5803(512);
+#endif
+#if i2c_addr_ms5803_0x76 == 1
+	struct state_ms5803_t state_ms5803_0x77;
+	MS_5803 sensor_0x77 = MS_5803(512);
+#endif
 
 uint16_t MS_PROM[8]; //storing calibration data
 
@@ -77,12 +82,26 @@ bool setup_ms5803()
   // If you don't want all the coefficients printed out, 
   // set sensor.initializeMS_5803(false).
 	LOOM_DEBUG_Println("MS5803 conversion coefficients:");
-	if (sensor.initializeMS_5803()) {
-		LOOM_DEBUG_Println("MS5803 CRC check OK.");
-	} else {
-		LOOM_DEBUG_Println("MS5803 CRC check FAILED!");
-		LOOM_DEBUG_Println("(but it might work anyway...)");
-	}
+
+	#if i2c_addr_ms5803_0x76 == 1
+		if (sensor_0x76.initializeMS_5803()) {
+			LOOM_DEBUG_Println("MS5803 CRC check OK.");
+		} else {
+			LOOM_DEBUG_Println("MS5803 CRC check FAILED!");
+			LOOM_DEBUG_Println("(but it might work anyway...)");
+		}
+	#endif
+
+	#if i2c_addr_ms5803_0x77 == 1
+		if (sensor_0x77.initializeMS_5803()) {
+			LOOM_DEBUG_Println("MS5803 CRC check OK.");
+		} else {
+			LOOM_DEBUG_Println("MS5803 CRC check FAILED!");
+			LOOM_DEBUG_Println("(but it might work anyway...)");
+		}
+	#endif
+
+
 	delay(3000);
 
 	LOOM_DEBUG_Println("Initialized MS_5803 pressure sensor");
@@ -108,22 +127,32 @@ void package_ms5803(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/ms5803/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
-	msg.add("pressure").add(state_ms5803.pressure);
-	msg.add("temp").add(state_ms5803.temp);
+	msg.add("pressure").add(state_ms5803_0x76.pressure);
+	msg.add("temp").add(state_ms5803_0x76.temp);
 	
 	bndl->add(msg);
 }
 
+#if is_multiplexer != 1
 void package_ms5803(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(address_string, "%s%s", packet_header_string, "/ms5803_pressure");
-	bndl->add(address_string ).add(state_ms5803.pressure);
-	sprintf(address_string, "%s%s", packet_header_string, "/ms5803_temp");
-	bndl->add(address_string).add(state_ms5803.temp);
-}
+	#if i2c_addr_ms5803_0x76 == 1
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", ms5803_0x76_name, "_pressure");
+		bndl->add(address_string ).add(state_ms5803_0x76.pressure);
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", ms5803_0x76_name, "_temp");
+		bndl->add(address_string).add(state_ms5803_0x76.temp);
+	#endif
 
+	#if i2c_addr_ms5803_0x77 == 1
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", ms5803_0x77_name, "_pressure");
+		bndl->add(address_string ).add(state_ms5803_0x77.pressure);
+		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", ms5803_0x77_name, "_temp");
+		bndl->add(address_string).add(state_ms5803_0x77.temp);
+	#endif
+}
+#endif
 
 // --- MEASURE MS5803 ---
 //
@@ -132,17 +161,30 @@ void package_ms5803(OSCBundle *bndl, char packet_header_string[])
 void measure_ms5803() 
 {
 	// Get sensor readings
-	sensor.readSensor();
 
-	// LOOM_DEBUG_Println("D1 = ", sensor.D1val());
-	// LOOM_DEBUG_Println("D2 = ", sensor.D2val());
+	#if i2c_addr_ms5803_0x76 == 1
+		sensor_0x76.readSensor();
 
-	state_ms5803.pressure = sensor.pressure();
-	state_ms5803.temp = sensor.temperature();
+		state_ms5803_0x76.pressure = sensor_0x76.pressure();
+		state_ms5803_0x76.temp = sensor_0x76.temperature();
 
-	#if LOOM_DEBUG == 1
-		Serial.print("MS5803 Pressure: ");     Serial.print(state_ms5803.pressure,  4);	Serial.println(" mbar");
-		Serial.print("MS5803 Temperature: ");  Serial.print(state_ms5803.temp,  4);		Serial.println(" C");
+		#if LOOM_DEBUG == 1
+			Serial.print("MS5803 Pressure: ");     Serial.print(state_ms5803_0x76.pressure,  4);	Serial.println(" mbar");
+			Serial.print("MS5803 Temperature: ");  Serial.print(state_ms5803_0x76.temp,  4);		Serial.println(" C");
+		#endif
+	#endif
+
+
+	#if i2c_addr_ms5803_0x77 == 1
+		sensor_0x77.readSensor();
+
+		state_ms5803_0x77.pressure = sensor_0x77.pressure();
+		state_ms5803_0x77.temp = sensor_0x77.temperature();
+
+		#if LOOM_DEBUG == 1
+			Serial.print("MS5803 Pressure: ");     Serial.print(state_ms5803_0x77.pressure,  4);	Serial.println(" mbar");
+			Serial.print("MS5803 Temperature: ");  Serial.print(state_ms5803_0x77.temp,  4);		Serial.println(" C");
+		#endif
 	#endif
 }
 

@@ -1,4 +1,12 @@
 // ================================================================ 
+// ===                          NOTES                           === 
+// ================================================================
+
+// This sensor supports I2C addresses 0x20 and 0x21, but the Adafruit 
+// breakout the Loom uses (pairs it with a fxos8700) does not allow the 
+// I2C address to be changed without modifing the library 
+
+// ================================================================ 
 // ===                        LIBRARIES                         === 
 // ================================================================
 #include <Wire.h>
@@ -9,7 +17,7 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define i2c_addr_fxas21002 0x20 //0x20, 0x21
+// #define i2c_addr_fxas21002 0x21 //0x20, 0x21
 
 
 // ================================================================ 
@@ -20,7 +28,6 @@
 // };
 
 struct state_fxas21002_t {
-	Adafruit_FXAS21002C inst_fxas21002;
 	float gyro[3];
 };
 
@@ -28,8 +35,10 @@ struct state_fxas21002_t {
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-// struct config_fxas21002_t config_fxas21002;
-struct state_fxas21002_t state_fxas21002;
+
+Adafruit_FXAS21002C inst_fxas21002_0x21;
+
+struct state_fxas21002_t state_fxas21002_0x21;
 
 
 // ================================================================ 
@@ -55,9 +64,9 @@ void measure_fxas21002();
 bool setup_fxas21002() 
 {
 	bool is_setup;
-	state_fxas21002.inst_fxas21002 = Adafruit_FXAS21002C(0x0021002C);
+	inst_fxas21002_0x21 = Adafruit_FXAS21002C(0x0021002C);
 	
-	if (state_fxas21002.inst_fxas21002.begin()) {
+	if (inst_fxas21002_0x21.begin()) {
 		is_setup = true;
 		LOOM_DEBUG_Println("Initialized fxas21002.");
 	}
@@ -88,26 +97,26 @@ void package_fxas21002(OSCBundle *bndl, char packet_header_string[], uint8_t por
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/fxas21002/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
-	msg.add("gx").add(state_fxas21002.gyro[0]);
-	msg.add("gy").add(state_fxas21002.gyro[1]);
-	msg.add("gz").add(state_fxas21002.gyro[2]);
+	msg.add("gx").add(state_fxas21002_0x21.gyro[0]);
+	msg.add("gy").add(state_fxas21002_0x21.gyro[1]);
+	msg.add("gz").add(state_fxas21002_0x21.gyro[2]);
 	
 	bndl->add(msg);
 }
 
-
+#if is_multiplexer != 1
 void package_fxas21002(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(address_string, "%s%s", packet_header_string, "/fxas21002_gx");
-	bndl->add(address_string).add(state_fxas21002.gyro[0]);
-	sprintf(address_string, "%s%s", packet_header_string, "/fxas21002_gy");
-	bndl->add(address_string).add(state_fxas21002.gyro[1]);
-	sprintf(address_string, "%s%s", packet_header_string, "/fxas21002_gz");
-	bndl->add(address_string).add(state_fxas21002.gyro[2]);
+	sprintf(address_string, "%s%s%s%s", packet_header_string, "/", fxas21002_0x21_name, "_gx");
+	bndl->add(address_string).add(state_fxas21002_0x21.gyro[0]);
+	sprintf(address_string, "%s%s%s%s", packet_header_string, "/", fxas21002_0x21_name, "_gy");
+	bndl->add(address_string).add(state_fxas21002_0x21.gyro[1]);
+	sprintf(address_string, "%s%s%s%s", packet_header_string, "/", fxas21002_0x21_name, "_gz");
+	bndl->add(address_string).add(state_fxas21002_0x21.gyro[2]);
 }
-
+#endif
 
 // --- MEASURE FXAS21002 ---
 //
@@ -117,16 +126,16 @@ void measure_fxas21002()
 {
 	/* Get a new sensor event */
 	sensors_event_t event;
-	state_fxas21002.inst_fxas21002.getEvent(&event);
+	inst_fxas21002_0x21.getEvent(&event);
 
-	state_fxas21002.gyro[0] = event.gyro.x;
-	state_fxas21002.gyro[1] = event.gyro.y;
-	state_fxas21002.gyro[2] = event.gyro.z;
+	state_fxas21002_0x21.gyro[0] = event.gyro.x;
+	state_fxas21002_0x21.gyro[1] = event.gyro.y;
+	state_fxas21002_0x21.gyro[2] = event.gyro.z;
 	
 	#if LOOM_DEBUG == 1
-		Serial.print("X: "); Serial.print(state_fxas21002.gyro[0]); Serial.print("  ");
-		Serial.print("Y: "); Serial.print(state_fxas21002.gyro[1]); Serial.print("  ");
-		Serial.print("Z: "); Serial.print(state_fxas21002.gyro[2]); Serial.print("  ");
+		Serial.print("X: "); Serial.print(state_fxas21002_0x21.gyro[0]); Serial.print("  ");
+		Serial.print("Y: "); Serial.print(state_fxas21002_0x21.gyro[1]); Serial.print("  ");
+		Serial.print("Z: "); Serial.print(state_fxas21002_0x21.gyro[2]); Serial.print("  ");
 		Serial.println("rad/s ");
 	#endif
 }
@@ -142,7 +151,7 @@ void measure_fxas21002()
 void details_fxas21002() 
 {
 	sensor_t sensor;
-	state_fxas21002.inst_fxas21002.getSensor(&sensor);
+	inst_fxas21002_0x21.getSensor(&sensor);
 	Serial.println("------------------------------------");
 	Serial.print  ("Sensor:       ");   Serial.println(sensor.name);
 	Serial.print  ("Driver Ver:   ");   Serial.println(sensor.version);

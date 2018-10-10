@@ -8,7 +8,7 @@
 // ================================================================ 
 // ===                        DEFINITIONS                       === 
 // ================================================================ 
-#define i2c_addr_tsl2591 0x29
+// #define i2c_addr_tsl2591 0x29
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -95,18 +95,19 @@ void package_tsl2591(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	bndl->add(msg);
 }
 
+#if is_multiplexer != 1
 void package_tsl2591(OSCBundle *bndl, char packet_header_string[])
 {
 	char address_string[255];
 
-	sprintf(address_string, "%s%s", packet_header_string, "/tsl2591_vis");
+	sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2591_0x29_name, "_vis");
 	bndl->add(address_string).add((int32_t)state_tsl2591.vis);
-	sprintf(address_string, "%s%s", packet_header_string, "/tsl2591_ir");
+	sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2591_0x29_name, "_ir");
 	bndl->add(address_string).add((int32_t)state_tsl2591.ir);
-	sprintf(address_string, "%s%s", packet_header_string, "/tsl2591_full");
+	sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2591_0x29_name, "_full");
 	bndl->add(address_string).add((int32_t)state_tsl2591.full);
 }
-
+#endif
 
 // --- MEASURE TSL2591 ---
 //

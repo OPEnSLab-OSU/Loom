@@ -28,8 +28,8 @@
 // ================================================================
 // --- Device Identification --- 
 #define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
-#define CHANNEL          4		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
+#define FAMILY_NUM       11		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
@@ -169,9 +169,9 @@
 #define is_tsl2561         0	// Lux Sensor
 	#if is_tsl2561 == 1
 		#define tsl2561_res 3 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
-		#define is_tsl2561_low   1 
-		#define is_tsl2561_float 1
-		#define is_tsl2561_high  1
+		// #define is_tsl2561_low   1 
+		// #define is_tsl2561_float 1
+		// #define is_tsl2561_high  1
 	#endif
 #define is_fxos8700        0	// Accelerometer / Magnetometer
 #define is_fxas21002       0	// Gyroscope
@@ -286,16 +286,16 @@
 	#define UPDATE_PERIOD 5000		// Milliseconds between multiplexer sensor list being updated
 	
 	// 1 to enable supported sensor type
-	#define is_tsl2591         1	// Lux Sensor
-	#define is_tsl2561         1	// Lux Sensor
-	#define is_fxos8700        1	// Accelerometer / Magnetometer
 	#define is_fxas21002       1	// Gyroscope
-	#define is_zxgesturesensor 1	// ZX_Distance Sensor
-	#define is_sht31d          1	// Temperature / Humidity
+	#define is_fxos8700        1	// Accelerometer / Magnetometer
+	#define is_lis3dh          1    // Accelerometer
 	#define is_mb1232          1	// Sonar
 	#define is_mpu6050         0	// Accelerometer / Gyroscope (NOTE* I2C address conflicts with RTC if not manually changed) (much better supported on Ishield)
-	#define is_lis3dh          1    // Accelerometer
 	#define is_ms5803          1	// Pressure Sensor
+	#define is_sht31d          1	// Temperature / Humidity
+	#define is_tsl2561         1	// Lux Sensor
+	#define is_tsl2591         1	// Lux Sensor
+	#define is_zxgesturesensor 1	// ZX_Distance Sensor
 
 	#define is_button 		   1	// 1 to enable button
 #endif
@@ -507,4 +507,174 @@
 #else
 	#define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 #endif
+
+
+
+
+// ================================================================
+// ===               I2C Sensor Address Selection               === 
+// ================================================================
+
+// 1 to enable a given I2C address, 0 to disable
+// Multiplexers shouldn't usually have to modify the enabled addresses section unless
+//   Multiple of the same sensors are being used and have different I2C addresses
+
+// You can also name your sensors if not using a multiplexer, which
+//	can be useful for distinquishing sensors 
+//  names will not be used when the sensor is connected via a multiplexer
+
+// Make sure you have no conflicts of addresses 
+//	(e.g. TSL2561 and TSL2591 both on 0x29)
+
+// You can have multiple of the same sensor
+
+// If there is only one I2C address available, the enable/disable feature is still here
+//  for completeness sake - if you don't use a given sensor disable it with the is_<sensor> define instead though
+
+
+
+
+
+#if is_fxas21002 == 1
+	// #define i2c_addr_fxas21002_0x20 1 
+	#define i2c_addr_fxas21002_0x21	1 // Default
+
+	#if is_multiplexer != 1
+		// #if i2c_addr_fxas21002_0x20 == 1
+		// 	#define fxas21002_0x20_name "FXAS21002_0x20"
+		// #endif 
+		#if i2c_addr_fxas21002_0x21 == 1
+			#define fxas21002_0x21_name "FXAS21002_0x21"
+		#endif 
+	#endif
+#endif
+
+#if is_fxos8700 == 1
+	// #define i2c_addr_fxos8700_0x1C 	0 
+	// #define i2c_addr_fxos8700_0x1D 	0
+	// #define i2c_addr_fxos8700_0x1E 	0
+	#define i2c_addr_fxos8700_0x1F 	1 // Default
+
+	#if is_multiplexer != 1
+		// #if i2c_addr_fxos8700_0x1C == 1
+		// 	#define fxos8700_0x1C_name "FXOS8700_0x1C"
+		// #endif 
+		// #if i2c_addr_fxos8700_0x1D == 1
+		// 	#define fxos8700_0x1D_name "FXOS8700_0x1D"
+		// #endif 
+		// #if i2c_addr_fxos8700_0x1E == 1
+		// 	#define fxos8700_0x1E_name "FXOS8700_0x1E"
+		// #endif 
+		#if i2c_addr_fxos8700_0x1F == 1
+			#define fxos8700_0x1F_name "FXOS8700_0x1F"
+		#endif 
+	#endif
+#endif
+
+#if is_lis3dh == 1
+	#define i2c_addr_lis3dh_0x19 	1
+
+	#if is_multiplexer != 1
+		#if i2c_addr_lis3dh_0x19 == 1
+			#define lis3dh_0x19_name "LIS3DH_0x19"
+		#endif 
+	#endif
+#endif
+
+#if is_mb1232 == 1
+	#define i2c_addr_mb1232_0x70	1
+
+	#if is_multiplexer != 1
+		#if i2c_addr_mb1232_0x70 == 1
+			#define mb1232_0x70_name "MB1232_0x70"
+		#endif 
+	#endif
+#endif
+
+#if is_mpu6050 == 1
+	#define i2c_addr_mpu6050_0x68 	1 // Default
+	#define i2c_addr_mpu6050_0x69	0
+
+	#if is_multiplexer != 1
+		#if i2c_addr_mpu6050_0x68 == 1
+			#define mpu6050_0x68_name "MPU6050_0x68"
+		#endif 
+		#if i2c_addr_mpu6050_0x69 == 1
+			#define mpu6050_0x69_name "MPU6050_0x69"
+		#endif 
+	#endif
+#endif
+
+#if is_ms5803 == 1
+	#define i2c_addr_ms5803_0x76 	1 // Default
+	// #define i2c_addr_ms5803_0x77	0
+
+	#if is_multiplexer != 1
+		#if i2c_addr_ms5803_0x76 == 1
+			#define ms5803_0x76_name "MS5803_0x76"
+		#endif 
+		// #if i2c_addr_ms5803_0x77 == 1
+		// 	#define ms5803_0x77_name "MS5803_0x77"
+		// #endif 
+	#endif
+#endif
+
+#if is_sht31d == 1
+	#define i2c_addr_sht31d_0x44 	1 // Default
+	#define i2c_addr_sht31d_0x45	0
+
+	#if is_multiplexer != 1
+		#if i2c_addr_sht31d_0x44 == 1
+			#define sht31d_0x44_name "SHT31D_0x44"
+		#endif 
+		#if i2c_addr_sht31d_0x45 == 1
+			#define sht31d_0x45_name "SHT31D_0x45"
+		#endif 
+	#endif
+#endif
+
+#if is_tsl2561 == 1
+	// 2 are used on evaporometer b/c no multiplexer
+	#define i2c_addr_tsl2561_0x29 	0 // generally disabled because 2591 uses this address, disable that to use 2561 on the address
+	#define i2c_addr_tsl2561_0x39 	1 
+	#define i2c_addr_tsl2561_0x49 	1
+	
+	#if is_multiplexer != 1
+		#if i2c_addr_tsl2561_0x29 == 1
+			#define tsl2561_0x29_name "TSL2561_0x29"
+		#endif 
+		#if i2c_addr_tsl2561_0x39 == 1
+			#define tsl2561_0x39_name "TSL2561_0x39"
+		#endif 
+		#if i2c_addr_tsl2561_0x49 == 1
+			#define tsl2561_0x49_name "TSL2561_0x49"
+		#endif 
+	#endif
+#endif
+
+#if is_tsl2591 == 1
+	#define i2c_addr_tsl2591_0x29 	1
+
+	#if is_multiplexer != 1
+		#if i2c_addr_tsl2591_0x29 == 1
+			#define tsl2591_0x29_name "TSL2591"
+		#endif 
+	#endif
+#endif
+
+#if is_zxgesturesensor == 1
+	#define i2c_addr_zxgesturesensor_0x10 	1 // Default
+	#define i2c_addr_zxgesturesensor_0x11	0
+
+	#if is_multiplexer != 1
+		#if i2c_addr_zxgesturesensor_0x10 == 1
+			#define zxgesturesensor_0x10_name "ZXGESTURESENSOR_0x10"
+		#endif 
+		#if i2c_addr_zxgesturesensor_0x11 == 1
+			#define zxgesturesensor_0x11_name "ZXGESTURESENSOR_0x11"
+		#endif 
+	#endif
+#endif
+
+
 
