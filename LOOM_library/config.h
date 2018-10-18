@@ -27,8 +27,8 @@
 // ===                  IDENTIFICATION OPTIONS                  === 
 // ================================================================
 // --- Device Identification --- 
-#define FAMILY "LOOM"			// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       11		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define FAMILY 		"LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
+#define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
 #define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
@@ -77,8 +77,8 @@
 // Further options in the advanced settings
 // Can override settings defined before the aggregate devices
 
-#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
+#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -591,6 +591,9 @@
 	#endif
 #endif
 
+
+// This may not work as intended yet - may need to modify 
+// i2c_addr_mpu6050 at top of loom_mpu6050.h
 #if is_mpu6050 == 1
 	#define i2c_addr_mpu6050_0x68 	1 // Default
 	#define i2c_addr_mpu6050_0x69	0

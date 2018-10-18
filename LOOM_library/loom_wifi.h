@@ -156,6 +156,9 @@ void setup_wifi(char packet_header_string[])
 	config_wifi->ip = WiFi.localIP();
 	LOOM_DEBUG_Println("Finished setting up WiFi.");
 
+	OSCMessage tmp = new OSCMessage("tmp");	
+	broadcastIP(tmp);
+
 	// printWiFiStatus();
 }
 
@@ -363,6 +366,9 @@ bool connect_to_WPA(char ssid[], char pass[])
 	UdpDevice.begin(config_wifi->devicePort);
 	UdpSubnet.begin(config_wifi->subnetPort);
 	UdpGlobal.begin(GLOBAL_PORT);
+
+	OSCMessage tmp = new OSCMessage("tmp");	
+	broadcastIP(tmp);
 
 	LOOM_DEBUG_Println("Done");
 	flash_led(6, 50, 50);
