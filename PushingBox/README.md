@@ -97,3 +97,68 @@ This is the python script used to test the PushingBox and Google Script function
 - "python fake_get.py num_cols IDtag Device ID" - Where Device ID is the unique identifier of the PushingBox Scenario. 
 	
 The script will query the user for the information that is not supplied.
+
+## Example .ino Loop Contents
+
+This section provides some common examples of how you might format the `loop()` function in the .ino file.
+
+#### WiFi Send and Receive
+
+```
+void loop() 
+{
+	OSCBundle bndl, send_bndl;  		// Bundles to hold incoming and outgoing data
+
+	receive_bundle(&bndl, WIFI);		// Receive messages
+	if (bndl.size()) {
+		print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
+	}
+	process_bundle(&bndl);				// Dispatch message to correct handling functions
+
+	measure_sensors();					// Read sensors, store data in sensor structs
+	
+	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	
+	send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
+
+	additional_loop_checks();			// Miscellaneous checks
+}
+```
+
+#### LoRa Hub (Recieve from node, upload to Google Sheet, no sensors)
+
+```
+void loop() 
+{
+	OSCBundle bndl;  					// Bundles to hold incoming and outgoing data
+
+	receive_bundle(&bndl, LORA);		// Receive messages
+	
+	log_bundle(&bndl, PUSHINGBOX);		// Send bundle of packaged data
+
+	additional_loop_checks();			// Miscellaneous checks
+}
+```
+
+#### LoRa Sensor Node (Transmits to central hub for upload to Google Sheet)
+
+```
+void loop() 
+{
+	OSCBundle send_bndl;  				// Bundles to hold incoming and outgoing data
+
+	measure_sensors();					// Read sensors, store data in sensor structs
+	
+	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	
+	send_bundle(&send_bndl, LORA);		// Send bundle of packaged data
+
+	additional_loop_checks();			// Miscellaneous checks
+}
+```
+
+
+
+#### 
+
+#### 

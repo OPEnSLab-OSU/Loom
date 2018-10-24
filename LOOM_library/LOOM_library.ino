@@ -30,31 +30,6 @@ void setup()
 // ================================================================ 
 void loop() 
 {
-	// OSCBundle bndl, send_bndl;
-
-	// // receive_bundle(&bndl, WIFI);
-	// // if (bndl.size()) {
-	// // 	// print_bundle(&bndl);
-	// // }
-	// // process_bundle(&bndl);
-
-	// measure_sensors();
-	// package_data(&send_bndl);
-	// print_bundle(&send_bndl);
-	// // send_bundle(&send_bndl, WIFI);
-
-
-	// // #if is_sd == 1
-	// // 	log_bundle(&send_bndl, SDCARD, "ishield8.csv");
-	// // #endif
-
-	// additional_loop_checks();
-
-	// delay(250);
-
-
-	
-
 
 	// --- Common Example ---
 	OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
@@ -67,9 +42,7 @@ void loop()
 
 	measure_sensors();					// Read sensors, store data in sensor state struct
 	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
-	// print_bundle(&send_bndl);			// Print bundle if LOOM_DEBUG enabled
 	send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
-	// log_bundle(&send_bndl, PUSHINGBOX);
 
 	additional_loop_checks();			// Miscellaneous checks
 	// --- End Example ---
