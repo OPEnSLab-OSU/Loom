@@ -10,11 +10,26 @@
 
 
 // ================================================================ 
+// ===                        STRUCTURES                        === 
+// ================================================================
+struct config_pushingbox_t {
+	char* spreadsheet_id;                // Spreadsheet ID
+	int   minimum_upload_delay;
+};
+
+// ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 #if pushUploadFilter == 1 
 	unsigned long lastPushMillis, currentPushMillis;  
 #endif
+
+
+struct config_pushingbox_t * config_pushingbox;
+void link_config_pushingbox(struct config_pushingbox_t *flash_setup_pushingbox){
+	config_pushingbox = flash_setup_pushingbox;
+}
+
 
 
 // ================================================================ 
@@ -32,7 +47,8 @@ void pushingbox_fona(char* args);
 // ================================================================
 void setup_pushingbox() 
 {
-
+	config_pushingbox->spreadsheet_id       = init_spreadsheet_id;
+	config_pushingbox->minimum_upload_delay = pushUploadMinDelay;
 }
 
 
@@ -64,7 +80,7 @@ void sendToPushingBox(OSCMessage &msg)
 	// Only send bundles if a minimum time (pushUploadMinDelay seconds) has passed since last upload
 	#if pushUploadFilter == 1
 		currentPushMillis = millis();
-		if ( (currentPushMillis - lastPushMillis) < (1000*pushUploadMinDelay) ) {
+		if ( (currentPushMillis - lastPushMillis) < (1000*config_pushingbox->minimum_upload_delay) ) {
 			LOOM_DEBUG_Println("Hasn't been long enough since last PushingBox upload, skipping this one");	
 			return; // has not been long enough yet, just return
 		} else {
@@ -109,13 +125,13 @@ void sendToPushingBox(OSCMessage &msg)
 	#if useHubTabID == 1
 		// Use hub's stored tab ID (in config file) to define spreadsheet tab
 		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s", 
-			device_id, spreadsheet_id, tab_id_complete, bundle_deviceID);
+			device_id, config_pushingbox->spreadsheet_id, tab_id_complete, bundle_deviceID);
 		// sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%d&key2=deviceID&val2=%s%d", 
 		// 	device_id, spreadsheet_id, tab_id_prefix, DEVICE, INIT_INST, ); 
 	#else
 		// Use bundle source to define spreadsheet tab suffix
 		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
-			device_id, spreadsheet_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
+			device_id, config_pushingbox->spreadsheet_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
 	#endif
 
 	// Populate URL with the bundle kesy and values

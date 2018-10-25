@@ -39,7 +39,7 @@
 // ===                      SERIAL OPTIONS                      === 
 // ================================================================
 // --- Debugging --- 
-#define LOOM_DEBUG    0			// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG    1			// Set to 1 if you want Serial statements from various functions to print
 								// NOTE: Serial monitor must be opened for device to setup if this is enabled
 								//   Device will freeze if this in enabled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
@@ -96,8 +96,8 @@
 // ================================================================ 
 // ===                  DATA LOGGING PLATFORMS                  === 
 // ================================================================
-#define is_pushingbox 0		// 1 to enable PushingBox  
-// #define is_adafruitio 0		// 1 to enable Adafruit IO (currently requires WiFi) [not much support yet]
+#define is_pushingbox 1		// 1 to enable PushingBox  
+
 
 // --- RTC Options ---
 #define is_rtc        0		// Enable RTC functionality
@@ -169,6 +169,7 @@
 #define is_tsl2561         0	// Lux Sensor
 	#if is_tsl2561 == 1
 		#define tsl2561_res 3 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
+		// Nex 3 options will be removed once confirmed unnecessary
 		// #define is_tsl2561_low   1 
 		// #define is_tsl2561_float 1
 		// #define is_tsl2561_high  1
@@ -448,7 +449,7 @@
 
 	// #define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	    
-	#define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"  // This is Luke's Arduino Test spreadsheet
+	#define init_spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"  // This is Luke's Arduino Test spreadsheet
 
 	// Required by PushingBox, specific to each scenario
 	char device_id[] = "v7ECCEF7A460E57A";
@@ -508,6 +509,10 @@
 #else
 	#define is_sleep_interrupt 11			// Uncomment to use Low-Power library to sit in idle sleep until woken by pin interrupt, parameter is pin to interrupt
 #endif
+
+
+
+
 
 
 
