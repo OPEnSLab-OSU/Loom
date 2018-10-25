@@ -35,7 +35,11 @@ struct config_flash_t {
 		struct config_dynamic_scripts_t config_dynamic_scripts;
 	#endif
 
-	
+	#if is_pushingbox == 1
+		struct config_pushingbox_t config_pushingbox;
+	#endif
+
+
 	//add any other stuff that needs to be stored based on the shields with a wrapped preprocessor statement HERE
 
 	#if is_mpu6050 == 1
@@ -119,6 +123,9 @@ void setup_flash_config()
 		link_config_dynamic_scripts(&configuration.config_dynamic_scripts);
 	#endif
 
+	#if is_pushingbox == 1
+		link_config_pushingbox(&configuration.config_pushingbox);
+	#endif
 
 
 	#if MEM_TYPE == MEM_FLASH || MEM_TYPE == MEM_EEPROM
