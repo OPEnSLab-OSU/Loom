@@ -13,8 +13,8 @@
 // ===                        STRUCTURES                        === 
 // ================================================================
 struct config_pushingbox_t {
-	char* spreadsheet_id;                // Spreadsheet ID
-	int   minimum_upload_delay;
+	char spreadsheet_id[50]; 		// Spreadsheet ID
+	int   minimum_upload_delay;		// Minimum delya between uploads
 };
 
 // ================================================================ 
@@ -41,13 +41,17 @@ void sendToPushingBox(OSCBundle *bndl);
 void pushingbox_ethernet(char* args);
 void pushingbox_wifi(char* args);
 void pushingbox_fona(char* args);
+void set_spreadsheet_id(OSCMessage &msg);
+void set_push_min_delay(OSCMessage &msg);
+
+
 
 // ================================================================
 // ===                          SETUP                           ===
 // ================================================================
 void setup_pushingbox() 
 {
-	config_pushingbox->spreadsheet_id       = init_spreadsheet_id;
+	strcpy(config_pushingbox->spreadsheet_id, init_spreadsheet_id);
 	config_pushingbox->minimum_upload_delay = pushUploadMinDelay;
 }
 
@@ -113,6 +117,8 @@ void sendToPushingBox(OSCMessage &msg)
 
 	LOOM_DEBUG_Println("Sending to PushingBox");
 
+
+return;
 
 	// Get the device source from bundle header 
 	char bundle_deviceID[20];
@@ -301,5 +307,54 @@ void pushingbox_fona(char* args)
 	fona.HTTP_GET_end();
 }
 #endif // of #if is_fona == 1
+
+
+
+
+
+// --- SET SPREADSHEET ID --- 
+//
+// Sets the spreadsheet Id - i.e. what spreadsheet to upload to
+//
+// @param msg  OSC messages that had header ending in '/SetSpreadSheetID'
+//				Contains the new spreadsheet ID
+//
+void set_spreadsheet_id(OSCMessage &msg)
+{
+	// char tmp[50];
+	// memset(tmp, '\0', sizeof(tmp));
+	// msg.getString(0, tmp, sizeof(state_wifi.new_ssid));
+
+	if (msg.isString(0)) {
+		msg.getString(0, config_pushingbox->spreadsheet_id, sizeof(config_pushingbox->spreadsheet_id));	
+		write_non_volatile();
+		LOOM_DEBUG_Println3("Setting Spreadsheet ID to: \"", config_pushingbox->spreadsheet_id, "\"");
+	} else {
+		LOOM_DEBUG_Println("Command to set spreadsheet id was not in correct format");
+	}
+
+	// config_pushingbox->spreadsheet_id = ; // Setting to 1 means that device will request new port settings on restart. 
+
+}
+
+
+
+// --- SET PUSHINGBOX MIN DELAY --- 
+//
+// Sets the minimum dleay between PushingBox uploads
+//
+// @param msg  OSC messages that had header ending in '/SetPushMinDelay'
+//				Contains the new minimum delay
+//
+void set_push_min_delay(OSCMessage &msg)
+{
+	if (msg.isInt(0)) {
+		config_pushingbox->minimum_upload_delay = msg.getInt(0);
+		write_non_volatile();
+		LOOM_DEBUG_Println3("Setting PushingBox Minimum Upload Delay to: ", config_pushingbox->minimum_upload_delay, " seconds");
+	} else {
+		LOOM_DEBUG_Println("Command to set PushingBox minimum upload delay was not in correct format");
+	}
+}
 
 

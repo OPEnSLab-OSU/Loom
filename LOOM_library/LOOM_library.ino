@@ -42,7 +42,9 @@ void loop()
 
 	measure_sensors();					// Read sensors, store data in sensor state struct
 	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
-	send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
+	// send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
+	log_bundle(&send_bndl, PUSHINGBOX);
+
 
 	additional_loop_checks();			// Miscellaneous checks
 	// --- End Example ---
@@ -65,3 +67,6 @@ void loop()
 // void log_bundle(OSCBundle *send_bndl, LogPlatform platform);
 // bool bundle_empty(OSCBundle *bndl);
 // void additional_loop_checks();
+
+// CommPlatforms: WIFI, LORA, NRF
+// LogPlatforms:  PUSHINGBOX, SDCARD

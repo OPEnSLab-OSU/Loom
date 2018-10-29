@@ -105,6 +105,8 @@ void respond_to_poll_request(OSCMessage &msg);
 //
 void setup_wifi(char packet_header_string[])
 {
+	LOOM_DEBUG_Println("Setting up WiFi");
+
 	// Configure pins for Adafruit ATWINC1500 Feather
 	WiFi.setPins(8,7,4,2);      
 		
