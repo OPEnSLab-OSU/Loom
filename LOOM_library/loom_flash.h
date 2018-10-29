@@ -146,7 +146,6 @@ void setup_flash_config()
 			
 			configuration.sample_rate = is_sleep_period;
 
-
 			#if is_wifi == 1
 				configuration.config_wifi.my_ssid = AP_NAME;                   // Default AP name
 				strcpy(configuration.config_wifi.ssid,DEFAULT_NETWORK);        // Default network name
