@@ -267,6 +267,10 @@ void flash_led();
 // ===            INCLUDE SENSOR / ACTUATOR FILES               === 
 // ================================================================
 #if (is_analog == 1) || (is_m0 == 1)
+	#if enable_analog_conversions == 1
+		#include "loom_analog_conversions.h"
+	#endif
+	
 	#include "loom_analogIn.h"
 #endif
 #if is_neopixel == 1

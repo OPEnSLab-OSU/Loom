@@ -246,7 +246,6 @@
 
 
 
-
 // ================================================================
 // ================================================================
 // ===            AGGREGATE DEVICE CONFIGURATIONS               === 
@@ -494,6 +493,45 @@
 	// 0: none, 1: date, 2: time, 3: date+time two fields, 4: data+time combined field
 	// Times are only added if RTC is also enabled
 	#define sd_save_time_format 3
+#endif
+
+
+
+// ================================================================
+// ===                    ANALOG CONVERSIONS                    === 
+// ================================================================
+// Analog conversions are specified by indexing (of function pointers
+// in an array). 
+// -1 means to not use any conversion
+// Numbers >= 0 indicate which conversion to use, as defined by the 
+//   array in loom_analog_conversions.h
+
+// These convesions only apply to the analog readings as read by the 
+//   measure_analog() function
+
+#define enable_analog_conversions 0		// 1 to enable the conversion of analog values upon reading
+
+#if enable_analog_conversions == 1
+
+	#if is_analog_a0 == 1
+		#define analog_a0_conversion 0
+	#endif 
+	#if is_analog_a1 == 1
+		#define analog_a1_conversion -1
+	#endif
+	#if is_analog_a2 == 1
+		#define analog_a2_conversion -1
+	#endif
+	#if is_analog_a3 == 1
+		#define analog_a3_conversion -1
+	#endif
+	#if is_analog_a4 == 1
+		#define analog_a4_conversion -1
+	#endif
+	#if is_analog_a5 == 1
+		#define analog_a5_conversion -1
+	#endif
+
 #endif
 
 
