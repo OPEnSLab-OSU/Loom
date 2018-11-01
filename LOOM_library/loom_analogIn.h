@@ -8,7 +8,7 @@
 // ===                        STRUCTURES                        === 
 // ================================================================
 struct state_analog_t {
-	int16_t a0, a1, a2, a3, a4, a5; // Memory to store analog sensor values
+	int a0, a1, a2, a3, a4, a5; // Memory to store analog sensor values
 													// Add other ports ? put these in #defines based on which ports are enabled
 };
 
@@ -21,10 +21,10 @@ struct state_analog_t state_analog;
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-void     setup_analog();
-uint32_t read_analog(uint8_t chnl);
-void     measure_analog();
-void     package_analog(OSCBundle *bndl, char packet_header_string[]);
+void setup_analog();
+int  read_analog(uint8_t chnl);
+void measure_analog();
+void package_analog(OSCBundle *bndl, char packet_header_string[]);
 
 
 // ================================================================ 
@@ -72,10 +72,10 @@ void setup_analog() {
 //
 // @return The measured sensor value
 //
-uint32_t read_analog(uint8_t chnl)
+int read_analog(uint8_t chnl)
 {
 	int i = analog_samples;
-	uint32_t reading = 0;
+	int reading = 0;
 
 	while (i--) {
 		reading += analogRead(chnl); 
@@ -107,22 +107,46 @@ uint32_t read_analog(uint8_t chnl)
 void measure_analog() 
 {
 	#if (is_analog_a0 == 1) 
-		state_analog.a0 = read_analog(0);
+		#if (enable_analog_conversions == 1) && (analog_a0_conversion >= 0)
+			state_analog.a0 = conversion_list[analog_a0_conversion](read_analog(0)); 
+		#else
+			state_analog.a0 = read_analog(0);
+		#endif
 	#endif
 	#if (is_analog_a1 == 1)
-		state_analog.a1 = read_analog(1);
+		#if (enable_analog_conversions == 1) && (analog_a1_conversion >= 0)
+			state_analog.a1 = conversion_list[analog_a1_conversion](read_analog(1)); 
+		#else
+			state_analog.a1 = read_analog(1);
+		#endif
 	#endif
 	#if (is_analog_a2 == 1) 
-		state_analog.a2 = read_analog(2);
+		#if (enable_analog_conversions == 1) && (analog_a2_conversion >= 0)
+			state_analog.a2 = conversion_list[analog_a2_conversion](read_analog(2)); 
+		#else
+			state_analog.a2 = read_analog(2);
+		#endif
 	#endif
 	#if (is_analog_a3 == 1)
-		state_analog.a3 = read_analog(3);
+		#if (enable_analog_conversions == 1) && (analog_a3_conversion >= 0)
+			state_analog.a3 = conversion_list[analog_a3_conversion](read_analog(3)); 
+		#else
+			state_analog.a3 = read_analog(3);
+		#endif
 	#endif
 	#if (is_analog_a4 == 1) 
-		state_analog.a4 = read_analog(4);
+		#if (enable_analog_conversions == 1) && (analog_a4_conversion >= 0)
+			state_analog.a4 = conversion_list[analog_a4_conversion](read_analog(4)); 
+		#else
+			state_analog.a4 = read_analog(4);
+		#endif
 	#endif
 	#if (is_analog_a5 == 1)
-		state_analog.a5 = read_analog(5);
+		#if (enable_analog_conversions == 1) && (analog_a5_conversion >= 0)
+			state_analog.a5 = conversion_list[analog_a5_conversion](read_analog(5)); 
+		#else
+			state_analog.a5 = read_analog(5);
+		#endif
 	#endif
 }
 

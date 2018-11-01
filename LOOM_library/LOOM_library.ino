@@ -42,8 +42,12 @@ void loop()
 
 	measure_sensors();					// Read sensors, store data in sensor state struct
 	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
-	send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
-	log_bundle(&send_bndl, PUSHINGBOX);
+	
+	print_bundle(&send_bndl);
+
+	// send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
+	// log_bundle(&send_bndl, PUSHINGBOX);
+	// log_bundle(&send_bndl, SDCARD, "file.csv");
 
 
 	additional_loop_checks();			// Miscellaneous checks
