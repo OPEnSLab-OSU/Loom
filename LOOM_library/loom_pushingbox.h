@@ -85,7 +85,7 @@ void sendToPushingBox(OSCMessage &msg)
 	#if pushUploadFilter == 1
 		currentPushMillis = millis();
 		if ( (currentPushMillis - lastPushMillis) < (1000*config_pushingbox->minimum_upload_delay) ) {
-			LOOM_DEBUG_Println("Hasn't been long enough since last PushingBox upload, skipping this one");	
+			// LOOM_DEBUG_Println("Hasn't been long enough since last PushingBox upload, skipping this one");	
 			return; // has not been long enough yet, just return
 		} else {
 			lastPushMillis = currentPushMillis;
@@ -118,7 +118,7 @@ void sendToPushingBox(OSCMessage &msg)
 	LOOM_DEBUG_Println("Sending to PushingBox");
 
 
-return;
+// return;
 
 	// Get the device source from bundle header 
 	char bundle_deviceID[20];

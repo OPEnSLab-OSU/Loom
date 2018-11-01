@@ -463,7 +463,7 @@
 		#define tab_id_complete "Sheet1"    // Defines tab if hub is defining tab instead of node
 	#else
 		// Use bundle source and below prefix to define tab ID
-		#define tab_id_prefix   "E_"		// Used as a prefix if node is being used to define tab
+		#define tab_id_prefix   "Test_"		// Used as a prefix if node is being used to define tab
 	#endif	
 
 	#define verify_family_match 1			// 1 to only upload to spreadsheet if source device family matches hub 
