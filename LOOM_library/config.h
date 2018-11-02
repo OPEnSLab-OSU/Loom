@@ -126,8 +126,19 @@
 // --- OLED ---
 #define is_oled 1
 #if is_oled == 1
-	#define oled_reset_pin A2  // Make sure this doesn't conflict with other pins in use
+	#define oled_reset_pin A2  			// Make sure this doesn't conflict with other pins in use
 
+	#define oled_display_format 3     	// 1: show first 4 elements of the bundle
+										// 2: show first 8 elements of the bundle
+										// 3: show all elements of the bundle in scrolling fashion
+
+	#if oled_display_format == 3
+		#define oled_scroll_duration 6	// The time (in seconds) to scroll through a bundle 
+	
+		#define oled_button_freeze	 2	// 0: disable
+										// 1: Button freezes the scrolling and data
+										// 2: Button freezes the scrolling
+	#endif
 #endif
 
 
