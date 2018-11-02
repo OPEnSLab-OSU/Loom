@@ -86,7 +86,7 @@
 // ================================================================ 
 // ===                 COMMUNICATION PLATFORMS                  === 
 // ================================================================
-#define is_wifi       1		// 1 to enable WiFi
+#define is_wifi       0		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
@@ -120,6 +120,14 @@
 	#define sdSaveMinDelay   1  // minimum delay in seconds between saves (only applies sdSaveFilter is 1)
 
 	#define sdBroadcastSave  0  // 1 to broadcast on communication platforms when data is saved to SD, 0 to not 
+#endif
+
+
+// --- OLED ---
+#define is_oled 1
+#if is_oled == 1
+	#define oled_reset_pin A2  // Make sure this doesn't conflict with other pins in use
+
 #endif
 
 
