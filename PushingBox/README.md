@@ -62,7 +62,7 @@ This script is generalized to work with any spreadsheets, so there is no need to
 
 - Go to PushingBox and create a new service via My Services > Add Service > Custom URL
 
-- Name the service whatever you feel like and copy in Google script URL from above into Root URL
+- Name the service whatever you feel like and copy in Google script URL from above into Root URL, set the Method to GET
 
 - Now you need to create a Scenario that calls this service with data
 
