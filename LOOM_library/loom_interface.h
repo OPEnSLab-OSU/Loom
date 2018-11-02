@@ -253,12 +253,12 @@ void package_data(OSCBundle *send_bndl)
 	//	Add multiplexer sensor data
 	#if is_multiplexer == 1
 		package_tca9548a(send_bndl, configuration.packet_header_string);
-	#endif //is_multiplexer
+	#endif 
 
 	// Update MPU6050 Data
 	#if is_mpu6050 == 1
 		package_mpu6050(send_bndl, configuration.packet_header_string, 0);
-	#endif //is_mpu6050
+	#endif 
 
 	#if is_max31856 == 1
 		package_max31856(send_bndl, configuration.packet_header_string);
@@ -314,7 +314,15 @@ void package_data(OSCBundle *send_bndl)
 		#if is_zxgesturesensor == 1
 			package_zxgesturesensor(send_bndl, configuration.packet_header_string);
 		#endif
+	#endif // of #if is_multiplexer != 1
+
+
+	#if (is_lora == 1) && (package_lora_rssi == 1)
+		sprintf(address_string, "%s%s", configuration.packet_header_string, "/rssi");
+		send_bndl->add(address_string).add((int32_t)lora_last_rssi);
 	#endif
+
+
 }
 
 
