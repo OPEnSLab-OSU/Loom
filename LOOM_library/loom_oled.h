@@ -50,11 +50,16 @@ void setup_oled()
 {
 	LOOM_DEBUG_Print("Initializing OLED...");
 
+	#if (oled_display_format == 3) && (oled_button_freeze > 0)
+		pinMode(oled_freeze_pin, INPUT_PULLUP);
+	#endif
+
 	display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x32)
 	display.display();
 	display.clearDisplay();
 
 	LOOM_DEBUG_Println("done.");
+
 }
 
 
@@ -73,9 +78,15 @@ void oled_display_bundle(OSCBundle* bndl)
 	if (bundle_empty(bndl)) return;
 
 	// If button press set to freeze display, don't do anything
-	#if (is_button == 1) && (oled_button_freeze == 1)
-		if (button_state == 0) return; 
+	// #if (is_button == 1) && (oled_button_freeze == 1)
+	// 	if (button_state == 0) return; 
+	// #endif
+	#if oled_button_freeze == 1
+		if (digitalRead(oled_freeze_pin) == 0) return; 
 	#endif
+
+	LOOM_DEBUG_Println2("Button: ", digitalRead(oled_freeze_pin));
+
 
 	display.clearDisplay();
 	display.setTextColor(WHITE);
@@ -114,8 +125,19 @@ void oled_display_bundle(OSCBundle* bndl)
 	#elif oled_display_format == 3
 
 		// If button enabled for freezing scrolling
-		#if (is_button == 1) && (oled_button_freeze == 2)
-			if (button_state == 0) {
+		// #if (is_button == 1) && (oled_button_freeze == 2)
+		// 	if (button_state == 0) {
+		// 		oled_time = previous_oled_time;
+		// 	} else {
+		// 		oled_time = millis();
+		// 		previous_oled_time = oled_time;
+		// 	}
+		// #else
+		// 	oled_time = millis();
+		// #endif
+
+		#if oled_button_freeze == 2
+			if (digitalRead(oled_freeze_pin) == 0) {
 				oled_time = previous_oled_time;
 			} else {
 				oled_time = millis();
