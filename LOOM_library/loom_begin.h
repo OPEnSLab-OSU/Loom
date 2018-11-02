@@ -203,6 +203,10 @@ void Loom_begin()
 	#endif
 
 
+	#if is_oled
+		setup_oled();
+	#endif
+
 
 	LOOM_DEBUG_Println("\n= = = = = Setup Complete = = = = =\n");
 

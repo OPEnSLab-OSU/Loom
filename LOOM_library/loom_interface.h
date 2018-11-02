@@ -337,22 +337,22 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port)
 {
 	switch(platform) {
 		#if is_wifi == 1
-		case WIFI : wifi_send_bundle(send_bndl); break;
-		// case WIFI : wifi_send_bundle(send_bndl, port); break;
+			case WIFI : wifi_send_bundle(send_bndl); break;
+			// case WIFI : wifi_send_bundle(send_bndl, port); break;
 		#endif
 
 		#if is_lora == 1
-		case LORA : lora_send_bundle(send_bndl); break;
-			// (!lora_bundle_fragment) ? lora_send_bundle(send_bndl) : lora_send_bundle_fragment(send_bndl); break;
+			case LORA : lora_send_bundle(send_bndl); break;
+				// (!lora_bundle_fragment) ? lora_send_bundle(send_bndl) : lora_send_bundle_fragment(send_bndl); break;
 		#endif
 
 		#if is_nrf == 1
-		case NRF : nrf_send_bundle(send_bndl); break;
-			// (!nrf_bundle_fragment) ? nrf_send_bundle(send_bndl) : nrf_send_bundle_fragment(send_bndl); break;
+			case NRF : nrf_send_bundle(send_bndl); break;
+				// (!nrf_bundle_fragment) ? nrf_send_bundle(send_bndl) : nrf_send_bundle_fragment(send_bndl); break;
 		#endif
 		
 		#if LOOM_DEBUG == 1
-		default : Serial.println("That platform is not enabled for sending");
+			default : Serial.println("That platform is not enabled for sending");
 		#endif 
 	} // of switch
 }
@@ -406,6 +406,12 @@ void log_bundle(OSCBundle *log_bndl, LogPlatform platform, char* file)
 		#if LOOM_DEBUG == 1
 		case SERIAL_MON :
 			print_bundle(log_bndl);
+			return;
+		#endif
+
+		#if is_oled == 1
+		case OLED :
+			oled_display_bundle(log_bndl);
 			return;
 		#endif
 

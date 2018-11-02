@@ -112,6 +112,9 @@ enum LogPlatform {
 	#if (is_pushingbox == 1) || (prevent_platform_compile_error == 1)
 		PUSHINGBOX,
 	#endif
+	#if (is_oled == 1) || (prevent_platform_compile_error == 1)
+		OLED,
+	#endif
 	#if (is_adafruitio == 1) || (prevent_platform_compile_error == 1)
 		// ADAFRUITIO,
 	#endif
@@ -270,7 +273,6 @@ void flash_led();
 	#if enable_analog_conversions == 1
 		#include "loom_analog_conversions.h"
 	#endif
-	
 	#include "loom_analogIn.h"
 #endif
 #if is_neopixel == 1
@@ -343,6 +345,10 @@ void flash_led();
 	#include "loom_sapflowmeter.h"
 #endif
 
+
+#if is_oled == 1
+	#include "loom_oled.h"
+#endif
 
 // ================================================================ 
 // ===                INCLUDE ESSENTIAL FILES                   === 

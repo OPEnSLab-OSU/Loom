@@ -34,11 +34,11 @@ void loop()
 	// --- Common Example ---
 	OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
 
-	receive_bundle(&bndl, WIFI);		// Receive messages
-	if (bndl.size()) {
-		print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
-	}
-	process_bundle(&bndl);				// Dispatch message to correct handling functions
+	// receive_bundle(&bndl, WIFI);		// Receive messages
+	// if (bndl.size()) {
+	// 	print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
+	// }
+	// process_bundle(&bndl);				// Dispatch message to correct handling functions
 
 	measure_sensors();					// Read sensors, store data in sensor state struct
 	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
@@ -47,7 +47,7 @@ void loop()
 
 	// send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
 	// log_bundle(&send_bndl, PUSHINGBOX);
-	// log_bundle(&send_bndl, SDCARD, "file.csv");
+	log_bundle(&send_bndl, OLED);
 
 
 	additional_loop_checks();			// Miscellaneous checks
