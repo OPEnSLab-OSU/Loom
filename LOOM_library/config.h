@@ -401,6 +401,8 @@
 										
 	#define RF95_FREQ      915.0			// Hardware specific, Tx must match Rx
 
+	#define package_lora_rssi 1 			// 1 to add LoRa lastest RSSi to bundle build via package bundle; 0 to not
+
 	// #define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 											// Currently unused
 #endif
