@@ -25,6 +25,11 @@
 Adafruit_SSD1306 display(oled_reset_pin);
 
 
+unsigned long oled_time = 0;
+#if (is_button == 1) && (oled_button_freeze == 2)
+	unsigned long previous_oled_time; 
+#endif
+
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
@@ -47,7 +52,6 @@ void setup_oled()
 
 	display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x32)
 	display.display();
-	// delay(1000);
 	display.clearDisplay();
 
 	LOOM_DEBUG_Println("done.");
@@ -68,73 +72,69 @@ void oled_display_bundle(OSCBundle* bndl)
 {
 	if (bundle_empty(bndl)) return;
 
-	String keys[16], vals[16];
-
-	// int size = bndl->getOSCMessage(0)->size();
-
-	int size = 10;
-
-	// OSCBundle tmpBndl;
-	// deep_copy_bundle(bndl, &tmpBndl);
-	// convert_bundle_structure(&tmpBndl, SINGLEMSG);
-
-	convert_bundle_to_arrays_assoc(bndl, keys, vals, 16);
-
-	// print_message(tmpBndl.getOSCMessage(0));
-
-	// int size = tmpBndl.getOSCMessage(0)->size();
-	// int size = tmpBndl.size();
-	LOOM_DEBUG_Println2("Size: ", size);
-
+	// If button press set to freeze display, don't do anything
+	#if (is_button == 1) && (oled_button_freeze == 1)
+		if (button_state == 0) return; 
+	#endif
 
 	display.clearDisplay();
 	display.setTextColor(WHITE);
 	display.setTextSize(1);
 
-	unsigned long time = millis();
-	LOOM_DEBUG_Println2("Time: ", time);
+	String keys[16], vals[16];
+	int size = bundle_num_data_pairs(bndl);
+	convert_bundle_to_arrays_assoc(bndl, keys, vals, 16);
 
 
-	int rate = 4;
-	int full_loop = 15000;
-	// or time per full loop
+	// Display first 4 elements
+	#if oled_display_format == 1
+		for (int i = 0; i < 4 && i < size; i++) {
+			display.setCursor(0, i*8);
+			display.print(keys[i].substring(0,8));
+			display.setCursor(64, i*8);
+			display.print(vals[i].substring(0,8));
+		}
 
-	int total_offset = ( float(time%full_loop)/(float)full_loop )*(8)*(size);
-	LOOM_DEBUG_Println2("Total Offset: ", total_offset);
-	// range from 0 to 16 [-4 as 4 will be shown] (or number of data points)
+	// Display first 8 elements
+	#elif oled_display_format == 2
+		for (int i = 0; i < 4 && i < size; i++) {
+			display.setCursor(0, i*8);
+			display.print(keys[i].substring(0,4));
+			display.setCursor(32, i*8);
+			display.print(vals[i].substring(0,4));
+		}
+		for (int i = 0; i < 4 && i < size; i++) {
+			display.setCursor(64, i*8);
+			display.print(keys[i+4].substring(0,4));
+			display.setCursor(96, i*8);
+			display.print(vals[i+4].substring(0,4));
+		}
 
-	// ideally smooth scroll
-	//  shift the y coordinate back
-	//  shift array access up
+	// Display all elements with scrolling
+	#elif oled_display_format == 3
 
-	// have some sort of scroll rate
-
-	// for (int i = 0; i < 5; i++) {
-	// 	display.setCursor(0, i*8);
-	// 	display.print(keys[i].substring(0,5));
-	// 	display.setCursor(32, i*8);
-	// 	display.print(vals[i].substring(0,4));
-	// }
-
-	for (int i = 0; i < 16; i++) {
-		display.setCursor(0, i*8-total_offset);
-		display.print(keys[i].substring(0,5));
-		display.setCursor(64, i*8-total_offset);
-		display.print(vals[i].substring(0,5));
-	}
-
-	// for (int i = 4; i < 8; i++) {
-	// 	display.setCursor(64, (i-4)*8);
-	// 	display.print(keys[i].substring(0,4));
-	// 	display.setCursor(96, (i-4)*8);
-	// 	display.print(vals[i].substring(0,4));
-	// }
+		// If button enabled for freezing scrolling
+		#if (is_button == 1) && (oled_button_freeze == 2)
+			if (button_state == 0) {
+				oled_time = previous_oled_time;
+			} else {
+				oled_time = millis();
+				previous_oled_time = oled_time;
+			}
+		#else
+			oled_time = millis();
+		#endif
 
 
-  // display.startscrollleft(0x00, 0xFF);
-  // delay(4000);
-  // display.stopscroll();
+		int offset = size*( float(oled_time%(oled_scroll_duration*1000)) / (float)(oled_scroll_duration*1000) );
 
-	// display.print(millis());
+		for (int i = 0; i < 5; i++) {
+			display.setCursor(0, i*8);
+			display.print(keys[(i+offset)%size].substring(0,6));
+			display.setCursor(64, i*8);
+			display.print(vals[(i+offset)%size].substring(0,6));
+		}
+	#endif
+
 	display.display();	
 }

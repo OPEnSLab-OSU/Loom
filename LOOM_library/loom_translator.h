@@ -30,6 +30,9 @@ void   print_bundle(OSCBundle *bndl);
 template<typename T> 
 void   print_array(T data [], int len, int format);
 int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
+
+int    bundle_num_data_pairs(OSCBundle *bndl);
+
 bool   bundle_empty(OSCBundle *bndl);
 String get_data_value(OSCMessage* msg, int pos);
 String get_address_string(OSCMessage *msg);
@@ -213,6 +216,23 @@ int get_bundle_bytes(OSCBundle *bndl)
 		total += bndl->getOSCMessage(i)->bytes();
 	}
 }
+
+
+
+// --- GET NUM DATA PAIRS ---
+//
+// Returns the number of key-value pairs in a bundle
+//  in either SINGLEMSG or MULTIMSG format
+// Assumes data to be keys and values, return value
+//  undefined otherwise
+int bundle_num_data_pairs(OSCBundle *bndl)
+{
+	int total = 0;
+	for (int i =0; i < bndl->size(); i++) {
+		total += bndl->getOSCMessage(i)->size();
+	}
+}
+
 
 
 bool bundle_empty(OSCBundle *bndl)
