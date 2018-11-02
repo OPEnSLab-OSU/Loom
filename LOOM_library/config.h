@@ -44,7 +44,7 @@
 								//   Device will freeze if this in enabled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
-#define dynamic_serial_output 0 // These only apply if LOOM_DEBUG is enabled
+#define dynamic_serial_output 1 // These only apply if LOOM_DEBUG is enabled
 								// 0 is standard operation 
 								//   - Serial monitor needs to start / be open for device to setup
 								//   - Serial (USB) can generally be detached after setup without issue 
@@ -124,7 +124,7 @@
 
 
 // --- OLED ---
-#define is_oled 1
+#define is_oled 					1 	// Whether OLED is being used
 #if is_oled == 1
 	#define oled_reset_pin A2  			// Make sure this doesn't conflict with other pins in use
 
@@ -133,11 +133,14 @@
 										// 3: show all elements of the bundle in scrolling fashion
 
 	#if oled_display_format == 3
-		#define oled_scroll_duration 6	// The time (in seconds) to scroll through a bundle 
-	
+		#define oled_scroll_duration 8	// The time (in seconds) to scroll through a bundle 
+
 		#define oled_button_freeze	 2	// 0: disable
 										// 1: Button freezes the scrolling and data
 										// 2: Button freezes the scrolling
+
+		#define oled_freeze_pin		 10	// Which pin to read from to freeze display
+
 	#endif
 #endif
 
