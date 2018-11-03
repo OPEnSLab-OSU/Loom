@@ -82,6 +82,14 @@ This script is generalized to work with any spreadsheets, so there is no need to
 
 - Now you should be able to call your new script as long as you provide the new deviceID, and a valid spreadsheetID in the config file
 
+### Test Pushingbox
+
+To test PushingBox, build a URL in the format:
+
+`http://api.pushingbox.com/pushingbox?devid=[DEVICE-ID]&key0=sheetID&val0=[SHEET-ID]&key2=deviceID&val2=[DEVICE-NAME]&key3=[KEY-NAME]&val3=[VALUE]`
+
+and paste into a browser.
+
 ## buildstring.py 
 This is a python script that will build the string used by the PushingBox Scenario. The usage is either "python buildstring.py", in which case the user will be prompted to enter the number of key-value pairs / columns. Or "python buildstring.py num_cols" where num_cols is the integer number of columns/key-value pairs of data being sent. The output is always a string to the command-line, which can be copied and pasted into the PushinBox Scenario.
 
