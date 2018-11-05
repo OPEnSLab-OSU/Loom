@@ -1,6 +1,6 @@
 # Project Loom: Library
 
-This is the primary location of the Project LOOM code, consolidated into place with a single Arduino .ino sketch built with code selected by the preprocessor based on the configuration file. 
+This is the primary location of the Project Loom code, consolidated into place with a single Arduino .ino sketch built with code selected by the preprocessor based on the configuration file. 
 
 ## Table of Contents
 
@@ -13,8 +13,6 @@ This is the primary location of the Project LOOM code, consolidated into place w
 
     1. [Overall Structure](#overall-structure)
         1. [Example Library Include Hierarchy](#example-library-include-hierarchy)
-    2. [Adding to the Library](#adding-to-the-library)
-    3. [Adding to the Message Router](adding-to-the-message-router)
 7. [Channels](#channels)
     1. [Implementation](#implementation)
     2. [Additional Devices](#additional-devices)
@@ -30,27 +28,22 @@ This is the primary location of the Project LOOM code, consolidated into place w
         4. [Package Data](#package-data)
         5. [Send Bundle](#send-bundle)
         6. [Additional Loop Checks](#additional-loop-checks)
-        	. [Minimal Working Example](#minimal-working-example)	
+        7. [Minimal Working Example](#minimal-working-example)	
 10. [SD Card Support](#sd-card-support)
 11. [Real-Time Clock Support](#real-time-clock-support)
-12. [Arduino IDE Setup](#arduino-ide-setup)
-13. [Building and Uploading Code Without The IDE](#building-and-uploading-code-without-the-ide)
-14. [Configuration Conflicts](#configuration-conflicts)
-15. [Device Identification Hierarchy](#device-identification-hierarchy)
-16. [Using the Loom Library](#using-the-loom-library)
-17. [Extending Loom Functionality](#extending-loom-functionality)
-18. [Example .ino Loop Contents](#example-.ino-loop-contents)      
+12. [Configuration Conflicts](#configuration-conflicts)
+13. [Device Identification Hierarchy](#device-identification-hierarchy)
+14. [Using the Loom Library](#using-the-loom-library)
+15. [Example .ino Loop Contents](#example-.ino-loop-contents)      
 
 ## Installation
 
-The Loom Library, and any dependencies, need to be placed into the Arduino libraries folder, i.e:
-
-Document > Arduino > Libraries
+See our [Arduino and Loom Setup Guide](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Arduino_and_Loom_Setup)
 
 ## Device Support
 
 - Adafruit Feather M0
-- Adafruit Feather 32u4
+- Adafruit Feather 32u4 *(limited support)*
 
 ## Communication Platforms
 
@@ -63,19 +56,18 @@ WiFi and LoRa have had the most attention in development and thus have the most 
 | nRF*           | nRF*                        | May need more testing to be 'proven'                         |
 | Ethernet       | Ethernet*                   | Currently only used with hubs, expansion in progress         |
 | GSM            | GSM*                        | Currently only one device, so outputs MQTT via GSM, but no GSM receiving yet |
-| Bluetooth      | Bluetooth                   | Planned                                                      |
 |                |                             |                                                              |
 | Google Sheets? | Google Sheets (PushingBox)* | Works as output, looking for ways of improving the pipline   |
-| Adafruit IO*   | Adafruit IO*                | Could use more robust integration                            |
+| Adafruit IO*   | Adafruit IO*                | Needs proper integration                                     |
 | IFTTT?         | IFTTT?                      | Currently, IFTTT works only as output though Adafruit IO     |
 | SD card?       | **SD card**                 | Works as output, considering as input                        |
 | Serial?        | **Serial**                  | Works for output. Serial as input may or may not be useful (is how Fona is tested) |
 
 ## Device Configuration
 
-The configuration of the code to upload and flash to devices is set in the config.h file. This file presents the options that can be set or toggled to achieve a particular behavior. The preprocessor uses these definitions to select the necessary declarations, variables, and functions automatically. 
+The configuration of the code to upload and flash to devices is specified in the config.h file. This file presents the options that can be set or toggled to achieve a particular behavior. The preprocessor uses these definitions to select the necessary declarations, variables, and functions automatically. 
 
-Currently changes to the config need to be done manually in the file itself. A script to automate this process from the command line, and ultimately Max, is in progress.
+Currently changes to the config need to be done manually in the file itself. An interface to aid the process is in progress.
 
 ## Max/MSP
 
@@ -83,15 +75,15 @@ The associated [Loom Data Processors](https://github.com/OPEnSLab-OSU/InternetOf
 
 ## Librarary Architecture
 
-The LOOM Library is the answer to the growing set of code to drive Project LOOM's supported devices, hardware, and communication platforms. The set of possible combinations of device configurations makes it unfeasable for LOOM developers and users alike to manage sketches with desired functionality. Instead, a configuration file effectively creates the desired sketch dynamically. A loom_preamble file selects entire files to include, each of which may also contain additional preprocessor statements.
+The Loom Library is an answer to the growing set of code to drive Loom's supported devices, hardware, and communication platforms. The set of possible combinations of device configurations makes it unfeasable for Loom developers and users alike to manage sketches with desired functionality. Instead, a configuration file effectively creates the desired sketch dynamically. A loom_preamble.h file uses that configuration to select entire files to include, each of which may also contain additional preprocessor statements.
 
 ### Overall Structure
 
-The LOOM Library is effectively an aggregate of all of the functionality possible within the entirety of the supported devices, sensors, and actuators. The user then specifies the needs of their sketch inside the config.h. Based on the needs of the sketch, the requisite files, functions, and logic will be dynamically included such that only what is needed by the sketch is uploaded to the device. loom_preamble.h uses config.h to know which files to include, these files in turn then include the libraries they need. loom_common.h is also always present as it has the LOOM_begin() function, which sets up all the modules and sensors being used by the sketch. 
+The Loom Library is effectively an aggregate of all of the functionality possible within the entirety of the supported devices, sensors, and actuators. The user then specifies the needs of their sketch inside the config.h. Based on the needs of the sketch, the requisite files, functions, and logic will be dynamically included such that only what is needed by the sketch is uploaded to the device. loom_preamble.h uses config.h to know which files to include, these files in turn then include the libraries they need. loom_common.h is also always present as it has the Loom_begin() function, which sets up all the modules and sensors being used by the sketch. 
 
 #### Example Library Include Hierarchy
 
-The hierarchy of included files looks something like the following (example if building for Ishield device on Feather M0 WiFi). 
+The hierarchy of included files looks something like the following (example if building for Ishield device on Feather M0 WiFi)  *(actual files may have since changed, but the idea/hierarchy remain)*. 
 
 **Note** – bolded are files that are always necessary and thus included, independent of config.h. In angle brackets are non-Loom dependencies.
 
@@ -116,19 +108,13 @@ The hierarchy of included files looks something like the following (example if b
       - <FlashStorage.h>
     - **loom_common.h**
 
-### Adding to the Library
 
-New sensor and actuator support can be added by filling out the loom_mod_template.h file with relevant code. This template ensures that the code for each piece of hardware conforms to a standard format, making it easier to read and understand.
-
-New files should be added #included in the loom_preamble.h file after config.h but generally before loom_flash.h and loom_common.h.
-
-There are plans/consideration for a script that will handle most of the additions for a user based on various provided parameters / needs as current additions generally need to modify the config, preamble, loom_commom (sometimes), and loom_interface files in a mostly boiler plate fashion in addition to the new device-specific file.
 
 ### Message Router
 
 #### Intro to Route and Dispatch of Message Router
 
-Custom functions can be added to the message router. The message router is called via:
+The message router is called via:
 
 ```
 bndl->route(configuration.packet_header_string, msg_router);
@@ -150,68 +136,11 @@ msg.dispatch("/SetID", set_instance_num, addrOffset);
 
 The reason only the `/SetID` is provided and not something like `/LOOM/Ishield7/SetID` is because the aforementioned route function checks for message addressed to the device, which in this case is identified by `/LOOM/Ishield7`, and passes only the remaining part of the address to the message router. Messages that do not start with the device indentifying string are not sent to the message router.
 
-#### Adding Custom Functions to Message Router
-
-There are a few steps that must be followed in order to get a custom function to be callable by the message router. These are:
-
-- Write your function in the correct format
-- Add the function prototype to the top of loom_msg_router.h file
-- Add the dispatch call to the msg_router function
-
-**Writing Your Function**
-
-All function that are called by the message router need to take only an OSC message by reference, and return nothing. Thus a function skeleton would look like:
-
-```
-void your_function(OSCMessage &msg)
-{
-	// process the message forwarded from msg_router
-}
-```
-
-Inside this function is generally where you will process the message (if you need, you can add auxiliary function(s), to do some of the processing/handling - these do not have constraints on the parameters or return value). The following OSC methods are recommended for extracting the arguments from the message. (The below list is not exhaustive, see the [OSC API](https://github.com/CNMAT/OSC/blob/master/API.md) for more functions)
-
-**`msg.size()`** Returns the number of arguments in the the message
-
-**`msg.getType(index)`** Returns the type of the argument at `index`, `i` for integer, `f` for float, and `s` for string. Useful in combination with switch statement to select which of the following three functions to call.
-
-**`msg.getInt(index)`** Returns argument to message that is an integer at `index` if argument is indeed an integer and there is an argument at that index
-
-**`msg.getFloat(index)`**Returns argument to message that is a float at `index` if argument is indeed a float and there is an argument at that index
-
-**`msg.getString(index)`**Returns argument to message that is a string at `index` if argument is indeed a string and there is an argument at that index
-
-**`msg.getAddress(buf, 0);`** Copies address of message into char array called `buf`
-
-**Adding the Function Prototype**
-
-Add the protype of the function you wrote, e.g:
-
-```
-void your_function(OSCMessage &msg);
-```
-
-to the `Custom Function Prototypes` section at the top of the `loom_msg_router.h` file. (Don't forget the semicolon). Should be no need to add the prototypes for any auxililary functions called by the `your_function`.
-
-**Adding the Dispatch Call**
-
-At the bottom of the message router, add:
-
-```
-msg.dispatch("/command/string", your_function, addrOffset);
-```
-
-Where
-
--  `/commmand/string` is the section after the device identifying string that is being used to select which function to dispatch a message to. This should be descriptive but not overly long. In the above example,  the string `setID` was used to check if the message should be forwarded to `set_instance_num`
-- `your_function` is the name of the function you want to be called if the message matches the device identifying string and command string.
-- `addrOffset` should stay as it is, this is an integer value passed in from the `bndl->route(...)` call, and simply specifies where in the message string to start looking for the command section (i.e. right after the device identifying string)
-
 ## Channels
 
 The LOOM library and associated Max/MSP processors are designed to use channel based interfaces by default. Channel interfaces abstract device instance number, UDP port, and IP address into a single letter A, B, C, … H. 
 
-The channels are purely a convenience, and the devices can operate without any notion of channels in the firmware and/or Max patches.
+The channels are purely a user convenience, and the devices can operate without any notion of channels in the firmware and/or Max patches.
 
 ### Implementation
 A common port is used for the communication of device settings in order to allow the Max patches to communicate with devices in a consistent manner if the instance number, UDP port, or IP (i.e. the channel information) address are unknown.
@@ -232,15 +161,15 @@ Channel H:	Instance # = 8		UDP Port = 9448
 
 ### Additional Devices
 
-The Max interfaces presently support 8 concurrent channels, the library itself poses no such restrictions and using custom Max interfaces can allow for the control of more devices.
+The Max interfaces presently support upto 8 concurrent channels, though the library itself poses no such restrictions and using custom Max interfaces can allow for the control of more devices.
 
 ## Configuration File
 
-The configuration file is used in conjunction with preprocessor statements to essentially built the specified sketch. Any options that can be set or toggled, or any specification of hardware (e.g. sensors and actuators) being used occur in (and only in) this config.h.
+The configuration file is used in conjunction with preprocessor statements to build the specified sketch, with as small a program memory usage as possible. Any options that can be set or toggled, or any specification of hardware (e.g. sensors and actuators) being used occur in this config.h.
 
 Any options for custom additions to the library should be added only to the configuration file.
 
-The config.h file needs to be included before the library itself, so that the configuration can be used to define the necessary subset of the library.
+The config.h file needs to be included before the library (via loom_preamble.h) itself, so that the configuration can be used to define the necessary subset of the library.
 
 ## API
 
@@ -323,11 +252,35 @@ Sends a packaged bundle on the specified platform
 ```cpp
 // Send the bundle
 //  takes bundle to be filled and wireless platforms [WIFI, LORA, NRF]
+// ex:
 send_bundle(&send_bndl, WIFI);
 ```
 
-- **bndl** – The bundle to be sent
-- **platform** – The wireless platform to send on, the values are encoded to a Platform enum to reduce chance for errors
+- **send_bndl** – The bundle to be sent
+- **comm_platform** – The wireless platform to send to another device on, the values are encoded to a CommPlatform enum to reduce chance for errors
+  - WIFI
+  - LORA
+  - NRF
+
+#### Log Bundle
+
+Logs a packaged bundle on the specified platform. *(Is distinct from send_bundle in that the destination is not another Loom enabled microprocessor)*
+
+```cpp
+// Send the bundle
+//  takes bundle to be filled and wireless platforms [PUSHINGBOX, SDCARD, OLED]
+// ex:
+log_bundle(&log_bndl, PUSHINGBOX);
+// SD card ex:
+log_bundle(&log_bndl, SDCARD, "filename.csv");
+
+```
+
+- **log_bndl** – The bundle to be logged
+- **log_platform** – The platform to log to, the values are encoded to a LogPlatform enum to reduce chance for errors
+  - PUSHINGBOX
+  - SDCARD
+  - OLED
 
 #### Additional Loop Checks
 
@@ -349,6 +302,7 @@ This example is fully functional. It assumes that WiFi has been specified as a w
 void setup() 
 {
 	Loom_begin(); // LOOM_begin calls any relevant LOOM device setup functions
+    
 	// Any custom setup code
 }
 
@@ -356,11 +310,18 @@ void loop()
 {
 	OSCBundle bndl, send_bndl; 
 	
+    // Incoming
 	receive_bundle(&bndl, WIFI);
 	process_bundle(&bndl);
+    
+    // Sensors
 	measure_sensors();
 	package_data(&send_bndl);
+    
+    // Outgoing
 	send_bundle(&send_bndl, WIFI);
+    log_bundle(&send_bndl, PUSHINGBOX);
+    
 	additional_loop_checks();
 } 
 ```
@@ -387,29 +348,6 @@ The Loom library supports two RTC devices:
 Currently, interrupts are only supported via the DS3231, with the PCF8523 mostly being used in conjunction with an SD card (as Adafruit Adalogger featherwing has PCF8523 and SD card holder) to provide timestamps.
 
 The Loom Library has support for both devices for returning strings of the date, time, or weekday. Additional timer functions are provided for the DS3231.
-
-## Arduino IDE Setup
-
-Make sure to download the dependencies of the Loom Library from:
-
-https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Dependencies 
-
-and install the libraries with the Arduino IDE, as described here:
-
-https://www.arduino.cc/en/guide/libraries
-
-## Building and Uploading Code Without The IDE
-
-Work is currently be done on investigating and implementing a script that will build the config.h file from the command line, taking the options as arguments. A corresponding Max interface will be made to provide a GUI to these options. The interface will pair with the one to subsequently build and upload code to devices.
-
-The design is planned to be as follows:
-
-- Generate the config file from command line 
-  - Arguments to used set options, have default values if none specified
-  - Sent to a Python script, inserting the parameters in the relevant locations of the config file
-- Be able to call this script from Max
-- Use Max to create a graphical interface of toggles / inputs corresponding to the script arguments.
-  - Error checking (i.e., of selection conflicts) can be performed in the script or Max, but would doing so in Max would give users immediate feedback on invalid combinations
 
 
 ## Configuration Conflicts
@@ -484,6 +422,8 @@ Target a message at a single device, i.e. the one with the matching family, fami
 
 ## Using the Loom Library
 
+More details can be found in the **Loom Setup and Usage** section of the [Readme](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Arduino_and_Loom_Setup) on using Loom
+
 This section assumes that you want to use the Loom Library without integrating your code, software, or hardware formally into the library's official code. This means that your code and modifications will exist almost exclusively in the main .ino file and config.h file.
 
 **Config.h**
@@ -498,20 +438,6 @@ By default, the .ino sketch is fairly sparse – the config.h and Loom preamble 
 - Add any additional setup you need after the call to `Loom_begin()` in `setup()`
 - Use the API to interface with the supported components of Loom at a high level
 - Put your own code into the `loop()` function as needed to support your additional functionality / components
-
-## Extending Loom Functionality 
-
-This section will describe some of the ways that you can extend Loom without officially integrating code into the library. 
-
-**Adding Message Router Options**
-
-If you have a non-Loom actuator that you would like to be able to respond to OSC Bundles, refer to the `loom_mod_template_actuator.h` for how to setup a function to handle messages forwarded from the message router, which directs messages to the correct 'driver' function for processing. 
-
-Then you need to add routing to your function in the message router (in `loom_msg_router.h`. Follow the format of the other dispatches in the function, i.e:
-
-```
-if (msg.dispatch("/<some-command>", <function-to-call>, addrOffset) ) return;
-```
 
 ## Example .ino Loop Contents
 
@@ -529,13 +455,9 @@ void loop()
 		print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
 	}
 	process_bundle(&bndl);				// Dispatch message to correct handling functions
-
 	measure_sensors();					// Read sensors, store data in sensor structs
-	
 	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
-	
 	send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
-
 	additional_loop_checks();			// Miscellaneous checks
 }
 ```
@@ -547,10 +469,8 @@ void loop()
 {
 	OSCBundle bndl;  					// Bundles to hold incoming and outgoing data
 
-	receive_bundle(&bndl, LORA);		// Receive messages
-	
+	receive_bundle(&bndl, LORA);		// Receive messages	
 	log_bundle(&bndl, PUSHINGBOX);		// Send bundle of packaged data
-
 	additional_loop_checks();			// Miscellaneous checks
 }
 ```
@@ -563,11 +483,8 @@ void loop()
 	OSCBundle send_bndl;  				// Bundles to hold incoming and outgoing data
 
 	measure_sensors();					// Read sensors, store data in sensor structs
-	
 	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
-	
 	send_bundle(&send_bndl, LORA);		// Send bundle of packaged data
-
 	additional_loop_checks();			// Miscellaneous checks
 }
 ```
