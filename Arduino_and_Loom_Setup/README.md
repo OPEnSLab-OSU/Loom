@@ -21,6 +21,8 @@
 
 ### **Install the Loom Dependencies**
 
+The Loom dependecies are provided [here](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Dependencies)
+
 **Mac/Linux**
 
 Either: *(assuming InternetOfAg folder was downloaded to Downloads folder and is unzipped)*
@@ -43,6 +45,10 @@ Or:
 - Select all of the zip folders
 - Right-click and use 7zip or equivalent to extract the folders
 - Once all of the zip files have been extracted as folders, drag them all to the folder: `Documents/Arduino/libraries ` 
+
+### Other Libraries
+
+Install other libraries with the Arduino IDE, as described [here](https://www.arduino.cc/en/guide/libraries)
 
 ### **Optional Configuration**
 
@@ -86,3 +92,16 @@ It is recommeded that you base your code off the example provided / use the High
 **Other**
 
 See the [Loom Library Readme](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/LOOM_library) for more details on using the library.
+
+## Building and Uploading Code Without The IDE
+
+Work is currently be done on investigating and implementing a script that will build the config.h file from the command line, taking the options as arguments. A corresponding Max interface will be made to provide a GUI to these options. The interface will pair with the one to subsequently build and upload code to devices.
+
+The design is planned to be as follows:
+
+- Generate the config file from command line 
+  - Arguments to used set options, have default values if none specified
+  - Sent to a Python script, inserting the parameters in the relevant locations of the config file
+- Be able to call this script from Max
+- Use Max to create a graphical interface of toggles / inputs corresponding to the script arguments.
+  - Error checking (i.e., of selection conflicts) can be performed in the script or Max, but would doing so in Max would give users immediate feedback on invalid combinations
