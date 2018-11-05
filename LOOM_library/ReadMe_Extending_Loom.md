@@ -1,4 +1,4 @@
-# Extending Loom
+# Project Loom: Extending Loom
 
 New sensor and actuator support can be added by filling out the loom_mod_template_sensor.h or loom_mod_template_actuator.h file with relevant code. This template ensures that the code for each piece of hardware conforms to a standard format, making it easier to read and understand.
 
