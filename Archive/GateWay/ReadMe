@@ -1,8 +1,0 @@
-This is the GateWay section of the IoA,
-This main section is subdivided into 3 wireless input Flavors:
-1) nRF
-2) LoRa
-3) WiFi
-
-All GateWay flavors interface with the WWW through Ethernet. But, will eventually have a WiFi Option.
-
