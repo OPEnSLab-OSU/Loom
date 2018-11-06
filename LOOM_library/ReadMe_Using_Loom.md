@@ -53,6 +53,8 @@ The Loom Library has six primary interface function to call. With just these, a 
 
 #### Receive Bundle
 
+ `void receive_bundle(OSCBundle *bndl, CommPlatform platform)`
+
 Fills an OSC bundle with packets received the specified platform if data exists and platform is enabled.
 
 ```cpp
@@ -66,6 +68,8 @@ receive_bundle(&bndl, WIFI);
 
 #### Process Bundle
 
+`void process_bundle(OSCBundle *bndl)`
+
 Examine the provided OSC bundle (presumably filled via receive_bundle(). If bundle is not empty,  has no errors, and is addressed to this device, then attempt to perform action specified.
 
 ```cpp
@@ -77,6 +81,8 @@ process_bundle(&bndl);
 
 #### Measure Sensors
 
+ `void measure_sensors()`
+
 Update stored readings from sensors by calling measure on each enabled sensor.
 
 ```cpp
@@ -85,6 +91,8 @@ measure_sensors();
 ```
 
 #### Package Data
+
+`void package_data(OSCBundle *send_bndl)`
 
 Fill the provided OSC bundle with latest stored sensor readings
 
@@ -96,6 +104,8 @@ package_data(&send_bndl);
 - **send_bndl** – The OSC bundle to be filled
 
 #### Send Bundle
+
+`void send_bundle(OSCBundle *send_bndl, CommPlatform platform)`
 
 Sends a packaged bundle on the specified platform
 
@@ -113,6 +123,8 @@ send_bundle(&send_bndl, WIFI);
   - NRF
 
 #### Log Bundle
+
+`void log_bundle(OSCBundle *send_bndl, LogPlatform platform [,char* file])`
 
 Logs a packaged bundle on the specified platform. *(Is distinct from send_bundle in that the destination is not another Loom enabled microprocessor)*
 
@@ -152,7 +164,6 @@ This example is fully functional. It assumes that WiFi has been specified as a w
 void setup() 
 {
 	Loom_begin(); // LOOM_begin calls any relevant LOOM device setup functions
-    
 	// Any custom setup code
 }
 
@@ -160,7 +171,7 @@ void loop()
 {
 	OSCBundle bndl, send_bndl; 
 	
-    // Incoming
+    // Incoming bundles
 	receive_bundle(&bndl, WIFI);
 	process_bundle(&bndl);
     
@@ -168,7 +179,7 @@ void loop()
 	measure_sensors();
 	package_data(&send_bndl);
     
-    // Outgoing
+    // Outgoing bundles
 	send_bundle(&send_bndl, WIFI);
     log_bundle(&send_bndl, PUSHINGBOX);
     
@@ -182,11 +193,11 @@ It is recommeded that you base your code off the example provided / use the High
 
 
 
-## Example .ino Loop Contents
+## More Example .ino Loop Contents
 
 This section provides some common examples of how you might format the `loop()` function in the .ino file.
 
-#### WiFi Send and Receive
+#### WiFi Send and Receive (Ideal for use with MaxMSP)
 
 ```
 void loop() 
