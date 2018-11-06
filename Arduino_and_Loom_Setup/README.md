@@ -60,6 +60,8 @@ The Arduino IDE editor is a bit limited, so if you want to use a different edito
 
 [Sublime Text](https://www.sublimetext.com) is a great editor you might consider.
 
+
+
 ## Loom Setup and Usage
 
 **Opening the Code**
@@ -89,9 +91,7 @@ Try to compile your program (check mark icon at the top left of the Arduino IDE)
 
 It is recommeded that you base your code off the example provided / use the High-Level API Functions listed at the bottom of the .ino file to for more basic Loom setups. The `loom_interface.h` file describes each of those functions in further detail. 
 
-**Other**
 
-See the [Loom Library Readme](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/LOOM_library) for more details on using the library.
 
 ## Building and Uploading Code Without The IDE
 

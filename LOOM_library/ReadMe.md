@@ -1,6 +1,19 @@
-# Project Loom: Library
+# Project Loom: Library Overview
 
 This is the primary location of the Project Loom code, consolidated into place with a single Arduino .ino sketch built with code selected by the preprocessor based on the configuration file. 
+
+Other readmes are provided for more specific content, while this document focuses on providing an overview of what Loom is and how the library works.
+
+#### Additional Readmes
+
+- [Arduino and Loom Setup](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Arduino_and_Loom_Setup) – How to setup Arduino and Loom from scratch
+- [Using Loom](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/LOOM_library/ReadMe_Using_Loom.md) – How to use Loom once you have set it and the Arduino IDE up
+- [Extending Loom](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/LOOM_library/ReadMe_Extending_Loom.md) – How to add support to the Loom Library
+- [Hub Scripts](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/LOOM_library/ReadMe_Hub_Scripts.md) – Documentation on the mini programs / scripts that Loom supports
+- [Loom Translator](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/LOOM_library/ReadMe_Loom_Translator.md) – Documentation on the collection of Loom functions for converting between data types and organization
+- [Max MSP](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Max) – Details on using Max MSP data processors with WiFi enabled Loom devices
+
+
 
 ## Table of Contents
 
@@ -16,34 +29,27 @@ This is the primary location of the Project Loom code, consolidated into place w
 7. [Channels](#channels)
     1. [Implementation](#implementation)
     2. [Additional Devices](#additional-devices)
-8. [Configuration File](#configuration-file)
-9. [API](#api)
+8. [Device Identification Hierarchy](#device-identification-hierarchy)
+9. [SD Card Support](#sd-card-support)
+10. [Real-Time Clock Support](#real-time-clock-support)
+11. [Configuration File](#configuration-file)
+12. [API](#api)
+13. [Using the Loom Library](#using-the-loom-library)
 
-    1. [Includes](#includes)
-    2. [Setup](#setup)
-    3. [Main Loop Functions](#main-loop-functions)
-        1. [Receive Bundle](#receive-bundle)
-        2. [Process Bundle](#process-bundle)
-        3. [Measure Sensors](#measure-sensors)
-        4. [Package Data](#package-data)
-        5. [Send Bundle](#send-bundle)
-        6. [Additional Loop Checks](#additional-loop-checks)
-        7. [Minimal Working Example](#minimal-working-example)	
-10. [Configuration Conflicts](#configuration-conflicts)
-11. [Device Identification Hierarchy](#device-identification-hierarchy)
-12. [SD Card Support](#sd-card-support)
-13. [Real-Time Clock Support](#real-time-clock-support)
-14. [Using the Loom Library](#using-the-loom-library)
-15. [Example .ino Loop Contents](#example-.ino-loop-contents)      
+
 
 ## Installation
 
 See our [Arduino and Loom Setup Guide](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Arduino_and_Loom_Setup)
 
+
+
 ## Device Support
 
 - Adafruit Feather M0
 - Adafruit Feather 32u4 *(limited support)*
+
+
 
 ## Communication Platforms
 
@@ -63,15 +69,21 @@ WiFi and LoRa have had the most attention in development and thus have the most 
 | SD card?       | **SD card**                 | Works as output, considering as input                        |
 | Serial?        | **Serial**                  | Works for output. Serial as input may or may not be useful (is how Fona is tested) |
 
+
+
 ## Device Configuration
 
 The configuration of the code to upload and flash to devices is specified in the config.h file. This file presents the options that can be set or toggled to achieve a particular behavior. The preprocessor uses these definitions to select the necessary declarations, variables, and functions automatically. 
 
 Currently changes to the config need to be done manually in the file itself. An interface to aid the process is in progress.
 
+
+
 ## Max/MSP
 
 The associated [Loom Data Processors](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Max) and control modules are made as patches in Max/MSP. The Max interfaces are not strictly necessary for using this library, but provide convenient features and means of interacting with your Loom devices / network.
+
+
 
 ## Librarary Architecture
 
@@ -136,6 +148,8 @@ msg.dispatch("/SetID", set_instance_num, addrOffset);
 
 The reason only the `/SetID` is provided and not something like `/LOOM/Ishield7/SetID` is because the aforementioned route function checks for message addressed to the device, which in this case is identified by `/LOOM/Ishield7`, and passes only the remaining part of the address to the message router. Messages that do not start with the device indentifying string are not sent to the message router.
 
+
+
 ## Channels
 
 The LOOM library and associated Max/MSP processors are designed to use channel based interfaces by default. Channel interfaces abstract device instance number, UDP port, and IP address into a single letter A, B, C, … H. 
@@ -163,17 +177,7 @@ Channel H:	Instance # = 8		UDP Port = 9448
 
 The Max interfaces presently support upto 8 concurrent channels, though the library itself poses no such restrictions and using custom Max interfaces can allow for the control of more devices.
 
-## Configuration File
 
-The configuration file is used in conjunction with preprocessor statements to build the specified sketch, with as small a program memory usage as possible. Any options that can be set or toggled, or any specification of hardware (e.g. sensors and actuators) being used occur in this config.h.
-
-Any options for custom additions to the library should be added only to the configuration file.
-
-The config.h file needs to be included before the library (via loom_preamble.h) itself, so that the configuration can be used to define the necessary subset of the library.
-
-## API
-
-The details of the API are provided in the Loom Usage readme.
 
 ## Device Identification Hierarchy
 
@@ -208,29 +212,6 @@ The Loom Library supports an autoname feature to try to name your device if it f
 
 A device number is used to distinguish the devices on the same subnet (family number) that have the same device type. Device numbers are sometimes also referred to as channels. Device numbers are expected to be between 1 and 8, inclusive (channels A-H).
 
-## SD Card Support
-
-The Loom library extends the Arduino SD library to have more features, mostly tailored towards using common data structures used by the library.
-
-Namely, support for printing:
-
-- Single elements (int, floats, c-strings, Strings)
-- Arrays (ints, floats, c-strings, Strings)
-- Bundles (single or multi-msg format)
-
-Additionally, if used with MaxMSP, there is support for sending commands to enable / disable the logging of bundles the device receives (also works without Max).
-
-## Real-Time Clock Support
-
-The Loom library supports two RTC devices:
-
-- Adafruit DS3231 
-- Adafruit PCF8523
-
-Currently, interrupts are only supported via the DS3231, with the PCF8523 mostly being used in conjunction with an SD card (as Adafruit Adalogger featherwing has PCF8523 and SD card holder) to provide timestamps.
-
-The Loom Library has support for both devices for returning strings of the date, time, or weekday. Additional timer functions are provided for the DS3231.
-
 ### WiFi UDP Ports
 
 If using WiFi, the family number and device number will determine the UDP ports that the device will expect messages from. The device will check and send on 3 ports, one for global messages, one for subnet, and one for device specific messages. The calculation of the specific ports are shown below. The reason for different ports fro various devices/purposes is to reduce the number of messages a device may recieve that were not intended for it.
@@ -261,77 +242,84 @@ Target a message at a single device, i.e. the one with the matching family, fami
 
 ![Loom_Hierarchy_Diagram](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/Images_for_Readmes/Loom_Hierarchy_Diagram.png)
 
+
+
+## SD Card Support
+
+The Loom library extends the Arduino SD library to have more features, mostly tailored towards using common data structures used by the library.
+
+Namely, support for printing:
+
+- Single elements (int, floats, c-strings, Strings)
+- Arrays (ints, floats, c-strings, Strings)
+- Bundles (single or multi-msg format)
+
+Additionally, if used with MaxMSP, there is support for sending commands to enable / disable the logging of bundles the device receives (also works without Max).
+
+
+
+## Real-Time Clock Support
+
+The Loom library supports two RTC devices:
+
+- Adafruit DS3231 
+- Adafruit PCF8523
+
+Currently, interrupts are only supported via the DS3231, with the PCF8523 mostly being used in conjunction with an SD card (as Adafruit Adalogger featherwing has PCF8523 and SD card holder) to provide timestamps.
+
+The Loom Library has support for both devices for returning strings of the date, time, or weekday. Additional timer functions are provided for the DS3231.
+
+
+
+## Configuration File
+
+The configuration file is used in conjunction with preprocessor statements to build the specified sketch, with as small a program memory usage as possible. Any options that can be set or toggled, or any specification of hardware (e.g. sensors and actuators) being used occur in this config.h.
+
+Any options for custom additions to the library should be added only to the configuration file.
+
+The config.h file needs to be included before the library (via loom_preamble.h) itself, so that the configuration can be used to define the necessary subset of the library.
+
+
+
+## API
+
+*'[]'s are used to indicate arguments that are optional or specific to a given platform* 
+
+
+
+- Receive Bundle `void receive_bundle(OSCBundle *bndl, CommPlatform platform)`
+  - Receive a packet and put it in an OSC bundle if not already
+  - CommPlatform options:
+    - WIFI
+    - LORA
+    - NRF
+- Process Bundle `void process_bundle(OSCBundle *bndl)`
+  - Process a bundle (presumably recieved via recieve_bundle) by performing message routing on it 
+- Measure Sensors `void measure_sensors()`
+  - Measure any enabled sensors
+- Package Data `void package_data(OSCBundle *send_bndl)`
+  - Package measured data into an OSC bundle  
+- Send Bundle `void send_bundle(OSCBundle *send_bndl, CommPlatform platform)` 
+  - Send a bundle (presumably built via package_data) to another Loom device / MaxMSP
+- Log Bundle `void log_bundle(OSCBundle *send_bndl, LogPlatform platform [,char* file])`
+  - Export a bundle
+  - Platform options
+    - PUSHINGBOX (Google Sheets)
+    - SDCARD (requires filename)
+    - OLED
+- Additional Loop Checks `void additional_loop_checks()`
+  - Function to catch remaining functionality that is not contained by the rest of the API
+
+Further details on using the API can be found [here](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/LOOM_library/ReadMe_Using_Loom.md)
+
+
+
 ## Using the Loom Library
 
-More details can be found in the **Loom Setup and Usage** section of the [Readme](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Arduino_and_Loom_Setup) on using Loom
+Details on setting up Arduino IDE and Loom can be found [here](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Arduino_and_Loom_Setup)
 
-This section assumes that you want to use the Loom Library without integrating your code, software, or hardware formally into the library's official code. This means that your code and modifications will exist almost exclusively in the main .ino file and config.h file.
+Details on using Loom once setup (with examples) can be found [here](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/LOOM_library/ReadMe_Using_Loom.md)
 
-**Config.h**
-
-The configuration file is where you will define which Loom supported components are being used, and various associated options and behaviors. Any functionality you need beyond Loom will be defined in the .ino file or your own addition files to #include.
-
- **.ino Sketch**
-
-By default, the .ino sketch is fairly sparse – the config.h and Loom preamble are #included (which together define what parts of the library should be used). The `setup()` function simply calls `Loom_begin()`  to handle any of the setup of the Loom components. The `loop()` function declares an OSC Bundle or two and uses the [API functions](#api). 
-
-- Any global variables you need that are not already availalbe in Loom can be added above the `setup()` function
-- Add any additional setup you need after the call to `Loom_begin()` in `setup()`
-- Use the API to interface with the supported components of Loom at a high level
-- Put your own code into the `loop()` function as needed to support your additional functionality / components
-
-## Example .ino Loop Contents
-
-This section provides some common examples of how you might format the `loop()` function in the .ino file.
-
-#### WiFi Send and Receive
-
-```
-void loop() 
-{
-	OSCBundle bndl, send_bndl;  		// Bundles to hold incoming and outgoing data
-
-	receive_bundle(&bndl, WIFI);		// Receive messages
-	if (bndl.size()) {
-		print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
-	}
-	process_bundle(&bndl);				// Dispatch message to correct handling functions
-	measure_sensors();					// Read sensors, store data in sensor structs
-	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
-	send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
-	additional_loop_checks();			// Miscellaneous checks
-}
-```
-
-#### LoRa Hub (Recieve from node, upload to Google Sheet, no sensors)
-
-```
-void loop() 
-{
-	OSCBundle bndl;  					// Bundles to hold incoming and outgoing data
-
-	receive_bundle(&bndl, LORA);		// Receive messages	
-	log_bundle(&bndl, PUSHINGBOX);		// Send bundle of packaged data
-	additional_loop_checks();			// Miscellaneous checks
-}
-```
-
-#### LoRa Sensor Node (Transmits to central hub for upload to Google Sheet)
-
-```
-void loop() 
-{
-	OSCBundle send_bndl;  				// Bundles to hold incoming and outgoing data
-
-	measure_sensors();					// Read sensors, store data in sensor structs
-	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
-	send_bundle(&send_bndl, LORA);		// Send bundle of packaged data
-	additional_loop_checks();			// Miscellaneous checks
-}
-```
-
-
-
-#### 
+####
 
 #### 
