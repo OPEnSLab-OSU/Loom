@@ -27,6 +27,7 @@ The Loom Translator (or converter) is used to convert data in one format into an
    -  *There is not much conversion here, but there will be functions to add elements to the other formats*
 
 
+
 ## Available Conversions
 
 | Source Format                        | Destination Format                   | Function | Notes |
@@ -173,6 +174,8 @@ Some of the conversions that keep the same data structure just organized in a di
 
 If instead, one omits the destination structure (to a function that supports it), the source data structure itself will be filled with the translated data. 
 
+
+
 ## Details about OSC Bundles
 
 The OSC library ReadMe and API documentation, [here](https://github.com/CNMAT/OSC), are very helpful for getting started. The details below focus primarily on the Loom Library usage of the protocol.
@@ -226,6 +229,8 @@ Value 1: 2.34
 Address 3: /LOOM/Device7/ghi
 Value 1: "five"
 ```
+
+
 
 ## Details about Arrays
 
@@ -299,6 +304,8 @@ These settings are controlled by the optional ```interpret``` parameter. If omit
 | 5       | Int–All                          | Non-int wsill become 0                     |
 | 6       | Float–All                        | Non-float will become 0.0                  |
 
+
+
 ## Details about Bundle-String Translator 
 
 Open Sound Control (OSC) is the transmission protocol used by Project Loom.  The
@@ -340,6 +347,8 @@ Here is what that same bundle looks like when encoded with the interpreter:
 
 **NOTE:** The OSC Interpreter does not currently support the encoding of OSCBundles which
 contain spaces or commas in either message addresses or string data values.
+
+
 
 ## OSC Issues
 

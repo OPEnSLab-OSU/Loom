@@ -2,15 +2,13 @@
 
 The Loom 'hub scripts' are essentially mini programs that run and a Loom device, especially hub-type devices. 
 
-## Table of Contents
-
-
-
 ## Motivation 
 
 Loom supports data processing and data flow control via the graphical interface and patches provided for Max/MSP. These provide powerful control of the devices and data of a Loom network, but require that the network is WiFi based (at least in part, repeaters to other communication platforms could partially get around this) and that a computer actively connnected to that network and running Max. This is impractical for most people for more permanent network deployments. 
 
 The intent of these 'hub scripts' (as they will generally be referred to in the document) is to implement similar, albeit less powerful / flexible, processing and data control on one or more of the microprocessors on the network.
+
+
 
 ## Overview
 
@@ -23,6 +21,8 @@ The hub scripts are basic programs that support:
 - Arbitrary function calls (generally through special wrapper functions)
 - If statements (*currently without nesting*)
 - Dynamical addition and removal of scripts (i.e. without reflashing the firmware)
+
+
 
 ## Implementation
 
@@ -39,6 +39,8 @@ The notation means that operators follow the inputs to the operation. For exampl
 While a program will be a mix of data literals, references to variables, if statements, and function calls, the stack is only for data. This stack only exists within the parser for the duration of the evaluation of a script, as it is added to, modified, and read from by the current script. Once the execution of a script has completed, you will not be able to access the contents anymore. If calculations placed on the stack are needed elsewhere, save the result to a register(s). Then call your own custom function to copy the data from these registers to other variable. Unlike the stack, however, the registers are globally accessible even after the completion of a script. The reason for copying to other variables would be to ensure that another script does not overwrite them (which could be avoided with careful design of scripts), and so that normal device operation can find the values in variables it uses for non-script operation (i.e. so that a device does not have mulitple locations where the value it needs could exist).
 
 The stack itself is actually just an array of floats with a pointer to the 'top' (i.e. the index one greater than the current top of the stack). The motivation for selecting floats and not something more complex is becuase the data type is sufficiently flexible to support the 3 data types: int, float, and boolean. If a value needs to be interpretted by a function an integer, it can be cast as such. The same goes for booleans. A value of 0.0 represents false, while anything else is true.
+
+
 
 ## Creating Scripts
 

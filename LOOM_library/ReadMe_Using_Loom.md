@@ -1,6 +1,27 @@
 # Project Loom: Using Loom
 
-## API
+
+
+## Configuration File
+
+The configuration file is used in conjunction with preprocessor statements to build the specified sketch, with as small a program memory usage as possible. Any options that can be set or toggled, or any specification of hardware (e.g. sensors and actuators) being used occur in this config.h.
+
+Any options for custom additions to the library should be added only to the configuration file.
+
+The config.h file needs to be included before the library (via loom_preamble.h) itself, so that the configuration can be used to define the necessary subset of the library.
+
+
+
+## .ino File
+
+### Overview
+
+By default, the .ino sketch is fairly sparse – the config.h and Loom preamble are #included (which together define what parts of the library should be used). The `setup()` function simply calls `Loom_begin()`  to handle any of the setup of the Loom components. The `loop()` function declares an OSC Bundle or two and uses the API functions.
+
+- Any global variables you need that are not already availalbe in Loom can be added above the `setup()` function
+- Add any additional setup you need after the call to `Loom_begin()` in `setup()`
+- Use the API to interface with the supported components of Loom at a high level
+- Put your own code into the `loop()` function as needed to support your additional functionality / components
 
 ### Includes
 
@@ -26,9 +47,9 @@ void setup()
 }
 ```
 
-### Main Loop Functions
+### Main Loop Functions / API
 
-The Loom Library has six primary interface function to call. With just these, a fully functional sketch can be made. Custom code can be inserted before, between, and after any of the interface functions, but changing the relative ordering of the interface functions is not recommended unless you know what you are doing.
+The Loom Library has six primary interface function to call. With just these, a fully functional sketch can be made. Custom code can be inserted before, between, and after any of the interface functions, but changing the relative ordering of the interface functions is not generally recommended unless you know what you are doing.
 
 #### Receive Bundle
 
@@ -107,8 +128,8 @@ log_bundle(&log_bndl, SDCARD, "filename.csv");
 
 - **log_bndl** – The bundle to be logged
 - **log_platform** – The platform to log to, the values are encoded to a LogPlatform enum to reduce chance for errors
-  - PUSHINGBOX
-  - SDCARD
+  - PUSHINGBOX (Google Sheets)
+  - SDCARD (requires filename)
   - OLED
 
 #### Additional Loop Checks
@@ -154,6 +175,64 @@ void loop()
 	additional_loop_checks();
 } 
 ```
+
+### **Modifying the .ino functionality**
+
+It is recommeded that you base your code off the example provided / use the High-Level API Functions listed at the bottom of the .ino file to for more basic Loom setups. The `loom_interface.h` file describes each of those functions in further detail. 
+
+
+
+## Example .ino Loop Contents
+
+This section provides some common examples of how you might format the `loop()` function in the .ino file.
+
+#### WiFi Send and Receive
+
+```
+void loop() 
+{
+	OSCBundle bndl, send_bndl;  		// Bundles to hold incoming and outgoing data
+
+	receive_bundle(&bndl, WIFI);		// Receive messages
+	if (bndl.size()) {
+		print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
+	}
+	process_bundle(&bndl);				// Dispatch message to correct handling functions
+	measure_sensors();					// Read sensors, store data in sensor structs
+	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
+	additional_loop_checks();			// Miscellaneous checks
+}
+```
+
+#### LoRa Hub (Recieve from node, upload to Google Sheet, no sensors)
+
+```
+void loop() 
+{
+	OSCBundle bndl;  					// Bundles to hold incoming and outgoing data
+
+	receive_bundle(&bndl, LORA);		// Receive messages	
+	log_bundle(&bndl, PUSHINGBOX);		// Send bundle of packaged data
+	additional_loop_checks();			// Miscellaneous checks
+}
+```
+
+#### LoRa Sensor Node (Transmits to central hub for upload to Google Sheet)
+
+```
+void loop() 
+{
+	OSCBundle send_bndl;  				// Bundles to hold incoming and outgoing data
+
+	measure_sensors();					// Read sensors, store data in sensor structs
+	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	send_bundle(&send_bndl, LORA);		// Send bundle of packaged data
+	additional_loop_checks();			// Miscellaneous checks
+}
+```
+
+
 
 ## Configuration Conflicts
 
