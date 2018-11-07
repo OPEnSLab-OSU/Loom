@@ -10,17 +10,17 @@ Code:*/
 
 //Run this in order to test the doGet(e) function
 function fakeGet() {
-  var eventObject = 
-    {
-      "parameter": {
-        "key0": "sheetID",
-        "val0": "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"
-      },
-      "contextPath": "",
-      "contentLength": -1,
-      "queryString": "action=view&page=3",
-    }
-  doGet(eventObject);
+//  var eventObject = 
+//    {
+//      "parameter": {
+//        "key0": "sheetID",
+//        "val0": "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"
+//      },
+//      "contextPath": "",
+//      "contentLength": -1,
+//      "queryString": "action=view&page=3",
+//    }
+//  doGet(eventObject);
 }
 
 // Automatically called whenever the linked PushingBox Scenario
@@ -51,14 +51,21 @@ function doGet(e) {
     if (sheet == undefined) {
       sheet = spreadsheet.insertSheet(sheet_id);
       sheet_list = spreadsheet.getSheets();
-      sheet.appendRow(column_set);
-      setSheetColumnList(sheet.getName(), column_set);
+//      sheet.appendRow(column_set);
+//      setSheetColumnList(sheet.getName(), column_set);
     }
     
     // Variable to hold new row and where to put it in the spreadsheet 
     var new_range;
     var new_row  = sheet.getLastRow() + 1;
     var row_data = [];
+    
+    
+    if (new_row <= 2) {
+      sheet.appendRow(column_set);
+      setSheetColumnList(sheet.getName(), column_set);
+      new_row += 1;
+    }
     
     // If the set of data received is different than previous for the sheet
     // Put a break between the two data sets and label the columns accurately.

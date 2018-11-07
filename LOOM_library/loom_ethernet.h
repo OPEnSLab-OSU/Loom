@@ -37,9 +37,9 @@ bool setup_ethernet()
 {
 	LOOM_DEBUG_Println("Setting up ethernet");
 
-	#if is_lora == 1
+	// #if is_lora == 1
 		digitalWrite(8, HIGH);
-	#endif
+	// #endif
 		
 	bool is_setup;
 	if (Ethernet.begin(mac) == 0) {
