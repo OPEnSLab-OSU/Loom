@@ -28,8 +28,8 @@
 // ================================================================
 // --- Device Identification --- 
 #define FAMILY 		"LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       5		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
-#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
+#define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define CHANNEL          2		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
@@ -44,7 +44,7 @@
 								//   Device will freeze if this in enabled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
-#define dynamic_serial_output 1 // These only apply if LOOM_DEBUG is enabled
+#define dynamic_serial_output 0 // These only apply if LOOM_DEBUG is enabled
 								// 0 is standard operation 
 								//   - Serial monitor needs to start / be open for device to setup
 								//   - Serial (USB) can generally be detached after setup without issue 
@@ -66,7 +66,7 @@
 // ================================================================ 
 // ===                  DEVICE TELEMETRY TYPE                   === 
 // ================================================================
-#define hub_node_type 1		// 0: Hub, 1: Node
+#define hub_node_type 0		// 0: Hub, 1: Node
 #define is_repeater   0		// Sorry, this doesn't do anything yet
 
 
@@ -126,7 +126,12 @@
 // --- OLED ---
 #define is_oled 					1 	// Whether OLED is being used
 #if is_oled == 1
-	#define oled_reset_pin A2  			// Make sure this doesn't conflict with other pins in use
+	
+	#define oled_form_factor 	2		// 1 for Featherwing Shield, 2 for breakout
+
+	#if oled_form_factor == 2
+		#define oled_reset_pin A2  			// Make sure this doesn't conflict with other pins in use
+	#endif
 
 	#define oled_display_format 3     	// 1: show first 4 elements of the bundle
 										// 2: show first 8 elements of the bundle
@@ -401,7 +406,9 @@
 		#define LORA_HUB_ADDRESS  1			
 		// #define LORA_NODE_ADDRESS CHANNEL
 	#endif
-										
+		
+	#define lora_subnet_scope     1			// 1 for global, 2 for subnet (use 1 if unsure)
+
 	#define RF95_FREQ      915.0			// Hardware specific, Tx must match Rx
 
 	#define package_lora_rssi 1 			// 1 to add LoRa lastest RSSi to bundle build via package bundle; 0 to not
@@ -429,9 +436,9 @@
 	#include <Ethernet2.h>				// (this is needed for IPAddress object below, do not remove)
 	
 	//Use this for OPEnS Lab
-	byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
+	// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
 
-	// byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // MAC address of Ethernet Luke's port
+	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // MAC address of Ethernet Luke's port
 	
 	IPAddress ip(128,193,56,138); 						  // device's IP address  				try to make this a string, so #include can be move to ethernet file
 #endif
@@ -486,7 +493,7 @@
 		#define tab_id_complete "Sheet1"    // Defines tab if hub is defining tab instead of node
 	#else
 		// Use bundle source and below prefix to define tab ID
-		#define tab_id_prefix   "Test_"		// Used as a prefix if node is being used to define tab
+		#define tab_id_prefix   "Test3_"		// Used as a prefix if node is being used to define tab
 	#endif	
 
 	#define verify_family_match 1			// 1 to only upload to spreadsheet if source device family matches hub 
