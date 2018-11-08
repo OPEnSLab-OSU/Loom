@@ -22,7 +22,12 @@
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-Adafruit_SSD1306 display(oled_reset_pin);
+#if oled_form_factor == 1
+	Adafruit_SSD1306 display;
+#else
+	Adafruit_SSD1306 display(oled_reset_pin);
+#endif
+
 
 
 unsigned long oled_time = 0;
@@ -54,7 +59,7 @@ void setup_oled()
 		pinMode(oled_freeze_pin, INPUT_PULLUP);
 	#endif
 
-	display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x32)
+	display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x32) cannot be changed
 	display.display();
 	display.clearDisplay();
 
