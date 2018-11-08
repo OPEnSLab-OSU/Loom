@@ -30,15 +30,16 @@ void   print_bundle(OSCBundle *bndl);
 template<typename T> 
 void   print_array(T data [], int len, int format);
 int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
-
 int    bundle_num_data_pairs(OSCBundle *bndl);
-
 bool   bundle_empty(OSCBundle *bndl);
 String get_data_value(OSCMessage* msg, int pos);
 String get_address_string(OSCMessage *msg);
 void   osc_extract_header_section(OSCMessage* msg, int section, char* result);
 void   osc_extract_header_to_section(OSCMessage* msg, int section, char* result);
 void   osc_extract_header_from_section(OSCMessage* msg, int section, char* result);
+int    osc_extract_family_number(OSCMessage* msg);
+int    osc_extract_family_number(OSCBundle* bndl);
+
 
 // Deep copy functions
 void   deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
@@ -346,6 +347,51 @@ void osc_extract_header_from_section(OSCMessage* msg, int section, char* result)
 		sprintf(result, "%s\0", cPtr_start); 
 	}
 }
+
+
+
+// --- OSC EXTRACT FAMILY NUMBER --- 
+//
+// Get the family number from a bundle or message
+// Assumes /<family># is first part of address
+// 
+int osc_extract_family_number(OSCMessage* msg) 
+{
+	char tmp[50];//, tmp2[16];
+	osc_extract_header_section(msg, 1, tmp);
+
+	// LOOM_DEBUG_Println2("Section 1: ", tmp); 
+
+	// sprintf(tmp2, "%s", tmp + strlen(FAMILY) );
+
+	// LOOM_DEBUG_Println2("Family #: ", tmp2);
+
+	// return (int)strtol(tmp + strlen(FAMILY), NULL, 10);
+
+	// int fam = (int)strtol(tmp + strlen(FAMILY), NULL, 10);
+	return (int)strtol(tmp + strlen(FAMILY), NULL, 10);
+
+
+	// LOOM_DEBUG_Println2("Number: ",  fam); 
+// 
+	// return fam;
+
+}
+
+int osc_extract_family_number(OSCBundle* bndl) 
+{
+	if ((bndl) && (bndl->size()>0)) {
+		return osc_extract_family_number(bndl->getOSCMessage(0));
+	} else {
+		return -1;
+	}
+}
+
+
+
+
+
+
 
 
 
