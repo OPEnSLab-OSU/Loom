@@ -31,24 +31,70 @@ void setup()
 void loop() 
 {
 
+	LOOM_DEBUG_Println("Here");
 
 	// --- Common Example ---
 	OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
 
-	receive_bundle(&bndl, WIFI);		// Receive messages
-	if (bndl.size()) {
-		print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
-	}
-	process_bundle(&bndl);				// Dispatch message to correct handling functions
+	// receive_bundle(&bndl, WIFI);		// Receive messages
+	// if (bndl.size()) {
+	// 	print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
+	// }
+	// process_bundle(&bndl);				// Dispatch message to correct handling functions
 
 	measure_sensors();					// Read sensors, store data in sensor state struct
+
 	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
-	
-	send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
-	log_bundle(&send_bndl, PUSHINGBOX);	// Send bundle to Google Sheet
+
+	print_bundle(&send_bndl);
+		
+	// char tmp[32], tmp2[32];
+	// osc_extract_header_section(send_bndl.getOSCMessage(0), 1, tmp);
+
+	// LOOM_DEBUG_Println2("Section 1: ", tmp); 
+
+	// sprintf(tmp2, "%s", tmp + strlen(FAMILY) );
+
+	// LOOM_DEBUG_Println2("Family #: ", tmp2);
+
+	// int fam = (int)strtol(tmp2, NULL, 10);
+
+	// LOOM_DEBUG_Println2("Number: ",  fam); 
+
+    // LOOM_DEBUG_Println2("Extracted: ", osc_extract_family_number(&send_bndl) );
+
+	// send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
+	// log_bundle(&send_bndl, OLED);	// Send bundle to Google Sheet
+
+
+
+	// LOOM_DEBUG_Println2("A0: ", state_analog.a0);
+
+	delay(3000);
 
 	additional_loop_checks();			// Miscellaneous checks
 	// --- End Example ---
+
+
+
+
+	// // --- Common Example ---
+	// OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
+
+	// receive_bundle(&bndl, WIFI);		// Receive messages
+	// if (bndl.size()) {
+	// 	print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
+	// }
+	// process_bundle(&bndl);				// Dispatch message to correct handling functions
+
+	// measure_sensors();					// Read sensors, store data in sensor state struct
+	// package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	
+	// send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
+	// log_bundle(&send_bndl, PUSHINGBOX);	// Send bundle to Google Sheet
+
+	// additional_loop_checks();			// Miscellaneous checks
+	// // --- End Example ---
 }
 
 

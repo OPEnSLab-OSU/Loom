@@ -200,8 +200,9 @@ void print_config()
 	#endif
 
 
-
-	LOOM_DEBUG_Println2("Loop Delay / Sleep: ", is_sleep_period);
+	#if is_lora == 0
+		LOOM_DEBUG_Println2("Loop Delay / Sleep: ", is_sleep_period);
+	#endif
 
 	LOOM_DEBUG_Println("\n= = = = = End Configuration Display = = = = =\n");
 
