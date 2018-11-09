@@ -72,13 +72,6 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 		LOOM_DEBUG_Println("setFrequency failed");
 	}
 
-	// #if hub_node_type == 0 && is_ethernet == 1 // if hub
-	// 	LOOM_DEBUG_Println("Setting up ethernet");
-	// 	if(!setup_ethernet()) {
-	// 		LOOM_DEBUG_Println("Failed to setup ethernet");
-	// 	}
-	// #endif
-	
 	LOOM_DEBUG_Println("Setting power...");
 	rf95->setTxPower(23, false);
 	LOOM_DEBUG_Println("LoRa setup finished!");
@@ -122,9 +115,12 @@ void lora_receive_bundle(OSCBundle *bndl)
 			// LOOM_DEBUG_Println2("Received: ", larger_buf);
 			// LOOM_DEBUG_Println2("Len: ", strlen((const char*)larger_buf));
 
+
 			convert_OSC_string_to_bundle((char*)larger_buf, bndl); 
 
-			// convert_OSC_string_to_bundle((char*)buf, bndl); 
+			subnet_filter(bndl, lora_subnet_scope);
+
+
 		} // of if (manager.recvfromAck(buf, &len, &from))
 	} // of if (manager.available()) 
 }
@@ -198,7 +194,6 @@ bool lora_send_bundle_fragment(OSCBundle *bndl)
 
 	OSCBundle tmp_bndl;
 	OSCMessage *tmp_msg;
-
 
 	for (int i = 0; i < bndl->size(); i+=5) {
 		for (int j = 0; j < 5; j++) {

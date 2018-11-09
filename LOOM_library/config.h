@@ -110,7 +110,7 @@
 #endif
 
 // --- SD Options ---
-#define is_sd         1		// 1 to enable SD card 
+#define is_sd         0		// 1 to enable SD card 
 #if is_sd == 1
 	// Does NOT automatically save to SD
 	// This works more like a filter than an automator,
@@ -126,7 +126,6 @@
 // --- OLED ---
 #define is_oled 					0 	// Whether OLED is being used
 #if is_oled == 1
-	
 	#define oled_form_factor 	2		// 1 for Featherwing Shield, 2 for breakout
 
 	#if oled_form_factor == 2
@@ -139,13 +138,11 @@
 
 	#if oled_display_format == 3
 		#define oled_scroll_duration 8	// The time (in seconds) to scroll through a bundle 
-
-		#define oled_button_freeze	 2	// 0: disable
+		#define oled_button_freeze	 2	// 0: Disable button freezing 
 										// 1: Button freezes the scrolling and data
 										// 2: Button freezes the scrolling
-
 		#define oled_freeze_pin		 10	// Which pin to read from to freeze display
-
+										// Common pins might be: 10 (Ishield); 5, 6, 9 (OLED Featherwing buttons)
 	#endif
 #endif
 
@@ -193,7 +190,7 @@
 // Using I2C sensors without the multiplexer
 // Multiplexer / aggregate device may override these settings
 #define is_tsl2591         0	// Lux Sensor
-#define is_tsl2561         1	// Lux Sensor
+#define is_tsl2561         0	// Lux Sensor
 	#if is_tsl2561 == 1
 		#define tsl2561_res 3 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
 		// Nex 3 options will be removed once confirmed unnecessary
@@ -362,7 +359,11 @@
 	#define is_lora       1		
 
 	// Lux Sensor
-	#define is_tsl2561 1
+	#define is_tsl2561 0
+	#if is_tsl2561 == 1
+		#define tsl2561_res 3
+	#endif
+
 		// #define is_tsl2561_low   1 	// Generally the upper light sensor
 		// #define is_tsl2561_float 1  // Generally the lower light sensor
 		// #define is_tsl2561_high  0  
@@ -374,7 +375,7 @@
 	#endif
 
 	// Temp / Humidity
-	#define is_sht31d 0
+	#define is_sht31d 1
 
 	// RTC
 	#define is_rtc 0
@@ -403,15 +404,15 @@
 		// #define LORA_HUB_ADDRESS  CHANNEL
 		// #define LORA_NODE_ADDRESS 1
 	#else 					// If is node
-		#define LORA_HUB_ADDRESS  1			
+		#define LORA_HUB_ADDRESS  	1			
 		#define LORA_NODE_ADDRESS CHANNEL
 	#endif
 		
-	#define lora_subnet_scope     1			// 1 for global, 2 for subnet (use 1 if unsure)
+	#define lora_subnet_scope     	1		// 0 for any message, 1 for subnet, 2 for global/family (use 2 if unsure)
 
 	#define RF95_FREQ      915.0			// Hardware specific, Tx must match Rx
 
-	#define package_lora_rssi 1 			// 1 to add LoRa lastest RSSi to bundle build via package bundle; 0 to not
+	#define package_lora_rssi 		1		// 1 to add LoRa lastest RSSi to bundle build via package bundle; 0 to not
 
 	// #define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 											// Currently unused
@@ -475,7 +476,7 @@
 #endif
 #if is_pushingbox == 1	
 	// Google Spreadsheet ID
-	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; random string of characters)
+	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; looks like random string of characters)
 
 	// #define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	    
@@ -500,10 +501,10 @@
 
 
 	// Currently works by only sending a bundle from 
-	// log_bundle/sendToPushingBox if the delay has passed
+	//  log_bundle/sendToPushingBox if the delay has passed
 	// Does NOT automatically upload a bundle, you still have to call sendToPushingBox
 	// This works more like a filter than an automator,
-	// with a minimum of pushUploadMinDelay between uploads
+	//  with a minimum of pushUploadMinDelay between uploads
 	// Uses millis
 	// Recommended that pushUploadedFilter is left enabled
 	#define pushUploadFilter   	1 	// 1 to enable a millis delay to uploading to PushingBox
@@ -545,7 +546,7 @@
 #if enable_analog_conversions == 1
 
 	#if is_analog_a0 == 1
-		#define analog_a0_conversion 0
+		#define analog_a0_conversion -1
 	#endif 
 	#if is_analog_a1 == 1
 		#define analog_a1_conversion -1

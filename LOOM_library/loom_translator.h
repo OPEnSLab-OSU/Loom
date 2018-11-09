@@ -357,25 +357,9 @@ void osc_extract_header_from_section(OSCMessage* msg, int section, char* result)
 // 
 int osc_extract_family_number(OSCMessage* msg) 
 {
-	char tmp[50];//, tmp2[16];
+	char tmp[50];
 	osc_extract_header_section(msg, 1, tmp);
-
-	// LOOM_DEBUG_Println2("Section 1: ", tmp); 
-
-	// sprintf(tmp2, "%s", tmp + strlen(FAMILY) );
-
-	// LOOM_DEBUG_Println2("Family #: ", tmp2);
-
-	// return (int)strtol(tmp + strlen(FAMILY), NULL, 10);
-
-	// int fam = (int)strtol(tmp + strlen(FAMILY), NULL, 10);
 	return (int)strtol(tmp + strlen(FAMILY), NULL, 10);
-
-
-	// LOOM_DEBUG_Println2("Number: ",  fam); 
-// 
-	// return fam;
-
 }
 
 int osc_extract_family_number(OSCBundle* bndl) 

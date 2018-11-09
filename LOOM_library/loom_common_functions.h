@@ -14,40 +14,14 @@ void flash_led();
 int milli_duration(int amount, TimeUnits units);
 
 
+bool subnet_filter(OSCBundle* bndl, int scope);
+
 // ================================================================
 // ===                        FUNCTIONS                         ===
 // ================================================================
 
 
 #if advanced_interdev_comm == 1
-
-// This is probably made obsolete by set channel
-
-// --- SET INSTANCE NUMBER ---
-//
-// Updates device's identifying instance number.
-// Device will not request new channel settings on startup if config is saved
-// Device announces presence so running Channel Manager can track it
-//
-// @param msg  Received OSC message with new instance number
-//
-// void set_instance_num(OSCMessage &msg) 
-// {
-// 	configuration.instance_number = msg.getInt(0);
-// 	sprintf(configuration.packet_header_string, "%s%d\0", PacketHeaderString, configuration.instance_number);
-// 	sprintf(global_packet_header_string,"%s",configuration.packet_header_string);
-	
-// 	LOOM_DEBUG_Println2("New address header: ", configuration.packet_header_string);
-
-// 	#if is_wifi == 1
-// 		configuration.config_wifi.request_settings = 0; // Setting to 0 means that device will not request new port settings on restart. 
-// 														// Note that configuration needs to be saved for this to take effect
-// 		// respond_to_poll_request(configuration.packet_header_string);
-// 		OSCMessage tmp = new OSCMessage("tmp");
-// 		respond_to_poll_request(tmp);
-// 	#endif
-// }
-
 
 // --- SET CHANNEL NUMBER ---
 //
@@ -92,7 +66,13 @@ void set_channel(OSCMessage &msg)
 
 }
 
+
+
+
 #endif // of if advanced_interdev_comm == 1
+
+
+
 
 
 
@@ -251,6 +231,62 @@ int second_duration(int amount, TimeUnits units) {
 		default:      return 0;
 	}
 }
+
+
+
+
+// --- SUBNET FILTER ---
+//
+// Called after receiving a bundle on a communication platform
+// Does nothing if bundle is in specified scope
+// Scope:
+//   1: Subnet (family name and number have to match this device)
+//   2: Family (only family name has to match this device)
+//   3: Global only (accept messages that are of family scope but don't have a family number) 
+// 
+// @param bndl   The bundle to check if in scope
+// @param scope  What scope to accept in 
+//
+// @return True if bundle was in scope, false otherwise
+//
+bool subnet_filter(OSCBundle* bndl, int scope)
+{
+	char comp_buf[32], addr_section[32];
+
+	switch (scope) {
+		// Empty bundle
+		case 0: bndl->empty(); return false;
+		// Subnet
+		case 1: 
+			sprintf(comp_buf, "%s%d", FAMILY, FAMILY_NUM); 
+			break;
+		// Family / Global only
+		case 2: case 3:
+			sprintf(comp_buf, "%s", FAMILY); 
+			break;
+		// Any
+		default: return true; 
+	}
+
+	osc_extract_header_section(bndl->getOSCMessage(0), 1, addr_section);
+
+	if (    ( (scope == 2) && (strncmp(comp_buf, addr_section, strlen(comp_buf)) != 0) ) 
+		 || ( (scope != 2) && (strcmp(comp_buf, addr_section) != 0) )  ) 
+	{
+			bndl->empty();
+			return false;
+	}
+		
+	return true;
+
+
+}
+
+
+
+
+
+
 
 
 
