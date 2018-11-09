@@ -212,24 +212,24 @@ void setup()
 
 void loop() 
 {
-	OSCBundle bndl, send_bndl; 
-	
+    OSCBundle bndl, send_bndl; 
+
     // Incoming bundles
-	receive_bundle(&bndl, WIFI);
-	process_bundle(&bndl);
-    
+    receive_bundle(&bndl, WIFI);
+    process_bundle(&bndl);
+
     // Sensors
-	measure_sensors();
-	package_data(&send_bndl);
-    
+    measure_sensors();
+    package_data(&send_bndl);
+
     // Outgoing bundles
-	send_bundle(&send_bndl, WIFI);
+    send_bundle(&send_bndl, WIFI);
     log_bundle(&send_bndl, PUSHINGBOX);
-    
+
     int analog_val0 = state_analog.a0;    // directly access analog state struct
     LOOM_DEBUG_println("Analog 0: ", analog_val0);  
-    
-	additional_loop_checks();
+
+    additional_loop_checks();
 } 
 ```
 

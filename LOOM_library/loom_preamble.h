@@ -197,6 +197,7 @@ void   convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
 String get_data_value(OSCMessage* msg, int pos);
 void   print_bundle(OSCBundle *bndl);
 int    get_bundle_bytes(OSCBundle *bndl); 			
+bool   subnet_filter(OSCBundle* bndl, int scope);
 
 void flash_led(int num, int time_high, int time_low);
 void flash_led();
