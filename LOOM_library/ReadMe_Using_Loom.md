@@ -153,6 +153,49 @@ Performs any miscellaneous Loom tasks that happen each loop iteration, but are n
 additional_loop_checks();
 ```
 
+### Directly Accessing Variables
+
+While you would normally let the main API functions collect, manage, and forward the device's data, you can access the data points individually and directly. This includes sensor readings and global variables, and depending on which type, there may be multiple methods of getting to the data.
+
+#### Extracting from OSC Bundle
+
+If your data point is a sensor reading, the bundle populated by `package_data()` will contain the data point within. The bundles are structured in key-value pair messages, that is, each data point is contained within a single message, the key being the last part of the message address, and the data value being the single element in the message.
+
+Using functions provided in the Loom Translator (documentation: [Loom Translator Readme](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/LOOM_library/ReadMe_Loom_Translator.md), file: [loom_translator.h](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/LOOM_library/loom_translator.h)) you can access the data elements of a bundle or convert the bundle to different formats, such as an array.
+
+While the translator should be sufficient for most data extraction and conversions, you can also refer to the [OSC API](https://github.com/CNMAT/OSC/blob/master/API.md) for the specific functions to access/modify bundles (which some of the Translator functions are just wrappers of).
+
+#### Accessing Global Structs
+
+Most components in Loom (sensor, actuator, communication platform, etc...) have a state structure (C struct) that contains the readings and state of the component. In the case of sensors, the variables pertaining to the readings will be updated anytime the API function `measure_sensors()` is called. The states of other components will change in more variable patterns.
+
+The states are defined near the top of the file of the component they are associated with, under a heading of "Structures." 
+
+##### Reading
+
+In the .ino file, you simply have to access the members of a given struct (location specified above) similar to:
+
+```
+int analog_val0 = state_analog.a0;
+LOOM_DEBUG_println("Analog 0: ", analog_val0);  // print the analog value
+```
+
+**Writing**
+
+While there is nothing currently preventing you from writing to the state structures, it is not recommended and would have undefined effects. However, you are free to experiment should you choose to.
+
+#### Accessing Other Global Variables
+
+The [loom_preamble.h](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/LOOM_library/loom_preamble.h) file contains a few other global variables that are general and not associated with a given component or struct. If you want to access them simply access them as normal global variables, like:
+
+```
+float batt_val = vbat; // access the battery value
+```
+
+#### Accessing Component Classes
+
+Many of the Loom components have a class which Loom simply provides a wrapper for. The classes can be accessed as well, using whatever public functions it provides. The behavior of directly accessing these classes without or in addition to letting Loom handle them is undefined. This does not mean you cannot do this, just that further documentation on the process will not be provided.
+
 ### Minimal Working Example
 
 This example is fully functional. It assumes that WiFi has been specified as a wireless communication platform in the config.h file.
@@ -182,6 +225,9 @@ void loop()
     // Outgoing bundles
 	send_bundle(&send_bndl, WIFI);
     log_bundle(&send_bndl, PUSHINGBOX);
+    
+    int analog_val0 = state_analog.a0;    // directly access analog state struct
+    LOOM_DEBUG_println("Analog 0: ", analog_val0);  
     
 	additional_loop_checks();
 } 

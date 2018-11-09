@@ -28,8 +28,8 @@
 // ================================================================
 
 struct state_tsl2561_t {
-		int lightIR;
-		int lightFull;
+	int lightIR;
+	int lightFull;
 };
 
 
@@ -40,7 +40,7 @@ struct state_tsl2561_t {
 
 #if i2c_addr_tsl2561_0x29 == 1
 	struct state_tsl2561_t state_tsl2561_0x29;
-	Adafruit_TSL2561_Unified inst_tsl2561_0x29   = Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW,   25611);
+	Adafruit_TSL2561_Unified inst_tsl2561_0x29 = Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW, 25611);
 #endif
 #if i2c_addr_tsl2561_0x39 == 1
 	struct state_tsl2561_t state_tsl2561_0x39;
@@ -48,7 +48,7 @@ struct state_tsl2561_t {
 #endif
 #if i2c_addr_tsl2561_0x49 == 1
 	struct state_tsl2561_t state_tsl2561_0x49;
-	Adafruit_TSL2561_Unified inst_tsl2561_0x49  = Adafruit_TSL2561_Unified(TSL2561_ADDR_HIGH,  25613);
+	Adafruit_TSL2561_Unified inst_tsl2561_0x49 = Adafruit_TSL2561_Unified(TSL2561_ADDR_HIGH,  25613);
 #endif
 
 
@@ -146,21 +146,21 @@ void package_tsl2561(OSCBundle *bndl, char packet_header_string[])
 
 	#if i2c_addr_tsl2561_0x29 == 1
 		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x29_name, "_ir");
-		bndl->add(address_string).add( (int32_t)state_tsl2561_0x29.lightIR_l );
+		bndl->add(address_string).add( (int32_t)state_tsl2561_0x29.lightIR );
 		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x29_name, "_full");
-		bndl->add(address_string ).add( (int32_t)state_tsl2561_0x29.lightFull_l );
+		bndl->add(address_string ).add( (int32_t)state_tsl2561_0x29.lightFull );
 	#endif
 	#if i2c_addr_tsl2561_0x39 == 1
 		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x39_name, "_ir_f");
-		bndl->add(address_string).add( (int32_t)state_tsl2561_0x39.lightIR_f );
+		bndl->add(address_string).add( (int32_t)state_tsl2561_0x39.lightIR );
 		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x39_name, "_full_f");
-		bndl->add(address_string ).add( (int32_t)state_tsl2561_0x39.lightFull_f );
+		bndl->add(address_string ).add( (int32_t)state_tsl2561_0x39.lightFull );
 	#endif
 	#if i2c_addr_tsl2561_0x49 == 1
 		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x49_name, "_ir_");
-		bndl->add(address_string).add( (int32_t)state_tsl2561_0x49.lightIR_h );
+		bndl->add(address_string).add( (int32_t)state_tsl2561_0x49.lightIR );
 		sprintf(address_string, "%s%s%s%s", packet_header_string, "/", tsl2561_0x49_name, "_full_");
-		bndl->add(address_string ).add( (int32_t)state_tsl2561_0x49.lightFull_h );
+		bndl->add(address_string ).add( (int32_t)state_tsl2561_0x49.lightFull );
 	#endif
 }
 #endif

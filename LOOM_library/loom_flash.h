@@ -144,7 +144,9 @@ void setup_flash_config()
 			
 			LOOM_DEBUG_Println2("Expecting OSC header: ", configuration.packet_header_string);
 			
-			configuration.sample_rate = is_sleep_period;
+			#if is_lora == 0
+				configuration.sample_rate = is_sleep_period;
+			#endif
 
 			#if is_wifi == 1
 				configuration.config_wifi.my_ssid = AP_NAME;                   // Default AP name

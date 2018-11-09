@@ -548,7 +548,7 @@ void broadcastSaved()
 	OSCBundle out_bndl;
 	out_bndl.empty();
 	char address_string[80];
-	sprintf(address_string, "%s%s", packet_header_string, "/SD_save");
+	sprintf(address_string, "%s%s", global_packet_header_string, "/SD_save");
 	out_bndl.add(address_string);
 
 	#if is_wifi == 1

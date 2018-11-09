@@ -77,10 +77,10 @@
 // Further options in the advanced settings
 // Can override settings defined before the aggregate devices
 
-#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
+#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
 #define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
-#define is_evaporimeter 0	// 1 to specify Evaporimeter
+#define is_evaporimeter 1	// 1 to specify Evaporimeter
 
 
 // ================================================================ 
@@ -110,7 +110,7 @@
 #endif
 
 // --- SD Options ---
-#define is_sd         0		// 1 to enable SD card 
+#define is_sd         1		// 1 to enable SD card 
 #if is_sd == 1
 	// Does NOT automatically save to SD
 	// This works more like a filter than an automator,
@@ -124,7 +124,7 @@
 
 
 // --- OLED ---
-#define is_oled 					1 	// Whether OLED is being used
+#define is_oled 					0 	// Whether OLED is being used
 #if is_oled == 1
 	
 	#define oled_form_factor 	2		// 1 for Featherwing Shield, 2 for breakout
@@ -193,7 +193,7 @@
 // Using I2C sensors without the multiplexer
 // Multiplexer / aggregate device may override these settings
 #define is_tsl2591         0	// Lux Sensor
-#define is_tsl2561         0	// Lux Sensor
+#define is_tsl2561         1	// Lux Sensor
 	#if is_tsl2561 == 1
 		#define tsl2561_res 3 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
 		// Nex 3 options will be removed once confirmed unnecessary
@@ -363,9 +363,9 @@
 
 	// Lux Sensor
 	#define is_tsl2561 1
-		#define is_tsl2561_low   1 	// Generally the upper light sensor
-		#define is_tsl2561_float 1  // Generally the lower light sensor
-		#define is_tsl2561_high  0  
+		// #define is_tsl2561_low   1 	// Generally the upper light sensor
+		// #define is_tsl2561_float 1  // Generally the lower light sensor
+		// #define is_tsl2561_high  0  
 
 	// Load Cell
 	#define is_hx711 1
@@ -374,10 +374,10 @@
 	#endif
 
 	// Temp / Humidity
-	#define is_sht31d 1
+	#define is_sht31d 0
 
 	// RTC
-	#define is_rtc 1
+	#define is_rtc 0
 	#if is_rtc == 1
 		#define RTC_pin    6
 		#define is_rtc3231 1
@@ -404,7 +404,7 @@
 		// #define LORA_NODE_ADDRESS 1
 	#else 					// If is node
 		#define LORA_HUB_ADDRESS  1			
-		// #define LORA_NODE_ADDRESS CHANNEL
+		#define LORA_NODE_ADDRESS CHANNEL
 	#endif
 		
 	#define lora_subnet_scope     1			// 1 for global, 2 for subnet (use 1 if unsure)
@@ -714,7 +714,7 @@
 #if is_tsl2561 == 1
 	// 2 are used on evaporometer b/c no multiplexer
 	#define i2c_addr_tsl2561_0x29 	0 // generally disabled because 2591 uses this address, disable that to use 2561 on the address
-	#define i2c_addr_tsl2561_0x39 	1 
+	#define i2c_addr_tsl2561_0x39 	0 
 	#define i2c_addr_tsl2561_0x49 	1
 	
 	#if is_multiplexer != 1
