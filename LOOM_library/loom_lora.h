@@ -118,8 +118,13 @@ void lora_receive_bundle(OSCBundle *bndl)
 
 			convert_OSC_string_to_bundle((char*)larger_buf, bndl); 
 
-			subnet_filter(bndl, lora_subnet_scope);
 
+
+			bool filtered = !subnet_filter(bndl, lora_subnet_scope);
+
+			if (filtered) {
+				LOOM_DEBUG_Println("Received LoRa bundle out of scope");
+			}
 
 		} // of if (manager.recvfromAck(buf, &len, &from))
 	} // of if (manager.available()) 

@@ -29,7 +29,7 @@
 // --- Device Identification --- 
 #define FAMILY 		"LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
 #define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
-#define CHANNEL          2		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
+#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
@@ -80,14 +80,14 @@
 #define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
 #define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
-#define is_evaporimeter 1	// 1 to specify Evaporimeter
+#define is_evaporimeter 0	// 1 to specify Evaporimeter
 
 
 // ================================================================ 
 // ===                 COMMUNICATION PLATFORMS                  === 
 // ================================================================
 #define is_wifi       0		// 1 to enable WiFi
-#define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_lora       1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808 version)
@@ -96,7 +96,7 @@
 // ================================================================ 
 // ===                  DATA LOGGING PLATFORMS                  === 
 // ================================================================
-#define is_pushingbox 1		// 1 to enable PushingBox  
+#define is_pushingbox 0		// 1 to enable PushingBox  
 
 
 // --- RTC Options ---
@@ -193,10 +193,6 @@
 #define is_tsl2561         0	// Lux Sensor
 	#if is_tsl2561 == 1
 		#define tsl2561_res 3 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
-		// Nex 3 options will be removed once confirmed unnecessary
-		// #define is_tsl2561_low   1 
-		// #define is_tsl2561_float 1
-		// #define is_tsl2561_high  1
 	#endif
 #define is_fxos8700        0	// Accelerometer / Magnetometer
 #define is_fxas21002       0	// Gyroscope
@@ -359,7 +355,7 @@
 	#define is_lora       1		
 
 	// Lux Sensor
-	#define is_tsl2561 0
+	#define is_tsl2561 1   // check bottom of file for which i2c addresses are in use for the TSL2561s
 	#if is_tsl2561 == 1
 		#define tsl2561_res 3
 	#endif
@@ -401,14 +397,14 @@
 	// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS,
 	// 10-19 for 0, 20 - 29 for 1, etc. 
 	#if hub_node_type == 0 	// If is hub
-		// #define LORA_HUB_ADDRESS  CHANNEL
-		// #define LORA_NODE_ADDRESS 1
+		#define LORA_HUB_ADDRESS  CHANNEL
+		#define LORA_NODE_ADDRESS 	1
 	#else 					// If is node
 		#define LORA_HUB_ADDRESS  	1			
-		#define LORA_NODE_ADDRESS CHANNEL
+		#define LORA_NODE_ADDRESS 	CHANNEL
 	#endif
 		
-	#define lora_subnet_scope     	1		// 0 for any message, 1 for subnet, 2 for global/family (use 2 if unsure)
+	#define lora_subnet_scope     	1		// 1 for subnet, 2 for global/family, 3 for global only (not recommended), 4 for any message. (use 2 if unsure)
 
 	#define RF95_FREQ      915.0			// Hardware specific, Tx must match Rx
 
@@ -421,11 +417,11 @@
 // --- nRF Options --- 
 #if is_nrf == 1
 	#if hub_node_type == 0 	// If is hub
-		// #define NRF_HUB_ADDRESS  CHANNEL
-		// #define NRF_NODE_ADDRESS 1
+		#define NRF_HUB_ADDRESS  CHANNEL
+		#define NRF_NODE_ADDRESS 1
 	#else 					// If is node
 		#define NRF_HUB_ADDRESS  1			
-		// #define NRF_NODE_ADDRESS CHANNEL
+		#define NRF_NODE_ADDRESS CHANNEL
 	#endif
 
 	// #define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
@@ -714,9 +710,9 @@
 
 #if is_tsl2561 == 1
 	// 2 are used on evaporometer b/c no multiplexer
-	#define i2c_addr_tsl2561_0x29 	0 // generally disabled because 2591 uses this address, disable that to use 2561 on the address
-	#define i2c_addr_tsl2561_0x39 	0 
-	#define i2c_addr_tsl2561_0x49 	1
+	#define i2c_addr_tsl2561_0x29 	1 // generally disabled because 2591 uses this address, disable that to use 2561 on the address
+	#define i2c_addr_tsl2561_0x39 	1 
+	#define i2c_addr_tsl2561_0x49 	0
 	
 	#if is_multiplexer != 1
 		#if i2c_addr_tsl2561_0x29 == 1
