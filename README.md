@@ -7,7 +7,7 @@ Other readmes are provided for more specific content, while this document focuse
 #### Additional Readmes
 
 - [Arduino and Loom Setup](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Arduino_and_Loom_Setup) – How to setup Arduino and Loom from scratch
-- [Hardware](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Hardware.md) – The processors, sensors, actuators, etc. that Loom uses / supports 
+- [Hardware](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/Readme_Hardware.md) – The processors, sensors, actuators, etc. that Loom uses / supports 
 - [Using Loom](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Using_Loom.md) – How to use Loom once you have set it and the Arduino IDE up
 - [Extending Loom](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Extending_Loom.md) – How to add support to the Loom Library
 - [Hub Scripts](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Hub_Scripts.md) – Documentation on the mini programs / scripts that Loom supports
