@@ -61,9 +61,11 @@ void print_config()
 		LOOM_DEBUG_Println("\tUses WiFi");							
 	#endif	
 	#if is_lora == 1
-		LOOM_DEBUG_Println("\tUses LoRa");			
-		LOOM_DEBUG_Println2("\t\tHub Address", LORA_HUB_ADDRESS);			
-		LOOM_DEBUG_Println2("\t\tNode Address", LORA_NODE_ADDRESS);						
+		LOOM_DEBUG_Println("\tUses LoRa");
+		#if hub_node_type == 1
+			LOOM_DEBUG_Println2("\t\tNode Address: ", LORA_NODE_ADDRESS);
+		#endif						
+		LOOM_DEBUG_Println2("\t\tHub Address: ", LORA_HUB_ADDRESS);
 	#endif	
 	#if is_nrf == 1
 		LOOM_DEBUG_Println("\tUses nRF");							
