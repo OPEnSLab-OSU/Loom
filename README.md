@@ -1,457 +1,287 @@
-# Project Loom
+# Project Loom: Library Overview
+
+This is the primary location of the Project Loom code, consolidated into place with a single Arduino .ino sketch built with code selected by the preprocessor based on the configuration file. 
+
+Other readmes are provided for more specific content, while this document focuses on providing an overview of what Loom is and how the library works.
+
+#### Additional Readmes
+
+- [Arduino and Loom Setup](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Arduino_and_Loom_Setup) – How to setup Arduino and Loom from scratch
+- [Hardware](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Hardware.md) – The processors, sensors, actuators, etc. that Loom uses / supports 
+- [Using Loom](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Using_Loom.md) – How to use Loom once you have set it and the Arduino IDE up
+- [Extending Loom](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Extending_Loom.md) – How to add support to the Loom Library
+- [Hub Scripts](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Hub_Scripts.md) – Documentation on the mini programs / scripts that Loom supports
+- [Loom Translator](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Loom_Translator.md) – Documentation on the collection of Loom functions for converting between data types and organization
+- [Max MSP](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Max) – Details on using Max MSP data processors with WiFi enabled Loom devices
+- [Limitations and Bugs](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/Readme_Limitations_and_Bugs.md) – The processors, sensors, actuators, etc. that Loom uses / supports 
+
+
 
 ## Table of Contents
-1. [Processors](#processors)
-    1. [Adafruit Feather M0](#adafruit-feather-m0)
-    2. [Adafruit Feather 32u4](#adafruit-feather-32u4)
-
-2. [Wireless Capabilities](#wireless-capabilities)
-    1. [WiFi](#wifi)
-        1. [WiFi Dependencies](#wifi-dependencies)
-    2. [LoRa](#lora)
-        1. [LoRa Dependencies](#lora-dependencies)
-        2. [EnableInterrupt.h and RH\_RF95.h compatibility](#enableinterrupth-and-rh_rf95h-compatibility)
-    3. [nRF](#nRF)
-        1. [nRF Dependencies](#nrf-dependencies)
-        2. [Configuring Maximum Message Length](#configuring-maximum-message-length)
-
-3. [Sensors](#sensors)
-    1. [I2C Sensors](#i2c-sensors)
-        1. [TSL2591 Lux Sensor](#tsl2591-lux-sensor)
-        2. [FXOS8700 3-Axis Accelerometer/Magentometer](#fxos8700-3-axis-accelerometermagentometer)
-        3. [FXAS21002 3-Axis Gyroscope](#fxas21002-3-axis-gyroscope)
-        4. [Sparkfun ZX](#sparkfun-zx)
-        5. [SHT31-D](#sht31-d)
-        6. [MB1232](#mb1232)
-        7. [TCA9548A Multiplexer](#tca9548a-multiplexer)   
-    2. [SDI-12 Sensors](#sdi-12-sensors)
-        1. [SDI-12 Dependencies](#sdi-12-dependencies)
-        2. [Supported SDI-12 Pins](#supported-sdi-12-pins)
-    3. [SPI Sensors](#spi-sensors)
-        1. [Adafruit Universal Thermocouple Amplifier](#adafruit-universal-thermocouple-amplifier)
-
-4. [Actuators](#actuators)
-    1. [SG92R Servo](#sg92r-servo)
-    2. [SM_42BYG011_25 Stepper Motor](#sm_42byg011_25-stepper-motor)
 
-5. [Miscellaneous Functionality](#miscellaneous-functionality)
-    1. [RTC and Low Power Functionality](#rtc-and-low-power-functionality)
-        1. [RTC and Low Power Dependencies](#rtc-and-low-power-dependencies)
-        2. [Standby Operation](#standby-operation)
-    2. [OSC Interpreter](#osc-interpreter)
-        1. [OSC Issues](#osc-issues)
-    3. [Non-Volatile Flash and EEPROM memory](#non-volatile-memory)
+1. [Installation](#installation)
+2. [Device Support](#device-support)
+3. [Communication Platforms](#communication-platforms)
+4. [Device Configuration](#device-configuration)
+5. [Max/MSP](#max/msp)
+6. [Library Architecture](#library-architecture)
 
-6. [32u4 Limitations](#32u4-limitations)
+    1. [Overall Structure](#overall-structure)
+        1. [Example Library Include Hierarchy](#example-library-include-hierarchy)
+7. [Channels](#channels)
+    1. [Implementation](#implementation)
+    2. [Additional Devices](#additional-devices)
+8. [Device Identification Hierarchy](#device-identification-hierarchy)
+9. [SD Card Support](#sd-card-support)
+10. [Real-Time Clock Support](#real-time-clock-support)
+11. [Non-Volatile Flash and EEPROM memory](#non-volatile-memory)
+12. [Configuration File](#configuration-file)
+13. [API](#api)
+14. [Using the Loom Library](#using-the-loom-library)
 
-7. [Other Notes](#other-notes)
 
-## Processors
 
-### Adafruit Feather M0
+## Installation
 
-Resources:
-* [Adafruit M0 Documentation](https://learn.adafruit.com/adafruit-feather-m0-basic-proto/overview)
-* [ATSAMD21 Datasheet](https://cdn-shop.adafruit.com/product-files/2772/atmel-42181-sam-d21_datasheet.pdf)
+See our [Arduino and Loom Setup Guide](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Arduino_and_Loom_Setup)
 
-The compiler macro `__SAMD21G18A__` can be used to define code blocks specifically for the Feather M0.
-For readability, we typically use this macro to define our own, more readable preprocessor
-definition `is_M0`.  This can be done by including the following lines in your source code:
 
-``` cpp
-#ifdef __SAMD21G18A__
-#define is_M0
-#endif
-```
-
-### Adafruit Feather 32u4
 
-Resources:
-* [Adafruit 32u4 Documentation](https://learn.adafruit.com/adafruit-feather-32u4-basic-proto?view=all)
-* [ATMega32U4 Datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf)
+## Device Support
 
-The compiler macro `__AVR_ATmega32U4__` can be used to define code blocks specifically for the Feather 32u4.
-For readability, we typically use this macro to define our own, more readable preprocessor
-definition `is_32U4`.  This can be done by including the following lines in your source code:
-
-``` cpp
-#ifdef __AVR_ATmega32U4__
-#define is_32U4
-#endif
-```
-
-## Wireless Capabilities
+- Adafruit Feather M0
+- Adafruit Feather 32u4 *(limited support)*
 
-### WiFi
-
-WiFi is supported by both the Adafruit Feather M0 and the Adafruit Feather 32u4.
-Features:
-* Send and receive arbitrary length Udp packets
-* Works in Access Point mode as well as WPA-protected client mode
-
-#### WiFi Dependencies
-
-WiFi is dependent on the Arduino [WiFi101 library](https://github.com/arduino-libraries/WiFi101). This library provides the WiFiUdp object.
-
-### LoRa
-
-LoRa wireless communication is supported by both the Adafruit Feather M0 and the
-Adafruit Feather 32u4.
-
-Features:
-* Send messages up to 2 km line-of-sight.
-* LoRa devices can be addressed with any value between 0 and 255.
-* Can send messages of length up to 251 bytes.
-
-#### LoRa Dependencies
 
-All LoRa modules used by Project Loom are provided by the 
-[RadioHead library](https://github.com/adafruit/RadioHead). This library
-provides both the radio drivers (i.e. `RH_RF95.h`) and a network manager
-(i.e. `RHReliableDatagram.h`).
 
-#### EnableInterrupt.h and RH\_RF95.h compatibility
-
-EnableInterrupt.h and RH\_RF95.h both try to define the same interrupt vectors.
-To use both of these libraries in the same file, include the following definition
-in your source code:
-
-``` cpp
-#define EI_NOTEXTERNAL
-```
-
-### nRF
-
-The nRF flavor of IoA is comprised with the Nordic nRF24L01+ radio tranceiver.
-nRF is supported by both the Adafruit Feather M0 and the Adafruit Feather 32u4.
-
-Features:
-* nRF devices can be addressed with any value between 0 and 7.
-* Fragmentation allows for messages of any length to be sent with some configuration.
-* Multi-hopping is supported.
+## Communication Platforms
 
-#### nRF Dependencies
-
-* [RF24](https://github.com/nRF24/RF24)
-* [RF24Network](https://github.com/nRF24/RF24Network)
-
-#### Configuring Maximum Message Length
+WiFi and LoRa have had the most attention in development and thus have the most support and options, especially WiFi, as that is currently the only to communicate with a computer running Max/MSP. Other platforms have been implemented however. Below is the table of device inputs and outputs currently implemented, planned, or in consideration (bold for well implemented, * if partially implemented or in need of testing to be considered well implemented, plaintext if planned but not implemented, ? if in consideration). The top section is device-device communication platforms, and the bottom section are platforms that do not necessarily transmit directly to another Loom device
 
-The maximum message length can be adjusted by editing the value of `MAIN_BUFFER_SIZE`,
-a variable found in the `RF24Network_config.h` file.
-
-## Sensors
+| Inputs         | Outputs                     | Comments                                                     |
+| -------------- | --------------------------- | ------------------------------------------------------------ |
+| **WiFi**       | **WiFi**                    | Implemented                                                  |
+| **LoRa**       | **LoRa**                    | Implemented                                                  |
+| nRF*           | nRF*                        | May need more testing to be 'proven'                         |
+| Ethernet       | Ethernet*                   | Currently only used with hubs, expansion in progress         |
+| GSM            | GSM*                        | Currently only one device, so outputs MQTT via GSM, but no GSM receiving yet |
+|                |                             |                                                              |
+| Google Sheets? | Google Sheets (PushingBox)* | Works as output, looking for ways of improving the pipline   |
+| Adafruit IO*   | Adafruit IO*                | Needs proper integration                                     |
+| IFTTT?         | IFTTT?                      | Currently, IFTTT works only as output though Adafruit IO     |
+| SD card?       | **SD card**                 | Works as output, considering as input                        |
+| Serial?        | **Serial**                  | Works for output. Serial as input may or may not be useful (is how Fona is tested) |
 
-### I2C Sensors
-
-The following I2C Sensors are currently supported by Project Loom:
-* [TSL2591](https://learn.adafruit.com/adafruit-tsl2591/overview)
-* [FXOS8700](https://learn.adafruit.com/nxp-precision-9dof-breakout/overview)
-* [FXAS21002](https://learn.adafruit.com/nxp-precision-9dof-breakout/overview)
-* [SPARKFUN ZX](https://learn.adafruit.com/adafruit-sht31-d-temperature-and-humidity-sensor-breakout)
-* [SHT31-D](https://www.sparkfun.com/products/13162)
-* [MB1232](https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm)
-
-The system also supports the following multiplexer in order to allow the use of multiple sensors with the same address:
-* [TCA9548A](https://learn.adafruit.com/adafruit-tca9548a-1-to-8-i2c-multiplexer-breakout/overview)
-
-#### TSL2591 Lux Sensor
-**Technical Details**
-* Approximates Human eye Response
-* Extremely wide dynamic range 1 to 600,000,000 Counts
-* Lux Range: 188 uLux sensitivity, up to 88,000 Lux input measurements.
-* Temperature range: -30 to 80 C
-* Voltage range: 3.3-5V into onboard regulator
-* I2C 7-bit address 0x29 
-
-**Dependencies Required**
-* [Adafruit_TSL2591](https://github.com/adafruit/Adafruit_TSL2591_Library)
-* [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
-
-**Available Functions**
-* displaySensorDetails: Displays basic info about the sensor
-* configureSensor: Sets the gain and integration time
-* simpleRead: Grabs a simple read of the luminosity
-* advancedRead: Reads both IR and Full Specrtum and converts to lux
-* unifiedSensorAPIRead: Reads the data using the unified sensor API
-
-**Additional Notes**
-* Settable gain depending on light conditions
-* Settable integration time for collecting light
-
-**Datasheet:** [TSL2591 Datasheet](http://www.adafruit.com/datasheets/TSL25911_Datasheet_EN_v1.pdf)
-
-#### FXOS8700 3-Axis Accelerometer/Magentometer
-**Technical Details**
-* 2-3.6V Supply
-* ±2 g/±4 g/±8 g adjustable acceleration range
-* ±1200 µT magnetic sensor range
-* Output data rates (ODR) from 1.563 Hz to 800 Hz
-* 14-bit ADC resolution for acceleration measurements
-* 16-bit ADC resolution for magnetic measurements
-* I2C 7-bit address 0x1C, 0x1D, 0x1E, 0x1F 
-
-**Dependencies Required**
-* [Adafruit_FXOS8700](https://github.com/adafruit/Adafruit_FXOS8700)
-* [Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS)
-* [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
-
-**Available Functions**
-* displaySensorDetails_FXOS: Displays the max and min values of the accelrometer and magnetometer
-* fxos_sensor_read: Displays accelrometer data in m/s^2 and magnetometer data in uTesla in X,Y,Z direction
-
-**Additional Notes**
-* Contained in the same sensor with FXAS21002
-
-**Datasheet:** [FXOS8700 Datasheet]https://cdn-learn.adafruit.com/assets/assets/000/043/458/original/FXOS8700CQ.pdf?1499125614)
-
-#### FXAS21002 3-Axis Gyroscope
-**Technical Details**
-* 2-3.6V Supply
-* ±250/500/1000/2000°/s configurable range
-* Output Data Rates (ODR) from 12.5 to 800 Hz
-* 16-bit digital output resolution
-* 192 bytes FIFO buffer (32 X/Y/Z samples)
-* I2C 7-bit address 0x20, 0x21 
 
-**Dependencies Required**
-* [Adafruit_FXAS21002C](https://github.com/adafruit/Adafruit_FXAS21002C)
-* [Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS)
-* [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
 
-**Available Functions**
-* displaySensorDetails_FXAS: Displays the max and min values
-* fxas_sensor_read: Displays the gyrscope speed in reference to X,Y,and Z coordinates in rad/s
+## Device Configuration
 
-**Additional Notes**
-* Contained in the same sensor with FXOS8700
+The configuration of the code to upload and flash to devices is specified in the config.h file. This file presents the options that can be set or toggled to achieve a particular behavior. The preprocessor uses these definitions to select the necessary declarations, variables, and functions automatically. 
 
-**Datasheet:** [FXAS21002 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056)
+Currently changes to the config need to be done manually in the file itself. An interface to aid the process is in progress.
 
-#### Sparkfun ZX
-**Technical Details**
-* 2-3.6V Supply
-* I2C 7-bit address 0x10, 0x11 
 
-**Dependencies Required**
-* [SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library](https://github.com/sparkfun/SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library/archive/master.zip)
 
-**Available Functions**
-* displaySensorDetails_ZX: Displays the model version of the sensor
-* zx_sensor_read_pos: Displays the position both in X and Z coordinates of the object in front of the sensor
-* zx_sensor_read_gesture: Displays the direction (up, down, left, right) of the object movement
+## Max/MSP
 
-**Additional Notes**
-* Can only use either the gesture function or the read function but can't use both at the same time
-* Has UART capabilities
+The associated [Loom Data Processors](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Max) and control modules are made as patches in Max/MSP. The Max interfaces are not strictly necessary for using this library, but provide convenient features and means of interacting with your Loom devices / network.
 
-**Datasheet:** [Sparkfun ZX Datasheet](https://cdn.sparkfun.com/assets/learn_tutorials/3/4/5/XYZ_Interactive_Technologies_-_ZX_SparkFun_Sensor_Datasheet.pdf)
 
-#### SHT31-D
-**Technical Details**
-* 2.4-5.5V Supply
-* Temperature: -10-125 °C ±0.3°C 
-* Relative Humidity:0-100% ±2%
-* I2C 7-bit address 0x44, 0x45 
 
-**Dependencies Required**
-* [Adafruit_SHT31](https://github.com/adafruit/Adafruit_SHT31)
+## Librarary Architecture
 
-**Available Functions**
-* readTemperature(): Reads in the temperature at the time 
-* reatHumidity(): Reads in the humidity at the time
-* sht31_sensor_read: Grabs and displays the temperature in Celsius and the humidity percentage
-* heater(): Turns on the heater to remove condensation
+The Loom Library is an answer to the growing set of code to drive Loom's supported devices, hardware, and communication platforms. The set of possible combinations of device configurations makes it unfeasable for Loom developers and users alike to manage sketches with desired functionality. Instead, a configuration file effectively creates the desired sketch dynamically. A loom_preamble.h file uses that configuration to select entire files to include, each of which may also contain additional preprocessor statements.
 
-**Additional Notes**
-* Has a heater function to remove condensation
+### Overall Structure
 
-**Datasheet:** [SHT3x-DIS Datasheet](https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf)
+The Loom Library is effectively an aggregate of all of the functionality possible within the entirety of the supported devices, sensors, and actuators. The user then specifies the needs of their sketch inside the config.h. Based on the needs of the sketch, the requisite files, functions, and logic will be dynamically included such that only what is needed by the sketch is uploaded to the device. loom_preamble.h uses config.h to know which files to include, these files in turn then include the libraries they need. loom_common.h is also always present as it has the Loom_begin() function, which sets up all the modules and sensors being used by the sketch. 
 
-#### MB1232
-**Technical Details**
-* Operates from 3.0-5.5V
-* Range: 0-625cm
-* Resolution of 1 cm
-* Up to 40Hz reading rate
-* 42kHz Ultrasonic sensor measures distance to objects
-* I2C 7-bit address 0x70 
+#### Example Library Include Hierarchy
 
-**Dependencies Required**
-* None
+The hierarchy of included files looks something like the following (example if building for Ishield device on Feather M0 WiFi)  *(actual files may have since changed, but the idea/hierarchy remain)*. 
 
-**Available Functions**
-* takeRangeReading(): Sends the range command to the sensor to take a reading
-* requestRange(): Returns the last range that the sensor read in centimeters
+**Note** – bolded are files that are always necessary and thus included, independent of config.h. In angle brackets are non-Loom dependencies.
 
-**Additional Notes**
-* Same address as multiplexer (0x70)
-* **Multiplexer must use another address if being used with this sensor**
+- Ishield_Example.ino
+  - **Config.h**
+  - **Loom_preamble.h** (likely to be renamed)
+    - **<OSCBundle.h>**
+    - Loom_translator.h
+    - <Adafruit_SleepyDog.h>
+    - <SPI.h>
+    - loom_analog.h
+    - loom_neopixel.h
+      - <Adafruit_NeoPixel.h>
+    - loom_mpu6050.h
+      - <I2Cdev.h>
+      - <Wire.h>
+      - <MPU6050_6Axis_MotionApps20.h>
+    - loom_wifi.h
+      - <WiFi101.h>
+      - <WiFiUDP.h>
+    - **loom_flash.h**
+      - <FlashStorage.h>
+    - **loom_common.h**
 
-**Datasheet:** [MB1232 Datahsheet](https://www.maxbotix.com/documents/I2CXL-MaxSonar-EZ_Datasheet.pdf)
 
-#### TCA9548A Multiplexer
-**Technical Details**
-* 1.8V - 5V Supply
-* Use up to 8 multiplexer simultaneously
-* Use up to 64 I2C sensors with the same address (8 per multiplexer)
-* I2C 7-bit address 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77 
 
-**Dependencies Required**
-* None
+### Message Router
 
-**Additional Notes**
-* Address can be changed by using solder bridges on the back of the board
-* **Initial Multiplexer address (0x70) conflicts with MB1232**
+#### Intro to Route and Dispatch of Message Router
 
-**Datasheet:** [TCA9548A Datasheet](http://www.adafruit.com/datasheets/tca9548a.pdf)
-
-### SDI-12 Sensors
-
-The following SDI-12 sensors are currently supported by Project Loom:
-* [Decagon GS3](http://manuals.decagon.com/Integration%20Guides/GS3%20Integrators%20Guide.pdf)
-* [Decagon 5TM](http://www.ictinternational.com/content/uploads/2014/03/5TM-Integrators-Guide.pdf)
-
-#### SDI-12 Dependencies
-* [Enable Interrupt](https://github.com/GreyGnome/EnableInterrupt)
-* [SDI-12 Functionality](https://github.com/EnviroDIY/Arduino-SDI-12)
-
-#### Supported SDI-12 Pins
-
-The following pins are available for use with SDI-12 sensors:
-
-* **Feather M0:** 10, 11, A0, A1, A3, A4, A5
-* **Feather 32u4:** 10, 11
-
-Additional pins may be operational, but they have not been verified.
-
-**NOTE:** To use the SDI-12 library with the 32u4, the user must define their own
-pin interrupts using the Enable Interrupt library.  The following line from
-the file SDI12.h must be uncommented so that external interrupts can be defined:
-
-``` cpp
-#define SDI12_EXTERNAL_PCINT // uncomment to use your own PCINT ISRs
-```
-
-The following is an example of how the Enable Interrupt library can be used
-to define an interrupt on pin 10:
-
-``` cpp
-pinMode(10, INPUT_PULLUP);
-enableInterrupt(10, handler_function, CHANGE);
-```
-
-### SPI Sensors
-
-#### Adafruit Universal Thermocouple Amplifier
-
-Project Loom currently supports operation of the Adafruit MAX31856 Universal
-Thermocouple Amplifier in both K-type thermocouple operation and generic voltage
-operation.  K-type thermocouple operation allows the user to directly measure
-temperatures, when the amplifier is used in conjunction with a K-type thermocouple,
-and the generic voltage operation allows the user to measure the voltage across any
-thermocouple attached to the amplifier.
-
-Dependencies and Documentation:
-* [Adafruit MAX31856 Github](https://github.com/adafruit/Adafruit_MAX31856)
-* [Adafruit MAX31856 Overview](https://learn.adafruit.com/adafruit-max31856-thermocouple-amplifier/overview)
-
-**IMPORTANT NOTE:** The Adafruit thermocouple library has been modified to include functionality
-to read the thermocouple voltage directly.  The modified library can be found
-[here](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/Dependencies/Adafruit_MAX31856.zip).
-
-Alternatively, the following function can be added as a public member to the Adafruit\_MAX31856
-class in the Adafruit\_MAX31856 library:
-
-``` cpp
-float Adafruit_MAX31856::readVoltage(int gain) {
-  oneShotTemperature();
-
-  int32_t temp24 = readRegister24(MAX31856_LTCBH_REG);
-  if (temp24 & 0x800000) {
-    temp24 |= 0xFF000000;
-  }
-
-  temp24 >>= 5;
-
-  float tempfloat = temp24/((float)(gain * 209715.2)); //temp24 = gain * 1.6 * 2^17 * vin
-
-  return tempfloat;
-}
+The message router is called via:
 
 ```
+bndl->route(configuration.packet_header_string, msg_router);
+```
 
-## Actuators
+From the `process_bundle` function in the 'loom_interface.h' file. The message router checks any OSC messages that it receives, and if the message's address string matches one of the dispatch calls in the router, then the message gets forwarded to a function designed to handle / process messages with that address string. This usually entails reading the arguments to the message (which should be sent in an order / format known by the function that will handle the processing).
 
-The following Actuators are currently supported by Project Loom:
-* [SG92R](https://www.adafruit.com/product/169)
-* [SM-42BYG011-25](https://www.adafruit.com/product/324)
+The dispatch calls in the message router take the following form:
 
-### SG92R Servo
-**Technical Details**
-* Use [8-channel Servo FeatherWing](https://learn.adafruit.com/adafruit-8-channel-pwm-or-servo-featherwing?view=all)
-* Up to 8 connections for SG92R
-* Rotation range: around 180 degrees(90 in each direction). Position "0" (1.5ms pulse) is middle, "90" (~2ms pulse) is all the way to the right, "-90" (~1ms pulse) is all the way to the left.
+```
+msg.dispatch("/address", processing_function, addrOffset);
+```
 
-SG92R servo uses a 50Hz signal giving a period of 20 ms to control the position of the servo. This position is determined by PWM. The duty cycle, or pulse width is 1ms(0 degrees) to 2ms(180 degrees). Therefore, the minimum pulse width is 1ms and the maximum pulse width is 2ms. The pulse width for specific angle is calculated from below equation. By manipulating pulse width in Code level, Servo can rotates up to 180 degrees.
+An example of a dispatch that takes a message that has an address of the device identifying string followed by "setID", and calls a function `set_instance_num` (which sets the device instance number) would be:
 
-* Voltage range: 3.3 - 5V into onboard regulator is required for logic voltage and additional 4.7 - 5.4V for each SG92R servo. 
-* Current range: SG92R’s idle current with 5V supply is 6 (+/-10mA) and  running current with 5V supply is 220 +/-50mA
-* Use I2C (SDA and SCL pins) 
+```
+msg.dispatch("/SetID", set_instance_num, addrOffset);
+```
 
-**Dependencies Required**
-* [Adafruit PWMServoDriver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
+The reason only the `/SetID` is provided and not something like `/LOOM/Ishield7/SetID` is because the aforementioned route function checks for message addressed to the device, which in this case is identified by `/LOOM/Ishield7`, and passes only the remaining part of the address to the message router. Messages that do not start with the device indentifying string are not sent to the message router.
 
-**Available Functions**
-*  setPWMFreq: Determines how many full ‘pulses’ per second are generated by the IC.
 
-**Additional Notes**
-* Settable rotation degree depending on user selection
 
-**Datasheet:** [PCA9685 PWM controller Datasheet](https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf)
+## Channels
 
-### SM_42BYG011_25 Stepper Motor
-**Technical Details**
-* Use [Adafruit DC Motor+Stepper FeatherWing](https://learn.adafruit.com/adafruit-stepper-dc-motor-featherwing)
-* Up to 2 connections for SM-42BYG011-25
-* Voltage range: 3.3 - 5V into onboard regulator is required for logic voltage and additional 12V for Stepper motor(SM-42BYG011-25) according to datasheet. Lower voltage (eg. 5V) also can be supplied. It lets the motor generate less heat but perform less torque.
-* Use I2C (SDA and SCL pins) 
+The LOOM library and associated Max/MSP processors are designed to use channel based interfaces by default. Channel interfaces abstract device instance number, UDP port, and IP address into a single letter A, B, C, … H. 
 
-**Dependencies Required**
-* [Adafruit MotorShield](https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library)
-* [Adafruit PWMServoDriver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
+The channels are purely a user convenience, and the devices can operate without any notion of channels in the firmware and/or Max patches.
 
-**Available Functions**
-* getsStepper: Steps indicates how many steps per revolution the motor has. A 7.5 degrees per step motor has 360/7.5 = 48 steps. SM-42BYG011-25 requires 200 steps. Stepper# is which port it is connected to. Port 1 is for the first stepper motor and port 2 is for the other stepper motor.
-* setSpeed: Set the speed of the motor in terms of revolution per minute(rpm).
-* Step: #steps is how many steps you’d like the stepper motor tatkes. Direction is either FORWARD(Clockwise) or BACKWARD(Counter clockwise) and the steptype is SINGLE, DOUBLE, INTERLEAVE, or MICROSTEP.
+### Implementation
+A common port is used for the communication of device settings in order to allow the Max patches to communicate with devices in a consistent manner if the instance number, UDP port, or IP (i.e. the channel information) address are unknown.
 
-**Additional Notes**
-* SINGLE steptype means one coil is activated.
-* DOUBLE steptype means two coils are activated at a time for higher torque.
-* INTERLEAVE steptype means alternate between single and double to create a half-step in between. It causes stepper motors to run smoother, but in halved speed.
-* MICROSTEP steptype used to achieve higher resolution but with a loss in torque at lower speeds.
+**Common Port:** 9440 
 
-**Datasheet:** [SM-42BYG011-25 datasheet](https://cdn-shop.adafruit.com/product-files/324/C140-A+datasheet.jpg)
+**Device Unique Channnel Data:** 9441 – 9448
 
-## Miscellaneous Functionality
+Channel A:	Instance # = 1		UDP Port = 9441	
 
-### RTC and Low Power Functionality
+Channel B:	Instance # = 2		UDP Port = 9442
 
-Project Loom currently supports sleep functionality for both the Adafruit Feather M0 and
-the Adafruit Feather 32u4.  The RTC used to wake both the M0 and the 32u4 is the 
-[Adafruit DS3231 Precision RTC Breakout](https://learn.adafruit.com/adafruit-ds3231-precision-rtc-breakout/).
+• • •
+
+Channel H:	Instance # = 8		UDP Port = 9448
+
+**IP Address:** Automatically assigned to devices by one's router. Max interfaces will automatically fetch IP address of selected device. If not using the channels feature implemented in the Loom Max interfaces, then Loom Debug mode may need to be enabled, or the user may need to add custom code, in order to obtain the device's IP address.
+
+### Additional Devices
+
+The Max interfaces presently support upto 8 concurrent channels, though the library itself poses no such restrictions and using custom Max interfaces can allow for the control of more devices.
+
+
+
+## Device Identification Hierarchy
+
+In Loom, a device is uniquely identified by 4 elements, from broad to precise identification:
+
+- Family
+- Family number
+- Device type
+- Device number
+
+The OSC messages and bundles send to and from devices are address/signed with their ID string, in the following format:
+
+`/<Family><Family-Num>/<Device-Type><Device-Num>/<the-rest-of-the-address>`
+
+For example, Ishield 7 in the 3 'Loom' subnet would be:
+
+`/Loom3/Ishield7`
+
+**Family**
+
+A family is generally a complete network of a given functionality under a single person or group.
+
+**Family Number**
+
+A family number is used to distinguish subnets between a family. This is typically used to seperate devices into groups by purpose, location, etc. In Max/MSP, you will generally only be observing a single subnet at a time. Family numbers should be 0 or greater.
+
+**Device Type**
+
+The Loom Library supports an autoname feature to try to name your device if it fits into a common hardware / functionality set. These include devices like Ishields, multiplexers, servo controllers, etc. and name the device accordingly. Alternatively, you can use custom names for your devices if you want. 
+
+**Device Number / Channel**
+
+A device number is used to distinguish the devices on the same subnet (family number) that have the same device type. Device numbers are sometimes also referred to as channels. Device numbers are expected to be between 1 and 8, inclusive (channels A-H).
+
+### WiFi UDP Ports
+
+If using WiFi, the family number and device number will determine the UDP ports that the device will expect messages from. The device will check and send on 3 ports, one for global messages, one for subnet, and one for device specific messages. The calculation of the specific ports are shown below. The reason for different ports fro various devices/purposes is to reduce the number of messages a device may recieve that were not intended for it.
+
+### Device Targetting Scope
+
+The message routing function of the Loom Library supports receiving messages addressed at a global, subnet, or device level. Max/MSP can send on any of the 3 formats as well.
+
+**Global** 
+
+Broadcast the OSC bundle to all devices. Those with the matching family name can see/react to the message. If using WiFi the message is sent on UDP port `9400`.
+
+`/<Family>/<command>`
+
+**Subnet**
+
+Broadcast to a single subnet of a given family. Those with the matching family name and family number can see/react to the message. If using WiFi the message is sent on UDP port `9400+10*(family-num)`.
+
+`/<Family><Family-Num>/<command>`
+
+**Device**
+
+Target a message at a single device, i.e. the one with the matching family, family number, device type, and device number. If using WiFi the message is sent on UDP port `9400+10*(family-num)+(device-num)`.
+
+`/<Family><Family-Num>/<Device-Type><Device-Num>/<command`
+
+### Diagram of Device Scope
+
+![Loom_Hierarchy_Diagram](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/Images_for_Readmes/Loom_Hierarchy_Diagram.png)
+
+
+
+## SD Card Support
+
+The Loom library extends the Arduino SD library to have more features, mostly tailored towards using common data structures used by the library.
+
+Namely, support for printing:
+
+- Single elements (int, floats, c-strings, Strings)
+- Arrays (ints, floats, c-strings, Strings)
+- Bundles (single or multi-msg format)
+
+Additionally, if used with MaxMSP, there is support for sending commands to enable / disable the logging of bundles the device receives (also works without Max).
+
+
+
+## Real-Time Clock Support
+
+The Loom library supports two RTC devices:
+
+- [Adafruit DS3231](https://learn.adafruit.com/adafruit-ds3231-precision-rtc-breakout/)
+- [Adafruit PCF8523](https://learn.adafruit.com/adafruit-adalogger-featherwing)
+
+Currently, interrupts (for waking the microprocessor from sleep) are only supported via the DS3231, with the PCF8523 mostly being used in conjunction with an SD card (as Adafruit Adalogger featherwing has PCF8523 and SD card holder) to provide timestamps.
+
+The Loom Library has support for both devices for returning strings of the date, time, or weekday. Additional timer functions are provided for the DS3231.
 
 #### RTC and Low Power Dependencies
 
-* [DS3231 Extended Library](https://github.com/FabioCuomo/FabioCuomo-DS3231)
-* [Low Power Library](https://github.com/rocketscream/Low-Power)
-* [Enable Interrupt](https://github.com/GreyGnome/EnableInterrupt)
+- [DS3231 Extended Library](https://github.com/FabioCuomo/FabioCuomo-DS3231)
+- [Low Power Library](https://github.com/rocketscream/Low-Power)
+- [Enable Interrupt](https://github.com/GreyGnome/EnableInterrupt)
 
 **NOTE:** To use the DS3231 extended library with the Feather M0,
 the following line must be added to `RTClibExtended.h`:
 
-``` cpp
+```cpp
 #define _BV(bit) (1 << (bit))
 ```
 
@@ -460,11 +290,11 @@ the following line must be added to `RTClibExtended.h`:
 Project Loom supports two sleep modes for the Feather M0 and one sleep mode for the Feather 32u4.
 Here are some details on the various modes:
 
-| Mode           | Supported board      | Current Draw           |
-| -------------- | -------------------- | ---------------------- |
-| Idle\_2        | Feather M0           | ~5 mA                  |
-| Standby        | Feather M0           | ~0.7 mA                |
-| SLEEP\_FOREVER | Feather 32U4         | Untested               |
+| Mode           | Supported board | Current Draw |
+| -------------- | --------------- | ------------ |
+| Idle\_2        | Feather M0      | ~5 mA        |
+| Standby        | Feather M0      | ~0.7 mA      |
+| SLEEP\_FOREVER | Feather 32U4    | Untested     |
 
 #### Standby Operation
 
@@ -500,119 +330,10 @@ void wake() {
 }
 ```
 
-### OSC Interpreter
 
-**Note:** This section is a subset of the much more comprehensive Loom Translator documentation, which can be found in the ReadMe_Loom_Translator.h file of the library.
 
-Open Sound Control (OSC) is the transmission protocol used by Project Loom.  The
-Arduino OSC implementation, along with more information about OSC,
-can be found [here](https://github.com/CNMAT/OSC).  
+## Non-Volatile Flash and EEPROM memory
 
-While OSC Bundles can be sent directly using WiFi, bundles must be reencoded to
-transmit them via LoRa or nRF.  The OSC Interpreter allows OSC Bundles to be
-translated into strings and allows strings to be translated back into OSC Bundles.
-Bundles are encoded by taking each message address, along with corresponding data 
-values, are concatenated into a comma delimited string, and all messages in the 
-bundle are concatenated into a space delimited string.  
-
-Currently, only three data values are supported by the interpreter: int32\_t, 
-float, and C strings.  The following shows how the supported data values are 
-encoded:
-
-| Type        | Encoding                         | Example Input  | Example Encoding  |
-|:-----------:|:--------------------------------:|:--------------:|:-----------------:|
-| int32\_t    | 'i' + raw bits to unsigned long  | 12001          | i12001            |
-| float       | 'f' + raw bits to unsigned long  | 6.0            | f1086324736       |
-| c string    | 's' + string                     | Hello          | sHello            |
-
-Let's look at an example of how an entire bundle is encoded.  Here is the original bundle:
-
-```
-OSCBundle
-    Message 1 Address: '/LOOM/D1'
-        Data 1: (float) 6.0
-        Data 2: (int32_t) 84
-    Message 2 Address: '/LOOM/D2'
-        Data 1: (c string) 'temp'
-```
-
-Here is what that same bundle looks like when encoded with the interpreter:
-
-```
-'/LOOM/D1,f1086324736,i84 /LOOM/D2,stemp'
-```
-
-**NOTE:** The OSC Interpreter does not currently support the encoding of OSCBundles which
-contain spaces or commas in either message addresses or string data values.
-
-#### OSC Issues
-
-OSC Bundles can cause some difficult to diagnose issues.  One of the main issues we have
-encountered is that multiple OSC Bundles can cause programs to run once through a loop but
-stop on the second iteration through a loop.  Here are some methods to avoid some of these
-issues:
-
-**Avoid Declaring Multiple OSC Bundles**
-
-Declaring multiple OSC bundles can cause both the M0 and the 32u4 to hang.  The best practice
-for sending multiple OSC bundles is to declare a single bundle object and empty it in between
-uses.
-
-DO:
-
-``` cpp
-void loop() {
-    OSCBundle bndl;
-    bndl.add('addr1').add(6.0);
-
-    // Do whatever you want with bundle 1 here
-
-    bndl.empty();
-    bndl.add('addr2').add('data').add('more-data');
-
-    // Do whatver you want with bundle 2 here
-}
-```
-
-DON'T:
-
-``` cpp
-void loop() {
-    OSCBundle bndl1;
-    OSCBundle bndl2; // Declaring multiple OSC bundles is BAD!
-    bndl1.add('addr1').add(6.0);
-    bndl2.add('addr2').add('data').add('more-data');
-}
-```
-
-**Always Pass OSC Bundles to Functions By Pointers**
-
-Passing OSC bundles by value can cause the Feather 32u4 to hang.  Furthermore, functions with 
-an OSC bundle return type may causes issues as well.  Although the Feather M0 functions
-properly when passing OSC bundles by value, it is still best practice to pass the address of the
-OSC bundle instead.  
-
-DO:
-
-``` cpp
-void package_data(OSCBundle *bndl) {
-    // Whatever you want the function to do
-}
-```
-
-DON'T:
-
-``` cpp
-OSCBundle package_data() {
-    // OSCBundle return types are BAD!
-}
-
-void process(OSCBundle bndl) {
-    // Passing OSCBundles by value is also BAD!
-}
-```
-
-### Non-Volatile Flash and EEPROM memory
 For storing configurations, both the Feather M0 and the Feather 32u4 boards are capable of storing a
 struct in non-volatile memory. The functions related to non-volatile memory can be found in loom_flash.h,
 and are automatically compatible with your board. If you modify the contents of the configuration structure,
@@ -620,32 +341,55 @@ you can save them with write_non_volatile(). If you need to read from flash memo
 configuration structure with read_non_volatile(). Do not excessively write, as each board supports about
 ~10000 flash writesin its lifetime; the cells in flash memory wear out over time.
 
-## 32u4 Limitations
 
-The 32u4 has a number of limitations in comparision to the M0 processors, which are documented below.
 
-**Program Storage**
+## Configuration File
 
-The 32u4 has limited program storage, generally not enough to fit a moderately complex Loom project.
+The configuration file is used in conjunction with preprocessor statements to build the specified sketch, with as small a program memory usage as possible. Any options that can be set or toggled, or any specification of hardware (e.g. sensors and actuators) being used occur in this config.h.
 
-**Issues with Floats**
+Any options for custom additions to the library should be added only to the configuration file.
 
-When compiling for the 32u4, the Arduino IDE seems to use a smaller subset of standard C functions. This is most apparent when using floats. For example, `strtof` is not provided (but is for M0), and `sprintf` does not work with floats (often requiring cumbersome work-arounds / using the String library).
+The config.h file needs to be included before the library (via loom_preamble.h) itself, so that the configuration can be used to define the necessary subset of the library.
 
-**RAM**
 
-It seems that exceeding the provided RAM causes freezing. In the LOOM library, it is not unusual for for a 32u4 to run normally until receiving a bundle, likely due to declaration of more variables exceeding RAM.
 
-## Other Notes
+## API
 
-**MPU6050 library bug** 
+*'[]'s are used to indicate arguments that are optional or specific to a given platform* 
 
-The default MPU6050 library has a bug preventing the alternate I2C address (0x69 instead of 0x68) from being used. Namely, line 375 of 'MPU6050_6Axis_MotionApps20.h' needed to be changed from:
 
-    setSlaveAddress(0, 0x68);
-to:
 
-```
-setSlaveAddress(0, devAddr);
-```
+- Receive Bundle `void receive_bundle(OSCBundle *bndl, CommPlatform platform)`
+  - Receive a packet and put it in an OSC bundle if not already
+  - CommPlatform options:
+    - WIFI
+    - LORA
+    - NRF
+- Process Bundle `void process_bundle(OSCBundle *bndl)`
+  - Process a bundle (presumably recieved via recieve_bundle) by performing message routing on it 
+- Measure Sensors `void measure_sensors()`
+  - Measure any enabled sensors
+- Package Data `void package_data(OSCBundle *send_bndl)`
+  - Package measured data into an OSC bundle  
+- Send Bundle `void send_bundle(OSCBundle *send_bndl, CommPlatform platform)` 
+  - Send a bundle (presumably built via package_data) to another Loom device / MaxMSP
+- Log Bundle `void log_bundle(OSCBundle *send_bndl, LogPlatform platform [,char* file])`
+  - Export a bundle
+  - Platform options
+    - PUSHINGBOX (Google Sheets)
+    - SDCARD (requires filename)
+    - OLED
+- Additional Loop Checks `void additional_loop_checks()`
+  - Function to catch remaining functionality that is not contained by the rest of the API
 
+Further details on using the API can be found [here](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Using_Loom.md)
+
+
+
+## Using the Loom Library
+
+Details on setting up Arduino IDE and Loom can be found [here](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Arduino_and_Loom_Setup)
+
+Details on using Loom once setup (with examples) can be found [here](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Using_Loom.md)
+
+#### 
