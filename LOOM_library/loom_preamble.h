@@ -41,9 +41,10 @@
 
 #if AUTO_NAME == 1
 	// Make sure only one device type is enabled
-	#if ( (is_ishield) + (is_evaporimeter) + (is_sapflow) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_multiplexer) ) > 1
-		autoname_device_type_error_probably_incompatible_devices_defined_in_config // this will force an error if too many sensor/actuator were defined (needs to be = 1 for autoname to work)
-	#endif
+
+	// #if ( (is_ishield) + (is_evaporimeter) + (is_sapflow) + (num_servos > 0) + (num_steppers > 0) + (is_relay) + (is_decagon) + (is_multiplexer) ) > 1
+	// 	autoname_device_type_error_probably_incompatible_devices_defined_in_config // this will force an error if too many sensor/actuator were defined (needs to be = 1 for autoname to work)
+	// #endif
 
 	// Automatically set device name
 	#if   is_ishield 
@@ -327,6 +328,9 @@ void flash_led();
 #endif
 #if is_hx711 == 1
 	#include "loom_hx711.h"
+#endif
+#if is_as726X == 1
+	#include "loom_as726X.h"
 #endif
 
 

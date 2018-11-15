@@ -20,16 +20,16 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-typedef int (*convertRetFuncPtr)(int); 
+typedef float (*convertRetFuncPtr)(int); 
 
 
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-int analog_convert_triple(int analog);
-int analog_convert_thermistor(int analog);
-
+float analog_convert_triple(int analog);
+float analog_convert_thermistor(int analog);
+float analog_convert_ph(int analog);
 
 
 // ================================================================ 
@@ -39,7 +39,8 @@ int analog_convert_thermistor(int analog);
 static convertRetFuncPtr conversion_list[] = 
 {
 	analog_convert_triple,
-	analog_convert_thermistor
+	analog_convert_thermistor,
+	analog_convert_ph
 };
 
 
@@ -49,7 +50,7 @@ static convertRetFuncPtr conversion_list[] =
 // ================================================================
 
 // mostly just an example
-int analog_convert_triple(int analog)
+float analog_convert_triple(int analog)
 {
 	return 3*analog;
 }
@@ -59,6 +60,7 @@ int analog_convert_triple(int analog)
 // ===                ANALOG CONVERT THERMISTOR                 === 
 // ================================================================
 
+#define reverse_connect 1
 
 #define THERMISTORNOMINAL 	10000   // resistance at 25 degrees C
 #define TEMPERATURENOMINAL 	25   	// temp. for nominal resistance (almost always 25 C)
@@ -67,7 +69,7 @@ int analog_convert_triple(int analog)
  #define SERIESRESISTOR 	29330  	// the value of the 'other' resistor
  #define range_resol  		4095
 
-int analog_convert_thermistor(int analog)
+float analog_convert_thermistor(int analog)
 {
 	float average = analog;
 
@@ -94,6 +96,15 @@ int analog_convert_thermistor(int analog)
 }
 
 
+// ================================================================ 
+// ===                    ANALOG CONVERT PH                     === 
+// ================================================================
+
+// mostly just an example
+float analog_convert_ph(int analog)
+{
+	return analog;
+}
 
 
 

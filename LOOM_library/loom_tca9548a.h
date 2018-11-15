@@ -15,6 +15,14 @@
 #endif
 
 
+		// measure_tca9548a();
+		// if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
+		// 	update_sensors();
+		// 	LOOM_DEBUG_Println("Update MuxShield Sensorlist");
+		// 	state_tca9548a.last_update_time = millis();
+		// }
+
+
 // ================================================================
 // ===                       DEFINITIONS                        ===
 // ================================================================
@@ -47,14 +55,17 @@ byte possible_addresses[] = {0x00
 		#if is_mb1232 == 1
 			, 0x70
 		#endif
-		#if is_mpu6050 == 1
-			, 0x68, 0x69 
-		#endif
+		// #if is_mpu6050 == 1
+			// , 0x68, 0x69 
+		// #endif
 		#if is_lis3dh == 1
 			, 0x19
 		#endif
 		#if is_ms5803 == 1
 			, 0x76, 0x77
+		#endif
+		#if is_as726X == 1
+			, 0x49
 		#endif
 	}; 
 
@@ -77,11 +88,10 @@ struct config_tca9548a_t {
 };
 
 struct state_tca9548a_t {
-	int  measurement_count;
-	long last_update_time;
-	long mux_update_period;
+	int     measurement_count;
+	long    last_update_time;
+	long    mux_update_period;
 	uint8_t devices[MUX_PORTS];
-
 };
 
 // ================================================================ 
@@ -102,7 +112,7 @@ void measure_tca9548a();
 void tcaseselect(uint8_t);
 void send_sensors(OSCBundle *, char[]);
 void update_sensors();
-void measure_tca9548a();
+// void measure_tca9548a();
 void package_tca9548a(OSCBundle *, char[]);
 void send_sensor_list(OSCMessage &);
 void setup_mux_sensors();
@@ -129,7 +139,10 @@ bool setup_tca9548a()
 
 	// Send current sensor list
 	OSCBundle send_bndl;
-	send_sensors(&send_bndl, packet_header_string);
+
+	// send_sensors(&send_bndl, packet_header_string);
+	send_sensors(&send_bndl, global_packet_header_string);
+
 	#if is_wifi
 		wifi_send_bundle(&send_bndl);
 		send_bndl.empty();
@@ -175,7 +188,7 @@ void tcaseselect(uint8_t port_num)
 //
 void measure_sensor_data(uint8_t i2c_addr)
 {
-	LOOM_DEBUG_Println2("Attempting to measure data from sensor with address: ", i2c_addr);
+	// LOOM_DEBUG_Println2("Attempting to measure data from sensor with address: ", i2c_addr);
 	
 	switch (i2c_addr) {
 		#if is_tsl2561 == 1 && is_tsl2591 != 1
@@ -234,6 +247,11 @@ void measure_sensor_data(uint8_t i2c_addr)
 				measure_lis3dh();
 				return;
 		#endif
+		#if is_as726X == 1		
+			case 0x49:
+				measure_as726X();
+				return;
+		#endif
 
 		case 0x00: default:
 			Serial.println("This sensor is not currently supported by the Project LOOM sytem");
@@ -255,6 +273,16 @@ void measure_sensor_data(uint8_t i2c_addr)
 //
 void package_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
+	if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
+		update_sensors();
+		LOOM_DEBUG_Println("Update MuxShield Sensorlist");
+		state_tca9548a.last_update_time = millis();
+	}
+
+	// LOOM_DEBUG_Println("TCA PACKAGE SENSOR");
+	// print_bundle(bndl);
+
+
 	LOOM_DEBUG_Print3("Attempting to measure data from sensor with address: ", i2c_addr, " (0x");
 	#if LOOM_DEBUG == 1
 		Serial.print(i2c_addr, HEX);
@@ -316,6 +344,11 @@ void package_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_s
 		#if is_lis3dh == 1		
 			case 0x19:
 				package_lis3dh(bndl, packet_header_string, port);
+				return;
+		#endif
+		#if is_as726X == 1		
+			case 0x49:
+				package_as726X(bndl, packet_header_string, port);
 				return;
 		#endif
 
@@ -472,6 +505,11 @@ void send_sensors(OSCBundle *bndl, char packet_header_string[])
 					case 0x19:
 						msg.add("lis3dh"); 			break;
 				#endif
+				#if is_as726X == 1		
+					case 0x49:
+						msg.add("as726X");			break;
+				#endif
+
 				default:
 					msg.add("unknown"); 			break;
 			} // of switch
@@ -487,20 +525,18 @@ void send_sensors(OSCBundle *bndl, char packet_header_string[])
 // 
 // Calls measure_<sensor> of any sensors currently plugged in
 //
-void measure_tca9548a()
-{
-	LOOM_DEBUG_Println("Measuring data from devices connected to tca9548a (Multiplexer).");
+// void measure_tca9548a()
+// {
+// 	LOOM_DEBUG_Println("Measuring data from devices connected to tca9548a (Multiplexer).");
 
-	for (int i = 0; i < MUX_PORTS; i++) {
-		if (state_tca9548a.devices[i] != 0) {
-			tcaseselect(i);
-			measure_sensor_data(state_tca9548a.devices[i]);
-		}
-	}
+// 	for (int i = 0; i < MUX_PORTS; i++) {
+// 		if (state_tca9548a.devices[i] != 0) {
+// 			tcaseselect(i);
+// 			measure_sensor_data(state_tca9548a.devices[i]);
+// 		}
+// 	}
 
-
-
-}
+// }
 
 
 
@@ -516,9 +552,16 @@ void package_tca9548a(OSCBundle *bndl, char packet_header_string[])
 {
 	LOOM_DEBUG_Println("Packaging data from devices connected to tca9548a (Multiplexer).");
 		
+
 	for (int i = 0; i < MUX_PORTS; i++) {
 		if (state_tca9548a.devices[i] != 0) {
 			tcaseselect(i);
+	
+			// LOOM_DEBUG_Println("PACKAGE TCA");
+			// print_bundle(bndl);
+
+			measure_sensor_data(state_tca9548a.devices[i]);
+
 			package_sensor_data(state_tca9548a.devices[i], bndl, packet_header_string, i);
 		}
 	}
@@ -587,6 +630,11 @@ void setup_mux_sensors()
 			#if is_lis3dh == 1		
 				case 0x19:
 					setup_lis3dh();
+					break;
+			#endif
+			#if is_as726X == 1		
+				case 0x49:
+					setup_as726X();
 					break;
 			#endif
 		} // of switch

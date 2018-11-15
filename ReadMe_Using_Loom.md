@@ -291,6 +291,29 @@ void loop()
 
 
 
+## Using Sensors on Top of  Loom
+
+This section explains how you might go about using non-Loom sensors with the rest of Loom functionality.
+
+If you are not integrating you sensor into Loom, keep your code in the .ino file or any additional files you have made. 
+
+#### **Components**
+
+Components your code will likely have are:
+
+- Include sensor library
+- Possible instance of sensor class
+- Setup
+- Measure sensor
+
+All of this can be done as normal, as if you were not using Loom. To get the data of your sensor to work with the rest of Loom, you will need to add the data to an OSC bundle.
+
+#### Adding to Bundle
+
+The package_bundle() API function populates the provided bundle. To add your own data to this bundle you can use the provided loom_translator functions, namely `append_bundle`. This function is overloaded and uses templates, so it can take most data types in either singular or array formats. You can also use any of the [OSC API](https://github.com/CNMAT/OSC/blob/master/API.md).
+
+Most of the time Loom OSC bundles are in key-value pairs, that is, 1 message per data point, with the one element being the data point.
+
 ## Configuration Conflicts
 
 The following combinations of options in the configuration file result in various conflicts (e.g. of dependencies) that are known to result in errors or undefined behavior. Such conflicts are also mentioned in the config.h file itself.

@@ -142,15 +142,15 @@ void measure_sensors()
 		button_state = digitalRead(button_pin);
 	#endif
 	
-	//	Measure multiplexer sennsors
-	#if is_multiplexer == 1
-		measure_tca9548a();
-		if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
-			update_sensors();
-			LOOM_DEBUG_Println("Update MuxShield Sensorlist");
-			state_tca9548a.last_update_time = millis();
-		}
-	#endif
+	//	Measure multiplexer sensors
+	// #if is_multiplexer == 1
+	// 	measure_tca9548a();
+	// 	if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
+	// 		update_sensors();
+	// 		LOOM_DEBUG_Println("Update MuxShield Sensorlist");
+	// 		state_tca9548a.last_update_time = millis();
+	// 	}
+	// #endif
 	
 	// Update MPU6050 Data
 	#if is_mpu6050 == 1
@@ -239,6 +239,9 @@ void package_data(OSCBundle *send_bndl)
 	// Clear any previous contents
 	send_bndl->empty();
 
+	// LOOM_DEBUG_Println("HERE1");
+	// print_bundle(send_bndl);
+
 	// Add battery data
 	char address_string[80]; 
 	sprintf(address_string, "%s%s", configuration.packet_header_string, "/vbat");
@@ -250,13 +253,17 @@ void package_data(OSCBundle *send_bndl)
 		send_bndl->add(address_string).add((int32_t)button_state);
 	#endif
 
-	//	Add multiplexer sensor data
-	#if is_multiplexer == 1
-		package_tca9548a(send_bndl, configuration.packet_header_string);
-	#endif 
+	// //	Add multiplexer sensor data
+	// #if is_multiplexer == 1
+	// 	package_tca9548a(send_bndl, configuration.packet_header_string);
+	// #endif 
+
+	// LOOM_DEBUG_Println("HERE2");
+	// print_bundle(send_bndl);
 
 	// Update MPU6050 Data
 	#if is_mpu6050 == 1
+		LOOM_DEBUG_Println("PACKAGE MPU");
 		package_mpu6050(send_bndl, configuration.packet_header_string, 0);
 	#endif 
 
@@ -278,9 +285,15 @@ void package_data(OSCBundle *send_bndl)
 		package_sht31d(send_bndl, configuration.packet_header_string);
 	#endif
 
+	// LOOM_DEBUG_Println("HERE3");
+	// print_bundle(send_bndl);
+
 
 	// If using I2C sensor without multiplexer
 	#if is_multiplexer != 1
+		#if is_as726X == 1 
+			package_as726X(send_bndl, configuration.packet_header_string);
+		#endif
 		#if is_fxas21002 == 1 
 			package_fxas21002(send_bndl, configuration.packet_header_string);
 		#endif
@@ -317,6 +330,11 @@ void package_data(OSCBundle *send_bndl)
 	#endif // of #if is_multiplexer != 1
 
 
+	//	Add multiplexer sensor data
+	#if is_multiplexer == 1
+		package_tca9548a(send_bndl, configuration.packet_header_string);
+	#endif 
+
 	#if (is_lora == 1) && (package_lora_rssi == 1)
 		sprintf(address_string, "%s%s", configuration.packet_header_string, "/rssi");
 		send_bndl->add(address_string).add((int32_t)lora_last_rssi);
@@ -343,6 +361,8 @@ void package_data(OSCBundle *send_bndl)
 void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port)
 // void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
 {
+	if (!send_bndl->size()) return;
+
 	switch(platform) {
 		#if is_wifi == 1
 			case WIFI : wifi_send_bundle(send_bndl); break;
@@ -385,6 +405,8 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
 //
 void log_bundle(OSCBundle *log_bndl, LogPlatform platform, char* file)
 {
+	if (!log_bndl->size()) return;
+
 	switch(platform) {
 		#if is_sd == 1
 		case SDCARD : 

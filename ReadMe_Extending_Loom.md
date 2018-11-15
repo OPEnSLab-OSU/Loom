@@ -33,9 +33,9 @@ Inside this function is generally where you will process the message (if you nee
 
 **`msg.getInt(index)`** Returns argument to message that is an integer at `index` if argument is indeed an integer and there is an argument at that index
 
-**`msg.getFloat(index)`**Returns argument to message that is a float at `index` if argument is indeed a float and there is an argument at that index
+**`msg.getFloat(index)`** Returns argument to message that is a float at `index` if argument is indeed a float and there is an argument at that index
 
-**`msg.getString(index)`**Returns argument to message that is a string at `index` if argument is indeed a string and there is an argument at that index
+**`msg.getString(index)`** Returns argument to message that is a string at `index` if argument is indeed a string and there is an argument at that index
 
 **`msg.getAddress(buf, 0);`** Copies address of message into char array called `buf`
 

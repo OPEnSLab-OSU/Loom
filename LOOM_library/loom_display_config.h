@@ -93,8 +93,10 @@ void print_config()
 	#if is_pushingbox == 1
 		LOOM_DEBUG_Println("\tPushingBox enabled");	
 		LOOM_DEBUG_Println2("\t\tDevice ID: ", device_id);
-		LOOM_DEBUG_Println2("\t\tSpreadsheet ID: ", init_spreadsheet_id);	
-		LOOM_DEBUG_Println2("\t\tMinimum Upload Delay (s): ", pushUploadMinDelay);	
+		LOOM_DEBUG_Println2("\t\tSpreadsheet ID: ", init_spreadsheet_id);
+		#if pushUploadFilter == 1	
+			LOOM_DEBUG_Println2("\t\tMinimum Upload Delay (s): ", pushUploadMinDelay);	
+		#endif
 		// LOOM_DEBUG_Println2("\t\tSpreadsheet ID: ", config_pushingbox->spreadsheet_id);	
 		// LOOM_DEBUG_Println2("\t\tMinimum Upload Delay (s): ", config_pushingbox->minimum_upload_delay);	
 	#endif	
@@ -200,7 +202,9 @@ void print_config()
 	#if is_hx711 == 1
 		LOOM_DEBUG_Println3("\t\t-HX711 (calibration: ", hx711_calibration, ")");
 	#endif
-
+	#if is_as726X == 1
+		LOOM_DEBUG_Println("\t\t-AS726X");
+	#endif
 
 	#if is_lora == 0
 		LOOM_DEBUG_Println2("Loop Delay / Sleep: ", is_sleep_period);
