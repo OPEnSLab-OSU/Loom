@@ -11,7 +11,7 @@ void loop_sleep();
 void save_config(OSCMessage &msg);
 void flash_led(int num, int time_high, int time_low);
 void flash_led();
-int milli_duration(int amount, TimeUnits units);
+int  milli_duration(int amount, TimeUnits units);
 
 
 bool subnet_filter(OSCBundle* bndl, int scope);

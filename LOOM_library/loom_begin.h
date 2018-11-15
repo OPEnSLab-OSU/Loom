@@ -70,7 +70,7 @@ void Loom_begin()
 	#endif
 	// #if is_mpu6050 == 1 
 	// #if (is_mpu6050 == 1) && (is_multiplexer != 1)
-	// 	setup_mpu6050();
+		// setup_mpu6050();
 	// #endif 
 	#if is_max31856 == 1
 		setup_max31856();
@@ -95,6 +95,9 @@ void Loom_begin()
 	// I2C Sensor setup if no mulitplexer
 	// call setups of enabled sensors individually
 	#if is_multiplexer != 1
+		#if is_as726X == 1 
+			setup_as726X();
+		#endif
 		#if is_fxas21002 == 1 
 			setup_fxas21002();
 		#endif

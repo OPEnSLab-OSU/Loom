@@ -14,7 +14,7 @@
 // ================================================================
 struct config_pushingbox_t {
 	char spreadsheet_id[50]; 		// Spreadsheet ID
-	int   minimum_upload_delay;		// Minimum delya between uploads
+	int  minimum_upload_delay;		// Minimum delya between uploads
 };
 
 // ================================================================ 
@@ -81,6 +81,8 @@ void setup_pushingbox()
 //
 void sendToPushingBox(OSCMessage &msg) 
 {
+
+
 	// Only send bundles if a minimum time (pushUploadMinDelay seconds) has passed since last upload
 	#if pushUploadFilter == 1
 		currentPushMillis = millis();
@@ -92,10 +94,16 @@ void sendToPushingBox(OSCMessage &msg)
 		}
 	#endif // of pushUploadFilter
 
+
+
+
 	if (msg.size() > 32) { // This also catches empty msgs, which seem to have a size around 1493 for some reason
 		LOOM_DEBUG_Println("Message to large to send to PushingBox");
 		return;
 	}
+
+
+
 
 	// If option enabled, make sure device is in the same family
 	#if verify_family_match == 1
@@ -106,6 +114,10 @@ void sendToPushingBox(OSCMessage &msg)
 			return;
 		}
 	#endif
+
+
+
+
 
 	// Make sure this bundle wasn't ping related
 	char check_ping[50];
@@ -118,27 +130,78 @@ void sendToPushingBox(OSCMessage &msg)
 	LOOM_DEBUG_Println("Sending to PushingBox");
 
 
-// return;
+
+
+
 
 	// Get the device source from bundle header 
 	char bundle_deviceID[20];
 	osc_extract_header_section(&msg, 2, bundle_deviceID);
 
 
+
+
+
 	// Build url arguments from bundle
 	char args[1024];
 
+
+	// Determine spreadsheet ID
+	char ss_id[48];
+	bool use_default = false;
+
+	#if use_pb_sheet_array == 1 // Using list of spreadsheet_ids
+
+		int  msg_family_num = osc_extract_family_number(&msg);
+
+		// LOOM_DEBUG_Println("Using array of spreadsheet_ids");
+
+		// If out of range of array
+		if (  (msg_family_num < 0) || (msg_family_num >= sizeof(spreadsheet_list)/sizeof(spreadsheet_list[0]) )  ) {
+			strcpy(ss_id, pb_default_sheet); 						// Use default
+			// sprintf(ss_id, "%s", pb_default_sheet); 						// Use default
+			LOOM_DEBUG_Println("Out of range, using default");
+			use_default = true;
+		} else {
+			strcpy(ss_id, spreadsheet_list[msg_family_num]);	// Use ID from list
+			// sprintf(ss_id, "%s", spreadsheet_list[msg_family_num]); 						// Use default
+			LOOM_DEBUG_Println2("Using spreadsheet_id at index: ", msg_family_num);
+		}
+	#else // Use dynamic single spreadsheet_id
+		strcpy(ss_id, config_pushingbox->spreadsheet_id);
+		// sprintf(ss_id, "%s", config_pushingbox->spreadsheet_id);
+	#endif
+
+
+	// #if useHubTabID == 1
+	// 	// Use hub's stored tab ID (in config file) to define spreadsheet tab
+	// 	sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s", 
+	// 		device_id, config_pushingbox->spreadsheet_id, tab_id_complete, bundle_deviceID);
+	// #else
+	// 	// Use bundle source to define spreadsheet tab suffix
+	// 	sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
+	// 		device_id, config_pushingbox->spreadsheet_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
+	// #endif
 	#if useHubTabID == 1
 		// Use hub's stored tab ID (in config file) to define spreadsheet tab
 		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s", 
-			device_id, config_pushingbox->spreadsheet_id, tab_id_complete, bundle_deviceID);
-		// sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%d&key2=deviceID&val2=%s%d", 
-		// 	device_id, spreadsheet_id, tab_id_prefix, DEVICE, INIT_INST, ); 
+			device_id, ss_id, tab_id_complete, bundle_deviceID);
+		// sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
+		// 	device_id, ss_id, (use_default) ? "default_" : "", tab_id_complete, bundle_deviceID);
 	#else
 		// Use bundle source to define spreadsheet tab suffix
-		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
-			device_id, config_pushingbox->spreadsheet_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
+		if (!use_default) {
+			sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
+				device_id, ss_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
+		} else {
+			sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=default_%s%s&key2=deviceID&val2=%s", 
+				device_id, ss_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
+		}
+
+		
+		
 	#endif
+
 
 	// Populate URL with the bundle kesy and values
 	for (int i = 0, j = 3; (i < MAX_FIELDS-6) && (i < msg.size()); i+=2, j++) {
@@ -148,6 +211,9 @@ void sendToPushingBox(OSCMessage &msg)
 		sprintf(args, "%s&key%d=%s&val%d=%s", args, j, buf1, j, buf2);
 	}
 	LOOM_DEBUG_Println2("URL get args: ", args);
+
+
+
 
 
 	// Send to PushingBox with enabled internet connection
@@ -202,6 +268,9 @@ void sendToPushingBox(OSCBundle *bndl)
 void pushingbox_ethernet(char* args)
 {
 	LOOM_DEBUG_Println("Running PushingBox for Ethernet");
+
+	// LOOM_DEBUG_Println2("ARGS: ", args);
+
 
 	ethernet_client.stop();
 	if (ethernet_client.connect("api.pushingbox.com", 80)) {  
@@ -321,10 +390,6 @@ void pushingbox_fona(char* args)
 //
 void set_spreadsheet_id(OSCMessage &msg)
 {
-	// char tmp[50];
-	// memset(tmp, '\0', sizeof(tmp));
-	// msg.getString(0, tmp, sizeof(state_wifi.new_ssid));
-
 	if (msg.isString(0)) {
 		msg.getString(0, config_pushingbox->spreadsheet_id, sizeof(config_pushingbox->spreadsheet_id));	
 		write_non_volatile();
@@ -332,9 +397,6 @@ void set_spreadsheet_id(OSCMessage &msg)
 	} else {
 		LOOM_DEBUG_Println("Command to set spreadsheet id was not in correct format");
 	}
-
-	// config_pushingbox->spreadsheet_id = ; // Setting to 1 means that device will request new port settings on restart. 
-
 }
 
 
