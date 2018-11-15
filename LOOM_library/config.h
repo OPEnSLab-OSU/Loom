@@ -28,10 +28,10 @@
 // ================================================================
 // --- Device Identification --- 
 #define FAMILY 		"LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       0		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define FAMILY_NUM       8		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
 #define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
-#define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
+#define AUTO_NAME        0		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
 
 
@@ -66,7 +66,7 @@
 // ================================================================ 
 // ===                  DEVICE TELEMETRY TYPE                   === 
 // ================================================================
-#define hub_node_type 0		// 0: Hub, 1: Node
+#define hub_node_type 1		// 0: Hub, 1: Node
 #define is_repeater   0		// Sorry, this doesn't do anything yet
 
 
@@ -77,8 +77,8 @@
 // Further options in the advanced settings
 // Can override settings defined before the aggregate devices
 
-#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
+#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -87,7 +87,7 @@
 // ===                 COMMUNICATION PLATFORMS                  === 
 // ================================================================
 #define is_wifi       0		// 1 to enable WiFi
-#define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_lora       1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808 version)
@@ -100,7 +100,7 @@
 
 
 // --- RTC Options ---
-#define is_rtc        0		// Enable RTC functionality
+#define is_rtc        1		// Enable RTC functionality
 #if is_rtc == 1
 	#define RTC_pin 6		// What pin the RTC interrupt is connected to
 
@@ -110,7 +110,7 @@
 #endif
 
 // --- SD Options ---
-#define is_sd         0		// 1 to enable SD card 
+#define is_sd         1		// 1 to enable SD card 
 #if is_sd == 1
 	// Does NOT automatically save to SD
 	// This works more like a filter than an automator,
@@ -126,7 +126,7 @@
 // --- OLED ---
 #define is_oled 					0 	// Whether OLED is being used
 #if is_oled == 1
-	#define oled_form_factor 	2		// 1 for Featherwing Shield, 2 for breakout
+	#define oled_form_factor 	1		// 1 for Featherwing Shield, 2 for breakout
 
 	#if oled_form_factor == 2
 		#define oled_reset_pin A2  			// Make sure this doesn't conflict with other pins in use
@@ -174,7 +174,7 @@
 
 	#define is_analog_a0 1 
 	#define is_analog_a1 1
-	#define is_analog_a2 0
+	#define is_analog_a2 1
 	#define is_analog_a3 0
 	#define is_analog_a4 0
 	#define is_analog_a5 0
@@ -362,10 +362,6 @@
 		#define tsl2561_res 3
 	#endif
 
-		// #define is_tsl2561_low   1 	// Generally the upper light sensor
-		// #define is_tsl2561_float 1  // Generally the lower light sensor
-		// #define is_tsl2561_high  0  
-
 	// Load Cell
 	#define is_hx711 1
 	#if is_hx711 == 1
@@ -399,7 +395,7 @@
 	// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS,
 	// 10-19 for 0, 20 - 29 for 1, etc. 
 	#if hub_node_type == 0 	// If is hub
-		#define LORA_HUB_ADDRESS  CHANNEL
+		#define LORA_HUB_ADDRESS  	CHANNEL
 		#define LORA_NODE_ADDRESS 	1
 	#else 					// If is node
 		#define LORA_HUB_ADDRESS  	1			
@@ -437,7 +433,7 @@
 	//Use this for OPEnS Lab
 	// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 
 
-	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // MAC address of Ethernet Luke's port
+	byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};    // MAC address of Luke's Ethernet port
 	
 	IPAddress ip(128,193,56,138); 						  // device's IP address  				try to make this a string, so #include can be move to ethernet file
 #endif
@@ -475,19 +471,11 @@
 #if is_pushingbox == 1	
 	// Google Spreadsheet ID
 	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; looks like random string of characters)
-
-	// #define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
-	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	    
-	// #define init_spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"  // Luke's Arduino Test spreadsheet
 	#define init_spreadsheet_id "1wMNszrEmPt2jN1ZYDNJhO5lJHm4WcMZhzP6ck5omEOU"  // Ghana Proto Sheet
-
 
 	// Required by PushingBox, specific to each scenario
 	// Does not always need to change with different spreadsheets, only different PushingBox accounts
-	// char device_id[] = "v7ECCEF7A460E57A"; 	// Luke
 	char device_id[] = "vBC42D81EEEB62D5"; 	// Opens
-
-
 
 
 	// Google Spreadsheet Sheet/Tab. Sent as parameter to PushingBox/Google Scripts
@@ -517,17 +505,6 @@
 	#if use_pb_sheet_array == 1
 		// 0–9 : Sheet ID for corresponding subnet #
 		// Only fill out number of IDs being used
-		// const char* spreadsheet_list[4] = {
-		// 	// "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U",
-		// 	// "1TRauExIZYA7sIN1seBIHpY8vilmNgYu_2hwgXDLq_aE",
-		// 	// "1xCujIwfz1a3Bgb_l900lIPIadlcRvHJCqZFkfP6kRRo",
-		// 	// "11vN8wkfO3ZAXXXRIKS-UI44SxgqAcWHq8vX7Lq8W1zY"
-		// 	"1W38zscT6RN1EJ4ZTSPzgMyOe17cPWpqwXiQQPicaoos",
-		// 	"1TRauExIZYA7sIN1seBIHpY8vilmNgYu_2hwgXDLq_aE",
-		// 	"1xCujIwfz1a3Bgb_l900lIPIadlcRvHJCqZFkfP6kRRo",
-		// 	"11vN8wkfO3ZAXXXRIKS-UI44SxgqAcWHq8vX7Lq8W1zY"
-		// };
-
 		const char* spreadsheet_list[8] = {
 			"1L6Rr6H-5PFbbZIBKmR5mkGTztqA8xQhJeOW4Bn7ec8c",
 			"1vgVBCv2nbCc8RGcb44-bgRtxKWvp2sIu7iu9w8rtWv4",
@@ -540,7 +517,7 @@
 		};
 
 		#define pb_default_sheet "1wMNszrEmPt2jN1ZYDNJhO5lJHm4WcMZhzP6ck5omEOU" 	// Default sheet to use if family number is out of range, 
-																			 	// can be duplicate of an element in the array
+																			 		// can be duplicate of an element in the array
 	#endif
 
 ///////////////////////
@@ -557,6 +534,7 @@
 	#define pushUploadFilter   	0 	// 1 to enable a millis delay to uploading to PushingBox
 	#define pushUploadMinDelay  5  	// delay in seconds
 #endif
+
 
 
 // --- Adafruit IO Options ---
@@ -588,7 +566,7 @@
 // These convesions only apply to the analog readings as read by the 
 //   measure_analog() function
 
-#define enable_analog_conversions 0		// 1 to enable the conversion of analog values upon reading
+#define enable_analog_conversions 1		// 1 to enable the conversion of analog values upon reading
 
 #if enable_analog_conversions == 1
 
