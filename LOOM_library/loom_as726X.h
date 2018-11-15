@@ -7,7 +7,7 @@
 // ===                       DEFINITIONS                        === 
 // ================================================================
 byte GAIN = 3;
-byte MEASUREMENT_MODE = 0;
+byte MEASUREMENT_MODE = 3;
 
 bool as726X_use_bulb = false;
 

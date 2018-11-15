@@ -33,23 +33,82 @@ void setup()
 void loop() 
 {
 
+// // HUB
+
+	// // --- Common Example ---
+	// OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
+
+	// receive_bundle(&bndl, LORA);		// Receive messages
+	// if (bndl.size()) {
+	// 	print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
+	// 	// LOOM_DEBUG_Println2("RSSi: ", lora_last_rssi);
+	// }
+
+	// log_bundle(&bndl, PUSHINGBOX);
+
+	// additional_loop_checks();			// Miscellaneous checks
+	// // --- End Example ---
+
+
+
+
+
+
 	// --- Common Example ---
 	OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
-
-	receive_bundle(&bndl, WIFI);		// Receive messages
-	if (bndl.size()) {
-		print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
-	}
-	process_bundle(&bndl);				// Dispatch message to correct handling functions
 
 	measure_sensors();					// Read sensors, store data in sensor state struct
 	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
 	
-	send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
-	log_bundle(&send_bndl, PUSHINGBOX);	// Send bundle to Google Sheet
+	// LOOM_DEBUG_Println("FINAL BUNDLE");
+	print_bundle(&send_bndl);
+	// LOOM_DEBUG_Println("END FINAL BUNDLE");
+
+
+	delay(1000);
+
 
 	additional_loop_checks();			// Miscellaneous checks
 	// --- End Example ---
+
+
+
+
+	// // --- Common Example ---
+	// OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
+
+	// measure_sensors();					// Read sensors, store data in sensor state struct
+	// package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	
+	// print_bundle(&send_bndl);
+
+	// delay(1000);
+
+	// // send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
+	// // log_bundle(&send_bndl, PUSHINGBOX);	// Send bundle to Google Sheet
+
+	// additional_loop_checks();			// Miscellaneous checks
+	// // --- End Example ---
+
+
+
+	// // --- Common Example ---
+	// OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
+
+	// receive_bundle(&bndl, WIFI);		// Receive messages
+	// if (bndl.size()) {
+	// 	print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
+	// }
+	// process_bundle(&bndl);				// Dispatch message to correct handling functions
+
+	// measure_sensors();					// Read sensors, store data in sensor state struct
+	// package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	
+	// send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
+	// log_bundle(&send_bndl, PUSHINGBOX);	// Send bundle to Google Sheet
+
+	// additional_loop_checks();			// Miscellaneous checks
+	// // --- End Example ---
 }
 
 
@@ -67,6 +126,8 @@ void loop()
 // void log_bundle(OSCBundle *send_bndl, LogPlatform platform);
 // bool bundle_empty(OSCBundle *bndl);
 // void additional_loop_checks();
+// void sleep_for(int amount, TimeUnits units, SleepMode mode);
+// void sleep_until_time(SleepMode mode, int hour, int min, int sec);
 
 // CommPlatforms: WIFI, LORA, NRF
 // LogPlatforms:  PUSHINGBOX, SDCARD, OLED

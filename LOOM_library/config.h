@@ -77,8 +77,8 @@
 // Further options in the advanced settings
 // Can override settings defined before the aggregate devices
 
-#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
+#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -281,7 +281,7 @@
 #if is_ishield == 1
 	#define is_button     1			// 1 to enable button
 	#define button_pin    10		// Pin that the button uses
-	#define is_mpu6050    1 		// Enables MPU6050 on Ishield
+	#define is_mpu6050    0 		// Enables MPU6050 on Ishield
 	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 
 	#define is_analog     1
 
@@ -588,12 +588,12 @@
 // These convesions only apply to the analog readings as read by the 
 //   measure_analog() function
 
-#define enable_analog_conversions 1		// 1 to enable the conversion of analog values upon reading
+#define enable_analog_conversions 0		// 1 to enable the conversion of analog values upon reading
 
 #if enable_analog_conversions == 1
 
 	#if is_analog_a0 == 1
-		#define analog_a0_conversion 1
+		#define analog_a0_conversion -1
 	#endif 
 	#if is_analog_a1 == 1
 		#define analog_a1_conversion -1

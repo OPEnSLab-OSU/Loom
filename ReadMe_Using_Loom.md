@@ -285,6 +285,7 @@ void loop()
 	measure_sensors();					// Read sensors, store data in sensor structs
 	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
 	send_bundle(&send_bndl, LORA);		// Send bundle of packaged data
+	log_bundle(&send_bndl, SDCARD, "filename.csv"); // Save to SD card
 	additional_loop_checks();			// Miscellaneous checks
 }
 ```
