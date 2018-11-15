@@ -8,7 +8,7 @@
 // Conversions are selected in the config based on the index of the 
 // desired conversion
 
-// All conversion functions should take int and return int
+// All conversion functions should take int and return float
 
 // Defines and constants should be placed immediately above their
 // associated function, rather than all at the top
@@ -66,8 +66,8 @@ float analog_convert_triple(int analog)
 #define TEMPERATURENOMINAL 	25   	// temp. for nominal resistance (almost always 25 C)
 #define BCOEFFICIENT 		3950  	// The beta coefficient of the thermistor (usually 3000-4000)
 //#define SERIESRESISTOR 10000    
- #define SERIESRESISTOR 	29330  	// the value of the 'other' resistor
- #define range_resol  		4095
+#define SERIESRESISTOR 	29330  	// the value of the 'other' resistor
+#define range_resol  		4095
 
 float analog_convert_thermistor(int analog)
 {
@@ -100,10 +100,14 @@ float analog_convert_thermistor(int analog)
 // ===                    ANALOG CONVERT PH                     === 
 // ================================================================
 
-// mostly just an example
+#define PH_Offset 0.0
+
 float analog_convert_ph(int analog)
 {
-	return analog;
+	float voltage = analog*3.3/4096;
+	float pHValue = 3.5*voltage + PH_Offset;
+
+	return pHValue;
 }
 
 
