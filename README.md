@@ -241,6 +241,21 @@ Target a message at a single device, i.e. the one with the matching family, fami
 
 `/<Family><Family-Num>/<Device-Type><Device-Num>/<command`
 
+### LoRa Subnet
+
+Loom also supports subnets with LoRa. This is implemented by having the receiver check the source of the received OSC bundle (from the device identification address), and filter out unwanted bundles (i.e. empty them). 
+
+The options are specified in the config.h file by `lora_subnet_scope`:
+
+- 1: subnet
+- 2: global/family
+- 3: global only (not recommended)
+- 4: any message. 
+
+(use 2 if unsure)
+
+These achieve a similar subnet structure that is produced with UDP ports on the WiFi boards.
+
 ### Diagram of Device Scope
 
 ![Loom_Hierarchy_Diagram](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/Images_for_Readmes/Loom_Hierarchy_Diagram.png)
