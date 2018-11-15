@@ -14,6 +14,9 @@ void log_bundle(  OSCBundle *send_bndl, LogPlatform  platform);
 bool bundle_empty(OSCBundle *bndl);
 void additional_loop_checks();
 
+void sleep_for(int amount, TimeUnits units, SleepMode mode);
+void sleep_until_time(SleepMode mode, int hour, int min, int sec);
+
 
 // ================================================================ 
 // ===               GENERAL INTERFACE FUNCTIONS                === 
