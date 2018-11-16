@@ -183,6 +183,12 @@ void measure_sensors()
 
 	// If using I2C sensor without multiplexer
 	#if is_multiplexer != 1
+		#if is_as726X == 1
+			measure_as726X();
+		#endif
+		#if is_as7265X == 1 
+			measure_as7265X();
+		#endif
 		#if is_fxas21002 == 1 
 			measure_fxas21002();
 		#endif
@@ -296,6 +302,9 @@ void package_data(OSCBundle *send_bndl)
 	#if is_multiplexer != 1
 		#if is_as726X == 1 
 			package_as726X(send_bndl, configuration.packet_header_string);
+		#endif
+		#if is_as7265X == 1 
+			package_as7265X(send_bndl, configuration.packet_header_string);
 		#endif
 		#if is_fxas21002 == 1 
 			package_fxas21002(send_bndl, configuration.packet_header_string);

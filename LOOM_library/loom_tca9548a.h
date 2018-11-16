@@ -67,6 +67,9 @@ byte possible_addresses[] = {0x00
 		#if is_as726X == 1
 			, 0x49
 		#endif
+		#if is_as7265X == 1
+			, 0x49
+		#endif
 	}; 
 
 
@@ -252,6 +255,11 @@ void measure_sensor_data(uint8_t i2c_addr)
 				measure_as726X();
 				return;
 		#endif
+		#if is_as7265X == 1		
+			case 0x49:
+				measure_as7265X();
+				return;
+		#endif
 
 		case 0x00: default:
 			Serial.println("This sensor is not currently supported by the Project LOOM sytem");
@@ -349,6 +357,11 @@ void package_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_s
 		#if is_as726X == 1		
 			case 0x49:
 				package_as726X(bndl, packet_header_string, port);
+				return;
+		#endif
+		#if is_as7265X == 1		
+			case 0x49:
+				package_as7265X(bndl, packet_header_string, port);
 				return;
 		#endif
 
@@ -509,6 +522,10 @@ void send_sensors(OSCBundle *bndl, char packet_header_string[])
 					case 0x49:
 						msg.add("as726X");			break;
 				#endif
+				#if is_as7265X == 1		
+					case 0x49:
+						msg.add("as7265X");			break;
+				#endif
 
 				default:
 					msg.add("unknown"); 			break;
@@ -635,6 +652,11 @@ void setup_mux_sensors()
 			#if is_as726X == 1		
 				case 0x49:
 					setup_as726X();
+					break;
+			#endif
+			#if is_as7265X == 1		
+				case 0x49:
+					setup_as7265X();
 					break;
 			#endif
 		} // of switch

@@ -205,6 +205,9 @@ void print_config()
 	#if is_as726X == 1
 		LOOM_DEBUG_Println("\t\t-AS726X");
 	#endif
+	#if is_as7265X == 1
+		LOOM_DEBUG_Println("\t\t-AS7265X");
+	#endif
 
 	#if is_lora == 0
 		LOOM_DEBUG_Println2("Loop Delay / Sleep: ", is_sleep_period);

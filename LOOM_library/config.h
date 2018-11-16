@@ -56,7 +56,7 @@
 #define wake_delay 0			// 1 to enable wait 5 seconds upon awaking from sleep to (re)start Serial before program continue (useful for reprogramming if device quickly goes back to sleep)
 
 
-#define prevent_platform_compile_error 1  	// 0: Allow errors to be triggered if the program calls 
+#define prevent_platform_compile_error 0  	// 0: Allow errors to be triggered if the program calls 
 											//     functionality of platforms / devices that are not enabled
 											// 1: Permits the code to compile and the device will skip functionality
 											//     of platforms / devices that are not enabled, informing the user of such
@@ -87,7 +87,7 @@
 // ===                 COMMUNICATION PLATFORMS                  === 
 // ================================================================
 #define is_wifi       0		// 1 to enable WiFi
-#define is_lora       1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
+#define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808 version)
@@ -100,7 +100,7 @@
 
 
 // --- RTC Options ---
-#define is_rtc        1		// Enable RTC functionality
+#define is_rtc        0		// Enable RTC functionality
 #if is_rtc == 1
 	#define RTC_pin 6		// What pin the RTC interrupt is connected to
 
@@ -110,7 +110,7 @@
 #endif
 
 // --- SD Options ---
-#define is_sd         1		// 1 to enable SD card 
+#define is_sd         0		// 1 to enable SD card 
 #if is_sd == 1
 	// Does NOT automatically save to SD
 	// This works more like a filter than an automator,
@@ -189,9 +189,10 @@
 // --- I2C Sensors ---
 // Using I2C sensors without the multiplexer
 // Multiplexer / aggregate device may override these settings
-#define is_as726X          0	// Spectral Sensor (visible) [cannot be used with TSL2561]
+#define is_as726X          0	// Spectral Sensor (visible 7262 /near IR 7263) [cannot be used with TSL2561 or AS7265X]
+#define is_as7265X         0	// Spectral Sensor Triad [cannot be used with TSL2561 or AS726X]
 #define is_tsl2591         0	// Lux Sensor
-#define is_tsl2561         0	// Lux Sensor
+#define is_tsl2561         0	// Lux Sensor [cannot be used with AS726X or AS7265X]
 	#if is_tsl2561 == 1
 		#define tsl2561_res 3 // 1 for fastest, low-res, 2 for middle, 3 for slow, high-res
 	#endif
@@ -307,7 +308,8 @@
 	#define UPDATE_PERIOD 5000		// Milliseconds between multiplexer sensor list being updated
 	
 	// 1 to enable supported sensor type
-	#define is_as726X          1 	// Spectral Sensor (visible)  [cannot be used with TSL2561]
+	#define is_as726X          1 	// Spectral Sensor (visible 7262 /near IR 7263) [cannot be used with TSL2561 or AS7265X]
+	#define is_as7265X         0	// Spectral Sensor Triad [cannot be used with TSL2561 or AS726X]
 	#define is_fxas21002       1	// Gyroscope
 	#define is_fxos8700        1	// Accelerometer / Magnetometer
 	#define is_lis3dh          1    // Accelerometer
@@ -315,7 +317,7 @@
 	#define is_mpu6050         0	// Accelerometer / Gyroscope (NOTE* I2C address conflicts with RTC if not manually changed) (much better supported on Ishield)
 	#define is_ms5803          1	// Pressure Sensor
 	#define is_sht31d          1	// Temperature / Humidity
-	#define is_tsl2561         0	// Lux Sensor
+	#define is_tsl2561         0	// Lux Sensor [cannot be used with AS726X or AS7265X]
 	#define is_tsl2591         1	// Lux Sensor
 	#define is_zxgesturesensor 1	// ZX_Distance Sensor
 
@@ -647,6 +649,15 @@
 #endif
 
 
+#if is_as7265X == 1
+	#define i2c_addr_as7265X_0x49 1 // 
+
+	#if is_multiplexer != 1
+		#if i2c_addr_as7265X_0x49 == 1
+			#define as7265X_0x49_name "AS7265X_0x49"
+		#endif
+	#endif 
+#endif
 
 
 #if is_fxas21002 == 1
