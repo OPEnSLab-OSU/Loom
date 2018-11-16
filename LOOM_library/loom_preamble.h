@@ -332,6 +332,9 @@ void flash_led();
 #if is_as726X == 1
 	#include "loom_as726X.h"
 #endif
+#if is_as7265X == 1
+	#include "loom_as7265X.h"
+#endif
 
 
 #if is_multiplexer == 1
