@@ -40,8 +40,8 @@ void loop()
 	
 	print_bundle(&send_bndl);
 
-	// log_bundle(&send_bndl, SDCARD, "savefile.csv");
-	// send_bundle(&send_bndl, LORA);
+	log_bundle(&send_bndl, SDCARD, "savefile.csv");
+	send_bundle(&send_bndl, LORA);
 
 	delay(1000);
 
