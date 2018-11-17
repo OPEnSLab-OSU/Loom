@@ -78,7 +78,7 @@
 // Can override settings defined before the aggregate devices
 
 #define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -308,8 +308,8 @@
 	#define UPDATE_PERIOD 5000		// Milliseconds between multiplexer sensor list being updated
 	
 	// 1 to enable supported sensor type
-	#define is_as726X          1 	// Spectral Sensor (visible 7262 /near IR 7263) [cannot be used with TSL2561 or AS7265X]
-	#define is_as7265X         0	// Spectral Sensor Triad [cannot be used with TSL2561 or AS726X]
+	#define is_as726X          0 	// Spectral Sensor (visible 7262 /near IR 7263) [cannot be used with TSL2561 or AS7265X]
+	#define is_as7265X         1	// Spectral Sensor Triad [cannot be used with TSL2561 or AS726X]
 	#define is_fxas21002       1	// Gyroscope
 	#define is_fxos8700        1	// Accelerometer / Magnetometer
 	#define is_lis3dh          1    // Accelerometer

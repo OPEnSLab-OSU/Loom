@@ -58,6 +58,72 @@ bool setup_as7265X()
 		}
 	#endif
 	
+
+
+  // //There are four gain settings. It is possible to saturate the reading so don't simply jump to 64x.
+  // //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  // inst_as7265X_0x49.setGain(AS7265X_GAIN_1X); 		//Default
+  // // inst_as7265X_0x49.setGain(AS7265X_GAIN_37X); 	//This is 3.7x
+  // // inst_as7265X_0x49.setGain(AS7265X_GAIN_16X);
+  // //inst_as7265X_0x49.setGain(AS7265X_GAIN_64X);
+  // //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+  // //There are four measurement modes - the datasheet describes it best
+  // //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  // //inst_as7265X_0x49.setMeasurementMode(AS7265X_MEASUREMENT_MODE_4CHAN); 				//Channels STUV on x51
+  // //inst_as7265X_0x49.setMeasurementMode(AS7265X_MEASUREMENT_MODE_4CHAN_2); 			//Channels RTUW on x51
+  // //inst_as7265X_0x49.setMeasurementMode(AS7265X_MEASUREMENT_MODE_6CHAN_CONTINUOUS); 	//All 6 channels on all devices
+  // inst_as7265X_0x49.setMeasurementMode(AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT); 		//Default: All 6 channels, all devices, just once
+  // //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  
+  // //Integration cycles is from 0 (2.78ms) to 255 (711ms)
+  // //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  // //inst_as7265X_0x49.setIntegrationCycles(49);	//Default 50*2.8ms = 140ms per reading
+  // inst_as7265X_0x49.setIntegrationCycles(1); 	//2*2.8ms = 5.6ms per reading
+  // //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  
+  // //Drive current can be set for each LED
+  // //4 levels: 12.5, 25, 50, and 100mA
+  // //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  // //White LED has max forward current of 120mA
+  // inst_as7265X_0x49.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_12_5MA, AS7265x_LED_WHITE); 	//Default
+  // //inst_as7265X_0x49.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_25MA, AS7265x_LED_WHITE); 	//Allowed
+  // //inst_as7265X_0x49.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_50MA, AS7265x_LED_WHITE); 	//Allowed 
+  // //inst_as7265X_0x49.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_100MA, AS7265x_LED_WHITE); 	//Allowed
+
+  // //UV LED has max forward current of 30mA so do not set the drive current higher
+  // inst_as7265X_0x49.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_12_5MA, AS7265x_LED_UV); 		//Default
+
+  // //IR LED has max forward current of 65mA 
+  // inst_as7265X_0x49.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_12_5MA, AS7265x_LED_IR); 		//Default
+  // //inst_as7265X_0x49.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_25MA, AS7265x_LED_IR); 		//Allowed
+  // //inst_as7265X_0x49.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_50MA, AS7265x_LED_IR); 		//Allowed
+  // //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+  // //The status indicator (Blue LED) can be enabled/disabled and have its current set
+  // //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  // inst_as7265X_0x49.enableIndicator(); //Default
+  // //inst_as7265X_0x49.disableIndicator();
+
+  // //inst_as7265X_0x49.setIndicatorCurrent(AS7265X_INDICATOR_CURRENT_LIMIT_1MA);
+  // //inst_as7265X_0x49.setIndicatorCurrent(AS7265X_INDICATOR_CURRENT_LIMIT_2MA);
+  // //inst_as7265X_0x49.setIndicatorCurrent(AS7265X_INDICATOR_CURRENT_LIMIT_4MA);
+  // inst_as7265X_0x49.setIndicatorCurrent(AS7265X_INDICATOR_CURRENT_LIMIT_8MA); 	//Default
+  // //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+      
+
+  // // //The interrupt pin is active low and can be enabled or disabled
+  // // //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  // // inst_as7265X_0x49.enableInterrupt(); //Default
+  // // //inst_as7265X_0x49.disableInterrupt();
+  // // //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+  // // inst_as7265X_0x49.disableIndicator();
+
+
+
+
+
 	LOOM_DEBUG_Println("AS7265X setup complete");
 }
 
