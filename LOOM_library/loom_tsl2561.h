@@ -9,19 +9,6 @@
 // ===                       DEFINITIONS                        === 
 // ================================================================
 
-// Fix this, as this might not work correctly with multiplexer
-
-// #if i2c_addr_tsl2561_0x29  == 1
-// 	#define i2c_addr_tsl2561 0x29 // Wired to ground
-// #endif
-// #if i2c_addr_tsl2561_0x39 == 1
-// 	#define i2c_addr_tsl2561 0x49 // Wired to vcc
-// #endif
-// #if i2c_addr_tsl2561_0x49  == 1
-// #define i2c_addr_tsl2561 0x39 // floating
-// #endif
-
-
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -121,18 +108,31 @@ void package_tsl2561(OSCBundle *bndl, char packet_header_string[], uint8_t port)
 	OSCMessage msg = OSCMessage(address_string);
 	
 
+	// #if i2c_addr_tsl2561_0x29 == 1
+	// 	msg.add("lightIR_0x29"    ).add( (int32_t)state_tsl2561_0x29.lightIR );
+	// 	msg.add("lightFull_0x29"  ).add( (int32_t)state_tsl2561_0x29.lightFull );
+	// #endif
+	// #if i2c_addr_tsl2561_0x39 == 1
+	// 	msg.add("lightIR_0x39"  ).add( (int32_t)state_tsl2561_0x39.lightIR );
+	// 	msg.add("lightFull_0x39").add( (int32_t)state_tsl2561_0x39.lightFull );
+	// #endif
+	// #if i2c_addr_tsl2561_0x49 == 1
+	// 	msg.add("lightIR_0x49"   ).add( (int32_t)state_tsl2561_0x49.lightIR );
+	// 	msg.add("lightFull_0x49" ).add( (int32_t)state_tsl2561_0x49.lightFull );
+	// #endif
 	#if i2c_addr_tsl2561_0x29 == 1
-		msg.add("lightIR_0x29"    ).add( (int32_t)state_tsl2561_0x29.lightIR );
-		msg.add("lightFull_0x29"  ).add( (int32_t)state_tsl2561_0x29.lightFull );
+		msg.add("lightIR"  ).add( (int32_t)state_tsl2561_0x29.lightIR );
+		msg.add("lightFull").add( (int32_t)state_tsl2561_0x29.lightFull );
 	#endif
 	#if i2c_addr_tsl2561_0x39 == 1
-		msg.add("lightIR_0x39"  ).add( (int32_t)state_tsl2561_0x39.lightIR );
-		msg.add("lightFull_0x39").add( (int32_t)state_tsl2561_0x39.lightFull );
+		msg.add("lightIR"  ).add( (int32_t)state_tsl2561_0x39.lightIR );
+		msg.add("lightFull").add( (int32_t)state_tsl2561_0x39.lightFull );
 	#endif
 	#if i2c_addr_tsl2561_0x49 == 1
-		msg.add("lightIR_0x49"   ).add( (int32_t)state_tsl2561_0x49.lightIR );
-		msg.add("lightFull_0x49" ).add( (int32_t)state_tsl2561_0x49.lightFull );
+		msg.add("lightIR"  ).add( (int32_t)state_tsl2561_0x49.lightIR );
+		msg.add("lightFull").add( (int32_t)state_tsl2561_0x49.lightFull );
 	#endif
+
 
 
 	bndl->add(msg);

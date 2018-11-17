@@ -78,7 +78,7 @@
 // Can override settings defined before the aggregate devices
 
 #define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -762,7 +762,7 @@
 #endif
 
 #if is_tsl2561 == 1
-	// 2 are used on evaporometer b/c no multiplexer
+	// 2 (0x29, 0x39) are used on evaporometer b/c no multiplexer
 	#define i2c_addr_tsl2561_0x29 	1 // generally disabled because 2591 uses this address, disable that to use 2561 on the address
 	#define i2c_addr_tsl2561_0x39 	1 
 	#define i2c_addr_tsl2561_0x49 	0
