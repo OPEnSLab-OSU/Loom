@@ -39,6 +39,8 @@ void   osc_extract_header_to_section(OSCMessage* msg, int section, char* result)
 void   osc_extract_header_from_section(OSCMessage* msg, int section, char* result);
 int    osc_extract_family_number(OSCMessage* msg);
 int    osc_extract_family_number(OSCBundle* bndl);
+int    osc_address_section_count(OSCMessage* msg);
+int    osc_address_section_count(OSCBundle* bndl);
 
 
 // Deep copy functions
@@ -355,6 +357,8 @@ void osc_extract_header_from_section(OSCMessage* msg, int section, char* result)
 // Get the family number from a bundle or message
 // Assumes /<family># is first part of address
 // 
+// @return Family number
+//
 int osc_extract_family_number(OSCMessage* msg) 
 {
 	char tmp[50];
@@ -373,6 +377,27 @@ int osc_extract_family_number(OSCBundle* bndl)
 
 
 
+// --- OSC EXTRACT NUMBER OF SECTIONS ---
+//
+// Return the number of sections in the OSC address of 
+// an OSC message or bundle (first message)
+// 
+// @return Number of sections
+//
+int osc_address_section_count(OSCMessage* msg)
+{
+	String s = get_address_string(msg);
+	int count = 0;
+	for (int i = 0; i < s.length(); i++) 
+		if (s[i] == '/') count++;
+
+	return count;
+}
+
+int osc_address_section_count(OSCBundle* bndl)
+{
+	return osc_address_section_count(bndl->getOSCMessage(0));
+}
 
 
 
