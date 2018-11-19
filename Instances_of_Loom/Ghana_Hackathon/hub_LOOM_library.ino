@@ -32,32 +32,32 @@ void setup()
 // ================================================================ 
 void loop() 
 {
-	// // --- LoRa Hub Example ---
-	// OSCBundle bndl;  		// Declare bundles to hold incoming and outgoing data
+	// --- LoRa Hub Example ---
+	OSCBundle bndl;  		// Declare bundles to hold incoming and outgoing data
 
-	// receive_bundle(&bndl, LORA);		// Read sensors, store data in sensor state struct
-	// print_bundle(&bndl);
-	// log_bundle(&bndl, PUSHINGBOX);
-
-	// additional_loop_checks();			// Miscellaneous checks
-	// // --- End Example ---
-
-
-	// --- LoRa Node Example ---
-	OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
-
-	measure_sensors();					// Read sensors, store data in sensor state struct
-	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
-	
-	print_bundle(&send_bndl);
-
-	log_bundle(&send_bndl, SDCARD, "savefile.csv");
-	send_bundle(&send_bndl, LORA);
-
-	delay(1000);
+	receive_bundle(&bndl, LORA);		// Read sensors, store data in sensor state struct
+	print_bundle(&bndl);
+	log_bundle(&bndl, PUSHINGBOX);
 
 	additional_loop_checks();			// Miscellaneous checks
 	// --- End Example ---
+
+
+	// // --- LoRa Node Example ---
+	// OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
+
+	// measure_sensors();					// Read sensors, store data in sensor state struct
+	// package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	
+	// print_bundle(&send_bndl);
+
+	// log_bundle(&send_bndl, SDCARD, "savefile.csv");
+	// send_bundle(&send_bndl, LORA);
+
+	// delay(1000);
+
+	// additional_loop_checks();			// Miscellaneous checks
+	// // --- End Example ---
 
 
 

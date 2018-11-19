@@ -28,7 +28,7 @@
 // ================================================================
 // --- Device Identification --- 
 #define FAMILY 		"LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define FAMILY_NUM       0		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
 #define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        0		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
@@ -78,7 +78,7 @@
 // Can override settings defined before the aggregate devices
 
 #define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -89,7 +89,7 @@
 #define is_wifi       0		// 1 to enable WiFi
 #define is_lora       1		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
-#define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
+#define is_ethernet   1		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808 version)
 
 
@@ -100,7 +100,7 @@
 
 
 // --- RTC Options ---
-#define is_rtc        1		// Enable RTC functionality
+#define is_rtc        0		// Enable RTC functionality
 #if is_rtc == 1
 	#define RTC_pin 6		// What pin the RTC interrupt is connected to
 
@@ -110,7 +110,7 @@
 #endif
 
 // --- SD Options ---
-#define is_sd         1		// 1 to enable SD card 
+#define is_sd         0		// 1 to enable SD card 
 #if is_sd == 1
 	// Does NOT automatically save to SD
 	// This works more like a filter than an automator,
@@ -308,8 +308,8 @@
 	#define UPDATE_PERIOD 5000		// Milliseconds between multiplexer sensor list being updated
 	
 	// 1 to enable supported sensor type
-	#define is_as726X          1 	// Spectral Sensor (visible 7262 /near IR 7263) [cannot be used with TSL2561 or AS7265X]
-	#define is_as7265X         0	// Spectral Sensor Triad [cannot be used with TSL2561 or AS726X]
+	#define is_as726X          0 	// Spectral Sensor (visible 7262 /near IR 7263) [cannot be used with TSL2561 or AS7265X]
+	#define is_as7265X         1	// Spectral Sensor Triad [cannot be used with TSL2561 or AS726X]
 	#define is_fxas21002       1	// Gyroscope
 	#define is_fxos8700        1	// Accelerometer / Magnetometer
 	#define is_lis3dh          1    // Accelerometer
