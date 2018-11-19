@@ -134,9 +134,15 @@ void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8
 	sprintf(address_string, "%s%s%d%s", packet_header_string, "/port", port, "/zxgesturesensor/data");
 	
 	OSCMessage msg = OSCMessage(address_string);
-	msg.add("px").add((int32_t)state_zxgesturesensor_0x10.pos[0]);
-	msg.add("pz").add((int32_t)state_zxgesturesensor_0x10.pos[1]);
+	#if i2c_addr_zxgesturesensor_0x10 == 1
+		msg.add("px").add((int32_t)state_zxgesturesensor_0x10.pos[0]);
+		msg.add("pz").add((int32_t)state_zxgesturesensor_0x10.pos[1]);
+	#endif
 
+	#if i2c_addr_zxgesturesensor_0x11 == 1
+		msg.add("px").add((int32_t)state_zxgesturesensor_0x11.pos[0]);
+		msg.add("pz").add((int32_t)state_zxgesturesensor_0x11.pos[1]);
+	#endif
 	// msg.add("type" ).add(state_zxgesturesensor_0x10.gesture_type.c_str());
 	// msg.add("speed").add((int32_t)state_zxgesturesensor_0x10.gesture_speed);
 	
