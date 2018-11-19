@@ -106,6 +106,10 @@ void append_to_bundle(OSCBundle *bndl, T elem);
 template <typename T> 
 void append_to_bundle(OSCBundle *bndl, T elements [], int count);
 
+void append_to_bundle_key_value(OSCBundle *bndl, char* key, int elem);
+void append_to_bundle_key_value(OSCBundle *bndl, char* key, String elem);
+template <typename T> 
+void append_to_bundle_key_value(OSCBundle *bndl, char* key, T elem);
 
 
 // ================================================================
@@ -1300,6 +1304,8 @@ void convert_array(Tin src [], Tout dest[], int count)
 // ================================================================
 
 // OVERLOADED function for appending to a single-message format OSC bundle
+// Will append to the first message of the bundle
+
 void append_to_bundle(OSCBundle *bndl, int elem) 
 { 
 	bndl->getOSCMessage(0)->add((int32_t)elem); 
@@ -1325,9 +1331,60 @@ void append_to_bundle(OSCBundle *bndl, T elements [], int count)
 
 
 
+void append_to_bundle_key_value_aux(OSCBundle *bndl, char* address_string, char* key)
+{
+	char tmp[50];
+	if ( bndl->size() ) {
+		osc_extract_header_to_section(bndl->getOSCMessage(0), 2, tmp);
+		sprintf(address_string, "%s/%s", tmp, key);
+	} else {
+		sprintf(address_string, "%s%d/%s%d%s", FAMILY, FAMILY_NUM, DEVICE, INIT_INST, key);
+	}
+}
+
+
+// --- APPEND TO BUNDLE KEY VALUE ---
+//
+// Append a key-value pair to a bundle
+// Adds one message to the bundle, with an 
+// address correlating to the key, and data 
+// to the provided value
+//
+void append_to_bundle_key_value(OSCBundle *bndl, char* key, int elem)
+{
+	char address_string[255];
+	append_to_bundle_key_value_aux(bndl, address_string, key);
+	bndl->add(address_string).add( (int32_t)elem );
+}
+
+void append_to_bundle_key_value(OSCBundle *bndl, char* key, String elem)
+{
+	char address_string[255];
+	append_to_bundle_key_value_aux(bndl, address_string, key);
+	bndl->add(address_string).add( elem.c_str() );
+}
+
+template <typename T> 
+void append_to_bundle_key_value(OSCBundle *bndl, char* key, T elem)
+{
+	char address_string[255];
+	append_to_bundle_key_value_aux(bndl, address_string, key);
+	bndl->add(address_string).add( elem );
+}
 
 
 
 
+// template <typename T> 
+// void append_to_bundle_key_value_block(OSCBundle *bndl, char* keys[], T elems[], int count)
+// {
+// 	char address_string[255];
+// 	append_to_bundle_key_value_aux(bndl, address_string, "data");
+// 	OSCMessage msg = OSCMessage(address_string);	
+
+// 	for (int i = 0; i < count; i++) {
+// 		msg.add(address_string).add( elem );
+// 	}
+// }
 
 

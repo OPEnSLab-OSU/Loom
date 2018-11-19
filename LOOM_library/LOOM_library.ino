@@ -32,6 +32,30 @@ void setup()
 // ================================================================ 
 void loop() 
 {
+	OSCBundle send_bndl;  		// Declare bundles to hold incoming and outgoing data
+
+	measure_sensors();					// Read sensors, store data in sensor state struct
+	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	
+	int analog0 = state_analog.a0;    // directly access analog state struct
+	float f     = 4.56;
+	char* c_str = "test";
+	String str  = String("test2");
+
+	append_to_bundle_key_value(&send_bndl, "analog0", analog0);
+	append_to_bundle_key_value(&send_bndl, "float", f);
+	append_to_bundle_key_value(&send_bndl, "c-str", c_str);
+	append_to_bundle_key_value(&send_bndl, "String", str);
+
+	print_bundle(&send_bndl);
+
+	send_bundle(&send_bndl, WIFI);
+
+	additional_loop_checks();			// Miscellaneous checks
+	// --- End Example ---
+
+
+
 	// // --- LoRa Hub Example ---
 	// OSCBundle bndl;  		// Declare bundles to hold incoming and outgoing data
 
@@ -43,21 +67,21 @@ void loop()
 	// // --- End Example ---
 
 
-	// --- LoRa Node Example ---
-	OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
+	// // --- LoRa Node Example ---
+	// OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
 
-	measure_sensors();					// Read sensors, store data in sensor state struct
-	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	// measure_sensors();					// Read sensors, store data in sensor state struct
+	// package_data(&send_bndl);			// Copy sensor data from state to provided bundle
 	
-	print_bundle(&send_bndl);
+	// print_bundle(&send_bndl);
 
-	log_bundle(&send_bndl, SDCARD, "savefile.csv");
-	send_bundle(&send_bndl, LORA);
+	// log_bundle(&send_bndl, SDCARD, "savefile.csv");
+	// send_bundle(&send_bndl, LORA);
 
-	delay(1000);
+	// delay(1000);
 
-	additional_loop_checks();			// Miscellaneous checks
-	// --- End Example ---
+	// additional_loop_checks();			// Miscellaneous checks
+	// // --- End Example ---
 
 
 

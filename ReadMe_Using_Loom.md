@@ -227,15 +227,45 @@ void loop()
     log_bundle(&send_bndl, PUSHINGBOX);
 
     int analog_val0 = state_analog.a0;    // directly access analog state struct
-    LOOM_DEBUG_println("Analog 0: ", analog_val0);  
+    LOOM_DEBUG_Println2("Analog 0: ", analog_val0);  
 
     additional_loop_checks();
-} 
+}
 ```
 
 ### **Modifying the .ino functionality**
 
 It is recommeded that you base your code off the example provided / use the High-Level API Functions listed at the bottom of the .ino file to for more basic Loom setups. The `loom_interface.h` file describes each of those functions in further detail. 
+
+
+
+## Using Sensors on Top of  Loom
+
+This section explains how you might go about using non-Loom sensors with the rest of Loom functionality.
+
+If you are not integrating you sensor into Loom, keep your code in the .ino file or any additional files you have made. 
+
+#### **Components**
+
+Components your code will likely have are:
+
+- Include sensor library
+- Possible instance of sensor class
+- Setup
+- Measure sensor
+
+All of this can be done as normal, as if you were not using Loom. To get the data of your sensor to work with the rest of Loom, you will need to add the data to an OSC bundle.
+
+#### Adding to Bundle
+
+The package_bundle() API function populates the provided bundle. To add your own data to this bundle you can use the provided loom_translator functions, namely:
+
+- Use `append_to_bundle_key_value(OSCBundle *bndl, char* key, T elem)`. This function adds a new message to the bundle, with the key at the end of the address, and with a single data point, `elem`.
+- Use `append_bundle`. This function is overloaded and uses templates, so it can take most data types in either singular or array formats, but simply adds to the first message in the bundle - which may or may not be desirable. 
+
+- Directly use any of the [OSC API](https://github.com/CNMAT/OSC/blob/master/API.md).
+
+Most of the time Loom OSC bundles are in key-value pairs, that is, 1 message per data point, with the one element being the data point.
 
 
 
@@ -290,30 +320,33 @@ void loop()
 }
 ```
 
+#### Appending to Bundle / Directly Accessing Sensor State Values 
+
+```
+void loop() 
+{
+    OSCBundle send_bndl;  		// Declare bundles to hold incoming and outgoing data
+
+	measure_sensors();				// Read sensors, store data in sensor state struct
+	package_data(&send_bndl);		// Copy sensor data from state to provided bundle
+	
+	int analog0 = state_analog.a0;  // directly access analog state struct
+	float f     = 4.56;
+	char* c_str = "test";
+	String str  = String("test2");
+
+	append_to_bundle_key_value(&send_bndl, "analog0", analog0);
+	append_to_bundle_key_value(&send_bndl, "float", f);
+	append_to_bundle_key_value(&send_bndl, "c-str", c_str);
+	append_to_bundle_key_value(&send_bndl, "String", str);
+
+	print_bundle(&send_bndl);
+	
+	additional_loop_checks();			// Miscellaneous checks
+}
+```
 
 
-## Using Sensors on Top of  Loom
-
-This section explains how you might go about using non-Loom sensors with the rest of Loom functionality.
-
-If you are not integrating you sensor into Loom, keep your code in the .ino file or any additional files you have made. 
-
-#### **Components**
-
-Components your code will likely have are:
-
-- Include sensor library
-- Possible instance of sensor class
-- Setup
-- Measure sensor
-
-All of this can be done as normal, as if you were not using Loom. To get the data of your sensor to work with the rest of Loom, you will need to add the data to an OSC bundle.
-
-#### Adding to Bundle
-
-The package_bundle() API function populates the provided bundle. To add your own data to this bundle you can use the provided loom_translator functions, namely `append_bundle`. This function is overloaded and uses templates, so it can take most data types in either singular or array formats. You can also use any of the [OSC API](https://github.com/CNMAT/OSC/blob/master/API.md).
-
-Most of the time Loom OSC bundles are in key-value pairs, that is, 1 message per data point, with the one element being the data point.
 
 ## Configuration Conflicts
 
