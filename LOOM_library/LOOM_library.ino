@@ -37,19 +37,22 @@ void loop()
 	measure_sensors();					// Read sensors, store data in sensor state struct
 	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
 	
-	int analog0 = state_analog.a0;    // directly access analog state struct
+
+	int analog0 = state_analog.a0;    	// directly access analog state struct
+	int analog4 = read_analog(4);		// read analog 4 as you would if not integrated into Loom 
+											// (you should just enable A4 in the config though)
 	float f     = 4.56;
 	char* c_str = "test";
 	String str  = String("test2");
 
 	append_to_bundle_key_value(&send_bndl, "analog0", analog0);
+	append_to_bundle_key_value(&send_bndl, "analog4", analog4);
 	append_to_bundle_key_value(&send_bndl, "float", f);
 	append_to_bundle_key_value(&send_bndl, "c-str", c_str);
 	append_to_bundle_key_value(&send_bndl, "String", str);
 
-	print_bundle(&send_bndl);
 
-	send_bundle(&send_bndl, WIFI);
+	print_bundle(&send_bndl);
 
 	additional_loop_checks();			// Miscellaneous checks
 	// --- End Example ---
@@ -67,6 +70,7 @@ void loop()
 	// // --- End Example ---
 
 
+
 	// // --- LoRa Node Example ---
 	// OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
 
@@ -82,7 +86,6 @@ void loop()
 
 	// additional_loop_checks();			// Miscellaneous checks
 	// // --- End Example ---
-
 
 
 
