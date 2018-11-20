@@ -51,7 +51,6 @@ void loop()
 	append_to_bundle_key_value(&send_bndl, "c-str", c_str);
 	append_to_bundle_key_value(&send_bndl, "String", str);
 
-
 	print_bundle(&send_bndl);
 
 	additional_loop_checks();			// Miscellaneous checks
