@@ -18,12 +18,20 @@
 3. [Sensors](#sensors)
     1. [I2C Sensors](#i2c-sensors)
         1. [TSL2591 Lux Sensor](#tsl2591-lux-sensor)
-        2. [FXOS8700 3-Axis Accelerometer/Magentometer](#fxos8700-3-axis-accelerometermagentometer)
-        3. [FXAS21002 3-Axis Gyroscope](#fxas21002-3-axis-gyroscope)
-        4. [Sparkfun ZX](#sparkfun-zx)
-        5. [SHT31-D](#sht31-d)
-        6. [MB1232](#mb1232)
-        7. [TCA9548A Multiplexer](#tca9548a-multiplexer)   
+        2. [TSL2561 Lux Sensor](#tsl2561-lux-sensor)
+        3. [FXOS8700 3-Axis Accelerometer/Magentometer](#fxos8700-3-axis-accelerometermagentometer)
+        4. [FXAS21002 3-Axis Gyroscope](#fxas21002-3-axis-gyroscope)
+        5. [ZX Gesture Sensor](#zx-distance-and-gesture-sensor)
+        6. [SHT31-D Temperature and Humidity](#sht31-d-temperature-and-humidity)
+        7. [MB1232 Sonar](#mb1232-sonar)
+        8. [MPU6050 Accelerometer / Gyroscope](#accelerometer-gyroscope)
+        9. [LIS3DH Accelerometer](#lis3dh-accelerometer)
+        10. [MS5803 Atmospheric Pressure / Temperature Sensor](#ms5803-atmospheric-pressure-/-temperature-sensor)
+        11. [HX711 Load Cell Amplifier](#hx711-load-cell-amplifier)
+        12. [AS7262 Spectral Sensor (visible)](#as7262-spectral-sensor-visible)
+        13. [AS7263 Spectral Sensor (near infrared)](#as7263-spectral-sensor-near-infrared)
+        14. [AS7262 Spectral Sensor Triad](#as7265X-spectral-sensor-visible-near-infrared-ultraviolet)
+        15. [TCA9548A Multiplexer](#tca9548a-multiplexer)   
     2. [SDI-12 Sensors](#sdi-12-sensors)
         1. [SDI-12 Dependencies](#sdi-12-dependencies)
         2. [Supported SDI-12 Pins](#supported-sdi-12-pins)
@@ -33,6 +41,8 @@
 4. [Actuators](#actuators)
     1. [SG92R Servo](#sg92r-servo)
     2. [SM_42BYG011_25 Stepper Motor](#sm_42byg011_25-stepper-motor)
+    3. [Relay](#relay)
+    4. [Neopixel](#neopixel)
 
 
 
@@ -135,18 +145,27 @@ a variable found in the `RF24Network_config.h` file.
 ### I2C Sensors
 
 The following I2C Sensors are currently supported by Project Loom:
-* [TSL2591](https://learn.adafruit.com/adafruit-tsl2591/overview)
-* [FXOS8700](https://learn.adafruit.com/nxp-precision-9dof-breakout/overview)
-* [FXAS21002](https://learn.adafruit.com/nxp-precision-9dof-breakout/overview)
-* [SPARKFUN ZX](https://learn.adafruit.com/adafruit-sht31-d-temperature-and-humidity-sensor-breakout)
-* [SHT31-D](https://www.sparkfun.com/products/13162)
-* [MB1232](https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm)
+* [TSL2591](https://www.adafruit.com/product/1980) Lux Sensor
+* [TSL2561](https://www.adafruit.com/product/439) Lux Sensor
+* [FXOS8700](https://www.adafruit.com/product/3463) Accelerometer / Magnetometer
+* [FXAS21002](https://www.adafruit.com/product/3463) Gyroscope
+* [ZX Gesture Sensor](https://www.sparkfun.com/products/13162) ZX Distance Sensor
+* [SHT31-D](https://www.adafruit.com/product/2857) Temperature / Humidity
+* [MB1232](https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm) Sonar
+* MPU6050 Accelerometer / Gyroscope
+* [LIS3DH](https://www.sparkfun.com/products/13963) Accelerometer
+* MS5803 Atmospheric Pressure / Temperature Sensor 
+* [HX711](https://www.sparkfun.com/products/13879) Load Cell
+* [AS7262](https://www.sparkfun.com/products/14347) Spectral Sensor (visible)
+* [AS7263](https://www.sparkfun.com/products/14351) Spectral Sensor (near infrared)
+* [AS7265X](https://www.sparkfun.com/products/15050) Spectral Sensor Triad (visible, near infrared, ultraviolet)
 
 The system also supports the following multiplexer in order to allow the use of multiple sensors with the same address:
-* [TCA9548A](https://learn.adafruit.com/adafruit-tca9548a-1-to-8-i2c-multiplexer-breakout/overview)
+* [TCA9548A](https://www.adafruit.com/product/2717)
 
 #### TSL2591 Lux Sensor
 **Technical Details**
+
 * Approximates Human eye Response
 * Extremely wide dynamic range 1 to 600,000,000 Counts
 * Lux Range: 188 uLux sensitivity, up to 88,000 Lux input measurements.
@@ -193,10 +212,44 @@ The system also supports the following multiplexer in order to allow the use of 
 **Additional Notes**
 * Contained in the same sensor with FXAS21002
 
-**Datasheet:** [FXOS8700 Datasheet]https://cdn-learn.adafruit.com/assets/assets/000/043/458/original/FXOS8700CQ.pdf?1499125614)
+**Datasheet:** [FXOS8700 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/043/458/original/FXOS8700CQ.pdf?1499125614)
+
+#### TSL2561 Lux Sensor
+
+**Technical Details**
+
+- 
+
+**Dependencies Required**
+
+- 
+
+**Additional Notes**
+
+- 
+
+**Datasheet:** 
+
+#### FXOS8700 Accelerometer / Magnetometer
+
+**Technical Details**
+
+- 
+
+**Dependencies Required**
+
+- 
+
+**Additional Notes**
+
+- 
+
+**Datasheet:** 
 
 #### FXAS21002 3-Axis Gyroscope
+
 **Technical Details**
+
 * 2-3.6V Supply
 * ±250/500/1000/2000°/s configurable range
 * Output Data Rates (ODR) from 12.5 to 800 Hz
@@ -218,7 +271,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 **Datasheet:** [FXAS21002 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056)
 
-#### Sparkfun ZX
+#### ZX Distance and Gesture Sensor
 **Technical Details**
 * 2-3.6V Supply
 * I2C 7-bit address 0x10, 0x11 
@@ -237,7 +290,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 **Datasheet:** [Sparkfun ZX Datasheet](https://cdn.sparkfun.com/assets/learn_tutorials/3/4/5/XYZ_Interactive_Technologies_-_ZX_SparkFun_Sensor_Datasheet.pdf)
 
-#### SHT31-D
+#### SHT31-D Temperature / Humidity
 **Technical Details**
 * 2.4-5.5V Supply
 * Temperature: -10-125 °C ±0.3°C 
@@ -280,7 +333,120 @@ The system also supports the following multiplexer in order to allow the use of 
 
 **Datasheet:** [MB1232 Datahsheet](https://www.maxbotix.com/documents/I2CXL-MaxSonar-EZ_Datasheet.pdf)
 
+#### MPU6050 Accelerometer / Gyroscope
+
+**Technical Details**
+
+- 
+
+**Dependencies Required**
+
+- 
+
+**Additional Notes**
+
+- 
+
+**Datasheet:** 
+
+#### LIS3DH Accelerometer
+
+**Technical Details**
+
+- 
+
+**Dependencies Required**
+
+- 
+
+**Additional Notes**
+
+- 
+
+**Datasheet:** 
+
+#### MS5803 Atmospheric Pressure / Temperature Sensor 
+
+**Technical Details**
+
+- 
+
+**Dependencies Required**
+
+- 
+
+**Additional Notes**
+
+- 
+
+**Datasheet:** 
+
+#### HX711 Load Cell Amplifier
+
+**Technical Details**
+
+- 
+
+**Dependencies Required**
+
+- 
+
+**Additional Notes**
+
+- 
+
+**Datasheet:** 
+
+#### AS7262 Spectral Sensor (visible)
+
+**Technical Details**
+
+- 
+
+**Dependencies Required**
+
+- 
+
+**Additional Notes**
+
+- 
+
+**Datasheet:** 
+
+#### AS7263 Spectral Sensor (near infrared)
+
+**Technical Details**
+
+- 
+
+**Dependencies Required**
+
+- 
+
+**Additional Notes**
+
+- 
+
+**Datasheet:** 
+
+#### AS7265X Spectral Sensor Triad (visible, near infrared, ultraviolet)
+
+**Technical Details**
+
+- 
+
+**Dependencies Required**
+
+- 
+
+**Additional Notes**
+
+- 
+
+**Datasheet:** 
+
 #### TCA9548A Multiplexer
+
 **Technical Details**
 * 1.8V - 5V Supply
 * Use up to 8 multiplexer simultaneously
@@ -423,3 +589,43 @@ SG92R servo uses a 50Hz signal giving a period of 20 ms to control the position 
 * MICROSTEP steptype used to achieve higher resolution but with a loss in torque at lower speeds.
 
 **Datasheet:** [SM-42BYG011-25 datasheet](https://cdn-shop.adafruit.com/product-files/324/C140-A+datasheet.jpg)
+
+### Relay
+
+**Technical Details**
+
+- 
+
+**Dependencies Required**
+
+- 
+
+**Available Functions**
+
+- 
+
+**Additional Notes**
+
+- 
+
+**Datasheet:**
+
+### Neopixel
+
+**Technical Details**
+
+- 
+
+**Dependencies Required**
+
+- 
+
+**Available Functions**
+
+- 
+
+**Additional Notes**
+
+- 
+
+**Datasheet:**

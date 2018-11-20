@@ -29,7 +29,7 @@
 // --- Device Identification --- 
 #define FAMILY 		"LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
 #define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
-#define CHANNEL          2		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
+#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
@@ -39,7 +39,7 @@
 // ===                      SERIAL OPTIONS                      === 
 // ================================================================
 // --- Debugging --- 
-#define LOOM_DEBUG    0			// Set to 1 if you want Serial statements from various functions to print
+#define LOOM_DEBUG    1			// Set to 1 if you want Serial statements from various functions to print
 								// NOTE: Serial monitor must be opened for device to setup if this is enabled
 								//   Device will freeze if this in enabled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
@@ -80,7 +80,7 @@
 #define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
 #define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
-#define is_evaporimeter 1	// 1 to specify Evaporimeter
+#define is_evaporimeter 0	// 1 to specify Evaporimeter
 
 
 // ================================================================ 
@@ -110,7 +110,7 @@
 #endif
 
 // --- SD Options ---
-#define is_sd         1		// 1 to enable SD card 
+#define is_sd         0		// 1 to enable SD card 
 #if is_sd == 1
 	// Does NOT automatically save to SD
 	// This works more like a filter than an automator,
@@ -202,7 +202,7 @@
 #define is_mb1232          0	// Sonar
 #define is_mpu6050         0	// Accelerometer / Gyroscope
 #define is_lis3dh          0	// Accelerometer
-#define is_ms5803          0	// Atmospheric Pressure / Temperature Sensor
+#define is_ms5803          1	// Atmospheric Pressure / Temperature Sensor
 #define is_hx711           0    // Load Cell
 	#if is_hx711 == 1
 		#define hx711_calibration 961.275
@@ -733,16 +733,16 @@
 #endif
 
 #if is_ms5803 == 1
-	#define i2c_addr_ms5803_0x76 	1 // Default
-	// #define i2c_addr_ms5803_0x77	0
+	#define i2c_addr_ms5803_0x76 	0 // Default
+	#define i2c_addr_ms5803_0x77	1
 
 	#if is_multiplexer != 1
 		#if i2c_addr_ms5803_0x76 == 1
 			#define ms5803_0x76_name "MS5803_0x76"
 		#endif 
-		// #if i2c_addr_ms5803_0x77 == 1
-		// 	#define ms5803_0x77_name "MS5803_0x77"
-		// #endif 
+		#if i2c_addr_ms5803_0x77 == 1
+			#define ms5803_0x77_name "MS5803_0x77"
+		#endif 
 	#endif
 #endif
 
