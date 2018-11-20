@@ -31,46 +31,46 @@
 
 
 byte possible_addresses[] = {0x00
-		#if is_tsl2591 == 1
-			, 0x29
-		#endif
-		#if is_tsl2561 == 1 && is_tsl2591 != 1
-			, 0x29
-		#endif
-		#if is_tsl2561 == 1
-			, 0x39, 0x49
-		#endif
-		#if is_fxos8700 == 1
-			, 0x1C, 0x1D, 0x1E, 0x1F
-		#endif
-		#if is_fxas21002 == 1
-			, 0x20, 0x21
-		#endif
-		#if is_zxgesturesensor == 1
-			, 0x10, 0x11
-		#endif
-		#if is_sht31d == 1
-			, 0x44, 0x45
-		#endif
-		#if is_mb1232 == 1
-			, 0x70
-		#endif
-		// #if is_mpu6050 == 1
-			// , 0x68, 0x69 
-		// #endif
-		#if is_lis3dh == 1
-			, 0x19
-		#endif
-		#if is_ms5803 == 1
-			, 0x76, 0x77
-		#endif
-		#if is_as726X == 1
-			, 0x49
-		#endif
-		#if is_as7265X == 1
-			, 0x49
-		#endif
-	}; 
+	#if is_tsl2591 == 1
+		, 0x29
+	#endif
+	#if is_tsl2561 == 1 && is_tsl2591 != 1
+		, 0x29
+	#endif
+	#if is_tsl2561 == 1
+		, 0x39, 0x49
+	#endif
+	#if is_fxos8700 == 1
+		, 0x1C, 0x1D, 0x1E, 0x1F
+	#endif
+	#if is_fxas21002 == 1
+		, 0x20, 0x21
+	#endif
+	#if is_zxgesturesensor == 1
+		, 0x10, 0x11
+	#endif
+	#if is_sht31d == 1
+		, 0x44, 0x45
+	#endif
+	#if is_mb1232 == 1
+		, 0x70
+	#endif
+	// #if is_mpu6050 == 1
+		// , 0x68, 0x69 
+	// #endif
+	#if is_lis3dh == 1
+		, 0x19
+	#endif
+	#if is_ms5803 == 1
+		, 0x76, 0x77
+	#endif
+	#if is_as726X == 1
+		, 0x49
+	#endif
+	#if is_as7265X == 1
+		, 0x49
+	#endif
+}; 
 
 
 
@@ -241,7 +241,7 @@ void measure_sensor_data(uint8_t i2c_addr)
 		// 		return;
 		// #endif
 		#if is_ms5803 == 1		
-			case 0x77:
+			case 0x76: case 0x77:
 				measure_ms5803();
 				return;
 		#endif
@@ -345,7 +345,7 @@ void package_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_s
 		// 		return;
 		// #endif
 		#if is_ms5803 == 1		
-			case 0x77:
+			case 0x76: case 0x77:
 				package_ms5803(bndl, packet_header_string, port);
 				return;
 		#endif
@@ -511,7 +511,7 @@ void send_sensors(OSCBundle *bndl, char packet_header_string[])
 				// 	case 0x69:
 				// 		msg.add("mpu6050"); 		break;
 				#if is_ms5803 == 1
-					case 0x77:
+					case 0x76: case 0x77:
 						msg.add("ms5803"); 			break;
 				#endif
 				#if is_lis3dh == 1
@@ -640,7 +640,7 @@ void setup_mux_sensors()
 					break;
 			#endif
 			#if is_ms5803 == 1		
-				case 0x77:
+				case 0x76: case 0x77:
 					setup_ms5803();
 					break;
 			#endif

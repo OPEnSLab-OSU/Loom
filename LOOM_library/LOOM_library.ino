@@ -33,6 +33,21 @@ void setup()
 void loop() 
 {
 
+	// --- Common Example ---
+	OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
+
+	measure_sensors();					// Read sensors, store data in sensor state struct
+	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	
+	print_bundle(&send_bndl);
+
+	delay(1000);
+
+	additional_loop_checks();			// Miscellaneous checks
+	// --- End Example ---
+
+
+
 	// // --- LoRa Hub Example ---
 	// OSCBundle bndl;  		// Declare bundles to hold incoming and outgoing data
 
@@ -62,23 +77,22 @@ void loop()
 	// // --- End Example ---
 
 
-	// --- LoRa Evaporometer Example ---
-	OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
 
-	measure_sensors();					// Read sensors, store data in sensor state struct
-	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	// // --- LoRa Evaporometer Example ---
+	// OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
+
+	// measure_sensors();					// Read sensors, store data in sensor state struct
+	// package_data(&send_bndl);			// Copy sensor data from state to provided bundle
 	
-	print_bundle(&send_bndl);
+	// print_bundle(&send_bndl);
 
-	log_bundle(&send_bndl, SDCARD, "savefile.csv");
-	send_bundle(&send_bndl, LORA);
+	// log_bundle(&send_bndl, SDCARD, "savefile.csv");
+	// send_bundle(&send_bndl, LORA);
 
-	sleep_for(5, MINUTES, STANDBY);
+	// sleep_for(5, MINUTES, STANDBY);
 
-	additional_loop_checks();			// Miscellaneous checks
-	// --- End Example ---
-
-
+	// additional_loop_checks();			// Miscellaneous checks
+	// // --- End Example ---
 
 
 
