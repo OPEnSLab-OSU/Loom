@@ -281,11 +281,13 @@ void measure_sensor_data(uint8_t i2c_addr)
 //
 void package_sensor_data(uint8_t i2c_addr, OSCBundle *bndl, char packet_header_string[], uint8_t port)
 {
-	if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
-		update_sensors();
-		LOOM_DEBUG_Println("Update MuxShield Sensorlist");
-		state_tca9548a.last_update_time = millis();
-	}
+	// LOOM_DEBUG_Println2("Update period: ", state_tca9548a.mux_update_period);
+
+	// if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
+	// 	update_sensors();
+	// 	LOOM_DEBUG_Println("Update MuxShield Sensorlist");
+	// 	state_tca9548a.last_update_time = millis();
+	// }
 
 	// LOOM_DEBUG_Println("TCA PACKAGE SENSOR");
 	// print_bundle(bndl);
@@ -568,17 +570,19 @@ void send_sensors(OSCBundle *bndl, char packet_header_string[])
 void package_tca9548a(OSCBundle *bndl, char packet_header_string[])
 {
 	LOOM_DEBUG_Println("Packaging data from devices connected to tca9548a (Multiplexer).");
-		
+	
+	// LOOM_DEBUG_Println2("Update period: ", state_tca9548a.mux_update_period);
+	
+	if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
+		update_sensors();
+		LOOM_DEBUG_Println("Update MuxShield Sensorlist");
+		state_tca9548a.last_update_time = millis();
+	}	
 
 	for (int i = 0; i < MUX_PORTS; i++) {
 		if (state_tca9548a.devices[i] != 0) {
 			tcaseselect(i);
-	
-			// LOOM_DEBUG_Println("PACKAGE TCA");
-			// print_bundle(bndl);
-
 			measure_sensor_data(state_tca9548a.devices[i]);
-
 			package_sensor_data(state_tca9548a.devices[i], bndl, packet_header_string, i);
 		}
 	}

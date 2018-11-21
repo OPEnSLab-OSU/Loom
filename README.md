@@ -71,6 +71,7 @@ WiFi and LoRa have had the most attention in development and thus have the most 
 | IFTTT?         | IFTTT?                      | Currently, IFTTT works only as output though Adafruit IO     |
 | SD card?       | **SD card**                 | Works as output, considering as input                        |
 | Serial?        | **Serial**                  | Works for output. Serial as input may or may not be useful (is how Fona is tested) |
+|                | OLED*                       | Display a bundle on an Adafruit OLED featherwing / breakout  |
 
 
 

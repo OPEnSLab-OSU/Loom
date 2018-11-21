@@ -33,17 +33,19 @@ void setup()
 void loop() 
 {
 
-	// --- Common Example ---
+	// --- OLED Example ---
 	OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
 
 	measure_sensors();					// Read sensors, store data in sensor state struct
 	package_data(&send_bndl);			// Copy sensor data from state to provided bundle
 	
 	print_bundle(&send_bndl);
-
 	delay(1000);
 
+	log_bundle(&send_bndl, OLED);
+
 	additional_loop_checks();			// Miscellaneous checks
+
 	// --- End Example ---
 
 

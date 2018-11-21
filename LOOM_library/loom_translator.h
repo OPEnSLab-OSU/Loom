@@ -39,6 +39,7 @@ void   osc_extract_header_to_section(OSCMessage* msg, int section, char* result)
 void   osc_extract_header_from_section(OSCMessage* msg, int section, char* result);
 int    osc_extract_family_number(OSCMessage* msg);
 int    osc_extract_family_number(OSCBundle* bndl);
+int    osc_address_section_count(String addr);
 int    osc_address_section_count(OSCMessage* msg);
 int    osc_address_section_count(OSCBundle* bndl);
 
@@ -234,10 +235,12 @@ int get_bundle_bytes(OSCBundle *bndl)
 //  undefined otherwise
 int bundle_num_data_pairs(OSCBundle *bndl)
 {
-	int total = 0;
-	for (int i =0; i < bndl->size(); i++) {
-		total += bndl->getOSCMessage(i)->size();
+	int tmp, total = 0;
+	for (int i = 0; i < bndl->size(); i++) {
+		tmp = bndl->getOSCMessage(i)->size();
+		total += (tmp == 1) ? 1 : tmp/2;
 	}
+	return total;
 }
 
 
@@ -388,14 +391,18 @@ int osc_extract_family_number(OSCBundle* bndl)
 // 
 // @return Number of sections
 //
-int osc_address_section_count(OSCMessage* msg)
+int osc_address_section_count(String s)
 {
-	String s = get_address_string(msg);
 	int count = 0;
 	for (int i = 0; i < s.length(); i++) 
 		if (s[i] == '/') count++;
 
 	return count;
+}
+
+int osc_address_section_count(OSCMessage* msg)
+{
+	return osc_address_section_count(get_address_string(msg));
 }
 
 int osc_address_section_count(OSCBundle* bndl)
