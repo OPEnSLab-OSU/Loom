@@ -78,7 +78,7 @@
 // Can override settings defined before the aggregate devices
 
 #define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -124,7 +124,7 @@
 
 
 // --- OLED ---
-#define is_oled 					0 	// Whether OLED is being used
+#define is_oled 					1 	// Whether OLED is being used
 #if is_oled == 1
 	#define oled_form_factor 	1		// 1 for Featherwing Shield, 2 for breakout
 
@@ -197,7 +197,7 @@
 	#endif
 #define is_fxos8700        0	// Accelerometer / Magnetometer
 #define is_fxas21002       0	// Gyroscope
-#define is_zxgesturesensor 0	// ZX_Distance Sensor
+#define is_zxgesturesensor 0	// ZX Distance Sensor
 #define is_sht31d          0	// Temperature / Humidity
 #define is_mb1232          0	// Sonar
 #define is_mpu6050         0	// Accelerometer / Gyroscope

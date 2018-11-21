@@ -90,7 +90,7 @@ void oled_display_bundle(OSCBundle* bndl)
 		if (digitalRead(oled_freeze_pin) == 0) return; 
 	#endif
 
-	LOOM_DEBUG_Println2("Button: ", digitalRead(oled_freeze_pin));
+	// LOOM_DEBUG_Println2("Button: ", digitalRead(oled_freeze_pin));
 
 
 	display.clearDisplay();
@@ -98,8 +98,17 @@ void oled_display_bundle(OSCBundle* bndl)
 	display.setTextSize(1);
 
 	String keys[16], vals[16];
+
 	int size = bundle_num_data_pairs(bndl);
 	convert_bundle_to_arrays_assoc(bndl, keys, vals, 16);
+
+
+
+	// Remove leading sections of address from multiplexer sections
+	for (int i = 0; i < size; i++) {
+		int count = osc_address_section_count(keys[i]);
+		if (count > 0)  keys[i] = String( nth_strchr(keys[i].c_str(), '/', count)+1 );
+	}
 
 
 	// Display first 4 elements
