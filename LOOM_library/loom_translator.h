@@ -34,6 +34,10 @@ int    bundle_num_data_pairs(OSCBundle *bndl);
 bool   bundle_empty(OSCBundle *bndl);
 String get_data_value(OSCMessage* msg, int pos);
 String get_address_string(OSCMessage *msg);
+
+String osc_get_keys_associated_value(OSCMessage* msg, char* key);
+String osc_get_keys_associated_value(OSCBundle* bndl, char* key);
+
 void   osc_extract_header_section(OSCMessage* msg, int section, char* result);
 void   osc_extract_header_to_section(OSCMessage* msg, int section, char* result);
 void   osc_extract_header_from_section(OSCMessage* msg, int section, char* result);
@@ -42,6 +46,7 @@ int    osc_extract_family_number(OSCBundle* bndl);
 int    osc_address_section_count(String addr);
 int    osc_address_section_count(OSCMessage* msg);
 int    osc_address_section_count(OSCBundle* bndl);
+
 
 
 // Deep copy functions
@@ -296,6 +301,52 @@ String get_address_string(OSCMessage *msg)
 	msg->getAddress(buf, 0);
 	return String(buf);
 }
+
+
+
+
+
+// --- OSC GET KEYS ASSOCIATED VALUE ---
+// 
+// Search the provided OSC bundle or message for a specified
+// key. If it exists, return the associated value.
+// Assumes message/bundle to be in key-value format
+//
+//
+String osc_get_keys_associated_value(OSCMessage* msg, char* key)
+{
+	char tmp[50];
+
+	// Single data point, check end of address for key
+	if (msg->size() == 1) {
+		osc_extract_header_section(msg, osc_address_section_count(msg), tmp);
+		return (strcmp(key, tmp) == 0) ? get_data_value(msg, 0) : String("-1");
+	}
+	// Block of key-values search every other for key
+	else {
+		for (int i = 0; i < msg->size(); i+=2)
+		{
+			if ( get_data_value(msg, i) == key) 
+				return get_data_value(msg, i+1);
+		}
+		return String("-1");
+	}
+}
+
+String osc_get_keys_associated_value(OSCBundle* bndl, char* key)
+{
+	for (int i = 0; i < bndl->size(); i++) {
+		LOOM_DEBUG_Println2("i=", i);
+		String s = osc_get_keys_associated_value(bndl->getOSCMessage(i), key);
+		if (s != "-1") return s;
+	}
+	return String("-1");
+}
+
+
+
+// Should overload to take String keys as well
+
 
 
 
