@@ -126,6 +126,10 @@ template <typename T>
 void append_to_bundle_key_value(OSCBundle *bndl, char* key, T elem);
 
 
+template <typename T> 
+void append_to_bundle_key_value_block(OSCBundle *bndl, char* keys[], T elems[], int count);
+
+
 // ================================================================
 // ===                    GENERAL FUNCTIONS                     ===
 // ================================================================
@@ -1420,16 +1424,31 @@ void append_to_bundle_key_value(OSCBundle *bndl, char* key, T elem)
 
 
 
-// template <typename T> 
-// void append_to_bundle_key_value_block(OSCBundle *bndl, char* keys[], T elems[], int count)
-// {
-// 	char address_string[255];
-// 	append_to_bundle_key_value_aux(bndl, address_string, "data");
-// 	OSCMessage msg = OSCMessage(address_string);	
 
-// 	for (int i = 0; i < count; i++) {
-// 		msg.add(address_string).add( elem );
-// 	}
-// }
+void append_to_bundle_key_value_block_aux(OSCMessage *msg, int elem)
+{ msg->add((int32_t)elem); }
+
+void append_to_bundle_key_value_block_aux(OSCMessage *msg, String elem)
+{ msg->add(elem.c_str()); }
+
+template <typename T> 
+void append_to_bundle_key_value_block_aux(OSCMessage *msg, T elem) 
+{ msg->add(elem); }
+
+template <typename T> 
+void append_to_bundle_key_value_block(OSCBundle *bndl, char* keys[], T elems[], int count)
+{
+	char address_string[255];
+	append_to_bundle_key_value_aux(bndl, address_string, "data");
+	OSCMessage msg = OSCMessage(address_string);	
+
+	for (int i = 0; i < count; i++) {
+		msg.add( keys[i] );
+		append_to_bundle_key_value_block_aux(&msg, elems[i]); 
+
+	}
+
+	bndl->add(msg);
+}
 
 

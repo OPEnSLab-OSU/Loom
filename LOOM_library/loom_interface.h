@@ -6,7 +6,7 @@
 void receive_bundle(OSCBundle *bndl, CommPlatform platform);
 void process_bundle(OSCBundle *bndl);
 void measure_sensors();
-void package_data(OSCBundle *send_bndl);
+void package_data(OSCBundle *bndl);
 void send_bundle( OSCBundle *send_bndl, CommPlatform platform, int port);
 void send_bundle( OSCBundle *send_bndl, CommPlatform platform);
 void log_bundle(  OSCBundle *send_bndl, LogPlatform  platform, char* file); //filename for SD files
@@ -241,115 +241,115 @@ void measure_sensors()
 // 
 // Fill the provided OSC bundle with latest stored sensor readings
 //
-// @param send_bndl  The OSC bundle to be filled
+// @param bndl  The OSC bundle to be filled
 //
-void package_data(OSCBundle *send_bndl)
+void package_data(OSCBundle *bndl)
 {
 	// Clear any previous contents
-	send_bndl->empty();
+	bndl->empty();
 
 	// LOOM_DEBUG_Println("HERE1");
-	// print_bundle(send_bndl);
+	// print_bundle(bndl);
 
 	// Add battery data
 	char address_string[80]; 
 	sprintf(address_string, "%s%s", configuration.packet_header_string, "/vbat");
-	send_bndl->add(address_string).add(vbat); 
+	bndl->add(address_string).add(vbat); 
 	
 	// Add button state
 	#if is_button == 1
 		sprintf(address_string, "%s%s", configuration.packet_header_string, "/button");
-		send_bndl->add(address_string).add((int32_t)button_state);
+		bndl->add(address_string).add((int32_t)button_state);
 	#endif
 
 	// //	Add multiplexer sensor data
 	// #if is_multiplexer == 1
-	// 	package_tca9548a(send_bndl, configuration.packet_header_string);
+	// 	package_tca9548a(bndl, configuration.packet_header_string);
 	// #endif 
 
 	// LOOM_DEBUG_Println("HERE2");
-	// print_bundle(send_bndl);
+	// print_bundle(bndl);
 
 	// Update MPU6050 Data
 	#if is_mpu6050 == 1
 		LOOM_DEBUG_Println("PACKAGE MPU");
-		package_mpu6050(send_bndl, configuration.packet_header_string, 0);
+		package_mpu6050(bndl, configuration.packet_header_string, 0);
 	#endif 
 
 	#if is_max31856 == 1
-		package_max31856(send_bndl, configuration.packet_header_string);
+		package_max31856(bndl, configuration.packet_header_string);
 	#endif
 	
 	// Get analog readings
 	#if (is_analog == 1) && (is_sapflow != 1)
-		package_analog(send_bndl, configuration.packet_header_string);
+		package_analog(bndl, configuration.packet_header_string);
 	#endif
 
 	#if is_decagon == 1
-		package_decagon(&send_bndl, configuration.packet_header_string);
+		package_decagon(&bndl, configuration.packet_header_string);
 	#endif
 
 	#if is_sapflow == 1 && hub_node_type == 1
-		package_sapflow(send_bndl, configuration.packet_header_string);
-		package_sht31d(send_bndl, configuration.packet_header_string);
+		package_sapflow(bndl, configuration.packet_header_string);
+		package_sht31d(bndl, configuration.packet_header_string);
 	#endif
 
 	// LOOM_DEBUG_Println("HERE3");
-	// print_bundle(send_bndl);
+	// print_bundle(bndl);
 
 
 	// If using I2C sensor without multiplexer
 	#if is_multiplexer != 1
 		#if is_as726X == 1 
-			package_as726X(send_bndl, configuration.packet_header_string);
+			package_as726X(bndl, configuration.packet_header_string);
 		#endif
 		#if is_as7265X == 1 
-			package_as7265X(send_bndl, configuration.packet_header_string);
+			package_as7265X(bndl, configuration.packet_header_string);
 		#endif
 		#if is_fxas21002 == 1 
-			package_fxas21002(send_bndl, configuration.packet_header_string);
+			package_fxas21002(bndl, configuration.packet_header_string);
 		#endif
 		#if is_fxos8700 == 1
-			package_fxos8700(send_bndl, configuration.packet_header_string);
+			package_fxos8700(bndl, configuration.packet_header_string);
 		#endif
 		#if is_hx711 == 1
-			package_hx711(send_bndl, configuration.packet_header_string);
+			package_hx711(bndl, configuration.packet_header_string);
 		#endif
 		#if is_lis3dh == 1
-			package_lis3dh(send_bndl, configuration.packet_header_string);
+			package_lis3dh(bndl, configuration.packet_header_string);
 		#endif
 		#if is_mb1232 == 1
-			package_mb1232(send_bndl, configuration.packet_header_string);
+			package_mb1232(bndl, configuration.packet_header_string);
 		#endif
 		// #if is_mpu6050 == 1
-		// 	package_mpu6050(send_bndl, configuration.packet_header_string); 
+		// 	package_mpu6050(bndl, configuration.packet_header_string); 
 		// #endif
 		#if is_ms5803 == 1
-			package_ms5803(send_bndl, configuration.packet_header_string);
+			package_ms5803(bndl, configuration.packet_header_string);
 		#endif
 		#if is_sht31d == 1
-			package_sht31d(send_bndl, configuration.packet_header_string);
+			package_sht31d(bndl, configuration.packet_header_string);
 		#endif
 		#if is_tsl2591 == 1
-			package_tsl2591(send_bndl, configuration.packet_header_string);
+			package_tsl2591(bndl, configuration.packet_header_string);
 		#endif
 		#if is_tsl2561 == 1
-			package_tsl2561(send_bndl, configuration.packet_header_string);
+			package_tsl2561(bndl, configuration.packet_header_string);
 		#endif
 		#if is_zxgesturesensor == 1
-			package_zxgesturesensor(send_bndl, configuration.packet_header_string);
+			package_zxgesturesensor(bndl, configuration.packet_header_string);
 		#endif
 	#endif // of #if is_multiplexer != 1
 
 
 	//	Add multiplexer sensor data
 	#if is_multiplexer == 1
-		package_tca9548a(send_bndl, configuration.packet_header_string);
+		package_tca9548a(bndl, configuration.packet_header_string);
 	#endif 
 
 	#if (is_lora == 1) && (package_lora_rssi == 1)
 		sprintf(address_string, "%s%s", configuration.packet_header_string, "/rssi");
-		send_bndl->add(address_string).add((int32_t)lora_last_rssi);
+		bndl->add(address_string).add((int32_t)lora_last_rssi);
 	#endif
 
 
@@ -506,6 +506,8 @@ void additional_loop_checks()
 	#if (hub_node_type == 0) && (advanced_interdev_comm == 1)
 		check_device_refresh_interval();
 	#endif
+
+	bndl.empty();
 }
 
 

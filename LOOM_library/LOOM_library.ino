@@ -36,15 +36,13 @@ void loop()
 
 
 
-
 	// // --- OLED Example ---
-	// OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
 
 	// measure_sensors();					// Read sensors, store data in sensor state struct
-	// package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	// package_data(&bndl);			// Copy sensor data from state to provided bundle
 	
-	// print_bundle(&send_bndl);
-	// log_bundle(&send_bndl, OLED);
+	// print_bundle(&bndl);
+	// log_bundle(&bndl, OLED);
 
 	// delay(1000);
 
@@ -55,7 +53,6 @@ void loop()
 
 
 	// // --- LoRa Hub Example ---
-	// OSCBundle bndl;  		// Declare bundles to hold incoming and outgoing data
 
 	// receive_bundle(&bndl, LORA);		// Read sensors, store data in sensor state struct
 	// print_bundle(&bndl);
@@ -67,15 +64,14 @@ void loop()
 
 
 	// // --- LoRa Node Example ---
-	// OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
 
 	// measure_sensors();					// Read sensors, store data in sensor state struct
-	// package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	// package_data(&bndl);			// Copy sensor data from state to provided bundle
 	
-	// print_bundle(&send_bndl);
+	// print_bundle(&bndl);
 
-	// log_bundle(&send_bndl, SDCARD, "savefile.csv");
-	// send_bundle(&send_bndl, LORA);
+	// log_bundle(&bndl, SDCARD, "savefile.csv");
+	// send_bundle(&bndl, LORA);
 
 	// delay(1000);
 
@@ -85,15 +81,14 @@ void loop()
 
 
 	// // --- LoRa Evaporometer Example ---
-	// OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
 
 	// measure_sensors();					// Read sensors, store data in sensor state struct
-	// package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	// package_data(&bndl);			// Copy sensor data from state to provided bundle
 	
-	// print_bundle(&send_bndl);
+	// print_bundle(&bndl);
 
-	// log_bundle(&send_bndl, SDCARD, "savefile.csv");
-	// send_bundle(&send_bndl, LORA);
+	// log_bundle(&bndl, SDCARD, "savefile.csv");
+	// send_bundle(&bndl, LORA);
 
 	// sleep_for(5, MINUTES, STANDBY);
 
@@ -103,7 +98,6 @@ void loop()
 
 
 	// // --- Common Example ---
-	// OSCBundle bndl, send_bndl;  		// Declare bundles to hold incoming and outgoing data
 
 	// receive_bundle(&bndl, WIFI);		// Receive messages
 	// if (bndl.size()) {
@@ -112,10 +106,10 @@ void loop()
 	// process_bundle(&bndl);				// Dispatch message to correct handling functions
 
 	// measure_sensors();					// Read sensors, store data in sensor state struct
-	// package_data(&send_bndl);			// Copy sensor data from state to provided bundle
+	// package_data(&bndl);			// Copy sensor data from state to provided bundle
 	
-	// send_bundle(&send_bndl, WIFI);		// Send bundle of packaged data
-	// log_bundle(&send_bndl, PUSHINGBOX);	// Send bundle to Google Sheet
+	// send_bundle(&bndl, WIFI);		// Send bundle of packaged data
+	// log_bundle(&bndl, PUSHINGBOX);	// Send bundle to Google Sheet
 
 	// additional_loop_checks();			// Miscellaneous checks
 	// // --- End Example ---
@@ -129,11 +123,11 @@ void loop()
 // void receive_bundle(OSCBundle *bndl, CommPlatform platform);
 // void process_bundle(OSCBundle *bndl);
 // void measure_sensors();
-// void package_data(OSCBundle *send_bndl);
-// void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port);
-// void send_bundle(OSCBundle *send_bndl, CommPlatform platform);
-// void log_bundle(OSCBundle *send_bndl, LogPlatform platform, char* file); // filename required for SD files
-// void log_bundle(OSCBundle *send_bndl, LogPlatform platform);
+// void package_data(OSCBundle *bndl);
+// void send_bundle(OSCBundle *bndl, CommPlatform platform, int port);
+// void send_bundle(OSCBundle *bndl, CommPlatform platform);
+// void log_bundle(OSCBundle *bndl, LogPlatform platform, char* file); // filename required for SD files
+// void log_bundle(OSCBundle *bndl, LogPlatform platform);
 // bool bundle_empty(OSCBundle *bndl);
 // void additional_loop_checks();
 // void sleep_for(int amount, TimeUnits units, SleepMode mode);
