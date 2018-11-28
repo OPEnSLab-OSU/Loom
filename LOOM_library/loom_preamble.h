@@ -75,6 +75,9 @@
 // ================================================================
 // ===                 COMMON GLOBAL VARIABLES                  ===
 // ================================================================
+
+OSCBundle     bndl;
+
 int           led = LED_BUILTIN;              	// LED pin number
 float         vbat;                    	 		// Place to save measured battery voltage (3.3V max)
 char          ReplyBuffer[] = "acknowledged"; 	// A string to send back
