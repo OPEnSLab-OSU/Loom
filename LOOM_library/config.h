@@ -77,8 +77,8 @@
 // Further options in the advanced settings
 // Can override settings defined before the aggregate devices
 
-#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
+#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -124,7 +124,7 @@
 
 
 // --- OLED ---
-#define is_oled 					1 	// Whether OLED is being used
+#define is_oled 					0 	// Whether OLED is being used
 #if is_oled == 1
 	#define oled_form_factor 	1		// 1 for Featherwing Shield, 2 for breakout
 
@@ -202,7 +202,7 @@
 #define is_mb1232          0	// Sonar
 #define is_mpu6050         0	// Accelerometer / Gyroscope
 #define is_lis3dh          0	// Accelerometer
-#define is_ms5803          1	// Atmospheric Pressure / Temperature Sensor
+#define is_ms5803          0	// Atmospheric Pressure / Temperature Sensor
 #define is_hx711           0    // Load Cell
 	#if is_hx711 == 1
 		#define hx711_calibration 961.275
@@ -287,7 +287,7 @@
 
 	#define is_analog_a0 1			// 1 to enable Feather A_ ports as analog inputs 
 	#define is_analog_a1 1
-	#define is_analog_a2 1
+	#define is_analog_a2 0
 	#define is_analog_a3 0
 	#define is_analog_a4 0
 	#define is_analog_a5 0

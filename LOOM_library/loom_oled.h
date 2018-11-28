@@ -138,18 +138,6 @@ void oled_display_bundle(OSCBundle* bndl)
 	// Display all elements with scrolling
 	#elif oled_display_format == 3
 
-		// If button enabled for freezing scrolling
-		// #if (is_button == 1) && (oled_button_freeze == 2)
-		// 	if (button_state == 0) {
-		// 		oled_time = previous_oled_time;
-		// 	} else {
-		// 		oled_time = millis();
-		// 		previous_oled_time = oled_time;
-		// 	}
-		// #else
-		// 	oled_time = millis();
-		// #endif
-
 		#if oled_button_freeze == 2
 			if (digitalRead(oled_freeze_pin) == 0) {
 				oled_time = previous_oled_time;

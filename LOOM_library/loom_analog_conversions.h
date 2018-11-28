@@ -27,7 +27,8 @@ typedef float (*convertRetFuncPtr)(int);
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
-float analog_convert_triple(int analog);
+float analog_convert_triple(int analog); // example
+float analog_convert_voltage(int analog); // example
 float analog_convert_thermistor(int analog);
 float analog_convert_ph(int analog);
 
@@ -46,7 +47,7 @@ static convertRetFuncPtr conversion_list[] =
 
 
 // ================================================================ 
-// ===                         Double                           === 
+// ===                         TRIPLE                           === 
 // ================================================================
 
 // mostly just an example
@@ -54,6 +55,17 @@ float analog_convert_triple(int analog)
 {
 	return 3*analog;
 }
+
+
+// ================================================================ 
+// ===                        VOLTAGE                           === 
+// ================================================================
+
+float analog_convert_voltage(int analog)
+{
+	return analog*3.3/4096.0;
+}
+
 
 
 // ================================================================ 
@@ -104,7 +116,7 @@ float analog_convert_thermistor(int analog)
 
 float analog_convert_ph(int analog)
 {
-	float voltage = analog*3.3/4096;
+	float voltage = analog*3.3/4096.0;
 	float pHValue = 3.5*voltage + PH_Offset;
 
 	return pHValue;

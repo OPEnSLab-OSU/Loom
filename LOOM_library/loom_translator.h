@@ -94,6 +94,14 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 template <typename T>
 void convert_array_assoc_to_key_value(String keys [], T values [], String key_values [], int assoc_len, int kv_len);
 
+
+// Convert strings to numbers
+int    convert_string_to_int(char * s);
+float  convert_string_to_float(char * s);
+int    convert_string_to_int(String s);
+float  convert_string_to_float(String s);
+
+
 // Conversion between array element types
 void convert_array(String src [], int    dest [],   int count);
 void convert_array(String src [], float  dest [],   int count);
@@ -105,12 +113,12 @@ void convert_array(Tin src [], Tout dest[], int count);
 
 
 // Appending single element or array to single-message format bundles
-void append_to_bundle(OSCBundle *bndl, int    elem);
-void append_to_bundle(OSCBundle *bndl, String elem);
-template <typename T> 
-void append_to_bundle(OSCBundle *bndl, T elem);
-template <typename T> 
-void append_to_bundle(OSCBundle *bndl, T elements [], int count);
+// void append_to_bundle(OSCBundle *bndl, int    elem);
+// void append_to_bundle(OSCBundle *bndl, String elem);
+// template <typename T> 
+// void append_to_bundle(OSCBundle *bndl, T elem);
+// template <typename T> 
+// void append_to_bundle(OSCBundle *bndl, T elements [], int count);
 
 void append_to_bundle_key_value(OSCBundle *bndl, char* key, int elem);
 void append_to_bundle_key_value(OSCBundle *bndl, char* key, String elem);
@@ -345,11 +353,6 @@ String osc_get_keys_associated_value(OSCBundle* bndl, char* key)
 
 
 
-// Should overload to take String keys as well
-
-
-
-
 // --- OSC EXTRACT HEADER SECTION ---
 //
 // Select a single part of an OSC Message header
@@ -556,47 +559,30 @@ void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
 
 
 void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string) 
-{
-//	LOOM_DEBUG_Println("1");
-
-	
+{	
 	// This is done in case the bundle converts to a string larger than
 	// 251 characters before compression
 	char larger_buf[384];
 	memset(larger_buf, '\0', sizeof(larger_buf));
 
-//	LOOM_DEBUG_Println("2");
-	
 	original_convert_OSC_bundle_to_string(bndl, (char*)larger_buf);
-
-//	LOOM_DEBUG_Println("3");
 
 	const char* cPtr = nth_strchr(larger_buf, '/', 3);
 
 	// Only try to compress if possible 
 	int third_slash = cPtr - (char*)larger_buf;
 	if ( (third_slash > 0) && (third_slash < 30) ) {
-//		Serial.println(third_slash);
 		
 		char buf[30];
 		snprintf(buf, cPtr-larger_buf+2, "%s\0", larger_buf); // Copy compressable header to buf
-//		LOOM_DEBUG_Println("4");
 		str_replace((char*)cPtr, buf, "%");
 	}
-
-//	char buf[30];
-//	snprintf(buf, cPtr-larger_buf+2, "%s\0", larger_buf); // Copy compressable header to buf
-//  LOOM_DEBUG_Println("4");
-//	str_replace((char*)cPtr, buf, "%");
-//	LOOM_DEBUG_Println("5");
 	snprintf(osc_string, 250, "%s\0", larger_buf);
 
 	// Remove occasional trailing space
 	if (osc_string[strlen(osc_string)-1] == 32 ) {
 		osc_string[strlen(osc_string)-1] = '\0';
 	}
-
-//	LOOM_DEBUG_Println("6");
 }
 
 
@@ -943,21 +929,14 @@ void convert_bundle_structure(OSCBundle *bndl, BundleStructure format)
 //
 void convert_bundle_to_array_key_value(OSCBundle *bndl, String key_values[], int kv_len)
 {	
-	// LOOM_DEBUG_Println("In convert_bundle_to_array_key_value");
-
-
 	// Convert bundle to flat single message if not already
 	OSCBundle convertedBndl;	
-
-	// LOOM_DEBUG_Println("Created convertedBndl");
 
 	if (bndl->size() > 1)  {
 		convert_bundle_structure(bndl, &convertedBndl, SINGLEMSG); 
 	} else {
 		convertedBndl = *bndl;
 	} 
-
-	// LOOM_DEBUG_Println("After bndl size check");
 
 	// Make sure key_values array is large enough
 	if ( convertedBndl.getOSCMessage(0)->size() > kv_len ) {
@@ -969,11 +948,7 @@ void convert_bundle_to_array_key_value(OSCBundle *bndl, String key_values[], int
 	OSCMessage* msg = convertedBndl.getOSCMessage(0);	
 	for (int i = 0; i < msg->size(); i++) {
 		key_values[i] = get_data_value(msg, i);
-		// key_values[i] = String(i); 
 	}
-
-	// LOOM_DEBUG_Println("Done with convert_bundle_to_array_key_value");
-
 }
 
 
@@ -1018,19 +993,9 @@ void convert_bundle_to_arrays_assoc(OSCBundle *bndl, String keys[], String value
 template <typename T>
 void convert_bundle_to_array(OSCBundle *bndl, T data [], int len)
 {
-	// LOOM_DEBUG_Println("In convert bundle to array");
-
 	String tmp_strings[len];
-
-	// LOOM_DEBUG_Println("Created tmp_strings");
-
 	convert_bundle_to_array_key_value(bndl, tmp_strings, len);
-
-	// LOOM_DEBUG_Println("Before convert array");
-
 	convert_array(tmp_strings, data, len);
-
-	// LOOM_DEBUG_Println("Done with convert array");
 }
 
 
@@ -1130,7 +1095,7 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, ch
 	for (int i = 0; i < kv_len; i++) {
 		key_values[i].toCharArray(data, 50);
 
-		// If all are stringm, or assuming keys as strings, add data as a string
+		// If all are string, or assuming keys as strings, add data as a string
 		if ( (interpret == 3) || ((interpret <= 3) && (i%2==0)) ) {
 			tmpMsg.add(data);
 		} else {
@@ -1312,6 +1277,26 @@ void convert_array_assoc_to_key_value(String keys [], T values [], String key_va
 
 
 // ================================================================
+// ===              CONVERSION BETWEEN DATA TYPES               ===
+// ================================================================
+
+
+int convert_string_to_int(char * s) 
+{ return (int)strtol(s, NULL, 10); }
+
+float convert_string_to_float(char * s) 
+{ return strtof(s, NULL); }
+
+int convert_string_to_int(String s) 
+{ return (int)strtol(s.c_str(), NULL, 10); }
+
+float convert_string_to_float(String s) 
+{ return strtof(s.c_str(), NULL); }
+
+
+
+
+// ================================================================
 // ===              CONVERSION BETWEEN ARRAY TYPES              ===
 // ================================================================
 
@@ -1364,28 +1349,30 @@ void convert_array(Tin src [], Tout dest[], int count)
 // OVERLOADED function for appending to a single-message format OSC bundle
 // Will append to the first message of the bundle
 
-void append_to_bundle(OSCBundle *bndl, int elem) 
-{ 
-	bndl->getOSCMessage(0)->add((int32_t)elem); 
-}
+// void append_to_bundle(OSCBundle *bndl, int elem) 
+// { 
+// 	bndl->getOSCMessage(0)->add((int32_t)elem); 
+// }
 
-void append_to_bundle(OSCBundle *bndl, String elem)
-{ 
-	bndl->getOSCMessage(0)->add(elem.c_str()); 
-}
+// void append_to_bundle(OSCBundle *bndl, String elem)
+// { 
+// 	bndl->getOSCMessage(0)->add(elem.c_str()); 
+// }
 
-template <typename T> 
-void append_to_bundle(OSCBundle *bndl, T elem)
-{ 
-	bndl->getOSCMessage(0)->add(elem);
-}
+// template <typename T> 
+// void append_to_bundle(OSCBundle *bndl, T elem)
+// { 
+// 	bndl->getOSCMessage(0)->add(elem);
+// }
 
-template <typename T>
-void append_to_bundle(OSCBundle *bndl, T elements [], int count)
-{ 
-	for (int i = 0; i < count; i++) 
-		append_to_bundle(bndl, elements[i]); 
-}
+// template <typename T>
+// void append_to_bundle(OSCBundle *bndl, T elements [], int count)
+// { 
+// 	for (int i = 0; i < count; i++) 
+// 		append_to_bundle(bndl, elements[i]); 
+// }
+
+
 
 
 
