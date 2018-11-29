@@ -44,7 +44,7 @@
 								//   Device will freeze if this in enabled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
-#define dynamic_serial_output 0 // These only apply if LOOM_DEBUG is enabled
+#define dynamic_serial_output 1 // These only apply if LOOM_DEBUG is enabled
 								// 0 is standard operation 
 								//   - Serial monitor needs to start / be open for device to setup
 								//   - Serial (USB) can generally be detached after setup without issue 
@@ -104,9 +104,23 @@
 #if is_rtc == 1
 	#define RTC_pin 6		// What pin the RTC interrupt is connected to
 
+	#define adjust_to_utc 1 // 1 to use UTC time rather than local
+
+	#if adjust_to_utc == 1
+
+		// Ideally the enum isn't declared here ...
+		enum TimeZone { 
+			WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
+			ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
+			ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
+		};
+
+		TimeZone timezone = PST;
+	#endif
+
 	// Select only one of the below options
-	#define is_rtc3231 0 	// RTC DS 3231 Featherwing
-	#define is_rtc8523 1	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
+	#define is_rtc3231 1 	// RTC DS 3231 Featherwing
+	#define is_rtc8523 0	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
 #endif
 
 // --- SD Options ---
