@@ -15,9 +15,60 @@
 // ===                       DEFINITIONS                        === 
 // ================================================================
 
+
+// enum TimeZone : short {
+// 	// PST, ALDT, PDT, MST, MDT, CST, CDT, EST, EDT, AST, ALST, HST
+// 	WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
+// 	ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
+// 	ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
+// };
+
+// 8, // PST // 8, // ALDT // 7, // PDT // 7, // MST // 6, // MDT // 6, // CST // 5, // CDT // 5, // EST // 4, // EDT // 4, // AST // 9, // ALST // 10 // HST
+const float timezone_adjustment[34] =
+{
+	1, // WAT
+	2, // AT
+	3, // ADT
+	4, // AST
+	4, // EDT
+	5, // EST
+	5, // CDT
+	6, // CST
+	6, // MDT
+	7, // MST
+	7, // PDT
+	8, // PST
+	8, // ALDT
+	9, // ALST
+	10, // HST
+	11, // SST
+	0,  // GMT
+	-1, // BST
+	-1, // CET
+	-2, // CEST
+	-2, // EET
+	-3, // EEST
+	-3, // BT
+	-4, // ZP4
+	-5, // ZP5
+	-6, // ZP6
+	-7, // ZP7
+	-8, // AWST
+	-9, // AWDT
+	-9.5, // ACST
+	-10.5, // ACDT
+	-10, // AEST
+	-11 // AEDT
+};
+
+
+// TimeZone timezone = PST;
+
+
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 
+// These two are probably obsolete
 // const int hour_adjustment   = 0;
 // const int minute_adjustment = 0;
 
@@ -60,6 +111,7 @@ volatile bool LEDState   = false; // flag to toggle LED
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void  setup_rtc();
+void convert_local_to_utc();
 void  measure_rtc();
 char* get_datestring(); 
 char* get_timestring();
@@ -103,6 +155,12 @@ void setup_rtc() {
 				LOOM_DEBUG_Println("Time set to:");
 				print_time();
 			#endif
+
+			// Adjust to UTC time if enabled
+			// Only adjust if power was lost
+			#if adjust_to_utc == 1
+				convert_local_to_utc();
+			#endif
 		}
 
 	#elif is_rtc8523 == 1
@@ -113,6 +171,12 @@ void setup_rtc() {
 				LOOM_DEBUG_Println("Time set to:");
 				print_time();
 				LOOM_DEBUG_Println();
+			#endif
+
+			// Adjust to UTC time if enabled
+			// Only adjust if power was lost
+			#if adjust_to_utc == 1
+				convert_local_to_utc();
 			#endif
 		}
 	#endif
@@ -146,8 +210,12 @@ void setup_rtc() {
 
 		// Configure RTC Interrupt pin to be input
 		pinMode(RTC_pin, INPUT_PULLUP);
-
 	#endif	
+
+
+
+
+
 
 	// Query Time and print
 	// #if LOOM_DEBUG == 1
@@ -160,6 +228,24 @@ void setup_rtc() {
 // ================================================================
 // ===                        FUNCTIONS                         ===
 // ================================================================
+
+void convert_local_to_utc() 
+{
+	float adj = timezone_adjustment[timezone];
+	int min;
+
+	if ( (adj-(int)adj) == 0 ) { min = 0;
+	} else if ( (adj-(int)adj) > 0 ) { min = 30;
+	} else { min = -30; }
+
+	DateTime utc = rtc_inst.now() + TimeSpan(0, (int)adj, min, 0);
+	rtc_inst.adjust(utc);
+
+	LOOM_DEBUG_Println("Time adjusted to UTC time:");
+	print_time();
+	LOOM_DEBUG_Println();
+}
+
 
 void measure_rtc() { 
 	DateTime now = rtc_inst.now();
