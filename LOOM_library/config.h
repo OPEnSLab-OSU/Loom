@@ -108,7 +108,7 @@
 
 	#if adjust_to_utc == 1
 
-		// Ideally the enum isn't declared here ...
+		// Ideally the enum wouldn't be declared here ...
 		enum TimeZone { 
 			WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
 			ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 

@@ -1,4 +1,24 @@
 // ================================================================ 
+// ===                ACCESSSING SENSOR STRUCTS                 === 
+// ================================================================
+
+// state_as726X_0x49.violet
+// state_as726X_0x49.blue
+// state_as726X_0x49.green
+// state_as726X_0x49.yellow
+// state_as726X_0x49.orange
+// state_as726X_0x49.red
+
+// state_as726X_0x49.nir_r
+// state_as726X_0x49.nir_s
+// state_as726X_0x49.nir_t
+// state_as726X_0x49.nir_u
+// state_as726X_0x49.nir_v
+// state_as726X_0x49.nir_w
+
+
+
+// ================================================================ 
 // ===                        LIBRARIES                         === 
 // ================================================================
 #include "AS726X.h"

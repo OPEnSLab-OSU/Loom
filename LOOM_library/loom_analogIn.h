@@ -1,4 +1,16 @@
 // ================================================================ 
+// ===                ACCESSSING SENSOR STRUCTS                 === 
+// ================================================================
+
+// state_analog.a0
+// state_analog.a1
+// state_analog.a2
+// state_analog.a3
+// state_analog.a4
+// state_analog.a5
+
+
+// ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
 #define analog_resolution 12	// How many bits to read (normally defaults to 10, but M0 supports 12)
