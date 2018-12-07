@@ -115,14 +115,9 @@ void lora_receive_bundle(OSCBundle *bndl)
 			// LOOM_DEBUG_Println2("Received: ", larger_buf);
 			// LOOM_DEBUG_Println2("Len: ", strlen((const char*)larger_buf));
 
-
 			convert_OSC_string_to_bundle((char*)larger_buf, bndl); 
 
-
-
-			bool filtered = !subnet_filter(bndl, lora_subnet_scope);
-
-			if (filtered) {
+			if ( !subnet_filter(bndl, lora_subnet_scope) ) {
 				LOOM_DEBUG_Println("Received LoRa bundle out of scope");
 			}
 
@@ -131,6 +126,38 @@ void lora_receive_bundle(OSCBundle *bndl)
 }
 
 
+
+
+
+
+// --- LORA SEND BUNDLE
+//
+// Sends an OSC Bundle over LoRa after converting the bundle 
+// to an equivalent string
+//
+// @param bndl  OSC Bundle to send (will be converted to string)
+//
+// @return Whether or not bundle send was successful
+//
+bool lora_send_bundle(OSCBundle *bndl, uint16_t destination)
+{
+	char message[LORA_MESSAGE_SIZE];
+	memset(message, '\0', sizeof(message));
+	convert_OSC_bundle_to_string(bndl, message);
+
+	LOOM_DEBUG_Println(message);
+	LOOM_DEBUG_Println2("Message length: ", strlen(message));
+	 
+	bool is_sent = manager.sendtoWait((uint8_t*)message, strlen(message)+1, destination);
+
+	if (is_sent) {	
+		LOOM_DEBUG_Println("Sent bundle through LoRa!");
+	} else {
+		LOOM_DEBUG_Println("Failed to send bundle!");
+	}
+
+	return is_sent;
+}
 
 
 
@@ -192,25 +219,25 @@ bool lora_send_bundle(OSCBundle *bndl)
 
 
 
-bool lora_send_bundle_fragment(OSCBundle *bndl)
-{
-	LOOM_DEBUG_Println2("Bundle of size ", get_bundle_bytes(bndl));
-	LOOM_DEBUG_Println(" Being split into smaller bundles");
+// bool lora_send_bundle_fragment(OSCBundle *bndl)
+// {
+// 	LOOM_DEBUG_Println2("Bundle of size ", get_bundle_bytes(bndl));
+// 	LOOM_DEBUG_Println(" Being split into smaller bundles");
 
-	OSCBundle tmp_bndl;
-	OSCMessage *tmp_msg;
+// 	OSCBundle tmp_bndl;
+// 	OSCMessage *tmp_msg;
 
-	for (int i = 0; i < bndl->size(); i+=5) {
-		for (int j = 0; j < 5; j++) {
-			if ((i+j) >= bndl->size()) break;
-			tmp_msg = bndl->getOSCMessage(i+j);
-			tmp_bndl.add(*tmp_msg);	
-		}
-		print_bundle(&tmp_bndl);
-		lora_send_bundle(&tmp_bndl);
-		tmp_bndl.empty();
-	}
-}
+// 	for (int i = 0; i < bndl->size(); i+=5) {
+// 		for (int j = 0; j < 5; j++) {
+// 			if ((i+j) >= bndl->size()) break;
+// 			tmp_msg = bndl->getOSCMessage(i+j);
+// 			tmp_bndl.add(*tmp_msg);	
+// 		}
+// 		print_bundle(&tmp_bndl);
+// 		lora_send_bundle(&tmp_bndl);
+// 		tmp_bndl.empty();
+// 	}
+// }
 
 
 

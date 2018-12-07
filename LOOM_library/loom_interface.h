@@ -272,7 +272,7 @@ void package_data(OSCBundle *bndl)
 
 	// Update MPU6050 Data
 	#if is_mpu6050 == 1
-		LOOM_DEBUG_Println("PACKAGE MPU");
+		// LOOM_DEBUG_Println("PACKAGE MPU");
 		package_mpu6050(bndl, configuration.packet_header_string, 0);
 	#endif 
 
