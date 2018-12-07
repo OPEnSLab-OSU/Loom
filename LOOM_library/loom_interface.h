@@ -370,8 +370,8 @@ void package_data(OSCBundle *bndl)
 // 
 // void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 
-void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port)
-// void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
+// void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port)
+void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
 {
 	if (!send_bndl->size()) return;
 
@@ -399,11 +399,13 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port)
 
 // Overloaded version that doesn't take the optional UDP port 
 // If WiFi, calling this function will default to Device Unique port
-void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
-{
-	send_bundle(send_bndl, platform, configuration.instance_number);
-}
+// void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
+// {
+// 	send_bundle(send_bndl, platform, configuration.instance_number);
+// }
 
+
+// Will probably add an extra function, or overload to specify destination or broadcast
 
 
 // --- LOG BUNDLE ---

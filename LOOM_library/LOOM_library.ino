@@ -55,7 +55,7 @@ void loop()
 	print_bundle(&bndl);
 
 	// send_bundle(&bndl, NRF);
-	send_bundle(&bndl, NRF, 00);
+	nrf_send_bundle(&bndl, 00);
 
 	delay(1000);
 

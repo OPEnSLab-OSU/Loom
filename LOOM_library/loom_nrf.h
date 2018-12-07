@@ -53,24 +53,6 @@ void setup_nrf()
 	radio.begin();
 
 
-	// Probably needs to be handled differently 
-	// for nodes and hubs
-
-	// #if hub_node_type == 0
-	// 	network.begin(90, 00);
-	// #elif hub_node_type == 1
-	// 	network.begin(90, 01);		
-	// #endif
-		
-
-
-
-
-
-
-// bool RF24::setDataRate	(	rf24_datarate_e 	speed	)	
-// speed	RF24_250KBPS for 250kbs, RF24_1MBPS for 1Mbps, or RF24_2MBPS for 2Mbps
-
 	// Set data rate
 	LOOM_DEBUG_Print("Setting nRF data rate to: ");
 	switch (nrf_data_rate) {
@@ -87,14 +69,10 @@ void setup_nrf()
 			LOOM_DEBUG_Println("2 Mbps");
 			break;
 	}
-
-	LOOM_DEBUG_Println2("nRF data rate : ", radio.getDataRate() );
+	// LOOM_DEBUG_Println2("nRF data rate : ", radio.getDataRate() );
 
 
 	// Set power level
-
-// RF24_PA_MIN, RF24_PA_LOW, RF24_PA_HIGH and RF24_PA_MAX
-// 1: RF24_PA_MIN (-18dBm), 2: RF24_PA_LOW (-12dBm), 3: RF24_PA_HIGH (-6dBM), 4: RF24_PA_MAX (0dBm)
 	LOOM_DEBUG_Print("Setting nRF power level to: ");
 	switch (nrf_power_level) {
 		case -1: 
@@ -113,16 +91,8 @@ void setup_nrf()
 			LOOM_DEBUG_Println("RF24_PA_MAX (0dBm)");
 			break;
 	}
-	LOOM_DEBUG_Println2("nRF power level : ", radio.getPALevel() );
+	// LOOM_DEBUG_Println2("nRF power level : ", radio.getPALevel() );
 
-
-
-// void RF24::setRetries	(	uint8_t 	delay,
-							//  uint8_t 	count 
-// )	
-
-// delay	How long to wait between each retry, in multiples of 250us, max is 15. 0 means 250us, 15 means 4000us.
-// count	How many retries before giving up, max 15
 
 	// Set retry behavior
 	if (  ( (nrf_retry_delay >= 0) && (nrf_retry_delay <= 15) ) &&
@@ -137,16 +107,17 @@ void setup_nrf()
 
 
 
-
 	// network.begin(90, this_node); // determine good way to convert change to octal address?
 
 
-	#if hub_node_type == 0
-		network.begin(90, NRF_HUB_ADDRESS);
-	#elif hub_node_type == 1
-		network.begin(90, NRF_NODE_ADDRESS);		
-	#endif
-		
+	// #if hub_node_type == 0
+	// 	network.begin(90, NRF_HUB_ADDRESS);
+	// #elif hub_node_type == 1
+	// 	network.begin(90, NRF_NODE_ADDRESS);		
+	// #endif
+
+	network.begin(90, NRF_SELF_ADDRESS); // determine good way to convert change to octal address?
+
 
 	
 	LOOM_DEBUG_Println("nRF Setup Complete");

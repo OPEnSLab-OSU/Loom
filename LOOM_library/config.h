@@ -429,15 +429,31 @@
 
 // --- nRF Options --- 
 #if is_nrf == 1
+	// #if hub_node_type == 0 	// If is hub
+	// 	#define NRF_HUB_ADDRESS  00		// Self
+	// 	#define NRF_NODE_ADDRESS 01		// Default node to communicate with 
+	// #else 					// If is node
+	// 	#define NRF_HUB_ADDRESS  00		// Hub to communicate with
+	// 	#define NRF_NODE_ADDRESS 01		// Self
+	// #endif
+
 	#if hub_node_type == 0 	// If is hub
-		#define NRF_HUB_ADDRESS  00		// Self
+		#define NRF_SELF_ADDRESS  00		// Self
 		#define NRF_NODE_ADDRESS 01		// Default node to communicate with 
 	#else 					// If is node
 		#define NRF_HUB_ADDRESS  00		// Hub to communicate with
-		#define NRF_NODE_ADDRESS 01		// Self
+		#define NRF_SELF_ADDRESS 01		// Self
 	#endif
 
-	// Node address should be 00-05
+
+	// #define NRF_SELF_ADDRESS 01
+
+	// // Default other devices to communicate to
+	// #define NRF_NODE_ADDRESS 02
+	// #define NRF_HUB_ADDRESS 00
+
+
+	// Node addresses should be 00-05
 
 
 
