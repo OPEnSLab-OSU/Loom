@@ -569,7 +569,7 @@ void send_sensors(OSCBundle *bndl, char packet_header_string[])
 //
 void package_tca9548a(OSCBundle *bndl, char packet_header_string[])
 {
-	LOOM_DEBUG_Println("Packaging data from devices connected to tca9548a (Multiplexer).");
+	// LOOM_DEBUG_Println("Packaging data from devices connected to tca9548a (Multiplexer).");
 	
 	// LOOM_DEBUG_Println2("Update period: ", state_tca9548a.mux_update_period);
 	

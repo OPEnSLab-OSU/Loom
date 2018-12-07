@@ -39,7 +39,7 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		LOOM_DEBUG_Println3("Will try to route on: '", buffer, "'"); 
 	#endif
 
-	#if is_multiplexer
+	#if is_multiplexer == 1
 		if (msg.fullMatch("/GetSensors", addrOffset)) {
 			msg.add(configuration.packet_header_string);
 			LOOM_DEBUG_Println("Got a request for sensor list");

@@ -8,6 +8,7 @@
 #include "config.h"
 
 
+
 // Preamble includes any relevant subroutine files based 
 // on options specified in the above config
 #include "loom_preamble.h"
@@ -35,16 +36,68 @@ void loop()
 	
 	// --- Basic Example
 
+	// NRF NODE
+
+	receive_bundle(&bndl, NRF);		// Read sensors, store data in sensor state struct
+	if (bndl.size()) {
+		LOOM_DEBUG_Println("\n\n\nRecieved bundle from hub");
+		print_bundle(&bndl);
+
+
+		LOOM_DEBUG_Println("End of bundle from hub\n\n\n");
+	}
+
+
+
 	measure_sensors();					// Read sensors, store data in sensor state struct
 	package_data(&bndl);			// Copy sensor data from state to provided bundle
 	
 	print_bundle(&bndl);
+
+	// send_bundle(&bndl, NRF);
+	send_bundle(&bndl, NRF, 00);
 
 	delay(1000);
 
 	additional_loop_checks();			// Miscellaneous checks
 
 	// --- End Example ---
+
+
+
+
+	// NRF HUB
+
+	// if ( (millis() - lastMillis) > 5000 ) {
+
+
+	// 	LOOM_DEBUG_Println("\n\n\nSending bundle to node");
+		
+	// 	char address_string[80]; 
+	// 	sprintf(address_string, "%s%s", configuration.packet_header_string, "/number");
+	// 	bndl.add(address_string).add((int32_t)i++); 
+
+	// 	print_bundle(&bndl);
+
+	// 	send_bundle(&bndl, NRF);
+	// 	bndl.empty();
+
+	// 	lastMillis = millis();
+
+	// 	LOOM_DEBUG_Println("Done Sending bundle to node\n\n\n");
+
+	// }
+
+
+	// receive_bundle(&bndl, NRF);
+
+	// print_bundle(&bndl); 
+
+	// additional_loop_checks();
+	// // --- End Example ---
+
+
+
 
 
 
@@ -120,9 +173,12 @@ void loop()
 
 	// measure_sensors();					// Read sensors, store data in sensor state struct
 	// package_data(&bndl);			// Copy sensor data from state to provided bundle
-	
+
+	// // print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
+
 	// send_bundle(&bndl, WIFI);		// Send bundle of packaged data
-	// log_bundle(&bndl, PUSHINGBOX);	// Send bundle to Google Sheet
+	// // log_bundle(&bndl, PUSHINGBOX);	// Send bundle to Google Sheet
+	// // log_bundle(&bndl, SDCARD, "Ishield.csv");	// Send bundle to Google Sheet
 
 	// additional_loop_checks();			// Miscellaneous checks
 	// // --- End Example ---

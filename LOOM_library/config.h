@@ -44,7 +44,7 @@
 								//   Device will freeze if this in enabled and device does not get plugged into Serial
 								// LOOM_DEBUG_Print* are Serial prints that are removed if debugging is off
 
-#define dynamic_serial_output 1 // These only apply if LOOM_DEBUG is enabled
+#define dynamic_serial_output 0 // These only apply if LOOM_DEBUG is enabled
 								// 0 is standard operation 
 								//   - Serial monitor needs to start / be open for device to setup
 								//   - Serial (USB) can generally be detached after setup without issue 
@@ -77,7 +77,7 @@
 // Further options in the advanced settings
 // Can override settings defined before the aggregate devices
 
-#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
+#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
 #define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
@@ -88,7 +88,7 @@
 // ================================================================
 #define is_wifi       0		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
-#define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
+#define is_nrf        1		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808 version)
 
@@ -295,7 +295,7 @@
 #if is_ishield == 1
 	#define is_button     1			// 1 to enable button
 	#define button_pin    10		// Pin that the button uses
-	#define is_mpu6050    0 		// Enables MPU6050 on Ishield
+	#define is_mpu6050    1 		// Enables MPU6050 on Ishield
 	#define is_neopixel   1			// Toggle based on whether Neopixels are being used 
 	#define is_analog     1
 
@@ -430,12 +430,33 @@
 // --- nRF Options --- 
 #if is_nrf == 1
 	#if hub_node_type == 0 	// If is hub
-		#define NRF_HUB_ADDRESS  CHANNEL
-		#define NRF_NODE_ADDRESS 1
+		#define NRF_HUB_ADDRESS  00		// Self
+		#define NRF_NODE_ADDRESS 01		// Default node to communicate with 
 	#else 					// If is node
-		#define NRF_HUB_ADDRESS  1			
-		#define NRF_NODE_ADDRESS CHANNEL
+		#define NRF_HUB_ADDRESS  00		// Hub to communicate with
+		#define NRF_NODE_ADDRESS 01		// Self
 	#endif
+
+	// Node address should be 00-05
+
+
+
+	#define nrf_data_rate -1 		// 1: 250kbs, 2: 1Mbps, 3: 2Mbps
+									// -1: use default (1Mbps)
+									// setting RF24_250KBPS will fail for non-plus units (not sure what this means)
+
+	#define nrf_power_level -1		// 1: RF24_PA_MIN (-18dBm), 2: RF24_PA_LOW (-12dBm), 3: RF24_PA_HIGH (-6dBM), 4: RF24_PA_MAX (0dBm)
+									// -1 to use default (-18dBm)
+
+	#define nrf_retry_delay	-1		// How long to wait between each retry, in multiples of 250us, max is 15. 0 means 250us, 15 means 4000us.
+									// -1 to use default (5) 
+	#define nrf_retry_count -1		// How many retries before giving up, max 15
+									// -1 to use default (15)
+
+									// Need to see 
+
+
+
 
 	// #define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 											// Currently unused
