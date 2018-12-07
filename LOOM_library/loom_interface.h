@@ -7,8 +7,14 @@ void receive_bundle(OSCBundle *bndl, CommPlatform platform);
 void process_bundle(OSCBundle *bndl);
 void measure_sensors();
 void package_data(OSCBundle *bndl);
-void send_bundle( OSCBundle *send_bndl, CommPlatform platform, int port);
-void send_bundle( OSCBundle *send_bndl, CommPlatform platform);
+// void send_bundle( OSCBundle *send_bndl, CommPlatform platform, int port);
+// void send_bundle( OSCBundle *send_bndl, CommPlatform platform);
+
+
+void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int16_t destination);
+void send_bundle(OSCBundle *send_bndl, CommPlatform platform);
+
+
 void log_bundle(  OSCBundle *send_bndl, LogPlatform  platform, char* file); //filename for SD files
 void log_bundle(  OSCBundle *send_bndl, LogPlatform  platform);
 bool bundle_empty(OSCBundle *bndl);
@@ -371,31 +377,31 @@ void package_data(OSCBundle *bndl)
 // void send_bundle(OSCBundle *send_bndl, Platform platform, char* file)
 
 // void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int port)
-void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
-{
-	if (!send_bndl->size()) return;
+// void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
+// {
+// 	if (!send_bndl->size()) return;
 
-	switch(platform) {
-		#if is_wifi == 1
-			case WIFI : wifi_send_bundle(send_bndl); break;
-			// case WIFI : wifi_send_bundle(send_bndl, port); break;
-		#endif
+// 	switch(platform) {
+// 		#if is_wifi == 1
+// 			case WIFI : wifi_send_bundle(send_bndl); break;
+// 			// case WIFI : wifi_send_bundle(send_bndl, port); break;
+// 		#endif
 
-		#if is_lora == 1
-			case LORA : lora_send_bundle(send_bndl); break;
-				// (!lora_bundle_fragment) ? lora_send_bundle(send_bndl) : lora_send_bundle_fragment(send_bndl); break;
-		#endif
+// 		#if is_lora == 1
+// 			case LORA : lora_send_bundle(send_bndl); break;
+// 				// (!lora_bundle_fragment) ? lora_send_bundle(send_bndl) : lora_send_bundle_fragment(send_bndl); break;
+// 		#endif
 
-		#if is_nrf == 1
-			case NRF : nrf_send_bundle(send_bndl); break;
-				// (!nrf_bundle_fragment) ? nrf_send_bundle(send_bndl) : nrf_send_bundle_fragment(send_bndl); break;
-		#endif
+// 		#if is_nrf == 1
+// 			case NRF : nrf_send_bundle(send_bndl); break;
+// 				// (!nrf_bundle_fragment) ? nrf_send_bundle(send_bndl) : nrf_send_bundle_fragment(send_bndl); break;
+// 		#endif
 		
-		#if LOOM_DEBUG == 1
-			default : Serial.println("That platform is not enabled for sending");
-		#endif 
-	} // of switch
-}
+// 		#if LOOM_DEBUG == 1
+// 			default : Serial.println("That platform is not enabled for sending");
+// 		#endif 
+// 	} // of switch
+// }
 
 // Overloaded version that doesn't take the optional UDP port 
 // If WiFi, calling this function will default to Device Unique port
@@ -406,6 +412,47 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
 
 
 // Will probably add an extra function, or overload to specify destination or broadcast
+
+
+void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int16_t destination)
+{
+	if (!send_bndl->size()) return;
+
+	switch(platform) {
+		#if is_wifi == 1
+			case WIFI : wifi_send_bundle(send_bndl); 
+			break;
+		#endif
+
+		#if is_lora == 1
+			case LORA : lora_send_bundle(send_bndl); 
+			break;
+		#endif
+
+		#if is_nrf == 1
+			case NRF : 
+			(destination > 0) 
+				? nrf_send_bundle(send_bndl, destination) 
+				: nrf_send_bundle(send_bndl); 
+			break;
+		#endif
+		
+		#if LOOM_DEBUG == 1
+			default : Serial.println("That platform is not enabled for sending");
+		#endif 
+	} // of switch
+}
+
+void send_bundle(OSCBundle *send_bndl, CommPlatform platform)
+{
+	send_bundle(send_bndl, platform, -1);
+}
+
+// Not sure yet if broadcast will be:
+
+// send_bundle(bndl, platform, 255);
+//  or
+// broadcast_bundle(bndl, platform);
 
 
 // --- LOG BUNDLE ---
