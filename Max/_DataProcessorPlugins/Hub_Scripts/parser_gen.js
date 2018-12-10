@@ -33,48 +33,8 @@ function createBpatcher(file)
 	if(numtracks<=255)
 	{
 		switch (file) {
-			case "neopixel": 
-				dimensions = ["150", "200"]; break;
-			case "ishield_monitor": 
-				dimensions = ["150", "220"]; break;
-			// case "channel_manager":
-				// dimensions = ["325", "250"]; break;
-			case "analog_monitor":
-				dimensions = ["150", "140"]; break;
-			case "relay":
-				dimensions = ["150", "125"]; break;
-			case "servo":
-				dimensions = ["150", "160"]; break;
-			case "decagon":
-				dimensions = ["150", "140"]; break;
-			case "stepper_motor":
-				dimensions = ["150", "200"]; break;	
-			case "multiplexer":
-				dimensions = ["150", "225"]; break;
-			case "stepper_motor_extension":
-				dimensions = ["270", "225"]; break;	
-			case "analog_to_uv":
-				dimensions = ["80", "120"]; break;
-			case "threshold":
-				dimensions = ["105", "145"]; break;
-			case "scaleLin":
-				dimensions = ["175", "145"]; break;
-			case "rangeSetter":
-				dimensions = ["160", "115"]; break;
-			case "scaleCurve":
-				dimensions = ["155", "220"]; break;
-			case "smooth":
-				dimensions = ["175", "130"]; break;
-			case "servo_pan_tilt":
-				dimensions = ["150", "180"]; break;
-			case "save_to_csv":
-				dimensions = ["140", "165"]; break;
-			case "sd_controller":
-				dimensions = ["150", "100"]; break;
-			case "channel_manager":
-				dimensions = ["195", "470"]; break;
 			default: 
-				dimensions = ["250", "150"]; break;
+				dimensions = ["200", "38"]; break;
 		}
 
 		// offset = (numtracks*175); // Use this offset if desiring scrolling
@@ -84,6 +44,7 @@ function createBpatcher(file)
 		"@varname", 
 		"obj["+numtracks+"]",
 		"@name", file,
+		// "@patching_rect", "300", (offset+10)+(numtracks)*50, dimensions[0], dimensions[1],
 		"@patching_rect", "300", (offset+10), dimensions[0], dimensions[1],
 		"@presentation_rect", "10", (offset+50), dimensions[0], dimensions[1],
 		"@border", "1",

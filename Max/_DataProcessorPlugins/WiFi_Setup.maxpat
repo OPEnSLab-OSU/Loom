@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 675.0, 79.0, 731.0, 787.0 ],
+		"rect" : [ 675.0, 79.0, 436.0, 787.0 ],
 		"bgcolor" : [ 0.878431, 0.878431, 0.858824, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -117,7 +117,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 755.5, 227.0, 39.0, 25.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 250.0, 8.0, 36.0, 24.0 ],
+					"presentation_rect" : [ 106.0, 8.0, 36.0, 24.0 ],
 					"rounded" : 15.0,
 					"style" : "",
 					"text" : "Help",
@@ -472,7 +472,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 416.0, 223.0, 120.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 141.0, 39.300003, 115.0, 22.0 ],
+					"presentation_rect" : [ 17.5, 89.299988, 115.0, 22.0 ],
 					"style" : "",
 					"text" : "Client Mode Config",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -491,7 +491,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 221.0, 117.0, 39.0, 25.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 23.0, 97.0, 58.0, 25.0 ],
+					"presentation_rect" : [ 7.0, 42.799988, 44.0, 34.0 ],
 					"rounded" : 15.0,
 					"style" : "",
 					"text" : "Send",
@@ -726,7 +726,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 384.0, 69.0, 200.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 38.300003, 90.0, 47.0 ],
+					"presentation_rect" : [ 59.0, 38.299988, 83.0, 44.0 ],
 					"style" : "",
 					"tabs" : [ "Access Point", "Client" ]
 				}
@@ -914,7 +914,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 16.5, 12.833374, 82.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 8.0, 237.0, 24.0 ],
+					"presentation_rect" : [ 7.0, 8.0, 93.0, 24.0 ],
 					"style" : "",
 					"text" : "WiFi Setup",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
@@ -998,7 +998,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 479.333344, 292.0, 74.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 180.0, 99.0, 99.0, 22.0 ],
+					"presentation_rect" : [ 51.0, 147.0, 87.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -1025,9 +1025,9 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 395.333344, 258.0, 58.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 114.5, 73.300003, 61.0, 21.0 ],
+					"presentation_rect" : [ 9.5, 121.299988, 36.0, 21.0 ],
 					"style" : "",
-					"text" : "Network",
+					"text" : "SSID",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"textjustification" : 1
 				}
@@ -1055,9 +1055,9 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 479.333344, 258.0, 66.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 114.5, 99.0, 60.0, 21.0 ],
+					"presentation_rect" : [ 9.5, 147.0, 36.0, 21.0 ],
 					"style" : "",
-					"text" : "Password",
+					"text" : "Pass",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"textjustification" : 1
 				}
@@ -1074,7 +1074,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 395.333344, 292.0, 74.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 180.0, 73.300003, 99.0, 22.0 ],
+					"presentation_rect" : [ 51.0, 121.299988, 87.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -1092,7 +1092,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 384.0, 164.0, 33.5, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 107.0, 65.0, 179.0, 63.0 ],
+					"presentation_rect" : [ 4.0, 114.0, 142.0, 61.0 ],
 					"proportion" : 0.39,
 					"style" : ""
 				}
@@ -1111,7 +1111,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 16.5, 47.0, 33.5, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 295.0, 135.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 150.0, 180.0 ],
 					"proportion" : 0.39,
 					"style" : ""
 				}

@@ -388,3 +388,12 @@ function cal_mpu()
 	send( build_msg( '/cal_MPU6050', [] ) );	
 }
 
+function sheet_id(s)
+{
+	send( build_msg( '/SetSpreadSheetID', [s] ) );	
+}
+
+function upload_interval(d)
+{
+	send( build_msg( '/SetPushMinDelay', [d] ) );	
+}
