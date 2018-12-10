@@ -10,11 +10,6 @@
 #define NRF_MESSAGE_SIZE 120
 // Though most documentation says 32 byte max
 
-// const uint16_t this_node = 01;
-// const uint16_t other_node = 00;
-
-
-
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -33,13 +28,12 @@ RF24Network network(radio);      // Network uses that radio
 // ================================================================
 void setup_nrf();
 void nrf_receive_bundle(OSCBundle *);
-bool nrf_send_bundle(OSCBundle *);
 bool nrf_send_bundle(OSCBundle *bndl, uint16_t destination);
-
+bool nrf_send_bundle(OSCBundle *);
 bool nrf_multicast_bundle(OSCBundle *bndl, uint8_t level);
 bool nrf_multicast_bundle(OSCBundle *bndl);
 
-bool nrf_send_bundle_fragment(OSCBundle *bndl);
+// bool nrf_send_bundle_fragment(OSCBundle *bndl);
 
 // ================================================================
 // ===                          SETUP                           ===
@@ -137,8 +131,7 @@ void nrf_receive_bundle(OSCBundle *bndl)
 		memset(buf, '\0', NRF_MESSAGE_SIZE);
 		network.read(header, &buf, NRF_MESSAGE_SIZE-1);
 
-
-		LOOM_DEBUG_Println2("Compressed buf :", buf);
+		// LOOM_DEBUG_Println2("Compressed buf :", buf);
 
 		// This is done just in case the compressed string
 		// uncompresses to more than 251 characters
@@ -147,48 +140,14 @@ void nrf_receive_bundle(OSCBundle *bndl)
 		strcpy(larger_buf, (const char*)buf);
 
 		convert_OSC_string_to_bundle((char*)larger_buf, bndl); 
-		// convert_OSC_string_to_bundle(buf, bndl);
 		
+		// Apply filtering based on family and subnet
 		if ( !subnet_filter(bndl, nrf_subnet_scope) ) {
 			LOOM_DEBUG_Println("Received nRF bundle out of scope");
 		}
 
 	} // of while ( network.available() )
 }
-
-// Use this to apply the compression to nRF as well
-
-// void lora_receive_bundle(OSCBundle *bndl)
-// {
-// 	if (manager.available()) {
-// 		uint8_t len = LORA_MESSAGE_SIZE;
-// 		uint8_t from;
-// 		uint8_t buf[LORA_MESSAGE_SIZE];
-// 		memset(buf, '\0', LORA_MESSAGE_SIZE);
-// 		if (manager.recvfromAck(buf, &len, &from)) {
-
-// 			lora_last_rssi = rf95.lastRssi();
-
-// 			// LOOM_DEBUG_Println("Receiving");
-// 			// This is done just in case the compressed string
-// 			// uncompresses to more than 251 characters
-// 			char larger_buf[384];
-// 			memset(larger_buf, '\0', sizeof(larger_buf));
-// 			strcpy(larger_buf, (const char*)buf);
-
-// 			// LOOM_DEBUG_Println2("Received: ", larger_buf);
-// 			// LOOM_DEBUG_Println2("Len: ", strlen((const char*)larger_buf));
-
-// 			convert_OSC_string_to_bundle((char*)larger_buf, bndl); 
-
-// 			if ( !subnet_filter(bndl, lora_subnet_scope) ) {
-// 				LOOM_DEBUG_Println("Received LoRa bundle out of scope");
-// 			}
-
-// 		} // of if (manager.recvfromAck(buf, &len, &from))
-// 	} // of if (manager.available()) 
-// }
-
 
 
 
@@ -252,6 +211,8 @@ bool nrf_multicast_bundle(OSCBundle *bndl)
 
 
 
+// Compression added to reduce need for fragmenting
+// nRF library does fragmentation anyways (not sure if it is automatic)
 
 // bool nrf_send_bundle_fragment(OSCBundle *bndl)
 // {
