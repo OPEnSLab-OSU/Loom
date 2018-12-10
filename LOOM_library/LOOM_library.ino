@@ -27,117 +27,26 @@ void setup()
 	// Any custom setup code
 }
 
-unsigned long lastMillis;   
-int i = 0;
-
 // ================================================================ 
 // ===                        MAIN LOOP                         ===
 // ================================================================ 
 void loop() 
 {
 	
-	// --- Basic Example
-
-	// NRF NODE
-
-	receive_bundle(&bndl, NRF);		// Read sensors, store data in sensor state struct
-	if (bndl.size()) {
-		LOOM_DEBUG_Println("\n\n\nRecieved bundle from hub");
-		print_bundle(&bndl);
 
 
-		LOOM_DEBUG_Println("End of bundle from hub\n\n\n");
-	}
+	// --- Basic Example ---
 
-
-
-// 	measure_sensors();					// Read sensors, store data in sensor state struct
-// 	package_data(&bndl);			// Copy sensor data from state to provided bundle
-	
-// 	print_bundle(&bndl);
-
-// 	// send_bundle(&bndl, NRF);
-// 	// nrf_send_bundle(&bndl, 00);
-// // 
-// 	// LOOM_DEBUG_Println("\n\n");
-// 	// send_bundle(&bndl, LORA, 1);
-// 		send_bundle(&bndl, LORA, 255);
-
-// 	LOOM_DEBUG_Println("\n\n");
-
-
-
-// 	delay(1000);
-
-
-
-
-	if ( (millis() - lastMillis) > 3000 ) {
-
-
-		LOOM_DEBUG_Println("\n\n\nSending bundle to hub");
-		
-			measure_sensors();					// Read sensors, store data in sensor state struct
+	measure_sensors();					// Read sensors, store data in sensor state struct
 	package_data(&bndl);			// Copy sensor data from state to provided bundle
 	
 	print_bundle(&bndl);
 
-//		send_bundle(&bndl, LORA);
-		// send_bundle(&bndl, NRF, 00);
-		send_bundle(&bndl, NRF);
-
-
-//		nrf_multicast_bundle(&bndl, 1);
-
-		bndl.empty();
-
-		lastMillis = millis();
-
-		LOOM_DEBUG_Println("Done Sending bundle to hub\n\n\n");
-
-	}
-
-
+	delay(1000);
 
 	additional_loop_checks();			// Miscellaneous checks
 
 	// --- End Example ---
-
-
-
-
-	// NRF HUB
-
-	// if ( (millis() - lastMillis) > 5000 ) {
-
-
-	// 	LOOM_DEBUG_Println("\n\n\nSending bundle to node");
-		
-	// 	char address_string[80]; 
-	// 	sprintf(address_string, "%s%s", configuration.packet_header_string, "/number");
-	// 	bndl.add(address_string).add((int32_t)i++); 
-
-	// 	print_bundle(&bndl);
-
-	// 	send_bundle(&bndl, NRF);
-	// 	bndl.empty();
-
-	// 	lastMillis = millis();
-
-	// 	LOOM_DEBUG_Println("Done Sending bundle to node\n\n\n");
-
-	// }
-
-
-	// receive_bundle(&bndl, NRF);
-
-	// print_bundle(&bndl); 
-
-	// additional_loop_checks();
-	// // --- End Example ---
-
-
-
 
 
 
