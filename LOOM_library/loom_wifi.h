@@ -161,7 +161,7 @@ void setup_wifi(char packet_header_string[])
 	OSCMessage tmp = new OSCMessage("tmp");	
 	broadcastIP(tmp);
 
-	// printWiFiStatus();
+	printWiFiStatus();
 }
 
 
@@ -214,15 +214,19 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port, char 
 
 	if (packetSize > 0) {
 		LOOM_DEBUG_Println("=========================================");
-		LOOM_DEBUG_Println2("Received packet of size: ", packetSize);
-		LOOM_DEBUG_Println2(" on port ", port);
+		LOOM_DEBUG_Print2("Received packet of size: ", packetSize);
+		LOOM_DEBUG_Print2(" on port ", port);
 		LOOM_DEBUG_Println3(" (", type, ")");
 		
 		bndl->empty();             // Empty previous bundle
 		while (packetSize--){      // Read in new bundle
 			bndl->fill(Udp->read());
 		}
+
+		// LOOM_DEBUG_Println("WIFI BUNDLE A");
+		// print_bundle(bndl);
 	} // of (packetSize > 0)
+
 }
 
 
