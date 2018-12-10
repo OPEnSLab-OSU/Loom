@@ -3,6 +3,10 @@
 // ===                   FUNCTION PROTOTYPE                     === 
 // ================================================================
 
+
+// in Loom 2.0, each function should have a display_config() 
+// method to reduce the number updates that need to be made here
+
 void print_config()
 {
 	LOOM_DEBUG_Println("\n\n= = = = = Start Configuration Display = = = = =\n");

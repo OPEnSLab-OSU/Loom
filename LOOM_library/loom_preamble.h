@@ -76,7 +76,7 @@
 // ===                 COMMON GLOBAL VARIABLES                  ===
 // ================================================================
 
-OSCBundle     bndl;
+// OSCBundle     bndl;    // Caused issues with Max when declared globally
 
 int           led = LED_BUILTIN;              	// LED pin number
 float         vbat;                    	 		// Place to save measured battery voltage (3.3V max)
