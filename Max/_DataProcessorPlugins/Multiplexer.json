@@ -6,6 +6,11 @@
 			"gx" : "-0.01 0.01",
 			"gy" : "-0.01 0.01",
 			"gz" : "-0.01 0.01"
+		},
+		"units" : {
+			"gx" : "°/s",
+			"gy" : "°/s",
+			"gz" : "°/s"
 		}
 
 	}
@@ -20,6 +25,14 @@
 			"mx" : "-1200 1200",
 			"my" : "-1200 1200",
 			"mz" : "-1200 1200"
+		},
+		"units" : {
+			"ax" : "g",
+			"ay" : "g",
+			"az" : "g",
+			"mx" : "μT",
+			"my" : "μT",
+			"mz" : "μT"
 		}
 
 	}
@@ -29,6 +42,9 @@
 		"fields" : [ "range" ],
 		"ranges" : 		{
 			"range" : "0 800"
+		},
+		"units" : {
+			"range" : "cm"
 		}
 
 	}
@@ -39,6 +55,23 @@
 		"ranges" : 		{
 			"temp" : "0 100",
 			"humid" : "0 100"
+		},
+		"units" : {
+			"temp" : "°C",
+			"humid" : "%"
+		}
+	}
+,
+	"tsl2561" : 	{
+		"common_name" : "Lux",
+		"fields" : ["full", "ir" ],
+		"ranges" : 		{
+			"full" : "0 10000",
+			"ir" : "0 10000"
+		},
+		"units" : {
+			"full" : "Lux",
+			"ir" : "Lux"
 		}
 
 	}
@@ -50,9 +83,15 @@
 			"vis" : "0 10000",
 			"ir" : "0 10000",
 			"full" : "0 10000"
+		},
+		"units" : {
+			"vis" : "Lux",
+			"ir" : "Lux",
+			"full" : "Lux"
 		}
 
 	}
+
 ,
 	"mpu6050" : 	{
 		"common_name" : "Accelerometer / Gyro",
@@ -68,6 +107,18 @@
 		"gyroY" : "-1.0 1.0",
 		"gyroZ" : "-1.0 1.0",
 		"freefall" : "0. 1."
+		},
+		"units" : {
+			"roll" : "°",
+			"pitch" : "°",
+			"yaw" : "°",
+			"accelX" : "g",
+			"accelY" : "g",
+			"accelZ" : "g",
+			"gyroX" : "°/s",
+			"gyroY" : "°/s",
+			"gyroZ" : "°/s",
+			"freefall" : "Bool"
 		}
 	}
 ,
@@ -77,6 +128,10 @@
 		"ranges" : 		{
 			"pressure" : "0 10000",
 			"temp" : "0. 60."
+		},
+		"units" : {
+			"pressure" : "mBar",
+			"temp" : "°C"
 		}
 
 	}
@@ -88,6 +143,11 @@
 			"accelX" : "-3. 3.",
 			"accelY" : "-3. 3.",
 			"accelZ" : "-3. 3."
+		},
+		"units" : {
+			"accelX" : "g",
+			"accelY" : "g",
+			"accelZ" : "g"
 		}
 
 	}
@@ -98,6 +158,10 @@
 		"ranges" : 		{
 			"px" : "0 240",
 			"pz" : "0 240"			
+		},
+		"units" : {
+			"px" : "",
+			"pz" : ""
 		}
 
 	}

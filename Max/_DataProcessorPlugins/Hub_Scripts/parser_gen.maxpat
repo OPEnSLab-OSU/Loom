@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 58.0, 116.0, 678.0, 683.0 ],
+		"rect" : [ 318.0, 168.0, 712.0, 683.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -68,15 +68,16 @@
 					"gradient" : 1,
 					"id" : "obj-18",
 					"ignoreclick" : 1,
+					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 8.0, 8.197998, 111.0, 24.0 ],
+					"patching_rect" : [ 8.0, 8.197998, 111.0, 40.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 7.0, 181.0, 24.0 ],
+					"presentation_rect" : [ 11.0, 7.0, 169.0, 24.0 ],
 					"style" : "",
-					"text" : "Patch Selector",
+					"text" : "Command Selector",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"textjustification" : 1
 				}
@@ -134,7 +135,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-4",
-					"items" : [ "<Select", "Module>", ",", "channel_manager", ",", "-INPUT-", ",", "analog_monitor", ",", "decagon", ",", "multiplexer", ",", "ishield_monitor", ",", "-PROCESS-", ",", "analog_to_uv", ",", "rangeSetter", ",", "scaleCurve", ",", "scaleLin", ",", "smooth", ",", "threshold", ",", "-OUTPUT-", ",", "neopixel", ",", "relay", ",", "sd_controller", ",", "servo", ",", "servo_pan_tilt", ",", "stepper_motor", ",", "stepper_motor_extension", ",", "save_to_csv", ",", "-", "-", "LEGACY", "-", "-", ",", "-INPUT-", ",", "emote", ",", "midiIn", ",", "oscIn", ",", "-PROCESS-", ",", "3Dpan", ",", "chordDegree", ",", "concatenate", ",", "drumKit", ",", "movement", ",", "musicbox", ",", "rotaryDial", ",", "scaleDegree", ",", "sequencer", ",", "simpleSamp", ",", "spring", ",", "tapTempo", ",", "-OUTPUT-", ",", "App3DPan", ",", "AppVST", ",", "DMX", ",", "instrumentPosition", ",", "midiOut", ",", "oscOut", ",", "outlightsaber", ",", "switchblade" ],
+					"items" : [ "number", ",", "variable", ",", "math", ",", "comparison", ",", "logic", ",", "stack", ",", "if", ",", "custom_func", ",", "end" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -282,14 +283,14 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 88.0, 507.0, 87.0, 22.0 ],
+					"patching_rect" : [ 88.0, 507.0, 95.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"filename" : "processor.js",
+						"filename" : "parser_gen.js",
 						"parameter_enable" : 0
 					}
 ,
 					"style" : "",
-					"text" : "js processor.js"
+					"text" : "js parser_gen.js"
 				}
 
 			}
@@ -412,8 +413,8 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "processor.js",
-				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins",
+				"name" : "parser_gen.js",
+				"bootpath" : "~/Documents/Max 7/Library/_DataProcessorPlugins/Hub_Scripts",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
