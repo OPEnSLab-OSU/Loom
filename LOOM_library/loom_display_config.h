@@ -62,13 +62,21 @@ void print_config()
 	#endif	
 	#if is_lora == 1
 		LOOM_DEBUG_Println("\tUses LoRa");
-		#if hub_node_type == 1
-			LOOM_DEBUG_Println2("\t\tNode Address: ", LORA_NODE_ADDRESS);
-		#endif						
-		LOOM_DEBUG_Println2("\t\tHub Address: ", LORA_HUB_ADDRESS);
+
+		LOOM_DEBUG_Println2("\t\tSelf Address: ", LORA_SELF_ADDRESS);
+		LOOM_DEBUG_Println2("\t\tDefault Other Address: ", LORA_OTHER_ADDRESS);
+
+		// #if hub_node_type == 1
+		// 	LOOM_DEBUG_Println2("\t\tNode Address: ", LORA_NODE_ADDRESS);
+		// #endif						
+		// LOOM_DEBUG_Println2("\t\tHub Address: ", LORA_HUB_ADDRESS);
 	#endif	
 	#if is_nrf == 1
-		LOOM_DEBUG_Println("\tUses nRF");							
+		LOOM_DEBUG_Println("\tUses nRF");		
+
+		LOOM_DEBUG_Println2("\t\tSelf Address: ", NRF_SELF_ADDRESS);
+		LOOM_DEBUG_Println2("\t\tDefault Other Address: ", NRF_OTHER_ADDRESS);
+					
 	#endif	
 	#if is_ethernet == 1
 		LOOM_DEBUG_Println("\tUses Ethernet");	

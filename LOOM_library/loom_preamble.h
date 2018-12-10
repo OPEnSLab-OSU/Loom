@@ -28,7 +28,7 @@
 #endif
 
 // --- Instance and port if using channels ---
-#if CHANNEL >= 1 && CHANNEL <= 9
+#if CHANNEL >= 0 && CHANNEL <= 9
 	#define INIT_INST CHANNEL
 	#if is_wifi == 1
 		#define INIT_PORT SUBNET_PORT+CHANNEL

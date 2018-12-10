@@ -8,15 +8,18 @@
 // ===                       DEFINITIONS                        === 
 // ================================================================
 #define LORA_MESSAGE_SIZE RH_RF95_MAX_MESSAGE_LEN       // Defaults to 251 as 4 bytes are used for the header.
+
+// LoRa chip pins
 #define RFM95_CS 8
 #define RFM95_RST 4
-
 #ifdef is_m0
 	#define RFM95_INT 3     // Use this for the M0
 #endif
 #ifdef is_32u4
 	#define RFM95_INT 7     // Use this for the 32u4
 #endif
+
+
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
@@ -28,11 +31,16 @@
 // ================================================================
 
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
-#if hub_node_type == 0
-	RHReliableDatagram manager(rf95, LORA_HUB_ADDRESS);
-#else
-	RHReliableDatagram manager(rf95, LORA_NODE_ADDRESS);
-#endif
+
+
+// #if hub_node_type == 0
+// 	RHReliableDatagram manager(rf95, LORA_HUB_ADDRESS);
+// #else
+// 	RHReliableDatagram manager(rf95, LORA_NODE_ADDRESS);
+// #endif
+
+RHReliableDatagram manager(rf95, LORA_SELF_ADDRESS);
+
 
 int lora_last_rssi;
 
@@ -58,6 +66,8 @@ bool lora_send_bundle_fragment(OSCBundle *bndl);
 //
 void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager) 
 {
+	LOOM_DEBUG_Println("Setting up LoRa");
+
 	#if hub_node_type == 0 // if hub
 		pinMode(8, INPUT_PULLUP);
 	#endif
@@ -72,8 +82,30 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 		LOOM_DEBUG_Println("setFrequency failed");
 	}
 
+
+	// Set power level
 	LOOM_DEBUG_Println("Setting power...");
-	rf95->setTxPower(23, false);
+	if ( (lora_power_level >= 5) && (lora_power_level <= 23) ) {
+		rf95->setTxPower(lora_power_level, false);
+		LOOM_DEBUG_Println2("Set LoRa power to ", lora_power_level);
+	} else {
+		rf95->setTxPower(23, false);
+		LOOM_DEBUG_Println("Set LoRa power to 23");
+	}
+
+	// Set retry delay
+	if (lora_retry_delay > 0) {
+		manager->setTimeout(lora_retry_delay);
+		LOOM_DEBUG_Println3("Set LoRa retry timeout to ", lora_retry_delay, " ms");
+	} 
+
+	// Set max retry amount
+	if (lora_retry_count >= 0) {
+		manager->setRetries(lora_retry_count);
+		LOOM_DEBUG_Println2("Set LoRa max retry amount ", lora_retry_count);
+	}
+
+
 	LOOM_DEBUG_Println("LoRa setup finished!");
 }
 
@@ -97,23 +129,24 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 void lora_receive_bundle(OSCBundle *bndl)
 {
 	if (manager.available()) {
+
 		uint8_t len = LORA_MESSAGE_SIZE;
 		uint8_t from;
 		uint8_t buf[LORA_MESSAGE_SIZE];
 		memset(buf, '\0', LORA_MESSAGE_SIZE);
+
 		if (manager.recvfromAck(buf, &len, &from)) {
 
 			lora_last_rssi = rf95.lastRssi();
 
-			// LOOM_DEBUG_Println("Receiving");
+			// LOOM_DEBUG_Println2("Received: ", (const char*)buf);
+			// LOOM_DEBUG_Println2("Len: ", len);
+
 			// This is done just in case the compressed string
 			// uncompresses to more than 251 characters
 			char larger_buf[384];
 			memset(larger_buf, '\0', sizeof(larger_buf));
 			strcpy(larger_buf, (const char*)buf);
-
-			// LOOM_DEBUG_Println2("Received: ", larger_buf);
-			// LOOM_DEBUG_Println2("Len: ", strlen((const char*)larger_buf));
 
 			convert_OSC_string_to_bundle((char*)larger_buf, bndl); 
 
@@ -141,81 +174,29 @@ void lora_receive_bundle(OSCBundle *bndl)
 //
 bool lora_send_bundle(OSCBundle *bndl, uint16_t destination)
 {
+	LOOM_DEBUG_Println2("Sending LoRa bundle to address: ", destination);
+
 	char message[LORA_MESSAGE_SIZE];
 	memset(message, '\0', sizeof(message));
 	convert_OSC_bundle_to_string(bndl, message);
 
-	LOOM_DEBUG_Println(message);
-	LOOM_DEBUG_Println2("Message length: ", strlen(message));
+	// LOOM_DEBUG_Println(message);
+	// LOOM_DEBUG_Println2("Message length: ", strlen(message));
 	 
 	bool is_sent = manager.sendtoWait((uint8_t*)message, strlen(message)+1, destination);
 
-	if (is_sent) {	
-		LOOM_DEBUG_Println("Sent bundle through LoRa!");
-	} else {
-		LOOM_DEBUG_Println("Failed to send bundle!");
-	}
+	LOOM_DEBUG_Println2("Send LoRa bundle " , (is_sent) ? "successful" : "failed" );
 
 	return is_sent;
 }
 
-
-
-
-// --- LORA SEND BUNDLE
-//
-// Sends an OSC Bundle over LoRa after converting the bundle 
-// to an equivalent string
-//
-// @param bndl  OSC Bundle to send (will be converted to string)
-//
-// @return Whether or not bundle send was successful
-//
 bool lora_send_bundle(OSCBundle *bndl)
 {
-	char message[LORA_MESSAGE_SIZE];
-	memset(message, '\0', sizeof(message));
-	convert_OSC_bundle_to_string(bndl, message);
+	lora_send_bundle(bndl, LORA_OTHER_ADDRESS); 
+} 
 
-	LOOM_DEBUG_Println(message);
-	LOOM_DEBUG_Println2("Message length: ", strlen(message));
-	// LOOM_DEBUG_Println2("Max message length: ", LORA_MESSAGE_SIZE);
-	// LOOM_DEBUG_Print("Sending...");
-	 
 
-// Sending to RH_BROADCAST_ADDRESS (255) might allow for broadcasting,
-// these arent acknowledged though, so not sure if I'll have to change anything,
-// such as not using 'sendtoWait' if there even is an alternative
-//   probably use the 'sendto' function
-//   might also just be able to temporarily set retries / timeout to 0 or something ? ...
-// lora send bundle could then take an address as well, and overload so that if none is provided,
-//   default to broadcasting with the other function
-	// Serial.println();
-	// for (int i = 0; i < strlen(message); i++) {
-	// 	Serial.print(message[i], HEX);
-	// 	Serial.print(" ");
-	// 	if ((i != 0) && (i % 16 == 0))
-	// 		Serial.println();
-	// }
-	// Serial.println();
-	// RH_RF95::printBuffer("Contents: ", (const uint8_t*)message, strlen(message)+1);
 
-	#if hub_node_type == 0
-		LOOM_DEBUG_Print("Sending to node...");
-		if (manager.sendtoWait((uint8_t*)message, strlen(message)+1, LORA_NODE_ADDRESS)) {  // this should be better generalized, as to be able to send to nodes
-	#else
-		LOOM_DEBUG_Print("Sending to server...");
-		if (manager.sendtoWait((uint8_t*)message, strlen(message)+1, LORA_HUB_ADDRESS)) {  // this should be better generalized, as to be able to send to nodes
-	#endif
-		LOOM_DEBUG_Println("Sent bundle through LoRa!");
-		return true;
-	} else {
-		LOOM_DEBUG_Println("Failed to send bundle!");
-		return false;
-	}
-
-	// Use 'recvfromAckTimeout' from reliable client example for ack confirmation
-}
 
 
 

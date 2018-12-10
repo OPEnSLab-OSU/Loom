@@ -425,7 +425,10 @@ void send_bundle(OSCBundle *send_bndl, CommPlatform platform, int16_t destinatio
 		#endif
 
 		#if is_lora == 1
-			case LORA : lora_send_bundle(send_bndl); 
+			case LORA : 
+			(destination > 0)
+				? lora_send_bundle(send_bndl, destination)
+				: lora_send_bundle(send_bndl);
 			break;
 		#endif
 

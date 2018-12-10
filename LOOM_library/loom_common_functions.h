@@ -240,9 +240,11 @@ int second_duration(int amount, TimeUnits units) {
 // Called after receiving a bundle on a communication platform
 // Does nothing if bundle is in specified scope
 // Scope:
+//   0: Filter all bundles
 //   1: Subnet (family name and number have to match this device)
 //   2: Family (only family name has to match this device)
 //   3: Global only (accept messages that are of family scope but don't have a family number) 
+//   4: Any
 // 
 // @param bndl   The bundle to check if in scope
 // @param scope  What scope to accept in 
