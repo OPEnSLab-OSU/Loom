@@ -29,7 +29,7 @@
 // --- Device Identification --- 
 #define FAMILY 		"LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
 #define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
-#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
+#define CHANNEL          7		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
@@ -410,18 +410,28 @@
 	// 10 CLIENT_ADDRESSes belong to each SERVER_ADDRESS,
 	// 10-19 for 0, 20 - 29 for 1, etc. 
 	#if hub_node_type == 0 	// If is hub
-		#define LORA_HUB_ADDRESS  	CHANNEL
-		#define LORA_NODE_ADDRESS 	1
+		#define LORA_SELF_ADDRESS  	1 			// Self
+		#define LORA_OTHER_ADDRESS 	2			// Default node to communicate with
 	#else 					// If is node
-		#define LORA_HUB_ADDRESS  	1			
-		#define LORA_NODE_ADDRESS 	CHANNEL
+		#define LORA_OTHER_ADDRESS  1			// Hub to communicate with	
+		#define LORA_SELF_ADDRESS 	CHANNEL 	// Self
 	#endif
-		
+
 	#define lora_subnet_scope     	2		// 1 for subnet, 2 for global/family, 3 for global only (not recommended), 4 for any message. (use 2 if unsure)
 
 	#define RF95_FREQ      			915.0	// Hardware specific, Tx must match Rx
 
 	#define package_lora_rssi 		0		// 1 to add LoRa lastest RSSi to bundle build via package bundle; 0 to not
+
+
+
+	#define lora_power_level -1	// 5 (low) – 23 (high)   
+								// -1 to use our default of 23 (13 is normally the default)
+	#define lora_retry_delay -1	// Time to wait between retries in milliseconds
+								// -1 to use default (200ms)
+	#define lora_retry_count -1	// 0 means no retransmission
+								// -1 to use default to (3)
+
 
 	// #define lora_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send
 											// Currently unused
@@ -429,32 +439,18 @@
 
 // --- nRF Options --- 
 #if is_nrf == 1
-	// #if hub_node_type == 0 	// If is hub
-	// 	#define NRF_HUB_ADDRESS  00		// Self
-	// 	#define NRF_NODE_ADDRESS 01		// Default node to communicate with 
-	// #else 					// If is node
-	// 	#define NRF_HUB_ADDRESS  00		// Hub to communicate with
-	// 	#define NRF_NODE_ADDRESS 01		// Self
-	// #endif
 
+	// Node addresses should be 00-05
 	#if hub_node_type == 0 	// If is hub
 		#define NRF_SELF_ADDRESS  00		// Self
-		#define NRF_NODE_ADDRESS 01		// Default node to communicate with 
+		#define NRF_OTHER_ADDRESS 01		// Default node to communicate with 
 	#else 					// If is node
-		#define NRF_HUB_ADDRESS  00		// Hub to communicate with
-		#define NRF_SELF_ADDRESS 01		// Self
+		#define NRF_OTHER_ADDRESS 00		// Hub to communicate with
+		#define NRF_SELF_ADDRESS  01		// Self
 	#endif
 
 
-	// #define NRF_SELF_ADDRESS 01
-
-	// // Default other devices to communicate to
-	// #define NRF_NODE_ADDRESS 02
-	// #define NRF_HUB_ADDRESS 00
-
-
-	// Node addresses should be 00-05
-
+	#define nrf_subnet_scope     	4	// 1 for subnet, 2 for global/family, 3 for global only (not recommended), 4 for any message. (use 2 if unsure)
 
 
 	#define nrf_data_rate -1 		// 1: 250kbs, 2: 1Mbps, 3: 2Mbps
@@ -464,14 +460,11 @@
 	#define nrf_power_level -1		// 1: RF24_PA_MIN (-18dBm), 2: RF24_PA_LOW (-12dBm), 3: RF24_PA_HIGH (-6dBM), 4: RF24_PA_MAX (0dBm)
 									// -1 to use default (-18dBm)
 
+	// Both of the next two options have to be set for them to take effect
 	#define nrf_retry_delay	-1		// How long to wait between each retry, in multiples of 250us, max is 15. 0 means 250us, 15 means 4000us.
 									// -1 to use default (5) 
 	#define nrf_retry_count -1		// How many retries before giving up, max 15
 									// -1 to use default (15)
-
-									// Need to see 
-
-
 
 
 	// #define nrf_bundle_fragment 0		// Splits bundles into smaller bundles to avoid overflowing size LoRa can send

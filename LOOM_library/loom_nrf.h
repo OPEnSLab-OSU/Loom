@@ -47,6 +47,8 @@ bool nrf_send_bundle_fragment(OSCBundle *bndl);
 
 void setup_nrf() 
 {
+	LOOM_DEBUG_Println("Setting up nRF");
+
 	// pinMode(8, INPUT_PULLUP);
  
 	SPI.begin();
@@ -105,27 +107,15 @@ void setup_nrf()
 	} 
 
 
-
-
-	// network.begin(90, this_node); // determine good way to convert change to octal address?
-
-
-	// #if hub_node_type == 0
-	// 	network.begin(90, NRF_HUB_ADDRESS);
-	// #elif hub_node_type == 1
-	// 	network.begin(90, NRF_NODE_ADDRESS);		
-	// #endif
-
 	network.begin(90, NRF_SELF_ADDRESS); // determine good way to convert change to octal address?
 
-
-	
 	LOOM_DEBUG_Println("nRF Setup Complete");
 }
 
 // ================================================================
 // ===                        FUNCTIONS                         ===
 // ================================================================
+
 
 
 // --- NRF RECEIVE BUNDLE ---
@@ -141,15 +131,64 @@ void nrf_receive_bundle(OSCBundle *bndl)
 	network.update();                      // Check the network regularly
 
 	while ( network.available() ) {        // Is there anything ready for us?
+		
 		RF24NetworkHeader header;          // If so, grab it and print it out
-		char message[NRF_MESSAGE_SIZE];
-		memset(message, '\0', NRF_MESSAGE_SIZE);
-		network.read(header,&message,NRF_MESSAGE_SIZE-1);
+		char buf[NRF_MESSAGE_SIZE];
+		memset(buf, '\0', NRF_MESSAGE_SIZE);
+		network.read(header, &buf, NRF_MESSAGE_SIZE-1);
 
-		convert_OSC_string_to_bundle(message, bndl);
-		LOOM_DEBUG_Println(message);
-	}
+
+		LOOM_DEBUG_Println2("Compressed buf :", buf);
+
+		// This is done just in case the compressed string
+		// uncompresses to more than 251 characters
+		char larger_buf[180];
+		memset(larger_buf, '\0', sizeof(larger_buf));
+		strcpy(larger_buf, (const char*)buf);
+
+		convert_OSC_string_to_bundle((char*)larger_buf, bndl); 
+		// convert_OSC_string_to_bundle(buf, bndl);
+		
+		if ( !subnet_filter(bndl, nrf_subnet_scope) ) {
+			LOOM_DEBUG_Println("Received nRF bundle out of scope");
+		}
+
+	} // of while ( network.available() )
 }
+
+// Use this to apply the compression to nRF as well
+
+// void lora_receive_bundle(OSCBundle *bndl)
+// {
+// 	if (manager.available()) {
+// 		uint8_t len = LORA_MESSAGE_SIZE;
+// 		uint8_t from;
+// 		uint8_t buf[LORA_MESSAGE_SIZE];
+// 		memset(buf, '\0', LORA_MESSAGE_SIZE);
+// 		if (manager.recvfromAck(buf, &len, &from)) {
+
+// 			lora_last_rssi = rf95.lastRssi();
+
+// 			// LOOM_DEBUG_Println("Receiving");
+// 			// This is done just in case the compressed string
+// 			// uncompresses to more than 251 characters
+// 			char larger_buf[384];
+// 			memset(larger_buf, '\0', sizeof(larger_buf));
+// 			strcpy(larger_buf, (const char*)buf);
+
+// 			// LOOM_DEBUG_Println2("Received: ", larger_buf);
+// 			// LOOM_DEBUG_Println2("Len: ", strlen((const char*)larger_buf));
+
+// 			convert_OSC_string_to_bundle((char*)larger_buf, bndl); 
+
+// 			if ( !subnet_filter(bndl, lora_subnet_scope) ) {
+// 				LOOM_DEBUG_Println("Received LoRa bundle out of scope");
+// 			}
+
+// 		} // of if (manager.recvfromAck(buf, &len, &from))
+// 	} // of if (manager.available()) 
+// }
+
 
 
 
@@ -172,28 +211,21 @@ bool nrf_send_bundle(OSCBundle *bndl, uint16_t destination)
 
 	bool is_sent = network.write( header, message, strlen(message) );
 
-	#if LOOM_DEBUG == 1
-		if (is_sent) LOOM_DEBUG_Println("NRF Bundle Send Suceeded!");
-		else 		 LOOM_DEBUG_Println("NRF Bundle Send Failed!");
-	#endif
+	LOOM_DEBUG_Println2( "Send nRF bundle " , (is_sent) ? "successful" : "failed" );
 
 	return is_sent;
 }
 
 bool nrf_send_bundle(OSCBundle *bndl)
 {
-	#if hub_node_type == 0
-		nrf_send_bundle(bndl, NRF_NODE_ADDRESS);
-	#elif hub_node_type == 1
-		nrf_send_bundle(bndl, NRF_HUB_ADDRESS);
-	#endif 
+	nrf_send_bundle(bndl, NRF_OTHER_ADDRESS);
 } 
 
 
 
 // Broadcasts a bundle
 
-// Should be merged with normal nrf send bundle?
+// Should it be merged with normal nrf send bundle?
 
 bool nrf_multicast_bundle(OSCBundle *bndl, uint8_t level) 
 {
@@ -206,10 +238,7 @@ bool nrf_multicast_bundle(OSCBundle *bndl, uint8_t level)
 
 	bool is_sent = network.multicast( header, message, strlen(message), level );
 
-	#if LOOM_DEBUG == 1
-		if (is_sent) LOOM_DEBUG_Println("NRF Bundle Send Suceeded!");
-		else 		 LOOM_DEBUG_Println("NRF Bundle Send Failed!");
-	#endif
+	LOOM_DEBUG_Println2("Multicast nRF bundle " , (is_sent) ? "successful" : "failed" );
 
 	return is_sent;
 }
@@ -218,50 +247,6 @@ bool nrf_multicast_bundle(OSCBundle *bndl)
 {
 	nrf_multicast_bundle(bndl, 1);
 }
-
-
-
-// // --- NRF SEND BUNDLE ---
-// //
-// // Takes an OSC bundle to send over nRF
-// // after conversion to the proper format (string)
-// //
-// // @param bndl  The OSC bundle to send (will be converted to string)
-// //
-// bool nrf_send_bundle(OSCBundle *bndl) 
-// {
-// 	char message[NRF_MESSAGE_SIZE];
-// 	memset(message, '\0', NRF_MESSAGE_SIZE);
-	
-// 	convert_OSC_bundle_to_string(bndl, message);
-	
-// 	// sprintf(message, "%s", "/test/2 string");
-
-// 	LOOM_DEBUG_Println2("MSG: ", message);
-
-// 	RF24NetworkHeader header(NRF_HUB_ADDRESS);							// This should be better generalized, as to be able to send to nodes
-
-// 	// #if hub_node_type == 0
-// 	// 	RF24NetworkHeader header(01);
-// 	// #elif hub_node_type == 1
-// 	// 	RF24NetworkHeader header(00);		
-// 	// #endif
-
-// 	// RF24NetworkHeader header(other_node);						
-
-
-// 	bool is_sent = network.write( header, message, strlen(message) );
-// 	// bool is_sent = network.write( header, message, strlen(message) );
-// 	// bool is_sent = network.write( header, "/test", sizeof("/test") );
-
-// 	#if LOOM_DEBUG == 1
-// 		if (is_sent) LOOM_DEBUG_Println("NRF Bundle Send Suceeded!");
-// 		else 		 LOOM_DEBUG_Println("NRF Bundle Send Failed!");
-// 	#endif
-
-// 	return is_sent;
-// }
-
 
 
 
