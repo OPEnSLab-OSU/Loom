@@ -20,7 +20,6 @@
 #endif
 
 
-
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================ 
@@ -32,25 +31,22 @@
 
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
-
-// #if hub_node_type == 0
-// 	RHReliableDatagram manager(rf95, LORA_HUB_ADDRESS);
-// #else
-// 	RHReliableDatagram manager(rf95, LORA_NODE_ADDRESS);
-// #endif
-
 RHReliableDatagram manager(rf95, LORA_SELF_ADDRESS);
 
-
 int lora_last_rssi;
+
+
 
 // ================================================================ 
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager);
 void lora_receive_bundle(OSCBundle *bndl);
+bool lora_send_bundle(OSCBundle *bndl, uint16_t destination);
 bool lora_send_bundle(OSCBundle *bndl);
-bool lora_send_bundle_fragment(OSCBundle *bndl);
+
+// bool lora_send_bundle_fragment(OSCBundle *bndl);
+
 
 // ================================================================
 // ===                          SETUP                           ===
@@ -105,7 +101,6 @@ void setup_lora(RH_RF95 *rf95, RHReliableDatagram *manager)
 		LOOM_DEBUG_Println2("Set LoRa max retry amount ", lora_retry_count);
 	}
 
-
 	LOOM_DEBUG_Println("LoRa setup finished!");
 }
 
@@ -150,6 +145,7 @@ void lora_receive_bundle(OSCBundle *bndl)
 
 			convert_OSC_string_to_bundle((char*)larger_buf, bndl); 
 
+			// Apply filtering based on family and subnet
 			if ( !subnet_filter(bndl, lora_subnet_scope) ) {
 				LOOM_DEBUG_Println("Received LoRa bundle out of scope");
 			}
@@ -157,9 +153,6 @@ void lora_receive_bundle(OSCBundle *bndl)
 		} // of if (manager.recvfromAck(buf, &len, &from))
 	} // of if (manager.available()) 
 }
-
-
-
 
 
 
@@ -198,6 +191,7 @@ bool lora_send_bundle(OSCBundle *bndl)
 
 
 
+// Compression added to reduce need for fragmenting
 
 
 // bool lora_send_bundle_fragment(OSCBundle *bndl)

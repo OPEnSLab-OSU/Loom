@@ -83,7 +83,9 @@ void loop()
 	print_bundle(&bndl);
 
 //		send_bundle(&bndl, LORA);
-		send_bundle(&bndl, NRF, 00);
+		// send_bundle(&bndl, NRF, 00);
+		send_bundle(&bndl, NRF);
+
 
 //		nrf_multicast_bundle(&bndl, 1);
 
@@ -91,7 +93,7 @@ void loop()
 
 		lastMillis = millis();
 
-		LOOM_DEBUG_Println("Done Sending bundle to node\n\n\n");
+		LOOM_DEBUG_Println("Done Sending bundle to hub\n\n\n");
 
 	}
 
