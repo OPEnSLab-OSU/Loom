@@ -232,10 +232,6 @@
 	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
 	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"		// Network password
-
-	#define DEFAULT_NETWORK   "Big Bertha"			// Network SSID / name
-	#define DEFAULT_PASSWORD  "BernieSanders"		// Network password
-
 #endif
 
 
