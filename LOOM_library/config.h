@@ -29,7 +29,7 @@
 // --- Device Identification --- 
 #define FAMILY 		"LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
 #define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
-#define CHANNEL          4		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
+#define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
 #define CUSTOM_NAME "Custom"	// This is only used if Auto_name is set to be 0
@@ -77,7 +77,7 @@
 // Further options in the advanced settings
 // Can override settings defined before the aggregate devices
 
-#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
+#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
 #define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
@@ -86,7 +86,7 @@
 // ================================================================ 
 // ===                 COMMUNICATION PLATFORMS                  === 
 // ================================================================
-#define is_wifi       0		// 1 to enable WiFi
+#define is_wifi       1		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
@@ -232,6 +232,9 @@
 	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
 	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"		// Network password
+
+	
+
 #endif
 
 
@@ -516,24 +519,29 @@
 #if is_pushingbox == 1	
 	// Google Spreadsheet ID
 	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; looks like random string of characters)
-	#define init_spreadsheet_id "***REMOVED***"  // Ghana Proto Sheet
+	#define init_spreadsheet_id "***REMOVED***"  // Luke Test Sheet
+
+	// #define init_spreadsheet_id "***REMOVED***"  // Ghana Proto Sheet
 
 	// Required by PushingBox, specific to each scenario
 	// Does not always need to change with different spreadsheets, only different PushingBox accounts
-	char device_id[] = "***REMOVED***"; 	// Opens
+	#define device_id "***REMOVED***" 	// Luke
+	// #define device_id "***REMOVED***" 	// Opens
 
 
 	// Google Spreadsheet Sheet/Tab. Sent as parameter to PushingBox/Google Scripts
 	// Generally 0 is the preferred setting (i.e. nodes get there own tab),
 	//   use 1 to force all node data to go to a single hub-defined sheet
-	#define useHubTabID 0  // Toggle option for below settings
-	#if useHubTabID == 1
+	#define useHubTabID 0  	// Toggle option for below settings
+
+	#if useHubTabID == 1	
 		// The hub defines tab ID regardless of bundle source
-		#define tab_id_complete "Sheet1"    // Defines tab if hub is defining tab instead of node
-	#else
+		#define init_tab_id "Sheet1" 	   // Defines tab if hub is defining tab instead of nodes
+	#else 					
 		// Use bundle source and below prefix to define tab ID
-		#define tab_id_prefix   "LoRaSubnet_"		// Used as a prefix if node is being used to define tab
+		#define init_tab_id "Test_"		   // Used as a prefix if node is being used to define tab
 	#endif	
+
 
 	#define verify_family_match 0			// 1 to only upload to spreadsheet if source device family matches hub
 											// Can likley be phased out by subnet filtering (e.g. lora_subnet_scope)
@@ -541,11 +549,9 @@
 
 ///////////////////////
 
-	#define use_pb_sheet_array	1			// 1 to use the following array of spreadsheet_ids to upload to different
+	#define use_pb_sheet_array	0			// 1 to use the following array of spreadsheet_ids to upload to different
 											// sheets depending on the bundle source's device ID
 											// In the form <Family><Family#>/<Device><DevInst>, a Family# of 0 would map to the sheet at index 0
-											// The item at index 0 is what will be defaulted to if a full ID is not found at the corresponding index
-											// This default index can be a duplicate of another sheet ID
 	
 	#if use_pb_sheet_array == 1
 		// 0–9 : Sheet ID for corresponding subnet #
@@ -576,7 +582,7 @@
 	//  with a minimum of pushUploadMinDelay between uploads
 	// Uses millis
 	// Recommended that pushUploadedFilter is left enabled
-	#define pushUploadFilter   	0 	// 1 to enable a millis delay to uploading to PushingBox
+	#define pushUploadFilter   	1 	// 1 to enable a millis delay to uploading to PushingBox
 	#define pushUploadMinDelay  5  	// delay in seconds
 #endif
 

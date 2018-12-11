@@ -393,6 +393,11 @@ function sheet_id(s)
 	send( build_msg( '/SetSpreadSheetID', [s] ) );	
 }
 
+function tab_id(s)
+{
+	send( build_msg( '/SetTabID', [s] ) );	
+}
+
 function upload_interval(d)
 {
 	send( build_msg( '/SetPushMinDelay', [d] ) );	

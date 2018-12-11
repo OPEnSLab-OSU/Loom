@@ -1199,7 +1199,7 @@
 					"outlettype" : [ "list", "list", "", "", "", "" ],
 					"patching_rect" : [ 28.0, 261.0, 150.0, 68.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 440.0, 700.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 440.0, 720.0 ],
 					"viewvisibility" : 1
 				}
 

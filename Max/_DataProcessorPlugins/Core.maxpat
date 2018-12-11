@@ -54,7 +54,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 200.0, 578.166687, 150.0, 180.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 165.5, 520.0, 150.0, 180.0 ],
+					"presentation_rect" : [ 165.5, 520.0, 150.0, 200.0 ],
 					"viewvisibility" : 1
 				}
 

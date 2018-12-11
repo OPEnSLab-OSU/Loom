@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 501.0, 79.0, 675.0, 787.0 ],
+		"rect" : [ 2896.0, -34.0, 649.0, 856.0 ],
 		"bgcolor" : [ 0.878431, 0.878431, 0.858824, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -40,12 +40,103 @@
 		"showontab" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 253.0, 249.833374, 91.0, 22.0 ],
+					"style" : "",
+					"text" : "prepend tab_id"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.376471, 0.384314, 0.4, 1.0 ],
+					"bgcolor2" : [ 0.376471, 0.384314, 0.4, 1.0 ],
+					"bgfillcolor_angle" : 270.0,
+					"bgfillcolor_autogradient" : 0.0,
+					"bgfillcolor_color" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+					"bgfillcolor_color1" : [ 0.376471, 0.384314, 0.4, 1.0 ],
+					"bgfillcolor_color2" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+					"bgfillcolor_proportion" : 0.39,
+					"bgfillcolor_type" : "color",
+					"fontface" : 1,
+					"fontsize" : 11.0,
+					"gradient" : 1,
+					"id" : "obj-2",
+					"ignoreclick" : 1,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 326.0, 213.833374, 43.0, 21.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 7.0, 121.633331, 46.0, 21.0 ],
+					"style" : "",
+					"text" : "Tab ID",
+					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"textjustification" : 1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-4",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 253.0, 213.833374, 61.0, 22.0 ],
+					"style" : "",
+					"text" : "route text"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"autoscroll" : 0,
+					"bangmode" : 1,
+					"clickmode" : 1,
+					"fontsize" : 12.0,
+					"id" : "obj-5",
+					"keymode" : 1,
+					"lines" : 1,
+					"maxclass" : "textedit",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"outlettype" : [ "", "int", "", "" ],
+					"outputmode" : 1,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 253.0, 159.833374, 166.0, 38.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 56.5, 121.633331, 85.5, 21.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-13",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 253.0, 120.833374, 81.0, 22.0 ],
+					"style" : "",
+					"text" : "loadmess set"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-12",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 272.0, 213.833374, 89.0, 22.0 ],
+					"patching_rect" : [ 459.0, 213.833374, 89.0, 22.0 ],
 					"style" : "",
 					"text" : "speedlim 2000"
 				}
@@ -58,7 +149,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 272.0, 249.833374, 139.0, 22.0 ],
+					"patching_rect" : [ 459.0, 249.833374, 139.0, 22.0 ],
 					"style" : "",
 					"text" : "prepend upload_interval"
 				}
@@ -97,9 +188,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 338.166687, 179.833374, 90.0, 21.0 ],
+					"patching_rect" : [ 525.166687, 179.833374, 90.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 86.0, 151.333344, 56.0, 21.0 ],
+					"presentation_rect" : [ 86.0, 172.833344, 56.0, 21.0 ],
 					"style" : "",
 					"text" : "Seconds",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
@@ -117,9 +208,9 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 272.0, 179.833374, 50.0, 22.0 ],
+					"patching_rect" : [ 459.0, 179.833374, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 151.333344, 68.0, 22.0 ],
+					"presentation_rect" : [ 7.0, 172.833344, 68.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -192,7 +283,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 494.166687, 30.833374, 39.0, 25.0 ],
+					"patching_rect" : [ 671.166687, 99.833374, 39.0, 25.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 106.0, 8.0, 36.0, 24.0 ],
 					"rounded" : 15.0,
@@ -214,7 +305,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 494.166687, 62.833374, 37.0, 22.0 ],
+					"patching_rect" : [ 671.166687, 131.833374, 37.0, 22.0 ],
 					"style" : "",
 					"text" : "open"
 				}
@@ -229,7 +320,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 494.166687, 93.833374, 53.0, 22.0 ],
+					"patching_rect" : [ 671.166687, 162.833374, 53.0, 22.0 ],
 					"style" : "",
 					"text" : "pcontrol"
 				}
@@ -337,16 +428,16 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-3",
-									"linecount" : 11,
+									"linecount" : 15,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 2.5, 7.0, 388.0, 167.0 ],
+									"patching_rect" : [ 2.5, 7.0, 388.0, 221.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 13,
-									"presentation_rect" : [ 2.5, 7.0, 356.0, 194.0 ],
+									"presentation_linecount" : 17,
+									"presentation_rect" : [ 2.5, 7.0, 356.0, 248.0 ],
 									"style" : "",
-									"text" : "Spreadsheet ID:\n     - Which is the string of characters after the .../d/ and before \n       the /edit#..., in the spreadsheet URL\n\nLog Interval:\n     - The maximum rate / minimum delay between uploads\n     - This requires the log_bundle(&bndl, PSUHINGBOX) line to be\n       called for any upload to happen, this interval will not auto trigger a \n       call to this function\n\n\n"
+									"text" : "Spreadsheet ID:\n     - The Google sheet to upload to\n     - Which is the string of characters after the .../d/ and before \n       the /edit#..., in the spreadsheet URL\n\nTab ID:\n     - The tab of the Google sheet to upload to\n\nLog Interval:\n     - The maximum rate / minimum delay between uploads\n     - This requires the log_bundle(&bndl, PSUHINGBOX) line to be\n       called for any upload to happen, this interval will not auto trigger a \n       call to this function\n\n\n"
 								}
 
 							}
@@ -385,7 +476,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 494.166687, 120.833374, 43.0, 22.0 ],
+					"patching_rect" : [ 671.166687, 189.833374, 43.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -497,11 +588,11 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 272.0, 148.833374, 90.0, 21.0 ],
+					"patching_rect" : [ 459.0, 147.833374, 156.166687, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 124.633331, 135.0, 21.0 ],
+					"presentation_rect" : [ 7.0, 148.133331, 135.0, 21.0 ],
 					"style" : "",
-					"text" : "Upload Interval",
+					"text" : "Min Upload Interval",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"textjustification" : 1
 				}
@@ -520,7 +611,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 16.5, 47.0, 33.5, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 150.0, 180.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 150.0, 200.0 ],
 					"proportion" : 0.39,
 					"style" : ""
 				}
@@ -528,6 +619,13 @@
 			}
  ],
 		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ "obj-15", 0 ],
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ "obj-15", 0 ],
 					"source" : [ "obj-10", 0 ]
@@ -545,6 +643,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
 					"source" : [ "obj-12", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-5", 0 ],
+					"source" : [ "obj-13", 0 ]
 				}
 
 			}
@@ -573,6 +678,20 @@
 				"patchline" : 				{
 					"destination" : [ "obj-33", 0 ],
 					"source" : [ "obj-29", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"source" : [ "obj-5", 0 ]
 				}
 
 			}
