@@ -33,7 +33,7 @@ RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
 RHReliableDatagram manager(rf95, LORA_SELF_ADDRESS);
 
-int lora_last_rssi;
+int lora_last_rssi; // Only updated upon receiving a bundle
 
 
 
@@ -179,6 +179,8 @@ bool lora_send_bundle(OSCBundle *bndl, uint16_t destination)
 	bool is_sent = manager.sendtoWait((uint8_t*)message, strlen(message)+1, destination);
 
 	LOOM_DEBUG_Println2("Send LoRa bundle " , (is_sent) ? "successful" : "failed" );
+
+	lora_last_rssi = rf95.lastRssi(); 
 
 	return is_sent;
 }
