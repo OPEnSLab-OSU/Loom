@@ -69,13 +69,14 @@ void msg_router(OSCMessage &msg, int addrOffset)
 		if (msg.dispatch("/Neopixel",     		set_color, 				addrOffset) ) return;
 	#endif
 
-	// #if is_pushingbox == 1 && hub_node_type == 0
 	#if is_pushingbox == 1
 		// Sends data to Google sheets via PushingBox
 		if (msg.dispatch("/SendToPB", 			sendToPushingBox, 		addrOffset) ) return;
-		// Sends data to Google sheets via PushingBox
+		// Sets which Google spreadsheet to upload to 
 		if (msg.dispatch("/SetSpreadSheetID", 	set_spreadsheet_id, 	addrOffset) ) return;
-		// Sends data to Google sheets via PushingBox
+		// Sets which tab of the Google spreadsheet to upload to 
+		if (msg.dispatch("/SetTabID", 			set_tab_id,			 	addrOffset) ) return;
+		// Set minimum delay between PushingBox uploads
 		if (msg.dispatch("/SetPushMinDelay", 	set_push_min_delay, 	addrOffset) ) return;
 	#endif
 	

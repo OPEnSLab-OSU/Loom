@@ -103,10 +103,6 @@ enum CommPlatform {
 	#if (is_nrf == 1) || (prevent_platform_compile_error == 1)
 		NRF, 
 	#endif
-	// in testing for inter-device communication
-	// #if (is_ethernet == 1) || (prevent_platform_compile_error == 1)
-	// ETHERNET 		
-	// #endif
 };
 
 enum LogPlatform {

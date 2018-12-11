@@ -72,7 +72,6 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 113.333336, 158.166656, 29.666666, 20.0 ],
 					"style" : "",
-					"text" : "%",
 					"textcolor" : [ 0.239216, 0.254902, 0.278431, 1.0 ],
 					"textjustification" : 1
 				}
@@ -4517,7 +4516,7 @@
 					"allowdrag" : 0,
 					"fontsize" : 11.0,
 					"id" : "obj-134",
-					"items" : [ "temp", ",", "humid" ],
+					"items" : "<empty>",
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -4535,7 +4534,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-85",
-					"items" : [ 4, ":", "tsl2591", ",", 5, ":", "sht31d" ],
+					"items" : "<empty>",
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -4673,7 +4672,6 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 7.0, 129.200012, 136.0, 22.0 ],
 					"style" : "",
-					"text" : "Temp/Humidity",
 					"textcolor" : [ 0.239216, 0.254902, 0.278431, 1.0 ]
 				}
 
@@ -4853,7 +4851,7 @@
 					"outlettype" : [ "list", "list", "", "", "", "" ],
 					"patching_rect" : [ 28.0, 261.0, 150.0, 68.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 440.0, 700.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 440.0, 720.0 ],
 					"viewvisibility" : 1
 				}
 

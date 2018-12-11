@@ -37,17 +37,42 @@ void loop()
 
 
 
+	// --- Common Example ---
+
+	receive_bundle(&bndl, WIFI);	// Receive messages
+	if (bndl.size()) {
+		print_bundle(&bndl);		// Print bundle if LOOM_DEBUG enabled
+	}
+	process_bundle(&bndl);			// Dispatch message to correct handling functions
+
+	measure_sensors();				// Read sensors, store data in sensor state struct
+	package_data(&bndl);			// Copy sensor data from state to provided bundle
+
+	// print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
+
+	send_bundle(&bndl, WIFI);		// Send bundle of packaged data
+	log_bundle(&bndl, PUSHINGBOX);	// Send bundle to Google Sheet
+	// log_bundle(&bndl, SDCARD, "Ishield.csv");	// Send bundle to Google Sheet
+
+	// delay(4000);
+
+	additional_loop_checks();			// Miscellaneous checks
+	// --- End Example ---
+
+
+
+
 
 	// --- Basic Example ---
 
-	measure_sensors();					// Read sensors, store data in sensor state struct
-	package_data(&bndl);			// Copy sensor data from state to provided bundle
+	// measure_sensors();				// Read sensors, store data in sensor state struct
+	// package_data(&bndl);			// Copy sensor data from state to provided bundle
 	
-	print_bundle(&bndl);
+	// print_bundle(&bndl);
 
-	delay(1000);
+	// delay(1000);
 
-	additional_loop_checks();			// Miscellaneous checks
+	// additional_loop_checks();		// Miscellaneous checks
 
 	// --- End Example ---
 
@@ -55,7 +80,7 @@ void loop()
 
 	// // --- OLED Example ---
 
-	// measure_sensors();					// Read sensors, store data in sensor state struct
+	// measure_sensors();			// Read sensors, store data in sensor state struct
 	// package_data(&bndl);			// Copy sensor data from state to provided bundle
 	
 	// print_bundle(&bndl);
@@ -63,7 +88,7 @@ void loop()
 
 	// delay(1000);
 
-	// additional_loop_checks();			// Miscellaneous checks
+	// additional_loop_checks();	// Miscellaneous checks
 
 	// // --- End Example ---
 
@@ -75,14 +100,14 @@ void loop()
 	// print_bundle(&bndl);
 	// log_bundle(&bndl, PUSHINGBOX);
 
-	// additional_loop_checks();			// Miscellaneous checks
+	// additional_loop_checks();		// Miscellaneous checks
 	// // --- End Example ---
 
 
 
 	// // --- LoRa Node Example ---
 
-	// measure_sensors();					// Read sensors, store data in sensor state struct
+	// measure_sensors();			// Read sensors, store data in sensor state struct
 	// package_data(&bndl);			// Copy sensor data from state to provided bundle
 	
 	// print_bundle(&bndl);
@@ -92,14 +117,14 @@ void loop()
 
 	// delay(1000);
 
-	// additional_loop_checks();			// Miscellaneous checks
+	// additional_loop_checks();	// Miscellaneous checks
 	// // --- End Example ---
 
 
 
 	// // --- LoRa Evaporometer Example ---
 
-	// measure_sensors();					// Read sensors, store data in sensor state struct
+	// measure_sensors();			// Read sensors, store data in sensor state struct
 	// package_data(&bndl);			// Copy sensor data from state to provided bundle
 	
 	// print_bundle(&bndl);
@@ -109,19 +134,19 @@ void loop()
 
 	// sleep_for(5, MINUTES, STANDBY);
 
-	// additional_loop_checks();			// Miscellaneous checks
+	// additional_loop_checks();	// Miscellaneous checks
 	// // --- End Example ---
 
 
 	// --- Common Example ---
 
-//	receive_bundle(&bndl, WIFI);		// Receive messages
+//	receive_bundle(&bndl, WIFI);	// Receive messages
 //	if (bndl.size()) {
-//		print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
+//		print_bundle(&bndl);		// Print bundle if LOOM_DEBUG enabled
 //	}
-//	process_bundle(&bndl);				// Dispatch message to correct handling functions
+//	process_bundle(&bndl);			// Dispatch message to correct handling functions
 //
-//	measure_sensors();					// Read sensors, store data in sensor state struct
+//	measure_sensors();				// Read sensors, store data in sensor state struct
 //	package_data(&bndl);			// Copy sensor data from state to provided bundle
 //
 //	// print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
@@ -132,6 +157,10 @@ void loop()
 //
 //	additional_loop_checks();			// Miscellaneous checks
 //	// --- End Example ---
+
+
+
+
 }
 
 

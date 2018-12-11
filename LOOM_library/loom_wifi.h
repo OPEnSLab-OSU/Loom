@@ -218,12 +218,15 @@ void wifi_receive_bundle(OSCBundle *bndl, WiFiUDP *Udp, unsigned int port, char 
 		LOOM_DEBUG_Print2(" on port ", port);
 		LOOM_DEBUG_Println3(" (", type, ")");
 		
+		// LOOM_DEBUG_Println("WIFI BUNDLE A");
+		// print_bundle(bndl);
+
 		bndl->empty();             // Empty previous bundle
 		while (packetSize--){      // Read in new bundle
 			bndl->fill(Udp->read());
 		}
 
-		// LOOM_DEBUG_Println("WIFI BUNDLE A");
+		// LOOM_DEBUG_Println("WIFI BUNDLE B");
 		// print_bundle(bndl);
 	} // of (packetSize > 0)
 

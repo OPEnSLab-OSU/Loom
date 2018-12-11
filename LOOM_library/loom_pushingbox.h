@@ -14,14 +14,25 @@
 // ================================================================
 struct config_pushingbox_t {
 	char spreadsheet_id[50]; 		// Spreadsheet ID
+
+	char tab_id[24];			// Tab prefix
+
 	int  minimum_upload_delay;		// Minimum delya between uploads
 };
+
+
+	// #if useHubTabID == 1	// The hub defines tab ID regardless of bundle source
+	// 	#define tab_id_complete "Sheet1"    // Defines tab if hub is defining tab instead of node
+	// #else 					// Use bundle source and below prefix to define tab ID
+	// 	#define tab_id_prefix   "Test_"		// Used as a prefix if node is being used to define tab
+	// #endif	
+
 
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
 #if pushUploadFilter == 1 
-	unsigned long lastPushMillis, currentPushMillis;  
+	unsigned long lastPushMillis;//, currentPushMillis;  
 #endif
 
 
@@ -42,6 +53,7 @@ void pushingbox_ethernet(char* args);
 void pushingbox_wifi(char* args);
 void pushingbox_fona(char* args);
 void set_spreadsheet_id(OSCMessage &msg);
+void set_tab_id(OSCMessage &msg);
 void set_push_min_delay(OSCMessage &msg);
 
 
@@ -51,8 +63,15 @@ void set_push_min_delay(OSCMessage &msg);
 // ================================================================
 void setup_pushingbox() 
 {
-	strcpy(config_pushingbox->spreadsheet_id, init_spreadsheet_id);
+	LOOM_DEBUG_Println("Setting up PushingBox");
+
+	strcpy( config_pushingbox->spreadsheet_id, init_spreadsheet_id );
+
+	strcpy( config_pushingbox->tab_id, init_tab_id );
+
 	config_pushingbox->minimum_upload_delay = pushUploadMinDelay;
+
+	LOOM_DEBUG_Println("PushingBox setup complete");
 }
 
 
@@ -85,12 +104,12 @@ void sendToPushingBox(OSCMessage &msg)
 
 	// Only send bundles if a minimum time (pushUploadMinDelay seconds) has passed since last upload
 	#if pushUploadFilter == 1
-		currentPushMillis = millis();
-		if ( (currentPushMillis - lastPushMillis) < (1000*config_pushingbox->minimum_upload_delay) ) {
+		// currentPushMillis = millis();
+		if ( (millis() - lastPushMillis) < (1000*config_pushingbox->minimum_upload_delay) ) {
 			// LOOM_DEBUG_Println("Hasn't been long enough since last PushingBox upload, skipping this one");	
 			return; // has not been long enough yet, just return
 		} else {
-			lastPushMillis = currentPushMillis;
+			lastPushMillis = millis();
 		}
 	#endif // of pushUploadFilter
 
@@ -117,8 +136,6 @@ void sendToPushingBox(OSCMessage &msg)
 
 
 
-
-
 	// Make sure this bundle wasn't ping related
 	char check_ping[50];
 	osc_extract_header_section(&msg, 2, check_ping);
@@ -127,9 +144,9 @@ void sendToPushingBox(OSCMessage &msg)
 		return;
 	}
 
+
+
 	LOOM_DEBUG_Println("Sending to PushingBox");
-
-
 
 
 
@@ -137,8 +154,6 @@ void sendToPushingBox(OSCMessage &msg)
 	// Get the device source from bundle header 
 	char bundle_deviceID[20];
 	osc_extract_header_section(&msg, 2, bundle_deviceID);
-
-
 
 
 
@@ -154,22 +169,17 @@ void sendToPushingBox(OSCMessage &msg)
 
 		int  msg_family_num = osc_extract_family_number(&msg);
 
-		// LOOM_DEBUG_Println("Using array of spreadsheet_ids");
-
 		// If out of range of array
 		if (  (msg_family_num < 0) || (msg_family_num >= sizeof(spreadsheet_list)/sizeof(spreadsheet_list[0]) )  ) {
 			strcpy(ss_id, pb_default_sheet); 						// Use default
-			// sprintf(ss_id, "%s", pb_default_sheet); 						// Use default
 			LOOM_DEBUG_Println("Out of range, using default");
 			use_default = true;
 		} else {
 			strcpy(ss_id, spreadsheet_list[msg_family_num]);	// Use ID from list
-			// sprintf(ss_id, "%s", spreadsheet_list[msg_family_num]); 						// Use default
 			LOOM_DEBUG_Println2("Using spreadsheet_id at index: ", msg_family_num);
 		}
 	#else // Use dynamic single spreadsheet_id
 		strcpy(ss_id, config_pushingbox->spreadsheet_id);
-		// sprintf(ss_id, "%s", config_pushingbox->spreadsheet_id);
 	#endif
 
 
@@ -182,25 +192,41 @@ void sendToPushingBox(OSCMessage &msg)
 	// 	sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
 	// 		device_id, config_pushingbox->spreadsheet_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
 	// #endif
+
+// --- 
+
+	// #if useHubTabID == 1
+	// 	// Use hub's stored tab ID (in config file) to define spreadsheet tab
+	// 	sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s", 
+	// 		device_id, ss_id, tab_id_complete, bundle_deviceID);
+	// 	// sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
+	// 	// 	device_id, ss_id, (use_default) ? "default_" : "", tab_id_complete, bundle_deviceID);
+	// #else
+	// 	// Use bundle source to define spreadsheet tab suffix
+	// 	if (!use_default) {
+	// 		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
+	// 			device_id, ss_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
+	// 	} else {
+	// 		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=default_%s%s&key2=deviceID&val2=%s", 
+	// 			device_id, ss_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
+	// 	}
+	// #endif
+
 	#if useHubTabID == 1
 		// Use hub's stored tab ID (in config file) to define spreadsheet tab
 		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s", 
-			device_id, ss_id, tab_id_complete, bundle_deviceID);
-		// sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
-		// 	device_id, ss_id, (use_default) ? "default_" : "", tab_id_complete, bundle_deviceID);
+			device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID);
 	#else
 		// Use bundle source to define spreadsheet tab suffix
 		if (!use_default) {
 			sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
-				device_id, ss_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
+				device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID, bundle_deviceID); 	
 		} else {
 			sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=default_%s%s&key2=deviceID&val2=%s", 
-				device_id, ss_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
+				device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID, bundle_deviceID); 	
 		}
-
-		
-		
 	#endif
+
 
 
 	// Populate URL with the bundle kesy and values
@@ -211,7 +237,6 @@ void sendToPushingBox(OSCMessage &msg)
 		sprintf(args, "%s&key%d=%s&val%d=%s", args, j, buf1, j, buf2);
 	}
 	LOOM_DEBUG_Println2("URL get args: ", args);
-
 
 
 
@@ -234,6 +259,7 @@ void sendToPushingBox(OSCMessage &msg)
 }
 
 
+
 // --- SEND TO PUSHINGBOX ---
 // 
 // Sends a get request to PushingBox
@@ -249,9 +275,6 @@ void sendToPushingBox(OSCBundle *bndl)
 	OSCBundle tmpBndl;
 	deep_copy_bundle(bndl, &tmpBndl);
 	convert_bundle_structure(&tmpBndl, SINGLEMSG);
-	// #if LOOM_DEBUG == 1
-	// 	print_bundle(&tmpBndl);
-	// #endif
 	sendToPushingBox( *(tmpBndl.getOSCMessage(0)) );
 }
 
@@ -268,9 +291,6 @@ void sendToPushingBox(OSCBundle *bndl)
 void pushingbox_ethernet(char* args)
 {
 	LOOM_DEBUG_Println("Running PushingBox for Ethernet");
-
-	// LOOM_DEBUG_Println2("ARGS: ", args);
-
 
 	ethernet_client.stop();
 	if (ethernet_client.connect("api.pushingbox.com", 80)) {  
@@ -290,12 +310,9 @@ void pushingbox_ethernet(char* args)
 
 		if (setup_ethernet()) {
 			LOOM_DEBUG_Println("Successfully re-setup ethernet.");
+		} else {
+			LOOM_DEBUG_Println("Failed to re-setup ethernet.");
 		}
-		#if LOOM_DEBUG == 1 
-		else {
-			Serial.println("Failed to re-setup ethernet.");
-		}
-		#endif
 	}
 }
 #endif // of #if is_ethernet == 1
@@ -396,6 +413,26 @@ void set_spreadsheet_id(OSCMessage &msg)
 		LOOM_DEBUG_Println3("Setting Spreadsheet ID to: \"", config_pushingbox->spreadsheet_id, "\"");
 	} else {
 		LOOM_DEBUG_Println("Command to set spreadsheet id was not in correct format");
+	}
+}
+
+
+
+// --- SET TAB ID --- 
+//
+// Sets the Tab Id - i.e. what sheet to upload to
+//
+// @param msg  OSC messages that had header ending in '/SetTabID'
+//				Contains the new tab ID
+//
+void set_tab_id(OSCMessage &msg)
+{
+	if (msg.isString(0)) {
+		msg.getString(0, config_pushingbox->tab_id, sizeof(config_pushingbox->tab_id));	
+		write_non_volatile();
+		LOOM_DEBUG_Println3("Setting Tab ID to: \"", config_pushingbox->tab_id, "\"");
+	} else {
+		LOOM_DEBUG_Println("Command to set tab id was not in correct format");
 	}
 }
 

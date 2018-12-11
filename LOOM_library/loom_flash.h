@@ -21,9 +21,9 @@
 // Define struct to hold DEVICE CONFIG SETTINGS
 // The structure that gets stored in non-volatile memory to keep settings
 struct config_flash_t {
-	byte        checksum;                 // Value is changed when flash memory is written to.
-	uint8_t     instance_number;          // Default 0, should be set on startup from a patch
-	char        packet_header_string[80]; // String of expected packet header (dynamically formed based on config.h)
+	byte        checksum;                 	// Value is changed when flash memory is written to.
+	uint8_t     instance_number;          	// Default 0, should be set on startup from a patch
+	char        packet_header_string[80]; 	// String of expected packet header (dynamically formed based on config.h)
  
 	uint16_t sample_rate;
 
