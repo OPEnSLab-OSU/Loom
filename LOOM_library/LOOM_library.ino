@@ -44,7 +44,7 @@ void loop()
 	
 	print_bundle(&bndl);
 
-	delay(1000);
+	delay(500);
 
 	additional_loop_checks();			// Miscellaneous checks
 
