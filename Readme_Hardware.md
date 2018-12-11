@@ -126,11 +126,13 @@ The nRF flavor of IoA is comprised with the Nordic nRF24L01+ radio tranceiver.
 nRF is supported by both the Adafruit Feather M0 and the Adafruit Feather 32u4.
 
 Features:
-* nRF devices can be addressed with any value between 0 and 7.
+* nRF devices can be addressed with any value between 0 and 5.
 * Fragmentation allows for messages of any length to be sent with some configuration.
 * Multi-hopping is supported.
 
 #### nRF Dependencies
+
+The libraries for nRF support - [RF24](https://github.com/nRF24/RF24) and [RF24Network](https://github.com/nRF24/RF24Network) - need to be the optimized forks, not the defaults provided the Arduino library manager. The correct versions are provided in the [Loom dependencies](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Dependencies) folder.
 
 * [RF24](https://github.com/nRF24/RF24)
 * [RF24Network](https://github.com/nRF24/RF24Network)

@@ -62,7 +62,7 @@ WiFi and LoRa have had the most attention in development and thus have the most 
 | -------------- | --------------------------- | ------------------------------------------------------------ |
 | **WiFi**       | **WiFi**                    | Implemented                                                  |
 | **LoRa**       | **LoRa**                    | Implemented                                                  |
-| nRF*           | nRF*                        | May need more testing to be 'proven'                         |
+| **nRF**        | **nRF**                     | Implemented                                                  |
 | Ethernet       | Ethernet*                   | Currently only used with hubs, expansion in progress         |
 | GSM            | GSM*                        | Currently only one device, so outputs MQTT via GSM, but no GSM receiving yet |
 |                |                             |                                                              |
@@ -71,7 +71,7 @@ WiFi and LoRa have had the most attention in development and thus have the most 
 | IFTTT?         | IFTTT?                      | Currently, IFTTT works only as output though Adafruit IO     |
 | SD card?       | **SD card**                 | Works as output, considering as input                        |
 | Serial?        | **Serial**                  | Works for output. Serial as input may or may not be useful (is how Fona is tested) |
-|                | OLED*                       | Display a bundle on an Adafruit OLED featherwing / breakout  |
+|                | **OLED**                    | Display a bundle on an Adafruit OLED featherwing / breakout  |
 
 
 
