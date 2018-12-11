@@ -78,7 +78,7 @@
 // Can override settings defined before the aggregate devices
 
 #define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
-#define is_multiplexer  1	// 1 to specify Multiplexer (tca9548a) is being used
+#define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
 
@@ -156,7 +156,7 @@
 										// 1: Button freezes the scrolling and data
 										// 2: Button freezes the scrolling
 		#define oled_freeze_pin		 10	// Which pin to read from to freeze display
-										// Common pins might be: 10 (Ishield); 5, 6, 9 (OLED Featherwing buttons)
+										// Common pins might be: 10 (Ishield); 9(A), 6(B), 5(C) (OLED Featherwing buttons)
 	#endif
 #endif
 

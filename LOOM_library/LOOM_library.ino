@@ -25,6 +25,7 @@ void setup()
 	Loom_begin();	
 
 	// Any custom setup code
+
 }
 
 // ================================================================ 
@@ -44,7 +45,7 @@ void loop()
 	
 	print_bundle(&bndl);
 
-	delay(500);
+	delay(1000);
 
 	additional_loop_checks();			// Miscellaneous checks
 
