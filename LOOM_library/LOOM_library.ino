@@ -37,18 +37,18 @@ void loop()
 
 
 
-	// // --- Basic Example ---
+	// --- Basic Example ---
 
-	// measure_sensors();					// Read sensors, store data in sensor state struct
-	// package_data(&bndl);			// Copy sensor data from state to provided bundle
+	measure_sensors();					// Read sensors, store data in sensor state struct
+	package_data(&bndl);			// Copy sensor data from state to provided bundle
 	
-	// print_bundle(&bndl);
+	print_bundle(&bndl);
 
-	// delay(1000);
+	delay(1000);
 
-	// additional_loop_checks();			// Miscellaneous checks
+	additional_loop_checks();			// Miscellaneous checks
 
-	// // --- End Example ---
+	// --- End Example ---
 
 
 

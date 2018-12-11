@@ -148,6 +148,9 @@ void package_zxgesturesensor(OSCBundle *bndl, char packet_header_string[], uint8
 	#if i2c_addr_zxgesturesensor_0x10 == 1
 		msg.add("px").add((int32_t)state_zxgesturesensor_0x10.pos[0]);
 		msg.add("pz").add((int32_t)state_zxgesturesensor_0x10.pos[1]);
+
+		// msg.add("type" ).add(state_zxgesturesensor_0x10.gesture_type.c_str());
+		// msg.add("speed").add((int32_t)state_zxgesturesensor_0x10.gesture_speed);
 	#endif
 
 	#if i2c_addr_zxgesturesensor_0x11 == 1
@@ -243,16 +246,16 @@ void measure_zxgesturesensor()
 		}
 	#endif
 
-// Commented out because type and speed are currently not used / there were some issues with them 
 
-	// if (state_zxgesturesensor_0x10.inst_zxgesturesensor_0x10.gestureAvailable()) {
-	// 	state_zxgesturesensor_0x10.gesture       = state_zxgesturesensor_0x10.inst_zxgesturesensor_0x10.readGesture();
-	// 	state_zxgesturesensor_0x10.gesture_speed = state_zxgesturesensor_0x10.inst_zxgesturesensor_0x10.readGestureSpeed();
+// Commented out because type and speed are can only be used if px and pz are not used
+// Gesture data is harder to get anyways, as too long of delay between polling the sensor
+// will miss the gesture 
+
+	// if (inst_zxgesturesensor_0x10.gestureAvailable()) {
+	// 	state_zxgesturesensor_0x10.gesture       = inst_zxgesturesensor_0x10.readGesture();
+	// 	state_zxgesturesensor_0x10.gesture_speed = inst_zxgesturesensor_0x10.readGestureSpeed();
 		
 	// 	switch (state_zxgesturesensor_0x10.gesture) {
-	// 		// case NO_GESTURE:
-	// 		// 	state_zxgesturesensor_0x10.gesture_type = "No Gesture";
-	// 		// 	break;
 	// 		case RIGHT_SWIPE:
 	// 			state_zxgesturesensor_0x10.gesture_type = "Right Swipe";
 	// 			break;
@@ -266,7 +269,7 @@ void measure_zxgesturesensor()
 	// 			break;
 	// 	}
 
-	// 	#if DEBUG == 1
+	// 	#if LOOM_DEBUG == 1
 	// 		LOOM_DEBUG_Println2("Gesture type: ", state_zxgesturesensor_0x10.gesture_type);
 	// 		LOOM_DEBUG_Print("Gesture speed: ");
 	// 		Serial.println(state_zxgesturesensor_0x10.gesture_speed, DEC);
@@ -277,6 +280,9 @@ void measure_zxgesturesensor()
 	// 	state_zxgesturesensor_0x10.gesture_type  = "No Gesture";
 	// 	state_zxgesturesensor_0x10.gesture_speed = 0;
 	// }
+
+
+
 }
 
 
