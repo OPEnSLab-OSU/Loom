@@ -319,6 +319,7 @@
 // ================================================================
 #if is_multiplexer == 1
 	#define UPDATE_PERIOD 5000		// Milliseconds between multiplexer sensor list being updated
+									// Set to -1 to prevent auto rechecking of which sensors are connected
 	
 	// 1 to enable supported sensor type
 	#define is_as726X          0 	// Spectral Sensor (visible 7262 /near IR 7263) [cannot be used with TSL2561 or AS7265X]

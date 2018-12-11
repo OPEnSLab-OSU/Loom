@@ -573,7 +573,8 @@ void package_tca9548a(OSCBundle *bndl, char packet_header_string[])
 	
 	// LOOM_DEBUG_Println2("Update period: ", state_tca9548a.mux_update_period);
 	
-	if (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period){
+
+	if (  (state_tca9548a.mux_update_period > 0) && (millis()-state_tca9548a.last_update_time > state_tca9548a.mux_update_period)  ){
 		update_sensors();
 		LOOM_DEBUG_Println("Update MuxShield Sensorlist");
 		state_tca9548a.last_update_time = millis();
