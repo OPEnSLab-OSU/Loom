@@ -22,9 +22,9 @@
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
-#if oled_form_factor == 1
+#if oled_form_factor == 1 	// FeatherWing
 	Adafruit_SSD1306 display;
-#else
+#else 						// Breakout
 	Adafruit_SSD1306 display(oled_reset_pin);
 #endif
 
