@@ -6,7 +6,8 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define MAX_PB_FIELDS 48	// Maximum number of fields accepted by the PushingBox Scenario    
+#define MAX_PB_FIELDS 50	// Maximum number of fields accepted by the PushingBox Scenario  
+							// Used to be 32 - not sure if there is a limit now  
 
 
 // ================================================================ 
@@ -21,13 +22,6 @@ struct config_pushingbox_t {
 };
 
 
-	// #if useHubTabID == 1	// The hub defines tab ID regardless of bundle source
-	// 	#define tab_id_complete "Sheet1"    // Defines tab if hub is defining tab instead of node
-	// #else 					// Use bundle source and below prefix to define tab ID
-	// 	#define tab_id_prefix   "Test_"		// Used as a prefix if node is being used to define tab
-	// #endif	
-
-
 // ================================================================ 
 // ===                   GLOBAL DECLARATIONS                    === 
 // ================================================================
@@ -35,12 +29,10 @@ struct config_pushingbox_t {
 	unsigned long lastPushMillis;//, currentPushMillis;  
 #endif
 
-
 struct config_pushingbox_t * config_pushingbox;
 void link_config_pushingbox(struct config_pushingbox_t *flash_setup_pushingbox){
 	config_pushingbox = flash_setup_pushingbox;
 }
-
 
 
 // ================================================================ 
@@ -55,7 +47,14 @@ void pushingbox_fona(char* args);
 void set_spreadsheet_id(OSCMessage &msg);
 void set_tab_id(OSCMessage &msg);
 void set_push_min_delay(OSCMessage &msg);
-
+bool apply_pushingbox_filters(OSCMessage* msg);
+void get_spreadsheet_id(OSCMessage* msg, char* ssid);
+#if pushUploadFilter == 1 
+bool check_push_upload_filter();
+#endif
+bool check_message_size(OSCMessage* msg);
+bool is_ping_message(OSCMessage* msg);
+bool check_family_match(OSCMessage* msg);
 
 
 // ================================================================
@@ -66,9 +65,7 @@ void setup_pushingbox()
 	LOOM_DEBUG_Println("Setting up PushingBox");
 
 	strcpy( config_pushingbox->spreadsheet_id, init_spreadsheet_id );
-
 	strcpy( config_pushingbox->tab_id, init_tab_id );
-
 	config_pushingbox->minimum_upload_delay = pushUploadMinDelay;
 
 	LOOM_DEBUG_Println("PushingBox setup complete");
@@ -100,49 +97,8 @@ void setup_pushingbox()
 //
 void sendToPushingBox(OSCMessage &msg) 
 {
-
-	// Only send bundles if a minimum time (pushUploadMinDelay seconds) has passed since last upload
-	#if pushUploadFilter == 1
-		if ( (millis() - lastPushMillis) < (1000*config_pushingbox->minimum_upload_delay) ) {
-			return; // has not been long enough yet, just return
-		} else {
-			lastPushMillis = millis();
-		}
-	#endif // of pushUploadFilter
-
-
-	// Filter out bundles that are too large
-	if (msg.size() > MAX_PB_FIELDS) { // This also catches empty msgs, which seem to have a size around 1493 for some reason
-		LOOM_DEBUG_Println("Message to large to send to PushingBox");
-		return;
-	}
-
-
-// Probably not needed anymore because subnet filter upon receiving bundles
-
-	// // If option enabled, make sure device is in the same family
-	// #if verify_family_match == 1
-	// 	char source[32];
-	// 	osc_extract_header_section(&msg, 1, source);
-	// 	if (strcmp(FAMILY STR(FAMILY_NUM), source) != 0) {
-	// 		LOOM_DEBUG_Println("Source device family did not match");
-	// 		return;
-	// 	}
-	// #endif
-
-
-	// Make sure this bundle wasn't ping related
-	char check_ping[50];
-	osc_extract_header_section(&msg, 2, check_ping);
-	if ( strstr(get_address_string(&msg).c_str(), "Ping") ) {
-		LOOM_DEBUG_Println("Message was a ping related, don't upload");
-		return;
-	}
-
-
-	// LOOM_DEBUG_Println("PUSHINGBOX MESSAGE");
-	// print_message(&msg);
-
+ 	// If any of the filters are not passed, do not upload
+	if (!apply_pushingbox_filters(&msg)) return;
 
 	LOOM_DEBUG_Println("Sending to PushingBox");
 
@@ -153,59 +109,19 @@ void sendToPushingBox(OSCMessage &msg)
 	// Get the device source from bundle header 
 	osc_extract_header_section(&msg, 2, bundle_deviceID);
 
-	#if use_pb_sheet_array == 1 // Using list of spreadsheet_ids
-		int msg_family_num = osc_extract_family_number(&msg);
+	// Determine spreadsheet ID
+	get_spreadsheet_id(&msg, ss_id);
 
-		// If out of range of array
-		if (  (msg_family_num < 0) || (msg_family_num >= sizeof(spreadsheet_list)/sizeof(spreadsheet_list[0]) )  ) {
-			strcpy(ss_id, pb_default_sheet); 						// Use default
-			LOOM_DEBUG_Println("Out of range, using default");
-			use_default = true;
-		} else {
-			strcpy(ss_id, spreadsheet_list[msg_family_num]);	// Use ID from list
-			LOOM_DEBUG_Println2("Using spreadsheet_id at index: ", msg_family_num);
-		}
-	#else // Use dynamic single spreadsheet_id
-		strcpy(ss_id, config_pushingbox->spreadsheet_id);
-	#endif
+	// Build info needed by PushingBox and Google Script to route data
+	sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s%s&key2=deviceID&val2=%s&key3=full_data&val3=", 
+		device_id, 								// PushingBox Device ID
+		ss_id,   								// Spreadsheet ID
+		(use_default) ? "default_" : "",		// Whether or not to specify that this is default spreadsheet (only applies when using sheet array) 
+		config_pushingbox->tab_id, 				// Tab to write to
+		(useHubTabID) ? "" : bundle_deviceID, 	// Optional suffix of tab if node, not hub defines complete tab ID
+		bundle_deviceID); 						// The bundle source's device ID
 
-
-
-	// #if useHubTabID == 1
-	// 	// Use hub's stored tab ID (in config file) to define spreadsheet tab
-	// 	sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s", 
-	// 		device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID);
-	// #else
-	// 	// Use bundle source to define spreadsheet tab suffix
-	// 	if (!use_default) {
-	// 		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
-	// 			device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID, bundle_deviceID); 	
-	// 	} else {
-	// 		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=default_%s%s&key2=deviceID&val2=%s", 
-	// 			device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID, bundle_deviceID); 	
-	// 	}
-	// #endif
-
-
-	#if useHubTabID == 1
-		// Use hub's stored tab ID (in config file) to define spreadsheet tab
-		sprintf(args, "/pushingbox?data=devid~%s~sheetID~%s~tabID~%s~deviceID~%s", 
-			device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID);
-	#else
-		// Use bundle source to define spreadsheet tab suffix
-		if (!use_default) {
-			sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
-				device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID, bundle_deviceID); 
-		} else {
-			sprintf(args, "/pushingbox?data=devid~%s~sheetID~%s~tabID~default_%s%s~deviceID~%s", 
-				device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID, bundle_deviceID); 	
-		}
-	#endif
-
-	// Add key and val specifying the data 
-	sprintf(args, "%s&key3=full_data&val3=", args);
-
-	// Populate URL with the bundle kesy and values
+	// Populate URL with the bundle keys and values from the OSC bundle/message
 	for (int i = 0, j = 3; (i < MAX_PB_FIELDS-6) && (i < msg.size()); i+=2, j++) {
 		sprintf(args, "%s%s~%s~", args, get_data_value(&msg, i).c_str(), get_data_value(&msg, i+1).c_str() );
 	}
@@ -214,7 +130,6 @@ void sendToPushingBox(OSCMessage &msg)
 
 	LOOM_DEBUG_Println2("URL get args: ", args);
 	LOOM_DEBUG_Println2("Len: ", strlen(args));
-
 
 
 	// Send to PushingBox with enabled internet connection
@@ -433,5 +348,141 @@ void set_push_min_delay(OSCMessage &msg)
 		LOOM_DEBUG_Println("Command to set PushingBox minimum upload delay was not in correct format");
 	}
 }
+
+
+
+// --- APPLY PUSHINGBOX FILTERS ---
+//
+// Apply any filters that might prevent uploading a message to PushingBox
+//
+// @param msg  The message to check filters against
+//
+// @return True if all filters are passed, False otherwise
+//
+bool apply_pushingbox_filters(OSCMessage* msg)
+{
+	// Only send bundles if a minimum time (pushUploadMinDelay seconds) has passed since last upload
+	#if pushUploadFilter == 1
+		if (!check_push_upload_filter()) return false;
+	#endif // of pushUploadFilter
+
+	// Filter out bundles that are too large
+	if (!check_message_size(msg)) 		return false;
+
+	// Don't upload any ping messages
+	if (is_ping_message(msg)) 			return false;
+
+	// If option enabled, make sure device is in the same family
+	#if verify_family_match == 1
+		if (!check_family_match(msg)) 	return false;
+	#endif
+ 
+ 	// Passed all filters
+ 	return true;
+}
+
+
+
+// -- GET SPREADSHEET ID ---
+//
+// Determines correct spreadsheet ID to send to 
+//
+// @param msg    The OSC message to be sent
+// @param ss_id  The char buffer to fill with the ss_id 
+//
+void get_spreadsheet_id(OSCMessage* msg, char* ss_id)
+{
+	#if use_pb_sheet_array == 1 // Using list of spreadsheet_ids
+		int msg_family_num = osc_extract_family_number(msg);
+
+		// If out of range of array
+		if (  (msg_family_num < 0) || (msg_family_num >= sizeof(spreadsheet_list)/sizeof(spreadsheet_list[0]) )  ) {
+			strcpy(ss_id, pb_default_sheet); 						// Use default
+			LOOM_DEBUG_Println("Family number out of spreadsheet list range, using default");
+			use_default = true;
+		} else {
+			strcpy(ss_id, spreadsheet_list[msg_family_num]);	// Use ID from list
+			LOOM_DEBUG_Println2("Using spreadsheet_id at index: ", msg_family_num);
+		}
+	#else // Use dynamic single spreadsheet_id
+		strcpy(ss_id, config_pushingbox->spreadsheet_id);
+	#endif
+}
+
+
+
+// --- CHECK PUSH UPLOAD FILTER ---
+//
+// Only send bundles if a minimum time (pushUploadMinDelay seconds) has passed since last upload
+// This function checks if the message should be filtered out
+//
+// @return True if enough time has passed and the message can be uploaded, false otherwise
+//
+#if pushUploadFilter == 1
+bool check_push_upload_filter()
+{
+	if ( (millis() - lastPushMillis) < (1000*config_pushingbox->minimum_upload_delay) ) {
+		return false; // has not been long enough yet, just return
+	} else {
+		lastPushMillis = millis();
+		return true;
+	}
+}
+#endif // of pushUploadFilter
+
+
+
+
+// --- CHECK MESSAGE SIZE ---
+//
+// Make sure message is not too large to send
+// Also catches empty msgs, which seem to have a size around 1493 for some reason
+//
+// @param msg  The message to check the size of 
+//
+// @return True if message is of sendable size
+bool check_message_size(OSCMessage* msg)
+{
+	if (msg->size() > MAX_PB_FIELDS) { // This also catches empty msgs, which seem to have a size around 1493 for some reason
+		LOOM_DEBUG_Println("Message too large to send to PushingBox");
+		return false;
+	} else {
+		return true;
+	}
+}
+
+// --- IS PING MESSAGE ---
+// 
+// Make sure ping messages don't accidentally get uploaded
+//
+// @param msg 	OSC message to check if is ping related
+//
+// @return True if message was ping related
+//
+bool is_ping_message(OSCMessage* msg)
+{
+	char check_ping[50];
+	osc_extract_header_section(msg, 2, check_ping);
+	return strstr(get_address_string(msg).c_str(), "Ping");
+}
+
+
+// --- CHECK FAMILY MATCH ---
+//
+// Make sure message source is of the same family as this device
+//
+// @param msg 	OSC message to check family of
+//
+// @return True if the message's family matches
+//
+bool check_family_match(OSCMessage* msg)
+{
+	char source[32];
+	osc_extract_header_section(msg, 1, source);
+	return (strcmp(FAMILY STR(FAMILY_NUM), source) == 0);
+}
+
+
+
 
 

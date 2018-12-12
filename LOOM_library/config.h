@@ -28,7 +28,7 @@
 // ================================================================
 // --- Device Identification --- 
 #define FAMILY 		"LOOM"		// Will usually be "LOOM", you can change this if you are setting up your own network
-#define FAMILY_NUM       1		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
+#define FAMILY_NUM       2		// Specifies the subnet of the family that the device is on. 0 for elevated permissions (can communicate with any subnet), 1-9 for normal
 #define CHANNEL          1		// Channel to use. Set to 1-8 for channels A-H, respectively (on WiFi), LoRa can use 1-9. Alternatively can define to -1 to used advanced option INIT_INST
 #define REQUEST_SETTINGS 0		// 1 to request dynamic channel settings (i.e. next available channel) from MaxMSP Channel Manager, 0 to not
 #define AUTO_NAME        1		// 1 to enable naming device based on configured settings (if not set manual name in advanced options)
@@ -86,10 +86,10 @@
 // ================================================================ 
 // ===                 COMMUNICATION PLATFORMS                  === 
 // ================================================================
-#define is_wifi       1		// 1 to enable WiFi
+#define is_wifi       0		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
-#define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
+#define is_ethernet   1		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808 version)
 
 
@@ -517,18 +517,13 @@
 	// Google Spreadsheet ID
 	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; looks like random string of characters)
 	// #define init_spreadsheet_id "***REMOVED***"  // Luke Test Sheet
-
 	#define init_spreadsheet_id "Replace_with_your_spreadsheet_id"  // Luke Test Sheet 2
-
-
 	// #define init_spreadsheet_id "***REMOVED***"  // Ghana Proto Sheet
 
 	// Required by PushingBox, specific to each scenario
 	// Does not always need to change with different spreadsheets, only different PushingBox accounts
 	// #define device_id "***REMOVED***" 	// Luke
-
 	#define device_id "Replace_with_your_device_id" 	// Luke Tests
-
 	// #define device_id "***REMOVED***" 	// Opens
 
 
@@ -539,10 +534,10 @@
 
 	#if useHubTabID == 1	
 		// The hub defines tab ID regardless of bundle source
-		#define init_tab_id "Sheet1" 	   // Defines tab if hub is defining tab instead of nodes
+		#define init_tab_id "HubSheet3" 	   // Defines tab if hub is defining tab instead of nodes
 	#else 					
 		// Use bundle source and below prefix to define tab ID
-		#define init_tab_id "Test_"		   // Used as a prefix if node is being used to define tab
+		#define init_tab_id "Test3_"		   // Used as a prefix if node is being used to define tab
 	#endif	
 
 
@@ -570,7 +565,9 @@
 			"***REMOVED***"
 		};
 
-		#define pb_default_sheet "***REMOVED***" 	// Default sheet to use if family number is out of range, 
+
+		#define pb_default_sheet "Replace_with_your_spreadsheet_id"
+		// #define pb_default_sheet "***REMOVED***" 	// Default sheet to use if family number is out of range, 
 																			 		// can be duplicate of an element in the array
 	#endif
 
@@ -586,7 +583,7 @@
 	// Uses millis
 	// Recommended that pushUploadedFilter is left enabled
 	#define pushUploadFilter   	1 	// 1 to enable a millis delay to uploading to PushingBox
-	#define pushUploadMinDelay  5  	// delay in seconds
+	#define pushUploadMinDelay  3  	// delay in seconds
 #endif
 
 
