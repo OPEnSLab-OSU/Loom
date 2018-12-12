@@ -6,7 +6,7 @@
 // ================================================================ 
 // ===                       DEFINITIONS                        === 
 // ================================================================
-#define MAX_FIELDS 32	// Maximum number of fields accepted by the PushingBox Scenario    
+#define MAX_PB_FIELDS 48	// Maximum number of fields accepted by the PushingBox Scenario    
 
 
 // ================================================================ 
@@ -101,12 +101,9 @@ void setup_pushingbox()
 void sendToPushingBox(OSCMessage &msg) 
 {
 
-
 	// Only send bundles if a minimum time (pushUploadMinDelay seconds) has passed since last upload
 	#if pushUploadFilter == 1
-		// currentPushMillis = millis();
 		if ( (millis() - lastPushMillis) < (1000*config_pushingbox->minimum_upload_delay) ) {
-			// LOOM_DEBUG_Println("Hasn't been long enough since last PushingBox upload, skipping this one");	
 			return; // has not been long enough yet, just return
 		} else {
 			lastPushMillis = millis();
@@ -114,26 +111,24 @@ void sendToPushingBox(OSCMessage &msg)
 	#endif // of pushUploadFilter
 
 
-
-
-	if (msg.size() > 32) { // This also catches empty msgs, which seem to have a size around 1493 for some reason
+	// Filter out bundles that are too large
+	if (msg.size() > MAX_PB_FIELDS) { // This also catches empty msgs, which seem to have a size around 1493 for some reason
 		LOOM_DEBUG_Println("Message to large to send to PushingBox");
 		return;
 	}
 
 
+// Probably not needed anymore because subnet filter upon receiving bundles
 
-
-	// If option enabled, make sure device is in the same family
-	#if verify_family_match == 1
-		char source[32];
-		osc_extract_header_section(&msg, 1, source);
-		if (strcmp(FAMILY STR(FAMILY_NUM), source) != 0) {
-			LOOM_DEBUG_Println("Source device family did not match");
-			return;
-		}
-	#endif
-
+	// // If option enabled, make sure device is in the same family
+	// #if verify_family_match == 1
+	// 	char source[32];
+	// 	osc_extract_header_section(&msg, 1, source);
+	// 	if (strcmp(FAMILY STR(FAMILY_NUM), source) != 0) {
+	// 		LOOM_DEBUG_Println("Source device family did not match");
+	// 		return;
+	// 	}
+	// #endif
 
 
 	// Make sure this bundle wasn't ping related
@@ -145,29 +140,21 @@ void sendToPushingBox(OSCMessage &msg)
 	}
 
 
+	// LOOM_DEBUG_Println("PUSHINGBOX MESSAGE");
+	// print_message(&msg);
+
 
 	LOOM_DEBUG_Println("Sending to PushingBox");
 
 
-
-
-	// Get the device source from bundle header 
-	char bundle_deviceID[20];
-	osc_extract_header_section(&msg, 2, bundle_deviceID);
-
-
-
-	// Build url arguments from bundle
-	char args[1024];
-
-
-	// Determine spreadsheet ID
-	char ss_id[48];
+	char bundle_deviceID[20], args[1024], ss_id[48];
 	bool use_default = false;
 
-	#if use_pb_sheet_array == 1 // Using list of spreadsheet_ids
+	// Get the device source from bundle header 
+	osc_extract_header_section(&msg, 2, bundle_deviceID);
 
-		int  msg_family_num = osc_extract_family_number(&msg);
+	#if use_pb_sheet_array == 1 // Using list of spreadsheet_ids
+		int msg_family_num = osc_extract_family_number(&msg);
 
 		// If out of range of array
 		if (  (msg_family_num < 0) || (msg_family_num >= sizeof(spreadsheet_list)/sizeof(spreadsheet_list[0]) )  ) {
@@ -183,78 +170,64 @@ void sendToPushingBox(OSCMessage &msg)
 	#endif
 
 
-	// #if useHubTabID == 1
-	// 	// Use hub's stored tab ID (in config file) to define spreadsheet tab
-	// 	sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s", 
-	// 		device_id, config_pushingbox->spreadsheet_id, tab_id_complete, bundle_deviceID);
-	// #else
-	// 	// Use bundle source to define spreadsheet tab suffix
-	// 	sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
-	// 		device_id, config_pushingbox->spreadsheet_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
-	// #endif
-
-// --- 
 
 	// #if useHubTabID == 1
 	// 	// Use hub's stored tab ID (in config file) to define spreadsheet tab
 	// 	sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s", 
-	// 		device_id, ss_id, tab_id_complete, bundle_deviceID);
-	// 	// sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
-	// 	// 	device_id, ss_id, (use_default) ? "default_" : "", tab_id_complete, bundle_deviceID);
+	// 		device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID);
 	// #else
 	// 	// Use bundle source to define spreadsheet tab suffix
 	// 	if (!use_default) {
 	// 		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
-	// 			device_id, ss_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
+	// 			device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID, bundle_deviceID); 	
 	// 	} else {
 	// 		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=default_%s%s&key2=deviceID&val2=%s", 
-	// 			device_id, ss_id, tab_id_prefix, bundle_deviceID, bundle_deviceID); 	
+	// 			device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID, bundle_deviceID); 	
 	// 	}
 	// #endif
 
+
 	#if useHubTabID == 1
 		// Use hub's stored tab ID (in config file) to define spreadsheet tab
-		sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s", 
+		sprintf(args, "/pushingbox?data=devid~%s~sheetID~%s~tabID~%s~deviceID~%s", 
 			device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID);
 	#else
 		// Use bundle source to define spreadsheet tab suffix
 		if (!use_default) {
 			sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=%s%s&key2=deviceID&val2=%s", 
-				device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID, bundle_deviceID); 	
+				device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID, bundle_deviceID); 
 		} else {
-			sprintf(args, "/pushingbox?devid=%s&key0=sheetID&val0=%s&key1=tabID&val1=default_%s%s&key2=deviceID&val2=%s", 
+			sprintf(args, "/pushingbox?data=devid~%s~sheetID~%s~tabID~default_%s%s~deviceID~%s", 
 				device_id, ss_id, config_pushingbox->tab_id, bundle_deviceID, bundle_deviceID); 	
 		}
 	#endif
 
-
+	// Add key and val specifying the data 
+	sprintf(args, "%s&key3=full_data&val3=", args);
 
 	// Populate URL with the bundle kesy and values
-	for (int i = 0, j = 3; (i < MAX_FIELDS-6) && (i < msg.size()); i+=2, j++) {
-	    char buf1[30], buf2[30];
-		(get_data_value(&msg, i  )).toCharArray(buf1, 30); 
-		(get_data_value(&msg, i+1)).toCharArray(buf2, 30);
-		sprintf(args, "%s&key%d=%s&val%d=%s", args, j, buf1, j, buf2);
+	for (int i = 0, j = 3; (i < MAX_PB_FIELDS-6) && (i < msg.size()); i+=2, j++) {
+		sprintf(args, "%s%s~%s~", args, get_data_value(&msg, i).c_str(), get_data_value(&msg, i+1).c_str() );
 	}
-	LOOM_DEBUG_Println2("URL get args: ", args);
+	args[strlen(args)-1] = '\0'; // Delete trailing '~'
 
+
+	LOOM_DEBUG_Println2("URL get args: ", args);
+	LOOM_DEBUG_Println2("Len: ", strlen(args));
 
 
 
 	// Send to PushingBox with enabled internet connection
 	#if is_ethernet == 1
-		pushingbox_ethernet(args);
-		return;
+		pushingbox_ethernet(args);	return;
 	#endif
 
 	#if is_wifi == 1
-		pushingbox_wifi(args);
-		return;
+		pushingbox_wifi(args);		return;
 	#endif
 
 	#if is_fona == 1
-		pushingbox_fona(args);
-		return;
+		pushingbox_fona(args);		return;
 	#endif
 }
 
@@ -330,6 +303,9 @@ void pushingbox_wifi(char* args)
 {
 	LOOM_DEBUG_Println("Running PushingBox for WiFi");
 
+	LOOM_DEBUG_Println2("ARGS: ", args);
+	LOOM_DEBUG_Println2("LEN: ", strlen(args));
+
 	wifi_client.stop();
 	if (wifi_client.connect("api.pushingbox.com", 80)) {  
 		LOOM_DEBUG_Println("Connection good");
@@ -393,6 +369,8 @@ void pushingbox_fona(char* args)
 	fona.HTTP_GET_end();
 }
 #endif // of #if is_fona == 1
+
+
 
 
 

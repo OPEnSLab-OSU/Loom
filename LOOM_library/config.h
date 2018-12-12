@@ -232,9 +232,6 @@
 	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
 	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"		// Network password
-
-	
-
 #endif
 
 
@@ -519,13 +516,19 @@
 #if is_pushingbox == 1	
 	// Google Spreadsheet ID
 	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; looks like random string of characters)
-	#define init_spreadsheet_id "***REMOVED***"  // Luke Test Sheet
+	// #define init_spreadsheet_id "***REMOVED***"  // Luke Test Sheet
+
+	#define init_spreadsheet_id "Replace_with_your_spreadsheet_id"  // Luke Test Sheet 2
+
 
 	// #define init_spreadsheet_id "***REMOVED***"  // Ghana Proto Sheet
 
 	// Required by PushingBox, specific to each scenario
 	// Does not always need to change with different spreadsheets, only different PushingBox accounts
-	#define device_id "***REMOVED***" 	// Luke
+	// #define device_id "***REMOVED***" 	// Luke
+
+	#define device_id "Replace_with_your_device_id" 	// Luke Tests
+
 	// #define device_id "***REMOVED***" 	// Opens
 
 

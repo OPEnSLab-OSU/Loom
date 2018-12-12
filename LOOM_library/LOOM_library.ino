@@ -36,25 +36,32 @@ void loop()
 	OSCBundle bndl;
 
 
-
 	// --- Common Example ---
 
-	receive_bundle(&bndl, WIFI);	// Receive messages
-	if (bndl.size()) {
-		print_bundle(&bndl);		// Print bundle if LOOM_DEBUG enabled
-	}
-	process_bundle(&bndl);			// Dispatch message to correct handling functions
+	// receive_bundle(&bndl, WIFI);	// Receive messages
+	// if (bndl.size()) {
+	// 	print_bundle(&bndl);		// Print bundle if LOOM_DEBUG enabled
+	// }
+	// process_bundle(&bndl);			// Dispatch message to correct handling functions
 
 	measure_sensors();				// Read sensors, store data in sensor state struct
 	package_data(&bndl);			// Copy sensor data from state to provided bundle
 
-	// print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
 
-	send_bundle(&bndl, WIFI);		// Send bundle of packaged data
+	append_to_bundle_key_value(&bndl, "abc", 123);
+	append_to_bundle_key_value(&bndl, "def", (float)4.56);
+	append_to_bundle_key_value(&bndl, "ghi", "seven");
+	append_to_bundle_key_value(&bndl, "jkl", String("Eight"));
+	append_to_bundle_key_value(&bndl, "mno", 987);
+
+
+	print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
+
+	// send_bundle(&bndl, WIFI);		// Send bundle of packaged data
 	log_bundle(&bndl, PUSHINGBOX);	// Send bundle to Google Sheet
 	// log_bundle(&bndl, SDCARD, "Ishield.csv");	// Send bundle to Google Sheet
 
-	// delay(4000);
+	delay(4000);
 
 	additional_loop_checks();			// Miscellaneous checks
 	// --- End Example ---
@@ -180,6 +187,7 @@ void loop()
 // void additional_loop_checks();
 // void sleep_for(int amount, TimeUnits units, SleepMode mode);
 // void sleep_until_time(SleepMode mode, int hour, int min, int sec);
+// void append_to_bundle_key_value(OSCBundle *bndl, char* key, T elem);
 
 // CommPlatforms: WIFI, LORA, NRF
 // LogPlatforms:  PUSHINGBOX, SDCARD, OLED
