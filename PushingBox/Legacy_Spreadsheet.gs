@@ -8,7 +8,20 @@ Code:*/
 //-----------------------------------------------
 
 
-
+//Run this in order to test the doGet(e) function
+function fakeGet() {
+//  var eventObject = 
+//    {
+//      "parameter": {
+//        "key0": "sheetID",
+//        "val0": "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"
+//      },
+//      "contextPath": "",
+//      "contentLength": -1,
+//      "queryString": "action=view&page=3",
+//    }
+//  doGet(eventObject);
+}
 
 // Automatically called whenever the linked PushingBox Scenario
 // has data sent to it in the form of key-value pairs. 
@@ -82,43 +95,22 @@ function doGet(e) {
 // Takes in the arguments of the get request
 // Formats it into a dictionary linking keys to their values.
 function getDataDict(get_args) {
-  
   var data_dict = {};
   var col_list = getMatches(get_args, "key[0-9]+");
   var val_list = getMatches(get_args, "val[0-9]+");
   
-  
   // Add date and time columns
-  // This could be customized further
+  // This could be customize further
   var d = new Date();
-  data_dict["UTC"]  = d.toUTCString();
   data_dict["Date"] = d.toLocaleDateString();
   data_dict["Time"] = d.toLocaleTimeString();
-
-  // Populate dictionary
+  
   for (i = 0; i < col_list.length; i++) {
     if (val_list[i] != "null")
       data_dict[col_list[i]] = val_list[i];
   }
-  
-  // Convert data string to array and then dictionary
-  var data_array = data_dict["full_data"].split('~');
-  for (i = 0; i < data_array.length; i+=2) {
-    data_dict[data_array[i]] = data_array[i+1];
-  }
-  
-  // Remove the data string
-  delete data_dict["full_data"];
- 
-  
   return data_dict;
 }
-
-
-
-
-
-// --- AUXILIARY FUNCTIONS ---
 
 
 // Returns the subset of args that matched pattern patt as a list.
@@ -175,7 +167,6 @@ function stripQuotes( value ) {
   return value.replace(/^["']|['"]$/g, "");
 }
 
-
 // Checks if two arrays are equal to each other.
 function arraysEqual(a, b) {
   if (a === b)                return true;
@@ -187,7 +178,6 @@ function arraysEqual(a, b) {
   }
   return true;
 }
-
 
 // Finds the difference of two arrays
 // Used to remove various columns from being printed

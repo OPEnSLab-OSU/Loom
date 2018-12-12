@@ -232,9 +232,6 @@
 	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
 	#define DEFAULT_PASSWORD  "arduino101"		// Network password
-
-	
-
 #endif
 
 
@@ -519,13 +516,19 @@
 #if is_pushingbox == 1	
 	// Google Spreadsheet ID
 	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; looks like random string of characters)
-	#define init_spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"  // Luke Test Sheet
+	// #define init_spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"  // Luke Test Sheet
+
+	#define init_spreadsheet_id "1FPwr8Q8QyP6-VbW1lp_fyFne38dbWQUhLGtNW7gVmMk"  // Luke Test Sheet 2
+
 
 	// #define init_spreadsheet_id "1wMNszrEmPt2jN1ZYDNJhO5lJHm4WcMZhzP6ck5omEOU"  // Ghana Proto Sheet
 
 	// Required by PushingBox, specific to each scenario
 	// Does not always need to change with different spreadsheets, only different PushingBox accounts
-	#define device_id "v7ECCEF7A460E57A" 	// Luke
+	// #define device_id "v7ECCEF7A460E57A" 	// Luke
+
+	#define device_id "v30C7C2EDE705157" 	// Luke Tests
+
 	// #define device_id "vBC42D81EEEB62D5" 	// Opens
 
 
