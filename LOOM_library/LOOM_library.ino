@@ -61,7 +61,7 @@ void loop()
 	log_bundle(&bndl, PUSHINGBOX);	// Send bundle to Google Sheet
 	// log_bundle(&bndl, SDCARD, "Ishield.csv");	// Send bundle to Google Sheet
 
-	delay(4000);
+	delay(5000);
 
 	additional_loop_checks();			// Miscellaneous checks
 	// --- End Example ---
