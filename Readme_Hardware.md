@@ -81,9 +81,10 @@ definition `is_32U4`.  This can be done by including the following lines in your
 
 ### WiFi
 
-**Dependencies:** Arduino [WiFi101 library](https://github.com/arduino-libraries/WiFi101)
+**Dependencies:** [WiFi101](https://github.com/arduino-libraries/WiFi101)
 
 WiFi is supported by both the Adafruit Feather M0 and the Adafruit Feather 32u4.
+
 **Features:**
 
 * Send and receive arbitrary length UDP packets
@@ -91,7 +92,7 @@ WiFi is supported by both the Adafruit Feather M0 and the Adafruit Feather 32u4.
 
 ### LoRa
 
-**Dependencies:** [RadioHead library](https://github.com/adafruit/RadioHead)
+**Dependencies:** [RadioHead](https://github.com/adafruit/RadioHead)
 
 LoRa wireless communication is supported by both the Adafruit Feather M0 and the
 Adafruit Feather 32u4.
@@ -137,25 +138,263 @@ a variable found in the `RF24Network_config.h` file.
 ### I2C Sensors
 
 The following I2C Sensors are currently supported by Project Loom:
-* [AS7262](https://www.sparkfun.com/products/14347) Spectral Sensor (visible)
-* [AS7263](https://www.sparkfun.com/products/14351) Spectral Sensor (near infrared)
-* [AS7265X](https://www.sparkfun.com/products/15050) Spectral Sensor Triad (visible, near infrared, ultraviolet)
-* [FXAS21002](https://www.adafruit.com/product/3463) Gyroscope
-* [FXOS8700](https://www.adafruit.com/product/3463) Accelerometer / Magnetometer
-* [HX711](https://www.sparkfun.com/products/13879) Load Cell
-* [LIS3DH](https://www.sparkfun.com/products/13963) Accelerometer
-* [MB1232](https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm) Sonar
+* AS7262 Spectral Sensor (visible)
+* AS7263 Spectral Sensor (near infrared)
+* AS7265X Spectral Sensor Triad (visible, near infrared, ultraviolet)
+* FXAS21002 Gyroscope
+* FXOS8700 Accelerometer / Magnetometer
+* HX711 Load Cell
+* LIS3DH Accelerometer
+* MB1232 Sonar
 * MPU6050 Accelerometer / Gyroscope
 * MS5803 Atmospheric Pressure / Temperature Sensor 
-* [SHT31-D](https://www.adafruit.com/product/2857) Temperature / Humidity
-* [TSL2561](https://www.adafruit.com/product/439) Lux Sensor
-* [TSL2591](https://www.adafruit.com/product/1980) Lux Sensor
-* [ZX Gesture Sensor](https://www.sparkfun.com/products/13162) ZX Distance Sensor
+* SHT31-D Temperature / Humidity
+* TSL2561 Lux Sensor
+* TSL2591Lux Sensor
+* ZX Gesture Sensor ZX Distance Sensor
 
 The system also supports the following multiplexer in order to allow the use of multiple sensors with the same address:
-* [TCA9548A](https://www.adafruit.com/product/2717)
+* TCA9548A I2C Multiplexer
+
+
+
+#### AS7262 Spectral Sensor (visible)
+
+**Product Page:** [SparkFun](https://www.sparkfun.com/products/14347)
+
+**Datasheet:**
+
+**Dependencies:**
+
+**Technical Details**
+
+- 
+
+**Additional Notes**
+
+- 
+
+#### AS7263 Spectral Sensor (near infrared)
+**Product Page:** [SparkFun](https://www.sparkfun.com/products/14351)
+
+**Datasheet:**
+
+**Dependencies:**
+
+**Technical Details**
+
+- 
+
+**Additional Notes**
+
+- 
+
+#### AS7265X Spectral Sensor Triad (visible, near infrared, ultraviolet)
+
+**Product Page:** [SparkFun](https://www.sparkfun.com/products/15050)
+
+**Datasheet:**
+
+**Dependencies:**
+
+**Technical Details**
+
+- 
+
+**Additional Notes**
+
+- 
+
+#### FXAS21002 3-Axis Gyroscope
+
+**Product Page:** [Adafruit](https://www.adafruit.com/product/3463)
+
+**Datasheet:** [FXAS21002 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056)
+
+**Dependencies:** [Adafruit_FXAS21002C](https://github.com/adafruit/Adafruit_FXAS21002C) | [Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS) |  [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+
+**Technical Details**
+
+- 2-3.6V Supply
+- ±250/500/1000/2000°/s configurable range
+- Output Data Rates (ODR) from 12.5 to 800 Hz
+- 16-bit digital output resolution
+- 192 bytes FIFO buffer (32 X/Y/Z samples)
+- I2C 7-bit address 0x20, 0x21 
+
+**Available Functions**
+
+- displaySensorDetails_FXAS: Displays the max and min values
+- fxas_sensor_read: Displays the gyrscope speed in reference to X,Y,and Z coordinates in rad/s
+
+**Additional Notes**
+
+- Contained in the same sensor with FXOS8700
+
+#### FXOS8700 3-Axis Accelerometer/Magentometer
+
+**Product Page:** [Adafruit](https://www.adafruit.com/product/3463)
+
+**Datasheet:** [FXOS8700 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/043/458/original/FXOS8700CQ.pdf?1499125614)
+
+**Dependencies:** [Adafruit_FXOS8700](https://github.com/adafruit/Adafruit_FXOS8700) | [Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS) | [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+
+**Technical Details**
+
+- 2-3.6V Supply
+- ±2 g/±4 g/±8 g adjustable acceleration range
+- ±1200 µT magnetic sensor range
+- Output data rates (ODR) from 1.563 Hz to 800 Hz
+- 14-bit ADC resolution for acceleration measurements
+- 16-bit ADC resolution for magnetic measurements
+- I2C 7-bit address 0x1C, 0x1D, 0x1E, 0x1F 
+
+**Available Functions**
+
+- displaySensorDetails_FXOS: Displays the max and min values of the accelrometer and magnetometer
+- fxos_sensor_read: Displays accelrometer data in m/s^2 and magnetometer data in uTesla in X,Y,Z direction
+
+**Additional Notes**
+
+- Contained in the same sensor with FXAS21002
+
+#### HX711 Load Cell Amplifier
+
+**Product Page:** [SparkFun](https://www.sparkfun.com/products/13879)
+
+**Datasheet:**
+
+**Dependencies:**
+
+**Technical Details**
+
+- 
+
+**Additional Notes**
+
+- 
+
+#### LIS3DH Accelerometer
+
+**Product Page:** [SparkFun](https://www.sparkfun.com/products/13963)
+
+**Datasheet:**
+
+**Dependencies:**
+
+**Technical Details**
+
+- 
+
+**Additional Notes**
+
+- 
+
+#### MB1232 Sonar
+
+**Product Page:** [MaxBotix](https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm)
+
+**Datasheet:** [MB1232 Datahsheet](https://www.maxbotix.com/documents/I2CXL-MaxSonar-EZ_Datasheet.pdf)
+
+**Dependencies:** None
+
+**Technical Details**
+
+- Operates from 3.0-5.5V
+- Range: 0-625cm
+- Resolution of 1 cm
+- Up to 40Hz reading rate
+- 42kHz Ultrasonic sensor measures distance to objects
+- I2C 7-bit address 0x70 
+
+**Available Functions**
+
+- takeRangeReading(): Sends the range command to the sensor to take a reading
+- requestRange(): Returns the last range that the sensor read in centimeters
+
+**Additional Notes**
+
+- Same address as multiplexer (0x70)
+- **Multiplexer must use another address if being used with this sensor**
+
+#### MPU6050 Accelerometer / Gyroscope
+
+**Product Page:** [Amazon](https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40/ref=asc_df_B008BOPN40/?tag=hyprod-20&linkCode=df0&hvadid=309773039951&hvpos=1o2&hvnetw=g&hvrand=3728702383655605371&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1024429&hvtargid=pla-366166873147&psc=1)
+
+**Datasheet:**
+
+**Dependencies:**
+
+**Technical Details**
+
+- 
+
+**Additional Notes**
+
+- 
+
+#### MS5803 Atmospheric Pressure / Temperature Sensor 
+
+**Product Page:** [Digi-Key](https://www.digikey.com/product-detail/en/te-connectivity-measurement-specialties/MS580302BA01-00/223-1624-5-ND/5277629)
+
+**Datasheet:**
+
+**Dependencies:**
+
+**Technical Details**
+
+- 
+
+**Additional Notes**
+
+- 
+
+#### SHT31-D Temperature / Humidity
+
+**Product Page:** [Adafruit](https://www.adafruit.com/product/2857)
+
+**Datasheet:** [SHT3x-DIS Datasheet](https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf)
+
+**Dependencies:** [Adafruit_SHT31](https://github.com/adafruit/Adafruit_SHT31)
+
+**Technical Details**
+
+- 2.4-5.5V Supply
+- Temperature: -10-125 °C ±0.3°C 
+- Relative Humidity:0-100% ±2%
+- I2C 7-bit address 0x44, 0x45 
+
+**Available Functions**
+
+- readTemperature(): Reads in the temperature at the time 
+- reatHumidity(): Reads in the humidity at the time
+- sht31_sensor_read: Grabs and displays the temperature in Celsius and the humidity percentage
+- heater(): Turns on the heater to remove condensation
+
+**Additional Notes**
+
+- Has a heater function to remove condensation
+
+#### TSL2561 Lux Sensor
+
+**Product Page:** [Adafruit](https://www.adafruit.com/product/439)
+
+**Datasheet:**
+
+**Dependencies:**
+
+**Technical Details**
+
+- 
+
+**Additional Notes**
+
+- 
 
 #### TSL2591 Lux Sensor
+
+**Product Page:** [Adafruit](https://www.adafruit.com/product/1980)
+
 **Datasheet:** [TSL2591 Datasheet](http://www.adafruit.com/datasheets/TSL25911_Datasheet_EN_v1.pdf)
 
 **Dependencies:** [Adafruit_TSL2591](https://github.com/adafruit/Adafruit_TSL2591_Library) | [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
@@ -179,85 +418,12 @@ The system also supports the following multiplexer in order to allow the use of 
 
 **Additional Notes**
 * Settable gain depending on light conditions
-* Settable integration time for collecting light
-
-#### FXOS8700 3-Axis Accelerometer/Magentometer
-**Datasheet:** [FXOS8700 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/043/458/original/FXOS8700CQ.pdf?1499125614)
-
-**Dependencies** [Adafruit_FXOS8700](https://github.com/adafruit/Adafruit_FXOS8700) | [Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS) | [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
-
-**Technical Details**
-
-* 2-3.6V Supply
-* ±2 g/±4 g/±8 g adjustable acceleration range
-* ±1200 µT magnetic sensor range
-* Output data rates (ODR) from 1.563 Hz to 800 Hz
-* 14-bit ADC resolution for acceleration measurements
-* 16-bit ADC resolution for magnetic measurements
-* I2C 7-bit address 0x1C, 0x1D, 0x1E, 0x1F 
-
-**Available Functions**
-* displaySensorDetails_FXOS: Displays the max and min values of the accelrometer and magnetometer
-* fxos_sensor_read: Displays accelrometer data in m/s^2 and magnetometer data in uTesla in X,Y,Z direction
-
-**Additional Notes**
-
-* Contained in the same sensor with FXAS21002
-
-#### TSL2561 Lux Sensor
-
-**Datasheet:**
-
-**Dependencies**
-
-**Technical Details**
-
-- 
-
-**Additional Notes**
-
-- 
-
-#### FXOS8700 Accelerometer / Magnetometer
-
-**Datasheet:**
-
-**Dependencies**
-
-**Technical Details**
-
-- 
-
-**Additional Notes**
-
-- 
-
-#### 
-
-#### FXAS21002 3-Axis Gyroscope
-
-**Datasheet:** [FXAS21002 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056)
-
-**Dependencies:** [Adafruit_FXAS21002C](https://github.com/adafruit/Adafruit_FXAS21002C) | [Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS) |  [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
-
-**Technical Details**
-
-* 2-3.6V Supply
-* ±250/500/1000/2000°/s configurable range
-* Output Data Rates (ODR) from 12.5 to 800 Hz
-* 16-bit digital output resolution
-* 192 bytes FIFO buffer (32 X/Y/Z samples)
-* I2C 7-bit address 0x20, 0x21 
-
-
-**Available Functions**
-* displaySensorDetails_FXAS: Displays the max and min values
-* fxas_sensor_read: Displays the gyrscope speed in reference to X,Y,and Z coordinates in rad/s
-
-**Additional Notes**
-* Contained in the same sensor with FXOS8700
+* Settable integration time for collecting light 
 
 #### ZX Distance and Gesture Sensor
+
+**Product Page:** [SparkFun](https://www.sparkfun.com/products/13162)
+
 **Datasheet:** [Sparkfun ZX Datasheet](https://cdn.sparkfun.com/assets/learn_tutorials/3/4/5/XYZ_Interactive_Technologies_-_ZX_SparkFun_Sensor_Datasheet.pdf)
 
 **Dependencies:** [SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library](https://github.com/sparkfun/SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library/archive/master.zip)
@@ -276,153 +442,9 @@ The system also supports the following multiplexer in order to allow the use of 
 * Can only use either the gesture function or the read function but can't use both at the same time
 * Has UART capabilities
 
-#### SHT31-D Temperature / Humidity
-
-**Datasheet:** [SHT3x-DIS Datasheet](https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf)
-
-**Dependencies:** [Adafruit_SHT31](https://github.com/adafruit/Adafruit_SHT31)
-
-**Technical Details**
-* 2.4-5.5V Supply
-* Temperature: -10-125 °C ±0.3°C 
-* Relative Humidity:0-100% ±2%
-* I2C 7-bit address 0x44, 0x45 
-
-
-
-**Available Functions**
-* readTemperature(): Reads in the temperature at the time 
-* reatHumidity(): Reads in the humidity at the time
-* sht31_sensor_read: Grabs and displays the temperature in Celsius and the humidity percentage
-* heater(): Turns on the heater to remove condensation
-
-**Additional Notes**
-* Has a heater function to remove condensation
-
-#### MB1232 Sonar
-
-**Datasheet:** [MB1232 Datahsheet](https://www.maxbotix.com/documents/I2CXL-MaxSonar-EZ_Datasheet.pdf)
-
-**Dependencies:** None
-
-**Technical Details**
-
-* Operates from 3.0-5.5V
-* Range: 0-625cm
-* Resolution of 1 cm
-* Up to 40Hz reading rate
-* 42kHz Ultrasonic sensor measures distance to objects
-* I2C 7-bit address 0x70 
-
-**Available Functions**
-* takeRangeReading(): Sends the range command to the sensor to take a reading
-* requestRange(): Returns the last range that the sensor read in centimeters
-
-**Additional Notes**
-* Same address as multiplexer (0x70)
-* **Multiplexer must use another address if being used with this sensor**
-
-
-
-#### MPU6050 Accelerometer / Gyroscope
-
-**Datasheet:**
-
-**Dependencies**
-
-**Technical Details**
-
-- 
-
-**Additional Notes**
-
-- 
-
-#### LIS3DH Accelerometer
-
-**Datasheet:**
-
-**Dependencies**
-
-**Technical Details**
-
-- 
-
-**Additional Notes**
-
-- 
-
-#### MS5803 Atmospheric Pressure / Temperature Sensor 
-
-**Datasheet:**
-
-**Dependencies**
-
-**Technical Details**
-
-- 
-
-**Additional Notes**
-
-- 
-
-#### HX711 Load Cell Amplifier
-
-**Datasheet:**
-
-**Dependencies**
-
-**Technical Details**
-
-- 
-
-**Additional Notes**
-
-- 
-
-#### AS7262 Spectral Sensor (visible)
-
-**Datasheet:**
-
-**Dependencies**
-
-**Technical Details**
-
-- 
-
-**Additional Notes**
-
-- 
-
-#### AS7263 Spectral Sensor (near infrared)
-
-**Datasheet:**
-
-**Dependencies**
-
-**Technical Details**
-
-- 
-
-**Additional Notes**
-
-- 
-
-#### AS7265X Spectral Sensor Triad (visible, near infrared, ultraviolet)
-
-**Datasheet:**
-
-**Dependencies**
-
-**Technical Details**
-
-- 
-
-**Additional Notes**
-
-- 
-
 #### TCA9548A Multiplexer
+
+**Product Page:** [Adafruit](https://www.adafruit.com/product/2717)
 
 **Datasheet:** [TCA9548A Datasheet](http://www.adafruit.com/datasheets/tca9548a.pdf)
 
@@ -438,6 +460,8 @@ The system also supports the following multiplexer in order to allow the use of 
 
 * Address can be changed by using solder bridges on the back of the board
 * **Initial Multiplexer address (0x70) conflicts with MB1232**
+
+
 
 ### SDI-12 Sensors
 
