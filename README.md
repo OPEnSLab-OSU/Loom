@@ -66,9 +66,9 @@ WiFi and LoRa have had the most attention in development and thus have the most 
 | Ethernet       | Ethernet*                   | Currently only used with hubs, expansion in progress         |
 | GSM            | GSM*                        | Currently only one device, so outputs MQTT via GSM, but no GSM receiving yet |
 |                |                             |                                                              |
-| Google Sheets? | Google Sheets (PushingBox)* | Works as output, looking for ways of improving the pipline   |
+| Google Sheets? | Google Sheets (PushingBox)* | Works as output                                              |
 | Adafruit IO*   | Adafruit IO*                | Needs proper integration                                     |
-| IFTTT?         | IFTTT?                      | Currently, IFTTT works only as output though Adafruit IO     |
+| IFTTT?         | IFTTT?                      | IFTTT currently only works as output though Adafruit IO      |
 | SD card?       | **SD card**                 | Works as output, considering as input                        |
 | Serial?        | **Serial**                  | Works for output. Serial as input may or may not be useful (is how Fona is tested) |
 |                | **OLED**                    | Display a bundle on an Adafruit OLED featherwing / breakout  |
@@ -95,13 +95,13 @@ The Loom Library is an answer to the growing set of code to drive Loom's support
 
 ### Overall Structure
 
-The Loom Library is effectively an aggregate of all of the functionality possible within the entirety of the supported devices, sensors, and actuators. The user then specifies the needs of their sketch inside the config.h. Based on the needs of the sketch, the requisite files, functions, and logic will be dynamically included such that only what is needed by the sketch is uploaded to the device. loom_preamble.h uses config.h to know which files to include, these files in turn then include the libraries they need. loom_common.h is also always present as it has the Loom_begin() function, which sets up all the modules and sensors being used by the sketch. 
+The Loom Library is effectively an aggregate of all of the functionality possible within the entirety of the supported devices, sensors, and actuators. The user then specifies the needs of their sketch inside the `config.h`. Based on the needs of the sketch, the requisite files, functions, and logic will be dynamically included such that only what is needed by the sketch is uploaded to the device. loom_preamble.h uses `config.h` to know which files to include, these files in turn then include the libraries they need. `loom_common.h` is also always present as it has the `Loom_begin()` function, which sets up all the modules and sensors being used by the sketch. 
 
 #### Example Library Include Hierarchy
 
 The hierarchy of included files looks something like the following (example if building for Ishield device on Feather M0 WiFi)  *(actual files may have since changed, but the idea/hierarchy remain)*. 
 
-**Note** – bolded are files that are always necessary and thus included, independent of config.h. In angle brackets are non-Loom dependencies.
+**Note** – bolded are files that are always necessary and thus included, independent of `config.h`. In angle brackets are non-Loom dependencies.
 
 - Ishield_Example.ino
   - **Config.h**
@@ -346,7 +346,13 @@ void wake() {
 }
 ```
 
+#### Setting the Time from the Internet
 
+Loom supports setting the RTC time based on the time obtained from an NTP server.
+
+#### UTC Time
+
+Loom supports the usage of either local or UTC time.
 
 ## Non-Volatile Flash and EEPROM memory
 

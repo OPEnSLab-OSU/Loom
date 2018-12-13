@@ -41,7 +41,7 @@ All Loom and device setup is called dynamically within Loom_begin(). A simple se
 ```cpp
 void setup() 
 {
-	Loom_begin();	
+    Loom_begin();	
     
     // Any custom setup code
 }
