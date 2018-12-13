@@ -70,7 +70,7 @@ void  set_rtc_to_compile_time();
 bool  set_rtc_from_internet_time();
 void  convert_local_to_utc(bool to_utc);
 void  convert_local_to_utc();
-bool rtc_validity_check();
+bool  rtc_validity_check();
 void  measure_rtc();
 char* get_datestring(); 
 char* get_timestring();

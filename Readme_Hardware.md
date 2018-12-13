@@ -50,9 +50,7 @@
 
 ### Adafruit Feather M0
 
-Resources:
-* [Adafruit M0 Documentation](https://learn.adafruit.com/adafruit-feather-m0-basic-proto/overview)
-* [ATSAMD21 Datasheet](https://cdn-shop.adafruit.com/product-files/2772/atmel-42181-sam-d21_datasheet.pdf)
+**Resources**: [Adafruit M0 Documentation](https://learn.adafruit.com/adafruit-feather-m0-basic-proto/overview) | [ATSAMD21 Datasheet](https://cdn-shop.adafruit.com/product-files/2772/atmel-42181-sam-d21_datasheet.pdf)
 
 The compiler macro `__SAMD21G18A__` can be used to define code blocks specifically for the Feather M0.
 For readability, we typically use this macro to define our own, more readable preprocessor
@@ -60,57 +58,51 @@ definition `is_M0`.  This can be done by including the following lines in your s
 
 ``` cpp
 #ifdef __SAMD21G18A__
-#define is_M0
+    #define is_M0
 #endif
 ```
 
 ### Adafruit Feather 32u4
 
-Resources:
-* [Adafruit 32u4 Documentation](https://learn.adafruit.com/adafruit-feather-32u4-basic-proto?view=all)
-* [ATMega32U4 Datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf)
+**Resources**: [Adafruit 32u4 Documentation](https://learn.adafruit.com/adafruit-feather-32u4-basic-proto?view=all) | [ATMega32U4 Datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf)
 
-The compiler macro `__AVR_ATmega32U4__` can be used to define code blocks specifically for the Feather 32u4.
-For readability, we typically use this macro to define our own, more readable preprocessor
+The compiler macro `__AVR_ATmega32U4__` can be used to define code blocks specifically for the Feather 32u4. For readability, we typically use this macro to define our own, more readable preprocessor
 definition `is_32U4`.  This can be done by including the following lines in your source code:
 
 ``` cpp
 #ifdef __AVR_ATmega32U4__
-#define is_32U4
+    #define is_32U4
 #endif
 ```
+
+*Note – The Feather 32u4 has less support than the Feather M0 due to its limitations*
 
 ## Wireless Capabilities
 
 ### WiFi
 
+**Dependencies:** Arduino [WiFi101 library](https://github.com/arduino-libraries/WiFi101)
+
 WiFi is supported by both the Adafruit Feather M0 and the Adafruit Feather 32u4.
-Features:
-* Send and receive arbitrary length Udp packets
+**Features:**
+
+* Send and receive arbitrary length UDP packets
 * Works in Access Point mode as well as WPA-protected client mode
 
-#### WiFi Dependencies
-
-WiFi is dependent on the Arduino [WiFi101 library](https://github.com/arduino-libraries/WiFi101). This library provides the WiFiUdp object.
-
 ### LoRa
+
+**Dependencies:** [RadioHead library](https://github.com/adafruit/RadioHead)
 
 LoRa wireless communication is supported by both the Adafruit Feather M0 and the
 Adafruit Feather 32u4.
 
-Features:
+**Features:**
+
 * Send messages up to 2 km line-of-sight.
 * LoRa devices can be addressed with any value between 0 and 255.
 * Can send messages of length up to 251 bytes.
 
-#### LoRa Dependencies
-
-All LoRa modules used by Project Loom are provided by the 
-[RadioHead library](https://github.com/adafruit/RadioHead). This library
-provides both the radio drivers (i.e. `RH_RF95.h`) and a network manager
-(i.e. `RHReliableDatagram.h`).
-
-#### EnableInterrupt.h and RH\_RF95.h compatibility
+**EnableInterrupt.h and RH\_RF95.h compatibility**
 
 EnableInterrupt.h and RH\_RF95.h both try to define the same interrupt vectors.
 To use both of these libraries in the same file, include the following definition
@@ -122,22 +114,20 @@ in your source code:
 
 ### nRF
 
+**Dependencies:** [RF24](https://github.com/nRF24/RF24) | [RF24Network](https://github.com/nRF24/RF24Network)
+
+The libraries for nRF support - [RF24](https://github.com/nRF24/RF24) and [RF24Network](https://github.com/nRF24/RF24Network) - need to be the optimized forks, not the defaults provided the Arduino library manager. The correct versions are provided in the [Loom dependencies](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Dependencies) folder.
+
 The nRF flavor of IoA is comprised with the Nordic nRF24L01+ radio tranceiver.
 nRF is supported by both the Adafruit Feather M0 and the Adafruit Feather 32u4.
 
-Features:
+**Features:**
+
 * nRF devices can be addressed with any value between 0 and 5.
 * Fragmentation allows for messages of any length to be sent with some configuration.
 * Multi-hopping is supported.
 
-#### nRF Dependencies
-
-The libraries for nRF support - [RF24](https://github.com/nRF24/RF24) and [RF24Network](https://github.com/nRF24/RF24Network) - need to be the optimized forks, not the defaults provided the Arduino library manager. The correct versions are provided in the [Loom dependencies](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Dependencies) folder.
-
-* [RF24](https://github.com/nRF24/RF24)
-* [RF24Network](https://github.com/nRF24/RF24Network)
-
-#### Configuring Maximum Message Length
+**Configuring Maximum Message Length**
 
 The maximum message length can be adjusted by editing the value of `MAIN_BUFFER_SIZE`,
 a variable found in the `RF24Network_config.h` file.
@@ -147,25 +137,29 @@ a variable found in the `RF24Network_config.h` file.
 ### I2C Sensors
 
 The following I2C Sensors are currently supported by Project Loom:
-* [TSL2591](https://www.adafruit.com/product/1980) Lux Sensor
-* [TSL2561](https://www.adafruit.com/product/439) Lux Sensor
-* [FXOS8700](https://www.adafruit.com/product/3463) Accelerometer / Magnetometer
-* [FXAS21002](https://www.adafruit.com/product/3463) Gyroscope
-* [ZX Gesture Sensor](https://www.sparkfun.com/products/13162) ZX Distance Sensor
-* [SHT31-D](https://www.adafruit.com/product/2857) Temperature / Humidity
-* [MB1232](https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm) Sonar
-* MPU6050 Accelerometer / Gyroscope
-* [LIS3DH](https://www.sparkfun.com/products/13963) Accelerometer
-* MS5803 Atmospheric Pressure / Temperature Sensor 
-* [HX711](https://www.sparkfun.com/products/13879) Load Cell
 * [AS7262](https://www.sparkfun.com/products/14347) Spectral Sensor (visible)
 * [AS7263](https://www.sparkfun.com/products/14351) Spectral Sensor (near infrared)
 * [AS7265X](https://www.sparkfun.com/products/15050) Spectral Sensor Triad (visible, near infrared, ultraviolet)
+* [FXAS21002](https://www.adafruit.com/product/3463) Gyroscope
+* [FXOS8700](https://www.adafruit.com/product/3463) Accelerometer / Magnetometer
+* [HX711](https://www.sparkfun.com/products/13879) Load Cell
+* [LIS3DH](https://www.sparkfun.com/products/13963) Accelerometer
+* [MB1232](https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm) Sonar
+* MPU6050 Accelerometer / Gyroscope
+* MS5803 Atmospheric Pressure / Temperature Sensor 
+* [SHT31-D](https://www.adafruit.com/product/2857) Temperature / Humidity
+* [TSL2561](https://www.adafruit.com/product/439) Lux Sensor
+* [TSL2591](https://www.adafruit.com/product/1980) Lux Sensor
+* [ZX Gesture Sensor](https://www.sparkfun.com/products/13162) ZX Distance Sensor
 
 The system also supports the following multiplexer in order to allow the use of multiple sensors with the same address:
 * [TCA9548A](https://www.adafruit.com/product/2717)
 
 #### TSL2591 Lux Sensor
+**Datasheet:** [TSL2591 Datasheet](http://www.adafruit.com/datasheets/TSL25911_Datasheet_EN_v1.pdf)
+
+**Dependencies:** [Adafruit_TSL2591](https://github.com/adafruit/Adafruit_TSL2591_Library) | [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+
 **Technical Details**
 
 * Approximates Human eye Response
@@ -175,11 +169,8 @@ The system also supports the following multiplexer in order to allow the use of 
 * Voltage range: 3.3-5V into onboard regulator
 * I2C 7-bit address 0x29 
 
-**Dependencies Required**
-* [Adafruit_TSL2591](https://github.com/adafruit/Adafruit_TSL2591_Library)
-* [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
-
 **Available Functions**
+
 * displaySensorDetails: Displays basic info about the sensor
 * configureSensor: Sets the gain and integration time
 * simpleRead: Grabs a simple read of the luminosity
@@ -190,10 +181,13 @@ The system also supports the following multiplexer in order to allow the use of 
 * Settable gain depending on light conditions
 * Settable integration time for collecting light
 
-**Datasheet:** [TSL2591 Datasheet](http://www.adafruit.com/datasheets/TSL25911_Datasheet_EN_v1.pdf)
-
 #### FXOS8700 3-Axis Accelerometer/Magentometer
+**Datasheet:** [FXOS8700 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/043/458/original/FXOS8700CQ.pdf?1499125614)
+
+**Dependencies** [Adafruit_FXOS8700](https://github.com/adafruit/Adafruit_FXOS8700) | [Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS) | [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+
 **Technical Details**
+
 * 2-3.6V Supply
 * ±2 g/±4 g/±8 g adjustable acceleration range
 * ±1200 µT magnetic sensor range
@@ -202,43 +196,35 @@ The system also supports the following multiplexer in order to allow the use of 
 * 16-bit ADC resolution for magnetic measurements
 * I2C 7-bit address 0x1C, 0x1D, 0x1E, 0x1F 
 
-**Dependencies Required**
-* [Adafruit_FXOS8700](https://github.com/adafruit/Adafruit_FXOS8700)
-* [Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS)
-* [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
-
 **Available Functions**
 * displaySensorDetails_FXOS: Displays the max and min values of the accelrometer and magnetometer
 * fxos_sensor_read: Displays accelrometer data in m/s^2 and magnetometer data in uTesla in X,Y,Z direction
 
 **Additional Notes**
-* Contained in the same sensor with FXAS21002
 
-**Datasheet:** [FXOS8700 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/043/458/original/FXOS8700CQ.pdf?1499125614)
+* Contained in the same sensor with FXAS21002
 
 #### TSL2561 Lux Sensor
 
+**Datasheet:**
+
+**Dependencies**
+
 **Technical Details**
-
-- 
-
-**Dependencies Required**
 
 - 
 
 **Additional Notes**
 
 - 
-
-**Datasheet:** 
 
 #### FXOS8700 Accelerometer / Magnetometer
 
+**Datasheet:**
+
+**Dependencies**
+
 **Technical Details**
-
-- 
-
-**Dependencies Required**
 
 - 
 
@@ -246,9 +232,13 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - 
 
-**Datasheet:** 
+#### 
 
 #### FXAS21002 3-Axis Gyroscope
+
+**Datasheet:** [FXAS21002 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056)
+
+**Dependencies:** [Adafruit_FXAS21002C](https://github.com/adafruit/Adafruit_FXAS21002C) | [Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS) |  [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
 
 **Technical Details**
 
@@ -259,10 +249,6 @@ The system also supports the following multiplexer in order to allow the use of 
 * 192 bytes FIFO buffer (32 X/Y/Z samples)
 * I2C 7-bit address 0x20, 0x21 
 
-**Dependencies Required**
-* [Adafruit_FXAS21002C](https://github.com/adafruit/Adafruit_FXAS21002C)
-* [Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS)
-* [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
 
 **Available Functions**
 * displaySensorDetails_FXAS: Displays the max and min values
@@ -271,15 +257,15 @@ The system also supports the following multiplexer in order to allow the use of 
 **Additional Notes**
 * Contained in the same sensor with FXOS8700
 
-**Datasheet:** [FXAS21002 Datasheet](https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056)
-
 #### ZX Distance and Gesture Sensor
+**Datasheet:** [Sparkfun ZX Datasheet](https://cdn.sparkfun.com/assets/learn_tutorials/3/4/5/XYZ_Interactive_Technologies_-_ZX_SparkFun_Sensor_Datasheet.pdf)
+
+**Dependencies:** [SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library](https://github.com/sparkfun/SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library/archive/master.zip)
+
 **Technical Details**
+
 * 2-3.6V Supply
 * I2C 7-bit address 0x10, 0x11 
-
-**Dependencies Required**
-* [SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library](https://github.com/sparkfun/SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library/archive/master.zip)
 
 **Available Functions**
 * displaySensorDetails_ZX: Displays the model version of the sensor
@@ -290,17 +276,19 @@ The system also supports the following multiplexer in order to allow the use of 
 * Can only use either the gesture function or the read function but can't use both at the same time
 * Has UART capabilities
 
-**Datasheet:** [Sparkfun ZX Datasheet](https://cdn.sparkfun.com/assets/learn_tutorials/3/4/5/XYZ_Interactive_Technologies_-_ZX_SparkFun_Sensor_Datasheet.pdf)
-
 #### SHT31-D Temperature / Humidity
+
+**Datasheet:** [SHT3x-DIS Datasheet](https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf)
+
+**Dependencies:** [Adafruit_SHT31](https://github.com/adafruit/Adafruit_SHT31)
+
 **Technical Details**
 * 2.4-5.5V Supply
 * Temperature: -10-125 °C ±0.3°C 
 * Relative Humidity:0-100% ±2%
 * I2C 7-bit address 0x44, 0x45 
 
-**Dependencies Required**
-* [Adafruit_SHT31](https://github.com/adafruit/Adafruit_SHT31)
+
 
 **Available Functions**
 * readTemperature(): Reads in the temperature at the time 
@@ -311,19 +299,20 @@ The system also supports the following multiplexer in order to allow the use of 
 **Additional Notes**
 * Has a heater function to remove condensation
 
-**Datasheet:** [SHT3x-DIS Datasheet](https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf)
+#### MB1232 Sonar
 
-#### MB1232
+**Datasheet:** [MB1232 Datahsheet](https://www.maxbotix.com/documents/I2CXL-MaxSonar-EZ_Datasheet.pdf)
+
+**Dependencies:** None
+
 **Technical Details**
+
 * Operates from 3.0-5.5V
 * Range: 0-625cm
 * Resolution of 1 cm
 * Up to 40Hz reading rate
 * 42kHz Ultrasonic sensor measures distance to objects
 * I2C 7-bit address 0x70 
-
-**Dependencies Required**
-* None
 
 **Available Functions**
 * takeRangeReading(): Sends the range command to the sensor to take a reading
@@ -333,111 +322,99 @@ The system also supports the following multiplexer in order to allow the use of 
 * Same address as multiplexer (0x70)
 * **Multiplexer must use another address if being used with this sensor**
 
-**Datasheet:** [MB1232 Datahsheet](https://www.maxbotix.com/documents/I2CXL-MaxSonar-EZ_Datasheet.pdf)
+
 
 #### MPU6050 Accelerometer / Gyroscope
 
+**Datasheet:**
+
+**Dependencies**
+
 **Technical Details**
-
-- 
-
-**Dependencies Required**
 
 - 
 
 **Additional Notes**
 
 - 
-
-**Datasheet:** 
 
 #### LIS3DH Accelerometer
 
+**Datasheet:**
+
+**Dependencies**
+
 **Technical Details**
-
-- 
-
-**Dependencies Required**
 
 - 
 
 **Additional Notes**
 
 - 
-
-**Datasheet:** 
 
 #### MS5803 Atmospheric Pressure / Temperature Sensor 
 
+**Datasheet:**
+
+**Dependencies**
+
 **Technical Details**
-
-- 
-
-**Dependencies Required**
 
 - 
 
 **Additional Notes**
 
 - 
-
-**Datasheet:** 
 
 #### HX711 Load Cell Amplifier
 
+**Datasheet:**
+
+**Dependencies**
+
 **Technical Details**
-
-- 
-
-**Dependencies Required**
 
 - 
 
 **Additional Notes**
 
 - 
-
-**Datasheet:** 
 
 #### AS7262 Spectral Sensor (visible)
 
+**Datasheet:**
+
+**Dependencies**
+
 **Technical Details**
-
-- 
-
-**Dependencies Required**
 
 - 
 
 **Additional Notes**
 
 - 
-
-**Datasheet:** 
 
 #### AS7263 Spectral Sensor (near infrared)
 
+**Datasheet:**
+
+**Dependencies**
+
 **Technical Details**
-
-- 
-
-**Dependencies Required**
 
 - 
 
 **Additional Notes**
 
 - 
-
-**Datasheet:** 
 
 #### AS7265X Spectral Sensor Triad (visible, near infrared, ultraviolet)
 
+**Datasheet:**
+
+**Dependencies**
+
 **Technical Details**
-
-- 
-
-**Dependencies Required**
 
 - 
 
@@ -445,9 +422,11 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - 
 
-**Datasheet:** 
-
 #### TCA9548A Multiplexer
+
+**Datasheet:** [TCA9548A Datasheet](http://www.adafruit.com/datasheets/tca9548a.pdf)
+
+**Dependencies:** None
 
 **Technical Details**
 * 1.8V - 5V Supply
@@ -455,14 +434,10 @@ The system also supports the following multiplexer in order to allow the use of 
 * Use up to 64 I2C sensors with the same address (8 per multiplexer)
 * I2C 7-bit address 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77 
 
-**Dependencies Required**
-* None
-
 **Additional Notes**
+
 * Address can be changed by using solder bridges on the back of the board
 * **Initial Multiplexer address (0x70) conflicts with MB1232**
-
-**Datasheet:** [TCA9548A Datasheet](http://www.adafruit.com/datasheets/tca9548a.pdf)
 
 ### SDI-12 Sensors
 
@@ -546,7 +521,13 @@ The following Actuators are currently supported by Project Loom:
 * [SM-42BYG011-25](https://www.adafruit.com/product/324)
 
 ### SG92R Servo
+
+**Datasheet:** [PCA9685 PWM controller Datasheet](https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf)
+
+**Dependencies:** [Adafruit PWMServoDriver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
+
 **Technical Details**
+
 * Use [8-channel Servo FeatherWing](https://learn.adafruit.com/adafruit-8-channel-pwm-or-servo-featherwing?view=all)
 * Up to 8 connections for SG92R
 * Rotation range: around 180 degrees(90 in each direction). Position "0" (1.5ms pulse) is middle, "90" (~2ms pulse) is all the way to the right, "-90" (~1ms pulse) is all the way to the left.
@@ -557,27 +538,24 @@ SG92R servo uses a 50Hz signal giving a period of 20 ms to control the position 
 * Current range: SG92R’s idle current with 5V supply is 6 (+/-10mA) and  running current with 5V supply is 220 +/-50mA
 * Use I2C (SDA and SCL pins) 
 
-**Dependencies Required**
-* [Adafruit PWMServoDriver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
-
 **Available Functions**
+
 *  setPWMFreq: Determines how many full ‘pulses’ per second are generated by the IC.
 
 **Additional Notes**
 * Settable rotation degree depending on user selection
 
-**Datasheet:** [PCA9685 PWM controller Datasheet](https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf)
-
 ### SM_42BYG011_25 Stepper Motor
+
+**Datasheet:** [SM-42BYG011-25 datasheet](https://cdn-shop.adafruit.com/product-files/324/C140-A+datasheet.jpg)
+
+**Dependencies:** [Adafruit MotorShield](https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library) | [Adafruit PWMServoDriver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
+
 **Technical Details**
 * Use [Adafruit DC Motor+Stepper FeatherWing](https://learn.adafruit.com/adafruit-stepper-dc-motor-featherwing)
 * Up to 2 connections for SM-42BYG011-25
 * Voltage range: 3.3 - 5V into onboard regulator is required for logic voltage and additional 12V for Stepper motor(SM-42BYG011-25) according to datasheet. Lower voltage (eg. 5V) also can be supplied. It lets the motor generate less heat but perform less torque.
 * Use I2C (SDA and SCL pins) 
-
-**Dependencies Required**
-* [Adafruit MotorShield](https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library)
-* [Adafruit PWMServoDriver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
 
 **Available Functions**
 * getsStepper: Steps indicates how many steps per revolution the motor has. A 7.5 degrees per step motor has 360/7.5 = 48 steps. SM-42BYG011-25 requires 200 steps. Stepper# is which port it is connected to. Port 1 is for the first stepper motor and port 2 is for the other stepper motor.
@@ -590,19 +568,13 @@ SG92R servo uses a 50Hz signal giving a period of 20 ms to control the position 
 * INTERLEAVE steptype means alternate between single and double to create a half-step in between. It causes stepper motors to run smoother, but in halved speed.
 * MICROSTEP steptype used to achieve higher resolution but with a loss in torque at lower speeds.
 
-**Datasheet:** [SM-42BYG011-25 datasheet](https://cdn-shop.adafruit.com/product-files/324/C140-A+datasheet.jpg)
-
 ### Relay
 
+**Datasheet:**
+
+**Dependencies**
+
 **Technical Details**
-
-- 
-
-**Dependencies Required**
-
-- 
-
-**Available Functions**
 
 - 
 
@@ -610,19 +582,13 @@ SG92R servo uses a 50Hz signal giving a period of 20 ms to control the position 
 
 - 
 
+#### Neopixel
+
 **Datasheet:**
 
-### Neopixel
+**Dependencies**
 
 **Technical Details**
-
-- 
-
-**Dependencies Required**
-
-- 
-
-**Available Functions**
 
 - 
 
@@ -630,4 +596,4 @@ SG92R servo uses a 50Hz signal giving a period of 20 ms to control the position 
 
 - 
 
-**Datasheet:**
+#### 

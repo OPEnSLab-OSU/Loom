@@ -29,6 +29,13 @@ to:
 setSlaveAddress(0, devAddr);
 ```
 
+## Configuration Conflicts
+
+The following combinations of options in the configuration file result in various conflicts (e.g. of dependencies) that are known to result in errors or undefined behavior. Such conflicts are also mentioned in the config.h file itself.
+
+- LoRa + nRF
+- is_sleep_period + LoRa (Adafruit_ASFcore-master/tc_interrupt.c:140: multiple definition of 'TC3_Handler')
+
 ## Other Notes
 
 #### nRF Libraries
