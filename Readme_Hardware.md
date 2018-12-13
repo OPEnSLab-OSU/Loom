@@ -4,7 +4,6 @@
 1. [Processors](#processors)
     1. [Adafruit Feather M0](#adafruit-feather-m0)
     2. [Adafruit Feather 32u4](#adafruit-feather-32u4)
-
 2. [Wireless Capabilities](#wireless-capabilities)
     1. [WiFi](#wifi)
         1. [WiFi Dependencies](#wifi-dependencies)
@@ -14,7 +13,6 @@
     3. [nRF](#nRF)
         1. [nRF Dependencies](#nrf-dependencies)
         2. [Configuring Maximum Message Length](#configuring-maximum-message-length)
-
 3. [Sensors](#sensors)
     1. [I2C Sensors](#i2c-sensors)
         1. [AS7262 Spectral Sensor (visible)](#as7262-spectral-sensor-visible)
@@ -37,13 +35,15 @@
         2. [Supported SDI-12 Pins](#supported-sdi-12-pins)
     3. [SPI Sensors](#spi-sensors)
         1. [Adafruit Universal Thermocouple Amplifier](#adafruit-universal-thermocouple-amplifier)
-
 4. [Actuators](#actuators)
     1. [SG92R Servo](#sg92r-servo)
     2. [SM_42BYG011_25 Stepper Motor](#sm_42byg011_25-stepper-motor)
     3. [Relay](#relay)
     4. [Neopixel](#neopixel)
 5. [Other Hardware](#other-hardware)
+    1. [RTC](#rtc)
+    2. [MicroSD](#microsd)
+    3. [OLED Display](#oled-display)
 
 
 
@@ -560,3 +560,31 @@ The following Actuators are currently supported by Project Loom:
 Tri-color LEDs
 
 ## Other Hardware
+
+### RTC
+
+**Precision RTC FeatherWing**
+
+[Adafruit Product Page](https://www.adafruit.com/product/3028)
+
+DS3231 RTC
+
+Supports interrupts
+
+**AdaLogger FeatherWing**
+
+ [Adafruit Product Page](https://www.adafruit.com/product/2922)
+
+PCF8523
+
+Library does not support interrupts
+
+### MicroSD
+
+- [AdaLogger FeatherWing](https://www.adafruit.com/product/2922)
+- [Breakout](https://www.adafruit.com/product/254)
+
+### OLED Display
+
+- [FeatherWing OLED](https://www.adafruit.com/product/2900)
+- [Breakout](https://www.adafruit.com/product/931)
