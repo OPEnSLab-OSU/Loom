@@ -158,7 +158,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 
 
-#### AS7262 Spectral Sensor (visible)
+### AS7262 Spectral Sensor (visible)
 
 **Product Page:** [SparkFun](https://www.sparkfun.com/products/14347)
 
@@ -174,7 +174,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - 
 
-#### AS7263 Spectral Sensor (near infrared)
+### AS7263 Spectral Sensor (near infrared)
 **Product Page:** [SparkFun](https://www.sparkfun.com/products/14351)
 
 **Datasheet:**
@@ -189,7 +189,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - 
 
-#### AS7265X Spectral Sensor Triad (visible, near infrared, ultraviolet)
+### AS7265X Spectral Sensor Triad (visible, near infrared, ultraviolet)
 
 **Product Page:** [SparkFun](https://www.sparkfun.com/products/15050)
 
@@ -205,7 +205,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - 
 
-#### FXAS21002 3-Axis Gyroscope
+### FXAS21002 3-Axis Gyroscope
 
 **Product Page:** [Adafruit](https://www.adafruit.com/product/3463)
 
@@ -231,7 +231,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - Contained in the same sensor with FXOS8700
 
-#### FXOS8700 3-Axis Accelerometer/Magentometer
+### FXOS8700 3-Axis Accelerometer/Magentometer
 
 **Product Page:** [Adafruit](https://www.adafruit.com/product/3463)
 
@@ -258,7 +258,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - Contained in the same sensor with FXAS21002
 
-#### HX711 Load Cell Amplifier
+### HX711 Load Cell Amplifier
 
 **Product Page:** [SparkFun](https://www.sparkfun.com/products/13879)
 
@@ -274,7 +274,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - 
 
-#### LIS3DH Accelerometer
+### LIS3DH Accelerometer
 
 **Product Page:** [SparkFun](https://www.sparkfun.com/products/13963)
 
@@ -290,7 +290,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - 
 
-#### MB1232 Sonar
+### MB1232 Sonar
 
 **Product Page:** [MaxBotix](https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm)
 
@@ -317,7 +317,7 @@ The system also supports the following multiplexer in order to allow the use of 
 - Same address as multiplexer (0x70)
 - **Multiplexer must use another address if being used with this sensor**
 
-#### MPU6050 Accelerometer / Gyroscope
+### MPU6050 Accelerometer / Gyroscope
 
 **Product Page:** [Amazon](https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40/ref=asc_df_B008BOPN40/?tag=hyprod-20&linkCode=df0&hvadid=309773039951&hvpos=1o2&hvnetw=g&hvrand=3728702383655605371&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1024429&hvtargid=pla-366166873147&psc=1)
 
@@ -333,7 +333,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - 
 
-#### MS5803 Atmospheric Pressure / Temperature Sensor 
+### MS5803 Atmospheric Pressure / Temperature Sensor 
 
 **Product Page:** [Digi-Key](https://www.digikey.com/product-detail/en/te-connectivity-measurement-specialties/MS580302BA01-00/223-1624-5-ND/5277629)
 
@@ -349,7 +349,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - 
 
-#### SHT31-D Temperature / Humidity
+### SHT31-D Temperature / Humidity
 
 **Product Page:** [Adafruit](https://www.adafruit.com/product/2857)
 
@@ -375,7 +375,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - Has a heater function to remove condensation
 
-#### TSL2561 Lux Sensor
+### TSL2561 Lux Sensor
 
 **Product Page:** [Adafruit](https://www.adafruit.com/product/439)
 
@@ -391,7 +391,7 @@ The system also supports the following multiplexer in order to allow the use of 
 
 - 
 
-#### TSL2591 Lux Sensor
+### TSL2591 Lux Sensor
 
 **Product Page:** [Adafruit](https://www.adafruit.com/product/1980)
 
@@ -420,7 +420,7 @@ The system also supports the following multiplexer in order to allow the use of 
 * Settable gain depending on light conditions
 * Settable integration time for collecting light 
 
-#### ZX Distance and Gesture Sensor
+### ZX Distance and Gesture Sensor
 
 **Product Page:** [SparkFun](https://www.sparkfun.com/products/13162)
 
@@ -442,7 +442,7 @@ The system also supports the following multiplexer in order to allow the use of 
 * Can only use either the gesture function or the read function but can't use both at the same time
 * Has UART capabilities
 
-#### TCA9548A Multiplexer
+### TCA9548A Multiplexer
 
 **Product Page:** [Adafruit](https://www.adafruit.com/product/2717)
 
