@@ -15,54 +15,15 @@
 // ===                       DEFINITIONS                        === 
 // ================================================================
 
-
-// enum TimeZone : short {
-// 	// PST, ALDT, PDT, MST, MDT, CST, CDT, EST, EDT, AST, ALST, HST
-// 	WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
-// 	ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
-// 	ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
-// };
-
-// 8, // PST // 8, // ALDT // 7, // PDT // 7, // MST // 6, // MDT // 6, // CST // 5, // CDT // 5, // EST // 4, // EDT // 4, // AST // 9, // ALST // 10 // HST
 const float timezone_adjustment[34] =
 {
-	1, // WAT
-	2, // AT
-	3, // ADT
-	4, // AST
-	4, // EDT
-	5, // EST
-	5, // CDT
-	6, // CST
-	6, // MDT
-	7, // MST
-	7, // PDT
-	8, // PST
-	8, // ALDT
-	9, // ALST
-	10, // HST
-	11, // SST
-	0,  // GMT
-	-1, // BST
-	-1, // CET
-	-2, // CEST
-	-2, // EET
-	-3, // EEST
-	-3, // BT
-	-4, // ZP4
-	-5, // ZP5
-	-6, // ZP6
-	-7, // ZP7
-	-8, // AWST
-	-9, // AWDT
-	-9.5, // ACST
-	-10.5, // ACDT
-	-10, // AEST
-	-11 // AEDT
+	1  /* WAT */, 2    /* AT  */, 3     /* ADT */, 4   /* AST */, 4   /* EDT */, 5  /* EST */, 5  /* CDT */,
+	6  /* CST */, 6    /* MDT */, 7     /* MST */, 7   /* PDT */, 8   /* PST */, 8  /* ALDT*/, 9  /* ALST*/,
+	10 /* HST */, 11   /* SST */, 0     /* GMT */, -1  /* BST */, -1  /* CET */, -2 /* CEST*/, -2 /* EET */,
+	-3 /* EEST*/, -3   /* BT  */, -4    /* ZP4 */, -5  /* ZP5 */, -6  /* ZP6 */, -7 /* ZP7 */, -8 /* AWST*/,
+	-9 /* AWDT*/, -9.5 /* ACST*/, -10.5 /* ACDT*/, -10 /* AEST*/, -11 /* AEDT*/
 };
 
-
-// TimeZone timezone = PST;
 
 
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
@@ -111,7 +72,10 @@ volatile bool LEDState   = false; // flag to toggle LED
 // ===                   FUNCTION PROTOTYPES                    === 
 // ================================================================
 void  setup_rtc();
-void convert_local_to_utc();
+void  set_rtc_to_compile_time();
+bool  set_rtc_from_internet_time();
+void  convert_local_to_utc(bool to_utc);
+void  convert_local_to_utc();
 void  measure_rtc();
 char* get_datestring(); 
 char* get_timestring();
@@ -124,8 +88,8 @@ char* get_weekday();
 	void wake_RTC_ISR();
 #endif
 
-void print_time();
-void print_DateTime(DateTime time);
+void  print_time();
+void  print_DateTime(DateTime time);
 
 
 // ================================================================
@@ -139,65 +103,51 @@ void setup_rtc() {
 		while (1);
 	}
 
-	#if LOOM_DEBUG == 1
-		print_time();
-		LOOM_DEBUG_Println();
-	#endif
-
-	// The following section checks if RTC is running, else sets 
-	// the time to the time that the sketch was compiled
-	#if is_rtc3231 == 1
-		// This may end up causing a problem in practice - what if RTC looses power in field? Shouldn't happen with coin cell batt backup
-		if (rtc_inst.lostPower()) {
-			LOOM_DEBUG_Println("RTC lost power, setting the time to compile time");
-			rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
-			#if LOOM_DEBUG == 1
-				LOOM_DEBUG_Println("Time set to:");
-				print_time();
-			#endif
-
-			// Adjust to UTC time if enabled
-			// Only adjust if power was lost
-			#if adjust_to_utc == 1
-				convert_local_to_utc();
-			#endif
-		}
-
-	#elif is_rtc8523 == 1
-		if (!rtc_inst.initialized()) {
-			LOOM_DEBUG_Println("RTC was not initialized, setting the time to compile time");
-			rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
-			#if LOOM_DEBUG == 1
-				LOOM_DEBUG_Println("Time set to:");
-				print_time();
-				LOOM_DEBUG_Println();
-			#endif
-
-			// Adjust to UTC time if enabled
-			// Only adjust if power was lost
-			#if adjust_to_utc == 1
-				convert_local_to_utc();
-			#endif
-		}
-	#endif
+	LOOM_DEBUG_Println("\nCurrent Time");
+	print_time();
 
 
-// Maybe add a check to set the time if it is way off
-	// rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
-	DateTime time_check = rtc_inst.now();
-	int y = time_check.year();
-	int m = time_check.month();
-	int d = time_check.day();
+	bool internet_time_success = false;
 
-	if ( (y < 2018) || (y > 2025) || (m < 1) || (m > 12) || (d < 1) || (d > 31) ) {
-		LOOM_DEBUG_Println("RTC Time is invalid, setting the time to compile time");
-		rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
-		#if LOOM_DEBUG == 1
-			LOOM_DEBUG_Println("Time set to:");
-			print_time();
-			LOOM_DEBUG_Println();
+	// Try to set the time from internet
+	#if get_time_from_internet == 1 
+		internet_time_success = set_rtc_from_internet_time();
+	#endif // of #if get_time_from_internet == 1  
+
+
+
+	// If unable to set time via internet, default to normal behavior
+	if (!internet_time_success) {
+
+		// The following section checks if RTC is running, else sets 
+		// the time to the time that the sketch was compiled
+		#if is_rtc3231 == 1
+			// This may end up causing a problem in practice - what if RTC looses power in field? Shouldn't happen with coin cell batt backup
+			if (rtc_inst.lostPower()) {
+				LOOM_DEBUG_Println("RTC 3231 lost power");
+				set_rtc_to_compile_time();
+			}
+		#elif is_rtc8523 == 1
+			if (!rtc_inst.initialized()) {
+				LOOM_DEBUG_Println("RTC 8523 was not initialized");
+				set_rtc_to_compile_time();
+			}
 		#endif
-	}
+
+
+		// rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
+		DateTime time_check = rtc_inst.now();
+		int y = time_check.year();
+		int m = time_check.month();
+		int d = time_check.day();
+
+		// A basic validity check of date
+		if ( (y < 2018) || (y > 2050) || (m < 1) || (m > 12) || (d < 1) || (d > 31) ) {
+			LOOM_DEBUG_Println("RTC Time is invalid");
+			set_rtc_to_compile_time();
+		}
+
+	} // of if (!internet_time_success)
 
 
 
@@ -214,13 +164,8 @@ void setup_rtc() {
 
 
 
-
-
-
 	// Query Time and print
-	// #if LOOM_DEBUG == 1
-	// 	print_time();
-	// #endif
+	print_time();
 
 }
 
@@ -229,9 +174,80 @@ void setup_rtc() {
 // ===                        FUNCTIONS                         ===
 // ================================================================
 
-void convert_local_to_utc() 
+
+// --- SET RTC TO COMPILE TIME ---
+//
+// Sets the RTC clock to compile time
+//
+void set_rtc_to_compile_time()
 {
-	float adj = timezone_adjustment[timezone];
+	// This sets to local time zone
+	rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
+	LOOM_DEBUG_Println("Time set to compile time:");
+	print_time();
+
+	// Adjust to UTC time if enabled
+	#if use_utc_time == 1
+		convert_local_to_utc();
+	#endif
+}
+
+
+
+// --- SET RTC FROM INTERNET TIME ---
+//
+// Attempt to set the RTC from time obtained over internet
+//
+// @return  True if RTC successfully set from internet time
+//
+bool set_rtc_from_internet_time()
+{
+	uint32_t unixTime;
+	bool internet_time_success = false;
+
+	#if is_ethernet == 1  
+		unixTime = get_time_ethernet();
+	#elif is_wifi == 1
+		// to be implemented
+	#endif
+
+	LOOM_DEBUG_Println2("UNIX TIME: ", unixTime);
+
+	if (unixTime != 0) {
+		// Set to UTC time
+		rtc_inst.adjust(DateTime(unixTime));
+
+		LOOM_DEBUG_Println("\nTime set to:");
+		print_time();
+
+		// If not using UTC Time convert to local
+		#if use_utc_time != 1
+			convert_local_to_utc(false);
+		#endif
+
+		internet_time_success = true;
+
+	} 
+	
+	LOOM_DEBUG_Println3("Set time from internet ", (internet_time_success) ? "successful" : "failed", "\n");
+
+	return internet_time_success;
+}
+
+
+
+// --- CONVERT LOCAL TIME TO UTC TIME ---
+//
+// Converts a time assumed to be local (no checks provided)
+// to UTC time
+//
+// @param to_utc  True to convert local to UTC, false to convert UTC to local
+// 
+void convert_local_to_utc(bool to_utc) 
+{
+	float adj = ( (to_utc) ? 1. : -1. ) * timezone_adjustment[timezone];
+
+
 	int min;
 
 	if ( (adj-(int)adj) == 0 ) { min = 0;
@@ -241,12 +257,23 @@ void convert_local_to_utc()
 	DateTime utc = rtc_inst.now() + TimeSpan(0, (int)adj, min, 0);
 	rtc_inst.adjust(utc);
 
-	LOOM_DEBUG_Println("Time adjusted to UTC time:");
+	LOOM_DEBUG_Println3("Time adjusted to ", (to_utc) ? "UTC" : "Local" , " time:");
 	print_time();
 	LOOM_DEBUG_Println();
 }
 
+// Default behavior - convert local to UTC
+void convert_local_to_utc() 
+{ 
+	convert_local_to_utc(true); 
+}
 
+
+
+// --- MEASURE RTC ---
+//
+// Reads the RTC time and copies to the state struct
+//
 void measure_rtc() { 
 	DateTime now = rtc_inst.now();
 
@@ -381,9 +408,11 @@ void wake_RTC_ISR()
 void print_time()
 {
 	measure_rtc();
-	LOOM_DEBUG_Println2("Date: ", get_datestring());
-	LOOM_DEBUG_Println2("Time: ", get_timestring());
-	LOOM_DEBUG_Println2("Day : ", get_weekday());
+	LOOM_DEBUG_Println("Time:");
+	LOOM_DEBUG_Println2("\tDate: ", get_datestring());
+	LOOM_DEBUG_Println2("\tTime: ", get_timestring());
+	LOOM_DEBUG_Println2("\tDay : ", get_weekday());
+	LOOM_DEBUG_Println();
 }
 
 
@@ -391,16 +420,17 @@ void print_time()
 //
 // Prints a DateTime object
 //
+// @param time  The DateTime object to print
+//
 void print_DateTime(DateTime time) 
 {
-	#if LOOM_DEBUG == 1
-		Serial.print(time.year());   Serial.print('/');
-		Serial.print(time.month());  Serial.print('/');
-		Serial.print(time.day());    Serial.print(' ');
-		Serial.print(time.hour());   Serial.print(':');
-		Serial.print(time.minute()); Serial.print(':');
-		Serial.print(time.second()); Serial.println();
-	#endif
+	LOOM_DEBUG_Println("DateTime:");
+	LOOM_DEBUG_Print(time.year());   LOOM_DEBUG_Print('/');
+	LOOM_DEBUG_Print(time.month());  LOOM_DEBUG_Print('/');
+	LOOM_DEBUG_Print(time.day());    LOOM_DEBUG_Print(' ');
+	LOOM_DEBUG_Print(time.hour());   LOOM_DEBUG_Print(':');
+	LOOM_DEBUG_Print(time.minute()); LOOM_DEBUG_Print(':');
+	LOOM_DEBUG_Print(time.second()); LOOM_DEBUG_Println();
 }
 
 

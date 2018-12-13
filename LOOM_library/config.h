@@ -77,7 +77,7 @@
 // Further options in the advanced settings
 // Can override settings defined before the aggregate devices
 
-#define is_ishield      1	// 1 to specify using Ishield (generally used on WiFi)
+#define is_ishield      0	// 1 to specify using Ishield (generally used on WiFi)
 #define is_multiplexer  0	// 1 to specify Multiplexer (tca9548a) is being used
 #define is_sapflow      0	// 1 to specify Sapflow  
 #define is_evaporimeter 0	// 1 to specify Evaporimeter
@@ -100,27 +100,30 @@
 
 
 // --- RTC Options ---
-#define is_rtc        0		// Enable RTC functionality
+#define is_rtc        1		// Enable RTC functionality
 #if is_rtc == 1
 	#define RTC_pin 6		// What pin the RTC interrupt is connected to
 
-	#define adjust_to_utc 1 // 1 to use UTC time rather than local
+	#define use_utc_time 1 // 1 to use UTC time rather than local
 
-	#if adjust_to_utc == 1
+	// Ideally the enum wouldn't be declared here ...
+	enum TimeZone { 
+		WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
+		ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
+		ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
+	};
 
-		// Ideally the enum wouldn't be declared here ...
-		enum TimeZone { 
-			WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
-			ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
-			ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
-		};
-
-		TimeZone timezone = PST;
-	#endif
+	TimeZone timezone = PST;
 
 	// Select only one of the below options
 	#define is_rtc3231 1 	// RTC DS 3231 Featherwing
 	#define is_rtc8523 0	// RTC Adalogger Featherwing with PCF8523 RTC (the one with SD card)
+
+
+	// Try to set time from internet (Ethernet or Wifi internet connection required)
+	// Will default to normal RTC setting routing if this fails
+	#define get_time_from_internet 1
+	
 #endif
 
 // --- SD Options ---

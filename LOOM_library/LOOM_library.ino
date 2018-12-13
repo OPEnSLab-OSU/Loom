@@ -36,6 +36,8 @@ void loop()
 	OSCBundle bndl;
 
 
+
+
 	// --- Common Example ---
 
 	// receive_bundle(&bndl, WIFI);	// Receive messages
@@ -48,18 +50,14 @@ void loop()
 	package_data(&bndl);			// Copy sensor data from state to provided bundle
 
 
-	append_to_bundle_key_value(&bndl, "abc", 123);
-	append_to_bundle_key_value(&bndl, "def", (float)4.56);
-	append_to_bundle_key_value(&bndl, "ghi", "seven");
-	append_to_bundle_key_value(&bndl, "jkl", String("Eight"));
-	append_to_bundle_key_value(&bndl, "mno", 987);
-
-
 	print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
 
 	// send_bundle(&bndl, WIFI);		// Send bundle of packaged data
 	log_bundle(&bndl, PUSHINGBOX);	// Send bundle to Google Sheet
 	// log_bundle(&bndl, SDCARD, "Ishield.csv");	// Send bundle to Google Sheet
+
+	// get_time_ethernet();
+	print_time();
 
 	delay(5000);
 
