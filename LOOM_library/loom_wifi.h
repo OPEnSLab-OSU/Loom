@@ -88,6 +88,8 @@ void get_new_channel(OSCMessage &msg);
 void set_request_settings(OSCMessage &msg);
 void respond_to_poll_request(OSCMessage &msg);
 
+uint32_t get_time_wifi();
+
 
 // ================================================================ 
 // ===                          SETUP                           === 
@@ -626,3 +628,17 @@ void respond_to_poll_request(OSCMessage &msg)
 
 	LOOM_DEBUG_Println("Responded to poll request");
 }
+
+
+
+// --- GET TIME WIFI ---
+//
+// Gets the UTC time over internet
+//
+// @return Unix time (seconds since 1970)
+//
+uint32_t get_time_wifi()
+{
+	return WiFi.getTime();
+}
+

@@ -24,21 +24,15 @@ const float timezone_adjustment[34] =
 	-9 /* AWDT*/, -9.5 /* ACST*/, -10.5 /* ACDT*/, -10 /* AEST*/, -11 /* AEDT*/
 };
 
-
-
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
-
-// These two are probably obsolete
-// const int hour_adjustment   = 0;
-// const int minute_adjustment = 0;
 
 // ================================================================ 
 // ===                        STRUCTURES                        === 
 // ================================================================ 
 struct state_rtc_t {
 	char    timestring[20], datestring[20], weekday[10];
-	int     year;
+	uint     year;
 	uint8_t month, day, hour, minute, second;
 };
 
@@ -76,6 +70,7 @@ void  set_rtc_to_compile_time();
 bool  set_rtc_from_internet_time();
 void  convert_local_to_utc(bool to_utc);
 void  convert_local_to_utc();
+bool rtc_validity_check();
 void  measure_rtc();
 char* get_datestring(); 
 char* get_timestring();
@@ -103,18 +98,17 @@ void setup_rtc() {
 		while (1);
 	}
 
-	LOOM_DEBUG_Println("\nCurrent Time");
+	LOOM_DEBUG_Println("\nCurrent Time (before possible resetting)");
 	print_time();
 
 
 	bool internet_time_success = false;
 
+
 	// Try to set the time from internet
 	#if get_time_from_internet == 1 
 		internet_time_success = set_rtc_from_internet_time();
-	#endif // of #if get_time_from_internet == 1  
-
-
+	#endif 
 
 	// If unable to set time via internet, default to normal behavior
 	if (!internet_time_success) {
@@ -122,7 +116,6 @@ void setup_rtc() {
 		// The following section checks if RTC is running, else sets 
 		// the time to the time that the sketch was compiled
 		#if is_rtc3231 == 1
-			// This may end up causing a problem in practice - what if RTC looses power in field? Shouldn't happen with coin cell batt backup
 			if (rtc_inst.lostPower()) {
 				LOOM_DEBUG_Println("RTC 3231 lost power");
 				set_rtc_to_compile_time();
@@ -134,23 +127,13 @@ void setup_rtc() {
 			}
 		#endif
 
-
-		// rtc_inst.adjust(DateTime(F(__DATE__), F(__TIME__)));
-		DateTime time_check = rtc_inst.now();
-		int y = time_check.year();
-		int m = time_check.month();
-		int d = time_check.day();
-
-		// A basic validity check of date
-		if ( (y < 2018) || (y > 2050) || (m < 1) || (m > 12) || (d < 1) || (d > 31) ) {
-			LOOM_DEBUG_Println("RTC Time is invalid");
-			set_rtc_to_compile_time();
-		}
+		// Make sure the RTC time is even valid, if not, set to compile time
+		rtc_validity_check();
 
 	} // of if (!internet_time_success)
 
 
-
+	// Alarm setup
 	#if  is_rtc3231 == 1
 		clearRTCAlarms(); 	//clear any pending alarms
 
@@ -163,10 +146,8 @@ void setup_rtc() {
 	#endif	
 
 
-
 	// Query Time and print
 	print_time();
-
 }
 
 
@@ -202,13 +183,13 @@ void set_rtc_to_compile_time()
 //
 bool set_rtc_from_internet_time()
 {
-	uint32_t unixTime;
+	uint32_t unixTime = 0;
 	bool internet_time_success = false;
 
 	#if is_ethernet == 1  
 		unixTime = get_time_ethernet();
 	#elif is_wifi == 1
-		// to be implemented
+		unixTime = get_time_wifi();
 	#endif
 
 	LOOM_DEBUG_Println2("UNIX TIME: ", unixTime);
@@ -226,7 +207,6 @@ bool set_rtc_from_internet_time()
 		#endif
 
 		internet_time_success = true;
-
 	} 
 	
 	LOOM_DEBUG_Println3("Set time from internet ", (internet_time_success) ? "successful" : "failed", "\n");
@@ -246,8 +226,6 @@ bool set_rtc_from_internet_time()
 void convert_local_to_utc(bool to_utc) 
 {
 	float adj = ( (to_utc) ? 1. : -1. ) * timezone_adjustment[timezone];
-
-
 	int min;
 
 	if ( (adj-(int)adj) == 0 ) { min = 0;
@@ -267,6 +245,34 @@ void convert_local_to_utc()
 { 
 	convert_local_to_utc(true); 
 }
+
+
+
+// --- RTC VALIDITY CHECK ---
+//
+// Make sure the RTC time is even valid
+// If not, set to compile time
+//
+// @return True if RTC time appeared to be valid (not necessarily correct)
+//
+bool rtc_validity_check()
+{
+	DateTime time_check = rtc_inst.now();
+	int y = time_check.year();
+	int m = time_check.month();
+	int d = time_check.day();
+
+	// A basic validity check of date
+	if ( (y < 2018) || (y > 2050) || (m < 1) || (m > 12) || (d < 1) || (d > 31) ) {
+		LOOM_DEBUG_Println("RTC Time is invalid");
+		set_rtc_to_compile_time();
+		return false;
+	}
+
+	return true;
+}
+
+
 
 
 
@@ -296,6 +302,8 @@ void measure_rtc() {
 	     + String(state_rtc.second, DEC))
 	     .toCharArray(state_rtc.timestring, 20);
 }
+
+
 
 char* get_datestring() {
 	measure_rtc();
@@ -432,6 +440,5 @@ void print_DateTime(DateTime time)
 	LOOM_DEBUG_Print(time.minute()); LOOM_DEBUG_Print(':');
 	LOOM_DEBUG_Print(time.second()); LOOM_DEBUG_Println();
 }
-
 
 

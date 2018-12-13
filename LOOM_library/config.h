@@ -86,10 +86,10 @@
 // ================================================================ 
 // ===                 COMMUNICATION PLATFORMS                  === 
 // ================================================================
-#define is_wifi       0		// 1 to enable WiFi
+#define is_wifi       1		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
-#define is_ethernet   1		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
+#define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
 #define is_fona       0		// 1 to enable cellular via Fona (808 version)
 
 
@@ -102,9 +102,9 @@
 // --- RTC Options ---
 #define is_rtc        1		// Enable RTC functionality
 #if is_rtc == 1
-	#define RTC_pin 6		// What pin the RTC interrupt is connected to
+	#define RTC_pin 		6	// What pin the RTC interrupt is connected to
 
-	#define use_utc_time 1 // 1 to use UTC time rather than local
+	#define use_utc_time 	1 	// 1 to use UTC time rather than local
 
 	// Ideally the enum wouldn't be declared here ...
 	enum TimeZone { 
@@ -235,6 +235,7 @@
 	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
 	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"		// Network password
+
 #endif
 
 
