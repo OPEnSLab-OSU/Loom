@@ -59,11 +59,18 @@ void loop()
 	// get_time_ethernet();
 	print_time();
 
+
+	// LOOM_DEBUG_Println2("WIFI TIME: ", WiFi.getTime());
+
 	delay(5000);
 
 	additional_loop_checks();			// Miscellaneous checks
 	// --- End Example ---
 
+
+// WiFiUDP 	UdpDevice;
+// WiFiServer   server(80);
+// WiFiClient wifi_client;
 
 
 
@@ -191,3 +198,6 @@ void loop()
 // LogPlatforms:  PUSHINGBOX, SDCARD, OLED
 // TimeUnits: MINUTES, SECONDS
 // SleepMode: STANDBY, SLEEPYDOG
+
+// Print Macro
+// LOOM_DEBUG_Println
