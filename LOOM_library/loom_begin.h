@@ -87,9 +87,11 @@ void Loom_begin()
 	#if is_relay == 1
 		setup_relay();
 	#endif
-	#if is_rtc == 1
-		setup_rtc();
-	#endif
+
+// Currently moved to after Ethernet setup
+	// #if is_rtc == 1
+	// 	setup_rtc();
+	// #endif
 
 
 	// I2C Sensor setup if no mulitplexer
@@ -163,6 +165,11 @@ void Loom_begin()
 		setup_fona();
 	#endif
 
+
+
+	#if is_rtc == 1
+		setup_rtc();
+	#endif
 
 	// Data Logging Platform setups
 	#if is_sd == 1
