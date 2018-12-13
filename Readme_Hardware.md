@@ -17,20 +17,20 @@
 
 3. [Sensors](#sensors)
     1. [I2C Sensors](#i2c-sensors)
-        1. [TSL2591 Lux Sensor](#tsl2591-lux-sensor)
-        2. [TSL2561 Lux Sensor](#tsl2561-lux-sensor)
-        3. [FXOS8700 3-Axis Accelerometer/Magnetometer](#fxos8700-3-axis-accelerometermagnetometer)
+        1. [AS7262 Spectral Sensor (visible)](#as7262-spectral-sensor-visible)
+        2. [AS7263 Spectral Sensor (near infrared)](#as7263-spectral-sensor-near-infrared)
+        3. [AS72625X Spectral Sensor Triad](#as7265X-spectral-sensor-visible-near-infrared-ultraviolet)
         4. [FXAS21002 3-Axis Gyroscope](#fxas21002-3-axis-gyroscope)
-        5. [ZX Gesture Sensor](#zx-distance-and-gesture-sensor)
-        6. [SHT31-D Temperature and Humidity](#sht31-d-temperature-and-humidity)
-        7. [MB1232 Sonar](#mb1232-sonar)
-        8. [MPU6050 Accelerometer / Gyroscope](#accelerometer-gyroscope)
-        9. [LIS3DH Accelerometer](#lis3dh-accelerometer)
+        5. [FXOS8700 3-Axis Accelerometer/Magnetometer](#fxos8700-3-axis-accelerometermagnetometer)
+        6. [HX711 Load Cell Amplifier](#hx711-load-cell-amplifier)
+        7. [LIS3DH Accelerometer](#lis3dh-accelerometer)
+        8. [MB1232 Sonar](#mb1232-sonar)
+        9. [MPU6050 Accelerometer / Gyroscope](#accelerometer-gyroscope)
         10. [MS5803 Atmospheric Pressure / Temperature Sensor](#ms5803-atmospheric-pressure-/-temperature-sensor)
-        11. [HX711 Load Cell Amplifier](#hx711-load-cell-amplifier)
-        12. [AS7262 Spectral Sensor (visible)](#as7262-spectral-sensor-visible)
-        13. [AS7263 Spectral Sensor (near infrared)](#as7263-spectral-sensor-near-infrared)
-        14. [AS72625X Spectral Sensor Triad](#as7265X-spectral-sensor-visible-near-infrared-ultraviolet)
+        11. [SHT31-D Temperature and Humidity](#sht31-d-temperature-and-humidity)
+        12. [TSL2561 Luminosity Sensor](#tsl2561-luminosity-sensor)
+        13. [TSL2591 Light Sensor](#tsl2591-light-sensor)
+        14. [ZX Gesture Sensor](#zx-distance-and-gesture-sensor)
         15. [TCA9548A Multiplexer](#tca9548a-multiplexer)   
     2. [SDI-12 Sensors](#sdi-12-sensors)
         1. [SDI-12 Dependencies](#sdi-12-dependencies)
@@ -43,6 +43,7 @@
     2. [SM_42BYG011_25 Stepper Motor](#sm_42byg011_25-stepper-motor)
     3. [Relay](#relay)
     4. [Neopixel](#neopixel)
+5. [Other Hardware](#other-hardware)
 
 
 
@@ -135,7 +136,7 @@ a variable found in the `RF24Network_config.h` file.
 
 ## Sensors
 
-### I2C Sensors
+## I2C Sensors
 
 The following I2C Sensors are currently supported by Project Loom:
 * AS7262 Spectral Sensor (visible)
@@ -367,7 +368,7 @@ The system also supports the following multiplexer in order to allow the use of 
 - Interface: I2C
 - This board/chip uses I2C 7-bit addresses 0x39, 0x29, 0x49, selectable with jumpers
 
-### TSL2591 Lux Sensor
+### TSL2591 Light Sensor
 
 **Resources:** [Adafruit Product Page](https://www.adafruit.com/product/1980) | [TSL2591 Datasheet](http://www.adafruit.com/datasheets/TSL25911_Datasheet_EN_v1.pdf)
 
@@ -420,11 +421,11 @@ The system also supports the following multiplexer in order to allow the use of 
 
 
 
-### SDI-12 Sensors
+## SDI-12 Sensors
 
-The following SDI-12 sensors are currently supported by Project Loom:
-* [Decagon GS3](http://manuals.decagon.com/Integration%20Guides/GS3%20Integrators%20Guide.pdf)
-* [Decagon 5TM](http://www.ictinternational.com/content/uploads/2014/03/5TM-Integrators-Guide.pdf)
+The following SDI-12 sensors are currently supported by Loom:
+* Decagon GS3
+* [Decagon 5TM Datasheet](http://www.ictinternational.com/content/uploads/2014/03/5TM-Integrators-Guide.pdf)
 
 #### SDI-12 Dependencies
 * [Enable Interrupt](https://github.com/GreyGnome/EnableInterrupt)
@@ -455,20 +456,20 @@ pinMode(10, INPUT_PULLUP);
 enableInterrupt(10, handler_function, CHANGE);
 ```
 
-### SPI Sensors
+## SPI Sensors
 
-#### Adafruit Universal Thermocouple Amplifier
+### MAX31856 Universal Thermocouple Amplifier
 
-Project Loom currently supports operation of the Adafruit MAX31856 Universal
+Loom currently supports operation of the Adafruit MAX31856 Universal
 Thermocouple Amplifier in both K-type thermocouple operation and generic voltage
 operation.  K-type thermocouple operation allows the user to directly measure
 temperatures, when the amplifier is used in conjunction with a K-type thermocouple,
 and the generic voltage operation allows the user to measure the voltage across any
 thermocouple attached to the amplifier.
 
-Dependencies and Documentation:
-* [Adafruit MAX31856 Github](https://github.com/adafruit/Adafruit_MAX31856)
-* [Adafruit MAX31856 Overview](https://learn.adafruit.com/adafruit-max31856-thermocouple-amplifier/overview)
+**Resources:** [Adafruit Product Page](https://www.adafruit.com/product/3263)
+
+**Dependencies:** [Adafruit MAX31856](https://github.com/adafruit/Adafruit_MAX31856)
 
 **IMPORTANT NOTE:** The Adafruit thermocouple library has been modified to include functionality
 to read the thermocouple voltage directly.  The modified library can be found
@@ -498,83 +499,64 @@ float Adafruit_MAX31856::readVoltage(int gain) {
 ## Actuators
 
 The following Actuators are currently supported by Project Loom:
-* [SG92R](https://www.adafruit.com/product/169)
-* [SM-42BYG011-25](https://www.adafruit.com/product/324)
 
-### SG92R Servo
+### Servos (8-Channel PWM or Servo FeatherWing)
 
-**Datasheet:** [PCA9685 PWM controller Datasheet](https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf)
+**Resources:** [Adafruit Product Page](https://www.adafruit.com/product/2928) | [PCA9685 Datasheet](https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf)
 
-**Dependencies:** [Adafruit PWMServoDriver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
+**Dependencies:** [Adafruit_PWMServorDriver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
 
 **Technical Details**
 
-* Use [8-channel Servo FeatherWing](https://learn.adafruit.com/adafruit-8-channel-pwm-or-servo-featherwing?view=all)
-* Up to 8 connections for SG92R
-* Rotation range: around 180 degrees(90 in each direction). Position "0" (1.5ms pulse) is middle, "90" (~2ms pulse) is all the way to the right, "-90" (~1ms pulse) is all the way to the left.
+- There's an I2C-controlled PWM driver with a built in clock. That means that, unlike the TLC5940 family, you do not need to continuously send it signal tying up your microcontroller, its completely free running!
+- It is 5V compliant, which means you can control it from a 3.3V Feather and still safely drive up to 6V outputs (this is good for when you want to control white or blue LEDs with 3.4+ forward voltages)
+- 6 address select pins so you can stack up to 62 of these on a single i2c bus, a total of 992 outputs - that's a lot of servos or LEDs
+- Adjustable frequency PWM up to about 1.6 KHz
+- 12-bit resolution for each output - for servos, that means about 4us resolution at 60Hz update rate
+- Configurable push-pull or open-drain output
 
-SG92R servo uses a 50Hz signal giving a period of 20 ms to control the position of the servo. This position is determined by PWM. The duty cycle, or pulse width is 1ms(0 degrees) to 2ms(180 degrees). Therefore, the minimum pulse width is 1ms and the maximum pulse width is 2ms. The pulse width for specific angle is calculated from below equation. By manipulating pulse width in Code level, Servo can rotates up to 180 degrees.
+**Possible Servos**
 
-* Voltage range: 3.3 - 5V into onboard regulator is required for logic voltage and additional 4.7 - 5.4V for each SG92R servo. 
-* Current range: SG92R’s idle current with 5V supply is 6 (+/-10mA) and  running current with 5V supply is 220 +/-50mA
-* Use I2C (SDA and SCL pins) 
+- [Adafruit micro servo](https://www.adafruit.com/product/169)
 
-**Available Functions**
+### Stepper Motors (DC Motor + Stepper FeatherWing)
 
-*  setPWMFreq: Determines how many full ‘pulses’ per second are generated by the IC.
+**Resources:** [Adafruit Product Page](https://www.adafruit.com/product/2927) | [TB6612FNG Datasheet](https://cdn-shop.adafruit.com/datasheets/TB6612FNG_datasheet_en_20121101.pdf)
 
-**Additional Notes**
-* Settable rotation degree depending on user selection
-
-### SM_42BYG011_25 Stepper Motor
-
-**Datasheet:** [SM-42BYG011-25 datasheet](https://cdn-shop.adafruit.com/product-files/324/C140-A+datasheet.jpg)
-
-**Dependencies:** [Adafruit MotorShield](https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library) | [Adafruit PWMServoDriver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
+**Dependencies:** [Adafruit_PWMServorDriver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library) | [Adafruit MotorShield](https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library)
 
 **Technical Details**
-* Use [Adafruit DC Motor+Stepper FeatherWing](https://learn.adafruit.com/adafruit-stepper-dc-motor-featherwing)
-* Up to 2 connections for SM-42BYG011-25
-* Voltage range: 3.3 - 5V into onboard regulator is required for logic voltage and additional 12V for Stepper motor(SM-42BYG011-25) according to datasheet. Lower voltage (eg. 5V) also can be supplied. It lets the motor generate less heat but perform less torque.
-* Use I2C (SDA and SCL pins) 
 
-**Available Functions**
-* getsStepper: Steps indicates how many steps per revolution the motor has. A 7.5 degrees per step motor has 360/7.5 = 48 steps. SM-42BYG011-25 requires 200 steps. Stepper# is which port it is connected to. Port 1 is for the first stepper motor and port 2 is for the other stepper motor.
-* setSpeed: Set the speed of the motor in terms of revolution per minute(rpm).
-* Step: #steps is how many steps you’d like the stepper motor tatkes. Direction is either FORWARD(Clockwise) or BACKWARD(Counter clockwise) and the steptype is SINGLE, DOUBLE, INTERLEAVE, or MICROSTEP.
+- 4 full H-Bridges: the TB6612 chipset provides **1.2A per bridge** with thermal shutdown protection, internal kickback protection diodes. Can run motors on 4.5VDC to 13.5VDC.
+- **Up to 4 bi-directional DC** motors with individual 12-bit speed selection (so, about 0.02% resolution)
+- **Up to 2 stepper motors** (unipolar or bipolar) with single coil, double coil, interleaved or micro-stepping.
+- Motors automatically disabled on power-up
+- Big 3.5mm terminal block connectors to easily hook up wires (18-26AWG) and power
+- Polarity protected 2-pin terminal block and jumper to connect external power, for separate logic/motor supplies
+- Completely stackable design: 5 address-select jumper pads means up to 32 stackable wings: that's 64 steppers or 128 DC motors! What on earth could you do with that many steppers? I have no idea but if you come up with something send us a photo because that would be a pretty glorious project.
+- Download the easy-to-use Arduino software library, check out the examples and you're ready to go!
 
-**Additional Notes**
-* SINGLE steptype means one coil is activated.
-* DOUBLE steptype means two coils are activated at a time for higher torque.
-* INTERLEAVE steptype means alternate between single and double to create a half-step in between. It causes stepper motors to run smoother, but in halved speed.
-* MICROSTEP steptype used to achieve higher resolution but with a loss in torque at lower speeds.
+**Possible Stepper Motors**
+
+- [Adafruit stepper motor](https://www.adafruit.com/product/324)
 
 ### Relay
 
-**Datasheet:**
+**Resources:** [Adafruit Product Page](https://www.adafruit.com/product/3191) | [G5LE Datasheet](https://cdn-shop.adafruit.com/product-files/3191/G5LE-14-DC3-Omron-datasheet-10841140.pdf)
 
-**Dependencies**
+**Dependencies:** None
 
 **Technical Details**
 
-- 
-
-**Additional Notes**
-
-- 
+- Latching
+- Switch up to 10A of resistive-load current at 120VAC, 5A at 240VAC.
 
 #### Neopixel
 
-**Datasheet:**
+**Resources:** [Adafruit Page](https://www.adafruit.com/category/168)
 
-**Dependencies**
+**Dependencies:** [Adafruit Neopixel](https://github.com/adafruit/Adafruit_NeoPixel)
 
-**Technical Details**
+Tri-color LEDs
 
-- 
-
-**Additional Notes**
-
-- 
-
-#### 
+## Other Hardware
