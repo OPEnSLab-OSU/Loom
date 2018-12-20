@@ -91,7 +91,7 @@ struct config_tca9548a_t {
 };
 
 struct state_tca9548a_t {
-	int     measurement_count;
+	int     measurement_count; // does not appear to be used
 	long    last_update_time;
 	long    mux_update_period;
 	uint8_t devices[MUX_PORTS];

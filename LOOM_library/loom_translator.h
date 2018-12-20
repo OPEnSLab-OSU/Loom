@@ -442,6 +442,43 @@ int osc_extract_family_number(OSCBundle* bndl)
 
 
 
+
+// void osc_extract_family(OSCMessage* msg, char* result)
+// {
+// 	osc_extract_header_section(msg, 1, result);	
+// 	snprintf(result, strchr(result, '_') - result + 1 , "%s", result);
+// }
+
+// char* osc_extract_family(OSCMessage* msg)
+// {
+// 	char result[50];
+// 	osc_extract_family(msg, result);
+// 	return (char*)result;
+// }
+
+
+// void osc_extract_family(OSCBundle* bndl, char* result)
+// {
+// 	if ((bndl) && (bndl->size()>0)) {
+// 		osc_extract_family(bndl->getOSCMessage(0), result);
+// 	} else {
+// 		sprintf(result, "\0");
+// 	}
+// }
+
+// char* osc_extract_family(OSCBundle* bndl)
+// {
+// 	if ((bndl) && (bndl->size()>0)) {
+// 		return osc_extract_family(bndl->getOSCMessage(0));
+// 	} else {
+// 		return "";
+// 	}
+// }
+
+
+
+
+
 // --- OSC EXTRACT NUMBER OF SECTIONS ---
 //
 // Return the number of sections in the OSC address of 

@@ -37,54 +37,16 @@ void loop()
 
 
 
-
-	// --- Common Example ---
-
-	// receive_bundle(&bndl, WIFI);	// Receive messages
-	// if (bndl.size()) {
-	// 	print_bundle(&bndl);		// Print bundle if LOOM_DEBUG enabled
-	// }
-	// process_bundle(&bndl);			// Dispatch message to correct handling functions
+	// --- Basic Example ---
 
 	measure_sensors();				// Read sensors, store data in sensor state struct
 	package_data(&bndl);			// Copy sensor data from state to provided bundle
-
-
-	print_bundle(&bndl);			// Print bundle if LOOM_DEBUG enabled
-
-	// send_bundle(&bndl, WIFI);		// Send bundle of packaged data
-	log_bundle(&bndl, PUSHINGBOX);	// Send bundle to Google Sheet
-	// log_bundle(&bndl, SDCARD, "Ishield.csv");	// Send bundle to Google Sheet
-
-	// get_time_ethernet();
-	print_time();
-
-
-	// LOOM_DEBUG_Println2("WIFI TIME: ", WiFi.getTime());
-
-	delay(5000);
-
-	additional_loop_checks();			// Miscellaneous checks
-	// --- End Example ---
-
-
-// WiFiUDP 	UdpDevice;
-// WiFiServer   server(80);
-// WiFiClient wifi_client;
-
-
-
-
-	// --- Basic Example ---
-
-	// measure_sensors();				// Read sensors, store data in sensor state struct
-	// package_data(&bndl);			// Copy sensor data from state to provided bundle
 	
-	// print_bundle(&bndl);
+	print_bundle(&bndl);
 
-	// delay(1000);
+	delay(1000);
 
-	// additional_loop_checks();		// Miscellaneous checks
+	additional_loop_checks();		// Miscellaneous checks
 
 	// --- End Example ---
 
