@@ -1,5 +1,7 @@
 # Project Loom: Library Overview
 
+[![DOI](https://zenodo.org/badge/94259766.svg)](https://zenodo.org/badge/latestdoi/94259766)
+
 This is the primary location of the Project Loom code, consolidated into place with a single Arduino .ino sketch built with code selected by the preprocessor based on the configuration file. 
 
 Other readmes are provided for more specific content, while this document focuses on providing an overview of what Loom is and how the library works.
