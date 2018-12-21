@@ -14,7 +14,7 @@ Other readmes are provided for more specific content, while this document focuse
 - [Extending Loom](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Extending_Loom.md) – How to add support to the Loom Library
 - [Hub Scripts](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Hub_Scripts.md) – Documentation on the mini programs / scripts that Loom supports
 - [Loom Translator](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/ReadMe_Loom_Translator.md) – Documentation on the collection of Loom functions for converting between data types and organization
-- [Max MSP](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Max) – Details on using Max MSP data processors with WiFi enabled Loom devices
+- [Max MSP](https://github.com/OPEnSLab-OSU/Loom-Max) – Details on using Max MSP data processors with WiFi enabled Loom devices
 - [Limitations and Bugs](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/Readme_Limitations_and_Bugs.md) – The processors, sensors, actuators, etc. that Loom uses / supports 
 
 
@@ -87,7 +87,7 @@ Currently changes to the config need to be done manually in the file itself. An 
 
 ## Max/MSP
 
-The associated [Loom Data Processors](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Max) and control modules are made as patches in Max/MSP. The Max interfaces are not strictly necessary for using this library, but provide convenient features and means of interacting with your Loom devices / network.
+The associated [Loom Data Processors](https://github.com/OPEnSLab-OSU/Loom-Max) and control modules are made as patches in Max/MSP. The Max interfaces are not strictly necessary for using this library, but provide convenient features and means of interacting with your Loom devices / network.
 
 
 
