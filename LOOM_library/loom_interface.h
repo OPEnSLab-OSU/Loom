@@ -186,6 +186,14 @@ void measure_sensors()
 		measure_rtc();
 	#endif
 
+	#if is_hx711 == 1
+		measure_hx711();
+	#endif
+
+	#if is_ads1231 == 1
+		measure_ads1231();
+	#endif
+
 
 	// If using I2C sensor without multiplexer
 	#if is_multiplexer != 1
@@ -200,9 +208,6 @@ void measure_sensors()
 		#endif
 		#if is_fxos8700 == 1
 			measure_fxos8700();
-		#endif
-		#if is_hx711 == 1
-			measure_hx711();
 		#endif
 		#if is_lis3dh == 1
 			measure_lis3dh();
@@ -300,9 +305,9 @@ void package_data(OSCBundle *bndl)
 		package_sht31d(bndl, configuration.packet_header_string);
 	#endif
 
-	// LOOM_DEBUG_Println("HERE3");
-	// print_bundle(bndl);
-
+	#if is_ads1231 == 1
+		package_ads1231(bndl, configuration.packet_header_string);
+	#endif
 
 	// If using I2C sensor without multiplexer
 	#if is_multiplexer != 1
@@ -317,9 +322,6 @@ void package_data(OSCBundle *bndl)
 		#endif
 		#if is_fxos8700 == 1
 			package_fxos8700(bndl, configuration.packet_header_string);
-		#endif
-		#if is_hx711 == 1
-			package_hx711(bndl, configuration.packet_header_string);
 		#endif
 		#if is_lis3dh == 1
 			package_lis3dh(bndl, configuration.packet_header_string);
