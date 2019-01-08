@@ -86,7 +86,7 @@
 // ================================================================ 
 // ===                 COMMUNICATION PLATFORMS                  === 
 // ================================================================
-#define is_wifi       1		// 1 to enable WiFi
+#define is_wifi       0		// 1 to enable WiFi
 #define is_lora       0		// 1 to enable LoRa (cannot be used with nRF) (Further customization in advanced options)
 #define is_nrf        0		// 1 to enable nRF (cannot be used with LoRa) (Further customization in advanced options)
 #define is_ethernet   0		// 1 to enable Ethernet (a number of options below might auto enable this anyway though)
@@ -96,11 +96,11 @@
 // ================================================================ 
 // ===                  DATA LOGGING PLATFORMS                  === 
 // ================================================================
-#define is_pushingbox 1		// 1 to enable PushingBox  
+#define is_pushingbox 0		// 1 to enable PushingBox  
 
 
 // --- RTC Options ---
-#define is_rtc        1		// Enable RTC functionality
+#define is_rtc        0		// Enable RTC functionality
 #if is_rtc == 1
 	#define RTC_pin 		6	// What pin the RTC interrupt is connected to
 
@@ -220,9 +220,21 @@
 #define is_mpu6050         0	// Accelerometer / Gyroscope
 #define is_lis3dh          0	// Accelerometer
 #define is_ms5803          0	// Atmospheric Pressure / Temperature Sensor
+
+
+// Other sensors
+
 #define is_hx711           0    // Load Cell
 	#if is_hx711 == 1
 		#define hx711_calibration 961.275
+	#endif
+
+#define is_ads1231         0 	//  Load Cell
+	#if is_ads1231 == 1
+		#define ADS1231_OFFSET 	 -27.2727272727
+		#define ADS1231_DATA_PIN A0
+		#define ADS1231_CLK_PIN  A1
+		#define ADS1231_PWR_PIN  A2
 	#endif
 
 
@@ -232,7 +244,7 @@
 // --- WiFi Settings ---
 // Requires is_wifi to be set to 1 to take effect
 #if is_wifi == 1
-	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
+	#define DEFAULT_MODE      AP_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
 	#define DEFAULT_PASSWORD  "arduino101"		// Network password
 

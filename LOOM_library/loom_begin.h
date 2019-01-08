@@ -88,6 +88,10 @@ void Loom_begin()
 		setup_relay();
 	#endif
 
+	#if is_ads1231 == 1
+		setup_ads1231();
+	#endif	
+
 // Currently moved to after Ethernet setup
 	// #if is_rtc == 1
 	// 	setup_rtc();
