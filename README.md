@@ -22,23 +22,38 @@ Other readmes are provided for more specific content, while this document focuse
 ## Table of Contents
 
 1. [Installation](#installation)
+
 2. [Device Support](#device-support)
+
 3. [Communication Platforms](#communication-platforms)
+
+    1. [Notes on Internet Connectivity](#notes-on-internet-connectivity)
+
 4. [Device Configuration](#device-configuration)
+
 5. [Max/MSP](#max/msp)
+
 6. [Library Architecture](#library-architecture)
 
     1. [Overall Structure](#overall-structure)
         1. [Example Library Include Hierarchy](#example-library-include-hierarchy)
+
 7. [Channels](#channels)
     1. [Implementation](#implementation)
     2. [Additional Devices](#additional-devices)
+
 8. [Device Identification Hierarchy](#device-identification-hierarchy)
+
 9. [SD Card Support](#sd-card-support)
+
 10. [Real-Time Clock Support](#real-time-clock-support)
+
 11. [Non-Volatile Flash and EEPROM memory](#non-volatile-memory)
+
 12. [Configuration File](#configuration-file)
+
 13. [API](#api)
+
 14. [Using the Loom Library](#using-the-loom-library)
 
 
