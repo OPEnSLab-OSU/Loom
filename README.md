@@ -77,6 +77,24 @@ WiFi and LoRa have had the most attention in development and thus have the most 
 
 
 
+### Notes on Internet Connectivity
+
+**Ethernet MAC Addresses:** 
+
+If you are not on a network where MAC addresses are managed / locked if not explicitly approved, then you will need obtain a valid MAC address from your IT department. Once you have a MAC address, it can be set in the code with something like `byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6};` It would generally be worth testing a new MAC address in basic example code first to ensure that will in fact work.
+
+**WiFi Network Connectivity:** 
+
+Many institutional / company WiFi network require a user's credentials to be access (rather than just network SSID and password). We do not currently support connecting to such networks, and it is unclear if this can be implemented on Arduinos at all.
+
+As such, you can operated the Loom WiFi device in:
+
+- Access point mode without internet access
+- Client mode connected to a WiFi router that does not connect to an institutional/ username protected network for internet access
+- Client mode connected to a WiFi router unconnected to internet for local communication between devices but no internet access
+
+
+
 ## Device Configuration
 
 The configuration of the code to upload and flash to devices is specified in the config.h file. This file presents the options that can be set or toggled to achieve a particular behavior. The preprocessor uses these definitions to select the necessary declarations, variables, and functions automatically. 
