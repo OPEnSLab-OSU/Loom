@@ -11,14 +11,15 @@
 const char* LoomRTC::daysOfTheWeek[] = 
 	{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
+
 const float LoomRTC::timezone_adjustment[] =
-{
-	1  /* WAT */, 2    /* AT  */, 3     /* ADT */, 4   /* AST */, 4   /* EDT */, 5  /* EST */, 5  /* CDT */,
-	6  /* CST */, 6    /* MDT */, 7     /* MST */, 7   /* PDT */, 8   /* PST */, 8  /* ALDT*/, 9  /* ALST*/,
-	10 /* HST */, 11   /* SST */, 0     /* GMT */, -1  /* BST */, -1  /* CET */, -2 /* CEST*/, -2 /* EET */,
-	-3 /* EEST*/, -3   /* BT  */, -4    /* ZP4 */, -5  /* ZP5 */, -6  /* ZP6 */, -7 /* ZP7 */, -8 /* AWST*/,
-	-9 /* AWDT*/, -9.5 /* ACST*/, -10.5 /* ACDT*/, -10 /* AEST*/, -11 /* AEDT*/
-};
+	{
+		1  /* WAT */, 2    /* AT  */, 3     /* ADT */, 4   /* AST */, 4   /* EDT */, 5  /* EST */, 5  /* CDT */,
+		6  /* CST */, 6    /* MDT */, 7     /* MST */, 7   /* PDT */, 8   /* PST */, 8  /* ALDT*/, 9  /* ALST*/,
+		10 /* HST */, 11   /* SST */, 0     /* GMT */, -1  /* BST */, -1  /* CET */, -2 /* CEST*/, -2 /* EET */,
+		-3 /* EEST*/, -3   /* BT  */, -4    /* ZP4 */, -5  /* ZP5 */, -6  /* ZP6 */, -7 /* ZP7 */, -8 /* AWST*/,
+		-9 /* AWDT*/, -9.5 /* ACST*/, -10.5 /* ACDT*/, -10 /* AEST*/, -11 /* AEDT*/
+	};
 
 
 char* LoomRTC::enum_timezone_string(TimeZone t)
@@ -96,8 +97,9 @@ void LoomRTC::print_config()
 
 void LoomRTC::print_time()
 {
-	measure();
+	// measure();
 	print_module_label();
+
 	LOOM_DEBUG_Println("Time:");
 	LOOM_DEBUG_Println2("\tDate: ", get_datestring());
 	LOOM_DEBUG_Println2("\tTime: ", get_timestring());
@@ -118,31 +120,54 @@ void LoomRTC::print_DateTime(DateTime time)
 }
 
 
+
 char* LoomRTC::get_datestring()
 {
-
+	DateTime time = now();
+	sprintf(datestring, "%d/%d/%d", time.year(), time.month(), time.day() );
+	return datestring;
 } 
+
+void LoomRTC::get_datestring(char* buf)
+{
+	DateTime time = now();
+	sprintf(buf, "%d/%d/%d", time.year(), time.month(), time.day() );
+} 
+
 
 char* LoomRTC::get_timestring()
 {
-
+	DateTime time = now();
+	sprintf(timestring, "%d:%d:%d", time.hour(), time.minute(), time.second() );
+	return timestring;
 }
+
+void LoomRTC::get_timestring(char* buf)
+{
+	DateTime time = now();
+	sprintf(buf, "%d:%d:%d", time.hour(), time.minute(), time.second() );
+}
+
 
 char* LoomRTC::get_weekday()
 {
-
+	return (char*)daysOfTheWeek[ now().dayOfTheWeek() ];
 }
 
+void LoomRTC::get_weekday(char* buf)
+{
+	strcpy( buf, daysOfTheWeek[ now().dayOfTheWeek() ] );
+}
 
 
 
 
 
 // Similar to measure_rtc  -- might not be needed
-void LoomRTC::read_rtc()
-{
+// void LoomRTC::read_rtc()
+// {
 
-}
+// }
 
 
 void LoomRTC::set_rtc_to_compile_time()

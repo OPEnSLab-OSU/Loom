@@ -14,6 +14,19 @@ union data_value { // Used in translation between OSC and strings
 
 
 
+
+
+char* LoomCommPlat::enum_comm_plat_string(CommPlatform c)
+{
+	switch(c) {
+		case WIFI : return "WiFi";
+		case LORA : return "LoRa";
+		case NRF  : return "nRF";
+	}
+}
+
+
+
 // char* LoomCommPlat::enum_subnet_scope_string(CommScope s)
 // {
 // 	switch(s) {
