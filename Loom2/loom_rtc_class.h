@@ -46,6 +46,9 @@ protected:
 	bool 		use_utc_time;
 	bool 		get_internet_time;
 
+	char	 	datestring[20];
+	char 		timestring[20];
+
 	// maybe store basic seconds unit?
 
 public:
@@ -74,11 +77,18 @@ public:
 	void print_time();
 
 
-	void measure();
+	// void package()     ?? 
+
+	// void measure();
+
 
 	char* get_datestring(); 
-	char* get_timestring();
+	void  get_datestring(char* buf); 
+	char* get_timestring();	
+	void  get_timestring(char* buf);
 	char* get_weekday();
+	void  get_weekday(char* buf);
+
 
 	virtual DateTime now() = 0;
 

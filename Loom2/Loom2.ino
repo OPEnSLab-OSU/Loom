@@ -32,6 +32,9 @@
 #include "loom_oled_class.h"
 #include "loom_sd_class.h"
 
+#include "loom_rtc_class.h"
+
+#include "loom_internet_plat_class.h"
 
 
 
@@ -52,7 +55,9 @@ Neopixel*      NP;
 // LoomOLED*      OL;
 // LoomSD*        SC;
 
-LoomCommPlat* LR;
+// Loom_RTC3231*          RT;
+
+// LoomCommPlat* LR;
 
 LoomDevice DeviceManager;
 
@@ -89,15 +94,16 @@ void setup()
 	// SH = new Loom_SHT31D();
 	// SH->print_config();
 
-	LR = new LoomLora();
-	LR->print_config();
-
+	// LR = new LoomLora();
+	// LR->print_config();
 
 	// OL = new LoomOLED();
 	// OL->print_config();
 
 	// SC = new LoomSD();
 	// SC->print_config();
+
+	// RT = new LoomRTC();
 
 	// DeviceManager = new LoomDevice();
 
@@ -107,7 +113,7 @@ void setup()
 	// DeviceManager.add_module(NP);
 	// DeviceManager.add_module(SC);
 	// DeviceManager.add_module(OL);
-	DeviceManager.add_module(LR);
+	// DeviceManager.add_module(LR);
 
 
 

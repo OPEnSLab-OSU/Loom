@@ -41,6 +41,8 @@ public:
 	~LoomCommPlat();
 
 
+	static char* enum_comm_plat_string(CommPlatform c);
+
 	// static char* enum_subnet_scope_string(CommScope s);
 
 

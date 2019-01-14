@@ -6,7 +6,6 @@
 
 // #include "loom_device_class.h"
 
-
 #include "loom_misc.h"
 #include "loom_translator.h"
 
@@ -97,7 +96,7 @@ public:
 	virtual void print_state();
 
 
-	virtual void measure() = 0;
+	virtual void measure() = 0; // maybe drop to subclasses
 
 	// Append to a bundle 
 	virtual void package(OSCBundle* bndl, char* id_prefix) = 0;
