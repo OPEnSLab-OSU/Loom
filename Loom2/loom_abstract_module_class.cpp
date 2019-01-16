@@ -49,11 +49,13 @@ LoomModule::LoomModule( char* module_name ) : LoomModule()
 	this->module_name = module_name;
 }
 
+// this version also links to parent device
 LoomModule::LoomModule( char* module_name, LoomDevice* LD ) : LoomModule()
 {
 	// LOOM_DEBUG_Println("LoomModule Constructor 2");
 	this->module_name   = module_name;
-	this->parent_device = LD;
+	// this->parent_device = LD;
+	link_parent_device(LD);
 }
 
 // This version did not seem to work

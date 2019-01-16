@@ -4,7 +4,6 @@
 
 #include "loom_sensor_i2c_class.h"
 
-// #include <Wire.h>
 #include "Adafruit_SHT31.h"
 
 
@@ -49,6 +48,7 @@ public:
 	void measure();
 
 	void package(OSCBundle* bndl, char* id_prefix);
+	void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
 
 
 private:
