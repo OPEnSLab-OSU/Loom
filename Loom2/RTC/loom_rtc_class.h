@@ -12,6 +12,7 @@
 
 
 
+
 enum TimeZone { 
 	WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
 	ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
@@ -72,14 +73,16 @@ public:
 
 	// --- PUBLIC METHODS ---
 
-	void print_config();
+	virtual void print_config();
 
 	void print_time();
 
+	virtual void measure();
 
-	// void package()     ?? 
+	virtual void package(OSCBundle* bndl, char* id_prefix);
 
-	// void measure();
+
+	// virtual bool message_route(OSCMessage* msg, int address_offset) = 0;
 
 
 	char* get_datestring(); 

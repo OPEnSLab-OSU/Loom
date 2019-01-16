@@ -500,12 +500,12 @@ void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, uin
 	bndl->add(address_string).add( (int32_t)elem );
 }
 
-void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, float elem)
-{
-	char address_string[80];
-	sprintf(address_string, "%s/%s", id_header, key);
-	bndl->add(address_string).add( elem );
-}
+// void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, float elem)
+// {
+// 	char address_string[80];
+// 	sprintf(address_string, "%s/%s", id_header, key);
+// 	bndl->add(address_string).add( elem );
+// }
 
 
 void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, String elem)
@@ -515,14 +515,39 @@ void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, Str
 	bndl->add(address_string).add( elem.c_str() );
 }
 
-template <typename T> 
-void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, T elem)
-{
-	char address_string[80];
-	sprintf(address_string, "%s/%s", id_header, key);
+// template <typename T> 
+// void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, T elem)
+// {
+// 	char address_string[80];
+// 	sprintf(address_string, "%s/%s", id_header, key);
 
-	bndl->add(address_string).add( elem );
+// 	bndl->add(address_string).add( elem );
+// }
+
+// template void append_to_bundle_key_value<char*>(OSCBundle *bndl, char* id_header, char* key, char* elem);
+
+
+void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, int elem)
+{
+	bndl->getOSCMessage( bndl->size()-1 )->add(key).add( (int32_t)elem );
 }
+
+void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, uint16_t elem)
+{
+	bndl->getOSCMessage( bndl->size()-1 )->add(key).add( (int32_t)elem );
+}
+
+void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, String elem)
+{
+	bndl->getOSCMessage( bndl->size()-1 )->add(key).add( elem.c_str() );
+
+}
+
+
+
+
+
+
 
 
 

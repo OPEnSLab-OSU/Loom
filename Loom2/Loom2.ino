@@ -33,10 +33,12 @@
 #include "loom_sd_class.h"
 
 #include "loom_rtc_class.h"
+#include "loom_ds3231_class.h"
+#include "loom_pcf8523_class.h"
 
 #include "loom_internet_plat_class.h"
 
-
+#include "loom_multiplexer_class.h"
 
 // AnalogManager Asensor;
 
@@ -55,7 +57,10 @@ Neopixel*      NP;
 // LoomOLED*      OL;
 // LoomSD*        SC;
 
-// Loom_RTC3231*          RT;
+// Loom_DS3231*     RT;
+// Loom_PCF8523*     RT;
+
+LoomMultiplexer* 	MP;
 
 // LoomCommPlat* LR;
 
@@ -77,6 +82,10 @@ void setup()
 
 	AS = new AnalogManager();
 	AS->print_config();
+
+	AS->measure();
+	AS->print_measurements();
+
 
 	// LOOM_DEBUG_Println("Change Verbosity");
 	// LOOM_DEBUG_Println( AS->get_print_verbosity() );
@@ -103,21 +112,28 @@ void setup()
 	// SC = new LoomSD();
 	// SC->print_config();
 
-	// RT = new LoomRTC();
+	// RT = new Loom_DS3231();
+	// RT = new Loom_PCF8523();
+	// RT->print_config();
+
+	MP = new LoomMultiplexer();
+	MP->print_config();
+
 
 	// DeviceManager = new LoomDevice();
 
 	LOOM_DEBUG_Println("Adding Components");
 
-	DeviceManager.add_module(AS);
+	// DeviceManager.add_module(AS);
 	// DeviceManager.add_module(NP);
 	// DeviceManager.add_module(SC);
 	// DeviceManager.add_module(OL);
 	// DeviceManager.add_module(LR);
+// 
+	// DeviceManager.add_module(RT-T);
 
 
-
-	DeviceManager.print_config();
+	// DeviceManager.print_config();
 
 
 
@@ -142,6 +158,12 @@ void loop()
 {
 	OSCBundle bndl;
 
+	// RT->print_time();
+	// RT->package(&bndl, "prefix");
+	// append_to_bundle_key_value(&bndl, "other", "Weekday", RT->get_weekday());
+
+
+	// print_bundle(&bndl);
 
 
 

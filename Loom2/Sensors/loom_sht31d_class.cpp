@@ -61,6 +61,14 @@ void Loom_SHT31D::measure()
 
 void Loom_SHT31D::package(OSCBundle* bndl, char* id_prefix)
 {
-
+	append_to_bundle_key_value(bndl, id_prefix, "Temp", temp);
+	append_to_bundle_key_value(bndl, id_prefix, "Humid", humid);
 }
 
+void Loom_SHT31D::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
+{
+	I2CSensor::package_mux(bndl, id_prefix, port);
+
+	append_to_bundle_msg_key_value(bndl, "Temp", temp);
+	append_to_bundle_msg_key_value(bndl, "Humid", humid);
+}

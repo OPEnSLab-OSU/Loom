@@ -101,6 +101,15 @@ void LoomRTC::print_time()
 	print_module_label();
 
 	LOOM_DEBUG_Println("Time:");
+	// char buf[20];
+	// get_datestring(buf);
+	// LOOM_DEBUG_Println2("\tDate: ", buf);
+	// get_timestring(buf);
+	// LOOM_DEBUG_Println2("\tTime: ", buf);
+	// LOOM_DEBUG_Println2("\tDay : ", get_weekday());
+	// LOOM_DEBUG_Println();
+
+
 	LOOM_DEBUG_Println2("\tDate: ", get_datestring());
 	LOOM_DEBUG_Println2("\tTime: ", get_timestring());
 	LOOM_DEBUG_Println2("\tDay : ", get_weekday());
@@ -120,6 +129,22 @@ void LoomRTC::print_DateTime(DateTime time)
 }
 
 
+void LoomRTC::measure()
+{
+	get_datestring();
+	get_timestring();
+}
+
+
+void LoomRTC::package(OSCBundle* bndl, char* id_prefix)
+{
+	measure();
+	append_to_bundle_key_value(bndl, id_prefix, "DateString", datestring);
+	append_to_bundle_key_value(bndl, id_prefix, "TimeString", timestring);
+}
+
+
+
 
 char* LoomRTC::get_datestring()
 {
@@ -132,6 +157,7 @@ void LoomRTC::get_datestring(char* buf)
 {
 	DateTime time = now();
 	sprintf(buf, "%d/%d/%d", time.year(), time.month(), time.day() );
+	strcpy(datestring, buf);
 } 
 
 
@@ -146,6 +172,7 @@ void LoomRTC::get_timestring(char* buf)
 {
 	DateTime time = now();
 	sprintf(buf, "%d:%d:%d", time.hour(), time.minute(), time.second() );
+	strcpy(timestring, buf);
 }
 
 
