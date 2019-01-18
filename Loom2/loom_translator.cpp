@@ -1,7 +1,6 @@
 
-#include "loom_translator.h"
-
-#include "loom_macros.h"
+#include "Loom_Translator.h"
+#include "Loom_Macros.h"
 
 
 // #include <OSCBundle.h>

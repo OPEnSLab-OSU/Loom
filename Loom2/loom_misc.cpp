@@ -1,7 +1,6 @@
 
-#include "loom_misc.h"
-#include "loom_macros.h"
-
+#include "Loom_Misc.h"
+#include "Loom_Macros.h"
 
 
 
@@ -57,9 +56,9 @@ void print_message(OSCMessage* msg, bool detail)
 			}
 			LOOM_DEBUG_Println();
 		} else {
-			LOOM_DEBUG_Println2("Address: ", get_address_string(msg).c_str());
+			LOOM_DEBUG_Println2("\tAddress: ", get_address_string(msg).c_str());
 			for (int i = 0; i < msg->size(); i++) {
-				LOOM_DEBUG_Print3("Value (", i, ") ");
+				LOOM_DEBUG_Print3("\tValue (", i, ") ");
 				switch(msg->getType(i)) {
 					case 'f': LOOM_DEBUG_Println2("(f) ", msg->getFloat(i) ); break;
 					case 'i': LOOM_DEBUG_Println2("(i) ", msg->getInt(i) );   break;

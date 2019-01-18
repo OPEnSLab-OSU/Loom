@@ -1,5 +1,4 @@
 
-#include "loom_macros.h"
 
 // // enum Verbosity { VERB_OFF, VERB_LOW, VERB_HIGH }; // Move back to "loom_abstract_module_class.h"
 // enum CommScope { SCOPE_DEVICE, SCOPE_SUBNET, SCOPE_FAMILY, SCOPE_SUBNET_ONLY, SCOPE_FAMILY_ONLY, SCOPE_ANY }; // Move back to "loom_comm_plat_class.h"
@@ -11,45 +10,57 @@
 // enum BundleStructure { SINGLEMSG, MULTIMSG };
 
 
+
+// Preamble will only need to include leafs in the heirarchy
+// abstract (noon-leaves) already included by leaves
+
 #include <OSCBundle.h>
 
-#include "loom_device_class.h"
-#include "loom_abstract_module_class.h"
+#include "Loom_Macros.h"
 
-#include "loom_sensor_class.h"
-#include "loom_sensor_analog_class.h"
 
-#include "loom_actuator_class.h"
-#include "loom_neopixel_class.h"
+#include "Loom_Device.h"
+#include "Loom_Module.h"
 
-#include "loom_sensor_i2c_class.h"
-#include "loom_sht31d_class.h"
 
-#include "loom_comm_plat_class.h"
-#include "loom_lora_class.h"
+#include "Loom_Analog.h"
+// #include "Loom_Sensor.h"
 
-#include "loom_logging_plat_class.h"
-#include "loom_oled_class.h"
-#include "loom_sd_class.h"
+// #include "Loom_Actuator.h"
+#include "Loom_Neopixel.h"
 
-#include "loom_rtc_class.h"
-#include "loom_ds3231_class.h"
-#include "loom_pcf8523_class.h"
+// #include "Loom_I2C_Sensor.h"
+#include "Loom_SHT31D.h"
+#include "Loom_TSL2591.h"
 
-#include "loom_internet_plat_class.h"
+// #include "Loom_CommPlat.h"
+#include "Loom_LoRa.h"
 
-#include "loom_multiplexer_class.h"
+// #include "Loom_LogPlat.h"
+#include "Loom_OLED.h"
+#include "Loom_SD.h"
 
-// AnalogManager Asensor;
+// #include "Loom_RTC.h"
+#include "Loom_DS3231.h"
+#include "Loom_PCF8523.h"
+
+// #include "Loom_InternetPlat.h"
+
+#include "Loom_Multiplexer.h"
+
+
+
+
+
+
+
+
 
 // Do these being pointers rather than global instances slow down startup?
 
-// AnalogManager Asensor;
 
-AnalogManager* AS;
-Neopixel*      NP;
-
-// // Neopixel      NP;
+Loom_Analog* 	AS;
+Loom_Neopixel*      NP;
 
 // Loom_SHT31D*   SH;
 // LoomLora*      LR;
@@ -60,7 +71,9 @@ Neopixel*      NP;
 // Loom_DS3231*     RT;
 // Loom_PCF8523*     RT;
 
-LoomMultiplexer* 	MP;
+Loom_Multiplexer* 	MP;
+// LoomModule* 	MP;
+
 
 // LoomCommPlat* LR;
 
@@ -80,22 +93,16 @@ void setup()
 	LOOM_DEBUG_Println();
 
 
-	AS = new AnalogManager();
+	AS = new Loom_Analog();
 	AS->print_config();
 
 	AS->measure();
 	AS->print_measurements();
 
 
-	// LOOM_DEBUG_Println("Change Verbosity");
-	// LOOM_DEBUG_Println( AS->get_print_verbosity() );
-	// AS->set_print_verbosity(VERB_HIGH);
-	// AS->print_config();
-
-
 	// Asensor.print_config();
 
-	// NP = new Neopixel();
+	// NP = new Loom_Neopixel();
 	// NP->print_config();
 
 	// NP->set_color(2, 0, 100, 0, 150);
@@ -116,24 +123,25 @@ void setup()
 	// RT = new Loom_PCF8523();
 	// RT->print_config();
 
-	MP = new LoomMultiplexer();
+	MP = new Loom_Multiplexer();
 	MP->print_config();
 
+	MP->print_state();
 
 	// DeviceManager = new LoomDevice();
 
 	LOOM_DEBUG_Println("Adding Components");
 
-	// DeviceManager.add_module(AS);
+	DeviceManager.add_module(AS);
 	// DeviceManager.add_module(NP);
 	// DeviceManager.add_module(SC);
 	// DeviceManager.add_module(OL);
 	// DeviceManager.add_module(LR);
 // 
-	// DeviceManager.add_module(RT-T);
+	DeviceManager.add_module(MP);
 
 
-	// DeviceManager.print_config();
+	DeviceManager.print_config();
 
 
 
@@ -158,17 +166,41 @@ void loop()
 {
 	OSCBundle bndl;
 
+	// LOOM_DEBUG_Println(b++);
+
+	MP->refresh_sensors();
+	MP->print_state();
+	MP->measure();
+	MP->print_measurements();
+
+	MP->package(&bndl);
+	print_bundle(&bndl);
+
+	delay(2000);
+
 	// RT->print_time();
 	// RT->package(&bndl, "prefix");
 	// append_to_bundle_key_value(&bndl, "other", "Weekday", RT->get_weekday());
 
+	LOOM_DEBUG_Println("SENSOR LIST");
+	bndl.empty();
+	MP->get_sensor_list(&bndl);
+	print_bundle(&bndl);
 
+
+	// MP->measure();
+	// bndl.empty();
+	// MP->package(&bndl);
+	// LOOM_DEBUG_Println("MUX PACKAGE");
 	// print_bundle(&bndl);
 
 
+	bndl.empty();	
+	AS->package(&bndl);
+	LOOM_DEBUG_Println("ANALOG PACKAGE");
+	print_bundle(&bndl);
 
-
-	while(1);
+	// while(1);
 
 
 	// DeviceManager.measure();
@@ -200,7 +232,6 @@ void loop()
 
 	// while(1);
 
-	delay(1000);
 
 }
 
