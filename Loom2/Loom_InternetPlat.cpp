@@ -20,7 +20,7 @@ char* LoomInternetPlat::enum_internet_plat_string(InternetPlatform p)
 // --- CONSTRUCTOR ---
 LoomInternetPlat::LoomInternetPlat(	char* module_name
 
-				)
+				) : LoomModule( module_name )
 {
 
 }
@@ -34,7 +34,13 @@ LoomInternetPlat::~LoomInternetPlat()
 
 void LoomInternetPlat::print_config()
 {
+	LoomModule::print_config();	
+}
 
+
+void LoomInternetPlat::print_state()
+{
+	LOOM_DEBUG_Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 
 

@@ -38,6 +38,12 @@ public:
 	// --- PUBLIC METHODS ---
 
 	virtual void print_config();
+	virtual void print_state();
+
+	virtual bool connect() = 0;
+	virtual bool is_connected() = 0;
+	virtual uint32_t get_time() = 0;
+
 
 
 	// Should this be external?

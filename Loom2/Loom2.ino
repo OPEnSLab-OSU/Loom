@@ -1,16 +1,4 @@
 
-
-// // enum Verbosity { VERB_OFF, VERB_LOW, VERB_HIGH }; // Move back to "loom_abstract_module_class.h"
-// enum CommScope { SCOPE_DEVICE, SCOPE_SUBNET, SCOPE_FAMILY, SCOPE_SUBNET_ONLY, SCOPE_FAMILY_ONLY, SCOPE_ANY }; // Move back to "loom_comm_plat_class.h"
-// // enum DeviceType { HUB, NODE, REPEATER };
-// enum LogPlatform { SDCARD, PUSHINGBOX, OLED, SERIAL_MON };
-// enum OLED_Version { FEATHERWING, BREAKOUT, OTHER };
-// enum OLED_Format { OLED_4, OLED_8, OLED_SCROLL };
-// enum OLED_Freeze { FREEZE_DISABLE, FREEZE_DATA, FREEZE_SCROLL };
-// enum BundleStructure { SINGLEMSG, MULTIMSG };
-
-
-
 // Preamble will only need to include leafs in the heirarchy
 // abstract (noon-leaves) already included by leaves
 
@@ -48,6 +36,8 @@
 
 #include "Loom_Multiplexer.h"
 
+
+#include "Loom_InternetPlat.h"
 
 
 
@@ -166,26 +156,29 @@ void loop()
 {
 	OSCBundle bndl;
 
+
+
+
 	// LOOM_DEBUG_Println(b++);
 
-	MP->refresh_sensors();
-	MP->print_state();
-	MP->measure();
-	MP->print_measurements();
+	// MP->refresh_sensors();
+	// MP->print_state();
+	// MP->measure();
+	// MP->print_measurements();
 
-	MP->package(&bndl);
-	print_bundle(&bndl);
+	// MP->package(&bndl);
+	// print_bundle(&bndl);
 
-	delay(2000);
+	// delay(2000);
 
 	// RT->print_time();
 	// RT->package(&bndl, "prefix");
 	// append_to_bundle_key_value(&bndl, "other", "Weekday", RT->get_weekday());
 
-	LOOM_DEBUG_Println("SENSOR LIST");
-	bndl.empty();
-	MP->get_sensor_list(&bndl);
-	print_bundle(&bndl);
+	// LOOM_DEBUG_Println("SENSOR LIST");
+	// bndl.empty();
+	// MP->get_sensor_list(&bndl);
+	// print_bundle(&bndl);
 
 
 	// MP->measure();
@@ -195,10 +188,10 @@ void loop()
 	// print_bundle(&bndl);
 
 
-	bndl.empty();	
-	AS->package(&bndl);
-	LOOM_DEBUG_Println("ANALOG PACKAGE");
-	print_bundle(&bndl);
+	// bndl.empty();	
+	// AS->package(&bndl);
+	// LOOM_DEBUG_Println("ANALOG PACKAGE");
+	// print_bundle(&bndl);
 
 	// while(1);
 
