@@ -54,9 +54,7 @@ public:
 	// maybe don't define package and measure in .cpp because they are empty
 
 	virtual void package(OSCBundle* bndl);
-
 	virtual void measure();
-
 	virtual bool message_route(OSCMessage* msg, int address_offset);
 
 
@@ -78,7 +76,6 @@ public:
 	// CommScope get_subnet_scope();
 
 	void set_compress_messages(bool c);
-
 	bool get_compress_messages();
 
 
@@ -87,7 +84,6 @@ public:
 // can probably just return offset and check if -1 to remove need to return bool
 	bool scope_filter(OSCBundle* bndl, int* offset);
 	bool scope_filter(OSCBundle* bndl);
-
 
 
 protected:

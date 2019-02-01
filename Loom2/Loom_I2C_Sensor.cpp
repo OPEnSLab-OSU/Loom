@@ -10,7 +10,6 @@ LoomI2CSensor::LoomI2CSensor( 	char* module_name,
 			byte  i2c_address 
 		) : LoomSensor( module_name, sensor_description )
 {
-	// LOOM_DEBUG_Println("I2C Constructor 1");
 	this->i2c_address = i2c_address;
 }
 
@@ -45,12 +44,3 @@ void LoomI2CSensor::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
 	sprintf(address_string, "%s/%s/%d", id_prefix, module_name, port);
 	bndl->add(address_string);
 }
-
-
-
-
-// these dont actually need to be re-added here
-	// virtual void measure() = 0;
-	// virtual void package() = 0;
-
-

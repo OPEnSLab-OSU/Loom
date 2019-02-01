@@ -38,25 +38,28 @@ Loom_LoRa::Loom_LoRa( 	char* module_name,
 	bool status;
 
 	// Initialize Manager
-	LOOM_DEBUG_Print("\tInitializing Manager ... ");
 	status = manager->init();
-	LOOM_DEBUG_Println( (status) ? "Success" : "Failed");
+	print_module_label();
+	LOOM_DEBUG_Println2("\tInitializing Manager ", (status) ? "Success" : "Failed");
 	
 	// Set Frequency
-	LOOM_DEBUG_Print("\tSetting Frequency ... ");
 	status = driver->setFrequency(RF95_FREQ);
-	LOOM_DEBUG_Println( (status) ? "Success" : "Failed" );
+	print_module_label();
+	LOOM_DEBUG_Println2( "\tSetting Frequency ", (status) ? "Success" : "Failed" );
 
 	// Set Power Level
+	print_module_label();
 	LOOM_DEBUG_Println2("\tSetting Power Level to ", this->power_level);
 	driver->setTxPower(this->power_level, false);
 
 	// Set Retry Delay
-	LOOM_DEBUG_Println3("\tSetting LoRa retry timeout to ", this->retry_timeout, " ms");
+	print_module_label();
+	LOOM_DEBUG_Println3("\tSetting retry timeout to ", this->retry_timeout, " ms");
 	manager->setTimeout(this->retry_timeout);
 
 	// Set Max Retry Count
-	LOOM_DEBUG_Println2("\tSetting LoRa max retry count ", this->retry_count);
+	print_module_label();
+	LOOM_DEBUG_Println2("\tSetting max retry count ", this->retry_count);
 	manager->setRetries(this->retry_count);
 }
 
@@ -120,8 +123,6 @@ bool Loom_LoRa::receive_bundle(OSCBundle *bndl)
 }
 
 
-
-
 // Send an OSC bundle
 // Should overload or use default args to optionally allow default address
 bool Loom_LoRa::send_bundle(OSCBundle *bndl, uint16_t destination) 
@@ -138,7 +139,7 @@ bool Loom_LoRa::send_bundle(OSCBundle *bndl, uint16_t destination)
 	LOOM_DEBUG_Println2("Message length: ", strlen(message));
 	 
 	// bool is_sent = manager->sendtoWait( (uint8_t*)message, strlen(message)+1, destination );
-		bool is_sent = manager->sendtoWait( (uint8_t*)message, strlen(message), destination );
+	bool is_sent = manager->sendtoWait( (uint8_t*)message, strlen(message), destination );
 
 	LOOM_DEBUG_Println2("Send LoRa bundle " , (is_sent) ? "successful" : "failed" );
 

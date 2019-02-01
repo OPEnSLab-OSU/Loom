@@ -15,11 +15,9 @@ LoomSensor::LoomSensor(	char* 	module_name,
 
 					  ) : LoomModule( module_name ) 
 {
-	// LOOM_DEBUG_Println("LoomSensor Constructor 1");
 	this->sensor_description = sensor_description; 
 	this->num_samples        = num_samples;
 }
-
 
 
 // --- DESTRUCTOR ---
@@ -36,17 +34,16 @@ void LoomSensor::print_config()
 	LOOM_DEBUG_Println3('\t', "Num Samples         : ", num_samples);
 }
 
-// void LoomSensor::print_measurements() = 0;
 
-void LoomSensor::calibrate() {}
 
-// void LoomSensor::measure() = 0;
+// void LoomSensor::calibrate() {}
 
-// void LoomSensor::package(OSCBundle* bndl, char* id_prefix) = 0;
 
-bool LoomSensor::message_route(OSCMessage* msg, int address_offset) {}
+// bool LoomSensor::message_route(OSCMessage* msg, int address_offset) {}
+
 
 void LoomSensor::set_num_samples(uint8_t n) { num_samples = n; }
+
 
 uint8_t LoomSensor::get_num_samples() { return num_samples; }
 

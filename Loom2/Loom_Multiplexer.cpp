@@ -213,13 +213,14 @@ void Loom_Multiplexer::get_sensor_list(OSCBundle* bndl) // populate an OSC bundl
 	}	
 
 	bndl->add(msg);
-
 }
+
 
 void Loom_Multiplexer::set_is_dynamic(bool dynamic)
 {
 	dynamic_list = dynamic;
 }
+
 
 bool Loom_Multiplexer::get_is_dynamic()
 {
@@ -232,13 +233,11 @@ void Loom_Multiplexer::set_update_period(int period)
 	update_period = period;
 }
 
+
 int  Loom_Multiplexer::get_update_period()
 {
 	return update_period;
 }
-
-
-
 
 
 void Loom_Multiplexer::refresh_sensors()

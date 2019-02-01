@@ -1,9 +1,5 @@
 
 #include "Loom_Module.h"
-#include "Loom_Device.h"
-
-#include "Loom_Macros.h"
-
 
 
 // char* enum_verbosity_string(Verbosity v)
@@ -53,7 +49,7 @@ LoomModule::LoomModule( char* module_name ) : LoomModule()
 }
 
 // this version also links to parent device
-LoomModule::LoomModule( char* module_name, LoomDevice* LD ) : LoomModule()
+LoomModule::LoomModule( char* module_name, LoomManager* LD ) : LoomModule()
 {
 	// LOOM_DEBUG_Println("LoomModule Constructor 2");
 	this->module_name   = module_name;
@@ -86,13 +82,13 @@ LoomModule::~LoomModule() {}
 // --- PUBLIC METHODS ---
 
 
-LoomDevice* LoomModule::get_parent_device()
+LoomManager* LoomModule::get_parent_device()
 {
 	return parent_device;
 }
 
 
-void LoomModule::link_parent_device(LoomDevice* LD)
+void LoomModule::link_parent_device(LoomManager* LD)
 {
 	if (LD == NULL) return;
 
@@ -160,7 +156,7 @@ void LoomModule::resolve_package_prefix(char* prefix)
 	// bool LoomModule::message_route(OSCMessage* msg, int address_offset) = 0;
 
 	// Not sure if there should be a verison that takes a bundle as well
-		// Maybe in LoomDevice , but not here
+		// Maybe in LoomManager , but not here
 	// Might have a default value for address_offset to skip the /[D/S/F] section?
 	// This might have be OSCMessage& msg instead
 

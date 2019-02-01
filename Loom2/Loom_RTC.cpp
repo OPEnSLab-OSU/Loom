@@ -1,6 +1,6 @@
 
 #include "Loom_RTC.h"
-#include "Loom_Device.h"
+#include "Loom_Manager.h"
 // #include "Loom_Macros.h"
 // #include "Loom_Misc.h"
 // #include "Loom_Translator.h"
@@ -146,8 +146,6 @@ void LoomRTC::package(OSCBundle* bndl)
 }
 
 
-
-
 char* LoomRTC::get_datestring()
 {
 	DateTime time = now();
@@ -170,6 +168,7 @@ char* LoomRTC::get_timestring()
 	return timestring;
 }
 
+
 void LoomRTC::get_timestring(char* buf)
 {
 	DateTime time = now();
@@ -183,20 +182,11 @@ char* LoomRTC::get_weekday()
 	return (char*)daysOfTheWeek[ now().dayOfTheWeek() ];
 }
 
+
 void LoomRTC::get_weekday(char* buf)
 {
 	strcpy( buf, daysOfTheWeek[ now().dayOfTheWeek() ] );
 }
-
-
-
-
-
-// Similar to measure_rtc  -- might not be needed
-// void LoomRTC::read_rtc()
-// {
-
-// }
 
 
 void LoomRTC::set_rtc_to_compile_time()

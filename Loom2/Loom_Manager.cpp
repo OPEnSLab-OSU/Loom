@@ -1,6 +1,6 @@
 
 #include "Loom_Module.h"
-#include "Loom_Device.h"
+#include "Loom_Manager.h"
 
 #include "Loom_Macros.h"
 
@@ -16,7 +16,7 @@
 
 
 
-char* LoomDevice::enum_device_type_string(DeviceType t)
+char* LoomManager::enum_device_type_string(DeviceType t)
 {
 	switch(t) {
 		case HUB      : return "Hub";
@@ -28,7 +28,7 @@ char* LoomDevice::enum_device_type_string(DeviceType t)
 
 
 // --- CONSTRUCTOR ---
-LoomDevice::LoomDevice( char* device_name, char* family, uint family_num, uint instance, DeviceType device_type, char* module_name)
+LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint instance, DeviceType device_type, char* module_name)
 	// : LoomModule(module_name)
 {
 	this->device_name 	= device_name;
@@ -39,7 +39,7 @@ LoomDevice::LoomDevice( char* device_name, char* family, uint family_num, uint i
 }
 
 // // --- CONSTRUCTOR ---
-// LoomDevice::LoomDevice( char* device_name, char* family, uint family_num, uint instance, DeviceType device_type)
+// LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint instance, DeviceType device_type)
 // {
 // 	this->device_name 	= device_name;
 // 	this->family 		= family;
@@ -49,17 +49,17 @@ LoomDevice::LoomDevice( char* device_name, char* family, uint family_num, uint i
 // }
 
 // --- DESTRUCTOR ---
-LoomDevice::~LoomDevice() {}
+LoomManager::~LoomManager() {}
 
 
 // --- PUBLIC METHODS ---
 
-void LoomDevice::print_device_label()
+void LoomManager::print_device_label()
 {
 	LOOM_DEBUG_Print3("[", device_name, "] ");
 }
 
-void LoomDevice::print_config() 
+void LoomManager::print_config() 
 {
 	print_device_label();
 	LOOM_DEBUG_Println("Config:");
@@ -76,7 +76,7 @@ void LoomDevice::print_config()
 }
 
 
-void LoomDevice::add_module(LoomModule* LM) 
+void LoomManager::add_module(LoomModule* LM) 
 {
 	// If module array is not dynamic, add check to make sure there is room in the array
 	print_device_label();
@@ -90,7 +90,7 @@ void LoomDevice::add_module(LoomModule* LM)
 // void module_enable(LoomModule* LM, bool e) ?
 
 
-void LoomDevice::list_modules()
+void LoomManager::list_modules()
 {
 	print_device_label();
 	LOOM_DEBUG_Println("Modules");
@@ -101,17 +101,17 @@ void LoomDevice::list_modules()
 
 
 
-void LoomDevice::set_device_name(char* device_name)
+void LoomManager::set_device_name(char* device_name)
 {
 	this->device_name = device_name;
 }
 
-void LoomDevice::get_device_name(char* buf)
+void LoomManager::get_device_name(char* buf)
 {
 	sprintf(buf, "%s", device_name); 
 }
 
-char* LoomDevice::get_device_name()
+char* LoomManager::get_device_name()
 {
 	char name[50];
 	get_device_name(name);
@@ -120,13 +120,13 @@ char* LoomDevice::get_device_name()
 
 
 
-void LoomDevice::packet_header_family(char* buf)
+void LoomManager::packet_header_family(char* buf)
 { 
 	sprintf(buf, "/F/%s", family); 
 }
 
 
-char* LoomDevice::packet_header_family() 
+char* LoomManager::packet_header_family() 
 {
 	char result[50];
 	packet_header_family(result);
@@ -134,13 +134,13 @@ char* LoomDevice::packet_header_family()
 }
 
 
-void LoomDevice::packet_header_subnet(char* buf)
+void LoomManager::packet_header_subnet(char* buf)
 { 
 	sprintf(buf, "/S/%s/%d", family, family_num); 
 }
 
 
-char* LoomDevice::packet_header_subnet() 
+char* LoomManager::packet_header_subnet() 
 {
 	char result[50];
 	packet_header_subnet(result);
@@ -148,13 +148,13 @@ char* LoomDevice::packet_header_subnet()
 }
 
 
-void LoomDevice::packet_header_device(char* buf)
+void LoomManager::packet_header_device(char* buf)
 { 
 	sprintf(buf, "/D/%s/%d/%s/%d", family, family_num, device_name, instance); 
 }
 
 
-char* LoomDevice::packet_header_device() 
+char* LoomManager::packet_header_device() 
 {
 	char result[50];
 	packet_header_device(result);
@@ -162,42 +162,42 @@ char* LoomDevice::packet_header_device()
 }
 
 
-char* LoomDevice::get_family() 
+char* LoomManager::get_family() 
 { 
 	return family; 
 }
 
 
-void  LoomDevice::set_family(char* f) 
+void  LoomManager::set_family(char* f) 
 { 
 	family = f; 
 }
 
-int  LoomDevice::get_family_num() 
+int  LoomManager::get_family_num() 
 { 
 	return family_num; 
 }
 
 
-void LoomDevice::set_family_num(int n) 
+void LoomManager::set_family_num(int n) 
 { 
 	family_num = n; 
 }
 
 
-int  LoomDevice::get_instance_num() 
+int  LoomManager::get_instance_num() 
 { 
 	return instance; 
 }
 
 
-void LoomDevice::set_instance_num(int n) 
+void LoomManager::set_instance_num(int n) 
 { 
 	instance = n; 
 }
 
 
-DeviceType LoomDevice::get_device_type() 
+DeviceType LoomManager::get_device_type() 
 { 
 	return device_type; 
 }
@@ -226,7 +226,7 @@ DeviceType LoomDevice::get_device_type()
 // void print_data
 
 
-void LoomDevice::measure()
+void LoomManager::measure()
 {
 	for (int i = 0; i < module_count; i++) {
 		if ( modules[i]->get_active() ) {
@@ -236,7 +236,7 @@ void LoomDevice::measure()
 }
 
 
-void LoomDevice::package() 
+void LoomManager::package() 
 {
 	bundle.empty();
 
@@ -250,14 +250,14 @@ void LoomDevice::package()
 
 }
 
-void LoomDevice::package(OSCBundle* bndl) 
+void LoomManager::package(OSCBundle* bndl) 
 {
 	package();
 	deep_copy_bundle(&bundle, bndl);
 }
 
 
-void LoomDevice::print_current_bundle() 
+void LoomManager::print_current_bundle() 
 {
 	LOOM_DEBUG_Println("Member Bundle:");
 	print_bundle(&bundle);

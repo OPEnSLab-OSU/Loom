@@ -7,7 +7,7 @@
 #include "Loom_Macros.h"
 
 
-#include "Loom_Device.h"
+#include "Loom_Manager.h"
 #include "Loom_Module.h"
 
 
@@ -37,7 +37,8 @@
 #include "Loom_Multiplexer.h"
 
 
-#include "Loom_InternetPlat.h"
+// #include "Loom_InternetPlat.h"
+#include "Loom_InternetEthernet.h"
 
 
 
@@ -64,10 +65,11 @@ Loom_Neopixel*      NP;
 Loom_Multiplexer* 	MP;
 // LoomModule* 	MP;
 
-
 // LoomCommPlat* LR;
 
-LoomDevice DeviceManager;
+Loom_Ethernet_I* EI;
+ 
+LoomManager DeviceManager;
 
 void setup() 
 {
@@ -113,12 +115,14 @@ void setup()
 	// RT = new Loom_PCF8523();
 	// RT->print_config();
 
-	MP = new Loom_Multiplexer();
-	MP->print_config();
+	// MP = new Loom_Multiplexer();
+	// MP->print_config();
 
-	MP->print_state();
+	// MP->print_state();
 
-	// DeviceManager = new LoomDevice();
+	// EI = new Loom_Ethernet_I();
+
+	// DeviceManager = new LoomManager();
 
 	LOOM_DEBUG_Println("Adding Components");
 
@@ -128,11 +132,11 @@ void setup()
 	// DeviceManager.add_module(OL);
 	// DeviceManager.add_module(LR);
 // 
-	DeviceManager.add_module(MP);
+	// DeviceManager.add_module(MP);
+	// DeviceManager.add_module(EI);
 
 
 	DeviceManager.print_config();
-
 
 
 	// DeviceManager.list_modules();
@@ -144,7 +148,12 @@ void setup()
 	// AS->load_config();
 	// AS->save_config();
 
-	// while(1);
+	LOOM_DEBUG_Println2("Connected : ", EI->is_connected());
+	LOOM_DEBUG_Println2("Time      : ", EI->get_time());
+	LOOM_DEBUG_Println2("Time      : ", EI->get_time());
+	
+
+	while(1);
 
 	delay(2000);
 
@@ -169,7 +178,7 @@ void loop()
 	// MP->package(&bndl);
 	// print_bundle(&bndl);
 
-	// delay(2000);
+	// delay(1000);
 
 	// RT->print_time();
 	// RT->package(&bndl, "prefix");
@@ -215,7 +224,7 @@ void loop()
 
 	// // LOOM_DEBUG_Println("\nBuild Bundle");
 	// DeviceManager.package(&bndl);
-
+// 
 	// print_bundle(&bndl);
 
 	// NP->set_color(2, 0, 0, b++, 0);
@@ -236,15 +245,15 @@ void loop()
 	// int tmp;
 	// char buf[50];
 
-	// b[0].add("/D/Loom/1/LoomDevice/1/data");
+	// b[0].add("/D/Loom/1/LoomManager/1/data");
 	// b[1].add("/D/Loom/1/Ishield/1/data");
-	// b[2].add("/D/Loom/1/LoomDevice/2/data");
+	// b[2].add("/D/Loom/1/LoomManager/2/data");
 
-	// b[3].add("/S/Loom/1/LoomDevice/1/data");
+	// b[3].add("/S/Loom/1/LoomManager/1/data");
 	// b[4].add("/S/Loom/2/Ishield/1/data");
 	// b[5].add("/S/Other/1/data");
 
-	// b[6].add("/F/Loom/1/LoomDevice/1/data");
+	// b[6].add("/F/Loom/1/LoomManager/1/data");
 	// b[7].add("/F/Loom/data");
 	// b[8].add("/F/Other/1/data");
 

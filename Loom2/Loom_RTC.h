@@ -75,15 +75,12 @@ public:
 	// --- PUBLIC METHODS ---
 
 	virtual void print_config();
-
 	virtual void measure();
-
 	virtual void package(OSCBundle* bndl);
 
 	void print_time();
 
 	// virtual bool message_route(OSCMessage* msg, int address_offset) = 0;
-
 
 	char* get_datestring(); 
 	void  get_datestring(char* buf); 

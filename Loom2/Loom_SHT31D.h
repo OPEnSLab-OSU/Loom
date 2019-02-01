@@ -29,10 +29,7 @@ public:
 					
 					char* module_name 			= "SHT31D",
 					char* sensor_description 	= "Temperature/Humidty" 
-
 				);
-
-	// maybe a constructor that specifies the i2c address (use a default otherwise)
 
 	// --- DESTRUCTOR ---
 	~Loom_SHT31D();
@@ -40,10 +37,7 @@ public:
 	void print_measurements();
 
 	void measure();
-
 	void package(OSCBundle* bndl);
-	// void package(OSCBundle* bndl) { LoomModule::package(bndl); }
-
 	void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
 
 private:

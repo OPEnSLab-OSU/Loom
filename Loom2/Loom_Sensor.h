@@ -54,13 +54,13 @@ public:
 
 	virtual void print_measurements() = 0;
 
-	virtual void calibrate();
+	virtual void calibrate() {};
 
 	virtual void measure() = 0;
 
 	virtual void package(OSCBundle* bndl) = 0;
 
-	virtual bool message_route(OSCMessage* msg, int address_offset);
+	virtual bool message_route(OSCMessage* msg, int address_offset) {};
 
 	void set_num_samples(uint8_t n);
 

@@ -23,7 +23,8 @@ Loom_SD::Loom_SD(		char* module_name, bool enable_rate_filter, uint min_filter_d
 	// #endif
 
 	sd_found = SD.begin(chip_select);
-	LOOM_DEBUG_Println4("\tInitialize ", module_name, " ", (sd_found) ? "sucessful" : "failed (will continue, but SD functions will be skipped)");
+	print_module_label();
+	LOOM_DEBUG_Println2("\tInitialize ", (sd_found) ? "sucessful" : "failed (will continue, but SD functions will be skipped)");
 
 
 }
@@ -48,10 +49,12 @@ void Loom_SD::print_config()
 	// }
 }
 
+
 void Loom_SD::set_default_file(char* filename) 
 { 
 	default_file = filename; 
 }
+
 
 char* Loom_SD::get_default_file() 
 { 
@@ -66,6 +69,7 @@ void Loom_SD::delete_file(char* file)
 	SD.remove(file);
 }
 
+
 void Loom_SD::empty_file(char* file)
 {
 	if ( !sd_found ) return;
@@ -74,6 +78,7 @@ void Loom_SD::empty_file(char* file)
 	SDFile = SD.open(file, FILE_WRITE);
 	SDFile.close();
 }
+
 
 void Loom_SD::list_files()
 {
@@ -114,7 +119,6 @@ bool Loom_SD::dump_file(char* file)
 }
 
 
-
 template <typename T>
 bool Loom_SD::save_elem(char *file, T data, char endchar)
 {	
@@ -141,14 +145,10 @@ bool Loom_SD::save_elem(char *file, T data, char endchar)
 
 }
 
+
 void Loom_SD::log_bundle(OSCBundle* bndl) 
 {
 	// if ( !sd_found || !check_millis() ) return;
-
-
-	LOOM_DEBUG_Println("LOGGING");
-
-
 	save_bundle(bndl, default_file, 3);
 
 }
@@ -173,7 +173,6 @@ void Loom_SD::log_bundle(OSCBundle* bndl)
 // @param timestamp  Format of timestamp (if any)
 bool Loom_SD::save_bundle(OSCBundle *bndl, char * file, int timestamp)
 {
-	// if ( !sd_found ) return false;
 	if ( !sd_found || !check_millis() ) return false;
 
 	LOOM_DEBUG_Println("HERE");

@@ -8,48 +8,9 @@
 
 
 
-
-// enum Verbosity { VERB_OFF, VERB_LOW, VERB_HIGH }; // Move back to "loom_abstract_module_class.h"
-// enum CommScope { SCOPE_DEVICE, SCOPE_SUBNET, SCOPE_FAMILY, SCOPE_SUBNET_ONLY, SCOPE_FAMILY_ONLY, SCOPE_ANY }; // Move back to "loom_comm_plat_class.h"
-// enum DeviceType { HUB, NODE, REPEATER };
-// enum LogPlatform { SDCARD, PUSHINGBOX, OLED, SERIAL_MON };
-// enum OLED_Version { FEATHERWING, BREAKOUT, OTHER };
-// enum OLED_Format { OLED_4, OLED_8, OLED_SCROLL };
-// enum OLED_Freeze { FREEZE_DISABLE, FREEZE_DATA, FREEZE_SCROLL };
-
-
-// Move these to the files where the enums are defined (the associated class)
-
-// These could also be #defined / const arrays? then just use associated index
-
-// char* enum_verbosity_string(Verbosity v);
-
-// char* enum_subnet_scope_string(CommScope s);
-
-// char* enum_device_type_string(DeviceType t);
-
-// char* enum_log_plat_string(LogPlatform p);
-// char* enum_oled_version_string(OLED_Version v);
-
-// char* enum_oled_format(OLED_Format f);
-
-// char* enum_oled_freeze(OLED_Freeze f);
-
-
-
-
-
-
-
 String get_data_value(OSCMessage* msg, int pos);
-
-
 String get_address_string(OSCMessage *msg);
-
-
-
 void print_message(OSCMessage* msg, bool detail);
-
 void print_message(OSCMessage* msg);
 void print_bundle(OSCBundle *bndl);
 

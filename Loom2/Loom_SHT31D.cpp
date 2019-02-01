@@ -13,7 +13,8 @@ Loom_SHT31D::Loom_SHT31D(byte i2c_address, char* module_name, char* sensor_descr
 {
 	bool setup = inst_sht31d.begin(i2c_address);
 
-	LOOM_DEBUG_Println4("\tInitialize ", module_name, " ", (setup) ? "sucessful" : "failed");
+	print_module_label();
+	LOOM_DEBUG_Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
 // maybe a constructor that specifies the i2c address (use a default otherwise)
@@ -34,6 +35,7 @@ void Loom_SHT31D::print_measurements()
 	LOOM_DEBUG_Println2("\tHumidity   : ", humid);
 }
 
+
 void Loom_SHT31D::measure()
 {
 	float t = inst_sht31d.readTemperature();
@@ -47,6 +49,7 @@ void Loom_SHT31D::measure()
 	}
 }
 
+
 void Loom_SHT31D::package(OSCBundle* bndl)
 {
 	char id_prefix[30]; 
@@ -55,6 +58,7 @@ void Loom_SHT31D::package(OSCBundle* bndl)
 	append_to_bundle_key_value(bndl, id_prefix, "Temp", temp);
 	append_to_bundle_key_value(bndl, id_prefix, "Humid", humid);
 }
+
 
 void Loom_SHT31D::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
 {

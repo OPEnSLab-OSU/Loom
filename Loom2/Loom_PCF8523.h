@@ -18,9 +18,9 @@ public:
 	// --- CONSTRUCTOR ---
 	Loom_PCF8523(	char* 	module_name 			= "PCF8523",
 	 
-				TimeZone 	timezone 			= PST,
-				bool 		use_utc_time 		= false,
-				bool 		get_internet_time 	= false
+					TimeZone 	timezone 			= PST,
+					bool 		use_utc_time 		= false,
+					bool 		get_internet_time 	= false
 		   );
 
 	// --- DESTRUCTOR ---

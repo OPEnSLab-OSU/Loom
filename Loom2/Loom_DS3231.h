@@ -24,9 +24,9 @@ public:
 	// --- CONSTRUCTOR ---
 	Loom_DS3231(	char* 	module_name 			= "DS3231",
 	 
-				TimeZone 	timezone 			= PST,
-				bool 		use_utc_time 		= true,
-				bool 		get_internet_time 	= false
+					TimeZone 	timezone 			= PST,
+					bool 		use_utc_time 		= true,
+					bool 		get_internet_time 	= false
 		   );
 
 	// --- DESTRUCTOR ---
@@ -37,7 +37,6 @@ public:
 	void print_config();
 
 	// void package(OSCBundle* bndl, char* id_prefix);
-
 
 	DateTime now();
 
@@ -53,4 +52,4 @@ protected:
 };
 
 
-#endif // of #ifndef LOOM_3231_h
+#endif // of #ifndef LOOM_DS3231_h

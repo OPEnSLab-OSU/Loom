@@ -1,7 +1,5 @@
 
 #include "loom_DS3231.h"
-// #include "loom_Macros.h"
-
 
 
 
@@ -90,6 +88,7 @@ DateTime Loom_DS3231::now()
 {
 	return rtc_inst->now();
 }
+
 
 void Loom_DS3231::time_adjust(DateTime time)
 {
