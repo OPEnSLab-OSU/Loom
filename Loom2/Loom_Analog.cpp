@@ -231,11 +231,11 @@ void Loom_Analog::set_analog_resolution(uint8_t res)
 	analogReadResolution(analog_read_resolution = res); 
 }
 
+
 uint8_t Loom_Analog::get_analog_resolution() 
 { 
 	return analog_read_resolution; 
 }
-
 
 
 int Loom_Analog::get_analog_val(int i) 

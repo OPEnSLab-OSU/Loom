@@ -10,9 +10,6 @@
 Loom_Neopixel::Loom_Neopixel(char* module_name, bool enableA0, bool enableA1, bool enableA2)
 	: LoomActuator(module_name)
 {
-	// LOOM_DEBUG_Println("Neopixel Constructor");
-	// LOOM_DEBUG_Println("Neopixel Setup");
-
 	// Set enabled pins
 	pin_enabled[0] = enableA0;
 	pin_enabled[1] = enableA1;
@@ -35,6 +32,8 @@ Loom_Neopixel::Loom_Neopixel(char* module_name, bool enableA0, bool enableA1, bo
 		}
 	}		
 
+	print_module_label();
+	LOOM_DEBUG_Println("Setup");
 } 
 
 // --- DESTRUCTOR ---
@@ -86,6 +85,8 @@ bool Loom_Neopixel::message_route(OSCMessage* msg, int address_offset)
 	}
 
 	// Enable/Disable individual Neopixel
+
+
 
 	return false;
 }

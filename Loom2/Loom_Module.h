@@ -4,7 +4,7 @@
 
 
 
-#include "Loom_Device.h"
+#include "Loom_Manager.h"
 
 #include "Loom_Misc.h"
 #include "Loom_Translator.h"
@@ -14,11 +14,11 @@
 #include <OSCBundle.h>
 
 
-// Maybe move out to global so that LoomDevice can reference this as well
+// Maybe move out to global so that LoomManager can reference this as well
 enum Verbosity { VERB_OFF, VERB_LOW, VERB_HIGH }; // Move back to "loom_abstract_module_class.h"
 
 
-class LoomDevice; // Specify that LoomDevice exists, defined in own file
+class LoomManager; // Specify that LoomManager exists, defined in own file
 
 
 
@@ -29,7 +29,7 @@ class LoomModule
 protected:
 
 	// LoomModule* parent_device;
-	LoomDevice* parent_device;
+	LoomManager* parent_device;
 
 	char* module_name;				// The name of the module    		Should have a DEFAULT but can be overriden if provided to constructor
 	
@@ -58,7 +58,7 @@ public:
 
 	LoomModule( char* module_name );// : LoomModule();
 
-	LoomModule( char* module_name, LoomDevice* LD );
+	LoomModule( char* module_name, LoomManager* LD );
 
 
 // This version did not seem to work
@@ -85,9 +85,9 @@ public:
 
 	// --- PUBLIC METHODS ---
 
-	LoomDevice* get_parent_device();
+	LoomManager* get_parent_device();
 
-	void link_parent_device(LoomDevice* LD);
+	void link_parent_device(LoomManager* LD);
 
 	void print_module_label();
 
@@ -105,7 +105,7 @@ public:
 	// Subclasses can provide defaults for id_prefix, permitting package(&bndl);
 	virtual void package(OSCBundle* bndl) = 0;
 
-	// Package but try to reference LoomDevice for id_prefix
+	// Package but try to reference LoomManager for id_prefix
 	// void package(OSCBundle* bndl);
 
 	// Perform message routing on an OSC message
@@ -114,7 +114,7 @@ public:
 	virtual bool message_route(OSCMessage* msg, int address_offset) = 0;
 
 	// Not sure if there should be a verison that takes a bundle as well
-		// Maybe in LoomDevice , but not here
+		// Maybe in LoomManager , but not here
 	// Might have a default value for address_offset to skip the /[D/S/F] section?
 	// This might have be OSCMessage& msg instead
 

@@ -61,22 +61,14 @@ public:
 	// --- PUBLIC METHODS ---
 
 	void print_config();
-
 	void set_default_file(char* filename);
-	
 	char* get_default_file();
-
 	void delete_file(char* file);
-
 	void empty_file(char* file);
-
 	void list_files();
-
 	bool dump_file(char* file) ;
-
 	template <typename T>
 	bool save_elem(char *file, T data, char endchar);
-
 	void log_bundle(OSCBundle* bndl);
 
 
@@ -88,8 +80,6 @@ public:
 	bool save_bundle(OSCBundle *bndl, char * file, int timestamp);
 
 
-
-
 	// timestamp options:
 	//   0: no timestamp added
 	//   1: only date added
@@ -98,7 +88,6 @@ public:
 	//   4: both date and time added (combined field)
 	template <typename T>
 	bool save_array(char *file, T data [], int len, char delimiter, int timestamp);
-
 
 
 private:

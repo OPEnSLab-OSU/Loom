@@ -2,19 +2,9 @@
 #ifndef LOOM_ANALOG_h
 #define LOOM_ANALOG_h
 
-
-// #include "Sensors/Loom_Sensor.h"
 #include "Loom_Sensor.h"
 
 
-#include <OSCBundle.h>
-
-
-
-
-// #include "loom_misc.h"
-
-// #include "loom_translator.h"
 
 #define VBATPIN A7
 
@@ -30,7 +20,6 @@ typedef struct {
 
 
 // FlashStorage(analog_flash_config, AnalogConfig);
-
 
 
 
@@ -141,16 +130,11 @@ public:
 
 	void print_config_struct();
 
-
-
 	bool message_route(OSCMessage* msg, int address_offset);
 
 
 	void set_analog_resolution(uint8_t res);
-
 	uint8_t get_analog_resolution();
-
-
 
 	int get_analog_val(int i);
 

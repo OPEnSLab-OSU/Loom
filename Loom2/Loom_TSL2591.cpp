@@ -12,8 +12,6 @@ Loom_TSL2591::Loom_TSL2591(byte i2c_address, char* module_name, char* sensor_des
 
 	: LoomI2CSensor( module_name, sensor_description, i2c_address )
 {
-	// LOOM_DEBUG_Println("LIS3DH Setup");
-
 	this->gain_level   = gain_level;
 	this->timing_level = timing_level;
 
@@ -25,8 +23,8 @@ Loom_TSL2591::Loom_TSL2591(byte i2c_address, char* module_name, char* sensor_des
 		configure_settings(); //Medium gain and timing
 	} 
 
-	LOOM_DEBUG_Println4("\tInitialize ", module_name, " ", (setup) ? "sucessful" : "failed");
-
+	print_module_label();
+	LOOM_DEBUG_Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
 // maybe a constructor that specifies the i2c address (use a default otherwise)
@@ -55,12 +53,14 @@ void Loom_TSL2591::print_measurements()
 	LOOM_DEBUG_Println2("\tFull : ", full);
 }
 
+
 void Loom_TSL2591::measure()
 {
 	vis  = inst_tsl2591.getLuminosity(TSL2591_VISIBLE);
 	ir   = inst_tsl2591.getLuminosity(TSL2591_INFRARED);
 	full = inst_tsl2591.getLuminosity(TSL2591_FULLSPECTRUM);
 }
+
 
 void Loom_TSL2591::package(OSCBundle* bndl)
 {
@@ -72,6 +72,7 @@ void Loom_TSL2591::package(OSCBundle* bndl)
 	append_to_bundle_key_value(bndl, id_prefix, "Full", full);
 }
 
+
 void Loom_TSL2591::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
 {
 	LoomI2CSensor::package_mux(bndl, id_prefix, port);
@@ -80,6 +81,7 @@ void Loom_TSL2591::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
 	append_to_bundle_msg_key_value(bndl, "IR", ir);
 	append_to_bundle_msg_key_value(bndl, "Full", full);
 }
+
 
 void Loom_TSL2591::configure_settings() 
 {

@@ -4,9 +4,6 @@
 
 #include "Loom_Module.h"
 
-#include <OSCBundle.h>
-
-
 
 enum InternetPlatform { INT_WIFI, ETHERNET, CELLULAR_2G };
 
@@ -40,6 +37,10 @@ public:
 	virtual void print_config();
 	virtual void print_state();
 
+	virtual void measure() {}
+	virtual void package(OSCBundle* bndl) {}
+	virtual bool message_route(OSCMessage* msg, int address_offset) {}
+
 	virtual bool connect() = 0;
 	virtual bool is_connected() = 0;
 	virtual uint32_t get_time() = 0;
@@ -47,7 +48,7 @@ public:
 
 
 	// Should this be external?
-	bool log_to_pushingbox(OSCBundle* bndl);
+	virtual bool log_to_pushingbox(OSCBundle* bndl);
 
 private:
 

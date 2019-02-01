@@ -15,11 +15,6 @@
 #define RF95_FREQ 915.0	// Hardware specific, Tx must match Rx   Move to config
 
 
-// These dont like to be declared in the class ...
-	// RH_RF95 			rf95(RFM95_CS, RFM95_INT);
-	// // RHReliableDatagram 	manager(rf95, LORA_SELF_ADDRESS);
-	// RHReliableDatagram 	manager(rf95, 00);
-
 // these will be defined in the config file
 #define LORA_SELF_ADDRESS   01
 #define LORA_FRIEND_ADDRESS 00
@@ -72,7 +67,6 @@ public:
 	// Send an OSC bundle
 	// Should overload or use default args to optionally allow default address
 	bool send_bundle(OSCBundle *bndl, uint16_t destination);
-
 	bool send_bundle(OSCBundle *bndl);
 
 	// Broadcast an OSC bundle
@@ -80,13 +74,10 @@ public:
 
 
 	void set_address(uint addr);
-
 	uint get_address();
 
 	void set_friend_address(uint addr);
-
 	uint get_friend_address();
-
 
 private:
 

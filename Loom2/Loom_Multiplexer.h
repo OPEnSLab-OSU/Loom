@@ -29,9 +29,11 @@ enum I2C_Selection { L_TSL2561, L_TSL2591, L_AS726X, L_AS7265X };
 class Loom_Multiplexer : public LoomModule
 {
 private:
+
 	const static byte known_addresses[];
 
 protected:
+
 	// --- PROTECTED MEMBERS ---
 
 	LoomI2CSensor**   sensors;
@@ -84,7 +86,6 @@ public:
 //  : other
 
 	bool message_route(OSCMessage* msg, int address_offset);
-
 
 
 	void get_sensor_list(OSCBundle* bndl); // populate an OSC bundle

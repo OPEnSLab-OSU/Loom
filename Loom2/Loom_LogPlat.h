@@ -34,7 +34,7 @@ public:
 					bool enable_rate_filter 	= true,
 					uint min_filter_delay 		= 1000
 
-			   ) ;//: LoomModule( module_name );
+			   );
 
 
 	// --- DESTRUCTOR ---
@@ -44,15 +44,10 @@ public:
 	// --- PUBLIC METHODS ---
 
 	virtual void print_config();
-
 	virtual void package(OSCBundle* bndl);
-
 	virtual void measure();
-
 	virtual bool message_route(OSCMessage* msg, int address_offset);
-
 	virtual void log_bundle(OSCBundle* bndl) = 0;
-
 
 private:
 

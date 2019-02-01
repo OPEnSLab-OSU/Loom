@@ -1,6 +1,6 @@
 
-#ifndef LOOM_DEVICE_h
-#define LOOM_DEVICE_h
+#ifndef LOOM_MANAGER_h
+#define LOOM_MANAGER_h
 
 
 // #include "loom_abstract_module_class.h"
@@ -29,7 +29,7 @@ class LoomLogPlat;
 
 
 
-class LoomDevice
+class LoomManager
 {
 
 protected:
@@ -40,7 +40,7 @@ protected:
 	uint 		family_num;		// The subnet of the family
 	uint 		instance;		// The instance / channel ID within the subnet
 
-	DeviceType 	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomDevice
+	DeviceType 	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
 	uint8_t		module_count;		//
 	LoomModule* modules[10];
@@ -80,17 +80,17 @@ public:
 	// --- CONSTRUCTOR ---
 
 								// The parameters to the constructor will be defined in config
-	LoomDevice( char* device_name 	= "LoomDevice",
+	LoomManager( char* device_name 	= "LoomManager",
 				char* family 		= "Loom",
 				uint  family_num 	= 1,
 				uint  instance 		= 1,
 
 				DeviceType device_type	= NODE,
 
-				char* module_name = "LoomDevice"
+				char* module_name = "LoomManager"
 			  );
 
-	// LoomDevice( char* device_name,
+	// LoomManager( char* device_name,
 	// 		char* family,
 	// 		uint  family_num,
 	// 		uint  instance,
@@ -99,7 +99,7 @@ public:
 	// 	  );
 
 	// --- DESTRUCTOR ---
-	~LoomDevice();
+	~LoomManager();
 
 	// --- PUBLIC METHODS ---
 
@@ -192,16 +192,10 @@ public:
 
 
 	void measure();
-
-
 	void package();
-
-
 	void package(OSCBundle* bndl);
 
 	void print_current_bundle();
-
-
 
 	// Methods to set package and print verbosities all at once
 
@@ -244,7 +238,7 @@ private:
 
 
 
-// class LoomDevice
+// class LoomManager
 // {
 
 // protected:
@@ -255,7 +249,7 @@ private:
 // 	uint 		family_num;		// The subnet of the family
 // 	uint 		instance;		// The instance / channel ID within the subnet
 
-// 	DeviceType 	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomDevice
+// 	DeviceType 	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
 // 	uint8_t		module_count;		//
 
@@ -287,7 +281,7 @@ private:
 // 	// --- CONSTRUCTOR ---
 
 // 								// The parameters to the constructor will be defined in config
-// 	LoomDevice( char* device_name 	= "LoomDevice",
+// 	LoomManager( char* device_name 	= "LoomManager",
 // 				char* family 		= "Loom",
 // 				uint  family_num 	= 1,
 // 				uint  instance 		= 1,
@@ -295,7 +289,7 @@ private:
 // 				DeviceType device_type	= NODE
 // 			  );
 
-// 	// LoomDevice( char* device_name,
+// 	// LoomManager( char* device_name,
 // 	// 		char* family,
 // 	// 		uint  family_num,
 // 	// 		uint  instance,
@@ -304,7 +298,7 @@ private:
 // 	// 	  );
 
 // 	// --- DESTRUCTOR ---
-// 	~LoomDevice();// {}
+// 	~LoomManager();// {}
 
 
 // 	// --- PUBLIC METHODS ---

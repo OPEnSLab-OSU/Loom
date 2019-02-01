@@ -14,7 +14,7 @@ protected:
 	// --- PROTECTED MEMBERS ---
 	byte i2c_address;	// The sensor's I2C address
 
-	// should is setup be a member here?
+	// should is_setup be a member here?
 
 public:
 
@@ -38,18 +38,12 @@ public:
 
 	virtual void print_config();
 
+	virtual void measure() = 0;
 	virtual void package(OSCBundle* bndl) = 0;
-	
 	virtual void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
-
 
 	// Get the sensor's I2C address
 	byte get_i2c_address(); 	
-
-
-// these dont actually need to be re-added here
-	// virtual void measure() = 0;
-	// virtual void package() = 0;
 
 
 private:

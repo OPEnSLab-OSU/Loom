@@ -36,13 +36,9 @@ protected:
 
 public:
 
-
 	static char* enum_oled_version_string(OLED_Version v);
-
 	static char* enum_oled_format(OLED_Format f);
-
 	static char* enum_oled_freeze(OLED_Freeze f);
-
 
 
 	// --- CONSTRUCTOR ---
@@ -68,27 +64,23 @@ public:
 	void print_config();
 
 	void set_display_format(OLED_Format format);
-	
 	OLED_Format get_display_format();
 
 	void set_scroll_duration(uint duration);
-	
 	uint get_scroll_duration();
 
 	void set_freeze_pin(byte pin);
-
 	byte get_freeze_pin();
 
 	void set_freeze_behavior(OLED_Freeze behavior);
-
 	OLED_Freeze get_freeze_behavior();
 
 	void log_bundle(OSCBundle* bndl);
-
 	void log_bundle(OSCBundle* bndl, OLED_Format format);
 
 
 private:
+	
 	unsigned long previous_time; // Used to manage scrolling
 
 };

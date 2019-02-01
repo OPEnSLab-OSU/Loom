@@ -1,9 +1,5 @@
 
 #include "Loom_InternetPlat.h"
-#include "Loom_Device.h"
-#include "Loom_Macros.h"
-
-
 
 
 char* LoomInternetPlat::enum_internet_plat_string(InternetPlatform p)

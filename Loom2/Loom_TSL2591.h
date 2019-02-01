@@ -47,13 +47,7 @@ public:
 	void print_measurements();
 
 	void measure();
-
 	void package(OSCBundle* bndl);	
-
-	// void package(OSCBundle* bndl, char* id_prefix);	
-	// void package(OSCBundle* bndl) { LoomModule::package(bndl); }
-
-
 	void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
 
 	void configure_settings();

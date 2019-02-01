@@ -69,6 +69,7 @@ Loom_OLED::~Loom_OLED() {}
 
 // --- PUBLIC METHODS ---
 
+
 void Loom_OLED::print_config() 
 {
 	LoomLogPlat::print_config();
@@ -121,6 +122,7 @@ void Loom_OLED::set_freeze_pin(byte pin)
 		pinMode(freeze_pin, INPUT_PULLUP);
 	}
 }
+
 
 byte Loom_OLED::get_freeze_pin() 
 { 
@@ -226,3 +228,4 @@ void Loom_OLED::log_bundle(OSCBundle* bndl, OLED_Format format)
 	// Update display
 	display->display();	
 }
+
