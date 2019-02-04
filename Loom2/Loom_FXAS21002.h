@@ -15,7 +15,7 @@ class Loom_FXAS21002 : public LoomI2CSensor
 
 protected:
 
-	Adafruit_FXAS21002* inst_FXAS21002;
+	Adafruit_FXAS21002C* inst_FXAS21002;
 
 	float gyro[3];
 

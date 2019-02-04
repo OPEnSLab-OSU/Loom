@@ -23,9 +23,8 @@ Loom_TSL2561::Loom_TSL2561(byte i2c_address, char* module_name, char* sensor_des
 
 	if (setup) {
 		switch (gain) {
-			case 0  : inst_TSL2561->setGain(TSL2561_GAIN_0X); break; 
 			case 1  : inst_TSL2561->setGain(TSL2561_GAIN_1X); break;
-			case 16 : inst_TSL2561->setGain(TSL2561_GAIN_1X); break;
+			case 16 : inst_TSL2561->setGain(TSL2561_GAIN_16X); break;
 			default : inst_TSL2561->setGain(TSL2561_GAIN_1X); break;
 		}
 
@@ -53,8 +52,8 @@ void Loom_TSL2561::print_measurements()
 {
 	print_module_label();
 	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println4("\t", "LightIR   : ", lightIR, " lux");
-	LOOM_DEBUG_Println4("\t", "LightFull : ", humid, " lux");
+	LOOM_DEBUG_Println4("\t", "LightIR   : ", lightIR,   " lux");
+	LOOM_DEBUG_Println4("\t", "LightFull : ", lightFull, " lux");
 }
 
 

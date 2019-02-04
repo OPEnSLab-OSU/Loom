@@ -3,9 +3,6 @@
 
 
 
-
-
-
 // --- CONSTRUCTOR ---
 Loom_ZXGesture::Loom_ZXGesture(byte i2c_address, char* module_name, char* sensor_description, ZXMode mode)
 
@@ -23,7 +20,7 @@ Loom_ZXGesture::Loom_ZXGesture(byte i2c_address, char* module_name, char* sensor
 	ver = inst_ZX->getModelVersion();
 	print_module_label();
 	if (ver != ZX_MODEL_VER) {
-		is_setup = false;
+		setup = false;
 		LOOM_DEBUG_Println("Incorrect Model Version or unable to read Model Version.");
 	} else {
 		LOOM_DEBUG_Println2("Model Version: ", ver);
@@ -33,7 +30,7 @@ Loom_ZXGesture::Loom_ZXGesture(byte i2c_address, char* module_name, char* sensor
 	ver = inst_ZX->getRegMapVersion();
 	print_module_label();
 	if (ver != ZX_REG_MAP_VER) {
-		is_setup = false;
+		setup = false;
 		LOOM_DEBUG_Println("Incorrect Register Map Version or unable to read Register Map Version.");
 	} else {
 		LOOM_DEBUG_Println2("Register Map Version: ", ver);
@@ -71,7 +68,7 @@ void Loom_ZXGesture::print_measurements()
 			LOOM_DEBUG_Println3("\t", "ZY: ", pos[1]);
 			break;
 		case ZX_GEST : 
-			LOOM_DEBUG_Println3("\t", "Gesture type : ", gesture_type);
+			LOOM_DEBUG_Println3("\t", "Gesture type : ", gesture_type.c_str());
 			LOOM_DEBUG_Println3("\t", "Gesture speed: ", gesture_speed);
 			break; 
 	}
@@ -80,11 +77,13 @@ void Loom_ZXGesture::print_measurements()
 
 void Loom_ZXGesture::measure()
 {
+	uint8_t x, z;
+
 	switch (mode) {
 		case ZX_POS : 
-			if ( inst_ZX.positionAvailable() ) {
-				x = inst_ZX.readX();
-				z = inst_ZX.readZ();
+			if ( inst_ZX->positionAvailable() ) {
+				x = inst_ZX->readX();
+				z = inst_ZX->readZ();
 				
 				if ( (x != ZX_ERROR) && (z != ZX_ERROR) ) {
 					pos[0] = x;
@@ -92,7 +91,7 @@ void Loom_ZXGesture::measure()
 					// LOOM_DEBUG_Println2("zxgesturesensor X: ", pos[0]);
 					// LOOM_DEBUG_Println2("zxgesturesensor Z: ", pos[1]);
 				} else {
-					print_module_label()
+					print_module_label();
 					LOOM_DEBUG_Println("Error occurred while reading position data");
 				}	
 			} else {
@@ -106,9 +105,9 @@ void Loom_ZXGesture::measure()
 		
 
 		case ZX_GEST :
-			if ( inst_ZX.gestureAvailable() ) {
-				gesture       = inst_ZX.readGesture();
-				gesture_speed = inst_ZX.readGestureSpeed();
+			if ( inst_ZX->gestureAvailable() ) {
+				gesture       = inst_ZX->readGesture();
+				gesture_speed = inst_ZX->readGestureSpeed();
 				
 				switch (gesture) {
 					case RIGHT_SWIPE : gesture_type = "Right Swipe"; break;
@@ -140,8 +139,8 @@ void Loom_ZXGesture::package(OSCBundle* bndl)
 			append_to_bundle_key_value(bndl, id_prefix, "zy", pos[1]);
 			break;
 		case ZX_GEST : 
-			append_to_bundle_key_value(bndl, id_prefix, "type", gesture_type);
-			append_to_bundle_key_value(bndl, id_prefix, "speed", gesture_speed);
+			append_to_bundle_key_value(bndl, id_prefix, "type" , gesture_type.c_str());
+			append_to_bundle_key_value(bndl, id_prefix, "speed", (int)gesture_speed);
 			break; 
 	}
 }
@@ -157,8 +156,8 @@ void Loom_ZXGesture::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
 			append_to_bundle_key_value(bndl, id_prefix, "zy", pos[1]);
 			break;
 		case ZX_GEST : 
-			append_to_bundle_key_value(bndl, id_prefix, "type", gesture_type);
-			append_to_bundle_key_value(bndl, id_prefix, "speed", gesture_speed);
+			append_to_bundle_key_value(bndl, id_prefix, "type" , gesture_type.c_str());
+			append_to_bundle_key_value(bndl, id_prefix, "speed", (int)gesture_speed);
 			break; 
 	}
 }

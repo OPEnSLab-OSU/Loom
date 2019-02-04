@@ -4,6 +4,8 @@
 
 #include "Loom_I2C_Sensor.h"
 
+#include <Wire.h>
+#include <MS5803_02.h> 
 
 
 class Loom_MS5803 : public LoomI2CSensor

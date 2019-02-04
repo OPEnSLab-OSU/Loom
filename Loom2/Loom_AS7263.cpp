@@ -13,10 +13,12 @@ Loom_AS7263::Loom_AS7263(byte i2c_address, char* module_name, char* sensor_descr
 	this->mode     = mode;
 	this->use_bulb = use_bulb;
 
-	bool setup = inst_AS7263.begin(Wire, gain, mode);
+	inst_AS7263.begin(Wire, gain, mode);
+	// bool setup = inst_AS7263.begin(Wire, gain, mode);
 
 	print_module_label();
-	LOOM_DEBUG_Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LOOM_DEBUG_Println2("\t", "Initialized");
+	// LOOM_DEBUG_Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 
@@ -93,7 +95,7 @@ void Loom_AS7263::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
 }
 
 
-void Loom_AS7263::use_bulb(bool e)
+void Loom_AS7263::enable_bulb(bool e)
 {
 	use_bulb = e;
 }

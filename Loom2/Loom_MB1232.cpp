@@ -35,7 +35,7 @@ void Loom_MB1232::print_measurements()
 {
 	print_module_label();
 	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println4("\t" "Range: ", range, " cm");
+	LOOM_DEBUG_Println4("\t", "Range: ", range, " cm");
 }
 
 

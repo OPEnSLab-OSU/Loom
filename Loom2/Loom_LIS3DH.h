@@ -14,7 +14,7 @@ class Loom_LIS3DH : public LoomI2CSensor
 
 protected:
 
-	LIS3DH inst_LIS3DH;
+	LIS3DH* inst_LIS3DH;
 
 	float accel[3];
 

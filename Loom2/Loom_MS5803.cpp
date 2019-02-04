@@ -29,17 +29,17 @@ void Loom_MS5803::print_measurements()
 {
 	print_module_label();
 	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println4("\t", "Pressure    : ", temp , " mbar");
-	LOOM_DEBUG_Println4("\t", "Temperature : ", humid, " C");
+	LOOM_DEBUG_Println4("\t", "Pressure    : ", pressure , " mbar");
+	LOOM_DEBUG_Println4("\t", "Temperature : ", temp     , " C");
 }
 
 
 void Loom_MS5803::measure()
 {
-	inst_MS5803.readSensor();
+	inst_MS5803->readSensor();
 
-	pressure = inst_MS5803.pressure();
-	temp     = inst_MS5803.temperature();
+	pressure = inst_MS5803->pressure();
+	temp     = inst_MS5803->temperature();
 }
 
 
@@ -49,7 +49,7 @@ void Loom_MS5803::package(OSCBundle* bndl)
 	resolve_package_prefix(id_prefix);
 
 	append_to_bundle_key_value(bndl, id_prefix, "Pressure", pressure);
-	append_to_bundle_key_value(bndl, id_prefix, "Temp", temp);
+	append_to_bundle_key_value(bndl, id_prefix, "Temp"    , temp);
 }
 
 
@@ -58,5 +58,5 @@ void Loom_MS5803::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
 	LoomI2CSensor::package_mux(bndl, id_prefix, port);
 
 	append_to_bundle_key_value(bndl, id_prefix, "Pressure", pressure);
-	append_to_bundle_key_value(bndl, id_prefix, "Temp", temp);
+	append_to_bundle_key_value(bndl, id_prefix, "Temp"    , temp);
 }
