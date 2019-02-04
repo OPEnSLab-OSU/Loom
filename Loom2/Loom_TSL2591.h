@@ -14,8 +14,6 @@ class Loom_TSL2591 : public LoomI2CSensor
 
 protected:
 
-	// Add gain and timing settings
-
 	Adafruit_TSL2591 inst_tsl2591;
 
 	uint16_t vis;
@@ -26,9 +24,6 @@ protected:
 	uint8_t timing_level;
 
 public:
-
-	// --- PUBLIC MEMBERS ---
-
 
 	// --- CONSTRUCTOR ---
 	Loom_TSL2591(	byte i2c_address 			= 0x29,
@@ -49,8 +44,6 @@ public:
 	void measure();
 	void package(OSCBundle* bndl);	
 	void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
-
-	void configure_settings();
 
 private:
 
