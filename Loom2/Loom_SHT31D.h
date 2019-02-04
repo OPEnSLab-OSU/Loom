@@ -13,7 +13,7 @@ class Loom_SHT31D : public LoomI2CSensor
 {
 
 protected:
-	// --- PROTECTED MEMBERS ---
+
 	Adafruit_SHT31 inst_sht31d;
 
 	float temp;
@@ -21,11 +21,8 @@ protected:
 
 public:
 
-	// --- PUBLIC MEMBERS ---
-
-
 	// --- CONSTRUCTOR ---
-	Loom_SHT31D(	byte i2c_address 			= 0x44,
+	Loom_SHT31D(	byte i2c_address 			= 0x44, // 0x44, 0x45
 					
 					char* module_name 			= "SHT31D",
 					char* sensor_description 	= "Temperature/Humidty" 

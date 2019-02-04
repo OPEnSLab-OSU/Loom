@@ -1,9 +1,6 @@
 
 #include "Loom_SHT31D.h"
 
-#include <Wire.h>
-
-
 
 
 // --- CONSTRUCTOR ---
@@ -14,15 +11,14 @@ Loom_SHT31D::Loom_SHT31D(byte i2c_address, char* module_name, char* sensor_descr
 	bool setup = inst_sht31d.begin(i2c_address);
 
 	print_module_label();
-	LOOM_DEBUG_Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
+	LOOM_DEBUG_Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
-// maybe a constructor that specifies the i2c address (use a default otherwise)
 
 // --- DESTRUCTOR ---
 Loom_SHT31D::~Loom_SHT31D() 
 {
-	// delete inst_sht31d;
+
 }
 
 
@@ -31,8 +27,8 @@ void Loom_SHT31D::print_measurements()
 {
 	print_module_label();
 	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println2("\tTemperature: ", temp);
-	LOOM_DEBUG_Println2("\tHumidity   : ", humid);
+	LOOM_DEBUG_Println4("\t", "Temperature: ", temp, " C");
+	LOOM_DEBUG_Println3("\t", "Humidity   : ", humid);
 }
 
 
@@ -45,6 +41,7 @@ void Loom_SHT31D::measure()
 		temp = t;
 		humid = h;
 	} else {
+		print_module_label();
 		LOOM_DEBUG_Println("Failed to read temperature or humidity");
 	}
 }
