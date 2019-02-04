@@ -5,6 +5,8 @@
 
 #include "Loom_I2C_Sensor.h"
 
+#include <Wire.h>
+
 
 #define RangeCommand    		0x51	//The Sensor ranging command has a value of 0x51
 #define ChangeAddressCommand1 	0xAA	//These are the two commands that need to be sent in sequence to change the sensor address

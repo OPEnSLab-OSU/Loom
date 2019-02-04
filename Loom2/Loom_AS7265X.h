@@ -16,9 +16,9 @@ protected:
 
 	AS7265X inst_AS7265X;
 
-	int[6] uv;
-	int[6] color;
-	int[6] nir;
+	int uv[6];
+	int color[6];
+	int nir[6];
 
 	bool use_bulb;
 
@@ -42,7 +42,7 @@ public:
 	void package(OSCBundle* bndl);
 	void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
 
-	void use_bulb(bool e);
+	void enable_bulb(bool e);
 
 private:
 

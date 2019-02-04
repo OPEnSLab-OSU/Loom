@@ -39,7 +39,7 @@ void Loom_FXOS8700::print_measurements()
 void Loom_FXOS8700::measure()
 {
 	sensors_event_t aevent, mevent;
-	inst_FXOS8700.getEvent(&aevent, &mevent);
+	inst_FXOS8700->getEvent(&aevent, &mevent);
 
 	accel[0] = aevent.acceleration.x;
 	accel[1] = aevent.acceleration.y;

@@ -32,7 +32,7 @@ public:
 					char* module_name 			= "TSL2561",
 					char* sensor_description 	= "Luminosity",
 
-					int gain 					= 1, // 0, 1, 16
+					int gain 					= 1, // 1, 16
 					int resolution 				= 3	 // 1, 2, 3
 				);
 

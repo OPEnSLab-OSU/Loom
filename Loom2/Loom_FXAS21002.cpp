@@ -50,9 +50,9 @@ void Loom_FXAS21002::package(OSCBundle* bndl)
 	char id_prefix[30]; 
 	resolve_package_prefix(id_prefix);
 
-	append_to_bundle_key_value(bndl, id_prefix, "gx", gx);
-	append_to_bundle_key_value(bndl, id_prefix, "gy", gy);
-	append_to_bundle_key_value(bndl, id_prefix, "gz", gz);
+	append_to_bundle_key_value(bndl, id_prefix, "gx", gyro[0]);
+	append_to_bundle_key_value(bndl, id_prefix, "gy", gyro[1]);
+	append_to_bundle_key_value(bndl, id_prefix, "gz", gyro[2]);
 }
 
 
@@ -60,7 +60,7 @@ void Loom_FXAS21002::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
 {
 	LoomI2CSensor::package_mux(bndl, id_prefix, port);
 
-	append_to_bundle_key_value(bndl, id_prefix, "gx", gx);
-	append_to_bundle_key_value(bndl, id_prefix, "gy", gy);
-	append_to_bundle_key_value(bndl, id_prefix, "gz", gz);
+	append_to_bundle_key_value(bndl, id_prefix, "gx", gyro[0]);
+	append_to_bundle_key_value(bndl, id_prefix, "gy", gyro[1]);
+	append_to_bundle_key_value(bndl, id_prefix, "gz", gyro[2]);
 }

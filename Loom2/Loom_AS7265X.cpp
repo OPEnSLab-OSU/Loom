@@ -10,7 +10,7 @@ Loom_AS7265X::Loom_AS7265X(byte i2c_address, char* module_name, char* sensor_des
 {
 	this->use_bulb = use_bulb;
 
-	bool setup = inst_7265X.begin(i2c_address);
+	bool setup = inst_AS7265X.begin();
 
 
 	//There are four gain settings. It is possible to saturate the reading so don't simply jump to 64x.
@@ -94,7 +94,7 @@ void Loom_AS7265X::print_measurements()
 
 void Loom_AS7265X::measure()
 {
-	if (as7265X_use_bulb) {
+	if (use_bulb) {
 		inst_AS7265X.takeMeasurementsWithBulb();
 	} else {
 		inst_AS7265X.takeMeasurements();
@@ -132,11 +132,11 @@ void Loom_AS7265X::package(OSCBundle* bndl)
 	resolve_package_prefix(id_prefix);
 
 	// UV
-	for (int i = 0; i < 6; i++) { append_to_bundle_key_value(bndl, id_prefix, "a"+i, uv[i]); }
+	for (int i = 0; i < 6; i++) { append_to_bundle_key_value(bndl, id_prefix, (char*)('a'+i), uv[i]); }
 	// Color
-	for (int i = 0; i < 6; i++) { append_to_bundle_key_value(bndl, id_prefix, "g"+i, color[i]); }
+	for (int i = 0; i < 6; i++) { append_to_bundle_key_value(bndl, id_prefix, (char*)('g'+i), color[i]); }
 	// NIR
-	for (int i = 0; i < 6; i++) { append_to_bundle_key_value(bndl, id_prefix, "r"+i, nir[i]); }
+	for (int i = 0; i < 6; i++) { append_to_bundle_key_value(bndl, id_prefix, (char*)('r'+i), nir[i]); }
 }
 
 
@@ -145,15 +145,15 @@ void Loom_AS7265X::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
 	LoomI2CSensor::package_mux(bndl, id_prefix, port);
 
 	// UV
-	for (int i = 0; i < 6; i++) { append_to_bundle_key_value(bndl, id_prefix, "a"+i, uv[i]); }
+	for (int i = 0; i < 6; i++) { append_to_bundle_key_value(bndl, id_prefix, (char*)('a'+i), uv[i]); }
 	// Color
-	for (int i = 0; i < 6; i++) { append_to_bundle_key_value(bndl, id_prefix, "g"+i, color[i]); }
+	for (int i = 0; i < 6; i++) { append_to_bundle_key_value(bndl, id_prefix, (char*)('g'+i), color[i]); }
 	// NIR
-	for (int i = 0; i < 6; i++) { append_to_bundle_key_value(bndl, id_prefix, "r"+i, nir[i]); }
+	for (int i = 0; i < 6; i++) { append_to_bundle_key_value(bndl, id_prefix, (char*)('r'+i), nir[i]); }
 }
 
 
-void Loom_AS7265X::use_bulb(bool e)
+void Loom_AS7265X::enable_bulb(bool e)
 {
 	use_bulb = e;
 }

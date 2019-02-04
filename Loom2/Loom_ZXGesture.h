@@ -33,7 +33,7 @@ public:
 	Loom_ZXGesture(	byte i2c_address 			= 0x10, // 0x10, 0x11
 					
 					char* module_name 			= "ZXGesture",
-					char* sensor_description 	= "Temperature/Humidty" 
+					char* sensor_description 	= "Temperature/Humidty",
 
 					ZXMode mode 				= ZX_POS
 				);

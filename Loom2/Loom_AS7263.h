@@ -27,7 +27,7 @@ public:
 	Loom_AS7263(	byte i2c_address 			= 0x49,
 					
 					char* module_name 			= "AS7263",
-					char* sensor_description 	= "Spectral Sensor (near ir)" 
+					char* sensor_description 	= "Spectral Sensor (near ir)",
 
 					bool use_bulb 				= false,
 					int gain 					= 3,
@@ -44,7 +44,7 @@ public:
 	void package(OSCBundle* bndl);
 	void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
 
-	void use_bulb(bool e);
+	void enable_bulb(bool e);
 
 private:
 

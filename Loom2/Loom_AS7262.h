@@ -12,7 +12,7 @@ class Loom_AS7262 : public LoomI2CSensor
 {
 
 protected:
-	
+
 	AS726X inst_AS7262;
 
 	int violet, blue, green, yellow, orange, red;
@@ -27,7 +27,7 @@ public:
 	Loom_AS7262(	byte i2c_address 			= 0x49,
 					
 					char* module_name 			= "AS7262",
-					char* sensor_description 	= "Spectral Sensor (visible)" 
+					char* sensor_description 	= "Spectral Sensor (visible)",
 
 					bool use_bulb 				= false,
 					int gain 					= 3,
@@ -44,7 +44,7 @@ public:
 	void package(OSCBundle* bndl);
 	void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
 
-	void use_bulb(bool e);
+	void enable_bulb(bool e);
 
 private:
 
