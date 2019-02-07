@@ -21,6 +21,10 @@ protected:
 	int nir[6];
 
 	bool use_bulb;
+	byte gain;
+	byte mode;
+	byte integration_time;
+
 
 public:
 
@@ -30,7 +34,10 @@ public:
 					char* module_name 			= "AS7265X",
 					char* sensor_description 	= "Spectral Triad",
 
-					bool use_bulb 				= false	
+					bool use_bulb 				= false,	
+					byte gain 					= 64, 	// 1 to 64x
+					byte mode 					= AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT, 	//4 channel, other 4 channel, 6 chan, or 6 chan one shot
+					byte integration_time		= 49  	// Time will be 2.8ms * [integration value]  (0-255), 50 is default
 				);
 
 	// --- DESTRUCTOR ---
@@ -43,6 +50,9 @@ public:
 	void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
 
 	void enable_bulb(bool e);
+	void set_gain(byte gain);
+	void set_mode(byte mode);
+	void set_integration_time(byte time);
 
 private:
 

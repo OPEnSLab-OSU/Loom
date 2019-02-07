@@ -641,3 +641,22 @@ int bundle_num_data_pairs(OSCBundle *bndl)
 
 
 
+// --- REPLACE CHARACTER ---
+//
+// Given a string, replace all instances of 'orig' char with 'rep' char
+// Used primarily for replacing '~'s sent by Max
+// as it cannot send strings with spaces
+//
+// @param str   Pointer to string to alter
+// @param orig  Character to replace
+// @param rep   Replacement character
+// 
+void replace_char(char *str, char orig, char rep) 
+{
+	char *ix = str;
+	while((ix = strchr(ix, orig)) != NULL) {
+		*ix++ = rep;
+	}
+}
+
+

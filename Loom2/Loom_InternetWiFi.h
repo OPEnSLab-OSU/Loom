@@ -4,7 +4,15 @@
 
 #include "Loom_InternetPlat.h"
 
+#include <WiFi101.h>
+#include <WiFiUdp.h>
 
+
+enum WiFiMode {
+	AP_MODE,
+	WPA_CLIENT_MODE,
+	WEP_CLIENT_MODE
+};
 
 
 
@@ -12,16 +20,31 @@ class Loom_WiFi_I : public LoomInternetPlat
 {
 
 protected:
-	// --- PROTECTED MEMBERS ---
 	
+	IPAddress   ip;                     // Device's IP Address
+	char*       my_ssid;                // Default AP name
+	char        ssid[32];               // Host network name
+	char        pass[32];               // Host network password
+	// int         keyIndex;               // Key Index Number (needed only for WEP)
+	char*       ip_broadcast;           // IP to Broadcast data
+	unsigned int devicePort;            // Local port to listen device specific messages on
+	unsigned int subnetPort; 			// Local port to listen for family subnet messages on	
+	byte        mac[6];                 // Device's MAC Address
+	WiFiMode    wifi_mode;              // Devices current wifi mode
+	// bool        request_settings;       // True if device should request new channel settings on startup
 	
 public:
 
-	// --- PUBLIC MEMBERS ---
+	static char* enum_wifi_mode_string(WiFiMode c);
 
 
 	// --- CONSTRUCTOR ---
-	Loom_WiFi_I(	char* module_name
+	Loom_WiFi_I(	char* module_name 	= "WiFi",
+
+					char* ssid 			= "",
+					char* pass 			= ""
+
+
 
 					);
 
@@ -45,10 +68,8 @@ public:
 
 private:
 
-// --- PRIVATE MEMBERS ---
-
-// --- PRIVATE METHODS --- 
-
+	bool connect_AP();
+	bool connect_WPA();
 
 
 };

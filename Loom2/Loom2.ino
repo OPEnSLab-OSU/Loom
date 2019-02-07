@@ -12,36 +12,27 @@
 
 
 #include "Loom_Analog.h"
-// #include "Loom_Sensor.h"
 
-// #include "Loom_Actuator.h"
 #include "Loom_Neopixel.h"
 
-// #include "Loom_I2C_Sensor.h"
 #include "Loom_SHT31D.h"
 #include "Loom_TSL2591.h"
 
-// #include "Loom_CommPlat.h"
 #include "Loom_LoRa.h"
 
-// #include "Loom_LogPlat.h"
 #include "Loom_OLED.h"
 #include "Loom_SD.h"
 
-// #include "Loom_RTC.h"
-#include "Loom_DS3231.h"
-#include "Loom_PCF8523.h"
-
-// #include "Loom_InternetPlat.h"
-
 #include "Loom_Multiplexer.h"
 
-
-// #include "Loom_InternetPlat.h"
 #include "Loom_InternetEthernet.h"
 
+#include "Loom_AS7262.h"
+#include "Loom_AS7263.h"
+#include "Loom_AS7265X.h"
 
-
+#include "Loom_DS3231.h"
+#include "Loom_PCF8523.h"
 
 
 
@@ -51,7 +42,7 @@
 
 
 Loom_Analog* 	AS;
-Loom_Neopixel*      NP;
+Loom_Neopixel*  NP;
 
 // Loom_SHT31D*   SH;
 // LoomLora*      LR;
@@ -67,7 +58,7 @@ Loom_Multiplexer* 	MP;
 
 // LoomCommPlat* LR;
 
-Loom_Ethernet_I* EI;
+// Loom_Ethernet_I* EI;
  
 LoomManager DeviceManager;
 
@@ -115,10 +106,10 @@ void setup()
 	// RT = new Loom_PCF8523();
 	// RT->print_config();
 
-	// MP = new Loom_Multiplexer();
-	// MP->print_config();
+	MP = new Loom_Multiplexer();
+	MP->print_config();
 
-	// MP->print_state();
+	MP->print_state();
 
 	// EI = new Loom_Ethernet_I();
 
@@ -132,7 +123,7 @@ void setup()
 	// DeviceManager.add_module(OL);
 	// DeviceManager.add_module(LR);
 // 
-	// DeviceManager.add_module(MP);
+	DeviceManager.add_module(MP);
 	// DeviceManager.add_module(EI);
 
 
@@ -148,14 +139,14 @@ void setup()
 	// AS->load_config();
 	// AS->save_config();
 
-	LOOM_DEBUG_Println2("Connected : ", EI->is_connected());
-	LOOM_DEBUG_Println2("Time      : ", EI->get_time());
-	LOOM_DEBUG_Println2("Time      : ", EI->get_time());
+	// LOOM_DEBUG_Println2("Connected : ", EI->is_connected());
+	// LOOM_DEBUG_Println2("Time      : ", EI->get_time());
+	// LOOM_DEBUG_Println2("Time      : ", EI->get_time());
 	
 
-	while(1);
+	// while(1);
 
-	delay(2000);
+	// delay(2000);
 
 }
 
@@ -170,15 +161,15 @@ void loop()
 
 	// LOOM_DEBUG_Println(b++);
 
-	// MP->refresh_sensors();
-	// MP->print_state();
-	// MP->measure();
-	// MP->print_measurements();
+	MP->refresh_sensors();
+	MP->print_state();
+	MP->measure();
+	MP->print_measurements();
 
-	// MP->package(&bndl);
-	// print_bundle(&bndl);
+	MP->package(&bndl);
+	print_bundle(&bndl);
 
-	// delay(1000);
+	delay(1000);
 
 	// RT->print_time();
 	// RT->package(&bndl, "prefix");
@@ -217,57 +208,6 @@ void loop()
 
 
 
-	// while(1);
-
-	// AS->measure();
-	// DeviceManager.measure();
-
-	// // LOOM_DEBUG_Println("\nBuild Bundle");
-	// DeviceManager.package(&bndl);
-// 
-	// print_bundle(&bndl);
-
-	// NP->set_color(2, 0, 0, b++, 0);
-// 
-
-	// NP->set_color(2, 0, 0, 0, AS->get_analog_val(0)*255/(4096) );
-
-	// while(1);
-
-
 }
-
-
-
-
-
-	// OSCBundle b[12];
-	// int tmp;
-	// char buf[50];
-
-	// b[0].add("/D/Loom/1/LoomManager/1/data");
-	// b[1].add("/D/Loom/1/Ishield/1/data");
-	// b[2].add("/D/Loom/1/LoomManager/2/data");
-
-	// b[3].add("/S/Loom/1/LoomManager/1/data");
-	// b[4].add("/S/Loom/2/Ishield/1/data");
-	// b[5].add("/S/Other/1/data");
-
-	// b[6].add("/F/Loom/1/LoomManager/1/data");
-	// b[7].add("/F/Loom/data");
-	// b[8].add("/F/Other/1/data");
-
-	// // LOOM_DEBUG_Println("\n\n[SCOPE_DEVICE]\n");
-	// // LR->set_subnet_scope(SCOPE_DEVICE);
-	// for (int i = 0; i < 9; i++) {
-	// 	LOOM_DEBUG_Println3("[", i, "] ");
-	// 	LR->scope_filter(&b[i], &tmp);
-	// 	LOOM_DEBUG_Println2("TMP: ", tmp);
-
-	// 	if (tmp) {
-	// 		b[i].getOSCMessage(0)->getAddress(buf, tmp);
-	// 		LOOM_DEBUG_Println2("CMD: ", buf);
-	// 	}
-	// }
 
 
