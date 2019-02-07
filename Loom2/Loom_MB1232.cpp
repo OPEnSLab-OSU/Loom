@@ -78,5 +78,5 @@ void Loom_MB1232::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
 {
 	LoomI2CSensor::package_mux(bndl, id_prefix, port);
 
-	append_to_bundle_key_value(bndl, id_prefix, "Range", range);
+	append_to_bundle_msg_key_value(bndl, "Range", range);
 }

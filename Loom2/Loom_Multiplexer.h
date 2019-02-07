@@ -8,17 +8,29 @@
 
 
 // I2C Sensor files
+#include "Loom_AS7262.h"
+#include "Loom_AS7263.h"
+#include "Loom_AS7265X.h"
+#include "Loom_FXAS21002.h"
+#include "Loom_FXOS8700.h"
+#include "Loom_LIS3DH.h"
+#include "Loom_MB1232.h"
+#include "Loom_MPU6050.h"
+#include "Loom_MS5803.h"
 #include "Loom_SHT31D.h"
+#include "Loom_TSL2561.h"
 #include "Loom_TSL2591.h"
+#include "Loom_ZXGesture.h"
+
 
 
 // // I2C Address Conflict Selection
 
 // // enum to specify selection?
-enum I2C_Selection { L_TSL2561, L_TSL2591, L_AS726X, L_AS7265X };
+enum I2C_Selection { L_TSL2561, L_TSL2591, L_AS7262, L_AS7263, L_AS7265X };
 
 #define i2c_0x29 L_TSL2591 	// TSL2561 / TSL2591
-#define i2c_0x49 L_AS7265X	// TSL2561 / AS726X / AS7265X
+#define i2c_0x49 L_AS7265X	// TSL2561 / AS7262 / AS7263 / AS7265X
 
 
 

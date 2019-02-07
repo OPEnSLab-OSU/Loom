@@ -349,4 +349,10 @@ void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
 //  undefined otherwise
 int bundle_num_data_pairs(OSCBundle *bndl);
 
+
+void replace_char(char *str, char orig, char rep); 
+
+
+
+
 #endif // of #ifndef LOOM_MISC_h

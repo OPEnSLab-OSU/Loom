@@ -152,12 +152,12 @@ void Loom_ZXGesture::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
 
 	switch (mode) {
 		case ZX_POS : 
-			append_to_bundle_key_value(bndl, id_prefix, "zx", pos[0]);
-			append_to_bundle_key_value(bndl, id_prefix, "zy", pos[1]);
+			append_to_bundle_msg_key_value(bndl, "zx", pos[0]);
+			append_to_bundle_msg_key_value(bndl, "zy", pos[1]);
 			break;
 		case ZX_GEST : 
-			append_to_bundle_key_value(bndl, id_prefix, "type" , gesture_type.c_str());
-			append_to_bundle_key_value(bndl, id_prefix, "speed", (int)gesture_speed);
+			append_to_bundle_msg_key_value(bndl, "type" , gesture_type.c_str());
+			append_to_bundle_msg_key_value(bndl, "speed", (int)gesture_speed);
 			break; 
 	}
 }
