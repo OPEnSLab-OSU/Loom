@@ -53,7 +53,7 @@ public:
 			);
 
 	// --- DESTRUCTOR ---
-	~Loom_LoRa();
+	virtual ~Loom_LoRa();
 
 
 	// --- PUBLIC METHODS ---

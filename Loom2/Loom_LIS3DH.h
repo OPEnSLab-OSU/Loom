@@ -28,7 +28,7 @@ public:
 				);
 
 	// --- DESTRUCTOR ---
-	~Loom_LIS3DH();
+	virtual ~Loom_LIS3DH();
 
 	void print_measurements();
 

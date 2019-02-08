@@ -38,7 +38,7 @@ public:
 
 
 	// --- DESTRUCTOR ---
-	~LoomLogPlat();
+	virtual ~LoomLogPlat();
 
 
 	// --- PUBLIC METHODS ---

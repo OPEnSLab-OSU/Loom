@@ -30,7 +30,7 @@ public:
 				);
 
 	// --- DESTRUCTOR ---
-	~Loom_MS5803();
+	virtual ~Loom_MS5803();
 
 	void print_measurements();
 

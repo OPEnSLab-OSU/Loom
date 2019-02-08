@@ -65,7 +65,7 @@ public:
 		   );
 
 	// --- DESTRUCTOR ---
-	~LoomRTC();
+	virtual ~LoomRTC();
 
 
 	static char* enum_timezone_string(TimeZone t);

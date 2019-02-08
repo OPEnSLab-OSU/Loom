@@ -19,7 +19,7 @@ Loom_FXAS21002::Loom_FXAS21002(byte i2c_address, char* module_name, char* sensor
 // --- DESTRUCTOR ---
 Loom_FXAS21002::~Loom_FXAS21002() 
 {
-
+	delete inst_FXAS21002;
 }
 
 

@@ -46,7 +46,7 @@ Loom_ZXGesture::Loom_ZXGesture(byte i2c_address, char* module_name, char* sensor
 // --- DESTRUCTOR ---
 Loom_ZXGesture::~Loom_ZXGesture() 
 {
-
+	delete inst_ZX;
 }
 
 

@@ -24,7 +24,7 @@ public:
 		   );
 
 	// --- DESTRUCTOR ---
-	~Loom_PCF8523();
+	virtual ~Loom_PCF8523();
 
 	// --- PUBLIC METHODS ---
 

@@ -27,7 +27,7 @@ public:
 					);
 
 	// --- DESTRUCTOR ---
-	~LoomInternetPlat();
+	virtual ~LoomInternetPlat();
 
 	static char* enum_internet_plat_string(InternetPlatform p);
 

@@ -103,7 +103,7 @@ public:
 
 
 	// --- DESTRUCTOR ---
-	~Loom_Analog();
+	virtual ~Loom_Analog();
 
 
 	// --- PUBLIC METHODS ---

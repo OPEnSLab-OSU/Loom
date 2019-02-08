@@ -33,7 +33,7 @@ public:
 			) ;
 
 	// --- DESTRUCTOR ---
-	~Loom_Neopixel();
+	virtual ~Loom_Neopixel();
 
 
 	// --- PUBLIC METHODS ---

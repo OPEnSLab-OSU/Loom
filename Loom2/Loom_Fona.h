@@ -39,7 +39,7 @@ public:
 					);
 
 	// --- DESTRUCTOR ---
-	~Loom_Fona();
+	virtual ~Loom_Fona();
 
 	// --- PUBLIC METHODS ---
 

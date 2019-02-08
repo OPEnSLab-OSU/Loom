@@ -25,6 +25,7 @@ Loom_Fona::Loom_Fona(	char* module_name,
 // --- DESTRUCTOR ---
 Loom_Fona::~Loom_Fona()
 {
+	delete fona;
 }
 
 

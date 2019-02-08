@@ -57,7 +57,7 @@ public:
 			   );
 
 	// --- DESTRUCTOR ---
-	~Loom_OLED();
+	virtual ~Loom_OLED();
 
 	// --- PUBLIC METHODS ---
 

@@ -30,7 +30,7 @@ public:
 				);
 
 	// --- DESTRUCTOR ---
-	~Loom_FXOS8700();
+	virtual ~Loom_FXOS8700();
 
 	void print_measurements();
 

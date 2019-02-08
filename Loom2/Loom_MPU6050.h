@@ -32,7 +32,7 @@
 // 				);
 
 // 	// --- DESTRUCTOR ---
-// 	~Loom_MPU6050();
+// 	virtual ~Loom_MPU6050();
 
 // 	void print_measurements();
 

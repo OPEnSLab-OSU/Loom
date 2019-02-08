@@ -39,7 +39,7 @@ public:
 				);
 
 	// --- DESTRUCTOR ---
-	~Loom_ZXGesture();
+	virtual ~Loom_ZXGesture();
 
 	void print_config();
 	void print_measurements();

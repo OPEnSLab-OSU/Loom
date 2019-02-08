@@ -20,7 +20,7 @@ Loom_MS5803::Loom_MS5803(byte i2c_address, char* module_name, char* sensor_descr
 // --- DESTRUCTOR ---
 Loom_MS5803::~Loom_MS5803() 
 {
-
+	delete inst_MS5803;
 }
 
 

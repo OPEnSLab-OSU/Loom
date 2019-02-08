@@ -30,7 +30,7 @@ public:
 				);
 
 	// --- DESTRUCTOR ---
-	~Loom_MB1232();
+	virtual ~Loom_MB1232();
 
 	void print_measurements();
 
