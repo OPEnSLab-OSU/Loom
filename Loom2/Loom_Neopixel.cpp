@@ -39,7 +39,11 @@ Loom_Neopixel::Loom_Neopixel(char* module_name, bool enableA0, bool enableA1, bo
 // --- DESTRUCTOR ---
 Loom_Neopixel::~Loom_Neopixel() 
 {
-
+	for (int i = 0; i < 3; i++) {
+		if (pixels[i] != NULL) {
+			delete pixels[i];
+		}
+	}
 }
 
 

@@ -47,7 +47,7 @@ public:
 					);
 
 	// --- DESTRUCTOR ---
-	~Loom_Ethernet_I();
+	virtual ~Loom_Ethernet_I();
 
 	// --- PUBLIC METHODS ---
 

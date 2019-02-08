@@ -40,7 +40,7 @@ public:
 				);
 
 	// --- DESTRUCTOR ---
-	~Loom_AS7263();
+	virtual ~Loom_AS7263();
 
 	void print_config();
 	void print_measurements();

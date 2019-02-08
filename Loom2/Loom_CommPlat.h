@@ -39,7 +39,7 @@ public:
 
 
 	// --- DESTRUCTOR ---
-	~LoomCommPlat();
+	virtual ~LoomCommPlat();
 
 
 	static char* enum_comm_plat_string(CommPlatform c);

@@ -69,7 +69,7 @@ Loom_DS3231::Loom_DS3231(	char* 	module_name,
 // --- DESTRUCTOR ---
 Loom_DS3231::~Loom_DS3231() 
 {
-
+	delete rtc_inst;
 }
 
 

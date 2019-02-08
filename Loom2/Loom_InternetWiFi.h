@@ -49,7 +49,7 @@ public:
 					);
 
 	// --- DESTRUCTOR ---
-	~Loom_WiFi_I();
+	virtual ~Loom_WiFi_I();
 
 
 	// --- PUBLIC METHODS ---

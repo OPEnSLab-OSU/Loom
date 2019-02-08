@@ -29,7 +29,7 @@ public:
 				);
 
 	// --- DESTRUCTOR ---
-	~Loom_SHT31D();
+	virtual ~Loom_SHT31D();
 
 	void print_measurements();
 

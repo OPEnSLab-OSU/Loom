@@ -29,7 +29,7 @@ public:
 				);
 
 	// --- DESTRUCTOR ---
-	~Loom_FXAS21002();
+	virtual ~Loom_FXAS21002();
 
 	void print_measurements();
 

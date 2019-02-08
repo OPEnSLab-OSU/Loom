@@ -19,7 +19,7 @@ Loom_FXOS8700::Loom_FXOS8700(byte i2c_address, char* module_name, char* sensor_d
 // --- DESTRUCTOR ---
 Loom_FXOS8700::~Loom_FXOS8700() 
 {
-
+	delete inst_FXOS8700;
 }
 
 

@@ -41,7 +41,7 @@ public:
 				);
 
 	// --- DESTRUCTOR ---
-	~Loom_AS7265X();
+	virtual ~Loom_AS7265X();
 
 	void print_measurements();
 

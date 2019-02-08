@@ -55,7 +55,7 @@ public:
 			   );
 
 	// --- DESTRUCTOR ---
-	~Loom_SD();
+	virtual ~Loom_SD();
 
 
 	// --- PUBLIC METHODS ---

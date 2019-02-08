@@ -37,7 +37,7 @@ public:
 
 
 	// --- DESTRUCTOR ---
-	~Loom_TSL2591();
+	virtual ~Loom_TSL2591();
 
 	void print_measurements();
 

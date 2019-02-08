@@ -78,7 +78,7 @@ public:
 
 
 	// --- DESTRUCTOR ---
-	~Loom_Multiplexer();
+	virtual ~Loom_Multiplexer();
 
 
 	// --- PUBLIC METHODS ---
@@ -92,10 +92,7 @@ public:
 	void print_measurements();
 
 	void package(OSCBundle* bndl);
-	// void package(OSCBundle* bndl) { LoomModule::package(bndl); }
 
-
-//  : other
 
 	bool message_route(OSCMessage* msg, int address_offset);
 

@@ -44,7 +44,7 @@ public:
 //Gain 
 
 	// --- DESTRUCTOR ---
-	~Loom_AS7262();
+	virtual ~Loom_AS7262();
 
 	void print_config();
 	void print_measurements();

@@ -30,7 +30,7 @@ public:
 		   );
 
 	// --- DESTRUCTOR ---
-	~Loom_DS3231();
+	virtual ~Loom_DS3231();
 
 	// --- PUBLIC METHODS ---
 

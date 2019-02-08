@@ -59,8 +59,8 @@ Loom_PCF8523::Loom_PCF8523(	char* 	module_name,
 // --- DESTRUCTOR ---
 Loom_PCF8523::~Loom_PCF8523() 
 {
-
-}
+	delete rtc_inst;
+}	
 
 
 // --- PUBLIC METHODS ---

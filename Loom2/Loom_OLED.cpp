@@ -64,7 +64,10 @@ Loom_OLED::Loom_OLED(	char* module_name, bool enable_rate_filter, uint min_filte
 
 
 // --- DESTRUCTOR ---
-Loom_OLED::~Loom_OLED() {}
+Loom_OLED::~Loom_OLED() 
+{
+	delete display;
+}
 
 
 // --- PUBLIC METHODS ---

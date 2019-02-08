@@ -64,7 +64,11 @@ Loom_LoRa::Loom_LoRa( 	char* module_name,
 }
 
 // --- DESTRUCTOR ---
-Loom_LoRa::~Loom_LoRa() {}
+Loom_LoRa::~Loom_LoRa() 
+{
+	delete driver;
+	delete manager;
+}
 
 
 // --- PUBLIC METHODS ---

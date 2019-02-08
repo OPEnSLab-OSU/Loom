@@ -14,8 +14,6 @@ protected:
 	// --- PROTECTED MEMBERS ---
 	byte i2c_address;	// The sensor's I2C address
 
-	// should is_setup be a member here?
-
 public:
 
 	// --- PUBLIC MEMBERS ---
@@ -32,7 +30,7 @@ public:
 	// maybe a constructor that specifies the i2c address (use a default otherwise)
 
 	// --- DESTRUCTOR ---
-	~LoomI2CSensor();
+	virtual ~LoomI2CSensor();
 
 	// --- PUBLIC METHODS ---
 

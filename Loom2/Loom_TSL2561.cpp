@@ -43,7 +43,7 @@ Loom_TSL2561::Loom_TSL2561(byte i2c_address, char* module_name, char* sensor_des
 // --- DESTRUCTOR ---
 Loom_TSL2561::~Loom_TSL2561() 
 {
-
+	delete inst_TSL2561;
 }
 
 

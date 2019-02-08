@@ -17,10 +17,10 @@ const byte Loom_Multiplexer::known_addresses[] =
 	0x10, // ZXGESTURESENSOR
 	0x11, // ZXGESTURESENSOR
 	0x19, // LIS3DH
-	0x1C, // FXOS8700
-	0x1D, // FXOS8700
-	0x1E, // FXOS8700
-	0x1F, // FXOS8700
+	// 0x1C, // FXOS8700
+	// 0x1D, // FXOS8700
+	// 0x1E, // FXOS8700
+	// 0x1F, // FXOS8700
 	0x20, // FXAS21002
 	0x21, // FXAS21002
 	0x29, // TSL2561 / TSL2591
@@ -114,11 +114,18 @@ Loom_Multiplexer::Loom_Multiplexer(	char* 	module_name,
 
 
 // --- DESTRUCTOR ---
-Loom_Multiplexer::~Loom_Multiplexer() {}
+Loom_Multiplexer::~Loom_Multiplexer() 
+{
+	// Free any sensors
+	for (uint8_t i = 0; i < num_ports; i++) {
+		if (sensors[i] != NULL) {
+			delete sensors[i];
+		}
+	}
+}
 
 
 // --- PUBLIC METHODS ---
-
 
 
 void Loom_Multiplexer::print_config()
@@ -263,16 +270,15 @@ void Loom_Multiplexer::refresh_sensors()
 		// No change (prev = current)
 			// Do nothing
 		// Sensor removed (prev ≠ 0, current = 0)
-			// Free removed sensor object
+			// Free removed sensor object memory
 		// Sensor added (prev = 0, currect ≠ 0)
-			// create object
+			// Create object
 		// Sensor switched (prev ≠ current)
 			// Delete old object
 			// Create new object
 
 
 		// Can be done with switch with intentional fallthrough?
-
 
 		// Sensor removed, added, or swapped
 		if (previous != current) {
@@ -291,16 +297,11 @@ void Loom_Multiplexer::refresh_sensors()
 				print_module_label();
 				LOOM_DEBUG_Println2("Added ", sensors[i]->get_module_name() );
 			}
-
 		} 
 
 		// Otherwise still no sensor or sensor did not 
 		// change. In which case, do nothing.
-
 	}
-
-
-
 }
 
 

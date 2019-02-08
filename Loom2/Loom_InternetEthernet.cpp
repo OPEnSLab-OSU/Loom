@@ -42,6 +42,8 @@ Loom_Ethernet_I::Loom_Ethernet_I(	char* module_name,
 // --- DESTRUCTOR ---
 Loom_Ethernet_I::~Loom_Ethernet_I()
 {
+	delete client;
+	delete UDP;
 }
 
 

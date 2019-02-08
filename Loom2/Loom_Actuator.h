@@ -17,7 +17,7 @@ public:
 	LoomActuator( char* module_name );
 
 	// --- DESTRUCTOR ---
-	~LoomActuator();
+	virtual ~LoomActuator();
 
 	// --- PUBLIC METHODS ---
 

@@ -3,7 +3,6 @@
 #define LOOM_SENSOR_h
 
 
-
 #include "Loom_Module.h"
 
 #include <OSCBundle.h>
@@ -16,7 +15,7 @@ class LoomSensor : public LoomModule
 protected:
 	// --- PROTECTED MEMBERS ---
 
-	char*   sensor_description;
+	char*   sensor_description;   // maybe move to module to be module description
 
 	uint8_t num_samples; 	// How many samples to take
 
@@ -45,7 +44,7 @@ public:
 
 
 	// --- DESTRUCTOR ---
-	~LoomSensor();
+	virtual ~LoomSensor();
 
 
 	// --- PUBLIC METHODS ---

@@ -29,7 +29,7 @@ Loom_LIS3DH::Loom_LIS3DH(byte i2c_address, char* module_name, char* sensor_descr
 // --- DESTRUCTOR ---
 Loom_LIS3DH::~Loom_LIS3DH() 
 {
-
+	delete inst_LIS3DH;
 }
 
 
