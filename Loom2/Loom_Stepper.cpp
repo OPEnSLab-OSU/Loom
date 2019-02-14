@@ -35,19 +35,6 @@ void Loom_Stepper::print_config()
 	LoomModule::print_config();
 }
 
-void Loom_Stepper::print_state()
-{
-	print_module_label();
-	// LOOM_DEBUG_Println3('\t', "Relay Pin           : ", pin );
-}
-
-void Loom_Stepper::package(OSCBundle* bndl, char* suffix)
-{
-
-}
-
-
-
 void Loom_Stepper::move_steps(int motor, uint steps, uint speed, bool clockwise)
 {
 	//int set_degree = map(degree,0,360,0,200);

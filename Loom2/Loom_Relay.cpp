@@ -29,7 +29,7 @@ void Loom_Relay::print_config()
 void Loom_Relay::print_state()
 {
 	print_module_label();
-	LOOM_DEBUG_Println3('\t', "Relay Pin           : ", pin );
+	LOOM_DEBUG_Println3('\t', "Relay ", pin, (on) ? " On" : " Off" );
 }
 
 void Loom_Relay::package(OSCBundle* bndl, char* suffix)
