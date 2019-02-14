@@ -44,6 +44,8 @@
 // SPI Sensors
 
 // SDI-12 Sensors
+#include "Loom_Decagon_GS3.h"
+#include "Loom_Decagon_5TM.h"
 
 // RTC
 #include "Loom_DS3231.h"
