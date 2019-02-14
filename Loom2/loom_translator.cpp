@@ -440,11 +440,7 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, ch
 						tmpMsg.add( tmpInt );   break;
 					}
 				case 2: case 6: 	// Float [All]
-					#if is_m0 == 1
-						tmpFloat = strtof(data, &end);
-					#else
-						tmpFloat = 0;
-					#endif
+					tmpFloat = strtof(data, &end);
 					if ( (interpret == 2) || (interpret == 6) || !(end == data || *end != '\0') ) {
 						tmpMsg.add( tmpFloat ); break;
 					}

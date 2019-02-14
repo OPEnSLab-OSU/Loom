@@ -2,9 +2,6 @@
 #ifndef LOOM_MISC_h
 #define LOOM_MISC_h
 
-
-
-// #include "Loom_Module.h"
 #include <OSCBundle.h>
 
 
@@ -12,10 +9,9 @@
 
 String get_data_value(OSCMessage* msg, int pos);
 String get_address_string(OSCMessage *msg);
+
 void print_message(OSCMessage* msg, bool detail=true);
 void print_bundle(OSCBundle *bndl);
-
-
 
 
 
@@ -29,6 +25,9 @@ void str_replace(char *target, const char *needle, const char *replacement);
 // Finds nth instance of a character in a string
 // Auxiliary function for OSC string compression
 const char* nth_strchr(const char* s, char c, int n);
+
+void replace_char(char *str, char orig, char rep); 
+
 
 // --- OSC EXTRACT HEADER SECTION ---
 //
@@ -283,7 +282,6 @@ void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
 int bundle_num_data_pairs(OSCBundle *bndl);
 
 
-void replace_char(char *str, char orig, char rep); 
 
 
 
