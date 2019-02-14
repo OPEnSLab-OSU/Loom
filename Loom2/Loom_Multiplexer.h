@@ -91,7 +91,7 @@ public:
 	void measure(); // maybe (as current implementation joins measure and package)
 	void print_measurements();
 
-	void package(OSCBundle* bndl);
+	void package(OSCBundle* bndl, char* suffix="");
 
 
 	bool message_route(OSCMessage* msg, int address_offset);

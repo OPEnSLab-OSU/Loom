@@ -44,7 +44,7 @@ public:
 	// --- CONSTRUCTOR ---
 																	// The default parameters will be controlled by config file
 
-	Loom_Analog(	char*   module_name 			= "Loom_Analog", 
+	Loom_Analog(	char*   module_name 			= "Analog", 
 					char*   sensor_description 		= "Analog Values",
 					uint8_t num_samples 			= 8, 
 
@@ -118,7 +118,7 @@ public:
 
 
 // This might be where analog conversions are applied
-	void package(OSCBundle* bndl);
+	void package(OSCBundle* bndl, char* suffix="");
 	// void package(OSCBundle* bndl) { LoomModule::package(bndl); }
 
 	// Save a FlashStorage struct

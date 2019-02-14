@@ -150,22 +150,31 @@ void Loom_Analog::measure()
 
 
 // This might be where analog conversions are applied
-void Loom_Analog::package(OSCBundle* bndl)
+void Loom_Analog::package(OSCBundle* bndl, char* suffix)
 {	
 	char id_prefix[30]; 
-	resolve_package_prefix(id_prefix);
+	resolve_bundle_address(id_prefix, suffix);
+
+	// Add Battery Data
+	append_to_bundle(bndl, id_prefix, "VBat", battery, NEW_MSG);
+
 
 	char buf[10];
-
 	// maybe make the analog array into a block message
 	for (int i = 0; i < 6; i++) {
 		if (pin_enabled[i]) {
-			sprintf(buf, "%s%d", "Analog", i);
-			append_to_bundle_key_value(bndl, id_prefix, buf, analog_vals[i]);
+			sprintf(buf, "%s%d", "A", i);
+			// append_to_bundle_key_value(bndl, id_prefix, buf, analog_vals[i]);
+			// append_to_bundle_msg_key_value(bndl, "buf", analog_vals[i]);
+			append_to_bundle(bndl, id_prefix, buf, analog_vals[i]);
+
 		}
 	}
 
-	append_to_bundle_key_value(bndl, id_prefix, "Battery", battery);
+	// append_to_bundle_key_value(bndl, id_prefix, "Battery", battery);
+
+
+	
 
 }
 

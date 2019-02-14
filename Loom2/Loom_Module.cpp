@@ -2,15 +2,6 @@
 #include "Loom_Module.h"
 
 
-// char* enum_verbosity_string(Verbosity v)
-// {
-// 	switch(v) {
-// 		case VERB_OFF  : return "Off";
-// 		case VERB_LOW  : return "Low";
-// 		case VERB_HIGH : return "High";
-// 	}
-// }
-
 char* LoomModule::enum_verbosity_string(Verbosity v)
 {
 	switch(v) {
@@ -129,19 +120,42 @@ void LoomModule::print_state()
 // void LoomModule::package(OSCBundle* bndl)
 // {
 // 	char buf[20];
-// 	resolve_package_prefix(buf);
+// 	resolve_bundle_address(buf);
 // 	package(bndl, buf);
 // }
 
 
-void LoomModule::resolve_package_prefix(char* prefix) 
+// void LoomModule::resolve_bundle_prefix(char* prefix) 
+// {
+// 	if (parent_device != NULL) {
+// 		parent_device->packet_header_device(prefix);
+// 	} else {
+// 		strcpy(prefix, module_name);
+// 	}
+// }
+
+
+
+void LoomModule::resolve_bundle_address(char* address, char* suffix)
 {
 	if (parent_device != NULL) {
-		parent_device->packet_header_device(prefix);
+		char tmp[30];
+		parent_device->packet_header_device(tmp);
+		sprintf(address, "%s/%s", tmp, module_name);
+		// parent_device->packet_header_device(address);
+
 	} else {
-		strcpy(prefix, module_name);
+		// strcpy(address, module_name);
+		sprintf(address, "/%s", module_name);
 	}
+
+	if (strlen(suffix) > 0) {
+		sprintf(address, "%s/%s", address, suffix);
+	} 
 }
+
+
+
 
 	// void LoomModule::measure() = 0;
 

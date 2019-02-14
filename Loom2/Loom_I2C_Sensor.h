@@ -37,8 +37,12 @@ public:
 	virtual void print_config();
 
 	virtual void measure() = 0;
-	virtual void package(OSCBundle* bndl) = 0;
-	virtual void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
+	virtual void package(OSCBundle* bndl, char* suffix="") = 0;
+
+	// remove this one
+	// virtual void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
+
+	// virtual void package_mux(OSCBundle* bndl, char* port_suffix);
 
 	// Get the sensor's I2C address
 	byte get_i2c_address(); 	

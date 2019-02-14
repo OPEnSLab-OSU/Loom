@@ -135,10 +135,10 @@ void LoomRTC::measure()
 }
 
 
-void LoomRTC::package(OSCBundle* bndl)
+void LoomRTC::package(OSCBundle* bndl, char* suffix)
 {
 	char id_prefix[30]; 
-	resolve_package_prefix(id_prefix);
+	resolve_bundle_address(id_prefix, suffix);
 
 	measure();
 	append_to_bundle_key_value(bndl, id_prefix, "DateString", datestring);
@@ -261,11 +261,6 @@ void LoomRTC::convert_local_to_utc(bool to_utc)
 	LOOM_DEBUG_Println();
 }
 
-
-void LoomRTC::convert_local_to_utc()
-{
-	convert_local_to_utc(true); 
-}
 
 
 bool LoomRTC::rtc_validity_check()

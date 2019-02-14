@@ -14,8 +14,7 @@ class Loom_Neopixel : public LoomActuator
 {
 
 protected:
-	// --- PROTECTED MEMBERS ---
-	
+
 	Adafruit_NeoPixel* pixels[3];
 
 	// Pins A0-A2
@@ -24,6 +23,7 @@ protected:
 
 
 public:
+	
 	// --- CONSTRUCTOR ---
 	Loom_Neopixel( 	char* 	module_name 	= "Neopixel",
 
@@ -35,15 +35,11 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Neopixel();
 
-
-	// --- PUBLIC METHODS ---
-
 	void print_config();
 	void print_state();
 
 
-	void package(OSCBundle* bndl);
-	// void package(OSCBundle* bndl) { LoomModule::package(bndl); }
+	void package(OSCBundle* bndl, char* suffix="");
 
 	bool message_route(OSCMessage* msg, int address_offset);
 

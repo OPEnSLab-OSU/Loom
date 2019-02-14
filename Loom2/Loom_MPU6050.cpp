@@ -48,10 +48,10 @@
 // }
 
 
-// void Loom_MPU6050::package(OSCBundle* bndl)
+// void Loom_MPU6050::package(OSCBundle* bndl, char* suffix)
 // {
 // 	char id_prefix[30]; 
-// 	resolve_package_prefix(id_prefix);
+// 	resolve_bundle_address(id_prefix, suffix);
 
 // 	append_to_bundle_key_value(bndl, id_prefix, "Temp", temp);
 // 	append_to_bundle_key_value(bndl, id_prefix, "Humid", humid);

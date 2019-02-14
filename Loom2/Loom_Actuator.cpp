@@ -23,11 +23,3 @@ void LoomActuator::print_config()
 }
 
 
-// void LoomActuator::measure() 
-// {
-
-// }
-
-
-
-

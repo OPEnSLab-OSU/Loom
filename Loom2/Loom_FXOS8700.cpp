@@ -51,10 +51,10 @@ void Loom_FXOS8700::measure()
 }
 
 
-void Loom_FXOS8700::package(OSCBundle* bndl)
+void Loom_FXOS8700::package(OSCBundle* bndl, char* suffix)
 {
 	char id_prefix[30]; 
-	resolve_package_prefix(id_prefix);
+	resolve_bundle_address(id_prefix, suffix);
 
 	append_to_bundle_key_value(bndl, id_prefix, "ax", accel[0]);
 	append_to_bundle_key_value(bndl, id_prefix, "ay", accel[1]);
@@ -66,15 +66,15 @@ void Loom_FXOS8700::package(OSCBundle* bndl)
 }
 
 
-void Loom_FXOS8700::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
-{
-	LoomI2CSensor::package_mux(bndl, id_prefix, port);
+// void Loom_FXOS8700::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
+// {
+// 	LoomI2CSensor::package_mux(bndl, id_prefix, port);
 
-	append_to_bundle_msg_key_value(bndl, "ax", accel[0]);
-	append_to_bundle_msg_key_value(bndl, "ay", accel[1]);
-	append_to_bundle_msg_key_value(bndl, "az", accel[2]);
+// 	append_to_bundle_msg_key_value(bndl, "ax", accel[0]);
+// 	append_to_bundle_msg_key_value(bndl, "ay", accel[1]);
+// 	append_to_bundle_msg_key_value(bndl, "az", accel[2]);
 
-	append_to_bundle_msg_key_value(bndl, "mx", mag[0]);
-	append_to_bundle_msg_key_value(bndl, "my", mag[1]);
-	append_to_bundle_msg_key_value(bndl, "mz", mag[2]);
-}
+// 	append_to_bundle_msg_key_value(bndl, "mx", mag[0]);
+// 	append_to_bundle_msg_key_value(bndl, "my", mag[1]);
+// 	append_to_bundle_msg_key_value(bndl, "mz", mag[2]);
+// }

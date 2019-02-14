@@ -27,7 +27,7 @@ void LoomI2CSensor::print_config()
 {
 	LoomSensor::print_config();
 	LOOM_DEBUG_Print2('\t', "I2C Address         : ");
-	LOOM_DEBUG_Print_Dec_Hex(i2c_address);
+	LOOM_DEBUG_Println_Dec_Hex(i2c_address);
 }
 
 
@@ -38,9 +38,9 @@ byte LoomI2CSensor::get_i2c_address()
 }
 
 
-void LoomI2CSensor::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
-{
-	char address_string[80];
-	sprintf(address_string, "%s/%s/%d", id_prefix, module_name, port);
-	bndl->add(address_string);
-}
+// void LoomI2CSensor::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
+// {
+// 	char address_string[80];
+// 	sprintf(address_string, "%s/%s/%d", id_prefix, module_name, port);
+// 	bndl->add(address_string);
+// }

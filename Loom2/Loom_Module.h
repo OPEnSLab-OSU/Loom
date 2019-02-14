@@ -27,8 +27,7 @@ class LoomModule
 
 protected:
 
-	// LoomModule* parent_device;
-	LoomManager* parent_device;
+	LoomManager* parent_device; // rename to manager
 
 	char* module_name;				// The name of the module    		Should have a DEFAULT but can be overriden if provided to constructor
 	
@@ -44,10 +43,10 @@ protected:
 public:
 
 
+
 	static char* enum_verbosity_string(Verbosity v);
 
 
-	// --- PUBLIC MEMBERS ---
 	// config struct may go here if it is pointed to by a master flash struct
 	// but can be protected if method loads the data from the FlashStorage struct
 
@@ -102,7 +101,7 @@ public:
 	// Append to a bundle 
 
 	// Subclasses can provide defaults for id_prefix, permitting package(&bndl);
-	virtual void package(OSCBundle* bndl) = 0;
+	virtual void package(OSCBundle* bndl, char* suffix="") = 0;
 
 	// Package but try to reference LoomManager for id_prefix
 	// void package(OSCBundle* bndl);
@@ -172,15 +171,12 @@ public:
 
 protected:
 
-	void resolve_package_prefix(char* prefix);
+	// void resolve_bundle_address(char* prefix);  // remove
+
+	void resolve_bundle_address(char* address, char* suffix="");
 
 
 private:
-
-// --- PRIVATE MEMBERS ---
-
-// --- PRIVATE METHODS --- 
-
 
 
 };
