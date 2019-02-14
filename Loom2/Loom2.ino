@@ -1,53 +1,6 @@
 
-// Preamble will only need to include leafs in the heirarchy
-// abstract (noon-leaves) already included by leaves
 
-#include <OSCBundle.h>
-
-#include "Loom_Macros.h"
-
-
-#include "Loom_Manager.h"
-#include "Loom_Module.h"
-
-
-#include "Loom_Analog.h"
-
-#include "Loom_Neopixel.h"
-
-#include "Loom_SHT31D.h"
-#include "Loom_TSL2591.h"
-
-#include "Loom_LoRa.h"
-
-#include "Loom_OLED.h"
-#include "Loom_SD.h"
-
-#include "Loom_Multiplexer.h"
-
-#include "Loom_InternetEthernet.h"
-
-// #include "Loom_AS7262.h"
-// #include "Loom_AS7263.h"
-// #include "Loom_AS7265X.h"
-#include "Loom_AS7262.h"
-#include "Loom_AS7263.h"
-#include "Loom_AS7265X.h"
-#include "Loom_FXAS21002.h"
-#include "Loom_FXOS8700.h"
-#include "Loom_LIS3DH.h"
-#include "Loom_MB1232.h"
-#include "Loom_MPU6050.h"
-#include "Loom_MS5803.h"
-#include "Loom_SHT31D.h"
-#include "Loom_TSL2561.h"
-#include "Loom_TSL2591.h"
-#include "Loom_ZXGesture.h"
-
-#include "Loom_DS3231.h"
-#include "Loom_PCF8523.h"
-
-// #include "Loom_Relay.h"
+#include "_Loom_Preamble.h"
 
 
 
