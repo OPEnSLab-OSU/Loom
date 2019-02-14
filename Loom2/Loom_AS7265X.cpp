@@ -136,59 +136,29 @@ void Loom_AS7265X::package(OSCBundle* bndl, char* suffix)
 	resolve_bundle_address(id_prefix, suffix);
 
 	// UV
-	append_to_bundle_key_value(bndl, id_prefix, "a", uv[0]);
-	append_to_bundle_key_value(bndl, id_prefix, "b", uv[1]);
-	append_to_bundle_key_value(bndl, id_prefix, "c", uv[2]);
-	append_to_bundle_key_value(bndl, id_prefix, "d", uv[3]);
-	append_to_bundle_key_value(bndl, id_prefix, "e", uv[4]);
-	append_to_bundle_key_value(bndl, id_prefix, "f", uv[5]);
+	append_to_bundle(bndl, id_prefix, "a", uv[0], NEW_MSG);
+	append_to_bundle(bndl, id_prefix, "b", uv[1]);
+	append_to_bundle(bndl, id_prefix, "c", uv[2]);
+	append_to_bundle(bndl, id_prefix, "d", uv[3]);
+	append_to_bundle(bndl, id_prefix, "e", uv[4]);
+	append_to_bundle(bndl, id_prefix, "f", uv[5]);
 	// Color
-	append_to_bundle_key_value(bndl, id_prefix, "g", color[0]); 
-	append_to_bundle_key_value(bndl, id_prefix, "h", color[1]); 
-	append_to_bundle_key_value(bndl, id_prefix, "i", color[2]); 
-	append_to_bundle_key_value(bndl, id_prefix, "j", color[3]); 
-	append_to_bundle_key_value(bndl, id_prefix, "k", color[4]); 
-	append_to_bundle_key_value(bndl, id_prefix, "l", color[5]); 
+	append_to_bundle(bndl, id_prefix, "g", color[0]); 
+	append_to_bundle(bndl, id_prefix, "h", color[1]); 
+	append_to_bundle(bndl, id_prefix, "i", color[2]); 
+	append_to_bundle(bndl, id_prefix, "j", color[3]); 
+	append_to_bundle(bndl, id_prefix, "k", color[4]); 
+	append_to_bundle(bndl, id_prefix, "l", color[5]); 
 
 	// NIR
-	append_to_bundle_key_value(bndl, id_prefix, "r", nir[0]);
-	append_to_bundle_key_value(bndl, id_prefix, "s", nir[1]);
-	append_to_bundle_key_value(bndl, id_prefix, "t", nir[2]);
-	append_to_bundle_key_value(bndl, id_prefix, "u", nir[3]);
-	append_to_bundle_key_value(bndl, id_prefix, "v", nir[4]);
-	append_to_bundle_key_value(bndl, id_prefix, "w", nir[5]);
+	append_to_bundle(bndl, id_prefix, "r", nir[0]);
+	append_to_bundle(bndl, id_prefix, "s", nir[1]);
+	append_to_bundle(bndl, id_prefix, "t", nir[2]);
+	append_to_bundle(bndl, id_prefix, "u", nir[3]);
+	append_to_bundle(bndl, id_prefix, "v", nir[4]);
+	append_to_bundle(bndl, id_prefix, "w", nir[5]);
 
 }
-
-
-// void Loom_AS7265X::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
-// {
-// 	LoomI2CSensor::package_mux(bndl, id_prefix, port);
-
-// 	// UV
-// 	append_to_bundle_msg_key_value(bndl, "a", uv[0]);
-// 	append_to_bundle_msg_key_value(bndl, "b", uv[1]);
-// 	append_to_bundle_msg_key_value(bndl, "c", uv[2]);
-// 	append_to_bundle_msg_key_value(bndl, "d", uv[3]);
-// 	append_to_bundle_msg_key_value(bndl, "e", uv[4]);
-// 	append_to_bundle_msg_key_value(bndl, "f", uv[5]);
-// 	// Color
-// 	append_to_bundle_msg_key_value(bndl, "g", color[0]); 
-// 	append_to_bundle_msg_key_value(bndl, "h", color[1]); 
-// 	append_to_bundle_msg_key_value(bndl, "i", color[2]); 
-// 	append_to_bundle_msg_key_value(bndl, "j", color[3]); 
-// 	append_to_bundle_msg_key_value(bndl, "k", color[4]); 
-// 	append_to_bundle_msg_key_value(bndl, "l", color[5]); 
-
-// 	// NIR
-// 	append_to_bundle_msg_key_value(bndl, "r", nir[0]);
-// 	append_to_bundle_msg_key_value(bndl, "s", nir[1]);
-// 	append_to_bundle_msg_key_value(bndl, "t", nir[2]);
-// 	append_to_bundle_msg_key_value(bndl, "u", nir[3]);
-// 	append_to_bundle_msg_key_value(bndl, "v", nir[4]);
-// 	append_to_bundle_msg_key_value(bndl, "w", nir[5]);
-// }
-
 
 void Loom_AS7265X::enable_bulb(bool e)
 {

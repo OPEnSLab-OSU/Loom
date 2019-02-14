@@ -46,7 +46,6 @@ public:
 
 	void measure();
 	void package(OSCBundle* bndl, char* suffix="");
-	// void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
 
 private:
 

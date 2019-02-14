@@ -31,7 +31,7 @@ void Loom_Servo::print_state()
 {
 	print_module_label();
 	LOOM_DEBUG_Println2('\t', "Servo Positions:" );
-	for (int i = 0; i < NUM_SERVOS; i++) {
+	for (int i = 1; i < NUM_SERVOS; i++) {
 		LOOM_DEBUG_Println5('\t\t', "Degree ", i, ": ", positions[i] );
 	}
 }
@@ -44,7 +44,10 @@ void Loom_Servo::package(OSCBundle* bndl, char* suffix)
 	char tmp[8];
 	for (int i = 0; i < NUM_SERVOS; i++) {
 		sprintf(tmp, "Servo%d", i);
-		append_to_bundle_msg_key_value(bndl, tmp, positions[i]);
+		if (i == 0) {
+			append_to_bundle(bndl, id_prefix, tmp, positions[i], NEW_MSG); 
+		}
+		append_to_bundle(bndl, id_prefix, tmp, positions[i]);
 	}
 }
 

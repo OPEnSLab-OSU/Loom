@@ -177,17 +177,18 @@ void loop()
 	// SH->measure();
 	// SH->package(&bndl);
 
-	// DeviceManager.measure();
-	// DeviceManager.package(&bndl);
+	DeviceManager.measure();
+	DeviceManager.package(&bndl);
 
 	// LOOM_DEBUG_Println(b++);
 
-	MP->refresh_sensors();
-	MP->print_state();
-	MP->measure();
-	MP->print_measurements();
+	// MP->refresh_sensors();
+	// MP->print_state();
+	// MP->measure();
+	// MP->print_measurements();
+	// MP->get_sensor_list(&bndl);
 
-	MP->package(&bndl);
+	// MP->package(&bndl);
 	print_bundle(&bndl);
 
 	delay(1000);

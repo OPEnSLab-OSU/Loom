@@ -43,14 +43,7 @@ void Loom_Stepper::print_state()
 
 void Loom_Stepper::package(OSCBundle* bndl, char* suffix)
 {
-	// char id_prefix[30]; 
-	// resolve_bundle_address(id_prefix, "Positions");
 
-	// char tmp[8];
-	// for (int i = 0; i < NUM_SERVOS; i++) {
-	// 	sprintf(tmp, "Stepper%d", i);
-	// 	append_to_bundle_msg_key_value(bndl, tmp, positions[i]);
-	// }
 }
 
 

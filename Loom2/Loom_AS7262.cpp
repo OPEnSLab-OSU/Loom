@@ -74,27 +74,13 @@ void Loom_AS7262::package(OSCBundle* bndl, char* suffix)
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, suffix);
 
-	append_to_bundle_key_value(bndl, id_prefix, "Violet", violet);
-	append_to_bundle_key_value(bndl, id_prefix, "Blue"  , blue);
-	append_to_bundle_key_value(bndl, id_prefix, "Green" , green);
-	append_to_bundle_key_value(bndl, id_prefix, "Yellow", yellow);
-	append_to_bundle_key_value(bndl, id_prefix, "Orange", orange);
-	append_to_bundle_key_value(bndl, id_prefix, "Red"   , red);
+	append_to_bundle(bndl, id_prefix, "Violet", violet, NEW_MSG);
+	append_to_bundle(bndl, id_prefix, "Blue"  , blue);
+	append_to_bundle(bndl, id_prefix, "Green" , green);
+	append_to_bundle(bndl, id_prefix, "Yellow", yellow);
+	append_to_bundle(bndl, id_prefix, "Orange", orange);
+	append_to_bundle(bndl, id_prefix, "Red"   , red);
 }
-
-
-// void Loom_AS7262::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
-// {
-// 	LoomI2CSensor::package_mux(bndl, id_prefix, port);
-
-// 	append_to_bundle_msg_key_value(bndl, "Violet", violet);
-// 	append_to_bundle_msg_key_value(bndl, "Blue"  , blue);
-// 	append_to_bundle_msg_key_value(bndl, "Green" , green);
-// 	append_to_bundle_msg_key_value(bndl, "Yellow", yellow);
-// 	append_to_bundle_msg_key_value(bndl, "Orange", orange);
-// 	append_to_bundle_msg_key_value(bndl, "Red"   , red);
-// }
-
 
 void Loom_AS7262::enable_bulb(bool enable)
 {
