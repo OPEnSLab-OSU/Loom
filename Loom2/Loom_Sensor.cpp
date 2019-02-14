@@ -1,11 +1,5 @@
 
 #include "Loom_Sensor.h"
-// #include "Loom_Device.h"
-
-// #include "Loom_Macros.h"
-// #include "Loom_Misc.h"
-// #include "Loom_Translator.h"
-
 
 
 LoomSensor::LoomSensor(	char* 	module_name,

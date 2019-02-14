@@ -1,13 +1,13 @@
 
 #include "Loom_I2C_Sensor.h"
-// #include "Loom_Macros.h"
 
 
 
 // --- CONSTRUCTOR ---
 LoomI2CSensor::LoomI2CSensor( 	char* module_name, 
-			char* sensor_description, 
-			byte  i2c_address 
+								char* sensor_description, 
+								byte  i2c_address 
+			
 		) : LoomSensor( module_name, sensor_description )
 {
 	this->i2c_address = i2c_address;
