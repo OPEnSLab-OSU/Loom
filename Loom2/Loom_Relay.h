@@ -25,8 +25,6 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Relay();
 
-	// --- PUBLIC METHODS ---
-
 	void print_config();
 	void print_state();
 	void package(OSCBundle* bndl, char* suffix="");

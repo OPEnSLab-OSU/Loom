@@ -104,7 +104,8 @@ void Loom_Neopixel::set_color(OSCMessage* msg)
 
 void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uint8_t green, uint8_t blue)
 {
-	if (pin_enabled[port]) {
+	if ( pin_enabled[port] ) {
+		
 		// Update color vars
 		color_vals[port][0] = red;
 		color_vals[port][1] = green;
@@ -118,7 +119,7 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 
 		LOOM_DEBUG_Print4("Set Neopixel on Port: ", port, ", Chain #: ", chain_num);
 		LOOM_DEBUG_Print2(" to R: ", red);
-		LOOM_DEBUG_Print2(", G: ", green);
+		LOOM_DEBUG_Print2(  ", G: ", green);
 		LOOM_DEBUG_Println2(", B: ", blue);
 	} 
 
