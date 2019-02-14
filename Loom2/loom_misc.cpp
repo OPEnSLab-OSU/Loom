@@ -466,89 +466,6 @@ char* extract_device(OSCBundle* bndl)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// void append_to_bundle_key_value_aux(OSCBundle *bndl, char* address_string, char* id_header, char* key)
-// {
-// 	char tmp[50];
-// 	if ( bndl->size() ) {
-// 		osc_extract_header_to_section(bndl->getOSCMessage(0), 2, tmp);
-// 		sprintf(address_string, "%s/%s", tmp, key);
-// 	} else {
-// 		sprintf(address_string, "%s%d/%s%d%s", FAMILY, FAMILY_NUM, DEVICE, INIT_INST, key);
-// 	}
-// }
-
-
-
-
-// --- APPEND TO BUNDLE KEY VALUE ---
-//
-// Append a key-value pair to a bundle
-// Adds one message to the bundle, with an 
-// address correlating to the key, and data 
-// to the provided value
-// //
-// void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, int elem)
-// {
-// 	char address_string[80];
-// 	sprintf(address_string, "%s/%s", id_header, key);
-// 	bndl->add(address_string).add( (int32_t)elem );
-// }
-
-// void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, uint16_t elem)
-// {
-// 	char address_string[80];
-// 	sprintf(address_string, "%s/%s", id_header, key);
-// 	bndl->add(address_string).add( (int32_t)elem );
-// }
-
-// void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, float elem)
-// {
-// 	char address_string[80];
-// 	sprintf(address_string, "%s/%s", id_header, key);
-// 	bndl->add(address_string).add( elem );
-// }
-
-
-// void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, String elem)
-// {
-// 	char address_string[80];
-// 	sprintf(address_string, "%s/%s", id_header, key);
-// 	bndl->add(address_string).add( elem.c_str() );
-// }
-
-
-
-
-// template <typename T> 
-// void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, T elem)
-// {
-// 	char address_string[80];
-// 	sprintf(address_string, "%s/%s", id_header, key);
-
-// 	bndl->add(address_string).add( elem );
-// }
-
-// template void append_to_bundle_key_value<char*>(OSCBundle *bndl, char* id_header, char* key, char* elem);
-
-// enum AppendType { NEW_MSG, LAST_MSG };
-
-
-
-
-
 void append_to_bundle_aux(OSCBundle* bndl, char* key, int elem, int message_index)
 { bndl->getOSCMessage(message_index)->add(key).add( (int32_t)elem ); }
 
@@ -579,162 +496,6 @@ void append_to_bundle_aux(OSCBundle* bndl, int key, String elem, int msg_idx)
 
 
 
-
-
-
-
-
-
-
-// template <typename T> 
-// void append_to_bundle_msg_key_value_new_aux(OSCBundle* bndl, char* key, T elem, int msg_idx)
-// {
-// 	bndl->getOSCMessage(msg_idx)->add(key).add( elem );
-// }
-
-
-// int append_determine_index(OSCBundle* bndl, int msg_idx)
-// {
-// 	// Index valid
-// 	if ( (msg_idx >= 0) && (msg_idx < bndl->size()) ) {
-// 		append_to_bundle_msg_key_value_new_aux(bndl, key, elem, msg_idx);
-// 	} 
-// 	// Add to last message
-// 	else if (msg_idx == -1) {
-// 		append_to_bundle_msg_key_value_new_aux(bndl, key, elem, bndl->size()-1);
-// 	}
-// 	// Create new or invalid index
-// 	else {
-// 		bndl->add(id_header);
-// 		append_to_bundle_msg_key_value_new_aux(bndl, key, elem, bndl->size()-1);
-// 	}
-// }
-
-
-// // msg_idx of -1 means add to last message
-// // msg_idx of -2 means add create new message
-// // any other message index means try to add to that message if it exists, else create new message
-// template <typename T>
-// void append_to_bundle_msg_key_value_new(OSCBundle* bndl, char* id_header, char* key, T elem, int msg_idx)
-// {
-// 	// Index valid
-// 	if ( (msg_idx >= 0) && (msg_idx < bndl->size()) ) {
-// 		append_to_bundle_msg_key_value_new_aux(bndl, key, elem, msg_idx);
-// 	} 
-// 	// Add to last message
-// 	else if (msg_idx == -1) {
-// 		append_to_bundle_msg_key_value_new_aux(bndl, key, elem, bndl->size()-1);
-// 	}
-// 	// Create new or invalid index
-// 	else {
-// 		bndl->add(id_header);
-// 		append_to_bundle_msg_key_value_new_aux(bndl, key, elem, bndl->size()-1);
-// 	}
-// }
-
-
-// template <typename T>
-// void append_to_bundle_msg_key_value_new(OSCBundle* bndl, char* id_header, char* key, T elem, int msg_idx)
-// {
-// 	int idx = append_determine_index(bndl, msg_idx);
-// 	// // Index valid
-// 	// if ( (msg_idx >= 0) && (msg_idx < bndl->size()) ) {
-// 	// 	append_to_bundle_msg_key_value_new_aux(bndl, key, elem, msg_idx);
-// 	// } 
-// 	// // Add to last message
-// 	// else if (msg_idx == -1) {
-// 	// 	append_to_bundle_msg_key_value_new_aux(bndl, key, elem, bndl->size()-1);
-// 	// }
-// 	// // Create new or invalid index
-// 	// else {
-// 	// 	bndl->add(id_header);
-// 	// 	append_to_bundle_msg_key_value_new_aux(bndl, key, elem, bndl->size()-1);
-// 	// }
-// }
-
-
-
-
-
-
-
-
-
-// void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, uint16_t elem)
-// {
-// 	bndl->getOSCMessage( bndl->size()-1 )->add(key).add( (int32_t)elem );
-// }
-
-// void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, String elem)
-// {
-// 	bndl->getOSCMessage( bndl->size()-1 )->add(key).add( elem.c_str() );
-
-// }
-
-
-// void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, int elem)
-// {
-// 	bndl->getOSCMessage( bndl->size()-1 )->add(key).add( (int32_t)elem );
-// }
-
-// void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, uint16_t elem)
-// {
-// 	bndl->getOSCMessage( bndl->size()-1 )->add(key).add( (int32_t)elem );
-// }
-
-// void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, String elem)
-// {
-// 	bndl->getOSCMessage( bndl->size()-1 )->add(key).add( elem.c_str() );
-
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// void append_to_bundle_key_value_block_aux(OSCMessage *msg, int elem)
-// { msg->add((int32_t)elem); }
-
-// void append_to_bundle_key_value_block_aux(OSCMessage *msg, String elem)
-// { msg->add(elem.c_str()); }
-
-// template <typename T> 
-// void append_to_bundle_key_value_block_aux(OSCMessage *msg, T elem) 
-// { msg->add(elem); }
-
-// template <typename T> 
-// void append_to_bundle_key_value_block(OSCBundle *bndl, char* keys[], T elems[], int count)
-// {
-// 	char address_string[255];
-// 	append_to_bundle_key_value_aux(bndl, address_string, "data");
-// 	OSCMessage msg = OSCMessage(address_string);	
-
-// 	for (int i = 0; i < count; i++) {
-// 		msg.add( keys[i] );
-// 		append_to_bundle_key_value_block_aux(&msg, elems[i]); 
-
-// 	}
-// 	bndl->add(msg);
-// }
-
-
-
-
-
-
-
-
-
-
-
 void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
 {
 	destMsg->empty();
@@ -751,6 +512,7 @@ void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
 	srcMsg->getAddress(addr);
 	destMsg->setAddress(addr);
 }
+
 
 
 // --- DEEP COPY BUNDLE ---
@@ -770,8 +532,6 @@ void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl)
 		destBndl->add(tmpMsg);
 	} 
 }
-
-
 
 
 

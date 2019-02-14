@@ -10,35 +10,6 @@
 enum BundleStructure { SINGLEMSG, MULTIMSG };
 
 
-// // Printing and data extraction functions
-// void   print_message(OSCMessage* msg);
-// void   print_message(OSCMessage* msg, bool detail);
-// void   print_bundle(OSCBundle *bndl);
-// template<typename T> 
-// void   print_array(T data [], int len, int format);
-// int    get_bundle_bytes(OSCBundle *bndl); 					// relatively untested
-// int    bundle_num_data_pairs(OSCBundle *bndl);
-// bool   bundle_empty(OSCBundle *bndl);
-// String get_data_value(OSCMessage* msg, int pos);
-// String get_address_string(OSCMessage *msg);
-
-// String osc_get_keys_associated_value(OSCMessage* msg, char* key);
-// String osc_get_keys_associated_value(OSCBundle* bndl, char* key);
-
-// void   osc_extract_header_section(OSCMessage* msg, int section, char* result);
-// void   osc_extract_header_to_section(OSCMessage* msg, int section, char* result);
-// void   osc_extract_header_from_section(OSCMessage* msg, int section, char* result);
-// int    osc_extract_family_number(OSCMessage* msg);
-// int    osc_extract_family_number(OSCBundle* bndl);
-// int    osc_address_section_count(String addr);
-// int    osc_address_section_count(OSCMessage* msg);
-// int    osc_address_section_count(OSCBundle* bndl);
-
-
-
-// // Deep copy functions
-// void   deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl);
-// void   deep_copy_message(OSCMessage *scrMsg, OSCMessage *destMsg);
 
 // Conversions between bundles and strings (and auxiliary functions)
 void convert_OSC_string_to_bundle(char *osc_string, OSCBundle*bndl);
