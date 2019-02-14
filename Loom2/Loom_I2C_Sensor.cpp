@@ -36,11 +36,3 @@ byte LoomI2CSensor::get_i2c_address()
 { 
 	return i2c_address; 
 }
-
-
-// void LoomI2CSensor::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
-// {
-// 	char address_string[80];
-// 	sprintf(address_string, "%s/%s/%d", id_prefix, module_name, port);
-// 	bndl->add(address_string);
-// }

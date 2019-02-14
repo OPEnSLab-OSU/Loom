@@ -80,7 +80,7 @@ public:
 	// --- CONSTRUCTOR ---
 
 								// The parameters to the constructor will be defined in config
-	LoomManager( char* device_name 	= "LoomManager",
+	LoomManager( char* device_name 	= "Default",
 				char* family 		= "Loom",
 				uint  family_num 	= 1,
 				uint  instance 		= 1,

@@ -159,6 +159,8 @@ void Loom_Multiplexer::print_state()
 
 void Loom_Multiplexer::measure()
 {
+	refresh_sensors();
+
 	for (uint8_t i = 0; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
 			tca_select(i);
@@ -180,17 +182,12 @@ void Loom_Multiplexer::print_measurements()
 
 void Loom_Multiplexer::package(OSCBundle* bndl, char* suffix)
 {
-	// char id_prefix[30]; 
-	// resolve_bundle_address(id_prefix, suffix);
-
 	for (uint8_t i = 0; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
 			tca_select(i);
-			// sensors[i]->package_mux(bndl, id_prefix, i);
 			char tmp[4];
 			itoa(i, tmp, 10);
 			sensors[i]->package(bndl, tmp);
-
 		} 
 	}
 }
@@ -208,27 +205,24 @@ bool Loom_Multiplexer::message_route(OSCMessage* msg, int address_offset)
 
 void Loom_Multiplexer::get_sensor_list(OSCBundle* bndl) // populate an OSC bundle
 {
-	// char address_string[80], id_prefix[30];
-	// resolve_bundle_address(id_prefix);
-	// sprintf(address_string, "%s%s", id_prefix, "/Multiplexer/Sensors");
-	// OSCMessage msg = OSCMessage(address_string);
+	refresh_sensors();
 
-	char id_prefix[30];
-	resolve_bundle_address(id_prefix, "/Mux/Sensors");
-	OSCMessage msg = OSCMessage(id_prefix);
+	char id_prefix[40];
+	resolve_bundle_address(id_prefix, "Sensors");
+
+	bool found_first = false;
 
 	for (uint8_t i = 0; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
-			// Add the port number
-			msg.add( (int32_t)i );
-			// Add sensor name
-			msg.add( sensors[i]->get_module_name() );
-
-			// sensors[i]->package(bndl);
+			// First sensor found should start a new message
+			if (!found_first) {
+				append_to_bundle(bndl, id_prefix, i, sensors[i]->get_module_name(), NEW_MSG);
+				found_first = true;
+			} else {
+				append_to_bundle(bndl, id_prefix, i, sensors[i]->get_module_name());
+			}
 		} 
 	}	
-
-	bndl->add(msg);
 }
 
 

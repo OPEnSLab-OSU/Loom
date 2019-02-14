@@ -48,15 +48,8 @@ void Loom_MS5803::package(OSCBundle* bndl, char* suffix)
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, suffix);
 
-	append_to_bundle_key_value(bndl, id_prefix, "Pressure", pressure);
-	append_to_bundle_key_value(bndl, id_prefix, "Temp"    , temp);
+	append_to_bundle(bndl, id_prefix, "Pressure", pressure, NEW_MSG);
+	append_to_bundle(bndl, id_prefix, "Temp"    , temp);
 }
 
 
-// void Loom_MS5803::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
-// {
-// 	LoomI2CSensor::package_mux(bndl, id_prefix, port);
-
-// 	append_to_bundle_msg_key_value(bndl, "Pressure", pressure);
-// 	append_to_bundle_msg_key_value(bndl, "Temp"    , temp);
-// }
