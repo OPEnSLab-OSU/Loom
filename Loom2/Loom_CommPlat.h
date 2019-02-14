@@ -53,7 +53,7 @@ public:
 
 	// maybe don't define package and measure in .cpp because they are empty
 
-	virtual void package(OSCBundle* bndl);
+	virtual void package(OSCBundle* bndl, char* suffix="");
 	virtual void measure();
 	virtual bool message_route(OSCMessage* msg, int address_offset);
 

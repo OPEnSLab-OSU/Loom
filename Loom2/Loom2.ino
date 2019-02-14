@@ -47,6 +47,7 @@
 #include "Loom_DS3231.h"
 #include "Loom_PCF8523.h"
 
+// #include "Loom_Relay.h"
 
 
 
@@ -57,7 +58,7 @@
 Loom_Analog* 	AS;
 Loom_Neopixel*  NP;
 
-// Loom_SHT31D*   SH;
+Loom_SHT31D*   SH;
 // LoomLora*      LR;
 
 // LoomOLED*      OL;
@@ -103,8 +104,8 @@ void setup()
 
 	// NP->set_color(2, 0, 100, 0, 150);
 
-	// SH = new Loom_SHT31D();
-	// SH->print_config();
+	SH = new Loom_SHT31D();
+	SH->print_config();
 
 	// LR = new LoomLora();
 	// LR->print_config();
@@ -122,7 +123,7 @@ void setup()
 	MP = new Loom_Multiplexer();
 	MP->print_config();
 
-	MP->print_state();
+	// MP->print_state();
 
 	// EI = new Loom_Ethernet_I();
 
@@ -135,6 +136,8 @@ void setup()
 	// DeviceManager.add_module(SC);
 	// DeviceManager.add_module(OL);
 	// DeviceManager.add_module(LR);
+	// DeviceManager.add_module(SH);
+
 // 
 	DeviceManager.add_module(MP);
 	// DeviceManager.add_module(EI);
@@ -157,6 +160,8 @@ void setup()
 	// LOOM_DEBUG_Println2("Time      : ", EI->get_time());
 	
 
+	// LOOM_DEBUG_Println()
+
 	// while(1);
 
 	// delay(2000);
@@ -169,8 +174,11 @@ void loop()
 {
 	OSCBundle bndl;
 
+	// SH->measure();
+	// SH->package(&bndl);
 
-
+	// DeviceManager.measure();
+	// DeviceManager.package(&bndl);
 
 	// LOOM_DEBUG_Println(b++);
 

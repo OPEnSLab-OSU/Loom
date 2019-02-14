@@ -52,10 +52,10 @@ void Loom_LIS3DH::measure()
 }
 
 
-void Loom_LIS3DH::package(OSCBundle* bndl)
+void Loom_LIS3DH::package(OSCBundle* bndl, char* suffix)
 {
 	char id_prefix[30]; 
-	resolve_package_prefix(id_prefix);
+	resolve_bundle_address(id_prefix, suffix);
 
 	append_to_bundle_key_value(bndl, id_prefix, "Accel_X", accel[0]);
 	append_to_bundle_key_value(bndl, id_prefix, "Accel_Y", accel[1]);
@@ -63,11 +63,11 @@ void Loom_LIS3DH::package(OSCBundle* bndl)
 }
 
 
-void Loom_LIS3DH::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
-{
-	LoomI2CSensor::package_mux(bndl, id_prefix, port);
+// void Loom_LIS3DH::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
+// {
+// 	LoomI2CSensor::package_mux(bndl, id_prefix, port);
 
-	append_to_bundle_msg_key_value(bndl, "Accel_X", accel[0]);
-	append_to_bundle_msg_key_value(bndl, "Accel_Y", accel[1]);
-	append_to_bundle_msg_key_value(bndl, "Accel_Z", accel[2]);
-}
+// 	append_to_bundle_msg_key_value(bndl, "Accel_X", accel[0]);
+// 	append_to_bundle_msg_key_value(bndl, "Accel_Y", accel[1]);
+// 	append_to_bundle_msg_key_value(bndl, "Accel_Z", accel[2]);
+// }

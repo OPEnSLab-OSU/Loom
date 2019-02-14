@@ -42,7 +42,7 @@ void LoomLogPlat::print_config()
 	}
 }
 
-void LoomLogPlat::package(OSCBundle* bndl) 
+void LoomLogPlat::package(OSCBundle* bndl, char* suffix) 
 {
 
 }

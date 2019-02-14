@@ -46,8 +46,8 @@ public:
 	void print_measurements();
 
 	void measure();
-	void package(OSCBundle* bndl);
-	void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
+	void package(OSCBundle* bndl, char* suffix="");
+	// void package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port);
 
 	void enable_bulb(bool e);
 	void set_gain(byte gain);

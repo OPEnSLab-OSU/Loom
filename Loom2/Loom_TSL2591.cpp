@@ -76,22 +76,53 @@ void Loom_TSL2591::measure()
 }
 
 
-void Loom_TSL2591::package(OSCBundle* bndl)
+void Loom_TSL2591::package(OSCBundle* bndl, char* suffix)
 {
 	char id_prefix[30]; 
-	resolve_package_prefix(id_prefix);
+	resolve_bundle_address(id_prefix, suffix);
 	
-	append_to_bundle_key_value(bndl, id_prefix, "Vis" , vis);
-	append_to_bundle_key_value(bndl, id_prefix, "IR"  , ir);
-	append_to_bundle_key_value(bndl, id_prefix, "Full", full);
+	append_to_bundle(bndl, id_prefix, "Vis" , vis, NEW_MSG);
+	append_to_bundle(bndl, id_prefix, "IR"  , ir);
+	append_to_bundle(bndl, id_prefix, "Full", full);
+
 }
 
+// // remove id_prefix, port can come as string to send as suffix to 'resolve_bundle_address'
+// void Loom_TSL2591::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
+// {
+// 	// char id_prefix[30];
+// 	char tmp[3]; 
+// 	itoa(port, tmp, 10);
+// 	resolve_bundle_address(id_prefix, tmp);
+	
+// 	append_to_bundle(bndl, id_prefix, "Vis" , vis, NEW_MSG);
+// 	append_to_bundle(bndl, id_prefix, "IR"  , ir);
+// 	append_to_bundle(bndl, id_prefix, "Full", full);
 
-void Loom_TSL2591::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
-{
-	LoomI2CSensor::package_mux(bndl, id_prefix, port);
 
-	append_to_bundle_msg_key_value(bndl, "Vis" , vis);
-	append_to_bundle_msg_key_value(bndl, "IR"  , ir);
-	append_to_bundle_msg_key_value(bndl, "Full", full);
-}
+
+// 	// LoomI2CSensor::package_mux(bndl, id_prefix, port);
+
+// 	// append_to_bundle_msg_key_value(bndl, "Vis" , vis);
+// 	// append_to_bundle_msg_key_value(bndl, "IR"  , ir);
+// 	// append_to_bundle_msg_key_value(bndl, "Full", full);
+// }
+
+
+
+// remove id_prefix, port can come as string to send as suffix to 'resolve_bundle_address'
+// void Loom_TSL2591::package_mux(OSCBundle* bndl, char* port_suffix)
+// {
+// 	char id_prefix[30];
+// 	// char tmp[3]; 
+// 	// itoa(port, tmp, 10);
+// 	resolve_bundle_address(id_prefix, port_suffix);
+	
+// 	append_to_bundle(bndl, id_prefix, "Vis" , vis, NEW_MSG);
+// 	append_to_bundle(bndl, id_prefix, "IR"  , ir);
+// 	append_to_bundle(bndl, id_prefix, "Full", full);
+
+// }
+
+
+

@@ -3,6 +3,8 @@
 #define LOOM_MISC_h
 
 
+
+// #include "Loom_Module.h"
 #include <OSCBundle.h>
 
 
@@ -10,8 +12,7 @@
 
 String get_data_value(OSCMessage* msg, int pos);
 String get_address_string(OSCMessage *msg);
-void print_message(OSCMessage* msg, bool detail);
-void print_message(OSCMessage* msg);
+void print_message(OSCMessage* msg, bool detail=true);
 void print_bundle(OSCBundle *bndl);
 
 
@@ -251,33 +252,100 @@ void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, int elem);
 void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, uint16_t elem);
 void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, String elem);
 
+
 template <typename T> 
 void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, T elem)
 {
-	// char address_string[80];
-	// sprintf(address_string, "%s/%s", id_header, key);
-
-	// bndl->add(address_string).add( elem );
-
-///
-
-	// char address_string[80];
-	// sprintf(address_string, "%s/Port%d%s", id_header, port, "/tsl2591/data");
-	
-	// OSCMessage msg = OSCMessage(address_string);
-	// msg.add("vis" ).add((int32_t)state_tsl2591.vis);
-	// msg.add("ir"  ).add((int32_t)state_tsl2591.ir);
-	// msg.add("full").add((int32_t)state_tsl2591.full);
-	
-	// bndl->add(msg);
-
-	
-	// Get last message
-	// OSCMessage* msg = bndl->getOSCMessage( bndl->size()-1 );
-
 	bndl->getOSCMessage( bndl->size()-1 )->add(key).add(elem);
-
 }
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+enum AppendType { NEW_MSG=-2, LAST_MSG=-1 };
+
+
+
+
+// Char* key versions
+void append_to_bundle_aux(OSCBundle* bndl, char* key, int elem, int msg_idx);
+void append_to_bundle_aux(OSCBundle* bndl, char* key, uint16_t elem, int msg_idx);
+void append_to_bundle_aux(OSCBundle* bndl, char* key, float elem, int msg_idx);
+void append_to_bundle_aux(OSCBundle* bndl, char* key, String elem, int msg_idx);
+template <typename T> 
+void append_to_bundle_aux(OSCBundle* bndl, char* key, T elem, int msg_idx)
+{
+	bndl->getOSCMessage(msg_idx)->add(key).add( elem );
+}
+
+
+// Int key versions
+void append_to_bundle_aux(OSCBundle* bndl, int key, int elem, int message_index);
+void append_to_bundle_aux(OSCBundle* bndl, int key, uint16_t elem, int message_index);
+void append_to_bundle_aux(OSCBundle* bndl, int key, float elem, int msg_idx);
+void append_to_bundle_aux(OSCBundle* bndl, int key, String elem, int msg_idx);
+template <typename T> 
+void append_to_bundle_aux(OSCBundle* bndl, int key, T elem, int msg_idx)
+{
+	bndl->getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem );
+}
+
+
+
+// msg_idx of -1 means add to last message
+// msg_idx of -2 means add create new message
+// any other message index means try to add to that message if it exists, else create new message
+template <typename T>
+void append_to_bundle(OSCBundle* bndl, char* id_header, char* key, T elem, int msg_idx=-1)
+{
+	// Index valid
+	if ( (msg_idx >= 0) && (msg_idx < bndl->size()) ) {
+		append_to_bundle_aux(bndl, key, elem, msg_idx);
+	} 
+	// Add to last message
+	else if (msg_idx == -1) {
+		append_to_bundle_aux(bndl, key, elem, bndl->size()-1);
+	}
+	// Create new or invalid index
+	else {
+		bndl->add(id_header);
+		append_to_bundle_aux(bndl, key, elem, bndl->size()-1);
+	}
+}
+
+template <typename T>
+void append_to_bundle(OSCBundle* bndl, char* id_header, int key, T elem, int msg_idx=-1)
+{
+	// Index valid
+	if ( (msg_idx >= 0) && (msg_idx < bndl->size()) ) {
+		append_to_bundle_aux(bndl, key, elem, msg_idx);
+	} 
+	// Add to last message
+	else if (msg_idx == -1) {
+		append_to_bundle_aux(bndl, key, elem, bndl->size()-1);
+	}
+	// Create new or invalid index
+	else {
+		bndl->add(id_header);
+		append_to_bundle_aux(bndl, key, elem, bndl->size()-1);
+	}
+}
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 // void append_to_message_key_value(OSCMessage* msg, char* id_header, char* key, int elem);

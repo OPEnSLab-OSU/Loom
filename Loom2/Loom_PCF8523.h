@@ -6,7 +6,6 @@
 #include "Loom_RTC.h"
 
 
-
 class Loom_PCF8523 : public LoomRTC
 {
 protected:
@@ -33,7 +32,6 @@ public:
 	DateTime now();
 
 	bool message_route(OSCMessage* msg, int address_offset) {}
-
 
 protected:
 

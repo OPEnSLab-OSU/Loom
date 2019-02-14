@@ -26,7 +26,7 @@ enum TimeZone {
 // {
 // 	1  /* WAT */, 2    /* AT  */, 3     /* ADT */, 4   /* AST */, 4   /* EDT */, 5  /* EST */, 5  /* CDT */,
 // 	6  /* CST */, 6    /* MDT */, 7     /* MST */, 7   /* PDT */, 8   /* PST */, 8  /* ALDT*/, 9  /* ALST*/,
-// 	10 /* HST */, 11    SST , 0     /* GMT */, -1  /* BST */, -1  /* CET */, -2 /* CEST*/, -2 /* EET */,
+// 	10 /* HST */, 11   /* SST */, 0     /* GMT */, -1  /* BST */, -1  /* CET */, -2 /* CEST*/, -2 /* EET */,
 // 	-3 /* EEST*/, -3   /* BT  */, -4    /* ZP4 */, -5  /* ZP5 */, -6  /* ZP6 */, -7 /* ZP7 */, -8 /* AWST*/,
 // 	-9 /* AWDT*/, -9.5 /* ACST*/, -10.5 /* ACDT*/, -10 /* AEST*/, -11 /* AEDT*/
 // };
@@ -71,12 +71,11 @@ public:
 	static char* enum_timezone_string(TimeZone t);
 
 
-
 	// --- PUBLIC METHODS ---
 
 	virtual void print_config();
 	virtual void measure();
-	virtual void package(OSCBundle* bndl);
+	virtual void package(OSCBundle* bndl, char* suffix="");
 
 	void print_time();
 
@@ -95,10 +94,6 @@ public:
 
 protected:
 
-// --- PRIVATE MEMBERS ---
-
-// --- PRIVATE METHODS --- 
-
 	// Similar to measure_rtc  -- might not be needed
 	void read_rtc();
 
@@ -108,9 +103,7 @@ protected:
 // needs to reference and internet connectivity class to get unix time
 	bool set_rtc_from_internet_time(); 
 
-	void convert_local_to_utc(bool to_utc);
-
-	void convert_local_to_utc();
+	void convert_local_to_utc(bool to_utc=true);
 
 	bool rtc_validity_check();
 

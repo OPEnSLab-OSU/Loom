@@ -71,13 +71,6 @@ void print_message(OSCMessage* msg, bool detail)
 }
 
 
-void print_message(OSCMessage* msg) 
-{
-	print_message(msg, 1);
-}
-
-
-
 void print_bundle(OSCBundle *bndl)
 {
 	if (!bndl->size()) return;
@@ -151,6 +144,23 @@ const char* nth_strchr(const char* s, char c, int n)
 }
 
 
+// --- REPLACE CHARACTER ---
+//
+// Given a string, replace all instances of 'orig' char with 'rep' char
+// Used primarily for replacing '~'s sent by Max
+// as it cannot send strings with spaces
+//
+// @param str   Pointer to string to alter
+// @param orig  Character to replace
+// @param rep   Replacement character
+// 
+void replace_char(char *str, char orig, char rep) 
+{
+	char *ix = str;
+	while((ix = strchr(ix, orig)) != NULL) {
+		*ix++ = rep;
+	}
+}
 
 
 
@@ -466,6 +476,9 @@ char* extract_device(OSCBundle* bndl)
 
 
 
+
+
+
 // void append_to_bundle_key_value_aux(OSCBundle *bndl, char* address_string, char* id_header, char* key)
 // {
 // 	char tmp[50];
@@ -476,6 +489,8 @@ char* extract_device(OSCBundle* bndl)
 // 		sprintf(address_string, "%s%d/%s%d%s", FAMILY, FAMILY_NUM, DEVICE, INIT_INST, key);
 // 	}
 // }
+
+
 
 
 // --- APPEND TO BUNDLE KEY VALUE ---
@@ -499,12 +514,12 @@ void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, uin
 	bndl->add(address_string).add( (int32_t)elem );
 }
 
-// void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, float elem)
-// {
-// 	char address_string[80];
-// 	sprintf(address_string, "%s/%s", id_header, key);
-// 	bndl->add(address_string).add( elem );
-// }
+void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, float elem)
+{
+	char address_string[80];
+	sprintf(address_string, "%s/%s", id_header, key);
+	bndl->add(address_string).add( elem );
+}
 
 
 void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, String elem)
@@ -525,6 +540,134 @@ void append_to_bundle_key_value(OSCBundle *bndl, char* id_header, char* key, Str
 
 // template void append_to_bundle_key_value<char*>(OSCBundle *bndl, char* id_header, char* key, char* elem);
 
+// enum AppendType { NEW_MSG, LAST_MSG };
+
+
+
+
+
+void append_to_bundle_aux(OSCBundle* bndl, char* key, int elem, int message_index)
+{ bndl->getOSCMessage(message_index)->add(key).add( (int32_t)elem ); }
+
+void append_to_bundle_aux(OSCBundle* bndl, char* key, uint16_t elem, int message_index)
+{ bndl->getOSCMessage(message_index)->add(key).add( (int32_t)elem ); }
+
+void append_to_bundle_aux(OSCBundle* bndl, char* key, float elem, int msg_idx)
+{ bndl->getOSCMessage(msg_idx)->add(key).add( elem ); }
+
+void append_to_bundle_aux(OSCBundle* bndl, char* key, String elem, int msg_idx)
+{ bndl->getOSCMessage(msg_idx)->add(key).add( elem.c_str() ); }
+
+void append_to_bundle_aux(OSCBundle* bndl, int key, int elem, int message_index)
+{ bndl->getOSCMessage(message_index)->add( (int32_t)key ).add( (int32_t)elem ); }
+
+void append_to_bundle_aux(OSCBundle* bndl, int key, uint16_t elem, int message_index)
+{ bndl->getOSCMessage(message_index)->add( (int32_t)key ).add( (int32_t)elem ); }
+
+void append_to_bundle_aux(OSCBundle* bndl, int key, float elem, int msg_idx)
+{ bndl->getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem ); }
+
+void append_to_bundle_aux(OSCBundle* bndl, int key, String elem, int msg_idx)
+{ bndl->getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem.c_str() ); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// template <typename T> 
+// void append_to_bundle_msg_key_value_new_aux(OSCBundle* bndl, char* key, T elem, int msg_idx)
+// {
+// 	bndl->getOSCMessage(msg_idx)->add(key).add( elem );
+// }
+
+
+// int append_determine_index(OSCBundle* bndl, int msg_idx)
+// {
+// 	// Index valid
+// 	if ( (msg_idx >= 0) && (msg_idx < bndl->size()) ) {
+// 		append_to_bundle_msg_key_value_new_aux(bndl, key, elem, msg_idx);
+// 	} 
+// 	// Add to last message
+// 	else if (msg_idx == -1) {
+// 		append_to_bundle_msg_key_value_new_aux(bndl, key, elem, bndl->size()-1);
+// 	}
+// 	// Create new or invalid index
+// 	else {
+// 		bndl->add(id_header);
+// 		append_to_bundle_msg_key_value_new_aux(bndl, key, elem, bndl->size()-1);
+// 	}
+// }
+
+
+// // msg_idx of -1 means add to last message
+// // msg_idx of -2 means add create new message
+// // any other message index means try to add to that message if it exists, else create new message
+// template <typename T>
+// void append_to_bundle_msg_key_value_new(OSCBundle* bndl, char* id_header, char* key, T elem, int msg_idx)
+// {
+// 	// Index valid
+// 	if ( (msg_idx >= 0) && (msg_idx < bndl->size()) ) {
+// 		append_to_bundle_msg_key_value_new_aux(bndl, key, elem, msg_idx);
+// 	} 
+// 	// Add to last message
+// 	else if (msg_idx == -1) {
+// 		append_to_bundle_msg_key_value_new_aux(bndl, key, elem, bndl->size()-1);
+// 	}
+// 	// Create new or invalid index
+// 	else {
+// 		bndl->add(id_header);
+// 		append_to_bundle_msg_key_value_new_aux(bndl, key, elem, bndl->size()-1);
+// 	}
+// }
+
+
+// template <typename T>
+// void append_to_bundle_msg_key_value_new(OSCBundle* bndl, char* id_header, char* key, T elem, int msg_idx)
+// {
+// 	int idx = append_determine_index(bndl, msg_idx);
+// 	// // Index valid
+// 	// if ( (msg_idx >= 0) && (msg_idx < bndl->size()) ) {
+// 	// 	append_to_bundle_msg_key_value_new_aux(bndl, key, elem, msg_idx);
+// 	// } 
+// 	// // Add to last message
+// 	// else if (msg_idx == -1) {
+// 	// 	append_to_bundle_msg_key_value_new_aux(bndl, key, elem, bndl->size()-1);
+// 	// }
+// 	// // Create new or invalid index
+// 	// else {
+// 	// 	bndl->add(id_header);
+// 	// 	append_to_bundle_msg_key_value_new_aux(bndl, key, elem, bndl->size()-1);
+// 	// }
+// }
+
+
+
+
+
+
+
+
+
+// void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, uint16_t elem)
+// {
+// 	bndl->getOSCMessage( bndl->size()-1 )->add(key).add( (int32_t)elem );
+// }
+
+// void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, String elem)
+// {
+// 	bndl->getOSCMessage( bndl->size()-1 )->add(key).add( elem.c_str() );
+
+// }
+
 
 void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, int elem)
 {
@@ -541,6 +684,8 @@ void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, String elem)
 	bndl->getOSCMessage( bndl->size()-1 )->add(key).add( elem.c_str() );
 
 }
+
+
 
 
 
@@ -576,6 +721,12 @@ void append_to_bundle_msg_key_value(OSCBundle* bndl, char* key, String elem)
 // 	}
 // 	bndl->add(msg);
 // }
+
+
+
+
+
+
 
 
 
@@ -641,22 +792,9 @@ int bundle_num_data_pairs(OSCBundle *bndl)
 
 
 
-// --- REPLACE CHARACTER ---
-//
-// Given a string, replace all instances of 'orig' char with 'rep' char
-// Used primarily for replacing '~'s sent by Max
-// as it cannot send strings with spaces
-//
-// @param str   Pointer to string to alter
-// @param orig  Character to replace
-// @param rep   Replacement character
-// 
-void replace_char(char *str, char orig, char rep) 
-{
-	char *ix = str;
-	while((ix = strchr(ix, orig)) != NULL) {
-		*ix++ = rep;
-	}
-}
+
+
+
+
 
 

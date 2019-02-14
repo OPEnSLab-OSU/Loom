@@ -17,10 +17,10 @@ const byte Loom_Multiplexer::known_addresses[] =
 	0x10, // ZXGESTURESENSOR
 	0x11, // ZXGESTURESENSOR
 	0x19, // LIS3DH
-	// 0x1C, // FXOS8700
-	// 0x1D, // FXOS8700
-	// 0x1E, // FXOS8700
-	// 0x1F, // FXOS8700
+	0x1C, // FXOS8700
+	0x1D, // FXOS8700
+	0x1E, // FXOS8700
+	0x1F, // FXOS8700
 	0x20, // FXAS21002
 	0x21, // FXAS21002
 	0x29, // TSL2561 / TSL2591
@@ -80,12 +80,12 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 
 Loom_Multiplexer::Loom_Multiplexer(	char* 	module_name,
 
-						byte	i2c_address,
-						uint	num_ports,
-						bool	dynamic_list,	
-						uint 	update_period
+									byte	i2c_address,
+									uint	num_ports,
+									bool	dynamic_list,	
+									uint 	update_period
 
-						) : LoomModule( module_name ) 
+								) : LoomModule( module_name ) 
 {
 	// LOOM_DEBUG_Println("Loom_Multiplexer Constructor 1");
 	this->i2c_address 	= i2c_address; 
@@ -103,9 +103,9 @@ Loom_Multiplexer::Loom_Multiplexer(	char* 	module_name,
 		sensors[i] = NULL;
 	}
 
-	// Update sensor list and display
-	refresh_sensors();
-	print_state();
+	// Update sensor list and display   -- currently removed because Mux should be linked to DeviceManager before polling sensors
+	// refresh_sensors();
+	// print_state();
 
 	print_module_label(); 
 	LOOM_DEBUG_Println("Setup Complete");
@@ -178,15 +178,19 @@ void Loom_Multiplexer::print_measurements()
 	}
 }
 
-void Loom_Multiplexer::package(OSCBundle* bndl)
+void Loom_Multiplexer::package(OSCBundle* bndl, char* suffix)
 {
-	char id_prefix[30]; 
-	resolve_package_prefix(id_prefix);
+	// char id_prefix[30]; 
+	// resolve_bundle_address(id_prefix, suffix);
 
 	for (uint8_t i = 0; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
 			tca_select(i);
-			sensors[i]->package_mux(bndl, id_prefix, i);
+			// sensors[i]->package_mux(bndl, id_prefix, i);
+			char tmp[4];
+			itoa(i, tmp, 10);
+			sensors[i]->package(bndl, tmp);
+
 		} 
 	}
 }
@@ -204,10 +208,14 @@ bool Loom_Multiplexer::message_route(OSCMessage* msg, int address_offset)
 
 void Loom_Multiplexer::get_sensor_list(OSCBundle* bndl) // populate an OSC bundle
 {
-	char address_string[80], id_prefix[30];
-	resolve_package_prefix(id_prefix);
-	sprintf(address_string, "%s%s", id_prefix, "/Multiplexer/Sensors");
-	OSCMessage msg = OSCMessage(address_string);
+	// char address_string[80], id_prefix[30];
+	// resolve_bundle_address(id_prefix);
+	// sprintf(address_string, "%s%s", id_prefix, "/Multiplexer/Sensors");
+	// OSCMessage msg = OSCMessage(address_string);
+
+	char id_prefix[30];
+	resolve_bundle_address(id_prefix, "/Mux/Sensors");
+	OSCMessage msg = OSCMessage(id_prefix);
 
 	for (uint8_t i = 0; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
@@ -215,6 +223,8 @@ void Loom_Multiplexer::get_sensor_list(OSCBundle* bndl) // populate an OSC bundl
 			msg.add( (int32_t)i );
 			// Add sensor name
 			msg.add( sensors[i]->get_module_name() );
+
+			// sensors[i]->package(bndl);
 		} 
 	}	
 
@@ -277,14 +287,11 @@ void Loom_Multiplexer::refresh_sensors()
 			// Delete old object
 			// Create new object
 
-
-		// Can be done with switch with intentional fallthrough?
-
 		// Sensor removed, added, or swapped
 		if (previous != current) {
 
 			if ( (previous != 0) || (current == 0) ) {
-				// free object
+				// Free object
 				print_module_label();
 				LOOM_DEBUG_Println2("Free Memory of ", sensors[i]->get_module_name() );
 				delete sensors[i];
@@ -294,6 +301,9 @@ void Loom_Multiplexer::refresh_sensors()
 			sensors[i] = generate_sensor_object(current);
 
 			if (sensors[i] != NULL) {
+				// Make sure sensor is also linked to DeviceManager
+				sensors[i]->link_parent_device(parent_device);
+
 				print_module_label();
 				LOOM_DEBUG_Println2("Added ", sensors[i]->get_module_name() );
 			}

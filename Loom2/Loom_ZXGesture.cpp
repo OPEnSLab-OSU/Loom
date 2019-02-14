@@ -128,10 +128,10 @@ void Loom_ZXGesture::measure()
 }
 
 
-void Loom_ZXGesture::package(OSCBundle* bndl)
+void Loom_ZXGesture::package(OSCBundle* bndl, char* suffix)
 {
 	char id_prefix[30]; 
-	resolve_package_prefix(id_prefix);
+	resolve_bundle_address(id_prefix, suffix);
 
 	switch (mode) {
 		case ZX_POS : 
@@ -146,18 +146,18 @@ void Loom_ZXGesture::package(OSCBundle* bndl)
 }
 
 
-void Loom_ZXGesture::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
-{
-	LoomI2CSensor::package_mux(bndl, id_prefix, port);
+// void Loom_ZXGesture::package_mux(OSCBundle* bndl, char* id_prefix, uint8_t port)
+// {
+// 	LoomI2CSensor::package_mux(bndl, id_prefix, port);
 
-	switch (mode) {
-		case ZX_POS : 
-			append_to_bundle_msg_key_value(bndl, "zx", pos[0]);
-			append_to_bundle_msg_key_value(bndl, "zy", pos[1]);
-			break;
-		case ZX_GEST : 
-			append_to_bundle_msg_key_value(bndl, "type" , gesture_type.c_str());
-			append_to_bundle_msg_key_value(bndl, "speed", (int)gesture_speed);
-			break; 
-	}
-}
+// 	switch (mode) {
+// 		case ZX_POS : 
+// 			append_to_bundle_msg_key_value(bndl, "zx", pos[0]);
+// 			append_to_bundle_msg_key_value(bndl, "zy", pos[1]);
+// 			break;
+// 		case ZX_GEST : 
+// 			append_to_bundle_msg_key_value(bndl, "type" , gesture_type.c_str());
+// 			append_to_bundle_msg_key_value(bndl, "speed", (int)gesture_speed);
+// 			break; 
+// 	}
+// }
