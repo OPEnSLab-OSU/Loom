@@ -141,8 +141,8 @@ void LoomRTC::package(OSCBundle* bndl, char* suffix)
 	resolve_bundle_address(id_prefix, suffix);
 
 	measure();
-	append_to_bundle_key_value(bndl, id_prefix, "DateString", datestring);
-	append_to_bundle_key_value(bndl, id_prefix, "TimeString", timestring);
+	append_to_bundle(bndl, id_prefix, "DateString", datestring, NEW_MSG);
+	append_to_bundle(bndl, id_prefix, "TimeString", timestring);
 }
 
 
