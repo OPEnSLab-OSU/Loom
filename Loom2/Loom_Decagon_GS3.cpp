@@ -36,7 +36,7 @@ void Loom_DecagonGS3::measure()
 
 }
 
-void Loom_DecagonGS3::package(OSCBundle* bndl, char* suffix)
+void Loom_DecagonGS3::package(OSCBundle& bndl, char* suffix)
 {
 
 }

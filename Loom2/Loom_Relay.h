@@ -27,7 +27,7 @@ public:
 
 	void print_config();
 	void print_state();
-	void package(OSCBundle* bndl, char* suffix="");
+	void package(OSCBundle& bndl, char* suffix="");
 
 private:
 

@@ -135,7 +135,7 @@ void LoomRTC::measure()
 }
 
 
-void LoomRTC::package(OSCBundle* bndl, char* suffix)
+void LoomRTC::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, suffix);

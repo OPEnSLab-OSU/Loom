@@ -45,7 +45,7 @@ void Loom_FXAS21002::measure()
 }
 
 
-void Loom_FXAS21002::package(OSCBundle* bndl, char* suffix)
+void Loom_FXAS21002::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, suffix);

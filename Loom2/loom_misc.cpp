@@ -71,22 +71,20 @@ void print_message(OSCMessage* msg, bool detail)
 }
 
 
-void print_bundle(OSCBundle *bndl)
+void print_bundle(OSCBundle& bndl)
 {
-	if (!bndl->size()) return;
+	if ( !bndl.size() ) return;
 
-	#if LOOM_DEBUG == 1
-		char buf[50];
-		char data_type;
-		LOOM_DEBUG_Println2("\nBundle Size: ", bndl->size());
-		OSCMessage *msg;
+	char buf[50];
+	char data_type;
+	LOOM_DEBUG_Println2("\nBundle Size: ", bndl.size());
+	OSCMessage *msg;
 
-		for (int i = 0; i < bndl->size(); i++) {
-			LOOM_DEBUG_Println2("Message: ", i);
-			print_message(bndl->getOSCMessage(i));
-		}
-		Serial.println();
-	#endif
+	for (int i = 0; i < bndl.size(); i++) {
+		LOOM_DEBUG_Println2("Message: ", i);
+		print_message(bndl.getOSCMessage(i));
+	}
+	LOOM_DEBUG_Println();
 }
 
 
@@ -97,7 +95,7 @@ void print_bundle(OSCBundle *bndl)
 
 // Replaces substrings with other substrings in a string
 // Auxiliary function for OSC string compression
-void str_replace(char *target, const char *needle, const char *replacement)
+void str_replace(char* target, const char* needle, const char* replacement)
 {
 	char buffer[384] = { 0 };
 	char *insert_point = &buffer[0];
@@ -129,6 +127,8 @@ void str_replace(char *target, const char *needle, const char *replacement)
 	strcpy(target, buffer);
 }
 
+
+
 // Finds nth instance of a character in a string
 // Auxiliary function for OSC string compression
 const char* nth_strchr(const char* s, char c, int n)
@@ -154,7 +154,7 @@ const char* nth_strchr(const char* s, char c, int n)
 // @param orig  Character to replace
 // @param rep   Replacement character
 // 
-void replace_char(char *str, char orig, char rep) 
+void replace_char(char* str, const char orig, const char rep) 
 {
 	char *ix = str;
 	while((ix = strchr(ix, orig)) != NULL) {
@@ -466,29 +466,29 @@ char* extract_device(OSCBundle* bndl)
 
 
 
-void append_to_bundle_aux(OSCBundle* bndl, char* key, int elem, int message_index)
-{ bndl->getOSCMessage(message_index)->add(key).add( (int32_t)elem ); }
+void append_to_bundle_aux(OSCBundle& bndl, char* key, int elem, int message_index)
+{ bndl.getOSCMessage(message_index)->add(key).add( (int32_t)elem ); }
 
-void append_to_bundle_aux(OSCBundle* bndl, char* key, uint16_t elem, int message_index)
-{ bndl->getOSCMessage(message_index)->add(key).add( (int32_t)elem ); }
+void append_to_bundle_aux(OSCBundle& bndl, char* key, uint16_t elem, int message_index)
+{ bndl.getOSCMessage(message_index)->add(key).add( (int32_t)elem ); }
 
-void append_to_bundle_aux(OSCBundle* bndl, char* key, float elem, int msg_idx)
-{ bndl->getOSCMessage(msg_idx)->add(key).add( elem ); }
+void append_to_bundle_aux(OSCBundle& bndl, char* key, float elem, int msg_idx)
+{ bndl.getOSCMessage(msg_idx)->add(key).add( elem ); }
 
-void append_to_bundle_aux(OSCBundle* bndl, char* key, String elem, int msg_idx)
-{ bndl->getOSCMessage(msg_idx)->add(key).add( elem.c_str() ); }
+void append_to_bundle_aux(OSCBundle& bndl, char* key, String elem, int msg_idx)
+{ bndl.getOSCMessage(msg_idx)->add(key).add( elem.c_str() ); }
 
-void append_to_bundle_aux(OSCBundle* bndl, int key, int elem, int message_index)
-{ bndl->getOSCMessage(message_index)->add( (int32_t)key ).add( (int32_t)elem ); }
+void append_to_bundle_aux(OSCBundle& bndl, int key, int elem, int message_index)
+{ bndl.getOSCMessage(message_index)->add( (int32_t)key ).add( (int32_t)elem ); }
 
-void append_to_bundle_aux(OSCBundle* bndl, int key, uint16_t elem, int message_index)
-{ bndl->getOSCMessage(message_index)->add( (int32_t)key ).add( (int32_t)elem ); }
+void append_to_bundle_aux(OSCBundle& bndl, int key, uint16_t elem, int message_index)
+{ bndl.getOSCMessage(message_index)->add( (int32_t)key ).add( (int32_t)elem ); }
 
-void append_to_bundle_aux(OSCBundle* bndl, int key, float elem, int msg_idx)
-{ bndl->getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem ); }
+void append_to_bundle_aux(OSCBundle& bndl, int key, float elem, int msg_idx)
+{ bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem ); }
 
-void append_to_bundle_aux(OSCBundle* bndl, int key, String elem, int msg_idx)
-{ bndl->getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem.c_str() ); }
+void append_to_bundle_aux(OSCBundle& bndl, int key, String elem, int msg_idx)
+{ bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem.c_str() ); }
 
 
 
@@ -523,13 +523,13 @@ void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
 // @param srcBndl   The source bundle to be copied
 // @param destBndl  The bundle to copied into
 //
-void deep_copy_bundle(OSCBundle *srcBndl, OSCBundle *destBndl) 
+void deep_copy_bundle(OSCBundle& srcBndl, OSCBundle& destBndl) 
 {
-	destBndl->empty();
+	destBndl.empty();
 	OSCMessage tmpMsg;
-	for (int i = 0; i < srcBndl->size(); i++) { 	// for each message
-		deep_copy_message( srcBndl->getOSCMessage(i) , &tmpMsg );
-		destBndl->add(tmpMsg);
+	for (int i = 0; i < srcBndl.size(); i++) { 	// for each message
+		deep_copy_message( srcBndl.getOSCMessage(i) , &tmpMsg );
+		destBndl.add(tmpMsg);
 	} 
 }
 

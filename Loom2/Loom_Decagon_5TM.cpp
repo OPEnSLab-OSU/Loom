@@ -36,7 +36,7 @@ void Loom_Decagon5TM::measure()
 
 }
 
-void Loom_Decagon5TM::package(OSCBundle* bndl, char* suffix)
+void Loom_Decagon5TM::package(OSCBundle& bndl, char* suffix)
 {
 
 }

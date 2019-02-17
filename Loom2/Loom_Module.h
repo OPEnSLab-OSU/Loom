@@ -101,10 +101,10 @@ public:
 	// Append to a bundle 
 
 	// Subclasses can provide defaults for id_prefix, permitting package(&bndl);
-	virtual void package(OSCBundle* bndl, char* suffix="") = 0;
+	virtual void package(OSCBundle& bndl, char* suffix="") = 0;
 
 	// Package but try to reference LoomManager for id_prefix
-	// void package(OSCBundle* bndl);
+	// void package(OSCBundle& bndl);
 
 	// Perform message routing on an OSC message
 	// Only parsing the message should happen in message_route

@@ -120,7 +120,7 @@ public:
 // 	// void measure() {}
 
 // 	// Append to a bundle 
-// 	void package(OSCBundle* bndl, char* id_prefix) {}
+// 	void package(OSCBundle& bndl, char* id_prefix) {}
 
 // 	bool message_route(OSCMessage* msg, int address_offset) {}
 
@@ -193,7 +193,7 @@ public:
 
 	void measure();
 	void package();
-	void package(OSCBundle* bndl);
+	void package(OSCBundle& bndl);
 
 	void print_current_bundle();
 
@@ -373,7 +373,7 @@ private:
 // 	void package();
 
 
-// 	void package(OSCBundle* bndl);
+// 	void package(OSCBundle& bndl);
 
 // 	void print_current_bundle();
 

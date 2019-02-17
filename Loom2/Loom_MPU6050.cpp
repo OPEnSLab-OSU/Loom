@@ -48,7 +48,7 @@
 // }
 
 
-// void Loom_MPU6050::package(OSCBundle* bndl, char* suffix)
+// void Loom_MPU6050::package(OSCBundle& bndl, char* suffix)
 // {
 // 	char id_prefix[30]; 
 // 	resolve_bundle_address(id_prefix, suffix);

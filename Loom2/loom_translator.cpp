@@ -12,59 +12,59 @@
 
 void aux_convert_bundle_structure_to_single(OSCBundle *bndl, OSCBundle *outBndl)
 {
-	char address[50];
-	bndl->getOSCMessage(0)->getAddress(address);
-	snprintf(address, strrchr(address,'/')-address+1, "%s", address);
-	sprintf(address, "%s%s", address, "/data");
-	OSCMessage newMsg = OSCMessage(address);
-	OSCMessage* msg;     // Temporarily hold message of bundle
+	// char address[50];
+	// bndl->getOSCMessage(0)->getAddress(address);
+	// snprintf(address, strrchr(address,'/')-address+1, "%s", address);
+	// sprintf(address, "%s%s", address, "/data");
+	// OSCMessage newMsg = OSCMessage(address);
+	// OSCMessage* msg;     // Temporarily hold message of bundle
 	
-	// Copy data of messages into new bundle
-	for (int i = 0; i < bndl->size(); i++) {
+	// // Copy data of messages into new bundle
+	// for (int i = 0; i < bndl->size(); i++) {
 
-		msg = bndl->getOSCMessage(i); 	// Get ith messsage
+	// 	msg = bndl->getOSCMessage(i); 	// Get ith messsage
 
-		// If the message only has one value
-		if (msg->size() == 1) {
-			// Get ith messsage key and add to new message
-			char tmpBuf[50], keyBuf[50];
-			msg->getAddress(tmpBuf);
-			strncpy(keyBuf, strrchr(tmpBuf,'/')+1, 49);
-			newMsg.add(keyBuf);
+	// 	// If the message only has one value
+	// 	if (msg->size() == 1) {
+	// 		// Get ith messsage key and add to new message
+	// 		char tmpBuf[50], keyBuf[50];
+	// 		msg->getAddress(tmpBuf);
+	// 		strncpy(keyBuf, strrchr(tmpBuf,'/')+1, 49);
+	// 		newMsg.add(keyBuf);
 
-			// Get ith message data and add to new message
-			switch (msg->getType(0)) {
-				case 'f': newMsg.add(msg->getFloat(0));	break;
-				case 'i': newMsg.add(msg->getInt(0));	break;
-				case 's': char buf[256];  msg->getString(0, buf, 256);  newMsg.add(buf);  break;
-				default: LOOM_DEBUG_Println("Unsupported data data_type.");
-			}
+	// 		// Get ith message data and add to new message
+	// 		switch (msg->getType(0)) {
+	// 			case 'f': newMsg.add(msg->getFloat(0));	break;
+	// 			case 'i': newMsg.add(msg->getInt(0));	break;
+	// 			case 's': char buf[256];  msg->getString(0, buf, 256);  newMsg.add(buf);  break;
+	// 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
+	// 		}
 
-		// If the message has multiple keys and values
-		} else if (msg->size() > 1) { 
+	// 	// If the message has multiple keys and values
+	// 	} else if (msg->size() > 1) { 
 
-			char addr_buf[50], addr_end[20];
-			osc_extract_header_section(msg, 5, addr_end);
-			osc_extract_header_from_section(msg, 3, addr_buf); 
+	// 		char addr_buf[50], addr_end[20];
+	// 		osc_extract_header_section(msg, 5, addr_end);
+	// 		osc_extract_header_from_section(msg, 3, addr_buf); 
 
-			// If in multiplexer format
-			if ( strcmp("data", addr_end) == 0) {
-				addr_buf[ strlen((char*)addr_buf)-5 ] = '\0';
-			} 
+	// 		// If in multiplexer format
+	// 		if ( strcmp("data", addr_end) == 0) {
+	// 			addr_buf[ strlen((char*)addr_buf)-5 ] = '\0';
+	// 		} 
 
-			for (int i = 0; i < msg->size(); i+=2) {
-				newMsg.add( ( String(addr_buf+1) + "/" + get_data_value(msg, i) ).c_str());
-				switch (msg->getType(i+1)) {
-					case 'f': newMsg.add(msg->getFloat(i+1));	break;
-					case 'i': newMsg.add(msg->getInt(i+1));	break;
-					case 's': char buf[256];  msg->getString(i+1, buf, 256);  newMsg.add(buf);  break;
-					default: LOOM_DEBUG_Println("Unsupported data data_type.");
-				}
-			}
+	// 		for (int i = 0; i < msg->size(); i+=2) {
+	// 			newMsg.add( ( String(addr_buf+1) + "/" + get_data_value(msg, i) ).c_str());
+	// 			switch (msg->getType(i+1)) {
+	// 				case 'f': newMsg.add(msg->getFloat(i+1));	break;
+	// 				case 'i': newMsg.add(msg->getInt(i+1));	break;
+	// 				case 's': char buf[256];  msg->getString(i+1, buf, 256);  newMsg.add(buf);  break;
+	// 				default: LOOM_DEBUG_Println("Unsupported data data_type.");
+	// 			}
+	// 		}
 
-		} // of if-else
-	} // of for
-	outBndl->add(newMsg);
+	// 	} // of if-else
+	// } // of for
+	// outBndl->add(newMsg);
 }
 
 
@@ -73,31 +73,31 @@ void aux_convert_bundle_structure_to_single(OSCBundle *bndl, OSCBundle *outBndl)
 
 void aux_convert_bundle_structure_to_multi(OSCBundle *bndl, OSCBundle *outBndl)
 {
-	OSCMessage *msg = bndl->getOSCMessage(0); 
-	OSCMessage tmpMsg;
-	char address[50], newAddress[50], keyBuf[50];
+	// OSCMessage *msg = bndl->getOSCMessage(0); 
+	// OSCMessage tmpMsg;
+	// char address[50], newAddress[50], keyBuf[50];
 
-	// Save old packet header address
-	msg->getAddress(address);
+	// // Save old packet header address
+	// msg->getAddress(address);
 
-	// Copy flat data into messages of '/some/address/key value' format
-	for (int i = 1; i < msg->size(); i+=2) {
-		switch (msg->getType(i)) {
-			case 'i': tmpMsg.add(msg->getInt(i));	break;
-			case 'f': tmpMsg.add(msg->getFloat(i));	break;
-			case 's': char buf[256];  msg->getString(i, buf, 256);  tmpMsg.add(buf);  break;
-			default: LOOM_DEBUG_Println("Unsupported data data_type.");
-		}
+	// // Copy flat data into messages of '/some/address/key value' format
+	// for (int i = 1; i < msg->size(); i+=2) {
+	// 	switch (msg->getType(i)) {
+	// 		case 'i': tmpMsg.add(msg->getInt(i));	break;
+	// 		case 'f': tmpMsg.add(msg->getFloat(i));	break;
+	// 		case 's': char buf[256];  msg->getString(i, buf, 256);  tmpMsg.add(buf);  break;
+	// 		default: LOOM_DEBUG_Println("Unsupported data data_type.");
+	// 	}
 
-		// Add message as /address/key value
-		snprintf(newAddress, strrchr(address,'/')-address+1, "%s", address);
-		msg->getString(i-1, keyBuf, 50);
-		sprintf(newAddress, "%s%s%s", newAddress, "/", keyBuf);
-		tmpMsg.setAddress(newAddress);
+	// 	// Add message as /address/key value
+	// 	snprintf(newAddress, strrchr(address,'/')-address+1, "%s", address);
+	// 	msg->getString(i-1, keyBuf, 50);
+	// 	sprintf(newAddress, "%s%s%s", newAddress, "/", keyBuf);
+	// 	tmpMsg.setAddress(newAddress);
 
-		outBndl->add(tmpMsg);
-		tmpMsg.empty();	
-	} 
+	// 	outBndl->add(tmpMsg);
+	// 	tmpMsg.empty();	
+	// } 
 }
 
 // --- CONVERT BUNDLE STRUCTURE ---
@@ -128,34 +128,34 @@ void aux_convert_bundle_structure_to_multi(OSCBundle *bndl, OSCBundle *outBndl)
 // 
 void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructure format)
 {
-	if (bndl->size() < 1) {
-		LOOM_DEBUG_Println("Bundle has no valid contents, cannot be converted");
-	}
+	// if (bndl->size() < 1) {
+	// 	LOOM_DEBUG_Println("Bundle has no valid contents, cannot be converted");
+	// }
 	
-	if ((format == MULTIMSG) && (bndl->size() > 1)) {
-		deep_copy_bundle(bndl, outBndl);
-		return; 
-	}
+	// if ((format == MULTIMSG) && (bndl->size() > 1)) {
+	// 	deep_copy_bundle(bndl, outBndl);
+	// 	return; 
+	// }
 
-	outBndl->empty();
+	// outBndl->empty();
 
-	// Single to Multi
-	if (format == SINGLEMSG) {
-		aux_convert_bundle_structure_to_single(bndl, outBndl);
-	} 
+	// // Single to Multi
+	// if (format == SINGLEMSG) {
+	// 	aux_convert_bundle_structure_to_single(bndl, outBndl);
+	// } 
 
-	// Multi to Single
-	if (format == MULTIMSG) {
-		aux_convert_bundle_structure_to_multi(bndl, outBndl);
-	}
+	// // Multi to Single
+	// if (format == MULTIMSG) {
+	// 	aux_convert_bundle_structure_to_multi(bndl, outBndl);
+	// }
 
 }
 
 void convert_bundle_structure(OSCBundle *bndl, BundleStructure format)
 {
-	OSCBundle outBndl;
-	convert_bundle_structure(bndl, &outBndl, format);
-	deep_copy_bundle(&outBndl, bndl);
+	// OSCBundle outBndl;
+	// convert_bundle_structure(bndl, &outBndl, format);
+	// deep_copy_bundle(&outBndl, bndl);
 }
 
 
@@ -168,7 +168,7 @@ void convert_bundle_structure(OSCBundle *bndl, BundleStructure format)
 
 
 
-void flatten_bundle(OSCBundle& bndl, OSCBundle& outBndl)
+void flatten_bundle(OSCBundle& bndl, OSCBundle& out_bndl)
 {
 	// Make sure bundle has more than one message
 	// Check upper bound as well, as querying some empty bundles gives large value
@@ -218,14 +218,14 @@ void flatten_bundle(OSCBundle& bndl, OSCBundle& outBndl)
 		}
 	} // of for
 
-	outBndl.add(new_msg);
+	out_bndl.add(new_msg);
 }
 
 void flatten_bundle(OSCBundle& bndl)
 {
-	OSCBundle outBndl;
-	flatten_bundle(bndl, outBndl);
-	deep_copy_bundle(&outBndl, &bndl);
+	OSCBundle out_bndl;
+	flatten_bundle(bndl, out_bndl);
+	deep_copy_bundle(out_bndl, bndl);
 }
 
 

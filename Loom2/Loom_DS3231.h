@@ -36,7 +36,7 @@ public:
 
 	void print_config();
 
-	// void package(OSCBundle* bndl, char* id_prefix);
+	// void package(OSCBundle& bndl, char* id_prefix);
 
 	DateTime now();
 

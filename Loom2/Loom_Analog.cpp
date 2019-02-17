@@ -123,7 +123,7 @@ void Loom_Analog::measure()
 
 
 // This might be where analog conversions are applied
-void Loom_Analog::package(OSCBundle* bndl, char* suffix)
+void Loom_Analog::package(OSCBundle& bndl, char* suffix)
 {	
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, suffix);

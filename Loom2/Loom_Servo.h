@@ -33,7 +33,7 @@ public:
 	void print_config();
 	void print_state();
 	void measure() {}
-	void package(OSCBundle* bndl, char* suffix="");
+	void package(OSCBundle& bndl, char* suffix="");
 
 	void set_degree(int servo, int degree);
 

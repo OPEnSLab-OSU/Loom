@@ -38,7 +38,7 @@ public:
 	void print_config();
 	void print_state();
 
-	void package(OSCBundle* bndl, char* suffix="");
+	void package(OSCBundle& bndl, char* suffix="");
 
 	bool message_route(OSCMessage* msg, int address_offset);
 

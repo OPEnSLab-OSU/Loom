@@ -199,7 +199,7 @@ bool Loom_SD::save_bundle(OSCBundle *bndl, char * file, int timestamp)
 		OSCBundle tmpBndl;
 		convert_bundle_structure(bndl, &tmpBndl, SINGLEMSG);
 		LOOM_DEBUG_Println("Converted Bundle:");
-		print_bundle(&tmpBndl);
+		print_bundle(tmpBndl);
 
 		if ( SDFile.position() == 0) { // Create Header
 

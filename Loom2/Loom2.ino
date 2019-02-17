@@ -132,7 +132,7 @@ void loop()
 	// SH->package(&bndl);
 
 	DeviceManager.measure();
-	DeviceManager.package(&bndl);
+	DeviceManager.package(bndl);
 
 
 	// MP->refresh_sensors();
@@ -144,23 +144,23 @@ void loop()
 	// MP->package(&bndl);
 
 	LOOM_DEBUG_Println("Original");
-	print_bundle(&bndl);
+	print_bundle(bndl);
 
 	// convert_bundle_structure(&bndl, &bndl2, SINGLEMSG);
 
 	// LOOM_DEBUG_Println("Single");
-	// print_bundle(&bndl2);
+	// print_bundle(bndl2);
 
 	// convert_bundle_structure(&bndl, &bndl2, MULTIMSG);
 
 	// LOOM_DEBUG_Println("Multi");
-	// print_bundle(&bndl2);
+	// print_bundle(bndl2);
 
 
 	flatten_bundle(bndl);
 
 	LOOM_DEBUG_Println("Flattened");
-	print_bundle(&bndl);
+	print_bundle(bndl);
 
 
 	LOOM_DEBUG_Println("\nDone");
@@ -175,20 +175,20 @@ void loop()
 	// LOOM_DEBUG_Println("SENSOR LIST");
 	// bndl.empty();
 	// MP->get_sensor_list(&bndl);
-	// print_bundle(&bndl);
+	// print_bundle(bndl);
 
 
 	// MP->measure();
 	// bndl.empty();
 	// MP->package(&bndl);
 	// LOOM_DEBUG_Println("MUX PACKAGE");
-	// print_bundle(&bndl);
+	// print_bundle(bndl);
 
 
 	// bndl.empty();	
 	// AS->package(&bndl);
 	// LOOM_DEBUG_Println("ANALOG PACKAGE");
-	// print_bundle(&bndl);
+	// print_bundle(bndl);
 
 	// while(1);
 
@@ -197,7 +197,7 @@ void loop()
 	// DeviceManager.package(&bndl);
 
 	// // LOOM_DEBUG_Println("Bundle 1:");
-	// print_bundle(&bndl);
+	// print_bundle(bndl);
 
 	// SC->log_bundle(&bndl);
 // 

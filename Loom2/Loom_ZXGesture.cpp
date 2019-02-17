@@ -128,7 +128,7 @@ void Loom_ZXGesture::measure()
 }
 
 
-void Loom_ZXGesture::package(OSCBundle* bndl, char* suffix)
+void Loom_ZXGesture::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, suffix);

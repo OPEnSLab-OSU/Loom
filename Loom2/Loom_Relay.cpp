@@ -32,7 +32,7 @@ void Loom_Relay::print_state()
 	LOOM_DEBUG_Println4('\t', "Relay ", pin, (on) ? " On" : " Off" );
 }
 
-void Loom_Relay::package(OSCBundle* bndl, char* suffix)
+void Loom_Relay::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, suffix);
