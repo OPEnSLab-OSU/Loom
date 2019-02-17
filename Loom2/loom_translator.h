@@ -22,33 +22,33 @@ const char* nth_strchr(const char* s, char c, int n);
 
 // Conversion between bundle formats
 // MAY DEPRECATE THESE TWO
-	void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructure format);
-	void convert_bundle_structure(OSCBundle *bndl, BundleStructure format);
+	void convert_bundle_structure(OSCBundle& bndl, OSCBundle& outBndl, BundleStructure format);
+	void convert_bundle_structure(OSCBundle& bndl, BundleStructure format);
 
 
-void flatten_bundle(OSCBundle& bndl, OSCBundle& outBndl);
+void flatten_bundle(OSCBundle& bndl, OSCBundle& out_bndl);
 void flatten_bundle(OSCBundle& bndl);
 
 
 // Conversion from bundle to array formats
-void convert_bundle_to_array_key_value(OSCBundle *bndl, String key_values[], int kv_len);
-void convert_bundle_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[], int assoc_len);
+void convert_bundle_to_array_key_value(OSCBundle& bndl, String key_values[], int kv_len);
+void convert_bundle_to_arrays_assoc(OSCBundle& bndl, String keys[], String values[], int assoc_len);
 
 template <typename T>
-void convert_bundle_to_array(OSCBundle *bndl, T data [], int len);
-void convert_bundle_to_array_w_header(OSCBundle *bndl, String data [], int len);
+void convert_bundle_to_array(OSCBundle& bndl, T data [], int len);
+void convert_bundle_to_array_w_header(OSCBundle& bndl, String data [], int len);
 
 
 // Conversion from array to bundle formats
-void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, BundleStructure format, int interpret);
-void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, BundleStructure format);
+void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char packet_header[], int kv_len, BundleStructure format, int interpret);
+void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char packet_header[], int kv_len, BundleStructure format);
 
-void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format, int interpret);
+void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char packet_header[], int assoc_len, BundleStructure format, int interpret);
 template <typename T>
-void convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format);
+void convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle& bndl, char packet_header[], int assoc_len, BundleStructure format);
 
 template <typename T>
-void convert_array_to_bundle(T data [], OSCBundle *bndl, char packet_header[], int len);
+void convert_array_to_bundle(T data [], OSCBundle& bndl, char packet_header[], int len);
 
 
 // Conversion between array formats

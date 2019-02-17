@@ -47,7 +47,7 @@ public:
 	virtual void package(OSCBundle& bndl, char* suffix="");
 	virtual void measure();
 	virtual bool message_route(OSCMessage* msg, int address_offset);
-	virtual void log_bundle(OSCBundle* bndl) = 0;
+	virtual void log_bundle(OSCBundle& bndl) = 0;
 
 private:
 

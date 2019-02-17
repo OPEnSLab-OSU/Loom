@@ -126,7 +126,7 @@ void aux_convert_bundle_structure_to_multi(OSCBundle *bndl, OSCBundle *outBndl)
 // @param outBndl  Where to store the converted bundle
 // @param format   Output bundle format (SINGLEMSG or MULTIMSG)
 // 
-void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructure format)
+void convert_bundle_structure(OSCBundle& bndl, OSCBundle& outBndl, BundleStructure format)
 {
 	// if (bndl->size() < 1) {
 	// 	LOOM_DEBUG_Println("Bundle has no valid contents, cannot be converted");
@@ -151,7 +151,7 @@ void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructu
 
 }
 
-void convert_bundle_structure(OSCBundle *bndl, BundleStructure format)
+void convert_bundle_structure(OSCBundle& bndl, BundleStructure format)
 {
 	// OSCBundle outBndl;
 	// convert_bundle_structure(bndl, &outBndl, format);
@@ -250,25 +250,28 @@ void flatten_bundle(OSCBundle& bndl)
 // @param bndl        The bundle to use to fill the key value array
 // @param key_values  The array to be populated
 //
-void convert_bundle_to_array_key_value(OSCBundle *bndl, String key_values[], int kv_len)
+void convert_bundle_to_array_key_value(OSCBundle& bndl, String key_values[], int kv_len)
 {	
 	// Convert bundle to flat single message if not already
-	OSCBundle convertedBndl;	
+	OSCBundle converted_bndl;	
 
-	if (bndl->size() > 1)  {
-		convert_bundle_structure(bndl, &convertedBndl, SINGLEMSG); 
-	} else {
-		convertedBndl = *bndl;
-	} 
+// switch to flatten
+	// if (bndl.size() > 1)  {
+	// 	convert_bundle_structure(bndl, converted_bndl, SINGLEMSG); 
+	// } else {
+	// 	// converted_bndl = *bndl;
+	// } 
+
+	flatten_bundle(bndl, converted_bndl);
 
 	// Make sure key_values array is large enough
-	if ( convertedBndl.getOSCMessage(0)->size() > kv_len ) {
+	if ( converted_bndl.getOSCMessage(0)->size() > kv_len ) {
 		// LOOM_DEBUG_Println("Key-values array not large enough to hold all of bundle data, cannot convert");
 		return;
 	}
 
 	// Fill key-value array
-	OSCMessage* msg = convertedBndl.getOSCMessage(0);	
+	OSCMessage* msg = converted_bndl.getOSCMessage(0);	
 	for (int i = 0; i < msg->size(); i++) {
 		key_values[i] = get_data_value(msg, i);
 	}
@@ -288,14 +291,16 @@ void convert_bundle_to_array_key_value(OSCBundle *bndl, String key_values[], int
 // @param keys   The array of keys be populated
 // @param value  The array of values to be populated
 //
-void convert_bundle_to_arrays_assoc(OSCBundle *bndl, String keys[], String values[], int assoc_len)
+void convert_bundle_to_arrays_assoc(OSCBundle& bndl, String keys[], String values[], int assoc_len)
 {
 	// Convert bundle to flat single message if not already
 	OSCBundle convertedBndl;	
-	if (bndl->size() > 1) {
-		convert_bundle_structure(bndl, &convertedBndl, SINGLEMSG);
+
+// switch to flatten	
+	if (bndl.size() > 1) {
+		convert_bundle_structure(bndl, convertedBndl, SINGLEMSG);
 	} else {
-		convertedBndl = *bndl;
+		// convertedBndl = *bndl;
 	}
 
 	// Make sure keys and values arrays are large enough
@@ -314,7 +319,7 @@ void convert_bundle_to_arrays_assoc(OSCBundle *bndl, String keys[], String value
 
 
 template <typename T>
-void convert_bundle_to_array(OSCBundle *bndl, T data [], int len)
+void convert_bundle_to_array(OSCBundle& bndl, T data [], int len)
 {
 	String tmp_strings[len];
 	convert_bundle_to_array_key_value(bndl, tmp_strings, len);
@@ -323,16 +328,15 @@ void convert_bundle_to_array(OSCBundle *bndl, T data [], int len)
 
 
 // Not verified to be fully functional yet
-void convert_bundle_to_array_w_header(OSCBundle *bndl, String data [], int len)
+void convert_bundle_to_array_w_header(OSCBundle& bndl, String data [], int len)
 {
 	// LOOM_DEBUG_Println("In convert bundle to array w header");
 	String tmpStrs[len-1];
 	char buf[50];
 
-	OSCMessage *msg;
+	// OSCMessage *msg;
 	
-	msg = bndl->getOSCMessage(0);
-	msg->getAddress(buf, 0);
+	bndl.getOSCMessage(0)->getAddress(buf, 0);
 	// Serial.print("Address ");
 	// Serial.println(buf);
 
@@ -482,7 +486,7 @@ void convert_array_assoc_to_key_value(String keys [], T values [], String key_va
 // @param kv_len         The length of the 'keys_values' array 
 // @param interprt       (see comment at start of section above for details about the parameter)
 //
-void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, BundleStructure format, int interpret)
+void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char packet_header[], int kv_len, BundleStructure format, int interpret)
 {
 	if ((interpret < 0) || (interpret > 6)) {
 		LOOM_DEBUG_Println3("'", interpret, "' is not a valid way to interpret array when converting to bundle");
@@ -490,7 +494,7 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, ch
 		LOOM_DEBUG_Println("Omitting 'interpret' argument will default to 'Smart' (recommended)");
 		return;
 	}
-	bndl->empty();
+	bndl.empty();
 
 	OSCMessage tmpMsg;
 	const char *number;    
@@ -532,7 +536,7 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, ch
 	}
 
 	tmpMsg.setAddress(address);
-	bndl->add(tmpMsg);
+	bndl.add(tmpMsg);
 
 	// If multi-message format requested
 	if (format == MULTIMSG) {
@@ -540,7 +544,7 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, ch
 	}
 }
 
-void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, char packet_header[], int kv_len, BundleStructure format) {
+void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char packet_header[], int kv_len, BundleStructure format) {
 	convert_key_value_array_to_bundle(key_values, bndl, packet_header, kv_len, format, 0); 
 }
 
@@ -561,7 +565,7 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle *bndl, ch
 // @param format         The output bundle structure (single or multiple messages)
 // @param interpret       (see comment at start of section above for details about the parameter)
 //
-void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format, int interpret)
+void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char packet_header[], int assoc_len, BundleStructure format, int interpret)
 {
 	// Convert to single array first 
 	int kv_len = 2*assoc_len;
@@ -574,12 +578,12 @@ void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle 
 // OVERLOADED version of the previous function
 // Simply calls the previous function with an 'interpret' value of 0
 // (see comment at start of section above for details about the parameter)
-// void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format) { 
+// void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char packet_header[], int assoc_len, BundleStructure format) { 
 // 	convert_assoc_arrays_to_bundle(keys, values, bndl, packet_header, assoc_len, format, 0); 
 // }
 
 template <typename T>
-void convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle *bndl, char packet_header[], int assoc_len, BundleStructure format)
+void convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle& bndl, char packet_header[], int assoc_len, BundleStructure format)
 {
 	String converted_values[assoc_len];
 	convert_array(values, converted_values, assoc_len);
@@ -589,10 +593,10 @@ void convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle *bndl
 
 // Conversion from array of non-Strings to single message bundle   
 template <typename T>   
-void convert_array_to_bundle(T data [], OSCBundle *bndl, char packet_header[], int len)
+void convert_array_to_bundle(T data [], OSCBundle& bndl, char packet_header[], int len)
 {
-	bndl->empty();
-	bndl->add(packet_header);
+	bndl.empty();
+	bndl.add(packet_header);
 	append_to_bundle(bndl, data, len);
 }
 
@@ -605,10 +609,10 @@ void convert_array_to_bundle(T data [], OSCBundle *bndl, char packet_header[], i
 // ================================================================
 
 
-int convert_string_to_int(char * s) 
+int convert_string_to_int(char* s) 
 { return (int)strtol(s, NULL, 10); }
 
-float convert_string_to_float(char * s) 
+float convert_string_to_float(char* s) 
 { return strtof(s, NULL); }
 
 int convert_string_to_int(String s) 

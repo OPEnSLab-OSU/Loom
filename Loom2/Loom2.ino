@@ -157,10 +157,15 @@ void loop()
 	// print_bundle(bndl2);
 
 
-	flatten_bundle(bndl);
+	// flatten_bundle(bndl);
 
-	LOOM_DEBUG_Println("Flattened");
-	print_bundle(bndl);
+	// LOOM_DEBUG_Println("Flattened");
+	// print_bundle(bndl);
+
+	String key_values[25];
+	convert_bundle_to_array_key_value(bndl, key_values, 25);
+	print_array(key_values, 25);
+
 
 
 	LOOM_DEBUG_Println("\nDone");
