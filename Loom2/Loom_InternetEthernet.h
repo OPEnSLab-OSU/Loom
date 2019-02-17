@@ -55,7 +55,7 @@ public:
 	void print_state();
 
 	// virtual void measure() {}
-	// virtual void package(OSCBundle* bndl) {}
+	// virtual void package(OSCBundle& bndl) {}
 	// virtual bool message_route(OSCMessage* msg, int address_offset) {}
 
 

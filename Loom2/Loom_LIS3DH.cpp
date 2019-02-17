@@ -52,7 +52,7 @@ void Loom_LIS3DH::measure()
 }
 
 
-void Loom_LIS3DH::package(OSCBundle* bndl, char* suffix)
+void Loom_LIS3DH::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, suffix);

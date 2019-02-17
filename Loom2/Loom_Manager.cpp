@@ -243,24 +243,24 @@ void LoomManager::package()
 	for (int i = 0; i < module_count; i++) {
 		if ( modules[i]->get_active() ) {
 			// modules[i]->package( &bundle, packet_header_device() );
-			modules[i]->package( &bundle );
+			modules[i]->package( bundle );
 
 		}
 	}
 
 }
 
-void LoomManager::package(OSCBundle* bndl) 
+void LoomManager::package(OSCBundle& bndl) 
 {
 	package();
-	deep_copy_bundle(&bundle, bndl);
+	deep_copy_bundle(bundle, bndl);
 }
 
 
 void LoomManager::print_current_bundle() 
 {
 	LOOM_DEBUG_Println("Member Bundle:");
-	print_bundle(&bundle);
+	print_bundle(bundle);
 }
 
 

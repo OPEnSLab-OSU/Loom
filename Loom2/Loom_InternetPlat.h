@@ -38,7 +38,7 @@ public:
 	virtual void print_state();
 
 	virtual void measure() {}
-	virtual void package(OSCBundle* bndl, char* suffix="") {}
+	virtual void package(OSCBundle& bndl, char* suffix="") {}
 	virtual bool message_route(OSCMessage* msg, int address_offset) {}
 
 	virtual bool connect() = 0;

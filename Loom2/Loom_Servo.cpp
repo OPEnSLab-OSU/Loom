@@ -36,7 +36,7 @@ void Loom_Servo::print_state()
 	}
 }
 
-void Loom_Servo::package(OSCBundle* bndl, char* suffix)
+void Loom_Servo::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, "Positions");

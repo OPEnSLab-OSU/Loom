@@ -31,7 +31,7 @@ public:
 	void print_config();
 	void print_state() {}
 	void measure() {}
-	void package(OSCBundle* bndl, char* suffix="") {}
+	void package(OSCBundle& bndl, char* suffix="") {}
 
 	void move_steps(int motor, uint steps, uint speed, bool clockwise);
 

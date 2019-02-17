@@ -32,7 +32,7 @@ public:
 	virtual void print_config();
 
 	virtual void measure() = 0;
-	virtual void package(OSCBundle* bndl, char* suffix="") = 0;
+	virtual void package(OSCBundle& bndl, char* suffix="") = 0;
 
 	// Get the sensor's I2C address
 	byte get_i2c_address(); 	

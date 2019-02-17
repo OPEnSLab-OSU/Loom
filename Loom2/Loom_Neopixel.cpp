@@ -72,7 +72,7 @@ void Loom_Neopixel::print_state()
 }
 
 
-void Loom_Neopixel::package(OSCBundle* bndl, char* suffix) 
+void Loom_Neopixel::package(OSCBundle& bndl, char* suffix) 
 {
 
 }

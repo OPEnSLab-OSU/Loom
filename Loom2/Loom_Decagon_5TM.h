@@ -28,7 +28,7 @@ public:
 	void print_measurements();
 	void calibrate() {};
 	void measure();
-	void package(OSCBundle* bndl, char* suffix="");
+	void package(OSCBundle& bndl, char* suffix="");
 
 private:
 

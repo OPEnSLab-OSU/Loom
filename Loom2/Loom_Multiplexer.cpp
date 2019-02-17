@@ -180,7 +180,7 @@ void Loom_Multiplexer::print_measurements()
 	}
 }
 
-void Loom_Multiplexer::package(OSCBundle* bndl, char* suffix)
+void Loom_Multiplexer::package(OSCBundle& bndl, char* suffix)
 {
 	for (uint8_t i = 0; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
@@ -203,7 +203,7 @@ bool Loom_Multiplexer::message_route(OSCMessage* msg, int address_offset)
 }
 
 
-void Loom_Multiplexer::get_sensor_list(OSCBundle* bndl) // populate an OSC bundle
+void Loom_Multiplexer::get_sensor_list(OSCBundle& bndl) // populate an OSC bundle
 {
 	refresh_sensors();
 

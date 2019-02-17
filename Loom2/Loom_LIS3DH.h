@@ -33,7 +33,7 @@ public:
 	void print_measurements();
 
 	void measure();
-	void package(OSCBundle* bndl, char* suffix="");
+	void package(OSCBundle& bndl, char* suffix="");
 
 private:
 

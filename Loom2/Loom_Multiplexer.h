@@ -46,8 +46,6 @@ private:
 
 protected:
 
-	// --- PROTECTED MEMBERS ---
-
 	LoomI2CSensor**   sensors;
 
 	byte          i2c_address;		// The device's I2C address
@@ -60,12 +58,6 @@ protected:
 
 
 public:
-	// --- PUBLIC MEMBERS ---
-
-
-	// Arary of current LoomI2CSensor objects of num_ports size
-// Public so other classes can easily access the devices
-
 
 	// --- CONSTRUCTOR ---
 	Loom_Multiplexer(	char* 	module_name 	= "Multiplexer",
@@ -91,13 +83,13 @@ public:
 	void measure(); // maybe (as current implementation joins measure and package)
 	void print_measurements();
 
-	void package(OSCBundle* bndl, char* suffix="");
+	void package(OSCBundle& bndl, char* suffix="");
 
 
 	bool message_route(OSCMessage* msg, int address_offset);
 
 
-	void get_sensor_list(OSCBundle* bndl); // populate an OSC bundle
+	void get_sensor_list(OSCBundle& bndl); // populate an OSC bundle
 
 	void set_is_dynamic(bool dynamic);
 	bool get_is_dynamic();

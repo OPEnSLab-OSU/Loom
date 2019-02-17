@@ -12,12 +12,12 @@ enum BundleStructure { SINGLEMSG, MULTIMSG };
 
 
 // Conversions between bundles and strings (and auxiliary functions)
-void convert_OSC_string_to_bundle(char *osc_string, OSCBundle*bndl);
-void convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
-void original_convert_OSC_string_to_bundle(char *osc_string, OSCBundle*bndl);
-void original_convert_OSC_bundle_to_string(OSCBundle *bndl, char *osc_string);
-void uncompress_OSC_string(char *osc_string);
-void str_replace(char *target, const char *needle, const char *replacement);
+// void convert_OSC_string_to_bundle(char *osc_string, OSCBundle& bndl);
+// void convert_OSC_bundle_to_string(OSCBundle& bndl, char *osc_string);
+// void original_convert_OSC_string_to_bundle(char *osc_string, OSCBundle*bndl);
+// void original_convert_OSC_bundle_to_string(OSCBundle *bndl, char* osc_string);
+// void uncompress_OSC_string(char *osc_string);
+void str_replace(char* target, const char* needle, const char* replacement);
 const char* nth_strchr(const char* s, char c, int n);
 
 // Conversion between bundle formats
