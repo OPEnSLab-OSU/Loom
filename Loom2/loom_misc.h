@@ -45,6 +45,9 @@ const char* nth_strchr(const char* s, char c, int n);
 void replace_char(char* str, const char orig, const char rep); 
 
 
+
+
+
 // --- OSC EXTRACT HEADER SECTION ---
 //
 // Select a single part of an OSC Message header
@@ -86,6 +89,10 @@ void osc_extract_header_from_section(OSCMessage* msg, int section, char* result)
 
 // This version works with sprintf and comparisons like strcmp, but not printing
 char* osc_extract_header_from_section(OSCMessage* msg, int section);
+
+
+
+
 // --- OSC EXTRACT NUMBER OF SECTIONS ---
 //
 // Return the number of sections in the OSC address of 
@@ -138,6 +145,7 @@ enum AppendType { NEW_MSG=-2, LAST_MSG=-1 };
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, int elem,      int msg_idx);
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, uint16_t elem, int msg_idx);
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, float elem,    int msg_idx);
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, double elem,   int msg_idx);
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, String elem,   int msg_idx);
 template <typename T> 
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, T elem, int msg_idx)
@@ -149,6 +157,7 @@ void append_to_bundle_aux(OSCBundle& bndl, const char* key, T elem, int msg_idx)
 void append_to_bundle_aux(OSCBundle& bndl, int key, int elem,      int msg_idx);
 void append_to_bundle_aux(OSCBundle& bndl, int key, uint16_t elem, int msg_idx);
 void append_to_bundle_aux(OSCBundle& bndl, int key, float elem,    int msg_idx);
+void append_to_bundle_aux(OSCBundle& bndl, int key, double elem,   int msg_idx);
 void append_to_bundle_aux(OSCBundle& bndl, int key, String elem,   int msg_idx);
 template <typename T> 
 void append_to_bundle_aux(OSCBundle& bndl, int key, T elem, int msg_idx)
@@ -169,7 +178,7 @@ void append_to_bundle(OSCBundle& bndl, const char* id_header, const char* key, T
 		append_to_bundle_aux(bndl, key, elem, msg_idx);
 	} 
 	// Add to last message
-	else if (msg_idx == -1) {
+	else if ( (msg_idx == -1) && (bndl.size() > 0) ) {
 		append_to_bundle_aux(bndl, key, elem, bndl.size()-1);
 	}
 	// Create new or invalid index
@@ -187,7 +196,7 @@ void append_to_bundle(OSCBundle& bndl, const char* id_header, const int key, T e
 		append_to_bundle_aux(bndl, key, elem, msg_idx);
 	} 
 	// Add to last message
-	else if (msg_idx == -1) {
+	else if ( (msg_idx == -1) && (bndl.size() > 0) ) {
 		append_to_bundle_aux(bndl, key, elem, bndl.size()-1);
 	}
 	// Create new or invalid index

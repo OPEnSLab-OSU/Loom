@@ -475,6 +475,9 @@ void append_to_bundle_aux(OSCBundle& bndl, const char* key, uint16_t elem, int m
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, float elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( elem ); }
 
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, double elem, int msg_idx)
+{ bndl.getOSCMessage(msg_idx)->add(key).add( (float)elem ); }
+
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, String elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( elem.c_str() ); }
 
@@ -486,6 +489,9 @@ void append_to_bundle_aux(OSCBundle& bndl, int key, uint16_t elem, int msg_idx)
 
 void append_to_bundle_aux(OSCBundle& bndl, int key, float elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem ); }
+
+void append_to_bundle_aux(OSCBundle& bndl, int key, double elem, int msg_idx)
+{ bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( (float)elem ); }
 
 void append_to_bundle_aux(OSCBundle& bndl, int key, String elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem.c_str() ); }
