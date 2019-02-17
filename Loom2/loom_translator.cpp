@@ -252,21 +252,12 @@ void flatten_bundle(OSCBundle& bndl)
 //
 void convert_bundle_to_array_key_value(OSCBundle& bndl, String key_values[], int kv_len)
 {	
-	// Convert bundle to flat single message if not already
 	OSCBundle converted_bndl;	
-
-// switch to flatten
-	// if (bndl.size() > 1)  {
-	// 	convert_bundle_structure(bndl, converted_bndl, SINGLEMSG); 
-	// } else {
-	// 	// converted_bndl = *bndl;
-	// } 
-
 	flatten_bundle(bndl, converted_bndl);
 
 	// Make sure key_values array is large enough
 	if ( converted_bndl.getOSCMessage(0)->size() > kv_len ) {
-		// LOOM_DEBUG_Println("Key-values array not large enough to hold all of bundle data, cannot convert");
+		LOOM_DEBUG_Println("Key-values array not large enough to hold all of bundle data, cannot convert");
 		return;
 	}
 
@@ -293,24 +284,17 @@ void convert_bundle_to_array_key_value(OSCBundle& bndl, String key_values[], int
 //
 void convert_bundle_to_arrays_assoc(OSCBundle& bndl, String keys[], String values[], int assoc_len)
 {
-	// Convert bundle to flat single message if not already
-	OSCBundle convertedBndl;	
-
-// switch to flatten	
-	if (bndl.size() > 1) {
-		convert_bundle_structure(bndl, convertedBndl, SINGLEMSG);
-	} else {
-		// convertedBndl = *bndl;
-	}
+	OSCBundle converted_bndl;	
+	flatten_bundle(bndl, converted_bndl);
 
 	// Make sure keys and values arrays are large enough
-	if ( convertedBndl.getOSCMessage(0)->size() > 2*assoc_len ) {
+	if ( converted_bndl.getOSCMessage(0)->size() > 2*assoc_len ) {
 		LOOM_DEBUG_Println("Key-values array not large enough to hold all of bundle data, cannot convert");
 		return;
 	}
 
 	// Fill key and value arrays
-	OSCMessage* msg = convertedBndl.getOSCMessage(0);
+	OSCMessage* msg = converted_bndl.getOSCMessage(0);
 	for (int i = 0; i < msg->size(); i+=2) {
 		keys[i/2]   = get_data_value(msg, i);
 		values[i/2] = get_data_value(msg, i+1); 
