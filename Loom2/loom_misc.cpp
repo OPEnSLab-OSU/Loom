@@ -385,9 +385,9 @@ int extract_family_number(OSCMessage* msg)
 	}
 }
 
-int extract_family_number(OSCBundle* bndl)
+int extract_family_number(OSCBundle& bndl)
 { 
-	return extract_family_number(bndl->getOSCMessage(0)); 
+	return extract_family_number(bndl.getOSCMessage(0)); 
 }
 
 
@@ -401,9 +401,9 @@ int extract_device_number(OSCMessage* msg)
 	}
 }
 
-int extract_device_number(OSCBundle* bndl)
+int extract_device_number(OSCBundle& bndl)
 { 
-	return extract_device_number(bndl->getOSCMessage(0)); 
+	return extract_device_number(bndl.getOSCMessage(0)); 
 }
 
 
@@ -413,9 +413,9 @@ void extract_family(OSCMessage* msg, char* result)
 	osc_extract_header_section(msg, 2, result); 
 }
 
-void extract_family(OSCBundle* bndl, char* result)
+void extract_family(OSCBundle& bndl, char* result)
 { 
-	extract_family(bndl->getOSCMessage(0), result); 
+	extract_family(bndl.getOSCMessage(0), result); 
 }
 
 char* extract_family(OSCMessage* msg)
@@ -425,9 +425,9 @@ char* extract_family(OSCMessage* msg)
 	return (char*)result;
 }
 
-char* extract_family(OSCBundle* bndl)
+char* extract_family(OSCBundle& bndl)
 { 
-	return extract_family(bndl->getOSCMessage(0)); 
+	return extract_family(bndl.getOSCMessage(0)); 
 }
 
 
@@ -442,9 +442,9 @@ void extract_device(OSCMessage* msg, char* result)
 	}
 }
 
-void extract_device(OSCBundle* bndl, char* result)
+void extract_device(OSCBundle& bndl, char* result)
 { 
-	extract_device(bndl->getOSCMessage(0), result); 
+	extract_device(bndl.getOSCMessage(0), result); 
 }
 
 char* extract_device(OSCMessage* msg)
@@ -454,9 +454,9 @@ char* extract_device(OSCMessage* msg)
 	return (char*)result;
 }
 
-char* extract_device(OSCBundle* bndl)
+char* extract_device(OSCBundle& bndl)
 { 
-	return extract_device(bndl->getOSCMessage(0)); 
+	return extract_device(bndl.getOSCMessage(0)); 
 }
 
 
@@ -466,28 +466,28 @@ char* extract_device(OSCBundle* bndl)
 
 
 
-void append_to_bundle_aux(OSCBundle& bndl, char* key, int elem, int message_index)
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, const int elem, int message_index)
 { bndl.getOSCMessage(message_index)->add(key).add( (int32_t)elem ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, char* key, uint16_t elem, int message_index)
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, const uint16_t elem, int message_index)
 { bndl.getOSCMessage(message_index)->add(key).add( (int32_t)elem ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, char* key, float elem, int msg_idx)
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, const float elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( elem ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, char* key, String elem, int msg_idx)
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, const String elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( elem.c_str() ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, int key, int elem, int message_index)
+void append_to_bundle_aux(OSCBundle& bndl, const int key, const int elem, int message_index)
 { bndl.getOSCMessage(message_index)->add( (int32_t)key ).add( (int32_t)elem ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, int key, uint16_t elem, int message_index)
+void append_to_bundle_aux(OSCBundle& bndl, const int key, const uint16_t elem, int message_index)
 { bndl.getOSCMessage(message_index)->add( (int32_t)key ).add( (int32_t)elem ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, int key, float elem, int msg_idx)
+void append_to_bundle_aux(OSCBundle& bndl, const int key, const float elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, int key, String elem, int msg_idx)
+void append_to_bundle_aux(OSCBundle& bndl, const int key, const String elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem.c_str() ); }
 
 
@@ -496,21 +496,21 @@ void append_to_bundle_aux(OSCBundle& bndl, int key, String elem, int msg_idx)
 
 
 
-void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
+void deep_copy_message(OSCMessage* src_msg, OSCMessage* dest_msg)
 {
-	destMsg->empty();
-	for (int i = 0; i < srcMsg->size(); i++) {
-		switch (srcMsg->getType(i)) {
- 			case 'i': destMsg->add(srcMsg->getInt(i));	    break;
- 			case 'f': destMsg->add(srcMsg->getFloat(i));	break;
- 			case 's': char buf[256];  srcMsg->getString(i, buf, 256);  destMsg->add(buf);  break;
+	dest_msg->empty();
+	for (int i = 0; i < src_msg->size(); i++) {
+		switch (src_msg->getType(i)) {
+ 			case 'i': dest_msg->add(src_msg->getInt(i));	    break;
+ 			case 'f': dest_msg->add(src_msg->getFloat(i));	break;
+ 			case 's': char buf[256];  src_msg->getString(i, buf, 256);  dest_msg->add(buf);  break;
  			default: LOOM_DEBUG_Println("Unsupported data data_type.");
  		}
 	}
 
 	char addr[50];
-	srcMsg->getAddress(addr);
-	destMsg->setAddress(addr);
+	src_msg->getAddress(addr);
+	dest_msg->setAddress(addr);
 }
 
 
@@ -523,13 +523,13 @@ void deep_copy_message(OSCMessage *srcMsg, OSCMessage *destMsg)
 // @param srcBndl   The source bundle to be copied
 // @param destBndl  The bundle to copied into
 //
-void deep_copy_bundle(OSCBundle& srcBndl, OSCBundle& destBndl) 
+void deep_copy_bundle(OSCBundle& src_bndl, OSCBundle& dest_bndl) 
 {
-	destBndl.empty();
+	dest_bndl.empty();
 	OSCMessage tmpMsg;
-	for (int i = 0; i < srcBndl.size(); i++) { 	// for each message
-		deep_copy_message( srcBndl.getOSCMessage(i) , &tmpMsg );
-		destBndl.add(tmpMsg);
+	for (int i = 0; i < src_bndl.size(); i++) { 	// for each message
+		deep_copy_message( src_bndl.getOSCMessage(i) , &tmpMsg );
+		dest_bndl.add(tmpMsg);
 	} 
 }
 
@@ -541,11 +541,11 @@ void deep_copy_bundle(OSCBundle& srcBndl, OSCBundle& destBndl)
 //  in either SINGLEMSG or MULTIMSG format
 // Assumes data to be keys and values, return value
 //  undefined otherwise
-int bundle_num_data_pairs(OSCBundle *bndl)
+int bundle_num_data_pairs(OSCBundle& bndl)
 {
 	int tmp, total = 0;
-	for (int i = 0; i < bndl->size(); i++) {
-		tmp = bndl->getOSCMessage(i)->size();
+	for (int i = 0; i < bndl.size(); i++) {
+		tmp = bndl.getOSCMessage(i)->size();
 		total += (tmp == 1) ? 1 : tmp/2;
 	}
 	return total;

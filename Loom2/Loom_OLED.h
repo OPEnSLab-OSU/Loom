@@ -75,8 +75,8 @@ public:
 	void set_freeze_behavior(OLED_Freeze behavior);
 	OLED_Freeze get_freeze_behavior();
 
-	void log_bundle(OSCBundle* bndl);
-	void log_bundle(OSCBundle* bndl, OLED_Format format);
+	void log_bundle(OSCBundle& bndl);
+	void log_bundle(OSCBundle& bndl, OLED_Format format);
 
 
 private:

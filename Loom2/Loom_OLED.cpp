@@ -145,13 +145,13 @@ OLED_Freeze Loom_OLED::get_freeze_behavior()
 }
 
 
-void Loom_OLED::log_bundle(OSCBundle* bndl) 
+void Loom_OLED::log_bundle(OSCBundle& bndl) 
 {
 	log_bundle(bndl, display_format);
 }
 
 
-void Loom_OLED::log_bundle(OSCBundle* bndl, OLED_Format format) 
+void Loom_OLED::log_bundle(OSCBundle& bndl, OLED_Format format) 
 {
 	if ( !check_millis() ) return;
 	

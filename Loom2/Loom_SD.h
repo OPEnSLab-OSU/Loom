@@ -69,7 +69,7 @@ public:
 	bool dump_file(char* file) ;
 	template <typename T>
 	bool save_elem(char *file, T data, char endchar);
-	void log_bundle(OSCBundle* bndl);
+	void log_bundle(OSCBundle& bndl);
 
 
 // --- SD SAVE BUNDLE --- 
@@ -77,7 +77,7 @@ public:
 // @param file       The file to save bundle to
 // @param bndl       The bundle to be saved
 // @param timestamp  Format of timestamp (if any)
-	bool save_bundle(OSCBundle *bndl, char * file, int timestamp);
+	bool save_bundle(OSCBundle& bndl, char* file, int timestamp);
 
 
 	// timestamp options:

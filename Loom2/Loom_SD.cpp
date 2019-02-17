@@ -146,7 +146,7 @@ bool Loom_SD::save_elem(char *file, T data, char endchar)
 }
 
 
-void Loom_SD::log_bundle(OSCBundle* bndl) 
+void Loom_SD::log_bundle(OSCBundle& bndl) 
 {
 	// if ( !sd_found || !check_millis() ) return;
 	save_bundle(bndl, default_file, 3);
@@ -171,7 +171,7 @@ void Loom_SD::log_bundle(OSCBundle* bndl)
 // @param bndl       The bundle to be saved
 // @param format     How to format the saved bundle in the SD card file
 // @param timestamp  Format of timestamp (if any)
-bool Loom_SD::save_bundle(OSCBundle *bndl, char * file, int timestamp)
+bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
 {
 	if ( !sd_found || !check_millis() ) return false;
 
@@ -197,7 +197,7 @@ bool Loom_SD::save_bundle(OSCBundle *bndl, char * file, int timestamp)
 
 		OSCMessage *msg;
 		OSCBundle tmpBndl;
-		convert_bundle_structure(bndl, &tmpBndl, SINGLEMSG);
+		convert_bundle_structure(bndl, tmpBndl, SINGLEMSG);
 		LOOM_DEBUG_Println("Converted Bundle:");
 		print_bundle(tmpBndl);
 
