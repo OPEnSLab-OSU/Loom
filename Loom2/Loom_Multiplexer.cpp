@@ -296,7 +296,9 @@ void Loom_Multiplexer::refresh_sensors()
 
 			if (sensors[i] != NULL) {
 				// Make sure sensor is also linked to DeviceManager
-				sensors[i]->link_parent_device(parent_device);
+				sensors[i]->link_device_manager(device_manager);
+				// device_manager->add_module(sensors[i]);
+
 
 				print_module_label();
 				LOOM_DEBUG_Println2("Added ", sensors[i]->get_module_name() );

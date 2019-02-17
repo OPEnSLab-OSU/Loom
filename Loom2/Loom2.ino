@@ -12,10 +12,10 @@ Loom_Analog* 	AS;
 Loom_Neopixel*  NP;
 
 Loom_SHT31D*   SH;
-// LoomLora*      LR;
+// Loom_Lora*      LR;
 
-// LoomOLED*      OL;
-// LoomSD*        SC;
+// Loom_OLED*      OL;
+Loom_SD*        SC;
 
 // Loom_DS3231*     RT;
 // Loom_PCF8523*     RT;
@@ -44,10 +44,10 @@ void setup()
 
 
 	AS = new Loom_Analog();
-	AS->print_config();
+	// AS->print_config();
 
-	AS->measure();
-	AS->print_measurements();
+	// AS->measure();
+	// AS->print_measurements();
 
 
 	// Asensor.print_config();
@@ -66,8 +66,8 @@ void setup()
 	// OL = new LoomOLED();
 	// OL->print_config();
 
-	// SC = new LoomSD();
-	// SC->print_config();
+	SC = new Loom_SD();
+	SC->print_config();
 
 	// RT = new Loom_DS3231();
 	// RT = new Loom_PCF8523();
@@ -86,7 +86,7 @@ void setup()
 
 	DeviceManager.add_module(AS);
 	// DeviceManager.add_module(NP);
-	// DeviceManager.add_module(SC);
+	DeviceManager.add_module(SC);
 	// DeviceManager.add_module(OL);
 	// DeviceManager.add_module(LR);
 	// DeviceManager.add_module(SH);
@@ -134,6 +134,8 @@ void loop()
 	DeviceManager.measure();
 	DeviceManager.package(bndl);
 
+
+	// SC->log_bundle(bndl);
 
 	// MP->refresh_sensors();
 	// MP->print_state();

@@ -25,7 +25,7 @@ LoomModule::LoomModule()
 	print_verbosity 	= VERB_LOW;
 	package_verbosity 	= VERB_LOW;
 	
-	this->parent_device = NULL;
+	this->device_manager = NULL;
 }
 
 
@@ -44,8 +44,8 @@ LoomModule::LoomModule( char* module_name, LoomManager* LD ) : LoomModule()
 {
 	// LOOM_DEBUG_Println("LoomModule Constructor 2");
 	this->module_name   = module_name;
-	// this->parent_device = LD;
-	link_parent_device(LD);
+	// this->device_manager = LD;
+	link_device_manager(LD);
 }
 
 // This version did not seem to work
@@ -73,17 +73,17 @@ LoomModule::~LoomModule() {}
 // --- PUBLIC METHODS ---
 
 
-LoomManager* LoomModule::get_parent_device()
+LoomManager* LoomModule::get_device_manager()
 {
-	return parent_device;
+	return device_manager;
 }
 
 
-void LoomModule::link_parent_device(LoomManager* LD)
+void LoomModule::link_device_manager(LoomManager* LD)
 {
 	if (LD == NULL) return;
 
-	parent_device = LD;
+	device_manager = LD;
 
 	char buf[50];
 	LD->get_device_name(buf);
@@ -127,8 +127,8 @@ void LoomModule::print_state()
 
 // void LoomModule::resolve_bundle_prefix(char* prefix) 
 // {
-// 	if (parent_device != NULL) {
-// 		parent_device->packet_header_device(prefix);
+// 	if (device_manager != NULL) {
+// 		device_manager->packet_header_device(prefix);
 // 	} else {
 // 		strcpy(prefix, module_name);
 // 	}
@@ -138,11 +138,11 @@ void LoomModule::print_state()
 
 void LoomModule::resolve_bundle_address(char* address, char* suffix)
 {
-	if (parent_device != NULL) {
+	if (device_manager != NULL) {
 		char tmp[30];
-		parent_device->packet_header_device(tmp);
+		device_manager->packet_header_device(tmp);
 		sprintf(address, "%s/%s", tmp, module_name);
-		// parent_device->packet_header_device(address);
+		// device_manager->packet_header_device(address);
 
 	} else {
 		// strcpy(address, module_name);

@@ -38,7 +38,7 @@ Loom_TSL2591::Loom_TSL2591(byte i2c_address, char* module_name, char* sensor_des
 	} 
 
 	print_module_label();
-	LOOM_DEBUG_Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LOOM_DEBUG_Println2("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 // maybe a constructor that specifies the i2c address (use a default otherwise)

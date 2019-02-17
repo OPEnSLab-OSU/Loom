@@ -27,7 +27,7 @@ class LoomModule
 
 protected:
 
-	LoomManager* parent_device; // rename to manager
+	LoomManager* device_manager; // rename to manager
 
 	char* module_name;				// The name of the module    		Should have a DEFAULT but can be overriden if provided to constructor
 	
@@ -83,9 +83,9 @@ public:
 
 	// --- PUBLIC METHODS ---
 
-	LoomManager* get_parent_device();
+	LoomManager* get_device_manager();
 
-	void link_parent_device(LoomManager* LD);
+	void link_device_manager(LoomManager* LD);
 
 	void print_module_label();
 

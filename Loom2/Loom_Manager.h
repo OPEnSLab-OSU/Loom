@@ -1,6 +1,6 @@
 
-#ifndef LOOM_MANAGER_h
-#define LOOM_MANAGER_h
+#ifndef device_manager_h
+#define device_manager_h
 
 
 // #include "loom_abstract_module_class.h"
@@ -15,6 +15,10 @@
 #include "Loom_Translator.h"
 
 
+// #include <vector.h>
+
+
+
 
 enum DeviceType { HUB, NODE, REPEATER };
 
@@ -24,8 +28,16 @@ enum DeviceType { HUB, NODE, REPEATER };
 class LoomModule;
 class LoomSensor;
 class LoomActuator;
+class LoomRTC;
 class LoomCommPlat;
 class LoomLogPlat;
+
+#define MAX_OTHER_MODULES 3
+#define MAX_SENSORS       20
+#define MAX_ACTUATORS     10
+#define MAX_RTCS          3
+#define MAX_COMMS         3
+#define MAX_LOGS          5
 
 
 
@@ -33,7 +45,7 @@ class LoomManager
 {
 
 protected:
-	// --- PROTECTED MEMBERS ---
+
 	char* 		device_name;		// The name of the device
 
 	char* 		family;			// The family the device belongs to
@@ -48,11 +60,22 @@ protected:
 
 // keep counts for these as well? or just make all of these arrays dynamic
 // or maybe just use check for null 
-	LoomSensor*      sensor_modules[10];
-	LoomActuator*    actuator_modules[10];
-	// LoomRTC*         rtc_module;
-	LoomCommPlat*    comm_modules[3];
-	LoomLogPlat*     log_modules[3];
+
+	// Loom_Multiplexer* multiplexer;
+	LoomModule*       other_modules[MAX_OTHER_MODULES];
+	LoomSensor*       sensor_modules[MAX_SENSORS];
+	LoomActuator*     actuator_modules[MAX_ACTUATORS];
+	LoomRTC*          rtc_modules[MAX_RTCS];
+	LoomCommPlat*     comm_modules[MAX_COMMS];
+	LoomLogPlat*      log_modules[MAX_LOGS];
+	// an other_modules array?
+
+	uint other_module_count;
+	uint sensor_count;
+	uint actuator_count;
+	uint rtc_count;
+	uint comm_count;
+	uint log_count;
 
 
 	// Array of pointers to enabled modules
@@ -130,7 +153,20 @@ public:
 // does this check type and sort into arrays accordingly, or is there specific add module methods per type
 
 	void add_module(LoomModule* LM);
+
+	// Over loaded as to sort by module type
+	void add_module(LoomSensor* sensor); 
+	void add_module(LoomActuator* actuator); 
+	void add_module(LoomRTC* rtc); 
+	void add_module(LoomCommPlat* comm_plat); 
+	void add_module(LoomLogPlat* log_plat); 
+
+
+
+
+
 	// void module_enable(LoomModule* LM, bool e) ?
+
 
 	void list_modules();
 
