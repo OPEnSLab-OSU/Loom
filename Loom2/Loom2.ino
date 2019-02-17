@@ -133,9 +133,21 @@ void loop()
 
 	DeviceManager.measure();
 	DeviceManager.package(bndl);
+	SC->log_bundle(bndl);
 
+	delay(1000);
 
-	// SC->log_bundle(bndl);
+	DeviceManager.measure();
+	DeviceManager.package(bndl);
+	SC->log_bundle(bndl);
+
+	delay(1000);
+
+	DeviceManager.measure();
+	DeviceManager.package(bndl);
+	SC->log_bundle(bndl);
+
+	print_bundle(bndl);
 
 	// MP->refresh_sensors();
 	// MP->print_state();
@@ -145,7 +157,7 @@ void loop()
 
 	// MP->package(&bndl);
 
-	print_bundle(bndl);
+	// print_bundle(bndl);
 
 
 	LOOM_DEBUG_Println("\nDone");

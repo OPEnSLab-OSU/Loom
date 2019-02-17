@@ -25,7 +25,6 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_PCF8523();
 
-	// --- PUBLIC METHODS ---
 
 	void print_config();
 

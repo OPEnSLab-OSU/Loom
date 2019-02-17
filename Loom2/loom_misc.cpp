@@ -4,6 +4,18 @@
 
 
 
+void print_array(String data [], int len, int format)
+{
+	#if LOOM_DEBUG == 1
+		for (int i = 0; i < len; i++) {
+			if (format == 1) { Serial.println(data[i].c_str()); }
+			if (format  > 1) { Serial.print(data[i].c_str()); Serial.print(" "); }
+			if ((format > 2) && (i%5==0)) { Serial.println(); }
+		}
+		Serial.println();
+	#endif
+}
+
 String get_data_value(OSCMessage* msg, int pos) 
 {
 	if (pos < msg->size()) {
@@ -470,7 +482,6 @@ void deep_copy_bundle(OSCBundle& src_bndl, OSCBundle& dest_bndl)
 // --- GET NUM DATA PAIRS ---
 //
 // Returns the number of key-value pairs in a bundle
-//  in either SINGLEMSG or MULTIMSG format
 // Assumes data to be keys and values, return value
 //  undefined otherwise
 int bundle_num_data_pairs(OSCBundle& bndl)

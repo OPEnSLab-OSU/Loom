@@ -18,9 +18,6 @@ protected:
 
 public:
 
-	// --- PUBLIC MEMBERS ---
-
-
 	// --- CONSTRUCTOR ---
 	Loom_DS3231(	char* 	module_name 			= "DS3231",
 	 
@@ -31,8 +28,6 @@ public:
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_DS3231();
-
-	// --- PUBLIC METHODS ---
 
 	void print_config();
 

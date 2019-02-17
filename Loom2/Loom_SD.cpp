@@ -24,7 +24,7 @@ Loom_SD::Loom_SD(		char* module_name, bool enable_rate_filter, uint min_filter_d
 
 	sd_found = SD.begin(chip_select);
 	print_module_label();
-	LOOM_DEBUG_Println2("\tInitialize ", (sd_found) ? "sucessful" : "failed (will continue, but SD functions will be skipped)");
+	LOOM_DEBUG_Println2("Initialize ", (sd_found) ? "sucessful" : "failed (will continue, but SD functions will be skipped)");
 
 
 }
@@ -75,7 +75,7 @@ void Loom_SD::empty_file(char* file)
 	if ( !sd_found ) return;
 
 	SD.remove(file);
-	SDFile = SD.open(file, FILE_WRITE);
+	File SDFile = SD.open(file, FILE_WRITE);
 	SDFile.close();
 }
 
@@ -99,7 +99,8 @@ bool Loom_SD::dump_file(char* file)
 
 		SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
 
-		SDFile = SD.open(file);
+		File SDFile = SD.open(file);
+
 		if (SDFile) {
 			LOOM_DEBUG_Println2("Contents of file: ", file);
 
@@ -130,7 +131,7 @@ bool Loom_SD::save_elem(char *file, T data, char endchar)
 
 	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
 	
-	SDFile = SD.open(file, FILE_WRITE);
+	File SDFile = SD.open(file, FILE_WRITE);
 
 	if (SDFile) {
 		LOOM_DEBUG_Println4("Saving ", data, " to SD file: ", file);
@@ -148,106 +149,30 @@ bool Loom_SD::save_elem(char *file, T data, char endchar)
 
 void Loom_SD::log_bundle(OSCBundle& bndl) 
 {
-	// if ( !sd_found || !check_millis() ) return;
 	save_bundle(bndl, default_file, 3);
-
 }
 
 
 
 // --- SD SAVE BUNDLE --- 
 //
-// Saves a bundle to SD card in 1 of 4 formats
-//
-// Format options
-//  0: Smart Save as comma separated array of data on (if in key-value single/mulit-msg or single message format)
-//       First row becomes a header, subsequent rows line up beneath columns
-//       (assumes data fields and timestamp format do not change over the course of writing to the file)
-//  1: Save as comma separated array of data on (if in key-value single/mulit-msg or single message format)
-//  2: Hierarchical output (best for visually understanding bundle)
-//  3: Save as OSC bundle translated to string used in LoRa/nRF transmissions 
-//
 // @param file       The file to save bundle to
 // @param bndl       The bundle to be saved
-// @param format     How to format the saved bundle in the SD card file
 // @param timestamp  Format of timestamp (if any)
+//
 bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
 {
-	if ( !sd_found || !check_millis() ) return false;
+	char device_id[30];
+	osc_extract_header_to_section(bndl.getOSCMessage(0), 5, device_id);
 
-	LOOM_DEBUG_Println("HERE");
+	int len = bundle_num_data_pairs(bndl)*2;
+	String key_values[len];
 
-	// #if is_lora == 1
-		digitalWrite(8, HIGH); 	// if using LoRa
-	// #endif
+	convert_bundle_to_array_key_value(bndl, key_values, len);
 
-	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
-	SDFile = SD.open(file, FILE_WRITE);
+	bool status = save_array(file, key_values, len, ',', timestamp, true, device_id);
 
-	if ( SDFile ) {
-		LOOM_DEBUG_Println2("Saving bundle to SD file: ", file);
-
-		// Optionally add some form of timestamp
-		// #if is_rtc == 1
-		// 	if ((format != 0) && (timestamp > 0) && (timestamp <= 4)) {
-		// 		sd_write_timestamp(file, timestamp, ',');
-		// 	}
-		// #endif
-
-
-		OSCMessage *msg;
-		OSCBundle tmp_bndl;
-		flatten_bundle(bndl, tmp_bndl);
-		// convert_bundle_structure(bndl, tmp_bndl, SINGLEMSG);
-		LOOM_DEBUG_Println("Converted Bundle:");
-		print_bundle(tmp_bndl);
-
-		if ( SDFile.position() == 0) { // Create Header
-
-			// Timestamp field(s)
-			// #if is_rtc == 1
-			// 	switch (timestamp) {
-			// 		case 1: SDFile.print("Date,");      break;
-			// 		case 2: SDFile.print("Time,");      break;
-			// 		case 3: SDFile.print("Date,Time,"); break;
-			// 		case 4:	SDFile.print("Date_Time,"); break;
-			// 		default: break;
-			// 	}
-			// #endif
-
-			// Address field
-			SDFile.print("Address,");
-
-			// Data fields
-			msg = tmp_bndl.getOSCMessage(0);
-			for (int i = 0; i < msg->size(); i+=2) {
-				SDFile.print(get_data_value(msg, i));
-				SDFile.print( (i <= msg->size()-3) ? ',' : '\n' );
-			}
-		}
-
-		// #if is_rtc == 1
-		// 	if ((timestamp > 0) && (timestamp <= 4)) {
-		// 		sd_write_timestamp(file, timestamp, ',');
-		// 	}
-		// #endif	
-		msg = tmp_bndl.getOSCMessage(0);
-		SDFile.print(get_address_string(msg)+',');
-		for (int i = 1; i < msg->size(); i+=2) {
-			SDFile.print( get_data_value(msg, i) );
-			SDFile.print( (i < msg->size()-1) ? ',' : '\n' );
-		}
-		// SDFile.println();
-	
-		SDFile.close();
-		return true;
-
-	} else {
-		LOOM_DEBUG_Println2("Error opening: ", file);
-		return false;
-	}
-
-
+	return status;
 }
 
 
@@ -260,7 +185,7 @@ bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
 //   3: both date and time added (two fields)
 //   4: both date and time added (combined field)
 template <typename T>
-bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int timestamp) 
+bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int timestamp, bool has_keys, char* device_id) 
 {
 	if ( !sd_found || !check_millis() ) return false;
 
@@ -268,31 +193,72 @@ bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int tim
 	digitalWrite(8, HIGH); 	// if using LoRa
 	// #endif
 
+
+
 	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
-	SDFile = SD.open(file, FILE_WRITE);
+	File SDFile = SD.open(file, FILE_WRITE);
 
+	// If file successfully opened
 	if (SDFile) {
-		LOOM_DEBUG_Print3("Saving array to SD file: ", file, " ...");
+		LOOM_DEBUG_Print3("Saving array to SD file: '", file, "' ...");
 
-		// Optionally add some form of timestamp
-		// #if is_rtc == 1
-		// 	if ((timestamp > 0) && (timestamp <= 4)) {
-		// 		sd_write_timestamp(file, timestamp, delimiter);
-		// 	}
-		// #endif
+		// Array is assumed to have alternating keys and values
+		if (has_keys) {
 
-		for (int i = 0; i < len-1; i++) {
-			SDFile.print(data[i]);
-			SDFile.print(delimiter);
+			char time_key[30], time_val[30];
+
+			if (timestamp) {
+				// This needs to reference some rtc
+				// get_timestamp(time_key, time_val, delimiter, timestamp);
+			}
+
+			// Check if at first row (create header)
+			if ( SDFile.position() == 0) {
+
+				if (timestamp) {
+					// SDFile.print(time_key);
+				}
+
+				if (strlen(device_id) > 0) {
+					SD_print_aux(SDFile, "Address", delimiter);
+				}
+
+				// Print keys
+				for (int i = 0; i < len-2; i+=2) {
+					SD_print_aux(SDFile, data[i], delimiter);
+				}
+				SDFile.println(data[len-2]);
+			}
+
+			if (strlen(device_id) > 0) {
+				SD_print_aux(SDFile, device_id, delimiter);
+			}
+
+			// Print values 
+			for (int i = 1; i < len-2; i+=2) {
+				SD_print_aux(SDFile, data[i], delimiter);
+			}
+			SDFile.println(data[len-1]);
+		} 
+
+		// Array is assume to only have values
+		else {
+			for (int i = 0; i < len-1; i++) {
+				SD_print_aux(SDFile, data[i], delimiter);
+			}
+			SDFile.println(data[len-1]);
 		}
 
-		SDFile.print(data[len-1]);
-		SDFile.println();
 		SDFile.close();
 		LOOM_DEBUG_Println("Done");
+		
 		return true;
-	} else {
+	} 
+	
+	// If file could not be opened
+	else {
 		LOOM_DEBUG_Println2("Error opening: ", file);
+		
 		return false;
 	}
 
