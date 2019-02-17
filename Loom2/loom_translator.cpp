@@ -215,8 +215,8 @@ void flatten_bundle(OSCBundle& bndl, OSCBundle& out_bndl)
 				case 's' : msg->getString(j+1, buf, 80);  new_msg.add(buf);  break;
 				default  : LOOM_DEBUG_Println("Unsupported data data_type.");
 			}
-		}
-	} // of for
+		} // of for j
+	} // of for i
 
 	out_bndl.add(new_msg);
 }
@@ -302,53 +302,6 @@ void convert_bundle_to_arrays_assoc(OSCBundle& bndl, String keys[], String value
 }
 
 
-template <typename T>
-void convert_bundle_to_array(OSCBundle& bndl, T data [], int len)
-{
-	String tmp_strings[len];
-	convert_bundle_to_array_key_value(bndl, tmp_strings, len);
-	convert_array(tmp_strings, data, len);
-}
-
-
-// Not verified to be fully functional yet
-void convert_bundle_to_array_w_header(OSCBundle& bndl, String data [], int len)
-{
-	// LOOM_DEBUG_Println("In convert bundle to array w header");
-	String tmpStrs[len-1];
-	char buf[50];
-
-	// OSCMessage *msg;
-	
-	bndl.getOSCMessage(0)->getAddress(buf, 0);
-	// Serial.print("Address ");
-	// Serial.println(buf);
-
-	// print_bundle(bndl);
-	// bndl->getOSCMessage(0)->getAddress(tmp);
-
-	convert_bundle_to_array(bndl, tmpStrs, len-1);
-
-	LOOM_DEBUG_Println("Done convert_bundle_to_array");
-
-	// print_bundle(bndl);
-
-
-
-	LOOM_DEBUG_Println("Done getting address");
-
-	data[0] = String(buf);
-
-	LOOM_DEBUG_Println("Done setting data 0");
-
-	for (int i = 1; i < len; i++) {
-		data[i] = tmpStrs[i-1];
-	}
-
-	LOOM_DEBUG_Println("Done copying");
-}
-
-
 
 
 
@@ -414,19 +367,6 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 	}
 }
 
-template <typename T>
-void convert_array_assoc_to_key_value(String keys [], T values [], String key_values [], int assoc_len, int kv_len)
-{
-	if ( kv_len < 2*assoc_len ) {
-		LOOM_DEBUG_Println("Key-values array is not at least twice the size of keys and values arrays, cannot merge");
-		return;
-	}
-	for (int i = 0; i < assoc_len; i++) {
-		key_values[i*2]   = keys[i];
-		key_values[i*2+1] = String(values[i]);
-	}
-}
-
 
 
 
@@ -438,25 +378,22 @@ void convert_array_assoc_to_key_value(String keys [], T values [], String key_va
 
 // Interpret is an optional parameter in the following 4 array to 
 // bundle functions (8 if counting overloaded versions)
-//
-// Floats may not work correctly with 32u4
 // 
 // The encoding is as follows:
 //  0 - 3 assume elements are in [key1, value1, key2, value2...] format,
 //        with even indexes being keys, and will be left as strings
 //        and odd indexes being data, and will be interpreted as specified
-//   0:  Smart   (int->int, float->float, other->string) 
+//    0:  Smart   (int->int, float->float, other->string) 
 //                 [This is the default if interpret is not specified]
-//   1: Int     (non-ints will become 0)
-//   2: Float   (non-floats will become 0)
-//   3: String  (does no extra manipulation, leaves as strings)
+//    1: Int     (non-ints will become 0)
+//    2: Float   (non-floats will become 0)
+//    3: String  (does no extra manipulation, leaves as strings)
 //
 //  4-6 do NOT assume key value pairs and will also interpret even indexes as specified,
 //      use with caution
-//      *Note: likely will be issues when making multi-message bundles with below option
-//   4: Smart-All 
-//   5: Int-All
-//   6: Float-All
+//    4: Smart-All 
+//    5: Int-All
+//    6: Float-All
 
 
 //	
@@ -466,11 +403,11 @@ void convert_array_assoc_to_key_value(String keys [], T values [], String key_va
 // 
 // @param keys_values    The flat array of keys and values  
 // @param bndl           The flat array of keys and values to be filled by combining 'keys' and 'values'
-// @param packet_header  The address to add to bundle/messages 
+// @param address  The address to add to bundle/messages 
 // @param kv_len         The length of the 'keys_values' array 
 // @param interprt       (see comment at start of section above for details about the parameter)
 //
-void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char packet_header[], int kv_len, BundleStructure format, int interpret)
+void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char* address, int kv_len, int interpret)
 {
 	if ((interpret < 0) || (interpret > 6)) {
 		LOOM_DEBUG_Println3("'", interpret, "' is not a valid way to interpret array when converting to bundle");
@@ -512,25 +449,22 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, ch
 	} // of for
 
 	// Add address string to message
-	char address[80];
-	if (packet_header[0] == '/') {
-		sprintf(address, "%s/data", packet_header);
+	char full_address[80];
+	if (address[0] == '/') {
+		sprintf(full_address, "%s/data", address);
 	} else {
-		sprintf(address, "/%s/data", packet_header);
+		sprintf(full_address, "/%s/data", address);
 	}
 
-	tmpMsg.setAddress(address);
+	tmpMsg.setAddress(full_address);
 	bndl.add(tmpMsg);
 
 	// If multi-message format requested
-	if (format == MULTIMSG) {
-		convert_bundle_structure(bndl, MULTIMSG);
-	}
+	// if (format == MULTIMSG) {
+	// 	convert_bundle_structure(bndl, MULTIMSG);
+	// }
 }
 
-void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char packet_header[], int kv_len, BundleStructure format) {
-	convert_key_value_array_to_bundle(key_values, bndl, packet_header, kv_len, format, 0); 
-}
 
 
 
@@ -544,46 +478,30 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, ch
 // @param keys           The array of keys  
 // @param values         The array to values
 // @param bndl           The flat array of keys and values to be filled by combining 'keys' and 'values'
-// @param packet_header  The address to add to bundle/messages 
+// @param address  The address to add to bundle/messages 
 // @param assoc_len      The length of the 'keys' and 'values' arrays (should be the same)
 // @param format         The output bundle structure (single or multiple messages)
 // @param interpret       (see comment at start of section above for details about the parameter)
 //
-void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char packet_header[], int assoc_len, BundleStructure format, int interpret)
+void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char* address, int assoc_len, int interpret)
 {
 	// Convert to single array first 
 	int kv_len = 2*assoc_len;
 	String key_values[kv_len];
 	convert_array_assoc_to_key_value(keys, values, key_values, assoc_len, kv_len);
 	// Then from key-value to desired bundle structure
-	convert_key_value_array_to_bundle(key_values, bndl, packet_header, kv_len, format, interpret);
+	convert_key_value_array_to_bundle(key_values, bndl, address, kv_len, interpret);
 }
 
-// OVERLOADED version of the previous function
-// Simply calls the previous function with an 'interpret' value of 0
-// (see comment at start of section above for details about the parameter)
-// void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char packet_header[], int assoc_len, BundleStructure format) { 
-// 	convert_assoc_arrays_to_bundle(keys, values, bndl, packet_header, assoc_len, format, 0); 
-// }
 
 template <typename T>
-void convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle& bndl, char packet_header[], int assoc_len, BundleStructure format)
+void convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle& bndl, char* address, int assoc_len)
 {
 	String converted_values[assoc_len];
 	convert_array(values, converted_values, assoc_len);
-	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, packet_header, assoc_len, format, 0);
+	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, address, assoc_len, 0);
 
 }
-
-// Conversion from array of non-Strings to single message bundle   
-template <typename T>   
-void convert_array_to_bundle(T data [], OSCBundle& bndl, char packet_header[], int len)
-{
-	bndl.empty();
-	bndl.add(packet_header);
-	append_to_bundle(bndl, data, len);
-}
-
 
 
 
@@ -594,16 +512,24 @@ void convert_array_to_bundle(T data [], OSCBundle& bndl, char packet_header[], i
 
 
 int convert_string_to_int(char* s) 
-{ return (int)strtol(s, NULL, 10); }
+{ 
+	return (int)strtol(s, NULL, 10); 
+}
 
 float convert_string_to_float(char* s) 
-{ return strtof(s, NULL); }
+{ 
+	return strtof(s, NULL); 
+}
 
 int convert_string_to_int(String s) 
-{ return (int)strtol(s.c_str(), NULL, 10); }
+{ 
+	return (int)strtol(s.c_str(), NULL, 10); 
+}
 
 float convert_string_to_float(String s) 
-{ return strtof(s.c_str(), NULL); }
+{ 
+	return strtof(s.c_str(), NULL); 
+}
 
 
 
@@ -634,21 +560,6 @@ void convert_array(String src [], char dest [][20], int count)
 { 
 	for (int i = 0; i < count; i++) 
 		src[i].toCharArray(dest[i], 10); 
-}
-
-template <typename Tin> 
-void convert_array(Tin src[], String dest[], int count)
-{ 
-	for (int i = 0; i < count; i++) 
-		dest[i] = String(src[i]); 
-}
-
-template <typename Tin, typename Tout> 
-void convert_array(Tin src [], Tout dest[], int count)
-{ 
-	String tmps[count]; 
-	convert_array(src, tmps, count); 
-	convert_array(tmps, dest, count); 
 }
 
 
