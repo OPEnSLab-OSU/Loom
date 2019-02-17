@@ -28,8 +28,6 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Servo();
 
-	// --- PUBLIC METHODS ---
-
 	void print_config();
 	void print_state();
 	void measure() {}

@@ -41,7 +41,6 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Fona();
 
-	// --- PUBLIC METHODS ---
 
 	void print_config();
 	void print_state();

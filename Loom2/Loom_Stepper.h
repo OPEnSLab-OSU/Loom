@@ -9,6 +9,7 @@
 #include <Adafruit_PWMServoDriver.h>
 
 
+
 #define NUM_STEPPERS 4
 
 
@@ -27,6 +28,7 @@ public:
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Stepper();
+
 
 	void print_config();
 	void print_state() {}

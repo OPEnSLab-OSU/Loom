@@ -64,7 +64,7 @@ public:
 
 
 	// Should this be external?
-	bool log_to_pushingbox(OSCBundle* bndl);
+	// bool log_to_pushingbox(OSCBundle& bndl);
 
 private:
 

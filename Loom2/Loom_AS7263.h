@@ -2,7 +2,6 @@
 #ifndef LOOM_AS7263_h
 #define LOOM_AS7263_h
 
-
 #include "Loom_I2C_Sensor.h"
 
 #include "AS726X.h"

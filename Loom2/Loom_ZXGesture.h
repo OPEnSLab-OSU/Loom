@@ -2,7 +2,6 @@
 #ifndef LOOM_ZXGESTURE_h
 #define LOOM_ZXGESTURE_h
 
-
 #include "Loom_I2C_Sensor.h"
 
 #include <Wire.h>

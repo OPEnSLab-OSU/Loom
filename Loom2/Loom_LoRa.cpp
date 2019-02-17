@@ -86,7 +86,7 @@ void Loom_LoRa::print_config()
 
 
 // Build OSC Bundle from packet if any exists
-bool Loom_LoRa::receive_bundle(OSCBundle *bndl) 
+bool Loom_LoRa::receive_bundle(OSCBundle& bndl) 
 {
 	if ( manager->available() ) {
 		uint8_t len = RH_RF95_MAX_MESSAGE_LEN;
@@ -129,9 +129,9 @@ bool Loom_LoRa::receive_bundle(OSCBundle *bndl)
 
 // Send an OSC bundle
 // Should overload or use default args to optionally allow default address
-bool Loom_LoRa::send_bundle(OSCBundle *bndl, uint16_t destination) 
-// bool send_bundle(OSCBundle *bndl, uint16_t destination=01) 
-// bool send_bundle(OSCBundle *bndl) 
+bool Loom_LoRa::send_bundle(OSCBundle& bndl, uint16_t destination) 
+// bool send_bundle(OSCBundle& bndl, uint16_t destination=01) 
+// bool send_bundle(OSCBundle& bndl) 
 {
 	LOOM_DEBUG_Println2("Sending LoRa bundle to address: ", destination);
 
@@ -152,7 +152,7 @@ bool Loom_LoRa::send_bundle(OSCBundle *bndl, uint16_t destination)
 	return is_sent;
 }
 
-bool Loom_LoRa::send_bundle(OSCBundle *bndl) 
+bool Loom_LoRa::send_bundle(OSCBundle& bndl) 
 {
 	send_bundle(bndl, friend_address);
 }
@@ -160,7 +160,7 @@ bool Loom_LoRa::send_bundle(OSCBundle *bndl)
 
 
 // Broadcast an OSC bundle
-void Loom_LoRa::broadcast_bundle(OSCBundle *bndl) 
+void Loom_LoRa::broadcast_bundle(OSCBundle& bndl) 
 {
 
 }

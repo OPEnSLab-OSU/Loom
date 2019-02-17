@@ -12,14 +12,9 @@ enum InternetPlatform { INT_WIFI, ETHERNET, CELLULAR_2G };
 class LoomInternetPlat : public LoomModule
 {
 
-protected:
-	// --- PROTECTED MEMBERS ---
-	
+protected:	
 	
 public:
-
-	// --- PUBLIC MEMBERS ---
-
 
 	// --- CONSTRUCTOR ---
 	LoomInternetPlat(	char* module_name
@@ -31,8 +26,6 @@ public:
 
 	static char* enum_internet_plat_string(InternetPlatform p);
 
-
-	// --- PUBLIC METHODS ---
 
 	virtual void print_config();
 	virtual void print_state();
@@ -51,12 +44,6 @@ public:
 	virtual bool log_to_pushingbox(OSCBundle* bndl);
 
 private:
-
-// --- PRIVATE MEMBERS ---
-
-// --- PRIVATE METHODS --- 
-
-
 
 };
 

@@ -2,8 +2,8 @@
 #ifndef LOOM_DECAGON_5TM_h
 #define LOOM_DECAGON_5TM_h
 
-
 #include "Loom_SDI12_Sensor.h"
+
 
 
 class Loom_Decagon5TM : public LoomSDI12Sensor

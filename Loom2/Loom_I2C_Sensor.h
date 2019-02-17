@@ -2,7 +2,6 @@
 #ifndef LOOM_I2C_SENSOR_h
 #define LOOM_I2C_SENSOR_h
 
-
 #include "Loom_Sensor.h"
 
 
@@ -27,7 +26,6 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~LoomI2CSensor();
 
-	// --- PUBLIC METHODS ---
 
 	virtual void print_config();
 
