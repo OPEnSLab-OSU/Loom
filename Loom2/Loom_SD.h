@@ -58,7 +58,6 @@ public:
 	virtual ~Loom_SD();
 
 
-	// --- PUBLIC METHODS ---
 
 	void print_config();
 	void set_default_file(char* filename);
@@ -72,11 +71,11 @@ public:
 	void log_bundle(OSCBundle& bndl);
 
 
-// --- SD SAVE BUNDLE --- 
-//
-// @param file       The file to save bundle to
-// @param bndl       The bundle to be saved
-// @param timestamp  Format of timestamp (if any)
+	// --- SD SAVE BUNDLE --- 
+	//
+	// @param file       The file to save bundle to
+	// @param bndl       The bundle to be saved
+	// @param timestamp  Format of timestamp (if any)
 	bool save_bundle(OSCBundle& bndl, char* file, int timestamp);
 
 

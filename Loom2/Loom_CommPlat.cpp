@@ -113,7 +113,7 @@ bool LoomCommPlat::get_compress_messages()
 bool LoomCommPlat::scope_filter(OSCBundle* bndl, int* offset) 
 {
 	// CommPlat needs to be associated with a LoomDevice to filter 
-	if (parent_device == NULL) return true; 
+	if (device_manager == NULL) return true; 
 
 	bool pass = false;
 	char type = get_message_type( bndl->getOSCMessage(0) );
@@ -123,9 +123,9 @@ bool LoomCommPlat::scope_filter(OSCBundle* bndl, int* offset)
 	bndl->getOSCMessage(0)->getAddress(address, 2); // offset of 2 to skip '/<type>'
 
 	switch (type) {
-		case 'D': parent_device->packet_header_device(test); break;
-		case 'S': parent_device->packet_header_subnet(test); break;
-		case 'F': parent_device->packet_header_family(test); break;
+		case 'D': device_manager->packet_header_device(test); break;
+		case 'S': device_manager->packet_header_subnet(test); break;
+		case 'F': device_manager->packet_header_family(test); break;
 		default: break;
 	}
 

@@ -196,11 +196,11 @@ bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
 
 
 		OSCMessage *msg;
-		OSCBundle tmpBndl;
-		flatten_bundle(bndl, tmpBndl);
-		// convert_bundle_structure(bndl, tmpBndl, SINGLEMSG);
+		OSCBundle tmp_bndl;
+		flatten_bundle(bndl, tmp_bndl);
+		// convert_bundle_structure(bndl, tmp_bndl, SINGLEMSG);
 		LOOM_DEBUG_Println("Converted Bundle:");
-		print_bundle(tmpBndl);
+		print_bundle(tmp_bndl);
 
 		if ( SDFile.position() == 0) { // Create Header
 
@@ -219,7 +219,7 @@ bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
 			SDFile.print("Address,");
 
 			// Data fields
-			msg = tmpBndl.getOSCMessage(0);
+			msg = tmp_bndl.getOSCMessage(0);
 			for (int i = 0; i < msg->size(); i+=2) {
 				SDFile.print(get_data_value(msg, i));
 				SDFile.print( (i <= msg->size()-3) ? ',' : '\n' );
@@ -231,7 +231,7 @@ bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
 		// 		sd_write_timestamp(file, timestamp, ',');
 		// 	}
 		// #endif	
-		msg = tmpBndl.getOSCMessage(0);
+		msg = tmp_bndl.getOSCMessage(0);
 		SDFile.print(get_address_string(msg)+',');
 		for (int i = 1; i < msg->size(); i+=2) {
 			SDFile.print( get_data_value(msg, i) );
