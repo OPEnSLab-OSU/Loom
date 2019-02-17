@@ -214,7 +214,7 @@ void LoomRTC::get_timestamp(char* header, char* timestamp, char delimiter, uint8
 			sprintf(timestamp, "%s%c ", get_datestring() ); 
 			break;
 		case 3 :
-			sprintf(header, "Date%c Time", delimiter); 
+			sprintf(header, "Date%c Time%c ", delimiter, delimiter); 
 			sprintf(timestamp, "%s%c %s%c ", get_datestring(), delimiter, get_timestring(), delimiter ); 
 			break;
 		case 4 :

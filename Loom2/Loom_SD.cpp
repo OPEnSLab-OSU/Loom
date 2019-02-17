@@ -3,6 +3,8 @@
 #include "Loom_Macros.h"
 #include "Loom_Translator.h"
 
+#include "Loom_RTC.h"
+
 #include <SD.h>
 #include <SPI.h>
 
@@ -90,8 +92,9 @@ void Loom_SD::list_files()
 
 bool Loom_SD::dump_file(char* file) 
 {
+	if ( !sd_found ) return false;
+
 	#if LOOM_DEBUG == 1
-		if ( !sd_found ) return false;
 
 		// #if is_lora == 1
 		digitalWrite(8, HIGH); 	// if using LoRa
@@ -120,32 +123,6 @@ bool Loom_SD::dump_file(char* file)
 }
 
 
-template <typename T>
-bool Loom_SD::save_elem(char *file, T data, char endchar)
-{	
-	if ( !sd_found ) return false;
-
-	// #if is_lora == 1
-		digitalWrite(8, HIGH); 	// if using LoRa
-	// #endif
-
-	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
-	
-	File SDFile = SD.open(file, FILE_WRITE);
-
-	if (SDFile) {
-		LOOM_DEBUG_Println4("Saving ", data, " to SD file: ", file);
-		SDFile.print(data);
-		SDFile.print(endchar);
-		SDFile.close();
-		return true;
-	} else {
-		LOOM_DEBUG_Println2("Error opening: ", file);
-		return false;
-	}
-
-}
-
 
 void Loom_SD::log_bundle(OSCBundle& bndl) 
 {
@@ -162,12 +139,13 @@ void Loom_SD::log_bundle(OSCBundle& bndl)
 //
 bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
 {
+	// Get device ID
 	char device_id[30];
 	osc_extract_header_to_section(bndl.getOSCMessage(0), 5, device_id);
 
+	// Convert bundle to 
 	int len = bundle_num_data_pairs(bndl)*2;
 	String key_values[len];
-
 	convert_bundle_to_array_key_value(bndl, key_values, len);
 
 	bool status = save_array(file, key_values, len, ',', timestamp, true, device_id);
@@ -193,7 +171,7 @@ bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int tim
 	digitalWrite(8, HIGH); 	// if using LoRa
 	// #endif
 
-
+	bool got_timestamp = false;
 
 	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
 	File SDFile = SD.open(file, FILE_WRITE);
@@ -202,25 +180,33 @@ bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int tim
 	if (SDFile) {
 		LOOM_DEBUG_Print3("Saving array to SD file: '", file, "' ...");
 
+		char time_key[30], time_val[30];
+
+		if (timestamp) {
+			if (device_manager != NULL) {
+				LoomRTC* rtc = device_manager->get_rtc_module(0);
+				if (rtc != NULL) {
+					LOOM_DEBUG_Println2("RTC Object: ", rtc->get_module_name() );
+					rtc->get_timestamp(time_key, time_val, delimiter, timestamp);
+					got_timestamp = true; 
+				}
+			}
+		}
+
 		// Array is assumed to have alternating keys and values
 		if (has_keys) {
-
-			char time_key[30], time_val[30];
-
-			if (timestamp) {
-				// This needs to reference some rtc
-				// get_timestamp(time_key, time_val, delimiter, timestamp);
-			}
 
 			// Check if at first row (create header)
 			if ( SDFile.position() == 0) {
 
-				if (timestamp) {
-					// SDFile.print(time_key);
+				// Add timestamp header
+				if (got_timestamp) {
+					SDFile.print(time_key);
 				}
 
+				// Add address header if address was provided
 				if (strlen(device_id) > 0) {
-					SD_print_aux(SDFile, "Address", delimiter);
+					SD_print_aux(SDFile, "Device", delimiter);
 				}
 
 				// Print keys
@@ -230,6 +216,12 @@ bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int tim
 				SDFile.println(data[len-2]);
 			}
 
+			// Add timestamp
+			if (got_timestamp) {
+				SDFile.print(time_val);
+			}
+
+			// Add device ID if provided
 			if (strlen(device_id) > 0) {
 				SD_print_aux(SDFile, device_id, delimiter);
 			}
@@ -243,6 +235,17 @@ bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int tim
 
 		// Array is assume to only have values
 		else {
+
+			if (got_timestamp) {
+				SDFile.print(time_val);
+			}
+
+			// Add device ID if provided
+			if (strlen(device_id) > 0) {
+				SD_print_aux(SDFile, device_id, delimiter);
+			}
+
+
 			for (int i = 0; i < len-1; i++) {
 				SD_print_aux(SDFile, data[i], delimiter);
 			}

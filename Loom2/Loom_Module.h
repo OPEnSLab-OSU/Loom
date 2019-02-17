@@ -14,7 +14,7 @@
 
 
 // Maybe move out to global so that LoomManager can reference this as well
-enum Verbosity { VERB_OFF, VERB_LOW, VERB_HIGH }; // Move back to "loom_abstract_module_class.h"
+// enum Verbosity { VERB_OFF, VERB_LOW, VERB_HIGH }; // Move back to "loom_abstract_module_class.h"
 
 
 class LoomManager; // Specify that LoomManager exists, defined in own file

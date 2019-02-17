@@ -26,13 +26,12 @@ char* LoomManager::enum_device_type_string(DeviceType t)
 
 
 // --- CONSTRUCTOR ---
-LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint instance, DeviceType device_type, char* module_name)
+LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint instance, DeviceType device_type, Verbosity print_verbosity, Verbosity package_verbosity)
 {
 	this->device_name 	= device_name;
 	this->family 		= family;
 	this->family_num 	= family_num;
 	this->instance 		= instance;
-	// this->module_count 	= 0;
 
 	// Initialize module counts
 	this->other_module_count = 0;
@@ -41,6 +40,10 @@ LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint
 	this->rtc_count          = 0;
 	this->comm_count         = 0;
 	this->log_count          = 0;
+
+	// Set verbosity
+	this->print_verbosity 	= print_verbosity;
+	this->package_verbosity	= package_verbosity;
 
 }
 
@@ -126,6 +129,37 @@ void LoomManager::add_module(LoomLogPlat* log_plat)
 }
 
 
+
+
+LoomModule* LoomManager::get_other_module(int idx)
+{
+	return other_modules[idx];
+}
+
+LoomSensor* LoomManager::get_sensor_module(int idx)
+{
+	return sensor_modules[idx];
+}
+
+LoomActuator* LoomManager::get_actuator_module(int idx)
+{
+	return actuator_modules[idx];
+}
+
+LoomRTC* LoomManager::get_rtc_module(int idx)
+{
+	return rtc_modules[idx];
+}
+
+LoomCommPlat* LoomManager::get_comm_plat_module(int idx)
+{
+	return comm_modules[idx];
+}
+
+LoomLogPlat* LoomManager::get_log_plat_module(int idx)
+{
+	return log_modules[idx];
+}
 
 
 
@@ -264,9 +298,30 @@ DeviceType LoomManager::get_device_type()
 	return device_type; 
 }
 
-
-
 // void set_device_type(DeviceType t) {device_type = t; }
+
+
+
+Verbosity LoomManager::get_print_verbosity()
+{
+	return print_verbosity;
+}
+
+void LoomManager::set_print_verbosity(Verbosity v)
+{
+	print_verbosity = v;
+}
+
+
+Verbosity LoomManager::get_package_verbosity()
+{
+	return package_verbosity;
+}
+
+void LoomManager::set_package_verbosity(Verbosity v)
+{
+	package_verbosity = v;
+}
 
 
 
@@ -320,10 +375,13 @@ void LoomManager::package()
 
 	package_aux( (LoomModule**)other_modules    , other_module_count ); 
 	package_aux( (LoomModule**)sensor_modules   , sensor_count ); 
-	package_aux( (LoomModule**)actuator_modules , actuator_count ); 
-	package_aux( (LoomModule**)rtc_modules      , rtc_count ); 
-	package_aux( (LoomModule**)comm_modules     , comm_count ); 
-	package_aux( (LoomModule**)log_modules      , log_count );
+
+	if (package_verbosity == VERB_HIGH) {
+		package_aux( (LoomModule**)actuator_modules , actuator_count ); 
+		package_aux( (LoomModule**)rtc_modules      , rtc_count ); 
+		package_aux( (LoomModule**)comm_modules     , comm_count ); 
+		package_aux( (LoomModule**)log_modules      , log_count );		
+	}
 }
 
 

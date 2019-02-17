@@ -9,6 +9,9 @@
 #include <OSCBundle.h>
 
 
+class LoomRTC;
+
+
 // See if there is any difference to use the SD breakout
 
 // enum SD_Version { FEATHERWING, BREAKOUT };
@@ -48,7 +51,7 @@ public:
 				uint 			min_filter_delay 	= 1000,
 
 				byte 			chip_select 		= 10,
-				char* 			default_file 		= "new.csv"
+				char* 			default_file 		= "test.csv"
 
 				// SD_Version 		version 			= FEATHERWING,
 				// byte 			reset_pin 			= A2 
@@ -66,8 +69,7 @@ public:
 	void empty_file(char* file);
 	void list_files();
 	bool dump_file(char* file) ;
-	template <typename T>
-	bool save_elem(char *file, T data, char endchar);
+
 	void log_bundle(OSCBundle& bndl);
 
 
