@@ -70,8 +70,8 @@ void setup()
 	SC->print_config();
 
 	// RT = new Loom_DS3231();
-	RT = new Loom_PCF8523();
-	RT->print_config();
+	// RT = new Loom_PCF8523();
+	// RT->print_config();
 
 	MP = new Loom_Multiplexer();
 	MP->print_config();
@@ -90,7 +90,7 @@ void setup()
 	// DeviceManager.add_module(OL);
 	// DeviceManager.add_module(LR);
 	// DeviceManager.add_module(SH);
-	DeviceManager.add_module(RT);
+	// DeviceManager.add_module(RT);
 
 // 
 	DeviceManager.add_module(MP);
@@ -134,21 +134,9 @@ void loop()
 
 	DeviceManager.measure();
 	DeviceManager.package(bndl);
-	SC->log_bundle(bndl);
+	// SC->log_bundle(bndl);
 
-	delay(1000);
 
-	DeviceManager.measure();
-	DeviceManager.package(bndl);
-	SC->log_bundle(bndl);
-
-	delay(1000);
-
-	DeviceManager.measure();
-	DeviceManager.package(bndl);
-	SC->log_bundle(bndl);
-
-	print_bundle(bndl);
 
 	// MP->refresh_sensors();
 	// MP->print_state();
@@ -164,42 +152,6 @@ void loop()
 	LOOM_DEBUG_Println("\nDone");
 	while(1);
 
-	// delay(1000);
-
-	// RT->print_time();
-	// RT->package(&bndl, "prefix");
-	// append_to_bundle_key_value(&bndl, "other", "Weekday", RT->get_weekday());
-
-	// LOOM_DEBUG_Println("SENSOR LIST");
-	// bndl.empty();
-	// MP->get_sensor_list(&bndl);
-	// print_bundle(bndl);
-
-
-	// MP->measure();
-	// bndl.empty();
-	// MP->package(&bndl);
-	// LOOM_DEBUG_Println("MUX PACKAGE");
-	// print_bundle(bndl);
-
-
-	// bndl.empty();	
-	// AS->package(&bndl);
-	// LOOM_DEBUG_Println("ANALOG PACKAGE");
-	// print_bundle(bndl);
-
-	// while(1);
-
-
-	// DeviceManager.measure();
-	// DeviceManager.package(&bndl);
-
-	// // LOOM_DEBUG_Println("Bundle 1:");
-	// print_bundle(bndl);
-
-	// SC->log_bundle(&bndl);
-// 
-	// OL->log_bundle(&bndl);
 
 
 
