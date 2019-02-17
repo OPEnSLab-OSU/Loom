@@ -143,7 +143,7 @@ void loop()
 
 	// MP->package(&bndl);
 
-	LOOM_DEBUG_Println("Original");
+	LOOM_DEBUG_Println("Original:");
 	print_bundle(bndl);
 
 	// convert_bundle_structure(&bndl, &bndl2, SINGLEMSG);
@@ -162,10 +162,17 @@ void loop()
 	// LOOM_DEBUG_Println("Flattened");
 	// print_bundle(bndl);
 
+	// LOOM_DEBUG_Println("Array:");
 	String key_values[25];
-	convert_bundle_to_array_key_value(bndl, key_values, 25);
-	print_array(key_values, 25);
+	String keys[25];
+	String vals[25];
 
+	// convert_bundle_to_array_key_value(bndl, key_values, 25);
+	convert_bundle_to_arrays_assoc(bndl, keys, vals, 25);
+	LOOM_DEBUG_Println("Keys:");
+	print_array(keys, 25);
+	LOOM_DEBUG_Println("Vals:");
+	print_array(vals, 25);
 
 
 	LOOM_DEBUG_Println("\nDone");

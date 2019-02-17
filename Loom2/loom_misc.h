@@ -22,12 +22,14 @@ void print_bundle(OSCBundle& bndl);
 template<typename T> 
 void print_array(T data [], int len, int format=1)
 {
-	for (int i = 0; i < len; i++) {
-		if (format == 1) { LOOM_DEBUG_Println(data[i]); }
-		if (format  > 1) { LOOM_DEBUG_Print2(data[i], " "); }
-		if ((format > 2) && (i%5==0)) { LOOM_DEBUG_Println(); }
-	}
-	LOOM_DEBUG_Println();
+	#if LOOM_DEBUG == 1
+		for (int i = 0; i < len; i++) {
+			if (format == 1) { Serial.println(data[i]); }
+			if (format  > 1) { Serial.print(data[i]); Serial.print(" "); }
+			if ((format > 2) && (i%5==0)) { Serial.println(); }
+		}
+		Serial.println();
+	#endif
 }
 
 
@@ -133,23 +135,23 @@ char* extract_device(OSCBundle& bndl);
 enum AppendType { NEW_MSG=-2, LAST_MSG=-1 };
 
 // Char* key versions
-void append_to_bundle_aux(OSCBundle& bndl, const char* key, const int elem,      const int msg_idx);
-void append_to_bundle_aux(OSCBundle& bndl, const char* key, const uint16_t elem, const int msg_idx);
-void append_to_bundle_aux(OSCBundle& bndl, const char* key, const float elem,    const int msg_idx);
-void append_to_bundle_aux(OSCBundle& bndl, const char* key, const String elem,   const int msg_idx);
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, int elem,      int msg_idx);
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, uint16_t elem, int msg_idx);
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, float elem,    int msg_idx);
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, String elem,   int msg_idx);
 template <typename T> 
-void append_to_bundle_aux(OSCBundle& bndl, const char* key, const T elem, const int msg_idx)
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, T elem, int msg_idx)
 {
 	bndl.getOSCMessage(msg_idx)->add(key).add( elem );
 }
 
 // Int key versions
-void append_to_bundle_aux(OSCBundle& bndl, const int key, const int elem,      const int msg_idx);
-void append_to_bundle_aux(OSCBundle& bndl, const int key, const uint16_t elem, const int msg_idx);
-void append_to_bundle_aux(OSCBundle& bndl, const int key, const float elem,    const int msg_idx);
-void append_to_bundle_aux(OSCBundle& bndl, const int key, const String elem,   const int msg_idx);
+void append_to_bundle_aux(OSCBundle& bndl, int key, int elem,      int msg_idx);
+void append_to_bundle_aux(OSCBundle& bndl, int key, uint16_t elem, int msg_idx);
+void append_to_bundle_aux(OSCBundle& bndl, int key, float elem,    int msg_idx);
+void append_to_bundle_aux(OSCBundle& bndl, int key, String elem,   int msg_idx);
 template <typename T> 
-void append_to_bundle_aux(OSCBundle& bndl, const int key, const T elem, const int msg_idx)
+void append_to_bundle_aux(OSCBundle& bndl, int key, T elem, int msg_idx)
 {
 	bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem );
 }

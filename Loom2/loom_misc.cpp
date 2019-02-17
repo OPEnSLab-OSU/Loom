@@ -466,28 +466,28 @@ char* extract_device(OSCBundle& bndl)
 
 
 
-void append_to_bundle_aux(OSCBundle& bndl, const char* key, const int elem, int message_index)
-{ bndl.getOSCMessage(message_index)->add(key).add( (int32_t)elem ); }
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, int elem, int msg_idx)
+{ bndl.getOSCMessage(msg_idx)->add(key).add( (int32_t)elem ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, const char* key, const uint16_t elem, int message_index)
-{ bndl.getOSCMessage(message_index)->add(key).add( (int32_t)elem ); }
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, uint16_t elem, int msg_idx)
+{ bndl.getOSCMessage(msg_idx)->add(key).add( (int32_t)elem ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, const char* key, const float elem, int msg_idx)
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, float elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( elem ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, const char* key, const String elem, int msg_idx)
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, String elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( elem.c_str() ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, const int key, const int elem, int message_index)
-{ bndl.getOSCMessage(message_index)->add( (int32_t)key ).add( (int32_t)elem ); }
+void append_to_bundle_aux(OSCBundle& bndl, int key, int elem, int msg_idx)
+{ bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( (int32_t)elem ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, const int key, const uint16_t elem, int message_index)
-{ bndl.getOSCMessage(message_index)->add( (int32_t)key ).add( (int32_t)elem ); }
+void append_to_bundle_aux(OSCBundle& bndl, int key, uint16_t elem, int msg_idx)
+{ bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( (int32_t)elem ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, const int key, const float elem, int msg_idx)
+void append_to_bundle_aux(OSCBundle& bndl, int key, float elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem ); }
 
-void append_to_bundle_aux(OSCBundle& bndl, const int key, const String elem, int msg_idx)
+void append_to_bundle_aux(OSCBundle& bndl, int key, String elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem.c_str() ); }
 
 
