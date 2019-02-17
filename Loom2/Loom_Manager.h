@@ -1,6 +1,6 @@
 
-#ifndef device_manager_h
-#define device_manager_h
+#ifndef LOOM_MANAGER_h
+#define LOOM_MANAGER_h
 
 
 // #include "loom_abstract_module_class.h"
@@ -78,6 +78,7 @@ protected:
 	uint log_count;
 
 
+
 	// Array of pointers to enabled modules
 	// Maybe preprocessor defined?
 	// LoomModule * modules[10];
@@ -152,6 +153,7 @@ public:
 
 // does this check type and sort into arrays accordingly, or is there specific add module methods per type
 
+	void add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
 	void add_module(LoomModule* LM);
 
 	// Over loaded as to sort by module type
@@ -167,7 +169,7 @@ public:
 
 	// void module_enable(LoomModule* LM, bool e) ?
 
-
+	void list_modules_aux(LoomModule** modules, uint len, char* module_type);
 	void list_modules();
 
 
@@ -227,7 +229,11 @@ public:
 // void print_data
 
 
-	void measure();
+
+	void measure_aux(LoomModule** modules, uint len);
+	void package_aux(LoomModule** modules, uint len);
+
+	void measure();  
 	void package();
 	void package(OSCBundle& bndl);
 
@@ -237,194 +243,11 @@ public:
 
 private:
 
-// --- PRIVATE METHODS --- 
+
 
 };
 
 
-#endif
+#endif // of LOOM_MANAGER_h
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// #ifndef LOOM_DEVICE_h
-// #define LOOM_DEVICE_h
-
-
-// #include "loom_abstract_module_class.h"
-
-// #include "loom_misc.h"
-// #include "loom_translator.h"
-
-
-
-// enum DeviceType { HUB, NODE, REPEATER };
-
-
-
-// class LoomManager
-// {
-
-// protected:
-// 	// --- PROTECTED MEMBERS ---
-// 	char* device_name;		// The name of the device
-
-// 	char* 		family;			// The family the device belongs to
-// 	uint 		family_num;		// The subnet of the family
-// 	uint 		instance;		// The instance / channel ID within the subnet
-
-// 	DeviceType 	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
-
-// 	uint8_t		module_count;		//
-
-// 	LoomModule* modules[10];
-
-
-// 	// Array of pointers to enabled modules
-// 	// Maybe preprocessor defined?
-// 	// LoomModule * modules[10];
-// 	// or
-// 	// LoomModule ** modules;     // probably not - I think only mux and analog should be dynamic
-// 	//   then later
-// 	//  modules = new LoomModule*[10];
-
-// 	// Maybe separate sensor, actuator, and various platform arrays?
-
-// 	// would allow for easy log-, send- all functionality 
-// 	// and better calls to measure()
-
-// 	OSCBundle bundle;	// Not sure if this will always work...
-
-// public:
-
-
-// 	static char* enum_device_type_string(DeviceType t);
-
-
-
-// 	// --- CONSTRUCTOR ---
-
-// 								// The parameters to the constructor will be defined in config
-// 	LoomManager( char* device_name 	= "LoomManager",
-// 				char* family 		= "Loom",
-// 				uint  family_num 	= 1,
-// 				uint  instance 		= 1,
-
-// 				DeviceType device_type	= NODE
-// 			  );
-
-// 	// LoomManager( char* device_name,
-// 	// 		char* family,
-// 	// 		uint  family_num,
-// 	// 		uint  instance,
-
-// 	// 		DeviceType device_typ
-// 	// 	  );
-
-// 	// --- DESTRUCTOR ---
-// 	~LoomManager();// {}
-
-
-// 	// --- PUBLIC METHODS ---
-// 	void print_config();
-
-
-// 	void add_module(LoomModule* LM);
-// 	// void module_enable(LoomModule* LM, bool e) ?
-
-// 	void list_modules();
-
-
-// 		// Should this return a char* or copy into char array passed by reference?
-// 		// Could overload to do either like String does with .toCharArray() and .c_str()
-// 	// char* packet_header() {}
-// 	// void packet_header(char* buf) {}
-
-// 	void packet_header_family(char* buf);
-
-// 	char* packet_header_family();
-
-
-// 	void packet_header_subnet(char* buf);
-
-// 	char* packet_header_subnet();
-
-
-// 	void packet_header_device(char* buf);
-
-// 	char* packet_header_device();
-
-
-
-// 	char* get_family();
-// 	void set_family(char* f);
-
-// 	int  get_family_num();
-// 	void set_family_num(int n);
-
-// 	int  get_instance_num();
-// 	void set_instance_num(int n);
-
-// 	DeviceType get_device_type();
-// 	// void set_device_type(DeviceType t) {device_type = t; }
-
-
-
-
-
-// // ** MAYBE IMPLEMENT THESE HERE **
-// // might not be needed becaused of CommPlat and other
-
-// //but probably put here, because measure and package aren't managed elsewhere
-
-// 	// void measure();
-// 	// void package();
-// 	// void receive(); // not srue if this should take arg to specify platform
-// 	// void send();
-// 	// void log(Enum );
-// 	// void sleep(); // could have default sleep behavior?
-
-// // void current_bundle(OSCBundle* bndl) ? return a stored bundle
-// // void print_data
-
-
-// 	void measure();
-
-
-// 	void package();
-
-
-// 	void package(OSCBundle& bndl);
-
-// 	void print_current_bundle();
-
-
-
-// 	// Methods to set package and print verbosities all at once
-
-// private:
-
-// // --- PRIVATE METHODS --- 
-
-// };
-
-
-
-
-
-// #endif
