@@ -268,8 +268,9 @@ char* osc_extract_header_from_section(OSCMessage* msg, int section)
 int osc_address_section_count(String s)
 {
 	int count = 0;
-	for (int i = 0; i < s.length(); i++) 
+	for (int i = 0; i < s.length(); i++) { 
 		if (s[i] == '/') count++;
+	}
 
 	return count;
 }
@@ -289,81 +290,6 @@ int osc_address_section_count(OSCBundle* bndl)
 
 
 
-
-// ** VERSIONS FOR NEW ADDRESSING SCHEME **
-
-
-
-
-
-// void osc_extract_family(OSCMessage* msg, char* result)
-// {
-// 	osc_extract_header_section(msg, 1, result);	
-// 	snprintf(result, strchr(result, '_') - result + 1 , "%s", result);
-// }
-
-// char* osc_extract_family(OSCMessage* msg)
-// {
-// 	char result[50];
-// 	osc_extract_family(msg, result);
-// 	return (char*)result;
-// }
-
-
-// void osc_extract_family(OSCBundle* bndl, char* result)
-// {
-// 	if ((bndl) && (bndl->size()>0)) {
-// 		osc_extract_family(bndl->getOSCMessage(0), result);
-// 	} else {
-// 		sprintf(result, "\0");
-// 	}
-// }
-
-// char* osc_extract_family(OSCBundle* bndl)
-// {
-// 	if ((bndl) && (bndl->size()>0)) {
-// 		return osc_extract_family(bndl->getOSCMessage(0));
-// 	} else {
-// 		return "";
-// 	}
-// }
-
-
-
-// // --- OSC EXTRACT FAMILY NUMBER --- 
-// //
-// // Get the family number from a bundle or message
-// // Assumes /<family>_# is first part of address
-// // 
-// // @return Family number
-// //
-// int osc_extract_family_number(OSCMessage* msg) 
-// {
-// 	if ( osc_address_section_count(msg) < 3 ) 
-// 		return -1;
-// 	char* ptr = strchr( osc_extract_header_section(msg, 1) , '_' );
-// 	return (ptr) 
-// 			? (int)strtol(ptr+1, NULL, 10) 
-// 			: -1;
-// }
-
-// int osc_extract_family_number(OSCBundle* bndl) 
-// {
-// 	return ((bndl) && (bndl->size()>0)) 
-// 			? osc_extract_family_number(bndl->getOSCMessage(0)) 
-// 			: -1;
-// 	// if ((bndl) && (bndl->size()>0)) {
-// 	// 	return osc_extract_family_number(bndl->getOSCMessage(0)) 
-// 	// } else {
-// 	// 	return -1
-// 	// }
-
-// }
-
-
-
-
-// add the char* return versions here
 
 
 

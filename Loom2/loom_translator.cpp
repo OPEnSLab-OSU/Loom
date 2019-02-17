@@ -333,6 +333,7 @@ void convert_array_key_value_to_assoc(String key_values [], String keys [], Stri
 		LOOM_DEBUG_Println("Keys or values array not large enough to hold all of keys/values, cannot split");
 		return;
 	}
+	
 	for (int i = 0; i < kv_len; i+=2) {
 		keys[i/2]   = key_values[i];
 		values[i/2] = key_values[i+1]; 	
@@ -361,6 +362,7 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 		LOOM_DEBUG_Println("Key-values array is not at least twice the size of keys and values arrays, cannot merge");
 		return;
 	}
+
 	for (int i = 0; i < assoc_len; i++) {
 		key_values[i*2]   = keys[i];
 		key_values[i*2+1] = values[i];
@@ -458,11 +460,6 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, ch
 
 	tmpMsg.setAddress(full_address);
 	bndl.add(tmpMsg);
-
-	// If multi-message format requested
-	// if (format == MULTIMSG) {
-	// 	convert_bundle_structure(bndl, MULTIMSG);
-	// }
 }
 
 
@@ -491,16 +488,6 @@ void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle&
 	convert_array_assoc_to_key_value(keys, values, key_values, assoc_len, kv_len);
 	// Then from key-value to desired bundle structure
 	convert_key_value_array_to_bundle(key_values, bndl, address, kv_len, interpret);
-}
-
-
-template <typename T>
-void convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle& bndl, char* address, int assoc_len)
-{
-	String converted_values[assoc_len];
-	convert_array(values, converted_values, assoc_len);
-	convert_assoc_arrays_to_bundle(keys, converted_values, bndl, address, assoc_len, 0);
-
 }
 
 

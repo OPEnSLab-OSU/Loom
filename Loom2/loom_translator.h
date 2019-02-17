@@ -68,7 +68,7 @@ void convert_array_assoc_to_key_value(String keys [], T values [], String key_va
 // --- Conversion from array to bundle formats ---
 void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char* address, int kv_len, int interpret=0);
 
-void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char* address, int assoc_len, int interpret);
+void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char* address, int assoc_len, int interpret=0);
 
 
 template <typename T>
