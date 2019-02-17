@@ -7,6 +7,8 @@
 // General Macros
 #include "Loom_Macros.h"
 
+#include "Loom_Translator.h"
+
 // Core Classes
 #include "Loom_Manager.h"
 #include "Loom_Module.h"

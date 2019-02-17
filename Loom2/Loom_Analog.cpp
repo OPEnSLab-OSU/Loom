@@ -1,90 +1,60 @@
 
-// #define VBATPIN A7
-
-
-// typedef struct {
-// 	byte checksum;  
-// 	// bool valid;  
-// 	char string[50];
-// 	int  number;
-// } AnalogConfig;
-
 #include "Loom_Analog.h"
-
 
 
 // FlashStorage(analog_flash_config, AnalogConfig);
 
 
 
+// Make a static class for analog conversions?
+// Is this going to be a member of the Loom_Analog class?
+	// this might contain the information about which conversion is being use - selecting conversion should be dynamic
+// Point is to contain location of updates adding new conversions
 
-	// --- CONSTRUCTOR ---
-																	// The default parameters will be controlled by config file
-
-	// Loom_Analog::Loom_Analog(	char*   module_name 			= "Loom_Analog", 
-	// 				char*   sensor_description 		= "Analog Values",
-	// 				uint8_t num_samples 			= 8, 
-
-	// 				uint8_t analog_read_resolution 	= 12,
-	// 				bool    enableA0 				= true,
-	// 				bool    enableA1 				= true,
-	// 				bool    enableA2 				= false,
-	// 				bool    enableA3 				= true,
-	// 				bool    enableA4 				= true,
-	// 				bool    enableA5 				= true
-
-	// 			) : LoomSensor( module_name, sensor_description, num_samples )
-	// {
-	// 	// LOOM_DEBUG_Println("Loom_Analog Constructor");
-	// 	LOOM_DEBUG_Println("Loom_Analog Setup");
+// Should support taking an extra float for use in conversion
+	// Like temperature for electrical conductivity 
 
 
-	// 	// Set Analog Read Resolution
-	// 	this->analog_read_resolution = analog_read_resolution;
-	// 	analogReadResolution(this->analog_read_resolution);
+float Loom_Analog::convert(uint8_t pin, int analog)
+{
+	switch(conversion[pin]) {
+		// case NO_CONVERT 		: return (float)analog;
+		case THERMISTOR_CONVERT	:
+		case PH_CONVERT 		:
+		case TURBIDITY_CONVERT	:
+		case EC_CONVERT			:
+		default					: return (float)analog;  
+	}
+}
 
-	// 	// Zero out array of measurements 
-	// 	for (int i = 0; i < 6; i++) { analog_vals[i] = 0; }
 
-	// 	battery = 0.;
 
-	// 	// Set enabled pins
-	// 	pin_enabled[0] = enableA0;
-	// 	pin_enabled[1] = enableA1;
-	// 	pin_enabled[2] = enableA2;
-	// 	pin_enabled[3] = enableA3;
-	// 	pin_enabled[4] = enableA4;
-	// 	pin_enabled[5] = enableA5;
 
-	// 	// print_config_struct();
-	// 	// load_config();
 
-	// }
+// --- CONSTRUCTOR ---
 Loom_Analog::Loom_Analog(	char*   module_name 	,
-					char*   sensor_description 		,
-					uint8_t num_samples 			,
+						char*   sensor_description 		,
+						uint8_t num_samples 			,
 
-					uint8_t analog_read_resolution 	,
-					bool    enableA0 				,
-					bool    enableA1 				,
-					bool    enableA2 				,
-					bool    enableA3 				,
-					bool    enableA4 				,
-					bool    enableA5 				
+						uint8_t read_resolution 		,
+						bool    enableA0 				,
+						bool    enableA1 				,
+						bool    enableA2 				,
+						bool    enableA3 				,
+						bool    enableA4 				,
+						bool    enableA5 				
 
 				) : LoomSensor( module_name, sensor_description, num_samples )
 {
 	// LOOM_DEBUG_Println("Loom_Analog Constructor");
-	// LOOM_DEBUG_Println("Loom_Analog Setup");
 
 
 	// Set Analog Read Resolution
-	this->analog_read_resolution = analog_read_resolution;
-	analogReadResolution(this->analog_read_resolution);
+	this->read_resolution = read_resolution;
+	analogReadResolution(this->read_resolution);
 
 	// Zero out array of measurements 
 	for (int i = 0; i < 6; i++) { analog_vals[i] = 0; }
-
 	battery = 0.;
 
 	// Set enabled pins
@@ -110,7 +80,7 @@ void Loom_Analog::print_config()
 {
 	LoomSensor::print_config();
 
-	LOOM_DEBUG_Println2("\tAnalog Resolution   : ", analog_read_resolution);
+	LOOM_DEBUG_Println2("\tAnalog Resolution   : ", read_resolution);
 	LOOM_DEBUG_Print("\tEnabled Pins        : ");
 	for (int i = 0; i < 6; i++) { 
 		if (pin_enabled[i]) {
@@ -128,24 +98,27 @@ void Loom_Analog::print_measurements()
 {
 	print_module_label();
 	LOOM_DEBUG_Println("Measurements:");
+	LOOM_DEBUG_Println2("\tBattery = ", battery);
 	for (int i = 0; i < 6; i++) {
 		if (pin_enabled[i]) {
 			LOOM_DEBUG_Println4("\tA", i, " = ", analog_vals[i]);
 		}
 	}
-	LOOM_DEBUG_Println2("\tBattery = ", battery);
 }
 
 
 void Loom_Analog::measure()
 {
+	battery = read_analog(VBATPIN) * 2 * 3.3 / (float)pow(2, read_resolution);
+
 	for (int i = 0; i < 6; i++) {
 		if (pin_enabled[i]) {
 			analog_vals[i] = read_analog(i);
 		}
-	}
 
-	battery = read_analog(VBATPIN) * 2 * 3.3 / (float)pow(2, analog_read_resolution);
+		// Put conversions here
+
+	}
 }
 
 
@@ -158,73 +131,21 @@ void Loom_Analog::package(OSCBundle* bndl, char* suffix)
 	// Add Battery Data
 	append_to_bundle(bndl, id_prefix, "VBat", battery, NEW_MSG);
 
-
 	char buf[10];
-	// maybe make the analog array into a block message
 	for (int i = 0; i < 6; i++) {
 		if (pin_enabled[i]) {
 			sprintf(buf, "%s%d", "A", i);
-			// append_to_bundle_key_value(bndl, id_prefix, buf, analog_vals[i]);
-			// append_to_bundle_msg_key_value(bndl, "buf", analog_vals[i]);
 			append_to_bundle(bndl, id_prefix, buf, analog_vals[i]);
-
 		}
-	}
 
-	// append_to_bundle_key_value(bndl, id_prefix, "Battery", battery);
+		// Put conversions here
 
-
-	
-
+	}	
 }
 
 
-// Save a FlashStorage struct
-void Loom_Analog::save_config() 
-{
-	// Probably set valid to true here
-	LOOM_DEBUG_Println("Save Analog Config");
-// analog_flash_config.write(configuration);
-}
 
 
-// Load a FlashStorage struct, true if valid
-bool Loom_Analog::load_config() 
-{
-	LOOM_DEBUG_Println("Load Analog Config");
-// configuration = analog_flash_config.read();
-
-
-// 		LOOM_DEBUG_Print("B: ");
-// 		print_config_struct();
-
-// 		if (configuration.checksum != 42) {
-// 			// configuration.valid = true;
-// 			configuration.checksum = 42;
-// 			sprintf( configuration.string, "%s", "Data" );
-// 			configuration.number = 1;	
-// 		}
-
-// 		LOOM_DEBUG_Print("C: ");
-// 		print_config_struct();
-
-// 		LOOM_DEBUG_Println("Incrementing number");
-// 		configuration.number++;
-
-// 		LOOM_DEBUG_Print("D: ");
-// 		print_config_struct();
-}
-
-void Loom_Analog::print_config_struct() 
-{
-	LOOM_DEBUG_Println("Analog Flash Struct:");
-	// LOOM_DEBUG_Println2("\tValid : ", configuration.valid);
-	LOOM_DEBUG_Println2("\tChecksum : ", configuration.checksum);
-
-	LOOM_DEBUG_Println2("\tString   : ", configuration.string);
-	LOOM_DEBUG_Println2("\tNumber   : ", configuration.number);
-
-}
 
 
 
@@ -237,13 +158,13 @@ bool Loom_Analog::message_route(OSCMessage* msg, int address_offset)
 
 void Loom_Analog::set_analog_resolution(uint8_t res) 
 { 
-	analogReadResolution(analog_read_resolution = res); 
+	analogReadResolution(read_resolution = res); 
 }
 
 
 uint8_t Loom_Analog::get_analog_resolution() 
 { 
-	return analog_read_resolution; 
+	return read_resolution; 
 }
 
 
@@ -271,6 +192,73 @@ int Loom_Analog::read_analog(uint8_t chnl)
 		default: return (reading);
 	}
 } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Save a FlashStorage struct
+void Loom_Analog::save_config() 
+{
+	// Probably set valid to true here
+	LOOM_DEBUG_Println("Save Analog Config");
+// analog_flash_config.write(configuration);
+}
+
+
+// Load a FlashStorage struct, true if valid
+bool Loom_Analog::load_config() 
+{
+	LOOM_DEBUG_Println("Load Analog Config");
+
+// configuration = analog_flash_config.read();
+
+
+// 		LOOM_DEBUG_Print("B: ");
+// 		print_config_struct();
+
+// 		if (configuration.checksum != 42) {
+// 			// configuration.valid = true;
+// 			configuration.checksum = 42;
+// 			sprintf( configuration.string, "%s", "Data" );
+// 			configuration.number = 1;	
+// 		}
+
+// 		LOOM_DEBUG_Print("C: ");
+// 		print_config_struct();
+
+// 		LOOM_DEBUG_Println("Incrementing number");
+// 		configuration.number++;
+
+// 		LOOM_DEBUG_Print("D: ");
+// 		print_config_struct();
+}
+
+
+
+void Loom_Analog::print_config_struct() 
+{
+	LOOM_DEBUG_Println("Analog Flash Struct:");
+	// LOOM_DEBUG_Println2("\tValid : ", configuration.valid);
+	LOOM_DEBUG_Println2("\tChecksum : ", configuration.checksum);
+
+	LOOM_DEBUG_Println2("\tString   : ", configuration.string);
+	LOOM_DEBUG_Println2("\tNumber   : ", configuration.number);
+
+}
+
+
+
+
+
 
 
 

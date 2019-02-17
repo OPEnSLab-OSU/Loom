@@ -3,11 +3,11 @@
 #include "Loom_Macros.h"
 
 
+// CONVERT BUNDEL FORMATS WILL BE OBSOLETE
 
-
-// ================================================================
-// ===            CONVERSION BETWEEN BUNDLE FORMATS             ===
-// ================================================================
+// // ================================================================
+// // ===            CONVERSION BETWEEN BUNDLE FORMATS             ===
+// // ================================================================
 
 
 void aux_convert_bundle_structure_to_single(OSCBundle *bndl, OSCBundle *outBndl)
@@ -157,6 +157,79 @@ void convert_bundle_structure(OSCBundle *bndl, BundleStructure format)
 	convert_bundle_structure(bndl, &outBndl, format);
 	deep_copy_bundle(&outBndl, bndl);
 }
+
+
+
+
+
+// ================================================================
+// ===                      FLATTEN BUNDLE                      ===
+// ================================================================
+
+
+
+void flatten_bundle(OSCBundle& bndl, OSCBundle& outBndl)
+{
+	// Make sure bundle has more than one message
+	// Check upper bound as well, as querying some empty bundles gives large value
+	if ( (bndl.size() < 2) || (bndl.size() > 1000) ) {
+		LOOM_DEBUG_Println("Bundle has no valid contents, cannot be converted");
+		return;
+	}
+
+	char address[50], suffix[50], key[30], buf[80];
+
+	// Get device identification from address
+	osc_extract_header_to_section(bndl.getOSCMessage(0), 5, address);
+	sprintf(address, "%s%s", address, "/data");
+	OSCMessage new_msg = OSCMessage(address);
+	OSCMessage* msg;     // Temporarily hold message of bundle
+	
+	// Copy data of messages into new bundle
+	for (int i = 0; i < bndl.size(); i++) {
+
+		msg = bndl.getOSCMessage(i); 	// Get ith messsage
+		osc_extract_header_from_section(msg, 7, suffix);
+
+		for (int j = 0; j < msg->size(); j =j+2) {
+
+			// Get Key
+			switch (msg->getType(j)) {
+				case 'f' : sprintf(key, "%f", msg->getFloat(j) );	break;
+				case 'i' : sprintf(key, "%d", msg->getInt(j) ); 	break;
+				case 's' : msg->getString(j, key, 20); 				break;
+				default  : strcpy(key, "key");
+			}
+
+			// Possibly add suffix
+			if (strlen(suffix) > 0) {
+				sprintf(key, "%s%s", key, suffix);
+			}
+
+			new_msg.add(key);
+
+			// Get Data Point
+			switch (msg->getType(j+1)) {
+				case 'f' : new_msg.add(msg->getFloat(j+1));	break;
+				case 'i' : new_msg.add(msg->getInt(j+1));	break;
+				case 's' : msg->getString(j+1, buf, 80);  new_msg.add(buf);  break;
+				default  : LOOM_DEBUG_Println("Unsupported data data_type.");
+			}
+		}
+	} // of for
+
+	outBndl.add(new_msg);
+}
+
+void flatten_bundle(OSCBundle& bndl)
+{
+	OSCBundle outBndl;
+	flatten_bundle(bndl, outBndl);
+	deep_copy_bundle(&outBndl, &bndl);
+}
+
+
+
 
 
 

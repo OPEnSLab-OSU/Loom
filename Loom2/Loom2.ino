@@ -57,8 +57,8 @@ void setup()
 
 	// NP->set_color(2, 0, 100, 0, 150);
 
-	SH = new Loom_SHT31D();
-	SH->print_config();
+	// SH = new Loom_SHT31D();
+	// SH->print_config();
 
 	// LR = new LoomLora();
 	// LR->print_config();
@@ -126,6 +126,7 @@ int b = 0;
 void loop() 
 {
 	OSCBundle bndl;
+	OSCBundle bndl2;
 
 	// SH->measure();
 	// SH->package(&bndl);
@@ -133,7 +134,6 @@ void loop()
 	DeviceManager.measure();
 	DeviceManager.package(&bndl);
 
-	// LOOM_DEBUG_Println(b++);
 
 	// MP->refresh_sensors();
 	// MP->print_state();
@@ -142,9 +142,31 @@ void loop()
 	// MP->get_sensor_list(&bndl);
 
 	// MP->package(&bndl);
+
+	LOOM_DEBUG_Println("Original");
 	print_bundle(&bndl);
 
-	delay(1000);
+	// convert_bundle_structure(&bndl, &bndl2, SINGLEMSG);
+
+	// LOOM_DEBUG_Println("Single");
+	// print_bundle(&bndl2);
+
+	// convert_bundle_structure(&bndl, &bndl2, MULTIMSG);
+
+	// LOOM_DEBUG_Println("Multi");
+	// print_bundle(&bndl2);
+
+
+	flatten_bundle(bndl);
+
+	LOOM_DEBUG_Println("Flattened");
+	print_bundle(&bndl);
+
+
+	LOOM_DEBUG_Println("\nDone");
+	while(1);
+
+	// delay(1000);
 
 	// RT->print_time();
 	// RT->package(&bndl, "prefix");

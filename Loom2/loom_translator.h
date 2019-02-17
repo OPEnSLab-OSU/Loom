@@ -21,8 +21,13 @@ void str_replace(char *target, const char *needle, const char *replacement);
 const char* nth_strchr(const char* s, char c, int n);
 
 // Conversion between bundle formats
-void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructure format);
-void convert_bundle_structure(OSCBundle *bndl, BundleStructure format);
+// MAY DEPRECATE THESE TWO
+	void convert_bundle_structure(OSCBundle *bndl, OSCBundle *outBndl, BundleStructure format);
+	void convert_bundle_structure(OSCBundle *bndl, BundleStructure format);
+
+
+void flatten_bundle(OSCBundle& bndl, OSCBundle& outBndl);
+void flatten_bundle(OSCBundle& bndl);
 
 
 // Conversion from bundle to array formats
