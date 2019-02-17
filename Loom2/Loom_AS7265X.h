@@ -2,7 +2,6 @@
 #ifndef LOOM_AS7265X_h
 #define LOOM_AS7265X_h
 
-
 #include "Loom_I2C_Sensor.h"
 
 #include "SparkFun_AS7265X.h"

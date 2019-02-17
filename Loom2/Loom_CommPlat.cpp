@@ -110,17 +110,17 @@ bool LoomCommPlat::get_compress_messages()
 
 
 // Offset index where message command starts (i.e. after addressing) for message routing later
-bool LoomCommPlat::scope_filter(OSCBundle* bndl, int* offset) 
+bool LoomCommPlat::scope_filter(OSCBundle& bndl, int* offset) 
 {
 	// CommPlat needs to be associated with a LoomDevice to filter 
 	if (device_manager == NULL) return true; 
 
 	bool pass = false;
-	char type = get_message_type( bndl->getOSCMessage(0) );
+	char type = get_message_type( bndl.getOSCMessage(0) );
 
 	char address[50], test[50];
 
-	bndl->getOSCMessage(0)->getAddress(address, 2); // offset of 2 to skip '/<type>'
+	bndl.getOSCMessage(0)->getAddress(address, 2); // offset of 2 to skip '/<type>'
 
 	switch (type) {
 		case 'D': device_manager->packet_header_device(test); break;
@@ -134,7 +134,7 @@ bool LoomCommPlat::scope_filter(OSCBundle* bndl, int* offset)
 
 	// if ( strlen(test) == 0 ) {
 	// 	LOOM_DEBUG_Println("Out of scope");
-	// 	bndl->empty();
+	// 	bndl.empty();
 	// 	return false; 
 	// }
 
@@ -153,7 +153,7 @@ bool LoomCommPlat::scope_filter(OSCBundle* bndl, int* offset)
 	LOOM_DEBUG_Println2("[Scope Filter] Pass: ", (pass) ? "true" : "false" );
 
 	// Empty bundle if out of scope
-	if (!pass) bndl->empty();
+	if (!pass) bndl.empty();
 
 
 	if (offset) {
@@ -183,7 +183,7 @@ bool LoomCommPlat::scope_filter(OSCBundle* bndl, int* offset)
 }
 
 
-bool LoomCommPlat::scope_filter(OSCBundle* bndl) 
+bool LoomCommPlat::scope_filter(OSCBundle& bndl) 
 {
 	return scope_filter(bndl, NULL);
 }
@@ -192,7 +192,7 @@ bool LoomCommPlat::scope_filter(OSCBundle* bndl)
 	
 
 
-void LoomCommPlat::convert_string_to_bundle(char *osc_string, OSCBundle* bndl) 
+void LoomCommPlat::convert_string_to_bundle(char* osc_string, OSCBundle& bndl) 
 {
 	// might just always try to uncompress, as other device may be compressing
 	uncompress_message_string(osc_string);
@@ -200,7 +200,7 @@ void LoomCommPlat::convert_string_to_bundle(char *osc_string, OSCBundle* bndl)
 }
 
 // break compression out to different function
-void LoomCommPlat::convert_bundle_to_string(OSCBundle *bndl, char *osc_string) 
+void LoomCommPlat::convert_bundle_to_string(OSCBundle& bndl, char* osc_string) 
 {
 	// This is done in case the bundle converts to a string larger than
 	// 251 characters before compression
@@ -227,9 +227,9 @@ void LoomCommPlat::convert_bundle_to_string(OSCBundle *bndl, char *osc_string)
 
 
 // Conversion without compression
-void LoomCommPlat::original_convert_string_to_bundle(char *osc_string, OSCBundle* bndl) 
+void LoomCommPlat::original_convert_string_to_bundle(char* osc_string, OSCBundle& bndl) 
 {
-	bndl->empty();
+	bndl.empty();
 	data_value value_union;
 	char buf[strlen(osc_string)+1];
 	char *p = buf, *p2 = NULL;
@@ -242,7 +242,7 @@ void LoomCommPlat::original_convert_string_to_bundle(char *osc_string, OSCBundle
 	{
 		p2 = msg_token;
 		token = strtok_r(p2, ",", &p2);
-		msg = &(bndl->add(token));
+		msg = &(bndl.add(token));
 		token = strtok_r(NULL, ",", &p2);
 		int k = 1;
 		while (token != NULL & strlen(token) > 0) 
@@ -268,7 +268,7 @@ void LoomCommPlat::original_convert_string_to_bundle(char *osc_string, OSCBundle
 }
 
 // Conversion without decompression
-void LoomCommPlat::original_convert_bundle_to_string(OSCBundle *bndl, char *osc_string) 
+void LoomCommPlat::original_convert_bundle_to_string(OSCBundle& bndl, char* osc_string) 
 {
 	char data_type;
 	data_value value;
@@ -278,8 +278,8 @@ void LoomCommPlat::original_convert_bundle_to_string(OSCBundle *bndl, char *osc_
 
 	memset(osc_string, '\0', sizeof(osc_string));
 
-	for (int i = 0; i < bndl->size(); i++) {
-		msg = bndl->getOSCMessage(i);
+	for (int i = 0; i < bndl.size(); i++) {
+		msg = bndl.getOSCMessage(i);
 		memset(addr_buf, '\0', addr_len);
 		msg->getAddress(addr_buf, 0);
 		strcat(osc_string, addr_buf);

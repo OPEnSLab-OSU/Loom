@@ -2,8 +2,8 @@
 #ifndef LOOM_SPI_SENSOR_h
 #define LOOM_SPI_SENSOR_h
 
-
 #include "Loom_Sensor.h"
+
 
 
 class LoomSPISensor : public LoomSensor

@@ -59,15 +59,15 @@ public:
 
 
 	// Build OSC Bundle from packet if any exists
-	virtual bool receive_bundle(OSCBundle *bndl) = 0;
+	virtual bool receive_bundle(OSCBundle& bndl) = 0;
 
 	// Send an OSC bundle
 	// Should overload or use default args to optionally allow default address
-	virtual bool send_bundle(OSCBundle *bndl, uint16_t destination) = 0;
-	virtual bool send_bundle(OSCBundle *bndl) = 0;
+	virtual bool send_bundle(OSCBundle& bndl, uint16_t destination) = 0;
+	virtual bool send_bundle(OSCBundle& bndl) = 0;
 
 	// Broadcast an OSC bundle
-	virtual void broadcast_bundle(OSCBundle *bndl) = 0;
+	virtual void broadcast_bundle(OSCBundle& bndl) = 0;
 
 	virtual void set_address(uint a) = 0;
 	virtual uint get_address() = 0;
@@ -82,8 +82,8 @@ public:
 // move back to protected?
 
 // can probably just return offset and check if -1 to remove need to return bool
-	bool scope_filter(OSCBundle* bndl, int* offset);
-	bool scope_filter(OSCBundle* bndl);
+	bool scope_filter(OSCBundle& bndl, int* offset);
+	bool scope_filter(OSCBundle& bndl);
 
 
 protected:
@@ -98,28 +98,28 @@ protected:
 // need to actually check names
 	// unless that is done via routing?
 
-	// bool scope_filter(OSCBundle* bndl);
+	// bool scope_filter(OSCBundle& bndl);
 
 
-	void convert_string_to_bundle(char *osc_string, OSCBundle* bndl);
+	void convert_string_to_bundle(char* osc_string, OSCBundle& bndl);
 
 // break compression out to different function
-	void convert_bundle_to_string(OSCBundle *bndl, char *osc_string);
+	void convert_bundle_to_string(OSCBundle& bndl, char* osc_string);
 
 
 private:
 
 	// Conversion without compression
-	void original_convert_string_to_bundle(char *osc_string, OSCBundle* bndl);
+	void original_convert_string_to_bundle(char* osc_string, OSCBundle& bndl);
 
 	// Conversion without decompression
-	void original_convert_bundle_to_string(OSCBundle *bndl, char *osc_string);
+	void original_convert_bundle_to_string(OSCBundle& bndl, char* osc_string);
+	
 	// Compress messages 
 	void compress_message_string(char* osc_string);
 
 	// Uncompress messages
 	void uncompress_message_string(char* osc_string);
-
 
 
 };

@@ -2,8 +2,6 @@
 #ifndef LOOM_MODULE_h
 #define LOOM_MODULE_h
 
-
-
 #include "Loom_Manager.h"
 
 #include "Loom_Misc.h"

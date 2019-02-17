@@ -2,11 +2,11 @@
 #ifndef LOOM_TSL2591_h
 #define LOOM_TSL2591_h
 
-
 #include "Loom_I2C_Sensor.h"
 
 #include <Adafruit_Sensor.h>
 #include <Adafruit_TSL2591.h>
+
 
 
 class Loom_TSL2591 : public LoomI2CSensor

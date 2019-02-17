@@ -19,8 +19,6 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~LoomActuator();
 
-	// --- PUBLIC METHODS ---
-
 	virtual void print_config();
 	virtual void print_state() = 0;
 	virtual void measure() {}

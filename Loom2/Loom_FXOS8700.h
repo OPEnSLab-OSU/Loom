@@ -2,12 +2,12 @@
 #ifndef LOOM_FXOS8700_h
 #define LOOM_FXOS8700_h
 
-
 #include "Loom_I2C_Sensor.h"
 
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_FXOS8700.h>
+
 
 
 class Loom_FXOS8700 : public LoomI2CSensor

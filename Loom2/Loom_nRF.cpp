@@ -86,7 +86,7 @@ void Loom_nRF::print_config()
 
 
 // Build OSC Bundle from packet if any exists
-bool Loom_nRF::receive_bundle(OSCBundle *bndl) 
+bool Loom_nRF::receive_bundle(OSCBundle& bndl) 
 {
 	// if ( manager->available() ) {
 	// 	uint8_t len = RH_RF95_MAX_MESSAGE_LEN;
@@ -127,12 +127,12 @@ bool Loom_nRF::receive_bundle(OSCBundle *bndl)
 }
 
 
-bool Loom_nRF::send_bundle(OSCBundle *bndl, uint16_t destination) 
+bool Loom_nRF::send_bundle(OSCBundle& bndl, uint16_t destination) 
 {
 
 }
 
-bool Loom_nRF::send_bundle(OSCBundle *bndl) 
+bool Loom_nRF::send_bundle(OSCBundle& bndl) 
 {
 	send_bundle(bndl, friend_address);
 }
@@ -140,7 +140,7 @@ bool Loom_nRF::send_bundle(OSCBundle *bndl)
 
 
 // Broadcast an OSC bundle
-void Loom_nRF::broadcast_bundle(OSCBundle *bndl) 
+void Loom_nRF::broadcast_bundle(OSCBundle& bndl) 
 {
 
 }

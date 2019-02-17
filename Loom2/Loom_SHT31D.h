@@ -2,7 +2,6 @@
 #ifndef LOOM_SHT31D_h
 #define LOOM_SHT31D_h
 
-
 #include "Loom_I2C_Sensor.h"
 
 #include "Adafruit_SHT31.h"

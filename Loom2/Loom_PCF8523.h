@@ -2,8 +2,8 @@
 #ifndef LOOM_PCF8523_h
 #define LOOM_PCF8523_h
 
-
 #include "Loom_RTC.h"
+
 
 
 class Loom_PCF8523 : public LoomRTC
@@ -39,4 +39,4 @@ protected:
 };
 
 
-#endif // of #ifndef LOOM_3231_h
+#endif // of #ifndef LOOM_PCF8523_h

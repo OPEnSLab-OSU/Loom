@@ -25,7 +25,6 @@ class Loom_Ethernet_I : public LoomInternetPlat
 {
 
 protected:
-	// --- PROTECTED MEMBERS ---
 	
 	EthernetClient*	client;            
 	EthernetUDP* 	UDP;
@@ -34,9 +33,6 @@ protected:
 	IPAddress 		ip;
 	
 public:
-
-	// --- PUBLIC MEMBERS ---
-
 
 	// --- CONSTRUCTOR ---
 	Loom_Ethernet_I(	char* 	module_name		= "Ethernet",
@@ -69,11 +65,7 @@ public:
 
 private:
 
-// --- PRIVATE MEMBERS ---
-
-// --- PRIVATE METHODS --- 
 	void send_NTP_packet(byte packet_buffer[]);
-
 
 };
 

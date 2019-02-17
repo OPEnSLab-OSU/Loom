@@ -2,7 +2,6 @@
 #ifndef LOOM_OLED_h
 #define LOOM_OLED_h
 
-
 #include "Loom_LogPlat.h"
 
 #include <OSCBundle.h>
@@ -59,7 +58,6 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_OLED();
 
-	// --- PUBLIC METHODS ---
 
 	void print_config();
 

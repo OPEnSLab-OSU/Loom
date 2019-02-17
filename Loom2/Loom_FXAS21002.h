@@ -2,12 +2,12 @@
 #ifndef LOOM_FXAS21002_h
 #define LOOM_FXAS21002_h
 
-
 #include "Loom_I2C_Sensor.h"
 
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_FXAS21002C.h>
+
 
 
 class Loom_FXAS21002 : public LoomI2CSensor

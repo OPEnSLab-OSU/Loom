@@ -2,7 +2,6 @@
 #ifndef LOOM_LIS3DH_h
 #define LOOM_LIS3DH_h
 
-
 #include "Loom_I2C_Sensor.h"
 
 #include "SparkFunLIS3DH.h"

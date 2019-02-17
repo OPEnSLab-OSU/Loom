@@ -2,7 +2,6 @@
 #ifndef LOOM_AS7262_h
 #define LOOM_AS7262_h
 
-
 #include "Loom_I2C_Sensor.h"
 
 #include "AS726X.h"
@@ -39,9 +38,6 @@ public:
 														// 3: One-shot reading of all channels
 					byte integration_time		= 50  	// Time will be 2.8ms * [integration value]  (0-255), 50 is default
 				);
-
-
-//Gain 
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_AS7262();
