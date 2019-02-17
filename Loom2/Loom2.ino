@@ -163,9 +163,11 @@ void loop()
 	// print_bundle(bndl);
 
 	// LOOM_DEBUG_Println("Array:");
-	String key_values[25];
+	String key_values[6] = { "a", "12", "b", "3.45", "c", "def" };
 	String keys[3] = { "abc", "def", "ghi" };
-	String vals[3] = { "12.3", "45.6", "78.9" };
+	char* vals[3] = { "12.3", "45.6", "789" };
+
+
 
 	// convert_bundle_to_array_key_value(bndl, key_values, 25);
 	// convert_bundle_to_arrays_assoc(bndl, keys, vals, 25);
@@ -176,19 +178,11 @@ void loop()
 
 
 	LOOM_DEBUG_Println("Convert");
-	// convert_array_to_bundle(keys, bndl, "/test", 3);
+	
 
-	char nums[3][20];
-	convert_array(vals, nums, 3);
+	convert_key_value_array_to_bundle(key_values, bndl, "test", 6 );
 
-	print_array(nums, 3);
-	// print_bundle(bndl);
-
-	LOOM_DEBUG_Println2("Bundle Size: ", bndl2.size());
-
-	append_to_bundle(bndl2, "addr", "key", 1.23 );
-
-	print_bundle(bndl2);
+	print_bundle(bndl);
 
 	LOOM_DEBUG_Println("\nDone");
 	while(1);
