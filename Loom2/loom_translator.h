@@ -7,20 +7,6 @@
 #include <OSCBundle.h>
 
 
-
-// Remove this
-enum BundleStructure { SINGLEMSG, MULTIMSG };
-
-
-
-
-
-// Conversion between bundle formats
-// MAY DEPRECATE THESE TWO
-	void convert_bundle_structure(OSCBundle& bndl, OSCBundle& outBndl, BundleStructure format);
-	void convert_bundle_structure(OSCBundle& bndl, BundleStructure format);
-
-
 // --- Converts a bundle with multiple messages to a bundle with only one message ---
 void flatten_bundle(OSCBundle& bndl, OSCBundle& out_bndl);
 void flatten_bundle(OSCBundle& bndl);
