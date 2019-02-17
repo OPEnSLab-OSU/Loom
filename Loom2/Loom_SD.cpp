@@ -197,7 +197,8 @@ bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
 
 		OSCMessage *msg;
 		OSCBundle tmpBndl;
-		convert_bundle_structure(bndl, tmpBndl, SINGLEMSG);
+		flatten_bundle(bndl, tmpBndl);
+		// convert_bundle_structure(bndl, tmpBndl, SINGLEMSG);
 		LOOM_DEBUG_Println("Converted Bundle:");
 		print_bundle(tmpBndl);
 

@@ -143,46 +143,8 @@ void loop()
 
 	// MP->package(&bndl);
 
-	LOOM_DEBUG_Println("Original:");
 	print_bundle(bndl);
 
-	// convert_bundle_structure(&bndl, &bndl2, SINGLEMSG);
-
-	// LOOM_DEBUG_Println("Single");
-	// print_bundle(bndl2);
-
-	// convert_bundle_structure(&bndl, &bndl2, MULTIMSG);
-
-	// LOOM_DEBUG_Println("Multi");
-	// print_bundle(bndl2);
-
-
-	// flatten_bundle(bndl);
-
-	// LOOM_DEBUG_Println("Flattened");
-	// print_bundle(bndl);
-
-	// LOOM_DEBUG_Println("Array:");
-	String key_values[6] = { "a", "12", "b", "3.45", "c", "def" };
-	String keys[3] = { "abc", "def", "ghi" };
-	char* vals[3] = { "12.3", "45.6", "789" };
-
-
-
-	// convert_bundle_to_array_key_value(bndl, key_values, 25);
-	// convert_bundle_to_arrays_assoc(bndl, keys, vals, 25);
-	LOOM_DEBUG_Println("Keys:");
-	print_array(keys, 3);
-	LOOM_DEBUG_Println("Vals:");
-	print_array(vals, 3);
-
-
-	LOOM_DEBUG_Println("Convert");
-	
-
-	convert_key_value_array_to_bundle(key_values, bndl, "test", 6 );
-
-	print_bundle(bndl);
 
 	LOOM_DEBUG_Println("\nDone");
 	while(1);
