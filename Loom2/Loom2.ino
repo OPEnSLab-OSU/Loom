@@ -18,7 +18,7 @@ Loom_SHT31D*   SH;
 Loom_SD*        SC;
 
 // Loom_DS3231*     RT;
-// Loom_PCF8523*     RT;
+Loom_PCF8523*     RT;
 
 Loom_Multiplexer* 	MP;
 // LoomModule* 	MP;
@@ -70,8 +70,8 @@ void setup()
 	SC->print_config();
 
 	// RT = new Loom_DS3231();
-	// RT = new Loom_PCF8523();
-	// RT->print_config();
+	RT = new Loom_PCF8523();
+	RT->print_config();
 
 	MP = new Loom_Multiplexer();
 	MP->print_config();
@@ -90,6 +90,7 @@ void setup()
 	// DeviceManager.add_module(OL);
 	// DeviceManager.add_module(LR);
 	// DeviceManager.add_module(SH);
+	DeviceManager.add_module(RT);
 
 // 
 	DeviceManager.add_module(MP);

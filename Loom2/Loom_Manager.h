@@ -15,6 +15,7 @@
 
 
 enum DeviceType { HUB, NODE, REPEATER };
+enum Verbosity { VERB_OFF, VERB_LOW, VERB_HIGH }; 
 
 
 // Forward declarations, specify that these classes 
@@ -66,6 +67,9 @@ protected:
 	uint log_count;
 
 
+	Verbosity print_verbosity;		// Print verbosity
+	Verbosity package_verbosity;	// Package verbosity 
+
 	OSCBundle bundle;	// Not sure if this will always work...
 
 public:
@@ -75,7 +79,6 @@ public:
 
 
 	// --- CONSTRUCTOR ---
-
 								// The parameters to the constructor will be defined in config
 	LoomManager( char* device_name 	= "Default",
 				char* family 		= "Loom",
@@ -84,7 +87,8 @@ public:
 
 				DeviceType device_type	= NODE,
 
-				char* module_name = "LoomManager"
+				Verbosity print_verbosity 	= VERB_HIGH,
+				Verbosity package_verbosity	= VERB_LOW    // Set high to include non sensors in package 
 			  );
 
 	// --- DESTRUCTOR ---
@@ -92,7 +96,6 @@ public:
 
 
 	void print_device_label();
-
 	void print_config();
 
 
@@ -114,21 +117,20 @@ public:
 
 
 
-
-// does this check type and sort into arrays accordingly, or is there specific add module methods per type
-
-	void add_module(LoomModule* LM);
-
 	// Over loaded as to sort by module type
+	void add_module(LoomModule* LM);
 	void add_module(LoomSensor* sensor); 
 	void add_module(LoomActuator* actuator); 
 	void add_module(LoomRTC* rtc); 
 	void add_module(LoomCommPlat* comm_plat); 
 	void add_module(LoomLogPlat* log_plat); 
 
-
-
-
+	LoomModule*   get_other_module(int idx);
+	LoomSensor*   get_sensor_module(int idx);
+	LoomActuator* get_actuator_module(int idx);
+	LoomRTC*      get_rtc_module(int idx);
+	LoomCommPlat* get_comm_plat_module(int idx);
+	LoomLogPlat*  get_log_plat_module(int idx);
 
 	// void module_enable(LoomModule* LM, bool e) ?
 
@@ -137,12 +139,10 @@ public:
 
 
 	void set_device_name(char* device_name);
-
 	void get_device_name(char* buf);
 	char* get_device_name();
 
 	
-
 
 		// Should this return a char* or copy into char array passed by reference?
 		// Could overload to do either like String does with .toCharArray() and .c_str()
@@ -172,7 +172,11 @@ public:
 	// void set_device_type(DeviceType t) {device_type = t; }
 
 
+	Verbosity get_print_verbosity();
+	void set_print_verbosity(Verbosity v);
 
+	Verbosity get_package_verbosity();
+	void set_package_verbosity(Verbosity v);
 
 
 // ** MAYBE IMPLEMENT THESE HERE **
@@ -201,7 +205,7 @@ public:
 	// Methods to set package and print verbosities all at once
 
 private:
-	
+
 	void add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
 	void list_modules_aux(LoomModule** modules, uint len, char* module_type);
 	void measure_aux(LoomModule** modules, uint len);

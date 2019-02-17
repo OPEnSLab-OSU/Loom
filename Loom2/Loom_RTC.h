@@ -72,7 +72,7 @@ public:
 
 
 	virtual void print_config();
-	// virtual void measure();
+	virtual void measure() {};
 	virtual void package(OSCBundle& bndl, char* suffix="");
 
 	virtual DateTime now() = 0;
