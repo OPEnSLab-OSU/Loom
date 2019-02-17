@@ -135,11 +135,11 @@ void Loom_ZXGesture::package(OSCBundle* bndl, char* suffix)
 
 	switch (mode) {
 		case ZX_POS : 
-			append_to_bundle(bndl, id_prefix, "zx", pos[0]);
+			append_to_bundle(bndl, id_prefix, "zx", pos[0], NEW_MSG);
 			append_to_bundle(bndl, id_prefix, "zy", pos[1]);
 			break;
 		case ZX_GEST : 
-			append_to_bundle(bndl, id_prefix, "type" , gesture_type.c_str());
+			append_to_bundle(bndl, id_prefix, "type" , gesture_type.c_str(), NEW_MSG);
 			append_to_bundle(bndl, id_prefix, "speed", (int)gesture_speed);
 			break; 
 	}
