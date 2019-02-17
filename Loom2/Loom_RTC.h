@@ -32,29 +32,29 @@ enum TimeZone {
 // };
 
 
+
+
 class LoomRTC : public LoomModule
 {
+
 private: 
+
 	// static const char* const daysOfTheWeek[7] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 	const static char* daysOfTheWeek[];
 	const static float timezone_adjustment[];
 
 protected:
-	// --- PROTECTED MEMBERS ---
 
 	TimeZone 	timezone;
+
 	bool 		use_utc_time;
 	bool 		get_internet_time;
 
 	char	 	datestring[20];
 	char 		timestring[20];
 
-	// maybe store basic seconds unit?
 
 public:
-
-	// --- PUBLIC MEMBERS ---
-
 
 	// --- CONSTRUCTOR ---
 	LoomRTC(	char* 	module_name,
@@ -67,15 +67,17 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~LoomRTC();
 
-
 	static char* enum_timezone_string(TimeZone t);
 
 
-	// --- PUBLIC METHODS ---
 
 	virtual void print_config();
-	virtual void measure();
+	// virtual void measure();
 	virtual void package(OSCBundle& bndl, char* suffix="");
+
+	virtual DateTime now() = 0;
+
+
 
 	void print_time();
 
@@ -89,7 +91,12 @@ public:
 	void  get_weekday(char* buf);
 
 
-	virtual DateTime now() = 0;
+	//   0: no timestamp added
+	//   1: only date added
+	//   2: only time added
+	//   3: both date and time added (two fields)
+	//   4: both date and time added (combined field)
+	void get_timestamp(char* header, char* timestamp, char delimiter, uint8_t format=3);
 
 
 protected:
@@ -100,7 +107,7 @@ protected:
 	void set_rtc_to_compile_time();
 
 
-// needs to reference and internet connectivity class to get unix time
+	// needs to reference and internet connectivity class to get unix time
 	bool set_rtc_from_internet_time(); 
 
 	void convert_local_to_utc(bool to_utc=true);

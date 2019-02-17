@@ -32,6 +32,7 @@ void print_array(T data [], int len, int format=1)
 	#endif
 }
 
+void print_array(String data [], int len, int format=1);
 
 
 // Replaces substrings with other substrings in a string

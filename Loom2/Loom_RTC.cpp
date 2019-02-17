@@ -128,11 +128,18 @@ void LoomRTC::print_DateTime(DateTime time)
 }
 
 
-void LoomRTC::measure()
+void LoomRTC::read_rtc()
 {
 	get_datestring();
 	get_timestring();
 }
+
+
+// void LoomRTC::measure()
+// {
+// 	get_datestring();
+// 	get_timestring();
+// }
 
 
 void LoomRTC::package(OSCBundle& bndl, char* suffix)
@@ -187,6 +194,42 @@ void LoomRTC::get_weekday(char* buf)
 {
 	strcpy( buf, daysOfTheWeek[ now().dayOfTheWeek() ] );
 }
+
+
+
+//   0: no timestamp added
+//   1: only date added
+//   2: only time added
+//   3: both date and time added (two fields)
+//   4: both date and time added (combined field)
+void LoomRTC::get_timestamp(char* header, char* timestamp, char delimiter, uint8_t format)
+{
+	switch (format) {
+		case 1 :
+			sprintf(header, "Date%c", delimiter); 
+			sprintf(timestamp, "%s%c ", get_timestring() ); 
+			break;
+		case 2 :
+			sprintf(header, "Date%c", delimiter); 
+			sprintf(timestamp, "%s%c ", get_datestring() ); 
+			break;
+		case 3 :
+			sprintf(header, "Date%c Time", delimiter); 
+			sprintf(timestamp, "%s%c %s%c ", get_datestring(), delimiter, get_timestring(), delimiter ); 
+			break;
+		case 4 :
+			sprintf(header, "Date_Time", delimiter); 
+			sprintf(timestamp, "%s %s%c ", get_datestring(), get_timestring(), delimiter ); 
+			break;
+		default : 
+			strcpy(header, ""); 
+			strcpy(timestamp, ""); 
+	}
+}
+
+
+
+
 
 
 void LoomRTC::set_rtc_to_compile_time()

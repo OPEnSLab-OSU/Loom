@@ -13,7 +13,6 @@ class LoomSensor : public LoomModule
 {
 
 protected:
-	// --- PROTECTED MEMBERS ---
 
 	char*   sensor_description;   // maybe move to module to be module description
 
@@ -24,16 +23,6 @@ protected:
 	// not really a reason for struct unless it is being passes around
 
 public:
-
-	// --- PUBLIC MEMBERS ---
-
-
-	// --- CONSTRUCTOR ---
-	// LoomSensor()
-	// {
-	// 	LOOM_DEBUG_Println("LoomSensor Default Constructor");		
-	// }
-
 
 	LoomSensor(	char* 	module_name			= "Sensor",
 	 
@@ -46,8 +35,6 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~LoomSensor();
 
-
-	// --- PUBLIC METHODS ---
 
 	virtual void print_config();
 

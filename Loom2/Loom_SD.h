@@ -29,7 +29,7 @@ class Loom_SD : public LoomLogPlat
 
 protected:
 
-		File SDFile;
+		// File SDFile;
 
 		byte 	chip_select;
 		bool 	sd_found;
@@ -48,7 +48,7 @@ public:
 				uint 			min_filter_delay 	= 1000,
 
 				byte 			chip_select 		= 10,
-				char* 			default_file 		= "test.csv"
+				char* 			default_file 		= "new.csv"
 
 				// SD_Version 		version 			= FEATHERWING,
 				// byte 			reset_pin 			= A2 
@@ -76,22 +76,35 @@ public:
 	// @param file       The file to save bundle to
 	// @param bndl       The bundle to be saved
 	// @param timestamp  Format of timestamp (if any)
-	bool save_bundle(OSCBundle& bndl, char* file, int timestamp);
+	bool save_bundle(OSCBundle& bndl, char* file, int timestamp=3);
 
 
+
+	// has_keys : set true if array is alternating keys and values, false otherwise
 	// timestamp options:
 	//   0: no timestamp added
 	//   1: only date added
 	//   2: only time added
 	//   3: both date and time added (two fields)
 	//   4: both date and time added (combined field)
+	// Device_id, string identifying device - used if forwarded from save_bundle
 	template <typename T>
-	bool save_array(char *file, T data [], int len, char delimiter, int timestamp);
+	bool save_array(char *file, T data [], int len, char delimiter=',', int timestamp=3, bool has_keys=false, char* device_id="");
 
 
 private:
 
 	void print_directory(File dir, int numTabs);
+
+	template <typename T>
+	void SD_print_aux(File SDFile, T data, char delimiter, bool add_space=true)
+	{
+		SDFile.print(data);
+		SDFile.print(delimiter);
+		if (add_space) {
+			SDFile.print(" ");			
+		}
+	}
 	
 };
 

@@ -18,8 +18,6 @@ LoomSensor::LoomSensor(	char* 	module_name,
 LoomSensor::~LoomSensor() {}
 
 
-// --- PUBLIC METHODS ---
-
 void LoomSensor::print_config()
 {
 	LoomModule::print_config();

@@ -32,7 +32,7 @@ LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint
 	this->family 		= family;
 	this->family_num 	= family_num;
 	this->instance 		= instance;
-	this->module_count 	= 0;
+	// this->module_count 	= 0;
 
 	// Initialize module counts
 	this->other_module_count = 0;
@@ -83,7 +83,7 @@ void LoomManager::add_module_aux(LoomModule** modules, LoomModule* module, uint&
 	print_device_label();
 
 	// If module array is not dynamic, add check to make sure there is room in the array
-	if ( len >= max_len ) {
+	if ( ( len >= max_len ) || (!module) ) {
 		LOOM_DEBUG_Println2("Cannot add ", module->get_module_name() );
 		return;
 	}
@@ -141,7 +141,7 @@ void LoomManager::list_modules_aux(LoomModule** modules, uint len, char* module_
 {
 	LOOM_DEBUG_Println5("\t", module_type, " (", len, "):");
 	for (int i = 0; i < len; i++) {
-		if ( modules[i]->get_active() ) {
+		if ( (modules[i] != NULL) && (modules[i]->get_active()) ) {
 			LOOM_DEBUG_Println4( "\t\t[", (modules[i]->get_active()) ? "+" : "-" , "] ", modules[i]->get_module_name() );
 		}
 	}	
@@ -291,7 +291,7 @@ DeviceType LoomManager::get_device_type()
 void LoomManager::measure_aux(LoomModule** modules, uint len)
 {
 	for (int i = 0; i < len; i++) {
-		if ( modules[i]->get_active() ) {
+		if ( (modules[i] != NULL) && (modules[i]->get_active()) ) {
 			modules[i]->measure();
 		}
 	}	
@@ -300,7 +300,7 @@ void LoomManager::measure_aux(LoomModule** modules, uint len)
 void LoomManager::package_aux(LoomModule** modules, uint len)
 {
 	for (int i = 0; i < len; i++) {
-		if ( modules[i]->get_active() ) {
+		if ( (modules[i] != NULL) && ( modules[i]->get_active() ) ){
 			modules[i]->package( bundle );
 		}
 	}	
@@ -309,12 +309,8 @@ void LoomManager::package_aux(LoomModule** modules, uint len)
 
 void LoomManager::measure()
 {
-	measure_aux( (LoomModule**)other_modules    , other_module_count ); 
 	measure_aux( (LoomModule**)sensor_modules   , sensor_count ); 
-	measure_aux( (LoomModule**)actuator_modules , actuator_count ); 
-	measure_aux( (LoomModule**)rtc_modules      , rtc_count ); 
-	measure_aux( (LoomModule**)comm_modules     , comm_count ); 
-	measure_aux( (LoomModule**)log_modules      , log_count ); 
+	measure_aux( (LoomModule**)other_modules    , other_module_count ); 
 }
 
 

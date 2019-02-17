@@ -3,8 +3,6 @@
 #define LOOM_MANAGER_h
 
 
-// #include "loom_abstract_module_class.h"
-
 // these might need to be forward declared instead
 // e.g. class LoomSensor;
 // both h files included in .cpp files
@@ -13,10 +11,6 @@
 
 #include "Loom_Misc.h"
 #include "Loom_Translator.h"
-
-
-// #include <vector.h>
-
 
 
 
@@ -32,6 +26,7 @@ class LoomRTC;
 class LoomCommPlat;
 class LoomLogPlat;
 
+
 #define MAX_OTHER_MODULES 3
 #define MAX_SENSORS       20
 #define MAX_ACTUATORS     10
@@ -46,7 +41,7 @@ class LoomManager
 
 protected:
 
-	char* 		device_name;		// The name of the device
+	char* 		device_name;	// The name of the device
 
 	char* 		family;			// The family the device belongs to
 	uint 		family_num;		// The subnet of the family
@@ -54,21 +49,14 @@ protected:
 
 	DeviceType 	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
-	uint8_t		module_count;		//
-	LoomModule* modules[10];
 
-
-// keep counts for these as well? or just make all of these arrays dynamic
-// or maybe just use check for null 
-
-	// Loom_Multiplexer* multiplexer;
+	// Arrays of Loom Modules, categorized by type
 	LoomModule*       other_modules[MAX_OTHER_MODULES];
 	LoomSensor*       sensor_modules[MAX_SENSORS];
 	LoomActuator*     actuator_modules[MAX_ACTUATORS];
 	LoomRTC*          rtc_modules[MAX_RTCS];
 	LoomCommPlat*     comm_modules[MAX_COMMS];
 	LoomLogPlat*      log_modules[MAX_LOGS];
-	// an other_modules array?
 
 	uint other_module_count;
 	uint sensor_count;
@@ -78,27 +66,12 @@ protected:
 	uint log_count;
 
 
-
-	// Array of pointers to enabled modules
-	// Maybe preprocessor defined?
-	// LoomModule * modules[10];
-	// or
-	// LoomModule ** modules;     // probably not - I think only mux and analog should be dynamic
-	//   then later
-	//  modules = new LoomModule*[10];
-
-	// Maybe separate sensor, actuator, and various platform arrays?
-
-	// would allow for easy log-, send- all functionality 
-	// and better calls to measure()
-
 	OSCBundle bundle;	// Not sure if this will always work...
 
 public:
 
 
 	static char* enum_device_type_string(DeviceType t);
-
 
 
 	// --- CONSTRUCTOR ---
@@ -114,18 +87,9 @@ public:
 				char* module_name = "LoomManager"
 			  );
 
-	// LoomManager( char* device_name,
-	// 		char* family,
-	// 		uint  family_num,
-	// 		uint  instance,
-
-	// 		DeviceType device_typ
-	// 	  );
-
 	// --- DESTRUCTOR ---
 	~LoomManager();
 
-	// --- PUBLIC METHODS ---
 
 	void print_device_label();
 
@@ -153,7 +117,6 @@ public:
 
 // does this check type and sort into arrays accordingly, or is there specific add module methods per type
 
-	void add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
 	void add_module(LoomModule* LM);
 
 	// Over loaded as to sort by module type
@@ -169,7 +132,6 @@ public:
 
 	// void module_enable(LoomModule* LM, bool e) ?
 
-	void list_modules_aux(LoomModule** modules, uint len, char* module_type);
 	void list_modules();
 
 
@@ -222,16 +184,13 @@ public:
 	// void package();
 	// void receive(); // not srue if this should take arg to specify platform
 	// void send();
-	// void log(Enum );
+	// void log(Enum );   Enum SD, GOOGLE, OLED ... 
 	// void sleep(); // could have default sleep behavior?
 
 // void current_bundle(OSCBundle* bndl) ? return a stored bundle
 // void print_data
 
 
-
-	void measure_aux(LoomModule** modules, uint len);
-	void package_aux(LoomModule** modules, uint len);
 
 	void measure();  
 	void package();
@@ -242,7 +201,11 @@ public:
 	// Methods to set package and print verbosities all at once
 
 private:
-
+	
+	void add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
+	void list_modules_aux(LoomModule** modules, uint len, char* module_type);
+	void measure_aux(LoomModule** modules, uint len);
+	void package_aux(LoomModule** modules, uint len);
 
 
 };
