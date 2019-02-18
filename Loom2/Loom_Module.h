@@ -107,7 +107,7 @@ public:
 	// Perform message routing on an OSC message
 	// Only parsing the message should happen in message_route
 	// Complete action should have its own method
-	virtual bool message_route(OSCMessage* msg, int address_offset) = 0;
+	virtual bool message_route(OSCMessage& msg, int address_offset) = 0;
 
 	// Not sure if there should be a verison that takes a bundle as well
 		// Maybe in LoomManager , but not here

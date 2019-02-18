@@ -52,7 +52,7 @@ public:
 
 	// virtual void measure() {}
 	// virtual void package(OSCBundle& bndl) {}
-	// virtual bool message_route(OSCMessage* msg, int address_offset) {}
+	// virtual bool message_route(OSCMessage& msg, int address_offset) {}
 
 
 	bool connect();

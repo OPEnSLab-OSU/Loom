@@ -38,10 +38,13 @@ public:
 	void print_state();
 	void measure() {}
 	void package(OSCBundle& bndl, char* suffix="");
-	bool message_route(OSCMessage* msg, int address_offset){}
+	bool message_route(OSCMessage& msg, int address_offset);
 
 	// Actuator Control
 	void set_degree(int servo, int degree);
+	void set_degree(OSCMessage& msg);
+
+
 
 private:
 

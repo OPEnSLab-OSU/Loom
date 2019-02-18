@@ -172,7 +172,7 @@ void Loom_Analog::package(OSCBundle& bndl, char* suffix)
 
 
 
-bool Loom_Analog::message_route(OSCMessage* msg, int address_offset) 
+bool Loom_Analog::message_route(OSCMessage& msg, int address_offset) 
 {
 	// Enable or disable individual pins
 }

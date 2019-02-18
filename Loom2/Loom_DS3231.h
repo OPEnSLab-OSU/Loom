@@ -35,7 +35,7 @@ public:
 
 	DateTime now();
 
-	bool message_route(OSCMessage* msg, int address_offset) {}
+	bool message_route(OSCMessage& msg, int address_offset) {}
 
 
 	// Alarm functions

@@ -81,7 +81,7 @@ public:
 
 	void print_time();
 
-	// virtual bool message_route(OSCMessage* msg, int address_offset) = 0;
+	// virtual bool message_route(OSCMessage& msg, int address_offset) = 0;
 
 	char* get_datestring(); 
 	void  get_datestring(char* buf); 

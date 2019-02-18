@@ -86,7 +86,7 @@ public:
 	void package(OSCBundle& bndl, char* suffix="");
 
 
-	bool message_route(OSCMessage* msg, int address_offset);
+	bool message_route(OSCMessage& msg, int address_offset);
 
 
 	void get_sensor_list(OSCBundle& bndl); // populate an OSC bundle

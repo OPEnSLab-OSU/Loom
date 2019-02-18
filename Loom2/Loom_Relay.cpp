@@ -41,6 +41,17 @@ void Loom_Relay::package(OSCBundle& bndl, char* suffix)
 }
 
 
+bool Loom_Relay::message_route(OSCMessage& msg, int address_offset)
+{
+	if ( msg.fullMatch( "/SetRelay" , address_offset) ) {
+		set_relay(msg); return true;
+	}
+
+	return false;
+}
+
+
+
 void Loom_Relay::set_relay(bool state)
 {
 	on = state;
@@ -50,4 +61,11 @@ void Loom_Relay::set_relay(bool state)
 		print_module_label();
 		LOOM_DEBUG_Println3("Set relay on pin ", pin, (on) ? " High" : " Low");
 	}
+}
+
+
+void Loom_Relay::set_relay(OSCMessage& msg)
+{
+	// 0 : On / Off
+	set_relay( msg.getInt(0) );
 }

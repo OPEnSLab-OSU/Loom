@@ -195,7 +195,7 @@ void Loom_Multiplexer::package(OSCBundle& bndl, char* suffix)
 
 
 
-bool Loom_Multiplexer::message_route(OSCMessage* msg, int address_offset)
+bool Loom_Multiplexer::message_route(OSCMessage& msg, int address_offset)
 {
 	// Mux routing 
 

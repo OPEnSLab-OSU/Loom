@@ -80,7 +80,7 @@ void LoomCommPlat::measure() {}
 
 
 
-bool LoomCommPlat::message_route(OSCMessage* msg, int address_offset) 
+bool LoomCommPlat::message_route(OSCMessage& msg, int address_offset) 
 {
 	// maybe set subnet_scope 
 }
