@@ -9,7 +9,7 @@
 
 
 Loom_Analog* 	AS;
-Loom_Neopixel*  NP;
+// Loom_Neopixel*  NP;
 
 Loom_SHT31D*   SH;
 // Loom_Lora*      LR;
@@ -76,8 +76,8 @@ void setup()
 	// RT = new Loom_PCF8523();
 	// RT->print_config();
 
-	MP = new Loom_Multiplexer();
-	MP->print_config();
+	// MP = new Loom_Multiplexer();
+	// MP->print_config();
 
 	// MP->print_state();
 
@@ -139,7 +139,6 @@ void loop()
 	DeviceManager.measure();
 	DeviceManager.package(bndl);
 	// SC->log_bundle(bndl);
-
 
 
 	// MP->refresh_sensors();

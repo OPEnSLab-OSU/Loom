@@ -96,6 +96,20 @@ bool Loom_Neopixel::message_route(OSCMessage* msg, int address_offset)
 }
 
 
+void Loom_Neopixel::enable_pin(uint8_t port, bool state)
+{
+	pin_enabled[port] = state;
+	if (state) {
+		pinMode(14+port, OUTPUT);
+	}
+
+	if (print_verbosity == HIGH) {
+		LOOM_DEBUG_Println4("Neopixel ", (state) ? "enabled" : "disabled", " on port ", port);
+	}
+}
+
+
+
 void Loom_Neopixel::set_color(OSCMessage* msg)
 {
 	set_color( msg->getInt(0), msg->getInt(1), msg->getInt(2), msg->getInt(3), msg->getInt(4) );
@@ -107,21 +121,27 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 	if ( pin_enabled[port] ) {
 		
 		// Update color vars
-		color_vals[port][0] = red;
-		color_vals[port][1] = green;
-		color_vals[port][2] = blue;
+		color_vals[port][0] = (red > 0)   ? ( (red < 255)   ? red   : 255 ) : 0;
+		color_vals[port][1] = (green > 0) ? ( (green < 255) ? green : 255 ) : 0;
+		color_vals[port][2] = (blue > 0)  ? ( (blue < 255)  ? blue  : 255 ) : 0;
 
 		// Apply color
-		pixels[port]->setPixelColor(chain_num, pixels[port]->Color(red, green, blue));
+		pixels[port]->setPixelColor(chain_num, pixels[port]->Color(color_vals[port][0], color_vals[port][1], color_vals[port][2]));
 
 		// Update colors displayed by Neopixel
 		pixels[port]->show();
 
-		LOOM_DEBUG_Print4("Set Neopixel on Port: ", port, ", Chain #: ", chain_num);
-		LOOM_DEBUG_Print2(" to R: ", red);
-		LOOM_DEBUG_Print2(  ", G: ", green);
-		LOOM_DEBUG_Println2(", B: ", blue);
-	} 
+		if (print_verbosity == HIGH) {
+			LOOM_DEBUG_Print4("Set Neopixel on Port: ", port, ", Chain #: ", chain_num);
+			LOOM_DEBUG_Print2(" to R: ", color_vals[port][0]);
+			LOOM_DEBUG_Print2(  ", G: ", color_vals[port][1]);
+			LOOM_DEBUG_Println2(", B: ", color_vals[port][2]);			
+		}
+	} else {
+		if (print_verbosity == HIGH) {
+			LOOM_DEBUG_Println2("Neopixel not enabled on port ", port);
+		}
+	}
 
 }
 
