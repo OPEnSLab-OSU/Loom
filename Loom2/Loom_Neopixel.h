@@ -42,6 +42,8 @@ public:
 	bool message_route(OSCMessage* msg, int address_offset);
 
 	// Actuator Control
+	void enable_pin(uint8_t port, bool state);
+
 	void set_color(OSCMessage* msg);
 	void set_color( uint8_t port, uint8_t chain_num, uint8_t red, uint8_t green, uint8_t blue);
 
