@@ -39,3 +39,15 @@ void Loom_Relay::package(OSCBundle& bndl, char* suffix)
 
 	append_to_bundle(bndl, id_prefix, "Relay" , on, NEW_MSG);
 }
+
+
+void Loom_Relay::set_relay(bool state)
+{
+	on = state;
+	digitalWrite(pin, (on) ? HIGH : LOW);
+
+	if (print_verbosity == HIGH) {
+		print_module_label();
+		LOOM_DEBUG_Println3("Set relay on pin ", pin, (on) ? " High" : " Low");
+	}
+}
