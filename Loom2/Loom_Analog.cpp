@@ -15,14 +15,15 @@
 	// Like temperature for electrical conductivity 
 
 
-float Loom_Analog::convert(uint8_t pin, int analog)
+float Loom_Analog::convert(uint8_t pin, uint16_t analog)
 {
-	switch(conversion[pin]) {
-		// case NO_CONVERT 		: return (float)analog;
-		case THERMISTOR_CONVERT	:
-		case PH_CONVERT 		:
-		case TURBIDITY_CONVERT	:
-		case EC_CONVERT			:
+	switch(conversions[pin]) {
+		case CONVERT_VOLTAGE	: return convert_voltage(analog);
+		case CONVERT_THERMISTOR	: return convert_thermistor(analog);
+		case CONVERT_PH 		: return convert_pH(analog);
+		case CONVERT_TURBIDITY	: return convert_turbidity(analog);
+		case CONVERT_EC			: return convert_EC(analog);
+		case CONVERT_TDS		: return convert_TDS(analog);
 		default					: return (float)analog;  
 	}
 }
@@ -33,16 +34,23 @@ float Loom_Analog::convert(uint8_t pin, int analog)
 
 // --- CONSTRUCTOR ---
 Loom_Analog::Loom_Analog(	char*   module_name 	,
-						char*   sensor_description 		,
-						uint8_t num_samples 			,
+						char*   sensor_description 	,
+						uint8_t num_samples 		,
 
-						uint8_t read_resolution 		,
-						bool    enableA0 				,
-						bool    enableA1 				,
-						bool    enableA2 				,
-						bool    enableA3 				,
-						bool    enableA4 				,
-						bool    enableA5 				
+						uint8_t read_resolution 	,
+						bool    enableA0 			,
+						bool    enableA1 			,
+						bool    enableA2 			,
+						bool    enableA3 			,
+						bool    enableA4 			,
+						bool    enableA5 			,
+
+						AnalogConversion convertA0	,
+						AnalogConversion convertA1	,
+						AnalogConversion convertA2	,
+						AnalogConversion convertA3	,
+						AnalogConversion convertA4	,
+						AnalogConversion convertA5	
 
 				) : LoomSensor( module_name, sensor_description, num_samples )
 {
@@ -64,6 +72,17 @@ Loom_Analog::Loom_Analog(	char*   module_name 	,
 	pin_enabled[3] = enableA3;
 	pin_enabled[4] = enableA4;
 	pin_enabled[5] = enableA5;
+
+	// Set conversions
+	this->enable_conversions = true;
+	conversions[0] = convertA0;
+	conversions[1] = convertA1;
+	conversions[2] = convertA2;
+	conversions[3] = convertA3;
+	conversions[4] = convertA4;
+	conversions[5] = convertA5;
+
+
 
 	// print_config_struct();
 	// load_config();
@@ -135,11 +154,14 @@ void Loom_Analog::package(OSCBundle& bndl, char* suffix)
 	for (int i = 0; i < 6; i++) {
 		if (pin_enabled[i]) {
 			sprintf(buf, "%s%d", "A", i);
-			append_to_bundle(bndl, id_prefix, buf, analog_vals[i]);
+
+			if ( (!enable_conversions) || (conversions[i] == NO_CONVERT) ) {
+				append_to_bundle(bndl, id_prefix, buf, analog_vals[i]);
+			} else {
+				append_to_bundle(bndl, id_prefix, buf, convert(i, analog_vals[i]) );
+			}
+
 		}
-
-		// Put conversions here
-
 	}	
 }
 
@@ -168,13 +190,30 @@ uint8_t Loom_Analog::get_analog_resolution()
 }
 
 
-int Loom_Analog::get_analog_val(int i) 
+int Loom_Analog::get_analog_val(uint8_t i) 
 {
 	return ( (i >= 0) && (i < 6) ) ? analog_vals[i] : -1;
 }
 
 
-int Loom_Analog::read_analog(uint8_t chnl)
+AnalogConversion Loom_Analog::get_conversion(uint8_t pin)
+{
+	return conversions[pin];
+}
+
+void Loom_Analog::set_conversion(uint8_t pin, AnalogConversion c)
+{
+	conversions[pin] = c;
+}
+
+void Loom_Analog::set_enable_conversions(bool e)
+{
+	enable_conversions = e;
+}
+
+
+
+uint16_t Loom_Analog::read_analog(uint8_t chnl)
 {
 	int i = num_samples;
 	int reading = 0;
@@ -192,6 +231,90 @@ int Loom_Analog::read_analog(uint8_t chnl)
 		default: return (reading);
 	}
 } 
+
+
+
+
+
+float Loom_Analog::convert_voltage(uint16_t analog)
+{
+	return analog*3.3/pow(2, read_resolution);
+}
+
+
+#define reverse_connect 1
+#define THERMISTORNOMINAL 	10000   // resistance at 25 degrees C
+#define TEMPERATURENOMINAL 	25   	// temp. for nominal resistance (almost always 25 C)
+#define BCOEFFICIENT 		3950  	// The beta coefficient of the thermistor (usually 3000-4000)
+// #define SERIESRESISTOR 	10000    
+#define SERIESRESISTOR 		29330  	// the value of the 'other' resistor
+#define range_resol  		4095
+float Loom_Analog::convert_thermistor(uint16_t analog)
+{
+	float average = analog;
+
+	#if reverse_connect == 0
+		average = range_resol / average - 1;
+		average = SERIESRESISTOR / average;
+	#endif
+	#if reverse_connect == 1
+		average = range_resol / average - 1; 
+		average = SERIESRESISTOR * average;
+	#endif
+	// Serial.print("Thermistor resistance "); 
+	// Serial.println(average);
+ 
+	float steinhart;
+	steinhart = average / THERMISTORNOMINAL;     // (R/Ro)
+	steinhart = log(steinhart);                  // ln(R/Ro)
+	steinhart /= BCOEFFICIENT;                   // 1/B * ln(R/Ro)
+	steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
+	steinhart = 1.0 / steinhart;                 // Invert
+	steinhart -= 273.15;                         // convert to C
+
+	return steinhart;
+}
+
+
+#define PH_Offset 0.0
+
+float Loom_Analog::convert_pH(uint16_t analog)
+{
+	float voltage = convert_voltage(analog);
+
+	return 3.5*voltage + PH_Offset;
+}
+
+
+float Loom_Analog::convert_turbidity(uint16_t analog)
+{
+	float voltage = convert_voltage(analog);
+
+	return -1120.4 * (voltage * voltage) + (5742.3 * voltage) - 4352.9;
+}	
+
+
+#define EC_TEMP 25
+
+float Loom_Analog::convert_EC(uint16_t analog)
+{
+	float voltage = convert_voltage(analog);
+
+	float compensation_coefficient = 1.0 + 0.02 * (EC_TEMP - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
+	float comp_volt = voltage / compensation_coefficient;  			// temperature compensation
+	float EC = ( 133.42 * comp_volt * comp_volt * comp_volt - 255.86 * comp_volt * comp_volt + 857.39 * comp_volt ); //convert voltage value to EC value
+	
+	return EC;
+}
+
+
+float Loom_Analog::convert_TDS(uint16_t analog)
+{
+	return convert_EC(analog)/2.;
+}
+
+
+
 
 
 

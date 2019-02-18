@@ -18,7 +18,7 @@ typedef struct {
 
 
 
-enum AnalogConversion { NO_CONVERT, THERMISTOR_CONVERT, PH_CONVERT, TURBIDITY_CONVERT, EC_CONVERT }; 
+enum AnalogConversion { NO_CONVERT, CONVERT_VOLTAGE, CONVERT_THERMISTOR, CONVERT_PH, CONVERT_TURBIDITY, CONVERT_EC, CONVERT_TDS }; 
 
 
 
@@ -36,11 +36,11 @@ protected:
 	// Pins A0-A5
 	bool     pin_enabled[ANALOG_COUNT];
 	uint16_t analog_vals[ANALOG_COUNT];
-	AnalogConversion conversion[ANALOG_COUNT];
+	AnalogConversion conversions[ANALOG_COUNT];
 
 	float    battery;  
 
-
+	bool	enable_conversions;
 
 	AnalogConfig configuration;
 
@@ -57,7 +57,14 @@ public:
 					bool    enableA2 				= false,
 					bool    enableA3 				= true,
 					bool    enableA4 				= true,
-					bool    enableA5 				= true
+					bool    enableA5 				= true,
+
+					AnalogConversion convertA0		= NO_CONVERT,
+					AnalogConversion convertA1		= NO_CONVERT,
+					AnalogConversion convertA2		= NO_CONVERT,
+					AnalogConversion convertA3		= NO_CONVERT,
+					AnalogConversion convertA4		= NO_CONVERT,
+					AnalogConversion convertA5		= NO_CONVERT
 				);
 
 	// --- DESTRUCTOR ---
@@ -72,8 +79,15 @@ public:
 	void 	set_analog_resolution(uint8_t res);
 	uint8_t get_analog_resolution();
 
-	int get_analog_val(int i);
+	int get_analog_val(uint8_t i);
 
+
+	AnalogConversion get_conversion(uint8_t pin);
+	void set_conversion(uint8_t pin, AnalogConversion c);
+
+	void set_enable_conversions(bool e);
+
+	float convert(uint8_t pin, uint16_t analog);
 
 
 	// Save a FlashStorage struct
@@ -85,9 +99,14 @@ public:
 
 private:
 
-	int read_analog(uint8_t chnl);
+	uint16_t read_analog(uint8_t chnl);
 
-	float convert(uint8_t pin, int analog);
+	float convert_voltage(uint16_t analog);
+	float convert_thermistor(uint16_t analog);
+	float convert_pH(uint16_t analog);
+	float convert_turbidity(uint16_t analog);	
+	float convert_EC(uint16_t analog);
+	float convert_TDS(uint16_t analog);
 
 };
 
