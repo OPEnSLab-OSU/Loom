@@ -32,7 +32,7 @@ public:
 
 	virtual void measure() {}
 	virtual void package(OSCBundle& bndl, char* suffix="") {}
-	virtual bool message_route(OSCMessage* msg, int address_offset) {}
+	virtual bool message_route(OSCMessage& msg, int address_offset) {}
 
 	virtual bool connect() = 0;
 	virtual bool is_connected() = 0;

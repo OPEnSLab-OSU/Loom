@@ -30,10 +30,11 @@ public:
 	void print_config();
 	void print_state();
 	void package(OSCBundle& bndl, char* suffix="");
-	bool message_route(OSCMessage* msg, int address_offset){}
+	bool message_route(OSCMessage& msg, int address_offset);
 
 	// Actuator Control
 	void set_relay(bool state);
+	void set_relay(OSCMessage& msg);
 
 private:
 

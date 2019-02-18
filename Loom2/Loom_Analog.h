@@ -74,7 +74,7 @@ public:
 	void print_measurements();
 	void measure();
 	void package(OSCBundle& bndl, char* suffix="");		 // This might be where analog conversions are applied
-	bool message_route(OSCMessage* msg, int address_offset);
+	bool message_route(OSCMessage& msg, int address_offset);
 
 	void 	set_analog_resolution(uint8_t res);
 	uint8_t get_analog_resolution();

@@ -167,7 +167,7 @@ void LoomModule::resolve_bundle_address(char* address, char* suffix)
 	// Perform message routing on an OSC message
 	// Only parsing the message should happen in message_route
 	// Complete action should have its own method
-	// bool LoomModule::message_route(OSCMessage* msg, int address_offset) = 0;
+	// bool LoomModule::message_route(OSCMessage& msg, int address_offset) = 0;
 
 	// Not sure if there should be a verison that takes a bundle as well
 		// Maybe in LoomManager , but not here

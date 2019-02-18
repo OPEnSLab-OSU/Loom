@@ -113,7 +113,7 @@ public:
 // 	// Append to a bundle 
 // 	void package(OSCBundle& bndl, char* id_prefix) {}
 
-// 	bool message_route(OSCMessage* msg, int address_offset) {}
+// 	bool message_route(OSCMessage& msg, int address_offset) {}
 
 
 

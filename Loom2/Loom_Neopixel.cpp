@@ -78,22 +78,20 @@ void Loom_Neopixel::package(OSCBundle& bndl, char* suffix)
 }
 
 
-bool Loom_Neopixel::message_route(OSCMessage* msg, int address_offset) 
+bool Loom_Neopixel::message_route(OSCMessage& msg, int address_offset) 
 {
 	// Set color
-	// if ( msg.dispatch("/SetNeopixel", 	set_color, 	address_offset) ) return true;
+	// if ( msg.dispatch("/SetNeopixel", cmd_color, address_offset) ) return true;
 	
-	if ( msg->fullMatch( "/SetNeopixel" , address_offset) ) {
-		set_color(msg);
-		return true;
+	if ( msg.fullMatch( "/SetNeopixel" , address_offset) ) {
+		set_color(msg); return true;
 	}
 
 	// Enable/Disable individual Neopixel
 
-
-
 	return false;
 }
+
 
 
 void Loom_Neopixel::enable_pin(uint8_t port, bool state)
@@ -106,13 +104,6 @@ void Loom_Neopixel::enable_pin(uint8_t port, bool state)
 	if (print_verbosity == HIGH) {
 		LOOM_DEBUG_Println4("Neopixel ", (state) ? "enabled" : "disabled", " on port ", port);
 	}
-}
-
-
-
-void Loom_Neopixel::set_color(OSCMessage* msg)
-{
-	set_color( msg->getInt(0), msg->getInt(1), msg->getInt(2), msg->getInt(3), msg->getInt(4) );
 }
 
 
@@ -143,5 +134,16 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 		}
 	}
 
+}
+
+void Loom_Neopixel::set_color(OSCMessage& msg)
+{
+	// 0 : 0-2 corresponding to A0-A2
+	// 1 : Which number in a daisy chain, starting at 0
+	// 2 : Red Val (0-255)
+	// 3 : Green Val (0-255)
+	// 4 : Blue Val (0-255)
+
+	set_color( msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3), msg.getInt(4) );
 }
 

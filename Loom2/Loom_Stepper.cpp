@@ -38,6 +38,17 @@ void Loom_Stepper::print_config()
 	LoomModule::print_config();
 }
 
+bool Loom_Stepper::message_route(OSCMessage& msg, int address_offset)
+{
+	if ( msg.fullMatch( "/SetStepper" , address_offset) ) {
+		move_steps(msg); return true;
+	}
+
+	return false;
+}
+
+
+
 void Loom_Stepper::move_steps(int motor, int steps, int speed, bool clockwise)
 {
 	motors[motor]->setSpeed( (speed > 0) ? speed : 0);
@@ -50,4 +61,13 @@ void Loom_Stepper::move_steps(int motor, int steps, int speed, bool clockwise)
 		LOOM_DEBUG_Println4("at speed ", speed, ", direction ", (clockwise) ? "clockwise" : "counterclockwise");
 	}
 
+}
+
+void Loom_Stepper::move_steps(OSCMessage& msg)
+{
+	// 0 : Motor # 
+	// 1 : # Steps
+	// 2 : Speed (0-255)
+	// 3 : Clockwise
+	move_steps( msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3) );
 }

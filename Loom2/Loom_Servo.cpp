@@ -32,6 +32,7 @@ void Loom_Servo::print_config()
 	LoomModule::print_config();
 }
 
+
 void Loom_Servo::print_state()
 {
 	print_module_label();
@@ -40,6 +41,7 @@ void Loom_Servo::print_state()
 		LOOM_DEBUG_Println5('\t\t', "Degree ", i, ": ", positions[i] );
 	}
 }
+
 
 void Loom_Servo::package(OSCBundle& bndl, char* suffix)
 {
@@ -56,6 +58,17 @@ void Loom_Servo::package(OSCBundle& bndl, char* suffix)
 	}
 }
 
+
+bool Loom_Servo::message_route(OSCMessage& msg, int address_offset)
+{
+	if ( msg.fullMatch( "/SetServo" , address_offset) ) {
+		set_degree(msg); return true;
+	}
+
+	return false;
+}
+
+
 void Loom_Servo::set_degree(int servo, int degree)
 {
 	
@@ -70,4 +83,14 @@ void Loom_Servo::set_degree(int servo, int degree)
 	}
 
 }
+
+
+void Loom_Servo::set_degree(OSCMessage& msg)
+{
+	// 0 : Servo #
+	// 1 : Degree
+	set_degree( msg.getInt(0), msg.getInt(1) );
+}
+
+
 

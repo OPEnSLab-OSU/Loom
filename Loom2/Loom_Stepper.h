@@ -38,10 +38,11 @@ public:
 	void print_state() {}
 	void measure() {}
 	void package(OSCBundle& bndl, char* suffix="") {}
-	bool message_route(OSCMessage* msg, int address_offset){}
+	bool message_route(OSCMessage& msg, int address_offset);
 
 	// Actuator Control 
 	void move_steps(int motor, int steps, int speed, bool clockwise);
+	void move_steps(OSCMessage& msg);
 
 private:
 

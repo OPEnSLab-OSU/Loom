@@ -31,7 +31,7 @@ void LoomSensor::print_config()
 // void LoomSensor::calibrate() {}
 
 
-// bool LoomSensor::message_route(OSCMessage* msg, int address_offset) {}
+// bool LoomSensor::message_route(OSCMessage& msg, int address_offset) {}
 
 
 void LoomSensor::set_num_samples(uint8_t n) { num_samples = n; }

@@ -54,7 +54,7 @@ void LoomLogPlat::measure()
 }
 
 
-bool LoomLogPlat::message_route(OSCMessage* msg, int address_offset) 
+bool LoomLogPlat::message_route(OSCMessage& msg, int address_offset) 
 {
 	// maybe set subnet_scope 
 }
