@@ -35,13 +35,13 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Neopixel();
 
+	// General
 	void print_config();
 	void print_state();
-
 	void package(OSCBundle& bndl, char* suffix="");
-
 	bool message_route(OSCMessage* msg, int address_offset);
 
+	// Actuator Control
 	void set_color(OSCMessage* msg);
 	void set_color( uint8_t port, uint8_t chain_num, uint8_t red, uint8_t green, uint8_t blue);
 

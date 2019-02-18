@@ -26,6 +26,8 @@ Loom_Multiplexer* 	MP;
 // LoomCommPlat* LR;
 
 // Loom_Ethernet_I* EI;
+// Loom_Relay* RL;
+
  
 LoomManager DeviceManager;
 
@@ -44,6 +46,7 @@ void setup()
 
 
 	AS = new Loom_Analog();
+	// RL = new Loom_Relay();
 	// AS->print_config();
 
 	// AS->measure();
@@ -66,8 +69,8 @@ void setup()
 	// OL = new LoomOLED();
 	// OL->print_config();
 
-	SC = new Loom_SD();
-	SC->print_config();
+	// SC = new Loom_SD();
+	// SC->print_config();
 
 	// RT = new Loom_DS3231();
 	// RT = new Loom_PCF8523();
@@ -86,14 +89,15 @@ void setup()
 
 	DeviceManager.add_module(AS);
 	// DeviceManager.add_module(NP);
-	DeviceManager.add_module(SC);
+	// DeviceManager.add_module(SC);
 	// DeviceManager.add_module(OL);
 	// DeviceManager.add_module(LR);
 	// DeviceManager.add_module(SH);
 	// DeviceManager.add_module(RT);
+	// DeviceManager.add_module(RL);
 
 // 
-	DeviceManager.add_module(MP);
+	// DeviceManager.add_module(MP);
 	// DeviceManager.add_module(EI);
 
 

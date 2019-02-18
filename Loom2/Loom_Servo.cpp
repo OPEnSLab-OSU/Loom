@@ -7,8 +7,13 @@
 
 
 // --- CONSTRUCTOR ---
-Loom_Servo::Loom_Servo( char* module_name ) : LoomActuator( module_name ) 
+Loom_Servo::Loom_Servo( char* module_name, uint8_t servo_count ) : LoomActuator( module_name ) 
 {
+
+	this->servo_count = servo_count;
+
+	this->positions = new int[servo_count];
+
 	servo_driver.begin();
 	servo_driver.setPWMFreq(60);
 }
@@ -16,7 +21,7 @@ Loom_Servo::Loom_Servo( char* module_name ) : LoomActuator( module_name )
 // --- DESTRUCTOR ---
 Loom_Servo::~Loom_Servo() 
 {
-
+	delete positions;
 }
 
 
@@ -31,7 +36,7 @@ void Loom_Servo::print_state()
 {
 	print_module_label();
 	LOOM_DEBUG_Println2('\t', "Servo Positions:" );
-	for (int i = 1; i < NUM_SERVOS; i++) {
+	for (int i = 1; i < servo_count; i++) {
 		LOOM_DEBUG_Println5('\t\t', "Degree ", i, ": ", positions[i] );
 	}
 }
@@ -42,7 +47,7 @@ void Loom_Servo::package(OSCBundle& bndl, char* suffix)
 	resolve_bundle_address(id_prefix, "Positions");
 
 	char tmp[8];
-	for (int i = 0; i < NUM_SERVOS; i++) {
+	for (int i = 0; i < servo_count; i++) {
 		sprintf(tmp, "Servo%d", i);
 		if (i == 0) {
 			append_to_bundle(bndl, id_prefix, tmp, positions[i], NEW_MSG); 
@@ -54,12 +59,15 @@ void Loom_Servo::package(OSCBundle& bndl, char* suffix)
 void Loom_Servo::set_degree(int servo, int degree)
 {
 	
-	if (servo < NUM_SERVOS) {
-		// uint16_t pulse_length = map(degree, 0, 180, SERVOMIN, SERVOMAX);
+	if (servo < servo_count) {
 		servo_driver.setPWM(servo, 0, map(degree, 0, 180, SERVOMIN, SERVOMAX));
 		positions[servo]          = degree;		
-		// pre_pulselength[servo] = pulse_length;
 	}	
+
+	if (print_verbosity == HIGH) {
+		print_module_label();
+		LOOM_DEBUG_Println4("Set servo ", servo, "to degree ", degree);
+	}
 
 }
 
