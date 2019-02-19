@@ -36,7 +36,6 @@ public:
 	// General
 	void print_config();
 	void print_state() {}
-	void measure() {}
 	void package(OSCBundle& bndl, char* suffix="") {}
 	bool message_route(OSCMessage& msg, int address_offset);
 
@@ -49,4 +48,4 @@ private:
 };
 
 
-#endif
+#endif // of LOOM_STEPPER_h

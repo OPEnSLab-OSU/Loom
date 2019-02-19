@@ -41,4 +41,4 @@ private:
 };
 
 
-#endif
+#endif // of LOOM_RELAY_h

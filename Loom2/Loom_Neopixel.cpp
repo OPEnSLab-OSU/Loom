@@ -143,7 +143,6 @@ void Loom_Neopixel::set_color(OSCMessage& msg)
 	// 2 : Red Val (0-255)
 	// 3 : Green Val (0-255)
 	// 4 : Blue Val (0-255)
-
 	set_color( msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3), msg.getInt(4) );
 }
 

@@ -37,7 +37,7 @@ void Loom_Relay::package(OSCBundle& bndl, char* suffix)
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, suffix);
 
-	append_to_bundle(bndl, id_prefix, "Relay" , on, NEW_MSG);
+	append_to_bundle(bndl, id_prefix, "Relay", on, NEW_MSG);
 }
 
 

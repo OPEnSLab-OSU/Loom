@@ -119,10 +119,6 @@ void Loom_Analog::print_measurements()
 	LOOM_DEBUG_Println("Measurements:");
 	LOOM_DEBUG_Println2("\tBattery = ", battery);
 	for (int i = 0; i < ANALOG_COUNT; i++) {
-	// 	if (pin_enabled[i]) {
-	// 		LOOM_DEBUG_Println4("\tA", i, " = ", analog_vals[i]);
-	// 	}
-	// }
 		if ( (!enable_conversions) || (conversions[i] == NO_CONVERT) ) {
 			LOOM_DEBUG_Println4("\tA", i, " = ", analog_vals[i]);
 		} else {
