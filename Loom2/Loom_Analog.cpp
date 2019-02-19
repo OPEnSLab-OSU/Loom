@@ -62,7 +62,9 @@ Loom_Analog::Loom_Analog(	char*   module_name 	,
 	analogReadResolution(this->read_resolution);
 
 	// Zero out array of measurements 
-	for (int i = 0; i < ANALOG_COUNT; i++) { analog_vals[i] = 0; }
+	for (int i = 0; i < ANALOG_COUNT; i++) { 
+		analog_vals[i] = 0; 
+	}
 	battery = 0.;
 
 	// Set enabled pins
@@ -72,6 +74,13 @@ Loom_Analog::Loom_Analog(	char*   module_name 	,
 	pin_enabled[3] = enableA3;
 	pin_enabled[4] = enableA4;
 	pin_enabled[5] = enableA5;
+
+
+	for (int i = 0; i < ANALOG_COUNT; i++) {
+		if (pin_enabled[i]) {
+			pinMode(14+i, INPUT);
+		}
+	}
 
 	// Set conversions
 	this->enable_conversions = true;
@@ -190,10 +199,27 @@ uint8_t Loom_Analog::get_analog_resolution()
 }
 
 
-int Loom_Analog::get_analog_val(uint8_t i) 
+int Loom_Analog::get_analog_val(uint8_t pin) 
 {
-	return ( (i >= 0) && (i < ANALOG_COUNT) ) ? analog_vals[i] : -1;
+	return ( (pin >= 0) && (pin < ANALOG_COUNT) ) ? analog_vals[pin] : -1;
 }
+
+
+
+bool Loom_Analog::get_pin_enabled(uint8_t pin)
+{
+	return pin_enabled[pin];
+}
+
+void Loom_Analog::set_pin_enabled(uint8_t pin, bool e)
+{
+	pin_enabled[pin] = e;
+	if (pin_enabled[pin]) {
+		pinMode(14+pin, INPUT);
+	}
+}
+
+
 
 
 AnalogConversion Loom_Analog::get_conversion(uint8_t pin)
