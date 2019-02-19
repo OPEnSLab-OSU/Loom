@@ -30,12 +30,9 @@ public:
 	virtual ~Loom_DS3231();
 
 	void print_config();
-
-	// void package(OSCBundle& bndl, char* id_prefix);
+	bool message_route(OSCMessage& msg, int address_offset) {}
 
 	DateTime now();
-
-	bool message_route(OSCMessage& msg, int address_offset) {}
 
 
 	// Alarm functions

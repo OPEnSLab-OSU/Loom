@@ -90,21 +90,23 @@ void LoomRTC::print_config()
 }
 
 
+void LoomRTC::package(OSCBundle& bndl, char* suffix)
+{
+	char id_prefix[30]; 
+	resolve_bundle_address(id_prefix, suffix);
+
+	read_rtc();
+	append_to_bundle(bndl, id_prefix, "DateString", datestring, NEW_MSG);
+	append_to_bundle(bndl, id_prefix, "TimeString", timestring);
+}
+
+
 void LoomRTC::print_time()
 {
-	// measure();
+	read_rtc();
 	print_module_label();
 
 	Println("Time:");
-	// char buf[20];
-	// get_datestring(buf);
-	// Println2("\tDate: ", buf);
-	// get_timestring(buf);
-	// Println2("\tTime: ", buf);
-	// Println2("\tDay : ", get_weekday());
-	// Println();
-
-
 	Println2("\tDate: ", get_datestring());
 	Println2("\tTime: ", get_timestring());
 	Println2("\tDay : ", get_weekday());
@@ -128,24 +130,6 @@ void LoomRTC::read_rtc()
 {
 	get_datestring();
 	get_timestring();
-}
-
-
-// void LoomRTC::measure()
-// {
-// 	get_datestring();
-// 	get_timestring();
-// }
-
-
-void LoomRTC::package(OSCBundle& bndl, char* suffix)
-{
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	measure();
-	append_to_bundle(bndl, id_prefix, "DateString", datestring, NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "TimeString", timestring);
 }
 
 

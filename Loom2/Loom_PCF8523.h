@@ -25,12 +25,10 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_PCF8523();
 
-
 	void print_config();
-
-	DateTime now();
-
 	bool message_route(OSCMessage& msg, int address_offset) {}
+	
+	DateTime now();
 
 protected:
 
