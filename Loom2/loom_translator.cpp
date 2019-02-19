@@ -392,5 +392,4 @@ void convert_array(String src [], char dest [][20], int count)
 
 
 
-// #endif // of #ifndef LOOM_TRANSLATOR_h
 

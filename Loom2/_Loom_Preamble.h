@@ -7,6 +7,7 @@
 // General Macros
 #include "Loom_Macros.h"
 
+// Type and Format Conversion Functions
 #include "Loom_Translator.h"
 
 // Core Classes
@@ -22,7 +23,6 @@
 
 // Internet Platforms
 #include "Loom_InternetEthernet.h"
-
 
 // Sensors
 #include "Loom_Analog.h"

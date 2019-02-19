@@ -7,7 +7,7 @@
 
 
 #define VBATPIN A7
-#define ANALOG_COUNT
+#define ANALOG_COUNT 6
 
 typedef struct {
 	byte checksum;  
@@ -54,15 +54,15 @@ public:
 					uint8_t read_resolution 		= 12,
 					bool    enableA0 				= true,
 					bool    enableA1 				= true,
-					bool    enableA2 				= false,
+					bool    enableA2 				= true,
 					bool    enableA3 				= true,
 					bool    enableA4 				= true,
 					bool    enableA5 				= true,
 
 					AnalogConversion convertA0		= NO_CONVERT,
-					AnalogConversion convertA1		= NO_CONVERT,
+					AnalogConversion convertA1		= CONVERT_VOLTAGE,
 					AnalogConversion convertA2		= NO_CONVERT,
-					AnalogConversion convertA3		= NO_CONVERT,
+					AnalogConversion convertA3		= CONVERT_VOLTAGE,
 					AnalogConversion convertA4		= NO_CONVERT,
 					AnalogConversion convertA5		= NO_CONVERT
 				);

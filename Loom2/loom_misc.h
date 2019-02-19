@@ -109,9 +109,6 @@ int osc_address_section_count(OSCBundle* bndl);
 
 
 
-// add the char* return versions here
-
-
 char get_message_type(OSCMessage* msg);
 int extract_family_number(OSCMessage* msg);
 int extract_family_number(OSCBundle& bndl);
