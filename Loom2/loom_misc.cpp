@@ -29,11 +29,11 @@ String get_data_value(OSCMessage* msg, int pos)
 				msg->getString(pos, buf, 256);
 				return String(buf);
 			default:
-				LOOM_DEBUG_Println("Unsupported data data_type.");
+				Println("Unsupported data data_type.");
 				return String("");
 		}
 	}
-	LOOM_DEBUG_Println2("Message does not have an argument at position: ", pos);
+	Println2("Message does not have an argument at position: ", pos);
 
 	return String("");
 }
@@ -56,25 +56,25 @@ void print_message(OSCMessage* msg, bool detail)
 		char buf[50];
 
 		if (!detail) {
-			LOOM_DEBUG_Print(get_address_string(msg).c_str());
+			Print(get_address_string(msg).c_str());
 			for (int i = 0; i < msg->size(); i++) {
-				LOOM_DEBUG_Print("  ");
+				Print("  ");
 				switch(msg->getType(i)) {
-					case 'f': LOOM_DEBUG_Print(msg->getFloat(i) ); break;
-					case 'i': LOOM_DEBUG_Print(msg->getInt(i)   ); break;
-					case 's': msg->getString(i, buf, 50); LOOM_DEBUG_Print(buf); break;
+					case 'f': Print(msg->getFloat(i) ); break;
+					case 'i': Print(msg->getInt(i)   ); break;
+					case 's': msg->getString(i, buf, 50); Print(buf); break;
 					default: break;
 				}
 			}
-			LOOM_DEBUG_Println();
+			Println();
 		} else {
-			LOOM_DEBUG_Println2("\tAddress: ", get_address_string(msg).c_str());
+			Println2("\tAddress: ", get_address_string(msg).c_str());
 			for (int i = 0; i < msg->size(); i++) {
-				LOOM_DEBUG_Print3("\tValue (", i, ") ");
+				Print3("\tValue (", i, ") ");
 				switch(msg->getType(i)) {
-					case 'f': LOOM_DEBUG_Println2("(f) ", msg->getFloat(i) ); break;
-					case 'i': LOOM_DEBUG_Println2("(i) ", msg->getInt(i) );   break;
-					case 's': msg->getString(i, buf, 50); LOOM_DEBUG_Println2("(s) ", buf ); break;
+					case 'f': Println2("(f) ", msg->getFloat(i) ); break;
+					case 'i': Println2("(i) ", msg->getInt(i) );   break;
+					case 's': msg->getString(i, buf, 50); Println2("(s) ", buf ); break;
 					default: break;
 				}
 			}
@@ -89,14 +89,14 @@ void print_bundle(OSCBundle& bndl)
 
 	char buf[50];
 	char data_type;
-	LOOM_DEBUG_Println2("\nBundle Size: ", bndl.size());
+	Println2("\nBundle Size: ", bndl.size());
 	OSCMessage *msg;
 
 	for (int i = 0; i < bndl.size(); i++) {
-		LOOM_DEBUG_Println2("Message: ", i);
+		Println2("Message: ", i);
 		print_message(bndl.getOSCMessage(i));
 	}
-	LOOM_DEBUG_Println();
+	Println();
 }
 
 
@@ -448,7 +448,7 @@ void deep_copy_message(OSCMessage* src_msg, OSCMessage* dest_msg)
  			case 'i': dest_msg->add(src_msg->getInt(i));	    break;
  			case 'f': dest_msg->add(src_msg->getFloat(i));	break;
  			case 's': char buf[256];  src_msg->getString(i, buf, 256);  dest_msg->add(buf);  break;
- 			default: LOOM_DEBUG_Println("Unsupported data data_type.");
+ 			default: Println("Unsupported data data_type.");
  		}
 	}
 

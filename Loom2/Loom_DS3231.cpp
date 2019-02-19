@@ -16,11 +16,11 @@ Loom_DS3231::Loom_DS3231(	char* 	module_name,
 
 	if (!rtc_inst->begin()) {
 		print_module_label();
-		LOOM_DEBUG_Println("Couldn't find RTC");
+		Println("Couldn't find RTC");
 		// while (1);	// remove while(1)
 	}
 
-	LOOM_DEBUG_Println("\nCurrent Time (before possible resetting)");
+	Println("\nCurrent Time (before possible resetting)");
 	print_time();
 
 
@@ -37,7 +37,7 @@ Loom_DS3231::Loom_DS3231(	char* 	module_name,
 		// The following section checks if RTC is running, else sets 
 		// the time to the time that the sketch was compiled
 		if (rtc_inst->lostPower()) {
-			LOOM_DEBUG_Println("RTC 3231 lost power");
+			Println("RTC 3231 lost power");
 			set_rtc_to_compile_time();
 		}
 

@@ -24,17 +24,17 @@ Loom_Ethernet_I::Loom_Ethernet_I(	char* module_name,
 	connect();
 
 	// if (client->connect("www.google.com", 80)) {
-	// 	LOOM_DEBUG_Println("Successfully connected to internet");
+	// 	Println("Successfully connected to internet");
 	// 	client->stop();
 	// } else {
-	// 	LOOM_DEBUG_Println("Failed to connect to internet");
+	// 	Println("Failed to connect to internet");
 	// }
 		// UDP->begin(8888);
 
 
-	// LOOM_DEBUG_Println2("Connected : ", is_connected());
-	// LOOM_DEBUG_Println2("Time      : ", get_time());
-	// LOOM_DEBUG_Println2("Time      : ", get_time());
+	// Println2("Connected : ", is_connected());
+	// Println2("Time      : ", get_time());
+	// Println2("Time      : ", get_time());
 
 
 }
@@ -50,16 +50,16 @@ Loom_Ethernet_I::~Loom_Ethernet_I()
 void Loom_Ethernet_I::print_config()
 {
 	LoomInternetPlat::print_config();
-	LOOM_DEBUG_Print2('\t', "MAC:                : [");
+	Print2('\t', "MAC:                : [");
 	for (int i = 0; i < 6; i++) {
-		LOOM_DEBUG_Print_Hex(mac[i]);
-		if (i < 5) LOOM_DEBUG_Print(",");
-		else 	   LOOM_DEBUG_Println("]");
+		Print_Hex(mac[i]);
+		if (i < 5) Print(",");
+		else 	   Println("]");
 	}
 
-	LOOM_DEBUG_Print2('\t', "IP:                 : " );
-	LOOM_DEBUG_Print4(  ip[0], ".", ip[1], ".");
-	LOOM_DEBUG_Println3(ip[2], ".", ip[3]);
+	Print2('\t', "IP:                 : " );
+	Print4(  ip[0], ".", ip[1], ".");
+	Println3(ip[2], ".", ip[3]);
 	
 }
 
@@ -67,7 +67,7 @@ void Loom_Ethernet_I::print_config()
 void Loom_Ethernet_I::print_state()
 {
 	LoomInternetPlat::print_state();	
-	// LOOM_DEBUG_Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
+	// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 
 
@@ -77,14 +77,14 @@ bool Loom_Ethernet_I::connect()
 
 	if (Ethernet.begin(mac) == 0) {
 		print_module_label();
-		LOOM_DEBUG_Println("Failed to configure Ethernet using DHCP");
+		Println("Failed to configure Ethernet using DHCP");
 		// try to congifure using IP address instead of DHCP:
 		Ethernet.begin(mac, ip);
 	}
 	
 	bool status = is_connected();
 	print_module_label();
-	LOOM_DEBUG_Println2("Connect to internet ", (status) ? "successful" : "failed" );
+	Println2("Connect to internet ", (status) ? "successful" : "failed" );
 
 	if (!status) client->stop();
 	
@@ -96,10 +96,10 @@ bool Loom_Ethernet_I::is_connected()
 {
 
 	bool status = client->connect("www.google.com", 80);
-		LOOM_DEBUG_Println2("CONNECTED STATUS: ", client->connected() );
+		Println2("CONNECTED STATUS: ", client->connected() );
 
 	// print_module_label();
-	// LOOM_DEBUG_Println2("Connect to internet ", (status) ? "successful" : "failed" );
+	// Println2("Connect to internet ", (status) ? "successful" : "failed" );
 	return status;
 }
 
@@ -118,22 +118,22 @@ const int NTP_PACKET_SIZE = 48; 			// NTP time stamp is in the first 48 bytes of
 void print_unix_time(unsigned long epoch) 
 {
 	// print Unix time:
-	LOOM_DEBUG_Println2("Epoch:", epoch);
+	Println2("Epoch:", epoch);
 
 
 	// print the hour, minute and second:
-	// LOOM_DEBUG_Print("The UTC time is ");       // UTC is the time at Greenwich Meridian (GMT)
-	LOOM_DEBUG_Print2((epoch  % 86400L) / 3600, ":"); // print the hour (86400 equals secs per day)
+	// Print("The UTC time is ");       // UTC is the time at Greenwich Meridian (GMT)
+	Print2((epoch  % 86400L) / 3600, ":"); // print the hour (86400 equals secs per day)
 	if (((epoch % 3600) / 60) < 10) {
 		// In the first 10 minutes of each hour, we'll want a leading '0'
-		LOOM_DEBUG_Print('0');
+		Print('0');
 	}
-	LOOM_DEBUG_Print2((epoch  % 3600) / 60, ":"); // print the minute (3600 equals secs per minute)
+	Print2((epoch  % 3600) / 60, ":"); // print the minute (3600 equals secs per minute)
 	if ((epoch % 60) < 10) {
 		// In the first 10 seconds of each minute, we'll want a leading '0'
-		LOOM_DEBUG_Print('0');
+		Print('0');
 	}
-	LOOM_DEBUG_Println(epoch % 60); // print the second
+	Println(epoch % 60); // print the second
 }
 
 
@@ -165,11 +165,11 @@ uint32_t Loom_Ethernet_I::get_time()
 		// combine the four bytes (two words) into a long integer
 		// this is NTP time (seconds since Jan 1 1900):
 		unsigned long secsSince1900 = highWord << 16 | lowWord;
-		// LOOM_DEBUG_Print("Seconds since Jan 1 1900 = ");
-		LOOM_DEBUG_Println(secsSince1900);
+		// Print("Seconds since Jan 1 1900 = ");
+		Println(secsSince1900);
 
 		// now convert NTP time into everyday time:
-		// LOOM_DEBUG_Print("Unix time = ");
+		// Print("Unix time = ");
 		// Unix time starts on Jan 1 1970. In seconds, that's 2208988800:
 		const unsigned long seventyYears = 2208988800UL;
 		// subtract seventy years:

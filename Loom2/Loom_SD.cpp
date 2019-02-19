@@ -14,7 +14,7 @@
 Loom_SD::Loom_SD(		char* module_name, bool enable_rate_filter, uint min_filter_delay, byte chip_select, char* default_file)
 	: LoomLogPlat( module_name, enable_rate_filter, min_filter_delay )
 {
-	LOOM_DEBUG_Println("SD Setup");
+	Println("SD Setup");
 
 	this->chip_select  = chip_select;
 	this->default_file = default_file;
@@ -26,7 +26,7 @@ Loom_SD::Loom_SD(		char* module_name, bool enable_rate_filter, uint min_filter_d
 
 	sd_found = SD.begin(chip_select);
 	print_module_label();
-	LOOM_DEBUG_Println2("Initialize ", (sd_found) ? "sucessful" : "failed (will continue, but SD functions will be skipped)");
+	Println2("Initialize ", (sd_found) ? "sucessful" : "failed (will continue, but SD functions will be skipped)");
 
 
 }
@@ -42,12 +42,12 @@ void Loom_SD::print_config()
 {
 	LoomLogPlat::print_config();
 
-	LOOM_DEBUG_Println3('\t', "Chip Select Pin     : ", chip_select);
-	LOOM_DEBUG_Println3('\t', "SD Found            : ", (sd_found) ? "True" : "False");
+	Println3('\t', "Chip Select Pin     : ", chip_select);
+	Println3('\t', "SD Found            : ", (sd_found) ? "True" : "False");
 
-	// LOOM_DEBUG_Println3('\t', "SD Version        : ", enum_oled_version_string(version) );
+	// Println3('\t', "SD Version        : ", enum_oled_version_string(version) );
 	// if (version == BREAKOUT) {
-	// 	LOOM_DEBUG_Println3('\t', "Reset Pin           : ", reset_pin );		
+	// 	Println3('\t', "Reset Pin           : ", reset_pin );		
 	// }
 }
 
@@ -105,7 +105,7 @@ bool Loom_SD::dump_file(char* file)
 		File SDFile = SD.open(file);
 
 		if (SDFile) {
-			LOOM_DEBUG_Println2("Contents of file: ", file);
+			Println2("Contents of file: ", file);
 
 			// read from the file until there's nothing else in it:
 			while (SDFile.available()) 
@@ -115,7 +115,7 @@ bool Loom_SD::dump_file(char* file)
 			return true;
 		} else {
 			// if the file didn't open, print an error:
-			LOOM_DEBUG_Println2("Error opening ", file);
+			Println2("Error opening ", file);
 			return false;
 		}
 
@@ -178,7 +178,7 @@ bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int tim
 
 	// If file successfully opened
 	if (SDFile) {
-		LOOM_DEBUG_Print3("Saving array to SD file: '", file, "' ...");
+		Print3("Saving array to SD file: '", file, "' ...");
 
 		char time_key[30], time_val[30];
 
@@ -186,7 +186,7 @@ bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int tim
 			if (device_manager != NULL) {
 				LoomRTC* rtc = device_manager->get_rtc_module(0);
 				if (rtc != NULL) {
-					LOOM_DEBUG_Println2("RTC Object: ", rtc->get_module_name() );
+					Println2("RTC Object: ", rtc->get_module_name() );
 					rtc->get_timestamp(time_key, time_val, delimiter, timestamp);
 					got_timestamp = true; 
 				}
@@ -253,14 +253,14 @@ bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int tim
 		}
 
 		SDFile.close();
-		LOOM_DEBUG_Println("Done");
+		Println("Done");
 		
 		return true;
 	} 
 	
 	// If file could not be opened
 	else {
-		LOOM_DEBUG_Println2("Error opening: ", file);
+		Println2("Error opening: ", file);
 		
 		return false;
 	}

@@ -33,14 +33,14 @@ void Loom_Fona::print_config()
 {
 	LoomInternetPlat::print_config();
 	
-	// LOOM_DEBUG_Println2('\t', "IP:                 : " );	
+	// Println2('\t', "IP:                 : " );	
 }
 
 
 void Loom_Fona::print_state()
 {
 	LoomInternetPlat::print_state();	
-	// LOOM_DEBUG_Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
+	// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 
 

@@ -19,8 +19,8 @@ Loom_LoRa::Loom_LoRa( 	char* module_name,
 	: LoomCommPlat( module_name, max_message_len, compress_messages )
 
 { 
-	// LOOM_DEBUG_Println("LoRa Constructor 1");
-	LOOM_DEBUG_Println("LoRa Setup");
+	// Println("LoRa Constructor 1");
+	Println("LoRa Setup");
 
 	// Create instances of driver and manager
 	this->driver         = new RH_RF95(RFM95_CS, RFM95_INT);
@@ -40,26 +40,26 @@ Loom_LoRa::Loom_LoRa( 	char* module_name,
 	// Initialize Manager
 	status = manager->init();
 	print_module_label();
-	LOOM_DEBUG_Println2("\tInitializing Manager ", (status) ? "Success" : "Failed");
+	Println2("\tInitializing Manager ", (status) ? "Success" : "Failed");
 	
 	// Set Frequency
 	status = driver->setFrequency(RF95_FREQ);
 	print_module_label();
-	LOOM_DEBUG_Println2( "\tSetting Frequency ", (status) ? "Success" : "Failed" );
+	Println2( "\tSetting Frequency ", (status) ? "Success" : "Failed" );
 
 	// Set Power Level
 	print_module_label();
-	LOOM_DEBUG_Println2("\tSetting Power Level to ", this->power_level);
+	Println2("\tSetting Power Level to ", this->power_level);
 	driver->setTxPower(this->power_level, false);
 
 	// Set Retry Delay
 	print_module_label();
-	LOOM_DEBUG_Println3("\tSetting retry timeout to ", this->retry_timeout, " ms");
+	Println3("\tSetting retry timeout to ", this->retry_timeout, " ms");
 	manager->setTimeout(this->retry_timeout);
 
 	// Set Max Retry Count
 	print_module_label();
-	LOOM_DEBUG_Println2("\tSetting max retry count ", this->retry_count);
+	Println2("\tSetting max retry count ", this->retry_count);
 	manager->setRetries(this->retry_count);
 }
 
@@ -77,10 +77,10 @@ void Loom_LoRa::print_config()
 {
 	LoomCommPlat::print_config();
 
-	LOOM_DEBUG_Println3('\t', "Address             : ", address );
-	LOOM_DEBUG_Println3('\t', "Power Level         : ", power_level );
-	LOOM_DEBUG_Println3('\t', "Retry Count         : ", retry_count );
-	LOOM_DEBUG_Println3('\t', "Retry Timeout       : ", retry_timeout );
+	Println3('\t', "Address             : ", address );
+	Println3('\t', "Power Level         : ", power_level );
+	Println3('\t', "Retry Count         : ", retry_count );
+	Println3('\t', "Retry Timeout       : ", retry_timeout );
 }
 
 
@@ -98,24 +98,24 @@ bool Loom_LoRa::receive_bundle(OSCBundle& bndl)
 
 			signal_strength = driver->lastRssi();
 
-			LOOM_DEBUG_Println2("Received: ", (const char*)buf);
-			LOOM_DEBUG_Println2("Len: ", len);
+			Println2("Received: ", (const char*)buf);
+			Println2("Len: ", len);
 
 			// This is done just in case the compressed string, uncompresses to more than 251 characters
 			char larger_buf[384];
 			memset(larger_buf, '\0', sizeof(larger_buf));
 			strcpy(larger_buf, (const char*)buf);
 
-			LOOM_DEBUG_Println("Memset larger_buf");
+			Println("Memset larger_buf");
 
 			LoomCommPlat::convert_string_to_bundle( (char*)larger_buf, bndl ); 
 
-			LOOM_DEBUG_Println("Converted string to bundle");
+			Println("Converted string to bundle");
 
 			// Apply filtering based on family and subnet
 			bool in_scope = LoomCommPlat::scope_filter(bndl);
 			if (!in_scope) {
-				LOOM_DEBUG_Println("Received LoRa bundle out of scope");
+				Println("Received LoRa bundle out of scope");
 			}
 
 			return in_scope;
@@ -133,19 +133,19 @@ bool Loom_LoRa::send_bundle(OSCBundle& bndl, uint16_t destination)
 // bool send_bundle(OSCBundle& bndl, uint16_t destination=01) 
 // bool send_bundle(OSCBundle& bndl) 
 {
-	LOOM_DEBUG_Println2("Sending LoRa bundle to address: ", destination);
+	Println2("Sending LoRa bundle to address: ", destination);
 
 	char message[RH_RF95_MAX_MESSAGE_LEN];
 	memset(message, '\0', sizeof(message));
 	LoomCommPlat::convert_bundle_to_string(bndl, message);
 
-	LOOM_DEBUG_Println(message);
-	LOOM_DEBUG_Println2("Message length: ", strlen(message));
+	Println(message);
+	Println2("Message length: ", strlen(message));
 	 
 	// bool is_sent = manager->sendtoWait( (uint8_t*)message, strlen(message)+1, destination );
 	bool is_sent = manager->sendtoWait( (uint8_t*)message, strlen(message), destination );
 
-	LOOM_DEBUG_Println2("Send LoRa bundle " , (is_sent) ? "successful" : "failed" );
+	Println2("Send LoRa bundle " , (is_sent) ? "successful" : "failed" );
 
 	signal_strength = driver->lastRssi(); 
 

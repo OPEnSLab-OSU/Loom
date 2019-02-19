@@ -36,9 +36,9 @@ void LoomLogPlat::print_config()
 {
 	LoomModule::print_config();
 
-	LOOM_DEBUG_Println3('\t', "Enable Log Filter   : ", (enable_rate_filter) ? "Enabled" : "Disabled" );
+	Println3('\t', "Enable Log Filter   : ", (enable_rate_filter) ? "Enabled" : "Disabled" );
 	if (enable_rate_filter) {
-		LOOM_DEBUG_Println3('\t', "Minimum Filter Delay: ", min_filter_delay );
+		Println3('\t', "Minimum Filter Delay: ", min_filter_delay );
 	}
 }
 
@@ -63,14 +63,14 @@ bool LoomLogPlat::message_route(OSCMessage& msg, int address_offset)
 bool LoomLogPlat::check_millis() 
 {
 	if ( (millis() > min_filter_delay) && ( (millis()-last_log_millis) < min_filter_delay ) ) {
-		LOOM_DEBUG_Println("FALSE");
-		LOOM_DEBUG_Println2("millis: ", millis() );
-		LOOM_DEBUG_Println2("last millis: ", last_log_millis );
-		LOOM_DEBUG_Println2("delay: ", min_filter_delay );
+		Println("FALSE");
+		Println2("millis: ", millis() );
+		Println2("last millis: ", last_log_millis );
+		Println2("delay: ", min_filter_delay );
 
 		return false;
 	} else {
-		LOOM_DEBUG_Println("TRUE");
+		Println("TRUE");
 		last_log_millis = millis();
 		return true;
 	}

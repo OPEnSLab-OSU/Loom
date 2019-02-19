@@ -46,7 +46,7 @@ LoomCommPlat::LoomCommPlat( char* module_name, uint max_message_len, bool compre
 
 	: LoomModule( module_name )
 {
-	// LOOM_DEBUG_Println("LoomCommPlat Constructor 1");
+	// Println("LoomCommPlat Constructor 1");
 	this->max_message_len   = max_message_len;
 	// this->subnet_scope      = subnet_scope; 
 	this->compress_messages = compress_messages;
@@ -66,9 +66,9 @@ void LoomCommPlat::print_config()
 {
 	LoomModule::print_config();
 
-	LOOM_DEBUG_Println3('\t', "Max Message Length  : ", max_message_len );
-	// LOOM_DEBUG_Println3('\t', "Communication Scope : ", enum_subnet_scope_string(subnet_scope) );
-	LOOM_DEBUG_Println3('\t', "Compress Messages   : ", (compress_messages) ? "Enabled" : "Disabled" );
+	Println3('\t', "Max Message Length  : ", max_message_len );
+	// Println3('\t', "Communication Scope : ", enum_subnet_scope_string(subnet_scope) );
+	Println3('\t', "Compress Messages   : ", (compress_messages) ? "Enabled" : "Disabled" );
 }
 
 void LoomCommPlat::package(OSCBundle& bndl, char* suffix) 
@@ -133,15 +133,15 @@ bool LoomCommPlat::scope_filter(OSCBundle& bndl, int* offset)
 	strcpy(test, test+2);
 
 	// if ( strlen(test) == 0 ) {
-	// 	LOOM_DEBUG_Println("Out of scope");
+	// 	Println("Out of scope");
 	// 	bndl.empty();
 	// 	return false; 
 	// }
 
-	// LOOM_DEBUG_Println2("[Scope Filter] Address: ", address);
-	// LOOM_DEBUG_Println2("[Scope Filter] Test: ", test);
-	// LOOM_DEBUG_Println2("[Scope Filter] len(address): ", strlen(address) );
-	// LOOM_DEBUG_Println2("[Scope Filter] len(test): ", strlen(test) );
+	// Println2("[Scope Filter] Address: ", address);
+	// Println2("[Scope Filter] Test: ", test);
+	// Println2("[Scope Filter] len(address): ", strlen(address) );
+	// Println2("[Scope Filter] len(test): ", strlen(test) );
 
 
 	// Compare addresses
@@ -150,7 +150,7 @@ bool LoomCommPlat::scope_filter(OSCBundle& bndl, int* offset)
 		pass = true;
 	}
 
-	LOOM_DEBUG_Println2("[Scope Filter] Pass: ", (pass) ? "true" : "false" );
+	Println2("[Scope Filter] Pass: ", (pass) ? "true" : "false" );
 
 	// Empty bundle if out of scope
 	if (!pass) bndl.empty();
@@ -305,7 +305,7 @@ void LoomCommPlat::original_convert_bundle_to_string(OSCBundle& bndl, char* osc_
 					break;
 				default:
 					if (data_type != '\0') {
-						LOOM_DEBUG_Println("Invalid message arg type");
+						Println("Invalid message arg type");
 					}
 					break;
 			}

@@ -20,10 +20,10 @@ Loom_PCF8523::Loom_PCF8523(	char* 	module_name,
 
 	if (!rtc_inst->begin()) {
 		print_module_label();
-		LOOM_DEBUG_Println("Couldn't find RTC");
+		Println("Couldn't find RTC");
 	}
 
-	LOOM_DEBUG_Println("\nCurrent Time (before possible resetting)");
+	Println("\nCurrent Time (before possible resetting)");
 	print_time();
 
 
@@ -41,7 +41,7 @@ Loom_PCF8523::Loom_PCF8523(	char* 	module_name,
 		// the time to the time that the sketch was compiled
 		if (!rtc_inst->initialized()) {
 			print_module_label();
-			LOOM_DEBUG_Println("RTC 8523 was not initialized");
+			Println("RTC 8523 was not initialized");
 			set_rtc_to_compile_time();
 		}
 

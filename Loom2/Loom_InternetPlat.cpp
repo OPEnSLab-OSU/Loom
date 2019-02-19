@@ -36,7 +36,7 @@ void LoomInternetPlat::print_config()
 
 void LoomInternetPlat::print_state()
 {
-	LOOM_DEBUG_Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
+	Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 
 

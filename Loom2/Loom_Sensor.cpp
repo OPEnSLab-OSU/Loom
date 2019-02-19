@@ -22,8 +22,8 @@ void LoomSensor::print_config()
 {
 	LoomModule::print_config();
 
-	LOOM_DEBUG_Println3('\t', "Description         : ", sensor_description);
-	LOOM_DEBUG_Println3('\t', "Num Samples         : ", num_samples);
+	Println3('\t', "Description         : ", sensor_description);
+	Println3('\t', "Num Samples         : ", num_samples);
 }
 
 

@@ -18,8 +18,8 @@ Loom_AS7263::Loom_AS7263(byte i2c_address, char* module_name, char* sensor_descr
 	inst_AS7263.setIntegrationTime(integration_time);
 
 	print_module_label();
-	LOOM_DEBUG_Println2("\t", "Initialized");
-	// LOOM_DEBUG_Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	Println2("\t", "Initialized");
+	// Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 
@@ -33,22 +33,22 @@ Loom_AS7263::~Loom_AS7263()
 void Loom_AS7263::print_config()
 {
 	LoomI2CSensor::print_config();	
-	LOOM_DEBUG_Println3("\t", "Gain                : ", gain);
-	LOOM_DEBUG_Println3("\t", "Mode                : ", mode);
-	LOOM_DEBUG_Println3("\t", "Use Bulb            : ", (use_bulb) ? "True" : "False");
+	Println3("\t", "Gain                : ", gain);
+	Println3("\t", "Mode                : ", mode);
+	Println3("\t", "Use Bulb            : ", (use_bulb) ? "True" : "False");
 }
 
 
 void Loom_AS7263::print_measurements()
 {
 	print_module_label();
-	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println3("\t", "NIR R: ", nir_r);
-	LOOM_DEBUG_Println3("\t", "NIR S: ", nir_s);
-	LOOM_DEBUG_Println3("\t", "NIR T: ", nir_t);
-	LOOM_DEBUG_Println3("\t", "NIR U: ", nir_u);
-	LOOM_DEBUG_Println3("\t", "NIR V: ", nir_v);
-	LOOM_DEBUG_Println3("\t", "NIR W: ", nir_w);
+	Println("Measurements:");
+	Println3("\t", "NIR R: ", nir_r);
+	Println3("\t", "NIR S: ", nir_s);
+	Println3("\t", "NIR T: ", nir_t);
+	Println3("\t", "NIR U: ", nir_u);
+	Println3("\t", "NIR V: ", nir_v);
+	Println3("\t", "NIR W: ", nir_w);
 }
 
 

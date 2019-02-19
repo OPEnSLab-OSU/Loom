@@ -85,8 +85,8 @@ void LoomRTC::print_config()
 {
 	LoomModule::print_config();
 
-	LOOM_DEBUG_Println3('\t', "Use UTC Time        : ", use_utc_time);
-	LOOM_DEBUG_Println3('\t', "Get Internet Time   : ", get_internet_time);
+	Println3('\t', "Use UTC Time        : ", use_utc_time);
+	Println3('\t', "Get Internet Time   : ", get_internet_time);
 }
 
 
@@ -95,32 +95,32 @@ void LoomRTC::print_time()
 	// measure();
 	print_module_label();
 
-	LOOM_DEBUG_Println("Time:");
+	Println("Time:");
 	// char buf[20];
 	// get_datestring(buf);
-	// LOOM_DEBUG_Println2("\tDate: ", buf);
+	// Println2("\tDate: ", buf);
 	// get_timestring(buf);
-	// LOOM_DEBUG_Println2("\tTime: ", buf);
-	// LOOM_DEBUG_Println2("\tDay : ", get_weekday());
-	// LOOM_DEBUG_Println();
+	// Println2("\tTime: ", buf);
+	// Println2("\tDay : ", get_weekday());
+	// Println();
 
 
-	LOOM_DEBUG_Println2("\tDate: ", get_datestring());
-	LOOM_DEBUG_Println2("\tTime: ", get_timestring());
-	LOOM_DEBUG_Println2("\tDay : ", get_weekday());
-	LOOM_DEBUG_Println();
+	Println2("\tDate: ", get_datestring());
+	Println2("\tTime: ", get_timestring());
+	Println2("\tDay : ", get_weekday());
+	Println();
 }
 
 
 void LoomRTC::print_DateTime(DateTime time) 
 {
-	LOOM_DEBUG_Println("DateTime:");
-	LOOM_DEBUG_Print(time.year());   LOOM_DEBUG_Print('/');
-	LOOM_DEBUG_Print(time.month());  LOOM_DEBUG_Print('/');
-	LOOM_DEBUG_Print(time.day());    LOOM_DEBUG_Print(' ');
-	LOOM_DEBUG_Print(time.hour());   LOOM_DEBUG_Print(':');
-	LOOM_DEBUG_Print(time.minute()); LOOM_DEBUG_Print(':');
-	LOOM_DEBUG_Print(time.second()); LOOM_DEBUG_Println();
+	Println("DateTime:");
+	Print(time.year());   Print('/');
+	Print(time.month());  Print('/');
+	Print(time.day());    Print(' ');
+	Print(time.hour());   Print(':');
+	Print(time.minute()); Print(':');
+	Print(time.second()); Println();
 }
 
 
@@ -234,7 +234,7 @@ void LoomRTC::set_rtc_to_compile_time()
 	time_adjust( DateTime(F(__DATE__), F(__TIME__)) );
 	
 	print_module_label();
-	LOOM_DEBUG_Println("Time set to compile time:");
+	Println("Time set to compile time:");
 	print_time();
 
 	// Adjust to UTC time if enabled
@@ -255,14 +255,14 @@ bool LoomRTC::set_rtc_from_internet_time()
 	// #endif
 
 	print_module_label();
-	LOOM_DEBUG_Println2("UNIX TIME: ", unixTime);
+	Println2("UNIX TIME: ", unixTime);
 
 	if (unixTime != 0) {
 		// Set to UTC time
 		time_adjust(DateTime(unixTime));
 
 		print_module_label();
-		LOOM_DEBUG_Println("\nTime set to:");
+		Println("\nTime set to:");
 		print_time();
 
 		// If not using UTC Time convert to local
@@ -272,7 +272,7 @@ bool LoomRTC::set_rtc_from_internet_time()
 	} 
 
 	print_module_label();
-	LOOM_DEBUG_Println3("Set time from internet ", (internet_time_success) ? "successful" : "failed", "\n");
+	Println3("Set time from internet ", (internet_time_success) ? "successful" : "failed", "\n");
 
 	return internet_time_success;
 } 
@@ -295,9 +295,9 @@ void LoomRTC::convert_local_to_utc(bool to_utc)
 	time_adjust(utc);
 
 	print_module_label();
-	LOOM_DEBUG_Println3("Time adjusted to ", (to_utc) ? "UTC" : "Local" , " time:");
+	Println3("Time adjusted to ", (to_utc) ? "UTC" : "Local" , " time:");
 	print_time();
-	LOOM_DEBUG_Println();
+	Println();
 }
 
 
@@ -312,7 +312,7 @@ bool LoomRTC::rtc_validity_check()
 	// A basic validity check of date
 	if ( (y < 2018) || (y > 2050) || (m < 1) || (m > 12) || (d < 1) || (d > 31) ) {
 		print_module_label();
-		LOOM_DEBUG_Println("RTC Time is invalid");
+		Println("RTC Time is invalid");
 		set_rtc_to_compile_time();
 		return false;
 	}

@@ -18,8 +18,8 @@ Loom_AS7262::Loom_AS7262(byte i2c_address, char* module_name, char* sensor_descr
 	inst_AS7262.setIntegrationTime(integration_time);
 
 	print_module_label();
-	LOOM_DEBUG_Println2("\t", "Initialized");
-	// LOOM_DEBUG_Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	Println2("\t", "Initialized");
+	// Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 
@@ -33,22 +33,22 @@ Loom_AS7262::~Loom_AS7262()
 void Loom_AS7262::print_config()
 {
 	LoomI2CSensor::print_config();	
-	LOOM_DEBUG_Println3("\t", "Gain                : ", gain);
-	LOOM_DEBUG_Println3("\t", "Mode                : ", mode);
-	LOOM_DEBUG_Println3("\t", "Use Bulb            : ", (use_bulb) ? "True" : "False");
+	Println3("\t", "Gain                : ", gain);
+	Println3("\t", "Mode                : ", mode);
+	Println3("\t", "Use Bulb            : ", (use_bulb) ? "True" : "False");
 }
 
 
 void Loom_AS7262::print_measurements()
 {
 	print_module_label();
-	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println3("\t", "Violet : ", violet);
-	LOOM_DEBUG_Println3("\t", "Blue   : ", blue);
-	LOOM_DEBUG_Println3("\t", "Green  : ", green);
-	LOOM_DEBUG_Println3("\t", "Yellow : ", yellow);
-	LOOM_DEBUG_Println3("\t", "Orange : ", orange);
-	LOOM_DEBUG_Println3("\t", "Red    : ", red);
+	Println("Measurements:");
+	Println3("\t", "Violet : ", violet);
+	Println3("\t", "Blue   : ", blue);
+	Println3("\t", "Green  : ", green);
+	Println3("\t", "Yellow : ", yellow);
+	Println3("\t", "Orange : ", orange);
+	Println3("\t", "Red    : ", red);
 }
 
 

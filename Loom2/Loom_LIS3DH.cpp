@@ -22,7 +22,7 @@ Loom_LIS3DH::Loom_LIS3DH(byte i2c_address, char* module_name, char* sensor_descr
 	bool setup = inst_LIS3DH->begin();
 
 	print_module_label();
-	LOOM_DEBUG_Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 
@@ -37,10 +37,10 @@ Loom_LIS3DH::~Loom_LIS3DH()
 void Loom_LIS3DH::print_measurements()
 {
 	print_module_label();
-	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println3("\t", "Accel X: ", accel[0]);
-	LOOM_DEBUG_Println3("\t", "Accel Y: ", accel[1]);
-	LOOM_DEBUG_Println3("\t", "Accel Z: ", accel[2]);
+	Println("Measurements:");
+	Println3("\t", "Accel X: ", accel[0]);
+	Println3("\t", "Accel Y: ", accel[1]);
+	Println3("\t", "Accel Z: ", accel[2]);
 }
 
 

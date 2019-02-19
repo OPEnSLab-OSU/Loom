@@ -12,7 +12,7 @@
 // 	bool setup = inst_sht31d.begin(i2c_address);
 
 // 	print_module_label();
-// 	LOOM_DEBUG_Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
+// 	Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
 // }
 
 // // maybe a constructor that specifies the i2c address (use a default otherwise)
@@ -28,9 +28,9 @@
 // void Loom_MPU6050::print_measurements()
 // {
 // 	print_module_label();
-// 	LOOM_DEBUG_Println("Measurements:");
-// 	LOOM_DEBUG_Println2("\tTemperature: ", temp);
-// 	LOOM_DEBUG_Println2("\tHumidity   : ", humid);
+// 	Println("Measurements:");
+// 	Println2("\tTemperature: ", temp);
+// 	Println2("\tHumidity   : ", humid);
 // }
 
 
@@ -43,7 +43,7 @@
 // 		temp = t;
 // 		humid = h;
 // 	} else {
-// 		LOOM_DEBUG_Println("Failed to read temperature or humidity");
+// 		Println("Failed to read temperature or humidity");
 // 	}
 // }
 
