@@ -79,14 +79,15 @@ public:
 	void 	set_analog_resolution(uint8_t res);
 	uint8_t get_analog_resolution();
 
-	int get_analog_val(uint8_t i);
+	int get_analog_val(uint8_t pin);
 
+
+	bool get_pin_enabled(uint8_t pin);
+	void set_pin_enabled(uint8_t pin, bool e);
 
 	AnalogConversion get_conversion(uint8_t pin);
-	void set_conversion(uint8_t pin, AnalogConversion c);
-
-	void set_enable_conversions(bool e);
-
+	void  set_conversion(uint8_t pin, AnalogConversion c);
+	void  set_enable_conversions(bool e);
 	float convert(uint8_t pin, uint16_t analog);
 
 
