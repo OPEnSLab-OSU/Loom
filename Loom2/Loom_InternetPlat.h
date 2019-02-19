@@ -29,10 +29,9 @@ public:
 
 	virtual void print_config();
 	virtual void print_state();
-
 	virtual void measure() {}
-	virtual void package(OSCBundle& bndl, char* suffix="") {}
-	virtual bool message_route(OSCMessage& msg, int address_offset) {}
+	virtual void package(OSCBundle& bndl, char* suffix="") = 0;
+	virtual bool message_route(OSCMessage& msg, int address_offset) = 0;
 
 	virtual bool connect() = 0;
 	virtual bool is_connected() = 0;
@@ -41,7 +40,7 @@ public:
 
 
 	// Should this be external?
-	virtual bool log_to_pushingbox(OSCBundle* bndl);
+	// virtual bool log_to_google_sheets(OSCBundle& bndl);
 
 private:
 

@@ -10,8 +10,8 @@
 
 enum WiFiMode {
 	AP_MODE,
-	WPA_CLIENT_MODE,
-	WEP_CLIENT_MODE
+	WPA_CLIENT_MODE
+	// WEP_CLIENT_MODE
 };
 
 
@@ -21,30 +21,41 @@ class Loom_WiFi_I : public LoomInternetPlat
 
 protected:
 	
-	IPAddress   ip;                     // Device's IP Address
-	char*       my_ssid;                // Default AP name
-	char        ssid[32];               // Host network name
-	char        pass[32];               // Host network password
-	// int         keyIndex;               // Key Index Number (needed only for WEP)
-	char*       ip_broadcast;           // IP to Broadcast data
-	unsigned int devicePort;            // Local port to listen device specific messages on
-	unsigned int subnetPort; 			// Local port to listen for family subnet messages on	
-	byte        mac[6];                 // Device's MAC Address
-	WiFiMode    wifi_mode;              // Devices current wifi mode
-	// bool        request_settings;       // True if device should request new channel settings on startup
+	IPAddress		ip;                     // Device's IP Address
+
+	char			SSID[32];               // Host network name
+	char			pass[32];               // Host network password
 	
+	// char*			ip_broadcast;           // IP to Broadcast data
+	// unsigned int 	devicePort;            // Local port to listen device specific messages on
+	// unsigned int 	subnetPort; 			// Local port to listen for family subnet messages on	
+	uint 			UDP_port;
+
+
+	byte			mac[6];                 // Device's MAC Address
+	WiFiMode 		mode;              // Devices current wifi mode
+	
+	WiFiServer*		server;
+	WiFiUDP			UDP;
+
+	uint8_t			status;
+
+
+	// bool 		request_settings;       // True if device should request new channel settings on startup
+
 public:
 
 	static char* enum_wifi_mode_string(WiFiMode c);
 
-
 	// --- CONSTRUCTOR ---
-	Loom_WiFi_I(	char* module_name 	= "WiFi",
+	Loom_WiFi_I(	char* module_name 		= "WiFi",
 
-					char* ssid 			= "",
-					char* pass 			= ""
+					WiFiMode 	mode		= WPA_CLIENT_MODE,
+					char* 		ssid		= "",
+					char* 		pass		= "",
+					uint 		UDP_port 	= 9411  	
 
-
+					// MAC address / IP ?
 
 					);
 
@@ -52,25 +63,26 @@ public:
 	virtual ~Loom_WiFi_I();
 
 
-	// --- PUBLIC METHODS ---
-
 	void print_config();
 	void print_state();
+	void package(OSCBundle& bndl, char* suffix="") {}
+	bool message_route(OSCMessage& msg, int address_offset) {}
 
 	bool connect();
 	bool is_connected();
 	uint32_t get_time();
 
 
-
-	// Should this be external?
-	// bool log_to_pushingbox(OSCBundle& bndl);
-
 private:
 
-	bool connect_AP();
-	bool connect_WPA();
+	/*static*/ uint LED_WiFi_connected[3] = {6, 50, 50};
 
+	bool connect_AP();
+	bool connect_WPA(char* new_SSID="", char* new_pass="");
+
+	void print_MAC(byte mac[]);
+
+	// void print_remote_AP_device_status();
 
 };
 

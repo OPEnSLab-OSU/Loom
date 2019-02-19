@@ -76,8 +76,6 @@ void LoomCommPlat::package(OSCBundle& bndl, char* suffix)
 
 }
 
-void LoomCommPlat::measure() {}
-
 
 
 bool LoomCommPlat::message_route(OSCMessage& msg, int address_offset) 

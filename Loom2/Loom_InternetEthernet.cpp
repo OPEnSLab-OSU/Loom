@@ -1,9 +1,6 @@
 
 #include "Loom_InternetEthernet.h"
 
-// int test = 0;
-
-
 
 
 // --- CONSTRUCTOR ---
@@ -212,7 +209,3 @@ void Loom_Ethernet_I::send_NTP_packet(byte packet_buffer[])
 }
 
 
-// bool Loom_Ethernet_I::log_to_pushingbox(OSCBundle* bndl)
-// {
-	
-// }

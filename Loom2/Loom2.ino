@@ -1,8 +1,5 @@
 
-
 #include "_Loom_Preamble.h"
-
-
 
 
 // Do these being pointers rather than global instances slow down startup?
@@ -28,6 +25,8 @@ Loom_Multiplexer* 	MP;
 // Loom_Ethernet_I* EI;
 // Loom_Relay* RL;
 
+Loom_WiFi_I* WI;
+
  
 LoomManager DeviceManager;
 
@@ -46,6 +45,8 @@ void setup()
 
 
 	AS = new Loom_Analog();
+
+	WI = new Loom_WiFi_I();
 	// RL = new Loom_Relay();
 	// AS->print_config();
 
@@ -58,7 +59,6 @@ void setup()
 	// NP = new Loom_Neopixel();
 	// NP->print_config();
 
-	// NP->set_color(2, 0, 100, 0, 150);
 
 	// SH = new Loom_SHT31D();
 	// SH->print_config();
@@ -90,15 +90,8 @@ void setup()
 	DeviceManager.add_module(AS);
 	// DeviceManager.add_module(NP);
 	// DeviceManager.add_module(SC);
-	// DeviceManager.add_module(OL);
-	// DeviceManager.add_module(LR);
-	// DeviceManager.add_module(SH);
-	// DeviceManager.add_module(RT);
-	// DeviceManager.add_module(RL);
-
-// 
 	// DeviceManager.add_module(MP);
-	// DeviceManager.add_module(EI);
+	DeviceManager.add_module(WI);
 
 
 	DeviceManager.print_config();
@@ -116,13 +109,6 @@ void setup()
 	// Println2("Connected : ", EI->is_connected());
 	// Println2("Time      : ", EI->get_time());
 	// Println2("Time      : ", EI->get_time());
-	
-
-	// Println()
-
-	// while(1);
-
-	// delay(2000);
 
 }
 
@@ -136,11 +122,12 @@ void loop()
 	// SH->measure();
 	// SH->package(&bndl);
 
-	DeviceManager.measure();
+	// DeviceManager.measure();
 	// AS->print_measurements();
-	DeviceManager.package(bndl);
+	// DeviceManager.package(bndl);
 	// SC->log_bundle(bndl);
 
+	WI->print_state();
 
 	// MP->refresh_sensors();
 	// MP->print_state();
@@ -150,10 +137,10 @@ void loop()
 
 	// MP->package(&bndl);
 
-	print_bundle(bndl);
+	// print_bundle(bndl);
 	delay(1000);
 
-	Println("\nDone");
+	// Println("\nDone");
 
 
 

@@ -7,6 +7,7 @@
 #include "Loom_Sensor.h"
 #include "Loom_Actuator.h"
 #include "Loom_CommPlat.h"
+#include "Loom_InternetPlat.h"
 #include "Loom_LogPlat.h"
 #include "Loom_RTC.h"
 
@@ -123,6 +124,11 @@ void LoomManager::add_module(LoomCommPlat* comm_plat)
 	add_module_aux( (LoomModule**)comm_modules, (LoomModule*)comm_plat, comm_count, MAX_COMMS );
 }
 
+void LoomManager::add_module(LoomInternetPlat* internet_module) 
+{
+	add_module_aux( (LoomModule**)internet_modules, (LoomModule*)internet_module, internet_count, MAX_INTERNETS );
+}
+
 void LoomManager::add_module(LoomLogPlat* log_plat) 
 {	
 	add_module_aux( (LoomModule**)log_modules, (LoomModule*)log_plat, log_count, MAX_LOGS );
@@ -133,32 +139,40 @@ void LoomManager::add_module(LoomLogPlat* log_plat)
 
 LoomModule* LoomManager::get_other_module(int idx)
 {
-	return other_modules[idx];
+	return (idx < other_module_count) ? other_modules[idx] : NULL;
 }
 
 LoomSensor* LoomManager::get_sensor_module(int idx)
 {
-	return sensor_modules[idx];
+	return (idx < sensor_count) ? sensor_modules[idx] : NULL;
 }
 
 LoomActuator* LoomManager::get_actuator_module(int idx)
 {
-	return actuator_modules[idx];
+	return (idx < actuator_count) ? actuator_modules[idx] : NULL;
+
 }
 
 LoomRTC* LoomManager::get_rtc_module(int idx)
 {
-	return rtc_modules[idx];
+	return (idx < rtc_count) ? rtc_modules[idx] : NULL;
+
 }
 
 LoomCommPlat* LoomManager::get_comm_plat_module(int idx)
 {
-	return comm_modules[idx];
+	return (idx < comm_count) ? comm_modules[idx] : NULL;
+}
+
+LoomInternetPlat* LoomManager::get_internet_plat_module(int idx)
+{
+	return (idx < internet_count) ? internet_modules[idx] : NULL;
+
 }
 
 LoomLogPlat* LoomManager::get_log_plat_module(int idx)
 {
-	return log_modules[idx];
+	return (idx < log_count) ? log_modules[idx] : NULL;
 }
 
 
@@ -192,6 +206,7 @@ void LoomManager::list_modules()
 	list_modules_aux( (LoomModule**)actuator_modules , actuator_count     , "Actuators"); 
 	list_modules_aux( (LoomModule**)rtc_modules      , rtc_count          , "RTC Modules"); 
 	list_modules_aux( (LoomModule**)comm_modules     , comm_count         , "Communication Platforms"); 
+	list_modules_aux( (LoomModule**)internet_modules  , internet_count     , "Internet Platforms"); 
 	list_modules_aux( (LoomModule**)log_modules      , log_count          , "Logging Platforms" ); 
 }
 
@@ -399,9 +414,20 @@ void LoomManager::print_current_bundle()
 }
 
 
+void LoomManager::flash_LED(uint count, uint time_high, uint time_low)
+{
+	for (int i = 0; i < count; i++) {
+		digitalWrite(LED_BUILTIN, HIGH);
+		delay(time_high);
+		digitalWrite(LED_BUILTIN, LOW);
+		delay(time_low);
+	} 
+}
 
-
-
+void LoomManager::flash_LED(uint sequence[3])
+{
+	flash_LED(sequence[0], sequence[1], sequence[2]);
+}
 
 
 

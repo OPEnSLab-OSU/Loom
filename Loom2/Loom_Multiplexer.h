@@ -56,7 +56,6 @@ protected:
 	
 	unsigned long last_update_time; // When the sensor list was last updated
 
-
 public:
 
 	// --- CONSTRUCTOR ---
@@ -72,22 +71,13 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Multiplexer();
 
-
-	// --- PUBLIC METHODS ---
-
+	// General
 	void print_config();
-
-	// Override LoomModule implementation
-	void print_state(); // print connected sensors and update period
-
-	void measure(); // maybe (as current implementation joins measure and package)
-	void print_measurements();
-
+	void print_state(); 
+	void measure();
 	void package(OSCBundle& bndl, char* suffix="");
-
-
 	bool message_route(OSCMessage& msg, int address_offset);
-
+	void print_measurements();
 
 	void get_sensor_list(OSCBundle& bndl); // populate an OSC bundle
 

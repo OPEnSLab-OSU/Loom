@@ -40,7 +40,3 @@ void LoomInternetPlat::print_state()
 }
 
 
-bool LoomInternetPlat::log_to_pushingbox(OSCBundle* bndl)
-{
-	
-}

@@ -25,6 +25,7 @@ class LoomSensor;
 class LoomActuator;
 class LoomRTC;
 class LoomCommPlat;
+class LoomInternetPlat;
 class LoomLogPlat;
 
 
@@ -33,6 +34,7 @@ class LoomLogPlat;
 #define MAX_ACTUATORS     10
 #define MAX_RTCS          3
 #define MAX_COMMS         3
+#define MAX_INTERNETS     3
 #define MAX_LOGS          5
 
 
@@ -57,6 +59,7 @@ protected:
 	LoomActuator*     actuator_modules[MAX_ACTUATORS];
 	LoomRTC*          rtc_modules[MAX_RTCS];
 	LoomCommPlat*     comm_modules[MAX_COMMS];
+	LoomInternetPlat*  internet_modules[MAX_INTERNETS];
 	LoomLogPlat*      log_modules[MAX_LOGS];
 
 	uint other_module_count;
@@ -64,6 +67,7 @@ protected:
 	uint actuator_count;
 	uint rtc_count;
 	uint comm_count;
+	uint internet_count;
 	uint log_count;
 
 
@@ -123,14 +127,16 @@ public:
 	void add_module(LoomActuator* actuator); 
 	void add_module(LoomRTC* rtc); 
 	void add_module(LoomCommPlat* comm_plat); 
+	void add_module(LoomInternetPlat* internet_plat); 
 	void add_module(LoomLogPlat* log_plat); 
 
-	LoomModule*   get_other_module(int idx);
-	LoomSensor*   get_sensor_module(int idx);
-	LoomActuator* get_actuator_module(int idx);
-	LoomRTC*      get_rtc_module(int idx);
-	LoomCommPlat* get_comm_plat_module(int idx);
-	LoomLogPlat*  get_log_plat_module(int idx);
+	LoomModule*			get_other_module(int idx);
+	LoomSensor*			get_sensor_module(int idx);
+	LoomActuator*		get_actuator_module(int idx);
+	LoomRTC*			get_rtc_module(int idx);
+	LoomCommPlat*		get_comm_plat_module(int idx);
+	LoomInternetPlat*	get_internet_plat_module(int idx);
+	LoomLogPlat*		get_log_plat_module(int idx);
 
 	// void module_enable(LoomModule* LM, bool e) ?
 
@@ -201,6 +207,11 @@ public:
 	void package(OSCBundle& bndl);
 
 	void print_current_bundle();
+
+
+	void flash_LED(uint count, uint time_high, uint time_low);
+	void flash_LED(uint sequence[3]);
+
 
 	// Methods to set package and print verbosities all at once
 

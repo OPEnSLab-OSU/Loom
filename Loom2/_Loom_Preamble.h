@@ -22,7 +22,8 @@
 #include "Loom_SD.h"
 
 // Internet Platforms
-#include "Loom_InternetEthernet.h"
+// #include "Loom_InternetEthernet.h"
+#include "Loom_InternetWiFi.h"
 
 // Sensors
 #include "Loom_Analog.h"

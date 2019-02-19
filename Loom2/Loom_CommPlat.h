@@ -43,18 +43,12 @@ public:
 
 
 	static char* enum_comm_plat_string(CommPlatform c);
-
 	// static char* enum_subnet_scope_string(CommScope s);
 
-
-	// --- PUBLIC METHODS ---
-
+	// General
 	virtual void print_config();
-
-	// maybe don't define package and measure in .cpp because they are empty
-
 	virtual void package(OSCBundle& bndl, char* suffix="");
-	virtual void measure();
+	virtual void measure() {}
 	virtual bool message_route(OSCMessage& msg, int address_offset);
 
 
