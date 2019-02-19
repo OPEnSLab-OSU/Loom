@@ -34,23 +34,23 @@ float Loom_Analog::convert(uint8_t pin, uint16_t analog)
 
 // --- CONSTRUCTOR ---
 Loom_Analog::Loom_Analog(	char*   module_name 	,
-						char*   sensor_description 	,
-						uint8_t num_samples 		,
+							char*   sensor_description 	,
+							uint8_t num_samples 		,
 
-						uint8_t read_resolution 	,
-						bool    enableA0 			,
-						bool    enableA1 			,
-						bool    enableA2 			,
-						bool    enableA3 			,
-						bool    enableA4 			,
-						bool    enableA5 			,
+							uint8_t read_resolution 	,
+							bool    enableA0 			,
+							bool    enableA1 			,
+							bool    enableA2 			,
+							bool    enableA3 			,
+							bool    enableA4 			,
+							bool    enableA5 			,
 
-						AnalogConversion convertA0	,
-						AnalogConversion convertA1	,
-						AnalogConversion convertA2	,
-						AnalogConversion convertA3	,
-						AnalogConversion convertA4	,
-						AnalogConversion convertA5	
+							AnalogConversion convertA0	,
+							AnalogConversion convertA1	,
+							AnalogConversion convertA2	,
+							AnalogConversion convertA3	,
+							AnalogConversion convertA4	,
+							AnalogConversion convertA5	
 
 				) : LoomSensor( module_name, sensor_description, num_samples )
 {
@@ -62,7 +62,7 @@ Loom_Analog::Loom_Analog(	char*   module_name 	,
 	analogReadResolution(this->read_resolution);
 
 	// Zero out array of measurements 
-	for (int i = 0; i < 6; i++) { analog_vals[i] = 0; }
+	for (int i = 0; i < ANALOG_COUNT; i++) { analog_vals[i] = 0; }
 	battery = 0.;
 
 	// Set enabled pins
@@ -101,7 +101,7 @@ void Loom_Analog::print_config()
 
 	LOOM_DEBUG_Println2("\tAnalog Resolution   : ", read_resolution);
 	LOOM_DEBUG_Print("\tEnabled Pins        : ");
-	for (int i = 0; i < 6; i++) { 
+	for (int i = 0; i < ANALOG_COUNT; i++) { 
 		if (pin_enabled[i]) {
 			LOOM_DEBUG_Print3("A", i, ", ");
 		}
@@ -118,9 +118,16 @@ void Loom_Analog::print_measurements()
 	print_module_label();
 	LOOM_DEBUG_Println("Measurements:");
 	LOOM_DEBUG_Println2("\tBattery = ", battery);
-	for (int i = 0; i < 6; i++) {
-		if (pin_enabled[i]) {
+	for (int i = 0; i < ANALOG_COUNT; i++) {
+	// 	if (pin_enabled[i]) {
+	// 		LOOM_DEBUG_Println4("\tA", i, " = ", analog_vals[i]);
+	// 	}
+	// }
+		if ( (!enable_conversions) || (conversions[i] == NO_CONVERT) ) {
 			LOOM_DEBUG_Println4("\tA", i, " = ", analog_vals[i]);
+		} else {
+			LOOM_DEBUG_Print4("\tA", i, " = ", analog_vals[i]);
+			LOOM_DEBUG_Println3( "  [ ", convert(i, analog_vals[i]), " (converted) ]" );
 		}
 	}
 }
@@ -134,9 +141,6 @@ void Loom_Analog::measure()
 		if (pin_enabled[i]) {
 			analog_vals[i] = read_analog(i);
 		}
-
-		// Put conversions here
-
 	}
 }
 
@@ -151,7 +155,7 @@ void Loom_Analog::package(OSCBundle& bndl, char* suffix)
 	append_to_bundle(bndl, id_prefix, "VBat", battery, NEW_MSG);
 
 	char buf[10];
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < ANALOG_COUNT; i++) {
 		if (pin_enabled[i]) {
 			sprintf(buf, "%s%d", "A", i);
 
@@ -192,7 +196,7 @@ uint8_t Loom_Analog::get_analog_resolution()
 
 int Loom_Analog::get_analog_val(uint8_t i) 
 {
-	return ( (i >= 0) && (i < 6) ) ? analog_vals[i] : -1;
+	return ( (i >= 0) && (i < ANALOG_COUNT) ) ? analog_vals[i] : -1;
 }
 
 
@@ -231,6 +235,10 @@ uint16_t Loom_Analog::read_analog(uint8_t chnl)
 		default: return (reading);
 	}
 } 
+
+
+
+
 
 
 

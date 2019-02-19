@@ -7,6 +7,7 @@
 #include <OSCBundle.h>
 
 
+
 // --- Converts a bundle with multiple messages to a bundle with only one message ---
 void flatten_bundle(OSCBundle& bndl, OSCBundle& out_bndl);
 void flatten_bundle(OSCBundle& bndl);
@@ -30,6 +31,7 @@ void convert_bundle_to_array(OSCBundle& bndl, T data [], int len)
 
 // --- Conversion between array formats ---
 void convert_array_key_value_to_assoc(String key_values [], String keys [], String values [], int kv_len, int assoc_len);
+
 void convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len);
 
 template <typename T>
@@ -54,7 +56,7 @@ void convert_array_assoc_to_key_value(String keys [], T values [], String key_va
 // --- Conversion from array to bundle formats ---
 void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char* address, int kv_len, int interpret=0);
 
-void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char* address, int assoc_len, int interpret=0);
+// void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char* address, int assoc_len, int interpret=0);
 
 
 template <typename T>
@@ -97,9 +99,9 @@ float  convert_string_to_float(String s);
 
 
 // --- Conversion between array element types ---
-void convert_array(String src [], int    dest [],   int count);
-void convert_array(String src [], float  dest [],   int count);
-void convert_array(String src [], char dest [][20], int count);
+// void convert_array(String src [], int    dest [],   int count);
+// void convert_array(String src [], float  dest [],   int count);
+// void convert_array(String src [], char dest [][20], int count);
 
 template <typename Tin> 
 void convert_array(Tin src[], String dest[], int count)

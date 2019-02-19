@@ -137,6 +137,7 @@ void loop()
 	// SH->package(&bndl);
 
 	DeviceManager.measure();
+	AS->print_measurements();
 	DeviceManager.package(bndl);
 	// SC->log_bundle(bndl);
 
@@ -149,11 +150,10 @@ void loop()
 
 	// MP->package(&bndl);
 
-	// print_bundle(bndl);
-
+	print_bundle(bndl);
+	delay(1000);
 
 	LOOM_DEBUG_Println("\nDone");
-	while(1);
 
 
 
