@@ -29,7 +29,7 @@ void Loom_Relay::print_config()
 void Loom_Relay::print_state()
 {
 	print_module_label();
-	LOOM_DEBUG_Println4('\t', "Relay ", pin, (on) ? " On" : " Off" );
+	Println4('\t', "Relay ", pin, (on) ? " On" : " Off" );
 }
 
 void Loom_Relay::package(OSCBundle& bndl, char* suffix)
@@ -59,7 +59,7 @@ void Loom_Relay::set_relay(bool state)
 
 	if (print_verbosity == HIGH) {
 		print_module_label();
-		LOOM_DEBUG_Println3("Set relay on pin ", pin, (on) ? " High" : " Low");
+		Println3("Set relay on pin ", pin, (on) ? " High" : " Low");
 	}
 }
 

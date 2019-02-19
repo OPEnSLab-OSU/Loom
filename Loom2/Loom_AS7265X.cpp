@@ -70,7 +70,7 @@ Loom_AS7265X::Loom_AS7265X(byte i2c_address, char* module_name, char* sensor_des
 	}
 
 	print_module_label();
-	LOOM_DEBUG_Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 
@@ -85,14 +85,14 @@ Loom_AS7265X::~Loom_AS7265X()
 void Loom_AS7265X::print_measurements()
 {
 	print_module_label();
-	LOOM_DEBUG_Println("Measurements:");
+	Println("Measurements:");
 
 	// UV
-	for (int i = 0; i < 6; i++) { LOOM_DEBUG_Println3("\t", "A: ", uv[i]); }
+	for (int i = 0; i < 6; i++) { Println3("\t", "A: ", uv[i]); }
 	// Color
-	for (int i = 0; i < 6; i++) { LOOM_DEBUG_Println3("\t", "G: ", color[i]); }
+	for (int i = 0; i < 6; i++) { Println3("\t", "G: ", color[i]); }
 	// NIR
-	for (int i = 0; i < 6; i++) { LOOM_DEBUG_Println3("\t", "R: ", nir[i]); }
+	for (int i = 0; i < 6; i++) { Println3("\t", "R: ", nir[i]); }
 }
 
 

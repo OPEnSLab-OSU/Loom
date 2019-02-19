@@ -38,11 +38,11 @@ void setup()
 	while(!Serial);        // Ensure Serial is ready to go before anything happens in LOOM_DEBUG mode.
 	delay(1000);
 
-	LOOM_DEBUG_Println("Initialized Serial!\n");
+	Println("Initialized Serial!\n");
 
 	// AnalogManager Asensor;
 
-	LOOM_DEBUG_Println();
+	Println();
 
 
 	AS = new Loom_Analog();
@@ -85,7 +85,7 @@ void setup()
 
 	// DeviceManager = new LoomManager();
 
-	LOOM_DEBUG_Println("Adding Components");
+	Println("Adding Components");
 
 	DeviceManager.add_module(AS);
 	// DeviceManager.add_module(NP);
@@ -107,18 +107,18 @@ void setup()
 	// DeviceManager.list_modules();
 
 
-	LOOM_DEBUG_Println("\n ** Setup Complete ** ");
+	Println("\n ** Setup Complete ** ");
 
 
 	// AS->load_config();
 	// AS->save_config();
 
-	// LOOM_DEBUG_Println2("Connected : ", EI->is_connected());
-	// LOOM_DEBUG_Println2("Time      : ", EI->get_time());
-	// LOOM_DEBUG_Println2("Time      : ", EI->get_time());
+	// Println2("Connected : ", EI->is_connected());
+	// Println2("Time      : ", EI->get_time());
+	// Println2("Time      : ", EI->get_time());
 	
 
-	// LOOM_DEBUG_Println()
+	// Println()
 
 	// while(1);
 
@@ -153,7 +153,7 @@ void loop()
 	print_bundle(bndl);
 	delay(1000);
 
-	LOOM_DEBUG_Println("\nDone");
+	Println("\nDone");
 
 
 

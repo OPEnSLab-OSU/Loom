@@ -36,7 +36,7 @@ Loom_TSL2561::Loom_TSL2561(byte i2c_address, char* module_name, char* sensor_des
 	}
 
 	print_module_label();
-	LOOM_DEBUG_Println2("Initialize ", (setup) ? "sucessful" : "failed");
+	Println2("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 
@@ -51,9 +51,9 @@ Loom_TSL2561::~Loom_TSL2561()
 void Loom_TSL2561::print_measurements()
 {
 	print_module_label();
-	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println4("\t", "LightIR   : ", lightIR,   " lux");
-	LOOM_DEBUG_Println4("\t", "LightFull : ", lightFull, " lux");
+	Println("Measurements:");
+	Println4("\t", "LightIR   : ", lightIR,   " lux");
+	Println4("\t", "LightFull : ", lightFull, " lux");
 }
 
 

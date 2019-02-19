@@ -39,7 +39,7 @@ char* Loom_OLED::enum_oled_freeze(OLED_Freeze f)
 Loom_OLED::Loom_OLED(	char* module_name, bool enable_rate_filter, uint min_filter_delay, OLED_Version version, byte reset_pin, OLED_Format display_format, uint scroll_duration, byte freeze_pin, OLED_Freeze freeze_behavior)
 	: LoomLogPlat( module_name, enable_rate_filter, min_filter_delay )
 {
-	LOOM_DEBUG_Println("OLED Setup");
+	Println("OLED Setup");
 
 	this->version 	      = version;
 	this->reset_pin       = reset_pin;
@@ -77,18 +77,18 @@ void Loom_OLED::print_config()
 {
 	LoomLogPlat::print_config();
 
-	LOOM_DEBUG_Println3('\t', "OLED Version        : ", enum_oled_version_string(this->version) );
+	Println3('\t', "OLED Version        : ", enum_oled_version_string(this->version) );
 	if (this->version == BREAKOUT) {
-		LOOM_DEBUG_Println3('\t', "Reset Pin           : ", this->reset_pin );		
+		Println3('\t', "Reset Pin           : ", this->reset_pin );		
 	}
 
-	LOOM_DEBUG_Println3('\t', "Display Format      : ", enum_oled_format(this->display_format) );
+	Println3('\t', "Display Format      : ", enum_oled_format(this->display_format) );
 	if (this->display_format == OLED_SCROLL) {
-		LOOM_DEBUG_Println3('\t', "Scroll Duration     : ", this->scroll_duration );
+		Println3('\t', "Scroll Duration     : ", this->scroll_duration );
 	}
-	LOOM_DEBUG_Println3('\t', "Freeze Behavior     : ", enum_oled_freeze(this->freeze_behavior) );
+	Println3('\t', "Freeze Behavior     : ", enum_oled_freeze(this->freeze_behavior) );
 	if (this->freeze_behavior != FREEZE_DISABLE) {
-		LOOM_DEBUG_Println3('\t', "Freeze Pin          : ", this->freeze_pin );
+		Println3('\t', "Freeze Pin          : ", this->freeze_pin );
 	}
 }
 

@@ -61,21 +61,21 @@ LoomManager::~LoomManager()
 
 void LoomManager::print_device_label()
 {
-	LOOM_DEBUG_Print3("[", device_name, "] ");
+	Print3("[", device_name, "] ");
 }
 
 
 void LoomManager::print_config() 
 {
 	print_device_label();
-	LOOM_DEBUG_Println("Config:");
-	LOOM_DEBUG_Println3('\t', "Device Name         : ", device_name );
-	LOOM_DEBUG_Println3('\t', "Family              : ", family );
-	LOOM_DEBUG_Println3('\t', "Family Number       : ", family_num );
-	LOOM_DEBUG_Println3('\t', "Instance Number     : ", instance );
-	LOOM_DEBUG_Println3('\t', "Device Type         : ", enum_device_type_string(device_type) );
+	Println("Config:");
+	Println3('\t', "Device Name         : ", device_name );
+	Println3('\t', "Family              : ", family );
+	Println3('\t', "Family Number       : ", family_num );
+	Println3('\t', "Instance Number     : ", instance );
+	Println3('\t', "Device Type         : ", enum_device_type_string(device_type) );
 
-	LOOM_DEBUG_Println3('\t', "Instance Number     : ", instance );
+	Println3('\t', "Instance Number     : ", instance );
 
 	list_modules();
 }
@@ -87,11 +87,11 @@ void LoomManager::add_module_aux(LoomModule** modules, LoomModule* module, uint&
 
 	// If module array is not dynamic, add check to make sure there is room in the array
 	if ( ( len >= max_len ) || (!module) ) {
-		LOOM_DEBUG_Println2("Cannot add ", module->get_module_name() );
+		Println2("Cannot add ", module->get_module_name() );
 		return;
 	}
 
-	LOOM_DEBUG_Println2("Adding Module: ", module->get_module_name() );
+	Println2("Adding Module: ", module->get_module_name() );
 	modules[ len++ ] = module;
 
 	module->link_device_manager(this);
@@ -173,10 +173,10 @@ LoomLogPlat* LoomManager::get_log_plat_module(int idx)
 
 void LoomManager::list_modules_aux(LoomModule** modules, uint len, char* module_type)
 {
-	LOOM_DEBUG_Println5("\t", module_type, " (", len, "):");
+	Println5("\t", module_type, " (", len, "):");
 	for (int i = 0; i < len; i++) {
 		if ( (modules[i] != NULL) && (modules[i]->get_active()) ) {
-			LOOM_DEBUG_Println4( "\t\t[", (modules[i]->get_active()) ? "+" : "-" , "] ", modules[i]->get_module_name() );
+			Println4( "\t\t[", (modules[i]->get_active()) ? "+" : "-" , "] ", modules[i]->get_module_name() );
 		}
 	}	
 }
@@ -185,7 +185,7 @@ void LoomManager::list_modules_aux(LoomModule** modules, uint len, char* module_
 void LoomManager::list_modules()
 {
 	print_device_label();
-	LOOM_DEBUG_Println("Modules:");
+	Println("Modules:");
 
 	list_modules_aux( (LoomModule**)other_modules    , other_module_count , "Other Modules" ); 
 	list_modules_aux( (LoomModule**)sensor_modules   , sensor_count       , "Sensors"); 
@@ -394,7 +394,7 @@ void LoomManager::package(OSCBundle& bndl)
 
 void LoomManager::print_current_bundle() 
 {
-	LOOM_DEBUG_Println("Member Bundle:");
+	Println("Member Bundle:");
 	print_bundle(bundle);
 }
 

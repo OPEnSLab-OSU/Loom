@@ -23,7 +23,7 @@ Loom_TSL2591::Loom_TSL2591(byte i2c_address, char* module_name, char* sensor_des
 			case 1 : inst_tsl2591.setGain(TSL2591_GAIN_MED);    break;  // 25x gain
 			case 2 : inst_tsl2591.setGain(TSL2591_GAIN_HIGH);   break;  // 428x gain
 			case 3 : inst_tsl2591.setGain(TSL2591_GAIN_MAX);    break;  // 9876x gain
-			default: LOOM_DEBUG_Println("Invalid gain level."); break;
+			default: Println("Invalid gain level."); break;
 		}
 	  
 		switch(timing_level) {
@@ -33,12 +33,12 @@ Loom_TSL2591::Loom_TSL2591(byte i2c_address, char* module_name, char* sensor_des
 			case 3 : inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_400MS); break;
 			case 4 : inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_500MS); break;
 			case 5 : inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_600MS);  // longest integration time (dim light) break;
-			default: LOOM_DEBUG_Println("Invalid timing level"); break;
+			default: Println("Invalid timing level"); break;
 		}	
 	} 
 
 	print_module_label();
-	LOOM_DEBUG_Println2("Initialize ", (setup) ? "sucessful" : "failed");
+	Println2("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 // maybe a constructor that specifies the i2c address (use a default otherwise)
@@ -61,10 +61,10 @@ Loom_TSL2591::~Loom_TSL2591()
 void Loom_TSL2591::print_measurements()
 {
 	print_module_label();
-	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println3("\t", "Vis  : ", vis);
-	LOOM_DEBUG_Println3("\t", "IR   : ", ir);
-	LOOM_DEBUG_Println3("\t", "Full : ", full);
+	Println("Measurements:");
+	Println3("\t", "Vis  : ", vis);
+	Println3("\t", "IR   : ", ir);
+	Println3("\t", "Full : ", full);
 }
 
 

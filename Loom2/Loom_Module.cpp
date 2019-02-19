@@ -17,7 +17,7 @@ char* LoomModule::enum_verbosity_string(Verbosity v)
 // --- CONSTRUCTOR ---
 LoomModule::LoomModule() 
 {
-	// LOOM_DEBUG_Println("LoomModule Default Constructor");
+	// Println("LoomModule Default Constructor");
 
 	this->module_name 	= "Unknown";
 	active 				= true;
@@ -31,18 +31,18 @@ LoomModule::LoomModule()
 
 LoomModule::LoomModule( char* module_name ) : LoomModule()
 {
-	// LOOM_DEBUG_Println("LoomModule Constructor 1");
+	// Println("LoomModule Constructor 1");
 
 	this->module_name = module_name;
 
 	print_module_label();
-	LOOM_DEBUG_Println("Begin Setup");
+	Println("Begin Setup");
 }
 
 // this version also links to parent device
 LoomModule::LoomModule( char* module_name, LoomManager* LD ) : LoomModule()
 {
-	// LOOM_DEBUG_Println("LoomModule Constructor 2");
+	// Println("LoomModule Constructor 2");
 	this->module_name   = module_name;
 	// this->device_manager = LD;
 	link_device_manager(LD);
@@ -57,7 +57,7 @@ LoomModule::LoomModule( char* module_name, LoomManager* LD ) : LoomModule()
 
 	// 		  ) : LoomModule()
 	// {
-	// 	// LOOM_DEBUG_Println("LoomModule Constructor 1");
+	// 	// Println("LoomModule Constructor 1");
 	// 	this->module_name 		= module_name;
 	// 	this->active 			= active;
 	// 	this->print_debug 		= print_debug;
@@ -89,13 +89,13 @@ void LoomModule::link_device_manager(LoomManager* LD)
 	LD->get_device_name(buf);
 
 	print_module_label();
-	LOOM_DEBUG_Println2("Linked as module of ", buf);
+	Println2("Linked as module of ", buf);
 }
 
 
 void LoomModule::print_module_label()
 {
-	LOOM_DEBUG_Print3("[", module_name, "] ");
+	Print3("[", module_name, "] ");
 }
 
 
@@ -103,11 +103,11 @@ void LoomModule::print_module_label()
 void LoomModule::print_config()
 {
 	print_module_label();
-	LOOM_DEBUG_Println("Config:");
-	LOOM_DEBUG_Println3('\t', "Module Active       : ", (active)      ? "Enabled" : "Disabled" );
-	LOOM_DEBUG_Println3('\t', "Print Debug         : ", (print_debug) ? "Enabled" : "Disabled" );
-	LOOM_DEBUG_Println3('\t', "Print Verbosity     : ", enum_verbosity_string(print_verbosity) );
-	LOOM_DEBUG_Println3('\t', "Package Verbosity   : ", enum_verbosity_string(package_verbosity) );
+	Println("Config:");
+	Println3('\t', "Module Active       : ", (active)      ? "Enabled" : "Disabled" );
+	Println3('\t', "Print Debug         : ", (print_debug) ? "Enabled" : "Disabled" );
+	Println3('\t', "Print Verbosity     : ", enum_verbosity_string(print_verbosity) );
+	Println3('\t', "Package Verbosity   : ", enum_verbosity_string(package_verbosity) );
 }
 
 // Display current state

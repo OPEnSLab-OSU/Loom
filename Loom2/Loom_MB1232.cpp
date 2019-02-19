@@ -19,7 +19,7 @@ Loom_MB1232::Loom_MB1232(byte i2c_address, char* module_name, char* sensor_descr
 	bool setup = (Wire.available() >= 2);
 
 	print_module_label();
-	LOOM_DEBUG_Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 
@@ -34,8 +34,8 @@ Loom_MB1232::~Loom_MB1232()
 void Loom_MB1232::print_measurements()
 {
 	print_module_label();
-	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println4("\t", "Range: ", range, " cm");
+	Println("Measurements:");
+	Println4("\t", "Range: ", range, " cm");
 }
 
 
@@ -60,7 +60,7 @@ void Loom_MB1232::measure()
 		range = (high * 256) + low;
 	} else {
 		print_module_label();
-		LOOM_DEBUG_Println("Error reading from mb1232 (range)");
+		Println("Error reading from mb1232 (range)");
 	}  
 }
 

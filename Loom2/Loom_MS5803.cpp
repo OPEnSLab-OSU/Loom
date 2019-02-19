@@ -13,7 +13,7 @@ Loom_MS5803::Loom_MS5803(byte i2c_address, char* module_name, char* sensor_descr
 	bool setup = inst_MS5803->initializeMS_5803();
 
 	print_module_label();
-	LOOM_DEBUG_Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
+	Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
 
@@ -28,9 +28,9 @@ Loom_MS5803::~Loom_MS5803()
 void Loom_MS5803::print_measurements()
 {
 	print_module_label();
-	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println4("\t", "Pressure    : ", pressure , " mbar");
-	LOOM_DEBUG_Println4("\t", "Temperature : ", temp     , " C");
+	Println("Measurements:");
+	Println4("\t", "Pressure    : ", pressure , " mbar");
+	Println4("\t", "Temperature : ", temp     , " C");
 }
 
 

@@ -12,7 +12,7 @@ Loom_FXOS8700::Loom_FXOS8700(byte i2c_address, char* module_name, char* sensor_d
 	bool setup = inst_FXOS8700->begin(ACCEL_RANGE_4G);
 
 	print_module_label();
-	LOOM_DEBUG_Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 
@@ -26,13 +26,13 @@ Loom_FXOS8700::~Loom_FXOS8700()
 void Loom_FXOS8700::print_measurements()
 {
 	print_module_label();
-	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println4("\t", "AX: ", accel[0], " m/s^2");
-	LOOM_DEBUG_Println4("\t", "AY: ", accel[1], " m/s^2");
-	LOOM_DEBUG_Println4("\t", "AZ: ", accel[2], " m/s^2");
-	LOOM_DEBUG_Println4("\t", "MX: ", mag[0], " uT");
-	LOOM_DEBUG_Println4("\t", "MY: ", mag[1], " uT");
-	LOOM_DEBUG_Println4("\t", "MZ: ", mag[2], " uT");
+	Println("Measurements:");
+	Println4("\t", "AX: ", accel[0], " m/s^2");
+	Println4("\t", "AY: ", accel[1], " m/s^2");
+	Println4("\t", "AZ: ", accel[2], " m/s^2");
+	Println4("\t", "MX: ", mag[0], " uT");
+	Println4("\t", "MY: ", mag[1], " uT");
+	Println4("\t", "MZ: ", mag[2], " uT");
 }
 
 

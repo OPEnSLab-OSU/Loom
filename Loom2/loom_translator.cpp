@@ -14,7 +14,7 @@ void flatten_bundle(OSCBundle& bndl, OSCBundle& out_bndl)
 	// Make sure bundle has more than one message
 	// Check upper bound as well, as querying some empty bundles gives large value
 	if ( (bndl.size() < 2) || (bndl.size() > 1000) ) {
-		LOOM_DEBUG_Println("Bundle has no valid contents, cannot be converted");
+		Println("Bundle has no valid contents, cannot be converted");
 		return;
 	}
 
@@ -54,7 +54,7 @@ void flatten_bundle(OSCBundle& bndl, OSCBundle& out_bndl)
 				case 'f' : new_msg.add(msg->getFloat(j+1));	break;
 				case 'i' : new_msg.add(msg->getInt(j+1));	break;
 				case 's' : msg->getString(j+1, buf, 80);  new_msg.add(buf);  break;
-				default  : LOOM_DEBUG_Println("Unsupported data data_type.");
+				default  : Println("Unsupported data data_type.");
 			}
 		} // of for j
 	} // of for i
@@ -98,7 +98,7 @@ void convert_bundle_to_array_key_value(OSCBundle& bndl, String key_values[], int
 
 	// Make sure key_values array is large enough
 	if ( converted_bndl.getOSCMessage(0)->size() > kv_len ) {
-		LOOM_DEBUG_Println("Key-values array not large enough to hold all of bundle data, cannot convert");
+		Println("Key-values array not large enough to hold all of bundle data, cannot convert");
 		return;
 	}
 
@@ -130,7 +130,7 @@ void convert_bundle_to_arrays_assoc(OSCBundle& bndl, String keys[], String value
 
 	// Make sure keys and values arrays are large enough
 	if ( converted_bndl.getOSCMessage(0)->size() > 2*assoc_len ) {
-		LOOM_DEBUG_Println("Key-values array not large enough to hold all of bundle data, cannot convert");
+		Println("Key-values array not large enough to hold all of bundle data, cannot convert");
 		return;
 	}
 
@@ -171,7 +171,7 @@ void convert_bundle_to_arrays_assoc(OSCBundle& bndl, String keys[], String value
 void convert_array_key_value_to_assoc(String key_values [], String keys [], String values [], int kv_len, int assoc_len)
 {
 	if (kv_len > 2*assoc_len) {
-		LOOM_DEBUG_Println("Keys or values array not large enough to hold all of keys/values, cannot split");
+		Println("Keys or values array not large enough to hold all of keys/values, cannot split");
 		return;
 	}
 
@@ -200,7 +200,7 @@ void convert_array_key_value_to_assoc(String key_values [], String keys [], Stri
 void convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len)
 {
 	if ( kv_len < 2*assoc_len ) {
-		LOOM_DEBUG_Println("Key-values array is not at least twice the size of keys and values arrays, cannot merge");
+		Println("Key-values array is not at least twice the size of keys and values arrays, cannot merge");
 		return;
 	}
 
@@ -253,9 +253,9 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char* address, int kv_len, int interpret)
 {
 	if ((interpret < 0) || (interpret > 6)) {
-		LOOM_DEBUG_Println3("'", interpret, "' is not a valid way to interpret array when converting to bundle");
-		LOOM_DEBUG_Println("Use: 0=Smart, 1=Int, 2=Float, 3=String, 4=Smart-All, 5=Int-All, 6=Float-All");
-		LOOM_DEBUG_Println("Omitting 'interpret' argument will default to 'Smart' (recommended)");
+		Println3("'", interpret, "' is not a valid way to interpret array when converting to bundle");
+		Println("Use: 0=Smart, 1=Int, 2=Float, 3=String, 4=Smart-All, 5=Int-All, 6=Float-All");
+		Println("Omitting 'interpret' argument will default to 'Smart' (recommended)");
 		return;
 	}
 	bndl.empty();

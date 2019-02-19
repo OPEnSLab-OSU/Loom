@@ -33,7 +33,7 @@ Loom_Neopixel::Loom_Neopixel(char* module_name, bool enableA0, bool enableA1, bo
 	}		
 
 	print_module_label();
-	LOOM_DEBUG_Println("Setup");
+	Println("Setup");
 } 
 
 // --- DESTRUCTOR ---
@@ -53,20 +53,20 @@ void Loom_Neopixel::print_config()
 	LoomActuator::print_config();
 
 	for (int i = 0; i < 3; i++) {
-		LOOM_DEBUG_Println4("\tNeopixel ", i, "          : ", (pin_enabled[i]) ? "Enabled" : "Disabled" );
+		Println4("\tNeopixel ", i, "          : ", (pin_enabled[i]) ? "Enabled" : "Disabled" );
 	}
 }
 
 
 void Loom_Neopixel::print_state()
 {
-	LOOM_DEBUG_Println2(module_name, " State:");
+	Println2(module_name, " State:");
 	for (int i = 0; i < 3; i++) {
 		if (pin_enabled[i]) {
-			LOOM_DEBUG_Print3("\tNeo", i, ": ");
-			LOOM_DEBUG_Print2( color_vals[i][0], ", ");
-			LOOM_DEBUG_Print2( color_vals[i][1], ", ");
-			LOOM_DEBUG_Println(color_vals[i][2]);
+			Print3("\tNeo", i, ": ");
+			Print2( color_vals[i][0], ", ");
+			Print2( color_vals[i][1], ", ");
+			Println(color_vals[i][2]);
 		}
 	}
 }
@@ -102,7 +102,7 @@ void Loom_Neopixel::enable_pin(uint8_t port, bool state)
 	}
 
 	if (print_verbosity == HIGH) {
-		LOOM_DEBUG_Println4("Neopixel ", (state) ? "enabled" : "disabled", " on port ", port);
+		Println4("Neopixel ", (state) ? "enabled" : "disabled", " on port ", port);
 	}
 }
 
@@ -123,14 +123,14 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 		pixels[port]->show();
 
 		if (print_verbosity == HIGH) {
-			LOOM_DEBUG_Print4("Set Neopixel on Port: ", port, ", Chain #: ", chain_num);
-			LOOM_DEBUG_Print2(" to R: ", color_vals[port][0]);
-			LOOM_DEBUG_Print2(  ", G: ", color_vals[port][1]);
-			LOOM_DEBUG_Println2(", B: ", color_vals[port][2]);			
+			Print4("Set Neopixel on Port: ", port, ", Chain #: ", chain_num);
+			Print2(" to R: ", color_vals[port][0]);
+			Print2(  ", G: ", color_vals[port][1]);
+			Println2(", B: ", color_vals[port][2]);			
 		}
 	} else {
 		if (print_verbosity == HIGH) {
-			LOOM_DEBUG_Println2("Neopixel not enabled on port ", port);
+			Println2("Neopixel not enabled on port ", port);
 		}
 	}
 

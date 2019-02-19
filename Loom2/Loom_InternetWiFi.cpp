@@ -26,7 +26,7 @@ Loom_WiFi_I::Loom_WiFi_I(	char* module_name,
 		
 	// Check for the presence of the shield, else don't continue:
 	if (WiFi.status() == WL_NO_SHIELD) {
-		LOOM_DEBUG_Println("WiFi shield not present, entering infinite loop");
+		Println("WiFi shield not present, entering infinite loop");
 		while (true); 
 	}
 }
@@ -47,7 +47,7 @@ void Loom_WiFi_I::print_config()
 void Loom_WiFi_I::print_state()
 {
 	LoomInternetPlat::print_state();	
-	// LOOM_DEBUG_Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
+	// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 
 
@@ -56,12 +56,12 @@ void Loom_WiFi_I::print_state()
 bool Loom_WiFi_I::connect_AP()
 {
 	// Print the network name (SSID);
-	// LOOM_DEBUG_Println2("Creating access point named: ", config_wifi->my_ssid);
+	// Println2("Creating access point named: ", config_wifi->my_ssid);
 
 	// // Create open network. Change this line if you want to create an WEP network:
 	// status = WiFi.beginAP(config_wifi->my_ssid);
 	// if (status != WL_AP_LISTENING) {
-	// 	LOOM_DEBUG_Println("Creating access point failed");
+	// 	Println("Creating access point failed");
 	// 	while (true);   	// Don't continue
 	// }
 
@@ -70,12 +70,12 @@ bool Loom_WiFi_I::connect_AP()
 	// server.begin();   		// Start the web server on port 80
 
 	// printWiFiStatus();   	// You're connected now, so print out the status
-	// LOOM_DEBUG_Println("\nStarting UDP connection over server...");
+	// Println("\nStarting UDP connection over server...");
 		
 	// // If you get a connection, report back via serial:
 	// UdpDevice.begin(config_wifi->devicePort);
 
-	// LOOM_DEBUG_Println("Done");
+	// Println("Done");
 	// flash_led(6, 50, 50);
 }
 

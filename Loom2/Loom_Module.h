@@ -66,7 +66,7 @@ public:
 
 	// 		  ) : LoomModule()
 	// {
-	// 	// LOOM_DEBUG_Println("LoomModule Constructor 1");
+	// 	// Println("LoomModule Constructor 1");
 	// 	this->module_name 		= module_name;
 	// 	this->active 			= active;
 	// 	this->print_debug 		= print_debug;

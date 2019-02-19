@@ -12,7 +12,7 @@ Loom_FXAS21002::Loom_FXAS21002(byte i2c_address, char* module_name, char* sensor
 	bool setup = inst_FXAS21002->begin();
 
 	print_module_label();
-	LOOM_DEBUG_Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 
@@ -27,10 +27,10 @@ Loom_FXAS21002::~Loom_FXAS21002()
 void Loom_FXAS21002::print_measurements()
 {
 	print_module_label();
-	LOOM_DEBUG_Println("Measurements:");
-	LOOM_DEBUG_Println3("\t", "gx: ", gyro[0]);
-	LOOM_DEBUG_Println3("\t", "gy: ", gyro[1]);
-	LOOM_DEBUG_Println3("\t", "gz: ", gyro[2]);
+	Println("Measurements:");
+	Println3("\t", "gx: ", gyro[0]);
+	Println3("\t", "gy: ", gyro[1]);
+	Println3("\t", "gz: ", gyro[2]);
 }
 
 

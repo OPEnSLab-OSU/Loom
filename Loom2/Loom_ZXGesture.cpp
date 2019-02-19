@@ -21,9 +21,9 @@ Loom_ZXGesture::Loom_ZXGesture(byte i2c_address, char* module_name, char* sensor
 	print_module_label();
 	if (ver != ZX_MODEL_VER) {
 		setup = false;
-		LOOM_DEBUG_Println("Incorrect Model Version or unable to read Model Version.");
+		Println("Incorrect Model Version or unable to read Model Version.");
 	} else {
-		LOOM_DEBUG_Println2("Model Version: ", ver);
+		Println2("Model Version: ", ver);
 	}
 	
 	// Read the register map version and ensure the library will work
@@ -31,14 +31,14 @@ Loom_ZXGesture::Loom_ZXGesture(byte i2c_address, char* module_name, char* sensor
 	print_module_label();
 	if (ver != ZX_REG_MAP_VER) {
 		setup = false;
-		LOOM_DEBUG_Println("Incorrect Register Map Version or unable to read Register Map Version.");
+		Println("Incorrect Register Map Version or unable to read Register Map Version.");
 	} else {
-		LOOM_DEBUG_Println2("Register Map Version: ", ver);
+		Println2("Register Map Version: ", ver);
 	}
 
 
 	print_module_label();
-	LOOM_DEBUG_Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
+	Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
 
@@ -53,23 +53,23 @@ Loom_ZXGesture::~Loom_ZXGesture()
 void Loom_ZXGesture::print_config()
 {
 	LoomI2CSensor::print_config();
-	LOOM_DEBUG_Println3('\t', "Mode                : ", (mode == ZX_POS) ? "Position" : "Gesture" );
+	Println3('\t', "Mode                : ", (mode == ZX_POS) ? "Position" : "Gesture" );
 }
 
 
 void Loom_ZXGesture::print_measurements()
 {
 	print_module_label();
-	LOOM_DEBUG_Println("Measurements:");
+	Println("Measurements:");
 
 	switch (mode) {
 		case ZX_POS : 
-			LOOM_DEBUG_Println3("\t", "ZX: ", pos[0]);
-			LOOM_DEBUG_Println3("\t", "ZY: ", pos[1]);
+			Println3("\t", "ZX: ", pos[0]);
+			Println3("\t", "ZY: ", pos[1]);
 			break;
 		case ZX_GEST : 
-			LOOM_DEBUG_Println3("\t", "Gesture type : ", gesture_type.c_str());
-			LOOM_DEBUG_Println3("\t", "Gesture speed: ", gesture_speed);
+			Println3("\t", "Gesture type : ", gesture_type.c_str());
+			Println3("\t", "Gesture speed: ", gesture_speed);
 			break; 
 	}
 }
@@ -88,14 +88,14 @@ void Loom_ZXGesture::measure()
 				if ( (x != ZX_ERROR) && (z != ZX_ERROR) ) {
 					pos[0] = x;
 					pos[1] = z;
-					// LOOM_DEBUG_Println2("zxgesturesensor X: ", pos[0]);
-					// LOOM_DEBUG_Println2("zxgesturesensor Z: ", pos[1]);
+					// Println2("zxgesturesensor X: ", pos[0]);
+					// Println2("zxgesturesensor Z: ", pos[1]);
 				} else {
 					print_module_label();
-					LOOM_DEBUG_Println("Error occurred while reading position data");
+					Println("Error occurred while reading position data");
 				}	
 			} else {
-				// LOOM_DEBUG_Println("Position data unavailable for zxgesturesensor");
+				// Println("Position data unavailable for zxgesturesensor");
 				
 				// Send 255 to indicate that no object is detected
 				pos[0] = 255; 
@@ -119,7 +119,7 @@ void Loom_ZXGesture::measure()
 				}
 
 			} else {
-				// LOOM_DEBUG_Println("Gesture data unavailable for zxgesturesensor");
+				// Println("Gesture data unavailable for zxgesturesensor");
 				gesture_type  = "No Gesture";
 				gesture_speed = 0;
 			}
