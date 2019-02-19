@@ -137,7 +137,7 @@ void loop()
 	// SH->package(&bndl);
 
 	DeviceManager.measure();
-	AS->print_measurements();
+	// AS->print_measurements();
 	DeviceManager.package(bndl);
 	// SC->log_bundle(bndl);
 

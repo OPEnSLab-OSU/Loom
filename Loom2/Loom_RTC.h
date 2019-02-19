@@ -25,7 +25,7 @@ enum TimeZone {
 // const float timezone_adjustment[34] =
 // {
 // 	1  /* WAT */, 2    /* AT  */, 3     /* ADT */, 4   /* AST */, 4   /* EDT */, 5  /* EST */, 5  /* CDT */,
-// 	6  /* CST */, 6    /* MDT */, 7     /* MST */, 7   /* PDT */, 8   /* PST */, 8  /* ALDT*/, 9  /* ALST*/,
+// 	6  /* CST */, 6    /* MDT */, 7     /* MST */, 7   /* PDT */, 8    PST , 8  /* ALDT*/, 9  /* ALST*/,
 // 	10 /* HST */, 11   /* SST */, 0     /* GMT */, -1  /* BST */, -1  /* CET */, -2 /* CEST*/, -2 /* EET */,
 // 	-3 /* EEST*/, -3   /* BT  */, -4    /* ZP4 */, -5  /* ZP5 */, -6  /* ZP6 */, -7 /* ZP7 */, -8 /* AWST*/,
 // 	-9 /* AWDT*/, -9.5 /* ACST*/, -10.5 /* ACDT*/, -10 /* AEST*/, -11 /* AEDT*/
@@ -43,6 +43,8 @@ private:
 	const static char* daysOfTheWeek[];
 	const static float timezone_adjustment[];
 
+
+
 protected:
 
 	TimeZone 	timezone;
@@ -52,7 +54,6 @@ protected:
 
 	char	 	datestring[20];
 	char 		timestring[20];
-
 
 public:
 
