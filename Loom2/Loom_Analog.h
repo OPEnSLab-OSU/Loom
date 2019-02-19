@@ -60,9 +60,9 @@ public:
 					bool    enableA5 				= true,
 
 					AnalogConversion convertA0		= NO_CONVERT,
-					AnalogConversion convertA1		= CONVERT_VOLTAGE,
+					AnalogConversion convertA1		= NO_CONVERT,
 					AnalogConversion convertA2		= NO_CONVERT,
-					AnalogConversion convertA3		= CONVERT_VOLTAGE,
+					AnalogConversion convertA3		= NO_CONVERT,
 					AnalogConversion convertA4		= NO_CONVERT,
 					AnalogConversion convertA5		= NO_CONVERT
 				);

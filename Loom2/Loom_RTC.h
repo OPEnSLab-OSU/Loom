@@ -70,19 +70,14 @@ public:
 
 	static char* enum_timezone_string(TimeZone t);
 
-
-
 	virtual void print_config();
 	virtual void measure() {};
 	virtual void package(OSCBundle& bndl, char* suffix="");
+	virtual bool message_route(OSCMessage& msg, int address_offset) = 0;
 
 	virtual DateTime now() = 0;
 
-
-
 	void print_time();
-
-	// virtual bool message_route(OSCMessage& msg, int address_offset) = 0;
 
 	char* get_datestring(); 
 	void  get_datestring(char* buf); 
@@ -102,23 +97,18 @@ public:
 
 protected:
 
-	// Similar to measure_rtc  -- might not be needed
 	void read_rtc();
-
 	void set_rtc_to_compile_time();
-
-
-	// needs to reference and internet connectivity class to get unix time
-	bool set_rtc_from_internet_time(); 
-
 	void convert_local_to_utc(bool to_utc=true);
-
 	bool rtc_validity_check();
 
 	static void print_DateTime(DateTime time);
 
 	virtual void time_adjust(DateTime time) = 0;
 
+
+// needs to reference and internet connectivity class to get unix time
+	bool set_rtc_from_internet_time(); 
 
 };
 
