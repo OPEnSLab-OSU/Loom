@@ -4,7 +4,7 @@
 
 
 
-char* Loom_OLED::enum_oled_version_string(OLED_Version v)
+const char* Loom_OLED::enum_oled_version_string(OLED_Version v)
 {
 	switch(v) {
 		case FEATHERWING : return "FeatherWing";
@@ -13,7 +13,7 @@ char* Loom_OLED::enum_oled_version_string(OLED_Version v)
 }
 
 
-char* Loom_OLED::enum_oled_format(OLED_Format f)
+const char* Loom_OLED::enum_oled_format(OLED_Format f)
 {
 	switch(f) {
 		case OLED_4      : return "OLED 4 Elements";
@@ -22,7 +22,7 @@ char* Loom_OLED::enum_oled_format(OLED_Format f)
 	}
 }
 
-char* Loom_OLED::enum_oled_freeze(OLED_Freeze f)
+const char* Loom_OLED::enum_oled_freeze(OLED_Freeze f)
 {
 	switch(f) {
 		case FREEZE_DISABLE : return "Freeze Disabled";
@@ -36,11 +36,17 @@ char* Loom_OLED::enum_oled_freeze(OLED_Freeze f)
 
 
 // --- CONSTRUCTOR ---
-Loom_OLED::Loom_OLED(	char* module_name, bool enable_rate_filter, uint min_filter_delay, OLED_Version version, byte reset_pin, OLED_Format display_format, uint scroll_duration, byte freeze_pin, OLED_Freeze freeze_behavior)
+Loom_OLED::Loom_OLED(	char* module_name, 
+						bool enable_rate_filter, 
+						uint min_filter_delay, 
+						OLED_Version version, 
+						byte reset_pin, 
+						OLED_Format display_format, 
+						uint scroll_duration, 
+						byte freeze_pin, 
+						OLED_Freeze freeze_behavior)
 	: LoomLogPlat( module_name, enable_rate_filter, min_filter_delay )
 {
-	Println("OLED Setup");
-
 	this->version 	      = version;
 	this->reset_pin       = reset_pin;
 	this->display_format  = display_format;

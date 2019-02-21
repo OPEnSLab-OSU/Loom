@@ -13,7 +13,7 @@ void flatten_bundle(OSCBundle& bndl, OSCBundle& out_bndl)
 {
 	// Make sure bundle has more than one message
 	// Check upper bound as well, as querying some empty bundles gives large value
-	if ( (bndl.size() < 2) || (bndl.size() > 1000) ) {
+	if ( (bndl.size() < 1) || (bndl.size() > 1000) ) {
 		Println("Bundle has no valid contents, cannot be converted");
 		return;
 	}

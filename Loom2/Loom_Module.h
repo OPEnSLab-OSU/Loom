@@ -93,7 +93,6 @@ public:
 	// Display current state
 	virtual void print_state();
 
-
 	virtual void measure() = 0; // maybe drop to subclasses  (measure_aux in Manager wouldnt work then)
 
 	// Append to a bundle 

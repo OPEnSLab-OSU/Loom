@@ -14,6 +14,7 @@
 #include "Loom_Manager.h"
 #include "Loom_Module.h"
 
+
 // Communiciation Platforms
 #include "Loom_LoRa.h"
 
@@ -53,6 +54,9 @@
 // RTC
 #include "Loom_DS3231.h"
 #include "Loom_PCF8523.h"
+
+// Sleep Manager
+#include "Loom_Sleep_Manager.h"
 
 // Actuators
 #include "Loom_Neopixel.h"

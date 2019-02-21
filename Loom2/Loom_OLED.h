@@ -31,13 +31,11 @@ protected:
 		byte 			freeze_pin;
 		OLED_Freeze 	freeze_behavior;
 
-		// Something to manage the buttons, or should that be done externally?
-
 public:
 
-	static char* enum_oled_version_string(OLED_Version v);
-	static char* enum_oled_format(OLED_Format f);
-	static char* enum_oled_freeze(OLED_Freeze f);
+	const static char* enum_oled_version_string(OLED_Version v);
+	const static char* enum_oled_format(OLED_Format f);
+	const static char* enum_oled_freeze(OLED_Freeze f);
 
 
 	// --- CONSTRUCTOR ---

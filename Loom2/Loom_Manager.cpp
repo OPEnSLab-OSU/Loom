@@ -21,6 +21,8 @@ char* LoomManager::enum_device_type_string(DeviceType t)
 		case HUB      : return "Hub";
 		case NODE     : return "Node";
 		case REPEATER : return "Repeater";
+		default       : return "";
+
 	}
 }
 

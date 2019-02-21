@@ -12,10 +12,10 @@ Loom_SHT31D*   SH;
 // Loom_Lora*      LR;
 
 // Loom_OLED*      OL;
-Loom_SD*        SC;
+// Loom_SD*        SC;
 
 // Loom_DS3231*     RT;
-Loom_PCF8523*     RT;
+// Loom_PCF8523*     RT;
 
 Loom_Multiplexer* 	MP;
 // LoomModule* 	MP;
@@ -26,6 +26,8 @@ Loom_Multiplexer* 	MP;
 // Loom_Relay* RL;
 
 Loom_WiFi_I* WI;
+
+Loom_Sleep_Manager* SLM;
 
  
 LoomManager DeviceManager;
@@ -46,7 +48,9 @@ void setup()
 
 	AS = new Loom_Analog();
 
-	WI = new Loom_WiFi_I();
+	SLM = new Loom_Sleep_Manager();
+
+	// WI = new Loom_WiFi_I();
 	// RL = new Loom_Relay();
 	// AS->print_config();
 
@@ -66,7 +70,7 @@ void setup()
 	// LR = new LoomLora();
 	// LR->print_config();
 
-	// OL = new LoomOLED();
+	// OL = new Loom_OLED();
 	// OL->print_config();
 
 	// SC = new Loom_SD();
@@ -91,7 +95,8 @@ void setup()
 	// DeviceManager.add_module(NP);
 	// DeviceManager.add_module(SC);
 	// DeviceManager.add_module(MP);
-	DeviceManager.add_module(WI);
+	// DeviceManager.add_module(OL);
+	// DeviceManager.add_module(WI);
 
 
 	DeviceManager.print_config();
@@ -122,12 +127,14 @@ void loop()
 	// SH->measure();
 	// SH->package(&bndl);
 
-	// DeviceManager.measure();
+	DeviceManager.measure();
 	// AS->print_measurements();
-	// DeviceManager.package(bndl);
-	// SC->log_bundle(bndl);
+	DeviceManager.package(bndl);
 
-	WI->print_state();
+	print_bundle(bndl);
+	// OL->log_bundle(bndl);
+
+	// WI->print_state();
 
 	// MP->refresh_sensors();
 	// MP->print_state();

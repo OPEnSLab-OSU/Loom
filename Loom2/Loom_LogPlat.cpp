@@ -63,14 +63,14 @@ bool LoomLogPlat::message_route(OSCMessage& msg, int address_offset)
 bool LoomLogPlat::check_millis() 
 {
 	if ( (millis() > min_filter_delay) && ( (millis()-last_log_millis) < min_filter_delay ) ) {
-		Println("FALSE");
-		Println2("millis: ", millis() );
-		Println2("last millis: ", last_log_millis );
-		Println2("delay: ", min_filter_delay );
+		// Println("FALSE");
+		// Println2("millis: ", millis() );
+		// Println2("last millis: ", last_log_millis );
+		// Println2("delay: ", min_filter_delay );
 
 		return false;
 	} else {
-		Println("TRUE");
+		// Println("TRUE");
 		last_log_millis = millis();
 		return true;
 	}

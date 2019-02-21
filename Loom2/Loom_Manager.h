@@ -14,6 +14,11 @@
 
 
 
+#define SERIAL_BAUD 115200
+
+
+
+
 enum DeviceType { HUB, NODE, REPEATER };
 enum Verbosity { VERB_OFF, VERB_LOW, VERB_HIGH }; 
 

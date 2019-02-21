@@ -48,23 +48,6 @@ LoomModule::LoomModule( char* module_name, LoomManager* LD ) : LoomModule()
 	link_device_manager(LD);
 }
 
-// This version did not seem to work
-	// LoomModule( char*      module_name 		 = "Unknown",
-	// 			bool       active 			 = true,
-	// 			bool       print_debug 		 = true,
-	// 			Verbosity  print_verbosity   = VERB_LOW,
-	// 			Verbosity  package_verbosity = VERB_LOW
-
-	// 		  ) : LoomModule()
-	// {
-	// 	// Println("LoomModule Constructor 1");
-	// 	this->module_name 		= module_name;
-	// 	this->active 			= active;
-	// 	this->print_debug 		= print_debug;
-	// 	this->print_verbosity 	= print_verbosity;
-	// 	this->package_verbosity = package_verbosity;	
-	// }
-
 
 // --- DESTRUCTOR ---
 LoomModule::~LoomModule() {}

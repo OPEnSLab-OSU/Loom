@@ -70,14 +70,16 @@ public:
 
 	static char* enum_timezone_string(TimeZone t);
 
+
 	virtual void print_config();
 	virtual void measure() {};
 	virtual void package(OSCBundle& bndl, char* suffix="");
 	virtual bool message_route(OSCMessage& msg, int address_offset) = 0;
 
 	virtual DateTime now() = 0;
+	static void print_DateTime(DateTime time);
 
-	void print_time();
+	void print_time(bool verbose=false);
 
 	char* get_datestring(); 
 	void  get_datestring(char* buf); 
@@ -102,7 +104,6 @@ protected:
 	void convert_local_to_utc(bool to_utc=true);
 	bool rtc_validity_check();
 
-	static void print_DateTime(DateTime time);
 
 	virtual void time_adjust(DateTime time) = 0;
 
