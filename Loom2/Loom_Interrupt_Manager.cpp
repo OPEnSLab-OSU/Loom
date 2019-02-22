@@ -1,77 +1,54 @@
 
-#include "Loom_Sleep_Manager.h"
-#include "Loom_RTC.h"
+#include "Loom_Interrupt_Manager.h"
 
-#include <Adafruit_SleepyDog.h>
-#include <LowPower.h>
+// #include "Loom_Sleep_Manager.h"
+// #include "Loom_RTC.h"
+
+// #include <Adafruit_SleepyDog.h>
+// #include <LowPower.h>
 
 
 
 
-const char* Loom_Sleep_Manager::enum_sleep_mode_string(SleepMode m)
+
+
+
+Loom_Interrupt_Manager::Loom_Interrupt_Manager( char* module_name) 
+	: LoomModule( module_name )
 {
-	switch(m) {
-		case IDLE_SLEEP : return "IdleSleep";
-		case STANDBY    : return "Standby";
-		case SLEEPYDOG  : return "SleepyDog";
-		default         : return "";
-	}
+
 }
-
-
-
-
-Loom_Sleep_Manager::Loom_Sleep_Manager( char* module_name, LoomRTC* RTC_Inst, bool use_LED, bool delay_on_wake ) : LoomModule( module_name )
-{
-	this->use_LED 		= use_LED;
-	this->delay_on_wake	= delay_on_wake;
-
-	this->RTC_Inst = RTC_Inst;
-
-	// Get current time
-	if (this->RTC_Inst != NULL) {
-		last_wake_time = this->RTC_Inst->now();
-		// this->sleep_mode = STANDBY;
-	} else {
-		// this->sleep_mode = SLEEPYDOG;
-	}
-}
-
-// Loom_Sleep_Manager( char* module_name, LoomManager* LD );
-
 
 
 // --- DESTRUCTOR ---
-Loom_Sleep_Manager::~Loom_Sleep_Manager()
+Loom_Interrupt_Manager::~Loom_Interrupt_Manager()
 {
 
 }
 
-void Loom_Sleep_Manager::print_config()
+void Loom_Interrupt_Manager::print_config()
 {
 	LoomModule::print_config();
-	// Println3('\t', "Sleep Mode          : ", enum_sleep_mode_string(sleep_mode) );
-	Println3('\t', "Use LED             : ", (use_LED) ? "Enabled" : "Disabled" );
+
 }
 
 
-void Loom_Sleep_Manager::print_state()
+void Loom_Interrupt_Manager::print_state()
 {
 	LoomModule::print_state();
-	if (RTC_Inst != NULL) {
-		Print2('\t', "Last Wake Time      : " );
-		RTC_Inst->print_time();
-	}
+
+	// print out registered interrupts
+
 }
 
 
 
-void Loom_Sleep_Manager::set_RTC_module(LoomRTC* RTC_Inst)
+void Loom_Interrupt_Manager::set_RTC_module(LoomRTC* RTC_Inst)
 {
 	this->RTC_Inst = RTC_Inst;
 }
 
-LoomRTC* Loom_Sleep_Manager::get_RTC_module()
+LoomRTC* Loom_Interrupt_Manager::get_RTC_module()
 {
 	return RTC_Inst;
 }
@@ -79,12 +56,12 @@ LoomRTC* Loom_Sleep_Manager::get_RTC_module()
 
 
 
-// void Loom_Sleep_Manager::set_sleep_mode(SleepMode mode)
+// void Loom_Interrupt_Manager::set_sleep_mode(SleepMode mode)
 // {
 // 	sleep_mode = mode;
 // }
 
-// SleepMode Loom_Sleep_Manager::get_sleep_mode()
+// SleepMode Loom_Interrupt_Manager::get_sleep_mode()
 // {
 // 	return sleep_mode;
 // }
@@ -93,7 +70,7 @@ LoomRTC* Loom_Sleep_Manager::get_RTC_module()
 
 
 
-bool Loom_Sleep_Manager::sleep_for_time(TimeSpan duration, SleepMode mode)
+bool Loom_Interrupt_Manager::sleep_for_time(TimeSpan duration, SleepMode mode)
 {
 	switch(mode) {
 
@@ -112,24 +89,24 @@ bool Loom_Sleep_Manager::sleep_for_time(TimeSpan duration, SleepMode mode)
 	}
 }
 
-bool Loom_Sleep_Manager::sleep_for_time(uint days, uint hours, uint minutes, uint seconds, SleepMode mode)
+bool Loom_Interrupt_Manager::sleep_for_time(uint days, uint hours, uint minutes, uint seconds, SleepMode mode)
 {
 	return sleep_for_time( TimeSpan(days, hours, minutes, seconds) );
 }
 
-bool Loom_Sleep_Manager::sleep_for_time_from_wake(TimeSpan duration)
+bool Loom_Interrupt_Manager::sleep_for_time_from_wake(TimeSpan duration)
 {
 	return (RTC_Inst) ? sleep_until_time(last_wake_time + duration) : false;
 }
 
-bool Loom_Sleep_Manager::sleep_for_time_from_wake(uint days, uint hours, uint minutes, uint seconds)
+bool Loom_Interrupt_Manager::sleep_for_time_from_wake(uint days, uint hours, uint minutes, uint seconds)
 {
 	return sleep_for_time_from_wake( TimeSpan(days, hours, minutes, seconds) );
 
 }
 
 
-bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
+bool Loom_Interrupt_Manager::sleep_until_time(DateTime future_time)
 {
 	// switch(sleep_mode) {
 		// case STANDBY :
@@ -180,7 +157,7 @@ bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 
 }
 
-bool Loom_Sleep_Manager::sleep_until_time(uint hour, uint minute, uint second)
+bool Loom_Interrupt_Manager::sleep_until_time(uint hour, uint minute, uint second)
 {
 	// Don't sleep if no RTC to wake up device
 	if (RTC_Inst == NULL) {
@@ -194,7 +171,7 @@ bool Loom_Sleep_Manager::sleep_until_time(uint hour, uint minute, uint second)
 }
 
 
-bool Loom_Sleep_Manager::sleep_until_interrupt_on(byte pin)
+bool Loom_Interrupt_Manager::sleep_until_interrupt_on(byte pin)
 {
 		pre_sleep();
 
@@ -209,7 +186,7 @@ bool Loom_Sleep_Manager::sleep_until_interrupt_on(byte pin)
 
 #define MAX_WATCHDOG_SLEEP 8 // seconds
 
-bool Loom_Sleep_Manager::sleepy_dog_sleep(TimeSpan duration)
+bool Loom_Interrupt_Manager::sleepy_dog_sleep(TimeSpan duration)
 {
 	uint32_t totalseconds = duration.totalseconds();
 
@@ -254,7 +231,7 @@ bool Loom_Sleep_Manager::sleepy_dog_sleep(TimeSpan duration)
 
 
 
-void Loom_Sleep_Manager::pre_sleep()
+void Loom_Interrupt_Manager::pre_sleep()
 {
 	Println("Entering Sleep");
 	#if LOOM_DEBUG == 1
@@ -271,7 +248,7 @@ void Loom_Sleep_Manager::pre_sleep()
 }
 
 
-void Loom_Sleep_Manager::post_sleep()
+void Loom_Interrupt_Manager::post_sleep()
 {
 
 // Standy by might get its own pre and post sleeps which in turn calls

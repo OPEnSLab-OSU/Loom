@@ -45,9 +45,9 @@ public:
 						LoomRTC* 	RTC_Inst 		= NULL,
 
 						bool 		use_LED 		= true,
-						bool		delay_on_wake 	= true
+						bool		delay_on_wake 	= false
 
-						 );
+					);
 
 	// Loom_Sleep_Manager( char* module_name, LoomManager* LD );
 
@@ -73,8 +73,8 @@ public:
 	// SleepMode get_sleep_mode();
 
 
-	bool sleep_for_time(TimeSpan duration);	
-	bool sleep_for_time(uint days, uint hours, uint minutes, uint seconds);
+	bool sleep_for_time(TimeSpan duration, SleepMode mode=SLEEPYDOG);	
+	bool sleep_for_time(uint days, uint hours, uint minutes, uint seconds, SleepMode mode=SLEEPYDOG);
 	
 	// Only works with RTC
 	// Might work using PCF and SleepyDog together, otherwise has to be DS3231
@@ -95,11 +95,19 @@ public:
 
 private:
 
-	void sleepy_dog_sleep();
+	bool sleepy_dog_sleep(TimeSpan duration);
+	// bool sleepy_dog_sleep(uint days, uint hours, uint minutes, uint seconds);
 
 	void pre_sleep();
 	void post_sleep();
 
+
+	// Wrappers for the other (pre/post)sleep but handles RTC alarms
+
+	// Unless the RTC alarm resetting is part of the interrupt manager not sleep manager
+	// Or in virtual LoomModule sleep/wake() methods
+	// void RTC_pre_sleep();
+	// void RTC_post_sleep(); 
 
 };
 

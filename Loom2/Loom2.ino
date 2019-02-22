@@ -43,6 +43,9 @@ LoomManager DeviceManager;
 
 void setup() 
 {
+	pinMode(LED_BUILTIN, OUTPUT);   // Set the LED pin mode
+
+
 	Serial.begin(115200);
 
 	while(!Serial);        // Ensure Serial is ready to go before anything happens in LOOM_DEBUG mode.
@@ -108,10 +111,10 @@ void setup()
 	// while(1);
 
 	// delay(2000);
-
+	digitalWrite(LED_BUILTIN, HIGH);  
 }
 
-int b = 0;
+int i = 0;
 
 void loop() 
 {
@@ -121,20 +124,23 @@ void loop()
 	// SH->measure();
 	// SH->package(&bndl);
 
-	DeviceManager.measure();
+	// DeviceManager.measure();
 	// AS->print_measurements();
-	DeviceManager.package(bndl);
-
-	print_bundle(bndl);
-	// OL->log_bundle(bndl);
+	// DeviceManager.package(bndl);
 
 	// print_bundle(bndl);
-	delay(1000);
+	// OL->log_bundle(bndl);
+
+	SLM->sleep_for_time( TimeSpan(0,0,0,12) );
+	digitalWrite(LED_BUILTIN, HIGH);
+	delay(5000);
+	Println2("I: ", i++);
 
 	// Println("\nDone");
 
 	Println("\nDone");
 
+	// while(1);
 
 
 
