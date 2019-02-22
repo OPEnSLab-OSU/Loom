@@ -9,7 +9,7 @@ Loom_Analog* 	AS;
 // Loom_Neopixel*  NP;
 
 Loom_SHT31D*   SH;
-// Loom_Lora*      LR;
+// Loom_LoRa*      LR;
 
 // Loom_OLED*      OL;
 // Loom_SD*        SC;
@@ -67,7 +67,7 @@ void setup()
 	// SH = new Loom_SHT31D();
 	// SH->print_config();
 
-	// LR = new LoomLora();
+	// LR = new Loom_LoRa();
 	// LR->print_config();
 
 	// OL = new Loom_OLED();
