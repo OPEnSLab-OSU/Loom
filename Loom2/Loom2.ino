@@ -37,9 +37,27 @@ Loom_Multiplexer* 	MP;
 Loom_WiFi_I* WI;
 
 Loom_Sleep_Manager* SLM;
+Loom_Interrupt_Manager* ITM;
 
  
 LoomManager DeviceManager;
+
+
+
+volatile byte state = LOW;
+void blink() {
+	state = !state;
+}
+
+void turn_on() {
+	state = HIGH;
+}
+
+void turn_off() {
+	state = LOW;
+}
+
+
 
 void setup() 
 {
@@ -60,7 +78,9 @@ void setup()
 
 	AS = new Loom_Analog();
 
-	SLM = new Loom_Sleep_Manager();
+	// SLM = new Loom_Sleep_Manager();
+	ITM = new Loom_Interrupt_Manager();
+
 
 	// WI = new Loom_WiFi_I();
 	// RL = new Loom_Relay();
@@ -112,14 +132,21 @@ void setup()
 
 	// delay(2000);
 	digitalWrite(LED_BUILTIN, HIGH);  
+
+	// IntDetails test = {9, INT_CHANGE, blink };
+	ITM->register_interrupt( {9, INT_CHANGE, blink } );
+	ITM->register_interrupt( {10, INT_LOW, turn_on } );
+	ITM->register_interrupt( {11, INT_LOW, turn_off } );
+
 }
 
 int i = 0;
 
+
 void loop() 
 {
-	OSCBundle bndl;
-	OSCBundle bndl2;
+	// OSCBundle bndl;
+	// OSCBundle bndl2;
 
 	// SH->measure();
 	// SH->package(&bndl);
@@ -131,15 +158,18 @@ void loop()
 	// print_bundle(bndl);
 	// OL->log_bundle(bndl);
 
-	SLM->sleep_for_time( TimeSpan(0,0,0,12) );
-	digitalWrite(LED_BUILTIN, HIGH);
-	delay(5000);
-	Println2("I: ", i++);
+	digitalWrite(LED_BUILTIN, state);
+
+	// SLM->sleep_for_time( TimeSpan(0,0,0,12) );
+	// digitalWrite(LED_BUILTIN, HIGH);
+	// delay(5000);
+	// Println2("I: ", i++);
+
+
+
+
 
 	// Println("\nDone");
-
-	Println("\nDone");
-
 	// while(1);
 
 

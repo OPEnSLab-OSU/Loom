@@ -55,6 +55,7 @@
 #include "Loom_PCF8523.h"
 
 // Sleep Manager
+#include "Loom_Interrupt_Manager.h"
 #include "Loom_Sleep_Manager.h"
 
 // Actuators
