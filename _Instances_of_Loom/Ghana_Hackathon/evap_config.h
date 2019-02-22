@@ -217,7 +217,11 @@
 #if is_wifi == 1
 	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
+<<<<<<< HEAD
 	#define DEFAULT_PASSWORD  "arduino101"		// Network password
+=======
+	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"		// Network password
+>>>>>>> 57cde1de93921efa3fc781c247732db1a2fc0a4f
 #endif
 
 
@@ -472,11 +476,19 @@
 #if is_pushingbox == 1	
 	// Google Spreadsheet ID
 	// (found betweeen the "docs.google.com/spreadsheets/d/" and "/edit..." in the URL; looks like random string of characters)
+<<<<<<< HEAD
 	#define init_spreadsheet_id "1wMNszrEmPt2jN1ZYDNJhO5lJHm4WcMZhzP6ck5omEOU"  // Ghana Proto Sheet
 
 	// Required by PushingBox, specific to each scenario
 	// Does not always need to change with different spreadsheets, only different PushingBox accounts
 	char device_id[] = "vBC42D81EEEB62D5"; 	// Opens
+=======
+	#define init_spreadsheet_id "***REMOVED***"  // Ghana Proto Sheet
+
+	// Required by PushingBox, specific to each scenario
+	// Does not always need to change with different spreadsheets, only different PushingBox accounts
+	char device_id[] = "***REMOVED***"; 	// Opens
+>>>>>>> 57cde1de93921efa3fc781c247732db1a2fc0a4f
 
 
 	// Google Spreadsheet Sheet/Tab. Sent as parameter to PushingBox/Google Scripts
@@ -507,6 +519,7 @@
 		// 0–9 : Sheet ID for corresponding subnet #
 		// Only fill out number of IDs being used
 		const char* spreadsheet_list[8] = {
+<<<<<<< HEAD
 			"1L6Rr6H-5PFbbZIBKmR5mkGTztqA8xQhJeOW4Bn7ec8c",
 			"1vgVBCv2nbCc8RGcb44-bgRtxKWvp2sIu7iu9w8rtWv4",
 			"1_VTY97xWlx8WzRJ5r2NbRzPFYiorViDu4RqYo_l_mCA",
@@ -518,6 +531,19 @@
 		};
 
 		#define pb_default_sheet "1wMNszrEmPt2jN1ZYDNJhO5lJHm4WcMZhzP6ck5omEOU" 	// Default sheet to use if family number is out of range, 
+=======
+			"***REMOVED***",
+			"***REMOVED***",
+			"***REMOVED***",
+			"***REMOVED***",
+			"***REMOVED***",
+			"***REMOVED***",
+			"***REMOVED***",
+			"***REMOVED***"
+		};
+
+		#define pb_default_sheet "***REMOVED***" 	// Default sheet to use if family number is out of range, 
+>>>>>>> 57cde1de93921efa3fc781c247732db1a2fc0a4f
 																			 		// can be duplicate of an element in the array
 	#endif
 

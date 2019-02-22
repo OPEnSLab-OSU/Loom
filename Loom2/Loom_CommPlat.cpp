@@ -76,14 +76,6 @@ void LoomCommPlat::package(OSCBundle& bndl, char* suffix)
 
 }
 
-
-
-bool LoomCommPlat::message_route(OSCMessage& msg, int address_offset) 
-{
-	// maybe set subnet_scope 
-}
-
-
 void LoomCommPlat::set_compress_messages(bool c) 
 { 
 	compress_messages = c; 

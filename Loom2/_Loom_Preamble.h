@@ -14,7 +14,6 @@
 #include "Loom_Manager.h"
 #include "Loom_Module.h"
 
-
 // Communiciation Platforms
 #include "Loom_LoRa.h"
 
@@ -23,8 +22,8 @@
 #include "Loom_SD.h"
 
 // Internet Platforms
-// #include "Loom_InternetEthernet.h"
 #include "Loom_InternetWiFi.h"
+// #include "Loom_InternetEthernet.h"
 
 // Sensors
 #include "Loom_Analog.h"

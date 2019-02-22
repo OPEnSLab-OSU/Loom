@@ -18,7 +18,6 @@
 
 
 
-
 enum DeviceType { HUB, NODE, REPEATER };
 enum Verbosity { VERB_OFF, VERB_LOW, VERB_HIGH }; 
 
@@ -84,7 +83,7 @@ protected:
 public:
 
 
-	static char* enum_device_type_string(DeviceType t);
+	const static char* enum_device_type_string(DeviceType t);
 
 
 	// --- CONSTRUCTOR ---
@@ -142,6 +141,7 @@ public:
 	LoomCommPlat*		get_comm_plat_module(int idx);
 	LoomInternetPlat*	get_internet_plat_module(int idx);
 	LoomLogPlat*		get_log_plat_module(int idx);
+
 
 	// void module_enable(LoomModule* LM, bool e) ?
 

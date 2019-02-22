@@ -115,20 +115,19 @@ void LoomRTC::print_time(bool verbose)
 	} else {
 		print_DateTime( now() );
 	}
-
-
 }
 
 
 void LoomRTC::print_DateTime(DateTime time) 
 {
-	// Println("DateTime:");
+	Println("DateTime:");
 	Print(time.year());   Print('/');
 	Print(time.month());  Print('/');
 	Print(time.day());    Print(' ');
 	Print(time.hour());   Print(':');
 	Print(time.minute()); Print(':');
-	Print(time.second()); Println();
+	Print(time.second()); 
+	Println();
 }
 
 

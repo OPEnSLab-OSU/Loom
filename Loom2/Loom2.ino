@@ -2,14 +2,23 @@
 #include "_Loom_Preamble.h"
 
 
+
+
 // Do these being pointers rather than global instances slow down startup?
 
 
 Loom_Analog* 	AS;
 // Loom_Neopixel*  NP;
 
-Loom_SHT31D*   SH;
+// Loom_SHT31D*   SH;
 // Loom_LoRa*      LR;
+
+// Loom_OLED*      OL;
+// Loom_SD*        SC;
+
+// Loom_DS3231*     RT;
+// Loom_PCF8523*     RT;
+// Loom_Lora*      LR;
 
 // Loom_OLED*      OL;
 // Loom_SD*        SC;
@@ -64,31 +73,6 @@ void setup()
 	// NP->print_config();
 
 
-	// SH = new Loom_SHT31D();
-	// SH->print_config();
-
-	// LR = new Loom_LoRa();
-	// LR->print_config();
-
-	// OL = new Loom_OLED();
-	// OL->print_config();
-
-	// SC = new Loom_SD();
-	// SC->print_config();
-
-	// RT = new Loom_DS3231();
-	// RT = new Loom_PCF8523();
-	// RT->print_config();
-
-	// MP = new Loom_Multiplexer();
-	// MP->print_config();
-
-	// MP->print_state();
-
-	// EI = new Loom_Ethernet_I();
-
-	// DeviceManager = new LoomManager();
-
 	Println("Adding Components");
 
 	DeviceManager.add_module(AS);
@@ -98,6 +82,8 @@ void setup()
 	// DeviceManager.add_module(OL);
 	// DeviceManager.add_module(WI);
 
+	// DeviceManager.add_module(MP);
+	// DeviceManager.add_module(EI);
 
 	DeviceManager.print_config();
 
@@ -114,6 +100,14 @@ void setup()
 	// Println2("Connected : ", EI->is_connected());
 	// Println2("Time      : ", EI->get_time());
 	// Println2("Time      : ", EI->get_time());
+
+	
+
+	// Println()
+
+	// while(1);
+
+	// delay(2000);
 
 }
 
@@ -134,20 +128,12 @@ void loop()
 	print_bundle(bndl);
 	// OL->log_bundle(bndl);
 
-	// WI->print_state();
-
-	// MP->refresh_sensors();
-	// MP->print_state();
-	// MP->measure();
-	// MP->print_measurements();
-	// MP->get_sensor_list(&bndl);
-
-	// MP->package(&bndl);
-
 	// print_bundle(bndl);
 	delay(1000);
 
 	// Println("\nDone");
+
+	Println("\nDone");
 
 
 

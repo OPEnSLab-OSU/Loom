@@ -42,7 +42,6 @@ protected:
 
 
 	// bool 		request_settings;       // True if device should request new channel settings on startup
-
 public:
 
 	static char* enum_wifi_mode_string(WiFiMode c);
@@ -54,10 +53,7 @@ public:
 					char* 		ssid		= "",
 					char* 		pass		= "",
 					uint 		UDP_port 	= 9411  	
-
-					// MAC address / IP ?
-
-					);
+				);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_WiFi_I();
@@ -68,14 +64,13 @@ public:
 	void package(OSCBundle& bndl, char* suffix="") {}
 	bool message_route(OSCMessage& msg, int address_offset) {}
 
+
 	bool connect();
 	bool is_connected();
 	uint32_t get_time();
 
 
-private:
 
-	/*static*/ uint LED_WiFi_connected[3] = {6, 50, 50};
 
 	bool connect_AP();
 	bool connect_WPA(char* new_SSID="", char* new_pass="");
@@ -83,6 +78,14 @@ private:
 	void print_MAC(byte mac[]);
 
 	// void print_remote_AP_device_status();
+
+	// Should this be external?
+	// bool log_to_pushingbox(OSCBundle& bndl);
+
+private:
+
+	/*static*/ uint LED_WiFi_connected[3] = {6, 50, 50};
+
 
 };
 

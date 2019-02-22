@@ -2,7 +2,6 @@
 #include "Loom_InternetEthernet.h"
 
 
-
 // --- CONSTRUCTOR ---
 Loom_Ethernet_I::Loom_Ethernet_I(	char* module_name,
 
@@ -207,5 +206,3 @@ void Loom_Ethernet_I::send_NTP_packet(byte packet_buffer[])
 	UDP->write(packet_buffer, NTP_PACKET_SIZE);
 	UDP->endPacket();
 }
-
-

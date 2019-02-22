@@ -67,10 +67,8 @@ bool LoomLogPlat::check_millis()
 		// Println2("millis: ", millis() );
 		// Println2("last millis: ", last_log_millis );
 		// Println2("delay: ", min_filter_delay );
-
 		return false;
 	} else {
-		// Println("TRUE");
 		last_log_millis = millis();
 		return true;
 	}

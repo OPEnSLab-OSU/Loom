@@ -38,9 +38,7 @@ public:
 	virtual uint32_t get_time() = 0;
 
 
-
-	// Should this be external?
-	// virtual bool log_to_google_sheets(OSCBundle& bndl);
+	virtual bool log_to_pushingbox(OSCBundle* bndl);
 
 private:
 

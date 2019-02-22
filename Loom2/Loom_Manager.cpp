@@ -15,14 +15,13 @@
 
 
 
-char* LoomManager::enum_device_type_string(DeviceType t)
+const char* LoomManager::enum_device_type_string(DeviceType t)
 {
 	switch(t) {
 		case HUB      : return "Hub";
 		case NODE     : return "Node";
 		case REPEATER : return "Repeater";
 		default       : return "";
-
 	}
 }
 
@@ -152,13 +151,11 @@ LoomSensor* LoomManager::get_sensor_module(int idx)
 LoomActuator* LoomManager::get_actuator_module(int idx)
 {
 	return (idx < actuator_count) ? actuator_modules[idx] : NULL;
-
 }
 
 LoomRTC* LoomManager::get_rtc_module(int idx)
 {
 	return (idx < rtc_count) ? rtc_modules[idx] : NULL;
-
 }
 
 LoomCommPlat* LoomManager::get_comm_plat_module(int idx)
@@ -169,7 +166,6 @@ LoomCommPlat* LoomManager::get_comm_plat_module(int idx)
 LoomInternetPlat* LoomManager::get_internet_plat_module(int idx)
 {
 	return (idx < internet_count) ? internet_modules[idx] : NULL;
-
 }
 
 LoomLogPlat* LoomManager::get_log_plat_module(int idx)
@@ -208,7 +204,7 @@ void LoomManager::list_modules()
 	list_modules_aux( (LoomModule**)actuator_modules , actuator_count     , "Actuators"); 
 	list_modules_aux( (LoomModule**)rtc_modules      , rtc_count          , "RTC Modules"); 
 	list_modules_aux( (LoomModule**)comm_modules     , comm_count         , "Communication Platforms"); 
-	list_modules_aux( (LoomModule**)internet_modules  , internet_count     , "Internet Platforms"); 
+	list_modules_aux( (LoomModule**)internet_modules , internet_count     , "Internet Platforms"); 
 	list_modules_aux( (LoomModule**)log_modules      , log_count          , "Logging Platforms" ); 
 }
 
@@ -430,6 +426,4 @@ void LoomManager::flash_LED(uint sequence[3])
 {
 	flash_LED(sequence[0], sequence[1], sequence[2]);
 }
-
-
 

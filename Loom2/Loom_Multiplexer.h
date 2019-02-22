@@ -79,6 +79,7 @@ public:
 	bool message_route(OSCMessage& msg, int address_offset);
 	void print_measurements();
 
+	
 	void get_sensor_list(OSCBundle& bndl); // populate an OSC bundle
 
 	void set_is_dynamic(bool dynamic);

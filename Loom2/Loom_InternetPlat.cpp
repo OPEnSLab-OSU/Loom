@@ -39,4 +39,3 @@ void LoomInternetPlat::print_state()
 	Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 
-

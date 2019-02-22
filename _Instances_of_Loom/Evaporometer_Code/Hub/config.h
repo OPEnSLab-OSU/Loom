@@ -113,7 +113,11 @@
 #if is_wifi == 1
 	#define DEFAULT_MODE      WPA_CLIENT_MODE	// AP_MODE, WPA_CLIENT_MODE or WEP_CLIENT_MODE
 	#define DEFAULT_NETWORK   "OPEnS"			// Network SSID / name
+<<<<<<< HEAD
 	#define DEFAULT_PASSWORD  "arduino101"		// Network password
+=======
+	#define DEFAULT_PASSWORD  "Replace_with_your_wifi_password"		// Network password
+>>>>>>> 57cde1de93921efa3fc781c247732db1a2fc0a4f
 #endif
 
 // --- Scripts ---
@@ -340,12 +344,20 @@
 	// #define spreadsheet_id "17XjrTjXENChYsHMVvKgePg8rsohwz0hyASkdeZZKROk"
 	// #define spreadsheet_id "16K7gOczeewt-wVHdnMR0ttWSrcqmVvWvG-2zJxo1-MA"	    
 //	#define spreadsheet_id "15KSoelwWpKwvXos2EALuKxCaPuH89McytFM-uKY8TI4"  
+<<<<<<< HEAD
 	#define spreadsheet_id "1Hv2oME5sjumUXv36GtFV1Q7I83xnXu-f-ZrxUNsXS_U"  // This is Luke's Arduino Test spreadsheet
+=======
+	#define spreadsheet_id "***REMOVED***"  // This is Luke's Arduino Test spreadsheet
+>>>>>>> 57cde1de93921efa3fc781c247732db1a2fc0a4f
 
 
 	// Required by PushingBox, specific to each scenario
 //	char device_id[]   = "vCBEA3F8416B0880";
+<<<<<<< HEAD
 	char device_id[]   = "v7ECCEF7A460E57A";
+=======
+	char device_id[]   = "***REMOVED***";
+>>>>>>> 57cde1de93921efa3fc781c247732db1a2fc0a4f
 
 
 	// Google Spreadsheet Sheet/Tab. Sent as parameter to PushingBox/Google Scripts
