@@ -2,6 +2,9 @@
 #include "Loom_Sleep_Manager.h"
 #include "Loom_RTC.h"
 
+// #include "Loom_Manager.h"
+#include "Loom_Interrupt_Manager.h"
+
 #include <Adafruit_SleepyDog.h>
 #include <LowPower.h>
 
@@ -143,9 +146,12 @@ bool Loom_Sleep_Manager::sleep_for_time_from_wake(uint days, uint hours, uint mi
 
 bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 {
-	// switch(sleep_mode) {
-		// case STANDBY :
-			
+	switch(sleep_mode) {
+		
+		// Both follow same process, intentional fallthrough
+		case STANDBY    :
+		case IDLE_SLEEP :
+		{
 			// Don't sleep if no RTC to wake up device
 			if (RTC_Inst == NULL) {
 				return false;
@@ -186,11 +192,13 @@ bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 			sleep_until_interrupt();
 
 
-			// break;
-	// }
-
-
+			return true;
+		}
+		case SLEEPYDOG : 
+			return false; // Can't sleep until a given time unless using RTC, in which case, use Standby or Idle instead
+	}
 }
+
 
 bool Loom_Sleep_Manager::sleep_until_time(uint hour, uint minute, uint second)
 {
@@ -280,7 +288,9 @@ void Loom_Sleep_Manager::pre_sleep()
 	#endif
 
 
-
+	if (device_manager->get_interrupt_manager()) {
+		device_manager->get_interrupt_manager()->interrupt_reset(RTC_Inst->get_interrupt_pin());
+	}
 	// RTC_Inst->rtc_interrupt_reset(); //clear interrupt registers, attach interrupts
 
 
@@ -294,10 +304,17 @@ void Loom_Sleep_Manager::post_sleep()
 
 // Standy by might get its own pre and post sleeps which in turn calls
 
+	if (device_manager->get_interrupt_manager()) {
+		device_manager->get_interrupt_manager()->interrupt_reset(RTC_Inst->get_interrupt_pin());
+	}
 	// rtc_interrupt_reset(); //clear interrupt registers, attach interrupts
 	RTC_Inst->clear_alarms(); //prevent double trigger of alarm interrupt
 
+
 	// Not sure why these have to be repeated but it seems to make a difference
+	if (device_manager->get_interrupt_manager()) {
+		device_manager->get_interrupt_manager()->interrupt_reset(RTC_Inst->get_interrupt_pin());
+	}
 	// rtc_interrupt_reset();
 	RTC_Inst->clear_alarms();
 

@@ -58,18 +58,18 @@ protected:
 
 	DeviceType 	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
-
+	// Sub Managers
 	Loom_Interrupt_Manager*	interrupt_manager;
 	Loom_Sleep_Manager* 	sleep_manager;
 
 	// Arrays of Loom Modules, categorized by type
-	LoomModule*       other_modules[MAX_OTHER_MODULES];
-	LoomSensor*       sensor_modules[MAX_SENSORS];
-	LoomActuator*     actuator_modules[MAX_ACTUATORS];
-	LoomRTC*          rtc_modules[MAX_RTCS];
-	LoomCommPlat*     comm_modules[MAX_COMMS];
-	LoomInternetPlat*  internet_modules[MAX_INTERNETS];
-	LoomLogPlat*      log_modules[MAX_LOGS];
+	LoomModule*			other_modules[MAX_OTHER_MODULES];
+	LoomSensor*			sensor_modules[MAX_SENSORS];
+	LoomActuator*		actuator_modules[MAX_ACTUATORS];
+	LoomRTC*			rtc_modules[MAX_RTCS];
+	LoomCommPlat*		comm_modules[MAX_COMMS];
+	LoomInternetPlat*	internet_modules[MAX_INTERNETS];
+	LoomLogPlat*		log_modules[MAX_LOGS];
 
 	uint other_module_count;
 	uint sensor_count;
@@ -131,6 +131,9 @@ public:
 
 
 	// Over loaded as to sort by module type
+	void add_module(Loom_Interrupt_Manager* interrupt_manager); 
+	void add_module(Loom_Sleep_Manager* sleep_manager);
+
 	void add_module(LoomModule* LM);
 	void add_module(LoomSensor* sensor); 
 	void add_module(LoomActuator* actuator); 
@@ -139,6 +142,9 @@ public:
 	void add_module(LoomInternetPlat* internet_plat); 
 	void add_module(LoomLogPlat* log_plat); 
 
+	Loom_Interrupt_Manager*	get_interrupt_manager();
+	Loom_Sleep_Manager*		get_sleep_manager();
+
 	LoomModule*			get_other_module(int idx);
 	LoomSensor*			get_sensor_module(int idx);
 	LoomActuator*		get_actuator_module(int idx);
@@ -146,6 +152,8 @@ public:
 	LoomCommPlat*		get_comm_plat_module(int idx);
 	LoomInternetPlat*	get_internet_plat_module(int idx);
 	LoomLogPlat*		get_log_plat_module(int idx);
+
+
 
 
 	// void module_enable(LoomModule* LM, bool e) ?

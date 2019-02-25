@@ -4,6 +4,9 @@
 
 #include "Loom_Macros.h"
 
+#include "Loom_Interrupt_Manager.h"
+#include "Loom_Sleep_Manager.h"
+
 #include "Loom_Sensor.h"
 #include "Loom_Actuator.h"
 #include "Loom_CommPlat.h"
@@ -100,6 +103,28 @@ void LoomManager::add_module_aux(LoomModule** modules, LoomModule* module, uint&
 }
 
 
+void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager) 
+{
+	print_device_label();
+	if (!interrupt_manager) {
+		Println2("Cannot add ", interrupt_manager->get_module_name() );
+		return;
+	}
+	Println2("Adding Module: ", interrupt_manager->get_module_name() );
+	this->interrupt_manager = interrupt_manager; 
+}
+
+void LoomManager::add_module(Loom_Sleep_Manager* sleep_manager) 
+{
+	print_device_label();
+	if (!sleep_manager) {
+		Println2("Cannot add ", sleep_manager->get_module_name() );
+		return;
+	}
+	Println2("Adding Module: ", sleep_manager->get_module_name() );
+	this->sleep_manager = sleep_manager; 
+}
+
 void LoomManager::add_module(LoomModule* module) 
 {
 	add_module_aux(other_modules, module, other_module_count, MAX_OTHER_MODULES);
@@ -136,7 +161,16 @@ void LoomManager::add_module(LoomLogPlat* log_plat)
 }
 
 
+	
+Loom_Interrupt_Manager* LoomManager::get_interrupt_manager()
+{
+	return interrupt_manager;
+}
 
+Loom_Sleep_Manager* LoomManager::get_sleep_manager()
+{
+	return sleep_manager;
+}
 
 LoomModule* LoomManager::get_other_module(int idx)
 {

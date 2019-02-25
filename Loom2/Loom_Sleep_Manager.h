@@ -70,7 +70,6 @@ public:
 	LoomRTC* get_RTC_module();
 
 
-// Currently commented out because mode is being sent as parameter
 	void set_sleep_mode(SleepMode mode);
 	SleepMode get_sleep_mode();
 
@@ -105,10 +104,14 @@ private:
 	void post_sleep();
 
 
+
+
+// Probably not needed:
 	// Wrappers for the other (pre/post)sleep but handles RTC alarms
 
 	// Unless the RTC alarm resetting is part of the interrupt manager not sleep manager
 	// Or in virtual LoomModule sleep/wake() methods
+	// Resetting might not be needed until next call to sleep_for_time_from_wake
 	// void RTC_pre_sleep();
 	// void RTC_post_sleep(); 
 
