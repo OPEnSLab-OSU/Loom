@@ -21,23 +21,24 @@ const char* Loom_Sleep_Manager::enum_sleep_mode_string(SleepMode m)
 
 
 
-Loom_Sleep_Manager::Loom_Sleep_Manager( char* module_name, LoomRTC* RTC_Inst, bool use_LED, bool delay_on_wake ) : LoomModule( module_name )
+Loom_Sleep_Manager::Loom_Sleep_Manager( char* module_name, LoomRTC* RTC_Inst, bool use_LED, bool delay_on_wake, SleepMode sleep_mode ) : LoomModule( module_name )
 {
 	this->use_LED 		= use_LED;
 	this->delay_on_wake	= delay_on_wake;
 
 	this->RTC_Inst = RTC_Inst;
+	this->sleep_mode = STANDBY;
+
 
 	// Get current time
 	if (this->RTC_Inst != NULL) {
 		last_wake_time = this->RTC_Inst->now();
-		// this->sleep_mode = STANDBY;
 	} else {
-		// this->sleep_mode = SLEEPYDOG;
+		sleep_mode = SLEEPYDOG;
 	}
+
 }
 
-// Loom_Sleep_Manager( char* module_name, LoomManager* LD );
 
 
 
@@ -50,7 +51,7 @@ Loom_Sleep_Manager::~Loom_Sleep_Manager()
 void Loom_Sleep_Manager::print_config()
 {
 	LoomModule::print_config();
-	// Println3('\t', "Sleep Mode          : ", enum_sleep_mode_string(sleep_mode) );
+	Println3('\t', "Sleep Mode          : ", enum_sleep_mode_string(sleep_mode) );
 	Println3('\t', "Use LED             : ", (use_LED) ? "Enabled" : "Disabled" );
 }
 
@@ -79,23 +80,23 @@ LoomRTC* Loom_Sleep_Manager::get_RTC_module()
 
 
 
-// void Loom_Sleep_Manager::set_sleep_mode(SleepMode mode)
-// {
-// 	sleep_mode = mode;
-// }
-
-// SleepMode Loom_Sleep_Manager::get_sleep_mode()
-// {
-// 	return sleep_mode;
-// }
-
-
-
-
-
-bool Loom_Sleep_Manager::sleep_for_time(TimeSpan duration, SleepMode mode)
+void Loom_Sleep_Manager::set_sleep_mode(SleepMode mode)
 {
-	switch(mode) {
+	sleep_mode = mode;
+}
+
+SleepMode Loom_Sleep_Manager::get_sleep_mode()
+{
+	return sleep_mode;
+}
+
+
+
+
+
+bool Loom_Sleep_Manager::sleep_for_time(TimeSpan duration)
+{
+	switch(sleep_mode) {
 
 		case STANDBY : 
 			// Try sleeping with Standby unless no RTC object
@@ -106,13 +107,24 @@ bool Loom_Sleep_Manager::sleep_for_time(TimeSpan duration, SleepMode mode)
 
 			// Intentional fallthrough: if no RTC found, revert to SLEEPYDOG
 
+		case IDLE_SLEEP :
+
+			if (RTC_Inst) {
+				return sleep_until_time(RTC_Inst->now() + duration);
+			} 
+
+			// Intentional fallthrough: if no RTC found, revert to SLEEPYDOG
+
 		case SLEEPYDOG : 
 			// Sleep 'hack' using repeated calls to Watchdog.sleep()
 			return sleepy_dog_sleep(duration);
+
+		default :
+			return false;
 	}
 }
 
-bool Loom_Sleep_Manager::sleep_for_time(uint days, uint hours, uint minutes, uint seconds, SleepMode mode)
+bool Loom_Sleep_Manager::sleep_for_time(uint days, uint hours, uint minutes, uint seconds)
 {
 	return sleep_for_time( TimeSpan(days, hours, minutes, seconds) );
 }
@@ -166,12 +178,12 @@ bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 
 			}
 
-			// RTC_Inst->setRTCAlarm_Absolute(hour, min, sec);
-
 			// Tell RTC_Inst to set RTC time at future_time
-			// Then call sleep_until interrupt on pin, because that is what it is
+			// Then call sleep_until_interrupt on pin, because that is what it is
+			RTC_Inst->set_alarm(future_time);
 
-			// sleep_until_interrupt_on(  RTC pin );
+			// sleep_until_interrupt_on( RTC_Inst->get_interrupt_pin() );
+			sleep_until_interrupt();
 
 
 			// break;
@@ -194,11 +206,16 @@ bool Loom_Sleep_Manager::sleep_until_time(uint hour, uint minute, uint second)
 }
 
 
-bool Loom_Sleep_Manager::sleep_until_interrupt_on(byte pin)
+// bool Loom_Sleep_Manager::sleep_until_interrupt_on(byte pin)
+bool Loom_Sleep_Manager::sleep_until_interrupt()
 {
 		pre_sleep();
 
-		LowPower.standby(); 
+		switch(sleep_mode) {
+			case STANDBY    : LowPower.standby(); 
+			case IDLE_SLEEP : LowPower.idle(IDLE_2); 
+		}
+
 		// This is where programs waits until waking
 
 		post_sleep();
@@ -263,8 +280,9 @@ void Loom_Sleep_Manager::pre_sleep()
 	#endif
 
 
+
 	// RTC_Inst->rtc_interrupt_reset(); //clear interrupt registers, attach interrupts
-	
+
 
 	delay(50);
 	digitalWrite(LED_BUILTIN, LOW);
@@ -277,11 +295,11 @@ void Loom_Sleep_Manager::post_sleep()
 // Standy by might get its own pre and post sleeps which in turn calls
 
 	// rtc_interrupt_reset(); //clear interrupt registers, attach interrupts
-	// clearRTCAlarms(); //prevent double trigger of alarm interrupt
+	RTC_Inst->clear_alarms(); //prevent double trigger of alarm interrupt
 
 	// Not sure why these have to be repeated but it seems to make a difference
 	// rtc_interrupt_reset();
-	// clearRTCAlarms();
+	RTC_Inst->clear_alarms();
 
 
 	// Update last_wake_time
@@ -298,6 +316,7 @@ void Loom_Sleep_Manager::post_sleep()
 		digitalWrite(LED_BUILTIN, HIGH);
 	}
 
+	// Give user time to open Serial (only when debugging)
 	#if LOOM_DEBUG == 1
 		if (delay_on_wake) {
 
@@ -310,7 +329,6 @@ void Loom_Sleep_Manager::post_sleep()
 			}
 
 			delay(5000); // give user 5s to close and reopen serial monitor!
-
 		}
 	#endif
 

@@ -19,7 +19,9 @@ public:
 	 
 					TimeZone 	timezone 			= PST,
 					bool 		use_utc_time 		= false,
-					bool 		get_internet_time 	= false
+					bool 		get_internet_time 	= false,
+
+					byte		int_pin				= 0
 		   );
 
 	// --- DESTRUCTOR ---
@@ -29,6 +31,12 @@ public:
 	bool message_route(OSCMessage& msg, int address_offset) {}
 	
 	DateTime now();
+
+
+	// Alarm functions (not currently implemented for this RTC, 
+	// need to combine 2 libraries to get this working)
+	void set_alarm(DateTime time) {}
+	void clear_alarms() {}
 
 protected:
 

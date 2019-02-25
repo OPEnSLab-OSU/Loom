@@ -35,7 +35,7 @@ protected:
 
 	LoomRTC* 	RTC_Inst;
 
-	// SleepMode 	sleep_mode;
+	SleepMode 	sleep_mode;
 
 public:
 
@@ -45,7 +45,9 @@ public:
 						LoomRTC* 	RTC_Inst 		= NULL,
 
 						bool 		use_LED 		= true,
-						bool		delay_on_wake 	= false
+						bool		delay_on_wake 	= false,
+
+						SleepMode 	sleep_mode 		= STANDBY
 
 					);
 
@@ -69,12 +71,12 @@ public:
 
 
 // Currently commented out because mode is being sent as parameter
-	// void set_sleep_mode(SleepMode mode);
-	// SleepMode get_sleep_mode();
+	void set_sleep_mode(SleepMode mode);
+	SleepMode get_sleep_mode();
 
 
-	bool sleep_for_time(TimeSpan duration, SleepMode mode=SLEEPYDOG);	
-	bool sleep_for_time(uint days, uint hours, uint minutes, uint seconds, SleepMode mode=SLEEPYDOG);
+	bool sleep_for_time(TimeSpan duration);	
+	bool sleep_for_time(uint days, uint hours, uint minutes, uint seconds);
 	
 	// Only works with RTC
 	// Might work using PCF and SleepyDog together, otherwise has to be DS3231
@@ -87,7 +89,8 @@ public:
 	bool sleep_until_time(uint hour, uint minute, uint second);
 	
 	// Standby mode
-	bool sleep_until_interrupt_on(byte pin);
+	// bool sleep_until_interrupt_on(byte pin);
+	bool sleep_until_interrupt();
 
 
 

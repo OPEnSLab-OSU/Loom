@@ -133,7 +133,6 @@ void setup()
 	// delay(2000);
 	digitalWrite(LED_BUILTIN, HIGH);  
 
-	// IntDetails test = {9, INT_CHANGE, blink };
 	ITM->register_interrupt( {9, INT_CHANGE, blink } );
 	ITM->register_interrupt( {10, INT_LOW, turn_on } );
 	ITM->register_interrupt( {11, INT_LOW, turn_off } );

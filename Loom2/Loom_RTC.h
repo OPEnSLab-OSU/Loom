@@ -10,6 +10,7 @@
 // #define _BV(bit) (1 << (bit))
 
 
+// byte RTC_Int_Pin = 0;
 
 
 enum TimeZone { 
@@ -52,8 +53,10 @@ protected:
 	bool 		use_utc_time;
 	bool 		get_internet_time;
 
-	char	 	datestring[20];
+	char		datestring[20];
 	char 		timestring[20];
+
+	static byte	int_pin; // This is static so ISR can be static
 
 public:
 
@@ -62,7 +65,9 @@ public:
 	 
 				TimeZone 	timezone 			= PST,
 				bool 		use_utc_time 		= true,
-				bool 		get_internet_time 	= false
+				bool 		get_internet_time 	= false,
+
+				byte		int_pin				= 6
 		   );
 
 	// --- DESTRUCTOR ---
@@ -96,6 +101,14 @@ public:
 	//   4: both date and time added (combined field)
 	void get_timestamp(char* header, char* timestamp, char delimiter, uint8_t format=3);
 
+
+	byte get_interrupt_pin();
+
+// might be able to move implementation up to this class if combining RTC libraries uses same alarm interface
+	virtual void set_alarm(DateTime time) = 0;
+	virtual void clear_alarms() = 0;
+
+	static void RTC_Wake_ISR();
 
 protected:
 

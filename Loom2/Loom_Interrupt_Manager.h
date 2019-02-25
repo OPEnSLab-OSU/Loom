@@ -34,6 +34,10 @@ protected:
 
 	bool enable_interrupts;
 
+
+	IntDetails interrupts[20];
+
+
 public:
 
 	// --- CONSTRUCTOR ---
@@ -65,6 +69,10 @@ public:
 	// Not sure which is ideal though
 	// maybe have a register immediate interrupt vs register delayed bottom half?
 	void register_interrupt(IntDetails details);
+
+
+	void interrupt_reset(byte pin);   // used to clear pending interrupts
+
 
 	// Individually attach and detach interrupts?
 

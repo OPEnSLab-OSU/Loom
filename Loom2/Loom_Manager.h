@@ -24,6 +24,8 @@ enum Verbosity { VERB_OFF, VERB_LOW, VERB_HIGH };
 
 // Forward declarations, specify that these classes 
 // exist but are defined in their own respective files
+class Loom_Interrupt_Manager;
+class Loom_Sleep_Manager;
 class LoomModule;
 class LoomSensor;
 class LoomActuator;
@@ -57,6 +59,9 @@ protected:
 	DeviceType 	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
 
+	Loom_Interrupt_Manager*	interrupt_manager;
+	Loom_Sleep_Manager* 	sleep_manager;
+
 	// Arrays of Loom Modules, categorized by type
 	LoomModule*       other_modules[MAX_OTHER_MODULES];
 	LoomSensor*       sensor_modules[MAX_SENSORS];
@@ -88,7 +93,7 @@ public:
 
 	// --- CONSTRUCTOR ---
 								// The parameters to the constructor will be defined in config
-	LoomManager( char* device_name 	= "Default",
+	LoomManager(char* device_name 	= "Default",
 				char* family 		= "Loom",
 				uint  family_num 	= 1,
 				uint  instance 		= 1,

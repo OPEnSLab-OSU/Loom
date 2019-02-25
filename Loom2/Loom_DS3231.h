@@ -23,7 +23,10 @@ public:
 	 
 					TimeZone 	timezone 			= PST,
 					bool 		use_utc_time 		= true,
-					bool 		get_internet_time 	= false
+					bool 		get_internet_time 	= false,
+					
+					byte		int_pin				= 6
+
 		   );
 
 	// --- DESTRUCTOR ---
@@ -36,6 +39,9 @@ public:
 
 
 	// Alarm functions
+	void set_alarm(DateTime time);
+	void clear_alarms();
+
 
 protected:
 

@@ -15,25 +15,21 @@
 class LoomRTC_Alarms
 {
 
-private: 
-
-
 
 protected:
 
-
+	byte int_pin;
 
 public:
 
 	// --- CONSTRUCTOR ---
-	LoomRTC_Alarms();
+	LoomRTC_Alarms(byte int_pin);
 
 	// --- DESTRUCTOR ---
 	virtual ~LoomRTC_Alarms();
 
-
 	virtual void clear_alarms() = 0;
-
+	virtual void set_alarm(DateTime future) = 0;
 
 
 protected:

@@ -5,7 +5,7 @@
 
 
 // --- CONSTRUCTOR ---
-LoomRTC_Alarms::LoomRTC_Alarms()
+LoomRTC_Alarms::LoomRTC_Alarms(byte int_pin)
 {
 
 }

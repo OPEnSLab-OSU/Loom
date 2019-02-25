@@ -63,13 +63,25 @@ LoomRTC::LoomRTC(	char* 	module_name,
 	 
 					TimeZone 	timezone,
 					bool 		use_utc_time,
-					bool 		get_internet_time
+					bool 		get_internet_time,
+
+					byte		int_pin
 
 	) : LoomModule( module_name )
 {
 	this->timezone			= timezone;
 	this->use_utc_time 		= use_utc_time;
 	this->get_internet_time = get_internet_time;
+
+	this->int_pin			= int_pin;
+	// RTC_Int_Pin 			= int_pin; 		// This is static so ISR can be static (currently int_pin was made static instead)
+
+
+	if (int_pin > 0) {
+		pinMode(int_pin, INPUT_PULLUP);		
+	}
+
+	clear_alarms();
 }
 
 // --- DESTRUCTOR ---
@@ -311,4 +323,18 @@ bool LoomRTC::rtc_validity_check()
 
 
 
+byte LoomRTC::get_interrupt_pin()
+{
+	return int_pin;
+}
+
+
+
+void LoomRTC::RTC_Wake_ISR()
+{
+	// Detach interrupt to prevent duplicate triggering
+	detachInterrupt(digitalPinToInterrupt(int_pin));
+
+	// Nothing else to do because interrupt woke device
+}
 
