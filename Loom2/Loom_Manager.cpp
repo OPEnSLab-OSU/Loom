@@ -50,6 +50,9 @@ LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint
 	this->print_verbosity 	= print_verbosity;
 	this->package_verbosity	= package_verbosity;
 
+	// This adds all the enabled modules
+	Device_Init();
+
 }
 
 // --- DESTRUCTOR ---

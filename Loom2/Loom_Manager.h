@@ -58,6 +58,7 @@ protected:
 
 	DeviceType 	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
+
 	// Sub Managers
 	Loom_Interrupt_Manager*	interrupt_manager;
 	Loom_Sleep_Manager* 	sleep_manager;
@@ -134,7 +135,7 @@ public:
 	void add_module(Loom_Interrupt_Manager* interrupt_manager); 
 	void add_module(Loom_Sleep_Manager* sleep_manager);
 
-	void add_module(LoomModule* LM);
+	void add_module(LoomModule* module);
 	void add_module(LoomSensor* sensor); 
 	void add_module(LoomActuator* actuator); 
 	void add_module(LoomRTC* rtc); 
@@ -234,6 +235,9 @@ public:
 	// Methods to set package and print verbosities all at once
 
 private:
+
+
+	void Device_Init();
 
 	void add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
 	void list_modules_aux(LoomModule** modules, uint len, char* module_type);

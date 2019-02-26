@@ -43,7 +43,6 @@ public:
 	// --- CONSTRUCTOR ---
 	Loom_Interrupt_Manager( char* 		module_name 	= "Interrupt_Manager"
 							
-
 					);
 
 	// Loom_Interrupt_Manager( char* module_name, LoomManager* LD );
