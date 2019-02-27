@@ -65,6 +65,8 @@ void setup()
 {
 	pinMode(LED_BUILTIN, OUTPUT);   // Set the LED pin mode
 
+	digitalWrite(LED_BUILTIN, HIGH);  
+
 
 	Serial.begin(115200);
 
@@ -80,8 +82,10 @@ void setup()
 
 	AS = new Loom_Analog();
 
-	// SLM = new Loom_Sleep_Manager();
+	SLM = new Loom_Sleep_Manager();
 	ITM = new Loom_Interrupt_Manager();
+
+	SLM->print_config();
 
 
 	// WI = new Loom_WiFi_I();
@@ -136,10 +140,11 @@ void setup()
 	digitalWrite(LED_BUILTIN, HIGH);  
 
 
-
 	ITM->register_interrupt_ISR( {9, INT_CHANGE, blink } );
-	ITM->register_interrupt_ISR( {10, INT_LOW, turn_on } );
-	ITM->register_interrupt_ISR( {11, INT_LOW, turn_off } );
+	// ITM->register_interrupt_ISR( {10, INT_LOW, turn_on } );
+	// ITM->register_interrupt_ISR( {11, INT_LOW, turn_off } );
+
+	SLM->sleep_until_interrupt();
 
 }
 

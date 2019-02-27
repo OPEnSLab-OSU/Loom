@@ -9,7 +9,7 @@ Loom_MS5803::Loom_MS5803(byte i2c_address, char* module_name, char* sensor_descr
 
 	: LoomI2CSensor( module_name, sensor_description, i2c_address )
 {
-	inst_MS5803 = new MS_5803(512);
+	inst_MS5803 = new MS_5803(i2c_address, 512);
 	bool setup = inst_MS5803->initializeMS_5803();
 
 	print_module_label();

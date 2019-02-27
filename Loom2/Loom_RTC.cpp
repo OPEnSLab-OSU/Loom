@@ -3,6 +3,9 @@
 #include "Loom_Manager.h"
 
 
+byte LoomRTC::int_pin = 0; 
+
+
 const char* LoomRTC::daysOfTheWeek[] = 
 	{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
@@ -65,7 +68,7 @@ LoomRTC::LoomRTC(	char* 	module_name,
 					bool 		use_utc_time,
 					bool 		get_internet_time,
 
-					byte		int_pin
+					byte		interrupt_pin
 
 	) : LoomModule( module_name )
 {
@@ -73,7 +76,7 @@ LoomRTC::LoomRTC(	char* 	module_name,
 	this->use_utc_time 		= use_utc_time;
 	this->get_internet_time = get_internet_time;
 
-	this->int_pin			= int_pin;
+	int_pin					= interrupt_pin;
 	// RTC_Int_Pin 			= int_pin; 		// This is static so ISR can be static (currently int_pin was made static instead)
 
 
@@ -97,6 +100,7 @@ void LoomRTC::print_config()
 {
 	LoomModule::print_config();
 
+	Println3('\t', "Interrupt Pin       : ", int_pin);
 	Println3('\t', "Use UTC Time        : ", use_utc_time);
 	Println3('\t', "Get Internet Time   : ", get_internet_time);
 }
@@ -326,6 +330,7 @@ bool LoomRTC::rtc_validity_check()
 byte LoomRTC::get_interrupt_pin()
 {
 	return int_pin;
+	// return RTC_Int_Pin;
 }
 
 

@@ -34,6 +34,16 @@ enum TimeZone {
 
 
 
+// void RTC_Wake_ISR();
+// {
+// 	// Detach interrupt to prevent duplicate triggering
+// 	// detachInterrupt(digitalPinToInterrupt(int_pin));
+// 	detachInterrupt(digitalPinToInterrupt(RTC_Int_Pin));
+
+// 	// Nothing else to do because interrupt woke device
+// }
+
+
 
 class LoomRTC : public LoomModule
 {
@@ -56,9 +66,11 @@ protected:
 	char		datestring[20];
 	char 		timestring[20];
 
+	// byte		int_pin; 
 	static byte	int_pin; // This is static so ISR can be static
 
 public:
+
 
 	// --- CONSTRUCTOR ---
 	LoomRTC(	char* 	module_name,
@@ -67,7 +79,7 @@ public:
 				bool 		use_utc_time 		= true,
 				bool 		get_internet_time 	= false,
 
-				byte		int_pin				= 6
+				byte		interrupt_pin				= 6
 		   );
 
 	// --- DESTRUCTOR ---
@@ -102,13 +114,20 @@ public:
 	void get_timestamp(char* header, char* timestamp, char delimiter, uint8_t format=3);
 
 
-	byte get_interrupt_pin();
 
 // might be able to move implementation up to this class if combining RTC libraries uses same alarm interface
 	virtual void set_alarm(DateTime time) = 0;
 	virtual void clear_alarms() = 0;
 
+
+
+	byte get_interrupt_pin();
+
+	// Static because ISRs need to be static if they are class methods
+	// Interrupt pin is also static, as that pin is referenced 
 	static void RTC_Wake_ISR();
+
+
 
 protected:
 
@@ -125,6 +144,10 @@ protected:
 	bool set_rtc_from_internet_time(); 
 
 };
+
+
+
+
 
 
 #endif // of #ifndef LOOM_RTC_h

@@ -77,9 +77,11 @@ void Loom_Interrupt_Manager::register_interrupt_ISR(IntDetails details)
 
 void Loom_Interrupt_Manager::run_ISR_bottom_halfs()
 {
-	for (int i = 0; i < InteruptRange; i++) {
-		if ( (interrupt_triggered[i]) && (interrupts[i].ISR_Bottom_Half != NULL) ) {
-			interrupts[i].ISR_Bottom_Half();
+	if (enable_interrupts) {
+		for (int i = 0; i < InteruptRange; i++) {
+			if ( (interrupt_triggered[i]) && (interrupts[i].ISR_Bottom_Half != NULL) ) {
+				interrupts[i].ISR_Bottom_Half();
+			}
 		}
 	}
 }

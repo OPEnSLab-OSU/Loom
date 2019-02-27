@@ -23,7 +23,7 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_MS5803(	byte i2c_address 			= 0x76, // 0x76 if CSB (pin 3) is High, 0x77 if CSB is Low
+	Loom_MS5803(	byte i2c_address 			= 0x77, // 0x76 if CSB (pin 3) is High, 0x77 if CSB is Low
 					
 					char* module_name 			= "MS5803",
 					char* sensor_description 	= "Atmospheric Pressure / Temperature" 
