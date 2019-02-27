@@ -55,7 +55,7 @@ bool Loom_Interrupt_Manager::get_enable_interrupts()
 
 
 
-void Loom_Interrupt_Manager::register_interrupt(IntDetails details)
+void Loom_Interrupt_Manager::register_interrupt_ISR(IntDetails details)
 {
 	interrupts[details.pin] = details;
 
@@ -71,6 +71,17 @@ void Loom_Interrupt_Manager::register_interrupt(IntDetails details)
 		case INT_CHANGE  : attachInterrupt(digitalPinToInterrupt(details.pin), details.ISR_Bottom_Half, CHANGE);
 	}
 
+}
+
+
+
+void Loom_Interrupt_Manager::run_ISR_bottom_halfs()
+{
+	for (int i = 0; i < InteruptRange; i++) {
+		if ( (interrupt_triggered[i]) && (interrupts[i].ISR_Bottom_Half != NULL) ) {
+			interrupts[i].ISR_Bottom_Half();
+		}
+	}
 }
 
 

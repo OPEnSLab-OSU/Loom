@@ -24,7 +24,7 @@ struct IntDetails {
 };
 
 
-
+#define InteruptRange 16
 
 
 class Loom_Interrupt_Manager : public LoomModule
@@ -35,8 +35,8 @@ protected:
 	bool enable_interrupts;
 
 
-	IntDetails interrupts[20];
-
+	IntDetails 	interrupts[InteruptRange];
+	bool 		interrupt_triggered[InteruptRange];
 
 public:
 
@@ -67,7 +67,11 @@ public:
 	// Currently can give it any ISR to do whatever, rather than planned flag setter
 	// Not sure which is ideal though
 	// maybe have a register immediate interrupt vs register delayed bottom half?
-	void register_interrupt(IntDetails details);
+	void register_interrupt_ISR(IntDetails details);
+	void unregister_interrupt_ISR(byte pin);  // restores to default ISR, does not disable interrupt
+
+
+	void run_ISR_bottom_halfs();
 
 
 	void interrupt_reset(byte pin);   // used to clear pending interrupts

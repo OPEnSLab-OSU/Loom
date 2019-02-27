@@ -90,7 +90,7 @@ public:
 	// Standby mode
 	// bool sleep_until_interrupt_on(byte pin);
 	bool sleep_until_interrupt();
-
+// maybe just call this sleep
 
 
 	// Some sort of auto repeat? - probably manage that at DeviceManager level

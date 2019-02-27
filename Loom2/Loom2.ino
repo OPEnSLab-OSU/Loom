@@ -137,9 +137,9 @@ void setup()
 
 
 
-	ITM->register_interrupt( {9, INT_CHANGE, blink } );
-	ITM->register_interrupt( {10, INT_LOW, turn_on } );
-	ITM->register_interrupt( {11, INT_LOW, turn_off } );
+	ITM->register_interrupt_ISR( {9, INT_CHANGE, blink } );
+	ITM->register_interrupt_ISR( {10, INT_LOW, turn_on } );
+	ITM->register_interrupt_ISR( {11, INT_LOW, turn_off } );
 
 }
 

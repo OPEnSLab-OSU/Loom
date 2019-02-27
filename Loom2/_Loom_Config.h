@@ -96,7 +96,6 @@
 #define Use_TSL2591 				0	// Lux Sensor
 #define Use_ZXGESTURESENSOR 		0	// ZX Distance Sensor
 
-
 // SPI
 
 
