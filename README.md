@@ -292,12 +292,6 @@ The options are specified in the config.h file by `lora_subnet_scope`:
 
 These achieve a similar subnet structure that is produced with UDP ports on the WiFi boards.
 
-### Diagram of Device Scope
-
-![Loom_Hierarchy_Diagram](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/Images_for_Readmes/Loom_Hierarchy_Diagram.png)
-
-
-
 ## SD Card Support
 
 The Loom library extends the Arduino SD library to have more features, mostly tailored towards using common data structures used by the library.
