@@ -86,9 +86,19 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halfs()
 
 
 
+void unregister_interrupt_ISR(byte pin, IntType type)
+{
+	detachInterrupt(digitalPinToInterrupt(pin));
+
+	// set ISR bottom half 
+}
+
 
 void Loom_Interrupt_Manager::interrupt_reset(byte pin)
 {
+// could just run register_interrupt_ISR again
+
+
 	detachInterrupt(digitalPinToInterrupt(pin));
 	delay(20);
 

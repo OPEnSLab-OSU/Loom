@@ -35,6 +35,8 @@ protected:
 	bool enable_interrupts;
 
 
+	bool 		interrupt_enabled[InteruptRange]
+
 	IntDetails 	interrupts[InteruptRange];
 	bool 		interrupt_triggered[InteruptRange];
 
@@ -44,8 +46,6 @@ public:
 	Loom_Interrupt_Manager( char* 		module_name 	= "Interrupt_Manager"
 							
 					);
-
-	// Loom_Interrupt_Manager( char* module_name, LoomManager* LD );
 
 
 	// --- DESTRUCTOR ---
@@ -59,7 +59,6 @@ public:
 	bool message_route(OSCMessage& msg, int address_offset) {}
 
 
-
 	void set_enable_interrupts(bool state);
 	bool get_enable_interrupts();
 
@@ -68,7 +67,7 @@ public:
 	// Not sure which is ideal though
 	// maybe have a register immediate interrupt vs register delayed bottom half?
 	void register_interrupt_ISR(IntDetails details);
-	void unregister_interrupt_ISR(byte pin);  // restores to default ISR, does not disable interrupt
+	void unregister_interrupt_ISR(byte pin, IntType=INT_LOW);  // restores to default ISR, does not disable interrupt
 
 
 	void run_ISR_bottom_halfs();
