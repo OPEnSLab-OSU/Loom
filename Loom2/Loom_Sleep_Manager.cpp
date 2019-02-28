@@ -189,7 +189,7 @@ bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 			RTC_Inst->set_alarm(future_time);
 
 			// sleep_until_interrupt_on( RTC_Inst->get_interrupt_pin() );
-			sleep_until_interrupt();
+			sleep();
 
 
 			return true;
@@ -215,7 +215,7 @@ bool Loom_Sleep_Manager::sleep_until_time(uint hour, uint minute, uint second)
 
 
 // bool Loom_Sleep_Manager::sleep_until_interrupt_on(byte pin)
-bool Loom_Sleep_Manager::sleep_until_interrupt()
+bool Loom_Sleep_Manager::sleep()
 {
 		pre_sleep();
 

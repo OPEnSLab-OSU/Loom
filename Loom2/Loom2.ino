@@ -44,6 +44,8 @@ Loom_Interrupt_Manager* ITM;
  
 LoomManager DeviceManager;
 
+int i = 0;
+
 
 
 volatile byte state = LOW;
@@ -60,6 +62,13 @@ void turn_off() {
 }
 
 
+void print_ISR() {
+	Println("ISR");
+}
+
+void inc_I() {
+	i++;
+}
 
 void setup() 
 {
@@ -92,15 +101,6 @@ void setup()
 	// RL = new Loom_Relay();
 	// AS->print_config();
 
-	// AS->measure();
-	// AS->print_measurements();
-
-
-	// Asensor.print_config();
-
-	// NP = new Loom_Neopixel();
-	// NP->print_config();
-
 
 	Println("Adding Components");
 
@@ -115,12 +115,9 @@ void setup()
 	// DeviceManager.add_module(EI);
 
 	DeviceManager.print_config();
-
-
 	// DeviceManager.list_modules();
 
 
-	Println("\n ** Setup Complete ** ");
 
 
 	// AS->load_config();
@@ -130,29 +127,42 @@ void setup()
 	// Println2("Time      : ", EI->get_time());
 	// Println2("Time      : ", EI->get_time());
 
-	
-
-	// Println()
-
-	// while(1);
-
-	// delay(2000);
 	digitalWrite(LED_BUILTIN, HIGH);  
 
+	// Println("A");
 
-	ITM->register_interrupt_ISR( {9, INT_CHANGE, blink } );
-	// ITM->register_interrupt_ISR( {10, INT_LOW, turn_on } );
-	// ITM->register_interrupt_ISR( {11, INT_LOW, turn_off } );
 
-	SLM->sleep_until_interrupt();
+	// ITM->register_ISR( 9, blink, LOW, true );
+	// ITM->register_ISR( 10, turn_on, LOW, true );
+	// ITM->register_ISR( 11, print_ISR, FALLING, false );
+	ITM->register_ISR( 9, blink, INT_CHANGE, true );
+	ITM->register_ISR( 10, turn_on, INT_LOW, true );
+	ITM->register_ISR( 11, turn_off, INT_LOW, true );
+	ITM->register_ISR( 12, print_ISR, INT_LOW, false );
+	ITM->register_ISR( 6, inc_I, INT_LOW, false );
+
+	// Println("B");
+
+
+	// ITM->print_config();
+
+	// Println("C");
+	// SLM->sleep();
+
+	Println("\n ** Setup Complete ** ");
+
 
 }
 
-int i = 0;
 
 
 void loop() 
 {
+
+	ITM->run_ISR_bottom_halves();
+
+	// Println2("I: ", i);
+
 	// OSCBundle bndl;
 	// OSCBundle bndl2;
 
@@ -168,6 +178,8 @@ void loop()
 
 	digitalWrite(LED_BUILTIN, state);
 
+	delay(50);
+
 	// SLM->sleep_for_time( TimeSpan(0,0,0,12) );
 	// digitalWrite(LED_BUILTIN, HIGH);
 	// delay(5000);
@@ -175,12 +187,8 @@ void loop()
 
 
 
-
-
 	// Println("\nDone");
 	// while(1);
-
-
 
 }
 

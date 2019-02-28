@@ -74,6 +74,11 @@ public:
 	SleepMode get_sleep_mode();
 
 
+// maybe offload setting timer to interrupt manager
+
+// extract timer from being paired with sleep
+ 
+
 	bool sleep_for_time(TimeSpan duration);	
 	bool sleep_for_time(uint days, uint hours, uint minutes, uint seconds);
 	
@@ -89,8 +94,7 @@ public:
 	
 	// Standby mode
 	// bool sleep_until_interrupt_on(byte pin);
-	bool sleep_until_interrupt();
-// maybe just call this sleep
+	bool sleep();
 
 
 	// Some sort of auto repeat? - probably manage that at DeviceManager level
