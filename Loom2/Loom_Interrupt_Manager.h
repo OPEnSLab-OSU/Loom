@@ -20,23 +20,15 @@ typedef void (*ISRFuncPtr)();
 // INT_CHANGE 	: 2
 // INT_FALLING	: 3
 // INT_RISING	: 4
-enum IntType { INT_LOW, INT_HIGH, INT_CHANGE, INT_FALLING, INT_RISING };
+// enum IntType { INT_LOW, INT_HIGH, INT_CHANGE, INT_FALLING, INT_RISING };
 
-// struct IntDetails {
-// 	byte pin;					// Pin Number
-// 	IntType type;				// Interupt Type 
-// 	ISRFuncPtr ISR;	// ISR Bottom Half
-
-// 	// char[20] description ?
-// };
 
 struct IntDetails {
 	ISRFuncPtr 	ISR;			// set null if no interrupt linked
-	IntType	 	type;
+	byte	 	type;
 	bool 		is_immediate;
 	bool 		is_enabled;
 
-	// bool 		is_linked  ?  
 	// char[20] description ?
 };
 
@@ -96,10 +88,10 @@ public:
 	// ISR: ISR function (Null if no interrupt linked)
 	// Type: Low, High, Change, Falling, Rising
 	// Immediate: Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
-	void register_ISR(byte pin, ISRFuncPtr ISR, IntType type, bool immediate);
+	void register_ISR(byte pin, ISRFuncPtr ISR, byte type, bool immediate);
 
 	// Restores to default ISR, disables interrupt
-	void unregister_ISR(byte pin, IntType type=INT_LOW);  
+	void unregister_ISR(byte pin, byte type=INT_LOW);  
 
 	// Checks the flags set by default ISRs, to call bottom half ISRs
 	void run_ISR_bottom_halves();

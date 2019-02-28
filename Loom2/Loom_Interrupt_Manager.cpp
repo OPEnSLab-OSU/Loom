@@ -30,7 +30,7 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager( char* module_name)
 	interrupts_enabled = true;
 
 	for (int i = 0; i < InteruptRange; i++) {
-		settings[i] = {NULL, INT_LOW, true, false};
+		settings[i] = {NULL, 0, true, false};
 	}
 }
 
@@ -91,7 +91,7 @@ bool Loom_Interrupt_Manager::get_enable_interrupt(byte pin)
 
 
 
-void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, IntType type, bool immediate)
+void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte type, bool immediate)
 {
 	if (pin < InteruptRange) {
 
@@ -110,13 +110,15 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, IntType type
 			ISRFuncPtr tmpISR = (immediate) ? ISR : default_ISRs[pin];
 
 			// Attach default interrupt with specified type
-			switch( type ) {
-				case INT_LOW     : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, LOW); break;
-				case INT_HIGH    : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, HIGH); break; 
-				case INT_CHANGE  : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, CHANGE); break;
-				case INT_FALLING : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, FALLING); break;
-				case INT_RISING  : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, RISING); break;
-			}
+			// switch( type ) {
+			// 	case INT_LOW     : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, LOW); break;
+			// 	case INT_HIGH    : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, HIGH); break; 
+			// 	case INT_CHANGE  : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, CHANGE); break;
+			// 	case INT_FALLING : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, FALLING); break;
+			// 	case INT_RISING  : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, RISING); break;
+			// }
+			attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (type<5) ? type : 0 );
+
 
 		} 
 		// If no ISR, detach interrupt pin
@@ -135,7 +137,7 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, IntType type
 
 
 
-void Loom_Interrupt_Manager::unregister_ISR(byte pin, IntType type)
+void Loom_Interrupt_Manager::unregister_ISR(byte pin, byte type)
 {
 	// Set interrupt to be the default
 	if (pin < InteruptRange) {
@@ -193,13 +195,15 @@ void Loom_Interrupt_Manager::interrupt_reset(byte pin)
 	if (settings[pin].ISR != NULL) {
 
 		// Attach interrupt with specified type
-		switch( settings[pin].type ) {
-			case INT_LOW     : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, LOW);
-			case INT_HIGH    : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, HIGH); 
-			case INT_RISING  : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, RISING);
-			case INT_FALLING : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, FALLING);
-			case INT_CHANGE  : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, CHANGE);
-		}
+		// switch( settings[pin].type ) {
+		// 	case INT_LOW     : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, LOW);
+		// 	case INT_HIGH    : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, HIGH); 
+		// 	case INT_RISING  : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, RISING);
+		// 	case INT_FALLING : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, FALLING);
+		// 	case INT_CHANGE  : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, CHANGE);
+		// }
+		attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, (settings[pin].type<5) ? settings[pin].type : 0 );
+
 	}
 
 

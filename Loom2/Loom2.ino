@@ -135,11 +135,18 @@ void setup()
 	// ITM->register_ISR( 9, blink, LOW, true );
 	// ITM->register_ISR( 10, turn_on, LOW, true );
 	// ITM->register_ISR( 11, print_ISR, FALLING, false );
-	ITM->register_ISR( 9, blink, INT_CHANGE, true );
-	ITM->register_ISR( 10, turn_on, INT_LOW, true );
-	ITM->register_ISR( 11, turn_off, INT_LOW, true );
-	ITM->register_ISR( 12, print_ISR, INT_LOW, false );
-	ITM->register_ISR( 6, inc_I, INT_LOW, false );
+
+	// ITM->register_ISR( 9, blink, INT_CHANGE, true );
+	// ITM->register_ISR( 10, turn_on, INT_LOW, true );
+	// ITM->register_ISR( 11, turn_off, INT_LOW, true );
+	// ITM->register_ISR( 12, print_ISR, INT_LOW, false );
+	// ITM->register_ISR( 6, inc_I, INT_LOW, false );
+
+	ITM->register_ISR( 9, blink, CHANGE, true );
+	ITM->register_ISR( 10, turn_on, LOW, true );
+	ITM->register_ISR( 11, turn_off, LOW, true );
+	ITM->register_ISR( 12, print_ISR, LOW, false );
+	ITM->register_ISR( 6, inc_I, LOW, false );
 
 	// Println("B");
 
