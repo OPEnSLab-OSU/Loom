@@ -8,6 +8,9 @@
 #include <EnableInterrupt.h>
 
 
+class LoomRTC; // Specify that LoomRTC exists, defined in own file
+
+
 
 // Used to make function signatures easier to read 
 // when returning function pointers
@@ -44,23 +47,24 @@ protected:
 	// Enable or disable all interrupts 	-- currently only disables bottom halves
 	bool 			interrupts_enabled;
 
-	// Whether or not to call ISR on for interrupts on a given pin
-	// bool 		interrupt_enabled[InteruptRange];
-	// bool 		is_immediate[InteruptRange]
-	// ISRFuncPtr	ISRs[InteruptRange];
-	// IntType		int_types[InteruptRange];
 	IntDetails		settings[InteruptRange];
 
-	
 	// Flags set by interrupts, indicating ISR bottom 
 	// half should be called if not Null
 	static bool 	interrupt_triggered[InteruptRange];
 
+
+	LoomRTC*		RTC_Inst;
+
+
+
+	// interrupt_triggered for timers, also support immediate and delayed
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_Interrupt_Manager( char* 		module_name 	= "Interrupt_Manager"
-							
+	Loom_Interrupt_Manager( char* 		module_name 	= "Interrupt_Manager",
+		
+							LoomRTC* 	RTC_Inst		= NULL
 							);
 
 
@@ -83,7 +87,6 @@ public:
 	bool get_enable_interrupt(byte pin);
 
 
-
 	// Pin: which pin to connect the interrupt on
 	// ISR: ISR function (Null if no interrupt linked)
 	// Type: Low, High, Change, Falling, Rising
@@ -91,20 +94,26 @@ public:
 	void register_ISR(byte pin, ISRFuncPtr ISR, byte type, bool immediate);
 
 	// Restores to default ISR, disables interrupt
-	void unregister_ISR(byte pin, byte type=INT_LOW);  
+	void unregister_ISR(byte pin, byte type=LOW);  
 
 	// Checks the flags set by default ISRs, to call bottom half ISRs
 	void run_ISR_bottom_halves();
-
-
-
-
 
 
 	// Detaches then reattacheds interrupt according to settings
 	// used to clear pending interrupts
 	void interrupt_reset(byte pin);   
 
+
+
+
+
+
+	void set_RTC_module(LoomRTC* RTC_Inst);
+	LoomRTC* get_RTC_module();
+
+
+	// Set timer for time / duration, select which timer (1 or 2)
 
 
 // set_timer_interrupt_for()   ?

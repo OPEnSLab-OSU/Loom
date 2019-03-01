@@ -4,6 +4,7 @@
 #include "_Loom_Preamble.h"
 
 
+#include <Adafruit_SleepyDog.h>
 
 
 // Do these being pointers rather than global instances slow down startup?
@@ -50,7 +51,9 @@ int i = 0;
 
 volatile byte state = LOW;
 void blink() {
-	state = !state;
+	// state = !state;
+    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+
 }
 
 void turn_on() {
@@ -129,35 +132,30 @@ void setup()
 
 	digitalWrite(LED_BUILTIN, HIGH);  
 
-	// Println("A");
 
-
-	// ITM->register_ISR( 9, blink, LOW, true );
+	// ITM->register_ISR( 9, blink, CHANGE, true );
 	// ITM->register_ISR( 10, turn_on, LOW, true );
-	// ITM->register_ISR( 11, print_ISR, FALLING, false );
+	// ITM->register_ISR( 11, turn_off, LOW, true );
+	// ITM->register_ISR( 12, print_ISR, LOW, false );
+	// ITM->register_ISR( 6, inc_I, LOW, false );
 
-	// ITM->register_ISR( 9, blink, INT_CHANGE, true );
-	// ITM->register_ISR( 10, turn_on, INT_LOW, true );
-	// ITM->register_ISR( 11, turn_off, INT_LOW, true );
-	// ITM->register_ISR( 12, print_ISR, INT_LOW, false );
-	// ITM->register_ISR( 6, inc_I, INT_LOW, false );
-
-	ITM->register_ISR( 9, blink, CHANGE, true );
-	ITM->register_ISR( 10, turn_on, LOW, true );
-	ITM->register_ISR( 11, turn_off, LOW, true );
-	ITM->register_ISR( 12, print_ISR, LOW, false );
-	ITM->register_ISR( 6, inc_I, LOW, false );
-
-	// Println("B");
-
-
-	// ITM->print_config();
-
-	// Println("C");
 	// SLM->sleep();
+
+
+	int countdownMS = Watchdog.enable(4000);
+	Print("Enabled the watchdog with max countdown of ");
+	Print(countdownMS);
+	Println(" milliseconds!");
+	Println();
+
 
 	Println("\n ** Setup Complete ** ");
 
+
+	delay(6000);
+
+	Println("Done");
+	while(1);
 
 }
 
@@ -166,9 +164,15 @@ void setup()
 void loop() 
 {
 
-	ITM->run_ISR_bottom_halves();
+	// ITM->run_ISR_bottom_halves();
 
-	// Println2("I: ", i);
+
+
+
+	// digitalWrite(LED_BUILTIN, state);
+
+	// delay(50);
+
 
 	// OSCBundle bndl;
 	// OSCBundle bndl2;
@@ -177,15 +181,9 @@ void loop()
 	// SH->package(&bndl);
 
 	// DeviceManager.measure();
-	// AS->print_measurements();
 	// DeviceManager.package(bndl);
 
-	// print_bundle(bndl);
-	// OL->log_bundle(bndl);
 
-	digitalWrite(LED_BUILTIN, state);
-
-	delay(50);
 
 	// SLM->sleep_for_time( TimeSpan(0,0,0,12) );
 	// digitalWrite(LED_BUILTIN, HIGH);

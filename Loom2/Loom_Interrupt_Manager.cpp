@@ -1,5 +1,6 @@
 
 #include "Loom_Interrupt_Manager.h"
+#include "Loom_RTC.h"
 
 // #include "Loom_Sleep_Manager.h"
 // #include "Loom_RTC.h"
@@ -23,7 +24,7 @@ const ISRFuncPtr Loom_Interrupt_Manager::default_ISRs[InteruptRange] =
 
 
 
-Loom_Interrupt_Manager::Loom_Interrupt_Manager( char* module_name) 
+Loom_Interrupt_Manager::Loom_Interrupt_Manager( char* module_name, LoomRTC* RTC_Inst) 
 	: LoomModule( module_name )
 {
 
@@ -32,6 +33,8 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager( char* module_name)
 	for (int i = 0; i < InteruptRange; i++) {
 		settings[i] = {NULL, 0, true, false};
 	}
+
+	this->RTC_Inst = RTC_Inst;
 }
 
 
@@ -205,8 +208,17 @@ void Loom_Interrupt_Manager::interrupt_reset(byte pin)
 		attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, (settings[pin].type<5) ? settings[pin].type : 0 );
 
 	}
+}
 
 
+void Loom_Interrupt_Manager::set_RTC_module(LoomRTC* RTC_Inst)
+{
+	this->RTC_Inst = RTC_Inst;
+}
+
+LoomRTC* Loom_Interrupt_Manager::get_RTC_module()
+{
+	return RTC_Inst;
 }
 
 

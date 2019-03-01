@@ -232,7 +232,7 @@ bool Loom_Sleep_Manager::sleep()
 
 
 
-#define MAX_WATCHDOG_SLEEP 8 // seconds
+#define MAX_WATCHDOG_SLEEP 16 // seconds
 
 bool Loom_Sleep_Manager::sleepy_dog_sleep(TimeSpan duration)
 {
@@ -297,6 +297,7 @@ void Loom_Sleep_Manager::pre_sleep()
 	delay(50);
 	digitalWrite(LED_BUILTIN, LOW);
 }
+
 
 
 void Loom_Sleep_Manager::post_sleep()
