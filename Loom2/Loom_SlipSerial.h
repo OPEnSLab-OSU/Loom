@@ -5,6 +5,7 @@
 
 #include <SLIPEncodedSerial.h>
 
+
 /// Slip Serial Pins
 #define SERIAL3_RX	A5	///< Pin used for SlipSerial RX
 #define SERIAL3_TX	6	///< Pin used for SlipSerial TX
@@ -12,22 +13,22 @@
 #define BUAD_RATE	115200	///< Buad rate used for communication
 #define SERIAL_MAX_MESSAGE_LEN	15 ///< Maximum size a message can be (OSCBundle)
 
+
+
 class Loom_SlipSerial : public LoomCommPlat
 {
 	protected:
 		uint buad_rate = BUAD_RATE;
 
 	public:
-		///Constructor
-		Loom_SlipSerial(
-				char* 	module_name = "SlipSerial",
-				uint 	max_message_len = SERIAL_MAX_MESSAGE_LEN,
-				bool 	compress_messages = true
-				); 
-		///Destructor	
+		/// Constructor
+		Loom_SlipSerial(char* 	module_name 		= "SlipSerial",
+						uint 	max_message_len 	= SERIAL_MAX_MESSAGE_LEN,
+						bool 	compress_messages 	= true
+						); 
+		/// Destructor	
 		~Loom_SlipSerial();
 
-		/// ... Public Methods ...
 		void print_config(); ///< Outputs Configuration of CommPlat
 
 		bool receive_bundle(OSCBundle& bndl); ///< Build OSC Bundle from packet if any exists

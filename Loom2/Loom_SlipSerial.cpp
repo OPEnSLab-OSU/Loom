@@ -10,9 +10,10 @@ Loom_SlipSerial::Loom_SlipSerial(
 				module_name,
 			 	max_message_len,
 				compress_messages	
-				){
+				)
+{
 	///Begin Setup Telemetry				
-	Println("SlipSerial Setup");
+
 
 	
 //	Uart Serial3 (&sercom5, SERIAL3_RX, SERIAL3_TX, SERCOM_RX_PAD_0, UART_TX_PAD_2);
