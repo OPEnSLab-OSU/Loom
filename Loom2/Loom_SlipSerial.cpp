@@ -1,5 +1,4 @@
 #include "Loom_SlipSerial.h"
-#include "Loom_Macros.h"
 
 /// ... Constructor ...
 Loom_SlipSerial::Loom_SlipSerial(
@@ -7,9 +6,9 @@ Loom_SlipSerial::Loom_SlipSerial(
 				uint 	max_message_len,
 				bool	compress_messages
 				) : LoomCommPlat(
-				module_name,
-			 	max_message_len,
-				compress_messages	
+					module_name,
+				 	max_message_len,
+					compress_messages	
 				)
 {
 	///Begin Setup Telemetry				

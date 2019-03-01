@@ -1,6 +1,5 @@
 
 #include "Loom_nRF.h"
-#include "Loom_Macros.h"
 
 
 
