@@ -16,6 +16,7 @@
 
 // Communiciation Platforms
 #include "Loom_LoRa.h"
+//#include "Loom_SlipSerial.h"
 
 // Logging Platforrms
 #include "Loom_OLED.h"
