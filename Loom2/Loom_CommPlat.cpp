@@ -21,6 +21,7 @@ char* LoomCommPlat::enum_comm_plat_string(CommPlatform c)
 		case WIFI : return "WiFi";
 		case LORA : return "LoRa";
 		case NRF  : return "nRF";
+		case SSER : return "SlipSerial";	    
 	}
 }
 

@@ -35,7 +35,7 @@ protected:
 	bool enable_interrupts;
 
 
-	bool 		interrupt_enabled[InteruptRange]
+	bool 		interrupt_enabled[InteruptRange];
 
 	IntDetails 	interrupts[InteruptRange];
 	bool 		interrupt_triggered[InteruptRange];
