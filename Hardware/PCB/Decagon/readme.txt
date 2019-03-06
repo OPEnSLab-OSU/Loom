@@ -1,1 +1,0 @@
-T-Shape Degacon PCB
