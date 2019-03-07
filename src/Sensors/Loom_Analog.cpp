@@ -33,17 +33,17 @@ float Loom_Analog::convert(uint8_t pin, uint16_t analog)
 
 
 // --- CONSTRUCTOR ---
-Loom_Analog::Loom_Analog(	char*   module_name 	,
-							char*   sensor_description 	,
+Loom_Analog::Loom_Analog(	char*	module_name 	,
+							char*	sensor_description 	,
 							uint8_t num_samples 		,
 
 							uint8_t read_resolution 	,
-							bool    enableA0 			,
-							bool    enableA1 			,
-							bool    enableA2 			,
-							bool    enableA3 			,
-							bool    enableA4 			,
-							bool    enableA5 			,
+							bool	enableA0 			,
+							bool	enableA1 			,
+							bool	enableA2 			,
+							bool	enableA3 			,
+							bool	enableA4 			,
+							bool	enableA5 			,
 
 							AnalogConversion convertA0	,
 							AnalogConversion convertA1	,
