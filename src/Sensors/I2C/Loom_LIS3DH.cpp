@@ -5,7 +5,10 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_LIS3DH::Loom_LIS3DH(byte i2c_address, char* module_name, char* sensor_description)
+Loom_LIS3DH::Loom_LIS3DH(
+		byte		i2c_address, 
+		char*		module_name, 
+		char*		sensor_description)
 
 	: LoomI2CSensor( module_name, sensor_description, i2c_address )
 {

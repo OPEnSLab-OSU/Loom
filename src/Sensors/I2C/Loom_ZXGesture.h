@@ -6,7 +6,7 @@
 
 #include <ZX_Sensor.h>
 
-enum ZXMode { ZX_POS, ZX_GEST };
+enum class ZXMode { ZX_POS, ZX_GEST };
 
 
 
@@ -15,15 +15,21 @@ class Loom_ZXGesture : public LoomI2CSensor
 
 protected:
 
-	ZX_Sensor* inst_ZX;
+	/// Underlying ZX sensor manager instance
+	ZX_Sensor*		inst_ZX;
 
-	ZXMode mode;
+	/// Sensor mode (read positions or gesture - mutually exclusive)
+	ZXMode			mode;
 
+	/// Measured positions (x, y pos)
 	int pos[2];
 
-	GestureType gesture;
-	String      gesture_type;
-	uint8_t     gesture_speed;
+	/// Last read gesture type
+	GestureType		gesture;
+	/// String labelling last read gesture type
+	String			gesture_type;
+	/// The speed of the last measured gesture
+	uint8_t			gesture_speed;
 
 public:
 
@@ -33,7 +39,7 @@ public:
 					char* module_name 			= "ZXGesture",
 					char* sensor_description 	= "Temperature/Humidty",
 
-					ZXMode mode 				= ZX_POS
+					ZXMode mode 				= ZXMode::ZX_POS
 				);
 
 	// --- DESTRUCTOR ---

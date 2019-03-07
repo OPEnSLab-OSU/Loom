@@ -20,26 +20,33 @@ class Loom_WiFi_I : public LoomInternetPlat
 {
 
 protected:
-	
-	IPAddress		ip;                     // Device's IP Address
 
-	char			SSID[32];               // Host network name
-	char			pass[32];               // Host network password
+	/// The device's IP Address
+	IPAddress		ip;                     
+
+	/// Host WiFi network name
+	char			SSID[32];
+	/// Host WiFi network password
+	char			pass[32];
 	
-	// char*			ip_broadcast;           // IP to Broadcast data
-	// unsigned int 	devicePort;            // Local port to listen device specific messages on
-	// unsigned int 	subnetPort; 			// Local port to listen for family subnet messages on	
+	// char*			ip_broadcast;       // IP to Broadcast data
+	// unsigned int 	devicePort;         // Local port to listen device specific messages on
+	// unsigned int 	subnetPort; 		// Local port to listen for family subnet messages on	
 	uint 			UDP_port;
 
+	/// The device's MAC Address
+	byte			mac[6];
 
-	byte			mac[6];                 // Device's MAC Address
-	WiFiMode 		mode;              // Devices current wifi mode
+	/// Current WiFi mode
+	WiFiMode 		mode;
 	
+	/// Underlying WiFi server instance
 	WiFiServer*		server;
+	/// Underlying WiFi UDP instance
 	WiFiUDP			UDP;
 
+	/// Status and error codes
 	uint8_t			status;
-
 
 	// bool 		request_settings;       // True if device should request new channel settings on startup
 public:

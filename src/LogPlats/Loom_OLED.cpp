@@ -36,15 +36,17 @@ const char* Loom_OLED::enum_oled_freeze(OLED_Freeze f)
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_OLED::Loom_OLED(	char* module_name, 
-						bool enable_rate_filter, 
-						uint min_filter_delay, 
-						OLED_Version version, 
-						byte reset_pin, 
-						OLED_Format display_format, 
-						uint scroll_duration, 
-						byte freeze_pin, 
-						OLED_Freeze freeze_behavior)
+Loom_OLED::Loom_OLED(	
+		char*			module_name, 
+		bool			enable_rate_filter, 
+		uint			min_filter_delay, 
+		OLED_Version	version, 
+		byte			reset_pin, 
+		OLED_Format		display_format, 
+		uint			scroll_duration, 
+		byte			freeze_pin, 
+		OLED_Freeze		freeze_behavior
+	)
 	: LoomLogPlat( module_name, enable_rate_filter, min_filter_delay )
 {
 	this->version 	      = version;

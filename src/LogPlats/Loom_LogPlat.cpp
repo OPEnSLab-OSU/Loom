@@ -16,7 +16,11 @@ char* LoomLogPlat::enum_log_plat_string(LogPlatform p)
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-LoomLogPlat::LoomLogPlat( char* module_name, bool enable_rate_filter, uint min_filter_delay) 
+LoomLogPlat::LoomLogPlat( 
+		char*	module_name, 
+		bool	enable_rate_filter,
+		uint	min_filter_delay
+	)
 	: LoomModule( module_name )
 {
 	this->enable_rate_filter	= enable_rate_filter;

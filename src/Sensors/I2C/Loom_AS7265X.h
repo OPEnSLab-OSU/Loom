@@ -13,15 +13,24 @@ class Loom_AS7265X : public LoomI2CSensor
 
 protected:
 
+	/// Underlying AS7265X sensor manager instance
 	AS7265X inst_AS7265X;
 
+	/// Measured UV bands values
 	int uv[6];
+	/// Measured color bands values
 	int color[6];
+	/// Measured near-infra-red bands values
 	int nir[6];
 
+	/// Whether or not to use the bulb
 	bool use_bulb;
+
+	/// Gain setting 
 	byte gain;
+	/// Sensor mode
 	byte mode;
+	/// Integration time setting
 	byte integration_time;
 
 

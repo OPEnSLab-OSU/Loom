@@ -15,16 +15,18 @@ class Loom_nRF : public LoomCommPlat
 {
 
 protected:
-	// RH_RF95 *            driver; 			//	rf95(RFM95_CS, RFM95_INT);
-	// RHReliableDatagram * manager; 			//	manager(rf95, 00);
 
-	uint8_t              address; 			// Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
-	uint8_t              friend_address;	// Default address to send to
+	/// Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
+	uint8_t              address;
+	/// Default address to send to
+	uint8_t              friend_address;
 
+	/// Power level to send at
 	uint8_t	             power_level;
+	/// Number of transmission retries allowed
 	uint8_t              retry_count;
+	/// Delay between transmission retries (in milliseconds)
 	uint16_t             retry_timeout; 	// in milliseconds
-
 
 public:
 

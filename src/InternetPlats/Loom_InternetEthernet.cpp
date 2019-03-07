@@ -4,13 +4,15 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_Ethernet_I::Loom_Ethernet_I(	char* module_name,
+Loom_Ethernet_I::Loom_Ethernet_I(	
+		char*	module_name,
 
-									byte 	mac[6],
-									byte 	ip[4]
-
-				) : LoomInternetPlat( module_name )
+		byte	mac[6],
+		byte	ip[4]
+	) 
+	: LoomInternetPlat( module_name )
 {
+
 	client = new EthernetClient();
 	UDP    = new EthernetUDP();
 

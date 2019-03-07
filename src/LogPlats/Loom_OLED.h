@@ -18,16 +18,26 @@ class Loom_OLED : public LoomLogPlat
 
 protected:
 
-		Adafruit_SSD1306* display;
+		/// Underlying OLED controller
+		Adafruit_SSD1306*	display;
 
-		OLED_Version 	version;
-		byte 			reset_pin;
+		/// What type the OLED is (FeatherWing or breakout)
+		OLED_Version		version;
 
-		OLED_Format 	display_format;
-		uint 			scroll_duration; 
+		/// The reset pin (only applies to breakout version)
+		byte				reset_pin;
 
-		byte 			freeze_pin;
-		OLED_Freeze 	freeze_behavior;
+		/// How to display the data on OLED
+		OLED_Format			display_format;
+
+		/// The duration to complete a full cycle through a bundle of data (milliseconds)(non-blocking)
+		uint				scroll_duration; 
+
+		/// Which pin to check if display should freeze
+		byte				freeze_pin;
+
+		/// What 'freezing' behavior should be followed
+		OLED_Freeze			freeze_behavior;
 
 public:
 

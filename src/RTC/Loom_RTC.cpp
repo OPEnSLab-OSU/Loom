@@ -61,16 +61,18 @@ char* LoomRTC::enum_timezone_string(TimeZone t)
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-LoomRTC::LoomRTC(	char* 	module_name,
-	 
-					TimeZone 	timezone,
-					bool 		use_utc_time,
-					bool 		get_internet_time,
+LoomRTC::LoomRTC(	
+		char*		module_name,
 
-					byte		interrupt_pin
+		TimeZone	timezone,
+		bool		use_utc_time,
+		bool		get_internet_time,
 
-	) : LoomModule( module_name )
+		byte		interrupt_pin
+	) 
+	: LoomModule( module_name )
 {
+	
 	this->timezone			= timezone;
 	this->use_utc_time 		= use_utc_time;
 	this->get_internet_time = get_internet_time;

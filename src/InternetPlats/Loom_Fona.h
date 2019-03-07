@@ -23,11 +23,14 @@ class Loom_Fona : public LoomInternetPlat
 
 protected:
 
-	Adafruit_FONA* fona;
-	HardwareSerial* fonaSerial;
+	/// Underlying Fona controller class
+	Adafruit_FONA*		fona;
 
+	/// Serial instance to interface with Fona
+	HardwareSerial*		fonaSerial;
 
-	char* APN;
+	/// APN to connect to GPRS
+	char*				APN;
 	
 public:
 
@@ -35,8 +38,7 @@ public:
 	Loom_Fona(	char* 	module_name		= "Fona",
 
 				char* 	apn				= "wholesale"
-
-					);
+			);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Fona();

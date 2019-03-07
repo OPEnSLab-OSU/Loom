@@ -10,12 +10,13 @@ class Loom_PCF8523 : public LoomRTC
 {
 protected:
 
+	/// Underlying PCF8523 manager instance
 	RTC_PCF8523*  rtc_inst;
 
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_PCF8523(	char* 	module_name 			= "PCF8523",
+	Loom_PCF8523(	char* 		module_name			= "PCF8523",
 	 
 					TimeZone 	timezone 			= PST,
 					bool 		use_utc_time 		= false,

@@ -5,7 +5,11 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_Stepper::Loom_Stepper( char* module_name, uint8_t stepper_count ) : LoomActuator( module_name ) 
+Loom_Stepper::Loom_Stepper( 
+		char* 		module_name, 
+		uint8_t		stepper_count 
+	) 
+	: LoomActuator( module_name ) 
 {
 	this->stepper_count = stepper_count;
 	this->motors = new Adafruit_StepperMotor*[stepper_count];

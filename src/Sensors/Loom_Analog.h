@@ -18,7 +18,7 @@ typedef struct {
 
 
 
-enum AnalogConversion { NO_CONVERT, CONVERT_VOLTAGE, CONVERT_THERMISTOR, CONVERT_PH, CONVERT_TURBIDITY, CONVERT_EC, CONVERT_TDS }; 
+enum class AnalogConversion { NONE, VOLTAGE, THERMISTOR, PH, TURBIDITY, EC, TDS }; 
 
 
 
@@ -31,11 +31,15 @@ class Loom_Analog : public LoomSensor
 {
 
 protected:
+
+	/// Which resolution to read at (generally use 12 or 10)
 	uint8_t  read_resolution;
 
-	// Pins A0-A5
+	/// Whether pins A0-A5 are enabled for analog reading
 	bool     pin_enabled[ANALOG_COUNT];
+	/// Last known analog readings for pin A0-A5
 	uint16_t analog_vals[ANALOG_COUNT];
+	/// Conversion (if any) to apply to analog value when printing / packaging
 	AnalogConversion conversions[ANALOG_COUNT];
 
 	float    battery;  
@@ -59,12 +63,12 @@ public:
 					bool    enableA4 				= true,
 					bool    enableA5 				= true,
 
-					AnalogConversion convertA0		= NO_CONVERT,
-					AnalogConversion convertA1		= NO_CONVERT,
-					AnalogConversion convertA2		= NO_CONVERT,
-					AnalogConversion convertA3		= NO_CONVERT,
-					AnalogConversion convertA4		= NO_CONVERT,
-					AnalogConversion convertA5		= NO_CONVERT
+					AnalogConversion convertA0		= AnalogConversion::NONE,
+					AnalogConversion convertA1		= AnalogConversion::NONE,
+					AnalogConversion convertA2		= AnalogConversion::NONE,
+					AnalogConversion convertA3		= AnalogConversion::NONE,
+					AnalogConversion convertA4		= AnalogConversion::NONE,
+					AnalogConversion convertA5		= AnalogConversion::NONE
 				);
 
 	// --- DESTRUCTOR ---

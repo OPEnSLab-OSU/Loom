@@ -17,9 +17,13 @@ class Loom_Stepper : public LoomActuator
 
 protected:
 
+	/// Underlying motor shield controller
 	Adafruit_MotorShield  *AFMS;
+
+	/// Array of stepper controllers
 	Adafruit_StepperMotor **motors;
 
+	/// Number of steppers
 	uint8_t stepper_count;
 
 public:
@@ -27,7 +31,8 @@ public:
 	// --- CONSTRUCTOR ---
 	Loom_Stepper( char* module_name = "Stepper" ,
 
-				uint8_t stepper_count = NUM_STEPPERS);
+					uint8_t stepper_count = NUM_STEPPERS
+				);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Stepper();

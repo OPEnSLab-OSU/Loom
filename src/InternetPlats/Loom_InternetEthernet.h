@@ -26,10 +26,15 @@ class Loom_Ethernet_I : public LoomInternetPlat
 
 protected:
 	
+	/// Underlying Ethernet client instance
 	EthernetClient*	client;            
+	/// Underlying Ethernet UDP instance
 	EthernetUDP* 	UDP;
 
+	/// The Ethernet MAC address
 	byte 			mac[6];
+
+	/// The devices IP address
 	IPAddress 		ip;
 	
 public:

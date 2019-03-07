@@ -12,8 +12,11 @@ class Loom_Relay : public LoomActuator
 
 protected:
 
-	byte pin;	// Which pin the relay is connected to
-	bool on;	// Whether the relay is on or off
+	/// The digital pin the relay is connect to
+	byte pin;
+
+	/// Whether the relay is on or off
+	bool on;	
 
 public:
 

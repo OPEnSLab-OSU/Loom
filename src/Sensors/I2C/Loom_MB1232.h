@@ -16,6 +16,7 @@ class Loom_MB1232 : public LoomI2CSensor
 
 protected:
 
+	/// Measure distance (cm)
 	int range;
 
 public:

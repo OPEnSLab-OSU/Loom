@@ -13,9 +13,10 @@ char* LoomInternetPlat::enum_internet_plat_string(InternetPlatform p)
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-LoomInternetPlat::LoomInternetPlat(	char* module_name
-
-				) : LoomModule( module_name )
+LoomInternetPlat::LoomInternetPlat(	
+		char* module_name
+	) 
+	: LoomModule( module_name )
 {
 
 }

@@ -2,12 +2,13 @@
 #include "Loom_Sensor.h"
 
 /////////////////////////////////////////////////////////////////////
-LoomSensor::LoomSensor(	char* 	module_name,
+LoomSensor::LoomSensor(	
+		char*		module_name,
 	 
-						char* 	sensor_description, 
-						uint8_t	num_samples 
-
-					  ) : LoomModule( module_name ) 
+		char*		sensor_description, 
+		uint8_t		num_samples 
+	) 
+	: LoomModule( module_name ) 
 {
 	this->sensor_description = sensor_description; 
 	this->num_samples        = num_samples;

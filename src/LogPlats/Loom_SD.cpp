@@ -9,7 +9,13 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_SD::Loom_SD(		char* module_name, bool enable_rate_filter, uint min_filter_delay, byte chip_select, char* default_file)
+Loom_SD::Loom_SD(		
+		char*		module_name, 
+		bool		enable_rate_filter, 
+		uint		min_filter_delay, 
+		byte		chip_select, 
+		char*		default_file
+	)
 	: LoomLogPlat( module_name, enable_rate_filter, min_filter_delay )
 {
 	Println("SD Setup");

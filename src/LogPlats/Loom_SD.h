@@ -32,10 +32,14 @@ protected:
 
 		// File SDFile;
 
-		byte 	chip_select;
-		bool 	sd_found;
+		/// Chip select pin
+		byte		chip_select;
 
-		char* 	default_file;
+		/// Whether or not the SD hardware was found
+		bool		sd_found;
+
+		/// String of file to write to if not filename explicitly provided
+		char*		default_file;
 
 		// SD_Version 		version;
 		// byte 			reset_pin;
@@ -57,8 +61,6 @@ public:
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_SD();
-
-
 
 	void print_config();
 	void set_default_file(char* filename);

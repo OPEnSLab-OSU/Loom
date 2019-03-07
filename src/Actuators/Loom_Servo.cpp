@@ -7,9 +7,12 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_Servo::Loom_Servo( char* module_name, uint8_t servo_count ) : LoomActuator( module_name ) 
+Loom_Servo::Loom_Servo( 
+		char* 		module_name, 
+		uint8_t 	servo_count 
+	) 
+	: LoomActuator( module_name ) 
 {
-
 	this->servo_count = servo_count;
 
 	this->positions = new int[servo_count];

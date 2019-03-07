@@ -7,8 +7,13 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_TSL2561::Loom_TSL2561(byte i2c_address, char* module_name, char* sensor_description, int gain, int resolution)
-
+Loom_TSL2561::Loom_TSL2561(
+		byte		i2c_address, 
+		char*		module_name, 
+		char*		sensor_description, 
+		int			gain, 
+		int			resolution
+	)
 	: LoomI2CSensor( module_name, sensor_description, i2c_address )
 {
 	this->gain       = gain;

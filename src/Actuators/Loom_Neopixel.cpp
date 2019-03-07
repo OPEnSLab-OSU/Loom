@@ -6,7 +6,12 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_Neopixel::Loom_Neopixel(char* module_name, bool enableA0, bool enableA1, bool enableA2)
+Loom_Neopixel::Loom_Neopixel(
+		char*	module_name, 
+		bool	enableA0, 
+		bool	enableA1, 
+		bool	enableA2
+	) 
 	: LoomActuator(module_name)
 {
 	// Set enabled pins

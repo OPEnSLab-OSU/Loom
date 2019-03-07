@@ -17,28 +17,32 @@
 
 class Loom_SlipSerial : public LoomCommPlat
 {
-	protected:
-		uint baud_rate = BAUD_RATE;
 
-	public:
-		/// Constructor
-		Loom_SlipSerial(char* 	module_name 		= "SlipSerial",
-						uint 	max_message_len 	= SERIAL_MAX_MESSAGE_LEN,
-						bool 	compress_messages 	= true
-						); 
-		/// Destructor	
-		~Loom_SlipSerial();
+protected:
 
-		void print_config(); ///< Outputs Configuration of CommPlat
+	/// Baud rate
+	uint baud_rate = BAUD_RATE;
 
-		bool receive_bundle(OSCBundle& bndl); ///< Build OSC Bundle from packet if any exists
-		bool send_bundle(OSCBundle& bndl); ///< Send an OSC Bundle
-		void broadcast_bundle(OSCBundle& bndl); ///< Broadcast an OSC bundle
+public:
+	
+	/// Constructor
+	Loom_SlipSerial(char* 	module_name 		= "SlipSerial",
+					uint 	max_message_len 	= SERIAL_MAX_MESSAGE_LEN,
+					bool 	compress_messages 	= true
+					); 
+	/// Destructor	
+	~Loom_SlipSerial();
 
-		void set_address(uint addr);
-		uint get_address();
+	void print_config(); ///< Outputs Configuration of CommPlat
 
-	private:	
+	bool receive_bundle(OSCBundle& bndl); ///< Build OSC Bundle from packet if any exists
+	bool send_bundle(OSCBundle& bndl); ///< Send an OSC Bundle
+	void broadcast_bundle(OSCBundle& bndl); ///< Broadcast an OSC bundle
+
+	void set_address(uint addr);
+	uint get_address();
+
+private:	
 
 };
 

@@ -4,11 +4,12 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-LoomI2CSensor::LoomI2CSensor( 	char* module_name, 
-								char* sensor_description, 
-								byte  i2c_address 
-			
-		) : LoomSensor( module_name, sensor_description )
+LoomI2CSensor::LoomI2CSensor( 	
+		char*		module_name, 
+		char*		sensor_description, 
+		byte		i2c_address 
+	) 
+	: LoomSensor( module_name, sensor_description )
 {
 	this->i2c_address = i2c_address;
 }

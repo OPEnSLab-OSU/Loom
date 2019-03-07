@@ -8,14 +8,15 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_PCF8523::Loom_PCF8523(	char* 	module_name,
+Loom_PCF8523::Loom_PCF8523(	
+		char*		module_name,
 	 
-						TimeZone 	timezone,
-						bool 		use_utc_time,
-						bool 		get_internet_time,
-						byte		int_pin
-
-	) : LoomRTC( module_name, timezone, use_utc_time, get_internet_time, int_pin )
+		TimeZone	timezone,
+		bool		use_utc_time,
+		bool		get_internet_time,
+		byte		int_pin
+	) 
+	: LoomRTC( module_name, timezone, use_utc_time, get_internet_time, int_pin )
 {
 	rtc_inst = new RTC_PCF8523();
 

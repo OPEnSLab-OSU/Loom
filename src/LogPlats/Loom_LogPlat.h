@@ -14,14 +14,19 @@ class LoomLogPlat : public LoomModule
 {
 
 protected:
-	// --- PROTECTED MEMBERS ---
-	bool          enable_rate_filter; 	// Whether or not to enable a minimum delay between logging
-	uint          min_filter_delay;		// Minimum delay between logging (milliseconds)
-	unsigned long last_log_millis;		// Value of millis() at last executed log
+
+	/// Whether or not to enable a minimum delay between logging
+	bool			enable_rate_filter;
+
+	/// Minimum delay between logging (milliseconds) 	
+	uint			min_filter_delay;
+
+	/// Value of millis() at last executed log time
+	unsigned long	last_log_millis;		
 
 public:
 
-	// --- PUBLIC MEMBERS ---
+
 
 	static char* enum_log_plat_string(LogPlatform p);
 

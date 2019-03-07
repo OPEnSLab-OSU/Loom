@@ -51,26 +51,31 @@ class LoomRTC : public LoomModule
 private: 
 
 	// static const char* const daysOfTheWeek[7] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+	
+	/// Array of strings the days of the week
 	const static char* daysOfTheWeek[];
+	/// Timezone hour adjustment associated with each TimeZone enum
 	const static float timezone_adjustment[];
-
-
 
 protected:
 
-	TimeZone 	timezone;
+	/// The TimeZone to use
+	TimeZone	timezone;
 
-	bool 		use_utc_time;
-	bool 		get_internet_time;
+	/// Whether or not use UTC time, else local time
+	bool		use_utc_time;
+	/// Whether or not to try to get the time over an enabled internet platform
+	bool		get_internet_time;
 
+	/// Latest saved string of the Date (year/month/day)
 	char		datestring[20];
-	char 		timestring[20];
+	/// Latest saved string of the time (hour:minute:second)
+	char		timestring[20];
 
-	// byte		int_pin; 
-	static byte	int_pin; // This is static so ISR can be static
+	// Which pin the RTC interrupt is connected to (static so RTC ISR can be static)
+	static byte	int_pin; 
 
 public:
-
 
 	// --- CONSTRUCTOR ---
 	LoomRTC(	char* 	module_name,

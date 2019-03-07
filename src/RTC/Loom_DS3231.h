@@ -11,12 +11,13 @@ class Loom_DS3231 : public LoomRTC
 {
 protected:
 
+	/// Underlying DS3231 manager instance
 	RTC_DS3231*  rtc_inst;
 
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_DS3231(	char* 	module_name 			= "DS3231",
+	Loom_DS3231(	char* 		module_name			= "DS3231",
 	 
 					TimeZone 	timezone 			= PST,
 					bool 		use_utc_time 		= false,

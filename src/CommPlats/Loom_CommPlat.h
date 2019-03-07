@@ -16,11 +16,17 @@ class LoomCommPlat : public LoomModule
 {
 
 protected:
-	uint16_t  max_message_len;		// The maximum message length
+
+	/// The maximum message length
+	uint16_t  max_message_len;
+	
 	// CommScope subnet_scope;			// The scope to accept messages on       Switch to be ENUM      Maybe move to LoomDevice instead?
 
-	bool      compress_messages;		//
-	int16_t   signal_strength; 		// Rssi for Lora (need to determine what the other platforms use)
+	/// Whether or not to try to compress transmission strings
+	bool      compress_messages;	
+
+	/// Rssi for Lora (need to determine what the other platforms use)
+	int16_t   signal_strength; 
 
 	// Not sure if address will be in this scope of only the individual implementations
 

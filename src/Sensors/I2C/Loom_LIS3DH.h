@@ -13,8 +13,10 @@ class Loom_LIS3DH : public LoomI2CSensor
 
 protected:
 
+	/// Underlying LIS3DH sensor manager instance
 	LIS3DH* inst_LIS3DH;
 
+	/// Measured acceleration values (x,y,z)(g's)
 	float accel[3];
 
 public:

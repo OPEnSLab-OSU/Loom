@@ -5,8 +5,15 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_AS7262::Loom_AS7262(byte i2c_address, char* module_name, char* sensor_description, bool use_bulb, byte gain, byte mode, byte integration_time)
-
+Loom_AS7262::Loom_AS7262(
+		byte		i2c_address, 
+		char*		module_name, 
+		char*		sensor_description, 
+		bool		use_bulb, 
+		byte		gain, 
+		byte		mode, 
+		byte		integration_time
+	)
 	: LoomI2CSensor( module_name, sensor_description, i2c_address )
 {
 	this->use_bulb 			= use_bulb;
@@ -43,12 +50,12 @@ void Loom_AS7262::print_measurements()
 {
 	print_module_label();
 	Println("Measurements:");
-	Println3("\t", "Violet : ", violet);
-	Println3("\t", "Blue   : ", blue);
-	Println3("\t", "Green  : ", green);
-	Println3("\t", "Yellow : ", yellow);
-	Println3("\t", "Orange : ", orange);
-	Println3("\t", "Red    : ", red);
+	Println3("\t", "Violet : ", color_vals[0]);
+	Println3("\t", "Blue   : ", color_vals[1]);
+	Println3("\t", "Green  : ", color_vals[2]);
+	Println3("\t", "Yellow : ", color_vals[3]);
+	Println3("\t", "Orange : ", color_vals[4]);
+	Println3("\t", "Red    : ", color_vals[5]);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -60,12 +67,12 @@ void Loom_AS7262::measure()
 		inst_AS7262.takeMeasurements();
 	}
 
-	violet = inst_AS7262.getViolet();
-	blue   = inst_AS7262.getBlue();
-	green  = inst_AS7262.getGreen();
-	yellow = inst_AS7262.getYellow();
-	orange = inst_AS7262.getOrange();
-	red    = inst_AS7262.getRed();	
+	color_vals[0] = inst_AS7262.getViolet();
+	color_vals[1] = inst_AS7262.getBlue();
+	color_vals[2] = inst_AS7262.getGreen();
+	color_vals[3] = inst_AS7262.getYellow();
+	color_vals[4] = inst_AS7262.getOrange();
+	color_vals[5] = inst_AS7262.getRed();	
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -74,12 +81,12 @@ void Loom_AS7262::package(OSCBundle& bndl, char* suffix)
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, suffix);
 
-	append_to_bundle(bndl, id_prefix, "Violet", violet, NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "Blue"  , blue);
-	append_to_bundle(bndl, id_prefix, "Green" , green);
-	append_to_bundle(bndl, id_prefix, "Yellow", yellow);
-	append_to_bundle(bndl, id_prefix, "Orange", orange);
-	append_to_bundle(bndl, id_prefix, "Red"   , red);
+	append_to_bundle(bndl, id_prefix, "Violet", color_vals[0], NEW_MSG);
+	append_to_bundle(bndl, id_prefix, "Blue"  , color_vals[1]);
+	append_to_bundle(bndl, id_prefix, "Green" , color_vals[2]);
+	append_to_bundle(bndl, id_prefix, "Yellow", color_vals[3]);
+	append_to_bundle(bndl, id_prefix, "Orange", color_vals[4]);
+	append_to_bundle(bndl, id_prefix, "Red"   , color_vals[5]);
 }
 
 /////////////////////////////////////////////////////////////////////

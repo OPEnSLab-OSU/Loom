@@ -14,14 +14,15 @@ char* Loom_WiFi_I::enum_wifi_mode_string(WiFiMode c)
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_WiFi_I::Loom_WiFi_I(	char* module_name,
+Loom_WiFi_I::Loom_WiFi_I(	
+		char*		module_name,
 
-							WiFiMode 	mode,
-							char* 		SSID,
-							char* 		pass,
-							uint 		UDP_port
-
-				) : LoomInternetPlat( module_name )
+		WiFiMode	mode,
+		char*		SSID,
+		char*		pass,
+		uint		UDP_port
+	) 
+	: LoomInternetPlat( module_name )
 {
 	// Configure pins for Adafruit ATWINC1500 Feather
 	WiFi.setPins(8,7,4,2);      

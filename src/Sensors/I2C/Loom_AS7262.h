@@ -13,13 +13,20 @@ class Loom_AS7262 : public LoomI2CSensor
 
 protected:
 
+	/// Underlying AS7262 sensor manager instance
 	AS726X inst_AS7262;
 
-	int violet, blue, green, yellow, orange, red;
+	/// Measured color  band values (violet, blue, green, yellow, orange, red)
+	int color_vals[6];
 
+	/// Whether or not to use bulb
 	bool use_bulb;
+
+	/// Gain setting
 	byte gain;
+	/// Sensor read mode
 	byte mode;
+	/// Integration time setting
 	byte integration_time;
 
 public:

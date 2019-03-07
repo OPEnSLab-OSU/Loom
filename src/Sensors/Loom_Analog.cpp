@@ -18,38 +18,39 @@
 float Loom_Analog::convert(uint8_t pin, uint16_t analog)
 {
 	switch(conversions[pin]) {
-		case CONVERT_VOLTAGE	: return convert_voltage(analog);
-		case CONVERT_THERMISTOR	: return convert_thermistor(analog);
-		case CONVERT_PH 		: return convert_pH(analog);
-		case CONVERT_TURBIDITY	: return convert_turbidity(analog);
-		case CONVERT_EC			: return convert_EC(analog);
-		case CONVERT_TDS		: return convert_TDS(analog);
-		default					: return (float)analog;  
+		case AnalogConversion::VOLTAGE 		: return convert_voltage(analog);
+		case AnalogConversion::THERMISTOR 	: return convert_thermistor(analog);
+		case AnalogConversion::PH 			: return convert_pH(analog);
+		case AnalogConversion::TURBIDITY 	: return convert_turbidity(analog);
+		case AnalogConversion::EC 			: return convert_EC(analog);
+		case AnalogConversion::TDS 			: return convert_TDS(analog);
+		default								: return (float)analog;  
 	}
 }
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_Analog::Loom_Analog(	char*	module_name 	,
-							char*	sensor_description 	,
-							uint8_t num_samples 		,
+Loom_Analog::Loom_Analog(	
+		char*				module_name,
+		char*				sensor_description,
+		uint8_t				num_samples,
 
-							uint8_t read_resolution 	,
-							bool	enableA0 			,
-							bool	enableA1 			,
-							bool	enableA2 			,
-							bool	enableA3 			,
-							bool	enableA4 			,
-							bool	enableA5 			,
+		uint8_t				read_resolution,
+		bool				enableA0,
+		bool				enableA1,
+		bool				enableA2,
+		bool				enableA3,
+		bool				enableA4,
+		bool				enableA5,
 
-							AnalogConversion convertA0	,
-							AnalogConversion convertA1	,
-							AnalogConversion convertA2	,
-							AnalogConversion convertA3	,
-							AnalogConversion convertA4	,
-							AnalogConversion convertA5	
-
-				) : LoomSensor( module_name, sensor_description, num_samples )
+		AnalogConversion	convertA0,
+		AnalogConversion	convertA1,
+		AnalogConversion	convertA2,
+		AnalogConversion	convertA3,
+		AnalogConversion	convertA4,
+		AnalogConversion	convertA5	
+	) 
+	: LoomSensor( module_name, sensor_description, num_samples )
 {
 	// Println("Loom_Analog Constructor");
 
@@ -125,7 +126,7 @@ void Loom_Analog::print_measurements()
 	Println("Measurements:");
 	Println2("\tBattery = ", battery);
 	for (int i = 0; i < ANALOG_COUNT; i++) {
-		if ( (!enable_conversions) || (conversions[i] == NO_CONVERT) ) {
+		if ( (!enable_conversions) || (conversions[i] == AnalogConversion::NONE) ) {
 			Println4("\tA", i, " = ", analog_vals[i]);
 		} else {
 			Print4("\tA", i, " = ", analog_vals[i]);
@@ -161,7 +162,7 @@ void Loom_Analog::package(OSCBundle& bndl, char* suffix)
 		if (pin_enabled[i]) {
 			sprintf(buf, "%s%d", "A", i);
 
-			if ( (!enable_conversions) || (conversions[i] == NO_CONVERT) ) {
+			if ( (!enable_conversions) || (conversions[i] == AnalogConversion::NONE) ) {
 				append_to_bundle(bndl, id_prefix, buf, analog_vals[i]);
 			} else {
 				append_to_bundle(bndl, id_prefix, buf, convert(i, analog_vals[i]) );

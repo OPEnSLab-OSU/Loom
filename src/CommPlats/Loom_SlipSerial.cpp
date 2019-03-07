@@ -3,14 +3,11 @@
 /////////////////////////////////////////////////////////////////////
 /// ... Constructor ...
 Loom_SlipSerial::Loom_SlipSerial(
-				char* 	module_name,
-				uint 	max_message_len,
-				bool	compress_messages
-				) : LoomCommPlat(
-					module_name,
-				 	max_message_len,
-					compress_messages	
-				)
+		char*	module_name,
+		uint	max_message_len,
+		bool	compress_messages
+	) 
+	: LoomCommPlat(module_name, max_message_len, compress_messages )
 {
 	///Begin Setup Telemetry				
 

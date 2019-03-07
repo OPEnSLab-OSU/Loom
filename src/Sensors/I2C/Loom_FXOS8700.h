@@ -13,9 +13,12 @@ class Loom_FXOS8700 : public LoomI2CSensor
 
 protected:
 
+	/// Underlying FXOS8700 sensor manager instance
 	Adafruit_FXOS8700* inst_FXOS8700;
 
+	/// Measured acceleration values (x,y,z) (g's)
 	float accel[3];
+	/// Measured magnetic field values (x,y,z) (T)
 	float mag[3];
 
 public:

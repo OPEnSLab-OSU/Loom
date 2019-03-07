@@ -12,13 +12,20 @@ class Loom_AS7263 : public LoomI2CSensor
 
 protected:
 
+	/// Underlying AS7263 sensor manager instance
 	AS726X inst_AS7263;
 
-	int nir_r, nir_s, nir_t, nir_u, nir_v, nir_w;
+	/// Measured near-infra-red band values (r,s,t,u,v,w)
+	int nir_vals[6];
 
+	/// Whether or not to use bulb
 	bool use_bulb;
+
+	/// Gain setting
 	byte gain;
+	/// Sensor read mode
 	byte mode;
+	/// Integration time setting
 	byte integration_time;
 
 public:

@@ -12,7 +12,8 @@ class LoomI2CSensor : public LoomSensor
 
 protected:
 
-	byte i2c_address;	// The sensor's I2C address
+	/// The sensor's I2C address
+	byte i2c_address;	
 
 public:
 
@@ -21,7 +22,6 @@ public:
 					char* sensor_description, 
 
 					byte  i2c_address 
-
 			);
 
 	// --- DESTRUCTOR ---

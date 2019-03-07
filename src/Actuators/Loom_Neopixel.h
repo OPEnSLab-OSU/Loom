@@ -14,12 +14,14 @@ class Loom_Neopixel : public LoomActuator
 
 protected:
 
+	/// Array of Neopixel instances to manage up to 3 Neopixels
 	Adafruit_NeoPixel* pixels[3];
 
-	// Pins A0-A2
+	/// Whether pins A0-A2 are enabled
 	bool    pin_enabled[3];
-	uint8_t color_vals[3][3]; 	// Store RGB vals for up to 1 pixel per port on Ishield
 
+	/// The associated color values (RGB) for each of the 3 Neopixels
+	uint8_t color_vals[3][3];
 
 public:
 	

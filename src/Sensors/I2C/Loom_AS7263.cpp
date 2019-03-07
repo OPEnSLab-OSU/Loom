@@ -4,8 +4,15 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_AS7263::Loom_AS7263(byte i2c_address, char* module_name, char* sensor_description, bool use_bulb, byte gain, byte mode, byte integration_time)
-
+Loom_AS7263::Loom_AS7263(
+		byte		i2c_address, 
+		char*		module_name,
+		char*		sensor_description, 
+		bool		use_bulb, 
+		byte		gain, 
+		byte		mode, 
+		byte		integration_time
+	)
 	: LoomI2CSensor( module_name, sensor_description, i2c_address )
 {
 	this->use_bulb 			= use_bulb;
@@ -42,12 +49,12 @@ void Loom_AS7263::print_measurements()
 {
 	print_module_label();
 	Println("Measurements:");
-	Println3("\t", "NIR R: ", nir_r);
-	Println3("\t", "NIR S: ", nir_s);
-	Println3("\t", "NIR T: ", nir_t);
-	Println3("\t", "NIR U: ", nir_u);
-	Println3("\t", "NIR V: ", nir_v);
-	Println3("\t", "NIR W: ", nir_w);
+	Println3("\t", "NIR R: ", nir_vals[0]);
+	Println3("\t", "NIR S: ", nir_vals[1]);
+	Println3("\t", "NIR T: ", nir_vals[2]);
+	Println3("\t", "NIR U: ", nir_vals[3]);
+	Println3("\t", "NIR V: ", nir_vals[4]);
+	Println3("\t", "NIR W: ", nir_vals[5]);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -59,12 +66,12 @@ void Loom_AS7263::measure()
 		inst_AS7263.takeMeasurements();
 	}
 
-	nir_r = inst_AS7263.getR();
-	nir_s = inst_AS7263.getS();
-	nir_t = inst_AS7263.getT();
-	nir_u = inst_AS7263.getU();
-	nir_v = inst_AS7263.getV();
-	nir_w = inst_AS7263.getW();	
+	nir_vals[0] = inst_AS7263.getR();
+	nir_vals[1] = inst_AS7263.getS();
+	nir_vals[2] = inst_AS7263.getT();
+	nir_vals[3] = inst_AS7263.getU();
+	nir_vals[4] = inst_AS7263.getV();
+	nir_vals[5] = inst_AS7263.getW();	
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -73,12 +80,12 @@ void Loom_AS7263::package(OSCBundle& bndl, char* suffix)
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, suffix);
 
-	append_to_bundle(bndl, id_prefix, "NIR_R", nir_r, NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "NIR_S", nir_s);
-	append_to_bundle(bndl, id_prefix, "NIR_T", nir_t);
-	append_to_bundle(bndl, id_prefix, "NIR_U", nir_u);
-	append_to_bundle(bndl, id_prefix, "NIR_V", nir_v);
-	append_to_bundle(bndl, id_prefix, "NIR_W", nir_w);
+	append_to_bundle(bndl, id_prefix, "NIR_R", nir_vals[0], NEW_MSG);
+	append_to_bundle(bndl, id_prefix, "NIR_S", nir_vals[1]);
+	append_to_bundle(bndl, id_prefix, "NIR_T", nir_vals[2]);
+	append_to_bundle(bndl, id_prefix, "NIR_U", nir_vals[3]);
+	append_to_bundle(bndl, id_prefix, "NIR_V", nir_vals[4]);
+	append_to_bundle(bndl, id_prefix, "NIR_W", nir_vals[5]);
 }
 
 /////////////////////////////////////////////////////////////////////

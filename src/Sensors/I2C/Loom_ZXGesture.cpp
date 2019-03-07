@@ -4,8 +4,12 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_ZXGesture::Loom_ZXGesture(byte i2c_address, char* module_name, char* sensor_description, ZXMode mode)
-
+Loom_ZXGesture::Loom_ZXGesture(
+		byte		i2c_address, 
+		char*		module_name, 
+		char*		sensor_description, 
+		ZXMode		mode
+	)
 	: LoomI2CSensor( module_name, sensor_description, i2c_address )
 {
 	this->mode = mode;
@@ -35,7 +39,6 @@ Loom_ZXGesture::Loom_ZXGesture(byte i2c_address, char* module_name, char* sensor
 		Println2("Register Map Version: ", ver);
 	}
 
-
 	print_module_label();
 	Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
@@ -51,7 +54,7 @@ Loom_ZXGesture::~Loom_ZXGesture()
 void Loom_ZXGesture::print_config()
 {
 	LoomI2CSensor::print_config();
-	Println3('\t', "Mode                : ", (mode == ZX_POS) ? "Position" : "Gesture" );
+	Println3('\t', "Mode                : ", (mode == ZXMode::ZX_POS) ? "Position" : "Gesture" );
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -61,11 +64,11 @@ void Loom_ZXGesture::print_measurements()
 	Println("Measurements:");
 
 	switch (mode) {
-		case ZX_POS : 
+		case ZXMode::ZX_POS : 
 			Println3("\t", "ZX: ", pos[0]);
 			Println3("\t", "ZY: ", pos[1]);
 			break;
-		case ZX_GEST : 
+		case ZXMode::ZX_GEST : 
 			Println3("\t", "Gesture type : ", gesture_type.c_str());
 			Println3("\t", "Gesture speed: ", gesture_speed);
 			break; 
@@ -78,7 +81,7 @@ void Loom_ZXGesture::measure()
 	uint8_t x, z;
 
 	switch (mode) {
-		case ZX_POS : 
+		case ZXMode::ZX_POS : 
 			if ( inst_ZX->positionAvailable() ) {
 				x = inst_ZX->readX();
 				z = inst_ZX->readZ();
@@ -102,7 +105,7 @@ void Loom_ZXGesture::measure()
 			break;
 		
 
-		case ZX_GEST :
+		case ZXMode::ZX_GEST :
 			if ( inst_ZX->gestureAvailable() ) {
 				gesture       = inst_ZX->readGesture();
 				gesture_speed = inst_ZX->readGestureSpeed();
@@ -132,11 +135,11 @@ void Loom_ZXGesture::package(OSCBundle& bndl, char* suffix)
 	resolve_bundle_address(id_prefix, suffix);
 
 	switch (mode) {
-		case ZX_POS : 
+		case ZXMode::ZX_POS : 
 			append_to_bundle(bndl, id_prefix, "zx", pos[0], NEW_MSG);
 			append_to_bundle(bndl, id_prefix, "zy", pos[1]);
 			break;
-		case ZX_GEST : 
+		case ZXMode::ZX_GEST : 
 			append_to_bundle(bndl, id_prefix, "type" , gesture_type.c_str(), NEW_MSG);
 			append_to_bundle(bndl, id_prefix, "speed", (int)gesture_speed);
 			break; 
