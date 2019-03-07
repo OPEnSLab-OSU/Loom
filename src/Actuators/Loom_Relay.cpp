@@ -57,7 +57,7 @@ void Loom_Relay::set_relay(bool state)
 	on = state;
 	digitalWrite(pin, (on) ? HIGH : LOW);
 
-	if (print_verbosity == HIGH) {
+	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
 		Println3("Set relay on pin ", pin, (on) ? " High" : " Low");
 	}

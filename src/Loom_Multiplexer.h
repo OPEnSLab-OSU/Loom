@@ -27,10 +27,10 @@
 // // I2C Address Conflict Selection
 
 // // enum to specify selection?
-enum I2C_Selection { L_TSL2561, L_TSL2591, L_AS7262, L_AS7263, L_AS7265X };
+enum class I2C_Selection { L_TSL2561, L_TSL2591, L_AS7262, L_AS7263, L_AS7265X };
 
-#define i2c_0x29 L_TSL2591 	// TSL2561 / TSL2591
-#define i2c_0x49 L_AS7265X	// TSL2561 / AS7262 / AS7263 / AS7265X
+#define i2c_0x29 I2C_Selection::L_TSL2591 	// TSL2561 / TSL2591
+#define i2c_0x49 I2C_Selection::L_AS7265X	// TSL2561 / AS7262 / AS7263 / AS7265X
 
 
 // Maybe query DeviceManager if RTC is in use, if not, query 0x68 s

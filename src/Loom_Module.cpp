@@ -5,9 +5,9 @@
 char* LoomModule::enum_verbosity_string(Verbosity v)
 {
 	switch(v) {
-		case VERB_OFF  : return "Off";
-		case VERB_LOW  : return "Low";
-		case VERB_HIGH : return "High";
+		case Verbosity::V_OFF  : return "Off";
+		case Verbosity::V_LOW  : return "Low";
+		case Verbosity::V_HIGH : return "High";
 	}
 }
 
@@ -22,8 +22,8 @@ LoomModule::LoomModule()
 	this->module_name 	= "Unknown";
 	active 				= true;
 	print_debug 		= true;
-	print_verbosity 	= VERB_LOW;
-	package_verbosity 	= VERB_LOW;
+	print_verbosity 	= Verbosity::V_LOW;
+	package_verbosity 	= Verbosity::V_LOW;
 	
 	this->device_manager = NULL;
 }

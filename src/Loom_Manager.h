@@ -18,8 +18,8 @@
 
 
 
-enum DeviceType { HUB, NODE, REPEATER };
-enum Verbosity { VERB_OFF, VERB_LOW, VERB_HIGH }; 
+enum class DeviceType { HUB, NODE, REPEATER };
+enum class Verbosity { V_OFF, V_LOW, V_HIGH }; 
 
 
 // Forward declarations, specify that these classes 
@@ -99,10 +99,10 @@ public:
 				uint  family_num 	= 1,
 				uint  instance 		= 1,
 
-				DeviceType device_type	= NODE,
+				DeviceType device_type	= DeviceType::NODE,
 
-				Verbosity print_verbosity 	= VERB_HIGH,
-				Verbosity package_verbosity	= VERB_LOW    // Set high to include non sensors in package 
+				Verbosity print_verbosity 	= Verbosity::V_HIGH,
+				Verbosity package_verbosity	= Verbosity::V_LOW    // Set high to include non sensors in package 
 			  );
 
 	// --- DESTRUCTOR ---

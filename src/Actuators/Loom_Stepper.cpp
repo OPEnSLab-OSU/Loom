@@ -57,7 +57,7 @@ void Loom_Stepper::move_steps(int motor, int steps, int speed, bool clockwise)
 	motors[motor]->step( (steps > 1) ? steps : 0, (clockwise) ? FORWARD : BACKWARD, SINGLE);
 	yield();
 
-	if (print_verbosity == HIGH) {
+	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
 		Print5("Set stepper ", motor, " to move ", steps, " steps ");
 		Println4("at speed ", speed, ", direction ", (clockwise) ? "clockwise" : "counterclockwise");

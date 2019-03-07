@@ -7,10 +7,10 @@
 char* LoomLogPlat::enum_log_plat_string(LogPlatform p)
 {
 	switch(p) {
-		case SDCARD     : return "SD Card";
-		case PUSHINGBOX : return "PushingBox";
-		case OLED       : return "OLED";
-		case SERIAL_MON : return "Serial";
+		case LogPlatform::SDCARD     : return "SD Card";
+		case LogPlatform::PUSHINGBOX : return "PushingBox";
+		case LogPlatform::OLED       : return "OLED";
+		case LogPlatform::SERIAL_MON : return "Serial";
 	}
 }
 

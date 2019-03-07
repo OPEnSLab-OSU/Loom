@@ -9,8 +9,8 @@
 const char* Loom_OLED::enum_oled_version_string(OLED_Version v)
 {
 	switch(v) {
-		case FEATHERWING : return "FeatherWing";
-		case BREAKOUT    : return "Breakout";
+		case OLED_Version::FEATHERWING : return "FeatherWing";
+		case OLED_Version::BREAKOUT    : return "Breakout";
 	}
 }
 
@@ -18,18 +18,18 @@ const char* Loom_OLED::enum_oled_version_string(OLED_Version v)
 const char* Loom_OLED::enum_oled_format(OLED_Format f)
 {
 	switch(f) {
-		case OLED_4      : return "OLED 4 Elements";
-		case OLED_8      : return "OLED 8 Elements";
-		case OLED_SCROLL : return "OLED Scroll"; 
+		case OLED_Format::FOUR   : return "OLED 4 Elements";
+		case OLED_Format::EIGHT  : return "OLED 8 Elements";
+		case OLED_Format::SCROLL : return "OLED Scroll"; 
 	}
 }
 
 const char* Loom_OLED::enum_oled_freeze(OLED_Freeze f)
 {
 	switch(f) {
-		case FREEZE_DISABLE : return "Freeze Disabled";
-		case FREEZE_DATA    : return "Freeze Data";
-		case FREEZE_SCROLL  : return "Freeze Scroll";
+		case OLED_Freeze::DISABLE : return "Freeze Disabled";
+		case OLED_Freeze::DATA    : return "Freeze Data";
+		case OLED_Freeze::SCROLL  : return "Freeze Scroll";
 	}
 }
 
@@ -57,11 +57,11 @@ Loom_OLED::Loom_OLED(	char* module_name,
 	this->freeze_pin      = freeze_pin;
 
 	switch(version) {
-		case FEATHERWING : display = new Adafruit_SSD1306();
-		case BREAKOUT    : display = new Adafruit_SSD1306(reset_pin);
+		case OLED_Version::FEATHERWING : display = new Adafruit_SSD1306();
+		case OLED_Version::BREAKOUT    : display = new Adafruit_SSD1306(reset_pin);
 	}
 
-	if (freeze_behavior != FREEZE_DISABLE) {
+	if (freeze_behavior != OLED_Freeze::DISABLE) {
 		pinMode(freeze_pin, INPUT_PULLUP);
 	}
 
@@ -86,16 +86,16 @@ void Loom_OLED::print_config()
 	LoomLogPlat::print_config();
 
 	Println3('\t', "OLED Version        : ", enum_oled_version_string(this->version) );
-	if (this->version == BREAKOUT) {
+	if (this->version == OLED_Version::BREAKOUT) {
 		Println3('\t', "Reset Pin           : ", this->reset_pin );		
 	}
 
 	Println3('\t', "Display Format      : ", enum_oled_format(this->display_format) );
-	if (this->display_format == OLED_SCROLL) {
+	if (this->display_format == OLED_Format::SCROLL) {
 		Println3('\t', "Scroll Duration     : ", this->scroll_duration );
 	}
 	Println3('\t', "Freeze Behavior     : ", enum_oled_freeze(this->freeze_behavior) );
-	if (this->freeze_behavior != FREEZE_DISABLE) {
+	if (this->freeze_behavior != OLED_Freeze::DISABLE) {
 		Println3('\t', "Freeze Pin          : ", this->freeze_pin );
 	}
 }
@@ -129,7 +129,7 @@ uint Loom_OLED::get_scroll_duration()
 void Loom_OLED::set_freeze_pin(byte pin) 
 {
 	freeze_pin = pin;
-	if (freeze_behavior != FREEZE_DISABLE) {
+	if (freeze_behavior != OLED_Freeze::DISABLE) {
 		pinMode(freeze_pin, INPUT_PULLUP);
 	}
 }
@@ -164,7 +164,7 @@ void Loom_OLED::log_bundle(OSCBundle& bndl, OLED_Format format)
 	if ( !check_millis() ) return;
 	
 	// If freeze complete, check button if no display update needed
-	if (freeze_behavior == FREEZE_DATA) {
+	if (freeze_behavior == OLED_Freeze::DATA) {
 		if (digitalRead(freeze_pin) == 0) return; 			
 	}
 
@@ -184,7 +184,7 @@ void Loom_OLED::log_bundle(OSCBundle& bndl, OLED_Format format)
 	}
 
 	switch (format) {
-		case OLED_4:
+		case OLED_Format::FOUR:
 
 			for (int i = 0; i < 4 && i < size; i++) {
 				display->setCursor(0, i*8);
@@ -194,7 +194,7 @@ void Loom_OLED::log_bundle(OSCBundle& bndl, OLED_Format format)
 			}
 			break;
 
-		case OLED_8:
+		case OLED_Format::EIGHT:
 
 			for (int i = 0; i < 4 && i < size; i++) {
 				display->setCursor(0, i*8);
@@ -210,10 +210,10 @@ void Loom_OLED::log_bundle(OSCBundle& bndl, OLED_Format format)
 			}
 			break;
 
-		case OLED_SCROLL:
+		case OLED_Format::SCROLL:
 
 			unsigned long time;
-			if (freeze_behavior == FREEZE_SCROLL) {
+			if (freeze_behavior == OLED_Freeze::SCROLL) {
 				if (digitalRead(freeze_pin) == 0) {
 					time = previous_time;
 				} else {

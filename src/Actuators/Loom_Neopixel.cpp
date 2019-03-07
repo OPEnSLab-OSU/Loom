@@ -100,7 +100,7 @@ void Loom_Neopixel::enable_pin(uint8_t port, bool state)
 		pinMode(14+port, OUTPUT);
 	}
 
-	if (print_verbosity == HIGH) {
+	if (print_verbosity == Verbosity::V_HIGH) {
 		Println4("Neopixel ", (state) ? "enabled" : "disabled", " on port ", port);
 	}
 }
@@ -121,14 +121,14 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 		// Update colors displayed by Neopixel
 		pixels[port]->show();
 
-		if (print_verbosity == HIGH) {
+		if (print_verbosity == Verbosity::V_HIGH) {
 			Print4("Set Neopixel on Port: ", port, ", Chain #: ", chain_num);
 			Print2(" to R: ", color_vals[port][0]);
 			Print2(  ", G: ", color_vals[port][1]);
 			Println2(", B: ", color_vals[port][2]);			
 		}
 	} else {
-		if (print_verbosity == HIGH) {
+		if (print_verbosity == Verbosity::V_HIGH) {
 			Println2("Neopixel not enabled on port ", port);
 		}
 	}

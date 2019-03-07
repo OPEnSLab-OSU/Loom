@@ -18,12 +18,13 @@
 
 
 
+
 const char* LoomManager::enum_device_type_string(DeviceType t)
 {
 	switch(t) {
-		case HUB      : return "Hub";
-		case NODE     : return "Node";
-		case REPEATER : return "Repeater";
+		case DeviceType::HUB      : return "Hub";
+		case DeviceType::NODE     : return "Node";
+		case DeviceType::REPEATER : return "Repeater";
 		default       : return "";
 	}
 }
@@ -444,7 +445,7 @@ void LoomManager::package()
 	package_aux( (LoomModule**)other_modules    , other_module_count ); 
 	package_aux( (LoomModule**)sensor_modules   , sensor_count ); 
 
-	if (package_verbosity == VERB_HIGH) {
+	if (package_verbosity == Verbosity::V_HIGH) {
 		package_aux( (LoomModule**)actuator_modules , actuator_count ); 
 		package_aux( (LoomModule**)rtc_modules      , rtc_count ); 
 		package_aux( (LoomModule**)comm_modules     , comm_count ); 

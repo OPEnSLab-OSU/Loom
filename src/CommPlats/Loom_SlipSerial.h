@@ -10,7 +10,7 @@
 #define SERIAL3_RX	A5	///< Pin used for SlipSerial RX
 #define SERIAL3_TX	6	///< Pin used for SlipSerial TX
 
-#define BUAD_RATE	115200	///< Buad rate used for communication
+#define BAUD_RATE	115200	///< Buad rate used for communication
 #define SERIAL_MAX_MESSAGE_LEN	15 ///< Maximum size a message can be (OSCBundle)
 
 
@@ -18,7 +18,7 @@
 class Loom_SlipSerial : public LoomCommPlat
 {
 	protected:
-		uint buad_rate = BUAD_RATE;
+		uint baud_rate = BAUD_RATE;
 
 	public:
 		/// Constructor

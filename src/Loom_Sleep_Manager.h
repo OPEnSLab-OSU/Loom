@@ -18,7 +18,7 @@ class LoomRTC; // Specify that LoomRTC exists, defined in own file
 
 
 
-enum SleepMode { IDLE_SLEEP, STANDBY, SLEEPYDOG };
+enum class SleepMode { IDLE, STANDBY, SLEEPYDOG };
 
 
 
@@ -49,7 +49,7 @@ public:
 						bool 		use_LED 		= true,
 						bool		delay_on_wake 	= false,
 
-						SleepMode 	sleep_mode 		= STANDBY
+						SleepMode 	sleep_mode 		= SleepMode::STANDBY
 
 					);
 

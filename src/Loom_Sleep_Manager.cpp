@@ -13,9 +13,9 @@
 const char* Loom_Sleep_Manager::enum_sleep_mode_string(SleepMode m)
 {
 	switch(m) {
-		case IDLE_SLEEP : return "IdleSleep";
-		case STANDBY    : return "Standby";
-		case SLEEPYDOG  : return "SleepyDog";
+		case SleepMode::IDLE 		: return "Idle";
+		case SleepMode::STANDBY 	: return "Standby";
+		case SleepMode::SLEEPYDOG 	: return "SleepyDog";
 		default         : return "";
 	}
 }
@@ -29,14 +29,14 @@ Loom_Sleep_Manager::Loom_Sleep_Manager( char* module_name, LoomRTC* RTC_Inst, bo
 	this->delay_on_wake	= delay_on_wake;
 
 	this->RTC_Inst = RTC_Inst;
-	this->sleep_mode = STANDBY;
+	this->sleep_mode = SleepMode::STANDBY;
 
 
 	// Get current time
 	if (this->RTC_Inst != NULL) {
 		last_wake_time = this->RTC_Inst->now();
 	} else {
-		sleep_mode = SLEEPYDOG;
+		sleep_mode = SleepMode::SLEEPYDOG;
 	}
 
 }
@@ -114,7 +114,7 @@ bool Loom_Sleep_Manager::sleep_for_time(TimeSpan duration)
 {
 	switch(sleep_mode) {
 
-		case STANDBY : 
+		case SleepMode::STANDBY : 
 			// Try sleeping with Standby unless no RTC object
 			// Calculate time to sleep until
 			if (RTC_Inst) {
@@ -123,7 +123,7 @@ bool Loom_Sleep_Manager::sleep_for_time(TimeSpan duration)
 
 			// Intentional fallthrough: if no RTC found, revert to SLEEPYDOG
 
-		case IDLE_SLEEP :
+		case SleepMode::IDLE :
 
 			if (RTC_Inst) {
 				return sleep_until_time(RTC_Inst->now() + duration);
@@ -131,7 +131,7 @@ bool Loom_Sleep_Manager::sleep_for_time(TimeSpan duration)
 
 			// Intentional fallthrough: if no RTC found, revert to SLEEPYDOG
 
-		case SLEEPYDOG : 
+		case SleepMode::SLEEPYDOG : 
 			// Sleep 'hack' using repeated calls to Watchdog.sleep()
 			return sleepy_dog_sleep(duration);
 
@@ -162,8 +162,8 @@ bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 	switch(sleep_mode) {
 		
 		// Both follow same process, intentional fallthrough
-		case STANDBY    :
-		case IDLE_SLEEP :
+		case SleepMode::STANDBY :
+		case SleepMode::IDLE :
 		{
 			// Don't sleep if no RTC to wake up device
 			if (RTC_Inst == NULL) {
@@ -213,7 +213,7 @@ bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 
 			return true;
 		}
-		case SLEEPYDOG : 
+		case SleepMode::SLEEPYDOG : 
 			return false; // Can't sleep until a given time unless using RTC, in which case, use Standby or Idle instead
 	}
 }
@@ -239,8 +239,8 @@ bool Loom_Sleep_Manager::sleep()
 		pre_sleep();
 
 		switch(sleep_mode) {
-			case STANDBY    : LowPower.standby(); 
-			case IDLE_SLEEP : LowPower.idle(IDLE_2); 
+			case SleepMode::STANDBY : LowPower.standby(); 
+			case SleepMode::IDLE 	: LowPower.idle(IDLE_2); 
 		}
 
 		// This is where programs waits until waking

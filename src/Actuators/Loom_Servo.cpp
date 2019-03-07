@@ -77,7 +77,7 @@ void Loom_Servo::set_degree(int servo, int degree)
 		positions[servo]          = degree;		
 	}	
 
-	if (print_verbosity == HIGH) {
+	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
 		Println4("Set servo ", servo, "to degree ", degree);
 	}

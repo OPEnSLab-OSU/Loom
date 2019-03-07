@@ -8,9 +8,9 @@
 #include <WiFiUdp.h>
 
 
-enum WiFiMode {
-	AP_MODE,
-	WPA_CLIENT_MODE
+enum class WiFiMode {
+	AP,
+	WPA_CLIENT
 	// WEP_CLIENT_MODE
 };
 
@@ -49,7 +49,7 @@ public:
 	// --- CONSTRUCTOR ---
 	Loom_WiFi_I(	char* module_name 		= "WiFi",
 
-					WiFiMode 	mode		= WPA_CLIENT_MODE,
+					WiFiMode 	mode		= WiFiMode::WPA_CLIENT,
 					char* 		ssid		= "",
 					char* 		pass		= "",
 					uint 		UDP_port 	= 9411  	

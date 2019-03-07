@@ -50,18 +50,18 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 		case 0x21 : return new Loom_FXAS21002(i2c_address=0x21);	// FXAS21002
 
 		case 0x29 : // TSL2561 / TSL2591
-			if (i2c_0x29 == L_TSL2561) return new Loom_TSL2561(i2c_address=0x29);	// TSL2561
-			if (i2c_0x29 == L_TSL2591) return new Loom_TSL2591(i2c_address=0x29);	// TSL2591
+			if (i2c_0x29 == I2C_Selection::L_TSL2561) return new Loom_TSL2561(i2c_address=0x29);	// TSL2561
+			if (i2c_0x29 == I2C_Selection::L_TSL2591) return new Loom_TSL2591(i2c_address=0x29);	// TSL2591
 
 		case 0x39 : return new Loom_TSL2561(i2c_address=0x39);	// TSL2561
 		case 0x44 : return new Loom_SHT31D(i2c_address=0x44);	// SHT31D
 		case 0x45 : return new Loom_SHT31D(i2c_address=0x45);	// SHT31D
 
 		case 0x49 : // TSL2561 / AS726X / AS7265X
-			if (i2c_0x49 == L_TSL2561) return new Loom_TSL2561(i2c_address=0x49);	// TSL2561
-			if (i2c_0x49 == L_AS7262 ) return new Loom_AS7262(i2c_address=0x49);	// AS7262
-			if (i2c_0x49 == L_AS7263 ) return new Loom_AS7263(i2c_address=0x49);	// AS7263
-			if (i2c_0x49 == L_AS7265X) return new Loom_AS7265X(i2c_address=0x49);	// AS7265X
+			if (i2c_0x49 == I2C_Selection::L_TSL2561) return new Loom_TSL2561(i2c_address=0x49);	// TSL2561
+			if (i2c_0x49 == I2C_Selection::L_AS7262 ) return new Loom_AS7262(i2c_address=0x49);	// AS7262
+			if (i2c_0x49 == I2C_Selection::L_AS7263 ) return new Loom_AS7263(i2c_address=0x49);	// AS7263
+			if (i2c_0x49 == I2C_Selection::L_AS7265X) return new Loom_AS7265X(i2c_address=0x49);	// AS7265X
 
 		case 0x68 : return NULL; // new Loom_MPU6050();
 		case 0x69 : return NULL; // new Loom_MPU6050();

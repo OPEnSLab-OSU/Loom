@@ -92,7 +92,7 @@ void Loom_DS3231::time_adjust(DateTime time)
 {
 	rtc_inst->adjust(time);
 
-	if (print_verbosity == VERB_HIGH) {
+	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
 		Println("Adjusted time to: "); 
 		print_DateTime(time);		
@@ -105,7 +105,7 @@ void Loom_DS3231::time_adjust(DateTime time)
 // Alarm Functions
 void Loom_DS3231::set_alarm(DateTime time)
 {
-	if (print_verbosity == VERB_HIGH) {
+	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
 		Println("Resetting Alarm 1 for:"); 
 		print_DateTime(time);		

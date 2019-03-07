@@ -73,7 +73,7 @@ void Loom_MAX31856::measure()
 	cj_temp = inst_max->readCJTemperature();
 	temperature = inst_max->readThermocoupleTemperature();
 
-	if (print_verbosity == VERB_HIGH) {
+	if (print_verbosity == Verbosity::V_HIGH) {
 		// Check and print any faults
 		uint8_t fault = inst_max->readFault();
 		if (fault) {

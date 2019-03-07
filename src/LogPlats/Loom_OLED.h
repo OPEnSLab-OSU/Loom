@@ -7,9 +7,9 @@
 #include <Adafruit_SSD1306.h>
 
 
-enum OLED_Version { FEATHERWING, BREAKOUT };
-enum OLED_Format  { OLED_4, OLED_8, OLED_SCROLL };
-enum OLED_Freeze  { FREEZE_DISABLE, FREEZE_DATA, FREEZE_SCROLL };
+enum class OLED_Version { FEATHERWING, BREAKOUT };
+enum class OLED_Format  { FOUR, EIGHT, SCROLL };
+enum class OLED_Freeze  { DISABLE, DATA, SCROLL };
 
 
 
@@ -42,12 +42,12 @@ public:
 				bool 			enable_rate_filter 	= true,
 				uint 			min_filter_delay 	= 300,
 
-				OLED_Version 	version 			= FEATHERWING,
+				OLED_Version 	version 			= OLED_Version::FEATHERWING,
 				byte 			reset_pin 			= A2,
-				OLED_Format 	display_format 		= OLED_SCROLL,
+				OLED_Format 	display_format 		= OLED_Format::SCROLL,
 				uint  			scroll_duration 	= 6000,
 				byte 			freeze_pin 			= 10, 				// Common pins might be: 10 (Ishield); 9(A), 6(B), 5(C) (OLED Featherwing buttons)
-				OLED_Freeze 	freeze_behavior 	= FREEZE_SCROLL
+				OLED_Freeze 	freeze_behavior 	= OLED_Freeze::SCROLL
 
 			   );
 

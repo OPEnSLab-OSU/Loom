@@ -75,7 +75,7 @@ public:
 	// --- CONSTRUCTOR ---
 	LoomRTC(	char* 	module_name,
 	 
-				TimeZone 	timezone 			= PST,
+				TimeZone 	timezone 			= TimeZone::PST,
 				bool 		use_utc_time 		= true,
 				bool 		get_internet_time 	= false,
 

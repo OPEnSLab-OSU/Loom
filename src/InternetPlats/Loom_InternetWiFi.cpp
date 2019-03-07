@@ -6,8 +6,8 @@
 char* Loom_WiFi_I::enum_wifi_mode_string(WiFiMode c)
 {
 	switch(c) {
-		case AP_MODE         : return "AP_MODE";
-		case WPA_CLIENT_MODE : return "WPA_CLIENT_MODE";
+		case WiFiMode::AP 			: return "AP";
+		case WiFiMode::WPA_CLIENT 	: return "WPA_CLIENT";
 		// case WEP_CLIENT_MODE : return "WEP_CLIENT_MODE";
 	}
 }
@@ -75,7 +75,7 @@ void Loom_WiFi_I::print_state()
 	Println3('\t', "Mode:               : ", enum_wifi_mode_string(mode) );
 	
 	switch (mode) {
-		case AP_MODE :
+		case WiFiMode::AP :
 			// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 			// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 			Print2('\t', "Connected MAC Addr  : " );
@@ -91,7 +91,7 @@ void Loom_WiFi_I::print_state()
 
 			break;
 
-		case WPA_CLIENT_MODE :
+		case WiFiMode::WPA_CLIENT :
 			// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 			Println3('\t', "SSID:               : ", SSID );
 
@@ -113,8 +113,8 @@ void Loom_WiFi_I::print_state()
 bool Loom_WiFi_I::connect()
 {
 	switch (mode) {
-		case AP_MODE         : return connect_AP();
-		case WPA_CLIENT_MODE : return connect_WPA();
+		case WiFiMode::AP         : return connect_AP();
+		case WiFiMode::WPA_CLIENT : return connect_WPA();
 		default              : return false;
 	}
 }
@@ -134,7 +134,7 @@ bool Loom_WiFi_I::connect_AP()
 {
 	if (!active) return false;
 
-	mode = AP_MODE;
+	mode = WiFiMode::AP;
 
 	// Print the AP network name (SSID);
 	print_module_label();
@@ -212,7 +212,7 @@ bool Loom_WiFi_I::connect_WPA(char* new_SSID, char* new_pass)
 		WiFi.end();
 
 		// If previous mode was WPA_CLIENT try last network
-		if ( (mode == WPA_CLIENT_MODE) && (strlen(new_SSID) == 0) ) {
+		if ( (mode == WiFiMode::WPA_CLIENT) && (strlen(new_SSID) == 0) ) {
 			print_module_label();
 			Println("Try to revert to previous WPA network");
 			status = WiFi.begin(SSID, pass);
@@ -241,7 +241,7 @@ bool Loom_WiFi_I::connect_WPA(char* new_SSID, char* new_pass)
 		device_manager->flash_LED(LED_WiFi_connected);
 	}
 
-	mode = WPA_CLIENT_MODE;
+	mode = WiFiMode::WPA_CLIENT;
 
 	return true;
 }
