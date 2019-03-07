@@ -1,6 +1,8 @@
 
 #include "Loom_FXAS21002.h"
 
+#include <Adafruit_Sensor.h>
+
 
 
 // --- CONSTRUCTOR ---

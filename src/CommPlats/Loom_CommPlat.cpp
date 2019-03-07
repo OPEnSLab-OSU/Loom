@@ -1,7 +1,5 @@
 
 #include "Loom_CommPlat.h"
-// #include "Loom_Device.h"
-// #include "Loom_Macros.h"
 
 
 

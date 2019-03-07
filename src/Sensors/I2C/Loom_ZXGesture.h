@@ -4,7 +4,6 @@
 
 #include "Loom_I2C_Sensor.h"
 
-#include <Wire.h>
 #include <ZX_Sensor.h>
 
 enum ZXMode { ZX_POS, ZX_GEST };

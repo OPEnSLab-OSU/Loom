@@ -1,6 +1,8 @@
 
 #include "Loom_Stepper.h"
 
+#include <Wire.h>
+
 
 // --- CONSTRUCTOR ---
 Loom_Stepper::Loom_Stepper( char* module_name, uint8_t stepper_count ) : LoomActuator( module_name ) 

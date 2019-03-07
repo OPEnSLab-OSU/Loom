@@ -3,6 +3,7 @@
 #define LOOM_I2C_SENSOR_h
 
 #include "../Loom_Sensor.h"
+#include <Wire.h>
 
 
 

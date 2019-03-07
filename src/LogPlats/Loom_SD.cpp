@@ -1,12 +1,10 @@
 
 #include "Loom_SD.h"
-#include "../Loom_Macros.h"
-#include "../Loom_Translator.h"
+
+#include <SPI.h>
 
 #include "../RTC/Loom_RTC.h"
 
-#include <SD.h>
-#include <SPI.h>
 
 
 

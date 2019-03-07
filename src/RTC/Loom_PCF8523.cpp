@@ -1,6 +1,9 @@
 
 #include "Loom_PCF8523.h"
-#include "Loom_Macros.h"
+
+#define EI_NOTEXTERNAL
+#include <EnableInterrupt.h>
+
 
 
 

@@ -5,8 +5,6 @@
 #include "Loom_LogPlat.h"
 
 #include <SD.h>
-#include <SPI.h>
-#include <OSCBundle.h>
 
 
 class LoomRTC;

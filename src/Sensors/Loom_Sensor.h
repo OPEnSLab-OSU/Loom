@@ -5,8 +5,6 @@
 
 #include "Loom_Module.h"
 
-#include <OSCBundle.h>
-
 
 
 class LoomSensor : public LoomModule

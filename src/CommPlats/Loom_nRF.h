@@ -4,16 +4,6 @@
 
 #include "Loom_CommPlat.h"
 
-// #include <RH_RF95.h>
-// #include <RHReliableDatagram.h>
-
-// // LoRa chip pins
-// #define RFM95_CS  8
-// #define RFM95_RST 4
-// #define RFM95_INT 3   // Use this for the M0 (7 for 32u4)
-
-// #define RF95_FREQ 915.0	// Hardware specific, Tx must match Rx   Move to config
-
 
 // // these will be defined in the config file
 #define NRF_SELF_ADDRESS   01

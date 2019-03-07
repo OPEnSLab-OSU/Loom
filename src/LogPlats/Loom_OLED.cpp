@@ -1,6 +1,8 @@
 
 #include "Loom_OLED.h"
 
+#include <Adafruit_GFX.h>
+
 
 
 

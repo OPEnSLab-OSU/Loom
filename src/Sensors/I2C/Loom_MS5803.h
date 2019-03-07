@@ -4,7 +4,6 @@
 
 #include "Loom_I2C_Sensor.h"
 
-#include <Wire.h>
 #include <MS5803_02.h> 
 
 

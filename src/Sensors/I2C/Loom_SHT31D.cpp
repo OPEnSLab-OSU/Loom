@@ -1,7 +1,6 @@
 
 #include "Loom_SHT31D.h"
 
-// #include "Loom_Misc.h"
 
 
 // --- CONSTRUCTOR ---

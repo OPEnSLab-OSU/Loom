@@ -4,7 +4,6 @@
 
 #include "Loom_I2C_Sensor.h"
 
-#include <Adafruit_Sensor.h>
 #include <Adafruit_TSL2591.h>
 
 

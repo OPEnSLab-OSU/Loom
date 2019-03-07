@@ -4,8 +4,6 @@
 
 #include "Loom_Module.h"
 
-#include <OSCBundle.h>
-
 
 
 enum LogPlatform { SDCARD, PUSHINGBOX, OLED, SERIAL_MON };

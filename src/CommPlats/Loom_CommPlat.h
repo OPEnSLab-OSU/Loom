@@ -5,9 +5,6 @@
 
 #include "Loom_Module.h"
 
-#include <OSCBundle.h>
-
-
 
 enum CommPlatform { WIFI, LORA, NRF, SSER };
 // enum CommScope { SCOPE_DEVICE, SCOPE_SUBNET, SCOPE_FAMILY, SCOPE_SUBNET_ONLY, SCOPE_FAMILY_ONLY, SCOPE_ANY };

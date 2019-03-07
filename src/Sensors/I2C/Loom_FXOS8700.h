@@ -4,8 +4,6 @@
 
 #include "Loom_I2C_Sensor.h"
 
-#include <Wire.h>
-#include <Adafruit_Sensor.h>
 #include <Adafruit_FXOS8700.h>
 
 

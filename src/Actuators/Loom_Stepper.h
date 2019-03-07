@@ -4,7 +4,6 @@
 
 #include "Loom_Actuator.h"
 
-#include <Wire.h>
 #include <Adafruit_MotorShield.h>
 #include <Adafruit_PWMServoDriver.h>
 

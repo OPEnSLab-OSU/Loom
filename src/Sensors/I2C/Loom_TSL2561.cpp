@@ -1,6 +1,8 @@
 
 #include "Loom_TSL2561.h"
 
+#include <Adafruit_Sensor.h>
+
 
 
 

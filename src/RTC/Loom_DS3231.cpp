@@ -1,6 +1,9 @@
 
 #include "loom_DS3231.h"
 
+#define EI_NOTEXTERNAL
+#include <EnableInterrupt.h>
+
 
 
 // --- CONSTRUCTOR ---

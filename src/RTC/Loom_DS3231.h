@@ -5,9 +5,6 @@
 
 #include "Loom_RTC.h"
 
-#define EI_NOTEXTERNAL
-#include <EnableInterrupt.h>
-
 
 
 class Loom_DS3231 : public LoomRTC
