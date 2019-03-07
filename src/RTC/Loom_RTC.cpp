@@ -5,11 +5,11 @@
 
 byte LoomRTC::int_pin = 0; 
 
-
+/////////////////////////////////////////////////////////////////////
 const char* LoomRTC::daysOfTheWeek[] = 
 	{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
-
+/////////////////////////////////////////////////////////////////////
 const float LoomRTC::timezone_adjustment[] =
 	{
 		1  /* WAT */, 2    /* AT  */, 3     /* ADT */, 4   /* AST */, 4   /* EDT */, 5  /* EST */, 5  /* CDT */,
@@ -19,7 +19,7 @@ const float LoomRTC::timezone_adjustment[] =
 		-9 /* AWDT*/, -9.5 /* ACST*/, -10.5 /* ACDT*/, -10 /* AEST*/, -11 /* AEDT*/
 	};
 
-
+/////////////////////////////////////////////////////////////////////
 char* LoomRTC::enum_timezone_string(TimeZone t)
 {
 	switch(t) {
@@ -59,8 +59,7 @@ char* LoomRTC::enum_timezone_string(TimeZone t)
 	}
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 LoomRTC::LoomRTC(	char* 	module_name,
 	 
@@ -87,15 +86,15 @@ LoomRTC::LoomRTC(	char* 	module_name,
 	clear_alarms();
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 LoomRTC::~LoomRTC() 
 {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
 void LoomRTC::print_config()
 {
 	LoomModule::print_config();
@@ -105,7 +104,7 @@ void LoomRTC::print_config()
 	Println3('\t', "Get Internet Time   : ", get_internet_time);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomRTC::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 
@@ -116,7 +115,7 @@ void LoomRTC::package(OSCBundle& bndl, char* suffix)
 	append_to_bundle(bndl, id_prefix, "TimeString", timestring);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomRTC::print_time(bool verbose)
 {
 	read_rtc();
@@ -133,7 +132,7 @@ void LoomRTC::print_time(bool verbose)
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomRTC::print_DateTime(DateTime time) 
 {
 	Println("DateTime:");
@@ -146,14 +145,14 @@ void LoomRTC::print_DateTime(DateTime time)
 	Println();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomRTC::read_rtc()
 {
 	get_datestring();
 	get_timestring();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 char* LoomRTC::get_datestring()
 {
 	DateTime time = now();
@@ -161,6 +160,7 @@ char* LoomRTC::get_datestring()
 	return datestring;
 } 
 
+/////////////////////////////////////////////////////////////////////
 void LoomRTC::get_datestring(char* buf)
 {
 	DateTime time = now();
@@ -168,7 +168,7 @@ void LoomRTC::get_datestring(char* buf)
 	strcpy(datestring, buf);
 } 
 
-
+/////////////////////////////////////////////////////////////////////
 char* LoomRTC::get_timestring()
 {
 	DateTime time = now();
@@ -176,7 +176,7 @@ char* LoomRTC::get_timestring()
 	return timestring;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomRTC::get_timestring(char* buf)
 {
 	DateTime time = now();
@@ -184,20 +184,19 @@ void LoomRTC::get_timestring(char* buf)
 	strcpy(timestring, buf);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 char* LoomRTC::get_weekday()
 {
 	return (char*)daysOfTheWeek[ now().dayOfTheWeek() ];
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomRTC::get_weekday(char* buf)
 {
 	strcpy( buf, daysOfTheWeek[ now().dayOfTheWeek() ] );
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 //   0: no timestamp added
 //   1: only date added
 //   2: only time added
@@ -228,11 +227,7 @@ void LoomRTC::get_timestamp(char* header, char* timestamp, char delimiter, uint8
 	}
 }
 
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 void LoomRTC::set_rtc_to_compile_time()
 {
 	// This sets to local time zone
@@ -246,8 +241,7 @@ void LoomRTC::set_rtc_to_compile_time()
 	if (use_utc_time) convert_local_to_utc();
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 bool LoomRTC::set_rtc_from_internet_time()
 {
 	uint32_t unixTime = 0;
@@ -282,7 +276,7 @@ bool LoomRTC::set_rtc_from_internet_time()
 	return internet_time_success;
 } 
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomRTC::convert_local_to_utc(bool to_utc)
 {
 	float adj = ( (to_utc) ? 1. : -1. ) * timezone_adjustment[timezone];
@@ -305,8 +299,7 @@ void LoomRTC::convert_local_to_utc(bool to_utc)
 	Println();
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 bool LoomRTC::rtc_validity_check()
 {
 	DateTime time_check = now();
@@ -325,16 +318,14 @@ bool LoomRTC::rtc_validity_check()
 	return true;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 byte LoomRTC::get_interrupt_pin()
 {
 	return int_pin;
 	// return RTC_Int_Pin;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void LoomRTC::RTC_Wake_ISR()
 {
 	// Detach interrupt to prevent duplicate triggering

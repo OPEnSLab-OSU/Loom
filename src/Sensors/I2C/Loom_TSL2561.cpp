@@ -5,7 +5,7 @@
 
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_TSL2561::Loom_TSL2561(byte i2c_address, char* module_name, char* sensor_description, int gain, int resolution)
 
@@ -41,15 +41,14 @@ Loom_TSL2561::Loom_TSL2561(byte i2c_address, char* module_name, char* sensor_des
 	Println2("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_TSL2561::~Loom_TSL2561() 
 {
 	delete inst_TSL2561;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_TSL2561::print_measurements()
 {
 	print_module_label();
@@ -58,7 +57,7 @@ void Loom_TSL2561::print_measurements()
 	Println4("\t", "LightFull : ", lightFull, " lux");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_TSL2561::measure()
 {
 	uint16_t IR_ar[5], Full_ar[5];
@@ -71,7 +70,7 @@ void Loom_TSL2561::measure()
 	lightFull = (Full_ar[0] + Full_ar[1] + Full_ar[2] + Full_ar[3] + Full_ar[4]) / 5;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_TSL2561::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 

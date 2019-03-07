@@ -7,7 +7,7 @@
 
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_SD::Loom_SD(		char* module_name, bool enable_rate_filter, uint min_filter_delay, byte chip_select, char* default_file)
 	: LoomLogPlat( module_name, enable_rate_filter, min_filter_delay )
@@ -29,13 +29,12 @@ Loom_SD::Loom_SD(		char* module_name, bool enable_rate_filter, uint min_filter_d
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_SD::~Loom_SD() {}
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
 void Loom_SD::print_config() 
 {
 	LoomLogPlat::print_config();
@@ -49,19 +48,19 @@ void Loom_SD::print_config()
 	// }
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_SD::set_default_file(char* filename) 
 { 
 	default_file = filename; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 char* Loom_SD::get_default_file() 
 { 
 	return default_file; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_SD::delete_file(char* file) 
 {
 	if ( !sd_found ) return;
@@ -69,7 +68,7 @@ void Loom_SD::delete_file(char* file)
 	SD.remove(file);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_SD::empty_file(char* file)
 {
 	if ( !sd_found ) return;
@@ -79,7 +78,7 @@ void Loom_SD::empty_file(char* file)
 	SDFile.close();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_SD::list_files()
 {
 	if ( !sd_found ) return;
@@ -87,7 +86,7 @@ void Loom_SD::list_files()
 	print_directory(SD.open("/"), 0);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_SD::dump_file(char* file) 
 {
 	if ( !sd_found ) return false;
@@ -120,15 +119,14 @@ bool Loom_SD::dump_file(char* file)
 	#endif
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_SD::log_bundle(OSCBundle& bndl) 
 {
 	save_bundle(bndl, default_file, 3);
 }
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- SD SAVE BUNDLE --- 
 //
 // @param file       The file to save bundle to
@@ -151,9 +149,7 @@ bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
 	return status;
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 // timestamp options:
 //   0: no timestamp added
 //   1: only date added
@@ -265,9 +261,7 @@ bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int tim
 
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_SD::print_directory(File dir, int numTabs) 
 {
 	if ( !sd_found ) return;

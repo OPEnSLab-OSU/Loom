@@ -1,5 +1,6 @@
 #include "Loom_SlipSerial.h"
 
+/////////////////////////////////////////////////////////////////////
 /// ... Constructor ...
 Loom_SlipSerial::Loom_SlipSerial(
 				char* 	module_name,
@@ -24,11 +25,13 @@ Loom_SlipSerial::Loom_SlipSerial(
 //	SLIPEncodedSerial SLIPSerial(Serial3);
 }
 
+/////////////////////////////////////////////////////////////////////
 /// ... Destructor ...
 Loom_SlipSerial::~Loom_SlipSerial() {
 
 }
 
+/////////////////////////////////////////////////////////////////////
 /// ... Public Methods ...
 
 

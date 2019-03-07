@@ -4,7 +4,7 @@
 // Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
 byte Loom_Digital::pin_nums[DIGITAL_COUNT] = {5, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19};
 
-
+/////////////////////////////////////////////////////////////////////
 Loom_Digital::Loom_Digital(	char*	module_name, 
 							char*	sensor_description,
 
@@ -47,13 +47,14 @@ Loom_Digital::Loom_Digital(	char*	module_name,
 
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Digital::~Loom_Digital()
 {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Digital::print_config()
 {
 	LoomSensor::print_config();
@@ -75,6 +76,7 @@ void Loom_Digital::print_config()
 	Println();
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Digital::print_measurements()
 {
 	print_module_label();
@@ -94,6 +96,7 @@ void Loom_Digital::print_measurements()
 
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Digital::measure()
 {
 	for (int i = 0; i < DIGITAL_COUNT; i++) {
@@ -101,6 +104,7 @@ void Loom_Digital::measure()
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Digital::package(OSCBundle& bndl, char* suffix)
 {
 	// 5,6,9,10,11,12
@@ -117,7 +121,7 @@ void Loom_Digital::package(OSCBundle& bndl, char* suffix)
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Digital::get_digital_val(uint8_t pin)
 {
 	if (pin_enabled[ pin_to_index(pin) ]) {
@@ -128,6 +132,7 @@ bool Loom_Digital::get_digital_val(uint8_t pin)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Digital::set_digital_val(uint8_t pin, bool state)
 {
 	if (pin_enabled[ pin_to_index(pin) ]) {
@@ -136,18 +141,19 @@ void Loom_Digital::set_digital_val(uint8_t pin, bool state)
 	}	
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Digital::get_pin_enabled(uint8_t pin)
 {
 	return pin_enabled[ pin_to_index(pin) ];
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Digital::set_pin_enabled(uint8_t pin, bool e)
 {
 	pin_enabled[ pin_to_index(pin) ] = e;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 uint8_t Loom_Digital::pin_to_index(uint8_t pin)
 {
 	for (int i = 0; i < DIGITAL_COUNT; i++) {

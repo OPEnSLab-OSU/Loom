@@ -2,7 +2,7 @@
 #include "Loom_nRF.h"
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_nRF::Loom_nRF( 	char* module_name,
 						uint16_t  max_message_len,
@@ -62,6 +62,7 @@ Loom_nRF::Loom_nRF( 	char* module_name,
 	// manager->setRetries(this->retry_count);
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_nRF::~Loom_nRF() 
 {
@@ -69,9 +70,8 @@ Loom_nRF::~Loom_nRF()
 	// delete manager;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
 void Loom_nRF::print_config() 
 {
 	LoomCommPlat::print_config();
@@ -82,8 +82,7 @@ void Loom_nRF::print_config()
 	Println3('\t', "Retry Timeout       : ", retry_timeout );
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // Build OSC Bundle from packet if any exists
 bool Loom_nRF::receive_bundle(OSCBundle& bndl) 
 {
@@ -125,26 +124,26 @@ bool Loom_nRF::receive_bundle(OSCBundle& bndl)
 	// return false;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_nRF::send_bundle(OSCBundle& bndl, uint16_t destination) 
 {
 
 }
 
+/////////////////////////////////////////////////////////////////////
 bool Loom_nRF::send_bundle(OSCBundle& bndl) 
 {
 	send_bundle(bndl, friend_address);
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // Broadcast an OSC bundle
 void Loom_nRF::broadcast_bundle(OSCBundle& bndl) 
 {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_nRF::set_address(uint addr)    // Need to test this
 { 
 	// address = addr;
@@ -152,19 +151,19 @@ void Loom_nRF::set_address(uint addr)    // Need to test this
 	// manager = new RHReliableDatagram(*driver, address);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 uint Loom_nRF::get_address() 
 { 
 	return address; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_nRF::set_friend_address(uint addr) 
 { 
 	friend_address = addr; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 uint Loom_nRF::get_friend_address() 
 { 
 	return friend_address; 

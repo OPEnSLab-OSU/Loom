@@ -1,11 +1,8 @@
 
 #include "Loom_Fona.h"
 
-// int test = 0;
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Fona::Loom_Fona(	char* module_name,
 
@@ -22,13 +19,14 @@ Loom_Fona::Loom_Fona(	char* module_name,
 
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Fona::~Loom_Fona()
 {
 	delete fona;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Fona::print_config()
 {
 	LoomInternetPlat::print_config();
@@ -36,20 +34,20 @@ void Loom_Fona::print_config()
 	// Println2('\t', "IP:                 : " );	
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Fona::print_state()
 {
 	LoomInternetPlat::print_state();	
 	// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Fona::connect()
 {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Fona::is_connected()
 {
 

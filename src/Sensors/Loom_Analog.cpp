@@ -14,7 +14,7 @@
 // Should support taking an extra float for use in conversion
 	// Like temperature for electrical conductivity 
 
-
+/////////////////////////////////////////////////////////////////////
 float Loom_Analog::convert(uint8_t pin, uint16_t analog)
 {
 	switch(conversions[pin]) {
@@ -28,10 +28,7 @@ float Loom_Analog::convert(uint8_t pin, uint16_t analog)
 	}
 }
 
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Analog::Loom_Analog(	char*	module_name 	,
 							char*	sensor_description 	,
@@ -98,12 +95,12 @@ Loom_Analog::Loom_Analog(	char*	module_name 	,
 
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Analog::~Loom_Analog() {}
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
 void Loom_Analog::print_config()
 {
 	LoomSensor::print_config();
@@ -121,7 +118,7 @@ void Loom_Analog::print_config()
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Analog::print_measurements()
 {
 	print_module_label();
@@ -137,7 +134,7 @@ void Loom_Analog::print_measurements()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Analog::measure()
 {
 	battery = read_analog(VBATPIN) * 2 * 3.3 / (float)pow(2, read_resolution);
@@ -149,7 +146,7 @@ void Loom_Analog::measure()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // This might be where analog conversions are applied
 void Loom_Analog::package(OSCBundle& bndl, char* suffix)
 {	
@@ -174,43 +171,37 @@ void Loom_Analog::package(OSCBundle& bndl, char* suffix)
 	}	
 }
 
-
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Analog::message_route(OSCMessage& msg, int address_offset) 
 {
 	// Enable or disable individual pins
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Analog::set_analog_resolution(uint8_t res) 
 { 
 	analogReadResolution(read_resolution = res); 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 uint8_t Loom_Analog::get_analog_resolution() 
 { 
 	return read_resolution; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 int Loom_Analog::get_analog_val(uint8_t pin) 
 {
 	return ( (pin >= 0) && (pin < ANALOG_COUNT) ) ? analog_vals[pin] : -1;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Analog::get_pin_enabled(uint8_t pin)
 {
 	return pin_enabled[pin];
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Analog::set_pin_enabled(uint8_t pin, bool e)
 {
 	pin_enabled[pin] = e;
@@ -219,26 +210,25 @@ void Loom_Analog::set_pin_enabled(uint8_t pin, bool e)
 	}
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 AnalogConversion Loom_Analog::get_conversion(uint8_t pin)
 {
 	return conversions[pin];
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Analog::set_conversion(uint8_t pin, AnalogConversion c)
 {
 	conversions[pin] = c;
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Analog::set_enable_conversions(bool e)
 {
 	enable_conversions = e;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 uint16_t Loom_Analog::read_analog(uint8_t chnl)
 {
 	int i = num_samples;
@@ -258,20 +248,13 @@ uint16_t Loom_Analog::read_analog(uint8_t chnl)
 	}
 } 
 
-
-
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 float Loom_Analog::convert_voltage(uint16_t analog)
 {
 	return analog*3.3/pow(2, read_resolution);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 #define reverse_connect 1
 #define THERMISTORNOMINAL 	10000   // resistance at 25 degrees C
 #define TEMPERATURENOMINAL 	25   	// temp. for nominal resistance (almost always 25 C)
@@ -305,7 +288,7 @@ float Loom_Analog::convert_thermistor(uint16_t analog)
 	return steinhart;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 #define PH_Offset 0.0
 
 float Loom_Analog::convert_pH(uint16_t analog)
@@ -315,7 +298,7 @@ float Loom_Analog::convert_pH(uint16_t analog)
 	return 3.5*voltage + PH_Offset;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 float Loom_Analog::convert_turbidity(uint16_t analog)
 {
 	float voltage = convert_voltage(analog);
@@ -323,7 +306,7 @@ float Loom_Analog::convert_turbidity(uint16_t analog)
 	return -1120.4 * (voltage * voltage) + (5742.3 * voltage) - 4352.9;
 }	
 
-
+/////////////////////////////////////////////////////////////////////
 #define EC_TEMP 25
 
 float Loom_Analog::convert_EC(uint16_t analog)
@@ -337,7 +320,7 @@ float Loom_Analog::convert_EC(uint16_t analog)
 	return EC;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 float Loom_Analog::convert_TDS(uint16_t analog)
 {
 	return convert_EC(analog)/2.;

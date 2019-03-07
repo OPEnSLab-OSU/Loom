@@ -2,7 +2,7 @@
 #include "Loom_InternetWiFi.h"
 
 
-
+/////////////////////////////////////////////////////////////////////
 char* Loom_WiFi_I::enum_wifi_mode_string(WiFiMode c)
 {
 	switch(c) {
@@ -12,7 +12,7 @@ char* Loom_WiFi_I::enum_wifi_mode_string(WiFiMode c)
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_WiFi_I::Loom_WiFi_I(	char* module_name,
 
@@ -43,6 +43,7 @@ Loom_WiFi_I::Loom_WiFi_I(	char* module_name,
 	connect();
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_WiFi_I::~Loom_WiFi_I()
 {
@@ -54,9 +55,7 @@ Loom_WiFi_I::~Loom_WiFi_I()
 	}
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_WiFi_I::print_config()
 {
 	if (!active) return;
@@ -65,7 +64,7 @@ void Loom_WiFi_I::print_config()
 	Println3('\t', "Mode:               : ", enum_wifi_mode_string(mode) );
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_WiFi_I::print_state()
 {
 	if (!active) return;
@@ -108,8 +107,7 @@ void Loom_WiFi_I::print_state()
 	Println();
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_WiFi_I::connect()
 {
 	switch (mode) {
@@ -119,7 +117,7 @@ bool Loom_WiFi_I::connect()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_WiFi_I::is_connected()
 {
 	if (!active) return false;
@@ -128,8 +126,7 @@ bool Loom_WiFi_I::is_connected()
 
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_WiFi_I::connect_AP()
 {
 	if (!active) return false;
@@ -170,6 +167,7 @@ bool Loom_WiFi_I::connect_AP()
 	return true;
 }
 
+/////////////////////////////////////////////////////////////////////
 // Omitting SSID and password will try to connect in saved network
 //   If they are provided but cannot connect, will revert to last mode,
 //   Falling back to AP if all else fails
@@ -246,7 +244,7 @@ bool Loom_WiFi_I::connect_WPA(char* new_SSID, char* new_pass)
 	return true;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 uint32_t Loom_WiFi_I::get_time()
 {
 	if (!active) return 0;
@@ -254,7 +252,7 @@ uint32_t Loom_WiFi_I::get_time()
 	return WiFi.getTime();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_WiFi_I::print_MAC(byte mac[])
 {
 	for (int i = 0; i < 5; i++) {

@@ -1,7 +1,7 @@
 
 #include "Loom_Sensor.h"
 
-
+/////////////////////////////////////////////////////////////////////
 LoomSensor::LoomSensor(	char* 	module_name,
 	 
 						char* 	sensor_description, 
@@ -13,11 +13,11 @@ LoomSensor::LoomSensor(	char* 	module_name,
 	this->num_samples        = num_samples;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 LoomSensor::~LoomSensor() {}
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomSensor::print_config()
 {
 	LoomModule::print_config();
@@ -27,16 +27,16 @@ void LoomSensor::print_config()
 }
 
 
+/////////////////////////////////////////////////////////////////////
+void LoomSensor::set_num_samples(uint8_t n) 
+{ 
+	num_samples = n; 
+}
 
-// void LoomSensor::calibrate() {}
-
-
-// bool LoomSensor::message_route(OSCMessage& msg, int address_offset) {}
-
-
-void LoomSensor::set_num_samples(uint8_t n) { num_samples = n; }
-
-
-uint8_t LoomSensor::get_num_samples() { return num_samples; }
+/////////////////////////////////////////////////////////////////////
+uint8_t LoomSensor::get_num_samples() 
+{ 
+	return num_samples; 
+}
 
 

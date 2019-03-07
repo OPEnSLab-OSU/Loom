@@ -4,7 +4,7 @@
 #include <Adafruit_Sensor.h>
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_FXAS21002::Loom_FXAS21002(byte i2c_address, char* module_name, char* sensor_description)
 
@@ -17,15 +17,14 @@ Loom_FXAS21002::Loom_FXAS21002(byte i2c_address, char* module_name, char* sensor
 	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_FXAS21002::~Loom_FXAS21002() 
 {
 	delete inst_FXAS21002;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_FXAS21002::print_measurements()
 {
 	print_module_label();
@@ -35,7 +34,7 @@ void Loom_FXAS21002::print_measurements()
 	Println3("\t", "gz: ", gyro[2]);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_FXAS21002::measure()
 {
 	sensors_event_t event;
@@ -46,7 +45,7 @@ void Loom_FXAS21002::measure()
 	gyro[2] = event.gyro.z;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_FXAS21002::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 

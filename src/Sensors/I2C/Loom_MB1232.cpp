@@ -2,8 +2,7 @@
 #include "Loom_MB1232.h"
 
 
-
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_MB1232::Loom_MB1232(byte i2c_address, char* module_name, char* sensor_description)
 
@@ -22,15 +21,14 @@ Loom_MB1232::Loom_MB1232(byte i2c_address, char* module_name, char* sensor_descr
 	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_MB1232::~Loom_MB1232() 
 {
 
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_MB1232::print_measurements()
 {
 	print_module_label();
@@ -38,7 +36,7 @@ void Loom_MB1232::print_measurements()
 	Println4("\t", "Range: ", range, " cm");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_MB1232::measure()
 {
 	Wire.beginTransmission(i2c_address);
@@ -64,7 +62,7 @@ void Loom_MB1232::measure()
 	}  
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_MB1232::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 

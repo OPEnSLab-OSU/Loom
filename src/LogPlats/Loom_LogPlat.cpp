@@ -3,7 +3,7 @@
 
 
 
-
+/////////////////////////////////////////////////////////////////////
 char* LoomLogPlat::enum_log_plat_string(LogPlatform p)
 {
 	switch(p) {
@@ -14,7 +14,7 @@ char* LoomLogPlat::enum_log_plat_string(LogPlatform p)
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 LoomLogPlat::LoomLogPlat( char* module_name, bool enable_rate_filter, uint min_filter_delay) 
 	: LoomModule( module_name )
@@ -24,13 +24,12 @@ LoomLogPlat::LoomLogPlat( char* module_name, bool enable_rate_filter, uint min_f
 	this->last_log_millis		= 0;  					// Not sure if there will be any issue with the first log 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 LoomLogPlat::~LoomLogPlat() {}
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
 void LoomLogPlat::print_config() 
 {
 	LoomModule::print_config();
@@ -41,24 +40,25 @@ void LoomLogPlat::print_config()
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomLogPlat::package(OSCBundle& bndl, char* suffix) 
 {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomLogPlat::measure() 
 {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool LoomLogPlat::message_route(OSCMessage& msg, int address_offset) 
 {
 	// maybe set subnet_scope 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool LoomLogPlat::check_millis() 
 {
 	if ( (millis() > min_filter_delay) && ( (millis()-last_log_millis) < min_filter_delay ) ) {

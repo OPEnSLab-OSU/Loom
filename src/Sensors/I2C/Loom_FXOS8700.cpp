@@ -4,7 +4,7 @@
 #include <Adafruit_Sensor.h>
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_FXOS8700::Loom_FXOS8700(byte i2c_address, char* module_name, char* sensor_description)
 
@@ -17,14 +17,14 @@ Loom_FXOS8700::Loom_FXOS8700(byte i2c_address, char* module_name, char* sensor_d
 	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_FXOS8700::~Loom_FXOS8700() 
 {
 	delete inst_FXOS8700;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_FXOS8700::print_measurements()
 {
 	print_module_label();
@@ -37,7 +37,7 @@ void Loom_FXOS8700::print_measurements()
 	Println4("\t", "MZ: ", mag[2], " uT");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_FXOS8700::measure()
 {
 	sensors_event_t aevent, mevent;
@@ -52,7 +52,7 @@ void Loom_FXOS8700::measure()
 	mag[2] = mevent.magnetic.z;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_FXOS8700::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 

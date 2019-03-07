@@ -17,8 +17,7 @@
 
 
 
-
-
+/////////////////////////////////////////////////////////////////////
 const char* LoomManager::enum_device_type_string(DeviceType t)
 {
 	switch(t) {
@@ -29,8 +28,7 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 	}
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint instance, DeviceType device_type, Verbosity print_verbosity, Verbosity package_verbosity)
 {
@@ -56,24 +54,21 @@ LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint
 
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 LoomManager::~LoomManager() 
 {
 	// Impelement this
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
-
-
 void LoomManager::print_device_label()
 {
 	Print3("[", device_name, "] ");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::print_config() 
 {
 	print_device_label();
@@ -89,7 +84,7 @@ void LoomManager::print_config()
 	list_modules();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len)
 {
 	print_device_label();
@@ -106,7 +101,7 @@ void LoomManager::add_module_aux(LoomModule** modules, LoomModule* module, uint&
 	module->link_device_manager(this);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager) 
 {
 	print_device_label();
@@ -122,6 +117,7 @@ void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(Loom_Sleep_Manager* sleep_manager) 
 {
 	print_device_label();
@@ -141,21 +137,25 @@ void LoomManager::add_module(Loom_Sleep_Manager* sleep_manager)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomModule* module) 
 {
 	add_module_aux(other_modules, module, other_module_count, MAX_OTHER_MODULES);
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomSensor* sensor) 
 {
 	add_module_aux( (LoomModule**)sensor_modules, (LoomModule*)sensor, sensor_count, MAX_SENSORS );
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomActuator* actuator) 
 {
 	add_module_aux( (LoomModule**)actuator_modules, (LoomModule*)actuator, actuator_count, MAX_ACTUATORS );
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomRTC* rtc) 
 {
 	add_module_aux( (LoomModule**)rtc_modules, (LoomModule*)rtc, rtc_count, MAX_RTCS );
@@ -167,78 +167,83 @@ void LoomManager::add_module(LoomRTC* rtc)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomCommPlat* comm_plat) 
 {
 	add_module_aux( (LoomModule**)comm_modules, (LoomModule*)comm_plat, comm_count, MAX_COMMS );
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomInternetPlat* internet_module) 
 {
 	add_module_aux( (LoomModule**)internet_modules, (LoomModule*)internet_module, internet_count, MAX_INTERNETS );
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomLogPlat* log_plat) 
 {	
 	add_module_aux( (LoomModule**)log_modules, (LoomModule*)log_plat, log_count, MAX_LOGS );
 }
 
-
-	
+/////////////////////////////////////////////////////////////////////
 Loom_Interrupt_Manager* LoomManager::get_interrupt_manager()
 {
 	return interrupt_manager;
 }
 
+/////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager* LoomManager::get_sleep_manager()
 {
 	return sleep_manager;
 }
 
+/////////////////////////////////////////////////////////////////////
 LoomModule* LoomManager::get_other_module(int idx)
 {
 	return (idx < other_module_count) ? other_modules[idx] : NULL;
 }
 
+/////////////////////////////////////////////////////////////////////
 LoomSensor* LoomManager::get_sensor_module(int idx)
 {
 	return (idx < sensor_count) ? sensor_modules[idx] : NULL;
 }
 
+/////////////////////////////////////////////////////////////////////
 LoomActuator* LoomManager::get_actuator_module(int idx)
 {
 	return (idx < actuator_count) ? actuator_modules[idx] : NULL;
 }
 
+/////////////////////////////////////////////////////////////////////
 LoomRTC* LoomManager::get_rtc_module(int idx)
 {
 	return (idx < rtc_count) ? rtc_modules[idx] : NULL;
 }
 
+/////////////////////////////////////////////////////////////////////
 LoomCommPlat* LoomManager::get_comm_plat_module(int idx)
 {
 	return (idx < comm_count) ? comm_modules[idx] : NULL;
 }
 
+/////////////////////////////////////////////////////////////////////
 LoomInternetPlat* LoomManager::get_internet_plat_module(int idx)
 {
 	return (idx < internet_count) ? internet_modules[idx] : NULL;
 }
 
+/////////////////////////////////////////////////////////////////////
 LoomLogPlat* LoomManager::get_log_plat_module(int idx)
 {
 	return (idx < log_count) ? log_modules[idx] : NULL;
 }
 
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 // void module_enable(LoomModule* LM, bool e) ?
 
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::list_modules_aux(LoomModule** modules, uint len, char* module_type)
 {
 	Println5("\t", module_type, " (", len, "):");
@@ -249,7 +254,7 @@ void LoomManager::list_modules_aux(LoomModule** modules, uint len, char* module_
 	}	
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::list_modules()
 {
 	print_device_label();
@@ -264,18 +269,19 @@ void LoomManager::list_modules()
 	list_modules_aux( (LoomModule**)log_modules      , log_count          , "Logging Platforms" ); 
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::set_device_name(char* device_name)
 {
 	this->device_name = device_name;
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::get_device_name(char* buf)
 {
 	sprintf(buf, "%s", device_name); 
 }
 
+/////////////////////////////////////////////////////////////////////
 char* LoomManager::get_device_name()
 {
 	char name[50];
@@ -283,14 +289,13 @@ char* LoomManager::get_device_name()
 	return (char*)name;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::packet_header_family(char* buf)
 { 
 	sprintf(buf, "/F/%s", family); 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 char* LoomManager::packet_header_family() 
 {
 	char result[50];
@@ -298,13 +303,13 @@ char* LoomManager::packet_header_family()
 	return (char*)result;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::packet_header_subnet(char* buf)
 { 
 	sprintf(buf, "/S/%s/%d", family, family_num); 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 char* LoomManager::packet_header_subnet() 
 {
 	char result[50];
@@ -312,13 +317,13 @@ char* LoomManager::packet_header_subnet()
 	return (char*)result;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::packet_header_device(char* buf)
 { 
 	sprintf(buf, "/D/%s/%d/%s/%d", family, family_num, device_name, instance); 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 char* LoomManager::packet_header_device() 
 {
 	char result[50];
@@ -326,67 +331,73 @@ char* LoomManager::packet_header_device()
 	return (char*)result;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 char* LoomManager::get_family() 
 { 
 	return family; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void  LoomManager::set_family(char* f) 
 { 
 	family = f; 
 }
 
+/////////////////////////////////////////////////////////////////////
 int  LoomManager::get_family_num() 
 { 
 	return family_num; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::set_family_num(int n) 
 { 
 	family_num = n; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 int  LoomManager::get_instance_num() 
 { 
 	return instance; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::set_instance_num(int n) 
 { 
 	instance = n; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 DeviceType LoomManager::get_device_type() 
 { 
 	return device_type; 
 }
 
-// void set_device_type(DeviceType t) {device_type = t; }
+/////////////////////////////////////////////////////////////////////
+// void set_device_type(DeviceType t) 
+// {
+// 	device_type = t; 
+// }
 
-
-
+/////////////////////////////////////////////////////////////////////
 Verbosity LoomManager::get_print_verbosity()
 {
 	return print_verbosity;
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::set_print_verbosity(Verbosity v)
 {
 	print_verbosity = v;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 Verbosity LoomManager::get_package_verbosity()
 {
 	return package_verbosity;
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::set_package_verbosity(Verbosity v)
 {
 	package_verbosity = v;
@@ -412,6 +423,7 @@ void LoomManager::set_package_verbosity(Verbosity v)
 // void print_data
 
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::measure_aux(LoomModule** modules, uint len)
 {
 	for (int i = 0; i < len; i++) {
@@ -421,6 +433,7 @@ void LoomManager::measure_aux(LoomModule** modules, uint len)
 	}	
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::package_aux(LoomModule** modules, uint len)
 {
 	for (int i = 0; i < len; i++) {
@@ -430,14 +443,14 @@ void LoomManager::package_aux(LoomModule** modules, uint len)
 	}	
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::measure()
 {
 	measure_aux( (LoomModule**)sensor_modules   , sensor_count ); 
 	measure_aux( (LoomModule**)other_modules    , other_module_count ); 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::package() 
 {
 	bundle.empty();
@@ -453,21 +466,21 @@ void LoomManager::package()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::package(OSCBundle& bndl) 
 {
 	package();
 	deep_copy_bundle(bundle, bndl);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::print_current_bundle() 
 {
 	Println("Member Bundle:");
 	print_bundle(bundle);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomManager::flash_LED(uint count, uint time_high, uint time_low)
 {
 	for (int i = 0; i < count; i++) {
@@ -478,6 +491,7 @@ void LoomManager::flash_LED(uint count, uint time_high, uint time_low)
 	} 
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomManager::flash_LED(uint sequence[3])
 {
 	flash_LED(sequence[0], sequence[1], sequence[2]);

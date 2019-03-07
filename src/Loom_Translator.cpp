@@ -8,7 +8,7 @@
 // ================================================================
 
 
-
+/////////////////////////////////////////////////////////////////////
 void flatten_bundle(OSCBundle& bndl, OSCBundle& out_bndl)
 {
 	// Make sure bundle has more than one message
@@ -62,6 +62,7 @@ void flatten_bundle(OSCBundle& bndl, OSCBundle& out_bndl)
 	out_bndl.add(new_msg);
 }
 
+/////////////////////////////////////////////////////////////////////
 void flatten_bundle(OSCBundle& bndl)
 {
 	OSCBundle out_bndl;
@@ -81,7 +82,7 @@ void flatten_bundle(OSCBundle& bndl)
 // ================================================================
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONVERT OSC TO ARRAY KEY VALUE --- 
 //
 // Converts an OSC bundle to an array formated as:
@@ -110,7 +111,7 @@ void convert_bundle_to_array_key_value(OSCBundle& bndl, String key_values[], int
 }
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONVERT OSC TO ARRAYS ASSOC --- 
 //
 // Converts an OSC bundle to two associated arrays,
@@ -153,7 +154,7 @@ void convert_bundle_to_arrays_assoc(OSCBundle& bndl, String keys[], String value
 // ================================================================
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONVERT ARRAY KEY VALUES TO ASSOC ---
 // 
 // Converts and array formatted as:
@@ -182,7 +183,7 @@ void convert_array_key_value_to_assoc(String key_values [], String keys [], Stri
 }
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONVERT ARRAY KEY VALUES TO ASSOC ---
 // 
 // Converts two associated arrays formatted as:
@@ -238,8 +239,7 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 //    5: Int-All
 //    6: Float-All
 
-
-//	
+/////////////////////////////////////////////////////////////////////
 // Convert an array formatted as:
 //   [key1, value1, key2, value2 ...]
 // to an OSC bundle with either single or multiple messages
@@ -305,7 +305,7 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, ch
 
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONVERT ASSOC ARRAYS TO BUNDLE ---
 //
 // Convert an array formatted as:
@@ -338,22 +338,25 @@ void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle&
 // ===              CONVERSION BETWEEN DATA TYPES               ===
 // ================================================================
 
-
+/////////////////////////////////////////////////////////////////////
 int convert_string_to_int(char* s) 
 { 
 	return (int)strtol(s, NULL, 10); 
 }
 
+/////////////////////////////////////////////////////////////////////
 float convert_string_to_float(char* s) 
 { 
 	return strtof(s, NULL); 
 }
 
+/////////////////////////////////////////////////////////////////////
 int convert_string_to_int(String s) 
 { 
 	return (int)strtol(s.c_str(), NULL, 10); 
 }
 
+/////////////////////////////////////////////////////////////////////
 float convert_string_to_float(String s) 
 { 
 	return strtof(s.c_str(), NULL); 
@@ -366,6 +369,7 @@ float convert_string_to_float(String s)
 // ===              CONVERSION BETWEEN ARRAY TYPES              ===
 // ================================================================
 
+/////////////////////////////////////////////////////////////////////
 void convert_array(String src [], int dest [], int count)
 { 
 	char buf[20]; 
@@ -375,6 +379,7 @@ void convert_array(String src [], int dest [], int count)
 	} 
 }
 
+/////////////////////////////////////////////////////////////////////
 void convert_array(String src [], float dest [], int count)
 { 
 	char buf[20]; 
@@ -384,6 +389,7 @@ void convert_array(String src [], float dest [], int count)
 	} 
 }
 
+/////////////////////////////////////////////////////////////////////
 void convert_array(String src [], char dest [][20], int count)
 { 
 	for (int i = 0; i < count; i++) 

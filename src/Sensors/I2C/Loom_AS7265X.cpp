@@ -2,7 +2,7 @@
 #include "Loom_AS7265X.h"
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_AS7265X::Loom_AS7265X(byte i2c_address, char* module_name, char* sensor_description, bool use_bulb, byte gain, byte mode, byte integration_time)
 
@@ -73,15 +73,14 @@ Loom_AS7265X::Loom_AS7265X(byte i2c_address, char* module_name, char* sensor_des
 	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_AS7265X::~Loom_AS7265X() 
 {
 
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_AS7265X::print_measurements()
 {
 	print_module_label();
@@ -95,7 +94,7 @@ void Loom_AS7265X::print_measurements()
 	for (int i = 0; i < 6; i++) { Println3("\t", "R: ", nir[i]); }
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_AS7265X::measure()
 {
 	if (use_bulb) {
@@ -129,7 +128,7 @@ void Loom_AS7265X::measure()
 	nir[5] = inst_AS7265X.getCalibratedW();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_AS7265X::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 
@@ -160,23 +159,27 @@ void Loom_AS7265X::package(OSCBundle& bndl, char* suffix)
 
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_AS7265X::enable_bulb(bool e)
 {
 	use_bulb = e;
 }
 
+/////////////////////////////////////////////////////////////////////
 // 1 to 64x
 void Loom_AS7265X::set_gain(byte gain) 
 {
 	inst_AS7265X.setGain(gain);
 }
 
+/////////////////////////////////////////////////////////////////////
 //4 channel, other 4 channel, 6 chan, or 6 chan one shot
 void Loom_AS7265X::set_mode(byte mode) 
 {
 	inst_AS7265X.setMeasurementMode(mode);
 }
 
+/////////////////////////////////////////////////////////////////////
 //50 * 2.8ms = 140ms. 0 to 255 is valid.  (49 is default)
 //If you use Mode 2 or 3 (all the colors) then integration time is double. 140*2 = 280ms between readings.
 void Loom_AS7265X::set_integration_time(byte time) 

@@ -2,7 +2,7 @@
 #include "Loom_LoRa.h"
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_LoRa::Loom_LoRa( 	char* module_name,
 						uint16_t  max_message_len,
@@ -62,6 +62,7 @@ Loom_LoRa::Loom_LoRa( 	char* module_name,
 	manager->setRetries(this->retry_count);
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_LoRa::~Loom_LoRa() 
 {
@@ -69,9 +70,8 @@ Loom_LoRa::~Loom_LoRa()
 	delete manager;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
 void Loom_LoRa::print_config() 
 {
 	LoomCommPlat::print_config();
@@ -82,8 +82,7 @@ void Loom_LoRa::print_config()
 	Println3('\t', "Retry Timeout       : ", retry_timeout );
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // Build OSC Bundle from packet if any exists
 bool Loom_LoRa::receive_bundle(OSCBundle& bndl) 
 {
@@ -125,7 +124,7 @@ bool Loom_LoRa::receive_bundle(OSCBundle& bndl)
 	return false;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // Send an OSC bundle
 // Should overload or use default args to optionally allow default address
 bool Loom_LoRa::send_bundle(OSCBundle& bndl, uint16_t destination) 
@@ -151,20 +150,20 @@ bool Loom_LoRa::send_bundle(OSCBundle& bndl, uint16_t destination)
 	return is_sent;
 }
 
+/////////////////////////////////////////////////////////////////////
 bool Loom_LoRa::send_bundle(OSCBundle& bndl) 
 {
 	send_bundle(bndl, friend_address);
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // Broadcast an OSC bundle
 void Loom_LoRa::broadcast_bundle(OSCBundle& bndl) 
 {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_LoRa::set_address(uint addr)    // Need to test this
 { 
 	address = addr;
@@ -172,19 +171,19 @@ void Loom_LoRa::set_address(uint addr)    // Need to test this
 	manager = new RHReliableDatagram(*driver, address);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 uint Loom_LoRa::get_address() 
 { 
 	return address; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_LoRa::set_friend_address(uint addr) 
 { 
 	friend_address = addr; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 uint Loom_LoRa::get_friend_address() 
 { 
 	return friend_address; 

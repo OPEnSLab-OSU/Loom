@@ -1,7 +1,7 @@
 
 #include "Loom_InternetPlat.h"
 
-
+/////////////////////////////////////////////////////////////////////
 char* LoomInternetPlat::enum_internet_plat_string(InternetPlatform p)
 {
 	switch(p) {
@@ -11,8 +11,7 @@ char* LoomInternetPlat::enum_internet_plat_string(InternetPlatform p)
 	}
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 LoomInternetPlat::LoomInternetPlat(	char* module_name
 
@@ -21,19 +20,20 @@ LoomInternetPlat::LoomInternetPlat(	char* module_name
 
 }
 
-	// --- DESTRUCTOR ---
+/////////////////////////////////////////////////////////////////////
+// --- DESTRUCTOR ---
 LoomInternetPlat::~LoomInternetPlat()
 {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomInternetPlat::print_config()
 {
 	LoomModule::print_config();	
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomInternetPlat::print_state()
 {
 	Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );

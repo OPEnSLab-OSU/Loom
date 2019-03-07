@@ -6,10 +6,7 @@
 
 
 
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_PCF8523::Loom_PCF8523(	char* 	module_name,
 	 
@@ -59,29 +56,27 @@ Loom_PCF8523::Loom_PCF8523(	char* 	module_name,
 	print_time();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_PCF8523::~Loom_PCF8523() 
 {
 	delete rtc_inst;
 }	
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
-
 void Loom_PCF8523::print_config()
 {
 	LoomRTC::print_config();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 DateTime Loom_PCF8523::now()
 {
 	return rtc_inst->now();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_PCF8523::time_adjust(DateTime time)
 {
 	rtc_inst->adjust(time);

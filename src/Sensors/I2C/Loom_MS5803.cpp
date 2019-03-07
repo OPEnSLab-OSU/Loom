@@ -3,7 +3,7 @@
 
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_MS5803::Loom_MS5803(byte i2c_address, char* module_name, char* sensor_description)
 
@@ -16,15 +16,14 @@ Loom_MS5803::Loom_MS5803(byte i2c_address, char* module_name, char* sensor_descr
 	Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_MS5803::~Loom_MS5803() 
 {
 	delete inst_MS5803;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_MS5803::print_measurements()
 {
 	print_module_label();
@@ -33,7 +32,7 @@ void Loom_MS5803::print_measurements()
 	Println4("\t", "Temperature : ", temp     , " C");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_MS5803::measure()
 {
 	inst_MS5803->readSensor();
@@ -42,7 +41,7 @@ void Loom_MS5803::measure()
 	temp     = inst_MS5803->temperature();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_MS5803::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 

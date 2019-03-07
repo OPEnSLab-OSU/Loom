@@ -35,7 +35,7 @@ const byte Loom_Multiplexer::known_addresses[] =
 	0x77  // MS5803
 };
 
-
+/////////////////////////////////////////////////////////////////////
 LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 {
 	switch (i2c_address) {
@@ -73,11 +73,7 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 	}
 }
 
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 Loom_Multiplexer::Loom_Multiplexer(	char* 	module_name,
 
 									byte	i2c_address,
@@ -111,8 +107,7 @@ Loom_Multiplexer::Loom_Multiplexer(	char* 	module_name,
 	Println("Setup Complete");
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Multiplexer::~Loom_Multiplexer() 
 {
@@ -124,10 +119,8 @@ Loom_Multiplexer::~Loom_Multiplexer()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
-
 void Loom_Multiplexer::print_config()
 {
 	LoomModule::print_config();
@@ -138,7 +131,7 @@ void Loom_Multiplexer::print_config()
 	Println3('\t', "Update Period (ms)  : ", update_period);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::print_state()
 {
 	print_module_label();
@@ -156,7 +149,7 @@ void Loom_Multiplexer::print_state()
 	Println();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::measure()
 {
 	refresh_sensors();
@@ -169,7 +162,7 @@ void Loom_Multiplexer::measure()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::print_measurements()
 {
 	for (uint8_t i = 0; i < num_ports; i++) {
@@ -180,6 +173,7 @@ void Loom_Multiplexer::print_measurements()
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::package(OSCBundle& bndl, char* suffix)
 {
 	for (uint8_t i = 0; i < num_ports; i++) {
@@ -192,9 +186,7 @@ void Loom_Multiplexer::package(OSCBundle& bndl, char* suffix)
 	}
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Multiplexer::message_route(OSCMessage& msg, int address_offset)
 {
 	// Mux routing 
@@ -202,7 +194,7 @@ bool Loom_Multiplexer::message_route(OSCMessage& msg, int address_offset)
 	// Sensor routing?
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::get_sensor_list(OSCBundle& bndl) // populate an OSC bundle
 {
 	refresh_sensors();
@@ -225,31 +217,31 @@ void Loom_Multiplexer::get_sensor_list(OSCBundle& bndl) // populate an OSC bundl
 	}	
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::set_is_dynamic(bool dynamic)
 {
 	dynamic_list = dynamic;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Multiplexer::get_is_dynamic()
 {
 	return dynamic_list;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::set_update_period(int period)
 {
 	update_period = period;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 int  Loom_Multiplexer::get_update_period()
 {
 	return update_period;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::refresh_sensors()
 {
 	byte previous, current;
@@ -310,7 +302,7 @@ void Loom_Multiplexer::refresh_sensors()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 byte Loom_Multiplexer::get_i2c_on_port(uint8_t port)
 {
 	tca_select(port);
@@ -333,13 +325,13 @@ byte Loom_Multiplexer::get_i2c_on_port(uint8_t port)
 	return 0x00; // No sensor found
 }
 
-
+/////////////////////////////////////////////////////////////////////
 LoomI2CSensor* Loom_Multiplexer::get_sensor(uint8_t port)
 {
 	return sensors[port];
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::tca_select(uint8_t port) 
 {
 	if (port < num_ports) {

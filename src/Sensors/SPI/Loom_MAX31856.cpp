@@ -2,7 +2,7 @@
 #include "Loom_MAX31856.h"
 
 
-
+/////////////////////////////////////////////////////////////////////
 Loom_MAX31856::Loom_MAX31856(	char* 	module_name,
 								char* 	sensor_description, 
 								uint8_t	num_samples, 
@@ -31,16 +31,15 @@ Loom_MAX31856::Loom_MAX31856(	char* 	module_name,
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_MAX31856::~Loom_MAX31856() 
 {
 	delete inst_max;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
 void Loom_MAX31856::print_config()
 {
 	LoomSPISensor::print_config();
@@ -61,13 +60,14 @@ void Loom_MAX31856::print_config()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_MAX31856::print_measurements() 
 {
 	print_module_label();
 	Println4("\t", "Temperature: ", temperature, " C");
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_MAX31856::measure() 
 {
 	cj_temp = inst_max->readCJTemperature();
@@ -89,6 +89,7 @@ void Loom_MAX31856::measure()
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_MAX31856::package(OSCBundle& bndl, char* suffix) 
 {
 	char id_prefix[30]; 

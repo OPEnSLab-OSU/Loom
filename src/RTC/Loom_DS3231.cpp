@@ -5,7 +5,7 @@
 #include <EnableInterrupt.h>
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_DS3231::Loom_DS3231(	char* 	module_name,
 	 
@@ -64,16 +64,15 @@ Loom_DS3231::Loom_DS3231(	char* 	module_name,
 	print_time();
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_DS3231::~Loom_DS3231() 
 {
 	delete rtc_inst;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
-
 void Loom_DS3231::print_config()
 {
 	LoomRTC::print_config();
@@ -81,13 +80,13 @@ void Loom_DS3231::print_config()
 	// will print out alarm info
 }
 
-
+/////////////////////////////////////////////////////////////////////
 DateTime Loom_DS3231::now()
 {
 	return rtc_inst->now();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_DS3231::time_adjust(DateTime time)
 {
 	rtc_inst->adjust(time);
@@ -99,9 +98,7 @@ void Loom_DS3231::time_adjust(DateTime time)
 	}
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 // Alarm Functions
 void Loom_DS3231::set_alarm(DateTime time)
 {
@@ -116,6 +113,7 @@ void Loom_DS3231::set_alarm(DateTime time)
 	rtc_inst->alarmInterrupt(1, true);
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_DS3231::clear_alarms()
 {
 	rtc_inst->armAlarm(1, false);

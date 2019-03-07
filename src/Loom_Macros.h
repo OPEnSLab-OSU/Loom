@@ -3,9 +3,9 @@
 #define LOOM_MACROS_h
 
 
-
-#define LOOM_DEBUG 1
-
+#ifndef LOOM_DEBUG
+	#define LOOM_DEBUG 1
+#endif
 
 // Print or println up to 5 items at once
 #define Print(X)            (LOOM_DEBUG==0) ? :  Serial.print(X)

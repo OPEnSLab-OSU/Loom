@@ -2,7 +2,7 @@
 #include "Loom_I2C_Sensor.h"
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 LoomI2CSensor::LoomI2CSensor( 	char* module_name, 
 								char* sensor_description, 
@@ -13,16 +13,15 @@ LoomI2CSensor::LoomI2CSensor( 	char* module_name,
 	this->i2c_address = i2c_address;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 LoomI2CSensor::~LoomI2CSensor() 
 {
 
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
 void LoomI2CSensor::print_config()
 {
 	LoomSensor::print_config();
@@ -30,8 +29,8 @@ void LoomI2CSensor::print_config()
 	Println_Dec_Hex(i2c_address);
 }
 
-
-	// Get the sensor's I2C address
+/////////////////////////////////////////////////////////////////////
+// Get the sensor's I2C address
 byte LoomI2CSensor::get_i2c_address() 
 { 
 	return i2c_address; 

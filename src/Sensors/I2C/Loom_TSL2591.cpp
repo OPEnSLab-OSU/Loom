@@ -4,11 +4,8 @@
 #include <Adafruit_Sensor.h>
 
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-// Loom_TSL2591::Loom_TSL2591(char* module_name, char* sensor_description, byte i2c_address)
 Loom_TSL2591::Loom_TSL2591(byte i2c_address, char* module_name, char* sensor_description, uint8_t gain_level, uint8_t timing_level)
 
 	: LoomI2CSensor( module_name, sensor_description, i2c_address )
@@ -44,23 +41,14 @@ Loom_TSL2591::Loom_TSL2591(byte i2c_address, char* module_name, char* sensor_des
 	Println2("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
-// maybe a constructor that specifies the i2c address (use a default otherwise)
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_TSL2591::~Loom_TSL2591() 
 {
 
 }
 
-
-// --- PUBLIC METHODS ---
-
-// void Loom_TSL2591::print_config()
-// {
-// 	I2CSensor::print_config();
-// }
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_TSL2591::print_measurements()
 {
 	print_module_label();
@@ -70,7 +58,7 @@ void Loom_TSL2591::print_measurements()
 	Println3("\t", "Full : ", full);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_TSL2591::measure()
 {
 	vis  = inst_tsl2591.getLuminosity(TSL2591_VISIBLE);
@@ -78,7 +66,7 @@ void Loom_TSL2591::measure()
 	full = inst_tsl2591.getLuminosity(TSL2591_FULLSPECTRUM);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_TSL2591::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 

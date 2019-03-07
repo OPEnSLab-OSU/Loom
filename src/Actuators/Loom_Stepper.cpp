@@ -3,7 +3,7 @@
 
 #include <Wire.h>
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Stepper::Loom_Stepper( char* module_name, uint8_t stepper_count ) : LoomActuator( module_name ) 
 {
@@ -20,6 +20,7 @@ Loom_Stepper::Loom_Stepper( char* module_name, uint8_t stepper_count ) : LoomAct
 	yield();
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Stepper::~Loom_Stepper() 
 {
@@ -32,14 +33,14 @@ Loom_Stepper::~Loom_Stepper()
 	delete AFMS;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
 void Loom_Stepper::print_config() 
 {
 	LoomModule::print_config();
 }
 
+/////////////////////////////////////////////////////////////////////
 bool Loom_Stepper::message_route(OSCMessage& msg, int address_offset)
 {
 	if ( msg.fullMatch( "/SetStepper" , address_offset) ) {
@@ -49,8 +50,7 @@ bool Loom_Stepper::message_route(OSCMessage& msg, int address_offset)
 	return false;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Stepper::move_steps(int motor, int steps, int speed, bool clockwise)
 {
 	motors[motor]->setSpeed( (speed > 0) ? speed : 0);
@@ -65,6 +65,7 @@ void Loom_Stepper::move_steps(int motor, int steps, int speed, bool clockwise)
 
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Stepper::move_steps(OSCMessage& msg)
 {
 	// 0 : Motor # 

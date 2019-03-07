@@ -2,12 +2,8 @@
 #include "Loom_Interrupt_Manager.h"
 #include "RTC/Loom_RTC.h"
 
-// #include "Loom_Sleep_Manager.h"
-// #include "Loom_RTC.h"
-
-// #include <Adafruit_SleepyDog.h>
-// #include <LowPower.h>
-
+#define EI_NOTEXTERNAL
+#include <EnableInterrupt.h>
 
 
 bool Loom_Interrupt_Manager::interrupt_triggered[InteruptRange] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -22,8 +18,7 @@ const ISRFuncPtr Loom_Interrupt_Manager::default_ISRs[InteruptRange] =
 };
 
 
-
-
+/////////////////////////////////////////////////////////////////////
 Loom_Interrupt_Manager::Loom_Interrupt_Manager( char* module_name, LoomRTC* RTC_Inst) 
 	: LoomModule( module_name )
 {
@@ -42,13 +37,14 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager( char* module_name, LoomRTC* RTC_
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Interrupt_Manager::~Loom_Interrupt_Manager()
 {
 
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::print_config()
 {
 	LoomModule::print_config();
@@ -64,7 +60,7 @@ void Loom_Interrupt_Manager::print_config()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::print_state()
 {
 	LoomModule::print_state();
@@ -72,19 +68,19 @@ void Loom_Interrupt_Manager::print_state()
 
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::set_interrupts_enabled(bool state)
 {
 	interrupts_enabled = state;
 }
 
+/////////////////////////////////////////////////////////////////////
 bool Loom_Interrupt_Manager::get_interrupts_enabled()
 {
 	return interrupts_enabled;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::set_enable_interrupt(byte pin, bool state)
 {
 	if (pin < InteruptRange) {
@@ -92,13 +88,13 @@ void Loom_Interrupt_Manager::set_enable_interrupt(byte pin, bool state)
 	} 
 }
 
+/////////////////////////////////////////////////////////////////////
 bool Loom_Interrupt_Manager::get_enable_interrupt(byte pin)
 {
 	return (pin < InteruptRange) ? settings[pin].is_enabled : false; 
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte type, bool immediate)
 {
 	if (pin < InteruptRange) {
@@ -136,11 +132,7 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte type, b
 
 }
 
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::unregister_ISR(byte pin, byte type)
 {
 	// Set interrupt to be the default
@@ -149,9 +141,7 @@ void Loom_Interrupt_Manager::unregister_ISR(byte pin, byte type)
 	}
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 {
 	if (interrupts_enabled) {
@@ -189,8 +179,7 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 	}
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::interrupt_reset(byte pin)
 {
 	detachInterrupt(digitalPinToInterrupt(pin));
@@ -211,28 +200,25 @@ void Loom_Interrupt_Manager::interrupt_reset(byte pin)
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::set_RTC_module(LoomRTC* RTC_Inst)
 {
 	this->RTC_Inst = RTC_Inst;
 }
 
+/////////////////////////////////////////////////////////////////////
 LoomRTC* Loom_Interrupt_Manager::get_RTC_module()
 {
 	return RTC_Inst;
 }
 
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Interrupt_Manager::set_RTC_alarm_time_into_future(TimeSpan duration)
 {
 	return (RTC_Inst) ? set_RTC_alarm_for_time(RTC_Inst->now() + duration) : false;
 }
 
+/////////////////////////////////////////////////////////////////////
 bool Loom_Interrupt_Manager::set_RTC_alarm_time_into_future(uint days, uint hours, uint minutes, uint seconds)
 {
 	return set_RTC_alarm_time_into_future( TimeSpan(days, hours, minutes, seconds) );
@@ -251,7 +237,7 @@ bool Loom_Interrupt_Manager::set_RTC_alarm_time_into_future(uint days, uint hour
 // }
 
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Interrupt_Manager::set_RTC_alarm_for_time(DateTime future_time)
 {
 	// Don't sleep if no RTC to wake up device
@@ -292,6 +278,7 @@ bool Loom_Interrupt_Manager::set_RTC_alarm_for_time(DateTime future_time)
 
 }
 
+/////////////////////////////////////////////////////////////////////
 bool Loom_Interrupt_Manager::set_RTC_alarm_for_time(uint hour, uint minute, uint second)
 {
 	// Don't sleep if no RTC to wake up device

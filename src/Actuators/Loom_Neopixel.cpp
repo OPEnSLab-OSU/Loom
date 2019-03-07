@@ -4,7 +4,7 @@
 #include <Adafruit_NeoPixel.h>
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Neopixel::Loom_Neopixel(char* module_name, bool enableA0, bool enableA1, bool enableA2)
 	: LoomActuator(module_name)
@@ -35,6 +35,7 @@ Loom_Neopixel::Loom_Neopixel(char* module_name, bool enableA0, bool enableA1, bo
 	Println("Setup");
 } 
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Neopixel::~Loom_Neopixel() 
 {
@@ -45,8 +46,7 @@ Loom_Neopixel::~Loom_Neopixel()
 	}
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Neopixel::print_config() 
 {
 	LoomActuator::print_config();
@@ -56,7 +56,7 @@ void Loom_Neopixel::print_config()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Neopixel::print_state()
 {
 	Println2(module_name, " State:");
@@ -70,13 +70,13 @@ void Loom_Neopixel::print_state()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Neopixel::package(OSCBundle& bndl, char* suffix) 
 {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Neopixel::message_route(OSCMessage& msg, int address_offset) 
 {
 	// Set color
@@ -91,8 +91,7 @@ bool Loom_Neopixel::message_route(OSCMessage& msg, int address_offset)
 	return false;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Neopixel::enable_pin(uint8_t port, bool state)
 {
 	pin_enabled[port] = state;
@@ -105,7 +104,7 @@ void Loom_Neopixel::enable_pin(uint8_t port, bool state)
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uint8_t green, uint8_t blue)
 {
 	if ( pin_enabled[port] ) {
@@ -135,6 +134,7 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Neopixel::set_color(OSCMessage& msg)
 {
 	// 0 : 0-2 corresponding to A0-A2

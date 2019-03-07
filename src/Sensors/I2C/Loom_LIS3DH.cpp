@@ -3,7 +3,7 @@
 
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_LIS3DH::Loom_LIS3DH(byte i2c_address, char* module_name, char* sensor_description)
 
@@ -25,15 +25,14 @@ Loom_LIS3DH::Loom_LIS3DH(byte i2c_address, char* module_name, char* sensor_descr
 	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_LIS3DH::~Loom_LIS3DH() 
 {
 	delete inst_LIS3DH;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_LIS3DH::print_measurements()
 {
 	print_module_label();
@@ -43,7 +42,7 @@ void Loom_LIS3DH::print_measurements()
 	Println3("\t", "Accel Z: ", accel[2]);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_LIS3DH::measure()
 {
 	accel[0] = inst_LIS3DH->readFloatAccelX();
@@ -51,7 +50,7 @@ void Loom_LIS3DH::measure()
 	accel[2] = inst_LIS3DH->readFloatAccelZ();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_LIS3DH::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 

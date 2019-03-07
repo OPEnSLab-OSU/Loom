@@ -2,6 +2,7 @@
 #include "Loom_InternetEthernet.h"
 
 
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Ethernet_I::Loom_Ethernet_I(	char* module_name,
 
@@ -35,6 +36,7 @@ Loom_Ethernet_I::Loom_Ethernet_I(	char* module_name,
 
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Ethernet_I::~Loom_Ethernet_I()
 {
@@ -42,7 +44,7 @@ Loom_Ethernet_I::~Loom_Ethernet_I()
 	delete UDP;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Ethernet_I::print_config()
 {
 	LoomInternetPlat::print_config();
@@ -59,14 +61,14 @@ void Loom_Ethernet_I::print_config()
 	
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Ethernet_I::print_state()
 {
 	LoomInternetPlat::print_state();	
 	// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Ethernet_I::connect()
 {
 	digitalWrite(8, HIGH);	 // if is LoRa board	
@@ -87,7 +89,7 @@ bool Loom_Ethernet_I::connect()
 	return status;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Ethernet_I::is_connected()
 {
 
@@ -102,7 +104,7 @@ bool Loom_Ethernet_I::is_connected()
 
 
 
-
+/////////////////////////////////////////////////////////////////////
 const unsigned int localPort = 8888;		// Local port to listen for UDP packets on
 
 const char time_server[] = "time.nist.gov"; 	// time.nist.gov NTP server
@@ -132,7 +134,7 @@ void print_unix_time(unsigned long epoch)
 	Println(epoch % 60); // print the second
 }
 
-
+/////////////////////////////////////////////////////////////////////
 uint32_t Loom_Ethernet_I::get_time()
 {
 	UDP->begin(localPort);
@@ -184,7 +186,7 @@ uint32_t Loom_Ethernet_I::get_time()
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Ethernet_I::send_NTP_packet(byte packet_buffer[])
 {
 	// set all bytes in the buffer to 0

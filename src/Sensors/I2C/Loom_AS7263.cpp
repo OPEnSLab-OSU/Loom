@@ -2,8 +2,7 @@
 #include "Loom_AS7263.h"
 
 
-
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_AS7263::Loom_AS7263(byte i2c_address, char* module_name, char* sensor_description, bool use_bulb, byte gain, byte mode, byte integration_time)
 
@@ -22,14 +21,14 @@ Loom_AS7263::Loom_AS7263(byte i2c_address, char* module_name, char* sensor_descr
 	// Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_AS7263::~Loom_AS7263() 
 {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_AS7263::print_config()
 {
 	LoomI2CSensor::print_config();	
@@ -38,7 +37,7 @@ void Loom_AS7263::print_config()
 	Println3("\t", "Use Bulb            : ", (use_bulb) ? "True" : "False");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_AS7263::print_measurements()
 {
 	print_module_label();
@@ -51,7 +50,7 @@ void Loom_AS7263::print_measurements()
 	Println3("\t", "NIR W: ", nir_w);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_AS7263::measure()
 {
 	if (use_bulb) {
@@ -68,7 +67,7 @@ void Loom_AS7263::measure()
 	nir_w = inst_AS7263.getW();	
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_AS7263::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 
@@ -82,17 +81,20 @@ void Loom_AS7263::package(OSCBundle& bndl, char* suffix)
 	append_to_bundle(bndl, id_prefix, "NIR_W", nir_w);
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_AS7263::enable_bulb(bool enable)
 {
 	use_bulb = enable;
 }
 
+/////////////////////////////////////////////////////////////////////
 // 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
 void Loom_AS7263::set_gain(byte gain)
 {
 	inst_AS7263.setGain(gain);
 }
 
+/////////////////////////////////////////////////////////////////////
 // 0: Continuous reading of STUV 
 // 1: Continuous reading of RTUX 
 // 2: Continuous reading of all channels (power-on default)
@@ -102,6 +104,7 @@ void Loom_AS7263::set_mode(byte mode)
 	inst_AS7263.setMeasurementMode(mode);
 }
 
+/////////////////////////////////////////////////////////////////////
 // Time will be 2.8ms * [integration value]  (0-255), 50 is default
 void Loom_AS7263::set_integration_time(byte time)
 {

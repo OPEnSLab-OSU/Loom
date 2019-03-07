@@ -3,7 +3,7 @@
 #include "Loom_Macros.h"
 
 
-
+/////////////////////////////////////////////////////////////////////
 void print_array(String data [], int len, int format)
 {
 	#if LOOM_DEBUG == 1
@@ -16,6 +16,7 @@ void print_array(String data [], int len, int format)
 	#endif
 }
 
+/////////////////////////////////////////////////////////////////////
 String get_data_value(OSCMessage* msg, int pos) 
 {
 	if (pos < msg->size()) {
@@ -38,7 +39,7 @@ String get_data_value(OSCMessage* msg, int pos)
 	return String("");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 String get_address_string(OSCMessage *msg)
 {
 	char buf[50];
@@ -46,10 +47,7 @@ String get_address_string(OSCMessage *msg)
 	return String(buf);
 }
 
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 void print_message(OSCMessage* msg, bool detail) 
 {
 	#if LOOM_DEBUG == 1
@@ -82,7 +80,7 @@ void print_message(OSCMessage* msg, bool detail)
 	#endif // of 'LOOM_DEBUG == 1'
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void print_bundle(OSCBundle& bndl)
 {
 	if ( !bndl.size() ) return;
@@ -99,12 +97,7 @@ void print_bundle(OSCBundle& bndl)
 	Println();
 }
 
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 // Replaces substrings with other substrings in a string
 // Auxiliary function for OSC string compression
 void str_replace(char* target, const char* needle, const char* replacement)
@@ -139,8 +132,7 @@ void str_replace(char* target, const char* needle, const char* replacement)
 	strcpy(target, buffer);
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // Finds nth instance of a character in a string
 // Auxiliary function for OSC string compression
 const char* nth_strchr(const char* s, char c, int n)
@@ -155,7 +147,7 @@ const char* nth_strchr(const char* s, char c, int n)
 	return nth_ptr;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- REPLACE CHARACTER ---
 //
 // Given a string, replace all instances of 'orig' char with 'rep' char
@@ -174,12 +166,7 @@ void replace_char(char* str, const char orig, const char rep)
 	}
 }
 
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 // --- OSC EXTRACT HEADER SECTION ---
 //
 // Select a single part of an OSC Message header
@@ -201,6 +188,7 @@ void osc_extract_header_section(OSCMessage* msg, int section, char* result)
 	snprintf(result, cPtr_end-cPtr_start, "%s\0", cPtr_start+1); 
 }
 
+/////////////////////////////////////////////////////////////////////
 // This version works with sprintf and comparisons like strcmp, but not printing
 char* osc_extract_header_section(OSCMessage* msg, int section)
 {
@@ -209,10 +197,7 @@ char* osc_extract_header_section(OSCMessage* msg, int section)
 	return (char*)result;
 }
 
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 // --- OSC EXTRACT HEADER TO SECTION ---
 //
 // Select up to and including the specified section of an osc message
@@ -231,6 +216,7 @@ void osc_extract_header_to_section(OSCMessage* msg, int section, char* result)
 	snprintf(result, cPtr_end-result+1, "%s\0", result); 
 }
 
+/////////////////////////////////////////////////////////////////////
 // This version works with sprintf and comparisons like strcmp, but not printing
 char* osc_extract_header_to_section(OSCMessage* msg, int section)
 {
@@ -239,7 +225,7 @@ char* osc_extract_header_to_section(OSCMessage* msg, int section)
 	return (char*)result;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- OSC EXTRACT HEADER FROM SECTION ---  
 //
 // Select from a section of an OSC message to the end
@@ -259,6 +245,7 @@ void osc_extract_header_from_section(OSCMessage* msg, int section, char* result)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 // This version works with sprintf and comparisons like strcmp, but not printing
 char* osc_extract_header_from_section(OSCMessage* msg, int section)
 {
@@ -267,9 +254,7 @@ char* osc_extract_header_from_section(OSCMessage* msg, int section)
 	return (char*)result;
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 // --- OSC EXTRACT NUMBER OF SECTIONS ---
 //
 // Return the number of sections in the OSC address of 
@@ -287,24 +272,19 @@ int osc_address_section_count(String s)
 	return count;
 }
 
+/////////////////////////////////////////////////////////////////////
 int osc_address_section_count(OSCMessage* msg)
 { 
 	return osc_address_section_count(get_address_string(msg)); 
 }
 
+/////////////////////////////////////////////////////////////////////
 int osc_address_section_count(OSCBundle* bndl)
 { 
 	return osc_address_section_count(bndl->getOSCMessage(0)); 
 }
 
-
-
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 char get_message_type(OSCMessage* msg)
 {
 	char buf[50];
@@ -312,7 +292,7 @@ char get_message_type(OSCMessage* msg)
 	return buf[1];
 }
 
-
+/////////////////////////////////////////////////////////////////////
 int extract_family_number(OSCMessage* msg)
 {
 	switch( get_message_type(msg) ) {
@@ -323,13 +303,13 @@ int extract_family_number(OSCMessage* msg)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 int extract_family_number(OSCBundle& bndl)
 { 
 	return extract_family_number(bndl.getOSCMessage(0)); 
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 int extract_device_number(OSCMessage* msg)
 {
 	if ( get_message_type(msg) == 'D' ) {
@@ -339,23 +319,25 @@ int extract_device_number(OSCMessage* msg)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 int extract_device_number(OSCBundle& bndl)
 { 
 	return extract_device_number(bndl.getOSCMessage(0)); 
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void extract_family(OSCMessage* msg, char* result)
 { 
 	osc_extract_header_section(msg, 2, result); 
 }
 
+/////////////////////////////////////////////////////////////////////
 void extract_family(OSCBundle& bndl, char* result)
 { 
 	extract_family(bndl.getOSCMessage(0), result); 
 }
 
+/////////////////////////////////////////////////////////////////////
 char* extract_family(OSCMessage* msg)
 {
 	char result[50];
@@ -363,14 +345,13 @@ char* extract_family(OSCMessage* msg)
 	return (char*)result;
 }
 
+/////////////////////////////////////////////////////////////////////
 char* extract_family(OSCBundle& bndl)
 { 
 	return extract_family(bndl.getOSCMessage(0)); 
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 void extract_device(OSCMessage* msg, char* result)
 {
 	if ( get_message_type(msg) == 'D' ) {
@@ -380,11 +361,13 @@ void extract_device(OSCMessage* msg, char* result)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 void extract_device(OSCBundle& bndl, char* result)
 { 
 	extract_device(bndl.getOSCMessage(0), result); 
 }
 
+/////////////////////////////////////////////////////////////////////
 char* extract_device(OSCMessage* msg)
 {
 	char result[50];
@@ -392,54 +375,53 @@ char* extract_device(OSCMessage* msg)
 	return (char*)result;
 }
 
+/////////////////////////////////////////////////////////////////////
 char* extract_device(OSCBundle& bndl)
 { 
 	return extract_device(bndl.getOSCMessage(0)); 
 }
 
-
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, int elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( (int32_t)elem ); }
 
+/////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, uint16_t elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( (int32_t)elem ); }
 
+/////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, float elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( elem ); }
 
+/////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, double elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( (float)elem ); }
 
+/////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, String elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( elem.c_str() ); }
 
+/////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, int key, int elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( (int32_t)elem ); }
 
+/////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, int key, uint16_t elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( (int32_t)elem ); }
 
+/////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, int key, float elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem ); }
 
+/////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, int key, double elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( (float)elem ); }
 
+/////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, int key, String elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( elem.c_str() ); }
 
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 void deep_copy_message(OSCMessage* src_msg, OSCMessage* dest_msg)
 {
 	dest_msg->empty();
@@ -457,8 +439,7 @@ void deep_copy_message(OSCMessage* src_msg, OSCMessage* dest_msg)
 	dest_msg->setAddress(addr);
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // --- DEEP COPY BUNDLE ---
 // 
 // Takes two bundle pointers,
@@ -477,8 +458,7 @@ void deep_copy_bundle(OSCBundle& src_bndl, OSCBundle& dest_bndl)
 	} 
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // --- GET NUM DATA PAIRS ---
 //
 // Returns the number of key-value pairs in a bundle
@@ -493,12 +473,6 @@ int bundle_num_data_pairs(OSCBundle& bndl)
 	}
 	return total;
 }
-
-
-
-
-
-
 
 
 

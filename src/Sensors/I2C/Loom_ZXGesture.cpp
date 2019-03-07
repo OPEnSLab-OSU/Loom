@@ -2,14 +2,13 @@
 #include "Loom_ZXGesture.h"
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_ZXGesture::Loom_ZXGesture(byte i2c_address, char* module_name, char* sensor_description, ZXMode mode)
 
 	: LoomI2CSensor( module_name, sensor_description, i2c_address )
 {
 	this->mode = mode;
-
 
 	inst_ZX = new ZX_Sensor(i2c_address);
 
@@ -41,22 +40,21 @@ Loom_ZXGesture::Loom_ZXGesture(byte i2c_address, char* module_name, char* sensor
 	Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_ZXGesture::~Loom_ZXGesture() 
 {
 	delete inst_ZX;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_ZXGesture::print_config()
 {
 	LoomI2CSensor::print_config();
 	Println3('\t', "Mode                : ", (mode == ZX_POS) ? "Position" : "Gesture" );
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_ZXGesture::print_measurements()
 {
 	print_module_label();
@@ -74,7 +72,7 @@ void Loom_ZXGesture::print_measurements()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_ZXGesture::measure()
 {
 	uint8_t x, z;
@@ -127,7 +125,7 @@ void Loom_ZXGesture::measure()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_ZXGesture::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 

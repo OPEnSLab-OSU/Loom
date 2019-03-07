@@ -10,9 +10,6 @@
 // #define _BV(bit) (1 << (bit))
 
 
-#define EI_NOTEXTERNAL
-#include <EnableInterrupt.h>
-
 
 class LoomRTC; // Specify that LoomRTC exists, defined in own file
 

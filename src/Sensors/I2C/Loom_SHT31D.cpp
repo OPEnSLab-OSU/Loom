@@ -2,7 +2,7 @@
 #include "Loom_SHT31D.h"
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_SHT31D::Loom_SHT31D(byte i2c_address, char* module_name, char* sensor_description)
 
@@ -14,15 +14,14 @@ Loom_SHT31D::Loom_SHT31D(byte i2c_address, char* module_name, char* sensor_descr
 	Println2("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_SHT31D::~Loom_SHT31D() 
 {
 
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_SHT31D::print_measurements()
 {
 	print_module_label();
@@ -31,7 +30,7 @@ void Loom_SHT31D::print_measurements()
 	Println3("\t", "Humidity   : ", humid);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_SHT31D::measure()
 {
 	float t = inst_sht31d.readTemperature();
@@ -46,7 +45,7 @@ void Loom_SHT31D::measure()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_SHT31D::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 

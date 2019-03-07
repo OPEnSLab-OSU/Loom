@@ -5,7 +5,7 @@
 
 
 
-
+/////////////////////////////////////////////////////////////////////
 const char* Loom_OLED::enum_oled_version_string(OLED_Version v)
 {
 	switch(v) {
@@ -14,7 +14,7 @@ const char* Loom_OLED::enum_oled_version_string(OLED_Version v)
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 const char* Loom_OLED::enum_oled_format(OLED_Format f)
 {
 	switch(f) {
@@ -24,6 +24,7 @@ const char* Loom_OLED::enum_oled_format(OLED_Format f)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 const char* Loom_OLED::enum_oled_freeze(OLED_Freeze f)
 {
 	switch(f) {
@@ -33,10 +34,7 @@ const char* Loom_OLED::enum_oled_freeze(OLED_Freeze f)
 	}
 }
 
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_OLED::Loom_OLED(	char* module_name, 
 						bool enable_rate_filter, 
@@ -70,17 +68,15 @@ Loom_OLED::Loom_OLED(	char* module_name,
 	display->clearDisplay();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_OLED::~Loom_OLED() 
 {
 	delete display;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
-
 void Loom_OLED::print_config() 
 {
 	LoomLogPlat::print_config();
@@ -100,32 +96,31 @@ void Loom_OLED::print_config()
 	}
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_OLED::set_display_format(OLED_Format format) 
 { 
 	display_format = format; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 OLED_Format Loom_OLED::get_display_format() 
 { 
 	return display_format; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_OLED::set_scroll_duration(uint duration) 
 { 
 	scroll_duration = duration; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 uint Loom_OLED::get_scroll_duration() 
 { 
 	return scroll_duration; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_OLED::set_freeze_pin(byte pin) 
 {
 	freeze_pin = pin;
@@ -134,31 +129,31 @@ void Loom_OLED::set_freeze_pin(byte pin)
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 byte Loom_OLED::get_freeze_pin() 
 { 
 	return freeze_pin; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_OLED::set_freeze_behavior(OLED_Freeze behavior) 
 { 
 	freeze_behavior = behavior; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 OLED_Freeze Loom_OLED::get_freeze_behavior() 
 { 
 	return freeze_behavior; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_OLED::log_bundle(OSCBundle& bndl) 
 {
 	log_bundle(bndl, display_format);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_OLED::log_bundle(OSCBundle& bndl, OLED_Format format) 
 {
 	if ( !check_millis() ) return;

@@ -9,7 +9,7 @@
 
 
 
-
+/////////////////////////////////////////////////////////////////////
 const char* Loom_Sleep_Manager::enum_sleep_mode_string(SleepMode m)
 {
 	switch(m) {
@@ -20,9 +20,7 @@ const char* Loom_Sleep_Manager::enum_sleep_mode_string(SleepMode m)
 	}
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager( char* module_name, LoomRTC* RTC_Inst, bool use_LED, bool delay_on_wake, SleepMode sleep_mode ) : LoomModule( module_name )
 {
 	this->use_LED 		= use_LED;
@@ -41,15 +39,14 @@ Loom_Sleep_Manager::Loom_Sleep_Manager( char* module_name, LoomRTC* RTC_Inst, bo
 
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Sleep_Manager::~Loom_Sleep_Manager()
 {
 
 }
 
+/////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::print_config()
 {
 	LoomModule::print_config();
@@ -57,7 +54,7 @@ void Loom_Sleep_Manager::print_config()
 	Println3('\t', "Use LED             : ", (use_LED) ? "Enabled" : "Disabled" );
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::print_state()
 {
 	LoomModule::print_state();
@@ -67,49 +64,43 @@ void Loom_Sleep_Manager::print_state()
 	}
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::set_RTC_module(LoomRTC* RTC_Inst)
 {
 	this->RTC_Inst = RTC_Inst;
 }
 
+/////////////////////////////////////////////////////////////////////
 LoomRTC* Loom_Sleep_Manager::get_RTC_module()
 {
 	return RTC_Inst;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::set_Interrupt_Manager(Loom_Interrupt_Manager* IM)
 {
 	this->IM = IM;
 }
 
+/////////////////////////////////////////////////////////////////////
 Loom_Interrupt_Manager* Loom_Sleep_Manager::get_Interrupt_Manager()
 {
 	return IM;
 }
 
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::set_sleep_mode(SleepMode mode)
 {
 	sleep_mode = mode;
 }
 
+/////////////////////////////////////////////////////////////////////
 SleepMode Loom_Sleep_Manager::get_sleep_mode()
 {
 	return sleep_mode;
 }
 
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Sleep_Manager::sleep_for_time(TimeSpan duration)
 {
 	switch(sleep_mode) {
@@ -140,23 +131,26 @@ bool Loom_Sleep_Manager::sleep_for_time(TimeSpan duration)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 bool Loom_Sleep_Manager::sleep_for_time(uint days, uint hours, uint minutes, uint seconds)
 {
 	return sleep_for_time( TimeSpan(days, hours, minutes, seconds) );
 }
 
+/////////////////////////////////////////////////////////////////////
 bool Loom_Sleep_Manager::sleep_for_time_from_wake(TimeSpan duration)
 {
 	return (RTC_Inst) ? sleep_until_time(last_wake_time + duration) : false;
 }
 
+/////////////////////////////////////////////////////////////////////
 bool Loom_Sleep_Manager::sleep_for_time_from_wake(uint days, uint hours, uint minutes, uint seconds)
 {
 	return sleep_for_time_from_wake( TimeSpan(days, hours, minutes, seconds) );
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 {
 	switch(sleep_mode) {
@@ -218,7 +212,7 @@ bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Sleep_Manager::sleep_until_time(uint hour, uint minute, uint second)
 {
 	// Don't sleep if no RTC to wake up device
@@ -232,7 +226,7 @@ bool Loom_Sleep_Manager::sleep_until_time(uint hour, uint minute, uint second)
 	return sleep_until_time( DateTime(now.year(), now.month(), now.day(), hour, minute, second) ); 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // bool Loom_Sleep_Manager::sleep_until_interrupt_on(byte pin)
 bool Loom_Sleep_Manager::sleep()
 {
@@ -248,9 +242,7 @@ bool Loom_Sleep_Manager::sleep()
 		post_sleep();
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 #define MAX_WATCHDOG_SLEEP 16 // seconds
 
 bool Loom_Sleep_Manager::sleepy_dog_sleep(TimeSpan duration)
@@ -294,10 +286,7 @@ bool Loom_Sleep_Manager::sleepy_dog_sleep(TimeSpan duration)
 
 }
 
-
-
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::pre_sleep()
 {
 	Println("Entering Sleep");
@@ -317,8 +306,7 @@ void Loom_Sleep_Manager::pre_sleep()
 	digitalWrite(LED_BUILTIN, LOW);
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::post_sleep()
 {
 

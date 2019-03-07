@@ -11,8 +11,7 @@ union data_value { // Used in translation between OSC and strings
 
 
 
-
-
+/////////////////////////////////////////////////////////////////////
 char* LoomCommPlat::enum_comm_plat_string(CommPlatform c)
 {
 	switch(c) {
@@ -38,7 +37,7 @@ char* LoomCommPlat::enum_comm_plat_string(CommPlatform c)
 // }
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 // LoomCommPlat::LoomCommPlat( char* module_name, uint max_message_len, CommScope subnet_scope, bool compress_messages ) 
 LoomCommPlat::LoomCommPlat( char* module_name, uint max_message_len, bool compress_messages ) 
@@ -52,15 +51,15 @@ LoomCommPlat::LoomCommPlat( char* module_name, uint max_message_len, bool compre
 	this->signal_strength   = 0;
 }
 
-	// --- DESTRUCTOR ---
+/////////////////////////////////////////////////////////////////////
+// --- DESTRUCTOR ---
 LoomCommPlat::~LoomCommPlat()
 {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
 void LoomCommPlat::print_config() 
 {
 	LoomModule::print_config();
@@ -70,23 +69,25 @@ void LoomCommPlat::print_config()
 	Println3('\t', "Compress Messages   : ", (compress_messages) ? "Enabled" : "Disabled" );
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomCommPlat::package(OSCBundle& bndl, char* suffix) 
 {
 
 }
 
+/////////////////////////////////////////////////////////////////////
 void LoomCommPlat::set_compress_messages(bool c) 
 { 
 	compress_messages = c; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::get_compress_messages() 
 { 
 	return compress_messages; 
 }
 
- 
+/////////////////////////////////////////////////////////////////////
 	// returns false if filtered out
 
 // might not actually empty bundle but just return a boolean
@@ -171,16 +172,13 @@ bool LoomCommPlat::scope_filter(OSCBundle& bndl, int* offset)
 	return pass;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::scope_filter(OSCBundle& bndl) 
 {
 	return scope_filter(bndl, NULL);
 }
 
-
-	
-
-
+/////////////////////////////////////////////////////////////////////
 void LoomCommPlat::convert_string_to_bundle(char* osc_string, OSCBundle& bndl) 
 {
 	// might just always try to uncompress, as other device may be compressing
@@ -188,6 +186,7 @@ void LoomCommPlat::convert_string_to_bundle(char* osc_string, OSCBundle& bndl)
 	original_convert_string_to_bundle(osc_string, bndl);
 }
 
+/////////////////////////////////////////////////////////////////////
 // break compression out to different function
 void LoomCommPlat::convert_bundle_to_string(OSCBundle& bndl, char* osc_string) 
 {
@@ -210,11 +209,8 @@ void LoomCommPlat::convert_bundle_to_string(OSCBundle& bndl, char* osc_string)
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- Private Methods ---
-
-
-
 // Conversion without compression
 void LoomCommPlat::original_convert_string_to_bundle(char* osc_string, OSCBundle& bndl) 
 {
@@ -256,6 +252,7 @@ void LoomCommPlat::original_convert_string_to_bundle(char* osc_string, OSCBundle
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 // Conversion without decompression
 void LoomCommPlat::original_convert_bundle_to_string(OSCBundle& bndl, char* osc_string) 
 {
@@ -303,6 +300,7 @@ void LoomCommPlat::original_convert_bundle_to_string(OSCBundle& bndl, char* osc_
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 // Compress messages 
 void LoomCommPlat::compress_message_string(char* osc_string) 
 {
@@ -318,6 +316,7 @@ void LoomCommPlat::compress_message_string(char* osc_string)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
 // Uncompress messages
 void LoomCommPlat::uncompress_message_string(char* osc_string) 
 {

@@ -5,7 +5,7 @@
 #define SERVOMAX  600	// This is the 'maximum' pulse length count (out of 4096)
 
 
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Servo::Loom_Servo( char* module_name, uint8_t servo_count ) : LoomActuator( module_name ) 
 {
@@ -18,21 +18,21 @@ Loom_Servo::Loom_Servo( char* module_name, uint8_t servo_count ) : LoomActuator(
 	servo_driver.setPWMFreq(60);
 }
 
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Servo::~Loom_Servo() 
 {
 	delete positions;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
 void Loom_Servo::print_config() 
 {
 	LoomModule::print_config();
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Servo::print_state()
 {
 	print_module_label();
@@ -42,7 +42,7 @@ void Loom_Servo::print_state()
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Servo::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 
@@ -58,7 +58,7 @@ void Loom_Servo::package(OSCBundle& bndl, char* suffix)
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 bool Loom_Servo::message_route(OSCMessage& msg, int address_offset)
 {
 	if ( msg.fullMatch( "/SetServo" , address_offset) ) {
@@ -68,7 +68,7 @@ bool Loom_Servo::message_route(OSCMessage& msg, int address_offset)
 	return false;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Servo::set_degree(int servo, int degree)
 {
 	
@@ -84,7 +84,7 @@ void Loom_Servo::set_degree(int servo, int degree)
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Loom_Servo::set_degree(OSCMessage& msg)
 {
 	// 0 : Servo #

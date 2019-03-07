@@ -1,7 +1,7 @@
 
 #include "Loom_Module.h"
 
-
+/////////////////////////////////////////////////////////////////////
 char* LoomModule::enum_verbosity_string(Verbosity v)
 {
 	switch(v) {
@@ -11,9 +11,7 @@ char* LoomModule::enum_verbosity_string(Verbosity v)
 	}
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 LoomModule::LoomModule() 
 {
@@ -28,7 +26,7 @@ LoomModule::LoomModule()
 	this->device_manager = NULL;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 LoomModule::LoomModule( char* module_name ) : LoomModule()
 {
 	// Println("LoomModule Constructor 1");
@@ -39,6 +37,7 @@ LoomModule::LoomModule( char* module_name ) : LoomModule()
 	Println("Begin Setup");
 }
 
+/////////////////////////////////////////////////////////////////////
 // this version also links to parent device
 LoomModule::LoomModule( char* module_name, LoomManager* LD ) : LoomModule()
 {
@@ -48,20 +47,18 @@ LoomModule::LoomModule( char* module_name, LoomManager* LD ) : LoomModule()
 	link_device_manager(LD);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 LoomModule::~LoomModule() {}
 
-
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
-
-
 LoomManager* LoomModule::get_device_manager()
 {
 	return device_manager;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomModule::link_device_manager(LoomManager* LD)
 {
 	if (LD == NULL) return;
@@ -75,13 +72,13 @@ void LoomModule::link_device_manager(LoomManager* LD)
 	Println2("Linked as module of ", buf);
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void LoomModule::print_module_label()
 {
 	Print3("[", module_name, "] ");
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // Display configuration settings
 void LoomModule::print_config()
 {
@@ -93,13 +90,14 @@ void LoomModule::print_config()
 	Println3('\t', "Package Verbosity   : ", enum_verbosity_string(package_verbosity) );
 }
 
+/////////////////////////////////////////////////////////////////////
 // Display current state
 void LoomModule::print_state() 
 {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // void LoomModule::package(OSCBundle* bndl)
 // {
 // 	char buf[20];
@@ -107,7 +105,7 @@ void LoomModule::print_state()
 // 	package(bndl, buf);
 // }
 
-
+/////////////////////////////////////////////////////////////////////
 // void LoomModule::resolve_bundle_prefix(char* prefix) 
 // {
 // 	if (device_manager != NULL) {
@@ -117,8 +115,7 @@ void LoomModule::print_state()
 // 	}
 // }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void LoomModule::resolve_bundle_address(char* address, char* suffix)
 {
 	if (device_manager != NULL) {
@@ -162,88 +159,92 @@ void LoomModule::resolve_bundle_address(char* address, char* suffix)
 		// Would need to make sure the parent routing isn't called repeatedly
 		// as different modules are iterated through
 
-
+/////////////////////////////////////////////////////////////////////
 // Copy module name into buffer
 void LoomModule::get_module_name(char* buf) 
 { 
 	strcpy(buf, module_name); 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // Return module name char*
 char* LoomModule::get_module_name() 
 { 
 	return module_name; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // Set print verbosity 
 void LoomModule::set_print_verbosity(Verbosity v) 
 { 
 	print_verbosity = v; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // Get print verbosity
 Verbosity LoomModule::get_print_verbosity() 
 { 
 	return print_verbosity; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // Set package verbosity (what gets included in bundle)
 void LoomModule::set_package_verbosity(Verbosity v) 
 { 
 	package_verbosity = v; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // Get package verbosity
 Verbosity LoomModule::get_package_verbosity() 
 { 
 	return package_verbosity; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // Set whether or not to be active
 void LoomModule::set_active(bool enable) 
 { 
 	active = enable; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // Get whether or not device is active
 bool LoomModule::get_active() 
 { 
 	return active; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // Set whether or not to use debug print statements
 void LoomModule::set_print_debug(bool enable) 
 { 
 	print_debug = enable; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // Get whether or not debug prints are enabled
 bool LoomModule::get_print_debug() 
 { 
 	return print_debug; 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 // Maybe?
 //  - not pure because not everything will have a config (should default to empty function here)
 // Save a FlashStorage struct
 void LoomModule::save_config() {}
+
+/////////////////////////////////////////////////////////////////////
 // Load a FlashStorage struct, true if valid
 bool LoomModule::load_config() {}
+
+/////////////////////////////////////////////////////////////////////
 // Display config struct contents (as flash can be disabled this is a different method)
 void LoomModule::print_config_struct() {}
 
 
-
+/////////////////////////////////////////////////////////////////////
 // Optionally implementable interactive loop
 void LoomModule::REPL_loop() {}
 
