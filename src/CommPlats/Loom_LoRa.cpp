@@ -99,24 +99,32 @@ bool Loom_LoRa::receive_bundle(OSCBundle& bndl)
 
 			signal_strength = driver->lastRssi();
 
-			Println2("Received: ", (const char*)buf);
-			Println2("Len: ", len);
+			if (print_verbosity == Verbosity::V_HIGH) {
+				Println2("Received: ", (const char*)buf);
+				Println2("Len: ", len);
+			}
 
 			// This is done just in case the compressed string, uncompresses to more than 251 characters
 			char larger_buf[384];
 			memset(larger_buf, '\0', sizeof(larger_buf));
 			strcpy(larger_buf, (const char*)buf);
 
-			Println("Memset larger_buf");
+			if (print_verbosity == Verbosity::V_HIGH) {
+				Println("Memset larger_buf");
+			}
 
 			LoomCommPlat::convert_string_to_bundle( (char*)larger_buf, bndl ); 
 
-			Println("Converted string to bundle");
+			if (print_verbosity == Verbosity::V_HIGH) {
+				Println("Converted string to bundle");
+			}
 
 			// Apply filtering based on family and subnet
 			bool in_scope = LoomCommPlat::scope_filter(bndl);
-			if (!in_scope) {
-				Println("Received LoRa bundle out of scope");
+			if (print_verbosity == Verbosity::V_HIGH) {
+				if (!in_scope) {
+					Println("Received LoRa bundle out of scope");
+				}
 			}
 
 			return in_scope;
@@ -140,9 +148,11 @@ bool Loom_LoRa::send_bundle(OSCBundle& bndl, uint16_t destination)
 	memset(message, '\0', sizeof(message));
 	LoomCommPlat::convert_bundle_to_string(bndl, message);
 
-	Println(message);
-	Println2("Message length: ", strlen(message));
-	 
+	if (print_verbosity == Verbosity::V_HIGH) {
+		Println(message);
+		Println2("Message length: ", strlen(message));
+	}
+
 	// bool is_sent = manager->sendtoWait( (uint8_t*)message, strlen(message)+1, destination );
 	bool is_sent = manager->sendtoWait( (uint8_t*)message, strlen(message), destination );
 
@@ -172,6 +182,26 @@ void Loom_LoRa::set_address(uint addr)    // Need to test this
 	address = addr;
 	delete manager;
 	manager = new RHReliableDatagram(*driver, address);
+
+	// Initialize Manager
+	bool status = manager->init();
+	print_module_label();
+	Println2("\tReinitializing Manager ", (status) ? "Success" : "Failed");
+	
+	// Set Frequency
+	status = driver->setFrequency(RF95_FREQ);
+	print_module_label();
+	Println2( "\tSetting Frequency ", (status) ? "Success" : "Failed" );
+
+	// Set Retry Delay
+	print_module_label();
+	Println3("\tSetting retry timeout to ", retry_timeout, " ms");
+	manager->setTimeout(retry_timeout);
+
+	// Set Max Retry Count
+	print_module_label();
+	Println2("\tSetting max retry count ", retry_count);
+	manager->setRetries(retry_count);
 }
 
 /////////////////////////////////////////////////////////////////////

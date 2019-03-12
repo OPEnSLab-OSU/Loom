@@ -27,37 +27,37 @@ class Loom_LoRa : public LoomCommPlat
 protected:
 
 	///	Underlying rf95 object
-	RH_RF95 *            driver; 	
+	RH_RF95*			driver; 	
 	/// Manager for driver		
-	RHReliableDatagram * manager;
+	RHReliableDatagram*	manager;
 
 	/// Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
-	uint8_t              address;
+	uint8_t				address;
 	/// Default address to send to
-	uint8_t              friend_address;	
+	uint8_t				friend_address;	
 
 	/// Power level to send at
-	uint8_t	             power_level;
+	uint8_t				power_level;
 	/// Number of transmission retries allowed
-	uint8_t              retry_count;
+	uint8_t				retry_count;
 	/// Delay between transmission retries (in milliseconds)
-	uint16_t             retry_timeout;
+	uint16_t			retry_timeout;
 
 
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_LoRa( 	char*     module_name 		= "LoRa",
+	Loom_LoRa( 	char*		module_name			= "LoRa",
 		
-				uint16_t  max_message_len 	= RH_RF95_MAX_MESSAGE_LEN,
+				uint16_t	max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
 				// CommScope subnet_scope 		= SCOPE_SUBNET,
-				bool      compress_messages = true,
+				bool		compress_messages	= true,
 
-				uint8_t   address           = LORA_SELF_ADDRESS,
-				uint8_t   friend_address    = LORA_FRIEND_ADDRESS,
-				uint8_t   power_level 		= 23,
-				uint8_t   retry_count       = 3,
-				uint16_t  retry_timeout 	= 200
+				uint8_t		address				= LORA_SELF_ADDRESS,
+				uint8_t		friend_address		= LORA_FRIEND_ADDRESS,
+				uint8_t		power_level 		= 23,
+				uint8_t		retry_count			= 3,
+				uint16_t	retry_timeout		= 200
 			);
 
 	// --- DESTRUCTOR ---

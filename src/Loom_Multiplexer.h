@@ -46,25 +46,31 @@ private:
 
 protected:
 
-	LoomI2CSensor**   sensors;
+	// Array of I2C sensor objects
+	LoomI2CSensor**	sensors;
 
-	byte          i2c_address;		// The device's I2C address
+	/// The multiplexer's I2C address
+	byte			i2c_address;		
 
-	uint          num_ports;		// The number of ports
-	bool          dynamic_list;		// Whether or not sensor list is dynamic	
-	uint          update_period;	// Interval to update sensor list at
+	/// The number of ports on the multiplexer
+	uint			num_ports;
+	/// Whether or not sensor list is dynamic (refresh sensor list periodically)
+	bool			dynamic_list;
+	/// Interval to update sensor list at
+	uint			update_period;	
 	
-	unsigned long last_update_time; // When the sensor list was last updated
+	/// When the sensor list was last updated
+	unsigned long	last_update_time; 
 
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_Multiplexer(	char* 	module_name 	= "Multiplexer",
+	Loom_Multiplexer(	char* 	module_name		= "Multiplexer",
 
-						byte	i2c_address 	= 0x71,
-						uint 	num_ports 		= 8,
-						bool	dynamic_list 	= true,
-						uint 	update_period 	= 5000 // find way to make this call interrupt class to manage timing
+						byte	i2c_address		= 0x71,
+						uint 	num_ports		= 8,
+						bool	dynamic_list	= true,
+						uint 	update_period	= 5000 // find way to make this call interrupt class to manage timing
 					);
 
 

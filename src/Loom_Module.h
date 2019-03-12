@@ -11,9 +11,6 @@
 #include <OSCBundle.h>
 
 
-// Maybe move out to global so that LoomManager can reference this as well
-// enum Verbosity { VERB_OFF, VERB_LOW, VERB_HIGH }; // Move back to "loom_abstract_module_class.h"
-
 
 class LoomManager; // Specify that LoomManager exists, defined in own file
 
@@ -25,22 +22,23 @@ class LoomModule
 
 protected:
 
-	LoomManager* device_manager; // rename to manager
+	/// Pointer to manager
+	LoomManager* device_manager;
 
-	char* module_name;				// The name of the module    		Should have a DEFAULT but can be overriden if provided to constructor
+	/// The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
+	char* module_name;				
 	
-	bool  active;					// Whether or not the device is currently active (not sure if this will be a setting)
-	bool  print_debug;				// Individually togglable debug statements
+	/// Whether or not the module should be treated
+	bool  active;
+	/// Individually togglable debug statements
+	bool  print_debug;				
 
-	Verbosity print_verbosity;		// Print verbosity
-	Verbosity package_verbosity;	// Package verbosity 	
-
-
-	// int blink_sequence[] ?
+	/// Print verbosity
+	Verbosity print_verbosity;		
+	/// Package verbosity 
+	Verbosity package_verbosity;		
 
 public:
-
-
 
 	static char* enum_verbosity_string(Verbosity v);
 

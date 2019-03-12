@@ -50,11 +50,16 @@ class LoomManager
 
 protected:
 
-	char* 		device_name;	// The name of the device
+	/// The name of the device
+	char* 		device_name;	
 
-	char* 		family;			// The family the device belongs to
-	uint 		family_num;		// The subnet of the family
-	uint 		instance;		// The instance / channel ID within the subnet
+	/// The family the device belongs to
+	char* 		family;			
+	/// The subnet of the family
+	uint 		family_num;
+	/// The instance / channel ID within the subnet		
+	uint 		instance;
+
 
 	DeviceType 	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
@@ -72,12 +77,19 @@ protected:
 	LoomInternetPlat*	internet_modules[MAX_INTERNETS];
 	LoomLogPlat*		log_modules[MAX_LOGS];
 
+	/// Count of miscellaneous modules
 	uint other_module_count;
+	/// Count of sensor modules
 	uint sensor_count;
+	/// Count of actuator modules
 	uint actuator_count;
+	/// Count of RTC modules
 	uint rtc_count;
+	/// Count of communication modules
 	uint comm_count;
+	/// Count of internet modules
 	uint internet_count;
+	/// Count of logging platform modules
 	uint log_count;
 
 

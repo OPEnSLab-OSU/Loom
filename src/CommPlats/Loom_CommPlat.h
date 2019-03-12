@@ -18,15 +18,15 @@ class LoomCommPlat : public LoomModule
 protected:
 
 	/// The maximum message length
-	uint16_t  max_message_len;
+	uint16_t	max_message_len;
 	
 	// CommScope subnet_scope;			// The scope to accept messages on       Switch to be ENUM      Maybe move to LoomDevice instead?
 
 	/// Whether or not to try to compress transmission strings
-	bool      compress_messages;	
+	bool		compress_messages;	
 
 	/// Rssi for Lora (need to determine what the other platforms use)
-	int16_t   signal_strength; 
+	int16_t		signal_strength; 
 
 	// Not sure if address will be in this scope of only the individual implementations
 
@@ -52,7 +52,7 @@ public:
 	virtual void print_config();
 	virtual void package(OSCBundle& bndl, char* suffix="");
 	virtual void measure() {}
-	virtual bool message_route(OSCMessage& msg, int address_offset);
+	virtual bool message_route(OSCMessage& msg, int address_offset) {}
 
 
 	// Build OSC Bundle from packet if any exists
@@ -106,16 +106,16 @@ protected:
 
 private:
 
-	// Conversion without compression
+	/// Conversion from c string to bundle without compression
 	void original_convert_string_to_bundle(char* osc_string, OSCBundle& bndl);
 
-	// Conversion without decompression
+	/// Conversion from bundle to string without decompression
 	void original_convert_bundle_to_string(OSCBundle& bndl, char* osc_string);
 	
-	// Compress messages 
+	/// Compress c-strings representing bundles 
 	void compress_message_string(char* osc_string);
 
-	// Uncompress messages
+	/// Uncompress c-strings representing bundles
 	void uncompress_message_string(char* osc_string);
 
 
