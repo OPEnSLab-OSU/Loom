@@ -24,7 +24,7 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 		case DeviceType::HUB      : return "Hub";
 		case DeviceType::NODE     : return "Node";
 		case DeviceType::REPEATER : return "Repeater";
-		default       : return "";
+		default : return "";
 	}
 }
 
@@ -78,7 +78,6 @@ void LoomManager::print_config()
 	Println3('\t', "Family Number       : ", family_num );
 	Println3('\t', "Instance Number     : ", instance );
 	Println3('\t', "Device Type         : ", enum_device_type_string(device_type) );
-
 	Println3('\t', "Instance Number     : ", instance );
 
 	list_modules();
@@ -402,26 +401,6 @@ void LoomManager::set_package_verbosity(Verbosity v)
 {
 	package_verbosity = v;
 }
-
-
-
-
-
-// ** MAYBE IMPLEMENT THESE HERE **
-// might not be needed becaused of CommPlat and other
-
-//but probably put here, because measure and package aren't managed elsewhere
-
-	// void measure();
-	// void package();
-	// void receive(); // not srue if this should take arg to specify platform
-	// void send();
-	// void log(Enum );
-	// void sleep(); // could have default sleep behavior?
-
-// void current_bundle(OSCBundle* bndl) ? return a stored bundle
-// void print_data
-
 
 /////////////////////////////////////////////////////////////////////
 void LoomManager::measure_aux(LoomModule** modules, uint len)

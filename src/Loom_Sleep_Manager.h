@@ -18,7 +18,11 @@ class LoomRTC; // Specify that LoomRTC exists, defined in own file
 
 
 
-enum class SleepMode { IDLE, STANDBY, SLEEPYDOG };
+enum class SleepMode { 
+	IDLE, 		///< Idle
+	STANDBY, 	///< Standby
+	SLEEPYDOG 	///< SleepyDog (sleep 'hack')
+};
 
 
 

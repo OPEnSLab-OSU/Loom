@@ -6,7 +6,12 @@
 
 
 
-enum class LogPlatform { SDCARD, PUSHINGBOX, OLED, SERIAL_MON };
+enum class LogPlatform { 
+	SDCARD, 		///< Serial Monitor
+	PUSHINGBOX, 	///< PushingBox 
+	OLED, 			///< OLED Display
+	SERIAL_MON 		///< Serial Monitor
+};
 
 
 

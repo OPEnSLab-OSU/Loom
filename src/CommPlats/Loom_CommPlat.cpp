@@ -41,8 +41,8 @@ char* LoomCommPlat::enum_comm_plat_string(CommPlatform c)
 // --- CONSTRUCTOR ---
 LoomCommPlat::LoomCommPlat( 
 		char*	module_name, 
-		uint 	max_message_len, 
-		bool 	compress_messages 
+		uint	max_message_len, 
+		bool	compress_messages 
 	) 
 	: LoomModule( module_name )
 {

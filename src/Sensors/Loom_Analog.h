@@ -18,7 +18,15 @@ typedef struct {
 
 
 
-enum class AnalogConversion { NONE, VOLTAGE, THERMISTOR, PH, TURBIDITY, EC, TDS }; 
+enum class AnalogConversion { 
+	NONE, 			///< No conversion applied
+	VOLTAGE, 		///< Analog to voltage
+	THERMISTOR,		///< Thermistor 
+	PH,				///< pH value
+	TURBIDITY, 		///< Turbidity
+	EC, 			///< Electrical Conductivity
+	TDS				///< Total Dissolved Solids
+}; 
 
 
 

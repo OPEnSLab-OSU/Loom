@@ -18,8 +18,17 @@
 
 
 
-enum class DeviceType { HUB, NODE, REPEATER };
-enum class Verbosity { V_OFF, V_LOW, V_HIGH }; 
+enum class DeviceType { 
+	HUB, 		///< Central device 
+	NODE, 		///< Data collecting / actuating node
+	REPEATER 	///< Forwards messages between other devices
+};
+
+enum class Verbosity { 
+	V_OFF,		///< Disable
+	V_LOW, 		///< Minimal/Stardard
+	V_HIGH 		///< Full details
+}; 
 
 
 // Forward declarations, specify that these classes 
@@ -52,7 +61,6 @@ protected:
 
 	/// The name of the device
 	char* 		device_name;	
-
 	/// The family the device belongs to
 	char* 		family;			
 	/// The subnet of the family
@@ -92,9 +100,11 @@ protected:
 	/// Count of logging platform modules
 	uint log_count;
 
+	/// Print detail verbosity
+	Verbosity print_verbosity;		
+	/// Package detail verbosity 
+	Verbosity package_verbosity;	
 
-	Verbosity print_verbosity;		// Print verbosity
-	Verbosity package_verbosity;	// Package verbosity 
 
 	OSCBundle bundle;	// Not sure if this will always work...
 
@@ -120,8 +130,10 @@ public:
 	// --- DESTRUCTOR ---
 	~LoomManager();
 
-
+	/// Print the device name as '[device_name]'
 	void print_device_label();
+	/// Print the devices current configuration.
+	/// Also prints configuration of linked modules.
 	void print_config();
 
 
@@ -144,40 +156,47 @@ public:
 
 
 	// Over loaded as to sort by module type
-	void add_module(Loom_Interrupt_Manager* interrupt_manager); 
-	void add_module(Loom_Sleep_Manager* sleep_manager);
+	void		add_module(Loom_Interrupt_Manager* interrupt_manager); 
+	void		add_module(Loom_Sleep_Manager* sleep_manager);
 
-	void add_module(LoomModule* module);
-	void add_module(LoomSensor* sensor); 
-	void add_module(LoomActuator* actuator); 
-	void add_module(LoomRTC* rtc); 
-	void add_module(LoomCommPlat* comm_plat); 
-	void add_module(LoomInternetPlat* internet_plat); 
-	void add_module(LoomLogPlat* log_plat); 
+	void		add_module(LoomModule* module);
+	void		add_module(LoomSensor* sensor); 
+	void		add_module(LoomActuator* actuator); 
+	void		add_module(LoomRTC* rtc); 
+	void		add_module(LoomCommPlat* comm_plat); 
+	void		add_module(LoomInternetPlat* internet_plat); 
+	void		add_module(LoomLogPlat* log_plat); 
 
 	Loom_Interrupt_Manager*	get_interrupt_manager();
 	Loom_Sleep_Manager*		get_sleep_manager();
 
-	LoomModule*			get_other_module(int idx);
-	LoomSensor*			get_sensor_module(int idx);
-	LoomActuator*		get_actuator_module(int idx);
-	LoomRTC*			get_rtc_module(int idx);
-	LoomCommPlat*		get_comm_plat_module(int idx);
-	LoomInternetPlat*	get_internet_plat_module(int idx);
-	LoomLogPlat*		get_log_plat_module(int idx);
+	LoomModule*				get_other_module(int idx);
+	LoomSensor*				get_sensor_module(int idx);
+	LoomActuator*			get_actuator_module(int idx);
+	LoomRTC*				get_rtc_module(int idx);
+	LoomCommPlat*			get_comm_plat_module(int idx);
+	LoomInternetPlat*		get_internet_plat_module(int idx);
+	LoomLogPlat*			get_log_plat_module(int idx);
 
 
 
 
 	// void module_enable(LoomModule* LM, bool e) ?
 
-	void list_modules();
+	/// Print the linked modules
+	void 		list_modules();
 
 
+	/// Set the device name.
+	void 		set_device_name(char* device_name);
+	/// Get the device name, copies into provided buffer.
+	/// \param[out] buf	The buffer copy device name into
+	void 		get_device_name(char* buf);
+	/// Get the device name
+	/// \return String literal of device name.
+	char*		get_device_name();
 
-	void set_device_name(char* device_name);
-	void get_device_name(char* buf);
-	char* get_device_name();
+
 
 	
 
@@ -186,34 +205,62 @@ public:
 	// char* packet_header() {}
 	// void packet_header(char* buf) {}
 
-	void packet_header_family(char* buf);
-	char* packet_header_family();
+	/// Copy device identification message header (to family level) string to buffer.
+	/// \param[out]	buf The bufer to copy family name into
+	void		packet_header_family(char* buf);
+	/// Return device identification message header (to family level) string.
+	/// \return	The device family string
+	char*	 	packet_header_family();
+	/// Copy device identification message header (to subnet level) string to buffer.
+	/// \param[out] buf The bufer to copy subnet name into
+	void		packet_header_subnet(char* buf);
+	/// Return device identification message header (to subnet level) string.
+	/// \return The device subnet string
+	char*		packet_header_subnet();
+	/// Copy device identification message header (to device specific level) string to buffer. 
+	/// \param[out] buf The bufer to copy device name into
+	void		packet_header_device(char* buf);
+	/// Return device identification message header (to device specific level) string.
+	/// \return The device name and number string
+	char*		packet_header_device();
 
-	void packet_header_subnet(char* buf);
-	char* packet_header_subnet();
 
-	void packet_header_device(char* buf);
-	char* packet_header_device();
+	/// Get device family name.
+	/// \return Family name
+	char*		get_family();
+	/// Set device family name.
+	/// \param[out] family Family name
+	void		set_family(char* f);
+	/// Get device family number.
+	/// \return Family number
+	int			get_family_num();
+	/// Set device family number.
+	/// \param[in] New family number
+	void		set_family_num(int n);
+	/// Get device instance number.
+	/// \return Family number
+	int			get_instance_num();
+	/// Set device instance number.
+	/// \param[in] New instance number
+	void		set_instance_num(int n);
 
 
-	char* get_family();
-	void set_family(char* f);
 
-	int  get_family_num();
-	void set_family_num(int n);
-
-	int  get_instance_num();
-	void set_instance_num(int n);
-
-	DeviceType get_device_type();
+	DeviceType	get_device_type();
 	// void set_device_type(DeviceType t) {device_type = t; }
 
-
-	Verbosity get_print_verbosity();
-	void set_print_verbosity(Verbosity v);
-
-	Verbosity get_package_verbosity();
-	void set_package_verbosity(Verbosity v);
+	/// Get print verbosity.
+	/// \return print verbosity
+	Verbosity	get_print_verbosity();
+	/// Set print verbosity.
+	/// \param[in] v New print verbosity
+	void		set_print_verbosity(Verbosity v);
+	/// Get package verbosity.
+	/// \return package verbosity
+	Verbosity	get_package_verbosity();
+		/// Set package verbosity.
+	/// \param[in] v New package verbosity
+	void		set_package_verbosity(Verbosity v);
 
 
 // ** MAYBE IMPLEMENT THESE HERE **
@@ -233,15 +280,15 @@ public:
 
 
 
-	void measure();  
-	void package();
-	void package(OSCBundle& bndl);
+	void		measure();  
+	void		package();
+	void		package(OSCBundle& bndl);
 
-	void print_current_bundle();
+	void		print_current_bundle();
 
 
-	void flash_LED(uint count, uint time_high, uint time_low);
-	void flash_LED(uint sequence[3]);
+	void		flash_LED(uint count, uint time_high, uint time_low);
+	void		flash_LED(uint sequence[3]);
 
 
 	// Methods to set package and print verbosities all at once
@@ -249,12 +296,12 @@ public:
 private:
 
 
-	void Device_Init();
+	void		Device_Init();
 
-	void add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
-	void list_modules_aux(LoomModule** modules, uint len, char* module_type);
-	void measure_aux(LoomModule** modules, uint len);
-	void package_aux(LoomModule** modules, uint len);
+	void		add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
+	void		list_modules_aux(LoomModule** modules, uint len, char* module_type);
+	void		measure_aux(LoomModule** modules, uint len);
+	void		package_aux(LoomModule** modules, uint len);
 
 
 };

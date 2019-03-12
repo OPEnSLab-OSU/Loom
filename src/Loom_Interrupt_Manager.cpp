@@ -19,10 +19,12 @@ const ISRFuncPtr Loom_Interrupt_Manager::default_ISRs[InteruptRange] =
 
 
 /////////////////////////////////////////////////////////////////////
-Loom_Interrupt_Manager::Loom_Interrupt_Manager( char* module_name, LoomRTC* RTC_Inst) 
+Loom_Interrupt_Manager::Loom_Interrupt_Manager( 
+		char*		module_name, 
+		LoomRTC*	RTC_Inst
+	) 
 	: LoomModule( module_name )
 {
-
 	interrupts_enabled = true;
 
 	for (int i = 0; i < InteruptRange; i++) {
@@ -64,8 +66,6 @@ void Loom_Interrupt_Manager::print_config()
 void Loom_Interrupt_Manager::print_state()
 {
 	LoomModule::print_state();
-
-
 }
 
 /////////////////////////////////////////////////////////////////////

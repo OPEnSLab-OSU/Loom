@@ -17,23 +17,20 @@ class LoomRTC; // Specify that LoomRTC exists, defined in own file
 
 // Used to make function signatures easier to read 
 // when returning function pointers
+/// Typedef to for ISR function pointer readability
 typedef void (*ISRFuncPtr)(); 
 
 
 
-// INT_LOW		: 0
-// INT_HIGH		: 1
-// INT_CHANGE 	: 2
-// INT_FALLING	: 3
-// INT_RISING	: 4
+
 // enum IntType { INT_LOW, INT_HIGH, INT_CHANGE, INT_FALLING, INT_RISING };
 
 
 struct IntDetails {
-	ISRFuncPtr 	ISR;			// set null if no interrupt linked
-	byte	 	type;
-	bool 		is_immediate;
-	bool 		is_enabled;
+	ISRFuncPtr 	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
+	byte	 	type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
+	bool 		is_immediate;	///< True if ISR is called directly upon interrupt, false if called next check of flags
+	bool 		is_enabled;		///< Whether or not this interrupt is enabled
 
 	// char[20] description ?
 };
@@ -47,19 +44,21 @@ class Loom_Interrupt_Manager : public LoomModule
 
 protected:
 
-	// Enable or disable all interrupts 	-- currently only disables bottom halves
+	/// Enable or disable all interrupts 	-- currently only disables bottom halves
 	bool 			interrupts_enabled;
 
+	/// List of interrupts configurations
 	IntDetails		settings[InteruptRange];
 
 	// Flags set by interrupts, indicating ISR bottom 
 	// half should be called if not Null
 	static bool 	interrupt_triggered[InteruptRange];
 
-
+	/// Pointer to an RTC object for managing timers / timed interrupts
 	LoomRTC*		RTC_Inst;
 
-	DateTime 	last_alarm_time;
+	/// Last time an alarm went off
+	DateTime 		last_alarm_time;
 
 
 	// interrupt_triggered for timers, also support immediate and delayed

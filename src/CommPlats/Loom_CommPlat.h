@@ -6,7 +6,12 @@
 #include "Loom_Module.h"
 
 
-enum class CommPlatform { WIFI, LORA, NRF, SSER };
+enum class CommPlatform { 
+	WIFI, 		///< WiFi
+	LORA, 		///< LoRa
+	NRF,		///< Nordic Radio
+	SSER 		///< Slip Serial
+};
 // enum CommScope { SCOPE_DEVICE, SCOPE_SUBNET, SCOPE_FAMILY, SCOPE_SUBNET_ONLY, SCOPE_FAMILY_ONLY, SCOPE_ANY };
 
 
