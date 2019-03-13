@@ -195,7 +195,7 @@ bool Loom_Multiplexer::message_route(OSCMessage& msg, int address_offset)
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::get_sensor_list(OSCBundle& bndl) // populate an OSC bundle
+void Loom_Multiplexer::get_sensor_list(OSCBundle& bndl)
 {
 	refresh_sensors();
 
