@@ -43,12 +43,13 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_MAX31856();
 
-	void print_config();
-	void print_measurements();
-	void calibrate() {}
-	void measure();
-	void package(OSCBundle& bndl, char* suffix="");
-	bool message_route(OSCMessage& msg, int address_offset) {}
+	// Inherited Methods
+	void		print_config();
+	void		print_measurements();
+	void		calibrate() {}
+	void		measure();
+	void		package(OSCBundle& bndl, char* suffix="");
+	bool		message_route(OSCMessage& msg, int address_offset) {}
 
 private:
 

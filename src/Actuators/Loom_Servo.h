@@ -20,10 +20,10 @@ protected:
 	Adafruit_PWMServoDriver servo_driver = Adafruit_PWMServoDriver();
 
 	/// Number of servos
-	uint8_t servo_count;
+	uint8_t		servo_count;
 
 	/// Positions of the servos
-	int* positions;
+	int*		positions;
 
 public:
 
@@ -37,15 +37,15 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Servo();
 
-	// General
-	void print_config();
-	void print_state();
-	void package(OSCBundle& bndl, char* suffix="");
-	bool message_route(OSCMessage& msg, int address_offset);
+	// Inherited (Overriding) Methods
+	void		print_config();
+	void		print_state();
+	void		package(OSCBundle& bndl, char* suffix="");
+	bool		message_route(OSCMessage& msg, int address_offset);
 
 	// Actuator Control
-	void set_degree(int servo, int degree);
-	void set_degree(OSCMessage& msg);
+	void		set_degree(int servo, int degree);
+	void		set_degree(OSCMessage& msg);
 
 private:
 

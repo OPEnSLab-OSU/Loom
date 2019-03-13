@@ -28,20 +28,22 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_PCF8523();
 
-	void print_config();
-	bool message_route(OSCMessage& msg, int address_offset) {}
+	// Inherited Methods
+	void		print_config();
+	bool		message_route(OSCMessage& msg, int address_offset) {}
 	
-	DateTime now();
+	DateTime	now();
+
 
 
 	// Alarm functions (not currently implemented for this RTC, 
 	// need to combine 2 libraries to get this working)
-	void set_alarm(DateTime time) {}
-	void clear_alarms() {}
+	void		set_alarm(DateTime time) {}
+	void		clear_alarms() {}
 
 protected:
 
-	void time_adjust(DateTime time);
+	void		time_adjust(DateTime time);
 
 };
 

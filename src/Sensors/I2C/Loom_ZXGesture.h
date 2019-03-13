@@ -45,11 +45,11 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_ZXGesture();
 
-	void print_config();
-	void print_measurements();
-
-	void measure();
-	void package(OSCBundle& bndl, char* suffix="");
+	// Inherited (Overriding) Methods
+	void		print_config();
+	void		print_measurements();
+	void		measure();
+	void		package(OSCBundle& bndl, char* suffix="");
 
 private:
 

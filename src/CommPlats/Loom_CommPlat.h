@@ -50,42 +50,42 @@ public:
 	virtual ~LoomCommPlat();
 
 
-	static char* enum_comm_plat_string(CommPlatform c);
+	static char*	enum_comm_plat_string(CommPlatform c);
 	// static char* enum_subnet_scope_string(CommScope s);
 
 	// General
-	virtual void print_config();
-	virtual void package(OSCBundle& bndl, char* suffix="");
-	virtual void measure() {}
-	virtual bool message_route(OSCMessage& msg, int address_offset) {}
+	virtual void	print_config();
+	virtual void	package(OSCBundle& bndl, char* suffix="");
+	virtual void	measure() {}
+	virtual bool	message_route(OSCMessage& msg, int address_offset) {}
 
 
 	// Build OSC Bundle from packet if any exists
-	virtual bool receive_bundle(OSCBundle& bndl) = 0;
+	virtual bool	receive_bundle(OSCBundle& bndl) = 0;
 
 	// Send an OSC bundle
 	// Should overload or use default args to optionally allow default address
-	virtual bool send_bundle(OSCBundle& bndl, uint16_t destination) = 0;
-	virtual bool send_bundle(OSCBundle& bndl) = 0;
+	virtual bool	send_bundle(OSCBundle& bndl, uint16_t destination) = 0;
+	virtual bool	send_bundle(OSCBundle& bndl) = 0;
 
 	// Broadcast an OSC bundle
-	virtual void broadcast_bundle(OSCBundle& bndl) = 0;
+	virtual void	broadcast_bundle(OSCBundle& bndl) = 0;
 
-	virtual void set_address(uint a) = 0;
-	virtual uint get_address() = 0;
+	virtual void	set_address(uint a) = 0;
+	virtual uint	get_address() = 0;
 
 	// void set_subnet_scope(CommScope s);
 	// CommScope get_subnet_scope();
 
-	void set_compress_messages(bool c);
-	bool get_compress_messages();
+	void			set_compress_messages(bool c);
+	bool			get_compress_messages();
 
 
 // move back to protected?
 
 // can probably just return offset and check if -1 to remove need to return bool
-	bool scope_filter(OSCBundle& bndl, int* offset);
-	bool scope_filter(OSCBundle& bndl);
+	bool			scope_filter(OSCBundle& bndl, int* offset);
+	bool			scope_filter(OSCBundle& bndl);
 
 
 protected:
@@ -103,25 +103,25 @@ protected:
 	// bool scope_filter(OSCBundle& bndl);
 
 
-	void convert_string_to_bundle(char* osc_string, OSCBundle& bndl);
+	void			convert_string_to_bundle(char* osc_string, OSCBundle& bndl);
 
 // break compression out to different function
-	void convert_bundle_to_string(OSCBundle& bndl, char* osc_string);
+	void			convert_bundle_to_string(OSCBundle& bndl, char* osc_string);
 
 
 private:
 
 	/// Conversion from c string to bundle without compression
-	void original_convert_string_to_bundle(char* osc_string, OSCBundle& bndl);
+	void			original_convert_string_to_bundle(char* osc_string, OSCBundle& bndl);
 
 	/// Conversion from bundle to string without decompression
-	void original_convert_bundle_to_string(OSCBundle& bndl, char* osc_string);
+	void			original_convert_bundle_to_string(OSCBundle& bndl, char* osc_string);
 	
 	/// Compress c-strings representing bundles 
-	void compress_message_string(char* osc_string);
+	void			compress_message_string(char* osc_string);
 
 	/// Uncompress c-strings representing bundles
-	void uncompress_message_string(char* osc_string);
+	void			uncompress_message_string(char* osc_string);
 
 
 };

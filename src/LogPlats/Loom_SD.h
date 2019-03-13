@@ -62,15 +62,15 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_SD();
 
-	void print_config();
-	void set_default_file(char* filename);
-	char* get_default_file();
-	void delete_file(char* file);
-	void empty_file(char* file);
-	void list_files();
-	bool dump_file(char* file) ;
+	void		print_config();
+	void		set_default_file(char* filename);
+	char*		get_default_file();
+	void		delete_file(char* file);
+	void		empty_file(char* file);
+	void		list_files();
+	bool		dump_file(char* file) ;
 
-	void log_bundle(OSCBundle& bndl);
+	void		log_bundle(OSCBundle& bndl);
 
 
 	// --- SD SAVE BUNDLE --- 
@@ -78,7 +78,7 @@ public:
 	// @param file       The file to save bundle to
 	// @param bndl       The bundle to be saved
 	// @param timestamp  Format of timestamp (if any)
-	bool save_bundle(OSCBundle& bndl, char* file, int timestamp=3);
+	bool		save_bundle(OSCBundle& bndl, char* file, int timestamp=3);
 
 
 
@@ -91,15 +91,15 @@ public:
 	//   4: both date and time added (combined field)
 	// Device_id, string identifying device - used if forwarded from save_bundle
 	template <typename T>
-	bool save_array(char *file, T data [], int len, char delimiter=',', int timestamp=3, bool has_keys=false, char* device_id="");
+	bool		save_array(char *file, T data [], int len, char delimiter=',', int timestamp=3, bool has_keys=false, char* device_id="");
 
 
 private:
 
-	void print_directory(File dir, int numTabs);
+	void		print_directory(File dir, int numTabs);
 
 	template <typename T>
-	void SD_print_aux(File SDFile, T data, char delimiter, bool add_space=true)
+	void		SD_print_aux(File SDFile, T data, char delimiter, bool add_space=true)
 	{
 		SDFile.print(data);
 		SDFile.print(delimiter);

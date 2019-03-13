@@ -36,16 +36,17 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~LoomSensor();
 
+	// Inherited Methods
+	virtual void	print_config();
+	virtual void	print_measurements() = 0;
+	virtual void	calibrate() {};
+	virtual void	measure() = 0;
+	virtual void	package(OSCBundle& bndl, char* suffix="") = 0;
+	virtual bool	message_route(OSCMessage& msg, int address_offset) {};
 
-	virtual void print_config();
-	virtual void print_measurements() = 0;
-	virtual void calibrate() {};
-	virtual void measure() = 0;
-	virtual void package(OSCBundle& bndl, char* suffix="") = 0;
-	virtual bool message_route(OSCMessage& msg, int address_offset) {};
 
-	void set_num_samples(uint8_t n);
-	uint8_t get_num_samples();
+	void			set_num_samples(uint8_t n);
+	uint8_t			get_num_samples();
 
 private:
 

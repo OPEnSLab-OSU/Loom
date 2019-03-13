@@ -14,24 +14,24 @@ class Loom_AS7265X : public LoomI2CSensor
 protected:
 
 	/// Underlying AS7265X sensor manager instance
-	AS7265X inst_AS7265X;
+	AS7265X		inst_AS7265X;
 
 	/// Measured UV bands values
-	int uv[6];
+	int			uv[6];
 	/// Measured color bands values
-	int color[6];
+	int			color[6];
 	/// Measured near-infra-red bands values
-	int nir[6];
+	int			nir[6];
 
 	/// Whether or not to use the bulb
-	bool use_bulb;
+	bool		use_bulb;
 
 	/// Gain setting 
-	byte gain;
+	byte		gain;
 	/// Sensor mode
-	byte mode;
+	byte		mode;
 	/// Integration time setting
-	byte integration_time;
+	byte		integration_time;
 
 
 public:
@@ -51,15 +51,16 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_AS7265X();
 
-	void print_measurements();
+	// Inherited (Overriding) Methods
+	void		print_measurements();
+	void		measure();
+	void		package(OSCBundle& bndl, char* suffix="");
 
-	void measure();
-	void package(OSCBundle& bndl, char* suffix="");
 
-	void enable_bulb(bool e);
-	void set_gain(byte gain);
-	void set_mode(byte mode);
-	void set_integration_time(byte time);
+	void		enable_bulb(bool e);
+	void		set_gain(byte gain);
+	void		set_mode(byte mode);
+	void		set_integration_time(byte time);
 
 private:
 

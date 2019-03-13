@@ -53,9 +53,9 @@ private:
 	// static const char* const daysOfTheWeek[7] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 	
 	/// Array of strings the days of the week
-	const static char* daysOfTheWeek[];
+	const static char*	daysOfTheWeek[];
 	/// Timezone hour adjustment associated with each TimeZone enum
-	const static float timezone_adjustment[];
+	const static float	timezone_adjustment[];
 
 protected:
 
@@ -92,23 +92,24 @@ public:
 
 	static char* enum_timezone_string(TimeZone t);
 
+	// Inherited Methods
+	virtual void 	print_config();
+	virtual void 	measure() {};
+	virtual void 	package(OSCBundle& bndl, char* suffix="");
+	virtual bool 	message_route(OSCMessage& msg, int address_offset) = 0;
 
-	virtual void print_config();
-	virtual void measure() {};
-	virtual void package(OSCBundle& bndl, char* suffix="");
-	virtual bool message_route(OSCMessage& msg, int address_offset) = 0;
 
 	virtual DateTime now() = 0;
-	static void print_DateTime(DateTime time);
+	static void 	print_DateTime(DateTime time);
 
-	void print_time(bool verbose=false);
+	void 			print_time(bool verbose=false);
 
-	char* get_datestring(); 
-	void  get_datestring(char* buf); 
-	char* get_timestring();	
-	void  get_timestring(char* buf);
-	char* get_weekday();
-	void  get_weekday(char* buf);
+	char*			get_datestring(); 
+	void			get_datestring(char* buf); 
+	char*			get_timestring();	
+	void			get_timestring(char* buf);
+	char*			get_weekday();
+	void			get_weekday(char* buf);
 
 
 	//   0: no timestamp added
@@ -116,36 +117,36 @@ public:
 	//   2: only time added
 	//   3: both date and time added (two fields)
 	//   4: both date and time added (combined field)
-	void get_timestamp(char* header, char* timestamp, char delimiter, uint8_t format=3);
+	void			get_timestamp(char* header, char* timestamp, char delimiter, uint8_t format=3);
 
 
 
 // might be able to move implementation up to this class if combining RTC libraries uses same alarm interface
-	virtual void set_alarm(DateTime time) = 0;
-	virtual void clear_alarms() {}
+	virtual void	set_alarm(DateTime time) = 0;
+	virtual void	clear_alarms() {}
 
 
 
-	byte get_interrupt_pin();
+	byte			get_interrupt_pin();
 
 	// Static because ISRs need to be static if they are class methods
 	// Interrupt pin is also static, as that pin is referenced 
-	static void RTC_Wake_ISR();
+	static void		RTC_Wake_ISR();
 
 
 protected:
 
-	void read_rtc();
-	void set_rtc_to_compile_time();
-	void convert_local_to_utc(bool to_utc=true);
-	bool rtc_validity_check();
+	void			read_rtc();
+	void			set_rtc_to_compile_time();
+	void			convert_local_to_utc(bool to_utc=true);
+	bool			rtc_validity_check();
 
 
-	virtual void time_adjust(DateTime time) = 0;
+	virtual void	time_adjust(DateTime time) = 0;
 
 
 // needs to reference and internet connectivity class to get unix time
-	bool set_rtc_from_internet_time(); 
+	bool			set_rtc_from_internet_time(); 
 
 };
 

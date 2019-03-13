@@ -14,20 +14,20 @@ class Loom_AS7262 : public LoomI2CSensor
 protected:
 
 	/// Underlying AS7262 sensor manager instance
-	AS726X inst_AS7262;
+	AS726X		inst_AS7262;
 
 	/// Measured color  band values (violet, blue, green, yellow, orange, red)
-	int color_vals[6];
+	int			color_vals[6];
 
 	/// Whether or not to use bulb
-	bool use_bulb;
+	bool		use_bulb;
 
 	/// Gain setting
-	byte gain;
+	byte		gain;
 	/// Sensor read mode
-	byte mode;
+	byte		mode;
 	/// Integration time setting
-	byte integration_time;
+	byte		integration_time;
 
 public:
 
@@ -49,16 +49,16 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_AS7262();
 
-	void print_config();
-	void print_measurements();
+	// Inherited (Overriding) Methods
+	void		print_config();
+	void		print_measurements();
+	void		measure();
+	void		package(OSCBundle& bndl, char* suffix="");
 
-	void measure();
-	void package(OSCBundle& bndl, char* suffix="");
-
-	void enable_bulb(bool enable);
-	void set_gain(byte gain);
-	void set_mode(byte mode);
-	void set_integration_time(byte time);
+	void		enable_bulb(bool enable);
+	void		set_gain(byte gain);
+	void		set_mode(byte mode);
+	void		set_integration_time(byte time);
 
 private:
 

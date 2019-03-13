@@ -82,25 +82,30 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Analog();
 
-	void print_config();
-	void print_measurements();
-	void measure();
-	void package(OSCBundle& bndl, char* suffix="");		 // This might be where analog conversions are applied
-	bool message_route(OSCMessage& msg, int address_offset);
-
-	void 	set_analog_resolution(uint8_t res);
-	uint8_t get_analog_resolution();
-
-	int get_analog_val(uint8_t pin);
+	// Inherited Methods
+	void		print_config();
+	void		print_measurements();
+	void		measure();
+	void		package(OSCBundle& bndl, char* suffix="");		 // This might be where analog conversions are applied
+	bool		message_route(OSCMessage& msg, int address_offset);
 
 
-	bool get_pin_enabled(uint8_t pin);
-	void set_pin_enabled(uint8_t pin, bool e);
+
+	void		set_analog_resolution(uint8_t res);
+	uint8_t		get_analog_resolution();
+
+	int			get_analog_val(uint8_t pin);
+
+
+	bool		get_pin_enabled(uint8_t pin);
+	void		set_pin_enabled(uint8_t pin, bool e);
 
 	AnalogConversion get_conversion(uint8_t pin);
-	void  set_conversion(uint8_t pin, AnalogConversion c);
-	void  set_enable_conversions(bool e);
-	float convert(uint8_t pin, uint16_t analog);
+	void  		set_conversion(uint8_t pin, AnalogConversion c);
+	void  		set_enable_conversions(bool e);
+	float 		convert(uint8_t pin, uint16_t analog);
+
+
 
 
 	// Save a FlashStorage struct
@@ -112,14 +117,14 @@ public:
 
 private:
 
-	uint16_t read_analog(uint8_t chnl);
+	uint16_t	read_analog(uint8_t chnl);
 
-	float convert_voltage(uint16_t analog);
-	float convert_thermistor(uint16_t analog);
-	float convert_pH(uint16_t analog);
-	float convert_turbidity(uint16_t analog);	
-	float convert_EC(uint16_t analog);
-	float convert_TDS(uint16_t analog);
+	float		convert_voltage(uint16_t analog);
+	float		convert_thermistor(uint16_t analog);
+	float		convert_pH(uint16_t analog);
+	float		convert_turbidity(uint16_t analog);	
+	float		convert_EC(uint16_t analog);
+	float		convert_TDS(uint16_t analog);
 
 };
 

@@ -31,10 +31,10 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_LIS3DH();
 
-	void print_measurements();
-
-	void measure();
-	void package(OSCBundle& bndl, char* suffix="");
+	// Inherited (Overriding) Methods
+	void		print_measurements();
+	void		measure();
+	void		package(OSCBundle& bndl, char* suffix="");
 
 private:
 

@@ -43,24 +43,28 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Digital();
 
-	void print_config();
-	void print_measurements();
-	void measure();
-	void package(OSCBundle& bndl, char* suffix="");
-	bool message_route(OSCMessage& msg, int address_offset) {}
+	// Inherited Methods
+	void		print_config();
+	void		print_measurements();
+	void		measure();
+	void		package(OSCBundle& bndl, char* suffix="");
+	bool		message_route(OSCMessage& msg, int address_offset) {}
 
-	bool get_digital_val(uint8_t pin);
-	void set_digital_val(uint8_t pin, bool state);
 
-	bool get_pin_enabled(uint8_t pin);
-	void set_pin_enabled(uint8_t pin, bool e);
+
+
+	bool		get_digital_val(uint8_t pin);
+	void		set_digital_val(uint8_t pin, bool state);
+
+	bool		get_pin_enabled(uint8_t pin);
+	void		set_pin_enabled(uint8_t pin, bool e);
 
 private:
 
 	/// Used to convert pin number to index in member arrays
 	static uint8_t pin_nums[DIGITAL_COUNT];
 
-	uint8_t pin_to_index(uint8_t pin);
+	uint8_t		pin_to_index(uint8_t pin);
 
 };
 

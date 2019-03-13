@@ -66,26 +66,26 @@ public:
 
 	// --- PUBLIC METHODS ---
 
-	void print_config();
+	void		print_config();
 
 	// Build OSC Bundle from packet if any exists
-	bool receive_bundle(OSCBundle& bndl);
+	bool		receive_bundle(OSCBundle& bndl);
 
 
 	// Send an OSC bundle
 	// Should overload or use default args to optionally allow default address
-	bool send_bundle(OSCBundle& bndl, uint16_t destination);
-	bool send_bundle(OSCBundle& bndl);
+	bool		send_bundle(OSCBundle& bndl, uint16_t destination);
+	bool		send_bundle(OSCBundle& bndl);
 
 	// Broadcast an OSC bundle
-	void broadcast_bundle(OSCBundle& bndl);
+	void		broadcast_bundle(OSCBundle& bndl);
 
 
-	void set_address(uint addr);
-	uint get_address();
+	void		set_address(uint addr);
+	uint		get_address();
 
-	void set_friend_address(uint addr);
-	uint get_friend_address();
+	void		set_friend_address(uint addr);
+	uint		get_friend_address();
 
 private:
 

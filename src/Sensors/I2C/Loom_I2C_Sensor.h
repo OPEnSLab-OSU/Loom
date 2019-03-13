@@ -27,14 +27,14 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~LoomI2CSensor();
 
+	// Inherited Methods
+	virtual void	print_config();
+	virtual void	measure() = 0;
+	virtual void	package(OSCBundle& bndl, char* suffix="") = 0;
 
-	virtual void print_config();
-
-	virtual void measure() = 0;
-	virtual void package(OSCBundle& bndl, char* suffix="") = 0;
-
-	// Get the sensor's I2C address
-	byte get_i2c_address(); 	
+	/// Get the sensor's I2C address
+	/// \return	The sensor's I2C address
+	byte			get_i2c_address(); 	
 
 private:
 

@@ -35,10 +35,10 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_MS5803();
 
-	void print_measurements();
-
-	void measure();
-	void package(OSCBundle& bndl, char* suffix="");
+	// Inherited (Overriding) Methods
+	void		print_measurements();
+	void		measure();
+	void		package(OSCBundle& bndl, char* suffix="");
 
 private:
 

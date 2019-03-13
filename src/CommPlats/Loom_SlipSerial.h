@@ -33,12 +33,11 @@ public:
 	/// Destructor	
 	~Loom_SlipSerial();
 
+	// Inherited (Overriding) Methods
 	void print_config(); ///< Outputs Configuration of CommPlat
-
 	bool receive_bundle(OSCBundle& bndl); ///< Build OSC Bundle from packet if any exists
 	bool send_bundle(OSCBundle& bndl); ///< Send an OSC Bundle
 	void broadcast_bundle(OSCBundle& bndl); ///< Broadcast an OSC bundle
-
 	void set_address(uint addr);
 	uint get_address();
 

@@ -30,11 +30,12 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~Loom_DecagonGS3();
 
-	void print_config();
-	void print_measurements();
-	void calibrate() {};
-	void measure();
-	void package(OSCBundle& bndl, char* suffix="");
+	// Inherited Methods
+	void		print_config();
+	void		print_measurements();
+	void		calibrate() {};
+	void		measure();
+	void		package(OSCBundle& bndl, char* suffix="");
 
 private:
 

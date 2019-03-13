@@ -7,9 +7,22 @@
 #include <Adafruit_SSD1306.h>
 
 
-enum class OLED_Version { FEATHERWING, BREAKOUT };
-enum class OLED_Format  { FOUR, EIGHT, SCROLL };
-enum class OLED_Freeze  { DISABLE, DATA, SCROLL };
+enum class OLED_Version { 
+	FEATHERWING,	///< FeatherWing OLED
+	BREAKOUT		///< Breakout board 
+};
+
+enum class OLED_Format { 
+	FOUR,		///< 4 Key values
+	EIGHT,		///< 8 Key values
+	SCROLL		///< Scrolling
+};
+
+enum class OLED_Freeze { 
+	DISABLE, 	///< Freeze disabled
+	DATA, 		///< Screen freezes
+	SCROLL 		///< Scroll freezes, data updates
+};
 
 
 
@@ -65,27 +78,29 @@ public:
 	virtual ~Loom_OLED();
 
 
-	void print_config();
+	void			print_config();
 
-	void set_display_format(OLED_Format format);
-	OLED_Format get_display_format();
+	void			set_display_format(OLED_Format format);
+	OLED_Format		get_display_format();
 
-	void set_scroll_duration(uint duration);
-	uint get_scroll_duration();
+	void			set_scroll_duration(uint duration);
+	uint			get_scroll_duration();
 
-	void set_freeze_pin(byte pin);
-	byte get_freeze_pin();
+	void			set_freeze_pin(byte pin);
+	byte			get_freeze_pin();
 
-	void set_freeze_behavior(OLED_Freeze behavior);
-	OLED_Freeze get_freeze_behavior();
+	void			set_freeze_behavior(OLED_Freeze behavior);
+	OLED_Freeze		get_freeze_behavior();
 
-	void log_bundle(OSCBundle& bndl);
-	void log_bundle(OSCBundle& bndl, OLED_Format format);
+	void			log_bundle(OSCBundle& bndl);
+	void			log_bundle(OSCBundle& bndl, OLED_Format format);
 
 
 private:
 	
-	unsigned long previous_time; // Used to manage scrolling
+	/// Last display update time.
+	/// Used to manage scrolling
+	unsigned long 	previous_time; 
 
 };
 
