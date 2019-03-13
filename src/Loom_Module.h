@@ -79,34 +79,43 @@ public:
 
 	// --- PUBLIC METHODS ---
 
-	LoomManager* get_device_manager();
+	/// Get the device manager class if linked
+	/// \return Pointer to the LoomManager, Null if not linked
+	LoomManager*	get_device_manager();
 
-	void link_device_manager(LoomManager* LD);
+	/// Add pointer back to device manager.
+	/// Generally only called when device manager links module
+	/// to provide pointer both directions
+	/// \param[in]	LM	LoomManager to point to
+	void			link_device_manager(LoomManager* LM);
 
-	void print_module_label();
+	/// Print the module name as a label.
+	/// Used for matching debug prints to corresponding module
+	void			print_module_label();
 
-	// Display configuration settings
-	virtual void print_config();
+	/// Display the configuration settings of the module
+	virtual void	print_config();
 
-	// Display current state
-	virtual void print_state();
+	/// Display current state of the module
+	virtual void	print_state();
 
-
-	virtual void measure() = 0; // maybe drop to subclasses  (measure_aux in Manager wouldnt work then)
+	/// Take any relevant measurements
+	virtual void	measure() = 0; // maybe drop to subclasses  (measure_aux in Manager wouldnt work then)
 
 	// Append to a bundle 
 
 	// Subclasses can provide defaults for id_prefix, permitting package(&bndl);
-	virtual void package(OSCBundle& bndl, char* suffix="") = 0;
+	/// Package a modules measurements or state.
+	virtual void	package(OSCBundle& bndl, char* suffix="") = 0;
 
 	// Package but try to reference LoomManager for id_prefix
 	// void package(OSCBundle& bndl);
 
-	// Perform message routing on an OSC message
+	/// Message routing on an OSC message.
 	// Only parsing the message should happen in message_route
 	// Complete action should have its own method
 	// Dispatch doesnt work unless the method is static, current use fullMatch instead
-	virtual bool message_route(OSCMessage& msg, int address_offset) = 0;
+	virtual bool	message_route(OSCMessage& msg, int address_offset) = 0;
 
 	// Not sure if there should be a verison that takes a bundle as well
 		// Maybe in LoomManager , but not here
@@ -119,59 +128,69 @@ public:
 		// as different modules are iterated through
 
 
-	// Copy module name into buffer
-	void get_module_name(char* buf);
-	// Return module name char*
-	char* get_module_name();
+	/// Copy module name into buffer
+	/// \param[out]	buf	The buffer to copy module name into
+	void			get_module_name(char* buf);
+	/// Get module name
+	/// \return	Module name
+	char*			get_module_name();
 
 
-
-	// Set print verbosity 
-	void set_print_verbosity(Verbosity v);
-	// Get print verbosity
-	Verbosity get_print_verbosity();
-
-
-	// Set package verbosity (what gets included in bundle)
-	void set_package_verbosity(Verbosity v);
-	// Get package verbosity
-	Verbosity get_package_verbosity();
+	/// Set print verbosity 
+	/// Controlls level of detail included in debug prints 
+	void			set_print_verbosity(Verbosity v);
+	/// Get print verbosity
+	/// \return		The current verbosity setting
+	Verbosity		get_print_verbosity();
 
 
-	// Set whether or not to be active
-	void set_active(bool enable);
-	// Get whether or not device is active
-	bool get_active();
+	/// Set package verbosity.
+	/// Controlls level of detail included in bundles
+	/// \param[in]	v	The verbosity setting
+	void			set_package_verbosity(Verbosity v);
+	/// Get package verbosity
+	/// \return		The current verbosity setting
+	Verbosity		get_package_verbosity();
 
 
-	// Set whether or not to use debug print statements
-	void set_print_debug(bool enable);
-	// Get whether or not debug prints are enabled
-	bool get_print_debug();
+	/// Set whether or not the module should be treated as active
+	/// \param[in]	enable	Whether or not to enable module
+	void			set_active(bool enable);
+	/// Get whether or not the module should be treated as active
+	/// \return		Whether or not the module is active
+	bool			get_active();
+
+
+	/// Set whether or not debug print statements are enabled for this module
+	/// \param[in]	enable	Whether or not to enable print statements
+	void			set_print_debug(bool enable);
+	/// Get whether or not debug prints are enabled
+	/// \return		Whether or not print statements are enabled
+	bool			get_print_debug();
 
 
 
 // Maybe?
 //  - not pure virtual because not everything will have a config (should default to empty function here)
 	// Save a FlashStorage struct
-	virtual void save_config();
+	virtual void	save_config();
 	// Load a FlashStorage struct, true if valid
-	virtual bool load_config();
+	virtual bool	load_config();
 	// Display config struct contents (as flash can be disabled this is a different method)
-	virtual void print_config_struct();
+	virtual void	print_config_struct();
 
 
 
 	// Optionally implementable interactive loop
-	virtual void REPL_loop();
+	virtual void	REPL_loop();
 
 
 protected:
 
-	// void resolve_bundle_address(char* prefix);  // remove
-
-	void resolve_bundle_address(char* address, char* suffix="");
-
+	/// Determine what address should be used for an OSC bundle for this module
+	/// \param[out]	address		The 
+	/// \param[in]	
+	void			resolve_bundle_address(char* address, char* suffix="");
 
 private:
 
