@@ -73,25 +73,11 @@ void flatten_bundle(OSCBundle& bndl)
 
 
 
-
-
-
-
 // ================================================================
 // ===         CONVERSION FROM BUNDLE TO ARRAY FORMATS          ===
 // ================================================================
 
-
 /////////////////////////////////////////////////////////////////////
-// --- CONVERT OSC TO ARRAY KEY VALUE --- 
-//
-// Converts an OSC bundle to an array formated as:
-// 	 [key1, value1, key2, value2, key3, value3]
-// Converts bundle to flat single message if not already
-//
-// @param bndl        The bundle to use to fill the key value array
-// @param key_values  The array to be populated
-//
 void convert_bundle_to_array_key_value(OSCBundle& bndl, String key_values[], int kv_len)
 {	
 	OSCBundle converted_bndl;	
@@ -112,18 +98,7 @@ void convert_bundle_to_array_key_value(OSCBundle& bndl, String key_values[], int
 
 
 /////////////////////////////////////////////////////////////////////
-// --- CONVERT OSC TO ARRAYS ASSOC --- 
-//
-// Converts an OSC bundle to two associated arrays,
-// formated as:
-//   [key1,   key2,   key3]
-//   [value1, value2, value3]
-// Converts bundle to flat single message if not already
-//
-// @param bndl   The bundle to use to fill the arrays
-// @param keys   The array of keys be populated
-// @param value  The array of values to be populated
-//
+
 void convert_bundle_to_arrays_assoc(OSCBundle& bndl, String keys[], String values[], int assoc_len)
 {
 	OSCBundle converted_bndl;	
@@ -155,20 +130,6 @@ void convert_bundle_to_arrays_assoc(OSCBundle& bndl, String keys[], String value
 
 
 /////////////////////////////////////////////////////////////////////
-// --- CONVERT ARRAY KEY VALUES TO ASSOC ---
-// 
-// Converts and array formatted as:
-//   [key1, value1, key2, value2, key3, value3]
-// to two associated arrays formatted as:
-//   [key1,   key2,   key3]
-//   [value1, value2, value3]
-// 
-// @param key_values  The flat array of keys and values
-// @param keys        The array to be filled with the keys from 'key_values'
-// @param values      The array to be filled with the values for 'key_values'
-// @param kv_len      The length of the 'key_value' array
-// @param assoc_len   The length of the 'keys' and 'values' arrays (should be the same)
-//
 void convert_array_key_value_to_assoc(String key_values [], String keys [], String values [], int kv_len, int assoc_len)
 {
 	if (kv_len > 2*assoc_len) {
@@ -184,20 +145,6 @@ void convert_array_key_value_to_assoc(String key_values [], String keys [], Stri
 
 
 /////////////////////////////////////////////////////////////////////
-// --- CONVERT ARRAY KEY VALUES TO ASSOC ---
-// 
-// Converts two associated arrays formatted as:
-//   [key1,   key2,   key3]
-//   [value1, value2, value3]:
-// to single array formatted as:
-//   [key1, value1, key2, value2, key3, value3]
-// 
-// @param keys        The array of keys  
-// @param values      The array to values
-// @param key_values  The flat array of keys and values to be filled by combining 'keys' and 'values'
-// @param assoc_len   The length of the 'keys' and 'values' arrays (should be the same)
-// @param kv_len      The length of the 'key_value' array
-//
 void convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len)
 {
 	if ( kv_len < 2*assoc_len ) {
@@ -210,10 +157,6 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 		key_values[i*2+1] = values[i];
 	}
 }
-
-
-
-
 
 
 // ================================================================
@@ -239,17 +182,9 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 //    5: Int-All
 //    6: Float-All
 
+
+
 /////////////////////////////////////////////////////////////////////
-// Convert an array formatted as:
-//   [key1, value1, key2, value2 ...]
-// to an OSC bundle with either single or multiple messages
-// 
-// @param keys_values    The flat array of keys and values  
-// @param bndl           The flat array of keys and values to be filled by combining 'keys' and 'values'
-// @param address  The address to add to bundle/messages 
-// @param kv_len         The length of the 'keys_values' array 
-// @param interprt       (see comment at start of section above for details about the parameter)
-//
 void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char* address, int kv_len, int interpret)
 {
 	if ((interpret < 0) || (interpret > 6)) {
@@ -306,21 +241,6 @@ void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, ch
 
 
 /////////////////////////////////////////////////////////////////////
-// --- CONVERT ASSOC ARRAYS TO BUNDLE ---
-//
-// Convert an array formatted as:
-//   [key1, key2 ...]
-//   [value1, value2 ...]
-// to an OSC message with either single or multiple messages
-//
-// @param keys           The array of keys  
-// @param values         The array to values
-// @param bndl           The flat array of keys and values to be filled by combining 'keys' and 'values'
-// @param address  The address to add to bundle/messages 
-// @param assoc_len      The length of the 'keys' and 'values' arrays (should be the same)
-// @param format         The output bundle structure (single or multiple messages)
-// @param interpret       (see comment at start of section above for details about the parameter)
-//
 void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char* address, int assoc_len, int interpret)
 {
 	// Convert to single array first 
