@@ -189,7 +189,6 @@ void LoomCommPlat::convert_string_to_bundle(char* osc_string, OSCBundle& bndl)
 }
 
 /////////////////////////////////////////////////////////////////////
-// break compression out to different function
 void LoomCommPlat::convert_bundle_to_string(OSCBundle& bndl, char* osc_string) 
 {
 	// This is done in case the bundle converts to a string larger than
@@ -213,7 +212,6 @@ void LoomCommPlat::convert_bundle_to_string(OSCBundle& bndl, char* osc_string)
 
 /////////////////////////////////////////////////////////////////////
 // --- Private Methods ---
-// Conversion without compression
 void LoomCommPlat::original_convert_string_to_bundle(char* osc_string, OSCBundle& bndl) 
 {
 	bndl.empty();
@@ -255,7 +253,6 @@ void LoomCommPlat::original_convert_string_to_bundle(char* osc_string, OSCBundle
 }
 
 /////////////////////////////////////////////////////////////////////
-// Conversion without decompression
 void LoomCommPlat::original_convert_bundle_to_string(OSCBundle& bndl, char* osc_string) 
 {
 	char data_type;
@@ -303,7 +300,6 @@ void LoomCommPlat::original_convert_bundle_to_string(OSCBundle& bndl, char* osc_
 }
 
 /////////////////////////////////////////////////////////////////////
-// Compress messages 
 void LoomCommPlat::compress_message_string(char* osc_string) 
 {
 	const char* cPtr = nth_strchr(osc_string, '/', 3);
@@ -319,7 +315,6 @@ void LoomCommPlat::compress_message_string(char* osc_string)
 }
 
 /////////////////////////////////////////////////////////////////////
-// Uncompress messages
 void LoomCommPlat::uncompress_message_string(char* osc_string) 
 {
 	// Only try to uncompress if it was compressed

@@ -21,10 +21,11 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_Relay( char* module_name 	= "Relay",
+	Loom_Relay( 
+			char*		module_name		= "Relay",
 
-				byte pin 			= 10
-			   );
+			byte		pin				= 10
+	   );
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Relay();
@@ -35,8 +36,15 @@ public:
 	void		package(OSCBundle& bndl, char* suffix="");
 	bool		message_route(OSCMessage& msg, int address_offset);
 
-	// Actuator Control
+	// --- Actuator Control --- 
+
+	/// Set relay state
+	/// \param[in]	state	The state to set relay to (True=HIGH, False=LOW)
 	void		set_relay(bool state);
+
+	/// Sest relay state.
+	/// Settings enclosed in message, forwards to set_relay with bool arg
+	/// \param[in]	msg		The message to parse
 	void		set_relay(OSCMessage& msg);
 
 private:

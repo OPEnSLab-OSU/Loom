@@ -18,26 +18,29 @@ protected:
 	Adafruit_TSL2561_Unified* inst_TSL2561;
 
 	/// Gain level
-	int gain;
+	int 		gain;
+
 	/// Sensor resolution setting
-	int resolution;
+	int 		resolution;
 
 	/// Measured infra-red lux 
-	int lightIR;
+	int 		lightIR;
+	
 	/// Measure full spectrum lux
-	int lightFull;
+	int 		lightFull;
 
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_TSL2561(	byte i2c_address 			= 0x29, // 0x29, 0x39, 0x49
-					
-					char* module_name 			= "TSL2561",
-					char* sensor_description 	= "Luminosity",
+	Loom_TSL2561(	
+			byte	i2c_address				= 0x29, // 0x29, 0x39, 0x49
+			
+			char*	module_name				= "TSL2561",
+			char*	sensor_description		= "Luminosity",
 
-					int gain 					= 1, // 1, 16
-					int resolution 				= 3	 // 1, 2, 3
-				);
+			int		gain					= 1, // 1, 16
+			int		resolution				= 3	 // 1, 2, 3
+		);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_TSL2561();

@@ -31,7 +31,6 @@ void LoomI2CSensor::print_config()
 }
 
 /////////////////////////////////////////////////////////////////////
-// Get the sensor's I2C address
 byte LoomI2CSensor::get_i2c_address() 
 { 
 	return i2c_address; 

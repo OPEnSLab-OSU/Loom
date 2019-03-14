@@ -96,24 +96,18 @@ void Loom_AS7262::enable_bulb(bool enable)
 }
 
 /////////////////////////////////////////////////////////////////////
-// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
 void Loom_AS7262::set_gain(byte gain)
 {
 	inst_AS7262.setGain(gain);
 }
 
 /////////////////////////////////////////////////////////////////////
-// 0: Continuous reading of VBGY 
-// 1: Continuous reading of GYOR 
-// 2: Continuous reading of all channels (power-on default)
-// 3: One-shot reading of all channels
 void Loom_AS7262::set_mode(byte mode)
 {
 	inst_AS7262.setMeasurementMode(mode);
 }
 
 /////////////////////////////////////////////////////////////////////
-// Time will be 2.8ms * [integration value]  (0-255), 50 is default
 void Loom_AS7262::set_integration_time(byte time)
 {
 	inst_AS7262.setIntegrationTime(time);

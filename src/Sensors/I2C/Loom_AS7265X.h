@@ -37,16 +37,17 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_AS7265X(	byte i2c_address 			= 0x49,
-					
-					char* module_name 			= "AS7265X",
-					char* sensor_description 	= "Spectral Triad",
+	Loom_AS7265X(	
+			byte		i2c_address				= 0x49,
+			
+			char*		module_name				= "AS7265X",
+			char*		sensor_description		= "Spectral Triad",
 
-					bool use_bulb 				= false,	
-					byte gain 					= 64, 	// 1 to 64x
-					byte mode 					= AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT, 	//4 channel, other 4 channel, 6 chan, or 6 chan one shot
-					byte integration_time		= 49  	// Time will be 2.8ms * [integration value]  (0-255), 50 is default
-				);
+			bool		use_bulb				= false,	
+			byte		gain					= 64,	// 1 to 64x
+			byte		mode					= AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT,	// 4 channel, other 4 channel, 6 chan, or 6 chan one shot
+			byte		integration_time		= 49 	// Time will be 2.8ms * [integration value]  (0-255), 50 is default
+		);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_AS7265X();
@@ -58,8 +59,12 @@ public:
 
 
 	void		enable_bulb(bool e);
+	// 1 to 64x
 	void		set_gain(byte gain);
+	//4 channel, other 4 channel, 6 chan, or 6 chan one shot
 	void		set_mode(byte mode);
+	//50 * 2.8ms = 140ms. 0 to 255 is valid.  (49 is default)
+	//If you use Mode 2 or 3 (all the colors) then integration time is double. 140*2 = 280ms between readings.
 	void		set_integration_time(byte time);
 
 private:

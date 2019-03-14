@@ -23,6 +23,7 @@ Loom_nRF::Loom_nRF(
 	)
 	: LoomCommPlat( module_name, max_message_len, compress_messages )
 {
+
 	// Create nRF manager objects
 	radio	= new RF24(5,6);
 	network	= new RF24Network(*radio);
@@ -149,8 +150,6 @@ bool Loom_nRF::receive_bundle(OSCBundle& bndl)
 				Println("Received nRF bundle out of scope");
 			}
 		}
-
-
 	} // of while ( network->available() )
 }
 
@@ -178,7 +177,6 @@ bool Loom_nRF::send_bundle(OSCBundle& bndl)
 }
 
 /////////////////////////////////////////////////////////////////////
-// Broadcast an OSC bundle
 void Loom_nRF::broadcast_bundle(OSCBundle& bndl) 
 {
 	char message[NRF_MESSAGE_SIZE];

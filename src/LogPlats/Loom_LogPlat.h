@@ -31,8 +31,6 @@ protected:
 
 public:
 
-
-
 	static char* enum_log_plat_string(LogPlatform p);
 
 

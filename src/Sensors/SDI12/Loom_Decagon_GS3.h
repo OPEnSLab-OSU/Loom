@@ -12,19 +12,19 @@ class Loom_DecagonGS3 : public LoomSDI12Sensor
 protected:
 
 	/// Measured dielectric permativity
-	float dielec_perm;
+	float		dielec_perm;
 	/// Measured temperature
-	float temp;
+	float		temp;
 	/// Measure electrical conductivity
-	float elec_cond;
+	float		elec_cond;
 
 public:
 
-	Loom_DecagonGS3(	char* 	module_name			= "GS3 Decagon",
-						char* 	sensor_description 	= "Soil Moisture", 
-						uint8_t	num_samples 		= 1 
-
-			  );
+	Loom_DecagonGS3(	
+			char*		module_name			= "GS3 Decagon",
+			char*		sensor_description	= "Soil Moisture", 
+			uint8_t		num_samples			= 1 
+		);
 
 
 	// --- DESTRUCTOR ---

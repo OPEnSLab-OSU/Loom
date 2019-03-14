@@ -36,7 +36,7 @@ enum class I2C_Selection {
 	L_AS7265X		///< AS72625X
 };
 
-#define i2c_0x29 I2C_Selection::L_TSL2591 	// TSL2561 / TSL2591
+#define i2c_0x29 I2C_Selection::L_TSL2591	// TSL2561 / TSL2591
 #define i2c_0x49 I2C_Selection::L_AS7265X	// TSL2561 / AS7262 / AS7263 / AS7265X
 
 
@@ -75,13 +75,14 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_Multiplexer(	char* 	module_name		= "Multiplexer",
+	Loom_Multiplexer(	
+			char*	module_name		= "Multiplexer",
 
-						byte	i2c_address		= 0x71,
-						uint 	num_ports		= 8,
-						bool	dynamic_list	= true,
-						uint 	update_period	= 5000 // find way to make this call interrupt class to manage timing
-					);
+			byte	i2c_address		= 0x71,
+			uint	num_ports		= 8,
+			bool	dynamic_list	= true,
+			uint	update_period	= 5000 // find way to make this call interrupt class to manage timing
+		);
 
 
 	// --- DESTRUCTOR ---
@@ -123,11 +124,11 @@ private:
 	/// Get the sensor object for sensor on provided port
 	/// \param[port]	port	The port of the multiplexer to get sensor object for
 	/// \return			The pointer to LoomI2CSensor on port, Null if no sensor
-	LoomI2CSensor* get_sensor(uint8_t port);
+	LoomI2CSensor*	get_sensor(uint8_t port);
 
 	/// Select communication with sensor at index port
 	/// \param[in]	port	The port to open I2C communication on
-	void tca_select(uint8_t port);
+	void			tca_select(uint8_t port);
 
 	/// Create appropriate instance to manage sensor.
 	/// Compares I2C address to known sensors and generates corresponding sensor instance
@@ -138,7 +139,7 @@ private:
 	/// Determine the I2C address of the sensor (if any) on port.
 	/// \param[in]	port	The port to get sensor address of
 	/// \return		The I2C address of sensor, 0x00 if no sensor found
-	byte get_i2c_on_port(uint8_t port);
+	byte			get_i2c_on_port(uint8_t port);
 
 };
 

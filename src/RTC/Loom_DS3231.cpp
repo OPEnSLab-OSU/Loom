@@ -99,7 +99,6 @@ void Loom_DS3231::time_adjust(DateTime time)
 }
 
 /////////////////////////////////////////////////////////////////////
-// Alarm Functions
 void Loom_DS3231::set_alarm(DateTime time)
 {
 	if (print_verbosity == Verbosity::V_HIGH) {

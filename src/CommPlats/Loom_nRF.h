@@ -30,7 +30,6 @@ protected:
 	/// Default address to send to
 	uint8_t				friend_address;
 
-
 	/// Data rate
 	uint8_t				data_rate;
 	/// Power level to send at
@@ -46,50 +45,51 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_nRF( 	char*		module_name			= "nRF",
+	Loom_nRF( 	
+			char*		module_name			= "nRF",
 		
-				uint16_t	max_message_len		= 120,//RH_RF95_MAX_MESSAGE_LEN,
-				// CommScope subnet_scope 		= SCOPE_SUBNET,
-				bool		compress_messages	= true,
+			uint16_t	max_message_len		= 120,//RH_RF95_MAX_MESSAGE_LEN,
+			// CommScope subnet_scope 		= SCOPE_SUBNET,
+			bool		compress_messages	= true,
 
-				uint8_t		address 			= NRF_SELF_ADDRESS,
-				uint8_t		friend_address 		= NRF_FRIEND_ADDRESS,
+			uint8_t		address 			= NRF_SELF_ADDRESS,
+			uint8_t		friend_address 		= NRF_FRIEND_ADDRESS,
 
-				uint8_t		data_rate			= 1, 	// 0: Default, 1: RF24_250KBPS, 2: RF24_1MBPS, 3: RF24_2MBPS 
-				uint8_t		power_level			= 0,	// 0: Default, 1: RF24_PA_MIN, 2: RF24_PA_LOW, 3: RF24_PA_HIGH, 4: RF24_PA_MAX
-				uint8_t		retry_count 		= 3,
-				uint16_t	retry_timeout 		= 200,
+			uint8_t		data_rate			= 1, 	// 0: Default, 1: RF24_250KBPS, 2: RF24_1MBPS, 3: RF24_2MBPS 
+			uint8_t		power_level			= 0,	// 0: Default, 1: RF24_PA_MIN, 2: RF24_PA_LOW, 3: RF24_PA_HIGH, 4: RF24_PA_MAX
+			uint8_t		retry_count 		= 3,
+			uint16_t	retry_timeout 		= 200,
 
-				uint8_t		multicast_level		= 1
-			);
+			uint8_t		multicast_level		= 1
+		);
 
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_nRF();
 
 
-	void print_config();
+	void		print_config();
 
 	// Build OSC Bundle from packet if any exists
-	bool receive_bundle(OSCBundle& bndl);
+	bool		receive_bundle(OSCBundle& bndl);
 
 	// Send an OSC bundle
 	// Should overload or use default args to optionally allow default address
-	bool send_bundle(OSCBundle& bndl, uint16_t destination);
-	bool send_bundle(OSCBundle& bndl);
+	bool		send_bundle(OSCBundle& bndl, uint16_t destination);
+	bool		send_bundle(OSCBundle& bndl);
 
 	// Broadcast an OSC bundle
-	void broadcast_bundle(OSCBundle& bndl);
+	void		broadcast_bundle(OSCBundle& bndl);
 
 
-	void set_address(uint addr);
-	uint get_address();
+	void		set_address(uint addr);
+	uint		get_address();
 
-	void set_friend_address(uint addr);
-	uint get_friend_address();
+	void		set_friend_address(uint addr);
+	uint		get_friend_address();
 
-	void set_multicast_level(uint8_t level);
-	uint8_t get_multicast_level();
+	void		set_multicast_level(uint8_t level);
+	uint8_t		get_multicast_level();
 
 private:
 

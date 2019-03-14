@@ -44,8 +44,6 @@ Loom_Digital::Loom_Digital(
 	pin_enabled[9]  = enableA3;
 	pin_enabled[10] = enableA4;
 	pin_enabled[11] = enableA5;
-
-
 }
 
 /////////////////////////////////////////////////////////////////////

@@ -31,14 +31,15 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_TSL2591(	byte i2c_address 			= 0x29,
-					
-					char* module_name 			= "TSL2591",
-					char* sensor_description 	= "Lux",
+	Loom_TSL2591(	
+			byte		i2c_address				= 0x29,
+			
+			char*		module_name				= "TSL2591",
+			char*		sensor_description		= "Lux",
 
-					uint8_t gain_level 			= 1, // document 
-					uint8_t timing_level 		= 0  // document
-				);
+			uint8_t		gain_level				= 1, // document 
+			uint8_t		timing_level			= 0  // document
+		);
 
 
 	// --- DESTRUCTOR ---

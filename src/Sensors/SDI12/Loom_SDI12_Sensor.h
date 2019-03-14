@@ -14,11 +14,11 @@ protected:
 
 public:
 
-	LoomSDI12Sensor(	char* 	module_name			= "SDI12_Sensor",
-						char* 	sensor_description 	= "SDI12 Sensor", 
-						uint8_t	num_samples 		= 1 
-
-			  );
+	LoomSDI12Sensor(	
+			char*		module_name			= "SDI12_Sensor",
+			char*		sensor_description	= "SDI12 Sensor", 
+			uint8_t		num_samples			= 1 
+		);
 
 
 	// --- DESTRUCTOR ---

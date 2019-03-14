@@ -38,12 +38,13 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	LoomCommPlat(	char*     module_name, 
+	LoomCommPlat(	
+			char*		module_name, 
 
-					uint      max_message_len, 
-					// CommScope subnet_scope, 
-					bool      compress_messages 
-				);
+			uint		max_message_len, 
+			// CommScope subnet_scope, 
+			bool		compress_messages 
+		);
 
 
 	// --- DESTRUCTOR ---
@@ -102,25 +103,37 @@ protected:
 
 	// bool scope_filter(OSCBundle& bndl);
 
-
+	/// Convert a c string to equivalent bundle.
+	/// Calls aux function to uncompress message if neccessary 
+	/// \param[in]	osc_string	The string to convert
+	/// \param[out]	bndl		The bundle to fill
 	void			convert_string_to_bundle(char* osc_string, OSCBundle& bndl);
 
-// break compression out to different function
+	/// Convert a bundle to equivalent c string
+	/// Calls aux function to try to compress message
+	/// \param[out]	bndl		The bundle to convert
+ 	/// \param[in]	osc_string	The string to fill
 	void			convert_bundle_to_string(OSCBundle& bndl, char* osc_string);
 
 
 private:
 
 	/// Conversion from c string to bundle without compression
+	/// \param[in]	osc_string	String to convert
+	/// \param[out]	bndl		Bundle to fill
 	void			original_convert_string_to_bundle(char* osc_string, OSCBundle& bndl);
 
 	/// Conversion from bundle to string without decompression
+	/// \param[in]	bndl		Bundle to convert
+	/// \param[out]	osc_string	String buffer to fill
 	void			original_convert_bundle_to_string(OSCBundle& bndl, char* osc_string);
 	
 	/// Compress c-strings representing bundles 
+	/// \param[in,out]	osc_string	String to compress
 	void			compress_message_string(char* osc_string);
 
 	/// Uncompress c-strings representing bundles
+	/// \param[in,out]	osc_string	String to uncompress
 	void			uncompress_message_string(char* osc_string);
 
 

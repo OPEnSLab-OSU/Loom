@@ -16,14 +16,15 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_PCF8523(	char* 		module_name			= "PCF8523",
+	Loom_PCF8523(	
+			char*		module_name			= "PCF8523",
 	 
-					TimeZone 	timezone 			= PST,
-					bool 		use_utc_time 		= false,
-					bool 		get_internet_time 	= false,
+			TimeZone	timezone			= PST,
+			bool		use_utc_time		= false,
+			bool		get_internet_time	= false,
 
-					byte		int_pin				= 0
-		   );
+			byte		int_pin				= 0
+		);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_PCF8523();
@@ -31,7 +32,6 @@ public:
 	// Inherited Methods
 	void		print_config();
 	bool		message_route(OSCMessage& msg, int address_offset) {}
-	
 	DateTime	now();
 
 

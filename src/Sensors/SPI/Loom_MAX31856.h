@@ -18,6 +18,7 @@ protected:
 
 	/// Raw value
 	// float voltage;
+
 	/// Measured temperature		
 	float temperature;
 	/// Measured cold junction temperature
@@ -25,19 +26,20 @@ protected:
 
 public:
 
-	Loom_MAX31856(	char* 	module_name			= "MAX31856",
-					char* 	sensor_description 	= "Thermocouple", 
-					uint8_t	num_samples 		= 1,
+	Loom_MAX31856(	
+			char*		module_name			= "MAX31856",
+			char*		sensor_description	= "Thermocouple", 
+			uint8_t		num_samples			= 1,
 
-					uint8_t	CS_pin				= 10,
+			uint8_t		CS_pin				= 10,
 
-					uint8_t	SPI_a				= 10,
-					uint8_t	SPI_b				= 11,
-					uint8_t	SPI_c				= 12,
-					uint8_t	SPI_d				= 13
+			uint8_t		SPI_a				= 10,
+			uint8_t		SPI_b				= 11,
+			uint8_t		SPI_c				= 12,
+			uint8_t		SPI_d				= 13
 
-					// type 
-			  );
+			// type 
+		);
 
 
 	// --- DESTRUCTOR ---

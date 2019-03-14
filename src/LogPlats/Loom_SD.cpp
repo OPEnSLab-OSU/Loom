@@ -133,12 +133,6 @@ void Loom_SD::log_bundle(OSCBundle& bndl)
 
 
 /////////////////////////////////////////////////////////////////////
-// --- SD SAVE BUNDLE --- 
-//
-// @param file       The file to save bundle to
-// @param bndl       The bundle to be saved
-// @param timestamp  Format of timestamp (if any)
-//
 bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
 {
 	// Get device ID
@@ -156,12 +150,9 @@ bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
 }
 
 /////////////////////////////////////////////////////////////////////
-// timestamp options:
-//   0: no timestamp added
-//   1: only date added
-//   2: only time added
-//   3: both date and time added (two fields)
-//   4: both date and time added (combined field)
+
+// Might need to move to header file
+
 template <typename T>
 bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int timestamp, bool has_keys, char* device_id) 
 {

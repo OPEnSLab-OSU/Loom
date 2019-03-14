@@ -66,15 +66,10 @@ void Loom_Stepper::move_steps(int motor, int steps, int speed, bool clockwise)
 		Print5("Set stepper ", motor, " to move ", steps, " steps ");
 		Println4("at speed ", speed, ", direction ", (clockwise) ? "clockwise" : "counterclockwise");
 	}
-
 }
 
 /////////////////////////////////////////////////////////////////////
 void Loom_Stepper::move_steps(OSCMessage& msg)
 {
-	// 0 : Motor # 
-	// 1 : # Steps
-	// 2 : Speed (0-255)
-	// 3 : Clockwise
 	move_steps( msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3) );
 }

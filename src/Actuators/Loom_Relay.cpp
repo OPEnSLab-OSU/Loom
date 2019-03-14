@@ -71,6 +71,5 @@ void Loom_Relay::set_relay(bool state)
 /////////////////////////////////////////////////////////////////////
 void Loom_Relay::set_relay(OSCMessage& msg)
 {
-	// 0 : On / Off
 	set_relay( msg.getInt(0) );
 }

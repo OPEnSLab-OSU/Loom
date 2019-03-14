@@ -27,10 +27,10 @@ typedef void (*ISRFuncPtr)();
 
 
 struct IntDetails {
-	ISRFuncPtr 	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
-	byte	 	type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
-	bool 		is_immediate;	///< True if ISR is called directly upon interrupt, false if called next check of flags
-	bool 		is_enabled;		///< Whether or not this interrupt is enabled
+	ISRFuncPtr	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
+	byte		type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
+	bool		is_immediate;	///< True if ISR is called directly upon interrupt, false if called next check of flags
+	bool		is_enabled;		///< Whether or not this interrupt is enabled
 
 	// char[20] description ?
 };
@@ -45,7 +45,7 @@ class Loom_Interrupt_Manager : public LoomModule
 protected:
 
 	/// Enable or disable all interrupts 	-- currently only disables bottom halves
-	bool 			interrupts_enabled;
+	bool			interrupts_enabled;
 
 	/// List of interrupts configurations
 	IntDetails		settings[InteruptRange];
@@ -58,71 +58,72 @@ protected:
 	LoomRTC*		RTC_Inst;
 
 	/// Last time an alarm went off
-	DateTime 		last_alarm_time;
+	DateTime		last_alarm_time;
 
 
 	// interrupt_triggered for timers, also support immediate and delayed
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_Interrupt_Manager( char* 		module_name 	= "Interrupt_Manager",
-		
-							LoomRTC* 	RTC_Inst		= NULL
-							);
+	Loom_Interrupt_Manager( 
+			char*		module_name		= "Interrupt_Manager",
+
+			LoomRTC*	RTC_Inst		= NULL
+		);
 
 
 	// --- DESTRUCTOR ---
 	~Loom_Interrupt_Manager();
 
 	// General
-	void print_config();
-	void print_state();
-	void measure() {}
-	void package(OSCBundle& bndl, char* suffix="") {}
-	bool message_route(OSCMessage& msg, int address_offset) {}
+	void		print_config();
+	void		print_state();
+	void		measure() {}
+	void		package(OSCBundle& bndl, char* suffix="") {}
+	bool		message_route(OSCMessage& msg, int address_offset) {}
 
 	// All interrupt enable
-	void set_interrupts_enabled(bool state);
-	bool get_interrupts_enabled();
+	void		set_interrupts_enabled(bool state);
+	bool		get_interrupts_enabled();
 
 	// Per interrupt enable
-	void set_enable_interrupt(byte pin, bool state);
-	bool get_enable_interrupt(byte pin);
+	void		set_enable_interrupt(byte pin, bool state);
+	bool		get_enable_interrupt(byte pin);
 
 
 	// Pin: which pin to connect the interrupt on
-	// ISR: ISR function (Null if no interrupt linked)
+	// ISR: ISR	function (Null if no interrupt linked)
 	// Type: Low, High, Change, Falling, Rising
 	// Immediate: Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
-	void register_ISR(byte pin, ISRFuncPtr ISR, byte type, bool immediate);
+	void		register_ISR(byte pin, ISRFuncPtr ISR, byte type, bool immediate);
 
 	// Restores to default ISR, disables interrupt
-	void unregister_ISR(byte pin, byte type=LOW);  
+	void		unregister_ISR(byte pin, byte type=LOW);  
 
 	// Checks the flags set by default ISRs, to call bottom half ISRs
-	void run_ISR_bottom_halves();
+	void		run_ISR_bottom_halves();
 
 
 	// Detaches then reattacheds interrupt according to settings
 	// used to clear pending interrupts
-	void interrupt_reset(byte pin);   
+	void		interrupt_reset(byte pin);   
 
 
-	void set_RTC_module(LoomRTC* RTC_Inst);
-	LoomRTC* get_RTC_module();
+	void		set_RTC_module(LoomRTC* RTC_Inst);
+	LoomRTC*	get_RTC_module();
 
 
 // Shorten names, maybe combine, taking behavior (e.g. relative/absolute) as parameter
 
-	bool set_RTC_alarm_time_into_future(TimeSpan duration);	
-	bool set_RTC_alarm_time_into_future(uint days, uint hours, uint minutes, uint seconds);
+	bool		set_RTC_alarm_time_into_future(TimeSpan duration);	
+	bool		set_RTC_alarm_time_into_future(uint days, uint hours, uint minutes, uint seconds);
 	
 // maybe remove these 2 (leave in Sleep manager)
 	// bool set_RTC_alarm_for_time_from_last_alarm_time(TimeSpan duration);
 	// bool set_RTC_alarm_for_time_from_last_alarm_time(uint days, uint hours, uint minutes, uint seconds);
 	
-	bool set_RTC_alarm_for_time(DateTime future_time);
-	bool set_RTC_alarm_for_time(uint hour, uint minute, uint second);
+	bool		set_RTC_alarm_for_time(DateTime future_time);
+	bool		set_RTC_alarm_for_time(uint hour, uint minute, uint second);
 	
 
 

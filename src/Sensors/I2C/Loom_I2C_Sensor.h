@@ -13,16 +13,17 @@ class LoomI2CSensor : public LoomSensor
 protected:
 
 	/// The sensor's I2C address
-	byte i2c_address;	
+	byte	i2c_address;	
 
 public:
 
 	// --- CONSTRUCTOR ---
-	LoomI2CSensor( 	char* module_name, 
-					char* sensor_description, 
+	LoomI2CSensor( 	
+			char*		module_name, 
+			char*		sensor_description, 
 
-					byte  i2c_address 
-			);
+			byte		i2c_address 
+		);
 
 	// --- DESTRUCTOR ---
 	virtual ~LoomI2CSensor();

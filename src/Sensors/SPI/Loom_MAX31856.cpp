@@ -28,7 +28,6 @@ Loom_MAX31856::Loom_MAX31856(
 	inst_max->begin();
 
 	inst_max->setThermocoupleType(MAX31856_TCTYPE_K);
-
 }
 
 /////////////////////////////////////////////////////////////////////

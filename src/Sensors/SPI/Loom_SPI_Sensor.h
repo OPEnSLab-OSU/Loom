@@ -14,11 +14,11 @@ protected:
 
 public:
 
-	LoomSPISensor(	char* 	module_name			= "SPI_Sensor",
-					char* 	sensor_description 	= "SPI Sensor", 
-					uint8_t	num_samples 		= 1 
-
-			  );
+	LoomSPISensor(	
+			char*		module_name			= "SPI_Sensor",
+			char*		sensor_description	= "SPI Sensor", 
+			uint8_t		num_samples			= 1 
+		);
 
 
 	// --- DESTRUCTOR ---

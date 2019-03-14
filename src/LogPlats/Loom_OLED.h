@@ -60,25 +60,30 @@ public:
 
 
 	// --- CONSTRUCTOR ---
-	Loom_OLED(	char* 			module_name 		= "OLED",
+	Loom_OLED(	
+			char*				module_name				= "OLED",
 
-				bool 			enable_rate_filter 	= true,
-				uint 			min_filter_delay 	= 300,
+			bool				enable_rate_filter		= true,
+			uint				min_filter_delay		= 300,
 
-				OLED_Version 	version 			= OLED_Version::FEATHERWING,
-				byte 			reset_pin 			= A2,
-				OLED_Format 	display_format 		= OLED_Format::SCROLL,
-				uint  			scroll_duration 	= 6000,
-				byte 			freeze_pin 			= 10, 				// Common pins might be: 10 (Ishield); 9(A), 6(B), 5(C) (OLED Featherwing buttons)
-				OLED_Freeze 	freeze_behavior 	= OLED_Freeze::SCROLL
-
-			   );
+			OLED_Version		version					= OLED_Version::FEATHERWING,
+			byte				reset_pin				= A2,
+			OLED_Format			display_format			= OLED_Format::SCROLL,
+			uint 				scroll_duration			= 6000,
+			byte				freeze_pin				= 10,					// Common pins might be: 10 (Ishield); 9(A), 6(B), 5(C) (OLED Featherwing buttons)
+			OLED_Freeze			freeze_behavior			= OLED_Freeze::SCROLL
+		);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_OLED();
 
 
 	void			print_config();
+
+	void			log_bundle(OSCBundle& bndl);
+	void			log_bundle(OSCBundle& bndl, OLED_Format format);
+
+
 
 	void			set_display_format(OLED_Format format);
 	OLED_Format		get_display_format();
@@ -92,15 +97,13 @@ public:
 	void			set_freeze_behavior(OLED_Freeze behavior);
 	OLED_Freeze		get_freeze_behavior();
 
-	void			log_bundle(OSCBundle& bndl);
-	void			log_bundle(OSCBundle& bndl, OLED_Format format);
 
 
 private:
 	
 	/// Last display update time.
 	/// Used to manage scrolling
-	unsigned long 	previous_time; 
+	unsigned long	previous_time; 
 
 };
 

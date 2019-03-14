@@ -25,12 +25,13 @@ protected:
 
 public:
 
-	LoomSensor(	char* 	module_name			= "Sensor",
-	 
-				char* 	sensor_description 	= "Sensor", 
-				uint8_t	num_samples 		= 1 
+	LoomSensor(	
+			char*		module_name			= "Sensor",
+ 
+			char*		sensor_description	= "Sensor", 
+			uint8_t		num_samples			= 1 
 
-			  );
+		  );
 
 
 	// --- DESTRUCTOR ---
@@ -44,8 +45,11 @@ public:
 	virtual void	package(OSCBundle& bndl, char* suffix="") = 0;
 	virtual bool	message_route(OSCMessage& msg, int address_offset) {};
 
-
+	/// Set the number of samples to take
+	/// \param[in]	n	Number of samples to take
 	void			set_num_samples(uint8_t n);
+	/// Get the number of samples sensor is set to take
+	/// \return		Number of samples
 	uint8_t			get_num_samples();
 
 private:

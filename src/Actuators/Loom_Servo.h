@@ -28,11 +28,11 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_Servo( char* module_name = "Servo",
+	Loom_Servo( 
+			char*		module_name		= "Servo",
 
-				uint8_t servo_count = NUM_SERVOS
-
-				);
+			uint8_t		servo_count		= NUM_SERVOS
+		);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Servo();
@@ -43,9 +43,18 @@ public:
 	void		package(OSCBundle& bndl, char* suffix="");
 	bool		message_route(OSCMessage& msg, int address_offset);
 
-	// Actuator Control
+
+	// --- Actuator Control ---
+
+	/// Set servo position.
+	/// \param[in]	servo		The servo number to control 
+	/// \param[in]	degree		The position to set the servo to
 	void		set_degree(int servo, int degree);
-	void		set_degree(OSCMessage& msg);
+
+	/// Set servo position.
+	/// Settings enclosed in message, forwards to set_degree with int args
+	/// \param[in]	msg		The message to parse
+	void		set_degree(OSCMessage& msg);	
 
 private:
 

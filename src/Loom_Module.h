@@ -23,20 +23,20 @@ class LoomModule
 protected:
 
 	/// Pointer to manager
-	LoomManager* device_manager;
+	LoomManager*	device_manager;
 
 	/// The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
-	char* module_name;				
+	char*			module_name;				
 	
 	/// Whether or not the module should be treated
-	bool  active;
+	bool			active;
 	/// Individually togglable debug statements
-	bool  print_debug;				
+	bool			print_debug;				
 
 	/// Print verbosity
-	Verbosity print_verbosity;		
+	Verbosity		print_verbosity;		
 	/// Package verbosity 
-	Verbosity package_verbosity;		
+	Verbosity		package_verbosity;		
 
 public:
 

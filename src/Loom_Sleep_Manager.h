@@ -46,16 +46,17 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_Sleep_Manager( char* 		module_name 	= "Sleep_Manager",
-							
-						LoomRTC* 	RTC_Inst 		= NULL,
+	Loom_Sleep_Manager( 
+			char*		module_name			= "Sleep_Manager",
+				
+			LoomRTC*	RTC_Inst			= NULL,
 
-						bool 		use_LED 		= true,
-						bool		delay_on_wake 	= false,
+			bool		use_LED				= true,
+			bool		delay_on_wake		= false,
 
-						SleepMode 	sleep_mode 		= SleepMode::STANDBY
+			SleepMode	sleep_mode			= SleepMode::STANDBY
 
-					);
+		);
 
 	// Loom_Sleep_Manager( char* module_name, LoomManager* LD );
 
@@ -65,23 +66,23 @@ public:
 	// --- DESTRUCTOR ---
 	~Loom_Sleep_Manager();
 
-	void print_config();
-	void print_state();
-	void measure() {}
-	void package(OSCBundle& bndl, char* suffix="") {}
-	bool message_route(OSCMessage& msg, int address_offset) {}
+	void		print_config();
+	void		print_state();
+	void		measure() {}
+	void		package(OSCBundle& bndl, char* suffix="") {}
+	bool		message_route(OSCMessage& msg, int address_offset) {}
 
 
-	void set_RTC_module(LoomRTC* RTC_Inst);
-	LoomRTC* get_RTC_module();
+	void		set_RTC_module(LoomRTC* RTC_Inst);
+	LoomRTC*	get_RTC_module();
 
-	void set_Interrupt_Manager(Loom_Interrupt_Manager* IM);
+	void		set_Interrupt_Manager(Loom_Interrupt_Manager* IM);
 	Loom_Interrupt_Manager* get_Interrupt_Manager();
 
 
 
-	void set_sleep_mode(SleepMode mode);
-	SleepMode get_sleep_mode();
+	void		set_sleep_mode(SleepMode mode);
+	SleepMode	get_sleep_mode();
 
 
 // maybe offload setting timer to interrupt manager
@@ -91,33 +92,33 @@ public:
 
 // Keep sleep time from wake controlled here
 
-	bool sleep_for_time(TimeSpan duration);	
-	bool sleep_for_time(uint days, uint hours, uint minutes, uint seconds);
+	bool		sleep_for_time(TimeSpan duration);	
+	bool		sleep_for_time(uint days, uint hours, uint minutes, uint seconds);
 	
 	// Only works with RTC
 	// Might work using PCF and SleepyDog together, otherwise has to be DS3231
-	bool sleep_for_time_from_wake(TimeSpan duration);
-	bool sleep_for_time_from_wake(uint days, uint hours, uint minutes, uint seconds);
+	bool		sleep_for_time_from_wake(TimeSpan duration);
+	bool		sleep_for_time_from_wake(uint days, uint hours, uint minutes, uint seconds);
 	
 	// Only works with RTC
 	// Might work using PCF and SleepyDog together, otherwise has to be DS3231
-	bool sleep_until_time(DateTime future_time);
-	bool sleep_until_time(uint hour, uint minute, uint second);
+	bool		sleep_until_time(DateTime future_time);
+	bool		sleep_until_time(uint hour, uint minute, uint second);
 	
 	// Standby mode
 	// bool sleep_until_interrupt_on(byte pin);
-	bool sleep();
+	bool		sleep();
 
 
 	// Some sort of auto repeat? - probably manage that at DeviceManager level
 
 private:
 
-	bool sleepy_dog_sleep(TimeSpan duration);
+	bool		sleepy_dog_sleep(TimeSpan duration);
 	// bool sleepy_dog_sleep(uint days, uint hours, uint minutes, uint seconds);
 
-	void pre_sleep();
-	void post_sleep();
+	void		pre_sleep();
+	void		post_sleep();
 
 
 

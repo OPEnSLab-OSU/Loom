@@ -21,8 +21,6 @@ Loom_LoRa::Loom_LoRa(
 	: LoomCommPlat( module_name, max_message_len, compress_messages )
 
 { 
-	// Println("LoRa Constructor 1");
-	Println("LoRa Setup");
 
 	// Create instances of driver and manager
 	this->driver         = new RH_RF95(RFM95_CS, RFM95_INT);
@@ -86,7 +84,6 @@ void Loom_LoRa::print_config()
 }
 
 /////////////////////////////////////////////////////////////////////
-// Build OSC Bundle from packet if any exists
 bool Loom_LoRa::receive_bundle(OSCBundle& bndl) 
 {
 	if ( manager->available() ) {
@@ -136,8 +133,6 @@ bool Loom_LoRa::receive_bundle(OSCBundle& bndl)
 }
 
 /////////////////////////////////////////////////////////////////////
-// Send an OSC bundle
-// Should overload or use default args to optionally allow default address
 bool Loom_LoRa::send_bundle(OSCBundle& bndl, uint16_t destination) 
 // bool send_bundle(OSCBundle& bndl, uint16_t destination=01) 
 // bool send_bundle(OSCBundle& bndl) 
@@ -170,7 +165,6 @@ bool Loom_LoRa::send_bundle(OSCBundle& bndl)
 }
 
 /////////////////////////////////////////////////////////////////////
-// Broadcast an OSC bundle
 void Loom_LoRa::broadcast_bundle(OSCBundle& bndl) 
 {
 

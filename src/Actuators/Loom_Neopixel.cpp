@@ -142,11 +142,6 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 /////////////////////////////////////////////////////////////////////
 void Loom_Neopixel::set_color(OSCMessage& msg)
 {
-	// 0 : 0-2 corresponding to A0-A2
-	// 1 : Which number in a daisy chain, starting at 0
-	// 2 : Red Val (0-255)
-	// 3 : Green Val (0-255)
-	// 4 : Blue Val (0-255)
 	set_color( msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3), msg.getInt(4) );
 }
 

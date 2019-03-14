@@ -60,21 +60,21 @@ class LoomManager
 protected:
 
 	/// The name of the device
-	char* 		device_name;	
+	char*		device_name;	
 	/// The family the device belongs to
-	char* 		family;			
+	char*		family;			
 	/// The subnet of the family
-	uint 		family_num;
+	uint		family_num;
 	/// The instance / channel ID within the subnet		
-	uint 		instance;
+	uint		instance;
 
 
-	DeviceType 	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
+	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
 
 	// Sub Managers
 	Loom_Interrupt_Manager*	interrupt_manager;
-	Loom_Sleep_Manager* 	sleep_manager;
+	Loom_Sleep_Manager*	sleep_manager;
 
 	// Arrays of Loom Modules, categorized by type
 	LoomModule*			other_modules[MAX_OTHER_MODULES];
@@ -86,27 +86,27 @@ protected:
 	LoomLogPlat*		log_modules[MAX_LOGS];
 
 	/// Count of miscellaneous modules
-	uint other_module_count;
+	uint		other_module_count;
 	/// Count of sensor modules
-	uint sensor_count;
+	uint		sensor_count;
 	/// Count of actuator modules
-	uint actuator_count;
+	uint		actuator_count;
 	/// Count of RTC modules
-	uint rtc_count;
+	uint		rtc_count;
 	/// Count of communication modules
-	uint comm_count;
+	uint		comm_count;
 	/// Count of internet modules
-	uint internet_count;
+	uint		internet_count;
 	/// Count of logging platform modules
-	uint log_count;
+	uint		log_count;
 
 	/// Print detail verbosity
-	Verbosity print_verbosity;		
+	Verbosity	print_verbosity;		
 	/// Package detail verbosity 
-	Verbosity package_verbosity;	
+	Verbosity	package_verbosity;	
 
 
-	OSCBundle bundle;	// Not sure if this will always work...
+	OSCBundle	bundle;	// Not sure if this will always work...
 
 public:
 
@@ -116,16 +116,17 @@ public:
 
 	// --- CONSTRUCTOR ---
 								// The parameters to the constructor will be defined in config
-	LoomManager(char* device_name 	= "Default",
-				char* family 		= "Loom",
-				uint  family_num 	= 1,
-				uint  instance 		= 1,
+	LoomManager(
+			char*		device_name			= "Default",
+			char*		family				= "Loom",
+			uint		family_num			= 1,
+			uint		instance			= 1,
 
-				DeviceType device_type	= DeviceType::NODE,
+			DeviceType	device_type			= DeviceType::NODE,
 
-				Verbosity print_verbosity 	= Verbosity::V_HIGH,
-				Verbosity package_verbosity	= Verbosity::V_LOW    // Set high to include non sensors in package 
-			  );
+			Verbosity	print_verbosity		= Verbosity::V_HIGH,
+			Verbosity	package_verbosity	= Verbosity::V_LOW    // Set high to include non sensors in package 
+		);
 
 	// --- DESTRUCTOR ---
 	~LoomManager();

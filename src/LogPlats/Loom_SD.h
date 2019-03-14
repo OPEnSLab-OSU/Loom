@@ -47,22 +47,34 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_SD(	char* 			module_name 		= "SD",
+	Loom_SD(	
+			char*		module_name			= "SD",
 
-				bool 			enable_rate_filter 	= true,
-				uint 			min_filter_delay 	= 1000,
+			bool		enable_rate_filter	= true,
+			uint		min_filter_delay	= 1000,
 
-				byte 			chip_select 		= 10,
-				char* 			default_file 		= "test.csv"
+			byte		chip_select			= 10,
+			char*		default_file		= "test.csv"
 
-				// SD_Version 		version 			= FEATHERWING,
-				// byte 			reset_pin 			= A2 
-			   );
+			// SD_Version 		version 			= FEATHERWING,
+			// byte 			reset_pin 			= A2 
+		);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_SD();
 
+
 	void		print_config();
+
+
+	// Save bundle to SD card
+	// \param[in]	file		The file to save bundle to
+	// \param[in]	bndl		The bundle to be saved
+	// \param[in]	timestamp	Format of timestamp (if any)
+	bool		save_bundle(OSCBundle& bndl, char* file, int timestamp=3);
+
+
+
 	void		set_default_file(char* filename);
 	char*		get_default_file();
 	void		delete_file(char* file);
@@ -71,14 +83,6 @@ public:
 	bool		dump_file(char* file) ;
 
 	void		log_bundle(OSCBundle& bndl);
-
-
-	// --- SD SAVE BUNDLE --- 
-	//
-	// @param file       The file to save bundle to
-	// @param bndl       The bundle to be saved
-	// @param timestamp  Format of timestamp (if any)
-	bool		save_bundle(OSCBundle& bndl, char* file, int timestamp=3);
 
 
 
@@ -90,14 +94,34 @@ public:
 	//   3: both date and time added (two fields)
 	//   4: both date and time added (combined field)
 	// Device_id, string identifying device - used if forwarded from save_bundle
+
+
+	/// Save array to SD card.
+	/// Takes array of generic type
+	// \param[in]	file		The file to save array to
+	// \param[in]	data		The array of data to save
+	// \param[in]	len			Length of the incoming array
+	// \param[in]	delimiter	Delimiter to use
+	// \param[in]	timestamp	Timestamp setting to use
+	// \param[in]	has_keys	True if data is assumed to have keys (alternating key-values) 
+	// \param[in]	device_id	Device ID to label row with
 	template <typename T>
 	bool		save_array(char *file, T data [], int len, char delimiter=',', int timestamp=3, bool has_keys=false, char* device_id="");
 
 
 private:
 
+	/// Print the files on the SD card.
+	/// Recursive for nested folders
+	/// \param[in]	dir			File to treat at root
+	/// \param[in]	numTabs		Number of tabs to prepend to properly show nesting
 	void		print_directory(File dir, int numTabs);
 
+	/// Auxiliary funcntion to print data element, delimiter, and (optionally) space
+	/// \param[in]	SDFile		File to write to
+	/// \param[in]	data		Data element to write
+	/// \param[in]	delimiter	Delimiter to use
+	/// \param[in]	add_space	True to add space after delimiter
 	template <typename T>
 	void		SD_print_aux(File SDFile, T data, char delimiter, bool add_space=true)
 	{

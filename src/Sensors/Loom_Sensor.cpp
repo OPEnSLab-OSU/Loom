@@ -4,7 +4,7 @@
 /////////////////////////////////////////////////////////////////////
 LoomSensor::LoomSensor(	
 		char*		module_name,
-	 
+
 		char*		sensor_description, 
 		uint8_t		num_samples 
 	) 

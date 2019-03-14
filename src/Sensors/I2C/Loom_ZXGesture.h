@@ -34,13 +34,14 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_ZXGesture(	byte i2c_address 			= 0x10, // 0x10, 0x11
-					
-					char* module_name 			= "ZXGesture",
-					char* sensor_description 	= "Temperature/Humidty",
+	Loom_ZXGesture(	
+			byte		i2c_address				= 0x10, // 0x10, 0x11
+			
+			char*		module_name				= "ZXGesture",
+			char*		sensor_description		= "Temperature/Humidty",
 
-					ZXMode mode 				= ZXMode::ZX_POS
-				);
+			ZXMode		mode					= ZXMode::ZX_POS
+		);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_ZXGesture();

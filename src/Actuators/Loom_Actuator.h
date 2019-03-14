@@ -14,7 +14,9 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	LoomActuator( char* module_name );
+	LoomActuator( 
+			char* module_name 
+		);
 
 	// --- DESTRUCTOR ---
 	virtual ~LoomActuator();

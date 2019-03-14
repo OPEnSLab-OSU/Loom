@@ -29,10 +29,11 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_Stepper( char* module_name = "Stepper" ,
+	Loom_Stepper( 
+			char*		module_name		= "Stepper" ,
 
-					uint8_t stepper_count = NUM_STEPPERS
-				);
+			uint8_t		stepper_count	= NUM_STEPPERS
+		);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Stepper();
@@ -44,8 +45,16 @@ public:
 	bool		message_route(OSCMessage& msg, int address_offset);
 
 
-	// Actuator Control 
+	// --- Actuator Control ---
+	/// Move specified stepper specified steps, speed, and direction
+	/// \param[in]	motor		Which stepper to move (0-3)
+	/// \param[in]	steps		Number of steps to rotate
+	///	\param[in]	speed		Speed to move at (0-255)
+	/// \param[in]	clockwise 	True to rotate clockwise, false for counterclock-wise
 	void		move_steps(int motor, int steps, int speed, bool clockwise);
+
+	/// Move stepper.
+	/// Settings enclosed in message, forwards to move_steps with int args
 	void		move_steps(OSCMessage& msg);
 
 private:

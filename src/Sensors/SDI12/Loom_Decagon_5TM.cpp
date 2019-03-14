@@ -23,7 +23,6 @@ Loom_Decagon5TM::~Loom_Decagon5TM() {}
 void Loom_Decagon5TM::print_config()
 {
 	LoomSDI12Sensor::print_config();
-
 }
 
 /////////////////////////////////////////////////////////////////////

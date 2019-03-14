@@ -199,11 +199,6 @@ void LoomRTC::get_weekday(char* buf)
 }
 
 /////////////////////////////////////////////////////////////////////
-//   0: no timestamp added
-//   1: only date added
-//   2: only time added
-//   3: both date and time added (two fields)
-//   4: both date and time added (combined field)
 void LoomRTC::get_timestamp(char* header, char* timestamp, char delimiter, uint8_t format)
 {
 	switch (format) {

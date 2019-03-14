@@ -22,11 +22,12 @@ protected:
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_MB1232(	byte i2c_address 			= 0x70, // 0x70
-					
-					char* module_name 			= "MB1232",
-					char* sensor_description 	= "Sonar" 
-				);
+	Loom_MB1232(	
+			byte		i2c_address				= 0x70, // 0x70
+			
+			char*		module_name				= "MB1232",
+			char*		sensor_description		= "Sonar" 
+		);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_MB1232();

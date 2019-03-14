@@ -173,22 +173,18 @@ void Loom_AS7265X::enable_bulb(bool e)
 }
 
 /////////////////////////////////////////////////////////////////////
-// 1 to 64x
 void Loom_AS7265X::set_gain(byte gain) 
 {
 	inst_AS7265X.setGain(gain);
 }
 
 /////////////////////////////////////////////////////////////////////
-//4 channel, other 4 channel, 6 chan, or 6 chan one shot
 void Loom_AS7265X::set_mode(byte mode) 
 {
 	inst_AS7265X.setMeasurementMode(mode);
 }
 
 /////////////////////////////////////////////////////////////////////
-//50 * 2.8ms = 140ms. 0 to 255 is valid.  (49 is default)
-//If you use Mode 2 or 3 (all the colors) then integration time is double. 140*2 = 280ms between readings.
 void Loom_AS7265X::set_integration_time(byte time) 
 {
 	inst_AS7265X.setIntegrationCycles(time);

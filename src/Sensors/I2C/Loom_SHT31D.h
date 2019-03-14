@@ -17,18 +17,19 @@ protected:
 	Adafruit_SHT31 inst_sht31d;
 
 	/// Measured temperature (C)
-	float temp;
+	float		temp;
 	/// Measured humidity (%)
-	float humid;
+	float		humid;
 
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_SHT31D(	byte i2c_address 			= 0x44, // 0x44, 0x45
-					
-					char* module_name 			= "SHT31D",
-					char* sensor_description 	= "Temperature/Humidty" 
-				);
+	Loom_SHT31D(	
+			byte		i2c_address				= 0x44, // 0x44, 0x45
+			
+			char*		module_name				= "SHT31D",
+			char*		sensor_description		= "Temperature/Humidty" 
+		);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_SHT31D();
