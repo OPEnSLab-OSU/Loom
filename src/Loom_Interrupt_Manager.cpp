@@ -213,32 +213,32 @@ LoomRTC* Loom_Interrupt_Manager::get_RTC_module()
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::set_RTC_alarm_time_into_future(TimeSpan duration)
+bool Loom_Interrupt_Manager::RTC_alarm_relative(TimeSpan duration)
 {
-	return (RTC_Inst) ? set_RTC_alarm_for_time(RTC_Inst->now() + duration) : false;
+	return (RTC_Inst) ? RTC_alarm_exact(RTC_Inst->now() + duration) : false;
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::set_RTC_alarm_time_into_future(uint days, uint hours, uint minutes, uint seconds)
+bool Loom_Interrupt_Manager::RTC_alarm_relative(uint days, uint hours, uint minutes, uint seconds)
 {
-	return set_RTC_alarm_time_into_future( TimeSpan(days, hours, minutes, seconds) );
+	return RTC_alarm_relative( TimeSpan(days, hours, minutes, seconds) );
 }
 
 
 
-// bool Loom_Interrupt_Manager::set_RTC_alarm_for_time_from_last_alarm_time(TimeSpan duration)
+// bool Loom_Interrupt_Manager::RTC_alarm_exact_from_last_alarm_time(TimeSpan duration)
 // {
-// 	return (RTC_Inst) ? set_RTC_alarm_for_time(last_alarm_time + duration) : false;
+// 	return (RTC_Inst) ? RTC_alarm_exact(last_alarm_time + duration) : false;
 // }
 
-// bool Loom_Interrupt_Manager::set_RTC_alarm_for_time_from_last_alarm_time(uint days, uint hours, uint minutes, uint seconds)
+// bool Loom_Interrupt_Manager::RTC_alarm_exact_from_last_alarm_time(uint days, uint hours, uint minutes, uint seconds)
 // {
-// 	return set_RTC_alarm_for_time_from_last_alarm_time( TimeSpan(days, hours, minutes, seconds) );
+// 	return RTC_alarm_exact_from_last_alarm_time( TimeSpan(days, hours, minutes, seconds) );
 // }
 
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::set_RTC_alarm_for_time(DateTime future_time)
+bool Loom_Interrupt_Manager::RTC_alarm_exact(DateTime future_time)
 {
 	// Don't sleep if no RTC to wake up device
 	if (RTC_Inst == NULL) {
@@ -279,17 +279,17 @@ bool Loom_Interrupt_Manager::set_RTC_alarm_for_time(DateTime future_time)
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::set_RTC_alarm_for_time(uint hour, uint minute, uint second)
+bool Loom_Interrupt_Manager::RTC_alarm_exact(uint hour, uint minute, uint second)
 {
 	// Don't sleep if no RTC to wake up device
 	if (RTC_Inst == NULL) {
 		return false;
 	}
 
-	// Call set_RTC_alarm_for_time(DateTime future_time) with that time today
+	// Call RTC_alarm_exact(DateTime future_time) with that time today
 	// That function will adjust to following day if necessary
 	DateTime now = RTC_Inst->now();
-	return set_RTC_alarm_for_time( DateTime(now.year(), now.month(), now.day(), hour, minute, second) ); 
+	return RTC_alarm_exact( DateTime(now.year(), now.month(), now.day(), hour, minute, second) ); 
 }
 
 

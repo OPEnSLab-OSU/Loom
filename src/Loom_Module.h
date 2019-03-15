@@ -12,6 +12,7 @@
 
 
 
+
 class LoomManager; // Specify that LoomManager exists, defined in own file
 
 
@@ -167,6 +168,11 @@ public:
 	/// Get whether or not debug prints are enabled
 	/// \return		Whether or not print statements are enabled
 	bool			get_print_debug();
+
+
+
+	virtual void	power_down() {}
+	virtual void	power_up() {}
 
 
 

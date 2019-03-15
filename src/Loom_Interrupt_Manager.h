@@ -75,55 +75,96 @@ public:
 	// --- DESTRUCTOR ---
 	~Loom_Interrupt_Manager();
 
-	// General
+	// Inherited methods
 	void		print_config();
 	void		print_state();
 	void		measure() {}
 	void		package(OSCBundle& bndl, char* suffix="") {}
 	bool		message_route(OSCMessage& msg, int address_offset) {}
 
-	// All interrupt enable
+
+
+	/// All interrupts enable/disable
+	/// \param[in]	state	Enable state to apply to all interrupts
 	void		set_interrupts_enabled(bool state);
+	/// Get global interrupt enable state
+	/// \return		Globla interrupt enable state
 	bool		get_interrupts_enabled();
 
-	// Per interrupt enable
+	/// Per interrupt enable
+	/// \param[in]	pin		Interrupt pin to change enable state of
+	/// \param[in]	state	The enable state to set pin to 
 	void		set_enable_interrupt(byte pin, bool state);
+	/// Get pin interrupt enable state
+	/// \return		The enable state
 	bool		get_enable_interrupt(byte pin);
 
 
-	// Pin: which pin to connect the interrupt on
-	// ISR: ISR	function (Null if no interrupt linked)
-	// Type: Low, High, Change, Falling, Rising
-	// Immediate: Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
+	/// Register an ISR to an interrupt pin and its configuration
+	// \param[in]	pin			Which pin to connect the interrupt on
+	// \param[in]	ISR			ISR	function (Null if no interrupt linked)
+	// \param[in]	type		Low, High, Change, Falling, Rising
+	// \param[in]	immediate	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
 	void		register_ISR(byte pin, ISRFuncPtr ISR, byte type, bool immediate);
 
-	// Restores to default ISR, disables interrupt
+	/// Restores pin to default ISR, disables interrupt
+	/// \param[in]	pin		The pin to unregister ISRs for
+	/// \param[in]	type	What signal to configure default ISR to (default LOW)
 	void		unregister_ISR(byte pin, byte type=LOW);  
 
-	// Checks the flags set by default ISRs, to call bottom half ISRs
+
+	/// Checks the flags set by default ISRs, calls pending bottom half ISRs
 	void		run_ISR_bottom_halves();
 
 
-	// Detaches then reattacheds interrupt according to settings
-	// used to clear pending interrupts
+	/// Detaches then reattacheds interrupt according to settings.
+	/// used to clear pending interrupts
+	/// \param[in]	pin 	Pin to reset interrupts for
 	void		interrupt_reset(byte pin);   
 
 
+	/// Set the RTC module to use for timers
+	/// \param[in]	RTC_Inst	Pointer to the RTC object
 	void		set_RTC_module(LoomRTC* RTC_Inst);
+	/// Return pointer to the currently linked RTC object
+	/// \return		Current RTC object
 	LoomRTC*	get_RTC_module();
 
 
 // Shorten names, maybe combine, taking behavior (e.g. relative/absolute) as parameter
 
-	bool		set_RTC_alarm_time_into_future(TimeSpan duration);	
-	bool		set_RTC_alarm_time_into_future(uint days, uint hours, uint minutes, uint seconds);
+
+
+	/// Set RTC alarm relative time from now
+	/// \param[in]	duration	How long before the alarm should go off
+	bool		RTC_alarm_relative(TimeSpan duration);	
+
+	/// Set RTC alarm relative time from now
+	/// \param[in]	days		Days into the future the alarm should be set
+	/// \param[in]	hours		Hours into the future the alarm should be set
+	/// \param[in]	minutes		Minutes into the future the alarm should be set
+	/// \param[in]	seconds		Seconds into the future the alarm should be set
+	bool		RTC_alarm_relative(uint days, uint hours, uint minutes, uint seconds);
 	
+
 // maybe remove these 2 (leave in Sleep manager)
 	// bool set_RTC_alarm_for_time_from_last_alarm_time(TimeSpan duration);
 	// bool set_RTC_alarm_for_time_from_last_alarm_time(uint days, uint hours, uint minutes, uint seconds);
 	
-	bool		set_RTC_alarm_for_time(DateTime future_time);
-	bool		set_RTC_alarm_for_time(uint hour, uint minute, uint second);
+
+
+
+	/// Set RTC alarm for a specific time.
+	/// Increments to next day at given hour, min, sec if specified time is in past
+	/// \param[in]	future_time		Time to set alarm for 
+	bool		RTC_alarm_exact(DateTime future_time);
+	
+	/// Set RTC alarm for a specific time.
+	/// Forwards to RTC_alarm_exact that takes DateTime object
+	/// \param[in]	hour		Hour to set alarm for
+	/// \param[in]	minute		Minute to set alarm for
+	/// \param[in]	second		Second to set alarm for
+	bool		RTC_alarm_exact(uint hour, uint minute, uint second);
 	
 
 
@@ -172,6 +213,7 @@ private:
 	// static void default_ISR_14() { detachInterrupt(digitalPinToInterrupt(14));  interrupt_triggered[14] = true;   }
 	// static void default_ISR_15() { detachInterrupt(digitalPinToInterrupt(15));  interrupt_triggered[15] = true;   }
 
+	/// Array of the default ISRs that set flags
 	const static ISRFuncPtr default_ISRs[InteruptRange];
 
 };

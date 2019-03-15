@@ -13,22 +13,22 @@
 const char* Loom_Sleep_Manager::enum_sleep_mode_string(SleepMode m)
 {
 	switch(m) {
-		case SleepMode::IDLE 		: return "Idle";
-		case SleepMode::STANDBY 	: return "Standby";
-		case SleepMode::SLEEPYDOG 	: return "SleepyDog";
-		default         : return "";
+		case SleepMode::IDLE			: return "Idle";
+		case SleepMode::STANDBY			: return "Standby";
+		case SleepMode::SLEEPYDOG		: return "SleepyDog";
+		case SleepMode::OPENS_LOWPOWER	: return "OPEnS_Lowpower";
+		default : return "";
 	}
 }
 
 /////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager( char* module_name, LoomRTC* RTC_Inst, bool use_LED, bool delay_on_wake, SleepMode sleep_mode ) : LoomModule( module_name )
 {
-	this->use_LED 		= use_LED;
+	this->use_LED		= use_LED;
 	this->delay_on_wake	= delay_on_wake;
 
-	this->RTC_Inst = RTC_Inst;
-	this->sleep_mode = SleepMode::STANDBY;
-
+	this->RTC_Inst		= RTC_Inst;
+	this->sleep_mode	= SleepMode::STANDBY;
 
 	// Get current time
 	if (this->RTC_Inst != NULL) {
@@ -36,7 +36,6 @@ Loom_Sleep_Manager::Loom_Sleep_Manager( char* module_name, LoomRTC* RTC_Inst, bo
 	} else {
 		sleep_mode = SleepMode::SLEEPYDOG;
 	}
-
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -101,7 +100,7 @@ SleepMode Loom_Sleep_Manager::get_sleep_mode()
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Sleep_Manager::sleep_for_time(TimeSpan duration)
+bool Loom_Sleep_Manager::sleep_duration(TimeSpan duration)
 {
 	switch(sleep_mode) {
 
@@ -132,21 +131,21 @@ bool Loom_Sleep_Manager::sleep_for_time(TimeSpan duration)
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Sleep_Manager::sleep_for_time(uint days, uint hours, uint minutes, uint seconds)
+bool Loom_Sleep_Manager::sleep_duration(uint days, uint hours, uint minutes, uint seconds)
 {
-	return sleep_for_time( TimeSpan(days, hours, minutes, seconds) );
+	return sleep_duration( TimeSpan(days, hours, minutes, seconds) );
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Sleep_Manager::sleep_for_time_from_wake(TimeSpan duration)
+bool Loom_Sleep_Manager::sleep_duration_from_wake(TimeSpan duration)
 {
 	return (RTC_Inst) ? sleep_until_time(last_wake_time + duration) : false;
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Sleep_Manager::sleep_for_time_from_wake(uint days, uint hours, uint minutes, uint seconds)
+bool Loom_Sleep_Manager::sleep_duration_from_wake(uint days, uint hours, uint minutes, uint seconds)
 {
-	return sleep_for_time_from_wake( TimeSpan(days, hours, minutes, seconds) );
+	return sleep_duration_from_wake( TimeSpan(days, hours, minutes, seconds) );
 
 }
 
@@ -197,7 +196,7 @@ bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 			
 
 			if ( IM ){
-				IM->set_RTC_alarm_for_time(future_time);
+				IM->RTC_alarm_exact(future_time);
 			} 
 
 			
@@ -209,6 +208,9 @@ bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 		}
 		case SleepMode::SLEEPYDOG : 
 			return false; // Can't sleep until a given time unless using RTC, in which case, use Standby or Idle instead
+		
+		case SleepMode::OPENS_LOWPOWER : 
+			return false; 
 	}
 }
 
@@ -235,6 +237,14 @@ bool Loom_Sleep_Manager::sleep()
 		switch(sleep_mode) {
 			case SleepMode::STANDBY : LowPower.standby(); 
 			case SleepMode::IDLE 	: LowPower.idle(IDLE_2); 
+
+			// implement
+			// case SleepMode::SLEEPYDOG 	: return;   
+
+			// implement
+			// case SleepMode::OPENS_LOWPOWER 	: return false;
+
+
 		}
 
 		// This is where programs waits until waking
