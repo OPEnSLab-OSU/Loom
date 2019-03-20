@@ -1,8 +1,8 @@
 
 #include "Loom_PCF8523.h"
 
-#define EI_NOTEXTERNAL
-#include <EnableInterrupt.h>
+// #define EI_NOTEXTERNAL
+// #include <EnableInterrupt.h>
 
 
 
@@ -18,43 +18,9 @@ Loom_PCF8523::Loom_PCF8523(
 	) 
 	: LoomRTC( module_name, timezone, use_utc_time, get_internet_time, int_pin )
 {
-	rtc_inst = new RTC_PCF8523();
-
-	if (!rtc_inst->begin()) {
-		print_module_label();
-		Println("Couldn't find RTC");
-	}
-
-	Println("\nCurrent Time (before possible resetting)");
-	print_time();
-
-
-	bool internet_time_success = false;
-
-	// Try to set the time from internet
-	if (get_internet_time) { 
-		internet_time_success = set_rtc_from_internet_time();
-	}
-
-	// If unable to set time via internet, default to normal behavior
-	if (!internet_time_success) {
-
-		// The following section checks if RTC is running, else sets 
-		// the time to the time that the sketch was compiled
-		if (!rtc_inst->initialized()) {
-			print_module_label();
-			Println("RTC 8523 was not initialized");
-			set_rtc_to_compile_time();
-		}
-
-		// Make sure the RTC time is even valid, if not, set to compile time
-		rtc_validity_check();
-
-	} // of if (!internet_time_success)
-
-
-	// Query Time and print
-	print_time();
+	// rtc_inst = new RTC_PCF8523();
+	rtc_inst = new PCF8523();
+	init();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -65,10 +31,24 @@ Loom_PCF8523::~Loom_PCF8523()
 }	
 
 /////////////////////////////////////////////////////////////////////
+bool Loom_PCF8523::_begin()
+{
+	return rtc_inst->begin();
+}
+
+/////////////////////////////////////////////////////////////////////
+bool Loom_PCF8523::_initialized()
+{
+	rtc_inst->initialized();
+}
+
+/////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
 void Loom_PCF8523::print_config()
 {
 	LoomRTC::print_config();
+
+	// will print out alarm info
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -89,5 +69,35 @@ void Loom_PCF8523::time_adjust(DateTime time)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
+void Loom_PCF8523::set_alarm(DateTime time)
+{
+
+	// Example: PCF8523.set_alarm(10,5,45)
+	// Set alarm at day = 5, 5:45 a.m.
+	// rtc_inst->set_alarm(uint8_t day_alarm, uint8_t hour_alarm,uint8_t minute_alarm ) {
+
+	// rtc_inst->set_alarm(time.hour(), time.minute() );
+
+	// rtc_inst->start_counter_1(time.totalseconds());
+
+	// Repeats by default
+	// rtc_inst->start_counter_1((time - now()).totalseconds());
+	set_alarm(time - now());
+
+}
+
+/////////////////////////////////////////////////////////////////////
+void Loom_PCF8523::set_alarm(TimeSpan duration)
+{
+	rtc_inst->start_counter_1(duration.totalseconds());
+}
+
+
+/////////////////////////////////////////////////////////////////////
+void Loom_PCF8523::clear_alarms()
+{
+	rtc_inst->clear_rtc_interrupt_flags();
+}
 
 

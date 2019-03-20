@@ -1,8 +1,8 @@
 
 #include "loom_DS3231.h"
 
-#define EI_NOTEXTERNAL
-#include <EnableInterrupt.h>
+// #define EI_NOTEXTERNAL
+// #include <EnableInterrupt.h>
 
 
 /////////////////////////////////////////////////////////////////////
@@ -18,50 +18,11 @@ Loom_DS3231::Loom_DS3231(
 	: LoomRTC( module_name, timezone, use_utc_time, get_internet_time, int_pin )
 {
 	rtc_inst = new RTC_DS3231();
-
-	if (!rtc_inst->begin()) {
-		print_module_label();
-		Println("Couldn't find RTC");
-		return;
-	}
-
-	Println("\nCurrent Time (before possible resetting)");
-	print_time();
-
-
-	bool internet_time_success = false;
-
-	// Try to set the time from internet
-	if (get_internet_time) { 
-		internet_time_success = set_rtc_from_internet_time();
-	}
-
-	// If unable to set time via internet, default to normal behavior
-	if (!internet_time_success) {
-
-		// The following section checks if RTC is running, else sets 
-		// the time to the time that the sketch was compiled
-		if (rtc_inst->lostPower()) {
-			Println("RTC 3231 lost power");
-			set_rtc_to_compile_time();
-		}
-
-		// Make sure the RTC time is even valid, if not, set to compile time
-		rtc_validity_check();
-
-	} // of if (!internet_time_success)
-
-
-
-	// Alarm setup
+	init();
 
 	// Set SQW pin to OFF (in my case it was set by default to 1Hz)
 	// The output of the DS3231 INT pin is connected to this pin
 	rtc_inst->writeSqwPinMode(DS3231_OFF);
-
-
-	// Query Time and print
-	print_time();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -70,6 +31,19 @@ Loom_DS3231::~Loom_DS3231()
 {
 	delete rtc_inst;
 }
+
+/////////////////////////////////////////////////////////////////////
+bool Loom_DS3231::_begin()
+{
+	return rtc_inst->begin();
+}
+
+/////////////////////////////////////////////////////////////////////
+bool Loom_DS3231::_initialized()
+{
+	return !rtc_inst->lostPower();
+}
+
 
 /////////////////////////////////////////////////////////////////////
 // --- PUBLIC METHODS ---
@@ -110,6 +84,12 @@ void Loom_DS3231::set_alarm(DateTime time)
 	// Set alarm 1
 	rtc_inst->setAlarm(ALM1_MATCH_HOURS, time.second(), time.minute(), time.hour(), 0); 	    								
 	rtc_inst->alarmInterrupt(1, true);
+}
+
+/////////////////////////////////////////////////////////////////////
+void Loom_DS3231::set_alarm(TimeSpan duration)
+{
+
 }
 
 /////////////////////////////////////////////////////////////////////

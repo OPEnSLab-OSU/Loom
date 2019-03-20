@@ -5,9 +5,11 @@
 
 #include "Loom_Module.h"
 
-#include <RTClibExtended.h>
-// NOTE: Must include the following line in the RTClibExtended.h file to use with M0:
-// #define _BV(bit) (1 << (bit))
+// #include <RTClibExtended.h>
+// // NOTE: Must include the following line in the RTClibExtended.h file to use with M0:
+// // #define _BV(bit) (1 << (bit))
+
+#include <OPEnS_RTC.h>
 
 
 // byte RTC_Int_Pin = 0;
@@ -95,6 +97,7 @@ public:
 
 	// Inherited Methods
 	virtual void 	print_config();
+	virtual void 	print_state();
 	virtual void 	measure() {};
 	virtual void 	package(OSCBundle& bndl, char* suffix="");
 	virtual bool 	message_route(OSCMessage& msg, int address_offset) = 0;
@@ -138,13 +141,21 @@ public:
 	/// \param[out]	timestamp	String to fill with timestamp element(s)
 	/// \param[in]	delimiter	Delimiter to use
 	/// \param[in]	format		How to format timestamp (0: no timestamp added, 1: only date added, 2: only time added, 3: both date and time added (two fields), 4: both date and time added (combined field) ), 
-	void get_timestamp(char* header, char* timestamp, char delimiter, uint8_t format=3);
+	void			get_timestamp(char* header, char* timestamp, char delimiter, uint8_t format=3);
 
 
 
-// might be able to move implementation up to this class if combining RTC libraries uses same alarm interface
 	virtual void	set_alarm(DateTime time) = 0;
+	virtual void	set_alarm(TimeSpan duration) = 0;
+
 	virtual void	clear_alarms() {}
+
+// Other functions that would be nice:
+	// virtual TimeSpan	get_timer_remaining();
+	// virtual void	pause_timer();
+	// virtual void resume_timer();
+	// virtual void restart_timer();
+
 
 
 	/// Get the pin the RTC interrupt is assumed to be connected to
@@ -157,6 +168,15 @@ public:
 
 
 protected:
+
+	/// Initialize RTC.
+	/// Called by subclass constructors 
+	void			init();
+	// Because subclasses use use members that are not
+	// polymorphic, they have to manager their own 
+	virtual bool	_begin() = 0;
+	virtual bool	_initialized() = 0;
+
 
 	/// Read the RTC, update time and date strings
 	void			read_rtc();
@@ -176,6 +196,7 @@ protected:
 	/// Set time to provided timezone
 	/// \param[in]	time	Time to set to
 	virtual void	time_adjust(DateTime time) = 0;
+
 
 
 // needs to reference and internet connectivity class to get unix time

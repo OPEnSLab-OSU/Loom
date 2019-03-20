@@ -14,10 +14,10 @@ protected:
 
 	/// A description of the sensor / what it measures
 	// maybe move to module to be module description
-	char*   sensor_description;  
+	char*		sensor_description;  
 
 	/// How many samples to take
-	uint8_t num_samples;
+	uint8_t		num_samples;
 
 	// struct or individual members of data?
 	// might prefer individual, using arrays for similar elements (e.g. different axes)

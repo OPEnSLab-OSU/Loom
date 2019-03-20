@@ -140,6 +140,7 @@ char* extract_device(OSCBundle& bndl);
 enum AppendType { NEW_MSG=-2, LAST_MSG=-1 };
 
 // Char* key versions
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, bool elem,     int msg_idx);
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, int elem,      int msg_idx);
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, uint16_t elem, int msg_idx);
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, float elem,    int msg_idx);
@@ -152,6 +153,7 @@ void append_to_bundle_aux(OSCBundle& bndl, const char* key, T elem, int msg_idx)
 }
 
 // Int key versions
+void append_to_bundle_aux(OSCBundle& bndl, int key, bool elem,      int msg_idx);
 void append_to_bundle_aux(OSCBundle& bndl, int key, int elem,      int msg_idx);
 void append_to_bundle_aux(OSCBundle& bndl, int key, uint16_t elem, int msg_idx);
 void append_to_bundle_aux(OSCBundle& bndl, int key, float elem,    int msg_idx);

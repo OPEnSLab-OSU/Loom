@@ -23,11 +23,11 @@ protected:
 public:
 	// --- CONSTRUCTOR ---
 	Loom_Digital(	
-			char*	module_name			= "Digital", 
+			char*	module_name			= "Digital",	//DIGITAL_MODULE_NAME
 			char*	sensor_description	= "Digital Values",
 
-			bool	enable5				= false,
-			bool	enable6				= false,
+			bool	enable5				= true,
+			bool	enable6				= true,
 			bool	enable9				= false,
 			bool	enable10			= true,
 			bool	enable11			= false,

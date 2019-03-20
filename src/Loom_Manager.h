@@ -43,7 +43,7 @@ class LoomCommPlat;
 class LoomInternetPlat;
 class LoomLogPlat;
 
-
+// switch to using vectors
 #define MAX_OTHER_MODULES 3
 #define MAX_SENSORS       20
 #define MAX_ACTUATORS     10
@@ -129,7 +129,7 @@ public:
 		);
 
 	// --- DESTRUCTOR ---
-	~LoomManager();
+	virtual ~LoomManager();
 
 	/// Print the device name as '[device_name]'
 	void print_device_label();

@@ -32,6 +32,8 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 // --- CONSTRUCTOR ---
 LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint instance, DeviceType device_type, Verbosity print_verbosity, Verbosity package_verbosity)
 {
+	// Println("MANAGER");
+
 	this->device_name 	= device_name;
 	this->family 		= family;
 	this->family_num 	= family_num;

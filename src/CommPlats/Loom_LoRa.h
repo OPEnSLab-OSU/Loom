@@ -16,8 +16,8 @@
 
 
 // these will be defined in the config file
-#define LORA_SELF_ADDRESS   01
-#define LORA_FRIEND_ADDRESS 00
+// #define LORA_SELF_ADDRESS   01
+// #define LORA_FRIEND_ADDRESS 00
 
 
 

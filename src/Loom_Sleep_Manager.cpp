@@ -306,8 +306,8 @@ void Loom_Sleep_Manager::pre_sleep()
 	#endif
 
 
-	if (device_manager->get_interrupt_manager()) {
-		device_manager->get_interrupt_manager()->interrupt_reset(RTC_Inst->get_interrupt_pin());
+	if (IM) {
+		IM->interrupt_reset(RTC_Inst->get_interrupt_pin());
 	}
 	// RTC_Inst->rtc_interrupt_reset(); //clear interrupt registers, attach interrupts
 
@@ -322,16 +322,16 @@ void Loom_Sleep_Manager::post_sleep()
 
 // Standy by might get its own pre and post sleeps which in turn calls
 
-	if (device_manager->get_interrupt_manager()) {
-		device_manager->get_interrupt_manager()->interrupt_reset(RTC_Inst->get_interrupt_pin());
+	if (IM) {
+		IM->interrupt_reset(RTC_Inst->get_interrupt_pin());
 	}
 	// rtc_interrupt_reset(); //clear interrupt registers, attach interrupts
 	RTC_Inst->clear_alarms(); //prevent double trigger of alarm interrupt
 
 
 	// Not sure why these have to be repeated but it seems to make a difference
-	if (device_manager->get_interrupt_manager()) {
-		device_manager->get_interrupt_manager()->interrupt_reset(RTC_Inst->get_interrupt_pin());
+	if (IM) {
+		IM->interrupt_reset(RTC_Inst->get_interrupt_pin());
 	}
 	// rtc_interrupt_reset();
 	RTC_Inst->clear_alarms();

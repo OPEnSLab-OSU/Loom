@@ -3,6 +3,11 @@
 #include "Loom_Manager.h"
 
 
+#define EI_NOTEXTERNAL
+#include <EnableInterrupt.h>
+
+
+
 byte LoomRTC::int_pin = 0; 
 
 /////////////////////////////////////////////////////////////////////
@@ -107,6 +112,12 @@ void LoomRTC::print_config()
 }
 
 /////////////////////////////////////////////////////////////////////
+void LoomRTC::print_state()
+{
+	print_time();
+}
+
+/////////////////////////////////////////////////////////////////////
 void LoomRTC::package(OSCBundle& bndl, char* suffix)
 {
 	char id_prefix[30]; 
@@ -137,7 +148,7 @@ void LoomRTC::print_time(bool verbose)
 /////////////////////////////////////////////////////////////////////
 void LoomRTC::print_DateTime(DateTime time) 
 {
-	Println("DateTime:");
+	// Print("DateTime:");
 	Print(time.year());   Print('/');
 	Print(time.month());  Print('/');
 	Print(time.day());    Print(' ');
@@ -222,6 +233,46 @@ void LoomRTC::get_timestamp(char* header, char* timestamp, char delimiter, uint8
 			strcpy(header, ""); 
 			strcpy(timestamp, ""); 
 	}
+}
+
+/////////////////////////////////////////////////////////////////////
+void LoomRTC::init()
+{
+	if (!_begin()) {
+		print_module_label();
+		Println("Couldn't find RTC");
+		return;
+	}
+
+	print_module_label();
+	Println("Current Time (before possible resetting)");
+	print_time();
+
+	bool internet_time_success = false;
+
+	// Try to set the time from internet
+	if (get_internet_time) { 
+		internet_time_success = set_rtc_from_internet_time();
+	}
+
+	// If unable to set time via internet, default to normal behavior
+	if (!internet_time_success) {
+
+		// The following section checks if RTC is running, else sets 
+		// the time to the time that the sketch was compiled
+		if (!_initialized()) {
+			print_module_label();
+			Println("RTC was not initialized");
+			set_rtc_to_compile_time();
+		}
+
+		// Make sure the RTC time is even valid, if not, set to compile time
+		rtc_validity_check();
+
+	} // of if (!internet_time_success)
+
+	// Query Time and print
+	print_time();
 }
 
 /////////////////////////////////////////////////////////////////////

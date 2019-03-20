@@ -5,10 +5,11 @@
 #include "Loom_Module.h"
 
 
-#include <RTClibExtended.h>
-// NOTE: Must include the following line in the RTClibExtended.h file to use with M0:
-// #define _BV(bit) (1 << (bit))
+// #include <RTClibExtended.h>
+// // NOTE: Must include the following line in the RTClibExtended.h file to use with M0:
+// // #define _BV(bit) (1 << (bit))
 
+#include <OPEnS_RTC.h>
 
 
 class LoomRTC; // Specify that LoomRTC exists, defined in own file
@@ -134,6 +135,8 @@ public:
 // Shorten names, maybe combine, taking behavior (e.g. relative/absolute) as parameter
 
 
+// maybe rename relative/exact to TimeSpan/DateTime?
+	
 
 	/// Set RTC alarm relative time from now
 	/// \param[in]	duration	How long before the alarm should go off
@@ -158,7 +161,7 @@ public:
 	/// Increments to next day at given hour, min, sec if specified time is in past
 	/// \param[in]	future_time		Time to set alarm for 
 	bool		RTC_alarm_exact(DateTime future_time);
-	
+
 	/// Set RTC alarm for a specific time.
 	/// Forwards to RTC_alarm_exact that takes DateTime object
 	/// \param[in]	hour		Hour to set alarm for
@@ -168,6 +171,9 @@ public:
 	
 
 
+
+	// Alarms/Timers should have option for repeat or not
+	// Query time left for alarm / timer
 
 	// Set timer for time / duration, select which timer (1 or 2)
 

@@ -382,6 +382,10 @@ char* extract_device(OSCBundle& bndl)
 }
 
 /////////////////////////////////////////////////////////////////////
+void append_to_bundle_aux(OSCBundle& bndl, const char* key, bool elem, int msg_idx)
+{ bndl.getOSCMessage(msg_idx)->add(key).add( (int32_t)elem ); }
+
+/////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, int elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( (int32_t)elem ); }
 
@@ -400,6 +404,11 @@ void append_to_bundle_aux(OSCBundle& bndl, const char* key, double elem, int msg
 /////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, const char* key, String elem, int msg_idx)
 { bndl.getOSCMessage(msg_idx)->add(key).add( elem.c_str() ); }
+
+
+/////////////////////////////////////////////////////////////////////
+void append_to_bundle_aux(OSCBundle& bndl, int key, bool elem, int msg_idx)
+{ bndl.getOSCMessage(msg_idx)->add( (int32_t)key ).add( (int32_t)elem ); }
 
 /////////////////////////////////////////////////////////////////////
 void append_to_bundle_aux(OSCBundle& bndl, int key, int elem, int msg_idx)

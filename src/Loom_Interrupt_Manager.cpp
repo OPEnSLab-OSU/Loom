@@ -99,6 +99,12 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte type, b
 {
 	if (pin < InteruptRange) {
 
+		print_module_label();
+		Print2("Registering ISR on pin ", pin);
+		Print2(" to be triggered on ", type);
+		Println2(" and is ", (immediate) ? "immediate" : "delay" );
+
+
 		// Save interrupt details
 		settings[pin] = { ISR, type, immediate, (ISR) ? true : false };
 

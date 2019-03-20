@@ -5,9 +5,11 @@
 #include "Loom_Module.h"
 
 
-#include <RTClibExtended.h>
-// NOTE: Must include the following line in the RTClibExtended.h file to use with M0:
-// #define _BV(bit) (1 << (bit))
+// #include <RTClibExtended.h>
+// // NOTE: Must include the following line in the RTClibExtended.h file to use with M0:
+// // #define _BV(bit) (1 << (bit))
+
+#include <OPEnS_RTC.h>
 
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>

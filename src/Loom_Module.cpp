@@ -16,8 +16,11 @@ char* LoomModule::enum_verbosity_string(Verbosity v)
 LoomModule::LoomModule() 
 {
 	// Println("LoomModule Default Constructor");
-
+// 
 	this->module_name 	= "Unknown";
+
+	// strcpy(this->module_name, "Unknown");
+
 	active 				= true;
 	print_debug 		= true;
 	print_verbosity 	= Verbosity::V_LOW;
@@ -33,8 +36,11 @@ LoomModule::LoomModule( char* module_name ) : LoomModule()
 
 	this->module_name = module_name;
 
-	print_module_label();
-	Println("Begin Setup");
+	// strcpy(this->module_name, module_name);
+
+// 
+	// print_module_label();
+	// Println("Begin Setup");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -43,6 +49,8 @@ LoomModule::LoomModule( char* module_name, LoomManager* LD ) : LoomModule()
 {
 	// Println("LoomModule Constructor 2");
 	this->module_name   = module_name;
+		// strcpy(this->module_name, module_name);
+
 	// this->device_manager = LD;
 	link_device_manager(LD);
 }
@@ -68,8 +76,8 @@ void LoomModule::link_device_manager(LoomManager* LD)
 	char buf[50];
 	LD->get_device_name(buf);
 
-	print_module_label();
-	Println2("Linked as module of ", buf);
+	// print_module_label();
+	// Println2("Linked as module of ", buf);
 }
 
 /////////////////////////////////////////////////////////////////////

@@ -26,6 +26,7 @@ enum class AnalogConversion {
 	TURBIDITY, 		///< Turbidity
 	EC, 			///< Electrical Conductivity
 	TDS				///< Total Dissolved Solids
+	// Soil moisture
 }; 
 
 
@@ -105,6 +106,11 @@ public:
 	/// \param[in]	pin		Pin to read
 	/// \return		The analog value
 	int			get_analog_val(uint8_t pin);
+
+
+	/// Get the battery voltage of the device
+	/// \return		The battery voltage
+	float		get_battery();
 
 	/// Get if a pin is enabled in manager
 	/// \param[in]	pin		Pin to get enable state of
