@@ -29,9 +29,9 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_Servo( 
-			char*		module_name		= "Servo",
+			char*		module_name		= SERVO_Module_Name, // "Servo",
 
-			uint8_t		servo_count		= NUM_SERVOS
+			uint8_t		servo_count		= SERVO_Servo_Count // NUM_SERVOS
 		);
 
 	// --- DESTRUCTOR ---

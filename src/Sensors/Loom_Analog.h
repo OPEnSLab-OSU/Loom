@@ -63,24 +63,24 @@ public:
 	// --- CONSTRUCTOR ---
 																	// The default parameters will be controlled by config file
 	Loom_Analog(	
-			char*			module_name				= "Analog", 
-			char*			sensor_description		= "Analog Values",
-			uint8_t			num_samples				= 8, 
+			char*			module_name				= ANALOG_Module_Name, // "Analog", 
+			char*			sensor_description		= ANALOG_Sensor_Description, // "Analog Values",
+			uint8_t			num_samples				= ANALOG_Num_Samples, // 8, 
 
-			uint8_t			read_resolution			= 12,
-			bool			enableA0				= true,
-			bool			enableA1				= true,
-			bool			enableA2				= true,
-			bool			enableA3				= true,
-			bool			enableA4				= true,
-			bool			enableA5				= true,
+			uint8_t			read_resolution			= ANALOG_Read_Resolution, // 12,
+			bool			enableA0				= ANALOG_EnableA0, // true,
+			bool			enableA1				= ANALOG_EnableA1, // true,
+			bool			enableA2				= ANALOG_EnableA2, // true,
+			bool			enableA3				= ANALOG_EnableA3, // true,
+			bool			enableA4				= ANALOG_EnableA4, // true,
+			bool			enableA5				= ANALOG_EnableA5, // true,
 
-			AnalogConversion convertA0				= AnalogConversion::NONE,
-			AnalogConversion convertA1				= AnalogConversion::NONE,
-			AnalogConversion convertA2				= AnalogConversion::NONE,
-			AnalogConversion convertA3				= AnalogConversion::NONE,
-			AnalogConversion convertA4				= AnalogConversion::NONE,
-			AnalogConversion convertA5				= AnalogConversion::NONE
+			AnalogConversion convertA0				= ANALOG_ConvertA0, // AnalogConversion::NONE,
+			AnalogConversion convertA1				= ANALOG_ConvertA1, // AnalogConversion::NONE,
+			AnalogConversion convertA2				= ANALOG_ConvertA2, // AnalogConversion::NONE,
+			AnalogConversion convertA3				= ANALOG_ConvertA3, // AnalogConversion::NONE,
+			AnalogConversion convertA4				= ANALOG_ConvertA4, // AnalogConversion::NONE,
+			AnalogConversion convertA5				= ANALOG_ConvertA5  // AnalogConversion::NONE
 		);
 
 	// --- DESTRUCTOR ---

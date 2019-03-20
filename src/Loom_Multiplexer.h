@@ -27,7 +27,7 @@
 
 // // I2C Address Conflict Selection
 
-// // enum to specify selection?
+
 enum class I2C_Selection { 
 	L_TSL2561,		///< TSL2561
 	L_TSL2591,		///< TSL2591
@@ -35,6 +35,9 @@ enum class I2C_Selection {
 	L_AS7263,		///< AS7263
 	L_AS7265X		///< AS72625X
 };
+
+
+// move to config
 
 #define i2c_0x29 I2C_Selection::L_TSL2591	// TSL2561 / TSL2591
 #define i2c_0x49 I2C_Selection::L_AS7265X	// TSL2561 / AS7262 / AS7263 / AS7265X
@@ -76,12 +79,12 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_Multiplexer(	
-			char*	module_name		= "Multiplexer",
+			char*		module_name			= "Multiplexer",
 
-			byte	i2c_address		= 0x71,
-			uint	num_ports		= 8,
-			bool	dynamic_list	= true,
-			uint	update_period	= 5000 // find way to make this call interrupt class to manage timing
+			byte		i2c_address			= 0x71,
+			uint		num_ports			= 8,
+			bool		dynamic_list		= true,
+			uint		update_period		= 5000 // find way to make this call interrupt class to manage timing
 		);
 
 

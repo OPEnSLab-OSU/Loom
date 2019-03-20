@@ -33,13 +33,13 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_TSL2561(	
-			byte	i2c_address				= 0x29, // 0x29, 0x39, 0x49
+			byte	i2c_address				= TSL2561_I2C_Address, // 0x29, // 0x29, 0x39, 0x49
 			
-			char*	module_name				= "TSL2561",
-			char*	sensor_description		= "Luminosity",
+			char*	module_name				= TSL2561_Module_Name, // "TSL2561",
+			char*	sensor_description		= TSL2561_Sensor_Description, // "Luminosity",
 
-			int		gain					= 1, // 1, 16
-			int		resolution				= 3	 // 1, 2, 3
+			int		gain					= TSL2561_Gain, // 1, // 1, 16
+			int		resolution				= TSL2561_Resolution // 3	 // 1, 2, 3
 		);
 
 	// --- DESTRUCTOR ---

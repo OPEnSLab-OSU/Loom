@@ -21,7 +21,7 @@ void LoomManager::Device_Init()
 {
 	
 	// Sub Managers
-	IM = new Loom_Interrupt_Manager( Interrupt_Manager_Name, RTC_Inst );
+	// IM = new Loom_Interrupt_Manager( Interrupt_Manager_Name, RTC_Inst );
 
 
 
@@ -43,10 +43,10 @@ void LoomManager::Device_Init()
 
 // config selects Use_*
 
-	// Sensors
-	#if Use_Analog == 1
-		AM = new Loom_Analog();
-	#endif
+	// // Sensors
+	// #if Use_Analog == 1
+	// 	AM = new Loom_Analog();
+	// #endif
 
 
 

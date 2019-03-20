@@ -48,13 +48,13 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_SD(	
-			char*		module_name			= "SD",
+			char*		module_name			= SD_Module_Name, // "SD",
 
-			bool		enable_rate_filter	= true,
-			uint		min_filter_delay	= 1000,
+			bool		enable_rate_filter	= SD_Enable_Rate_Filter, // true,
+			uint		min_filter_delay	= SD_Min_Filter_Delay, // 1000,
 
-			byte		chip_select			= 10,
-			char*		default_file		= "test.csv"
+			byte		chip_select			= SD_Chip_Select, // 10,
+			char*		default_file		= SD_Default_File // "test.csv"
 
 			// SD_Version 		version 			= FEATHERWING,
 			// byte 			reset_pin 			= A2 

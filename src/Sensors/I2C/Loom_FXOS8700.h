@@ -25,10 +25,10 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_FXOS8700(	
-			byte		i2c_address				= 0x1F, // 0x1C, 0x1D, 0x1E, 0x1F
+			byte		i2c_address				= FXOS8700_I2C_Address, // 0x1F, // 0x1C, 0x1D, 0x1E, 0x1F
 			
-			char*		module_name				= "FXOS8700",
-			char*		sensor_description		= "3-Axis Acceleromter/Magnetometer" 
+			char*		module_name				= FXOS8700_Module_Name, // "FXOS8700",
+			char*		sensor_description		= FXOS8700_Sensor_Description // "3-Axis Acceleromter/Magnetometer" 
 		);
 
 	// --- DESTRUCTOR ---

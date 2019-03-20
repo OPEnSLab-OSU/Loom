@@ -32,13 +32,13 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_TSL2591(	
-			byte		i2c_address				= 0x29,
+			byte		i2c_address				= TSL2591_I2c_Address, // 0x29,
 			
-			char*		module_name				= "TSL2591",
-			char*		sensor_description		= "Lux",
+			char*		module_name				= TSL2591_Module_Name, // "TSL2591",
+			char*		sensor_description		= TSL2591_Sensor_Description, // "Lux",
 
-			uint8_t		gain_level				= 1, // document 
-			uint8_t		timing_level			= 0  // document
+			uint8_t		gain_level				= TSL2591_Gain_Level, // 1, // document 
+			uint8_t		timing_level			= TSL2591_Timing_Level // 0  // document
 		);
 
 

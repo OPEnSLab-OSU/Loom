@@ -23,22 +23,22 @@ protected:
 public:
 	// --- CONSTRUCTOR ---
 	Loom_Digital(	
-			char*	module_name			= "Digital",	//DIGITAL_MODULE_NAME
-			char*	sensor_description	= "Digital Values",
+			char*	module_name			= DIGITAL_Module_name, //"Digital",	//DIGITAL_MODULE_NAME
+			char*	sensor_description	= DIGITAL_Sensor_description, //"Digital Values",
 
-			bool	enable5				= true,
-			bool	enable6				= true,
-			bool	enable9				= false,
-			bool	enable10			= true,
-			bool	enable11			= false,
-			bool	enable12			= false,
+			bool	enable5				= DIGITAL_Enable5, //true,
+			bool	enable6				= DIGITAL_Enable6, //true,
+			bool	enable9				= DIGITAL_Enable9, //false,
+			bool	enable10			= DIGITAL_Enable10, //true,
+			bool	enable11			= DIGITAL_Enable11, //false,
+			bool	enable12			= DIGITAL_Enable12, //false,
 
-			bool	enableA0			= false,
-			bool	enableA1			= false,
-			bool	enableA2			= false,
-			bool	enableA3			= false,
-			bool	enableA4			= false,
-			bool	enableA5			= false
+			bool	enableA0			= DIGITAL_EnableA0, //false,
+			bool	enableA1			= DIGITAL_EnableA1, //false,
+			bool	enableA2			= DIGITAL_EnableA2, //false,
+			bool	enableA3			= DIGITAL_EnableA3, //false,
+			bool	enableA4			= DIGITAL_EnableA4, //false,
+			bool	enableA5			= DIGITAL_EnableA5 //false
 		);
 
 	// --- DESTRUCTOR ---

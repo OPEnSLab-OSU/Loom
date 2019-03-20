@@ -23,10 +23,10 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_LIS3DH(	
-			byte		i2c_address				= 0x19,
+			byte		i2c_address				= LIS3DH_I2C_Address, // 0x19,
 			
-			char*		module_name				= "LIS3DH",
-			char*		sensor_description		= "Accelerometer" 
+			char*		module_name				= LIS3DH_Module_Name, // "LIS3DH",
+			char*		sensor_description		= LIS3DH_Sensor_Description // "Accelerometer" 
 		);
 
 	// --- DESTRUCTOR ---

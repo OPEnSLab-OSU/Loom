@@ -47,17 +47,17 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_LoRa( 	
-			char*		module_name			= "LoRa",
+			char*		module_name			= LORA_Module_Name, // "LoRa",
 		
-			uint16_t	max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
-			// CommScope subnet_scope 		= SCOPE_SUBNET,
-			bool		compress_messages	= true,
+			uint16_t	max_message_len		= LORA_Max_Message_Len, // RH_RF95_MAX_MESSAGE_LEN,
+			// CommScope subnet_scope 		= LORA_Subnet_Scope, // SCOPE_SUBNET,
+			bool		compress_messages	= LORA_Compress_Messages, // true,
 
-			uint8_t		address				= LORA_SELF_ADDRESS,
-			uint8_t		friend_address		= LORA_FRIEND_ADDRESS,
-			uint8_t		power_level 		= 23,
-			uint8_t		retry_count			= 3,
-			uint16_t	retry_timeout		= 200
+			uint8_t		address				= LORA_Address, // LORA_SELF_ADDRESS,
+			uint8_t		friend_address		= LORA_Friend_Address, // LORA_FRIEND_ADDRESS,
+			uint8_t		power_level 		= LORA_Power_Level, // 23,
+			uint8_t		retry_count			= LORA_Retry_Count, // 3,
+			uint16_t	retry_timeout		= LORA_Retry_Timeout // 200
 		);
 
 	// --- DESTRUCTOR ---

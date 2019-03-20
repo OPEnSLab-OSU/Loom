@@ -22,9 +22,9 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_Relay( 
-			char*		module_name		= "Relay",
+			char*		module_name		= RELAY_Module_Name, // "Relay",
 
-			byte		pin				= 10
+			byte		pin				= RELAY_Pin // 10
 	   );
 
 	// --- DESTRUCTOR ---

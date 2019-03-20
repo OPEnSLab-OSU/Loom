@@ -27,11 +27,11 @@ public:
 	
 	// --- CONSTRUCTOR ---
 	Loom_Neopixel( 	
-			char*	module_name		= "Neopixel",
+			char*	module_name		= NEOPIXEL_Module_Name, // "Neopixel",
 
-			bool	enableA0		= false,
-			bool	enableA1		= false,
-			bool	enableA2		= true
+			bool	enableA0		= NEOPIXEL_EnableA0, // false,
+			bool	enableA1		= NEOPIXEL_EnableA1, // false,
+			bool	enableA2		= NEOPIXEL_EnableA2 // true
 		) ;
 
 	// --- DESTRUCTOR ---

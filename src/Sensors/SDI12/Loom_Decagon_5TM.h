@@ -15,9 +15,9 @@ protected:
 public:
 
 	Loom_Decagon5TM(	
-			char*		module_name			= "5TM Decagon",
-			char*		sensor_description	= "Soil Moisture", 
-			uint8_t		num_samples			= 1 
+			char*		module_name			= DECAGON_5TM_Module_Name, // "5TM Decagon",
+			char*		sensor_description	= DECAGON_5TM_Sensor_Description, // "Soil Moisture", 
+			uint8_t		num_samples			= DECAGON_5TM_Num_Samples // 1 
 		);
 
 
