@@ -18,13 +18,13 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_PCF8523(	
-			char*		module_name			= PCF8523_Module_Name, // "PCF8523",
+			char*		module_name			=  "PCF8523",   // PCF8523_Module_Name,
 	 
-			TimeZone	timezone			= PCF8523_Timezone, // PST,
-			bool		use_utc_time		= PCF8523_Use_Utc_Time, // false,
-			bool		get_internet_time	= PCF8523_Get_Internet_Time, // false,
+			TimeZone	timezone			=  PST,   // PCF8523_Timezone,
+			bool		use_utc_time		=  false,   // PCF8523_Use_Utc_Time,
+			bool		get_internet_time	=  false,   // PCF8523_Get_Internet_Time,
 
-			byte		int_pin				= PCF8523_Int_Pin // 6
+			byte		int_pin				= 6   // PCF8523_Int_Pin 
 		);
 
 

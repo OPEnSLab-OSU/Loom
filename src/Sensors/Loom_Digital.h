@@ -23,22 +23,22 @@ protected:
 public:
 	// --- CONSTRUCTOR ---
 	Loom_Digital(	
-			char*	module_name			= DIGITAL_Module_name, //"Digital",	//DIGITAL_MODULE_NAME
-			char*	sensor_description	= DIGITAL_Sensor_description, //"Digital Values",
+			char*	module_name			= "Digital",	//DIGITAL_MODULE_NAME  // DIGITAL_Module_Name,
+			char*	sensor_description	= "Digital Values",  // DIGITAL_Sensor_Description,
 
-			bool	enable5				= DIGITAL_Enable5, //true,
-			bool	enable6				= DIGITAL_Enable6, //true,
-			bool	enable9				= DIGITAL_Enable9, //false,
-			bool	enable10			= DIGITAL_Enable10, //true,
-			bool	enable11			= DIGITAL_Enable11, //false,
-			bool	enable12			= DIGITAL_Enable12, //false,
+			bool	enable5				= true,  // DIGITAL_Enable5,
+			bool	enable6				= true,  // DIGITAL_Enable6,
+			bool	enable9				= false,  // DIGITAL_Enable9,
+			bool	enable10			= false,  // DIGITAL_Enable10,
+			bool	enable11			= false,  // DIGITAL_Enable11,
+			bool	enable12			= false,  // DIGITAL_Enable12,
 
-			bool	enableA0			= DIGITAL_EnableA0, //false,
-			bool	enableA1			= DIGITAL_EnableA1, //false,
-			bool	enableA2			= DIGITAL_EnableA2, //false,
-			bool	enableA3			= DIGITAL_EnableA3, //false,
-			bool	enableA4			= DIGITAL_EnableA4, //false,
-			bool	enableA5			= DIGITAL_EnableA5 //false
+			bool	enableA0			= false,  // DIGITAL_EnableA0,
+			bool	enableA1			= false,  // DIGITAL_EnableA1,
+			bool	enableA2			= false,  // DIGITAL_EnableA2,
+			bool	enableA3			= false,  // DIGITAL_EnableA3,
+			bool	enableA4			= false,  // DIGITAL_EnableA4,
+			bool	enableA5			= false  // DIGITAL_EnableA5 
 		);
 
 	// --- DESTRUCTOR ---

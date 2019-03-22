@@ -18,13 +18,13 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_DS3231(	
-			char*		module_name			= DS3231_Module_Name, // "DS3231",
+			char*		module_name			=  "DS3231",  // DS3231_Module_Name,
 
-			TimeZone	timezone			= DS3231_Timezone, // PST,
-			bool		use_utc_time		= DS3231_Use_Utc_Time, // false,
-			bool		get_internet_time	= DS3231_Get_Internet_Time, // false,
+			TimeZone	timezone			=  PST,  // DS3231_Timezone,
+			bool		use_utc_time		=  false,  // DS3231_Use_Utc_Time,
+			bool		get_internet_time	=  false,  // DS3231_Get_Internet_Time,
 			
-			byte		int_pin				= DS3231_Int_Pin // 6
+			byte		int_pin				= 6  // DS3231_Int_Pin 
 		);
 
 	// --- DESTRUCTOR ---

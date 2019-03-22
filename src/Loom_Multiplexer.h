@@ -23,6 +23,7 @@
 #include "Sensors/I2C/Loom_ZXGesture.h"
 
 
+class Loom_AS7262;
 
 
 // // I2C Address Conflict Selection
@@ -44,6 +45,13 @@ enum class I2C_Selection {
 
 
 // Maybe query DeviceManager if RTC is in use, if not, query 0x68 s
+
+
+
+
+
+
+
 
 
 
@@ -137,7 +145,46 @@ private:
 	/// Compares I2C address to known sensors and generates corresponding sensor instance
 	/// \param[in]	i2c_address		The I2C address to match to sensor class
 	/// \return		Pointer to the generated I2C sensor object, Null if no match for that address
-	static LoomI2CSensor* generate_sensor_object(byte i2c_address);
+LoomI2CSensor* generate_sensor_object(byte i2c_address);
+/////////////////////////////////////////////////////////////////////
+// static LoomI2CSensor* generate_sensor_object(byte i2c_address)
+// {
+// 	switch (i2c_address) {
+// 		case 0x10 : return new Loom_ZXGesture(i2c_address=0x10);	// ZXGesture
+// 		case 0x11 : return new Loom_ZXGesture(i2c_address=0x11);	// ZXGesture
+// 		case 0x19 : return new Loom_LIS3DH(i2c_address=0x19);		// LIS3DH
+// 		case 0x1C : return new Loom_FXOS8700(i2c_address=0x1C);		// FXOS8700
+// 		case 0x1D : return new Loom_FXOS8700(i2c_address=0x1D);		// FXOS8700
+// 		case 0x1E : return new Loom_FXOS8700(i2c_address=0x1E);		// FXOS8700
+// 		case 0x1F : return new Loom_FXOS8700(i2c_address=0x1F);		// FXOS8700
+// 		case 0x20 : return new Loom_FXAS21002(i2c_address=0x20);	// FXAS21002
+// 		case 0x21 : return new Loom_FXAS21002(i2c_address=0x21);	// FXAS21002
+
+// 		case 0x29 : // TSL2561 / TSL2591
+// 			if (i2c_0x29 == I2C_Selection::L_TSL2561) return new Loom_TSL2561(i2c_address=0x29);	// TSL2561
+// 			if (i2c_0x29 == I2C_Selection::L_TSL2591) return new Loom_TSL2591(i2c_address=0x29);	// TSL2591
+
+// 		case 0x39 : return new Loom_TSL2561(i2c_address=0x39);	// TSL2561
+// 		case 0x44 : return new Loom_SHT31D(i2c_address=0x44);	// SHT31D
+// 		case 0x45 : return new Loom_SHT31D(i2c_address=0x45);	// SHT31D
+
+// 		case 0x49 : // TSL2561 / AS726X / AS7265X
+// 			if (i2c_0x49 == I2C_Selection::L_TSL2561) return new Loom_TSL2561(i2c_address=0x49);	// TSL2561
+// 			if (i2c_0x49 == I2C_Selection::L_AS7262 ) return new Loom_AS7262(i2c_address=0x49);	// AS7262
+// 			if (i2c_0x49 == I2C_Selection::L_AS7263 ) return new Loom_AS7263(i2c_address=0x49);	// AS7263
+// 			if (i2c_0x49 == I2C_Selection::L_AS7265X) return new Loom_AS7265X(i2c_address=0x49);	// AS7265X
+
+// 		case 0x68 : return NULL; // new Loom_MPU6050();
+// 		case 0x69 : return NULL; // new Loom_MPU6050();
+// 		case 0x70 : return new Loom_MB1232(i2c_address=0x70); // MB1232
+// 		case 0x76 : return new Loom_MS5803(i2c_address=0x76); // MS5803
+// 		case 0x77 : return new Loom_MS5803(i2c_address=0x77); // MS5803
+
+// 		default : return NULL;
+// 	}
+// }
+
+
 
 	/// Determine the I2C address of the sensor (if any) on port.
 	/// \param[in]	port	The port to get sensor address of
@@ -145,5 +192,49 @@ private:
 	byte			get_i2c_on_port(uint8_t port);
 
 };
+
+
+
+
+
+// /////////////////////////////////////////////////////////////////////
+// LoomI2CSensor* generate_sensor_object(byte i2c_address)
+// {
+// 	switch (i2c_address) {
+// 		case 0x10 : return new Loom_ZXGesture(i2c_address=0x10);	// ZXGesture
+// 		case 0x11 : return new Loom_ZXGesture(i2c_address=0x11);	// ZXGesture
+// 		case 0x19 : return new Loom_LIS3DH(i2c_address=0x19);		// LIS3DH
+// 		case 0x1C : return new Loom_FXOS8700(i2c_address=0x1C);		// FXOS8700
+// 		case 0x1D : return new Loom_FXOS8700(i2c_address=0x1D);		// FXOS8700
+// 		case 0x1E : return new Loom_FXOS8700(i2c_address=0x1E);		// FXOS8700
+// 		case 0x1F : return new Loom_FXOS8700(i2c_address=0x1F);		// FXOS8700
+// 		case 0x20 : return new Loom_FXAS21002(i2c_address=0x20);	// FXAS21002
+// 		case 0x21 : return new Loom_FXAS21002(i2c_address=0x21);	// FXAS21002
+
+// 		case 0x29 : // TSL2561 / TSL2591
+// 			if (i2c_0x29 == I2C_Selection::L_TSL2561) return new Loom_TSL2561(i2c_address=0x29);	// TSL2561
+// 			if (i2c_0x29 == I2C_Selection::L_TSL2591) return new Loom_TSL2591(i2c_address=0x29);	// TSL2591
+
+// 		case 0x39 : return new Loom_TSL2561(i2c_address=0x39);	// TSL2561
+// 		case 0x44 : return new Loom_SHT31D(i2c_address=0x44);	// SHT31D
+// 		case 0x45 : return new Loom_SHT31D(i2c_address=0x45);	// SHT31D
+
+// 		case 0x49 : // TSL2561 / AS726X / AS7265X
+// 			if (i2c_0x49 == I2C_Selection::L_TSL2561) return new Loom_TSL2561(i2c_address=0x49);	// TSL2561
+// 			if (i2c_0x49 == I2C_Selection::L_AS7262 ) return new Loom_AS7262(i2c_address=0x49);	// AS7262
+// 			if (i2c_0x49 == I2C_Selection::L_AS7263 ) return new Loom_AS7263(i2c_address=0x49);	// AS7263
+// 			if (i2c_0x49 == I2C_Selection::L_AS7265X) return new Loom_AS7265X(i2c_address=0x49);	// AS7265X
+
+// 		case 0x68 : return NULL; // new Loom_MPU6050();
+// 		case 0x69 : return NULL; // new Loom_MPU6050();
+// 		case 0x70 : return new Loom_MB1232(i2c_address=0x70); // MB1232
+// 		case 0x76 : return new Loom_MS5803(i2c_address=0x76); // MS5803
+// 		case 0x77 : return new Loom_MS5803(i2c_address=0x77); // MS5803
+
+// 		default : return NULL;
+// 	}
+// }
+
+
 
 #endif

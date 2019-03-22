@@ -9,7 +9,7 @@
 
 
 
-// #define NUM_STEPPERS 4
+#define NUM_STEPPERS 4
 
 
 class Loom_Stepper : public LoomActuator
@@ -30,9 +30,9 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_Stepper( 
-			char*		module_name		= STEPPER_Module_Name, // "Stepper" ,
+			char*		module_name		= "Stepper" ,  // STEPPER_Module_Name,
 
-			uint8_t		stepper_count	= STEPPER_Stepper_Count // NUM_STEPPERS
+			uint8_t		stepper_count	= NUM_STEPPERS  // STEPPER_Stepper_Count 
 		);
 
 	// --- DESTRUCTOR ---

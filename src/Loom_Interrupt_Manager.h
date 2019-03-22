@@ -29,25 +29,26 @@ struct IntDetails {
 	byte		type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
 	bool		is_immediate;	///< True if ISR is called directly upon interrupt, false if called next check of flags
 	bool		enabled;		///< Whether or not this interrupt is enabled
-
-	// char[20] description ?
 };
-
 
 struct TimerDetails {
 	ISRFuncPtr	ISR;			///< Not a real ISR, just a function called if timer has expired
 	uint		duration;		///< The timer duration
 	bool		repeat;			///< Whether or not timer should repeat
 	bool		enabled;		///< Whether or not this timer is enabled
+};
 
-	// char[20] description ?
+struct StopWatchDetails {
+	unsigned long	start_time;		///< The millis time when stopwatch started
+	bool			enabled;		///< Whether or not this stopwatch is enabled
 };
 
 
 #define InteruptRange 16
 
 
-#define MaxTimerCount 4   // maybe just make the timers an enum?
+#define MaxTimerCount 4
+#define MaxStopWatchCount 2
 
 
 
@@ -76,7 +77,9 @@ protected:
 
 	AsyncDelay		timers[MaxTimerCount];
 	TimerDetails	timer_settings[MaxTimerCount];
-	// uint			timer_count;
+
+
+	StopWatchDetails	stopwatch_settings[MaxStopWatchCount];
 
 
 	// interrupt_triggered for timers, also support immediate and delayed
@@ -103,7 +106,7 @@ public:
 	void 		link_device_manager(LoomManager* LM);
 
 
-	void		execute_pending_ISRs();
+	void		run_pending_ISRs();
 
 
 
@@ -201,6 +204,7 @@ public:
 
 // === === AsyncDelay Timer Functions === ===
 
+
 	/// Check if timers have elapsed, if so run associated 'ISR'
 	void		check_timers();
 
@@ -209,6 +213,10 @@ public:
 
 	/// Clear specified timer 
 	void		clear_timer(uint timer_num);
+
+
+// === === Stopwatch Functions === ===
+
 
 
 

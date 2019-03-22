@@ -35,12 +35,12 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_ZXGesture(	
-			byte		i2c_address				= ZXGESTURE_I2C_Address, // 0x10, // 0x10, 0x11
+			byte		i2c_address				=  0x10, // 0x10, 0x11    // ZXGESTURE_I2C_Address,
 			
-			char*		module_name				= ZXGESTURE_Module_Name, // "ZXGesture",
-			char*		sensor_description		= ZXGESTURE_Sensor_Description, // "Temperature/Humidty",
+			char*		module_name				=  "ZXGesture",    // ZXGESTURE_Module_Name,
+			char*		sensor_description		=  "Temperature/Humidty",    // ZXGESTURE_Sensor_Description,
 
-			ZXMode		mode					= ZXGESTURE_Mode // ZXMode::ZX_POS
+			ZXMode		mode					= ZXMode::ZX_POS    // ZXGESTURE_Mode 
 		);
 
 	// --- DESTRUCTOR ---

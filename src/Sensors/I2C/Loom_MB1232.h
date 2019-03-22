@@ -23,10 +23,10 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_MB1232(	
-			byte		i2c_address				= MB1232_I2C_Address, // 0x70, // 0x70
+			byte		i2c_address				=  0x70, // 0x70   // MB1232_I2C_Address,
 			
-			char*		module_name				= MB1232_Module_Name, // "MB1232",
-			char*		sensor_description		= MB1232_Sensor_Description // "Sonar" 
+			char*		module_name				=  "MB1232",   // MB1232_Module_Name,
+			char*		sensor_description		= "Sonar"    // MB1232_Sensor_Description 
 		);
 
 	// --- DESTRUCTOR ---

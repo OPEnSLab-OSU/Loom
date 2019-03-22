@@ -61,17 +61,17 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_OLED(	
-			char*				module_name				= OLED_Module_Name, // "OLED",
+			char*				module_name				=  "OLED",     // OLED_Module_Name,
 
-			bool				enable_rate_filter		= OLED_Enable_Rate_Filter, // true,
-			uint				min_filter_delay		= OLED_Min_Filter_Delay, // 300,
+			bool				enable_rate_filter		=  true,     // OLED_Enable_Rate_Filter,
+			uint				min_filter_delay		=  300,     // OLED_Min_Filter_Delay,
 
-			OLED_Version		type					= OLED_Type, // OLED_Version::FEATHERWING,
-			byte				reset_pin				= OLED_Reset_Pin, // A2,
-			OLED_Format			display_format			= OLED_Display_Format, // OLED_Format::SCROLL,
-			uint 				scroll_duration			= OLED_Scroll_Duration, // 6000,
-			byte				freeze_pin				= OLED_Freeze_Pin, // 10,					// Common pins might be: 10 (Ishield); 9(A), 6(B), 5(C) (OLED Featherwing buttons)
-			OLED_Freeze			freeze_behavior			= OLED_Freeze_Behavior // OLED_Freeze::SCROLL
+			OLED_Version		type					=  OLED_Version::FEATHERWING,     // OLED_Type,
+			byte				reset_pin				=  A2,     // OLED_Reset_Pin,
+			OLED_Format			display_format			=  OLED_Format::SCROLL,     // OLED_Display_Format,
+			uint 				scroll_duration			=  6000,     // OLED_Scroll_Duration,
+			byte				freeze_pin				=  10,					// Common pins might be: 10 (Ishield); 9(A), 6(B), 5(C) (OLED Featherwing buttons)     // OLED_Freeze_Pin,
+			OLED_Freeze			freeze_behavior			= OLED_Freeze::SCROLL     // OLED_Freeze_Behavior 
 		);
 
 	// --- DESTRUCTOR ---

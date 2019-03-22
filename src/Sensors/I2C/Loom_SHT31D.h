@@ -25,10 +25,10 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_SHT31D(	
-			byte		i2c_address				= SHT31D_I2C_Address, // 0x44, // 0x44, 0x45
+			byte		i2c_address				=  0x44, // 0x44, 0x45  // SHT31D_I2C_Address,
 			
-			char*		module_name				= SHT31D_Module_Name, // "SHT31D",
-			char*		sensor_description		= SHT31D_Sensor_Description // "Temperature/Humidty" 
+			char*		module_name				=  "SHT31D",  // SHT31D_Module_Name,
+			char*		sensor_description		= "Temperature/Humidty"   // SHT31D_Sensor_Description 
 		);
 
 	// --- DESTRUCTOR ---

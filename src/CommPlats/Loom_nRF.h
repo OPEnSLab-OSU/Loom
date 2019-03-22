@@ -9,8 +9,8 @@
 
 
 // // these will be defined in the config file
-// #define NRF_SELF_ADDRESS   01
-// #define NRF_FRIEND_ADDRESS 00
+#define NRF_SELF_ADDRESS   01
+#define NRF_FRIEND_ADDRESS 00
 
 #ifndef NRF_MESSAGE_SIZE
 	#define NRF_MESSAGE_SIZE 120
@@ -47,21 +47,21 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_nRF( 	
-			char*		module_name			= NRF_Module_Name, // "nRF",
+			char*		module_name			=  "nRF",   // NRF_Module_Name,
 		
-			uint16_t	max_message_len		= NRF_Max_Message_Len, // 120,//RH_RF95_MAX_MESSAGE_LEN,
-			// CommScope subnet_scope 		= // SCOPE_SUBNET,
-			bool		compress_messages	= NRF_Compress_Messages, // true,
+			uint16_t	max_message_len		=  120,//RH_RF95_MAX_MESSAGE_LEN,   // NRF_Max_Message_Len,
+			// CommScope subnet_scope 		= SCOPE_SUBNET,   // // 
+			bool		compress_messages	=  true,   // NRF_Compress_Messages,
 
-			uint8_t		address 			= NRF_Address, // NRF_SELF_ADDRESS,
-			uint8_t		friend_address 		= NRF_Friend_Address, // NRF_FRIEND_ADDRESS,
+			uint8_t		address 			=  NRF_SELF_ADDRESS,   // NRF_Address,
+			uint8_t		friend_address 		=  NRF_FRIEND_ADDRESS,   // NRF_Friend_Address,
 
-			uint8_t		data_rate			= NRF_Data_Rate, // 1, 	// 0: Default, 1: RF24_250KBPS, 2: RF24_1MBPS, 3: RF24_2MBPS 
-			uint8_t		power_level			= NRF_Power_Level, // 0,	// 0: Default, 1: RF24_PA_MIN, 2: RF24_PA_LOW, 3: RF24_PA_HIGH, 4: RF24_PA_MAX
-			uint8_t		retry_count 		= NRF_Retry_Count, // 3,
-			uint16_t	retry_timeout 		= NRF_Retry_Timeout, // 200,
+			uint8_t		data_rate			=  1, 	// 0: Default, 1: RF24_250KBPS, 2: RF24_1MBPS, 3: RF24_2MBPS    // NRF_Data_Rate,
+			uint8_t		power_level			=  0,	// 0: Default, 1: RF24_PA_MIN, 2: RF24_PA_LOW, 3: RF24_PA_HIGH, 4: RF24_PA_MAX   // NRF_Power_Level,
+			uint8_t		retry_count 		=  3,   // NRF_Retry_Count,
+			uint16_t	retry_timeout 		=  200,   // NRF_Retry_Timeout,
 
-			uint8_t		multicast_level		= NRF_Multicast_level // 1
+			uint8_t		multicast_level		= 1   // NRF_Multicast_level 
 		);
 
 

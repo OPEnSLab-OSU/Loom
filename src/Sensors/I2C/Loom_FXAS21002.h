@@ -23,10 +23,10 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_FXAS21002(	
-			byte		i2c_address				= FXAS21002_I2C_Address, // 0x20, // 0x20 / 0x21
+			byte		i2c_address				=   0x20, // 0x20 / 0x21  // FXAS21002_I2C_Address,
 					
-			char*		module_name				= FXAS21002_Module_Name, // "FXAS21002",
-			char*		sensor_description		= FXAS21002_Sensor_Description // "3-Axis Gyroscope" 
+			char*		module_name				=   "FXAS21002",  // FXAS21002_Module_Name,
+			char*		sensor_description		= "3-Axis Gyroscope"   // FXAS21002_Sensor_Description 
 		);
 
 	// --- DESTRUCTOR ---

@@ -16,8 +16,8 @@
 
 
 // these will be defined in the config file
-// #define LORA_SELF_ADDRESS   01
-// #define LORA_FRIEND_ADDRESS 00
+#define LORA_SELF_ADDRESS   01
+#define LORA_FRIEND_ADDRESS 00
 
 
 
@@ -47,17 +47,17 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_LoRa( 	
-			char*		module_name			= LORA_Module_Name, // "LoRa",
+			char*		module_name			=  "LoRa",  // LORA_Module_Name,
 		
-			uint16_t	max_message_len		= LORA_Max_Message_Len, // RH_RF95_MAX_MESSAGE_LEN,
-			// CommScope subnet_scope 		= LORA_Subnet_Scope, // SCOPE_SUBNET,
-			bool		compress_messages	= LORA_Compress_Messages, // true,
+			uint16_t	max_message_len		=  RH_RF95_MAX_MESSAGE_LEN,  // LORA_Max_Message_Len,
+			// CommScope subnet_scope 		=  SCOPE_SUBNET,  // LORA_Subnet_Scope,
+			bool		compress_messages	=  true,  // LORA_Compress_Messages,
 
-			uint8_t		address				= LORA_Address, // LORA_SELF_ADDRESS,
-			uint8_t		friend_address		= LORA_Friend_Address, // LORA_FRIEND_ADDRESS,
-			uint8_t		power_level 		= LORA_Power_Level, // 23,
-			uint8_t		retry_count			= LORA_Retry_Count, // 3,
-			uint16_t	retry_timeout		= LORA_Retry_Timeout // 200
+			uint8_t		address				=  LORA_SELF_ADDRESS,  // LORA_Address,
+			uint8_t		friend_address		=  LORA_FRIEND_ADDRESS,  // LORA_Friend_Address,
+			uint8_t		power_level 		=  23,  // LORA_Power_Level,
+			uint8_t		retry_count			=  3,  // LORA_Retry_Count,
+			uint16_t	retry_timeout		= 200  // LORA_Retry_Timeout 
 		);
 
 	// --- DESTRUCTOR ---

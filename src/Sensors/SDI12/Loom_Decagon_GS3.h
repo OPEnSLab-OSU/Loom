@@ -21,9 +21,9 @@ protected:
 public:
 
 	Loom_DecagonGS3(	
-			char*		module_name			= DECAGON_GS3_Module_Name, // "GS3 Decagon",
-			char*		sensor_description	= DECAGON_GS3_Sensor_Description, // "Soil Moisture", 
-			uint8_t		num_samples			= DECAGON_GS3_Num_Samples // 1 
+			char*		module_name			=  "GS3 Decagon",// DECAGON_GS3_Module_Name,
+			char*		sensor_description	=  "Soil Moisture", // DECAGON_GS3_Sensor_Description,
+			uint8_t		num_samples			= 1 // DECAGON_GS3_Num_Samples 
 		);
 
 

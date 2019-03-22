@@ -196,7 +196,7 @@ int Loom_Analog::get_analog_val(uint8_t pin)
 }
 
 /////////////////////////////////////////////////////////////////////
-float get_battery()
+float Loom_Analog::get_battery()
 {
 	return battery;
 }

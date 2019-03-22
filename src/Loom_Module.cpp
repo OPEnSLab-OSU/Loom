@@ -43,17 +43,17 @@ LoomModule::LoomModule( char* module_name ) : LoomModule()
 	// Println("Begin Setup");
 }
 
-/////////////////////////////////////////////////////////////////////
-// this version also links to parent device
-LoomModule::LoomModule( char* module_name, LoomManager* LD ) : LoomModule()
-{
-	// Println("LoomModule Constructor 2");
-	this->module_name   = module_name;
-		// strcpy(this->module_name, module_name);
+// /////////////////////////////////////////////////////////////////////
+// // this version also links to parent device
+// LoomModule::LoomModule( char* module_name, LoomManager* LD ) : LoomModule()
+// {
+// 	// Println("LoomModule Constructor 2");
+// 	this->module_name   = module_name;
+// 		// strcpy(this->module_name, module_name);
 
-	// this->device_manager = LD;
-	link_device_manager(LD);
-}
+// 	// this->device_manager = LD;
+// 	link_device_manager(LD);
+// }
 
 /////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
@@ -67,17 +67,11 @@ LoomManager* LoomModule::get_device_manager()
 }
 
 /////////////////////////////////////////////////////////////////////
-void LoomModule::link_device_manager(LoomManager* LD)
+void LoomModule::link_device_manager(LoomManager* LM)
 {
-	if (LD == NULL) return;
+	if (LM == NULL) return;
 
-	device_manager = LD;
-
-	char buf[50];
-	LD->get_device_name(buf);
-
-	// print_module_label();
-	// Println2("Linked as module of ", buf);
+	device_manager = LM;
 }
 
 /////////////////////////////////////////////////////////////////////

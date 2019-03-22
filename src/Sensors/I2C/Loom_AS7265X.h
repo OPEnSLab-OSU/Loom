@@ -38,15 +38,15 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_AS7265X(	
-			byte		i2c_address				= AS7265X_I2C_Address, // 0x49,
+			byte		i2c_address				=  0x49, // AS7265X_I2C_Address,
 			
-			char*		module_name				= AS7265X_Module_Name, // "AS7265X",
-			char*		sensor_description		= AS7265X_Sensor_Description, // "Spectral Triad",
+			char*		module_name				=  "AS7265X", // AS7265X_Module_Name,
+			char*		sensor_description		=  "Spectral Triad", // AS7265X_Sensor_Description,
 
-			bool		use_bulb				= AS7265X_Use_Bulb, // false,	
-			byte		gain					= AS7265X_Gain, // 64,	// 1 to 64x
-			byte		mode					= AS7265X_Mode, // AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT,	// 4 channel, other 4 channel, 6 chan, or 6 chan one shot
-			byte		integration_time		= AS7265X_Integration_Time // 49 	// Time will be 2.8ms * [integration value]  (0-255), 50 is default
+			bool		use_bulb				=  false,	 // AS7265X_Use_Bulb,
+			byte		gain					=  64,	// 1 to 64x // AS7265X_Gain,
+			byte		mode					=  AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT,	// 4 channel, other 4 channel, 6 chan, or 6 chan one shot // AS7265X_Mode,
+			byte		integration_time		= 49 	// Time will be 2.8ms * [integration value]  (0-255), 50 is default // AS7265X_Integration_Time 
 		);
 
 	// --- DESTRUCTOR ---

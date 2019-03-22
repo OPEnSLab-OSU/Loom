@@ -43,7 +43,6 @@ LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint
 	this->other_module_count = 0;
 	this->sensor_count       = 0;
 	this->actuator_count     = 0;
-	this->rtc_count          = 0;
 	this->comm_count         = 0;
 	this->log_count          = 0;
 
@@ -52,7 +51,7 @@ LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint
 	this->package_verbosity	= package_verbosity;
 
 	// This adds all the enabled modules
-	Device_Init();
+	// Device_Init();
 
 }
 
@@ -113,9 +112,11 @@ void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager)
 	Println2("Adding Module: ", interrupt_manager->get_module_name() );
 	this->interrupt_manager = interrupt_manager; 
 
-	if (rtc_modules[0]) {
-		this->interrupt_manager->set_RTC_module(rtc_modules[0]);
-	}
+	interrupt_manager->link_device_manager(this);
+
+	// if (rtc_module != NULL) {
+	// 	this->interrupt_manager->set_RTC_module(rtc_module);
+	// }
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -129,14 +130,52 @@ void LoomManager::add_module(Loom_Sleep_Manager* sleep_manager)
 	Println2("Adding Module: ", sleep_manager->get_module_name() );
 	this->sleep_manager = sleep_manager; 
 
-	if (rtc_modules[0]) {
-		this->sleep_manager->set_RTC_module(rtc_modules[0]);
-	}
+	sleep_manager->link_device_manager(this);
 
-	if (interrupt_manager) {
-		this->sleep_manager->set_Interrupt_Manager(interrupt_manager);
+	// if (rtc_module != NULL) {
+	// 	this->sleep_manager->set_RTC_module(rtc_module);
+	// }
+
+	// if (interrupt_manager) {
+	// 	this->sleep_manager->set_Interrupt_Manager(interrupt_manager);
+	// }
+}
+
+/////////////////////////////////////////////////////////////////////
+void LoomManager::add_module(LoomRTC* rtc) 
+{
+	rtc_module = rtc;
+	// add_module_aux( (LoomModule**)rtc_modules, (LoomModule*)rtc, rtc_count, MAX_RTCS );
+	
+	if (rtc != NULL) {
+		if (interrupt_manager != NULL) {
+			interrupt_manager->set_RTC_module(rtc);
+		}
+		if (sleep_manager != NULL) {
+			sleep_manager->set_RTC_module(rtc);
+		}
 	}
 }
+
+// /////////////////////////////////////////////////////////////////////
+// void LoomManager::add_module(LoomSD* SD_manager) 
+// {
+// 	print_device_label();
+// 	if (!sleep_manager) {
+// 		Println2("Cannot add ", sleep_manager->get_module_name() );
+// 		return;
+// 	}
+// 	Println2("Adding Module: ", sleep_manager->get_module_name() );
+// 	this->sleep_manager = sleep_manager; 
+
+// 	if (rtc_module != NULL) {
+// 		this->sleep_manager->set_RTC_module(rtc_module);
+// 	}
+
+// 	if (interrupt_manager) {
+// 		this->sleep_manager->set_Interrupt_Manager(interrupt_manager);
+// 	}
+// }
 
 /////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomModule* module) 
@@ -154,18 +193,6 @@ void LoomManager::add_module(LoomSensor* sensor)
 void LoomManager::add_module(LoomActuator* actuator) 
 {
 	add_module_aux( (LoomModule**)actuator_modules, (LoomModule*)actuator, actuator_count, MAX_ACTUATORS );
-}
-
-/////////////////////////////////////////////////////////////////////
-void LoomManager::add_module(LoomRTC* rtc) 
-{
-	add_module_aux( (LoomModule**)rtc_modules, (LoomModule*)rtc, rtc_count, MAX_RTCS );
-	if (interrupt_manager) {
-		interrupt_manager->set_RTC_module(rtc_modules[0]);
-	}
-	if (sleep_manager) {
-		sleep_manager->set_RTC_module(rtc_modules[0]);
-	}
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -199,6 +226,12 @@ Loom_Sleep_Manager* LoomManager::get_sleep_manager()
 }
 
 /////////////////////////////////////////////////////////////////////
+LoomRTC* LoomManager::get_rtc_module()
+{
+	return rtc_module;
+}
+
+/////////////////////////////////////////////////////////////////////
 LoomModule* LoomManager::get_other_module(int idx)
 {
 	return (idx < other_module_count) ? other_modules[idx] : NULL;
@@ -214,12 +247,6 @@ LoomSensor* LoomManager::get_sensor_module(int idx)
 LoomActuator* LoomManager::get_actuator_module(int idx)
 {
 	return (idx < actuator_count) ? actuator_modules[idx] : NULL;
-}
-
-/////////////////////////////////////////////////////////////////////
-LoomRTC* LoomManager::get_rtc_module(int idx)
-{
-	return (idx < rtc_count) ? rtc_modules[idx] : NULL;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -261,10 +288,15 @@ void LoomManager::list_modules()
 	print_device_label();
 	Println("Modules:");
 
+	// if ( (rtc_module != NULL) && (rtc_module[i]->get_active()) ) {
+	// 		Println4( "\t\t[", (rtc_module[i]->get_active()) ? "+" : "-" , "] ", rtc_module[i]->get_module_name() );
+	// 	}
+
+	list_modules_aux( (LoomModule**)rtc_module      , 1          , "RTC Modules"); 
+
 	list_modules_aux( (LoomModule**)other_modules    , other_module_count , "Other Modules" ); 
 	list_modules_aux( (LoomModule**)sensor_modules   , sensor_count       , "Sensors"); 
 	list_modules_aux( (LoomModule**)actuator_modules , actuator_count     , "Actuators"); 
-	list_modules_aux( (LoomModule**)rtc_modules      , rtc_count          , "RTC Modules"); 
 	list_modules_aux( (LoomModule**)comm_modules     , comm_count         , "Communication Platforms"); 
 	list_modules_aux( (LoomModule**)internet_modules , internet_count     , "Internet Platforms"); 
 	list_modules_aux( (LoomModule**)log_modules      , log_count          , "Logging Platforms" ); 
@@ -441,7 +473,7 @@ void LoomManager::package()
 
 	if (package_verbosity == Verbosity::V_HIGH) {
 		package_aux( (LoomModule**)actuator_modules , actuator_count ); 
-		package_aux( (LoomModule**)rtc_modules      , rtc_count ); 
+		package_aux( (LoomModule**)rtc_module      , 1 ); 
 		package_aux( (LoomModule**)comm_modules     , comm_count ); 
 		package_aux( (LoomModule**)log_modules      , log_count );		
 	}

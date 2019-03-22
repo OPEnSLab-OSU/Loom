@@ -63,24 +63,24 @@ public:
 	// --- CONSTRUCTOR ---
 																	// The default parameters will be controlled by config file
 	Loom_Analog(	
-			char*			module_name				= ANALOG_Module_Name, // "Analog", 
-			char*			sensor_description		= ANALOG_Sensor_Description, // "Analog Values",
-			uint8_t			num_samples				= ANALOG_Num_Samples, // 8, 
+			char*			module_name				= "Analog",   // ANALOG_Module_Name,
+			char*			sensor_description		= "Analog Values",  // ANALOG_Sensor_Description,
+			uint8_t			num_samples				= 8,   // ANALOG_Num_Samples,
 
-			uint8_t			read_resolution			= ANALOG_Read_Resolution, // 12,
-			bool			enableA0				= ANALOG_EnableA0, // true,
-			bool			enableA1				= ANALOG_EnableA1, // true,
-			bool			enableA2				= ANALOG_EnableA2, // true,
-			bool			enableA3				= ANALOG_EnableA3, // true,
-			bool			enableA4				= ANALOG_EnableA4, // true,
-			bool			enableA5				= ANALOG_EnableA5, // true,
+			uint8_t			read_resolution			= 12,  // ANALOG_Read_Resolution,
+			bool			enableA0				= true,  // ANALOG_EnableA0,
+			bool			enableA1				= true,  // ANALOG_EnableA1,
+			bool			enableA2				= true,  // ANALOG_EnableA2,
+			bool			enableA3				= true,  // ANALOG_EnableA3,
+			bool			enableA4				= true,  // ANALOG_EnableA4,
+			bool			enableA5				= true,  // ANALOG_EnableA5,
 
-			AnalogConversion convertA0				= ANALOG_ConvertA0, // AnalogConversion::NONE,
-			AnalogConversion convertA1				= ANALOG_ConvertA1, // AnalogConversion::NONE,
-			AnalogConversion convertA2				= ANALOG_ConvertA2, // AnalogConversion::NONE,
-			AnalogConversion convertA3				= ANALOG_ConvertA3, // AnalogConversion::NONE,
-			AnalogConversion convertA4				= ANALOG_ConvertA4, // AnalogConversion::NONE,
-			AnalogConversion convertA5				= ANALOG_ConvertA5  // AnalogConversion::NONE
+			AnalogConversion convertA0				= AnalogConversion::NONE,  // ANALOG_ConvertA0,
+			AnalogConversion convertA1				= AnalogConversion::NONE,  // ANALOG_ConvertA1,
+			AnalogConversion convertA2				= AnalogConversion::NONE,  // ANALOG_ConvertA2,
+			AnalogConversion convertA3				= AnalogConversion::NONE,  // ANALOG_ConvertA3,
+			AnalogConversion convertA4				= AnalogConversion::NONE,  // ANALOG_ConvertA4,
+			AnalogConversion convertA5				= AnalogConversion::NONE  // ANALOG_ConvertA5 
 		);
 
 	// --- DESTRUCTOR ---

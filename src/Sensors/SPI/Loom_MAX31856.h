@@ -27,16 +27,16 @@ protected:
 public:
 
 	Loom_MAX31856(	
-			char*		module_name			= MAX31856_Module_Name, // "MAX31856",
-			char*		sensor_description	= MAX31856_Sensor_Description, // "Thermocouple", 
-			uint8_t		num_samples			= MAX31856_Num_Damples, // 1,
+			char*		module_name			=  "MAX31856",  // MAX31856_Module_Name,
+			char*		sensor_description	=  "Thermocouple",   // MAX31856_Sensor_Description,
+			uint8_t		num_samples			=  1,  // MAX31856_Num_Damples,
 
-			uint8_t		CS_pin				= MAX31856_CS_Pin, // 10,
+			uint8_t		CS_pin				=  10,  // MAX31856_CS_Pin,
 
-			uint8_t		SPI_a				= MAX31856_SPI_A, // 10,
-			uint8_t		SPI_b				= MAX31856_SPI_B, // 11,
-			uint8_t		SPI_c				= MAX31856_SPI_C, // 12,
-			uint8_t		SPI_d				= MAX31856_SPI_D // 13
+			uint8_t		SPI_a				=  10,  // MAX31856_SPI_A,
+			uint8_t		SPI_b				=  11,  // MAX31856_SPI_B,
+			uint8_t		SPI_c				=  12,  // MAX31856_SPI_C,
+			uint8_t		SPI_d				=  13  // MAX31856_SPI_D 
 
 			// type 
 		);

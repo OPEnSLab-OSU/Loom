@@ -43,11 +43,12 @@ class LoomCommPlat;
 class LoomInternetPlat;
 class LoomLogPlat;
 
+
 // switch to using vectors
 #define MAX_OTHER_MODULES 3
 #define MAX_SENSORS       20
 #define MAX_ACTUATORS     10
-#define MAX_RTCS          3
+// #define MAX_RTCS          3
 #define MAX_COMMS         3
 #define MAX_INTERNETS     3
 #define MAX_LOGS          5
@@ -76,11 +77,13 @@ protected:
 	Loom_Interrupt_Manager*	interrupt_manager;
 	Loom_Sleep_Manager*	sleep_manager;
 
+	// RTC object
+	LoomRTC*			rtc_module;
+
 	// Arrays of Loom Modules, categorized by type
 	LoomModule*			other_modules[MAX_OTHER_MODULES];
 	LoomSensor*			sensor_modules[MAX_SENSORS];
 	LoomActuator*		actuator_modules[MAX_ACTUATORS];
-	LoomRTC*			rtc_modules[MAX_RTCS];
 	LoomCommPlat*		comm_modules[MAX_COMMS];
 	LoomInternetPlat*	internet_modules[MAX_INTERNETS];
 	LoomLogPlat*		log_modules[MAX_LOGS];
@@ -92,7 +95,7 @@ protected:
 	/// Count of actuator modules
 	uint		actuator_count;
 	/// Count of RTC modules
-	uint		rtc_count;
+	// uint		rtc_count;
 	/// Count of communication modules
 	uint		comm_count;
 	/// Count of internet modules
@@ -160,10 +163,11 @@ public:
 	void		add_module(Loom_Interrupt_Manager* interrupt_manager); 
 	void		add_module(Loom_Sleep_Manager* sleep_manager);
 
+	void		add_module(LoomRTC* rtc); 
+
 	void		add_module(LoomModule* module);
 	void		add_module(LoomSensor* sensor); 
 	void		add_module(LoomActuator* actuator); 
-	void		add_module(LoomRTC* rtc); 
 	void		add_module(LoomCommPlat* comm_plat); 
 	void		add_module(LoomInternetPlat* internet_plat); 
 	void		add_module(LoomLogPlat* log_plat); 
@@ -171,10 +175,11 @@ public:
 	Loom_Interrupt_Manager*	get_interrupt_manager();
 	Loom_Sleep_Manager*		get_sleep_manager();
 
+	LoomRTC*				get_rtc_module();
+
 	LoomModule*				get_other_module(int idx);
 	LoomSensor*				get_sensor_module(int idx);
 	LoomActuator*			get_actuator_module(int idx);
-	LoomRTC*				get_rtc_module(int idx);
 	LoomCommPlat*			get_comm_plat_module(int idx);
 	LoomInternetPlat*		get_internet_plat_module(int idx);
 	LoomLogPlat*			get_log_plat_module(int idx);

@@ -33,6 +33,9 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 	for (auto i = 0; i < MaxTimerCount; i++) {
 		timer_settings[i] = {NULL, 0, false, false};
 	}
+	for (auto i = 0; i < MaxStopWatchCount; i++) {
+		stopwatch_settings[i] = {0, false};
+	}
 
 	this->RTC_Inst = RTC_Inst;
 
@@ -75,6 +78,16 @@ void Loom_Interrupt_Manager::print_config()
 			Println("[Disabled]");
 		}
 	}
+
+	Println2('\t', "Registered StopWatches     : " );
+	for (auto i = 0; i < MaxStopWatchCount; i++) {
+		Print4("\t\t", "Stopwatch ", i, " : ");
+		if (stopwatch_settings[i].enabled) {
+			Println2("[Enabled] Elapsed: ",  millis()-stopwatch_settings[i].start_time);
+		} else {
+			Println("[Disabled]");
+		}
+	}
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -97,7 +110,7 @@ void Loom_Interrupt_Manager::link_device_manager(LoomManager* LM)
 
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::execute_pending_ISRs() {
+void Loom_Interrupt_Manager::run_pending_ISRs() {
 	// Run any bottom half ISRs of interrupts
 	run_ISR_bottom_halves();
 	// Run 'ISR' functions for elapsed timers
@@ -147,6 +160,7 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte type, b
 		// Set pin mode
 		pinMode(pin, INPUT_PULLUP);
 
+
 		// If ISR provided
 		if (ISR != NULL) {
 
@@ -171,7 +185,6 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte type, b
 		// Ensure triggered flag false 
 		interrupt_triggered[pin] = false;
 	}
-
 }
 
 /////////////////////////////////////////////////////////////////////
