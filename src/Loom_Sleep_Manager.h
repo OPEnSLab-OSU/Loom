@@ -85,6 +85,7 @@ public:
 	void		package(OSCBundle& bndl, char* suffix="") {}
 	bool		message_route(OSCMessage& msg, int address_offset) {}
 
+	void 		link_device_manager(LoomManager* LM);
 
 
 	/// Set the RTC module to use for timers

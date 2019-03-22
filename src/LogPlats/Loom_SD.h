@@ -41,6 +41,10 @@ protected:
 		/// String of file to write to if not filename explicitly provided
 		char*		default_file;
 
+		/// Pointer to an RTC object for timestamps
+		LoomRTC*	RTC_Inst;
+
+
 		// SD_Version 		version;
 		// byte 			reset_pin;
 
@@ -48,13 +52,13 @@ public:
 
 	// --- CONSTRUCTOR ---
 	Loom_SD(	
-			char*		module_name			= SD_Module_Name, // "SD",
+			char*		module_name			=  "SD", // SD_Module_Name,
 
-			bool		enable_rate_filter	= SD_Enable_Rate_Filter, // true,
-			uint		min_filter_delay	= SD_Min_Filter_Delay, // 1000,
+			bool		enable_rate_filter	=  true, // SD_Enable_Rate_Filter,
+			uint		min_filter_delay	=  1000, // SD_Min_Filter_Delay,
 
-			byte		chip_select			= SD_Chip_Select, // 10,
-			char*		default_file		= SD_Default_File // "test.csv"
+			byte		chip_select			=  10, // SD_Chip_Select,
+			char*		default_file		= "test.csv" // SD_Default_File 
 
 			// SD_Version 		version 			= FEATHERWING,
 			// byte 			reset_pin 			= A2 
@@ -67,12 +71,27 @@ public:
 	void		print_config();
 
 
+	/// Add pointer back to device manager.
+	/// Generally only called when device manager links module
+	/// to provide pointer both directions
+	/// \param[in]	LM	LoomManager to point to
+	void		link_device_manager(LoomManager* LM);
+
+
+
 	// Save bundle to SD card
 	// \param[in]	file		The file to save bundle to
 	// \param[in]	bndl		The bundle to be saved
 	// \param[in]	timestamp	Format of timestamp (if any)
 	bool		save_bundle(OSCBundle& bndl, char* file, int timestamp=3);
 
+
+	/// Set the RTC module to use for timers
+	/// \param[in]	RTC_Inst	Pointer to the RTC object
+	void		set_RTC_module(LoomRTC* RTC_Inst);
+	/// Return pointer to the currently linked RTC object
+	/// \return		Current RTC object
+	LoomRTC*	get_RTC_module();
 
 
 	void		set_default_file(char* filename);

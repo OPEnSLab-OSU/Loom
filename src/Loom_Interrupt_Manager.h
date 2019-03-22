@@ -100,8 +100,14 @@ public:
 	void		package(OSCBundle& bndl, char* suffix="") {}
 	bool		message_route(OSCMessage& msg, int address_offset) {}
 
+	void 		link_device_manager(LoomManager* LM);
 
-	void		execute_pending();
+
+	void		execute_pending_ISRs();
+
+
+
+// === === Interrupt Functions === ===
 
 
 	/// All interrupts enable/disable
@@ -192,14 +198,6 @@ public:
 
 
 
-	// Alarms/Timers should have option for repeat or not
-	// Query time left for alarm / timer
-
-	// Set timer for time / duration, select which timer (1 or 2)
-
-
-// set_timer_interrupt_for()   ?
-
 
 // === === AsyncDelay Timer Functions === ===
 
@@ -236,22 +234,9 @@ private:
 	static void default_ISR_14() { interrupt_triggered[14] = true; };
 	static void default_ISR_15() { interrupt_triggered[15] = true; };
 
+// detaching interrupt did not seem to work
 	// static void default_ISR_0()  { detachInterrupt(digitalPinToInterrupt(0));  interrupt_triggered[0]  = true;   }
-	// static void default_ISR_1()  { detachInterrupt(digitalPinToInterrupt(1));  interrupt_triggered[1]  = true;   }
-	// static void default_ISR_2()  { detachInterrupt(digitalPinToInterrupt(2));  interrupt_triggered[2]  = true;   }
-	// static void default_ISR_3()  { detachInterrupt(digitalPinToInterrupt(3));  interrupt_triggered[3]  = true;   }
-	// static void default_ISR_4()  { detachInterrupt(digitalPinToInterrupt(4));  interrupt_triggered[4]  = true;   }
-	// static void default_ISR_5()  { detachInterrupt(digitalPinToInterrupt(5));  interrupt_triggered[5]  = true;   }
-	// static void default_ISR_6()  { detachInterrupt(digitalPinToInterrupt(6));  interrupt_triggered[6]  = true;   }
-	// static void default_ISR_7()  { detachInterrupt(digitalPinToInterrupt(7));  interrupt_triggered[7]  = true;   }
-	// static void default_ISR_8()  { detachInterrupt(digitalPinToInterrupt(8));  interrupt_triggered[8]  = true;   }
-	// static void default_ISR_9()  { detachInterrupt(digitalPinToInterrupt(9));  interrupt_triggered[9]  = true;   }
-	// static void default_ISR_10() { detachInterrupt(digitalPinToInterrupt(10));  interrupt_triggered[10] = true;   }
-	// static void default_ISR_11() { detachInterrupt(digitalPinToInterrupt(11));  interrupt_triggered[11] = true;   }
-	// static void default_ISR_12() { detachInterrupt(digitalPinToInterrupt(12));  interrupt_triggered[12] = true;   }
-	// static void default_ISR_13() { detachInterrupt(digitalPinToInterrupt(13));  interrupt_triggered[13] = true;   }
-	// static void default_ISR_14() { detachInterrupt(digitalPinToInterrupt(14));  interrupt_triggered[14] = true;   }
-	// static void default_ISR_15() { detachInterrupt(digitalPinToInterrupt(15));  interrupt_triggered[15] = true;   }
+
 
 	/// Array of the default ISRs that set flags
 	const static ISRFuncPtr default_ISRs[InteruptRange];

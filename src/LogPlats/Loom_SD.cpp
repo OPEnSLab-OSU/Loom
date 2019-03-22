@@ -55,6 +55,29 @@ void Loom_SD::print_config()
 }
 
 /////////////////////////////////////////////////////////////////////
+void Loom_SD::link_device_manager(LoomManager* LM)
+{
+	LoomModule::link_device_manager(LM);
+
+	// If no currently linked RTC object, try to get one from Manager
+	if ( (RTC_Inst == NULL) && (LM != NULL) ){
+		RTC_Inst = LM->get_rtc_module();
+	}
+}
+
+/////////////////////////////////////////////////////////////////////
+void Loom_SD::set_RTC_module(LoomRTC* RTC_Inst)
+{
+	this->RTC_Inst = RTC_Inst;
+}
+
+/////////////////////////////////////////////////////////////////////
+LoomRTC* Loom_SD::get_RTC_module()
+{
+	return RTC_Inst;
+}
+
+/////////////////////////////////////////////////////////////////////
 void Loom_SD::set_default_file(char* filename) 
 { 
 	default_file = filename; 
@@ -175,10 +198,10 @@ bool Loom_SD::save_array(char *file, T data [], int len, char delimiter, int tim
 
 		if (timestamp) {
 			if (device_manager != NULL) {
-				LoomRTC* rtc = device_manager->get_rtc_module(0);
-				if (rtc != NULL) {
-					Println2("RTC Object: ", rtc->get_module_name() );
-					rtc->get_timestamp(time_key, time_val, delimiter, timestamp);
+				// LoomRTC* rtc = device_manager->get_rtc_module(0);
+				if (RTC_Inst != NULL) {
+					Println2("RTC Object: ", RTC_Inst->get_module_name() );
+					RTC_Inst->get_timestamp(time_key, time_val, delimiter, timestamp);
 					got_timestamp = true; 
 				}
 			}

@@ -84,10 +84,23 @@ void Loom_Interrupt_Manager::print_state()
 }
 
 
+/////////////////////////////////////////////////////////////////////
+void Loom_Interrupt_Manager::link_device_manager(LoomManager* LM)
+{
+	LoomModule::link_device_manager(LM);
+
+	// If no currently linked RTC object, try to get one from Manager
+	if ( (RTC_Inst == NULL) && (LM != NULL) ){
+		RTC_Inst = LM->get_rtc_module();
+	}
+}
+
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::execute_pending() {
+void Loom_Interrupt_Manager::execute_pending_ISRs() {
+	// Run any bottom half ISRs of interrupts
 	run_ISR_bottom_halves();
+	// Run 'ISR' functions for elapsed timers
 	check_timers();
 }
 
@@ -350,6 +363,7 @@ void Loom_Interrupt_Manager::register_timer(uint timer_num, unsigned long durati
 		timer_settings[timer_num] = { ISR, duration, repeat, true };
 		timers[timer_num].start(duration, AsyncDelay::MILLIS);
 	} else {
+		print_module_label();
 		Println("Timer number out of range");
 	}
 }
@@ -358,9 +372,15 @@ void Loom_Interrupt_Manager::register_timer(uint timer_num, unsigned long durati
 void Loom_Interrupt_Manager::clear_timer(uint timer_num)
 {
 	if (timer_num < MaxTimerCount) {
-		Println2("Clear timer ", timer_num);
+		if (print_verbosity == Verbosity::V_HIGH) {
+			print_module_label();
+			Println2("Clear timer ", timer_num);
+		}
 		timers[timer_num].expire();
 		timer_settings[timer_num].enabled = false;
+	} else {
+		print_module_label();
+		Println("Timer number out of range");
 	}
 }
 

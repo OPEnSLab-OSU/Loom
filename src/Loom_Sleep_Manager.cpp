@@ -64,6 +64,23 @@ void Loom_Sleep_Manager::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
+void Loom_Sleep_Manager::link_device_manager(LoomManager* LM)
+{
+	LoomModule::link_device_manager(LM);
+
+	// If no currently linked Interrupt Manager object, try to get one from Manager
+	if ( (IM == NULL) && (LM != NULL) ){
+		IM = LM->get_interrupt_manager();
+	}
+
+	// If no currently linked RTC object, try to get one from Manager
+	if ( (RTC_Inst == NULL) && (LM != NULL) ){
+		RTC_Inst = LM->get_rtc_module();
+	}
+}
+
+
+/////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::set_RTC_module(LoomRTC* RTC_Inst)
 {
 	this->RTC_Inst = RTC_Inst;
