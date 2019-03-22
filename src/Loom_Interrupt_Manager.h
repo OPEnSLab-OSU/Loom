@@ -5,11 +5,8 @@
 #include "Loom_Module.h"
 
 
-// #include <RTClibExtended.h>
-// // NOTE: Must include the following line in the RTClibExtended.h file to use with M0:
-// // #define _BV(bit) (1 << (bit))
-
 #include <OPEnS_RTC.h>
+#include <AsyncDelay.h>
 
 
 class LoomRTC; // Specify that LoomRTC exists, defined in own file
@@ -31,13 +28,27 @@ struct IntDetails {
 	ISRFuncPtr	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
 	byte		type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
 	bool		is_immediate;	///< True if ISR is called directly upon interrupt, false if called next check of flags
-	bool		is_enabled;		///< Whether or not this interrupt is enabled
+	bool		enabled;		///< Whether or not this interrupt is enabled
+
+	// char[20] description ?
+};
+
+
+struct TimerDetails {
+	ISRFuncPtr	ISR;			///< Not a real ISR, just a function called if timer has expired
+	uint		duration;		///< The timer duration
+	bool		repeat;			///< Whether or not timer should repeat
+	bool		enabled;		///< Whether or not this timer is enabled
 
 	// char[20] description ?
 };
 
 
 #define InteruptRange 16
+
+
+#define MaxTimerCount 4   // maybe just make the timers an enum?
+
 
 
 class Loom_Interrupt_Manager : public LoomModule
@@ -49,7 +60,7 @@ protected:
 	bool			interrupts_enabled;
 
 	/// List of interrupts configurations
-	IntDetails		settings[InteruptRange];
+	IntDetails		int_settings[InteruptRange];
 
 	// Flags set by interrupts, indicating ISR bottom 
 	// half should be called if not Null
@@ -60,6 +71,12 @@ protected:
 
 	/// Last time an alarm went off
 	DateTime		last_alarm_time;
+
+
+
+	AsyncDelay		timers[MaxTimerCount];
+	TimerDetails	timer_settings[MaxTimerCount];
+	// uint			timer_count;
 
 
 	// interrupt_triggered for timers, also support immediate and delayed
@@ -84,12 +101,14 @@ public:
 	bool		message_route(OSCMessage& msg, int address_offset) {}
 
 
+	void		execute_pending();
+
 
 	/// All interrupts enable/disable
 	/// \param[in]	state	Enable state to apply to all interrupts
 	void		set_interrupts_enabled(bool state);
 	/// Get global interrupt enable state
-	/// \return		Globla interrupt enable state
+	/// \return		Global interrupt enable state
 	bool		get_interrupts_enabled();
 
 	/// Per interrupt enable
@@ -113,16 +132,17 @@ public:
 	/// \param[in]	type	What signal to configure default ISR to (default LOW)
 	void		unregister_ISR(byte pin, byte type=LOW);  
 
-
 	/// Checks the flags set by default ISRs, calls pending bottom half ISRs
 	void		run_ISR_bottom_halves();
-
 
 	/// Detaches then reattacheds interrupt according to settings.
 	/// used to clear pending interrupts
 	/// \param[in]	pin 	Pin to reset interrupts for
 	void		interrupt_reset(byte pin);   
 
+
+
+// === === RTC Alarm Functions === ===
 
 	/// Set the RTC module to use for timers
 	/// \param[in]	RTC_Inst	Pointer to the RTC object
@@ -179,6 +199,20 @@ public:
 
 
 // set_timer_interrupt_for()   ?
+
+
+// === === AsyncDelay Timer Functions === ===
+
+	/// Check if timers have elapsed, if so run associated 'ISR'
+	void		check_timers();
+
+	/// Configure specified timer
+	void		register_timer(uint timer_num, unsigned long duration, ISRFuncPtr ISR, bool repeat);
+
+	/// Clear specified timer 
+	void		clear_timer(uint timer_num);
+
+
 
 
 private:

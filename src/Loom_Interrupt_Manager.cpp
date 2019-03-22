@@ -27,8 +27,11 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 {
 	interrupts_enabled = true;
 
-	for (int i = 0; i < InteruptRange; i++) {
-		settings[i] = {NULL, 0, true, false};
+	for (auto i = 0; i < InteruptRange; i++) {
+		int_settings[i] = {NULL, 0, true, false};
+	}
+	for (auto i = 0; i < MaxTimerCount; i++) {
+		timer_settings[i] = {NULL, 0, false, false};
 	}
 
 	this->RTC_Inst = RTC_Inst;
@@ -36,7 +39,6 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 	if (this->RTC_Inst != NULL) {
 		last_alarm_time = this->RTC_Inst->now();
 	}
-
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -55,10 +57,23 @@ void Loom_Interrupt_Manager::print_config()
 
 	// print out registered interrupts
 	Println2('\t', "Registered ISRs     : " );
-	for (int i = 0; i < InteruptRange; i++) {
-		Print5("\t\t", "Pin ", i, " | ISR: ", (settings[i].is_immediate) ? "Immediate" : "Bottom Half");
-		Println4(" | Type: ", settings[i].type, " | ", (settings[i].is_enabled) ? "Enabled" : "Disabled" );
+	for (auto i = 0; i < InteruptRange; i++) {
+		Print5("\t\t", "Pin ", i, " | ISR: ", (int_settings[i].is_immediate) ? "Immediate" : "Bottom Half");
+		Println4(" | Type: ", int_settings[i].type, " | ", (int_settings[i].enabled) ? "Enabled" : "Disabled" );
 
+	}
+
+	Println2('\t', "Registered Timers     : " );
+	for (auto i = 0; i < MaxTimerCount; i++) {
+		Print4("\t\t", "Timer ", i, " : ");
+		if (timer_settings[i].enabled) {
+			unsigned long delay;
+			AsyncDelay::units_t u;
+			timers[i].getDelay(delay, u);
+			Println2("[Enabled] Delay: ", delay);
+		} else {
+			Println("[Disabled]");
+		}
 	}
 }
 
@@ -66,6 +81,14 @@ void Loom_Interrupt_Manager::print_config()
 void Loom_Interrupt_Manager::print_state()
 {
 	LoomModule::print_state();
+}
+
+
+
+/////////////////////////////////////////////////////////////////////
+void Loom_Interrupt_Manager::execute_pending() {
+	run_ISR_bottom_halves();
+	check_timers();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -84,14 +107,14 @@ bool Loom_Interrupt_Manager::get_interrupts_enabled()
 void Loom_Interrupt_Manager::set_enable_interrupt(byte pin, bool state)
 {
 	if (pin < InteruptRange) {
-		settings[pin].is_enabled = state;
+		int_settings[pin].enabled = state;
 	} 
 }
 
 /////////////////////////////////////////////////////////////////////
 bool Loom_Interrupt_Manager::get_enable_interrupt(byte pin)
 {
-	return (pin < InteruptRange) ? settings[pin].is_enabled : false; 
+	return (pin < InteruptRange) ? int_settings[pin].enabled : false; 
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -106,7 +129,7 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte type, b
 
 
 		// Save interrupt details
-		settings[pin] = { ISR, type, immediate, (ISR) ? true : false };
+		int_settings[pin] = { ISR, type, immediate, (ISR) ? true : false };
 
 		// Set pin mode
 		pinMode(pin, INPUT_PULLUP);
@@ -158,16 +181,16 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 			// If pin enabled and bottom half ISR provided
 			// ISR will be Null if no interrupt on that pin,
 			// or if ISR on pin is set to immediate (dont want to rerun the ISR here)
-			if ( (interrupt_triggered[i]) && (settings[i].ISR != NULL) ) {
+			if ( (interrupt_triggered[i]) && (int_settings[i].ISR != NULL) ) {
 
 				Println2("I: ", i);
 
 
 				// Run bottom half ISR
-				settings[i].ISR();
+				int_settings[i].ISR();
 
 				// Reattach interrupts (disconnected in default ISR top half)
-				// switch( settings[i].type ) {
+				// switch( int_settings[i].type ) {
 				// 	case INT_LOW     : attachInterrupt(digitalPinToInterrupt(i), default_ISRs[i], LOW); break;
 				// 	case INT_HIGH    : attachInterrupt(digitalPinToInterrupt(i), default_ISRs[i], HIGH); break; 
 				// 	case INT_CHANGE  : attachInterrupt(digitalPinToInterrupt(i), default_ISRs[i], CHANGE); break;
@@ -191,17 +214,17 @@ void Loom_Interrupt_Manager::interrupt_reset(byte pin)
 	detachInterrupt(digitalPinToInterrupt(pin));
 	delay(20);
 
-	if (settings[pin].ISR != NULL) {
+	if (int_settings[pin].ISR != NULL) {
 
 		// Attach interrupt with specified type
-		// switch( settings[pin].type ) {
-		// 	case INT_LOW     : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, LOW);
-		// 	case INT_HIGH    : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, HIGH); 
-		// 	case INT_RISING  : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, RISING);
-		// 	case INT_FALLING : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, FALLING);
-		// 	case INT_CHANGE  : attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, CHANGE);
+		// switch( int_settings[pin].type ) {
+		// 	case INT_LOW     : attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, LOW);
+		// 	case INT_HIGH    : attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, HIGH); 
+		// 	case INT_RISING  : attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, RISING);
+		// 	case INT_FALLING : attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, FALLING);
+		// 	case INT_CHANGE  : attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, CHANGE);
 		// }
-		attachInterrupt(digitalPinToInterrupt(pin), settings[pin].ISR, (settings[pin].type<5) ? settings[pin].type : 0 );
+		attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, (int_settings[pin].type<5) ? int_settings[pin].type : 0 );
 
 	}
 }
@@ -300,6 +323,48 @@ bool Loom_Interrupt_Manager::RTC_alarm_exact(uint hour, uint minute, uint second
 
 
 
+/////////////////////////////////////////////////////////////////////
+void Loom_Interrupt_Manager::check_timers()
+{
+	// Check each timer
+	for (auto i = 0; i < MaxTimerCount; i++) {
+		// If enabled and expired
+		if ( (timer_settings[i].enabled) && (timers[i].isExpired()) ){
+			// Run associated ISR
+			timer_settings[i].ISR();
+			
+			// If set to repeat, start again, else disable
+			if (timer_settings[i].repeat) {
+				timers[i].repeat();
+			} else {
+				clear_timer(i);
+			}
+		}
+	}
+}
+
+/////////////////////////////////////////////////////////////////////
+void Loom_Interrupt_Manager::register_timer(uint timer_num, unsigned long duration, ISRFuncPtr ISR, bool repeat)
+{
+	if (timer_num < MaxTimerCount) {
+		timer_settings[timer_num] = { ISR, duration, repeat, true };
+		timers[timer_num].start(duration, AsyncDelay::MILLIS);
+	} else {
+		Println("Timer number out of range");
+	}
+}
+
+/////////////////////////////////////////////////////////////////////
+void Loom_Interrupt_Manager::clear_timer(uint timer_num)
+{
+	if (timer_num < MaxTimerCount) {
+		Println2("Clear timer ", timer_num);
+		timers[timer_num].expire();
+		timer_settings[timer_num].enabled = false;
+	}
+}
+
+/////////////////////////////////////////////////////////////////////
 
 
 
