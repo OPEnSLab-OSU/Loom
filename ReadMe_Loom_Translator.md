@@ -1,5 +1,7 @@
 # Project Loom: Translator
 
+## *To be updated*
+
 The Loom Translator (or converter) is used to convert data in one format into another format, for best fit to the task at hand. The functions for the converter currently live in the loom_OSC_translator.h file of the Loom Library.
 
 ## Table of Contents
