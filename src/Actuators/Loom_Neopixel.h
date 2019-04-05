@@ -38,7 +38,7 @@ public:
 	virtual ~Loom_Neopixel();
 
 	// Inherited (Overriding) Methods
-	void		print_config();
+	void		print_config() override;
 	void		print_state();
 	void		package(OSCBundle& bndl, char* suffix="");
 	bool		message_route(OSCMessage& msg, int address_offset);

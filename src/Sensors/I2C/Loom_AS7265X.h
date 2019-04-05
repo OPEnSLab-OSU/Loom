@@ -53,9 +53,9 @@ public:
 	virtual ~Loom_AS7265X();
 
 	// Inherited (Overriding) Methods
-	void		print_measurements();
-	void		measure();
-	void		package(OSCBundle& bndl, char* suffix="");
+	void		print_measurements() override;
+	void		measure() override;
+	void		package(OSCBundle& bndl, char* suffix="") override;
 
 
 	void		enable_bulb(bool e);

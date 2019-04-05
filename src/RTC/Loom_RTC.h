@@ -97,10 +97,10 @@ public:
 	static char*	enum_timezone_string(TimeZone t);
 
 	// Inherited Methods
-	virtual void 	print_config();
-	virtual void 	print_state();
+	virtual void 	print_config() override;
+	virtual void 	print_state() override;
 	virtual void 	measure() {};
-	virtual void 	package(OSCBundle& bndl, char* suffix="");
+	virtual void 	package(OSCBundle& bndl, char* suffix="") override;
 	virtual bool 	message_route(OSCMessage& msg, int address_offset) = 0;
 
 

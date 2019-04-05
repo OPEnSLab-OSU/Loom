@@ -30,7 +30,6 @@ public:
  
 			char*		sensor_description	= "Sensor", 
 			uint8_t		num_samples			= 1 
-
 		  );
 
 
@@ -38,8 +37,8 @@ public:
 	virtual ~LoomSensor();
 
 	// Inherited Methods
-	virtual void	print_config();
-	virtual void	print_measurements() = 0;
+	virtual void	print_config() override;
+	virtual void	print_measurements() = 0; 
 	virtual void	calibrate() {};
 	virtual void	measure() = 0;
 	virtual void	package(OSCBundle& bndl, char* suffix="") = 0;

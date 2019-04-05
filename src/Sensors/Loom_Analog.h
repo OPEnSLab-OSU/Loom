@@ -90,11 +90,11 @@ public:
 	virtual ~Loom_Analog();
 
 	// Inherited Methods
-	void		print_config();
-	void		print_measurements();
-	void		measure();
-	void		package(OSCBundle& bndl, char* suffix="");		 // This might be where analog conversions are applied
-	bool		message_route(OSCMessage& msg, int address_offset);
+	void		print_config() override;
+	void		print_measurements() override;
+	void		measure() override;
+	void		package(OSCBundle& bndl, char* suffix="") override;		 // This might be where analog conversions are applied
+	bool		message_route(OSCMessage& msg, int address_offset) override;
 
 
 	/// Set the analog read resolution

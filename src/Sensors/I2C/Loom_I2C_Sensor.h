@@ -29,7 +29,7 @@ public:
 	virtual ~LoomI2CSensor();
 
 	// Inherited Methods
-	virtual void	print_config();
+	virtual void	print_config() override;
 	virtual void	measure() = 0;
 	virtual void	package(OSCBundle& bndl, char* suffix="") = 0;
 

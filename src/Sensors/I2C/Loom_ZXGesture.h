@@ -52,10 +52,10 @@ public:
 	virtual ~Loom_ZXGesture();
 
 	// Inherited (Overriding) Methods
-	void		print_config();
-	void		print_measurements();
-	void		measure();
-	void		package(OSCBundle& bndl, char* suffix="");
+	void		print_config() override;
+	void		print_measurements() override;
+	void		measure() override;
+	void		package(OSCBundle& bndl, char* suffix="") override;
 
 private:
 

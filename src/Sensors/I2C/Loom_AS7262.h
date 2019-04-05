@@ -51,10 +51,10 @@ public:
 	virtual ~Loom_AS7262();
 
 	// Inherited (Overriding) Methods
-	void		print_config();
-	void		print_measurements();
-	void		measure();
-	void		package(OSCBundle& bndl, char* suffix="");
+	void		print_config() override;
+	void		print_measurements() override;
+	void		measure() override;
+	void		package(OSCBundle& bndl, char* suffix="") override;
 
 	void		enable_bulb(bool enable);
 	// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x

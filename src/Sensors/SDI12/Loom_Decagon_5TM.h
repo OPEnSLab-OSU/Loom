@@ -25,11 +25,11 @@ public:
 	virtual ~Loom_Decagon5TM();
 
 	// Inherited Methods
-	void		print_config();
-	void		print_measurements();
-	void		calibrate() {};
-	void		measure();
-	void		package(OSCBundle& bndl, char* suffix="");
+	void		print_config() override;
+	void		print_measurements() override;
+	void		calibrate() override;
+	void		measure() override;
+	void		package(OSCBundle& bndl, char* suffix="") override;
 
 private:
 

@@ -83,7 +83,7 @@ public:
 	virtual ~Loom_OLED();
 
 
-	void			print_config();
+	void			print_config() override;
 
 	void			log_bundle(OSCBundle& bndl);
 	void			log_bundle(OSCBundle& bndl, OLED_Format format);

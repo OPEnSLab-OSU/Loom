@@ -35,9 +35,9 @@ public:
 	virtual ~Loom_FXOS8700();
 
 	// Inherited (Overriding) Methods
-	void		print_measurements();
-	void		measure();
-	void		package(OSCBundle& bndl, char* suffix="");
+	void		print_measurements() override;
+	void		measure() override;
+	void		package(OSCBundle& bndl, char* suffix="") override;
 
 private:
 

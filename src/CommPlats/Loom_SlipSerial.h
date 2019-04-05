@@ -40,7 +40,7 @@ public:
 	~Loom_SlipSerial();
 
 	// Inherited (Overriding) Methods
-	void print_config();
+	void print_config() override;
 	bool receive_bundle(OSCBundle& bndl); 
 	bool send_bundle(OSCBundle& bndl);
 	void broadcast_bundle(OSCBundle& bndl);

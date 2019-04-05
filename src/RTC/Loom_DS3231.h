@@ -32,8 +32,8 @@ public:
 	virtual ~Loom_DS3231();
 
 	// Inherited (overriding) Methods
-	void		print_config();
-	bool		message_route(OSCMessage& msg, int address_offset) {}
+	void		print_config() override;
+	bool		message_route(OSCMessage& msg, int address_offset) {};
 	DateTime	now();
 	void		set_alarm(DateTime time);
 	void		set_alarm(TimeSpan duration);

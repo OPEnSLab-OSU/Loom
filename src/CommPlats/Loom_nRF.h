@@ -70,7 +70,7 @@ public:
 	virtual ~Loom_nRF();
 
 
-	void		print_config();
+	void		print_config() override;
 
 	// Build OSC Bundle from packet if any exists
 	bool		receive_bundle(OSCBundle& bndl);

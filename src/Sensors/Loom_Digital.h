@@ -48,11 +48,11 @@ public:
 	virtual ~Loom_Digital();
 
 	// Inherited Methods
-	void		print_config();
-	void		print_measurements();
-	void		measure();
-	void		package(OSCBundle& bndl, char* suffix="");
-	bool		message_route(OSCMessage& msg, int address_offset) {}
+	void		print_config() override;
+	void		print_measurements() override;
+	void		measure() override;
+	void		package(OSCBundle& bndl, char* suffix="") override;
+	bool		message_route(OSCMessage& msg, int address_offset) override;
 
 
 	/// Get value on digital pin

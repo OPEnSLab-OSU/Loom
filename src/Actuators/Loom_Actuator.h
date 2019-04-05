@@ -22,7 +22,7 @@ public:
 	virtual ~LoomActuator();
 
 	// Inherited Methods
-	virtual void	print_config();
+	virtual void	print_config() override;
 	virtual void	print_state() = 0;
 	virtual void	measure() {}
 	virtual void	package(OSCBundle& bndl, char* suffix="") = 0;

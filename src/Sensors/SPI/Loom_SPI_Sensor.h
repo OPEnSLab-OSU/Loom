@@ -25,7 +25,7 @@ public:
 	virtual ~LoomSPISensor();
 
 	// Inherited Methods
-	virtual void	print_config();
+	virtual void	print_config() override;
 	virtual void	print_measurements() = 0;
 	virtual void	calibrate() {};
 	virtual void	measure() = 0;

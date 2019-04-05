@@ -69,7 +69,7 @@ public:
 	virtual ~Loom_SD();
 
 
-	void		print_config();
+	void		print_config() override;
 
 
 	/// Add pointer back to device manager.

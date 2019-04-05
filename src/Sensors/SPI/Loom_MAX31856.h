@@ -46,11 +46,11 @@ public:
 	virtual ~Loom_MAX31856();
 
 	// Inherited Methods
-	void		print_config();
-	void		print_measurements();
+	void		print_config() override;
+	void		print_measurements() override;
 	void		calibrate() {}
-	void		measure();
-	void		package(OSCBundle& bndl, char* suffix="");
+	void		measure() override;
+	void		package(OSCBundle& bndl, char* suffix="") override;
 	bool		message_route(OSCMessage& msg, int address_offset) {}
 
 private:

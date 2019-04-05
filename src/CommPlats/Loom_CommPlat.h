@@ -56,8 +56,8 @@ public:
 	// static char* enum_subnet_scope_string(CommScope s);
 
 	// General
-	virtual void	print_config();
-	virtual void	package(OSCBundle& bndl, char* suffix="");
+	virtual void	print_config() override;
+	virtual void	package(OSCBundle& bndl, char* suffix="") override;
 	virtual void	measure() {}
 	virtual bool	message_route(OSCMessage& msg, int address_offset) {}
 

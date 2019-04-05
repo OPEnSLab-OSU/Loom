@@ -33,8 +33,8 @@ public:
 	virtual ~Loom_PCF8523();
 
 	// Inherited (overriding) Methods
-	void		print_config();
-	bool		message_route(OSCMessage& msg, int address_offset) {}
+	void		print_config() override;
+	bool		message_route(OSCMessage& msg, int address_offset) {};
 	DateTime	now();
 
 // proper alarms not really working yet
