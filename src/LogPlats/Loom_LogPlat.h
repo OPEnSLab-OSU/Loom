@@ -5,7 +5,7 @@
 #include "Loom_Module.h"
 
 
-
+/// Differnt Logging platforms supported
 enum class LogPlatform { 
 	SDCARD, 		///< Serial Monitor
 	PUSHINGBOX, 	///< PushingBox 
@@ -14,7 +14,7 @@ enum class LogPlatform {
 };
 
 
-
+/// Abstract base of logging platforms
 class LoomLogPlat : public LoomModule
 {
 

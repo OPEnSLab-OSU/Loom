@@ -7,7 +7,7 @@
 #include "SparkFunLIS3DH.h"
 
 
-
+/// LIS3DH Accelerometer sensor module
 class Loom_LIS3DH : public LoomI2CSensor
 {
 

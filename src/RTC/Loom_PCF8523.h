@@ -5,14 +5,15 @@
 #include "Loom_RTC.h"
 
 
-
+/// PCF8523 RTC module
 class Loom_PCF8523 : public LoomRTC
 {
+	
 protected:
 
 	/// Underlying PCF8523 manager instance
-	// RTC_PCF8523*  rtc_inst;
 	PCF8523*		rtc_inst;
+	// RTC_PCF8523*  rtc_inst;
 
 public:
 

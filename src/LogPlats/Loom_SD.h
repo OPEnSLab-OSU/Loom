@@ -6,7 +6,7 @@
 
 #include <SD.h>
 
-
+// Forward declare existence of RTC class
 class LoomRTC;
 
 
@@ -25,6 +25,7 @@ class LoomRTC;
 // getters and setters for save/timestamp settings
 
 
+/// SD logging platform module
 class Loom_SD : public LoomLogPlat
 {
 
@@ -115,6 +116,8 @@ public:
 	// Device_id, string identifying device - used if forwarded from save_bundle
 
 
+// Fix this as it is currently in .cpp
+
 	/// Save array to SD card.
 	/// Takes array of generic type
 	// \param[in]	file		The file to save array to
@@ -126,7 +129,104 @@ public:
 	// \param[in]	device_id	Device ID to label row with
 	template <typename T>
 	bool		save_array(char *file, T data [], int len, char delimiter=',', int timestamp=3, bool has_keys=false, char* device_id="");
+	// {
+	// 	if ( !sd_found || !check_millis() ) return false;
 
+	// 	// #if is_lora == 1
+	// 	digitalWrite(8, HIGH); 	// if using LoRa
+	// 	// #endif
+
+	// 	bool got_timestamp = false;
+
+	// 	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
+	// 	File SDFile = SD.open(file, FILE_WRITE);
+
+	// 	// If file successfully opened
+	// 	if (SDFile) {
+	// 		Print3("Saving array to SD file: '", file, "' ...");
+
+	// 		char time_key[30], time_val[30];
+
+	// 		if (timestamp) {
+	// 			if (device_manager != NULL) {
+	// 				// LoomRTC* rtc = device_manager->get_rtc_module(0);
+	// 				if (RTC_Inst != NULL) {
+	// 					Println2("RTC Object: ", RTC_Inst->get_module_name() );
+	// 					RTC_Inst->get_timestamp(time_key, time_val, delimiter, timestamp);
+	// 					got_timestamp = true; 
+	// 				}
+	// 			}
+	// 		}
+
+	// 		// Array is assumed to have alternating keys and values
+	// 		if (has_keys) {
+
+	// 			// Check if at first row (create header)
+	// 			if ( SDFile.position() == 0) {
+
+	// 				// Add timestamp header
+	// 				if (got_timestamp) {
+	// 					SDFile.print(time_key);
+	// 				}
+
+	// 				// Add address header if address was provided
+	// 				if (strlen(device_id) > 0) {
+	// 					SD_print_aux(SDFile, "Device", delimiter);
+	// 				}
+
+	// 				// Print keys
+	// 				for (int i = 0; i < len-2; i+=2) {
+	// 					SD_print_aux(SDFile, data[i], delimiter);
+	// 				}
+	// 				SDFile.println(data[len-2]);
+	// 			}
+
+	// 			// Add timestamp
+	// 			if (got_timestamp) {
+	// 				SDFile.print(time_val);
+	// 			}
+
+	// 			// Add device ID if provided
+	// 			if (strlen(device_id) > 0) {
+	// 				SD_print_aux(SDFile, device_id, delimiter);
+	// 			}
+
+	// 			// Print values 
+	// 			for (int i = 1; i < len-2; i+=2) {
+	// 				SD_print_aux(SDFile, data[i], delimiter);
+	// 			}
+	// 			SDFile.println(data[len-1]);
+	// 		} 
+
+	// 		// Array is assume to only have values
+	// 		else {
+
+	// 			if (got_timestamp) {
+	// 				SDFile.print(time_val);
+	// 			}
+
+	// 			// Add device ID if provided
+	// 			if (strlen(device_id) > 0) {
+	// 				SD_print_aux(SDFile, device_id, delimiter);
+	// 			}
+
+	// 			for (int i = 0; i < len-1; i++) {
+	// 				SD_print_aux(SDFile, data[i], delimiter);
+	// 			}
+	// 			SDFile.println(data[len-1]);
+	// 		}
+
+	// 		SDFile.close();
+	// 		Println("Done");
+	// 		return true;
+	// 	} 
+		
+	// 	// If file could not be opened
+	// 	else {
+	// 		Println2("Error opening: ", file);
+	// 		return false;
+	// 	}
+	// }
 
 private:
 

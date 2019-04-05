@@ -17,7 +17,7 @@ class LoomManager; // Specify that LoomManager exists, defined in own file
 
 
 
-
+/// Abstract root of Loom component modules inheritance hierarchy
 class LoomModule
 {
 

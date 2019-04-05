@@ -5,9 +5,11 @@
 #include "Loom_Sensor.h"
 
 
-
+/// Battery pin
 #define VBATPIN A7
+/// Number of analog pins
 #define ANALOG_COUNT 6
+
 
 typedef struct {
 	byte checksum;  
@@ -17,7 +19,8 @@ typedef struct {
 } AnalogConfig;
 
 
-
+/// Different types of conversions from
+/// analog to specified unit
 enum class AnalogConversion { 
 	NONE, 			///< No conversion applied
 	VOLTAGE, 		///< Analog to voltage
@@ -35,7 +38,7 @@ enum class AnalogConversion {
 
 
 
-
+/// Analog pin manager
 class Loom_Analog : public LoomSensor
 {
 

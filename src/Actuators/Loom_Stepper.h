@@ -8,10 +8,12 @@
 #include <Adafruit_PWMServoDriver.h>
 
 
-
+/// Number of possible steppers.
+/// Dependent on stepper controller breakout.
 #define NUM_STEPPERS 4
 
 
+/// Stepper actuator module
 class Loom_Stepper : public LoomActuator
 {
 

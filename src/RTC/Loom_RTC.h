@@ -15,6 +15,7 @@
 // byte RTC_Int_Pin = 0;
 
 
+/// Different time zones
 enum TimeZone { 
 	WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
 	ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
@@ -46,7 +47,7 @@ enum TimeZone {
 // }
 
 
-
+/// Abstract base of RTC modules
 class LoomRTC : public LoomModule
 {
 
@@ -81,7 +82,7 @@ public:
 
 	// --- CONSTRUCTOR ---
 	LoomRTC(	
-			char*		module_name,
+			char*		module_name			= "RTC",
  
 			TimeZone	timezone			= TimeZone::PST,
 			bool		use_utc_time		= true,
@@ -93,7 +94,7 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~LoomRTC();
 
-	static char* enum_timezone_string(TimeZone t);
+	static char*	enum_timezone_string(TimeZone t);
 
 	// Inherited Methods
 	virtual void 	print_config();

@@ -55,7 +55,8 @@ enum class I2C_Selection {
 
 
 
-
+/// Multiplexer manager for interfacing with 
+/// multiple I2C sensors 
 class Loom_Multiplexer : public LoomModule
 {
 private:

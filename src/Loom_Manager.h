@@ -17,13 +17,14 @@
 #define SERIAL_BAUD 115200
 
 
-
+/// Different general types of devices 
 enum class DeviceType { 
 	HUB, 		///< Central device 
 	NODE, 		///< Data collecting / actuating node
 	REPEATER 	///< Forwards messages between other devices
 };
 
+/// Different levels of verbosity (for printing or packaging)
 enum class Verbosity { 
 	V_OFF,		///< Disable
 	V_LOW, 		///< Minimal/Stardard
@@ -54,7 +55,7 @@ class LoomLogPlat;
 #define MAX_LOGS          5
 
 
-
+/// Manager class to simplify with enabled modules
 class LoomManager
 {
 
@@ -75,7 +76,7 @@ protected:
 
 	// Sub Managers
 	Loom_Interrupt_Manager*	interrupt_manager;
-	Loom_Sleep_Manager*	sleep_manager;
+	Loom_Sleep_Manager*		sleep_manager;
 
 	// RTC object
 	LoomRTC*			rtc_module;
@@ -135,10 +136,10 @@ public:
 	virtual ~LoomManager();
 
 	/// Print the device name as '[device_name]'
-	void print_device_label();
+	void		print_device_label();
 	/// Print the devices current configuration.
 	/// Also prints configuration of linked modules.
-	void print_config();
+	void		print_config();
 
 
 

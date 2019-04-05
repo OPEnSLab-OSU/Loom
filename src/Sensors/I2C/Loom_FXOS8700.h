@@ -7,7 +7,7 @@
 #include <Adafruit_FXOS8700.h>
 
 
-
+/// FXOS8700 3-Axis Acceleromter/Magnetometer sensor module
 class Loom_FXOS8700 : public LoomI2CSensor
 {
 

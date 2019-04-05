@@ -7,17 +7,19 @@
 #include <Adafruit_PWMServoDriver.h>
 
 
+/// Number of possible servos.
+/// Dependent on servo controller breakout.
 #define NUM_SERVOS 8
 
 
-
+/// Servo actuator module
 class Loom_Servo : public LoomActuator
 {
 
 protected:
 
 	/// Underlying servo driver instance
-	Adafruit_PWMServoDriver servo_driver = Adafruit_PWMServoDriver();
+	Adafruit_PWMServoDriver servo_driver;// = Adafruit_PWMServoDriver();
 
 	/// Number of servos
 	uint8_t		servo_count;

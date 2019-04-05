@@ -5,7 +5,7 @@
 #include "Loom_Module.h"
 
 
-
+/// Abstract base class of actuator modules
 class LoomActuator : public LoomModule
 {
 

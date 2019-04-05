@@ -9,18 +9,18 @@
 #include <AsyncDelay.h>
 
 
-
+/// Number of interrupts
 #define InteruptRange 16
 
-
+/// Maximum number of timers
 #define MaxTimerCount 4
+/// Maximum numbr of stopwatches
 #define MaxStopWatchCount 2
 
 
 
-
-class LoomRTC; // Specify that LoomRTC exists, defined in own file
-
+// Specify that LoomRTC exists, defined in own file
+class LoomRTC; 
 
 
 // Used to make function signatures easier to read 
@@ -60,7 +60,7 @@ struct StopWatchDetails {
 
 
 
-
+/// Submanager for managing interrupts, timers, and stopwatches
 class Loom_Interrupt_Manager : public LoomModule
 {
 

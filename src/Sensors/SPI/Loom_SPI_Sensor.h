@@ -5,7 +5,7 @@
 #include "../Loom_Sensor.h"
 
 
-
+/// Abstract base class for SPI sensor modules 
 class LoomSPISensor : public LoomSensor
 {
 

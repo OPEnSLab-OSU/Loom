@@ -7,7 +7,7 @@
 #include "AS726X.h"
 
 
-
+/// AS7262 Visible spectrum spectral sensor module 
 class Loom_AS7262 : public LoomI2CSensor
 {
 

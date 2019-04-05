@@ -1,8 +1,10 @@
 
 #include "Loom_Servo.h"
 
-#define SERVOMIN  150	// This is the 'minimum' pulse length count (out of 4096)
-#define SERVOMAX  600	// This is the 'maximum' pulse length count (out of 4096)
+/// This is the 'minimum' pulse length count (out of 4096)
+#define SERVOMIN  150	
+/// This is the 'maximum' pulse length count (out of 4096)
+#define SERVOMAX  600	
 
 
 /////////////////////////////////////////////////////////////////////
@@ -17,6 +19,8 @@ Loom_Servo::Loom_Servo(
 
 	this->positions = new int[servo_count];
 
+	// this->servo_driver = new Adafruit_PWMServoDriver();
+
 	servo_driver.begin();
 	servo_driver.setPWMFreq(60);
 }
@@ -26,6 +30,7 @@ Loom_Servo::Loom_Servo(
 Loom_Servo::~Loom_Servo() 
 {
 	delete positions;
+	// delete servo_driver;
 }
 
 /////////////////////////////////////////////////////////////////////

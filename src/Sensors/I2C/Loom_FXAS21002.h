@@ -7,7 +7,7 @@
 #include <Adafruit_FXAS21002C.h>
 
 
-
+/// FXAS21002 3-Axis Gyroscope snesor module
 class Loom_FXAS21002 : public LoomI2CSensor
 {
 

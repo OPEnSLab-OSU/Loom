@@ -12,10 +12,11 @@
 #define NRF_SELF_ADDRESS   01
 #define NRF_FRIEND_ADDRESS 00
 
-#ifndef NRF_MESSAGE_SIZE
-	#define NRF_MESSAGE_SIZE 120
-#endif
+/// Max nRF message size
+#define NRF_MESSAGE_SIZE 120
 
+
+/// Nordic Radio communication platform module
 class Loom_nRF : public LoomCommPlat
 {
 

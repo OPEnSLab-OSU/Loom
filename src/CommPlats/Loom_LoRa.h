@@ -7,12 +7,18 @@
 #include <RH_RF95.h>
 #include <RHReliableDatagram.h>
 
-// LoRa chip pins
-#define RFM95_CS  8
-#define RFM95_RST 4
-#define RFM95_INT 3   // Use this for the M0 (7 for 32u4)
+// LoRa Module pins
 
-#define RF95_FREQ 915.0	// Hardware specific, Tx must match Rx   Move to config
+/// LoRa hip select pin
+#define RFM95_CS  8
+/// LoRa reset pin
+#define RFM95_RST 4
+/// LoRa interrupt pin
+#define RFM95_INT 3  
+
+/// LoRa radio frequence.
+/// Hardware specific, Tx must match Rx
+#define RF95_FREQ 915.0
 
 
 // these will be defined in the config file
@@ -20,7 +26,7 @@
 #define LORA_FRIEND_ADDRESS 00
 
 
-
+/// LoRa communication platform module
 class Loom_LoRa : public LoomCommPlat
 {
 

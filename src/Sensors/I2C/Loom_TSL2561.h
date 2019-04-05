@@ -8,7 +8,7 @@
 #include <Adafruit_TSL2561_U.h>
 
 
-
+/// TSL2561 Luminosity sensor module
 class Loom_TSL2561 : public LoomI2CSensor
 {
 

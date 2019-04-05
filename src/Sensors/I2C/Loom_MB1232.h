@@ -6,11 +6,7 @@
 #include "Loom_I2C_Sensor.h"
 
 
-#define RangeCommand    		0x51	//The Sensor ranging command has a value of 0x51
-#define ChangeAddressCommand1 	0xAA	//These are the two commands that need to be sent in sequence to change the sensor address
-#define ChangeAddressCommand2 	0xA5
-
-
+/// MB1232 Sonar sensor module
 class Loom_MB1232 : public LoomI2CSensor
 {
 
@@ -25,7 +21,7 @@ public:
 	Loom_MB1232(	
 			byte		i2c_address				=  0x70, // 0x70   // MB1232_I2C_Address,
 			
-			char*		module_name				=  "MB1232",   // MB1232_Module_Name,
+			char*		module_name				= "MB1232",   // MB1232_Module_Name,
 			char*		sensor_description		= "Sonar"    // MB1232_Sensor_Description 
 		);
 

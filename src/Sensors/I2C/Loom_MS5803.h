@@ -7,6 +7,7 @@
 #include <MS5803_02.h> 
 
 
+/// MS5803 Atmospheric Pressure / Temperature sensor module
 class Loom_MS5803 : public LoomI2CSensor
 {
 

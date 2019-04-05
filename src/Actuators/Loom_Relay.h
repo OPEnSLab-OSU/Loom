@@ -6,7 +6,7 @@
 #include "Loom_Actuator.h"
 
 
-
+/// Relay actuator module
 class Loom_Relay : public LoomActuator
 {
 

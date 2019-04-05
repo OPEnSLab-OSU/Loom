@@ -4,28 +4,40 @@
 
 A comment describing a variable should look like:
 
-```
+```cpp
 /// Description of variable
 int var;
 ```
 
 Alternatively, if there are several similar variables in sequence, they may be commented as such:
 
-```
+```cpp
 int var1;			///< Description of var1
 int var2;			///< Description of var2
 int var3;			///< Description of var3
+```
+
+## Class Description
+
+A comment describing a variable should look like:
+
+```cpp
+/// Description of class
+class ExampleClass
+{
+  ...
+}
 ```
 
 ## Inline Comments
 
 Prefer for a sequence of similarly formatted, short lines of code (e.g. switch statements, items of enum definitions)
 
-```
+```cpp
 code		///< Brief inline comment
 ```
 
-```
+```cpp
 code		///< Detailed inline
 				///< comment
 ```
@@ -34,7 +46,7 @@ code		///< Detailed inline
 
 **Function declaration (in .h file)**
 
-```
+```cpp
 /// Brief description.
 /// Detailed description
 /// goes here.
@@ -54,7 +66,7 @@ Leave a blank line after function declaration.
 
 Only has a divider between other function definitions, description goes in header file
 
-```
+```cpp
 /////////////////////////////////////////////////////////////////////
 int func(float param1, int& param2, char* param3)
 {
@@ -71,11 +83,11 @@ Leave a blank line after function definition.
 
 General comment blocks may look like the following:
 
-```
+```cpp
 /// Brief description which ends at this dot. 
 /// Details follow here.
 ```
-```
+```cpp
 /// ... text ... 
 /// ... text ...
 /// ... text ...
@@ -83,7 +95,20 @@ General comment blocks may look like the following:
 
 ### Preprocessor Defines
 
+A comment describing a preprocessor definition should look like:
 
+```cpp
+/// Description of define
+#define DEFINITION	1
+```
+
+Alternatively, if there are several similar definitions in sequence, they may be commented as such:
+
+```cpp
+#define DEF1	123			///< Description of DEF1
+#define DEF2	4.56		///< Description of DEF2
+#define DEF3	"acb"		///< Description of DEF3
+```
 
 ## Code Divider / Heading
 
@@ -91,7 +116,7 @@ If sections of code within a file warrant dividers for readability and ease of n
 
 **Major**
 
-```
+```cpp
 // ================================================================
 // ===                Major Section Description                 ===
 // ================================================================
@@ -99,7 +124,7 @@ If sections of code within a file warrant dividers for readability and ease of n
 
 **Minor**
 
-```
+```cpp
 // === === Minor Section Description === ===
 ```
 
@@ -109,7 +134,7 @@ The comments in the code that are not used to generate documentation should gene
 
 **General Comments**
 
-```
+```cpp
 // Comment goes here
 code being 
 commented on
@@ -119,11 +144,10 @@ commented on
 
 A series of short lines of code may also be commented as:
 
-```
+```cpp
 statement1;			// comment 1
 statement2;			// comment 2
 statement3;			// comment 3
-
 ```
 
 

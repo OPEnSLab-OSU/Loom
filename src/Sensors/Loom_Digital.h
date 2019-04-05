@@ -4,11 +4,14 @@
 
 #include "Loom_Sensor.h"
 
-
+/// Number of digital pins
 #define DIGITAL_COUNT 12
 
 // Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
 
+
+
+/// Digital pin manager module
 class Loom_Digital : public LoomSensor
 {
 

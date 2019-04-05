@@ -6,7 +6,7 @@
 #include "Loom_Module.h"
 
 
-
+/// Abstract root of Loom sensor modules hierarchy
 class LoomSensor : public LoomModule
 {
 

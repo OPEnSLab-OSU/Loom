@@ -7,7 +7,7 @@
 #include <Adafruit_MAX31856.h>
 
 
-
+/// MAX31856 thermocouple module
 class Loom_MAX31856 : public LoomSPISensor
 {
 

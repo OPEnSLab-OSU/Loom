@@ -8,7 +8,7 @@
 #include <Adafruit_NeoPixel.h>
 
 
-
+/// Neopixel tri-color LED actuator module
 class Loom_Neopixel : public LoomActuator
 {
 

@@ -6,6 +6,7 @@
 #include "../Loom_Sensor.h"
 
 
+/// Abstract base class for SDI12 sensor modules 
 class LoomSDI12Sensor : public LoomSensor
 {
 

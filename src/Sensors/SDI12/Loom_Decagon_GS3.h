@@ -5,7 +5,7 @@
 #include "Loom_SDI12_Sensor.h"
 
 
-
+/// Decagon GS3 Soil Moisture sensor module
 class Loom_DecagonGS3 : public LoomSDI12Sensor
 {
 

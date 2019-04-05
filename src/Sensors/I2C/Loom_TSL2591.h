@@ -7,7 +7,7 @@
 #include <Adafruit_TSL2591.h>
 
 
-
+/// TSL2591 Lux sensor module
 class Loom_TSL2591 : public LoomI2CSensor
 {
 
@@ -38,7 +38,7 @@ public:
 			char*		sensor_description		=   "Lux",    // TSL2591_Sensor_Description,
 
 			uint8_t		gain_level				=   1, // document     // TSL2591_Gain_Level,
-			uint8_t		timing_level			= 0  // document    // TSL2591_Timing_Level 
+			uint8_t		timing_level			= 	0  // document    // TSL2591_Timing_Level 
 		);
 
 

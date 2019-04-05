@@ -6,7 +6,7 @@
 #include <Wire.h>
 
 
-
+/// Abstract root for I2C sensor modules
 class LoomI2CSensor : public LoomSensor
 {
 

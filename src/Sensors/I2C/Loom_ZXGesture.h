@@ -6,10 +6,15 @@
 
 #include <ZX_Sensor.h>
 
-enum class ZXMode { ZX_POS, ZX_GEST };
+
+/// Different modes of the ZX gesture sensor
+enum class ZXMode { 
+	ZX_POS,		///< Measure z and x position
+	ZX_GEST 	///< Measure gestures
+};
 
 
-
+/// ZXGesture position / gesture sensor module
 class Loom_ZXGesture : public LoomI2CSensor
 {
 
@@ -40,7 +45,7 @@ public:
 			char*		module_name				=  "ZXGesture",    // ZXGESTURE_Module_Name,
 			char*		sensor_description		=  "Temperature/Humidty",    // ZXGESTURE_Sensor_Description,
 
-			ZXMode		mode					= ZXMode::ZX_POS    // ZXGESTURE_Mode 
+			ZXMode		mode					=	ZXMode::ZX_POS    // ZXGESTURE_Mode 
 		);
 
 	// --- DESTRUCTOR ---

@@ -6,9 +6,10 @@
 #include "Loom_RTC.h"
 
 
-
+/// DS3231 RTC module
 class Loom_DS3231 : public LoomRTC
 {
+
 protected:
 
 	/// Underlying DS3231 manager instance

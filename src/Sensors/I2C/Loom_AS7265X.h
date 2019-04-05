@@ -7,7 +7,7 @@
 #include "SparkFun_AS7265X.h"
 
 
-
+/// AS7262 3 Spectrum (Visible, near IR, UV) spectral sensor module 
 class Loom_AS7265X : public LoomI2CSensor
 {
 

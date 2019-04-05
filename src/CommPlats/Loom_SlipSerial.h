@@ -5,16 +5,19 @@
 
 #include <SLIPEncodedSerial.h>
 
+/// Pin used for SlipSerial RX
+#define SERIAL3_RX	A5	
+/// Pin used for SlipSerial TX
+#define SERIAL3_TX	6	
 
-/// Slip Serial Pins
-#define SERIAL3_RX	A5	///< Pin used for SlipSerial RX
-#define SERIAL3_TX	6	///< Pin used for SlipSerial TX
-
-#define BAUD_RATE	115200	///< Buad rate used for communication
-#define SERIAL_MAX_MESSAGE_LEN	15 ///< Maximum size a message can be (OSCBundle)
+/// Baud rate used for communication
+#define BAUD_RATE	115200	
+/// Maximum size a message can be (OSCBundle)
+#define SERIAL_MAX_MESSAGE_LEN	15 
 
 
 
+/// SlipSerial communication platform module
 class Loom_SlipSerial : public LoomCommPlat
 {
 

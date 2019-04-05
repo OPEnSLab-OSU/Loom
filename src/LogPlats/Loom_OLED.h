@@ -7,17 +7,22 @@
 #include <Adafruit_SSD1306.h>
 
 
+// Maybe move these enums into class
+
+/// Different forms of the OLED display
 enum class OLED_Version { 
 	FEATHERWING,	///< FeatherWing OLED
 	BREAKOUT		///< Breakout board 
 };
 
+/// Different formats to display information in
 enum class OLED_Format { 
 	FOUR,		///< 4 Key values
 	EIGHT,		///< 8 Key values
 	SCROLL		///< Scrolling
 };
 
+/// Differnt freeze behaviors
 enum class OLED_Freeze { 
 	DISABLE, 	///< Freeze disabled
 	DATA, 		///< Screen freezes
@@ -25,7 +30,7 @@ enum class OLED_Freeze {
 };
 
 
-
+/// OLED logging platform module
 class Loom_OLED : public LoomLogPlat
 {
 

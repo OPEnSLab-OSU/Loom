@@ -6,6 +6,7 @@
 #include "Loom_Module.h"
 
 
+/// Different communication platforms available
 enum class CommPlatform { 
 	WIFI, 		///< WiFi
 	LORA, 		///< LoRa
@@ -16,7 +17,7 @@ enum class CommPlatform {
 
 
 
-
+/// Abstract base of communication platform modules
 class LoomCommPlat : public LoomModule
 {
 

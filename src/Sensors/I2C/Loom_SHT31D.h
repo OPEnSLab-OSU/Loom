@@ -7,7 +7,7 @@
 #include "Adafruit_SHT31.h"
 
 
-
+/// SHT31D Temperature / Humidty sensor module
 class Loom_SHT31D : public LoomI2CSensor
 {
 
