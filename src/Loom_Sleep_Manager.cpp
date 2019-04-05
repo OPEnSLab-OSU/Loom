@@ -31,7 +31,7 @@ Loom_Sleep_Manager::Loom_Sleep_Manager( char* module_name, LoomRTC* RTC_Inst, bo
 	this->sleep_mode	= SleepMode::STANDBY;
 
 	// Get current time
-	if (this->RTC_Inst != NULL) {
+	if (this->RTC_Inst != nullptr) {
 		last_wake_time = this->RTC_Inst->now();
 	} else {
 		sleep_mode = SleepMode::SLEEPYDOG;
@@ -57,7 +57,7 @@ void Loom_Sleep_Manager::print_config()
 void Loom_Sleep_Manager::print_state()
 {
 	LoomModule::print_state();
-	if (RTC_Inst != NULL) {
+	if (RTC_Inst != nullptr) {
 		Print2('\t', "Last Wake Time      : " );
 		RTC_Inst->print_time();
 	}
@@ -69,12 +69,12 @@ void Loom_Sleep_Manager::link_device_manager(LoomManager* LM)
 	LoomModule::link_device_manager(LM);
 
 	// If no currently linked Interrupt Manager object, try to get one from Manager
-	if ( (IM == NULL) && (LM != NULL) ){
+	if ( (IM == nullptr) && (LM != nullptr) ){
 		IM = LM->get_interrupt_manager();
 	}
 
 	// If no currently linked RTC object, try to get one from Manager
-	if ( (RTC_Inst == NULL) && (LM != NULL) ){
+	if ( (RTC_Inst == nullptr) && (LM != nullptr) ){
 		RTC_Inst = LM->get_rtc_module();
 	}
 }
@@ -84,6 +84,11 @@ void Loom_Sleep_Manager::link_device_manager(LoomManager* LM)
 void Loom_Sleep_Manager::set_RTC_module(LoomRTC* RTC_Inst)
 {
 	this->RTC_Inst = RTC_Inst;
+
+	if (RTC_Inst != nullptr)
+	{
+		last_wake_time = this->RTC_Inst->now();
+	}
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -117,15 +122,16 @@ SleepMode Loom_Sleep_Manager::get_sleep_mode()
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Sleep_Manager::sleep_duration(TimeSpan duration)
+bool Loom_Sleep_Manager::sleep_duration(TimeSpan duration, bool from_last_wake)
 {
 	switch(sleep_mode) {
+
 
 		case SleepMode::STANDBY : 
 			// Try sleeping with Standby unless no RTC object
 			// Calculate time to sleep until
 			if (RTC_Inst) {
-				return sleep_until_time(RTC_Inst->now() + duration);
+				return sleep_until( ((from_last_wake) ? last_wake_time : RTC_Inst->now()) + duration);
 			} 
 
 			// Intentional fallthrough: if no RTC found, revert to SLEEPYDOG
@@ -133,41 +139,37 @@ bool Loom_Sleep_Manager::sleep_duration(TimeSpan duration)
 		case SleepMode::IDLE :
 
 			if (RTC_Inst) {
-				return sleep_until_time(RTC_Inst->now() + duration);
+				// return sleep_until(RTC_Inst->now() + duration);
+				return sleep_until( ((from_last_wake) ? last_wake_time : RTC_Inst->now()) + duration);
 			} 
 
 			// Intentional fallthrough: if no RTC found, revert to SLEEPYDOG
 
 		case SleepMode::SLEEPYDOG : 
 			// Sleep 'hack' using repeated calls to Watchdog.sleep()
+			// Does not support duration from last wake time
 			return sleepy_dog_sleep(duration);
+
+		case SleepMode::OPENS_LOWPOWER : 
+			// not implemented yet
+			return false;
 
 		default :
 			return false;
 	}
+
+	// If no sleep was possible
+	return false;
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Sleep_Manager::sleep_duration(uint days, uint hours, uint minutes, uint seconds)
+bool Loom_Sleep_Manager::sleep_duration(uint days, uint hours, uint minutes, uint seconds, bool from_last_wake)
 {
-	return sleep_duration( TimeSpan(days, hours, minutes, seconds) );
+	return sleep_duration( TimeSpan(days, hours, minutes, seconds), from_last_wake );
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Sleep_Manager::sleep_duration_from_wake(TimeSpan duration)
-{
-	return (RTC_Inst) ? sleep_until_time(last_wake_time + duration) : false;
-}
-
-/////////////////////////////////////////////////////////////////////
-bool Loom_Sleep_Manager::sleep_duration_from_wake(uint days, uint hours, uint minutes, uint seconds)
-{
-	return sleep_duration_from_wake( TimeSpan(days, hours, minutes, seconds) );
-
-}
-
-/////////////////////////////////////////////////////////////////////
-bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
+bool Loom_Sleep_Manager::sleep_until(DateTime future_time)
 {
 	switch(sleep_mode) {
 		
@@ -176,7 +178,7 @@ bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 		case SleepMode::IDLE :
 		{
 			// Don't sleep if no RTC to wake up device
-			if (RTC_Inst == NULL) {
+			if (RTC_Inst == nullptr) {
 				return false;
 			}
 
@@ -232,17 +234,17 @@ bool Loom_Sleep_Manager::sleep_until_time(DateTime future_time)
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Sleep_Manager::sleep_until_time(uint hour, uint minute, uint second)
+bool Loom_Sleep_Manager::sleep_until(uint hour, uint minute, uint second)
 {
 	// Don't sleep if no RTC to wake up device
-	if (RTC_Inst == NULL) {
+	if (RTC_Inst == nullptr) {
 		return false;
 	}
 
-	// Call sleep_until_time(DateTime future_time) with that time today
+	// Call sleep_until(DateTime future_time) with that time today
 	// That function will adjust to following day if necessary
 	DateTime now = RTC_Inst->now();
-	return sleep_until_time( DateTime(now.year(), now.month(), now.day(), hour, minute, second) ); 
+	return sleep_until( DateTime(now.year(), now.month(), now.day(), hour, minute, second) ); 
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -388,7 +390,7 @@ void Loom_Sleep_Manager::post_sleep()
 	#if LOOM_DEBUG == 1
 		Println("WAKE");
 
-		if (RTC_Inst != NULL) {
+		if (RTC_Inst != nullptr) {
 			print_module_label();
 			Print("Wake Time : ");
 			RTC_Inst->print_time();
@@ -400,6 +402,28 @@ void Loom_Sleep_Manager::post_sleep()
 	digitalWrite(LED_BUILTIN, LOW);
 
 }
+
+
+
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+
+
+/////////////////////////////////////////////////////////////////////
+// bool Loom_Sleep_Manager::sleep_duration_from_wake(TimeSpan duration)
+// {
+// 	return (RTC_Inst) ? sleep_until(last_wake_time + duration) : false;
+// }
+
+// /////////////////////////////////////////////////////////////////////
+// bool Loom_Sleep_Manager::sleep_duration_from_wake(uint days, uint hours, uint minutes, uint seconds)
+// {
+// 	return sleep_duration_from_wake( TimeSpan(days, hours, minutes, seconds) );
+
+// }
 
 
 

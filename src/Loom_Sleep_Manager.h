@@ -4,22 +4,21 @@
 
 #include "Loom_Module.h"
 
-
-// #include <RTClibExtended.h>
-// // NOTE: Must include the following line in the RTClibExtended.h file to use with M0:
-// // #define _BV(bit) (1 << (bit))
-
 #include <OPEnS_RTC.h>
 
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
 
-class LoomRTC; // Specify that LoomRTC exists, defined in own file
-// class LoomManager; // Specify that LoomManager exists, defined in own file
 
 
+// Specify that LoomRTC exists, defined in own file
+class LoomRTC; 
+// Specify that LoomManager exists, defined in own file
+// class LoomManager; 
 
+
+/// Different options available to sleep in
 enum class SleepMode { 
 	IDLE, 			///< Idle
 	STANDBY, 		///< Standby
@@ -61,13 +60,12 @@ public:
 	Loom_Sleep_Manager( 
 			char*		module_name			= "Sleep_Manager",
 				
-			LoomRTC*	RTC_Inst			= NULL,
+			LoomRTC*	RTC_Inst			= nullptr,
 
 			bool		use_LED				= true,
 			bool		delay_on_wake		= false,
 
 			SleepMode	sleep_mode			= SleepMode::STANDBY
-
 		);
 
 	// Loom_Sleep_Manager( char* module_name, LoomManager* LD );
@@ -98,10 +96,10 @@ public:
 
 	/// Link an Interrupt Manager
 	/// \param[in]	IM		Interrupt manager to link
-	void		set_Interrupt_Manager(Loom_Interrupt_Manager* IM);
+	void					set_Interrupt_Manager(Loom_Interrupt_Manager* IM);
 	/// Get linked Interrupt Manager
 	/// \return		Linked Interrupt Manager (Null if none linked)
-	Loom_Interrupt_Manager* get_Interrupt_Manager();
+	Loom_Interrupt_Manager*	get_Interrupt_Manager();
 
 
 	/// Set the sleep mode to use
@@ -118,20 +116,35 @@ public:
 
 
 // Keep sleep time from wake controlled here
+// NEED these functions, cant offload to only interrupt manager
 
-
-	bool		sleep_duration(TimeSpan duration);	
-	bool		sleep_duration(uint days, uint hours, uint minutes, uint seconds);
+	/// Sleep for the specified time.
+	/// Can optionally sleep for given time from 
+	/// last wake time.
+	/// \param[in]	duration		The time to sleep
+	/// \param[in]	from_last_wake	True to try to sleep for duration from
+	///								last wake time, false to sleep duration
+	///								from current time
+	/// \return		Whether or not sleep was executed
+	bool		sleep_duration(TimeSpan duration, bool from_last_wake=false);	
+	/// Sleep for the specified time.
+	/// Can optionally sleep for given time from 
+	/// last wake time.
+	/// Creates timespan and sends to overloaded Timespan version of function
+	/// \param[in]	days			Days to sleep
+	/// \param[in]	minutes			Minutes to sleep
+	/// \param[in]	seconds			Seconds to sleep
+	/// \param[in]	from_last_wake	True to try to sleep for duration from
+	///								last wake time, false to sleep duration
+	///								from current time
+	/// \return		Whether or not sleep was executed
+	bool		sleep_duration(uint days, uint hours, uint minutes, uint seconds, bool from_last_wake=false);
 	
+
 	// Only works with RTC
 	// Might work using PCF and SleepyDog together, otherwise has to be DS3231
-	bool		sleep_duration_from_wake(TimeSpan duration);
-	bool		sleep_duration_from_wake(uint days, uint hours, uint minutes, uint seconds);
-	
-	// Only works with RTC
-	// Might work using PCF and SleepyDog together, otherwise has to be DS3231
-	bool		sleep_until_time(DateTime future_time);
-	bool		sleep_until_time(uint hour, uint minute, uint second);
+	bool		sleep_until(DateTime future_time);
+	bool		sleep_until(uint hour, uint minute, uint second);
 	
 	// Standby mode
 	// bool sleep_until_interrupt_on(byte pin);
@@ -172,5 +185,9 @@ private:
 
 
 
-
+	// Only works with RTC
+	// Might work using PCF and SleepyDog together, otherwise has to be DS3231
+	// bool		sleep_duration_from_wake(TimeSpan duration);
+	// bool		sleep_duration_from_wake(uint days, uint hours, uint minutes, uint seconds);
+	
 

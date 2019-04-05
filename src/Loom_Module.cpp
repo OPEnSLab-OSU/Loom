@@ -26,7 +26,7 @@ LoomModule::LoomModule()
 	print_verbosity 	= Verbosity::V_LOW;
 	package_verbosity 	= Verbosity::V_LOW;
 	
-	this->device_manager = NULL;
+	this->device_manager = nullptr;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -69,7 +69,7 @@ LoomManager* LoomModule::get_device_manager()
 /////////////////////////////////////////////////////////////////////
 void LoomModule::link_device_manager(LoomManager* LM)
 {
-	if (LM == NULL) return;
+	if (LM == nullptr) return;
 
 	device_manager = LM;
 }
@@ -110,7 +110,7 @@ void LoomModule::print_state()
 /////////////////////////////////////////////////////////////////////
 // void LoomModule::resolve_bundle_prefix(char* prefix) 
 // {
-// 	if (device_manager != NULL) {
+// 	if (device_manager != nullptr) {
 // 		device_manager->packet_header_device(prefix);
 // 	} else {
 // 		strcpy(prefix, module_name);
@@ -120,7 +120,7 @@ void LoomModule::print_state()
 /////////////////////////////////////////////////////////////////////
 void LoomModule::resolve_bundle_address(char* address, char* suffix)
 {
-	if (device_manager != NULL) {
+	if (device_manager != nullptr) {
 		char tmp[30];
 		device_manager->packet_header_device(tmp);
 		sprintf(address, "%s/%s", tmp, module_name);

@@ -28,10 +28,10 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 	interrupts_enabled = true;
 
 	for (auto i = 0; i < InteruptRange; i++) {
-		int_settings[i] = {NULL, 0, true, false};
+		int_settings[i] = {nullptr, 0, true, false};
 	}
 	for (auto i = 0; i < MaxTimerCount; i++) {
-		timer_settings[i] = {NULL, 0, false, false};
+		timer_settings[i] = {nullptr, 0, false, false};
 	}
 	for (auto i = 0; i < MaxStopWatchCount; i++) {
 		stopwatch_settings[i] = {0, false};
@@ -39,7 +39,7 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 
 	this->RTC_Inst = RTC_Inst;
 
-	if (this->RTC_Inst != NULL) {
+	if (this->RTC_Inst != nullptr) {
 		last_alarm_time = this->RTC_Inst->now();
 	}
 }
@@ -66,6 +66,7 @@ void Loom_Interrupt_Manager::print_config()
 
 	}
 
+	// print out registered timers
 	Println2('\t', "Registered Timers     : " );
 	for (auto i = 0; i < MaxTimerCount; i++) {
 		Print4("\t\t", "Timer ", i, " : ");
@@ -79,6 +80,7 @@ void Loom_Interrupt_Manager::print_config()
 		}
 	}
 
+	// print out registered stopwatches
 	Println2('\t', "Registered StopWatches     : " );
 	for (auto i = 0; i < MaxStopWatchCount; i++) {
 		Print4("\t\t", "Stopwatch ", i, " : ");
@@ -103,7 +105,7 @@ void Loom_Interrupt_Manager::link_device_manager(LoomManager* LM)
 	LoomModule::link_device_manager(LM);
 
 	// If no currently linked RTC object, try to get one from Manager
-	if ( (RTC_Inst == NULL) && (LM != NULL) ){
+	if ( (RTC_Inst == nullptr) && (LM != nullptr) ){
 		RTC_Inst = LM->get_rtc_module();
 	}
 }
@@ -153,27 +155,17 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte type, b
 		Print2(" to be triggered on ", type);
 		Println2(" and is ", (immediate) ? "immediate" : "delay" );
 
-
 		// Save interrupt details
 		int_settings[pin] = { ISR, type, immediate, (ISR) ? true : false };
 
 		// Set pin mode
 		pinMode(pin, INPUT_PULLUP);
 
-
 		// If ISR provided
-		if (ISR != NULL) {
+		if (ISR != nullptr) {
 
 			ISRFuncPtr tmpISR = (immediate) ? ISR : default_ISRs[pin];
 
-			// Attach default interrupt with specified type
-			// switch( type ) {
-			// 	case INT_LOW     : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, LOW); break;
-			// 	case INT_HIGH    : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, HIGH); break; 
-			// 	case INT_CHANGE  : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, CHANGE); break;
-			// 	case INT_FALLING : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, FALLING); break;
-			// 	case INT_RISING  : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, RISING); break;
-			// }
 			attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (type<5) ? type : 0 );
 
 		} 
@@ -192,7 +184,7 @@ void Loom_Interrupt_Manager::unregister_ISR(byte pin, byte type)
 {
 	// Set interrupt to be the default
 	if (pin < InteruptRange) {
-		register_ISR(pin, NULL, type, true);
+		register_ISR(pin, nullptr, type, true);
 	}
 }
 
@@ -207,22 +199,20 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 			// If pin enabled and bottom half ISR provided
 			// ISR will be Null if no interrupt on that pin,
 			// or if ISR on pin is set to immediate (dont want to rerun the ISR here)
-			if ( (interrupt_triggered[i]) && (int_settings[i].ISR != NULL) ) {
+			if ( (interrupt_triggered[i]) && (int_settings[i].ISR != nullptr) ) {
 
 				Println2("I: ", i);
-
 
 				// Run bottom half ISR
 				int_settings[i].ISR();
 
+			// currently not detaching in ISR... so nothing to reconnect
 				// Reattach interrupts (disconnected in default ISR top half)
-				// switch( int_settings[i].type ) {
-				// 	case INT_LOW     : attachInterrupt(digitalPinToInterrupt(i), default_ISRs[i], LOW); break;
-				// 	case INT_HIGH    : attachInterrupt(digitalPinToInterrupt(i), default_ISRs[i], HIGH); break; 
-				// 	case INT_CHANGE  : attachInterrupt(digitalPinToInterrupt(i), default_ISRs[i], CHANGE); break;
-				// 	case INT_FALLING : attachInterrupt(digitalPinToInterrupt(i), default_ISRs[i], FALLING); break;
-				// 	case INT_RISING  : attachInterrupt(digitalPinToInterrupt(i), default_ISRs[i], RISING); break;
+				// if (int_settings[pin].ISR != nullptr) {
+				// 	// Attach interrupt with specified type
+				// 	attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, (int_settings[pin].type<5) ? int_settings[pin].type : 0 );
 				// }
+
 
 				// // set triggered flag false 
 				interrupt_triggered[i] = false;
@@ -240,18 +230,9 @@ void Loom_Interrupt_Manager::interrupt_reset(byte pin)
 	detachInterrupt(digitalPinToInterrupt(pin));
 	delay(20);
 
-	if (int_settings[pin].ISR != NULL) {
-
+	if (int_settings[pin].ISR != nullptr) {
 		// Attach interrupt with specified type
-		// switch( int_settings[pin].type ) {
-		// 	case INT_LOW     : attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, LOW);
-		// 	case INT_HIGH    : attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, HIGH); 
-		// 	case INT_RISING  : attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, RISING);
-		// 	case INT_FALLING : attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, FALLING);
-		// 	case INT_CHANGE  : attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, CHANGE);
-		// }
 		attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, (int_settings[pin].type<5) ? int_settings[pin].type : 0 );
-
 	}
 }
 
@@ -296,7 +277,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_relative(uint days, uint hours, uint minu
 bool Loom_Interrupt_Manager::RTC_alarm_exact(DateTime future_time)
 {
 	// Don't sleep if no RTC to wake up device
-	if (RTC_Inst == NULL) {
+	if (RTC_Inst == nullptr) {
 		return false;
 	}
 
@@ -337,7 +318,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_exact(DateTime future_time)
 bool Loom_Interrupt_Manager::RTC_alarm_exact(uint hour, uint minute, uint second)
 {
 	// Don't sleep if no RTC to wake up device
-	if (RTC_Inst == NULL) {
+	if (RTC_Inst == nullptr) {
 		return false;
 	}
 
@@ -401,3 +382,13 @@ void Loom_Interrupt_Manager::clear_timer(uint timer_num)
 
 
 
+// probably not necessary anymore
+
+// Attach default interrupt with specified type
+// switch( type ) {
+// 	case INT_LOW     : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, LOW); break;
+// 	case INT_HIGH    : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, HIGH); break; 
+// 	case INT_CHANGE  : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, CHANGE); break;
+// 	case INT_FALLING : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, FALLING); break;
+// 	case INT_RISING  : attachInterrupt(digitalPinToInterrupt(pin), tmpISR, RISING); break;
+// }

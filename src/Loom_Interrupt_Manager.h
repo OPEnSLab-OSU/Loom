@@ -9,6 +9,16 @@
 #include <AsyncDelay.h>
 
 
+
+#define InteruptRange 16
+
+
+#define MaxTimerCount 4
+#define MaxStopWatchCount 2
+
+
+
+
 class LoomRTC; // Specify that LoomRTC exists, defined in own file
 
 
@@ -20,10 +30,12 @@ typedef void (*ISRFuncPtr)();
 
 
 
-
+// currently not used
 // enum IntType { INT_LOW, INT_HIGH, INT_CHANGE, INT_FALLING, INT_RISING };
 
 
+
+/// Contains information defining an interrupt's configuration
 struct IntDetails {
 	ISRFuncPtr	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
 	byte		type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
@@ -31,6 +43,7 @@ struct IntDetails {
 	bool		enabled;		///< Whether or not this interrupt is enabled
 };
 
+/// Contains information defining a timer's configuration
 struct TimerDetails {
 	ISRFuncPtr	ISR;			///< Not a real ISR, just a function called if timer has expired
 	uint		duration;		///< The timer duration
@@ -38,17 +51,13 @@ struct TimerDetails {
 	bool		enabled;		///< Whether or not this timer is enabled
 };
 
+/// Contains information defining a stopwatch's configuration
 struct StopWatchDetails {
 	unsigned long	start_time;		///< The millis time when stopwatch started
 	bool			enabled;		///< Whether or not this stopwatch is enabled
 };
 
 
-#define InteruptRange 16
-
-
-#define MaxTimerCount 4
-#define MaxStopWatchCount 2
 
 
 
@@ -75,6 +84,7 @@ protected:
 
 
 
+// millis timers
 	AsyncDelay		timers[MaxTimerCount];
 	TimerDetails	timer_settings[MaxTimerCount];
 
@@ -89,7 +99,7 @@ public:
 	Loom_Interrupt_Manager( 
 			char*		module_name		= "Interrupt_Manager",
 
-			LoomRTC*	RTC_Inst		= NULL
+			LoomRTC*	RTC_Inst		= nullptr
 		);
 
 
@@ -179,12 +189,10 @@ public:
 	bool		RTC_alarm_relative(uint days, uint hours, uint minutes, uint seconds);
 	
 
-// maybe remove these 2 (leave in Sleep manager)
+// maybe remove these 2 (leave in Sleep manager) ? - perhaps not
 	// bool set_RTC_alarm_for_time_from_last_alarm_time(TimeSpan duration);
 	// bool set_RTC_alarm_for_time_from_last_alarm_time(uint days, uint hours, uint minutes, uint seconds);
 	
-
-
 
 	/// Set RTC alarm for a specific time.
 	/// Increments to next day at given hour, min, sec if specified time is in past
@@ -200,8 +208,6 @@ public:
 	
 
 
-
-
 // === === AsyncDelay Timer Functions === ===
 
 
@@ -215,10 +221,17 @@ public:
 	void		clear_timer(uint timer_num);
 
 
+
+
 // === === Stopwatch Functions === ===
 
 
 
+
+// === === Internal Timer Functions === ===
+
+
+	// https://github.com/GabrielNotman/RTCCounter
 
 
 private:

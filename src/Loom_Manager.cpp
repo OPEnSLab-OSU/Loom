@@ -114,7 +114,7 @@ void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager)
 
 	interrupt_manager->link_device_manager(this);
 
-	// if (rtc_module != NULL) {
+	// if (rtc_module != nullptr) {
 	// 	this->interrupt_manager->set_RTC_module(rtc_module);
 	// }
 }
@@ -132,7 +132,7 @@ void LoomManager::add_module(Loom_Sleep_Manager* sleep_manager)
 
 	sleep_manager->link_device_manager(this);
 
-	// if (rtc_module != NULL) {
+	// if (rtc_module != nullptr) {
 	// 	this->sleep_manager->set_RTC_module(rtc_module);
 	// }
 
@@ -147,11 +147,11 @@ void LoomManager::add_module(LoomRTC* rtc)
 	rtc_module = rtc;
 	// add_module_aux( (LoomModule**)rtc_modules, (LoomModule*)rtc, rtc_count, MAX_RTCS );
 	
-	if (rtc != NULL) {
-		if (interrupt_manager != NULL) {
+	if (rtc != nullptr) {
+		if (interrupt_manager != nullptr) {
 			interrupt_manager->set_RTC_module(rtc);
 		}
-		if (sleep_manager != NULL) {
+		if (sleep_manager != nullptr) {
 			sleep_manager->set_RTC_module(rtc);
 		}
 	}
@@ -168,7 +168,7 @@ void LoomManager::add_module(LoomRTC* rtc)
 // 	Println2("Adding Module: ", sleep_manager->get_module_name() );
 // 	this->sleep_manager = sleep_manager; 
 
-// 	if (rtc_module != NULL) {
+// 	if (rtc_module != nullptr) {
 // 		this->sleep_manager->set_RTC_module(rtc_module);
 // 	}
 
@@ -234,37 +234,37 @@ LoomRTC* LoomManager::get_rtc_module()
 /////////////////////////////////////////////////////////////////////
 LoomModule* LoomManager::get_other_module(int idx)
 {
-	return (idx < other_module_count) ? other_modules[idx] : NULL;
+	return (idx < other_module_count) ? other_modules[idx] : nullptr;
 }
 
 /////////////////////////////////////////////////////////////////////
 LoomSensor* LoomManager::get_sensor_module(int idx)
 {
-	return (idx < sensor_count) ? sensor_modules[idx] : NULL;
+	return (idx < sensor_count) ? sensor_modules[idx] : nullptr;
 }
 
 /////////////////////////////////////////////////////////////////////
 LoomActuator* LoomManager::get_actuator_module(int idx)
 {
-	return (idx < actuator_count) ? actuator_modules[idx] : NULL;
+	return (idx < actuator_count) ? actuator_modules[idx] : nullptr;
 }
 
 /////////////////////////////////////////////////////////////////////
 LoomCommPlat* LoomManager::get_comm_plat_module(int idx)
 {
-	return (idx < comm_count) ? comm_modules[idx] : NULL;
+	return (idx < comm_count) ? comm_modules[idx] : nullptr;
 }
 
 /////////////////////////////////////////////////////////////////////
 LoomInternetPlat* LoomManager::get_internet_plat_module(int idx)
 {
-	return (idx < internet_count) ? internet_modules[idx] : NULL;
+	return (idx < internet_count) ? internet_modules[idx] : nullptr;
 }
 
 /////////////////////////////////////////////////////////////////////
 LoomLogPlat* LoomManager::get_log_plat_module(int idx)
 {
-	return (idx < log_count) ? log_modules[idx] : NULL;
+	return (idx < log_count) ? log_modules[idx] : nullptr;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -276,7 +276,7 @@ void LoomManager::list_modules_aux(LoomModule** modules, uint len, char* module_
 {
 	Println5("\t", module_type, " (", len, "):");
 	for (int i = 0; i < len; i++) {
-		if ( (modules[i] != NULL) && (modules[i]->get_active()) ) {
+		if ( (modules[i] != nullptr) && (modules[i]->get_active()) ) {
 			Println4( "\t\t[", (modules[i]->get_active()) ? "+" : "-" , "] ", modules[i]->get_module_name() );
 		}
 	}	
@@ -288,7 +288,7 @@ void LoomManager::list_modules()
 	print_device_label();
 	Println("Modules:");
 
-	// if ( (rtc_module != NULL) && (rtc_module[i]->get_active()) ) {
+	// if ( (rtc_module != nullptr) && (rtc_module[i]->get_active()) ) {
 	// 		Println4( "\t\t[", (rtc_module[i]->get_active()) ? "+" : "-" , "] ", rtc_module[i]->get_module_name() );
 	// 	}
 
@@ -440,7 +440,7 @@ void LoomManager::set_package_verbosity(Verbosity v)
 void LoomManager::measure_aux(LoomModule** modules, uint len)
 {
 	for (int i = 0; i < len; i++) {
-		if ( (modules[i] != NULL) && (modules[i]->get_active()) ) {
+		if ( (modules[i] != nullptr) && (modules[i]->get_active()) ) {
 			modules[i]->measure();
 		}
 	}	
@@ -450,7 +450,7 @@ void LoomManager::measure_aux(LoomModule** modules, uint len)
 void LoomManager::package_aux(LoomModule** modules, uint len)
 {
 	for (int i = 0; i < len; i++) {
-		if ( (modules[i] != NULL) && ( modules[i]->get_active() ) ){
+		if ( (modules[i] != nullptr) && ( modules[i]->get_active() ) ){
 			modules[i]->package( bundle );
 		}
 	}	
