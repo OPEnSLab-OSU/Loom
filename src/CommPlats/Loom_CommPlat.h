@@ -13,6 +13,8 @@ enum class CommPlatform {
 	NRF,		///< Nordic Radio
 	SSER 		///< Slip Serial
 };
+
+
 // enum CommScope { SCOPE_DEVICE, SCOPE_SUBNET, SCOPE_FAMILY, SCOPE_SUBNET_ONLY, SCOPE_FAMILY_ONLY, SCOPE_ANY };
 
 
@@ -53,6 +55,9 @@ public:
 
 
 	static char*	enum_comm_plat_string(CommPlatform c);
+	static CommPlatform string_to_enum_comm_plat(const char* s);
+
+
 	// static char* enum_subnet_scope_string(CommScope s);
 
 	// General

@@ -5,9 +5,9 @@
 char* LoomInternetPlat::enum_internet_plat_string(InternetPlatform p)
 {
 	switch(p) {
-		case InternetPlatform::WIFI     : return "WiFi";
-		case InternetPlatform::ETHERNET     : return "Ethernet";
-		case InternetPlatform::CELLULAR_2G  : return "Cellular";
+		case INT_WIFI			: return "WiFi";
+		case INT_ETHERNET		: return "Ethernet";
+		case INT_CELLULAR_2G	: return "Cellular";
 	}
 }
 

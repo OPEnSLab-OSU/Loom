@@ -5,7 +5,11 @@
 #include "Loom_Module.h"
 
 
-enum InternetPlatform { WIFI, ETHERNET, CELLULAR_2G };
+enum InternetPlatform { 
+	INT_WIFI, 
+	INT_ETHERNET, 
+	INT_CELLULAR_2G
+};
 
 
 

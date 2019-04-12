@@ -60,8 +60,8 @@ protected:
 public:
 
 	const static char* enum_oled_version_string(OLED_Version v);
-	const static char* enum_oled_format(OLED_Format f);
-	const static char* enum_oled_freeze(OLED_Freeze f);
+	const static char* enum_oled_format_string(OLED_Format f);
+	const static char* enum_oled_freeze_string(OLED_Freeze f);
 
 
 	// --- CONSTRUCTOR ---

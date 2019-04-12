@@ -23,7 +23,6 @@ char* LoomCommPlat::enum_comm_plat_string(CommPlatform c)
 }
 
 
-
 // char* LoomCommPlat::enum_subnet_scope_string(CommScope s)
 // {
 // 	switch(s) {

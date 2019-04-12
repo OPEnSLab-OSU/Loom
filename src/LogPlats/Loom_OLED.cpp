@@ -15,7 +15,7 @@ const char* Loom_OLED::enum_oled_version_string(OLED_Version v)
 }
 
 /////////////////////////////////////////////////////////////////////
-const char* Loom_OLED::enum_oled_format(OLED_Format f)
+const char* Loom_OLED::enum_oled_format_string(OLED_Format f)
 {
 	switch(f) {
 		case OLED_Format::FOUR   : return "OLED 4 Elements";
@@ -25,7 +25,7 @@ const char* Loom_OLED::enum_oled_format(OLED_Format f)
 }
 
 /////////////////////////////////////////////////////////////////////
-const char* Loom_OLED::enum_oled_freeze(OLED_Freeze f)
+const char* Loom_OLED::enum_oled_freeze_string(OLED_Freeze f)
 {
 	switch(f) {
 		case OLED_Freeze::DISABLE : return "Freeze Disabled";
@@ -33,6 +33,7 @@ const char* Loom_OLED::enum_oled_freeze(OLED_Freeze f)
 		case OLED_Freeze::SCROLL  : return "Freeze Scroll";
 	}
 }
+
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
@@ -88,11 +89,11 @@ void Loom_OLED::print_config()
 		Println3('\t', "Reset Pin           : ", this->reset_pin );		
 	}
 
-	Println3('\t', "Display Format      : ", enum_oled_format(this->display_format) );
+	Println3('\t', "Display Format      : ", enum_oled_format_string(this->display_format) );
 	if (this->display_format == OLED_Format::SCROLL) {
 		Println3('\t', "Scroll Duration     : ", this->scroll_duration );
 	}
-	Println3('\t', "Freeze Behavior     : ", enum_oled_freeze(this->freeze_behavior) );
+	Println3('\t', "Freeze Behavior     : ", enum_oled_freeze_string(this->freeze_behavior) );
 	if (this->freeze_behavior != OLED_Freeze::DISABLE) {
 		Println3('\t', "Freeze Pin          : ", this->freeze_pin );
 	}
