@@ -83,7 +83,6 @@ protected:
 	DateTime		last_alarm_time;
 
 
-
 // millis timers
 	AsyncDelay		timers[MaxTimerCount];
 	TimerDetails	timer_settings[MaxTimerCount];
@@ -107,8 +106,8 @@ public:
 	~Loom_Interrupt_Manager();
 
 	// Inherited methods
-	void		print_config();
-	void		print_state();
+	void		print_config() override;
+	void		print_state() override;
 	void		measure() {}
 	void		package(OSCBundle& bndl, char* suffix="") {}
 	bool		message_route(OSCMessage& msg, int address_offset) {}

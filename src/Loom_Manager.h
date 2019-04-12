@@ -160,7 +160,7 @@ public:
 
 
 
-	// Over loaded as to sort by module type
+	// Overloaded as to sort by module type
 	void		add_module(Loom_Interrupt_Manager* interrupt_manager); 
 	void		add_module(Loom_Sleep_Manager* sleep_manager);
 
