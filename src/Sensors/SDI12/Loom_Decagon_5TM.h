@@ -5,7 +5,9 @@
 #include "Loom_SDI12_Sensor.h"
 
 
+// # (LoomSDI12Sensor) | dependencies: [] | conflicts: []
 /// Decagon 5TM soil moisture sensor module
+// #
 class Loom_Decagon5TM : public LoomSDI12Sensor
 {
 
@@ -14,10 +16,15 @@ protected:
 
 public:
 
+	/// Decagon 5TM module constructor
+	///
+	/// \param[in]	module_name			String | <"5TM"> | Decagon 5TM manager module name
+	/// \param[in]	sensor_description	String | <"5TM Decagon"> | Debugging display description of module
+	/// \param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
 	Loom_Decagon5TM(	
-			char*		module_name			=  "5TM Decagon",// DECAGON_5TM_Module_Name,
-			char*		sensor_description	=  "Soil Moisture", // DECAGON_5TM_Sensor_Description,
-			uint8_t		num_samples			= 1 // DECAGON_5TM_Num_Samples 
+			char*		module_name			= "5TM Decagon",
+			char*		sensor_description	= "Soil Moisture",
+			uint8_t		num_samples			= 1
 		);
 
 

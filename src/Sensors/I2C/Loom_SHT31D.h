@@ -7,7 +7,9 @@
 #include "Adafruit_SHT31.h"
 
 
+// # (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// SHT31D Temperature / Humidty sensor module
+// #
 class Loom_SHT31D : public LoomI2CSensor
 {
 
@@ -23,12 +25,15 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+	/// SHT31D module constructor
+	///
+	/// \param[in]	i2c_address				Set(Int) | <0x44> | {0x44, 0x45} | I2C address
+	/// \param[in]	module_name				String | <"SHT31D"> | SHT31D module name					
+	/// \param[in]	sensor_description		String | <"Temperature/Humidty"> | Debugging display description of module
 	Loom_SHT31D(	
-			byte		i2c_address				=  0x44, // 0x44, 0x45  // SHT31D_I2C_Address,
-			
-			char*		module_name				=  "SHT31D",  // SHT31D_Module_Name,
-			char*		sensor_description		= "Temperature/Humidty"   // SHT31D_Sensor_Description 
+			byte		i2c_address				= 0x44,
+			char*		module_name				= "SHT31D",
+			char*		sensor_description		= "Temperature/Humidty"
 		);
 
 	// --- DESTRUCTOR ---

@@ -7,7 +7,9 @@
 #include <Adafruit_TSL2591.h>
 
 
+// # (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// TSL2591 Lux sensor module
+// #
 class Loom_TSL2591 : public LoomI2CSensor
 {
 
@@ -30,15 +32,19 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+	/// TSL2591 module constructor
+	///
+	/// \param[in]	i2c_address				Set(Int) | <0x29> | {0x29} | I2C address
+	/// \param[in]	module_name				String | <"TSL2591"> | TSL2591 module name					
+	/// \param[in]	sensor_description		String | <"Lux"> | Debugging display description of module
+	/// \param[in]	gain					Set(Int) | <1> | { 1 } | Gain level
+	/// \param[in]	timing_level			Set(Int) | <0> | { 0 } | Timing level
 	Loom_TSL2591(	
-			byte		i2c_address				=   0x29,    // TSL2591_I2C_Address,
-			
-			char*		module_name				=   "TSL2591",    // TSL2591_Module_Name,
-			char*		sensor_description		=   "Lux",    // TSL2591_Sensor_Description,
-
-			uint8_t		gain_level				=   1, // document     // TSL2591_Gain_Level,
-			uint8_t		timing_level			= 	0  // document    // TSL2591_Timing_Level 
+			byte		i2c_address				= 0x29,
+			char*		module_name				= "TSL2591",
+			char*		sensor_description		= "Lux",
+			uint8_t		gain_level				= 1,
+			uint8_t		timing_level			= 0
 		);
 
 

@@ -14,8 +14,7 @@ Loom_MAX31856::Loom_MAX31856(
 		uint8_t		SPI_b,
 		uint8_t		SPI_c,
 		uint8_t		SPI_d
-
-						  ) : LoomSPISensor( module_name, sensor_description, num_samples ) 
+	) : LoomSPISensor( module_name, sensor_description, num_samples ) 
 {
 
 	// Hardware Serial

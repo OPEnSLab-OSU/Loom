@@ -7,7 +7,9 @@
 #include <MS5803_02.h> 
 
 
+// # (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// MS5803 Atmospheric Pressure / Temperature sensor module
+// #
 class Loom_MS5803 : public LoomI2CSensor
 {
 
@@ -27,12 +29,15 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+	/// MS5803 module constructor
+	///
+	/// \param[in]	i2c_address				Set(Int) | <0x76> | {0x76, 0x77} | I2C address (0x76 if CSB (pin 3) is High, 0x77 if CSB is Low)
+	/// \param[in]	module_name				String | <"MS5803"> | MS5803 module name					
+	/// \param[in]	sensor_description		String | <"Atmospheric Pressure / Temperature"> | Debugging display description of module
 	Loom_MS5803(	
-			byte		i2c_address				=  0x77, // 0x76 if CSB (pin 3) is High, 0x77 if CSB is Low // MS5803_I2C_Address,
-			
-			char*		module_name				=  "MS5803", // MS5803_Module_Name,
-			char*		sensor_description		= "Atmospheric Pressure / Temperature"  // MS5803_Sensor_Description 
+			byte		i2c_address				= 0x76,
+			char*		module_name				= "MS5803",
+			char*		sensor_description		= "Atmospheric Pressure / Temperature"
 		);
 
 	// --- DESTRUCTOR ---

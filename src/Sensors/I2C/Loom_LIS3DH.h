@@ -7,7 +7,9 @@
 #include "SparkFunLIS3DH.h"
 
 
+// # (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// LIS3DH Accelerometer sensor module
+// #
 class Loom_LIS3DH : public LoomI2CSensor
 {
 
@@ -21,12 +23,16 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+
+	/// LIS3DH module constructor
+	///
+	/// \param[in]	i2c_address				Set(Int) | <0x19> | {0x19} | I2C address
+	/// \param[in]	module_name				String | <"LIS3DH"> | LIS3DH module name					
+	/// \param[in]	sensor_description		String | <"Acceleromter"> | Debugging display description of module
 	Loom_LIS3DH(	
-			byte		i2c_address				=  0x19,  // LIS3DH_I2C_Address,
-			
-			char*		module_name				=  "LIS3DH",  // LIS3DH_Module_Name,
-			char*		sensor_description		= "Accelerometer"   // LIS3DH_Sensor_Description 
+			byte		i2c_address				= 0x19,
+			char*		module_name				= "LIS3DH",
+			char*		sensor_description		= "Accelerometer"
 		);
 
 	// --- DESTRUCTOR ---

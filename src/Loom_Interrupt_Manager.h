@@ -59,8 +59,9 @@ struct StopWatchDetails {
 
 
 
-
+// # (LoomModule) | dependencies: [] | conflicts: []
 /// Submanager for managing interrupts, timers, and stopwatches
+// #
 class Loom_Interrupt_Manager : public LoomModule
 {
 
@@ -94,10 +95,12 @@ protected:
 	// interrupt_triggered for timers, also support immediate and delayed
 public:
 
-	// --- CONSTRUCTOR ---
+	/// Interrupt Manager module constructor.
+	/// 
+	/// \param[in]	module_name			String | <"Interrupt-Manager"> | Interrupt Manager module name
+	/// \param[in]	RTC_Inst			Set(Int) | <0> | {0("Null")} | OLED module name
 	Loom_Interrupt_Manager( 
 			char*		module_name		= "Interrupt_Manager",
-
 			LoomRTC*	RTC_Inst		= nullptr
 		);
 

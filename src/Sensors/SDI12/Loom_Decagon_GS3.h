@@ -5,7 +5,9 @@
 #include "Loom_SDI12_Sensor.h"
 
 
+// # (LoomSDI12Sensor) | dependencies: [] | conflicts: []
 /// Decagon GS3 Soil Moisture sensor module
+// #
 class Loom_DecagonGS3 : public LoomSDI12Sensor
 {
 
@@ -20,10 +22,15 @@ protected:
 
 public:
 
+	/// Decagon GS3 module constructor
+	///
+	/// \param[in]	module_name			String | <"GS3"> | Decagon GS3 manager module name
+	/// \param[in]	sensor_description	String | <"GS3 Decagon"> | Debugging display description of module
+	/// \param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
 	Loom_DecagonGS3(	
-			char*		module_name			=  "GS3 Decagon",// DECAGON_GS3_Module_Name,
-			char*		sensor_description	=  "Soil Moisture", // DECAGON_GS3_Sensor_Description,
-			uint8_t		num_samples			= 1 // DECAGON_GS3_Num_Samples 
+			char*		module_name			= "GS3 Decagon",
+			char*		sensor_description	= "Soil Moisture",
+			uint8_t		num_samples			= 1
 		);
 
 

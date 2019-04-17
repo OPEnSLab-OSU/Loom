@@ -55,7 +55,9 @@ class LoomLogPlat;
 #define MAX_LOGS          5
 
 
+// # () | dependencies: [] | conflicts: []
 /// Manager class to simplify with enabled modules
+// #
 class LoomManager
 {
 
@@ -114,22 +116,26 @@ protected:
 
 public:
 
-
 	const static char* enum_device_type_string(DeviceType t);
 
 
-	// --- CONSTRUCTOR ---
-								// The parameters to the constructor will be defined in config
+	/// Loom Manager constructor.
+	/// 
+	/// \param[in]	device_name			String | <"Default"> | Manager name
+	/// \param[in]	family				String | <"Loom"> | Which family the device belongs to
+	/// \param[in]	family_num			Int | <1> | [0-99] | Which family subnet the device belongs to
+	/// \param[in]	instance			Int | <1> | [0-99] | Device instance number on its subnet
+	/// \param[in]	type				Set(DeviceType) | <1> | {0("Hub"), 1("Node"), 2("Repeater")} | Device's topological type
+	/// \param[in]	type				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
+	/// \param[in]	type				Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed OSC bundles are
 	LoomManager(
 			char*		device_name			= "Default",
 			char*		family				= "Loom",
 			uint		family_num			= 1,
 			uint		instance			= 1,
-
 			DeviceType	device_type			= DeviceType::NODE,
-
 			Verbosity	print_verbosity		= Verbosity::V_HIGH,
-			Verbosity	package_verbosity	= Verbosity::V_LOW    // Set high to include non sensors in package 
+			Verbosity	package_verbosity	= Verbosity::V_LOW
 		);
 
 	// --- DESTRUCTOR ---

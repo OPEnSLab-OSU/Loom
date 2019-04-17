@@ -6,7 +6,9 @@
 #include "Loom_I2C_Sensor.h"
 
 
+// # (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// MB1232 Sonar sensor module
+// #
 class Loom_MB1232 : public LoomI2CSensor
 {
 
@@ -17,12 +19,15 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+	/// MB1232 module constructor
+	///
+	/// \param[in]	i2c_address				Set(Int) | <0x70> | {0x70} | I2C address
+	/// \param[in]	module_name				String | <"MB1232"> | MB1232 module name					
+	/// \param[in]	sensor_description		String | <"Sonar"> | Debugging display description of module
 	Loom_MB1232(	
-			byte		i2c_address				=  0x70, // 0x70   // MB1232_I2C_Address,
-			
-			char*		module_name				= "MB1232",   // MB1232_Module_Name,
-			char*		sensor_description		= "Sonar"    // MB1232_Sensor_Description 
+			byte		i2c_address				= 0x70,
+			char*		module_name				= "MB1232",
+			char*		sensor_description		= "Sonar"
 		);
 
 	// --- DESTRUCTOR ---

@@ -27,8 +27,9 @@ enum class SleepMode {
 };
 
 
-
+// # (LoomModule) | dependencies: [] | conflicts: []
 /// Submanager to manage sleep functionality 
+// #
 class Loom_Sleep_Manager : public LoomModule
 {
 
@@ -56,17 +57,23 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+	/// Sleep Manager module constructor.
+	/// 
+	/// \param[in]	module_name			String | <"Sleep-Manager"> | Sleep Manager module name
+	/// \param[in]	RTC_Inst			Set(Int) | <0> | {0("Null")} | OLED module name
+	/// \param[in]	use_LED				Bool | <true> | Whether or not to use LED to indicate wake state
+	/// \param[in]	delay_on_wake		Bool | <false> | Whether or not to delay upon waking to allow time to open Serial Monitor
+	/// \param[in]	sleep_mode			Set(SleepMode) | <1> | { 0("Idle"), 1("Standby"), 2("SleepyDog"), 3("Opens Low Power")} | Which SleepMode to use
 	Loom_Sleep_Manager( 
-			char*		module_name			= "Sleep_Manager",
-				
-			LoomRTC*	RTC_Inst			= nullptr,
+		char*		module_name			= "Sleep_Manager",
+			
+		LoomRTC*	RTC_Inst			= nullptr,
 
-			bool		use_LED				= true,
-			bool		delay_on_wake		= false,
+		bool		use_LED				= true,
+		bool		delay_on_wake		= false,
 
-			SleepMode	sleep_mode			= SleepMode::STANDBY
-		);
+		SleepMode	sleep_mode			= SleepMode::STANDBY
+	);
 
 	// Loom_Sleep_Manager( char* module_name, LoomManager* LD );
 

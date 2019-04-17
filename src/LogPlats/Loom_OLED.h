@@ -65,7 +65,6 @@ public:
 	const static char* enum_oled_freeze_string(OLED_Freeze f);
 
 
-
 	/// OLED module constructor.
 	/// 
 	/// \param[in]	module_name			String | <"OLED"> | OLED module name

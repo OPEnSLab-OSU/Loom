@@ -49,14 +49,10 @@ enum class I2C_Selection {
 
 
 
-
-
-
-
-
-
+// # (LoomModule) | dependencies: [] | conflicts: []
 /// Multiplexer manager for interfacing with 
 /// multiple I2C sensors 
+// #
 class Loom_Multiplexer : public LoomModule
 {
 private:
@@ -86,14 +82,20 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+
+	/// Multiplexer module constructor.
+	/// 
+	/// \param[in]	module_name			String | <"Multiplexer"> | Multiplexer module name
+	/// \param[in]	i2c_address			Set(Int) | <0x71> | {0x71} | I2C address
+	/// \param[in]	min_filter_delay	Int | <8> | [1-8] | Minimum update delay, if enable_rate_filter enabled
+	/// \param[in]	dynamic_list		Bool | <true> | Whether or not to automatically check for new sensors
+	/// \param[in]	update_period		Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
 	Loom_Multiplexer(	
 			char*		module_name			= "Multiplexer",
-
 			byte		i2c_address			= 0x71,
 			uint		num_ports			= 8,
 			bool		dynamic_list		= true,
-			uint		update_period		= 5000 // find way to make this call interrupt class to manage timing
+			uint		update_period		= 5000
 		);
 
 
