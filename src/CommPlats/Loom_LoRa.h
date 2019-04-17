@@ -25,8 +25,9 @@
 #define LORA_SELF_ADDRESS   01
 #define LORA_FRIEND_ADDRESS 00
 
-
+// # (LoomCommPlat) | dependencies: [] | conflicts: []
 /// LoRa communication platform module
+// #
 class Loom_LoRa : public LoomCommPlat
 {
 
@@ -53,9 +54,9 @@ public:
 
 	/// LoRa module constructor
 	///
-	/// \param[in]	module_name				String <"LoRa"> | LoRa module name	
-	/// \param[in]	max_message_len			Set(Int) {255("Max length")} <255> | The maximum possible message length
-	/// \param[in]	compress_messages		Bool <true> | Whether or not to try to compress messages
+	/// \param[in]	module_name				String | <"LoRa"> | LoRa module name	
+	/// \param[in]	max_message_len			Set(Int) | <255> | {255("Max length")} | The maximum possible message length
+	/// \param[in]	compress_messages		Bool | <true> | Whether or not to try to compress messages
 	/// \param[in]	address					Int [0-99] <01> | This device's LoRa address
 	/// \param[in]	friend_address			Int [0-99] <00> | Default LoRa address to send to
 	/// \param[in]	power_level				Int [5-23] <23> | Transmission power level, low to high power

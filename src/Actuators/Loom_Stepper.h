@@ -13,7 +13,9 @@
 #define NUM_STEPPERS 4
 
 
+// # (LoomActuator) | dependencies: [] | conflicts: []
 /// Stepper actuator module
+// #
 class Loom_Stepper : public LoomActuator
 {
 
@@ -32,8 +34,8 @@ public:
 
 	/// Stepper module constructor
 	///
-	/// \param[in]	module_name		String <"Stepper"> | Stepper module name	
-	/// \param[in]	servo_count		Int [1-2] <2> | How many steppers to enable
+	/// \param[in]	module_name		String | <"Stepper"> | Stepper module name	
+	/// \param[in]	servo_count		Int | <2> | [1-2] | How many steppers to enable
 	Loom_Stepper( 
 			char*		module_name		= "Stepper" ,
 			uint8_t		stepper_count	= NUM_STEPPERS

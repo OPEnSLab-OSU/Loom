@@ -11,8 +11,9 @@
 /// Dependent on servo controller breakout.
 #define NUM_SERVOS 8
 
-
+// # (LoomActuator) | dependencies: [] | conflicts: []
 /// Servo actuator module
+// #
 class Loom_Servo : public LoomActuator
 {
 
@@ -31,8 +32,8 @@ public:
 
 	/// Servo module constructor
 	///
-	/// \param[in]	module_name		String <"Servo"> | Servo module name	
-	/// \param[in]	servo_count		Int [1-8] <8> | How many servos to enable
+	/// \param[in]	module_name		String | <"Servo"> | Servo module name	
+	/// \param[in]	servo_count		Int | <8> | [1-8] | How many servos to enable
 	Loom_Servo( 
 			char*		module_name		= "Servo",
 

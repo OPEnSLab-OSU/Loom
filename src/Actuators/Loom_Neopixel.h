@@ -7,8 +7,9 @@
 
 #include <Adafruit_NeoPixel.h>
 
-
+// # (LoomActuator) | dependencies: [] | conflicts: []
 /// Neopixel tri-color LED actuator module
+// #
 class Loom_Neopixel : public LoomActuator
 {
 
@@ -27,10 +28,10 @@ public:
 	
 	/// Neopixel module constructor
 	///
-	/// \param[in]	module_name		String <"Neopixel"> | Neopixel module name
-	/// \param[in]	enableA0		Bool <false> | Whether or not to use pin A0 for Neopixel
-	/// \param[in]	enableA1		Bool <false> | Whether or not to use pin A1 for Neopixel
-	/// \param[in]	enableA2		Bool <true> | Whether or not to use pin A2 for Neopixel
+	/// \param[in]	module_name		String | <"Neopixel"> | Neopixel module name
+	/// \param[in]	enableA0		Bool | <false> | Whether or not to use pin A0 for Neopixel
+	/// \param[in]	enableA1		Bool | <false> | Whether or not to use pin A1 for Neopixel
+	/// \param[in]	enableA2		Bool | <true> | Whether or not to use pin A2 for Neopixel
 	Loom_Neopixel( 	
 			char*	module_name		= "Neopixel",
 			bool	enableA0		= false,

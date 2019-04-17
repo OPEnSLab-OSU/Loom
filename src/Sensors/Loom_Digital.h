@@ -10,8 +10,9 @@
 // Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
 
 
-
+// # (LoomSensor) | dependencies: [] | conflicts: []
 /// Digital pin manager module
+// #
 class Loom_Digital : public LoomSensor
 {
 
@@ -24,24 +25,39 @@ protected:
 	bool		digital_vals[DIGITAL_COUNT];
 
 public:
-	// --- CONSTRUCTOR ---
+
+
+	/// Digital manager module constructor
+	/// 
+	/// \param[in]	module_name			String | <"Digital"> | Digital manager module name
+	/// \param[in]	sensor_description	String | <"Digital values"> | Debugging display description of module
+	/// \param[in]	enable5				Bool | <true> | Enable pin 5 for managing
+	/// \param[in]	enable6				Bool | <true> | Enable pin 6 for managing
+	/// \param[in]	enable9				Bool | <false> | Enable pin 9 for managing
+	/// \param[in]	enable10			Bool | <false> | Enable pin 10 for managing
+	/// \param[in]	enable11			Bool | <false> | Enable pin 11 for managing
+	/// \param[in]	enable12			Bool | <false> | Enable pin 12 for managing
+	/// \param[in]	enableA0			Bool | <false> | Enable pin A0 for managing
+	/// \param[in]	enableA1			Bool | <false> | Enable pin A1 for managing
+	/// \param[in]	enableA2			Bool | <false> | Enable pin A2 for managing
+	/// \param[in]	enableA3			Bool | <false> | Enable pin A3 for managing
+	/// \param[in]	enableA4			Bool | <false> | Enable pin A4 for managing
+	/// \param[in]	enableA5			Bool | <false> | Enable pin A5 for managing
 	Loom_Digital(	
-			char*	module_name			= "Digital",	//DIGITAL_MODULE_NAME  // DIGITAL_Module_Name,
-			char*	sensor_description	= "Digital Values",  // DIGITAL_Sensor_Description,
-
-			bool	enable5				= true,  // DIGITAL_Enable5,
-			bool	enable6				= true,  // DIGITAL_Enable6,
-			bool	enable9				= false,  // DIGITAL_Enable9,
-			bool	enable10			= false,  // DIGITAL_Enable10,
-			bool	enable11			= false,  // DIGITAL_Enable11,
-			bool	enable12			= false,  // DIGITAL_Enable12,
-
-			bool	enableA0			= false,  // DIGITAL_EnableA0,
-			bool	enableA1			= false,  // DIGITAL_EnableA1,
-			bool	enableA2			= false,  // DIGITAL_EnableA2,
-			bool	enableA3			= false,  // DIGITAL_EnableA3,
-			bool	enableA4			= false,  // DIGITAL_EnableA4,
-			bool	enableA5			= false  // DIGITAL_EnableA5 
+			char*	module_name			= "Digital",
+			char*	sensor_description	= "Digital Values",
+			bool	enable5				= true,
+			bool	enable6				= true,
+			bool	enable9				= false,
+			bool	enable10			= false,
+			bool	enable11			= false,
+			bool	enable12			= false,
+			bool	enableA0			= false,
+			bool	enableA1			= false,
+			bool	enableA2			= false,
+			bool	enableA3			= false,
+			bool	enableA4			= false,
+			bool	enableA5			= false
 		);
 
 	// --- DESTRUCTOR ---

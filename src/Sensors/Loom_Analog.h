@@ -38,7 +38,9 @@ enum class AnalogConversion {
 
 
 
+// # (LoomSensor) | dependencies: [] | conflicts: []
 /// Analog pin manager
+// #
 class Loom_Analog : public LoomSensor
 {
 
@@ -63,27 +65,44 @@ protected:
 	AnalogConfig configuration;
 
 public:
-	// --- CONSTRUCTOR ---
-																	// The default parameters will be controlled by config file
+	
+
+	/// Analog manager module constructor
+	/// 
+	/// \param[in]	module_name			String | <"Analog"> | Analog manager module name
+	/// \param[in]	sensor_description	String | <"Analog values"> | Debugging display description of module
+	/// \param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
+	/// \param[in]	read_resolution		Int | 12 | [8-12] | How many bits to read analog values at
+	/// \param[in]	enableA0			Bool | <true> | Enable pin A0 for managing
+	/// \param[in]	enableA1			Bool | <true> | Enable pin A1 for managing
+	/// \param[in]	enableA2			Bool | <true> | Enable pin A2 for managing
+	/// \param[in]	enableA3			Bool | <true> | Enable pin A3 for managing
+	/// \param[in]	enableA4			Bool | <true> | Enable pin A4 for managing
+	/// \param[in]	enableA5			Bool | <true> | Enable pin A5 for managing
+	/// \param[in]	convertA0			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A0
+	/// \param[in]	convertA1			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A1
+	/// \param[in]	convertA2			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A2
+	/// \param[in]	convertA3			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A3
+	/// \param[in]	convertA4			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A4
+	/// \param[in]	convertA5			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A5
+
 	Loom_Analog(	
-			char*			module_name				= "Analog",   // ANALOG_Module_Name,
-			char*			sensor_description		= "Analog Values",  // ANALOG_Sensor_Description,
-			uint8_t			num_samples				= 8,   // ANALOG_Num_Samples,
-
-			uint8_t			read_resolution			= 12,  // ANALOG_Read_Resolution,
-			bool			enableA0				= true,  // ANALOG_EnableA0,
-			bool			enableA1				= true,  // ANALOG_EnableA1,
-			bool			enableA2				= true,  // ANALOG_EnableA2,
-			bool			enableA3				= true,  // ANALOG_EnableA3,
-			bool			enableA4				= true,  // ANALOG_EnableA4,
-			bool			enableA5				= true,  // ANALOG_EnableA5,
-
-			AnalogConversion convertA0				= AnalogConversion::NONE,  // ANALOG_ConvertA0,
-			AnalogConversion convertA1				= AnalogConversion::NONE,  // ANALOG_ConvertA1,
-			AnalogConversion convertA2				= AnalogConversion::NONE,  // ANALOG_ConvertA2,
-			AnalogConversion convertA3				= AnalogConversion::NONE,  // ANALOG_ConvertA3,
-			AnalogConversion convertA4				= AnalogConversion::NONE,  // ANALOG_ConvertA4,
-			AnalogConversion convertA5				= AnalogConversion::NONE  // ANALOG_ConvertA5 
+			char*			module_name				= "Analog",
+			char*			sensor_description		= "Analog Values",
+			uint8_t			num_samples				= 8,
+			uint8_t			read_resolution			= 12,
+			bool			enableA0				= true,
+			bool			enableA1				= true,
+			bool			enableA2				= true,
+			bool			enableA3				= true,
+			bool			enableA4				= true,
+			bool			enableA5				= true,
+			AnalogConversion convertA0				= AnalogConversion::NONE,
+			AnalogConversion convertA1				= AnalogConversion::NONE,
+			AnalogConversion convertA2				= AnalogConversion::NONE,
+			AnalogConversion convertA3				= AnalogConversion::NONE,
+			AnalogConversion convertA4				= AnalogConversion::NONE,
+			AnalogConversion convertA5				= AnalogConversion::NONE
 		);
 
 	// --- DESTRUCTOR ---
