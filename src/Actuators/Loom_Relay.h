@@ -20,11 +20,13 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+	/// Relay module constructor.
+	///
+	/// \param[in]	module_name		String <"Relay"> | Relay module name	
+	/// \param[in]	pin				Set(Int) {5, 6, 9, 10, 11, 12, 13, A0, A1, A2, A3, A4, A5} <10> | Which pin should be used to control the relay
 	Loom_Relay( 
-			char*		module_name		=  "Relay",  // RELAY_Module_Name,
-
-			byte		pin				= 10  // RELAY_Pin 
+			char*		module_name		= "Relay"
+			byte		pin				= 10 
 	   );
 
 	// --- DESTRUCTOR ---

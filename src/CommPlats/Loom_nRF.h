@@ -46,23 +46,29 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+	/// nRF module constructor
+	///
+	/// \param[in]	module_name			String <"OLED"> | OLED module name	
+	/// \param[in]	max_message_len		Set(Int) {120("Max length")} <120> | The maximum possible message length
+	/// \param[in]	compress_messages	Bool <true> | Whether or not to try to compress messages
+	/// \param[in]	address 			Int [0-99] <01> | This device's nRF address
+	/// \param[in]	friend_address 		Int [0-99] <00> | Default nRF address to send to
+	/// \param[in]	data_rate			Set(Int) {0("Default"), 1("250KBPS"), 2("1MBPS"), 3("2MBPS")} <0> | Transmission data rate
+	/// \param[in]	power_level			Set(Int) {0("Default"), 1("Min"), 2("Low"), 3("High"), 4("Max")} <0> | Transmission ower level
+	/// \param[in]	retry_count 		Int [0-15] <3> | Max number of transmission retries 
+	/// \param[in]	retry_timeout 		Int [20-500] <200> | Delay between retransmissions (ms)
+	/// \param[in]	multicast_level		Int [1-3] <1> | How many levels to propogate message through heirarchy
 	Loom_nRF( 	
-			char*		module_name			=  "nRF",   // NRF_Module_Name,
-		
-			uint16_t	max_message_len		=  120,//RH_RF95_MAX_MESSAGE_LEN,   // NRF_Max_Message_Len,
-			// CommScope subnet_scope 		= SCOPE_SUBNET,   // // 
-			bool		compress_messages	=  true,   // NRF_Compress_Messages,
-
-			uint8_t		address 			=  NRF_SELF_ADDRESS,   // NRF_Address,
-			uint8_t		friend_address 		=  NRF_FRIEND_ADDRESS,   // NRF_Friend_Address,
-
-			uint8_t		data_rate			=  1, 	// 0: Default, 1: RF24_250KBPS, 2: RF24_1MBPS, 3: RF24_2MBPS    // NRF_Data_Rate,
-			uint8_t		power_level			=  0,	// 0: Default, 1: RF24_PA_MIN, 2: RF24_PA_LOW, 3: RF24_PA_HIGH, 4: RF24_PA_MAX   // NRF_Power_Level,
-			uint8_t		retry_count 		=  3,   // NRF_Retry_Count,
-			uint16_t	retry_timeout 		=  200,   // NRF_Retry_Timeout,
-
-			uint8_t		multicast_level		= 1   // NRF_Multicast_level 
+			char*		module_name			=  "nRF",
+			uint16_t	max_message_len		=  120,
+			bool		compress_messages	=  true,   
+			uint8_t		address 			=  NRF_SELF_ADDRESS,   
+			uint8_t		friend_address 		=  NRF_FRIEND_ADDRESS,   
+			uint8_t		data_rate			=  1, 	
+			uint8_t		power_level			=  0,	
+			uint8_t		retry_count 		=  3,   
+			uint16_t	retry_timeout 		=  200,   
+			uint8_t		multicast_level		= 1   
 		);
 
 

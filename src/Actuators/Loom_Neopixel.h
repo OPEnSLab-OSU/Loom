@@ -25,19 +25,23 @@ protected:
 
 public:
 	
-	// --- CONSTRUCTOR ---
+	/// Neopixel module constructor
+	///
+	/// \param[in]	module_name		String <"Neopixel"> | Neopixel module name
+	/// \param[in]	enableA0		Bool <false> | Whether or not to use pin A0 for Neopixel
+	/// \param[in]	enableA1		Bool <false> | Whether or not to use pin A1 for Neopixel
+	/// \param[in]	enableA2		Bool <true> | Whether or not to use pin A2 for Neopixel
 	Loom_Neopixel( 	
-			char*	module_name		=  "Neopixel",   // NEOPIXEL_Module_Name,
-
-			bool	enableA0		=  false,   // NEOPIXEL_EnableA0,
-			bool	enableA1		=  false,   // NEOPIXEL_EnableA1,
-			bool	enableA2		= true   // NEOPIXEL_EnableA2 
+			char*	module_name		= "Neopixel",
+			bool	enableA0		= false,
+			bool	enableA1		= false,
+			bool	enableA2		= true
 		);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Neopixel();
 
-	// Inherited (Overriding) Methods
+	// Inherited Methods
 	void		print_config() override;
 	void		print_state();
 	void		package(OSCBundle& bndl, char* suffix="");

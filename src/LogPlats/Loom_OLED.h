@@ -29,8 +29,10 @@ enum class OLED_Freeze {
 	SCROLL 		///< Scroll freezes, data updates
 };
 
-
-/// OLED logging platform module
+// # (LoomLogPlat) | dependencies: [] | conflicts: []
+/// OLED logging platform module.
+/// More info
+// #
 class Loom_OLED : public LoomLogPlat
 {
 
@@ -64,20 +66,29 @@ public:
 	const static char* enum_oled_freeze_string(OLED_Freeze f);
 
 
-	// --- CONSTRUCTOR ---
+	/// OLED module constructor.
+	/// 
+	/// \param[in]	module_name			String | <"OLED"> | OLED module name
+	/// \param[in]	enable_rate_filter	Bool | <true> | Whether or not to impose maximum update rate
+	/// \param[in]	min_filter_delay	Int | <300> | [50-5000] | Minimum update delay, if enable_rate_filter enabled
+	/// \param[in]	type				Set(OLED_Version) | <0> | {0("Featherwing"), 1("Breakout")} | Which version of the OLED is being used
+	/// \param[in]	reset_pin			Set(Int) | <A0> | {5, 6, 9, 10, 11, 12, 13, A0, A1, A2, A3, A4, A5} | | Which pin should be used for reseting. Only applies to breakout version
+	/// \param[in]	display_format		Set(OLED_Format) | <A0> | {0("4 pairs"), 1("8 pairs"), 2("Scrolling")} | How to display the key value pairs of a bundle
+	/// \param[in]	scroll_duration		Int | <6000> | [500-30000] | The time (ms) to complete full scroll cycle if display_format is SCROLL
+	/// \param[in]	freeze_pin			Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, A0, A1, A2, A3, A4, A5} | Which pin should be used to pause the display
+	/// \param[in]	freeze_behavior		Set(OLED_Freeze_Pin) | <2> | {O("Disable"), 1("Pause Data"), 2("Pause Data and Scroll")} | How freezing the display should behave
 	Loom_OLED(	
-			char*				module_name				=  "OLED",     // OLED_Module_Name,
-
-			bool				enable_rate_filter		=  true,     // OLED_Enable_Rate_Filter,
-			uint				min_filter_delay		=  300,     // OLED_Min_Filter_Delay,
-
-			OLED_Version		type					=  OLED_Version::FEATHERWING,     // OLED_Type,
-			byte				reset_pin				=  A2,     // OLED_Reset_Pin,
-			OLED_Format			display_format			=  OLED_Format::SCROLL,     // OLED_Display_Format,
-			uint 				scroll_duration			=  6000,     // OLED_Scroll_Duration,
-			byte				freeze_pin				=  10,					// Common pins might be: 10 (Ishield); 9(A), 6(B), 5(C) (OLED Featherwing buttons)     // OLED_Freeze_Pin,
-			OLED_Freeze			freeze_behavior			= OLED_Freeze::SCROLL     // OLED_Freeze_Behavior 
+			char*				module_name				= "OLED",
+			bool				enable_rate_filter		= true,
+			uint				min_filter_delay		= 300,
+			OLED_Version		type					= OLED_Version::FEATHERWING, 
+			byte				reset_pin				= A2,
+			OLED_Format			display_format			= OLED_Format::SCROLL, 
+			uint 				scroll_duration			= 6000,
+			byte				freeze_pin				= 10,
+			OLED_Freeze			freeze_behavior			= OLED_Freeze::SCROLL
 		);
+
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_OLED();
@@ -89,17 +100,32 @@ public:
 	void			log_bundle(OSCBundle& bndl, OLED_Format format);
 
 
-
+	/// Set the OLED display organization.
+	/// \param[in]	format	The OLED_Format to set to
 	void			set_display_format(OLED_Format format);
+	/// Get the current OLED display organization.
+	/// \return		The current OLED_Format being used
 	OLED_Format		get_display_format();
 
+	/// Set the duration of a complete scroll.
+	/// \param[in]	duration	The duration to set to
 	void			set_scroll_duration(uint duration);
+	/// Get the current scroll duration.
+	/// \return		The current scroll duration
 	uint			get_scroll_duration();
 
+	/// Set the digital pin to use to freeze the display
+	/// param[in]	pin		The pin to use
 	void			set_freeze_pin(byte pin);
+	/// Get the digital pin use to freeze the display
+	/// return	The freeze pin
 	byte			get_freeze_pin();
 
+	/// Set the freezing behavior of the display
+	/// \param[in]	behavior	Which OLED_Freeze type to use
 	void			set_freeze_behavior(OLED_Freeze behavior);
+	/// Get the current freeze behavior
+	/// \return		The current freeze behavior
 	OLED_Freeze		get_freeze_behavior();
 
 
