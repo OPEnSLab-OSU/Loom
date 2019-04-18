@@ -60,16 +60,16 @@ public:
 	/// \param[in]	retry_timeout 		Int | <200> | [20-500] | Delay between retransmissions (ms)
 	/// \param[in]	multicast_level		Int | <1> | [1-3] | How many levels to propogate message through heirarchy
 	Loom_nRF( 	
-			char*		module_name			=  "nRF",
-			uint16_t	max_message_len		=  120,
-			bool		compress_messages	=  true,   
-			uint8_t		address 			=  NRF_SELF_ADDRESS,   
-			uint8_t		friend_address 		=  NRF_FRIEND_ADDRESS,   
-			uint8_t		data_rate			=  1, 	
-			uint8_t		power_level			=  0,	
-			uint8_t		retry_count 		=  3,   
-			uint16_t	retry_timeout 		=  200,   
-			uint8_t		multicast_level		= 1   
+			char*		module_name			= "nRF",
+			uint16_t	max_message_len		= 120,
+			bool		compress_messages	= true,
+			uint8_t		address 			= NRF_SELF_ADDRESS,
+			uint8_t		friend_address 		= NRF_FRIEND_ADDRESS,
+			uint8_t		data_rate			= 1,
+			uint8_t		power_level			= 0,
+			uint8_t		retry_count 		= 3,
+			uint16_t	retry_timeout 		= 200,
+			uint8_t		multicast_level		= 1
 		);
 
 
