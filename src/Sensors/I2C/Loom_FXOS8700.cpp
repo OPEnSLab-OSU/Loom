@@ -8,10 +8,9 @@
 // --- CONSTRUCTOR ---
 Loom_FXOS8700::Loom_FXOS8700(
 		byte		i2c_address, 
-		char*		module_name, 
-		char*		sensor_description
+		char*		module_name
 	)
-	: LoomI2CSensor( module_name, sensor_description, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address )
 {
 	inst_FXOS8700 = new Adafruit_FXOS8700(0x8700A, 0x8700B);
 	bool setup = inst_FXOS8700->begin(ACCEL_RANGE_4G);

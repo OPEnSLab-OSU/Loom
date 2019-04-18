@@ -20,8 +20,6 @@ public:
 	// --- CONSTRUCTOR ---
 	LoomI2CSensor( 	
 			char*		module_name, 
-			char*		sensor_description, 
-
 			byte		i2c_address 
 		);
 

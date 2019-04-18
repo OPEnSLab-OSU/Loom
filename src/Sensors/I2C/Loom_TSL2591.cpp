@@ -9,11 +9,10 @@
 Loom_TSL2591::Loom_TSL2591(
 		byte		i2c_address, 
 		char*		module_name, 
-		char*		sensor_description, 
 		uint8_t		gain_level, 
 		uint8_t		timing_level
 	)
-	: LoomI2CSensor( module_name, sensor_description, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address )
 {
 	this->gain_level   = gain_level;
 	this->timing_level = timing_level;

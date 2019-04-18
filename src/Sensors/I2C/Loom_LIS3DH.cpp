@@ -7,10 +7,8 @@
 // --- CONSTRUCTOR ---
 Loom_LIS3DH::Loom_LIS3DH(
 		byte		i2c_address, 
-		char*		module_name, 
-		char*		sensor_description)
-
-	: LoomI2CSensor( module_name, sensor_description, i2c_address )
+		char*		module_name
+	) : LoomI2CSensor( module_name, i2c_address )
 {
 	inst_LIS3DH = new LIS3DH(I2C_MODE, i2c_address);
 

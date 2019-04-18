@@ -43,7 +43,6 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x49> | {0x49} | I2C address
 	/// \param[in]	module_name				String | <"AS72625X"> | AS72625X module name					
-	/// \param[in]	sensor_description		String | <"Spectral Triad"> | Debugging display description of module
 	/// \param[in]	use_bulb				Bool | <false> | Whether or not to use bulb
 	/// \param[in]	gain					Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
 	/// \param[in]	mode					Set(Int) | <3> | { 0("4 channels out of 6"), 1("Different 4 channels out of 6"), 2("All 6 channels continuously"), 3("One-shot reading of all channels") } | Read mode
@@ -51,7 +50,6 @@ public:
 	Loom_AS7265X(	
 			byte		i2c_address				= 0x49,
 			char*		module_name				= "AS7265X",
-			char*		sensor_description		= "Spectral Triad",
 			bool		use_bulb				= false,
 			byte		gain					= 64,
 			byte		mode					= AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT,	// 4 channel, other 4 channel, 6 chan, or 6 chan one shot // AS7265X_Mode,

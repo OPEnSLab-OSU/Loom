@@ -70,7 +70,6 @@ public:
 	/// Analog manager module constructor
 	/// 
 	/// \param[in]	module_name			String | <"Analog"> | Analog manager module name
-	/// \param[in]	sensor_description	String | <"Analog values"> | Debugging display description of module
 	/// \param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
 	/// \param[in]	read_resolution		Int | 12 | [8-12] | How many bits to read analog values at
 	/// \param[in]	enableA0			Bool | <true> | Enable pin A0 for managing
@@ -88,7 +87,6 @@ public:
 
 	Loom_Analog(	
 			char*			module_name				= "Analog",
-			char*			sensor_description		= "Analog Values",
 			uint8_t			num_samples				= 8,
 			uint8_t			read_resolution			= 12,
 			bool			enableA0				= true,

@@ -4,13 +4,10 @@
 /////////////////////////////////////////////////////////////////////
 LoomSensor::LoomSensor(	
 		char*		module_name,
-
-		char*		sensor_description, 
 		uint8_t		num_samples 
 	) 
 	: LoomModule( module_name ) 
 {
-	this->sensor_description = sensor_description; 
 	this->num_samples        = num_samples;
 }
 
@@ -23,7 +20,6 @@ void LoomSensor::print_config()
 {
 	LoomModule::print_config();
 
-	Println3('\t', "Description         : ", sensor_description);
 	Println3('\t', "Num Samples         : ", num_samples);
 }
 

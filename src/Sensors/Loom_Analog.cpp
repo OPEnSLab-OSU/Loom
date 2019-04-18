@@ -32,7 +32,6 @@ float Loom_Analog::convert(uint8_t pin, uint16_t analog)
 // --- CONSTRUCTOR ---
 Loom_Analog::Loom_Analog(	
 		char*				module_name,
-		char*				sensor_description,
 		uint8_t				num_samples,
 
 		uint8_t				read_resolution,
@@ -50,7 +49,7 @@ Loom_Analog::Loom_Analog(
 		AnalogConversion	convertA4,
 		AnalogConversion	convertA5	
 	) 
-	: LoomSensor( module_name, sensor_description, num_samples )
+	: LoomSensor( module_name, num_samples )
 {
 	// Println("Loom_Analog Constructor");
 

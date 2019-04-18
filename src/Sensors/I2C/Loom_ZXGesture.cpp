@@ -7,10 +7,9 @@
 Loom_ZXGesture::Loom_ZXGesture(
 		byte		i2c_address, 
 		char*		module_name, 
-		char*		sensor_description, 
 		ZXMode		mode
 	)
-	: LoomI2CSensor( module_name, sensor_description, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address )
 {
 	this->mode = mode;
 

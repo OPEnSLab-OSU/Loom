@@ -4,10 +4,9 @@
 /////////////////////////////////////////////////////////////////////
 LoomSDI12Sensor::LoomSDI12Sensor(	
 		char*		module_name,
-		char*		sensor_description, 
 		uint8_t		num_samples 
 	) 
-	: LoomSensor( module_name, sensor_description, num_samples ) 
+	: LoomSensor( module_name, num_samples ) 
 {
 
 

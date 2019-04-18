@@ -12,10 +12,6 @@ class LoomSensor : public LoomModule
 
 protected:
 
-	/// A description of the sensor / what it measures
-	// maybe move to module to be module description
-	char*		sensor_description;  
-
 	/// How many samples to take
 	uint8_t		num_samples;
 
@@ -27,9 +23,7 @@ public:
 
 	LoomSensor(	
 			char*		module_name			= "Sensor",
- 
-			char*		sensor_description	= "Sensor", 
-			uint8_t		num_samples			= 1 
+ 			uint8_t		num_samples			= 1 
 		  );
 
 

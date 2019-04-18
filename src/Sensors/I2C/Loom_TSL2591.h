@@ -36,13 +36,11 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x29> | {0x29} | I2C address
 	/// \param[in]	module_name				String | <"TSL2591"> | TSL2591 module name					
-	/// \param[in]	sensor_description		String | <"Lux"> | Debugging display description of module
 	/// \param[in]	gain					Set(Int) | <1> | { 1 } | Gain level
 	/// \param[in]	timing_level			Set(Int) | <0> | { 0 } | Timing level
 	Loom_TSL2591(	
 			byte		i2c_address				= 0x29,
 			char*		module_name				= "TSL2591",
-			char*		sensor_description		= "Lux",
 			uint8_t		gain_level				= 1,
 			uint8_t		timing_level			= 0
 		);

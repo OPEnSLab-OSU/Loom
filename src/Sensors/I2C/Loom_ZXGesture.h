@@ -44,12 +44,10 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x10> | {0x10, 0x11} | I2C address
 	/// \param[in]	module_name				String | <"ZXGesture"> | ZXGesture module name					
-	/// \param[in]	sensor_description		String | <"ZX Position"> | Debugging display description of module
 	/// \param[in]	mode					Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
 	Loom_ZXGesture(	
 			byte		i2c_address				= 0x10,
 			char*		module_name				= "ZXGesture",
-			char*		sensor_description		= "ZX Position",
 			ZXMode		mode					= ZXMode::ZX_POS
 		);
 

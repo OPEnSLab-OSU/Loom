@@ -6,10 +6,9 @@
 // --- CONSTRUCTOR ---
 Loom_SHT31D::Loom_SHT31D(
 		byte		i2c_address,
-		char*		module_name, 
-		char*		sensor_description
+		char*		module_name
 	)
-	: LoomI2CSensor( module_name, sensor_description, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address )
 {
 	bool setup = inst_sht31d.begin(i2c_address);
 

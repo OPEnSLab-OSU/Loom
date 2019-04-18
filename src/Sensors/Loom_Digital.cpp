@@ -7,7 +7,6 @@ byte Loom_Digital::pin_nums[DIGITAL_COUNT] = {5, 6, 9, 10, 11, 12, 14, 15, 16, 1
 /////////////////////////////////////////////////////////////////////
 Loom_Digital::Loom_Digital(	
 		char*	module_name, 
-		char*	sensor_description,
 
 		bool	enable5,
 		bool	enable6,
@@ -23,7 +22,7 @@ Loom_Digital::Loom_Digital(
 		bool	enableA4,
 		bool	enableA5
 	) 
-	: LoomSensor( module_name, sensor_description, 1 )
+	: LoomSensor( module_name, 1 )
 {
 	// Zero out array of measurements 
 	for (int i = 0; i < DIGITAL_COUNT; i++) { 

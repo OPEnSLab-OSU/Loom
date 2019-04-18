@@ -23,11 +23,9 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x70> | {0x70} | I2C address
 	/// \param[in]	module_name				String | <"MB1232"> | MB1232 module name					
-	/// \param[in]	sensor_description		String | <"Sonar"> | Debugging display description of module
 	Loom_MB1232(	
 			byte		i2c_address				= 0x70,
-			char*		module_name				= "MB1232",
-			char*		sensor_description		= "Sonar"
+			char*		module_name				= "MB1232"
 		);
 
 	// --- DESTRUCTOR ---

@@ -28,11 +28,9 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x20> | {0x20, 0x21} | I2C address
 	/// \param[in]	module_name				String | <"FXAS21002"> | FXAS21002 module name					
-	/// \param[in]	sensor_description		String | <"3-Axis Gyroscope"> | Debugging display description of module
 	Loom_FXAS21002(	
 			byte		i2c_address				= 0x20,
-			char*		module_name				= "FXAS21002",
-			char*		sensor_description		= "3-Axis Gyroscope"
+			char*		module_name				= "FXAS21002"
 		);
 
 	// --- DESTRUCTOR ---

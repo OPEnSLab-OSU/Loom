@@ -30,7 +30,6 @@ public:
 	/// Digital manager module constructor
 	/// 
 	/// \param[in]	module_name			String | <"Digital"> | Digital manager module name
-	/// \param[in]	sensor_description	String | <"Digital values"> | Debugging display description of module
 	/// \param[in]	enable5				Bool | <true> | Enable pin 5 for managing
 	/// \param[in]	enable6				Bool | <true> | Enable pin 6 for managing
 	/// \param[in]	enable9				Bool | <false> | Enable pin 9 for managing
@@ -45,7 +44,6 @@ public:
 	/// \param[in]	enableA5			Bool | <false> | Enable pin A5 for managing
 	Loom_Digital(	
 			char*	module_name			= "Digital",
-			char*	sensor_description	= "Digital Values",
 			bool	enable5				= true,
 			bool	enable6				= true,
 			bool	enable9				= false,
