@@ -35,9 +35,8 @@ public:
 	/// \param[in]	module_name		String | <"Servo"> | Servo module name	
 	/// \param[in]	servo_count		Int | <8> | [1-8] | How many servos to enable
 	Loom_Servo( 
-			char*		module_name		= "Servo",
-
-			uint8_t		servo_count		= NUM_SERVOS
+			const char*		module_name		= "Servo",
+			uint8_t			servo_count		= NUM_SERVOS
 		);
 
 	// --- DESTRUCTOR ---

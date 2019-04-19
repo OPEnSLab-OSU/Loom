@@ -7,23 +7,23 @@
 #include "Sensors/I2C/Loom_I2C_Sensor.h"
 
 
-// I2C Sensor files
-#include "Sensors/I2C/Loom_AS7262.h"
-#include "Sensors/I2C/Loom_AS7263.h"
-#include "Sensors/I2C/Loom_AS7265X.h"
-#include "Sensors/I2C/Loom_FXAS21002.h"
-#include "Sensors/I2C/Loom_FXOS8700.h"
-#include "Sensors/I2C/Loom_LIS3DH.h"
-#include "Sensors/I2C/Loom_MB1232.h"
-#include "Sensors/I2C/Loom_MPU6050.h"
-#include "Sensors/I2C/Loom_MS5803.h"
-#include "Sensors/I2C/Loom_SHT31D.h"
-#include "Sensors/I2C/Loom_TSL2561.h"
-#include "Sensors/I2C/Loom_TSL2591.h"
-#include "Sensors/I2C/Loom_ZXGesture.h"
+// // I2C Sensor files
+// #include "Sensors/I2C/Loom_AS7262.h"
+// #include "Sensors/I2C/Loom_AS7263.h"
+// #include "Sensors/I2C/Loom_AS7265X.h"
+// #include "Sensors/I2C/Loom_FXAS21002.h"
+// #include "Sensors/I2C/Loom_FXOS8700.h"
+// #include "Sensors/I2C/Loom_LIS3DH.h"
+// #include "Sensors/I2C/Loom_MB1232.h"
+// #include "Sensors/I2C/Loom_MPU6050.h"
+// #include "Sensors/I2C/Loom_MS5803.h"
+// #include "Sensors/I2C/Loom_SHT31D.h"
+// #include "Sensors/I2C/Loom_TSL2561.h"
+// #include "Sensors/I2C/Loom_TSL2591.h"
+// #include "Sensors/I2C/Loom_ZXGesture.h"
 
 
-class Loom_AS7262;
+// class Loom_AS7262;    // dont remember what this was doing here
 
 
 // // I2C Address Conflict Selection
@@ -91,11 +91,11 @@ public:
 	/// \param[in]	dynamic_list		Bool | <true> | Whether or not to automatically check for new sensors
 	/// \param[in]	update_period		Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
 	Loom_Multiplexer(	
-			char*		module_name			= "Multiplexer",
-			byte		i2c_address			= 0x71,
-			uint		num_ports			= 8,
-			bool		dynamic_list		= true,
-			uint		update_period		= 5000
+			const char*		module_name			= "Multiplexer",
+			byte			i2c_address			= 0x71,
+			uint			num_ports			= 8,
+			bool			dynamic_list		= true,
+			uint			update_period		= 5000
 		);
 
 

@@ -4,8 +4,8 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Relay::Loom_Relay( 
-		char*	module_name, 
-		byte	pin 
+		const char*		module_name, 
+		byte			pin 
 	) 
 	: LoomActuator( module_name ) 
 {

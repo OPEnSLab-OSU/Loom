@@ -29,8 +29,8 @@ public:
 	/// \param[in]	i2c_address				Set(Int) | <0x19> | {0x19} | I2C address
 	/// \param[in]	module_name				String | <"LIS3DH"> | LIS3DH module name					
 	Loom_LIS3DH(	
-			byte		i2c_address				= 0x19,
-			char*		module_name				= "LIS3DH"
+			byte			i2c_address		= 0x19,
+			const char*		module_name		= "LIS3DH"
 		);
 
 	// --- DESTRUCTOR ---

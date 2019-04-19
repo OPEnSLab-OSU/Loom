@@ -13,6 +13,17 @@
 #include "Loom_Translator.h"
 
 
+// #include "Loom_Interrupt_Manager.h"
+// #include "Loom_Sleep_Manager.h"
+// #include "Loom_Module.h"
+// #include "Sensors/Loom_Sensor.h"
+// #include "Actuators/Loom_Actuator.h"
+// #include "RTC/Loom_RTC.h"
+// #include "CommPlats/Loom_CommPlat.h"
+// #include "InternetPlats/Loom_InternetPlat.h"
+// #include "LogPlats/Loom_LogPlat.h"
+
+
 
 #define SERIAL_BAUD 115200
 
@@ -43,6 +54,9 @@ class LoomRTC;
 class LoomCommPlat;
 class LoomInternetPlat;
 class LoomLogPlat;
+
+
+
 
 
 // switch to using vectors

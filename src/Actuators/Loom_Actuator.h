@@ -15,7 +15,7 @@ public:
 
 	// --- CONSTRUCTOR ---
 	LoomActuator( 
-			char* module_name 
+			const char*		module_name 
 		);
 
 	// --- DESTRUCTOR ---

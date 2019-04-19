@@ -30,11 +30,11 @@ LoomModule::LoomModule()
 }
 
 /////////////////////////////////////////////////////////////////////
-LoomModule::LoomModule( char* module_name ) : LoomModule()
+LoomModule::LoomModule( const char* module_name ) : LoomModule()
 {
 	// Println("LoomModule Constructor 1");
 
-	this->module_name = module_name;
+	strcpy(this->module_name, module_name);
 
 	// strcpy(this->module_name, module_name);
 

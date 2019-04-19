@@ -39,10 +39,10 @@ public:
 	/// \param[in]	gain					Set(Int) | <1> | { 1 } | Gain level
 	/// \param[in]	timing_level			Set(Int) | <0> | { 0 } | Timing level
 	Loom_TSL2591(	
-			byte		i2c_address				= 0x29,
-			char*		module_name				= "TSL2591",
-			uint8_t		gain_level				= 1,
-			uint8_t		timing_level			= 0
+			byte			i2c_address			= 0x29,
+			const char*		module_name			= "TSL2591",
+			uint8_t			gain_level			= 1,
+			uint8_t			timing_level		= 0
 		);
 
 

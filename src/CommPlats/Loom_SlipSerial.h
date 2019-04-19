@@ -36,9 +36,9 @@ public:
 	/// \param[in]	max_message_len		Set(Int) | <15> | {15("Max length")} | The maximum possible message length
 	/// \param[in]	compress_messages	Bool | <true> | Whether or not to try to compress messages
 	Loom_SlipSerial(
-			char*	module_name			= "SlipSerial",
-			uint	max_message_len		= SERIAL_MAX_MESSAGE_LEN,
-			bool	compress_messages	= true
+			const char*		module_name			= "SlipSerial",
+			uint			max_message_len		= SERIAL_MAX_MESSAGE_LEN,
+			bool			compress_messages	= true
 		); 
 
 	/// Destructor	

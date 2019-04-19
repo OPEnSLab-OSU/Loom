@@ -52,7 +52,7 @@ public:
 	// --- CONSTRUCTOR ---
 	LoomModule();
 
-	LoomModule( char* module_name );// : LoomModule();
+	LoomModule( const char* module_name );// : LoomModule();
 
 	// LoomModule( char* module_name, LoomManager* LD );
 

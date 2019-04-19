@@ -5,6 +5,20 @@
 #include <Wire.h>
 
 
+// I2C Sensor files
+#include "Sensors/I2C/Loom_AS7262.h"
+#include "Sensors/I2C/Loom_AS7263.h"
+#include "Sensors/I2C/Loom_AS7265X.h"
+#include "Sensors/I2C/Loom_FXAS21002.h"
+#include "Sensors/I2C/Loom_FXOS8700.h"
+#include "Sensors/I2C/Loom_LIS3DH.h"
+#include "Sensors/I2C/Loom_MB1232.h"
+#include "Sensors/I2C/Loom_MPU6050.h"
+#include "Sensors/I2C/Loom_MS5803.h"
+#include "Sensors/I2C/Loom_SHT31D.h"
+#include "Sensors/I2C/Loom_TSL2561.h"
+#include "Sensors/I2C/Loom_TSL2591.h"
+#include "Sensors/I2C/Loom_ZXGesture.h"
 
 
 // Maybe these sensor lists go in own file
@@ -74,14 +88,13 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 }
 
 /////////////////////////////////////////////////////////////////////
-Loom_Multiplexer::Loom_Multiplexer(	char* 	module_name,
-
-									byte	i2c_address,
-									uint	num_ports,
-									bool	dynamic_list,	
-									uint 	update_period
-
-								) : LoomModule( module_name ) 
+Loom_Multiplexer::Loom_Multiplexer(	
+		const char* 	module_name,
+		byte			i2c_address,
+		uint			num_ports,
+		bool			dynamic_list,	
+		uint 			update_period
+	) : LoomModule( module_name ) 
 {
 	// Println("Loom_Multiplexer Constructor 1");
 	this->i2c_address 	= i2c_address; 

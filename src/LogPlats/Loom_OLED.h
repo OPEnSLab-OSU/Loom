@@ -77,7 +77,7 @@ public:
 	/// \param[in]	freeze_pin			Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to pause the display
 	/// \param[in]	freeze_behavior		Set(OLED_Freeze_Pin) | <2> | {O("Disable"), 1("Pause Data"), 2("Pause Data and Scroll")} | How freezing the display should behave
 	Loom_OLED(	
-			char*				module_name				= "OLED",
+			const char*			module_name				= "OLED",
 			bool				enable_rate_filter		= true,
 			uint				min_filter_delay		= 300,
 			OLED_Version		type					= OLED_Version::FEATHERWING, 

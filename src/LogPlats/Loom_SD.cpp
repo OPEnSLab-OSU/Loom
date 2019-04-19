@@ -10,18 +10,18 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_SD::Loom_SD(		
-		char*		module_name, 
-		bool		enable_rate_filter, 
-		uint		min_filter_delay, 
-		byte		chip_select, 
-		char*		default_file
+		const char*		module_name, 
+		bool			enable_rate_filter, 
+		uint			min_filter_delay, 
+		byte			chip_select, 
+		const char*		default_file
 	)
 	: LoomLogPlat( module_name, enable_rate_filter, min_filter_delay )
 {
 	Println("SD Setup");
 
 	this->chip_select  = chip_select;
-	this->default_file = default_file;
+	strcpy(this->default_file, default_file);
 
 	// // Remove the #if if you are using a LoRa M0, but don't have LoRa enabled
 	// #if is_lora == 1

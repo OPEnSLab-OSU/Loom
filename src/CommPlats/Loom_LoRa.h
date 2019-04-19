@@ -63,15 +63,15 @@ public:
 	/// \param[in]	retry_count				Int [0-15] <3> | Max number of transmission retries
 	/// \param[in]	retry_timeout			Int [20-500] <200> | Delay between retransmissions (ms)
 	Loom_LoRa( 	
-			char*		module_name			= "LoRa",
-			uint16_t	max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
-			// CommScope subnet_scope 		= SCOPE_SUBNET,
-			bool		compress_messages	= true,
-			uint8_t		address				= LORA_SELF_ADDRESS,
-			uint8_t		friend_address		= LORA_FRIEND_ADDRESS,
-			uint8_t		power_level 		= 23,
-			uint8_t		retry_count			= 3,
-			uint16_t	retry_timeout		= 200
+			const char*		module_name			= "LoRa",
+			uint16_t		max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
+			// CommScope 	subnet_scope 		= SCOPE_SUBNET,
+			bool			compress_messages	= true,
+			uint8_t			address				= LORA_SELF_ADDRESS,
+			uint8_t			friend_address		= LORA_FRIEND_ADDRESS,
+			uint8_t			power_level 		= 23,
+			uint8_t			retry_count			= 3,
+			uint16_t		retry_timeout		= 200
 		);
 
 	// --- DESTRUCTOR ---

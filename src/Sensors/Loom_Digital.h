@@ -43,19 +43,19 @@ public:
 	/// \param[in]	enableA4			Bool | <false> | Enable pin A4 for managing
 	/// \param[in]	enableA5			Bool | <false> | Enable pin A5 for managing
 	Loom_Digital(	
-			char*	module_name			= "Digital",
-			bool	enable5				= true,
-			bool	enable6				= true,
-			bool	enable9				= false,
-			bool	enable10			= false,
-			bool	enable11			= false,
-			bool	enable12			= false,
-			bool	enableA0			= false,
-			bool	enableA1			= false,
-			bool	enableA2			= false,
-			bool	enableA3			= false,
-			bool	enableA4			= false,
-			bool	enableA5			= false
+			const char*		module_name		= "Digital",
+			bool			enable5			= true,
+			bool			enable6			= true,
+			bool			enable9			= false,
+			bool			enable10		= false,
+			bool			enable11		= false,
+			bool			enable12		= false,
+			bool			enableA0		= false,
+			bool			enableA1		= false,
+			bool			enableA2		= false,
+			bool			enableA3		= false,
+			bool			enableA4		= false,
+			bool			enableA5		= false
 		);
 
 	// --- DESTRUCTOR ---

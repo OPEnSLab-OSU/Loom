@@ -4,15 +4,15 @@
 
 /////////////////////////////////////////////////////////////////////
 Loom_MAX31856::Loom_MAX31856(	
-		char*		module_name,
-		uint8_t		num_samples, 
+		const char*		module_name,
+		uint8_t			num_samples, 
 		
-		uint8_t		CS_pin,
+		uint8_t			CS_pin,
 
-		uint8_t		SPI_a,
-		uint8_t		SPI_b,
-		uint8_t		SPI_c,
-		uint8_t		SPI_d
+		uint8_t			SPI_a,
+		uint8_t			SPI_b,
+		uint8_t			SPI_c,
+		uint8_t			SPI_d
 	) : LoomSPISensor( module_name, num_samples ) 
 {
 

@@ -100,8 +100,8 @@ public:
 	/// \param[in]	module_name			String | <"Interrupt-Manager"> | Interrupt Manager module name
 	/// \param[in]	RTC_Inst			Set(Int) | <0> | {0("Null")} | OLED module name
 	Loom_Interrupt_Manager( 
-			char*		module_name		= "Interrupt_Manager",
-			LoomRTC*	RTC_Inst		= nullptr
+			const char*		module_name		= "Interrupt-Manager",
+			LoomRTC*		RTC_Inst		= nullptr
 		);
 
 

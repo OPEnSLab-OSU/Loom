@@ -8,12 +8,12 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_DS3231::Loom_DS3231(	
-		char*		module_name,
+		const char*		module_name,
 
-		TimeZone	timezone,
-		bool		use_utc_time,
-		bool		get_internet_time,
-		byte		int_pin
+		TimeZone		timezone,
+		bool			use_utc_time,
+		bool			get_internet_time,
+		byte			int_pin
 	)
 	: LoomRTC( module_name, timezone, use_utc_time, get_internet_time, int_pin )
 {

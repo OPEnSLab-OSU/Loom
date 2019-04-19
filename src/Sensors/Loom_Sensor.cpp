@@ -3,8 +3,8 @@
 
 /////////////////////////////////////////////////////////////////////
 LoomSensor::LoomSensor(	
-		char*		module_name,
-		uint8_t		num_samples 
+		const char*		module_name,
+		uint8_t			num_samples 
 	) 
 	: LoomModule( module_name ) 
 {

@@ -31,8 +31,8 @@ public:
 	/// \param[in]	i2c_address				Set(Int) | <0x1F> | {0x1C, 0x1D, 0x1E, 0x1F} | I2C address
 	/// \param[in]	module_name				String | <"FXOS8700"> | FXOS8700 module name					
 	Loom_FXOS8700(	
-			byte		i2c_address				= 0x1F,
-			char*		module_name				= "FXOS8700" 
+			byte			i2c_address		= 0x1F,
+			const char*		module_name		= "FXOS8700" 
 		);
 
 	// --- DESTRUCTOR ---

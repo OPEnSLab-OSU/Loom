@@ -86,21 +86,21 @@ public:
 	/// \param[in]	convertA5			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A5
 
 	Loom_Analog(	
-			char*			module_name				= "Analog",
-			uint8_t			num_samples				= 8,
-			uint8_t			read_resolution			= 12,
-			bool			enableA0				= true,
-			bool			enableA1				= true,
-			bool			enableA2				= true,
-			bool			enableA3				= true,
-			bool			enableA4				= true,
-			bool			enableA5				= true,
-			AnalogConversion convertA0				= AnalogConversion::NONE,
-			AnalogConversion convertA1				= AnalogConversion::NONE,
-			AnalogConversion convertA2				= AnalogConversion::NONE,
-			AnalogConversion convertA3				= AnalogConversion::NONE,
-			AnalogConversion convertA4				= AnalogConversion::NONE,
-			AnalogConversion convertA5				= AnalogConversion::NONE
+			const char*			module_name			= "Analog",
+			uint8_t				num_samples			= 8,
+			uint8_t				read_resolution		= 12,
+			bool				enableA0			= true,
+			bool				enableA1			= true,
+			bool				enableA2			= true,
+			bool				enableA3			= true,
+			bool				enableA4			= true,
+			bool				enableA5			= true,
+			AnalogConversion	convertA0			= AnalogConversion::NONE,
+			AnalogConversion	convertA1			= AnalogConversion::NONE,
+			AnalogConversion	convertA2			= AnalogConversion::NONE,
+			AnalogConversion	convertA3			= AnalogConversion::NONE,
+			AnalogConversion	convertA4			= AnalogConversion::NONE,
+			AnalogConversion	convertA5			= AnalogConversion::NONE
 		);
 
 	// --- DESTRUCTOR ---

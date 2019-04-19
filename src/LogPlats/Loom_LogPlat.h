@@ -35,12 +35,12 @@ public:
 
 
 	// --- CONSTRUCTOR ---
-	LoomLogPlat(	char* module_name,
+	LoomLogPlat(	
+			const char*		module_name,
 
-					bool enable_rate_filter 	= true,
-					uint min_filter_delay 		= 1000
-
-			   );
+			bool			enable_rate_filter 	= true,
+			uint			min_filter_delay 		= 1000
+	   );
 
 
 	// --- DESTRUCTOR ---

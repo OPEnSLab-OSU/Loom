@@ -30,8 +30,8 @@ public:
 	/// \param[in]	i2c_address				Set(Int) | <0x44> | {0x44, 0x45} | I2C address
 	/// \param[in]	module_name				String | <"SHT31D"> | SHT31D module name					
 	Loom_SHT31D(	
-			byte		i2c_address				= 0x44,
-			char*		module_name				= "SHT31D"
+			byte			i2c_address		= 0x44,
+			const char*		module_name		= "SHT31D"
 		);
 
 	// --- DESTRUCTOR ---

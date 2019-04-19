@@ -15,8 +15,8 @@ protected:
 public:
 
 	LoomSPISensor(	
-			char*		module_name			= "SPI_Sensor",
-			uint8_t		num_samples			= 1 
+			const char*		module_name			= "SPI_Sensor",
+			uint8_t			num_samples			= 1 
 		);
 
 

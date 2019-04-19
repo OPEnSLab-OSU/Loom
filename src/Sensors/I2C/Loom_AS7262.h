@@ -42,12 +42,12 @@ public:
 	/// \param[in]	mode					Set(Int) | <3> | { 0("Continuous reading of VBGY"), 1("Continuous reading of GYOR"), 2("Continuous reading all channels"), 3("One-shot reading of all channels") } | Read mode
 	/// \param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value]) 
 	Loom_AS7262(	
-			byte		i2c_address				= 0x49,
-			char*		module_name				= "AS7262",
-			bool		use_bulb				= false,
-			byte		gain					= 1,
-			byte		mode					= 3,
-			byte		integration_time		= 50
+			byte			i2c_address			= 0x49,
+			const char*		module_name			= "AS7262",
+			bool			use_bulb			= false,
+			byte			gain				= 1,
+			byte			mode				= 3,
+			byte			integration_time	= 50
 		);
 
 	// --- DESTRUCTOR ---

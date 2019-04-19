@@ -31,7 +31,7 @@ float Loom_Analog::convert(uint8_t pin, uint16_t analog)
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Analog::Loom_Analog(	
-		char*				module_name,
+		const char*			module_name,
 		uint8_t				num_samples,
 
 		uint8_t				read_resolution,

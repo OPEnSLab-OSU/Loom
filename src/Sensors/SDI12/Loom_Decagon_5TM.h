@@ -21,8 +21,8 @@ public:
 	/// \param[in]	module_name			String | <"5TM"> | Decagon 5TM manager module name
 	/// \param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
 	Loom_Decagon5TM(	
-			char*		module_name			= "5TM Decagon",
-			uint8_t		num_samples			= 1
+			const char*		module_name		= "5TM Decagon",
+			uint8_t			num_samples		= 1
 		);
 
 

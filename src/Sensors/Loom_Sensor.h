@@ -22,8 +22,8 @@ protected:
 public:
 
 	LoomSensor(	
-			char*		module_name			= "Sensor",
- 			uint8_t		num_samples			= 1 
+			const char*		module_name		= "Sensor",
+ 			uint8_t			num_samples		= 1 
 		  );
 
 

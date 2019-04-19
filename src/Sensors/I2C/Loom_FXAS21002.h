@@ -29,8 +29,8 @@ public:
 	/// \param[in]	i2c_address				Set(Int) | <0x20> | {0x20, 0x21} | I2C address
 	/// \param[in]	module_name				String | <"FXAS21002"> | FXAS21002 module name					
 	Loom_FXAS21002(	
-			byte		i2c_address				= 0x20,
-			char*		module_name				= "FXAS21002"
+			byte			i2c_address		= 0x20,
+			const char*		module_name		= "FXAS21002"
 		);
 
 	// --- DESTRUCTOR ---

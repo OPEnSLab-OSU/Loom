@@ -6,21 +6,21 @@ byte Loom_Digital::pin_nums[DIGITAL_COUNT] = {5, 6, 9, 10, 11, 12, 14, 15, 16, 1
 
 /////////////////////////////////////////////////////////////////////
 Loom_Digital::Loom_Digital(	
-		char*	module_name, 
+		const char*		module_name, 
 
-		bool	enable5,
-		bool	enable6,
-		bool	enable9,
-		bool	enable10,
-		bool	enable11,
-		bool	enable12,
+		bool			enable5,
+		bool			enable6,
+		bool			enable9,
+		bool			enable10,
+		bool			enable11,
+		bool			enable12,
 
-		bool	enableA0,
-		bool	enableA1,
-		bool	enableA2,
-		bool	enableA3,
-		bool	enableA4,
-		bool	enableA5
+		bool			enableA0,
+		bool			enableA1,
+		bool			enableA2,
+		bool			enableA3,
+		bool			enableA4,
+		bool			enableA5
 	) 
 	: LoomSensor( module_name, 1 )
 {

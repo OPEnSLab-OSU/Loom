@@ -7,10 +7,10 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_TSL2591::Loom_TSL2591(
-		byte		i2c_address, 
-		char*		module_name, 
-		uint8_t		gain_level, 
-		uint8_t		timing_level
+		byte			i2c_address, 
+		const char*		module_name, 
+		uint8_t			gain_level, 
+		uint8_t			timing_level
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {

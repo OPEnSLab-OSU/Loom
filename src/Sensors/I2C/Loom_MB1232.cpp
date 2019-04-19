@@ -11,8 +11,8 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_MB1232::Loom_MB1232(
-		byte		i2c_address,
-		char*		module_name
+		byte			i2c_address,
+		const char*		module_name
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {	

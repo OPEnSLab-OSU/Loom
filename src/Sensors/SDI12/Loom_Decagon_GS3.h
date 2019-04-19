@@ -27,8 +27,8 @@ public:
 	/// \param[in]	module_name			String | <"GS3"> | Decagon GS3 manager module name
 	/// \param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
 	Loom_DecagonGS3(	
-			char*		module_name			= "GS3 Decagon",
-			uint8_t		num_samples			= 1
+			const char*		module_name		= "GS3 Decagon",
+			uint8_t			num_samples		= 1
 		);
 
 

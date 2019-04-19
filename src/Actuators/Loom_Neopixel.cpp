@@ -7,10 +7,10 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Neopixel::Loom_Neopixel(
-		char*	module_name, 
-		bool	enableA0, 
-		bool	enableA1, 
-		bool	enableA2
+		const char*		module_name, 
+		bool			enableA0, 
+		bool			enableA1, 
+		bool			enableA2
 	) 
 	: LoomActuator(module_name)
 {

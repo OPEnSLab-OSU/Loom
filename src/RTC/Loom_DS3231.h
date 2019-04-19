@@ -26,11 +26,11 @@ public:
 	/// \param[in]	get_internet_time	Bool | <false> | Whether or not to try to get time via internet
 	/// \param[in]	int_pin				Set(Int) | <6> | {5, 6, 9, 10, 11, 12} | Which pin the interrupt is connected to 
 	Loom_DS3231(	
-			char*		module_name			= "DS3231",
-			TimeZone	timezone			= PST,
-			bool		use_utc_time		= false,
-			bool		get_internet_time	= false,
-			byte		int_pin				= 6
+			const char*		module_name			= "DS3231",
+			TimeZone		timezone			= TimeZone::PST,
+			bool			use_utc_time		= false,
+			bool			get_internet_time	= false,
+			byte			int_pin				= 6
 		);
 
 	// --- DESTRUCTOR ---

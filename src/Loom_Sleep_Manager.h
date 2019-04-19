@@ -65,11 +65,11 @@ public:
 	/// \param[in]	delay_on_wake		Bool | <false> | Whether or not to delay upon waking to allow time to open Serial Monitor
 	/// \param[in]	sleep_mode			Set(SleepMode) | <1> | { 0("Idle"), 1("Standby"), 2("SleepyDog"), 3("Opens Low Power")} | Which SleepMode to use
 	Loom_Sleep_Manager( 
-			char*		module_name			= "Sleep_Manager",
-			LoomRTC*	RTC_Inst			= nullptr,
-			bool		use_LED				= true,
-			bool		delay_on_wake		= false,
-			SleepMode	sleep_mode			= SleepMode::STANDBY
+			const char*		module_name			= "Sleep-Manager",
+			LoomRTC*		RTC_Inst			= nullptr,
+			bool			use_LED				= true,
+			bool			delay_on_wake		= false,
+			SleepMode		sleep_mode			= SleepMode::STANDBY
 		);
 
 	// Loom_Sleep_Manager( char* module_name, LoomManager* LD );

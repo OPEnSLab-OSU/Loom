@@ -62,11 +62,11 @@ public:
 	/// \param[in]	chip_select			Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
 	/// \param[in]	default_file		String | <"test.csv"> | File to write to if none explicity provided (should be < 8 characters w/out extension)
 	Loom_SD(	
-			char*		module_name			= "SD",
-			bool		enable_rate_filter	= true,
-			uint		min_filter_delay	= 1000,
-			byte		chip_select			= 10,
-			char*		default_file		= "test.csv"
+			const char*		module_name			= "SD",
+			bool			enable_rate_filter	= true,
+			uint			min_filter_delay	= 1000,
+			byte			chip_select			= 10,
+			const char*		default_file		= "test.csv"
 
 			// SD_Version 		version 			= FEATHERWING,
 			// byte 			reset_pin 			= A2 

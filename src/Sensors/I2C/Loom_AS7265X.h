@@ -48,12 +48,12 @@ public:
 	/// \param[in]	mode					Set(Int) | <3> | { 0("4 channels out of 6"), 1("Different 4 channels out of 6"), 2("All 6 channels continuously"), 3("One-shot reading of all channels") } | Read mode
 	/// \param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value]) 
 	Loom_AS7265X(	
-			byte		i2c_address				= 0x49,
-			char*		module_name				= "AS7265X",
-			bool		use_bulb				= false,
-			byte		gain					= 64,
-			byte		mode					= AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT,	// 4 channel, other 4 channel, 6 chan, or 6 chan one shot // AS7265X_Mode,
-			byte		integration_time		= 50
+			byte			i2c_address			= 0x49,
+			const char*		module_name			= "AS7265X",
+			bool			use_bulb			= false,
+			byte			gain				= 64,
+			byte			mode				= AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT,	// 4 channel, other 4 channel, 6 chan, or 6 chan one shot // AS7265X_Mode,
+			byte			integration_time	= 50
 		);
 
 	// --- DESTRUCTOR ---

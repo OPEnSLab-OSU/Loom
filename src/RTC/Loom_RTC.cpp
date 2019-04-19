@@ -28,52 +28,52 @@ const float LoomRTC::timezone_adjustment[] =
 char* LoomRTC::enum_timezone_string(TimeZone t)
 {
 	switch(t) {
-		case WAT  : return "WAT";
-		case AT   : return "AT";
-		case ADT  : return "ADT";
-		case AST  : return "AST";
-		case EDT  : return "EDT";
-		case EST  : return "EST";
-		case CDT  : return "CDT";
-		case CST  : return "CST";
-		case MDT  : return "MDT";
-		case MST  : return "MST";
-		case PDT  : return "PDT";
-		case PST  : return "PST";
-		case ALDT : return "ALDT";
-		case ALST : return "ALST";
-		case HST  : return "HST";
-		case SST  : return "SST";
-		case GMT  : return "GMT";
-		case BST  : return "BST";
-		case CET  : return "CET";
-		case CEST : return "CEST";
-		case EET  : return "EET";
-		case EEST : return "EEST";
-		case BT   : return "BT";
-		case ZP4  : return "ZP4";
-		case ZP5  : return "ZP5";
-		case ZP6  : return "ZP6";
-		case ZP7  : return "ZP7";
-		case AWST : return "AWST";
-		case AWDT : return "AWDT";
-		case ACST : return "ACST";
-		case ACDT : return "ACDT";
-		case AEST : return "AEST";
-		case AEDT : return "AEDT";
+		case TimeZone::WAT  : return "WAT";
+		case TimeZone::AT   : return "AT";
+		case TimeZone::ADT  : return "ADT";
+		case TimeZone::AST  : return "AST";
+		case TimeZone::EDT  : return "EDT";
+		case TimeZone::EST  : return "EST";
+		case TimeZone::CDT  : return "CDT";
+		case TimeZone::CST  : return "CST";
+		case TimeZone::MDT  : return "MDT";
+		case TimeZone::MST  : return "MST";
+		case TimeZone::PDT  : return "PDT";
+		case TimeZone::PST  : return "PST";
+		case TimeZone::ALDT : return "ALDT";
+		case TimeZone::ALST : return "ALST";
+		case TimeZone::HST  : return "HST";
+		case TimeZone::SST  : return "SST";
+		case TimeZone::GMT  : return "GMT";
+		case TimeZone::BST  : return "BST";
+		case TimeZone::CET  : return "CET";
+		case TimeZone::CEST : return "CEST";
+		case TimeZone::EET  : return "EET";
+		case TimeZone::EEST : return "EEST";
+		case TimeZone::BT   : return "BT";
+		case TimeZone::ZP4  : return "ZP4";
+		case TimeZone::ZP5  : return "ZP5";
+		case TimeZone::ZP6  : return "ZP6";
+		case TimeZone::ZP7  : return "ZP7";
+		case TimeZone::AWST : return "AWST";
+		case TimeZone::AWDT : return "AWDT";
+		case TimeZone::ACST : return "ACST";
+		case TimeZone::ACDT : return "ACDT";
+		case TimeZone::AEST : return "AEST";
+		case TimeZone::AEDT : return "AEDT";
 	}
 }
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 LoomRTC::LoomRTC(	
-		char*		module_name,
+		const char*		module_name,
 
-		TimeZone	timezone,
-		bool		use_utc_time,
-		bool		get_internet_time,
+		TimeZone		timezone,
+		bool			use_utc_time,
+		bool			get_internet_time,	
 
-		byte		interrupt_pin
+		byte			interrupt_pin
 	) 
 	: LoomModule( module_name )
 {
@@ -327,7 +327,7 @@ bool LoomRTC::set_rtc_from_internet_time()
 /////////////////////////////////////////////////////////////////////
 void LoomRTC::convert_local_to_utc(bool to_utc)
 {
-	float adj = ( (to_utc) ? 1. : -1. ) * timezone_adjustment[timezone];
+	float adj = ( (to_utc) ? 1. : -1. ) * timezone_adjustment[(int)timezone];
 	int min;
 
 	if ( (adj-(int)adj) == 0 ) { 

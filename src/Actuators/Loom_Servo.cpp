@@ -10,8 +10,8 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Servo::Loom_Servo( 
-		char* 		module_name, 
-		uint8_t 	servo_count 
+		const char* 	module_name, 
+		uint8_t 		servo_count 
 	) 
 	: LoomActuator( module_name ) 
 {

@@ -40,10 +40,10 @@ public:
 	/// \param[in]	gain					Set(Int) | <1> | { 1, 16 } | Gain level
 	/// \param[in]	resolution				Set(Int) | <3> | { 1("Low"), 2("Med"), 3("High") } | Resolution
 	Loom_TSL2561(	
-			byte	i2c_address				= 0x29,
-			char*	module_name				= "TSL2561",
-			int		gain					= 1,
-			int		resolution				= 3
+			byte			i2c_address		= 0x29,
+			const char*		module_name		= "TSL2561",
+			int				gain			= 1,
+			int				resolution		= 3
 		);
 
 	// --- DESTRUCTOR ---

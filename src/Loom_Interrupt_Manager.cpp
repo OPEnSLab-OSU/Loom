@@ -20,8 +20,8 @@ const ISRFuncPtr Loom_Interrupt_Manager::default_ISRs[InteruptRange] =
 
 /////////////////////////////////////////////////////////////////////
 Loom_Interrupt_Manager::Loom_Interrupt_Manager( 
-		char*		module_name, 
-		LoomRTC*	RTC_Inst
+		const char*		module_name, 
+		LoomRTC*		RTC_Inst
 	) 
 	: LoomModule( module_name )
 {

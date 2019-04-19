@@ -16,7 +16,7 @@
 
 
 /// Different time zones
-enum TimeZone { 
+enum class TimeZone { 
 	WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
 	ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
 	ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
@@ -82,13 +82,13 @@ public:
 
 	// --- CONSTRUCTOR ---
 	LoomRTC(	
-			char*		module_name			= "RTC",
+			const char*		module_name			= "RTC",
  
-			TimeZone	timezone			= TimeZone::PST,
-			bool		use_utc_time		= true,
-			bool		get_internet_time	= false,
+			TimeZone		timezone			= TimeZone::PST,
+			bool			use_utc_time		= true,
+			bool			get_internet_time	= false,
 
-			byte		interrupt_pin		= 6
+			byte			interrupt_pin		= 6
 		);
 
 	// --- DESTRUCTOR ---

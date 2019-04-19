@@ -7,8 +7,8 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_FXAS21002::Loom_FXAS21002(
-		byte		i2c_address, 
-		char*		module_name
+		byte			i2c_address, 
+		const char*		module_name
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {

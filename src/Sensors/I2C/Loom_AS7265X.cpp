@@ -5,12 +5,12 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_AS7265X::Loom_AS7265X(
-		byte		i2c_address, 
-		char*		module_name, 
-		bool		use_bulb, 
-		byte		gain, 
-		byte		mode, 
-		byte		integration_time
+		byte			i2c_address, 
+		const char*		module_name, 
+		bool			use_bulb, 
+		byte			gain, 
+		byte			mode, 
+		byte			integration_time
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {

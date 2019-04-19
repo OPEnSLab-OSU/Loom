@@ -33,10 +33,10 @@ public:
 	/// \param[in]	enableA1		Bool | <false> | Whether or not to use pin A1 for Neopixel
 	/// \param[in]	enableA2		Bool | <true> | Whether or not to use pin A2 for Neopixel
 	Loom_Neopixel( 	
-			char*	module_name		= "Neopixel",
-			bool	enableA0		= false,
-			bool	enableA1		= false,
-			bool	enableA2		= true
+			const char*		module_name		= "Neopixel",
+			bool			enableA0		= false,
+			bool			enableA1		= false,
+			bool			enableA2		= true
 		);
 
 	// --- DESTRUCTOR ---

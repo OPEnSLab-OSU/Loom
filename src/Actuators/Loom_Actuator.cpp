@@ -4,7 +4,7 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 LoomActuator::LoomActuator( 
-		char*	module_name 
+		const char*		module_name 
 	) 
 	: LoomModule( module_name ) 
 {

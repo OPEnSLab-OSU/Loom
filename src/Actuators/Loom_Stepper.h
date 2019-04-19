@@ -37,8 +37,8 @@ public:
 	/// \param[in]	module_name		String | <"Stepper"> | Stepper module name	
 	/// \param[in]	servo_count		Int | <2> | [1-2] | How many steppers to enable
 	Loom_Stepper( 
-			char*		module_name		= "Stepper" ,
-			uint8_t		stepper_count	= NUM_STEPPERS
+			const char*		module_name		= "Stepper" ,
+			uint8_t			stepper_count	= NUM_STEPPERS
 		);
 
 	// --- DESTRUCTOR ---

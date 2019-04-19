@@ -5,8 +5,8 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 LoomI2CSensor::LoomI2CSensor( 	
-		char*		module_name, 
-		byte		i2c_address 
+		const char*		module_name, 
+		byte			i2c_address 
 	) 
 	: LoomSensor( module_name )
 {

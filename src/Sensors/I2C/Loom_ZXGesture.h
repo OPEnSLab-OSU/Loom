@@ -46,9 +46,9 @@ public:
 	/// \param[in]	module_name				String | <"ZXGesture"> | ZXGesture module name					
 	/// \param[in]	mode					Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
 	Loom_ZXGesture(	
-			byte		i2c_address				= 0x10,
-			char*		module_name				= "ZXGesture",
-			ZXMode		mode					= ZXMode::ZX_POS
+			byte			i2c_address		= 0x10,
+			const char*		module_name		= "ZXGesture",
+			ZXMode			mode			= ZXMode::ZX_POS
 		);
 
 	// --- DESTRUCTOR ---

@@ -5,9 +5,9 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_ZXGesture::Loom_ZXGesture(
-		byte		i2c_address, 
-		char*		module_name, 
-		ZXMode		mode
+		byte			i2c_address, 
+		const char*		module_name, 
+		ZXMode			mode
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {

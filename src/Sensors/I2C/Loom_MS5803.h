@@ -34,8 +34,8 @@ public:
 	/// \param[in]	i2c_address				Set(Int) | <0x76> | {0x76, 0x77} | I2C address (0x76 if CSB (pin 3) is High, 0x77 if CSB is Low)
 	/// \param[in]	module_name				String | <"MS5803"> | MS5803 module name					
 	Loom_MS5803(	
-			byte		i2c_address				= 0x76,
-			char*		module_name				= "MS5803"
+			byte			i2c_address		= 0x76,
+			const char*		module_name		= "MS5803"
 		);
 
 	// --- DESTRUCTOR ---

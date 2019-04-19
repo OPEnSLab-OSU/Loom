@@ -5,8 +5,8 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_SHT31D::Loom_SHT31D(
-		byte		i2c_address,
-		char*		module_name
+		byte			i2c_address,
+		const char*		module_name
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {

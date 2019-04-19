@@ -6,8 +6,8 @@
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Stepper::Loom_Stepper( 
-		char* 		module_name, 
-		uint8_t		stepper_count 
+		const char*		module_name, 
+		uint8_t			stepper_count 
 	) 
 	: LoomActuator( module_name ) 
 {

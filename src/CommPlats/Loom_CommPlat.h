@@ -42,11 +42,11 @@ public:
 
 	// --- CONSTRUCTOR ---
 	LoomCommPlat(	
-			char*		module_name, 
+			const char*		module_name, 
 
-			uint		max_message_len, 
+			uint			max_message_len, 
 			// CommScope subnet_scope, 
-			bool		compress_messages 
+			bool			compress_messages 
 		);
 
 

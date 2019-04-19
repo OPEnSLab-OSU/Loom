@@ -3,8 +3,8 @@
 
 /////////////////////////////////////////////////////////////////////
 Loom_Decagon5TM::Loom_Decagon5TM(	
-		char*		module_name,
-		uint8_t		num_samples 
+		const char*		module_name,
+		uint8_t			num_samples 
 	) 
 	: LoomSDI12Sensor( module_name, num_samples ) 
 {
