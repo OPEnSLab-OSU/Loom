@@ -130,6 +130,12 @@ void Loom_Digital::package(OSCBundle& bndl, char* suffix)
 }
 
 /////////////////////////////////////////////////////////////////////
+bool Loom_Digital::message_route(OSCMessage& msg, int address_offset)
+{
+
+}
+
+/////////////////////////////////////////////////////////////////////
 bool Loom_Digital::get_digital_val(uint8_t pin)
 {
 	if (pin_enabled[ pin_to_index(pin) ]) {

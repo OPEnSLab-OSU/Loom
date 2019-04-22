@@ -60,6 +60,9 @@
 
 LoomModule* module_factory_aux(JsonVariant module) 
 {
+	Println("= = = = = Generate Objects = = = = =");
+	Println();
+
 
 	Println("\n\nModule Info: ");
 	serializeJsonPretty(module, Serial);
@@ -70,6 +73,7 @@ LoomModule* module_factory_aux(JsonVariant module)
 	JsonVariant p  = module["parameters"]; 
 
 	Println2("Module Name:: ", module_type);
+	Println2("Description:: ", module["desc"].as<const char*>() );
 	Println2("Parameter count:: ", p.size());
 
 
@@ -81,7 +85,7 @@ LoomModule* module_factory_aux(JsonVariant module)
 
 
 
-// 	// --- General ---
+	// --- General ---
 
 	if (strcmp(module_type, "Interrupt-Manager") == 0) {
 		Println("Create Interrupt_Manager");
@@ -105,7 +109,7 @@ LoomModule* module_factory_aux(JsonVariant module)
 	} 
 
 
-// 	// --- Actuators ---
+	// --- Actuators ---
 
 	if (strcmp(module_type, "Neopixel") == 0) {
 		Println("Create Neopixel");
@@ -136,7 +140,7 @@ LoomModule* module_factory_aux(JsonVariant module)
 	} 
 
 
-// 	// --- CommPlats --- 
+	// --- CommPlats --- 
 
 	if (strcmp(module_type, "LoRa") == 0) {
 		Println("Create LoRa");
@@ -160,11 +164,11 @@ LoomModule* module_factory_aux(JsonVariant module)
 	// } 
 
 
-// 	// --- InternetPlats --- 
+	// --- InternetPlats --- 
 
 
 
-// 	// --- LogPlats ---
+	// --- LogPlats ---
 
 	if (strcmp(module_type, "OLED") == 0) {
 		Println("Create OLED");
@@ -181,7 +185,7 @@ LoomModule* module_factory_aux(JsonVariant module)
 	} 
 
 
-// 	// --- RTC --- 
+	// --- RTC --- 
 
 	if (strcmp(module_type, "DS3231") == 0) {
 		Println("Create DS3231");
@@ -198,7 +202,7 @@ LoomModule* module_factory_aux(JsonVariant module)
 	} 
 
 
-// 	// --- Sensors ---
+	// --- Sensors ---
 
 	if (strcmp(module_type, "Analog") == 0) {
 		Println("Create Analog");
@@ -215,7 +219,7 @@ LoomModule* module_factory_aux(JsonVariant module)
 	} 
 
 
-// 	//    --- I2C Sensors ---
+	//    --- I2C Sensors ---
 
 	if (strcmp(module_type, "AS7262") == 0) {
 		Println("Create AS7262");
@@ -302,7 +306,7 @@ LoomModule* module_factory_aux(JsonVariant module)
 	} 
 
 
-// 	//    --- SDI12 Sensors ---
+	//    --- SDI12 Sensors ---
 
 	if (strcmp(module_type, "5TM Decagon") == 0) {
 		Println("Create 5TM Decagon");
@@ -330,8 +334,8 @@ LoomModule* module_factory_aux(JsonVariant module)
 
 
 
-// 	Println2("No match found for: ", module_type);
-// 	return nullptr;
+	Println2("No match found for: ", module_type);
+	return nullptr;
 
 // }
 

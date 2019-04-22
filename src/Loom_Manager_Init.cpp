@@ -4,31 +4,99 @@
 
 #include "Loom_Module.h"
 #include "Loom_Manager.h"
-
-
 #include "Loom_Module_Factory.h"
-
-
-
-
 
 #include <ArduinoJson.h>
 
 
+// const char* json_config = "{\"general\":{\"device_name\":\"name\",\"instance_num\":1,\"family_num\":0},\"components\":{\"Device4\":{\"desc\":\"Some description\",\"parameters\":[\"a string\",123,4.56,true,\"0\"]}}}";
+const char* json_config = "{\"general\":{\"device_name\":\"name\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Device1\",\"desc\":\"Some description of device 1\",\"parameters\":[123,4.56,true]},{\"name\":\"Device2\",\"desc\":\"Some description of device 2\",\"parameters\":[123,4.56,-789,123,123,123]},{\"name\":\"Device3\",\"desc\":\"Some description of device 3\",\"parameters\":[\"North\",0,1,2,3]}]}";
 
-
-
-
-
-
-
-void LoomManager::Device_Init()
+void LoomManager::parse_config()
 {
-	
+	// Parse Json config
 
-	// parsing of Json
-	
-	// call module factory
+	Println();
+	Println("= = = = = Parse Config = = = = =");
+
+	DynamicJsonDocument doc(2048);
+	DeserializationError error = deserializeJson(doc, json_config);
+
+	// Test if parsing succeeds.
+	if (error) {
+		Serial.print(F("deserializeJson() failed: "));
+		Serial.println(error.c_str());
+		return;
+	}
+
+
+	Serial.println("\n\nConfig Pretty Version:");
+	serializeJsonPretty(doc, Serial);
+
+	Serial.println("\n\nGeneral Settings:");
+	serializeJsonPretty(doc["general"], Serial);
+
+	Serial.print("\n\nNum modules: ");
+	Serial.println(doc["components"].size()); 
+	Println();
+
+
+	// Apply LoomManager General Settings
+	Println("= = = = = LoomManager Settings = = = = =");
+	Println();
+
+	// JsonObject general = doc["general"];
+
+	// if (general.containsKey("device_name")) {
+	// 	strcpy(this->device_name, general["device_name"]);
+	// }
+	// if (general.containsKey("family")) {
+	// 	strcpy(this->family, general["family"]);
+	// }
+	// if (general.containsKey("family_num")) {
+	// 	this->family_num = general["family_num"];
+	// }
+	// if (general.containsKey("instance")) {
+	// 	this->instance = general["instance"];
+	// }
+	// if (general.containsKey("device_type")) {
+	// 	this->device_type = (DeviceType)(int)general["device_type"];
+	// }
+	// if (general.containsKey("print_verbosity")) {
+	// 	this->print_verbosity = (Verbosity)(int)general["print_verbosity"];
+	// }
+	// if (general.containsKey("package_verbosity")) {
+	// 	this->package_verbosity = (Verbosity)(int)general["package_verbosity"];
+	// }
+
+	print_config();
+
+
+			// char*		device_name			= "Default",
+			// char*		family				= "Loom",
+			// uint		family_num			= 1,
+			// uint		instance			= 1,
+			// DeviceType	device_type			= DeviceType::NODE,
+			// Verbosity	print_verbosity		= Verbosity::V_HIGH,
+			// Verbosity	package_verbosity	=
+
+
+
+
+	// Generate Module Objects
+
+	Println("= = = = = Generate Objects = = = = =");
+	Println();
+
+
+	// Call module factory
+	for ( JsonVariant module : doc["components"].as<JsonArray>()) {
+		module_factory_aux( module );
+	}
+
+	Println("= = = = = = = = = = = = = = = = =");
+	Println();
+
 
 }
 

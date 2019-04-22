@@ -17,9 +17,10 @@ LoomModule::LoomModule()
 {
 	// Println("LoomModule Default Constructor");
 // 
-	this->module_name 	= "Unknown";
-
+	// this->module_name 	= "Unknown";
 	// strcpy(this->module_name, "Unknown");
+	snprintf(this->module_name, 20, "%s", "Unknown"); 
+
 
 	active 				= true;
 	print_debug 		= true;
@@ -34,10 +35,8 @@ LoomModule::LoomModule( const char* module_name ) : LoomModule()
 {
 	// Println("LoomModule Constructor 1");
 
-	strcpy(this->module_name, module_name);
-
 	// strcpy(this->module_name, module_name);
-
+	snprintf(this->module_name, 20, "%s", module_name); 
 // 
 	// print_module_label();
 	// Println("Begin Setup");
@@ -170,7 +169,7 @@ void LoomModule::get_module_name(char* buf)
 
 /////////////////////////////////////////////////////////////////////
 // Return module name char*
-char* LoomModule::get_module_name() 
+const char* LoomModule::get_module_name() 
 { 
 	return module_name; 
 }

@@ -27,7 +27,7 @@ protected:
 	LoomManager*	device_manager;
 
 	/// The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
-	char*			module_name;				
+	char			module_name[20];				
 	// char			module_name[20];				
 	
 	/// Whether or not the module should be treated
@@ -137,7 +137,7 @@ public:
 	void			get_module_name(char* buf);
 	/// Get module name
 	/// \return	Module name
-	char*			get_module_name();
+	const char*		get_module_name();
 
 
 	/// Set print verbosity 

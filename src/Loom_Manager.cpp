@@ -30,14 +30,25 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-LoomManager::LoomManager( char* device_name, char* family, uint family_num, uint instance, DeviceType device_type, Verbosity print_verbosity, Verbosity package_verbosity)
+LoomManager::LoomManager( 
+		const char*		device_name, 
+		const char*		family, 
+		uint			family_num,
+		uint			instance, 
+		DeviceType		device_type, 
+		Verbosity		print_verbosity, 
+		Verbosity		package_verbosity
+	)
 {
-	// Println("MANAGER");
 
-	this->device_name 	= device_name;
-	this->family 		= family;
-	this->family_num 	= family_num;
-	this->instance 		= instance;
+	// strcpy(this->device_name, device_name);
+	// strcpy(this->family, family);
+
+	// this->device_name = device_name;
+	// this->family = family;
+
+	snprintf(this->device_name, 20, "%s", device_name);
+	snprintf(this->family, 20, "%s", family);
 
 	// Initialize module counts
 	this->other_module_count = 0;
@@ -292,7 +303,7 @@ void LoomManager::list_modules()
 	// 		Println4( "\t\t[", (rtc_module[i]->get_active()) ? "+" : "-" , "] ", rtc_module[i]->get_module_name() );
 	// 	}
 
-	list_modules_aux( (LoomModule**)rtc_module      , 1          , "RTC Modules"); 
+	list_modules_aux( (LoomModule**)rtc_module      , 1   		       , "RTC Modules"); 
 
 	list_modules_aux( (LoomModule**)other_modules    , other_module_count , "Other Modules" ); 
 	list_modules_aux( (LoomModule**)sensor_modules   , sensor_count       , "Sensors"); 
@@ -305,7 +316,9 @@ void LoomManager::list_modules()
 /////////////////////////////////////////////////////////////////////
 void LoomManager::set_device_name(char* device_name)
 {
-	this->device_name = device_name;
+	// this->device_name = device_name;
+	// strcpy(this->device_name, device_name);
+	snprintf(this->device_name, 20, "%s", device_name);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -315,11 +328,11 @@ void LoomManager::get_device_name(char* buf)
 }
 
 /////////////////////////////////////////////////////////////////////
-char* LoomManager::get_device_name()
+const char* LoomManager::get_device_name()
 {
 	char name[50];
 	get_device_name(name);
-	return (char*)name;
+	return (const char*)name;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -329,11 +342,11 @@ void LoomManager::packet_header_family(char* buf)
 }
 
 /////////////////////////////////////////////////////////////////////
-char* LoomManager::packet_header_family() 
+const char* LoomManager::packet_header_family() 
 {
 	char result[50];
 	packet_header_family(result);
-	return (char*)result;
+	return (const char*)result;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -343,11 +356,11 @@ void LoomManager::packet_header_subnet(char* buf)
 }
 
 /////////////////////////////////////////////////////////////////////
-char* LoomManager::packet_header_subnet() 
+const char* LoomManager::packet_header_subnet() 
 {
 	char result[50];
 	packet_header_subnet(result);
-	return (char*)result;
+	return (const char*)result;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -357,23 +370,24 @@ void LoomManager::packet_header_device(char* buf)
 }
 
 /////////////////////////////////////////////////////////////////////
-char* LoomManager::packet_header_device() 
+const char* LoomManager::packet_header_device() 
 {
 	char result[50];
 	packet_header_device(result);
-	return (char*)result;
+	return (const char*)result;
 }
 
 /////////////////////////////////////////////////////////////////////
-char* LoomManager::get_family() 
+const char* LoomManager::get_family() 
 { 
 	return family; 
 }
 
 /////////////////////////////////////////////////////////////////////
-void  LoomManager::set_family(char* f) 
+void  LoomManager::set_family(const char* f) 
 { 
-	family = f; 
+	// strcpy(family, f);
+	snprintf(this->family, 20, "%s", family); 
 }
 
 /////////////////////////////////////////////////////////////////////

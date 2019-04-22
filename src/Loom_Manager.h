@@ -78,9 +78,10 @@ class LoomManager
 protected:
 
 	/// The name of the device
-	char*		device_name;	
+	// char*		device_name;	
+	char		device_name[20];	
 	/// The family the device belongs to
-	char*		family;			
+	char		family[20];			
 	/// The subnet of the family
 	uint		family_num;
 	/// The instance / channel ID within the subnet		
@@ -143,13 +144,13 @@ public:
 	/// \param[in]	type				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
 	/// \param[in]	type				Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed OSC bundles are
 	LoomManager(
-			char*		device_name			= "Default",
-			char*		family				= "Loom",
-			uint		family_num			= 1,
-			uint		instance			= 1,
-			DeviceType	device_type			= DeviceType::NODE,
-			Verbosity	print_verbosity		= Verbosity::V_HIGH,
-			Verbosity	package_verbosity	= Verbosity::V_LOW
+			const char*		device_name			= "Default",
+			const char*		family				= "Loom",
+			uint			family_num			= 1,
+			uint			instance			= 1,
+			DeviceType		device_type			= DeviceType::NODE,
+			Verbosity		print_verbosity		= Verbosity::V_HIGH,
+			Verbosity		package_verbosity	= Verbosity::V_LOW
 		);
 
 	// --- DESTRUCTOR ---
@@ -161,6 +162,9 @@ public:
 	/// Also prints configuration of linked modules.
 	void		print_config();
 
+
+	void		parse_config();
+	// maybe overload to take JsonVariant or const char* of json?
 
 
 // // From LoomModule
@@ -221,7 +225,7 @@ public:
 	void 		get_device_name(char* buf);
 	/// Get the device name
 	/// \return String literal of device name.
-	char*		get_device_name();
+	const char*		get_device_name();
 
 
 
@@ -237,27 +241,27 @@ public:
 	void		packet_header_family(char* buf);
 	/// Return device identification message header (to family level) string.
 	/// \return	The device family string
-	char*	 	packet_header_family();
+	const char*	 packet_header_family();
 	/// Copy device identification message header (to subnet level) string to buffer.
 	/// \param[out] buf The bufer to copy subnet name into
 	void		packet_header_subnet(char* buf);
 	/// Return device identification message header (to subnet level) string.
 	/// \return The device subnet string
-	char*		packet_header_subnet();
+	const char*	packet_header_subnet();
 	/// Copy device identification message header (to device specific level) string to buffer. 
 	/// \param[out] buf The bufer to copy device name into
 	void		packet_header_device(char* buf);
 	/// Return device identification message header (to device specific level) string.
 	/// \return The device name and number string
-	char*		packet_header_device();
+	const char*	packet_header_device();
 
 
 	/// Get device family name.
 	/// \return Family name
-	char*		get_family();
+	const char*	get_family();
 	/// Set device family name.
 	/// \param[out] family Family name
-	void		set_family(char* f);
+	void		set_family(const char* f);
 	/// Get device family number.
 	/// \return Family number
 	int			get_family_num();
@@ -323,7 +327,6 @@ public:
 private:
 
 
-	void		Device_Init();
 
 	void		add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
 	void		list_modules_aux(LoomModule** modules, uint len, char* module_type);
