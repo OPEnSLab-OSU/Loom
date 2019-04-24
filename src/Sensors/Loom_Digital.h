@@ -28,21 +28,21 @@ public:
 
 
 	/// Digital manager module constructor
-	/// 
-	/// \param[in]	module_name			String | <"Digital"> | Digital manager module name
-	/// \param[in]	enable5				Bool | <true> | Enable pin 5 for managing
-	/// \param[in]	enable6				Bool | <true> | Enable pin 6 for managing
-	/// \param[in]	enable9				Bool | <false> | Enable pin 9 for managing
-	/// \param[in]	enable10			Bool | <false> | Enable pin 10 for managing
-	/// \param[in]	enable11			Bool | <false> | Enable pin 11 for managing
-	/// \param[in]	enable12			Bool | <false> | Enable pin 12 for managing
-	/// \param[in]	enableA0			Bool | <false> | Enable pin A0 for managing
-	/// \param[in]	enableA1			Bool | <false> | Enable pin A1 for managing
-	/// \param[in]	enableA2			Bool | <false> | Enable pin A2 for managing
-	/// \param[in]	enableA3			Bool | <false> | Enable pin A3 for managing
-	/// \param[in]	enableA4			Bool | <false> | Enable pin A4 for managing
-	/// \param[in]	enableA5			Bool | <false> | Enable pin A5 for managing
-	Loom_Digital(	
+	///
+	/// \param[in]	module_name			String | <"Digital"> | null | Digital manager module name
+	/// \param[in]	enable5				Bool | <true> | {true, false} | Enable pin 5 for managing
+	/// \param[in]	enable6				Bool | <true> | {true, false} | Enable pin 6 for managing
+	/// \param[in]	enable9				Bool | <false> | {true, false} | Enable pin 9 for managing
+	/// \param[in]	enable10			Bool | <false> | {true, false} | Enable pin 10 for managing
+	/// \param[in]	enable11			Bool | <false> | {true, false} | Enable pin 11 for managing
+	/// \param[in]	enable12			Bool | <false> | {true, false} | Enable pin 12 for managing
+	/// \param[in]	enableA0			Bool | <false> | {true, false} | Enable pin A0 for managing
+	/// \param[in]	enableA1			Bool | <false> | {true, false} | Enable pin A1 for managing
+	/// \param[in]	enableA2			Bool | <false> | {true, false} | Enable pin A2 for managing
+	/// \param[in]	enableA3			Bool | <false> | {true, false} | Enable pin A3 for managing
+	/// \param[in]	enableA4			Bool | <false> | {true, false} | Enable pin A4 for managing
+	/// \param[in]	enableA5			Bool | <false> | {true, false} | Enable pin A5 for managing
+	Loom_Digital(
 			const char*		module_name		= "Digital",
 			bool			enable5			= true,
 			bool			enable6			= true,

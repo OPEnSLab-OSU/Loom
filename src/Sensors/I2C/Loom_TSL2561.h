@@ -25,9 +25,9 @@ protected:
 	/// Sensor resolution setting
 	int 		resolution;
 
-	/// Measured infra-red lux 
+	/// Measured infra-red lux
 	int 		lightIR;
-	
+
 	/// Measure full spectrum lux
 	int 		lightFull;
 
@@ -36,10 +36,10 @@ public:
 	/// TSL2561 module constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x29> | {0x29, 0x39, 0x49} | I2C address
-	/// \param[in]	module_name				String | <"TSL2561"> | TSL2561 module name					
-	/// \param[in]	gain					Set(Int) | <1> | { 1, 16 } | Gain level
+	/// \param[in]	module_name				String | <"TSL2561"> | null | TSL2561 module name					
+	/// \param[in]	gain							Set(Int) | <1> | {1, 16} | Gain level
 	/// \param[in]	resolution				Set(Int) | <3> | { 1("Low"), 2("Med"), 3("High") } | Resolution
-	Loom_TSL2561(	
+	Loom_TSL2561(
 			byte			i2c_address		= 0x29,
 			const char*		module_name		= "TSL2561",
 			int				gain			= 1,

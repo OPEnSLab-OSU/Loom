@@ -20,13 +20,13 @@
 
 
 // Specify that LoomRTC exists, defined in own file
-class LoomRTC; 
+class LoomRTC;
 
 
-// Used to make function signatures easier to read 
+// Used to make function signatures easier to read
 // when returning function pointers
 /// Typedef to for ISR function pointer readability
-typedef void (*ISRFuncPtr)(); 
+typedef void (*ISRFuncPtr)();
 
 
 
@@ -73,7 +73,7 @@ protected:
 	/// List of interrupts configurations
 	IntDetails		int_settings[InteruptRange];
 
-	// Flags set by interrupts, indicating ISR bottom 
+	// Flags set by interrupts, indicating ISR bottom
 	// half should be called if not Null
 	static bool 	interrupt_triggered[InteruptRange];
 
@@ -96,10 +96,10 @@ protected:
 public:
 
 	/// Interrupt Manager module constructor.
-	/// 
-	/// \param[in]	module_name			String | <"Interrupt-Manager"> | Interrupt Manager module name
+	///
+	/// \param[in]	module_name		String | <"Interrupt-Manager"> | null | Interrupt Manager module name
 	/// \param[in]	RTC_Inst			Set(Int) | <0> | {0("Null")} | OLED module name
-	Loom_Interrupt_Manager( 
+	Loom_Interrupt_Manager(
 			const char*		module_name		= "Interrupt-Manager",
 			LoomRTC*		RTC_Inst		= nullptr
 		);
@@ -134,7 +134,7 @@ public:
 
 	/// Per interrupt enable
 	/// \param[in]	pin		Interrupt pin to change enable state of
-	/// \param[in]	state	The enable state to set pin to 
+	/// \param[in]	state	The enable state to set pin to
 	void		set_enable_interrupt(byte pin, bool state);
 	/// Get pin interrupt enable state
 	/// \return		The enable state
@@ -151,7 +151,7 @@ public:
 	/// Restores pin to default ISR, disables interrupt
 	/// \param[in]	pin		The pin to unregister ISRs for
 	/// \param[in]	type	What signal to configure default ISR to (default LOW)
-	void		unregister_ISR(byte pin, byte type=LOW);  
+	void		unregister_ISR(byte pin, byte type=LOW);
 
 	/// Checks the flags set by default ISRs, calls pending bottom half ISRs
 	void		run_ISR_bottom_halves();
@@ -159,7 +159,7 @@ public:
 	/// Detaches then reattacheds interrupt according to settings.
 	/// used to clear pending interrupts
 	/// \param[in]	pin 	Pin to reset interrupts for
-	void		interrupt_reset(byte pin);   
+	void		interrupt_reset(byte pin);
 
 
 
@@ -177,11 +177,11 @@ public:
 
 
 // maybe rename relative/exact to TimeSpan/DateTime?
-	
+
 
 	/// Set RTC alarm relative time from now
 	/// \param[in]	duration	How long before the alarm should go off
-	bool		RTC_alarm_relative(TimeSpan duration);	
+	bool		RTC_alarm_relative(TimeSpan duration);
 
 	/// Set RTC alarm relative time from now
 	/// \param[in]	days		Days into the future the alarm should be set
@@ -189,16 +189,16 @@ public:
 	/// \param[in]	minutes		Minutes into the future the alarm should be set
 	/// \param[in]	seconds		Seconds into the future the alarm should be set
 	bool		RTC_alarm_relative(uint days, uint hours, uint minutes, uint seconds);
-	
+
 
 // maybe remove these 2 (leave in Sleep manager) ? - perhaps not
 	// bool set_RTC_alarm_for_time_from_last_alarm_time(TimeSpan duration);
 	// bool set_RTC_alarm_for_time_from_last_alarm_time(uint days, uint hours, uint minutes, uint seconds);
-	
+
 
 	/// Set RTC alarm for a specific time.
 	/// Increments to next day at given hour, min, sec if specified time is in past
-	/// \param[in]	future_time		Time to set alarm for 
+	/// \param[in]	future_time		Time to set alarm for
 	bool		RTC_alarm_exact(DateTime future_time);
 
 	/// Set RTC alarm for a specific time.
@@ -207,7 +207,7 @@ public:
 	/// \param[in]	minute		Minute to set alarm for
 	/// \param[in]	second		Second to set alarm for
 	bool		RTC_alarm_exact(uint hour, uint minute, uint second);
-	
+
 
 
 // === === AsyncDelay Timer Functions === ===
@@ -219,7 +219,7 @@ public:
 	/// Configure specified timer
 	void		register_timer(uint timer_num, unsigned long duration, ISRFuncPtr ISR, bool repeat);
 
-	/// Clear specified timer 
+	/// Clear specified timer
 	void		clear_timer(uint timer_num);
 
 
@@ -268,15 +268,3 @@ private:
 
 
 #endif // of #ifndef LOOM_INTERRUPT_MANAGER_h
-
-
-
-
-
-
-
-
-
-
-
-

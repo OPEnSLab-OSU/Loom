@@ -8,7 +8,7 @@
 
 
 /// Different modes of the ZX gesture sensor
-enum class ZXMode { 
+enum class ZXMode {
 	ZX_POS,		///< Measure z and x position
 	ZX_GEST 	///< Measure gestures
 };
@@ -43,9 +43,9 @@ public:
 	/// ZXGesture module constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x10> | {0x10, 0x11} | I2C address
-	/// \param[in]	module_name				String | <"ZXGesture"> | ZXGesture module name					
-	/// \param[in]	mode					Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
-	Loom_ZXGesture(	
+	/// \param[in]	module_name				String | <"ZXGesture"> | null | ZXGesture module name
+	/// \param[in]	mode							Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
+	Loom_ZXGesture(
 			byte			i2c_address		= 0x10,
 			const char*		module_name		= "ZXGesture",
 			ZXMode			mode			= ZXMode::ZX_POS

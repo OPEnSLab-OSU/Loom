@@ -13,13 +13,13 @@
 
 
 // Specify that LoomRTC exists, defined in own file
-class LoomRTC; 
+class LoomRTC;
 // Specify that LoomManager exists, defined in own file
-// class LoomManager; 
+// class LoomManager;
 
 
 /// Different options available to sleep in
-enum class SleepMode { 
+enum class SleepMode {
 	IDLE, 			///< Idle
 	STANDBY, 		///< Standby
 	SLEEPYDOG, 		///< SleepyDog (sleep 'hack')
@@ -28,7 +28,7 @@ enum class SleepMode {
 
 
 // # (LoomModule) | dependencies: [] | conflicts: []
-/// Submanager to manage sleep functionality 
+/// Submanager to manage sleep functionality
 // #
 class Loom_Sleep_Manager : public LoomModule
 {
@@ -58,13 +58,13 @@ protected:
 public:
 
 	/// Sleep Manager module constructor.
-	/// 
-	/// \param[in]	module_name			String | <"Sleep-Manager"> | Sleep Manager module name
-	/// \param[in]	RTC_Inst			Set(Int) | <0> | {0("Null")} | OLED module name
-	/// \param[in]	use_LED				Bool | <true> | Whether or not to use LED to indicate wake state
-	/// \param[in]	delay_on_wake		Bool | <false> | Whether or not to delay upon waking to allow time to open Serial Monitor
+	///
+	/// \param[in]	module_name			String | <"Sleep-Manager"> | null | Sleep Manager module name
+	/// \param[in]	RTC_Inst				Set(Int) | <0> | {0("Null")} | OLED module name
+	/// \param[in]	use_LED					Bool | <true> | {true, false} | Whether or not to use LED to indicate wake state
+	/// \param[in]	delay_on_wake		Bool | <false> | {true, false} | Whether or not to delay upon waking to allow time to open Serial Monitor
 	/// \param[in]	sleep_mode			Set(SleepMode) | <1> | { 0("Idle"), 1("Standby"), 2("SleepyDog"), 3("Opens Low Power")} | Which SleepMode to use
-	Loom_Sleep_Manager( 
+	Loom_Sleep_Manager(
 			const char*		module_name			= "Sleep-Manager",
 			LoomRTC*		RTC_Inst			= nullptr,
 			bool			use_LED				= true,
@@ -123,16 +123,16 @@ public:
 // NEED these functions, cant offload to only interrupt manager
 
 	/// Sleep for the specified time.
-	/// Can optionally sleep for given time from 
+	/// Can optionally sleep for given time from
 	/// last wake time.
 	/// \param[in]	duration		The time to sleep
 	/// \param[in]	from_last_wake	True to try to sleep for duration from
 	///								last wake time, false to sleep duration
 	///								from current time
 	/// \return		Whether or not sleep was executed
-	bool		sleep_duration(TimeSpan duration, bool from_last_wake=false);	
+	bool		sleep_duration(TimeSpan duration, bool from_last_wake=false);
 	/// Sleep for the specified time.
-	/// Can optionally sleep for given time from 
+	/// Can optionally sleep for given time from
 	/// last wake time.
 	/// Creates timespan and sends to overloaded Timespan version of function
 	/// \param[in]	days			Days to sleep
@@ -143,13 +143,13 @@ public:
 	///								from current time
 	/// \return		Whether or not sleep was executed
 	bool		sleep_duration(uint days, uint hours, uint minutes, uint seconds, bool from_last_wake=false);
-	
+
 
 	// Only works with RTC
 	// Might work using PCF and SleepyDog together, otherwise has to be DS3231
 	bool		sleep_until(DateTime future_time);
 	bool		sleep_until(uint hour, uint minute, uint second);
-	
+
 	// Standby mode
 	// bool sleep_until_interrupt_on(byte pin);
 	bool		sleep();
@@ -175,7 +175,7 @@ private:
 	// Or in virtual LoomModule sleep/wake() methods
 	// Resetting might not be needed until next call to sleep_duration_from_wake
 	// void RTC_pre_sleep();
-	// void RTC_post_sleep(); 
+	// void RTC_post_sleep();
 
 };
 
@@ -193,5 +193,3 @@ private:
 	// Might work using PCF and SleepyDog together, otherwise has to be DS3231
 	// bool		sleep_duration_from_wake(TimeSpan duration);
 	// bool		sleep_duration_from_wake(uint days, uint hours, uint minutes, uint seconds);
-	
-

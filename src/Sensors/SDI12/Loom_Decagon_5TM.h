@@ -18,9 +18,9 @@ public:
 
 	/// Decagon 5TM module constructor
 	///
-	/// \param[in]	module_name			String | <"5TM"> | Decagon 5TM manager module name
+	/// \param[in]	module_name			String | <"5TM"> | null | Decagon 5TM manager module name
 	/// \param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
-	Loom_Decagon5TM(	
+	Loom_Decagon5TM(
 			const char*		module_name		= "5TM Decagon",
 			uint8_t			num_samples		= 1
 		);

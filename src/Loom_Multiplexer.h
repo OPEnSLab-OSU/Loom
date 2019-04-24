@@ -29,10 +29,10 @@
 // // I2C Address Conflict Selection
 
 
-enum class I2C_Selection { 
+enum class I2C_Selection {
 	L_TSL2561,		///< TSL2561
 	L_TSL2591,		///< TSL2591
-	L_AS7262,		///< AS7262 
+	L_AS7262,		///< AS7262
 	L_AS7263,		///< AS7263
 	L_AS7265X		///< AS72625X
 };
@@ -50,8 +50,8 @@ enum class I2C_Selection {
 
 
 // # (LoomModule) | dependencies: [] | conflicts: []
-/// Multiplexer manager for interfacing with 
-/// multiple I2C sensors 
+/// Multiplexer manager for interfacing with
+/// multiple I2C sensors
 // #
 class Loom_Multiplexer : public LoomModule
 {
@@ -68,29 +68,29 @@ protected:
 	LoomI2CSensor**	sensors;
 
 	/// The multiplexer's I2C address
-	byte			i2c_address;		
+	byte			i2c_address;
 
 	/// The number of ports on the multiplexer
 	uint			num_ports;
 	/// Whether or not sensor list is dynamic (refresh sensor list periodically)
 	bool			dynamic_list;
 	/// Interval to update sensor list at
-	uint			update_period;	
-	
+	uint			update_period;
+
 	/// When the sensor list was last updated
-	unsigned long	last_update_time; 
+	unsigned long	last_update_time;
 
 public:
 
 
 	/// Multiplexer module constructor.
-	/// 
-	/// \param[in]	module_name			String | <"Multiplexer"> | Multiplexer module name
-	/// \param[in]	i2c_address			Set(Int) | <0x71> | {0x71} | I2C address
+	///
+	/// \param[in]	module_name				String | <"Multiplexer"> | null | Multiplexer module name
+	/// \param[in]	i2c_address				Set(Int) | <0x71> | {0x71} | I2C address
 	/// \param[in]	min_filter_delay	Int | <8> | [1-8] | Minimum update delay, if enable_rate_filter enabled
-	/// \param[in]	dynamic_list		Bool | <true> | Whether or not to automatically check for new sensors
-	/// \param[in]	update_period		Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
-	Loom_Multiplexer(	
+	/// \param[in]	dynamic_list			Bool | <true> | {true, false} | Whether or not to automatically check for new sensors
+	/// \param[in]	update_period			Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
+	Loom_Multiplexer(
 			const char*		module_name			= "Multiplexer",
 			byte			i2c_address			= 0x71,
 			uint			num_ports			= 8,
@@ -104,18 +104,18 @@ public:
 
 	// General
 	void		print_config();
-	void		print_state(); 
+	void		print_state();
 	void		measure();
 	void		package(OSCBundle& bndl, char* suffix="");
 	bool		message_route(OSCMessage& msg, int address_offset);
 	void		print_measurements();
 
-	/// Populate a bundle with a list of sensors currently attached  
+	/// Populate a bundle with a list of sensors currently attached
 	/// \param[out]	bndl	Bundle to populate with sensor list
 	void		get_sensor_list(OSCBundle& bndl);
 
 	/// Set whether or not to periodically update list of attached sensors
-	/// \param[in]	dynamic		The setting to set 
+	/// \param[in]	dynamic		The setting to set
 	void		set_is_dynamic(bool dynamic);
 	/// Get whether or not sensors are updated dynamically
 	/// \return	True if dynamic

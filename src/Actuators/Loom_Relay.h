@@ -18,17 +18,17 @@ protected:
 	byte		pin;
 
 	/// Whether the relay is on or off
-	bool		on;	
+	bool		on;
 
 public:
 
 	/// Relay module constructor.
 	///
-	/// \param[in]	module_name		String | <"Relay"> | Relay module name	
-	/// \param[in]	pin				Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to control the relay
-	Loom_Relay( 
+	/// \param[in]	module_name		String | <"Relay"> | {true, false} | Relay module name
+	/// \param[in]	pin						Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to control the relay
+	Loom_Relay(
 			const char*		module_name		= "Relay",
-			byte			pin				= 10 
+			byte			pin				= 10
 		);
 
 	// --- DESTRUCTOR ---
@@ -40,7 +40,7 @@ public:
 	void		package(OSCBundle& bndl, char* suffix="");
 	bool		message_route(OSCMessage& msg, int address_offset);
 
-	// --- Actuator Control --- 
+	// --- Actuator Control ---
 
 	/// Set relay state
 	/// \param[in]	state	The state to set relay to (True=HIGH, False=LOW)

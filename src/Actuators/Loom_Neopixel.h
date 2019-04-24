@@ -25,14 +25,14 @@ protected:
 	uint8_t				color_vals[3][3];
 
 public:
-	
+
 	/// Neopixel module constructor
 	///
-	/// \param[in]	module_name		String | <"Neopixel"> | Neopixel module name
-	/// \param[in]	enableA0		Bool | <false> | Whether or not to use pin A0 for Neopixel
-	/// \param[in]	enableA1		Bool | <false> | Whether or not to use pin A1 for Neopixel
-	/// \param[in]	enableA2		Bool | <true> | Whether or not to use pin A2 for Neopixel
-	Loom_Neopixel( 	
+	/// \param[in]	module_name		String | <"Neopixel"> | null | Neopixel module name
+	/// \param[in]	enableA0			Bool | <false> | {true, false} | Whether or not to use pin A0 for Neopixel
+	/// \param[in]	enableA1			Bool | <false> | {true, false} | Whether or not to use pin A1 for Neopixel
+	/// \param[in]	enableA2			Bool | <true> | {true, false} | Whether or not to use pin A2 for Neopixel
+	Loom_Neopixel(
 			const char*		module_name		= "Neopixel",
 			bool			enableA0		= false,
 			bool			enableA1		= false,
@@ -58,7 +58,7 @@ public:
 
 	/// Set Neopixel color.
 	/// \param[in]	port		The port the Neopixel to control is on (0-2 corresponding to A0-A2)
-	/// \param[in]	chain_num	The Neopixel number if daisy-chained 
+	/// \param[in]	chain_num	The Neopixel number if daisy-chained
 	/// \param[in]	red			The red value (0-255)
 	/// \param[in]	green		The green value (0-255)
 	/// \param[in]	blue		The blue value (0-255)

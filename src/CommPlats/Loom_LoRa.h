@@ -14,7 +14,7 @@
 /// LoRa reset pin
 #define RFM95_RST 4
 /// LoRa interrupt pin
-#define RFM95_INT 3  
+#define RFM95_INT 3
 
 /// LoRa radio frequence.
 /// Hardware specific, Tx must match Rx
@@ -34,14 +34,14 @@ class Loom_LoRa : public LoomCommPlat
 protected:
 
 	///	Underlying rf95 object
-	RH_RF95*			driver; 	
-	/// Manager for driver		
+	RH_RF95*			driver;
+	/// Manager for driver
 	RHReliableDatagram*	manager;
 
 	/// Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
 	uint8_t				address;
 	/// Default address to send to
-	uint8_t				friend_address;	
+	uint8_t				friend_address;
 
 	/// Power level to send at
 	uint8_t				power_level;
@@ -54,15 +54,15 @@ public:
 
 	/// LoRa module constructor
 	///
-	/// \param[in]	module_name				String | <"LoRa"> | LoRa module name	
+	/// \param[in]	module_name					String | <"LoRa"> | LoRa module name
 	/// \param[in]	max_message_len			Set(Int) | <255> | {255("Max length")} | The maximum possible message length
-	/// \param[in]	compress_messages		Bool | <true> | Whether or not to try to compress messages
-	/// \param[in]	address					Int [0-99] <01> | This device's LoRa address
-	/// \param[in]	friend_address			Int [0-99] <00> | Default LoRa address to send to
-	/// \param[in]	power_level				Int [5-23] <23> | Transmission power level, low to high power
-	/// \param[in]	retry_count				Int [0-15] <3> | Max number of transmission retries
-	/// \param[in]	retry_timeout			Int [20-500] <200> | Delay between retransmissions (ms)
-	Loom_LoRa( 	
+	/// \param[in]	compress_messages		Bool | <true> | {true, false} | Whether or not to try to compress messages
+	/// \param[in]	address							Int | <01> | [0-99] | This device's LoRa address
+	/// \param[in]	friend_address			Int | <00> | [0-99] | Default LoRa address to send to
+	/// \param[in]	power_level					Int | <23> | [5-23] | Transmission power level, low to high power
+	/// \param[in]	retry_count					Int | <3> | [0-15] | Max number of transmission retries
+	/// \param[in]	retry_timeout				Int | <200>| [20-500] | Delay between retransmissions (ms)
+	Loom_LoRa(
 			const char*		module_name			= "LoRa",
 			uint16_t		max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
 			// CommScope 	subnet_scope 		= SCOPE_SUBNET,
