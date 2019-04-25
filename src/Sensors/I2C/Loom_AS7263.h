@@ -6,9 +6,9 @@
 
 #include "AS726X.h"
 
-// # (LoomI2CSensor) | dependencies: [] | conflicts: []
+// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// AS7263 Near Infrared spectrum spectral sensor module
-// #
+// ###
 class Loom_AS7263 : public LoomI2CSensor
 {
 

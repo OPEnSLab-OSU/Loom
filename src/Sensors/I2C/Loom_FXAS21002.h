@@ -7,9 +7,9 @@
 #include <Adafruit_FXAS21002C.h>
 
 
-// # (LoomI2CSensor) | dependencies: [] | conflicts: []
+// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// FXAS21002 3-Axis Gyroscope snesor module
-// #
+// ###
 class Loom_FXAS21002 : public LoomI2CSensor
 {
 
@@ -27,7 +27,7 @@ public:
 	/// FXAS21002 module constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x20> | {0x20, 0x21} | I2C address
-	/// \param[in]	module_name				String | <"FXAS21002"> | null | FXAS21002 module name					
+	/// \param[in]	module_name				String | <"FXAS21002"> | null | FXAS21002 module name
 	Loom_FXAS21002(
 			byte			i2c_address		= 0x20,
 			const char*		module_name		= "FXAS21002"

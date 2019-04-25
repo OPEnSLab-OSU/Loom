@@ -49,10 +49,10 @@ enum class I2C_Selection {
 
 
 
-// # (LoomModule) | dependencies: [] | conflicts: []
+// ### (LoomModule) | dependencies: [] | conflicts: []
 /// Multiplexer manager for interfacing with
 /// multiple I2C sensors
-// #
+// ###
 class Loom_Multiplexer : public LoomModule
 {
 private:

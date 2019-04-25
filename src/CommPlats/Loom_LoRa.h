@@ -25,9 +25,9 @@
 #define LORA_SELF_ADDRESS   01
 #define LORA_FRIEND_ADDRESS 00
 
-// # (LoomCommPlat) | dependencies: [] | conflicts: []
+// ### (LoomCommPlat) | dependencies: [] | conflicts: []
 /// LoRa communication platform module
-// #
+// ###
 class Loom_LoRa : public LoomCommPlat
 {
 

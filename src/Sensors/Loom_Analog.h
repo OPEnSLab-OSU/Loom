@@ -38,9 +38,9 @@ enum class AnalogConversion {
 
 
 
-// # (LoomSensor) | dependencies: [] | conflicts: []
+// ### (LoomSensor) | dependencies: [] | conflicts: []
 /// Analog pin manager
-// #
+// ###
 class Loom_Analog : public LoomSensor
 {
 

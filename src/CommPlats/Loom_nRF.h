@@ -15,9 +15,9 @@
 /// Max nRF message size
 #define NRF_MESSAGE_SIZE 120
 
-// # (LoomCommPlat) | dependencies: [] | conflicts: []
+// ### (LoomCommPlat) | dependencies: [] | conflicts: []
 /// Nordic Radio communication platform module
-// #
+// ###
 class Loom_nRF : public LoomCommPlat
 {
 

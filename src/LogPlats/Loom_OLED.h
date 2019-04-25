@@ -29,9 +29,9 @@ enum class OLED_Freeze {
 	SCROLL 		///< Scroll freezes, data updates
 };
 
-// # (LoomLogPlat) | dependencies: [] | conflicts: []
+// ### (LoomLogPlat) | dependencies: [] | conflicts: []
 /// OLED logging platform module.
-// #
+// ###
 class Loom_OLED : public LoomLogPlat
 {
 

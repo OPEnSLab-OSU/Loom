@@ -59,9 +59,9 @@ struct StopWatchDetails {
 
 
 
-// # (LoomModule) | dependencies: [] | conflicts: []
+// ### (LoomModule) | dependencies: [] | conflicts: []
 /// Submanager for managing interrupts, timers, and stopwatches
-// #
+// ###
 class Loom_Interrupt_Manager : public LoomModule
 {
 

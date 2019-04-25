@@ -7,10 +7,10 @@
 #include <Adafruit_MAX31856.h>
 
 
-// # (LoomSPISensor) | dependencies: [] | conflicts: []
+// ### (LoomSPISensor) | dependencies: [] | conflicts: []
 /// MAX31856 thermocouple module.
 /// Measures temperature.
-// #
+// ###
 class Loom_MAX31856 : public LoomSPISensor
 {
 

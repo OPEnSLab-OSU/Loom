@@ -7,9 +7,9 @@
 #include "SparkFun_AS7265X.h"
 
 
-// # (LoomI2CSensor) | dependencies: [] | conflicts: []
+// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// AS72625X 3 Spectrum (Visible, near IR, UV) spectral sensor module
-// #
+// ###
 class Loom_AS7265X : public LoomI2CSensor
 {
 

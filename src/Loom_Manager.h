@@ -69,9 +69,9 @@ class LoomLogPlat;
 #define MAX_LOGS          5
 
 
-// # () | dependencies: [] | conflicts: []
+// ### () | dependencies: [] | conflicts: []
 /// Manager class to simplify with enabled modules
-// #
+// ###
 class LoomManager
 {
 

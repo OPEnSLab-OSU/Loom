@@ -11,9 +11,9 @@
 /// Dependent on servo controller breakout.
 #define NUM_SERVOS 8
 
-// # (LoomActuator) | dependencies: [] | conflicts: []
+// ### (LoomActuator) | dependencies: [] | conflicts: []
 /// Servo actuator module
-// #
+// ###
 class Loom_Servo : public LoomActuator
 {
 

@@ -6,9 +6,9 @@
 #include "Loom_Actuator.h"
 
 
-// # (LoomActuator) | dependencies: [] | conflicts: []
+// ### (LoomActuator) | dependencies: [] | conflicts: []
 /// Relay actuator module
-// #
+// ###
 class Loom_Relay : public LoomActuator
 {
 

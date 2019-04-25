@@ -27,9 +27,9 @@ enum class SleepMode {
 };
 
 
-// # (LoomModule) | dependencies: [] | conflicts: []
+// ### (LoomModule) | dependencies: [] | conflicts: []
 /// Submanager to manage sleep functionality
-// #
+// ###
 class Loom_Sleep_Manager : public LoomModule
 {
 

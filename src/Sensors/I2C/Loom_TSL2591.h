@@ -7,9 +7,9 @@
 #include <Adafruit_TSL2591.h>
 
 
-// # (LoomI2CSensor) | dependencies: [] | conflicts: []
+// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// TSL2591 Lux sensor module
-// #
+// ###
 class Loom_TSL2591 : public LoomI2CSensor
 {
 

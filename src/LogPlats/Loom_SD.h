@@ -26,9 +26,9 @@ class LoomRTC;
 
 
 
-// # (LoomLogPlat) | dependencies: [] | conflicts: []
+// ### (LoomLogPlat) | dependencies: [] | conflicts: []
 /// SD logging platform module
-// #
+// ###
 class Loom_SD : public LoomLogPlat
 {
 

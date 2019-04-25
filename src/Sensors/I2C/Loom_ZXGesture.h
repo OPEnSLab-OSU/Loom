@@ -14,9 +14,9 @@ enum class ZXMode {
 };
 
 
-// # (LoomI2CSensor) | dependencies: [] | conflicts: []
+// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// ZXGesture position / gesture sensor module
-// #
+// ###
 class Loom_ZXGesture : public LoomI2CSensor
 {
 

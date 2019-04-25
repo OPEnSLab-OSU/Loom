@@ -17,9 +17,9 @@
 
 
 
-// # (LoomLogPlat) | dependencies: [] | conflicts: []
+// ### (LoomLogPlat) | dependencies: [] | conflicts: []
 /// SlipSerial communication platform module
-// #
+// ###
 class Loom_SlipSerial : public LoomCommPlat
 {
 

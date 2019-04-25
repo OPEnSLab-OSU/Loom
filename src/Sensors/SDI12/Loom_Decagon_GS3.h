@@ -5,9 +5,9 @@
 #include "Loom_SDI12_Sensor.h"
 
 
-// # (LoomSDI12Sensor) | dependencies: [] | conflicts: []
+// ### (LoomSDI12Sensor) | dependencies: [] | conflicts: []
 /// Decagon GS3 Soil Moisture sensor module
-// #
+// ###
 class Loom_DecagonGS3 : public LoomSDI12Sensor
 {
 
