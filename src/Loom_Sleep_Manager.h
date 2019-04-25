@@ -78,7 +78,7 @@ public:
 
 
 	// --- DESTRUCTOR ---
-	~Loom_Sleep_Manager();
+	virtual ~Loom_Sleep_Manager();
 
 	// Inherited methods
 	void		print_config() override;

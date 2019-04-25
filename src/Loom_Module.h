@@ -76,7 +76,7 @@ public:
 
 
 	// --- DESTRUCTOR ---
-	~LoomModule();
+	virtual ~LoomModule();
 
 
 	// --- PUBLIC METHODS ---
@@ -91,7 +91,7 @@ public:
 	/// Derived modules may override this for increased function,
 	/// such as linking a submanager or RTC module.
 	/// \param[in]	LM	LoomManager to point to
-	virtual void	link_device_manager(LoomManager* LM);
+	void	link_device_manager(LoomManager* LM);
 
 	/// Print the module name as a label.
 	/// Used for matching debug prints to corresponding module

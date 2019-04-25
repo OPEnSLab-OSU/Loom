@@ -106,7 +106,7 @@ public:
 
 
 	// --- DESTRUCTOR ---
-	~Loom_Interrupt_Manager();
+	virtual ~Loom_Interrupt_Manager();
 
 	// Inherited methods
 	void		print_config() override;

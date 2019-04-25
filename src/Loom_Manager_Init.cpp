@@ -10,7 +10,11 @@
 
 
 // const char* json_config = "{\"general\":{\"device_name\":\"name\",\"instance_num\":1,\"family_num\":0},\"components\":{\"Device4\":{\"desc\":\"Some description\",\"parameters\":[\"a string\",123,4.56,true,\"0\"]}}}";
-const char* json_config = "{\"general\":{\"device_name\":\"name\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Device1\",\"desc\":\"Some description of device 1\",\"parameters\":[123,4.56,true]},{\"name\":\"Device2\",\"desc\":\"Some description of device 2\",\"parameters\":[123,4.56,-789,123,123,123]},{\"name\":\"Device3\",\"desc\":\"Some description of device 3\",\"parameters\":[\"North\",0,1,2,3]}]}";
+// const char* json_config = "{\"general\":{\"device_name\":\"name\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Device1\",\"desc\":\"Some description of device 1\",\"parameters\":[123,4.56,true]},{\"name\":\"Device2\",\"desc\":\"Some description of device 2\",\"parameters\":[123,4.56,-789,123,123,123]},{\"name\":\"Device3\",\"desc\":\"Some description of device 3\",\"parameters\":[\"North\",0,1,2,3]}]}";
+// const char* json_config = "{\"general\":{\"device_name\":\"name\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]},{\"name\":\"Device1\",\"parameters\":[123,4.56,true]},{\"name\":\"Device2\",\"parameters\":[123,4.56,-789,123,123,123]},{\"name\":\"Device3\",\"parameters\":[\"North\",0,1,2,3]}]}";
+// const char* json_config = "{\"general\":{\"device_name\":\"name\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]}]}";
+
+const char* json_config = "{\"general\":{\"device_name\":\"Analog\",\"instance_num\":1,\"family_num\":0},\"componenents\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]},{\"name\":\"Loom_Digital\",\"parameters\":[\"Digital\",true,true,false,false,false,false,false,false,false,false,false,false]},{\"name\":\"Loom_Interrupt_Manager\",\"parameters\":[\"Interrupt-Manager\",0]}]}";
 
 void LoomManager::parse_config()
 {
@@ -91,12 +95,62 @@ void LoomManager::parse_config()
 
 	// Call module factory
 	for ( JsonVariant module : doc["components"].as<JsonArray>()) {
-		module_factory_aux( module );
+		
+		Loom_Interrupt_Manager*	interrupt_manager	= nullptr; 
+		Loom_Sleep_Manager*		sleep_manager		= nullptr;
+		LoomRTC* 				rtc					= nullptr;
+		LoomModule*				other_module		= nullptr; 
+		LoomSensor*				sensor				= nullptr;
+		LoomActuator*			actuator			= nullptr;
+		LoomCommPlat*			comm_plat			= nullptr;
+		LoomInternetPlat*		internet_plat		= nullptr;
+		LoomLogPlat*			log_plat			= nullptr;
+
+		module_factory_aux(
+			module,
+			interrupt_manager,
+			sleep_manager,
+			rtc,
+			other_module,
+			sensor,
+			actuator,
+			comm_plat,
+			internet_plat,
+			log_plat
+		);
+
+		if (interrupt_manager != nullptr) {
+			add_module(interrupt_manager); 
+		} 
+		if (sleep_manager != nullptr) {
+			add_module(sleep_manager); 
+		} 
+		if (rtc != nullptr) {
+			add_module(rtc);
+		} 
+		if (other_module != nullptr) {
+			add_module(other_module); 
+		} 
+		if (sensor != nullptr) {
+			add_module(sensor); 
+		} 
+		if (actuator != nullptr) {
+			add_module(actuator); 
+		} 
+		if (comm_plat != nullptr) {
+			add_module(comm_plat); 
+		} 
+		if (internet_plat != nullptr) {
+			add_module(internet_plat); 
+		} 
+		if (log_plat != nullptr) {
+			add_module(log_plat); 
+		}
+
 	}
 
 	Println("= = = = = = = = = = = = = = = = =");
 	Println();
-
 
 }
 

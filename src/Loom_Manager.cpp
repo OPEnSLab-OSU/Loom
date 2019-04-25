@@ -100,15 +100,20 @@ void LoomManager::add_module_aux(LoomModule** modules, LoomModule* module, uint&
 {
 	print_device_label();
 
+	if (module == nullptr) {
+		Println("Cannot add null module");
+		return;
+	}
+
 	// If module array is not dynamic, add check to make sure there is room in the array
-	if ( ( len >= max_len ) || (!module) ) {
+	if ( len >= max_len ) {
 		Println2("Cannot add ", module->get_module_name() );
 		return;
 	}
 
 	Println2("Adding Module: ", module->get_module_name() );
-	modules[ len++ ] = module;
 
+	modules[ len++ ] = module;
 	module->link_device_manager(this);
 }
 
@@ -165,6 +170,9 @@ void LoomManager::add_module(LoomRTC* rtc)
 		if (sleep_manager != nullptr) {
 			sleep_manager->set_RTC_module(rtc);
 		}
+	} else {
+		Println("Cannot add null module");
+		return;
 	}
 }
 
@@ -299,11 +307,12 @@ void LoomManager::list_modules()
 	print_device_label();
 	Println("Modules:");
 
-	// if ( (rtc_module != nullptr) && (rtc_module[i]->get_active()) ) {
-	// 		Println4( "\t\t[", (rtc_module[i]->get_active()) ? "+" : "-" , "] ", rtc_module[i]->get_module_name() );
-	// 	}
+	Println5("\t", "RTC modules", " (", (rtc_module != nullptr), "):");
+	if ( (rtc_module != nullptr) && (rtc_module->get_active()) ) {
+		Println4( "\t\t[", (rtc_module->get_active()) ? "+" : "-" , "] ", rtc_module->get_module_name() );
+	}
 
-	list_modules_aux( (LoomModule**)rtc_module      , 1   		       , "RTC Modules"); 
+	// list_modules_aux( (LoomModule**)rtc_module      , 1   		       , "RTC Modules"); 
 
 	list_modules_aux( (LoomModule**)other_modules    , other_module_count , "Other Modules" ); 
 	list_modules_aux( (LoomModule**)sensor_modules   , sensor_count       , "Sensors"); 

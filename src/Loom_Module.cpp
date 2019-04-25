@@ -19,6 +19,8 @@ LoomModule::LoomModule()
 // 
 	// this->module_name 	= "Unknown";
 	// strcpy(this->module_name, "Unknown");
+
+
 	snprintf(this->module_name, 20, "%s", "Unknown"); 
 
 
@@ -36,6 +38,8 @@ LoomModule::LoomModule( const char* module_name ) : LoomModule()
 	// Println("LoomModule Constructor 1");
 
 	// strcpy(this->module_name, module_name);
+
+	// Println2("Module name:", module_name);
 	snprintf(this->module_name, 20, "%s", module_name); 
 // 
 	// print_module_label();
@@ -69,7 +73,6 @@ LoomManager* LoomModule::get_device_manager()
 void LoomModule::link_device_manager(LoomManager* LM)
 {
 	if (LM == nullptr) return;
-
 	device_manager = LM;
 }
 
