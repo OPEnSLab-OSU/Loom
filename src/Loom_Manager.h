@@ -134,6 +134,9 @@ public:
 	const static char* enum_device_type_string(DeviceType t);
 
 
+	/// LoomManager constructor without parameters
+	LoomManager();
+
 	/// Loom Manager constructor.
 	/// 
 	/// \param[in]	device_name			String | <"Default"> | Manager name

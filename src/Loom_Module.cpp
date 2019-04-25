@@ -20,10 +20,8 @@ LoomModule::LoomModule()
 	// this->module_name 	= "Unknown";
 	// strcpy(this->module_name, "Unknown");
 
-
 	snprintf(this->module_name, 20, "%s", "Unknown"); 
-
-
+	
 	active 				= true;
 	print_debug 		= true;
 	print_verbosity 	= Verbosity::V_LOW;

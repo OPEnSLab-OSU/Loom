@@ -14,8 +14,13 @@
 // const char* json_config = "{\"general\":{\"device_name\":\"name\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]},{\"name\":\"Device1\",\"parameters\":[123,4.56,true]},{\"name\":\"Device2\",\"parameters\":[123,4.56,-789,123,123,123]},{\"name\":\"Device3\",\"parameters\":[\"North\",0,1,2,3]}]}";
 // const char* json_config = "{\"general\":{\"device_name\":\"name\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]}]}";
 
-const char* json_config = "{\"general\":{\"device_name\":\"Analog\",\"instance_num\":1,\"family_num\":0},\"componenents\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]},{\"name\":\"Loom_Digital\",\"parameters\":[\"Digital\",true,true,false,false,false,false,false,false,false,false,false,false]},{\"name\":\"Loom_Interrupt_Manager\",\"parameters\":[\"Interrupt-Manager\",0]}]}";
+const char* json_config = "{\"general\":{\"device_name\":\"Device\",\"family\":\"Loom\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]},{\"name\":\"Loom_Digital\",\"parameters\":[\"Digital\",true,true,false,false,false,false,false,false,false,false,false,false]},{\"name\":\"Loom_Interrupt_Manager\",\"parameters\":[\"Interrupt-Manager\",0]}]}";
 
+
+
+/// Parses a JSON configuration and instantiates the specified 
+/// LoomModules.
+/// Adds created LoomModules to the arrays of LoomManager
 void LoomManager::parse_config()
 {
 	// Parse Json config
@@ -49,29 +54,32 @@ void LoomManager::parse_config()
 	Println("= = = = = LoomManager Settings = = = = =");
 	Println();
 
-	// JsonObject general = doc["general"];
+	JsonObject general = doc["general"];
 
-	// if (general.containsKey("device_name")) {
-	// 	strcpy(this->device_name, general["device_name"]);
-	// }
-	// if (general.containsKey("family")) {
-	// 	strcpy(this->family, general["family"]);
-	// }
-	// if (general.containsKey("family_num")) {
-	// 	this->family_num = general["family_num"];
-	// }
-	// if (general.containsKey("instance")) {
-	// 	this->instance = general["instance"];
-	// }
-	// if (general.containsKey("device_type")) {
-	// 	this->device_type = (DeviceType)(int)general["device_type"];
-	// }
-	// if (general.containsKey("print_verbosity")) {
-	// 	this->print_verbosity = (Verbosity)(int)general["print_verbosity"];
-	// }
-	// if (general.containsKey("package_verbosity")) {
-	// 	this->package_verbosity = (Verbosity)(int)general["package_verbosity"];
-	// }
+	if (general.containsKey("device_name")) {
+		// strcpy(this->device_name, general["device_name"]);
+		snprintf(this->device_name, 20, "%s", general["device_name"].as<const char*>());
+
+	}
+	if (general.containsKey("family")) {
+		// strcpy(this->family, general["family"]);
+		snprintf(this->family, 20, "%s", general["family"].as<const char*>());
+	}
+	if (general.containsKey("family_num")) {
+		this->family_num = general["family_num"];
+	}
+	if (general.containsKey("instance")) {
+		this->instance = general["instance"];
+	}
+	if (general.containsKey("device_type")) {
+		this->device_type = (DeviceType)(int)general["device_type"];
+	}
+	if (general.containsKey("print_verbosity")) {
+		this->print_verbosity = (Verbosity)(int)general["print_verbosity"];
+	}
+	if (general.containsKey("package_verbosity")) {
+		this->package_verbosity = (Verbosity)(int)general["package_verbosity"];
+	}
 
 	print_config();
 

@@ -29,6 +29,33 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 }
 
 /////////////////////////////////////////////////////////////////////
+
+
+// doesn't work because default parameters
+
+// // --- CONSTRUCTOR ---
+// LoomManager::LoomManager()
+// {
+
+// 	snprintf(this->device_name, 20, "%s", "device_name");
+// 	snprintf(this->family, 20, "%s", "family");
+
+// 	// Initialize module counts
+// 	this->other_module_count = 0;
+// 	this->sensor_count       = 0;
+// 	this->actuator_count     = 0;
+// 	this->comm_count         = 0;
+// 	this->log_count          = 0;
+
+// 	this->device_type = DeviceType::NODE;
+
+// 	// Set verbosity
+// 	this->print_verbosity 	= Verbosity::V_LOW;
+// 	this->package_verbosity	= Verbosity::V_LOW;
+// }
+/////////////////////////////////////////////////////////////////////
+
+
 // --- CONSTRUCTOR ---
 LoomManager::LoomManager( 
 		const char*		device_name, 
@@ -39,6 +66,7 @@ LoomManager::LoomManager(
 		Verbosity		print_verbosity, 
 		Verbosity		package_verbosity
 	)
+	// : LoomManager()
 {
 
 	// strcpy(this->device_name, device_name);
@@ -50,20 +78,14 @@ LoomManager::LoomManager(
 	snprintf(this->device_name, 20, "%s", device_name);
 	snprintf(this->family, 20, "%s", family);
 
-	// Initialize module counts
-	this->other_module_count = 0;
-	this->sensor_count       = 0;
-	this->actuator_count     = 0;
-	this->comm_count         = 0;
-	this->log_count          = 0;
+	this->family_num = family_num;
+	this->instance = instance;
+
+	this->device_type = device_type;
 
 	// Set verbosity
 	this->print_verbosity 	= print_verbosity;
 	this->package_verbosity	= package_verbosity;
-
-	// This adds all the enabled modules
-	// Device_Init();
-
 }
 
 /////////////////////////////////////////////////////////////////////
