@@ -30,32 +30,6 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 
 /////////////////////////////////////////////////////////////////////
 
-
-// doesn't work because default parameters
-
-// // --- CONSTRUCTOR ---
-// LoomManager::LoomManager()
-// {
-
-// 	snprintf(this->device_name, 20, "%s", "device_name");
-// 	snprintf(this->family, 20, "%s", "family");
-
-// 	// Initialize module counts
-// 	this->other_module_count = 0;
-// 	this->sensor_count       = 0;
-// 	this->actuator_count     = 0;
-// 	this->comm_count         = 0;
-// 	this->log_count          = 0;
-
-// 	this->device_type = DeviceType::NODE;
-
-// 	// Set verbosity
-// 	this->print_verbosity 	= Verbosity::V_LOW;
-// 	this->package_verbosity	= Verbosity::V_LOW;
-// }
-/////////////////////////////////////////////////////////////////////
-
-
 // --- CONSTRUCTOR ---
 LoomManager::LoomManager( 
 		const char*		device_name, 
@@ -66,15 +40,7 @@ LoomManager::LoomManager(
 		Verbosity		print_verbosity, 
 		Verbosity		package_verbosity
 	)
-	// : LoomManager()
 {
-
-	// strcpy(this->device_name, device_name);
-	// strcpy(this->family, family);
-
-	// this->device_name = device_name;
-	// this->family = family;
-
 	snprintf(this->device_name, 20, "%s", device_name);
 	snprintf(this->family, 20, "%s", family);
 

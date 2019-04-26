@@ -25,6 +25,32 @@
 
 
 
+enum class ModuleType {
+	// Actuators
+	Relay
+
+	// Sensors
+
+
+	// CommPlats
+
+
+	// LogPlats
+
+
+	// InternetPlats
+
+
+	// RTC
+	
+
+	// Other
+}
+
+
+
+
+
 #define SERIAL_BAUD 115200
 
 
@@ -133,10 +159,6 @@ public:
 
 	const static char* enum_device_type_string(DeviceType t);
 
-
-	/// LoomManager constructor without parameters
-	LoomManager();
-
 	/// Loom Manager constructor.
 	/// 
 	/// \param[in]	device_name			String | <"Default"> | Manager name
@@ -164,35 +186,78 @@ public:
 	/// Print the devices current configuration.
 	/// Also prints configuration of linked modules.
 	void		print_config();
+	
+	// 	void print_state()
+
+
+	/// Print the linked modules
+	void 		list_modules();
 
 
 	void		parse_config();
 	// maybe overload to take JsonVariant or const char* of json?
 
 
-// // From LoomModule
-
-// 	// Display configuration settings
-// 	// void print_config() {}
-
-// 	// Display current state
-// 	void print_state() {}
-
-// 	// void measure() {}
-
-// 	// Append to a bundle 
-// 	void package(OSCBundle& bndl, char* id_prefix) {}
 
 // 	bool message_route(OSCMessage& msg, int address_offset) {}
+
+
+
+
+//but probably put here, because measure and package aren't managed elsewhere
+
+	// void measure();
+	// void package();
+	// void receive(); // not sure if this should take arg to specify platform
+	// void send();
+	// void log(Enum );   Enum SD, GOOGLE, OLED ... 
+	// void sleep(); // could have default sleep behavior?
+
+// void current_bundle(OSCBundle* bndl) ? return a stored bundle
+// void print_data
+
+
+
+	void		measure();  
+	void		package();
+	void		package(OSCBundle& bndl);
+
+	void		print_current_bundle();
+
+
+	// bool		receive(OSCBundle& bndl);
+	// bool		send(OSCBundle& bndl);
+	// bool		log()
+
+
+	void		flash_LED(uint count, uint time_high, uint time_low);
+	void		flash_LED(uint sequence[3]);
+
+
+
+
+
+
+
+		// Methods to set package and print verbosities all at once
+
+
+
+
+
+	// void module_enable(LoomModule* LM, bool e) ?
+
+
+
+	DeviceType	get_device_type();
+	// void set_device_type(DeviceType t) {device_type = t; }
 
 
 
 	// Overloaded as to sort by module type
 	void		add_module(Loom_Interrupt_Manager* interrupt_manager); 
 	void		add_module(Loom_Sleep_Manager* sleep_manager);
-
 	void		add_module(LoomRTC* rtc); 
-
 	void		add_module(LoomModule* module);
 	void		add_module(LoomSensor* sensor); 
 	void		add_module(LoomActuator* actuator); 
@@ -200,11 +265,11 @@ public:
 	void		add_module(LoomInternetPlat* internet_plat); 
 	void		add_module(LoomLogPlat* log_plat); 
 
+
+// these might become obsolete
 	Loom_Interrupt_Manager*	get_interrupt_manager();
 	Loom_Sleep_Manager*		get_sleep_manager();
-
 	LoomRTC*				get_rtc_module();
-
 	LoomModule*				get_other_module(int idx);
 	LoomSensor*				get_sensor_module(int idx);
 	LoomActuator*			get_actuator_module(int idx);
@@ -213,12 +278,6 @@ public:
 	LoomLogPlat*			get_log_plat_module(int idx);
 
 
-
-
-	// void module_enable(LoomModule* LM, bool e) ?
-
-	/// Print the linked modules
-	void 		list_modules();
 
 
 	/// Set the device name.
@@ -279,10 +338,6 @@ public:
 	void		set_instance_num(int n);
 
 
-
-	DeviceType	get_device_type();
-	// void set_device_type(DeviceType t) {device_type = t; }
-
 	/// Get print verbosity.
 	/// \return print verbosity
 	Verbosity	get_print_verbosity();
@@ -297,44 +352,26 @@ public:
 	void		set_package_verbosity(Verbosity v);
 
 
-// ** MAYBE IMPLEMENT THESE HERE **
-// might not be needed becaused of CommPlat and other
-
-//but probably put here, because measure and package aren't managed elsewhere
-
-	// void measure();
-	// void package();
-	// void receive(); // not srue if this should take arg to specify platform
-	// void send();
-	// void log(Enum );   Enum SD, GOOGLE, OLED ... 
-	// void sleep(); // could have default sleep behavior?
-
-// void current_bundle(OSCBundle* bndl) ? return a stored bundle
-// void print_data
 
 
 
-	void		measure();  
-	void		package();
-	void		package(OSCBundle& bndl);
 
-	void		print_current_bundle();
+	// Module Access methods
+	Relay()
 
 
-	void		flash_LED(uint count, uint time_high, uint time_low);
-	void		flash_LED(uint sequence[3]);
-
-
-	// Methods to set package and print verbosities all at once
 
 private:
-
 
 
 	void		add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
 	void		list_modules_aux(LoomModule** modules, uint len, char* module_type);
 	void		measure_aux(LoomModule** modules, uint len);
 	void		package_aux(LoomModule** modules, uint len);
+
+
+	LoomModule*	module_access_aux(ModuleType type, LoomModule** array)
+
 
 
 };

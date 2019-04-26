@@ -57,12 +57,9 @@ void LoomManager::parse_config()
 	JsonObject general = doc["general"];
 
 	if (general.containsKey("device_name")) {
-		// strcpy(this->device_name, general["device_name"]);
 		snprintf(this->device_name, 20, "%s", general["device_name"].as<const char*>());
-
 	}
 	if (general.containsKey("family")) {
-		// strcpy(this->family, general["family"]);
 		snprintf(this->family, 20, "%s", general["family"].as<const char*>());
 	}
 	if (general.containsKey("family_num")) {
@@ -82,17 +79,6 @@ void LoomManager::parse_config()
 	}
 
 	print_config();
-
-
-			// char*		device_name			= "Default",
-			// char*		family				= "Loom",
-			// uint		family_num			= 1,
-			// uint		instance			= 1,
-			// DeviceType	device_type			= DeviceType::NODE,
-			// Verbosity	print_verbosity		= Verbosity::V_HIGH,
-			// Verbosity	package_verbosity	=
-
-
 
 
 	// Generate Module Objects
