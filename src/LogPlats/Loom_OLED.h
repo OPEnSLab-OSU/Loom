@@ -67,7 +67,7 @@ public:
 
 	/// OLED module constructor.
 	///
-	/// \param[in]	module_name					String | <"OLED"> | OLED module name
+	/// \param[in]	module_name					String | <"OLED"> | null | OLED module name
 	/// \param[in]	enable_rate_filter	Bool | <true> | {true, false} | Whether or not to impose maximum update rate
 	/// \param[in]	min_filter_delay		Int | <300> | [50-5000] | Minimum update delay, if enable_rate_filter enabled
 	/// \param[in]	type								Set(OLED_Version) | <0> | {0("Featherwing"), 1("Breakout")} | Which version of the OLED is being used
