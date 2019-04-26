@@ -7,7 +7,7 @@
 
 
 /// Different communication platforms available
-enum class CommPlatform { 
+enum class CommPlatform {
 	WIFI, 		///< WiFi
 	LORA, 		///< LoRa
 	NRF,		///< Nordic Radio
@@ -27,26 +27,26 @@ protected:
 
 	/// The maximum message length
 	uint16_t	max_message_len;
-	
+
 	// CommScope subnet_scope;			// The scope to accept messages on       Switch to be ENUM      Maybe move to LoomDevice instead?
 
 	/// Whether or not to try to compress transmission strings
-	bool		compress_messages;	
+	bool		compress_messages;
 
 	/// Rssi for Lora (need to determine what the other platforms use)
-	int16_t		signal_strength; 
+	int16_t		signal_strength;
 
 	// Not sure if address will be in this scope of only the individual implementations
 
 public:
 
 	// --- CONSTRUCTOR ---
-	LoomCommPlat(	
-			const char*		module_name, 
+	LoomCommPlat(
+			const char*		module_name,
 
-			uint			max_message_len, 
-			// CommScope subnet_scope, 
-			bool			compress_messages 
+			uint			max_message_len,
+			// CommScope subnet_scope,
+			bool			compress_messages
 		);
 
 
@@ -98,19 +98,19 @@ public:
 protected:
 
 
-	// Fix   
+	// Fix
 	// returns false if filtered out
 
-// might not actually empty bundle but just return a boolean
+	// might not actually empty bundle but just return a boolean
 	// depends on whether filtering is done at routing or receiving
 
-// need to actually check names
+	// need to actually check names
 	// unless that is done via routing?
 
 	// bool scope_filter(OSCBundle& bndl);
 
 	/// Convert a c string to equivalent bundle.
-	/// Calls aux function to uncompress message if neccessary 
+	/// Calls aux function to uncompress message if neccessary
 	/// \param[in]	osc_string	The string to convert
 	/// \param[out]	bndl		The bundle to fill
 	void			convert_string_to_bundle(char* osc_string, OSCBundle& bndl);
@@ -133,8 +133,8 @@ private:
 	/// \param[in]	bndl		Bundle to convert
 	/// \param[out]	osc_string	String buffer to fill
 	void			original_convert_bundle_to_string(OSCBundle& bndl, char* osc_string);
-	
-	/// Compress c-strings representing bundles 
+
+	/// Compress c-strings representing bundles
 	/// \param[in,out]	osc_string	String to compress
 	void			compress_message_string(char* osc_string);
 

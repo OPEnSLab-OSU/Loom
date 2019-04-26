@@ -12,8 +12,8 @@
 
 
 typedef struct {
-	byte checksum;  
-	// bool valid;  
+	byte checksum;
+	// bool valid;
 	char string[50];
 	int  number;
 } AnalogConfig;
@@ -21,16 +21,16 @@ typedef struct {
 
 /// Different types of conversions from
 /// analog to specified unit
-enum class AnalogConversion { 
+enum class AnalogConversion {
 	NONE, 			///< No conversion applied
 	VOLTAGE, 		///< Analog to voltage
-	THERMISTOR,		///< Thermistor 
+	THERMISTOR,		///< Thermistor
 	PH,				///< pH value
 	TURBIDITY, 		///< Turbidity
 	EC, 			///< Electrical Conductivity
 	TDS				///< Total Dissolved Solids
 	// Soil moisture
-}; 
+};
 
 
 
@@ -38,9 +38,9 @@ enum class AnalogConversion {
 
 
 
-// # (LoomSensor) | dependencies: [] | conflicts: []
+// ### (LoomSensor) | dependencies: [] | conflicts: []
 /// Analog pin manager
-// #
+// ###
 class Loom_Analog : public LoomSensor
 {
 
@@ -57,7 +57,7 @@ protected:
 	AnalogConversion conversions[ANALOG_COUNT];
 
 	/// Battery voltage
-	float		battery;  
+	float		battery;
 
 	/// Enable or disable all conversions
 	bool		enable_conversions;
@@ -65,19 +65,19 @@ protected:
 	AnalogConfig configuration;
 
 public:
-	
+
 
 	/// Analog manager module constructor
-	/// 
-	/// \param[in]	module_name			String | <"Analog"> | Analog manager module name
+	///
+	/// \param[in]	module_name			String | <"Analog"> | null | Analog manager module name
 	/// \param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
-	/// \param[in]	read_resolution		Int | 12 | [8-12] | How many bits to read analog values at
-	/// \param[in]	enableA0			Bool | <true> | Enable pin A0 for managing
-	/// \param[in]	enableA1			Bool | <true> | Enable pin A1 for managing
-	/// \param[in]	enableA2			Bool | <true> | Enable pin A2 for managing
-	/// \param[in]	enableA3			Bool | <true> | Enable pin A3 for managing
-	/// \param[in]	enableA4			Bool | <true> | Enable pin A4 for managing
-	/// \param[in]	enableA5			Bool | <true> | Enable pin A5 for managing
+	/// \param[in]	read_resolution		Int | <12> | [8-12] | How many bits to read analog values at
+	/// \param[in]	enableA0			Bool | <true> | {true, false} | Enable pin A0 for managing
+	/// \param[in]	enableA1			Bool | <true> | {true, false} | Enable pin A1 for managing
+	/// \param[in]	enableA2			Bool | <true> | {true, false} | Enable pin A2 for managing
+	/// \param[in]	enableA3			Bool | <true> | {true, false} | Enable pin A3 for managing
+	/// \param[in]	enableA4			Bool | <true> | {true, false} | Enable pin A4 for managing
+	/// \param[in]	enableA5			Bool | <true> | {true, false} | Enable pin A5 for managing
 	/// \param[in]	convertA0			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A0
 	/// \param[in]	convertA1			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A1
 	/// \param[in]	convertA2			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A2
@@ -85,7 +85,7 @@ public:
 	/// \param[in]	convertA4			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A4
 	/// \param[in]	convertA5			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A5
 
-	Loom_Analog(	
+	Loom_Analog(
 			const char*			module_name			= "Analog",
 			uint8_t				num_samples			= 8,
 			uint8_t				read_resolution		= 12,
@@ -117,7 +117,7 @@ public:
 	/// Set the analog read resolution
 	/// \param[in]	res		Resolution to read at (12 bit max)
 	void		set_analog_resolution(uint8_t res);
-	
+
 	/// Get the current analog read resolution
 	/// \return		Read resolution
 	uint8_t		get_analog_resolution();
@@ -134,7 +134,7 @@ public:
 
 	/// Get if a pin is enabled in manager
 	/// \param[in]	pin		Pin to get enable state of
-	/// \return		The enabled state of pin		
+	/// \return		The enabled state of pin
 	bool		get_pin_enabled(uint8_t pin);
 	/// Set the enable state of a pin
 	/// \param[in]	pin		The pin to set enable state of
@@ -142,12 +142,12 @@ public:
 	void		set_pin_enabled(uint8_t pin, bool e);
 
 	/// Get the current conversion associated with a pin
-	/// \param[in]	pin		The pin to get conversion for 
+	/// \param[in]	pin		The pin to get conversion for
 	/// \return		The current AnalogConversion setting
 	AnalogConversion get_conversion(uint8_t pin);
 
 	/// Set the current conversion associated with a pin
-	/// \param[in]	pin		The pin to set conversion for 
+	/// \param[in]	pin		The pin to set conversion for
 	/// \param[in]	c		The AnalogConversion to use
 	void  		set_conversion(uint8_t pin, AnalogConversion c);
 
@@ -196,7 +196,7 @@ private:
 	/// Convert analog to turbidity
 	/// \param[in]	analog	Analog value to convert
 	/// \return Converted value
-	float		convert_turbidity(uint16_t analog);	
+	float		convert_turbidity(uint16_t analog);
 
 	/// Convert analog to electrical conductivity
 	/// \param[in]	analog	Analog value to convert

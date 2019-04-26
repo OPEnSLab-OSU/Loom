@@ -24,6 +24,9 @@
 // #include "LogPlats/Loom_LogPlat.h"
 
 
+class Loom_Relay;
+
+
 
 enum class ModuleType {
 	// Actuators
@@ -45,7 +48,7 @@ enum class ModuleType {
 	
 
 	// Other
-}
+};
 
 
 
@@ -54,22 +57,22 @@ enum class ModuleType {
 #define SERIAL_BAUD 115200
 
 
-/// Different general types of devices 
-enum class DeviceType { 
-	HUB, 		///< Central device 
+/// Different general types of devices
+enum class DeviceType {
+	HUB, 		///< Central device
 	NODE, 		///< Data collecting / actuating node
 	REPEATER 	///< Forwards messages between other devices
 };
 
 /// Different levels of verbosity (for printing or packaging)
-enum class Verbosity { 
+enum class Verbosity {
 	V_OFF,		///< Disable
 	V_LOW, 		///< Minimal/Stardard
 	V_HIGH 		///< Full details
-}; 
+};
 
 
-// Forward declarations, specify that these classes 
+// Forward declarations, specify that these classes
 // exist but are defined in their own respective files
 class Loom_Interrupt_Manager;
 class Loom_Sleep_Manager;
@@ -95,22 +98,22 @@ class LoomLogPlat;
 #define MAX_LOGS          5
 
 
-// # () | dependencies: [] | conflicts: []
+// ### () | dependencies: [] | conflicts: []
 /// Manager class to simplify with enabled modules
-// #
+// ###
 class LoomManager
 {
 
 protected:
 
 	/// The name of the device
-	// char*		device_name;	
-	char		device_name[20];	
+	// char*		device_name;
+	char		device_name[20];
 	/// The family the device belongs to
-	char		family[20];			
+	char		family[20];
 	/// The subnet of the family
 	uint		family_num;
-	/// The instance / channel ID within the subnet		
+	/// The instance / channel ID within the subnet
 	uint		instance;
 
 
@@ -148,9 +151,9 @@ protected:
 	uint		log_count;
 
 	/// Print detail verbosity
-	Verbosity	print_verbosity;		
-	/// Package detail verbosity 
-	Verbosity	package_verbosity;	
+	Verbosity	print_verbosity;
+	/// Package detail verbosity
+	Verbosity	package_verbosity;
 
 
 	OSCBundle	bundle;	// Not sure if this will always work...
@@ -160,14 +163,14 @@ public:
 	const static char* enum_device_type_string(DeviceType t);
 
 	/// Loom Manager constructor.
-	/// 
-	/// \param[in]	device_name			String | <"Default"> | Manager name
-	/// \param[in]	family				String | <"Loom"> | Which family the device belongs to
+	///
+	/// \param[in]	device_name			String | <"Default"> | null | Manager name
+	/// \param[in]	family					String | <"Loom"> | null | Which family the device belongs to
 	/// \param[in]	family_num			Int | <1> | [0-99] | Which family subnet the device belongs to
-	/// \param[in]	instance			Int | <1> | [0-99] | Device instance number on its subnet
-	/// \param[in]	type				Set(DeviceType) | <1> | {0("Hub"), 1("Node"), 2("Repeater")} | Device's topological type
-	/// \param[in]	type				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
-	/// \param[in]	type				Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed OSC bundles are
+	/// \param[in]	instance				Int | <1> | [0-99] | Device instance number on its subnet
+	/// \param[in]	type						Set(DeviceType) | <1> | {0("Hub"), 1("Node"), 2("Repeater")} | Device's topological type
+	/// \param[in]	type						Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
+	/// \param[in]	type						Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed OSC bundles are
 	LoomManager(
 			const char*		device_name			= "Default",
 			const char*		family				= "Loom",
@@ -235,10 +238,6 @@ public:
 
 
 
-
-
-
-
 		// Methods to set package and print verbosities all at once
 
 
@@ -255,15 +254,18 @@ public:
 
 
 	// Overloaded as to sort by module type
-	void		add_module(Loom_Interrupt_Manager* interrupt_manager); 
+	void		add_module(Loom_Interrupt_Manager* interrupt_manager);
 	void		add_module(Loom_Sleep_Manager* sleep_manager);
-	void		add_module(LoomRTC* rtc); 
+
+
+	void		add_module(LoomRTC* rtc);
+
 	void		add_module(LoomModule* module);
-	void		add_module(LoomSensor* sensor); 
-	void		add_module(LoomActuator* actuator); 
-	void		add_module(LoomCommPlat* comm_plat); 
-	void		add_module(LoomInternetPlat* internet_plat); 
-	void		add_module(LoomLogPlat* log_plat); 
+	void		add_module(LoomSensor* sensor);
+	void		add_module(LoomActuator* actuator);
+	void		add_module(LoomCommPlat* comm_plat);
+	void		add_module(LoomInternetPlat* internet_plat);
+	void		add_module(LoomLogPlat* log_plat);
 
 
 // these might become obsolete
@@ -291,7 +293,7 @@ public:
 
 
 
-	
+
 
 		// Should this return a char* or copy into char array passed by reference?
 		// Could overload to do either like String does with .toCharArray() and .c_str()
@@ -310,7 +312,7 @@ public:
 	/// Return device identification message header (to subnet level) string.
 	/// \return The device subnet string
 	const char*	packet_header_subnet();
-	/// Copy device identification message header (to device specific level) string to buffer. 
+	/// Copy device identification message header (to device specific level) string to buffer.
 	/// \param[out] buf The bufer to copy device name into
 	void		packet_header_device(char* buf);
 	/// Return device identification message header (to device specific level) string.
@@ -353,11 +355,8 @@ public:
 
 
 
-
-
-
 	// Module Access methods
-	Relay()
+	Loom_Relay& Relay();
 
 
 
@@ -370,7 +369,7 @@ private:
 	void		package_aux(LoomModule** modules, uint len);
 
 
-	LoomModule*	module_access_aux(ModuleType type, LoomModule** array)
+	LoomModule*	module_access_aux(ModuleType type, LoomModule** array);
 
 
 
@@ -378,5 +377,3 @@ private:
 
 
 #endif // of LOOM_MANAGER_h
-
-

@@ -26,9 +26,9 @@ class LoomRTC;
 
 
 
-// # (LoomLogPlat) | dependencies: [] | conflicts: []
+// ### (LoomLogPlat) | dependencies: [] | conflicts: []
 /// SD logging platform module
-// #
+// ###
 class Loom_SD : public LoomLogPlat
 {
 
@@ -56,12 +56,12 @@ public:
 
 	/// SD Module Constructor
 	///
-	/// \param[in]	module_name			String | <"SD"> | OLED module name
-	/// \param[in]	enable_rate_filter	Bool | <true> | Whether or not to impose maximum update rate
-	/// \param[in]	min_filter_delay	Int | <1000> | [100-5000] | Minimum update delay, if enable_rate_filter enabled
-	/// \param[in]	chip_select			Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
-	/// \param[in]	default_file		String | <"test.csv"> | File to write to if none explicity provided (should be < 8 characters w/out extension)
-	Loom_SD(	
+	/// \param[in]	module_name					String | <"SD"> | null | OLED module name
+	/// \param[in]	enable_rate_filter	Bool | <true> | {true, false} | Whether or not to impose maximum update rate
+	/// \param[in]	min_filter_delay		Int | <1000> | [100-5000] | Minimum update delay, if enable_rate_filter enabled
+	/// \param[in]	chip_select					Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
+	/// \param[in]	default_file				String | <"test.csv"> | null | File to write to if none explicity provided (should be < 8 characters w/out extension)
+	Loom_SD(
 			const char*		module_name			= "SD",
 			bool			enable_rate_filter	= true,
 			uint			min_filter_delay	= 1000,
@@ -69,7 +69,7 @@ public:
 			const char*		default_file		= "test.csv"
 
 			// SD_Version 		version 			= FEATHERWING,
-			// byte 			reset_pin 			= A2 
+			// byte 			reset_pin 			= A2
 		);
 
 	// --- DESTRUCTOR ---
@@ -132,7 +132,7 @@ public:
 	// \param[in]	len			Length of the incoming array
 	// \param[in]	delimiter	Delimiter to use
 	// \param[in]	timestamp	Timestamp setting to use
-	// \param[in]	has_keys	True if data is assumed to have keys (alternating key-values) 
+	// \param[in]	has_keys	True if data is assumed to have keys (alternating key-values)
 	// \param[in]	device_id	Device ID to label row with
 	template <typename T>
 	bool		save_array(char *file, T data [], int len, char delimiter=',', int timestamp=3, bool has_keys=false, char* device_id="");
@@ -160,7 +160,7 @@ public:
 	// 				if (RTC_Inst != NULL) {
 	// 					Println2("RTC Object: ", RTC_Inst->get_module_name() );
 	// 					RTC_Inst->get_timestamp(time_key, time_val, delimiter, timestamp);
-	// 					got_timestamp = true; 
+	// 					got_timestamp = true;
 	// 				}
 	// 			}
 	// 		}
@@ -198,12 +198,12 @@ public:
 	// 				SD_print_aux(SDFile, device_id, delimiter);
 	// 			}
 
-	// 			// Print values 
+	// 			// Print values
 	// 			for (int i = 1; i < len-2; i+=2) {
 	// 				SD_print_aux(SDFile, data[i], delimiter);
 	// 			}
 	// 			SDFile.println(data[len-1]);
-	// 		} 
+	// 		}
 
 	// 		// Array is assume to only have values
 	// 		else {
@@ -226,8 +226,8 @@ public:
 	// 		SDFile.close();
 	// 		Println("Done");
 	// 		return true;
-	// 	} 
-		
+	// 	}
+
 	// 	// If file could not be opened
 	// 	else {
 	// 		Println2("Error opening: ", file);
@@ -254,10 +254,10 @@ private:
 		SDFile.print(data);
 		SDFile.print(delimiter);
 		if (add_space) {
-			SDFile.print(" ");			
+			SDFile.print(" ");
 		}
 	}
-	
+
 };
 
 

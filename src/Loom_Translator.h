@@ -26,7 +26,7 @@ void		flatten_bundle(OSCBundle& bndl);
 
 
 /// Converts an OSC bundle to an equivalent array.
-/// Formatted as [key1, value1, key2, value2, key3, value3] 
+/// Formatted as [key1, value1, key2, value2, key3, value3]
 /// \param[in]	bndl		The bundle to use to fill the key value array
 /// \param[out]	key_values	The array to be populated
 /// \param[in]	kv_len		The length of the key_values array
@@ -63,7 +63,7 @@ void		convert_bundle_to_array(OSCBundle& bndl, T data [], int len)
 // ================================================================
 
 
- 
+
 /// Converts key-value array to pair of associated key and value arrays.
 /// Convert incoming array formatted as:
 ///   [key1, value1, key2, value2, key3, value3]
@@ -84,8 +84,8 @@ void		convert_array_key_value_to_assoc(String key_values [], String keys [], Str
 ///   [value1, value2, value3]:
 /// to single array formatted as:
 ///   [key1, value1, key2, value2, key3, value3]
-/// 
-/// \param[in]	keys		The array of keys  
+///
+/// \param[in]	keys		The array of keys
 /// \param[in]	values		The array to values
 /// \param[out]	key_values	The flat array of keys and values to be filled by combining 'keys' and 'values'
 /// \param[in]	assoc_len	The length of the 'keys' and 'values' arrays (should be the same)
@@ -99,8 +99,8 @@ void		convert_array_assoc_to_key_value(String keys [], String values [], String 
 ///   [value1, value2, value3]:
 /// to single array formatted as:
 ///   [key1, value1, key2, value2, key3, value3]
-/// 
-/// \param[in]	keys		The array of keys  
+///
+/// \param[in]	keys		The array of keys
 /// \param[in]	values		The array to values
 /// \param[out]	key_values	The flat array of keys and values to be filled by combining 'keys' and 'values'
 /// \param[in]	assoc_len	The length of the 'keys' and 'values' arrays (should be the same)
@@ -130,11 +130,11 @@ void		convert_array_assoc_to_key_value(String keys [], T values [], String key_v
 /// Convert an array formatted as:
 ///   [key1, value1, key2, value2 ...]
 /// to an OSC bundle with single message
-/// 
-/// \param[in]	keys_values		The flat array of keys and values  
+///
+/// \param[in]	keys_values		The flat array of keys and values
 /// \param[out]	bndl			The flat array of keys and values to be filled by combining 'keys' and 'values'
-/// \param[in]	address			The address to add to bundle/messages 
-/// \param[in]	kv_len			The length of the 'keys_values' array 
+/// \param[in]	address			The address to add to bundle/messages
+/// \param[in]	kv_len			The length of the 'keys_values' array
 /// \param[in]	interpret		(see comment at start of section above for details about the parameter)
 void		convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char* address, int kv_len, int interpret=0);
 
@@ -150,10 +150,10 @@ void		convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, c
 ///   [value1, value2 ...]
 /// to an OSC message with single message
 ///
-/// \param[in]	keys		The array of keys  
+/// \param[in]	keys		The array of keys
 /// \param[in]	values		The array to values
 /// \param[out]	bndl		The flat array of keys and values to be filled by combining 'keys' and 'values'
-/// \param[in]	address		The address to add to bundle/messages 
+/// \param[in]	address		The address to add to bundle/messages
 /// \param[in]	assoc_len	The length of the 'keys' and 'values' arrays (should be the same)
 /// \param[in]	interpret	(see comment at start of section above for details about the parameter)
 template <typename T>
@@ -176,7 +176,7 @@ void		convert_assoc_arrays_to_bundle(String keys [], T values [], OSCBundle& bnd
 /// \param[out]	bndl	The bundle to populate
 /// \param[in]	address	The OSC address to add to bundle
 /// \param[in]	len		The length of the incoming array
-template <typename T>   
+template <typename T>
 void		convert_array_to_bundle(T data [], OSCBundle& bndl, char* address, int len)
 {
 	bndl.empty();
@@ -223,11 +223,11 @@ float		convert_string_to_float(String s);
 /// \param[in]	scr		Incoming array
 /// \param[out]	scr		Outgoing array
 /// \param[in]	scr		Number of elements in array
-template <typename Tin> 
+template <typename Tin>
 void		convert_array(Tin src[], String dest[], int count)
-{ 
+{
 	for (int i = 0; i < count; i++) {
-		dest[i] = String(src[i]); 
+		dest[i] = String(src[i]);
 	}
 }
 
@@ -236,15 +236,14 @@ void		convert_array(Tin src[], String dest[], int count)
 /// \param[in]	scr		Incoming array
 /// \param[out]	scr		Outgoing array
 /// \param[in]	scr		Number of elements in array
-template <typename Tin, typename Tout> 
+template <typename Tin, typename Tout>
 void		convert_array(Tin src [], Tout dest[], int count)
-{ 
-	String tmps[count]; 
-	convert_array(src, tmps, count); 
-	convert_array(tmps, dest, count); 
+{
+	String tmps[count];
+	convert_array(src, tmps, count);
+	convert_array(tmps, dest, count);
 }
 
 
 
 #endif // of #ifndef LOOM_TRANSLATOR_h
-

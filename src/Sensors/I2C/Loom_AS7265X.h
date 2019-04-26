@@ -7,9 +7,9 @@
 #include "SparkFun_AS7265X.h"
 
 
-// # (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// AS72625X 3 Spectrum (Visible, near IR, UV) spectral sensor module 
-// #
+// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
+/// AS72625X 3 Spectrum (Visible, near IR, UV) spectral sensor module
+// ###
 class Loom_AS7265X : public LoomI2CSensor
 {
 
@@ -28,7 +28,7 @@ protected:
 	/// Whether or not to use the bulb
 	bool		use_bulb;
 
-	/// Gain setting 
+	/// Gain setting
 	byte		gain;
 	/// Sensor mode
 	byte		mode;
@@ -42,12 +42,12 @@ public:
 	/// AS72625X module constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x49> | {0x49} | I2C address
-	/// \param[in]	module_name				String | <"AS72625X"> | AS72625X module name					
-	/// \param[in]	use_bulb				Bool | <false> | Whether or not to use bulb
+	/// \param[in]	module_name				String | <"AS72625X"> | AS72625X module name
+	/// \param[in]	use_bulb				Bool | <false> | {true, false} | Whether or not to use bulb
 	/// \param[in]	gain					Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
 	/// \param[in]	mode					Set(Int) | <3> | { 0("4 channels out of 6"), 1("Different 4 channels out of 6"), 2("All 6 channels continuously"), 3("One-shot reading of all channels") } | Read mode
-	/// \param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value]) 
-	Loom_AS7265X(	
+	/// \param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
+	Loom_AS7265X(
 			byte			i2c_address			= 0x49,
 			const char*		module_name			= "AS7265X",
 			bool			use_bulb			= false,
