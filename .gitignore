@@ -1,3 +1,4 @@
 # Ignore Doxygen documentation
 html/
 latex/
+LoomTests
