@@ -8,32 +8,32 @@ LoomManager DeviceManager("Manager", "Loom", 1, 1, DeviceType::NODE, Verbosity::
 // Loom_Sleep_Manager* SLM;
 Loom_Interrupt_Manager* ITM;
 
- 
 
 
-//volatile int i = 0;
-//
-//
-//void wake() {}
-//void turn_on()  { digitalWrite(LED_BUILTIN, HIGH); Println("ON"); }
-//void turn_off() { digitalWrite(LED_BUILTIN, LOW); Println("OFF"); }
-//void toggle() { digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN)); Println("SWITCH"); }
-//void print_ISR() { Println("ISR"); }
-//void inc_I() { i++; }
-//void timer_print0() { Println2("Timer 0: ", millis()); }
-//void timer_print1() { Println2("Timer 1: ", millis()); }
-//void button() { Println("Button"); }
-//
-//
-//int timer_2_count = 3;
-//bool clear_flag = true;
-//void timer_print2() {
-//	Println2("Timer 2: ", millis());
-//	timer_2_count--;
-//	Println3("\t", "timer_2_count:", timer_2_count);
-//}
 
-void setup() 
+volatile int i = 0;
+
+
+void wake() {}
+void turn_on()  { digitalWrite(LED_BUILTIN, HIGH); Println("ON"); }
+void turn_off() { digitalWrite(LED_BUILTIN, LOW); Println("OFF"); }
+void toggle() { digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN)); Println("SWITCH"); }
+void print_ISR() { Println("ISR"); }
+void inc_I() { i++; }
+void timer_print0() { Println2("Timer 0: ", millis()); }
+void timer_print1() { Println2("Timer 1: ", millis()); }
+void button() { Println("Button"); }
+
+
+int timer_2_count = 3;
+bool clear_flag = true;
+void timer_print2() {
+	Println2("Timer 2: ", millis());
+	timer_2_count--;
+	Println3("\t", "timer_2_count:", timer_2_count);
+}
+
+void setup()
 {
 	pinMode(LED_BUILTIN, OUTPUT);   // Set the LED pin mode
 
@@ -43,8 +43,8 @@ void setup()
 
 	Println("Initialized Serial!\n");
 
-//	DeviceManager.parse_config();
-//	DeviceManager.print_config();
+	DeviceManager.parse_config();
+	DeviceManager.print_config();
 
 	// pinMode(5, INPUT_PULLUP);
 	// pinMode(6, INPUT_PULLUP);
@@ -114,17 +114,17 @@ void setup()
 
 
 
-void loop() 
+void loop()
 {
 	OSCBundle bndl;
 
 	// ITM->run_pending_ISRs();
 
-//	DeviceManager.measure();
-//	DeviceManager.package(bndl);
-//	print_bundle(bndl);
-//
-//	delay(3000);
+	DeviceManager.measure();
+	DeviceManager.package(bndl);
+	print_bundle(bndl);
+
+	delay(3000);
 
 
 
