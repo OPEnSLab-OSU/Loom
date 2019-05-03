@@ -12,6 +12,8 @@ Loom_FXOS8700::Loom_FXOS8700(
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {
+	this->module_type = ModuleType::FXOS8700;
+
 	inst_FXOS8700 = new Adafruit_FXOS8700(0x8700A, 0x8700B);
 	bool setup = inst_FXOS8700->begin(ACCEL_RANGE_4G);
 

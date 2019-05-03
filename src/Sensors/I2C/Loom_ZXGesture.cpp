@@ -11,6 +11,8 @@ Loom_ZXGesture::Loom_ZXGesture(
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {
+	this->module_type = ModuleType::ZXGesture;
+
 	this->mode = mode;
 
 	inst_ZX = new ZX_Sensor(i2c_address);

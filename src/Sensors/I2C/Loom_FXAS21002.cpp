@@ -12,6 +12,8 @@ Loom_FXAS21002::Loom_FXAS21002(
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {
+	this->module_type = ModuleType::FXAS21002;
+
 	inst_FXAS21002 = new Adafruit_FXAS21002C(0x0021002C);
 	bool setup = inst_FXAS21002->begin();
 

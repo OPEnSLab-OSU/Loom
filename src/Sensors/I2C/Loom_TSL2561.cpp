@@ -15,6 +15,8 @@ Loom_TSL2561::Loom_TSL2561(
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {
+	this->module_type = ModuleType::TSL2561;
+
 	this->gain       = gain;
 	this->resolution = resolution;
 

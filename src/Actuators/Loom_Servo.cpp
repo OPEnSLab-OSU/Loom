@@ -15,6 +15,8 @@ Loom_Servo::Loom_Servo(
 	) 
 	: LoomActuator( module_name ) 
 {
+	this->module_type = ModuleType::Servo;
+
 	this->servo_count = servo_count;
 
 	this->positions = new int[servo_count];

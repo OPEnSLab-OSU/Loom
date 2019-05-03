@@ -18,6 +18,8 @@ Loom_SD::Loom_SD(
 	)
 	: LoomLogPlat( module_name, enable_rate_filter, min_filter_delay )
 {
+	this->module_type = ModuleType::SDCARD;
+
 	Println("SD Setup");
 
 	this->chip_select  = chip_select;

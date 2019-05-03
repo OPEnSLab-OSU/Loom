@@ -17,6 +17,8 @@ Loom_DS3231::Loom_DS3231(
 	)
 	: LoomRTC( module_name, timezone, use_utc_time, get_internet_time, int_pin )
 {
+	this->module_type = ModuleType::DS3231;
+
 	rtc_inst = new RTC_DS3231();
 	init();
 

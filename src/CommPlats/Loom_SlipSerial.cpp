@@ -9,6 +9,8 @@ Loom_SlipSerial::Loom_SlipSerial(
 	) 
 	: LoomCommPlat(module_name, max_message_len, compress_messages )
 {
+	this->module_type = ModuleType::SlipSerial;
+
 	///Begin Setup Telemetry				
 
 

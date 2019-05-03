@@ -15,6 +15,7 @@ Loom_MAX31856::Loom_MAX31856(
 		uint8_t			SPI_d
 	) : LoomSPISensor( module_name, num_samples ) 
 {
+	this->module_type = ModuleType::MAX31856;
 
 	// Hardware Serial
 	// inst_max = new Adafruit_MAX31856(CS_pin);

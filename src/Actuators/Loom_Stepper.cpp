@@ -11,6 +11,9 @@ Loom_Stepper::Loom_Stepper(
 	) 
 	: LoomActuator( module_name ) 
 {
+	this->module_type = ModuleType::Stepper;
+
+
 	this->stepper_count = stepper_count;
 	this->motors = new Adafruit_StepperMotor*[stepper_count];
 

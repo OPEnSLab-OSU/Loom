@@ -23,6 +23,8 @@ Loom_nRF::Loom_nRF(
 	)
 	: LoomCommPlat( module_name, max_message_len, compress_messages )
 {
+	this->module_type = ModuleType::nRF;
+
 
 	// Create nRF manager objects
 	radio	= new RF24(5,6);

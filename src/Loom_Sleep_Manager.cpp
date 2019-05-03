@@ -24,6 +24,8 @@ const char* Loom_Sleep_Manager::enum_sleep_mode_string(SleepMode m)
 /////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager( const char* module_name, LoomRTC* RTC_Inst, bool use_LED, bool delay_on_wake, SleepMode sleep_mode ) : LoomModule( module_name )
 {
+	this->module_type = ModuleType::Sleep_Manager;
+
 	this->use_LED		= use_LED;
 	this->delay_on_wake	= delay_on_wake;
 

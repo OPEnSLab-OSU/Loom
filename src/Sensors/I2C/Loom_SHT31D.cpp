@@ -10,6 +10,8 @@ Loom_SHT31D::Loom_SHT31D(
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {
+	this->module_type = ModuleType::SHT31D;
+
 	bool setup = inst_sht31d.begin(i2c_address);
 
 	print_module_label();

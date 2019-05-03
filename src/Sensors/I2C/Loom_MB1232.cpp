@@ -16,6 +16,8 @@ Loom_MB1232::Loom_MB1232(
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {	
+	this->module_type = ModuleType::MB1232;
+
 	Wire.beginTransmission(i2c_address);
 
 	Wire.write(RangeCommand);

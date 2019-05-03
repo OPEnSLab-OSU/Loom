@@ -50,6 +50,8 @@ Loom_OLED::Loom_OLED(
 	)
 	: LoomLogPlat( module_name, enable_rate_filter, min_filter_delay )
 {
+	this->module_type = ModuleType::OLED;
+
 	this->version 	      = version;
 	this->reset_pin       = reset_pin;
 	this->display_format  = display_format;

@@ -64,11 +64,11 @@ enum class ModuleType {
 	ZXGesture,
 
 	// SDI12
-	Loom_Decagon_5TM,
-	Loom_Decagon_GS3,
+	Decagon_5TM,
+	Decagon_GS3,
 
 	// SPI
-	Loom_MAX31856,
+	MAX31856,
 
 	// CommPlats
 	LoRa,
@@ -87,6 +87,8 @@ enum class ModuleType {
 	PCF8523,
 
 	// Other
+	Sleep_Manager,
+	Interrupt_Manager,
 	Multiplexer
 };
 

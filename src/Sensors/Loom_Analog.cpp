@@ -51,6 +51,8 @@ Loom_Analog::Loom_Analog(
 	) 
 	: LoomSensor( module_name, num_samples )
 {
+	this->module_type = ModuleType::Analog;
+
 	// Println("Loom_Analog Constructor");
 
 
