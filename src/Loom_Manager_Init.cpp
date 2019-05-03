@@ -14,8 +14,11 @@
 // const char* json_config = "{\"general\":{\"device_name\":\"name\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]},{\"name\":\"Device1\",\"parameters\":[123,4.56,true]},{\"name\":\"Device2\",\"parameters\":[123,4.56,-789,123,123,123]},{\"name\":\"Device3\",\"parameters\":[\"North\",0,1,2,3]}]}";
 // const char* json_config = "{\"general\":{\"device_name\":\"name\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]}]}";
 
-const char* json_config = "{\"general\":{\"device_name\":\"Device\",\"family\":\"Loom\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]},{\"name\":\"Loom_Digital\",\"parameters\":[\"Digital\",true,true,false,false,false,false,false,false,false,false,false,false]},{\"name\":\"Loom_Interrupt_Manager\",\"parameters\":[\"Interrupt-Manager\",0]}]}";
+// Without Relay
+// const char* json_config = "{\"general\":{\"device_name\":\"Device\",\"family\":\"Loom\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]},{\"name\":\"Loom_Digital\",\"parameters\":[\"Digital\",true,true,false,false,false,false,false,false,false,false,false,false]},{\"name\":\"Loom_Interrupt_Manager\",\"parameters\":[\"Interrupt-Manager\",0]}]}";
 
+// With Relay
+const char* json_config = "{\"general\":{\"device_name\":\"Device\",\"family\":\"Loom\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]},{\"name\":\"Loom_Digital\",\"parameters\":[\"Digital\",true,true,false,false,false,false,false,false,false,false,false,false]},{\"name\":\"Loom_Interrupt_Manager\",\"parameters\":[\"Interrupt-Manager\",0]},{\"name\":\"Loom_Relay\",\"parameters\":[\"Relay\",10]}]}";
 
 
 /// Parses a JSON configuration and instantiates the specified 

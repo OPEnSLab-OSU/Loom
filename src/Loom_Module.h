@@ -23,12 +23,13 @@ class LoomModule
 
 protected:
 
+	ModuleType		module_type;
+
 	/// Pointer to manager
 	LoomManager*	device_manager;
 
 	/// The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
 	char			module_name[20];				
-	// char			module_name[20];				
 	
 	/// Whether or not the module should be treated
 	bool			active;
@@ -80,6 +81,9 @@ public:
 
 
 	// --- PUBLIC METHODS ---
+
+
+	ModuleType		get_module_type();
 
 	/// Get the device manager class if linked
 	/// \return Pointer to the LoomManager, Null if not linked

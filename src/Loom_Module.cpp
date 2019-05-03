@@ -21,7 +21,7 @@ LoomModule::LoomModule()
 	// strcpy(this->module_name, "Unknown");
 
 	snprintf(this->module_name, 20, "%s", "Unknown"); 
-	
+
 	active 				= true;
 	print_debug 		= true;
 	print_verbosity 	= Verbosity::V_LOW;
@@ -61,6 +61,13 @@ LoomModule::LoomModule( const char* module_name ) : LoomModule()
 LoomModule::~LoomModule() {}
 
 /////////////////////////////////////////////////////////////////////
+ModuleType LoomModule::get_module_type()
+{
+	return module_type;
+}
+
+/////////////////////////////////////////////////////////////////////
+
 // --- PUBLIC METHODS ---
 LoomManager* LoomModule::get_device_manager()
 {

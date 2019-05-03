@@ -142,10 +142,10 @@ public:
 
 
 	/// Register an ISR to an interrupt pin and its configuration
-	// \param[in]	pin			Which pin to connect the interrupt on
-	// \param[in]	ISR			ISR	function (Null if no interrupt linked)
-	// \param[in]	type		Low, High, Change, Falling, Rising
-	// \param[in]	immediate	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
+	/// \param[in]	pin			Which pin to connect the interrupt on
+	/// \param[in]	ISR			ISR	function (Null if no interrupt linked)
+	/// \param[in]	type		Low, High, Change, Falling, Rising
+	/// \param[in]	immediate	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
 	void		register_ISR(byte pin, ISRFuncPtr ISR, byte type, bool immediate);
 
 	/// Restores pin to default ISR, disables interrupt

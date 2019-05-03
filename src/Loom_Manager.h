@@ -12,6 +12,7 @@
 #include "Loom_Misc.h"
 #include "Loom_Translator.h"
 
+// #include "Actuators/Loom_Relay_Stub.h"
 
 // #include "Loom_Interrupt_Manager.h"
 // #include "Loom_Sleep_Manager.h"
@@ -25,29 +26,68 @@
 
 
 class Loom_Relay;
+// class Loom_Relay_Stub;
+
+
+
+
 
 
 
 enum class ModuleType {
+
+	Unknown,
+
 	// Actuators
-	Relay
+	Neopixel,
+	Relay,
+	Servo,
+	Stepper,
 
 	// Sensors
+	Analog,
+	Digital,
 
+	// I2C
+	AS7262,
+	AS7263,
+	AS7265X,
+	FXAS21002,
+	FXOS8700,
+	LIS3DH,
+	MB1232,
+	MPU6050,
+	MS5803,
+	SHT31D,
+	TSL2561,
+	TSL2591,
+	ZXGesture,
+
+	// SDI12
+	Loom_Decagon_5TM,
+	Loom_Decagon_GS3,
+
+	// SPI
+	Loom_MAX31856,
 
 	// CommPlats
-
+	LoRa,
+	nRF,
+	SlipSerial,
 
 	// LogPlats
-
+	OLED,
+	SDCARD,
 
 	// InternetPlats
 
 
 	// RTC
-	
+	DS3231,
+	PCF8523,
 
 	// Other
+	Multiplexer
 };
 
 
@@ -356,7 +396,7 @@ public:
 
 
 	// Module Access methods
-	Loom_Relay& Relay();
+	Loom_Relay& Relay(int idx = 0);
 
 
 
@@ -369,7 +409,7 @@ private:
 	void		package_aux(LoomModule** modules, uint len);
 
 
-	LoomModule*	module_access_aux(ModuleType type, LoomModule** array);
+	LoomModule*	module_access_aux(ModuleType type, int idx, LoomModule** modules, int count);
 
 
 
