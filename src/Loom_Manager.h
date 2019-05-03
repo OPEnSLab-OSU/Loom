@@ -25,8 +25,66 @@
 // #include "LogPlats/Loom_LogPlat.h"
 
 
+// #include "Loom_Module_Stub.h"
+
+
+
+class LoomModule;
+
+// Actuators
+class Loom_Neopixel;
 class Loom_Relay;
-// class Loom_Relay_Stub;
+class Loom_Servo;
+class Loom_Stepper;
+
+// Sensors
+class Loom_Analog;
+class Loom_Digital;
+
+// I2C
+class Loom_AS7262;
+class Loom_AS7263;
+class Loom_AS7265X;
+class Loom_FXAS21002;
+class Loom_FXOS8700;
+class Loom_LIS3DH;
+class Loom_MB1232;
+class Loom_MPU6050;
+class Loom_MS5803;
+class Loom_SHT31D;
+class Loom_TSL2561;
+class Loom_TSL2591;
+class Loom_ZXGesture;
+
+// SDI12
+class Loom_Decagon_5TM;
+class Loom_Decagon_GS3;
+
+// SPI
+class Loom_MAX31856;
+
+// CommPlats
+class Loom_LoRa;
+class Loom_nRF;
+class Loom_SlipSerial;
+
+// LogPlats
+class Loom_OLED;
+class Loom_SDCARD;
+
+// InternetPlats
+
+
+// RTC
+class Loom_DS3231;
+class Loom_PCF8523;
+
+// Other
+class Loom_Sleep_Manager;
+class Loom_Interrupt_Manager;
+class Loom_Multiplexer;
+
+
 
 
 
@@ -398,7 +456,63 @@ public:
 
 
 	// Module Access methods
-	Loom_Relay& Relay(int idx = 0);
+
+
+
+
+	// Actuators
+	Loom_Neopixel&		Neopixel(int idx = 0);
+	Loom_Relay&			Relay(int idx = 0);
+	Loom_Servo&			Servo(int idx = 0);
+	Loom_Stepper&		Stepper(int idx = 0);
+
+	// Sensors
+	Loom_Analog& Analog(int idx = 0);
+	Loom_Digital& Digital(int idx = 0);
+
+	// I2C
+	Loom_AS7262& AS7262(int idx = 0);
+	Loom_AS7263& AS7263(int idx = 0);
+	Loom_AS7265X& AS7265X(int idx = 0);
+	Loom_FXAS21002& FXAS21002(int idx = 0);
+	Loom_FXOS8700& FXOS8700(int idx = 0);
+	Loom_LIS3DH& LIS3DH(int idx = 0);
+	Loom_MB1232& MB1232(int idx = 0);
+	Loom_MPU6050& MPU6050(int idx = 0);
+	Loom_MS5803& MS5803(int idx = 0);
+	Loom_SHT31D& SHT31D(int idx = 0);
+	Loom_TSL2561& TSL2561(int idx = 0);
+	Loom_TSL2591& TSL2591(int idx = 0);
+	Loom_ZXGesture& ZXGesture(int idx = 0);
+
+	// SDI12
+	Loom_Decagon_5TM& Decagon_5TM(int idx = 0);
+	Loom_Decagon_GS3& Decagon_GS3(int idx = 0);
+
+	// SPI
+	Loom_MAX31856& MAX31856(int idx = 0);
+
+	// CommPlats
+	Loom_LoRa& LoRa(int idx = 0);
+	Loom_nRF& nRF(int idx = 0);
+	Loom_SlipSerial& SlipSerial(int idx = 0);
+
+	// LogPlats
+	Loom_OLED& OLED(int idx = 0);
+	Loom_SDCARD& SDCARD(int idx = 0);
+
+	// InternetPlats
+
+
+	// RTC
+	Loom_DS3231& DS3231(int idx = 0);
+	Loom_PCF8523& PCF8523(int idx = 0);
+
+	// Other
+	Loom_Sleep_Manager& Sleep_Manager(int idx = 0);
+	Loom_Interrupt_Manager& Interrupt_Manager(int idx = 0);
+	Loom_Multiplexer& Multiplexer(int idx = 0);
+
 
 
 
@@ -411,7 +525,18 @@ private:
 	void		package_aux(LoomModule** modules, uint len);
 
 
-	LoomModule*	module_access_aux(ModuleType type, int idx, LoomModule** modules, int count);
+
+	LoomModule*	find_module(ModuleType type, int idx, LoomModule** modules, int count);
+
+
+	// template <class T>
+	// T& find_module(ModuleType type, int idx, LoomModule** modules, int count )
+	// {
+	// 	LoomModule* tmp = module_access_aux(type, idx, modules, count);
+
+	// 	// Found module else stub, cast to module's type 
+	// 	return (*(T*)( (tmp) ? tmp : &global_stub ));	
+	// }
 
 
 
