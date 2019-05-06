@@ -46,6 +46,9 @@ public:
 			int				resolution		= 3
 		);
 
+	Loom_TSL2561(JsonVariant p);
+
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_TSL2561();
 

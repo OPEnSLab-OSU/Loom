@@ -41,6 +41,8 @@ public:
 			bool			compress_messages	= true
 		);
 
+	Loom_SlipSerial(JsonVariant p);
+
 	/// Destructor
 	~Loom_SlipSerial();
 

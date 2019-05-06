@@ -74,6 +74,8 @@ public:
 			uint16_t		retry_timeout		= 200
 		);
 
+	Loom_LoRa(JsonVariant p);
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_LoRa();
 

@@ -56,6 +56,8 @@ public:
 			byte			integration_time	= 50
 		);
 
+	Loom_AS7265X(JsonVariant p);
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_AS7265X();
 

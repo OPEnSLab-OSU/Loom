@@ -98,6 +98,19 @@ Loom_Analog::Loom_Analog(
 }
 
 /////////////////////////////////////////////////////////////////////
+// --- CONSTRUCTOR ---
+Loom_Analog::Loom_Analog(JsonVariant p)
+	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], (AnalogConversion)(int)p[9], (AnalogConversion)(int)p[10], (AnalogConversion)(int)p[11], (AnalogConversion)(int)p[12], (AnalogConversion)(int)p[13], (AnalogConversion)(int)p[14])
+{
+	// if (p.size() >= 15) {
+	// 	Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], (AnalogConversion)(int)p[9], (AnalogConversion)(int)p[10], (AnalogConversion)(int)p[11], (AnalogConversion)(int)p[12], (AnalogConversion)(int)p[13], (AnalogConversion)(int)p[14]);
+	// } else {
+	// 	// Loom_Analog();
+	// }
+}
+
+
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Analog::~Loom_Analog() 
 {

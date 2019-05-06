@@ -98,6 +98,8 @@ public:
 			uint			update_period		= 5000
 		);
 
+	Loom_Multiplexer(JsonVariant p);
+
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Multiplexer();

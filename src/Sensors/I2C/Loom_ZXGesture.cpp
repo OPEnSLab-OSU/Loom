@@ -45,6 +45,12 @@ Loom_ZXGesture::Loom_ZXGesture(
 }
 
 /////////////////////////////////////////////////////////////////////
+// --- CONSTRUCTOR ---
+Loom_ZXGesture::Loom_ZXGesture(JsonVariant p)
+	: Loom_ZXGesture(p[0], p[1], (ZXMode)(int)p[2])
+{}
+
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_ZXGesture::~Loom_ZXGesture() 
 {

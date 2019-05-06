@@ -33,6 +33,8 @@ public:
 			byte			int_pin				= 6
 		);
 
+	Loom_PCF8523(JsonVariant p);
+
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_PCF8523();

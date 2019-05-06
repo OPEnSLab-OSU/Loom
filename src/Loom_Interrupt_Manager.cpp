@@ -47,6 +47,12 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 }
 
 /////////////////////////////////////////////////////////////////////
+// --- CONSTRUCTOR ---
+Loom_Interrupt_Manager::Loom_Interrupt_Manager(JsonVariant p)
+	: Loom_Interrupt_Manager(p[0], nullptr)
+{}
+
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Interrupt_Manager::~Loom_Interrupt_Manager()
 {

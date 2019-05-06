@@ -103,6 +103,8 @@ public:
 			AnalogConversion	convertA5			= AnalogConversion::NONE
 		);
 
+	Loom_Analog(JsonVariant p);
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Analog();
 

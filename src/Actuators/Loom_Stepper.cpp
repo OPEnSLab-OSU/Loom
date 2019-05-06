@@ -28,6 +28,14 @@ Loom_Stepper::Loom_Stepper(
 }
 
 /////////////////////////////////////////////////////////////////////
+// --- CONSTRUCTOR ---
+Loom_Stepper::Loom_Stepper(JsonVariant p)
+	: Loom_Stepper(p[0], p[1])
+{
+
+}
+
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Stepper::~Loom_Stepper() 
 {

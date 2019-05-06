@@ -31,6 +31,8 @@ public:
 			uint8_t			num_samples		= 1
 		);
 
+	Loom_DecagonGS3(JsonVariant p);
+
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_DecagonGS3();

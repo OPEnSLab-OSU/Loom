@@ -31,6 +31,10 @@ public:
 			byte			pin				= 10
 		);
 
+	Loom_Relay(JsonVariant p);
+
+
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Relay();
 

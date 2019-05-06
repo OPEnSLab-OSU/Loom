@@ -33,6 +33,9 @@ public:
 			const char*		module_name		= "LIS3DH"
 		);
 
+	Loom_LIS3DH(JsonVariant p);
+
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_LIS3DH();
 

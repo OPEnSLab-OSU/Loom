@@ -19,6 +19,20 @@ Loom_Relay::Loom_Relay(
 }
 
 /////////////////////////////////////////////////////////////////////
+// --- CONSTRUCTOR ---
+Loom_Relay::Loom_Relay(JsonVariant p)
+	: Loom_Relay(p[0], p[1]) 
+{}
+// {
+	// if (p.size() >= 2) {
+	// 	Loom_Relay(p[0], p[1]);
+	// } else {
+	// 	// Loom_Relay();
+	// }
+// }
+
+
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Relay::~Loom_Relay() 
 {

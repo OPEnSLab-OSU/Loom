@@ -104,6 +104,8 @@ public:
 			LoomRTC*		RTC_Inst		= nullptr
 		);
 
+	Loom_Interrupt_Manager(JsonVariant p);
+
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Interrupt_Manager();

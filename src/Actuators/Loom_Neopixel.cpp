@@ -43,6 +43,14 @@ Loom_Neopixel::Loom_Neopixel(
 } 
 
 /////////////////////////////////////////////////////////////////////
+// --- CONSTRUCTOR ---
+Loom_Neopixel::Loom_Neopixel(JsonVariant p)
+	: Loom_Neopixel(p[0], p[1], p[2], p[3])
+{
+
+}
+
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Neopixel::~Loom_Neopixel() 
 {

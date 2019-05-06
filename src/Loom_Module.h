@@ -9,6 +9,7 @@
 #include "Loom_Macros.h"
 
 #include <OSCBundle.h>
+#include <ArduinoJson.h>
 
 
 
@@ -54,6 +55,9 @@ public:
 	LoomModule();
 
 	LoomModule( const char* module_name );// : LoomModule();
+
+	LoomModule(JsonVariant settings);
+
 
 	// LoomModule( char* module_name, LoomManager* LD );
 

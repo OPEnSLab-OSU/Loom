@@ -72,6 +72,9 @@ public:
 			// byte 			reset_pin 			= A2
 		);
 
+	Loom_SD(JsonVariant p);
+
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_SD();
 

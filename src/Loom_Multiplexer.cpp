@@ -121,6 +121,12 @@ Loom_Multiplexer::Loom_Multiplexer(
 }
 
 /////////////////////////////////////////////////////////////////////
+// --- CONSTRUCTOR ---
+Loom_Multiplexer::Loom_Multiplexer(JsonVariant p)
+	: Loom_Multiplexer(p[0], p[1], p[2], p[3], p[4])
+{}
+
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Multiplexer::~Loom_Multiplexer() 
 {

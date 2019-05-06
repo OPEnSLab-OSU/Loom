@@ -50,6 +50,7 @@ public:
 			// type
 		);
 
+	Loom_MAX31856(JsonVariant p);
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_MAX31856();

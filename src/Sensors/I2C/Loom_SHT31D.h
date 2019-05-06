@@ -1,4 +1,3 @@
-
 #ifndef LOOM_SHT31D_h
 #define LOOM_SHT31D_h
 
@@ -33,6 +32,9 @@ public:
 			byte			i2c_address		= 0x44,
 			const char*		module_name		= "SHT31D"
 		);
+
+	Loom_SHT31D(JsonVariant p);
+
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_SHT31D();

@@ -35,6 +35,9 @@ public:
 			const char*		module_name		= "FXOS8700"
 		);
 
+	Loom_FXOS8700(JsonVariant p);
+
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_FXOS8700();
 

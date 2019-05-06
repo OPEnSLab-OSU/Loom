@@ -39,6 +39,10 @@ public:
 			uint8_t			servo_count		= NUM_SERVOS
 		);
 
+	Loom_Servo(JsonVariant p);
+
+
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Servo();
 

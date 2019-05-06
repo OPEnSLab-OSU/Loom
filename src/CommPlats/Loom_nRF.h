@@ -72,6 +72,8 @@ public:
 			uint8_t			multicast_level		= 1
 		);
 
+	Loom_nRF(JsonVariant p);
+
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_nRF();

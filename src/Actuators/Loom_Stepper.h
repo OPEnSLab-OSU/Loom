@@ -41,6 +41,10 @@ public:
 			uint8_t			stepper_count	= NUM_STEPPERS
 		);
 
+	Loom_Stepper(JsonVariant p);
+
+
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Stepper();
 

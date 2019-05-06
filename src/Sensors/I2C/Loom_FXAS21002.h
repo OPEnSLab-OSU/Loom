@@ -33,6 +33,8 @@ public:
 			const char*		module_name		= "FXAS21002"
 		);
 
+	Loom_FXAS21002(JsonVariant p);
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_FXAS21002();
 

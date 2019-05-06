@@ -51,6 +51,9 @@ public:
 			ZXMode			mode			= ZXMode::ZX_POS
 		);
 
+	Loom_ZXGesture(JsonVariant p);
+
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_ZXGesture();
 

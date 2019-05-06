@@ -28,6 +28,9 @@ public:
 			const char*		module_name		= "MB1232"
 		);
 
+	Loom_MB1232(JsonVariant p);
+
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_MB1232();
 

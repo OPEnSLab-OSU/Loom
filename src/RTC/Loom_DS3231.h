@@ -33,6 +33,8 @@ public:
 			byte			int_pin				= 6
 		);
 
+	Loom_DS3231(JsonVariant p);
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_DS3231();
 

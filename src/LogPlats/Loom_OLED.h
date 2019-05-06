@@ -88,6 +88,8 @@ public:
 			OLED_Freeze			freeze_behavior			= OLED_Freeze::SCROLL
 		);
 
+	Loom_OLED(JsonVariant p);
+
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_OLED();

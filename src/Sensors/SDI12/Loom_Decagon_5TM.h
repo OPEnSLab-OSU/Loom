@@ -25,6 +25,8 @@ public:
 			uint8_t			num_samples		= 1
 		);
 
+	Loom_Decagon5TM(JsonVariant p);
+
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Decagon5TM();

@@ -39,6 +39,8 @@ public:
 			bool			enableA2		= true
 		);
 
+	Loom_Neopixel(JsonVariant p);
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Neopixel();
 

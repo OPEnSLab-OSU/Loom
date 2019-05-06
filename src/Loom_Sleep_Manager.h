@@ -72,6 +72,9 @@ public:
 			SleepMode		sleep_mode			= SleepMode::STANDBY
 		);
 
+	Loom_Sleep_Manager(JsonVariant p);
+
+
 	// Loom_Sleep_Manager( char* module_name, LoomManager* LD );
 
 	const static char* enum_sleep_mode_string(SleepMode m);

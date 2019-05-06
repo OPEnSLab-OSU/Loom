@@ -38,6 +38,9 @@ public:
 			const char*		module_name		= "MS5803"
 		);
 
+	Loom_MS5803(JsonVariant p);
+
+
 	// --- DESTRUCTOR ---
 	virtual ~Loom_MS5803();
 

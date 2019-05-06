@@ -45,6 +45,8 @@ public:
 			uint8_t			timing_level		= 0
 		);
 
+	Loom_TSL2591(JsonVariant p);
+
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_TSL2591();

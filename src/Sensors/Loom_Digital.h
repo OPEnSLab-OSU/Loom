@@ -58,8 +58,10 @@ public:
 			bool			enableA5		= false
 		);
 
+	Loom_Digital(JsonVariant p);
+
 	// --- DESTRUCTOR ---
-	virtual ~Loom_Digital();
+	~Loom_Digital();
 
 	// Inherited Methods
 	void		print_config() override;

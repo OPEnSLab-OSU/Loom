@@ -41,6 +41,12 @@ Loom_Sleep_Manager::Loom_Sleep_Manager( const char* module_name, LoomRTC* RTC_In
 }
 
 /////////////////////////////////////////////////////////////////////
+// --- CONSTRUCTOR ---
+Loom_Sleep_Manager::Loom_Sleep_Manager(JsonVariant p)
+	: Loom_Sleep_Manager(p[0], nullptr, p[2], p[3], (SleepMode)(int)p[4])
+{}
+
+/////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 Loom_Sleep_Manager::~Loom_Sleep_Manager()
 {
