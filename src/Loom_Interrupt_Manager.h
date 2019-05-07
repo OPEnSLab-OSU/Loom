@@ -80,6 +80,9 @@ protected:
 	/// Pointer to an RTC object for managing timers / timed interrupts
 	LoomRTC*		RTC_Inst;
 
+	/// Pointer to a Sleep Manager object
+	Loom_Sleep_Manager* Sleep_Manager;
+
 	/// Last time an alarm went off
 	DateTime		last_alarm_time;
 

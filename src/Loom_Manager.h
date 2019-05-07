@@ -283,6 +283,11 @@ public:
 	// --- DESTRUCTOR ---
 	virtual ~LoomManager();
 
+	void		parse_config(const char* json_config);
+	// maybe overload to take JsonVariant or const char* of json?
+
+
+
 	/// Print the device name as '[device_name]'
 	void		print_device_label();
 	/// Print the devices current configuration.
@@ -296,8 +301,6 @@ public:
 	void 		list_modules();
 
 
-	void		parse_config();
-	// maybe overload to take JsonVariant or const char* of json?
 
 
 
@@ -349,10 +352,7 @@ public:
 	// Overloaded as to sort by module type
 	void		add_module(Loom_Interrupt_Manager* interrupt_manager);
 	void		add_module(Loom_Sleep_Manager* sleep_manager);
-
-
 	void		add_module(LoomRTC* rtc);
-
 	void		add_module(LoomModule* module);
 	void		add_module(LoomSensor* sensor);
 	void		add_module(LoomActuator* actuator);

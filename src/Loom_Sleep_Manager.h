@@ -47,9 +47,11 @@ protected:
 
 	/// Pointer to Interrupt Manager.
 	/// Offload timers and interrupts to interrupts manager
+//kill
 	Loom_Interrupt_Manager* IM;
 	/// Pointer to RTC object
 	// Might remove this pointer and only leave in Interrupt Manager
+// kill
 	LoomRTC* 	RTC_Inst;
 
 	/// Which sleep mode to use
@@ -60,8 +62,8 @@ public:
 	/// Sleep Manager module constructor.
 	///
 	/// \param[in]	module_name			String | <"Sleep-Manager"> | null | Sleep Manager module name
-	/// \param[in]	RTC_Inst				Set(Int) | <0> | {0("Null")} | OLED module name
-	/// \param[in]	use_LED					Bool | <true> | {true, false} | Whether or not to use LED to indicate wake state
+	/// \param[in]	RTC_Inst			Set(Int) | <0> | {0("Null")} | OLED module name
+	/// \param[in]	use_LED				Bool | <true> | {true, false} | Whether or not to use LED to indicate wake state
 	/// \param[in]	delay_on_wake		Bool | <false> | {true, false} | Whether or not to delay upon waking to allow time to open Serial Monitor
 	/// \param[in]	sleep_mode			Set(SleepMode) | <1> | { 0("Idle"), 1("Standby"), 2("SleepyDog"), 3("Opens Low Power")} | Which SleepMode to use
 	Loom_Sleep_Manager(

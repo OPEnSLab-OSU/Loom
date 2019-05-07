@@ -105,7 +105,7 @@ void module_factory_aux(
 
 	// --- General ---
 
-	if (strcmp(module_type, "Loom_Interrupt-Manager") == 0) {
+	if (strcmp(module_type, "Loom_Interrupt_Manager") == 0) {
 		Println("Create Interrupt_Manager");
 		if (p.size() >= 2) {
 			interrupt_manager = new Loom_Interrupt_Manager(p);
@@ -114,7 +114,7 @@ void module_factory_aux(
 		return;
 	} 
 
-	if (strcmp(module_type, "Loom_Sleep-Manager") == 0) {
+	if (strcmp(module_type, "Loom_Sleep_Manager") == 0) {
 		Println("Create Sleep_Manager");
 		if (p.size() >= 2) {
 			sleep_manager = new Loom_Sleep_Manager(p);
