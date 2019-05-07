@@ -57,8 +57,8 @@ class Loom_TSL2591;
 class Loom_ZXGesture;
 
 // SDI12
-class Loom_Decagon_5TM;
-class Loom_Decagon_GS3;
+class Loom_Decagon5TM;
+class Loom_DecagonGS3;
 
 // SPI
 class Loom_MAX31856;
@@ -70,7 +70,7 @@ class Loom_SlipSerial;
 
 // LogPlats
 class Loom_OLED;
-class Loom_SDCARD;
+class Loom_SD;
 
 // InternetPlats
 
@@ -122,8 +122,8 @@ enum class ModuleType {
 	ZXGesture,
 
 	// SDI12
-	Decagon_5TM,
-	Decagon_GS3,
+	Decagon5TM,
+	DecagonGS3,
 
 	// SPI
 	MAX31856,
@@ -138,7 +138,6 @@ enum class ModuleType {
 	SDCARD,
 
 	// InternetPlats
-
 
 	// RTC
 	DS3231,
@@ -342,12 +341,6 @@ public:
 
 
 
-
-
-	// void module_enable(LoomModule* LM, bool e) ?
-
-
-
 	DeviceType	get_device_type();
 	// void set_device_type(DeviceType t) {device_type = t; }
 
@@ -389,7 +382,7 @@ public:
 	void 		get_device_name(char* buf);
 	/// Get the device name
 	/// \return String literal of device name.
-	const char*		get_device_name();
+	const char*	get_device_name();
 
 
 
@@ -455,10 +448,31 @@ public:
 
 
 
+
+
+
 	// Module Access methods
 
 
+	// Other
+	Loom_Sleep_Manager&			Sleep_Manager(int idx = 0);
+	Loom_Interrupt_Manager&		Interrupt_Manager(int idx = 0);
+	Loom_Multiplexer&			Multiplexer(int idx = 0);
 
+	// CommPlats
+	Loom_LoRa&			LoRa(int idx = 0);
+	Loom_nRF&			nRF(int idx = 0);
+	// Loom_SlipSerial&	SlipSerial(int idx = 0);
+
+	// LogPlats
+	Loom_OLED&			OLED(int idx = 0);
+	Loom_SD&			SDCARD(int idx = 0);
+
+	// InternetPlats
+
+	// RTC
+	Loom_DS3231&		DS3231(int idx = 0);
+	Loom_PCF8523&		PCF8523(int idx = 0);
 
 	// Actuators
 	Loom_Neopixel&		Neopixel(int idx = 0);
@@ -467,52 +481,32 @@ public:
 	Loom_Stepper&		Stepper(int idx = 0);
 
 	// Sensors
-	Loom_Analog& Analog(int idx = 0);
-	Loom_Digital& Digital(int idx = 0);
+	Loom_Analog&		Analog(int idx = 0);
+	Loom_Digital&		Digital(int idx = 0);
 
 	// I2C
-	Loom_AS7262& AS7262(int idx = 0);
-	Loom_AS7263& AS7263(int idx = 0);
-	Loom_AS7265X& AS7265X(int idx = 0);
-	Loom_FXAS21002& FXAS21002(int idx = 0);
-	Loom_FXOS8700& FXOS8700(int idx = 0);
-	Loom_LIS3DH& LIS3DH(int idx = 0);
-	Loom_MB1232& MB1232(int idx = 0);
-	Loom_MPU6050& MPU6050(int idx = 0);
-	Loom_MS5803& MS5803(int idx = 0);
-	Loom_SHT31D& SHT31D(int idx = 0);
-	Loom_TSL2561& TSL2561(int idx = 0);
-	Loom_TSL2591& TSL2591(int idx = 0);
-	Loom_ZXGesture& ZXGesture(int idx = 0);
+	Loom_AS7262&		AS7262(int idx = 0);
+	Loom_AS7263&		AS7263(int idx = 0);
+	Loom_AS7265X&		AS7265X(int idx = 0);
+	Loom_FXAS21002&		FXAS21002(int idx = 0);
+	Loom_FXOS8700&		FXOS8700(int idx = 0);
+	Loom_LIS3DH&		LIS3DH(int idx = 0);
+	Loom_MB1232&		MB1232(int idx = 0);
+	Loom_MPU6050&		MPU6050(int idx = 0);
+	Loom_MS5803&		MS5803(int idx = 0);
+	Loom_SHT31D&		SHT31D(int idx = 0);
+	Loom_TSL2561&		TSL2561(int idx = 0);
+	Loom_TSL2591&		TSL2591(int idx = 0);
+	Loom_ZXGesture&		ZXGesture(int idx = 0);
 
 	// SDI12
-	Loom_Decagon_5TM& Decagon_5TM(int idx = 0);
-	Loom_Decagon_GS3& Decagon_GS3(int idx = 0);
+	Loom_Decagon5TM&	Decagon5TM(int idx = 0);
+	Loom_DecagonGS3&	DecagonGS3(int idx = 0);
 
 	// SPI
-	Loom_MAX31856& MAX31856(int idx = 0);
+	Loom_MAX31856&		MAX31856(int idx = 0);
 
-	// CommPlats
-	Loom_LoRa& LoRa(int idx = 0);
-	Loom_nRF& nRF(int idx = 0);
-	Loom_SlipSerial& SlipSerial(int idx = 0);
-
-	// LogPlats
-	Loom_OLED& OLED(int idx = 0);
-	Loom_SDCARD& SDCARD(int idx = 0);
-
-	// InternetPlats
-
-
-	// RTC
-	Loom_DS3231& DS3231(int idx = 0);
-	Loom_PCF8523& PCF8523(int idx = 0);
-
-	// Other
-	Loom_Sleep_Manager& Sleep_Manager(int idx = 0);
-	Loom_Interrupt_Manager& Interrupt_Manager(int idx = 0);
-	Loom_Multiplexer& Multiplexer(int idx = 0);
-
+	
 
 
 
@@ -525,9 +519,7 @@ private:
 	void		package_aux(LoomModule** modules, uint len);
 
 
-
 	LoomModule*	find_module(ModuleType type, int idx, LoomModule** modules, int count);
-
 
 	// template <class T>
 	// T& find_module(ModuleType type, int idx, LoomModule** modules, int count )

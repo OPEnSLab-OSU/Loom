@@ -197,9 +197,6 @@ void module_factory_aux(
 	// 	if (p.size() >= 3) {
 	// 		? new Loom_SlipSerial(p);
 			// ? new Loom_SlipSerial(p[0], p[1], p[2]);
-// }
-// return;
-	// } 
 
 
 	// --- InternetPlats --- 
