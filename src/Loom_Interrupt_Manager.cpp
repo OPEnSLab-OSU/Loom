@@ -18,6 +18,22 @@ const ISRFuncPtr Loom_Interrupt_Manager::default_ISRs[InteruptRange] =
 };
 
 
+
+/////////////////////////////////////////////////////////////////////
+const char* Loom_Interrupt_Manager::interrupt_type_to_string(int type)
+{
+	switch(type) {
+		case 0  : return "LOW";
+		case 1  : return "HIGH";
+		case 2  : return "CHANGE";
+		case 3  : return "FALLING";
+		case 4  : return "RISING";
+		default : return "Invalid";
+	}
+}
+
+
+
 /////////////////////////////////////////////////////////////////////
 Loom_Interrupt_Manager::Loom_Interrupt_Manager( 
 		const char*		module_name, 
@@ -41,6 +57,7 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 
 	this->RTC_Inst = RTC_Inst;
 
+	// Note initial wake time
 	if (this->RTC_Inst != nullptr) {
 		last_alarm_time = this->RTC_Inst->now();
 	}
@@ -70,11 +87,11 @@ void Loom_Interrupt_Manager::print_config()
 	Println2('\t', "Registered ISRs     : " );
 	for (auto i = 0; i < InteruptRange; i++) {
 		Print5("\t\t", "Pin ", i, " | ISR: ", (int_settings[i].is_immediate) ? "Immediate" : "Bottom Half");
-		Println4(" | Type: ", int_settings[i].type, " | ", (int_settings[i].enabled) ? "Enabled" : "Disabled" );
+		Println4(" | Type: ", interrupt_type_to_string(int_settings[i].type), " | ", (int_settings[i].enabled) ? "Enabled" : "Disabled" );
 
 	}
 
-	// print out registered timers
+	// Print out registered timers
 	Println2('\t', "Registered Timers     : " );
 	for (auto i = 0; i < MaxTimerCount; i++) {
 		Print4("\t\t", "Timer ", i, " : ");
@@ -88,7 +105,7 @@ void Loom_Interrupt_Manager::print_config()
 		}
 	}
 
-	// print out registered stopwatches
+	// Print out registered stopwatches
 	Println2('\t', "Registered StopWatches     : " );
 	for (auto i = 0; i < MaxStopWatchCount; i++) {
 		Print4("\t\t", "Stopwatch ", i, " : ");
@@ -257,32 +274,19 @@ LoomRTC* Loom_Interrupt_Manager::get_RTC_module()
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_relative(TimeSpan duration)
+bool Loom_Interrupt_Manager::RTC_alarm_duration(TimeSpan duration)
 {
-	return (RTC_Inst) ? RTC_alarm_exact(RTC_Inst->now() + duration) : false;
+	return (RTC_Inst) ? RTC_alarm_at(RTC_Inst->now() + duration) : false;
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_relative(uint days, uint hours, uint minutes, uint seconds)
+bool Loom_Interrupt_Manager::RTC_alarm_duration(uint days, uint hours, uint minutes, uint seconds)
 {
-	return RTC_alarm_relative( TimeSpan(days, hours, minutes, seconds) );
+	return RTC_alarm_duration( TimeSpan(days, hours, minutes, seconds) );
 }
 
-
-
-// bool Loom_Interrupt_Manager::RTC_alarm_exact_from_last_alarm_time(TimeSpan duration)
-// {
-// 	return (RTC_Inst) ? RTC_alarm_exact(last_alarm_time + duration) : false;
-// }
-
-// bool Loom_Interrupt_Manager::RTC_alarm_exact_from_last_alarm_time(uint days, uint hours, uint minutes, uint seconds)
-// {
-// 	return RTC_alarm_exact_from_last_alarm_time( TimeSpan(days, hours, minutes, seconds) );
-// }
-
-
 /////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_exact(DateTime future_time)
+bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 {
 	// Don't sleep if no RTC to wake up device
 	if (RTC_Inst == nullptr) {
@@ -323,18 +327,34 @@ bool Loom_Interrupt_Manager::RTC_alarm_exact(DateTime future_time)
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_exact(uint hour, uint minute, uint second)
+bool Loom_Interrupt_Manager::RTC_alarm_at(uint hour, uint minute, uint second)
 {
 	// Don't sleep if no RTC to wake up device
 	if (RTC_Inst == nullptr) {
 		return false;
 	}
 
-	// Call RTC_alarm_exact(DateTime future_time) with that time today
+	// Call RTC_alarm_at(DateTime future_time) with that time today
 	// That function will adjust to following day if necessary
 	DateTime now = RTC_Inst->now();
-	return RTC_alarm_exact( DateTime(now.year(), now.month(), now.day(), hour, minute, second) ); 
+	return RTC_alarm_at( DateTime(now.year(), now.month(), now.day(), hour, minute, second) ); 
 }
+
+
+
+bool Loom_Interrupt_Manager::RTC_alarm_duration_from_last(TimeSpan duration)
+{
+	return (RTC_Inst) ? RTC_alarm_at(last_alarm_time + duration) : false;
+}
+
+bool Loom_Interrupt_Manager::RTC_alarm_duration_from_last(uint days, uint hours, uint minutes, uint seconds)
+{
+	return RTC_alarm_duration_from_last( TimeSpan(days, hours, minutes, seconds) );
+}
+
+
+
+
 
 
 

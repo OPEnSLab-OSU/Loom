@@ -98,12 +98,13 @@ protected:
 	// interrupt_triggered for timers, also support immediate and delayed
 public:
 
+
 	/// Interrupt Manager module constructor.
 	///
 	/// \param[in]	module_name		String | <"Interrupt-Manager"> | null | Interrupt Manager module name
 	/// \param[in]	RTC_Inst			Set(Int) | <0> | {0("Null")} | OLED module name
 	Loom_Interrupt_Manager(
-			const char*		module_name		= "Interrupt-Manager",
+			const char*		module_name		= "Interrupt_Manager",
 			LoomRTC*		RTC_Inst		= nullptr
 		);
 
@@ -112,6 +113,10 @@ public:
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Interrupt_Manager();
+
+
+	const static char* interrupt_type_to_string(int type);
+
 
 	// Inherited methods
 	void		print_config() override;
@@ -184,35 +189,54 @@ public:
 // maybe rename relative/exact to TimeSpan/DateTime?
 
 
+
+// sleep_for
 	/// Set RTC alarm relative time from now
 	/// \param[in]	duration	How long before the alarm should go off
-	bool		RTC_alarm_relative(TimeSpan duration);
+	bool		RTC_alarm_duration(TimeSpan duration);
 
 	/// Set RTC alarm relative time from now
 	/// \param[in]	days		Days into the future the alarm should be set
 	/// \param[in]	hours		Hours into the future the alarm should be set
 	/// \param[in]	minutes		Minutes into the future the alarm should be set
 	/// \param[in]	seconds		Seconds into the future the alarm should be set
-	bool		RTC_alarm_relative(uint days, uint hours, uint minutes, uint seconds);
+	bool		RTC_alarm_duration(uint days, uint hours, uint minutes, uint seconds);
 
 
 // maybe remove these 2 (leave in Sleep manager) ? - perhaps not
 	// bool set_RTC_alarm_for_time_from_last_alarm_time(TimeSpan duration);
 	// bool set_RTC_alarm_for_time_from_last_alarm_time(uint days, uint hours, uint minutes, uint seconds);
 
-
+// sleep_until
 	/// Set RTC alarm for a specific time.
 	/// Increments to next day at given hour, min, sec if specified time is in past
 	/// \param[in]	future_time		Time to set alarm for
-	bool		RTC_alarm_exact(DateTime future_time);
+	bool		RTC_alarm_at(DateTime future_time);
 
 	/// Set RTC alarm for a specific time.
-	/// Forwards to RTC_alarm_exact that takes DateTime object
+	/// Forwards to RTC_alarm_at that takes DateTime object
 	/// \param[in]	hour		Hour to set alarm for
 	/// \param[in]	minute		Minute to set alarm for
 	/// \param[in]	second		Second to set alarm for
-	bool		RTC_alarm_exact(uint hour, uint minute, uint second);
+	bool		RTC_alarm_at(uint hour, uint minute, uint second);
 
+
+
+// // sleep_for
+	/// Set RTC alarm relative time from last alarm time
+	/// \param[in]	duration	How long before the alarm should go off
+	bool		RTC_alarm_duration_from_last(TimeSpan duration);
+
+	/// Set RTC alarm relative time from last alarm time
+	/// \param[in]	days		Days into the future the alarm should be set
+	/// \param[in]	hours		Hours into the future the alarm should be set
+	/// \param[in]	minutes		Minutes into the future the alarm should be set
+	/// \param[in]	seconds		Seconds into the future the alarm should be set
+	bool		RTC_alarm_duration_from_last(uint days, uint hours, uint minutes, uint seconds);
+
+
+
+// some sort of alarm auto repeating
 
 
 // === === AsyncDelay Timer Functions === ===

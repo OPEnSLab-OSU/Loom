@@ -118,9 +118,9 @@ void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager)
 
 	interrupt_manager->link_device_manager(this);
 
-	// if (rtc_module != nullptr) {
-	// 	this->interrupt_manager->set_RTC_module(rtc_module);
-	// }
+	if (rtc_module != nullptr) {
+		this->interrupt_manager->set_RTC_module(rtc_module);
+	}
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -135,54 +135,22 @@ void LoomManager::add_module(Loom_Sleep_Manager* sleep_manager)
 	this->sleep_manager = sleep_manager; 
 
 	sleep_manager->link_device_manager(this);
-
-	// if (rtc_module != nullptr) {
-	// 	this->sleep_manager->set_RTC_module(rtc_module);
-	// }
-
-	// if (interrupt_manager) {
-	// 	this->sleep_manager->set_Interrupt_Manager(interrupt_manager);
-	// }
 }
 
 /////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomRTC* rtc) 
 {
 	rtc_module = rtc;
-	// add_module_aux( (LoomModule**)rtc_modules, (LoomModule*)rtc, rtc_count, MAX_RTCS );
 	
 	if (rtc != nullptr) {
 		if (interrupt_manager != nullptr) {
 			interrupt_manager->set_RTC_module(rtc);
-		}
-		if (sleep_manager != nullptr) {
-			sleep_manager->set_RTC_module(rtc);
 		}
 	} else {
 		Println("Cannot add null module");
 		return;
 	}
 }
-
-// /////////////////////////////////////////////////////////////////////
-// void LoomManager::add_module(LoomSD* SD_manager) 
-// {
-// 	print_device_label();
-// 	if (!sleep_manager) {
-// 		Println2("Cannot add ", sleep_manager->get_module_name() );
-// 		return;
-// 	}
-// 	Println2("Adding Module: ", sleep_manager->get_module_name() );
-// 	this->sleep_manager = sleep_manager; 
-
-// 	if (rtc_module != nullptr) {
-// 		this->sleep_manager->set_RTC_module(rtc_module);
-// 	}
-
-// 	if (interrupt_manager) {
-// 		this->sleep_manager->set_Interrupt_Manager(interrupt_manager);
-// 	}
-// }
 
 /////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomModule* module) 
