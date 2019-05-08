@@ -28,10 +28,7 @@ class LoomRTC;
 /// Typedef to for ISR function pointer readability
 typedef void (*ISRFuncPtr)();
 
-
-
-// currently not used
-// enum IntType { INT_LOW, INT_HIGH, INT_CHANGE, INT_FALLING, INT_RISING };
+enum class ISR_Type { IMMEDIATE, CHECK_FLAG };
 
 
 
@@ -39,7 +36,7 @@ typedef void (*ISRFuncPtr)();
 struct IntDetails {
 	ISRFuncPtr	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
 	byte		type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
-	bool		is_immediate;	///< True if ISR is called directly upon interrupt, false if called next check of flags
+	ISR_Type	run_type;		///< True if ISR is called directly upon interrupt, false if called next check of flags
 	bool		enabled;		///< Whether or not this interrupt is enabled
 };
 
@@ -127,9 +124,7 @@ public:
 
 	void 		link_device_manager(LoomManager* LM);
 
-
 	void		run_pending_ISRs();
-
 
 
 // === === Interrupt Functions === ===
@@ -156,19 +151,16 @@ public:
 	/// \param[in]	ISR			ISR	function (Null if no interrupt linked)
 	/// \param[in]	type		Low, High, Change, Falling, Rising
 	/// \param[in]	immediate	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
-	void		register_ISR(byte pin, ISRFuncPtr ISR, byte type, bool immediate);
+	void		register_ISR(byte pin, ISRFuncPtr ISR, byte signal_type, ISR_Type run_type);
 
 	/// Restores pin to default ISR, disables interrupt
 	/// \param[in]	pin		The pin to unregister ISRs for
 	/// \param[in]	type	What signal to configure default ISR to (default LOW)
-	void		unregister_ISR(byte pin, byte type=LOW);
-
-	/// Checks the flags set by default ISRs, calls pending bottom half ISRs
-	void		run_ISR_bottom_halves();
+	void		unregister_ISR(byte pin, byte signal_type=LOW);
 
 	/// Detaches then reattacheds interrupt according to settings.
 	/// used to clear pending interrupts
-	/// \param[in]	pin 	Pin to reset interrupts for
+	/// \param[in]	pin 	Pin to reset interrupts for ...
 	void		interrupt_reset(byte pin);
 
 
@@ -183,10 +175,8 @@ public:
 	LoomRTC*	get_RTC_module();
 
 
+
 // Shorten names, maybe combine, taking behavior (e.g. relative/absolute) as parameter
-
-
-// maybe rename relative/exact to TimeSpan/DateTime?
 
 
 
@@ -201,11 +191,6 @@ public:
 	/// \param[in]	minutes		Minutes into the future the alarm should be set
 	/// \param[in]	seconds		Seconds into the future the alarm should be set
 	bool		RTC_alarm_duration(uint days, uint hours, uint minutes, uint seconds);
-
-
-// maybe remove these 2 (leave in Sleep manager) ? - perhaps not
-	// bool set_RTC_alarm_for_time_from_last_alarm_time(TimeSpan duration);
-	// bool set_RTC_alarm_for_time_from_last_alarm_time(uint days, uint hours, uint minutes, uint seconds);
 
 // sleep_until
 	/// Set RTC alarm for a specific time.
@@ -266,6 +251,9 @@ public:
 
 
 private:
+
+	/// Checks the flags set by default ISRs, calls pending bottom half ISRs
+	void		run_ISR_bottom_halves();
 
 
 	// Default ISRs that set flags, detach interrupt to prevent multiple triggering (reattached after checking flag)

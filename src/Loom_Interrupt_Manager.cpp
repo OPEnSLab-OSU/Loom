@@ -46,7 +46,7 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 	interrupts_enabled = true;
 
 	for (auto i = 0; i < InteruptRange; i++) {
-		int_settings[i] = {nullptr, 0, true, false};
+		int_settings[i] = {nullptr, 0, ISR_Type::IMMEDIATE, true};
 	}
 	for (auto i = 0; i < MaxTimerCount; i++) {
 		timer_settings[i] = {nullptr, 0, false, false};
@@ -86,7 +86,7 @@ void Loom_Interrupt_Manager::print_config()
 	// print out registered interrupts
 	Println2('\t', "Registered ISRs     : " );
 	for (auto i = 0; i < InteruptRange; i++) {
-		Print5("\t\t", "Pin ", i, " | ISR: ", (int_settings[i].is_immediate) ? "Immediate" : "Bottom Half");
+		Print5("\t\t", "Pin ", i, " | ISR: ", (int_settings[i].run_type == ISR_Type::IMMEDIATE) ? "Immediate" : "Check Flag");
 		Println4(" | Type: ", interrupt_type_to_string(int_settings[i].type), " | ", (int_settings[i].enabled) ? "Enabled" : "Disabled" );
 
 	}
@@ -171,17 +171,17 @@ bool Loom_Interrupt_Manager::get_enable_interrupt(byte pin)
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte type, bool immediate)
+void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte signal_type, ISR_Type run_type)
 {
 	if (pin < InteruptRange) {
 
 		print_module_label();
 		Print2("Registering ISR on pin ", pin);
-		Print2(" to be triggered on ", type);
-		Println2(" and is ", (immediate) ? "immediate" : "delay" );
+		Print2(" to be triggered on ", signal_type);
+		Println2(" and is ", (run_type==ISR_Type::IMMEDIATE) ? "immediate" : "delay" );
 
 		// Save interrupt details
-		int_settings[pin] = { ISR, type, immediate, (ISR) ? true : false };
+		int_settings[pin] = { ISR, signal_type, run_type, (ISR) ? true : false };
 
 		// Set pin mode
 		pinMode(pin, INPUT_PULLUP);
@@ -189,9 +189,9 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte type, b
 		// If ISR provided
 		if (ISR != nullptr) {
 
-			ISRFuncPtr tmpISR = (immediate) ? ISR : default_ISRs[pin];
+			ISRFuncPtr tmpISR = (run_type==ISR_Type::IMMEDIATE) ? ISR : default_ISRs[pin];
 
-			attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (type<5) ? type : 0 );
+			attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (signal_type<5) ? signal_type : 0 );
 
 		} 
 		// If no ISR, detach interrupt pin
@@ -205,11 +205,11 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte type, b
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::unregister_ISR(byte pin, byte type)
+void Loom_Interrupt_Manager::unregister_ISR(byte pin, byte signal_type)
 {
 	// Set interrupt to be the default
 	if (pin < InteruptRange) {
-		register_ISR(pin, nullptr, type, true);
+		register_ISR(pin, nullptr, signal_type, ISR_Type::IMMEDIATE);
 	}
 }
 
@@ -242,9 +242,6 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 				// // set triggered flag false 
 				interrupt_triggered[i] = false;
 			}
-							// set triggered flag false 
-				// interrupt_triggered[i] = false;
-
 		}
 	}
 }
@@ -312,7 +309,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 								future_time.hour(), 
 								future_time.minute(), 
 								future_time.second() )
-						+ TimeSpan(1,0,0,0);
+								+ TimeSpan(1,0,0,0);
 
 		print_module_label();
 		Println("Will instead try to set alarm for : ");
