@@ -89,64 +89,39 @@ class Loom_Multiplexer;
 
 
 
-
-
-
+/// Enum to check against to when finding individual component
+/// managed by a LoomManager
 enum class ModuleType {
-
 	Unknown,
 
 	// Actuators
-	Neopixel,
-	Relay,
-	Servo,
-	Stepper,
+	Neopixel, Relay, Servo, Stepper,
 
 	// Sensors
-	Analog,
-	Digital,
+	Analog, Digital,
 
 	// I2C
-	AS7262,
-	AS7263,
-	AS7265X,
-	FXAS21002,
-	FXOS8700,
-	LIS3DH,
-	MB1232,
-	MPU6050,
-	MS5803,
-	SHT31D,
-	TSL2561,
-	TSL2591,
-	ZXGesture,
+	AS7262, AS7263, AS7265X, FXAS21002, FXOS8700, LIS3DH, MB1232, MPU6050, MS5803, SHT31D, TSL2561, TSL2591, ZXGesture,
 
 	// SDI12
-	Decagon5TM,
-	DecagonGS3,
+	Decagon5TM, DecagonGS3,
 
 	// SPI
 	MAX31856,
 
 	// CommPlats
-	LoRa,
-	nRF,
-	SlipSerial,
+	LoRa, nRF, SlipSerial,
 
 	// LogPlats
-	OLED,
-	SDCARD,
+	OLED, SDCARD,
 
 	// InternetPlats
 
 	// RTC
-	DS3231,
-	PCF8523,
+	DS3231, PCF8523,
 
 	// Other
-	Sleep_Manager,
-	Interrupt_Manager,
-	Multiplexer
+	Sleep_Manager, Interrupt_Manager, Multiplexer
 };
 
 
@@ -386,13 +361,6 @@ public:
 
 
 
-
-
-		// Should this return a char* or copy into char array passed by reference?
-		// Could overload to do either like String does with .toCharArray() and .c_str()
-	// char* packet_header() {}
-	// void packet_header(char* buf) {}
-
 	/// Copy device identification message header (to family level) string to buffer.
 	/// \param[out]	buf The bufer to copy family name into
 	void		packet_header_family(char* buf);
@@ -449,10 +417,7 @@ public:
 
 
 
-
-
 	// Module Access methods
-
 
 	// Other
 	Loom_Sleep_Manager&			Sleep_Manager(int idx = 0);
@@ -506,31 +471,15 @@ public:
 	// SPI
 	Loom_MAX31856&		MAX31856(int idx = 0);
 
-	
-
-
 
 private:
-
 
 	void		add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
 	void		list_modules_aux(LoomModule** modules, uint len, char* module_type);
 	void		measure_aux(LoomModule** modules, uint len);
 	void		package_aux(LoomModule** modules, uint len);
 
-
 	LoomModule*	find_module(ModuleType type, int idx, LoomModule** modules, int count);
-
-	// template <class T>
-	// T& find_module(ModuleType type, int idx, LoomModule** modules, int count )
-	// {
-	// 	LoomModule* tmp = module_access_aux(type, idx, modules, count);
-
-	// 	// Found module else stub, cast to module's type 
-	// 	return (*(T*)( (tmp) ? tmp : &global_stub ));	
-	// }
-
-
 
 };
 

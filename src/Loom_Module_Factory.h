@@ -59,6 +59,8 @@
 #include "Loom_Multiplexer.h" // this needs to be include after I2C sensors (due to conflict with enableInterrupt macro/function defined by EnableInterrupt library and AS726X sensors)
 
 
+/// Enum used to determine where to sort module in 
+/// device manager lists 
 enum class ModuleSortType {
 	InterruptManager,
 	SleepManager,
@@ -74,19 +76,23 @@ enum class ModuleSortType {
 
 
 
-// Create with default parameters
+/// Creates a LoomModule with default parameters
+/// \return The created LoomModule
 template<class T> T* ConstructDefault() {
 	return new T();
 }
 
+/// Creates a LoomModule with Json of parameters
+/// \return The created LoomModule
 template<class T> LoomModule* Construct(JsonVariant p) {
 	return new T(p);
 }
 
-// Function pointer to 'template<class T> LoomModule* Construct(JsonVariant p)'
+/// Function pointer to 'template<class T> LoomModule* Construct(JsonVariant p)'
 using FactoryPtr = LoomModule* (*)(JsonVariant p);
 
 
+/// Struct to contain the elements of factory lookup table
 typedef struct {
 	const char*		name;		// Module type to compare against
 	FactoryPtr		Construct;	// Pointer to 'template<class T> LoomModule* Create(JsonVariant p)' with the type T set
@@ -95,12 +101,7 @@ typedef struct {
 
 
 
-
-
-
-
-
-
+/// LoomModule Factory
 class Factory 
 {
 
@@ -109,12 +110,18 @@ public:
 	Factory();
 	~Factory();
 
+	/// Create a LoomModule accoding to Json parameters
+	/// \param[in]	module		Json of the module name and settings
+	/// \return The created LoomModule
 	LoomModule* Create(JsonVariant module);
 
+	/// Creates a LoomModule with its default parameters
+	/// \return The created LoomModule
 	template<class T> T* CreateDefault() {
 		return ConstructDefault<T>();
 	}
 
+	/// Creates a LoomModule according to Json
 	void CreateAndSort(
 		JsonVariant module, 
 		Loom_Interrupt_Manager*& interrupt_manager, 
@@ -130,8 +137,12 @@ public:
 
 private:
 
+	/// Determine which array of manager to sort new module into
+	/// \param[in]	module		Json of the module name and settings
+	/// \return Type indicating manager array to sort into 
 	ModuleSortType get_sort_type(JsonVariant module);
 
+	/// Factory lookup table
 	const static NameModulePair LookupTable[];
 
 };

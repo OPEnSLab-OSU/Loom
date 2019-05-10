@@ -19,27 +19,15 @@ LoomModule*	LoomManager::find_module(ModuleType type, int idx, LoomModule** modu
 
 	for (int i = 0; i < count; i++) {
 		if (type == modules[i]->get_module_type()) {
-			
 			if (current == idx) {
 				return modules[i];
 			} else {
 				current++;
 			}
-
 		}
 	}
-
-	print_device_label();
-	Println("No match found");
 	return nullptr;
 }
-
-
-// if there is an array over the sorted arrays, these can all be templatized
-
-// Function name cant be a template, but could do 'Manager.get<Relay>(1).set_relay();'
-
-// Could probably get it to 'Manager[Relay][1].set_relay();' with operator overloading
 
 // --- General ---
 
