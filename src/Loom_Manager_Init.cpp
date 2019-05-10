@@ -38,12 +38,12 @@ void LoomManager::parse_config(const char* json_config)
 	Serial.println("\n\nConfig Pretty Version:");
 	serializeJsonPretty(doc, Serial);
 
-	Serial.println("\n\nGeneral Settings:");
-	serializeJsonPretty(doc["general"], Serial);
+	// Serial.println("\n\nGeneral Settings:");
+	// serializeJsonPretty(doc["general"], Serial);
 
-	Serial.print("\n\nNum modules: ");
-	Serial.println(doc["components"].size()); 
-	Println();
+	// Serial.print("\n\nNum modules: ");
+	// Serial.println(doc["components"].size()); 
+	// Println();
 
 
 	// Apply LoomManager General Settings
@@ -74,7 +74,7 @@ void LoomManager::parse_config(const char* json_config)
 		this->package_verbosity = (Verbosity)(int)general["package_verbosity"];
 	}
 
-	print_config();
+	// print_config();
 
 
 	// Generate Module Objects

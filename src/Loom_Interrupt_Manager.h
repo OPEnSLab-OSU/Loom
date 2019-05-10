@@ -26,7 +26,8 @@ class LoomRTC;
 // Used to make function signatures easier to read
 // when returning function pointers
 /// Typedef to for ISR function pointer readability
-typedef void (*ISRFuncPtr)();
+using ISRFuncPtr = void (*)();
+
 
 enum class ISR_Type { IMMEDIATE, CHECK_FLAG };
 
