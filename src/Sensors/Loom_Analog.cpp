@@ -53,7 +53,7 @@ Loom_Analog::Loom_Analog(
 {
 	this->module_type = ModuleType::Analog;
 
-	// Println("Loom_Analog Constructor");
+	// LPrintln("Loom_Analog Constructor");
 
 
 	// Set Analog Read Resolution
@@ -114,7 +114,7 @@ Loom_Analog::Loom_Analog(JsonVariant p)
 // --- DESTRUCTOR ---
 Loom_Analog::~Loom_Analog() 
 {
-	Println("DESTRUCTOR");
+	LPrintln("DESTRUCTOR");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -123,14 +123,14 @@ void Loom_Analog::print_config()
 {
 	LoomSensor::print_config();
 
-	Println2("\tAnalog Resolution   : ", read_resolution);
-	Print("\tEnabled Pins        : ");
+	LPrintln("\tAnalog Resolution   : ", read_resolution);
+	LPrint("\tEnabled Pins        : ");
 	for (int i = 0; i < ANALOG_COUNT; i++) { 
 		if (pin_enabled[i]) {
-			Print3("A", i, ", ");
+			LPrint("A", i, ", ");
 		}
 	}
-	Println();
+	LPrintln();
 
 	// print_config_struct();
 }
@@ -139,14 +139,14 @@ void Loom_Analog::print_config()
 void Loom_Analog::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
-	Println2("\tBattery = ", battery);
+	LPrintln("Measurements:");
+	LPrintln("\tBattery = ", battery);
 	for (int i = 0; i < ANALOG_COUNT; i++) {
 		if ( (!enable_conversions) || (conversions[i] == AnalogConversion::NONE) ) {
-			Println4("\tA", i, " = ", analog_vals[i]);
+			LPrintln("\tA", i, " = ", analog_vals[i]);
 		} else {
-			Print4("\tA", i, " = ", analog_vals[i]);
-			Println3( "  [ ", convert(i, analog_vals[i]), " (converted) ]" );
+			LPrint("\tA", i, " = ", analog_vals[i]);
+			LPrintln( "  [ ", convert(i, analog_vals[i]), " (converted) ]" );
 		}
 	}
 }
@@ -368,7 +368,7 @@ float Loom_Analog::convert_TDS(uint16_t analog)
 void Loom_Analog::save_config() 
 {
 	// Probably set valid to true here
-	Println("Save Analog Config");
+	LPrintln("Save Analog Config");
 // analog_flash_config.write(configuration);
 }
 
@@ -376,12 +376,12 @@ void Loom_Analog::save_config()
 // Load a FlashStorage struct, true if valid
 bool Loom_Analog::load_config() 
 {
-	Println("Load Analog Config");
+	LPrintln("Load Analog Config");
 
 // configuration = analog_flash_config.read();
 
 
-// 		Print("B: ");
+// 		LPrint("B: ");
 // 		print_config_struct();
 
 // 		if (configuration.checksum != 42) {
@@ -391,13 +391,13 @@ bool Loom_Analog::load_config()
 // 			configuration.number = 1;	
 // 		}
 
-// 		Print("C: ");
+// 		LPrint("C: ");
 // 		print_config_struct();
 
-// 		Println("Incrementing number");
+// 		LPrintln("Incrementing number");
 // 		configuration.number++;
 
-// 		Print("D: ");
+// 		LPrint("D: ");
 // 		print_config_struct();
 }
 
@@ -405,12 +405,12 @@ bool Loom_Analog::load_config()
 
 void Loom_Analog::print_config_struct() 
 {
-	Println("Analog Flash Struct:");
-	// Println2("\tValid : ", configuration.valid);
-	Println2("\tChecksum : ", configuration.checksum);
+	LPrintln("Analog Flash Struct:");
+	// LPrintln("\tValid : ", configuration.valid);
+	LPrintln("\tChecksum : ", configuration.checksum);
 
-	Println2("\tString   : ", configuration.string);
-	Println2("\tNumber   : ", configuration.number);
+	LPrintln("\tString   : ", configuration.string);
+	LPrintln("\tNumber   : ", configuration.number);
 
 }
 

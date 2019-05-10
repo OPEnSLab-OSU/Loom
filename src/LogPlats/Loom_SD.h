@@ -153,7 +153,7 @@ public:
 
 	// 	// If file successfully opened
 	// 	if (SDFile) {
-	// 		Print3("Saving array to SD file: '", file, "' ...");
+	// 		LPrint("Saving array to SD file: '", file, "' ...");
 
 	// 		char time_key[30], time_val[30];
 
@@ -161,7 +161,7 @@ public:
 	// 			if (device_manager != NULL) {
 	// 				// LoomRTC* rtc = device_manager->get_rtc_module(0);
 	// 				if (RTC_Inst != NULL) {
-	// 					Println2("RTC Object: ", RTC_Inst->get_module_name() );
+	// 					LPrintln("RTC Object: ", RTC_Inst->get_module_name() );
 	// 					RTC_Inst->get_timestamp(time_key, time_val, delimiter, timestamp);
 	// 					got_timestamp = true;
 	// 				}
@@ -184,7 +184,7 @@ public:
 	// 					SD_print_aux(SDFile, "Device", delimiter);
 	// 				}
 
-	// 				// Print keys
+	// 				// LPrint keys
 	// 				for (int i = 0; i < len-2; i+=2) {
 	// 					SD_print_aux(SDFile, data[i], delimiter);
 	// 				}
@@ -201,7 +201,7 @@ public:
 	// 				SD_print_aux(SDFile, device_id, delimiter);
 	// 			}
 
-	// 			// Print values
+	// 			// LPrint values
 	// 			for (int i = 1; i < len-2; i+=2) {
 	// 				SD_print_aux(SDFile, data[i], delimiter);
 	// 			}
@@ -227,20 +227,20 @@ public:
 	// 		}
 
 	// 		SDFile.close();
-	// 		Println("Done");
+	// 		LPrintln("Done");
 	// 		return true;
 	// 	}
 
 	// 	// If file could not be opened
 	// 	else {
-	// 		Println2("Error opening: ", file);
+	// 		LPrintln("Error opening: ", file);
 	// 		return false;
 	// 	}
 	// }
 
 private:
 
-	/// Print the files on the SD card.
+	/// LPrint the files on the SD card.
 	/// Recursive for nested folders
 	/// \param[in]	dir			File to treat at root
 	/// \param[in]	numTabs		Number of tabs to prepend to properly show nesting

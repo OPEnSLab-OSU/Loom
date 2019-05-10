@@ -25,8 +25,8 @@ Loom_AS7263::Loom_AS7263(
 	inst_AS7263.setIntegrationTime(integration_time);
 
 	print_module_label();
-	Println2("\t", "Initialized");
-	// Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\t", "Initialized");
+	// LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -46,22 +46,22 @@ Loom_AS7263::~Loom_AS7263()
 void Loom_AS7263::print_config()
 {
 	LoomI2CSensor::print_config();	
-	Println3("\t", "Gain                : ", gain);
-	Println3("\t", "Mode                : ", mode);
-	Println3("\t", "Use Bulb            : ", (use_bulb) ? "True" : "False");
+	LPrintln("\t", "Gain                : ", gain);
+	LPrintln("\t", "Mode                : ", mode);
+	LPrintln("\t", "Use Bulb            : ", (use_bulb) ? "True" : "False");
 }
 
 /////////////////////////////////////////////////////////////////////
 void Loom_AS7263::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
-	Println3("\t", "NIR R: ", nir_vals[0]);
-	Println3("\t", "NIR S: ", nir_vals[1]);
-	Println3("\t", "NIR T: ", nir_vals[2]);
-	Println3("\t", "NIR U: ", nir_vals[3]);
-	Println3("\t", "NIR V: ", nir_vals[4]);
-	Println3("\t", "NIR W: ", nir_vals[5]);
+	LPrintln("Measurements:");
+	LPrintln("\t", "NIR R: ", nir_vals[0]);
+	LPrintln("\t", "NIR S: ", nir_vals[1]);
+	LPrintln("\t", "NIR T: ", nir_vals[2]);
+	LPrintln("\t", "NIR U: ", nir_vals[3]);
+	LPrintln("\t", "NIR V: ", nir_vals[4]);
+	LPrintln("\t", "NIR W: ", nir_vals[5]);
 }
 
 /////////////////////////////////////////////////////////////////////

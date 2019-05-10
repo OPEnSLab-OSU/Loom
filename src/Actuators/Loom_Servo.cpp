@@ -54,9 +54,9 @@ void Loom_Servo::print_config()
 void Loom_Servo::print_state()
 {
 	print_module_label();
-	Println2('\t', "Servo Positions:" );
+	LPrintln('\t', "Servo Positions:" );
 	for (int i = 1; i < servo_count; i++) {
-		Println5('\t\t', "Degree ", i, ": ", positions[i] );
+		LPrintln('\t\t', "Degree ", i, ": ", positions[i] );
 	}
 }
 
@@ -97,7 +97,7 @@ void Loom_Servo::set_degree(int servo, int degree)
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
-		Println4("Set servo ", servo, "to degree ", degree);
+		LPrintln("Set servo ", servo, "to degree ", degree);
 	}
 
 }

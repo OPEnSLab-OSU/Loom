@@ -28,7 +28,7 @@ Loom_MB1232::Loom_MB1232(
 	bool setup = (Wire.available() >= 2);
 
 	print_module_label();
-	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -48,8 +48,8 @@ Loom_MB1232::~Loom_MB1232()
 void Loom_MB1232::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
-	Println4("\t", "Range: ", range, " cm");
+	LPrintln("Measurements:");
+	LPrintln("\t", "Range: ", range, " cm");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@ void Loom_MB1232::measure()
 		range = (high * 256) + low;
 	} else {
 		print_module_label();
-		Println("Error reading from mb1232 (range)");
+		LPrintln("Error reading from mb1232 (range)");
 	}  
 }
 

@@ -96,7 +96,7 @@ Loom_Multiplexer::Loom_Multiplexer(
 		uint 			update_period
 	) : LoomModule( module_name ) 
 {
-	// Println("Loom_Multiplexer Constructor 1");
+	// LPrintln("Loom_Multiplexer Constructor 1");
 	this->i2c_address 	= i2c_address; 
 	this->num_ports 	= num_ports;
 	this->update_period	= update_period;
@@ -117,7 +117,7 @@ Loom_Multiplexer::Loom_Multiplexer(
 	// print_state();
 
 	print_module_label(); 
-	Println("Setup Complete");
+	LPrintln("Setup Complete");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -144,28 +144,28 @@ void Loom_Multiplexer::print_config()
 {
 	LoomModule::print_config();
 
-	Print2('\t', "I2C Address         : ");
-	Println_Hex(i2c_address);
-	Println3('\t', "Num Ports           : ", num_ports);
-	Println3('\t', "Update Period (ms)  : ", update_period);
+	LPrint('\t', "I2C Address         : ");
+	LPrintln_Hex(i2c_address);
+	LPrintln('\t', "Num Ports           : ", num_ports);
+	LPrintln('\t', "Update Period (ms)  : ", update_period);
 }
 
 /////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::print_state()
 {
 	print_module_label();
-	Println("Attached Sensors:");
+	LPrintln("Attached Sensors:");
 
 	for (uint8_t i = 0; i < num_ports; i++) {
-		Print3("\tPort ", i, ": ");
+		LPrint("\tPort ", i, ": ");
 		if (sensors[i] != NULL) {
-			Print_Dec_Hex(sensors[i]->get_i2c_address());
-			Println2(" - ", sensors[i]->get_module_name() );
+			LPrint_Dec_Hex(sensors[i]->get_i2c_address());
+			LPrintln(" - ", sensors[i]->get_module_name() );
 		} else {
-			Println(" -");
+			LPrintln(" -");
 		}
 	}
-	Println();
+	LPrintln();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -267,18 +267,18 @@ void Loom_Multiplexer::refresh_sensors()
 
 	for (uint8_t i = 0; i < num_ports; i++) {
 
-		// Println2("TCA Port: ", i);
+		// LPrintln("TCA Port: ", i);
 		// tca_select(i);
 
 		previous = (sensors[i] != NULL) ? sensors[i]->get_i2c_address() : 0x00;
-		// Print("\tPrevious: 0x");
-		// Println_Hex(previous);
+		// LPrint("\tPrevious: 0x");
+		// LPrintln_Hex(previous);
 
 		current = get_i2c_on_port(i);
 
 
-		// Print("\tNew     : 0x");
-		// Println_Hex(current);
+		// LPrint("\tNew     : 0x");
+		// LPrintln_Hex(current);
 
 
 		// Cases:
@@ -298,7 +298,7 @@ void Loom_Multiplexer::refresh_sensors()
 			if ( (previous != 0) || (current == 0) ) {
 				// Free object
 				print_module_label();
-				Println2("Free Memory of ", sensors[i]->get_module_name() );
+				LPrintln("Free Memory of ", sensors[i]->get_module_name() );
 				delete sensors[i];
 			}
 
@@ -312,7 +312,7 @@ void Loom_Multiplexer::refresh_sensors()
 
 
 				print_module_label();
-				Println2("Added ", sensors[i]->get_module_name() );
+				LPrintln("Added ", sensors[i]->get_module_name() );
 			}
 		} 
 

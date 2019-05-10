@@ -37,7 +37,7 @@ protected:
 	/// Individually togglable debug statements
 	bool			print_debug;				
 
-	/// Print verbosity
+	/// LPrint verbosity
 	Verbosity		print_verbosity;		
 	/// Package verbosity 
 	Verbosity		package_verbosity;		
@@ -71,7 +71,7 @@ public:
 
 	// 		  ) : LoomModule()
 	// {
-	// 	// Println("LoomModule Constructor 1");
+	// 	// LPrintln("LoomModule Constructor 1");
 	// 	this->module_name 		= module_name;
 	// 	this->active 			= active;
 	// 	this->print_debug 		= print_debug;
@@ -101,7 +101,7 @@ public:
 	/// \param[in]	LM	LoomManager to point to
 	void	link_device_manager(LoomManager* LM);
 
-	/// Print the module name as a label.
+	/// LPrint the module name as a label.
 	/// Used for matching debug prints to corresponding module
 	void			print_module_label();
 

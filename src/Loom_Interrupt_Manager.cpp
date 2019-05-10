@@ -81,38 +81,38 @@ void Loom_Interrupt_Manager::print_config()
 {
 	LoomModule::print_config();
 
-	Println3('\t', "Interrupts Enabled  : ", (interrupts_enabled) ? "True" : "False" );
+	LPrintln('\t', "Interrupts Enabled  : ", (interrupts_enabled) ? "True" : "False" );
 
 	// print out registered interrupts
-	Println2('\t', "Registered ISRs     : " );
+	LPrintln('\t', "Registered ISRs     : " );
 	for (auto i = 0; i < InteruptRange; i++) {
-		Print5("\t\t", "Pin ", i, " | ISR: ", (int_settings[i].run_type == ISR_Type::IMMEDIATE) ? "Immediate" : "Check Flag");
-		Println4(" | Type: ", interrupt_type_to_string(int_settings[i].type), " | ", (int_settings[i].enabled) ? "Enabled" : "Disabled" );
+		LPrint("\t\t", "Pin ", i, " | ISR: ", (int_settings[i].run_type == ISR_Type::IMMEDIATE) ? "Immediate" : "Check Flag");
+		LPrintln(" | Type: ", interrupt_type_to_string(int_settings[i].type), " | ", (int_settings[i].enabled) ? "Enabled" : "Disabled" );
 
 	}
 
-	// Print out registered timers
-	Println2('\t', "Registered Timers     : " );
+	// LPrint out registered timers
+	LPrintln('\t', "Registered Timers     : " );
 	for (auto i = 0; i < MaxTimerCount; i++) {
-		Print4("\t\t", "Timer ", i, " : ");
+		LPrint("\t\t", "Timer ", i, " : ");
 		if (timer_settings[i].enabled) {
 			unsigned long delay;
 			AsyncDelay::units_t u;
 			timers[i].getDelay(delay, u);
-			Println2("[Enabled] Delay: ", delay);
+			LPrintln("[Enabled] Delay: ", delay);
 		} else {
-			Println("[Disabled]");
+			LPrintln("[Disabled]");
 		}
 	}
 
-	// Print out registered stopwatches
-	Println2('\t', "Registered StopWatches     : " );
+	// LPrint out registered stopwatches
+	LPrintln('\t', "Registered StopWatches     : " );
 	for (auto i = 0; i < MaxStopWatchCount; i++) {
-		Print4("\t\t", "Stopwatch ", i, " : ");
+		LPrint("\t\t", "Stopwatch ", i, " : ");
 		if (stopwatch_settings[i].enabled) {
-			Println2("[Enabled] Elapsed: ",  millis()-stopwatch_settings[i].start_time);
+			LPrintln("[Enabled] Elapsed: ",  millis()-stopwatch_settings[i].start_time);
 		} else {
-			Println("[Disabled]");
+			LPrintln("[Disabled]");
 		}
 	}
 }
@@ -176,9 +176,9 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte signal_
 	if (pin < InteruptRange) {
 
 		print_module_label();
-		Print2("Registering ISR on pin ", pin);
-		Print2(" to be triggered on ", signal_type);
-		Println2(" and is ", (run_type==ISR_Type::IMMEDIATE) ? "immediate" : "delay" );
+		LPrint("Registering ISR on pin ", pin);
+		LPrint(" to be triggered on ", signal_type);
+		LPrintln(" and is ", (run_type==ISR_Type::IMMEDIATE) ? "immediate" : "delay" );
 
 		// Save interrupt details
 		int_settings[pin] = { ISR, signal_type, run_type, (ISR) ? true : false };
@@ -226,7 +226,7 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 			// or if ISR on pin is set to immediate (dont want to rerun the ISR here)
 			if ( (interrupt_triggered[i]) && (int_settings[i].ISR != nullptr) ) {
 
-				Println2("I: ", i);
+				LPrintln("I: ", i);
 
 				// Run bottom half ISR
 				int_settings[i].ISR();
@@ -291,7 +291,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 	}
 
 	print_module_label();
-	Println("Will set alarm for : ");
+	LPrintln("Will set alarm for : ");
 	RTC_Inst->print_DateTime(future_time);
 
 
@@ -299,7 +299,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 	DateTime now = RTC_Inst->now();
 	if ( (future_time - now).totalseconds() < 0 ) {
 		print_module_label();
-		Println("Wont wake from alarm in the past, increasing time to following day");
+		LPrintln("Wont wake from alarm in the past, increasing time to following day");
 		// future_time = future + TimeSpan(1,0,0,0);    // might not work if DateTime is several days in past
 		
 		// Adjust future_time to be following day at same time intended
@@ -312,7 +312,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 								+ TimeSpan(1,0,0,0);
 
 		print_module_label();
-		Println("Will instead try to set alarm for : ");
+		LPrintln("Will instead try to set alarm for : ");
 		RTC_Inst->print_DateTime(future_time);
 
 	}
@@ -383,7 +383,7 @@ void Loom_Interrupt_Manager::register_timer(uint timer_num, unsigned long durati
 		timers[timer_num].start(duration, AsyncDelay::MILLIS);
 	} else {
 		print_module_label();
-		Println("Timer number out of range");
+		LPrintln("Timer number out of range");
 	}
 }
 
@@ -393,13 +393,13 @@ void Loom_Interrupt_Manager::clear_timer(uint timer_num)
 	if (timer_num < MaxTimerCount) {
 		if (print_verbosity == Verbosity::V_HIGH) {
 			print_module_label();
-			Println2("Clear timer ", timer_num);
+			LPrintln("Clear timer ", timer_num);
 		}
 		timers[timer_num].expire();
 		timer_settings[timer_num].enabled = false;
 	} else {
 		print_module_label();
-		Println("Timer number out of range");
+		LPrintln("Timer number out of range");
 	}
 }
 

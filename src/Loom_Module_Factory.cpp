@@ -78,8 +78,8 @@ LoomModule* Factory::Create(JsonVariant module)
 	const char* name = module["name"];
 	JsonVariant p = module["parameters"];
 
-	// Println2("Module Name:: ", name);
-	// Println2("Parameter count:: ", p.size());
+	// LPrintln("Module Name:: ", name);
+	// LPrintln("Parameter count:: ", p.size());
 
 	LoomModule* newObject;
 
@@ -91,7 +91,7 @@ LoomModule* Factory::Create(JsonVariant module)
 		}
 	}
 
-	// Println3("'", name, "' could not be created");
+	// LPrintln("'", name, "' could not be created");
 	return nullptr;
 }
 
@@ -112,7 +112,7 @@ void Factory::CreateAndSort(
 	ModuleSortType sort_to = get_sort_type(module);
 
 	if (tmp == nullptr) {
-		Println("Module could not be created"); 
+		LPrintln("Module could not be created"); 
 	} 
 	// else {
 		// tmp->print_config();

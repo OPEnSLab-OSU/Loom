@@ -18,7 +18,7 @@ Loom_FXAS21002::Loom_FXAS21002(
 	bool setup = inst_FXAS21002->begin();
 
 	print_module_label();
-	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -38,10 +38,10 @@ Loom_FXAS21002::~Loom_FXAS21002()
 void Loom_FXAS21002::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
-	Println3("\t", "gx: ", gyro[0]);
-	Println3("\t", "gy: ", gyro[1]);
-	Println3("\t", "gz: ", gyro[2]);
+	LPrintln("Measurements:");
+	LPrintln("\t", "gx: ", gyro[0]);
+	LPrintln("\t", "gy: ", gyro[1]);
+	LPrintln("\t", "gz: ", gyro[2]);
 }
 
 /////////////////////////////////////////////////////////////////////

@@ -48,19 +48,19 @@ void Loom_MAX31856::print_config()
 {
 	LoomSPISensor::print_config();
 	
-	Print("Thermocouple type: ");
+	LPrint("Thermocouple type: ");
 	switch ( inst_max->getThermocoupleType() ) {
-		case MAX31856_TCTYPE_B  : Println("B Type"); break;
-		case MAX31856_TCTYPE_E  : Println("E Type"); break;
-		case MAX31856_TCTYPE_J  : Println("J Type"); break;
-		case MAX31856_TCTYPE_K  : Println("K Type"); break;
-		case MAX31856_TCTYPE_N  : Println("N Type"); break;
-		case MAX31856_TCTYPE_R  : Println("R Type"); break;
-		case MAX31856_TCTYPE_S  : Println("S Type"); break;
-		case MAX31856_TCTYPE_T  : Println("T Type"); break;
-		case MAX31856_VMODE_G8  : Println("Voltage x8 Gain mode"); break;
-		case MAX31856_VMODE_G32 : Println("Voltage x8 Gain mode"); break;
-		default: Println("Unknown"); break;
+		case MAX31856_TCTYPE_B  : LPrintln("B Type"); break;
+		case MAX31856_TCTYPE_E  : LPrintln("E Type"); break;
+		case MAX31856_TCTYPE_J  : LPrintln("J Type"); break;
+		case MAX31856_TCTYPE_K  : LPrintln("K Type"); break;
+		case MAX31856_TCTYPE_N  : LPrintln("N Type"); break;
+		case MAX31856_TCTYPE_R  : LPrintln("R Type"); break;
+		case MAX31856_TCTYPE_S  : LPrintln("S Type"); break;
+		case MAX31856_TCTYPE_T  : LPrintln("T Type"); break;
+		case MAX31856_VMODE_G8  : LPrintln("Voltage x8 Gain mode"); break;
+		case MAX31856_VMODE_G32 : LPrintln("Voltage x8 Gain mode"); break;
+		default: LPrintln("Unknown"); break;
 	}
 }
 
@@ -68,7 +68,7 @@ void Loom_MAX31856::print_config()
 void Loom_MAX31856::print_measurements() 
 {
 	print_module_label();
-	Println4("\t", "Temperature: ", temperature, " C");
+	LPrintln("\t", "Temperature: ", temperature, " C");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -81,14 +81,14 @@ void Loom_MAX31856::measure()
 		// Check and print any faults
 		uint8_t fault = inst_max->readFault();
 		if (fault) {
-			if (fault & MAX31856_FAULT_CJRANGE) Println("Cold Junction Range Fault");
-			if (fault & MAX31856_FAULT_TCRANGE) Println("Thermocouple Range Fault");
-			if (fault & MAX31856_FAULT_CJHIGH)  Println("Cold Junction High Fault");
-			if (fault & MAX31856_FAULT_CJLOW)   Println("Cold Junction Low Fault");
-			if (fault & MAX31856_FAULT_TCHIGH)  Println("Thermocouple High Fault");
-			if (fault & MAX31856_FAULT_TCLOW)   Println("Thermocouple Low Fault");
-			if (fault & MAX31856_FAULT_OVUV)    Println("Over/Under Voltage Fault");
-			if (fault & MAX31856_FAULT_OPEN)    Println("Thermocouple Open Fault");
+			if (fault & MAX31856_FAULT_CJRANGE) LPrintln("Cold Junction Range Fault");
+			if (fault & MAX31856_FAULT_TCRANGE) LPrintln("Thermocouple Range Fault");
+			if (fault & MAX31856_FAULT_CJHIGH)  LPrintln("Cold Junction High Fault");
+			if (fault & MAX31856_FAULT_CJLOW)   LPrintln("Cold Junction Low Fault");
+			if (fault & MAX31856_FAULT_TCHIGH)  LPrintln("Thermocouple High Fault");
+			if (fault & MAX31856_FAULT_TCLOW)   LPrintln("Thermocouple Low Fault");
+			if (fault & MAX31856_FAULT_OVUV)    LPrintln("Over/Under Voltage Fault");
+			if (fault & MAX31856_FAULT_OPEN)    LPrintln("Thermocouple Open Fault");
 		}
 	}
 }

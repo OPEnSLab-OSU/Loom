@@ -39,7 +39,7 @@ Loom_Neopixel::Loom_Neopixel(
 	}		
 
 	print_module_label();
-	Println("Setup");
+	LPrintln("Setup");
 } 
 
 /////////////////////////////////////////////////////////////////////
@@ -67,20 +67,20 @@ void Loom_Neopixel::print_config()
 	LoomActuator::print_config();
 
 	for (int i = 0; i < 3; i++) {
-		Println4("\tNeopixel ", i, "          : ", (pin_enabled[i]) ? "Enabled" : "Disabled" );
+		LPrintln("\tNeopixel ", i, "          : ", (pin_enabled[i]) ? "Enabled" : "Disabled" );
 	}
 }
 
 /////////////////////////////////////////////////////////////////////
 void Loom_Neopixel::print_state()
 {
-	Println2(module_name, " State:");
+	LPrintln(module_name, " State:");
 	for (int i = 0; i < 3; i++) {
 		if (pin_enabled[i]) {
-			Print3("\tNeo", i, ": ");
-			Print2( color_vals[i][0], ", ");
-			Print2( color_vals[i][1], ", ");
-			Println(color_vals[i][2]);
+			LPrint("\tNeo", i, ": ");
+			LPrint( color_vals[i][0], ", ");
+			LPrint( color_vals[i][1], ", ");
+			LPrintln(color_vals[i][2]);
 		}
 	}
 }
@@ -115,7 +115,7 @@ void Loom_Neopixel::enable_pin(uint8_t port, bool state)
 	}
 
 	if (print_verbosity == Verbosity::V_HIGH) {
-		Println4("Neopixel ", (state) ? "enabled" : "disabled", " on port ", port);
+		LPrintln("Neopixel ", (state) ? "enabled" : "disabled", " on port ", port);
 	}
 }
 
@@ -136,14 +136,14 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 		pixels[port]->show();
 
 		if (print_verbosity == Verbosity::V_HIGH) {
-			Print4("Set Neopixel on Port: ", port, ", Chain #: ", chain_num);
-			Print2(" to R: ", color_vals[port][0]);
-			Print2(  ", G: ", color_vals[port][1]);
-			Println2(", B: ", color_vals[port][2]);			
+			LPrint("Set Neopixel on Port: ", port, ", Chain #: ", chain_num);
+			LPrint(" to R: ", color_vals[port][0]);
+			LPrint(  ", G: ", color_vals[port][1]);
+			LPrintln(", B: ", color_vals[port][2]);			
 		}
 	} else {
 		if (print_verbosity == Verbosity::V_HIGH) {
-			Println2("Neopixel not enabled on port ", port);
+			LPrintln("Neopixel not enabled on port ", port);
 		}
 	}
 

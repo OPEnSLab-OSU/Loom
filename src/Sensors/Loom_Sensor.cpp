@@ -20,7 +20,7 @@ void LoomSensor::print_config()
 {
 	LoomModule::print_config();
 
-	Println3('\t', "Num Samples         : ", num_samples);
+	LPrintln('\t', "Num Samples         : ", num_samples);
 }
 
 

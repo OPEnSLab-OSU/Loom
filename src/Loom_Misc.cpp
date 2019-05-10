@@ -30,11 +30,11 @@ String get_data_value(OSCMessage* msg, int pos)
 				msg->getString(pos, buf, 256);
 				return String(buf);
 			default:
-				Println("Unsupported data data_type.");
+				LPrintln("Unsupported data data_type.");
 				return String("");
 		}
 	}
-	Println2("Message does not have an argument at position: ", pos);
+	LPrintln("Message does not have an argument at position: ", pos);
 
 	return String("");
 }
@@ -54,25 +54,25 @@ void print_message(OSCMessage* msg, bool detail)
 		char buf[50];
 
 		if (!detail) {
-			Print(get_address_string(msg).c_str());
+			LPrint(get_address_string(msg).c_str());
 			for (int i = 0; i < msg->size(); i++) {
-				Print("  ");
+				LPrint("  ");
 				switch(msg->getType(i)) {
-					case 'f': Print(msg->getFloat(i) ); break;
-					case 'i': Print(msg->getInt(i)   ); break;
-					case 's': msg->getString(i, buf, 50); Print(buf); break;
+					case 'f': LPrint(msg->getFloat(i) ); break;
+					case 'i': LPrint(msg->getInt(i)   ); break;
+					case 's': msg->getString(i, buf, 50); LPrint(buf); break;
 					default: break;
 				}
 			}
-			Println();
+			LPrintln();
 		} else {
-			Println2("\tAddress: ", get_address_string(msg).c_str());
+			LPrintln("\tAddress: ", get_address_string(msg).c_str());
 			for (int i = 0; i < msg->size(); i++) {
-				Print3("\tValue (", i, ") ");
+				LPrint("\tValue (", i, ") ");
 				switch(msg->getType(i)) {
-					case 'f': Println2("(f) ", msg->getFloat(i) ); break;
-					case 'i': Println2("(i) ", msg->getInt(i) );   break;
-					case 's': msg->getString(i, buf, 50); Println2("(s) ", buf ); break;
+					case 'f': LPrintln("(f) ", msg->getFloat(i) ); break;
+					case 'i': LPrintln("(i) ", msg->getInt(i) );   break;
+					case 's': msg->getString(i, buf, 50); LPrintln("(s) ", buf ); break;
 					default: break;
 				}
 			}
@@ -87,14 +87,14 @@ void print_bundle(OSCBundle& bndl)
 
 	char buf[50];
 	char data_type;
-	Println2("\nBundle Size: ", bndl.size());
+	LPrintln("\nBundle Size: ", bndl.size());
 	OSCMessage *msg;
 
 	for (int i = 0; i < bndl.size(); i++) {
-		Println2("Message: ", i);
+		LPrintln("Message: ", i);
 		print_message(bndl.getOSCMessage(i));
 	}
-	Println();
+	LPrintln();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -439,7 +439,7 @@ void deep_copy_message(OSCMessage* src_msg, OSCMessage* dest_msg)
  			case 'i': dest_msg->add(src_msg->getInt(i));	    break;
  			case 'f': dest_msg->add(src_msg->getFloat(i));	break;
  			case 's': char buf[256];  src_msg->getString(i, buf, 256);  dest_msg->add(buf);  break;
- 			default: Println("Unsupported data data_type.");
+ 			default: LPrintln("Unsupported data data_type.");
  		}
 	}
 

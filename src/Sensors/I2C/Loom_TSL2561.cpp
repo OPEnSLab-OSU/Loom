@@ -44,7 +44,7 @@ Loom_TSL2561::Loom_TSL2561(
 	}
 
 	print_module_label();
-	Println2("Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -64,9 +64,9 @@ Loom_TSL2561::~Loom_TSL2561()
 void Loom_TSL2561::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
-	Println4("\t", "LightIR   : ", lightIR,   " lux");
-	Println4("\t", "LightFull : ", lightFull, " lux");
+	LPrintln("Measurements:");
+	LPrintln("\t", "LightIR   : ", lightIR,   " lux");
+	LPrintln("\t", "LightFull : ", lightFull, " lux");
 }
 
 /////////////////////////////////////////////////////////////////////

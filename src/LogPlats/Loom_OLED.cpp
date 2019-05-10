@@ -92,18 +92,18 @@ void Loom_OLED::print_config()
 {
 	LoomLogPlat::print_config();
 
-	Println3('\t', "OLED Version        : ", enum_oled_version_string(this->version) );
+	LPrintln('\t', "OLED Version        : ", enum_oled_version_string(this->version) );
 	if (this->version == OLED_Version::BREAKOUT) {
-		Println3('\t', "Reset Pin           : ", this->reset_pin );		
+		LPrintln('\t', "Reset Pin           : ", this->reset_pin );		
 	}
 
-	Println3('\t', "Display Format      : ", enum_oled_format_string(this->display_format) );
+	LPrintln('\t', "Display Format      : ", enum_oled_format_string(this->display_format) );
 	if (this->display_format == OLED_Format::SCROLL) {
-		Println3('\t', "Scroll Duration     : ", this->scroll_duration );
+		LPrintln('\t', "Scroll Duration     : ", this->scroll_duration );
 	}
-	Println3('\t', "Freeze Behavior     : ", enum_oled_freeze_string(this->freeze_behavior) );
+	LPrintln('\t', "Freeze Behavior     : ", enum_oled_freeze_string(this->freeze_behavior) );
 	if (this->freeze_behavior != OLED_Freeze::DISABLE) {
-		Println3('\t', "Freeze Pin          : ", this->freeze_pin );
+		LPrintln('\t', "Freeze Pin          : ", this->freeze_pin );
 	}
 }
 

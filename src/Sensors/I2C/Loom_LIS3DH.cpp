@@ -25,7 +25,7 @@ Loom_LIS3DH::Loom_LIS3DH(
 	bool setup = inst_LIS3DH->begin();
 
 	print_module_label();
-	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -45,10 +45,10 @@ Loom_LIS3DH::~Loom_LIS3DH()
 void Loom_LIS3DH::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
-	Println3("\t", "Accel X: ", accel[0]);
-	Println3("\t", "Accel Y: ", accel[1]);
-	Println3("\t", "Accel Z: ", accel[2]);
+	LPrintln("Measurements:");
+	LPrintln("\t", "Accel X: ", accel[0]);
+	LPrintln("\t", "Accel Y: ", accel[1]);
+	LPrintln("\t", "Accel Z: ", accel[2]);
 }
 
 /////////////////////////////////////////////////////////////////////

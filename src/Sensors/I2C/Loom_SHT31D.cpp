@@ -15,7 +15,7 @@ Loom_SHT31D::Loom_SHT31D(
 	bool setup = inst_sht31d.begin(i2c_address);
 
 	print_module_label();
-	Println2("Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -35,9 +35,9 @@ Loom_SHT31D::~Loom_SHT31D()
 void Loom_SHT31D::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
-	Println4("\t", "Temperature: ", temp, " C");
-	Println3("\t", "Humidity   : ", humid);
+	LPrintln("Measurements:");
+	LPrintln("\t", "Temperature: ", temp, " C");
+	LPrintln("\t", "Humidity   : ", humid);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ void Loom_SHT31D::measure()
 		humid = h;
 	} else {
 		print_module_label();
-		Println("Failed to read temperature or humidity");
+		LPrintln("Failed to read temperature or humidity");
 	}
 }
 

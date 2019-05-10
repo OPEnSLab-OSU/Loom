@@ -36,48 +36,48 @@ Loom_nRF::Loom_nRF(
 	// Set data rate
 	this->data_rate = data_rate;
 	print_module_label();
-	Print("Setting nRF data rate to: ");
+	LPrint("Setting nRF data rate to: ");
 	switch (this->data_rate) {
 		case 0: 
-			Println("Default (1Mbps)");
+			LPrintln("Default (1Mbps)");
 			break; 
 		case 1: 
 			radio->setDataRate(RF24_250KBPS);
-			Println("250 kbps");
+			LPrintln("250 kbps");
 			break;
 		case 2: 
 			radio->setDataRate(RF24_1MBPS);
-			Println("1 Mbps");
+			LPrintln("1 Mbps");
 			break;
 		case 3: 
 			radio->setDataRate(RF24_2MBPS);
-			Println("2 Mbps");
+			LPrintln("2 Mbps");
 			break;
 	}
 
 	// Set power level
 	this->power_level = power_level;
 	print_module_label();
-	Print("Setting nRF power level to: ");
+	LPrint("Setting nRF power level to: ");
 	switch (this->power_level) {
 		case 0: 
-			Println("Default");
+			LPrintln("Default");
 			break; 
 		case 1: 
 			radio->setPALevel(RF24_PA_MIN);
-			Println("RF24_PA_MIN (-18dBm)");
+			LPrintln("RF24_PA_MIN (-18dBm)");
 			break;
 		case 2: 
 			radio->setPALevel(RF24_PA_LOW);
-			Println("RF24_PA_LOW (-12dBm)");
+			LPrintln("RF24_PA_LOW (-12dBm)");
 			break;
 		case 3: 
 			radio->setPALevel(RF24_PA_HIGH);
-			Println("RF24_PA_HIGH (-6dBM)");
+			LPrintln("RF24_PA_HIGH (-6dBM)");
 			break;
 		case 4: 
 			radio->setPALevel(RF24_PA_MAX);
-			Println("RF24_PA_MAX (0dBm)");
+			LPrintln("RF24_PA_MAX (0dBm)");
 			break;
 	}
 
@@ -91,8 +91,8 @@ Loom_nRF::Loom_nRF(
 		radio->setRetries(retry_timeout, retry_count);
 
 		print_module_label();
-		Println4("\t", "Retry delay: ", 250*retry_timeout, " microseconds");
-		Println3("\t", "Retry count: ", retry_count);
+		LPrintln("\t", "Retry delay: ", 250*retry_timeout, " microseconds");
+		LPrintln("\t", "Retry count: ", retry_count);
 	} 
 
 	this->multicast_level = multicast_level;
@@ -121,11 +121,11 @@ void Loom_nRF::print_config()
 {
 	LoomCommPlat::print_config();
 
-	Println3('\t', "Address             : ", address );
-	Println3('\t', "Data Rate           : ", data_rate );
-	Println3('\t', "Power Level         : ", power_level );
-	Println3('\t', "Retry Count         : ", retry_count );
-	Println3('\t', "Retry Timeout       : ", retry_timeout );
+	LPrintln('\t', "Address             : ", address );
+	LPrintln('\t', "Data Rate           : ", data_rate );
+	LPrintln('\t', "Power Level         : ", power_level );
+	LPrintln('\t', "Retry Count         : ", retry_count );
+	LPrintln('\t', "Retry Timeout       : ", retry_timeout );
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -141,7 +141,7 @@ bool Loom_nRF::receive_bundle(OSCBundle& bndl)
 		memset(buf, '\0', NRF_MESSAGE_SIZE);
 		network->read(header, &buf, NRF_MESSAGE_SIZE-1);
 
-		// Println2("Compressed buf :", buf);
+		// LPrintln("Compressed buf :", buf);
 
 		// This is done just in case the compressed string
 		// uncompresses to more than 251 characters
@@ -155,7 +155,7 @@ bool Loom_nRF::receive_bundle(OSCBundle& bndl)
 		bool in_scope = LoomCommPlat::scope_filter(bndl);
 		if (print_verbosity == Verbosity::V_HIGH) {
 			if (!in_scope) {
-				Println("Received nRF bundle out of scope");
+				LPrintln("Received nRF bundle out of scope");
 			}
 		}
 	} // of while ( network->available() )
@@ -173,7 +173,7 @@ bool Loom_nRF::send_bundle(OSCBundle& bndl, uint16_t destination)
 
 	bool is_sent = network->write( header, message, strlen(message) );
 
-	Println2( "Send nRF bundle " , (is_sent) ? "successful" : "failed" );
+	LPrintln( "Send nRF bundle " , (is_sent) ? "successful" : "failed" );
 
 	return is_sent;
 }
@@ -196,7 +196,7 @@ void Loom_nRF::broadcast_bundle(OSCBundle& bndl)
 
 	bool is_sent = network->multicast( header, message, strlen(message), multicast_level );
 
-	Println2("Multicast nRF bundle " , (is_sent) ? "successful" : "failed" );
+	LPrintln("Multicast nRF bundle " , (is_sent) ? "successful" : "failed" );
 
 }
 

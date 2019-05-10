@@ -29,7 +29,7 @@ Loom_WiFi_I::Loom_WiFi_I(
 		
 	// Check for the presence of the shield, else disable WiFi module
 	if (WiFi.status() == WL_NO_SHIELD) {
-		Println("WiFi shield not present, entering infinite loop");
+		LPrintln("WiFi shield not present, entering infinite loop");
 		active = false; 
 		return;
 	}
@@ -51,7 +51,7 @@ Loom_WiFi_I::~Loom_WiFi_I()
 	delete server;
 	// Check for the presence of the shield, else don't continue:
 	if (WiFi.status() == WL_NO_SHIELD) {
-		Println("WiFi shield not present, entering infinite loop");
+		LPrintln("WiFi shield not present, entering infinite loop");
 		while (true); 
 	}
 }
@@ -62,7 +62,7 @@ void Loom_WiFi_I::print_config()
 	if (!active) return;
 
 	LoomInternetPlat::print_config();
-	Println3('\t', "Mode:               : ", enum_wifi_mode_string(mode) );
+	LPrintln('\t', "Mode:               : ", enum_wifi_mode_string(mode) );
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -72,40 +72,40 @@ void Loom_WiFi_I::print_state()
 
 	LoomInternetPlat::print_state();	
 
-	Println3('\t', "Mode:               : ", enum_wifi_mode_string(mode) );
+	LPrintln('\t', "Mode:               : ", enum_wifi_mode_string(mode) );
 	
 	switch (mode) {
 		case WiFiMode::AP :
-			// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
-			// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
-			Print2('\t', "Connected MAC Addr  : " );
+			// LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
+			// LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
+			LPrint('\t', "Connected MAC Addr  : " );
 			status = WiFi.status();
 			if (status == WL_AP_CONNECTED) { 	// A computer has connected to the AP
 				byte remoteMac[6];
 				WiFi.APClientMacAddress(remoteMac);
 				print_MAC(remoteMac);
 			} else {							// A computer has disconnected from the AP, and we are back in listening mode 
-				Println("None");
+				LPrintln("None");
 			}
 			// print_remote_AP_device_status();
 
 			break;
 
 		case WiFiMode::WPA_CLIENT :
-			// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
-			Println3('\t', "SSID:               : ", SSID );
+			// LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
+			LPrintln('\t', "SSID:               : ", SSID );
 
-			// Println3('\t', "IP Address:         : ", WiFi.localIP() );
-			// Print2('\t', "MAC Address:        : " ); print_MAC();
-			// Println4('\t', "RSSi:               : ", WiFi.RSSI(), " dBm" );
-			// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
-			// Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
+			// LPrintln('\t', "IP Address:         : ", WiFi.localIP() );
+			// LPrint('\t', "MAC Address:        : " ); print_MAC();
+			// LPrintln('\t', "RSSi:               : ", WiFi.RSSI(), " dBm" );
+			// LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
+			// LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 			break;
 	}
-	Println3('\t', "IP Address:         : ", WiFi.localIP() );
-	Print2(  '\t', "MAC Address:        : " ); print_MAC(mac);
-	Println4('\t', "RSSi:               : ", WiFi.RSSI(), " dBm" );
-	Println();
+	LPrintln('\t', "IP Address:         : ", WiFi.localIP() );
+	LPrint(  '\t', "MAC Address:        : " ); print_MAC(mac);
+	LPrintln('\t', "RSSi:               : ", WiFi.RSSI(), " dBm" );
+	LPrintln();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -134,17 +134,17 @@ bool Loom_WiFi_I::connect_AP()
 
 	mode = WiFiMode::AP;
 
-	// Print the AP network name (SSID);
+	// LPrint the AP network name (SSID);
 	print_module_label();
 	char AP_name[20];
 	strcpy(AP_name, (device_manager) ? device_manager->get_device_name() : "UnknownFeather" );
-	Println2("Creating access point named: ", AP_name );
+	LPrintln("Creating access point named: ", AP_name );
 
 	// Create open network
 	status = WiFi.beginAP(AP_name);
 	if (status != WL_AP_LISTENING) {
 		print_module_label();
-		Println("Create access point failed");
+		LPrintln("Create access point failed");
 		active = false;
 		return false;
 	}
@@ -159,7 +159,7 @@ bool Loom_WiFi_I::connect_AP()
 	// Complete
 	print_state();
 	print_module_label();
-	Println("Start AP done");
+	LPrintln("Start AP done");
 
 	if (device_manager) {
 		device_manager->flash_LED(LED_WiFi_connected);
@@ -182,16 +182,16 @@ bool Loom_WiFi_I::connect_WPA(char* new_SSID, char* new_pass)
 	int attempt_count = 0;
 	do {
 		// print_module_label();
-		// Println("Connecting to WPA host failed, trying again");
+		// LPrintln("Connecting to WPA host failed, trying again");
 
 		// Try new network if provided
 		print_module_label();
 		if ( strlen(new_SSID) ) {
-			Println2("Trying to connect to : ", new_SSID);
+			LPrintln("Trying to connect to : ", new_SSID);
 			status = WiFi.begin(new_SSID, new_pass);
 			attempt_count++;
 		} else {
-			Println2("Trying to connect to : ", SSID);
+			LPrintln("Trying to connect to : ", SSID);
 			status = WiFi.begin(SSID, pass);
 			attempt_count++;
 		}
@@ -202,9 +202,9 @@ bool Loom_WiFi_I::connect_WPA(char* new_SSID, char* new_pass)
 	// If not successfully connected try previous network or AP
 	if (status != WL_CONNECTED) {
 		print_module_label();
-		Println("Connecting to WPA host failed completely");
+		LPrintln("Connecting to WPA host failed completely");
 		print_module_label();
-		Println("Reverting to previous WiFi network, else AP mode");
+		LPrintln("Reverting to previous WiFi network, else AP mode");
 
 		UDP.stop();
 		WiFi.disconnect();
@@ -213,7 +213,7 @@ bool Loom_WiFi_I::connect_WPA(char* new_SSID, char* new_pass)
 		// If previous mode was WPA_CLIENT try last network
 		if ( (mode == WiFiMode::WPA_CLIENT) && (strlen(new_SSID) == 0) ) {
 			print_module_label();
-			Println("Try to revert to previous WPA network");
+			LPrintln("Try to revert to previous WPA network");
 			status = WiFi.begin(SSID, pass);
 		}
 
@@ -223,7 +223,7 @@ bool Loom_WiFi_I::connect_WPA(char* new_SSID, char* new_pass)
 			WiFi.disconnect();
 			WiFi.end();			
 			print_module_label();
-			Println("Reverting to AP");
+			LPrintln("Reverting to AP");
 			connect_AP();
 			return false;
 		}
@@ -257,10 +257,10 @@ uint32_t Loom_WiFi_I::get_time()
 void Loom_WiFi_I::print_MAC(byte mac[])
 {
 	for (int i = 0; i < 5; i++) {
-		Print_Hex(mac[0]);
-		Print(":");		
+		LPrint_Hex(mac[0]);
+		LPrint(":");		
 	}
-	Println(mac[5]);
+	LPrintln(mac[5]);
 
 }
 
@@ -273,18 +273,18 @@ void Loom_WiFi_I::print_MAC(byte mac[])
 // 	if (status == WL_AP_CONNECTED) { 	// A computer has connected to the AP
 // 		byte remoteMac[6];
 // 		WiFi.APClientMacAddress(remoteMac);
-// 		Print2('\t', "Connected MAC Addr  : " ); print_MAC(remoteMac);
+// 		LPrint('\t', "Connected MAC Addr  : " ); print_MAC(remoteMac);
 // 	} else {							// A computer has disconnected from the AP, and we are back in listening mode 
-// 		Println("No device connected connected to AP");
+// 		LPrintln("No device connected connected to AP");
 // 	}
 // 	// }
-	// Print the network name (SSID);
-	// Println2("Creating access point named: ", config_wifi->my_ssid);
+	// LPrint the network name (SSID);
+	// LPrintln("Creating access point named: ", config_wifi->my_ssid);
 
 	// // Create open network. Change this line if you want to create an WEP network:
 	// status = WiFi.beginAP(config_wifi->my_ssid);
 	// if (status != WL_AP_LISTENING) {
-	// 	Println("Creating access point failed");
+	// 	LPrintln("Creating access point failed");
 	// 	while (true);   	// Don't continue
 	// }
 
@@ -293,12 +293,12 @@ void Loom_WiFi_I::print_MAC(byte mac[])
 	// server.begin();   		// Start the web server on port 80
 
 	// printWiFiStatus();   	// You're connected now, so print out the status
-	// Println("\nStarting UDP connection over server...");
+	// LPrintln("\nStarting UDP connection over server...");
 		
 	// // If you get a connection, report back via serial:
 	// UdpDevice.begin(config_wifi->devicePort);
 
-	// Println("Done");
+	// LPrintln("Done");
 	// flash_led(6, 50, 50);
 
 

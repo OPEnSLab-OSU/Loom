@@ -72,7 +72,7 @@ void Loom_PCF8523::time_adjust(DateTime time)
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
-		Println("Adjusted time to: "); 
+		LPrintln("Adjusted time to: "); 
 		print_DateTime(time);		
 	}
 }

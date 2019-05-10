@@ -53,8 +53,8 @@ Loom_Sleep_Manager::~Loom_Sleep_Manager()
 void Loom_Sleep_Manager::print_config()
 {
 	LoomModule::print_config();
-	Println3('\t', "Sleep Mode          : ", enum_sleep_mode_string(sleep_mode) );
-	Println3('\t', "Use LED             : ", (use_LED) ? "Enabled" : "Disabled" );
+	LPrintln('\t', "Sleep Mode          : ", enum_sleep_mode_string(sleep_mode) );
+	LPrintln('\t', "Use LED             : ", (use_LED) ? "Enabled" : "Disabled" );
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -110,7 +110,7 @@ SleepMode Loom_Sleep_Manager::get_sleep_mode()
 // 			// }
 
 // 			// print_module_label();
-// 			// Println("Will try to sleep until : ");
+// 			// LPrintln("Will try to sleep until : ");
 // 			// RTC_Inst->print_DateTime(future_time);
 
 
@@ -118,7 +118,7 @@ SleepMode Loom_Sleep_Manager::get_sleep_mode()
 // 			// DateTime now = RTC_Inst->now();
 // 			// if ( (future_time - now).totalseconds() < 0 ) {
 // 			// 	print_module_label();
-// 			// 	Println("Wont wake from alarm in the past, increasing time to following day");
+// 			// 	LPrintln("Wont wake from alarm in the past, increasing time to following day");
 // 			// 	// future_time = future + TimeSpan(1,0,0,0);    // might not work if DateTime is several days in past
 				
 // 			// 	// Adjust future_time to be following day at same time intended
@@ -131,7 +131,7 @@ SleepMode Loom_Sleep_Manager::get_sleep_mode()
 // 			// 					+ TimeSpan(1,0,0,0);
 
 // 			// 	print_module_label();
-// 			// 	Println("Will instead try to sleep until : ");
+// 			// 	LPrintln("Will instead try to sleep until : ");
 // 			// 	RTC_Inst->print_DateTime(future_time);
 
 // 			// }
@@ -197,20 +197,20 @@ bool Loom_Sleep_Manager::sleepy_dog_sleep(TimeSpan duration)
 	int remainder  = totalseconds % MAX_WATCHDOG_SLEEP;
 	int total = 0; // counter (mostly for display purposes currently)
 
-	Println3("Will sleep for a total of: ", totalseconds, " seconds");
-	Print5("Using ", iterations, " blocks of ", MAX_WATCHDOG_SLEEP, " seconds");
-	Println3(" and ", remainder, " seconds");
+	LPrintln("Will sleep for a total of: ", totalseconds, " seconds");
+	LPrint("Using ", iterations, " blocks of ", MAX_WATCHDOG_SLEEP, " seconds");
+	LPrintln(" and ", remainder, " seconds");
 
 
 	pre_sleep();
 
 
-	// Println3("Going to sleep in ", MAX_WATCHDOG_SLEEP, " second blocks");
+	// LPrintln("Going to sleep in ", MAX_WATCHDOG_SLEEP, " second blocks");
 	for (int i = 0; i < iterations; i++) {
 		int sleepMS = Watchdog.sleep(MAX_WATCHDOG_SLEEP * 1000);
-		// Println3("Just slept for: ", sleepMS, " milliseconds");
+		// LPrintln("Just slept for: ", sleepMS, " milliseconds");
 		total += sleepMS;
-		// Println3("Now have slept a total of: ", total, " milliseconds");
+		// LPrintln("Now have slept a total of: ", total, " milliseconds");
 
 		// Test print blink
 		// digitalWrite(LED_BUILTIN, HIGH);  
@@ -219,21 +219,21 @@ bool Loom_Sleep_Manager::sleepy_dog_sleep(TimeSpan duration)
 	}
 
 	if (remainder > 0) {
-		// Println3("Sleeping the remaining ", remainder*1000, " milliseconds");
+		// LPrintln("Sleeping the remaining ", remainder*1000, " milliseconds");
 		int sleepMS = Watchdog.sleep(remainder*1000); // remained is in seconds
 		total += sleepMS;
 	}
 
 	post_sleep();
 
-	Println3("Done sleeping a total of: ", total, " milliseconds");
+	LPrintln("Done sleeping a total of: ", total, " milliseconds");
 
 }
 
 /////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::pre_sleep()
 {
-	Println("Entering Sleep");
+	LPrintln("Entering Sleep");
 	#if LOOM_DEBUG == 1
 		Serial.end();
 		USBDevice.detach(); 
@@ -302,13 +302,13 @@ void Loom_Sleep_Manager::post_sleep()
 		}
 	#endif
 
-	// Print to Serial now that LED/delay has given user time to open Serial Monitor
+	// LPrint to Serial now that LED/delay has given user time to open Serial Monitor
 	#if LOOM_DEBUG == 1
-		Println("WAKE");
+		LPrintln("WAKE");
 
 		// if (RTC_Inst != nullptr) {
 		// 	print_module_label();
-		// 	Print("Wake Time : ");
+		// 	LPrint("Wake Time : ");
 		// 	RTC_Inst->print_time();
 		// }
 		delay(50);  // delay so serial stuff has time to print out all the way

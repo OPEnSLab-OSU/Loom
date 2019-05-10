@@ -45,7 +45,7 @@ LoomCommPlat::LoomCommPlat(
 	) 
 	: LoomModule( module_name )
 {
-	// Println("LoomCommPlat Constructor 1");
+	// LPrintln("LoomCommPlat Constructor 1");
 	this->max_message_len   = max_message_len;
 	// this->subnet_scope      = subnet_scope; 
 	this->compress_messages = compress_messages;
@@ -65,9 +65,9 @@ void LoomCommPlat::print_config()
 {
 	LoomModule::print_config();
 
-	Println3('\t', "Max Message Length  : ", max_message_len );
-	// Println3('\t', "Communication Scope : ", enum_subnet_scope_string(subnet_scope) );
-	Println3('\t', "Compress Messages   : ", (compress_messages) ? "Enabled" : "Disabled" );
+	LPrintln('\t', "Max Message Length  : ", max_message_len );
+	// LPrintln('\t', "Communication Scope : ", enum_subnet_scope_string(subnet_scope) );
+	LPrintln('\t', "Compress Messages   : ", (compress_messages) ? "Enabled" : "Disabled" );
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -124,15 +124,15 @@ bool LoomCommPlat::scope_filter(OSCBundle& bndl, int* offset)
 	strcpy(test, test+2);
 
 	// if ( strlen(test) == 0 ) {
-	// 	Println("Out of scope");
+	// 	LPrintln("Out of scope");
 	// 	bndl.empty();
 	// 	return false; 
 	// }
 
-	// Println2("[Scope Filter] Address: ", address);
-	// Println2("[Scope Filter] Test: ", test);
-	// Println2("[Scope Filter] len(address): ", strlen(address) );
-	// Println2("[Scope Filter] len(test): ", strlen(test) );
+	// LPrintln("[Scope Filter] Address: ", address);
+	// LPrintln("[Scope Filter] Test: ", test);
+	// LPrintln("[Scope Filter] len(address): ", strlen(address) );
+	// LPrintln("[Scope Filter] len(test): ", strlen(test) );
 
 
 	// Compare addresses
@@ -141,7 +141,7 @@ bool LoomCommPlat::scope_filter(OSCBundle& bndl, int* offset)
 		pass = true;
 	}
 
-	Println2("[Scope Filter] Pass: ", (pass) ? "true" : "false" );
+	LPrintln("[Scope Filter] Pass: ", (pass) ? "true" : "false" );
 
 	// Empty bundle if out of scope
 	if (!pass) bndl.empty();
@@ -289,7 +289,7 @@ void LoomCommPlat::original_convert_bundle_to_string(OSCBundle& bndl, char* osc_
 					break;
 				default:
 					if (data_type != '\0') {
-						Println("Invalid message arg type");
+						LPrintln("Invalid message arg type");
 					}
 					break;
 			}

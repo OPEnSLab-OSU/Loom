@@ -108,11 +108,11 @@ public:
 	/// \return	DateTime
 	virtual DateTime now() = 0;
 
-	/// Print an arbitrary DateTime object
+	/// LPrint an arbitrary DateTime object
 	/// \param[in]	time	Time to print
 	static void 	print_DateTime(DateTime time);
 
-	/// Print the current time
+	/// LPrint the current time
 	/// \param[in]	verbose		True for multile lines, false for short display
 	void 			print_time(bool verbose=false);
 

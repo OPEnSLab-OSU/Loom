@@ -25,8 +25,8 @@ LoomI2CSensor::~LoomI2CSensor()
 void LoomI2CSensor::print_config()
 {
 	LoomSensor::print_config();
-	Print2('\t', "I2C Address         : ");
-	Println_Dec_Hex(i2c_address);
+	LPrint('\t', "I2C Address         : ");
+	LPrintln_Dec_Hex(i2c_address);
 }
 
 /////////////////////////////////////////////////////////////////////

@@ -29,7 +29,7 @@ Loom_TSL2591::Loom_TSL2591(
 			case 1 : inst_tsl2591.setGain(TSL2591_GAIN_MED);    break;  // 25x gain
 			case 2 : inst_tsl2591.setGain(TSL2591_GAIN_HIGH);   break;  // 428x gain
 			case 3 : inst_tsl2591.setGain(TSL2591_GAIN_MAX);    break;  // 9876x gain
-			default: Println("Invalid gain level."); break;
+			default: LPrintln("Invalid gain level."); break;
 		}
 	  
 		switch(timing_level) {
@@ -39,12 +39,12 @@ Loom_TSL2591::Loom_TSL2591(
 			case 3 : inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_400MS); break;
 			case 4 : inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_500MS); break;
 			case 5 : inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_600MS);  // longest integration time (dim light) break;
-			default: Println("Invalid timing level"); break;
+			default: LPrintln("Invalid timing level"); break;
 		}	
 	} 
 
 	print_module_label();
-	Println2("Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -64,10 +64,10 @@ Loom_TSL2591::~Loom_TSL2591()
 void Loom_TSL2591::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
-	Println3("\t", "Vis  : ", vis);
-	Println3("\t", "IR   : ", ir);
-	Println3("\t", "Full : ", full);
+	LPrintln("Measurements:");
+	LPrintln("\t", "Vis  : ", vis);
+	LPrintln("\t", "IR   : ", ir);
+	LPrintln("\t", "Full : ", full);
 }
 
 /////////////////////////////////////////////////////////////////////

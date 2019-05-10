@@ -21,8 +21,8 @@ void LoomManager::parse_config(const char* json_config)
 {
 	// Parse Json config
 
-	Println();
-	Println("= = = = = Parse Config = = = = =");
+	LPrintln();
+	LPrintln("= = = = = Parse Config = = = = =");
 
 	DynamicJsonDocument doc(2048);
 	DeserializationError error = deserializeJson(doc, json_config);
@@ -43,12 +43,12 @@ void LoomManager::parse_config(const char* json_config)
 
 	// Serial.print("\n\nNum modules: ");
 	// Serial.println(doc["components"].size()); 
-	// Println();
+	// LPrintln();
 
 
 	// Apply LoomManager General Settings
-	Println("= = = = = LoomManager Settings = = = = =");
-	Println();
+	LPrintln("= = = = = LoomManager Settings = = = = =");
+	LPrintln();
 
 	JsonObject general = doc["general"];
 
@@ -79,8 +79,8 @@ void LoomManager::parse_config(const char* json_config)
 
 	// Generate Module Objects
 
-	Println("= = = = = Generate Objects = = = = =");
-	Println();
+	LPrintln("= = = = = Generate Objects = = = = =");
+	LPrintln();
 
 
 	// Call module factory
@@ -140,8 +140,8 @@ void LoomManager::parse_config(const char* json_config)
 
 	}
 
-	Println("= = = = = = = = = = = = = = = = =");
-	Println();
+	LPrintln("= = = = = = = = = = = = = = = = =");
+	LPrintln();
 
 }
 

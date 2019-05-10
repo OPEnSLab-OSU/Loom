@@ -65,20 +65,20 @@ LoomManager::~LoomManager()
 // --- PUBLIC METHODS ---
 void LoomManager::print_device_label()
 {
-	Print3("[", device_name, "] ");
+	LPrint("[", device_name, "] ");
 }
 
 /////////////////////////////////////////////////////////////////////
 void LoomManager::print_config() 
 {
 	print_device_label();
-	Println("Config:");
-	Println3('\t', "Device Name         : ", device_name );
-	Println3('\t', "Family              : ", family );
-	Println3('\t', "Family Number       : ", family_num );
-	Println3('\t', "Instance Number     : ", instance );
-	Println3('\t', "Device Type         : ", enum_device_type_string(device_type) );
-	Println3('\t', "Instance Number     : ", instance );
+	LPrintln("Config:");
+	LPrintln('\t', "Device Name         : ", device_name );
+	LPrintln('\t', "Family              : ", family );
+	LPrintln('\t', "Family Number       : ", family_num );
+	LPrintln('\t', "Instance Number     : ", instance );
+	LPrintln('\t', "Device Type         : ", enum_device_type_string(device_type) );
+	LPrintln('\t', "Instance Number     : ", instance );
 
 	list_modules();
 }
@@ -89,17 +89,17 @@ void LoomManager::add_module_aux(LoomModule** modules, LoomModule* module, uint&
 	print_device_label();
 
 	if (module == nullptr) {
-		Println("Cannot add null module");
+		LPrintln("Cannot add null module");
 		return;
 	}
 
 	// If module array is not dynamic, add check to make sure there is room in the array
 	if ( len >= max_len ) {
-		Println2("Cannot add ", module->get_module_name() );
+		LPrintln("Cannot add ", module->get_module_name() );
 		return;
 	}
 
-	Println2("Adding Module: ", module->get_module_name() );
+	LPrintln("Adding Module: ", module->get_module_name() );
 
 	modules[ len++ ] = module;
 	module->link_device_manager(this);
@@ -110,10 +110,10 @@ void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager)
 {
 	print_device_label();
 	if (!interrupt_manager) {
-		Println2("Cannot add ", interrupt_manager->get_module_name() );
+		LPrintln("Cannot add ", interrupt_manager->get_module_name() );
 		return;
 	}
-	Println2("Adding Module: ", interrupt_manager->get_module_name() );
+	LPrintln("Adding Module: ", interrupt_manager->get_module_name() );
 	this->interrupt_manager = interrupt_manager; 
 
 	interrupt_manager->link_device_manager(this);
@@ -128,10 +128,10 @@ void LoomManager::add_module(Loom_Sleep_Manager* sleep_manager)
 {
 	print_device_label();
 	if (!sleep_manager) {
-		Println2("Cannot add ", sleep_manager->get_module_name() );
+		LPrintln("Cannot add ", sleep_manager->get_module_name() );
 		return;
 	}
-	Println2("Adding Module: ", sleep_manager->get_module_name() );
+	LPrintln("Adding Module: ", sleep_manager->get_module_name() );
 	this->sleep_manager = sleep_manager; 
 
 	sleep_manager->link_device_manager(this);
@@ -147,7 +147,7 @@ void LoomManager::add_module(LoomRTC* rtc)
 			interrupt_manager->set_RTC_module(rtc);
 		}
 	} else {
-		Println("Cannot add null module");
+		LPrintln("Cannot add null module");
 		return;
 	}
 }
@@ -249,10 +249,10 @@ LoomLogPlat* LoomManager::get_log_plat_module(int idx)
 /////////////////////////////////////////////////////////////////////
 void LoomManager::list_modules_aux(LoomModule** modules, uint len, char* module_type)
 {
-	Println5("\t", module_type, " (", len, "):");
+	LPrintln("\t", module_type, " (", len, "):");
 	for (int i = 0; i < len; i++) {
 		if ( (modules[i] != nullptr) && (modules[i]->get_active()) ) {
-			Println4( "\t\t[", (modules[i]->get_active()) ? "+" : "-" , "] ", modules[i]->get_module_name() );
+			LPrintln( "\t\t[", (modules[i]->get_active()) ? "+" : "-" , "] ", modules[i]->get_module_name() );
 		}
 	}	
 }
@@ -261,11 +261,11 @@ void LoomManager::list_modules_aux(LoomModule** modules, uint len, char* module_
 void LoomManager::list_modules()
 {
 	print_device_label();
-	Println("Modules:");
+	LPrintln("Modules:");
 
-	Println5("\t", "RTC modules", " (", (rtc_module != nullptr), "):");
+	LPrintln("\t", "RTC modules", " (", (rtc_module != nullptr), "):");
 	if ( (rtc_module != nullptr) && (rtc_module->get_active()) ) {
-		Println4( "\t\t[", (rtc_module->get_active()) ? "+" : "-" , "] ", rtc_module->get_module_name() );
+		LPrintln( "\t\t[", (rtc_module->get_active()) ? "+" : "-" , "] ", rtc_module->get_module_name() );
 	}
 
 	// list_modules_aux( (LoomModule**)rtc_module      , 1   		       , "RTC Modules"); 
@@ -468,7 +468,7 @@ void LoomManager::package(OSCBundle& bndl)
 /////////////////////////////////////////////////////////////////////
 void LoomManager::print_current_bundle() 
 {
-	Println("Member Bundle:");
+	LPrintln("Member Bundle:");
 	print_bundle(bundle);
 }
 

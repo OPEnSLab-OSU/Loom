@@ -26,8 +26,8 @@ Loom_AS7262::Loom_AS7262(
 	inst_AS7262.setIntegrationTime(integration_time);
 
 	print_module_label();
-	Println2("\t", "Initialized");
-	// Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\t", "Initialized");
+	// LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -47,22 +47,22 @@ Loom_AS7262::~Loom_AS7262()
 void Loom_AS7262::print_config()
 {
 	LoomI2CSensor::print_config();	
-	Println3("\t", "Gain                : ", gain);
-	Println3("\t", "Mode                : ", mode);
-	Println3("\t", "Use Bulb            : ", (use_bulb) ? "True" : "False");
+	LPrintln("\t", "Gain                : ", gain);
+	LPrintln("\t", "Mode                : ", mode);
+	LPrintln("\t", "Use Bulb            : ", (use_bulb) ? "True" : "False");
 }
 
 /////////////////////////////////////////////////////////////////////
 void Loom_AS7262::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
-	Println3("\t", "Violet : ", color_vals[0]);
-	Println3("\t", "Blue   : ", color_vals[1]);
-	Println3("\t", "Green  : ", color_vals[2]);
-	Println3("\t", "Yellow : ", color_vals[3]);
-	Println3("\t", "Orange : ", color_vals[4]);
-	Println3("\t", "Red    : ", color_vals[5]);
+	LPrintln("Measurements:");
+	LPrintln("\t", "Violet : ", color_vals[0]);
+	LPrintln("\t", "Blue   : ", color_vals[1]);
+	LPrintln("\t", "Green  : ", color_vals[2]);
+	LPrintln("\t", "Yellow : ", color_vals[3]);
+	LPrintln("\t", "Orange : ", color_vals[4]);
+	LPrintln("\t", "Red    : ", color_vals[5]);
 }
 
 /////////////////////////////////////////////////////////////////////

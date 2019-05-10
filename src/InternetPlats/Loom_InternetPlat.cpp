@@ -37,6 +37,6 @@ void LoomInternetPlat::print_config()
 /////////////////////////////////////////////////////////////////////
 void LoomInternetPlat::print_state()
 {
-	Println3('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
+	LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 

@@ -50,7 +50,7 @@ void Loom_Relay::print_config()
 void Loom_Relay::print_state()
 {
 	print_module_label();
-	Println4('\t', "Relay ", pin, (on) ? " On" : " Off" );
+	LPrintln('\t', "Relay ", pin, (on) ? " On" : " Off" );
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -80,7 +80,7 @@ void Loom_Relay::set_relay(bool state)
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
-		Println3("Set relay on pin ", pin, (on) ? " High" : " Low");
+		LPrintln("Set relay on pin ", pin, (on) ? " High" : " Low");
 	}
 }
 

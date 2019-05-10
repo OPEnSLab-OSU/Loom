@@ -78,7 +78,7 @@ Loom_AS7265X::Loom_AS7265X(
 	}
 
 	print_module_label();
-	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -98,14 +98,14 @@ Loom_AS7265X::~Loom_AS7265X()
 void Loom_AS7265X::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
+	LPrintln("Measurements:");
 
 	// UV
-	for (int i = 0; i < 6; i++) { Println3("\t", "A: ", uv[i]); }
+	for (int i = 0; i < 6; i++) { LPrintln("\t", "A: ", uv[i]); }
 	// Color
-	for (int i = 0; i < 6; i++) { Println3("\t", "G: ", color[i]); }
+	for (int i = 0; i < 6; i++) { LPrintln("\t", "G: ", color[i]); }
 	// NIR
-	for (int i = 0; i < 6; i++) { Println3("\t", "R: ", nir[i]); }
+	for (int i = 0; i < 6; i++) { LPrintln("\t", "R: ", nir[i]); }
 }
 
 /////////////////////////////////////////////////////////////////////

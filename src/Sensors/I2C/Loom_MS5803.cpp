@@ -17,7 +17,7 @@ Loom_MS5803::Loom_MS5803(
 	bool setup = inst_MS5803->initializeMS_5803();
 
 	print_module_label();
-	Println2("\tInitialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -37,9 +37,9 @@ Loom_MS5803::~Loom_MS5803()
 void Loom_MS5803::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
-	Println4("\t", "Pressure    : ", pressure , " mbar");
-	Println4("\t", "Temperature : ", temp     , " C");
+	LPrintln("Measurements:");
+	LPrintln("\t", "Pressure    : ", pressure , " mbar");
+	LPrintln("\t", "Temperature : ", temp     , " C");
 }
 
 /////////////////////////////////////////////////////////////////////

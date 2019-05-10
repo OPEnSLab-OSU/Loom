@@ -74,38 +74,38 @@ void Loom_Digital::print_config()
 {
 	LoomSensor::print_config();
 
-	Print("\tEnabled Pins        : ");
+	LPrint("\tEnabled Pins        : ");
 	// 5,6,9,10,11,12
 	for (int i = 0; i < 6; i++) { 
 		if (pin_enabled[i]) {
-			Print2(pin_nums[i], ", ");
+			LPrint(pin_nums[i], ", ");
 		}
 	}
 	// A0-A5
 	for (int i = 0; i < 6; i++) { 
 		if (pin_enabled[i+6]) {
-			Print3("A", i, ", ");
+			LPrint("A", i, ", ");
 		}
 	}
 
-	Println();
+	LPrintln();
 }
 
 /////////////////////////////////////////////////////////////////////
 void Loom_Digital::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
+	LPrintln("Measurements:");
 	// 5,6,9,10,11,12
 	for (int i = 0; i < 6; i++) { 
 		if (pin_enabled[i]) {
-			Println4("\t", pin_nums[i], ": ", digital_vals[i]);
+			LPrintln("\t", pin_nums[i], ": ", digital_vals[i]);
 		}
 	}
 	// A0-A5
 	for (int i = 0; i < 6; i++) { 
 		if (pin_enabled[i+6]) {
-			Println5("\t", "A", i, ": ", digital_vals[i+6]);
+			LPrintln("\t", "A", i, ": ", digital_vals[i+6]);
 		}
 	}
 

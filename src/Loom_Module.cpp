@@ -15,7 +15,7 @@ char* LoomModule::enum_verbosity_string(Verbosity v)
 // --- CONSTRUCTOR ---
 LoomModule::LoomModule() 
 {
-	// Println("LoomModule Default Constructor");
+	// LPrintln("LoomModule Default Constructor");
 // 
 	// this->module_name 	= "Unknown";
 	// strcpy(this->module_name, "Unknown");
@@ -33,22 +33,22 @@ LoomModule::LoomModule()
 /////////////////////////////////////////////////////////////////////
 LoomModule::LoomModule( const char* module_name ) : LoomModule()
 {
-	// Println("LoomModule Constructor 1");
+	// LPrintln("LoomModule Constructor 1");
 
 	// strcpy(this->module_name, module_name);
 
-	// Println2("Module name:", module_name);
+	// LPrintln("Module name:", module_name);
 	snprintf(this->module_name, 20, "%s", module_name); 
 // 
 	// print_module_label();
-	// Println("Begin Setup");
+	// LPrintln("Begin Setup");
 }
 
 // /////////////////////////////////////////////////////////////////////
 // // this version also links to parent device
 // LoomModule::LoomModule( char* module_name, LoomManager* LD ) : LoomModule()
 // {
-// 	// Println("LoomModule Constructor 2");
+// 	// LPrintln("LoomModule Constructor 2");
 // 	this->module_name   = module_name;
 // 		// strcpy(this->module_name, module_name);
 
@@ -84,7 +84,7 @@ void LoomModule::link_device_manager(LoomManager* LM)
 /////////////////////////////////////////////////////////////////////
 void LoomModule::print_module_label()
 {
-	Print3("[", module_name, "] ");
+	LPrint("[", module_name, "] ");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -92,11 +92,11 @@ void LoomModule::print_module_label()
 void LoomModule::print_config()
 {
 	print_module_label();
-	Println("Config:");
-	Println3('\t', "Module Active       : ", (active)      ? "Enabled" : "Disabled" );
-	Println3('\t', "Print Debug         : ", (print_debug) ? "Enabled" : "Disabled" );
-	Println3('\t', "Print Verbosity     : ", enum_verbosity_string(print_verbosity) );
-	Println3('\t', "Package Verbosity   : ", enum_verbosity_string(package_verbosity) );
+	LPrintln("Config:");
+	LPrintln('\t', "Module Active       : ", (active)      ? "Enabled" : "Disabled" );
+	LPrintln('\t', "LPrint Debug         : ", (print_debug) ? "Enabled" : "Disabled" );
+	LPrintln('\t', "LPrint Verbosity     : ", enum_verbosity_string(print_verbosity) );
+	LPrintln('\t', "Package Verbosity   : ", enum_verbosity_string(package_verbosity) );
 }
 
 /////////////////////////////////////////////////////////////////////

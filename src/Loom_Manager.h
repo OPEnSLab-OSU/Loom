@@ -224,7 +224,7 @@ protected:
 	/// Count of logging platform modules
 	uint		log_count;
 
-	/// Print detail verbosity
+	/// LPrint detail verbosity
 	Verbosity	print_verbosity;
 	/// Package detail verbosity
 	Verbosity	package_verbosity;
@@ -263,16 +263,16 @@ public:
 
 
 
-	/// Print the device name as '[device_name]'
+	/// LPrint the device name as '[device_name]'
 	void		print_device_label();
-	/// Print the devices current configuration.
+	/// LPrint the devices current configuration.
 	/// Also prints configuration of linked modules.
 	void		print_config();
 	
 	// 	void print_state()
 
 
-	/// Print the linked modules
+	/// LPrint the linked modules
 	void 		list_modules();
 
 

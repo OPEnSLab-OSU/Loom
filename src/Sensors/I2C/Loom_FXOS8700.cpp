@@ -18,7 +18,7 @@ Loom_FXOS8700::Loom_FXOS8700(
 	bool setup = inst_FXOS8700->begin(ACCEL_RANGE_4G);
 
 	print_module_label();
-	Println3("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -38,13 +38,13 @@ Loom_FXOS8700::~Loom_FXOS8700()
 void Loom_FXOS8700::print_measurements()
 {
 	print_module_label();
-	Println("Measurements:");
-	Println4("\t", "AX: ", accel[0], " m/s^2");
-	Println4("\t", "AY: ", accel[1], " m/s^2");
-	Println4("\t", "AZ: ", accel[2], " m/s^2");
-	Println4("\t", "MX: ", mag[0], " uT");
-	Println4("\t", "MY: ", mag[1], " uT");
-	Println4("\t", "MZ: ", mag[2], " uT");
+	LPrintln("Measurements:");
+	LPrintln("\t", "AX: ", accel[0], " m/s^2");
+	LPrintln("\t", "AY: ", accel[1], " m/s^2");
+	LPrintln("\t", "AZ: ", accel[2], " m/s^2");
+	LPrintln("\t", "MX: ", mag[0], " uT");
+	LPrintln("\t", "MY: ", mag[1], " uT");
+	LPrintln("\t", "MZ: ", mag[2], " uT");
 }
 
 /////////////////////////////////////////////////////////////////////
