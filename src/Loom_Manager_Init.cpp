@@ -10,6 +10,10 @@
 
 
 
+Factory LoomFactory;
+
+
+
 /// Parses a JSON configuration and instantiates the specified 
 /// LoomModules.
 /// Adds created LoomModules to the arrays of LoomManager
@@ -92,7 +96,7 @@ void LoomManager::parse_config(const char* json_config)
 		LoomInternetPlat*		internet_plat		= nullptr;
 		LoomLogPlat*			log_plat			= nullptr;
 
-		module_factory_aux(
+		LoomFactory.CreateAndSort(
 			module,
 			interrupt_manager,
 			sleep_manager,
@@ -104,6 +108,7 @@ void LoomManager::parse_config(const char* json_config)
 			internet_plat,
 			log_plat
 		);
+
 
 		if (interrupt_manager != nullptr) {
 			add_module(interrupt_manager); 

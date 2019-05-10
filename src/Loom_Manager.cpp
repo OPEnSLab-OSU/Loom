@@ -17,6 +17,10 @@
 
 
 
+
+
+
+
 /////////////////////////////////////////////////////////////////////
 const char* LoomManager::enum_device_type_string(DeviceType t)
 {

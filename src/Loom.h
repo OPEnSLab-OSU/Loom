@@ -94,3 +94,5 @@
 
 // Device Manager
 // #include "Loom_Manager.h"
+
+#include "Loom_Module_Factory.h"

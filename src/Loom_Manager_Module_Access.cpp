@@ -35,11 +35,15 @@ LoomModule*	LoomManager::find_module(ModuleType type, int idx, LoomModule** modu
 }
 
 
+// if there is an array over the sorted arrays, these can all be templatized
 
+// Function name cant be a template, but could do 'Manager.get<Relay>(1).set_relay();'
+
+// Could probably get it to 'Manager[Relay][1].set_relay();' with operator overloading
 
 // --- General ---
 
-
+// maybe this not templatized
 Loom_Interrupt_Manager& LoomManager::Interrupt_Manager(int idx) 
 {
 	// LoomModule* tmp = find_module(ModuleType::Interrupt_Manager, idx, (LoomModule**)interrupt_manager, 1);
@@ -47,7 +51,7 @@ Loom_Interrupt_Manager& LoomManager::Interrupt_Manager(int idx)
 	return (*(Loom_Interrupt_Manager*)( (tmp) ? tmp : &global_stub ));
 }
 
-
+// maybe this not templatized
 Loom_Sleep_Manager& LoomManager::Sleep_Manager(int idx) 
 {
 	// LoomModule* tmp = find_module(ModuleType::Sleep_Manager, idx, (LoomModule**)sleep_manager, 1);

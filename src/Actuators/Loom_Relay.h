@@ -32,11 +32,13 @@ public:
 		);
 
 	Loom_Relay(JsonVariant p);
+	
+	// Loom_Relay* static Create(JsonVariant p);
 
 
 
 	// --- DESTRUCTOR ---
-	virtual ~Loom_Relay();
+ ~Loom_Relay();
 
 	// Inherited (Overriding) Methods
 	void		print_config() override;
