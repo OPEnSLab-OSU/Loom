@@ -1,5 +1,5 @@
 
-#include "loom_DS3231.h"
+#include "Loom_DS3231.h"
 
 // #define EI_NOTEXTERNAL
 // #include <EnableInterrupt.h>
@@ -7,7 +7,7 @@
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-Loom_DS3231::Loom_DS3231(	
+Loom_DS3231::Loom_DS3231(
 		const char*		module_name,
 
 		TimeZone		timezone,
@@ -30,12 +30,12 @@ Loom_DS3231::Loom_DS3231(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_DS3231::Loom_DS3231(JsonVariant p)
-	: Loom_DS3231(p[0], (TimeZone)(int)p[1], p[2], p[3], p[4]) 
+	: Loom_DS3231(p[0], (TimeZone)(int)p[1], p[2], p[3], p[4])
 {}
 
 /////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
-Loom_DS3231::~Loom_DS3231() 
+Loom_DS3231::~Loom_DS3231()
 {
 	delete rtc_inst;
 }
@@ -75,8 +75,8 @@ void Loom_DS3231::time_adjust(DateTime time)
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
-		Println("Adjusted time to: "); 
-		print_DateTime(time);		
+		Println("Adjusted time to: ");
+		print_DateTime(time);
 	}
 }
 
@@ -85,12 +85,12 @@ void Loom_DS3231::set_alarm(DateTime time)
 {
 	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
-		Println("Resetting Alarm 1 for:"); 
-		print_DateTime(time);		
+		Println("Resetting Alarm 1 for:");
+		print_DateTime(time);
 	}
 
 	// Set alarm 1
-	rtc_inst->setAlarm(ALM1_MATCH_HOURS, time.second(), time.minute(), time.hour(), 0); 	    								
+	rtc_inst->setAlarm(ALM1_MATCH_HOURS, time.second(), time.minute(), time.hour(), 0);
 	rtc_inst->alarmInterrupt(1, true);
 }
 
@@ -110,8 +110,3 @@ void Loom_DS3231::clear_alarms()
 	rtc_inst->clearAlarm(2);
 	rtc_inst->alarmInterrupt(2, false);
 }
-
-
-
-
-
