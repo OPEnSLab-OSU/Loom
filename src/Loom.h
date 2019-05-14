@@ -1,6 +1,5 @@
 
-// #include "Default_Loom_Config.h"
-
+#define LOOM_DEBUG 1
 
 
 

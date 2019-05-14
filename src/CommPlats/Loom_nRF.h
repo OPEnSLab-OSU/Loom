@@ -49,14 +49,14 @@ public:
 
 	/// nRF module constructor
 	///
-	/// \param[in]	module_name				String | <"nRF"> | null | nRF module name
+	/// \param[in]	module_name			String | <"nRF"> | null | nRF module name
 	/// \param[in]	max_message_len		Set(Int) | <120> | {120("Max length")} | The maximum possible message length
 	/// \param[in]	compress_messages	Bool | <true> | {true, false} | Whether or not to try to compress messages
-	/// \param[in]	address 					Int | <01> | [0-99] | This device's nRF address
+	/// \param[in]	address 			Int | <01> | [0-99] | This device's nRF address
 	/// \param[in]	friend_address 		Int | <00> | [0-99] | Default nRF address to send to
-	/// \param[in]	data_rate					Set(Int) | <0> | {0("Default"), 1("250KBPS"), 2("1MBPS"), 3("2MBPS")} | Transmission data rate
-	/// \param[in]	power_level				Set(Int) | <0> | {0("Default"), 1("Min"), 2("Low"), 3("High"), 4("Max")} | Transmission ower level
-	/// \param[in]	retry_count 			Int | <3> | [0-15] | Max number of transmission retries
+	/// \param[in]	data_rate			Set(Int) | <0> | {0("Default"), 1("250KBPS"), 2("1MBPS"), 3("2MBPS")} | Transmission data rate
+	/// \param[in]	power_level			Set(Int) | <0> | {0("Default"), 1("Min"), 2("Low"), 3("High"), 4("Max")} | Transmission ower level
+	/// \param[in]	retry_count 		Int | <3> | [0-15] | Max number of transmission retries
 	/// \param[in]	retry_timeout 		Int | <200> | [20-500] | Delay between retransmissions (ms)
 	/// \param[in]	multicast_level		Int | <1> | [1-3] | How many levels to propogate message through heirarchy
 	Loom_nRF(

@@ -15,11 +15,6 @@ char* LoomModule::enum_verbosity_string(Verbosity v)
 // --- CONSTRUCTOR ---
 LoomModule::LoomModule() 
 {
-	// LPrintln("LoomModule Default Constructor");
-// 
-	// this->module_name 	= "Unknown";
-	// strcpy(this->module_name, "Unknown");
-
 	snprintf(this->module_name, 20, "%s", "Unknown"); 
 
 	active 				= true;
@@ -33,28 +28,9 @@ LoomModule::LoomModule()
 /////////////////////////////////////////////////////////////////////
 LoomModule::LoomModule( const char* module_name ) : LoomModule()
 {
-	// LPrintln("LoomModule Constructor 1");
 
-	// strcpy(this->module_name, module_name);
-
-	// LPrintln("Module name:", module_name);
 	snprintf(this->module_name, 20, "%s", module_name); 
-// 
-	// print_module_label();
-	// LPrintln("Begin Setup");
 }
-
-// /////////////////////////////////////////////////////////////////////
-// // this version also links to parent device
-// LoomModule::LoomModule( char* module_name, LoomManager* LD ) : LoomModule()
-// {
-// 	// LPrintln("LoomModule Constructor 2");
-// 	this->module_name   = module_name;
-// 		// strcpy(this->module_name, module_name);
-
-// 	// this->device_manager = LD;
-// 	link_device_manager(LD);
-// }
 
 /////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---

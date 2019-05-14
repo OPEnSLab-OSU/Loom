@@ -8,6 +8,7 @@
 #endif
 
 
+// Functions to print arbitrary number of elements at once
 
 template <typename... Types> 
 void LPrint(Types... vars) 
@@ -38,28 +39,6 @@ void LPrintlnAll(Types... vars)
 	#endif
 }
 
-// Macros for print or println up to 5 items at once
-
-/// LPrint X to Serial if LOOM_DEBUG enabled, no newline
-// #define LPrint(X)            (LOOM_DEBUG==0) ? :  Serial.print(X)
-// /// LPrint X to Serial if LOOM_DEBUG enabled, newline added
-// #define LPrintln(X)          (LOOM_DEBUG==0) ? :  Serial.println(X)
-// /// LPrint X,Y to Serial if LOOM_DEBUG enabled, no newline
-// #define LPrint(X,Y)         LPrint(X); LPrint(Y)
-// /// LPrint X,Y to Serial if LOOM_DEBUG enabled, newline added
-// #define LPrintln(X,Y)       LPrint(X); LPrintln(Y)
-// /// LPrint X,Y,Z to Serial if LOOM_DEBUG enabled, no newline
-// #define LPrint(X,Y,Z)       LPrint(X); LPrint(Y); LPrint(Z)
-// /// LPrint X,Y,Z to Serial if LOOM_DEBUG enabled, newline added
-// #define LPrintln(X,Y,Z)     LPrint(X); LPrint(Y); LPrintln(Z)
-// /// LPrint W,X,Y,Z to Serial if LOOM_DEBUG enabled, no newline
-// #define LPrint(W,X,Y,Z)     LPrint(W); LPrint(X); LPrint(Y); LPrint(Z)
-// /// LPrint W,X,Y,Z to Serial if LOOM_DEBUG enabled, newline added
-// #define LPrintln(W,X,Y,Z)   LPrint(W); LPrint(X); LPrint(Y); LPrintln(Z)
-// /// LPrint V,W,X,Y,Z to Serial if LOOM_DEBUG enabled, no newline
-// #define LPrint(V,W,X,Y,Z)   LPrint(V); LPrint(W); LPrint(X); LPrint(Y); LPrint(Z)
-// /// LPrint V,W,X,Y,Z to Serial if LOOM_DEBUG enabled, newline added
-// #define LPrintln(V,W,X,Y,Z) LPrint(V); LPrint(W); LPrint(X); LPrint(Y); LPrintln(Z)
 
 /// LPrint Hexadeximal number to Serial if LOOM_DEBUG enabled, no newline
 #define LPrint_Hex(X)      (LOOM_DEBUG==0) ? :  Serial.print(X, HEX)

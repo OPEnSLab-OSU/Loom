@@ -38,7 +38,7 @@ public:
 	LoomLogPlat(	
 			const char*		module_name,
 
-			bool			enable_rate_filter 	= true,
+			bool			enable_rate_filter 		= true,
 			uint			min_filter_delay 		= 1000
 	   );
 
