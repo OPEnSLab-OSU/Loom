@@ -62,7 +62,6 @@ public:
 
 	// General
 	virtual void	print_config() override;
-	virtual void	package(OSCBundle& bndl, char* suffix="") override;
 	virtual void	measure() {}
 	virtual bool	message_route(OSCMessage& msg, int address_offset) {}
 	virtual void 	package(JsonObject json) override;

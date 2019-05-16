@@ -83,14 +83,6 @@ void LoomModule::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
-// void LoomModule::package(OSCBundle* bndl)
-// {
-// 	char buf[20];
-// 	resolve_bundle_address(buf);
-// 	package(bndl, buf);
-// }
-
-/////////////////////////////////////////////////////////////////////
 // void LoomModule::resolve_bundle_prefix(char* prefix) 
 // {
 // 	if (device_manager != nullptr) {

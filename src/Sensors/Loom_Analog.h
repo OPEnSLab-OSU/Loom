@@ -111,10 +111,7 @@ public:
 	void		print_config() override;
 	void		print_measurements() override;
 	void		measure() override;
-	void		package(OSCBundle& bndl, char* suffix="") override;		 // This might be where analog conversions are applied
 	bool		message_route(OSCMessage& msg, int address_offset) override;
-
-
 	void 		package(JsonObject json);
 
 

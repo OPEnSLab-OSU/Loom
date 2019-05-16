@@ -54,12 +54,9 @@ void Loom_Relay::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Relay::package(OSCBundle& bndl, char* suffix)
+void Loom_Relay::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "Relay", on, NEW_MSG);
+	package_json(json, module_name, "state", on);
 }
 
 /////////////////////////////////////////////////////////////////////

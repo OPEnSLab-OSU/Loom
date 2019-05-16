@@ -118,17 +118,6 @@ void LoomRTC::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
-void LoomRTC::package(OSCBundle& bndl, char* suffix)
-{
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	read_rtc();
-	append_to_bundle(bndl, id_prefix, "DateString", datestring, NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "TimeString", timestring);
-}
-
-/////////////////////////////////////////////////////////////////////
 
 void LoomRTC::package(JsonObject json)
 {

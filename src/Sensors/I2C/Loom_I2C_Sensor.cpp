@@ -41,5 +41,4 @@ void LoomI2CSensor::adjust_module_name_with_port(int port)
 	snprintf(module_name, 20, "%s_%d", module_name, port); 
 }
 
-
 /////////////////////////////////////////////////////////////////////

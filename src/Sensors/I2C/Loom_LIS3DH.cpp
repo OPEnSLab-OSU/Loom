@@ -60,17 +60,6 @@ void Loom_LIS3DH::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_LIS3DH::package(OSCBundle& bndl, char* suffix)
-{
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "Accel_X", accel[0], NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "Accel_Y", accel[1]);
-	append_to_bundle(bndl, id_prefix, "Accel_Z", accel[2]);
-}
-
-/////////////////////////////////////////////////////////////////////
 
 void Loom_LIS3DH::package(JsonObject json)
 {

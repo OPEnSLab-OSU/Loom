@@ -59,7 +59,7 @@ public:
 	void		print_config() override;
 	void		print_measurements() override;
 	void		measure() override;
-	void		package(OSCBundle& bndl, char* suffix="") override;
+	void 		package(JsonObject json);
 
 	void		enable_bulb(bool enable);
 	// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
@@ -72,7 +72,6 @@ public:
 	// Time will be 2.8ms * [integration value]  (0-255), 50 is default
 	void		set_integration_time(byte time);
 
-	void 		package(JsonObject json);
 
 private:
 

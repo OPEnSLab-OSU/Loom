@@ -79,18 +79,6 @@ void Loom_TSL2591::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_TSL2591::package(OSCBundle& bndl, char* suffix)
-{
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-	
-	append_to_bundle(bndl, id_prefix, "Vis" , vis, NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "IR"  , ir);
-	append_to_bundle(bndl, id_prefix, "Full", full);
-
-}
-
-/////////////////////////////////////////////////////////////////////
 
 void Loom_TSL2591::package(JsonObject json)
 {

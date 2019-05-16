@@ -136,26 +136,6 @@ void Loom_ZXGesture::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_ZXGesture::package(OSCBundle& bndl, char* suffix)
-{
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	switch (mode) {
-		case ZXMode::ZX_POS : 
-			append_to_bundle(bndl, id_prefix, "zx", pos[0], NEW_MSG);
-			append_to_bundle(bndl, id_prefix, "zy", pos[1]);
-			break;
-		case ZXMode::ZX_GEST : 
-			append_to_bundle(bndl, id_prefix, "type" , gesture_type.c_str(), NEW_MSG);
-			append_to_bundle(bndl, id_prefix, "speed", (int)gesture_speed);
-			break; 
-	}
-}
-
-
-
-/////////////////////////////////////////////////////////////////////
 
 void Loom_ZXGesture::package(JsonObject json)
 {

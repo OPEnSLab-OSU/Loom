@@ -121,8 +121,6 @@ public:
 
 	// Subclasses can provide defaults for id_prefix, permitting package(&bndl);
 	/// Package a modules measurements or state.
-	virtual void	package(OSCBundle& bndl, char* suffix="") = 0;
-
 	virtual void 	package(JsonObject json) = 0;
 
 

@@ -86,12 +86,6 @@ void Loom_Neopixel::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::package(OSCBundle& bndl, char* suffix) 
-{
-
-}
-
-/////////////////////////////////////////////////////////////////////
 bool Loom_Neopixel::message_route(OSCMessage& msg, int address_offset) 
 {
 	// Set color

@@ -161,69 +161,6 @@ void Loom_Analog::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-// This might be where analog conversions are applied
-void Loom_Analog::package(OSCBundle& bndl, char* suffix)
-{	
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	// Add Battery Data
-	append_to_bundle(bndl, id_prefix, "VBat", battery, NEW_MSG);
-
-	char buf[10];
-	for (int i = 0; i < ANALOG_COUNT; i++) {
-		if (pin_enabled[i]) {
-			sprintf(buf, "%s%d", "A", i);
-
-			if ( (!enable_conversions) || (conversions[i] == AnalogConversion::NONE) ) {
-				append_to_bundle(bndl, id_prefix, buf, analog_vals[i]);
-			} else {
-				append_to_bundle(bndl, id_prefix, buf, convert(i, analog_vals[i]) );
-			}
-
-		}
-	}	
-}
-
-
-/////////////////////////////////////////////////////////////////////
-
-// Does not currently do multiple blocks of timestamped data
-
-// void Loom_Analog::package(JsonObject json)
-// {
-// 	JsonArray dataArray = json["contents"];
-// 	if (dataArray.isNull()) {
-// 		// LPrintln("Array is null");
-// 		dataArray = json.createNestedArray("contents");
-// 	}
-
-// 	JsonObject compenent = dataArray.createNestedObject();
-// 	compenent["name"] = module_name;
-
-// 	JsonArray data = compenent.createNestedArray("data"); 
-// 	JsonObject tmp;
-
-// 	tmp = data.createNestedObject();
-// 	tmp["Vbat"] = battery;
-
-// 	char buf[10];
-// 	for (int i = 0; i < ANALOG_COUNT; i++) {
-// 		if (pin_enabled[i]) {
-// 			sprintf(buf, "%s%d", "A", i);
-
-// 			if ( (!enable_conversions) || (conversions[i] == AnalogConversion::NONE) ) {
-// 				tmp = data.createNestedObject();
-// 				tmp[buf] = analog_vals[i];
-// 			} else {
-// 				tmp = data.createNestedObject();
-// 				tmp[buf] = convert(i, analog_vals[i]);
-// 			}
-// 		}
-// 	}	
-// }
-
-
 void Loom_Analog::package(JsonObject json)
 {
 	package_json(json, module_name, "Vbat", battery);
@@ -241,10 +178,6 @@ void Loom_Analog::package(JsonObject json)
 		}
 	}	
 }
-
-
-
-/////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
 bool Loom_Analog::message_route(OSCMessage& msg, int address_offset) 

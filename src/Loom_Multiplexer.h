@@ -108,11 +108,10 @@ public:
 	void		print_config();
 	void		print_state();
 	void		measure();
-	void		package(OSCBundle& bndl, char* suffix="");
+	void 		package(JsonObject json);
 	bool		message_route(OSCMessage& msg, int address_offset);
 	void		print_measurements();
 
-	void 		package(JsonObject json);
 
 
 	/// Populate a bundle with a list of sensors currently attached

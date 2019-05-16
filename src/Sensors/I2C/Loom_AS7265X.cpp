@@ -142,63 +142,8 @@ void Loom_AS7265X::measure()
 	nir[5] = inst_AS7265X.getCalibratedW();
 }
 
-/////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::package(OSCBundle& bndl, char* suffix)
-{
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	// UV
-	append_to_bundle(bndl, id_prefix, "a", uv[0], NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "b", uv[1]);
-	append_to_bundle(bndl, id_prefix, "c", uv[2]);
-	append_to_bundle(bndl, id_prefix, "d", uv[3]);
-	append_to_bundle(bndl, id_prefix, "e", uv[4]);
-	append_to_bundle(bndl, id_prefix, "f", uv[5]);
-	// Color
-	append_to_bundle(bndl, id_prefix, "g", color[0]); 
-	append_to_bundle(bndl, id_prefix, "h", color[1]); 
-	append_to_bundle(bndl, id_prefix, "i", color[2]); 
-	append_to_bundle(bndl, id_prefix, "j", color[3]); 
-	append_to_bundle(bndl, id_prefix, "k", color[4]); 
-	append_to_bundle(bndl, id_prefix, "l", color[5]); 
-
-	// NIR
-	append_to_bundle(bndl, id_prefix, "r", nir[0]);
-	append_to_bundle(bndl, id_prefix, "s", nir[1]);
-	append_to_bundle(bndl, id_prefix, "t", nir[2]);
-	append_to_bundle(bndl, id_prefix, "u", nir[3]);
-	append_to_bundle(bndl, id_prefix, "v", nir[4]);
-	append_to_bundle(bndl, id_prefix, "w", nir[5]);
-
-}
 
 /////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::enable_bulb(bool e)
-{
-	use_bulb = e;
-}
-
-/////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::set_gain(byte gain) 
-{
-	inst_AS7265X.setGain(gain);
-}
-
-/////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::set_mode(byte mode) 
-{
-	inst_AS7265X.setMeasurementMode(mode);
-}
-
-/////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::set_integration_time(byte time) 
-{
-	inst_AS7265X.setIntegrationCycles(time);
-}
-
-/////////////////////////////////////////////////////////////////////
-
 void Loom_AS7265X::package(JsonObject json)
 {
 	package_json(json, module_name, 
@@ -229,5 +174,25 @@ void Loom_AS7265X::package(JsonObject json)
 }
 
 /////////////////////////////////////////////////////////////////////
+void Loom_AS7265X::enable_bulb(bool e)
+{
+	use_bulb = e;
+}
 
+/////////////////////////////////////////////////////////////////////
+void Loom_AS7265X::set_gain(byte gain) 
+{
+	inst_AS7265X.setGain(gain);
+}
 
+/////////////////////////////////////////////////////////////////////
+void Loom_AS7265X::set_mode(byte mode) 
+{
+	inst_AS7265X.setMeasurementMode(mode);
+}
+
+/////////////////////////////////////////////////////////////////////
+void Loom_AS7265X::set_integration_time(byte time) 
+{
+	inst_AS7265X.setIntegrationCycles(time);
+}

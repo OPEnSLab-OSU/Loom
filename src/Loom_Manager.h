@@ -11,6 +11,7 @@
 
 #include "Loom_Misc.h"
 #include "Loom_Translator.h"
+#include <ArduinoJson.h>
 
 // #include "Actuators/Loom_Relay_Stub.h"
 
@@ -299,8 +300,9 @@ public:
 
 
 	void		measure();  
-	void		package();
-	void		package(OSCBundle& bndl);
+	// void		package();
+	// void		package(OSCBundle& bndl);
+	void		package(JsonObject json);
 
 	void		print_current_bundle();
 
@@ -477,7 +479,7 @@ private:
 	void		add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
 	void		list_modules_aux(LoomModule** modules, uint len, char* module_type);
 	void		measure_aux(LoomModule** modules, uint len);
-	void		package_aux(LoomModule** modules, uint len);
+	void		package_aux(JsonObject json, LoomModule** modules, uint len);
 
 	LoomModule*	find_module(ModuleType type, int idx, LoomModule** modules, int count);
 

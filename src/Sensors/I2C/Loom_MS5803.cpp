@@ -52,16 +52,6 @@ void Loom_MS5803::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_MS5803::package(OSCBundle& bndl, char* suffix)
-{
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "Pressure", pressure, NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "Temp"    , temp);
-}
-
-/////////////////////////////////////////////////////////////////////
 
 void Loom_MS5803::package(JsonObject json)
 {

@@ -83,17 +83,6 @@ void Loom_TSL2561::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_TSL2561::package(OSCBundle& bndl, char* suffix)
-{
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "LightIR", lightIR, NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "LightFull", lightFull);
-}
-
-
-/////////////////////////////////////////////////////////////////////
 
 void Loom_TSL2561::package(JsonObject json)
 {

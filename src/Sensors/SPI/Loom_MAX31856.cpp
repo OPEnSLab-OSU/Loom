@@ -94,15 +94,6 @@ void Loom_MAX31856::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_MAX31856::package(OSCBundle& bndl, char* suffix) 
-{
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "Temp", temperature, NEW_MSG);
-}
-
-/////////////////////////////////////////////////////////////////////
 
 void Loom_MAX31856::package(JsonObject json)
 {

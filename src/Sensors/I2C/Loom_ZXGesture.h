@@ -61,8 +61,6 @@ public:
 	void		print_config() override;
 	void		print_measurements() override;
 	void		measure() override;
-	void		package(OSCBundle& bndl, char* suffix="") override;
-
 	void 		package(JsonObject json);
 
 private:

@@ -62,23 +62,8 @@ void Loom_FXOS8700::measure()
 	mag[2] = mevent.magnetic.z;
 }
 
-/////////////////////////////////////////////////////////////////////
-void Loom_FXOS8700::package(OSCBundle& bndl, char* suffix)
-{
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "ax", accel[0], NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "ay", accel[1]);
-	append_to_bundle(bndl, id_prefix, "az", accel[2]);
-
-	append_to_bundle(bndl, id_prefix, "mx", mag[0]);
-	append_to_bundle(bndl, id_prefix, "my", mag[1]);
-	append_to_bundle(bndl, id_prefix, "mz", mag[2]);
-}
 
 /////////////////////////////////////////////////////////////////////
-
 void Loom_FXOS8700::package(JsonObject json)
 {
 	package_json(json, module_name, 

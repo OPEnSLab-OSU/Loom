@@ -56,18 +56,6 @@ void Loom_FXAS21002::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_FXAS21002::package(OSCBundle& bndl, char* suffix)
-{
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "gx", gyro[0], NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "gy", gyro[1]);
-	append_to_bundle(bndl, id_prefix, "gz", gyro[2]);
-}
-
-/////////////////////////////////////////////////////////////////////
-
 void Loom_FXAS21002::package(JsonObject json)
 {
 	package_json(json, module_name, 

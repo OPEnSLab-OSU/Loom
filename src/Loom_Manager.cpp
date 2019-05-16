@@ -426,16 +426,6 @@ void LoomManager::measure_aux(LoomModule** modules, uint len)
 }
 
 /////////////////////////////////////////////////////////////////////
-void LoomManager::package_aux(LoomModule** modules, uint len)
-{
-	for (int i = 0; i < len; i++) {
-		if ( (modules[i] != nullptr) && ( modules[i]->get_active() ) ){
-			modules[i]->package( bundle );
-		}
-	}	
-}
-
-/////////////////////////////////////////////////////////////////////
 void LoomManager::measure()
 {
 	measure_aux( (LoomModule**)sensor_modules   , sensor_count ); 
@@ -443,27 +433,52 @@ void LoomManager::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void LoomManager::package() 
+void LoomManager::package_aux(JsonObject json, LoomModule** modules, uint len)
 {
-	bundle.empty();
+	for (int i = 0; i < len; i++) {
+		if ( (modules[i] != nullptr) && ( modules[i]->get_active() ) ){
+			modules[i]->package( json );
+		}
+	}	
+}
 
-	package_aux( (LoomModule**)other_modules    , other_module_count ); 
-	package_aux( (LoomModule**)sensor_modules   , sensor_count ); 
+// /////////////////////////////////////////////////////////////////////
+// void LoomManager::package() 
+// {
+// 	bundle.empty();
+
+// 	package_aux( (LoomModule**)other_modules    , other_module_count ); 
+// 	package_aux( (LoomModule**)sensor_modules   , sensor_count ); 
+
+// 	if (package_verbosity == Verbosity::V_HIGH) {
+// 		package_aux( (LoomModule**)actuator_modules , actuator_count ); 
+// 		package_aux( (LoomModule**)rtc_module      , 1 ); 
+// 		package_aux( (LoomModule**)comm_modules     , comm_count ); 
+// 		package_aux( (LoomModule**)log_modules      , log_count );		
+// 	}
+// }
+
+/////////////////////////////////////////////////////////////////////
+void LoomManager::package(JsonObject json) 
+{
+	package_aux( json, (LoomModule**)other_modules    , other_module_count ); 
+	package_aux( json, (LoomModule**)sensor_modules   , sensor_count ); 
 
 	if (package_verbosity == Verbosity::V_HIGH) {
-		package_aux( (LoomModule**)actuator_modules , actuator_count ); 
-		package_aux( (LoomModule**)rtc_module      , 1 ); 
-		package_aux( (LoomModule**)comm_modules     , comm_count ); 
-		package_aux( (LoomModule**)log_modules      , log_count );		
+		package_aux( json, (LoomModule**)actuator_modules , actuator_count ); 
+		package_aux( json, (LoomModule**)rtc_module       , 1 ); 
+		package_aux( json, (LoomModule**)comm_modules     , comm_count ); 
+		package_aux( json, (LoomModule**)log_modules      , log_count );		
 	}
 }
 
-/////////////////////////////////////////////////////////////////////
-void LoomManager::package(OSCBundle& bndl) 
-{
-	package();
-	deep_copy_bundle(bundle, bndl);
-}
+// /////////////////////////////////////////////////////////////////////
+// void LoomManager::package(OSCBundle& bndl) 
+// {
+// 	package();
+// 	deep_copy_bundle(bundle, bndl);
+// }
+
 
 /////////////////////////////////////////////////////////////////////
 void LoomManager::print_current_bundle() 

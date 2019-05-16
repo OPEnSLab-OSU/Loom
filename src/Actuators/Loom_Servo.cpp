@@ -61,7 +61,7 @@ void Loom_Servo::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Servo::package(OSCBundle& bndl, char* suffix)
+void Loom_Servo::package(JsonObject json)
 {
 	char id_prefix[30]; 
 	resolve_bundle_address(id_prefix, "Positions");
@@ -69,10 +69,7 @@ void Loom_Servo::package(OSCBundle& bndl, char* suffix)
 	char tmp[8];
 	for (int i = 0; i < servo_count; i++) {
 		sprintf(tmp, "Servo%d", i);
-		if (i == 0) {
-			append_to_bundle(bndl, id_prefix, tmp, positions[i], NEW_MSG); 
-		}
-		append_to_bundle(bndl, id_prefix, tmp, positions[i]);
+		package_json(json, module_name, tmp, positions[i]);
 	}
 }
 

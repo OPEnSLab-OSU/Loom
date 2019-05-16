@@ -194,20 +194,6 @@ void Loom_Multiplexer::print_measurements()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::package(OSCBundle& bndl, char* suffix)
-{
-	for (uint8_t i = 0; i < num_ports; i++) {
-		if (sensors[i] != NULL) {
-			tca_select(i);
-			char tmp[4];
-			itoa(i, tmp, 10);
-			sensors[i]->package(bndl, tmp);
-		} 
-	}
-}
-
-
-/////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::package(JsonObject json)
 {
 	for (uint8_t i = 0; i < num_ports; i++) {

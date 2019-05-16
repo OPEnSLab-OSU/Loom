@@ -70,11 +70,7 @@ void LoomCommPlat::print_config()
 	LPrintln('\t', "Compress Messages   : ", (compress_messages) ? "Enabled" : "Disabled" );
 }
 
-/////////////////////////////////////////////////////////////////////
-void LoomCommPlat::package(OSCBundle& bndl, char* suffix) 
-{
 
-}
 
 /////////////////////////////////////////////////////////////////////
 
