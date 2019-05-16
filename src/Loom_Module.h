@@ -1,6 +1,6 @@
-
-#ifndef LOOM_MODULE_h
-#define LOOM_MODULE_h
+#pragma once
+// #ifndef LOOM_MODULE_h
+// #define LOOM_MODULE_h
 
 #include "Loom_Manager.h"
 
@@ -10,6 +10,9 @@
 
 #include <OSCBundle.h>
 #include <ArduinoJson.h>
+
+
+
 
 
 
@@ -215,7 +218,7 @@ private:
 };
 
 
-#endif
+// #endif
 
 
 

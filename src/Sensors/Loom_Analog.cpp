@@ -1,6 +1,7 @@
 
 #include "Loom_Analog.h"
 
+// #include "Loom_Package.h"
 
 // FlashStorage(analog_flash_config, AnalogConfig);
 
@@ -53,9 +54,6 @@ Loom_Analog::Loom_Analog(
 {
 	this->module_type = ModuleType::Analog;
 
-	// LPrintln("Loom_Analog Constructor");
-
-
 	// Set Analog Read Resolution
 	this->read_resolution = read_resolution;
 	analogReadResolution(this->read_resolution);
@@ -89,7 +87,6 @@ Loom_Analog::Loom_Analog(
 	conversions[3] = convertA3;
 	conversions[4] = convertA4;
 	conversions[5] = convertA5;
-
 
 
 	// print_config_struct();
@@ -187,6 +184,67 @@ void Loom_Analog::package(OSCBundle& bndl, char* suffix)
 		}
 	}	
 }
+
+
+/////////////////////////////////////////////////////////////////////
+
+// Does not currently do multiple blocks of timestamped data
+
+// void Loom_Analog::package(JsonObject json)
+// {
+// 	JsonArray dataArray = json["contents"];
+// 	if (dataArray.isNull()) {
+// 		// LPrintln("Array is null");
+// 		dataArray = json.createNestedArray("contents");
+// 	}
+
+// 	JsonObject compenent = dataArray.createNestedObject();
+// 	compenent["name"] = module_name;
+
+// 	JsonArray data = compenent.createNestedArray("data"); 
+// 	JsonObject tmp;
+
+// 	tmp = data.createNestedObject();
+// 	tmp["Vbat"] = battery;
+
+// 	char buf[10];
+// 	for (int i = 0; i < ANALOG_COUNT; i++) {
+// 		if (pin_enabled[i]) {
+// 			sprintf(buf, "%s%d", "A", i);
+
+// 			if ( (!enable_conversions) || (conversions[i] == AnalogConversion::NONE) ) {
+// 				tmp = data.createNestedObject();
+// 				tmp[buf] = analog_vals[i];
+// 			} else {
+// 				tmp = data.createNestedObject();
+// 				tmp[buf] = convert(i, analog_vals[i]);
+// 			}
+// 		}
+// 	}	
+// }
+
+
+void Loom_Analog::package(JsonObject json)
+{
+	package_json(json, module_name, "Vbat", battery);
+
+	char buf[10];
+	for (int i = 0; i < ANALOG_COUNT; i++) {
+		if (pin_enabled[i]) {
+			sprintf(buf, "%s%d", "A", i);
+
+			package_json(json, module_name, buf, 
+				( (!enable_conversions) || (conversions[i] == AnalogConversion::NONE) ) 
+				? analog_vals[i]
+				: convert(i, analog_vals[i])
+			);
+		}
+	}	
+}
+
+
+
+/////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
 bool Loom_Analog::message_route(OSCMessage& msg, int address_offset) 

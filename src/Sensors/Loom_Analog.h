@@ -84,7 +84,6 @@ public:
 	/// \param[in]	convertA3			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A3
 	/// \param[in]	convertA4			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A4
 	/// \param[in]	convertA5			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A5
-
 	Loom_Analog(
 			const char*			module_name			= "Analog",
 			uint8_t				num_samples			= 8,
@@ -114,6 +113,9 @@ public:
 	void		measure() override;
 	void		package(OSCBundle& bndl, char* suffix="") override;		 // This might be where analog conversions are applied
 	bool		message_route(OSCMessage& msg, int address_offset) override;
+
+
+	void package(JsonObject json);
 
 
 	/// Set the analog read resolution

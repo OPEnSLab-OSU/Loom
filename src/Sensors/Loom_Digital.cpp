@@ -147,6 +147,29 @@ void Loom_Digital::package(OSCBundle& bndl, char* suffix)
 }
 
 /////////////////////////////////////////////////////////////////////
+
+void Loom_Digital::package(JsonObject json)
+{
+	char buf[3];
+
+	// 5,6,9,10,11,12
+	for (int i = 0; i < 6; i++) { 
+		if (pin_enabled[i]) {
+			sprintf(buf, "%d", pin_nums[i]);
+			package_json(json, module_name, buf, digital_vals[i]);
+		}
+	}
+	// A0-A5
+	for (int i = 0; i < 6; i++) { 
+		if (pin_enabled[i+6]) {
+			sprintf(buf, "%s%d", "A", i);
+			package_json(json, module_name, buf, digital_vals[i+6]);
+		}
+	}
+
+}
+
+/////////////////////////////////////////////////////////////////////
 bool Loom_Digital::message_route(OSCMessage& msg, int address_offset)
 {
 

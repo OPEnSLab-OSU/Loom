@@ -70,6 +70,9 @@ public:
 	void		package(OSCBundle& bndl, char* suffix="") override;
 	bool		message_route(OSCMessage& msg, int address_offset) override;
 
+	void package(JsonObject json);
+
+
 
 	/// Get value on digital pin
 	/// \return		True if HIGH, false if LOW
