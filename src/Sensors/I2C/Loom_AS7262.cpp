@@ -120,4 +120,20 @@ void Loom_AS7262::set_integration_time(byte time)
 	inst_AS7262.setIntegrationTime(time);
 }
 
+/////////////////////////////////////////////////////////////////////
+
+void Loom_AS7262::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		"Violet",	color_vals[0],
+		"Blue",		color_vals[1],
+		"Green",	color_vals[2],
+		"Yellow",	color_vals[3],
+		"Orange",	color_vals[4],
+		"Red",		color_vals[5]
+	);
+}
+
+/////////////////////////////////////////////////////////////////////
+
 

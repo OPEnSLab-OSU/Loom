@@ -49,3 +49,13 @@ void Loom_Decagon5TM::package(OSCBundle& bndl, char* suffix)
 
 }
 
+/////////////////////////////////////////////////////////////////////
+
+void Loom_Decagon5TM::package(JsonObject json)
+{
+	// package_json(json, module_name, "Temp", temperature);
+}
+
+/////////////////////////////////////////////////////////////////////
+
+

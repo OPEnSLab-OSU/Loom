@@ -63,6 +63,9 @@ public:
 	void		package(OSCBundle& bndl, char* suffix="") override;
 	bool		message_route(OSCMessage& msg, int address_offset) {}
 
+	void 		package(JsonObject json);
+
+
 private:
 
 

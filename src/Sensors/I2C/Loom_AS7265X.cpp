@@ -196,3 +196,38 @@ void Loom_AS7265X::set_integration_time(byte time)
 {
 	inst_AS7265X.setIntegrationCycles(time);
 }
+
+/////////////////////////////////////////////////////////////////////
+
+void Loom_AS7265X::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		// UV
+		"a", uv[0],
+		"b", uv[1],
+		"c", uv[2],
+		"d", uv[3],
+		"e", uv[4],
+		"f", uv[5],
+
+		// Color
+		"g", color[0],
+		"h", color[1],
+		"i", color[2],
+		"j", color[3],
+		"k", color[4],
+		"l", color[5],
+
+		// NIR
+		"r", nir[0],
+		"s", nir[1],
+		"t", nir[2],
+		"u", nir[3],
+		"v", nir[4],
+		"w", nir[5]
+	);
+}
+
+/////////////////////////////////////////////////////////////////////
+
+

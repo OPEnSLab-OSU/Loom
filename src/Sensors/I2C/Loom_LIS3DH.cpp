@@ -70,4 +70,18 @@ void Loom_LIS3DH::package(OSCBundle& bndl, char* suffix)
 	append_to_bundle(bndl, id_prefix, "Accel_Z", accel[2]);
 }
 
+/////////////////////////////////////////////////////////////////////
+
+void Loom_LIS3DH::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		// Acceleration
+		"ax", accel[0],
+		"ay", accel[1],
+		"az", accel[2]
+	);
+}
+
+/////////////////////////////////////////////////////////////////////
+
 

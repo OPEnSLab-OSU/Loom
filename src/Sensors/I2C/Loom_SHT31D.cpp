@@ -66,3 +66,15 @@ void Loom_SHT31D::package(OSCBundle& bndl, char* suffix)
 }
 
 
+/////////////////////////////////////////////////////////////////////
+
+void Loom_SHT31D::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		"Temp",		temp,
+		"Humid",	humid
+	);
+}
+
+/////////////////////////////////////////////////////////////////////
+

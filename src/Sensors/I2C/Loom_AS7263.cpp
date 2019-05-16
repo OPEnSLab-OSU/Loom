@@ -118,3 +118,21 @@ void Loom_AS7263::set_integration_time(byte time)
 {
 	inst_AS7263.setIntegrationTime(time);
 }
+
+/////////////////////////////////////////////////////////////////////
+
+void Loom_AS7263::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		"NIR_R",	nir_vals[0],
+		"NIR_S",	nir_vals[1],
+		"NIR_T",	nir_vals[2],
+		"NIR_U",	nir_vals[3],
+		"NIR_V",	nir_vals[4],
+		"NIR_W",	nir_vals[5]
+	);
+}
+
+/////////////////////////////////////////////////////////////////////
+
+

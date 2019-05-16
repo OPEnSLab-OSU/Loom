@@ -129,6 +129,17 @@ void LoomRTC::package(OSCBundle& bndl, char* suffix)
 }
 
 /////////////////////////////////////////////////////////////////////
+
+void LoomRTC::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		"Date", datestring,
+		"Time", timestring
+	);
+}
+
+
+/////////////////////////////////////////////////////////////////////
 void LoomRTC::print_time(bool verbose)
 {
 	read_rtc();

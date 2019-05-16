@@ -121,6 +121,7 @@ public:
 	void		print_state() override;
 	void		measure() {}
 	void		package(OSCBundle& bndl, char* suffix="") {}
+	void 		package(JsonObject json) {}
 	bool		message_route(OSCMessage& msg, int address_offset) {}
 
 	void 		link_device_manager(LoomManager* LM);

@@ -52,6 +52,7 @@ const byte Loom_Multiplexer::known_addresses[] =
 /////////////////////////////////////////////////////////////////////
 LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 {
+
 	switch (i2c_address) {
 		case 0x10 : return new Loom_ZXGesture(i2c_address=0x10);	// ZXGesture
 		case 0x11 : return new Loom_ZXGesture(i2c_address=0x11);	// ZXGesture
@@ -205,6 +206,20 @@ void Loom_Multiplexer::package(OSCBundle& bndl, char* suffix)
 	}
 }
 
+
+/////////////////////////////////////////////////////////////////////
+void Loom_Multiplexer::package(JsonObject json)
+{
+	for (uint8_t i = 0; i < num_ports; i++) {
+		if (sensors[i] != NULL) {
+			tca_select(i);
+			char tmp[4];
+			itoa(i, tmp, 10);
+			sensors[i]->package(json);
+		} 
+	}
+}
+
 /////////////////////////////////////////////////////////////////////
 bool Loom_Multiplexer::message_route(OSCMessage& msg, int address_offset)
 {
@@ -306,6 +321,9 @@ void Loom_Multiplexer::refresh_sensors()
 			sensors[i] = generate_sensor_object(current);
 
 			if (sensors[i] != NULL) {
+
+				sensors[i]->adjust_module_name_with_port(i);
+
 				// Make sure sensor is also linked to DeviceManager
 				sensors[i]->link_device_manager(device_manager);
 				// device_manager->add_module(sensors[i]);

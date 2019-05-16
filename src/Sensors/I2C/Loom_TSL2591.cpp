@@ -90,5 +90,17 @@ void Loom_TSL2591::package(OSCBundle& bndl, char* suffix)
 
 }
 
+/////////////////////////////////////////////////////////////////////
+
+void Loom_TSL2591::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		"Vis",	vis,
+		"IR",	ir,
+		"Full",	full
+	);
+}
+
+/////////////////////////////////////////////////////////////////////
 
 

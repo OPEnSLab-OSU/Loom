@@ -31,6 +31,7 @@ public:
 	virtual void	measure() = 0;
 	virtual void	package(OSCBundle& bndl, char* suffix="") = 0;
 	virtual bool	message_route(OSCMessage& msg, int address_offset) {};
+	virtual void 	package(JsonObject json) = 0;
 
 private:
 

@@ -102,4 +102,14 @@ void Loom_MAX31856::package(OSCBundle& bndl, char* suffix)
 	append_to_bundle(bndl, id_prefix, "Temp", temperature, NEW_MSG);
 }
 
+/////////////////////////////////////////////////////////////////////
+
+void Loom_MAX31856::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		"Temp", temperature
+	);
+}
+
+/////////////////////////////////////////////////////////////////////
 

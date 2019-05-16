@@ -61,4 +61,15 @@ void Loom_MS5803::package(OSCBundle& bndl, char* suffix)
 	append_to_bundle(bndl, id_prefix, "Temp"    , temp);
 }
 
+/////////////////////////////////////////////////////////////////////
+
+void Loom_MS5803::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		"Pressure",	pressure,
+		"Temp",		temp
+	);
+}
+
+/////////////////////////////////////////////////////////////////////
 

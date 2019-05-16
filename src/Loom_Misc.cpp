@@ -3,10 +3,6 @@
 #include "Loom_Macros.h"
 
 
-void func() {} // termination version
-void package_json(JsonObject json, const char* module_name) {} // termination version
-void package_json_aux(JsonArray data) {} // termination version
-
 
 /////////////////////////////////////////////////////////////////////
 void print_array(String data [], int len, int format)

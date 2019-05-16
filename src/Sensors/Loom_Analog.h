@@ -115,7 +115,7 @@ public:
 	bool		message_route(OSCMessage& msg, int address_offset) override;
 
 
-	void package(JsonObject json);
+	void 		package(JsonObject json);
 
 
 	/// Set the analog read resolution

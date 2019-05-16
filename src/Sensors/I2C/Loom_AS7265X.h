@@ -76,6 +76,9 @@ public:
 	//If you use Mode 2 or 3 (all the colors) then integration time is double. 140*2 = 280ms between readings.
 	void		set_integration_time(byte time);
 
+	void 		package(JsonObject json);
+
+
 private:
 
 };

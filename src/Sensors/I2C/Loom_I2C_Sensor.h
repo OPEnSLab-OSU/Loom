@@ -35,6 +35,11 @@ public:
 	/// \return	The sensor's I2C address
 	byte			get_i2c_address(); 	
 
+	virtual void 	package(JsonObject json) = 0;
+	
+	void			adjust_module_name_with_port(int port);
+
+
 private:
 
 };

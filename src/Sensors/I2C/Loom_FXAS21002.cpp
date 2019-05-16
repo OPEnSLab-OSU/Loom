@@ -66,4 +66,19 @@ void Loom_FXAS21002::package(OSCBundle& bndl, char* suffix)
 	append_to_bundle(bndl, id_prefix, "gz", gyro[2]);
 }
 
+/////////////////////////////////////////////////////////////////////
+
+void Loom_FXAS21002::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		"gx", gyro[0],
+		"gy", gyro[1],
+		"gz", gyro[2]
+
+	);
+}
+
+/////////////////////////////////////////////////////////////////////
+
+
 

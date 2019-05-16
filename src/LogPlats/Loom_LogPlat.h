@@ -55,6 +55,7 @@ public:
 	virtual void	measure();
 	virtual bool	message_route(OSCMessage& msg, int address_offset);
 	virtual void	log_bundle(OSCBundle& bndl) = 0;
+	virtual void 	package(JsonObject json) override;
 
 private:
 

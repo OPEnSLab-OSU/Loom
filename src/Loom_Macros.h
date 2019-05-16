@@ -37,8 +37,6 @@ template <typename... Types>
 void LPrint(Types... vars) 
 {
 	#if LOOM_DEBUG == 1
-		// using expand_type = int[];
-		// expand_type{ (Serial.print(vars), 0)... };
 		VARIADIC_EXPAND(Serial.print(vars));
 	#endif
 }
@@ -47,8 +45,6 @@ template <typename... Types>
 void LPrintln(Types... vars) 
 {		
 	#if LOOM_DEBUG == 1
-		// using expand_type = int[];
-		// expand_type{ (Serial.print(vars), 0)... };
 		VARIADIC_EXPAND(Serial.print(vars));
 		Serial.println();
 	#endif
@@ -58,8 +54,6 @@ template <typename... Types>
 void LPrintlnAll(Types... vars) 
 {
 	#if LOOM_DEBUG == 1
-		// using expand_type = int[];
-		// expand_type{ (Serial.println(vars), 0)... };
 		VARIADIC_EXPAND(Serial.println(vars));
 		Serial.println();
 	#endif

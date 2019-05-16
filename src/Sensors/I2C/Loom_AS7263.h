@@ -73,6 +73,8 @@ public:
 	// Time will be 2.8ms * [integration value]  (0-255), 50 is default
 	void		set_integration_time(byte time);
 
+	void 		package(JsonObject json);
+
 private:
 
 };

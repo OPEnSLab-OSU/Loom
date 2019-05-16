@@ -91,3 +91,18 @@ void Loom_TSL2561::package(OSCBundle& bndl, char* suffix)
 	append_to_bundle(bndl, id_prefix, "LightIR", lightIR, NEW_MSG);
 	append_to_bundle(bndl, id_prefix, "LightFull", lightFull);
 }
+
+
+/////////////////////////////////////////////////////////////////////
+
+void Loom_TSL2561::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		"IR",	lightIR,
+		"Full",	lightFull
+	);
+}
+
+/////////////////////////////////////////////////////////////////////
+
+

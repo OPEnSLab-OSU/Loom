@@ -112,6 +112,9 @@ public:
 	bool		message_route(OSCMessage& msg, int address_offset);
 	void		print_measurements();
 
+	void 		package(JsonObject json);
+
+
 	/// Populate a bundle with a list of sensors currently attached
 	/// \param[out]	bndl	Bundle to populate with sensor list
 	void		get_sensor_list(OSCBundle& bndl);

@@ -152,3 +152,32 @@ void Loom_ZXGesture::package(OSCBundle& bndl, char* suffix)
 			break; 
 	}
 }
+
+
+
+/////////////////////////////////////////////////////////////////////
+
+void Loom_ZXGesture::package(JsonObject json)
+{
+	switch (mode) {
+		case ZXMode::ZX_POS : 		
+			package_json(json, module_name, 
+				"zx",	pos[0],
+				"zy",	pos[1]
+			);
+
+			break;
+		case ZXMode::ZX_GEST : 
+			package_json(json, module_name, 
+				"type",		gesture_type.c_str(),
+				"speed",	(int)gesture_speed
+			);
+			break; 
+	}
+
+}
+
+/////////////////////////////////////////////////////////////////////
+
+
+
