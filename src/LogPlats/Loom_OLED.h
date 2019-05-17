@@ -97,8 +97,8 @@ public:
 
 	void			print_config() override;
 
-	void			log_bundle(OSCBundle& bndl);
-	void			log_bundle(OSCBundle& bndl, OLED_Format format);
+	void			log(OSCBundle& bndl);
+	void			log(JsonObject json);
 
 
 	/// Set the OLED display organization.

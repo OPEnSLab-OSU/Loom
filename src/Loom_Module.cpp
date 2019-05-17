@@ -70,8 +70,8 @@ void LoomModule::print_config()
 	print_module_label();
 	LPrintln("Config:");
 	LPrintln('\t', "Module Active       : ", (active)      ? "Enabled" : "Disabled" );
-	LPrintln('\t', "LPrint Debug         : ", (print_debug) ? "Enabled" : "Disabled" );
-	LPrintln('\t', "LPrint Verbosity     : ", enum_verbosity_string(print_verbosity) );
+	LPrintln('\t', "Print Debug         : ", (print_debug) ? "Enabled" : "Disabled" );
+	LPrintln('\t', "Print Verbosity     : ", enum_verbosity_string(print_verbosity) );
 	LPrintln('\t', "Package Verbosity   : ", enum_verbosity_string(package_verbosity) );
 }
 

@@ -23,18 +23,17 @@ Loom_SD::Loom_SD(
 	LPrintln("SD Setup");
 
 	this->chip_select  = chip_select;
-	strcpy(this->default_file, default_file);
+	snprintf(this->default_file, 16, "%s", default_file);
 
 	// // Remove the #if if you are using a LoRa M0, but don't have LoRa enabled
 	// #if is_lora == 1
-	// 	digitalWrite(8, HIGH); 	// if using LoRa
+	digitalWrite(8, HIGH); 	// if using LoRa
 	// #endif
 
 	sd_found = SD.begin(chip_select);
-	print_module_label();
+
+	print_module_label();	
 	LPrintln("Initialize ", (sd_found) ? "sucessful" : "failed (will continue, but SD functions will be skipped)");
-
-
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -88,7 +87,7 @@ LoomRTC* Loom_SD::get_RTC_module()
 /////////////////////////////////////////////////////////////////////
 void Loom_SD::set_default_file(char* filename) 
 { 
-	default_file = filename; 
+	snprintf(this->default_file, 16, "%s", default_file); 
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -157,10 +156,17 @@ bool Loom_SD::dump_file(char* file)
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_SD::log_bundle(OSCBundle& bndl) 
+void Loom_SD::log(OSCBundle& bndl) 
 {
 	save_bundle(bndl, default_file, 3);
 }
+
+/////////////////////////////////////////////////////////////////////
+void Loom_SD::log(JsonObject json) 
+{
+	save_json(json, default_file, 3);
+}
+
 
 
 /////////////////////////////////////////////////////////////////////
@@ -179,6 +185,98 @@ bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
 
 	return status;
 }
+
+
+
+/////////////////////////////////////////////////////////////////////
+
+// Note that timestamp implementation may change with blocks of data in json
+
+	// Format:
+	// Date Time ModuleA key1 val1 key2 val2 ... ModuleB key1 val1 ...   
+
+
+bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
+{
+	if ( !sd_found || !check_millis() ) return false;
+
+	digitalWrite(8, HIGH); 
+
+	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
+	File SDFile = SD.open(file, FILE_WRITE);
+
+	if (!SDFile) {
+		LPrintln("Error opening: ", file);
+		return false;
+	} 
+
+	JsonObject timestamp = json["timestamp"];
+	JsonArray  contents  = json["contents"];
+	
+	// Don't log if no data
+	if (contents.isNull()) return false;
+
+	if (!timestamp.isNull()) {
+		// Save timestamp
+	}
+
+	// Create Header
+	if ( SDFile.position() == 0) {
+		for (JsonObject module : contents) {
+
+			// LPrint(module["module"].as<const char*>());
+			// LPrint(",");
+			SDFile.print(module["module"].as<const char*>());
+			SDFile.print(",");
+
+			JsonObject data = module["data"];
+			if (data.isNull()) continue;
+
+			for (JsonPair dataPoint : data) {
+				SDFile.print(dataPoint.key().c_str());
+				SDFile.print(',');
+			}
+		}
+		// LPrintln();
+		SDFile.println();
+	}
+
+
+	for (JsonObject module : contents) {
+		// LPrint(",");
+		SDFile.print(",");
+
+		JsonObject data = module["data"];
+		if (data.isNull()) continue;
+
+		for (JsonPair dataPoint : data) {
+			JsonVariant val = dataPoint.value();
+			if (val.is<int>()) {
+				// LPrint(dataPoint.value().as<int>());
+				SDFile.print(dataPoint.value().as<int>());
+			} else if (val.is<bool>()) {
+				// LPrint(dataPoint.value().as<bool>());								
+				SDFile.print(dataPoint.value().as<bool>());								
+			} else if (val.is<float>()) {
+				// LPrint(dataPoint.value().as<float>());				
+				SDFile.print(dataPoint.value().as<float>());				
+			} else if (val.is<char*>() || val.is<const char*>() ) {
+				// LPrint(dataPoint.value().as<const char*>());
+				SDFile.print(dataPoint.value().as<const char*>());
+			} 
+			// LPrint(",");		
+			SDFile.print(",");		
+		}
+	}
+
+	// LPrintln();
+	SDFile.println();
+
+	SDFile.close();
+	LPrintln("Done writing to SD");
+	return true;
+}
+
 
 /////////////////////////////////////////////////////////////////////
 

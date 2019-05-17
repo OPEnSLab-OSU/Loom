@@ -159,13 +159,7 @@ OLED_Freeze Loom_OLED::get_freeze_behavior()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_OLED::log_bundle(OSCBundle& bndl) 
-{
-	log_bundle(bndl, display_format);
-}
-
-/////////////////////////////////////////////////////////////////////
-void Loom_OLED::log_bundle(OSCBundle& bndl, OLED_Format format) 
+void Loom_OLED::log(OSCBundle& bndl) 
 {
 	if ( !check_millis() ) return;
 	
@@ -189,7 +183,7 @@ void Loom_OLED::log_bundle(OSCBundle& bndl, OLED_Format format)
 		if (count > 0)  keys[i] = String( nth_strchr(keys[i].c_str(), '/', count)+1 );
 	}
 
-	switch (format) {
+	switch (display_format) {
 		case OLED_Format::FOUR:
 
 			for (int i = 0; i < 4 && i < size; i++) {
@@ -245,4 +239,11 @@ void Loom_OLED::log_bundle(OSCBundle& bndl, OLED_Format format)
 	// Update display
 	display->display();	
 }
+
+/////////////////////////////////////////////////////////////////////
+void Loom_OLED::log(JsonObject json) 
+{
+
+}
+
 

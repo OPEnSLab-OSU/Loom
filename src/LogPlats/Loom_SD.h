@@ -43,7 +43,7 @@ protected:
 		bool		sd_found;
 
 		/// String of file to write to if not filename explicitly provided
-		char*		default_file;
+		char		default_file[16];
 
 		/// Pointer to an RTC object for timestamps
 		LoomRTC*	RTC_Inst;
@@ -95,6 +95,7 @@ public:
 	// \param[in]	bndl		The bundle to be saved
 	// \param[in]	timestamp	Format of timestamp (if any)
 	bool		save_bundle(OSCBundle& bndl, char* file, int timestamp=3);
+	bool		save_json(JsonObject json, const char* file, int timestamp=3);
 
 
 	/// Set the RTC module to use for timers
@@ -112,7 +113,8 @@ public:
 	void		list_files();
 	bool		dump_file(char* file) ;
 
-	void		log_bundle(OSCBundle& bndl);
+	void		log(OSCBundle& bndl);
+	void		log(JsonObject json);
 
 
 
