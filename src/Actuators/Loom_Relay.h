@@ -46,6 +46,9 @@ public:
 	void 		package(JsonObject json);
 	bool		message_route(OSCMessage& msg, int address_offset);
 
+	bool		route_cmd(const JsonObject json);
+
+
 	// --- Actuator Control ---
 
 	/// Set relay state
