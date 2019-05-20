@@ -473,11 +473,9 @@ void LoomManager::package_aux(JsonObject json, LoomModule* module)
 /////////////////////////////////////////////////////////////////////
 void LoomManager::package(JsonObject json) 
 {
+	package_aux( json, (LoomModule*)rtc_module ); 
 	package_aux( json, (LoomModule**)other_modules    , other_module_count ); 
 	package_aux( json, (LoomModule**)sensor_modules   , sensor_count ); 
-	LPrintln("A");
-	package_aux( json, (LoomModule*)rtc_module ); 
-	LPrintln("C");
 
 	if (package_verbosity == Verbosity::V_HIGH) {
 		package_aux( json, (LoomModule**)actuator_modules , actuator_count ); 

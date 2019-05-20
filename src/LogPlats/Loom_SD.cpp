@@ -216,12 +216,16 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 	// Don't log if no data
 	if (contents.isNull()) return false;
 
-	if (!timestamp.isNull()) {
-		// Save timestamp
-	}
-
 	// Create Header
 	if ( SDFile.position() == 0) {
+
+		if (!timestamp.isNull()) { 
+			for (JsonPair dataPoint : timestamp) {
+				SDFile.print(dataPoint.key().c_str());
+				SDFile.print(',');
+			}
+		}
+
 		for (JsonObject module : contents) {
 
 			// LPrint(module["module"].as<const char*>());
@@ -241,10 +245,21 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 		SDFile.println();
 	}
 
-
+	// Write data value
 	for (JsonObject module : contents) {
 		// LPrint(",");
-		SDFile.print(",");
+		// SDFile.print(",");
+
+		if (!timestamp.isNull()) { 
+			for (JsonPair dataPoint : timestamp) {
+				JsonVariant val = dataPoint.value();				
+				if (val.is<char*>() || val.is<const char*>() ) {
+					// LPrint(dataPoint.value().as<const char*>());
+					SDFile.print(dataPoint.value().as<const char*>());
+				} 
+				SDFile.print(',');
+			}
+		}
 
 		JsonObject data = module["data"];
 		if (data.isNull()) continue;
