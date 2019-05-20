@@ -71,6 +71,8 @@ void package_json(JsonObject json, const char* module_name, const Args... args)
 
 
 
+void package_json_timestamp(JsonObject json, const char* date, const char* time);
+
 
 
 

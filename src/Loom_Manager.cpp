@@ -442,6 +442,18 @@ void LoomManager::package_aux(JsonObject json, LoomModule** modules, uint len)
 	}	
 }
 
+/////////////////////////////////////////////////////////////////////
+void LoomManager::package_aux(JsonObject json, LoomModule* module)
+{
+	// for (int i = 0; i < len; i++) {
+	if ( (module != nullptr) && ( module->get_active() ) ){
+		module->package( json );
+	}
+	// }	
+}
+
+
+
 // /////////////////////////////////////////////////////////////////////
 // void LoomManager::package() 
 // {
@@ -463,13 +475,33 @@ void LoomManager::package(JsonObject json)
 {
 	package_aux( json, (LoomModule**)other_modules    , other_module_count ); 
 	package_aux( json, (LoomModule**)sensor_modules   , sensor_count ); 
+	LPrintln("A");
+	package_aux( json, (LoomModule*)rtc_module ); 
+	LPrintln("C");
 
 	if (package_verbosity == Verbosity::V_HIGH) {
 		package_aux( json, (LoomModule**)actuator_modules , actuator_count ); 
-		package_aux( json, (LoomModule**)rtc_module       , 1 ); 
 		package_aux( json, (LoomModule**)comm_modules     , comm_count ); 
 		package_aux( json, (LoomModule**)log_modules      , log_count );		
 	}
+
+	LPrintln("In void LoomManager::package(JsonObject json)");
+	serializeJsonPretty(json, Serial);
+	LPrintln("\nSIZE: ", json.memoryUsage());
+}
+
+
+JsonObject LoomManager::package()
+{
+	doc["type"] = "data";
+	JsonObject json = doc.as<JsonObject>();
+
+	package(json);
+	LPrintln("In JsonObject LoomManager::package()");
+	serializeJsonPretty(json, Serial);
+	LPrintln("\nSIZE: ", json.memoryUsage());
+
+	return json;
 }
 
 // /////////////////////////////////////////////////////////////////////

@@ -233,6 +233,9 @@ protected:
 
 	OSCBundle	bundle;	// Not sure if this will always work...
 
+	StaticJsonDocument<2000> doc;
+
+
 public:
 
 	const static char* enum_device_type_string(DeviceType t);
@@ -303,6 +306,9 @@ public:
 	// void		package();
 	// void		package(OSCBundle& bndl);
 	void		package(JsonObject json);
+	JsonObject	package();
+
+
 
 	void		print_current_bundle();
 
@@ -480,6 +486,9 @@ private:
 	void		list_modules_aux(LoomModule** modules, uint len, char* module_type);
 	void		measure_aux(LoomModule** modules, uint len);
 	void		package_aux(JsonObject json, LoomModule** modules, uint len);
+	void		package_aux(JsonObject json, LoomModule* module);
+
+
 
 	LoomModule*	find_module(ModuleType type, int idx, LoomModule** modules, int count);
 
