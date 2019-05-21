@@ -25,6 +25,8 @@ Loom_DS3231::Loom_DS3231(
 	// Set SQW pin to OFF (in my case it was set by default to 1Hz)
 	// The output of the DS3231 INT pin is connected to this pin
 	rtc_inst->writeSqwPinMode(DS3231_OFF);
+
+	clear_alarms();
 }
 
 /////////////////////////////////////////////////////////////////////

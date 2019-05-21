@@ -483,9 +483,9 @@ void LoomManager::package(JsonObject json)
 		package_aux( json, (LoomModule**)log_modules      , log_count );		
 	}
 
-	LPrintln("In void LoomManager::package(JsonObject json)");
-	serializeJsonPretty(json, Serial);
-	LPrintln("\nSIZE: ", json.memoryUsage());
+	// LPrintln("In void LoomManager::package(JsonObject json)");
+	// serializeJsonPretty(json, Serial);
+	// LPrintln("\nSIZE: ", json.memoryUsage());
 }
 
 
@@ -495,9 +495,9 @@ JsonObject LoomManager::package()
 	JsonObject json = doc.as<JsonObject>();
 
 	package(json);
-	LPrintln("In JsonObject LoomManager::package()");
-	serializeJsonPretty(json, Serial);
-	LPrintln("\nSIZE: ", json.memoryUsage());
+	// LPrintln("In JsonObject LoomManager::package()");
+	// serializeJsonPretty(json, Serial);
+	// LPrintln("\nSIZE: ", json.memoryUsage());
 
 	return json;
 }

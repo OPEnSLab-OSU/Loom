@@ -246,20 +246,23 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 	}
 
 	// Write data value
+
+	if (!timestamp.isNull()) { 
+		for (JsonPair dataPoint : timestamp) {
+			JsonVariant val = dataPoint.value();				
+			if (val.is<char*>() || val.is<const char*>() ) {
+				// LPrint(dataPoint.value().as<const char*>());
+				SDFile.print(dataPoint.value().as<const char*>());
+			} 
+			SDFile.print(',');
+		}
+	}
+	
 	for (JsonObject module : contents) {
 		// LPrint(",");
-		// SDFile.print(",");
+		SDFile.print(",");
 
-		if (!timestamp.isNull()) { 
-			for (JsonPair dataPoint : timestamp) {
-				JsonVariant val = dataPoint.value();				
-				if (val.is<char*>() || val.is<const char*>() ) {
-					// LPrint(dataPoint.value().as<const char*>());
-					SDFile.print(dataPoint.value().as<const char*>());
-				} 
-				SDFile.print(',');
-			}
-		}
+
 
 		JsonObject data = module["data"];
 		if (data.isNull()) continue;
