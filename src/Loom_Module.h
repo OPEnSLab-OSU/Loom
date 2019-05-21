@@ -62,27 +62,6 @@ public:
 	LoomModule(JsonVariant settings);
 
 
-	// LoomModule( char* module_name, LoomManager* LD );
-
-
-// This version did not seem to work
-	// LoomModule( char*      module_name 		 = "Unknown",
-	// 			bool       active 			 = true,
-	// 			bool       print_debug 		 = true,
-	// 			Verbosity  print_verbosity   = VERB_LOW,
-	// 			Verbosity  package_verbosity = VERB_LOW
-
-	// 		  ) : LoomModule()
-	// {
-	// 	// LPrintln("LoomModule Constructor 1");
-	// 	this->module_name 		= module_name;
-	// 	this->active 			= active;
-	// 	this->print_debug 		= print_debug;
-	// 	this->print_verbosity 	= print_verbosity;
-	// 	this->package_verbosity = package_verbosity;	
-	// }
-
-
 	// --- DESTRUCTOR ---
 	virtual ~LoomModule();
 
@@ -102,7 +81,7 @@ public:
 	/// Derived modules may override this for increased function,
 	/// such as linking a submanager or RTC module.
 	/// \param[in]	LM	LoomManager to point to
-	void	link_device_manager(LoomManager* LM);
+	void			link_device_manager(LoomManager* LM);
 
 	/// LPrint the module name as a label.
 	/// Used for matching debug prints to corresponding module

@@ -368,7 +368,7 @@ public:
 	const char*	get_device_name();
 
 
-
+// Maybe remove these 6
 	/// Copy device identification message header (to family level) string to buffer.
 	/// \param[out]	buf The bufer to copy family name into
 	void		packet_header_family(char* buf);
@@ -487,8 +487,6 @@ private:
 	void		measure_aux(LoomModule** modules, uint len);
 	void		package_aux(JsonObject json, LoomModule** modules, uint len);
 	void		package_aux(JsonObject json, LoomModule* module);
-
-
 
 	LoomModule*	find_module(ModuleType type, int idx, LoomModule** modules, int count);
 
