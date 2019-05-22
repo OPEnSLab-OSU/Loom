@@ -97,7 +97,6 @@ public:
 
 	void			print_config() override;
 
-	void			log(OSCBundle& bndl);
 	void			log(JsonObject json);
 
 

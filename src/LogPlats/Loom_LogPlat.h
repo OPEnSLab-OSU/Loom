@@ -53,7 +53,7 @@ public:
 	virtual void	print_config();
 	virtual void	measure();
 	virtual bool	message_route(OSCMessage& msg, int address_offset);
-	virtual void	log(OSCBundle& bndl) = 0;
+	// virtual void	log(OSCBundle& bndl) = 0;
 	virtual void	log(JsonObject json) = 0;
 	virtual void 	package(JsonObject json) {}
 

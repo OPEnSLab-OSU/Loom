@@ -94,7 +94,6 @@ public:
 	// \param[in]	file		The file to save bundle to
 	// \param[in]	bndl		The bundle to be saved
 	// \param[in]	timestamp	Format of timestamp (if any)
-	bool		save_bundle(OSCBundle& bndl, char* file, int timestamp=3);
 	bool		save_json(JsonObject json, const char* file, int timestamp=3);
 
 
@@ -111,9 +110,8 @@ public:
 	void		delete_file(char* file);
 	void		empty_file(char* file);
 	void		list_files();
-	bool		dump_file(char* file) ;
+	bool		dump_file(char* file);
 
-	void		log(OSCBundle& bndl);
 	void		log(JsonObject json);
 
 

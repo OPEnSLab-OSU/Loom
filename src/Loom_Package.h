@@ -75,8 +75,8 @@ void package_json_timestamp(JsonObject json, const char* date, const char* time)
 
 
 
-void flatten_json_data(JsonObject json);
-
+void flatten_json_data_object(JsonObject json);
+void flatten_json_data_array(JsonObject json);
 
 
 

@@ -153,37 +153,10 @@ bool Loom_SD::dump_file(char* file)
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_SD::log(OSCBundle& bndl) 
-{
-	save_bundle(bndl, default_file, 3);
-}
-
-/////////////////////////////////////////////////////////////////////
 void Loom_SD::log(JsonObject json) 
 {
 	save_json(json, default_file, 3);
 }
-
-
-
-/////////////////////////////////////////////////////////////////////
-bool Loom_SD::save_bundle(OSCBundle& bndl, char* file, int timestamp)
-{
-	// Get device ID
-	char device_id[30];
-	osc_extract_header_to_section(bndl.getOSCMessage(0), 5, device_id);
-
-	// Convert bundle to 
-	int len = bundle_num_data_pairs(bndl)*2;
-	String key_values[len];
-	convert_bundle_to_array_key_value(bndl, key_values, len);
-
-	bool status = save_array(file, key_values, len, ',', timestamp, true, device_id);
-
-	return status;
-}
-
-
 
 /////////////////////////////////////////////////////////////////////
 

@@ -159,7 +159,7 @@ OLED_Freeze Loom_OLED::get_freeze_behavior()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_OLED::log(OSCBundle& bndl) 
+void Loom_OLED::log(JsonObject json) 
 {
 	if ( !check_millis() ) return;
 	
@@ -172,15 +172,19 @@ void Loom_OLED::log(OSCBundle& bndl)
 	display->setTextColor(WHITE);
 	display->setTextSize(1);
 
-	String keys[16], vals[16];
+	// Structure Json to parse
+	flatten_json_data_object(json);
 
-	int size = bundle_num_data_pairs(bndl);
-	convert_bundle_to_arrays_assoc(bndl, keys, vals, 16);
+	// Get associated array size
+	JsonObject data = json["flatObj"];
+	int size = data.size();
+	String keys[size], vals[size];
 
-	// Remove leading sections of address from multiplexer sections
-	for (int i = 0; i < size; i++) {
-		int count = osc_address_section_count(keys[i]);
-		if (count > 0)  keys[i] = String( nth_strchr(keys[i].c_str(), '/', count)+1 );
+	int i = 0;
+	for (auto kv : data) {
+		keys[i] = kv.key().c_str();
+		vals[i] = kv.value().as<String>();
+		i++;
 	}
 
 	switch (display_format) {
@@ -239,36 +243,5 @@ void Loom_OLED::log(OSCBundle& bndl)
 	// Update display
 	display->display();	
 }
-
-/////////////////////////////////////////////////////////////////////
-void Loom_OLED::log(JsonObject json) 
-{
-	LPrintln("\n\nIN LOG");
-
-	flatten_json_data(json);
-
-	LPrintln("\nLOG MemoryUsage: ", json.memoryUsage());
-	LPrintln("\nLOG Size: ", json.size());
-
-
-	serializeJsonPretty(json, Serial);
-
-
-	LPrintln("\n\nEND LOG");
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
