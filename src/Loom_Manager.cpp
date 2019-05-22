@@ -473,6 +473,12 @@ void LoomManager::package_aux(JsonObject json, LoomModule* module)
 /////////////////////////////////////////////////////////////////////
 void LoomManager::package(JsonObject json) 
 {
+	// LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
+	// doc.clear();
+	// json["type"] = "data";
+	// LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
+
+
 	package_aux( json, (LoomModule*)rtc_module ); 
 	package_aux( json, (LoomModule**)other_modules    , other_module_count ); 
 	package_aux( json, (LoomModule**)sensor_modules   , sensor_count ); 
@@ -491,6 +497,12 @@ void LoomManager::package(JsonObject json)
 
 JsonObject LoomManager::package()
 {
+	LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
+	doc.clear();
+	// json["type"] = "data";
+	LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
+
+
 	doc["type"] = "data";
 	JsonObject json = doc.as<JsonObject>();
 

@@ -233,7 +233,7 @@ protected:
 
 	OSCBundle	bundle;	// Not sure if this will always work...
 
-	StaticJsonDocument<2000> doc;
+	StaticJsonDocument<1000> doc;
 
 
 public:

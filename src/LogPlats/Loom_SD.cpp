@@ -25,10 +25,7 @@ Loom_SD::Loom_SD(
 	this->chip_select  = chip_select;
 	snprintf(this->default_file, 16, "%s", default_file);
 
-	// // Remove the #if if you are using a LoRa M0, but don't have LoRa enabled
-	// #if is_lora == 1
 	digitalWrite(8, HIGH); 	// if using LoRa
-	// #endif
 
 	sd_found = SD.begin(chip_select);
 

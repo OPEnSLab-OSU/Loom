@@ -243,7 +243,32 @@ void Loom_OLED::log(OSCBundle& bndl)
 /////////////////////////////////////////////////////////////////////
 void Loom_OLED::log(JsonObject json) 
 {
+	LPrintln("\n\nIN LOG");
 
+	flatten_json_data(json);
+
+	LPrintln("\nLOG MemoryUsage: ", json.memoryUsage());
+	LPrintln("\nLOG Size: ", json.size());
+
+
+	serializeJsonPretty(json, Serial);
+
+
+	LPrintln("\n\nEND LOG");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
