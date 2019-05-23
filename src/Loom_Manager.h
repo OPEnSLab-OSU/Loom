@@ -302,12 +302,17 @@ public:
 
 
 
+
+
 	void		measure();  
 	// void		package();
 	// void		package(OSCBundle& bndl);
 	void		package(JsonObject json);
 	JsonObject	package();
 
+
+// Return reference to internal json object
+	JsonObject	internalJson(bool clear = true);
 
 
 	void		print_current_bundle();

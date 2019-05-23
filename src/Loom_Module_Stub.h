@@ -188,11 +188,11 @@ public:
 
 	/////////////////////////////////////////////////////////////////////
 	// Logging Platforms
-	void log_bundle(OSCBundle& bndl)
+	void log_bundle(JsonObject json)
 	{ LPrintln(error_msg); }
 
 	// OLED
-	void log_bundle(OSCBundle& bndl, OLED_Format format)
+	void log_bundle(JsonObject json, OLED_Format format)
 	{ LPrintln(error_msg); }
 	void set_display_format(OLED_Format format)
 	{ LPrintln(error_msg); }
@@ -213,7 +213,7 @@ public:
 
 
 	// SD
-	bool save_bundle(OSCBundle& bndl, char* file, int timestamp=3)
+	bool save_json(JsonObject json, char* file, int timestamp=3)
 	{ LPrintln(error_msg); }
 	void set_default_file(char* filename)
 	{ LPrintln(error_msg); }
@@ -238,7 +238,7 @@ public:
 
 	/////////////////////////////////////////////////////////////////////
 	// Mulitplexer
-	void get_sensor_list(OSCBundle& bndl)
+	void get_sensor_list(JsonObject json)
 	{ LPrintln(error_msg); }
 	void set_is_dynamic(bool dynamic)
 	{ LPrintln(error_msg); }

@@ -513,6 +513,18 @@ JsonObject LoomManager::package()
 	return json;
 }
 
+JsonObject LoomManager::internalJson(bool clear)
+{
+	if (clear) {
+		doc.clear();
+	}
+	LPrintln("\nDOC MemoryUsage in internalJson: ", doc.memoryUsage());
+	doc["type"] = "unknown";
+	return doc.as<JsonObject>();
+}
+
+
+
 // /////////////////////////////////////////////////////////////////////
 // void LoomManager::package(OSCBundle& bndl) 
 // {

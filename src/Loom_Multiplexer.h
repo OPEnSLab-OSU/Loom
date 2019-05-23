@@ -116,7 +116,7 @@ public:
 
 	/// Populate a bundle with a list of sensors currently attached
 	/// \param[out]	bndl	Bundle to populate with sensor list
-	void		get_sensor_list(OSCBundle& bndl);
+	void		get_sensor_list(JsonObject json);
 
 	/// Set whether or not to periodically update list of attached sensors
 	/// \param[in]	dynamic		The setting to set
