@@ -91,8 +91,8 @@ public:
 // move back to protected?
 
 // can probably just return offset and check if -1 to remove need to return bool
-	bool			scope_filter(OSCBundle& bndl, int* offset);
-	bool			scope_filter(OSCBundle& bndl);
+	// bool			scope_filter(OSCBundle& bndl, int* offset);
+	// bool			scope_filter(OSCBundle& bndl);
 
 
 protected:

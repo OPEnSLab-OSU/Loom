@@ -8,67 +8,67 @@
 // ================================================================
 
 
-/////////////////////////////////////////////////////////////////////
-void flatten_bundle(OSCBundle& bndl, OSCBundle& out_bndl)
-{
-	// Make sure bundle has more than one message
-	// Check upper bound as well, as querying some empty bundles gives large value
-	if ( (bndl.size() < 1) || (bndl.size() > 1000) ) {
-		LPrintln("Bundle has no valid contents, cannot be converted");
-		return;
-	}
+// /////////////////////////////////////////////////////////////////////
+// void flatten_bundle(OSCBundle& bndl, OSCBundle& out_bndl)
+// {
+// 	// Make sure bundle has more than one message
+// 	// Check upper bound as well, as querying some empty bundles gives large value
+// 	if ( (bndl.size() < 1) || (bndl.size() > 1000) ) {
+// 		LPrintln("Bundle has no valid contents, cannot be converted");
+// 		return;
+// 	}
 
-	char address[50], suffix[50], key[30], buf[80];
+// 	char address[50], suffix[50], key[30], buf[80];
 
-	// Get device identification from address
-	osc_extract_header_to_section(bndl.getOSCMessage(0), 5, address);
-	sprintf(address, "%s%s", address, "/data");
-	OSCMessage new_msg = OSCMessage(address);
-	OSCMessage* msg;     // Temporarily hold message of bundle
+// 	// Get device identification from address
+// 	osc_extract_header_to_section(bndl.getOSCMessage(0), 5, address);
+// 	sprintf(address, "%s%s", address, "/data");
+// 	OSCMessage new_msg = OSCMessage(address);
+// 	OSCMessage* msg;     // Temporarily hold message of bundle
 	
-	// Copy data of messages into new bundle
-	for (int i = 0; i < bndl.size(); i++) {
+// 	// Copy data of messages into new bundle
+// 	for (int i = 0; i < bndl.size(); i++) {
 
-		msg = bndl.getOSCMessage(i); 	// Get ith messsage
-		osc_extract_header_from_section(msg, 7, suffix);
+// 		msg = bndl.getOSCMessage(i); 	// Get ith messsage
+// 		osc_extract_header_from_section(msg, 7, suffix);
 
-		for (int j = 0; j < msg->size(); j =j+2) {
+// 		for (int j = 0; j < msg->size(); j =j+2) {
 
-			// Get Key
-			switch (msg->getType(j)) {
-				case 'f' : sprintf(key, "%f", msg->getFloat(j) );	break;
-				case 'i' : sprintf(key, "%d", msg->getInt(j) ); 	break;
-				case 's' : msg->getString(j, key, 20); 				break;
-				default  : strcpy(key, "key");
-			}
+// 			// Get Key
+// 			switch (msg->getType(j)) {
+// 				case 'f' : sprintf(key, "%f", msg->getFloat(j) );	break;
+// 				case 'i' : sprintf(key, "%d", msg->getInt(j) ); 	break;
+// 				case 's' : msg->getString(j, key, 20); 				break;
+// 				default  : strcpy(key, "key");
+// 			}
 
-			// Possibly add suffix
-			if (strlen(suffix) > 0) {
-				sprintf(key, "%s%s", key, suffix);
-			}
+// 			// Possibly add suffix
+// 			if (strlen(suffix) > 0) {
+// 				sprintf(key, "%s%s", key, suffix);
+// 			}
 
-			new_msg.add(key);
+// 			new_msg.add(key);
 
-			// Get Data Point
-			switch (msg->getType(j+1)) {
-				case 'f' : new_msg.add(msg->getFloat(j+1));	break;
-				case 'i' : new_msg.add(msg->getInt(j+1));	break;
-				case 's' : msg->getString(j+1, buf, 80);  new_msg.add(buf);  break;
-				default  : LPrintln("Unsupported data data_type.");
-			}
-		} // of for j
-	} // of for i
+// 			// Get Data Point
+// 			switch (msg->getType(j+1)) {
+// 				case 'f' : new_msg.add(msg->getFloat(j+1));	break;
+// 				case 'i' : new_msg.add(msg->getInt(j+1));	break;
+// 				case 's' : msg->getString(j+1, buf, 80);  new_msg.add(buf);  break;
+// 				default  : LPrintln("Unsupported data data_type.");
+// 			}
+// 		} // of for j
+// 	} // of for i
 
-	out_bndl.add(new_msg);
-}
+// 	out_bndl.add(new_msg);
+// }
 
-/////////////////////////////////////////////////////////////////////
-void flatten_bundle(OSCBundle& bndl)
-{
-	OSCBundle out_bndl;
-	flatten_bundle(bndl, out_bndl);
-	deep_copy_bundle(out_bndl, bndl);
-}
+// /////////////////////////////////////////////////////////////////////
+// void flatten_bundle(OSCBundle& bndl)
+// {
+// 	OSCBundle out_bndl;
+// 	flatten_bundle(bndl, out_bndl);
+// 	deep_copy_bundle(out_bndl, bndl);
+// }
 
 
 
@@ -77,46 +77,46 @@ void flatten_bundle(OSCBundle& bndl)
 // ===         CONVERSION FROM BUNDLE TO ARRAY FORMATS          ===
 // ================================================================
 
-/////////////////////////////////////////////////////////////////////
-void convert_bundle_to_array_key_value(OSCBundle& bndl, String key_values[], int kv_len)
-{	
-	OSCBundle converted_bndl;	
-	flatten_bundle(bndl, converted_bndl);
+// /////////////////////////////////////////////////////////////////////
+// void convert_bundle_to_array_key_value(OSCBundle& bndl, String key_values[], int kv_len)
+// {	
+// 	OSCBundle converted_bndl;	
+// 	flatten_bundle(bndl, converted_bndl);
 
-	// Make sure key_values array is large enough
-	if ( converted_bndl.getOSCMessage(0)->size() > kv_len ) {
-		LPrintln("Key-values array not large enough to hold all of bundle data, cannot convert");
-		return;
-	}
+// 	// Make sure key_values array is large enough
+// 	if ( converted_bndl.getOSCMessage(0)->size() > kv_len ) {
+// 		LPrintln("Key-values array not large enough to hold all of bundle data, cannot convert");
+// 		return;
+// 	}
 
-	// Fill key-value array
-	OSCMessage* msg = converted_bndl.getOSCMessage(0);	
-	for (int i = 0; i < msg->size(); i++) {
-		key_values[i] = get_data_value(msg, i);
-	}
-}
+// 	// Fill key-value array
+// 	OSCMessage* msg = converted_bndl.getOSCMessage(0);	
+// 	for (int i = 0; i < msg->size(); i++) {
+// 		key_values[i] = get_data_value(msg, i);
+// 	}
+// }
 
 
-/////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////
 
-void convert_bundle_to_arrays_assoc(OSCBundle& bndl, String keys[], String values[], int assoc_len)
-{
-	OSCBundle converted_bndl;	
-	flatten_bundle(bndl, converted_bndl);
+// void convert_bundle_to_arrays_assoc(OSCBundle& bndl, String keys[], String values[], int assoc_len)
+// {
+// 	OSCBundle converted_bndl;	
+// 	flatten_bundle(bndl, converted_bndl);
 
-	// Make sure keys and values arrays are large enough
-	if ( converted_bndl.getOSCMessage(0)->size() > 2*assoc_len ) {
-		LPrintln("Key-values array not large enough to hold all of bundle data, cannot convert");
-		return;
-	}
+// 	// Make sure keys and values arrays are large enough
+// 	if ( converted_bndl.getOSCMessage(0)->size() > 2*assoc_len ) {
+// 		LPrintln("Key-values array not large enough to hold all of bundle data, cannot convert");
+// 		return;
+// 	}
 
-	// Fill key and value arrays
-	OSCMessage* msg = converted_bndl.getOSCMessage(0);
-	for (int i = 0; i < msg->size(); i+=2) {
-		keys[i/2]   = get_data_value(msg, i);
-		values[i/2] = get_data_value(msg, i+1); 
-	}
-}
+// 	// Fill key and value arrays
+// 	OSCMessage* msg = converted_bndl.getOSCMessage(0);
+// 	for (int i = 0; i < msg->size(); i+=2) {
+// 		keys[i/2]   = get_data_value(msg, i);
+// 		values[i/2] = get_data_value(msg, i+1); 
+// 	}
+// }
 
 
 
@@ -184,72 +184,72 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 
 
 
-/////////////////////////////////////////////////////////////////////
-void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char* address, int kv_len, int interpret)
-{
-	if ((interpret < 0) || (interpret > 6)) {
-		LPrintln("'", interpret, "' is not a valid way to interpret array when converting to bundle");
-		LPrintln("Use: 0=Smart, 1=Int, 2=Float, 3=String, 4=Smart-All, 5=Int-All, 6=Float-All");
-		LPrintln("Omitting 'interpret' argument will default to 'Smart' (recommended)");
-		return;
-	}
-	bndl.empty();
+// /////////////////////////////////////////////////////////////////////
+// void convert_key_value_array_to_bundle(String key_values [], OSCBundle& bndl, char* address, int kv_len, int interpret)
+// {
+// 	if ((interpret < 0) || (interpret > 6)) {
+// 		LPrintln("'", interpret, "' is not a valid way to interpret array when converting to bundle");
+// 		LPrintln("Use: 0=Smart, 1=Int, 2=Float, 3=String, 4=Smart-All, 5=Int-All, 6=Float-All");
+// 		LPrintln("Omitting 'interpret' argument will default to 'Smart' (recommended)");
+// 		return;
+// 	}
+// 	bndl.empty();
 
-	OSCMessage tmpMsg;
-	const char *number;    
-	char    *end;       char  data[50];
-	int32_t tmpInt;     float tmpFloat;
+// 	OSCMessage tmpMsg;
+// 	const char *number;    
+// 	char    *end;       char  data[50];
+// 	int32_t tmpInt;     float tmpFloat;
 
-	// Convert array to single message bundle format
-	for (int i = 0; i < kv_len; i++) {
-		key_values[i].toCharArray(data, 50);
+// 	// Convert array to single message bundle format
+// 	for (int i = 0; i < kv_len; i++) {
+// 		key_values[i].toCharArray(data, 50);
 
-		// If all are string, or assuming keys as strings, add data as a string
-		if ( (interpret == 3) || ((interpret <= 3) && (i%2==0)) ) {
-			tmpMsg.add(data);
-		} else {
-			switch (interpret) {
-				case 0: case 4: 	// Smart [All]
-				case 1: case 5: 	// Int [All]
-					tmpInt = (int32_t)strtol(data, &end, 10);
-					if ( (interpret == 1) ||  (interpret == 5) || !(end == data || *end != '\0') ) {
-						tmpMsg.add( tmpInt );   break;
-					}
-				case 2: case 6: 	// Float [All]
-					tmpFloat = strtof(data, &end);
-					if ( (interpret == 2) || (interpret == 6) || !(end == data || *end != '\0') ) {
-						tmpMsg.add( tmpFloat ); break;
-					}
-				default: 			// String
-					tmpMsg.add(data);
-			} // of switch
-		} // of else
-	} // of for
+// 		// If all are string, or assuming keys as strings, add data as a string
+// 		if ( (interpret == 3) || ((interpret <= 3) && (i%2==0)) ) {
+// 			tmpMsg.add(data);
+// 		} else {
+// 			switch (interpret) {
+// 				case 0: case 4: 	// Smart [All]
+// 				case 1: case 5: 	// Int [All]
+// 					tmpInt = (int32_t)strtol(data, &end, 10);
+// 					if ( (interpret == 1) ||  (interpret == 5) || !(end == data || *end != '\0') ) {
+// 						tmpMsg.add( tmpInt );   break;
+// 					}
+// 				case 2: case 6: 	// Float [All]
+// 					tmpFloat = strtof(data, &end);
+// 					if ( (interpret == 2) || (interpret == 6) || !(end == data || *end != '\0') ) {
+// 						tmpMsg.add( tmpFloat ); break;
+// 					}
+// 				default: 			// String
+// 					tmpMsg.add(data);
+// 			} // of switch
+// 		} // of else
+// 	} // of for
 
-	// Add address string to message
-	char full_address[80];
-	if (address[0] == '/') {
-		sprintf(full_address, "%s/data", address);
-	} else {
-		sprintf(full_address, "/%s/data", address);
-	}
+// 	// Add address string to message
+// 	char full_address[80];
+// 	if (address[0] == '/') {
+// 		sprintf(full_address, "%s/data", address);
+// 	} else {
+// 		sprintf(full_address, "/%s/data", address);
+// 	}
 
-	tmpMsg.setAddress(full_address);
-	bndl.add(tmpMsg);
-}
+// 	tmpMsg.setAddress(full_address);
+// 	bndl.add(tmpMsg);
+// }
 
 
 
-/////////////////////////////////////////////////////////////////////
-void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char* address, int assoc_len, int interpret)
-{
-	// Convert to single array first 
-	int kv_len = 2*assoc_len;
-	String key_values[kv_len];
-	convert_array_assoc_to_key_value(keys, values, key_values, assoc_len, kv_len);
-	// Then from key-value to desired bundle structure
-	convert_key_value_array_to_bundle(key_values, bndl, address, kv_len, interpret);
-}
+// /////////////////////////////////////////////////////////////////////
+// void convert_assoc_arrays_to_bundle(String keys [], String values [], OSCBundle& bndl, char* address, int assoc_len, int interpret)
+// {
+// 	// Convert to single array first 
+// 	int kv_len = 2*assoc_len;
+// 	String key_values[kv_len];
+// 	convert_array_assoc_to_key_value(keys, values, key_values, assoc_len, kv_len);
+// 	// Then from key-value to desired bundle structure
+// 	convert_key_value_array_to_bundle(key_values, bndl, address, kv_len, interpret);
+// }
 
 
 

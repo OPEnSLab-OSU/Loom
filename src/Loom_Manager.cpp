@@ -445,40 +445,15 @@ void LoomManager::package_aux(JsonObject json, LoomModule** modules, uint len)
 /////////////////////////////////////////////////////////////////////
 void LoomManager::package_aux(JsonObject json, LoomModule* module)
 {
-	// for (int i = 0; i < len; i++) {
 	if ( (module != nullptr) && ( module->get_active() ) ){
 		module->package( json );
 	}
-	// }	
 }
 
-
-
-// /////////////////////////////////////////////////////////////////////
-// void LoomManager::package() 
-// {
-// 	bundle.empty();
-
-// 	package_aux( (LoomModule**)other_modules    , other_module_count ); 
-// 	package_aux( (LoomModule**)sensor_modules   , sensor_count ); 
-
-// 	if (package_verbosity == Verbosity::V_HIGH) {
-// 		package_aux( (LoomModule**)actuator_modules , actuator_count ); 
-// 		package_aux( (LoomModule**)rtc_module      , 1 ); 
-// 		package_aux( (LoomModule**)comm_modules     , comm_count ); 
-// 		package_aux( (LoomModule**)log_modules      , log_count );		
-// 	}
-// }
 
 /////////////////////////////////////////////////////////////////////
 void LoomManager::package(JsonObject json) 
 {
-	// LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
-	// doc.clear();
-	// json["type"] = "data";
-	// LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
-
-
 	package_aux( json, (LoomModule*)rtc_module ); 
 	package_aux( json, (LoomModule**)other_modules    , other_module_count ); 
 	package_aux( json, (LoomModule**)sensor_modules   , sensor_count ); 
@@ -488,18 +463,14 @@ void LoomManager::package(JsonObject json)
 		package_aux( json, (LoomModule**)comm_modules     , comm_count ); 
 		package_aux( json, (LoomModule**)log_modules      , log_count );		
 	}
-
-	// LPrintln("In void LoomManager::package(JsonObject json)");
-	// serializeJsonPretty(json, Serial);
-	// LPrintln("\nSIZE: ", json.memoryUsage());
 }
 
-
+/////////////////////////////////////////////////////////////////////
 JsonObject LoomManager::package()
 {
-	// LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
-	// doc.clear();
-	// LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
+	LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
+	doc.clear();
+	LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
 
 
 	doc["type"] = "data";

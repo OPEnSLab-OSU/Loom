@@ -124,14 +124,14 @@ bool Loom_LoRa::receive_bundle(OSCBundle& bndl)
 			}
 
 			// Apply filtering based on family and subnet
-			bool in_scope = LoomCommPlat::scope_filter(bndl);
-			if (print_verbosity == Verbosity::V_HIGH) {
-				if (!in_scope) {
-					LPrintln("Received LoRa bundle out of scope");
-				}
-			}
-
-			return in_scope;
+			// bool in_scope = LoomCommPlat::scope_filter(bndl);
+			// if (print_verbosity == Verbosity::V_HIGH) {
+			// 	if (!in_scope) {
+			// 		LPrintln("Received LoRa bundle out of scope");
+			// 	}
+			// }
+			// return in_scope;
+			return true;
 			 
 		} // of if (manager.recvfromAck(buf, &len, &from))
 	} // of if (manager.available()) 

@@ -152,12 +152,14 @@ bool Loom_nRF::receive_bundle(OSCBundle& bndl)
 		LoomCommPlat::convert_string_to_bundle((char*)larger_buf, bndl); 
 		
 		// Apply filtering based on family and subnet
-		bool in_scope = LoomCommPlat::scope_filter(bndl);
-		if (print_verbosity == Verbosity::V_HIGH) {
-			if (!in_scope) {
-				LPrintln("Received nRF bundle out of scope");
-			}
-		}
+		// bool in_scope = LoomCommPlat::scope_filter(bndl);
+		// if (print_verbosity == Verbosity::V_HIGH) {
+		// 	if (!in_scope) {
+		// 		LPrintln("Received nRF bundle out of scope");
+		// 	}
+		// }
+		return true;
+
 	} // of while ( network->available() )
 }
 

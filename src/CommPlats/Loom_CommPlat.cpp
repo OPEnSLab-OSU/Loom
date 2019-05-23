@@ -106,84 +106,84 @@ bool LoomCommPlat::get_compress_messages()
 // maybe return offset as well?
 
 
-// Offset index where message command starts (i.e. after addressing) for message routing later
-bool LoomCommPlat::scope_filter(OSCBundle& bndl, int* offset) 
-{
-	// CommPlat needs to be associated with a LoomDevice to filter 
-	if (device_manager == NULL) return true; 
+// // Offset index where message command starts (i.e. after addressing) for message routing later
+// bool LoomCommPlat::scope_filter(OSCBundle& bndl, int* offset) 
+// {
+// 	// CommPlat needs to be associated with a LoomDevice to filter 
+// 	if (device_manager == NULL) return true; 
 
-	bool pass = false;
-	char type = get_message_type( bndl.getOSCMessage(0) );
+// 	bool pass = false;
+// 	char type = get_message_type( bndl.getOSCMessage(0) );
 
-	char address[50], test[50];
+// 	char address[50], test[50];
 
-	bndl.getOSCMessage(0)->getAddress(address, 2); // offset of 2 to skip '/<type>'
+// 	bndl.getOSCMessage(0)->getAddress(address, 2); // offset of 2 to skip '/<type>'
 
-	switch (type) {
-		case 'D': device_manager->packet_header_device(test); break;
-		case 'S': device_manager->packet_header_subnet(test); break;
-		case 'F': device_manager->packet_header_family(test); break;
-		default: break;
-	}
+// 	switch (type) {
+// 		case 'D': device_manager->packet_header_device(test); break;
+// 		case 'S': device_manager->packet_header_subnet(test); break;
+// 		case 'F': device_manager->packet_header_family(test); break;
+// 		default: break;
+// 	}
 
-	// Remove type character
-	strcpy(test, test+2);
+// 	// Remove type character
+// 	strcpy(test, test+2);
 
-	// if ( strlen(test) == 0 ) {
-	// 	LPrintln("Out of scope");
-	// 	bndl.empty();
-	// 	return false; 
-	// }
+// 	// if ( strlen(test) == 0 ) {
+// 	// 	LPrintln("Out of scope");
+// 	// 	bndl.empty();
+// 	// 	return false; 
+// 	// }
 
-	// LPrintln("[Scope Filter] Address: ", address);
-	// LPrintln("[Scope Filter] Test: ", test);
-	// LPrintln("[Scope Filter] len(address): ", strlen(address) );
-	// LPrintln("[Scope Filter] len(test): ", strlen(test) );
-
-
-	// Compare addresses
-	// if ( strncmp(address, test+2, strlen(test)-2 ) == 0 ) {
-	if ( strncmp(address, test, strlen(test) ) == 0 ) {
-		pass = true;
-	}
-
-	LPrintln("[Scope Filter] Pass: ", (pass) ? "true" : "false" );
-
-	// Empty bundle if out of scope
-	if (!pass) bndl.empty();
+// 	// LPrintln("[Scope Filter] Address: ", address);
+// 	// LPrintln("[Scope Filter] Test: ", test);
+// 	// LPrintln("[Scope Filter] len(address): ", strlen(address) );
+// 	// LPrintln("[Scope Filter] len(test): ", strlen(test) );
 
 
-	if (offset) {
-		*offset = (pass) ? strlen(test)+2 : -1;
+// 	// Compare addresses
+// 	// if ( strncmp(address, test+2, strlen(test)-2 ) == 0 ) {
+// 	if ( strncmp(address, test, strlen(test) ) == 0 ) {
+// 		pass = true;
+// 	}
 
-	// 	if (pass) {
+// 	LPrintln("[Scope Filter] Pass: ", (pass) ? "true" : "false" );
 
-	// 		// fix offset to return correct number - check type to determine what number '/' to search for 
+// 	// Empty bundle if out of scope
+// 	if (!pass) bndl.empty();
 
-	// // const char* nth_strchr(const char* s, char c, int n)
-	// 		int section = 0;
-	// 		switch (type) {
-	// 			case 'D': section = 6; break;
-	// 			case 'S': section = 4; break;
-	// 			case 'F': section = 3; break;
-	// 			default: break;
-	// 		}
-	// 		*offset = nth_strchr(address, '/', section) - address;
+
+// 	if (offset) {
+// 		*offset = (pass) ? strlen(test)+2 : -1;
+
+// 	// 	if (pass) {
+
+// 	// 		// fix offset to return correct number - check type to determine what number '/' to search for 
+
+// 	// // const char* nth_strchr(const char* s, char c, int n)
+// 	// 		int section = 0;
+// 	// 		switch (type) {
+// 	// 			case 'D': section = 6; break;
+// 	// 			case 'S': section = 4; break;
+// 	// 			case 'F': section = 3; break;
+// 	// 			default: break;
+// 	// 		}
+// 	// 		*offset = nth_strchr(address, '/', section) - address;
 		
-	// 	} else {
-	// 		*offset = -1;
-	// 	}
+// 	// 	} else {
+// 	// 		*offset = -1;
+// 	// 	}
 
-	}
+// 	}
 
-	return pass;
-}
+// 	return pass;
+// }
 
-/////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::scope_filter(OSCBundle& bndl) 
-{
-	return scope_filter(bndl, NULL);
-}
+// /////////////////////////////////////////////////////////////////////
+// bool LoomCommPlat::scope_filter(OSCBundle& bndl) 
+// {
+// 	return scope_filter(bndl, NULL);
+// }
 
 /////////////////////////////////////////////////////////////////////
 void LoomCommPlat::convert_string_to_bundle(char* osc_string, OSCBundle& bndl) 
