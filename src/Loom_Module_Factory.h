@@ -19,6 +19,7 @@
 // CommPlats
 #include "CommPlats/Loom_LoRa.h"
 #include "CommPlats/Loom_nRF.h"
+#include "CommPlats/Loom_Bluetooth.h"
 #include "CommPlats/Loom_SlipSerial.h"
 
 // InternetPlats

@@ -67,6 +67,7 @@ class Loom_MAX31856;
 // CommPlats
 class Loom_LoRa;
 class Loom_nRF;
+class Loom_Bluetooth;
 class Loom_SlipSerial;
 
 // LogPlats
@@ -111,7 +112,7 @@ enum class ModuleType {
 	MAX31856,
 
 	// CommPlats
-	LoRa, nRF, SlipSerial,
+	LoRa, nRF, SlipSerial, Bluetooth,
 
 	// LogPlats
 	OLED, SDCARD,
@@ -440,6 +441,8 @@ public:
 	// CommPlats
 	Loom_LoRa&			LoRa(int idx = 0);
 	Loom_nRF&			nRF(int idx = 0);
+	Loom_Bluetooth& 	Bluetooth(int idx = 0); 
+
 	// Loom_SlipSerial&	SlipSerial(int idx = 0);
 
 	// LogPlats

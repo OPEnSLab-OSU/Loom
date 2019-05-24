@@ -100,6 +100,13 @@ Loom_nRF& LoomManager::nRF(int idx)
 	return (*(Loom_nRF*)( (tmp) ? tmp : &global_stub ));
 }
 
+Loom_Bluetooth& LoomManager::Bluetooth(int idx) 
+{
+	LoomModule* tmp = find_module(ModuleType::Bluetooth, idx, (LoomModule**)comm_modules, comm_count);
+	return (*(Loom_Bluetooth*)( (tmp) ? tmp : &global_stub ));
+}
+
+
 
 // --- InternetPlats --- 
 

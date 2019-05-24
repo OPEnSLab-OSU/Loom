@@ -11,6 +11,7 @@ enum class CommPlatform {
 	WIFI, 		///< WiFi
 	LORA, 		///< LoRa
 	NRF,		///< Nordic Radio
+	BLE,		///< Bluetooth
 	SSER 		///< Slip Serial
 };
 

@@ -23,6 +23,7 @@ const  NameModulePair Factory::LookupTable[] =
 	// // CommPlat
 	{"Loom_LoRa",				Construct<Loom_LoRa>,			ModuleSortType::CommPlat },
 	{"Loom_nRF",				Construct<Loom_nRF>,			ModuleSortType::CommPlat },
+	{"Loom_Bluetooth",			Construct<Loom_Bluetooth>,		ModuleSortType::CommPlat },
 	
 	// InternetPlat
 	
