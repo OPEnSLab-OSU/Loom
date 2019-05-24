@@ -1,7 +1,7 @@
 #include "Loom_Package.h"
 
 // termination version
-void func() {} 
+// void func() {} 
 
 // termination version
 void package_json(JsonObject json, const char* module_name) {} 

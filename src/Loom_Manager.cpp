@@ -206,41 +206,41 @@ LoomRTC* LoomManager::get_rtc_module()
 	return rtc_module;
 }
 
-/////////////////////////////////////////////////////////////////////
-LoomModule* LoomManager::get_other_module(int idx)
-{
-	return (idx < other_module_count) ? other_modules[idx] : nullptr;
-}
+// /////////////////////////////////////////////////////////////////////
+// LoomModule* LoomManager::get_other_module(int idx)
+// {
+// 	return (idx < other_module_count) ? other_modules[idx] : nullptr;
+// }
 
-/////////////////////////////////////////////////////////////////////
-LoomSensor* LoomManager::get_sensor_module(int idx)
-{
-	return (idx < sensor_count) ? sensor_modules[idx] : nullptr;
-}
+// /////////////////////////////////////////////////////////////////////
+// LoomSensor* LoomManager::get_sensor_module(int idx)
+// {
+// 	return (idx < sensor_count) ? sensor_modules[idx] : nullptr;
+// }
 
-/////////////////////////////////////////////////////////////////////
-LoomActuator* LoomManager::get_actuator_module(int idx)
-{
-	return (idx < actuator_count) ? actuator_modules[idx] : nullptr;
-}
+// /////////////////////////////////////////////////////////////////////
+// LoomActuator* LoomManager::get_actuator_module(int idx)
+// {
+// 	return (idx < actuator_count) ? actuator_modules[idx] : nullptr;
+// }
 
-/////////////////////////////////////////////////////////////////////
-LoomCommPlat* LoomManager::get_comm_plat_module(int idx)
-{
-	return (idx < comm_count) ? comm_modules[idx] : nullptr;
-}
+// /////////////////////////////////////////////////////////////////////
+// LoomCommPlat* LoomManager::get_comm_plat_module(int idx)
+// {
+// 	return (idx < comm_count) ? comm_modules[idx] : nullptr;
+// }
 
-/////////////////////////////////////////////////////////////////////
-LoomInternetPlat* LoomManager::get_internet_plat_module(int idx)
-{
-	return (idx < internet_count) ? internet_modules[idx] : nullptr;
-}
+// /////////////////////////////////////////////////////////////////////
+// LoomInternetPlat* LoomManager::get_internet_plat_module(int idx)
+// {
+// 	return (idx < internet_count) ? internet_modules[idx] : nullptr;
+// }
 
-/////////////////////////////////////////////////////////////////////
-LoomLogPlat* LoomManager::get_log_plat_module(int idx)
-{
-	return (idx < log_count) ? log_modules[idx] : nullptr;
-}
+// /////////////////////////////////////////////////////////////////////
+// LoomLogPlat* LoomManager::get_log_plat_module(int idx)
+// {
+// 	return (idx < log_count) ? log_modules[idx] : nullptr;
+// }
 
 /////////////////////////////////////////////////////////////////////
 // void module_enable(LoomModule* LM, bool e) ?
@@ -300,47 +300,47 @@ const char* LoomManager::get_device_name()
 	return (const char*)name;
 }
 
-/////////////////////////////////////////////////////////////////////
-void LoomManager::packet_header_family(char* buf)
-{ 
-	sprintf(buf, "/F/%s", family); 
-}
+// /////////////////////////////////////////////////////////////////////
+// void LoomManager::packet_header_family(char* buf)
+// { 
+// 	sprintf(buf, "/F/%s", family); 
+// }
 
-/////////////////////////////////////////////////////////////////////
-const char* LoomManager::packet_header_family() 
-{
-	char result[50];
-	packet_header_family(result);
-	return (const char*)result;
-}
+// /////////////////////////////////////////////////////////////////////
+// const char* LoomManager::packet_header_family() 
+// {
+// 	char result[50];
+// 	packet_header_family(result);
+// 	return (const char*)result;
+// }
 
-/////////////////////////////////////////////////////////////////////
-void LoomManager::packet_header_subnet(char* buf)
-{ 
-	sprintf(buf, "/S/%s/%d", family, family_num); 
-}
+// /////////////////////////////////////////////////////////////////////
+// void LoomManager::packet_header_subnet(char* buf)
+// { 
+// 	sprintf(buf, "/S/%s/%d", family, family_num); 
+// }
 
-/////////////////////////////////////////////////////////////////////
-const char* LoomManager::packet_header_subnet() 
-{
-	char result[50];
-	packet_header_subnet(result);
-	return (const char*)result;
-}
+// /////////////////////////////////////////////////////////////////////
+// const char* LoomManager::packet_header_subnet() 
+// {
+// 	char result[50];
+// 	packet_header_subnet(result);
+// 	return (const char*)result;
+// }
 
-/////////////////////////////////////////////////////////////////////
-void LoomManager::packet_header_device(char* buf)
-{ 
-	sprintf(buf, "/D/%s/%d/%s/%d", family, family_num, device_name, instance); 
-}
+// /////////////////////////////////////////////////////////////////////
+// void LoomManager::packet_header_device(char* buf)
+// { 
+// 	sprintf(buf, "/D/%s/%d/%s/%d", family, family_num, device_name, instance); 
+// }
 
-/////////////////////////////////////////////////////////////////////
-const char* LoomManager::packet_header_device() 
-{
-	char result[50];
-	packet_header_device(result);
-	return (const char*)result;
-}
+// /////////////////////////////////////////////////////////////////////
+// const char* LoomManager::packet_header_device() 
+// {
+// 	char result[50];
+// 	packet_header_device(result);
+// 	return (const char*)result;
+// }
 
 /////////////////////////////////////////////////////////////////////
 const char* LoomManager::get_family() 
@@ -468,9 +468,9 @@ void LoomManager::package(JsonObject json)
 /////////////////////////////////////////////////////////////////////
 JsonObject LoomManager::package()
 {
-	LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
+	// LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
 	doc.clear();
-	LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
+	// LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
 
 
 	doc["type"] = "data";
@@ -489,7 +489,7 @@ JsonObject LoomManager::internalJson(bool clear)
 	if (clear) {
 		doc.clear();
 	}
-	LPrintln("\nDOC MemoryUsage in internalJson: ", doc.memoryUsage());
+	// LPrintln("\nDOC MemoryUsage in internalJson: ", doc.memoryUsage());
 	doc["type"] = "unknown";
 	return doc.as<JsonObject>();
 }

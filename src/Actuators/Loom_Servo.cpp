@@ -63,9 +63,6 @@ void Loom_Servo::print_state()
 /////////////////////////////////////////////////////////////////////
 void Loom_Servo::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, "Positions");
-
 	char tmp[8];
 	for (int i = 0; i < servo_count; i++) {
 		sprintf(tmp, "Servo%d", i);

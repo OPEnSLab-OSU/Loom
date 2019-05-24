@@ -48,7 +48,9 @@ public:
 	int8_t		getCommand( uint16_t max_timeout );
 
 
-	bool		test_send(const char* string);
+	bool		test_send(const uint8_t val);
+	bool		test_send_str(const char* string);
+
 
 
 	// Build OSC Bundle from packet if any exists

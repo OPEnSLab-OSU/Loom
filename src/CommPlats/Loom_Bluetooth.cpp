@@ -125,16 +125,27 @@ int8_t Loom_Bluetooth::getCommand( uint16_t max_timeout )
 
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Bluetooth::test_send(const char* string)
+
+bool Loom_Bluetooth::test_send(const uint8_t val)
 {
 	if ( BLE->isConnected() ) {
-		BLE->write(string);
+		BLE->print(val);
 		return true;
 	} else {
 		return false;
 	}
 }
 
+
+bool Loom_Bluetooth::test_send_str(const char* string)
+{
+	if ( BLE->isConnected() ) {
+		BLE->print(string);
+		return true;
+	} else {
+		return false;
+	}
+}
 
 
 

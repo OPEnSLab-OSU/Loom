@@ -234,7 +234,7 @@ protected:
 
 	OSCBundle	bundle;	// Not sure if this will always work...
 
-	StaticJsonDocument<1000> doc;
+	StaticJsonDocument<2000> doc;
 
 
 public:
@@ -302,12 +302,7 @@ public:
 // void print_data
 
 
-
-
-
 	void		measure();  
-	// void		package();
-	// void		package(OSCBundle& bndl);
 	void		package(JsonObject json);
 	JsonObject	package();
 
@@ -354,12 +349,12 @@ public:
 	Loom_Interrupt_Manager*	get_interrupt_manager();
 	Loom_Sleep_Manager*		get_sleep_manager();
 	LoomRTC*				get_rtc_module();
-	LoomModule*				get_other_module(int idx);
-	LoomSensor*				get_sensor_module(int idx);
-	LoomActuator*			get_actuator_module(int idx);
-	LoomCommPlat*			get_comm_plat_module(int idx);
-	LoomInternetPlat*		get_internet_plat_module(int idx);
-	LoomLogPlat*			get_log_plat_module(int idx);
+	// LoomModule*				get_other_module(int idx);
+	// LoomSensor*				get_sensor_module(int idx);
+	// LoomActuator*			get_actuator_module(int idx);
+	// LoomCommPlat*			get_comm_plat_module(int idx);
+	// LoomInternetPlat*		get_internet_plat_module(int idx);
+	// LoomLogPlat*			get_log_plat_module(int idx);
 
 
 
@@ -374,25 +369,25 @@ public:
 	const char*	get_device_name();
 
 
-// Maybe remove these 6
-	/// Copy device identification message header (to family level) string to buffer.
-	/// \param[out]	buf The bufer to copy family name into
-	void		packet_header_family(char* buf);
-	/// Return device identification message header (to family level) string.
-	/// \return	The device family string
-	const char*	 packet_header_family();
-	/// Copy device identification message header (to subnet level) string to buffer.
-	/// \param[out] buf The bufer to copy subnet name into
-	void		packet_header_subnet(char* buf);
-	/// Return device identification message header (to subnet level) string.
-	/// \return The device subnet string
-	const char*	packet_header_subnet();
-	/// Copy device identification message header (to device specific level) string to buffer.
-	/// \param[out] buf The bufer to copy device name into
-	void		packet_header_device(char* buf);
-	/// Return device identification message header (to device specific level) string.
-	/// \return The device name and number string
-	const char*	packet_header_device();
+// // Maybe remove these 6
+// 	/// Copy device identification message header (to family level) string to buffer.
+// 	/// \param[out]	buf The bufer to copy family name into
+// 	void		packet_header_family(char* buf);
+// 	/// Return device identification message header (to family level) string.
+// 	/// \return	The device family string
+// 	const char*	 packet_header_family();
+// 	/// Copy device identification message header (to subnet level) string to buffer.
+// 	/// \param[out] buf The bufer to copy subnet name into
+// 	void		packet_header_subnet(char* buf);
+// 	/// Return device identification message header (to subnet level) string.
+// 	/// \return The device subnet string
+// 	const char*	packet_header_subnet();
+// 	/// Copy device identification message header (to device specific level) string to buffer.
+// 	/// \param[out] buf The bufer to copy device name into
+// 	void		packet_header_device(char* buf);
+// 	/// Return device identification message header (to device specific level) string.
+// 	/// \return The device name and number string
+// 	const char*	packet_header_device();
 
 
 	/// Get device family name.

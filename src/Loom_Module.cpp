@@ -92,24 +92,24 @@ void LoomModule::print_state()
 // 	}
 // }
 
-/////////////////////////////////////////////////////////////////////
-void LoomModule::resolve_bundle_address(char* address, char* suffix)
-{
-	if (device_manager != nullptr) {
-		char tmp[30];
-		device_manager->packet_header_device(tmp);
-		sprintf(address, "%s/%s", tmp, module_name);
-		// device_manager->packet_header_device(address);
+// /////////////////////////////////////////////////////////////////////
+// void LoomModule::resolve_bundle_address(char* address, char* suffix)
+// {
+// 	if (device_manager != nullptr) {
+// 		char tmp[30];
+// 		device_manager->packet_header_device(tmp);
+// 		sprintf(address, "%s/%s", tmp, module_name);
+// 		// device_manager->packet_header_device(address);
 
-	} else {
-		// strcpy(address, module_name);
-		sprintf(address, "/%s", module_name);
-	}
+// 	} else {
+// 		// strcpy(address, module_name);
+// 		sprintf(address, "/%s", module_name);
+// 	}
 
-	if (strlen(suffix) > 0) {
-		sprintf(address, "%s/%s", address, suffix);
-	} 
-}
+// 	if (strlen(suffix) > 0) {
+// 		sprintf(address, "%s/%s", address, suffix);
+// 	} 
+// }
 
 
 
