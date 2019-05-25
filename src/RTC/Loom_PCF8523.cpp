@@ -23,6 +23,8 @@ Loom_PCF8523::Loom_PCF8523(
 	// rtc_inst = new RTC_PCF8523();
 	rtc_inst = new PCF8523();
 	init();
+
+	clear_alarms();
 }
 
 /////////////////////////////////////////////////////////////////////

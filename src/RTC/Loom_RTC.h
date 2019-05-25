@@ -149,7 +149,7 @@ public:
 	virtual void	set_alarm(DateTime time) = 0;
 	virtual void	set_alarm(TimeSpan duration) = 0;
 
-	virtual void	clear_alarms() {}
+	virtual void	clear_alarms() = 0;
 
 // Other functions that would be nice:
 	// virtual TimeSpan	get_timer_remaining();

@@ -105,12 +105,17 @@ void Loom_DS3231::set_alarm(TimeSpan duration)
 /////////////////////////////////////////////////////////////////////
 void Loom_DS3231::clear_alarms()
 {
+	LPrintln("\n\nClearing DS3231 alarms");
 	rtc_inst->armAlarm(1, false);
 	rtc_inst->clearAlarm(1);
 	rtc_inst->alarmInterrupt(1, false);
 	rtc_inst->armAlarm(2, false);
 	rtc_inst->clearAlarm(2);
 	rtc_inst->alarmInterrupt(2, false);
+
+	// Not sure if this goes here
+	// rtc_inst->writeSqwPinMode(DS3231_OFF);
+
 }
 
 

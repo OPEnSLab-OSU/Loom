@@ -131,13 +131,14 @@ Loom_SD& LoomManager::SDCARD(int idx)
 
 Loom_DS3231& LoomManager::DS3231(int idx) 
 {
-	LoomModule* tmp = find_module(ModuleType::DS3231, idx, (LoomModule**)rtc_module, 1);
+	LoomModule* tmp =rtc_module;
 	return (*(Loom_DS3231*)( (tmp) ? tmp : &global_stub ));
 }
 
 Loom_PCF8523& LoomManager::PCF8523(int idx) 
 {
-	LoomModule* tmp = find_module(ModuleType::PCF8523, idx, (LoomModule**)rtc_module, 1);
+	// LoomModule* tmp = find_module(ModuleType::PCF8523, idx, (LoomModule**)rtc_module, 1);
+	LoomModule* tmp =rtc_module;
 	return (*(Loom_PCF8523*)( (tmp) ? tmp : &global_stub ));
 }
 

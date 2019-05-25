@@ -90,7 +90,7 @@ LoomRTC::LoomRTC(
 		pinMode(int_pin, INPUT_PULLUP);		
 	}
 
-	clear_alarms();
+	// clear_alarms();
 }
 
 /////////////////////////////////////////////////////////////////////
