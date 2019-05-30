@@ -1,7 +1,4 @@
-
-// #ifndef LOOM_MPU6050_h
-// #define LOOM_MPU6050_h
-
+// #pragma once
 
 // #include "Loom_I2C_Sensor.h"
 
@@ -44,5 +41,3 @@
 
 // };
 
-
-// #endif

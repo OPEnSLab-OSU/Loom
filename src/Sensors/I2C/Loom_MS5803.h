@@ -1,6 +1,4 @@
-
-#ifndef LOOM_MS5803_h
-#define LOOM_MS5803_h
+#pragma once
 
 #include "Loom_I2C_Sensor.h"
 
@@ -54,4 +52,4 @@ private:
 };
 
 
-#endif
+

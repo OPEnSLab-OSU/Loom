@@ -1,9 +1,4 @@
-
-
-#ifndef LOOM_MODULE_FACTORY_h
-#define LOOM_MODULE_FACTORY_h
-
-
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -148,6 +143,3 @@ private:
 
 };
 
-
-
-#endif // of LOOM_MODULE_FACTORY_h

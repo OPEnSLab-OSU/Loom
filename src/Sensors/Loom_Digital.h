@@ -1,6 +1,4 @@
-
-#ifndef LOOM_DIGITAL_h
-#define LOOM_DIGITAL_h
+#pragma once
 
 #include "Loom_Sensor.h"
 
@@ -98,6 +96,3 @@ private:
 
 };
 
-
-
-#endif

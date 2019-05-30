@@ -1,6 +1,4 @@
-
-#ifndef LOOM_RELAY_h
-#define LOOM_RELAY_h
+#pragma once
 
 
 #include "Loom_Actuator.h"
@@ -67,19 +65,3 @@ private:
 
 
 
-// class Loom_Relay_Stub : public Loom_Relay
-// {
-// 	Loom_Relay_Stub() {}
-
-// 	void print_config() { LPrintln("No valid Relay found"); }
-// 	void print_state() { LPrintln("No valid Relay found"); }
-// 	void package(OSCBundle bndl, char* suffix="") { LPrintln("No valid Relay found"); }
-// 	bool message_route(OSCMessage& msg, int address_offset) { LPrintln("No valid Relay found"); return false; }
-// 	void set_relay(bool state) { LPrintln("No valid Relay found"); }
-// 	void set_relay(OSCMessage& msg) { LPrintln("No valid Relay found"); }
-// };
-
-
-
-
-#endif // of LOOM_RELAY_h

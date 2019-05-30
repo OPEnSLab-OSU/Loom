@@ -1,6 +1,4 @@
-
-#ifndef LOOM_INTERRUPT_MANAGER_h
-#define LOOM_INTERRUPT_MANAGER_h
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -285,4 +283,3 @@ private:
 };
 
 
-#endif // of #ifndef LOOM_INTERRUPT_MANAGER_h

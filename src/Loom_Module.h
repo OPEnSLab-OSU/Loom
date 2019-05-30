@@ -1,6 +1,4 @@
 #pragma once
-// #ifndef LOOM_MODULE_h
-// #define LOOM_MODULE_h
 
 #include "Loom_Manager.h"
 
@@ -187,23 +185,11 @@ public:
 
 protected:
 
-	/// Determine what address should be used for an OSC bundle for this module
-	/// \param[out]	address		The 
-	/// \param[in]	
-	// void			resolve_bundle_address(char* address, char* suffix="");
 
 private:
 
 
 };
-
-
-// #endif
-
-
-
-
-
 
 
 

@@ -1,6 +1,4 @@
-
-#ifndef LOOM_SLEEP_MANAGER_h
-#define LOOM_SLEEP_MANAGER_h
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -102,5 +100,4 @@ private:
 };
 
 
-#endif // of #ifndef LOOM_SLEEP_MANAGER_h
 

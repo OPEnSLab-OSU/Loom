@@ -1,6 +1,4 @@
-
-#ifndef LOOM_LORA_h
-#define LOOM_LORA_h
+#pragma once
 
 #include "Loom_CommPlat.h"
 
@@ -103,4 +101,3 @@ private:
 };
 
 
-#endif

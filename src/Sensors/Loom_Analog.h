@@ -1,6 +1,4 @@
-
-#ifndef LOOM_ANALOG_h
-#define LOOM_ANALOG_h
+#pragma once
 
 #include "Loom_Sensor.h"
 
@@ -220,5 +218,3 @@ private:
 };
 
 
-
-#endif

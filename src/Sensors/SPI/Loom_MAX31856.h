@@ -1,6 +1,4 @@
-
-#ifndef LOOM_MAX31856_h
-#define LOOM_MAX31856_h
+#pragma once
 
 #include "Loom_SPI_Sensor.h"
 
@@ -33,7 +31,7 @@ public:
 	///
 	/// \param[in]	module_name			String | <"MAX31856"> | null | MAX31856 module name
 	/// \param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
-	/// \param[in]	CS_pin					Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used for chip select
+	/// \param[in]	CS_pin				Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used for chip select
 	/// \param[in]	SPI_a				Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used for Software Serial a
 	/// \param[in]	SPI_b				Set(Int) | <11> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used for Software Serial b
 	/// \param[in]	SPI_c				Set(Int) | <12> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used for Software Serial c
@@ -70,6 +68,3 @@ private:
 
 };
 
-
-
-#endif // of #ifndef LOOM_MAX31856_h

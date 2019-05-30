@@ -1,6 +1,4 @@
-
-#ifndef LOOM_OLED_h
-#define LOOM_OLED_h
+#pragma once
 
 #include "Loom_LogPlat.h"
 
@@ -139,5 +137,3 @@ private:
 };
 
 
-
-#endif

@@ -1,7 +1,4 @@
-
-#ifndef LOOM_MULTIPLEXER_h
-#define LOOM_MULTIPLEXER_h
-
+#pragma once
 
 #include "Loom_Module.h"
 #include "Sensors/I2C/Loom_I2C_Sensor.h"
@@ -167,7 +164,3 @@ private:
 
 
 
-
-
-
-#endif

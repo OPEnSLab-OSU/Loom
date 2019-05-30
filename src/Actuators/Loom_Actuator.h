@@ -1,6 +1,4 @@
-
-#ifndef LOOM_ACTUATOR_h
-#define LOOM_ACTUATOR_h
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -32,5 +30,3 @@ private:
 
 };
 
-
-#endif

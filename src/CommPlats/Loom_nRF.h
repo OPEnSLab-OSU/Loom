@@ -1,6 +1,4 @@
-
-#ifndef LOOM_NRF_h
-#define LOOM_NRF_h
+#pragma once
 
 #include "Loom_CommPlat.h"
 
@@ -104,4 +102,3 @@ private:
 };
 
 
-#endif // of #ifndef LOOM_NRF_h

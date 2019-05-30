@@ -1,7 +1,4 @@
-
-#ifndef LOOM_DS3231_h
-#define LOOM_DS3231_h
-
+#pragma once
 
 #include "Loom_RTC.h"
 
@@ -55,5 +52,3 @@ protected:
 
 };
 
-
-#endif // of #ifndef LOOM_DS3231_h

@@ -1,6 +1,4 @@
-
-#ifndef LOOM_SPI_SENSOR_h
-#define LOOM_SPI_SENSOR_h
+#pragma once
 
 #include "../Loom_Sensor.h"
 
@@ -37,5 +35,3 @@ private:
 };
 
 
-
-#endif // of #ifndef LOOM_SPI_SENSOR_h

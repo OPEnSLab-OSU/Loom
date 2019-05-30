@@ -1,6 +1,4 @@
-
-#ifndef LOOM_DECAGON_5TM_h
-#define LOOM_DECAGON_5TM_h
+#pragma once
 
 #include "Loom_SDI12_Sensor.h"
 
@@ -46,4 +44,3 @@ private:
 
 
 
-#endif // of #ifndef LOOM_DECAGON_5TM_h

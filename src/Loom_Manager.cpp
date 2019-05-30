@@ -515,12 +515,12 @@ JsonObject LoomManager::internalJson(bool clear)
 // }
 
 
-/////////////////////////////////////////////////////////////////////
-void LoomManager::print_current_bundle() 
-{
-	LPrintln("Member Bundle:");
-	print_bundle(bundle);
-}
+// /////////////////////////////////////////////////////////////////////
+// void LoomManager::print_current_bundle() 
+// {
+// 	LPrintln("Member Bundle:");
+// 	print_bundle(bundle);
+// }
 
 /////////////////////////////////////////////////////////////////////
 void LoomManager::flash_LED(uint count, uint time_high, uint time_low)

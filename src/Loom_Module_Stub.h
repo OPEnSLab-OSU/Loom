@@ -1,3 +1,4 @@
+#pragma once
 
 #include "Loom_Module.h"
 

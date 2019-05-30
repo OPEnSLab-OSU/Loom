@@ -1,7 +1,4 @@
-
-#ifndef LOOM_COMM_PLAT_h
-#define LOOM_COMM_PLAT_h
-
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -70,6 +67,3 @@ public:
 };
 
 
-
-
-#endif

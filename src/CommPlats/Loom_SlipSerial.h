@@ -1,5 +1,4 @@
-#ifndef LOOM_SLIPSERIAL_H
-#define LOOM_SLIPSERIAL_H
+#pragma once
 
 #include "Loom_CommPlat.h"
 
@@ -61,4 +60,3 @@ private:
 
 };
 
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef LOOM_STEPPER_h
-#define LOOM_STEPPER_h
+#pragma once
 
 #include "Loom_Actuator.h"
 
@@ -70,5 +68,3 @@ private:
 
 };
 
-
-#endif // of LOOM_STEPPER_h

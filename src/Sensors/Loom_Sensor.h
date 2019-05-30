@@ -1,7 +1,4 @@
-
-#ifndef LOOM_SENSOR_h
-#define LOOM_SENSOR_h
-
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -51,6 +48,3 @@ private:
 
 };
 
-
-
-#endif

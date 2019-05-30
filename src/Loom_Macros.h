@@ -1,6 +1,6 @@
+#pragma once
 
-#ifndef LOOM_MACROS_h
-#define LOOM_MACROS_h
+// #include "Arduino.h"
 
 // If LOOM_DEBUG was never specified elsewhere, default to enabled
 #ifndef LOOM_DEBUG
@@ -11,15 +11,15 @@
 
 
 #define EXPAND_ARRAY1(x) x[0]
-#define EXPAND_ARRAY2(x) EXPAND_ARRAY1(x), x[1]
-#define EXPAND_ARRAY3(x) EXPAND_ARRAY2(x), x[2]
-#define EXPAND_ARRAY4(x) EXPAND_ARRAY3(x), x[3]
-#define EXPAND_ARRAY5(x) EXPAND_ARRAY4(x), x[4]
-#define EXPAND_ARRAY6(x) EXPAND_ARRAY5(x), x[5]
-#define EXPAND_ARRAY7(x) EXPAND_ARRAY6(x), x[6]
-#define EXPAND_ARRAY8(x) EXPAND_ARRAY7(x), x[7]
-#define EXPAND_ARRAY9(x) EXPAND_ARRAY8(x), x[8]
-#define EXPAND_ARRAY10(x) EXPAND_ARRAY9(x), x[9]
+#define EXPAND_ARRAY2(x)  EXPAND_ARRAY1(x),  x[1]
+#define EXPAND_ARRAY3(x)  EXPAND_ARRAY2(x),  x[2]
+#define EXPAND_ARRAY4(x)  EXPAND_ARRAY3(x),  x[3]
+#define EXPAND_ARRAY5(x)  EXPAND_ARRAY4(x),  x[4]
+#define EXPAND_ARRAY6(x)  EXPAND_ARRAY5(x),  x[5]
+#define EXPAND_ARRAY7(x)  EXPAND_ARRAY6(x),  x[6]
+#define EXPAND_ARRAY8(x)  EXPAND_ARRAY7(x),  x[7]
+#define EXPAND_ARRAY9(x)  EXPAND_ARRAY8(x),  x[8]
+#define EXPAND_ARRAY10(x) EXPAND_ARRAY9(x),  x[9]
 #define EXPAND_ARRAY11(x) EXPAND_ARRAY10(x), x[10]
 #define EXPAND_ARRAY12(x) EXPAND_ARRAY11(x), x[11]
 #define EXPAND_ARRAY13(x) EXPAND_ARRAY12(x), x[12]
@@ -78,4 +78,3 @@ void LPrintlnAll(Types... vars)
 #define LPrintln_Dec_Hex(X)    (LOOM_DEBUG==0) ? :  Serial.print(X); Serial.print(" (0x"); Serial.print(X, HEX); Serial.println(")")
 
 
-#endif

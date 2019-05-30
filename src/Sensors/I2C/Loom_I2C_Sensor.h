@@ -1,6 +1,4 @@
-
-#ifndef LOOM_I2C_SENSOR_h
-#define LOOM_I2C_SENSOR_h
+#pragma once
 
 #include "../Loom_Sensor.h"
 #include <Wire.h>
@@ -44,4 +42,3 @@ private:
 };
 
 
-#endif // of #ifndef LOOM_I2C_SENSOR_h

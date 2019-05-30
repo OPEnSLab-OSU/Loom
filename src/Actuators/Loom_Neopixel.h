@@ -1,7 +1,4 @@
-
-#ifndef LOOM_NEOPIXEL_h
-#define LOOM_NEOPIXEL_h
-
+#pragma once
 
 #include "Loom_Actuator.h"
 
@@ -77,4 +74,3 @@ private:
 };
 
 
-#endif // of LOOM_NEOPIXEL_h

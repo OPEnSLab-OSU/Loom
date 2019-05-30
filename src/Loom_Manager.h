@@ -1,6 +1,4 @@
-
-#ifndef LOOM_MANAGER_h
-#define LOOM_MANAGER_h
+#pragma once
 
 
 // these might need to be forward declared instead
@@ -232,7 +230,7 @@ protected:
 	Verbosity	package_verbosity;
 
 
-	OSCBundle	bundle;	// Not sure if this will always work...
+	// OSCBundle	bundle;	// Not sure if this will always work...
 
 	StaticJsonDocument<2000> doc;
 
@@ -311,7 +309,7 @@ public:
 	JsonObject	internalJson(bool clear = true);
 
 
-	void		print_current_bundle();
+	// void		print_current_bundle();
 
 
 	// bool		receive(OSCBundle& bndl);
@@ -496,4 +494,3 @@ private:
 };
 
 
-#endif // of LOOM_MANAGER_h

@@ -1,7 +1,4 @@
-
-#ifndef LOOM_SDI12_SENSOR_h
-#define LOOM_SDI12_SENSOR_h
-
+#pragma once
 
 #include "../Loom_Sensor.h"
 
@@ -38,5 +35,3 @@ private:
 };
 
 
-
-#endif // of #ifndef LOOM_SDI12_SENSOR_h

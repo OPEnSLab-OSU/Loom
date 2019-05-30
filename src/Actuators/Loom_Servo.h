@@ -1,6 +1,4 @@
-
-#ifndef LOOM_SERVO_h
-#define LOOM_SERVO_h
+#pragma once
 
 #include "Loom_Actuator.h"
 
@@ -70,4 +68,4 @@ private:
 };
 
 
-#endif // of LOOM_SERVO_h
+#pragma once

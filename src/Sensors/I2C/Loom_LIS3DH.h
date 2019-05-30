@@ -1,6 +1,4 @@
-
-#ifndef LOOM_LIS3DH_h
-#define LOOM_LIS3DH_h
+#pragma once
 
 #include "Loom_I2C_Sensor.h"
 
@@ -49,4 +47,4 @@ private:
 };
 
 
-#endif
+

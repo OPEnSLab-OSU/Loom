@@ -1,6 +1,4 @@
-
-#ifndef LOOM_FXAS21002_h
-#define LOOM_FXAS21002_h
+#pragma once
 
 #include "Loom_I2C_Sensor.h"
 
@@ -48,4 +46,3 @@ private:
 };
 
 
-#endif

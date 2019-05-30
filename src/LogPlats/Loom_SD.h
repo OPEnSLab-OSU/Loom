@@ -1,6 +1,4 @@
-
-#ifndef LOOM_SD_h
-#define LOOM_SD_h
+#pragma once
 
 #include "Loom_LogPlat.h"
 
@@ -264,4 +262,3 @@ private:
 };
 
 
-#endif

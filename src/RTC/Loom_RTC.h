@@ -1,7 +1,4 @@
-
-#ifndef LOOM_RTC_h
-#define LOOM_RTC_h
-
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -209,5 +206,3 @@ protected:
 };
 
 
-
-#endif // of #ifndef LOOM_RTC_h
