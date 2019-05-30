@@ -32,6 +32,9 @@ Loom_LoRa::Loom_LoRa(
 	pinMode(8, INPUT_PULLUP);
 	// #endif
 
+	pinMode(RFM95_RST, OUTPUT);
+	digitalWrite(RFM95_RST, HIGH);
+
 	bool status;
 
 	// Initialize Manager
@@ -58,6 +61,8 @@ Loom_LoRa::Loom_LoRa(
 	print_module_label();
 	LPrintln("\tSetting max retry count ", this->retry_count);
 	manager->setRetries(this->retry_count);
+
+	driver->setModemConfig(RH_RF95::Bw500Cr45Sf128);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -85,85 +90,6 @@ void Loom_LoRa::print_config()
 	LPrintln('\t', "Power Level         : ", power_level );
 	LPrintln('\t', "Retry Count         : ", retry_count );
 	LPrintln('\t', "Retry Timeout       : ", retry_timeout );
-}
-
-/////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::receive_bundle(OSCBundle& bndl) 
-{
-	if ( manager->available() ) {
-		uint8_t len = RH_RF95_MAX_MESSAGE_LEN;
-		uint8_t from;
-		uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
-		memset(buf, '\0', RH_RF95_MAX_MESSAGE_LEN);
-
-		if ( manager->recvfromAck(buf, &len, &from) ) {
-
-			signal_strength = driver->lastRssi();
-
-			if (print_verbosity == Verbosity::V_HIGH) {
-				LPrintln("Received: ", (const char*)buf);
-				LPrintln("Len: ", len);
-			}
-
-			// This is done just in case the compressed string, uncompresses to more than 251 characters
-			char larger_buf[384];
-			memset(larger_buf, '\0', sizeof(larger_buf));
-			strcpy(larger_buf, (const char*)buf);
-
-			if (print_verbosity == Verbosity::V_HIGH) {
-				LPrintln("Memset larger_buf");
-			}
-
-			LoomCommPlat::convert_string_to_bundle( (char*)larger_buf, bndl ); 
-
-			if (print_verbosity == Verbosity::V_HIGH) {
-				LPrintln("Converted string to bundle");
-			}
-
-			return true;
-			 
-		} // of if (manager.recvfromAck(buf, &len, &from))
-	} // of if (manager.available()) 
-
-	return false;
-}
-
-/////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::send_bundle(OSCBundle& bndl, uint16_t destination) 
-// bool send_bundle(OSCBundle& bndl, uint16_t destination=01) 
-// bool send_bundle(OSCBundle& bndl) 
-{
-	LPrintln("Sending LoRa bundle to address: ", destination);
-
-	char message[RH_RF95_MAX_MESSAGE_LEN];
-	memset(message, '\0', sizeof(message));
-	LoomCommPlat::convert_bundle_to_string(bndl, message);
-
-	if (print_verbosity == Verbosity::V_HIGH) {
-		LPrintln(message);
-		LPrintln("Message length: ", strlen(message));
-	}
-
-	// bool is_sent = manager->sendtoWait( (uint8_t*)message, strlen(message)+1, destination );
-	bool is_sent = manager->sendtoWait( (uint8_t*)message, strlen(message), destination );
-
-	LPrintln("Send LoRa bundle " , (is_sent) ? "successful" : "failed" );
-
-	signal_strength = driver->lastRssi(); 
-
-	return is_sent;
-}
-
-/////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::send_bundle(OSCBundle& bndl) 
-{
-	send_bundle(bndl, friend_address);
-}
-
-/////////////////////////////////////////////////////////////////////
-void Loom_LoRa::broadcast_bundle(OSCBundle& bndl) 
-{
-
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -212,26 +138,82 @@ uint Loom_LoRa::get_friend_address()
 	return friend_address; 
 }
 
-
-
 /////////////////////////////////////////////////////////////////////
-bool		receive_json(JsonObject json) 
+bool Loom_LoRa::receive(JsonObject json) 
 {
+	if ( manager->available() ) {
+		uint8_t len = max_message_len;
+		uint8_t from;
+		uint8_t buffer[max_message_len];
+		memset(buffer, '\0', max_message_len);
 
+		if ( manager->recvfromAck(buffer, &len, &from) ) {
+
+			signal_strength = driver->lastRssi();
+
+			if (print_verbosity == Verbosity::V_HIGH) {
+				print_module_label();
+				LPrintln("Received: ", (const char*)buffer);
+				print_module_label();
+				LPrintln("Len: ", len);
+			}
+
+			messageJson.clear();
+
+			if (deserializeMsgPack(messageJson, buffer) != DeserializationError::Ok ) {
+				print_module_label();
+				LPrintln("Failed to parse MsgPack");
+				return false;
+			}
+
+			json.set(messageJson.as<JsonObject>());
+
+			if (print_verbosity == Verbosity::V_HIGH) {
+				// LPrintln("\nmessageJson:");
+				// serializeJsonPretty(messageJson, Serial);
+				print_module_label();
+				LPrintln("\njson:");
+				serializeJsonPretty(json, Serial);
+				LPrintln();
+			}
+
+			return true;
+
+		} // of if (manager.recvfromAck(buffer, &len, &from))
+	} // of if (manager.available()) 
+
+	return false;
 }
 
 /////////////////////////////////////////////////////////////////////
-bool		send_json(JsonObject json, uint16_t destination) 
+bool Loom_LoRa::send(JsonObject json, uint16_t destination) 
 {
+	char buffer[max_message_len];
+	memset(buffer, '\0', sizeof(buffer));
 
+	serializeMsgPack(json, buffer, max_message_len);
+
+	if (print_verbosity == Verbosity::V_HIGH) {
+		print_module_label();
+		LPrintln(buffer);
+		// LPrintln("Message length: ", strlen(buffer));
+		LPrintln("MsgPack size: ", measureMsgPack(json));
+	}
+
+	// bool is_sent = manager->sendtoWait( (uint8_t*)buffer, strlen(buffer)+1, destination );
+	bool is_sent = manager->sendtoWait( (uint8_t*)buffer, measureMsgPack(json), destination );
+
+	print_module_label();
+	LPrintln("Send LoRa bundle " , (is_sent) ? "successful" : "failed" );
+	signal_strength = driver->lastRssi(); 
+	return is_sent;
 }
 
 /////////////////////////////////////////////////////////////////////
-bool		send_json(JsonObject json) 
+bool Loom_LoRa::send(JsonObject json) 
 {
-
+	send(json, friend_address);
 }
-
 
 
 

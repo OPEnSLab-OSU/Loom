@@ -51,32 +51,17 @@ public:
 	bool		test_send(const uint8_t val);
 	bool		test_send_str(const char* string);
 
-
-
-	// Build OSC Bundle from packet if any exists
-	bool		receive_bundle(OSCBundle& bndl);
-
-
-	// Send an OSC bundle
-	// Should overload or use default args to optionally allow default address
-	bool		send_bundle(OSCBundle& bndl, uint16_t destination);
-	bool		send_bundle(OSCBundle& bndl);
-
-	// Broadcast an OSC bundle
-	void		broadcast_bundle(OSCBundle& bndl);
-
-
 	void		set_address(uint addr);
 	uint		get_address();
 
 
 
 	// Build json from packet if any exists
-	bool		receive_json(JsonObject json) {}
+	bool		receive(JsonObject json) {}
 
 	// Send json
-	bool		send_json(JsonObject json, uint16_t destination) {}
-	bool		send_json(JsonObject json) {}
+	bool		send(JsonObject json, uint16_t destination) {}
+	bool		send(JsonObject json) {}
 
 
 

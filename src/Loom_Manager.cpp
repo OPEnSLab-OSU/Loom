@@ -472,9 +472,13 @@ JsonObject LoomManager::package()
 	doc.clear();
 	// LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
 
-
+// This works
 	doc["type"] = "data";
 	JsonObject json = doc.as<JsonObject>();
+
+
+// Test 
+	// JsonObject json = doc.to<JsonObject>();
 
 	package(json);
 	// LPrintln("In JsonObject LoomManager::package()");
@@ -488,10 +492,17 @@ JsonObject LoomManager::internalJson(bool clear)
 {
 	if (clear) {
 		doc.clear();
+		return doc.to<JsonObject>();
+
+	} 
+	else {
+		return doc.as<JsonObject>();
 	}
 	// LPrintln("\nDOC MemoryUsage in internalJson: ", doc.memoryUsage());
-	doc["type"] = "unknown";
-	return doc.as<JsonObject>();
+
+	// doc["type"] = "unknown";
+	// return doc.as<JsonObject>();
+
 }
 
 
