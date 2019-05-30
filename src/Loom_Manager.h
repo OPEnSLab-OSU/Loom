@@ -304,16 +304,14 @@ public:
 	void		package(JsonObject json);
 	JsonObject	package();
 
+	bool		cmd_route(JsonObject) {}
+
+
 
 // Return reference to internal json object
 	JsonObject	internalJson(bool clear = true);
 
-
 	// void		print_current_bundle();
-
-
-	// bool		receive(OSCBundle& bndl);
-	// bool		send(OSCBundle& bndl);
 	// bool		log()
 
 

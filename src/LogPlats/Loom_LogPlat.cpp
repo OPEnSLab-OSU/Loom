@@ -51,12 +51,6 @@ void LoomLogPlat::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-bool LoomLogPlat::message_route(OSCMessage& msg, int address_offset) 
-{
-	// maybe set subnet_scope 
-}
-
-/////////////////////////////////////////////////////////////////////
 bool LoomLogPlat::check_millis() 
 {
 	if ( (millis() > min_filter_delay) && ( (millis()-last_log_millis) < min_filter_delay ) ) {

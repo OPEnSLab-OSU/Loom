@@ -97,7 +97,8 @@ public:
 	virtual void 	print_config() override;
 	virtual void 	print_state() override;
 	virtual void 	measure() {};
-	virtual bool 	message_route(OSCMessage& msg, int address_offset) = 0;
+	// virtual bool 	message_route(OSCMessage& msg, int address_offset) = 0;
+	virtual bool	cmd_route(JsonObject) {}
 	virtual void 	package(JsonObject json) override;
 
 

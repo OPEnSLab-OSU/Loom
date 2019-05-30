@@ -50,7 +50,8 @@ public:
 	// General
 	virtual void	print_config() override;
 	virtual void	measure() {}
-	virtual bool	message_route(OSCMessage& msg, int address_offset) {}
+	// virtual bool	message_route(OSCMessage& msg, int address_offset) {}
+	virtual bool	cmd_route(JsonObject) {}
 	virtual void 	package(JsonObject json) override;
 
 	virtual void	set_address(uint a) = 0;

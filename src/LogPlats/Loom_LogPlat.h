@@ -51,7 +51,8 @@ public:
 	// Inherited Methods
 	virtual void	print_config();
 	virtual void	measure();
-	virtual bool	message_route(OSCMessage& msg, int address_offset);
+	// virtual bool	message_route(OSCMessage& msg, int address_offset);
+	virtual bool	cmd_route(JsonObject) {}
 	virtual void	log(JsonObject json) = 0;
 	virtual void 	package(JsonObject json) {}
 

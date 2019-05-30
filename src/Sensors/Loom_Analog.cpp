@@ -199,12 +199,6 @@ void Loom_Analog::package(JsonObject json)
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Analog::message_route(OSCMessage& msg, int address_offset) 
-{
-	// Enable or disable individual pins
-}
-
-/////////////////////////////////////////////////////////////////////
 void Loom_Analog::set_analog_resolution(uint8_t res) 
 { 
 	analogReadResolution(read_resolution = res); 

@@ -33,7 +33,9 @@ public:
 	virtual void	calibrate() {};
 	virtual void	measure() = 0;
 	virtual void 	package(JsonObject json) = 0;
-	virtual bool	message_route(OSCMessage& msg, int address_offset) {};
+	// virtual bool	message_route(OSCMessage& msg, int address_offset) {};
+	virtual bool	cmd_route(JsonObject) {}
+
 
 
 	/// Set the number of samples to take

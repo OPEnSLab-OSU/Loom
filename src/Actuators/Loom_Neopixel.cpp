@@ -85,19 +85,25 @@ void Loom_Neopixel::print_state()
 	}
 }
 
-/////////////////////////////////////////////////////////////////////
-bool Loom_Neopixel::message_route(OSCMessage& msg, int address_offset) 
-{
-	// Set color
-	// if ( msg.dispatch("/SetNeopixel", cmd_color, address_offset) ) return true;
+// /////////////////////////////////////////////////////////////////////
+// bool Loom_Neopixel::message_route(OSCMessage& msg, int address_offset) 
+// {
+// 	// Set color
+// 	// if ( msg.dispatch("/SetNeopixel", cmd_color, address_offset) ) return true;
 	
-	if ( msg.fullMatch( "/SetNeopixel" , address_offset) ) {
-		set_color(msg); return true;
-	}
+// 	if ( msg.fullMatch( "/SetNeopixel" , address_offset) ) {
+// 		set_color(msg); return true;
+// 	}
 
-	// Enable/Disable individual Neopixel
+// 	// Enable/Disable individual Neopixel
 
-	return false;
+// 	return false;
+// }
+
+/////////////////////////////////////////////////////////////////////
+bool Loom_Neopixel::cmd_route(JsonObject)
+{
+
 }
 
 /////////////////////////////////////////////////////////////////////

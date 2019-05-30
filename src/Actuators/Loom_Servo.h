@@ -48,7 +48,8 @@ public:
 	void		print_config() override;
 	void		print_state();
 	void		package(JsonObject json);
-	bool		message_route(OSCMessage& msg, int address_offset);
+	// bool		message_route(OSCMessage& msg, int address_offset);
+	bool		cmd_route(JsonObject);
 
 
 	// --- Actuator Control ---

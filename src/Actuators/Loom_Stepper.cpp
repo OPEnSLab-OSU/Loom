@@ -56,13 +56,20 @@ void Loom_Stepper::print_config()
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Stepper::message_route(OSCMessage& msg, int address_offset)
-{
-	if ( msg.fullMatch( "/SetStepper" , address_offset) ) {
-		move_steps(msg); return true;
-	}
+// bool Loom_Stepper::message_route(OSCMessage& msg, int address_offset)
+// {
+// 	if ( msg.fullMatch( "/SetStepper" , address_offset) ) {
+// 		move_steps(msg); return true;
+// 	}
 
-	return false;
+// 	return false;
+// }
+
+
+/////////////////////////////////////////////////////////////////////
+bool Loom_Stepper::cmd_route(JsonObject)
+{
+
 }
 
 /////////////////////////////////////////////////////////////////////

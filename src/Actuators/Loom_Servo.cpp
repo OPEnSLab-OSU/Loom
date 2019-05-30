@@ -71,13 +71,19 @@ void Loom_Servo::package(JsonObject json)
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Servo::message_route(OSCMessage& msg, int address_offset)
-{
-	if ( msg.fullMatch( "/SetServo" , address_offset) ) {
-		set_degree(msg); return true;
-	}
+// bool Loom_Servo::message_route(OSCMessage& msg, int address_offset)
+// {
+// 	if ( msg.fullMatch( "/SetServo" , address_offset) ) {
+// 		set_degree(msg); return true;
+// 	}
 
-	return false;
+// 	return false;
+// }
+
+/////////////////////////////////////////////////////////////////////
+bool Loom_Servo::cmd_route(JsonObject)
+{
+
 }
 
 /////////////////////////////////////////////////////////////////////

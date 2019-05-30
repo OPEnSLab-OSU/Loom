@@ -59,32 +59,38 @@ void Loom_Relay::package(JsonObject json)
 	package_json(json, module_name, "state", on);
 }
 
-/////////////////////////////////////////////////////////////////////
-bool Loom_Relay::message_route(OSCMessage& msg, int address_offset)
-{
-	if ( msg.fullMatch( "/SetRelay" , address_offset) ) {
-		set_relay(msg); return true;
-	}
+// /////////////////////////////////////////////////////////////////////
+// bool Loom_Relay::message_route(OSCMessage& msg, int address_offset)
+// {
+// 	if ( msg.fullMatch( "/SetRelay" , address_offset) ) {
+// 		set_relay(msg); return true;
+// 	}
 
-	return false;
+// 	return false;
+// }
+
+/////////////////////////////////////////////////////////////////////
+bool Loom_Relay::cmd_route(JsonObject)
+{
+
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Relay::route_cmd(const JsonObject json)
-{
-	if ( strcmp(json["module"], module_name) != 0 ) {
-		return false;
-	}
+// bool Loom_Relay::route_cmd(const JsonObject json)
+// {
+// 	if ( strcmp(json["module"], module_name) != 0 ) {
+// 		return false;
+// 	}
 
-	JsonArray params = json["params"];
+// 	JsonArray params = json["params"];
 
-	if ( strcmp(json["func"], "set_relay") == 0 ) {
-		set_relay(params[0]);
-		return true;
-	}
+// 	if ( strcmp(json["func"], "set_relay") == 0 ) {
+// 		set_relay(params[0]);
+// 		return true;
+// 	}
 
 
-}
+// }
 
 // Do an experiment to 
 

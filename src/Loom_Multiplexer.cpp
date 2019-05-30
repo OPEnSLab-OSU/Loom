@@ -218,14 +218,6 @@ void Loom_Multiplexer::package(JsonObject json)
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Multiplexer::message_route(OSCMessage& msg, int address_offset)
-{
-	// Mux routing 
-
-	// Sensor routing?
-}
-
-/////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::get_sensor_list(JsonObject json)
 {
 	refresh_sensors();

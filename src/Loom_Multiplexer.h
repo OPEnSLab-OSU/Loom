@@ -106,7 +106,8 @@ public:
 	void		print_state();
 	void		measure();
 	void 		package(JsonObject json);
-	bool		message_route(OSCMessage& msg, int address_offset);
+	// bool		message_route(OSCMessage& msg, int address_offset);
+	bool		cmd_route(JsonObject) {}
 	void		print_measurements();
 
 
