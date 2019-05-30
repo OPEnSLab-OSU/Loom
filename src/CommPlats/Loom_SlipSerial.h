@@ -37,8 +37,7 @@ public:
 	/// \param[in]	compress_messages	Bool | <true> | {true, false} | Whether or not to try to compress messages
 	Loom_SlipSerial(
 			const char*		module_name			= "SlipSerial",
-			uint			max_message_len		= SERIAL_MAX_MESSAGE_LEN,
-			bool			compress_messages	= true
+			uint			max_message_len		= SERIAL_MAX_MESSAGE_LEN
 		);
 
 	Loom_SlipSerial(JsonVariant p);
@@ -53,6 +52,14 @@ public:
 	void broadcast_bundle(OSCBundle& bndl);
 	void set_address(uint addr);
 	uint get_address();
+
+	// Build json from packet if any exists
+	bool		receive_json(JsonObject json) {}
+
+	// Send json
+	bool		send_json(JsonObject json, uint16_t destination) {}
+	bool		send_json(JsonObject json) {}
+
 
 private:
 

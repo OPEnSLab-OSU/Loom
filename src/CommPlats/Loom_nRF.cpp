@@ -8,9 +8,6 @@ Loom_nRF::Loom_nRF(
 		const char*		module_name,
 		uint16_t		max_message_len,
 		
-		// CommScope 	subnet_scope,
-		bool			compress_messages,
-
 		uint8_t			address,
 		uint8_t			friend_address,
 
@@ -21,7 +18,7 @@ Loom_nRF::Loom_nRF(
 
 		uint8_t			multicast_level	
 	)
-	: LoomCommPlat( module_name, max_message_len, compress_messages )
+	: LoomCommPlat( module_name, max_message_len )
 {
 	this->module_type = ModuleType::nRF;
 
@@ -104,7 +101,7 @@ Loom_nRF::Loom_nRF(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_nRF::Loom_nRF(JsonVariant p)
-	: Loom_nRF(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9])
+	: Loom_nRF(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
 {}
 
 /////////////////////////////////////////////////////////////////////

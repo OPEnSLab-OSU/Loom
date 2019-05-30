@@ -12,7 +12,7 @@ Loom_Bluetooth::Loom_Bluetooth(
 		uint			spi_RST
 
 	)
-	: LoomCommPlat( module_name, max_message_length, false )
+	: LoomCommPlat( module_name, max_message_length )
 
 { 
 	this->module_type = ModuleType::Bluetooth;
@@ -27,7 +27,7 @@ Loom_Bluetooth::Loom_Bluetooth(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Bluetooth::Loom_Bluetooth(JsonVariant p)
-	: Loom_Bluetooth(p[0], p[1])
+	: Loom_Bluetooth(p[0], p[1], p[2], p[3], p[4])
 {}
 
 /////////////////////////////////////////////////////////////////////

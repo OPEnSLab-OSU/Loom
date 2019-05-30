@@ -62,7 +62,6 @@ public:
 	Loom_nRF(
 			const char*		module_name			= "nRF",
 			uint16_t		max_message_len		= 120,
-			bool			compress_messages	= true,
 			uint8_t			address 			= NRF_SELF_ADDRESS,
 			uint8_t			friend_address 		= NRF_FRIEND_ADDRESS,
 			uint8_t			data_rate			= 1,
@@ -101,6 +100,14 @@ public:
 
 	void		set_multicast_level(uint8_t level);
 	uint8_t		get_multicast_level();
+
+
+	// Build json from packet if any exists
+	bool		receive_json(JsonObject json) {}
+
+	// Send json
+	bool		send_json(JsonObject json, uint16_t destination) {}
+	bool		send_json(JsonObject json) {}
 
 private:
 

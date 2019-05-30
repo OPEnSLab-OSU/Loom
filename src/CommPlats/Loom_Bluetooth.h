@@ -70,6 +70,17 @@ public:
 	uint		get_address();
 
 
+
+	// Build json from packet if any exists
+	bool		receive_json(JsonObject json) {}
+
+	// Send json
+	bool		send_json(JsonObject json, uint16_t destination) {}
+	bool		send_json(JsonObject json) {}
+
+
+
+
 private:
 
 

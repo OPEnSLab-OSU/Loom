@@ -66,7 +66,7 @@ public:
 			const char*		module_name			= "LoRa",
 			uint16_t		max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
 			// CommScope 	subnet_scope 		= SCOPE_SUBNET,
-			bool			compress_messages	= true,
+			// bool			compress_messages	= true,
 			uint8_t			address				= LORA_SELF_ADDRESS,
 			uint8_t			friend_address		= LORA_FRIEND_ADDRESS,
 			uint8_t			power_level 		= 23,
@@ -102,6 +102,14 @@ public:
 
 	void		set_friend_address(uint addr);
 	uint		get_friend_address();
+
+
+	// Build json from packet if any exists
+	bool		receive_json(JsonObject json);
+
+	// Send json
+	bool		send_json(JsonObject json, uint16_t destination);
+	bool		send_json(JsonObject json);
 
 private:
 

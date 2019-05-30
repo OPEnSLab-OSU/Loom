@@ -10,7 +10,7 @@ Loom_LoRa::Loom_LoRa(
 
 		// CommScope 	subnet_scope,
 
-		bool			compress_messages,
+		// bool			compress_messages,
 
 		uint8_t			address,
 		uint8_t			friend_address,
@@ -18,7 +18,7 @@ Loom_LoRa::Loom_LoRa(
 		uint8_t			retry_count,
 		uint16_t		retry_timeout 	
 	)
-	: LoomCommPlat( module_name, max_message_len, compress_messages )
+	: LoomCommPlat( module_name, max_message_len )
 
 { 
 	this->module_type = ModuleType::LoRa;
@@ -67,7 +67,7 @@ Loom_LoRa::Loom_LoRa(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_LoRa::Loom_LoRa(JsonVariant p)
-	: Loom_LoRa(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7])
+	: Loom_LoRa(p[0], p[1], p[2], p[3], p[4], p[5], p[6])
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -222,4 +222,32 @@ uint Loom_LoRa::get_friend_address()
 { 
 	return friend_address; 
 }
+
+
+
+/////////////////////////////////////////////////////////////////////
+bool		receive_json(JsonObject json) 
+{
+
+}
+
+/////////////////////////////////////////////////////////////////////
+bool		send_json(JsonObject json, uint16_t destination) 
+{
+
+}
+
+/////////////////////////////////////////////////////////////////////
+bool		send_json(JsonObject json) 
+{
+	
+}
+
+
+
+
+
+
+
+
 

@@ -31,9 +31,6 @@ protected:
 
 	// CommScope subnet_scope;			// The scope to accept messages on       Switch to be ENUM      Maybe move to LoomDevice instead?
 
-	/// Whether or not to try to compress transmission strings
-	bool		compress_messages;
-
 	/// Rssi for Lora (need to determine what the other platforms use)
 	int16_t		signal_strength;
 
@@ -45,9 +42,8 @@ public:
 	LoomCommPlat(
 			const char*		module_name,
 
-			uint			max_message_len,
+			uint			max_message_len
 			// CommScope subnet_scope,
-			bool			compress_messages
 		);
 
 
@@ -55,7 +51,7 @@ public:
 	virtual ~LoomCommPlat();
 
 
-	static char*	enum_comm_plat_string(CommPlatform c);
+	static char*		enum_comm_plat_string(CommPlatform c);
 	static CommPlatform string_to_enum_comm_plat(const char* s);
 
 
@@ -85,8 +81,13 @@ public:
 	// void set_subnet_scope(CommScope s);
 	// CommScope get_subnet_scope();
 
-	void			set_compress_messages(bool c);
-	bool			get_compress_messages();
+
+	// Build json from packet if any exists
+	virtual bool	receive_json(JsonObject json) {}
+
+	// Send json
+	virtual bool	send_json(JsonObject json, uint16_t destination) {}
+	virtual bool	send_json(JsonObject json) {}
 
 
 // move back to protected?
@@ -134,14 +135,6 @@ private:
 	/// \param[in]	bndl		Bundle to convert
 	/// \param[out]	osc_string	String buffer to fill
 	void			original_convert_bundle_to_string(OSCBundle& bndl, char* osc_string);
-
-	/// Compress c-strings representing bundles
-	/// \param[in,out]	osc_string	String to compress
-	void			compress_message_string(char* osc_string);
-
-	/// Uncompress c-strings representing bundles
-	/// \param[in,out]	osc_string	String to uncompress
-	void			uncompress_message_string(char* osc_string);
 
 
 };

@@ -40,15 +40,14 @@ char* LoomCommPlat::enum_comm_plat_string(CommPlatform c)
 // --- CONSTRUCTOR ---
 LoomCommPlat::LoomCommPlat( 
 		const char*		module_name, 
-		uint			max_message_len, 
-		bool			compress_messages 
+		uint			max_message_len 
+		// bool			compress_messages 
 	) 
 	: LoomModule( module_name )
 {
 	// LPrintln("LoomCommPlat Constructor 1");
 	this->max_message_len   = max_message_len;
 	// this->subnet_scope      = subnet_scope; 
-	this->compress_messages = compress_messages;
 	this->signal_strength   = 0;
 }
 
@@ -67,7 +66,6 @@ void LoomCommPlat::print_config()
 
 	LPrintln('\t', "Max Message Length  : ", max_message_len );
 	// LPrintln('\t', "Communication Scope : ", enum_subnet_scope_string(subnet_scope) );
-	LPrintln('\t', "Compress Messages   : ", (compress_messages) ? "Enabled" : "Disabled" );
 }
 
 
@@ -79,20 +77,6 @@ void LoomCommPlat::package(JsonObject json)
 
 }
 
-/////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////
-void LoomCommPlat::set_compress_messages(bool c) 
-{ 
-	compress_messages = c; 
-}
-
-/////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::get_compress_messages() 
-{ 
-	return compress_messages; 
-}
 
 /////////////////////////////////////////////////////////////////////
 	// returns false if filtered out
@@ -189,7 +173,7 @@ bool LoomCommPlat::get_compress_messages()
 void LoomCommPlat::convert_string_to_bundle(char* osc_string, OSCBundle& bndl) 
 {
 	// might just always try to uncompress, as other device may be compressing
-	uncompress_message_string(osc_string);
+	// uncompress_message_string(osc_string);
 	original_convert_string_to_bundle(osc_string, bndl);
 }
 
@@ -203,9 +187,9 @@ void LoomCommPlat::convert_bundle_to_string(OSCBundle& bndl, char* osc_string)
 
 	original_convert_bundle_to_string(bndl, (char*)larger_buf);
 
-	if (compress_messages) { 
-		compress_message_string((char*)larger_buf);
-	}
+	// if (compress_messages) { 
+	// 	compress_message_string((char*)larger_buf);
+	// }
 
 	snprintf(osc_string, 251, "%s\0", larger_buf);
 
@@ -301,32 +285,5 @@ void LoomCommPlat::original_convert_bundle_to_string(OSCBundle& bndl, char* osc_
 			}
 		}
 		if (msg != NULL) strcat(osc_string, " ");
-	}
-}
-
-/////////////////////////////////////////////////////////////////////
-void LoomCommPlat::compress_message_string(char* osc_string) 
-{
-	const char* cPtr = nth_strchr(osc_string, '/', 3);
-
-	// Only try to compress if possible 
-	int third_slash = cPtr - (char*)osc_string;
-	if ( (third_slash > 0) && (third_slash < 30) ) {
-		
-		char buf[30];
-		snprintf(buf, cPtr-osc_string+2, "%s\0", osc_string); // Copy compressable header to buf
-		str_replace((char*)cPtr, buf, "%");
-	}
-}
-
-/////////////////////////////////////////////////////////////////////
-void LoomCommPlat::uncompress_message_string(char* osc_string) 
-{
-	// Only try to uncompress if it was compressed
-	if ( strstr(osc_string, "%") ) {
-		char buf[30];
-		const char* cPtr = nth_strchr( osc_string, '/', 3 );
-		snprintf( buf, cPtr-osc_string+2, "%s", osc_string );
-		str_replace( (char*)cPtr, "%", buf );		
 	}
 }
