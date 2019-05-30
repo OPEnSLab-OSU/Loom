@@ -30,7 +30,7 @@ Loom_Stepper::Loom_Stepper(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Stepper::Loom_Stepper(JsonVariant p)
-	: Loom_Stepper(p[0], p[1])
+	: Loom_Stepper( EXPAND_ARRAY(p, 2) )
 {
 
 }

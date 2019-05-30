@@ -30,7 +30,7 @@ Loom_Servo::Loom_Servo(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Servo::Loom_Servo(JsonVariant p)
-	: Loom_Servo(p[0], p[1])
+	: Loom_Servo( EXPAND_ARRAY(p, 2) )
 {
 
 }

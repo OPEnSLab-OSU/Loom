@@ -21,7 +21,7 @@ Loom_Relay::Loom_Relay(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Relay::Loom_Relay(JsonVariant p)
-	: Loom_Relay(p[0], p[1]) 
+	: Loom_Relay( EXPAND_ARRAY(p, 2) ) 
 {}
 // {
 	// if (p.size() >= 2) {

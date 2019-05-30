@@ -45,7 +45,7 @@ Loom_Neopixel::Loom_Neopixel(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Neopixel::Loom_Neopixel(JsonVariant p)
-	: Loom_Neopixel(p[0], p[1], p[2], p[3])
+	: Loom_Neopixel( EXPAND_ARRAY(p, 4) )
 {
 
 }

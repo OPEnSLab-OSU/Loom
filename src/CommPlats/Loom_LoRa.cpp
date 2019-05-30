@@ -69,7 +69,7 @@ Loom_LoRa::Loom_LoRa(
 // --- CONSTRUCTOR ---
 Loom_LoRa::Loom_LoRa(JsonVariant p)
 	// : Loom_LoRa(p[0], p[1], p[2], p[3], p[4], p[5], p[6])
-	: Loom_LoRa( ARR_EXPAND(p, 7) )
+	: Loom_LoRa( EXPAND_ARRAY(p, 7) )
 {}
 
 /////////////////////////////////////////////////////////////////////

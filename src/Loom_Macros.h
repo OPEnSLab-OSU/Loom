@@ -10,17 +10,20 @@
 
 
 
-#define ARR_EXPAND1(x) x[0]
-#define ARR_EXPAND2(x) ARR_EXPAND1(x), x[1]
-#define ARR_EXPAND3(x) ARR_EXPAND2(x), x[2]
-#define ARR_EXPAND4(x) ARR_EXPAND3(x), x[3]
-#define ARR_EXPAND5(x) ARR_EXPAND4(x), x[4]
-#define ARR_EXPAND6(x) ARR_EXPAND5(x), x[5]
-#define ARR_EXPAND7(x) ARR_EXPAND6(x), x[6]
-#define ARR_EXPAND8(x) ARR_EXPAND7(x), x[7]
-#define ARR_EXPAND9(x) ARR_EXPAND8(x), x[8]
-#define ARR_EXPAND10(x) ARR_EXPAND9(x), x[9]
-#define ARR_EXPAND(x, i) ARR_EXPAND##i(x)
+#define EXPAND_ARRAY1(x) x[0]
+#define EXPAND_ARRAY2(x) EXPAND_ARRAY1(x), x[1]
+#define EXPAND_ARRAY3(x) EXPAND_ARRAY2(x), x[2]
+#define EXPAND_ARRAY4(x) EXPAND_ARRAY3(x), x[3]
+#define EXPAND_ARRAY5(x) EXPAND_ARRAY4(x), x[4]
+#define EXPAND_ARRAY6(x) EXPAND_ARRAY5(x), x[5]
+#define EXPAND_ARRAY7(x) EXPAND_ARRAY6(x), x[6]
+#define EXPAND_ARRAY8(x) EXPAND_ARRAY7(x), x[7]
+#define EXPAND_ARRAY9(x) EXPAND_ARRAY8(x), x[8]
+#define EXPAND_ARRAY10(x) EXPAND_ARRAY9(x), x[9]
+#define EXPAND_ARRAY11(x) EXPAND_ARRAY10(x), x[10]
+#define EXPAND_ARRAY12(x) EXPAND_ARRAY11(x), x[11]
+#define EXPAND_ARRAY13(x) EXPAND_ARRAY12(x), x[12]
+#define EXPAND_ARRAY(x, i) EXPAND_ARRAY##i(x)
 
 
 

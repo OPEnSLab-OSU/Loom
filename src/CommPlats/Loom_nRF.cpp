@@ -102,7 +102,7 @@ Loom_nRF::Loom_nRF(
 // --- CONSTRUCTOR ---
 Loom_nRF::Loom_nRF(JsonVariant p)
 	// : Loom_nRF(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
-	: Loom_nRF( ARR_EXPAND(p, 9) )
+	: Loom_nRF( EXPAND_ARRAY(p, 9) )
 {}
 
 /////////////////////////////////////////////////////////////////////
