@@ -150,23 +150,17 @@ public:
 	/////////////////////////////////////////////////////////////////////
 	// Communiciation Platforms
 
-	bool receive_bundle(OSCBundle& bndl)
+	bool receive(JsonObject json)
 	{ LPrintln(error_msg); }
-	bool send_bundle(OSCBundle& bndl)
+	bool send(JsonObject json)
 	{ LPrintln(error_msg); }
-	void broadcast_bundle(OSCBundle& bndl)
+	bool send()
+	{ LPrintln(error_msg); }
+	void broadcast(JsonObject json)
 	{ LPrintln(error_msg); }
 	void set_address(uint a)
 	{ LPrintln(error_msg); }
 	uint get_address()
-	{ LPrintln(error_msg); }
-	void set_compress_messages(bool c)
-	{ LPrintln(error_msg); }
-	bool get_compress_messages()
-	{ LPrintln(error_msg); }
-	bool scope_filter(OSCBundle& bndl, int* offset)
-	{ LPrintln(error_msg); }
-	bool scope_filter(OSCBundle& bndl)
 	{ LPrintln(error_msg); }
 	void set_friend_address(uint addr)
 	{ LPrintln(error_msg); }
