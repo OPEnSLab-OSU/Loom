@@ -27,7 +27,8 @@ Loom_Bluetooth::Loom_Bluetooth(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Bluetooth::Loom_Bluetooth(JsonVariant p)
-	: Loom_Bluetooth(p[0], p[1], p[2], p[3], p[4])
+	// : Loom_Bluetooth(p[0], p[1], p[2], p[3], p[4])
+	: Loom_Bluetooth( ARR_EXPAND(p, 5) )
 {}
 
 /////////////////////////////////////////////////////////////////////

@@ -9,14 +9,18 @@
 
 
 
-// void func();// {} // termination version
 
-// template<typename Arg1, typename... Args>
-// void func(const Arg1 arg1, const Args... args)
-// {
-//     Serial.println( arg1 );
-//     func(args...); // note: arg1 does not appear here!
-// }
+#define ARR_EXPAND1(x) x[0]
+#define ARR_EXPAND2(x) ARR_EXPAND1(x), x[1]
+#define ARR_EXPAND3(x) ARR_EXPAND2(x), x[2]
+#define ARR_EXPAND4(x) ARR_EXPAND3(x), x[3]
+#define ARR_EXPAND5(x) ARR_EXPAND4(x), x[4]
+#define ARR_EXPAND6(x) ARR_EXPAND5(x), x[5]
+#define ARR_EXPAND7(x) ARR_EXPAND6(x), x[6]
+#define ARR_EXPAND8(x) ARR_EXPAND7(x), x[7]
+#define ARR_EXPAND9(x) ARR_EXPAND8(x), x[8]
+#define ARR_EXPAND10(x) ARR_EXPAND9(x), x[9]
+#define ARR_EXPAND(x, i) ARR_EXPAND##i(x)
 
 
 

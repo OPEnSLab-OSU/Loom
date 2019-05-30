@@ -26,7 +26,7 @@ Loom_SlipSerial::Loom_SlipSerial(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_SlipSerial::Loom_SlipSerial(JsonVariant p)
-	: Loom_SlipSerial(p[0], p[1])
+	: Loom_SlipSerial( ARR_EXPAND(p, 2) )
 {}
 
 /////////////////////////////////////////////////////////////////////
