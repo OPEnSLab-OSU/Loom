@@ -16,10 +16,6 @@ enum class CommPlatform {
 };
 
 
-// enum CommScope { SCOPE_DEVICE, SCOPE_SUBNET, SCOPE_FAMILY, SCOPE_SUBNET_ONLY, SCOPE_FAMILY_ONLY, SCOPE_ANY };
-
-
-
 /// Abstract base of communication platform modules
 class LoomCommPlat : public LoomModule
 {
@@ -28,8 +24,6 @@ protected:
 
 	/// The maximum message length
 	uint16_t	max_message_len;
-
-	// CommScope subnet_scope;			// The scope to accept messages on       Switch to be ENUM      Maybe move to LoomDevice instead?
 
 	/// Rssi for Lora (need to determine what the other platforms use)
 	int16_t		signal_strength;
@@ -41,11 +35,8 @@ public:
 	// --- CONSTRUCTOR ---
 	LoomCommPlat(
 			const char*		module_name,
-
 			uint			max_message_len
-			// CommScope subnet_scope,
 		);
-
 
 	// --- DESTRUCTOR ---
 	virtual ~LoomCommPlat();
@@ -54,8 +45,6 @@ public:
 	static char*		enum_comm_plat_string(CommPlatform c);
 	static CommPlatform string_to_enum_comm_plat(const char* s);
 
-
-	// static char* enum_subnet_scope_string(CommScope s);
 
 	// General
 	virtual void	print_config() override;
@@ -78,9 +67,6 @@ public:
 	virtual void	set_address(uint a) = 0;
 	virtual uint	get_address() = 0;
 
-	// void set_subnet_scope(CommScope s);
-	// CommScope get_subnet_scope();
-
 
 	// Build json from packet if any exists
 	virtual bool	receive_json(JsonObject json) {}
@@ -90,26 +76,9 @@ public:
 	virtual bool	send_json(JsonObject json) {}
 
 
-// move back to protected?
-
-// can probably just return offset and check if -1 to remove need to return bool
-	// bool			scope_filter(OSCBundle& bndl, int* offset);
-	// bool			scope_filter(OSCBundle& bndl);
-
 
 protected:
 
-
-	// Fix
-	// returns false if filtered out
-
-	// might not actually empty bundle but just return a boolean
-	// depends on whether filtering is done at routing or receiving
-
-	// need to actually check names
-	// unless that is done via routing?
-
-	// bool scope_filter(OSCBundle& bndl);
 
 	/// Convert a c string to equivalent bundle.
 	/// Calls aux function to uncompress message if neccessary

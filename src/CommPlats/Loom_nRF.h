@@ -51,7 +51,6 @@ public:
 	///
 	/// \param[in]	module_name			String | <"nRF"> | null | nRF module name
 	/// \param[in]	max_message_len		Set(Int) | <120> | {120("Max length")} | The maximum possible message length
-	/// \param[in]	compress_messages	Bool | <true> | {true, false} | Whether or not to try to compress messages
 	/// \param[in]	address 			Int | <01> | [0-99] | This device's nRF address
 	/// \param[in]	friend_address 		Int | <00> | [0-99] | Default nRF address to send to
 	/// \param[in]	data_rate			Set(Int) | <0> | {0("Default"), 1("250KBPS"), 2("1MBPS"), 3("2MBPS")} | Transmission data rate

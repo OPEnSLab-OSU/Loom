@@ -22,33 +22,16 @@ char* LoomCommPlat::enum_comm_plat_string(CommPlatform c)
 	}
 }
 
-
-// char* LoomCommPlat::enum_subnet_scope_string(CommScope s)
-// {
-// 	switch(s) {
-// 		case SCOPE_DEVICE      : return "Device";
-// 		case SCOPE_SUBNET      : return "Subnet";
-// 		case SCOPE_FAMILY      : return "Family";
-// 		case SCOPE_SUBNET_ONLY : return "Subnet Only";
-// 		case SCOPE_FAMILY_ONLY : return "Family Only";
-// 		case SCOPE_ANY         : return "Any";
-// 	}
-// }
-
-
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 LoomCommPlat::LoomCommPlat( 
 		const char*		module_name, 
 		uint			max_message_len 
-		// bool			compress_messages 
 	) 
 	: LoomModule( module_name )
 {
-	// LPrintln("LoomCommPlat Constructor 1");
-	this->max_message_len   = max_message_len;
-	// this->subnet_scope      = subnet_scope; 
-	this->signal_strength   = 0;
+	this->max_message_len = max_message_len;
+	this->signal_strength = 0;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -76,98 +59,6 @@ void LoomCommPlat::package(JsonObject json)
 {
 
 }
-
-
-/////////////////////////////////////////////////////////////////////
-	// returns false if filtered out
-
-// might not actually empty bundle but just return a boolean
-	// depends on whether filtering is done at routing or receiving
-
-// need to actually check names
-	// unless that is done via routing?
-
-// maybe return offset as well?
-
-
-// // Offset index where message command starts (i.e. after addressing) for message routing later
-// bool LoomCommPlat::scope_filter(OSCBundle& bndl, int* offset) 
-// {
-// 	// CommPlat needs to be associated with a LoomDevice to filter 
-// 	if (device_manager == NULL) return true; 
-
-// 	bool pass = false;
-// 	char type = get_message_type( bndl.getOSCMessage(0) );
-
-// 	char address[50], test[50];
-
-// 	bndl.getOSCMessage(0)->getAddress(address, 2); // offset of 2 to skip '/<type>'
-
-// 	switch (type) {
-// 		case 'D': device_manager->packet_header_device(test); break;
-// 		case 'S': device_manager->packet_header_subnet(test); break;
-// 		case 'F': device_manager->packet_header_family(test); break;
-// 		default: break;
-// 	}
-
-// 	// Remove type character
-// 	strcpy(test, test+2);
-
-// 	// if ( strlen(test) == 0 ) {
-// 	// 	LPrintln("Out of scope");
-// 	// 	bndl.empty();
-// 	// 	return false; 
-// 	// }
-
-// 	// LPrintln("[Scope Filter] Address: ", address);
-// 	// LPrintln("[Scope Filter] Test: ", test);
-// 	// LPrintln("[Scope Filter] len(address): ", strlen(address) );
-// 	// LPrintln("[Scope Filter] len(test): ", strlen(test) );
-
-
-// 	// Compare addresses
-// 	// if ( strncmp(address, test+2, strlen(test)-2 ) == 0 ) {
-// 	if ( strncmp(address, test, strlen(test) ) == 0 ) {
-// 		pass = true;
-// 	}
-
-// 	LPrintln("[Scope Filter] Pass: ", (pass) ? "true" : "false" );
-
-// 	// Empty bundle if out of scope
-// 	if (!pass) bndl.empty();
-
-
-// 	if (offset) {
-// 		*offset = (pass) ? strlen(test)+2 : -1;
-
-// 	// 	if (pass) {
-
-// 	// 		// fix offset to return correct number - check type to determine what number '/' to search for 
-
-// 	// // const char* nth_strchr(const char* s, char c, int n)
-// 	// 		int section = 0;
-// 	// 		switch (type) {
-// 	// 			case 'D': section = 6; break;
-// 	// 			case 'S': section = 4; break;
-// 	// 			case 'F': section = 3; break;
-// 	// 			default: break;
-// 	// 		}
-// 	// 		*offset = nth_strchr(address, '/', section) - address;
-		
-// 	// 	} else {
-// 	// 		*offset = -1;
-// 	// 	}
-
-// 	}
-
-// 	return pass;
-// }
-
-// /////////////////////////////////////////////////////////////////////
-// bool LoomCommPlat::scope_filter(OSCBundle& bndl) 
-// {
-// 	return scope_filter(bndl, NULL);
-// }
 
 /////////////////////////////////////////////////////////////////////
 void LoomCommPlat::convert_string_to_bundle(char* osc_string, OSCBundle& bndl) 

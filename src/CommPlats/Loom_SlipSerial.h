@@ -33,8 +33,7 @@ public:
 	/// SlipSerial module constructor.
 	///
 	/// \param[in]	module_name				String | <"SlipSerial"> | null | SlipSerial module name
-	/// \param[in]	max_message_len		Set(Int) | <15> | {15("Max length")} | The maximum possible message length
-	/// \param[in]	compress_messages	Bool | <true> | {true, false} | Whether or not to try to compress messages
+	/// \param[in]	max_message_len			Set(Int) | <15> | {15("Max length")} | The maximum possible message length
 	Loom_SlipSerial(
 			const char*		module_name			= "SlipSerial",
 			uint			max_message_len		= SERIAL_MAX_MESSAGE_LEN
