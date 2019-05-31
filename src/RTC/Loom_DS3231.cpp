@@ -25,6 +25,8 @@ Loom_DS3231::Loom_DS3231(
 	// Set SQW pin to OFF (in my case it was set by default to 1Hz)
 	// The output of the DS3231 INT pin is connected to this pin
 	rtc_inst->writeSqwPinMode(DS3231_OFF);
+
+	clear_alarms();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -52,9 +54,7 @@ bool Loom_DS3231::_initialized()
 	return !rtc_inst->lostPower();
 }
 
-
 /////////////////////////////////////////////////////////////////////
-// --- PUBLIC METHODS ---
 void Loom_DS3231::print_config()
 {
 	LoomRTC::print_config();
@@ -100,10 +100,15 @@ void Loom_DS3231::set_alarm(TimeSpan duration)
 /////////////////////////////////////////////////////////////////////
 void Loom_DS3231::clear_alarms()
 {
+	LPrintln("\n\nClearing DS3231 alarms");
 	rtc_inst->armAlarm(1, false);
 	rtc_inst->clearAlarm(1);
 	rtc_inst->alarmInterrupt(1, false);
 	rtc_inst->armAlarm(2, false);
 	rtc_inst->clearAlarm(2);
 	rtc_inst->alarmInterrupt(2, false);
+
+	// Not sure if this goes here
+	// rtc_inst->writeSqwPinMode(DS3231_OFF);
+
 }

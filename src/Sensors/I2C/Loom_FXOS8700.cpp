@@ -24,7 +24,7 @@ Loom_FXOS8700::Loom_FXOS8700(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_FXOS8700::Loom_FXOS8700(JsonVariant p)
-	: Loom_FXOS8700(p[0], p[1]) 
+	: Loom_FXOS8700( EXPAND_ARRAY(p, 2) ) 
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -62,18 +62,24 @@ void Loom_FXOS8700::measure()
 	mag[2] = mevent.magnetic.z;
 }
 
+
 /////////////////////////////////////////////////////////////////////
-void Loom_FXOS8700::package(OSCBundle& bndl, char* suffix)
+void Loom_FXOS8700::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
+	package_json(json, module_name, 
+		// Acceleration
+		"ax", accel[0],
+		"ay", accel[1],
+		"az", accel[2],
 
-	append_to_bundle(bndl, id_prefix, "ax", accel[0], NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "ay", accel[1]);
-	append_to_bundle(bndl, id_prefix, "az", accel[2]);
-
-	append_to_bundle(bndl, id_prefix, "mx", mag[0]);
-	append_to_bundle(bndl, id_prefix, "my", mag[1]);
-	append_to_bundle(bndl, id_prefix, "mz", mag[2]);
+		// Magnetism
+		"mx", mag[0],
+		"my", mag[1],
+		"mz", mag[2]
+	);
 }
+
+/////////////////////////////////////////////////////////////////////
+
+
 

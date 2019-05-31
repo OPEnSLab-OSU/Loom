@@ -1,6 +1,4 @@
-
-#ifndef LOOM_STEPPER_h
-#define LOOM_STEPPER_h
+#pragma once
 
 #include "Loom_Actuator.h"
 
@@ -51,8 +49,7 @@ public:
 	// Inherited (Overriding) Methods
 	void		print_config() override;
 	void		print_state() {}
-	void		package(OSCBundle& bndl, char* suffix="") {}
-	bool		message_route(OSCMessage& msg, int address_offset);
+	bool		cmd_route(JsonObject json);
 
 
 	// --- Actuator Control ---
@@ -63,13 +60,7 @@ public:
 	/// \param[in]	clockwise 	True to rotate clockwise, false for counterclock-wise
 	void		move_steps(int motor, int steps, int speed, bool clockwise);
 
-	/// Move stepper.
-	/// Settings enclosed in message, forwards to move_steps with int args
-	void		move_steps(OSCMessage& msg);
-
 private:
 
 };
 
-
-#endif // of LOOM_STEPPER_h

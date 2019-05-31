@@ -23,7 +23,7 @@ Loom_MS5803::Loom_MS5803(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_MS5803::Loom_MS5803(JsonVariant p)
-	: Loom_MS5803(p[0], p[1]) 
+	: Loom_MS5803( EXPAND_ARRAY(p, 2) ) 
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -52,13 +52,13 @@ void Loom_MS5803::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_MS5803::package(OSCBundle& bndl, char* suffix)
+void Loom_MS5803::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "Pressure", pressure, NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "Temp"    , temp);
+	package_json(json, module_name, 
+		"Pressure",	pressure,
+		"Temp",		temp
+	);
 }
 
+/////////////////////////////////////////////////////////////////////
 

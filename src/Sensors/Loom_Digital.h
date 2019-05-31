@@ -1,6 +1,4 @@
-
-#ifndef LOOM_DIGITAL_h
-#define LOOM_DIGITAL_h
+#pragma once
 
 #include "Loom_Sensor.h"
 
@@ -67,8 +65,8 @@ public:
 	void		print_config() override;
 	void		print_measurements() override;
 	void		measure() override;
-	void		package(OSCBundle& bndl, char* suffix="") override;
-	bool		message_route(OSCMessage& msg, int address_offset) override;
+	void		package(JsonObject json);
+
 
 
 	/// Get value on digital pin
@@ -96,6 +94,3 @@ private:
 
 };
 
-
-
-#endif

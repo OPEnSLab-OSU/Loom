@@ -32,7 +32,7 @@ Loom_AS7263::Loom_AS7263(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_AS7263::Loom_AS7263(JsonVariant p)
-	: Loom_AS7263(p[0], p[1], p[2], p[3], p[4], p[5])
+	: Loom_AS7263( EXPAND_ARRAY(p, 6) )
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -82,17 +82,16 @@ void Loom_AS7263::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_AS7263::package(OSCBundle& bndl, char* suffix)
+void Loom_AS7263::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "NIR_R", nir_vals[0], NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "NIR_S", nir_vals[1]);
-	append_to_bundle(bndl, id_prefix, "NIR_T", nir_vals[2]);
-	append_to_bundle(bndl, id_prefix, "NIR_U", nir_vals[3]);
-	append_to_bundle(bndl, id_prefix, "NIR_V", nir_vals[4]);
-	append_to_bundle(bndl, id_prefix, "NIR_W", nir_vals[5]);
+	package_json(json, module_name, 
+		"NIR_R",	nir_vals[0],
+		"NIR_S",	nir_vals[1],
+		"NIR_T",	nir_vals[2],
+		"NIR_U",	nir_vals[3],
+		"NIR_V",	nir_vals[4],
+		"NIR_W",	nir_vals[5]
+	);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -118,3 +117,7 @@ void Loom_AS7263::set_integration_time(byte time)
 {
 	inst_AS7263.setIntegrationTime(time);
 }
+
+/////////////////////////////////////////////////////////////////////
+
+

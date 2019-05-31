@@ -1,6 +1,4 @@
-
-#ifndef LOOM_ANALOG_h
-#define LOOM_ANALOG_h
+#pragma once
 
 #include "Loom_Sensor.h"
 
@@ -28,7 +26,8 @@ enum class AnalogConversion {
 	PH,				///< pH value
 	TURBIDITY, 		///< Turbidity
 	EC, 			///< Electrical Conductivity
-	TDS				///< Total Dissolved Solids
+	TDS,			///< Total Dissolved Solids
+	SALINITY		///< Salinity
 	// Soil moisture
 };
 
@@ -78,13 +77,12 @@ public:
 	/// \param[in]	enableA3			Bool | <true> | {true, false} | Enable pin A3 for managing
 	/// \param[in]	enableA4			Bool | <true> | {true, false} | Enable pin A4 for managing
 	/// \param[in]	enableA5			Bool | <true> | {true, false} | Enable pin A5 for managing
-	/// \param[in]	convertA0			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A0
-	/// \param[in]	convertA1			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A1
-	/// \param[in]	convertA2			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A2
-	/// \param[in]	convertA3			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A3
-	/// \param[in]	convertA4			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A4
-	/// \param[in]	convertA5			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids")} | Conversion to apply to analog readings on pin A5
-
+	/// \param[in]	convertA0			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A0
+	/// \param[in]	convertA1			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A1
+	/// \param[in]	convertA2			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A2
+	/// \param[in]	convertA3			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A3
+	/// \param[in]	convertA4			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A4
+	/// \param[in]	convertA5			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A5
 	Loom_Analog(
 			const char*			module_name			= "Analog",
 			uint8_t				num_samples			= 8,
@@ -112,8 +110,7 @@ public:
 	void		print_config() override;
 	void		print_measurements() override;
 	void		measure() override;
-	void		package(OSCBundle& bndl, char* suffix="") override;		 // This might be where analog conversions are applied
-	bool		message_route(OSCMessage& msg, int address_offset) override;
+	void 		package(JsonObject json);
 
 
 	/// Set the analog read resolution
@@ -164,6 +161,7 @@ public:
 	float 		convert(uint8_t pin, uint16_t analog);
 
 
+	const char* conversion_name(AnalogConversion conversion);
 
 
 	// Save a FlashStorage struct
@@ -210,8 +208,12 @@ private:
 	/// \return Converted value
 	float		convert_TDS(uint16_t analog);
 
+	/// Convert analog to salinity (total dissolved solids)
+	/// \param[in]	analog	Analog value to convert
+	/// \return Converted value
+	float		convert_salinity(uint16_t analog);
+
+
 };
 
 
-
-#endif

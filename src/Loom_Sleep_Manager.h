@@ -1,6 +1,4 @@
-
-#ifndef LOOM_SLEEP_MANAGER_h
-#define LOOM_SLEEP_MANAGER_h
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -64,8 +62,9 @@ public:
 	void		print_config() override;
 	void		print_state() override;
 	void		measure() {}
-	void		package(OSCBundle& bndl, char* suffix="") {}
-	bool		message_route(OSCMessage& msg, int address_offset) {}
+	void 		package(JsonObject json) {}
+	bool		cmd_route(JsonObject) {}
+
 
 	void 		link_device_manager(LoomManager* LM);
 
@@ -101,5 +100,4 @@ private:
 };
 
 
-#endif // of #ifndef LOOM_SLEEP_MANAGER_h
 

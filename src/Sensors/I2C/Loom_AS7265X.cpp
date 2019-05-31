@@ -84,7 +84,7 @@ Loom_AS7265X::Loom_AS7265X(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_AS7265X::Loom_AS7265X(JsonVariant p)
-	: Loom_AS7265X(p[0], p[1], p[2], p[3], p[4], p[5])
+	: Loom_AS7265X( EXPAND_ARRAY(p, 6) )
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -142,35 +142,35 @@ void Loom_AS7265X::measure()
 	nir[5] = inst_AS7265X.getCalibratedW();
 }
 
+
 /////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::package(OSCBundle& bndl, char* suffix)
+void Loom_AS7265X::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
+	package_json(json, module_name, 
+		// UV
+		"a", uv[0],
+		"b", uv[1],
+		"c", uv[2],
+		"d", uv[3],
+		"e", uv[4],
+		"f", uv[5],
 
-	// UV
-	append_to_bundle(bndl, id_prefix, "a", uv[0], NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "b", uv[1]);
-	append_to_bundle(bndl, id_prefix, "c", uv[2]);
-	append_to_bundle(bndl, id_prefix, "d", uv[3]);
-	append_to_bundle(bndl, id_prefix, "e", uv[4]);
-	append_to_bundle(bndl, id_prefix, "f", uv[5]);
-	// Color
-	append_to_bundle(bndl, id_prefix, "g", color[0]); 
-	append_to_bundle(bndl, id_prefix, "h", color[1]); 
-	append_to_bundle(bndl, id_prefix, "i", color[2]); 
-	append_to_bundle(bndl, id_prefix, "j", color[3]); 
-	append_to_bundle(bndl, id_prefix, "k", color[4]); 
-	append_to_bundle(bndl, id_prefix, "l", color[5]); 
+		// Color
+		"g", color[0],
+		"h", color[1],
+		"i", color[2],
+		"j", color[3],
+		"k", color[4],
+		"l", color[5],
 
-	// NIR
-	append_to_bundle(bndl, id_prefix, "r", nir[0]);
-	append_to_bundle(bndl, id_prefix, "s", nir[1]);
-	append_to_bundle(bndl, id_prefix, "t", nir[2]);
-	append_to_bundle(bndl, id_prefix, "u", nir[3]);
-	append_to_bundle(bndl, id_prefix, "v", nir[4]);
-	append_to_bundle(bndl, id_prefix, "w", nir[5]);
-
+		// NIR
+		"r", nir[0],
+		"s", nir[1],
+		"t", nir[2],
+		"u", nir[3],
+		"v", nir[4],
+		"w", nir[5]
+	);
 }
 
 /////////////////////////////////////////////////////////////////////

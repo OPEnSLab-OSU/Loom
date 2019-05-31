@@ -24,7 +24,7 @@ Loom_FXAS21002::Loom_FXAS21002(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_FXAS21002::Loom_FXAS21002(JsonVariant p)
-	: Loom_FXAS21002(p[0], p[1]) 
+	: Loom_FXAS21002( EXPAND_ARRAY(p, 2) ) 
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -56,14 +56,17 @@ void Loom_FXAS21002::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_FXAS21002::package(OSCBundle& bndl, char* suffix)
+void Loom_FXAS21002::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
+	package_json(json, module_name, 
+		"gx", gyro[0],
+		"gy", gyro[1],
+		"gz", gyro[2]
 
-	append_to_bundle(bndl, id_prefix, "gx", gyro[0], NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "gy", gyro[1]);
-	append_to_bundle(bndl, id_prefix, "gz", gyro[2]);
+	);
 }
+
+/////////////////////////////////////////////////////////////////////
+
 
 

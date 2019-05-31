@@ -1,7 +1,4 @@
-
-#ifndef LOOM_RTC_h
-#define LOOM_RTC_h
-
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -100,8 +97,8 @@ public:
 	virtual void 	print_config() override;
 	virtual void 	print_state() override;
 	virtual void 	measure() {};
-	virtual void 	package(OSCBundle& bndl, char* suffix="") override;
-	virtual bool 	message_route(OSCMessage& msg, int address_offset) = 0;
+	virtual bool	cmd_route(JsonObject) {}
+	virtual void 	package(JsonObject json) override;
 
 
 	/// Get DateTime of current time
@@ -149,7 +146,7 @@ public:
 	virtual void	set_alarm(DateTime time) = 0;
 	virtual void	set_alarm(TimeSpan duration) = 0;
 
-	virtual void	clear_alarms() {}
+	virtual void	clear_alarms() = 0;
 
 // Other functions that would be nice:
 	// virtual TimeSpan	get_timer_remaining();
@@ -209,5 +206,3 @@ protected:
 };
 
 
-
-#endif // of #ifndef LOOM_RTC_h

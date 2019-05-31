@@ -4,10 +4,9 @@
 /// ... Constructor ...
 Loom_SlipSerial::Loom_SlipSerial(
 		const char*		module_name,
-		uint			max_message_len,
-		bool			compress_messages
+		uint			max_message_len
 	) 
-	: LoomCommPlat(module_name, max_message_len, compress_messages )
+	: LoomCommPlat(module_name, max_message_len )
 {
 	this->module_type = ModuleType::SlipSerial;
 
@@ -27,7 +26,7 @@ Loom_SlipSerial::Loom_SlipSerial(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_SlipSerial::Loom_SlipSerial(JsonVariant p)
-	: Loom_SlipSerial(p[0], p[1], p[2])
+	: Loom_SlipSerial( EXPAND_ARRAY(p, 2) )
 {}
 
 /////////////////////////////////////////////////////////////////////

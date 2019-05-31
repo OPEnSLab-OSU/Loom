@@ -1,6 +1,4 @@
-
-#ifndef LOOM_I2C_SENSOR_h
-#define LOOM_I2C_SENSOR_h
+#pragma once
 
 #include "../Loom_Sensor.h"
 #include <Wire.h>
@@ -29,15 +27,17 @@ public:
 	// Inherited Methods
 	virtual void	print_config() override;
 	virtual void	measure() = 0;
-	virtual void	package(OSCBundle& bndl, char* suffix="") = 0;
+	virtual void 	package(JsonObject json) = 0;
 
 	/// Get the sensor's I2C address
 	/// \return	The sensor's I2C address
 	byte			get_i2c_address(); 	
+	
+	void			adjust_module_name_with_port(int port);
+
 
 private:
 
 };
 
 
-#endif // of #ifndef LOOM_I2C_SENSOR_h

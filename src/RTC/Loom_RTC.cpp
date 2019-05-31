@@ -90,7 +90,7 @@ LoomRTC::LoomRTC(
 		pinMode(int_pin, INPUT_PULLUP);		
 	}
 
-	clear_alarms();
+	// clear_alarms();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -118,14 +118,9 @@ void LoomRTC::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
-void LoomRTC::package(OSCBundle& bndl, char* suffix)
+void LoomRTC::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	read_rtc();
-	append_to_bundle(bndl, id_prefix, "DateString", datestring, NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "TimeString", timestring);
+	package_json_timestamp(json, datestring, timestring);
 }
 
 /////////////////////////////////////////////////////////////////////

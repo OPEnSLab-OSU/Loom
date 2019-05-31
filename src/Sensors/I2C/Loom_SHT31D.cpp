@@ -21,7 +21,7 @@ Loom_SHT31D::Loom_SHT31D(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_SHT31D::Loom_SHT31D(JsonVariant p)
-	: Loom_SHT31D(p[0], p[1]) 
+	: Loom_SHT31D( EXPAND_ARRAY(p, 2) ) 
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -56,13 +56,13 @@ void Loom_SHT31D::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_SHT31D::package(OSCBundle& bndl, char* suffix)
+void Loom_SHT31D::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "Temp", temp, NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "Humid", humid);
+	package_json(json, module_name, 
+		"Temp",		temp,
+		"Humid",	humid
+	);
 }
 
+/////////////////////////////////////////////////////////////////////
 

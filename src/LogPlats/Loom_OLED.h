@@ -1,6 +1,4 @@
-
-#ifndef LOOM_OLED_h
-#define LOOM_OLED_h
+#pragma once
 
 #include "Loom_LogPlat.h"
 
@@ -97,8 +95,7 @@ public:
 
 	void			print_config() override;
 
-	void			log_bundle(OSCBundle& bndl);
-	void			log_bundle(OSCBundle& bndl, OLED_Format format);
+	void			log(JsonObject json);
 
 
 	/// Set the OLED display organization.
@@ -140,5 +137,3 @@ private:
 };
 
 
-
-#endif

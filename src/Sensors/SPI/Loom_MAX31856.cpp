@@ -32,7 +32,7 @@ Loom_MAX31856::Loom_MAX31856(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_MAX31856::Loom_MAX31856(JsonVariant p)
-	: Loom_MAX31856(p[0], p[1], p[2], p[3], p[4], p[5], p[6]) 
+	: Loom_MAX31856( EXPAND_ARRAY(p, 7) ) 
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -94,12 +94,12 @@ void Loom_MAX31856::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_MAX31856::package(OSCBundle& bndl, char* suffix) 
+void Loom_MAX31856::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "Temp", temperature, NEW_MSG);
+	package_json(json, module_name, 
+		"Temp", temperature
+	);
 }
 
+/////////////////////////////////////////////////////////////////////
 

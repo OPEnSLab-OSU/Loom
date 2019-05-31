@@ -24,6 +24,7 @@ void LoomManager::parse_config(const char* json_config)
 	LPrintln();
 	LPrintln("= = = = = Parse Config = = = = =");
 
+// Might need to be even larger
 	DynamicJsonDocument doc(2048);
 	DeserializationError error = deserializeJson(doc, json_config);
 
@@ -38,6 +39,9 @@ void LoomManager::parse_config(const char* json_config)
 	Serial.println("\n\nConfig Pretty Version:");
 	serializeJsonPretty(doc, Serial);
 
+
+	LPrintln("\nSIZE: ", doc.memoryUsage());
+
 	// Serial.println("\n\nGeneral Settings:");
 	// serializeJsonPretty(doc["general"], Serial);
 
@@ -51,6 +55,7 @@ void LoomManager::parse_config(const char* json_config)
 	LPrintln();
 
 	JsonObject general = doc["general"];
+
 
 	if (general.containsKey("device_name")) {
 		snprintf(this->device_name, 20, "%s", general["device_name"].as<const char*>());
@@ -139,6 +144,9 @@ void LoomManager::parse_config(const char* json_config)
 		}
 
 	}
+
+	// Empty
+	doc.clear();
 
 	LPrintln("= = = = = = = = = = = = = = = = =");
 	LPrintln();

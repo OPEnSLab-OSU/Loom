@@ -1,6 +1,4 @@
-
-#ifndef LOOM_ZXGESTURE_h
-#define LOOM_ZXGESTURE_h
+#pragma once
 
 #include "Loom_I2C_Sensor.h"
 
@@ -29,7 +27,7 @@ protected:
 	ZXMode			mode;
 
 	/// Measured positions (x, y pos)
-	int pos[2];
+	int 			pos[2];
 
 	/// Last read gesture type
 	GestureType		gesture;
@@ -44,7 +42,7 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x10> | {0x10, 0x11} | I2C address
 	/// \param[in]	module_name				String | <"ZXGesture"> | null | ZXGesture module name
-	/// \param[in]	mode							Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
+	/// \param[in]	mode					Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
 	Loom_ZXGesture(
 			byte			i2c_address		= 0x10,
 			const char*		module_name		= "ZXGesture",
@@ -61,11 +59,10 @@ public:
 	void		print_config() override;
 	void		print_measurements() override;
 	void		measure() override;
-	void		package(OSCBundle& bndl, char* suffix="") override;
+	void 		package(JsonObject json);
 
 private:
 
 };
 
 
-#endif

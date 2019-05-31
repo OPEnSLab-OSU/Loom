@@ -31,7 +31,7 @@ Loom_LIS3DH::Loom_LIS3DH(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_LIS3DH::Loom_LIS3DH(JsonVariant p)
-	: Loom_LIS3DH(p[0], p[1]) 
+	: Loom_LIS3DH( EXPAND_ARRAY(p, 2) ) 
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -60,14 +60,15 @@ void Loom_LIS3DH::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_LIS3DH::package(OSCBundle& bndl, char* suffix)
+void Loom_LIS3DH::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "Accel_X", accel[0], NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "Accel_Y", accel[1]);
-	append_to_bundle(bndl, id_prefix, "Accel_Z", accel[2]);
+	package_json(json, module_name, 
+		"ax", accel[0],
+		"ay", accel[1],
+		"az", accel[2]
+	);
 }
+
+/////////////////////////////////////////////////////////////////////
 
 

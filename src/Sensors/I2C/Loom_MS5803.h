@@ -1,6 +1,4 @@
-
-#ifndef LOOM_MS5803_h
-#define LOOM_MS5803_h
+#pragma once
 
 #include "Loom_I2C_Sensor.h"
 
@@ -47,11 +45,11 @@ public:
 	// Inherited (Overriding) Methods
 	void		print_measurements() override;
 	void		measure() override;
-	void		package(OSCBundle& bndl, char* suffix="") override;
+	void 		package(JsonObject json);
 
 private:
 
 };
 
 
-#endif
+

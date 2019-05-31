@@ -1,6 +1,4 @@
-
-#ifndef LOOM_SERVO_h
-#define LOOM_SERVO_h
+#pragma once
 
 #include "Loom_Actuator.h"
 
@@ -49,9 +47,8 @@ public:
 	// Inherited (Overriding) Methods
 	void		print_config() override;
 	void		print_state();
-	void		package(OSCBundle& bndl, char* suffix="");
-	bool		message_route(OSCMessage& msg, int address_offset);
-
+	void		package(JsonObject json);
+	bool		cmd_route(JsonObject json);
 
 	// --- Actuator Control ---
 
@@ -60,14 +57,9 @@ public:
 	/// \param[in]	degree		The position to set the servo to
 	void		set_degree(int servo, int degree);
 
-	/// Set servo position.
-	/// Settings enclosed in message, forwards to set_degree with int args
-	/// \param[in]	msg		The message to parse
-	void		set_degree(OSCMessage& msg);
-
 private:
 
 };
 
 
-#endif // of LOOM_SERVO_h
+#pragma once

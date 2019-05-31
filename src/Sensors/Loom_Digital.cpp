@@ -51,13 +51,9 @@ Loom_Digital::Loom_Digital(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Digital::Loom_Digital(JsonVariant p)
-	: Loom_Digital(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9], p[10], p[11], p[12])
+	: Loom_Digital( EXPAND_ARRAY(p, 13) )
 {
-	// if (p.size() >= 13) {
-	// 	Loom_Digital(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9], p[10], p[11], p[12]);
-	// } else {
-	// 	// Loom_Digital();
-	// }
+
 }
 
 
@@ -120,35 +116,24 @@ void Loom_Digital::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Digital::package(OSCBundle& bndl, char* suffix)
+void Loom_Digital::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
 	char buf[3];
-	bool first = true;
 
 	// 5,6,9,10,11,12
 	for (int i = 0; i < 6; i++) { 
 		if (pin_enabled[i]) {
 			sprintf(buf, "%d", pin_nums[i]);
-			append_to_bundle(bndl, id_prefix, buf, digital_vals[i], (!first) ? : NEW_MSG );
-			first = false;
+			package_json(json, module_name, buf, digital_vals[i]);
 		}
 	}
 	// A0-A5
 	for (int i = 0; i < 6; i++) { 
 		if (pin_enabled[i+6]) {
 			sprintf(buf, "%s%d", "A", i);
-			append_to_bundle(bndl, id_prefix, buf, digital_vals[i+6], (!first) ? : NEW_MSG );
-			first = false;
+			package_json(json, module_name, buf, digital_vals[i+6]);
 		}
 	}
-}
-
-/////////////////////////////////////////////////////////////////////
-bool Loom_Digital::message_route(OSCMessage& msg, int address_offset)
-{
 
 }
 

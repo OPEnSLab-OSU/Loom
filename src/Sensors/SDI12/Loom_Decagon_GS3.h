@@ -1,6 +1,4 @@
-
-#ifndef LOOM_DECAGON_GS3_h
-#define LOOM_DECAGON_GS3_h
+#pragma once
 
 #include "Loom_SDI12_Sensor.h"
 
@@ -42,7 +40,8 @@ public:
 	void		print_measurements() override;
 	// void		calibrate() override;
 	void		measure() override;
-	void		package(OSCBundle& bndl, char* suffix="") override;
+	void 		package(JsonObject json);
+
 
 private:
 
@@ -50,5 +49,3 @@ private:
 };
 
 
-
-#endif // of #ifndef LOOM_DECAGON_GS3_h

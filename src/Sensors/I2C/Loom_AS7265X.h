@@ -1,6 +1,4 @@
-
-#ifndef LOOM_AS7265X_h
-#define LOOM_AS7265X_h
+#pragma once
 
 #include "Loom_I2C_Sensor.h"
 
@@ -64,7 +62,7 @@ public:
 	// Inherited (Overriding) Methods
 	void		print_measurements() override;
 	void		measure() override;
-	void		package(OSCBundle& bndl, char* suffix="") override;
+	void 		package(JsonObject json);
 
 
 	void		enable_bulb(bool e);
@@ -76,9 +74,10 @@ public:
 	//If you use Mode 2 or 3 (all the colors) then integration time is double. 140*2 = 280ms between readings.
 	void		set_integration_time(byte time);
 
+
+
 private:
 
 };
 
 
-#endif

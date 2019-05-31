@@ -1,9 +1,4 @@
-
-
-#ifndef LOOM_MODULE_FACTORY_h
-#define LOOM_MODULE_FACTORY_h
-
-
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -19,6 +14,7 @@
 // CommPlats
 #include "CommPlats/Loom_LoRa.h"
 #include "CommPlats/Loom_nRF.h"
+#include "CommPlats/Loom_Bluetooth.h"
 #include "CommPlats/Loom_SlipSerial.h"
 
 // InternetPlats
@@ -147,6 +143,3 @@ private:
 
 };
 
-
-
-#endif // of LOOM_MODULE_FACTORY_h

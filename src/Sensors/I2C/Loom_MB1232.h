@@ -1,7 +1,4 @@
-
-#ifndef LOOM_MB1232_h
-#define LOOM_MB1232_h
-
+#pragma once
 
 #include "Loom_I2C_Sensor.h"
 
@@ -37,11 +34,11 @@ public:
 	// Inherited (Overriding) Methods
 	void		print_measurements() override;
 	void		measure() override;
-	void		package(OSCBundle& bndl, char* suffix="") override;
+	void 		package(JsonObject json);
 
 private:
 
 };
 
 
-#endif
+

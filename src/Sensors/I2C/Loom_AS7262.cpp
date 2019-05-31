@@ -33,7 +33,7 @@ Loom_AS7262::Loom_AS7262(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_AS7262::Loom_AS7262(JsonVariant p)
-	: Loom_AS7262(p[0], p[1], p[2], p[3], p[4], p[5])
+	: Loom_AS7262( EXPAND_ARRAY(p, 6) )
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -83,17 +83,16 @@ void Loom_AS7262::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_AS7262::package(OSCBundle& bndl, char* suffix)
+void Loom_AS7262::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "Violet", color_vals[0], NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "Blue"  , color_vals[1]);
-	append_to_bundle(bndl, id_prefix, "Green" , color_vals[2]);
-	append_to_bundle(bndl, id_prefix, "Yellow", color_vals[3]);
-	append_to_bundle(bndl, id_prefix, "Orange", color_vals[4]);
-	append_to_bundle(bndl, id_prefix, "Red"   , color_vals[5]);
+	package_json(json, module_name, 
+		"Violet",	color_vals[0],
+		"Blue",		color_vals[1],
+		"Green",	color_vals[2],
+		"Yellow",	color_vals[3],
+		"Orange",	color_vals[4],
+		"Red",		color_vals[5]
+	);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -119,5 +118,8 @@ void Loom_AS7262::set_integration_time(byte time)
 {
 	inst_AS7262.setIntegrationTime(time);
 }
+
+/////////////////////////////////////////////////////////////////////
+
 
 

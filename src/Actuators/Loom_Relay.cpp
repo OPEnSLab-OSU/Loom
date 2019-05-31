@@ -21,7 +21,7 @@ Loom_Relay::Loom_Relay(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Relay::Loom_Relay(JsonVariant p)
-	: Loom_Relay(p[0], p[1]) 
+	: Loom_Relay( EXPAND_ARRAY(p, 2) ) 
 {}
 // {
 	// if (p.size() >= 2) {
@@ -54,22 +54,23 @@ void Loom_Relay::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Relay::package(OSCBundle& bndl, char* suffix)
+void Loom_Relay::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "Relay", on, NEW_MSG);
+	package_json(json, module_name, "state", on);
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Relay::message_route(OSCMessage& msg, int address_offset)
+bool Loom_Relay::cmd_route(JsonObject json)
 {
-	if ( msg.fullMatch( "/SetRelay" , address_offset) ) {
-		set_relay(msg); return true;
+	if ( strcmp(json["module"], module_name) == 0 ) {
+		JsonArray params = json["params"];
+		return functionRoute(
+			json["func"],
+			"set_relay", [this, params]() { if (params.size() >= 1) { set_relay( EXPAND_ARRAY(params, 1) ); } else { LPrintln("Not enough parameters"); } } 
+		);
+	} else {
+		return false;
 	}
-
-	return false;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -82,10 +83,4 @@ void Loom_Relay::set_relay(bool state)
 		print_module_label();
 		LPrintln("Set relay on pin ", pin, (on) ? " High" : " Low");
 	}
-}
-
-/////////////////////////////////////////////////////////////////////
-void Loom_Relay::set_relay(OSCMessage& msg)
-{
-	set_relay( msg.getInt(0) );
 }

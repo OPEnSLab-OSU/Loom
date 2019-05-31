@@ -1,16 +1,12 @@
-
-#ifndef LOOM_MODULE_h
-#define LOOM_MODULE_h
+#pragma once
 
 #include "Loom_Manager.h"
-
 #include "Loom_Misc.h"
 #include "Loom_Translator.h"
 #include "Loom_Macros.h"
+#include "Loom_Package.h"
 
-#include <OSCBundle.h>
 #include <ArduinoJson.h>
-
 
 
 
@@ -59,27 +55,6 @@ public:
 	LoomModule(JsonVariant settings);
 
 
-	// LoomModule( char* module_name, LoomManager* LD );
-
-
-// This version did not seem to work
-	// LoomModule( char*      module_name 		 = "Unknown",
-	// 			bool       active 			 = true,
-	// 			bool       print_debug 		 = true,
-	// 			Verbosity  print_verbosity   = VERB_LOW,
-	// 			Verbosity  package_verbosity = VERB_LOW
-
-	// 		  ) : LoomModule()
-	// {
-	// 	// LPrintln("LoomModule Constructor 1");
-	// 	this->module_name 		= module_name;
-	// 	this->active 			= active;
-	// 	this->print_debug 		= print_debug;
-	// 	this->print_verbosity 	= print_verbosity;
-	// 	this->package_verbosity = package_verbosity;	
-	// }
-
-
 	// --- DESTRUCTOR ---
 	virtual ~LoomModule();
 
@@ -99,7 +74,7 @@ public:
 	/// Derived modules may override this for increased function,
 	/// such as linking a submanager or RTC module.
 	/// \param[in]	LM	LoomManager to point to
-	void	link_device_manager(LoomManager* LM);
+	void			link_device_manager(LoomManager* LM);
 
 	/// LPrint the module name as a label.
 	/// Used for matching debug prints to corresponding module
@@ -118,27 +93,11 @@ public:
 
 	// Subclasses can provide defaults for id_prefix, permitting package(&bndl);
 	/// Package a modules measurements or state.
-	virtual void	package(OSCBundle& bndl, char* suffix="") = 0;
+	virtual void 	package(JsonObject json) = 0;
 
-	// Package but try to reference LoomManager for id_prefix
-	// void package(OSCBundle& bndl);
-
-	/// Message routing on an OSC message.
-	// Only parsing the message should happen in message_route
-	// Complete action should have its own method
-	// Dispatch doesnt work unless the method is static, current use fullMatch instead
-	virtual bool	message_route(OSCMessage& msg, int address_offset) = 0;
-
-	// Not sure if there should be a verison that takes a bundle as well
-		// Maybe in LoomManager , but not here
-	// Might have a default value for address_offset to skip the /[D/S/F] section?
-	// This might have be OSCMessage& msg instead
-
-	// Modules might call parent message_route at the end of their own routing
-		// Wont be called if a match is found
-		// Would need to make sure the parent routing isn't called repeatedly
-		// as different modules are iterated through
-
+	/// Route command to driver 
+	virtual bool	cmd_route(JsonObject) = 0;
+	
 
 	/// Copy module name into buffer
 	/// \param[out]	buf	The buffer to copy module name into
@@ -204,23 +163,11 @@ public:
 
 protected:
 
-	/// Determine what address should be used for an OSC bundle for this module
-	/// \param[out]	address		The 
-	/// \param[in]	
-	void			resolve_bundle_address(char* address, char* suffix="");
 
 private:
 
 
 };
-
-
-#endif
-
-
-
-
-
 
 
 

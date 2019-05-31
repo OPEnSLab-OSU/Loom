@@ -1,7 +1,4 @@
-
-#ifndef LOOM_SENSOR_h
-#define LOOM_SENSOR_h
-
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -35,8 +32,9 @@ public:
 	virtual void	print_measurements() = 0; 
 	virtual void	calibrate() {};
 	virtual void	measure() = 0;
-	virtual void	package(OSCBundle& bndl, char* suffix="") = 0;
-	virtual bool	message_route(OSCMessage& msg, int address_offset) {};
+	virtual void 	package(JsonObject json) = 0;
+	virtual bool	cmd_route(JsonObject) {}
+
 
 	/// Set the number of samples to take
 	/// \param[in]	n	Number of samples to take
@@ -50,6 +48,3 @@ private:
 
 };
 
-
-
-#endif

@@ -50,7 +50,7 @@ Loom_TSL2561::Loom_TSL2561(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_TSL2561::Loom_TSL2561(JsonVariant p)
-	: Loom_TSL2561(p[0], p[1], p[2], p[3])
+	: Loom_TSL2561( EXPAND_ARRAY(p, 4) )
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -83,11 +83,14 @@ void Loom_TSL2561::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_TSL2561::package(OSCBundle& bndl, char* suffix)
+void Loom_TSL2561::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
-
-	append_to_bundle(bndl, id_prefix, "LightIR", lightIR, NEW_MSG);
-	append_to_bundle(bndl, id_prefix, "LightFull", lightFull);
+	package_json(json, module_name, 
+		"IR",	lightIR,
+		"Full",	lightFull
+	);
 }
+
+/////////////////////////////////////////////////////////////////////
+
+

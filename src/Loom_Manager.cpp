@@ -207,46 +207,6 @@ LoomRTC* LoomManager::get_rtc_module()
 }
 
 /////////////////////////////////////////////////////////////////////
-LoomModule* LoomManager::get_other_module(int idx)
-{
-	return (idx < other_module_count) ? other_modules[idx] : nullptr;
-}
-
-/////////////////////////////////////////////////////////////////////
-LoomSensor* LoomManager::get_sensor_module(int idx)
-{
-	return (idx < sensor_count) ? sensor_modules[idx] : nullptr;
-}
-
-/////////////////////////////////////////////////////////////////////
-LoomActuator* LoomManager::get_actuator_module(int idx)
-{
-	return (idx < actuator_count) ? actuator_modules[idx] : nullptr;
-}
-
-/////////////////////////////////////////////////////////////////////
-LoomCommPlat* LoomManager::get_comm_plat_module(int idx)
-{
-	return (idx < comm_count) ? comm_modules[idx] : nullptr;
-}
-
-/////////////////////////////////////////////////////////////////////
-LoomInternetPlat* LoomManager::get_internet_plat_module(int idx)
-{
-	return (idx < internet_count) ? internet_modules[idx] : nullptr;
-}
-
-/////////////////////////////////////////////////////////////////////
-LoomLogPlat* LoomManager::get_log_plat_module(int idx)
-{
-	return (idx < log_count) ? log_modules[idx] : nullptr;
-}
-
-/////////////////////////////////////////////////////////////////////
-// void module_enable(LoomModule* LM, bool e) ?
-
-
-/////////////////////////////////////////////////////////////////////
 void LoomManager::list_modules_aux(LoomModule** modules, uint len, char* module_type)
 {
 	LPrintln("\t", module_type, " (", len, "):");
@@ -301,48 +261,6 @@ const char* LoomManager::get_device_name()
 }
 
 /////////////////////////////////////////////////////////////////////
-void LoomManager::packet_header_family(char* buf)
-{ 
-	sprintf(buf, "/F/%s", family); 
-}
-
-/////////////////////////////////////////////////////////////////////
-const char* LoomManager::packet_header_family() 
-{
-	char result[50];
-	packet_header_family(result);
-	return (const char*)result;
-}
-
-/////////////////////////////////////////////////////////////////////
-void LoomManager::packet_header_subnet(char* buf)
-{ 
-	sprintf(buf, "/S/%s/%d", family, family_num); 
-}
-
-/////////////////////////////////////////////////////////////////////
-const char* LoomManager::packet_header_subnet() 
-{
-	char result[50];
-	packet_header_subnet(result);
-	return (const char*)result;
-}
-
-/////////////////////////////////////////////////////////////////////
-void LoomManager::packet_header_device(char* buf)
-{ 
-	sprintf(buf, "/D/%s/%d/%s/%d", family, family_num, device_name, instance); 
-}
-
-/////////////////////////////////////////////////////////////////////
-const char* LoomManager::packet_header_device() 
-{
-	char result[50];
-	packet_header_device(result);
-	return (const char*)result;
-}
-
-/////////////////////////////////////////////////////////////////////
 const char* LoomManager::get_family() 
 { 
 	return family; 
@@ -351,7 +269,6 @@ const char* LoomManager::get_family()
 /////////////////////////////////////////////////////////////////////
 void  LoomManager::set_family(const char* f) 
 { 
-	// strcpy(family, f);
 	snprintf(this->family, 20, "%s", family); 
 }
 
@@ -426,16 +343,6 @@ void LoomManager::measure_aux(LoomModule** modules, uint len)
 }
 
 /////////////////////////////////////////////////////////////////////
-void LoomManager::package_aux(LoomModule** modules, uint len)
-{
-	for (int i = 0; i < len; i++) {
-		if ( (modules[i] != nullptr) && ( modules[i]->get_active() ) ){
-			modules[i]->package( bundle );
-		}
-	}	
-}
-
-/////////////////////////////////////////////////////////////////////
 void LoomManager::measure()
 {
 	measure_aux( (LoomModule**)sensor_modules   , sensor_count ); 
@@ -443,33 +350,136 @@ void LoomManager::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void LoomManager::package() 
+void LoomManager::package_aux(JsonObject json, LoomModule** modules, uint len)
 {
-	bundle.empty();
+	for (int i = 0; i < len; i++) {
+		if ( (modules[i] != nullptr) && ( modules[i]->get_active() ) ){
+			modules[i]->package( json );
+		}
+	}	
+}
 
-	package_aux( (LoomModule**)other_modules    , other_module_count ); 
-	package_aux( (LoomModule**)sensor_modules   , sensor_count ); 
+/////////////////////////////////////////////////////////////////////
+void LoomManager::package_aux(JsonObject json, LoomModule* module)
+{
+	if ( (module != nullptr) && ( module->get_active() ) ){
+		module->package( json );
+	}
+}
+
+
+/////////////////////////////////////////////////////////////////////
+void LoomManager::package(JsonObject json) 
+{
+	package_aux( json, (LoomModule*)rtc_module ); 
+	package_aux( json, (LoomModule**)other_modules    , other_module_count ); 
+	package_aux( json, (LoomModule**)sensor_modules   , sensor_count ); 
 
 	if (package_verbosity == Verbosity::V_HIGH) {
-		package_aux( (LoomModule**)actuator_modules , actuator_count ); 
-		package_aux( (LoomModule**)rtc_module      , 1 ); 
-		package_aux( (LoomModule**)comm_modules     , comm_count ); 
-		package_aux( (LoomModule**)log_modules      , log_count );		
+		package_aux( json, (LoomModule**)actuator_modules , actuator_count ); 
+		package_aux( json, (LoomModule**)comm_modules     , comm_count ); 
+		package_aux( json, (LoomModule**)log_modules      , log_count );		
 	}
 }
 
 /////////////////////////////////////////////////////////////////////
-void LoomManager::package(OSCBundle& bndl) 
+JsonObject LoomManager::package()
 {
-	package();
-	deep_copy_bundle(bundle, bndl);
+	// LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
+	doc.clear();
+	// LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
+
+// This works
+	doc["type"] = "data";
+	JsonObject json = doc.as<JsonObject>();
+
+
+// Test 
+	// JsonObject json = doc.to<JsonObject>();
+
+	package(json);
+	// LPrintln("In JsonObject LoomManager::package()");
+	// serializeJsonPretty(json, Serial);
+	// LPrintln("\nSIZE: ", json.memoryUsage());
+
+	return json;
+}
+
+JsonObject LoomManager::internalJson(bool clear)
+{
+	if (clear) {
+		doc.clear();
+		return doc.to<JsonObject>();
+
+	} 
+	else {
+		return doc.as<JsonObject>();
+	}
+	// LPrintln("\nDOC MemoryUsage in internalJson: ", doc.memoryUsage());
+
+	// doc["type"] = "unknown";
+	// return doc.as<JsonObject>();
+
 }
 
 /////////////////////////////////////////////////////////////////////
-void LoomManager::print_current_bundle() 
+
+// Have each module check against provided command
+bool LoomManager::cmd_route_aux(JsonObject json, LoomModule** modules, uint len)
 {
-	LPrintln("Member Bundle:");
-	print_bundle(bundle);
+	for (int i = 0; i < len; i++) {
+		if ( (modules[i] != nullptr) && ( modules[i]->get_active() ) ){
+			if (modules[i]->cmd_route( json ) ) return true;
+		}
+	}
+	return false;
+}
+
+/////////////////////////////////////////////////////////////////////
+
+// Have module check against provided command
+bool LoomManager::cmd_route_aux(JsonObject json, LoomModule* module)
+{
+	if ( (module != nullptr) && ( module->get_active() ) ){
+		module->cmd_route( json );
+	}
+
+}
+
+/////////////////////////////////////////////////////////////////////
+
+// Iterate over array of commands
+void LoomManager::cmd_route(JsonObject json)
+{
+	// LPrintln("Command object:");
+	// serializeJsonPretty(json, Serial);
+
+	if ( strcmp(json["type"], "command") == 0 )	{
+
+		for ( JsonObject cmd : json["commands"].as<JsonArray>() ) {
+
+			// LPrintln("\n\nCMD:");
+			// serializeJsonPretty(cmd, Serial);
+
+
+			if ( cmd_route_aux( cmd, (LoomModule**)actuator_modules , actuator_count ) )		continue;
+			
+			if ( cmd_route_aux( cmd, (LoomModule*)rtc_module ) )								continue;
+			if ( cmd_route_aux( cmd, (LoomModule**)other_modules    , other_module_count ) )	continue;
+			if ( cmd_route_aux( cmd, (LoomModule**)sensor_modules   , sensor_count ) )			continue;
+			if ( cmd_route_aux( cmd, (LoomModule**)comm_modules     , comm_count ) )			continue;
+			if ( cmd_route_aux( cmd, (LoomModule**)log_modules      , log_count ) )				continue;
+		}
+	}
+}
+
+// /////////////////////////////////////////////////////////////////////
+void LoomManager::print_internalJson()
+{
+	print_device_label();
+	LPrintln("Internal Json:");
+	serializeJsonPretty(doc, Serial);
+	LPrintln();
 }
 
 /////////////////////////////////////////////////////////////////////

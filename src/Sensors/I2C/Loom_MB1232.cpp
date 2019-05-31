@@ -34,7 +34,7 @@ Loom_MB1232::Loom_MB1232(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_MB1232::Loom_MB1232(JsonVariant p)
-	: Loom_MB1232(p[0], p[1]) 
+	: Loom_MB1232( EXPAND_ARRAY(p, 2) ) 
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -78,13 +78,15 @@ void Loom_MB1232::measure()
 	}  
 }
 
-/////////////////////////////////////////////////////////////////////
-void Loom_MB1232::package(OSCBundle& bndl, char* suffix)
-{
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, suffix);
 
-	append_to_bundle(bndl, id_prefix, "Range", range, NEW_MSG);
+/////////////////////////////////////////////////////////////////////
+void Loom_MB1232::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		"Range", range
+	);
 }
+
+/////////////////////////////////////////////////////////////////////
 
 

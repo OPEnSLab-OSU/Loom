@@ -1,7 +1,4 @@
-
-#ifndef LOOM_TSL2561_h
-#define LOOM_TSL2561_h
-
+#pragma once
 
 #include "Loom_I2C_Sensor.h"
 
@@ -37,7 +34,7 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x29> | {0x29, 0x39, 0x49} | I2C address
 	/// \param[in]	module_name				String | <"TSL2561"> | null | TSL2561 module name
-	/// \param[in]	gain							Set(Int) | <1> | {1, 16} | Gain level
+	/// \param[in]	gain					Set(Int) | <1> | {1, 16} | Gain level
 	/// \param[in]	resolution				Set(Int) | <3> | { 1("Low"), 2("Med"), 3("High") } | Resolution
 	Loom_TSL2561(
 			byte			i2c_address		= 0x29,
@@ -55,11 +52,10 @@ public:
 	// Inherited (Overriding) Methods
 	void		print_measurements() override;
 	void		measure() override;
-	void		package(OSCBundle& bndl, char* suffix="") override;
+	void 		package(JsonObject json);
 
 private:
 
 };
 
 
-#endif

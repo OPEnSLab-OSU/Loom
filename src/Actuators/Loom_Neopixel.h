@@ -1,7 +1,4 @@
-
-#ifndef LOOM_NEOPIXEL_h
-#define LOOM_NEOPIXEL_h
-
+#pragma once
 
 #include "Loom_Actuator.h"
 
@@ -47,8 +44,8 @@ public:
 	// Inherited Methods
 	void		print_config() override;
 	void		print_state();
-	void		package(OSCBundle& bndl, char* suffix="");
-	bool		message_route(OSCMessage& msg, int address_offset);
+	bool		cmd_route(JsonObject json);
+
 
 
 	// --- Actuator Control ---
@@ -66,16 +63,9 @@ public:
 	/// \param[in]	blue		The blue value (0-255)
 	void		set_color(uint8_t port, uint8_t chain_num, uint8_t red, uint8_t green, uint8_t blue);
 
-	/// Set Neopixel color.
-	/// Settings enclosed in message, forwards to set_color with int args
-	/// \param[in]	msg		The message to parse
-	void		set_color(OSCMessage& msg);
-
-
 private:
 
 
 };
 
 
-#endif // of LOOM_NEOPIXEL_h

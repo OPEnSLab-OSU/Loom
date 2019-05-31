@@ -52,6 +52,7 @@ const byte Loom_Multiplexer::known_addresses[] =
 /////////////////////////////////////////////////////////////////////
 LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 {
+
 	switch (i2c_address) {
 		case 0x10 : return new Loom_ZXGesture(i2c_address=0x10);	// ZXGesture
 		case 0x11 : return new Loom_ZXGesture(i2c_address=0x11);	// ZXGesture
@@ -96,10 +97,14 @@ Loom_Multiplexer::Loom_Multiplexer(
 		uint 			update_period
 	) : LoomModule( module_name ) 
 {
-	// LPrintln("Loom_Multiplexer Constructor 1");
+	this->module_type = ModuleType::Multiplexer;
+
 	this->i2c_address 	= i2c_address; 
 	this->num_ports 	= num_ports;
 	this->update_period	= update_period;
+
+	LPrintln("this->num_ports: ", this->num_ports);
+	LPrintln("num_ports: ", num_ports);
 
 	// Begin I2C 
 	Wire.begin();
@@ -193,45 +198,34 @@ void Loom_Multiplexer::print_measurements()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::package(OSCBundle& bndl, char* suffix)
+void Loom_Multiplexer::package(JsonObject json)
 {
+
+		LPrintln("num_ports: ", this->num_ports);
+
 	for (uint8_t i = 0; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
 			tca_select(i);
 			char tmp[4];
 			itoa(i, tmp, 10);
-			sensors[i]->package(bndl, tmp);
+			sensors[i]->package(json);
 		} 
 	}
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Multiplexer::message_route(OSCMessage& msg, int address_offset)
-{
-	// Mux routing 
-
-	// Sensor routing?
-}
-
-/////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::get_sensor_list(OSCBundle& bndl)
+void Loom_Multiplexer::get_sensor_list(JsonObject json)
 {
 	refresh_sensors();
 
-	char id_prefix[40];
-	resolve_bundle_address(id_prefix, "Sensors");
+	json["type"] = "state";
+	JsonObject list = json.createNestedObject("MuxSensors");
 
-	bool found_first = false;
-
+	char tmp[3];
 	for (uint8_t i = 0; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
-			// First sensor found should start a new message
-			if (!found_first) {
-				append_to_bundle(bndl, id_prefix, i, sensors[i]->get_module_name(), NEW_MSG);
-				found_first = true;
-			} else {
-				append_to_bundle(bndl, id_prefix, i, sensors[i]->get_module_name());
-			}
+			itoa(i, tmp, 10);
+			list[tmp] = sensors[i]->get_module_name();
 		} 
 	}	
 }
@@ -306,6 +300,9 @@ void Loom_Multiplexer::refresh_sensors()
 			sensors[i] = generate_sensor_object(current);
 
 			if (sensors[i] != NULL) {
+
+				sensors[i]->adjust_module_name_with_port(i);
+
 				// Make sure sensor is also linked to DeviceManager
 				sensors[i]->link_device_manager(device_manager);
 				// device_manager->add_module(sensors[i]);

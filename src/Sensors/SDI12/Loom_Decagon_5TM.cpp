@@ -17,7 +17,7 @@ Loom_Decagon5TM::Loom_Decagon5TM(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Decagon5TM::Loom_Decagon5TM(JsonVariant p)
-	: Loom_Decagon5TM(p[0], p[1]) 
+	: Loom_Decagon5TM( EXPAND_ARRAY(p, 2) ) 
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -44,8 +44,12 @@ void Loom_Decagon5TM::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Decagon5TM::package(OSCBundle& bndl, char* suffix)
-{
 
+void Loom_Decagon5TM::package(JsonObject json)
+{
+	// package_json(json, module_name, "Temp", temperature);
 }
+
+/////////////////////////////////////////////////////////////////////
+
 

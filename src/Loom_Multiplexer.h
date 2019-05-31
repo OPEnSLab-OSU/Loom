@@ -1,33 +1,10 @@
-
-#ifndef LOOM_MULTIPLEXER_h
-#define LOOM_MULTIPLEXER_h
-
+#pragma once
 
 #include "Loom_Module.h"
 #include "Sensors/I2C/Loom_I2C_Sensor.h"
 
 
-// // I2C Sensor files
-// #include "Sensors/I2C/Loom_AS7262.h"
-// #include "Sensors/I2C/Loom_AS7263.h"
-// #include "Sensors/I2C/Loom_AS7265X.h"
-// #include "Sensors/I2C/Loom_FXAS21002.h"
-// #include "Sensors/I2C/Loom_FXOS8700.h"
-// #include "Sensors/I2C/Loom_LIS3DH.h"
-// #include "Sensors/I2C/Loom_MB1232.h"
-// #include "Sensors/I2C/Loom_MPU6050.h"
-// #include "Sensors/I2C/Loom_MS5803.h"
-// #include "Sensors/I2C/Loom_SHT31D.h"
-// #include "Sensors/I2C/Loom_TSL2561.h"
-// #include "Sensors/I2C/Loom_TSL2591.h"
-// #include "Sensors/I2C/Loom_ZXGesture.h"
-
-
-// class Loom_AS7262;    // dont remember what this was doing here
-
-
 // // I2C Address Conflict Selection
-
 
 enum class I2C_Selection {
 	L_TSL2561,		///< TSL2561
@@ -108,13 +85,15 @@ public:
 	void		print_config();
 	void		print_state();
 	void		measure();
-	void		package(OSCBundle& bndl, char* suffix="");
-	bool		message_route(OSCMessage& msg, int address_offset);
+	void 		package(JsonObject json);
+	bool		cmd_route(JsonObject) {}
 	void		print_measurements();
+
+
 
 	/// Populate a bundle with a list of sensors currently attached
 	/// \param[out]	bndl	Bundle to populate with sensor list
-	void		get_sensor_list(OSCBundle& bndl);
+	void		get_sensor_list(JsonObject json);
 
 	/// Set whether or not to periodically update list of attached sensors
 	/// \param[in]	dynamic		The setting to set
@@ -152,8 +131,6 @@ private:
 	/// \return		Pointer to the generated I2C sensor object, Null if no match for that address
 	LoomI2CSensor* generate_sensor_object(byte i2c_address);
 
-
-
 	/// Determine the I2C address of the sensor (if any) on port.
 	/// \param[in]	port	The port to get sensor address of
 	/// \return		The I2C address of sensor, 0x00 if no sensor found
@@ -165,7 +142,3 @@ private:
 
 
 
-
-
-
-#endif

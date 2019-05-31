@@ -23,6 +23,7 @@ const  NameModulePair Factory::LookupTable[] =
 	// // CommPlat
 	{"Loom_LoRa",				Construct<Loom_LoRa>,			ModuleSortType::CommPlat },
 	{"Loom_nRF",				Construct<Loom_nRF>,			ModuleSortType::CommPlat },
+	{"Loom_Bluetooth",			Construct<Loom_Bluetooth>,		ModuleSortType::CommPlat },
 	
 	// InternetPlat
 	
@@ -91,7 +92,7 @@ LoomModule* Factory::Create(JsonVariant module)
 		}
 	}
 
-	// LPrintln("'", name, "' could not be created");
+	LPrintln("'", name, "' could not be created");
 	return nullptr;
 }
 
@@ -111,12 +112,9 @@ void Factory::CreateAndSort(
 	LoomModule* tmp = Create(module);
 	ModuleSortType sort_to = get_sort_type(module);
 
-	if (tmp == nullptr) {
-		LPrintln("Module could not be created"); 
-	} 
-	// else {
-		// tmp->print_config();
-	// }
+	// if (tmp == nullptr) {
+	// 	LPrintln("Module could not be created"); 
+	// } 
 
 	switch (sort_to) {
 		case ModuleSortType::InterruptManager:	interrupt_manager = (Loom_Interrupt_Manager*)tmp; return;
