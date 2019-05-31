@@ -8,9 +8,6 @@ Loom_nRF::Loom_nRF(
 		const char*		module_name,
 		uint16_t		max_message_len,
 		
-		// CommScope 	subnet_scope,
-		bool			compress_messages,
-
 		uint8_t			address,
 		uint8_t			friend_address,
 
@@ -21,7 +18,7 @@ Loom_nRF::Loom_nRF(
 
 		uint8_t			multicast_level	
 	)
-	: LoomCommPlat( module_name, max_message_len, compress_messages )
+	: LoomCommPlat( module_name, max_message_len )
 {
 	this->module_type = ModuleType::nRF;
 
@@ -104,7 +101,7 @@ Loom_nRF::Loom_nRF(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_nRF::Loom_nRF(JsonVariant p)
-	: Loom_nRF(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9])
+	: Loom_nRF( EXPAND_ARRAY(p, 9) )
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -130,75 +127,77 @@ void Loom_nRF::print_config()
 
 /////////////////////////////////////////////////////////////////////
 
-bool Loom_nRF::receive_bundle(OSCBundle& bndl) 
-{
-	network->update();                      // Check the network regularly
+// bool Loom_nRF::receive_bundle(OSCBundle& bndl) 
+// {
+// 	network->update();                      // Check the network regularly
 
-	while ( network->available() ) {        // Is there anything ready for us?
+// 	while ( network->available() ) {        // Is there anything ready for us?
 		
-		RF24NetworkHeader header;          // If so, grab it and print it out
-		char buf[NRF_MESSAGE_SIZE];
-		memset(buf, '\0', NRF_MESSAGE_SIZE);
-		network->read(header, &buf, NRF_MESSAGE_SIZE-1);
+// 		RF24NetworkHeader header;          // If so, grab it and print it out
+// 		char buf[NRF_MESSAGE_SIZE];
+// 		memset(buf, '\0', NRF_MESSAGE_SIZE);
+// 		network->read(header, &buf, NRF_MESSAGE_SIZE-1);
 
-		// LPrintln("Compressed buf :", buf);
+// 		// LPrintln("Compressed buf :", buf);
 
-		// This is done just in case the compressed string
-		// uncompresses to more than 251 characters
-		char larger_buf[180];
-		memset(larger_buf, '\0', sizeof(larger_buf));
-		strcpy(larger_buf, (const char*)buf);
+// 		// This is done just in case the compressed string
+// 		// uncompresses to more than 251 characters
+// 		char larger_buf[180];
+// 		memset(larger_buf, '\0', sizeof(larger_buf));
+// 		strcpy(larger_buf, (const char*)buf);
 
-		LoomCommPlat::convert_string_to_bundle((char*)larger_buf, bndl); 
+// 		LoomCommPlat::convert_string_to_bundle((char*)larger_buf, bndl); 
 		
-		// Apply filtering based on family and subnet
-		bool in_scope = LoomCommPlat::scope_filter(bndl);
-		if (print_verbosity == Verbosity::V_HIGH) {
-			if (!in_scope) {
-				LPrintln("Received nRF bundle out of scope");
-			}
-		}
-	} // of while ( network->available() )
-}
+// 		// Apply filtering based on family and subnet
+// 		// bool in_scope = LoomCommPlat::scope_filter(bndl);
+// 		// if (print_verbosity == Verbosity::V_HIGH) {
+// 		// 	if (!in_scope) {
+// 		// 		LPrintln("Received nRF bundle out of scope");
+// 		// 	}
+// 		// }
+// 		return true;
 
-/////////////////////////////////////////////////////////////////////
-bool Loom_nRF::send_bundle(OSCBundle& bndl, uint16_t destination) 
-{
-	char message[NRF_MESSAGE_SIZE];
-	memset(message, '\0', NRF_MESSAGE_SIZE);
+// 	} // of while ( network->available() )
+// }
+
+// /////////////////////////////////////////////////////////////////////
+// bool Loom_nRF::send_bundle(OSCBundle& bndl, uint16_t destination) 
+// {
+// 	char message[NRF_MESSAGE_SIZE];
+// 	memset(message, '\0', NRF_MESSAGE_SIZE);
 	
-	LoomCommPlat::convert_bundle_to_string(bndl, message);
+// 	LoomCommPlat::convert_bundle_to_string(bndl, message);
 	
-	RF24NetworkHeader header(destination);									
+// 	RF24NetworkHeader header(destination);									
 
-	bool is_sent = network->write( header, message, strlen(message) );
+// 	bool is_sent = network->write( header, message, strlen(message) );
 
-	LPrintln( "Send nRF bundle " , (is_sent) ? "successful" : "failed" );
+// 	LPrintln( "Send nRF bundle " , (is_sent) ? "successful" : "failed" );
 
-	return is_sent;
-}
+// 	return is_sent;
+// }
 
-/////////////////////////////////////////////////////////////////////
-bool Loom_nRF::send_bundle(OSCBundle& bndl) 
-{
-	send_bundle(bndl, friend_address);
-}
+// /////////////////////////////////////////////////////////////////////
+// bool Loom_nRF::send_bundle(OSCBundle& bndl) 
+// {
+// 	send_bundle(bndl, friend_address);
+// }
 
-/////////////////////////////////////////////////////////////////////
-void Loom_nRF::broadcast_bundle(OSCBundle& bndl) 
-{
-	char message[NRF_MESSAGE_SIZE];
-	memset(message, '\0', NRF_MESSAGE_SIZE);
+// /////////////////////////////////////////////////////////////////////
+// void Loom_nRF::broadcast_bundle(OSCBundle& bndl) 
+// {
+// 	char message[NRF_MESSAGE_SIZE];
+// 	memset(message, '\0', NRF_MESSAGE_SIZE);
 	
-	LoomCommPlat::convert_bundle_to_string(bndl, message);
+// 	LoomCommPlat::convert_bundle_to_string(bndl, message);
 	
-	RF24NetworkHeader header(00);									
+// 	RF24NetworkHeader header(00);									
 
-	bool is_sent = network->multicast( header, message, strlen(message), multicast_level );
+// 	bool is_sent = network->multicast( header, message, strlen(message), multicast_level );
 
-	LPrintln("Multicast nRF bundle " , (is_sent) ? "successful" : "failed" );
+// 	LPrintln("Multicast nRF bundle " , (is_sent) ? "successful" : "failed" );
 
-}
+// }
 
 /////////////////////////////////////////////////////////////////////
 void Loom_nRF::set_address(uint addr)    // Need to test this

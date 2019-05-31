@@ -1,6 +1,4 @@
-
-#ifndef LOOM_AS7262_h
-#define LOOM_AS7262_h
+#pragma once
 
 #include "Loom_I2C_Sensor.h"
 
@@ -37,10 +35,10 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x49> | {0x49} | I2C address
 	/// \param[in]	module_name				String | <"AS7262"> | null | AS7262 module name
-	/// \param[in]	use_bulb					Bool | <false> | {true, false} | Whether or not to use bulb
-	/// \param[in]	gain							Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
-	/// \param[in]	mode							Set(Int) | <3> | { 0("Continuous reading of VBGY"), 1("Continuous reading of GYOR"), 2("Continuous reading all channels"), 3("One-shot reading of all channels") } | Read mode
-	/// \param[in]	integration_time	Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
+	/// \param[in]	use_bulb				Bool | <false> | {true, false} | Whether or not to use bulb
+	/// \param[in]	gain					Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
+	/// \param[in]	mode					Set(Int) | <3> | { 0("Continuous reading of VBGY"), 1("Continuous reading of GYOR"), 2("Continuous reading all channels"), 3("One-shot reading of all channels") } | Read mode
+	/// \param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
 	Loom_AS7262(
 			byte			i2c_address			= 0x49,
 			const char*		module_name			= "AS7262",
@@ -77,5 +75,3 @@ private:
 
 };
 
-
-#endif

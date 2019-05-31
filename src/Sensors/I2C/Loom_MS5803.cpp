@@ -23,7 +23,7 @@ Loom_MS5803::Loom_MS5803(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_MS5803::Loom_MS5803(JsonVariant p)
-	: Loom_MS5803(p[0], p[1]) 
+	: Loom_MS5803( EXPAND_ARRAY(p, 2) ) 
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -52,7 +52,6 @@ void Loom_MS5803::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-
 void Loom_MS5803::package(JsonObject json)
 {
 	package_json(json, module_name, 

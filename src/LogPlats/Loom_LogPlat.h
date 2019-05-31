@@ -1,6 +1,5 @@
 
-#ifndef LOOM_LOG_PLAT_h
-#define LOOM_LOG_PLAT_h
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -52,8 +51,7 @@ public:
 	// Inherited Methods
 	virtual void	print_config();
 	virtual void	measure();
-	virtual bool	message_route(OSCMessage& msg, int address_offset);
-	virtual void	log(OSCBundle& bndl) = 0;
+	virtual bool	cmd_route(JsonObject) {}
 	virtual void	log(JsonObject json) = 0;
 	virtual void 	package(JsonObject json) {}
 
@@ -66,5 +64,3 @@ protected:
 };
 
 
-
-#endif

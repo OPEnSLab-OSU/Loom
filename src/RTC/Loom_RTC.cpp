@@ -90,7 +90,7 @@ LoomRTC::LoomRTC(
 		pinMode(int_pin, INPUT_PULLUP);		
 	}
 
-	clear_alarms();
+	// clear_alarms();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -118,15 +118,10 @@ void LoomRTC::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
-
 void LoomRTC::package(JsonObject json)
 {
-	package_json(json, module_name, 
-		"Date", datestring,
-		"Time", timestring
-	);
+	package_json_timestamp(json, datestring, timestring);
 }
-
 
 /////////////////////////////////////////////////////////////////////
 void LoomRTC::print_time(bool verbose)

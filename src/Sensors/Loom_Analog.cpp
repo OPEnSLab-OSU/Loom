@@ -25,9 +25,26 @@ float Loom_Analog::convert(uint8_t pin, uint16_t analog)
 		case AnalogConversion::TURBIDITY 	: return convert_turbidity(analog);
 		case AnalogConversion::EC 			: return convert_EC(analog);
 		case AnalogConversion::TDS 			: return convert_TDS(analog);
+		case AnalogConversion::SALINITY 	: return convert_salinity(analog);
 		default								: return (float)analog;  
 	}
 }
+
+
+const char* Loom_Analog::conversion_name(AnalogConversion conversion)
+{
+	switch(conversion) {
+		case AnalogConversion::VOLTAGE 		: return "voltage";
+		case AnalogConversion::THERMISTOR 	: return "thermistor";
+		case AnalogConversion::PH 			: return "pH";
+		case AnalogConversion::TURBIDITY 	: return "turbidity";
+		case AnalogConversion::EC 			: return "EC";
+		case AnalogConversion::TDS 			: return "TDS";
+		case AnalogConversion::SALINITY 	: return "salinity";
+		default								: return "analog";  
+	}
+}
+
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
@@ -99,11 +116,7 @@ Loom_Analog::Loom_Analog(
 Loom_Analog::Loom_Analog(JsonVariant p)
 	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], (AnalogConversion)(int)p[9], (AnalogConversion)(int)p[10], (AnalogConversion)(int)p[11], (AnalogConversion)(int)p[12], (AnalogConversion)(int)p[13], (AnalogConversion)(int)p[14])
 {
-	// if (p.size() >= 15) {
-	// 	Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], (AnalogConversion)(int)p[9], (AnalogConversion)(int)p[10], (AnalogConversion)(int)p[11], (AnalogConversion)(int)p[12], (AnalogConversion)(int)p[13], (AnalogConversion)(int)p[14]);
-	// } else {
-	// 	// Loom_Analog();
-	// }
+
 }
 
 
@@ -152,6 +165,7 @@ void Loom_Analog::print_measurements()
 void Loom_Analog::measure()
 {
 	battery = read_analog(VBATPIN) * 2 * 3.3 / (float)pow(2, read_resolution);
+	// battery = read_analog(VBATPIN) * 2 * 3.3 ;/// (float)pow(2, read_resolution);
 
 	for (int i = 0; i < 6; i++) {
 		if (pin_enabled[i]) {
@@ -165,24 +179,19 @@ void Loom_Analog::package(JsonObject json)
 {
 	package_json(json, module_name, "Vbat", battery);
 
-	char buf[10];
+	char buf[20];
 	for (int i = 0; i < ANALOG_COUNT; i++) {
 		if (pin_enabled[i]) {
-			sprintf(buf, "%s%d", "A", i);
 
-			package_json(json, module_name, buf, 
-				( (!enable_conversions) || (conversions[i] == AnalogConversion::NONE) ) 
-				? analog_vals[i]
-				: convert(i, analog_vals[i])
-			);
+			if ( (!enable_conversions) || (conversions[i] == AnalogConversion::NONE) ) {
+				sprintf(buf, "%s%d", "A", i);
+				package_json(json, module_name, buf, analog_vals[i]);
+			} else {
+				sprintf(buf, "%s%d(%s)", "A", i, conversion_name(conversions[i]));
+				package_json(json, module_name, buf, convert(i, analog_vals[i]) );
+			}		
 		}
 	}	
-}
-
-/////////////////////////////////////////////////////////////////////
-bool Loom_Analog::message_route(OSCMessage& msg, int address_offset) 
-{
-	// Enable or disable individual pins
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -317,6 +326,8 @@ float Loom_Analog::convert_turbidity(uint16_t analog)
 {
 	float voltage = convert_voltage(analog);
 
+	// LPrintln("turbidity voltage: ", voltage);
+
 	return -1120.4 * (voltage * voltage) + (5742.3 * voltage) - 4352.9;
 }	
 
@@ -339,6 +350,46 @@ float Loom_Analog::convert_TDS(uint16_t analog)
 {
 	return convert_EC(analog)/2.;
 }
+
+
+/////////////////////////////////////////////////////////////////////
+float Loom_Analog::convert_salinity(uint16_t analog)
+{
+	// Probably doesn't actually give a value of any worth right now...
+	return (analog-76) / .0928;
+}
+
+
+// //Used to find the peaks of the square wave from the output
+// //of the Salinity Sensor
+// //
+// float rawValue, minimum, maximum, peakValue;
+// int threshold = 70; // sensitivity
+// float voltage = 0., temp = 25.0, kvalue = 1.0 ;
+// void setup() {
+// 	Serial.begin(9600);
+// }
+
+// void loop() {
+// 	minimum = 0; // reset
+// 	maximum = 0;
+// 	for (int i = 0; i < 10000; i++) { // measure
+// 		rawValue = analogRead(A0);
+// 		if (rawValue < minimum) minimum = rawValue; // store min peak
+// 		if (rawValue > maximum) maximum = rawValue; // store max peak
+// 	}
+// 	peakValue = maximum - minimum; // calc difference
+// 	if (peakValue > threshold) { // action
+// 		// do something
+// 	}
+// 	//3V
+// 	// peakValue = (peakValue - 76) / .0928;
+// 	//5V
+// 	// peakValue = (peakValue - 75)/ .0834;
+// 	Serial.print("PPM: ");
+// 	Serial.print(peakValue);
+// 	delay(250); // remove in final code
+// }
 
 
 

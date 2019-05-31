@@ -1,33 +1,8 @@
-
-#ifndef LOOM_MANAGER_h
-#define LOOM_MANAGER_h
-
-
-// these might need to be forward declared instead
-// e.g. class LoomSensor;
-// both h files included in .cpp files
-// #include "loom_sensor_class.h"
-// #include "loom_actuator_class.h"
+#pragma once
 
 #include "Loom_Misc.h"
 #include "Loom_Translator.h"
 #include <ArduinoJson.h>
-
-// #include "Actuators/Loom_Relay_Stub.h"
-
-// #include "Loom_Interrupt_Manager.h"
-// #include "Loom_Sleep_Manager.h"
-// #include "Loom_Module.h"
-// #include "Sensors/Loom_Sensor.h"
-// #include "Actuators/Loom_Actuator.h"
-// #include "RTC/Loom_RTC.h"
-// #include "CommPlats/Loom_CommPlat.h"
-// #include "InternetPlats/Loom_InternetPlat.h"
-// #include "LogPlats/Loom_LogPlat.h"
-
-
-// #include "Loom_Module_Stub.h"
-
 
 
 class LoomModule;
@@ -67,6 +42,7 @@ class Loom_MAX31856;
 // CommPlats
 class Loom_LoRa;
 class Loom_nRF;
+class Loom_Bluetooth;
 class Loom_SlipSerial;
 
 // LogPlats
@@ -94,38 +70,26 @@ class Loom_Multiplexer;
 /// managed by a LoomManager
 enum class ModuleType {
 	Unknown,
-
 	// Actuators
 	Neopixel, Relay, Servo, Stepper,
-
 	// Sensors
 	Analog, Digital,
-
 	// I2C
 	AS7262, AS7263, AS7265X, FXAS21002, FXOS8700, LIS3DH, MB1232, MPU6050, MS5803, SHT31D, TSL2561, TSL2591, ZXGesture,
-
 	// SDI12
 	Decagon5TM, DecagonGS3,
-
 	// SPI
 	MAX31856,
-
 	// CommPlats
-	LoRa, nRF, SlipSerial,
-
+	LoRa, nRF, SlipSerial, Bluetooth,
 	// LogPlats
 	OLED, SDCARD,
-
 	// InternetPlats
-
 	// RTC
 	DS3231, PCF8523,
-
 	// Other
 	Sleep_Manager, Interrupt_Manager, Multiplexer
 };
-
-
 
 
 
@@ -182,7 +146,6 @@ class LoomManager
 protected:
 
 	/// The name of the device
-	// char*		device_name;
 	char		device_name[20];
 	/// The family the device belongs to
 	char		family[20];
@@ -230,8 +193,8 @@ protected:
 	/// Package detail verbosity
 	Verbosity	package_verbosity;
 
+	StaticJsonDocument<2000> doc;
 
-	OSCBundle	bundle;	// Not sure if this will always work...
 
 public:
 
@@ -239,13 +202,13 @@ public:
 
 	/// Loom Manager constructor.
 	///
-	/// \param[in]	device_name			String | <"Default"> | null | Manager name
-	/// \param[in]	family					String | <"Loom"> | null | Which family the device belongs to
-	/// \param[in]	family_num			Int | <1> | [0-99] | Which family subnet the device belongs to
-	/// \param[in]	instance				Int | <1> | [0-99] | Device instance number on its subnet
+	/// \param[in]	device_name					String | <"Default"> | null | Manager name
+	/// \param[in]	family						String | <"Loom"> | null | Which family the device belongs to
+	/// \param[in]	family_num					Int | <1> | [0-99] | Which family subnet the device belongs to
+	/// \param[in]	instance					Int | <1> | [0-99] | Device instance number on its subnet
 	/// \param[in]	type						Set(DeviceType) | <1> | {0("Hub"), 1("Node"), 2("Repeater")} | Device's topological type
 	/// \param[in]	type						Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
-	/// \param[in]	type						Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed OSC bundles are
+	/// \param[in]	type						Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
 	LoomManager(
 			const char*		device_name			= "Default",
 			const char*		family				= "Loom",
@@ -280,11 +243,6 @@ public:
 
 
 
-// 	bool message_route(OSCMessage& msg, int address_offset) {}
-
-
-
-
 //but probably put here, because measure and package aren't managed elsewhere
 
 	// void measure();
@@ -298,18 +256,20 @@ public:
 // void print_data
 
 
-
 	void		measure();  
-	// void		package();
-	// void		package(OSCBundle& bndl);
 	void		package(JsonObject json);
+	JsonObject	package();
 
-	void		print_current_bundle();
+	// Iterate over array of commands
+	void		cmd_route(JsonObject json);
 
 
-	// bool		receive(OSCBundle& bndl);
-	// bool		send(OSCBundle& bndl);
+	// Return reference to internal json object
+	JsonObject	internalJson(bool clear = true);
+	void		print_internalJson();
+
 	// bool		log()
+
 
 
 	void		flash_LED(uint count, uint time_high, uint time_low);
@@ -342,13 +302,6 @@ public:
 	Loom_Interrupt_Manager*	get_interrupt_manager();
 	Loom_Sleep_Manager*		get_sleep_manager();
 	LoomRTC*				get_rtc_module();
-	LoomModule*				get_other_module(int idx);
-	LoomSensor*				get_sensor_module(int idx);
-	LoomActuator*			get_actuator_module(int idx);
-	LoomCommPlat*			get_comm_plat_module(int idx);
-	LoomInternetPlat*		get_internet_plat_module(int idx);
-	LoomLogPlat*			get_log_plat_module(int idx);
-
 
 
 
@@ -362,25 +315,25 @@ public:
 	const char*	get_device_name();
 
 
-
-	/// Copy device identification message header (to family level) string to buffer.
-	/// \param[out]	buf The bufer to copy family name into
-	void		packet_header_family(char* buf);
-	/// Return device identification message header (to family level) string.
-	/// \return	The device family string
-	const char*	 packet_header_family();
-	/// Copy device identification message header (to subnet level) string to buffer.
-	/// \param[out] buf The bufer to copy subnet name into
-	void		packet_header_subnet(char* buf);
-	/// Return device identification message header (to subnet level) string.
-	/// \return The device subnet string
-	const char*	packet_header_subnet();
-	/// Copy device identification message header (to device specific level) string to buffer.
-	/// \param[out] buf The bufer to copy device name into
-	void		packet_header_device(char* buf);
-	/// Return device identification message header (to device specific level) string.
-	/// \return The device name and number string
-	const char*	packet_header_device();
+// // Maybe remove these 6
+// 	/// Copy device identification message header (to family level) string to buffer.
+// 	/// \param[out]	buf The bufer to copy family name into
+// 	void		packet_header_family(char* buf);
+// 	/// Return device identification message header (to family level) string.
+// 	/// \return	The device family string
+// 	const char*	 packet_header_family();
+// 	/// Copy device identification message header (to subnet level) string to buffer.
+// 	/// \param[out] buf The bufer to copy subnet name into
+// 	void		packet_header_subnet(char* buf);
+// 	/// Return device identification message header (to subnet level) string.
+// 	/// \return The device subnet string
+// 	const char*	packet_header_subnet();
+// 	/// Copy device identification message header (to device specific level) string to buffer.
+// 	/// \param[out] buf The bufer to copy device name into
+// 	void		packet_header_device(char* buf);
+// 	/// Return device identification message header (to device specific level) string.
+// 	/// \return The device name and number string
+// 	const char*	packet_header_device();
 
 
 	/// Get device family name.
@@ -429,6 +382,8 @@ public:
 	// CommPlats
 	Loom_LoRa&			LoRa(int idx = 0);
 	Loom_nRF&			nRF(int idx = 0);
+	Loom_Bluetooth& 	Bluetooth(int idx = 0); 
+
 	// Loom_SlipSerial&	SlipSerial(int idx = 0);
 
 	// LogPlats
@@ -480,10 +435,14 @@ private:
 	void		list_modules_aux(LoomModule** modules, uint len, char* module_type);
 	void		measure_aux(LoomModule** modules, uint len);
 	void		package_aux(JsonObject json, LoomModule** modules, uint len);
+	void		package_aux(JsonObject json, LoomModule* module);
+	bool		cmd_route_aux(JsonObject json, LoomModule** modules, uint len);
+	bool		cmd_route_aux(JsonObject json, LoomModule* module);
+
+
 
 	LoomModule*	find_module(ModuleType type, int idx, LoomModule** modules, int count);
 
 };
 
 
-#endif // of LOOM_MANAGER_h

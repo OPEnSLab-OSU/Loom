@@ -1,6 +1,4 @@
-
-#ifndef LOOM_TSL2591_h
-#define LOOM_TSL2591_h
+#pragma once
 
 #include "Loom_I2C_Sensor.h"
 
@@ -36,7 +34,7 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x29> | {0x29} | I2C address
 	/// \param[in]	module_name				String | <"TSL2591"> | null | TSL2591 module name
-	/// \param[in]	gain							Set(Int) | <1> | { 1 } | Gain level
+	/// \param[in]	gain					Set(Int) | <1> | { 1 } | Gain level
 	/// \param[in]	timing_level			Set(Int) | <0> | { 0 } | Timing level
 	Loom_TSL2591(
 			byte			i2c_address			= 0x29,
@@ -61,4 +59,3 @@ private:
 };
 
 
-#endif

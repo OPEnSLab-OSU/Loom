@@ -1,7 +1,4 @@
-
-#ifndef LOOM_RELAY_h
-#define LOOM_RELAY_h
-
+#pragma once
 
 #include "Loom_Actuator.h"
 
@@ -44,21 +41,13 @@ public:
 	void		print_config() override;
 	void		print_state();
 	void 		package(JsonObject json);
-	bool		message_route(OSCMessage& msg, int address_offset);
-
-	bool		route_cmd(const JsonObject json);
-
+	bool		cmd_route(JsonObject json);
 
 	// --- Actuator Control ---
 
 	/// Set relay state
 	/// \param[in]	state	The state to set relay to (True=HIGH, False=LOW)
 	void		set_relay(bool state);
-
-	/// Sest relay state.
-	/// Settings enclosed in message, forwards to set_relay with bool arg
-	/// \param[in]	msg		The message to parse
-	void		set_relay(OSCMessage& msg);
 
 private:
 
@@ -67,19 +56,3 @@ private:
 
 
 
-// class Loom_Relay_Stub : public Loom_Relay
-// {
-// 	Loom_Relay_Stub() {}
-
-// 	void print_config() { LPrintln("No valid Relay found"); }
-// 	void print_state() { LPrintln("No valid Relay found"); }
-// 	void package(OSCBundle bndl, char* suffix="") { LPrintln("No valid Relay found"); }
-// 	bool message_route(OSCMessage& msg, int address_offset) { LPrintln("No valid Relay found"); return false; }
-// 	void set_relay(bool state) { LPrintln("No valid Relay found"); }
-// 	void set_relay(OSCMessage& msg) { LPrintln("No valid Relay found"); }
-// };
-
-
-
-
-#endif // of LOOM_RELAY_h

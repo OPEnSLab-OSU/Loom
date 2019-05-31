@@ -1,6 +1,4 @@
-
-#ifndef LOOM_AS7265X_h
-#define LOOM_AS7265X_h
+#pragma once
 
 #include "Loom_I2C_Sensor.h"
 
@@ -83,4 +81,3 @@ private:
 };
 
 
-#endif

@@ -50,7 +50,7 @@ Loom_TSL2561::Loom_TSL2561(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_TSL2561::Loom_TSL2561(JsonVariant p)
-	: Loom_TSL2561(p[0], p[1], p[2], p[3])
+	: Loom_TSL2561( EXPAND_ARRAY(p, 4) )
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -83,7 +83,6 @@ void Loom_TSL2561::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-
 void Loom_TSL2561::package(JsonObject json)
 {
 	package_json(json, module_name, 

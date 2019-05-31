@@ -71,7 +71,12 @@ void package_json(JsonObject json, const char* module_name, const Args... args)
 
 
 
+void package_json_timestamp(JsonObject json, const char* date, const char* time);
 
+
+
+void flatten_json_data_object(JsonObject json);
+void flatten_json_data_array(JsonObject json);
 
 
 
@@ -139,24 +144,24 @@ void package_json(JsonObject json, const char* module_name, const Args... args)
 // Recursively extract the first two args at a time
 
 
-void func();// {} // termination version
+// void func();// {} // termination version
 
-template<typename Arg1>
-void func(const Arg1 arg1)
-{
-	Serial.println( arg1 );
-}
+// template<typename Arg1>
+// void func(const Arg1 arg1)
+// {
+// 	Serial.println( arg1 );
+// }
 
 
 
-template<typename Arg1, typename Arg2, typename... Args>
-void func(const Arg1 arg1, const Arg2 arg2, const Args... args)
-{
-	Serial.print( arg1 );
-	Serial.print(" ");
-	Serial.println( arg2 );
-	func(args...); // note: arg1 does not appear here!
-}
+// template<typename Arg1, typename Arg2, typename... Args>
+// void func(const Arg1 arg1, const Arg2 arg2, const Args... args)
+// {
+// 	Serial.print( arg1 );
+// 	Serial.print(" ");
+// 	Serial.println( arg2 );
+// 	func(args...); // note: arg1 does not appear here!
+// }
 
 
 

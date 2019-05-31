@@ -2,7 +2,6 @@
 #include "Loom_LogPlat.h"
 
 
-
 /////////////////////////////////////////////////////////////////////
 char* LoomLogPlat::enum_log_plat_string(LogPlatform p)
 {
@@ -48,12 +47,6 @@ void LoomLogPlat::print_config()
 void LoomLogPlat::measure() 
 {
 
-}
-
-/////////////////////////////////////////////////////////////////////
-bool LoomLogPlat::message_route(OSCMessage& msg, int address_offset) 
-{
-	// maybe set subnet_scope 
 }
 
 /////////////////////////////////////////////////////////////////////

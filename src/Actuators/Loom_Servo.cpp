@@ -30,7 +30,7 @@ Loom_Servo::Loom_Servo(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Servo::Loom_Servo(JsonVariant p)
-	: Loom_Servo(p[0], p[1])
+	: Loom_Servo( EXPAND_ARRAY(p, 2) )
 {
 
 }
@@ -63,9 +63,6 @@ void Loom_Servo::print_state()
 /////////////////////////////////////////////////////////////////////
 void Loom_Servo::package(JsonObject json)
 {
-	char id_prefix[30]; 
-	resolve_bundle_address(id_prefix, "Positions");
-
 	char tmp[8];
 	for (int i = 0; i < servo_count; i++) {
 		sprintf(tmp, "Servo%d", i);
@@ -74,13 +71,17 @@ void Loom_Servo::package(JsonObject json)
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Servo::message_route(OSCMessage& msg, int address_offset)
+bool Loom_Servo::cmd_route(JsonObject json)
 {
-	if ( msg.fullMatch( "/SetServo" , address_offset) ) {
-		set_degree(msg); return true;
+	if ( strcmp(json["module"], module_name) == 0 ) {
+		JsonArray params = json["params"];
+		return functionRoute(
+			json["func"],
+			"set_degree", [this, params]() { if (params.size() >= 2) { set_degree( EXPAND_ARRAY(params, 2) ); } else { LPrintln("Not enough parameters"); } } 
+		);
+	} else {
+		return false;
 	}
-
-	return false;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -98,12 +99,5 @@ void Loom_Servo::set_degree(int servo, int degree)
 	}
 
 }
-
-/////////////////////////////////////////////////////////////////////
-void Loom_Servo::set_degree(OSCMessage& msg)
-{
-	set_degree( msg.getInt(0), msg.getInt(1) );
-}
-
 
 

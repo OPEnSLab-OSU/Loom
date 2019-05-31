@@ -30,7 +30,7 @@ Loom_Stepper::Loom_Stepper(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Stepper::Loom_Stepper(JsonVariant p)
-	: Loom_Stepper(p[0], p[1])
+	: Loom_Stepper( EXPAND_ARRAY(p, 2) )
 {
 
 }
@@ -49,20 +49,23 @@ Loom_Stepper::~Loom_Stepper()
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- PUBLIC METHODS ---
 void Loom_Stepper::print_config() 
 {
 	LoomModule::print_config();
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Stepper::message_route(OSCMessage& msg, int address_offset)
+bool Loom_Stepper::cmd_route(JsonObject json)
 {
-	if ( msg.fullMatch( "/SetStepper" , address_offset) ) {
-		move_steps(msg); return true;
+	if ( strcmp(json["module"], module_name) == 0 ) {
+		JsonArray params = json["params"];
+		return functionRoute(
+			json["func"],
+			"move_steps", [this, params]() { if (params.size() >= 4) { move_steps( EXPAND_ARRAY(params, 4) ); } else { LPrintln("Not enough parameters"); } } 
+		);
+	} else {
+		return false;
 	}
-
-	return false;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -77,10 +80,4 @@ void Loom_Stepper::move_steps(int motor, int steps, int speed, bool clockwise)
 		LPrint("Set stepper ", motor, " to move ", steps, " steps ");
 		LPrintln("at speed ", speed, ", direction ", (clockwise) ? "clockwise" : "counterclockwise");
 	}
-}
-
-/////////////////////////////////////////////////////////////////////
-void Loom_Stepper::move_steps(OSCMessage& msg)
-{
-	move_steps( msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3) );
 }

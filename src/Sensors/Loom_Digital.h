@@ -1,6 +1,4 @@
-
-#ifndef LOOM_DIGITAL_h
-#define LOOM_DIGITAL_h
+#pragma once
 
 #include "Loom_Sensor.h"
 
@@ -68,8 +66,6 @@ public:
 	void		print_measurements() override;
 	void		measure() override;
 	void		package(JsonObject json);
-	bool		message_route(OSCMessage& msg, int address_offset) override;
-
 
 
 
@@ -98,6 +94,3 @@ private:
 
 };
 
-
-
-#endif

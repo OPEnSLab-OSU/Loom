@@ -1,6 +1,4 @@
-
-#ifndef LOOM_NRF_h
-#define LOOM_NRF_h
+#pragma once
 
 #include "Loom_CommPlat.h"
 
@@ -51,7 +49,6 @@ public:
 	///
 	/// \param[in]	module_name			String | <"nRF"> | null | nRF module name
 	/// \param[in]	max_message_len		Set(Int) | <120> | {120("Max length")} | The maximum possible message length
-	/// \param[in]	compress_messages	Bool | <true> | {true, false} | Whether or not to try to compress messages
 	/// \param[in]	address 			Int | <01> | [0-99] | This device's nRF address
 	/// \param[in]	friend_address 		Int | <00> | [0-99] | Default nRF address to send to
 	/// \param[in]	data_rate			Set(Int) | <0> | {0("Default"), 1("250KBPS"), 2("1MBPS"), 3("2MBPS")} | Transmission data rate
@@ -62,7 +59,6 @@ public:
 	Loom_nRF(
 			const char*		module_name			= "nRF",
 			uint16_t		max_message_len		= 120,
-			bool			compress_messages	= true,
 			uint8_t			address 			= NRF_SELF_ADDRESS,
 			uint8_t			friend_address 		= NRF_FRIEND_ADDRESS,
 			uint8_t			data_rate			= 1,
@@ -81,18 +77,6 @@ public:
 
 	void		print_config() override;
 
-	// Build OSC Bundle from packet if any exists
-	bool		receive_bundle(OSCBundle& bndl);
-
-	// Send an OSC bundle
-	// Should overload or use default args to optionally allow default address
-	bool		send_bundle(OSCBundle& bndl, uint16_t destination);
-	bool		send_bundle(OSCBundle& bndl);
-
-	// Broadcast an OSC bundle
-	void		broadcast_bundle(OSCBundle& bndl);
-
-
 	void		set_address(uint addr);
 	uint		get_address();
 
@@ -102,10 +86,14 @@ public:
 	void		set_multicast_level(uint8_t level);
 	uint8_t		get_multicast_level();
 
+	bool		receive(JsonObject json) {}
+	bool		send(JsonObject json, uint16_t destination) {}
+	bool		send(JsonObject json) {}
+	void		broadcast(JsonObject json) {}
+
 private:
 
 
 };
 
 
-#endif // of #ifndef LOOM_NRF_h

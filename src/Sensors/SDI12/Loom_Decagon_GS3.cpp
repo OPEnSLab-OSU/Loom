@@ -17,7 +17,7 @@ Loom_DecagonGS3::Loom_DecagonGS3(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_DecagonGS3::Loom_DecagonGS3(JsonVariant p)
-	: Loom_DecagonGS3(p[0], p[1]) 
+	: Loom_DecagonGS3( EXPAND_ARRAY(p, 2) ) 
 {}
 
 /////////////////////////////////////////////////////////////////////

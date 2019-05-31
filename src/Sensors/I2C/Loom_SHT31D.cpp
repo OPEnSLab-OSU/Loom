@@ -21,7 +21,7 @@ Loom_SHT31D::Loom_SHT31D(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_SHT31D::Loom_SHT31D(JsonVariant p)
-	: Loom_SHT31D(p[0], p[1]) 
+	: Loom_SHT31D( EXPAND_ARRAY(p, 2) ) 
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -56,7 +56,6 @@ void Loom_SHT31D::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-
 void Loom_SHT31D::package(JsonObject json)
 {
 	package_json(json, module_name, 

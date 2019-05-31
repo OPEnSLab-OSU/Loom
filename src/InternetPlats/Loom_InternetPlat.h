@@ -34,15 +34,15 @@ public:
 	virtual void print_config();
 	virtual void print_state();
 	virtual void measure() {}
-	virtual void package(OSCBundle& bndl, char* suffix="") = 0;
-	virtual bool message_route(OSCMessage& msg, int address_offset) = 0;
+	// virtual void package(OSCBundle& bndl, char* suffix="") = 0;
+	// virtual bool message_route(OSCMessage& msg, int address_offset) = 0;
 
 	virtual bool connect() = 0;
 	virtual bool is_connected() = 0;
 	virtual uint32_t get_time() = 0;
 
 
-	virtual bool log_to_pushingbox(OSCBundle* bndl);
+	// virtual bool log_to_pushingbox(OSCBundle* bndl);
 
 private:
 

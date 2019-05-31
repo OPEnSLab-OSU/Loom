@@ -45,7 +45,7 @@ Loom_Neopixel::Loom_Neopixel(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Neopixel::Loom_Neopixel(JsonVariant p)
-	: Loom_Neopixel(p[0], p[1], p[2], p[3])
+	: Loom_Neopixel( EXPAND_ARRAY(p, 4) )
 {
 
 }
@@ -86,18 +86,17 @@ void Loom_Neopixel::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Neopixel::message_route(OSCMessage& msg, int address_offset) 
+bool Loom_Neopixel::cmd_route(JsonObject json)
 {
-	// Set color
-	// if ( msg.dispatch("/SetNeopixel", cmd_color, address_offset) ) return true;
-	
-	if ( msg.fullMatch( "/SetNeopixel" , address_offset) ) {
-		set_color(msg); return true;
+	if ( strcmp(json["module"], module_name) == 0 ) {
+		JsonArray params = json["params"];
+		return functionRoute(
+			json["func"],
+			"set_color", [this, params]() { if (params.size() >= 5) { set_color( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } } 
+		);
+	} else {
+		return false;
 	}
-
-	// Enable/Disable individual Neopixel
-
-	return false;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -142,10 +141,3 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 	}
 
 }
-
-/////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::set_color(OSCMessage& msg)
-{
-	set_color( msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3), msg.getInt(4) );
-}
-

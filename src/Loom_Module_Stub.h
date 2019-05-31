@@ -1,3 +1,4 @@
+#pragma once
 
 #include "Loom_Module.h"
 
@@ -44,7 +45,7 @@ public:
 	{ LPrintln(error_msg); }
 	void package(JsonObject json) 
 	{ LPrintln(error_msg); }
-	bool message_route(OSCMessage& msg, int address_offset) 
+	bool cmd_route(JsonObject) 
 	{ LPrintln(error_msg); return false; }
 
 	void get_module_name(char* buf)
@@ -150,23 +151,17 @@ public:
 	/////////////////////////////////////////////////////////////////////
 	// Communiciation Platforms
 
-	bool receive_bundle(OSCBundle& bndl)
+	bool receive(JsonObject json)
 	{ LPrintln(error_msg); }
-	bool send_bundle(OSCBundle& bndl)
+	bool send(JsonObject json)
 	{ LPrintln(error_msg); }
-	void broadcast_bundle(OSCBundle& bndl)
+	bool send()
+	{ LPrintln(error_msg); }
+	void broadcast(JsonObject json)
 	{ LPrintln(error_msg); }
 	void set_address(uint a)
 	{ LPrintln(error_msg); }
 	uint get_address()
-	{ LPrintln(error_msg); }
-	void set_compress_messages(bool c)
-	{ LPrintln(error_msg); }
-	bool get_compress_messages()
-	{ LPrintln(error_msg); }
-	bool scope_filter(OSCBundle& bndl, int* offset)
-	{ LPrintln(error_msg); }
-	bool scope_filter(OSCBundle& bndl)
 	{ LPrintln(error_msg); }
 	void set_friend_address(uint addr)
 	{ LPrintln(error_msg); }
@@ -188,11 +183,11 @@ public:
 
 	/////////////////////////////////////////////////////////////////////
 	// Logging Platforms
-	void log_bundle(OSCBundle& bndl)
+	void log_bundle(JsonObject json)
 	{ LPrintln(error_msg); }
 
 	// OLED
-	void log_bundle(OSCBundle& bndl, OLED_Format format)
+	void log_bundle(JsonObject json, OLED_Format format)
 	{ LPrintln(error_msg); }
 	void set_display_format(OLED_Format format)
 	{ LPrintln(error_msg); }
@@ -213,7 +208,7 @@ public:
 
 
 	// SD
-	bool save_bundle(OSCBundle& bndl, char* file, int timestamp=3)
+	bool save_json(JsonObject json, char* file, int timestamp=3)
 	{ LPrintln(error_msg); }
 	void set_default_file(char* filename)
 	{ LPrintln(error_msg); }
@@ -238,7 +233,7 @@ public:
 
 	/////////////////////////////////////////////////////////////////////
 	// Mulitplexer
-	void get_sensor_list(OSCBundle& bndl)
+	void get_sensor_list(JsonObject json)
 	{ LPrintln(error_msg); }
 	void set_is_dynamic(bool dynamic)
 	{ LPrintln(error_msg); }
@@ -366,27 +361,18 @@ public:
 	{ LPrintln(error_msg); }
 	void set_color(uint8_t port, uint8_t chain_num, uint8_t red, uint8_t green, uint8_t blue)
 	{ LPrintln(error_msg); }
-	void set_color(OSCMessage& msg)
-	{ LPrintln(error_msg); }
 
 	// Relay
 	void set_relay(bool state)
-	{ LPrintln(error_msg); }
-	void set_relay(OSCMessage& msg)
 	{ LPrintln(error_msg); }
 
 	// Servo
 	void set_degree(int servo, int degree)
 	{ LPrintln(error_msg); }
-	void set_degree(OSCMessage& msg)
-	{ LPrintln(error_msg); }
 
 	// Stepper
 	void move_steps(int motor, int steps, int speed, bool clockwise)
 	{ LPrintln(error_msg); }
-	void move_steps(OSCMessage& msg)
-	{ LPrintln(error_msg); }
-
 
 };
 

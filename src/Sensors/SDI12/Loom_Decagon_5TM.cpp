@@ -17,7 +17,7 @@ Loom_Decagon5TM::Loom_Decagon5TM(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Decagon5TM::Loom_Decagon5TM(JsonVariant p)
-	: Loom_Decagon5TM(p[0], p[1]) 
+	: Loom_Decagon5TM( EXPAND_ARRAY(p, 2) ) 
 {}
 
 /////////////////////////////////////////////////////////////////////

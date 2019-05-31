@@ -1,7 +1,4 @@
-
-#ifndef LOOM_SDI12_SENSOR_h
-#define LOOM_SDI12_SENSOR_h
-
+#pragma once
 
 #include "../Loom_Sensor.h"
 
@@ -30,7 +27,8 @@ public:
 	virtual void	calibrate() {};
 	virtual void	measure() = 0;
 	virtual void 	package(JsonObject json) = 0;
-	virtual bool	message_route(OSCMessage& msg, int address_offset) {};
+	virtual bool	cmd_route(JsonObject) {}
+
 
 private:
 
@@ -38,5 +36,3 @@ private:
 };
 
 
-
-#endif // of #ifndef LOOM_SDI12_SENSOR_h

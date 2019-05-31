@@ -1,7 +1,4 @@
-
-#ifndef LOOM_DS3231_h
-#define LOOM_DS3231_h
-
+#pragma once
 
 #include "Loom_RTC.h"
 
@@ -40,7 +37,6 @@ public:
 
 	// Inherited (overriding) Methods
 	void		print_config() override;
-	bool		message_route(OSCMessage& msg, int address_offset) {};
 	DateTime	now();
 	void		set_alarm(DateTime time);
 	void		set_alarm(TimeSpan duration);
@@ -55,5 +51,3 @@ protected:
 
 };
 
-
-#endif // of #ifndef LOOM_DS3231_h

@@ -1,6 +1,4 @@
-
-#ifndef LOOM_OLED_h
-#define LOOM_OLED_h
+#pragma once
 
 #include "Loom_LogPlat.h"
 
@@ -97,7 +95,6 @@ public:
 
 	void			print_config() override;
 
-	void			log(OSCBundle& bndl);
 	void			log(JsonObject json);
 
 
@@ -140,5 +137,3 @@ private:
 };
 
 
-
-#endif

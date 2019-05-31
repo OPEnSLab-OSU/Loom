@@ -6,7 +6,6 @@
 // Preamble will only need to include leaves in the heirarchy
 // abstract (non-leaves) already included by leaves
 
-#include <OSCBundle.h>
 
 /////////////////////////////////////////////////////////////////////
 // General Macros
