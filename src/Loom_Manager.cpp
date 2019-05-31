@@ -300,48 +300,6 @@ const char* LoomManager::get_device_name()
 	return (const char*)name;
 }
 
-// /////////////////////////////////////////////////////////////////////
-// void LoomManager::packet_header_family(char* buf)
-// { 
-// 	sprintf(buf, "/F/%s", family); 
-// }
-
-// /////////////////////////////////////////////////////////////////////
-// const char* LoomManager::packet_header_family() 
-// {
-// 	char result[50];
-// 	packet_header_family(result);
-// 	return (const char*)result;
-// }
-
-// /////////////////////////////////////////////////////////////////////
-// void LoomManager::packet_header_subnet(char* buf)
-// { 
-// 	sprintf(buf, "/S/%s/%d", family, family_num); 
-// }
-
-// /////////////////////////////////////////////////////////////////////
-// const char* LoomManager::packet_header_subnet() 
-// {
-// 	char result[50];
-// 	packet_header_subnet(result);
-// 	return (const char*)result;
-// }
-
-// /////////////////////////////////////////////////////////////////////
-// void LoomManager::packet_header_device(char* buf)
-// { 
-// 	sprintf(buf, "/D/%s/%d/%s/%d", family, family_num, device_name, instance); 
-// }
-
-// /////////////////////////////////////////////////////////////////////
-// const char* LoomManager::packet_header_device() 
-// {
-// 	char result[50];
-// 	packet_header_device(result);
-// 	return (const char*)result;
-// }
-
 /////////////////////////////////////////////////////////////////////
 const char* LoomManager::get_family() 
 { 
@@ -505,15 +463,56 @@ JsonObject LoomManager::internalJson(bool clear)
 
 }
 
+/////////////////////////////////////////////////////////////////////
+
+// Have each module check against provided command
+bool LoomManager::cmd_route_aux(JsonObject json, LoomModule** modules, uint len)
+{
+	for (int i = 0; i < len; i++) {
+		if ( (modules[i] != nullptr) && ( modules[i]->get_active() ) ){
+			if (modules[i]->cmd_route( json ) ) return true;
+		}
+	}
+	return false;
+}
+
+/////////////////////////////////////////////////////////////////////
+
+// Have module check against provided command
+bool LoomManager::cmd_route_aux(JsonObject json, LoomModule* module)
+{
+	if ( (module != nullptr) && ( module->get_active() ) ){
+		module->cmd_route( json );
+	}
+
+}
+
+/////////////////////////////////////////////////////////////////////
+
+// Iterate over array of commands
+void LoomManager::cmd_route(JsonObject json)
+{
+	// LPrintln("Command object:");
+	// serializeJsonPretty(json, Serial);
+
+	if ( strcmp(json["type"], "command") == 0 )	{
+
+		for ( JsonObject cmd : json["commands"].as<JsonArray>() ) {
+
+			// LPrintln("\n\nCMD:");
+			// serializeJsonPretty(cmd, Serial);
 
 
-// /////////////////////////////////////////////////////////////////////
-// void LoomManager::package(OSCBundle& bndl) 
-// {
-// 	package();
-// 	deep_copy_bundle(bundle, bndl);
-// }
-
+			if ( cmd_route_aux( cmd, (LoomModule**)actuator_modules , actuator_count ) )		continue;
+			
+			if ( cmd_route_aux( cmd, (LoomModule*)rtc_module ) )								continue;
+			if ( cmd_route_aux( cmd, (LoomModule**)other_modules    , other_module_count ) )	continue;
+			if ( cmd_route_aux( cmd, (LoomModule**)sensor_modules   , sensor_count ) )			continue;
+			if ( cmd_route_aux( cmd, (LoomModule**)comm_modules     , comm_count ) )			continue;
+			if ( cmd_route_aux( cmd, (LoomModule**)log_modules      , log_count ) )				continue;
+		}
+	}
+}
 
 // /////////////////////////////////////////////////////////////////////
 // void LoomManager::print_current_bundle() 

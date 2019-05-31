@@ -1,6 +1,8 @@
 #pragma once
 
 #include <Arduino.h>
+#include "Loom_Macros.h"
+
 
 // 3 Options
 //   1: every element on different line
@@ -45,5 +47,23 @@ void replace_char(char* str, const char orig, const char rep);
 
 
 
+
+bool functionRoute(const char* name);
+
+template<typename Arg1>
+bool functionRoute(const char* name, const Arg1 arg1) { return false; } 
+
+template<typename FName, typename FType, typename... Args>
+bool functionRoute(const char* name, const FName fName, const FType f, const Args... args)
+{
+	if ( strcmp(name, fName) == 0 ) {	// Found match, call lambda that calls function
+		// LPrintln("Found ", name, " match");
+		f();
+		return true;
+	} else {	// Search the rest of the string-function pairs
+		// LPrintln(name, " and ", fName, " did not match");
+		return functionRoute(name, args...);
+	}
+}
 
 

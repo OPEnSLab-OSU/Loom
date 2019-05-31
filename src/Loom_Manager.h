@@ -304,8 +304,8 @@ public:
 	void		package(JsonObject json);
 	JsonObject	package();
 
-	bool		cmd_route(JsonObject) {}
-
+	// Iterate over array of commands
+	void		cmd_route(JsonObject json);
 
 
 // Return reference to internal json object
@@ -313,6 +313,7 @@ public:
 
 	// void		print_current_bundle();
 	// bool		log()
+
 
 
 	void		flash_LED(uint count, uint time_high, uint time_low);
@@ -486,6 +487,10 @@ private:
 	void		measure_aux(LoomModule** modules, uint len);
 	void		package_aux(JsonObject json, LoomModule** modules, uint len);
 	void		package_aux(JsonObject json, LoomModule* module);
+	bool		cmd_route_aux(JsonObject json, LoomModule** modules, uint len);
+	bool		cmd_route_aux(JsonObject json, LoomModule* module);
+
+
 
 	LoomModule*	find_module(ModuleType type, int idx, LoomModule** modules, int count);
 

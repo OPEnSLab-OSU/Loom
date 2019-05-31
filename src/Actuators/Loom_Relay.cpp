@@ -59,54 +59,19 @@ void Loom_Relay::package(JsonObject json)
 	package_json(json, module_name, "state", on);
 }
 
-// /////////////////////////////////////////////////////////////////////
-// bool Loom_Relay::message_route(OSCMessage& msg, int address_offset)
-// {
-// 	if ( msg.fullMatch( "/SetRelay" , address_offset) ) {
-// 		set_relay(msg); return true;
-// 	}
-
-// 	return false;
-// }
-
 /////////////////////////////////////////////////////////////////////
-bool Loom_Relay::cmd_route(JsonObject)
+bool Loom_Relay::cmd_route(JsonObject json)
 {
-
+	if ( strcmp(json["module"], module_name) == 0 ) {
+		JsonArray params = json["params"];
+		return functionRoute(
+			json["func"],
+			"set_relay", [this, params]() { if (params.size() >= 1) { set_relay( EXPAND_ARRAY(params, 1) ); } else { LPrintln("Not enough parameters"); } } 
+		);
+	} else {
+		return false;
+	}
 }
-
-/////////////////////////////////////////////////////////////////////
-// bool Loom_Relay::route_cmd(const JsonObject json)
-// {
-// 	if ( strcmp(json["module"], module_name) != 0 ) {
-// 		return false;
-// 	}
-
-// 	JsonArray params = json["params"];
-
-// 	if ( strcmp(json["func"], "set_relay") == 0 ) {
-// 		set_relay(params[0]);
-// 		return true;
-// 	}
-
-
-// }
-
-// Do an experiment to 
-
-
-// Decide if route command takes one or multiple commands
-
-// Generalize to use function pointers are arbitrary parameters
-// Should:
-//	- Check module name
-//	- Compare function name against available list of drivers
-//	- Call assoicated drivers with all params
-
-
-// Could generalize drivers to take json only... dont like this much
-//   overloading with a json version would be more consistent with constructor approach anyway
-
 
 /////////////////////////////////////////////////////////////////////
 void Loom_Relay::set_relay(bool state)
@@ -119,9 +84,3 @@ void Loom_Relay::set_relay(bool state)
 		LPrintln("Set relay on pin ", pin, (on) ? " High" : " Low");
 	}
 }
-
-// /////////////////////////////////////////////////////////////////////
-// void Loom_Relay::set_relay(OSCMessage& msg)
-// {
-// 	set_relay( msg.getInt(0) );
-// }

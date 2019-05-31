@@ -56,20 +56,17 @@ void Loom_Stepper::print_config()
 }
 
 /////////////////////////////////////////////////////////////////////
-// bool Loom_Stepper::message_route(OSCMessage& msg, int address_offset)
-// {
-// 	if ( msg.fullMatch( "/SetStepper" , address_offset) ) {
-// 		move_steps(msg); return true;
-// 	}
-
-// 	return false;
-// }
-
-
-/////////////////////////////////////////////////////////////////////
-bool Loom_Stepper::cmd_route(JsonObject)
+bool Loom_Stepper::cmd_route(JsonObject json)
 {
-
+	if ( strcmp(json["module"], module_name) == 0 ) {
+		JsonArray params = json["params"];
+		return functionRoute(
+			json["func"],
+			"move_steps", [this, params]() { if (params.size() >= 4) { move_steps( EXPAND_ARRAY(params, 4) ); } else { LPrintln("Not enough parameters"); } } 
+		);
+	} else {
+		return false;
+	}
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -85,9 +82,3 @@ void Loom_Stepper::move_steps(int motor, int steps, int speed, bool clockwise)
 		LPrintln("at speed ", speed, ", direction ", (clockwise) ? "clockwise" : "counterclockwise");
 	}
 }
-
-// /////////////////////////////////////////////////////////////////////
-// void Loom_Stepper::move_steps(OSCMessage& msg)
-// {
-// 	move_steps( msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3) );
-// }

@@ -45,8 +45,6 @@ public:
 	{ LPrintln(error_msg); }
 	void package(JsonObject json) 
 	{ LPrintln(error_msg); }
-	// bool message_route(OSCMessage& msg, int address_offset) 
-	// { LPrintln(error_msg); return false; }
 	bool cmd_route(JsonObject) 
 	{ LPrintln(error_msg); return false; }
 

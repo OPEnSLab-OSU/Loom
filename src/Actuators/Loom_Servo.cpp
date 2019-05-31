@@ -71,19 +71,17 @@ void Loom_Servo::package(JsonObject json)
 }
 
 /////////////////////////////////////////////////////////////////////
-// bool Loom_Servo::message_route(OSCMessage& msg, int address_offset)
-// {
-// 	if ( msg.fullMatch( "/SetServo" , address_offset) ) {
-// 		set_degree(msg); return true;
-// 	}
-
-// 	return false;
-// }
-
-/////////////////////////////////////////////////////////////////////
-bool Loom_Servo::cmd_route(JsonObject)
+bool Loom_Servo::cmd_route(JsonObject json)
 {
-
+	if ( strcmp(json["module"], module_name) == 0 ) {
+		JsonArray params = json["params"];
+		return functionRoute(
+			json["func"],
+			"set_degree", [this, params]() { if (params.size() >= 2) { set_degree( EXPAND_ARRAY(params, 2) ); } else { LPrintln("Not enough parameters"); } } 
+		);
+	} else {
+		return false;
+	}
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -101,12 +99,5 @@ void Loom_Servo::set_degree(int servo, int degree)
 	}
 
 }
-
-// /////////////////////////////////////////////////////////////////////
-// void Loom_Servo::set_degree(OSCMessage& msg)
-// {
-// 	set_degree( msg.getInt(0), msg.getInt(1) );
-// }
-
 
 

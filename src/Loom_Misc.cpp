@@ -70,3 +70,6 @@ void replace_char(char* str, const char orig, const char rep)
 	}
 }
 
+
+
+bool functionRoute(const char* name) { return false; }
