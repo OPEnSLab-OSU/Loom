@@ -32,7 +32,6 @@ public:
 	/// Get the sensor's I2C address
 	/// \return	The sensor's I2C address
 	byte			get_i2c_address(); 	
-
 	
 	void			adjust_module_name_with_port(int port);
 

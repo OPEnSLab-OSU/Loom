@@ -99,16 +99,12 @@ Loom_Multiplexer::Loom_Multiplexer(
 {
 	this->module_type = ModuleType::Multiplexer;
 
-
-	// LPrintln("Loom_Multiplexer Constructor 1");
 	this->i2c_address 	= i2c_address; 
 	this->num_ports 	= num_ports;
 	this->update_period	= update_period;
 
 	LPrintln("this->num_ports: ", this->num_ports);
 	LPrintln("num_ports: ", num_ports);
-
-
 
 	// Begin I2C 
 	Wire.begin();

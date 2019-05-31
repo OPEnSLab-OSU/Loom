@@ -53,7 +53,6 @@ bool Loom_PCF8523::_initialized()
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- PUBLIC METHODS ---
 void Loom_PCF8523::print_config()
 {
 	LoomRTC::print_config();

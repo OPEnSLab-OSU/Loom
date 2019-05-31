@@ -83,7 +83,6 @@ void Loom_TSL2561::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-
 void Loom_TSL2561::package(JsonObject json)
 {
 	package_json(json, module_name, 

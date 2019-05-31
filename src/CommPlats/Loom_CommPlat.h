@@ -25,11 +25,7 @@ protected:
 	/// Rssi for Lora (need to determine what the other platforms use)
 	int16_t		signal_strength;
 
-
-
 	StaticJsonDocument<2000> messageJson;
-
-
 
 public:
 
@@ -50,7 +46,6 @@ public:
 	// General
 	virtual void	print_config() override;
 	virtual void	measure() {}
-	// virtual bool	message_route(OSCMessage& msg, int address_offset) {}
 	virtual bool	cmd_route(JsonObject) {}
 	virtual void 	package(JsonObject json) override;
 

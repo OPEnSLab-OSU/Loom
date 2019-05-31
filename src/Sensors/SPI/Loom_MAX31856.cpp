@@ -94,7 +94,6 @@ void Loom_MAX31856::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-
 void Loom_MAX31856::package(JsonObject json)
 {
 	package_json(json, module_name, 

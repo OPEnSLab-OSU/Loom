@@ -83,60 +83,6 @@ void LoomModule::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
-// void LoomModule::resolve_bundle_prefix(char* prefix) 
-// {
-// 	if (device_manager != nullptr) {
-// 		device_manager->packet_header_device(prefix);
-// 	} else {
-// 		strcpy(prefix, module_name);
-// 	}
-// }
-
-// /////////////////////////////////////////////////////////////////////
-// void LoomModule::resolve_bundle_address(char* address, char* suffix)
-// {
-// 	if (device_manager != nullptr) {
-// 		char tmp[30];
-// 		device_manager->packet_header_device(tmp);
-// 		sprintf(address, "%s/%s", tmp, module_name);
-// 		// device_manager->packet_header_device(address);
-
-// 	} else {
-// 		// strcpy(address, module_name);
-// 		sprintf(address, "/%s", module_name);
-// 	}
-
-// 	if (strlen(suffix) > 0) {
-// 		sprintf(address, "%s/%s", address, suffix);
-// 	} 
-// }
-
-
-
-
-	// void LoomModule::measure() = 0;
-
-	// Append to a bundle 
-	// void LoomModule::package(OSCBundle* bndl, char* id_prefix) = 0;
-
-
-
-	// Perform message routing on an OSC message
-	// Only parsing the message should happen in message_route
-	// Complete action should have its own method
-	// bool LoomModule::message_route(OSCMessage& msg, int address_offset) = 0;
-
-	// Not sure if there should be a verison that takes a bundle as well
-		// Maybe in LoomManager , but not here
-	// Might have a default value for address_offset to skip the /[D/S/F] section?
-	// This might have be OSCMessage& msg instead
-
-	// Modules might call parent message_route at the end of their own routing
-		// Wont be called if a match is found
-		// Would need to make sure the parent routing isn't called repeatedly
-		// as different modules are iterated through
-
-/////////////////////////////////////////////////////////////////////
 // Copy module name into buffer
 void LoomModule::get_module_name(char* buf) 
 { 
@@ -144,63 +90,54 @@ void LoomModule::get_module_name(char* buf)
 }
 
 /////////////////////////////////////////////////////////////////////
-// Return module name char*
 const char* LoomModule::get_module_name() 
 { 
 	return module_name; 
 }
 
 /////////////////////////////////////////////////////////////////////
-// Set print verbosity 
 void LoomModule::set_print_verbosity(Verbosity v) 
 { 
 	print_verbosity = v; 
 }
 
 /////////////////////////////////////////////////////////////////////
-// Get print verbosity
 Verbosity LoomModule::get_print_verbosity() 
 { 
 	return print_verbosity; 
 }
 
 /////////////////////////////////////////////////////////////////////
-// Set package verbosity (what gets included in bundle)
 void LoomModule::set_package_verbosity(Verbosity v) 
 { 
 	package_verbosity = v; 
 }
 
 /////////////////////////////////////////////////////////////////////
-// Get package verbosity
 Verbosity LoomModule::get_package_verbosity() 
 { 
 	return package_verbosity; 
 }
 
 /////////////////////////////////////////////////////////////////////
-// Set whether or not to be active
 void LoomModule::set_active(bool enable) 
 { 
 	active = enable; 
 }
 
 /////////////////////////////////////////////////////////////////////
-// Get whether or not device is active
 bool LoomModule::get_active() 
 { 
 	return active; 
 }
 
 /////////////////////////////////////////////////////////////////////
-// Set whether or not to use debug print statements
 void LoomModule::set_print_debug(bool enable) 
 { 
 	print_debug = enable; 
 }
 
 /////////////////////////////////////////////////////////////////////
-// Get whether or not debug prints are enabled
 bool LoomModule::get_print_debug() 
 { 
 	return print_debug; 

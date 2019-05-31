@@ -2,7 +2,6 @@
 #include "Loom_LogPlat.h"
 
 
-
 /////////////////////////////////////////////////////////////////////
 char* LoomLogPlat::enum_log_plat_string(LogPlatform p)
 {

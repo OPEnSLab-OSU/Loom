@@ -86,14 +86,9 @@ public:
 	void		set_multicast_level(uint8_t level);
 	uint8_t		get_multicast_level();
 
-
-	// Build json from packet if any exists
 	bool		receive(JsonObject json) {}
-
-	// Send json
 	bool		send(JsonObject json, uint16_t destination) {}
 	bool		send(JsonObject json) {}
-
 	void		broadcast(JsonObject json) {}
 
 private:

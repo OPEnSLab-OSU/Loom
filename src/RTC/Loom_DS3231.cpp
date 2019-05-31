@@ -1,5 +1,5 @@
 
-#include "loom_DS3231.h"
+#include "Loom_DS3231.h"
 
 // #define EI_NOTEXTERNAL
 // #include <EnableInterrupt.h>
@@ -54,9 +54,7 @@ bool Loom_DS3231::_initialized()
 	return !rtc_inst->lostPower();
 }
 
-
 /////////////////////////////////////////////////////////////////////
-// --- PUBLIC METHODS ---
 void Loom_DS3231::print_config()
 {
 	LoomRTC::print_config();

@@ -49,7 +49,6 @@ Loom_Stepper::~Loom_Stepper()
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- PUBLIC METHODS ---
 void Loom_Stepper::print_config() 
 {
 	LoomModule::print_config();

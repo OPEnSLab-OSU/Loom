@@ -28,9 +28,7 @@ Loom_LoRa::Loom_LoRa(
 	this->retry_count    = retry_count;
 	this->retry_timeout  = retry_timeout;
 
-	// #if hub_node_type == 0 // if hub
 	pinMode(8, INPUT_PULLUP);
-	// #endif
 
 	pinMode(RFM95_RST, OUTPUT);
 	digitalWrite(RFM95_RST, HIGH);
@@ -68,7 +66,6 @@ Loom_LoRa::Loom_LoRa(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_LoRa::Loom_LoRa(JsonVariant p)
-	// : Loom_LoRa(p[0], p[1], p[2], p[3], p[4], p[5], p[6])
 	: Loom_LoRa( EXPAND_ARRAY(p, 7) )
 {}
 
@@ -196,11 +193,9 @@ bool Loom_LoRa::send(JsonObject json, uint16_t destination)
 	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
 		LPrintln(buffer);
-		// LPrintln("Message length: ", strlen(buffer));
 		LPrintln("MsgPack size: ", measureMsgPack(json));
 	}
 
-	// bool is_sent = manager->sendtoWait( (uint8_t*)buffer, strlen(buffer)+1, destination );
 	bool is_sent = manager->sendtoWait( (uint8_t*)buffer, measureMsgPack(json), destination );
 
 	print_module_label();

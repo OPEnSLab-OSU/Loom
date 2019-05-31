@@ -59,7 +59,6 @@ public:
 	void		calibrate() {}
 	void		measure() override;
 	void 		package(JsonObject json);
-	// bool		message_route(OSCMessage& msg, int address_offset) {}
 
 
 

@@ -60,11 +60,9 @@ void Loom_LIS3DH::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-
 void Loom_LIS3DH::package(JsonObject json)
 {
 	package_json(json, module_name, 
-		// Acceleration
 		"ax", accel[0],
 		"ay", accel[1],
 		"az", accel[2]

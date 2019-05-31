@@ -54,15 +54,9 @@ public:
 	uint		get_address();
 
 
-
-	// Build json from packet if any exists
 	bool		receive(JsonObject json) {}
-
-	// Send json
 	bool		send(JsonObject json, uint16_t destination) {}
 	bool		send(JsonObject json) {}
-
-
 
 
 private:

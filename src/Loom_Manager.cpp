@@ -206,46 +206,6 @@ LoomRTC* LoomManager::get_rtc_module()
 	return rtc_module;
 }
 
-// /////////////////////////////////////////////////////////////////////
-// LoomModule* LoomManager::get_other_module(int idx)
-// {
-// 	return (idx < other_module_count) ? other_modules[idx] : nullptr;
-// }
-
-// /////////////////////////////////////////////////////////////////////
-// LoomSensor* LoomManager::get_sensor_module(int idx)
-// {
-// 	return (idx < sensor_count) ? sensor_modules[idx] : nullptr;
-// }
-
-// /////////////////////////////////////////////////////////////////////
-// LoomActuator* LoomManager::get_actuator_module(int idx)
-// {
-// 	return (idx < actuator_count) ? actuator_modules[idx] : nullptr;
-// }
-
-// /////////////////////////////////////////////////////////////////////
-// LoomCommPlat* LoomManager::get_comm_plat_module(int idx)
-// {
-// 	return (idx < comm_count) ? comm_modules[idx] : nullptr;
-// }
-
-// /////////////////////////////////////////////////////////////////////
-// LoomInternetPlat* LoomManager::get_internet_plat_module(int idx)
-// {
-// 	return (idx < internet_count) ? internet_modules[idx] : nullptr;
-// }
-
-// /////////////////////////////////////////////////////////////////////
-// LoomLogPlat* LoomManager::get_log_plat_module(int idx)
-// {
-// 	return (idx < log_count) ? log_modules[idx] : nullptr;
-// }
-
-/////////////////////////////////////////////////////////////////////
-// void module_enable(LoomModule* LM, bool e) ?
-
-
 /////////////////////////////////////////////////////////////////////
 void LoomManager::list_modules_aux(LoomModule** modules, uint len, char* module_type)
 {
@@ -309,7 +269,6 @@ const char* LoomManager::get_family()
 /////////////////////////////////////////////////////////////////////
 void  LoomManager::set_family(const char* f) 
 { 
-	// strcpy(family, f);
 	snprintf(this->family, 20, "%s", family); 
 }
 
@@ -515,11 +474,13 @@ void LoomManager::cmd_route(JsonObject json)
 }
 
 // /////////////////////////////////////////////////////////////////////
-// void LoomManager::print_current_bundle() 
-// {
-// 	LPrintln("Member Bundle:");
-// 	print_bundle(bundle);
-// }
+void LoomManager::print_internalJson()
+{
+	print_device_label();
+	LPrintln("Internal Json:");
+	serializeJsonPretty(doc, Serial);
+	LPrintln();
+}
 
 /////////////////////////////////////////////////////////////////////
 void LoomManager::flash_LED(uint count, uint time_high, uint time_low)

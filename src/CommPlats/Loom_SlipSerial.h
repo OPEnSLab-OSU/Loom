@@ -11,7 +11,7 @@
 
 /// Baud rate used for communication
 #define BAUD_RATE	115200
-/// Maximum size a message can be (OSCBundle)
+/// Maximum size a message can be
 #define SERIAL_MAX_MESSAGE_LEN	15
 
 

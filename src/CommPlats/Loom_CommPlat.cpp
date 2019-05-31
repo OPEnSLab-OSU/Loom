@@ -2,15 +2,6 @@
 #include "Loom_CommPlat.h"
 
 
-
-union data_value { // Used in translation between OSC and strings
-	int32_t  i;
-	float    f;
-	uint32_t u;
-};
-
-
-
 /////////////////////////////////////////////////////////////////////
 char* LoomCommPlat::enum_comm_plat_string(CommPlatform c)
 {
@@ -50,10 +41,7 @@ void LoomCommPlat::print_config()
 	LPrintln('\t', "Max Message Length  : ", max_message_len );
 }
 
-
-
 /////////////////////////////////////////////////////////////////////
-
 void LoomCommPlat::package(JsonObject json)
 {
 

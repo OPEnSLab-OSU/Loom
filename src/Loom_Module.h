@@ -1,16 +1,12 @@
 #pragma once
 
 #include "Loom_Manager.h"
-
 #include "Loom_Misc.h"
 #include "Loom_Translator.h"
 #include "Loom_Macros.h"
-
-#include <ArduinoJson.h>
-
 #include "Loom_Package.h"
 
-
+#include <ArduinoJson.h>
 
 
 
@@ -99,27 +95,9 @@ public:
 	/// Package a modules measurements or state.
 	virtual void 	package(JsonObject json) = 0;
 
-
-	// Package but try to reference LoomManager for id_prefix
-	// void package(OSCBundle& bndl);
-
-	/// Message routing on an OSC message.
-	// Only parsing the message should happen in message_route
-	// Complete action should have its own method
-	// Dispatch doesnt work unless the method is static, current use fullMatch instead
-	// virtual bool	message_route(OSCMessage& msg, int address_offset) = 0;
+	/// Route command to driver 
 	virtual bool	cmd_route(JsonObject) = 0;
-
-	// Not sure if there should be a verison that takes a bundle as well
-		// Maybe in LoomManager , but not here
-	// Might have a default value for address_offset to skip the /[D/S/F] section?
-	// This might have be OSCMessage& msg instead
-
-	// Modules might call parent message_route at the end of their own routing
-		// Wont be called if a match is found
-		// Would need to make sure the parent routing isn't called repeatedly
-		// as different modules are iterated through
-
+	
 
 	/// Copy module name into buffer
 	/// \param[out]	buf	The buffer to copy module name into

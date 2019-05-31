@@ -56,7 +56,6 @@ void Loom_SHT31D::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-
 void Loom_SHT31D::package(JsonObject json)
 {
 	package_json(json, module_name, 

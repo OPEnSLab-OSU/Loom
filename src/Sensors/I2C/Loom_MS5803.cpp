@@ -52,7 +52,6 @@ void Loom_MS5803::measure()
 }
 
 /////////////////////////////////////////////////////////////////////
-
 void Loom_MS5803::package(JsonObject json)
 {
 	package_json(json, module_name, 

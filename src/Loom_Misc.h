@@ -24,29 +24,28 @@ void print_array(T data [], int len, int format=1)
 void print_array(String data [], int len, int format=1);
 
 
-// Replaces substrings with other substrings in a string
-// Auxiliary function for OSC string compression
-void str_replace(char* target, const char* needle, const char* replacement);
+// // Replaces substrings with other substrings in a string
+// void str_replace(char* target, const char* needle, const char* replacement);
 
-// Finds nth instance of a character in a string
-// Auxiliary function for OSC string compression
-const char* nth_strchr(const char* s, char c, int n);
+// // Finds nth instance of a character in a string
+// const char* nth_strchr(const char* s, char c, int n);
 
-// --- REPLACE CHARACTER ---
-//
-// Given a string, replace all instances of 'orig' char with 'rep' char
-// Used primarily for replacing '~'s sent by Max
-// as it cannot send strings with spaces
-//
-// @param str   Pointer to string to alter
-// @param orig  Character to replace
-// @param rep   Replacement character
-// 
-void replace_char(char* str, const char orig, const char rep); 
+// // --- REPLACE CHARACTER ---
+// //
+// // Given a string, replace all instances of 'orig' char with 'rep' char
+// // Used primarily for replacing '~'s sent by Max
+// // as it cannot send strings with spaces
+// //
+// // @param str   Pointer to string to alter
+// // @param orig  Character to replace
+// // @param rep   Replacement character
+// // 
+// void replace_char(char* str, const char orig, const char rep); 
 
 
 
 
+// Used to call lambda function with parameters set if search string matches string associated with function
 
 bool functionRoute(const char* name);
 

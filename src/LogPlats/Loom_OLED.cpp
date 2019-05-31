@@ -87,7 +87,6 @@ Loom_OLED::~Loom_OLED()
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- PUBLIC METHODS ---
 void Loom_OLED::print_config() 
 {
 	LoomLogPlat::print_config();

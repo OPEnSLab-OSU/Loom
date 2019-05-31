@@ -63,8 +63,6 @@ public:
 	void		print_state() override;
 	void		measure() {}
 	void 		package(JsonObject json) {}
-
-	// bool		message_route(OSCMessage& msg, int address_offset) {}
 	bool		cmd_route(JsonObject) {}
 
 
