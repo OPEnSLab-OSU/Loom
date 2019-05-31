@@ -86,8 +86,8 @@ void Loom_Stepper::move_steps(int motor, int steps, int speed, bool clockwise)
 	}
 }
 
-/////////////////////////////////////////////////////////////////////
-void Loom_Stepper::move_steps(OSCMessage& msg)
-{
-	move_steps( msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3) );
-}
+// /////////////////////////////////////////////////////////////////////
+// void Loom_Stepper::move_steps(OSCMessage& msg)
+// {
+// 	move_steps( msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3) );
+// }

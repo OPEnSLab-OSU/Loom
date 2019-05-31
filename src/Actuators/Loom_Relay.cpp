@@ -120,8 +120,8 @@ void Loom_Relay::set_relay(bool state)
 	}
 }
 
-/////////////////////////////////////////////////////////////////////
-void Loom_Relay::set_relay(OSCMessage& msg)
-{
-	set_relay( msg.getInt(0) );
-}
+// /////////////////////////////////////////////////////////////////////
+// void Loom_Relay::set_relay(OSCMessage& msg)
+// {
+// 	set_relay( msg.getInt(0) );
+// }

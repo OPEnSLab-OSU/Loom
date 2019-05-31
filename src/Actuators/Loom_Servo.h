@@ -62,7 +62,7 @@ public:
 	/// Set servo position.
 	/// Settings enclosed in message, forwards to set_degree with int args
 	/// \param[in]	msg		The message to parse
-	void		set_degree(OSCMessage& msg);
+	// void		set_degree(OSCMessage& msg);
 
 private:
 

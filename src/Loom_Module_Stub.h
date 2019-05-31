@@ -363,27 +363,18 @@ public:
 	{ LPrintln(error_msg); }
 	void set_color(uint8_t port, uint8_t chain_num, uint8_t red, uint8_t green, uint8_t blue)
 	{ LPrintln(error_msg); }
-	void set_color(OSCMessage& msg)
-	{ LPrintln(error_msg); }
 
 	// Relay
 	void set_relay(bool state)
-	{ LPrintln(error_msg); }
-	void set_relay(OSCMessage& msg)
 	{ LPrintln(error_msg); }
 
 	// Servo
 	void set_degree(int servo, int degree)
 	{ LPrintln(error_msg); }
-	void set_degree(OSCMessage& msg)
-	{ LPrintln(error_msg); }
 
 	// Stepper
 	void move_steps(int motor, int steps, int speed, bool clockwise)
 	{ LPrintln(error_msg); }
-	void move_steps(OSCMessage& msg)
-	{ LPrintln(error_msg); }
-
 
 };
 

@@ -1,9 +1,7 @@
 #pragma once
 
 #include "Loom_Misc.h"
-#include <OSCBundle.h>
-
-
+#include <Arduino.h>
 
 // ================================================================
 // ===             CONVERSION BETWEEN ARRAY FORMATS             ===
@@ -23,7 +21,7 @@
 /// \param[out]	values		The array to be filled with the values for 'key_values'
 /// \param[in]	kv_len		The length of the 'key_value' array
 /// \param[in]	assoc_len	The length of the 'keys' and 'values' arrays (should be the same)
-void		convert_array_key_value_to_assoc(String key_values [], String keys [], String values [], int kv_len, int assoc_len);
+void convert_array_key_value_to_assoc(String key_values [], String keys [], String values [], int kv_len, int assoc_len);
 
 /// Converts pair of associated key and value arrays to equivalent key-value array.
 /// Converts incoming associated arrays formatted as:
@@ -37,7 +35,7 @@ void		convert_array_key_value_to_assoc(String key_values [], String keys [], Str
 /// \param[out]	key_values	The flat array of keys and values to be filled by combining 'keys' and 'values'
 /// \param[in]	assoc_len	The length of the 'keys' and 'values' arrays (should be the same)
 /// \param[in]	kv_len		The length of the 'key_value' array
-void		convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len);
+void convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len);
 
 
 /// Overloaded version of convert_array_assoc_to_key_value to convert output type.
@@ -53,7 +51,7 @@ void		convert_array_assoc_to_key_value(String keys [], String values [], String 
 /// \param[in]	assoc_len	The length of the 'keys' and 'values' arrays (should be the same)
 /// \param[in]	kv_len		The length of the 'key_value' array
 template <typename T>
-void		convert_array_assoc_to_key_value(String keys [], T values [], String key_values [], int assoc_len, int kv_len)
+void convert_array_assoc_to_key_value(String keys [], T values [], String key_values [], int assoc_len, int kv_len)
 {
 	if ( kv_len < 2*assoc_len ) {
 		#if LOOM_DEBUG == 1

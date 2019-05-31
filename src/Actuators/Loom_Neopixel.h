@@ -67,7 +67,7 @@ public:
 	/// Set Neopixel color.
 	/// Settings enclosed in message, forwards to set_color with int args
 	/// \param[in]	msg		The message to parse
-	void		set_color(OSCMessage& msg);
+	// void		set_color(OSCMessage& msg);
 
 
 private:

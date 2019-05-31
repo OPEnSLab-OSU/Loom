@@ -150,8 +150,8 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::set_color(OSCMessage& msg)
-{
-	set_color( msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3), msg.getInt(4) );
-}
+// void Loom_Neopixel::set_color(OSCMessage& msg)
+// {
+// 	set_color( msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3), msg.getInt(4) );
+// }
 

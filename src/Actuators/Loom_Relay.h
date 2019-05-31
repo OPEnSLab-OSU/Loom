@@ -55,7 +55,7 @@ public:
 	/// Sest relay state.
 	/// Settings enclosed in message, forwards to set_relay with bool arg
 	/// \param[in]	msg		The message to parse
-	void		set_relay(OSCMessage& msg);
+	// void		set_relay(OSCMessage& msg);
 
 private:
 

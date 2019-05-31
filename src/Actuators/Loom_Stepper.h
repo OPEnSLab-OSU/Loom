@@ -63,7 +63,7 @@ public:
 
 	/// Move stepper.
 	/// Settings enclosed in message, forwards to move_steps with int args
-	void		move_steps(OSCMessage& msg);
+	// void		move_steps(OSCMessage& msg);
 
 private:
 

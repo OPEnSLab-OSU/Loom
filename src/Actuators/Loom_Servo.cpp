@@ -102,11 +102,11 @@ void Loom_Servo::set_degree(int servo, int degree)
 
 }
 
-/////////////////////////////////////////////////////////////////////
-void Loom_Servo::set_degree(OSCMessage& msg)
-{
-	set_degree( msg.getInt(0), msg.getInt(1) );
-}
+// /////////////////////////////////////////////////////////////////////
+// void Loom_Servo::set_degree(OSCMessage& msg)
+// {
+// 	set_degree( msg.getInt(0), msg.getInt(1) );
+// }
 
 
 
