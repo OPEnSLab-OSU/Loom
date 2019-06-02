@@ -47,7 +47,7 @@ public:
 
 	/// Set relay state
 	/// \param[in]	state	The state to set relay to (True=HIGH, False=LOW)
-	void		set_relay(bool state);
+	void		set(bool state);
 
 private:
 

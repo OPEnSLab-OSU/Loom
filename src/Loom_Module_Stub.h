@@ -363,7 +363,7 @@ public:
 	{ LPrintln(error_msg); }
 
 	// Relay
-	void set_relay(bool state)
+	void set(bool state)
 	{ LPrintln(error_msg); }
 
 	// Servo

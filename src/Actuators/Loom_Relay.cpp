@@ -66,7 +66,7 @@ bool Loom_Relay::cmd_route(JsonObject json)
 		JsonArray params = json["params"];
 		return functionRoute(
 			json["func"],
-			"set_relay", [this, params]() { if (params.size() >= 1) { set_relay( EXPAND_ARRAY(params, 1) ); } else { LPrintln("Not enough parameters"); } } 
+			"set", [this, params]() { if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } else { LPrintln("Not enough parameters"); } } 
 		);
 	} else {
 		return false;
@@ -74,7 +74,7 @@ bool Loom_Relay::cmd_route(JsonObject json)
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Relay::set_relay(bool state)
+void Loom_Relay::set(bool state)
 {
 	on = state;
 	digitalWrite(pin, (on) ? HIGH : LOW);

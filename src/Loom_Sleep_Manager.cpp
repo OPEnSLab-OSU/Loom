@@ -23,10 +23,11 @@ const char* Loom_Sleep_Manager::enum_sleep_mode_string(SleepMode m)
 
 /////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager( 
-		const char*	module_name, 
-		bool		use_LED, 
-		bool 		delay_on_wake, 
-		SleepMode	sleep_mode 
+		const char*		module_name, 
+		bool			use_LED, 
+		bool 			delay_on_wake, 
+		SleepMode		sleep_mode,
+		byte			power_off_pin
 	) : LoomModule( module_name )
 {
 	this->module_type = ModuleType::Sleep_Manager;
@@ -34,6 +35,9 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 	this->use_LED		= use_LED;
 	this->delay_on_wake	= delay_on_wake;
 	this->sleep_mode	= SleepMode::STANDBY;
+
+	this->power_off_pin	= power_off_pin;
+	pinMode(power_off_pin, OUTPUT);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -64,22 +68,30 @@ void Loom_Sleep_Manager::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::link_device_manager(LoomManager* LM)
+
+void Loom_Sleep_Manager::powerDown()
 {
-	LoomModule::link_device_manager(LM);
+	// Call manager to coordinate modules saving to flash
+	// and running any individual powerDown methods
+
+	LPrintln("Powering Off");
+	digitalWrite(power_off_pin, HIGH);
+	delay(50); // Sometimes the board takes several milliseconds to fully power off
+	LPrintln("This should not be printed");
 }
 
-// /////////////////////////////////////////////////////////////////////
-// void Loom_Sleep_Manager::set_Interrupt_Manager(Loom_Interrupt_Manager* IM)
-// {
-// 	this->IM = IM;
-// }
 
-// /////////////////////////////////////////////////////////////////////
-// Loom_Interrupt_Manager* Loom_Sleep_Manager::get_Interrupt_Manager()
-// {
-// 	return IM;
-// }
+
+
+
+
+
+
+
+
+
+
+
 
 /////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::set_sleep_mode(SleepMode mode)
@@ -170,7 +182,9 @@ bool Loom_Sleep_Manager::sleep()
 
 		switch(sleep_mode) {
 			case SleepMode::STANDBY : LowPower.standby(); 
+				break;
 			case SleepMode::IDLE 	: LowPower.idle(IDLE_2); 
+				break;
 
 			// implement
 			// case SleepMode::SLEEPYDOG 	: return false;   

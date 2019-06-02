@@ -50,8 +50,8 @@ public:
 	bool		test_send(const uint8_t val);
 	bool		test_send_str(const char* string);
 
-	void		set_address(uint addr);
-	uint		get_address();
+	void		set_address(uint addr) {}
+	uint		get_address() {}
 
 
 	bool		receive(JsonObject json) {}

@@ -30,16 +30,16 @@ void print_array(String data [], int len, int format=1);
 // // Finds nth instance of a character in a string
 // const char* nth_strchr(const char* s, char c, int n);
 
-// // --- REPLACE CHARACTER ---
-// //
-// // Given a string, replace all instances of 'orig' char with 'rep' char
-// // Used primarily for replacing '~'s sent by Max
-// // as it cannot send strings with spaces
-// //
-// // @param str   Pointer to string to alter
-// // @param orig  Character to replace
-// // @param rep   Replacement character
-// // 
+// --- REPLACE CHARACTER ---
+//
+// Given a string, replace all instances of 'orig' char with 'rep' char
+// Used primarily for replacing '~'s sent by Max
+// as it cannot send strings with spaces
+//
+// @param str   Pointer to string to alter
+// @param orig  Character to replace
+// @param rep   Replacement character
+// 
 // void replace_char(char* str, const char orig, const char rep); 
 
 

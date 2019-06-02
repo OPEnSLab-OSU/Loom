@@ -105,8 +105,8 @@ void Loom_SD::empty_file(char* file)
 	if ( !sd_found ) return;
 
 	SD.remove(file);
-	File SDFile = SD.open(file, FILE_WRITE);
-	SDFile.close();
+	File sdFile = SD.open(file, FILE_WRITE);
+	sdFile.close();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -130,16 +130,16 @@ bool Loom_SD::dump_file(char* file)
 
 		SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
 
-		File SDFile = SD.open(file);
+		File sdFile = SD.open(file);
 
-		if (SDFile) {
+		if (sdFile) {
 			LPrintln("Contents of file: ", file);
 
 			// read from the file until there's nothing else in it:
-			while (SDFile.available()) 
-				Serial.write(SDFile.read());
+			while (sdFile.available()) 
+				Serial.write(sdFile.read());
 			Serial.println();
-			SDFile.close();
+			sdFile.close();
 			return true;
 		} else {
 			// if the file didn't open, print an error:
@@ -171,9 +171,9 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 	digitalWrite(8, HIGH); 
 
 	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
-	File SDFile = SD.open(file, FILE_WRITE);
+	File sdFile = SD.open(file, FILE_WRITE);
 
-	if (!SDFile) {
+	if (!sdFile) {
 		LPrintln("Error opening: ", file);
 		return false;
 	} 
@@ -185,32 +185,31 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 	if (contents.isNull()) return false;
 
 	// Create Header
-	if ( SDFile.position() == 0) {
+	if ( sdFile.position() == 0) {
 
 		if (!timestamp.isNull()) { 
 			for (JsonPair dataPoint : timestamp) {
-				SDFile.print(dataPoint.key().c_str());
-				SDFile.print(',');
+				sdFile.print(dataPoint.key().c_str());
+				sdFile.print(',');
 			}
 		}
 
 		for (JsonObject module : contents) {
-
 			// LPrint(module["module"].as<const char*>());
 			// LPrint(",");
-			SDFile.print(module["module"].as<const char*>());
-			SDFile.print(",");
+			sdFile.print(module["module"].as<const char*>());
+			sdFile.print(",");
 
 			JsonObject data = module["data"];
 			if (data.isNull()) continue;
 
 			for (JsonPair dataPoint : data) {
-				SDFile.print(dataPoint.key().c_str());
-				SDFile.print(',');
+				sdFile.print(dataPoint.key().c_str());
+				sdFile.print(',');
 			}
 		}
 		// LPrintln();
-		SDFile.println();
+		sdFile.println();
 	}
 
 	// Write data value
@@ -220,15 +219,15 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 			JsonVariant val = dataPoint.value();				
 			if (val.is<char*>() || val.is<const char*>() ) {
 				// LPrint(dataPoint.value().as<const char*>());
-				SDFile.print(dataPoint.value().as<const char*>());
+				sdFile.print(dataPoint.value().as<const char*>());
 			} 
-			SDFile.print(',');
+			sdFile.print(',');
 		}
 	}
 	
 	for (JsonObject module : contents) {
 		// LPrint(",");
-		SDFile.print(",");
+		sdFile.print(",");
 
 
 
@@ -239,26 +238,26 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 			JsonVariant val = dataPoint.value();
 			if (val.is<int>()) {
 				// LPrint(dataPoint.value().as<int>());
-				SDFile.print(dataPoint.value().as<int>());
+				sdFile.print(dataPoint.value().as<int>());
 			} else if (val.is<bool>()) {
 				// LPrint(dataPoint.value().as<bool>());								
-				SDFile.print(dataPoint.value().as<bool>());								
+				sdFile.print(dataPoint.value().as<bool>());								
 			} else if (val.is<float>()) {
 				// LPrint(dataPoint.value().as<float>());				
-				SDFile.print(dataPoint.value().as<float>());				
+				sdFile.print(dataPoint.value().as<float>());				
 			} else if (val.is<char*>() || val.is<const char*>() ) {
 				// LPrint(dataPoint.value().as<const char*>());
-				SDFile.print(dataPoint.value().as<const char*>());
+				sdFile.print(dataPoint.value().as<const char*>());
 			} 
 			// LPrint(",");		
-			SDFile.print(",");		
+			sdFile.print(",");		
 		}
 	}
 
 	// LPrintln();
-	SDFile.println();
+	sdFile.println();
 
-	SDFile.close();
+	sdFile.close();
 	LPrintln("Done writing to SD");
 	return true;
 }
@@ -289,5 +288,21 @@ void Loom_SD::print_directory(File dir, int numTabs)
 		entry.close();
 	}
 }
+
+/////////////////////////////////////////////////////////////////////
+
+
+
+/////////////////////////////////////////////////////////////////////
+
+
+
+/////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
 

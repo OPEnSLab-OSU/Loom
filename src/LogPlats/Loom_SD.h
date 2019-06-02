@@ -34,7 +34,7 @@ class Loom_SD : public LoomLogPlat
 
 protected:
 
-		// File SDFile;
+		// File sdFile;
 
 		/// Chip select pin
 		byte		chip_select;
@@ -96,6 +96,19 @@ public:
 	// \param[in]	timestamp	Format of timestamp (if any)
 	bool		save_json(JsonObject json, const char* file, int timestamp=3);
 
+	void		log(JsonObject json);
+
+
+
+
+	void		get_row(char* filename, int idx, char* buffer);
+
+	
+
+
+
+
+
 
 	/// Set the RTC module to use for timers
 	/// \param[in]	RTC_Inst	Pointer to the RTC object
@@ -111,9 +124,6 @@ public:
 	void		empty_file(char* file);
 	void		list_files();
 	bool		dump_file(char* file);
-
-	void		log(JsonObject json);
-
 
 
 	// has_keys : set true if array is alternating keys and values, false otherwise
@@ -144,10 +154,10 @@ public:
 		bool got_timestamp = false;
 
 		SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
-		File SDFile = SD.open(file, FILE_WRITE);
+		File sdFile = SD.open(file, FILE_WRITE);
 
 		// If file successfully opened
-		if (SDFile) {
+		if (sdFile) {
 			LPrint("Saving array to SD file: '", file, "' ...");
 
 			char time_key[30], time_val[30];
@@ -167,48 +177,48 @@ public:
 			if (has_keys) {
 
 				// Check if at first row (create header)
-				if ( SDFile.position() == 0) {
+				if ( sdFile.position() == 0) {
 
 					// Add timestamp header
-					if (got_timestamp) SDFile.print(time_key); 
+					if (got_timestamp) sdFile.print(time_key); 
 
 					// Add address header if address was provided
-					if (strlen(device_id) > 0) SD_print_aux(SDFile, "Device", delimiter); 
+					if (strlen(device_id) > 0) SD_print_aux(sdFile, "Device", delimiter); 
 
 					// LPrint keys
 					for (int i = 0; i < len-2; i+=2) 
-						SD_print_aux(SDFile, data[i], delimiter);
+						SD_print_aux(sdFile, data[i], delimiter);
 					
-					SDFile.println(data[len-2]);
+					sdFile.println(data[len-2]);
 				}
 
 				// Add timestamp
-				if (got_timestamp) SDFile.print(time_val); 
+				if (got_timestamp) sdFile.print(time_val); 
 
 				// Add device ID if provided
-				if (strlen(device_id) > 0) SD_print_aux(SDFile, device_id, delimiter); 
+				if (strlen(device_id) > 0) SD_print_aux(sdFile, device_id, delimiter); 
 
 				// LPrint values 
 				for (int i = 1; i < len-2; i+=2) 
-					SD_print_aux(SDFile, data[i], delimiter); 
+					SD_print_aux(sdFile, data[i], delimiter); 
 
-				SDFile.println(data[len-1]);
+				sdFile.println(data[len-1]);
 			} 
 
 			// Array is assume to only have values
 			else {
-				if (got_timestamp) SDFile.print(time_val); 
+				if (got_timestamp) sdFile.print(time_val); 
 
 				// Add device ID if provided
-				if (strlen(device_id) > 0) SD_print_aux(SDFile, device_id, delimiter); 
+				if (strlen(device_id) > 0) SD_print_aux(sdFile, device_id, delimiter); 
 
 				for (int i = 0; i < len-1; i++) 
-					SD_print_aux(SDFile, data[i], delimiter);
+					SD_print_aux(sdFile, data[i], delimiter);
 
-				SDFile.println(data[len-1]);
+				sdFile.println(data[len-1]);
 			}
 
-			SDFile.close();
+			sdFile.close();
 			LPrintln("Done");
 			return true;
 		} 
@@ -230,17 +240,17 @@ private:
 	void		print_directory(File dir, int numTabs);
 
 	/// Auxiliary funcntion to print data element, delimiter, and (optionally) space
-	/// \param[in]	SDFile		File to write to
+	/// \param[in]	sdFile		File to write to
 	/// \param[in]	data		Data element to write
 	/// \param[in]	delimiter	Delimiter to use
 	/// \param[in]	add_space	True to add space after delimiter
 	template <typename T>
-	void		SD_print_aux(File SDFile, T data, char delimiter, bool add_space=true)
+	void		SD_print_aux(File sdFile, T data, char delimiter, bool add_space=true)
 	{
-		SDFile.print(data);
-		SDFile.print(delimiter);
+		sdFile.print(data);
+		sdFile.print(delimiter);
 		if (add_space) {
-			SDFile.print(" ");
+			sdFile.print(" ");
 		}
 	}
 

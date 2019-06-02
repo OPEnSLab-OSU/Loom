@@ -148,17 +148,3 @@ bool Loom_Bluetooth::test_send_str(const char* string)
 	}
 }
 
-
-
-/////////////////////////////////////////////////////////////////////
-void Loom_Bluetooth::set_address(uint addr)    // Need to test this
-{ 
-
-}
-
-/////////////////////////////////////////////////////////////////////
-uint Loom_Bluetooth::get_address() 
-{ 
-}
-
-

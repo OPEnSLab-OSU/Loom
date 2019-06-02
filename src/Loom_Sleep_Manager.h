@@ -35,6 +35,9 @@ protected:
 	/// Which sleep mode to use
 	SleepMode 	sleep_mode;
 
+	///	Which pin to use to power board off (requires power board)
+	byte		power_off_pin;
+
 public:
 
 	/// Sleep Manager module constructor.
@@ -43,11 +46,13 @@ public:
 	/// \param[in]	use_LED				Bool | <true> | {true, false} | Whether or not to use LED to indicate wake state
 	/// \param[in]	delay_on_wake		Bool | <false> | {true, false} | Whether or not to delay upon waking to allow time to open Serial Monitor
 	/// \param[in]	sleep_mode			Set(SleepMode) | <1> | { 0("Idle"), 1("Standby"), 2("SleepyDog"), 3("Opens Low Power")} | Which SleepMode to use
+	/// \param[in]	power_off_pin		Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to power off board
 	Loom_Sleep_Manager(
 			const char*		module_name			= "Sleep_Manager",
 			bool			use_LED				= true,
 			bool			delay_on_wake		= false,
-			SleepMode		sleep_mode			= SleepMode::STANDBY
+			SleepMode		sleep_mode			= SleepMode::STANDBY,
+			byte			power_off_pin		= A5
 		);
 
 	Loom_Sleep_Manager(JsonVariant p);
@@ -66,16 +71,14 @@ public:
 	bool		cmd_route(JsonObject) {}
 
 
-	void 		link_device_manager(LoomManager* LM);
+	// Put into low power state.
+	// On wake, program will continue from where it went to sleep
+	bool		sleep();
+	// Turn board off.
+	// Program will restart from setup on wake
+	void		powerDown();
 
 
-
-	// /// Link an Interrupt Manager
-	// /// \param[in]	IM		Interrupt manager to link
-	// void					set_Interrupt_Manager(Loom_Interrupt_Manager* IM);
-	// /// Get linked Interrupt Manager
-	// /// \return		Linked Interrupt Manager (Null if none linked)
-	// Loom_Interrupt_Manager*	get_Interrupt_Manager();
 
 
 	/// Set the sleep mode to use
@@ -84,10 +87,6 @@ public:
 	/// Get the current sleep mode
 	/// \return		The current sleep mode
 	SleepMode	get_sleep_mode();
-
-	// Standby mode
-	// bool sleep_until_interrupt_on(byte pin);
-	bool		sleep();
 
 private:
 

@@ -41,6 +41,7 @@ void LoomManager::parse_config(const char* json_config)
 
 
 	LPrintln("\nSIZE: ", doc.memoryUsage());
+	LPrintln("measureJson: ", measureJson(doc));
 
 	// Serial.println("\n\nGeneral Settings:");
 	// serializeJsonPretty(doc["general"], Serial);
