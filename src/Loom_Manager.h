@@ -375,8 +375,8 @@ public:
 	// Module Access methods
 
 	// Other
-	Loom_Sleep_Manager&			Sleep_Manager(int idx = 0);
-	Loom_Interrupt_Manager&		Interrupt_Manager(int idx = 0);
+	Loom_Sleep_Manager&			SleepManager(int idx = 0);
+	Loom_Interrupt_Manager&		InterruptManager(int idx = 0);
 	Loom_Multiplexer&			Multiplexer(int idx = 0);
 
 	// CommPlats

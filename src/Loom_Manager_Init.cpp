@@ -21,8 +21,10 @@ void LoomManager::parse_config(const char* json_config)
 {
 	// Parse Json config
 
-	LPrintln();
-	LPrintln("= = = = = Parse Config = = = = =");
+	if (print_verbosity == Verbosity::V_HIGH) {
+		LPrintln();
+		LPrintln("= = = = = Parse Config = = = = =");
+	}
 
 // Might need to be even larger
 	DynamicJsonDocument doc(2048);
@@ -36,24 +38,27 @@ void LoomManager::parse_config(const char* json_config)
 	}
 
 
-	Serial.println("\n\nConfig Pretty Version:");
-	serializeJsonPretty(doc, Serial);
+
+	if (print_verbosity == Verbosity::V_HIGH) {
+
+		Serial.println("\n\nConfig Pretty Version:");
+		serializeJsonPretty(doc, Serial);
+		LPrintln("\nSIZE: ", doc.memoryUsage());
+
+		// LPrintln("measureJson: ", measureJson(doc));
+
+		// Serial.println("\n\nGeneral Settings:");
+		// serializeJsonPretty(doc["general"], Serial);
+
+		// Serial.print("\n\nNum modules: ");
+		// Serial.println(doc["components"].size()); 
+		// LPrintln();
 
 
-	LPrintln("\nSIZE: ", doc.memoryUsage());
-	LPrintln("measureJson: ", measureJson(doc));
-
-	// Serial.println("\n\nGeneral Settings:");
-	// serializeJsonPretty(doc["general"], Serial);
-
-	// Serial.print("\n\nNum modules: ");
-	// Serial.println(doc["components"].size()); 
-	// LPrintln();
-
-
-	// Apply LoomManager General Settings
-	LPrintln("= = = = = LoomManager Settings = = = = =");
-	LPrintln();
+		// Apply LoomManager General Settings
+		LPrintln("= = = = = LoomManager Settings = = = = =");
+		LPrintln();
+	}
 
 	JsonObject general = doc["general"];
 
@@ -85,8 +90,10 @@ void LoomManager::parse_config(const char* json_config)
 
 	// Generate Module Objects
 
-	LPrintln("= = = = = Generate Objects = = = = =");
-	LPrintln();
+	if (print_verbosity == Verbosity::V_HIGH) {
+		LPrintln("= = = = = Generate Objects = = = = =");
+		LPrintln();
+	}
 
 
 	// Call module factory
@@ -149,8 +156,10 @@ void LoomManager::parse_config(const char* json_config)
 	// Empty
 	doc.clear();
 
-	LPrintln("= = = = = = = = = = = = = = = = =");
-	LPrintln();
+	if (print_verbosity == Verbosity::V_HIGH) {
+		LPrintln("= = = = = = = = = = = = = = = = =");
+		LPrintln();
+	}
 
 }
 
