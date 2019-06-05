@@ -291,8 +291,8 @@ void Loom_Sleep_Manager::post_sleep()
 
 	// Reconnect USB
 	#if LOOM_DEBUG == 1
-		USBDevice.attach();
-		Serial.begin(SERIAL_BAUD);
+		// USBDevice.attach();
+		// Serial.begin(SERIAL_BAUD);
 	#endif
 
 	// Turn on LED
@@ -329,6 +329,6 @@ void Loom_Sleep_Manager::post_sleep()
 	#endif
 
 	// Turn of LED
-	digitalWrite(LED_BUILTIN, LOW);
+	// digitalWrite(LED_BUILTIN, LOW);
 
 }

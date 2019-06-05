@@ -18,6 +18,7 @@ Loom_SD::Loom_SD(
 {
 	this->module_type = ModuleType::SDCARD;
 
+	print_module_label();
 	LPrintln("SD Setup");
 
 	this->chip_select  = chip_select;
