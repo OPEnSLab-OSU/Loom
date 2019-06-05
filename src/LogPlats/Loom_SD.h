@@ -5,7 +5,6 @@
 #include <SD.h>
 #include "../RTC/Loom_RTC.h"
 
-
 // Forward declare existence of RTC class
 // class LoomRTC;
 
