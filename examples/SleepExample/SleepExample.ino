@@ -1,7 +1,6 @@
 // Example to put device to sleep and wake via 
 // DS3231 RTC alarm connected to pin 6
 
-
 #include <Loom.h>
 
 // #include "LowPower.h"
