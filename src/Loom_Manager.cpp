@@ -223,7 +223,20 @@ void LoomManager::list_modules()
 	print_device_label();
 	LPrintln("Modules:");
 
-	LPrintln("\t", "RTC modules", " (", (rtc_module != nullptr), "):");
+	// Interrupt Manager
+	LPrintln("\t", "Interrupt Manager", " (", (interrupt_manager != nullptr), "):");
+	if ( (interrupt_manager != nullptr) && (interrupt_manager->get_active()) ) {
+		LPrintln( "\t\t[", (interrupt_manager->get_active()) ? "+" : "-" , "] ", interrupt_manager->get_module_name() );
+	}
+
+	// Sleep Manager
+	LPrintln("\t", "Sleep Manager", " (", (sleep_manager != nullptr), "):");
+	if ( (sleep_manager != nullptr) && (sleep_manager->get_active()) ) {
+		LPrintln( "\t\t[", (sleep_manager->get_active()) ? "+" : "-" , "] ", sleep_manager->get_module_name() );
+	}
+
+	// RTC 
+	LPrintln("\t", "RTC module", " (", (rtc_module != nullptr), "):");
 	if ( (rtc_module != nullptr) && (rtc_module->get_active()) ) {
 		LPrintln( "\t\t[", (rtc_module->get_active()) ? "+" : "-" , "] ", rtc_module->get_module_name() );
 	}
