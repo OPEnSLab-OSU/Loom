@@ -7,6 +7,10 @@
 #include <AsyncDelay.h>
 
 
+#include <initializer_list>
+
+
+
 /// Number of interrupts
 #define InteruptRange 16
 
@@ -14,6 +18,7 @@
 #define MaxTimerCount 4
 /// Maximum numbr of stopwatches
 #define MaxStopWatchCount 2
+
 
 
 
@@ -25,6 +30,7 @@ class LoomRTC;
 // when returning function pointers
 /// Typedef to for ISR function pointer readability
 using ISRFuncPtr = void (*)();
+// using ISRFuncPtr = void *();
 
 
 enum class ISR_Type { IMMEDIATE, CHECK_FLAG };
@@ -123,6 +129,7 @@ public:
 
 
 	void 		link_device_manager(LoomManager* LM);
+	void 		link_sleep_manager(Loom_Sleep_Manager* SM);
 
 	void		run_pending_ISRs();
 
@@ -152,6 +159,7 @@ public:
 	/// \param[in]	type		Low, High, Change, Falling, Rising
 	/// \param[in]	immediate	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
 	void		register_ISR(byte pin, ISRFuncPtr ISR, byte signal_type, ISR_Type run_type);
+
 
 	/// Restores pin to default ISR, disables interrupt
 	/// \param[in]	pin		The pin to unregister ISRs for

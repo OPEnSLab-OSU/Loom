@@ -6,6 +6,42 @@
 #include <EnableInterrupt.h>
 
 
+
+
+// ISRFuncPtr get_wakeISR(int pin) {
+// 	switch (pin) {
+// 		case 5  : return []() { detachInterrupt(digitalPinToInterrupt(5)); };
+// 		case 6  : return []() { detachInterrupt(digitalPinToInterrupt(6)); };
+// 		case 9  : return []() { detachInterrupt(digitalPinToInterrupt(9)); };
+// 		case 10 : return []() { detachInterrupt(digitalPinToInterrupt(10)); };
+// 		case 11 : return []() { detachInterrupt(digitalPinToInterrupt(11)); };
+// 		case 12 : return []() { detachInterrupt(digitalPinToInterrupt(12)); };
+// 		case 13 : return []() { detachInterrupt(digitalPinToInterrupt(13)); };
+// 		case A0 : return []() { detachInterrupt(digitalPinToInterrupt(A0)); };
+// 		case A1 : return []() { detachInterrupt(digitalPinToInterrupt(A1)); };
+// 		case A2 : return []() { detachInterrupt(digitalPinToInterrupt(A2)); };
+// 		case A3 : return []() { detachInterrupt(digitalPinToInterrupt(A3)); };
+// 		case A4 : return []() { detachInterrupt(digitalPinToInterrupt(A4)); };
+// 		case A5 : return []() { detachInterrupt(digitalPinToInterrupt(A5)); };
+// 		default : return nullptr;
+// 	}
+// }
+
+// void wake() {}
+
+// void Loom_Interrupt_Manager::register_sleep_ISR(std::initializer_list<int> pins)
+// {
+// 	for (auto pin : pins) {
+// 		attachInterrupt(digitalPinToInterrupt(pin), wake, LOW );
+// 		attachInterrupt(digitalPinToInterrupt(pin), wake, LOW );
+
+// 		// register_ISR(pin, get_wakeISR(pin), LOW, ISR_Type::IMMEDIATE);
+// 		// register_ISR(pin, get_wakeISR(pin), LOW, ISR_Type::IMMEDIATE);
+// 	}
+// }
+
+
+
 bool Loom_Interrupt_Manager::interrupt_triggered[InteruptRange] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 
@@ -135,6 +171,11 @@ void Loom_Interrupt_Manager::link_device_manager(LoomManager* LM)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
+void Loom_Interrupt_Manager::link_sleep_manager(Loom_Sleep_Manager* SM)
+{
+	Sleep_Manager = SM;
+}
 
 /////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::run_pending_ISRs() {
@@ -191,6 +232,7 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte signal_
 
 			ISRFuncPtr tmpISR = (run_type==ISR_Type::IMMEDIATE) ? ISR : default_ISRs[pin];
 
+			attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (signal_type<5) ? signal_type : 0 );
 			attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (signal_type<5) ? signal_type : 0 );
 
 		} 
