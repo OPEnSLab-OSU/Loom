@@ -41,7 +41,7 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Sleep_Manager::Loom_Sleep_Manager(JsonVariant p)
-	: Loom_Sleep_Manager(p[0], p[2], p[3], (SleepMode)(int)p[4])
+	: Loom_Sleep_Manager(p[0], p[1], p[2], (SleepMode)(int)p[3], p[4])
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -63,6 +63,7 @@ void Loom_Sleep_Manager::print_config()
 	LoomModule::print_config();
 	LPrintln('\t', "Sleep Mode          : ", enum_sleep_mode_string(sleep_mode) );
 	LPrintln('\t', "Use LED             : ", (use_LED) ? "Enabled" : "Disabled" );
+	LPrintln('\t', "Delay on Wake       : ", (delay_on_wake) ? "Enabled" : "Disabled" );
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -234,9 +235,9 @@ void Loom_Sleep_Manager::post_sleep()
 	// }
 
 	#if LOOM_DEBUG == 1
+		USBDevice.attach();
+		Serial.begin(115200);
 		if (delay_on_wake) {
-			USBDevice.attach();
-			Serial.begin(115200);
 			// Give user 5s to reopen Serial monitor!
 			// Note that the serial may still take a few seconds 
 			// to fully setup after the LED turns on

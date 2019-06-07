@@ -333,7 +333,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 	}
 
 	print_module_label();
-	LPrintln("Will set alarm for : ");
+	LPrint("Will set alarm for : ");
 	RTC_Inst->print_DateTime(future_time);
 
 
@@ -354,7 +354,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 								+ TimeSpan(1,0,0,0);
 
 		print_module_label();
-		LPrintln("Will instead try to set alarm for : ");
+		LPrint("Will instead try to set alarm for : ");
 		RTC_Inst->print_DateTime(future_time);
 
 	}
