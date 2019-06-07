@@ -1,11 +1,13 @@
 #pragma once
 
 #include "Loom_Module.h"
+#include "Loom_Interrupt_Manager.h"
 
 #include <OPEnS_RTC.h>
 
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
+
 
 
 
@@ -38,6 +40,8 @@ protected:
 	///	Which pin to use to power board off (requires power board)
 	byte		power_off_pin;
 
+	Loom_Interrupt_Manager* interrupt_manager;
+
 public:
 
 	/// Sleep Manager module constructor.
@@ -62,6 +66,9 @@ public:
 
 	// --- DESTRUCTOR ---
 	virtual ~Loom_Sleep_Manager();
+
+	void 		link_interrupt_manager(Loom_Interrupt_Manager* IM);
+
 
 	// Inherited methods
 	void		print_config() override;
@@ -88,13 +95,13 @@ public:
 	/// \return		The current sleep mode
 	SleepMode	get_sleep_mode();
 
-private:
-
-	bool		sleepy_dog_sleep(TimeSpan duration);
-	// bool sleepy_dog_sleep(uint days, uint hours, uint minutes, uint seconds);
-
 	void		pre_sleep();
 	void		post_sleep();
+private:
+
+	// bool		sleepy_dog_sleep(TimeSpan duration);
+	// bool sleepy_dog_sleep(uint days, uint hours, uint minutes, uint seconds);
+
 
 };
 

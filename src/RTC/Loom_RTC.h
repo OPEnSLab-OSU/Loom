@@ -96,7 +96,7 @@ public:
 	// Inherited Methods
 	virtual void 	print_config() override;
 	virtual void 	print_state() override;
-	virtual void 	measure() {};
+	virtual void 	measure() { read_rtc(); };
 	virtual bool	cmd_route(JsonObject) {}
 	virtual void 	package(JsonObject json) override;
 

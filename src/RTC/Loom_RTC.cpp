@@ -120,6 +120,7 @@ void LoomRTC::print_state()
 /////////////////////////////////////////////////////////////////////
 void LoomRTC::package(JsonObject json)
 {
+	read_rtc();
 	package_json_timestamp(json, datestring, timestring);
 }
 

@@ -118,8 +118,15 @@ void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager)
 
 	interrupt_manager->link_device_manager(this);
 
+	// Point new interrupt manager to existing RTC
 	if (rtc_module != nullptr) {
 		this->interrupt_manager->set_RTC_module(rtc_module);
+	}
+
+	// Point existing sleep manager to new interrupt manager
+	if (sleep_manager != nullptr) {
+		interrupt_manager->link_sleep_manager(sleep_manager);
+		sleep_manager->link_interrupt_manager(interrupt_manager);
 	}
 }
 
@@ -135,6 +142,12 @@ void LoomManager::add_module(Loom_Sleep_Manager* sleep_manager)
 	this->sleep_manager = sleep_manager; 
 
 	sleep_manager->link_device_manager(this);
+
+	// Point existing sleep manager to new interrupt manager
+	if (interrupt_manager != nullptr) {
+		sleep_manager->link_interrupt_manager(interrupt_manager);
+		interrupt_manager->link_sleep_manager(sleep_manager);
+	}
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -398,15 +411,16 @@ void LoomManager::package(JsonObject json)
 /////////////////////////////////////////////////////////////////////
 JsonObject LoomManager::package()
 {
-	// LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
+	LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
 	doc.clear();
-	// LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
+	LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
 
 // This works
 	doc["type"] = "data";
 	JsonObject json = doc.as<JsonObject>();
 
-
+	// LPrintln("In JsonObject LoomManager::package()");
+	// serializeJsonPretty(json, Serial);
 // Test 
 	// JsonObject json = doc.to<JsonObject>();
 

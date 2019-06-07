@@ -2,8 +2,6 @@
 #include "Loom_Sleep_Manager.h"
 #include "RTC/Loom_RTC.h"
 
-#include "Loom_Interrupt_Manager.h"
-
 #include <Adafruit_SleepyDog.h>
 #include <LowPower.h>
 
@@ -43,7 +41,7 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Sleep_Manager::Loom_Sleep_Manager(JsonVariant p)
-	: Loom_Sleep_Manager(p[0], p[2], p[3], (SleepMode)(int)p[4])
+	: Loom_Sleep_Manager(p[0], p[1], p[2], (SleepMode)(int)p[3], p[4])
 {}
 
 /////////////////////////////////////////////////////////////////////
@@ -54,11 +52,18 @@ Loom_Sleep_Manager::~Loom_Sleep_Manager()
 }
 
 /////////////////////////////////////////////////////////////////////
+void Loom_Sleep_Manager::link_interrupt_manager(Loom_Interrupt_Manager* IM)
+{
+	interrupt_manager = IM;
+}
+
+/////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::print_config()
 {
 	LoomModule::print_config();
 	LPrintln('\t', "Sleep Mode          : ", enum_sleep_mode_string(sleep_mode) );
 	LPrintln('\t', "Use LED             : ", (use_LED) ? "Enabled" : "Disabled" );
+	LPrintln('\t', "Delay on Wake       : ", (delay_on_wake) ? "Enabled" : "Disabled" );
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -180,20 +185,19 @@ bool Loom_Sleep_Manager::sleep()
 {
 		pre_sleep();
 
-		switch(sleep_mode) {
-			case SleepMode::STANDBY : LowPower.standby(); 
-				break;
-			case SleepMode::IDLE 	: LowPower.idle(IDLE_2); 
-				break;
+		LowPower.standby();
+		// switch(sleep_mode) {
+			// case SleepMode::STANDBY : LowPower.standby(); 
+				// break;
+			// case SleepMode::IDLE 	: LowPower.idle(IDLE_2); 
+				// break;
 
 			// implement
 			// case SleepMode::SLEEPYDOG 	: return false;   
 
 			// implement
 			// case SleepMode::OPENS_LOWPOWER 	: return false;
-
-
-		}
+		// }
 
 		// This is where programs waits until waking
 
@@ -201,67 +205,19 @@ bool Loom_Sleep_Manager::sleep()
 }
 
 /////////////////////////////////////////////////////////////////////
-#define MAX_WATCHDOG_SLEEP 16 // seconds
-
-bool Loom_Sleep_Manager::sleepy_dog_sleep(TimeSpan duration)
-{
-	uint32_t totalseconds = duration.totalseconds();
-
-	int iterations = totalseconds / MAX_WATCHDOG_SLEEP;
-	int remainder  = totalseconds % MAX_WATCHDOG_SLEEP;
-	int total = 0; // counter (mostly for display purposes currently)
-
-	LPrintln("Will sleep for a total of: ", totalseconds, " seconds");
-	LPrint("Using ", iterations, " blocks of ", MAX_WATCHDOG_SLEEP, " seconds");
-	LPrintln(" and ", remainder, " seconds");
-
-
-	pre_sleep();
-
-
-	// LPrintln("Going to sleep in ", MAX_WATCHDOG_SLEEP, " second blocks");
-	for (int i = 0; i < iterations; i++) {
-		int sleepMS = Watchdog.sleep(MAX_WATCHDOG_SLEEP * 1000);
-		// LPrintln("Just slept for: ", sleepMS, " milliseconds");
-		total += sleepMS;
-		// LPrintln("Now have slept a total of: ", total, " milliseconds");
-
-		// Test print blink
-		// digitalWrite(LED_BUILTIN, HIGH);  
-		// delay(100);                       
-		// digitalWrite(LED_BUILTIN, LOW);   
-	}
-
-	if (remainder > 0) {
-		// LPrintln("Sleeping the remaining ", remainder*1000, " milliseconds");
-		int sleepMS = Watchdog.sleep(remainder*1000); // remained is in seconds
-		total += sleepMS;
-	}
-
-	post_sleep();
-
-	LPrintln("Done sleeping a total of: ", total, " milliseconds");
-
-}
-
-/////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::pre_sleep()
 {
-	LPrintln("Entering Sleep");
-	#if LOOM_DEBUG == 1
-		Serial.end();
-		USBDevice.detach(); 
-	#endif
-
-	// Interrupt/Alarm reset 
-
-	// if (IM) {
-	// 	IM->interrupt_reset(RTC_Inst->get_interrupt_pin());
-	// }
-	// RTC_Inst->rtc_interrupt_reset(); //clear interrupt registers, attach interrupts
-
-
+	LPrintln("\nEntering STANDBY");
 	delay(50);
+	Serial.end();
+	USBDevice.detach();
+
+
+
+	// Don't know why this has to happen twice but it does
+	// attachInterrupt(digitalPinToInterrupt(WAKE_PIN), wake_ISR, LOW);
+	// attachInterrupt(digitalPinToInterrupt(WAKE_PIN), wake_ISR, LOW);
+
 	digitalWrite(LED_BUILTIN, LOW);
 }
 
@@ -269,66 +225,27 @@ void Loom_Sleep_Manager::pre_sleep()
 void Loom_Sleep_Manager::post_sleep()
 {
 
-// Standy by might get its own pre and post sleeps which in turn calls
-
-	// if (IM) {
-	// 	IM->interrupt_reset(RTC_Inst->get_interrupt_pin());
-	// }
-	// // rtc_interrupt_reset(); //clear interrupt registers, attach interrupts
-	// // RTC_Inst->clear_alarms(); //prevent double trigger of alarm interrupt
-
-
-	// // Not sure why these have to be repeated but it seems to make a difference
-	// if (IM) {
-	// 	IM->interrupt_reset(RTC_Inst->get_interrupt_pin());
-	// }
-	// rtc_interrupt_reset();
-	// RTC_Inst->clear_alarms();
-
-
-	// Update last_wake_time
-	// last_wake_time = (RTC_Inst) ? RTC_Inst->now() : DateTime(0);
-
-	// Reconnect USB
-	#if LOOM_DEBUG == 1
-		// USBDevice.attach();
-		// Serial.begin(SERIAL_BAUD);
-	#endif
-
-	// Turn on LED
-	if (use_LED) {
-		digitalWrite(LED_BUILTIN, HIGH);
+	// Prevent double trigger of alarm interrupt
+	if (interrupt_manager) {
+		interrupt_manager->get_RTC_module()->clear_alarms();
 	}
 
-	// Give user time to open Serial (only when debugging)
+	// if (use_LED) {
+		digitalWrite(LED_BUILTIN, HIGH);
+	// }
+
 	#if LOOM_DEBUG == 1
+		USBDevice.attach();
+		Serial.begin(115200);
 		if (delay_on_wake) {
-
-			if (use_LED) {
-				for (int i = 0; i < 4; i++) {
-					digitalWrite(LED_BUILTIN, LOW);
-					delay(100);
-					digitalWrite(LED_BUILTIN, HIGH);
-				}
-			}
-
-			delay(5000); // give user 5s to close and reopen serial monitor!
+			// Give user 5s to reopen Serial monitor!
+			// Note that the serial may still take a few seconds 
+			// to fully setup after the LED turns on
+			delay(5000); 
 		}
-	#endif
-
-	// LPrint to Serial now that LED/delay has given user time to open Serial Monitor
-	#if LOOM_DEBUG == 1
 		LPrintln("WAKE");
-
-		// if (RTC_Inst != nullptr) {
-		// 	print_module_label();
-		// 	LPrint("Wake Time : ");
-		// 	RTC_Inst->print_time();
-		// }
-		delay(50);  // delay so serial stuff has time to print out all the way
 	#endif
 
-	// Turn of LED
-	// digitalWrite(LED_BUILTIN, LOW);
+	// Set wake time
 
 }
