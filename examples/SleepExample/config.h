@@ -1,0 +1,1 @@
+"{\"general\":{\"device_name\":\"Device\",\"family\":\"Loom\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_DS3231\",\"parameters\":[\"DS3231\",11,false,false,6]},{\"name\":\"Loom_Interrupt_Manager\",\"parameters\":[\"Interrupt-Manager\",0]},{\"name\":\"Loom_Sleep_Manager\",\"parameters\":[\"Sleep-Manager\",true,false,1]}]}"
