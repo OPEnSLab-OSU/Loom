@@ -156,6 +156,15 @@ void LoomManager::parse_config(const char* json_config)
 	// Empty
 	doc.clear();
 
+	/// call second stage construction
+	/// other modules must go last, as they are most likely to do weird things 
+	second_stage_ctor_aux( (LoomModule**)sensor_modules   , sensor_count       ); 
+	second_stage_ctor_aux( (LoomModule**)actuator_modules , actuator_count     ); 
+	second_stage_ctor_aux( (LoomModule**)comm_modules     , comm_count         ); 
+	second_stage_ctor_aux( (LoomModule**)internet_modules , internet_count     ); 
+	second_stage_ctor_aux( (LoomModule**)log_modules      , log_count          );
+	second_stage_ctor_aux( (LoomModule**)other_modules    , other_module_count ); 
+
 	if (print_verbosity == Verbosity::V_HIGH) {
 		LPrintln("= = = = = = = = = = = = = = = = =");
 		LPrintln();

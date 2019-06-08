@@ -500,6 +500,16 @@ void LoomManager::cmd_route(JsonObject json)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////
+void LoomManager::second_stage_ctor_aux(LoomModule** modules, uint len)
+{
+	for (int i = 0; i < len; i++) {
+		if ( (modules[i] != nullptr) && ( modules[i]->get_active() ) ){
+			modules[i]->second_stage_ctor();
+		}
+	}	
+}
+
 // /////////////////////////////////////////////////////////////////////
 void LoomManager::print_internalJson()
 {
