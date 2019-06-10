@@ -2,7 +2,7 @@
 
 #include "Loom_I2C_Sensor.h"
 
-#include <MS5803_02.h>
+#include <MS5803_01.h>
 
 
 // ### (LoomI2CSensor) | dependencies: [] | conflicts: []

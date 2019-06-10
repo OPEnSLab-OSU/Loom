@@ -1,7 +1,7 @@
 
 #include "Loom_InternetWiFi.h"
 
-
+/* 
 /////////////////////////////////////////////////////////////////////
 char* Loom_WiFi_I::enum_wifi_mode_string(WiFiMode c)
 {
@@ -301,5 +301,5 @@ void Loom_WiFi_I::print_MAC(byte mac[])
 	// LPrintln("Done");
 	// flash_led(6, 50, 50);
 
-
+*/
 

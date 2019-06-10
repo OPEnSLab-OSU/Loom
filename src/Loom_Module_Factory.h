@@ -18,6 +18,7 @@
 #include "CommPlats/Loom_SlipSerial.h"
 
 // InternetPlats
+#include "InternetPlats/Loom_InternetEthernet.h"
 
 // LogPlats
 #include "LogPlats/Loom_OLED.h"
@@ -49,6 +50,9 @@
 
 #include "Sensors/SPI/Loom_MAX31856.h"
 
+// Other
+#include "Loom_NTP_Sync.h"
+
 // General
 #include "Loom_Interrupt_Manager.h"
 #include "Loom_Sleep_Manager.h"
@@ -67,6 +71,7 @@ enum class ModuleSortType {
 	LogPlat,
 	Rtc,
 	Sensor,
+	Other,
 	Unknown
 };
 

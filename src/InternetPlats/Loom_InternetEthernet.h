@@ -3,74 +3,53 @@
 #define LOOM_INTERNET_ETHERNET_PLAT_h
 
 #include "Loom_InternetPlat.h"
-
-#include <Ethernet2.h>
-#include <EthernetUdp2.h>
-
-
-
-
-// byte mac[] = {0x98, 0x76, 0xB6, 0x10, 0x61, 0xD6}; 		//Use this for OPEnS Lab
-// byte mac[] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};   	// MAC address of Luke's Ethernet port
-// IPAddress ip(128,193,56,138); 						  // device's IP address
-
-
-const byte default_mac[6] = {0x00, 0x23, 0x12, 0x12, 0xCE, 0x7D};
-const byte default_ip[4]  = {128, 193, 56, 138};
-
-
-
+#include "Ethernet.h"
+#include "SSLClient.h"
 
 class Loom_Ethernet_I : public LoomInternetPlat
 {
-
 protected:
 	
-	/// Underlying Ethernet client instance
-	EthernetClient*	client;            
+	/// Underlying Ethernet SSLclient instance
+	SSLClient<EthernetClient> m_client;         
 	/// Underlying Ethernet UDP instance
-	EthernetUDP* 	UDP;
+	EthernetUDP 	m_UDP;
 
 	/// The Ethernet MAC address
-	byte 			mac[6];
+	byte 			m_mac[6];
 
 	/// The devices IP address
-	IPAddress 		ip;
+	IPAddress 		m_ip;
+
+	/// Whether or not ethernet initialized successfully
+	bool m_is_connected;
 	
 public:
 
 	// --- CONSTRUCTOR ---
-	Loom_Ethernet_I(	char* 	module_name		= "Ethernet",
-
-						byte	mac[6] 			= (byte*)default_mac,
-						byte 	ip[4]			= (byte*)default_ip
-
+	Loom_Ethernet_I(	const char* 			module_name		= "Ethernet",
+						const JsonArrayConst	mac				= JsonArray(),
+						const JsonArrayConst 	ip				= JsonArray()
 					);
 
+	Loom_Ethernet_I( JsonVariant p );
+
 	// --- DESTRUCTOR ---
-	virtual ~Loom_Ethernet_I();
+	~Loom_Ethernet_I() = default;
 
-	void print_config();
-	void print_state();
-	// void package(OSCBundle& bndl, char* suffix="") {}
-	// bool message_route(OSCMessage& msg, int address_offset) {}
+	void print_config() override;
+	void print_state() override;
 
-	// virtual void measure() {}
-	// virtual void package(OSCBundle& bndl) {}
-	// virtual bool message_route(OSCMessage& msg, int address_offset) {}
+	// remember to close the socket!
+	Client& http_request(const char* domain, const char* url, const char* body, const char* verb) override;
 
-
-	bool connect();
-	bool is_connected();
-	uint32_t get_time();
+	void connect() override;
+	bool is_connected() override;
+	uint32_t get_time() override;
 
 private:
 
-	void send_NTP_packet(byte packet_buffer[]);
+	void m_send_NTP_packet(byte packet_buffer[]);
 
 };
-
-
-
 #endif
-

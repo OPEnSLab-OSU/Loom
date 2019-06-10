@@ -1,34 +1,34 @@
 
 #include "Loom_InternetEthernet.h"
-
+#include "Loom_Trust_Anchors.h"
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 Loom_Ethernet_I::Loom_Ethernet_I(	
-		char*	module_name,
-
-		byte	mac[6],
-		byte	ip[4]
+		const char*	module_name,
+		const JsonArrayConst	mac,
+		const JsonArrayConst	ip
 	) 
 	: LoomInternetPlat( module_name )
+	, m_client( EthernetClient(), TAs, (size_t)TAs_NUM, A7, SSL_INFO )
+	, m_UDP()
+	, m_mac{}
+	, m_ip()
+	, m_is_connected(false)
 {
-
-	client = new EthernetClient();
-	UDP    = new EthernetUDP();
-
-	for (int i = 0; i < 6; i++)
-		this->mac[i] = mac[i];
-	this->ip = IPAddress(ip[0], ip[1], ip[2], ip[3]); 
+	if(!mac.isNull()) {
+		for (int i = 0; i < 6; i++)
+			this->m_mac[i] = mac[i];
+	}
+	if(!ip.isNull()) this->m_ip = IPAddress(ip[0], ip[1], ip[2], ip[3]);
 
 	connect();
 
-	// if (client->connect("www.google.com", 80)) {
-	// 	LPrintln("Successfully connected to internet");
-	// 	client->stop();
-	// } else {
-	// 	LPrintln("Failed to connect to internet");
-	// }
-		// UDP->begin(8888);
+	if (is_connected()) {
+	 	LPrintln("Ethernet: Successfully connected to internet");
+	} else {
+	 	LPrintln("Ethernet: Failed to connect to internet");
+	}
 
 
 	// LPrintln("Connected : ", is_connected());
@@ -39,12 +39,9 @@ Loom_Ethernet_I::Loom_Ethernet_I(
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
-Loom_Ethernet_I::~Loom_Ethernet_I()
-{
-	delete client;
-	delete UDP;
-}
+// --- CONSTRUCTOR --
+Loom_Ethernet_I::Loom_Ethernet_I(JsonVariant p)
+	: Loom_Ethernet_I( EXPAND_ARRAY(p, 3) ) {}
 
 /////////////////////////////////////////////////////////////////////
 void Loom_Ethernet_I::print_config()
@@ -52,14 +49,14 @@ void Loom_Ethernet_I::print_config()
 	LoomInternetPlat::print_config();
 	LPrint('\t', "MAC:                : [");
 	for (int i = 0; i < 6; i++) {
-		LPrint_Hex(mac[i]);
+		LPrint_Hex(m_mac[i]);
 		if (i < 5) LPrint(",");
 		else 	   LPrintln("]");
 	}
 
 	LPrint('\t', "IP:                 : " );
-	LPrint(  ip[0], ".", ip[1], ".");
-	LPrintln(ip[2], ".", ip[3]);
+	LPrint(  m_ip[0], ".", m_ip[1], ".");
+	LPrintln(m_ip[2], ".", m_ip[3]);
 	
 }
 
@@ -67,53 +64,67 @@ void Loom_Ethernet_I::print_config()
 void Loom_Ethernet_I::print_state()
 {
 	LoomInternetPlat::print_state();	
-	// LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
+	LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_Ethernet_I::connect()
+void Loom_Ethernet_I::connect()
 {
-	digitalWrite(8, HIGH);	 // if is LoRa board	
+	// initialize ethernet shield for Feather
+	Ethernet.init(10);
 
-	if (Ethernet.begin(mac) == 0) {
+	if (Ethernet.begin(m_mac) == 0) {
 		print_module_label();
 		LPrintln("Failed to configure Ethernet using DHCP");
 		// try to congifure using IP address instead of DHCP:
-		Ethernet.begin(mac, ip);
+		Ethernet.begin(m_mac, m_ip);
 	}
-	
-	bool status = is_connected();
-	print_module_label();
-	LPrintln("Connect to internet ", (status) ? "successful" : "failed" );
+	m_is_connected = true;
 
-	if (!status) client->stop();
-	
-	return status;
+	print_module_label();
+	LPrintln("Connect to Ethernet ", (m_is_connected) ? "successful" : "failed" );
+
+	if (!m_is_connected) m_client.stop();
 }
 
 /////////////////////////////////////////////////////////////////////
 bool Loom_Ethernet_I::is_connected()
 {
 
-	bool status = client->connect("www.google.com", 80);
-		LPrintln("CONNECTED STATUS: ", client->connected() );
+	LPrintln("CONNECTED STATUS: ",  m_is_connected );
+	return  m_is_connected;
+}
 
-	// print_module_label();
-	// LPrintln("Connect to internet ", (status) ? "successful" : "failed" );
-	return status;
+/////////////////////////////////////////////////////////////////////
+Client& Loom_Ethernet_I::http_request(const char* domain, const char* url, const char* body, const char* verb) {
+	LPrint("Connecting to: ", domain, "\n");
+	// if the socket is somehow still open, close it
+	if (m_client.connected()) m_client.stop();
+	// * the rainbow connection *
+	int status = m_client.connect(domain, 443);
+	if (!status) {
+		// log fail, and return
+		LPrint("Ethernet HTTP request failed with error ", m_client.getWriteError(), "\n");
+		m_is_connected = false;
+		return m_client;
+	}
+	// ok next, make the http request
+	LPrint("Writing http: ", domain, "\n");
+	write_http_request(m_client, domain, url, body, verb);
+	write_http_request(Serial, domain, url, body, verb);
+	// gosh that was easy
+	m_is_connected = true;
+	// return the client for data reception
+	return m_client;
 }
 
 
-
-
 /////////////////////////////////////////////////////////////////////
-const unsigned int localPort = 8888;		// Local port to listen for UDP packets on
+constexpr unsigned int localPort = 8888;		// Local port to listen for UDP packets on
 
-const char time_server[] = "time.nist.gov"; 	// time.nist.gov NTP server
-const int NTP_PACKET_SIZE = 48; 			// NTP time stamp is in the first 48 bytes of the message
+constexpr char time_server[] = "time.nist.gov"; 	// time.nist.gov NTP server
+constexpr int NTP_PACKET_SIZE = 48; 			// NTP time stamp is in the first 48 bytes of the message
 // byte packet_buffer[NTP_PACKET_SIZE]; 		//buffer to hold incoming and outgoing packets
-
-
 
 void print_unix_time(unsigned long epoch) 
 {
@@ -139,24 +150,21 @@ void print_unix_time(unsigned long epoch)
 /////////////////////////////////////////////////////////////////////
 uint32_t Loom_Ethernet_I::get_time()
 {
-	UDP->begin(localPort);
-
-	// connect();
-
 	if (!is_connected()) return 0;
-
+	
+	if (!m_UDP.begin(localPort)) return 0;
 
 	byte packet_buffer[NTP_PACKET_SIZE]; 		//buffer to hold incoming and outgoing packets
 
-	send_NTP_packet(packet_buffer); // send an NTP packet to a time server
+	m_send_NTP_packet(packet_buffer); // send an NTP packet to a time server
 
 	unsigned long epoch = 0;
 
 	// wait to see if a reply is available
 	delay(1000);
-	if (UDP->parsePacket()) {
+	if (m_UDP.parsePacket()) {
 		// We've received a packet, read the data from it
-		UDP->read(packet_buffer, NTP_PACKET_SIZE); // read the packet into the buffer
+		m_UDP.read(packet_buffer, NTP_PACKET_SIZE); // read the packet into the buffer
 
 		// the timestamp starts at byte 40 of the received packet and is four bytes,
 		// or two words, long. First, extract the two words:
@@ -165,8 +173,7 @@ uint32_t Loom_Ethernet_I::get_time()
 		// combine the four bytes (two words) into a long integer
 		// this is NTP time (seconds since Jan 1 1900):
 		unsigned long secsSince1900 = highWord << 16 | lowWord;
-		// LPrint("Seconds since Jan 1 1900 = ");
-		LPrintln(secsSince1900);
+		LPrint("Seconds since Jan 1 1900 = ", secsSince1900, "\n");
 
 		// now convert NTP time into everyday time:
 		// LPrint("Unix time = ");
@@ -178,18 +185,14 @@ uint32_t Loom_Ethernet_I::get_time()
 		print_unix_time(epoch);
 	}
 
-	// wait ten seconds before asking for the time again
-	// delay(10000);
-	// Ethernet.maintain();
-
-	UDP->stop();
+	m_UDP.stop();
 
 	return epoch;
 
 }
 
 /////////////////////////////////////////////////////////////////////
-void Loom_Ethernet_I::send_NTP_packet(byte packet_buffer[])
+void Loom_Ethernet_I::m_send_NTP_packet(byte packet_buffer[])
 {
 	// set all bytes in the buffer to 0
 	memset(packet_buffer, 0, NTP_PACKET_SIZE);
@@ -206,7 +209,7 @@ void Loom_Ethernet_I::send_NTP_packet(byte packet_buffer[])
 
 	// all NTP fields have been given values, now
 	// you can send a packet requesting a timestamp:
-	UDP->beginPacket(time_server, 123); // NTP requests are to port 123
-	UDP->write(packet_buffer, NTP_PACKET_SIZE);
-	UDP->endPacket();
+	m_UDP.beginPacket(time_server, 123); // NTP requests are to port 123
+	m_UDP.write(packet_buffer, NTP_PACKET_SIZE);
+	m_UDP.endPacket();
 }

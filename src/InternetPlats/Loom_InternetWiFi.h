@@ -7,6 +7,7 @@
 #include <WiFi101.h>
 #include <WiFiUdp.h>
 
+/* 
 
 enum class WiFiMode {
 	AP,
@@ -91,12 +92,10 @@ public:
 
 private:
 
-	/*static*/ uint LED_WiFi_connected[3] = {6, 50, 50};
-
 
 };
 
 
-
+*/
 #endif
 

@@ -26,7 +26,8 @@ const  NameModulePair Factory::LookupTable[] =
 	{"Loom_Bluetooth",			Construct<Loom_Bluetooth>,		ModuleSortType::CommPlat },
 	
 	// InternetPlat
-	
+	{"Loom_Ethernet",			Construct<Loom_Ethernet_I>,		ModuleSortType::InternetPlat },
+
 	// LogPlat
 	{"Loom_OLED",				Construct<Loom_OLED>,			ModuleSortType::LogPlat },
 	{"Loom_SD",					Construct<Loom_SD>,				ModuleSortType::LogPlat },
@@ -55,7 +56,10 @@ const  NameModulePair Factory::LookupTable[] =
 	{"Loom_Decagon5TM",			Construct<Loom_Decagon5TM>,		ModuleSortType::Sensor },
 	{"Loom_DecagonGS3",			Construct<Loom_DecagonGS3>,		ModuleSortType::Sensor },
 	
-	{"Loom_MAX31856",			Construct<Loom_MAX31856>,		ModuleSortType::Sensor }
+	{"Loom_MAX31856",			Construct<Loom_MAX31856>,		ModuleSortType::Sensor },
+
+	// Other
+	{"Loom_NTP_Sync", 			Construct<LoomNTPSync>,			ModuleSortType::Other }
 };
 
 

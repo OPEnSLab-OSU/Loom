@@ -2,41 +2,24 @@
 #include "Loom_InternetPlat.h"
 
 /////////////////////////////////////////////////////////////////////
-char* LoomInternetPlat::enum_internet_plat_string(InternetPlatform p)
-{
-	switch(p) {
-		case INT_WIFI			: return "WiFi";
-		case INT_ETHERNET		: return "Ethernet";
-		case INT_CELLULAR_2G	: return "Cellular";
-	}
-}
-
-/////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 LoomInternetPlat::LoomInternetPlat(	
-		char* module_name
+		const char* module_name
 	) 
-	: LoomModule( module_name )
-{
-
-}
+	: LoomModule( module_name ) {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
-LoomInternetPlat::~LoomInternetPlat()
-{
-
+void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb) {
+	/// print the initial http request
+	client.print(verb);
+	client.print(" ");
+	client.print(url == nullptr ? "/" : url);
+	client.print(" ");
+	client.print("HTTP/1.1\r\nUser-Agent: LoomOverSSLClient\r\nHost: ");
+	client.print(domain);
+	client.print("\r\nConnection: close\r\n");
+	/// add the optional body
+	if(body != nullptr) client.print(body);
+	client.print("\r\n");
+	/// all ready to go!
 }
-
-/////////////////////////////////////////////////////////////////////
-void LoomInternetPlat::print_config()
-{
-	LoomModule::print_config();	
-}
-
-/////////////////////////////////////////////////////////////////////
-void LoomInternetPlat::print_state()
-{
-	LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
-}
-
