@@ -85,6 +85,7 @@ enum class ModuleType {
 	// LogPlats
 	OLED, SDCARD,
 	// InternetPlats
+	Internet,
 	// RTC
 	DS3231, PCF8523,
 	// Other
@@ -391,6 +392,7 @@ public:
 	Loom_SD&			SDCARD(int idx = 0);
 
 	// InternetPlats
+	LoomInternetPlat&	InternetPlat(const int idx = 0);
 
 	// RTC
 	Loom_DS3231&		DS3231(int idx = 0);
@@ -438,7 +440,7 @@ private:
 	void		package_aux(JsonObject json, LoomModule* module);
 	bool		cmd_route_aux(JsonObject json, LoomModule** modules, uint len);
 	bool		cmd_route_aux(JsonObject json, LoomModule* module);
-
+	void		second_stage_ctor_aux(LoomModule** modules, uint len);
 
 
 	LoomModule*	find_module(ModuleType type, int idx, LoomModule** modules, int count);

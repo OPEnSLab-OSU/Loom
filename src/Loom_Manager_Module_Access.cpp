@@ -54,7 +54,6 @@ Loom_Multiplexer& LoomManager::Multiplexer(int idx)
 	return (*(Loom_Multiplexer*)( (tmp) ? tmp : &global_stub ));
 }
 
-
 // --- Actuators ---
 
 Loom_Neopixel& LoomManager::Neopixel(int idx) 
@@ -109,7 +108,11 @@ Loom_Bluetooth& LoomManager::Bluetooth(int idx)
 
 
 // --- InternetPlats --- 
-
+LoomInternetPlat& LoomManager::InternetPlat(const int idx)
+{
+	if (idx >= internet_count) return *(LoomInternetPlat*)(&global_stub);
+	else return *(internet_modules[idx]);
+}
 
 
 // --- LogPlats ---

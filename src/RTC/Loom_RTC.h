@@ -164,6 +164,9 @@ public:
 	// Interrupt pin is also static, as that pin is referenced 
 	static void		RTC_Wake_ISR();
 
+	/// Set time to provided timezone
+	/// \param[in]	time	Time to set to
+	virtual void	time_adjust(DateTime time) = 0;
 
 protected:
 
@@ -190,10 +193,6 @@ protected:
 	/// Check if current RTC time is valid (not necessarily correct)
 	/// \return	True if valid
 	bool			rtc_validity_check();
-
-	/// Set time to provided timezone
-	/// \param[in]	time	Time to set to
-	virtual void	time_adjust(DateTime time) = 0;
 
 
 

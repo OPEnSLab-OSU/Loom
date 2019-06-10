@@ -6,7 +6,7 @@
 #include "Loom_Macros.h"
 #include "Loom_Package.h"
 
-#include <ArduinoJson.h>
+#include "ArduinoJson.h"
 
 
 
@@ -56,7 +56,7 @@ public:
 
 
 	// --- DESTRUCTOR ---
-	virtual ~LoomModule();
+	virtual ~LoomModule() = default;
 
 
 	// --- PUBLIC METHODS ---
@@ -75,6 +75,11 @@ public:
 	/// such as linking a submanager or RTC module.
 	/// \param[in]	LM	LoomManager to point to
 	void			link_device_manager(LoomManager* LM);
+
+	/// Second stage construction
+	/// Perform any actions that need all of the devices to be
+	/// initized beforehand - such as looking up an internet platform
+	virtual void	second_stage_ctor();
 
 	/// LPrint the module name as a label.
 	/// Used for matching debug prints to corresponding module

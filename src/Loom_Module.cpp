@@ -33,10 +33,6 @@ LoomModule::LoomModule( const char* module_name ) : LoomModule()
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
-LoomModule::~LoomModule() {}
-
-/////////////////////////////////////////////////////////////////////
 ModuleType LoomModule::get_module_type()
 {
 	return module_type;
@@ -55,6 +51,12 @@ void LoomModule::link_device_manager(LoomManager* LM)
 {
 	if (LM == nullptr) return;
 	device_manager = LM;
+}
+
+/////////////////////////////////////////////////////////////////////
+void LoomModule::second_stage_ctor()
+{
+	// do nothing unless overriden
 }
 
 /////////////////////////////////////////////////////////////////////

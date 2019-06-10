@@ -1,0 +1,73 @@
+#include "Loom_Module.h"
+#include "./InternetPlats/Loom_InternetPlat.h"
+#include "./RTC/Loom_RTC.h"
+#include "./Loom_Manager.h"
+#include "ArduinoJson.h"
+#include "Loom_Macros.h"
+#include "Loom_Interrupt_Manager.h"
+
+// ### (LoomModule) | dependencies: [] | conflicts: []
+/// OLED logging platform module.
+// ###
+class LoomNTPSync : public LoomModule
+{
+
+protected:
+
+public:
+	/// OLED module constructor.
+	///
+	/// \param[in]	module_name				String | <"OLED"> | null | OLED module name
+    /// \param[in]  internet_module_index   Int | <0> | [0-5] | Index from zero of of the desired internet platform based on the JSON configuration	Loom_NTP_Sync(
+	/// \param[in]  sync_interval_hours     Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
+    LoomNTPSync(
+        const char*			module_name				= "OLED",
+        const uint          internet_module_index   = 0,
+        const uint          sync_interval_hours     = 0
+    );
+
+	LoomNTPSync(JsonVariant p);
+
+
+	// --- DESTRUCTOR ---
+	~LoomNTPSync() = default;
+
+    // --- PUBLIC METHODS ---
+
+    /// Sync the RTC using NTP from the internet platform specified
+    void        second_stage_ctor() override;
+
+    
+	void		print_config() override;
+	void		print_state() override;
+	void		measure() override;
+	void 		package(JsonObject json) override { /* do nothing */ };
+	bool		cmd_route(JsonObject) override { /* do nothing */}
+
+private:
+    /// the actual synchronization function
+    DateTime m_sync_rtc();
+    /// enumerate errors
+    enum class Error {
+        OK,
+        INVAL_DEVICE_MANAGE, ///< Failed to recieve a Loom Device Manager
+        INVAL_INTERNET, ///< Failed to find the correct internet object
+        INVAL_TIME,     ///< Retrieved a time that was invalid
+        INVAL_RTC,      ///< Failed to find a RTC
+        NON_START,      ///< No attempt was made to sync
+    };
+    /// Store the Internet Plat from second stage contsruction
+    const uint m_internet_module_index;
+    /// Store the sync interval, in hours
+    const uint m_sync_interval;
+    /// Store the Internet Plat from second stage contsruction
+    LoomInternetPlat* m_internet;
+    /// Store the RTC pointer so we can check the time
+    LoomRTC* m_rtc;
+    /// Store when next to change the RTC
+    DateTime m_next_sync;
+    /// Store if we've successfully accomplished our task
+    Error m_last_error;
+};
+
+
