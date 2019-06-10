@@ -411,9 +411,9 @@ void LoomManager::package(JsonObject json)
 /////////////////////////////////////////////////////////////////////
 JsonObject LoomManager::package()
 {
-	LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
+	// LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
 	doc.clear();
-	LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
+	// LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
 
 // This works
 	doc["type"] = "data";

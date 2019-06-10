@@ -360,38 +360,6 @@ float Loom_Analog::convert_salinity(uint16_t analog)
 }
 
 
-// //Used to find the peaks of the square wave from the output
-// //of the Salinity Sensor
-// //
-// float rawValue, minimum, maximum, peakValue;
-// int threshold = 70; // sensitivity
-// float voltage = 0., temp = 25.0, kvalue = 1.0 ;
-// void setup() {
-// 	Serial.begin(9600);
-// }
-
-// void loop() {
-// 	minimum = 0; // reset
-// 	maximum = 0;
-// 	for (int i = 0; i < 10000; i++) { // measure
-// 		rawValue = analogRead(A0);
-// 		if (rawValue < minimum) minimum = rawValue; // store min peak
-// 		if (rawValue > maximum) maximum = rawValue; // store max peak
-// 	}
-// 	peakValue = maximum - minimum; // calc difference
-// 	if (peakValue > threshold) { // action
-// 		// do something
-// 	}
-// 	//3V
-// 	// peakValue = (peakValue - 76) / .0928;
-// 	//5V
-// 	// peakValue = (peakValue - 75)/ .0834;
-// 	Serial.print("PPM: ");
-// 	Serial.print(peakValue);
-// 	delay(250); // remove in final code
-// }
-
-
 
 
 
