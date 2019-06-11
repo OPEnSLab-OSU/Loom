@@ -10,7 +10,7 @@ Loom_Ethernet_I::Loom_Ethernet_I(
 		const JsonArrayConst	ip
 	) 
 	: LoomInternetPlat( module_name )
-	, m_client( EthernetClient(), TAs, (size_t)TAs_NUM, A7, SSL_INFO )
+	, m_client( EthernetClient(), TAs, (size_t)TAs_NUM, A7, SSL_ERROR )
 	, m_UDP()
 	, m_mac{}
 	, m_ip()
@@ -79,6 +79,7 @@ void Loom_Ethernet_I::connect()
 		// try to congifure using IP address instead of DHCP:
 		Ethernet.begin(m_mac, m_ip);
 	}
+	else m_ip = Ethernet.localIP();
 	m_is_connected = true;
 
 	print_module_label();
@@ -152,7 +153,10 @@ uint32_t Loom_Ethernet_I::get_time()
 {
 	if (!is_connected()) return 0;
 	
-	if (!m_UDP.begin(localPort)) return 0;
+	if (!m_UDP.begin(localPort)) {
+		LPrint("Failed to open UDP for NTP!\n");
+		return 0;
+	}
 
 	byte packet_buffer[NTP_PACKET_SIZE]; 		//buffer to hold incoming and outgoing packets
 
