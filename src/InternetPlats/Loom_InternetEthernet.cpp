@@ -24,10 +24,11 @@ Loom_Ethernet_I::Loom_Ethernet_I(
 
 	connect();
 
+	print_module_label();
 	if (is_connected()) {
-	 	LPrintln("Ethernet: Successfully connected to internet");
+	 	LPrintln("Successfully connected to internet");
 	} else {
-	 	LPrintln("Ethernet: Failed to connect to internet");
+	 	LPrintln("Failed to connect to internet");
 	}
 
 
@@ -53,7 +54,6 @@ void Loom_Ethernet_I::print_config()
 		if (i < 5) LPrint(",");
 		else 	   LPrintln("]");
 	}
-
 	LPrint('\t', "IP:                 : " );
 	LPrint(  m_ip[0], ".", m_ip[1], ".");
 	LPrintln(m_ip[2], ".", m_ip[3]);
@@ -64,6 +64,7 @@ void Loom_Ethernet_I::print_config()
 void Loom_Ethernet_I::print_state()
 {
 	LoomInternetPlat::print_state();	
+	print_module_label();
 	LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 
@@ -91,8 +92,6 @@ void Loom_Ethernet_I::connect()
 /////////////////////////////////////////////////////////////////////
 bool Loom_Ethernet_I::is_connected()
 {
-
-	LPrintln("CONNECTED STATUS: ",  m_is_connected );
 	return  m_is_connected;
 }
 
@@ -105,11 +104,13 @@ Client& Loom_Ethernet_I::http_request(const char* domain, const char* url, const
 	int status = m_client.connect(domain, 443);
 	if (!status) {
 		// log fail, and return
+		print_module_label();
 		LPrint("Ethernet HTTP request failed with error ", m_client.getWriteError(), "\n");
 		m_is_connected = false;
 		return m_client;
 	}
 	// ok next, make the http request
+	print_module_label();
 	LPrint("Writing http: ", domain, "\n");
 	write_http_request(m_client, domain, url, body, verb);
 	write_http_request(Serial, domain, url, body, verb);
@@ -150,10 +151,11 @@ void print_unix_time(unsigned long epoch)
 
 /////////////////////////////////////////////////////////////////////
 uint32_t Loom_Ethernet_I::get_time()
-{
+{	
 	if (!is_connected()) return 0;
 	
 	if (!m_UDP.begin(localPort)) {
+		print_module_label();
 		LPrint("Failed to open UDP for NTP!\n");
 		return 0;
 	}
@@ -165,7 +167,8 @@ uint32_t Loom_Ethernet_I::get_time()
 	unsigned long epoch = 0;
 
 	// wait to see if a reply is available
-	delay(1000);
+	delay(2000);
+	print_module_label();
 	if (m_UDP.parsePacket()) {
 		// We've received a packet, read the data from it
 		m_UDP.read(packet_buffer, NTP_PACKET_SIZE); // read the packet into the buffer
@@ -177,6 +180,7 @@ uint32_t Loom_Ethernet_I::get_time()
 		// combine the four bytes (two words) into a long integer
 		// this is NTP time (seconds since Jan 1 1900):
 		unsigned long secsSince1900 = highWord << 16 | lowWord;
+		
 		LPrint("Seconds since Jan 1 1900 = ", secsSince1900, "\n");
 
 		// now convert NTP time into everyday time:
@@ -185,9 +189,10 @@ uint32_t Loom_Ethernet_I::get_time()
 		const unsigned long seventyYears = 2208988800UL;
 		// subtract seventy years:
 		epoch = secsSince1900 - seventyYears;
-		
+		print_module_label();
 		print_unix_time(epoch);
 	}
+	else LPrint("Failed to parse UDP packet!\n");
 
 	m_UDP.stop();
 

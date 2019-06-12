@@ -6,7 +6,9 @@
 LoomInternetPlat::LoomInternetPlat(	
 		const char* module_name
 	) 
-	: LoomModule( module_name ) {}
+	: LoomModule( module_name ) {
+		this->module_type = ModuleType::Internet;
+	}
 
 /////////////////////////////////////////////////////////////////////
 void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb) {

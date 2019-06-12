@@ -130,7 +130,9 @@ void Factory::CreateAndSort(
 		case ModuleSortType::LogPlat:			log_plat = (LoomLogPlat*)tmp; return;
 		case ModuleSortType::Rtc:				rtc = (LoomRTC*)tmp; return;
 		case ModuleSortType::Sensor:			sensor = (LoomSensor*)tmp; return;
+		case ModuleSortType::Other:				other_module = tmp; return;
 		case ModuleSortType::Unknown:			other_module = tmp; return;
+		default: 								other_module = tmp; return;
 	}
 }
 

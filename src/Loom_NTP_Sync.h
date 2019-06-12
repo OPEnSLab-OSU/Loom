@@ -15,13 +15,13 @@ class LoomNTPSync : public LoomModule
 protected:
 
 public:
-	/// OLED module constructor.
+	/// NTP Sync module constructor.
 	///
-	/// \param[in]	module_name				String | <"OLED"> | null | OLED module name
+	/// \param[in]	module_name				String | <"NTP1"> | null | NTP synchronizer module name
     /// \param[in]  internet_module_index   Int | <0> | [0-5] | Index from zero of of the desired internet platform based on the JSON configuration	Loom_NTP_Sync(
 	/// \param[in]  sync_interval_hours     Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
     LoomNTPSync(
-        const char*			module_name				= "OLED",
+        const char*			module_name				= "NTP1",
         const uint          internet_module_index   = 0,
         const uint          sync_interval_hours     = 0
     );
