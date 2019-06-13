@@ -97,7 +97,6 @@ bool Loom_Ethernet_I::is_connected()
 
 /////////////////////////////////////////////////////////////////////
 Client& Loom_Ethernet_I::http_request(const char* domain, const char* url, const char* body, const char* verb) {
-	LPrint("Connecting to: ", domain, "\n");
 	// if the socket is somehow still open, close it
 	if (m_client.connected()) m_client.stop();
 	// * the rainbow connection *
@@ -113,7 +112,6 @@ Client& Loom_Ethernet_I::http_request(const char* domain, const char* url, const
 	print_module_label();
 	LPrint("Writing http: ", domain, "\n");
 	write_http_request(m_client, domain, url, body, verb);
-	write_http_request(Serial, domain, url, body, verb);
 	// gosh that was easy
 	m_is_connected = true;
 	// return the client for data reception

@@ -40,10 +40,19 @@ public:
 	bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
 
 private:
+    // Get the number of bytes left in buffer from a given pointer in buffer
+    size_t m_buffer_left(const char* buffer_index) const {
+	    const char* end_buffer = &(m_buffer[sizeof(m_buffer) - 1]);
+	    if (buffer_index >= end_buffer) return 0;
+	    return end_buffer - buffer_index;
+    }
+    // private utility send function
+    bool m_serialize_internet_impl(const JsonObject json);
+
     // storage for all those strings we're going to need above
     // main string buffer, the front of which stores our URL
     // do not edit this directly, use m_url_end instead.
-    char m_buffer[1024];
+    char m_buffer[768];
     // store a pointer to where we can actually add data
     char* m_data_start;
 };

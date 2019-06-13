@@ -44,16 +44,39 @@ void Loom_GoogleSheets::print_config() {
 /////////////////////////////////////////////////////////////////////
 bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat* plat) {
     print_module_label();
+    // serialize the data, checking for an error
+    if (!m_serialize_internet_impl(json)) {
+        LPrint("Buffer overflow during serialize!\n");
+        return false;
+    }
+    else {
+        LPrint(m_buffer, "\n");
+        Client& m_cli = plat->http_get_request("script.google.com", m_buffer);
+        if (!m_cli.connected()) return false;
+        // discard all oncoming data
+        const auto start = millis();
+        while (m_cli.connected()) {
+            const auto read = m_cli.available();
+            if(read) m_cli.read(nullptr, read);
+            // timeout in case connection doesn't close itself
+            if (millis() - start > 5000) m_cli.stop();
+        }
+        // all done!
+        print_module_label();
+        LPrint("Published successfully!\n");
+        return true;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////
+bool Loom_GoogleSheets::m_serialize_internet_impl(const JsonObject json) {
     // step one: package timestamp
     char* m_data_cur = m_data_start;
     const JsonObject time_obj = json["timestamp"];
     for (const JsonPair i : time_obj) {
-        const int printed = snprintf(m_data_cur, &(m_buffer[sizeof(m_buffer) - 1]) - m_data_cur,
+        const int printed = snprintf(m_data_cur, m_buffer_left(m_data_cur),
             "%s~%s~", i.key().c_str(), i.value().as<const char*>());
-        if (printed < 0) {
-            LPrint("Buffer overflow during timestamp packaging");
-            return false;
-        }
+        if (printed < 0) return false;
         // move the pointer foward
         m_data_cur = &(m_data_cur[printed]);
     }
@@ -66,33 +89,26 @@ bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat
         const JsonObject data_vals = i["data"];
         for (const auto d : data_vals) {
             // serialize the key
-            const int printed = snprintf(m_data_cur, &(m_buffer[sizeof(m_buffer) - 1]) - m_data_cur,
-            "%s-%s~", name, d.key().c_str());
-            if (printed < 0) {
-                LPrint("Buffer overflow during data packaging");
-                return false;
-            }
+            const int printed = snprintf(m_data_cur, m_buffer_left(m_data_cur),
+                "%s-%s~", name, d.key().c_str());
+            if (printed < 0) return false;
             // move the pointer foward
             m_data_cur = &(m_data_cur[printed]);
             // serialize the value
             const auto data_tmp = d.value();
-            const auto size = measureJson(data_tmp);
-            const auto max_size = &(m_buffer[sizeof(m_buffer) - 1]) - m_data_cur;
+            const auto json_size = measureJson(data_tmp);
+            const auto max_json_size = m_buffer_left(m_data_cur);
             // no overflow check
-            if (size + 1 >= max_size) {
-                LPrint("Buffer overflow during data packaging");
-                return false;
-            }
-            serializeJson(data_tmp, m_data_cur, max_size);
+            if (json_size + 1 >= max_json_size) return false;
+            serializeJson(data_tmp, m_data_cur, max_json_size);
             // add the trailing tilde
-            m_data_cur[size] = '~';
+            m_data_cur[json_size] = '~';
             // move the pointer forward
-            m_data_cur = &(m_data_cur[size + 1]);
+            m_data_cur = &(m_data_cur[json_size + 1]);
         }
     }
     // step three: replace the last trailing tilde with a null
     m_data_cur--;
     m_data_cur[0] = '\0';
-    // step four: send the data!
-    LPrint("Google sheets data: ", m_buffer, "\n");
+    return true;
 }
