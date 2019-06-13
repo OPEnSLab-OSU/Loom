@@ -28,6 +28,9 @@ const  NameModulePair Factory::LookupTable[] =
 	// InternetPlat
 	{"Loom_Ethernet",			Construct<Loom_Ethernet_I>,		ModuleSortType::InternetPlat },
 
+	// PublishPlat
+	{"Loom_GoogleSheets",		Construct<Loom_GoogleSheets>,	ModuleSortType::PublishPlat },
+
 	// LogPlat
 	{"Loom_OLED",				Construct<Loom_OLED>,			ModuleSortType::LogPlat },
 	{"Loom_SD",					Construct<Loom_SD>,				ModuleSortType::LogPlat },
@@ -111,6 +114,7 @@ void Factory::CreateAndSort(
 	LoomActuator*& actuator,
 	LoomCommPlat*& comm_plat,
 	LoomInternetPlat*& internet_plat,
+	LoomPublishPlat*& publish_plat,
 	LoomLogPlat*& log_plat
 ) {		
 	LoomModule* tmp = Create(module);
@@ -127,6 +131,7 @@ void Factory::CreateAndSort(
 		case ModuleSortType::Actuator:			actuator = (LoomActuator*)tmp; return;
 		case ModuleSortType::CommPlat:			comm_plat = (LoomCommPlat*)tmp; return;
 		case ModuleSortType::InternetPlat:		internet_plat = (LoomInternetPlat*)tmp; return;
+		case ModuleSortType::PublishPlat:		publish_plat = (LoomPublishPlat*)tmp; return;
 		case ModuleSortType::LogPlat:			log_plat = (LoomLogPlat*)tmp; return;
 		case ModuleSortType::Rtc:				rtc = (LoomRTC*)tmp; return;
 		case ModuleSortType::Sensor:			sensor = (LoomSensor*)tmp; return;

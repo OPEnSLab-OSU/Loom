@@ -114,6 +114,12 @@ LoomInternetPlat& LoomManager::InternetPlat(const int idx)
 	else return *(internet_modules[idx]);
 }
 
+// --- PublishPlats ---
+LoomPublishPlat& LoomManager::PublishPlat(const int idx)
+{
+	if (idx >= publish_count) return *(LoomPublishPlat*)(&global_stub);
+	else return *(publish_modules[idx]);
+}
 
 // --- LogPlats ---
 

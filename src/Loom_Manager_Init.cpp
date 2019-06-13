@@ -107,6 +107,7 @@ void LoomManager::parse_config(const char* json_config)
 		LoomActuator*			actuator			= nullptr;
 		LoomCommPlat*			comm_plat			= nullptr;
 		LoomInternetPlat*		internet_plat		= nullptr;
+		LoomPublishPlat*		publish_plat		= nullptr;
 		LoomLogPlat*			log_plat			= nullptr;
 
 		LoomFactory.CreateAndSort(
@@ -119,6 +120,7 @@ void LoomManager::parse_config(const char* json_config)
 			actuator,
 			comm_plat,
 			internet_plat,
+			publish_plat,
 			log_plat
 		);
 
@@ -147,6 +149,9 @@ void LoomManager::parse_config(const char* json_config)
 		if (internet_plat != nullptr) {
 			add_module(internet_plat); 
 		} 
+		if (publish_plat != nullptr) {
+			add_module(publish_plat); 
+		} 
 		if (log_plat != nullptr) {
 			add_module(log_plat); 
 		}
@@ -162,6 +167,7 @@ void LoomManager::parse_config(const char* json_config)
 	second_stage_ctor_aux( (LoomModule**)actuator_modules , actuator_count     ); 
 	second_stage_ctor_aux( (LoomModule**)comm_modules     , comm_count         ); 
 	second_stage_ctor_aux( (LoomModule**)internet_modules , internet_count     ); 
+	second_stage_ctor_aux( (LoomModule**)publish_modules  , publish_count      ); 
 	second_stage_ctor_aux( (LoomModule**)log_modules      , log_count          );
 	second_stage_ctor_aux( (LoomModule**)other_modules    , other_module_count ); 
 

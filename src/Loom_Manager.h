@@ -50,7 +50,10 @@ class Loom_OLED;
 class Loom_SD;
 
 // InternetPlats
+class LoomInternetPlat;
 
+// Publish plat
+class LoomPublishPlat;
 
 // RTC
 class Loom_DS3231;
@@ -86,6 +89,8 @@ enum class ModuleType {
 	OLED, SDCARD,
 	// InternetPlats
 	Internet,
+	// PublishPlats
+	Publish,
 	// RTC
 	DS3231, PCF8523,
 	// Other
@@ -121,7 +126,6 @@ class LoomSensor;
 class LoomActuator;
 class LoomRTC;
 class LoomCommPlat;
-class LoomInternetPlat;
 class LoomLogPlat;
 
 
@@ -135,6 +139,7 @@ class LoomLogPlat;
 // #define MAX_RTCS          3
 #define MAX_COMMS         3
 #define MAX_INTERNETS     3
+#define MAX_PUBLISH		  2
 #define MAX_LOGS          5
 
 
@@ -160,11 +165,11 @@ protected:
 
 
 	// Sub Managers
-	Loom_Interrupt_Manager*	interrupt_manager;
-	Loom_Sleep_Manager*		sleep_manager;
+	Loom_Interrupt_Manager*	interrupt_manager = nullptr;
+	Loom_Sleep_Manager*		sleep_manager = nullptr;
 
 	// RTC object
-	LoomRTC*			rtc_module;
+	LoomRTC*			rtc_module = nullptr;
 
 	// Arrays of Loom Modules, categorized by type
 	LoomModule*			other_modules[MAX_OTHER_MODULES];
@@ -172,22 +177,25 @@ protected:
 	LoomActuator*		actuator_modules[MAX_ACTUATORS];
 	LoomCommPlat*		comm_modules[MAX_COMMS];
 	LoomInternetPlat*	internet_modules[MAX_INTERNETS];
+	LoomPublishPlat*	publish_modules[MAX_PUBLISH];
 	LoomLogPlat*		log_modules[MAX_LOGS];
 
 	/// Count of miscellaneous modules
-	uint		other_module_count;
+	uint		other_module_count = 0;
 	/// Count of sensor modules
-	uint		sensor_count;
+	uint		sensor_count = 0;
 	/// Count of actuator modules
-	uint		actuator_count;
+	uint		actuator_count = 0;
 	/// Count of RTC modules
 	// uint		rtc_count;
 	/// Count of communication modules
-	uint		comm_count;
+	uint		comm_count = 0;
 	/// Count of internet modules
-	uint		internet_count;
+	uint		internet_count = 0;
+	/// Count of publish modules
+	uint		publish_count = 0;
 	/// Count of logging platform modules
-	uint		log_count;
+	uint		log_count = 0;
 
 	/// LPrint detail verbosity
 	Verbosity	print_verbosity;
@@ -261,6 +269,8 @@ public:
 	void		package(JsonObject json);
 	JsonObject	package();
 
+	bool		publish(const JsonObject json);
+
 	// Iterate over array of commands
 	void		cmd_route(JsonObject json);
 
@@ -296,6 +306,7 @@ public:
 	void		add_module(LoomActuator* actuator);
 	void		add_module(LoomCommPlat* comm_plat);
 	void		add_module(LoomInternetPlat* internet_plat);
+	void 		add_module(LoomPublishPlat* publish_module); 
 	void		add_module(LoomLogPlat* log_plat);
 
 
@@ -393,6 +404,9 @@ public:
 
 	// InternetPlats
 	LoomInternetPlat&	InternetPlat(const int idx = 0);
+
+	// PublishPlats
+	LoomPublishPlat& 	PublishPlat(const int idx = 0);
 
 	// RTC
 	Loom_DS3231&		DS3231(int idx = 0);

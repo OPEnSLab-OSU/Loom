@@ -16,11 +16,7 @@ protected:
 public:
 	/// Loom Internet Platform module constructor.
 	///
-	/// \param[in]	module_name		String | <"Internet-Plat"> | null | Interrupt Manager module name
-	/// \param[in]	network_auth	Object("ssid", "pass", "mac") | <{}> | null | Authentication credentials for ethernet and wireless connectivity.
-	/// \param[in]	endpoint_domain	String | <"script.google.com"> | null | Domain to publish our measured data
-	/// \param[in]	url_path		String | <"/macros/s/AKfycbymznIaW3ALKaCuhE6hhJrQFr2R0B5PDBuX0mz3D6hcPGpR_k0n/exec"> | null | Path send in HTTP Get Request
-	/// \param[in]	endpoint_kind	Set(Internet_Endpoint_Type) | <0> | {0("Google Sheets"), 1("MongoDB")} | How to format data being sent to the endpoint
+	/// \param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
 	LoomInternetPlat( const char* module_name );
 
 	// --- DESTRUCTOR ---

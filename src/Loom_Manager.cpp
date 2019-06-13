@@ -13,6 +13,7 @@
 #include "InternetPlats/Loom_InternetPlat.h"
 #include "LogPlats/Loom_LogPlat.h"
 #include "RTC/Loom_RTC.h"
+#include "PublishPlats/Loom_PublishPlat.h"
 
 
 
@@ -196,6 +197,12 @@ void LoomManager::add_module(LoomInternetPlat* internet_module)
 }
 
 /////////////////////////////////////////////////////////////////////
+void LoomManager::add_module(LoomPublishPlat* publish_module) 
+{
+	add_module_aux( (LoomModule**)publish_modules, (LoomModule*)publish_module, publish_count, MAX_PUBLISH );
+}
+
+/////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomLogPlat* log_plat) 
 {	
 	add_module_aux( (LoomModule**)log_modules, (LoomModule*)log_plat, log_count, MAX_LOGS );
@@ -261,6 +268,7 @@ void LoomManager::list_modules()
 	list_modules_aux( (LoomModule**)actuator_modules , actuator_count     , "Actuators"); 
 	list_modules_aux( (LoomModule**)comm_modules     , comm_count         , "Communication Platforms"); 
 	list_modules_aux( (LoomModule**)internet_modules , internet_count     , "Internet Platforms"); 
+	list_modules_aux( (LoomModule**)publish_modules ,  publish_count      , "Publish Platforms"); 
 	list_modules_aux( (LoomModule**)log_modules      , log_count          , "Logging Platforms" ); 
 }
 
@@ -432,6 +440,7 @@ JsonObject LoomManager::package()
 	return json;
 }
 
+
 JsonObject LoomManager::internalJson(bool clear)
 {
 	if (clear) {
@@ -447,6 +456,18 @@ JsonObject LoomManager::internalJson(bool clear)
 	// doc["type"] = "unknown";
 	// return doc.as<JsonObject>();
 
+}
+
+/////////////////////////////////////////////////////////////////////
+bool LoomManager::publish(const JsonObject json)
+{
+	bool result = true;
+	for (auto i = 0; i < publish_count; i++) {
+		if ( (publish_modules[i] != nullptr) && ( publish_modules[i]->get_active() ) ){
+			result &= publish_modules[i]->publish(json);
+		}
+	}
+	return publish_count > 0 && result;
 }
 
 /////////////////////////////////////////////////////////////////////

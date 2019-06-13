@@ -20,6 +20,10 @@
 // InternetPlats
 #include "InternetPlats/Loom_InternetEthernet.h"
 
+// PublishPlats
+
+#include "PublishPlats/Loom_GoogleSheets.h"
+
 // LogPlats
 #include "LogPlats/Loom_OLED.h"
 #include "LogPlats/Loom_SD.h"
@@ -68,6 +72,7 @@ enum class ModuleSortType {
 	Actuator,
 	CommPlat,
 	InternetPlat,
+	PublishPlat,
 	LogPlat,
 	Rtc,
 	Sensor,
@@ -133,6 +138,7 @@ public:
 		LoomActuator*& actuator,
 		LoomCommPlat*& comm_plat,
 		LoomInternetPlat*& internet_plat,
+		LoomPublishPlat*& publish_plat,
 		LoomLogPlat*& log_plat
 	);
 
