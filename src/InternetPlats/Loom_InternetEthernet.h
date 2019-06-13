@@ -3,7 +3,7 @@
 #define LOOM_INTERNET_ETHERNET_PLAT_h
 
 #include "Loom_InternetPlat.h"
-#include "Ethernet.h"
+#include "EthernetLarge.h"
 #include "SSLClient.h"
 
 class Loom_Ethernet_I : public LoomInternetPlat
