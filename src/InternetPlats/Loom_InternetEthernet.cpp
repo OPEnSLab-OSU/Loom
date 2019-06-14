@@ -122,9 +122,8 @@ Client& Loom_Ethernet_I::http_request(const char* domain, const char* url, const
 /////////////////////////////////////////////////////////////////////
 constexpr unsigned int localPort = 8888;		// Local port to listen for UDP packets on
 
-constexpr char time_server[] = "time.nist.gov"; 	// time.nist.gov NTP server
+constexpr char time_server[] = "pool.ntp.org"; 	// pool.ntp.org NTP server
 constexpr int NTP_PACKET_SIZE = 48; 			// NTP time stamp is in the first 48 bytes of the message
-// byte packet_buffer[NTP_PACKET_SIZE]; 		//buffer to hold incoming and outgoing packets
 
 void print_unix_time(unsigned long epoch) 
 {
@@ -165,7 +164,7 @@ uint32_t Loom_Ethernet_I::get_time()
 	unsigned long epoch = 0;
 
 	// wait to see if a reply is available
-	delay(2000);
+	delay(1000);
 	print_module_label();
 	if (m_UDP.parsePacket()) {
 		// We've received a packet, read the data from it

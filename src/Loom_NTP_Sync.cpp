@@ -68,31 +68,32 @@ void LoomNTPSync::print_state() {
 
 /////////////////////////////////////////////////////////////////////
 void LoomNTPSync::measure() {
-    // if periodic sync is requested and the sync time has passed
-    if (m_last_error == Error::OK
-        && m_internet->is_connected()
-        && m_next_sync.unixtime() != 0 
-        && (m_rtc->now() - m_next_sync).totalseconds() >= 0) {
-        // synchronize the RTC
-        DateTime timeNow;
-        // repeat synchronize if this is the first power on
-        do {
-            timeNow = m_sync_rtc();
-            if (timeNow.unixtime() != 0) m_next_sync = DateTime(0);
-            else delay(100);
-        } while (m_next_sync.unixtime() == 1);
-        // set the next sync time
-        if (m_sync_interval != 0) {
-            // to n hours from now
-            m_next_sync = DateTime(timeNow) + TimeSpan(0, m_sync_interval, 0, 0);
+    // if a sync is requested
+    if (m_next_sync.unixtime() != 0 && (m_rtc->now() - m_next_sync).totalseconds() >= 0) {
+        // if the engine is operating correctly
+        if (m_last_error == Error::OK && m_internet->is_connected()) {
+            // synchronize the RTC
+            DateTime timeNow;
+            // repeat synchronize if this is the first power on
+            do {
+                timeNow = m_sync_rtc();
+                if (timeNow.unixtime() != 0) m_next_sync = DateTime(0);
+                else delay(100);
+            } while (m_next_sync.unixtime() == 1);
+            // set the next sync time
+            if (m_sync_interval != 0) {
+                // to n hours from now
+                m_next_sync = DateTime(timeNow) + TimeSpan(0, m_sync_interval, 0, 0);
+            }
         }
-    }
-    else {
+        // else log errors
+        else {
         print_module_label();
-        if (m_last_error != Error::OK) 
-            LPrint("Could not synchronize RTC due to error ", static_cast<uint8_t>(m_last_error), "\n");
-        else if (!(m_internet->is_connected()))
-            LPrint("Could not synchronize RTC due to lack of internet");
+            if (m_last_error != Error::OK) 
+                LPrint("Could not synchronize RTC due to error ", static_cast<uint8_t>(m_last_error), "\n");
+            else if (!(m_internet->is_connected()))
+                LPrint("Could not synchronize RTC due to lack of internet");
+        }
     }
 }
 

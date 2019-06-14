@@ -33,11 +33,10 @@ void LoomPublishPlat::second_stage_ctor() {
 /////////////////////////////////////////////////////////////////////
 bool LoomPublishPlat::publish(const JsonObject json) {
 	// check validity
-	if(m_internet == nullptr || !(m_internet->is_connected()) || json.isNull()){
+	if(m_internet == nullptr  || json.isNull()){
 		print_module_label();
 		LPrint("Could not publish without ");
 		if(m_internet == nullptr) LPrint("internet module\n");
-		else if (!(m_internet->is_connected())) LPrint("internet connectivity.\n");
 		else LPrint("valid data.\n");
 		return false;
 	}
