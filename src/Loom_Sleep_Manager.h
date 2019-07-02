@@ -33,13 +33,11 @@ protected:
 	/// Whether to provide delay on wake.
 	/// Used to allow user to restart Serial Monitor
 	bool		delay_on_wake;
-
 	/// Which sleep mode to use
 	SleepMode 	sleep_mode;
-
 	///	Which pin to use to power board off (requires power board)
 	byte		power_off_pin;
-
+	/// Pointer to interrupt_manager instance 
 	Loom_Interrupt_Manager* interrupt_manager;
 
 public:
@@ -61,6 +59,7 @@ public:
 
 	Loom_Sleep_Manager(JsonVariant p);
 
+	/// Convert enum of sleep mode to a string
 	const static char* enum_sleep_mode_string(SleepMode m);
 
 
@@ -78,11 +77,11 @@ public:
 	bool		cmd_route(JsonObject) {}
 
 
-	// Put into low power state.
-	// On wake, program will continue from where it went to sleep
+	/// Put into low power state.
+	/// On wake, program will continue from where it went to sleep
 	bool		sleep();
-	// Turn board off.
-	// Program will restart from setup on wake
+	/// Turn board off.
+	/// Program will restart from setup on wake
 	void		powerDown();
 
 
