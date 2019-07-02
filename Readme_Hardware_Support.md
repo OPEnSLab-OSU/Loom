@@ -1,51 +1,15 @@
-# Project Loom: Hardware
+# Hardware Support
+
+This readme lists the hardware currently supported by Loom, providing a brief description and links to relevant resources for each component
 
 ## Table of Contents
-1. [Processors](#processors)
-    1. [Adafruit Feather M0](#adafruit-feather-m0)
-    2. [Adafruit Feather 32u4](#adafruit-feather-32u4)
-2. [Wireless Capabilities](#wireless-capabilities)
-    1. [WiFi](#wifi)
-        1. [WiFi Dependencies](#wifi-dependencies)
-    2. [LoRa](#lora)
-        1. [LoRa Dependencies](#lora-dependencies)
-        2. [EnableInterrupt.h and RH\_RF95.h compatibility](#enableinterrupth-and-rh_rf95h-compatibility)
-    3. [nRF](#nRF)
-        1. [nRF Dependencies](#nrf-dependencies)
-        2. [Configuring Maximum Message Length](#configuring-maximum-message-length)
-3. [Sensors](#sensors)
-    1. [I2C Sensors](#i2c-sensors)
-        1. [AS7262 Spectral Sensor (visible)](#as7262-spectral-sensor-visible)
-        2. [AS7263 Spectral Sensor (near infrared)](#as7263-spectral-sensor-near-infrared)
-        3. [AS72625X Spectral Sensor Triad](#as7265X-spectral-sensor-visible-near-infrared-ultraviolet)
-        4. [FXAS21002 3-Axis Gyroscope](#fxas21002-3-axis-gyroscope)
-        5. [FXOS8700 3-Axis Accelerometer/Magnetometer](#fxos8700-3-axis-accelerometermagnetometer)
-        6. [HX711 Load Cell Amplifier](#hx711-load-cell-amplifier)
-        7. [LIS3DH Accelerometer](#lis3dh-accelerometer)
-        8. [MB1232 Sonar](#mb1232-sonar)
-        9. [MPU6050 Accelerometer / Gyroscope](#accelerometer-gyroscope)
-        10. [MS5803 Atmospheric Pressure / Temperature Sensor](#ms5803-atmospheric-pressure-/-temperature-sensor)
-        11. [SHT31-D Temperature and Humidity](#sht31-d-temperature-and-humidity)
-        12. [TSL2561 Luminosity Sensor](#tsl2561-luminosity-sensor)
-        13. [TSL2591 Light Sensor](#tsl2591-light-sensor)
-        14. [ZX Gesture Sensor](#zx-distance-and-gesture-sensor)
-        15. [TCA9548A Multiplexer](#tca9548a-multiplexer)   
-    2. [SDI-12 Sensors](#sdi-12-sensors)
-        1. [SDI-12 Dependencies](#sdi-12-dependencies)
-        2. [Supported SDI-12 Pins](#supported-sdi-12-pins)
-    3. [SPI Sensors](#spi-sensors)
-        1. [Adafruit Universal Thermocouple Amplifier](#adafruit-universal-thermocouple-amplifier)
-4. [Actuators](#actuators)
-    1. [SG92R Servo](#sg92r-servo)
-    2. [SM_42BYG011_25 Stepper Motor](#sm_42byg011_25-stepper-motor)
-    3. [Relay](#relay)
-    4. [Neopixel](#neopixel)
-5. [Other Hardware](#other-hardware)
-    1. [RTC](#rtc)
-    2. [MicroSD](#microsd)
-    3. [OLED Display](#oled-display)
 
-
+- [Processors](#processors)
+- [Communication Capabilities](#communication-capabilities)
+- [Data Logging](#Data logging)
+- [Sensors](#sensors)
+- [Actuators](#actuators)
+- [Other](#other)
 
 ## Processors
 
@@ -53,111 +17,81 @@
 
 **Resources**: [Adafruit M0 Documentation](https://learn.adafruit.com/adafruit-feather-m0-basic-proto/overview) | [ATSAMD21 Datasheet](https://cdn-shop.adafruit.com/product-files/2772/atmel-42181-sam-d21_datasheet.pdf)
 
-The compiler macro `__SAMD21G18A__` can be used to define code blocks specifically for the Feather M0.
-For readability, we typically use this macro to define our own, more readable preprocessor
-definition `is_M0`.  This can be done by including the following lines in your source code:
-
-``` cpp
-#ifdef __SAMD21G18A__
-    #define is_M0
-#endif
-```
-
-### Adafruit Feather 32u4
-
-**Resources**: [Adafruit 32u4 Documentation](https://learn.adafruit.com/adafruit-feather-32u4-basic-proto?view=all) | [ATMega32U4 Datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf)
-
-The compiler macro `__AVR_ATmega32U4__` can be used to define code blocks specifically for the Feather 32u4. For readability, we typically use this macro to define our own, more readable preprocessor
-definition `is_32U4`.  This can be done by including the following lines in your source code:
-
-``` cpp
-#ifdef __AVR_ATmega32U4__
-    #define is_32U4
-#endif
-```
-
-*Note – The Feather 32u4 has less support than the Feather M0 due to its limitations*
-
-## Wireless Capabilities
+## Communication Capabilities 
 
 ### WiFi
 
-**Dependencies:** [WiFi101](https://github.com/arduino-libraries/WiFi101)
+**Resources:**
 
-WiFi is supported by both the Adafruit Feather M0 and the Adafruit Feather 32u4.
+**Dependencies:** [WiFi101](https://github.com/arduino-libraries/WiFi101)
 
 **Features:**
 
-* Send and receive arbitrary length UDP packets
-* Works in Access Point mode as well as WPA-protected client mode
+- Works in Access Point mode as well as WPA-protected client mode
 
 ### LoRa
 
-**Dependencies:** [RadioHead](https://github.com/adafruit/RadioHead)
+**Resources:**
 
-LoRa wireless communication is supported by both the Adafruit Feather M0 and the
-Adafruit Feather 32u4.
+**Dependencies:** [RadioHead](https://github.com/adafruit/RadioHead)
 
 **Features:**
 
-* Send messages up to 2 km line-of-sight.
-* LoRa devices can be addressed with any value between 0 and 255.
-* Can send messages of length up to 251 bytes.
-
-**EnableInterrupt.h and RH\_RF95.h compatibility**
-
-EnableInterrupt.h and RH\_RF95.h both try to define the same interrupt vectors.
-To use both of these libraries in the same file, include the following definition
-in your source code:
-
-``` cpp
-#define EI_NOTEXTERNAL
-```
+- Send messages up to 2 km line-of-sight.
+- LoRa devices can be addressed with any value between 0 and 255.
+- Can send messages of length up to 251 bytes.
 
 ### nRF
+
+**Resources:**
 
 **Dependencies:** [RF24](https://github.com/nRF24/RF24) | [RF24Network](https://github.com/nRF24/RF24Network)
 
 The libraries for nRF support - [RF24](https://github.com/nRF24/RF24) and [RF24Network](https://github.com/nRF24/RF24Network) - need to be the optimized forks, not the defaults provided the Arduino library manager. The correct versions are provided in the [Loom dependencies](https://github.com/OPEnSLab-OSU/InternetOfAg/tree/master/Dependencies) folder.
 
-The nRF flavor of IoA is comprised with the Nordic nRF24L01+ radio tranceiver.
-nRF is supported by both the Adafruit Feather M0 and the Adafruit Feather 32u4.
+### Ethernet
 
-**Features:**
+**Resources:**
 
-* nRF devices can be addressed with any value between 0 and 5.
-* Fragmentation allows for messages of any length to be sent with some configuration.
-* Multi-hopping is supported.
+**Dependencies:**
 
-**Configuring Maximum Message Length**
+### Cellular
 
-The maximum message length can be adjusted by editing the value of `MAIN_BUFFER_SIZE`,
-a variable found in the `RF24Network_config.h` file.
+**Resources:**
+
+**Dependencies:**
+
+## Data Logging
+
+### SD Card
+
+**Resources:** [Adafruit Featherwing Product Page](https://www.adafruit.com/product/2922) | [Adafruit Breakout Product Page](https://www.adafruit.com/product/254)
+
+**Dependencies:**
+
+### DS3231 RTC
+
+**Resources:** [Adafruit Product Page](https://www.adafruit.com/product/3028)
+
+**Dependencies:**
+
+### Adalogger + PCF8523 RTC
+
+**Resources:**  [Adafruit Adalogger Featherwing Product Page](https://www.adafruit.com/product/2922)
+
+**Dependencies:**
+
+### Adafruit Feather M0 Adalogger
+
+**Resources:**
+
+**Dependencies:**
 
 ## Sensors
 
-## I2C Sensors
+### I2C Sensors
 
-The following I2C Sensors are currently supported by Project Loom:
-* AS7262 Spectral Sensor (visible)
-* AS7263 Spectral Sensor (near infrared)
-* AS7265X Spectral Sensor Triad (visible, near infrared, ultraviolet)
-* FXAS21002 Gyroscope
-* FXOS8700 Accelerometer / Magnetometer
-* HX711 Load Cell
-* LIS3DH Accelerometer
-* MB1232 Sonar
-* MPU6050 Accelerometer / Gyroscope
-* MS5803 Atmospheric Pressure / Temperature Sensor 
-* SHT31-D Temperature / Humidity
-* TSL2561 Lux Sensor
-* TSL2591Lux Sensor
-* ZX Gesture Sensor ZX Distance Sensor
-
-The system also supports the following multiplexer in order to allow the use of multiple sensors with the same address:
-* TCA9548A I2C Multiplexer
-
-
+------
 
 ### AS7262 Spectral Sensor (visible)
 
@@ -175,6 +109,7 @@ The system also supports the following multiplexer in order to allow the use of 
 - 2x Qwiic connectors
 
 ### AS7263 Spectral Sensor (near infrared)
+
 **Resources:** [SparkFun Product Page](https://www.sparkfun.com/products/14351) | [AS7263 Datasheet](https://cdn.sparkfun.com/assets/1/b/7/3/b/AS7263.pdf) | [GitHub](https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X)
 
 **Dependencies:** [SparkFun_AS726X](https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X/tree/master/Libraries/Arduino)
@@ -376,16 +311,17 @@ The system also supports the following multiplexer in order to allow the use of 
 
 **Technical Details**
 
-* Approximates Human eye Response
-* Extremely wide dynamic range 1 to 600,000,000 Counts
-* Lux Range: 188 uLux sensitivity, up to 88,000 Lux input measurements.
-* Temperature range: -30 to 80 C
-* Voltage range: 3.3-5V into onboard regulator
-* I2C 7-bit address 0x29 
+- Approximates Human eye Response
+- Extremely wide dynamic range 1 to 600,000,000 Counts
+- Lux Range: 188 uLux sensitivity, up to 88,000 Lux input measurements.
+- Temperature range: -30 to 80 C
+- Voltage range: 3.3-5V into onboard regulator
+- I2C 7-bit address 0x29 
 
 **Additional Notes**
-* Settable gain depending on light conditions
-* Settable integration time for collecting light 
+
+- Settable gain depending on light conditions
+- Settable integration time for collecting light 
 
 ### ZX Distance and Gesture Sensor
 
@@ -395,68 +331,17 @@ The system also supports the following multiplexer in order to allow the use of 
 
 **Technical Details**
 
-* 2-3.6V Supply
-* I2C 7-bit address 0x10, 0x11
-
-**Additional Notes**
-* Can only use either the gesture function or the read function but can't use both at the same time
-* Has UART capabilities
-
-### TCA9548A Multiplexer
-
-**Product Page:** [Adafruit](https://www.adafruit.com/product/2717) | [TCA9548A Datasheet](http://www.adafruit.com/datasheets/tca9548a.pdf)
-
-**Dependencies:** None
-
-**Technical Details**
-* 1.8V - 5V Supply
-* Use up to 8 multiplexer simultaneously
-* Use up to 64 I2C sensors with the same address (8 per multiplexer)
-* I2C 7-bit address 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77 
+- 2-3.6V Supply
+- I2C 7-bit address 0x10, 0x11
 
 **Additional Notes**
 
-* Address can be changed by using solder bridges on the back of the board
-* **Initial Multiplexer address (0x70) conflicts with MB1232**
+- Can only use either the gesture function or the read function but can't use both at the same time
+- Has UART capabilities
 
+### SPI Sensors
 
-
-## SDI-12 Sensors
-
-The following SDI-12 sensors are currently supported by Loom:
-* Decagon GS3
-* [Decagon 5TM Datasheet](http://www.ictinternational.com/content/uploads/2014/03/5TM-Integrators-Guide.pdf)
-
-#### SDI-12 Dependencies
-* [Enable Interrupt](https://github.com/GreyGnome/EnableInterrupt)
-* [SDI-12 Functionality](https://github.com/EnviroDIY/Arduino-SDI-12)
-
-#### Supported SDI-12 Pins
-
-The following pins are available for use with SDI-12 sensors:
-
-* **Feather M0:** 10, 11, A0, A1, A3, A4, A5
-* **Feather 32u4:** 10, 11
-
-Additional pins may be operational, but they have not been verified.
-
-**NOTE:** To use the SDI-12 library with the 32u4, the user must define their own
-pin interrupts using the Enable Interrupt library.  The following line from
-the file SDI12.h must be uncommented so that external interrupts can be defined:
-
-``` cpp
-#define SDI12_EXTERNAL_PCINT // uncomment to use your own PCINT ISRs
-```
-
-The following is an example of how the Enable Interrupt library can be used
-to define an interrupt on pin 10:
-
-``` cpp
-pinMode(10, INPUT_PULLUP);
-enableInterrupt(10, handler_function, CHANGE);
-```
-
-## SPI Sensors
+------
 
 ### MAX31856 Universal Thermocouple Amplifier
 
@@ -475,26 +360,27 @@ thermocouple attached to the amplifier.
 to read the thermocouple voltage directly.  The modified library can be found
 [here](https://github.com/OPEnSLab-OSU/InternetOfAg/blob/master/Dependencies/Adafruit_MAX31856.zip).
 
-Alternatively, the following function can be added as a public member to the Adafruit\_MAX31856
-class in the Adafruit\_MAX31856 library:
+### SDI-12 Sensors
 
-``` cpp
-float Adafruit_MAX31856::readVoltage(int gain) {
-  oneShotTemperature();
+------
 
-  int32_t temp24 = readRegister24(MAX31856_LTCBH_REG);
-  if (temp24 & 0x800000) {
-    temp24 |= 0xFF000000;
-  }
+The following SDI-12 sensors are currently supported by Loom:
 
-  temp24 >>= 5;
+- Decagon GS3
+- [Decagon 5TM Datasheet](http://www.ictinternational.com/content/uploads/2014/03/5TM-Integrators-Guide.pdf)
 
-  float tempfloat = temp24/((float)(gain * 209715.2)); //temp24 = gain * 1.6 * 2^17 * vin
+#### SDI-12 Dependencies
 
-  return tempfloat;
-}
+- [Enable Interrupt](https://github.com/GreyGnome/EnableInterrupt)
+- [SDI-12 Functionality](https://github.com/EnviroDIY/Arduino-SDI-12)
 
-```
+#### Supported SDI-12 Pins
+
+The following pins are available for use with SDI-12 sensors:
+
+- **Feather M0:** 10, 11, A0, A1, A3, A4, A5
+
+Additional pins may be operational, but they have not been verified.
 
 ## Actuators
 
@@ -559,32 +445,28 @@ The following Actuators are currently supported by Project Loom:
 
 Tri-color LEDs
 
-## Other Hardware
+## Other
 
-### RTC
+### TCA9548A Multiplexer
 
-**Precision RTC FeatherWing**
+**Product Page:** [Adafruit](https://www.adafruit.com/product/2717) | [TCA9548A Datasheet](http://www.adafruit.com/datasheets/tca9548a.pdf)
 
-[Adafruit Product Page](https://www.adafruit.com/product/3028)
+**Dependencies:** None
 
-DS3231 RTC
+**Technical Details**
 
-Supports interrupts
+- 1.8V - 5V Supply
+- Use up to 8 multiplexer simultaneously
+- Use up to 64 I2C sensors with the same address (8 per multiplexer)
+- I2C 7-bit address 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77 
 
-**AdaLogger FeatherWing**
+**Additional Notes**
 
- [Adafruit Product Page](https://www.adafruit.com/product/2922)
-
-PCF8523
-
-Library does not support interrupts
-
-### MicroSD
-
-- [AdaLogger FeatherWing](https://www.adafruit.com/product/2922)
-- [Breakout](https://www.adafruit.com/product/254)
+- Address can be changed by using solder bridges on the back of the board
+- **Initial Multiplexer address (0x70) conflicts with MB1232**
 
 ### OLED Display
 
-- [FeatherWing OLED](https://www.adafruit.com/product/2900)
-- [Breakout](https://www.adafruit.com/product/931)
+**Resources:** [Adafruit Product Page](https://www.adafruit.com/product/2900) | [Adafruit Breakout Product Page](https://www.adafruit.com/product/931)
+
+**Dependencies:**
