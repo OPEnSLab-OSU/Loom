@@ -16,8 +16,6 @@
   <a href=#quick-start>Quick Start</a>
 </p>
 
-------
-
 ##Table of Contents
 
 - [Introduction](#introduction)
@@ -80,7 +78,7 @@ Loom aims to follow [Semantic Versioning](https://semver.org)
 
 ## Resources
 
-- [Project Website](http://www.open-sensing.org/project-loom) page for Loom on 
+- [Project Page](http://www.open-sensing.org/project-loom) for Loom on OPEnS lab website
 - [GitHub Organization](https://github.com/OPEnSLab-OSU) for all OPEnS Lab projects
 - [Loomify](https://github.com/OPEnSLab-OSU/Loomify) An npm package to drive the backend Loom Tag Format parsing and Loom Library github interactions.
 - [Loom Configurator](https://github.com/OPEnSLab-OSU/Loom_Configurator) A WebApp designed for designing and exporting loom configurations
