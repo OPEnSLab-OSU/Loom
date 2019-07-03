@@ -207,8 +207,6 @@ protected:
 
 public:
 
-	const static char* enum_device_type_string(DeviceType t);
-
 	/// Loom Manager constructor.
 	///
 	/// \param[in]	device_name					String | <"Default"> | null | Manager name
@@ -228,7 +226,7 @@ public:
 			Verbosity		package_verbosity	= Verbosity::V_LOW
 		);
 
-	// --- DESTRUCTOR ---
+	//// Destructor
 	virtual ~LoomManager();
 
 	void		parse_config(const char* json_config);
@@ -271,7 +269,8 @@ public:
 
 	bool		publish(const JsonObject json);
 
-	// Iterate over array of commands
+	/// Iterate over array of commands
+	/// \param[in] json		Object containing commands
 	void		cmd_route(JsonObject json);
 
 
@@ -382,6 +381,9 @@ public:
 	void		set_package_verbosity(Verbosity v);
 
 
+	const static char* enum_device_type_string(DeviceType t);
+
+
 
 
 	// Module Access methods
@@ -452,8 +454,11 @@ private:
 	void		measure_aux(LoomModule** modules, uint len);
 	void		package_aux(JsonObject json, LoomModule** modules, uint len);
 	void		package_aux(JsonObject json, LoomModule* module);
+	/// Have each module check against provided command
 	bool		cmd_route_aux(JsonObject json, LoomModule** modules, uint len);
+	/// Have module check against provided command	
 	bool		cmd_route_aux(JsonObject json, LoomModule* module);
+
 	void		second_stage_ctor_aux(LoomModule** modules, uint len);
 
 

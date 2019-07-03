@@ -20,7 +20,7 @@ public:
 		const uint	internet_index
 	);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~LoomPublishPlat() = default;
 
 	/// Grab the internet platform specified by the ctor parameters

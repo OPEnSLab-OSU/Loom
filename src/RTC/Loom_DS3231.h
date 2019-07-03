@@ -32,7 +32,7 @@ public:
 
 	Loom_DS3231(JsonVariant p);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_DS3231();
 
 	// Inherited (overriding) Methods

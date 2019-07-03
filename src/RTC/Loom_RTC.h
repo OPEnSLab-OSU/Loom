@@ -77,7 +77,7 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+	// Constructor
 	LoomRTC(	
 			const char*		module_name			= "RTC",
  
@@ -88,7 +88,7 @@ public:
 			byte			interrupt_pin		= 6
 		);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~LoomRTC();
 
 	static char*	enum_timezone_string(TimeZone t);

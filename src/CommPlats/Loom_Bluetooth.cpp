@@ -32,7 +32,7 @@ Loom_Bluetooth::Loom_Bluetooth(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_Bluetooth::~Loom_Bluetooth() 
 {
 }

@@ -4,10 +4,14 @@
 #include "Loom_Macros.h"
 
 
-// 3 Options
-//   1: every element on different line
-//   2: every element on same line
-//   3: 5 elements per line
+/// Print an array.
+/// 3 Options
+///   1: every element on different line
+///   2: every element on same line
+///   3: 5 elements per line
+/// \param[in]	data	Array to print
+/// \param[in]	len		Length of array
+/// \param[in]	format	Display formatting
 template<typename T> 
 void print_array(T data [], int len, int format=1)
 {
@@ -21,37 +25,22 @@ void print_array(T data [], int len, int format=1)
 	#endif
 }
 
+/// @private (hide from Doxygen)
 void print_array(String data [], int len, int format=1);
 
-
-// // Replaces substrings with other substrings in a string
-// void str_replace(char* target, const char* needle, const char* replacement);
-
-// // Finds nth instance of a character in a string
-// const char* nth_strchr(const char* s, char c, int n);
-
-// --- REPLACE CHARACTER ---
-//
-// Given a string, replace all instances of 'orig' char with 'rep' char
-// Used primarily for replacing '~'s sent by Max
-// as it cannot send strings with spaces
-//
-// @param str   Pointer to string to alter
-// @param orig  Character to replace
-// @param rep   Replacement character
-// 
-// void replace_char(char* str, const char orig, const char rep); 
-
-
-
-
-// Used to call lambda function with parameters set if search string matches string associated with function
-
+/// @private (hide from Doxygen)
 bool functionRoute(const char* name);
 
+/// @private (hide from Doxygen)
 template<typename Arg1>
 bool functionRoute(const char* name, const Arg1 arg1) { return false; } 
 
+/// Used to call lambda function with parameters set if search string matches string associated with function.
+/// Recursively get next pair of function-name, function-pointer from variadic list
+/// \param[in]	name	Name of function to look for
+/// \param[in]	fName	First function name to compare against
+/// \param[in]	f		Function pointer
+/// \param[in]	args	The rest of the list of names and pointers
 template<typename FName, typename FType, typename... Args>
 bool functionRoute(const char* name, const FName fName, const FType f, const Args... args)
 {

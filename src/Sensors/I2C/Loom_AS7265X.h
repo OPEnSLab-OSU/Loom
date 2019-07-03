@@ -56,7 +56,7 @@ public:
 
 	Loom_AS7265X(JsonVariant p);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_AS7265X();
 
 	// Inherited (Overriding) Methods

@@ -38,7 +38,7 @@ public:
 
 	Loom_Neopixel(JsonVariant p);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_Neopixel();
 
 	// Inherited Methods

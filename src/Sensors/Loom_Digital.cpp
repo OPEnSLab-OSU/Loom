@@ -59,7 +59,7 @@ Loom_Digital::Loom_Digital(JsonVariant p)
 
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_Digital::~Loom_Digital()
 {
 

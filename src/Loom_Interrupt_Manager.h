@@ -2,7 +2,6 @@
 
 #include "Loom_Module.h"
 
-
 #include <OPEnS_RTC.h>
 #include <AsyncDelay.h>
 
@@ -13,7 +12,6 @@
 
 /// Number of interrupts
 #define InteruptRange 16
-
 /// Maximum number of timers
 #define MaxTimerCount 4
 /// Maximum numbr of stopwatches
@@ -89,7 +87,7 @@ protected:
 	DateTime		last_alarm_time;
 
 
-// millis timers
+	// millis timers
 	AsyncDelay		timers[MaxTimerCount];
 	TimerDetails	timer_settings[MaxTimerCount];
 
@@ -100,11 +98,10 @@ protected:
 	// interrupt_triggered for timers, also support immediate and delayed
 public:
 
-
 	/// Interrupt Manager module constructor.
 	///
 	/// \param[in]	module_name		String | <"Interrupt-Manager"> | null | Interrupt Manager module name
-	/// \param[in]	RTC_Inst			Set(Int) | <0> | {0("Null")} | OLED module name
+	/// \param[in]	RTC_Inst		Set(Int) | <0> | {0("Null")} | OLED module name
 	Loom_Interrupt_Manager(
 			const char*		module_name		= "Interrupt_Manager",
 			LoomRTC*		RTC_Inst		= nullptr
@@ -113,7 +110,7 @@ public:
 	Loom_Interrupt_Manager(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_Interrupt_Manager();
 
 

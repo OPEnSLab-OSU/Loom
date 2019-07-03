@@ -70,7 +70,7 @@ Loom_LoRa::Loom_LoRa(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_LoRa::~Loom_LoRa() 
 {
 	delete driver;

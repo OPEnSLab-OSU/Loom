@@ -32,7 +32,7 @@ public:
 	Loom_DecagonGS3(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_DecagonGS3();
 
 	// Inherited Methods

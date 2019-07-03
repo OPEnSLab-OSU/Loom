@@ -36,7 +36,7 @@ public:
 	Loom_FXOS8700(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_FXOS8700();
 
 	// Inherited (Overriding) Methods

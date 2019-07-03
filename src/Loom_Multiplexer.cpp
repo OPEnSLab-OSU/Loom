@@ -126,13 +126,11 @@ Loom_Multiplexer::Loom_Multiplexer(
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR ---
 Loom_Multiplexer::Loom_Multiplexer(JsonVariant p)
 	: Loom_Multiplexer(p[0], p[1], p[2], p[3], p[4])
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
 Loom_Multiplexer::~Loom_Multiplexer() 
 {
 	// Free any sensors
@@ -144,7 +142,6 @@ Loom_Multiplexer::~Loom_Multiplexer()
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- PUBLIC METHODS ---
 void Loom_Multiplexer::print_config()
 {
 	LoomModule::print_config();

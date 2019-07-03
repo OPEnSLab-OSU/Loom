@@ -31,7 +31,7 @@ public:
 
 	Loom_GoogleSheets( JsonVariant p );
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	~Loom_GoogleSheets() = default;
 
 	void print_config() override;

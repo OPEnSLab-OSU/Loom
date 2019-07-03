@@ -36,7 +36,7 @@ Loom_Servo::Loom_Servo(JsonVariant p)
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_Servo::~Loom_Servo() 
 {
 	delete positions;

@@ -1,4 +1,3 @@
-
 #include "Loom_Module_Factory.h"
 
 
@@ -66,21 +65,17 @@ const  NameModulePair Factory::LookupTable[] =
 };
 
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 Factory::Factory() {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////
 Factory::~Factory() {
 
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////
 LoomModule* Factory::Create(JsonVariant module)
 {
 	const char* name = module["name"];
@@ -103,7 +98,7 @@ LoomModule* Factory::Create(JsonVariant module)
 	return nullptr;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void Factory::CreateAndSort(
 	JsonVariant module, 
 	Loom_Interrupt_Manager*& interrupt_manager, 
@@ -141,7 +136,7 @@ void Factory::CreateAndSort(
 	}
 }
 
-
+/////////////////////////////////////////////////////////////////////
 ModuleSortType Factory::get_sort_type(JsonVariant module) {
 	const char* name = module["name"];
 

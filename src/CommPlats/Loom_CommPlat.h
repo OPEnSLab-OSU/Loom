@@ -29,13 +29,13 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+	// Constructor
 	LoomCommPlat(
 			const char*		module_name,
 			uint			max_message_len
 		);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~LoomCommPlat();
 
 

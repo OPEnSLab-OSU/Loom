@@ -21,14 +21,14 @@
 // 	// --- PUBLIC MEMBERS ---
 
 
-// 	// --- CONSTRUCTOR ---
+// 	// Constructor
 // 	Loom_MPU6050(	byte i2c_address 			= 0x44,
 					
 // 					char* module_name 			= "MPU6050",
 // 					char* sensor_description 	= "Temperature/Humidty" 
 // 				);
 
-// 	// --- DESTRUCTOR ---
+// 	/// Destructor
 // 	virtual ~Loom_MPU6050();
 
 // 	void print_measurements();

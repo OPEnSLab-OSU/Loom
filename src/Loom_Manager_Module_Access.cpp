@@ -31,18 +31,14 @@ LoomModule*	LoomManager::find_module(ModuleType type, int idx, LoomModule** modu
 
 // --- General ---
 
-// maybe this not templatized
 Loom_Interrupt_Manager& LoomManager::InterruptManager(int idx) 
 {
-	// LoomModule* tmp = find_module(ModuleType::Interrupt_Manager, idx, (LoomModule**)interrupt_manager, 1);
 	LoomModule* tmp = interrupt_manager;
 	return (*(Loom_Interrupt_Manager*)( (tmp) ? tmp : &global_stub ));
 }
 
-// maybe this not templatized
 Loom_Sleep_Manager& LoomManager::SleepManager(int idx) 
 {
-	// LoomModule* tmp = find_module(ModuleType::Sleep_Manager, idx, (LoomModule**)sleep_manager, 1);
 	LoomModule* tmp = sleep_manager;
 	return (*(Loom_Sleep_Manager*)( (tmp) ? tmp : &global_stub ));
 }

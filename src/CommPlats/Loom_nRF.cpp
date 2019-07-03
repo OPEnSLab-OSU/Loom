@@ -105,7 +105,7 @@ Loom_nRF::Loom_nRF(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_nRF::~Loom_nRF() 
 {
 	delete network;

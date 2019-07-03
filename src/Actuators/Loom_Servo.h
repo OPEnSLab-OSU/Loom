@@ -41,7 +41,7 @@ public:
 
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_Servo();
 
 	// Inherited (Overriding) Methods

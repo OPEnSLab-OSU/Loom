@@ -14,7 +14,7 @@ LoomI2CSensor::LoomI2CSensor(
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 LoomI2CSensor::~LoomI2CSensor() 
 {
 

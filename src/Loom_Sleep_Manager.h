@@ -57,15 +57,16 @@ public:
 			byte			power_off_pin		= A5
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	JsonVariant		The array of constuctor args to expanc
 	Loom_Sleep_Manager(JsonVariant p);
 
-	/// Convert enum of sleep mode to a string
-	const static char* enum_sleep_mode_string(SleepMode m);
-
-
-	// --- DESTRUCTOR ---
+	//// Destructor
 	virtual ~Loom_Sleep_Manager();
 
+	/// Set pointer to interrupt manager
+	/// \param[in]	IM	Pointer to an interrupt manager	
 	void 		link_interrupt_manager(Loom_Interrupt_Manager* IM);
 
 
@@ -76,32 +77,34 @@ public:
 	void 		package(JsonObject json) {}
 	bool		cmd_route(JsonObject) {}
 
-
 	/// Put into low power state.
 	/// On wake, program will continue from where it went to sleep
+	/// \return Whether or not sleep was successful
 	bool		sleep();
+
 	/// Turn board off.
 	/// Program will restart from setup on wake
 	void		powerDown();
 
-
-
-
 	/// Set the sleep mode to use
 	/// \param[in]	mode	The SleepMode to set to
 	void		set_sleep_mode(SleepMode mode);
+
 	/// Get the current sleep mode
 	/// \return		The current sleep mode
 	SleepMode	get_sleep_mode();
+	
+	/// Convert enum of sleep mode to a string
+	/// \return String of sleep mode
+	const static char* enum_sleep_mode_string(SleepMode m);
 
-	void		pre_sleep();
-	void		post_sleep();
 private:
 
-	// bool		sleepy_dog_sleep(TimeSpan duration);
-	// bool sleepy_dog_sleep(uint days, uint hours, uint minutes, uint seconds);
+	/// Handles pre-sleep operations
+	void		pre_sleep();
 
-
+	/// Handles post-sleep operations
+	void		post_sleep();
 };
 
 

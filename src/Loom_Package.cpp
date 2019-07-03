@@ -1,15 +1,16 @@
 #include "Loom_Package.h"
 
-// termination version
-// void func() {} 
-
-// termination version
+/////////////////////////////////////////////////////////////////////
+/// @private (hide from Doxygen)
+/// Termination of recursive package_json
 void package_json(JsonObject json, const char* module_name) {} 
 
-// termination version
+/////////////////////////////////////////////////////////////////////
+/// @private (hide from Doxygen)
+/// Termination of recursive package_json
 void package_json_aux(JsonObject data) {} 
 
-
+/////////////////////////////////////////////////////////////////////
 void package_json_timestamp(JsonObject json, const char* date, const char* time)
 {
 	JsonObject timestamp = json.createNestedObject("timestamp");
@@ -17,7 +18,7 @@ void package_json_timestamp(JsonObject json, const char* date, const char* time)
 	timestamp["Time"] = time;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 void flatten_json_data_object(JsonObject json)
 {
 	// Get / Create array for module data blocks
@@ -35,8 +36,7 @@ void flatten_json_data_object(JsonObject json)
 	}
 }
 
-
-
+/////////////////////////////////////////////////////////////////////
 void flatten_json_data_array(JsonObject json)
 {
 	// Get / Create array for module data blocks

@@ -97,7 +97,6 @@ template<class T> LoomModule* Construct(JsonVariant p) {
 /// Function pointer to 'template<class T> LoomModule* Construct(JsonVariant p)'
 using FactoryPtr = LoomModule* (*)(JsonVariant p);
 
-
 /// Struct to contain the elements of factory lookup table
 typedef struct {
 	const char*		name;		// Module type to compare against
@@ -112,8 +111,10 @@ class Factory
 {
 
 public:
-
+	
+	/// Constructor
 	Factory();
+	//// Destructor
 	~Factory();
 
 	/// Create a LoomModule accoding to Json parameters

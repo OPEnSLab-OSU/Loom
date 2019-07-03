@@ -34,7 +34,7 @@ public:
 
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
  ~Loom_Relay();
 
 	// Inherited (Overriding) Methods

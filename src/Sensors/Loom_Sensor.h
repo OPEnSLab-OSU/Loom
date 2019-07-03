@@ -24,7 +24,7 @@ public:
 		  );
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~LoomSensor();
 
 	// Inherited Methods

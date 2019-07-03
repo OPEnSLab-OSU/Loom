@@ -12,7 +12,7 @@ LoomActuator::LoomActuator(
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 LoomActuator::~LoomActuator() 
 {
 

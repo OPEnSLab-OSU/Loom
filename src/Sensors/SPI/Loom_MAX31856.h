@@ -50,7 +50,7 @@ public:
 
 	Loom_MAX31856(JsonVariant p);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_MAX31856();
 
 	// Inherited Methods

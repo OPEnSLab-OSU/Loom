@@ -18,7 +18,7 @@ If you haven't already, set up Arduino following our [IDE Setup Guide](https://w
 Get the Loom code from here on [GitHub](https://github.com/OPEnSLab-OSU/Loom) (the large green button)
 
 - If you intend to contribute to Loom you will probably want to clone the library
-- Otherwiseyou can just download the zip folder
+- Otherwises you can just download the zip folder
   - Use the Arduino IDE > Sketch > Include Library > Add .ZIP Library… to add the downloaded library
 
 ## Run an Example
@@ -45,4 +45,4 @@ Start by compiling on of the Loom examples (File > Examples > Loom >) to ensure 
 
 ## Contribute to Loom
 
-Is there a feature you would like to added to Loom? Follow our [guide to contribute to Loom](https://github.com/OPEnSLab-OSU/Loom/Readme/Contributing)
+Is there a feature you would like to added to Loom? Follow our [guide to contribute to Loom](https://github.com/OPEnSLab-OSU/Loom/Readme_Contributing.md)

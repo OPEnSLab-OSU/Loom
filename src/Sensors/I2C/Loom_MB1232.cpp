@@ -38,7 +38,7 @@ Loom_MB1232::Loom_MB1232(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_MB1232::~Loom_MB1232() 
 {
 

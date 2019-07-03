@@ -45,7 +45,7 @@ Loom_WiFi_I::Loom_WiFi_I(
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_WiFi_I::~Loom_WiFi_I()
 {
 	delete server;

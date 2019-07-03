@@ -40,7 +40,7 @@ public:
 	Loom_MS5803(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_MS5803();
 
 	// Inherited (Overriding) Methods

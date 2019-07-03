@@ -46,7 +46,7 @@ public:
 	Loom_TSL2561(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_TSL2561();
 
 	// Inherited (Overriding) Methods

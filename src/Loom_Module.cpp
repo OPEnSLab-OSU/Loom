@@ -1,4 +1,3 @@
-
 #include "Loom_Module.h"
 
 /////////////////////////////////////////////////////////////////////
@@ -12,7 +11,6 @@ char* LoomModule::enum_verbosity_string(Verbosity v)
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR ---
 LoomModule::LoomModule() 
 {
 	snprintf(this->module_name, 20, "%s", "Unknown"); 
@@ -39,8 +37,6 @@ ModuleType LoomModule::get_module_type()
 }
 
 /////////////////////////////////////////////////////////////////////
-
-// --- PUBLIC METHODS ---
 LoomManager* LoomModule::get_device_manager()
 {
 	return device_manager;
@@ -66,7 +62,6 @@ void LoomModule::print_module_label()
 }
 
 /////////////////////////////////////////////////////////////////////
-// Display configuration settings
 void LoomModule::print_config()
 {
 	print_module_label();
@@ -78,14 +73,12 @@ void LoomModule::print_config()
 }
 
 /////////////////////////////////////////////////////////////////////
-// Display current state
 void LoomModule::print_state() 
 {
 
 }
 
 /////////////////////////////////////////////////////////////////////
-// Copy module name into buffer
 void LoomModule::get_module_name(char* buf) 
 { 
 	strcpy(buf, module_name); 

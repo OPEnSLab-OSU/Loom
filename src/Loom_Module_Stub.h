@@ -27,6 +27,8 @@ public:
 	Loom_Module_Stub() {};
 	~Loom_Module_Stub() {};
 	
+	/// \cond DO_NOT_DOCUMENT
+
 	// Loom Module
 	ModuleType		get_module_type()
 	{ return ModuleType::Unknown; }
@@ -373,6 +375,8 @@ public:
 	// Stepper
 	void move_steps(int motor, int steps, int speed, bool clockwise)
 	{ LPrintln(error_msg); }
+
+	/// \endcond
 
 };
 

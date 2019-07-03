@@ -36,7 +36,7 @@ Loom_AS7263::Loom_AS7263(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_AS7263::~Loom_AS7263() 
 {
 

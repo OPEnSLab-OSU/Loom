@@ -26,7 +26,7 @@ public:
 	Loom_Decagon5TM(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_Decagon5TM();
 
 	// Inherited Methods

@@ -34,7 +34,7 @@ public:
 	Loom_LIS3DH(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_LIS3DH();
 
 	// Inherited (Overriding) Methods

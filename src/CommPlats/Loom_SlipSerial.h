@@ -40,7 +40,7 @@ public:
 
 	Loom_SlipSerial(JsonVariant p);
 
-	/// Destructor
+	//// Destructor
 	~Loom_SlipSerial();
 
 	// Inherited (Overriding) Methods

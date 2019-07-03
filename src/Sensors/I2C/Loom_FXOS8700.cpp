@@ -28,7 +28,7 @@ Loom_FXOS8700::Loom_FXOS8700(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_FXOS8700::~Loom_FXOS8700() 
 {
 	delete inst_FXOS8700;

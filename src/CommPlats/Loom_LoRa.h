@@ -71,11 +71,11 @@ public:
 
 	Loom_LoRa(JsonVariant p);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_LoRa();
 
 
-	// --- PUBLIC METHODS ---
+
 
 	void		print_config() override;
 

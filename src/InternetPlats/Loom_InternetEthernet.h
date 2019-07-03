@@ -26,7 +26,7 @@ protected:
 	
 public:
 
-	// --- CONSTRUCTOR ---
+	// Constructor
 	Loom_Ethernet_I(	const char* 			module_name		= "Ethernet",
 						const JsonArrayConst	mac				= JsonArray(),
 						const JsonArrayConst 	ip				= JsonArray()
@@ -34,7 +34,7 @@ public:
 
 	Loom_Ethernet_I( JsonVariant p );
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	~Loom_Ethernet_I() = default;
 
 	void print_config() override;

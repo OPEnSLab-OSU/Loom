@@ -1,7 +1,6 @@
 #include "Loom_NTP_Sync.h"
 
 /////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR ---
 LoomNTPSync::LoomNTPSync(	
 		const char*			module_name,
         const uint          internet_module_index,
@@ -18,7 +17,6 @@ LoomNTPSync::LoomNTPSync(
     }
 
 /////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR ---
 LoomNTPSync::LoomNTPSync(JsonVariant p)
 	: LoomNTPSync( EXPAND_ARRAY(p, 2) ) {}
 

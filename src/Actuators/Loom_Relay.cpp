@@ -33,7 +33,7 @@ Loom_Relay::Loom_Relay(JsonVariant p)
 
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_Relay::~Loom_Relay() 
 {
 

@@ -106,7 +106,7 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_Interrupt_Manager::~Loom_Interrupt_Manager()
 {
 

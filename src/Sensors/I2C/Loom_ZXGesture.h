@@ -52,7 +52,7 @@ public:
 	Loom_ZXGesture(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_ZXGesture();
 
 	// Inherited (Overriding) Methods

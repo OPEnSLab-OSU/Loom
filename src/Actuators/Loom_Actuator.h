@@ -11,12 +11,12 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+	// Constructor
 	LoomActuator( 
 			const char*		module_name 
 		);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~LoomActuator();
 
 	// Inherited Methods

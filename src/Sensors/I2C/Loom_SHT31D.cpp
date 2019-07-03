@@ -25,7 +25,7 @@ Loom_SHT31D::Loom_SHT31D(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_SHT31D::~Loom_SHT31D() 
 {
 

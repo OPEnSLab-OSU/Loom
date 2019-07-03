@@ -43,7 +43,7 @@ public:
 
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_Stepper();
 
 	// Inherited (Overriding) Methods

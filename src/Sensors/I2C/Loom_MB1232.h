@@ -28,7 +28,7 @@ public:
 	Loom_MB1232(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_MB1232();
 
 	// Inherited (Overriding) Methods

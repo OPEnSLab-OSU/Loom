@@ -16,8 +16,6 @@
 #include "PublishPlats/Loom_PublishPlat.h"
 
 
-
-
 /////////////////////////////////////////////////////////////////////
 const char* LoomManager::enum_device_type_string(DeviceType t)
 {
@@ -30,8 +28,6 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 }
 
 /////////////////////////////////////////////////////////////////////
-
-// --- CONSTRUCTOR ---
 LoomManager::LoomManager( 
 		const char*		device_name, 
 		const char*		family, 
@@ -56,14 +52,12 @@ LoomManager::LoomManager(
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
 LoomManager::~LoomManager() 
 {
 	// Impelement this
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- PUBLIC METHODS ---
 void LoomManager::print_device_label()
 {
 	LPrint("[", device_name, "] ");
@@ -275,8 +269,6 @@ void LoomManager::list_modules()
 /////////////////////////////////////////////////////////////////////
 void LoomManager::set_device_name(char* device_name)
 {
-	// this->device_name = device_name;
-	// strcpy(this->device_name, device_name);
 	snprintf(this->device_name, 20, "%s", device_name);
 }
 
@@ -419,28 +411,14 @@ void LoomManager::package(JsonObject json)
 /////////////////////////////////////////////////////////////////////
 JsonObject LoomManager::package()
 {
-	// LPrintln("\nDOC MemoryUsage before clear: ", doc.memoryUsage());
 	doc.clear();
-	// LPrintln("\nDOC MemoryUsage after clear: ", doc.memoryUsage());
-
-// This works
 	doc["type"] = "data";
 	JsonObject json = doc.as<JsonObject>();
-
-	// LPrintln("In JsonObject LoomManager::package()");
-	// serializeJsonPretty(json, Serial);
-// Test 
-	// JsonObject json = doc.to<JsonObject>();
-
 	package(json);
-	// LPrintln("In JsonObject LoomManager::package()");
-	// serializeJsonPretty(json, Serial);
-	// LPrintln("\nSIZE: ", json.memoryUsage());
-
 	return json;
 }
 
-
+/////////////////////////////////////////////////////////////////////
 JsonObject LoomManager::internalJson(bool clear)
 {
 	if (clear) {
@@ -471,8 +449,6 @@ bool LoomManager::publish(const JsonObject json)
 }
 
 /////////////////////////////////////////////////////////////////////
-
-// Have each module check against provided command
 bool LoomManager::cmd_route_aux(JsonObject json, LoomModule** modules, uint len)
 {
 	for (int i = 0; i < len; i++) {
@@ -484,8 +460,6 @@ bool LoomManager::cmd_route_aux(JsonObject json, LoomModule** modules, uint len)
 }
 
 /////////////////////////////////////////////////////////////////////
-
-// Have module check against provided command
 bool LoomManager::cmd_route_aux(JsonObject json, LoomModule* module)
 {
 	if ( (module != nullptr) && ( module->get_active() ) ){
@@ -495,8 +469,6 @@ bool LoomManager::cmd_route_aux(JsonObject json, LoomModule* module)
 }
 
 /////////////////////////////////////////////////////////////////////
-
-// Iterate over array of commands
 void LoomManager::cmd_route(JsonObject json)
 {
 	// LPrintln("Command object:");

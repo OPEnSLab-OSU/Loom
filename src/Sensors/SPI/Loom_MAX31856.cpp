@@ -36,7 +36,7 @@ Loom_MAX31856::Loom_MAX31856(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_MAX31856::~Loom_MAX31856() 
 {
 	delete inst_max;

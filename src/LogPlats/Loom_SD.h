@@ -74,7 +74,7 @@ public:
 	Loom_SD(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_SD();
 
 

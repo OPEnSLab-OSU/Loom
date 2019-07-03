@@ -71,7 +71,7 @@ public:
 	Loom_nRF(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_nRF();
 
 

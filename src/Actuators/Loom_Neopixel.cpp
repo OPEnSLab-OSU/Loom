@@ -51,7 +51,7 @@ Loom_Neopixel::Loom_Neopixel(JsonVariant p)
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_Neopixel::~Loom_Neopixel() 
 {
 	for (int i = 0; i < 3; i++) {

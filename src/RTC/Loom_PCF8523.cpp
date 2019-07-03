@@ -34,7 +34,7 @@ Loom_PCF8523::Loom_PCF8523(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_PCF8523::~Loom_PCF8523() 
 {
 	delete rtc_inst;

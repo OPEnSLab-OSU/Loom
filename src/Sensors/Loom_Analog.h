@@ -103,7 +103,7 @@ public:
 
 	Loom_Analog(JsonVariant p);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_Analog();
 
 	// Inherited Methods

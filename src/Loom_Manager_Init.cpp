@@ -26,7 +26,7 @@ void LoomManager::parse_config(const char* json_config)
 		LPrintln("= = = = = Parse Config = = = = =");
 	}
 
-// Might need to be even larger
+	// Might need to be even larger
 	DynamicJsonDocument doc(2048);
 	DeserializationError error = deserializeJson(doc, json_config);
 
@@ -95,7 +95,6 @@ void LoomManager::parse_config(const char* json_config)
 		LPrintln();
 	}
 
-
 	// Call module factory
 	for ( JsonVariant module : doc["components"].as<JsonArray>()) {
 		
@@ -161,8 +160,8 @@ void LoomManager::parse_config(const char* json_config)
 	// Empty
 	doc.clear();
 
-	/// call second stage construction
-	/// other modules must go last, as they are most likely to do weird things 
+	// call second stage construction
+	// other modules must go last, as they are most likely to do weird things 
 	second_stage_ctor_aux( (LoomModule**)sensor_modules   , sensor_count       ); 
 	second_stage_ctor_aux( (LoomModule**)actuator_modules , actuator_count     ); 
 	second_stage_ctor_aux( (LoomModule**)comm_modules     , comm_count         ); 

@@ -29,10 +29,10 @@ public:
 	LoomNTPSync(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor ---
 	~LoomNTPSync() = default;
 
-	// --- PUBLIC METHODS ---
+
 
 	/// Sync the RTC using NTP from the internet platform specified
 	void        second_stage_ctor() override;

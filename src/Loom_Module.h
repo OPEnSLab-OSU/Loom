@@ -47,7 +47,7 @@ public:
 	// but can be protected if method loads the data from the FlashStorage struct
 
 
-	// --- CONSTRUCTOR ---
+	// Constructor
 	LoomModule();
 
 	LoomModule( const char* module_name );// : LoomModule();
@@ -55,11 +55,11 @@ public:
 	LoomModule(JsonVariant settings);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~LoomModule() = default;
 
 
-	// --- PUBLIC METHODS ---
+
 
 
 	ModuleType		get_module_type();

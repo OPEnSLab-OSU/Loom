@@ -15,13 +15,13 @@ protected:
 
 public:
 
-	// --- CONSTRUCTOR ---
+	// Constructor
 	LoomI2CSensor( 	
 			const char*		module_name, 
 			byte			i2c_address 
 		);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~LoomI2CSensor();
 
 	// Inherited Methods

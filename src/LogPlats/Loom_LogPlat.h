@@ -33,7 +33,7 @@ public:
 	static char* enum_log_plat_string(LogPlatform p);
 
 
-	// --- CONSTRUCTOR ---
+	// Constructor
 	LoomLogPlat(	
 			const char*		module_name,
 
@@ -42,11 +42,11 @@ public:
 	   );
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~LoomLogPlat();
 
 
-	// --- PUBLIC METHODS ---
+
 
 	// Inherited Methods
 	virtual void	print_config();

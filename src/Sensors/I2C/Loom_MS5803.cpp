@@ -27,7 +27,7 @@ Loom_MS5803::Loom_MS5803(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_MS5803::~Loom_MS5803() 
 {
 	delete inst_MS5803;

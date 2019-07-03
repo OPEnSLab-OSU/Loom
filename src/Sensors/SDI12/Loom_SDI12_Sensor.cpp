@@ -14,7 +14,7 @@ LoomSDI12Sensor::LoomSDI12Sensor(
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 LoomSDI12Sensor::~LoomSDI12Sensor() 
 {
 	

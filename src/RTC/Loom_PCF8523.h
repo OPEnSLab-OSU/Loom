@@ -33,7 +33,7 @@ public:
 	Loom_PCF8523(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_PCF8523();
 
 	// Inherited (overriding) Methods

@@ -121,7 +121,7 @@ Loom_Analog::Loom_Analog(JsonVariant p)
 
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_Analog::~Loom_Analog() 
 {
 	LPrintln("DESTRUCTOR");

@@ -54,7 +54,7 @@ Loom_TSL2591::Loom_TSL2591(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_TSL2591::~Loom_TSL2591() 
 {
 

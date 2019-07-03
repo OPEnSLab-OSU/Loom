@@ -36,7 +36,7 @@ Loom_DS3231::Loom_DS3231(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_DS3231::~Loom_DS3231()
 {
 	delete rtc_inst;

@@ -35,7 +35,7 @@ public:
 	Loom_SHT31D(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_SHT31D();
 
 	// Inherited (Overriding) Methods

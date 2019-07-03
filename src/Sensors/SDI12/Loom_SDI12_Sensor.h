@@ -18,7 +18,7 @@ public:
 		);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~LoomSDI12Sensor();
 
 	// Inherited Methods

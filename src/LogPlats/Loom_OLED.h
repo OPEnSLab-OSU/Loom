@@ -89,7 +89,7 @@ public:
 	Loom_OLED(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_OLED();
 
 

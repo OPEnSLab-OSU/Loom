@@ -19,7 +19,7 @@ public:
 	/// \param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
 	LoomInternetPlat( const char* module_name );
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~LoomInternetPlat() = default;
 
 	virtual void connect() = 0;

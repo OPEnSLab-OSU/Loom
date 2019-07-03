@@ -78,7 +78,7 @@ public:
 	Loom_Multiplexer(JsonVariant p);
 
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_Multiplexer();
 
 	// General
@@ -129,7 +129,7 @@ private:
 	/// Compares I2C address to known sensors and generates corresponding sensor instance
 	/// \param[in]	i2c_address		The I2C address to match to sensor class
 	/// \return		Pointer to the generated I2C sensor object, Null if no match for that address
-	LoomI2CSensor* generate_sensor_object(byte i2c_address);
+	LoomI2CSensor*	generate_sensor_object(byte i2c_address);
 
 	/// Determine the I2C address of the sensor (if any) on port.
 	/// \param[in]	port	The port to get sensor address of

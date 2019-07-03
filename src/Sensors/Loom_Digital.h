@@ -58,7 +58,7 @@ public:
 
 	Loom_Digital(JsonVariant p);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	~Loom_Digital();
 
 	// Inherited Methods

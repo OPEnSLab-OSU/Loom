@@ -51,7 +51,7 @@ Loom_ZXGesture::Loom_ZXGesture(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_ZXGesture::~Loom_ZXGesture() 
 {
 	delete inst_ZX;

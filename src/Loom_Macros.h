@@ -1,15 +1,12 @@
 #pragma once
 
-// #include "Arduino.h"
-
 // If LOOM_DEBUG was never specified elsewhere, default to enabled
 #ifndef LOOM_DEBUG
 	#define LOOM_DEBUG 1
 #endif
 
 
-
-
+/// \cond DO_NOT_DOCUMENT
 #define EXPAND_ARRAY1(x) x[0]
 #define EXPAND_ARRAY2(x)  EXPAND_ARRAY1(x),  x[1]
 #define EXPAND_ARRAY3(x)  EXPAND_ARRAY2(x),  x[2]
@@ -23,11 +20,14 @@
 #define EXPAND_ARRAY11(x) EXPAND_ARRAY10(x), x[10]
 #define EXPAND_ARRAY12(x) EXPAND_ARRAY11(x), x[11]
 #define EXPAND_ARRAY13(x) EXPAND_ARRAY12(x), x[12]
+/// \endcond
 #define EXPAND_ARRAY(x, i) EXPAND_ARRAY##i(x)
 
 
 
-
+/// \cond DO_NOT_DOCUMENT
+/// Macros to expand variadics.
+/// For use in LPrint functions
 #define VARIADIC_DETAIL_CAT2(a, b) a ## b
 #define VARIADIC_DETAIL_CAT(a, b) VARIADIC_DETAIL_CAT2(a, b)
 
@@ -36,10 +36,10 @@
       ((__VA_ARGS__), 0)... \
     } \
     /**/
+/// \endcond
 
 
-// Functions to print arbitrary number of elements at once
-
+/// Print variable number of arguments (no newline)
 template <typename... Types> 
 void LPrint(Types... vars) 
 {
@@ -48,6 +48,8 @@ void LPrint(Types... vars)
 	#endif
 }
 
+/// Print variable number of arguments 
+/// with newline after last element
 template <typename... Types> 
 void LPrintln(Types... vars) 
 {		
@@ -57,6 +59,8 @@ void LPrintln(Types... vars)
 	#endif
 }
 
+/// Print variable number of arguments 
+/// with newline after each element
 template <typename... Types> 
 void LPrintlnAll(Types... vars) 
 {
@@ -66,12 +70,10 @@ void LPrintlnAll(Types... vars)
 	#endif
 }
 
-
 /// LPrint Hexadeximal number to Serial if LOOM_DEBUG enabled, no newline
 #define LPrint_Hex(X)      (LOOM_DEBUG==0) ? :  Serial.print(X, HEX)
 /// LPrint Hexadeximal number to Serial if LOOM_DEBUG enabled, newline added
 #define LPrintln_Hex(X)    (LOOM_DEBUG==0) ? :  Serial.println(X, HEX)
-
 /// LPrint Hexadeximal number to Serial in form: DEC (0xHEX) if LOOM_DEBUG enabled, newline added
 #define LPrint_Dec_Hex(X)      (LOOM_DEBUG==0) ? :  Serial.print(X); Serial.print(" (0x"); Serial.print(X, HEX); Serial.print(")")
 /// LPrint Hexadeximal number to Serial in form: DEC (0xHEX) if LOOM_DEBUG enabled, newline added

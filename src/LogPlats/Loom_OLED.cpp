@@ -80,7 +80,7 @@ Loom_OLED::Loom_OLED(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_OLED::~Loom_OLED() 
 {
 	delete display;

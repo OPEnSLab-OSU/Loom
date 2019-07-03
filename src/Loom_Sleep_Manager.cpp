@@ -6,7 +6,6 @@
 #include <LowPower.h>
 
 
-
 /////////////////////////////////////////////////////////////////////
 const char* Loom_Sleep_Manager::enum_sleep_mode_string(SleepMode m)
 {
@@ -39,13 +38,11 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR ---
 Loom_Sleep_Manager::Loom_Sleep_Manager(JsonVariant p)
 	: Loom_Sleep_Manager(p[0], p[1], p[2], (SleepMode)(int)p[3], p[4])
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
 Loom_Sleep_Manager::~Loom_Sleep_Manager()
 {
 
@@ -73,7 +70,6 @@ void Loom_Sleep_Manager::print_state()
 }
 
 /////////////////////////////////////////////////////////////////////
-
 void Loom_Sleep_Manager::powerDown()
 {
 	// Call manager to coordinate modules saving to flash

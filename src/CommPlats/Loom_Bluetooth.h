@@ -33,11 +33,11 @@ public:
 
 	Loom_Bluetooth(JsonVariant p);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_Bluetooth();
 
 
-	// --- PUBLIC METHODS ---
+
 
 	void		print_config() override;
 

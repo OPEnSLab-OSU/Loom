@@ -28,7 +28,7 @@ Loom_FXAS21002::Loom_FXAS21002(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_FXAS21002::~Loom_FXAS21002() 
 {
 	delete inst_FXAS21002;

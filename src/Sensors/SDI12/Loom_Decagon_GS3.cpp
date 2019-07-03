@@ -21,7 +21,7 @@ Loom_DecagonGS3::Loom_DecagonGS3(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_DecagonGS3::~Loom_DecagonGS3() 
 {
 

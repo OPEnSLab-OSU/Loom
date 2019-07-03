@@ -26,7 +26,7 @@ LoomCommPlat::LoomCommPlat(
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 LoomCommPlat::~LoomCommPlat()
 {
 

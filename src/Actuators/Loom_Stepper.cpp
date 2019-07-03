@@ -36,7 +36,7 @@ Loom_Stepper::Loom_Stepper(JsonVariant p)
 }
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_Stepper::~Loom_Stepper() 
 {
 	for (int i = 0; i < stepper_count; i++)

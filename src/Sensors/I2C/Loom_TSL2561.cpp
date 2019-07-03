@@ -54,7 +54,7 @@ Loom_TSL2561::Loom_TSL2561(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_TSL2561::~Loom_TSL2561() 
 {
 	delete inst_TSL2561;

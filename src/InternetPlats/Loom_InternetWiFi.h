@@ -54,7 +54,7 @@ public:
 
 	static char* enum_wifi_mode_string(WiFiMode c);
 
-	// --- CONSTRUCTOR ---
+	// Constructor
 	Loom_WiFi_I(	char* module_name 		= "WiFi",
 
 					WiFiMode 	mode		= WiFiMode::WPA_CLIENT,
@@ -63,7 +63,7 @@ public:
 					uint 		UDP_port 	= 9411  	
 				);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_WiFi_I();
 
 

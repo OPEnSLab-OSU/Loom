@@ -35,7 +35,7 @@ Loom_LIS3DH::Loom_LIS3DH(JsonVariant p)
 {}
 
 /////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
+/// Destructor
 Loom_LIS3DH::~Loom_LIS3DH() 
 {
 	delete inst_LIS3DH;

@@ -33,7 +33,7 @@ public:
 
 	Loom_FXAS21002(JsonVariant p);
 
-	// --- DESTRUCTOR ---
+	/// Destructor
 	virtual ~Loom_FXAS21002();
 
 	// Inherited (Overriding) Methods
