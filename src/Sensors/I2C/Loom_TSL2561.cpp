@@ -85,9 +85,13 @@ void Loom_TSL2561::measure()
 /////////////////////////////////////////////////////////////////////
 void Loom_TSL2561::package(JsonObject json)
 {
+    
+    int lux = inst_TSL2561->calculateLux(lightFull, lightIR);
+    
 	package_json(json, module_name, 
 		"IR",	lightIR,
-		"Full",	lightFull
+		"Full",	lightFull,
+        "Lux", lux
 	);
 }
 
