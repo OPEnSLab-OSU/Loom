@@ -5,6 +5,9 @@
 #include "Adafruit_SHT31.h"
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// SHT31D Temperature / Humidty sensor module
 // ###
@@ -12,16 +15,17 @@ class Loom_SHT31D : public LoomI2CSensor
 {
 
 protected:
+	
+	Adafruit_SHT31 inst_sht31d;		/// Underlying SHT31D sensor manager instance
 
-	/// Underlying SHT31D sensor manager instance
-	Adafruit_SHT31 inst_sht31d;
-
-	/// Measured temperature (C)
-	float		temp;
-	/// Measured humidity (%)
-	float		humid;
+	float		temp;				/// Measured temperature (C)
+	float		humid;				/// Measured humidity (%)
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// SHT31D module constructor
 	///
@@ -32,16 +36,26 @@ public:
 			const char*		module_name		= "SHT31D"
 		);
 
-	Loom_SHT31D(JsonVariant p);
-
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
+	Loom_SHT31D( JsonVariant p );
 
 	/// Destructor
-	virtual ~Loom_SHT31D();
+	~Loom_SHT31D() = default;
 
-	// Inherited (Overriding) Methods
-	void		print_measurements() override;
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
 	void		measure() override;
-	void 		package(JsonObject json);
+	void 		package(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	void		print_measurements() override;
 
 private:
 

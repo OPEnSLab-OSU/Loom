@@ -3,6 +3,9 @@
 #include "Loom_SDI12_Sensor.h"
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomSDI12Sensor) | dependencies: [] | conflicts: []
 /// Decagon GS3 Soil Moisture sensor module
 // ###
@@ -11,14 +14,15 @@ class Loom_DecagonGS3 : public LoomSDI12Sensor
 
 protected:
 
-	/// Measured dielectric permativity
-	float		dielec_perm;
-	/// Measured temperature
-	float		temp;
-	/// Measure electrical conductivity
-	float		elec_cond;
+	float		dielec_perm;	/// Measured dielectric permativity
+	float		temp;			/// Measured temperature
+	float		elec_cond;		/// Measure electrical conductivity
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// Decagon GS3 module constructor
 	///
@@ -29,22 +33,29 @@ public:
 			uint8_t			num_samples		= 1
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_DecagonGS3(JsonVariant p);
 
-
 	/// Destructor
-	virtual ~Loom_DecagonGS3();
+	~Loom_DecagonGS3() = default;
 
-	// Inherited Methods
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+	void		measure() override;
+	void 		package(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
 	void		print_config() override;
 	void		print_measurements() override;
-	// void		calibrate() override;
-	void		measure() override;
-	void 		package(JsonObject json);
-
 
 private:
-
 
 };
 

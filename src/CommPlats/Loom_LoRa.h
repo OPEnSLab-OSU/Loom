@@ -5,23 +5,23 @@
 #include <RH_RF95.h>
 #include <RHReliableDatagram.h>
 
-// LoRa Module pins
-
-/// LoRa hip select pin
-#define RFM95_CS  8
-/// LoRa reset pin
-#define RFM95_RST 4
-/// LoRa interrupt pin
-#define RFM95_INT 3
+// LoRa Chip pins
+#define RFM95_CS  8		/// LoRa hip select pin
+#define RFM95_RST 4		/// LoRa reset pin
+#define RFM95_INT 3		/// LoRa interrupt pin
 
 /// LoRa radio frequence.
 /// Hardware specific, Tx must match Rx
 #define RF95_FREQ 915.0
 
 
-// these will be defined in the config file
+// these will be defined in the config
 #define LORA_SELF_ADDRESS   01
 #define LORA_FRIEND_ADDRESS 00
+
+
+///////////////////////////////////////////////////////////////////////////////
+
 
 // ### (LoomCommPlat) | dependencies: [] | conflicts: []
 /// LoRa communication platform module
@@ -31,24 +31,21 @@ class Loom_LoRa : public LoomCommPlat
 
 protected:
 
-	///	Underlying rf95 object
-	RH_RF95*			driver;
-	/// Manager for driver
-	RHReliableDatagram*	manager;
+	RH_RF95*			driver;				///	Underlying rf95 object
+	RHReliableDatagram*	manager;			/// Manager for driver
 
-	/// Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
-	uint8_t				address;
-	/// Default address to send to
-	uint8_t				friend_address;
+	uint8_t				address;			/// Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
+	uint8_t				friend_address;		/// Default address to send to
 
-	/// Power level to send at
-	uint8_t				power_level;
-	/// Number of transmission retries allowed
-	uint8_t				retry_count;
-	/// Delay between transmission retries (in milliseconds)
-	uint16_t			retry_timeout;
+	uint8_t				power_level;		/// Power level to send at
+	uint8_t				retry_count;		/// Number of transmission retries allowed
+	uint16_t			retry_timeout;		/// Delay between transmission retries (in milliseconds)
 
 public:
+
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// LoRa module constructor
 	///
@@ -69,30 +66,49 @@ public:
 			uint16_t		retry_timeout		= 200
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_LoRa(JsonVariant p);
 
 	/// Destructor
-	virtual ~Loom_LoRa();
+	~Loom_LoRa();
 
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
 
+	bool		receive(JsonObject json) override;
+	bool		send(JsonObject json, uint16_t destination) override;
+	bool		send(JsonObject json) override;
 
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
 
 	void		print_config() override;
 
-	void		set_address(uint addr);
-	uint		get_address();
+//=============================================================================
+///@name	GETTERS
+/*@{*/ //======================================================================
 
-	void		set_friend_address(uint addr);
+	uint		get_address() override;
+
+	/// Get address of default destination
+	/// \return	Address of default destination device
 	uint		get_friend_address();
 
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
 
-	bool		receive(JsonObject json);
-	bool		send(JsonObject json, uint16_t destination);
-	bool		send(JsonObject json);
-	void		broadcast(JsonObject json);
+	void		set_address(uint addr) override;
+
+	/// Set address of default destination
+	/// \param[in] addr		Address of destination device
+	void		set_friend_address(uint addr);
 
 private:
-
 
 };
 

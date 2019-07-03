@@ -2,8 +2,7 @@
 #include "Loom_Bluetooth.h"
 
 
-/////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR ---
+///////////////////////////////////////////////////////////////////////////////
 Loom_Bluetooth::Loom_Bluetooth( 	
 		const char*		module_name,
 		int 			max_message_length,
@@ -24,30 +23,18 @@ Loom_Bluetooth::Loom_Bluetooth(
 	BLE->setMode(BLUEFRUIT_MODE_DATA); // set to simple UART back and forth comms
 }
 
-/////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR ---
+///////////////////////////////////////////////////////////////////////////////
 Loom_Bluetooth::Loom_Bluetooth(JsonVariant p)
-	// : Loom_Bluetooth(p[0], p[1], p[2], p[3], p[4])
-	: Loom_Bluetooth( EXPAND_ARRAY(p, 5) )
-{}
+	: Loom_Bluetooth( EXPAND_ARRAY(p, 5) ) {}
 
-/////////////////////////////////////////////////////////////////////
-/// Destructor
-Loom_Bluetooth::~Loom_Bluetooth() 
-{
-}
-
-/////////////////////////////////////////////////////////////////////
-// --- PUBLIC METHODS ---
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Bluetooth::print_config() 
 {
 	LoomCommPlat::print_config();
 
 }
 
-
-
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Bluetooth::connect(uint16_t connect_timeout)
 {
 	uint32_t timeout = millis();
@@ -61,23 +48,7 @@ void Loom_Bluetooth::connect(uint16_t connect_timeout)
 	}
 }
 
-
-
-
-
-/*
-Get Command
-
-Gets a command from the ble interface, or times out. This is used in combination with
-parseCommand if the return value is valid.
-
-Returns:
--1: user never wrote a command, timed out
--2: user entered an invalid command
-0 or positive integer: index in COMMAND_TABLE that matches the user-entered command
-
-*/
-
+///////////////////////////////////////////////////////////////////////////////
 int8_t Loom_Bluetooth::getCommand( uint16_t max_timeout )
 {
 	// printCommands();
@@ -121,12 +92,7 @@ int8_t Loom_Bluetooth::getCommand( uint16_t max_timeout )
 	return -2;
 }
 
-
-
-
-
-/////////////////////////////////////////////////////////////////////
-
+///////////////////////////////////////////////////////////////////////////////
 bool Loom_Bluetooth::test_send(const uint8_t val)
 {
 	if ( BLE->isConnected() ) {
@@ -137,7 +103,7 @@ bool Loom_Bluetooth::test_send(const uint8_t val)
 	}
 }
 
-
+///////////////////////////////////////////////////////////////////////////////
 bool Loom_Bluetooth::test_send_str(const char* string)
 {
 	if ( BLE->isConnected() ) {
@@ -148,3 +114,4 @@ bool Loom_Bluetooth::test_send_str(const char* string)
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////

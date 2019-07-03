@@ -5,6 +5,9 @@
 #include <Adafruit_TSL2591.h>
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// TSL2591 Lux sensor module
 // ###
@@ -13,22 +16,20 @@ class Loom_TSL2591 : public LoomI2CSensor
 
 protected:
 
-	/// Underlying TSL2591 sensor manager instance
-	Adafruit_TSL2591	inst_tsl2591;
+	Adafruit_TSL2591	inst_tsl2591;		/// Underlying TSL2591 sensor manager instance
 
-	/// Measured visable lux
-	uint16_t			vis;
-	/// Measured infra-red lux
-	uint16_t			ir;
-	/// Measured full spectrum lux
-	uint16_t			full;
+	uint16_t			vis;				/// Measured visable lux
+	uint16_t			ir;					/// Measured infra-red lux
+	uint16_t			full;				/// Measured full spectrum lux
 
-	/// Sensor gain level setting to use
-	uint8_t				gain_level;
-	/// Sensor integration time setting
-	uint8_t				timing_level;
+	uint8_t				gain_level;			/// Sensor gain level setting to use
+	uint8_t				timing_level;		/// Sensor integration time setting
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// TSL2591 module constructor
 	///
@@ -43,16 +44,26 @@ public:
 			uint8_t			timing_level		= 0
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_TSL2591(JsonVariant p);
 
-
 	/// Destructor
-	virtual ~Loom_TSL2591();
+	~Loom_TSL2591() = default;
 
-	// Inherited (Overriding) Methods
-	void		print_measurements() override;
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
 	void		measure() override;
-	void 		package(JsonObject json);
+	void 		package(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	void		print_measurements() override;
 
 private:
 

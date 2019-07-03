@@ -5,6 +5,9 @@
 #include "SparkFun_AS7265X.h"
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// AS72625X 3 Spectrum (Visible, near IR, UV) spectral sensor module
 // ###
@@ -13,29 +16,24 @@ class Loom_AS7265X : public LoomI2CSensor
 
 protected:
 
-	/// Underlying AS7265X sensor manager instance
-	AS7265X		inst_AS7265X;
+	AS7265X		inst_AS7265X;		/// Underlying AS7265X sensor manager instance
 
-	/// Measured UV bands values
-	int			uv[6];
-	/// Measured color bands values
-	int			color[6];
-	/// Measured near-infra-red bands values
-	int			nir[6];
+	int			uv[6];				/// Measured UV bands values
+	int			color[6];			/// Measured color bands values
+	int			nir[6];				/// Measured near-infra-red bands values
 
-	/// Whether or not to use the bulb
-	bool		use_bulb;
+	bool		use_bulb;			/// Whether or not to use the bulb
 
-	/// Gain setting
-	byte		gain;
-	/// Sensor mode
-	byte		mode;
-	/// Integration time setting
-	byte		integration_time;
+	byte		gain;				/// Gain setting
+	byte		mode;				/// Sensor mode
+	byte		integration_time;	/// Integration time setting
 
 
 public:
-
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// AS72625X module constructor
 	///
@@ -54,27 +52,49 @@ public:
 			byte			integration_time	= 50
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_AS7265X(JsonVariant p);
 
 	/// Destructor
-	virtual ~Loom_AS7265X();
+	~Loom_AS7265X() = default;
 
-	// Inherited (Overriding) Methods
-	void		print_measurements() override;
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
 	void		measure() override;
-	void 		package(JsonObject json);
+	void 		package(JsonObject json) override;
 
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
 
+	void		print_measurements() override;
+
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
+
+	/// Set whether not bulb is used for active light source
+	/// \param[in]	enable	Whether or not to enable 
 	void		enable_bulb(bool e);
-	// 1 to 64x
+
+	/// Set gain.
+	// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
+	/// \param[in]	gain	Gain level: 
 	void		set_gain(byte gain);
-	//4 channel, other 4 channel, 6 chan, or 6 chan one shot
+
+	/// Set mode.
+	/// 4 channel, other 4 channel, 6 chan, or 6 chan one shot
+	/// \param[in]	mode	Mode
 	void		set_mode(byte mode);
-	//50 * 2.8ms = 140ms. 0 to 255 is valid.  (49 is default)
-	//If you use Mode 2 or 3 (all the colors) then integration time is double. 140*2 = 280ms between readings.
+
+	/// Set integration time.
+	/// 50 * 2.8ms = 140ms. 0 to 255 is valid.  (49 is default)
+	/// If you use Mode 2 or 3 (all the colors) then integration time is double. 140*2 = 280ms between readings.
 	void		set_integration_time(byte time);
-
-
 
 private:
 

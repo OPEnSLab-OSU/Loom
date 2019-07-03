@@ -13,6 +13,10 @@
 /// Max nRF message size
 #define NRF_MESSAGE_SIZE 120
 
+
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomCommPlat) | dependencies: [] | conflicts: []
 /// Nordic Radio communication platform module
 // ###
@@ -21,29 +25,24 @@ class Loom_nRF : public LoomCommPlat
 
 protected:
 
-	/// Underlying nRF24L01(+) radio object
-	RF24*				radio;
-	/// Network layer manager for radio
-	RF24Network*		network;
+	RF24*				radio;				/// Underlying nRF24L01(+) radio object
+	RF24Network*		network;			/// Network layer manager for radio
 
-	/// Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
-	uint8_t				address;
-	/// Default address to send to
-	uint8_t				friend_address;
+	uint8_t				address;			/// Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
+	uint8_t				friend_address;		/// Default address to send to
 
-	/// Data rate
-	uint8_t				data_rate;
-	/// Power level to send at
-	uint8_t				power_level;
-	/// Number of transmission retries allowed
-	uint8_t				retry_count;
-	/// Delay between transmission retries (in milliseconds)
-	uint16_t			retry_timeout;
+	uint8_t				data_rate;			/// Data rate
+	uint8_t				power_level;		/// Power level to send at
+	uint8_t				retry_count;		/// Number of transmission retries allowed
+	uint16_t			retry_timeout;		/// Delay between transmission retries (in milliseconds)
 
-	/// Which level(s) of the network to broadcast to
-	uint8_t				multicast_level;
+	uint8_t				multicast_level;	/// Which level(s) of the network to broadcast to
 
 public:
+
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// nRF module constructor
 	///
@@ -68,31 +67,67 @@ public:
 			uint8_t			multicast_level		= 1
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_nRF(JsonVariant p);
 
-
 	/// Destructor
-	virtual ~Loom_nRF();
+	~Loom_nRF();
 
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+	bool		receive(JsonObject json) override {}
+	bool		send(JsonObject json, uint16_t destination) override {}
+	bool		send(JsonObject json) override {}
+	void		broadcast(JsonObject json) override {}
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
 
 	void		print_config() override;
 
-	void		set_address(uint addr);
-	uint		get_address();
+//=============================================================================
+///@name	GETTERS
+/*@{*/ //======================================================================
 
-	void		set_friend_address(uint addr);
+	uint		get_address() override;
+
+	/// Get address of default destination
+	/// \return	Address of default destination device
 	uint		get_friend_address();
 
-	void		set_multicast_level(uint8_t level);
+	/// Get multicast(broadcast) level.
+	/// nRF has varying degrees of broadcast corresponding to 
+	/// depth to broadcast through network tree
+	/// \return Multicast level
 	uint8_t		get_multicast_level();
 
-	bool		receive(JsonObject json) {}
-	bool		send(JsonObject json, uint16_t destination) {}
-	bool		send(JsonObject json) {}
-	void		broadcast(JsonObject json) {}
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
+
+	void		set_address(uint addr) override;
+
+	/// Set address of default destination
+	/// \param[in] addr		Address of destination device
+	void		set_friend_address(uint addr);
+
+	/// Set multicast(broadcast) level.
+	/// nRF has varying degrees of broadcast corresponding to 
+	/// depth to broadcast through network tree
+	/// \param[in]	level 	Multicast level to set to
+	void		set_multicast_level(uint8_t level);
+
+
+//=============================================================================
+///@name	MISCELLANEOUS
+/*@{*/ //======================================================================
 
 private:
-
 
 };
 

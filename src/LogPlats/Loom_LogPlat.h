@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "Loom_Module.h"
@@ -13,27 +12,26 @@ enum class LogPlatform {
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 /// Abstract base of logging platforms
 class LoomLogPlat : public LoomModule
 {
 
 protected:
 
-	/// Whether or not to enable a minimum delay between logging
-	bool			enable_rate_filter;
-
-	/// Minimum delay between logging (milliseconds) 	
-	uint			min_filter_delay;
-
-	/// Value of millis() at last executed log time
-	unsigned long	last_log_millis;		
+	bool			enable_rate_filter;		/// Whether or not to enable a minimum delay between logging
+	uint			min_filter_delay;		/// Minimum delay between logging (milliseconds) 	
+	unsigned long	last_log_millis;		/// Value of millis() at last executed log time
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
-	static char* enum_log_plat_string(LogPlatform p);
-
-
-	// Constructor
+	/// Constructor
 	LoomLogPlat(	
 			const char*		module_name,
 
@@ -41,24 +39,39 @@ public:
 			uint			min_filter_delay 		= 1000
 	   );
 
-
 	/// Destructor
-	virtual ~LoomLogPlat();
+	virtual ~LoomLogPlat() = default;
 
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
 
+	virtual bool	cmd_route(JsonObject) override {}
+	virtual void 	package(JsonObject json) override {}
 
-
-	// Inherited Methods
-	virtual void	print_config();
-	virtual void	measure();
-	virtual bool	cmd_route(JsonObject) {}
+	/// Log a Json object
+	/// \param[in] json		Json Object to log
 	virtual void	log(JsonObject json) = 0;
-	virtual void 	package(JsonObject json) {}
 
-private:
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	virtual void	print_config();
+
+//=============================================================================
+///@name	MISCELLANEOUS
+/*@{*/ //======================================================================
+
+	/// Get c-string of name associated with log platform enum
+	/// \return c-string of log platform
+	static char* enum_log_plat_string(LogPlatform p);
 
 protected:
 
+	/// Check against millis to determine if time since last
+	/// log exceeds min time 
+	/// \return True if enough time has elapsed
 	bool			check_millis();
 
 };

@@ -8,6 +8,9 @@
 // Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomSensor) | dependencies: [] | conflicts: []
 /// Digital pin manager module
 // ###
@@ -16,14 +19,14 @@ class Loom_Digital : public LoomSensor
 
 protected:
 
-	/// Array of which pins are enabled
-	bool		pin_enabled[DIGITAL_COUNT];
-
-	/// Array of last read digital values
-	bool		digital_vals[DIGITAL_COUNT];
+	bool		pin_enabled[DIGITAL_COUNT];		/// Array of which pins are enabled
+	bool		digital_vals[DIGITAL_COUNT];	/// Array of last read digital values
 
 public:
-
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// Digital manager module constructor
 	///
@@ -56,30 +59,49 @@ public:
 			bool			enableA5		= false
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_Digital(JsonVariant p);
 
 	/// Destructor
-	~Loom_Digital();
+	~Loom_Digital() = default;
 
-	// Inherited Methods
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+	void		measure() override;
+	void		package(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
 	void		print_config() override;
 	void		print_measurements() override;
-	void		measure() override;
-	void		package(JsonObject json);
 
-
+//=============================================================================
+///@name	GETTERS
+/*@{*/ //======================================================================
 
 	/// Get value on digital pin
 	/// \return		True if HIGH, false if LOW
 	bool		get_digital_val(uint8_t pin);
+
+	/// Get if pin is enabled in manager
+	/// \return 	Enable state of pin
+	bool		get_pin_enabled(uint8_t pin);
+
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
+
 	/// Set digital value of pin
 	/// \param[in]	pin		Pin to set value of
 	/// \param[in]	state	State to set pin to
 	void		set_digital_val(uint8_t pin, bool state);
 
-	/// Get if pin is enabled in manager
-	/// \return 	Enable state of pin
-	bool		get_pin_enabled(uint8_t pin);
 	/// Set pin enable state in manager
 	/// \param[in]	pin		Pin to set enable state of
 	void		set_pin_enabled(uint8_t pin, bool e);
@@ -90,6 +112,7 @@ private:
 	static uint8_t pin_nums[DIGITAL_COUNT];
 
 	/// Convert pin number to index in manager arrays
+	/// \param[in]	pin		Pin to convert to index
 	uint8_t		pin_to_index(uint8_t pin);
 
 };

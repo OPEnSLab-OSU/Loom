@@ -1,8 +1,7 @@
 
 #include "Loom_GoogleSheets.h"
 
-/////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR --
+///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(
     const char* module_name,
     const uint	internet_index,
@@ -12,7 +11,8 @@ Loom_GoogleSheets::Loom_GoogleSheets(
     const char* device_id
 )   : LoomPublishPlat(module_name, internet_index)
     , m_buffer{}
-    , m_data_start(nullptr) {
+    , m_data_start(nullptr) 
+{
     const int printed = snprintf(m_buffer, sizeof(m_buffer), "%s?key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s&key3=full_data&val3=", 
 		script_url,                                 // URL of the script
         sheet_id,   								// Spreadsheet ID
@@ -28,21 +28,22 @@ Loom_GoogleSheets::Loom_GoogleSheets(
     }
 } 
 
-/////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR --
+///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(JsonVariant p)
 	: Loom_GoogleSheets( EXPAND_ARRAY(p, 6) ) {}
 
-/////////////////////////////////////////////////////////////////////
-void Loom_GoogleSheets::print_config() {
+///////////////////////////////////////////////////////////////////////////////
+void Loom_GoogleSheets::print_config() 
+{
     LoomPublishPlat::print_config();
     // just in case
     m_data_start[0] = '\0';
     LPrint("\t URL: ", m_buffer, "\n");
 }
 
-/////////////////////////////////////////////////////////////////////
-bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat* plat) {
+///////////////////////////////////////////////////////////////////////////////
+bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat* plat) 
+{
     print_module_label();
     // serialize the data, checking for an error
     if (!m_serialize_internet_impl(json)) {
@@ -68,8 +69,9 @@ bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat
     }
 }
 
-/////////////////////////////////////////////////////////////////////
-bool Loom_GoogleSheets::m_serialize_internet_impl(const JsonObject json) {
+///////////////////////////////////////////////////////////////////////////////
+bool Loom_GoogleSheets::m_serialize_internet_impl(const JsonObject json) 
+{
     // step one: package timestamp
     char* m_data_cur = m_data_start;
     const JsonObject time_obj = json["timestamp"];
@@ -112,3 +114,5 @@ bool Loom_GoogleSheets::m_serialize_internet_impl(const JsonObject json) {
     m_data_cur[0] = '\0';
     return true;
 }
+
+///////////////////////////////////////////////////////////////////////////////

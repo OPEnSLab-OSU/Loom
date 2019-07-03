@@ -24,7 +24,12 @@ int var;
 ```
 
 Alternatively, if there are several similar variables in sequence, they may be commented as such:
-
+```cpp
+int var1;			/// Description of var1
+int var2;			/// Description of var2
+int var3;			/// Description of var3
+```
+Or
 ```cpp
 int var1;			///< Description of var1
 int var2;			///< Description of var2

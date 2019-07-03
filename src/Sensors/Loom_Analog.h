@@ -37,6 +37,9 @@ enum class AnalogConversion {
 
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomSensor) | dependencies: [] | conflicts: []
 /// Analog pin manager
 // ###
@@ -45,26 +48,21 @@ class Loom_Analog : public LoomSensor
 
 protected:
 
-	/// Which resolution to read at (generally use 12 or 10)
-	uint8_t		read_resolution;
+	uint8_t		read_resolution;				/// Which resolution to read at (generally use 12 or 10)
+	bool		pin_enabled[ANALOG_COUNT];		/// Whether pins A0-A5 are enabled for analog reading
+	uint16_t	analog_vals[ANALOG_COUNT];		/// Last known analog readings for pin A0-A5
+	float		battery;						/// Battery voltage
+	bool		enable_conversions;				/// Enable or disable all conversions
 
-	/// Whether pins A0-A5 are enabled for analog reading
-	bool		pin_enabled[ANALOG_COUNT];
-	/// Last known analog readings for pin A0-A5
-	uint16_t	analog_vals[ANALOG_COUNT];
-	/// Conversion (if any) to apply to analog value when printing / packaging
-	AnalogConversion conversions[ANALOG_COUNT];
-
-	/// Battery voltage
-	float		battery;
-
-	/// Enable or disable all conversions
-	bool		enable_conversions;
+	AnalogConversion conversions[ANALOG_COUNT];	/// Conversion (if any) to apply to analog value when printing / packaging
 
 	AnalogConfig configuration;
 
 public:
 
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// Analog manager module constructor
 	///
@@ -101,21 +99,32 @@ public:
 			AnalogConversion	convertA5			= AnalogConversion::NONE
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_Analog(JsonVariant p);
 
 	/// Destructor
-	virtual ~Loom_Analog();
+	~Loom_Analog() = default;
 
-	// Inherited Methods
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+	void		measure() override;
+	void 		package(JsonObject json) override;
+
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
 	void		print_config() override;
 	void		print_measurements() override;
-	void		measure() override;
-	void 		package(JsonObject json);
 
-
-	/// Set the analog read resolution
-	/// \param[in]	res		Resolution to read at (12 bit max)
-	void		set_analog_resolution(uint8_t res);
+//=============================================================================
+///@name	GETTERS
+/*@{*/ //======================================================================
 
 	/// Get the current analog read resolution
 	/// \return		Read resolution
@@ -126,7 +135,6 @@ public:
 	/// \return		The analog value
 	int			get_analog_val(uint8_t pin);
 
-
 	/// Get the battery voltage of the device
 	/// \return		The battery voltage
 	float		get_battery();
@@ -135,15 +143,25 @@ public:
 	/// \param[in]	pin		Pin to get enable state of
 	/// \return		The enabled state of pin
 	bool		get_pin_enabled(uint8_t pin);
-	/// Set the enable state of a pin
-	/// \param[in]	pin		The pin to set enable state of
-	/// \param[in]	e		Enable state
-	void		set_pin_enabled(uint8_t pin, bool e);
 
 	/// Get the current conversion associated with a pin
 	/// \param[in]	pin		The pin to get conversion for
 	/// \return		The current AnalogConversion setting
 	AnalogConversion get_conversion(uint8_t pin);
+
+
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
+
+	/// Set the analog read resolution
+	/// \param[in]	res		Resolution to read at (12 bit max)
+	void		set_analog_resolution(uint8_t res);
+
+	/// Set the enable state of a pin
+	/// \param[in]	pin		The pin to set enable state of
+	/// \param[in]	e		Enable state
+	void		set_pin_enabled(uint8_t pin, bool e);
 
 	/// Set the current conversion associated with a pin
 	/// \param[in]	pin		The pin to set conversion for
@@ -154,14 +172,18 @@ public:
 	/// \param[in]	e		Enable state
 	void  		set_enable_conversions(bool e);
 
-	/// Apply conversion (if any) to analog value based on associated conversion setting
-	/// \param[in]	pin		Pin the analog value is associated with
-	/// \param[in]	analog	Analog value to convert
-	/// \return		The converted value
-	float 		convert(uint8_t pin, uint16_t analog);
+//=============================================================================
+///@name	MISCELLANEOUS
+/*@{*/ //======================================================================
 
-
+	/// Get string of name associated with conversion enum
+	/// \return String of conversion
 	const char* conversion_name(AnalogConversion conversion);
+
+
+
+
+// = = = = = = = = = =
 
 
 	// Save a FlashStorage struct
@@ -177,6 +199,12 @@ private:
 	/// \param[in]	chnl	The channel/pin to read
 	/// \return		The analog value
 	uint16_t	read_analog(uint8_t chnl);
+
+	/// Apply conversion (if any) to analog value based on associated conversion setting
+	/// \param[in]	pin		Pin the analog value is associated with
+	/// \param[in]	analog	Analog value to convert
+	/// \return		The converted value
+	float 		convert(uint8_t pin, uint16_t analog);
 
 	/// Convert analog to voltage
 	/// \param[in]	analog	Analog value to convert

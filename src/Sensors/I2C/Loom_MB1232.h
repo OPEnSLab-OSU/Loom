@@ -3,6 +3,9 @@
 #include "Loom_I2C_Sensor.h"
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// MB1232 Sonar sensor module
 // ###
@@ -11,10 +14,13 @@ class Loom_MB1232 : public LoomI2CSensor
 
 protected:
 
-	/// Measure distance (cm)
-	int range;
+	int range;		/// Measure distance (cm)
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// MB1232 module constructor
 	///
@@ -25,16 +31,26 @@ public:
 			const char*		module_name		= "MB1232"
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_MB1232(JsonVariant p);
 
-
 	/// Destructor
-	virtual ~Loom_MB1232();
+	~Loom_MB1232() = default;
 
-	// Inherited (Overriding) Methods
-	void		print_measurements() override;
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
 	void		measure() override;
-	void 		package(JsonObject json);
+	void 		package(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	void		print_measurements() override;
 
 private:
 

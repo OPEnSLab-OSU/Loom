@@ -143,6 +143,9 @@ class LoomLogPlat;
 #define MAX_LOGS          5
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### () | dependencies: [] | conflicts: []
 /// Manager class to simplify with enabled modules
 // ###
@@ -197,15 +200,20 @@ protected:
 	/// Count of logging platform modules
 	uint		log_count = 0;
 
-	/// LPrint detail verbosity
+	/// Print detail verbosity
 	Verbosity	print_verbosity;
 	/// Package detail verbosity
 	Verbosity	package_verbosity;
 
+	/// Json data
 	StaticJsonDocument<2000> doc;
 
 
 public:
+
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// Loom Manager constructor.
 	///
@@ -229,24 +237,149 @@ public:
 	//// Destructor
 	virtual ~LoomManager();
 
+//=============================================================================
+///@name	OPERATION
+/// Desription
+/*@{*/ //======================================================================
+
 	void		parse_config(const char* json_config);
-	// maybe overload to take JsonVariant or const char* of json?
 
+	/// Measure data of all managed sensors
+	void		measure();  
 
+	/// Package data of all modules into provide JsonObject
+	void		package(JsonObject json);
 
-	/// LPrint the device name as '[device_name]'
-	void		print_device_label();
-	/// LPrint the devices current configuration.
+	/// Package data of all modules into JsonObject and return
+	/// \return JsonObject of packaged data
+	JsonObject	package();
+
+	/// Publish
+	bool		publish(const JsonObject json);
+
+	/// Iterate over array of commands
+	/// \param[in] json		Object containing commands
+	void		cmd_route(JsonObject json);
+
+//=============================================================================
+///@name	ADD MODULE TO MANAGER
+/*@{*/ //======================================================================
+
+	/// Add a module to be managed.
+	/// Overloaded as to sort by module type
+	void		add_module(Loom_Interrupt_Manager* interrupt_manager);
+	void		add_module(Loom_Sleep_Manager* sleep_manager);
+	void		add_module(LoomRTC* rtc);
+	void		add_module(LoomModule* module);
+	void		add_module(LoomSensor* sensor);
+	void		add_module(LoomActuator* actuator);
+	void		add_module(LoomCommPlat* comm_plat);
+	void		add_module(LoomInternetPlat* internet_plat);
+	void 		add_module(LoomPublishPlat* publish_module); 
+	void		add_module(LoomLogPlat* log_plat);
+	
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+	
+	/// Print the devices current configuration.
 	/// Also prints configuration of linked modules.
 	void		print_config();
 	
 	// 	void print_state()
 
-
 	/// LPrint the linked modules
 	void 		list_modules();
 
+	/// Print out the internal JSON object
+	void		print_internalJson();
 
+//=============================================================================
+///@name	GETTERS
+/*@{*/ //======================================================================
+
+	/// Get device type
+	/// \return Device type (Hub/Node)
+	DeviceType	get_device_type();
+
+	/// Return reference to internal json object
+	/// \return Reference to internal json object
+	JsonObject	internalJson(bool clear = true);
+
+	/// Get the device name, copies into provided buffer.
+	/// \param[out] buf	The buffer copy device name into
+	void 		get_device_name(char* buf);
+	/// Get the device name
+	/// \return String literal of device name.
+	const char*	get_device_name();
+
+	/// Get device family name.
+	/// \return Family name
+	const char*	get_family();
+
+	/// Get device family number.
+	/// \return Family number
+	int			get_family_num();
+
+	/// Get device instance number.
+	/// \return Family number
+	int			get_instance_num();
+
+	/// Get print verbosity.
+	/// \return print verbosity
+	Verbosity	get_print_verbosity();
+
+	/// Get package verbosity.
+	/// \return package verbosity
+	Verbosity	get_package_verbosity();
+
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
+
+	/// Set the device name.
+	/// \param[in]	device_name		The new device name
+	void 		set_device_name(char* device_name);
+
+	/// Set device family name.
+	/// \param[out] family Family name
+	void		set_family(const char* f);
+	
+	/// Set device family number.
+	/// \param[in] New family number
+	void		set_family_num(int n);
+	
+	/// Set device instance number.
+	/// \param[in] New instance number
+	void		set_instance_num(int n);
+
+	/// Set print verbosity.
+	/// \param[in] v New print verbosity
+	void		set_print_verbosity(Verbosity v);
+		
+	/// Set package verbosity.
+	/// \param[in] v New package verbosity
+	void		set_package_verbosity(Verbosity v);
+
+//=============================================================================
+///@name	MISCELLANEOUS
+/*@{*/ //======================================================================
+
+	void		flash_LED(uint count, uint time_high, uint time_low);
+	void		flash_LED(uint sequence[3]);
+
+	/// Get c-string of name associated with device type enum
+	/// \return C-string of device type
+	const static char* enum_device_type_string(DeviceType t);
+
+// these might become obsolete
+	Loom_Interrupt_Manager*	get_interrupt_manager();
+	Loom_Sleep_Manager*		get_sleep_manager();
+	LoomRTC*				get_rtc_module();
+
+
+
+	// maybe overload to take JsonVariant or const char* of json?
 
 
 
@@ -258,135 +391,18 @@ public:
 	// void send();
 	// void log(Enum );   Enum SD, GOOGLE, OLED ... 
 	// void sleep(); // could have default sleep behavior?
-
-// void current_bundle(OSCBundle* bndl) ? return a stored bundle
-// void print_data
-
-
-	void		measure();  
-	void		package(JsonObject json);
-	JsonObject	package();
-
-	bool		publish(const JsonObject json);
-
-	/// Iterate over array of commands
-	/// \param[in] json		Object containing commands
-	void		cmd_route(JsonObject json);
-
-
-	// Return reference to internal json object
-	JsonObject	internalJson(bool clear = true);
-	void		print_internalJson();
-
 	// bool		log()
 
 
-
-	void		flash_LED(uint count, uint time_high, uint time_low);
-	void		flash_LED(uint sequence[3]);
-
-
-
-		// Methods to set package and print verbosities all at once
-
-
-
-	DeviceType	get_device_type();
-	// void set_device_type(DeviceType t) {device_type = t; }
-
-
-
-	// Overloaded as to sort by module type
-	void		add_module(Loom_Interrupt_Manager* interrupt_manager);
-	void		add_module(Loom_Sleep_Manager* sleep_manager);
-	void		add_module(LoomRTC* rtc);
-	void		add_module(LoomModule* module);
-	void		add_module(LoomSensor* sensor);
-	void		add_module(LoomActuator* actuator);
-	void		add_module(LoomCommPlat* comm_plat);
-	void		add_module(LoomInternetPlat* internet_plat);
-	void 		add_module(LoomPublishPlat* publish_module); 
-	void		add_module(LoomLogPlat* log_plat);
-
-
-// these might become obsolete
-	Loom_Interrupt_Manager*	get_interrupt_manager();
-	Loom_Sleep_Manager*		get_sleep_manager();
-	LoomRTC*				get_rtc_module();
-
-
-
-	/// Set the device name.
-	void 		set_device_name(char* device_name);
-	/// Get the device name, copies into provided buffer.
-	/// \param[out] buf	The buffer copy device name into
-	void 		get_device_name(char* buf);
-	/// Get the device name
-	/// \return String literal of device name.
-	const char*	get_device_name();
-
-
-// // Maybe remove these 6
-// 	/// Copy device identification message header (to family level) string to buffer.
-// 	/// \param[out]	buf The bufer to copy family name into
-// 	void		packet_header_family(char* buf);
-// 	/// Return device identification message header (to family level) string.
-// 	/// \return	The device family string
-// 	const char*	 packet_header_family();
-// 	/// Copy device identification message header (to subnet level) string to buffer.
-// 	/// \param[out] buf The bufer to copy subnet name into
-// 	void		packet_header_subnet(char* buf);
-// 	/// Return device identification message header (to subnet level) string.
-// 	/// \return The device subnet string
-// 	const char*	packet_header_subnet();
-// 	/// Copy device identification message header (to device specific level) string to buffer.
-// 	/// \param[out] buf The bufer to copy device name into
-// 	void		packet_header_device(char* buf);
-// 	/// Return device identification message header (to device specific level) string.
-// 	/// \return The device name and number string
-// 	const char*	packet_header_device();
-
-
-	/// Get device family name.
-	/// \return Family name
-	const char*	get_family();
-	/// Set device family name.
-	/// \param[out] family Family name
-	void		set_family(const char* f);
-	/// Get device family number.
-	/// \return Family number
-	int			get_family_num();
-	/// Set device family number.
-	/// \param[in] New family number
-	void		set_family_num(int n);
-	/// Get device instance number.
-	/// \return Family number
-	int			get_instance_num();
-	/// Set device instance number.
-	/// \param[in] New instance number
-	void		set_instance_num(int n);
-
-
-	/// Get print verbosity.
-	/// \return print verbosity
-	Verbosity	get_print_verbosity();
-	/// Set print verbosity.
-	/// \param[in] v New print verbosity
-	void		set_print_verbosity(Verbosity v);
-	/// Get package verbosity.
-	/// \return package verbosity
-	Verbosity	get_package_verbosity();
-		/// Set package verbosity.
-	/// \param[in] v New package verbosity
-	void		set_package_verbosity(Verbosity v);
-
-
-	const static char* enum_device_type_string(DeviceType t);
+	// Methods to set package and print verbosities all at once
 
 
 
 
-	// Module Access methods
+
+//=============================================================================
+///@name	MODULE ACCESS 
+/*@{*/ //======================================================================
 
 	// Other
 	Loom_Sleep_Manager&			SleepManager(int idx = 0);
@@ -446,22 +462,45 @@ public:
 	// SPI
 	Loom_MAX31856&		MAX31856(int idx = 0);
 
+protected:
+
+	/// Print the device name as '[device_name]'
+	void		print_device_label();
+
+
 
 private:
 
+	/// Add module to a list of modules
 	void		add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
+		
+	/// Auxiliary function for printing a list of modules
 	void		list_modules_aux(LoomModule** modules, uint len, char* module_type);
-	void		measure_aux(LoomModule** modules, uint len);
+	
+	/// Auxiliary function for measure data from a list of modules	
+	void		measure_aux(LoomSensor** modules, uint len);
+
+	/// Auxiliary function for packaging data of a list of modules
 	void		package_aux(JsonObject json, LoomModule** modules, uint len);
+
+	/// Auxiliary function for packaging data of a single module
 	void		package_aux(JsonObject json, LoomModule* module);
+	
 	/// Have each module check against provided command
 	bool		cmd_route_aux(JsonObject json, LoomModule** modules, uint len);
+	
 	/// Have module check against provided command	
 	bool		cmd_route_aux(JsonObject json, LoomModule* module);
 
+
 	void		second_stage_ctor_aux(LoomModule** modules, uint len);
 
-
+	/// Auxiliary function to search a list of modules for a module of specified type
+	/// \param[in]	type		Module type to find
+	/// \param[in]	idx			ith instance of the module to search for
+	/// \param[in]	modules		Module list to search
+	/// \param[in]	count		Module type to find
+	/// \return Module if found, nullptr if not
 	LoomModule*	find_module(ModuleType type, int idx, LoomModule** modules, int count);
 
 };

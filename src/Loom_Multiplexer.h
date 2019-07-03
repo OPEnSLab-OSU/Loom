@@ -5,7 +5,6 @@
 
 
 // // I2C Address Conflict Selection
-
 enum class I2C_Selection {
 	L_TSL2561,		///< TSL2561
 	L_TSL2591,		///< TSL2591
@@ -24,6 +23,7 @@ enum class I2C_Selection {
 // Maybe query DeviceManager if RTC is in use, if not, query 0x68 s
 
 
+///////////////////////////////////////////////////////////////////////////////
 
 
 // ### (LoomModule) | dependencies: [] | conflicts: []
@@ -38,27 +38,23 @@ private:
 	/// Used to avoid checking addresses that no sensors in Loom use
 	const static byte known_addresses[19];
 
-
 protected:
 
-	/// Array of I2C sensor objects
-	LoomI2CSensor**	sensors;
+	LoomI2CSensor**	sensors;			/// Array of I2C sensor objects
 
-	/// The multiplexer's I2C address
-	byte			i2c_address;
+	byte			i2c_address;		/// The multiplexer's I2C address
 
-	/// The number of ports on the multiplexer
-	uint			num_ports;
-	/// Whether or not sensor list is dynamic (refresh sensor list periodically)
-	bool			dynamic_list;
-	/// Interval to update sensor list at
-	uint			update_period;
+	uint			num_ports;			/// The number of ports on the multiplexer
+	bool			dynamic_list;		/// Whether or not sensor list is dynamic (refresh sensor list periodically)
+	uint			update_period;		/// Interval to update sensor list at
 
-	/// When the sensor list was last updated
-	unsigned long	last_update_time;
+	unsigned long	last_update_time;	/// When the sensor list was last updated
 
 public:
 
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// Multiplexer module constructor.
 	///
@@ -75,44 +71,66 @@ public:
 			uint			update_period		= 5000
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_Multiplexer(JsonVariant p);
 
-
 	/// Destructor
-	virtual ~Loom_Multiplexer();
+	~Loom_Multiplexer();
 
-	// General
-	void		print_config();
-	void		print_state();
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
 	void		measure();
-	void 		package(JsonObject json);
-	bool		cmd_route(JsonObject) {}
-	void		print_measurements();
-
-
+	void 		package(JsonObject json) override;
+	bool		cmd_route(JsonObject) override {}
 
 	/// Populate a bundle with a list of sensors currently attached
 	/// \param[out]	bndl	Bundle to populate with sensor list
 	void		get_sensor_list(JsonObject json);
 
-	/// Set whether or not to periodically update list of attached sensors
-	/// \param[in]	dynamic		The setting to set
-	void		set_is_dynamic(bool dynamic);
+	/// Update sensor list.
+	/// Polls all ports of multiplexer getting sensor on port (if any)
+	void		refresh_sensors();
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	void		print_config() override;
+	void		print_state() override;
+	void		print_measurements();
+
+//=============================================================================
+///@name	GETTERS
+/*@{*/ //======================================================================
+
 	/// Get whether or not sensors are updated dynamically
 	/// \return	True if dynamic
 	bool		get_is_dynamic();
+
+	/// Get the sensor list update period.
+	/// \return		The update period
+	int			get_update_period();
+
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
+
+	/// Set whether or not to periodically update list of attached sensors
+	/// \param[in]	dynamic		The setting to set
+	void		set_is_dynamic(bool dynamic);
 
 	/// Set the sensor list update period.
 	/// Requires dynamic_list to be enabled
 	/// \param[in]	New update period
 	void		set_update_period(int period);
-	/// Get the sensor list update period.
-	/// \return		The update period
-	int			get_update_period();
 
-	/// Update sensor list.
-	/// Polls all ports of multiplexer getting sensor on port (if any)
-	void		refresh_sensors();
+//=============================================================================
+///@name	MISCELLANEOUS
+/*@{*/ //======================================================================
 
 private:
 

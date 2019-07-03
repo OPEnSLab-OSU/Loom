@@ -1,10 +1,6 @@
 
 #include "Loom_Multiplexer.h"
 
-
-#include <Wire.h>
-
-
 // I2C Sensor files
 #include "Sensors/I2C/Loom_AS7262.h"
 #include "Sensors/I2C/Loom_AS7263.h"
@@ -20,8 +16,8 @@
 #include "Sensors/I2C/Loom_TSL2591.h"
 #include "Sensors/I2C/Loom_ZXGesture.h"
 
+#include <Wire.h>
 
-// Maybe these sensor lists go in own file
 
 
 // Used to optimize searching for sensors:
@@ -49,7 +45,60 @@ const byte Loom_Multiplexer::known_addresses[] =
 	0x77  // MS5803
 };
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+Loom_Multiplexer::Loom_Multiplexer(	
+		const char* 	module_name,
+		byte			i2c_address,
+		uint			num_ports,
+		bool			dynamic_list,	
+		uint 			update_period
+	) : LoomModule( module_name ) 
+{
+	this->module_type = ModuleType::Multiplexer;
+
+	this->i2c_address 	= i2c_address; 
+	this->num_ports 	= num_ports;
+	this->update_period	= update_period;
+
+	LPrintln("this->num_ports: ", this->num_ports);
+	LPrintln("num_ports: ", num_ports);
+
+	// Begin I2C 
+	Wire.begin();
+
+	// Create sensor array of 'num_ports' size
+	sensors = new LoomI2CSensor*[num_ports];
+
+	// Initialize array of sensors to Null pointrs
+	for (uint8_t i = 0; i < num_ports; i++) {
+		sensors[i] = NULL;
+	}
+
+	// Update sensor list and display   -- currently removed because Mux should be linked to DeviceManager before polling sensors
+	// refresh_sensors();
+	// print_state();
+
+	print_module_label(); 
+	LPrintln("Setup Complete");
+}
+
+///////////////////////////////////////////////////////////////////////////////
+Loom_Multiplexer::Loom_Multiplexer(JsonVariant p)
+	: Loom_Multiplexer(p[0], p[1], p[2], p[3], p[4])
+{}
+
+///////////////////////////////////////////////////////////////////////////////
+Loom_Multiplexer::~Loom_Multiplexer() 
+{
+	// Free any sensors
+	for (uint8_t i = 0; i < num_ports; i++) {
+		if (sensors[i] != NULL) {
+			delete sensors[i];
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
 LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 {
 
@@ -88,60 +137,8 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 	}
 }
 
-/////////////////////////////////////////////////////////////////////
-Loom_Multiplexer::Loom_Multiplexer(	
-		const char* 	module_name,
-		byte			i2c_address,
-		uint			num_ports,
-		bool			dynamic_list,	
-		uint 			update_period
-	) : LoomModule( module_name ) 
-{
-	this->module_type = ModuleType::Multiplexer;
 
-	this->i2c_address 	= i2c_address; 
-	this->num_ports 	= num_ports;
-	this->update_period	= update_period;
-
-	LPrintln("this->num_ports: ", this->num_ports);
-	LPrintln("num_ports: ", num_ports);
-
-	// Begin I2C 
-	Wire.begin();
-
-	// Create sensor array of 'num_ports' size
-	sensors = new LoomI2CSensor*[num_ports];
-
-	// Initialize array of sensors to Null pointrs
-	for (uint8_t i = 0; i < num_ports; i++) {
-		sensors[i] = NULL;
-	}
-
-	// Update sensor list and display   -- currently removed because Mux should be linked to DeviceManager before polling sensors
-	// refresh_sensors();
-	// print_state();
-
-	print_module_label(); 
-	LPrintln("Setup Complete");
-}
-
-/////////////////////////////////////////////////////////////////////
-Loom_Multiplexer::Loom_Multiplexer(JsonVariant p)
-	: Loom_Multiplexer(p[0], p[1], p[2], p[3], p[4])
-{}
-
-/////////////////////////////////////////////////////////////////////
-Loom_Multiplexer::~Loom_Multiplexer() 
-{
-	// Free any sensors
-	for (uint8_t i = 0; i < num_ports; i++) {
-		if (sensors[i] != NULL) {
-			delete sensors[i];
-		}
-	}
-}
-
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::print_config()
 {
 	LoomModule::print_config();
@@ -152,7 +149,7 @@ void Loom_Multiplexer::print_config()
 	LPrintln('\t', "Update Period (ms)  : ", update_period);
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::print_state()
 {
 	print_module_label();
@@ -170,7 +167,7 @@ void Loom_Multiplexer::print_state()
 	LPrintln();
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::measure()
 {
 	refresh_sensors();
@@ -183,7 +180,7 @@ void Loom_Multiplexer::measure()
 	}
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::print_measurements()
 {
 	for (uint8_t i = 0; i < num_ports; i++) {
@@ -194,7 +191,7 @@ void Loom_Multiplexer::print_measurements()
 	}
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::package(JsonObject json)
 {
 
@@ -210,7 +207,7 @@ void Loom_Multiplexer::package(JsonObject json)
 	}
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::get_sensor_list(JsonObject json)
 {
 	refresh_sensors();
@@ -227,31 +224,31 @@ void Loom_Multiplexer::get_sensor_list(JsonObject json)
 	}	
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::set_is_dynamic(bool dynamic)
 {
 	dynamic_list = dynamic;
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 bool Loom_Multiplexer::get_is_dynamic()
 {
 	return dynamic_list;
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::set_update_period(int period)
 {
 	update_period = period;
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 int  Loom_Multiplexer::get_update_period()
 {
 	return update_period;
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::refresh_sensors()
 {
 	byte previous, current;
@@ -315,7 +312,7 @@ void Loom_Multiplexer::refresh_sensors()
 	}
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 byte Loom_Multiplexer::get_i2c_on_port(uint8_t port)
 {
 	tca_select(port);
@@ -338,13 +335,13 @@ byte Loom_Multiplexer::get_i2c_on_port(uint8_t port)
 	return 0x00; // No sensor found
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 LoomI2CSensor* Loom_Multiplexer::get_sensor(uint8_t port)
 {
 	return sensors[port];
 }
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::tca_select(uint8_t port) 
 {
 	if (port < num_ports) {
@@ -354,3 +351,4 @@ void Loom_Multiplexer::tca_select(uint8_t port)
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////

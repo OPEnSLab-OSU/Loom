@@ -2,7 +2,10 @@
 
 #include "Loom_I2C_Sensor.h"
 
-#include "SparkFunLIS3DH.h"
+#include <SparkFunLIS3DH.h>
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 
 // ### (LoomI2CSensor) | dependencies: [] | conflicts: []
@@ -13,14 +16,15 @@ class Loom_LIS3DH : public LoomI2CSensor
 
 protected:
 
-	/// Underlying LIS3DH sensor manager instance
-	LIS3DH*		inst_LIS3DH;
+	LIS3DH*		inst_LIS3DH;	/// Underlying LIS3DH sensor manager instance
 
-	/// Measured acceleration values (x,y,z)(g's)
-	float		accel[3];
+	float		accel[3];		/// Measured acceleration values (x,y,z)(g's)
 
 public:
-
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// LIS3DH module constructor
 	///
@@ -31,16 +35,26 @@ public:
 			const char*		module_name		= "LIS3DH"
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_LIS3DH(JsonVariant p);
 
-
 	/// Destructor
-	virtual ~Loom_LIS3DH();
+	~Loom_LIS3DH();
 
-	// Inherited (Overriding) Methods
-	void		print_measurements() override;
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
 	void		measure() override;
-	void 		package(JsonObject json);
+	void 		package(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	void		print_measurements() override;
 
 private:
 

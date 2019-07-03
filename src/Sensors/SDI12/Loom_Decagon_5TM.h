@@ -3,6 +3,9 @@
 #include "Loom_SDI12_Sensor.h"
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomSDI12Sensor) | dependencies: [] | conflicts: []
 /// Decagon 5TM soil moisture sensor module
 // ###
@@ -13,6 +16,10 @@ protected:
 
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// Decagon 5TM module constructor
 	///
@@ -23,22 +30,29 @@ public:
 			uint8_t			num_samples		= 1
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_Decagon5TM(JsonVariant p);
 
-
 	/// Destructor
-	virtual ~Loom_Decagon5TM();
+ 	~Loom_Decagon5TM() = default;
 
-	// Inherited Methods
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+	void		measure() override;
+	void 		package(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
 	void		print_config() override;
 	void		print_measurements() override;
-	// void		calibrate() override;
-	void		measure() override;
-	void 		package(JsonObject json);
-
 
 private:
-
 
 };
 

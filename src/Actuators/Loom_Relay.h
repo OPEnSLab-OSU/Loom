@@ -3,6 +3,9 @@
 #include "Loom_Actuator.h"
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomActuator) | dependencies: [] | conflicts: []
 /// Relay actuator module
 // ###
@@ -18,6 +21,10 @@ protected:
 	bool		on;
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// Relay module constructor.
 	///
@@ -28,26 +35,31 @@ public:
 			byte			pin				= 10
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_Relay(JsonVariant p);
-	
-	// Loom_Relay* static Create(JsonVariant p);
-
-
 
 	/// Destructor
- ~Loom_Relay();
+	~Loom_Relay() = default;
 
-	// Inherited (Overriding) Methods
-	void		print_config() override;
-	void		print_state();
-	void 		package(JsonObject json);
-	bool		cmd_route(JsonObject json);
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
 
-	// --- Actuator Control ---
+	void 		package(JsonObject json) override;
+	bool		cmd_route(JsonObject json) override;
 
 	/// Set relay state
 	/// \param[in]	state	The state to set relay to (True=HIGH, False=LOW)
 	void		set(bool state);
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	void		print_config() override;
+	void		print_state() override;
 
 private:
 

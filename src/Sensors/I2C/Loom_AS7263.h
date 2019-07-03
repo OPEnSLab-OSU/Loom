@@ -4,6 +4,10 @@
 
 #include "AS726X.h"
 
+
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// AS7263 Near Infrared spectrum spectral sensor module
 // ###
@@ -12,24 +16,20 @@ class Loom_AS7263 : public LoomI2CSensor
 
 protected:
 
-	/// Underlying AS7263 sensor manager instance
-	AS726X		inst_AS7263;
+	AS726X		inst_AS7263;		/// Underlying AS7263 sensor manager instance
 
-	/// Measured near-infra-red band values (r,s,t,u,v,w)
-	int			nir_vals[6];
-
-	/// Whether or not to use bulb
-	bool		use_bulb;
-
-	/// Gain setting
-	byte		gain;
-	/// Sensor read mode
-	byte		mode;
-	/// Integration time setting
-	byte		integration_time;
+	int			nir_vals[6];		/// Measured near-infra-red band values (r,s,t,u,v,w)
+	
+	bool		use_bulb;			/// Whether or not to use bulb
+	byte		gain;				/// Gain setting
+	byte		mode;				/// Sensor read mode
+	byte		integration_time;	/// Integration time setting
 
 public:
-
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// AS7263 module constructor
 	///
@@ -48,29 +48,53 @@ public:
 			byte			integration_time	= 50
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_AS7263(JsonVariant p);
 
 	/// Destructor
-	virtual ~Loom_AS7263();
+	~Loom_AS7263() = default;
 
-	// Inherited (Overriding) Methods
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+	void		measure() override;
+	void 		package(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
 	void		print_config() override;
 	void		print_measurements() override;
-	void		measure() override;
-	void 		package(JsonObject json);
 
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
 
+	/// Set whether not bulb is used for active light source
+	/// \param[in]	enable	Whether or not to enable 
 	void		enable_bulb(bool enable);
-	// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
-	void		set_gain(byte gain);
-	// 0: Continuous reading of STUV
-	// 1: Continuous reading of RTUX
-	// 2: Continuous reading of all channels (power-on default)
-	// 3: One-shot reading of all channels
-	void		set_mode(byte mode);
-	// Time will be 2.8ms * [integration value]  (0-255), 50 is default
-	void		set_integration_time(byte time);
 
+	/// Set gain.
+	/// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
+	/// \param[in]	gain	Gain level: 
+	void		set_gain(byte gain);
+
+	/// Set mode.
+	/// 0: Continuous reading of STUV
+	/// 1: Continuous reading of RTUX
+	/// 2: Continuous reading of all channels (power-on default)
+	/// 3: One-shot reading of all channels
+	/// \param[in]	mode	Mode
+	void		set_mode(byte mode);
+
+	/// Set integration time.
+	/// Time will be 2.8ms * [integration value]  (0-255), 50 is default
+	/// \param[in]	time	Integration time
+	void		set_integration_time(byte time);
 
 private:
 

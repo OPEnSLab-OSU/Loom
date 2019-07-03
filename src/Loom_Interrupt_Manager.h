@@ -9,13 +9,9 @@
 // #include <initializer_list>
 
 
-
-/// Number of interrupts
-#define InteruptRange 16
-/// Maximum number of timers
-#define MaxTimerCount 4
-/// Maximum numbr of stopwatches
-#define MaxStopWatchCount 2
+#define InteruptRange 16		/// Number of interrupts
+#define MaxTimerCount 4			/// Maximum number of timers
+#define MaxStopWatchCount 2		/// Maximum numbr of stopwatches
 
 
 
@@ -58,6 +54,8 @@ struct StopWatchDetails {
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
+
 
 // ### (LoomModule) | dependencies: [] | conflicts: []
 /// Submanager for managing interrupts, timers, and stopwatches
@@ -67,27 +65,22 @@ class Loom_Interrupt_Manager : public LoomModule
 
 protected:
 
-	/// Enable or disable all interrupts 	-- currently only disables bottom halves
-	bool			interrupts_enabled;
-
-	/// List of interrupts configurations
-	IntDetails		int_settings[InteruptRange];
-
+	IntDetails		int_settings[InteruptRange];		/// List of interrupts configurations
+	
 	// Flags set by interrupts, indicating ISR bottom
 	// half should be called if not Null
 	static bool 	interrupt_triggered[InteruptRange];
 
-	/// Pointer to an RTC object for managing timers / timed interrupts
-	LoomRTC*		RTC_Inst;
-
-	/// Pointer to a Sleep Manager object
-	Loom_Sleep_Manager* Sleep_Manager;
-
-	/// Last time an alarm went off
-	DateTime		last_alarm_time;
+	bool			interrupts_enabled;			/// Enable or disable all interrupts 	-- currently only disables bottom halves
+	
+	LoomRTC*		RTC_Inst;					/// Pointer to an RTC object for managing timers / timed interrupts	
+	Loom_Sleep_Manager* Sleep_Manager;			/// Pointer to a Sleep Manager object
+	
+	DateTime		last_alarm_time;			/// Last time an alarm went off
 
 
 	// millis timers
+
 	AsyncDelay		timers[MaxTimerCount];
 	TimerDetails	timer_settings[MaxTimerCount];
 
@@ -97,6 +90,10 @@ protected:
 
 	// interrupt_triggered for timers, also support immediate and delayed
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// Interrupt Manager module constructor.
 	///
@@ -107,48 +104,24 @@ public:
 			LoomRTC*		RTC_Inst		= nullptr
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_Interrupt_Manager(JsonVariant p);
 
-
 	/// Destructor
-	virtual ~Loom_Interrupt_Manager();
+	~Loom_Interrupt_Manager() = default;
 
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
 
-	const static char* interrupt_type_to_string(int type);
+	void 		package(JsonObject json) override {}
+	bool		cmd_route(JsonObject) override {}
 
-
-	// Inherited methods
-	void		print_config() override;
-	void		print_state() override;
-	void		measure() {}
-	void 		package(JsonObject json) {}
-	bool		cmd_route(JsonObject) {}
-
-
-	void 		link_device_manager(LoomManager* LM);
-	void 		link_sleep_manager(Loom_Sleep_Manager* SM);
-
-	void		run_pending_ISRs();
-
-
-// === === Interrupt Functions === ===
-
-
-	/// All interrupts enable/disable
-	/// \param[in]	state	Enable state to apply to all interrupts
-	void		set_interrupts_enabled(bool state);
-	/// Get global interrupt enable state
-	/// \return		Global interrupt enable state
-	bool		get_interrupts_enabled();
-
-	/// Per interrupt enable
-	/// \param[in]	pin		Interrupt pin to change enable state of
-	/// \param[in]	state	The enable state to set pin to
-	void		set_enable_interrupt(byte pin, bool state);
-	/// Get pin interrupt enable state
-	/// \return		The enable state
-	bool		get_enable_interrupt(byte pin);
-
+//=============================================================================
+///@name	EXTERNAL INTERRUPT METHODS
+/*@{*/ //======================================================================
 
 	/// Register an ISR to an interrupt pin and its configuration
 	/// \param[in]	pin			Which pin to connect the interrupt on
@@ -157,6 +130,9 @@ public:
 	/// \param[in]	immediate	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
 	void		register_ISR(byte pin, ISRFuncPtr ISR, byte signal_type, ISR_Type run_type);
 
+	/// Run any waiting ISRs.
+	/// Flag was set by a top half ISR
+	void		run_pending_ISRs();
 
 	/// Restores pin to default ISR, disables interrupt
 	/// \param[in]	pin		The pin to unregister ISRs for
@@ -169,23 +145,13 @@ public:
 	void		interrupt_reset(byte pin);
 
 
+//=============================================================================
+///@name	RTC ALARM METHODS
+/*@{*/ //======================================================================
 
-// === === RTC Alarm Functions === ===
+	// Shorten names, maybe combine, taking behavior (e.g. relative/absolute) as parameter
 
-	/// Set the RTC module to use for timers
-	/// \param[in]	RTC_Inst	Pointer to the RTC object
-	void		set_RTC_module(LoomRTC* RTC_Inst);
-	/// Return pointer to the currently linked RTC object
-	/// \return		Current RTC object
-	LoomRTC*	get_RTC_module();
-
-
-
-// Shorten names, maybe combine, taking behavior (e.g. relative/absolute) as parameter
-
-
-
-// sleep_for
+	// sleep_for
 	/// Set RTC alarm relative time from now
 	/// \param[in]	duration	How long before the alarm should go off
 	bool		RTC_alarm_duration(TimeSpan duration);
@@ -197,7 +163,7 @@ public:
 	/// \param[in]	seconds		Seconds into the future the alarm should be set
 	bool		RTC_alarm_duration(uint days, uint hours, uint minutes, uint seconds);
 
-// sleep_until
+	// sleep_until
 	/// Set RTC alarm for a specific time.
 	/// Increments to next day at given hour, min, sec if specified time is in past
 	/// \param[in]	future_time		Time to set alarm for
@@ -209,8 +175,6 @@ public:
 	/// \param[in]	minute		Minute to set alarm for
 	/// \param[in]	second		Second to set alarm for
 	bool		RTC_alarm_at(uint hour, uint minute, uint second);
-
-
 
 // // sleep_for
 	/// Set RTC alarm relative time from last alarm time
@@ -225,41 +189,95 @@ public:
 	bool		RTC_alarm_duration_from_last(uint days, uint hours, uint minutes, uint seconds);
 
 
-
-// some sort of alarm auto repeating
-
-
-// === === AsyncDelay Timer Functions === ===
-
+//=============================================================================
+///@name	ASYNCDELAY TIMER METHODS
+/*@{*/ //======================================================================
 
 	/// Check if timers have elapsed, if so run associated 'ISR'
 	void		check_timers();
 
 	/// Configure specified timer
+	/// \param[in]	timer_num		Timer to set
+	/// \param[in]	duration		How long timer should take (seconds)
+	/// \param[in]	ISR				ISR to run after timer goes off
+	/// \param[in]	repeat			Whether or not to be a repeating alarm
 	void		register_timer(uint timer_num, unsigned long duration, ISRFuncPtr ISR, bool repeat);
 
-	/// Clear specified timer
+	/// Clear specified timer 
+	/// \param[in]	timer_num		Timer to clear
 	void		clear_timer(uint timer_num);
 
+//=============================================================================
+///@name	STOPWATCH METHODS
+/*@{*/ //======================================================================
 
 
-
-// === === Stopwatch Functions === ===
-
-
-
-
-// === === Internal Timer Functions === ===
-
+//=============================================================================
+///@name	INTERNAL TIMER METHODS
+/*@{*/ //======================================================================
 
 	// https://github.com/GabrielNotman/RTCCounter
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	void		print_config() override;
+	void		print_state() override;
+
+//=============================================================================
+///@name	GETTERS
+/*@{*/ //======================================================================
+
+	/// Get global interrupt enable state
+	/// \return		Global interrupt enable state
+	bool		get_interrupts_enabled();
+
+	/// Get pin interrupt enable state
+	/// \param[in]	pin		Pin to the the enable state of
+	/// \return		The enable state
+	bool		get_enable_interrupt(byte pin);
+
+	/// Return pointer to the currently linked RTC object
+	/// \return		Current RTC object
+	LoomRTC*	get_RTC_module();
+
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
+
+	void 		link_device_manager(LoomManager* LM) override;
+
+	/// Set pointer to sleep Manager
+	/// \param[in]	SM		Pointer to sleep manager
+	void 		link_sleep_manager(Loom_Sleep_Manager* SM);
+
+	/// All interrupts enable/disable
+	/// \param[in]	state	Enable state to apply to all interrupts
+	void		set_interrupts_enabled(bool state);
+
+	/// Per interrupt enable
+	/// \param[in]	pin		Interrupt pin to change enable state of
+	/// \param[in]	state	The enable state to set pin to
+	void		set_enable_interrupt(byte pin, bool state);
+
+	/// Set the RTC module to use for timers
+	/// \param[in]	RTC_Inst	Pointer to the RTC object
+	void		set_RTC_module(LoomRTC* RTC_Inst);
+
+//=============================================================================
+///@name	MISCELLANEOUS
+/*@{*/ //======================================================================
+
+	/// Get c-string of name associated with interrupt type enum
+	/// \return C-string of interrupt type
+	const static char* interrupt_type_to_string(int type);
 
 
 private:
 
 	/// Checks the flags set by default ISRs, calls pending bottom half ISRs
 	void		run_ISR_bottom_halves();
-
 
 	// Default ISRs that set flags, detach interrupt to prevent multiple triggering (reattached after checking flag)
 	static void default_ISR_0()  { interrupt_triggered[0]  = true; };
@@ -278,6 +296,7 @@ private:
 	static void default_ISR_13() { interrupt_triggered[13] = true; };
 	static void default_ISR_14() { interrupt_triggered[14] = true; };
 	static void default_ISR_15() { interrupt_triggered[15] = true; };
+
 
 // detaching interrupt did not seem to work
 	// static void default_ISR_0()  { detachInterrupt(digitalPinToInterrupt(0));  interrupt_triggered[0]  = true;   }

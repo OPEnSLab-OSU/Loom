@@ -9,8 +9,6 @@
 #include <EnableInterrupt.h>
 
 
-
-
 /// Different options available to sleep in
 enum class SleepMode {
 	IDLE, 			///< Idle
@@ -18,6 +16,9 @@ enum class SleepMode {
 	SLEEPYDOG, 		///< SleepyDog (sleep 'hack')
 	OPENS_LOWPOWER	///< OPEnS board to shut board off completely
 };
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 
 // ### (LoomModule) | dependencies: [] | conflicts: []
@@ -28,19 +29,20 @@ class Loom_Sleep_Manager : public LoomModule
 
 protected:
 
-	/// Whether or not to use LED to indicate wake status
-	bool 		use_LED;
-	/// Whether to provide delay on wake.
-	/// Used to allow user to restart Serial Monitor
-	bool		delay_on_wake;
-	/// Which sleep mode to use
-	SleepMode 	sleep_mode;
-	///	Which pin to use to power board off (requires power board)
-	byte		power_off_pin;
-	/// Pointer to interrupt_manager instance 
-	Loom_Interrupt_Manager* interrupt_manager;
+	
+	bool 		use_LED;			/// Whether or not to use LED to indicate wake status
+	bool		delay_on_wake;		/// Whether to provide delay on wake.
+									/// Used to allow user to restart Serial Monitor
+	SleepMode 	sleep_mode;			/// Which sleep mode to use
+	byte		power_off_pin;		///	Which pin to use to power board off (requires power board)
+	
+	Loom_Interrupt_Manager* interrupt_manager;	/// Pointer to interrupt_manager instance 
 
 public:
+
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// Sleep Manager module constructor.
 	///
@@ -59,23 +61,18 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	JsonVariant		The array of constuctor args to expanc
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_Sleep_Manager(JsonVariant p);
 
 	//// Destructor
-	virtual ~Loom_Sleep_Manager();
+	~Loom_Sleep_Manager() = default;
 
-	/// Set pointer to interrupt manager
-	/// \param[in]	IM	Pointer to an interrupt manager	
-	void 		link_interrupt_manager(Loom_Interrupt_Manager* IM);
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
 
-
-	// Inherited methods
-	void		print_config() override;
-	void		print_state() override;
-	void		measure() {}
-	void 		package(JsonObject json) {}
-	bool		cmd_route(JsonObject) {}
+	void 		package(JsonObject json) override {}
+	bool		cmd_route(JsonObject) override {}
 
 	/// Put into low power state.
 	/// On wake, program will continue from where it went to sleep
@@ -86,18 +83,41 @@ public:
 	/// Program will restart from setup on wake
 	void		powerDown();
 
-	/// Set the sleep mode to use
-	/// \param[in]	mode	The SleepMode to set to
-	void		set_sleep_mode(SleepMode mode);
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	void		print_config() override;
+	void		print_state() override;
+
+//=============================================================================
+///@name	GETTERS
+/*@{*/ //======================================================================
 
 	/// Get the current sleep mode
 	/// \return		The current sleep mode
 	SleepMode	get_sleep_mode();
-	
-	/// Convert enum of sleep mode to a string
-	/// \return String of sleep mode
-	const static char* enum_sleep_mode_string(SleepMode m);
 
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
+
+	/// Set pointer to interrupt manager
+	/// \param[in]	IM	Pointer to an interrupt manager	
+	void 		link_interrupt_manager(Loom_Interrupt_Manager* IM);
+
+	/// Set the sleep mode to use
+	/// \param[in]	mode	The SleepMode to set to
+	void		set_sleep_mode(SleepMode mode);
+
+//=============================================================================
+///@name	MISCELLANEOUS
+/*@{*/ //======================================================================
+
+	/// Convert enum of sleep mode to a c-string
+	/// \return C-string of sleep mode
+	const static char* enum_sleep_mode_string(SleepMode m);
+	
 private:
 
 	/// Handles pre-sleep operations

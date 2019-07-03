@@ -5,6 +5,9 @@
 #include <Adafruit_MAX31856.h>
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomSPISensor) | dependencies: [] | conflicts: []
 /// MAX31856 thermocouple module.
 /// Measures temperature.
@@ -14,18 +17,19 @@ class Loom_MAX31856 : public LoomSPISensor
 
 protected:
 
-	/// Underlying MAX31856 sensor manager instance
-	Adafruit_MAX31856* inst_max;
+	Adafruit_MAX31856* inst_max;	/// Underlying MAX31856 sensor manager instance
 
 	/// Raw value
 	// float voltage;
 
-	/// Measured temperature
-	float temperature;
-	/// Measured cold junction temperature
-	float cj_temp;
+	float temperature;				/// Measured temperature
+	float cj_temp;					/// Measured cold junction temperature
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// MAX31856 module constructor.
 	///
@@ -48,19 +52,27 @@ public:
 			// type
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_MAX31856(JsonVariant p);
 
 	/// Destructor
-	virtual ~Loom_MAX31856();
+	~Loom_MAX31856();
 
-	// Inherited Methods
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+	void		measure() override;
+	void 		package(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
 	void		print_config() override;
 	void		print_measurements() override;
-	void		calibrate() {}
-	void		measure() override;
-	void 		package(JsonObject json);
-
-
 
 private:
 

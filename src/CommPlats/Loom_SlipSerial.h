@@ -4,16 +4,15 @@
 
 #include <SLIPEncodedSerial.h>
 
-/// Pin used for SlipSerial RX
-#define SERIAL3_RX	A5
-/// Pin used for SlipSerial TX
-#define SERIAL3_TX	6
 
-/// Baud rate used for communication
-#define BAUD_RATE	115200
-/// Maximum size a message can be
-#define SERIAL_MAX_MESSAGE_LEN	15
+#define SERIAL3_RX	A5				/// Pin used for SlipSerial RX
+#define SERIAL3_TX	6				/// Pin used for SlipSerial TX
 
+#define BAUD_RATE	115200			/// Baud rate used for communication
+#define SERIAL_MAX_MESSAGE_LEN	15	/// Maximum size a message can be
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 
 // ### (LoomLogPlat) | dependencies: [] | conflicts: []
@@ -23,11 +22,14 @@ class Loom_SlipSerial : public LoomCommPlat
 {
 
 protected:
-
-	/// Baud rate
-	uint baud_rate = BAUD_RATE;
+	
+	uint baud_rate = BAUD_RATE;		/// Baud rate
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// SlipSerial module constructor.
 	///
@@ -38,23 +40,43 @@ public:
 			uint			max_message_len		= SERIAL_MAX_MESSAGE_LEN
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_SlipSerial(JsonVariant p);
 
 	//// Destructor
-	~Loom_SlipSerial();
+	~Loom_SlipSerial() = default;
 
-	// Inherited (Overriding) Methods
-	void print_config() override;
-	void set_address(uint addr);
-	uint get_address();
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
 
-	// Build json from packet if any exists
-	bool		receive(JsonObject json) {}
+	bool		receive(JsonObject json) override {}
+	bool		send(JsonObject json, uint16_t destination) override {}
+	bool		send(JsonObject json) override {}
 
-	// Send json
-	bool		send(JsonObject json, uint16_t destination) {}
-	bool		send(JsonObject json) {}
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
 
+	void 		print_config() override;
+
+//=============================================================================
+///@name	GETTERS
+/*@{*/ //======================================================================
+
+	uint 		get_address() override;
+
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
+
+	void 		set_address(uint addr) override;
+
+//=============================================================================
+///@name	MISCELLANEOUS
+/*@{*/ //======================================================================
 
 private:
 

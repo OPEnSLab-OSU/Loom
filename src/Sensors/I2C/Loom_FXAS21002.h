@@ -5,6 +5,9 @@
 #include <Adafruit_FXAS21002C.h>
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// FXAS21002 3-Axis Gyroscope snesor module
 // ###
@@ -12,15 +15,15 @@ class Loom_FXAS21002 : public LoomI2CSensor
 {
 
 protected:
-
-	/// Underlying FXAS21002 sensor manager instance
-	Adafruit_FXAS21002C*	inst_FXAS21002;
-
-	/// Measured gyro values (x,y,z)
-	float		gyro[3];
+	
+	Adafruit_FXAS21002C*	inst_FXAS21002;		/// Underlying FXAS21002 sensor manager instance
+	float					gyro[3];			/// Measured gyro values (x,y,z)
 
 public:
-
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// FXAS21002 module constructor
 	///
@@ -31,15 +34,26 @@ public:
 			const char*		module_name		= "FXAS21002"
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_FXAS21002(JsonVariant p);
 
 	/// Destructor
-	virtual ~Loom_FXAS21002();
+	~Loom_FXAS21002();
 
-	// Inherited (Overriding) Methods
-	void		print_measurements() override;
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
 	void		measure() override;
-	void 		package(JsonObject json);
+	void 		package(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	void		print_measurements() override;
 
 private:
 

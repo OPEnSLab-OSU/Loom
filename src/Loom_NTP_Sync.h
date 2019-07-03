@@ -1,10 +1,11 @@
 #include "Loom_Module.h"
 #include "./InternetPlats/Loom_InternetPlat.h"
 #include "./RTC/Loom_RTC.h"
-#include "./Loom_Manager.h"
-#include "ArduinoJson.h"
-#include "Loom_Macros.h"
 #include "Loom_Interrupt_Manager.h"
+
+
+///////////////////////////////////////////////////////////////////////////////
+
 
 // ### (LoomModule) | dependencies: [] | conflicts: []
 /// 
@@ -15,6 +16,11 @@ class LoomNTPSync : public LoomModule
 protected:
 
 public:
+
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
+
 	/// NTP Sync module constructor.
 	///
 	/// \param[in]	module_name				String | <"NTP1"> | null | NTP synchronizer module name
@@ -26,25 +32,34 @@ public:
 		const uint			sync_interval_hours		= 0
 	);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	LoomNTPSync(JsonVariant p);
 
-
-	/// Destructor ---
+	/// Destructor
 	~LoomNTPSync() = default;
 
-
-
 	/// Sync the RTC using NTP from the internet platform specified
-	void        second_stage_ctor() override;
+	void	second_stage_ctor() override;
 
-	
-	void		print_config() override;
-	void		print_state() override;
-	void		measure() override;
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+	void		measure();
 	void 		package(JsonObject json) override { /* do nothing */ };
 	bool		cmd_route(JsonObject) override { /* do nothing */}
 
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	void		print_config() override;
+	void		print_state() override;	
+
 private:
+	
 	/// the actual synchronization function
 	DateTime m_sync_rtc();
 	/// enumerate errors

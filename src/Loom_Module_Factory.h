@@ -113,9 +113,9 @@ class Factory
 public:
 	
 	/// Constructor
-	Factory();
+	Factory() = default;
 	//// Destructor
-	~Factory();
+	~Factory() = default;
 
 	/// Create a LoomModule accoding to Json parameters
 	/// \param[in]	module		Json of the module name and settings

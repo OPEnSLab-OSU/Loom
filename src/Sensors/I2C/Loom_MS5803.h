@@ -6,6 +6,9 @@
 #include <MS5803_02.h>
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// MS5803 Atmospheric Pressure / Temperature sensor module
 // ###
@@ -14,19 +17,18 @@ class Loom_MS5803 : public LoomI2CSensor
 
 protected:
 
-	/// Underlying MS5803 sensor manager instance
-	MS_5803*	inst_MS5803;
+	MS_5803*	inst_MS5803;	/// Underlying MS5803 sensor manager instance
 
-	/// Read calibration data stored on sensor
-	uint16_t	MS_PROM[8];
+	uint16_t	MS_PROM[8];		/// Read calibration data stored on sensor
 
-	/// Measure pressure (mbar)
-	float		pressure;
-
-	/// Measured temperature (C)
-	float		temp;
+	float		pressure;		/// Measure pressure (mbar)
+	float		temp;			/// Measured temperature (C)
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// MS5803 module constructor
 	///
@@ -37,16 +39,26 @@ public:
 			const char*		module_name		= "MS5803"
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_MS5803(JsonVariant p);
 
-
 	/// Destructor
-	virtual ~Loom_MS5803();
+	~Loom_MS5803();
 
-	// Inherited (Overriding) Methods
-	void		print_measurements() override;
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
 	void		measure() override;
-	void 		package(JsonObject json);
+	void 		package(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	void		print_measurements() override;
 
 private:
 

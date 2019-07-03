@@ -1,8 +1,8 @@
 
 #include "Loom_InternetPlat.h"
 
-/////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR ---
+
+///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::LoomInternetPlat(	
 		const char* module_name
 	) 
@@ -10,7 +10,7 @@ LoomInternetPlat::LoomInternetPlat(
 		this->module_type = ModuleType::Internet;
 	}
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb) {
 	/// print the initial http request
 	client.print(verb);
@@ -25,3 +25,5 @@ void LoomInternetPlat::write_http_request(Stream& client, const char* domain, co
 	client.print("\r\n");
 	/// all ready to go!
 }
+
+///////////////////////////////////////////////////////////////////////////////

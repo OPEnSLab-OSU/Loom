@@ -2,6 +2,10 @@
 
 #include "Loom_RTC.h"
 
+
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomRTC) | dependencies: [] | conflicts: []
 /// PCF8523 RTC module
 // ###
@@ -10,10 +14,13 @@ class Loom_PCF8523 : public LoomRTC
 
 protected:
 
-	/// Underlying PCF8523 manager instance
-	PCF8523*		rtc_inst;
+	PCF8523*		rtc_inst;		/// Underlying PCF8523 manager instance
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// PCF8523 module constructor
 	///
@@ -30,26 +37,37 @@ public:
 			byte			int_pin				= 6
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_PCF8523(JsonVariant p);
 
-
 	/// Destructor
-	virtual ~Loom_PCF8523();
+	~Loom_PCF8523();
 
-	// Inherited (overriding) Methods
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+	DateTime	now() override;
+
+	// proper alarms not really working yet
+	void		set_alarm(DateTime time) override;
+	void		set_alarm(TimeSpan duration) override;
+	void		clear_alarms() override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
 	void		print_config() override;
-	DateTime	now();
-
-// proper alarms not really working yet
-	void		set_alarm(DateTime time);
-	void		set_alarm(TimeSpan duration);
-	void		clear_alarms();
 
 protected:
 
-	bool		_begin();
-	bool		_initialized();
-	void		time_adjust(DateTime time);
+	bool		_begin() override;
+	bool		_initialized() override;
+	void		time_adjust(DateTime time) override;
 
 };
 
+				

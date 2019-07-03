@@ -15,17 +15,21 @@ enum class OLED_Version {
 
 /// Different formats to display information in
 enum class OLED_Format {
-	FOUR,		///< 4 Key values
-	EIGHT,		///< 8 Key values
-	SCROLL		///< Scrolling
+	FOUR,			///< 4 Key values
+	EIGHT,			///< 8 Key values
+	SCROLL			///< Scrolling
 };
 
 /// Differnt freeze behaviors
 enum class OLED_Freeze {
-	DISABLE, 	///< Freeze disabled
-	DATA, 		///< Screen freezes
-	SCROLL 		///< Scroll freezes, data updates
+	DISABLE, 		///< Freeze disabled
+	DATA, 			///< Screen freezes
+	SCROLL 			///< Scroll freezes, data updates
 };
+
+
+///////////////////////////////////////////////////////////////////////////////
+
 
 // ### (LoomLogPlat) | dependencies: [] | conflicts: []
 /// OLED logging platform module.
@@ -34,34 +38,20 @@ class Loom_OLED : public LoomLogPlat
 {
 
 protected:
-
-		/// Underlying OLED controller
-		Adafruit_SSD1306*	display;
-
-		/// What type the OLED is (FeatherWing or breakout)
-		OLED_Version		version;
-
-		/// The reset pin (only applies to breakout version)
-		byte				reset_pin;
-
-		/// How to display the data on OLED
-		OLED_Format			display_format;
-
-		/// The duration to complete a full cycle through a bundle of data (milliseconds)(non-blocking)
-		uint				scroll_duration;
-
-		/// Which pin to check if display should freeze
-		byte				freeze_pin;
-
-		/// What 'freezing' behavior should be followed
-		OLED_Freeze			freeze_behavior;
+		Adafruit_SSD1306*	display;			/// Underlying OLED controller
+		OLED_Version		version;			/// What type the OLED is (FeatherWing or breakout)
+		byte				reset_pin;			/// The reset pin (only applies to breakout version)
+		
+		OLED_Format			display_format;		/// How to display the data on OLED
+		uint				scroll_duration;	/// The duration to complete a full cycle through a bundle of data (milliseconds)(non-blocking)
+		byte				freeze_pin;			/// Which pin to check if display should freeze
+		OLED_Freeze			freeze_behavior;	/// What 'freezing' behavior should be followed
 
 public:
-
-	const static char* enum_oled_version_string(OLED_Version v);
-	const static char* enum_oled_format_string(OLED_Format f);
-	const static char* enum_oled_freeze_string(OLED_Freeze f);
-
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// OLED module constructor.
 	///
@@ -86,47 +76,81 @@ public:
 			OLED_Freeze			freeze_behavior			= OLED_Freeze::SCROLL
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_OLED(JsonVariant p);
 
-
 	/// Destructor
-	virtual ~Loom_OLED();
+	~Loom_OLED();
 
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+	void			log(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
 
 	void			print_config() override;
 
-	void			log(JsonObject json);
+//=============================================================================
+///@name	GETTERS
+/*@{*/ //======================================================================
 
-
-	/// Set the OLED display organization.
-	/// \param[in]	format	The OLED_Format to set to
-	void			set_display_format(OLED_Format format);
 	/// Get the current OLED display organization.
 	/// \return		The current OLED_Format being used
 	OLED_Format		get_display_format();
 
-	/// Set the duration of a complete scroll.
-	/// \param[in]	duration	The duration to set to
-	void			set_scroll_duration(uint duration);
 	/// Get the current scroll duration.
 	/// \return		The current scroll duration
 	uint			get_scroll_duration();
 
-	/// Set the digital pin to use to freeze the display
-	/// param[in]	pin		The pin to use
-	void			set_freeze_pin(byte pin);
 	/// Get the digital pin use to freeze the display
 	/// return	The freeze pin
 	byte			get_freeze_pin();
 
-	/// Set the freezing behavior of the display
-	/// \param[in]	behavior	Which OLED_Freeze type to use
-	void			set_freeze_behavior(OLED_Freeze behavior);
 	/// Get the current freeze behavior
 	/// \return		The current freeze behavior
 	OLED_Freeze		get_freeze_behavior();
 
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
 
+	/// Set the OLED display organization.
+	/// \param[in]	format	The OLED_Format to set to
+	void			set_display_format(OLED_Format format);
+
+	/// Set the duration of a complete scroll.
+	/// \param[in]	duration	The duration to set to
+	void			set_scroll_duration(uint duration);
+
+	/// Set the digital pin to use to freeze the display
+	/// param[in]	pin		The pin to use
+	void			set_freeze_pin(byte pin);
+
+	/// Set the freezing behavior of the display
+	/// \param[in]	behavior	Which OLED_Freeze type to use
+	void			set_freeze_behavior(OLED_Freeze behavior);
+
+//=============================================================================
+///@name	MISCELLANEOUS
+/*@{*/ //======================================================================
+
+	/// Get c-string of name associated with OLED version enum
+	/// \return C-string of OLED version
+	const static char* enum_oled_version_string(OLED_Version v);
+	
+	/// Get c-string of name associated with OLED format enum
+	/// \return C-string of OLED format
+	const static char* enum_oled_format_string(OLED_Format f);
+
+	/// Get c-string of name associated with OLED freeze behavior enum
+	/// \return C-string of OLED freeze behavior
+	const static char* enum_oled_freeze_string(OLED_Freeze f);
 
 private:
 

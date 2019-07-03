@@ -2,6 +2,10 @@
 
 #include "Loom_RTC.h"
 
+
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomRTC) | dependencies: [] | conflicts: []
 /// DS3231 RTC module
 // ###
@@ -10,10 +14,13 @@ class Loom_DS3231 : public LoomRTC
 
 protected:
 
-	/// Underlying DS3231 manager instance
-	RTC_DS3231*  rtc_inst;
+	RTC_DS3231*  rtc_inst;		/// Underlying DS3231 manager instance
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// DS3231 module constructor
 	///
@@ -30,24 +37,34 @@ public:
 			byte			int_pin				= 6
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_DS3231(JsonVariant p);
 
 	/// Destructor
-	virtual ~Loom_DS3231();
+	~Loom_DS3231();
 
-	// Inherited (overriding) Methods
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+	DateTime	now() override;
+	void		set_alarm(DateTime time) override;
+	void		set_alarm(TimeSpan duration) override;
+	void		clear_alarms() override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
 	void		print_config() override;
-	DateTime	now();
-	void		set_alarm(DateTime time);
-	void		set_alarm(TimeSpan duration);
-	void		clear_alarms();
-
 
 protected:
 
-	bool		_begin();
-	bool		_initialized();
-	void		time_adjust(DateTime time);
+	bool		_begin() override;
+	bool		_initialized() override;
+	void		time_adjust(DateTime time) override;
 
 };
 

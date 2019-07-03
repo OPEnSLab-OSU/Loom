@@ -12,6 +12,9 @@ enum class ZXMode {
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomI2CSensor) | dependencies: [] | conflicts: []
 /// ZXGesture position / gesture sensor module
 // ###
@@ -37,6 +40,10 @@ protected:
 	uint8_t			gesture_speed;
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// ZXGesture module constructor
 	///
@@ -49,17 +56,27 @@ public:
 			ZXMode			mode			= ZXMode::ZX_POS
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_ZXGesture(JsonVariant p);
 
-
 	/// Destructor
-	virtual ~Loom_ZXGesture();
+	~Loom_ZXGesture();
 
-	// Inherited (Overriding) Methods
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+	void		measure() override;
+	void 		package(JsonObject json) override;
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
 	void		print_config() override;
 	void		print_measurements() override;
-	void		measure() override;
-	void 		package(JsonObject json);
 
 private:
 

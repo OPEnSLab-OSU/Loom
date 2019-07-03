@@ -3,7 +3,9 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 
-/////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+
 
 /// @private (hide from Doxygen)
 /// Invalid package argument count
@@ -39,6 +41,11 @@ void package_json_aux(JsonObject data, const Arg1 arg1, const Arg2 arg2, const A
 
 /// Add an list of alternating keys and values to a json data object
 /// under the specified module
+/// \param[out]		json			Object to add data to
+/// \param[in]		module_name		Name of module calling package
+/// \param[in]		args			Series of alternating keys and values 
+///									keys: const* char
+///									vals: any
 template<typename... Args>
 void package_json(JsonObject json, const char* module_name, const Args... args)
 {
@@ -71,12 +78,20 @@ void package_json(JsonObject json, const char* module_name, const Args... args)
 }
 
 
-
+/// Add timestamp to a Json object
+/// \param[out]		json	Object to add timestamp to
+/// \param[in]		date 	Time string of timestamp
+/// \param[in]		time	Date string of timestamp
 void package_json_timestamp(JsonObject json, const char* date, const char* time);
 
-
-
+/// Convert data in key values in arrays in ojects to 
+/// keys and values in single object 'flatObj'
+/// \param[out]		json	Object to flatten data of
 void flatten_json_data_object(JsonObject json);
+
+/// Convert data in key values in arrays in ojects to 
+/// alternating keys and values in array 'flatArray'
+/// \param[out]		json	Object to flatten data of
 void flatten_json_data_array(JsonObject json);
 
 

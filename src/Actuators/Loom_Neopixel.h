@@ -4,6 +4,10 @@
 
 #include <Adafruit_NeoPixel.h>
 
+
+///////////////////////////////////////////////////////////////////////////////
+
+
 // ### (LoomActuator) | dependencies: [] | conflicts: []
 /// Neopixel tri-color LED actuator module
 // ###
@@ -22,6 +26,10 @@ protected:
 	uint8_t				color_vals[3][3];
 
 public:
+	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
 
 	/// Neopixel module constructor
 	///
@@ -36,24 +44,19 @@ public:
 			bool			enableA2		= true
 		);
 
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]	p		The array of constuctor args to expand
 	Loom_Neopixel(JsonVariant p);
 
 	/// Destructor
 	virtual ~Loom_Neopixel();
 
-	// Inherited Methods
-	void		print_config() override;
-	void		print_state();
-	bool		cmd_route(JsonObject json);
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
 
-
-
-	// --- Actuator Control ---
-
-	/// Enable or disable pin for use with Neopixel
-	/// \param[in]	port	Port to configure (0-2)
-	/// \param[in]	state	Enable or disable
-	void		enable_pin(uint8_t port, bool state);
+	bool		cmd_route(JsonObject json) override;
 
 	/// Set Neopixel color.
 	/// \param[in]	port		The port the Neopixel to control is on (0-2 corresponding to A0-A2)
@@ -62,6 +65,22 @@ public:
 	/// \param[in]	green		The green value (0-255)
 	/// \param[in]	blue		The blue value (0-255)
 	void		set_color(uint8_t port, uint8_t chain_num, uint8_t red, uint8_t green, uint8_t blue);
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+	void		print_config() override;
+	void		print_state() override;
+
+//=============================================================================
+///@name	SETTERS
+/*@{*/ //======================================================================
+
+	/// Enable or disable pin for use with Neopixel
+	/// \param[in]	port	Port to configure (0-2)
+	/// \param[in]	state	Enable or disable
+	void		enable_pin(uint8_t port, bool state);
 
 private:
 
