@@ -2,10 +2,25 @@
 
 #include "Loom_Misc.h"
 #include "Loom_Translator.h"
+#include "Loom_Module.h"
+#include "Loom_General_Enums.h"
+
 #include <ArduinoJson.h>
 
+// Need to undef max and min for vector to work
+#undef max
+#undef min
+#include <vector>
 
+
+// Forward declarations, specify that these classes
+// exist but are defined in their own respective files
 class LoomModule;
+class LoomSensor;
+class LoomActuator;
+class LoomRTC;
+class LoomCommPlat;
+class LoomLogPlat;
 
 // Actuators
 class Loom_Neopixel;
@@ -66,42 +81,6 @@ class Loom_Multiplexer;
 
 
 
-
-
-
-/// Enum to check against to when finding individual component
-/// managed by a LoomManager
-enum class ModuleType {
-	Unknown,
-	// Actuators
-	Neopixel, Relay, Servo, Stepper,
-	// Sensors
-	Analog, Digital,
-	// I2C
-	AS7262, AS7263, AS7265X, FXAS21002, FXOS8700, LIS3DH, MB1232, MPU6050, MS5803, SHT31D, TSL2561, TSL2591, ZXGesture,
-	// SDI12
-	Decagon5TM, DecagonGS3,
-	// SPI
-	MAX31856,
-	// CommPlats
-	LoRa, nRF, SlipSerial, Bluetooth,
-	// LogPlats
-	OLED, SDCARD,
-	// InternetPlats
-	Internet,
-	// PublishPlats
-	Publish,
-	// RTC
-	DS3231, PCF8523,
-	// Other
-	Sleep_Manager, Interrupt_Manager, Multiplexer
-};
-
-
-
-#define SERIAL_BAUD 115200
-
-
 /// Different general types of devices
 enum class DeviceType {
 	HUB, 		///< Central device
@@ -109,35 +88,9 @@ enum class DeviceType {
 	REPEATER 	///< Forwards messages between other devices
 };
 
-/// Different levels of verbosity (for printing or packaging)
-enum class Verbosity {
-	V_OFF,		///< Disable
-	V_LOW, 		///< Minimal/Stardard
-	V_HIGH 		///< Full details
-};
 
+#define SERIAL_BAUD 115200
 
-// Forward declarations, specify that these classes
-// exist but are defined in their own respective files
-class Loom_Interrupt_Manager;
-class Loom_Sleep_Manager;
-class LoomModule;
-class LoomSensor;
-class LoomActuator;
-class LoomRTC;
-class LoomCommPlat;
-class LoomLogPlat;
-
-
-
-// switch to using vectors
-#define MAX_OTHER_MODULES 3
-#define MAX_SENSORS       20
-#define MAX_ACTUATORS     10
-#define MAX_COMMS         3
-#define MAX_INTERNETS     3
-#define MAX_PUBLISH		  2
-#define MAX_LOGS          5
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -150,6 +103,7 @@ class LoomManager
 {
 
 protected:
+
 
 	char		device_name[20];	/// The name of the device
 	char		family[20];			/// The family the device belongs to
@@ -167,23 +121,14 @@ protected:
 	/// RTC object pointer
 	LoomRTC*			rtc_module = nullptr;
 
-	// Arrays of Loom Modules, categorized by type
-	LoomModule*			other_modules[MAX_OTHER_MODULES];
-	LoomSensor*			sensor_modules[MAX_SENSORS];
-	LoomActuator*		actuator_modules[MAX_ACTUATORS];
-	LoomCommPlat*		comm_modules[MAX_COMMS];
-	LoomInternetPlat*	internet_modules[MAX_INTERNETS];
-	LoomPublishPlat*	publish_modules[MAX_PUBLISH];
-	LoomLogPlat*		log_modules[MAX_LOGS];
-
-	// Module list counts
-	uint		other_module_count = 0;		/// Count of miscellaneous modules
-	uint		sensor_count = 0;			/// Count of sensor modules
-	uint		actuator_count = 0;			/// Count of actuator modules
-	uint		comm_count = 0;				/// Count of communication modules
-	uint		internet_count = 0;			/// Count of internet modules
-	uint		publish_count = 0;			/// Count of publish modules
-	uint		log_count = 0;				/// Count of logging platform modules
+	// Vectors of Loom Modules, categorized by type
+	std::vector<LoomModule*> other_modules;
+	std::vector<LoomSensor*> sensor_modules;
+	std::vector<LoomActuator*> actuator_modules;
+	std::vector<LoomCommPlat*> comm_modules;
+	std::vector<LoomInternetPlat*> internet_modules;
+	std::vector<LoomPublishPlat*> publish_modules;
+	std::vector<LoomLogPlat*> log_modules;
 
 	Verbosity	print_verbosity;			/// Print detail verbosity
 	Verbosity	package_verbosity;			/// Package detail verbosity
@@ -460,36 +405,93 @@ protected:
 private:
 
 	/// Add module to a list of modules
-	void		add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len);
-		
+	template<typename T>
+	bool		add_module_aux(std::vector<T>& modules, const T module) 
+	{
+		print_device_label();
+
+		if (module == nullptr) {
+			LPrintln("Cannot add null module");
+			return false;
+		}
+
+		LPrintln("Adding Module: ", ((LoomModule*)module)->get_module_name() );
+
+		modules.emplace_back(module);
+		module->link_device_manager(this);
+		return true;	
+	}
+
 	/// Auxiliary function for printing a list of modules
-	void		list_modules_aux(LoomModule** modules, uint len, char* module_type);
-	
-	/// Auxiliary function for measure data from a list of modules	
-	void		measure_aux(LoomSensor** modules, uint len);
+	template<typename T>
+	void 		list_modules_aux(const std::vector<T>& modules, const char* module_type)
+	{
+		LPrintln("\t", module_type, " (", modules.size(), "):");
+		for (auto module : modules) {
+			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active()) ) {
+				LPrintln( "\t\t[", ( ((LoomModule*)module)->get_active()) ? "+" : "-" , "] ", ((LoomModule*)module)->get_module_name() );
+			}
+		}	
+	}
 
 	/// Auxiliary function for packaging data of a list of modules
-	void		package_aux(JsonObject json, LoomModule** modules, uint len);
+	template<typename T>
+	void		package_aux(JsonObject json, const std::vector<T>& modules)
+	{
+		for (auto module : modules) {
+			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
+				((LoomModule*)module)->package( json );
+			}
+		}	
+	}
 
 	/// Auxiliary function for packaging data of a single module
 	void		package_aux(JsonObject json, LoomModule* module);
 	
 	/// Have each module check against provided command
-	bool		cmd_route_aux(JsonObject json, LoomModule** modules, uint len);
+	template<typename T>
+	bool		cmd_route_aux(JsonObject json, const std::vector<T>& modules)
+	{
+		for (auto module : modules) {
+			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
+				if ( ((LoomModule*)module)->cmd_route( json ) ) return true;
+			}
+		}
+		return false;
+	}
 	
 	/// Have module check against provided command	
 	bool		cmd_route_aux(JsonObject json, LoomModule* module);
 
-
-	void		second_stage_ctor_aux(LoomModule** modules, uint len);
+	template<typename T>
+	void 		second_stage_ctor_aux(const std::vector<T>& modules)
+	{
+		for (auto module : modules) {
+			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
+				((LoomModule*)module)->second_stage_ctor();
+			}
+		}	
+	}
 
 	/// Auxiliary function to search a list of modules for a module of specified type
-	/// \param[in]	type		Module type to find
-	/// \param[in]	idx			ith instance of the module to search for
-	/// \param[in]	modules		Module list to search
-	/// \param[in]	count		Module type to find
-	/// \return Module if found, nullptr if not
-	LoomModule*	find_module(ModuleType type, int idx, LoomModule** modules, int count);
+	/// \param[in]	type	ModuleType to search for
+	template<typename T>
+	LoomModule*	find_module(ModuleType type, int idx, const std::vector<T>& modules)
+	{
+		int current = 0;
+
+		for (auto module : modules) {
+			if (type == ((LoomModule*)module)->get_module_type()) {
+				if (current == idx) {
+					return (LoomModule*)module;
+				} else {
+					current++;
+				}
+			}
+		}
+		return nullptr;
+	}
+
 
 };
 

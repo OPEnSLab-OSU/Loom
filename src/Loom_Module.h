@@ -1,12 +1,13 @@
 #pragma once
 
-#include "Loom_Manager.h"
+// #include "Loom_Manager.h"
 #include "Loom_Misc.h"
 #include "Loom_Translator.h"
 #include "Loom_Macros.h"
 #include "Loom_Package.h"
+#include "Loom_General_Enums.h"
 
-#include "ArduinoJson.h"
+#include <ArduinoJson.h>
 
 
 
@@ -167,7 +168,7 @@ protected:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	/// LPrint the module name as a label.
+	/// Print the module name as a label.
 	/// Used for matching debug prints to corresponding module
 	void			print_module_label();
 

@@ -1,5 +1,6 @@
 
 #include "Loom_SD.h"
+#include "Loom_Manager.h"
 
 #include <SPI.h>
 

@@ -80,28 +80,6 @@ void LoomManager::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_module_aux(LoomModule** modules, LoomModule* module, uint& len, const int max_len)
-{
-	print_device_label();
-
-	if (module == nullptr) {
-		LPrintln("Cannot add null module");
-		return;
-	}
-
-	// If module array is not dynamic, add check to make sure there is room in the array
-	if ( len >= max_len ) {
-		LPrintln("Cannot add ", module->get_module_name() );
-		return;
-	}
-
-	LPrintln("Adding Module: ", module->get_module_name() );
-
-	modules[ len++ ] = module;
-	module->link_device_manager(this);
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager) 
 {
 	print_device_label();
@@ -164,43 +142,43 @@ void LoomManager::add_module(LoomRTC* rtc)
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomModule* module) 
 {
-	add_module_aux(other_modules, module, other_module_count, MAX_OTHER_MODULES);
+	add_module_aux(other_modules, module);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomSensor* sensor) 
 {
-	add_module_aux( (LoomModule**)sensor_modules, (LoomModule*)sensor, sensor_count, MAX_SENSORS );
+	add_module_aux(sensor_modules, sensor);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomActuator* actuator) 
 {
-	add_module_aux( (LoomModule**)actuator_modules, (LoomModule*)actuator, actuator_count, MAX_ACTUATORS );
+	add_module_aux(actuator_modules, actuator);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomCommPlat* comm_plat) 
 {
-	add_module_aux( (LoomModule**)comm_modules, (LoomModule*)comm_plat, comm_count, MAX_COMMS );
+	add_module_aux(comm_modules, comm_plat);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomInternetPlat* internet_module) 
 {
-	add_module_aux( (LoomModule**)internet_modules, (LoomModule*)internet_module, internet_count, MAX_INTERNETS );
+	add_module_aux(internet_modules, internet_module);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomPublishPlat* publish_module) 
 {
-	add_module_aux( (LoomModule**)publish_modules, (LoomModule*)publish_module, publish_count, MAX_PUBLISH );
+	add_module_aux(publish_modules, publish_module);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomLogPlat* log_plat) 
 {	
-	add_module_aux( (LoomModule**)log_modules, (LoomModule*)log_plat, log_count, MAX_LOGS );
+	add_module_aux(log_modules, log_plat);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -219,17 +197,6 @@ Loom_Sleep_Manager* LoomManager::get_sleep_manager()
 LoomRTC* LoomManager::get_rtc_module()
 {
 	return rtc_module;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::list_modules_aux(LoomModule** modules, uint len, char* module_type)
-{
-	LPrintln("\t", module_type, " (", len, "):");
-	for (int i = 0; i < len; i++) {
-		if ( (modules[i] != nullptr) && (modules[i]->get_active()) ) {
-			LPrintln( "\t\t[", (modules[i]->get_active()) ? "+" : "-" , "] ", modules[i]->get_module_name() );
-		}
-	}	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -256,15 +223,13 @@ void LoomManager::list_modules()
 		LPrintln( "\t\t[", (rtc_module->get_active()) ? "+" : "-" , "] ", rtc_module->get_module_name() );
 	}
 
-	// list_modules_aux( (LoomModule**)rtc_module      , 1   		       , "RTC Modules"); 
-
-	list_modules_aux( (LoomModule**)other_modules    , other_module_count , "Other Modules" ); 
-	list_modules_aux( (LoomModule**)sensor_modules   , sensor_count       , "Sensors"); 
-	list_modules_aux( (LoomModule**)actuator_modules , actuator_count     , "Actuators"); 
-	list_modules_aux( (LoomModule**)comm_modules     , comm_count         , "Communication Platforms"); 
-	list_modules_aux( (LoomModule**)internet_modules , internet_count     , "Internet Platforms"); 
-	list_modules_aux( (LoomModule**)publish_modules ,  publish_count      , "Publish Platforms"); 
-	list_modules_aux( (LoomModule**)log_modules      , log_count          , "Logging Platforms" ); 
+	list_modules_aux( other_modules, "Other Modules"); 
+	list_modules_aux( sensor_modules, "Sensors"); 
+	list_modules_aux( actuator_modules, "Actuators"); 
+	list_modules_aux( comm_modules, "Communication Platforms"); 
+	list_modules_aux( internet_modules, "Internet Platforms"); 
+	list_modules_aux( publish_modules, "Publish Platforms"); 
+	list_modules_aux( log_modules, "Logging Platforms" ); 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -360,37 +325,19 @@ void LoomManager::set_package_verbosity(Verbosity v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::measure_aux(LoomSensor** sensors, uint len)
-{
-	for (int i = 0; i < len; i++) {
-		if ( (sensors[i] != nullptr) && (sensors[i]->get_active()) ) {
-			sensors[i]->measure();
-		}
-	}	
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void LoomManager::measure()
 {
-	measure_aux( sensor_modules   , sensor_count ); 
-	
-	// Not all LoomModules have a measure function,
-	// among the other_modules, it is the multiplexer
-	for (int i = 0; i < other_module_count; i++) {	
-		if (other_modules[i]->get_module_type() == ModuleType::Multiplexer) {
-			((Loom_Multiplexer*)other_modules[i])->measure();
+	for (auto sensor : sensor_modules) {
+		if ( (sensor != nullptr) && (sensor->get_active()) ) {
+			sensor->measure();
 		}
 	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::package_aux(JsonObject json, LoomModule** modules, uint len)
-{
-	for (int i = 0; i < len; i++) {
-		if ( (modules[i] != nullptr) && ( modules[i]->get_active() ) ){
-			modules[i]->package( json );
+	
+	for (auto module : other_modules) {	
+		if (module->get_module_type() == ModuleType::Multiplexer) {
+			((Loom_Multiplexer*)module)->measure();
 		}
-	}	
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -406,13 +353,15 @@ void LoomManager::package_aux(JsonObject json, LoomModule* module)
 void LoomManager::package(JsonObject json) 
 {
 	package_aux( json, (LoomModule*)rtc_module ); 
-	package_aux( json, (LoomModule**)other_modules    , other_module_count ); 
-	package_aux( json, (LoomModule**)sensor_modules   , sensor_count ); 
+	package_aux( json, (LoomModule*)sleep_manager ); 
+	package_aux( json, (LoomModule*)interrupt_manager ); 
+	package_aux( json, other_modules); 
+	package_aux( json, sensor_modules); 
 
 	if (package_verbosity == Verbosity::V_HIGH) {
-		package_aux( json, (LoomModule**)actuator_modules , actuator_count ); 
-		package_aux( json, (LoomModule**)comm_modules     , comm_count ); 
-		package_aux( json, (LoomModule**)log_modules      , log_count );		
+		package_aux( json, actuator_modules); 
+		package_aux( json, comm_modules); 
+		package_aux( json, log_modules);		
 	}
 }
 
@@ -444,27 +393,15 @@ JsonObject LoomManager::internalJson(bool clear)
 
 }
 
-///////////////////////////////////////////////////////////////////////////////
 bool LoomManager::publish(const JsonObject json)
 {
 	bool result = true;
-	for (auto i = 0; i < publish_count; i++) {
-		if ( (publish_modules[i] != nullptr) && ( publish_modules[i]->get_active() ) ){
-			result &= publish_modules[i]->publish(json);
+	for (auto publisher : publish_modules) {
+		if ( (publisher != nullptr) && ( publisher->get_active() ) ){
+			result &= publisher->publish(json);
 		}
 	}
-	return publish_count > 0 && result;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::cmd_route_aux(JsonObject json, LoomModule** modules, uint len)
-{
-	for (int i = 0; i < len; i++) {
-		if ( (modules[i] != nullptr) && ( modules[i]->get_active() ) ){
-			if (modules[i]->cmd_route( json ) ) return true;
-		}
-	}
-	return false;
+	return (publish_modules.size() > 0) && result;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -489,26 +426,15 @@ void LoomManager::cmd_route(JsonObject json)
 			// LPrintln("\n\nCMD:");
 			// serializeJsonPretty(cmd, Serial);
 
-
-			if ( cmd_route_aux( cmd, (LoomModule**)actuator_modules , actuator_count ) )		continue;
+			if ( cmd_route_aux(cmd, actuator_modules) )			continue;
 			
-			if ( cmd_route_aux( cmd, (LoomModule*)rtc_module ) )								continue;
-			if ( cmd_route_aux( cmd, (LoomModule**)other_modules    , other_module_count ) )	continue;
-			if ( cmd_route_aux( cmd, (LoomModule**)sensor_modules   , sensor_count ) )			continue;
-			if ( cmd_route_aux( cmd, (LoomModule**)comm_modules     , comm_count ) )			continue;
-			if ( cmd_route_aux( cmd, (LoomModule**)log_modules      , log_count ) )				continue;
+			if ( cmd_route_aux(cmd, (LoomModule*)rtc_module) )	continue;
+			if ( cmd_route_aux(cmd, other_modules) )			continue;
+			if ( cmd_route_aux(cmd, sensor_modules) )			continue;
+			if ( cmd_route_aux(cmd, comm_modules) )				continue;
+			if ( cmd_route_aux(cmd, log_modules) )				continue;
 		}
 	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::second_stage_ctor_aux(LoomModule** modules, uint len)
-{
-	for (int i = 0; i < len; i++) {
-		if ( (modules[i] != nullptr) && ( modules[i]->get_active() ) ){
-			modules[i]->second_stage_ctor();
-		}
-	}	
 }
 
 // ///////////////////////////////////////////////////////////////////////////////

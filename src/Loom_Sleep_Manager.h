@@ -2,12 +2,15 @@
 
 #include "Loom_Module.h"
 #include "Loom_Interrupt_Manager.h"
+#include "Loom_Manager.h"
 
 #include <OPEnS_RTC.h>
 
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
+
+class Loom_Interrupt_Manager;
 
 /// Different options available to sleep in
 enum class SleepMode {
@@ -28,15 +31,14 @@ class Loom_Sleep_Manager : public LoomModule
 {
 
 protected:
-
+	
+	Loom_Interrupt_Manager* interrupt_manager;	/// Pointer to interrupt_manager instance 
 	
 	bool 		use_LED;			/// Whether or not to use LED to indicate wake status
 	bool		delay_on_wake;		/// Whether to provide delay on wake.
 									/// Used to allow user to restart Serial Monitor
 	SleepMode 	sleep_mode;			/// Which sleep mode to use
 	byte		power_off_pin;		///	Which pin to use to power board off (requires power board)
-	
-	Loom_Interrupt_Manager* interrupt_manager;	/// Pointer to interrupt_manager instance 
 
 public:
 

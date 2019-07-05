@@ -1,5 +1,7 @@
 
 #include "Loom_PublishPlat.h"
+#include "Loom_Manager.h"
+
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomPublishPlat::LoomPublishPlat(	

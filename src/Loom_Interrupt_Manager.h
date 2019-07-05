@@ -17,6 +17,7 @@
 
 // Specify that LoomRTC exists, defined in own file
 class LoomRTC;
+class Loom_Sleep_Manager;
 
 
 // Used to make function signatures easier to read

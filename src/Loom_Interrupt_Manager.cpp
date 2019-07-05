@@ -5,7 +5,7 @@
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
-
+#include "Loom_Manager.h"
 
 // ISRFuncPtr get_wakeISR(int pin) {
 // 	switch (pin) {
