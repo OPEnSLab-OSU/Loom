@@ -3,13 +3,13 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-char* LoomCommPlat::enum_comm_plat_string(CommPlatform c)
+const char* LoomCommPlat::enum_comm_plat_string(Platform c)
 {
 	switch(c) {
-		case CommPlatform::WIFI : return "WiFi";
-		case CommPlatform::LORA : return "LoRa";
-		case CommPlatform::NRF  : return "nRF";
-		case CommPlatform::SSER : return "SlipSerial";	    
+		case Platform::WIFI : return "WiFi";
+		case Platform::LORA : return "LoRa";
+		case Platform::NRF  : return "nRF";
+		case Platform::SSER : return "SlipSerial";	    
 	}
 }
 

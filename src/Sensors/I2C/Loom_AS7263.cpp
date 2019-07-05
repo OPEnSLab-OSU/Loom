@@ -13,7 +13,7 @@ Loom_AS7263::Loom_AS7263(
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {
-	this->module_type = ModuleType::AS7263;
+	this->module_type = LoomModule::Type::AS7263;
 
 	this->use_bulb 			= use_bulb;
 	this->gain 				= gain;

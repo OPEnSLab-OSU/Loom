@@ -21,6 +21,7 @@ class Loom_Module_Stub : public LoomModule
 {
 
 private: 
+
 	const char* error_msg = "No valid module found";
 
 public:
@@ -30,8 +31,8 @@ public:
 	/// \cond DO_NOT_DOCUMENT
 
 	// Loom Module
-	ModuleType		get_module_type()
-	{ return ModuleType::Unknown; }
+	LoomModule::Type get_module_type()
+	{ return LoomModule::Type::Unknown; }
 	LoomManager*	get_device_manager()
 	{ return nullptr; }
 	void link_device_manager(LoomManager* LM) 
@@ -80,10 +81,6 @@ public:
 	{ LPrintln(error_msg); }
 	void print_config_struct()
 	{ LPrintln(error_msg); }
-	void REPL_loop()
-	{ LPrintln(error_msg); }
-
-
 
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -97,9 +94,9 @@ public:
 	{ LPrintln(error_msg); }
 	Loom_Interrupt_Manager*	get_Interrupt_Manager()
 	{ LPrintln(error_msg); }
-	void set_sleep_mode(SleepMode mode)
+	void set_sleep_mode(Loom_Sleep_Manager::Mode mode)
 	{ LPrintln(error_msg); }
-	SleepMode get_sleep_mode()
+	Loom_Sleep_Manager::Mode get_sleep_mode()
 	{ LPrintln(error_msg); }
 	bool sleep_duration(TimeSpan duration, bool from_last_wake=false)
 	{ LPrintln(error_msg); }
@@ -148,8 +145,6 @@ public:
 	{ LPrintln(error_msg); }
 
 
-
-
 	///////////////////////////////////////////////////////////////////////////////
 	// Communiciation Platforms
 
@@ -181,19 +176,17 @@ public:
 	// SlipSerial
 	
 
-
-
 	///////////////////////////////////////////////////////////////////////////////
 	// Logging Platforms
 	void log_bundle(JsonObject json)
 	{ LPrintln(error_msg); }
 
 	// OLED
-	void log_bundle(JsonObject json, OLED_Format format)
+	void log_bundle(JsonObject json, Loom_OLED::Format format)
 	{ LPrintln(error_msg); }
-	void set_display_format(OLED_Format format)
+	void set_display_format(Loom_OLED::Format format)
 	{ LPrintln(error_msg); }
-	OLED_Format	get_display_format()
+	Loom_OLED::Format get_display_format()
 	{ LPrintln(error_msg); }
 	void set_scroll_duration(uint duration)
 	{ LPrintln(error_msg); }
@@ -203,9 +196,9 @@ public:
 	{ LPrintln(error_msg); }
 	byte get_freeze_pin()
 	{ LPrintln(error_msg); }
-	void set_freeze_behavior(OLED_Freeze behavior)
+	void set_freeze_behavior(Loom_OLED::FreezeType behavior)
 	{ LPrintln(error_msg); }
-	OLED_Freeze	get_freeze_behavior()
+	Loom_OLED::FreezeType get_freeze_behavior()
 	{ LPrintln(error_msg); }
 
 
@@ -274,9 +267,9 @@ public:
 	{ LPrintln(error_msg); }	
 	void set_pin_enabled(uint8_t pin, bool e)
 	{ LPrintln(error_msg); }
-	AnalogConversion get_conversion(uint8_t pin)
+	Loom_Analog::Conversion get_conversion(uint8_t pin)
 	{ LPrintln(error_msg); }
-	void set_conversion(uint8_t pin, AnalogConversion c)
+	void set_conversion(uint8_t pin, Loom_Analog::Conversion c)
 	{ LPrintln(error_msg); }
 	void set_enable_conversions(bool e)
 	{ LPrintln(error_msg); }
@@ -290,8 +283,6 @@ public:
 	void set_digital_val(uint8_t pin, bool state)
 	{ LPrintln(error_msg); }
 	
-
-
 
 	///////////////////////////////////////////////////////////////////////////////
 	// I2C Sensors

@@ -9,7 +9,7 @@ Loom_Relay::Loom_Relay(
 	) 
 	: LoomActuator( module_name ) 
 {
-	this->module_type = ModuleType::Relay;
+	this->module_type = LoomModule::Type::Relay;
 
 	this->pin = pin;
 

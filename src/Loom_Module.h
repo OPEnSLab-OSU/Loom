@@ -5,11 +5,15 @@
 #include "Loom_Translator.h"
 #include "Loom_Macros.h"
 #include "Loom_Package.h"
-#include "Loom_General_Enums.h"
 
 #include <ArduinoJson.h>
 
-
+/// Different levels of verbosity (for printing or packaging)
+enum class Verbosity {
+	V_OFF,		///< Disable
+	V_LOW, 		///< Minimal/Stardard
+	V_HIGH 		///< Full details
+};
 
 class LoomManager; // Specify that LoomManager exists, defined in own file
 
@@ -21,9 +25,39 @@ class LoomManager; // Specify that LoomManager exists, defined in own file
 class LoomModule
 {
 
+public:
+
+	/// Enum to check against to when finding individual component
+	/// managed by a LoomManager
+	enum class Type {
+		Unknown,
+		// Actuators
+		Neopixel, Relay, Servo, Stepper,
+		// Sensors
+		Analog, Digital,
+		// I2C
+		AS7262, AS7263, AS7265X, FXAS21002, FXOS8700, LIS3DH, MB1232, MPU6050, MS5803, SHT31D, TSL2561, TSL2591, ZXGesture,
+		// SDI12
+		Decagon5TM, DecagonGS3,
+		// SPI
+		MAX31856,
+		// CommPlats
+		LoRa, nRF, SlipSerial, Bluetooth,
+		// LogPlats
+		OLED, SDCARD,
+		// InternetPlats
+		Internet,
+		// PublishPlats
+		Publish,
+		// RTC
+		DS3231, PCF8523,
+		// Other
+		Sleep_Manager, Interrupt_Manager, Multiplexer
+	};
+
 protected:
 
-	ModuleType		module_type;		/// Module type (hub / node)
+	Type			module_type;		/// Module type (hub / node)
 	LoomManager*	device_manager;		/// Pointer to manager
 	char			module_name[20];	/// The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
 	bool			active;				/// Whether or not the module should be treated as active
@@ -84,7 +118,7 @@ public:
 
 	/// Get module type
 	/// \return Module type
-	ModuleType		get_module_type();
+	Type			get_module_type();
 
 	/// Get the device manager class if linked
 	/// \return Pointer to the LoomManager, Null if not linked

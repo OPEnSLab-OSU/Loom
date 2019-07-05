@@ -3,7 +3,6 @@
 #include "Loom_Misc.h"
 #include "Loom_Translator.h"
 #include "Loom_Module.h"
-#include "Loom_General_Enums.h"
 
 #include <ArduinoJson.h>
 
@@ -80,15 +79,6 @@ class Loom_Interrupt_Manager;
 class Loom_Multiplexer;
 
 
-
-/// Different general types of devices
-enum class DeviceType {
-	HUB, 		///< Central device
-	NODE, 		///< Data collecting / actuating node
-	REPEATER 	///< Forwards messages between other devices
-};
-
-
 #define SERIAL_BAUD 115200
 
 
@@ -101,6 +91,15 @@ enum class DeviceType {
 // ###
 class LoomManager
 {
+
+public:
+
+	/// Different general types of devices
+	enum class DeviceType {
+		HUB, 		///< Central device
+		NODE, 		///< Data collecting / actuating node
+		REPEATER 	///< Forwards messages between other devices
+	};
 
 protected:
 
@@ -134,7 +133,6 @@ protected:
 	Verbosity	package_verbosity;			/// Package detail verbosity
 
 	StaticJsonDocument<2000> doc;			/// Json data
-
 
 public:
 
@@ -406,7 +404,7 @@ private:
 
 	/// Add module to a list of modules
 	template<typename T>
-	bool		add_module_aux(std::vector<T>& modules, const T module) 
+	bool add_module_aux(std::vector<T>& modules, const T module) 
 	{
 		print_device_label();
 
@@ -424,7 +422,7 @@ private:
 
 	/// Auxiliary function for printing a list of modules
 	template<typename T>
-	void 		list_modules_aux(const std::vector<T>& modules, const char* module_type)
+	void list_modules_aux(const std::vector<T>& modules, const char* module_type)
 	{
 		LPrintln("\t", module_type, " (", modules.size(), "):");
 		for (auto module : modules) {
@@ -436,7 +434,7 @@ private:
 
 	/// Auxiliary function for packaging data of a list of modules
 	template<typename T>
-	void		package_aux(JsonObject json, const std::vector<T>& modules)
+	void package_aux(JsonObject json, const std::vector<T>& modules)
 	{
 		for (auto module : modules) {
 			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
@@ -446,11 +444,11 @@ private:
 	}
 
 	/// Auxiliary function for packaging data of a single module
-	void		package_aux(JsonObject json, LoomModule* module);
+	void package_aux(JsonObject json, LoomModule* module);
 	
 	/// Have each module check against provided command
 	template<typename T>
-	bool		cmd_route_aux(JsonObject json, const std::vector<T>& modules)
+	bool cmd_route_aux(JsonObject json, const std::vector<T>& modules)
 	{
 		for (auto module : modules) {
 			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
@@ -461,10 +459,10 @@ private:
 	}
 	
 	/// Have module check against provided command	
-	bool		cmd_route_aux(JsonObject json, LoomModule* module);
+	bool cmd_route_aux(JsonObject json, LoomModule* module);
 
 	template<typename T>
-	void 		second_stage_ctor_aux(const std::vector<T>& modules)
+	void second_stage_ctor_aux(const std::vector<T>& modules)
 	{
 		for (auto module : modules) {
 			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
@@ -474,9 +472,9 @@ private:
 	}
 
 	/// Auxiliary function to search a list of modules for a module of specified type
-	/// \param[in]	type	ModuleType to search for
+	/// \param[in]	type	Type to search for
 	template<typename T>
-	LoomModule*	find_module(ModuleType type, int idx, const std::vector<T>& modules)
+	LoomModule*	find_module(LoomModule::Type type, int idx, const std::vector<T>& modules)
 	{
 		int current = 0;
 

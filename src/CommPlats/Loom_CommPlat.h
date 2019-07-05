@@ -3,22 +3,23 @@
 #include "Loom_Module.h"
 
 
-/// Different communication platforms available
-enum class CommPlatform {
-	WIFI, 		///< WiFi
-	LORA, 		///< LoRa
-	NRF,		///< Nordic Radio
-	BLE,		///< Bluetooth
-	SSER 		///< Slip Serial
-};
-
-
 ///////////////////////////////////////////////////////////////////////////////
 
 
 /// Abstract base of communication platform modules
 class LoomCommPlat : public LoomModule
 {
+
+public:
+
+	/// Different communication platforms available
+	enum class Platform {
+		WIFI, 		///< WiFi
+		LORA, 		///< LoRa
+		NRF,		///< Nordic Radio
+		BLE,		///< Bluetooth
+		SSER 		///< Slip Serial
+	};
 
 protected:
 
@@ -95,12 +96,12 @@ public:
 	/// Get string of name associated with communication platform enum
 	/// \param[in]	c 	CommPlatform to get c-string of
 	/// \return c-string of communication platform
-	static char*		enum_comm_plat_string(CommPlatform c);
+	static const char*	enum_comm_plat_string(Platform c);
 	
 	/// Get enum val associated with string representing communication platform
 	/// \param[in]	s	C-string to get CommPlatform enum of
 	/// \return CommPlatform 
-	static CommPlatform string_to_enum_comm_plat(const char* s);
+	static Platform string_to_enum_comm_plat(const char* s);
 
 };
 

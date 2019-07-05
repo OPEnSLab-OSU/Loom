@@ -16,7 +16,7 @@ Loom_LoRa::Loom_LoRa(
 	: LoomCommPlat( module_name, max_message_len )
 
 { 
-	this->module_type = ModuleType::LoRa;
+	this->module_type = LoomModule::Type::LoRa;
 
 	// Create instances of driver and manager
 	this->driver         = new RH_RF95(RFM95_CS, RFM95_INT);

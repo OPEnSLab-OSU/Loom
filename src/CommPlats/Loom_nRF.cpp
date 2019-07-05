@@ -19,7 +19,7 @@ Loom_nRF::Loom_nRF(
 	)
 	: LoomCommPlat( module_name, max_message_len )
 {
-	this->module_type = ModuleType::nRF;
+	this->module_type = LoomModule::Type::nRF;
 
 
 	// Create nRF manager objects

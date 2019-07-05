@@ -5,23 +5,21 @@
 #include <OPEnS_RTC.h>
 
 
-// byte RTC_Int_Pin = 0;
-
-
-/// Different time zones
-enum class TimeZone { 
-	WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
-	ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
-	ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
-};
-
-
 ///////////////////////////////////////////////////////////////////////////////
 
 
 /// Abstract base of RTC modules
 class LoomRTC : public LoomModule
 {
+
+public:
+	/// Different time zones
+	enum class TimeZone { 
+		WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
+		ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
+		ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
+	};
+
 
 private: 
 	

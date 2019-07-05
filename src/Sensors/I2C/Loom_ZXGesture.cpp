@@ -6,11 +6,11 @@
 Loom_ZXGesture::Loom_ZXGesture(
 		byte			i2c_address, 
 		const char*		module_name, 
-		ZXMode			mode
+		Mode			mode
 	)
 	: LoomI2CSensor( module_name, i2c_address )
 {
-	this->module_type = ModuleType::ZXGesture;
+	this->module_type = LoomModule::Type::ZXGesture;
 
 	this->mode = mode;
 
@@ -45,7 +45,7 @@ Loom_ZXGesture::Loom_ZXGesture(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ZXGesture::Loom_ZXGesture(JsonArrayConst p)
-	: Loom_ZXGesture(p[0], p[1], (ZXMode)(int)p[2])
+	: Loom_ZXGesture(p[0], p[1], (Mode)(int)p[2])
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ Loom_ZXGesture::~Loom_ZXGesture()
 void Loom_ZXGesture::print_config()
 {
 	LoomI2CSensor::print_config();
-	LPrintln('\t', "Mode                : ", (mode == ZXMode::ZX_POS) ? "Position" : "Gesture" );
+	LPrintln('\t', "Mode                : ", (mode == Mode::POS) ? "Position" : "Gesture" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -68,11 +68,11 @@ void Loom_ZXGesture::print_measurements()
 	LPrintln("Measurements:");
 
 	switch (mode) {
-		case ZXMode::ZX_POS : 
+		case Mode::POS : 
 			LPrintln("\t", "ZX: ", pos[0]);
 			LPrintln("\t", "ZY: ", pos[1]);
 			break;
-		case ZXMode::ZX_GEST : 
+		case Mode::GEST : 
 			LPrintln("\t", "Gesture type : ", gesture_type.c_str());
 			LPrintln("\t", "Gesture speed: ", gesture_speed);
 			break; 
@@ -85,7 +85,7 @@ void Loom_ZXGesture::measure()
 	uint8_t x, z;
 
 	switch (mode) {
-		case ZXMode::ZX_POS : 
+		case Mode::POS : 
 			if ( inst_ZX->positionAvailable() ) {
 				x = inst_ZX->readX();
 				z = inst_ZX->readZ();
@@ -109,7 +109,7 @@ void Loom_ZXGesture::measure()
 			break;
 		
 
-		case ZXMode::ZX_GEST :
+		case Mode::GEST :
 			if ( inst_ZX->gestureAvailable() ) {
 				gesture       = inst_ZX->readGesture();
 				gesture_speed = inst_ZX->readGestureSpeed();
@@ -137,14 +137,14 @@ void Loom_ZXGesture::measure()
 void Loom_ZXGesture::package(JsonObject json)
 {
 	switch (mode) {
-		case ZXMode::ZX_POS : 		
+		case Mode::POS : 		
 			package_json(json, module_name, 
 				"zx",	pos[0],
 				"zy",	pos[1]
 			);
 
 			break;
-		case ZXMode::ZX_GEST : 
+		case Mode::GEST : 
 			package_json(json, module_name, 
 				"type",		gesture_type.c_str(),
 				"speed",	(int)gesture_speed

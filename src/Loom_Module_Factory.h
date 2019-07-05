@@ -63,24 +63,6 @@
 #include "Loom_Multiplexer.h" // this needs to be include after I2C sensors (due to conflict with enableInterrupt macro/function defined by EnableInterrupt library and AS726X sensors)
 
 
-/// Enum used to determine where to sort module in 
-/// device manager lists 
-enum class ModuleSortType {
-	InterruptManager,
-	SleepManager,
-	Multiplexer,
-	Actuator,
-	CommPlat,
-	InternetPlat,
-	PublishPlat,
-	LogPlat,
-	Rtc,
-	Sensor,
-	Other,
-	Unknown
-};
-
-
 /// Creates a LoomModule with default parameters
 /// \return The created LoomModule
 template<class T> T* ConstructDefault() {
@@ -95,13 +77,6 @@ template<class T> LoomModule* Construct(JsonArrayConst p) {
 
 /// Function pointer to 'template<class T> LoomModule* Construct(JsonArrayConst p)'
 using FactoryPtr = LoomModule* (*)(JsonArrayConst p);
-
-/// Struct to contain the elements of factory lookup table
-typedef struct {
-	const char*		name;		// Module type to compare against
-	FactoryPtr		Construct;	// Pointer to 'template<class T> LoomModule* Create(JsonArrayConst p)' with the type T set
-	ModuleSortType	sort_type;	// Which array of LoomManager to sort into 
-} NameModulePair;
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -148,6 +123,32 @@ public:
 	);
 
 private:
+
+	/// Enum used to determine where to sort module in 
+	/// device manager lists 
+	enum class ModuleSortType {
+		InterruptManager,
+		SleepManager,
+		Multiplexer,
+		Actuator,
+		CommPlat,
+		InternetPlat,
+		PublishPlat,
+		LogPlat,
+		Rtc,
+		Sensor,
+		Other,
+		Unknown
+	};
+
+	/// Struct to contain the elements of factory lookup table
+	typedef struct {
+		const char*		name;		// Module type to compare against
+		FactoryPtr		Construct;	// Pointer to 'template<class T> LoomModule* Create(JsonArrayConst p)' with the type T set
+		ModuleSortType	sort_type;	// Which array of LoomManager to sort into 
+	} NameModulePair;
+
+
 
 	/// Determine which array of manager to sort new module into
 	/// \param[in]	module		Json of the module name and settings

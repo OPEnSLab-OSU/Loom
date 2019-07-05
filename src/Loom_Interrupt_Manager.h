@@ -6,9 +6,6 @@
 #include <AsyncDelay.h>
 
 
-// #include <initializer_list>
-
-
 #define InteruptRange 16		/// Number of interrupts
 #define MaxTimerCount 4			/// Maximum number of timers
 #define MaxStopWatchCount 2		/// Maximum numbr of stopwatches
@@ -27,9 +24,10 @@ using ISRFuncPtr = void (*)();
 // using ISRFuncPtr = void *();
 
 
-enum class ISR_Type { IMMEDIATE, CHECK_FLAG };
-
-
+enum class ISR_Type { 
+	IMMEDIATE, 
+	CHECK_FLAG 
+};
 
 /// Contains information defining an interrupt's configuration
 struct IntDetails {

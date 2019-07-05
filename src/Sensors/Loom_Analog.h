@@ -17,20 +17,6 @@ typedef struct {
 } AnalogConfig;
 
 
-/// Different types of conversions from
-/// analog to specified unit
-enum class AnalogConversion {
-	NONE, 			///< No conversion applied
-	VOLTAGE, 		///< Analog to voltage
-	THERMISTOR,		///< Thermistor
-	PH,				///< pH value
-	TURBIDITY, 		///< Turbidity
-	EC, 			///< Electrical Conductivity
-	TDS,			///< Total Dissolved Solids
-	SALINITY		///< Salinity
-	// Soil moisture
-};
-
 
 
 // FlashStorage(analog_flash_config, AnalogConfig);
@@ -45,6 +31,22 @@ enum class AnalogConversion {
 // ###
 class Loom_Analog : public LoomSensor
 {
+	
+public:
+
+	/// Different types of conversions from
+	/// analog to specified unit
+	enum class Conversion {
+		NONE, 			///< No conversion applied
+		VOLTAGE, 		///< Analog to voltage
+		THERMISTOR,		///< Thermistor
+		PH,				///< pH value
+		TURBIDITY, 		///< Turbidity
+		EC, 			///< Electrical Conductivity
+		TDS,			///< Total Dissolved Solids
+		SALINITY		///< Salinity
+		// Soil moisture
+	};
 
 protected:
 
@@ -54,7 +56,7 @@ protected:
 	float		battery;						/// Battery voltage
 	bool		enable_conversions;				/// Enable or disable all conversions
 
-	AnalogConversion conversions[ANALOG_COUNT];	/// Conversion (if any) to apply to analog value when printing / packaging
+	Conversion	conversions[ANALOG_COUNT];		/// Conversion (if any) to apply to analog value when printing / packaging
 
 	AnalogConfig configuration;
 
@@ -75,28 +77,28 @@ public:
 	/// \param[in]	enableA3			Bool | <true> | {true, false} | Enable pin A3 for managing
 	/// \param[in]	enableA4			Bool | <true> | {true, false} | Enable pin A4 for managing
 	/// \param[in]	enableA5			Bool | <true> | {true, false} | Enable pin A5 for managing
-	/// \param[in]	convertA0			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A0
-	/// \param[in]	convertA1			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A1
-	/// \param[in]	convertA2			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A2
-	/// \param[in]	convertA3			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A3
-	/// \param[in]	convertA4			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A4
-	/// \param[in]	convertA5			Set(AnalogConversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A5
+	/// \param[in]	convertA0			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A0
+	/// \param[in]	convertA1			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A1
+	/// \param[in]	convertA2			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A2
+	/// \param[in]	convertA3			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A3
+	/// \param[in]	convertA4			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A4
+	/// \param[in]	convertA5			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A5
 	Loom_Analog(
-			const char*			module_name			= "Analog",
-			uint8_t				num_samples			= 8,
-			uint8_t				read_resolution		= 12,
-			bool				enableA0			= true,
-			bool				enableA1			= true,
-			bool				enableA2			= true,
-			bool				enableA3			= true,
-			bool				enableA4			= true,
-			bool				enableA5			= true,
-			AnalogConversion	convertA0			= AnalogConversion::NONE,
-			AnalogConversion	convertA1			= AnalogConversion::NONE,
-			AnalogConversion	convertA2			= AnalogConversion::NONE,
-			AnalogConversion	convertA3			= AnalogConversion::NONE,
-			AnalogConversion	convertA4			= AnalogConversion::NONE,
-			AnalogConversion	convertA5			= AnalogConversion::NONE
+			const char*		module_name			= "Analog",
+			uint8_t			num_samples			= 8,
+			uint8_t			read_resolution		= 12,
+			bool			enableA0			= true,
+			bool			enableA1			= true,
+			bool			enableA2			= true,
+			bool			enableA3			= true,
+			bool			enableA4			= true,
+			bool			enableA5			= true,
+			Conversion		convertA0			= Conversion::NONE,
+			Conversion		convertA1			= Conversion::NONE,
+			Conversion		convertA2			= Conversion::NONE,
+			Conversion		convertA3			= Conversion::NONE,
+			Conversion		convertA4			= Conversion::NONE,
+			Conversion		convertA5			= Conversion::NONE
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -146,8 +148,8 @@ public:
 
 	/// Get the current conversion associated with a pin
 	/// \param[in]	pin		The pin to get conversion for
-	/// \return		The current AnalogConversion setting
-	AnalogConversion get_conversion(uint8_t pin);
+	/// \return		The current Conversion setting
+	Conversion	get_conversion(uint8_t pin);
 
 
 //=============================================================================
@@ -165,8 +167,8 @@ public:
 
 	/// Set the current conversion associated with a pin
 	/// \param[in]	pin		The pin to set conversion for
-	/// \param[in]	c		The AnalogConversion to use
-	void  		set_conversion(uint8_t pin, AnalogConversion c);
+	/// \param[in]	c		The Conversion to use
+	void  		set_conversion(uint8_t pin, Conversion c);
 
 	/// Enable or disable all conversions
 	/// \param[in]	e		Enable state
@@ -178,7 +180,7 @@ public:
 
 	/// Get string of name associated with conversion enum
 	/// \return String of conversion
-	const char* conversion_name(AnalogConversion conversion);
+	const char* conversion_name(Conversion conversion);
 
 
 

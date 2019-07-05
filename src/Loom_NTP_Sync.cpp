@@ -16,7 +16,7 @@ LoomNTPSync::LoomNTPSync(
     , m_rtc( nullptr )
     , m_next_sync( 1 )
     , m_last_error( LoomNTPSync::Error::NON_START ) {
-        module_type = ModuleType::Unknown;
+        module_type = LoomModule::Type::Unknown;
     }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -30,7 +30,7 @@ void LoomNTPSync::second_stage_ctor()
     if (device_manager == nullptr) { m_last_error = Error::INVAL_DEVICE_MANAGE; return; }
     // check if internet platform exist
     LoomModule* temp = (LoomModule*)&(device_manager->InternetPlat(m_internet_module_index));
-    if (temp->get_module_type() == ModuleType::Internet) m_internet = (LoomInternetPlat*)temp;
+    if (temp->get_module_type() == LoomModule::Type::Internet) m_internet = (LoomInternetPlat*)temp;
     else {
         m_last_error = Error::INVAL_INTERNET;
         print_module_label();
@@ -39,7 +39,7 @@ void LoomNTPSync::second_stage_ctor()
     }
     // same for RTC
     Loom_Interrupt_Manager* inter_temp = &(device_manager->InterruptManager());
-    if (inter_temp->get_module_type() == ModuleType::Interrupt_Manager 
+    if (inter_temp->get_module_type() == LoomModule::Type::Interrupt_Manager 
         && inter_temp->get_RTC_module() != nullptr) m_rtc = inter_temp->get_RTC_module();
     else {
         m_last_error = Error::INVAL_RTC;

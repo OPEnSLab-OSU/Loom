@@ -16,27 +16,27 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Analog::Loom_Analog(	
-		const char*			module_name,
-		uint8_t				num_samples,
+		const char*		module_name,
+		uint8_t			num_samples,
 
-		uint8_t				read_resolution,
-		bool				enableA0,
-		bool				enableA1,
-		bool				enableA2,
-		bool				enableA3,
-		bool				enableA4,
-		bool				enableA5,
+		uint8_t			read_resolution,
+		bool			enableA0,
+		bool			enableA1,
+		bool			enableA2,
+		bool			enableA3,
+		bool			enableA4,
+		bool			enableA5,
 
-		AnalogConversion	convertA0,
-		AnalogConversion	convertA1,
-		AnalogConversion	convertA2,
-		AnalogConversion	convertA3,
-		AnalogConversion	convertA4,
-		AnalogConversion	convertA5	
+		Conversion		convertA0,
+		Conversion		convertA1,
+		Conversion		convertA2,
+		Conversion		convertA3,
+		Conversion		convertA4,
+		Conversion		convertA5	
 	) 
 	: LoomSensor( module_name, num_samples )
 {
-	this->module_type = ModuleType::Analog;
+	this->module_type = LoomModule::Type::Analog;
 
 	// Set Analog Read Resolution
 	this->read_resolution = read_resolution;
@@ -72,43 +72,41 @@ Loom_Analog::Loom_Analog(
 	conversions[4] = convertA4;
 	conversions[5] = convertA5;
 
-
 	// print_config_struct();
 	// load_config();
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Analog::Loom_Analog(JsonArrayConst p)
-	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], (AnalogConversion)(int)p[9], (AnalogConversion)(int)p[10], (AnalogConversion)(int)p[11], (AnalogConversion)(int)p[12], (AnalogConversion)(int)p[13], (AnalogConversion)(int)p[14]) {}
+	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], (Conversion)(int)p[9], (Conversion)(int)p[10], (Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13], (Conversion)(int)p[14]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 float Loom_Analog::convert(uint8_t pin, uint16_t analog)
 {
 	switch(conversions[pin]) {
-		case AnalogConversion::VOLTAGE 		: return convert_voltage(analog);
-		case AnalogConversion::THERMISTOR 	: return convert_thermistor(analog);
-		case AnalogConversion::PH 			: return convert_pH(analog);
-		case AnalogConversion::TURBIDITY 	: return convert_turbidity(analog);
-		case AnalogConversion::EC 			: return convert_EC(analog);
-		case AnalogConversion::TDS 			: return convert_TDS(analog);
-		case AnalogConversion::SALINITY 	: return convert_salinity(analog);
-		default								: return (float)analog;  
+		case Conversion::VOLTAGE 		: return convert_voltage(analog);
+		case Conversion::THERMISTOR 	: return convert_thermistor(analog);
+		case Conversion::PH 			: return convert_pH(analog);
+		case Conversion::TURBIDITY 		: return convert_turbidity(analog);
+		case Conversion::EC 			: return convert_EC(analog);
+		case Conversion::TDS 			: return convert_TDS(analog);
+		case Conversion::SALINITY 		: return convert_salinity(analog);
+		default							: return (float)analog;  
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_Analog::conversion_name(AnalogConversion conversion)
+const char* Loom_Analog::conversion_name(Conversion conversion)
 {
 	switch(conversion) {
-		case AnalogConversion::VOLTAGE 		: return "voltage";
-		case AnalogConversion::THERMISTOR 	: return "thermistor";
-		case AnalogConversion::PH 			: return "pH";
-		case AnalogConversion::TURBIDITY 	: return "turbidity";
-		case AnalogConversion::EC 			: return "EC";
-		case AnalogConversion::TDS 			: return "TDS";
-		case AnalogConversion::SALINITY 	: return "salinity";
-		default								: return "analog";  
+		case Conversion::VOLTAGE 		: return "voltage";
+		case Conversion::THERMISTOR 	: return "thermistor";
+		case Conversion::PH 			: return "pH";
+		case Conversion::TURBIDITY 		: return "turbidity";
+		case Conversion::EC 			: return "EC";
+		case Conversion::TDS 			: return "TDS";
+		case Conversion::SALINITY 		: return "salinity";
+		default							: return "analog";  
 	}
 }
 
@@ -136,7 +134,7 @@ void Loom_Analog::print_measurements()
 	LPrintln("Measurements:");
 	LPrintln("\tBattery = ", battery);
 	for (int i = 0; i < ANALOG_COUNT; i++) {
-		if ( (!enable_conversions) || (conversions[i] == AnalogConversion::NONE) ) {
+		if ( (!enable_conversions) || (conversions[i] == Conversion::NONE) ) {
 			LPrintln("\tA", i, " = ", analog_vals[i]);
 		} else {
 			LPrint("\tA", i, " = ", analog_vals[i]);
@@ -167,7 +165,7 @@ void Loom_Analog::package(JsonObject json)
 	for (int i = 0; i < ANALOG_COUNT; i++) {
 		if (pin_enabled[i]) {
 
-			if ( (!enable_conversions) || (conversions[i] == AnalogConversion::NONE) ) {
+			if ( (!enable_conversions) || (conversions[i] == Conversion::NONE) ) {
 				sprintf(buf, "%s%d", "A", i);
 				package_json(json, module_name, buf, analog_vals[i]);
 			} else {
@@ -218,13 +216,13 @@ void Loom_Analog::set_pin_enabled(uint8_t pin, bool e)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-AnalogConversion Loom_Analog::get_conversion(uint8_t pin)
+Loom_Analog::Conversion Loom_Analog::get_conversion(uint8_t pin)
 {
 	return conversions[pin];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Analog::set_conversion(uint8_t pin, AnalogConversion c)
+void Loom_Analog::set_conversion(uint8_t pin, Conversion c)
 {
 	conversions[pin] = c;
 }

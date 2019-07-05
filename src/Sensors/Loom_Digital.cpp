@@ -25,7 +25,7 @@ Loom_Digital::Loom_Digital(
 	) 
 	: LoomSensor( module_name, 1 )
 {
-	this->module_type = ModuleType::Digital;
+	this->module_type = LoomModule::Type::Digital;
 
 	// Zero out array of measurements 
 	for (int i = 0; i < DIGITAL_COUNT; i++) { 

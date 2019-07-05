@@ -73,7 +73,7 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 	) 
 	: LoomModule( module_name )
 {
-	this->module_type = ModuleType::Interrupt_Manager;
+	this->module_type = LoomModule::Type::Interrupt_Manager;
 
 	interrupts_enabled = true;
 

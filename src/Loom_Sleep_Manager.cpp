@@ -11,15 +11,15 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 		const char*		module_name, 
 		bool			use_LED, 
 		bool 			delay_on_wake, 
-		SleepMode		sleep_mode,
+		Mode			sleep_mode,
 		byte			power_off_pin
 	) : LoomModule( module_name )
 {
-	this->module_type = ModuleType::Sleep_Manager;
+	this->module_type = LoomModule::Type::Sleep_Manager;
 
 	this->use_LED		= use_LED;
 	this->delay_on_wake	= delay_on_wake;
-	this->sleep_mode	= SleepMode::STANDBY;
+	this->sleep_mode	= Mode::STANDBY;
 
 	this->power_off_pin	= power_off_pin;
 	pinMode(power_off_pin, OUTPUT);
@@ -27,7 +27,7 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager(JsonArrayConst p)
-	: Loom_Sleep_Manager(p[0], p[1], p[2], (SleepMode)(int)p[3], p[4]) {}
+	: Loom_Sleep_Manager(p[0], p[1], p[2], (Mode)(int)p[3], p[4]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::link_interrupt_manager(Loom_Interrupt_Manager* IM)
@@ -63,13 +63,13 @@ void Loom_Sleep_Manager::powerDown()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::set_sleep_mode(SleepMode mode)
+void Loom_Sleep_Manager::set_sleep_mode(Mode mode)
 {
 	sleep_mode = mode;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-SleepMode Loom_Sleep_Manager::get_sleep_mode()
+Loom_Sleep_Manager::Mode Loom_Sleep_Manager::get_sleep_mode()
 {
 	return sleep_mode;
 }
@@ -82,8 +82,8 @@ SleepMode Loom_Sleep_Manager::get_sleep_mode()
 // 	switch(sleep_mode) {
 		
 // 		// Both follow same process, intentional fallthrough
-// 		case SleepMode::STANDBY :
-// 		case SleepMode::IDLE :
+// 		case Mode::STANDBY :
+// 		case Mode::IDLE :
 // 		{
 // 			// Don't sleep if no RTC to wake up device
 // 			// if (RTC_Inst == nullptr) {
@@ -135,10 +135,10 @@ SleepMode Loom_Sleep_Manager::get_sleep_mode()
 
 // 			return true;
 // 		}
-// 		case SleepMode::SLEEPYDOG : 
+// 		case Mode::SLEEPYDOG : 
 // 			return false; // Can't sleep until a given time unless using RTC, in which case, use Standby or Idle instead
 		
-// 		case SleepMode::OPENS_LOWPOWER : 
+// 		case Mode::OPENS_LOWPOWER : 
 // 			return false; 
 // 	}
 // }
@@ -151,16 +151,16 @@ bool Loom_Sleep_Manager::sleep()
 
 		LowPower.standby();
 		// switch(sleep_mode) {
-			// case SleepMode::STANDBY : LowPower.standby(); 
+			// case Mode::STANDBY : LowPower.standby(); 
 				// break;
-			// case SleepMode::IDLE 	: LowPower.idle(IDLE_2); 
+			// case Mode::IDLE 	: LowPower.idle(IDLE_2); 
 				// break;
 
 			// implement
-			// case SleepMode::SLEEPYDOG 	: return false;   
+			// case Mode::SLEEPYDOG 	: return false;   
 
 			// implement
-			// case SleepMode::OPENS_LOWPOWER 	: return false;
+			// case Mode::OPENS_LOWPOWER 	: return false;
 		// }
 
 		// This is where programs waits until waking
@@ -215,13 +215,13 @@ void Loom_Sleep_Manager::post_sleep()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_Sleep_Manager::enum_sleep_mode_string(SleepMode m)
+const char* Loom_Sleep_Manager::enum_sleep_mode_string(Mode m)
 {
 	switch(m) {
-		case SleepMode::IDLE			: return "Idle";
-		case SleepMode::STANDBY			: return "Standby";
-		case SleepMode::SLEEPYDOG		: return "SleepyDog";
-		case SleepMode::OPENS_LOWPOWER	: return "OPEnS_Lowpower";
+		case Mode::IDLE				: return "Idle";
+		case Mode::STANDBY			: return "Standby";
+		case Mode::SLEEPYDOG		: return "SleepyDog";
+		case Mode::OPENS_LOWPOWER	: return "OPEnS_Lowpower";
 		default : return "";
 	}
 }

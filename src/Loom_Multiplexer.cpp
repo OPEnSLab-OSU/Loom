@@ -54,7 +54,7 @@ Loom_Multiplexer::Loom_Multiplexer(
 		uint 			update_period
 	) : LoomModule( module_name ) 
 {
-	this->module_type = ModuleType::Multiplexer;
+	this->module_type = LoomModule::Type::Multiplexer;
 
 	this->i2c_address 	= i2c_address; 
 	this->num_ports 	= num_ports;

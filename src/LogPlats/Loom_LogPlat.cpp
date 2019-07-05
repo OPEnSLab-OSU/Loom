@@ -3,13 +3,13 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-char* LoomLogPlat::enum_log_plat_string(LogPlatform p)
+const char* LoomLogPlat::enum_log_plat_string(Platform p)
 {
 	switch(p) {
-		case LogPlatform::SDCARD     : return "SD Card";
-		case LogPlatform::PUSHINGBOX : return "PushingBox";
-		case LogPlatform::OLED       : return "OLED";
-		case LogPlatform::SERIAL_MON : return "Serial";
+		case Platform::SDCARD     : return "SD Card";
+		case Platform::PUSHINGBOX : return "PushingBox";
+		case Platform::OLED       : return "OLED";
+		case Platform::SERIAL_MON : return "Serial";
 	}
 }
 

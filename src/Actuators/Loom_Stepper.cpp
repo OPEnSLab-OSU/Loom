@@ -11,7 +11,7 @@ Loom_Stepper::Loom_Stepper(
 	) 
 	: LoomActuator( module_name ) 
 {
-	this->module_type = ModuleType::Stepper;
+	this->module_type = LoomModule::Type::Stepper;
 
 
 	this->stepper_count = stepper_count;

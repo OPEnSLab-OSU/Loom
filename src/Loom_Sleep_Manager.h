@@ -12,14 +12,6 @@
 
 class Loom_Interrupt_Manager;
 
-/// Different options available to sleep in
-enum class SleepMode {
-	IDLE, 			///< Idle
-	STANDBY, 		///< Standby
-	SLEEPYDOG, 		///< SleepyDog (sleep 'hack')
-	OPENS_LOWPOWER	///< OPEnS board to shut board off completely
-};
-
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -30,6 +22,16 @@ enum class SleepMode {
 class Loom_Sleep_Manager : public LoomModule
 {
 
+public:
+
+	/// Different options available to sleep in
+	enum class Mode {
+		IDLE, 			///< Idle
+		STANDBY, 		///< Standby
+		SLEEPYDOG, 		///< SleepyDog (sleep 'hack')
+		OPENS_LOWPOWER	///< OPEnS board to shut board off completely
+	};
+
 protected:
 	
 	Loom_Interrupt_Manager* interrupt_manager;	/// Pointer to interrupt_manager instance 
@@ -37,7 +39,7 @@ protected:
 	bool 		use_LED;			/// Whether or not to use LED to indicate wake status
 	bool		delay_on_wake;		/// Whether to provide delay on wake.
 									/// Used to allow user to restart Serial Monitor
-	SleepMode 	sleep_mode;			/// Which sleep mode to use
+	Mode 		sleep_mode;			/// Which sleep mode to use
 	byte		power_off_pin;		///	Which pin to use to power board off (requires power board)
 
 public:
@@ -51,13 +53,13 @@ public:
 	/// \param[in]	module_name			String | <"Sleep-Manager"> | null | Sleep Manager module name
 	/// \param[in]	use_LED				Bool | <true> | {true, false} | Whether or not to use LED to indicate wake state
 	/// \param[in]	delay_on_wake		Bool | <false> | {true, false} | Whether or not to delay upon waking to allow time to open Serial Monitor
-	/// \param[in]	sleep_mode			Set(SleepMode) | <1> | { 0("Idle"), 1("Standby"), 2("SleepyDog"), 3("Opens Low Power")} | Which SleepMode to use
+	/// \param[in]	sleep_mode			Set(Mode) | <1> | { 0("Idle"), 1("Standby"), 2("SleepyDog"), 3("Opens Low Power")} | Which Mode to use
 	/// \param[in]	power_off_pin		Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to power off board
 	Loom_Sleep_Manager(
 			const char*		module_name			= "Sleep_Manager",
 			bool			use_LED				= true,
 			bool			delay_on_wake		= false,
-			SleepMode		sleep_mode			= SleepMode::STANDBY,
+			Mode			sleep_mode			= Mode::STANDBY,
 			byte			power_off_pin		= A5
 		);
 
@@ -98,7 +100,7 @@ public:
 
 	/// Get the current sleep mode
 	/// \return		The current sleep mode
-	SleepMode	get_sleep_mode();
+	Mode	get_sleep_mode();
 
 //=============================================================================
 ///@name	SETTERS
@@ -109,8 +111,8 @@ public:
 	void 		link_interrupt_manager(Loom_Interrupt_Manager* IM);
 
 	/// Set the sleep mode to use
-	/// \param[in]	mode	The SleepMode to set to
-	void		set_sleep_mode(SleepMode mode);
+	/// \param[in]	mode	The Mode to set to
+	void		set_sleep_mode(Mode mode);
 
 //=============================================================================
 ///@name	MISCELLANEOUS
@@ -119,7 +121,7 @@ public:
 	/// Convert enum of sleep mode to a c-string
 	/// \param[in]	m	Sleep to get string of
 	/// \return C-string of sleep mode
-	const static char* enum_sleep_mode_string(SleepMode m);
+	const static char* enum_sleep_mode_string(Mode m);
 	
 private:
 

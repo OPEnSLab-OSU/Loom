@@ -3,7 +3,7 @@
 
 
 
-const  NameModulePair Factory::LookupTable[] =
+const Factory::NameModulePair Factory::LookupTable[] =
 {
 	// InterruptManager
 	{"Loom_Interrupt_Manager",	Construct<Loom_Interrupt_Manager>,	ModuleSortType::InterruptManager },
@@ -127,7 +127,7 @@ void Factory::CreateAndSort(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-ModuleSortType Factory::get_sort_type(JsonVariant module) {
+Factory::ModuleSortType Factory::get_sort_type(JsonVariant module) {
 	const char* name = module["name"];
 
 	for (auto elem : LookupTable) {

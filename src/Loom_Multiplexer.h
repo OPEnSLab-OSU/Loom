@@ -95,6 +95,11 @@ public:
 	/// Polls all ports of multiplexer getting sensor on port (if any)
 	void		refresh_sensors();
 
+	/// Get the sensor object for sensor on provided port
+	/// \param[port]	port	The port of the multiplexer to get sensor object for
+	/// \return			The pointer to LoomI2CSensor on port, Null if no sensor
+	LoomI2CSensor*	get_sensor(uint8_t port);
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -133,11 +138,6 @@ public:
 /*@{*/ //======================================================================
 
 private:
-
-	/// Get the sensor object for sensor on provided port
-	/// \param[port]	port	The port of the multiplexer to get sensor object for
-	/// \return			The pointer to LoomI2CSensor on port, Null if no sensor
-	LoomI2CSensor*	get_sensor(uint8_t port);
 
 	/// Select communication with sensor at index port
 	/// \param[in]	port	The port to open I2C communication on

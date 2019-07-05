@@ -14,7 +14,7 @@ Loom_Bluetooth::Loom_Bluetooth(
 	: LoomCommPlat( module_name, max_message_length )
 
 { 
-	this->module_type = ModuleType::Bluetooth;
+	this->module_type = LoomModule::Type::Bluetooth;
 
 
 	BLE = new Adafruit_BluefruitLE_SPI(spi_CS, spi_IRQ, spi_RST);

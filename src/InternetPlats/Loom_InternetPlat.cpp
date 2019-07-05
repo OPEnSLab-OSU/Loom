@@ -7,7 +7,7 @@ LoomInternetPlat::LoomInternetPlat(
 		const char* module_name
 	) 
 	: LoomModule( module_name ) {
-		this->module_type = ModuleType::Internet;
+		this->module_type = LoomModule::Type::Internet;
 	}
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -22,7 +22,7 @@ LoomModule::LoomModule( const char* module_name ) : LoomModule()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-ModuleType LoomModule::get_module_type()
+LoomModule::Type LoomModule::get_module_type()
 {
 	return module_type;
 }

@@ -289,7 +289,7 @@ void LoomManager::set_instance_num(int n)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DeviceType LoomManager::get_device_type() 
+LoomManager::DeviceType LoomManager::get_device_type() 
 { 
 	return device_type; 
 }
@@ -334,7 +334,7 @@ void LoomManager::measure()
 	}
 	
 	for (auto module : other_modules) {	
-		if (module->get_module_type() == ModuleType::Multiplexer) {
+		if (module->get_module_type() == LoomModule::Type::Multiplexer) {
 			((Loom_Multiplexer*)module)->measure();
 		}
 	}

@@ -3,21 +3,22 @@
 #include "Loom_Module.h"
 
 
-/// Differnt Logging platforms supported
-enum class LogPlatform { 
-	SDCARD, 		///< Serial Monitor
-	PUSHINGBOX, 	///< PushingBox 
-	OLED, 			///< OLED Display
-	SERIAL_MON 		///< Serial Monitor
-};
-
-
 ///////////////////////////////////////////////////////////////////////////////
 
 
 /// Abstract base of logging platforms
 class LoomLogPlat : public LoomModule
 {
+
+public:
+
+	/// Differnt Logging platforms supported
+	enum class Platform { 
+		SDCARD, 		///< Serial Monitor
+		PUSHINGBOX, 	///< PushingBox 
+		OLED, 			///< OLED Display
+		SERIAL_MON 		///< Serial Monitor
+	};
 
 protected:
 
@@ -65,7 +66,7 @@ public:
 
 	/// Get c-string of name associated with log platform enum
 	/// \return c-string of log platform
-	static char* enum_log_plat_string(LogPlatform p);
+	static const char* enum_log_plat_string(Platform p);
 
 protected:
 

@@ -5,13 +5,6 @@
 #include <ZX_Sensor.h>
 
 
-/// Different modes of the ZX gesture sensor
-enum class ZXMode {
-	ZX_POS,		///< Measure z and x position
-	ZX_GEST 	///< Measure gestures
-};
-
-
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -21,13 +14,21 @@ enum class ZXMode {
 class Loom_ZXGesture : public LoomI2CSensor
 {
 
+public:
+
+	/// Different modes of the ZX gesture sensor
+	enum class Mode {
+		POS,	///< Measure z and x position
+		GEST 	///< Measure gestures
+	};
+
 protected:
 
 	/// Underlying ZX sensor manager instance
 	ZX_Sensor*		inst_ZX;
 
 	/// Sensor mode (read positions or gesture - mutually exclusive)
-	ZXMode			mode;
+	Mode			mode;
 
 	/// Measured positions (x, y pos)
 	int 			pos[2];
@@ -53,7 +54,7 @@ public:
 	Loom_ZXGesture(
 			byte			i2c_address		= 0x10,
 			const char*		module_name		= "ZXGesture",
-			ZXMode			mode			= ZXMode::ZX_POS
+			Mode			mode			= Mode::POS
 		);
 
 	/// Constructor that takes Json Array, extracts args
