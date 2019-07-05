@@ -163,6 +163,11 @@ Loom_Digital& LoomManager::Digital(int idx)
 	return (*(Loom_Digital*)( (tmp) ? tmp : &global_stub ));
 }
 
+Loom_SDS011& LoomManager::SDS011(int idx)
+{
+    LoomModule* tmp = find_module(ModuleType::SDS011, idx, (LoomModule**)sensor_modules, sensor_count);
+    return (*(Loom_SDS011*)( (tmp) ? tmp : &global_stub ));
+}
 
 //    --- I2C Sensors ---
 
