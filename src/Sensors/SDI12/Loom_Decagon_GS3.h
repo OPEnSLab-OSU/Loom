@@ -36,7 +36,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_DecagonGS3(JsonVariant p);
+	Loom_DecagonGS3(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_DecagonGS3() = default;

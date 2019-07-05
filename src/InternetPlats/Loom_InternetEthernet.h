@@ -37,7 +37,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_Ethernet_I( JsonVariant p );
+	Loom_Ethernet_I( JsonArrayConst p );
 
 	/// Destructor
 	~Loom_Ethernet_I() = default;

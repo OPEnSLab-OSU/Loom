@@ -42,7 +42,7 @@ Loom_Neopixel::Loom_Neopixel(
 } 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Neopixel::Loom_Neopixel(JsonVariant p)
+Loom_Neopixel::Loom_Neopixel(JsonArrayConst p)
 	: Loom_Neopixel( EXPAND_ARRAY(p, 4) )
 {
 

@@ -44,7 +44,7 @@ Loom_ZXGesture::Loom_ZXGesture(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_ZXGesture::Loom_ZXGesture(JsonVariant p)
+Loom_ZXGesture::Loom_ZXGesture(JsonArrayConst p)
 	: Loom_ZXGesture(p[0], p[1], (ZXMode)(int)p[2])
 {}
 

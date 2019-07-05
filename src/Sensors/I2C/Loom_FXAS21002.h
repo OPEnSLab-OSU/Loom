@@ -37,7 +37,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_FXAS21002(JsonVariant p);
+	Loom_FXAS21002(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_FXAS21002();

@@ -87,19 +87,19 @@ template<class T> T* ConstructDefault() {
 	return new T();
 }
 
-/// Creates a LoomModule with Json of parameters
+/// Creates a LoomModule with Json array of parameters
 /// \return The created LoomModule
-template<class T> LoomModule* Construct(JsonVariant p) {
+template<class T> LoomModule* Construct(JsonArrayConst p) {
 	return new T(p);
 }
 
-/// Function pointer to 'template<class T> LoomModule* Construct(JsonVariant p)'
-using FactoryPtr = LoomModule* (*)(JsonVariant p);
+/// Function pointer to 'template<class T> LoomModule* Construct(JsonArrayConst p)'
+using FactoryPtr = LoomModule* (*)(JsonArrayConst p);
 
 /// Struct to contain the elements of factory lookup table
 typedef struct {
 	const char*		name;		// Module type to compare against
-	FactoryPtr		Construct;	// Pointer to 'template<class T> LoomModule* Create(JsonVariant p)' with the type T set
+	FactoryPtr		Construct;	// Pointer to 'template<class T> LoomModule* Create(JsonArrayConst p)' with the type T set
 	ModuleSortType	sort_type;	// Which array of LoomManager to sort into 
 } NameModulePair;
 
@@ -115,7 +115,8 @@ public:
 	
 	/// Constructor
 	Factory() = default;
-	//// Destructor
+	
+	/// Destructor
 	~Factory() = default;
 
 	/// Create a LoomModule accoding to Json parameters
@@ -123,7 +124,9 @@ public:
 	/// \return The created LoomModule
 	LoomModule* Create(JsonVariant module);
 
-	/// Creates a LoomModule with its default parameters
+	/// Creates a LoomModule with its default parameters.
+	/// Usage example:
+	///		Loom_Relay r = FactoryInst.CreateDefault<Loom_Relay>();
 	/// \return The created LoomModule
 	template<class T> T* CreateDefault() {
 		return ConstructDefault<T>();

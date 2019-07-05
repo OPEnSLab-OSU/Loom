@@ -62,7 +62,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_Sleep_Manager(JsonVariant p);
+	Loom_Sleep_Manager(JsonArrayConst p);
 
 	//// Destructor
 	~Loom_Sleep_Manager() = default;

@@ -43,7 +43,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_Neopixel(JsonVariant p);
+	Loom_Neopixel(JsonArrayConst p);
 
 	/// Destructor
 	virtual ~Loom_Neopixel();

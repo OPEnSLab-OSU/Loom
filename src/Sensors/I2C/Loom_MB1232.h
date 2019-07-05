@@ -34,7 +34,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_MB1232(JsonVariant p);
+	Loom_MB1232(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_MB1232() = default;

@@ -54,15 +54,12 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	// /// Take any relevant measurements
-	// virtual void	measure() = 0; // maybe drop to subclasses  (measure_aux in Manager wouldnt work then)
-
 	/// Package a modules measurements or state.
 	/// \param[out]	json	Object to put data into
 	virtual void 	package(JsonObject json) = 0;
 
 	/// Route command to driver 
-	virtual bool	cmd_route(JsonObject) = 0;
+	virtual bool	cmd_route(JsonObject json) = 0;
 
 	/// Turn off any hardware
 	virtual void	power_down() {}

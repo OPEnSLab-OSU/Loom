@@ -72,7 +72,7 @@ Loom_OLED::Loom_OLED(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_OLED::Loom_OLED(JsonVariant p)
+Loom_OLED::Loom_OLED(JsonArrayConst p)
 	: Loom_OLED(p[0], p[1], p[2], (OLED_Version)(int)p[3], p[4], (OLED_Format)(int)p[5], p[6], p[7], (OLED_Freeze)(int)p[8]) {}
 
 ///////////////////////////////////////////////////////////////////////////////

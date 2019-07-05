@@ -79,7 +79,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_OLED(JsonVariant p);
+	Loom_OLED(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_OLED();

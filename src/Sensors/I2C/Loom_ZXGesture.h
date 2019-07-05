@@ -59,7 +59,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_ZXGesture(JsonVariant p);
+	Loom_ZXGesture(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_ZXGesture();

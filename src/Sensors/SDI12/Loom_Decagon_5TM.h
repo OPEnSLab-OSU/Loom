@@ -33,7 +33,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_Decagon5TM(JsonVariant p);
+	Loom_Decagon5TM(JsonArrayConst p);
 
 	/// Destructor
  	~Loom_Decagon5TM() = default;

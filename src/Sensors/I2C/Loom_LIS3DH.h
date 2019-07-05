@@ -38,7 +38,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_LIS3DH(JsonVariant p);
+	Loom_LIS3DH(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_LIS3DH();

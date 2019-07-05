@@ -39,7 +39,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_SHT31D( JsonVariant p );
+	Loom_SHT31D( JsonArrayConst p );
 
 	/// Destructor
 	~Loom_SHT31D() = default;

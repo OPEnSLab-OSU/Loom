@@ -69,7 +69,7 @@ const  NameModulePair Factory::LookupTable[] =
 LoomModule* Factory::Create(JsonVariant module)
 {
 	const char* name = module["name"];
-	JsonVariant p = module["parameters"];
+	JsonArrayConst p = module["parameters"];
 
 	// LPrintln("Module Name:: ", name);
 	// LPrintln("Parameter count:: ", p.size());

@@ -106,7 +106,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_Interrupt_Manager(JsonVariant p);
+	Loom_Interrupt_Manager(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_Interrupt_Manager() = default;

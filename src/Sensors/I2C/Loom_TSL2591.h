@@ -47,7 +47,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_TSL2591(JsonVariant p);
+	Loom_TSL2591(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_TSL2591() = default;

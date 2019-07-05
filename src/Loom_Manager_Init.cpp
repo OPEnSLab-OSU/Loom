@@ -19,7 +19,7 @@ Factory LoomFactory;
 /// Adds created LoomModules to the arrays of LoomManager
 void LoomManager::parse_config(const char* json_config)
 {
-	// Parse Json config
+	// = = = Parse Json config = = =
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		LPrintln();
