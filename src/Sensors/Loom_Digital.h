@@ -104,6 +104,7 @@ public:
 
 	/// Set pin enable state in manager
 	/// \param[in]	pin		Pin to set enable state of
+	/// \param[in]	e		Enable state to set to
 	void		set_pin_enabled(uint8_t pin, bool e);
 
 private:

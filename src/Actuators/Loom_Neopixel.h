@@ -16,14 +16,10 @@ class Loom_Neopixel : public LoomActuator
 
 protected:
 
-	/// Array of Neopixel instances to manage up to 3 Neopixels
-	Adafruit_NeoPixel*	pixels[3];
+	Adafruit_NeoPixel*	pixels[3];			/// Array of Neopixel instances to manage up to 3 Neopixels
 
-	/// Whether pins A0-A2 are enabled
-	bool				pin_enabled[3];
-
-	/// The associated color values (RGB) for each of the 3 Neopixels
-	uint8_t				color_vals[3][3];
+	bool				pin_enabled[3];		/// Whether pins A0-A2 are enabled
+	uint8_t				color_vals[3][3];	/// The associated color values (RGB) for each of the 3 Neopixels
 
 public:
 	

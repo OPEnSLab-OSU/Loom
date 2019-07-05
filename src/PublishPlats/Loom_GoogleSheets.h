@@ -21,11 +21,11 @@ public:
 	/// Loom Google Sheets Platform module constructor.
 	/// Check out http://www.open-sensing.org/evaporometerblog/datalog for more information on these parameters.
 	/// \param[in]	module_name		String | <"Internet-Plat"> | null | Publish platform module name.
-	/// \param[in]  internet_index  Int | <0> | [0-5] | Index from zero of of the desired internet platform based on the JSON configuration. 
-	/// \param[in]  script_url[in]  String | <""> | null | URL where the google sheets script is hosted, without domain (ex. /macros/s/AKfycby<more letters here>_k0n/exec).
-	/// \param[in]  sheet_id        String | <""> | null |ID Of the spreadsheet to put data in (script must have edit access).
-	/// \param[in]  tab_id          String | <"Data"> | null | Name of the tab that the device will put data into. 
-	/// \param[in]  device_id       String | <"Mine"> | null | Identifier to use for the device in the spreadsheet.
+	/// \param[in]  internet_index	Int | <0> | [0-5] | Index from zero of of the desired internet platform based on the JSON configuration. 
+	/// \param[in]  script_url		String | <""> | null | URL where the google sheets script is hosted, without domain (ex. /macros/s/AKfycby<more letters here>_k0n/exec).
+	/// \param[in]  sheet_id		String | <""> | null |ID Of the spreadsheet to put data in (script must have edit access).
+	/// \param[in]  tab_id			String | <"Data"> | null | Name of the tab that the device will put data into. 
+	/// \param[in]  device_id		String | <"Mine"> | null | Identifier to use for the device in the spreadsheet.
 	Loom_GoogleSheets(	
 						const char* module_name,
 						const uint	internet_index,
@@ -37,7 +37,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]  JsonVariant     The array of constuctor args to expand
+	/// \param[in]  p     The array of constuctor args to expand
 	Loom_GoogleSheets( JsonVariant p );
 
 	/// Destructor

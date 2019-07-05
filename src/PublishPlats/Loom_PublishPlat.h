@@ -21,8 +21,8 @@ public:
 
 	/// Loom Publish Platform module constructor.
 	///
-	/// \param[in]	module_name		String | <"Internet-Plat"> | null | Publish platform module name
-	/// \param[in]  internet_module_index   Int | <0> | [0-5] | Index from zero of of the desired internet platform based on the JSON configuration
+	/// \param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
+	/// \param[in]  internet_index		Int | <0> | [0-5] | Index from zero of of the desired internet platform based on the JSON configuration
 	LoomPublishPlat( 
 		const char* module_name,
 		const uint	internet_index

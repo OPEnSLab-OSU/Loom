@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include "Loom_Macros.h"
 
-
+///////////////////////////////////////////////////////////////////////////////
 /// Print an array.
 /// 3 Options
 ///   1: every element on different line
@@ -25,9 +25,11 @@ void print_array(T data [], int len, int format=1)
 	#endif
 }
 
+///////////////////////////////////////////////////////////////////////////////
 /// @private (hide from Doxygen)
 void print_array(String data [], int len, int format=1);
 
+///////////////////////////////////////////////////////////////////////////////
 /// @private (hide from Doxygen)
 bool functionRoute(const char* name);
 
@@ -54,4 +56,4 @@ bool functionRoute(const char* name, const FName fName, const FType f, const Arg
 	}
 }
 
-
+///////////////////////////////////////////////////////////////////////////////

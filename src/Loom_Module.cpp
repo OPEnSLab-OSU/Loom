@@ -140,23 +140,20 @@ char* LoomModule::enum_verbosity_string(Verbosity v)
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-// Maybe?
-//  - not pure because not everything will have a config (should default to empty function here)
-// Save a FlashStorage struct
-void LoomModule::save_config() {}
+// ///////////////////////////////////////////////////////////////////////////////
+// // Maybe?
+// //  - not pure because not everything will have a config (should default to empty function here)
+// // Save a FlashStorage struct
+// void LoomModule::save_config() {}
 
-///////////////////////////////////////////////////////////////////////////////
-// Load a FlashStorage struct, true if valid
-bool LoomModule::load_config() {}
+// ///////////////////////////////////////////////////////////////////////////////
+// // Load a FlashStorage struct, true if valid
+// bool LoomModule::load_config() {}
 
-///////////////////////////////////////////////////////////////////////////////
-// Display config struct contents (as flash can be disabled this is a different method)
-void LoomModule::print_config_struct() {}
+// ///////////////////////////////////////////////////////////////////////////////
+// // Display config struct contents (as flash can be disabled this is a different method)
+// void LoomModule::print_config_struct() {}
 
 
-///////////////////////////////////////////////////////////////////////////////
-// Optionally implementable interactive loop
-void LoomModule::REPL_loop() {}
 
 

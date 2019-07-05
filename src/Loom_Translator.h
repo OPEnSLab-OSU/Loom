@@ -74,11 +74,11 @@ void convert_array_assoc_to_key_value(String keys [], T values [], String key_va
 /// Convert a c-string to int.
 /// \param[in]	s	C-string to try to convert
 /// \return 		The converted int
-int			convert_string_to_int(char* s);
+int			convert_string_to_int(const char* s);
 /// Convert a String to float.
 /// \param[in]	s	C-string to try to convert
 /// \return 		The converted float
-float		convert_string_to_float(char* s);
+float		convert_string_to_float(const char* s);
 /// Convert a String to int.
 /// \param[in]	s	C-string to try to convert
 /// \return 		The converted int
@@ -101,9 +101,9 @@ float		convert_string_to_float(String s);
 
 
 /// Converts array of generic type to array Strings
-/// \param[in]	scr		Incoming array
-/// \param[out]	scr		Outgoing array
-/// \param[in]	scr		Number of elements in array
+/// \param[in]	src		Incoming array
+/// \param[out]	dest	Outgoing array
+/// \param[in]	count	Number of elements in array
 template <typename Tin>
 void		convert_array(Tin src[], String dest[], int count)
 {
@@ -113,9 +113,9 @@ void		convert_array(Tin src[], String dest[], int count)
 }
 
 /// Converts array of generic type to array of different provided type
-/// \param[in]	scr		Incoming array
-/// \param[out]	scr		Outgoing array
-/// \param[in]	scr		Number of elements in array
+/// \param[in]	src		Incoming array
+/// \param[out]	dest	Outgoing array
+/// \param[in]	count	Number of elements in array
 template <typename Tin, typename Tout>
 void		convert_array(Tin src [], Tout dest[], int count)
 {

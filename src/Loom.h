@@ -1,9 +1,24 @@
+/*! \mainpage An Internet of Things Rapid Prototyping System for applications in environmental sensing
+
+Text
+
+\section resources Resources
+
+- [Github](https://github.com/OPEnSLab-OSU/Loom)
+- [Project Website](http://www.open-sensing.org/project-loom)
+- [Wiki](https://wiki.open-sensing.org/doku.php?id=loom)
+
+\section intro_sec Overview
+
+This is the overview.
+
+*/
+
+
 
 #define LOOM_DEBUG 1
 
-
-
-// Preamble will only need to include leaves in the heirarchy
+// Preamble will only need to include leaves in the hierarchy
 // abstract (non-leaves) already included by leaves
 
 

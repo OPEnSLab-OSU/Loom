@@ -130,13 +130,10 @@ class LoomLogPlat;
 
 
 
-
-
 // switch to using vectors
 #define MAX_OTHER_MODULES 3
 #define MAX_SENSORS       20
 #define MAX_ACTUATORS     10
-// #define MAX_RTCS          3
 #define MAX_COMMS         3
 #define MAX_INTERNETS     3
 #define MAX_PUBLISH		  2
@@ -154,14 +151,10 @@ class LoomManager
 
 protected:
 
-	/// The name of the device
-	char		device_name[20];
-	/// The family the device belongs to
-	char		family[20];
-	/// The subnet of the family
-	uint		family_num;
-	/// The instance / channel ID within the subnet
-	uint		instance;
+	char		device_name[20];	/// The name of the device
+	char		family[20];			/// The family the device belongs to
+	uint		family_num;			/// The subnet of the family
+	uint		instance;			/// The instance / channel ID within the subnet
 
 
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
@@ -171,7 +164,7 @@ protected:
 	Loom_Interrupt_Manager*	interrupt_manager = nullptr;
 	Loom_Sleep_Manager*		sleep_manager = nullptr;
 
-	// RTC object
+	/// RTC object pointer
 	LoomRTC*			rtc_module = nullptr;
 
 	// Arrays of Loom Modules, categorized by type
@@ -183,30 +176,19 @@ protected:
 	LoomPublishPlat*	publish_modules[MAX_PUBLISH];
 	LoomLogPlat*		log_modules[MAX_LOGS];
 
-	/// Count of miscellaneous modules
-	uint		other_module_count = 0;
-	/// Count of sensor modules
-	uint		sensor_count = 0;
-	/// Count of actuator modules
-	uint		actuator_count = 0;
-	/// Count of RTC modules
-	// uint		rtc_count;
-	/// Count of communication modules
-	uint		comm_count = 0;
-	/// Count of internet modules
-	uint		internet_count = 0;
-	/// Count of publish modules
-	uint		publish_count = 0;
-	/// Count of logging platform modules
-	uint		log_count = 0;
+	// Module list counts
+	uint		other_module_count = 0;		/// Count of miscellaneous modules
+	uint		sensor_count = 0;			/// Count of sensor modules
+	uint		actuator_count = 0;			/// Count of actuator modules
+	uint		comm_count = 0;				/// Count of communication modules
+	uint		internet_count = 0;			/// Count of internet modules
+	uint		publish_count = 0;			/// Count of publish modules
+	uint		log_count = 0;				/// Count of logging platform modules
 
-	/// Print detail verbosity
-	Verbosity	print_verbosity;
-	/// Package detail verbosity
-	Verbosity	package_verbosity;
+	Verbosity	print_verbosity;			/// Print detail verbosity
+	Verbosity	package_verbosity;			/// Package detail verbosity
 
-	/// Json data
-	StaticJsonDocument<2000> doc;
+	StaticJsonDocument<2000> doc;			/// Json data
 
 
 public:
@@ -221,9 +203,9 @@ public:
 	/// \param[in]	family						String | <"Loom"> | null | Which family the device belongs to
 	/// \param[in]	family_num					Int | <1> | [0-99] | Which family subnet the device belongs to
 	/// \param[in]	instance					Int | <1> | [0-99] | Device instance number on its subnet
-	/// \param[in]	type						Set(DeviceType) | <1> | {0("Hub"), 1("Node"), 2("Repeater")} | Device's topological type
-	/// \param[in]	type						Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
-	/// \param[in]	type						Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
+	/// \param[in]	device_type					Set(DeviceType) | <1> | {0("Hub"), 1("Node"), 2("Repeater")} | Device's topological type
+	/// \param[in]	print_verbosity				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
+	/// \param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
 	LoomManager(
 			const char*		device_name			= "Default",
 			const char*		family				= "Loom",
@@ -242,16 +224,22 @@ public:
 /// Desription
 /*@{*/ //======================================================================
 
+	/// Parse a JSON configuration specifying enabled modules.
+	/// Enabled modules are instantiated with specified settings
+	/// and added to manager lists for managing
+	/// \param[in]	json_config		Configuration
 	void		parse_config(const char* json_config);
 
 	/// Measure data of all managed sensors
 	void		measure();  
 
-	/// Package data of all modules into provide JsonObject
+	/// Package data of all modules into provide JsonObject.
+	/// How detailed data is can be modified with package_verbosity
+	/// \param[out]	json	JsonObject of packaged data of enabled modules
 	void		package(JsonObject json);
 
 	/// Package data of all modules into JsonObject and return
-	/// \return JsonObject of packaged data
+	/// \return JsonObject of packaged data of enabled modules
 	JsonObject	package();
 
 	/// Publish
@@ -288,7 +276,7 @@ public:
 	
 	// 	void print_state()
 
-	/// LPrint the linked modules
+	/// Print the linked modules
 	void 		list_modules();
 
 	/// Print out the internal JSON object
@@ -303,12 +291,14 @@ public:
 	DeviceType	get_device_type();
 
 	/// Return reference to internal json object
+	/// \param[in]	clear	Whether or not to empty Json before returning it
 	/// \return Reference to internal json object
 	JsonObject	internalJson(bool clear = true);
 
 	/// Get the device name, copies into provided buffer.
-	/// \param[out] buf	The buffer copy device name into
+	/// \param[out]	buf		The buffer copy device name into
 	void 		get_device_name(char* buf);
+	
 	/// Get the device name
 	/// \return String literal of device name.
 	const char*	get_device_name();
@@ -339,26 +329,26 @@ public:
 
 	/// Set the device name.
 	/// \param[in]	device_name		The new device name
-	void 		set_device_name(char* device_name);
+	void 		set_device_name(const char* device_name);
 
 	/// Set device family name.
-	/// \param[out] family Family name
-	void		set_family(const char* f);
+	/// \param[out]	family	Family name
+	void		set_family(const char* family);
 	
 	/// Set device family number.
-	/// \param[in] New family number
+	/// \param[in]	n	New family number
 	void		set_family_num(int n);
 	
 	/// Set device instance number.
-	/// \param[in] New instance number
+	/// \param[in]	n	New instance number
 	void		set_instance_num(int n);
 
 	/// Set print verbosity.
-	/// \param[in] v New print verbosity
+	/// \param[in]	v	New print verbosity
 	void		set_print_verbosity(Verbosity v);
 		
 	/// Set package verbosity.
-	/// \param[in] v New package verbosity
+	/// \param[in]	v	New package verbosity
 	void		set_package_verbosity(Verbosity v);
 
 //=============================================================================
@@ -466,8 +456,6 @@ protected:
 
 	/// Print the device name as '[device_name]'
 	void		print_device_label();
-
-
 
 private:
 

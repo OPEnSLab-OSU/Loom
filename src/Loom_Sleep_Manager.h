@@ -115,6 +115,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Convert enum of sleep mode to a c-string
+	/// \param[in]	m	Sleep to get string of
 	/// \return C-string of sleep mode
 	const static char* enum_sleep_mode_string(SleepMode m);
 	

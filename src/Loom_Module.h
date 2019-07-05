@@ -13,6 +13,8 @@
 class LoomManager; // Specify that LoomManager exists, defined in own file
 
 
+///////////////////////////////////////////////////////////////////////////////
+
 
 /// Abstract root of Loom component modules inheritance hierarchy
 class LoomModule
@@ -93,6 +95,7 @@ public:
 	/// Copy module name into buffer
 	/// \param[out]	buf	The buffer to copy module name into
 	void			get_module_name(char* buf);
+	
 	/// Get module name
 	/// \return	Module name
 	const char*		get_module_name();
@@ -155,17 +158,11 @@ public:
 // Maybe?
 //  - not pure virtual because not everything will have a config (should default to empty function here)
 	// Save a FlashStorage struct
-	virtual void	save_config();
+	virtual void	save_config() {}
 	// Load a FlashStorage struct, true if valid
-	virtual bool	load_config();
+	virtual bool	load_config() {}
 	// Display config struct contents (as flash can be disabled this is a different method)
-	virtual void	print_config_struct();
-
-
-
-	// Optionally implementable interactive loop
-	virtual void	REPL_loop();
-
+	virtual void	print_config_struct() {}
 
 protected:
 

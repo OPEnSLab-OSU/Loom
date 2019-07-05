@@ -81,7 +81,6 @@ enum class ModuleSortType {
 };
 
 
-
 /// Creates a LoomModule with default parameters
 /// \return The created LoomModule
 template<class T> T* ConstructDefault() {
@@ -104,6 +103,8 @@ typedef struct {
 	ModuleSortType	sort_type;	// Which array of LoomManager to sort into 
 } NameModulePair;
 
+
+///////////////////////////////////////////////////////////////////////////////
 
 
 /// LoomModule Factory

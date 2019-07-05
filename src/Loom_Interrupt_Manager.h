@@ -15,7 +15,6 @@
 
 
 
-
 // Specify that LoomRTC exists, defined in own file
 class LoomRTC;
 
@@ -126,8 +125,8 @@ public:
 	/// Register an ISR to an interrupt pin and its configuration
 	/// \param[in]	pin			Which pin to connect the interrupt on
 	/// \param[in]	ISR			ISR	function (Null if no interrupt linked)
-	/// \param[in]	type		Low, High, Change, Falling, Rising
-	/// \param[in]	immediate	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
+	/// \param[in]	signal_type	Low, High, Change, Falling, Rising
+	/// \param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
 	void		register_ISR(byte pin, ISRFuncPtr ISR, byte signal_type, ISR_Type run_type);
 
 	/// Run any waiting ISRs.
@@ -135,8 +134,8 @@ public:
 	void		run_pending_ISRs();
 
 	/// Restores pin to default ISR, disables interrupt
-	/// \param[in]	pin		The pin to unregister ISRs for
-	/// \param[in]	type	What signal to configure default ISR to (default LOW)
+	/// \param[in]	pin				The pin to unregister ISRs for
+	/// \param[in]	signal_type		What signal to configure default ISR to (default LOW)
 	void		unregister_ISR(byte pin, byte signal_type=LOW);
 
 	/// Detaches then reattacheds interrupt according to settings.
@@ -246,6 +245,10 @@ public:
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
+	/// Link a device manager.
+	/// Overrides default by getting RTC pointer from 
+	/// device manager if possible
+	/// \param[in]	LM		Manager to link 
 	void 		link_device_manager(LoomManager* LM) override;
 
 	/// Set pointer to sleep Manager
@@ -270,6 +273,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get c-string of name associated with interrupt type enum
+	/// \param[in]	type	Interrupt type 
 	/// \return C-string of interrupt type
 	const static char* interrupt_type_to_string(int type);
 

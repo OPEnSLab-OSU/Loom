@@ -40,13 +40,13 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 /*@{*/ //======================================================================
 
 ///////////////////////////////////////////////////////////////////////////////
-int convert_string_to_int(char* s) 
+int convert_string_to_int(const char* s) 
 { 
 	return (int)strtol(s, NULL, 10); 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-float convert_string_to_float(char* s) 
+float convert_string_to_float(const char* s) 
 { 
 	return strtof(s, NULL); 
 }

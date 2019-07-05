@@ -5,8 +5,6 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
 /// @private (hide from Doxygen)
 /// Invalid package argument count
 void package_json(JsonObject json, const char* module_name); 
@@ -77,18 +75,20 @@ void package_json(JsonObject json, const char* module_name, const Args... args)
 	package_json_aux(compenent["data"], args...); 
 }
 
-
+///////////////////////////////////////////////////////////////////////////////
 /// Add timestamp to a Json object
 /// \param[out]		json	Object to add timestamp to
 /// \param[in]		date 	Time string of timestamp
 /// \param[in]		time	Date string of timestamp
 void package_json_timestamp(JsonObject json, const char* date, const char* time);
 
+///////////////////////////////////////////////////////////////////////////////
 /// Convert data in key values in arrays in ojects to 
 /// keys and values in single object 'flatObj'
 /// \param[out]		json	Object to flatten data of
 void flatten_json_data_object(JsonObject json);
 
+///////////////////////////////////////////////////////////////////////////////
 /// Convert data in key values in arrays in ojects to 
 /// alternating keys and values in array 'flatArray'
 /// \param[out]		json	Object to flatten data of

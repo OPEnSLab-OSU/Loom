@@ -268,7 +268,7 @@ void LoomManager::list_modules()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_device_name(char* device_name)
+void LoomManager::set_device_name(const char* device_name)
 {
 	snprintf(this->device_name, 20, "%s", device_name);
 }
@@ -294,7 +294,7 @@ const char* LoomManager::get_family()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void  LoomManager::set_family(const char* f) 
+void  LoomManager::set_family(const char* family) 
 { 
 	snprintf(this->family, 20, "%s", family); 
 }

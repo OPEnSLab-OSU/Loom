@@ -21,14 +21,10 @@ class Loom_Servo : public LoomActuator
 
 protected:
 
-	/// Underlying servo driver instance
-	Adafruit_PWMServoDriver servo_driver;// = Adafruit_PWMServoDriver();
+	Adafruit_PWMServoDriver servo_driver;	/// Underlying servo driver instance
 
-	/// Number of servos
-	uint8_t		servo_count;
-
-	/// Positions of the servos
-	int*		positions;
+	uint8_t		servo_count;				/// Number of servos
+	int*		positions;					/// Positions of the servos
 
 public:
 	

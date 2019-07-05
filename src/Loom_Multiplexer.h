@@ -60,7 +60,7 @@ public:
 	///
 	/// \param[in]	module_name				String | <"Multiplexer"> | null | Multiplexer module name
 	/// \param[in]	i2c_address				Set(Int) | <0x71> | {0x71} | I2C address
-	/// \param[in]	min_filter_delay	Int | <8> | [1-8] | Minimum update delay, if enable_rate_filter enabled
+	/// \param[in]	num_ports				Int | <8> | [1-8] | Number of ports available
 	/// \param[in]	dynamic_list			Bool | <true> | {true, false} | Whether or not to automatically check for new sensors
 	/// \param[in]	update_period			Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
 	Loom_Multiplexer(
@@ -88,7 +88,7 @@ public:
 	bool		cmd_route(JsonObject) override {}
 
 	/// Populate a bundle with a list of sensors currently attached
-	/// \param[out]	bndl	Bundle to populate with sensor list
+	/// \param[out]	json	Json object to populate with sensor list
 	void		get_sensor_list(JsonObject json);
 
 	/// Update sensor list.
@@ -112,7 +112,7 @@ public:
 	bool		get_is_dynamic();
 
 	/// Get the sensor list update period.
-	/// \return		The update period
+	/// \return	The update period
 	int			get_update_period();
 
 //=============================================================================
@@ -125,7 +125,7 @@ public:
 
 	/// Set the sensor list update period.
 	/// Requires dynamic_list to be enabled
-	/// \param[in]	New update period
+	/// \param[in]	period	New update period
 	void		set_update_period(int period);
 
 //=============================================================================
