@@ -6,16 +6,15 @@ const char* json_config =
 ;
 
 
-LoomManager Manager("Manager", "Loom", 1, 1, DeviceType::NODE, Verbosity::V_HIGH, Verbosity::V_LOW);
-
+LoomManager Manager("Manager", "Loom", 1, 1, LoomManager::DeviceType::NODE, Verbosity::V_HIGH, Verbosity::V_LOW);
 
 void setup() 
 {
 	pinMode(LED_BUILTIN, OUTPUT); 
 
 	Serial.begin(115200);
-	// while(!Serial);
-	// delay(1000);
+	while(!Serial);
+	delay(1000);
 
 	LPrintln("Initialized Serial!\n");
 
@@ -28,9 +27,8 @@ void setup()
 
 void loop() 
 {
-	Manager.measure();
-	JsonObject tmp = Manager.package();
-	serializeJsonPretty(tmp, Serial);
-
+	Manager.Relay().set(true);
+	delay(2000);
+	Manager.Relay().set(false);
 	delay(2000);
 }

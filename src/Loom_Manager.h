@@ -132,7 +132,8 @@ protected:
 	Verbosity	print_verbosity;			/// Print detail verbosity
 	Verbosity	package_verbosity;			/// Package detail verbosity
 
-	StaticJsonDocument<2000> doc;			/// Json data
+	/// Json data
+	StaticJsonDocument<2000> doc;			
 
 public:
 
