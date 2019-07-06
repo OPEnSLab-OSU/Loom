@@ -38,7 +38,7 @@ void setup()
 	Manager.parse_config(json_config_pretty);
 	Manager.print_config();
 
-	Manager.Relay().set(1);
+	Manager.Relay().set(true);
 
 	// LPrintln("strlen pretty: ", strlen(pretty));
 	LPrintln("strlen json_config: ", strlen(json_config));
