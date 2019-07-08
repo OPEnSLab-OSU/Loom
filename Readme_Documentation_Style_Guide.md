@@ -147,14 +147,14 @@ If sections of code within a file warrant dividers for readability and ease of n
 
 ```cpp
 // ================================================================
-// ===                Major Section Description                 ===
+// ===                   Major Section Title                    ===
 // ================================================================
 ```
 
 #### **Minor**
 
 ```cpp
-// === === Minor Section Description === ===
+// === === Minor Section Title === ===
 ```
 
 ### Non-Documentation Comments
@@ -195,8 +195,8 @@ Toward the top of each header file, immediately before the the class declaration
 
 Angle brackets indicate a required field. Do not include them in your code.
 
-- "inheritFromModule": The virtual class of which your module will inherit methods
-- "Description of module": A short description of your module.
+- **inheritFromModule**: The virtual class of which your module will inherit methods
+- Description **of** module: A short description of your module.
 
 #### Example found in Loom_OLED class.
 

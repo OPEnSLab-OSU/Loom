@@ -38,7 +38,7 @@ Things to generally avoid in ISRs (see [Check Flag ISRs](#check-flag) if you wan
 
 The interrupt manager supports two types of ISRs, immediate and flag-based,  the difference lying in when they are run. 
 
-**Immediate: ** The ISR will run in its entirety immediately upon the interrupt triggering
+**Immediate:** The ISR will run in its entirety immediately upon the interrupt triggering
 
 **Check Flag:** When the interrupt triggers, a default ISR will set a flag indicating that the ISR you provided should be run when `run_pending_ISRs()` is called (your ISR is known as an ISR bottom half). Use this if the execution of your ISR can wait until the next iteration of `loop()`; if it is relatively long; or if you  want to use commands like Serial prints, delay, or function calls. These ISRs are similar to setting a flag in an immediate ISR and running code in an `if (flag) { … }`, either approach is acceptable.
 

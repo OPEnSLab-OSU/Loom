@@ -6,7 +6,7 @@ This readme lists the hardware currently supported by Loom, providing a brief de
 
 - [Processors](#processors)
 - [Communication Capabilities](#communication-capabilities)
-- [Data Logging](#Data logging)
+- [Data Logging](#data-logging)
 - [Sensors](#sensors)
 - [Actuators](#actuators)
 - [Other](#other)

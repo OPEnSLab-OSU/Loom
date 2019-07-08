@@ -12,6 +12,7 @@ This guide is intended to help users with the typical usage of Loom.
 - [Usage](#usage)
 - [Adapting Examples](#adapting-examples)
 - [Contributing  to Loom](#contributing-to-loom)
+- [Basic Example](#basic-example)
 
 ## Setup Arduino
 
