@@ -42,7 +42,7 @@ const  NameModulePair Factory::LookupTable[] =
 	{"Loom_Analog",				Construct<Loom_Analog>,			ModuleSortType::Sensor },
 	{"Loom_Digital",			Construct<Loom_Digital>,		ModuleSortType::Sensor },
     {"Loom_SDS011",             Construct<Loom_SDS011>,         ModuleSortType::Sensor },
-    
+    {"Loom_K30",                Construct<Loom_K30>,            ModuleSortType::Sensor },
 	{"Loom_AS7262",				Construct<Loom_AS7262>,			ModuleSortType::Sensor },
 	{"Loom_AS7263",				Construct<Loom_AS7263>,			ModuleSortType::Sensor },
 	{"Loom_AS7265X",			Construct<Loom_AS7265X>,		ModuleSortType::Sensor },

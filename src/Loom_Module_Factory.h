@@ -36,6 +36,7 @@
 #include "Sensors/Loom_Analog.h"
 #include "Sensors/Loom_Digital.h"
 #include "Sensors/Loom_SDS011.h"
+#include "Sensors/Loom_K30.h"
 
 #include "Sensors/I2C/Loom_AS7262.h"
 #include "Sensors/I2C/Loom_AS7263.h"

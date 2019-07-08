@@ -169,6 +169,12 @@ Loom_SDS011& LoomManager::SDS011(int idx)
     return (*(Loom_SDS011*)( (tmp) ? tmp : &global_stub ));
 }
 
+Loom_K30& LoomManager::K30(int idx)
+{
+    LoomModule* tmp = find_module(ModuleType::K30, idx, (LoomModule**)sensor_modules, sensor_count);
+    return (*(Loom_K30*)( (tmp) ? tmp : &global_stub ));
+}
+
 //    --- I2C Sensors ---
 
 Loom_AS7262& LoomManager::AS7262(int idx) 

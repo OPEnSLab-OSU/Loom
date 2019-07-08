@@ -17,6 +17,7 @@ class Loom_Stepper;
 class Loom_Analog;
 class Loom_Digital;
 class Loom_SDS011;
+class Loom_K30;
 // I2C
 class Loom_AS7262;
 class Loom_AS7263;
@@ -76,7 +77,7 @@ enum class ModuleType {
 	// Actuators
 	Neopixel, Relay, Servo, Stepper,
 	// Sensors
-	Analog, Digital, SDS011,
+	Analog, Digital, SDS011, K30,
 	// I2C
 	AS7262, AS7263, AS7265X, FXAS21002, FXOS8700, LIS3DH, MB1232, MPU6050, MS5803, SHT31D, TSL2561, TSL2591, ZXGesture,
 	// SDI12
@@ -424,6 +425,8 @@ public:
 	Loom_Analog&		Analog(int idx = 0);
 	Loom_Digital&		Digital(int idx = 0);
     Loom_SDS011&        SDS011(int idx = 0);
+    Loom_K30&           K30(int idx = 0);
+    
 	// I2C
 	Loom_AS7262&		AS7262(int idx = 0);
 	Loom_AS7263&		AS7263(int idx = 0);
