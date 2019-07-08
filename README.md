@@ -70,6 +70,10 @@ Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team 
 
 [Doxygen generated documentation](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/) for documentation of the code and how to use
 
+***Note***: The documentation does not currently update automatically, if would want to be sure you have the most up to date version of the documentation, you can run Doxygen to manually generate a local copy of the documentation. See the Doxygen website on how to [Install Doxygen](http://www.doxygen.nl/manual/install.html) and [Doxygen Usage](http://www.doxygen.nl/manual/doxygen_usage.html). 
+
+Once installed, the run `doxygen Doxyfile` from the command line (from Loom directory) to generate the documentation. To view, open the `Loom/html/index.html` file in a browser.
+
 ## Contributing
 
 Is there hardware support or other feature you would like to add to Loom? Follow our [Guide to contributing to Loom](https://github.com/OPEnSLab-OSU/Loom/blob/master/ReadMe_Contributing.md)
