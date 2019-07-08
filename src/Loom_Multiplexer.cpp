@@ -194,9 +194,6 @@ void Loom_Multiplexer::print_measurements()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::package(JsonObject json)
 {
-
-		LPrintln("num_ports: ", this->num_ports);
-
 	for (uint8_t i = 0; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
 			tca_select(i);

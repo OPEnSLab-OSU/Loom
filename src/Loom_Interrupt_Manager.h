@@ -142,7 +142,6 @@ public:
 	/// \param[in]	pin 	Pin to reset interrupts for ...
 	void		interrupt_reset(byte pin);
 
-
 //=============================================================================
 ///@name	RTC ALARM METHODS
 /*@{*/ //======================================================================
@@ -150,11 +149,11 @@ public:
 	// Shorten names, maybe combine, taking behavior (e.g. relative/absolute) as parameter
 
 	// sleep_for
-	/// Set RTC alarm relative time from now
+	/// Set RTC alarm an amount of time from now
 	/// \param[in]	duration	How long before the alarm should go off
 	bool		RTC_alarm_duration(TimeSpan duration);
 
-	/// Set RTC alarm relative time from now
+	/// Set RTC alarm an amount of time from now
 	/// \param[in]	days		Days into the future the alarm should be set
 	/// \param[in]	hours		Hours into the future the alarm should be set
 	/// \param[in]	minutes		Minutes into the future the alarm should be set
@@ -175,11 +174,11 @@ public:
 	bool		RTC_alarm_at(uint hour, uint minute, uint second);
 
 // // sleep_for
-	/// Set RTC alarm relative time from last alarm time
+	/// Set RTC alarm an amount of time from last alarm time
 	/// \param[in]	duration	How long before the alarm should go off
 	bool		RTC_alarm_duration_from_last(TimeSpan duration);
 
-	/// Set RTC alarm relative time from last alarm time
+	/// Set RTC alarm an amount of time from last alarm time
 	/// \param[in]	days		Days into the future the alarm should be set
 	/// \param[in]	hours		Hours into the future the alarm should be set
 	/// \param[in]	minutes		Minutes into the future the alarm should be set

@@ -2,6 +2,8 @@
 
 # Loom Quick Start
 
+This guide is intended to help users with the typical usage of Loom.
+
 ## Table of Contents
 
 - [Setup Arduino](#setup-arduino)
@@ -41,7 +43,7 @@ The external .h file options are preferred, either of these two versions is fine
 
 See the [documentation](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/) or source code (.h files) for valid module parameter.
 
-####Including configuration 
+#### Including configuration 
 
 As shown in the example, include a configuration like so:
 ```cpp
@@ -98,7 +100,7 @@ Manager.package(data2);
 Note that you can also get the current state of the `LoomManager`s internal Json object at any time (without updating the data that is packaged) with `JsonObject internalJson (bool clear=true)`, which can be used as follows. By default this operation empties the Json object (so you can use it), if you do not want to clear the data, send argument false to the method.
 
 ```cpp
-JsonObject noClearedJson = Manager.interalJson(false);
+JsonObject notClearedJson = Manager.internalJson(false);
 
 JsonObject clearedJson = Manager.internalJson();
 ```
@@ -108,7 +110,7 @@ JsonObject clearedJson = Manager.internalJson();
 If you want to print the Json object to the Serial monitor, the ArduinoJson library provides built in functionality to do so, formatting it to be easily readable.
 
 ```cpp
-JsonObject toPrint = Manager.package();
+JsonObject toPrint;
 serializeJsonPretty(toPrint, Serial);
 ```
 
@@ -128,14 +130,6 @@ For more details on executing commands and how the Json of a command is structur
 #### More
 
 See the [LoomManager Documentation](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/class_loom_manager.html) for all avaible `LoomManager` methods.
-
-### Interrupt Manager
-
-
-
-### Sleep Manager
-
-
 
 ### Module
 
@@ -177,11 +171,21 @@ Loom_Relay relay = Manager.Relay();
 // relay and Manger.Relay() now refer to different objects
 ```
 
-In some cases behavior might work fine but as the two objects are different, changing one will not change the other
+In some cases behavior might work fine but as the two objects are different, changing one will not change the other.
 
 #### Available Methods
 
 See the [Documentation](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/inherits.html) for available methods of individual modules.
+
+### Secondary Managers
+
+Loom has a few secondary managers that are `LoomModules` specialized to managing features more general than an individual hardware component. These currently include:
+
+- Interrupt manager
+- Sleep manager
+- Multiplexer
+
+See the [Secondary Managers](https://github.com/OPEnSLab-OSU/Loom/blob/master/Readme_Secondary_Managers.md) readme for details on their usage.
 
 ### Printing to Serial
 
@@ -191,51 +195,39 @@ Loom provides a few macros (LPrint, LPrintln, LPrintlnAll) to simplify printing 
 
 ```cpp
 LPrint("abc", 123);
-```
-
-Produces:
-
-```cpp
-abc123
+// produces:
+// abc123
 ```
 
 **LPrintln:** Print variable number of arguments with newline after last element
 
 ```cpp
 LPrintln("abc", 123);
-```
-
-Produces:
-
-```cpp
-abc123
+// produces:
+// abc123
 ```
 
 **LPrintlnAll:** Print variable number of arguments with newline after each element
 
 ```cpp
 LPrintlnAll(1, 2.34, true, "string", String("another string"));
-```
-
-Produces:
-
-```cpp
-1
-2.34
-1
-string
-another string
+// produces:
+// 1
+// 2.34
+// 1
+// string
+// another string
 ```
 
 ## Documentation
 
-[Wiki](https://wiki.open-sensing.org/doku.php?id=loom)
+[Wiki](https://wiki.open-sensing.org/doku.php?id=loom) for general documentation not contained in GitHub readmes
 
-[Doxygen generated documentation](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/)
+[Doxygen generated documentation](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/) for documentation of the code and how to use
 
 ## Contribute to Loom
 
-Is there a feature you would like to added to Loom? Follow our [guide to contribute to Loom](https://github.com/OPEnSLab-OSU/Loom/Readme_Contributing.md)
+Is there hardware support or other feature you would like to add to Loom? Follow our [guide to contribute to Loom](https://github.com/OPEnSLab-OSU/Loom/Readme_Contributing.md)
 
 ## Basic Example
 
@@ -255,27 +247,27 @@ LoomManager Manager("Manager", "Loom", 1, 1, LoomManager::DeviceType::NODE, Verb
 
 void setup() 
 {
-	pinMode(LED_BUILTIN, OUTPUT); 
+  pinMode(LED_BUILTIN, OUTPUT); 
 
-	Serial.begin(115200);
+  Serial.begin(115200);
   while(!Serial);
   delay(1000);
 
-	LPrintln("Initialized Serial!\n");
+  LPrintln("Initialized Serial!\n");
 
-	Manager.parse_config(json_config);
-	Manager.print_config();
+  Manager.parse_config(json_config);
+  Manager.print_config();
 
-	LPrintln("\n ** Setup Complete ** ");
+  LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	Manager.measure();
-	JsonObject tmp = Manager.package();
-	serializeJsonPretty(tmp, Serial);
+  Manager.measure();
+  JsonObject tmp = Manager.package();
+  serializeJsonPretty(tmp, Serial);
 
-	delay(2000);
+  delay(2000);
 }
 ```
 

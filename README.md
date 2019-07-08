@@ -66,13 +66,13 @@ Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team 
 
 ## Documentation
 
-[Wiki](https://wiki.open-sensing.org/doku.php?id=loom)
+[Wiki](https://wiki.open-sensing.org/doku.php?id=loom) for general documentation not contained in GitHub readmes
 
-[Doxygen generated documentation](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/)
+[Doxygen generated documentation](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/) for documentation of the code and how to use
 
 ## Contributing
 
-[Guide to contributing to Loom](https://github.com/OPEnSLab-OSU/Loom/blob/master/ReadMe_Contributing.md)
+Is there hardware support or other feature you would like to add to Loom? Follow our [Guide to contributing to Loom](https://github.com/OPEnSLab-OSU/Loom/blob/master/ReadMe_Contributing.md)
 
 ## Versioning
 
