@@ -51,8 +51,8 @@ private:
 
     // storage for all those strings we're going to need above
     // main string buffer, the front of which stores our URL
-    // do not edit this directly, use m_url_end instead.
-    char m_buffer[768];
+    // do not edit this directly, use m_data_start instead.
+    char m_buffer[512];
     // store a pointer to where we can actually add data
     char* m_data_start;
 };
