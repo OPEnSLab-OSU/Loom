@@ -64,7 +64,7 @@ The `LoomManager` automates much of the operation of a Loom device, preventing y
 
 In order to use a Json configuration, it needs to be parsed by a `LoomManager`. For each component in the configuration, the manager will create a module according to the provided settings. Pass the configuration to the manager in `setup())` as follows (see bottom of this readme for full program):
 
-```
+```cpp
 Manager.parse_config(json_config);
 ```
 
@@ -72,17 +72,58 @@ Manager.parse_config(json_config);
 
 If you would like to see the configuration of the device, you can print it with:
 
-```
+```cpp
 Manager.print_config();
 ```
 
 #### Measure Data
 
+The manager provides a `measure()` method to automate the process of measuring data of all sensor type modules. The method does not take an arguments or return anything.
+
+```cpp
+Manager.measure();
+```
+
 #### Package Data
+
+Packaging data entails copying the measured data into a Json object. Non-sensor type modules may also package data to the Json, depending on `package_verbosity` settings. Use either of the following format to extract the packaged data from the manager.
+
+```cpp
+JsonObject data1 = Manager.package();
+// or
+JsonObject data2;
+Manager.package(data2);
+```
+
+Note that you can also get the current state of the `LoomManager`s internal Json object at any time (without updating the data that is packaged) with `JsonObject internalJson (bool clear=true)`, which can be used as follows. By default this operation empties the Json object (so you can use it), if you do not want to clear the data, send argument false to the method.
+
+```cpp
+JsonObject noClearedJson = Manager.interalJson(false);
+
+JsonObject clearedJson = Manager.internalJson();
+```
+
+#### Print Json object
+
+If you want to print the Json object to the Serial monitor, the ArduinoJson library provides built in functionality to do so, formatting it to be easily readable.
+
+```cpp
+JsonObject toPrint = Manager.package();
+serializeJsonPretty(toPrint, Serial);
+```
 
 #### Publish to Internet
 
 #### Command Routing
+
+Some module support executing commands based on a command defined in a Json object. Rather than send the command directly to the intended module, you can just send it to the `LoomManager`, which will determine which module it goes to and forward the command to it.
+
+```
+JsonObject command;
+Manager.cmd_route(command);
+```
+
+For more details on executing commands and how the Json of a command is structured, see the [Executing Commands](https://github.com/OPEnSLab-OSU/Loom/blob/master/Readme_Executing_Commands.md) readme.
 
 #### More
 
@@ -90,7 +131,11 @@ See the [LoomManager Documentation](http://web.engr.oregonstate.edu/~goertzel/Lo
 
 ### Interrupt Manager
 
+
+
 ### Sleep Manager
+
+
 
 ### Module
 
