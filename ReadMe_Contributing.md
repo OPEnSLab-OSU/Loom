@@ -222,7 +222,40 @@ void Loom_TSL2591::package(JsonObject json)
 
 ### Support for Executing Commands
 
-The `cmd_route(JsonObject)` method pertains mostly to running commands to control an actuator, but can  be implemented by any module to execute an of its methods based on a command JsonObject.
+The `bool cmd_route(JsonObject)` method pertains mostly to running commands to control an actuator, but can  be implemented by any module to execute an of its methods based on a command JsonObject. Using the `template<typename FName, typename FType, typename... Args> bool functionRoute(const char* name, const FName fName, const FType f, const Args... args)` function you can associate strings with methods of the class to execute, with the arguments provided in the JsonObject command. See the [documentation](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/_loom___misc_8h.html) if you want more details on that function. 
+
+The function takes a c-string representing a function to call, and then alternating c-strings and lambda functions that expand the json command's arguments to arguments to a method of the class.
+
+The following is an example of the `Loom_Servo` implementation:
+
+```cpp
+bool Loom_Servo::cmd_route(JsonObject json)
+{
+	if ( strcmp(json["module"], module_name) == 0 ) {
+		JsonArray params = json["params"];
+		return functionRoute(
+			json["func"],
+			"set_degree", [this, params]() { if (params.size() >= 2) { set_degree( EXPAND_ARRAY(params, 2) ); } else { LPrintln("Not enough parameters"); } } // modify this line
+		);
+	} else {
+		return false;
+	}
+}
+```
+
+You don't have to worry much about the how this works, just what you need to change to get it to work with your module. The only part that you need to modify from the above is the arguments to `functionRoute`. Leave `json["func"]` as the first argument. The rest of the arguments are the alternating strings and lambda. 
+
+- The string should be or represent the name of the method you want to execute. In the above example this is the string `"set_degree"`
+- The lambda function will stay mostly the same, but you will change:
+  - `if (params.size() >= 2)` – change  the number to match the number of parameters the method you want to execute has
+  - `set_degree` – change to the name of the method you want to be executed
+  - `EXPAND_ARRAY(params, 2)` – change  the number to match the number of parameters the method you want to execute has
+
+If you have multiple commands you want to support, just add more pairs of strings and lambdas.
+
+If your module does not need to implement executing commands from Json, you can omit the function from the .h and .cpp. 
+
+**Note:** label as `override`
 
 ### Power Up and Power Down
 
