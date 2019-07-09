@@ -3,24 +3,8 @@
 #include "Loom_Sensor.h"
 
 
-/// Battery pin
-#define VBATPIN A7
-/// Number of analog pins
-#define ANALOG_COUNT 6
-
-
-typedef struct {
-	byte checksum;
-	// bool valid;
-	char string[50];
-	int  number;
-} AnalogConfig;
-
-
-
-
-// FlashStorage(analog_flash_config, AnalogConfig);
-
+#define VBATPIN A7			/// Battery pin
+#define ANALOG_COUNT 6		/// Number of analog pins
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -57,8 +41,6 @@ protected:
 	bool		enable_conversions;				/// Enable or disable all conversions
 
 	Conversion	conversions[ANALOG_COUNT];		/// Conversion (if any) to apply to analog value when printing / packaging
-
-	AnalogConfig configuration;
 
 public:
 
@@ -115,7 +97,6 @@ public:
 
 	void		measure() override;
 	void 		package(JsonObject json) override;
-
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -182,19 +163,6 @@ public:
 	/// \return String of conversion
 	const char* conversion_name(Conversion conversion);
 
-
-
-
-// = = = = = = = = = =
-
-
-	// Save a FlashStorage struct
-	void save_config();
-	// Load a FlashStorage struct, true if valid
-	bool load_config();
-	void print_config_struct();
-
-
 private:
 
 	/// Read analog value of pin
@@ -242,7 +210,6 @@ private:
 	/// \param[in]	analog	Analog value to convert
 	/// \return Converted value
 	float		convert_salinity(uint16_t analog);
-
 
 };
 

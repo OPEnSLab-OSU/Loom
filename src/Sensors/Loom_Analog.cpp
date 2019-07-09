@@ -1,18 +1,6 @@
 
 #include "Loom_Analog.h"
 
-// FlashStorage(analog_flash_config, AnalogConfig);
-
-
-
-// Make a static class for analog conversions?
-// Is this going to be a member of the Loom_Analog class?
-	// this might contain the information about which conversion is being use - selecting conversion should be dynamic
-// Point is to contain location of updates adding new conversions
-
-// Should support taking an extra float for use in conversion
-	// Like temperature for electrical conductivity 
-
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Analog::Loom_Analog(	
@@ -340,76 +328,4 @@ float Loom_Analog::convert_salinity(uint16_t analog)
 	// Probably doesn't actually give a value of any worth right now...
 	return (analog-76) / .0928;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Save a FlashStorage struct
-void Loom_Analog::save_config() 
-{
-	// Probably set valid to true here
-	LPrintln("Save Analog Config");
-// analog_flash_config.write(configuration);
-}
-
-
-// Load a FlashStorage struct, true if valid
-bool Loom_Analog::load_config() 
-{
-	LPrintln("Load Analog Config");
-
-// configuration = analog_flash_config.read();
-
-
-// 		LPrint("B: ");
-// 		print_config_struct();
-
-// 		if (configuration.checksum != 42) {
-// 			// configuration.valid = true;
-// 			configuration.checksum = 42;
-// 			sprintf( configuration.string, "%s", "Data" );
-// 			configuration.number = 1;	
-// 		}
-
-// 		LPrint("C: ");
-// 		print_config_struct();
-
-// 		LPrintln("Incrementing number");
-// 		configuration.number++;
-
-// 		LPrint("D: ");
-// 		print_config_struct();
-}
-
-
-
-void Loom_Analog::print_config_struct() 
-{
-	LPrintln("Analog Flash Struct:");
-	// LPrintln("\tValid : ", configuration.valid);
-	LPrintln("\tChecksum : ", configuration.checksum);
-
-	LPrintln("\tString   : ", configuration.string);
-	LPrintln("\tNumber   : ", configuration.number);
-
-}
-
-
-
-
-
-
-
 
