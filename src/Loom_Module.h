@@ -190,11 +190,11 @@ public:
 // Maybe?
 //  - not pure virtual because not everything will have a config (should default to empty function here)
 	// Save a FlashStorage struct
-	virtual void	save_config() {}
-	// Load a FlashStorage struct, true if valid
-	virtual bool	load_config() {}
-	// Display config struct contents (as flash can be disabled this is a different method)
-	virtual void	print_config_struct() {}
+	// virtual void	save_config() {}
+	// // Load a FlashStorage struct, true if valid
+	// virtual bool	load_config() {}
+	// // Display config struct contents (as flash can be disabled this is a different method)
+	// virtual void	print_config_struct() {}
 
 protected:
 

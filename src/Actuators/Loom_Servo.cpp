@@ -48,7 +48,7 @@ void Loom_Servo::print_state()
 {
 	print_module_label();
 	LPrintln('\t', "Servo Positions:" );
-	for (int i = 1; i < servo_count; i++) {
+	for (int i = 0; i < servo_count; i++) {
 		LPrintln('\t\t', "Degree ", i, ": ", positions[i] );
 	}
 }

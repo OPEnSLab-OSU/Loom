@@ -23,7 +23,7 @@ Loom_SD::Loom_SD(
 	this->chip_select  = chip_select;
 	snprintf(this->default_file, 16, "%s", default_file);
 
-	digitalWrite(8, HIGH); 	// if using LoRa
+	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
 
 	sd_found = SD.begin(chip_select);
 
@@ -117,9 +117,7 @@ bool Loom_SD::dump_file(char* file)
 
 	#if LOOM_DEBUG == 1
 
-		// #if is_lora == 1
-		digitalWrite(8, HIGH); 	// if using LoRa
-		// #endif
+		digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
 
 		SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
 
@@ -161,7 +159,7 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 {
 	if ( !sd_found || !check_millis() ) return false;
 
-	digitalWrite(8, HIGH); 
+	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
 
 	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
 	File sdFile = SD.open(file, FILE_WRITE);
@@ -222,8 +220,6 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 		// LPrint(",");
 		sdFile.print(",");
 
-
-
 		JsonObject data = module["data"];
 		if (data.isNull()) continue;
 
@@ -259,6 +255,8 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 void Loom_SD::print_directory(File dir, int numTabs) 
 {
 	if ( !sd_found ) return;
+
+	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
 
 	while (true) {
 		File entry =  dir.openNextFile();
