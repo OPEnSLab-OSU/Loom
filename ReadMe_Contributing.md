@@ -305,7 +305,26 @@ If you are referring to the enum outside of the class (as long as the enum is pu
 Manager.OLED().set_display_format(Loom_OLED::Format::SCROLL);
 ```
 
-The same approach applies to structs associated with only that module.
+The same approach applies to structs associated with only that module. An example is the structs the `Loom_Interrupt_Manager` uses (note that documentation of it is truncated for this example):
+
+```cpp
+class Loom_Interrupt_Manager : public LoomModule
+{
+
+private:
+
+	/// Contains information defining an interrupt's configuration
+	struct IntDetails {
+		ISRFuncPtr	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
+		byte		type;					///< Interrupt signal type to detect. LOW: 0, HIGH: 1, ...
+		ISR_Type	run_type;		///< True if ISR is called directly ...
+		bool		enabled;			///< Whether or not this interrupt is enabled
+	};
+  ...
+};
+```
+
+Make the structs `private` if the user / other classes do not need to use the classes.
 
 ### Other Notes
 

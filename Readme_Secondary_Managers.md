@@ -164,7 +164,7 @@ setup() {
 
 #### Run Pending ISRs
 
-Run any waiting ISRs. This only applys to bottom half ISRs (those specified as `ISR_Type::CHECK_FLAG`). If you don't call this method, any `CHECK_FLAG` ISRs will not run.
+Run any waiting ISRs. This applys to bottom half ISRs (those specified as `ISR_Type::CHECK_FLAG`). If you don't call this method, any `CHECK_FLAG` ISRs will not run. It also applies to some timer ISRs.
 
 ```cpp
 Manager.InterruptManager().run_pending_ISRs();

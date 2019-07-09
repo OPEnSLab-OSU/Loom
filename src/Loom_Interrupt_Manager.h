@@ -29,28 +29,6 @@ enum class ISR_Type {
 	CHECK_FLAG 
 };
 
-/// Contains information defining an interrupt's configuration
-struct IntDetails {
-	ISRFuncPtr	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
-	byte		type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
-	ISR_Type	run_type;		///< True if ISR is called directly upon interrupt, false if called next check of flags
-	bool		enabled;		///< Whether or not this interrupt is enabled
-};
-
-/// Contains information defining a timer's configuration
-struct TimerDetails {
-	ISRFuncPtr	ISR;			///< Not a real ISR, just a function called if timer has expired
-	uint		duration;		///< The timer duration
-	bool		repeat;			///< Whether or not timer should repeat
-	bool		enabled;		///< Whether or not this timer is enabled
-};
-
-/// Contains information defining a stopwatch's configuration
-struct StopWatchDetails {
-	unsigned long	start_time;		///< The millis time when stopwatch started
-	bool			enabled;		///< Whether or not this stopwatch is enabled
-};
-
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -60,6 +38,30 @@ struct StopWatchDetails {
 // ###
 class Loom_Interrupt_Manager : public LoomModule
 {
+
+private:
+
+	/// Contains information defining an interrupt's configuration
+	struct IntDetails {
+		ISRFuncPtr	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
+		byte		type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
+		ISR_Type	run_type;		///< True if ISR is called directly upon interrupt, false if called next check of flags
+		bool		enabled;		///< Whether or not this interrupt is enabled
+	};
+
+	/// Contains information defining a timer's configuration
+	struct TimerDetails {
+		ISRFuncPtr	ISR;			///< Not a real ISR, just a function called if timer has expired
+		uint		duration;		///< The timer duration
+		bool		repeat;			///< Whether or not timer should repeat
+		bool		enabled;		///< Whether or not this timer is enabled
+	};
+
+	/// Contains information defining a stopwatch's configuration
+	struct StopWatchDetails {
+		unsigned long	start_time;		///< The millis time when stopwatch started
+		bool			enabled;		///< Whether or not this stopwatch is enabled
+	};
 
 protected:
 
