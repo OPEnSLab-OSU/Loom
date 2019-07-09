@@ -149,7 +149,6 @@ private:
 	} NameModulePair;
 
 
-
 	/// Determine which array of manager to sort new module into
 	/// \param[in]	module		Json of the module name and settings
 	/// \return Type indicating manager array to sort into 
@@ -157,6 +156,5 @@ private:
 
 	/// Factory lookup table
 	const static NameModulePair LookupTable[];
-
 };
 

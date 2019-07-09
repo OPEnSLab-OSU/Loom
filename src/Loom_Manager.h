@@ -103,15 +103,12 @@ public:
 
 protected:
 
-
 	char		device_name[20];	/// The name of the device
 	char		family[20];			/// The family the device belongs to
 	uint		family_num;			/// The subnet of the family
 	uint		instance;			/// The instance / channel ID within the subnet
 
-
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
-
 
 	// Sub Managers
 	Loom_Interrupt_Manager*	interrupt_manager = nullptr;
@@ -121,13 +118,13 @@ protected:
 	LoomRTC*			rtc_module = nullptr;
 
 	// Vectors of Loom Modules, categorized by type
-	std::vector<LoomModule*> other_modules;
-	std::vector<LoomSensor*> sensor_modules;
-	std::vector<LoomActuator*> actuator_modules;
-	std::vector<LoomCommPlat*> comm_modules;
-	std::vector<LoomInternetPlat*> internet_modules;
-	std::vector<LoomPublishPlat*> publish_modules;
-	std::vector<LoomLogPlat*> log_modules;
+	std::vector<LoomModule*>		other_modules;
+	std::vector<LoomSensor*>		sensor_modules;
+	std::vector<LoomActuator*>		actuator_modules;
+	std::vector<LoomCommPlat*>		comm_modules;
+	std::vector<LoomInternetPlat*>	internet_modules;
+	std::vector<LoomPublishPlat*>	publish_modules;
+	std::vector<LoomLogPlat*>		log_modules;
 
 	Verbosity	print_verbosity;			/// Print detail verbosity
 	Verbosity	package_verbosity;			/// Package detail verbosity
@@ -299,6 +296,10 @@ public:
 ///@name	MISCELLANEOUS
 /*@{*/ //======================================================================
 
+	/// Flash the built in LED
+	/// \param[in]	count		Number of times to flash
+	/// \param[in]	time_high	Milliseconds to stay on for 
+	/// \param[in]	time_low	Milliseconds to stay off for 
 	void		flash_LED(uint count, uint time_high, uint time_low);
 	void		flash_LED(uint sequence[3]);
 

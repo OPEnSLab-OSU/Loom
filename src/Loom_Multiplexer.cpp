@@ -101,7 +101,6 @@ Loom_Multiplexer::~Loom_Multiplexer()
 ///////////////////////////////////////////////////////////////////////////////
 LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 {
-
 	switch (i2c_address) {
 		case 0x10 : return new Loom_ZXGesture(i2c_address=0x10);	// ZXGesture
 		case 0x11 : return new Loom_ZXGesture(i2c_address=0x11);	// ZXGesture
@@ -126,7 +125,7 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 			if (i2c_0x49 == I2C_Selection::L_AS7262 ) return new Loom_AS7262(i2c_address=0x49);	// AS7262
 			if (i2c_0x49 == I2C_Selection::L_AS7263 ) return new Loom_AS7263(i2c_address=0x49);	// AS7263
 			if (i2c_0x49 == I2C_Selection::L_AS7265X) return new Loom_AS7265X(i2c_address=0x49);	// AS7265X
-
+			
 		case 0x68 : return NULL; // new Loom_MPU6050();
 		case 0x69 : return NULL; // new Loom_MPU6050();
 		case 0x70 : return new Loom_MB1232(i2c_address=0x70); // MB1232
