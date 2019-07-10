@@ -100,7 +100,7 @@ public:
 
 	/// Get the current sleep mode
 	/// \return		The current sleep mode
-	Mode	get_sleep_mode();
+	Mode		get_sleep_mode();
 
 //=============================================================================
 ///@name	SETTERS
