@@ -22,10 +22,7 @@ class LoomCommPlat;
 class LoomLogPlat;
 
 // Actuators
-class Loom_Neopixel;
-class Loom_Relay;
-class Loom_Servo;
-class Loom_Stepper;
+class Loom_Neopixel; class Loom_Relay; class Loom_Servo; class Loom_Stepper;
 
 // Sensors
 class Loom_Analog;
@@ -148,7 +145,7 @@ public:
 	/// \param[in]	print_verbosity				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
 	/// \param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
 	LoomManager(
-			const char*		device_name			= "Default",
+			const char*		device_name			= "Manager",
 			const char*		family				= "Loom",
 			uint			family_num			= 1,
 			uint			instance			= 1,
@@ -162,8 +159,14 @@ public:
 
 //=============================================================================
 ///@name	OPERATION
-/// Desription
 /*@{*/ //======================================================================
+
+	/// Begin LED
+	void		begin_LED();
+
+	/// Begin Serial, optionally wait for user.
+	/// \param[in]	wait_for_monitor	True to wait for serial monitor to open
+	void		begin_serial(bool wait_for_monitor = false);
 
 	/// Parse a JSON configuration specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings

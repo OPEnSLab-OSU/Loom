@@ -80,6 +80,26 @@ void LoomManager::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomManager::begin_LED()
+{
+	pinMode(LED_BUILTIN, OUTPUT);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomManager::begin_serial(bool wait_for_monitor)
+{
+	Serial.begin(SERIAL_BAUD);
+
+	if (wait_for_monitor) {	
+		while(!Serial);
+		delay(1000);
+	}
+
+	LPrintln("Initialized Serial!\n");
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager) 
 {
 	print_device_label();
