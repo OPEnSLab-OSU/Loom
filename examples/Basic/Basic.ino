@@ -22,8 +22,8 @@ void setup()
 void loop() 
 {
 	Manager.measure();
-	JsonObject tmp = Manager.package();
-	serializeJsonPretty(tmp, Serial);
+	Manager.package();
+	Manager.print_internalJson();
 
 	delay(2000);
 }

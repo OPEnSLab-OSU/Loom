@@ -145,7 +145,7 @@ public:
 	/// \param[in]	print_verbosity				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
 	/// \param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
 	LoomManager(
-			const char*		device_name			= "Manager",
+			const char*		device_name			= "Device",
 			const char*		family				= "Loom",
 			uint			family_num			= 1,
 			uint			instance			= 1,
@@ -195,6 +195,22 @@ public:
 	void		cmd_route(JsonObject json);
 
 //=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+	
+	/// Print the devices current configuration.
+	/// Also prints configuration of linked modules.
+	void		print_config();
+	
+	// 	void print_state()
+
+	/// Print the linked modules
+	void 		list_modules();
+
+	/// Print out the internal JSON object
+	void		print_internalJson();
+
+//=============================================================================
 ///@name	ADD MODULE TO MANAGER
 /*@{*/ //======================================================================
 
@@ -211,21 +227,6 @@ public:
 	void 		add_module(LoomPublishPlat* publish_module); 
 	void		add_module(LoomLogPlat* log_plat);
 	
-//=============================================================================
-///@name	PRINT INFORMATION
-/*@{*/ //======================================================================
-	
-	/// Print the devices current configuration.
-	/// Also prints configuration of linked modules.
-	void		print_config();
-	
-	// 	void print_state()
-
-	/// Print the linked modules
-	void 		list_modules();
-
-	/// Print out the internal JSON object
-	void		print_internalJson();
 
 //=============================================================================
 ///@name	GETTERS
