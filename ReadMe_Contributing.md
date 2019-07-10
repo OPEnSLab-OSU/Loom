@@ -19,7 +19,7 @@ In many cases, additions to Loom will take the form of adding a class inheriting
 
 ### Templates
 
-If possible, use one of our provided templates to start your module to maintain consistency and make it clear what you need to implement. The class [hierarchy graph](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/inherits.html) in the documentation may be useful for determining where in the inheritance tree your module fits. Pick the best match to your module from the following templates:
+If possible, use one of our provided templates to start your module to maintain consistency and make it clear what you need to implement. The class [hierarchy graph](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/inherits.html) in the documentation may be useful for determining where in the inheritance tree your module fits. Pick the best match to your module from the following templates (which can be found in /Loom/Templates):
 
 - Module 
 - Sensor
@@ -30,7 +30,6 @@ If possible, use one of our provided templates to start your module to maintain 
 - Actuator
 - Logging platform
 - Communication platform
-- RTC
 - Internet platform
 - Publishing platform
 
@@ -570,7 +569,8 @@ case 0x49 : // TSL2561 / AS726X / AS7265X
 
 ### Other
 
-Other additions may be necessary if your module interacts with other modules
+- Other additions may be necessary if your module interacts with other modules
+- If a superclass declares a non-pure method that your class does not need to implement, simply remove the method when using the templates rather than leaving an empty body as an implementation
 
 ## Documenting Additions
 

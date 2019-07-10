@@ -9,7 +9,7 @@ Loom_GoogleSheets::Loom_GoogleSheets(
     const char* sheet_id,
     const char* tab_id,
     const char* device_id
-)   : LoomPublishPlat(module_name, internet_index)
+)   : LoomPublishPlat( module_name, internet_index )
     , m_buffer{}
     , m_data_start(nullptr) 
 {

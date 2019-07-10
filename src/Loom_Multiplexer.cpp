@@ -84,8 +84,7 @@ Loom_Multiplexer::Loom_Multiplexer(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Multiplexer::Loom_Multiplexer(JsonArrayConst p)
-	: Loom_Multiplexer(p[0], p[1], p[2], p[3], p[4])
-{}
+	: Loom_Multiplexer( EXPAND_ARRAY(p, 5) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Multiplexer::~Loom_Multiplexer() 
