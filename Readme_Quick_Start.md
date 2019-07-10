@@ -98,13 +98,25 @@ JsonObject data2;
 Manager.package(data2);
 ```
 
-Note that you can also get the current state of the `LoomManager`s internal Json object at any time (without updating the data that is packaged) with `JsonObject internalJson (bool clear=true)`, which can be used as follows. By default this operation empties the Json object (so you can use it), if you do not want to clear the data, send argument false to the method.
+Note that you can also get the current state of the `LoomManager`s internal Json object at any time (without updating the data that is packaged) with `JsonObject internal_json (bool clear=true)`, which can be used as follows. By default this operation empties the Json object (so you can use it), if you do not want to clear the data, send argument false to the method.
 
 ```cpp
-JsonObject notClearedJson = Manager.internalJson(false);
+JsonObject notClearedJson = Manager.internal_json(false);
 
-JsonObject clearedJson = Manager.internalJson();
+JsonObject clearedJson = Manager.internal_json();
 ```
+
+#### Append to Data Json
+
+After package data, you can add non-Loom data to the Json data package with `template<typename T> bool append_to_data_json(const char* module, const char* key, T val)`.
+
+**Example:**
+
+```
+Manager.append_to_data_json("exampleModule", "key", 12345);
+```
+
+You can also add to a Loom module's section of the data object. If the provided module name matches a component already in the data package, your data key value pair will be added to that component.
 
 #### Print Json object
 

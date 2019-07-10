@@ -5,7 +5,7 @@ const char* json_config =
 #include "config.h"
 ;
 
-LoomManager Manager("Manager", "Loom", 1, 1);
+LoomManager Manager("");
 
 
 void setup() 
@@ -18,12 +18,11 @@ void setup()
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-
 void loop() 
 {
 	Manager.measure();
 	Manager.package();
-	Manager.print_internalJson();
+	Manager.print_internal_json();
 
 	delay(2000);
 }

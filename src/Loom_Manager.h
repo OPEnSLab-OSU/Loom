@@ -183,6 +183,30 @@ public:
 	/// \param[out]	json	JsonObject of packaged data of enabled modules
 	void		package(JsonObject json);
 
+	/// Append to a Json object of data.
+	/// If object is non-empty and contains non-data, 
+	/// will not add and will return false.
+	/// Only call this after package, otherwise the data will be overriden
+	/// \param[in]	module	Which module to add data to (will create if it doesn't exist) 
+	/// \param[in]	key		Key of data to add
+	/// \param[in]	val		Value of data to add
+	/// \return True if success
+	template<typename T>
+	bool append_to_data_json(const char* module, const char* key, T val)
+	{
+		if ( doc.isNull() ) {
+			doc["type"] = "data";
+		} 
+		JsonObject json = doc.as<JsonObject>();
+		if (strcmp(json["type"], "data") == 0 ) {
+			
+			package_json(json, module, key, val);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	/// Package data of all modules into JsonObject and return
 	/// \return JsonObject of packaged data of enabled modules
 	JsonObject	package();
@@ -208,7 +232,7 @@ public:
 	void 		list_modules();
 
 	/// Print out the internal JSON object
-	void		print_internalJson();
+	void		print_internal_json();
 
 //=============================================================================
 ///@name	ADD MODULE TO MANAGER
@@ -305,7 +329,7 @@ public:
 	/// \param[in]	count		Number of times to flash
 	/// \param[in]	time_high	Milliseconds to stay on for 
 	/// \param[in]	time_low	Milliseconds to stay off for 
-	void		flash_LED(uint count, uint time_high, uint time_low);
+	void		flash_LED(uint count, uint time_high, uint time_low, bool end_high=false);
 	void		flash_LED(uint sequence[3]);
 
 	/// Get c-string of name associated with device type enum

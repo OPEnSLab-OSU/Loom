@@ -6,18 +6,12 @@ const char* json_config =
 ;
 
 
-LoomManager Manager("Manager", "Loom", 1, 1, LoomManager::DeviceType::NODE, Verbosity::V_HIGH, Verbosity::V_LOW);
+LoomManager Manager("");
+
 
 void setup() 
-{
-	pinMode(LED_BUILTIN, OUTPUT); 
-
-	Serial.begin(115200);
-	while(!Serial);
-	delay(1000);
-
-	LPrintln("Initialized Serial!\n");
-
+{ 
+	Manager.begin_serial(true);
 	Manager.parse_config(json_config);
 	Manager.print_config();
 

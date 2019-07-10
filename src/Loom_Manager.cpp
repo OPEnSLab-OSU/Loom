@@ -396,7 +396,7 @@ JsonObject LoomManager::package()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-JsonObject LoomManager::internalJson(bool clear)
+JsonObject LoomManager::internal_json(bool clear)
 {
 	if (clear) {
 		doc.clear();
@@ -406,7 +406,7 @@ JsonObject LoomManager::internalJson(bool clear)
 	else {
 		return doc.as<JsonObject>();
 	}
-	// LPrintln("\nDOC MemoryUsage in internalJson: ", doc.memoryUsage());
+	// LPrintln("\nDOC MemoryUsage in internal_json: ", doc.memoryUsage());
 
 	// doc["type"] = "unknown";
 	// return doc.as<JsonObject>();
@@ -458,7 +458,7 @@ void LoomManager::cmd_route(JsonObject json)
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::print_internalJson()
+void LoomManager::print_internal_json()
 {
 	print_device_label();
 	LPrintln("Internal Json:");
@@ -467,7 +467,7 @@ void LoomManager::print_internalJson()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::flash_LED(uint count, uint time_high, uint time_low)
+void LoomManager::flash_LED(uint count, uint time_high, uint time_low, bool end_high)
 {
 	for (int i = 0; i < count; i++) {
 		digitalWrite(LED_BUILTIN, HIGH);
@@ -475,6 +475,9 @@ void LoomManager::flash_LED(uint count, uint time_high, uint time_low)
 		digitalWrite(LED_BUILTIN, LOW);
 		delay(time_low);
 	} 
+	if (end_high) {
+		digitalWrite(LED_BUILTIN, HIGH);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
