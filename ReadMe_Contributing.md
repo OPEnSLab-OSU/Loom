@@ -59,7 +59,7 @@ This is where you will setup the variables of your class instance and setup the 
 
 There are two constructors that should be implemented (though you can implement more if necessary).
 
-One takes all of the necessary arguments to configure the class. The parameters can have default values. See the constructor section of the [Style Guide](https://github.com/OPEnSLab-OSU/Loom/blob/cleanup_and_doxygen/Readme_Documentation_Style_Guide.md#constructor) for proper documentation of this constructor.
+One takes all of the necessary arguments to configure the class. The parameters can have default values. See the constructor section of the [Style Guide](https://github.com/OPEnSLab-OSU/Loom/blob/master/Readme_Documentation_Style_Guide.md#constructor) for proper documentation of this constructor.
 
 The other constructor only takes a `JsonArrayConst` and expands the array, forwarding the elements of the array as arguments to the other constructor (this known as constructor delegation).
 

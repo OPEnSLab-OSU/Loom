@@ -58,7 +58,7 @@ Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team 
 
 ## Quick Start
 
- [Quick Start Guide](https://github.com/OPEnSLab-OSU/Loom/blob/master/Quick_Start_Readme.md)
+ [Quick Start Guide](https://github.com/OPEnSLab-OSU/Loom/blob/master/Readme_Quick_Start.md)
 
 ## Hardware Support
 
