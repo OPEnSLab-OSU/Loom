@@ -82,7 +82,6 @@ class Loom_Multiplexer;
 #define SERIAL_BAUD 115200
 
 
-
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -108,29 +107,30 @@ protected:
 	uint		family_num;			/// The subnet of the family
 	uint		instance;			/// The instance / channel ID within the subnet
 
+	/// Device type (Hub / Node)
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
 	// Sub Managers
+	/// Pointer to an interrupt manager
 	Loom_Interrupt_Manager*	interrupt_manager = nullptr;
+	/// Pointer to a sleep manager
 	Loom_Sleep_Manager*		sleep_manager = nullptr;
-
 	/// RTC object pointer
-	LoomRTC*			rtc_module = nullptr;
+	LoomRTC*				rtc_module = nullptr;
 
 	// Vectors of Loom Modules, categorized by type
-	std::vector<LoomModule*>		other_modules;
-	std::vector<LoomSensor*>		sensor_modules;
-	std::vector<LoomActuator*>		actuator_modules;
-	std::vector<LoomCommPlat*>		comm_modules;
-	std::vector<LoomInternetPlat*>	internet_modules;
-	std::vector<LoomPublishPlat*>	publish_modules;
-	std::vector<LoomLogPlat*>		log_modules;
+	std::vector<LoomModule*>		other_modules;		/// Miscellaneous modules
+	std::vector<LoomSensor*>		sensor_modules;		/// Sensors
+	std::vector<LoomActuator*>		actuator_modules;	/// Actuators
+	std::vector<LoomCommPlat*>		comm_modules;		/// Communication platforms
+	std::vector<LoomInternetPlat*>	internet_modules;	/// Internet platforms
+	std::vector<LoomPublishPlat*>	publish_modules;	/// Publishing platforms
+	std::vector<LoomLogPlat*>		log_modules;		/// Logging platforms
 
-	Verbosity	print_verbosity;			/// Print detail verbosity
-	Verbosity	package_verbosity;			/// Package detail verbosity
+	Verbosity	print_verbosity;		/// Print detail verbosity
+	Verbosity	package_verbosity;		/// Package detail verbosity
 
-	/// Json data
-	StaticJsonDocument<2000> doc;			
+	StaticJsonDocument<2000> doc;		/// Json data
 
 public:
 
@@ -170,6 +170,7 @@ public:
 	/// and added to manager lists for managing
 	/// \param[in]	json_config		Configuration
 	void		parse_config(const char* json_config);
+	// maybe overload to take JsonVariant or const char* of json?
 
 	/// Measure data of all managed sensors
 	void		measure();  
@@ -307,34 +308,6 @@ public:
 	/// \return C-string of device type
 	const static char* enum_device_type_string(DeviceType t);
 
-// these might become obsolete
-	Loom_Interrupt_Manager*	get_interrupt_manager();
-	Loom_Sleep_Manager*		get_sleep_manager();
-	LoomRTC*				get_rtc_module();
-
-
-
-	// maybe overload to take JsonVariant or const char* of json?
-
-
-
-//but probably put here, because measure and package aren't managed elsewhere
-
-	// void measure();
-	// void package();
-	// void receive(); // not sure if this should take arg to specify platform
-	// void send();
-	// void log(Enum );   Enum SD, GOOGLE, OLED ... 
-	// void sleep(); // could have default sleep behavior?
-	// bool		log()
-
-
-	// Methods to set package and print verbosities all at once
-
-
-
-
-
 //=============================================================================
 ///@name	MODULE ACCESS 
 /*@{*/ //======================================================================
@@ -400,10 +373,20 @@ public:
 protected:
 
 	/// Print the device name as '[device_name]'
-	void		print_device_label();
+	void				print_device_label();
 
 private:
 
+	// Allow secondary managers to access private members of LoomManager
+	friend class Loom_Interrupt_Manager;
+	friend class Loom_Sleep_Manager;
+	friend class Loom_SD;
+
+	Loom_Interrupt_Manager*	get_interrupt_manager();
+	Loom_Sleep_Manager*		get_sleep_manager();
+	LoomRTC*				get_rtc_module();
+
+	///////////////////////////////////////////////////////////////////////////
 	/// Add module to a list of modules
 	template<typename T>
 	bool add_module_aux(std::vector<T>& modules, const T module) 
@@ -422,6 +405,7 @@ private:
 		return true;	
 	}
 
+	///////////////////////////////////////////////////////////////////////////
 	/// Auxiliary function for printing a list of modules
 	template<typename T>
 	void list_modules_aux(const std::vector<T>& modules, const char* module_type)
@@ -434,6 +418,7 @@ private:
 		}	
 	}
 
+	///////////////////////////////////////////////////////////////////////////
 	/// Auxiliary function for packaging data of a list of modules
 	template<typename T>
 	void package_aux(JsonObject json, const std::vector<T>& modules)
@@ -445,6 +430,7 @@ private:
 		}	
 	}
 
+	///////////////////////////////////////////////////////////////////////////
 	/// Auxiliary function for packaging data of a single module
 	void package_aux(JsonObject json, LoomModule* module);
 	
@@ -460,6 +446,7 @@ private:
 		return false;
 	}
 	
+	///////////////////////////////////////////////////////////////////////////
 	/// Have module check against provided command	
 	bool cmd_route_aux(JsonObject json, LoomModule* module);
 
@@ -473,6 +460,7 @@ private:
 		}	
 	}
 
+	///////////////////////////////////////////////////////////////////////////
 	/// Auxiliary function to search a list of modules for a module of specified type
 	/// \param[in]	type	Type to search for
 	template<typename T>

@@ -9,11 +9,10 @@
 #include <ArduinoJson.h>
 
 
-
 Factory LoomFactory;
 
 
-
+///////////////////////////////////////////////////////////////////////////////
 /// Parses a JSON configuration and instantiates the specified 
 /// LoomModules.
 /// Adds created LoomModules to the arrays of LoomManager
