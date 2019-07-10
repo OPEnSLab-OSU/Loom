@@ -19,7 +19,7 @@ In many cases, additions to Loom will take the form of adding a class inheriting
 
 ### Templates
 
-If possible, use one of our provided templates to start your module to maintain consistency and make it clear what you need to implement. The class [hierarchy graph](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/inherits.html) in the documentation may be useful for determining where in the inheritance tree your module fits. Pick the best match to your module from the following templates (which can be found in /Loom/Templates):
+If possible, use one of our provided templates to start your module to maintain consistency and make it clear what you need to implement. The class [hierarchy graph](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/inherits.html) in the documentation may be useful for determining where in the inheritance tree your module fits. Pick the best match to your module from the following templates (which can be found in the library under /Loom/Templates or on [GitHub](https://github.com/OPEnSLab-OSU/Loom/tree/master/Templates)):
 
 - Module 
 - Sensor
