@@ -172,6 +172,8 @@ public:
 	/// Enabled modules are instantiated with specified settings
 	/// and added to manager lists for managing
 	/// \param[in]	json_config		Configuration
+	/// \param[in]	print_config	Print config of modules as they are generated
+	///								false by default
 	void		parse_config(const char* json_config);
 	// maybe overload to take JsonVariant or const char* of json?
 
@@ -223,8 +225,9 @@ public:
 /*@{*/ //======================================================================
 	
 	/// Print the devices current configuration.
-	/// Also prints configuration of linked modules.
-	void		print_config();
+	/// Lists modules. Optionally also prints 
+	/// configuration of linked modules.
+	void		print_config(bool print_modules_config = false);
 	
 	// 	void print_state()
 
@@ -414,6 +417,16 @@ private:
 	Loom_Interrupt_Manager*	get_interrupt_manager();
 	Loom_Sleep_Manager*		get_sleep_manager();
 	LoomRTC*				get_rtc_module();
+
+	///////////////////////////////////////////////////////////////////////////
+	/// Add module to a list of modules
+	template<typename T>
+	bool print_config_aux(std::vector<T>& modules) 
+	{
+		for (auto module : modules) {
+			module->print_config();
+		}	
+	}
 
 	///////////////////////////////////////////////////////////////////////////
 	/// Add module to a list of modules

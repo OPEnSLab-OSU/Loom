@@ -65,7 +65,7 @@ void LoomManager::print_device_label()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::print_config() 
+void LoomManager::print_config(bool print_modules_config) 
 {
 	print_device_label();
 	LPrintln("Config:");
@@ -77,6 +77,27 @@ void LoomManager::print_config()
 	LPrintln('\t', "Instance Number     : ", instance );
 
 	list_modules();
+
+	// Print managed module's configs
+	if (print_modules_config) {
+		if (interrupt_manager != nullptr) {
+			interrupt_manager->print_config();
+		}
+		if (sleep_manager != nullptr) {
+			interrupt_manager->print_config();
+		}
+		if (rtc_module != nullptr) {
+			interrupt_manager->print_config();
+		}
+
+		print_config_aux( other_modules); 
+		print_config_aux( sensor_modules); 
+		print_config_aux( actuator_modules); 
+		print_config_aux( comm_modules); 
+		print_config_aux( internet_modules); 
+		print_config_aux( publish_modules); 
+		print_config_aux( log_modules );  
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
