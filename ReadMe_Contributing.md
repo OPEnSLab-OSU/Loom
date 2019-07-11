@@ -571,6 +571,7 @@ case 0x49 : // TSL2561 / AS726X / AS7265X
 
 - Other additions may be necessary if your module interacts with other modules
 - If a superclass declares a non-pure method that your class does not need to implement, simply remove the method when using the templates rather than leaving an empty body as an implementation
+- You do not necessarily need to add new documentation for a method that your class overrides if the superclass's documentation suffices.
 
 ## Documenting Additions
 

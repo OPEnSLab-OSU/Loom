@@ -263,7 +263,7 @@ public:
 	/// Return reference to internal json object
 	/// \param[in]	clear	Whether or not to empty Json before returning it
 	/// \return Reference to internal json object
-	JsonObject	internalJson(bool clear = true);
+	JsonObject	internal_json(bool clear = false);
 
 	/// Get the device name, copies into provided buffer.
 	/// \param[out]	buf		The buffer copy device name into
@@ -409,6 +409,7 @@ private:
 	friend class Loom_Interrupt_Manager;
 	friend class Loom_Sleep_Manager;
 	friend class Loom_SD;
+	// friend class LoomLogPlat;
 
 	Loom_Interrupt_Manager*	get_interrupt_manager();
 	Loom_Sleep_Manager*		get_sleep_manager();

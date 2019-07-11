@@ -5,15 +5,14 @@ const char* json_config =
 #include "config.h"
 ;
 
-
-LoomManager Manager("");
+LoomManager Loom("");
 
 
 void setup() 
 { 
-	Manager.begin_serial(true);
-	Manager.parse_config(json_config);
-	Manager.print_config();
+	Loom.begin_serial(true);
+	Loom.parse_config(json_config);
+	Loom.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -21,8 +20,8 @@ void setup()
 
 void loop() 
 {
-	Manager.Relay().set(true);
+	Loom.Relay().set(true);
 	delay(2000);
-	Manager.Relay().set(false);
+	Loom.Relay().set(false);
 	delay(2000);
 }

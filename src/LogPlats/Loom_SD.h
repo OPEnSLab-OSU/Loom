@@ -70,6 +70,16 @@ public:
 
 	void		log(JsonObject json) override;
 
+	/// Version of logging for use with LoomManager.
+	/// Accesses Json from LoomManager
+	/// \param[in]	filename	Name of file to write to
+	void		log(const char* filename);
+
+	// manually expose superclass version of log() that gets json from
+	// linked LoomManager, calling this classes implementation of 
+	// 'log(JsonObject json)', which is pure virtual in superclass
+	using LoomLogPlat::log; 
+
 	// Save bundle to SD card
 	// \param[in]	file		The file to save bundle to
 	// \param[in]	bndl		The bundle to be saved

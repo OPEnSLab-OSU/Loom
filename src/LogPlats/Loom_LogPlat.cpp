@@ -1,5 +1,6 @@
 
 #include "Loom_LogPlat.h"
+#include "Loom_Manager.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -49,6 +50,17 @@ bool LoomLogPlat::check_millis()
 	} else {
 		last_log_millis = millis();
 		return true;
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomLogPlat::log()
+{
+	if (device_manager != nullptr) {
+		JsonObject tmp = device_manager->internal_json();
+		if (strcmp(tmp["type"], "data") == 0 ) {
+			log(tmp);
+		}
 	}
 }
 

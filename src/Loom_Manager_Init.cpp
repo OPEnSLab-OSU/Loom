@@ -31,8 +31,9 @@ void LoomManager::parse_config(const char* json_config)
 
 	// Test if parsing succeeds.
 	if (error) {
-		Serial.print(F("deserializeJson() failed: "));
-		Serial.println(error.c_str());
+		print_device_label();
+		LPrint(F("deserializeJson() failed: "));
+		LPrintln(error.c_str());
 		return;
 	}
 

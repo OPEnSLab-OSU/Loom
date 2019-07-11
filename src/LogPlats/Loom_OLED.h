@@ -89,6 +89,11 @@ public:
 
 	void			log(JsonObject json) override;
 
+	// manually expose superclass version of log() that gets json from
+	// linked LoomManager, calling this classes implementation of 
+	// 'log(JsonObject json)', which is pure virtual in superclass
+	using LoomLogPlat::log; 
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
