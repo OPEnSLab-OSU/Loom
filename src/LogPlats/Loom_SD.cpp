@@ -153,6 +153,7 @@ void Loom_SD::log(const char* filename)
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
 		if (strcmp(tmp["type"], "data") == 0 ) {
+			LPrintln("HERE");
 			save_json(tmp, filename, 3);
 		}
 	}
@@ -176,9 +177,13 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 	File sdFile = SD.open(file, FILE_WRITE);
 
 	if (!sdFile) {
+		print_module_label();
 		LPrintln("Error opening: ", file);
 		return false;
-	} 
+	} else {
+		print_module_label();
+		LPrintln("Writing to: ", file);
+	}
 
 	JsonObject timestamp = json["timestamp"];
 	JsonArray  contents  = json["contents"];
@@ -258,6 +263,7 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 	sdFile.println();
 
 	sdFile.close();
+	print_module_label();
 	LPrintln("Done writing to SD");
 	return true;
 }
