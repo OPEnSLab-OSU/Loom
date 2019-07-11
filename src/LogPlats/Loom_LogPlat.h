@@ -47,15 +47,15 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	/// Version of logging for use with LoomManager.
-	/// Accesses Json from LoomManager
-
 	virtual bool	cmd_route(JsonObject) override {}
 	virtual void 	package(JsonObject json) override {}
 
 	/// Log a Json object
 	/// \param[in] json		Json Object to log
 	virtual void	log(JsonObject json) = 0;
+
+	/// Version of log for use with LoomManager.
+	/// Accesses Json from LoomManager
 	void			log();
 
 //=============================================================================

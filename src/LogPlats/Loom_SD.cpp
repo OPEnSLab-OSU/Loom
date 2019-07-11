@@ -153,7 +153,6 @@ void Loom_SD::log(const char* filename)
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
 		if (strcmp(tmp["type"], "data") == 0 ) {
-			LPrintln("HERE");
 			save_json(tmp, filename, 3);
 		}
 	}

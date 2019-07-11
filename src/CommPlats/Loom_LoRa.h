@@ -82,6 +82,14 @@ public:
 	bool		send(JsonObject json, uint16_t destination) override;
 	bool		send(JsonObject json) override;
 
+	// manually expose superclass version of log() that gets json from
+	// linked LoomManager, calling this classes implementation of 
+	// 'send(JsonObject)' and 'send(JsonObject, uint16_t)', which is pure virtual in superclass
+	using LoomCommPlat::send; 
+	using LoomCommPlat::receive; 
+	using LoomCommPlat::broadcast; 
+
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================

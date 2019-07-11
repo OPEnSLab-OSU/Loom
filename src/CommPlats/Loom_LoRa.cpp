@@ -158,13 +158,15 @@ bool Loom_LoRa::receive(JsonObject json)
 				return false;
 			}
 
-			json.set(messageJson.as<JsonObject>());
+			bool status = json.set(messageJson.as<JsonObject>());
+			if (!status) return false;
 
 			if (print_verbosity == Verbosity::V_HIGH) {
-				// LPrintln("\nmessageJson:");
-				// serializeJsonPretty(messageJson, Serial);
+				LPrintln("\nInternal messageJson:");
+				serializeJsonPretty(messageJson, Serial);
+
 				print_module_label();
-				LPrintln("\njson:");
+				LPrintln("\nProvided Json:");
 				serializeJsonPretty(json, Serial);
 				LPrintln();
 			}

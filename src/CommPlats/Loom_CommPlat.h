@@ -26,6 +26,11 @@ protected:
 	uint16_t	max_message_len;			/// The maximum message length
 	int16_t		signal_strength;			/// Rssi for Lora (need to determine what the other platforms use)
 
+	// CommPlatforms need their own JsonDocument because an incoming message
+	// can only be deserialized into JsonDocuments, not JsonObjects.
+	// And it seemed bad design to pass around references to the LoomManager's
+	// internal JsonDocument. 
+	// Especially as the LoomManager is intended to be non-mandatory for usage of Loom
 	StaticJsonDocument<2000> messageJson;	/// Document to read incoming data into
 
 public:
@@ -57,6 +62,10 @@ public:
 	/// \param[out]	json	Json object to fill with incoming data
 	virtual bool	receive(JsonObject json) {}
 
+	/// Version of send for use with LoomManager.
+	/// Accesses Json from LoomManager
+	bool			receive();
+
 	/// Send json to a specific address
 	/// \param[in]	json			Json package to send
 	/// \param[in]	destination		Device to send to
@@ -66,9 +75,22 @@ public:
 	/// Calls send(JsonObject, uint16_t) with 
 	virtual bool	send(JsonObject json) {}
 
+	/// Version of send for use with LoomManager.
+	/// Accesses Json from LoomManager, uses default address
+	bool			send();
+
+	/// Version of send for use with LoomManager.
+	/// Accesses Json from LoomManager
+	/// \param[in]	destination		Address of destination device
+	bool			send(uint16_t destination);
+
 	/// Broadcast data to all that can receive
 	/// \param[in]	json	Json object to send
 	virtual void	broadcast(JsonObject json) {};
+
+	/// Version of send for use with LoomManager.
+	/// Accesses Json from LoomManager
+	void			broadcast();
 
 
 //=============================================================================
