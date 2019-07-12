@@ -73,7 +73,7 @@ void loop()
 	digitalWrite(10, LOW);
 
 	Manager.package();
-	Manager.append_to_data_json("wakeType", "type", alarmFlag ? "alarm" : "reed");
+	Manager.add_data("wakeType", "type", alarmFlag ? "alarm" : "reed");
 	Manager.print_internal_json();
 	Manager.SDCARD().log();
 

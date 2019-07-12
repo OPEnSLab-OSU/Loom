@@ -194,7 +194,7 @@ public:
 	/// \param[in]	val		Value of data to add
 	/// \return True if success
 	template<typename T>
-	bool append_to_data_json(const char* module, const char* key, T val)
+	bool add_data(const char* module, const char* key, T val)
 	{
 		if ( doc.isNull() ) {
 			doc["type"] = "data";

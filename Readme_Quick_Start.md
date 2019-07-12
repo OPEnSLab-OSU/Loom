@@ -108,12 +108,12 @@ JsonObject clearedJson = Manager.internal_json();
 
 #### Append to Data Json
 
-After package data, you can add non-Loom data to the Json data package with `template<typename T> bool append_to_data_json(const char* module, const char* key, T val)`.
+After package data, you can add non-Loom data to the Json data package with `template<typename T> bool add_data(const char* module, const char* key, T val)`.
 
 **Example:**
 
 ```
-Manager.append_to_data_json("exampleModule", "key", 12345);
+Manager.add_data("exampleModule", "key", 12345);
 ```
 
 You can also add to a Loom module's section of the data object. If the provided module name matches a component already in the data package, your data key value pair will be added to that component.
