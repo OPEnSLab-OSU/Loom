@@ -41,17 +41,15 @@ void setup()
 {
 	Manager.begin_LED();
 	Manager.flash_LED(10, 200, 200, true);
-	Manager.begin_serial(true);
-
-	// pinMode(LED_BUILTIN, OUTPUT);   // Set the LED pin mode
+	Manager.begin_serial();
 
 	pinMode(10, OUTPUT);   
 
 	Manager.parse_config(json_config);
 	Manager.print_config();
 
-	pinMode(ALARM_PIN, OUTPUT);
-	pinMode(REED_PIN, OUTPUT);
+	// pinMode(ALARM_PIN, INPUT_PULLUP);
+	// pinMode(REED_PIN, INPUT_PULLUP);
 
 	Manager.InterruptManager().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
 	Manager.InterruptManager().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
@@ -74,14 +72,10 @@ void loop()
 
 	digitalWrite(10, LOW);
 
-
-	JsonObject tmp = Manager.package();
-
+	Manager.package();
 	Manager.append_to_data_json("wakeType", "type", alarmFlag ? "alarm" : "reed");
 	Manager.print_internal_json();
-
-
-	Manager.SDCARD().log(tmp);
+	Manager.SDCARD().log();
 
 	
 	delay(500);

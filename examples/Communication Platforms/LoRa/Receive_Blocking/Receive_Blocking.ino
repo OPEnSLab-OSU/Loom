@@ -10,7 +10,7 @@ LoomManager Loom("");
 
 void setup() 
 { 
-	Loom.begin_serial(true);
+	Loom.begin_serial();
 	Loom.parse_config(json_config);
 	Loom.print_config();
 
@@ -19,13 +19,8 @@ void setup()
 
 void loop() 
 {
-	Loom.measure();
-	Loom.package();
-	Loom.print_internal_json();
-
-	// Send to address 1
-	Loom.LoRa().send(1);
-
-	delay(2000);
+	if (Loom.LoRa().receive_blocking(5000)) {
+		Loom.print_internal_json();
+		Loom.SDCARD().log("received.csv");
+	}
 }
-

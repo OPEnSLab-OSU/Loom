@@ -53,6 +53,8 @@ bool LoomCommPlat::receive_blocking(JsonObject json, int max_wait_time)
 			return true;
 		}
 	} while ( (millis() - start_time) < max_wait_time );
+	print_module_label();
+	LPrintln("Timeout of ", max_wait_time, "ms reached");
 	return false;
 }
 
