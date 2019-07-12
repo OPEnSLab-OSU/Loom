@@ -16,6 +16,8 @@
 #include "RTC/Loom_RTC.h"
 #include "PublishPlats/Loom_PublishPlat.h"
 
+#include <Adafruit_SleepyDog.h>
+
 
 ///////////////////////////////////////////////////////////////////////////////
 const char* LoomManager::enum_device_type_string(DeviceType t)
@@ -524,3 +526,22 @@ void LoomManager::flash_LED(uint sequence[3])
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomManager::pause(int ms)
+{
+	Serial.end();
+	USBDevice.detach();
+
+	int sleepMS = Watchdog.sleep(ms);
+
+	USBDevice.attach();
+	Serial.begin(SERIAL_BAUD);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+

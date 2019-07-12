@@ -100,9 +100,9 @@ public:
 protected:
 
 	char		device_name[20];	/// The name of the device
+	uint		instance;			/// The instance / channel ID within the subnet
 	char		family[20];			/// The family the device belongs to
 	uint		family_num;			/// The subnet of the family
-	uint		instance;			/// The instance / channel ID within the subnet
 
 	/// Device type (Hub / Node)
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
@@ -219,6 +219,13 @@ public:
 	/// Iterate over array of commands
 	/// \param[in] json		Object containing commands
 	void		cmd_route(JsonObject json);
+
+	/// Pause for up to 16 seconds.
+	/// You can use this instead of delay to put the device into a 
+	/// semi-low power state.
+	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
+	/// \param[in]	ms	Number of milliseconds to pause
+	void		pause(int ms);
 
 //=============================================================================
 ///@name	PRINT INFORMATION
