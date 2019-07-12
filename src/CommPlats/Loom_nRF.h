@@ -51,7 +51,7 @@ public:
 	Loom_nRF(
 			const char*		module_name			= "nRF",
 			uint16_t		max_message_len		= 120,
-			uint8_t			address 			= 0,
+			uint16_t		address 			= 0,
 			uint8_t			data_rate			= 1,
 			uint8_t			power_level			= 0,
 			uint8_t			retry_count 		= 3,

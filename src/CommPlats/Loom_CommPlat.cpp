@@ -105,12 +105,12 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 	if (!status) return false;
 
 	if (print_verbosity == Verbosity::V_HIGH) {
+		print_module_label();
 		LPrintln("\nInternal messageJson:");
 		serializeJsonPretty(messageJson, Serial);
 
-		print_module_label();
-		LPrintln("\nJson passed in:");
-		serializeJsonPretty(json, Serial);
+		// LPrintln("\nJson passed in:");
+		// serializeJsonPretty(json, Serial);
 		LPrintln();
 	}
 }

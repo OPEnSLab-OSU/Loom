@@ -12,9 +12,8 @@ void setup()
 { 
 	Loom.begin_serial(true);
 	Loom.parse_config(json_config);
-	// Loom.nRF().set_print_verbosity(Verbosity::V_HIGH);
+	Loom.nRF().set_print_verbosity(Verbosity::V_HIGH);
 	Loom.print_config();
-
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -25,11 +24,9 @@ void loop()
 	Loom.package();
 	Loom.print_internal_json();
 
-	// Send to default address
-	// Loom.LoRa().send();
-
 	// Sent to specific address
-	Loom.nRF().send(1);
+	// Loom.nRF().send(01);
+	Loom.nRF().broadcast();
 
 	delay(2000);
 }

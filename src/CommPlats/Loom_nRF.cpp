@@ -7,7 +7,7 @@ Loom_nRF::Loom_nRF(
 		const char*		module_name,
 		uint16_t		max_message_len,
 		
-		uint8_t			address,
+		uint16_t		address,
 
 		uint8_t			data_rate,
 		uint8_t			power_level,
@@ -155,48 +155,19 @@ void Loom_nRF::print_config()
 // }
 bool Loom_nRF::receive(JsonObject json) 
 {
-	// network->update();                      // Check the network regularly
+	network->update();                      // Check the network regularly
 
-	// while ( network->available() ) {        // Is there anything ready for us?
+	while ( network->available() ) {        // Is there anything ready for us?
 		
-	// 	RF24NetworkHeader header;          // If so, grab it and print it out
-	// 	char buffer[max_message_len];
-	// 	memset(buffer, '\0', max_message_len);
-	// 	network->read(header, &buffer, max_message_len-1);
-
-	// 	if (print_verbosity == Verbosity::V_HIGH) {
-	// 		print_module_label();
-	// 		LPrintln("Received: ", (const char*)buffer);
-	// 		print_module_label();
-	// 		LPrintln("Len: ", len);
-	// 	}
-
-	// 	messageJson.clear();
-
-	// 	if (deserializeMsgPack(messageJson, buffer) != DeserializationError::Ok ) {
-	// 		print_module_label();
-	// 		LPrintln("Failed to parse MsgPack");
-	// 		return false;
-	// 	}
-
-	// 	bool status = json.set(messageJson.as<JsonObject>());
-	// 	if (!status) return false;
-
-	// 	if (print_verbosity == Verbosity::V_HIGH) {
-	// 		LPrintln("\nInternal messageJson:");
-	// 		serializeJsonPretty(messageJson, Serial);
-
-	// 		print_module_label();
-	// 		LPrintln("\nProvided Json:");
-	// 		serializeJsonPretty(json, Serial);
-	// 		LPrintln();
-	// 	}
-
-	// 	return true;
-
-	// } // of while ( network->available() )
-
-	// return false;
+		RF24NetworkHeader header;          // If so, grab it and print it out
+		char buffer[max_message_len];
+		memset(buffer, '\0', max_message_len);
+		if (network->read(header, &buffer, max_message_len-1) ) {
+			bool status = msgpack_buffer_to_json(buffer, json);
+			return status;
+		}
+	}
+	return false;
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
@@ -218,17 +189,9 @@ bool Loom_nRF::receive(JsonObject json)
 bool Loom_nRF::send(JsonObject json, uint16_t destination) 
 {
 	char buffer[max_message_len];
-	memset(buffer, '\0', sizeof(buffer));
+	bool to_msgpack = json_to_msgpack_buffer(json, buffer, max_message_len);
+	if (!to_msgpack) return false;
 
-	serializeMsgPack(json, buffer, max_message_len);
-
-	if (print_verbosity == Verbosity::V_HIGH) {
-		print_module_label();
-		LPrintln(buffer);
-		LPrintln("MsgPack size: ", measureMsgPack(json));
-	}
-
-	// bool is_sent = manager->sendtoWait( (uint8_t*)buffer, measureMsgPack(json), destination );
 	RF24NetworkHeader header(destination);
 	bool is_sent = network->write( header, buffer, measureMsgPack(json) );
 
@@ -256,9 +219,20 @@ bool Loom_nRF::send(JsonObject json, uint16_t destination)
 
 void Loom_nRF::broadcast(JsonObject json)
 {
+	char buffer[max_message_len];
+	bool to_msgpack = json_to_msgpack_buffer(json, buffer, max_message_len);
+	if (!to_msgpack) {
+		print_module_label();
+		LPrintln("Failed to convert to msgpack");
+		return;
+	}
 
+	RF24NetworkHeader header(00);
+	network->multicast( header, buffer, measureMsgPack(json), multicast_level );
+
+	print_module_label();
+	LPrintln("Broadcasted");
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_nRF::set_address(uint addr)    // Need to test this

@@ -12,6 +12,7 @@
 			'parameters':[\
 				'nRF',\
 				120,\
+				01,\
 				1,\
 				0,\
 				3,\
@@ -23,6 +24,5 @@
 			'name':'Loom_SD',\
 			'parameters':['SD',true,1000,10,'datafile.csv']\
 		}\
-
 	]\
 }"
