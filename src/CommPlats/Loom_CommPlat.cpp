@@ -45,6 +45,29 @@ bool LoomCommPlat::receive()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+bool LoomCommPlat::receive_blocking(JsonObject json, int max_wait_time)
+{
+	unsigned long start_time = millis();
+	do {
+		if ( receive(json) ) {
+			return true;
+		}
+	} while ( (millis() - start_time) < max_wait_time );
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomCommPlat::receive_blocking(int max_wait_time)
+{
+	if (device_manager != nullptr) {
+		// Loom_Manager's json needs to be cleared (passing true to internal_json)
+		// in order to copy over correctly
+		return receive_blocking( device_manager->internal_json(true), max_wait_time );
+	} 
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::send(uint16_t destination)
 {
 	if (device_manager != nullptr) {

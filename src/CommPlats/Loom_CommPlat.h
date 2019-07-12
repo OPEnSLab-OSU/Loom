@@ -55,25 +55,37 @@ public:
 	virtual bool	cmd_route(JsonObject) override {}
 	virtual void 	package(JsonObject json) override {};
 
-
-	// Subclasses don't have to implement the following
-
 	/// Build json from packet if any exists
 	/// \param[out]	json	Json object to fill with incoming data
 	virtual bool	receive(JsonObject json) {}
 
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager
+	/// \return True if packet received
 	bool			receive();
+
+	/// Receive, but block until packet received, or timeout reached
+	/// \param[out]	json			Json object to fill with incoming data
+	/// \param[out]	max_wait_time	Maximum number of milliseconds to block for
+	/// \return True if packet received
+	bool			receive_blocking(JsonObject json, int max_wait_time);
+
+	/// Version of receive_blocking for use with LoomManager.
+	/// Accesses Json from LoomManager
+	/// \param[out]	max_wait_time	Maximum number of milliseconds to block for
+	/// \return True if packet received	
+	bool			receive_blocking(int max_wait_time);
 
 	/// Send json to a specific address
 	/// \param[in]	json			Json package to send
 	/// \param[in]	destination		Device to send to
+	/// \return True if packet sent successfully
 	virtual bool	send(JsonObject json, uint16_t destination) {}
 
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager
 	/// \param[in]	destination		Address of destination device
+	/// \return True if packet sent successfully
 	bool			send(uint16_t destination);
 
 	/// Broadcast data to all that can receive
