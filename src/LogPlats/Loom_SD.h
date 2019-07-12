@@ -83,8 +83,7 @@ public:
 	// Save bundle to SD card
 	// \param[in]	file		The file to save bundle to
 	// \param[in]	bndl		The bundle to be saved
-	// \param[in]	timestamp	Format of timestamp (if any)
-	bool		save_json(JsonObject json, const char* file, int timestamp=3);
+	bool		save_json(JsonObject json, const char* file);
 
 	/// Delete a file
 	/// \param[in]	file	Name of file to delete
@@ -252,6 +251,13 @@ private:
 			sdFile.print(" ");
 		}
 	}
+
+	/// Create Header Row 1 (Categories)
+	void _write_json_header_part1(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents);
+	/// Create Header Row 2 (Column names)
+	void _write_json_header_part2(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents);
+	/// Write data values
+	void _write_json_data(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents);
 
 };
 

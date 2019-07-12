@@ -418,6 +418,9 @@ private:
 	Loom_Sleep_Manager*		get_sleep_manager();
 	LoomRTC*				get_rtc_module();
 
+	void add_device_ID_to_json(JsonObject json);
+
+
 	///////////////////////////////////////////////////////////////////////////
 	/// Add module to a list of modules
 	template<typename T>

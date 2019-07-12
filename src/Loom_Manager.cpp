@@ -393,12 +393,17 @@ void LoomManager::package_aux(JsonObject json, LoomModule* module)
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::package(JsonObject json) 
 {
+	// Add device identification to json
+	add_device_ID_to_json(json);
+	
+	// Iterate over lists of modules getting data from each
 	package_aux( json, (LoomModule*)rtc_module ); 
 	package_aux( json, (LoomModule*)sleep_manager ); 
 	package_aux( json, (LoomModule*)interrupt_manager ); 
 	package_aux( json, other_modules); 
 	package_aux( json, sensor_modules); 
 
+	// If high verbosity, also check these lists
 	if (package_verbosity == Verbosity::V_HIGH) {
 		package_aux( json, actuator_modules); 
 		package_aux( json, comm_modules); 
@@ -414,6 +419,17 @@ JsonObject LoomManager::package()
 	JsonObject json = doc.as<JsonObject>();
 	package(json);
 	return json;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomManager::add_device_ID_to_json(JsonObject json)
+{
+	JsonObject timestamp = json.createNestedObject("id");
+	timestamp["name"]		= device_name;
+	timestamp["instance"]	= instance;
+	timestamp["family"]		= family;
+	timestamp["family_num"]	= family_num;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -30,6 +30,11 @@
 		{\
 			'name':'Loom_SD',\
 			'parameters':['SD',true,1000,10,'datafile.csv']\
+		},\
+		{\
+			'name':'Loom_PCF8523',\
+			'parameters':'default'\
 		}\
+
 	]\
 }"

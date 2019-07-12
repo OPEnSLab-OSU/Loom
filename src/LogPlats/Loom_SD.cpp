@@ -144,7 +144,7 @@ bool Loom_SD::dump_file(char* file)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_SD::log(JsonObject json) 
 {
-	save_json(json, default_file, 3);
+	save_json(json, default_file);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ void Loom_SD::log(const char* filename)
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
 		if (strcmp(tmp["type"], "data") == 0 ) {
-			save_json(tmp, filename, 3);
+			save_json(tmp, filename);
 		}
 	}
 }
@@ -161,12 +161,10 @@ void Loom_SD::log(const char* filename)
 ///////////////////////////////////////////////////////////////////////////////
 
 // Note that timestamp implementation may change with blocks of data in json
+// Format:
+// Identification Date Time ModuleA key1 val1 key2 val2 ... ModuleB key1 val1 ...   
 
-	// Format:
-	// Date Time ModuleA key1 val1 key2 val2 ... ModuleB key1 val1 ...   
-
-
-bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
+bool Loom_SD::save_json(JsonObject json, const char* file)
 {
 	if ( !sd_found || !check_millis() ) return false;
 
@@ -184,47 +182,118 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 		LPrintln("Writing to: ", file);
 	}
 
+	JsonObject dev_id    = json["id"];
 	JsonObject timestamp = json["timestamp"];
 	JsonArray  contents  = json["contents"];
 	
 	// Don't log if no data
 	if (contents.isNull()) return false;
 
-	// Create Header
+	// Create Header Rows
 	if ( sdFile.position() == 0) {
 
-		if (!timestamp.isNull()) { 
-			for (JsonPair dataPoint : timestamp) {
-				sdFile.print(dataPoint.key().c_str());
-				sdFile.print(',');
-			}
-		}
+		// Create Header Row 1 (Categories)
+		_write_json_header_part1(sdFile, dev_id, timestamp, contents);
 
-		for (JsonObject module : contents) {
-			// LPrint(module["module"].as<const char*>());
-			// LPrint(",");
-			sdFile.print(module["module"].as<const char*>());
-			sdFile.print(",");
-
-			JsonObject data = module["data"];
-			if (data.isNull()) continue;
-
-			for (JsonPair dataPoint : data) {
-				sdFile.print(dataPoint.key().c_str());
-				sdFile.print(',');
-			}
-		}
-		// LPrintln();
-		sdFile.println();
+		// Create Header Row 2 (Column names)
+		_write_json_header_part2(sdFile, dev_id, timestamp, contents);
 	}
 
-	// Write data value
+	// Write data values
+	_write_json_data(sdFile, dev_id, timestamp, contents);
+
+	sdFile.close();
+	print_module_label();
+	LPrintln("Done writing to SD");
+	return true;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_SD::_write_json_header_part1(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents)
+{
+	// Print device indentifcation headers
+	if (!dev_id.isNull()) { 
+		sdFile.print("ID");
+		for (JsonPair dataPoint : dev_id) {
+			sdFile.print(',');
+		}
+	}
+
+	// Print timestamp headers
+	if (!timestamp.isNull()) { 
+		sdFile.print("Timestamp");
+		for (JsonPair dataPoint : timestamp) {
+			sdFile.print(',');
+		}
+	}
+
+	// Print module data headers
+	for (JsonObject module : contents) {
+		sdFile.print(module["module"].as<const char*>());
+		
+		JsonObject data = module["data"];
+		if (data.isNull()) continue;
+
+		for (JsonPair dataPoint : data) {
+			sdFile.print(',');
+		}
+	}
+
+	sdFile.println();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_SD::_write_json_header_part2(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents)
+{
+	// Print device indentifcation headers
+	if (!dev_id.isNull()) { 
+		for (JsonPair dataPoint : dev_id) {
+			sdFile.print(dataPoint.key().c_str());
+			sdFile.print(',');
+		}
+	}
+
+	// Print timestamp headers
+	if (!timestamp.isNull()) { 
+		for (JsonPair dataPoint : timestamp) {
+			sdFile.print(dataPoint.key().c_str());
+			sdFile.print(',');
+		}
+	}
+
+	// Print module data headers
+	for (JsonObject module : contents) {
+		JsonObject data = module["data"];
+		if (data.isNull()) continue;
+
+		for (JsonPair dataPoint : data) {
+			sdFile.print(dataPoint.key().c_str());
+			sdFile.print(',');
+		}
+	}
+	// LPrintln();
+	sdFile.println();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_SD::_write_json_data(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents)
+{
+	if (!dev_id.isNull()) { 
+		for (JsonPair dataPoint : dev_id) {
+			JsonVariant val = dataPoint.value();	
+			if (val.is<int>()) {
+				sdFile.print(dataPoint.value().as<int>());
+			} else if (val.is<char*>() || val.is<const char*>() ) {
+				sdFile.print(dataPoint.value().as<const char*>());
+			} 
+			sdFile.print(',');
+		}
+	}
 
 	if (!timestamp.isNull()) { 
 		for (JsonPair dataPoint : timestamp) {
 			JsonVariant val = dataPoint.value();				
 			if (val.is<char*>() || val.is<const char*>() ) {
-				// LPrint(dataPoint.value().as<const char*>());
 				sdFile.print(dataPoint.value().as<const char*>());
 			} 
 			sdFile.print(',');
@@ -232,39 +301,25 @@ bool Loom_SD::save_json(JsonObject json, const char* file, int timestamp_format)
 	}
 	
 	for (JsonObject module : contents) {
-		// LPrint(",");
-		sdFile.print(",");
-
 		JsonObject data = module["data"];
 		if (data.isNull()) continue;
 
 		for (JsonPair dataPoint : data) {
 			JsonVariant val = dataPoint.value();
 			if (val.is<int>()) {
-				// LPrint(dataPoint.value().as<int>());
 				sdFile.print(dataPoint.value().as<int>());
 			} else if (val.is<bool>()) {
-				// LPrint(dataPoint.value().as<bool>());								
 				sdFile.print(dataPoint.value().as<bool>());								
 			} else if (val.is<float>()) {
-				// LPrint(dataPoint.value().as<float>());				
 				sdFile.print(dataPoint.value().as<float>());				
 			} else if (val.is<char*>() || val.is<const char*>() ) {
-				// LPrint(dataPoint.value().as<const char*>());
 				sdFile.print(dataPoint.value().as<const char*>());
 			} 
-			// LPrint(",");		
 			sdFile.print(",");		
 		}
 	}
 
-	// LPrintln();
 	sdFile.println();
-
-	sdFile.close();
-	print_module_label();
-	LPrintln("Done writing to SD");
-	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
