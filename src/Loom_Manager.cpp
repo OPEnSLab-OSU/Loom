@@ -469,7 +469,7 @@ void LoomManager::cmd_route(JsonObject json)
 
 			if ( cmd_route_aux(cmd, actuator_modules) )			continue;
 			
-			if ( cmd_route_aux(cmd, (LoomModule*)rtc_module) )	continue;
+			if ( cmd_route_aux(cmd, (LoomModule*)rtc_module) )		continue;
 			if ( cmd_route_aux(cmd, other_modules) )			continue;
 			if ( cmd_route_aux(cmd, sensor_modules) )			continue;
 			if ( cmd_route_aux(cmd, comm_modules) )				continue;
