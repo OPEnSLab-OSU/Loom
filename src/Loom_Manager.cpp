@@ -482,7 +482,7 @@ void LoomManager::cmd_route(JsonObject json)
 void LoomManager::print_internal_json()
 {
 	print_device_label();
-	LPrintln("Internal Json:");
+	LPrintln("Json:");
 	serializeJsonPretty(doc, Serial);
 	LPrintln();
 }

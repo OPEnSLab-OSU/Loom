@@ -71,14 +71,6 @@ public:
 	/// \param[in]	destination		Device to send to
 	virtual bool	send(JsonObject json, uint16_t destination) {}
 
-	/// Send json to default address.
-	/// Calls send(JsonObject, uint16_t) with 
-	virtual bool	send(JsonObject json) {}
-
-	/// Version of send for use with LoomManager.
-	/// Accesses Json from LoomManager, uses default address
-	bool			send();
-
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager
 	/// \param[in]	destination		Address of destination device
@@ -125,6 +117,29 @@ public:
 	/// \return CommPlatform 
 	static Platform string_to_enum_comm_plat(const char* s);
 
+protected:
+
+	/// Serialize a JsonObject into a MessagePack buffer.
+	/// Also contains buffer memsetting and print statements
+	/// \param[in]	json		JsonObject to serialize
+	/// \param[out]	buffer		Buffer to fill with MessagePack of json
+	/// \param[in]	max_len		Length of buffer
+	/// return True if success
+	bool	json_to_msgpack_buffer(JsonObjectConst json, char* buffer, int max_len);
+
+	/// Deserialize a MessagePack buffer into a JsonObject.
+	/// Also clears the json, contains prints and error checks.
+	/// \param[in]	buffer		Buffer to deserialize
+	/// \param[out]	json		JsonObject to deserialize into
+	/// \param[in]	max_len		Length of buffer
+	/// return True if success
+	bool	msgpack_buffer_to_json(const char* buffer, JsonObject json);
+
 };
+
+
+
+
+
 
 

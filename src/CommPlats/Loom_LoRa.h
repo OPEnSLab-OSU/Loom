@@ -15,11 +15,6 @@
 #define RF95_FREQ 915.0
 
 
-// these will be defined in the config
-#define LORA_SELF_ADDRESS   01
-#define LORA_FRIEND_ADDRESS 00
-
-
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -35,7 +30,6 @@ protected:
 	RHReliableDatagram*	manager;			/// Manager for driver
 
 	uint8_t				address;			/// Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
-	uint8_t				friend_address;		/// Default address to send to
 
 	uint8_t				power_level;		/// Power level to send at
 	uint8_t				retry_count;		/// Number of transmission retries allowed
@@ -59,8 +53,7 @@ public:
 	Loom_LoRa(
 			const char*		module_name			= "LoRa",
 			uint16_t		max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
-			uint8_t			address				= LORA_SELF_ADDRESS,
-			uint8_t			friend_address		= LORA_FRIEND_ADDRESS,
+			uint8_t			address				= 0,
 			uint8_t			power_level 		= 23,
 			uint8_t			retry_count			= 3,
 			uint16_t		retry_timeout		= 200
@@ -80,7 +73,6 @@ public:
 
 	bool		receive(JsonObject json) override;
 	bool		send(JsonObject json, uint16_t destination) override;
-	bool		send(JsonObject json) override;
 
 	// manually expose superclass version of log() that gets json from
 	// linked LoomManager, calling this classes implementation of 
@@ -102,19 +94,11 @@ public:
 
 	uint		get_address() override;
 
-	/// Get address of default destination
-	/// \return	Address of default destination device
-	uint		get_friend_address();
-
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
 	void		set_address(uint addr) override;
-
-	/// Set address of default destination
-	/// \param[in] addr		Address of destination device
-	void		set_friend_address(uint addr);
 
 private:
 

@@ -54,7 +54,6 @@ public:
 
 	bool		receive(JsonObject json) override {}
 	bool		send(JsonObject json, uint16_t destination) override {}
-	bool		send(JsonObject json) override {}
 
 //=============================================================================
 ///@name	PRINT INFORMATION

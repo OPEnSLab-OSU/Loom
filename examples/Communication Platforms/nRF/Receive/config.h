@@ -8,19 +8,21 @@
 	},\
 	'components':[\
 		{\
-			'name':'Loom_LoRa',\
+			'name':'Loom_nRF',\
 			'parameters':[\
-				'LoRa',\
-				255,\
+				'nRF',\
+				120,\
 				1,\
-				23,\
+				0,\
 				3,\
-				200\
+				200,\
+				1\
 			]\
 		},\
 		{\
 			'name':'Loom_SD',\
 			'parameters':['SD',true,1000,10,'datafile.csv']\
 		}\
+
 	]\
 }"
