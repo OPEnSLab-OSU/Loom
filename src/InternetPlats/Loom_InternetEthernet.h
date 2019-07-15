@@ -7,7 +7,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
+// ### (LoomModule) | dependencies: [] | conflicts: []
+/// InternetPlat built off of SSLClient running over an Ethernet Featherwing. Requires 8KB of free SRAM at runtime to use.
+// ###
 class Loom_Ethernet_I : public LoomInternetPlat
 {
 
@@ -23,7 +25,7 @@ protected:
 	
 public:
 	
-//============================s=================================================
+//==============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
@@ -47,7 +49,7 @@ public:
 /*@{*/ //======================================================================
 
 	// remember to close the socket!
-	Client& http_request(const char* domain, const char* url, const char* body, const char* verb) override;
+	Client& connect_to_domain(const char* domain) override;
 
 	/// Connect to internet
 	void connect() override;

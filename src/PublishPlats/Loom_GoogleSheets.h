@@ -6,7 +6,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
+// ### (LoomModule) | dependencies: [] | conflicts: []
+/// Module taking in and translating JSON into data understood by the Google Sheets script API.
+// ###
 class Loom_GoogleSheets : public LoomPublishPlat 
 {
 
@@ -48,7 +50,9 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	// remember to close the socket!
+	/// Send JSON data to a google sheet
+	/// \param[in] json The JSON data, formatted according to publish();
+	/// \param[in] plat A pointer to an internet platform
 	bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
 
 //=============================================================================
@@ -58,23 +62,14 @@ public:
 	void print_config() override;
 
 private:
-
-	/// Get the number of bytes left in buffer from a given pointer in buffer
-	size_t m_buffer_left(const char* buffer_index) const {
-		const char* end_buffer = &(m_buffer[sizeof(m_buffer) - 1]);
-		if (buffer_index >= end_buffer) return 0;
-		return end_buffer - buffer_index;
-	}
-
 	/// Private utility send function
-	bool m_serialize_internet_impl(const JsonObject json);
-
-	/// Storage for all those strings we're going to need above
-	/// main string buffer, the front of which stores our URL
-	/// do not edit this directly, use m_url_end instead.
-	char m_buffer[512];
+	bool m_serialize_internet_impl(const JsonObject json, Print& write);
 	
-	/// Store a pointer to where we can actually add data
-	char* m_data_start;
+	// use dynamic memory to store the varibles from the user
+	// since most of these strings will be smaller than the maximum size
+	const String m_script_url;
+	const String m_sheet_id;
+	const String m_tab_id;
+	const String m_device_id;
 };
 
