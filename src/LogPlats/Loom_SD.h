@@ -85,7 +85,6 @@ public:
 	/// \param[in]	file		The file to save to
 	bool		save_json(JsonObject json, const char* file);
 
-
 	/// Delete a file
 	/// \param[in]	file	Name of file to delete
 	void		delete_file(const char* file);

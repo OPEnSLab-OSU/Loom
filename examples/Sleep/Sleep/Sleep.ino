@@ -3,8 +3,6 @@
 
 #include <Loom.h>
 
-// #include "LowPower.h"
-
 
 // Include configuration
 const char* json_config = 
@@ -13,41 +11,33 @@ const char* json_config =
 
 // Detach interrupt on wake
 void wakeISR() { 
-	LPrintln("Alarm went off"); 
 	detachInterrupt(6); 
+	LPrintln("Alarm went off"); 
 }
 
-LoomManager Manager("Manager", "Loom", 1, 1, DeviceType::NODE, Verbosity::V_LOW, Verbosity::V_LOW);
+LoomManager Loom("");
 
 
 void setup() 
 {
-	pinMode(LED_BUILTIN, OUTPUT);   	
+	Loom.begin_LED();
 	digitalWrite(LED_BUILTIN, HIGH);
-
-	Serial.begin(115200);
-
-	// Wait for Serial Monitor to continue
-	// Comment out the following line to run without Serial
-	while(!Serial);       		
-	delay(1000);
-
-	LPrintln("Initialized Serial!\n");
-
-	Manager.parse_config(json_config);
+	// open Serial Monitor to continue, or use Loom.begin_serial();
+	// to continue without waiting on user 
+	Loom.begin_serial(true);
+	Loom.parse_config(json_config);
 
 	// Register ISR to call on wake
-	Manager.InterruptManager().register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);
+	Loom.InterruptManager().register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);
 	
 	// Set an alarm 15 seconds into the future
-	Manager.InterruptManager().RTC_alarm_duration(0, 0, 0, 15);
+	Loom.InterruptManager().RTC_alarm_duration(0, 0, 0, 15);
 
 	// Go to sleep
 	LPrintln("Going to sleep");
-	Manager.SleepManager().sleep();
+	Loom.SleepManager().sleep();
 	// LowPower.standby();
 	digitalWrite(LED_BUILTIN, LOW);
-
 
 	LPrintln("\n ** Setup Complete ** ");
 }
