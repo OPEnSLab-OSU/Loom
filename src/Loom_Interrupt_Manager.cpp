@@ -200,6 +200,22 @@ void Loom_Interrupt_Manager::register_ISR(byte pin, ISRFuncPtr ISR, byte signal_
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+bool Loom_Interrupt_Manager::reconnect_interrupt(byte pin)
+{
+	IntDetails settings = int_settings[pin];
+
+	// Set pin mode
+	pinMode(pin, INPUT_PULLUP);
+
+	// If ISR provided
+	if (settings.ISR != nullptr) {
+		ISRFuncPtr tmpISR = (settings.run_type == ISR_Type::IMMEDIATE) ? settings.ISR : default_ISRs[pin];
+		attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (settings.type<5) ? settings.type : 0 );
+		attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (settings.type<5) ? settings.type : 0 );
+	} 
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::unregister_ISR(byte pin, byte signal_type)
 {
 	// Set interrupt to be the default

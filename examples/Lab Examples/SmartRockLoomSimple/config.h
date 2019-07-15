@@ -13,7 +13,8 @@
 		},\
 		{\
 			'name':'Loom_Interrupt_Manager',\
-			'parameters':['Interrupt-Manager',0]},\
+			'parameters':['Interrupt-Manager',0]
+		},\
 		{\
 			'name':'Loom_Sleep_Manager',\
 			'parameters':['Sleep-Manager',true,false,1,19]\

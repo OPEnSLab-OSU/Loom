@@ -130,6 +130,12 @@ public:
 	/// \param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
 	void		register_ISR(byte pin, ISRFuncPtr ISR, byte signal_type, ISR_Type run_type);
 
+	/// If an ISR dettaches interrupt, use this to reattach according to 
+	/// previous settings.
+	/// Effectively to running register_ISR with previous settings
+	/// \param[in]	pin			Which pin to reconnect the interrupt on
+	bool		reconnect_interrupt(byte pin);
+
 	/// Run any waiting ISRs.
 	/// Flag was set by a top half ISR
 	void		run_pending_ISRs();
