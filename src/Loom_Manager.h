@@ -76,7 +76,8 @@ class Loom_Interrupt_Manager;
 class Loom_Multiplexer;
 
 
-#define SERIAL_BAUD 115200
+#define SERIAL_BAUD	115200
+#define SD_CS 		10
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -168,15 +169,27 @@ public:
 	/// \param[in]	wait_for_monitor	True to wait for serial monitor to open
 	void		begin_serial(bool wait_for_monitor = false);
 
-	/// Parse a JSON configuration specifying enabled modules.
+	/// Parse a JSON configuration string specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
 	/// and added to manager lists for managing
 	/// \param[in]	json_config		Configuration
-	/// \param[in]	print_config	Print config of modules as they are generated
-	///								false by default
 	/// \return True if success
 	bool		parse_config(const char* json_config);
-	// maybe overload to take JsonVariant or const char* of json?
+	
+	/// Parse a JSON configuration on SD card specifying enabled modules.
+	/// Enabled modules are instantiated with specified settings
+	/// and added to manager lists for managing
+	/// \param[in]	json_config		Configuration
+	/// \return True if success
+	bool		parse_config_SD(const char* config_file);
+
+	/// Parse a JSON configuration object specifying enabled modules.
+	/// Enabled modules are instantiated with specified settings
+	/// and added to manager lists for managing.
+	/// Called by parse_config and parse_config_SD
+	/// \param[in]	json_config		Configuration
+	/// \return True if success
+	bool		parse_config_json(JsonObject config);
 
 	/// Measure data of all managed sensors
 	void		measure();  
@@ -232,7 +245,12 @@ public:
 	/// Only replaces current configuration if success
 	/// \param[in]	config_file		File config is in
 	/// \return True is success, false if fail or file not found
-	bool		use_SD_config(const char* config_file);
+	// bool		use_SD_config(const char* config_file);
+
+	/// Save current configuration to SD.
+	/// \param[in]	config_file		File to save configuration to
+	/// \return True is success, false if fail or file not found
+	// bool		save_SD_config(const char* config_file);
 
 //=============================================================================
 ///@name	PRINT INFORMATION

@@ -80,10 +80,11 @@ public:
 	// 'log(JsonObject json)', which is pure virtual in superclass
 	using LoomLogPlat::log; 
 
-	// Save bundle to SD card
-	// \param[in]	file		The file to save bundle to
-	// \param[in]	bndl		The bundle to be saved
+	/// Save data to SD card in CSV format
+	/// \param[in]	json		The data to be saved
+	/// \param[in]	file		The file to save to
 	bool		save_json(JsonObject json, const char* file);
+
 
 	/// Delete a file
 	/// \param[in]	file	Name of file to delete
@@ -92,17 +93,6 @@ public:
 	/// Clear a file (remove contents but not file itself)
 	/// \param[in]	file	Name of file to empty
 	void		empty_file(const char* file);
-
-	// void		get_row(char* filename, int idx, char* buffer);
-
-
-	/// Load a configuration from SD
-	/// \param[in]	config_file		File config is in
-	/// \param[out]	config			String of config
-	/// \param[in]	len				Size of config buffer
-	/// \return True is success, false if fail or file not found
-	bool		load_config(const char* config_file, char* config, int len);
-
 
 //=============================================================================
 ///@name	PRINT INFORMATION

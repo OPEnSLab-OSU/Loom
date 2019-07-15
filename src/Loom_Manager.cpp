@@ -16,8 +16,6 @@
 #include "RTC/Loom_RTC.h"
 #include "PublishPlats/Loom_PublishPlat.h"
 
-#include "LogPlats/Loom_SD.h"
-
 #include <Adafruit_SleepyDog.h>
 
 
@@ -540,76 +538,6 @@ void LoomManager::pause(int ms)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::use_SD_config(const char* config_file)
-{
-	// Check if SD module exists currently, else create a temporary one
-	Loom_SD* SD_inst = nullptr;
-
-	// for (auto log_module : log_modules) {
-    for (auto i = 0; i < log_modules.size(); i++) {
-		if (log_modules[i]->get_module_type() == LoomModule::Type::SDCARD) {
-			// If SD inst did exist, remove from vector
-			// Put back if have to return false
-			SD_inst = (Loom_SD*)log_modules[i];
-			print_device_label();
-			LPrintln("Found SD module");
-			log_modules.erase(log_modules.begin() + i);
-			break;
-		}
-	}
-
-	bool tmp_SD_created = false;
-	if (SD_inst == nullptr) {
-		print_device_label();
-		LPrintln("No SD module found, creating temporary one");
-
-		// Create SD module to use
-		tmp_SD_created = true;
-		SD_inst = new Loom_SD();
-	}
-
-	// Read in config
-	char buffer[512];
-	if ( !SD_inst->load_config(config_file, buffer, 512) ) {
-		print_device_label();
-		LPrintln("Failed to load SD config");
-		if (tmp_SD_created) {
-			// If temporary SD module created, free it
-			delete SD_inst;
-		} else {
-			// If SD instance already existed, put it back in vector of log plats
-			LoomLogPlat* tmp = SD_inst;
-			log_modules.push_back(tmp);
-		}
-		return false;
-	}
-
-	// Clear / free current modules
-	free_modules(); 
-
-	// Parse config
-// Currently, if you try to parse a bad config, 
-// your existing modules will be cleared
-	if ( !parse_config(buffer) ) {
-		print_device_label();
-		LPrintln("Failed to parse SD config");
-		if (tmp_SD_created) {
-			// If temporary SD module created, free it
-			delete SD_inst;
-		} else {
-			// If SD instance already existed, put it back in vector of log plats
-			LoomLogPlat* tmp = SD_inst;
-			log_modules.push_back(tmp);
-		}
-		return false;
-	}
-
-	// Free SD module (if previous existed, or created here)
-	delete SD_inst;
-	return true;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void LoomManager::free_modules()
 {
 	if (rtc_module != nullptr) { delete rtc_module; }
@@ -627,11 +555,5 @@ void LoomManager::free_modules()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
 
 

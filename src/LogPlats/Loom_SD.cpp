@@ -352,39 +352,6 @@ void Loom_SD::print_directory(File dir, int numTabs)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_SD::load_config(const char* config_file, char* config, int len)
-{
-	if ( !sd_found ) return false;
-
-	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
-
-	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
-	File sdFile = SD.open(config_file);
-
-	print_module_label();
-	if (sdFile) {
-		LPrintln("Reading '", config_file, "'");
-	} else {
-		LPrintln("Failed to open '", config_file, "'");
-		sdFile.close();
-		return false;		
-	}
-
-	memset(config, '\0', len);
-
-	// read from the file until there's nothing else in it:
-	if ( sdFile.available() && sdFile.read(config, len) ) {
-		// LPrintln(config);
-		sdFile.close();
-		return true;
-	} else {
-		sdFile.close();
-		return false;
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
 
 
 
