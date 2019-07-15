@@ -73,19 +73,19 @@ LoomRTC* Loom_SD::get_RTC_module()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::set_default_file(char* filename) 
+void Loom_SD::set_default_file(const char* filename) 
 { 
 	snprintf(this->default_file, 16, "%s", default_file); 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-char* Loom_SD::get_default_file() 
+const char* Loom_SD::get_default_file() 
 { 
 	return default_file; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::delete_file(char* file) 
+void Loom_SD::delete_file(const char* file) 
 {
 	if ( !sd_found ) return;
 
@@ -93,7 +93,7 @@ void Loom_SD::delete_file(char* file)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::empty_file(char* file)
+void Loom_SD::empty_file(const char* file)
 {
 	if ( !sd_found ) return;
 
@@ -111,7 +111,7 @@ void Loom_SD::list_files()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_SD::dump_file(char* file) 
+bool Loom_SD::dump_file(const char* file) 
 {
 	if ( !sd_found ) return false;
 
@@ -352,5 +352,42 @@ void Loom_SD::print_directory(File dir, int numTabs)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+bool Loom_SD::load_config(const char* config_file, char* config, int len)
+{
+	if ( !sd_found ) return false;
+
+	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
+
+	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
+	File sdFile = SD.open(config_file);
+
+	print_module_label();
+	if (sdFile) {
+		LPrintln("Reading '", config_file, "'");
+	} else {
+		LPrintln("Failed to open '", config_file, "'");
+		sdFile.close();
+		return false;		
+	}
+
+	memset(config, '\0', len);
+
+	// read from the file until there's nothing else in it:
+	if ( sdFile.available() && sdFile.read(config, len) ) {
+		// LPrintln(config);
+		sdFile.close();
+		return true;
+	} else {
+		sdFile.close();
+		return false;
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 
 

@@ -174,7 +174,8 @@ public:
 	/// \param[in]	json_config		Configuration
 	/// \param[in]	print_config	Print config of modules as they are generated
 	///								false by default
-	void		parse_config(const char* json_config);
+	/// \return True if success
+	bool		parse_config(const char* json_config);
 	// maybe overload to take JsonVariant or const char* of json?
 
 	/// Measure data of all managed sensors
@@ -226,6 +227,12 @@ public:
 	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
 	/// \param[in]	ms	Number of milliseconds to pause
 	void		pause(int ms);
+
+	/// Load and parse a configuration from SD.
+	/// Only replaces current configuration if success
+	/// \param[in]	config_file		File config is in
+	/// \return True is success, false if fail or file not found
+	bool		use_SD_config(const char* config_file);
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -532,6 +539,20 @@ private:
 		return nullptr;
 	}
 
+	/// Free modules.
+	/// Used in destructor or when switching configuration
+	void free_modules();
+
+	/// Free a vector of modules.
+	/// Called by free_modules
+	template<typename T>
+	void free_modules_aux(std::vector<T>& modules)
+	{
+		for (auto module : modules) {
+			delete module;
+		}
+		modules.clear();
+	}
 
 };
 

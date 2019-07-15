@@ -16,7 +16,7 @@ Factory LoomFactory;
 /// Parses a JSON configuration and instantiates the specified 
 /// LoomModules.
 /// Adds created LoomModules to the arrays of LoomManager
-void LoomManager::parse_config(const char* json_config)
+bool LoomManager::parse_config(const char* json_config)
 {
 	// = = = Parse Json config = = =
 
@@ -34,7 +34,7 @@ void LoomManager::parse_config(const char* json_config)
 		print_device_label();
 		LPrint(F("deserializeJson() failed: "));
 		LPrintln(error.c_str());
-		return;
+		return false;
 	}
 
 
@@ -176,5 +176,6 @@ void LoomManager::parse_config(const char* json_config)
 		LPrintln();
 	}
 
+	return true;
 }
 
