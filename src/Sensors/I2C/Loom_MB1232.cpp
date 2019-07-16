@@ -24,6 +24,8 @@ Loom_MB1232::Loom_MB1232(
 	Wire.requestFrom(i2c_address, byte(2));
 	bool setup = (Wire.available() >= 2);
 
+	if (!setup) active = false;
+
 	print_module_label();
 	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }

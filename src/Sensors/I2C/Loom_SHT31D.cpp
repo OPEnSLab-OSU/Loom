@@ -13,6 +13,8 @@ Loom_SHT31D::Loom_SHT31D(
 
 	bool setup = inst_sht31d.begin(i2c_address);
 
+	if (!setup) active = false;
+
 	print_module_label();
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }

@@ -60,9 +60,6 @@ Loom_Multiplexer::Loom_Multiplexer(
 	this->num_ports 	= num_ports;
 	this->update_period	= update_period;
 
-	LPrintln("this->num_ports: ", this->num_ports);
-	LPrintln("num_ports: ", num_ports);
-
 	// Begin I2C 
 	Wire.begin();
 
@@ -71,7 +68,7 @@ Loom_Multiplexer::Loom_Multiplexer(
 
 	// Initialize array of sensors to Null pointrs
 	for (uint8_t i = 0; i < num_ports; i++) {
-		sensors[i] = NULL;
+		sensors[i] = nullptr;
 	}
 
 	// Update sensor list and display   -- currently removed because Mux should be linked to DeviceManager before polling sensors
@@ -91,7 +88,7 @@ Loom_Multiplexer::~Loom_Multiplexer()
 {
 	// Free any sensors
 	for (uint8_t i = 0; i < num_ports; i++) {
-		if (sensors[i] != NULL) {
+		if (sensors[i] != nullptr) {
 			delete sensors[i];
 		}
 	}
@@ -125,13 +122,13 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 			if (i2c_0x49 == I2C_Selection::L_AS7263 ) return new Loom_AS7263(i2c_address=0x49);	// AS7263
 			if (i2c_0x49 == I2C_Selection::L_AS7265X) return new Loom_AS7265X(i2c_address=0x49);	// AS7265X
 			
-		case 0x68 : return NULL; // new Loom_MPU6050();
-		case 0x69 : return NULL; // new Loom_MPU6050();
+		case 0x68 : return nullptr; // new Loom_MPU6050();
+		case 0x69 : return nullptr; // new Loom_MPU6050();
 		case 0x70 : return new Loom_MB1232(i2c_address=0x70); // MB1232
 		case 0x76 : return new Loom_MS5803(i2c_address=0x76); // MS5803
 		case 0x77 : return new Loom_MS5803(i2c_address=0x77); // MS5803
 
-		default : return NULL;
+		default : return nullptr;
 	}
 }
 
@@ -155,7 +152,7 @@ void Loom_Multiplexer::print_state()
 
 	for (uint8_t i = 0; i < num_ports; i++) {
 		LPrint("\tPort ", i, ": ");
-		if (sensors[i] != NULL) {
+		if (sensors[i] != nullptr) {
 			LPrint_Dec_Hex(sensors[i]->get_i2c_address());
 			LPrintln(" - ", sensors[i]->get_module_name() );
 		} else {
@@ -171,7 +168,7 @@ void Loom_Multiplexer::measure()
 	refresh_sensors();
 
 	for (uint8_t i = 0; i < num_ports; i++) {
-		if (sensors[i] != NULL) {
+		if (sensors[i] != nullptr) {
 			tca_select(i);
 			sensors[i]->measure();
 		} 
@@ -182,7 +179,7 @@ void Loom_Multiplexer::measure()
 void Loom_Multiplexer::print_measurements()
 {
 	for (uint8_t i = 0; i < num_ports; i++) {
-		if (sensors[i] != NULL) {
+		if (sensors[i] != nullptr) {
 			tca_select(i);
 			sensors[i]->print_measurements();
 		} 
@@ -253,16 +250,14 @@ void Loom_Multiplexer::refresh_sensors()
 		// LPrintln("TCA Port: ", i);
 		// tca_select(i);
 
-		previous = (sensors[i] != NULL) ? sensors[i]->get_i2c_address() : 0x00;
+		previous = (sensors[i] != nullptr) ? sensors[i]->get_i2c_address() : 0x00;
 		// LPrint("\tPrevious: 0x");
 		// LPrintln_Hex(previous);
 
 		current = get_i2c_on_port(i);
 
-
-		// LPrint("\tNew     : 0x");
-		// LPrintln_Hex(current);
-
+		// LPrint("Current I2C on port ", i, " : ");
+		// LPrintln_Dec_Hex(current);
 
 		// Cases:
 		// No change (prev = current)
@@ -288,17 +283,29 @@ void Loom_Multiplexer::refresh_sensors()
 			// Create new sensor object and setup (in constructor)
 			sensors[i] = generate_sensor_object(current);
 
-			if (sensors[i] != NULL) {
+			if (sensors[i] != nullptr) {
 
-				sensors[i]->adjust_module_name_with_port(i);
+				if (sensors[i]->get_active()) {
+					sensors[i]->adjust_module_name_with_port(i);
 
-				// Make sure sensor is also linked to DeviceManager
-				sensors[i]->link_device_manager(device_manager);
-				// device_manager->add_module(sensors[i]);
+					// Make sure sensor is also linked to DeviceManager
+					sensors[i]->link_device_manager(device_manager);
+					// device_manager->add_module(sensors[i]);
 
 
-				print_module_label();
-				LPrintln("Added ", sensors[i]->get_module_name() );
+					print_module_label();
+					LPrintln("Added ", sensors[i]->get_module_name() );
+				} else {
+					// Sensors will switch themselves to inactive if they dont 
+					// properly initialize. 
+					// If so, don't add sensor
+					print_module_label();
+					LPrintln(sensors[i]->get_module_name(), " failed to initialize");
+
+					delete sensors[i];
+					sensors[i] = nullptr;
+				}
+
 			}
 		} 
 

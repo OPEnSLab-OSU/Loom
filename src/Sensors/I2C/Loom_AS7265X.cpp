@@ -76,6 +76,8 @@ Loom_AS7265X::Loom_AS7265X(
 		// //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	}
 
+	if (!setup) active = false;
+
 	print_module_label();
 	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }

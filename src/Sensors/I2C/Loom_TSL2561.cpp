@@ -41,6 +41,8 @@ Loom_TSL2561::Loom_TSL2561(
 		}
 	}
 
+	if (!setup) active = false;
+
 	print_module_label();
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }

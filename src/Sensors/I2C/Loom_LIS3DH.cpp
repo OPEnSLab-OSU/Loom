@@ -22,6 +22,8 @@ Loom_LIS3DH::Loom_LIS3DH(
   
 	bool setup = inst_LIS3DH->begin();
 
+	if (!setup) active = false;
+
 	print_module_label();
 	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }

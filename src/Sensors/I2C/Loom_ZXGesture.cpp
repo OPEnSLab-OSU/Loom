@@ -39,8 +39,10 @@ Loom_ZXGesture::Loom_ZXGesture(
 		LPrintln("Register Map Version: ", ver);
 	}
 
+	if (!setup) active = false;
+
 	print_module_label();
-	LPrintln("\tInitialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -16,6 +16,8 @@ Loom_FXOS8700::Loom_FXOS8700(
 	inst_FXOS8700 = new Adafruit_FXOS8700(0x8700A, 0x8700B);
 	bool setup = inst_FXOS8700->begin(ACCEL_RANGE_4G);
 
+	if (!setup) active = false;
+
 	print_module_label();
 	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }

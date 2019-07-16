@@ -16,6 +16,8 @@ Loom_FXAS21002::Loom_FXAS21002(
 	inst_FXAS21002 = new Adafruit_FXAS21002C(0x0021002C);
 	bool setup = inst_FXAS21002->begin();
 
+	if (!setup) active = false;
+
 	print_module_label();
 	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
 }

@@ -42,6 +42,8 @@ Loom_TSL2591::Loom_TSL2591(
 		}	
 	} 
 
+	if (!setup) active = false;
+
 	print_module_label();
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }
