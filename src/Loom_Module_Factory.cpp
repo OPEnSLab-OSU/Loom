@@ -52,6 +52,7 @@ const Factory::NameModulePair Factory::LookupTable[] =
 	{"Loom_MB1232",				Construct<Loom_MB1232>,					ConstructDefault<Loom_MB1232>,				ModuleSortType::Sensor },
 	{"Loom_MS5803",				Construct<Loom_MS5803>,					ConstructDefault<Loom_MS5803>,				ModuleSortType::Sensor },
 	{"Loom_SHT31D",				Construct<Loom_SHT31D>,					ConstructDefault<Loom_SHT31D>,				ModuleSortType::Sensor },
+	{"Loom_TMP007",				Construct<Loom_TMP007>,					ConstructDefault<Loom_TMP007>,				ModuleSortType::Sensor },
 	{"Loom_TSL2561",			Construct<Loom_TSL2561>,				ConstructDefault<Loom_TSL2561>,				ModuleSortType::Sensor },
 	{"Loom_TSL2591",			Construct<Loom_TSL2591>,				ConstructDefault<Loom_TSL2591>,				ModuleSortType::Sensor },
 	{"Loom_ZXGesture",			Construct<Loom_ZXGesture>,				ConstructDefault<Loom_ZXGesture>,			ModuleSortType::Sensor },

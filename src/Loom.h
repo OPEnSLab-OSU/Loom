@@ -72,6 +72,7 @@ This is the overview.
 #include "Sensors/I2C/Loom_MPU6050.h"
 #include "Sensors/I2C/Loom_MS5803.h"
 #include "Sensors/I2C/Loom_SHT31D.h"
+#include "Sensors/I2C/Loom_TMP007.h"
 #include "Sensors/I2C/Loom_TSL2561.h"
 #include "Sensors/I2C/Loom_TSL2591.h"
 #include "Sensors/I2C/Loom_ZXGesture.h"

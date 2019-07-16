@@ -12,6 +12,7 @@
 #include "Sensors/I2C/Loom_MPU6050.h"
 #include "Sensors/I2C/Loom_MS5803.h"
 #include "Sensors/I2C/Loom_SHT31D.h"
+#include "Sensors/I2C/Loom_TMP007.h"
 #include "Sensors/I2C/Loom_TSL2561.h"
 #include "Sensors/I2C/Loom_TSL2591.h"
 #include "Sensors/I2C/Loom_ZXGesture.h"
@@ -35,6 +36,7 @@ const byte Loom_Multiplexer::known_addresses[] =
 	0x21, // FXAS21002
 	0x29, // TSL2561 / TSL2591
 	0x39, // TSL2561
+	0x40, // TMP007
 	0x44, // SHT31D
 	0x45, // SHT31D
 	0x49, // TSL2561 / AS726X / AS7265X
@@ -113,6 +115,7 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 			if (i2c_0x29 == I2C_Selection::L_TSL2591) return new Loom_TSL2591(i2c_address=0x29);	// TSL2591
 
 		case 0x39 : return new Loom_TSL2561(i2c_address=0x39);	// TSL2561
+		case 0x40 : return new Loom_TMP007(i2c_address=0x40);	// TMP007
 		case 0x44 : return new Loom_SHT31D(i2c_address=0x44);	// SHT31D
 		case 0x45 : return new Loom_SHT31D(i2c_address=0x45);	// SHT31D
 

@@ -202,6 +202,12 @@ Loom_SHT31D& LoomManager::SHT31D(int idx)
 	return (*(Loom_SHT31D*)( (tmp) ? tmp : &global_stub ));
 }
 
+Loom_TMP007& LoomManager::TMP007(int idx) 
+{
+	LoomModule* tmp = find_module(LoomModule::Type::TMP007, idx, sensor_modules);
+	return (*(Loom_TMP007*)( (tmp) ? tmp : &global_stub ));
+}
+
 Loom_TSL2561& LoomManager::TSL2561(int idx) 
 {
 	LoomModule* tmp = find_module(LoomModule::Type::TSL2561, idx, sensor_modules);

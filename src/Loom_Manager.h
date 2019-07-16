@@ -39,6 +39,7 @@ class Loom_MB1232;
 class Loom_MPU6050;
 class Loom_MS5803;
 class Loom_SHT31D;
+class Loom_TMP007;
 class Loom_TSL2561;
 class Loom_TSL2591;
 class Loom_ZXGesture;
@@ -422,6 +423,7 @@ public:
 	Loom_MPU6050&		MPU6050(int idx = 0);
 	Loom_MS5803&		MS5803(int idx = 0);
 	Loom_SHT31D&		SHT31D(int idx = 0);
+	Loom_TMP007&		TMP007(int idx = 0);
 	Loom_TSL2561&		TSL2561(int idx = 0);
 	Loom_TSL2591&		TSL2591(int idx = 0);
 	Loom_ZXGesture&		ZXGesture(int idx = 0);

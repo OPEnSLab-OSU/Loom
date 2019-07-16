@@ -33,7 +33,7 @@ void LoomSDI12SensorTemplate::print_state()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_TSL2591::print_measurements()
+void LoomSDI12SensorTemplate::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");

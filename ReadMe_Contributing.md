@@ -361,7 +361,9 @@ The includes are sorted into similar types, determine where you class fits best 
 
 ### LoomModule.h
 
-- Type enum
+Update the `Type` enum in the `LoomModule` class to include a name representing your module. The enum value should be the name of your module without the "Loom" prefix. 
+
+The includes are sorted into similar types, determine where you class fits best and add the include at the end of that list.
 
 ### Manager.h
 

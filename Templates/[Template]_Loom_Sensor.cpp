@@ -33,7 +33,7 @@ void LoomSensorTemplate::print_state()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_TSL2591::print_measurements()
+void LoomSensorTemplate::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
