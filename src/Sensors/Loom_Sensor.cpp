@@ -16,7 +16,6 @@ LoomSensor::LoomSensor(
 void LoomSensor::print_config()
 {
 	LoomModule::print_config();
-
 	LPrintln('\t', "Num Samples         : ", num_samples);
 }
 

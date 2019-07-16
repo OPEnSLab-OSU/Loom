@@ -478,7 +478,7 @@ Available `ModuleSortType` options can be found in the "Loom_Module_Factory.h" f
 
 The array is sorted into similar types, determine where you class fits best and add the include at the end of that section.
 
-### Multiplexer.h
+### Multiplexer.h (for I2C sensors)
 
 Some I2C sensors have conflicting addresses. At the top of this file is an enum of sensors that might have a conflict, followed by a series of constants specifying what sensor to interpret those I2C addresses as. 
 

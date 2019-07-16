@@ -43,6 +43,7 @@
 #include "Sensors/I2C/Loom_FXOS8700.h"
 #include "Sensors/I2C/Loom_LIS3DH.h"
 #include "Sensors/I2C/Loom_MB1232.h"
+#include "Sensors/I2C/Loom_MPU6050.h"
 #include "Sensors/I2C/Loom_MS5803.h"
 #include "Sensors/I2C/Loom_SHT31D.h"
 #include "Sensors/I2C/Loom_TMP007.h"

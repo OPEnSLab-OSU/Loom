@@ -82,7 +82,7 @@ public:
 	void		enable_bulb(bool e);
 
 	/// Set gain.
-	// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
+	/// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
 	/// \param[in]	gain	Gain level: 
 	void		set_gain(byte gain);
 

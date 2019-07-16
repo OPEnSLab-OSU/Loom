@@ -125,8 +125,8 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 			if (i2c_0x49 == I2C_Selection::L_AS7263 ) return new Loom_AS7263(i2c_address=0x49);	// AS7263
 			if (i2c_0x49 == I2C_Selection::L_AS7265X) return new Loom_AS7265X(i2c_address=0x49);	// AS7265X
 			
-		case 0x68 : return nullptr; // new Loom_MPU6050();
-		case 0x69 : return nullptr; // new Loom_MPU6050();
+		case 0x68 : return new Loom_MPU6050(i2c_address=0x68);
+		case 0x69 : return new Loom_MPU6050(i2c_address=0x69);
 		case 0x70 : return new Loom_MB1232(i2c_address=0x70); // MB1232
 		case 0x76 : return new Loom_MS5803(i2c_address=0x76); // MS5803
 		case 0x77 : return new Loom_MS5803(i2c_address=0x77); // MS5803
