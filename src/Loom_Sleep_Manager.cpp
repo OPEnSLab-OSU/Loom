@@ -74,95 +74,12 @@ Loom_Sleep_Manager::Mode Loom_Sleep_Manager::get_sleep_mode()
 	return sleep_mode;
 }
 
-
-
-// ///////////////////////////////////////////////////////////////////////////////
-// bool Loom_Sleep_Manager::sleep_until(DateTime future_time)
-// {
-// 	switch(sleep_mode) {
-		
-// 		// Both follow same process, intentional fallthrough
-// 		case Mode::STANDBY :
-// 		case Mode::IDLE :
-// 		{
-// 			// Don't sleep if no RTC to wake up device
-// 			// if (RTC_Inst == nullptr) {
-// 			// 	return false;
-// 			// }
-
-// 			// print_module_label();
-// 			// LPrintln("Will try to sleep until : ");
-// 			// RTC_Inst->print_DateTime(future_time);
-
-
-// 			// // Cannot wake at time in the past
-// 			// DateTime now = RTC_Inst->now();
-// 			// if ( (future_time - now).totalseconds() < 0 ) {
-// 			// 	print_module_label();
-// 			// 	LPrintln("Wont wake from alarm in the past, increasing time to following day");
-// 			// 	// future_time = future + TimeSpan(1,0,0,0);    // might not work if DateTime is several days in past
-				
-// 			// 	// Adjust future_time to be following day at same time intended
-// 			// 	future_time = DateTime(	now.year(), 
-// 			// 							now.month(), 
-// 			// 							now.day(), 
-// 			// 							future_time.hour(), 
-// 			// 							future_time.minute(), 
-// 			// 							future_time.second() )
-// 			// 					+ TimeSpan(1,0,0,0);
-
-// 			// 	print_module_label();
-// 			// 	LPrintln("Will instead try to sleep until : ");
-// 			// 	RTC_Inst->print_DateTime(future_time);
-
-// 			// }
-
-// 			// // Tell RTC_Inst to set RTC time at future_time
-// 			// // Then call sleep_until_interrupt on pin, because that is what it is
-// 			// RTC_Inst->set_alarm(future_time);
-			
-
-// 			// if ( IM ){
-// 			// 	IM->RTC_alarm_exact(future_time);
-// 			// } 
-
-			
-
-// 			// sleep();
-
-
-// 			// digitalWrite(LED_BUILTIN, HIGH);
-
-// 			return true;
-// 		}
-// 		case Mode::SLEEPYDOG : 
-// 			return false; // Can't sleep until a given time unless using RTC, in which case, use Standby or Idle instead
-		
-// 		case Mode::OPENS_LOWPOWER : 
-// 			return false; 
-// 	}
-// }
-
-
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Sleep_Manager::sleep()
 {
 		pre_sleep();
 
 		LowPower.standby();
-		// switch(sleep_mode) {
-			// case Mode::STANDBY : LowPower.standby(); 
-				// break;
-			// case Mode::IDLE 	: LowPower.idle(IDLE_2); 
-				// break;
-
-			// implement
-			// case Mode::SLEEPYDOG 	: return false;   
-
-			// implement
-			// case Mode::OPENS_LOWPOWER 	: return false;
-		// }
-
 		// This is where programs waits until waking
 
 		post_sleep();
@@ -176,27 +93,20 @@ void Loom_Sleep_Manager::pre_sleep()
 	Serial.end();
 	USBDevice.detach();
 
-
-
-	// Don't know why this has to happen twice but it does
-	// attachInterrupt(digitalPinToInterrupt(WAKE_PIN), wake_ISR, LOW);
-	// attachInterrupt(digitalPinToInterrupt(WAKE_PIN), wake_ISR, LOW);
-
 	digitalWrite(LED_BUILTIN, LOW);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::post_sleep()
 {
-
 	// Prevent double trigger of alarm interrupt
 	if (interrupt_manager) {
 		interrupt_manager->get_RTC_module()->clear_alarms();
 	}
 
-	// if (use_LED) {
+	if (use_LED) {
 		digitalWrite(LED_BUILTIN, HIGH);
-	// }
+	}
 
 	#if LOOM_DEBUG == 1
 		USBDevice.attach();
