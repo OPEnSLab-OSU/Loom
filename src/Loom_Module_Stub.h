@@ -15,7 +15,10 @@
 
 
 
-
+/// NOTE: This module is broken, as it attempts to implement member functions
+/// of classes it does not inherit from. If you need to check if you
+/// recieved a stub module, check the modules type using
+/// (LoomModule*)(module)->get_module_type().
 
 class Loom_Module_Stub : public LoomModule
 {

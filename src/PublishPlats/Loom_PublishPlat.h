@@ -41,7 +41,8 @@ public:
 	void package(JsonObject json) override { /* do nothing for now */ }
 	bool cmd_route(JsonObject json) override { /* do nothing for now */}
 
-	/// \param[in] json JSON object to publish
+	/// \param[in] json JSON object to publish. MUST be formatted as 
+	/// { "contents" : [ { "module": "module_name", "data" : {...} }, ... ], "timestamp"(optional) : {...} }
 	/// \returns Whether or not the publish succeded
 	bool publish(const JsonObject json);
 
@@ -60,9 +61,12 @@ protected:
 	virtual bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) = 0;
 
 private:
-
 	LoomInternetPlat* m_internet;
-
 	const uint m_internet_index;
+
+	/// Check that the JSON supplied meets the format criteria required by publish()
+	bool m_validate_json(const JsonObjectConst json);
+	/// Print a JSON error
+	void m_print_json_error(const char* str);
 };
 

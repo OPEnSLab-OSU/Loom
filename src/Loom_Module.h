@@ -83,6 +83,8 @@ public:
 	/// Second stage construction.
 	/// Perform any actions that need all of the devices to be
 	/// initized beforehand - such as looking up an internet platform
+	/// This function is guranteed to be called AFTER all modules have been
+	/// constructed.
 	virtual void	second_stage_ctor();
 
 //=============================================================================
