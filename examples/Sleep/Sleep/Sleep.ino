@@ -15,7 +15,7 @@ void wakeISR() {
 	LPrintln("Alarm went off"); 
 }
 
-LoomManager Loom("");
+LoomManager Loom{};
 
 
 void setup() 

@@ -5,7 +5,7 @@ const char* json_config =
 #include "config.h"
 ;
 
-LoomManager Loom("");
+LoomManager Loom{};
 
 
 #define ALARM_PIN 6

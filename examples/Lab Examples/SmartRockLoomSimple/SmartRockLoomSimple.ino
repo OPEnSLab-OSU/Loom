@@ -33,26 +33,26 @@ void reedISR() {
 
 
 
-LoomManager Manager("");
+LoomManager Loom{};
 
 
 
 void setup() 
 {
-	Manager.begin_LED();
-	Manager.flash_LED(10, 200, 200, true);
-	Manager.begin_serial();
+	Loom.begin_LED();
+	Loom.flash_LED(10, 200, 200, true);
+	Loom.begin_serial();
 
 	pinMode(10, OUTPUT);   
 
-	Manager.parse_config(json_config);
-	Manager.print_config();
+	Loom.parse_config(json_config);
+	Loom.print_config();
 
 	// pinMode(ALARM_PIN, INPUT_PULLUP);
 	// pinMode(REED_PIN, INPUT_PULLUP);
 
-	Manager.InterruptManager().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Manager.InterruptManager().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
+	Loom.InterruptManager().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	Loom.InterruptManager().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -68,20 +68,20 @@ void loop()
 	digitalWrite(10, HIGH);
 	delay(200);
 
-	Manager.measure();
+	Loom.measure();
 
 	digitalWrite(10, LOW);
 
-	Manager.package();
-	Manager.add_data("wakeType", "type", alarmFlag ? "alarm" : "reed");
-	Manager.print_internal_json();
-	Manager.SDCARD().log();
+	Loom.package();
+	Loom.add_data("wakeType", "type", alarmFlag ? "alarm" : "reed");
+	Loom.print_internal_json();
+	Loom.SDCARD().log();
 
 	
 	delay(500);
-	Manager.InterruptManager().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Manager.InterruptManager().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
-	Manager.InterruptManager().RTC_alarm_duration(TimeSpan(600));
+	Loom.InterruptManager().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	Loom.InterruptManager().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
+	Loom.InterruptManager().RTC_alarm_duration(TimeSpan(600));
 
 	// delay(4000);
 
@@ -89,7 +89,7 @@ void loop()
 	reedFlag = false;
 
 	// Go to sleep
-	Manager.SleepManager().sleep();
+	Loom.SleepManager().sleep();
 	// 
 	
 }

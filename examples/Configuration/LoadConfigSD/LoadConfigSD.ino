@@ -7,7 +7,7 @@ const char* json_config =
 #include "config.h"
 ;
 
-LoomManager Loom("");
+LoomManager Loom{};
 
 
 void setup() 

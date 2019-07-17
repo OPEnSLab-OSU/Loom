@@ -17,7 +17,7 @@ const char* json_config_pretty =
 ;
 
 
-LoomManager Loom("");
+LoomManager Loom{};
 
 
 void setup() 
