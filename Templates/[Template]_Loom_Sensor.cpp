@@ -75,7 +75,7 @@ bool LoomSensorTemplate::cmd_route(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomSensorTemplate::calibrate()
+void LoomSensorTemplate::calibrate()
 {
 
 }

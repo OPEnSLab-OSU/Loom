@@ -46,7 +46,7 @@ public:
 	void		power_down() override {} 
 	void		power_up() override {}
 
-	bool	send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
+	bool		send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

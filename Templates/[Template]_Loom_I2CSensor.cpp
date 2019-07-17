@@ -75,7 +75,7 @@ bool LoomI2CSensorTemplate::cmd_route(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomI2CSensorTemplate::calibrate()
+void LoomI2CSensorTemplate::calibrate()
 {
 
 }

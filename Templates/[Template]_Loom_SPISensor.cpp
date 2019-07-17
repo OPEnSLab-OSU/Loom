@@ -75,7 +75,7 @@ bool LoomSPISensorTemplate::cmd_route(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomSPISensorTemplate::calibrate()
+void LoomSPISensorTemplate::calibrate()
 {
 
 }

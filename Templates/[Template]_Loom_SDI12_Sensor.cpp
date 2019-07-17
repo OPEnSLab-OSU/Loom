@@ -75,7 +75,7 @@ bool LoomSDI12SensorTemplate::cmd_route(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomSDI12SensorTemplate::calibrate()
+void LoomSDI12SensorTemplate::calibrate()
 {
 
 }
