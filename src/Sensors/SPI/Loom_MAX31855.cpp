@@ -1,0 +1,68 @@
+
+#include "Loom_MAX31855.h"
+
+
+///////////////////////////////////////////////////////////////////////////////
+Loom_MAX31855::Loom_MAX31855(	
+		const char*		module_name,
+		uint8_t			num_samples, 
+		uint8_t			CS_pin
+	) 
+	: LoomSPISensor( module_name, num_samples ) 
+	, inst_max{CS_pin}
+{
+	this->module_type = LoomModule::Type::MAX31855;
+	inst_max.begin();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+Loom_MAX31855::Loom_MAX31855(JsonArrayConst p)
+	: Loom_MAX31855( EXPAND_ARRAY(p, 3) ) {}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_MAX31855::print_measurements() 
+{
+	print_module_label();
+	LPrintln();
+	LPrintln("\t", "Temperature   : ", temperature, " °C");
+	LPrintln("\t", "Internal Temp : ", internal_temp, " °C");
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_MAX31855::measure() 
+{
+	int i = num_samples;
+	float int_temp = 0, temp = 0, t;
+
+	while (i--) {
+		int_temp += inst_max.readInternal();
+		t = inst_max.readCelsius();
+		if (isnan(t)) {
+			print_module_label();
+			LPrintln("Something wrong with thermocouple!");
+			break;
+		} else {
+			temp += t;
+		}
+	}
+
+	internal_temp = int_temp / num_samples;
+	temperature   = temp / num_samples;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_MAX31855::package(JsonObject json)
+{
+	package_json(json, module_name, 
+		"Temp", temperature
+	);	
+
+	if (package_verbosity == Verbosity::V_HIGH) {
+		package_json(json, module_name, 
+			"Internal", internal_temp
+		);	
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+

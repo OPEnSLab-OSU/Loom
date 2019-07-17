@@ -49,6 +49,7 @@ class Loom_Decagon5TM;
 class Loom_DecagonGS3;
 
 // SPI
+class Loom_MAX31855;
 class Loom_MAX31856;
 
 // CommPlats
@@ -433,6 +434,7 @@ public:
 	Loom_DecagonGS3&	DecagonGS3(int idx = 0);
 
 	// SPI
+	Loom_MAX31855&		MAX31855(int idx = 0);
 	Loom_MAX31856&		MAX31856(int idx = 0);
 
 protected:

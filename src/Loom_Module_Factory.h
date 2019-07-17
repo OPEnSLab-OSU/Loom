@@ -54,6 +54,7 @@
 #include "Sensors/SDI12/Loom_Decagon_5TM.h"
 #include "Sensors/SDI12/Loom_Decagon_GS3.h"
 
+#include "Sensors/SPI/Loom_MAX31855.h"
 #include "Sensors/SPI/Loom_MAX31856.h"
 
 // Other

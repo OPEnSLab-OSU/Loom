@@ -70,13 +70,19 @@ void Loom_MAX31856::print_measurements()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MAX31856::measure() 
 {
-	cj_temp = inst_max->readCJTemperature();
-	temperature = inst_max->readThermocoupleTemperature();
+	// cj_temp = inst_max->readCJTemperature();
+	// temperature = inst_max->readThermocoupleTemperature();
 
-	if (print_verbosity == Verbosity::V_HIGH) {
+	int i = num_samples;
+	float cj = 0, temp = 0;
+
+	while (i--) {
+		cj += inst_max->readCJTemperature();
+		temp += inst_max->readThermocoupleTemperature();
+
 		// Check and print any faults
 		uint8_t fault = inst_max->readFault();
-		if (fault) {
+		if ( (fault) && (print_verbosity == Verbosity::V_HIGH) ) {
 			if (fault & MAX31856_FAULT_CJRANGE) LPrintln("Cold Junction Range Fault");
 			if (fault & MAX31856_FAULT_TCRANGE) LPrintln("Thermocouple Range Fault");
 			if (fault & MAX31856_FAULT_CJHIGH)  LPrintln("Cold Junction High Fault");
@@ -85,8 +91,13 @@ void Loom_MAX31856::measure()
 			if (fault & MAX31856_FAULT_TCLOW)   LPrintln("Thermocouple Low Fault");
 			if (fault & MAX31856_FAULT_OVUV)    LPrintln("Over/Under Voltage Fault");
 			if (fault & MAX31856_FAULT_OPEN)    LPrintln("Thermocouple Open Fault");
-		}
+			break;
+		} 
 	}
+
+	cj_temp = cj / num_samples;
+	temperature   = temp / num_samples;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

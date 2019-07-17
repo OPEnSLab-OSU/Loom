@@ -61,6 +61,7 @@ const Factory::NameModulePair Factory::LookupTable[] =
 	{"Loom_Decagon5TM",			Construct<Loom_Decagon5TM>,				ConstructDefault<Loom_Decagon5TM>,			ModuleSortType::Sensor },
 	{"Loom_DecagonGS3",			Construct<Loom_DecagonGS3>,				ConstructDefault<Loom_DecagonGS3>,			ModuleSortType::Sensor },
 	
+	{"Loom_MAX31855",			Construct<Loom_MAX31855>,				ConstructDefault<Loom_MAX31855>,			ModuleSortType::Sensor },
 	{"Loom_MAX31856",			Construct<Loom_MAX31856>,				ConstructDefault<Loom_MAX31856>,			ModuleSortType::Sensor },
 
 	// Other

@@ -40,7 +40,7 @@ public:
 		// SDI12
 		Decagon5TM, DecagonGS3,
 		// SPI
-		MAX31856,
+		MAX31855, MAX31856,
 		// CommPlats
 		LoRa, nRF, SlipSerial, Bluetooth,
 		// LogPlats

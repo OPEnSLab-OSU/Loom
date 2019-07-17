@@ -250,11 +250,19 @@ Loom_DecagonGS3& LoomManager::DecagonGS3(int idx)
 ///////////////////////////////////////////////////////////////////////////////
 //    --- SPI Sensors ---
 
+Loom_MAX31855& LoomManager::MAX31855(int idx) 
+{
+	LoomModule* tmp = find_module(LoomModule::Type::MAX31855, idx, sensor_modules);
+	return (*(Loom_MAX31855*)( (tmp) ? tmp : &global_stub ));
+}
+
 Loom_MAX31856& LoomManager::MAX31856(int idx) 
 {
 	LoomModule* tmp = find_module(LoomModule::Type::MAX31856, idx, sensor_modules);
 	return (*(Loom_MAX31856*)( (tmp) ? tmp : &global_stub ));
 }
+
+
 
 
 

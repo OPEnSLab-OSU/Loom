@@ -37,7 +37,6 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_config() override;
 	virtual void	print_measurements() override = 0;
 
 private:
