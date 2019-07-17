@@ -190,6 +190,12 @@ Loom_MB1232& LoomManager::MB1232(int idx)
 	return (*(Loom_MB1232*)( (tmp) ? tmp : &global_stub ));
 }
 
+Loom_MMA8451& LoomManager::MMA8451(int idx) 
+{
+	LoomModule* tmp = find_module(LoomModule::Type::MMA8451, idx, sensor_modules);
+	return (*(Loom_MMA8451*)( (tmp) ? tmp : &global_stub ));
+}
+
 Loom_MPU6050& LoomManager::MPU6050(int idx) 
 {
 	LoomModule* tmp = find_module(LoomModule::Type::MPU6050, idx, sensor_modules);

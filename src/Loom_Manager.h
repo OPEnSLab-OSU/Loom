@@ -36,6 +36,7 @@ class Loom_FXAS21002;
 class Loom_FXOS8700;
 class Loom_LIS3DH;
 class Loom_MB1232;
+class Loom_MMA8451;
 class Loom_MPU6050;
 class Loom_MS5803;
 class Loom_SHT31D;
@@ -421,6 +422,7 @@ public:
 	Loom_FXOS8700&		FXOS8700(int idx = 0);
 	Loom_LIS3DH&		LIS3DH(int idx = 0);
 	Loom_MB1232&		MB1232(int idx = 0);
+	Loom_MMA8451&		MMA8451(int idx = 0);
 	Loom_MPU6050&		MPU6050(int idx = 0);
 	Loom_MS5803&		MS5803(int idx = 0);
 	Loom_SHT31D&		SHT31D(int idx = 0);

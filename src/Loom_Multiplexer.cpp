@@ -9,6 +9,7 @@
 #include "Sensors/I2C/Loom_FXOS8700.h"
 #include "Sensors/I2C/Loom_LIS3DH.h"
 #include "Sensors/I2C/Loom_MB1232.h"
+#include "Sensors/I2C/Loom_MMA8451.h"
 #include "Sensors/I2C/Loom_MPU6050.h"
 #include "Sensors/I2C/Loom_MS5803.h"
 #include "Sensors/I2C/Loom_SHT31D.h"
@@ -28,8 +29,8 @@ const byte Loom_Multiplexer::known_addresses[] =
 	0x10, // ZXGESTURESENSOR
 	0x11, // ZXGESTURESENSOR
 	0x19, // LIS3DH
-	0x1C, // FXOS8700
-	0x1D, // FXOS8700
+	0x1C, // MMA8451 / FXOS8700 
+	0x1D, // MMA8451 / FXOS8700
 	0x1E, // FXOS8700
 	0x1F, // FXOS8700
 	0x20, // FXAS21002
@@ -103,8 +104,15 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 		case 0x10 : return new Loom_ZXGesture(i2c_address=0x10);	// ZXGesture
 		case 0x11 : return new Loom_ZXGesture(i2c_address=0x11);	// ZXGesture
 		case 0x19 : return new Loom_LIS3DH(i2c_address=0x19);		// LIS3DH
-		case 0x1C : return new Loom_FXOS8700(i2c_address=0x1C);		// FXOS8700
-		case 0x1D : return new Loom_FXOS8700(i2c_address=0x1D);		// FXOS8700
+
+		case 0x1C : // MMA8451 / FXOS8700
+			if (i2c_0x1C == I2C_Selection::L_MMA8451)  return new Loom_MMA8451(i2c_address=0x1C);	// MMA8451
+			if (i2c_0x1C == I2C_Selection::L_FXOS8700) return new Loom_FXOS8700(i2c_address=0x1C);	// FXOS8700
+
+		case 0x1D : // MMA8451 / FXOS8700
+			if (i2c_0x1D == I2C_Selection::L_MMA8451)  return new Loom_MMA8451(i2c_address=0x1D);	// MMA8451
+			if (i2c_0x1D == I2C_Selection::L_FXOS8700) return new Loom_FXOS8700(i2c_address=0x1D);	// FXOS8700
+
 		case 0x1E : return new Loom_FXOS8700(i2c_address=0x1E);		// FXOS8700
 		case 0x1F : return new Loom_FXOS8700(i2c_address=0x1F);		// FXOS8700
 		case 0x20 : return new Loom_FXAS21002(i2c_address=0x20);	// FXAS21002
@@ -121,15 +129,15 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address)
 
 		case 0x49 : // TSL2561 / AS726X / AS7265X
 			if (i2c_0x49 == I2C_Selection::L_TSL2561) return new Loom_TSL2561(i2c_address=0x49);	// TSL2561
-			if (i2c_0x49 == I2C_Selection::L_AS7262 ) return new Loom_AS7262(i2c_address=0x49);	// AS7262
-			if (i2c_0x49 == I2C_Selection::L_AS7263 ) return new Loom_AS7263(i2c_address=0x49);	// AS7263
+			if (i2c_0x49 == I2C_Selection::L_AS7262 ) return new Loom_AS7262(i2c_address=0x49);		// AS7262
+			if (i2c_0x49 == I2C_Selection::L_AS7263 ) return new Loom_AS7263(i2c_address=0x49);		// AS7263
 			if (i2c_0x49 == I2C_Selection::L_AS7265X) return new Loom_AS7265X(i2c_address=0x49);	// AS7265X
 			
-		case 0x68 : return new Loom_MPU6050(i2c_address=0x68);
-		case 0x69 : return new Loom_MPU6050(i2c_address=0x69);
-		case 0x70 : return new Loom_MB1232(i2c_address=0x70); // MB1232
-		case 0x76 : return new Loom_MS5803(i2c_address=0x76); // MS5803
-		case 0x77 : return new Loom_MS5803(i2c_address=0x77); // MS5803
+		case 0x68 : return new Loom_MPU6050(i2c_address=0x68);	// MPU6050
+		case 0x69 : return new Loom_MPU6050(i2c_address=0x69);	// MPU6050
+		case 0x70 : return new Loom_MB1232(i2c_address=0x70);	// MB1232
+		case 0x76 : return new Loom_MS5803(i2c_address=0x76);	// MS5803
+		case 0x77 : return new Loom_MS5803(i2c_address=0x77);	// MS5803
 
 		default : return nullptr;
 	}
