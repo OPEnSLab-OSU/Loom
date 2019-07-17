@@ -17,7 +17,7 @@ void wakeISR() {
 	detachInterrupt(6); 
 }
 
-LoomManager Manager("Manager", "Loom", 1, 1, DeviceType::NODE, Verbosity::V_LOW, Verbosity::V_LOW);
+LoomManager Manager("Manager", "Loom", 1, 1, LoomManager::DeviceType::NODE, Verbosity::V_LOW, Verbosity::V_LOW);
 
 
 void setup() 
