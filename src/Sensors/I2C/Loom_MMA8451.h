@@ -2,8 +2,8 @@
 
 #include "Loom_I2C_Sensor.h"
 
-#include <Adafruit_MMA8451.h>
 #include <Adafruit_Sensor.h>
+#include <Adafruit_MMA8451.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -57,6 +57,9 @@ public:
 	void		measure() override;
 	void 		package(JsonObject json) override;
 
+	// void		enable_interrupts(bool enable = true);
+	// void 		set_transient_int_threshold(uint8_t range);
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -73,6 +76,8 @@ public:
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
+	// Needs refinement
+	// void 		configure_interrupts();
 
 //=============================================================================
 ///@name	MISCELLANEOUS
