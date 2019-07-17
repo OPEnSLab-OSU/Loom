@@ -1,0 +1,101 @@
+// This file provides examples of the formats of Loom json
+// objects. For configuration, data, and commands
+
+
+// = = = Configuration Object = = =
+
+{
+	"general": {
+		"device_name": "Device",
+		"family": "Loom",
+		"instance_num": 1,
+		"family_num": 0
+	},
+	"components": [
+		{
+			"name": "moduleA",
+			"parameters": "default"
+		},
+		{
+			"name": "moduleB",
+			"parameters": [
+				"moduleB",
+				10,
+				true
+			]
+		}
+	]
+}
+
+
+// = = = Data Object = = =
+// Eventually will support individually timestamped blocks of data
+
+{
+	"type" : "data",
+	"id" : {
+		"name" : "SomeDevice",
+		"instance" : "1",
+		"family" : "Loom",
+		"family_num" : 1
+	},
+	"timestamp" : {
+		"date" : "some_date",
+		"time" : "some_time"
+	},
+	"contents" :
+	[
+		{ 
+			"module" : "moduleA",
+			"data" : [ 
+				{"key1" : "val1"}, 
+				{"key2" : "val2"}, 
+				{"key3" : "val3"}
+			]
+		},
+		{ 
+			"module" : "moduleB",
+			"data" : [ 
+				{"key1" : "val1"}, 
+				{"key2" : "val2"}
+			]
+		}
+	]
+}
+
+
+// = = = Command Object = = =
+
+{
+	"source" : { ... },
+	"destination" : {
+		"name" : "Device",
+		"family" : "Loom",
+		"instance" : 1,
+		"family_num" : 0
+	},
+	"type" : "command",
+	"commands" :
+	[
+		{ 
+			"name" : "moduleA",
+			"func" : "actuation_functionA",
+			"params" : 
+			[
+				"param1",
+				"param2",
+				"param3"
+			]
+		},
+		{ 
+			"name" : "moduleB",
+			"func" : "actuation_functionB",
+			"params" : 
+			[
+				"param1",
+				"param2"
+			]
+		}
+	]
+}
+
