@@ -4,17 +4,6 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomLogPlat::enum_log_plat_string(Platform p)
-{
-	switch(p) {
-		case Platform::SDCARD     : return "SD Card";
-		case Platform::PUSHINGBOX : return "PushingBox";
-		case Platform::OLED       : return "OLED";
-		case Platform::SERIAL_MON : return "Serial";
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
 LoomLogPlat::LoomLogPlat( 
 		const char*		module_name, 
 		bool			enable_rate_filter,

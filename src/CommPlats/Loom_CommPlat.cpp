@@ -4,17 +4,6 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomCommPlat::enum_comm_plat_string(Platform c)
-{
-	switch(c) {
-		case Platform::WIFI : return "WiFi";
-		case Platform::LORA : return "LoRa";
-		case Platform::NRF  : return "nRF";
-		case Platform::SSER : return "SlipSerial";	    
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
 LoomCommPlat::LoomCommPlat( 
 		const char*		module_name, 
 		uint			max_message_len 

@@ -10,16 +10,6 @@
 class LoomLogPlat : public LoomModule
 {
 
-public:
-
-	/// Differnt Logging platforms supported
-	enum class Platform { 
-		SDCARD, 		///< Serial Monitor
-		PUSHINGBOX, 	///< PushingBox 
-		OLED, 			///< OLED Display
-		SERIAL_MON 		///< Serial Monitor
-	};
-
 protected:
 
 	bool			enable_rate_filter;		/// Whether or not to enable a minimum delay between logging
@@ -63,14 +53,6 @@ public:
 /*@{*/ //======================================================================
 
 	virtual void	print_config();
-
-//=============================================================================
-///@name	MISCELLANEOUS
-/*@{*/ //======================================================================
-
-	/// Get c-string of name associated with log platform enum
-	/// \return c-string of log platform
-	static const char* enum_log_plat_string(Platform p);
 
 protected:
 
