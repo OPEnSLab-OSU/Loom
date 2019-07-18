@@ -49,6 +49,17 @@ bool LoomPublishPlat::publish(const JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomPublishPlat::publish()
+{
+	if (device_manager != nullptr) {
+		JsonObject tmp = device_manager->internal_json();
+		if (strcmp(tmp["type"], "data") == 0 ) {
+			publish(tmp);
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void LoomPublishPlat::print_config() 
 {
 	LoomModule::print_config();

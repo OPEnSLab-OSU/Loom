@@ -49,7 +49,7 @@
       'name':'Loom_Ethernet',\
       'parameters':[\
         'Ether1',\
-        [<your-mac-address>],\ 
+        [<your-mac-address>],\
         [192,168,0,1]\
       ]\
     },\

@@ -231,7 +231,14 @@ public:
 	JsonObject	package();
 
 	/// Publish
-	bool		publish(const JsonObject json);
+	/// \param[in]	json	Data object to publish
+	/// \return True if success
+	bool		publish_all(const JsonObject json);
+
+	/// Publish.
+	/// Calls publish_all(const JsonObject json) with interal json
+	/// \return True if success
+	bool		publish_all() { publish_all(internal_json()); }
 
 	/// Iterate over array of commands
 	/// \param[in] json		Object containing commands

@@ -46,6 +46,11 @@ public:
 	/// \returns Whether or not the publish succeded
 	bool publish(const JsonObject json);
 
+	/// Version of log for use with LoomManager.
+	/// Accesses Json from LoomManager
+	void publish();
+
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================

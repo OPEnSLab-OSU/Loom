@@ -452,12 +452,12 @@ JsonObject LoomManager::internal_json(bool clear)
 
 }
 
-bool LoomManager::publish(const JsonObject json)
+bool LoomManager::publish_all(const JsonObject json)
 {
 	bool result = true;
 	for (auto publisher : publish_modules) {
 		if ( (publisher != nullptr) && ( publisher->get_active() ) ){
-			result &= publisher->publish(json);
+			result &= publisher->publish( json );
 		}
 	}
 	return (publish_modules.size() > 0) && result;

@@ -47,7 +47,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	virtual bool	cmd_route(JsonObject) override {}
+	virtual bool	cmd_route(JsonObject json) override {}
 	virtual void 	package(JsonObject json) override {}
 
 	/// Log a Json object
