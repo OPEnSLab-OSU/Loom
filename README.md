@@ -13,7 +13,7 @@
   ·
   <a href="https://wiki.open-sensing.org/doku.php?id=loom">Wiki</a>
   ·
-  <a href=https://github.com/OPEnSLab-OSU/Loom/Readme_Quick_Start.md>Quick Start</a>
+  <a href=https://github.com/OPEnSLab-OSU/Loom/wiki/Quick-Start>Quick Start</a>
 </p>
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3266419.svg)](https://doi.org/10.5281/zenodo.3266419)
@@ -58,11 +58,11 @@ Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team 
 
 ## Quick Start
 
- [Quick Start Guide](https://github.com/OPEnSLab-OSU/Loom/blob/master/Readme_Quick_Start.md)
+ [Quick Start Guide](https://github.com/OPEnSLab-OSU/Loom/wiki/Quick-Start)
 
 ## Hardware Support
 
-[Hardware Support](https://github.com/OPEnSLab-OSU/Loom/blob/master/Readme_Hardware_Support.md)
+[Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support)
 
 ## Documentation
 
@@ -76,7 +76,7 @@ Once installed, the run `doxygen Doxyfile` from the command line (from Loom dire
 
 ## Contributing
 
-Is there hardware support or other feature you would like to add to Loom? Follow our [Guide to contributing to Loom](https://github.com/OPEnSLab-OSU/Loom/blob/master/ReadMe_Contributing.md)
+Is there hardware support or other feature you would like to add to Loom? Follow our [Guide to contributing to Loom](https://github.com/OPEnSLab-OSU/Loom/wiki/Contributing-to-Loom)
 
 ## Versioning
 
