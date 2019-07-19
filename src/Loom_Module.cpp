@@ -86,6 +86,10 @@ const char* LoomModule::get_module_name()
 void LoomModule::set_print_verbosity(Verbosity v) 
 { 
 	print_verbosity = v; 
+	if (print_verbosity == Verbosity::V_HIGH) {
+		print_module_label();
+		LPrintln("Set print verbosity to: ", enum_verbosity_string(v));
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -97,7 +101,11 @@ Verbosity LoomModule::get_print_verbosity()
 ///////////////////////////////////////////////////////////////////////////////
 void LoomModule::set_package_verbosity(Verbosity v) 
 { 
-	package_verbosity = v; 
+	package_verbosity = v;
+	if (print_verbosity == Verbosity::V_HIGH) { 
+		print_module_label();
+		LPrintln("Set package verbosity verbosity to: ", enum_verbosity_string(v));
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

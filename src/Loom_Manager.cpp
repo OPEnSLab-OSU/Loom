@@ -350,9 +350,24 @@ Verbosity LoomManager::get_print_verbosity()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_print_verbosity(Verbosity v)
+void LoomManager::set_print_verbosity(Verbosity v, bool set_modules)
 {
 	print_verbosity = v;
+
+	if (set_modules) {
+		if (rtc_module != nullptr) { rtc_module->set_print_verbosity(v); }
+		if (interrupt_manager != nullptr) { interrupt_manager->set_print_verbosity(v); }
+		if (sleep_manager != nullptr) { sleep_manager->set_print_verbosity(v); }
+
+		// Iterate over lists of modules freeing each
+		set_print_verbosity_aux(v, other_modules);
+		set_print_verbosity_aux(v, sensor_modules);
+		set_print_verbosity_aux(v, actuator_modules);
+		set_print_verbosity_aux(v, comm_modules);
+		set_print_verbosity_aux(v, internet_modules);
+		set_print_verbosity_aux(v, publish_modules);
+		set_print_verbosity_aux(v, log_modules);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -362,9 +377,24 @@ Verbosity LoomManager::get_package_verbosity()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_package_verbosity(Verbosity v)
+void LoomManager::set_package_verbosity(Verbosity v, bool set_modules)
 {
 	package_verbosity = v;
+
+	if (set_modules) {
+		if (rtc_module != nullptr) { rtc_module->set_package_verbosity(v); }
+		if (interrupt_manager != nullptr) { interrupt_manager->set_package_verbosity(v); }
+		if (sleep_manager != nullptr) { sleep_manager->set_package_verbosity(v); }
+
+		// Iterate over lists of modules freeing each
+		set_package_verbosity_aux(v, other_modules);
+		set_package_verbosity_aux(v, sensor_modules);
+		set_package_verbosity_aux(v, actuator_modules);
+		set_package_verbosity_aux(v, comm_modules);
+		set_package_verbosity_aux(v, internet_modules);
+		set_package_verbosity_aux(v, publish_modules);
+		set_package_verbosity_aux(v, log_modules);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

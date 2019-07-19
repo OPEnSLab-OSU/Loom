@@ -379,12 +379,14 @@ public:
 	void		set_instance_num(int n);
 
 	/// Set print verbosity.
-	/// \param[in]	v	New print verbosity
-	void		set_print_verbosity(Verbosity v);
+	/// \param[in]	v			New print verbosity
+	/// \param[in]	set_modules	Whether or not to also apply setting to modules
+	void		set_print_verbosity(Verbosity v, bool set_modules = false);
 		
 	/// Set package verbosity.
 	/// \param[in]	v	New package verbosity
-	void		set_package_verbosity(Verbosity v);
+	/// \param[in]	set_modules	Whether or not to also apply setting to modules
+	void		set_package_verbosity(Verbosity v, bool set_modules = false);
 
 //=============================================================================
 ///@name	MISCELLANEOUS
@@ -604,6 +606,31 @@ private:
 		}
 		modules.clear();
 	}
+
+	/// Called by set_print_verbosity.
+	/// \param[in]	v	New print verbosity for modules
+	template<typename T>
+	void set_print_verbosity_aux(Verbosity v, const std::vector<T>& modules)
+	{
+		for (auto module : modules) {
+			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
+				((LoomModule*)module)->set_print_verbosity(v);
+			}
+		}	
+	}
+		
+	/// Called by set_package_verbosity.
+	/// \param[in]	v	New print verbosity for modules
+	template<typename T>
+	void set_package_verbosity_aux(Verbosity v, const std::vector<T>& modules)
+	{
+		for (auto module : modules) {
+			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
+				((LoomModule*)module)->set_package_verbosity(v);
+			}
+		}	
+	}
+
 
 };
 
