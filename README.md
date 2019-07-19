@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="http://web.engr.oregonstate.edu/~goertzel/OPEnSLogo.png" alt="logo" width="100" height="100">
+    <img src="https://github.com/OPEnSLab-OSU/Loom/blob/gh-pages/OPEnSLogo.png" alt="logo" width="100" height="100">
   </a>
 </p>
 
@@ -11,7 +11,7 @@
   ·
   <a href="https://github.com/OPEnSLab-OSU/Loom/wiki">Loom Wiki</a>
   ·
-  <a href="http://web.engr.oregonstate.edu/~goertzel/Loom_documentation_html/">Documentation</a>
+  <a href="https://openslab-osu.github.io/Loom/html/index.html">Documentation</a>
   ·
   <a href="https://wiki.open-sensing.org/doku.php?id=loom">Wiki</a>
   ·
@@ -70,7 +70,7 @@ Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team 
 
 [Wiki](https://wiki.open-sensing.org/doku.php?id=loom) for general documentation not contained in GitHub readmes
 
-[Doxygen generated documentation](http://web.engr.oregonstate.edu/~goertzel/Loom_documentation/) for documentation of the code and how to use
+[Doxygen generated documentation](https://openslab-osu.github.io/Loom/html/index.html) for documentation of the code and how to use
 
 ***Note***: The documentation does not currently update automatically, if would want to be sure you have the most up to date version of the documentation, you can run Doxygen to manually generate a local copy of the documentation. See the Doxygen website on how to [Install Doxygen](http://www.doxygen.nl/manual/install.html) and [Doxygen Usage](http://www.doxygen.nl/manual/doxygen_usage.html). 
 
