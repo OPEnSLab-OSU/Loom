@@ -66,9 +66,9 @@ void Loom_DS3231::time_adjust(DateTime time)
 {
 	rtc_inst->adjust(time);
 
-	if (print_verbosity == Verbosity::V_HIGH) {
-		print_module_label();
-	}
+	print_module_label();
+	LPrint("Adjusted time to: "); 
+	print_DateTime(time);	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -76,7 +76,8 @@ void Loom_DS3231::set_alarm(DateTime time)
 {
 	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
-
+		LPrintln("Setting alarm for: ");
+		print_DateTime(time);
 	}
 
 	// Set alarm 1
@@ -93,17 +94,14 @@ void Loom_DS3231::set_alarm(TimeSpan duration)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_DS3231::clear_alarms()
 {
-	LPrintln("\n\nClearing DS3231 alarms");
+	print_module_label();
+	LPrintln("Clearing DS3231 alarms");
 	rtc_inst->armAlarm(1, false);
 	rtc_inst->clearAlarm(1);
 	rtc_inst->alarmInterrupt(1, false);
 	rtc_inst->armAlarm(2, false);
 	rtc_inst->clearAlarm(2);
 	rtc_inst->alarmInterrupt(2, false);
-
-	// Not sure if this goes here
-	// rtc_inst->writeSqwPinMode(DS3231_OFF);
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

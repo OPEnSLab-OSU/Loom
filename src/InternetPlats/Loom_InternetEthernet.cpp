@@ -22,6 +22,7 @@ Loom_Ethernet_I::Loom_Ethernet_I(
 	}
 	if(!ip.isNull()) this->m_ip = IPAddress(ip[0], ip[1], ip[2], ip[3]);
 
+	// try to connect to internet
 	connect();
 
 	print_module_label();
@@ -69,6 +70,8 @@ void Loom_Ethernet_I::print_state()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Ethernet_I::connect()
 {
+	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
+
 	// initialize ethernet shield for Feather
 	Ethernet.init(10);
 
@@ -94,7 +97,10 @@ bool Loom_Ethernet_I::is_connected()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Client& Loom_Ethernet_I::connect_to_domain(const char* domain) {
+Client& Loom_Ethernet_I::connect_to_domain(const char* domain) 
+{
+	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
+
 	// if the socket is somehow still open, close it
 	if (m_client.connected()) m_client.stop();
 	// * the rainbow connection *
@@ -120,8 +126,7 @@ constexpr int NTP_PACKET_SIZE = 48; 			// NTP time stamp is in the first 48 byte
 void print_unix_time(unsigned long epoch) 
 {
 	// print Unix time:
-	LPrintln("Epoch:", epoch);
-
+	LPrint("Epoch:", epoch, " = ");
 
 	// print the hour, minute and second:
 	// LPrint("The UTC time is ");       // UTC is the time at Greenwich Meridian (GMT)
@@ -141,6 +146,8 @@ void print_unix_time(unsigned long epoch)
 ///////////////////////////////////////////////////////////////////////////////
 uint32_t Loom_Ethernet_I::get_time()
 {	
+	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
+
 	if (!is_connected()) return 0;
 	
 	if (!m_UDP.begin(localPort)) {
@@ -157,7 +164,6 @@ uint32_t Loom_Ethernet_I::get_time()
 
 	// wait to see if a reply is available
 	delay(1000);
-	print_module_label();
 	if (m_UDP.parsePacket()) {
 		// We've received a packet, read the data from it
 		m_UDP.read(packet_buffer, NTP_PACKET_SIZE); // read the packet into the buffer
@@ -170,7 +176,10 @@ uint32_t Loom_Ethernet_I::get_time()
 		// this is NTP time (seconds since Jan 1 1900):
 		unsigned long secsSince1900 = highWord << 16 | lowWord;
 		
-		LPrint("Seconds since Jan 1 1900 = ", secsSince1900, "\n");
+		if (print_verbosity == Verbosity::V_HIGH) {
+			print_module_label();
+			LPrint("Seconds since Jan 1 1900 = ", secsSince1900, "\n");
+		}
 
 		// now convert NTP time into everyday time:
 		// LPrint("Unix time = ");
@@ -178,10 +187,15 @@ uint32_t Loom_Ethernet_I::get_time()
 		const unsigned long seventyYears = 2208988800UL;
 		// subtract seventy years:
 		epoch = secsSince1900 - seventyYears;
+
+		if (print_verbosity == Verbosity::V_HIGH) {
+			print_module_label();
+			print_unix_time(epoch);
+		}
+	} else {
 		print_module_label();
-		print_unix_time(epoch);
+		LPrint("Failed to parse UDP packet!\n");
 	}
-	else LPrint("Failed to parse UDP packet!\n");
 
 	m_UDP.stop();
 

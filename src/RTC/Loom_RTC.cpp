@@ -1,6 +1,8 @@
 
 #include "Loom_RTC.h"
 #include "Loom_Manager.h"
+#include "../InternetPlats/Loom_InternetPlat.h"
+
 
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
@@ -127,6 +129,7 @@ void LoomRTC::print_time(bool verbose)
 		LPrintln("\tDay : ", get_weekday());
 		LPrintln();
 	} else {
+		LPrint("Time: ");
 		print_DateTime( now() );
 	}
 }
@@ -140,8 +143,7 @@ void LoomRTC::print_DateTime(DateTime time)
 	LPrint(time.day());    LPrint(' ');
 	LPrint(time.hour());   LPrint(':');
 	LPrint(time.minute()); LPrint(':');
-	LPrint(time.second()); 
-	LPrintln();
+	LPrintln(time.second()); 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -234,28 +236,42 @@ void LoomRTC::init()
 	LPrintln("Current Time (before possible resetting)");
 	print_time();
 
-	bool internet_time_success = false;
+	// bool internet_time_success = false;
 
-	// Try to set the time from internet
-	if (get_internet_time) { 
-		internet_time_success = set_rtc_from_internet_time();
+	// // Try to set the time from internet
+	// if (get_internet_time) { 
+	// 	internet_time_success = set_rtc_from_internet_time();
+	// }
+
+	// // If unable to set time via internet, default to normal behavior
+	// if (!internet_time_success) {
+
+	// 	// The following section checks if RTC is running, else sets 
+	// 	// the time to the time that the sketch was compiled
+	// 	if (!_initialized()) {
+	// 		print_module_label();
+	// 		LPrintln("RTC was not initialized");
+	// 		set_rtc_to_compile_time();
+	// 	}
+
+	// 	// Make sure the RTC time is even valid, if not, set to compile time
+	// 	rtc_validity_check();
+
+	// } // of if (!internet_time_success)
+
+
+
+	// The following section checks if RTC is running, else sets 
+	// the time to the time that the sketch was compiled
+	if (!_initialized()) {
+		print_module_label();
+		LPrintln("RTC was not initialized");
+		set_rtc_to_compile_time();
 	}
 
-	// If unable to set time via internet, default to normal behavior
-	if (!internet_time_success) {
+	// Make sure the RTC time is even valid, if not, set to compile time
+	rtc_validity_check();
 
-		// The following section checks if RTC is running, else sets 
-		// the time to the time that the sketch was compiled
-		if (!_initialized()) {
-			print_module_label();
-			LPrintln("RTC was not initialized");
-			set_rtc_to_compile_time();
-		}
-
-		// Make sure the RTC time is even valid, if not, set to compile time
-		rtc_validity_check();
-
-	} // of if (!internet_time_success)
 
 	// Query Time and print
 	print_time();
@@ -281,21 +297,23 @@ bool LoomRTC::set_rtc_from_internet_time()
 	uint32_t unixTime = 0;
 	bool internet_time_success = false;
 
-	// #if is_ethernet == 1  
-	// 	unixTime = get_time_ethernet();
-	// #elif is_wifi == 1
-	// 	unixTime = get_time_wifi();
-	// #endif
+	// Check device manager for an internet platform
+	// Query platform for time
+	if (device_manager != nullptr) {
+		if (device_manager->InternetPlat(0).is_connected() ) {
+			unixTime = device_manager->InternetPlat(0).get_time();
+			print_module_label();
+			LPrintln("Unix Time: ", unixTime);
+		}
+	}
 
-	print_module_label();
-	LPrintln("UNIX TIME: ", unixTime);
 
 	if (unixTime != 0) {
 		// Set to UTC time
 		time_adjust(DateTime(unixTime));
 
 		print_module_label();
-		LPrintln("\nTime set to:");
+		LPrintln("Time set to:");
 		print_time();
 
 		// If not using UTC Time convert to local

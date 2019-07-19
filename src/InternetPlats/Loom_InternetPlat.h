@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Loom_Module.h"
+
 #include "Client.h"
 
 
@@ -39,7 +40,11 @@ public:
 	virtual void package(JsonObject json) override { /* do nothing for now */ }
 	virtual bool cmd_route(JsonObject json) override { /* do nothing for now */}
 
+	/// Try to connect to internet
 	virtual void connect() = 0;
+
+	/// Get if connected to internet
+	/// \return True if connected
 	virtual bool is_connected() = 0;
 
 	/// make NTP request to get UTC time

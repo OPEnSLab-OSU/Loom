@@ -228,6 +228,12 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////
 	// Internet Platforms
+	void connect()
+	{ LPrintln(error_msg); }
+	bool is_connected()
+	{ LPrintln(error_msg); return false; }
+	uint32_t get_time()
+	{ LPrintln(error_msg); return 0; }
 
 
 

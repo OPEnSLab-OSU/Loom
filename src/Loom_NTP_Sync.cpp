@@ -21,7 +21,7 @@ LoomNTPSync::LoomNTPSync(
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomNTPSync::LoomNTPSync(JsonArrayConst p)
-	: LoomNTPSync( EXPAND_ARRAY(p, 2) ) {}
+	: LoomNTPSync( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomNTPSync::second_stage_ctor() 
@@ -34,14 +34,19 @@ void LoomNTPSync::second_stage_ctor()
     else {
         m_last_error = Error::INVAL_INTERNET;
         print_module_label();
-        LPrint("Unable to find internet platform, intstead got: ", (int)(temp->get_module_type()), " using index ", m_internet_module_index, "\n");
+        LPrint("Unable to find internet platform, instead got: ", (int)(temp->get_module_type()), " using index ", m_internet_module_index, "\n");
         return;
     }
     // same for RTC
-    Loom_Interrupt_Manager* inter_temp = &(device_manager->InterruptManager());
-    if (inter_temp->get_module_type() == LoomModule::Type::Interrupt_Manager 
-        && inter_temp->get_RTC_module() != nullptr) m_rtc = inter_temp->get_RTC_module();
-    else {
+    LoomRTC* rtc_temp = device_manager->get_rtc_module();
+    if (rtc_temp != nullptr) {
+        m_rtc = rtc_temp;
+        if (m_internet->is_connected()) {
+            print_module_label();
+            LPrintln("Setting RTC time");
+            m_rtc->time_adjust(m_internet->get_time());
+        }
+    } else {
         m_last_error = Error::INVAL_RTC;
         print_module_label();
         LPrint("Unable to find RTC\n");

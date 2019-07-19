@@ -17,7 +17,7 @@ Loom_GoogleSheets::Loom_GoogleSheets(
 {   
     /// Build the begining of the Google Sheets URL with all of the provided parameters
     print_module_label();
-    LPrint("Google sheets ready with url: ", m_script_url);
+    LPrintln("Google sheets ready with url: ", m_script_url);
 } 
 
 ///////////////////////////////////////////////////////////////////////////////

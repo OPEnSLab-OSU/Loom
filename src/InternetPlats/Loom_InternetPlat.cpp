@@ -23,7 +23,6 @@ Client& LoomInternetPlat::http_request(const char* domain, const char* url, cons
 	return client;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb) {
 	/// print the initial http request

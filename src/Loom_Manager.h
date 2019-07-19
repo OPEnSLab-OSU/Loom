@@ -457,7 +457,7 @@ private:
 	friend class Loom_Interrupt_Manager;
 	friend class Loom_Sleep_Manager;
 	friend class Loom_SD;
-	// friend class LoomLogPlat;
+	friend class LoomNTPSync;
 
 	Loom_Interrupt_Manager*	get_interrupt_manager();
 	Loom_Sleep_Manager*		get_sleep_manager();
