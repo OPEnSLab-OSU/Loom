@@ -218,13 +218,34 @@ public:
 		} 
 		JsonObject json = doc.as<JsonObject>();
 		if (strcmp(json["type"], "data") == 0 ) {
-			
 			package_json(json, module, key, val);
 			return true;
 		} else {
 			return false;
 		}
 	}
+
+	/// Get a data value from Json object of data
+	/// \param[in]	module	LoomModule key is associated with
+	/// \param[in]	key		Key of data value to find
+	/// \return Data value if found 
+	template<typename T>
+	T get_data_as(const char* module, const char* key)
+	{
+		JsonObject json = doc.as<JsonObject>();
+		JsonArray contents = json["contents"];
+		if (!contents.isNull()) {
+			for (auto module_block : contents) {
+				if ( strcmp(module_block["module"], module) == 0 ) {
+					return module_block["data"][key].as<T>();
+				}
+			}
+		}
+		return (T)0;
+	}
+
+	
+
 
 	/// Package data of all modules into JsonObject and return
 	/// \return JsonObject of packaged data of enabled modules
@@ -295,7 +316,6 @@ public:
 	void		add_module(LoomInternetPlat* internet_plat);
 	void 		add_module(LoomPublishPlat* publish_module); 
 	void		add_module(LoomLogPlat* log_plat);
-	
 
 //=============================================================================
 ///@name	GETTERS
@@ -463,8 +483,8 @@ private:
 	Loom_Sleep_Manager*		get_sleep_manager();
 	LoomRTC*				get_rtc_module();
 
+	/// Used to add device info to data object
 	void add_device_ID_to_json(JsonObject json);
-
 
 	///////////////////////////////////////////////////////////////////////////
 	/// Add module to a list of modules
@@ -473,7 +493,7 @@ private:
 	{
 		for (auto module : modules) {
 			module->print_config();
-		}	
+		}
 	}
 
 	///////////////////////////////////////////////////////////////////////////
