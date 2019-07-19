@@ -54,7 +54,13 @@ void Loom_Sleep_Manager::print_state()
 void Loom_Sleep_Manager::powerDown()
 {
 	// Call manager to coordinate modules saving to flash
-	// and running any individual powerDown methods
+
+// to be implemented
+
+	// Use manager to power all modules off
+	if (device_manager != nullptr) {
+		device_manager->power_down();
+	}
 
 	LPrintln("Powering Off");
 	digitalWrite(power_off_pin, HIGH);
@@ -88,6 +94,11 @@ bool Loom_Sleep_Manager::sleep()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::pre_sleep()
 {
+	// Use manager to power all modules off
+	if (device_manager != nullptr) {
+		device_manager->power_down();
+	}
+
 	LPrintln("\nEntering STANDBY");
 	delay(50);
 	Serial.end();
@@ -107,6 +118,12 @@ void Loom_Sleep_Manager::post_sleep()
 	if (use_LED) {
 		digitalWrite(LED_BUILTIN, HIGH);
 	}
+
+	// Use manager to power all active modules up
+	if (device_manager != nullptr) {
+		device_manager->power_up();
+	}
+
 
 	#if LOOM_DEBUG == 1
 		USBDevice.attach();

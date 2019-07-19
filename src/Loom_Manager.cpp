@@ -359,7 +359,7 @@ void LoomManager::set_print_verbosity(Verbosity v, bool set_modules)
 		if (interrupt_manager != nullptr) { interrupt_manager->set_print_verbosity(v); }
 		if (sleep_manager != nullptr) { sleep_manager->set_print_verbosity(v); }
 
-		// Iterate over lists of modules freeing each
+		// Iterate over lists of modules set verbosity for each
 		set_print_verbosity_aux(v, other_modules);
 		set_print_verbosity_aux(v, sensor_modules);
 		set_print_verbosity_aux(v, actuator_modules);
@@ -386,7 +386,7 @@ void LoomManager::set_package_verbosity(Verbosity v, bool set_modules)
 		if (interrupt_manager != nullptr) { interrupt_manager->set_package_verbosity(v); }
 		if (sleep_manager != nullptr) { sleep_manager->set_package_verbosity(v); }
 
-		// Iterate over lists of modules freeing each
+		// Iterate over lists of modules set verbosity for each
 		set_package_verbosity_aux(v, other_modules);
 		set_package_verbosity_aux(v, sensor_modules);
 		set_package_verbosity_aux(v, actuator_modules);
@@ -585,5 +585,35 @@ void LoomManager::free_modules()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomManager::power_up()
+{
+	// Iterate over lists of modules powering active one on
+	power_up_aux(other_modules);
+	power_up_aux(sensor_modules);
+	power_up_aux(actuator_modules);
+	power_up_aux(comm_modules);
+	power_up_aux(internet_modules);
+	power_up_aux(publish_modules);
+	power_up_aux(log_modules);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomManager::power_down()
+{
+	// Iterate over lists of modules powering them off
+	power_down_aux(other_modules);
+	power_down_aux(sensor_modules);
+	power_down_aux(actuator_modules);
+	power_down_aux(comm_modules);
+	power_down_aux(internet_modules);
+	power_down_aux(publish_modules);
+	power_down_aux(log_modules);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 

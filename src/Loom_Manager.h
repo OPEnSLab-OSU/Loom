@@ -244,9 +244,6 @@ public:
 		return (T)0;
 	}
 
-	
-
-
 	/// Package data of all modules into JsonObject and return
 	/// \return JsonObject of packaged data of enabled modules
 	JsonObject	package();
@@ -272,6 +269,14 @@ public:
 	/// \param[in]	ms	Number of milliseconds to pause
 	void		pause(int ms);
 
+	/// Iterate over modules, calling power up method
+	void 		power_up();
+
+	/// Iterate over modules, calling power down method
+	void 		power_down();
+
+
+
 	/// Load and parse a configuration from SD.
 	/// Only replaces current configuration if success
 	/// \param[in]	config_file		File config is in
@@ -282,6 +287,7 @@ public:
 	/// \param[in]	config_file		File to save configuration to
 	/// \return True is success, false if fail or file not found
 	// bool		save_SD_config(const char* config_file);
+
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -627,6 +633,28 @@ private:
 		for (auto module : modules) {
 			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
 				((LoomModule*)module)->set_package_verbosity(v);
+			}
+		}	
+	}
+
+	/// Called by power_up.
+	template<typename T>
+	void power_up_aux(const std::vector<T>& modules)
+	{
+		for (auto module : modules) {
+			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
+				((LoomModule*)module)->power_up();
+			}
+		}	
+	}
+
+	/// Called by power_down.
+	template<typename T>
+	void power_down_aux(const std::vector<T>& modules)
+	{
+		for (auto module : modules) {
+			if ( module != nullptr ){
+				((LoomModule*)module)->power_down();
 			}
 		}	
 	}
