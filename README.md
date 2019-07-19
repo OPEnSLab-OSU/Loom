@@ -9,6 +9,8 @@
   <br>
   <a href="http://www.open-sensing.org/project-loom">Project Page</a>
   ·
+  <a href="https://github.com/OPEnSLab-OSU/Loom/wiki">Loom Wiki</a>
+  ·
   <a href="http://web.engr.oregonstate.edu/~goertzel/Loom_documentation_html/">Documentation</a>
   ·
   <a href="https://wiki.open-sensing.org/doku.php?id=loom">Wiki</a>
