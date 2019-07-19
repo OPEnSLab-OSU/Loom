@@ -1,18 +1,17 @@
 /*! \mainpage An Internet of Things Rapid Prototyping System for applications in environmental sensing
 
-Text
+This is the Doxygen generated documentation of the Loom library code.
 
 \section resources Resources
 
 - [Github](https://github.com/OPEnSLab-OSU/Loom)
+- [Look Wiki](https://github.com/OPEnSLab-OSU/Loom/wiki)
 - [Project Website](http://www.open-sensing.org/project-loom)
-- [Wiki](https://wiki.open-sensing.org/doku.php?id=loom)
+- [Lab Wiki](https://wiki.open-sensing.org/doku.php?id=loom)
 
-\section intro_sec Overview
-
-This is the overview.
 
 */
+
 
 
 
