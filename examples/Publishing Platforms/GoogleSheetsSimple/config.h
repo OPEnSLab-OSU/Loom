@@ -36,10 +36,10 @@
 			'parameters':[\
 				'Goog',\
 				0,\
-				'/macros/s/<your-url>/exec',\
+				'/macros/s/<your-script-id>/exec',\
 				'<your-sheet-id>',\
-				'<your-Tab-id>',\
-				'<your-device-id>'\
+				'<your-tab-name>',\
+				'<your-device-name>'\
 			]\
 		}\
 	]\
