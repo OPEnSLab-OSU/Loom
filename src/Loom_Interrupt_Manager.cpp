@@ -205,7 +205,7 @@ bool Loom_Interrupt_Manager::reconnect_interrupt(byte pin)
 	IntDetails settings = int_settings[pin];
 
 	// Set pin mode
-	pinMode(pin, INPUT_PULLUP);
+	// pinMode(pin, INPUT_PULLUP);  // was causing freezing
 
 	// If ISR provided
 	if (settings.ISR != nullptr) {

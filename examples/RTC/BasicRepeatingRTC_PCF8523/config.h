@@ -1,0 +1,23 @@
+"{\
+	'general':\
+	{\
+		'device_name':'Device',\
+		'family':'Loom',\
+		'instance_num':1,\
+		'family_num':0\
+	},\
+	'components':[\
+		{\
+			'name':'Loom_PCF8523',\
+			'parameters':['PCF8523',11,true,false,6]\
+		},\
+		{\
+			'name':'Loom_Interrupt_Manager',\
+			'parameters':'default'\
+		},\
+		{\
+			'name':'Loom_Analog',\
+			'parameters':'default'\
+		}\
+	]\
+}"

@@ -50,8 +50,6 @@ public:
 /*@{*/ //======================================================================
 
 	DateTime	now() override;
-
-	// proper alarms not really working yet
 	void		set_alarm(DateTime time) override;
 	void		set_alarm(TimeSpan duration) override;
 	void		clear_alarms() override;
