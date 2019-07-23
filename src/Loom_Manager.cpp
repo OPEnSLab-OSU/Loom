@@ -291,7 +291,7 @@ void LoomManager::get_device_name(char* buf)
 ///////////////////////////////////////////////////////////////////////////////
 const char* LoomManager::get_device_name()
 {
-	char name[50];
+	char name[20];
 	get_device_name(name);
 	return (const char*)name;
 }

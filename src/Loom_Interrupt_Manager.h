@@ -8,7 +8,7 @@
 
 
 #define InteruptRange 16		/// Number of interrupts
-#define MaxTimerCount 4			/// Maximum number of timers
+#define MaxTimerCount 2			/// Maximum number of timers
 #define MaxStopWatchCount 2		/// Maximum numbr of stopwatches
 
 
