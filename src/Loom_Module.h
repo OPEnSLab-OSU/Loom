@@ -59,7 +59,8 @@ protected:
 
 	Type			module_type;		/// Module type (hub / node)
 	LoomManager*	device_manager;		/// Pointer to manager
-	char			module_name[20];	/// The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
+	const String	module_name_base;	/// The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
+	const char * 	module_name;
 	bool			active;				/// Whether or not the module should be treated as active
 	bool			print_debug;		/// Individually togglable debug statements
 	Verbosity		print_verbosity;	/// Print verbosity
