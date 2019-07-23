@@ -113,8 +113,9 @@ void LoomManager::begin_serial(bool wait_for_monitor)
 {
 	Serial.begin(SERIAL_BAUD);
 
-	if (wait_for_monitor) {	
-		while(!Serial);
+	if (wait_for_monitor) {
+		unsigned long start = millis();	
+		while( !Serial && ((millis() - start) < MAX_SERIAL_WAIT) );
 		delay(1000);
 	}
 

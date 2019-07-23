@@ -79,8 +79,9 @@ class Loom_Interrupt_Manager;
 class Loom_Multiplexer;
 
 
-#define SERIAL_BAUD	115200
-#define SD_CS 		10
+#define SERIAL_BAUD		115200
+#define MAX_SERIAL_WAIT	20000	/// Maximum number of milliseconds to wait for user given 'begin_serial(true)'
+#define SD_CS			10
 
 
 ///////////////////////////////////////////////////////////////////////////////
