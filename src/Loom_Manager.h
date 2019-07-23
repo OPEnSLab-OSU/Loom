@@ -203,6 +203,41 @@ public:
 	/// \param[out]	json	JsonObject of packaged data of enabled modules
 	void		package(JsonObject json);
 
+	/// Measure and package data.
+	/// Convenience function, current just calls measure then package
+	void		record();
+
+	/// Package data of all modules into JsonObject and return
+	/// \return JsonObject of packaged data of enabled modules
+	JsonObject	package();
+
+	/// Publish
+	/// \param[in]	json	Data object to publish
+	/// \return True if success
+	bool		publish_all(const JsonObject json);
+
+	/// Publish.
+	/// Calls publish_all(const JsonObject json) with interal json
+	/// \return True if success
+	bool		publish_all() { publish_all(internal_json()); }
+
+	/// Iterate over array of commands
+	/// \param[in] json		Object containing commands
+	void		cmd_route(JsonObject json);
+
+	/// Pause for up to 16 seconds.
+	/// You can use this instead of delay to put the device into a 
+	/// semi-low power state.
+	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
+	/// \param[in]	ms	Number of milliseconds to pause
+	void		pause(int ms);
+
+	/// Iterate over modules, calling power up method
+	void 		power_up();
+
+	/// Iterate over modules, calling power down method
+	void 		power_down();
+
 	/// Append to a Json object of data.
 	/// If object is non-empty and contains non-data, 
 	/// will not add and will return false.
@@ -244,39 +279,6 @@ public:
 		}
 		return (T)0;
 	}
-
-	/// Package data of all modules into JsonObject and return
-	/// \return JsonObject of packaged data of enabled modules
-	JsonObject	package();
-
-	/// Publish
-	/// \param[in]	json	Data object to publish
-	/// \return True if success
-	bool		publish_all(const JsonObject json);
-
-	/// Publish.
-	/// Calls publish_all(const JsonObject json) with interal json
-	/// \return True if success
-	bool		publish_all() { publish_all(internal_json()); }
-
-	/// Iterate over array of commands
-	/// \param[in] json		Object containing commands
-	void		cmd_route(JsonObject json);
-
-	/// Pause for up to 16 seconds.
-	/// You can use this instead of delay to put the device into a 
-	/// semi-low power state.
-	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
-	/// \param[in]	ms	Number of milliseconds to pause
-	void		pause(int ms);
-
-	/// Iterate over modules, calling power up method
-	void 		power_up();
-
-	/// Iterate over modules, calling power down method
-	void 		power_down();
-
-
 
 	/// Load and parse a configuration from SD.
 	/// Only replaces current configuration if success

@@ -41,12 +41,6 @@ void LoomModule::link_device_manager(LoomManager* LM)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::second_stage_ctor()
-{
-	// do nothing unless overriden
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void LoomModule::print_module_label()
 {
 	LPrint("[", module_name, "] ");
