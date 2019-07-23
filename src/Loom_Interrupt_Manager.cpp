@@ -56,6 +56,10 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 
 	this->RTC_Inst = RTC_Inst;
 
+
+	// Setup the RTCCounter for internal timer
+	rtcCounter.begin();
+
 	// Note initial wake time
 	if (this->RTC_Inst != nullptr) {
 		last_alarm_time = this->RTC_Inst->now();
@@ -136,6 +140,8 @@ void Loom_Interrupt_Manager::run_pending_ISRs() {
 	run_ISR_bottom_halves();
 	// Run 'ISR' functions for elapsed timers
 	check_timers();
+	// Run delayed ISR for elapsed interal timer
+	run_pending_internal_timer_ISR();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -406,6 +412,98 @@ void Loom_Interrupt_Manager::clear_timer(uint timer_num)
 		print_module_label();
 		LPrintln("Timer number out of range");
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// Configure internal timer
+/// \param[in]	duration		How long timer should take (seconds)
+/// \param[in]	ISR				ISR to run after timer goes off
+/// \param[in]	repeat			Whether or not to be a repeating alarm
+/// \param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
+void Loom_Interrupt_Manager::register_internal_timer(uint duration, ISRFuncPtr ISR, bool repeat, ISR_Type run_type)		
+{
+	internal_timer.ISR		= ISR;
+	internal_timer.run_type	= run_type;
+	internal_timer.duration	= duration;
+	internal_timer.repeat	= repeat;
+	internal_timer.enabled	= true;
+
+	if (run_type == ISR_Type::IMMEDIATE) {
+		rtcCounter.attachInterrupt(ISR);
+	} else {
+		rtcCounter.detachInterrupt();
+	}
+
+	if (repeat) {
+		rtcCounter.setPeriodicAlarm(duration);
+	} else {
+		// Timer is for exact time, need to offset by adding current time
+		rtcCounter.setAlarmEpoch(duration + rtcCounter.getEpoch());
+	}
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// Run a delayed (flag based) ISR if the interal timer elapsed.
+/// Is not needed if using ISR_Type::IMMEDIATE ISR
+/// \return	True if flag was set and ISR run
+bool Loom_Interrupt_Manager::run_pending_internal_timer_ISR()
+{
+	if ( (internal_timer.run_type == ISR_Type::CHECK_FLAG) &&
+		 (internal_timer.ISR != nullptr) &&
+		 (rtcCounter.getFlag()) ) {
+		rtcCounter.clearFlag();
+		LPrintln("Executing ISR");
+		internal_timer.ISR();
+		return true;
+	}
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// Get whether the internal timer has elapsed
+/// \return True if timer elapsed, false otherwise
+bool Loom_Interrupt_Manager::get_internal_timer_flag()
+{
+	return rtcCounter.getFlag();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// Clear internal timer flag
+void Loom_Interrupt_Manager::clear_internal_timer_flag()
+{
+	rtcCounter.clearFlag();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_Interrupt_Manager::internal_timer_enable(bool enable)
+{
+	internal_timer.enabled = enable;
+
+	if (enable) {
+		// Simply re-register with previous settings
+		register_internal_timer(
+			internal_timer.duration,
+			internal_timer.ISR,
+			internal_timer.repeat,
+			internal_timer.run_type
+		);
+	} else {
+		rtcCounter.disableAlarm();
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_Interrupt_Manager::unregister_internal_timer()
+{
+	rtcCounter.disableAlarm();  
+	rtcCounter.detachInterrupt();
+
+	internal_timer.ISR		= nullptr;
+	internal_timer.run_type	= ISR_Type::IMMEDIATE;
+	internal_timer.duration	= 0;
+	internal_timer.repeat	= false;
+	internal_timer.enabled	= false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

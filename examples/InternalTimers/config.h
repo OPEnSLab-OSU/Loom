@@ -1,0 +1,15 @@
+"{\
+	'general':\
+	{\
+		'device_name':'Device',\
+		'family':'Loom',\
+		'instance_num':1,\
+		'family_num':0\
+	},\
+	'components':[\
+		{\
+			'name':'Loom_Interrupt_Manager',\
+			'parameters':'default'\
+		}\
+	]\
+}"

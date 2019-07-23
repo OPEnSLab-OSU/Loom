@@ -4,6 +4,7 @@
 
 #include <OPEnS_RTC.h>
 #include <AsyncDelay.h>
+#include <RTCCounter.h>
 
 
 #define InteruptRange 16		/// Number of interrupts
@@ -50,6 +51,15 @@ private:
 	};
 
 	/// Contains information defining a timer's configuration
+	struct InternalTimerDetails {
+		ISRFuncPtr	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
+		ISR_Type	run_type;		///< True if ISR is called directly upon interrupt, false if called next check of flags
+		uint		duration;		///< The timer duration
+		bool		repeat;			///< Whether or not timer should repeat
+		bool		enabled;		///< Whether or not this timer is enabled
+	};
+
+	/// Contains information defining a timer's configuration
 	struct TimerDetails {
 		ISRFuncPtr	ISR;			///< Not a real ISR, just a function called if timer has expired
 		uint		duration;		///< The timer duration
@@ -65,30 +75,42 @@ private:
 
 protected:
 
-	IntDetails		int_settings[InteruptRange];		/// List of interrupts configurations
+	/// Pointer to an RTC object for managing timers / timed interrupts	
+	LoomRTC*		RTC_Inst;					
+	/// Pointer to a Sleep Manager object
+	Loom_Sleep_Manager* Sleep_Manager;	
+
+	// = = = Interrupts = = =
+
+	/// List of interrupts configurations
+	IntDetails		int_settings[InteruptRange];		
 	
-	// Flags set by interrupts, indicating ISR bottom
-	// half should be called if not Null
+	/// Flags set by interrupts, indicating ISR bottom
+	/// half should be called if not Null
 	static bool 	interrupt_triggered[InteruptRange];
 
-	bool			interrupts_enabled;			/// Enable or disable all interrupts 	-- currently only disables bottom halves
+	/// Enable or disable all interrupts 	-- currently only disables bottom halves
+	bool			interrupts_enabled;			
 	
-	LoomRTC*		RTC_Inst;					/// Pointer to an RTC object for managing timers / timed interrupts	
-	Loom_Sleep_Manager* Sleep_Manager;			/// Pointer to a Sleep Manager object
-	
-	DateTime		last_alarm_time;			/// Last time an alarm went off
+	// = = = Interal Timer = = =
 
+	InternalTimerDetails	internal_timer;
+
+	// = = = Timers = = =
+
+	/// Last time an alarm went off
+	DateTime		last_alarm_time;			
 
 	// millis timers
-
 	AsyncDelay		timers[MaxTimerCount];
 	TimerDetails	timer_settings[MaxTimerCount];
 
+	// = = = Stopwatches = = =
 
 	StopWatchDetails	stopwatch_settings[MaxStopWatchCount];
 
 
-	// interrupt_triggered for timers, also support immediate and delayed
+	// interrupt_triggered equivalent for timers, also support immediate and delayed
 public:
 	
 //=============================================================================
@@ -119,6 +141,10 @@ public:
 	void 		package(JsonObject json) override {}
 	bool		cmd_route(JsonObject) override {}
 
+	/// Run any waiting ISRs.
+	/// Flag was set by a top half ISR
+	void		run_pending_ISRs();
+
 //=============================================================================
 ///@name	EXTERNAL INTERRUPT METHODS
 /*@{*/ //======================================================================
@@ -136,9 +162,6 @@ public:
 	/// \param[in]	pin			Which pin to reconnect the interrupt on
 	bool		reconnect_interrupt(byte pin);
 
-	/// Run any waiting ISRs.
-	/// Flag was set by a top half ISR
-	void		run_pending_ISRs();
 
 	/// Restores pin to default ISR, disables interrupt
 	/// \param[in]	pin				The pin to unregister ISRs for
@@ -198,6 +221,8 @@ public:
 ///@name	ASYNCDELAY TIMER METHODS
 /*@{*/ //======================================================================
 
+// maybe remove in favor of internal timers
+
 	/// Check if timers have elapsed, if so run associated 'ISR'
 	void		check_timers();
 
@@ -221,7 +246,34 @@ public:
 ///@name	INTERNAL TIMER METHODS
 /*@{*/ //======================================================================
 
-	// https://github.com/GabrielNotman/RTCCounter
+	// uses https://github.com/GabrielNotman/RTCCounter
+
+	/// Configure internal timer
+	/// \param[in]	duration		How long timer should take (seconds)
+	/// \param[in]	ISR				ISR to run after timer goes off
+	/// \param[in]	repeat			Whether or not to be a repeating alarm
+	/// \param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
+	void		register_internal_timer(uint duration, ISRFuncPtr ISR, bool repeat, ISR_Type run_type);		
+
+	/// Run a delayed (flag based) ISR if the interal timer elapsed.
+	/// Is not needed if using ISR_Type::IMMEDIATE ISR
+	/// \return	True if flag was set and ISR run
+	bool		run_pending_internal_timer_ISR();
+
+	/// Get whether the internal timer has elapsed
+	/// \return True if timer elapsed, false otherwise
+	bool		get_internal_timer_flag();
+
+	/// Clear internal timer flag
+	void		clear_internal_timer_flag();
+
+	/// Enable or disable internal timer.
+	/// Disabling does not remove settings, use unregister_interal_timer for that behavior
+	/// \param[in]	enable	True to enable timer, false to disable
+	void		internal_timer_enable(bool enable);
+
+	/// Clear and disable internal timer, remove ISR
+	void		unregister_internal_timer();
 
 //=============================================================================
 ///@name	PRINT INFORMATION
