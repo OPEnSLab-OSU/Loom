@@ -195,6 +195,11 @@ public:
 	/// \return True if success
 	bool		parse_config_json(JsonObject config);
 
+	/// Get complete configuration of the device.
+	/// Generally used to save configuration to SD
+	void		get_config();
+
+
 	/// Measure data of all managed sensors
 	void		measure();  
 
@@ -279,12 +284,6 @@ public:
 		}
 		return (T)0;
 	}
-
-	/// Load and parse a configuration from SD.
-	/// Only replaces current configuration if success
-	/// \param[in]	config_file		File config is in
-	/// \return True is success, false if fail or file not found
-	// bool		use_SD_config(const char* config_file);
 
 	/// Save current configuration to SD.
 	/// \param[in]	config_file		File to save configuration to
@@ -661,6 +660,17 @@ private:
 			}
 		}	
 	}
+
+	/// Called by get_config
+	template<typename T>
+	void get_config_aux(const std::vector<T>& modules, JsonObject json)
+	{
+		for (auto module : modules) {
+			if ( module != nullptr ){
+				((LoomModule*)module)->add_config(json);
+			}
+		}	
+	}	
 
 
 };

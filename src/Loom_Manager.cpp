@@ -618,6 +618,37 @@ void LoomManager::power_down()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomManager::get_config()
+{
+	doc.clear();
+	doc["type"] = "config";
+	JsonObject json = doc.as<JsonObject>();
+
+	// Add general device identification
+	JsonObject general_info = json.createNestedObject("general");
+	general_info["device_name"]	= device_name;
+	general_info["instance"]	= instance;
+	general_info["family"]		= family;
+	general_info["family_num"]	= family_num;
+
+	// Start array for modules to add config objects to
+	JsonArray components = json.createNestedArray("components");
+
+	if (rtc_module != nullptr) { rtc_module->add_config(json); }
+	if (interrupt_manager != nullptr) { interrupt_manager->add_config(json); }
+	if (sleep_manager != nullptr) { sleep_manager->add_config(json); }
+
+	// Iterate over lists of modules freeing each
+	get_config_aux(other_modules, json);
+	get_config_aux(sensor_modules, json);
+	get_config_aux(actuator_modules, json);
+	get_config_aux(comm_modules, json);
+	get_config_aux(internet_modules, json);
+	get_config_aux(publish_modules, json);
+	get_config_aux(log_modules, json);	
+}
+
+///////////////////////////////////////////////////////////////////////////////
 
 
 

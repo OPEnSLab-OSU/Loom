@@ -94,4 +94,41 @@ void flatten_json_data_object(JsonObject json);
 /// \param[out]		json	Object to flatten data of
 void flatten_json_data_array(JsonObject json);
 
+///////////////////////////////////////////////////////////////////////////////
+
+
+/// @private (hide from Doxygen)
+/// Termination version no args
+void add_config_aux2(JsonArray parameters); 
+
+/// @private (hide from Doxygen)
+template<typename Arg1, typename... Args>
+void add_config_aux2(JsonArray parameters, const Arg1 arg1, const Args... args)
+{
+	parameters.add(arg1);
+	add_config_aux2(parameters, args...);
+}
+
+
+/// Use to help build configuration Json
+/// \param[in] json		JsonObject to add config info to
+template<typename... Args>
+void add_config_aux(JsonObject json, const char* module_name, const Args... args)
+{
+	JsonArray components = json["components"];
+	if (components.isNull()) {
+		components = json.createNestedArray("components");
+	}
+
+	JsonObject config_info = components.createNestedObject();
+	config_info["name"] = module_name;
+	JsonArray parameters = config_info.createNestedArray("parameters");
+
+	// Add parameters
+	add_config_aux2(parameters, args...);
+}
+///////////////////////////////////////////////////////////////////////////////
+
+// template<typename Arg1>
+// void package_json_aux(JsonObject data, const Arg1 arg1) {} 
 

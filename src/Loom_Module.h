@@ -105,6 +105,11 @@ public:
 	/// Turn on any hardware
 	virtual void	power_up() {}
 
+	/// Add configuration information to JsonObject.
+	/// LoomManager iterates over modules to build complete configuration
+	/// \param[in]	json	Json configuration object to add to
+	virtual void	add_config(JsonObject json) {}//= 0;
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -186,7 +191,7 @@ public:
 
 	/// Get string of name associated with verbosity enum
 	/// \return String of verbosity
-	static char*	enum_verbosity_string(Verbosity v);
+	static const char*	enum_verbosity_string(Verbosity v);
 
 
 
