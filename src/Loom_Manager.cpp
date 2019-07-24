@@ -534,7 +534,7 @@ void LoomManager::cmd_route(JsonObject json)
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::print_internal_json()
+void LoomManager::display_data()
 {
 	print_device_label();
 	LPrintln("Json:");

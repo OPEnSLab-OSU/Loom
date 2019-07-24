@@ -21,7 +21,7 @@ void loop()
 {
 	Loom.measure();
 	Loom.package();
-	Loom.print_internal_json();
+	Loom.display_data();
 
 	// Send to address 1
 	Loom.LoRa().send(1);

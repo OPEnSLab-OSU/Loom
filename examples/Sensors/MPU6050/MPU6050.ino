@@ -23,7 +23,7 @@ void loop()
 	Loom.measure();
 	Loom.MPU6050().print_measurements();
 	// Loom.package();
-	// Loom.print_internal_json();
+	// Loom.display_data();
 
 	delay(500);
 }

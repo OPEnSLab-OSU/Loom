@@ -21,7 +21,7 @@ void setup()
 void loop() 
 {
 	if (Loom.nRF().receive()) {
-		Loom.print_internal_json();
+		Loom.display_data();
 		Loom.SDCARD().log("nrf.csv");
 	}
 

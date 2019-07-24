@@ -22,7 +22,7 @@ void loop()
 	Loom.measure();
 	Loom.package();
 	Loom.MMA8451().print_measurements();
-	Loom.print_internal_json();
+	Loom.display_data();
 
 	delay(2000);
 }

@@ -74,7 +74,7 @@ void loop()
 
 	Loom.package();
 	Loom.add_data("wakeType", "type", alarmFlag ? "alarm" : "reed");
-	Loom.print_internal_json();
+	Loom.display_data();
 	Loom.SDCARD().log();
 
 	

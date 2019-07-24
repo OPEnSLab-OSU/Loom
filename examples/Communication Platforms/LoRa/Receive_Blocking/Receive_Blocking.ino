@@ -20,7 +20,7 @@ void setup()
 void loop() 
 {
 	if (Loom.LoRa().receive_blocking(5000)) {
-		Loom.print_internal_json();
+		Loom.display_data();
 		Loom.SDCARD().log("received.csv");
 	}
 }

@@ -22,7 +22,7 @@ void loop()
 {
 	Loom.measure();
 	Loom.package();
-	Loom.print_internal_json();
+	Loom.display_data();
 
 	// Sent to specific address
 	// Loom.nRF().send(01);

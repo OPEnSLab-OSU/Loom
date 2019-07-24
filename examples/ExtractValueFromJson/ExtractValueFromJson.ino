@@ -18,7 +18,7 @@ void setup()
 
 	Loom.measure();
 	Loom.package();
-	Loom.print_internal_json();
+	Loom.display_data();
 
 	// Get analog A0 value
 	LPrintln("A0 Val: ", Loom.get_data_as<int>("Analog", "A0") );

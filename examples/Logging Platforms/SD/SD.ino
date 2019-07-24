@@ -22,7 +22,7 @@ void loop()
 {
 	Loom.measure();
 	Loom.package();
-	Loom.print_internal_json();
+	Loom.display_data();
 	
 	// Log using default filename as provided in configuration
 	// in this case, 'datafile.csv'

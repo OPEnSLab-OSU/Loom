@@ -307,7 +307,7 @@ public:
 	void 		list_modules();
 
 	/// Print out the internal JSON object
-	void		print_internal_json();
+	void		display_data();
 
 //=============================================================================
 ///@name	ADD MODULE TO MANAGER
