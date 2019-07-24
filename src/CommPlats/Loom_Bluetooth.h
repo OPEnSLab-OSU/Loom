@@ -19,6 +19,8 @@ protected:
 
 	Adafruit_BluefruitLE_SPI* BLE;		/// Bluetooth manager instance
 
+	uint spi_CS, spi_IRQ, spi_RST;
+
 public:
 	
 //=============================================================================
@@ -30,7 +32,7 @@ public:
 	/// \param[in]	module_name					String | <"Bluetooth"> | LoRa module name
 	Loom_Bluetooth(
 			const char*		module_name			= "Bluetooth",
-			int 			max_message_length	= 120,
+			int 			max_message_len		= 120,
 
 			uint			spi_CS				= 8,
 			uint			spi_IRQ				= 7,
@@ -51,6 +53,7 @@ public:
 
 	bool		receive(JsonObject json) override {}
 	bool		send(JsonObject json, uint16_t destination) override {}
+	void		add_config(JsonObject json) override;
 
 	/// Allow a phone to connect
 	/// \param[in] connect_timeout		Max time to allow user to try to connect

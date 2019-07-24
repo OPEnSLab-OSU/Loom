@@ -55,6 +55,7 @@ public:
 
 	void		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
+	void		add_config(JsonObject json) override;
 
 	/// Set servo position.
 	/// \param[in]	servo		The servo number to control

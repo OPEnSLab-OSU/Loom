@@ -5,17 +5,19 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Bluetooth::Loom_Bluetooth( 	
 		const char*		module_name,
-		int 			max_message_length,
+		int 			max_message_len,
 		uint			spi_CS,
 		uint			spi_IRQ,
 		uint			spi_RST
 
 	)
-	: LoomCommPlat( module_name, max_message_length )
+	: LoomCommPlat( module_name, max_message_len )
+	, spi_CS(spi_CS)
+	, spi_IRQ(spi_IRQ)
+	, spi_RST(spi_RST)
 
 { 
 	this->module_type = LoomModule::Type::Bluetooth;
-
 
 	BLE = new Adafruit_BluefruitLE_SPI(spi_CS, spi_IRQ, spi_RST);
 
@@ -28,10 +30,18 @@ Loom_Bluetooth::Loom_Bluetooth(JsonArrayConst p)
 	: Loom_Bluetooth( EXPAND_ARRAY(p, 5) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_Bluetooth::add_config(JsonObject json)
+{
+	// add_config_aux(json, module_name,
+	// 	module_name, 
+	// 	max_message_len, spi_CS, spi_IRQ, spi_RST
+	// );
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Bluetooth::print_config() 
 {
 	LoomCommPlat::print_config();
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

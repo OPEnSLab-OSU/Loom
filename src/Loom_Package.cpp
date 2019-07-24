@@ -60,5 +60,18 @@ void flatten_json_data_array(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 /// @private (hide from Doxygen)
 /// Termination of recursive add_config_aux
-void add_config_aux2(JsonArray parameters) {} 
+void add_config_aux2(JsonArray parameters) {}
+
+
+JsonArray add_config_temp(JsonObject json, const char* module_name)
+{
+	JsonArray components = json["components"];
+	if (components.isNull()) {
+		components = json.createNestedArray("components");
+	}
+
+	JsonObject config_info = components.createNestedObject();
+	config_info["name"] = module_name;
+	return config_info.createNestedArray("params");
+} 
 

@@ -74,6 +74,7 @@ public:
 	bool		receive(JsonObject json) override;
 	bool		send(JsonObject json, uint16_t destination) override;
 	void		broadcast(JsonObject json) override;
+	void		add_config(JsonObject json) override;
 
 	// manually expose superclass version of log() that gets json from
 	// linked LoomManager, calling this classes implementation of 

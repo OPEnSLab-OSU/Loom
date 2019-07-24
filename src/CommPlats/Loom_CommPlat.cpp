@@ -9,9 +9,11 @@ LoomCommPlat::LoomCommPlat(
 		uint			max_message_len 
 	) 
 	: LoomModule( module_name )
+	, max_message_len(max_message_len)
+	, signal_strength(0)
 {
-	this->max_message_len = max_message_len;
-	this->signal_strength = 0;
+	// this->max_message_len = max_message_len;
+	// this->signal_strength = 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -54,6 +54,7 @@ public:
 
 	bool		receive(JsonObject json) override {}
 	bool		send(JsonObject json, uint16_t destination) override {}
+	void		add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

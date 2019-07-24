@@ -13,6 +13,9 @@ Loom_LoRa::Loom_LoRa(
 		uint16_t		retry_timeout 	
 	)
 	: LoomCommPlat( module_name, max_message_len )
+	, address(address)
+	, retry_count(retry_count)
+	, retry_timeout(retry_timeout)
 
 { 
 	this->module_type = LoomModule::Type::LoRa;
@@ -20,10 +23,10 @@ Loom_LoRa::Loom_LoRa(
 	// Create instances of driver and manager
 	this->driver         = new RH_RF95(RFM95_CS, RFM95_INT);
 	this->manager        = new RHReliableDatagram(*driver, address);
-	this->address        = address;
+	// this->address        = address;
 	this->power_level    = ( (power_level >= 5) && (power_level <= 23) ) ? power_level : 23;
-	this->retry_count    = retry_count;
-	this->retry_timeout  = retry_timeout;
+	// this->retry_count    = retry_count;
+	// this->retry_timeout  = retry_timeout;
 
 	pinMode(8, INPUT_PULLUP);
 
@@ -69,6 +72,15 @@ Loom_LoRa::~Loom_LoRa()
 {
 	delete driver;
 	delete manager;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_LoRa::add_config(JsonObject json)
+{
+	// add_config_aux(json, module_name,
+	// 	module_name, 
+	// 	max_message_len, address, power_level, retry_count, retry_timeout
+	// );
 }
 
 ///////////////////////////////////////////////////////////////////////////////

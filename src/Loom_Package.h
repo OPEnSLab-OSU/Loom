@@ -129,6 +129,9 @@ void add_config_aux(JsonObject json, const char* module_name, const Args... args
 }
 ///////////////////////////////////////////////////////////////////////////////
 
-// template<typename Arg1>
-// void package_json_aux(JsonObject data, const Arg1 arg1) {} 
+JsonArray add_config_temp(JsonObject json, const char* module_name);
+
+
+
+
 

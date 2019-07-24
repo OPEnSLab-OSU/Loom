@@ -8,10 +8,9 @@ Loom_Relay::Loom_Relay(
 		byte			pin 
 	) 
 	: LoomActuator( module_name ) 
+	, pin(pin)
 {
 	this->module_type = LoomModule::Type::Relay;
-
-	this->pin = pin;
 
 	pinMode(pin, OUTPUT);
 	on = false;
@@ -21,6 +20,14 @@ Loom_Relay::Loom_Relay(
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Relay::Loom_Relay(JsonArrayConst p)
 	: Loom_Relay( EXPAND_ARRAY(p, 2) ) {}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_Relay::add_config(JsonObject json)
+{
+	add_config_aux(json, module_name,
+		module_name, pin
+	);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::print_config() 

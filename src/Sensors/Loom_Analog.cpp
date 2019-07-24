@@ -71,29 +71,24 @@ Loom_Analog::Loom_Analog(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Analog::add_config(JsonObject json)
 {
-	add_config_aux(json, "Loom_Analog",
-		"Analog", 8, 12
-	);
+	// add_config_aux(json, module_name,
+	// 	module_name, num_samples, read_resolution,
+	// 	pin_enabled[0], pin_enabled[1], pin_enabled[2], pin_enabled[3], pin_enabled[4], pin_enabled[5],
+	// 	(int)conversions[0], (int)conversions[1], (int)conversions[2], (int)conversions[3], (int)conversions[4], (int)conversions[5]
+	// );
+
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(module_name);
+	params.add(num_samples);
+	params.add(read_resolution);
+	for (int i = 0; i < 6; i++) {
+		params.add(pin_enabled[i]);
+	}
+	for (int i = 0; i < 6; i++) {
+		params.add((int)conversions[i]);
+	}
+
 }
-
-
-		// const char*		module_name,
-		// uint8_t			num_samples,
-
-		// uint8_t			read_resolution,
-		// bool			enableA0,
-		// bool			enableA1,
-		// bool			enableA2,
-		// bool			enableA3,
-		// bool			enableA4,
-		// bool			enableA5,
-
-		// Conversion		convertA0,
-		// Conversion		convertA1,
-		// Conversion		convertA2,
-		// Conversion		convertA3,
-		// Conversion		convertA4,
-		// Conversion		convertA5	
 
 ///////////////////////////////////////////////////////////////////////////////
 float Loom_Analog::convert(uint8_t pin, uint16_t analog)

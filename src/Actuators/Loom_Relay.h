@@ -46,6 +46,7 @@ public:
 
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
+	void		add_config(JsonObject json) override;
 
 	/// Set relay state
 	/// \param[in]	state	The state to set relay to (True=HIGH, False=LOW)

@@ -17,6 +17,11 @@ Loom_nRF::Loom_nRF(
 		uint8_t			multicast_level	
 	)
 	: LoomCommPlat( module_name, max_message_len )
+	, data_rate(data_rate)
+	, power_level(power_level)
+	, retry_count(retry_count)
+	, retry_timeout(retry_timeout)
+	, multicast_level(multicast_level)
 {
 	this->module_type = LoomModule::Type::nRF;
 
@@ -29,7 +34,7 @@ Loom_nRF::Loom_nRF(
 	radio->begin();
 
 	// Set data rate
-	this->data_rate = data_rate;
+	// this->data_rate = data_rate;
 	print_module_label();
 	LPrint("Setting nRF data rate to: ");
 	switch (this->data_rate) {
@@ -51,7 +56,7 @@ Loom_nRF::Loom_nRF(
 	}
 
 	// Set power level
-	this->power_level = power_level;
+	// this->power_level = power_level;
 	print_module_label();
 	LPrint("Setting nRF power level to: ");
 	switch (this->power_level) {
@@ -78,8 +83,8 @@ Loom_nRF::Loom_nRF(
 
 
 	// Set retry behavior
-	this->retry_count 	= retry_count;
-	this->retry_timeout	= retry_timeout;
+	// this->retry_count 	= retry_count;
+	// this->retry_timeout	= retry_timeout;
 	if (  ( (retry_timeout >= 0) && (retry_timeout <= 15) ) &&
 		  ( (retry_count >= 0) && (retry_count <= 15) )    ) {
 
@@ -90,7 +95,7 @@ Loom_nRF::Loom_nRF(
 		LPrintln("\t", "Retry count: ", retry_count);
 	} 
 
-	this->multicast_level = multicast_level;
+	// this->multicast_level = multicast_level;
 
 	// Begin network manager with provided address
 	network->begin(90, address); // determine good way to convert change to octal address?
@@ -105,6 +110,16 @@ Loom_nRF::~Loom_nRF()
 {
 	delete network;
 	delete radio;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_nRF::add_config(JsonObject json)
+{
+	// add_config_aux(json, module_name,
+	// 	module_name,
+	// 	max_message_len, address, data_rate, power_level,
+	// 	retry_count, retry_timeout, multicast_level	
+	// );
 }
 
 ///////////////////////////////////////////////////////////////////////////////

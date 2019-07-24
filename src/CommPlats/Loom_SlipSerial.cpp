@@ -29,5 +29,11 @@ Loom_SlipSerial::Loom_SlipSerial(JsonArrayConst p)
 	: Loom_SlipSerial( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_SlipSerial::add_config(JsonObject json)
+{
+	// add_config_aux(json, module_name,
+	// 	module_name, max_message_len
+	// );
+}
 
-
+///////////////////////////////////////////////////////////////////////////////

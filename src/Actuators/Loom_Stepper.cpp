@@ -10,11 +10,10 @@ Loom_Stepper::Loom_Stepper(
 		uint8_t			stepper_count 
 	) 
 	: LoomActuator( module_name ) 
+	, stepper_count(stepper_count)
 {
 	this->module_type = LoomModule::Type::Stepper;
 
-
-	this->stepper_count = stepper_count;
 	this->motors = new Adafruit_StepperMotor*[stepper_count];
 
 	AFMS = new Adafruit_MotorShield();
@@ -34,13 +33,20 @@ Loom_Stepper::Loom_Stepper(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Stepper::~Loom_Stepper() 
 {
-	for (int i = 0; i < stepper_count; i++)
-	{
+	for (int i = 0; i < stepper_count; i++) {
 		delete motors[i];
 	}
 
 	delete motors;
 	delete AFMS;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_Stepper::add_config(JsonObject json)
+{
+	add_config_aux(json, module_name,
+		module_name, stepper_count
+	);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -54,6 +54,7 @@ public:
 /*@{*/ //======================================================================
 
 	bool		dispatch(JsonObject json) override;
+	void		add_config(JsonObject json) override;
 
 	/// Move specified stepper specified steps, speed, and direction
 	/// \param[in]	motor		Which stepper to move (0-3)

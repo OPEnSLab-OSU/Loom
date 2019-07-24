@@ -13,10 +13,9 @@ Loom_Servo::Loom_Servo(
 		uint8_t 		servo_count 
 	) 
 	: LoomActuator( module_name ) 
+	, servo_count(servo_count)
 {
 	this->module_type = LoomModule::Type::Servo;
-
-	this->servo_count = servo_count;
 
 	this->positions = new int[servo_count];
 
@@ -35,6 +34,14 @@ Loom_Servo::~Loom_Servo()
 {
 	delete positions;
 	// delete servo_driver;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_Servo::add_config(JsonObject json)
+{
+	add_config_aux(json, module_name,
+		module_name, servo_count
+	);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
