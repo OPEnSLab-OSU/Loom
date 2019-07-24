@@ -38,7 +38,7 @@ public:
 	/// Take any relevant measurements
 	virtual void	measure() = 0;
 	virtual void 	package(JsonObject json) override = 0;
-	virtual bool	cmd_route(JsonObject) {}
+	virtual bool	dispatch(JsonObject) {}
 
 //=============================================================================
 ///@name	PRINT INFORMATION

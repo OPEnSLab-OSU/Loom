@@ -84,7 +84,7 @@ void Loom_Neopixel::print_state()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Neopixel::cmd_route(JsonObject json)
+bool Loom_Neopixel::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];

@@ -41,7 +41,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	virtual bool	cmd_route(JsonObject) override {}
+	virtual bool	dispatch(JsonObject) override {}
 	virtual void 	package(JsonObject json) override {};
 
 	/// Build json from packet if any exists

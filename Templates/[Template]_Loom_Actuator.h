@@ -41,7 +41,7 @@ public:
 /*@{*/ //======================================================================
 
 	void 		package(JsonObject json) override;
-	bool		cmd_route(JsonObject json) override;
+	bool		dispatch(JsonObject json) override;
 	void		power_down() override {} 
 	void		power_up() override {}
 

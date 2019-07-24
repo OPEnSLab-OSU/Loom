@@ -139,7 +139,7 @@ public:
 /*@{*/ //======================================================================
 
 	void 		package(JsonObject json) override {}
-	bool		cmd_route(JsonObject) override {}
+	bool		dispatch(JsonObject) override {}
 
 	/// Run any waiting ISRs.
 	/// Flag was set by a top half ISR

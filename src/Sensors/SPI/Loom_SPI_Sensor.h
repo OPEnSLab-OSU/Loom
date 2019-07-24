@@ -31,7 +31,7 @@ public:
 	virtual void	calibrate() override {};
 	virtual void	measure() override = 0;
 	virtual void 	package(JsonObject json) override = 0;
-	virtual bool	cmd_route(JsonObject) override {}
+	virtual bool	dispatch(JsonObject) override {}
 
 //=============================================================================
 ///@name	PRINT INFORMATION

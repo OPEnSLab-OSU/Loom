@@ -59,7 +59,7 @@ void LoomI2CSensorTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomI2CSensorTemplate::cmd_route(JsonObject json)
+bool LoomI2CSensorTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];

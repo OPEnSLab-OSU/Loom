@@ -53,7 +53,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	bool		cmd_route(JsonObject json) override;
+	bool		dispatch(JsonObject json) override;
 
 	/// Move specified stepper specified steps, speed, and direction
 	/// \param[in]	motor		Which stepper to move (0-3)

@@ -97,7 +97,7 @@ public:
 	virtual void 	package(JsonObject json) = 0;
 
 	/// Route command to driver 
-	virtual bool	cmd_route(JsonObject json) = 0;
+	virtual bool	dispatch(JsonObject json) = 0;
 
 	/// Turn off any hardware
 	virtual void	power_down() {}

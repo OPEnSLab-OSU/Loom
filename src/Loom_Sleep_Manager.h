@@ -76,7 +76,7 @@ public:
 /*@{*/ //======================================================================
 
 	void 		package(JsonObject json) override {}
-	bool		cmd_route(JsonObject) override {}
+	bool		dispatch(JsonObject) override {}
 
 	/// Put into low power state.
 	/// On wake, program will continue from where it went to sleep

@@ -49,7 +49,7 @@ public:
 
 	void		measure();
 	void 		package(JsonObject json) override { /* do nothing */ };
-	bool		cmd_route(JsonObject) override { /* do nothing */}
+	bool		dispatch(JsonObject) override { /* do nothing */}
 
 //=============================================================================
 ///@name	PRINT INFORMATION

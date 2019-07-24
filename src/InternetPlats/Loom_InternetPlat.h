@@ -38,7 +38,7 @@ public:
 /*@{*/ //======================================================================
 
 	virtual void package(JsonObject json) override { /* do nothing for now */ }
-	virtual bool cmd_route(JsonObject json) override { /* do nothing for now */}
+	virtual bool dispatch(JsonObject json) override { /* do nothing for now */}
 
 	/// Try to connect to internet
 	virtual void connect() = 0;

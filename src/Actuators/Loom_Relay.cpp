@@ -42,7 +42,7 @@ void Loom_Relay::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Relay::cmd_route(JsonObject json)
+bool Loom_Relay::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];

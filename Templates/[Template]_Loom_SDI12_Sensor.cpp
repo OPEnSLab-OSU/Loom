@@ -59,7 +59,7 @@ void LoomSDI12SensorTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomSDI12SensorTemplate::cmd_route(JsonObject json)
+bool LoomSDI12SensorTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];

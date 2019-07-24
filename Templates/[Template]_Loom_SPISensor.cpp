@@ -59,7 +59,7 @@ void LoomSPISensorTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomSPISensorTemplate::cmd_route(JsonObject json)
+bool LoomSPISensorTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];

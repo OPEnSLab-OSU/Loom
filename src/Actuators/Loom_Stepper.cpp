@@ -50,7 +50,7 @@ void Loom_Stepper::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Stepper::cmd_route(JsonObject json)
+bool Loom_Stepper::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];

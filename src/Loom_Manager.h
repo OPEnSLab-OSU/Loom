@@ -223,7 +223,7 @@ public:
 
 	/// Iterate over array of commands
 	/// \param[in] json		Object containing commands
-	void		cmd_route(JsonObject json);
+	void		dispatch(JsonObject json);
 
 	/// Pause for up to 16 seconds.
 	/// You can use this instead of delay to put the device into a 
@@ -557,11 +557,11 @@ private:
 	
 	/// Have each module check against provided command
 	template<typename T>
-	bool cmd_route_aux(JsonObject json, const std::vector<T>& modules)
+	bool dispatch_aux(JsonObject json, const std::vector<T>& modules)
 	{
 		for (auto module : modules) {
 			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-				if ( ((LoomModule*)module)->cmd_route( json ) ) return true;
+				if ( ((LoomModule*)module)->dispatch( json ) ) return true;
 			}
 		}
 		return false;
@@ -569,7 +569,7 @@ private:
 	
 	///////////////////////////////////////////////////////////////////////////
 	/// Have module check against provided command	
-	bool cmd_route_aux(JsonObject json, LoomModule* module);
+	bool dispatch_aux(JsonObject json, LoomModule* module);
 
 	template<typename T>
 	void second_stage_ctor_aux(const std::vector<T>& modules)

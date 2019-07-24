@@ -30,7 +30,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	virtual bool	cmd_route(JsonObject) override = 0;
+	virtual bool	dispatch(JsonObject) override = 0;
 	virtual void 	package(JsonObject json) override {}
 
 //=============================================================================

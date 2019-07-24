@@ -39,7 +39,7 @@ public:
 /*@{*/ //======================================================================
 
 	void package(JsonObject json) override { /* do nothing for now */ }
-	bool cmd_route(JsonObject json) override { /* do nothing for now */}
+	bool dispatch(JsonObject json) override { /* do nothing for now */}
 
 	/// \param[in] json JSON object to publish. MUST be formatted as 
 	/// { "contents" : [ { "module": "module_name", "data" : {...} }, ... ], "timestamp"(optional) : {...} }

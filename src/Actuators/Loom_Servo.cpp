@@ -64,7 +64,7 @@ void Loom_Servo::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Servo::cmd_route(JsonObject json)
+bool Loom_Servo::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];

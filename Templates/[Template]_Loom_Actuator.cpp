@@ -44,7 +44,7 @@ void LoomActuatorTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomActuatorTemplate::cmd_route(JsonObject json)
+bool LoomActuatorTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];

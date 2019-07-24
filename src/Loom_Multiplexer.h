@@ -88,7 +88,7 @@ public:
 
 	void		measure();
 	void 		package(JsonObject json) override;
-	bool		cmd_route(JsonObject) override {}
+	bool		dispatch(JsonObject) override {}
 
 	/// Populate a bundle with a list of sensors currently attached
 	/// \param[out]	json	Json object to populate with sensor list

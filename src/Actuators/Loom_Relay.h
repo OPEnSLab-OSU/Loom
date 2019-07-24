@@ -45,7 +45,7 @@ public:
 /*@{*/ //======================================================================
 
 	void 		package(JsonObject json) override;
-	bool		cmd_route(JsonObject json) override;
+	bool		dispatch(JsonObject json) override;
 
 	/// Set relay state
 	/// \param[in]	state	The state to set relay to (True=HIGH, False=LOW)

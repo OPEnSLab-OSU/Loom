@@ -51,7 +51,7 @@ public:
 	{ LPrintln(error_msg); }
 	void package(JsonObject json) 
 	{ LPrintln(error_msg); }
-	bool cmd_route(JsonObject) 
+	bool dispatch(JsonObject) 
 	{ LPrintln(error_msg); return false; }
 
 	void get_module_name(char* buf)

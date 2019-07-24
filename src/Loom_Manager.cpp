@@ -501,16 +501,16 @@ bool LoomManager::publish_all(const JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::cmd_route_aux(JsonObject json, LoomModule* module)
+bool LoomManager::dispatch_aux(JsonObject json, LoomModule* module)
 {
 	if ( (module != nullptr) && ( module->get_active() ) ){
-		module->cmd_route( json );
+		module->dispatch( json );
 	}
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::cmd_route(JsonObject json)
+void LoomManager::dispatch(JsonObject json)
 {
 	// LPrintln("Command object:");
 	// serializeJsonPretty(json, Serial);
@@ -522,13 +522,13 @@ void LoomManager::cmd_route(JsonObject json)
 			// LPrintln("\n\nCMD:");
 			// serializeJsonPretty(cmd, Serial);
 
-			if ( cmd_route_aux(cmd, actuator_modules) )			continue;
+			if ( dispatch_aux(cmd, actuator_modules) )			continue;
 			
-			if ( cmd_route_aux(cmd, (LoomModule*)rtc_module) )		continue;
-			if ( cmd_route_aux(cmd, other_modules) )			continue;
-			if ( cmd_route_aux(cmd, sensor_modules) )			continue;
-			if ( cmd_route_aux(cmd, comm_modules) )				continue;
-			if ( cmd_route_aux(cmd, log_modules) )				continue;
+			if ( dispatch_aux(cmd, (LoomModule*)rtc_module) )		continue;
+			if ( dispatch_aux(cmd, other_modules) )			continue;
+			if ( dispatch_aux(cmd, sensor_modules) )			continue;
+			if ( dispatch_aux(cmd, comm_modules) )				continue;
+			if ( dispatch_aux(cmd, log_modules) )				continue;
 		}
 	}
 }
