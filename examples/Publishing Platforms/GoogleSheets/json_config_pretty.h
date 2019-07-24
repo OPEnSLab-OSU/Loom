@@ -1,15 +1,15 @@
 "{\
 	'general':\
 	{\
-		'device_name':'Device',\
+		'name':'Device',\
 		'family':'Loom',\
-		'instance_num':1,\
+		'instance':1,\
 		'family_num':0\
 	},\
 	'components':[\
 		{\
-			'name':'Loom_Analog',\
-			'parameters':[\
+			'name':'Analog',\
+			'params':[\
 				'Analog',\
 				8,\
 				12,\
@@ -28,8 +28,8 @@
 			]\
 		},\
 		{\
-			'name':'Loom_Digital',\
-			'parameters':[\
+			'name':'Digital',\
+			'params':[\
 				'Digital',\
 				true,\
 				true,\
@@ -46,16 +46,16 @@
 			]\
 		},\
     {\
-      'name':'Loom_Ethernet',\
-      'parameters':[\
+      'name':'Ethernet',\
+      'params':[\
         'Ether1',\
         [<your-mac-address>],\
         [192,168,0,1]\
       ]\
     },\
     {\
-      'name':'Loom_DS3231',\
-      'parameters':[\
+      'name':'DS3231',\
+      'params':[\
         'RTC1',\
         12,\
         true,\
@@ -64,16 +64,16 @@
        ]\
     },\
     {\
-      'name':'Loom_NTP_Sync',\
-      'parameters':[\
+      'name':'NTP_Sync',\
+      'params':[\
         'NTP1',\
         0,\
         0\
        ]\
     },\
     {\
-      'name':'Loom_GoogleSheets',\
-      'parameters':[\
+      'name':'GoogleSheets',\
+      'params':[\
         'Goog',\
         0,\
         '/macros/s/<your-url>/exec',\
@@ -83,8 +83,8 @@
        ]\
     },\
 		{\
-			'name':'Loom_Interrupt_Manager',\
-			'parameters':[\
+			'name':'Interrupt_Manager',\
+			'params':[\
 				'Interrupt-Manager',\
 				0\
 			]\

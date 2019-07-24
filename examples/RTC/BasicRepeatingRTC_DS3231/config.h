@@ -1,23 +1,23 @@
 "{\
 	'general':\
 	{\
-		'device_name':'Device',\
+		'name':'Device',\
 		'family':'Loom',\
-		'instance_num':1,\
+		'instance':1,\
 		'family_num':0\
 	},\
 	'components':[\
 		{\
-			'name':'Loom_DS3231',\
-			'parameters':['DS3231',11,false,false,6]\
+			'name':'DS3231',\
+			'params':['DS3231',11,false,false,6]\
 		},\
 		{\
-			'name':'Loom_Interrupt_Manager',\
-			'parameters':'default'\
+			'name':'Interrupt_Manager',\
+			'params':'default'\
 		},\
 		{\
-			'name':'Loom_Analog',\
-			'parameters':'default'\
+			'name':'Analog',\
+			'params':'default'\
 		}\
 	]\
 }"

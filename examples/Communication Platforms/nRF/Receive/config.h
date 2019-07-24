@@ -1,15 +1,15 @@
 "{\
 	'general':\
 	{\
-		'device_name':'Device',\
+		'name':'Device',\
 		'family':'Loom',\
-		'instance_num':1,\
+		'instance':1,\
 		'family_num':0\
 	},\
 	'components':[\
 		{\
-			'name':'Loom_nRF',\
-			'parameters':[\
+			'name':'nRF',\
+			'params':[\
 				'nRF',\
 				120,\
 				01,\
@@ -21,8 +21,8 @@
 			]\
 		},\
 		{\
-			'name':'Loom_SD',\
-			'parameters':['SD',true,1000,10,'datafile.csv']\
+			'name':'SD',\
+			'params':['SD',true,1000,10,'datafile.csv']\
 		}\
 	]\
 }"

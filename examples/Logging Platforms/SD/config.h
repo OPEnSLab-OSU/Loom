@@ -1,15 +1,15 @@
 "{\
 	'general':\
 	{\
-		'device_name':'Device',\
+		'name':'Device',\
 		'family':'Loom',\
-		'instance_num':1,\
+		'instance':1,\
 		'family_num':0\
 	},\
 	'components':[\
 		{\
-			'name':'Loom_Analog',\
-			'parameters':[\
+			'name':'Analog',\
+			'params':[\
 				'Analog',\
 				8,\
 				12,\
@@ -28,12 +28,12 @@
 			]\
 		},\
 		{\
-			'name':'Loom_SD',\
-			'parameters':['SD',true,1000,10,'datafile.csv']\
+			'name':'SD',\
+			'params':['SD',true,1000,10,'datafile.csv']\
 		},\
 		{\
-			'name':'Loom_PCF8523',\
-			'parameters':'default'\
+			'name':'PCF8523',\
+			'params':'default'\
 		}\
 
 	]\

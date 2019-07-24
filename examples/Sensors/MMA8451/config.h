@@ -1,19 +1,19 @@
 "{\
 	'general':\
 	{\
-		'device_name':'Device',\
+		'name':'Device',\
 		'family':'Loom',\
-		'instance_num':1,\
+		'instance':1,\
 		'family_num':0\
 	},\
 	'components':[\
 		{\
-			'name':'Loom_Analog',\
-			'parameters':'default'\
+			'name':'Analog',\
+			'params':'default'\
 		},\
 		{\
-			'name':'Loom_MMA8451',\
-			'parameters':'default'\
+			'name':'MMA8451',\
+			'params':'default'\
 		}\
 	]\
 }"

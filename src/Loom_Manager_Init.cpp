@@ -84,8 +84,8 @@ bool LoomManager::parse_config_json(JsonObject config)
 	// Apply LoomManager General Settings
 	JsonObject general = config["general"];
 
-	if (general.containsKey("device_name")) {
-		snprintf(this->device_name, 20, "%s", general["device_name"].as<const char*>());
+	if (general.containsKey("name")) {
+		snprintf(this->device_name, 20, "%s", general["name"].as<const char*>());
 	}
 	if (general.containsKey("family")) {
 		snprintf(this->family, 20, "%s", general["family"].as<const char*>());

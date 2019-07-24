@@ -122,7 +122,7 @@ void add_config_aux(JsonObject json, const char* module_name, const Args... args
 
 	JsonObject config_info = components.createNestedObject();
 	config_info["name"] = module_name;
-	JsonArray parameters = config_info.createNestedArray("parameters");
+	JsonArray parameters = config_info.createNestedArray("params");
 
 	// Add parameters
 	add_config_aux2(parameters, args...);

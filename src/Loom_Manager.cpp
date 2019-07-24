@@ -626,7 +626,7 @@ void LoomManager::get_config()
 
 	// Add general device identification
 	JsonObject general_info = json.createNestedObject("general");
-	general_info["device_name"]	= device_name;
+	general_info["name"]	= device_name;
 	general_info["instance"]	= instance;
 	general_info["family"]		= family;
 	general_info["family_num"]	= family_num;

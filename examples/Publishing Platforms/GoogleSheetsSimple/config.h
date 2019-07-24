@@ -1,39 +1,39 @@
 "{\
 	'general':\
 	{\
-		'device_name':'Device',\
+		'name':'Device',\
 		'family':'Loom',\
-		'instance_num':1,\
+		'instance':1,\
 		'family_num':0\
 	},\
 	'components':[\
 		{\
-			'name':'Loom_Analog',\
-			'parameters':'default'\
+			'name':'Analog',\
+			'params':'default'\
 		},\
 		{\
-			'name':'Loom_Digital',\
-			'parameters':'default'\
+			'name':'Digital',\
+			'params':'default'\
 		},\
 		{\
-			'name':'Loom_Ethernet',\
-			'parameters':[\
+			'name':'Ethernet',\
+			'params':[\
 				'Ether1',\
 				[<your-mac-address>],\
 				[192,168,0,1]\
 			]\
 		},\
 		{\
-			'name':'Loom_NTP_Sync',\
-			'parameters':[\
+			'name':'NTP_Sync',\
+			'params':[\
 				'NTP1',\
 				0,\
 				0\
 			]\
 		},\
 		{\
-			'name':'Loom_GoogleSheets',\
-			'parameters':[\
+			'name':'GoogleSheets',\
+			'params':[\
 				'Goog',\
 				0,\
 				'/macros/s/<your-script-id>/exec',\
