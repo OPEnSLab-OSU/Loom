@@ -5,9 +5,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TMP007::Loom_TMP007(
 		byte			i2c_address, 
-		const char*		module_name 
+		int				mux_port,
+		const char*		module_name
 	) 
-	: LoomI2CSensor( module_name, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address, mux_port )
 {
 	this->module_type = LoomModule::Type::TMP007;
 
@@ -22,7 +23,7 @@ Loom_TMP007::Loom_TMP007(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TMP007::Loom_TMP007(JsonArrayConst p)
-	: Loom_TMP007( EXPAND_ARRAY(p, 2) ) {}
+	: Loom_TMP007( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TMP007::~Loom_TMP007()

@@ -14,6 +14,7 @@ class LoomI2CSensor : public LoomSensor
 protected:
 
 	byte	i2c_address;	/// The sensor's I2C address
+	int		port_num;		/// Used with multiplexer, keep track of port it is on
 
 public:
 	
@@ -24,7 +25,8 @@ public:
 	/// Constructor
 	LoomI2CSensor( 	
 			const char*		module_name, 
-			byte			i2c_address 
+			byte			i2c_address,
+			int				mux_port = -1	// Default to -1 (not on mux)		 
 		);
 
 	/// Destructor
@@ -56,12 +58,6 @@ private:
 
 	// Allow Multiplexer to access private methods of I2C sensor modules
 	friend class Loom_Multiplexer;
-
-	/// Add port number to sensor's name.
-	/// Used by multiplexer so that packaged data can 
-	/// be distinquished by port
-	void			adjust_module_name_with_port(int port);
-
 };
 
 

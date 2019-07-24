@@ -28,9 +28,11 @@ public:
 	/// FXAS21002 module constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x20> | {0x20, 0x21} | I2C address
+	/// \param[in]	mux_port				Int | <-1> | [0-16] | Port on multiplexer
 	/// \param[in]	module_name				String | <"FXAS21002"> | null | FXAS21002 module name
 	Loom_FXAS21002(
 			byte			i2c_address		= 0x20,
+			int				mux_port		= -1,
 			const char*		module_name		= "FXAS21002"
 		);
 

@@ -34,6 +34,7 @@ public:
 	/// AS7262 module constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x49> | {0x49} | I2C address
+	/// \param[in]	mux_port				Int | <-1> | [0-16] | Port on multiplexer
 	/// \param[in]	module_name				String | <"AS7262"> | null | AS7262 module name
 	/// \param[in]	use_bulb				Bool | <false> | {true, false} | Whether or not to use bulb
 	/// \param[in]	gain					Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
@@ -41,6 +42,7 @@ public:
 	/// \param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
 	Loom_AS7262(
 			byte			i2c_address			= 0x49,
+			int				mux_port			= -1,
 			const char*		module_name			= "AS7262",
 			bool			use_bulb			= false,
 			byte			gain				= 1,

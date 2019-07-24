@@ -7,9 +7,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXAS21002::Loom_FXAS21002(
 		byte			i2c_address, 
+		int				mux_port,
 		const char*		module_name
 	)
-	: LoomI2CSensor( module_name, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address, mux_port )
 {
 	this->module_type = LoomModule::Type::FXAS21002;
 
@@ -24,7 +25,7 @@ Loom_FXAS21002::Loom_FXAS21002(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXAS21002::Loom_FXAS21002(JsonArrayConst p)
-	: Loom_FXAS21002( EXPAND_ARRAY(p, 2) ) {}
+	: Loom_FXAS21002( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXAS21002::~Loom_FXAS21002() 

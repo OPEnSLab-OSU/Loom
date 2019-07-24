@@ -30,9 +30,11 @@ public:
 	/// FXOS8700 module constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x1F> | {0x1C, 0x1D, 0x1E, 0x1F} | I2C address
+	/// \param[in]	mux_port				Int | <-1> | [0-16] | Port on multiplexer
 	/// \param[in]	module_name				String | <"FXOS8700"> | null | FXOS8700 module name
 	Loom_FXOS8700(
 			byte			i2c_address		= 0x1F,
+			int				mux_port		= -1,
 			const char*		module_name		= "FXOS8700"
 		);
 

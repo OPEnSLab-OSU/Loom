@@ -49,10 +49,12 @@ public:
 	/// ZXGesture module constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x10> | {0x10, 0x11} | I2C address
+	/// \param[in]	mux_port				Int | <-1> | [0-16] | Port on multiplexer
 	/// \param[in]	module_name				String | <"ZXGesture"> | null | ZXGesture module name
 	/// \param[in]	mode					Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
 	Loom_ZXGesture(
 			byte			i2c_address		= 0x10,
+			int				mux_port		= -1,
 			const char*		module_name		= "ZXGesture",
 			Mode			mode			= Mode::POS
 		);

@@ -7,9 +7,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXOS8700::Loom_FXOS8700(
 		byte			i2c_address, 
+		int				mux_port,
 		const char*		module_name
 	)
-	: LoomI2CSensor( module_name, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address, mux_port )
 {
 	this->module_type = LoomModule::Type::FXOS8700;
 
@@ -24,7 +25,7 @@ Loom_FXOS8700::Loom_FXOS8700(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXOS8700::Loom_FXOS8700(JsonArrayConst p)
-	: Loom_FXOS8700( EXPAND_ARRAY(p, 2) ) {}
+	: Loom_FXOS8700( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXOS8700::~Loom_FXOS8700() 

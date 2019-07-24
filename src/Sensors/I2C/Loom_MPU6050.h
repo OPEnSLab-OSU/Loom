@@ -40,10 +40,12 @@ public:
 	/// Constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x69> | {0x68, 0x69} | I2C address
+	/// \param[in]	mux_port				Int | <-1> | [0-16] | Port on multiplexer
 	/// \param[in]	module_name				String | <"SHT31D"> | null | SHT31D module name
 	/// \param[in]	calibrate				Bool | <true> | {true, false} | Whether or not to calibrate at start
 	Loom_MPU6050(
 			byte			i2c_address		= 0x69,
+			int				mux_port		= -1,
 			const char*		module_name		= "MPU6050",
 			bool			calibrate		= true
 		);

@@ -5,12 +5,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 LoomI2CSensor::LoomI2CSensor( 	
 		const char*		module_name, 
-		byte			i2c_address 
+		byte			i2c_address,
+		int				mux_port 
 	) 
-	: LoomSensor( module_name )
-{
-	this->i2c_address = i2c_address;
-}
+	: LoomSensor( mux_port ? (String(module_name)+'_'+String(mux_port)).c_str() : module_name )
+	, i2c_address(i2c_address)
+	, port_num(mux_port)
+{}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomI2CSensor::print_config()
@@ -24,12 +25,6 @@ void LoomI2CSensor::print_config()
 byte LoomI2CSensor::get_i2c_address() 
 { 
 	return i2c_address; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void LoomI2CSensor::adjust_module_name_with_port(int port)
-{
-	// snprintf(module_name, 20, "%s_%d", module_name, port); 
 }
 
 ///////////////////////////////////////////////////////////////////////////////

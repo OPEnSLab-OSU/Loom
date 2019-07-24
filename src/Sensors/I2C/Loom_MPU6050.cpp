@@ -9,10 +9,11 @@ MPU6050 mpu6050(Wire);
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MPU6050::Loom_MPU6050(
 		byte			i2c_address, 
+		int				mux_port,
 		const char*		module_name,
 		bool			calibrate
 	) 
-	: LoomI2CSensor( module_name, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address, mux_port )
 {
 	this->module_type = LoomModule::Type::MPU6050;
 
@@ -28,7 +29,7 @@ Loom_MPU6050::Loom_MPU6050(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MPU6050::Loom_MPU6050(JsonArrayConst p)
-	: Loom_MPU6050( EXPAND_ARRAY(p, 3) ) {}
+	: Loom_MPU6050( EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MPU6050::print_state()

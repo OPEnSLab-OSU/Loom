@@ -5,8 +5,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LIS3DH::Loom_LIS3DH(
 		byte			i2c_address, 
+		int				mux_port,
 		const char*		module_name
-	) : LoomI2CSensor( module_name, i2c_address )
+	) : LoomI2CSensor( module_name, i2c_address, mux_port )
 {
 	this->module_type = LoomModule::Type::LIS3DH;
 
@@ -30,7 +31,7 @@ Loom_LIS3DH::Loom_LIS3DH(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LIS3DH::Loom_LIS3DH(JsonArrayConst p)
-	: Loom_LIS3DH( EXPAND_ARRAY(p, 2) ) {}
+	: Loom_LIS3DH( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LIS3DH::~Loom_LIS3DH() 

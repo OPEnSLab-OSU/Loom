@@ -25,9 +25,11 @@ public:
 	/// MB1232 module constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x70> | {0x70} | I2C address
+	/// \param[in]	mux_port				Int | <-1> | [0-16] | Port on multiplexer
 	/// \param[in]	module_name				String | <"MB1232"> | null | MB1232 module name
 	Loom_MB1232(
 			byte			i2c_address		= 0x70,
+			int				mux_port		= -1,
 			const char*		module_name		= "MB1232"
 		);
 

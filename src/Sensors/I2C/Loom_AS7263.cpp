@@ -5,13 +5,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7263::Loom_AS7263(
 		byte			i2c_address, 
+		int				mux_port,
 		const char*		module_name,
 		bool			use_bulb, 
 		byte			gain, 
 		byte			mode, 
 		byte			integration_time
 	)
-	: LoomI2CSensor( module_name, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address, mux_port )
 {
 	this->module_type = LoomModule::Type::AS7263;
 
@@ -30,7 +31,7 @@ Loom_AS7263::Loom_AS7263(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7263::Loom_AS7263(JsonArrayConst p)
-	: Loom_AS7263( EXPAND_ARRAY(p, 6) ) {}
+	: Loom_AS7263( EXPAND_ARRAY(p, 7) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7263::print_config()

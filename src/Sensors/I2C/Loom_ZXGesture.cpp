@@ -5,10 +5,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ZXGesture::Loom_ZXGesture(
 		byte			i2c_address, 
-		const char*		module_name, 
+		int				mux_port, 
+		const char*		module_name,
 		Mode			mode
 	)
-	: LoomI2CSensor( module_name, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address, mux_port )
 {
 	this->module_type = LoomModule::Type::ZXGesture;
 
@@ -47,7 +48,7 @@ Loom_ZXGesture::Loom_ZXGesture(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ZXGesture::Loom_ZXGesture(JsonArrayConst p)
-	: Loom_ZXGesture(p[0], p[1], (Mode)(int)p[2])
+	: Loom_ZXGesture(p[0], p[1], p[2], (Mode)(int)p[3])
 {}
 
 ///////////////////////////////////////////////////////////////////////////////

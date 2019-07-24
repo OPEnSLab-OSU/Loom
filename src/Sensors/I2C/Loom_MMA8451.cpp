@@ -5,10 +5,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MMA8451::Loom_MMA8451(
 		byte			i2c_address, 
+		int				mux_port,
 		const char*		module_name,
 		mma8451_range_t	range
 	) 
-	: LoomI2CSensor( module_name, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address, mux_port )
 	, range{range}
 {
 	this->module_type = LoomModule::Type::MMA8451;
@@ -29,7 +30,7 @@ Loom_MMA8451::Loom_MMA8451(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MMA8451::Loom_MMA8451(JsonArrayConst p)
-	: Loom_MMA8451(p[0], p[1], (mma8451_range_t)(int)p[2]) {}
+	: Loom_MMA8451(p[0], p[1], p[2], (mma8451_range_t)(int)p[3]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MMA8451::print_config()

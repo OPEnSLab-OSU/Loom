@@ -9,9 +9,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MB1232::Loom_MB1232(
 		byte			i2c_address,
+		int				mux_port,
 		const char*		module_name
 	)
-	: LoomI2CSensor( module_name, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address, mux_port )
 {	
 	this->module_type = LoomModule::Type::MB1232;
 
@@ -32,7 +33,7 @@ Loom_MB1232::Loom_MB1232(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MB1232::Loom_MB1232(JsonArrayConst p)
-	: Loom_MB1232( EXPAND_ARRAY(p, 2) ) {}
+	: Loom_MB1232( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MB1232::print_measurements()

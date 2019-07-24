@@ -7,11 +7,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TSL2591::Loom_TSL2591(
 		byte			i2c_address, 
+		int				mux_port,
 		const char*		module_name, 
 		uint8_t			gain_level, 
 		uint8_t			timing_level
 	)
-	: LoomI2CSensor( module_name, i2c_address )
+	: LoomI2CSensor( module_name, i2c_address, mux_port )
 {
 	this->module_type = LoomModule::Type::TSL2591;
 
@@ -50,7 +51,7 @@ Loom_TSL2591::Loom_TSL2591(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TSL2591::Loom_TSL2591(JsonArrayConst p)
-	: Loom_TSL2591( EXPAND_ARRAY(p, 4) ) {}
+	: Loom_TSL2591( EXPAND_ARRAY(p, 5) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TSL2591::print_measurements()
