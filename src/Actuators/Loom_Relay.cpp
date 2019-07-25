@@ -32,7 +32,7 @@ void Loom_Relay::add_config(JsonObject json)
 void Loom_Relay::print_state()
 {
 	print_module_label();
-	LPrintln('\t', "Relay ", pin, (on) ? " On" : " Off" );
+	LPrintln("\tRelay ", pin, (on) ? " On" : " Off" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -44,15 +44,15 @@ void Loom_Relay::package(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Relay::dispatch(JsonObject json)
 {
-	if ( strcmp(json["module"], module_name) == 0 ) {
-		JsonArray params = json["params"];
-		return functionRoute(
-			json["func"],
-			"set", [this, params]() { if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } else { LPrintln("Not enough parameters"); } } 
-		);
-	} else {
-		return false;
-	}
+	// if ( strcmp(json["module"], module_name) == 0 ) {
+	// 	JsonArray params = json["params"];
+	// 	return functionRoute(
+	// 		json["func"],
+	// 		"set", [this, params]() { if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } else { LPrintln("Not enough parameters"); } } 
+	// 	);
+	// } else {
+	// 	return false;
+	// }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

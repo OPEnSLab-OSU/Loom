@@ -54,9 +54,9 @@ void Loom_Servo::print_config()
 void Loom_Servo::print_state()
 {
 	print_module_label();
-	LPrintln('\t', "Servo Positions:" );
+	LPrintln("\tServo Positions:" );
 	for (int i = 0; i < servo_count; i++) {
-		LPrintln('\t\t', "Degree ", i, ": ", positions[i] );
+		LPrintln("\t\tDegree ", i, ": ", positions[i] );
 	}
 }
 
@@ -73,15 +73,15 @@ void Loom_Servo::package(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Servo::dispatch(JsonObject json)
 {
-	if ( strcmp(json["module"], module_name) == 0 ) {
-		JsonArray params = json["params"];
-		return functionRoute(
-			json["func"],
-			"set_degree", [this, params]() { if (params.size() >= 2) { set_degree( EXPAND_ARRAY(params, 2) ); } else { LPrintln("Not enough parameters"); } } 
-		);
-	} else {
-		return false;
-	}
+	// if ( strcmp(json["module"], module_name) == 0 ) {
+	// 	JsonArray params = json["params"];
+	// 	return functionRoute(
+	// 		json["func"],
+	// 		"set_degree", [this, params]() { if (params.size() >= 2) { set_degree( EXPAND_ARRAY(params, 2) ); } else { LPrintln("Not enough parameters"); } } 
+	// 	);
+	// } else {
+	// 	return false;
+	// }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
