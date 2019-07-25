@@ -8,7 +8,7 @@
 #include <EnableInterrupt.h>
 
 
-byte LoomRTC::int_pin = 0; 
+// byte LoomRTC::int_pin = 0; 
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -72,9 +72,9 @@ LoomRTC::LoomRTC(
 
 		TimeZone			timezone,
 		bool				use_utc_time,
-		bool				get_internet_time,	
+		bool				get_internet_time
 
-		byte				interrupt_pin
+		// byte				interrupt_pin
 	) 
 	: LoomModule( module_name, module_type )
 	, timezone(timezone)
@@ -86,13 +86,13 @@ LoomRTC::LoomRTC(
 	// this->use_utc_time 		= use_utc_time;
 	// this->get_internet_time = get_internet_time;
 
-	int_pin					= interrupt_pin;
+	// int_pin					= interrupt_pin;
 	// RTC_Int_Pin 			= int_pin; 		// This is static so ISR can be static (currently int_pin was made static instead)
 
 
-	if (int_pin > 0) {
-		pinMode(int_pin, INPUT_PULLUP);		
-	}
+	// if (int_pin > 0) {
+	// 	pinMode(int_pin, INPUT_PULLUP);		
+	// }
 
 	// clear_alarms();
 }
@@ -102,14 +102,15 @@ void LoomRTC::print_config()
 {
 	LoomModule::print_config();
 
-	LPrintln('\t', "Interrupt Pin       : ", int_pin);
-	LPrintln('\t', "Use UTC Time        : ", use_utc_time);
-	LPrintln('\t', "Get Internet Time   : ", get_internet_time);
+	// LPrintln("\tInterrupt Pin       : ", int_pin);
+	LPrintln("\tUse UTC Time        : ", use_utc_time);
+	LPrintln("\tGet Internet Time   : ", get_internet_time);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomRTC::print_state()
 {
+	LoomModule::print_state();
 	print_time();
 }
 
@@ -158,7 +159,7 @@ void LoomRTC::read_rtc()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-char* LoomRTC::get_datestring()
+const char* LoomRTC::get_datestring()
 {
 	DateTime time = now();
 	sprintf(datestring, "%d/%d/%d", time.year(), time.month(), time.day() );
@@ -174,7 +175,7 @@ void LoomRTC::get_datestring(char* buf)
 } 
 
 ///////////////////////////////////////////////////////////////////////////////
-char* LoomRTC::get_timestring()
+const char* LoomRTC::get_timestring()
 {
 	DateTime time = now();
 	sprintf(timestring, "%d:%d:%d", time.hour(), time.minute(), time.second() );
@@ -187,12 +188,6 @@ void LoomRTC::get_timestring(char* buf)
 	DateTime time = now();
 	sprintf(buf, "%d:%d:%d", time.hour(), time.minute(), time.second() );
 	strcpy(timestring, buf);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-char* LoomRTC::get_weekday()
-{
-	return (char*)daysOfTheWeek[ now().dayOfTheWeek() ];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -327,7 +322,7 @@ bool LoomRTC::set_rtc_from_internet_time()
 	} 
 
 	print_module_label();
-	LPrintln("Set time from internet ", (internet_time_success) ? "successful" : "failed", "\n");
+	LPrintln("Set time from internet ", (internet_time_success) ? "successful" : "failed");
 
 	return internet_time_success;
 } 
@@ -374,20 +369,20 @@ bool LoomRTC::rtc_validity_check()
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-byte LoomRTC::get_interrupt_pin()
-{
-	return int_pin;
-	// return RTC_Int_Pin;
-}
+// ///////////////////////////////////////////////////////////////////////////////
+// byte LoomRTC::get_interrupt_pin()
+// {
+// 	return int_pin;
+// 	// return RTC_Int_Pin;
+// }
 
-///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::RTC_Wake_ISR()
-{
-	// Detach interrupt to prevent duplicate triggering
-	detachInterrupt(digitalPinToInterrupt(int_pin));
+// ///////////////////////////////////////////////////////////////////////////////
+// void LoomRTC::RTC_Wake_ISR()
+// {
+// 	// Detach interrupt to prevent duplicate triggering
+// 	detachInterrupt(digitalPinToInterrupt(int_pin));
 
-	// Nothing else to do because interrupt woke device
-}
+// 	// Nothing else to do because interrupt woke device
+// }
 
-///////////////////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////////////////

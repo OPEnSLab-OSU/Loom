@@ -37,7 +37,7 @@ protected:
 	char		timestring[20];		/// Latest saved string of the time (hour:minute:second)
 
 	
-	static byte	int_pin; 			/// Which pin the RTC interrupt is connected to (static so RTC ISR can be static)
+	// static byte	int_pin; 			/// Which pin the RTC interrupt is connected to (static so RTC ISR can be static)
 
 public:
 	
@@ -52,9 +52,9 @@ public:
  
 			TimeZone			timezone,
 			bool				use_utc_time,
-			bool				get_internet_time,
+			bool				get_internet_time
 
-			byte				interrupt_pin
+			// byte				interrupt_pin
 		);
 
 	/// Destructor
@@ -120,23 +120,23 @@ public:
 	
 	/// Get the pin the RTC interrupt is assumed to be connected to
 	/// \return	Interrupt pin
-	byte			get_interrupt_pin();
+	// byte			get_interrupt_pin();
 
 	/// Get string of date
 	/// \return	Date string
-	char*			get_datestring(); 
+	const char*		get_datestring(); 
 	/// Get string of date
 	/// \param[out]	buf		Buffer to fill
 	void			get_datestring(char* buf); 
 	/// Get string of time
 	/// \return	Time string
-	char*			get_timestring();
+	const char*		get_timestring();
 	/// Get string of time
 	/// \param[out]	buf		Buffer to fill]	
 	void			get_timestring(char* buf);
 	/// Get string of weekday
 	/// \return	Weekday string
-	char*			get_weekday();
+	const char*		get_weekday() { return (const char*)daysOfTheWeek[ now().dayOfTheWeek() ]; }
 	/// Get string of weekday
 	/// \param[out]	buf		Buffer to fill
 	void			get_weekday(char* buf);
@@ -155,7 +155,7 @@ public:
 // Might be obsolete
 	// Static because ISRs need to be static if they are class methods
 	// Interrupt pin is also static, as that pin is referenced 
-	static void		RTC_Wake_ISR();
+	// static void		RTC_Wake_ISR();
 
 
 	

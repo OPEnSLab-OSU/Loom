@@ -33,8 +33,8 @@ public:
 			const char*		module_name			= "DS3231",
 			TimeZone		timezone			= TimeZone::PST,
 			bool			use_utc_time		= true,
-			bool			get_internet_time	= false,
-			byte			int_pin				= 6
+			bool			get_internet_time	= false
+			// byte			int_pin				= 6
 		);
 
 	/// Constructor that takes Json Array, extracts args
