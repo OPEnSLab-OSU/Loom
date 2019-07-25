@@ -15,31 +15,33 @@ Loom_TSL2561::Loom_TSL2561(
 	: LoomI2CSensor( module_name, Type::TSL2561, i2c_address, mux_port )
 	, gain(gain)
 	, resolution(resolution)
+	, inst_TSL2561( (i2c_address == 0x29) 
+						? Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW, 29) 
+						: ( (i2c_address == 39) 
+								? Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 39)
+								: Adafruit_TSL2561_Unified(TSL2561_ADDR_HIGH , 49)
+						  )  
+				  )
 {
-	// this->module_type = LoomModule::Type::TSL2561;
+	// switch (i2c_address) {
+	// 	case 0x29 : inst_TSL2561 = new Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW  , 29); break;
+	// 	case 0x39 : inst_TSL2561 = new Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 39); break;
+	// 	case 0x49 : inst_TSL2561 = new Adafruit_TSL2561_Unified(TSL2561_ADDR_HIGH , 49); break;
+	// }
 
-	// this->gain       = gain;
-	// this->resolution = resolution;
-
-	switch (i2c_address) {
-		case 0x29 : inst_TSL2561 = new Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW  , 29); break;
-		case 0x39 : inst_TSL2561 = new Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 39); break;
-		case 0x49 : inst_TSL2561 = new Adafruit_TSL2561_Unified(TSL2561_ADDR_HIGH , 49); break;
-	}
-
-	bool setup = inst_TSL2561->begin();
+	bool setup = inst_TSL2561.begin();
 
 	if (setup) {
 		switch (gain) {
-			case 1  : inst_TSL2561->setGain(TSL2561_GAIN_1X); break;
-			case 16 : inst_TSL2561->setGain(TSL2561_GAIN_16X); break;
-			default : inst_TSL2561->setGain(TSL2561_GAIN_1X); break;
+			case 1  : inst_TSL2561.setGain(TSL2561_GAIN_1X); break;
+			case 16 : inst_TSL2561.setGain(TSL2561_GAIN_16X); break;
+			default : inst_TSL2561.setGain(TSL2561_GAIN_1X); break;
 		}
 
 		switch (resolution) {
-			case 1 : inst_TSL2561->setIntegrationTime(TSL2561_INTEGRATIONTIME_13MS); break;
-			case 2 : inst_TSL2561->setIntegrationTime(TSL2561_INTEGRATIONTIME_101MS); break;
-			case 3 : inst_TSL2561->setIntegrationTime(TSL2561_INTEGRATIONTIME_402MS); break;
+			case 1 : inst_TSL2561.setIntegrationTime(TSL2561_INTEGRATIONTIME_13MS); break;
+			case 2 : inst_TSL2561.setIntegrationTime(TSL2561_INTEGRATIONTIME_101MS); break;
+			case 3 : inst_TSL2561.setIntegrationTime(TSL2561_INTEGRATIONTIME_402MS); break;
 		}
 	}
 
@@ -52,12 +54,6 @@ Loom_TSL2561::Loom_TSL2561(
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TSL2561::Loom_TSL2561(JsonArrayConst p)
 	: Loom_TSL2561( EXPAND_ARRAY(p, 5) ) {}
-
-///////////////////////////////////////////////////////////////////////////////
-Loom_TSL2561::~Loom_TSL2561() 
-{
-	delete inst_TSL2561;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TSL2561::print_measurements()
@@ -74,7 +70,7 @@ void Loom_TSL2561::measure()
 	uint16_t IR_ar[5], Full_ar[5];
 
 	for (int i = 0; i < 5; i++) {
-		inst_TSL2561->getLuminosity(&Full_ar[i], &IR_ar[i]);
+		inst_TSL2561.getLuminosity(&Full_ar[i], &IR_ar[i]);
 	}
 
 	lightIR   = (IR_ar[0]   + IR_ar[1]   + IR_ar[2]   + IR_ar[3]   + IR_ar[4])   / 5;
@@ -84,7 +80,7 @@ void Loom_TSL2561::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TSL2561::package(JsonObject json)
 {
-	int lux = inst_TSL2561->calculateLux(lightFull, lightIR);
+	int lux = inst_TSL2561.calculateLux(lightFull, lightIR);
 	
 	package_json(json, module_name, 
 		"IR",	lightIR,

@@ -11,18 +11,13 @@ Loom_ZXGesture::Loom_ZXGesture(
 	)
 	: LoomI2CSensor( module_name, Type::ZXGesture, i2c_address, mux_port )
 	, mode(mode)
+	, inst_ZX( ZX_Sensor(i2c_address) )
 {
-	// this->module_type = LoomModule::Type::ZXGesture;
-
-	// this->mode = mode;
-
-	inst_ZX = new ZX_Sensor(i2c_address);
-
-	bool setup = inst_ZX->init();
+	bool setup = inst_ZX.init();
 	uint8_t ver;
 
 
-	ver = inst_ZX->getModelVersion();
+	ver = inst_ZX.getModelVersion();
 	print_module_label();
 	if (ver != ZX_MODEL_VER) {
 		setup = false;
@@ -32,7 +27,7 @@ Loom_ZXGesture::Loom_ZXGesture(
 	}
 	
 	// Read the register map version and ensure the library will work
-	ver = inst_ZX->getRegMapVersion();
+	ver = inst_ZX.getRegMapVersion();
 	print_module_label();
 	if (ver != ZX_REG_MAP_VER) {
 		setup = false;
@@ -49,14 +44,7 @@ Loom_ZXGesture::Loom_ZXGesture(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ZXGesture::Loom_ZXGesture(JsonArrayConst p)
-	: Loom_ZXGesture(p[0], p[1], p[2], (Mode)(int)p[3])
-{}
-
-///////////////////////////////////////////////////////////////////////////////
-Loom_ZXGesture::~Loom_ZXGesture() 
-{
-	delete inst_ZX;
-}
+	: Loom_ZXGesture(p[0], p[1], p[2], (Mode)(int)p[3]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_ZXGesture::print_config()
@@ -90,9 +78,9 @@ void Loom_ZXGesture::measure()
 
 	switch (mode) {
 		case Mode::POS : 
-			if ( inst_ZX->positionAvailable() ) {
-				x = inst_ZX->readX();
-				z = inst_ZX->readZ();
+			if ( inst_ZX.positionAvailable() ) {
+				x = inst_ZX.readX();
+				z = inst_ZX.readZ();
 				
 				if ( (x != ZX_ERROR) && (z != ZX_ERROR) ) {
 					pos[0] = x;
@@ -114,9 +102,9 @@ void Loom_ZXGesture::measure()
 		
 
 		case Mode::GEST :
-			if ( inst_ZX->gestureAvailable() ) {
-				gesture       = inst_ZX->readGesture();
-				gesture_speed = inst_ZX->readGestureSpeed();
+			if ( inst_ZX.gestureAvailable() ) {
+				gesture       = inst_ZX.readGesture();
+				gesture_speed = inst_ZX.readGestureSpeed();
 				
 				switch (gesture) {
 					case RIGHT_SWIPE : gesture_type = "Right Swipe"; break;

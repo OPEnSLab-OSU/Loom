@@ -12,8 +12,6 @@ Loom_MMA8451::Loom_MMA8451(
 	: LoomI2CSensor( module_name, Type::MMA8451, i2c_address, mux_port )
 	, range{range}
 {
-	// this->module_type = LoomModule::Type::MMA8451;
-
 	bool setup = MMA.begin(i2c_address);
 
 	// Set range

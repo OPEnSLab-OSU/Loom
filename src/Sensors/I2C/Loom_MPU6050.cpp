@@ -15,8 +15,6 @@ Loom_MPU6050::Loom_MPU6050(
 	) 
 	: LoomI2CSensor( module_name, Type::MPU6050, i2c_address, mux_port )
 {
-	// this->module_type = LoomModule::Type::MPU6050;
-
 	Wire.begin();
 	mpu6050.begin();
 
@@ -47,17 +45,17 @@ void Loom_MPU6050::print_measurements()
 	print_module_label();
 	LPrintln("Measurements:");
 
-	LPrintln("\taccX       : ", accX);
-	LPrintln("\taccY       : ", accY);
-	LPrintln("\taccZ       : ", accZ);
+	LPrintln("\taccX   : ", accX);
+	LPrintln("\taccY   : ", accY);
+	LPrintln("\taccZ   : ", accZ);
 
-	LPrintln("\tgyroX      : ", gyroX);
-	LPrintln("\tgyroY      : ", gyroY);
-	LPrintln("\tgyroZ      : ", gyroZ);
+	LPrintln("\tgyroX  : ", gyroX);
+	LPrintln("\tgyroY  : ", gyroY);
+	LPrintln("\tgyroZ  : ", gyroZ);
 
-	LPrintln("\tangleX     : ", angleX);
-	LPrintln("\tangleY     : ", angleY);
-	LPrintln("\tangleZ     : ", angleZ);
+	LPrintln("\tangleX : ", angleX);
+	LPrintln("\tangleY : ", angleY);
+	LPrintln("\tangleZ : ", angleZ);
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		LPrintln("\ttemp       : ", temp);

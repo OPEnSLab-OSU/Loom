@@ -10,8 +10,6 @@ Loom_SHT31D::Loom_SHT31D(
 	)
 	: LoomI2CSensor( module_name, Type::SHT31D, i2c_address, mux_port )
 {
-	// this->module_type = LoomModule::Type::SHT31D;
-
 	bool setup = inst_sht31d.begin(i2c_address);
 
 	if (!setup) active = false;
@@ -29,8 +27,8 @@ void Loom_SHT31D::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\tTemperature: ", temp, " C");
-	LPrintln("\tHumidity   : ", humid);
+	LPrintln("\tTemp  : ", temp, " C");
+	LPrintln("\tHumid : ", humid);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -44,7 +42,7 @@ void Loom_SHT31D::measure()
 		humid = h;
 	} else {
 		print_module_label();
-		LPrintln("Failed to read temperature or humidity");
+		LPrintln("Failed to read temp/humid");
 	}
 }
 

@@ -17,7 +17,7 @@ class Loom_MS5803 : public LoomI2CSensor
 
 protected:
 
-	MS_5803*	inst_MS5803;	/// Underlying MS5803 sensor manager instance
+	MS_5803		inst_MS5803;	/// Underlying MS5803 sensor manager instance
 
 	uint16_t	MS_PROM[8];		/// Read calibration data stored on sensor
 
@@ -47,7 +47,7 @@ public:
 	Loom_MS5803(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_MS5803();
+	~Loom_MS5803() = default;
 
 //=============================================================================
 ///@name	OPERATION

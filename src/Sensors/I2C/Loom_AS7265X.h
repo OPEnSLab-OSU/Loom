@@ -28,7 +28,6 @@ protected:
 	uint8_t		mode;				/// Sensor mode
 	uint8_t		integration_time;	/// Integration time setting
 
-
 public:
 	
 //=============================================================================

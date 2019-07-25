@@ -9,11 +9,9 @@ Loom_TMP007::Loom_TMP007(
 		const char*		module_name
 	) 
 	: LoomI2CSensor( module_name, Type::TMP007, i2c_address, mux_port )
+	, inst_tmp007( Adafruit_TMP007(i2c_address) )
 {
-	// this->module_type = LoomModule::Type::TMP007;
-
-	inst_tmp007 = new Adafruit_TMP007(i2c_address);
-	bool setup = inst_tmp007->begin();
+	bool setup = inst_tmp007.begin();
 
 	if (!setup) active = false;
 
@@ -24,12 +22,6 @@ Loom_TMP007::Loom_TMP007(
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TMP007::Loom_TMP007(JsonArrayConst p)
 	: Loom_TMP007( EXPAND_ARRAY(p, 3) ) {}
-
-///////////////////////////////////////////////////////////////////////////////
-Loom_TMP007::~Loom_TMP007()
-{
-	delete inst_tmp007;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TMP007::print_measurements()
@@ -43,8 +35,8 @@ void Loom_TMP007::print_measurements()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TMP007::measure()
 {
-	object_temp = inst_tmp007->readObjTempC();
-	die_temp    = inst_tmp007->readDieTempC();
+	object_temp = inst_tmp007.readObjTempC();
+	die_temp    = inst_tmp007.readDieTempC();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -11,11 +11,9 @@ Loom_FXOS8700::Loom_FXOS8700(
 		const char*		module_name
 	)
 	: LoomI2CSensor( module_name, Type::FXOS8700, i2c_address, mux_port )
+	, inst_FXOS8700(Adafruit_FXOS8700(0x8700A, 0x8700B))
 {
-	// this->module_type = LoomModule::Type::FXOS8700;
-
-	inst_FXOS8700 = new Adafruit_FXOS8700(0x8700A, 0x8700B);
-	bool setup = inst_FXOS8700->begin(ACCEL_RANGE_4G);
+	bool setup = inst_FXOS8700.begin(ACCEL_RANGE_4G);
 
 	if (!setup) active = false;
 
@@ -26,12 +24,6 @@ Loom_FXOS8700::Loom_FXOS8700(
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXOS8700::Loom_FXOS8700(JsonArrayConst p)
 	: Loom_FXOS8700( EXPAND_ARRAY(p, 3) ) {}
-
-///////////////////////////////////////////////////////////////////////////////
-Loom_FXOS8700::~Loom_FXOS8700() 
-{
-	delete inst_FXOS8700;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_FXOS8700::print_measurements()
@@ -50,7 +42,7 @@ void Loom_FXOS8700::print_measurements()
 void Loom_FXOS8700::measure()
 {
 	sensors_event_t aevent, mevent;
-	inst_FXOS8700->getEvent(&aevent, &mevent);
+	inst_FXOS8700.getEvent(&aevent, &mevent);
 
 	accel[0] = aevent.acceleration.x;
 	accel[1] = aevent.acceleration.y;

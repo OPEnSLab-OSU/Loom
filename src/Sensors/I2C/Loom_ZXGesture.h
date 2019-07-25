@@ -25,7 +25,7 @@ public:
 protected:
 
 	/// Underlying ZX sensor manager instance
-	ZX_Sensor*		inst_ZX;
+	ZX_Sensor		inst_ZX;
 
 	/// Sensor mode (read positions or gesture - mutually exclusive)
 	Mode			mode;
@@ -65,7 +65,7 @@ public:
 	Loom_ZXGesture(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_ZXGesture();
+	~Loom_ZXGesture() = default;
 
 //=============================================================================
 ///@name	OPERATION

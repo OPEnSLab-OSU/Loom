@@ -11,11 +11,9 @@ Loom_FXAS21002::Loom_FXAS21002(
 		const char*		module_name
 	)
 	: LoomI2CSensor( module_name, Type::FXAS21002, i2c_address, mux_port )
+	, inst_FXAS21002(Adafruit_FXAS21002C(0x0021002C))
 {
-	// this->module_type = LoomModule::Type::FXAS21002;
-
-	inst_FXAS21002 = new Adafruit_FXAS21002C(0x0021002C);
-	bool setup = inst_FXAS21002->begin();
+	bool setup = inst_FXAS21002.begin();
 
 	if (!setup) active = false;
 
@@ -26,12 +24,6 @@ Loom_FXAS21002::Loom_FXAS21002(
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXAS21002::Loom_FXAS21002(JsonArrayConst p)
 	: Loom_FXAS21002( EXPAND_ARRAY(p, 3) ) {}
-
-///////////////////////////////////////////////////////////////////////////////
-Loom_FXAS21002::~Loom_FXAS21002() 
-{
-	delete inst_FXAS21002;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_FXAS21002::print_measurements()
@@ -47,7 +39,7 @@ void Loom_FXAS21002::print_measurements()
 void Loom_FXAS21002::measure()
 {
 	sensors_event_t event;
-	inst_FXAS21002->getEvent(&event);
+	inst_FXAS21002.getEvent(&event);
 
 	gyro[0] = event.gyro.x;
 	gyro[1] = event.gyro.y;

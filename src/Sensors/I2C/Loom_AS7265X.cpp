@@ -18,8 +18,6 @@ Loom_AS7265X::Loom_AS7265X(
 	, mode(mode)
 	, integration_time(integration_time)
 {
-	// this->module_type = LoomModule::Type::AS7265X;
-
 	bool setup = inst_AS7265X.begin();
 
 	if (setup) {

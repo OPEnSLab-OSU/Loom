@@ -16,7 +16,7 @@ class Loom_TMP007 : public LoomI2CSensor
 
 protected:
 
-	Adafruit_TMP007* inst_tmp007;	/// Underlying TMP007 sensor manager instance
+	Adafruit_TMP007 inst_tmp007;	/// Underlying TMP007 sensor manager instance
 
 	float		object_temp;	/// Object temperature
 	float		die_temp;		/// Die temperature
@@ -44,7 +44,7 @@ public:
 	Loom_TMP007(JsonArrayConst p);
 	
 	/// Destructor
-	virtual ~Loom_TMP007();;
+	virtual ~Loom_TMP007() = default;
 
 //=============================================================================
 ///@name	OPERATION

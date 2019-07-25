@@ -16,7 +16,7 @@ class Loom_TSL2561 : public LoomI2CSensor
 
 protected:
 
-	Adafruit_TSL2561_Unified* inst_TSL2561;		/// Underlying TSL2561 sensor manager instance
+	Adafruit_TSL2561_Unified	inst_TSL2561;		/// Underlying TSL2561 sensor manager instance
 
 	uint8_t 	gain;			/// Gain level
 	uint8_t 	resolution;		/// Sensor resolution setting
@@ -51,7 +51,7 @@ public:
 	Loom_TSL2561(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_TSL2561();
+	~Loom_TSL2561() = default;
 
 //=============================================================================
 ///@name	OPERATION

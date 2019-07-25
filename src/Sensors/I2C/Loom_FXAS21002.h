@@ -16,7 +16,7 @@ class Loom_FXAS21002 : public LoomI2CSensor
 
 protected:
 	
-	Adafruit_FXAS21002C*	inst_FXAS21002;		/// Underlying FXAS21002 sensor manager instance
+	Adafruit_FXAS21002C		inst_FXAS21002;		/// Underlying FXAS21002 sensor manager instance
 	float					gyro[3];			/// Measured gyro values (x,y,z)
 
 public:
@@ -42,7 +42,7 @@ public:
 	Loom_FXAS21002(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_FXAS21002();
+	~Loom_FXAS21002() = default;
 
 //=============================================================================
 ///@name	OPERATION

@@ -9,11 +9,11 @@ Loom_MS5803::Loom_MS5803(
 		const char*		module_name
 	)
 	: LoomI2CSensor( module_name, Type::MS5803, i2c_address, mux_port )
+	, inst_MS5803( MS_5803(i2c_address, 512) )
 {
-	// this->module_type = LoomModule::Type::MS5803;
 
-	inst_MS5803 = new MS_5803(i2c_address, 512);
-	bool setup = inst_MS5803->initializeMS_5803();
+	// inst_MS5803 = new MS_5803(i2c_address, 512);
+	bool setup = inst_MS5803.initializeMS_5803();
 
 	if (!setup) active = false;
 
@@ -24,12 +24,6 @@ Loom_MS5803::Loom_MS5803(
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MS5803::Loom_MS5803(JsonArrayConst p)
 	: Loom_MS5803( EXPAND_ARRAY(p, 3) ) {}
-
-///////////////////////////////////////////////////////////////////////////////
-Loom_MS5803::~Loom_MS5803() 
-{
-	delete inst_MS5803;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MS5803::print_measurements()
@@ -43,10 +37,10 @@ void Loom_MS5803::print_measurements()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MS5803::measure()
 {
-	inst_MS5803->readSensor();
+	inst_MS5803.readSensor();
 
-	pressure = inst_MS5803->pressure();
-	temp     = inst_MS5803->temperature();
+	pressure = inst_MS5803.pressure();
+	temp     = inst_MS5803.temperature();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -17,13 +17,6 @@ Loom_TSL2591::Loom_TSL2591(
 	, timing_level(timing_level)
 	, inst_tsl2591( Adafruit_TSL2591(i2c_address) )
 {
-	// this->module_type = LoomModule::Type::TSL2591;
-
-	// this->gain_level   = gain_level;
-	// this->timing_level = timing_level;
-
-	// inst_tsl2591 = Adafruit_TSL2591(i2c_address);
-
 	bool setup = inst_tsl2591.begin();
 		
 	if (setup) {

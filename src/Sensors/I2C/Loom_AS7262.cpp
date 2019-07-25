@@ -19,14 +19,11 @@ Loom_AS7262::Loom_AS7262(
 	, integration_time(integration_time)
 
 {
-	// this->module_type = LoomModule::Type::AS7262;
-
 	inst_AS7262.begin(Wire, gain, mode);
 	inst_AS7262.setIntegrationTime(integration_time);
 
 	print_module_label();
 	LPrintln("Initialized");
-	// LPrintln("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
