@@ -8,7 +8,7 @@
 
 /// Number of possible steppers.
 /// Dependent on stepper controller breakout.
-#define NUM_STEPPERS 4
+#define NUM_STEPPERS 2
 
 
 ///////////////////////////////////////////////////////////////////////////////

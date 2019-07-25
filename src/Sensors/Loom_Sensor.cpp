@@ -4,13 +4,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomSensor::LoomSensor(	
-		const char*		module_name,
-		uint8_t			num_samples 
+		const char*			module_name,
+		LoomModule::Type	module_type,
+		uint8_t				num_samples 
 	) 
-	: LoomModule( module_name ) 
-{
-	this->num_samples        = num_samples;
-}
+	: LoomModule( module_name, module_type ) 
+	, num_samples(num_samples)
+{}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomSensor::print_config()
@@ -19,19 +19,4 @@ void LoomSensor::print_config()
 	LPrintln("\tNum Samples         : ", num_samples);
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSensor::set_num_samples(uint8_t n) 
-{ 
-	num_samples = n; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-uint8_t LoomSensor::get_num_samples() 
-{ 
-	return num_samples; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-

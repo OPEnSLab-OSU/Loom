@@ -24,10 +24,10 @@ public:
 
 	/// Constructor
 	LoomLogPlat(	
-			const char*		module_name,
-
-			bool			enable_rate_filter 		= true,
-			uint16_t		min_filter_delay 		= 1000
+			const char*			module_name,
+			LoomModule::Type	module_type,
+			bool				enable_rate_filter 		= true,
+			uint16_t			min_filter_delay 		= 1000
 	   );
 
 	/// Destructor

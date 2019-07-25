@@ -46,16 +46,21 @@ Loom_OLED::Loom_OLED(
 		byte			freeze_pin, 
 		FreezeType		freeze_behavior
 	)
-	: LoomLogPlat( module_name, enable_rate_filter, min_filter_delay )
+	: LoomLogPlat( module_name, Type::OLED, enable_rate_filter, min_filter_delay )
+	, version(version)
+	, reset_pin(reset_pin)
+	, display_format(display_format)
+	, scroll_duration(scroll_duration)
+	, freeze_behavior(freeze_behavior)
+	, freeze_pin(freeze_pin)
 {
-	this->module_type = LoomModule::Type::OLED;
 
-	this->version 	      = version;
-	this->reset_pin       = reset_pin;
-	this->display_format  = display_format;
-	this->scroll_duration = scroll_duration;
-	this->freeze_behavior = freeze_behavior;
-	this->freeze_pin      = freeze_pin;
+	// this->version 	      = version;
+	// this->reset_pin       = reset_pin;
+	// this->display_format  = display_format;
+	// this->scroll_duration = scroll_duration;
+	// this->freeze_behavior = freeze_behavior;
+	// this->freeze_pin      = freeze_pin;
 
 	switch(version) {
 		case Version::FEATHERWING : display = new Adafruit_SSD1306();
@@ -86,43 +91,19 @@ void Loom_OLED::print_config()
 {
 	LoomLogPlat::print_config();
 
-	LPrintln('\t', "OLED Version        : ", enum_oled_version_string(this->version) );
-	if (this->version == Version::BREAKOUT) {
-		LPrintln('\t', "Reset Pin           : ", this->reset_pin );		
+	LPrintln("\tOLED Version        : ", enum_oled_version_string(version) );
+	if (version == Version::BREAKOUT) {
+		LPrintln("\tReset Pin           : ", reset_pin );		
 	}
 
-	LPrintln('\t', "Display Format      : ", enum_oled_format_string(this->display_format) );
-	if (this->display_format == Format::SCROLL) {
-		LPrintln('\t', "Scroll Duration     : ", this->scroll_duration );
+	LPrintln("\tDisplay Format      : ", enum_oled_format_string(display_format) );
+	if (display_format == Format::SCROLL) {
+		LPrintln("\tScroll Duration     : ", scroll_duration );
 	}
-	LPrintln('\t', "Freeze Behavior     : ", enum_oled_freeze_string(this->freeze_behavior) );
-	if (this->freeze_behavior != FreezeType::DISABLE) {
-		LPrintln('\t', "Freeze Pin          : ", this->freeze_pin );
+	LPrintln("\tFreeze Behavior     : ", enum_oled_freeze_string(freeze_behavior) );
+	if (freeze_behavior != FreezeType::DISABLE) {
+		LPrintln("\tFreeze Pin          : ", freeze_pin );
 	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_OLED::set_display_format(Format format) 
-{ 
-	display_format = format; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-Loom_OLED::Format Loom_OLED::get_display_format() 
-{ 
-	return display_format; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_OLED::set_scroll_duration(uint duration) 
-{ 
-	scroll_duration = duration; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-uint Loom_OLED::get_scroll_duration() 
-{ 
-	return scroll_duration; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -132,24 +113,6 @@ void Loom_OLED::set_freeze_pin(byte pin)
 	if (freeze_behavior != FreezeType::DISABLE) {
 		pinMode(freeze_pin, INPUT_PULLUP);
 	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-byte Loom_OLED::get_freeze_pin() 
-{ 
-	return freeze_pin; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_OLED::set_freeze_behavior(FreezeType behavior) 
-{ 
-	freeze_behavior = behavior; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-Loom_OLED::FreezeType Loom_OLED::get_freeze_behavior() 
-{ 
-	return freeze_behavior; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -5,11 +5,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Ethernet_I::Loom_Ethernet_I(	
-		const char*	module_name,
+		const char*				module_name,
 		const JsonArrayConst	mac,
 		const JsonArrayConst	ip
 	) 
-	: LoomInternetPlat( module_name )
+	: LoomInternetPlat( module_name, Type::Ethernet )
 	, m_client( EthernetClient(), TAs, (size_t)TAs_NUM, A7, SSL_ERROR )
 	, m_UDP()
 	, m_mac{}

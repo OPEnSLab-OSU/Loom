@@ -30,12 +30,12 @@ public:
 	/// \param[in]  tab_id			String | <"Data"> | null | Name of the tab that the device will put data into. 
 	/// \param[in]  device_id		String | <"Mine"> | null | Identifier to use for the device in the spreadsheet.
 	Loom_GoogleSheets(	
-						const char* module_name,
-						const uint	internet_index,
-						const char* script_url,
-						const char* sheet_id,
-						const char* tab_id = "Data",
-						const char* device_id = "Mine"
+						const char*		module_name,
+						const uint8_t	internet_index,
+						const char*		script_url,
+						const char*		sheet_id,
+						const char*		tab_id = "Data",
+						const char*		device_id = "Mine"
 					);
 
 	/// Constructor that takes Json Array, extracts args

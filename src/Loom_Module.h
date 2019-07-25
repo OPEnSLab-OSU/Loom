@@ -46,9 +46,9 @@ public:
 		// LogPlats
 		OLED, SDCARD,
 		// InternetPlats
-		Internet,
+		Ethernet, // Internet, 
 		// PublishPlats
-		Publish,
+		GoogleSheets, //Publish,
 		// RTC
 		DS3231, PCF8523,
 		// Other
@@ -76,7 +76,7 @@ public:
 	LoomModule();
 
 	/// Constructor
-	LoomModule( const char* module_name );
+	LoomModule( const char* module_name, Type type );
 
 	/// Destructor
 	virtual ~LoomModule() = default;
@@ -126,11 +126,11 @@ public:
 
 	/// Get module type
 	/// \return Module type
-	Type			get_module_type();
+	Type			get_module_type() { return module_type; }
 
 	/// Get the device manager class if linked
 	/// \return Pointer to the LoomManager, Null if not linked
-	LoomManager*	get_device_manager();
+	LoomManager*	get_device_manager() { return device_manager; }
 
 	/// Copy module name into buffer
 	/// \param[out]	buf	The buffer to copy module name into
@@ -138,23 +138,23 @@ public:
 	
 	/// Get module name
 	/// \return	Module name
-	const char*		get_module_name();
+	const char*		get_module_name() { return module_name; }
 
 	/// Get print verbosity
 	/// \return		The current verbosity setting
-	Verbosity		get_print_verbosity();
+	Verbosity		get_print_verbosity() { return print_verbosity; }
 
 	/// Get package verbosity
 	/// \return		The current verbosity setting
-	Verbosity		get_package_verbosity();
+	Verbosity		get_package_verbosity() { return package_verbosity; }
 
 	/// Get whether or not the module should be treated as active
 	/// \return		Whether or not the module is active
-	bool			get_active();
+	bool			get_active() { return active; }
 
 	/// Get whether or not debug prints are enabled
 	/// \return		Whether or not print statements are enabled
-	bool			get_print_debug();
+	bool			get_print_debug() { return print_debug; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -183,7 +183,7 @@ public:
 
 	/// Set whether or not debug print statements are enabled for this module
 	/// \param[in]	enable	Whether or not to enable print statements
-	void			set_print_debug(bool enable);
+	void			set_print_debug(bool enable) { print_debug = enable; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS

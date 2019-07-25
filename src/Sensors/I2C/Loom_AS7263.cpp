@@ -12,13 +12,13 @@ Loom_AS7263::Loom_AS7263(
 		uint8_t			mode, 
 		uint8_t			integration_time
 	)
-	: LoomI2CSensor( module_name, i2c_address, mux_port )
+	: LoomI2CSensor( module_name, Type::AS7263, i2c_address, mux_port )
 	, use_bulb(use_bulb)
 	, gain(gain)
 	, mode(mode)
 	, integration_time(integration_time)
 {
-	this->module_type = LoomModule::Type::AS7263;
+	// this->module_type = LoomModule::Type::AS7263;
 
 	inst_AS7263.begin(Wire, gain, mode);
 	inst_AS7263.setIntegrationTime(integration_time);

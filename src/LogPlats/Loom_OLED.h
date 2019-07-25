@@ -106,19 +106,19 @@ public:
 
 	/// Get the current OLED display organization.
 	/// \return		The current Format being used
-	Format			get_display_format();
+	Format			get_display_format() { return display_format; }
 
 	/// Get the current scroll duration.
 	/// \return		The current scroll duration
-	uint			get_scroll_duration();
+	uint			get_scroll_duration() { return scroll_duration; }
 
 	/// Get the digital pin use to freeze the display
 	/// return	The freeze pin
-	byte			get_freeze_pin();
+	byte			get_freeze_pin() { return freeze_pin; }
 
 	/// Get the current freeze behavior
 	/// \return		The current freeze behavior
-	FreezeType		get_freeze_behavior();
+	FreezeType		get_freeze_behavior() { return freeze_behavior; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -126,11 +126,11 @@ public:
 
 	/// Set the OLED display organization.
 	/// \param[in]	format	The Format to set to
-	void			set_display_format(Format format);
+	void			set_display_format(Format format) { display_format = format; }
 
 	/// Set the duration of a complete scroll.
 	/// \param[in]	duration	The duration to set to
-	void			set_scroll_duration(uint duration);
+	void			set_scroll_duration(uint duration) { scroll_duration = duration; }
 
 	/// Set the digital pin to use to freeze the display
 	/// param[in]	pin		The pin to use
@@ -138,7 +138,7 @@ public:
 
 	/// Set the freezing behavior of the display
 	/// \param[in]	behavior	Which FreezeType type to use
-	void			set_freeze_behavior(FreezeType behavior);
+	void			set_freeze_behavior(FreezeType behavior) { freeze_behavior = behavior; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS

@@ -9,10 +9,10 @@ Loom_ZXGesture::Loom_ZXGesture(
 		const char*		module_name,
 		Mode			mode
 	)
-	: LoomI2CSensor( module_name, i2c_address, mux_port )
+	: LoomI2CSensor( module_name, Type::ZXGesture, i2c_address, mux_port )
 	, mode(mode)
 {
-	this->module_type = LoomModule::Type::ZXGesture;
+	// this->module_type = LoomModule::Type::ZXGesture;
 
 	// this->mode = mode;
 

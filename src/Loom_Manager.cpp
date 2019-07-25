@@ -40,23 +40,23 @@ LoomManager::LoomManager(
 		Verbosity		print_verbosity, 
 		Verbosity		package_verbosity
 	)
-	// , instance(instance)
-	// , family_num(family_num)
-	// , print_verbosity(print_verbosity)
-	// , package_verbosity(package_verbosity)
-	// , device_type(device_type)
+	: instance(instance)
+	, family_num(family_num)
+	, print_verbosity(print_verbosity)
+	, package_verbosity(package_verbosity)
+	, device_type(device_type)
 {
 	snprintf(this->device_name, 20, "%s", device_name);
 	snprintf(this->family, 20, "%s", family);
 
-	this->family_num = family_num;
-	this->instance = instance;
+	// this->family_num = family_num;
+	// this->instance = instance;
 
-	this->device_type = device_type;
+	// this->device_type = device_type;
 
-	// Set verbosity
-	this->print_verbosity 	= print_verbosity;
-	this->package_verbosity	= package_verbosity;
+	// // Set verbosity
+	// this->print_verbosity 	= print_verbosity;
+	// this->package_verbosity	= package_verbosity;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

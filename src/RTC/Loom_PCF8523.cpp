@@ -11,9 +11,8 @@ Loom_PCF8523::Loom_PCF8523(
 		bool			get_internet_time,
 		byte			int_pin
 	) 
-	: LoomRTC( module_name, timezone, use_utc_time, get_internet_time, int_pin )
+	: LoomRTC( module_name, Type::PCF8523, timezone, use_utc_time, get_internet_time, int_pin )
 {
-	this->module_type = LoomModule::Type::PCF8523;
 
 	rtc_inst = new PCF8523();
 	init();

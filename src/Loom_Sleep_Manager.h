@@ -100,7 +100,7 @@ public:
 
 	/// Get the current sleep mode
 	/// \return		The current sleep mode
-	Mode		get_sleep_mode();
+	Mode		get_sleep_mode() { return sleep_mode; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -112,7 +112,7 @@ public:
 
 	/// Set the sleep mode to use
 	/// \param[in]	mode	The Mode to set to
-	void		set_sleep_mode(Mode mode);
+	void		set_sleep_mode(Mode mode) { sleep_mode = mode; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS

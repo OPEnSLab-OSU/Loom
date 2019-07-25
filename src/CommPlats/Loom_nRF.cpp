@@ -16,14 +16,14 @@ Loom_nRF::Loom_nRF(
 
 		uint8_t			multicast_level	
 	)
-	: LoomCommPlat( module_name, max_message_len )
+	: LoomCommPlat( module_name, Type::nRF, max_message_len )
 	, data_rate(data_rate)
 	, power_level(power_level)
 	, retry_count(retry_count)
 	, retry_timeout(retry_timeout)
 	, multicast_level(multicast_level)
 {
-	this->module_type = LoomModule::Type::nRF;
+	// this->module_type = LoomModule::Type::nRF;
 
 
 	// Create nRF manager objects
@@ -192,24 +192,6 @@ void Loom_nRF::set_address(uint8_t addr)    // Need to test this
 
 	network = new RF24Network(*radio);
 	network->begin(90, address);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-uint8_t Loom_nRF::get_address() 
-{ 
-	return address; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::set_multicast_level(uint8_t level)
-{
-	multicast_level = level;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-uint8_t Loom_nRF::get_multicast_level()
-{
-	return multicast_level;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -93,7 +93,7 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	uint8_t		get_address() override;
+	uint8_t		get_address() override { return address; }
 
 //=============================================================================
 ///@name	SETTERS

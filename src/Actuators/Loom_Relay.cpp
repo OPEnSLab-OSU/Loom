@@ -7,13 +7,12 @@ Loom_Relay::Loom_Relay(
 		const char*		module_name, 
 		byte			pin 
 	) 
-	: LoomActuator( module_name ) 
+	: LoomActuator( module_name, Type::Relay ) 
 	, pin(pin)
+	, on(false)
 {
-	this->module_type = LoomModule::Type::Relay;
-
 	pinMode(pin, OUTPUT);
-	on = false;
+	// on = false;
 	digitalWrite(pin, LOW);
 }
 
@@ -27,12 +26,6 @@ void Loom_Relay::add_config(JsonObject json)
 	// add_config_aux(json, module_name,
 	// 	module_name, pin
 	// );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::print_config() 
-{
-	LoomModule::print_config();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

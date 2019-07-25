@@ -3,39 +3,21 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule::LoomModule( const char* set_module_name )
-	: module_name_base(set_module_name)
+LoomModule::LoomModule( const char* module_name, Type type )
+	: module_name_base(module_name)
 	, module_name(module_name_base.c_str())
+	, module_type(type)
 	, active(true)
 	, print_debug(true)
 	, print_verbosity(Verbosity::V_LOW)
 	, package_verbosity(Verbosity::V_LOW)
 	, device_manager(nullptr)
-{
-	// active 				= true;
-	// print_debug 		= true;
-	// print_verbosity 	= Verbosity::V_LOW;
-	// package_verbosity 	= Verbosity::V_LOW;
-	
-	// this->device_manager = nullptr;
-}
+{}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomModule::LoomModule( ) 
-	: LoomModule("Unknown") 
-{}
-
-///////////////////////////////////////////////////////////////////////////////
-LoomModule::Type LoomModule::get_module_type()
-{
-	return module_type;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-LoomManager* LoomModule::get_device_manager()
-{
-	return device_manager;
-}
+	: LoomModule("Unknown", Type::Unknown) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomModule::link_device_manager(LoomManager* LM)
@@ -75,12 +57,6 @@ void LoomModule::get_module_name(char* buf)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomModule::get_module_name() 
-{ 
-	return module_name; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void LoomModule::set_print_verbosity(Verbosity v) 
 { 
 	print_verbosity = v; 
@@ -88,12 +64,6 @@ void LoomModule::set_print_verbosity(Verbosity v)
 		print_module_label();
 		LPrintln("Set print verbosity to: ", enum_verbosity_string(v));
 	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-Verbosity LoomModule::get_print_verbosity() 
-{ 
-	return print_verbosity; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -107,33 +77,9 @@ void LoomModule::set_package_verbosity(Verbosity v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Verbosity LoomModule::get_package_verbosity() 
-{ 
-	return package_verbosity; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void LoomModule::set_active(bool enable) 
 { 
 	active = enable; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-bool LoomModule::get_active() 
-{ 
-	return active; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void LoomModule::set_print_debug(bool enable) 
-{ 
-	print_debug = enable; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-bool LoomModule::get_print_debug() 
-{ 
-	return print_debug; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////

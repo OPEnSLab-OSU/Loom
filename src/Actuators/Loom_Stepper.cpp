@@ -9,15 +9,15 @@ Loom_Stepper::Loom_Stepper(
 		const char*		module_name, 
 		uint8_t			stepper_count 
 	) 
-	: LoomActuator( module_name ) 
+	: LoomActuator( module_name, Type::Stepper ) 
 	, stepper_count(stepper_count)
 {
-	this->module_type = LoomModule::Type::Stepper;
+	// this->module_type = LoomModule::Type::Stepper;
 
 	this->motors = new Adafruit_StepperMotor*[stepper_count];
 
 	AFMS = new Adafruit_MotorShield();
-	for (int i = 0; i < stepper_count; i++){
+	for (auto i = 0; i < stepper_count; i++){
 		motors[i] = AFMS->getStepper(200, i+1);
 	}
 

@@ -20,7 +20,8 @@ public:
 
 	/// Constructor
 	LoomActuator( 
-			const char*		module_name 
+			const char*			module_name, 
+			LoomModule::Type	module_type
 		);
 
 	/// Destructor
@@ -37,7 +38,6 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_config() override;
 	virtual void	print_state() override = 0;
 
 private:

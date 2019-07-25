@@ -4,11 +4,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::LoomInternetPlat(	
-		const char* module_name
+		const char*			module_name,
+		LoomModule::Type	module_type
 	) 
-	: LoomModule( module_name ) {
-		this->module_type = LoomModule::Type::Internet;
-	}
+	: LoomModule( module_name, module_type ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 Client& LoomInternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb) {

@@ -11,9 +11,8 @@ Loom_DS3231::Loom_DS3231(
 		bool			get_internet_time,
 		byte			int_pin
 	)
-	: LoomRTC( module_name, timezone, use_utc_time, get_internet_time, int_pin )
+	: LoomRTC( module_name, Type::DS3231, timezone, use_utc_time, get_internet_time, int_pin )
 {
-	this->module_type = LoomModule::Type::DS3231;
 
 	rtc_inst = new RTC_DS3231();
 	init();

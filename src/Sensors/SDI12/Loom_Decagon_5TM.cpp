@@ -7,9 +7,9 @@ Loom_Decagon5TM::Loom_Decagon5TM(
 		const char*		module_name,
 		uint8_t			num_samples 
 	) 
-	: LoomSDI12Sensor( module_name, num_samples ) 
+	: LoomSDI12Sensor( module_name, Type::Decagon5TM, num_samples ) 
 {
-	this->module_type = LoomModule::Type::Decagon5TM;
+	// this->module_type = LoomModule::Type::Decagon5TM;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

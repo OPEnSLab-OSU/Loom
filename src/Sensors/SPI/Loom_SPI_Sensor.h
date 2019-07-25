@@ -17,8 +17,9 @@ public:
 /*@{*/ //======================================================================
 
 	LoomSPISensor(	
-			const char*		module_name			= "SPI_Sensor",
-			uint8_t			num_samples			= 1 
+			const char*			module_name,
+			LoomModule::Type	module_type,
+			uint8_t				num_samples		= 1
 		);
 
 	/// Destructor

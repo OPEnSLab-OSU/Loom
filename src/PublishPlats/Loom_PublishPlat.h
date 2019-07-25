@@ -24,8 +24,9 @@ public:
 	/// \param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
 	/// \param[in]  internet_index		Int | <0> | [0-5] | Index from zero of of the desired internet platform based on the JSON configuration
 	LoomPublishPlat( 
-		const char*		module_name,
-		const uint		internet_index
+		const char*			module_name,
+		LoomModule::Type	module_type,
+		const uint8_t		internet_index
 	);
 
 	/// Destructor

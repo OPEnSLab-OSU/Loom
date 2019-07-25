@@ -7,9 +7,9 @@ Loom_DecagonGS3::Loom_DecagonGS3(
 		const char*		module_name,
 		uint8_t			num_samples 
 	) 
-	: LoomSDI12Sensor( module_name, num_samples ) 
+	: LoomSDI12Sensor( module_name, Type::DecagonGS3, num_samples ) 
 {
-	this->module_type = LoomModule::Type::DecagonGS3;
+	// this->module_type = LoomModule::Type::DecagonGS3;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

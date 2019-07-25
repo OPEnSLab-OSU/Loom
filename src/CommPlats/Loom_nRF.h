@@ -93,13 +93,13 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	uint8_t		get_address() override;
+	uint8_t		get_address() override { return address; }
 
 	/// Get multicast(broadcast) level.
 	/// nRF has varying degrees of broadcast corresponding to 
 	/// depth to broadcast through network tree
 	/// \return Multicast level
-	uint8_t		get_multicast_level();
+	uint8_t		get_multicast_level() { return multicast_level; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -111,7 +111,7 @@ public:
 	/// nRF has varying degrees of broadcast corresponding to 
 	/// depth to broadcast through network tree
 	/// \param[in]	level 	Multicast level to set to
-	void		set_multicast_level(uint8_t level);
+	void		set_multicast_level(uint8_t level) { multicast_level = level; }
 
 
 //=============================================================================

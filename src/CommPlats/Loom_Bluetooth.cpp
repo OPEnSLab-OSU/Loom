@@ -11,13 +11,12 @@ Loom_Bluetooth::Loom_Bluetooth(
 		uint8_t			spi_RST
 
 	)
-	: LoomCommPlat( module_name, max_message_len )
+	: LoomCommPlat( module_name, Type::Bluetooth, max_message_len )
 	, spi_CS(spi_CS)
 	, spi_IRQ(spi_IRQ)
 	, spi_RST(spi_RST)
 
 { 
-	this->module_type = LoomModule::Type::Bluetooth;
 
 	BLE = new Adafruit_BluefruitLE_SPI(spi_CS, spi_IRQ, spi_RST);
 

@@ -12,10 +12,10 @@ Loom_Servo::Loom_Servo(
 		const char* 	module_name, 
 		uint8_t 		servo_count 
 	) 
-	: LoomActuator( module_name ) 
+	: LoomActuator( module_name, Type::Servo ) 
 	, servo_count(servo_count)
 {
-	this->module_type = LoomModule::Type::Servo;
+	// this->module_type = LoomModule::Type::Servo;
 
 	this->positions = new uint8_t[servo_count];
 

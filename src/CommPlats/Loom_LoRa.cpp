@@ -12,19 +12,20 @@ Loom_LoRa::Loom_LoRa(
 		uint8_t			retry_count,
 		uint16_t		retry_timeout 	
 	)
-	: LoomCommPlat( module_name, max_message_len )
+	: LoomCommPlat( module_name, Type::LoRa, max_message_len )
 	, address(address)
+	, power_level( ( (power_level >= 5) && (power_level <= 23) ) ? power_level : 23 )
 	, retry_count(retry_count)
 	, retry_timeout(retry_timeout)
 
 { 
-	this->module_type = LoomModule::Type::LoRa;
+	// this->module_type = LoomModule::Type::LoRa;
 
 	// Create instances of driver and manager
 	this->driver         = new RH_RF95(RFM95_CS, RFM95_INT);
 	this->manager        = new RHReliableDatagram(*driver, address);
 	// this->address        = address;
-	this->power_level    = ( (power_level >= 5) && (power_level <= 23) ) ? power_level : 23;
+	// this->power_level    = ( (power_level >= 5) && (power_level <= 23) ) ? power_level : 23;
 	// this->retry_count    = retry_count;
 	// this->retry_timeout  = retry_timeout;
 
@@ -88,10 +89,10 @@ void Loom_LoRa::print_config()
 {
 	LoomCommPlat::print_config();
 
-	LPrintln('\t', "Address             : ", address );
-	LPrintln('\t', "Power Level         : ", power_level );
-	LPrintln('\t', "Retry Count         : ", retry_count );
-	LPrintln('\t', "Retry Timeout       : ", retry_timeout );
+	LPrintln("\tAddress             : ", address );
+	LPrintln("\tPower Level         : ", power_level );
+	LPrintln("\tRetry Count         : ", retry_count );
+	LPrintln("\tRetry Timeout       : ", retry_timeout );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -120,12 +121,6 @@ void Loom_LoRa::set_address(uint8_t addr)    // Need to test this
 	print_module_label();
 	LPrintln("\tSetting max retry count ", retry_count);
 	manager->setRetries(retry_count);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-uint8_t Loom_LoRa::get_address() 
-{ 
-	return address; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////

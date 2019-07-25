@@ -11,9 +11,9 @@ Loom_Neopixel::Loom_Neopixel(
 		bool			enableA1, 
 		bool			enableA2
 	) 
-	: LoomActuator(module_name)
+	: LoomActuator(module_name, Type::Neopixel)
 {
-	this->module_type = LoomModule::Type::Neopixel;
+	// this->module_type = LoomModule::Type::Neopixel;
 
 	// Set enabled pins
 	pin_enabled[0] = enableA0;

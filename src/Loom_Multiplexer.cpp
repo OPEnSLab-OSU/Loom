@@ -55,13 +55,16 @@ Loom_Multiplexer::Loom_Multiplexer(
 		uint			num_ports,
 		bool			dynamic_list,	
 		uint 			update_period
-	) : LoomModule( module_name ) 
+	) : LoomModule( module_name, Type::Multiplexer ) 
+	, i2c_address(i2c_address)
+	, num_ports(num_ports)
+	, update_period(update_period)
 {
-	this->module_type = LoomModule::Type::Multiplexer;
+	// this->module_type = LoomModule::Type::Multiplexer;
 
-	this->i2c_address 	= i2c_address; 
-	this->num_ports 	= num_ports;
-	this->update_period	= update_period;
+	// this->i2c_address 	= i2c_address; 
+	// this->num_ports 	= num_ports;
+	// this->update_period	= update_period;
 
 	// Begin I2C 
 	Wire.begin();

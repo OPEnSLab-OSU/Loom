@@ -47,13 +47,14 @@ public:
 
 	/// Constructor
 	LoomRTC(	
-			const char*		module_name			= "RTC",
+			const char*			module_name,
+			LoomModule::Type	module_type,
  
-			TimeZone		timezone			= TimeZone::PST,
-			bool			use_utc_time		= true,
-			bool			get_internet_time	= false,
+			TimeZone			timezone,
+			bool				use_utc_time,
+			bool				get_internet_time,
 
-			byte			interrupt_pin		= 6
+			byte				interrupt_pin
 		);
 
 	/// Destructor

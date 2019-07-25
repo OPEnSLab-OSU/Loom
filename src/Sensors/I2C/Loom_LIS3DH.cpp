@@ -7,9 +7,9 @@ Loom_LIS3DH::Loom_LIS3DH(
 		byte			i2c_address, 
 		uint8_t			mux_port,
 		const char*		module_name
-	) : LoomI2CSensor( module_name, i2c_address, mux_port )
+	) : LoomI2CSensor( module_name, Type::LIS3DH, i2c_address, mux_port )
 {
-	this->module_type = LoomModule::Type::LIS3DH;
+	// this->module_type = LoomModule::Type::LIS3DH;
 
 	inst_LIS3DH = new LIS3DH(I2C_MODE, i2c_address);
 

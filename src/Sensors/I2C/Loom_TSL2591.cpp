@@ -12,11 +12,11 @@ Loom_TSL2591::Loom_TSL2591(
 		uint8_t			gain_level, 
 		uint8_t			timing_level
 	)
-	: LoomI2CSensor( module_name, i2c_address, mux_port )
+	: LoomI2CSensor( module_name, Type::TSL2591, i2c_address, mux_port )
 	, gain_level(gain_level)
 	, timing_level(timing_level)
 {
-	this->module_type = LoomModule::Type::TSL2591;
+	// this->module_type = LoomModule::Type::TSL2591;
 
 	// this->gain_level   = gain_level;
 	// this->timing_level = timing_level;

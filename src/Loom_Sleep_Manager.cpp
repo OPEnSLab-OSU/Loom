@@ -13,15 +13,19 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 		bool 			delay_on_wake, 
 		Mode			sleep_mode,
 		byte			power_off_pin
-	) : LoomModule( module_name )
+	) : LoomModule( module_name, Type::Sleep_Manager )
+	, use_LED(use_LED)
+	, delay_on_wake(delay_on_wake)
+	, sleep_mode(Mode::STANDBY)
+	, power_off_pin(power_off_pin)
 {
-	this->module_type = LoomModule::Type::Sleep_Manager;
+	// this->module_type = LoomModule::Type::Sleep_Manager;
 
-	this->use_LED		= use_LED;
-	this->delay_on_wake	= delay_on_wake;
-	this->sleep_mode	= Mode::STANDBY;
+	// this->use_LED		= use_LED;
+	// this->delay_on_wake	= delay_on_wake;
+	// this->sleep_mode	= Mode::STANDBY;
 
-	this->power_off_pin	= power_off_pin;
+	// this->power_off_pin	= power_off_pin;
 	pinMode(power_off_pin, OUTPUT);
 }
 
@@ -66,18 +70,6 @@ void Loom_Sleep_Manager::powerDown()
 	digitalWrite(power_off_pin, HIGH);
 	delay(50); // Sometimes the board takes several milliseconds to fully power off
 	LPrintln("This should not be printed");
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::set_sleep_mode(Mode mode)
-{
-	sleep_mode = mode;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-Loom_Sleep_Manager::Mode Loom_Sleep_Manager::get_sleep_mode()
-{
-	return sleep_mode;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

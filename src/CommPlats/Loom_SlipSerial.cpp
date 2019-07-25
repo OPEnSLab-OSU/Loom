@@ -7,9 +7,9 @@ Loom_SlipSerial::Loom_SlipSerial(
 		const char*		module_name,
 		uint16_t		max_message_len
 	) 
-	: LoomCommPlat(module_name, max_message_len )
+	: LoomCommPlat(module_name, Type::SlipSerial, max_message_len )
 {
-	this->module_type = LoomModule::Type::SlipSerial;
+	// this->module_type = LoomModule::Type::SlipSerial;
 
 	///Begin Setup Telemetry				
 

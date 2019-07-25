@@ -5,10 +5,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomCommPlat::LoomCommPlat( 
-		const char*		module_name, 
-		uint			max_message_len 
+		const char*			module_name, 
+		LoomModule::Type	module_type,
+		uint16_t			max_message_len 
 	) 
-	: LoomModule( module_name )
+	: LoomModule( module_name, module_type )
 	, max_message_len(max_message_len)
 	, signal_strength(0)
 {
@@ -20,7 +21,7 @@ LoomCommPlat::LoomCommPlat(
 void LoomCommPlat::print_config() 
 {
 	LoomModule::print_config();
-	LPrintln('\t', "Max Message Length  : ", max_message_len );
+	LPrintln("\tMax Message Length  : ", max_message_len );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -35,7 +36,7 @@ bool LoomCommPlat::receive()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::receive_blocking(JsonObject json, int max_wait_time)
+bool LoomCommPlat::receive_blocking(JsonObject json, uint max_wait_time)
 {
 	unsigned long start_time = millis();
 	do {
@@ -49,7 +50,7 @@ bool LoomCommPlat::receive_blocking(JsonObject json, int max_wait_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::receive_blocking(int max_wait_time)
+bool LoomCommPlat::receive_blocking(uint max_wait_time)
 {
 	if (device_manager != nullptr) {
 		// Loom_Manager's json needs to be cleared (passing true to internal_json)

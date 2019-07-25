@@ -12,9 +12,9 @@ Loom_MB1232::Loom_MB1232(
 		uint8_t			mux_port,
 		const char*		module_name
 	)
-	: LoomI2CSensor( module_name, i2c_address, mux_port )
+	: LoomI2CSensor( module_name, Type::MB1232, i2c_address, mux_port )
 {	
-	this->module_type = LoomModule::Type::MB1232;
+	// this->module_type = LoomModule::Type::MB1232;
 
 	Wire.beginTransmission(i2c_address);
 

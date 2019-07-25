@@ -8,9 +8,9 @@ Loom_TMP007::Loom_TMP007(
 		uint8_t			mux_port,
 		const char*		module_name
 	) 
-	: LoomI2CSensor( module_name, i2c_address, mux_port )
+	: LoomI2CSensor( module_name, Type::TMP007, i2c_address, mux_port )
 {
-	this->module_type = LoomModule::Type::TMP007;
+	// this->module_type = LoomModule::Type::TMP007;
 
 	inst_tmp007 = new Adafruit_TMP007(i2c_address);
 	bool setup = inst_tmp007->begin();

@@ -13,9 +13,9 @@ Loom_MPU6050::Loom_MPU6050(
 		const char*		module_name,
 		bool			calibrate
 	) 
-	: LoomI2CSensor( module_name, i2c_address, mux_port )
+	: LoomI2CSensor( module_name, Type::MPU6050, i2c_address, mux_port )
 {
-	this->module_type = LoomModule::Type::MPU6050;
+	// this->module_type = LoomModule::Type::MPU6050;
 
 	Wire.begin();
 	mpu6050.begin();

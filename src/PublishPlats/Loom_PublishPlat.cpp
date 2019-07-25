@@ -5,32 +5,31 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomPublishPlat::LoomPublishPlat(	
-		const char* module_name,
-		uint internet_index
+		const char*			module_name,
+		LoomModule::Type	module_type,
+		uint8_t				internet_index
 	) 
-	: LoomModule( module_name )
+	: LoomModule( module_name, module_type )
 	, m_internet( nullptr )
 	, m_internet_index( internet_index ) 
-{
-	this->module_type = LoomModule::Type::Publish;
-}
+{}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomPublishPlat::second_stage_ctor() 
 {
-    // check to see if we have a device manager
-    if (device_manager == nullptr) { print_module_label(); LPrint("No Device Manager!\n"); return; }
-    // check if internet platform exist
-    LoomModule* temp = (LoomModule*)&(device_manager->InternetPlat(m_internet_index));
-    if (temp->get_module_type() == LoomModule::Type::Internet) m_internet = (LoomInternetPlat*)temp;
-    else {
-        print_module_label();
-        LPrint("Unable to find internet platform, intstead got: ", (int)(temp->get_module_type()), " using index ", m_internet_index, "\n");
-        return;
-    }
-    // made it here, guess we're good to go!
-    print_module_label();
-    LPrint("Ready\n");
+	// check to see if we have a device manager
+	if (device_manager == nullptr) { print_module_label(); LPrint("No Device Manager!\n"); return; }
+	// check if internet platform exist
+	LoomModule* temp = (LoomModule*)&(device_manager->InternetPlat(m_internet_index));
+	if (temp->get_module_type() == LoomModule::Type::Ethernet) m_internet = (LoomInternetPlat*)temp;
+	else {
+		print_module_label();
+		LPrint("Unable to find internet platform, intstead got: ", (int)(temp->get_module_type()), " using index ", m_internet_index, "\n");
+		return;
+	}
+	// made it here, guess we're good to go!
+	print_module_label();
+	LPrint("Ready\n");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

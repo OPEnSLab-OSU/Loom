@@ -8,9 +8,9 @@ Loom_SHT31D::Loom_SHT31D(
 		uint8_t			mux_port,
 		const char*		module_name
 	)
-	: LoomI2CSensor( module_name, i2c_address, mux_port )
+	: LoomI2CSensor( module_name, Type::SHT31D, i2c_address, mux_port )
 {
-	this->module_type = LoomModule::Type::SHT31D;
+	// this->module_type = LoomModule::Type::SHT31D;
 
 	bool setup = inst_sht31d.begin(i2c_address);
 

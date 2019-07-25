@@ -20,7 +20,7 @@ protected:
 	// And it seemed bad design to pass around references to the LoomManager's
 	// internal JsonDocument. 
 	// Especially as the LoomManager is intended to be non-mandatory for usage of Loom
-	StaticJsonDocument<2000> messageJson;	/// Document to read incoming data into
+	StaticJsonDocument<1500> messageJson;	/// Document to read incoming data into
 
 public:
 	
@@ -30,8 +30,9 @@ public:
 
 	/// Constructor
 	LoomCommPlat(
-			const char*		module_name,
-			uint			max_message_len
+			const char*			module_name,
+			LoomModule::Type	module_type,
+			uint16_t			max_message_len
 		);
 
 	/// Destructor
@@ -57,13 +58,13 @@ public:
 	/// \param[out]	json			Json object to fill with incoming data
 	/// \param[out]	max_wait_time	Maximum number of milliseconds to block for
 	/// \return True if packet received
-	bool			receive_blocking(JsonObject json, int max_wait_time);
+	bool			receive_blocking(JsonObject json, uint max_wait_time);
 
 	/// Version of receive_blocking for use with LoomManager.
 	/// Accesses Json from LoomManager
 	/// \param[out]	max_wait_time	Maximum number of milliseconds to block for
 	/// \return True if packet received	
-	bool			receive_blocking(int max_wait_time);
+	bool			receive_blocking(uint max_wait_time);
 
 	/// Send json to a specific address
 	/// \param[in]	json			Json package to send

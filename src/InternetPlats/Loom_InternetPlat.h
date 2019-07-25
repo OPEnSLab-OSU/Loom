@@ -28,7 +28,10 @@ public:
 	/// Loom Internet Platform module constructor.
 	///
 	/// \param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
-	LoomInternetPlat( const char* module_name );
+	LoomInternetPlat( 
+			const char*			module_name,  
+			LoomModule::Type	module_type
+		);
 
 	/// Destructor
 	virtual ~LoomInternetPlat() = default;

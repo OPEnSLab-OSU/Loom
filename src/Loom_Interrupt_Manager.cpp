@@ -38,9 +38,10 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 		const char*		module_name, 
 		LoomRTC*		RTC_Inst
 	) 
-	: LoomModule( module_name )
+	: LoomModule( module_name, Type::Interrupt_Manager )
+	, RTC_Inst(RTC_Inst)
 {
-	this->module_type = LoomModule::Type::Interrupt_Manager;
+	// this->module_type = LoomModule::Type::Interrupt_Manager;
 
 	interrupts_enabled = true;
 
@@ -54,7 +55,7 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 		stopwatch_settings[i] = {0, false};
 	}
 
-	this->RTC_Inst = RTC_Inst;
+	// this->RTC_Inst = RTC_Inst;
 
 
 	// Setup the RTCCounter for internal timer

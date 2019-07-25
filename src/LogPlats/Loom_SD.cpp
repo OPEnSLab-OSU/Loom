@@ -13,14 +13,15 @@ Loom_SD::Loom_SD(
 		byte			chip_select, 
 		const char*		default_file
 	)
-	: LoomLogPlat( module_name, enable_rate_filter, min_filter_delay )
+	: LoomLogPlat( module_name, Type::SDCARD, enable_rate_filter, min_filter_delay )
+	, chip_select(chip_select)
 {
-	this->module_type = LoomModule::Type::SDCARD;
+	// this->module_type = LoomModule::Type::SDCARD;
 
 	print_module_label();
 	LPrintln("SD Setup");
 
-	this->chip_select  = chip_select;
+	// this->chip_select  = chip_select;
 	snprintf(this->default_file, 16, "%s", default_file);
 
 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
@@ -40,12 +41,12 @@ void Loom_SD::print_config()
 {
 	LoomLogPlat::print_config();
 
-	LPrintln('\t', "Chip Select Pin     : ", chip_select);
-	LPrintln('\t', "SD Found            : ", (sd_found) ? "True" : "False");
+	LPrintln("\tChip Select Pin     : ", chip_select);
+	LPrintln("\tSD Found            : ", (sd_found) ? "True" : "False");
 
-	// LPrintln('\t', "SD Version        : ", enum_oled_version_string(version) );
+	// LPrintln("\tSD Version        : ", enum_oled_version_string(version) );
 	// if (version == BREAKOUT) {
-	// 	LPrintln('\t', "Reset Pin           : ", reset_pin );		
+	// 	LPrintln("\tReset Pin           : ", reset_pin );		
 	// }
 }
 

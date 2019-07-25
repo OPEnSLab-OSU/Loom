@@ -22,12 +22,11 @@ Loom_Analog::Loom_Analog(
 		Conversion		convertA4,
 		Conversion		convertA5	
 	) 
-	: LoomSensor( module_name, num_samples )
+	: LoomSensor( module_name, Type::Analog, num_samples )
+	, read_resolution(read_resolution)
 {
-	this->module_type = LoomModule::Type::Analog;
-
 	// Set Analog Read Resolution
-	this->read_resolution = read_resolution;
+	// this->read_resolution = read_resolution;
 	analogReadResolution(this->read_resolution);
 
 	// Zero out array of measurements 
