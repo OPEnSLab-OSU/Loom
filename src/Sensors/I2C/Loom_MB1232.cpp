@@ -28,7 +28,7 @@ Loom_MB1232::Loom_MB1232(
 	if (!setup) active = false;
 
 	print_module_label();
-	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -40,7 +40,7 @@ void Loom_MB1232::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\t", "Range: ", range, " cm");
+	LPrintln("\tRange: ", range, " cm");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

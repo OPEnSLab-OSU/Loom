@@ -27,7 +27,7 @@ public:
 			const char*			module_name, 
 			LoomModule::Type	module_type,
 			byte				i2c_address,
-			uint8_t				mux_port	= -1,	// Default to -1 (not on mux)
+			uint8_t				mux_port	= 255,	// Default to 255 (not on mux)
 			uint8_t				num_samples	= 1		 
 		);
 

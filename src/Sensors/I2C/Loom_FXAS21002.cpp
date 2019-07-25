@@ -20,7 +20,7 @@ Loom_FXAS21002::Loom_FXAS21002(
 	if (!setup) active = false;
 
 	print_module_label();
-	LPrintln("\tInitialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -21,7 +21,6 @@ Loom_TSL2561::Loom_TSL2561(
 	// this->gain       = gain;
 	// this->resolution = resolution;
 
-
 	switch (i2c_address) {
 		case 0x29 : inst_TSL2561 = new Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW  , 29); break;
 		case 0x39 : inst_TSL2561 = new Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 39); break;

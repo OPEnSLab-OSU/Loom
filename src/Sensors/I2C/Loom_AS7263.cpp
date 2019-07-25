@@ -24,7 +24,7 @@ Loom_AS7263::Loom_AS7263(
 	inst_AS7263.setIntegrationTime(integration_time);
 
 	print_module_label();
-	LPrintln("\tInitialized");
+	LPrintln("Initialized");
 	// LPrintln("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
@@ -85,29 +85,4 @@ void Loom_AS7263::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7263::enable_bulb(bool enable)
-{
-	use_bulb = enable;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7263::set_gain(uint8_t gain)
-{
-	inst_AS7263.setGain(gain);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7263::set_mode(uint8_t mode)
-{
-	inst_AS7263.setMeasurementMode(mode);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7263::set_integration_time(uint8_t time)
-{
-	inst_AS7263.setIntegrationTime(time);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
 

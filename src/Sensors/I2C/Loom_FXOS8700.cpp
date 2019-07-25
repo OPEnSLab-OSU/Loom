@@ -20,7 +20,7 @@ Loom_FXOS8700::Loom_FXOS8700(
 	if (!setup) active = false;
 
 	print_module_label();
-	LPrintln("\tInitialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -47,7 +47,7 @@ protected:
 
 	byte			i2c_address;		/// The multiplexer's I2C address
 
-	uint			num_ports;			/// The number of ports on the multiplexer
+	uint8_t			num_ports;			/// The number of ports on the multiplexer
 	bool			dynamic_list;		/// Whether or not sensor list is dynamic (refresh sensor list periodically)
 	uint			update_period;		/// Interval to update sensor list at
 
@@ -69,7 +69,7 @@ public:
 	Loom_Multiplexer(
 			const char*		module_name			= "Multiplexer",
 			byte			i2c_address			= 0x71,
-			uint			num_ports			= 8,
+			uint8_t			num_ports			= 8,
 			bool			dynamic_list		= true,
 			uint			update_period		= 5000
 		);
@@ -101,7 +101,7 @@ public:
 	/// Get the sensor object for sensor on provided port
 	/// \param[port]	port	The port of the multiplexer to get sensor object for
 	/// \return			The pointer to LoomI2CSensor on port, Null if no sensor
-	LoomI2CSensor*	get_sensor(uint8_t port);
+	LoomI2CSensor*	get_sensor(uint8_t port) { return sensors[port]; }
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -117,11 +117,11 @@ public:
 
 	/// Get whether or not sensors are updated dynamically
 	/// \return	True if dynamic
-	bool		get_is_dynamic();
+	bool		get_is_dynamic() { return dynamic_list; }
 
 	/// Get the sensor list update period.
 	/// \return	The update period
-	int			get_update_period();
+	int			get_update_period() { return update_period; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -129,12 +129,12 @@ public:
 
 	/// Set whether or not to periodically update list of attached sensors
 	/// \param[in]	dynamic		The setting to set
-	void		set_is_dynamic(bool dynamic);
+	void		set_is_dynamic(bool dynamic) { dynamic_list = dynamic; }
 
 	/// Set the sensor list update period.
 	/// Requires dynamic_list to be enabled
 	/// \param[in]	period	New update period
-	void		set_update_period(int period);
+	void		set_update_period(uint period) { update_period = period; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS
@@ -150,7 +150,7 @@ private:
 	/// Compares I2C address to known sensors and generates corresponding sensor instance
 	/// \param[in]	i2c_address		The I2C address to match to sensor class
 	/// \return		Pointer to the generated I2C sensor object, Null if no match for that address
-	LoomI2CSensor*	generate_sensor_object(byte i2c_address, int port);
+	LoomI2CSensor*	generate_sensor_object(byte i2c_address, uint8_t port);
 
 	/// Determine the I2C address of the sensor (if any) on port.
 	/// \param[in]	port	The port to get sensor address of

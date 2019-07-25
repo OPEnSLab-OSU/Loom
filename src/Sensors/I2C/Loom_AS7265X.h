@@ -38,7 +38,7 @@ public:
 	/// AS72625X module constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x49> | {0x49} | I2C address
-	/// \param[in]	mux_port				Int | <-1> | [0-16] | Port on multiplexer
+	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	/// \param[in]	module_name				String | <"AS72625X"> | AS72625X module name
 	/// \param[in]	use_bulb				Bool | <false> | {true, false} | Whether or not to use bulb
 	/// \param[in]	gain					Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
@@ -46,7 +46,7 @@ public:
 	/// \param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
 	Loom_AS7265X(
 			byte			i2c_address			= 0x49,
-			uint8_t			mux_port			= -1,
+			uint8_t			mux_port			= 255,
 			const char*		module_name			= "AS7265X",
 			bool			use_bulb			= false,
 			uint8_t			gain				= 64,
@@ -81,22 +81,22 @@ public:
 
 	/// Set whether not bulb is used for active light source
 	/// \param[in]	enable	Whether or not to enable 
-	void		enable_bulb(bool e);
+	void		enable_bulb(bool e) { use_bulb = e; }
 
 	/// Set gain.
 	/// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
 	/// \param[in]	gain	Gain level: 
-	void		set_gain(uint8_t gain);
+	void		set_gain(uint8_t gain) { inst_AS7265X.setGain(gain); }
 
 	/// Set mode.
 	/// 4 channel, other 4 channel, 6 chan, or 6 chan one shot
 	/// \param[in]	mode	Mode
-	void		set_mode(uint8_t mode);
+	void		set_mode(uint8_t mode) { inst_AS7265X.setMeasurementMode(mode); }
 
 	/// Set integration time.
 	/// 50 * 2.8ms = 140ms. 0 to 255 is valid.  (49 is default)
 	/// If you use Mode 2 or 3 (all the colors) then integration time is double. 140*2 = 280ms between readings.
-	void		set_integration_time(uint8_t time);
+	void		set_integration_time(uint8_t time) { inst_AS7265X.setIntegrationCycles(time); }
 
 private:
 

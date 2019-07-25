@@ -10,7 +10,7 @@ LoomI2CSensor::LoomI2CSensor(
 		uint8_t				mux_port,
 		uint8_t				num_samples
 	) 
-	: LoomSensor( mux_port ? (String(module_name)+'_'+String(mux_port)).c_str() : module_name, module_type, num_samples )
+	: LoomSensor( (mux_port != 255)  ? (String(module_name)+'_'+String(mux_port)).c_str() : module_name, module_type, num_samples )
 	, i2c_address(i2c_address)
 	, port_num(mux_port)
 {}

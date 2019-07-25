@@ -16,7 +16,8 @@ class Loom_LIS3DH : public LoomI2CSensor
 
 protected:
 
-	LIS3DH*		inst_LIS3DH;	/// Underlying LIS3DH sensor manager instance
+	// LIS3DH*		inst_LIS3DH;	/// Underlying LIS3DH sensor manager instance
+	LIS3DH	inst_LIS3DH;	/// Underlying LIS3DH sensor manager instance
 
 	float		accel[3];		/// Measured acceleration values (x,y,z)(g's)
 
@@ -29,11 +30,11 @@ public:
 	/// LIS3DH module constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x19> | {0x19} | I2C address
-	/// \param[in]	mux_port				Int | <-1> | [0-16] | Port on multiplexer
+	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	/// \param[in]	module_name				String | <"LIS3DH"> | null | LIS3DH module name
 	Loom_LIS3DH(
 			byte			i2c_address		= 0x19,
-			uint8_t			mux_port		= -1,
+			uint8_t			mux_port		= 255,
 			const char*		module_name		= "LIS3DH"
 		);
 

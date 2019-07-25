@@ -26,7 +26,7 @@ Loom_ZXGesture::Loom_ZXGesture(
 	print_module_label();
 	if (ver != ZX_MODEL_VER) {
 		setup = false;
-		LPrintln("Incorrect Model Version or unable to read Model Version.");
+		LPrintln("Incorrect Model Version");
 	} else {
 		LPrintln("Model Version: ", ver);
 	}
@@ -36,7 +36,7 @@ Loom_ZXGesture::Loom_ZXGesture(
 	print_module_label();
 	if (ver != ZX_REG_MAP_VER) {
 		setup = false;
-		LPrintln("Incorrect Register Map Version or unable to read Register Map Version.");
+		LPrintln("Incorrect Register Map Version");
 	} else {
 		LPrintln("Register Map Version: ", ver);
 	}
