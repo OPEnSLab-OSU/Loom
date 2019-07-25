@@ -189,7 +189,7 @@ public:
 	/// \param[in]	hours		Hours into the future the alarm should be set
 	/// \param[in]	minutes		Minutes into the future the alarm should be set
 	/// \param[in]	seconds		Seconds into the future the alarm should be set
-	bool		RTC_alarm_duration(uint days, uint hours, uint minutes, uint seconds);
+	bool		RTC_alarm_duration(uint8_t days, uint8_t hours, uint8_t minutes, uint8_t seconds);
 
 	// sleep_until
 	/// Set RTC alarm for a specific time.
@@ -202,7 +202,7 @@ public:
 	/// \param[in]	hour		Hour to set alarm for
 	/// \param[in]	minute		Minute to set alarm for
 	/// \param[in]	second		Second to set alarm for
-	bool		RTC_alarm_at(uint hour, uint minute, uint second);
+	bool		RTC_alarm_at(uint8_t hour, uint8_t minute, uint8_t second);
 
 // // sleep_for
 	/// Set RTC alarm an amount of time from last alarm time
@@ -214,7 +214,7 @@ public:
 	/// \param[in]	hours		Hours into the future the alarm should be set
 	/// \param[in]	minutes		Minutes into the future the alarm should be set
 	/// \param[in]	seconds		Seconds into the future the alarm should be set
-	bool		RTC_alarm_duration_from_last(uint days, uint hours, uint minutes, uint seconds);
+	bool		RTC_alarm_duration_from_last(uint8_t days, uint8_t hours, uint8_t minutes, uint8_t seconds);
 
 
 //=============================================================================
@@ -231,11 +231,11 @@ public:
 	/// \param[in]	duration		How long timer should take (seconds)
 	/// \param[in]	ISR				ISR to run after timer goes off
 	/// \param[in]	repeat			Whether or not to be a repeating alarm
-	void		register_timer(uint timer_num, unsigned long duration, ISRFuncPtr ISR, bool repeat);
+	void		register_timer(uint8_t timer_num, unsigned long duration, ISRFuncPtr ISR, bool repeat);
 
 	/// Clear specified timer 
 	/// \param[in]	timer_num		Timer to clear
-	void		clear_timer(uint timer_num);
+	void		clear_timer(uint8_t timer_num);
 
 //=============================================================================
 ///@name	STOPWATCH METHODS
@@ -333,7 +333,7 @@ public:
 	/// Get c-string of name associated with interrupt type enum
 	/// \param[in]	type	Interrupt type 
 	/// \return C-string of interrupt type
-	const static char* interrupt_type_to_string(int type);
+	const static char* interrupt_type_to_string(uint8_t type);
 
 
 private:

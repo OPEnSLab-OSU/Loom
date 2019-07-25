@@ -21,7 +21,7 @@ const ISRFuncPtr Loom_Interrupt_Manager::default_ISRs[InteruptRange] =
 
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_Interrupt_Manager::interrupt_type_to_string(int type)
+const char* Loom_Interrupt_Manager::interrupt_type_to_string(uint8_t type)
 {
 	switch(type) {
 		case 0  : return "LOW";
@@ -75,20 +75,20 @@ void Loom_Interrupt_Manager::print_config()
 {
 	LoomModule::print_config();
 
-	LPrintln('\t', "Interrupts Enabled  : ", (interrupts_enabled) ? "True" : "False" );
+	LPrintln("\tInterrupts Enabled  : ", (interrupts_enabled) ? "True" : "False" );
 
 	// print out registered interrupts
-	LPrintln('\t', "Registered ISRs     : " );
+	LPrintln("\tRegistered ISRs     : " );
 	for (auto i = 0; i < InteruptRange; i++) {
-		LPrint("\t\t", "Pin ", i, " | ISR: ", (int_settings[i].run_type == ISR_Type::IMMEDIATE) ? "Immediate" : "Check Flag");
+		LPrint("\t\tPin ", i, " | ISR: ", (int_settings[i].run_type == ISR_Type::IMMEDIATE) ? "Immediate" : "Check Flag");
 		LPrintln(" | Type: ", interrupt_type_to_string(int_settings[i].type), " | ", (int_settings[i].enabled) ? "Enabled" : "Disabled" );
 
 	}
 
 	// LPrint out registered timers
-	LPrintln('\t', "Registered Timers     : " );
+	LPrintln("\tRegistered Timers     : " );
 	for (auto i = 0; i < MaxTimerCount; i++) {
-		LPrint("\t\t", "Timer ", i, " : ");
+		LPrint("\t\tTimer ", i, " : ");
 		if (timer_settings[i].enabled) {
 			unsigned long delay;
 			AsyncDelay::units_t u;
@@ -100,9 +100,9 @@ void Loom_Interrupt_Manager::print_config()
 	}
 
 	// LPrint out registered stopwatches
-	LPrintln('\t', "Registered StopWatches     : " );
+	LPrintln("\tRegistered StopWatches     : " );
 	for (auto i = 0; i < MaxStopWatchCount; i++) {
-		LPrint("\t\t", "Stopwatch ", i, " : ");
+		LPrint("\t\tStopwatch ", i, " : ");
 		if (stopwatch_settings[i].enabled) {
 			LPrintln("[Enabled] Elapsed: ",  millis()-stopwatch_settings[i].start_time);
 		} else {
@@ -243,7 +243,7 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 			// or if ISR on pin is set to immediate (dont want to rerun the ISR here)
 			if ( (interrupt_triggered[i]) && (int_settings[i].ISR != nullptr) ) {
 
-				LPrintln("I: ", i);
+				// LPrintln("I: ", i);
 
 				// Run bottom half ISR
 				int_settings[i].ISR();
@@ -294,7 +294,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_duration(TimeSpan duration)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_duration(uint days, uint hours, uint minutes, uint seconds)
+bool Loom_Interrupt_Manager::RTC_alarm_duration(uint8_t days, uint8_t hours, uint8_t minutes, uint8_t seconds)
 {
 	return RTC_alarm_duration( TimeSpan(days, hours, minutes, seconds) );
 }
@@ -341,7 +341,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_at(uint hour, uint minute, uint second)
+bool Loom_Interrupt_Manager::RTC_alarm_at(uint8_t hour, uint8_t minute, uint8_t second)
 {
 	// Don't sleep if no RTC to wake up device
 	if (RTC_Inst == nullptr) {
@@ -361,7 +361,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_duration_from_last(TimeSpan duration)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_duration_from_last(uint days, uint hours, uint minutes, uint seconds)
+bool Loom_Interrupt_Manager::RTC_alarm_duration_from_last(uint8_t days, uint8_t hours, uint8_t minutes, uint8_t seconds)
 {
 	return RTC_alarm_duration_from_last( TimeSpan(days, hours, minutes, seconds) );
 }
@@ -387,7 +387,7 @@ void Loom_Interrupt_Manager::check_timers()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::register_timer(uint timer_num, unsigned long duration, ISRFuncPtr ISR, bool repeat)
+void Loom_Interrupt_Manager::register_timer(uint8_t timer_num, unsigned long duration, ISRFuncPtr ISR, bool repeat)
 {
 	if (timer_num < MaxTimerCount) {
 		timer_settings[timer_num] = { ISR, duration, repeat, true };
@@ -399,7 +399,7 @@ void Loom_Interrupt_Manager::register_timer(uint timer_num, unsigned long durati
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::clear_timer(uint timer_num)
+void Loom_Interrupt_Manager::clear_timer(uint8_t timer_num)
 {
 	if (timer_num < MaxTimerCount) {
 		if (print_verbosity == Verbosity::V_HIGH) {

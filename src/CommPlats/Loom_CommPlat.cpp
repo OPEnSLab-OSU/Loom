@@ -20,7 +20,6 @@ LoomCommPlat::LoomCommPlat(
 void LoomCommPlat::print_config() 
 {
 	LoomModule::print_config();
-
 	LPrintln('\t', "Max Message Length  : ", max_message_len );
 }
 
@@ -61,7 +60,7 @@ bool LoomCommPlat::receive_blocking(int max_wait_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::send(uint16_t destination)
+bool LoomCommPlat::send(uint8_t destination)
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
@@ -84,7 +83,7 @@ void LoomCommPlat::broadcast()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, int max_len)
+bool LoomCommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, uint16_t max_len)
 {
 	memset(buffer, '\0', sizeof(buffer));
 

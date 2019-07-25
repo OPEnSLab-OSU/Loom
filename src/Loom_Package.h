@@ -97,36 +97,36 @@ void flatten_json_data_array(JsonObject json);
 ///////////////////////////////////////////////////////////////////////////////
 
 
-/// @private (hide from Doxygen)
-/// Termination version no args
-void add_config_aux2(JsonArray parameters); 
+// /// @private (hide from Doxygen)
+// /// Termination version no args
+// void add_config_aux2(JsonArray parameters); 
 
-/// @private (hide from Doxygen)
-template<typename Arg1, typename... Args>
-void add_config_aux2(JsonArray parameters, const Arg1 arg1, const Args... args)
-{
-	parameters.add(arg1);
-	add_config_aux2(parameters, args...);
-}
+// /// @private (hide from Doxygen)
+// template<typename Arg1, typename... Args>
+// void add_config_aux2(JsonArray parameters, const Arg1 arg1, const Args... args)
+// {
+// 	parameters.add(arg1);
+// 	add_config_aux2(parameters, args...);
+// }
 
 
-/// Use to help build configuration Json
-/// \param[in] json		JsonObject to add config info to
-template<typename... Args>
-void add_config_aux(JsonObject json, const char* module_name, const Args... args)
-{
-	JsonArray components = json["components"];
-	if (components.isNull()) {
-		components = json.createNestedArray("components");
-	}
+// /// Use to help build configuration Json
+// /// \param[in] json		JsonObject to add config info to
+// template<typename... Args>
+// void add_config_aux(JsonObject json, const char* module_name, const Args... args)
+// {
+// 	JsonArray components = json["components"];
+// 	if (components.isNull()) {
+// 		components = json.createNestedArray("components");
+// 	}
 
-	JsonObject config_info = components.createNestedObject();
-	config_info["name"] = module_name;
-	JsonArray parameters = config_info.createNestedArray("params");
+// 	JsonObject config_info = components.createNestedObject();
+// 	config_info["name"] = module_name;
+// 	JsonArray parameters = config_info.createNestedArray("params");
 
-	// Add parameters
-	add_config_aux2(parameters, args...);
-}
+// 	// Add parameters
+// 	add_config_aux2(parameters, args...);
+// }
 ///////////////////////////////////////////////////////////////////////////////
 
 JsonArray add_config_temp(JsonObject json, const char* module_name);

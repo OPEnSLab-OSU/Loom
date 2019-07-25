@@ -34,12 +34,17 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 LoomManager::LoomManager( 
 		const char*		device_name, 
 		const char*		family, 
-		uint			family_num,
-		uint			instance, 
+		uint8_t			family_num,
+		uint8_t			instance, 
 		DeviceType		device_type, 
 		Verbosity		print_verbosity, 
 		Verbosity		package_verbosity
 	)
+	// , instance(instance)
+	// , family_num(family_num)
+	// , print_verbosity(print_verbosity)
+	// , package_verbosity(package_verbosity)
+	// , device_type(device_type)
 {
 	snprintf(this->device_name, 20, "%s", device_name);
 	snprintf(this->family, 20, "%s", family);
@@ -71,12 +76,12 @@ void LoomManager::print_config(bool print_modules_config)
 {
 	print_device_label();
 	LPrintln("Config:");
-	LPrintln('\t', "Device Name         : ", device_name );
-	LPrintln('\t', "Family              : ", family );
-	LPrintln('\t', "Family Number       : ", family_num );
-	LPrintln('\t', "Instance Number     : ", instance );
-	LPrintln('\t', "Device Type         : ", enum_device_type_string(device_type) );
-	LPrintln('\t', "Instance Number     : ", instance );
+	LPrintln("\tDevice Name         : ", device_name );
+	LPrintln("\tFamily              : ", family );
+	LPrintln("\tFamily Number       : ", family_num );
+	LPrintln("\tInstance Number     : ", instance );
+	LPrintln("\tDevice Type         : ", enum_device_type_string(device_type) );
+	LPrintln("\tInstance Number     : ", instance );
 
 	list_modules();
 
@@ -250,19 +255,19 @@ void LoomManager::list_modules()
 	LPrintln("Modules:");
 
 	// Interrupt Manager
-	LPrintln("\t", "Interrupt Manager", " (", (interrupt_manager != nullptr), "):");
+	LPrintln("\tInterrupt Manager (", (interrupt_manager != nullptr), "):");
 	if ( (interrupt_manager != nullptr) && (interrupt_manager->get_active()) ) {
 		LPrintln( "\t\t[", (interrupt_manager->get_active()) ? "+" : "-" , "] ", interrupt_manager->get_module_name() );
 	}
 
 	// Sleep Manager
-	LPrintln("\t", "Sleep Manager", " (", (sleep_manager != nullptr), "):");
+	LPrintln("\tSleep Manager (", (sleep_manager != nullptr), "):");
 	if ( (sleep_manager != nullptr) && (sleep_manager->get_active()) ) {
 		LPrintln( "\t\t[", (sleep_manager->get_active()) ? "+" : "-" , "] ", sleep_manager->get_module_name() );
 	}
 
 	// RTC 
-	LPrintln("\t", "RTC module", " (", (rtc_module != nullptr), "):");
+	LPrintln("\tRTC module (", (rtc_module != nullptr), "):");
 	if ( (rtc_module != nullptr) && (rtc_module->get_active()) ) {
 		LPrintln( "\t\t[", (rtc_module->get_active()) ? "+" : "-" , "] ", rtc_module->get_module_name() );
 	}
@@ -309,25 +314,25 @@ void  LoomManager::set_family(const char* family)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-int  LoomManager::get_family_num() 
+uint8_t  LoomManager::get_family_num() 
 { 
 	return family_num; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_family_num(int n) 
+void LoomManager::set_family_num(uint8_t n) 
 { 
 	family_num = n; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-int  LoomManager::get_instance_num() 
+uint8_t  LoomManager::get_instance_num() 
 { 
 	return instance; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_instance_num(int n) 
+void LoomManager::set_instance_num(uint8_t n) 
 { 
 	instance = n; 
 }
@@ -543,7 +548,7 @@ void LoomManager::display_data()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::flash_LED(uint count, uint time_high, uint time_low, bool end_high)
+void LoomManager::flash_LED(uint8_t count, uint8_t time_high, uint8_t time_low, bool end_high)
 {
 	for (int i = 0; i < count; i++) {
 		digitalWrite(LED_BUILTIN, HIGH);
@@ -557,18 +562,18 @@ void LoomManager::flash_LED(uint count, uint time_high, uint time_low, bool end_
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::flash_LED(uint sequence[3])
+void LoomManager::flash_LED(uint8_t sequence[3])
 {
 	flash_LED(sequence[0], sequence[1], sequence[2]);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::pause(int ms)
+void LoomManager::pause(uint16_t ms)
 {
 	Serial.end();
 	USBDevice.detach();
 
-	int sleepMS = Watchdog.sleep(ms);
+	uint16_t sleepMS = Watchdog.sleep(ms);
 
 	USBDevice.attach();
 	Serial.begin(SERIAL_BAUD);
@@ -625,8 +630,8 @@ void LoomManager::get_config()
 	JsonObject json = doc.as<JsonObject>();
 
 	// Add general device identification
-	JsonObject general_info = json.createNestedObject("general");
-	general_info["name"]	= device_name;
+	JsonObject general_info 	= json.createNestedObject("general");
+	general_info["name"]		= device_name;
 	general_info["instance"]	= instance;
 	general_info["family"]		= family;
 	general_info["family_num"]	= family_num;

@@ -6,7 +6,7 @@
 LoomI2CSensor::LoomI2CSensor( 	
 		const char*		module_name, 
 		byte			i2c_address,
-		int				mux_port 
+		uint8_t			mux_port 
 	) 
 	: LoomSensor( mux_port ? (String(module_name)+'_'+String(mux_port)).c_str() : module_name )
 	, i2c_address(i2c_address)
@@ -17,7 +17,7 @@ LoomI2CSensor::LoomI2CSensor(
 void LoomI2CSensor::print_config()
 {
 	LoomSensor::print_config();
-	LPrint('\t', "I2C Address         : ");
+	LPrint("\tI2C Address         : ");
 	LPrintln_Dec_Hex(i2c_address);
 }
 

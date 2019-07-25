@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LIS3DH::Loom_LIS3DH(
 		byte			i2c_address, 
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name
 	) : LoomI2CSensor( module_name, i2c_address, mux_port )
 {
@@ -26,7 +26,7 @@ Loom_LIS3DH::Loom_LIS3DH(
 	if (!setup) active = false;
 
 	print_module_label();
-	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -44,9 +44,9 @@ void Loom_LIS3DH::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\t", "Accel X: ", accel[0]);
-	LPrintln("\t", "Accel Y: ", accel[1]);
-	LPrintln("\t", "Accel Z: ", accel[2]);
+	LPrintln("\tAccel X: ", accel[0]);
+	LPrintln("\tAccel Y: ", accel[1]);
+	LPrintln("\tAccel Z: ", accel[2]);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

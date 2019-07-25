@@ -38,11 +38,11 @@ const char* Loom_OLED::enum_oled_freeze_string(FreezeType f)
 Loom_OLED::Loom_OLED(	
 		const char*		module_name, 
 		bool			enable_rate_filter, 
-		uint			min_filter_delay, 
+		uint16_t		min_filter_delay, 
 		Version			version, 
 		byte			reset_pin, 
 		Format			display_format, 
-		uint			scroll_duration, 
+		uint16_t		scroll_duration, 
 		byte			freeze_pin, 
 		FreezeType		freeze_behavior
 	)

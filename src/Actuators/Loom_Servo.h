@@ -24,7 +24,7 @@ protected:
 	Adafruit_PWMServoDriver servo_driver;	/// Underlying servo driver instance
 
 	uint8_t		servo_count;				/// Number of servos
-	int*		positions;					/// Positions of the servos
+	uint8_t*	positions;					/// Positions of the servos
 
 public:
 	
@@ -60,7 +60,7 @@ public:
 	/// Set servo position.
 	/// \param[in]	servo		The servo number to control
 	/// \param[in]	degree		The position to set the servo to
-	void		set_degree(int servo, int degree);
+	void		set_degree(uint8_t servo, uint8_t degree);
 
 //=============================================================================
 ///@name	PRINT INFORMATION

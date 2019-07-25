@@ -18,12 +18,12 @@ protected:
 
 	AS726X		inst_AS7262;		/// Underlying AS7262 sensor manager instance
 
-	int			color_vals[6];		/// Measured color  band values (violet, blue, green, yellow, orange, red)
+	uint16_t	color_vals[6];		/// Measured color  band values (violet, blue, green, yellow, orange, red)
 
 	bool		use_bulb;			/// Whether or not to use bulb
-	byte		gain;				/// Gain setting
-	byte		mode;				/// Sensor read mode
-	byte		integration_time;	/// Integration time setting
+	uint8_t		gain;				/// Gain setting
+	uint8_t		mode;				/// Sensor read mode
+	uint8_t		integration_time;	/// Integration time setting
 
 public:
 
@@ -42,12 +42,12 @@ public:
 	/// \param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
 	Loom_AS7262(
 			byte			i2c_address			= 0x49,
-			int				mux_port			= -1,
+			uint8_t			mux_port			= -1,
 			const char*		module_name			= "AS7262",
 			bool			use_bulb			= false,
-			byte			gain				= 1,
-			byte			mode				= 3,
-			byte			integration_time	= 50
+			uint8_t			gain				= 1,
+			uint8_t			mode				= 3,
+			uint8_t			integration_time	= 50
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -83,7 +83,7 @@ public:
 	/// Set gain.
 	// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
 	/// \param[in]	gain	Gain level: 
-	void		set_gain(byte gain);
+	void		set_gain(uint8_t gain);
 
 	/// Set mode.
 	/// 0: Continuous reading of VBGY
@@ -91,12 +91,12 @@ public:
 	/// 2: Continuous reading of all channels (power-on default)
 	/// 3: One-shot reading of all channels
 	/// \param[in]	mode	Mode
-	void		set_mode(byte mode);
+	void		set_mode(uint8_t mode);
 
 	/// Set integration time.
 	/// Time will be 2.8ms * [integration value]  (0-255), 50 is default
 	/// \param[in]	time	Integration time
-	void		set_integration_time(byte time);
+	void		set_integration_time(uint8_t time);
 
 private:
 

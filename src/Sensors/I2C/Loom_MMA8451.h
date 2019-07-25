@@ -39,7 +39,7 @@ public:
 
 	Loom_MMA8451(
 			byte			i2c_address		= 0x1D,
-			int				mux_port		= -1,
+			uint8_t			mux_port		= -1,
 			const char*		module_name		= "MMA8451",
 			mma8451_range_t	range			= MMA8451_RANGE_2_G
 		);

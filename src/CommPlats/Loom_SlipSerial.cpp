@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SlipSerial::Loom_SlipSerial(
 		const char*		module_name,
-		uint			max_message_len
+		uint16_t		max_message_len
 	) 
 	: LoomCommPlat(module_name, max_message_len )
 {

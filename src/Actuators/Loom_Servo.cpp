@@ -17,7 +17,7 @@ Loom_Servo::Loom_Servo(
 {
 	this->module_type = LoomModule::Type::Servo;
 
-	this->positions = new int[servo_count];
+	this->positions = new uint8_t[servo_count];
 
 	// this->servo_driver = new Adafruit_PWMServoDriver();
 
@@ -39,9 +39,9 @@ Loom_Servo::~Loom_Servo()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Servo::add_config(JsonObject json)
 {
-	add_config_aux(json, module_name,
-		module_name, servo_count
-	);
+	// add_config_aux(json, module_name,
+	// 	module_name, servo_count
+	// );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ void Loom_Servo::print_state()
 void Loom_Servo::package(JsonObject json)
 {
 	char tmp[8];
-	for (int i = 0; i < servo_count; i++) {
+	for (auto i = 0; i < servo_count; i++) {
 		sprintf(tmp, "Servo%d", i);
 		package_json(json, module_name, tmp, positions[i]);
 	}
@@ -85,7 +85,7 @@ bool Loom_Servo::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Servo::set_degree(int servo, int degree)
+void Loom_Servo::set_degree(uint8_t servo, uint8_t degree)
 {
 	
 	if (servo < servo_count) {

@@ -9,7 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MB1232::Loom_MB1232(
 		byte			i2c_address,
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name
 	)
 	: LoomI2CSensor( module_name, i2c_address, mux_port )

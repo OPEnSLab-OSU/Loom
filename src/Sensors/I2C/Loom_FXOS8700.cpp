@@ -7,7 +7,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXOS8700::Loom_FXOS8700(
 		byte			i2c_address, 
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name
 	)
 	: LoomI2CSensor( module_name, i2c_address, mux_port )
@@ -38,12 +38,12 @@ void Loom_FXOS8700::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\t", "AX: ", accel[0], " m/s^2");
-	LPrintln("\t", "AY: ", accel[1], " m/s^2");
-	LPrintln("\t", "AZ: ", accel[2], " m/s^2");
-	LPrintln("\t", "MX: ", mag[0], " uT");
-	LPrintln("\t", "MY: ", mag[1], " uT");
-	LPrintln("\t", "MZ: ", mag[2], " uT");
+	LPrintln("\tAX: ", accel[0], " m/s^2");
+	LPrintln("\tAY: ", accel[1], " m/s^2");
+	LPrintln("\tAZ: ", accel[2], " m/s^2");
+	LPrintln("\tMX: ", mag[0], " uT");
+	LPrintln("\tMY: ", mag[1], " uT");
+	LPrintln("\tMZ: ", mag[2], " uT");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

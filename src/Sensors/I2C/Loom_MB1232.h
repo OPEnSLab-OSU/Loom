@@ -14,7 +14,7 @@ class Loom_MB1232 : public LoomI2CSensor
 
 protected:
 
-	int range;		/// Measure distance (cm)
+	uint16_t range;		/// Measure distance (cm)
 
 public:
 	
@@ -29,7 +29,7 @@ public:
 	/// \param[in]	module_name				String | <"MB1232"> | null | MB1232 module name
 	Loom_MB1232(
 			byte			i2c_address		= 0x70,
-			int				mux_port		= -1,
+			uint8_t			mux_port		= -1,
 			const char*		module_name		= "MB1232"
 		);
 

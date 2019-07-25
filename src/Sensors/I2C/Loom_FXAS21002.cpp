@@ -7,7 +7,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXAS21002::Loom_FXAS21002(
 		byte			i2c_address, 
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name
 	)
 	: LoomI2CSensor( module_name, i2c_address, mux_port )
@@ -20,7 +20,7 @@ Loom_FXAS21002::Loom_FXAS21002(
 	if (!setup) active = false;
 
 	print_module_label();
-	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -38,9 +38,9 @@ void Loom_FXAS21002::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\t", "gx: ", gyro[0]);
-	LPrintln("\t", "gy: ", gyro[1]);
-	LPrintln("\t", "gz: ", gyro[2]);
+	LPrintln("\tgx: ", gyro[0]);
+	LPrintln("\tgy: ", gyro[1]);
+	LPrintln("\tgz: ", gyro[2]);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

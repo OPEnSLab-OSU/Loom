@@ -34,7 +34,7 @@ public:
 	/// \param[in]	module_name				String | <"FXOS8700"> | null | FXOS8700 module name
 	Loom_FXOS8700(
 			byte			i2c_address		= 0x1F,
-			int				mux_port		= -1,
+			uint8_t			mux_port		= -1,
 			const char*		module_name		= "FXOS8700"
 		);
 

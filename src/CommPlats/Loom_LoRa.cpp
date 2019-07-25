@@ -95,7 +95,7 @@ void Loom_LoRa::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::set_address(uint addr)    // Need to test this
+void Loom_LoRa::set_address(uint8_t addr)    // Need to test this
 { 
 	address = addr;
 	delete manager;
@@ -123,7 +123,7 @@ void Loom_LoRa::set_address(uint addr)    // Need to test this
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint Loom_LoRa::get_address() 
+uint8_t Loom_LoRa::get_address() 
 { 
 	return address; 
 }
@@ -148,7 +148,7 @@ bool Loom_LoRa::receive(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::send(JsonObject json, uint16_t destination) 
+bool Loom_LoRa::send(JsonObject json, uint8_t destination) 
 {
 	char buffer[max_message_len];
 	bool to_msgpack = json_to_msgpack_buffer(json, buffer, max_message_len);

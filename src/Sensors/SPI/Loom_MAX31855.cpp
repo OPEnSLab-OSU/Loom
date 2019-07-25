@@ -24,8 +24,8 @@ void Loom_MAX31855::print_measurements()
 {
 	print_module_label();
 	LPrintln();
-	LPrintln("\t", "Temperature   : ", temperature, " °C");
-	LPrintln("\t", "Internal Temp : ", internal_temp, " °C");
+	LPrintln("\tTemperature   : ", temperature, " °C");
+	LPrintln("\tInternal Temp : ", internal_temp, " °C");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

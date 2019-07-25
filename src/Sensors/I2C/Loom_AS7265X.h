@@ -18,15 +18,15 @@ protected:
 
 	AS7265X		inst_AS7265X;		/// Underlying AS7265X sensor manager instance
 
-	int			uv[6];				/// Measured UV bands values
-	int			color[6];			/// Measured color bands values
-	int			nir[6];				/// Measured near-infra-red bands values
+	uint16_t	uv[6];				/// Measured UV bands values
+	uint16_t	color[6];			/// Measured color bands values
+	uint16_t	nir[6];				/// Measured near-infra-red bands values
 
 	bool		use_bulb;			/// Whether or not to use the bulb
 
-	byte		gain;				/// Gain setting
-	byte		mode;				/// Sensor mode
-	byte		integration_time;	/// Integration time setting
+	uint8_t		gain;				/// Gain setting
+	uint8_t		mode;				/// Sensor mode
+	uint8_t		integration_time;	/// Integration time setting
 
 
 public:
@@ -46,12 +46,12 @@ public:
 	/// \param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
 	Loom_AS7265X(
 			byte			i2c_address			= 0x49,
-			int				mux_port			= -1,
+			uint8_t			mux_port			= -1,
 			const char*		module_name			= "AS7265X",
 			bool			use_bulb			= false,
-			byte			gain				= 64,
-			byte			mode				= AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT,	// 4 channel, other 4 channel, 6 chan, or 6 chan one shot // AS7265X_Mode,
-			byte			integration_time	= 50
+			uint8_t			gain				= 64,
+			uint8_t			mode				= AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT,	// 4 channel, other 4 channel, 6 chan, or 6 chan one shot // AS7265X_Mode,
+			uint8_t			integration_time	= 50
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -86,17 +86,17 @@ public:
 	/// Set gain.
 	/// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
 	/// \param[in]	gain	Gain level: 
-	void		set_gain(byte gain);
+	void		set_gain(uint8_t gain);
 
 	/// Set mode.
 	/// 4 channel, other 4 channel, 6 chan, or 6 chan one shot
 	/// \param[in]	mode	Mode
-	void		set_mode(byte mode);
+	void		set_mode(uint8_t mode);
 
 	/// Set integration time.
 	/// 50 * 2.8ms = 140ms. 0 to 255 is valid.  (49 is default)
 	/// If you use Mode 2 or 3 (all the colors) then integration time is double. 140*2 = 280ms between readings.
-	void		set_integration_time(byte time);
+	void		set_integration_time(uint8_t time);
 
 private:
 

@@ -18,11 +18,11 @@ protected:
 
 	Adafruit_TSL2561_Unified* inst_TSL2561;		/// Underlying TSL2561 sensor manager instance
 
-	int 		gain;			/// Gain level
-	int 		resolution;		/// Sensor resolution setting
+	uint8_t 	gain;			/// Gain level
+	uint8_t 	resolution;		/// Sensor resolution setting
 
-	int 		lightIR;		/// Measured infra-red lux
-	int 		lightFull;		/// Measure full spectrum lux
+	uint16_t	lightIR;		/// Measured infra-red lux
+	uint16_t	lightFull;		/// Measure full spectrum lux
 
 public:
 	
@@ -39,10 +39,10 @@ public:
 	/// \param[in]	resolution				Set(Int) | <3> | { 1("Low"), 2("Med"), 3("High") } | Resolution
 	Loom_TSL2561(
 			byte			i2c_address		= 0x39,
-			int				mux_port		= -1,
+			uint8_t			mux_port		= -1,
 			const char*		module_name		= "TSL2561",
-			int				gain			= 1,
-			int				resolution		= 3
+			uint8_t			gain			= 1,
+			uint8_t			resolution		= 3
 		);
 
 	/// Constructor that takes Json Array, extracts args

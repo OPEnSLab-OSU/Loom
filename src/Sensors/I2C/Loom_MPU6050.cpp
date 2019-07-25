@@ -9,7 +9,7 @@ MPU6050 mpu6050(Wire);
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MPU6050::Loom_MPU6050(
 		byte			i2c_address, 
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name,
 		bool			calibrate
 	) 

@@ -66,11 +66,11 @@ public:
 	Loom_OLED(
 			const char*		module_name				= "OLED",
 			bool			enable_rate_filter		= true,
-			uint			min_filter_delay		= 300,
+			uint16_t		min_filter_delay		= 300,
 			Version			type					= Version::FEATHERWING,
 			byte			reset_pin				= A2,
 			Format			display_format			= Format::SCROLL,
-			uint 			scroll_duration			= 6000,
+			uint16_t		scroll_duration			= 6000,
 			byte			freeze_pin				= 10,
 			FreezeType		freeze_behavior			= FreezeType::SCROLL
 		);

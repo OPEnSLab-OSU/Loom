@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MMA8451::Loom_MMA8451(
 		byte			i2c_address, 
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name,
 		mma8451_range_t	range
 	) 
@@ -44,11 +44,11 @@ void Loom_MMA8451::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\t", "Accel X     : ", accel[0], " m/s^2");
-	LPrintln("\t", "Accel Y     : ", accel[1], " m/s^2");
-	LPrintln("\t", "Accel Z     : ", accel[2], " m/s^2");
+	LPrintln("\tAccel X     : ", accel[0], " m/s^2");
+	LPrintln("\tAccel Y     : ", accel[1], " m/s^2");
+	LPrintln("\tAccel Z     : ", accel[2], " m/s^2");
 	
-	LPrint("\t", "Orientation : ");
+	LPrint("\tOrientation : ");
 	switch (orientation) {
 		case MMA8451_PL_PUF: LPrintln("Portrait Up Front");		break;
 		case MMA8451_PL_PUB: LPrintln("Portrait Up Back");		break;

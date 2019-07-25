@@ -72,12 +72,12 @@ public:
 /*@{*/ //======================================================================
 
 	bool		receive(JsonObject json) override;
-	bool		send(JsonObject json, uint16_t destination) override;
+	bool		send(JsonObject json, uint8_t destination) override;
 	void		add_config(JsonObject json) override;
 
 	// manually expose superclass version of log() that gets json from
 	// linked LoomManager, calling this classes implementation of 
-	// 'send(JsonObject)' and 'send(JsonObject, uint16_t)', which is pure virtual in superclass
+	// 'send(JsonObject)' and 'send(JsonObject, uint8_t)', which is pure virtual in superclass
 	using LoomCommPlat::send; 
 	using LoomCommPlat::receive; 
 	using LoomCommPlat::broadcast; 
@@ -93,13 +93,13 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	uint		get_address() override;
+	uint8_t		get_address() override;
 
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
-	void		set_address(uint addr) override;
+	void		set_address(uint8_t addr) override;
 
 private:
 

@@ -37,7 +37,7 @@ public:
 	/// \param[in]	max_message_len			Set(Int) | <15> | {15("Max length")} | The maximum possible message length
 	Loom_SlipSerial(
 			const char*		module_name			= "SlipSerial",
-			uint			max_message_len		= SERIAL_MAX_MESSAGE_LEN
+			uint16_t			max_message_len		= SERIAL_MAX_MESSAGE_LEN
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -53,7 +53,7 @@ public:
 /*@{*/ //======================================================================
 
 	bool		receive(JsonObject json) override {}
-	bool		send(JsonObject json, uint16_t destination) override {}
+	bool		send(JsonObject json, uint8_t destination) override {}
 	void		add_config(JsonObject json) override;
 
 //=============================================================================
@@ -66,13 +66,13 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	uint 		get_address() override;
+	uint8_t		get_address() override;
 
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
-	void 		set_address(uint addr) override;
+	void 		set_address(uint8_t addr) override;
 
 //=============================================================================
 ///@name	MISCELLANEOUS

@@ -14,7 +14,7 @@ class LoomI2CSensor : public LoomSensor
 protected:
 
 	byte	i2c_address;	/// The sensor's I2C address
-	int		port_num;		/// Used with multiplexer, keep track of port it is on
+	uint8_t	port_num;		/// Used with multiplexer, keep track of port it is on
 
 public:
 	
@@ -26,7 +26,7 @@ public:
 	LoomI2CSensor( 	
 			const char*		module_name, 
 			byte			i2c_address,
-			int				mux_port = -1	// Default to -1 (not on mux)		 
+			uint8_t			mux_port = -1	// Default to -1 (not on mux)		 
 		);
 
 	/// Destructor

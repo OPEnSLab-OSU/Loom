@@ -34,7 +34,7 @@ public:
 	/// \param[in]	module_name				String | <"SHT31D"> | null | SHT31D module name
 	Loom_SHT31D(
 			byte			i2c_address		= 0x44,
-			int				mux_port		= -1,
+			uint8_t			mux_port		= -1,
 			const char*		module_name		= "SHT31D"
 		);
 

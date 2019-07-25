@@ -69,13 +69,13 @@ public:
 	/// \param[in]	json			Json package to send
 	/// \param[in]	destination		Device to send to
 	/// \return True if packet sent successfully
-	virtual bool	send(JsonObject json, uint16_t destination) {}
+	virtual bool	send(JsonObject json, uint8_t destination) {}
 
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager
 	/// \param[in]	destination		Address of destination device
 	/// \return True if packet sent successfully
-	bool			send(uint16_t destination);
+	bool			send(uint8_t destination);
 
 	/// Broadcast data to all that can receive
 	/// \param[in]	json	Json object to send
@@ -96,13 +96,13 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	virtual uint	get_address() = 0;
+	virtual uint8_t	get_address() = 0;
 
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
-	virtual void	set_address(uint a) = 0;
+	virtual void	set_address(uint8_t a) = 0;
 
 protected:
 
@@ -112,7 +112,7 @@ protected:
 	/// \param[out]	buffer		Buffer to fill with MessagePack of json
 	/// \param[in]	max_len		Length of buffer
 	/// return True if success
-	bool	json_to_msgpack_buffer(JsonObjectConst json, char* buffer, int max_len);
+	bool	json_to_msgpack_buffer(JsonObjectConst json, char* buffer, uint16_t max_len);
 
 	/// Deserialize a MessagePack buffer into a JsonObject.
 	/// Also clears the json, contains prints and error checks.

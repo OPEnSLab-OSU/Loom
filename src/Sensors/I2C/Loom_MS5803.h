@@ -37,7 +37,7 @@ public:
 	/// \param[in]	module_name				String | <"MS5803"> | null | MS5803 module name
 	Loom_MS5803(
 			byte			i2c_address		= 0x76,
-			int				mux_port		= -1,
+			uint8_t			mux_port		= -1,
 			const char*		module_name		= "MS5803"
 		);
 

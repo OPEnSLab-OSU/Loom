@@ -21,15 +21,15 @@ Loom_Neopixel::Loom_Neopixel(
 	pin_enabled[2] = enableA2;
 
 	// Set pin mode on enabled pins (pins A0-A5 = 14-19)
-	for (int i = 0; i < 3; i++) { 
+	for (auto i = 0; i < 3; i++) { 
 		if (pin_enabled[i]) pinMode(14+i, OUTPUT); 
 	}
 
 	// Initialize Neopixels
-	for (int i = 0; i < 3; i++) {
+	for (auto i = 0; i < 3; i++) {
 		if (pin_enabled[i]) {
 			pixels[i] = new Adafruit_NeoPixel(1, 14+i, NEO_GRB + NEO_KHZ800);
-			for (int j = 0; j < 3; j++) {
+			for (auto j = 0; j < 3; j++) {
 				color_vals[i][j] = 0;
 			}
 			pixels[i]->begin(); // This initializes the NeoPixel library.
@@ -49,7 +49,7 @@ Loom_Neopixel::Loom_Neopixel(JsonArrayConst p)
 /// Destructor
 Loom_Neopixel::~Loom_Neopixel() 
 {
-	for (int i = 0; i < 3; i++) {
+	for (auto i = 0; i < 3; i++) {
 		if (pixels[i] != NULL) {
 			delete pixels[i];
 		}
@@ -59,10 +59,10 @@ Loom_Neopixel::~Loom_Neopixel()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Neopixel::add_config(JsonObject json)
 {
-	add_config_aux(json, module_name,
-		module_name,
-		pin_enabled[0], pin_enabled[1], pin_enabled[2]
-	);
+	// add_config_aux(json, module_name,
+	// 	module_name,
+	// 	pin_enabled[0], pin_enabled[1], pin_enabled[2]
+	// );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -70,7 +70,7 @@ void Loom_Neopixel::print_config()
 {
 	LoomActuator::print_config();
 
-	for (int i = 0; i < 3; i++) {
+	for (auto i = 0; i < 3; i++) {
 		LPrintln("\tNeopixel ", i, "          : ", (pin_enabled[i]) ? "Enabled" : "Disabled" );
 	}
 }
@@ -79,7 +79,7 @@ void Loom_Neopixel::print_config()
 void Loom_Neopixel::print_state()
 {
 	LPrintln(module_name, " State:");
-	for (int i = 0; i < 3; i++) {
+	for (auto i = 0; i < 3; i++) {
 		if (pin_enabled[i]) {
 			LPrint("\tNeo", i, ": ");
 			LPrint( color_vals[i][0], ", ");

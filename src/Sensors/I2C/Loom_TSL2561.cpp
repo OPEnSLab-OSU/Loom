@@ -7,17 +7,19 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TSL2561::Loom_TSL2561(
 		byte			i2c_address, 
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name, 
-		int				gain, 
-		int				resolution
+		uint8_t			gain, 
+		uint8_t			resolution
 	)
 	: LoomI2CSensor( module_name, i2c_address, mux_port )
+	, gain(gain)
+	, resolution(resolution)
 {
 	this->module_type = LoomModule::Type::TSL2561;
 
-	this->gain       = gain;
-	this->resolution = resolution;
+	// this->gain       = gain;
+	// this->resolution = resolution;
 
 
 	switch (i2c_address) {
@@ -63,8 +65,8 @@ void Loom_TSL2561::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\t", "LightIR   : ", lightIR,   " lux");
-	LPrintln("\t", "LightFull : ", lightFull, " lux");
+	LPrintln("\tLightIR   : ", lightIR,   " lux");
+	LPrintln("\tLightFull : ", lightFull, " lux");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

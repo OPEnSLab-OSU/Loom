@@ -40,7 +40,7 @@ public:
 	/// \param[in]	timing_level			Set(Int) | <0> | { 0 } | Timing level
 	Loom_TSL2591(
 			byte			i2c_address			= 0x29,
-			int				mux_port			= -1,
+			uint8_t			mux_port			= -1,
 			const char*		module_name			= "TSL2591",
 			uint8_t			gain_level			= 1,
 			uint8_t			timing_level		= 0

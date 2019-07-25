@@ -76,11 +76,14 @@ LoomRTC::LoomRTC(
 		byte			interrupt_pin
 	) 
 	: LoomModule( module_name )
+	, timezone(timezone)
+	, use_utc_time(use_utc_time)
+	, get_internet_time(get_internet_time)
 {
 	
-	this->timezone			= timezone;
-	this->use_utc_time 		= use_utc_time;
-	this->get_internet_time = get_internet_time;
+	// this->timezone			= timezone;
+	// this->use_utc_time 		= use_utc_time;
+	// this->get_internet_time = get_internet_time;
 
 	int_pin					= interrupt_pin;
 	// RTC_Int_Pin 			= int_pin; 		// This is static so ISR can be static (currently int_pin was made static instead)

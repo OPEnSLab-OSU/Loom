@@ -5,15 +5,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ZXGesture::Loom_ZXGesture(
 		byte			i2c_address, 
-		int				mux_port, 
+		uint8_t			mux_port, 
 		const char*		module_name,
 		Mode			mode
 	)
 	: LoomI2CSensor( module_name, i2c_address, mux_port )
+	, mode(mode)
 {
 	this->module_type = LoomModule::Type::ZXGesture;
 
-	this->mode = mode;
+	// this->mode = mode;
 
 	inst_ZX = new ZX_Sensor(i2c_address);
 
@@ -61,7 +62,7 @@ Loom_ZXGesture::~Loom_ZXGesture()
 void Loom_ZXGesture::print_config()
 {
 	LoomI2CSensor::print_config();
-	LPrintln('\t', "Mode                : ", (mode == Mode::POS) ? "Position" : "Gesture" );
+	LPrintln("\tMode             : ", (mode == Mode::POS) ? "Position" : "Gesture" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -72,12 +73,12 @@ void Loom_ZXGesture::print_measurements()
 
 	switch (mode) {
 		case Mode::POS : 
-			LPrintln("\t", "ZX: ", pos[0]);
-			LPrintln("\t", "ZY: ", pos[1]);
+			LPrintln("\tZX: ", pos[0]);
+			LPrintln("\tZY: ", pos[1]);
 			break;
 		case Mode::GEST : 
-			LPrintln("\t", "Gesture type : ", gesture_type.c_str());
-			LPrintln("\t", "Gesture speed: ", gesture_speed);
+			LPrintln("\tGesture type : ", gesture_type.c_str());
+			LPrintln("\tGesture speed: ", gesture_speed);
 			break; 
 	}
 }

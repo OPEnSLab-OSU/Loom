@@ -33,7 +33,7 @@ public:
 	/// \param[in]	module_name				String | <"LIS3DH"> | null | LIS3DH module name
 	Loom_LIS3DH(
 			byte			i2c_address		= 0x19,
-			int				mux_port		= -1,
+			uint8_t			mux_port		= -1,
 			const char*		module_name		= "LIS3DH"
 		);
 

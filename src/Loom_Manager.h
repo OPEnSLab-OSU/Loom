@@ -105,9 +105,9 @@ public:
 protected:
 
 	char		device_name[20];	/// The name of the device
-	uint		instance;			/// The instance / channel ID within the subnet
+	uint8_t		instance;			/// The instance / channel ID within the subnet
 	char		family[20];			/// The family the device belongs to
-	uint		family_num;			/// The subnet of the family
+	uint8_t		family_num;			/// The subnet of the family
 
 	/// Device type (Hub / Node)
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
@@ -152,8 +152,8 @@ public:
 	LoomManager(
 			const char*		device_name			= "Device",
 			const char*		family				= "Loom",
-			uint			family_num			= 1,
-			uint			instance			= 1,
+			uint8_t			family_num			= 1,
+			uint8_t			instance			= 1,
 			DeviceType		device_type			= DeviceType::NODE,
 			Verbosity		print_verbosity		= Verbosity::V_HIGH,
 			Verbosity		package_verbosity	= Verbosity::V_LOW
@@ -235,7 +235,7 @@ public:
 	/// semi-low power state.
 	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
 	/// \param[in]	ms	Number of milliseconds to pause
-	void		pause(int ms);
+	void		pause(uint16_t ms);
 
 	/// Iterate over modules, calling power up method
 	void 		power_up();
@@ -352,11 +352,11 @@ public:
 
 	/// Get device family number.
 	/// \return Family number
-	int			get_family_num();
+	uint8_t		get_family_num();
 
 	/// Get device instance number.
 	/// \return Family number
-	int			get_instance_num();
+	uint8_t		get_instance_num();
 
 	/// Get print verbosity.
 	/// \return print verbosity
@@ -380,11 +380,11 @@ public:
 	
 	/// Set device family number.
 	/// \param[in]	n	New family number
-	void		set_family_num(int n);
+	void		set_family_num(uint8_t n);
 	
 	/// Set device instance number.
 	/// \param[in]	n	New instance number
-	void		set_instance_num(int n);
+	void		set_instance_num(uint8_t n);
 
 	/// Set print verbosity.
 	/// \param[in]	v			New print verbosity
@@ -404,8 +404,8 @@ public:
 	/// \param[in]	count		Number of times to flash
 	/// \param[in]	time_high	Milliseconds to stay on for 
 	/// \param[in]	time_low	Milliseconds to stay off for 
-	void		flash_LED(uint count, uint time_high, uint time_low, bool end_high=false);
-	void		flash_LED(uint sequence[3]);
+	void		flash_LED(uint8_t count, uint8_t time_high, uint8_t time_low, bool end_high=false);
+	void		flash_LED(uint8_t sequence[3]);
 
 	/// Get c-string of name associated with device type enum
 	/// \return C-string of device type
@@ -416,65 +416,65 @@ public:
 /*@{*/ //======================================================================
 
 	// Other
-	Loom_Sleep_Manager&			SleepManager(int idx = 0);
-	Loom_Interrupt_Manager&		InterruptManager(int idx = 0);
-	Loom_Multiplexer&			Multiplexer(int idx = 0);
+	Loom_Sleep_Manager&			SleepManager(uint8_t idx = 0);
+	Loom_Interrupt_Manager&		InterruptManager(uint8_t idx = 0);
+	Loom_Multiplexer&			Multiplexer(uint8_t idx = 0);
 
 	// CommPlats
-	Loom_LoRa&			LoRa(int idx = 0);
-	Loom_nRF&			nRF(int idx = 0);
-	Loom_Bluetooth& 	Bluetooth(int idx = 0); 
+	Loom_LoRa&			LoRa(uint8_t idx = 0);
+	Loom_nRF&			nRF(uint8_t idx = 0);
+	Loom_Bluetooth& 	Bluetooth(uint8_t idx = 0); 
 
-	// Loom_SlipSerial&	SlipSerial(int idx = 0);
+	// Loom_SlipSerial&	SlipSerial(uint8_t idx = 0);
 
 	// LogPlats
-	Loom_OLED&			OLED(int idx = 0);
-	Loom_SD&			SDCARD(int idx = 0);
+	Loom_OLED&			OLED(uint8_t idx = 0);
+	Loom_SD&			SDCARD(uint8_t idx = 0);
 
 	// InternetPlats
-	LoomInternetPlat&	InternetPlat(const int idx = 0);
+	LoomInternetPlat&	InternetPlat(const uint8_t idx = 0);
 
 	// PublishPlats
-	LoomPublishPlat& 	PublishPlat(const int idx = 0);
+	LoomPublishPlat& 	PublishPlat(const uint8_t idx = 0);
 
 	// RTC
-	Loom_DS3231&		DS3231(int idx = 0);
-	Loom_PCF8523&		PCF8523(int idx = 0);
+	Loom_DS3231&		DS3231(uint8_t idx = 0);
+	Loom_PCF8523&		PCF8523(uint8_t idx = 0);
 
 	// Actuators
-	Loom_Neopixel&		Neopixel(int idx = 0);
-	Loom_Relay&			Relay(int idx = 0);
-	Loom_Servo&			Servo(int idx = 0);
-	Loom_Stepper&		Stepper(int idx = 0);
+	Loom_Neopixel&		Neopixel(uint8_t idx = 0);
+	Loom_Relay&			Relay(uint8_t idx = 0);
+	Loom_Servo&			Servo(uint8_t idx = 0);
+	Loom_Stepper&		Stepper(uint8_t idx = 0);
 
 	// Sensors
-	Loom_Analog&		Analog(int idx = 0);
-	Loom_Digital&		Digital(int idx = 0);
+	Loom_Analog&		Analog(uint8_t idx = 0);
+	Loom_Digital&		Digital(uint8_t idx = 0);
 
 	// I2C
-	Loom_AS7262&		AS7262(int idx = 0);
-	Loom_AS7263&		AS7263(int idx = 0);
-	Loom_AS7265X&		AS7265X(int idx = 0);
-	Loom_FXAS21002&		FXAS21002(int idx = 0);
-	Loom_FXOS8700&		FXOS8700(int idx = 0);
-	Loom_LIS3DH&		LIS3DH(int idx = 0);
-	Loom_MB1232&		MB1232(int idx = 0);
-	Loom_MMA8451&		MMA8451(int idx = 0);
-	Loom_MPU6050&		MPU6050(int idx = 0);
-	Loom_MS5803&		MS5803(int idx = 0);
-	Loom_SHT31D&		SHT31D(int idx = 0);
-	Loom_TMP007&		TMP007(int idx = 0);
-	Loom_TSL2561&		TSL2561(int idx = 0);
-	Loom_TSL2591&		TSL2591(int idx = 0);
-	Loom_ZXGesture&		ZXGesture(int idx = 0);
+	Loom_AS7262&		AS7262(uint8_t idx = 0);
+	Loom_AS7263&		AS7263(uint8_t idx = 0);
+	Loom_AS7265X&		AS7265X(uint8_t idx = 0);
+	Loom_FXAS21002&		FXAS21002(uint8_t idx = 0);
+	Loom_FXOS8700&		FXOS8700(uint8_t idx = 0);
+	Loom_LIS3DH&		LIS3DH(uint8_t idx = 0);
+	Loom_MB1232&		MB1232(uint8_t idx = 0);
+	Loom_MMA8451&		MMA8451(uint8_t idx = 0);
+	Loom_MPU6050&		MPU6050(uint8_t idx = 0);
+	Loom_MS5803&		MS5803(uint8_t idx = 0);
+	Loom_SHT31D&		SHT31D(uint8_t idx = 0);
+	Loom_TMP007&		TMP007(uint8_t idx = 0);
+	Loom_TSL2561&		TSL2561(uint8_t idx = 0);
+	Loom_TSL2591&		TSL2591(uint8_t idx = 0);
+	Loom_ZXGesture&		ZXGesture(uint8_t idx = 0);
 
 	// SDI12
-	Loom_Decagon5TM&	Decagon5TM(int idx = 0);
-	Loom_DecagonGS3&	DecagonGS3(int idx = 0);
+	Loom_Decagon5TM&	Decagon5TM(uint8_t idx = 0);
+	Loom_DecagonGS3&	DecagonGS3(uint8_t idx = 0);
 
 	// SPI
-	Loom_MAX31855&		MAX31855(int idx = 0);
-	Loom_MAX31856&		MAX31856(int idx = 0);
+	Loom_MAX31855&		MAX31855(uint8_t idx = 0);
+	Loom_MAX31856&		MAX31856(uint8_t idx = 0);
 
 protected:
 
@@ -584,9 +584,9 @@ private:
 	/// Auxiliary function to search a list of modules for a module of specified type
 	/// \param[in]	type	Type to search for
 	template<typename T>
-	LoomModule*	find_module(LoomModule::Type type, int idx, const std::vector<T>& modules)
+	LoomModule*	find_module(LoomModule::Type type, uint8_t idx, const std::vector<T>& modules)
 	{
-		int current = 0;
+		uint8_t current = 0;
 
 		for (auto module : modules) {
 			if (type == ((LoomModule*)module)->get_module_type()) {
@@ -628,7 +628,7 @@ private:
 	}
 		
 	/// Called by set_package_verbosity.
-	/// \param[in]	v	New print verbosity for modules
+	/// \param[in]	v	New print  verbosity for modules
 	template<typename T>
 	void set_package_verbosity_aux(Verbosity v, const std::vector<T>& modules)
 	{

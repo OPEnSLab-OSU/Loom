@@ -7,7 +7,7 @@ Loom_nRF::Loom_nRF(
 		const char*		module_name,
 		uint16_t		max_message_len,
 		
-		uint16_t		address,
+		uint8_t			address,
 
 		uint8_t			data_rate,
 		uint8_t			power_level,
@@ -127,11 +127,11 @@ void Loom_nRF::print_config()
 {
 	LoomCommPlat::print_config();
 
-	LPrintln('\t', "Address             : ", address );
-	LPrintln('\t', "Data Rate           : ", data_rate );
-	LPrintln('\t', "Power Level         : ", power_level );
-	LPrintln('\t', "Retry Count         : ", retry_count );
-	LPrintln('\t', "Retry Timeout       : ", retry_timeout );
+	LPrintln("\tAddress          : ", address );
+	LPrintln("\tData Rate        : ", data_rate );
+	LPrintln("\tPower Level      : ", power_level );
+	LPrintln("\tRetry Count      : ", retry_count );
+	LPrintln("\tRetry Timeout    : ", retry_timeout );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -152,7 +152,7 @@ bool Loom_nRF::receive(JsonObject json)
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
-bool Loom_nRF::send(JsonObject json, uint16_t destination) 
+bool Loom_nRF::send(JsonObject json, uint8_t destination) 
 {
 	char buffer[max_message_len];
 	bool to_msgpack = json_to_msgpack_buffer(json, buffer, max_message_len);
@@ -185,7 +185,7 @@ void Loom_nRF::broadcast(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::set_address(uint addr)    // Need to test this
+void Loom_nRF::set_address(uint8_t addr)    // Need to test this
 { 
 	address = addr;
 	delete network;
@@ -195,7 +195,7 @@ void Loom_nRF::set_address(uint addr)    // Need to test this
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint Loom_nRF::get_address() 
+uint8_t Loom_nRF::get_address() 
 { 
 	return address; 
 }

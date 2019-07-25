@@ -44,9 +44,9 @@ Loom_Stepper::~Loom_Stepper()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Stepper::add_config(JsonObject json)
 {
-	add_config_aux(json, module_name,
-		module_name, stepper_count
-	);
+	// add_config_aux(json, module_name,
+	// 	module_name, stepper_count
+	// );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -70,7 +70,7 @@ bool Loom_Stepper::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Stepper::move_steps(int motor, int steps, int speed, bool clockwise)
+void Loom_Stepper::move_steps(uint8_t motor, uint16_t steps, uint8_t speed, bool clockwise)
 {
 	motors[motor]->setSpeed( (speed > 0) ? speed : 0);
 	motors[motor]->step( (steps > 1) ? steps : 0, (clockwise) ? FORWARD : BACKWARD, SINGLE);

@@ -19,7 +19,7 @@ protected:
 
 	Adafruit_BluefruitLE_SPI* BLE;		/// Bluetooth manager instance
 
-	uint spi_CS, spi_IRQ, spi_RST;
+	uint8_t spi_CS, spi_IRQ, spi_RST;
 
 public:
 	
@@ -32,11 +32,11 @@ public:
 	/// \param[in]	module_name					String | <"Bluetooth"> | LoRa module name
 	Loom_Bluetooth(
 			const char*		module_name			= "Bluetooth",
-			int 			max_message_len		= 120,
+			uint16_t 		max_message_len		= 120,
 
-			uint			spi_CS				= 8,
-			uint			spi_IRQ				= 7,
-			uint			spi_RST				= 4
+			uint8_t			spi_CS				= 8,
+			uint8_t			spi_IRQ				= 7,
+			uint8_t			spi_RST				= 4
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -52,7 +52,7 @@ public:
 /*@{*/ //======================================================================
 
 	bool		receive(JsonObject json) override {}
-	bool		send(JsonObject json, uint16_t destination) override {}
+	bool		send(JsonObject json, uint8_t destination) override {}
 	void		add_config(JsonObject json) override;
 
 	/// Allow a phone to connect
@@ -90,14 +90,14 @@ public:
 /*@{*/ //======================================================================
 
 	/// Bluetooth currently does not use addresses
-	uint		get_address() override {}
+	uint8_t		get_address() override {}
 
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
 	/// Bluetooth currently does not use addresses
-	void		set_address(uint addr) override {}
+	void		set_address(uint8_t addr) override {}
 
 private:
 

@@ -48,7 +48,7 @@ public:
 	Loom_SD(
 			const char*		module_name			= "SD",
 			bool			enable_rate_filter	= true,
-			uint			min_filter_delay	= 1000,
+			uint16_t		min_filter_delay	= 1000,
 			byte			chip_select			= 10,
 			const char*		default_file		= "test.csv"
 
@@ -157,75 +157,75 @@ public:
 	///							   4: both date and time added (combined field)
 	/// \param[in]	has_keys	True if data is assumed to have keys (alternating key-values)
 	/// \param[in]	device_id	Device ID to label row with
-	template <typename T>
-	bool save_array(const char *file, T data [], int len, char delimiter, int timestamp, bool has_keys, char* device_id) 
-	{
-		if ( !sd_found || !check_millis() ) return false;
+	// template <typename T>
+	// bool save_array(const char *file, T data [], int len, char delimiter, int timestamp, bool has_keys, char* device_id) 
+	// {
+	// 	if ( !sd_found || !check_millis() ) return false;
 
-		digitalWrite(8, HIGH); 	// if using LoRa
+	// 	digitalWrite(8, HIGH); 	// if using LoRa
 
-		bool got_timestamp = false;
+	// 	bool got_timestamp = false;
 
-		SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
-		File sdFile = SD.open(file, FILE_WRITE);
+	// 	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
+	// 	File sdFile = SD.open(file, FILE_WRITE);
 
-		// If file successfully opened
-		if (sdFile) {
-			LPrint("Saving array to SD file: '", file, "' ...");
-			char time_key[30], time_val[30];
+	// 	// If file successfully opened
+	// 	if (sdFile) {
+	// 		LPrint("Saving array to SD file: '", file, "' ...");
+	// 		char time_key[30], time_val[30];
 
-			if (timestamp) {
-				if (device_manager != NULL) {
-					// LoomRTC* rtc = device_manager->get_rtc_module(0);
-					if (RTC_Inst != NULL) {
-						LPrintln("RTC Object: ", RTC_Inst->get_module_name() );
-						RTC_Inst->get_timestamp(time_key, time_val, delimiter, timestamp);
-						got_timestamp = true; 
-					}
-				}
-			}
+	// 		if (timestamp) {
+	// 			if (device_manager != NULL) {
+	// 				// LoomRTC* rtc = device_manager->get_rtc_module(0);
+	// 				if (RTC_Inst != NULL) {
+	// 					LPrintln("RTC Object: ", RTC_Inst->get_module_name() );
+	// 					RTC_Inst->get_timestamp(time_key, time_val, delimiter, timestamp);
+	// 					got_timestamp = true; 
+	// 				}
+	// 			}
+	// 		}
 
-			// Array is assumed to have alternating keys and values
-			if (has_keys) {
-				// Check if at first row (create header)
-				if ( sdFile.position() == 0) {
-					// Add timestamp header
-					if (got_timestamp) sdFile.print(time_key); 
-					// Add address header if address was provided
-					if (strlen(device_id) > 0) SD_print_aux(sdFile, "Device", delimiter); 
-					// LPrint keys
-					for (int i = 0; i < len-2; i+=2) 
-						SD_print_aux(sdFile, data[i], delimiter);
-					sdFile.println(data[len-2]);
-				}
-				// Add timestamp
-				if (got_timestamp) sdFile.print(time_val); 
-				// Add device ID if provided
-				if (strlen(device_id) > 0) SD_print_aux(sdFile, device_id, delimiter); 
-				// LPrint values 
-				for (int i = 1; i < len-2; i+=2) 
-					SD_print_aux(sdFile, data[i], delimiter); 
-				sdFile.println(data[len-1]);
-			} 
-			// Array is assume to only have values
-			else {
-				if (got_timestamp) sdFile.print(time_val); 
-				// Add device ID if provided
-				if (strlen(device_id) > 0) SD_print_aux(sdFile, device_id, delimiter); 
-				for (int i = 0; i < len-1; i++) 
-					SD_print_aux(sdFile, data[i], delimiter);
-				sdFile.println(data[len-1]);
-			}
-			sdFile.close();
-			LPrintln("Done");
-			return true;
-		} 
-		// If file could not be opened
-		else {
-			LPrintln("Error opening: ", file);
-			return false;
-		}
-	}
+	// 		// Array is assumed to have alternating keys and values
+	// 		if (has_keys) {
+	// 			// Check if at first row (create header)
+	// 			if ( sdFile.position() == 0) {
+	// 				// Add timestamp header
+	// 				if (got_timestamp) sdFile.print(time_key); 
+	// 				// Add address header if address was provided
+	// 				if (strlen(device_id) > 0) SD_print_aux(sdFile, "Device", delimiter); 
+	// 				// LPrint keys
+	// 				for (int i = 0; i < len-2; i+=2) 
+	// 					SD_print_aux(sdFile, data[i], delimiter);
+	// 				sdFile.println(data[len-2]);
+	// 			}
+	// 			// Add timestamp
+	// 			if (got_timestamp) sdFile.print(time_val); 
+	// 			// Add device ID if provided
+	// 			if (strlen(device_id) > 0) SD_print_aux(sdFile, device_id, delimiter); 
+	// 			// LPrint values 
+	// 			for (int i = 1; i < len-2; i+=2) 
+	// 				SD_print_aux(sdFile, data[i], delimiter); 
+	// 			sdFile.println(data[len-1]);
+	// 		} 
+	// 		// Array is assume to only have values
+	// 		else {
+	// 			if (got_timestamp) sdFile.print(time_val); 
+	// 			// Add device ID if provided
+	// 			if (strlen(device_id) > 0) SD_print_aux(sdFile, device_id, delimiter); 
+	// 			for (int i = 0; i < len-1; i++) 
+	// 				SD_print_aux(sdFile, data[i], delimiter);
+	// 			sdFile.println(data[len-1]);
+	// 		}
+	// 		sdFile.close();
+	// 		LPrintln("Done");
+	// 		return true;
+	// 	} 
+	// 	// If file could not be opened
+	// 	else {
+	// 		LPrintln("Error opening: ", file);
+	// 		return false;
+	// 	}
+	// }
 
 private:
 
@@ -233,7 +233,7 @@ private:
 	/// Recursive for nested folders
 	/// \param[in]	dir			File to treat at root
 	/// \param[in]	numTabs		Number of tabs to prepend to properly show nesting
-	void		print_directory(File dir, int numTabs);
+	void		print_directory(File dir, uint8_t numTabs);
 
 	/// Auxiliary funcntion to print data element, delimiter, and (optionally) space
 	/// \param[in]	sdFile		File to write to

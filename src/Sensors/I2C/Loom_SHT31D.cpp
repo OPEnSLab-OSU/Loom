@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SHT31D::Loom_SHT31D(
 		byte			i2c_address,
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name
 	)
 	: LoomI2CSensor( module_name, i2c_address, mux_port )
@@ -29,8 +29,8 @@ void Loom_SHT31D::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\t", "Temperature: ", temp, " C");
-	LPrintln("\t", "Humidity   : ", humid);
+	LPrintln("\tTemperature: ", temp, " C");
+	LPrintln("\tHumidity   : ", humid);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

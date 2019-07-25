@@ -7,7 +7,7 @@
 LoomLogPlat::LoomLogPlat( 
 		const char*		module_name, 
 		bool			enable_rate_filter,
-		uint			min_filter_delay
+		uint16_t		min_filter_delay
 	)
 	: LoomModule( module_name )
 {

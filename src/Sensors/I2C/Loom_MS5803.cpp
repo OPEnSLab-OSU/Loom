@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MS5803::Loom_MS5803(
 		byte			i2c_address, 
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name
 	)
 	: LoomI2CSensor( module_name, i2c_address, mux_port )
@@ -36,8 +36,8 @@ void Loom_MS5803::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\t", "Pressure    : ", pressure , " mbar");
-	LPrintln("\t", "Temperature : ", temp     , " C");
+	LPrintln("\tPressure    : ", pressure , " mbar");
+	LPrintln("\tTemperature : ", temp     , " C");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

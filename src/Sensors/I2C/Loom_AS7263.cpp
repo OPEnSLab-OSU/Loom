@@ -5,28 +5,27 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7263::Loom_AS7263(
 		byte			i2c_address, 
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name,
 		bool			use_bulb, 
-		byte			gain, 
-		byte			mode, 
-		byte			integration_time
+		uint8_t			gain, 
+		uint8_t			mode, 
+		uint8_t			integration_time
 	)
 	: LoomI2CSensor( module_name, i2c_address, mux_port )
+	, use_bulb(use_bulb)
+	, gain(gain)
+	, mode(mode)
+	, integration_time(integration_time)
 {
 	this->module_type = LoomModule::Type::AS7263;
-
-	this->use_bulb 			= use_bulb;
-	this->gain 				= gain;
-	this->mode 				= mode;
-	this->integration_time 	= integration_time;
 
 	inst_AS7263.begin(Wire, gain, mode);
 	inst_AS7263.setIntegrationTime(integration_time);
 
 	print_module_label();
-	LPrintln("\t", "Initialized");
-	// LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\tInitialized");
+	// LPrintln("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -37,9 +36,9 @@ Loom_AS7263::Loom_AS7263(JsonArrayConst p)
 void Loom_AS7263::print_config()
 {
 	LoomI2CSensor::print_config();	
-	LPrintln("\t", "Gain                : ", gain);
-	LPrintln("\t", "Mode                : ", mode);
-	LPrintln("\t", "Use Bulb            : ", (use_bulb) ? "True" : "False");
+	LPrintln("\tGain     : ", gain);
+	LPrintln("\tMode     : ", mode);
+	LPrintln("\tUse Bulb : ", (use_bulb) ? "True" : "False");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -47,12 +46,12 @@ void Loom_AS7263::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\t", "NIR R: ", nir_vals[0]);
-	LPrintln("\t", "NIR S: ", nir_vals[1]);
-	LPrintln("\t", "NIR T: ", nir_vals[2]);
-	LPrintln("\t", "NIR U: ", nir_vals[3]);
-	LPrintln("\t", "NIR V: ", nir_vals[4]);
-	LPrintln("\t", "NIR W: ", nir_vals[5]);
+	LPrintln("\tNIR R: ", nir_vals[0]);
+	LPrintln("\tNIR S: ", nir_vals[1]);
+	LPrintln("\tNIR T: ", nir_vals[2]);
+	LPrintln("\tNIR U: ", nir_vals[3]);
+	LPrintln("\tNIR V: ", nir_vals[4]);
+	LPrintln("\tNIR W: ", nir_vals[5]);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -92,19 +91,19 @@ void Loom_AS7263::enable_bulb(bool enable)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7263::set_gain(byte gain)
+void Loom_AS7263::set_gain(uint8_t gain)
 {
 	inst_AS7263.setGain(gain);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7263::set_mode(byte mode)
+void Loom_AS7263::set_mode(uint8_t mode)
 {
 	inst_AS7263.setMeasurementMode(mode);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7263::set_integration_time(byte time)
+void Loom_AS7263::set_integration_time(uint8_t time)
 {
 	inst_AS7263.setIntegrationTime(time);
 }

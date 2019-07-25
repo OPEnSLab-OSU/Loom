@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TMP007::Loom_TMP007(
 		byte			i2c_address, 
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name
 	) 
 	: LoomI2CSensor( module_name, i2c_address, mux_port )
@@ -36,8 +36,8 @@ void Loom_TMP007::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\t", "Object Temp : ", object_temp);
-	LPrintln("\t", "Die Temp    : ", die_temp);
+	LPrintln("\tObject Temp : ", object_temp);
+	LPrintln("\tDie Temp    : ", die_temp);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -31,7 +31,7 @@ protected:
 	Mode			mode;
 
 	/// Measured positions (x, y pos)
-	int 			pos[2];
+	uint8_t			pos[2];
 
 	/// Last read gesture type
 	GestureType		gesture;
@@ -54,7 +54,7 @@ public:
 	/// \param[in]	mode					Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
 	Loom_ZXGesture(
 			byte			i2c_address		= 0x10,
-			int				mux_port		= -1,
+			uint8_t			mux_port		= -1,
 			const char*		module_name		= "ZXGesture",
 			Mode			mode			= Mode::POS
 		);

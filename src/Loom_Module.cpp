@@ -6,13 +6,18 @@
 LoomModule::LoomModule( const char* set_module_name )
 	: module_name_base(set_module_name)
 	, module_name(module_name_base.c_str())
+	, active(true)
+	, print_debug(true)
+	, print_verbosity(Verbosity::V_LOW)
+	, package_verbosity(Verbosity::V_LOW)
+	, device_manager(nullptr)
 {
-	active 				= true;
-	print_debug 		= true;
-	print_verbosity 	= Verbosity::V_LOW;
-	package_verbosity 	= Verbosity::V_LOW;
+	// active 				= true;
+	// print_debug 		= true;
+	// print_verbosity 	= Verbosity::V_LOW;
+	// package_verbosity 	= Verbosity::V_LOW;
 	
-	this->device_manager = nullptr;
+	// this->device_manager = nullptr;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -50,10 +55,10 @@ void LoomModule::print_config()
 {
 	print_module_label();
 	LPrintln("Config:");
-	LPrintln('\t', "Module Active       : ", (active)      ? "Enabled" : "Disabled" );
-	LPrintln('\t', "Print Debug         : ", (print_debug) ? "Enabled" : "Disabled" );
-	LPrintln('\t', "Print Verbosity     : ", enum_verbosity_string(print_verbosity) );
-	LPrintln('\t', "Package Verbosity   : ", enum_verbosity_string(package_verbosity) );
+	LPrintln("\tModule Active    : ", (active)      ? "Enabled" : "Disabled" );
+	LPrintln("\tPrint Debug      : ", (print_debug) ? "Enabled" : "Disabled" );
+	LPrintln("\tPrint Verbosity  : ", enum_verbosity_string(print_verbosity) );
+	LPrintln("\tPackage Verbosity: ", enum_verbosity_string(package_verbosity) );
 }
 
 ///////////////////////////////////////////////////////////////////////////////

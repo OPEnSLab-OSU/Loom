@@ -5,28 +5,28 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7262::Loom_AS7262(
 		byte			i2c_address, 
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name, 
 		bool			use_bulb, 
-		byte			gain, 
-		byte			mode, 
-		byte			integration_time
+		uint8_t			gain, 
+		uint8_t			mode, 
+		uint8_t			integration_time
 	)
 	: LoomI2CSensor( module_name, i2c_address, mux_port )
+	, use_bulb(use_bulb)
+	, gain(gain)
+	, mode(mode)
+	, integration_time(integration_time)
+
 {
 	this->module_type = LoomModule::Type::AS7262;
-
-	this->use_bulb 			= use_bulb;
-	this->gain 				= gain;
-	this->mode 				= mode;
-	this->integration_time 	= integration_time;
 
 	inst_AS7262.begin(Wire, gain, mode);
 	inst_AS7262.setIntegrationTime(integration_time);
 
 	print_module_label();
-	LPrintln("\t", "Initialized");
-	// LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\tInitialized");
+	// LPrintln("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -37,9 +37,9 @@ Loom_AS7262::Loom_AS7262(JsonArrayConst p)
 void Loom_AS7262::print_config()
 {
 	LoomI2CSensor::print_config();	
-	LPrintln("\t", "Gain                : ", gain);
-	LPrintln("\t", "Mode                : ", mode);
-	LPrintln("\t", "Use Bulb            : ", (use_bulb) ? "True" : "False");
+	LPrintln("\tGain     : ", gain);
+	LPrintln("\tMode     : ", mode);
+	LPrintln("\tUse Bulb : ", (use_bulb) ? "True" : "False");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -47,12 +47,12 @@ void Loom_AS7262::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\t", "Violet : ", color_vals[0]);
-	LPrintln("\t", "Blue   : ", color_vals[1]);
-	LPrintln("\t", "Green  : ", color_vals[2]);
-	LPrintln("\t", "Yellow : ", color_vals[3]);
-	LPrintln("\t", "Orange : ", color_vals[4]);
-	LPrintln("\t", "Red    : ", color_vals[5]);
+	LPrintln("\tViolet : ", color_vals[0]);
+	LPrintln("\tBlue   : ", color_vals[1]);
+	LPrintln("\tGreen  : ", color_vals[2]);
+	LPrintln("\tYellow : ", color_vals[3]);
+	LPrintln("\tOrange : ", color_vals[4]);
+	LPrintln("\tRed    : ", color_vals[5]);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -92,19 +92,19 @@ void Loom_AS7262::enable_bulb(bool enable)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7262::set_gain(byte gain)
+void Loom_AS7262::set_gain(uint8_t gain)
 {
 	inst_AS7262.setGain(gain);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7262::set_mode(byte mode)
+void Loom_AS7262::set_mode(uint8_t mode)
 {
 	inst_AS7262.setMeasurementMode(mode);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7262::set_integration_time(byte time)
+void Loom_AS7262::set_integration_time(uint8_t time)
 {
 	inst_AS7262.setIntegrationTime(time);
 }

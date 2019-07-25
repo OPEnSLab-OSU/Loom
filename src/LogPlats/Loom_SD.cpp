@@ -9,7 +9,7 @@
 Loom_SD::Loom_SD(		
 		const char*		module_name, 
 		bool			enable_rate_filter, 
-		uint			min_filter_delay, 
+		uint16_t		min_filter_delay, 
 		byte			chip_select, 
 		const char*		default_file
 	)
@@ -323,7 +323,7 @@ void Loom_SD::_write_json_data(File sdFile, JsonObject dev_id, JsonObject timest
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::print_directory(File dir, int numTabs) 
+void Loom_SD::print_directory(File dir, uint8_t numTabs) 
 {
 	if ( !sd_found ) return;
 
@@ -334,7 +334,7 @@ void Loom_SD::print_directory(File dir, int numTabs)
 		
 		if ( !entry ) break;	// no more files
 
-		for (uint8_t i = 0; i < numTabs; i++) {
+		for (auto i = 0; i < numTabs; i++) {
 			Serial.print('\t');
 		}
 

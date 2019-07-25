@@ -46,25 +46,26 @@ void Loom_MAX31856::print_config()
 	
 	LPrint("Thermocouple type: ");
 	switch ( inst_max->getThermocoupleType() ) {
-		case MAX31856_TCTYPE_B  : LPrintln("B Type"); break;
-		case MAX31856_TCTYPE_E  : LPrintln("E Type"); break;
-		case MAX31856_TCTYPE_J  : LPrintln("J Type"); break;
-		case MAX31856_TCTYPE_K  : LPrintln("K Type"); break;
-		case MAX31856_TCTYPE_N  : LPrintln("N Type"); break;
-		case MAX31856_TCTYPE_R  : LPrintln("R Type"); break;
-		case MAX31856_TCTYPE_S  : LPrintln("S Type"); break;
-		case MAX31856_TCTYPE_T  : LPrintln("T Type"); break;
-		case MAX31856_VMODE_G8  : LPrintln("Voltage x8 Gain mode"); break;
-		case MAX31856_VMODE_G32 : LPrintln("Voltage x8 Gain mode"); break;
-		default: LPrintln("Unknown"); break;
+		case MAX31856_TCTYPE_B  : LPrint("B"); break;
+		case MAX31856_TCTYPE_E  : LPrint("E"); break;
+		case MAX31856_TCTYPE_J  : LPrint("J"); break;
+		case MAX31856_TCTYPE_K  : LPrint("K"); break;
+		case MAX31856_TCTYPE_N  : LPrint("N"); break;
+		case MAX31856_TCTYPE_R  : LPrint("R"); break;
+		case MAX31856_TCTYPE_S  : LPrint("S"); break;
+		case MAX31856_TCTYPE_T  : LPrint("T"); break;
+		case MAX31856_VMODE_G8  : LPrint("Voltage x8 Gain mode"); break;
+		case MAX31856_VMODE_G32 : LPrint("Voltage x8 Gain mode"); break;
+		default: LPrint("Unknown"); break;
 	}
+	LPrintln(" Type");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MAX31856::print_measurements() 
 {
 	print_module_label();
-	LPrintln("\t", "Temperature: ", temperature, " C");
+	LPrintln("\tTemperature: ", temperature, " C");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

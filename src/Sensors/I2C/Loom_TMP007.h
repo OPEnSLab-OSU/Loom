@@ -34,7 +34,7 @@ public:
 	/// \param[in]	module_name				String | <"TMP007"> | null | TMP007 module name
 	Loom_TMP007(
 			byte			i2c_address		= 0x40,
-			int				mux_port		= -1,
+			uint8_t			mux_port		= -1,
 			const char*		module_name		= "TMP007"
 		);
 

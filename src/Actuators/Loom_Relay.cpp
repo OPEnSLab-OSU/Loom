@@ -24,9 +24,9 @@ Loom_Relay::Loom_Relay(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::add_config(JsonObject json)
 {
-	add_config_aux(json, module_name,
-		module_name, pin
-	);
+	// add_config_aux(json, module_name,
+	// 	module_name, pin
+	// );
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -5,10 +5,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Bluetooth::Loom_Bluetooth( 	
 		const char*		module_name,
-		int 			max_message_len,
-		uint			spi_CS,
-		uint			spi_IRQ,
-		uint			spi_RST
+		uint16_t 		max_message_len,
+		uint8_t			spi_CS,
+		uint8_t			spi_IRQ,
+		uint8_t			spi_RST
 
 	)
 	: LoomCommPlat( module_name, max_message_len )

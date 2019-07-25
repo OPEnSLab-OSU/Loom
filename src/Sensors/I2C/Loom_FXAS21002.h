@@ -32,7 +32,7 @@ public:
 	/// \param[in]	module_name				String | <"FXAS21002"> | null | FXAS21002 module name
 	Loom_FXAS21002(
 			byte			i2c_address		= 0x20,
-			int				mux_port		= -1,
+			uint8_t			mux_port		= -1,
 			const char*		module_name		= "FXAS21002"
 		);
 

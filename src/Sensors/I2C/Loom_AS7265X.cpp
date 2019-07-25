@@ -5,21 +5,20 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7265X::Loom_AS7265X(
 		byte			i2c_address, 
-		int				mux_port,
+		uint8_t			mux_port,
 		const char*		module_name, 
 		bool			use_bulb, 
-		byte			gain, 
-		byte			mode, 
-		byte			integration_time
+		uint8_t			gain, 
+		uint8_t			mode, 
+		uint8_t			integration_time
 	)
 	: LoomI2CSensor( module_name, i2c_address, mux_port )
+	, use_bulb(use_bulb)
+	, gain(gain)
+	, mode(mode)
+	, integration_time(integration_time)
 {
 	this->module_type = LoomModule::Type::AS7265X;
-
-	this->use_bulb 			= use_bulb;
-	this->gain 				= gain;
-	this->mode 				= mode;
-	this->integration_time 	= integration_time;
 
 	bool setup = inst_AS7265X.begin();
 
@@ -80,7 +79,7 @@ Loom_AS7265X::Loom_AS7265X(
 	if (!setup) active = false;
 
 	print_module_label();
-	LPrintln("\t", "Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("\tInitialize ", (setup) ? "sucessful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -94,11 +93,11 @@ void Loom_AS7265X::print_measurements()
 	LPrintln("Measurements:");
 
 	// UV
-	for (int i = 0; i < 6; i++) { LPrintln("\t", "A: ", uv[i]); }
+	for (auto i = 0; i < 6; i++) { LPrintln("\tA: ", uv[i]); }
 	// Color
-	for (int i = 0; i < 6; i++) { LPrintln("\t", "G: ", color[i]); }
+	for (auto i = 0; i < 6; i++) { LPrintln("\tG: ", color[i]); }
 	// NIR
-	for (int i = 0; i < 6; i++) { LPrintln("\t", "R: ", nir[i]); }
+	for (auto i = 0; i < 6; i++) { LPrintln("\tR: ", nir[i]); }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -173,19 +172,19 @@ void Loom_AS7265X::enable_bulb(bool e)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::set_gain(byte gain) 
+void Loom_AS7265X::set_gain(uint8_t gain) 
 {
 	inst_AS7265X.setGain(gain);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::set_mode(byte mode) 
+void Loom_AS7265X::set_mode(uint8_t mode) 
 {
 	inst_AS7265X.setMeasurementMode(mode);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::set_integration_time(byte time) 
+void Loom_AS7265X::set_integration_time(uint8_t time) 
 {
 	inst_AS7265X.setIntegrationCycles(time);
 }

@@ -13,7 +13,7 @@ class LoomLogPlat : public LoomModule
 protected:
 
 	bool			enable_rate_filter;		/// Whether or not to enable a minimum delay between logging
-	uint			min_filter_delay;		/// Minimum delay between logging (milliseconds) 	
+	uint16_t		min_filter_delay;		/// Minimum delay between logging (milliseconds) 	
 	unsigned long	last_log_millis;		/// Value of millis() at last executed log time
 
 public:
@@ -27,7 +27,7 @@ public:
 			const char*		module_name,
 
 			bool			enable_rate_filter 		= true,
-			uint			min_filter_delay 		= 1000
+			uint16_t		min_filter_delay 		= 1000
 	   );
 
 	/// Destructor
