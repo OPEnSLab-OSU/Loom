@@ -36,9 +36,9 @@ void Loom_MPU6050::print_state()
 {
 	LoomI2CSensor::print_state();
 
-	LPrintln("\t", "gyroXoffset : ", mpu6050.getGyroXoffset() );
-	LPrintln("\t", "gyroYoffset : ", mpu6050.getGyroYoffset() );
-	LPrintln("\t", "gyroZoffset : ", mpu6050.getGyroZoffset() );
+	LPrintln("\tgyroXoffset : ", mpu6050.getGyroXoffset() );
+	LPrintln("\tgyroYoffset : ", mpu6050.getGyroYoffset() );
+	LPrintln("\tgyroZoffset : ", mpu6050.getGyroZoffset() );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -47,27 +47,27 @@ void Loom_MPU6050::print_measurements()
 	print_module_label();
 	LPrintln("Measurements:");
 
-	LPrintln("\t", "accX       : ", accX);
-	LPrintln("\t", "accY       : ", accY);
-	LPrintln("\t", "accZ       : ", accZ);
+	LPrintln("\taccX       : ", accX);
+	LPrintln("\taccY       : ", accY);
+	LPrintln("\taccZ       : ", accZ);
 
-	LPrintln("\t", "gyroX      : ", gyroX);
-	LPrintln("\t", "gyroY      : ", gyroY);
-	LPrintln("\t", "gyroZ      : ", gyroZ);
+	LPrintln("\tgyroX      : ", gyroX);
+	LPrintln("\tgyroY      : ", gyroY);
+	LPrintln("\tgyroZ      : ", gyroZ);
 
-	LPrintln("\t", "angleX     : ", angleX);
-	LPrintln("\t", "angleY     : ", angleY);
-	LPrintln("\t", "angleZ     : ", angleZ);
+	LPrintln("\tangleX     : ", angleX);
+	LPrintln("\tangleY     : ", angleY);
+	LPrintln("\tangleZ     : ", angleZ);
 
 	if (print_verbosity == Verbosity::V_HIGH) {
-		LPrintln("\t", "temp       : ", temp);
+		LPrintln("\ttemp       : ", temp);
 
-		LPrintln("\t", "accAngleX  : ", accAngleX);
-		LPrintln("\t", "accAngleY  : ", accAngleY);
+		LPrintln("\taccAngleX  : ", accAngleX);
+		LPrintln("\taccAngleY  : ", accAngleY);
 
-		LPrintln("\t", "gyroAngleX : ", gyroAngleX);
-		LPrintln("\t", "gyroAngleY : ", gyroAngleY);
-		LPrintln("\t", "gyroAngleZ : ", gyroAngleZ);
+		LPrintln("\tgyroAngleX : ", gyroAngleX);
+		LPrintln("\tgyroAngleY : ", gyroAngleY);
+		LPrintln("\tgyroAngleZ : ", gyroAngleZ);
 	}
 
 }

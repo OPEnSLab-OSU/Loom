@@ -36,7 +36,7 @@ Loom_MMA8451::Loom_MMA8451(JsonArrayConst p)
 void Loom_MMA8451::print_config()
 {
 	LoomI2CSensor::print_config();
-	LPrintln('\t', "Range               : ", 2 << MMA.getRange(), "G" );
+	LPrintln("\tRange               : ", 2 << MMA.getRange(), "G" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -94,7 +94,7 @@ void Loom_MMA8451::package(JsonObject json)
 			case MMA8451_PL_PUF: strcpy(buf, "Portrait Up Front");		break;
 			case MMA8451_PL_PUB: strcpy(buf, "Portrait Up Back");		break;
 			case MMA8451_PL_PDF: strcpy(buf, "Portrait Down Front");	break;
-			case MMA8451_PL_PDB: strcpy(buf, "Portrait Down Back");	break;
+			case MMA8451_PL_PDB: strcpy(buf, "Portrait Down Back");		break;
 			case MMA8451_PL_LRF: strcpy(buf, "Landscape Right Front");	break;
 			case MMA8451_PL_LRB: strcpy(buf, "Landscape Right Back");	break;
 			case MMA8451_PL_LLF: strcpy(buf, "Landscape Left Front");	break;

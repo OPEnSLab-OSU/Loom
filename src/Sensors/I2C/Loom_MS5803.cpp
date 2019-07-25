@@ -18,7 +18,7 @@ Loom_MS5803::Loom_MS5803(
 	if (!setup) active = false;
 
 	print_module_label();
-	LPrintln("\tInitialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
