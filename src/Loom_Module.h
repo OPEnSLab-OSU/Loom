@@ -30,34 +30,46 @@ public:
 	/// Enum to check against to when finding individual component
 	/// managed by a LoomManager
 	enum class Type {
-		Unknown,
-		// Actuators
-		Neopixel, Relay, Servo, Stepper,
-		// Sensors
-		Analog, Digital,
-		// I2C
-		AS7262, AS7263, AS7265X, FXAS21002, FXOS8700, LIS3DH, MB1232, MMA8451, MPU6050, MS5803, SHT31D, TMP007, TSL2561, TSL2591, ZXGesture,
-		// SDI12
-		Decagon5TM, DecagonGS3,
-		// SPI
-		MAX31855, MAX31856,
-		// CommPlats
-		LoRa, nRF, SlipSerial, Bluetooth,
-		// LogPlats
-		OLED, SDCARD,
-		// InternetPlats
-		Ethernet, // Internet, 
-		// PublishPlats
-		GoogleSheets, //Publish,
-		// RTC
-		DS3231, PCF8523,
+		Unknown = 0,
 		// Other
-		Sleep_Manager, Interrupt_Manager, Multiplexer
+		Other=1000,			Interrupt_Manager, Sleep_Manager, Multiplexer,
+		// Sensors
+		Sensor=2000,		Analog, Digital,
+		// I2C
+		I2C=2100,			AS7262, AS7263, AS7265X, FXAS21002, FXOS8700, LIS3DH, MB1232, MMA8451, MPU6050, MS5803, SHT31D, TMP007, TSL2561, TSL2591, ZXGesture,
+		// SDI12
+		SDI12=2200,			Decagon5TM, DecagonGS3,
+		// SPI	
+		SPI=2300,			MAX31855, MAX31856,
+		// RTC
+		L_RTC=3000,			DS3231, PCF8523,
+		// Actuators
+		Actuator=4000,		Neopixel, Relay, Servo, Stepper,
+		// LogPlats
+		LogPlat=5000,		OLED, SDCARD,
+		// CommPlats
+		CommPlat=6000,		LoRa, nRF, SlipSerial, Bluetooth,
+		// InternetPlats
+		InternetPlat=7000,	Ethernet,
+		// PublishPlats
+		PublishPlat=8000,	GoogleSheets
+	};
+
+	enum class Category {
+		Unknown=0,		// Unknown	
+		Other=1,		// Other
+		Sensor=2,		// Sensors
+		L_RTC=3,		// RTC
+		Actuator=4,		// Actuators
+		LogPlat=5,		// LogPlats
+		CommPlat=6,		// CommPlats
+		InternetPlat=7,	// InternetPlats
+		PublishPlat=8,	// PublishPlats
 	};
 
 protected:
 
-	Type			module_type;		/// Module type (hub / node)
+	const Type		module_type;		/// Module type (hub / node)
 	LoomManager*	device_manager;		/// Pointer to manager
 	const String	module_name_base;	/// The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
 	const char * 	module_name;
@@ -192,6 +204,11 @@ public:
 	/// Get string of name associated with verbosity enum
 	/// \return String of verbosity
 	static const char*	enum_verbosity_string(Verbosity v);
+	
+	static const char*	enum_category_string(Category c);
+
+	Category			get_module_category();
+
 
 protected:
 

@@ -19,6 +19,8 @@
 #include <Adafruit_SleepyDog.h>
 
 
+#include <algorithm>
+
 ///////////////////////////////////////////////////////////////////////////////
 const char* LoomManager::enum_device_type_string(DeviceType t)
 {
@@ -48,15 +50,6 @@ LoomManager::LoomManager(
 {
 	snprintf(this->device_name, 20, "%s", device_name);
 	snprintf(this->family, 20, "%s", family);
-
-	// this->family_num = family_num;
-	// this->instance = instance;
-
-	// this->device_type = device_type;
-
-	// // Set verbosity
-	// this->print_verbosity 	= print_verbosity;
-	// this->package_verbosity	= package_verbosity;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -188,16 +181,39 @@ void LoomManager::add_module(LoomRTC* rtc)
 	}
 }
 
+
+bool LoomManager::add_module_aux2(std::vector<LoomModule*>& modules, LoomModule* module) 
+{
+	print_device_label();
+
+	if (module == nullptr) {
+		LPrintln("Cannot add null module");
+		return false;
+	}
+
+	LPrintln("Adding Module: ", module->get_module_name() );
+
+	// modules.emplace_back(module);
+	modules.push_back(module);
+	module->link_device_manager(this);
+	return true;	
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomModule* module) 
 {
-	add_module_aux(other_modules, module);
+	// add_module_aux(other_modules, module);
+	add_module_aux2(other_modules, module);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomSensor* sensor) 
 {
 	add_module_aux(sensor_modules, sensor);
+	// add_module_aux2(sensor_modules, sensor);
+	// add_module_aux2(other_modules, sensor);
+	// add_module_aux2(static_cast<>sensor_modules, sensor);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

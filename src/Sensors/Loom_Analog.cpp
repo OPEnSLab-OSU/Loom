@@ -116,7 +116,7 @@ void Loom_Analog::print_config()
 {
 	LoomSensor::print_config();
 
-	LPrintln("\tAnalog Resolution   : ", read_resolution);
+	LPrintln("\tAnalog Resolution : ", read_resolution);
 	LPrint("\tEnabled Pins        : ");
 	for (auto i = 0; i < ANALOG_COUNT; i++) { 
 		if (pin_enabled[i]) {

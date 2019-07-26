@@ -507,7 +507,7 @@ private:
 	}
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Add module to a list of modules
+	// /// Add module to a list of modules
 	template<typename T>
 	bool add_module_aux(std::vector<T>& modules, const T module) 
 	{
@@ -524,6 +524,24 @@ private:
 		module->link_device_manager(this);
 		return true;	
 	}
+
+	/// Add module to a list of modules
+	// template<typename T>
+	bool add_module_aux2(std::vector<LoomModule*>& modules, LoomModule* module); 
+	// {
+	// 	print_device_label();
+
+	// 	if (module == nullptr) {
+	// 		LPrintln("Cannot add null module");
+	// 		return false;
+	// 	}
+
+	// 	LPrintln("Adding Module: ", module->get_module_name() );
+
+	// 	modules.emplace_back(module);
+	// 	module->link_device_manager(this);
+	// 	return true;	
+	// }
 
 	///////////////////////////////////////////////////////////////////////////
 	/// Auxiliary function for printing a list of modules
