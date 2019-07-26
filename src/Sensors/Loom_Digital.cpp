@@ -118,23 +118,23 @@ void Loom_Digital::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Digital::package(JsonObject json)
 {
+	JsonObject data = get_module_data_object(json, module_name);
 	char buf[3];
 
 	// 5,6,9,10,11,12
-	for (int i = 0; i < 6; i++) { 
+	for (auto i = 0; i < 6; i++) { 
 		if (pin_enabled[i]) {
 			sprintf(buf, "%d", pin_nums[i]);
-			package_json(json, module_name, buf, digital_vals[i]);
+			data[buf] = digital_vals[i];
 		}
 	}
 	// A0-A5
-	for (int i = 0; i < 6; i++) { 
+	for (auto i = 0; i < 6; i++) { 
 		if (pin_enabled[i+6]) {
 			sprintf(buf, "%s%d", "A", i);
-			package_json(json, module_name, buf, digital_vals[i+6]);
+			data[buf] = digital_vals[i];
 		}
 	}
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

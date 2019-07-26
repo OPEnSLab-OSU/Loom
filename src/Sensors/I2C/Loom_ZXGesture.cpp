@@ -128,22 +128,18 @@ void Loom_ZXGesture::measure()
 
 void Loom_ZXGesture::package(JsonObject json)
 {
+	JsonObject data = get_module_data_object(json, module_name);
+
 	switch (mode) {
 		case Mode::POS : 		
-			package_json(json, module_name, 
-				"zx",	pos[0],
-				"zy",	pos[1]
-			);
-
+			data["zx"] = pos[0];
+			data["zy"] = pos[1];
 			break;
 		case Mode::GEST : 
-			package_json(json, module_name, 
-				"type",		gesture_type.c_str(),
-				"speed",	(int)gesture_speed
-			);
+			data["type"]  = gesture_type.c_str();
+			data["speed"] = (int)gesture_speed;		
 			break; 
 	}
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

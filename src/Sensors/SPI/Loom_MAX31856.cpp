@@ -95,9 +95,8 @@ void Loom_MAX31856::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MAX31856::package(JsonObject json)
 {
-	package_json(json, module_name, 
-		"Temp", temperature
-	);
+	JsonObject data = get_module_data_object(json, module_name);
+	data["temp"] = temperature;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

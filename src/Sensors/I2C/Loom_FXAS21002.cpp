@@ -49,12 +49,10 @@ void Loom_FXAS21002::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_FXAS21002::package(JsonObject json)
 {
-	package_json(json, module_name, 
-		"gx", gyro[0],
-		"gy", gyro[1],
-		"gz", gyro[2]
-
-	);
+	JsonObject data = get_module_data_object(json, module_name);
+	data["gx"] = gyro[0];
+	data["gy"] = gyro[1];
+	data["gz"] = gyro[2];
 }
 
 ///////////////////////////////////////////////////////////////////////////////

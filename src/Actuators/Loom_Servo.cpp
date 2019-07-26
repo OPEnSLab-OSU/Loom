@@ -51,10 +51,11 @@ void Loom_Servo::print_state()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Servo::package(JsonObject json)
 {
-	char tmp[8];
+	JsonObject data = get_module_data_object(json, module_name);
+	char buf[8];
 	for (auto i = 0; i < NUM_SERVOS; i++) {
-		sprintf(tmp, "Servo%d", i);
-		package_json(json, module_name, tmp, positions[i]);
+		sprintf(buf, "Servo%d", i);
+		data[buf] = positions[i];
 	}
 }
 

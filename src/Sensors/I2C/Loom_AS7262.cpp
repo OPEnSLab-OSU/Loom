@@ -72,14 +72,13 @@ void Loom_AS7262::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7262::package(JsonObject json)
 {
-	package_json(json, module_name, 
-		"Violet",	color_vals[0],
-		"Blue",		color_vals[1],
-		"Green",	color_vals[2],
-		"Yellow",	color_vals[3],
-		"Orange",	color_vals[4],
-		"Red",		color_vals[5]
-	);
+	JsonObject data = get_module_data_object(json, module_name);
+	data["Violet"]	= color_vals[0];
+	data["Blue"]	= color_vals[1];
+	data["Green"]	= color_vals[2];
+	data["Yellow"]	= color_vals[3];
+	data["Orange"]	= color_vals[4];
+	data["Red"]		= color_vals[5];
 }
 
 ///////////////////////////////////////////////////////////////////////////////

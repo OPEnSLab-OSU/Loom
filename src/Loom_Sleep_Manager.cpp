@@ -19,13 +19,6 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 	, sleep_mode(Mode::STANDBY)
 	, power_off_pin(power_off_pin)
 {
-	// this->module_type = LoomModule::Type::Sleep_Manager;
-
-	// this->use_LED		= use_LED;
-	// this->delay_on_wake	= delay_on_wake;
-	// this->sleep_mode	= Mode::STANDBY;
-
-	// this->power_off_pin	= power_off_pin;
 	pinMode(power_off_pin, OUTPUT);
 }
 
@@ -43,9 +36,9 @@ void Loom_Sleep_Manager::link_interrupt_manager(Loom_Interrupt_Manager* IM)
 void Loom_Sleep_Manager::print_config()
 {
 	LoomModule::print_config();
-	LPrintln('\t', "Sleep Mode          : ", enum_sleep_mode_string(sleep_mode) );
-	LPrintln('\t', "Use LED             : ", (use_LED) ? "Enabled" : "Disabled" );
-	LPrintln('\t', "Delay on Wake       : ", (delay_on_wake) ? "Enabled" : "Disabled" );
+	LPrintln("\tSleep Mode    : ", enum_sleep_mode_string(sleep_mode) );
+	LPrintln("\tUse LED       : ", (use_LED) ? "Enabled" : "Disabled" );
+	LPrintln("\tDelay on Wake : ", (delay_on_wake) ? "Enabled" : "Disabled" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////

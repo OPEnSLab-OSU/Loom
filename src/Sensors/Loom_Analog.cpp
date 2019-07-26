@@ -24,16 +24,12 @@ Loom_Analog::Loom_Analog(
 	) 
 	: LoomSensor( module_name, Type::Analog, num_samples )
 	, read_resolution(read_resolution)
+	, enable_conversions(true)
+	, analog_vals{0}
+	, battery(0.)
 {
 	// Set Analog Read Resolution
-	// this->read_resolution = read_resolution;
-	analogReadResolution(this->read_resolution);
-
-	// Zero out array of measurements 
-	for (int i = 0; i < ANALOG_COUNT; i++) { 
-		analog_vals[i] = 0; 
-	}
-	battery = 0.;
+	analogReadResolution(read_resolution);
 
 	// Set enabled pins
 	pin_enabled[0] = enableA0;
@@ -44,23 +40,19 @@ Loom_Analog::Loom_Analog(
 	pin_enabled[5] = enableA5;
 
 
-	for (int i = 0; i < ANALOG_COUNT; i++) {
+	for (auto i = 0; i < ANALOG_COUNT; i++) {
 		if (pin_enabled[i]) {
 			pinMode(14+i, INPUT);
 		}
 	}
 
 	// Set conversions
-	this->enable_conversions = true;
 	conversions[0] = convertA0;
 	conversions[1] = convertA1;
 	conversions[2] = convertA2;
 	conversions[3] = convertA3;
 	conversions[4] = convertA4;
 	conversions[5] = convertA5;
-
-	// print_config_struct();
-	// load_config();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -80,10 +72,10 @@ void Loom_Analog::add_config(JsonObject json)
 	params.add(module_name);
 	params.add(num_samples);
 	params.add(read_resolution);
-	for (int i = 0; i < 6; i++) {
+	for (auto i = 0; i < 6; i++) {
 		params.add(pin_enabled[i]);
 	}
-	for (int i = 0; i < 6; i++) {
+	for (auto i = 0; i < 6; i++) {
 		params.add((int)conversions[i]);
 	}
 
@@ -126,7 +118,7 @@ void Loom_Analog::print_config()
 
 	LPrintln("\tAnalog Resolution   : ", read_resolution);
 	LPrint("\tEnabled Pins        : ");
-	for (int i = 0; i < ANALOG_COUNT; i++) { 
+	for (auto i = 0; i < ANALOG_COUNT; i++) { 
 		if (pin_enabled[i]) {
 			LPrint("A", i, ", ");
 		}
@@ -142,7 +134,7 @@ void Loom_Analog::print_measurements()
 	print_module_label();
 	LPrintln("Measurements:");
 	LPrintln("\tBattery = ", battery);
-	for (int i = 0; i < ANALOG_COUNT; i++) {
+	for (auto i = 0; i < ANALOG_COUNT; i++) {
 		if ( (!enable_conversions) || (conversions[i] == Conversion::NONE) ) {
 			LPrintln("\tA", i, " = ", analog_vals[i]);
 		} else {
@@ -158,7 +150,7 @@ void Loom_Analog::measure()
 	battery = read_analog(VBATPIN) * 2 * 3.3 / (float)pow(2, read_resolution);
 	// battery = read_analog(VBATPIN) * 2 * 3.3 ;/// (float)pow(2, read_resolution);
 
-	for (int i = 0; i < 6; i++) {
+	for (auto i = 0; i < 6; i++) {
 		if (pin_enabled[i]) {
 			analog_vals[i] = read_analog(i);
 		}
@@ -168,33 +160,17 @@ void Loom_Analog::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Analog::package(JsonObject json)
 {
-	package_json(json, module_name, "Vbat", battery);
-
-	char buf[20];
-	for (int i = 0; i < ANALOG_COUNT; i++) {
+	JsonObject data = get_module_data_object(json, module_name);
+	data["Vbat"] = battery;
+	char buf[3];
+	for (auto i = 0; i < ANALOG_COUNT; i++) {
 		if (pin_enabled[i]) {
-
-			if ( (!enable_conversions) || (conversions[i] == Conversion::NONE) ) {
-				sprintf(buf, "%s%d", "A", i);
-				package_json(json, module_name, buf, analog_vals[i]);
-			} else {
-				sprintf(buf, "%s%d(%s)", "A", i, conversion_name(conversions[i]));
-				package_json(json, module_name, buf, convert(i, analog_vals[i]) );
-			}		
+			sprintf(buf, "%s%d", "A", i);
+			data[buf] = (!enable_conversions || conversions[i] == Conversion::NONE) 
+						 ? analog_vals[i]
+						 : convert(i, analog_vals[i]);
 		}
 	}	
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_Analog::set_analog_resolution(uint8_t res) 
-{ 
-	analogReadResolution(read_resolution = res); 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-uint8_t Loom_Analog::get_analog_resolution() 
-{ 
-	return read_resolution; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -204,42 +180,12 @@ int Loom_Analog::get_analog_val(uint8_t pin)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-float Loom_Analog::get_battery()
-{
-	return battery;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-bool Loom_Analog::get_pin_enabled(uint8_t pin)
-{
-	return pin_enabled[pin];
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void Loom_Analog::set_pin_enabled(uint8_t pin, bool e)
 {
 	pin_enabled[pin] = e;
 	if (pin_enabled[pin]) {
 		pinMode(14+pin, INPUT);
 	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-Loom_Analog::Conversion Loom_Analog::get_conversion(uint8_t pin)
-{
-	return conversions[pin];
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_Analog::set_conversion(uint8_t pin, Conversion c)
-{
-	conversions[pin] = c;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_Analog::set_enable_conversions(bool e)
-{
-	enable_conversions = e;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

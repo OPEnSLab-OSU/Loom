@@ -100,46 +100,31 @@ void Loom_MPU6050::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MPU6050::package(JsonObject json)
 {
-	if (print_verbosity == Verbosity::V_LOW) {
-		package_json(json, module_name, 
-			"accX", 		accX,
-			"accY", 		accY,
-			"accZ", 		accZ,
+	JsonObject data = get_module_data_object(json, module_name);
+	
+	data["ax"] = accX;
+	data["ay"] = accY;
+	data["az"] = accZ;
 
-			"gyroX", 		gyroX,
-			"gyroY", 		gyroY,
-			"gyroZ", 		gyroZ,
+	data["gx"] = gyroX;
+	data["gy"] = gyroY;
+	data["gz"] = gyroZ;
 
-			"angleX", 		angleX,
-			"angleY", 		angleY,
-			"angleZ", 		angleZ
-		);
-	}
+	data["angx"] = angleX;
+	data["angy"] = angleY;
+	data["angz"] = angleZ;
 
 	if (print_verbosity == Verbosity::V_HIGH) {
-		package_json(json, module_name, 
-			"accX", 		accX,
-			"accY", 		accY,
-			"accZ", 		accZ,
+		data["temp"]		= 	temp;
 
-			"gyroX", 		gyroX,
-			"gyroY", 		gyroY,
-			"gyroZ", 		gyroZ,
+		data["accAngleX"]	= 	accAngleX;
+		data["accAngleY"]	= 	accAngleY;
 
-			"angleX", 		angleX,
-			"angleY", 		angleY,
-			"angleZ", 		angleZ,
-
-			"temp", 		temp,
-
-			"accAngleX", 	accAngleX,
-			"accAngleY", 	accAngleY,
-
-			"gyroAngleX", 	gyroAngleX,
-			"gyroAngleY", 	gyroAngleY,
-			"gyroAngleZ",	gyroAngleZ
-		);
+		data["gyroAngleX"]	= 	gyroAngleX;
+		data["gyroAngleY"]	= 	gyroAngleY;
+		data["gyroAngleZ"]	=	gyroAngleZ;
 	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

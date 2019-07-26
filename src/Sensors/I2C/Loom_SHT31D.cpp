@@ -49,10 +49,10 @@ void Loom_SHT31D::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_SHT31D::package(JsonObject json)
 {
-	package_json(json, module_name, 
-		"Temp",		temp,
-		"Humid",	humid
-	);
+	JsonObject data = get_module_data_object(json, module_name);
+	
+	data["temp"]  = temp;
+	data["humid"] = humid;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

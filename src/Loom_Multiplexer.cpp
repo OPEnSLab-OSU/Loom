@@ -203,8 +203,6 @@ void Loom_Multiplexer::package(JsonObject json)
 	for (auto i = 0; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
 			tca_select(i);
-			// char tmp[4];
-			// itoa(i, tmp, 10);
 			sensors[i]->package(json);
 		} 
 	}

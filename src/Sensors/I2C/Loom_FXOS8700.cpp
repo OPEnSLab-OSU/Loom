@@ -56,17 +56,15 @@ void Loom_FXOS8700::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_FXOS8700::package(JsonObject json)
 {
-	package_json(json, module_name, 
-		// Acceleration
-		"ax", accel[0],
-		"ay", accel[1],
-		"az", accel[2],
+	JsonObject data = get_module_data_object(json, module_name);
+	
+	data["ax"] = accel[0];
+	data["ay"] = accel[1];
+	data["az"] = accel[2];
 
-		// Magnetism
-		"mx", mag[0],
-		"my", mag[1],
-		"mz", mag[2]
-	);
+	data["mx"] = mag[0];
+	data["my"] = mag[1];
+	data["mz"] = mag[2];
 }
 
 ///////////////////////////////////////////////////////////////////////////////

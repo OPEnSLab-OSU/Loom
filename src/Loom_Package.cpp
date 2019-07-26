@@ -3,14 +3,34 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @private (hide from Doxygen)
-/// Termination of recursive package_json
-void package_json(JsonObject json, const char* module_name) {} 
+JsonObject get_module_data_object(JsonObject json, const char* module_name)
+{
+	JsonArray contents = json["contents"];
+	if (contents.isNull()) {
+		contents = json.createNestedArray("contents");
+	}
 
-///////////////////////////////////////////////////////////////////////////////
-/// @private (hide from Doxygen)
-/// Termination of recursive package_json
-void package_json_aux(JsonObject data) {} 
+	// Find module object if it exists
+	JsonObject compenent;
+	for (auto module_obj : contents) {
+		if ( strcmp(module_obj["module"], module_name) == 0 ) {
+			compenent = module_obj;
+			break;
+		}
+	}
+
+	// If module object does not exist yet
+	// create object, specify module name, 
+	// and create data array
+	JsonObject data;
+	if (compenent.isNull()) {
+		compenent = contents.createNestedObject();
+		compenent["module"] = module_name;
+		data = compenent.createNestedObject("data"); 
+	}
+
+	return data;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void package_json_timestamp(JsonObject json, const char* date, const char* time)
@@ -62,7 +82,7 @@ void flatten_json_data_array(JsonObject json)
 /// Termination of recursive add_config_aux
 // void add_config_aux2(JsonArray parameters) {}
 
-
+///////////////////////////////////////////////////////////////////////////////
 JsonArray add_config_temp(JsonObject json, const char* module_name)
 {
 	JsonArray components = json["components"];
@@ -74,4 +94,8 @@ JsonArray add_config_temp(JsonObject json, const char* module_name)
 	config_info["name"] = module_name;
 	return config_info.createNestedArray("params");
 } 
+
+///////////////////////////////////////////////////////////////////////////////
+
+
 

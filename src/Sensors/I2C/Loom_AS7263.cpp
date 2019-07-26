@@ -71,14 +71,14 @@ void Loom_AS7263::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7263::package(JsonObject json)
 {
-	package_json(json, module_name, 
-		"NIR_R",	nir_vals[0],
-		"NIR_S",	nir_vals[1],
-		"NIR_T",	nir_vals[2],
-		"NIR_U",	nir_vals[3],
-		"NIR_V",	nir_vals[4],
-		"NIR_W",	nir_vals[5]
-	);
+	JsonObject data = get_module_data_object(json, module_name);
+	data["NIR_R"] = nir_vals[0];
+	data["NIR_S"] = nir_vals[1];
+	data["NIR_T"] = nir_vals[2];
+	data["NIR_U"] = nir_vals[3];
+	data["NIR_V"] = nir_vals[4];
+	data["NIR_W"] = nir_vals[5];
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

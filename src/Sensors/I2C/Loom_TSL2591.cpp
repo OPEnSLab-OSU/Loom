@@ -70,11 +70,11 @@ void Loom_TSL2591::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TSL2591::package(JsonObject json)
 {
-	package_json(json, module_name, 
-		"Vis",	vis,
-		"IR",	ir,
-		"Full",	full
-	);
+	JsonObject data = get_module_data_object(json, module_name);
+	
+	data["Vis"]  = vis;
+	data["IR"]   = ir;
+	data["Full"] = full;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

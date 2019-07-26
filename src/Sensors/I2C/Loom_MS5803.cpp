@@ -46,10 +46,10 @@ void Loom_MS5803::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MS5803::package(JsonObject json)
 {
-	package_json(json, module_name, 
-		"Pressure",	pressure,
-		"Temp",		temp
-	);
+	JsonObject data = get_module_data_object(json, module_name);
+	
+	data["pressure"] = pressure;
+	data["temp"]     = temp;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

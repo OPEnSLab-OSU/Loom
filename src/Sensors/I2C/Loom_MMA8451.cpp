@@ -80,11 +80,11 @@ void Loom_MMA8451::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MMA8451::package(JsonObject json)
 {
-	package_json(json, module_name, 
-		"accel_x",	accel[0],
-		"accel_y",	accel[1],
-		"accel_z",	accel[2]
-	);
+	JsonObject data = get_module_data_object(json, module_name);
+	
+	data["ax"] = accel[0];
+	data["ay"] = accel[1];
+	data["az"] = accel[2];
 
 	if (package_verbosity == Verbosity::V_HIGH) {
 		char buf[22];
@@ -99,8 +99,7 @@ void Loom_MMA8451::package(JsonObject json)
 			case MMA8451_PL_LLB: strcpy(buf, "Landscape Left Back");	break;
 		}
 
-		package_json(json, module_name, 
-			"orient", buf);
+		data["orient"] = buf;
 	}
 }
 

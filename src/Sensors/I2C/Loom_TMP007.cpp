@@ -42,10 +42,10 @@ void Loom_TMP007::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TMP007::package(JsonObject json)
 {
-	package_json(json, module_name, 
-		"objTemp",	object_temp,
-		"dieTemp",	die_temp
-	);
+	JsonObject data = get_module_data_object(json, module_name);
+	
+	data["objTemp"] = object_temp;
+	data["dieTemp"] = die_temp;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

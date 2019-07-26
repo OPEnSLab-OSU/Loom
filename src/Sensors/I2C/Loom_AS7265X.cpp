@@ -136,31 +136,29 @@ void Loom_AS7265X::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7265X::package(JsonObject json)
 {
-	package_json(json, module_name, 
-		// UV
-		"a", uv[0],
-		"b", uv[1],
-		"c", uv[2],
-		"d", uv[3],
-		"e", uv[4],
-		"f", uv[5],
+	JsonObject data = get_module_data_object(json, module_name);
+	data["a"] = uv[0];
+	data["b"] = uv[1];
+	data["c"] = uv[2];
+	data["d"] = uv[3];
+	data["e"] = uv[4];
+	data["f"] = uv[5];
 
-		// Color
-		"g", color[0],
-		"h", color[1],
-		"i", color[2],
-		"j", color[3],
-		"k", color[4],
-		"l", color[5],
+	data["g"] = color[0];
+	data["h"] = color[1];
+	data["i"] = color[2];
+	data["j"] = color[3];
+	data["k"] = color[4];
+	data["l"] = color[5];
 
-		// NIR
-		"r", nir[0],
-		"s", nir[1],
-		"t", nir[2],
-		"u", nir[3],
-		"v", nir[4],
-		"w", nir[5]
-	);
+	data["r"] = nir[0];
+	data["s"] = nir[1];
+	data["t"] = nir[2];
+	data["u"] = nir[3];
+	data["v"] = nir[4];
+	data["w"] = nir[5];
+
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

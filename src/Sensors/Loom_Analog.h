@@ -112,7 +112,7 @@ public:
 
 	/// Get the current analog read resolution
 	/// \return		Read resolution
-	uint8_t		get_analog_resolution();
+	uint8_t		get_analog_resolution() { return read_resolution; }
 
 	/// Get the analog value of specified pin
 	/// \param[in]	pin		Pin to read
@@ -121,17 +121,17 @@ public:
 
 	/// Get the battery voltage of the device
 	/// \return		The battery voltage
-	float		get_battery();
+	float		get_battery() { return battery; };
 
 	/// Get if a pin is enabled in manager
 	/// \param[in]	pin		Pin to get enable state of
 	/// \return		The enabled state of pin
-	bool		get_pin_enabled(uint8_t pin);
+	bool		get_pin_enabled(uint8_t pin) { return pin_enabled[pin]; }
 
 	/// Get the current conversion associated with a pin
 	/// \param[in]	pin		The pin to get conversion for
 	/// \return		The current Conversion setting
-	Conversion	get_conversion(uint8_t pin);
+	Conversion	get_conversion(uint8_t pin) { return conversions[pin]; }
 
 
 //=============================================================================
@@ -140,7 +140,7 @@ public:
 
 	/// Set the analog read resolution
 	/// \param[in]	res		Resolution to read at (12 bit max)
-	void		set_analog_resolution(uint8_t res);
+	void		set_analog_resolution(uint8_t res) { analogReadResolution(read_resolution = res); }
 
 	/// Set the enable state of a pin
 	/// \param[in]	pin		The pin to set enable state of
@@ -150,11 +150,11 @@ public:
 	/// Set the current conversion associated with a pin
 	/// \param[in]	pin		The pin to set conversion for
 	/// \param[in]	c		The Conversion to use
-	void  		set_conversion(uint8_t pin, Conversion c);
+	void  		set_conversion(uint8_t pin, Conversion c) { conversions[pin] = c; }
 
 	/// Enable or disable all conversions
 	/// \param[in]	e		Enable state
-	void  		set_enable_conversions(bool e);
+	void  		set_enable_conversions(bool e) { enable_conversions = e; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS

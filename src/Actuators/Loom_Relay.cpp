@@ -37,7 +37,8 @@ void Loom_Relay::print_state()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::package(JsonObject json)
 {
-	package_json(json, module_name, "state", on);
+	JsonObject data = get_module_data_object(json, module_name);
+	data["on"] = on;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
