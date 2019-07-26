@@ -17,7 +17,7 @@ class Loom_Bluetooth : public LoomCommPlat
 
 protected:
 
-	Adafruit_BluefruitLE_SPI* BLE;		/// Bluetooth manager instance
+	Adafruit_BluefruitLE_SPI BLE;		/// Bluetooth manager instance
 
 	uint8_t spi_CS, spi_IRQ, spi_RST;
 
@@ -33,7 +33,6 @@ public:
 	Loom_Bluetooth(
 			const char*		module_name			= "Bluetooth",
 			uint16_t 		max_message_len		= 120,
-
 			uint8_t			spi_CS				= 8,
 			uint8_t			spi_IRQ				= 7,
 			uint8_t			spi_RST				= 4

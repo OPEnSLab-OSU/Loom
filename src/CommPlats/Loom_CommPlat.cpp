@@ -12,10 +12,7 @@ LoomCommPlat::LoomCommPlat(
 	: LoomModule( module_name, module_type )
 	, max_message_len(max_message_len)
 	, signal_strength(0)
-{
-	// this->max_message_len = max_message_len;
-	// this->signal_strength = 0;
-}
+{}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomCommPlat::print_config() 

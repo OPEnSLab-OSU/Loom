@@ -12,7 +12,6 @@ Loom_Relay::Loom_Relay(
 	, on(false)
 {
 	pinMode(pin, OUTPUT);
-	// on = false;
 	digitalWrite(pin, LOW);
 }
 

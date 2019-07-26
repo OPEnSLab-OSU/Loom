@@ -9,7 +9,7 @@ Loom_DecagonGS3::Loom_DecagonGS3(
 	) 
 	: LoomSDI12Sensor( module_name, Type::DecagonGS3, num_samples ) 
 {
-	// this->module_type = LoomModule::Type::DecagonGS3;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

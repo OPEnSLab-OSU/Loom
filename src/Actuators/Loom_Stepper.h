@@ -23,8 +23,7 @@ class Loom_Stepper : public LoomActuator
 protected:
 
 	Adafruit_MotorShield*	AFMS;			/// Underlying motor shield controller
-	Adafruit_StepperMotor**	motors;			/// Array of stepper controllers
-	uint8_t 				stepper_count;	/// Number of steppers
+	Adafruit_StepperMotor*	motors[NUM_STEPPERS];		/// Array of stepper controllers
 
 public:
 	
@@ -35,10 +34,8 @@ public:
 	/// Stepper module constructor
 	///
 	/// \param[in]	module_name		String | <"Stepper"> | null | Stepper module name
-	/// \param[in]	stepper_count	Int | <2> | [1-2] | How many steppers to enable
 	Loom_Stepper(
-			const char*		module_name		= "Stepper" ,
-			uint8_t			stepper_count	= NUM_STEPPERS
+			const char*		module_name		= "Stepper"
 		);
 
 	/// Constructor that takes Json Array, extracts args

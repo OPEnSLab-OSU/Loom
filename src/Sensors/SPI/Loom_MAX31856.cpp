@@ -14,19 +14,16 @@ Loom_MAX31856::Loom_MAX31856(
 		uint8_t			SPI_c,
 		uint8_t			SPI_d
 	) : LoomSPISensor( module_name, Type::MAX31856, num_samples ) 
+	, inst_max( Adafruit_MAX31856(SPI_a, SPI_b, SPI_c, SPI_d) )
 {
-	// this->module_type = LoomModule::Type::MAX31856;
-
 	// Hardware Serial
 	// inst_max = new Adafruit_MAX31856(CS_pin);
 
 	// Software Serial
-	inst_max = new Adafruit_MAX31856(SPI_a, SPI_b, SPI_c, SPI_d);
-	
+	// inst_max = new Adafruit_MAX31856(SPI_a, SPI_b, SPI_c, SPI_d);
 
-	inst_max->begin();
-
-	inst_max->setThermocoupleType(MAX31856_TCTYPE_K);
+	inst_max.begin();
+	inst_max.setThermocoupleType(MAX31856_TCTYPE_K);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -34,18 +31,12 @@ Loom_MAX31856::Loom_MAX31856(JsonArrayConst p)
 	: Loom_MAX31856( EXPAND_ARRAY(p, 7) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MAX31856::~Loom_MAX31856() 
-{
-	delete inst_max;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void Loom_MAX31856::print_config()
 {
 	LoomSPISensor::print_config();
 	
 	LPrint("Thermocouple type: ");
-	switch ( inst_max->getThermocoupleType() ) {
+	switch ( inst_max.getThermocoupleType() ) {
 		case MAX31856_TCTYPE_B  : LPrint("B"); break;
 		case MAX31856_TCTYPE_E  : LPrint("E"); break;
 		case MAX31856_TCTYPE_J  : LPrint("J"); break;
@@ -65,24 +56,24 @@ void Loom_MAX31856::print_config()
 void Loom_MAX31856::print_measurements() 
 {
 	print_module_label();
-	LPrintln("\tTemperature: ", temperature, " C");
+	LPrintln("\tTemp: ", temperature, " C");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MAX31856::measure() 
 {
-	// cj_temp = inst_max->readCJTemperature();
-	// temperature = inst_max->readThermocoupleTemperature();
+	// cj_temp = inst_max.readCJTemperature();
+	// temperature = inst_max.readThermocoupleTemperature();
 
 	int i = num_samples;
 	float cj = 0, temp = 0;
 
 	while (i--) {
-		cj += inst_max->readCJTemperature();
-		temp += inst_max->readThermocoupleTemperature();
+		cj += inst_max.readCJTemperature();
+		temp += inst_max.readThermocoupleTemperature();
 
 		// Check and print any faults
-		uint8_t fault = inst_max->readFault();
+		uint8_t fault = inst_max.readFault();
 		if ( (fault) && (print_verbosity == Verbosity::V_HIGH) ) {
 			if (fault & MAX31856_FAULT_CJRANGE) LPrintln("Cold Junction Range Fault");
 			if (fault & MAX31856_FAULT_TCRANGE) LPrintln("Thermocouple Range Fault");

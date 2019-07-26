@@ -8,9 +8,6 @@
 #include <EnableInterrupt.h>
 
 
-// byte LoomRTC::int_pin = 0; 
-
-
 ///////////////////////////////////////////////////////////////////////////////
 const char* LoomRTC::daysOfTheWeek[] = 
 	{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
@@ -69,42 +66,22 @@ char* LoomRTC::enum_timezone_string(TimeZone t)
 LoomRTC::LoomRTC(	
 		const char*			module_name,
 		LoomModule::Type	module_type,
-
 		TimeZone			timezone,
 		bool				use_utc_time,
 		bool				get_internet_time
-
-		// byte				interrupt_pin
 	) 
 	: LoomModule( module_name, module_type )
 	, timezone(timezone)
 	, use_utc_time(use_utc_time)
 	, get_internet_time(get_internet_time)
-{
-	
-	// this->timezone			= timezone;
-	// this->use_utc_time 		= use_utc_time;
-	// this->get_internet_time = get_internet_time;
-
-	// int_pin					= interrupt_pin;
-	// RTC_Int_Pin 			= int_pin; 		// This is static so ISR can be static (currently int_pin was made static instead)
-
-
-	// if (int_pin > 0) {
-	// 	pinMode(int_pin, INPUT_PULLUP);		
-	// }
-
-	// clear_alarms();
-}
+{}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomRTC::print_config()
 {
 	LoomModule::print_config();
-
-	// LPrintln("\tInterrupt Pin       : ", int_pin);
-	LPrintln("\tUse UTC Time        : ", use_utc_time);
-	LPrintln("\tGet Internet Time   : ", get_internet_time);
+	LPrintln("\tUse UTC Time      : ", use_utc_time);
+	LPrintln("\tGet Internet Time : ", get_internet_time);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -142,7 +119,6 @@ void LoomRTC::print_time(bool verbose)
 ///////////////////////////////////////////////////////////////////////////////
 void LoomRTC::print_DateTime(DateTime time) 
 {
-	// LPrint("DateTime:");
 	LPrint(time.year());   LPrint('/');
 	LPrint(time.month());  LPrint('/');
 	LPrint(time.day());    LPrint(' ');
@@ -227,12 +203,12 @@ void LoomRTC::init()
 {
 	if (!_begin()) {
 		print_module_label();
-		LPrintln("Couldn't find RTC");
+		LPrintln("RTC not found");
 		return;
 	}
 
 	print_module_label();
-	LPrintln("Current Time (before possible resetting)");
+	LPrintln("Current Time (before possible reset)");
 	print_time();
 
 	// bool internet_time_success = false;
@@ -345,7 +321,7 @@ void LoomRTC::convert_local_to_utc(bool to_utc)
 	time_adjust(utc);
 
 	print_module_label();
-	LPrintln("Time adjusted to ", (to_utc) ? "UTC" : "Local" , " time:");
+	LPrintln("Time adjusted to ", (to_utc) ? "UTC" : "Local" , ": ");
 	print_time();
 	LPrintln();
 }
@@ -369,20 +345,4 @@ bool LoomRTC::rtc_validity_check()
 	return true;
 }
 
-// ///////////////////////////////////////////////////////////////////////////////
-// byte LoomRTC::get_interrupt_pin()
-// {
-// 	return int_pin;
-// 	// return RTC_Int_Pin;
-// }
-
-// ///////////////////////////////////////////////////////////////////////////////
-// void LoomRTC::RTC_Wake_ISR()
-// {
-// 	// Detach interrupt to prevent duplicate triggering
-// 	detachInterrupt(digitalPinToInterrupt(int_pin));
-
-// 	// Nothing else to do because interrupt woke device
-// }
-
-// ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////

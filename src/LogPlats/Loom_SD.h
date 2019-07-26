@@ -68,7 +68,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	void		log(JsonObject json) override;
+	void		log(JsonObject json) override { save_json(json, default_file); }
 
 	/// Version of logging for use with LoomManager.
 	/// Accesses Json from LoomManager
@@ -87,7 +87,7 @@ public:
 
 	/// Delete a file
 	/// \param[in]	file	Name of file to delete
-	void		delete_file(const char* file);
+	void		delete_file(const char* file) { if (sd_found) SD.remove(file); }
 
 	/// Clear a file (remove contents but not file itself)
 	/// \param[in]	file	Name of file to empty
@@ -100,7 +100,7 @@ public:
 	void		print_config() override;
 
 	/// List current files on the SD card
-	void		list_files();
+	void		list_files() { if (sd_found) print_directory(SD.open("/"), 0); }
 
 	/// Print the contents of a particular file
 	/// \param[in]	file 	Name of file to print
@@ -112,11 +112,11 @@ public:
 
 	/// Return pointer to the currently linked RTC object
 	/// \return		Current RTC object
-	LoomRTC*	get_RTC_module();
+	LoomRTC*	get_RTC_module() { return RTC_Inst; }
 
 	/// Get the current default file to write to
 	/// \return Default file
-	const char*	get_default_file();
+	const char*	get_default_file() { return default_file; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -130,7 +130,7 @@ public:
 
 	/// Set the RTC module to use for timers
 	/// \param[in]	RTC_Inst	Pointer to the RTC object
-	void		set_RTC_module(LoomRTC* RTC_Inst);
+	void		set_RTC_module(LoomRTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
 
 	/// Set default file to write to
 	/// \param[in]	filename	New default file (max 8 characters excluding extension)

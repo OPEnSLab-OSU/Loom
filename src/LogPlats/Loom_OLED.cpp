@@ -33,7 +33,6 @@ const char* Loom_OLED::enum_oled_freeze_string(FreezeType f)
 	}
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 Loom_OLED::Loom_OLED(	
 		const char*		module_name, 
@@ -53,38 +52,23 @@ Loom_OLED::Loom_OLED(
 	, scroll_duration(scroll_duration)
 	, freeze_behavior(freeze_behavior)
 	, freeze_pin(freeze_pin)
+	, display( (version == Version::FEATHERWING)
+				? Adafruit_SSD1306()
+				: Adafruit_SSD1306(reset_pin)
+			 )
 {
-
-	// this->version 	      = version;
-	// this->reset_pin       = reset_pin;
-	// this->display_format  = display_format;
-	// this->scroll_duration = scroll_duration;
-	// this->freeze_behavior = freeze_behavior;
-	// this->freeze_pin      = freeze_pin;
-
-	switch(version) {
-		case Version::FEATHERWING : display = new Adafruit_SSD1306();
-		case Version::BREAKOUT    : display = new Adafruit_SSD1306(reset_pin);
-	}
-
 	if (freeze_behavior != FreezeType::DISABLE) {
 		pinMode(freeze_pin, INPUT_PULLUP);
 	}
 
-	display->begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x32) cannot be changed
-	display->display();
-	display->clearDisplay();
+	display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x32) cannot be changed
+	display.display();
+	display.clearDisplay();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_OLED::Loom_OLED(JsonArrayConst p)
 	: Loom_OLED(p[0], p[1], p[2], (Version)(int)p[3], p[4], (Format)(int)p[5], p[6], p[7], (FreezeType)(int)p[8]) {}
-
-///////////////////////////////////////////////////////////////////////////////
-Loom_OLED::~Loom_OLED() 
-{
-	delete display;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_OLED::print_config() 
@@ -125,9 +109,9 @@ void Loom_OLED::log(JsonObject json)
 		if (digitalRead(freeze_pin) == 0) return; 			
 	}
 
-	display->clearDisplay();
-	display->setTextColor(WHITE);
-	display->setTextSize(1);
+	display.clearDisplay();
+	display.setTextColor(WHITE);
+	display.setTextSize(1);
 
 	// Structure Json to parse
 	flatten_json_data_object(json);
@@ -148,26 +132,26 @@ void Loom_OLED::log(JsonObject json)
 		case Format::FOUR:
 
 			for (int i = 0; i < 4 && i < size; i++) {
-				display->setCursor(0, i*8);
-				display->print(keys[i].substring(0,8));
-				display->setCursor(64, i*8);
-				display->print(vals[i].substring(0,8));
+				display.setCursor(0, i*8);
+				display.print(keys[i].substring(0,8));
+				display.setCursor(64, i*8);
+				display.print(vals[i].substring(0,8));
 			}
 			break;
 
 		case Format::EIGHT:
 
 			for (int i = 0; i < 4 && i < size; i++) {
-				display->setCursor(0, i*8);
-				display->print(keys[i].substring(0,4));
-				display->setCursor(32, i*8);
-				display->print(vals[i].substring(0,4));
+				display.setCursor(0, i*8);
+				display.print(keys[i].substring(0,4));
+				display.setCursor(32, i*8);
+				display.print(vals[i].substring(0,4));
 			}
 			for (int i = 0; i < 4 && i < size; i++) {
-				display->setCursor(64, i*8);
-				display->print(keys[i+4].substring(0,4));
-				display->setCursor(96, i*8);
-				display->print(vals[i+4].substring(0,4));
+				display.setCursor(64, i*8);
+				display.print(keys[i+4].substring(0,4));
+				display.setCursor(96, i*8);
+				display.print(vals[i+4].substring(0,4));
 			}
 			break;
 
@@ -188,17 +172,17 @@ void Loom_OLED::log(JsonObject json)
 			int offset = size*( float(time%(scroll_duration)) / (float)(scroll_duration) );
 
 			for (int i = 0; i < 5; i++) {
-				display->setCursor(0, i*8);
-				display->print(keys[(i+offset)%size].substring(0,8));
-				display->setCursor(64, i*8);
-				display->print(vals[(i+offset)%size].substring(0,8));
+				display.setCursor(0, i*8);
+				display.print(keys[(i+offset)%size].substring(0,8));
+				display.setCursor(64, i*8);
+				display.print(vals[(i+offset)%size].substring(0,8));
 			}
 
 			break;
 	}
 
 	// Update display
-	display->display();	
+	display.display();	
 }
 
 ///////////////////////////////////////////////////////////////////////////////

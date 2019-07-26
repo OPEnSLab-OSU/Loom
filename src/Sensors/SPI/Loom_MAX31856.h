@@ -17,7 +17,7 @@ class Loom_MAX31856 : public LoomSPISensor
 
 protected:
 
-	Adafruit_MAX31856* inst_max;	/// Underlying MAX31856 sensor manager instance
+	Adafruit_MAX31856 inst_max;	/// Underlying MAX31856 sensor manager instance
 
 	/// Raw value
 	// float voltage;
@@ -58,7 +58,7 @@ public:
 	Loom_MAX31856(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_MAX31856();
+	~Loom_MAX31856() = default;
 
 //=============================================================================
 ///@name	OPERATION

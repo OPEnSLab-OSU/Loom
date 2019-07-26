@@ -20,8 +20,10 @@ class Loom_nRF : public LoomCommPlat
 
 protected:
 
-	RF24*				radio;				/// Underlying nRF24L01(+) radio object
+	RF24				radio;				/// Underlying nRF24L01(+) radio object
 	RF24Network*		network;			/// Network layer manager for radio
+	// RF24*				radio;				/// Underlying nRF24L01(+) radio object
+	// RF24Network*		network;			/// Network layer manager for radio
 
 	uint8_t				address;			/// Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
 

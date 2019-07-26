@@ -16,12 +16,6 @@ Loom_SD::Loom_SD(
 	: LoomLogPlat( module_name, Type::SDCARD, enable_rate_filter, min_filter_delay )
 	, chip_select(chip_select)
 {
-	// this->module_type = LoomModule::Type::SDCARD;
-
-	print_module_label();
-	LPrintln("SD Setup");
-
-	// this->chip_select  = chip_select;
 	snprintf(this->default_file, 16, "%s", default_file);
 
 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
@@ -62,35 +56,9 @@ void Loom_SD::link_device_manager(LoomManager* LM)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::set_RTC_module(LoomRTC* RTC_Inst)
-{
-	this->RTC_Inst = RTC_Inst;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-LoomRTC* Loom_SD::get_RTC_module()
-{
-	return RTC_Inst;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void Loom_SD::set_default_file(const char* filename) 
 { 
 	snprintf(this->default_file, 16, "%s", default_file); 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-const char* Loom_SD::get_default_file() 
-{ 
-	return default_file; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::delete_file(const char* file) 
-{
-	if ( !sd_found ) return;
-
-	SD.remove(file);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -101,14 +69,6 @@ void Loom_SD::empty_file(const char* file)
 	SD.remove(file);
 	File sdFile = SD.open(file, FILE_WRITE);
 	sdFile.close();
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::list_files()
-{
-	if ( !sd_found ) return;
-
-	print_directory(SD.open("/"), 0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -140,12 +100,6 @@ bool Loom_SD::dump_file(const char* file)
 		}
 
 	#endif
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::log(JsonObject json) 
-{
-	save_json(json, default_file);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

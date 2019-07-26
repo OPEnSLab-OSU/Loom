@@ -15,13 +15,11 @@ Loom_Bluetooth::Loom_Bluetooth(
 	, spi_CS(spi_CS)
 	, spi_IRQ(spi_IRQ)
 	, spi_RST(spi_RST)
+	, BLE( Adafruit_BluefruitLE_SPI(spi_CS, spi_IRQ, spi_RST) )
 
 { 
-
-	BLE = new Adafruit_BluefruitLE_SPI(spi_CS, spi_IRQ, spi_RST);
-
-	BLE->begin();
-	BLE->setMode(BLUEFRUIT_MODE_DATA); // set to simple UART back and forth comms
+	BLE.begin();
+	BLE.setMode(BLUEFRUIT_MODE_DATA); // set to simple UART back and forth comms
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -50,7 +48,7 @@ void Loom_Bluetooth::connect(uint16_t connect_timeout)
 
 	LPrintln("[BLE_C] timeout: ", timeout );
 
-	while ( !BLE->isConnected() ) {
+	while ( !BLE.isConnected() ) {
 		if ( ( millis() - timeout ) > connect_timeout ){
 			return;
 		}
@@ -61,13 +59,13 @@ void Loom_Bluetooth::connect(uint16_t connect_timeout)
 int8_t Loom_Bluetooth::getCommand( uint16_t max_timeout )
 {
 	// printCommands();
-	BLE->println("Enter Command.");
+	BLE.println("Enter Command.");
 	char cmd_buffer [32] = {0};
 	uint32_t timeout = millis();
 
-	while ( !BLE->available() ) {
+	while ( !BLE.available() ) {
 		if ( millis() - timeout > max_timeout ) {
-			BLE->println("timed out");
+			BLE.println("timed out");
 			return -1;
 		}
 	}
@@ -75,12 +73,12 @@ int8_t Loom_Bluetooth::getCommand( uint16_t max_timeout )
 	uint8_t index = 0;
 
 	timeout = millis();
-	while ( BLE->available() && index < sizeof(cmd_buffer) - 1) {
-		cmd_buffer[index] = BLE->read();
+	while ( BLE.available() && index < sizeof(cmd_buffer) - 1) {
+		cmd_buffer[index] = BLE.read();
 		index++;
 	}
 	cmd_buffer[index] = 0;
-	BLE->println( cmd_buffer );
+	BLE.println( cmd_buffer );
 	
 	// for( int i = 0; i< NUMCOMMANDS; i++)
 	// {
@@ -104,8 +102,8 @@ int8_t Loom_Bluetooth::getCommand( uint16_t max_timeout )
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Bluetooth::test_send(const uint8_t val)
 {
-	if ( BLE->isConnected() ) {
-		BLE->print(val);
+	if ( BLE.isConnected() ) {
+		BLE.print(val);
 		return true;
 	} else {
 		return false;
@@ -115,8 +113,8 @@ bool Loom_Bluetooth::test_send(const uint8_t val)
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Bluetooth::test_send_str(const char* string)
 {
-	if ( BLE->isConnected() ) {
-		BLE->print(string);
+	if ( BLE.isConnected() ) {
+		BLE.print(string);
 		return true;
 	} else {
 		return false;

@@ -62,12 +62,6 @@ Loom_Multiplexer::Loom_Multiplexer(
 	, update_period(update_period)
 	, sensors(new LoomI2CSensor*[num_ports])
 {
-	// this->module_type = LoomModule::Type::Multiplexer;
-
-	// this->i2c_address 	= i2c_address; 
-	// this->num_ports 	= num_ports;
-	// this->update_period	= update_period;
-
 	// Begin I2C 
 	Wire.begin();
 
@@ -100,6 +94,7 @@ Loom_Multiplexer::~Loom_Multiplexer()
 			delete sensors[i];
 		}
 	}
+	delete sensors;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

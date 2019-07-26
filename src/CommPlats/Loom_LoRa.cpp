@@ -17,20 +17,14 @@ Loom_LoRa::Loom_LoRa(
 	, power_level( ( (power_level >= 5) && (power_level <= 23) ) ? power_level : 23 )
 	, retry_count(retry_count)
 	, retry_timeout(retry_timeout)
+	, driver( RH_RF95(RFM95_CS, RFM95_INT) )
 
 { 
-	// this->module_type = LoomModule::Type::LoRa;
-
-	// Create instances of driver and manager
-	this->driver         = new RH_RF95(RFM95_CS, RFM95_INT);
-	this->manager        = new RHReliableDatagram(*driver, address);
-	// this->address        = address;
-	// this->power_level    = ( (power_level >= 5) && (power_level <= 23) ) ? power_level : 23;
-	// this->retry_count    = retry_count;
-	// this->retry_timeout  = retry_timeout;
+	// this->driver         = new RH_RF95(RFM95_CS, RFM95_INT);
+	// this->manager        = new RHReliableDatagram(*driver, address);
+	this->manager        = new RHReliableDatagram(driver, address);
 
 	pinMode(8, INPUT_PULLUP);
-
 	pinMode(RFM95_RST, OUTPUT);
 	digitalWrite(RFM95_RST, HIGH);
 
@@ -42,26 +36,26 @@ Loom_LoRa::Loom_LoRa(
 	LPrintln("\tInitializing Manager ", (status) ? "Success" : "Failed");
 	
 	// Set Frequency
-	status = driver->setFrequency(RF95_FREQ);
+	status = driver.setFrequency(RF95_FREQ);
 	print_module_label();
 	LPrintln( "\tSetting Frequency ", (status) ? "Success" : "Failed" );
 
 	// Set Power Level
 	print_module_label();
-	LPrintln("\tSetting Power Level to ", this->power_level);
-	driver->setTxPower(this->power_level, false);
+	LPrintln("\tSetting Power Level to ", power_level);
+	driver.setTxPower(power_level, false);
 
 	// Set Retry Delay
 	print_module_label();
-	LPrintln("\tSetting retry timeout to ", this->retry_timeout, " ms");
-	manager->setTimeout(this->retry_timeout);
+	LPrintln("\tSetting retry timeout to ", retry_timeout, " ms");
+	manager->setTimeout(retry_timeout);
 
 	// Set Max Retry Count
 	print_module_label();
-	LPrintln("\tSetting max retry count ", this->retry_count);
-	manager->setRetries(this->retry_count);
+	LPrintln("\tSetting max retry count ", retry_count);
+	manager->setRetries(retry_count);
 
-	driver->setModemConfig(RH_RF95::Bw500Cr45Sf128);
+	driver.setModemConfig(RH_RF95::Bw500Cr45Sf128);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -71,7 +65,7 @@ Loom_LoRa::Loom_LoRa(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::~Loom_LoRa() 
 {
-	delete driver;
+	// delete driver;
 	delete manager;
 }
 
@@ -89,10 +83,10 @@ void Loom_LoRa::print_config()
 {
 	LoomCommPlat::print_config();
 
-	LPrintln("\tAddress             : ", address );
-	LPrintln("\tPower Level         : ", power_level );
-	LPrintln("\tRetry Count         : ", retry_count );
-	LPrintln("\tRetry Timeout       : ", retry_timeout );
+	LPrintln("\tAddress       : ", address );
+	LPrintln("\tPower Level   : ", power_level );
+	LPrintln("\tRetry Count   : ", retry_count );
+	LPrintln("\tRetry Timeout : ", retry_timeout );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -100,26 +94,26 @@ void Loom_LoRa::set_address(uint8_t addr)    // Need to test this
 { 
 	address = addr;
 	delete manager;
-	manager = new RHReliableDatagram(*driver, address);
+	manager = new RHReliableDatagram(driver, address);
 
 	// Initialize Manager
 	bool status = manager->init();
 	print_module_label();
-	LPrintln("\tReinitializing Manager ", (status) ? "Success" : "Failed");
+	LPrintln("\tReinit Manager ", (status) ? "Success" : "Failed");
 	
 	// Set Frequency
-	status = driver->setFrequency(RF95_FREQ);
+	status = driver.setFrequency(RF95_FREQ);
 	print_module_label();
-	LPrintln( "\tSetting Frequency ", (status) ? "Success" : "Failed" );
+	LPrintln( "\tSet Frequency ", (status) ? "Success" : "Failed" );
 
 	// Set Retry Delay
 	print_module_label();
-	LPrintln("\tSetting retry timeout to ", retry_timeout, " ms");
+	LPrintln("\tSet retry timeout to ", retry_timeout, " ms");
 	manager->setTimeout(retry_timeout);
 
 	// Set Max Retry Count
 	print_module_label();
-	LPrintln("\tSetting max retry count ", retry_count);
+	LPrintln("\tSet max retry count ", retry_count);
 	manager->setRetries(retry_count);
 }
 
@@ -133,7 +127,7 @@ bool Loom_LoRa::receive(JsonObject json)
 		memset(buffer, '\0', max_message_len);
 
 		if ( manager->recvfromAck( (uint8_t*)buffer, &len, &from) ) {
-			signal_strength = driver->lastRssi();
+			signal_strength = driver.lastRssi();
 			bool status = msgpack_buffer_to_json(buffer, json);
 			return status;
 		}
@@ -153,7 +147,7 @@ bool Loom_LoRa::send(JsonObject json, uint8_t destination)
 
 	print_module_label();
 	LPrintln("Send " , (is_sent) ? "successful" : "failed" );
-	signal_strength = driver->lastRssi(); 
+	signal_strength = driver.lastRssi(); 
 	return is_sent;
 }
 

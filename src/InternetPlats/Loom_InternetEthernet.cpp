@@ -16,11 +16,11 @@ Loom_Ethernet_I::Loom_Ethernet_I(
 	, m_ip()
 	, m_is_connected(false)
 {
-	if(!mac.isNull()) {
+	if (!mac.isNull()) {
 		for (int i = 0; i < 6; i++)
 			this->m_mac[i] = mac[i];
 	}
-	if(!ip.isNull()) this->m_ip = IPAddress(ip[0], ip[1], ip[2], ip[3]);
+	if (!ip.isNull()) this->m_ip = IPAddress(ip[0], ip[1], ip[2], ip[3]);
 
 	// try to connect to internet
 	connect();
@@ -48,7 +48,7 @@ void Loom_Ethernet_I::print_config()
 {
 	LoomInternetPlat::print_config();
 	LPrint('\t', "MAC:                : [");
-	for (int i = 0; i < 6; i++) {
+	for (auto i = 0; i < 6; i++) {
 		LPrint_Hex(m_mac[i]);
 		if (i < 5) LPrint(",");
 		else 	   LPrintln("]");
@@ -200,7 +200,6 @@ uint32_t Loom_Ethernet_I::get_time()
 	m_UDP.stop();
 
 	return epoch;
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

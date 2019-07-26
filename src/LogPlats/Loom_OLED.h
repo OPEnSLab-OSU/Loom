@@ -37,7 +37,7 @@ public:
 	};
 
 protected:
-		Adafruit_SSD1306*	display;			/// Underlying OLED controller
+		Adafruit_SSD1306	display;			/// Underlying OLED controller
 		Version				version;			/// What type the OLED is (FeatherWing or breakout)
 		byte				reset_pin;			/// The reset pin (only applies to breakout version)
 		
@@ -81,7 +81,7 @@ public:
 	Loom_OLED(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_OLED();
+	~Loom_OLED() = default;
 
 //=============================================================================
 ///@name	OPERATION

@@ -13,13 +13,13 @@ class LoomRTC : public LoomModule
 {
 
 public:
+
 	/// Different time zones
 	enum class TimeZone { 
 		WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
 		ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
 		ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
 	};
-
 
 private: 
 	
@@ -36,9 +36,6 @@ protected:
 	char		datestring[20];		/// Latest saved string of the Date (year/month/day)
 	char		timestring[20];		/// Latest saved string of the time (hour:minute:second)
 
-	
-	// static byte	int_pin; 			/// Which pin the RTC interrupt is connected to (static so RTC ISR can be static)
-
 public:
 	
 //=============================================================================
@@ -49,12 +46,9 @@ public:
 	LoomRTC(	
 			const char*			module_name,
 			LoomModule::Type	module_type,
- 
 			TimeZone			timezone,
 			bool				use_utc_time,
 			bool				get_internet_time
-
-			// byte				interrupt_pin
 		);
 
 	/// Destructor
@@ -88,7 +82,9 @@ public:
 
 	/// Set an alarm for a duration
 	/// \param[in]	duration	TimeSpan of duration before alarm goes off
-	virtual void	set_alarm(TimeSpan duration) = 0;
+	// virtual void	set_alarm(TimeSpan duration) = 0;
+	void			set_alarm(TimeSpan duration) { set_alarm(now()+duration); }
+
 
 	/// Clear alarms
 	virtual void	clear_alarms() = 0;

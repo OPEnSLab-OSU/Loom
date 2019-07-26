@@ -37,7 +37,7 @@ public:
 	/// \param[in]	max_message_len			Set(Int) | <15> | {15("Max length")} | The maximum possible message length
 	Loom_SlipSerial(
 			const char*		module_name			= "SlipSerial",
-			uint16_t			max_message_len		= SERIAL_MAX_MESSAGE_LEN
+			uint16_t		max_message_len		= SERIAL_MAX_MESSAGE_LEN
 		);
 
 	/// Constructor that takes Json Array, extracts args

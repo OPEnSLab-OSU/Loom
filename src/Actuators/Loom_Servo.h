@@ -23,8 +23,7 @@ protected:
 
 	Adafruit_PWMServoDriver servo_driver;	/// Underlying servo driver instance
 
-	uint8_t		servo_count;				/// Number of servos
-	uint8_t*	positions;					/// Positions of the servos
+	uint8_t		positions[NUM_SERVOS];					/// Positions of the servos
 
 public:
 	
@@ -35,10 +34,8 @@ public:
 	/// Servo module constructor
 	///
 	/// \param[in]	module_name		String | <"Servo"> | null | Servo module name
-	/// \param[in]	servo_count		Int | <8> | [1-8] | How many servos to enable
 	Loom_Servo(
-			const char*		module_name		= "Servo",
-			uint8_t			servo_count		= NUM_SERVOS
+			const char*		module_name		= "Servo"
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -47,7 +44,7 @@ public:
 	Loom_Servo(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Servo();
+	~Loom_Servo() = default;
 
 //=============================================================================
 ///@name	OPERATION

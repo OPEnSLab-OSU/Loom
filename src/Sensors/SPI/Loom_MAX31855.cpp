@@ -9,9 +9,8 @@ Loom_MAX31855::Loom_MAX31855(
 		uint8_t			CS_pin
 	) 
 	: LoomSPISensor( module_name, Type::MAX31855, num_samples ) 
-	, inst_max{CS_pin}
+	, inst_max(CS_pin)
 {
-	// this->module_type = LoomModule::Type::MAX31855;
 	inst_max.begin();
 }
 

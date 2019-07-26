@@ -9,7 +9,7 @@ Loom_Decagon5TM::Loom_Decagon5TM(
 	) 
 	: LoomSDI12Sensor( module_name, Type::Decagon5TM, num_samples ) 
 {
-	// this->module_type = LoomModule::Type::Decagon5TM;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

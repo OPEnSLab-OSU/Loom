@@ -5,18 +5,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_PCF8523::Loom_PCF8523(	
 		const char*		module_name,
-	 
 		TimeZone		timezone,
 		bool			use_utc_time,
 		bool			get_internet_time
-		// byte			int_pin
-	) 
+	)
 	: LoomRTC( module_name, Type::PCF8523, timezone, use_utc_time, get_internet_time )
 {
-
-	rtc_inst = new PCF8523();
 	init();
-
 	clear_alarms();
 }
 
@@ -25,22 +20,10 @@ Loom_PCF8523::Loom_PCF8523(JsonArrayConst p)
 	: Loom_PCF8523(p[0], (TimeZone)(int)p[1], p[2], p[3]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_PCF8523::~Loom_PCF8523() 
-{
-	delete rtc_inst;
-}	
-
-///////////////////////////////////////////////////////////////////////////////
 bool Loom_PCF8523::_begin()
 {
-	rtc_inst->begin();
-	rtc_inst->stop_32768_clkout();
-}
-
-///////////////////////////////////////////////////////////////////////////////
-bool Loom_PCF8523::_initialized()
-{
-	rtc_inst->initialized();
+	rtc_inst.begin();
+	rtc_inst.stop_32768_clkout();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -52,15 +35,9 @@ void Loom_PCF8523::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DateTime Loom_PCF8523::now()
-{
-	return rtc_inst->now();
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void Loom_PCF8523::time_adjust(DateTime time)
 {
-	rtc_inst->adjust(time);
+	rtc_inst.adjust(time);
 
 	print_module_label();
 	LPrint("Adjusted time to: "); 
@@ -73,43 +50,8 @@ void Loom_PCF8523::set_alarm(DateTime time)
 	// Don't set alarm for current minute
 	DateTime tmp = (now().minute() != time.minute()) ? time : time+TimeSpan(60);
 
-	rtc_inst->set_alarm(tmp.day(), tmp.hour(), tmp.minute() );
-	rtc_inst->enable_alarm(true);
-}
-
-// void Loom_PCF8523::set_alarm(DateTime time)
-// {
-
-// 	// Example: PCF8523.set_alarm(10,5,45)
-// 	// Set alarm at day = 5, 5:45 a.m.
-// 	// rtc_inst->set_alarm(uint8_t day_alarm, uint8_t hour_alarm,uint8_t minute_alarm ) {
-
-// 	// rtc_inst->set_alarm(time.hour(), time.minute() );
-
-// 	// rtc_inst->start_counter_1(time.totalseconds());
-
-// 	// Repeats by default
-// 	// rtc_inst->start_counter_1((time - now()).totalseconds());
-// 	set_alarm(time - now());
-
-// }
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_PCF8523::set_alarm(TimeSpan duration)
-{
-	set_alarm(rtc_inst->now()+duration);
-}
-
-// void Loom_PCF8523::set_alarm(TimeSpan duration)
-// {
-// 	rtc_inst->start_counter_1(duration.totalseconds());
-// }
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_PCF8523::clear_alarms()
-{
-	rtc_inst->clear_rtc_interrupt_flags();
+	rtc_inst.set_alarm(tmp.day(), tmp.hour(), tmp.minute() );
+	rtc_inst.enable_alarm(true);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-

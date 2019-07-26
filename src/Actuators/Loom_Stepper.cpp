@@ -6,18 +6,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Stepper::Loom_Stepper( 
-		const char*		module_name, 
-		uint8_t			stepper_count 
+		const char*		module_name
 	) 
 	: LoomActuator( module_name, Type::Stepper ) 
-	, stepper_count(stepper_count)
 {
-	// this->module_type = LoomModule::Type::Stepper;
-
-	this->motors = new Adafruit_StepperMotor*[stepper_count];
-
 	AFMS = new Adafruit_MotorShield();
-	for (auto i = 0; i < stepper_count; i++){
+	for (auto i = 0; i < NUM_STEPPERS; i++){
 		motors[i] = AFMS->getStepper(200, i+1);
 	}
 
@@ -28,16 +22,11 @@ Loom_Stepper::Loom_Stepper(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Stepper::Loom_Stepper(JsonArrayConst p)
-	: Loom_Stepper( EXPAND_ARRAY(p, 2) ) {}
+	: Loom_Stepper( (const char*)p[0] ) {} 
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Stepper::~Loom_Stepper() 
 {
-	for (int i = 0; i < stepper_count; i++) {
-		delete motors[i];
-	}
-
-	delete motors;
 	delete AFMS;
 }
 
@@ -72,14 +61,17 @@ bool Loom_Stepper::dispatch(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Stepper::move_steps(uint8_t motor, uint16_t steps, uint8_t speed, bool clockwise)
 {
-	motors[motor]->setSpeed( (speed > 0) ? speed : 0);
-	motors[motor]->step( (steps > 1) ? steps : 0, (clockwise) ? FORWARD : BACKWARD, SINGLE);
-	yield();
+	if (motor < NUM_STEPPERS) {
+		motors[motor]->setSpeed( (speed > 0) ? speed : 0);
+		motors[motor]->step( (steps > 1) ? steps : 0, (clockwise) ? FORWARD : BACKWARD, SINGLE);
+		yield();
 
-	if (print_verbosity == Verbosity::V_HIGH) {
-		print_module_label();
-		LPrint("Set stepper ", motor, " to move ", steps, " steps ");
-		LPrintln("at speed ", speed, ", direction ", (clockwise) ? "clockwise" : "counterclockwise");
+		if (print_verbosity == Verbosity::V_HIGH) {
+			print_module_label();
+			LPrint("Set stepper ", motor, " to move ", steps, " steps ");
+			LPrintln("at speed ", speed, ", direction ", (clockwise) ? "clockwise" : "counterclockwise");
+		}
+
 	}
 }
 

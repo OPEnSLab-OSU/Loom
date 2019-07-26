@@ -22,80 +22,74 @@ Loom_nRF::Loom_nRF(
 	, retry_count(retry_count)
 	, retry_timeout(retry_timeout)
 	, multicast_level(multicast_level)
+	, radio( RF24(5,6) )
+	// , network( RF24Network(radio) )
 {
-	// this->module_type = LoomModule::Type::nRF;
-
-
 	// Create nRF manager objects
-	radio	= new RF24(5,6);
-	network	= new RF24Network(*radio);
+	// radio	= new RF24(5,6);
+	network	= new RF24Network(radio);
 
 	SPI.begin();
-	radio->begin();
+	radio.begin();
 
 	// Set data rate
-	// this->data_rate = data_rate;
 	print_module_label();
 	LPrint("Setting nRF data rate to: ");
-	switch (this->data_rate) {
+	switch (data_rate) {
 		case 0: 
 			LPrintln("Default (1Mbps)");
 			break; 
 		case 1: 
-			radio->setDataRate(RF24_250KBPS);
+			radio.setDataRate(RF24_250KBPS);
 			LPrintln("250 kbps");
 			break;
 		case 2: 
-			radio->setDataRate(RF24_1MBPS);
+			radio.setDataRate(RF24_1MBPS);
 			LPrintln("1 Mbps");
 			break;
 		case 3: 
-			radio->setDataRate(RF24_2MBPS);
+			radio.setDataRate(RF24_2MBPS);
 			LPrintln("2 Mbps");
 			break;
 	}
 
 	// Set power level
-	// this->power_level = power_level;
 	print_module_label();
 	LPrint("Setting nRF power level to: ");
-	switch (this->power_level) {
+	switch (power_level) {
 		case 0: 
 			LPrintln("Default");
 			break; 
 		case 1: 
-			radio->setPALevel(RF24_PA_MIN);
+			radio.setPALevel(RF24_PA_MIN);
 			LPrintln("RF24_PA_MIN (-18dBm)");
 			break;
 		case 2: 
-			radio->setPALevel(RF24_PA_LOW);
+			radio.setPALevel(RF24_PA_LOW);
 			LPrintln("RF24_PA_LOW (-12dBm)");
 			break;
 		case 3: 
-			radio->setPALevel(RF24_PA_HIGH);
+			radio.setPALevel(RF24_PA_HIGH);
 			LPrintln("RF24_PA_HIGH (-6dBM)");
 			break;
 		case 4: 
-			radio->setPALevel(RF24_PA_MAX);
+			radio.setPALevel(RF24_PA_MAX);
 			LPrintln("RF24_PA_MAX (0dBm)");
 			break;
 	}
 
-
 	// Set retry behavior
-	// this->retry_count 	= retry_count;
-	// this->retry_timeout	= retry_timeout;
+	// this.retry_count 	= retry_count;
+	// this.retry_timeout	= retry_timeout;
 	if (  ( (retry_timeout >= 0) && (retry_timeout <= 15) ) &&
 		  ( (retry_count >= 0) && (retry_count <= 15) )    ) {
 
-		radio->setRetries(retry_timeout, retry_count);
+		radio.setRetries(retry_timeout, retry_count);
 
 		print_module_label();
-		LPrintln("\t", "Retry delay: ", 250*retry_timeout, " microseconds");
-		LPrintln("\t", "Retry count: ", retry_count);
+		LPrintln("\tRetry delay: ", 250*retry_timeout, " microseconds");
+		LPrintln("\tRetry count: ", retry_count);
 	} 
-
-	// this->multicast_level = multicast_level;
 
 	// Begin network manager with provided address
 	network->begin(90, address); // determine good way to convert change to octal address?
@@ -109,7 +103,7 @@ Loom_nRF::Loom_nRF(JsonArrayConst p)
 Loom_nRF::~Loom_nRF() 
 {
 	delete network;
-	delete radio;
+// 	delete radio;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -188,9 +182,9 @@ void Loom_nRF::broadcast(JsonObject json)
 void Loom_nRF::set_address(uint8_t addr)    // Need to test this
 { 
 	address = addr;
-	delete network;
+	// delete network;
 
-	network = new RF24Network(*radio);
+	// network = new RF24Network(*radio);
 	network->begin(90, address);
 }
 

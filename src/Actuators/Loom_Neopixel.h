@@ -16,7 +16,7 @@ class Loom_Neopixel : public LoomActuator
 
 protected:
 
-	Adafruit_NeoPixel*	pixels[3];			/// Array of Neopixel instances to manage up to 3 Neopixels
+	Adafruit_NeoPixel	pixels[3];			/// Array of Neopixel instances to manage up to 3 Neopixels
 
 	bool				pin_enabled[3];		/// Whether pins A0-A2 are enabled
 	uint8_t				color_vals[3][3];	/// The associated color values (RGB) for each of the 3 Neopixels
@@ -46,7 +46,7 @@ public:
 	Loom_Neopixel(JsonArrayConst p);
 
 	/// Destructor
-	virtual ~Loom_Neopixel();
+	~Loom_Neopixel() = default;
 
 //=============================================================================
 ///@name	OPERATION

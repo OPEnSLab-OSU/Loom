@@ -5,20 +5,17 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DS3231::Loom_DS3231(
 		const char*		module_name,
-
 		TimeZone		timezone,
 		bool			use_utc_time,
 		bool			get_internet_time
 	)
 	: LoomRTC( module_name, Type::DS3231, timezone, use_utc_time, get_internet_time )
 {
-
-	rtc_inst = new RTC_DS3231();
 	init();
 
 	// Set SQW pin to OFF (in my case it was set by default to 1Hz)
 	// The output of the DS3231 INT pin is connected to this pin
-	rtc_inst->writeSqwPinMode(DS3231_OFF);
+	rtc_inst.writeSqwPinMode(DS3231_OFF);
 
 	clear_alarms();
 }
@@ -28,21 +25,9 @@ Loom_DS3231::Loom_DS3231(JsonArrayConst p)
 	: Loom_DS3231(p[0], (TimeZone)(int)p[1], p[2], p[3]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_DS3231::~Loom_DS3231()
-{
-	delete rtc_inst;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 bool Loom_DS3231::_begin()
 {
-	return rtc_inst->begin();
-}
-
-///////////////////////////////////////////////////////////////////////////////
-bool Loom_DS3231::_initialized()
-{
-	return !rtc_inst->lostPower();
+	return rtc_inst.begin();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -54,15 +39,9 @@ void Loom_DS3231::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DateTime Loom_DS3231::now()
-{
-	return rtc_inst->now();
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void Loom_DS3231::time_adjust(DateTime time)
 {
-	rtc_inst->adjust(time);
+	rtc_inst.adjust(time);
 
 	print_module_label();
 	LPrint("Adjusted time to: "); 
@@ -79,14 +58,8 @@ void Loom_DS3231::set_alarm(DateTime time)
 	}
 
 	// Set alarm 1
-	rtc_inst->setAlarm(ALM1_MATCH_HOURS, time.second(), time.minute(), time.hour(), 0);
-	rtc_inst->alarmInterrupt(1, true);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_DS3231::set_alarm(TimeSpan duration)
-{
-	set_alarm(now()+duration);
+	rtc_inst.setAlarm(ALM1_MATCH_HOURS, time.second(), time.minute(), time.hour(), 0);
+	rtc_inst.alarmInterrupt(1, true);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -94,12 +67,12 @@ void Loom_DS3231::clear_alarms()
 {
 	print_module_label();
 	LPrintln("Clearing DS3231 alarms");
-	rtc_inst->armAlarm(1, false);
-	rtc_inst->clearAlarm(1);
-	rtc_inst->alarmInterrupt(1, false);
-	rtc_inst->armAlarm(2, false);
-	rtc_inst->clearAlarm(2);
-	rtc_inst->alarmInterrupt(2, false);
+	rtc_inst.armAlarm(1, false);
+	rtc_inst.clearAlarm(1);
+	rtc_inst.alarmInterrupt(1, false);
+	rtc_inst.armAlarm(2, false);
+	rtc_inst.clearAlarm(2);
+	rtc_inst.alarmInterrupt(2, false);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
