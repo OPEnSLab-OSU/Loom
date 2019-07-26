@@ -47,11 +47,19 @@ bool Loom_Relay::dispatch(JsonObject json)
 	// 	JsonArray params = json["params"];
 	// 	return functionRoute(
 	// 		json["func"],
-	// 		"set", [this, params]() { if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } else { LPrintln("Not enough parameters"); } } 
+	// 		"set", [this, params]() { if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } } 
 	// 	);
 	// } else {
 	// 	return false;
 	// }
+
+	if ( strcmp(json["module"], module_name) == 0 ) {
+		JsonArray params = json["params"];
+		switch( (char)json["func"] ) {
+			case 's': if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } return true;
+		}
+	}
+	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
