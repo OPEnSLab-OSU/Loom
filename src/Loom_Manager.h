@@ -113,22 +113,18 @@ protected:
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
 	// Sub Managers
-	/// Pointer to an interrupt manager
+	/// Pointer to an interrupt manager.
+	/// Used for convenience, another pointer can exist in modules vector
 	Loom_Interrupt_Manager*	interrupt_manager = nullptr;
-	/// Pointer to a sleep manager
+	/// Pointer to a sleep manager.
+	/// Used for convenience, another pointer can exist in modules vector
 	Loom_Sleep_Manager*		sleep_manager = nullptr;
-	/// RTC object pointer
+	/// RTC object pointer.
+	/// Used for convenience, another pointer can exist in modules vector
 	LoomRTC*				rtc_module = nullptr;
 
 	// Vectors of Loom Modules, categorized by type
 	std::vector<LoomModule*>		modules;		/// Miscellaneous modules
-	// std::vector<LoomModule*>		other_modules;		/// Miscellaneous modules
-	// std::vector<LoomSensor*>		sensor_modules;		/// Sensors
-	// std::vector<LoomActuator*>		actuator_modules;	/// Actuators
-	// std::vector<LoomCommPlat*>		comm_modules;		/// Communication platforms
-	// std::vector<LoomInternetPlat*>	internet_modules;	/// Internet platforms
-	// std::vector<LoomPublishPlat*>	publish_modules;	/// Publishing platforms
-	// std::vector<LoomLogPlat*>		log_modules;		/// Logging platforms
 
 	Verbosity	print_verbosity;		/// Print detail verbosity
 	Verbosity	package_verbosity;		/// Package detail verbosity
@@ -498,199 +494,13 @@ private:
 	void add_device_ID_to_json(JsonObject json);
 
 	///////////////////////////////////////////////////////////////////////////
-	// /// Add module to a list of modules
-	// template<typename T>
-	// bool print_config_aux(std::vector<T>& modules) 
-	// {
-	// 	for (auto module : modules) {
-	// 		module->print_config();
-	// 	}
-	// }
-
-	// ///////////////////////////////////////////////////////////////////////////
-	// // /// Add module to a list of modules
-	// template<typename T>
-	// bool add_module_aux(std::vector<T>& modules, const T module) 
-	// {
-	// 	print_device_label();
-
-	// 	if (module == nullptr) {
-	// 		LPrintln("Cannot add null module");
-	// 		return false;
-	// 	}
-
-	// 	LPrintln("Adding Module: ", ((LoomModule*)module)->get_module_name() );
-
-	// 	modules.emplace_back(module);
-	// 	module->link_device_manager(this);
-	// 	return true;	
-	// }
-
-	/// Add module to a list of modules
-	// template<typename T>
-	// bool add_module_aux2(std::vector<LoomModule*>& modules, LoomModule* module); 
-	// {
-	// 	print_device_label();
-
-	// 	if (module == nullptr) {
-	// 		LPrintln("Cannot add null module");
-	// 		return false;
-	// 	}
-
-	// 	LPrintln("Adding Module: ", module->get_module_name() );
-
-	// 	modules.emplace_back(module);
-	// 	module->link_device_manager(this);
-	// 	return true;	
-	// }
-
-	// ///////////////////////////////////////////////////////////////////////////
-	// /// Auxiliary function for printing a list of modules
-	// template<typename T>
-	// void list_modules_aux(const std::vector<T>& modules, const char* module_type)
-	// {
-	// 	LPrintln("\t", module_type, " (", modules.size(), "):");
-	// 	for (auto module : modules) {
-	// 		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active()) ) {
-	// 			LPrintln( "\t\t[", ( ((LoomModule*)module)->get_active()) ? "+" : "-" , "] ", ((LoomModule*)module)->get_module_name() );
-	// 		}
-	// 	}	
-	// }
-
-	///////////////////////////////////////////////////////////////////////////
-	/// Auxiliary function for packaging data of a list of modules
-	// template<typename T>
-	// void package_aux(JsonObject json, const std::vector<T>& modules)
-	// {
-	// 	for (auto module : modules) {
-	// 		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-	// 			((LoomModule*)module)->package( json );
-	// 		}
-	// 	}	
-	// }
-
-	///////////////////////////////////////////////////////////////////////////
-	/// Auxiliary function for packaging data of a single module
-	// void package_aux(JsonObject json, LoomModule* module);
-	
-	/// Have each module check against provided command
-	// template<typename T>
-	// bool dispatch_aux(JsonObject json, const std::vector<T>& modules)
-	// {
-	// 	for (auto module : modules) {
-	// 		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-	// 			if ( ((LoomModule*)module)->dispatch( json ) ) return true;
-	// 		}
-	// 	}
-	// 	return false;
-	// }
-	
-	///////////////////////////////////////////////////////////////////////////
-	/// Have module check against provided command	
-	// bool dispatch_aux(JsonObject json, LoomModule* module);
-
-	// template<typename T>
-	// void second_stage_ctor_aux(const std::vector<T>& modules)
-	// {
-	// 	for (auto module : modules) {
-	// 		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-	// 			((LoomModule*)module)->second_stage_ctor();
-	// 		}
-	// 	}	
-	// }
-
-	///////////////////////////////////////////////////////////////////////////
 	/// Auxiliary function to search a list of modules for a module of specified type
 	/// \param[in]	type	Type to search for
-	template<typename T>
-	LoomModule*	find_module(LoomModule::Type type, uint8_t idx, const std::vector<T>& modules)
-	{
-		uint8_t current = 0;
-
-		for (auto module : modules) {
-			if (type == ((LoomModule*)module)->get_module_type()) {
-				if (current == idx) {
-					return (LoomModule*)module;
-				} else {
-					current++;
-				}
-			}
-		}
-		return nullptr;
-	}
+	LoomModule*	find_module(LoomModule::Type type, uint8_t idx);
 
 	/// Free modules.
 	/// Used in destructor or when switching configuration
 	void free_modules();
-
-	/// Free a vector of modules.
-	/// Called by free_modules
-	// template<typename T>
-	// void free_modules_aux(std::vector<T>& modules)
-	// {
-	// 	for (auto module : modules) {
-	// 		delete module;
-	// 	}
-	// 	modules.clear();
-	// }
-
-	/// Called by set_print_verbosity.
-	/// \param[in]	v	New print verbosity for modules
-	// template<typename T>
-	// void set_print_verbosity_aux(Verbosity v, const std::vector<T>& modules)
-	// {
-	// 	for (auto module : modules) {
-	// 		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-	// 			((LoomModule*)module)->set_print_verbosity(v);
-	// 		}
-	// 	}	
-	// }
-		
-	// /// Called by set_package_verbosity.
-	// /// \param[in]	v	New print  verbosity for modules
-	// template<typename T>
-	// void set_package_verbosity_aux(Verbosity v, const std::vector<T>& modules)
-	// {
-	// 	for (auto module : modules) {
-	// 		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-	// 			((LoomModule*)module)->set_package_verbosity(v);
-	// 		}
-	// 	}	
-	// }
-
-	// /// Called by power_up.
-	// template<typename T>
-	// void power_up_aux(const std::vector<T>& modules)
-	// {
-	// 	for (auto module : modules) {
-	// 		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-	// 			((LoomModule*)module)->power_up();
-	// 		}
-	// 	}	
-	// }
-
-	// /// Called by power_down.
-	// template<typename T>
-	// void power_down_aux(const std::vector<T>& modules)
-	// {
-	// 	for (auto module : modules) {
-	// 		if ( module != nullptr ){
-	// 			((LoomModule*)module)->power_down();
-	// 		}
-	// 	}	
-	// }
-
-	/// Called by get_config
-	// template<typename T>
-	// void get_config_aux(const std::vector<T>& modules, JsonObject json)
-	// {
-	// 	for (auto module : modules) {
-	// 		if ( module != nullptr ){
-	// 			((LoomModule*)module)->add_config(json);
-	// 		}
-	// 	}	
-	// }	
-
 
 };
 

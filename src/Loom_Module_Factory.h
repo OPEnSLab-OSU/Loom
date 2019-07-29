@@ -90,8 +90,6 @@ class Factory
 
 public:
 
-
-	
 	/// Constructor
 	Factory() = default;
 	
@@ -112,39 +110,7 @@ public:
 		return ConstructDefault<T>();
 	}
 
-	/// Creates a LoomModule according to Json
-	// void CreateAndSort(
-	// 	JsonVariant module, 
-	// 	Loom_Interrupt_Manager*& interrupt_manager, 
-	// 	Loom_Sleep_Manager*& sleep_manager,
-	// 	LoomRTC*& rtc,
-	// 	LoomModule*& other_module, 
-	// 	LoomSensor*& sensor,
-	// 	LoomActuator*& actuator,
-	// 	LoomCommPlat*& comm_plat,
-	// 	LoomInternetPlat*& internet_plat,
-	// 	LoomPublishPlat*& publish_plat,
-	// 	LoomLogPlat*& log_plat
-	// );
-
 private:
-
-	// /// Enum used to determine where to sort module in 
-	// /// device manager lists 
-	// enum class ModuleSortType {
-	// 	InterruptManager,
-	// 	SleepManager,
-	// 	Multiplexer,
-	// 	Actuator,
-	// 	CommPlat,
-	// 	InternetPlat,
-	// 	PublishPlat,
-	// 	LogPlat,
-	// 	Rtc,
-	// 	Sensor,
-	// 	Other,
-	// 	Unknown
-	// };
 
 	/// Function pointer to 'template<class T> LoomModule* Construct(JsonArrayConst p)'
 	using FactoryPtr = LoomModule* (*)(JsonArrayConst p);
@@ -155,14 +121,7 @@ private:
 		const char*			name;				// Module type to compare against
 		FactoryPtr			Construct;			// Pointer to 'template<class T> LoomModule* Create(JsonArrayConst p)' with the type T set
 		FactoryPtrDefault	ConstructDefault;	// Pointer to 'template<class T> LoomModule* CreateDefault()' with the type T set
-		// ModuleSortType		sort_type;			// Which array of LoomManager to sort into 
 	} NameModulePair;
-
-
-	/// Determine which array of manager to sort new module into
-	/// \param[in]	module		Json of the module name and settings
-	/// \return Type indicating manager array to sort into 
-	// ModuleSortType get_sort_type(JsonVariant module);
 
 	/// Factory lookup table
 	const static NameModulePair LookupTable[];

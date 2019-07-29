@@ -25,8 +25,8 @@ const Factory::NameModulePair Factory::LookupTable[] =
 	{"Bluetooth",			Construct<Loom_Bluetooth>,				ConstructDefault<Loom_Bluetooth> },
 	
 	// InternetPlat
-	// {"Ethernet",			Construct<Loom_Ethernet_I>,				ConstructDefault<Loom_Ethernet_I> },
-	{"Ethernet",			Construct<Loom_Ethernet_I>,				nullptr },
+	{"Ethernet",			Construct<Loom_Ethernet_I>,				ConstructDefault<Loom_Ethernet_I> },
+	// {"Ethernet",			Construct<Loom_Ethernet_I>,				nullptr },
 
 	// PublishPlat
 	{"GoogleSheets",		Construct<Loom_GoogleSheets>,			nullptr},
@@ -101,57 +101,8 @@ LoomModule* Factory::Create(JsonVariant module)
 	return nullptr;
 }
 
-
-
 ///////////////////////////////////////////////////////////////////////////////
-// void Factory::CreateAndSort(
-// 	JsonVariant module, 
-// 	Loom_Interrupt_Manager*& interrupt_manager, 
-// 	Loom_Sleep_Manager*& sleep_manager,
-// 	LoomRTC*& rtc,
-// 	LoomModule*& other_module, 
-// 	LoomSensor*& sensor,
-// 	LoomActuator*& actuator,
-// 	LoomCommPlat*& comm_plat,
-// 	LoomInternetPlat*& internet_plat,
-// 	LoomPublishPlat*& publish_plat,
-// 	LoomLogPlat*& log_plat
-// ) {		
-// 	LoomModule* tmp = Create(module);
-// 	ModuleSortType sort_to = get_sort_type(module);
 
-// 	// if (tmp == nullptr) {
-// 	// 	LPrintln("Module could not be created"); 
-// 	// } 
 
-// 	switch (sort_to) {
-// 		case ModuleSortType::InterruptManager:	interrupt_manager = (Loom_Interrupt_Manager*)tmp; return;
-// 		case ModuleSortType::SleepManager:		sleep_manager = (Loom_Sleep_Manager*)tmp; return;
-// 		case ModuleSortType::Multiplexer:		other_module = tmp; return;
-// 		case ModuleSortType::Actuator:			actuator = (LoomActuator*)tmp; return;
-// 		case ModuleSortType::CommPlat:			comm_plat = (LoomCommPlat*)tmp; return;
-// 		case ModuleSortType::InternetPlat:		internet_plat = (LoomInternetPlat*)tmp; return;
-// 		case ModuleSortType::PublishPlat:		publish_plat = (LoomPublishPlat*)tmp; return;
-// 		case ModuleSortType::LogPlat:			log_plat = (LoomLogPlat*)tmp; return;
-// 		case ModuleSortType::Rtc:				rtc = (LoomRTC*)tmp; return;
-// 		case ModuleSortType::Sensor:			sensor = (LoomSensor*)tmp; return;
-// 		case ModuleSortType::Other:				other_module = tmp; return;
-// 		case ModuleSortType::Unknown:			other_module = tmp; return;
-// 		default: 								other_module = tmp; return;
-// 	}
-// }
 
-///////////////////////////////////////////////////////////////////////////////
-// Factory::ModuleSortType Factory::get_sort_type(JsonVariant module) {
-// 	const char* name = module["name"];
 
-// 	for (auto elem : LookupTable) {
-// 		if ( strcmp(name, elem.name) == 0 ) {
-// 			return elem.sort_type;
-// 		}
-// 	}
-
-// 	return ModuleSortType::Unknown;
-// }
-
-///////////////////////////////////////////////////////////////////////////////
