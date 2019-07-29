@@ -17,30 +17,22 @@ const char* json_config_pretty =
 ;
 
 
-LoomManager Manager("Manager", "Loom", 1, 1, LoomManager::DeviceType::NODE, Verbosity::V_HIGH, Verbosity::V_LOW);
-
+LoomManager Loom("");
 
 
 void setup() 
 {
-	pinMode(LED_BUILTIN, OUTPUT);   // Set the LED pin mode
-
-	Serial.begin(115200);
-	while(!Serial);       			// Ensure Serial is ready to go before anything happens in LOOM_DEBUG mode.
-	delay(1000);
-
-	LPrintln("Initialized Serial!\n");
+	Loom.begin_serial(true);
 
 	LPrintln("\nConfig:\n", json_config, "\n");
 
-	// Manager.parse_config(json_config);
-	// Manager.parse_config(json_config_compact);
-	Manager.parse_config(json_config_pretty);
-	Manager.print_config();
+	// Parse one of the configs by selecting one of the below 3 lines
+	// Loom.parse_config(json_config);
+	// Loom.parse_config(json_config_compact);
+	Loom.parse_config(json_config_pretty);
 
-	Manager.Relay().set(true);
+	Loom.print_config();
 
-	// LPrintln("strlen pretty: ", strlen(pretty));
 	LPrintln("strlen json_config: ", strlen(json_config));
 	LPrintln("strlen json_config_compact: ", strlen(json_config_compact));
 	LPrintln("strlen json_config_pretty ", strlen(json_config_pretty));
@@ -52,7 +44,7 @@ void setup()
 
 void loop() 
 {
-
+	// No program here, example is for how to include json config
 }
 
 

@@ -3,10 +3,10 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule::LoomModule() 
+LoomModule::LoomModule( const char* set_module_name )
+	: module_name_base(set_module_name)
+	, module_name(module_name_base.c_str())
 {
-	snprintf(this->module_name, 20, "%s", "Unknown"); 
-
 	active 				= true;
 	print_debug 		= true;
 	print_verbosity 	= Verbosity::V_LOW;
@@ -16,10 +16,9 @@ LoomModule::LoomModule()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule::LoomModule( const char* module_name ) : LoomModule()
-{
-	snprintf(this->module_name, 20, "%s", module_name); 
-}
+LoomModule::LoomModule( ) 
+	: LoomModule("Unknown") 
+{}
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomModule::Type LoomModule::get_module_type()
@@ -72,7 +71,7 @@ void LoomModule::print_state()
 ///////////////////////////////////////////////////////////////////////////////
 void LoomModule::get_module_name(char* buf) 
 { 
-	strcpy(buf, module_name); 
+	module_name_base.toCharArray(buf, 20);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -51,7 +51,6 @@ public:
 
 	bool		receive(JsonObject json) override {}
 	bool		send(JsonObject json, uint16_t destination) override {}
-	bool		send(JsonObject json) override {}
 
 	/// Allow a phone to connect
 	/// \param[in] connect_timeout		Max time to allow user to try to connect

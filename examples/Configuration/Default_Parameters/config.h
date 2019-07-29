@@ -1,0 +1,27 @@
+"{\
+	'general':\
+	{\
+		'device_name':'Device',\
+		'family':'Loom',\
+		'instance_num':1,\
+		'family_num':0\
+	},\
+	'components':[\
+		{\
+			'name':'Loom_Analog',\
+			'parameters':'default'\
+		},\
+		{\
+			'name':'Loom_Digital',\
+			'parameters':'default'\
+		},\
+		{\
+			'name':'Loom_Interrupt_Manager',\
+			'parameters':'default'\
+		},\
+		{\
+			'name':'Loom_Relay',\
+			'parameters':'default'\
+		}\
+	]\
+}"

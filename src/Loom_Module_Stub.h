@@ -15,7 +15,10 @@
 
 
 
-
+/// NOTE: This module is broken, as it attempts to implement member functions
+/// of classes it does not inherit from. If you need to check if you
+/// recieved a stub module, check the modules type using
+/// (LoomModule*)(module)->get_module_type().
 
 class Loom_Module_Stub : public LoomModule
 {
@@ -178,12 +181,12 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////
 	// Logging Platforms
-	void log_bundle(JsonObject json)
+	void log()
+	{ LPrintln(error_msg); }
+	void log(JsonObject json)
 	{ LPrintln(error_msg); }
 
 	// OLED
-	void log_bundle(JsonObject json, Loom_OLED::Format format)
-	{ LPrintln(error_msg); }
 	void set_display_format(Loom_OLED::Format format)
 	{ LPrintln(error_msg); }
 	Loom_OLED::Format get_display_format()
@@ -203,6 +206,8 @@ public:
 
 
 	// SD
+	void log(const char* filename)
+	{ LPrintln(error_msg); }
 	bool save_json(JsonObject json, char* file, int timestamp=3)
 	{ LPrintln(error_msg); }
 	void set_default_file(char* filename)

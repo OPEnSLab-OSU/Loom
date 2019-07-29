@@ -1,0 +1,26 @@
+"{\
+	'general':\
+	{\
+		'device_name':'Device',\
+		'family':'Loom',\
+		'instance_num':1,\
+		'family_num':0\
+	},\
+	'components':[\
+		{\
+			'name':'Loom_LoRa',\
+			'parameters':[\
+				'LoRa',\
+				255,\
+				1,\
+				23,\
+				3,\
+				200\
+			]\
+		},\
+		{\
+			'name':'Loom_SD',\
+			'parameters':['SD',true,1000,10,'datafile.csv']\
+		}\
+	]\
+}"

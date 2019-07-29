@@ -10,22 +10,14 @@ Loom_GoogleSheets::Loom_GoogleSheets(
     const char* tab_id,
     const char* device_id
 )   : LoomPublishPlat( module_name, internet_index )
-    , m_buffer{}
-    , m_data_start(nullptr) 
-{
-    const int printed = snprintf(m_buffer, sizeof(m_buffer), "%s?key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s&key3=full_data&val3=", 
-		script_url,                                 // URL of the script
-        sheet_id,   								// Spreadsheet ID
-		tab_id, 				                    // Tab to write to
-		device_id);                           // The bundle source's device ID
-    
+    , m_script_url(script_url)
+    , m_sheet_id(sheet_id)
+    , m_tab_id(tab_id)
+    , m_device_id(device_id)
+{   
     /// Build the begining of the Google Sheets URL with all of the provided parameters
     print_module_label();
-	if(printed < 0) LPrint("Buffer overflowed when constructing google sheets url\n");
-    else {
-        LPrint("Google sheets ready with url: ", m_buffer);
-        m_data_start = &(m_buffer[printed]);
-    }
+    LPrint("Google sheets ready with url: ", m_script_url);
 } 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -36,83 +28,98 @@ Loom_GoogleSheets::Loom_GoogleSheets(JsonArrayConst p)
 void Loom_GoogleSheets::print_config() 
 {
     LoomPublishPlat::print_config();
-    // just in case
-    m_data_start[0] = '\0';
-    LPrint("\t URL: ", m_buffer, "\n");
+    LPrint("\t URL: ", m_script_url, "\n");
+    LPrint("\t Sheet ID: ", m_sheet_id, "\n");
+    LPrint("\t Tab ID: ", m_tab_id, "\n");
+    LPrint("\t Device ID: ", m_device_id, "\n");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat* plat) 
 {
     print_module_label();
-    // serialize the data, checking for an error
-    if (!m_serialize_internet_impl(json)) {
-        LPrint("Buffer overflow during serialize!\n");
+    // connect to script.google.com
+    Client& network = plat->connect_to_domain("script.google.com");
+    // check if we connected
+    if (!network.connected()) {
+        LPrint("Could not connect to script.google.com");
         return false;
     }
-    else {
-        LPrint(m_buffer, "\n");
-        Client& m_cli = plat->http_get_request("script.google.com", m_buffer);
-        if (!m_cli.connected()) return false;
-        // discard all oncoming data
-        const auto start = millis();
-        while (m_cli.connected()) {
-            const auto read = m_cli.available();
-            if(read) m_cli.read(nullptr, read);
-            // timeout in case connection doesn't close itself
-            if (millis() - start > 5000) m_cli.stop();
-        }
-        // all done!
-        print_module_label();
-        LPrint("Published successfully!\n");
-        return true;
+    // start writing data to the network
+    // print the initial http request
+    network.print("GET ");
+	// construct the URL from a bunch of different segments
+    // start with the sheet metadata base, referenced from the following snprintf statement:
+    /* const int printed = snprintf(m_buffer, sizeof(m_buffer), "%s?key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s&key3=full_data&val3=", 
+		script_url,                                 // URL of the script
+        sheet_id,   								// Spreadsheet ID
+		tab_id, 				                    // Tab to write to
+		device_id);                           // The bundle source's device ID */
+    network.print(m_script_url);
+    network.print("?key0=sheetID&val0=");
+    network.print(m_sheet_id);
+    network.print("&key1=tabID&val1=");
+    network.print(m_tab_id);
+    network.print("&key2=deviceID&val2=");
+    network.print(m_device_id);
+    network.print("&key3=full_data&val3=");
+    // next print the body data, converted in real time
+    m_serialize_internet_impl(json, network);
+    // that should finish off the URL, so print the rest of the HTTP request
+	network.print(" HTTP/1.1\r\nUser-Agent: LoomOverSSLClient\r\nHost: script.google.com\r\nConnection: close\r\n\r\n");
+	// all ready to go!
+    if (!network.connected()) return false;
+    // discard all oncoming data
+    const auto start = millis();
+    while (network.connected()) {
+        const auto read = network.available();
+        if(read) network.read(nullptr, read);
+        // timeout in case connection doesn't close itself
+        if (millis() - start > 5000) network.stop();
     }
+    // all done!
+    LPrint("Published successfully!\n");
+    return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_GoogleSheets::m_serialize_internet_impl(const JsonObject json) 
+bool Loom_GoogleSheets::m_serialize_internet_impl(const JsonObject json, Print& write) 
 {
     // step one: package timestamp
-    char* m_data_cur = m_data_start;
     const JsonObject time_obj = json["timestamp"];
     for (const JsonPair i : time_obj) {
-        const int printed = snprintf(m_data_cur, m_buffer_left(m_data_cur),
-            "%s~%s~", i.key().c_str(), i.value().as<const char*>());
-        if (printed < 0) return false;
-        // move the pointer foward
-        m_data_cur = &(m_data_cur[printed]);
+        write.print(i.key().c_str());
+        write.print('~');
+        write.print(i.value().as<const char*>());
+        write.print('~');
     }
     // step two: package data
-    const JsonArray data_ray = json["contents"];
-    for (const auto i : data_ray) {
+    const JsonArrayConst data_ray = json["contents"];
+    for (JsonArrayConst::iterator i = data_ray.begin(); i != data_ray.end();) {
+        JsonObjectConst obj = i->as<JsonObjectConst>();
         // store the module name
-        const char* name = i["module"].as<const char*>();
+        const char* name = obj["module"].as<const char*>();
         // iterate over the data, pushing it into the buffer
-        const JsonObject data_vals = i["data"];
-        for (const auto d : data_vals) {
+        const JsonObjectConst data_vals = obj["data"];
+        // increment i, and let the loop below know if it's the very last cycle
+        const bool end = (++i == data_ray.end());
+        for (JsonObjectConst::iterator d = data_vals.begin();;) {
             // serialize the key
-            const int printed = snprintf(m_data_cur, m_buffer_left(m_data_cur),
-                "%s-%s~", name, d.key().c_str());
-            if (printed < 0) return false;
-            // move the pointer foward
-            m_data_cur = &(m_data_cur[printed]);
+            write.print(name);
+            write.print('-');
+            write.print(d->key().c_str());
+            write.print('~');
             // serialize the value
-            const auto data_tmp = d.value();
-            const auto json_size = measureJson(data_tmp);
-            const auto max_json_size = m_buffer_left(m_data_cur);
-            // no overflow check
-            if (json_size + 1 >= max_json_size) return false;
-            serializeJson(data_tmp, m_data_cur, max_json_size);
-            // add the trailing tilde
-            m_data_cur[json_size] = '~';
-            // move the pointer forward
-            m_data_cur = &(m_data_cur[json_size + 1]);
+            const auto data_tmp = d->value();
+            serializeJson(data_tmp, write);
+            // add the trailing tilde, only if this is not the last element
+            if (++d == data_vals.end()) {
+                if (!end) write.print('~');
+                break;
+            }
+            write.print('~');
         }
     }
-    // step three: replace the last trailing tilde with a null
-    m_data_cur--;
-    m_data_cur[0] = '\0';
-    return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

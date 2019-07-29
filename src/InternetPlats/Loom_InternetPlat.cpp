@@ -11,6 +11,20 @@ LoomInternetPlat::LoomInternetPlat(
 	}
 
 ///////////////////////////////////////////////////////////////////////////////
+Client& LoomInternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb) {
+	// * the rainbow connection *
+	Client& client = connect_to_domain(domain);
+	if (!client.connected()) return client;
+	// ok next, make the http request
+	print_module_label();
+	LPrint("Writing http: ", domain, "\n");
+	write_http_request(client, domain, url, body, verb);
+	// return the client for data reception
+	return client;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb) {
 	/// print the initial http request
 	client.print(verb);

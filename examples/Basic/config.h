@@ -1,1 +1,31 @@
-"{\"general\":{\"device_name\":\"Device\",\"family\":\"Loom\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]}]}"
+"{\
+	'general':\
+	{\
+		'device_name':'Device',\
+		'family':'Loom',\
+		'instance_num':1,\
+		'family_num':0\
+	},\
+	'components':[\
+		{\
+			'name':'Loom_Analog',\
+			'parameters':[\
+				'Analog',\
+				8,\
+				12,\
+				true,\
+				true,\
+				true,\
+				true,\
+				true,\
+				true,\
+				0,\
+				0,\
+				0,\
+				0,\
+				0,\
+				0\
+			]\
+		}\
+	]\
+}"

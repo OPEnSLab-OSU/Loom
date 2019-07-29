@@ -22,10 +22,7 @@ class LoomCommPlat;
 class LoomLogPlat;
 
 // Actuators
-class Loom_Neopixel;
-class Loom_Relay;
-class Loom_Servo;
-class Loom_Stepper;
+class Loom_Neopixel; class Loom_Relay; class Loom_Servo; class Loom_Stepper;
 
 // Sensors
 class Loom_Analog;
@@ -79,7 +76,8 @@ class Loom_Interrupt_Manager;
 class Loom_Multiplexer;
 
 
-#define SERIAL_BAUD 115200
+#define SERIAL_BAUD	115200
+#define SD_CS 		10
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -103,9 +101,9 @@ public:
 protected:
 
 	char		device_name[20];	/// The name of the device
+	uint		instance;			/// The instance / channel ID within the subnet
 	char		family[20];			/// The family the device belongs to
 	uint		family_num;			/// The subnet of the family
-	uint		instance;			/// The instance / channel ID within the subnet
 
 	/// Device type (Hub / Node)
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
@@ -130,7 +128,7 @@ protected:
 	Verbosity	print_verbosity;		/// Print detail verbosity
 	Verbosity	package_verbosity;		/// Package detail verbosity
 
-	StaticJsonDocument<2000> doc;		/// Json data
+	StaticJsonDocument<1500> doc;		/// Json data
 
 public:
 
@@ -148,7 +146,7 @@ public:
 	/// \param[in]	print_verbosity				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
 	/// \param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
 	LoomManager(
-			const char*		device_name			= "Default",
+			const char*		device_name			= "Device",
 			const char*		family				= "Loom",
 			uint			family_num			= 1,
 			uint			instance			= 1,
@@ -162,15 +160,36 @@ public:
 
 //=============================================================================
 ///@name	OPERATION
-/// Desription
 /*@{*/ //======================================================================
 
-	/// Parse a JSON configuration specifying enabled modules.
+	/// Begin LED
+	void		begin_LED();
+
+	/// Begin Serial, optionally wait for user.
+	/// \param[in]	wait_for_monitor	True to wait for serial monitor to open
+	void		begin_serial(bool wait_for_monitor = false);
+
+	/// Parse a JSON configuration string specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
 	/// and added to manager lists for managing
 	/// \param[in]	json_config		Configuration
-	void		parse_config(const char* json_config);
-	// maybe overload to take JsonVariant or const char* of json?
+	/// \return True if success
+	bool		parse_config(const char* json_config);
+	
+	/// Parse a JSON configuration on SD card specifying enabled modules.
+	/// Enabled modules are instantiated with specified settings
+	/// and added to manager lists for managing
+	/// \param[in]	json_config		Configuration
+	/// \return True if success
+	bool		parse_config_SD(const char* config_file);
+
+	/// Parse a JSON configuration object specifying enabled modules.
+	/// Enabled modules are instantiated with specified settings
+	/// and added to manager lists for managing.
+	/// Called by parse_config and parse_config_SD
+	/// \param[in]	json_config		Configuration
+	/// \return True if success
+	bool		parse_config_json(JsonObject config);
 
 	/// Measure data of all managed sensors
 	void		measure();  
@@ -179,6 +198,30 @@ public:
 	/// How detailed data is can be modified with package_verbosity
 	/// \param[out]	json	JsonObject of packaged data of enabled modules
 	void		package(JsonObject json);
+
+	/// Append to a Json object of data.
+	/// If object is non-empty and contains non-data, 
+	/// will not add and will return false.
+	/// Only call this after package, otherwise the data will be overriden
+	/// \param[in]	module	Which module to add data to (will create if it doesn't exist) 
+	/// \param[in]	key		Key of data to add
+	/// \param[in]	val		Value of data to add
+	/// \return True if success
+	template<typename T>
+	bool add_data(const char* module, const char* key, T val)
+	{
+		if ( doc.isNull() ) {
+			doc["type"] = "data";
+		} 
+		JsonObject json = doc.as<JsonObject>();
+		if (strcmp(json["type"], "data") == 0 ) {
+			
+			package_json(json, module, key, val);
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	/// Package data of all modules into JsonObject and return
 	/// \return JsonObject of packaged data of enabled modules
@@ -190,6 +233,41 @@ public:
 	/// Iterate over array of commands
 	/// \param[in] json		Object containing commands
 	void		cmd_route(JsonObject json);
+
+	/// Pause for up to 16 seconds.
+	/// You can use this instead of delay to put the device into a 
+	/// semi-low power state.
+	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
+	/// \param[in]	ms	Number of milliseconds to pause
+	void		pause(int ms);
+
+	/// Load and parse a configuration from SD.
+	/// Only replaces current configuration if success
+	/// \param[in]	config_file		File config is in
+	/// \return True is success, false if fail or file not found
+	// bool		use_SD_config(const char* config_file);
+
+	/// Save current configuration to SD.
+	/// \param[in]	config_file		File to save configuration to
+	/// \return True is success, false if fail or file not found
+	// bool		save_SD_config(const char* config_file);
+
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+	
+	/// Print the devices current configuration.
+	/// Lists modules. Optionally also prints 
+	/// configuration of linked modules.
+	void		print_config(bool print_modules_config = false);
+	
+	// 	void print_state()
+
+	/// Print the linked modules
+	void 		list_modules();
+
+	/// Print out the internal JSON object
+	void		print_internal_json();
 
 //=============================================================================
 ///@name	ADD MODULE TO MANAGER
@@ -208,21 +286,6 @@ public:
 	void 		add_module(LoomPublishPlat* publish_module); 
 	void		add_module(LoomLogPlat* log_plat);
 	
-//=============================================================================
-///@name	PRINT INFORMATION
-/*@{*/ //======================================================================
-	
-	/// Print the devices current configuration.
-	/// Also prints configuration of linked modules.
-	void		print_config();
-	
-	// 	void print_state()
-
-	/// Print the linked modules
-	void 		list_modules();
-
-	/// Print out the internal JSON object
-	void		print_internalJson();
 
 //=============================================================================
 ///@name	GETTERS
@@ -235,7 +298,7 @@ public:
 	/// Return reference to internal json object
 	/// \param[in]	clear	Whether or not to empty Json before returning it
 	/// \return Reference to internal json object
-	JsonObject	internalJson(bool clear = true);
+	JsonObject	internal_json(bool clear = false);
 
 	/// Get the device name, copies into provided buffer.
 	/// \param[out]	buf		The buffer copy device name into
@@ -301,7 +364,7 @@ public:
 	/// \param[in]	count		Number of times to flash
 	/// \param[in]	time_high	Milliseconds to stay on for 
 	/// \param[in]	time_low	Milliseconds to stay off for 
-	void		flash_LED(uint count, uint time_high, uint time_low);
+	void		flash_LED(uint count, uint time_high, uint time_low, bool end_high=false);
 	void		flash_LED(uint sequence[3]);
 
 	/// Get c-string of name associated with device type enum
@@ -381,10 +444,24 @@ private:
 	friend class Loom_Interrupt_Manager;
 	friend class Loom_Sleep_Manager;
 	friend class Loom_SD;
+	// friend class LoomLogPlat;
 
 	Loom_Interrupt_Manager*	get_interrupt_manager();
 	Loom_Sleep_Manager*		get_sleep_manager();
 	LoomRTC*				get_rtc_module();
+
+	void add_device_ID_to_json(JsonObject json);
+
+
+	///////////////////////////////////////////////////////////////////////////
+	/// Add module to a list of modules
+	template<typename T>
+	bool print_config_aux(std::vector<T>& modules) 
+	{
+		for (auto module : modules) {
+			module->print_config();
+		}	
+	}
 
 	///////////////////////////////////////////////////////////////////////////
 	/// Add module to a list of modules
@@ -480,6 +557,20 @@ private:
 		return nullptr;
 	}
 
+	/// Free modules.
+	/// Used in destructor or when switching configuration
+	void free_modules();
+
+	/// Free a vector of modules.
+	/// Called by free_modules
+	template<typename T>
+	void free_modules_aux(std::vector<T>& modules)
+	{
+		for (auto module : modules) {
+			delete module;
+		}
+		modules.clear();
+	}
 
 };
 

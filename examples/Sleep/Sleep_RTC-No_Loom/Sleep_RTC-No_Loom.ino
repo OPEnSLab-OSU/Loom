@@ -67,7 +67,7 @@ void loop()
 	DEBUG_Println(" Done Processing");
 
 	// Set alarms (5 seconds here)
-	setRTCAlarm_Relative(0, 0, 5);
+	setRTCAlarm_Relative(0, 0, DELAY_COUNT);
 	
 	// Go to sleep
 	sleep();

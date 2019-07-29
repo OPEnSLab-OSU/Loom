@@ -32,7 +32,7 @@ public:
 	Loom_PCF8523(
 			const char*		module_name			= "PCF8523",
 			TimeZone		timezone			= TimeZone::PST,
-			bool			use_utc_time		= false,
+			bool			use_utc_time		= true,
 			bool			get_internet_time	= false,
 			byte			int_pin				= 6
 		);

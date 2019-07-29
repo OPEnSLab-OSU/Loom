@@ -7,60 +7,82 @@
 #include "Loom_Module_Factory.h"
 
 #include <ArduinoJson.h>
+#include <SD.h>
 
 
 Factory LoomFactory;
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Parses a JSON configuration and instantiates the specified 
-/// LoomModules.
-/// Adds created LoomModules to the arrays of LoomManager
-void LoomManager::parse_config(const char* json_config)
+bool LoomManager::parse_config(const char* json_config)
 {
-	// = = = Parse Json config = = =
-
-	if (print_verbosity == Verbosity::V_HIGH) {
-		LPrintln();
-		LPrintln("= = = = = Parse Config = = = = =");
-	}
-
 	// Might need to be even larger
 	DynamicJsonDocument doc(2048);
 	DeserializationError error = deserializeJson(doc, json_config);
 
 	// Test if parsing succeeds.
 	if (error) {
-		Serial.print(F("deserializeJson() failed: "));
-		Serial.println(error.c_str());
-		return;
+		print_device_label();
+		LPrintln("deserializeJson() failed: ", error.c_str());
+		return false;
 	}
 
+	bool status = parse_config_json( doc.as<JsonObject>() );
+	doc.clear();
+	return status;
+}
 
+///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::parse_config_SD(const char* config_file)
+{
+	print_device_label();
+	LPrintln("Read config from file: '", config_file, "'");
+
+	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
+	if (!SD.begin(SD_CS)) {
+		print_device_label();
+		LPrintln("SD failed to begin");
+		return false;
+	}
+
+	File file = SD.open(config_file);
+	if (!file) {
+		print_device_label();
+		LPrintln("Failed to open '", config_file, "'");
+		return false;
+	}
+
+	DynamicJsonDocument doc(2048);
+	DeserializationError error = deserializeJson(doc, file);
+	
+	// Test if parsing succeeds.
+	if (error) {
+		print_device_label();
+		LPrintln("deserializeJson() failed: ", error.c_str());
+		return false;
+	}
+
+	bool status = parse_config_json( doc.as<JsonObject>() );
+	doc.clear();
+	return status;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::parse_config_json(JsonObject config)
+{
+	// Remove current modules
+	free_modules();
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 
-		Serial.println("\n\nConfig Pretty Version:");
-		serializeJsonPretty(doc, Serial);
-		LPrintln("\nSIZE: ", doc.memoryUsage());
-
-		// LPrintln("measureJson: ", measureJson(doc));
-
-		// Serial.println("\n\nGeneral Settings:");
-		// serializeJsonPretty(doc["general"], Serial);
-
-		// Serial.print("\n\nNum modules: ");
-		// Serial.println(doc["components"].size()); 
-		// LPrintln();
-
-
-		// Apply LoomManager General Settings
-		LPrintln("= = = = = LoomManager Settings = = = = =");
-		LPrintln();
+		LPrintln("\n= = = = = Parse Config = = = = =");
+		LPrintln("\nConfig Pretty Version:");
+		serializeJsonPretty(config, Serial);
+		LPrintln("\nSIZE: ", config.memoryUsage());
 	}
 
-	JsonObject general = doc["general"];
-
+	// Apply LoomManager General Settings
+	JsonObject general = config["general"];
 
 	if (general.containsKey("device_name")) {
 		snprintf(this->device_name, 20, "%s", general["device_name"].as<const char*>());
@@ -84,18 +106,13 @@ void LoomManager::parse_config(const char* json_config)
 		this->package_verbosity = (Verbosity)(int)general["package_verbosity"];
 	}
 
-	// print_config();
-
-
 	// Generate Module Objects
-
 	if (print_verbosity == Verbosity::V_HIGH) {
-		LPrintln("= = = = = Generate Objects = = = = =");
-		LPrintln();
+		LPrintln("= = = = = Generate Objects = = = = =\n");
 	}
 
 	// Call module factory
-	for ( JsonVariant module : doc["components"].as<JsonArray>()) {
+	for ( JsonVariant module : config["components"].as<JsonArray>()) {
 		
 		Loom_Interrupt_Manager*	interrupt_manager	= nullptr; 
 		Loom_Sleep_Manager*		sleep_manager		= nullptr;
@@ -156,9 +173,6 @@ void LoomManager::parse_config(const char* json_config)
 
 	}
 
-	// Empty
-	doc.clear();
-
 	// call second stage construction
 	// other modules must go last, as they are most likely to do weird things 
 	second_stage_ctor_aux( sensor_modules   ); 
@@ -175,5 +189,16 @@ void LoomManager::parse_config(const char* json_config)
 		LPrintln();
 	}
 
+	return true;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 

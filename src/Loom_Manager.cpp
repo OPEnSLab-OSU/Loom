@@ -16,6 +16,8 @@
 #include "RTC/Loom_RTC.h"
 #include "PublishPlats/Loom_PublishPlat.h"
 
+#include <Adafruit_SleepyDog.h>
+
 
 ///////////////////////////////////////////////////////////////////////////////
 const char* LoomManager::enum_device_type_string(DeviceType t)
@@ -55,7 +57,7 @@ LoomManager::LoomManager(
 ///////////////////////////////////////////////////////////////////////////////
 LoomManager::~LoomManager() 
 {
-	// Impelement this
+	free_modules();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -65,7 +67,7 @@ void LoomManager::print_device_label()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::print_config() 
+void LoomManager::print_config(bool print_modules_config) 
 {
 	print_device_label();
 	LPrintln("Config:");
@@ -77,7 +79,48 @@ void LoomManager::print_config()
 	LPrintln('\t', "Instance Number     : ", instance );
 
 	list_modules();
+
+	// Print managed module's configs
+	if (print_modules_config) {
+		if (interrupt_manager != nullptr) {
+			interrupt_manager->print_config();
+		}
+		if (sleep_manager != nullptr) {
+			interrupt_manager->print_config();
+		}
+		if (rtc_module != nullptr) {
+			interrupt_manager->print_config();
+		}
+
+		print_config_aux( other_modules); 
+		print_config_aux( sensor_modules); 
+		print_config_aux( actuator_modules); 
+		print_config_aux( comm_modules); 
+		print_config_aux( internet_modules); 
+		print_config_aux( publish_modules); 
+		print_config_aux( log_modules );  
+	}
 }
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomManager::begin_LED()
+{
+	pinMode(LED_BUILTIN, OUTPUT);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomManager::begin_serial(bool wait_for_monitor)
+{
+	Serial.begin(SERIAL_BAUD);
+
+	if (wait_for_monitor) {	
+		while(!Serial);
+		delay(1000);
+	}
+
+	LPrintln("Initialized Serial!\n");
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager) 
@@ -247,7 +290,7 @@ void LoomManager::get_device_name(char* buf)
 ///////////////////////////////////////////////////////////////////////////////
 const char* LoomManager::get_device_name()
 {
-	char name[50];
+	char name[20];
 	get_device_name(name);
 	return (const char*)name;
 }
@@ -352,12 +395,17 @@ void LoomManager::package_aux(JsonObject json, LoomModule* module)
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::package(JsonObject json) 
 {
+	// Add device identification to json
+	add_device_ID_to_json(json);
+	
+	// Iterate over lists of modules getting data from each
 	package_aux( json, (LoomModule*)rtc_module ); 
 	package_aux( json, (LoomModule*)sleep_manager ); 
 	package_aux( json, (LoomModule*)interrupt_manager ); 
 	package_aux( json, other_modules); 
 	package_aux( json, sensor_modules); 
 
+	// If high verbosity, also check these lists
 	if (package_verbosity == Verbosity::V_HIGH) {
 		package_aux( json, actuator_modules); 
 		package_aux( json, comm_modules); 
@@ -375,8 +423,19 @@ JsonObject LoomManager::package()
 	return json;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////
-JsonObject LoomManager::internalJson(bool clear)
+void LoomManager::add_device_ID_to_json(JsonObject json)
+{
+	JsonObject timestamp = json.createNestedObject("id");
+	timestamp["name"]		= device_name;
+	timestamp["instance"]	= instance;
+	timestamp["family"]		= family;
+	timestamp["family_num"]	= family_num;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+JsonObject LoomManager::internal_json(bool clear)
 {
 	if (clear) {
 		doc.clear();
@@ -386,7 +445,7 @@ JsonObject LoomManager::internalJson(bool clear)
 	else {
 		return doc.as<JsonObject>();
 	}
-	// LPrintln("\nDOC MemoryUsage in internalJson: ", doc.memoryUsage());
+	// LPrintln("\nDOC MemoryUsage in internal_json: ", doc.memoryUsage());
 
 	// doc["type"] = "unknown";
 	// return doc.as<JsonObject>();
@@ -428,7 +487,7 @@ void LoomManager::cmd_route(JsonObject json)
 
 			if ( cmd_route_aux(cmd, actuator_modules) )			continue;
 			
-			if ( cmd_route_aux(cmd, (LoomModule*)rtc_module) )	continue;
+			if ( cmd_route_aux(cmd, (LoomModule*)rtc_module) )		continue;
 			if ( cmd_route_aux(cmd, other_modules) )			continue;
 			if ( cmd_route_aux(cmd, sensor_modules) )			continue;
 			if ( cmd_route_aux(cmd, comm_modules) )				continue;
@@ -438,16 +497,16 @@ void LoomManager::cmd_route(JsonObject json)
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::print_internalJson()
+void LoomManager::print_internal_json()
 {
 	print_device_label();
-	LPrintln("Internal Json:");
+	LPrintln("Json:");
 	serializeJsonPretty(doc, Serial);
 	LPrintln();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::flash_LED(uint count, uint time_high, uint time_low)
+void LoomManager::flash_LED(uint count, uint time_high, uint time_low, bool end_high)
 {
 	for (int i = 0; i < count; i++) {
 		digitalWrite(LED_BUILTIN, HIGH);
@@ -455,6 +514,9 @@ void LoomManager::flash_LED(uint count, uint time_high, uint time_low)
 		digitalWrite(LED_BUILTIN, LOW);
 		delay(time_low);
 	} 
+	if (end_high) {
+		digitalWrite(LED_BUILTIN, HIGH);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -464,3 +526,34 @@ void LoomManager::flash_LED(uint sequence[3])
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomManager::pause(int ms)
+{
+	Serial.end();
+	USBDevice.detach();
+
+	int sleepMS = Watchdog.sleep(ms);
+
+	USBDevice.attach();
+	Serial.begin(SERIAL_BAUD);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomManager::free_modules()
+{
+	if (rtc_module != nullptr) { delete rtc_module; }
+	if (interrupt_manager != nullptr) { delete interrupt_manager; }
+	if (sleep_manager != nullptr) { delete sleep_manager; }
+
+	// Iterate over lists of modules freeing each
+	free_modules_aux(other_modules);
+	free_modules_aux(sensor_modules);
+	free_modules_aux(actuator_modules);
+	free_modules_aux(comm_modules);
+	free_modules_aux(internet_modules);
+	free_modules_aux(publish_modules);
+	free_modules_aux(log_modules);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+

@@ -8,7 +8,6 @@ Loom_LoRa::Loom_LoRa(
 		uint16_t		max_message_len,
 
 		uint8_t			address,
-		uint8_t			friend_address,
 		uint8_t			power_level,
 		uint8_t			retry_count,
 		uint16_t		retry_timeout 	
@@ -22,7 +21,6 @@ Loom_LoRa::Loom_LoRa(
 	this->driver         = new RH_RF95(RFM95_CS, RFM95_INT);
 	this->manager        = new RHReliableDatagram(*driver, address);
 	this->address        = address;
-	this->friend_address = friend_address;
 	this->power_level    = ( (power_level >= 5) && (power_level <= 23) ) ? power_level : 23;
 	this->retry_count    = retry_count;
 	this->retry_timeout  = retry_timeout;
@@ -64,7 +62,7 @@ Loom_LoRa::Loom_LoRa(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::Loom_LoRa(JsonArrayConst p)
-	: Loom_LoRa( EXPAND_ARRAY(p, 7) ) {}
+	: Loom_LoRa( EXPAND_ARRAY(p, 6) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::~Loom_LoRa() 
@@ -119,60 +117,20 @@ uint Loom_LoRa::get_address()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::set_friend_address(uint addr) 
-{ 
-	friend_address = addr; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-uint Loom_LoRa::get_friend_address() 
-{ 
-	return friend_address; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
 bool Loom_LoRa::receive(JsonObject json) 
 {
 	if ( manager->available() ) {
 		uint8_t len = max_message_len;
 		uint8_t from;
-		uint8_t buffer[max_message_len];
+		char buffer[max_message_len];
 		memset(buffer, '\0', max_message_len);
 
-		if ( manager->recvfromAck(buffer, &len, &from) ) {
-
+		if ( manager->recvfromAck( (uint8_t*)buffer, &len, &from) ) {
 			signal_strength = driver->lastRssi();
-
-			if (print_verbosity == Verbosity::V_HIGH) {
-				print_module_label();
-				LPrintln("Received: ", (const char*)buffer);
-				print_module_label();
-				LPrintln("Len: ", len);
-			}
-
-			messageJson.clear();
-
-			if (deserializeMsgPack(messageJson, buffer) != DeserializationError::Ok ) {
-				print_module_label();
-				LPrintln("Failed to parse MsgPack");
-				return false;
-			}
-
-			json.set(messageJson.as<JsonObject>());
-
-			if (print_verbosity == Verbosity::V_HIGH) {
-				// LPrintln("\nmessageJson:");
-				// serializeJsonPretty(messageJson, Serial);
-				print_module_label();
-				LPrintln("\njson:");
-				serializeJsonPretty(json, Serial);
-				LPrintln();
-			}
-
-			return true;
-
-		} // of if (manager.recvfromAck(buffer, &len, &from))
-	} // of if (manager.available()) 
+			bool status = msgpack_buffer_to_json(buffer, json);
+			return status;
+		}
+	} 
 
 	return false;
 }
@@ -181,28 +139,15 @@ bool Loom_LoRa::receive(JsonObject json)
 bool Loom_LoRa::send(JsonObject json, uint16_t destination) 
 {
 	char buffer[max_message_len];
-	memset(buffer, '\0', sizeof(buffer));
-
-	serializeMsgPack(json, buffer, max_message_len);
-
-	if (print_verbosity == Verbosity::V_HIGH) {
-		print_module_label();
-		LPrintln(buffer);
-		LPrintln("MsgPack size: ", measureMsgPack(json));
-	}
+	bool to_msgpack = json_to_msgpack_buffer(json, buffer, max_message_len);
+	if (!to_msgpack) return false;
 
 	bool is_sent = manager->sendtoWait( (uint8_t*)buffer, measureMsgPack(json), destination );
 
 	print_module_label();
-	LPrintln("Send LoRa bundle " , (is_sent) ? "successful" : "failed" );
+	LPrintln("Send " , (is_sent) ? "successful" : "failed" );
 	signal_strength = driver->lastRssi(); 
 	return is_sent;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::send(JsonObject json) 
-{
-	send(json, friend_address);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

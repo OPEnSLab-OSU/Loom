@@ -94,7 +94,7 @@ bool Loom_Ethernet_I::is_connected()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Client& Loom_Ethernet_I::http_request(const char* domain, const char* url, const char* body, const char* verb) {
+Client& Loom_Ethernet_I::connect_to_domain(const char* domain) {
 	// if the socket is somehow still open, close it
 	if (m_client.connected()) m_client.stop();
 	// * the rainbow connection *
@@ -102,16 +102,10 @@ Client& Loom_Ethernet_I::http_request(const char* domain, const char* url, const
 	if (!status) {
 		// log fail, and return
 		print_module_label();
-		LPrint("Ethernet HTTP request failed with error ", m_client.getWriteError(), "\n");
+		LPrint("Ethernet connect failed with error ", m_client.getWriteError(), "\n");
 		m_is_connected = false;
-		return m_client;
 	}
-	// ok next, make the http request
-	print_module_label();
-	LPrint("Writing http: ", domain, "\n");
-	write_http_request(m_client, domain, url, body, verb);
-	// gosh that was easy
-	m_is_connected = true;
+	else m_is_connected = true;
 	// return the client for data reception
 	return m_client;
 }

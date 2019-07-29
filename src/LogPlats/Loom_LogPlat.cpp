@@ -1,5 +1,6 @@
 
 #include "Loom_LogPlat.h"
+#include "Loom_Manager.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -41,14 +42,23 @@ void LoomLogPlat::print_config()
 bool LoomLogPlat::check_millis() 
 {
 	if ( (millis() > min_filter_delay) && ( (millis()-last_log_millis) < min_filter_delay ) ) {
-		// LPrintln("FALSE");
-		// LPrintln("millis: ", millis() );
-		// LPrintln("last millis: ", last_log_millis );
-		// LPrintln("delay: ", min_filter_delay );
+		print_module_label();
+		LPrintln("Not enough time since last log, need at least ", min_filter_delay, "ms at current settings");
 		return false;
 	} else {
 		last_log_millis = millis();
 		return true;
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomLogPlat::log()
+{
+	if (device_manager != nullptr) {
+		JsonObject tmp = device_manager->internal_json();
+		if (strcmp(tmp["type"], "data") == 0 ) {
+			log(tmp);
+		}
 	}
 }
 

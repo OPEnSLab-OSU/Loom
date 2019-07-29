@@ -29,7 +29,7 @@ byte LoomI2CSensor::get_i2c_address()
 ///////////////////////////////////////////////////////////////////////////////
 void LoomI2CSensor::adjust_module_name_with_port(int port)
 {
-	snprintf(module_name, 20, "%s_%d", module_name, port); 
+	// snprintf(module_name, 20, "%s_%d", module_name, port); 
 }
 
 ///////////////////////////////////////////////////////////////////////////////

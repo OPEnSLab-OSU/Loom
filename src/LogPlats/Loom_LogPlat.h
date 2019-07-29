@@ -54,6 +54,10 @@ public:
 	/// \param[in] json		Json Object to log
 	virtual void	log(JsonObject json) = 0;
 
+	/// Version of log for use with LoomManager.
+	/// Accesses Json from LoomManager
+	void			log();
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================

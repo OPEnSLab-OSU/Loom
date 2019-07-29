@@ -65,18 +65,17 @@
 
 /// Creates a LoomModule with default parameters
 /// \return The created LoomModule
-template<class T> T* ConstructDefault() {
+template<class T> 
+LoomModule* ConstructDefault() {
 	return new T();
 }
 
 /// Creates a LoomModule with Json array of parameters
 /// \return The created LoomModule
-template<class T> LoomModule* Construct(JsonArrayConst p) {
+template<class T> 
+LoomModule* Construct(JsonArrayConst p) {
 	return new T(p);
 }
-
-/// Function pointer to 'template<class T> LoomModule* Construct(JsonArrayConst p)'
-using FactoryPtr = LoomModule* (*)(JsonArrayConst p);
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -87,6 +86,8 @@ class Factory
 {
 
 public:
+
+
 	
 	/// Constructor
 	Factory() = default;
@@ -95,7 +96,7 @@ public:
 	~Factory() = default;
 
 	/// Create a LoomModule accoding to Json parameters
-	/// \param[in]	module		Json of the module name and settings
+	/// \param[in]	module			Json of the module name and settings
 	/// \return The created LoomModule
 	LoomModule* Create(JsonVariant module);
 
@@ -103,7 +104,8 @@ public:
 	/// Usage example:
 	///		Loom_Relay r = FactoryInst.CreateDefault<Loom_Relay>();
 	/// \return The created LoomModule
-	template<class T> T* CreateDefault() {
+	template<class T> 
+	T* CreateDefault() {
 		return ConstructDefault<T>();
 	}
 
@@ -141,11 +143,16 @@ private:
 		Unknown
 	};
 
+	/// Function pointer to 'template<class T> LoomModule* Construct(JsonArrayConst p)'
+	using FactoryPtr = LoomModule* (*)(JsonArrayConst p);
+	using FactoryPtrDefault = LoomModule* (*)();
+
 	/// Struct to contain the elements of factory lookup table
 	typedef struct {
-		const char*		name;		// Module type to compare against
-		FactoryPtr		Construct;	// Pointer to 'template<class T> LoomModule* Create(JsonArrayConst p)' with the type T set
-		ModuleSortType	sort_type;	// Which array of LoomManager to sort into 
+		const char*			name;				// Module type to compare against
+		FactoryPtr			Construct;			// Pointer to 'template<class T> LoomModule* Create(JsonArrayConst p)' with the type T set
+		FactoryPtrDefault	ConstructDefault;	// Pointer to 'template<class T> LoomModule* CreateDefault()' with the type T set
+		ModuleSortType		sort_type;			// Which array of LoomManager to sort into 
 	} NameModulePair;
 
 

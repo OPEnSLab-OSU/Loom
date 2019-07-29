@@ -58,12 +58,15 @@ public:
 	/// \param[out]	result	Pointer to the buffer to put data returned from the request in. Can be nullptr if result data is to be
 	/// 					discarded.
 	/// \param[in]	verb	HTTP verb ("PUT", "GET", etc.) to use with this request.
-	/// \returns true if the request completed succesfully and the result buffer was not overflowed, false otherwise. 
-	virtual Client& http_request(const char* domain, const char* url, const char* body, const char* verb) = 0;
+	/// \returns A client reference. The client::connected method will return true if the connection succeeded, and false otherwise.
+	virtual Client& http_request(const char* domain, const char* url, const char* body, const char* verb);
 	Client& http_get_request(const char* domain, const char* url, const char* body = nullptr) { return http_request(domain, url, body, "GET"); }
 	Client& http_post_request(const char* domain, const char* url, const char* body = nullptr) { return http_request(domain, url, body, "POST"); }
 
-
+	/// Connect to a domain, but don't write any HTTP stuff, Let the module figure that out.
+	/// \param[in]	domain	The domain to connect to "www.google.com"
+	/// \returns A client reference. The client::connected method will return true if the connection succeeded, and false otherwise.
+	virtual Client& connect_to_domain(const char* domain) = 0;
 
 	// TODO: Websockets? how do those work
 

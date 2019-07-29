@@ -70,21 +70,28 @@ public:
 
 	void		log(JsonObject json) override;
 
-	// Save bundle to SD card
-	// \param[in]	file		The file to save bundle to
-	// \param[in]	bndl		The bundle to be saved
-	// \param[in]	timestamp	Format of timestamp (if any)
-	bool		save_json(JsonObject json, const char* file, int timestamp=3);
+	/// Version of logging for use with LoomManager.
+	/// Accesses Json from LoomManager
+	/// \param[in]	filename	Name of file to write to
+	void		log(const char* filename);
+
+	// manually expose superclass version of log() that gets json from
+	// linked LoomManager, calling this classes implementation of 
+	// 'log(JsonObject json)', which is pure virtual in superclass
+	using LoomLogPlat::log; 
+
+	/// Save data to SD card in CSV format
+	/// \param[in]	json		The data to be saved
+	/// \param[in]	file		The file to save to
+	bool		save_json(JsonObject json, const char* file);
 
 	/// Delete a file
 	/// \param[in]	file	Name of file to delete
-	void		delete_file(char* file);
+	void		delete_file(const char* file);
 
 	/// Clear a file (remove contents but not file itself)
 	/// \param[in]	file	Name of file to empty
-	void		empty_file(char* file);
-
-	// void		get_row(char* filename, int idx, char* buffer);
+	void		empty_file(const char* file);
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -97,7 +104,7 @@ public:
 
 	/// Print the contents of a particular file
 	/// \param[in]	file 	Name of file to print
-	bool		dump_file(char* file);
+	bool		dump_file(const char* file);
 
 //=============================================================================
 ///@name	GETTERS
@@ -109,7 +116,7 @@ public:
 
 	/// Get the current default file to write to
 	/// \return Default file
-	char*		get_default_file();
+	const char*	get_default_file();
 
 //=============================================================================
 ///@name	SETTERS
@@ -127,7 +134,7 @@ public:
 
 	/// Set default file to write to
 	/// \param[in]	filename	New default file (max 8 characters excluding extension)
-	void		set_default_file(char* filename);
+	void		set_default_file(const char* filename);
 
 //=============================================================================
 ///@name	MISCELLANEOUS
@@ -151,7 +158,7 @@ public:
 	/// \param[in]	has_keys	True if data is assumed to have keys (alternating key-values)
 	/// \param[in]	device_id	Device ID to label row with
 	template <typename T>
-	bool save_array(char *file, T data [], int len, char delimiter, int timestamp, bool has_keys, char* device_id) 
+	bool save_array(const char *file, T data [], int len, char delimiter, int timestamp, bool has_keys, char* device_id) 
 	{
 		if ( !sd_found || !check_millis() ) return false;
 
@@ -242,6 +249,13 @@ private:
 			sdFile.print(" ");
 		}
 	}
+
+	/// Create Header Row 1 (Categories)
+	void _write_json_header_part1(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents);
+	/// Create Header Row 2 (Column names)
+	void _write_json_header_part2(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents);
+	/// Write data values
+	void _write_json_data(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents);
 
 };
 
