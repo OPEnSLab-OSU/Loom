@@ -7,7 +7,6 @@ byte Loom_Digital::pin_nums[DIGITAL_COUNT] = {5, 6, 9, 10, 11, 12, 14, 15, 16, 1
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Digital::Loom_Digital(	
-		const char*			module_name, 
 		bool				enable5,
 		bool				enable6,
 		bool				enable9,
@@ -22,7 +21,7 @@ Loom_Digital::Loom_Digital(
 		bool				enableA4,
 		bool				enableA5
 	) 
-	: LoomSensor( module_name, Type::Digital, 1 )
+	: LoomSensor( "Digital", Type::Digital, 1 )
 {
 	// Zero out array of measurements 
 	for (int i = 0; i < DIGITAL_COUNT; i++) { 
@@ -48,7 +47,7 @@ Loom_Digital::Loom_Digital(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Digital::Loom_Digital(JsonArrayConst p)
-	: Loom_Digital( EXPAND_ARRAY(p, 13) ) {}
+	: Loom_Digital( EXPAND_ARRAY(p, 12) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Digital::add_config(JsonObject json)

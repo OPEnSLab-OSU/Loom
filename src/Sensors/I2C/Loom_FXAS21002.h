@@ -29,11 +29,9 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x20> | {0x20, 0x21} | I2C address
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	/// \param[in]	module_name				String | <"FXAS21002"> | null | FXAS21002 module name
 	Loom_FXAS21002(
 			byte			i2c_address		= 0x20,
-			uint8_t			mux_port		= 255,
-			const char*		module_name		= "FXAS21002"
+			uint8_t			mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args

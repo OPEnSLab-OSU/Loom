@@ -10,7 +10,6 @@
 		{\
 			'name':'Analog',\
 			'params':[\
-				'Analog',\
 				8,\
 				12,\
 				true,\
@@ -30,7 +29,6 @@
 		{\
 			'name':'LoRa',\
 			'params':[\
-				'LoRa',\
 				255,\
 				0,\
 				23,\

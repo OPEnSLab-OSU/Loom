@@ -31,9 +31,11 @@ public:
 
 	/// Constructor
 	Loom_Ethernet_I(	
-			const char* 			module_name		= "Ethernet",
-			const JsonArrayConst	mac				= JsonArray(),
-			const JsonArrayConst 	ip				= JsonArray()
+			// const JsonArrayConst	mac,
+			// const JsonArrayConst 	ip
+			const char* 			module_name	= "Ethernet",
+			const JsonArrayConst	mac			= JsonArray(),
+			const JsonArrayConst 	ip			= JsonArray()
 		);
 
 	/// Constructor that takes Json Array, extracts args

@@ -7,13 +7,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SD::Loom_SD(		
-		const char*		module_name, 
 		bool			enable_rate_filter, 
 		uint16_t		min_filter_delay, 
 		byte			chip_select, 
 		const char*		default_file
 	)
-	: LoomLogPlat( module_name, Type::SDCARD, enable_rate_filter, min_filter_delay )
+	: LoomLogPlat( "SD", Type::SDCARD, enable_rate_filter, min_filter_delay )
 	, chip_select(chip_select)
 {
 	snprintf(this->default_file, 16, "%s", default_file);
@@ -28,7 +27,7 @@ Loom_SD::Loom_SD(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SD::Loom_SD(JsonArrayConst p)
-	: Loom_SD( EXPAND_ARRAY(p, 5) ) {}
+	: Loom_SD( EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_SD::print_config() 

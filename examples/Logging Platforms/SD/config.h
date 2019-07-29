@@ -10,7 +10,6 @@
 		{\
 			'name':'Analog',\
 			'params':[\
-				'Analog',\
 				8,\
 				12,\
 				true,\
@@ -29,7 +28,7 @@
 		},\
 		{\
 			'name':'SD',\
-			'params':['SD',true,1000,10,'datafile.csv']\
+			'params':[true,1000,10,'datafile.csv']\
 		},\
 		{\
 			'name':'PCF8523',\

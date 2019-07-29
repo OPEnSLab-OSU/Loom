@@ -50,7 +50,6 @@ public:
 
 	/// Analog manager module constructor
 	///
-	/// \param[in]	module_name			String | <"Analog"> | null | Analog manager module name
 	/// \param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
 	/// \param[in]	read_resolution		Int | <12> | [8-12] | How many bits to read analog values at
 	/// \param[in]	enableA0			Bool | <true> | {true, false} | Enable pin A0 for managing
@@ -66,7 +65,6 @@ public:
 	/// \param[in]	convertA4			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A4
 	/// \param[in]	convertA5			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A5
 	Loom_Analog(
-			const char*		module_name			= "Analog",
 			uint8_t			num_samples			= 8,
 			uint8_t			read_resolution		= 12,
 			bool			enableA0			= true,

@@ -10,7 +10,6 @@
 		{\
 			'name':'Analog',\
 			'params':[\
-				'Analog',\
 				8,\
 				12,\
 				true,\

@@ -61,13 +61,11 @@ public:
 
 	/// Multiplexer module constructor.
 	///
-	/// \param[in]	module_name				String | <"Multiplexer"> | null | Multiplexer module name
 	/// \param[in]	i2c_address				Set(Int) | <0x71> | {0x71} | I2C address
 	/// \param[in]	num_ports				Int | <8> | [1-8] | Number of ports available
 	/// \param[in]	dynamic_list			Bool | <true> | {true, false} | Whether or not to automatically check for new sensors
 	/// \param[in]	update_period			Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
 	Loom_Multiplexer(
-			const char*		module_name			= "Multiplexer",
 			byte			i2c_address			= 0x71,
 			uint8_t			num_ports			= 8,
 			bool			dynamic_list		= true,

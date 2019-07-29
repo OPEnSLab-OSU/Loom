@@ -4,7 +4,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_nRF::Loom_nRF( 	
-		const char*		module_name,
 		uint16_t		max_message_len,
 		
 		uint8_t			address,
@@ -16,7 +15,7 @@ Loom_nRF::Loom_nRF(
 
 		uint8_t			multicast_level	
 	)
-	: LoomCommPlat( module_name, Type::nRF, max_message_len )
+	: LoomCommPlat( "nRF", Type::nRF, max_message_len )
 	, data_rate(data_rate)
 	, power_level(power_level)
 	, retry_count(retry_count)
@@ -97,7 +96,7 @@ Loom_nRF::Loom_nRF(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_nRF::Loom_nRF(JsonArrayConst p)
-	: Loom_nRF( EXPAND_ARRAY(p, 8) ) {}
+	: Loom_nRF( EXPAND_ARRAY(p, 7) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_nRF::~Loom_nRF() 

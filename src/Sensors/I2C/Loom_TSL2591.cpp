@@ -8,11 +8,10 @@
 Loom_TSL2591::Loom_TSL2591(
 		byte			i2c_address, 
 		uint8_t			mux_port,
-		const char*		module_name, 
 		uint8_t			gain_level, 
 		uint8_t			timing_level
 	)
-	: LoomI2CSensor( module_name, Type::TSL2591, i2c_address, mux_port )
+	: LoomI2CSensor( "TSL2591", Type::TSL2591, i2c_address, mux_port )
 	, gain_level(gain_level)
 	, timing_level(timing_level)
 	, inst_tsl2591( Adafruit_TSL2591(i2c_address) )
@@ -47,7 +46,7 @@ Loom_TSL2591::Loom_TSL2591(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TSL2591::Loom_TSL2591(JsonArrayConst p)
-	: Loom_TSL2591( EXPAND_ARRAY(p, 5) ) {}
+	: Loom_TSL2591( EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TSL2591::print_measurements()

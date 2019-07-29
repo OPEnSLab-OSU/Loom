@@ -26,11 +26,9 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x70> | {0x70} | I2C address
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	/// \param[in]	module_name				String | <"MB1232"> | null | MB1232 module name
 	Loom_MB1232(
 			byte			i2c_address		= 0x70,
-			uint8_t			mux_port		= 255,
-			const char*		module_name		= "MB1232"
+			uint8_t			mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args

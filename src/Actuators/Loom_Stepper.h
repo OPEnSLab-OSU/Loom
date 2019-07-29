@@ -33,10 +33,7 @@ public:
 
 	/// Stepper module constructor
 	///
-	/// \param[in]	module_name		String | <"Stepper"> | null | Stepper module name
-	Loom_Stepper(
-			const char*		module_name		= "Stepper"
-		);
+	Loom_Stepper();
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor

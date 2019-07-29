@@ -29,9 +29,7 @@ public:
 
 	/// Bluetooth module constructor
 	///
-	/// \param[in]	module_name					String | <"Bluetooth"> | LoRa module name
 	Loom_Bluetooth(
-			const char*		module_name			= "Bluetooth",
 			uint16_t 		max_message_len		= 120,
 			uint8_t			spi_CS				= 8,
 			uint8_t			spi_IRQ				= 7,

@@ -31,11 +31,9 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x44> | {0x44, 0x45} | I2C address
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	/// \param[in]	module_name				String | <"SHT31D"> | null | SHT31D module name
 	Loom_SHT31D(
 			byte			i2c_address		= 0x44,
-			uint8_t			mux_port		= 255,
-			const char*		module_name		= "SHT31D"
+			uint8_t			mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args

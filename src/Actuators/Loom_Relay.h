@@ -25,10 +25,8 @@ public:
 
 	/// Relay module constructor.
 	///
-	/// \param[in]	module_name		String | <"Relay"> | {true, false} | Relay module name
 	/// \param[in]	pin						Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to control the relay
 	Loom_Relay(
-			const char*		module_name		= "Relay",
 			byte			pin				= 10
 		);
 

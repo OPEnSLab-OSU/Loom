@@ -9,27 +9,27 @@
 	'components':[\
 		{\
 			'name':'DS3231',\
-			'params':['DS3231',11,false,false,6]\
+			'params':[11,false,false,6]\
 		},\
 		{\
 			'name':'Interrupt_Manager',\
-			'params':['Interrupt-Manager',0]
+			'params':'default'\
 		},\
 		{\
 			'name':'Sleep_Manager',\
-			'params':['Sleep-Manager',true,false,1,19]\
+			'params':[true,false,1,19]\
 		},\
 		{\
 			'name':'Analog',\
-			'params':['Analog',8,12,true,true,false,false,false,false,7,4,0,0,0,0]\
+			'params':[8,12,true,true,false,false,false,false,7,4,0,0,0,0]\
 		},\
 		{\
 			'name':'SD',\
-			'params':['SD',true,1000,4,'data19.csv']\
+			'params':[true,1000,4,'data19.csv']\
 		},\
 		{\
 			'name':'MS5803',\
-			'params':[119,'MS5803']\
+			'params':[119]\
 		}\
 	]\
 }"

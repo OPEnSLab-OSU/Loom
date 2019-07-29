@@ -50,13 +50,12 @@ const byte Loom_Multiplexer::known_addresses[] =
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Multiplexer::Loom_Multiplexer(	
-		const char* 	module_name,
 		byte			i2c_address,
 		uint8_t			num_ports,
 		bool			dynamic_list,	
 		uint 			update_period
 	) 
-	: LoomModule( module_name, Type::Multiplexer ) 
+	: LoomModule( "Multiplexer", Type::Multiplexer ) 
 	, i2c_address(i2c_address)
 	, num_ports(num_ports)
 	, update_period(update_period)
@@ -83,7 +82,7 @@ Loom_Multiplexer::Loom_Multiplexer(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Multiplexer::Loom_Multiplexer(JsonArrayConst p)
-	: Loom_Multiplexer( EXPAND_ARRAY(p, 5) ) {}
+	: Loom_Multiplexer( EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Multiplexer::~Loom_Multiplexer() 

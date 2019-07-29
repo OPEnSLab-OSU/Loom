@@ -9,7 +9,7 @@ Loom_Ethernet_I::Loom_Ethernet_I(
 		const JsonArrayConst	mac,
 		const JsonArrayConst	ip
 	) 
-	: LoomInternetPlat( module_name, Type::Ethernet )
+	: LoomInternetPlat( "Ethernet", Type::Ethernet )
 	, m_client( EthernetClient(), TAs, (size_t)TAs_NUM, A7, SSL_ERROR )
 	, m_UDP()
 	, m_mac{}
@@ -17,7 +17,7 @@ Loom_Ethernet_I::Loom_Ethernet_I(
 	, m_is_connected(false)
 {
 	if (!mac.isNull()) {
-		for (int i = 0; i < 6; i++)
+		for (auto i = 0; i < 6; i++)
 			this->m_mac[i] = mac[i];
 	}
 	if (!ip.isNull()) this->m_ip = IPAddress(ip[0], ip[1], ip[2], ip[3]);

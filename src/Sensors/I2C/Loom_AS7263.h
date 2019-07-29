@@ -35,8 +35,6 @@ public:
 	///
 	/// \param[in]	i2c_address					Set(Int) | <0x49> | {0x49} | I2C address
 	/// \param[in]	mux_port					Int | <255> | [0-16] | Port on multiplexer
-	/// \param[in]	module_name					String | <"AS7262"> | null | AS7262 module 
-	/// \param[in]	module_name					String | <"AS7263"> | null | AS7263 module name
 	/// \param[in]	use_bulb					Bool | <false> | {true, false} | Whether or not to use bulb
 	/// \param[in]	gain						Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
 	/// \param[in]	mode						Set(Int) | <3> | { 0("Continuous reading of STUV"), 1("Continuous reading of RTUX"), 2("Continuous reading all channels"), 3("One-shot reading of all channels") } | Read mode
@@ -44,7 +42,6 @@ public:
 	Loom_AS7263(
 			byte			i2c_address			= 0x49,
 			uint8_t			mux_port			= 255,
-			const char*		module_name			= "AS7263",
 			bool			use_bulb			= false,
 			uint8_t			gain				= 1,
 			uint8_t			mode				= 3,

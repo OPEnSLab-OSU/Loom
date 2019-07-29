@@ -33,10 +33,7 @@ public:
 
 	/// Servo module constructor
 	///
-	/// \param[in]	module_name		String | <"Servo"> | null | Servo module name
-	Loom_Servo(
-			const char*		module_name		= "Servo"
-		);
+	Loom_Servo();
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor

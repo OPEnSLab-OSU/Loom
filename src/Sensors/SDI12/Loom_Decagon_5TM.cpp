@@ -4,17 +4,16 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Decagon5TM::Loom_Decagon5TM(	
-		const char*		module_name,
 		uint8_t			num_samples 
 	) 
-	: LoomSDI12Sensor( module_name, Type::Decagon5TM, num_samples ) 
+	: LoomSDI12Sensor( "5TM", Type::Decagon5TM, num_samples ) 
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Decagon5TM::Loom_Decagon5TM(JsonArrayConst p)
-	: Loom_Decagon5TM( EXPAND_ARRAY(p, 2) ) {}
+	: Loom_Decagon5TM( (uint8_t)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Decagon5TM::print_config()

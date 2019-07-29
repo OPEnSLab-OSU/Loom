@@ -10,7 +10,6 @@
 		{\
 			'name':'Analog',\
 			'params':[\
-				'Analog',\
 				8,\
 				12,\
 				true,\
@@ -30,7 +29,6 @@
 		{\
 			'name':'OLED',\
 			'params':[\
-				'OLED',\
 				'true',\
 				'300',\
 				'0',\

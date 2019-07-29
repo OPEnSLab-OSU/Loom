@@ -9,7 +9,7 @@
 	'components':[\
 		{\
 			'name':'DS3231',\
-			'params':['DS3231',11,false,false,6]\
+			'params':[11,false,false,6]\
 		},\
 		{\
 			'name':'Interrupt_Manager',\

@@ -6,12 +6,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Neopixel::Loom_Neopixel(
-		const char*		module_name, 
 		bool			enableA0, 
 		bool			enableA1, 
 		bool			enableA2
 	) 
-	: LoomActuator(module_name, Type::Neopixel)
+	: LoomActuator("Neopixel", Type::Neopixel)
 	, pin_enabled( {enableA0, enableA1, enableA2} )
 	, pixels( { Adafruit_NeoPixel(1, 14, NEO_GRB + NEO_KHZ800),
 				Adafruit_NeoPixel(1, 15, NEO_GRB + NEO_KHZ800),
@@ -38,7 +37,7 @@ Loom_Neopixel::Loom_Neopixel(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Neopixel::Loom_Neopixel(JsonArrayConst p)
-	: Loom_Neopixel( EXPAND_ARRAY(p, 4) ) {}
+	: Loom_Neopixel( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Neopixel::add_config(JsonObject json)

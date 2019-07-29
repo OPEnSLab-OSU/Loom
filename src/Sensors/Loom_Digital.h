@@ -30,7 +30,6 @@ public:
 
 	/// Digital manager module constructor
 	///
-	/// \param[in]	module_name			String | <"Digital"> | null | Digital manager module name
 	/// \param[in]	enable5				Bool | <true> | {true, false} | Enable pin 5 for managing
 	/// \param[in]	enable6				Bool | <true> | {true, false} | Enable pin 6 for managing
 	/// \param[in]	enable9				Bool | <false> | {true, false} | Enable pin 9 for managing
@@ -44,7 +43,6 @@ public:
 	/// \param[in]	enableA4			Bool | <false> | {true, false} | Enable pin A4 for managing
 	/// \param[in]	enableA5			Bool | <false> | {true, false} | Enable pin A5 for managing
 	Loom_Digital(
-			const char*			module_name		= "Digital",
 			bool				enable5			= true,
 			bool				enable6			= true,
 			bool				enable9			= false,

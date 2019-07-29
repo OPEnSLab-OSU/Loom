@@ -8,12 +8,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager( 
-		const char*		module_name, 
 		bool			use_LED, 
 		bool 			delay_on_wake, 
 		Mode			sleep_mode,
 		byte			power_off_pin
-	) : LoomModule( module_name, Type::Sleep_Manager )
+	) : LoomModule( "SleepManager", Type::Sleep_Manager )
 	, use_LED(use_LED)
 	, delay_on_wake(delay_on_wake)
 	, sleep_mode(Mode::STANDBY)
@@ -24,7 +23,7 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager(JsonArrayConst p)
-	: Loom_Sleep_Manager(p[0], p[1], p[2], (Mode)(int)p[3], p[4]) {}
+	: Loom_Sleep_Manager(p[0], p[1], (Mode)(int)p[2], p[3]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::link_interrupt_manager(Loom_Interrupt_Manager* IM)

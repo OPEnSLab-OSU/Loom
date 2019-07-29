@@ -4,15 +4,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::Loom_LoRa( 	
-		const char*		module_name,
 		uint16_t		max_message_len,
-
 		uint8_t			address,
 		uint8_t			power_level,
 		uint8_t			retry_count,
 		uint16_t		retry_timeout 	
 	)
-	: LoomCommPlat( module_name, Type::LoRa, max_message_len )
+	: LoomCommPlat( "LoRa", Type::LoRa, max_message_len )
 	, address(address)
 	, power_level( ( (power_level >= 5) && (power_level <= 23) ) ? power_level : 23 )
 	, retry_count(retry_count)
@@ -60,7 +58,7 @@ Loom_LoRa::Loom_LoRa(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::Loom_LoRa(JsonArrayConst p)
-	: Loom_LoRa( EXPAND_ARRAY(p, 6) ) {}
+	: Loom_LoRa( EXPAND_ARRAY(p, 5) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::~Loom_LoRa() 

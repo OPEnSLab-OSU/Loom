@@ -25,7 +25,7 @@
 		},\
 		{\
 			'name':'DS3231',\
-			'params':['DS3231',11,true,true,6]\
+			'params':[11,true,true,6]\
 		},\
 		{\
 			'name':'NTP_Sync',\

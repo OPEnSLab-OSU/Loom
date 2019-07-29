@@ -31,11 +31,9 @@ public:
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x40> | {0x40, 0x41, 0x42, 0x43, 0x46, 0x47, 0x48} | I2C address
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	/// \param[in]	module_name				String | <"TMP007"> | null | TMP007 module name
 	Loom_TMP007(
 			byte			i2c_address		= 0x40,
-			uint8_t			mux_port		= 255,
-			const char*		module_name		= "TMP007"
+			uint8_t			mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args

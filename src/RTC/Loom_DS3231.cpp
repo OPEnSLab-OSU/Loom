@@ -4,12 +4,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DS3231::Loom_DS3231(
-		const char*		module_name,
 		TimeZone		timezone,
 		bool			use_utc_time,
 		bool			get_internet_time
 	)
-	: LoomRTC( module_name, Type::DS3231, timezone, use_utc_time, get_internet_time )
+	: LoomRTC( "DS3231", Type::DS3231, timezone, use_utc_time, get_internet_time )
 {
 	init();
 
@@ -22,7 +21,7 @@ Loom_DS3231::Loom_DS3231(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DS3231::Loom_DS3231(JsonArrayConst p)
-	: Loom_DS3231(p[0], (TimeZone)(int)p[1], p[2], p[3]) {}
+	: Loom_DS3231((TimeZone)(int)p[0], p[1], p[2]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_DS3231::_begin()

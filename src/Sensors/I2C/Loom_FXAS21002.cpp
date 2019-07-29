@@ -7,10 +7,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXAS21002::Loom_FXAS21002(
 		byte			i2c_address, 
-		uint8_t			mux_port,
-		const char*		module_name
+		uint8_t			mux_port
 	)
-	: LoomI2CSensor( module_name, Type::FXAS21002, i2c_address, mux_port )
+	: LoomI2CSensor( "FXAS21002", Type::FXAS21002, i2c_address, mux_port )
 	, inst_FXAS21002(Adafruit_FXAS21002C(0x0021002C))
 {
 	bool setup = inst_FXAS21002.begin();
@@ -23,7 +22,7 @@ Loom_FXAS21002::Loom_FXAS21002(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXAS21002::Loom_FXAS21002(JsonArrayConst p)
-	: Loom_FXAS21002( EXPAND_ARRAY(p, 3) ) {}
+	: Loom_FXAS21002( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_FXAS21002::print_measurements()

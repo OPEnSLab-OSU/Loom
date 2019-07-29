@@ -4,10 +4,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SlipSerial::Loom_SlipSerial(
-		const char*		module_name,
 		uint16_t		max_message_len
 	) 
-	: LoomCommPlat(module_name, Type::SlipSerial, max_message_len )
+	: LoomCommPlat("SlipSerial", Type::SlipSerial, max_message_len )
 {
 	// this->module_type = LoomModule::Type::SlipSerial;
 
@@ -26,7 +25,7 @@ Loom_SlipSerial::Loom_SlipSerial(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SlipSerial::Loom_SlipSerial(JsonArrayConst p)
-	: Loom_SlipSerial( EXPAND_ARRAY(p, 2) ) {}
+	: Loom_SlipSerial( (uint16_t)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_SlipSerial::add_config(JsonObject json)

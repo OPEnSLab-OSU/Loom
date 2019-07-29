@@ -8,10 +8,8 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Servo::Loom_Servo( 
-		const char* 	module_name
-	) 
-	: LoomActuator( module_name, Type::Servo ) 
+Loom_Servo::Loom_Servo() 
+	: LoomActuator( "Servo", Type::Servo ) 
 	, positions{}
 {
 	servo_driver.begin();
@@ -20,9 +18,7 @@ Loom_Servo::Loom_Servo(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Servo::Loom_Servo(JsonArrayConst p)
-	: Loom_Servo( (const char*)p[0] ) {} 
-// explicitly cast because with only one parameter, JsonVariant p[0] can 
-// implicitly cast to either JsonArrayConst or const char* of regular constructor
+	: Loom_Servo() {} 
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Servo::add_config(JsonObject json)

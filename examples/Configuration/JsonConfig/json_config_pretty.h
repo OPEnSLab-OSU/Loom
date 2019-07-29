@@ -10,7 +10,6 @@
 		{\
 			'name':'Analog',\
 			'params':[\
-				'Analog',\
 				8,\
 				12,\
 				true,\
@@ -30,7 +29,6 @@
 		{\
 			'name':'Digital',\
 			'params':[\
-				'Digital',\
 				true,\
 				true,\
 				false,\
@@ -47,17 +45,11 @@
 		},\
 		{\
 			'name':'Interrupt_Manager',\
-			'params':[\
-				'Interrupt-Manager',\
-				0\
-			]\
+			'params':'default'\
 		},\
 		{\
 			'name':'Relay',\
-			'params':[\
-				'Relay',\
-				10\
-			]\
+			'params':[10]\
 		}\
 	]\
 }"

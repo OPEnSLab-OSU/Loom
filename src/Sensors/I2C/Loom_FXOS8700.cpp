@@ -7,10 +7,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXOS8700::Loom_FXOS8700(
 		byte			i2c_address, 
-		uint8_t			mux_port,
-		const char*		module_name
+		uint8_t			mux_port
 	)
-	: LoomI2CSensor( module_name, Type::FXOS8700, i2c_address, mux_port )
+	: LoomI2CSensor( "FXOS8700", Type::FXOS8700, i2c_address, mux_port )
 	, inst_FXOS8700(Adafruit_FXOS8700(0x8700A, 0x8700B))
 {
 	bool setup = inst_FXOS8700.begin(ACCEL_RANGE_4G);
@@ -23,7 +22,7 @@ Loom_FXOS8700::Loom_FXOS8700(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXOS8700::Loom_FXOS8700(JsonArrayConst p)
-	: Loom_FXOS8700( EXPAND_ARRAY(p, 3) ) {}
+	: Loom_FXOS8700( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_FXOS8700::print_measurements()

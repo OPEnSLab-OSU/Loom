@@ -10,7 +10,6 @@
 		{\
 			'name':'LoRa',\
 			'params':[\
-				'LoRa',\
 				255,\
 				1,\
 				23,\
@@ -20,7 +19,7 @@
 		},\
 		{\
 			'name':'SD',\
-			'params':['SD',true,1000,10,'datafile.csv']\
+			'params':[true,1000,10,'datafile.csv']\
 		}\
 	]\
 }"

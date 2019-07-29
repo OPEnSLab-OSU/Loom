@@ -5,10 +5,8 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Stepper::Loom_Stepper( 
-		const char*		module_name
-	) 
-	: LoomActuator( module_name, Type::Stepper ) 
+Loom_Stepper::Loom_Stepper() 
+	: LoomActuator( "Stepper", Type::Stepper ) 
 {
 	AFMS = new Adafruit_MotorShield();
 	for (auto i = 0; i < NUM_STEPPERS; i++){
@@ -22,7 +20,7 @@ Loom_Stepper::Loom_Stepper(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Stepper::Loom_Stepper(JsonArrayConst p)
-	: Loom_Stepper( (const char*)p[0] ) {} 
+	: Loom_Stepper() {} 
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Stepper::~Loom_Stepper() 

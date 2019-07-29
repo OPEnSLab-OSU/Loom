@@ -10,7 +10,6 @@
 		{\
 			'name':'Relay',\
 			'params':[\
-				'Relay',\
 				10\
 			]\
 		}\

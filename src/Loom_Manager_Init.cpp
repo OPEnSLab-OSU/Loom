@@ -115,21 +115,11 @@ bool LoomManager::parse_config_json(JsonObject config)
 	// Call module factory creating each module
 	for ( JsonVariant module : config["components"].as<JsonArray>()) {		
 		add_module(LoomFactory.Create(module));
-		LPrintln("*");
 	}
 
 	// Sort modules by type
 	std::sort(modules.begin(), modules.end(), module_sort_comp());
-
-	// call second stage construction
-	// other modules must go last, as they are most likely to do weird things 
-	// second_stage_ctor_aux( sensor_modules   ); 
-	// second_stage_ctor_aux( actuator_modules ); 
-	// second_stage_ctor_aux( comm_modules     ); 
-	// second_stage_ctor_aux( internet_modules ); 
-	// second_stage_ctor_aux( publish_modules  ); 
-	// second_stage_ctor_aux( log_modules      );
-	// second_stage_ctor_aux( modules ); 
+	
 
 	for (auto module : modules) {
 		if ( (module != nullptr) && module->get_active() ) {

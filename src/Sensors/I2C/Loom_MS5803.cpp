@@ -5,10 +5,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MS5803::Loom_MS5803(
 		byte			i2c_address, 
-		uint8_t			mux_port,
-		const char*		module_name
+		uint8_t			mux_port
 	)
-	: LoomI2CSensor( module_name, Type::MS5803, i2c_address, mux_port )
+	: LoomI2CSensor( "MS5803", Type::MS5803, i2c_address, mux_port )
 	, inst_MS5803( MS_5803(i2c_address, 512) )
 {
 
@@ -23,7 +22,7 @@ Loom_MS5803::Loom_MS5803(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MS5803::Loom_MS5803(JsonArrayConst p)
-	: Loom_MS5803( EXPAND_ARRAY(p, 3) ) {}
+	: Loom_MS5803( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MS5803::print_measurements()

@@ -54,7 +54,6 @@ public:
 
 	/// OLED module constructor.
 	///
-	/// \param[in]	module_name				String | <"OLED"> | null | OLED module name
 	/// \param[in]	enable_rate_filter		Bool | <true> | {true, false} | Whether or not to impose maximum update rate
 	/// \param[in]	min_filter_delay		Int | <300> | [50-5000] | Minimum update delay, if enable_rate_filter enabled
 	/// \param[in]	type					Set(Version) | <0> | {0("Featherwing"), 1("Breakout")} | Which version of the OLED is being used
@@ -64,7 +63,6 @@ public:
 	/// \param[in]	freeze_pin				Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to pause the display
 	/// \param[in]	freeze_behavior			Set(FreezeType) | <2> | {O("Disable"), 1("Pause Data"), 2("Pause Data and Scroll")} | How freezing the display should behave
 	Loom_OLED(
-			const char*		module_name				= "OLED",
 			bool			enable_rate_filter		= true,
 			uint16_t		min_filter_delay		= 300,
 			Version			type					= Version::FEATHERWING,

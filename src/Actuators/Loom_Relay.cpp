@@ -4,10 +4,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Relay::Loom_Relay( 
-		const char*		module_name, 
 		byte			pin 
 	) 
-	: LoomActuator( module_name, Type::Relay ) 
+	: LoomActuator( "Relay", Type::Relay ) 
 	, pin(pin)
 	, on(false)
 {
@@ -17,7 +16,10 @@ Loom_Relay::Loom_Relay(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Relay::Loom_Relay(JsonArrayConst p)
-	: Loom_Relay( EXPAND_ARRAY(p, 2) ) {}
+	: Loom_Relay( (byte)p[0] ) {}
+// explicitly cast because with only one parameter, JsonVariant p[0] can 
+// implicitly cast to either JsonArrayConst or byte of regular constructor
+
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::add_config(JsonObject json)

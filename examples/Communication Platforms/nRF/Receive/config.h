@@ -10,7 +10,6 @@
 		{\
 			'name':'nRF',\
 			'params':[\
-				'nRF',\
 				120,\
 				01,\
 				1,\
@@ -22,7 +21,7 @@
 		},\
 		{\
 			'name':'SD',\
-			'params':['SD',true,1000,10,'datafile.csv']\
+			'params':[true,1000,10,'datafile.csv']\
 		}\
 	]\
 }"

@@ -22,7 +22,7 @@ protected:
 
 	RF24				radio;				/// Underlying nRF24L01(+) radio object
 	RF24Network*		network;			/// Network layer manager for radio
-	// RF24*				radio;				/// Underlying nRF24L01(+) radio object
+	// RF24*			radio;				/// Underlying nRF24L01(+) radio object
 	// RF24Network*		network;			/// Network layer manager for radio
 
 	uint8_t				address;			/// Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
@@ -42,7 +42,6 @@ public:
 
 	/// nRF module constructor
 	///
-	/// \param[in]	module_name			String | <"nRF"> | null | nRF module name
 	/// \param[in]	max_message_len		Set(Int) | <120> | {120("Max length")} | The maximum possible message length
 	/// \param[in]	address 			Int | <01> | [0-99] | This device's nRF address
 	/// \param[in]	data_rate			Set(Int) | <0> | {0("Default"), 1("250KBPS"), 2("1MBPS"), 3("2MBPS")} | Transmission data rate
@@ -51,7 +50,6 @@ public:
 	/// \param[in]	retry_timeout 		Int | <200> | [20-500] | Delay between retransmissions (ms)
 	/// \param[in]	multicast_level		Int | <1> | [1-3] | How many levels to propogate message through heirarchy
 	Loom_nRF(
-			const char*		module_name			= "nRF",
 			uint16_t		max_message_len		= 120,
 			uint8_t			address 			= 0,
 			uint8_t			data_rate			= 1,

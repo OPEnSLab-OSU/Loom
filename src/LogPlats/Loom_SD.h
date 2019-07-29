@@ -40,13 +40,11 @@ public:
 
 	/// SD Module Constructor
 	///
-	/// \param[in]	module_name					String | <"SD"> | null | OLED module name
-	/// \param[in]	enable_rate_filter	Bool | <true> | {true, false} | Whether or not to impose maximum update rate
-	/// \param[in]	min_filter_delay		Int | <1000> | [100-5000] | Minimum update delay, if enable_rate_filter enabled
+	/// \param[in]	enable_rate_filter			Bool | <true> | {true, false} | Whether or not to impose maximum update rate
+	/// \param[in]	min_filter_delay			Int | <1000> | [100-5000] | Minimum update delay, if enable_rate_filter enabled
 	/// \param[in]	chip_select					Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
 	/// \param[in]	default_file				String | <"test.csv"> | null | File to write to if none explicity provided (should be < 8 characters w/out extension)
 	Loom_SD(
-			const char*		module_name			= "SD",
 			bool			enable_rate_filter	= true,
 			uint16_t		min_filter_delay	= 1000,
 			byte			chip_select			= 10,
