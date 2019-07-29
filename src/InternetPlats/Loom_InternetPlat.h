@@ -2,7 +2,7 @@
 
 #include "Loom_Module.h"
 #include "Client.h"
-
+#include "Udp.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -17,6 +17,9 @@ protected:
 	
 	/// Utility function to write an http reqest based on parameters specified by LoomInternetPlat::httpo_request to a Client class
 	void write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb);
+	/// Get UTC time, using a UDP object
+	/// \return Time if found, 0 otherwise
+	uint32_t get_ntp_time(UDP& udp_dev) const;
 
 public:
 
@@ -67,10 +70,6 @@ public:
 	/// \param[in]	domain	The domain to connect to "www.google.com"
 	/// \returns A client reference. The client::connected method will return true if the connection succeeded, and false otherwise.
 	virtual Client& connect_to_domain(const char* domain) = 0;
-
-	// TODO: Websockets? how do those work
-
-
 private:
-
+	void m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const;
 };

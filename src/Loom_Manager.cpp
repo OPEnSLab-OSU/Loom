@@ -15,6 +15,7 @@
 #include "LogPlats/Loom_LogPlat.h"
 #include "RTC/Loom_RTC.h"
 #include "PublishPlats/Loom_PublishPlat.h"
+#include "Loom_NTP_Sync.h"
 
 #include <Adafruit_SleepyDog.h>
 
@@ -379,6 +380,9 @@ void LoomManager::measure()
 	for (auto module : other_modules) {	
 		if (module->get_module_type() == LoomModule::Type::Multiplexer) {
 			((Loom_Multiplexer*)module)->measure();
+		}
+		else if (module->get_module_type() == LoomModule::Type::NTP) {
+			((LoomNTPSync*)module)->measure();
 		}
 	}
 }

@@ -52,7 +52,7 @@ public:
 		// RTC
 		DS3231, PCF8523,
 		// Other
-		Sleep_Manager, Interrupt_Manager, Multiplexer
+		Sleep_Manager, Interrupt_Manager, Multiplexer, NTP,
 	};
 
 protected:

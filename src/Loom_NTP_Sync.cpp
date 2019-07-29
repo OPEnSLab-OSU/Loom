@@ -16,12 +16,12 @@ LoomNTPSync::LoomNTPSync(
     , m_rtc( nullptr )
     , m_next_sync( 1 )
     , m_last_error( LoomNTPSync::Error::NON_START ) {
-        module_type = LoomModule::Type::Unknown;
+        module_type = LoomModule::Type::NTP;
     }
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomNTPSync::LoomNTPSync(JsonArrayConst p)
-	: LoomNTPSync( EXPAND_ARRAY(p, 2) ) {}
+	: LoomNTPSync( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomNTPSync::second_stage_ctor() 
@@ -49,7 +49,7 @@ void LoomNTPSync::second_stage_ctor()
     }
     // made it here, guess we're good to go!
     print_module_label();
-    LPrint("Ready\n");
+    print_config();
     m_last_error = Error::OK;
 }
 
@@ -57,7 +57,7 @@ void LoomNTPSync::second_stage_ctor()
 void LoomNTPSync::print_config() 
 {
 	print_module_label();
-    if (m_next_sync.unixtime() == 0) LPrint("\tNTPSync set to synchronize once.");
+    if (m_sync_interval == 0) LPrintln("\tNTPSync set to synchronize once.");
     else LPrint("\tNTPSync set to synchronize every ", m_sync_interval, " hours\n");
 }
 
@@ -74,7 +74,7 @@ void LoomNTPSync::print_state()
 void LoomNTPSync::measure() 
 {
     // if a sync is requested
-    if (m_next_sync.unixtime() != 0 && (m_rtc->now() - m_next_sync).totalseconds() >= 0) {
+    if (m_next_sync.unixtime() != 0 && m_rtc->now().secondstime() > m_next_sync.secondstime()) {
         // if the engine is operating correctly
         if (m_last_error == Error::OK && m_internet->is_connected()) {
             // synchronize the RTC

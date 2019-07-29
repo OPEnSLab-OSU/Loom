@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 // ### (LoomModule) | dependencies: [] | conflicts: []
-/// InternetPlat built off of SSLClient running over an Ethernet Featherwing. Requires 8KB of free SRAM at runtime to use.
+/// InternetPlat built off of SSLClient running over an Ethernet Featherwing. Requires 7KB of free SRAM at runtime to use.
 // ###
 class Loom_Ethernet_I : public LoomInternetPlat
 {
@@ -42,7 +42,7 @@ public:
 	Loom_Ethernet_I( JsonArrayConst p );
 
 	/// Destructor
-	~Loom_Ethernet_I() = default;
+	virtual ~Loom_Ethernet_I() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -60,7 +60,7 @@ public:
 
 	/// Get UTC time
 	/// \return Time if found, 0 otherwise
-	uint32_t get_time() override;
+	uint32_t get_time() override { return get_ntp_time(m_UDP); }
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -68,10 +68,6 @@ public:
 
 	void print_config() override;
 	void print_state() override;
-
-private:
-
-	void m_send_NTP_packet(byte packet_buffer[]);
 
 };
 
