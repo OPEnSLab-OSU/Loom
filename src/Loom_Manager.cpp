@@ -80,23 +80,26 @@ void LoomManager::print_config(bool print_modules_config)
 
 	// Print managed module's configs
 	if (print_modules_config) {
-		if (interrupt_manager != nullptr) {
-			interrupt_manager->print_config();
-		}
-		if (sleep_manager != nullptr) {
-			interrupt_manager->print_config();
-		}
-		if (rtc_module != nullptr) {
-			interrupt_manager->print_config();
-		}
+		// if (interrupt_manager != nullptr) {
+		// 	interrupt_manager->print_config();
+		// }
+		// if (sleep_manager != nullptr) {
+		// 	interrupt_manager->print_config();
+		// }
+		// if (rtc_module != nullptr) {
+		// 	interrupt_manager->print_config();
+		// }
 
-		print_config_aux( other_modules); 
-		print_config_aux( sensor_modules); 
-		print_config_aux( actuator_modules); 
-		print_config_aux( comm_modules); 
-		print_config_aux( internet_modules); 
-		print_config_aux( publish_modules); 
-		print_config_aux( log_modules );  
+		// print_config_aux( other_modules); 
+		// print_config_aux( sensor_modules); 
+		// print_config_aux( actuator_modules); 
+		// print_config_aux( comm_modules); 
+		// print_config_aux( internet_modules); 
+		// print_config_aux( publish_modules); 
+		// print_config_aux( log_modules ); 
+		for (auto module : modules) {
+			module->print_config();
+		} 
 	}
 }
 
@@ -121,148 +124,183 @@ void LoomManager::begin_serial(bool wait_for_monitor)
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager) 
-{
-	print_device_label();
-	if (!interrupt_manager) {
-		LPrintln("Cannot add ", interrupt_manager->get_module_name() );
-		return;
-	}
-	LPrintln("Adding Module: ", interrupt_manager->get_module_name() );
-	this->interrupt_manager = interrupt_manager; 
+// ///////////////////////////////////////////////////////////////////////////////
+// void LoomManager::add_module(Loom_Interrupt_Manager* interrupt_manager) 
+// {
+// 	print_device_label();
+// 	if (!interrupt_manager) {
+// 		LPrintln("Cannot add ", interrupt_manager->get_module_name() );
+// 		return;
+// 	}
+// 	LPrintln("Adding Module: ", interrupt_manager->get_module_name() );
+// 	this->interrupt_manager = interrupt_manager; 
 
-	interrupt_manager->link_device_manager(this);
+// 	interrupt_manager->link_device_manager(this);
 
-	// Point new interrupt manager to existing RTC
-	if (rtc_module != nullptr) {
-		this->interrupt_manager->set_RTC_module(rtc_module);
-	}
+// 	// Point new interrupt manager to existing RTC
+// 	if (rtc_module != nullptr) {
+// 		this->interrupt_manager->set_RTC_module(rtc_module);
+// 	}
 
-	// Point existing sleep manager to new interrupt manager
-	if (sleep_manager != nullptr) {
-		interrupt_manager->link_sleep_manager(sleep_manager);
-		sleep_manager->link_interrupt_manager(interrupt_manager);
-	}
-}
+// 	// Point existing sleep manager to new interrupt manager
+// 	if (sleep_manager != nullptr) {
+// 		interrupt_manager->link_sleep_manager(sleep_manager);
+// 		sleep_manager->link_interrupt_manager(interrupt_manager);
+// 	}
+// }
 
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_module(Loom_Sleep_Manager* sleep_manager) 
-{
-	print_device_label();
-	if (!sleep_manager) {
-		LPrintln("Cannot add ", sleep_manager->get_module_name() );
-		return;
-	}
-	LPrintln("Adding Module: ", sleep_manager->get_module_name() );
-	this->sleep_manager = sleep_manager; 
+// ///////////////////////////////////////////////////////////////////////////////
+// void LoomManager::add_module(Loom_Sleep_Manager* sleep_manager) 
+// {
+// 	print_device_label();
+// 	if (!sleep_manager) {
+// 		LPrintln("Cannot add ", sleep_manager->get_module_name() );
+// 		return;
+// 	}
+// 	LPrintln("Adding Module: ", sleep_manager->get_module_name() );
+// 	this->sleep_manager = sleep_manager; 
 
-	sleep_manager->link_device_manager(this);
+// 	sleep_manager->link_device_manager(this);
 
-	// Point existing sleep manager to new interrupt manager
-	if (interrupt_manager != nullptr) {
-		sleep_manager->link_interrupt_manager(interrupt_manager);
-		interrupt_manager->link_sleep_manager(sleep_manager);
-	}
-}
+// 	// Point existing sleep manager to new interrupt manager
+// 	if (interrupt_manager != nullptr) {
+// 		sleep_manager->link_interrupt_manager(interrupt_manager);
+// 		interrupt_manager->link_sleep_manager(sleep_manager);
+// 	}
+// }
 
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_module(LoomRTC* rtc) 
-{
-	rtc_module = rtc;
+// ///////////////////////////////////////////////////////////////////////////////
+// void LoomManager::add_module(LoomRTC* rtc) 
+// {
+// 	rtc_module = rtc;
 	
-	if (rtc != nullptr) {
-		if (interrupt_manager != nullptr) {
-			interrupt_manager->set_RTC_module(rtc);
-		}
-	} else {
-		LPrintln("Cannot add null module");
-		return;
-	}
-}
+// 	if (rtc != nullptr) {
+// 		if (interrupt_manager != nullptr) {
+// 			interrupt_manager->set_RTC_module(rtc);
+// 		}
+// 	} else {
+// 		LPrintln("Cannot add null module");
+// 		return;
+// 	}
+// }
 
 
-bool LoomManager::add_module_aux2(std::vector<LoomModule*>& modules, LoomModule* module) 
+// bool LoomManager::add_module_aux2(std::vector<LoomModule*>& modules, LoomModule* module) 
+// {
+// 	print_device_label();
+
+// 	if (module == nullptr) {
+// 		LPrintln("Cannot add null module");
+// 		return false;
+// 	}
+
+// 	LPrintln("Adding Module: ", module->get_module_name() );
+
+// 	// modules.emplace_back(module);
+// 	modules.push_back(module);
+// 	module->link_device_manager(this);
+// 	return true;	
+// }
+
+void LoomManager::add_module(LoomModule* module)
 {
+
 	print_device_label();
 
 	if (module == nullptr) {
 		LPrintln("Cannot add null module");
-		return false;
+		return;
 	}
 
-	LPrintln("Adding Module: ", module->get_module_name() );
+	LPrintln("Adding Module: ", ((LoomModule*)module)->get_module_name() );
 
-	// modules.emplace_back(module);
-	modules.push_back(module);
+	modules.emplace_back(module);
 	module->link_device_manager(this);
-	return true;	
-}
+
+	// If is RTC
+	if (  (module->category() == LoomModule::Category::L_RTC) 
+	   && (interrupt_manager != nullptr) ) {
+		interrupt_manager->set_RTC_module( (LoomRTC*)module );
+	}
+
+	// If is Interrupt manager
+	if (module->get_module_type() == LoomModule::Type::Interrupt_Manager) {
+		this->interrupt_manager = (Loom_Interrupt_Manager*)module; 
+
+		// Point new interrupt manager to existing RTC
+		if (rtc_module != nullptr) {
+			this->interrupt_manager->set_RTC_module(rtc_module);
+		}
+
+		// Point existing sleep manager to new interrupt manager
+		if (sleep_manager != nullptr) {
+			this->interrupt_manager->link_sleep_manager(this->sleep_manager);
+			this->sleep_manager->link_interrupt_manager(this->interrupt_manager);
+		}
+	}
+
+	// If is Sleep manager
+	if (module->get_module_type() == LoomModule::Type::Sleep_Manager) {
+		this->sleep_manager = (Loom_Sleep_Manager*)module; 
+
+		// Point existing interrupt_manager manager to new sleep manager
+		if (this->interrupt_manager != nullptr) {
+			this->sleep_manager->link_interrupt_manager(this->interrupt_manager);
+			this->interrupt_manager->link_sleep_manager(this->sleep_manager);
+		}
+	}
+
+} 
 
 
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_module(LoomModule* module) 
-{
-	// add_module_aux(other_modules, module);
-	add_module_aux2(other_modules, module);
-}
 
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_module(LoomSensor* sensor) 
-{
-	add_module_aux(sensor_modules, sensor);
-	// add_module_aux2(sensor_modules, sensor);
-	// add_module_aux2(other_modules, sensor);
-	// add_module_aux2(static_cast<>sensor_modules, sensor);
-}
 
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_module(LoomActuator* actuator) 
-{
-	add_module_aux(actuator_modules, actuator);
-}
 
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_module(LoomCommPlat* comm_plat) 
-{
-	add_module_aux(comm_modules, comm_plat);
-}
+// ///////////////////////////////////////////////////////////////////////////////
+// void LoomManager::add_module(LoomModule* module) 
+// {
+// 	// add_module_aux(other_modules, module);
+// 	add_module_aux2(other_modules, module);
+// }
 
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_module(LoomInternetPlat* internet_module) 
-{
-	add_module_aux(internet_modules, internet_module);
-}
+// ///////////////////////////////////////////////////////////////////////////////
+// void LoomManager::add_module(LoomSensor* sensor) 
+// {
+// 	add_module_aux(sensor_modules, sensor);
+// 	// add_module_aux2(sensor_modules, sensor);
+// 	// add_module_aux2(other_modules, sensor);
+// 	// add_module_aux2(static_cast<>sensor_modules, sensor);
+// }
 
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_module(LoomPublishPlat* publish_module) 
-{
-	add_module_aux(publish_modules, publish_module);
-}
+// ///////////////////////////////////////////////////////////////////////////////
+// void LoomManager::add_module(LoomActuator* actuator) 
+// {
+// 	add_module_aux(actuator_modules, actuator);
+// }
 
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_module(LoomLogPlat* log_plat) 
-{	
-	add_module_aux(log_modules, log_plat);
-}
+// ///////////////////////////////////////////////////////////////////////////////
+// void LoomManager::add_module(LoomCommPlat* comm_plat) 
+// {
+// 	add_module_aux(comm_modules, comm_plat);
+// }
 
-///////////////////////////////////////////////////////////////////////////////
-Loom_Interrupt_Manager* LoomManager::get_interrupt_manager()
-{
-	return interrupt_manager;
-}
+// ///////////////////////////////////////////////////////////////////////////////
+// void LoomManager::add_module(LoomInternetPlat* internet_module) 
+// {
+// 	add_module_aux(internet_modules, internet_module);
+// }
 
-///////////////////////////////////////////////////////////////////////////////
-Loom_Sleep_Manager* LoomManager::get_sleep_manager()
-{
-	return sleep_manager;
-}
+// ///////////////////////////////////////////////////////////////////////////////
+// void LoomManager::add_module(LoomPublishPlat* publish_module) 
+// {
+// 	add_module_aux(publish_modules, publish_module);
+// }
 
-///////////////////////////////////////////////////////////////////////////////
-LoomRTC* LoomManager::get_rtc_module()
-{
-	return rtc_module;
-}
+// ///////////////////////////////////////////////////////////////////////////////
+// void LoomManager::add_module(LoomLogPlat* log_plat) 
+// {	
+// 	add_module_aux(log_modules, log_plat);
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::list_modules()
@@ -270,31 +308,39 @@ void LoomManager::list_modules()
 	print_device_label();
 	LPrintln("Modules:");
 
-	// Interrupt Manager
-	LPrintln("\tInterrupt Manager (", (interrupt_manager != nullptr), "):");
-	if ( (interrupt_manager != nullptr) && (interrupt_manager->get_active()) ) {
-		LPrintln( "\t\t[", (interrupt_manager->get_active()) ? "+" : "-" , "] ", interrupt_manager->get_module_name() );
-	}
 
-	// Sleep Manager
-	LPrintln("\tSleep Manager (", (sleep_manager != nullptr), "):");
-	if ( (sleep_manager != nullptr) && (sleep_manager->get_active()) ) {
-		LPrintln( "\t\t[", (sleep_manager->get_active()) ? "+" : "-" , "] ", sleep_manager->get_module_name() );
-	}
+	// LPrintln("\t", enum_category_string(), " (", modules.size(), "):");
+	for (auto module : modules) {
+		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active()) ) {
+			LPrintln( "\t\t[", ( ((LoomModule*)module)->get_active()) ? "+" : "-" , "] ", ((LoomModule*)module)->get_module_name() );
+		}
+	}	
 
-	// RTC 
-	LPrintln("\tRTC module (", (rtc_module != nullptr), "):");
-	if ( (rtc_module != nullptr) && (rtc_module->get_active()) ) {
-		LPrintln( "\t\t[", (rtc_module->get_active()) ? "+" : "-" , "] ", rtc_module->get_module_name() );
-	}
+	// // Interrupt Manager
+	// LPrintln("\tInterrupt Manager (", (interrupt_manager != nullptr), "):");
+	// if ( (interrupt_manager != nullptr) && (interrupt_manager->get_active()) ) {
+	// 	LPrintln( "\t\t[", (interrupt_manager->get_active()) ? "+" : "-" , "] ", interrupt_manager->get_module_name() );
+	// }
 
-	list_modules_aux( other_modules, "Other Modules"); 
-	list_modules_aux( sensor_modules, "Sensors"); 
-	list_modules_aux( actuator_modules, "Actuators"); 
-	list_modules_aux( comm_modules, "Communication Platforms"); 
-	list_modules_aux( internet_modules, "Internet Platforms"); 
-	list_modules_aux( publish_modules, "Publish Platforms"); 
-	list_modules_aux( log_modules, "Logging Platforms" ); 
+	// // Sleep Manager
+	// LPrintln("\tSleep Manager (", (sleep_manager != nullptr), "):");
+	// if ( (sleep_manager != nullptr) && (sleep_manager->get_active()) ) {
+	// 	LPrintln( "\t\t[", (sleep_manager->get_active()) ? "+" : "-" , "] ", sleep_manager->get_module_name() );
+	// }
+
+	// // RTC 
+	// LPrintln("\tRTC module (", (rtc_module != nullptr), "):");
+	// if ( (rtc_module != nullptr) && (rtc_module->get_active()) ) {
+	// 	LPrintln( "\t\t[", (rtc_module->get_active()) ? "+" : "-" , "] ", rtc_module->get_module_name() );
+	// }
+
+	// list_modules_aux( other_modules, "Other Modules"); 
+	// list_modules_aux( sensor_modules, "Sensors"); 
+	// list_modules_aux( actuator_modules, "Actuators"); 
+	// list_modules_aux( comm_modules, "Communication Platforms"); 
+	// list_modules_aux( internet_modules, "Internet Platforms"); 
+	// list_modules_aux( publish_modules, "Publish Platforms"); 
+	// list_modules_aux( log_modules, "Logging Platforms" ); 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -318,57 +364,9 @@ const char* LoomManager::get_device_name()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomManager::get_family() 
-{ 
-	return family; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void  LoomManager::set_family(const char* family) 
 { 
 	snprintf(this->family, 20, "%s", family); 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-uint8_t  LoomManager::get_family_num() 
-{ 
-	return family_num; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_family_num(uint8_t n) 
-{ 
-	family_num = n; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-uint8_t  LoomManager::get_instance_num() 
-{ 
-	return instance; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_instance_num(uint8_t n) 
-{ 
-	instance = n; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-LoomManager::DeviceType LoomManager::get_device_type() 
-{ 
-	return device_type; 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// void set_device_type(DeviceType t) 
-// {
-// 	device_type = t; 
-// }
-
-///////////////////////////////////////////////////////////////////////////////
-Verbosity LoomManager::get_print_verbosity()
-{
-	return print_verbosity;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -377,26 +375,26 @@ void LoomManager::set_print_verbosity(Verbosity v, bool set_modules)
 	print_verbosity = v;
 
 	if (set_modules) {
-		if (rtc_module != nullptr) { rtc_module->set_print_verbosity(v); }
-		if (interrupt_manager != nullptr) { interrupt_manager->set_print_verbosity(v); }
-		if (sleep_manager != nullptr) { sleep_manager->set_print_verbosity(v); }
+		// if (rtc_module != nullptr) { rtc_module->set_print_verbosity(v); }
+		// if (interrupt_manager != nullptr) { interrupt_manager->set_print_verbosity(v); }
+		// if (sleep_manager != nullptr) { sleep_manager->set_print_verbosity(v); }
 
-		// Iterate over lists of modules set verbosity for each
-		set_print_verbosity_aux(v, other_modules);
-		set_print_verbosity_aux(v, sensor_modules);
-		set_print_verbosity_aux(v, actuator_modules);
-		set_print_verbosity_aux(v, comm_modules);
-		set_print_verbosity_aux(v, internet_modules);
-		set_print_verbosity_aux(v, publish_modules);
-		set_print_verbosity_aux(v, log_modules);
+		// // Iterate over lists of modules set verbosity for each
+		// set_print_verbosity_aux(v, other_modules);
+		// set_print_verbosity_aux(v, sensor_modules);
+		// set_print_verbosity_aux(v, actuator_modules);
+		// set_print_verbosity_aux(v, comm_modules);
+		// set_print_verbosity_aux(v, internet_modules);
+		// set_print_verbosity_aux(v, publish_modules);
+		// set_print_verbosity_aux(v, log_modules);
+		for (auto module : modules) {
+			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
+				((LoomModule*)module)->set_print_verbosity(v);
+			}
+		}
 	}
 }
 
-///////////////////////////////////////////////////////////////////////////////
-Verbosity LoomManager::get_package_verbosity()
-{
-	return package_verbosity;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::set_package_verbosity(Verbosity v, bool set_modules)
@@ -404,44 +402,51 @@ void LoomManager::set_package_verbosity(Verbosity v, bool set_modules)
 	package_verbosity = v;
 
 	if (set_modules) {
-		if (rtc_module != nullptr) { rtc_module->set_package_verbosity(v); }
-		if (interrupt_manager != nullptr) { interrupt_manager->set_package_verbosity(v); }
-		if (sleep_manager != nullptr) { sleep_manager->set_package_verbosity(v); }
+		// if (rtc_module != nullptr) { rtc_module->set_package_verbosity(v); }
+		// if (interrupt_manager != nullptr) { interrupt_manager->set_package_verbosity(v); }
+		// if (sleep_manager != nullptr) { sleep_manager->set_package_verbosity(v); }
 
 		// Iterate over lists of modules set verbosity for each
-		set_package_verbosity_aux(v, other_modules);
-		set_package_verbosity_aux(v, sensor_modules);
-		set_package_verbosity_aux(v, actuator_modules);
-		set_package_verbosity_aux(v, comm_modules);
-		set_package_verbosity_aux(v, internet_modules);
-		set_package_verbosity_aux(v, publish_modules);
-		set_package_verbosity_aux(v, log_modules);
+		// set_package_verbosity_aux(v, other_modules);
+		// set_package_verbosity_aux(v, sensor_modules);
+		// set_package_verbosity_aux(v, actuator_modules);
+		// set_package_verbosity_aux(v, comm_modules);
+		// set_package_verbosity_aux(v, internet_modules);
+		// set_package_verbosity_aux(v, publish_modules);
+		// set_package_verbosity_aux(v, log_modules);
+		for (auto module : modules) {
+			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
+				((LoomModule*)module)->set_package_verbosity(v);
+			}
+		}	
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::measure()
 {
-	for (auto sensor : sensor_modules) {
-		if ( (sensor != nullptr) && (sensor->get_active()) ) {
-			sensor->measure();
-		}
-	}
+	// for (auto sensor : sensor_modules) {
+	// 	if ( (sensor != nullptr) && (sensor->get_active()) ) {
+	// 		sensor->measure();
+	// 	}
+	// }
 	
-	for (auto module : other_modules) {	
+	for (auto module : modules) {	
 		if (module->get_module_type() == LoomModule::Type::Multiplexer) {
 			((Loom_Multiplexer*)module)->measure();
+		} else if ( module->category() == LoomModule::Category::Sensor ) {
+			((LoomSensor*)module)->measure();
 		}
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::package_aux(JsonObject json, LoomModule* module)
-{
-	if ( (module != nullptr) && ( module->get_active() ) ){
-		module->package( json );
-	}
-}
+// void LoomManager::package_aux(JsonObject json, LoomModule* module)
+// {
+// 	if ( (module != nullptr) && ( module->get_active() ) ){
+// 		module->package( json );
+// 	}
+// }
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -450,19 +455,26 @@ void LoomManager::package(JsonObject json)
 	// Add device identification to json
 	add_device_ID_to_json(json);
 	
-	// Iterate over lists of modules getting data from each
-	package_aux( json, (LoomModule*)rtc_module ); 
-	package_aux( json, (LoomModule*)sleep_manager ); 
-	package_aux( json, (LoomModule*)interrupt_manager ); 
-	package_aux( json, other_modules); 
-	package_aux( json, sensor_modules); 
+	for (auto module : modules) {
+		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
+			((LoomModule*)module)->package( json );
+		}
+	}	
 
-	// If high verbosity, also check these lists
-	if (package_verbosity == Verbosity::V_HIGH) {
-		package_aux( json, actuator_modules); 
-		package_aux( json, comm_modules); 
-		package_aux( json, log_modules);		
-	}
+
+	// // Iterate over lists of modules getting data from each
+	// package_aux( json, (LoomModule*)rtc_module ); 
+	// package_aux( json, (LoomModule*)sleep_manager ); 
+	// package_aux( json, (LoomModule*)interrupt_manager ); 
+	// package_aux( json, other_modules); 
+	// package_aux( json, sensor_modules); 
+
+	// // If high verbosity, also check these lists
+	// if (package_verbosity == Verbosity::V_HIGH) {
+	// 	package_aux( json, actuator_modules); 
+	// 	package_aux( json, comm_modules); 
+	// 	package_aux( json, log_modules);		
+	// }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -512,23 +524,23 @@ JsonObject LoomManager::internal_json(bool clear)
 
 bool LoomManager::publish_all(const JsonObject json)
 {
-	bool result = true;
-	for (auto publisher : publish_modules) {
-		if ( (publisher != nullptr) && ( publisher->get_active() ) ){
-			result &= publisher->publish( json );
-		}
-	}
-	return (publish_modules.size() > 0) && result;
+	// bool result = true;
+	// for (auto publisher : publish_modules) {
+	// 	if ( (publisher != nullptr) && ( publisher->get_active() ) ){
+	// 		result &= publisher->publish( json );
+	// 	}
+	// }
+	// return (publish_modules.size() > 0) && result;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::dispatch_aux(JsonObject json, LoomModule* module)
-{
-	if ( (module != nullptr) && ( module->get_active() ) ){
-		module->dispatch( json );
-	}
+// bool LoomManager::dispatch_aux(JsonObject json, LoomModule* module)
+// {
+// 	if ( (module != nullptr) && ( module->get_active() ) ){
+// 		module->dispatch( json );
+// 	}
 
-}
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::dispatch(JsonObject json)
@@ -543,13 +555,19 @@ void LoomManager::dispatch(JsonObject json)
 			// LPrintln("\n\nCMD:");
 			// serializeJsonPretty(cmd, Serial);
 
-			if ( dispatch_aux(cmd, actuator_modules) )			continue;
+			for (auto module : modules) {
+				if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
+					if ( module->dispatch( json ) ) continue;
+				}
+			}
+
+			// if ( dispatch_aux(cmd, actuator_modules) )			continue;
 			
-			if ( dispatch_aux(cmd, (LoomModule*)rtc_module) )		continue;
-			if ( dispatch_aux(cmd, other_modules) )			continue;
-			if ( dispatch_aux(cmd, sensor_modules) )			continue;
-			if ( dispatch_aux(cmd, comm_modules) )				continue;
-			if ( dispatch_aux(cmd, log_modules) )				continue;
+			// if ( dispatch_aux(cmd, (LoomModule*)rtc_module) )		continue;
+			// if ( dispatch_aux(cmd, other_modules) )			continue;
+			// if ( dispatch_aux(cmd, sensor_modules) )			continue;
+			// if ( dispatch_aux(cmd, comm_modules) )				continue;
+			// if ( dispatch_aux(cmd, log_modules) )				continue;
 		}
 	}
 }
@@ -598,44 +616,68 @@ void LoomManager::pause(uint16_t ms)
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::free_modules()
 {
-	if (rtc_module != nullptr) { delete rtc_module; }
-	if (interrupt_manager != nullptr) { delete interrupt_manager; }
-	if (sleep_manager != nullptr) { delete sleep_manager; }
+	// if (rtc_module != nullptr) { delete rtc_module; }
+	// if (interrupt_manager != nullptr) { delete interrupt_manager; }
+	// if (sleep_manager != nullptr) { delete sleep_manager; }
 
 	// Iterate over lists of modules freeing each
-	free_modules_aux(other_modules);
-	free_modules_aux(sensor_modules);
-	free_modules_aux(actuator_modules);
-	free_modules_aux(comm_modules);
-	free_modules_aux(internet_modules);
-	free_modules_aux(publish_modules);
-	free_modules_aux(log_modules);
+	// free_modules_aux(other_modules);
+	// free_modules_aux(sensor_modules);
+	// free_modules_aux(actuator_modules);
+	// free_modules_aux(comm_modules);
+	// free_modules_aux(internet_modules);
+	// free_modules_aux(publish_modules);
+	// free_modules_aux(log_modules);
+
+	for (auto module : modules) {
+		delete module;
+	}
+	modules.clear();
+
+	rtc_module = nullptr;
+	interrupt_manager = nullptr;
+	sleep_manager = nullptr;
+
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::power_up()
 {
 	// Iterate over lists of modules powering active one on
-	power_up_aux(other_modules);
-	power_up_aux(sensor_modules);
-	power_up_aux(actuator_modules);
-	power_up_aux(comm_modules);
-	power_up_aux(internet_modules);
-	power_up_aux(publish_modules);
-	power_up_aux(log_modules);
+// 	power_up_aux(other_modules);
+// 	power_up_aux(sensor_modules);
+// 	power_up_aux(actuator_modules);
+// 	power_up_aux(comm_modules);
+// 	power_up_aux(internet_modules);
+// 	power_up_aux(publish_modules);
+// 	power_up_aux(log_modules);
+	for (auto module : modules) {
+		if ( module != nullptr ){
+			((LoomModule*)module)->power_up();
+		}
+	}	
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::power_down()
 {
 	// Iterate over lists of modules powering them off
-	power_down_aux(other_modules);
-	power_down_aux(sensor_modules);
-	power_down_aux(actuator_modules);
-	power_down_aux(comm_modules);
-	power_down_aux(internet_modules);
-	power_down_aux(publish_modules);
-	power_down_aux(log_modules);
+	// power_down_aux(other_modules);
+	// power_down_aux(sensor_modules);
+	// power_down_aux(actuator_modules);
+	// power_down_aux(comm_modules);
+	// power_down_aux(internet_modules);
+	// power_down_aux(publish_modules);
+	// power_down_aux(log_modules);
+
+	for (auto module : modules) {
+		if ( module != nullptr ){
+			((LoomModule*)module)->power_down();
+		}
+	}	
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -655,18 +697,24 @@ void LoomManager::get_config()
 	// Start array for modules to add config objects to
 	JsonArray components = json.createNestedArray("components");
 
-	if (rtc_module != nullptr) { rtc_module->add_config(json); }
-	if (interrupt_manager != nullptr) { interrupt_manager->add_config(json); }
-	if (sleep_manager != nullptr) { sleep_manager->add_config(json); }
+	// if (rtc_module != nullptr) { rtc_module->add_config(json); }
+	// if (interrupt_manager != nullptr) { interrupt_manager->add_config(json); }
+	// if (sleep_manager != nullptr) { sleep_manager->add_config(json); }
 
-	// Iterate over lists of modules freeing each
-	get_config_aux(other_modules, json);
-	get_config_aux(sensor_modules, json);
-	get_config_aux(actuator_modules, json);
-	get_config_aux(comm_modules, json);
-	get_config_aux(internet_modules, json);
-	get_config_aux(publish_modules, json);
-	get_config_aux(log_modules, json);	
+	// // Iterate over lists of modules freeing each
+	// get_config_aux(other_modules, json);
+	// get_config_aux(sensor_modules, json);
+	// get_config_aux(actuator_modules, json);
+	// get_config_aux(comm_modules, json);
+	// get_config_aux(internet_modules, json);
+	// get_config_aux(publish_modules, json);
+	// get_config_aux(log_modules, json);	
+	for (auto module : modules) {
+		if ( module != nullptr ){
+			((LoomModule*)module)->add_config(json);
+		}
+	}	
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -93,7 +93,7 @@ const char* LoomModule::enum_verbosity_string(Verbosity v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule::Category LoomModule::get_module_category() 
+LoomModule::Category LoomModule::category() 
 {
 	switch( (int)module_type / 1000 ) {
 		case 1 : return Category::Other;		// Other

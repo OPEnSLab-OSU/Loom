@@ -112,77 +112,25 @@ bool LoomManager::parse_config_json(JsonObject config)
 	}
 
 	// Call module factory
-	for ( JsonVariant module : config["components"].as<JsonArray>()) {
-		
-		Loom_Interrupt_Manager*	interrupt_manager	= nullptr; 
-		Loom_Sleep_Manager*		sleep_manager		= nullptr;
-		LoomRTC* 				rtc					= nullptr;
-		LoomModule*				other_module		= nullptr; 
-		LoomSensor*				sensor				= nullptr;
-		LoomActuator*			actuator			= nullptr;
-		LoomCommPlat*			comm_plat			= nullptr;
-		LoomInternetPlat*		internet_plat		= nullptr;
-		LoomPublishPlat*		publish_plat		= nullptr;
-		LoomLogPlat*			log_plat			= nullptr;
-
-		LoomFactory.CreateAndSort(
-			module,
-			interrupt_manager,
-			sleep_manager,
-			rtc,
-			other_module,
-			sensor,
-			actuator,
-			comm_plat,
-			internet_plat,
-			publish_plat,
-			log_plat
-		);
-
-
-		if (interrupt_manager != nullptr) {
-			add_module(interrupt_manager); 
-		} 
-		if (sleep_manager != nullptr) {
-			add_module(sleep_manager); 
-		} 
-		if (rtc != nullptr) {
-			add_module(rtc);
-		} 
-		if (other_module != nullptr) {
-			add_module(other_module); 
-		} 
-		if (sensor != nullptr) {
-			add_module(sensor); 
-		} 
-		if (actuator != nullptr) {
-			add_module(actuator); 
-		} 
-		if (comm_plat != nullptr) {
-			add_module(comm_plat); 
-		} 
-		if (internet_plat != nullptr) {
-			add_module(internet_plat); 
-		} 
-		if (publish_plat != nullptr) {
-			add_module(publish_plat); 
-		} 
-		if (log_plat != nullptr) {
-			add_module(log_plat); 
-		}
-
+	for ( JsonVariant module : config["components"].as<JsonArray>()) {		
+		add_module(LoomFactory.Create(module));
 	}
 
 	// call second stage construction
 	// other modules must go last, as they are most likely to do weird things 
-	second_stage_ctor_aux( sensor_modules   ); 
-	second_stage_ctor_aux( actuator_modules ); 
-	second_stage_ctor_aux( comm_modules     ); 
-	second_stage_ctor_aux( internet_modules ); 
-	second_stage_ctor_aux( publish_modules  ); 
-	second_stage_ctor_aux( log_modules      );
-	second_stage_ctor_aux( other_modules    ); 
+	// second_stage_ctor_aux( sensor_modules   ); 
+	// second_stage_ctor_aux( actuator_modules ); 
+	// second_stage_ctor_aux( comm_modules     ); 
+	// second_stage_ctor_aux( internet_modules ); 
+	// second_stage_ctor_aux( publish_modules  ); 
+	// second_stage_ctor_aux( log_modules      );
+	// second_stage_ctor_aux( modules ); 
 
+	for (auto module : modules) {
+		if ( (module != nullptr) && module->get_active() ) {
+			module->second_stage_ctor();
+		}
+	}	
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		LPrintln("= = = = = = = = = = = = = = = = =");

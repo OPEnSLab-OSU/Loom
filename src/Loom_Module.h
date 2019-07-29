@@ -207,7 +207,7 @@ public:
 	
 	static const char*	enum_category_string(Category c);
 
-	Category			get_module_category();
+	Category			category();
 
 
 protected:
