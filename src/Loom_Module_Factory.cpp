@@ -2,7 +2,6 @@
 #include "Loom_Module_Factory.h"
 
 
-
 const Factory::NameModulePair Factory::LookupTable[] =
 {
 	// InterruptManager
@@ -100,6 +99,8 @@ LoomModule* Factory::Create(JsonVariant module)
 	LPrintln("'", name, "' could not be created");
 	return nullptr;
 }
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // void Factory::CreateAndSort(

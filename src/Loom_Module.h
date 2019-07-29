@@ -209,7 +209,6 @@ public:
 
 	Category			category();
 
-
 protected:
 
 //=============================================================================
@@ -225,6 +224,13 @@ private:
 
 };
 
+
+// Used by LoomManager to sort modules in its vector
+struct module_sort_comp {
+    bool operator() (LoomModule* left, LoomModule* right) const { 
+       return left->get_module_type() < right->get_module_type();
+    }
+};
 
 
 

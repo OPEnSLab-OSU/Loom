@@ -8,6 +8,7 @@
 
 #include <ArduinoJson.h>
 #include <SD.h>
+#include <algorithm>
 
 
 Factory LoomFactory;
@@ -111,10 +112,14 @@ bool LoomManager::parse_config_json(JsonObject config)
 		LPrintln("= = = = = Generate Objects = = = = =\n");
 	}
 
-	// Call module factory
+	// Call module factory creating each module
 	for ( JsonVariant module : config["components"].as<JsonArray>()) {		
 		add_module(LoomFactory.Create(module));
+		LPrintln("*");
 	}
+
+	// Sort modules by type
+	std::sort(modules.begin(), modules.end(), module_sort_comp());
 
 	// call second stage construction
 	// other modules must go last, as they are most likely to do weird things 
