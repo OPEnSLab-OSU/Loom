@@ -309,11 +309,20 @@ void LoomManager::list_modules()
 	LPrintln("Modules:");
 
 
-	// LPrintln("\t", enum_category_string(), " (", modules.size(), "):");
+	auto last_category = LoomModule::Category::Unknown;
+
 	for (auto module : modules) {
-		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active()) ) {
-			LPrintln( "\t\t[", ( ((LoomModule*)module)->get_active()) ? "+" : "-" , "] ", ((LoomModule*)module)->get_module_name() );
+		auto category = module->category();
+		if ( category != last_category ) {
+			LPrintln("\t", LoomModule::enum_category_string(category), "s");//, " (", modules.size(), "):");
+			last_category = category;
 		}
+		if ( (module != nullptr) && ( module->get_active()) ) {
+			LPrintln( "\t\t[", module->get_active() ? "+" : "-" , "] ", module->get_module_name() );
+		}
+		// if ( (module != nullptr) && ( ((LoomModule*)module)->get_active()) ) {
+		// 	LPrintln( "\t\t[", ( ((LoomModule*)module)->get_active()) ? "+" : "-" , "] ", ((LoomModule*)module)->get_module_name() );
+		// }
 	}	
 
 	// // Interrupt Manager
