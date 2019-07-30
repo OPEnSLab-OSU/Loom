@@ -223,9 +223,13 @@ public:
 	/// \return True if success
 	bool		publish_all() { publish_all(internal_json()); }
 
-	/// Iterate over array of commands
+	/// Iterate over list of commands, forwarding to handling module
 	/// \param[in] json		Object containing commands
 	void		dispatch(JsonObject json);
+
+	/// Iterate over list of commands, forwarding to handling module.
+	/// Uses internal json
+	void		dispatch();
 
 	/// Pause for up to 16 seconds.
 	/// You can use this instead of delay to put the device into a 

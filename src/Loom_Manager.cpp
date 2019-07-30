@@ -283,14 +283,10 @@ void LoomManager::add_device_ID_to_json(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 JsonObject LoomManager::internal_json(bool clear)
 {
-	if (clear) {
-		doc.clear();
-		return doc.to<JsonObject>();
+	if (clear) doc.clear(); 
 
-	} 
-	else {
-		return doc.as<JsonObject>();
-	}
+	return doc.as<JsonObject>();
+	
 	// LPrintln("\nDOC MemoryUsage in internal_json: ", doc.memoryUsage());
 
 	// doc["type"] = "unknown";
@@ -325,7 +321,13 @@ void LoomManager::dispatch(JsonObject json)
 	}
 }
 
-// ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+void LoomManager::dispatch()
+{
+	dispatch( internal_json() );
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void LoomManager::display_data()
 {
 	print_device_label();

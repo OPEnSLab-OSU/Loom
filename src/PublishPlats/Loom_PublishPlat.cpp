@@ -63,7 +63,6 @@ void LoomPublishPlat::print_config()
 {
 	LoomModule::print_config();
 	// print internet stuff
-	print_module_label();
 	LPrint("\tInternet Index: ", m_internet_index);
 }
 
@@ -72,7 +71,6 @@ void LoomPublishPlat::print_state()
 {
 	LoomModule::print_state();
 	// print internet stuff
-	print_module_label();
 	LPrint("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());
 }
 

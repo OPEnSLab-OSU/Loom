@@ -14,7 +14,6 @@ LoomModule::LoomModule( const char* module_name, Type type )
 	, device_manager(nullptr)
 {}
 
-
 ///////////////////////////////////////////////////////////////////////////////
 LoomModule::LoomModule( ) 
 	: LoomModule("Unknown", Type::Unknown) {}
@@ -120,6 +119,7 @@ const char* LoomModule::enum_category_string(Category c)
 		case 6 : return "CommPlat";		// CommPlats
 		case 7 : return "InternetPlat";	// InternetPlats
 		case 8 : return "PublishPlat";	// PublishPlats
+		case 9 : return "SubscribePlat";// SubscribePlats
 		default: return "Unknown";		// Unknown	
 	}
 }

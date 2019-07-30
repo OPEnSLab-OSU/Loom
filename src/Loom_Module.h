@@ -52,19 +52,22 @@ public:
 		// InternetPlats
 		InternetPlat=7000,	Ethernet,
 		// PublishPlats
-		PublishPlat=8000,	GoogleSheets
+		PublishPlat=8000,	GoogleSheets, MaxPub,
+		// SubscribePlats
+		SubscribePlats=9000, MaxSub
 	};
 
 	enum class Category {
-		Unknown=0,		// Unknown	
-		Other=1,		// Other
-		Sensor=2,		// Sensors
-		L_RTC=3,		// RTC
-		Actuator=4,		// Actuators
-		LogPlat=5,		// LogPlats
-		CommPlat=6,		// CommPlats
-		InternetPlat=7,	// InternetPlats
-		PublishPlat=8,	// PublishPlats
+		Unknown=0,			// Unknown	
+		Other=1,			// Other
+		Sensor=2,			// Sensors
+		L_RTC=3,			// RTC
+		Actuator=4,			// Actuators
+		LogPlat=5,			// LogPlats
+		CommPlat=6,			// CommPlats
+		InternetPlat=7,		// InternetPlats
+		PublishPlat=8,		// PublishPlats
+		SubscribePlat=9		// PublishPlats
 	};
 
 protected:
@@ -72,7 +75,7 @@ protected:
 	const Type		module_type;		/// Module type (hub / node)
 	LoomManager*	device_manager;		/// Pointer to manager
 	const String	module_name_base;	/// The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
-	const char * 	module_name;
+	const char* 	module_name;
 	bool			active;				/// Whether or not the module should be treated as active
 	bool			print_debug;		/// Individually togglable debug statements
 	Verbosity		print_verbosity;	/// Print verbosity
@@ -223,6 +226,10 @@ private:
 
 
 };
+
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 
 // Used by LoomManager to sort modules in its vector
