@@ -27,6 +27,8 @@ const Factory::NameModulePair Factory::LookupTable[] =
 	
 	// InternetPlat
 	{"Loom_Ethernet",			Construct<Loom_Ethernet_I>,				ConstructDefault<Loom_Ethernet_I>,			ModuleSortType::InternetPlat },
+	{"Loom_WiFi",				Construct<Loom_WiFi_I>,					ConstructDefault<Loom_WiFi_I>,				ModuleSortType::InternetPlat },
+
 
 	// PublishPlat
 	{"Loom_GoogleSheets",		Construct<Loom_GoogleSheets>,			nullptr,									ModuleSortType::PublishPlat },

@@ -11,7 +11,6 @@ Loom_Ethernet_I::Loom_Ethernet_I(
 	) 
 	: LoomInternetPlat( module_name )
 	, m_client( EthernetClient(), TAs, (size_t)TAs_NUM, A7, SSL_ERROR )
-	, m_UDP()
 	, m_mac{}
 	, m_ip()
 	, m_is_connected(false)
@@ -94,7 +93,7 @@ bool Loom_Ethernet_I::is_connected()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Client& Loom_Ethernet_I::connect_to_domain(const char* domain) {
+LoomInternetPlat::ClientSession Loom_Ethernet_I::connect_to_domain(const char* domain) {
 	// if the socket is somehow still open, close it
 	if (m_client.connected()) m_client.stop();
 	// * the rainbow connection *
@@ -104,10 +103,22 @@ Client& Loom_Ethernet_I::connect_to_domain(const char* domain) {
 		print_module_label();
 		LPrint("Ethernet connect failed with error ", m_client.getWriteError(), "\n");
 		m_is_connected = false;
+		return ClientSession();
 	}
-	else m_is_connected = true;
-	// return the client for data reception
-	return m_client;
+	m_is_connected = true;
+	// return a pointer to the client for data reception
+	return LoomInternetPlat::ClientSession(&m_client);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+LoomInternetPlat::UDPPtr Loom_Ethernet_I::open_socket(const uint port)
+{
+	// create the unique pointer
+	UDPPtr ptr = UDPPtr(new EthernetUDP());
+	// use the object created to open a UDP socket
+	if(ptr && ptr->begin(port)) return std::move(ptr);
+	// return a nullptr if any of that failed
+	return UDPPtr();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

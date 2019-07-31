@@ -48,7 +48,6 @@ void LoomNTPSync::second_stage_ctor()
         return;
     }
     // made it here, guess we're good to go!
-    print_module_label();
     print_config();
     m_last_error = Error::OK;
 }
@@ -79,25 +78,29 @@ void LoomNTPSync::measure()
         if (m_last_error == Error::OK && m_internet->is_connected()) {
             // synchronize the RTC
             DateTime timeNow;
+            int attempt_count = 0;
             // repeat synchronize if this is the first power on
             do {
                 timeNow = m_sync_rtc();
                 if (timeNow.unixtime() != 0) m_next_sync = DateTime(0);
                 else delay(100);
-            } while (m_next_sync.unixtime() == 1);
+            } while (m_next_sync.unixtime() == 1 && ++attempt_count < 10);
+            if (attempt_count == 10) m_last_error = Error::NO_CONNECTION;
             // set the next sync time
-            if (m_sync_interval != 0) {
+            else if (m_sync_interval != 0) {
                 // to n hours from now
                 m_next_sync = DateTime(timeNow) + TimeSpan(0, m_sync_interval, 0, 0);
             }
         }
         // else log errors
-        else {
+
+        if (m_last_error != Error::OK) {
             print_module_label();
-            if (m_last_error != Error::OK) 
-                LPrint("Could not synchronize RTC due to error ", static_cast<uint8_t>(m_last_error), "\n");
-            else if (!(m_internet->is_connected()))
-                LPrint("Could not synchronize RTC due to lack of internet");
+            LPrint("Could not synchronize RTC due to error ", static_cast<uint8_t>(m_last_error), "\n");
+        }
+        else if (!(m_internet->is_connected())) {
+            print_module_label();
+            LPrint("Could not synchronize RTC due to lack of internet");
         }
     }
 }

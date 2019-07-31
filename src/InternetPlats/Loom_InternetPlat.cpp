@@ -11,16 +11,16 @@ LoomInternetPlat::LoomInternetPlat(
 	}
 
 ///////////////////////////////////////////////////////////////////////////////
-Client& LoomInternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb) {
+LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb) {
 	// * the rainbow connection *
-	Client& client = connect_to_domain(domain);
-	if (!client.connected()) return client;
+	ClientSession client = connect_to_domain(domain);
+	if (!client) return ClientSession();
 	// ok next, make the http request
 	print_module_label();
 	LPrint("Writing http: ", domain, "\n");
-	write_http_request(client, domain, url, body, verb);
+	write_http_request(*client, domain, url, body, verb);
 	// return the client for data reception
-	return client;
+	return std::move(client);
 }
 
 
@@ -41,8 +41,8 @@ void LoomInternetPlat::write_http_request(Stream& client, const char* domain, co
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-constexpr unsigned int localPort = 8888;		// Local port to listen for UDP packets on
-constexpr int NTP_PACKET_SIZE = 48; 			// NTP time stamp is in the first 48 bytes of the message
+constexpr static unsigned int localPort = 8888;		// Local port to listen for UDP packets on
+constexpr static int NTP_PACKET_SIZE = 48; 			// NTP time stamp is in the first 48 bytes of the message
 /// Static NTP time server
 constexpr static char time_server[] = "pool.ntp.org"; 	// pool.ntp.org NTP server
 
@@ -67,23 +67,25 @@ static void print_unix_time(unsigned long epoch)
 	LPrintln(epoch % 60); // print the second
 }
 
-uint32_t LoomInternetPlat::get_ntp_time(UDP& udp_dev) const {
-	if (!udp_dev.begin(localPort)) {
+uint32_t LoomInternetPlat::get_time() {
+	auto udp_dev = open_socket(localPort);
+	
+	if (!udp_dev) {
 		LPrint("Failed to open UDP for NTP!\n");
 		return 0;
 	}
 
 	byte packet_buffer[NTP_PACKET_SIZE]; 		//buffer to hold incoming and outgoing packets
 
-	m_send_NTP_packet(udp_dev, packet_buffer); // send an NTP packet to a time server
+	m_send_NTP_packet(*udp_dev, packet_buffer); // send an NTP packet to a time server
 
 	unsigned long epoch = 0;
 
 	// wait to see if a reply is available
 	delay(1000);
-	if (udp_dev.parsePacket()) {
+	if (udp_dev->parsePacket()) {
 		// We've received a packet, read the data from it
-		udp_dev.read(packet_buffer, NTP_PACKET_SIZE); // read the packet into the buffer
+		udp_dev->read(packet_buffer, NTP_PACKET_SIZE); // read the packet into the buffer
 
 		// the timestamp starts at byte 40 of the received packet and is four bytes,
 		// or two words, long. First, extract the two words:
@@ -102,8 +104,6 @@ uint32_t LoomInternetPlat::get_ntp_time(UDP& udp_dev) const {
 		print_unix_time(epoch);
 	}
 	else LPrint("Failed to parse UDP packet!\n");
-
-	udp_dev.stop();
 
 	return epoch;
 }

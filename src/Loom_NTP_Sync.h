@@ -70,6 +70,7 @@ private:
 		INVAL_TIME,     ///< Retrieved a time that was invalid
 		INVAL_RTC,      ///< Failed to find a RTC
 		NON_START,      ///< No attempt was made to sync
+		NO_CONNECTION, ///< Repeated attempts were made to sync, but there was no response
 	};
 	/// Store the Internet Plat from second stage contsruction
 	const uint m_internet_module_index;

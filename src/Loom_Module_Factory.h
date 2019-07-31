@@ -19,6 +19,7 @@
 
 // InternetPlats
 #include "InternetPlats/Loom_InternetEthernet.h"
+#include "InternetPlats/Loom_InternetWiFi.h"
 
 // PublishPlats
 
