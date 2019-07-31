@@ -5,23 +5,21 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomNTPSync::LoomNTPSync(	
-		const char*			module_name,
         const uint          internet_module_index,
         const uint          sync_interval_hours
     ) 
-    : LoomModule( module_name, Type::Unknown )
+    : LoomModule( "NTP", Type::NTP )
     , m_internet_module_index( internet_module_index )
     , m_sync_interval( sync_interval_hours )
     , m_internet( nullptr )
     , m_rtc( nullptr )
     , m_next_sync( 1 )
-    , m_last_error( LoomNTPSync::Error::NON_START ) {
-        // module_type = LoomModule::Type::Unknown;
-    }
+    , m_last_error( LoomNTPSync::Error::NON_START ) 
+    {}
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomNTPSync::LoomNTPSync(JsonArrayConst p)
-	: LoomNTPSync( EXPAND_ARRAY(p, 3) ) {}
+	: LoomNTPSync( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomNTPSync::second_stage_ctor() 
@@ -30,7 +28,7 @@ void LoomNTPSync::second_stage_ctor()
     if (device_manager == nullptr) { m_last_error = Error::INVAL_DEVICE_MANAGE; return; }
     // check if internet platform exist
     LoomModule* temp = (LoomModule*)&(device_manager->InternetPlat(m_internet_module_index));
-    if (temp->get_module_type() == LoomModule::Type::Ethernet) m_internet = (LoomInternetPlat*)temp;
+    if (temp->category() == LoomModule::Category::InternetPlat) m_internet = (LoomInternetPlat*)temp;
     else {
         m_last_error = Error::INVAL_INTERNET;
         print_module_label();
@@ -53,8 +51,7 @@ void LoomNTPSync::second_stage_ctor()
         return;
     }
     // made it here, guess we're good to go!
-    print_module_label();
-    LPrint("Ready\n");
+    print_config();
     m_last_error = Error::OK;
 }
 
@@ -62,7 +59,7 @@ void LoomNTPSync::second_stage_ctor()
 void LoomNTPSync::print_config() 
 {
 	print_module_label();
-    if (m_next_sync.unixtime() == 0) LPrint("\tNTPSync set to synchronize once.");
+    if (m_sync_interval == 0) LPrintln("\tNTPSync set to synchronize once.");
     else LPrint("\tNTPSync set to synchronize every ", m_sync_interval, " hours\n");
 }
 
@@ -79,30 +76,34 @@ void LoomNTPSync::print_state()
 void LoomNTPSync::measure() 
 {
     // if a sync is requested
-    if (m_next_sync.unixtime() != 0 && (m_rtc->now() - m_next_sync).totalseconds() >= 0) {
+    if (m_next_sync.unixtime() != 0 && m_rtc->now().secondstime() > m_next_sync.secondstime()) {
         // if the engine is operating correctly
         if (m_last_error == Error::OK && m_internet->is_connected()) {
             // synchronize the RTC
             DateTime timeNow;
+            int attempt_count = 0;
             // repeat synchronize if this is the first power on
             do {
                 timeNow = m_sync_rtc();
                 if (timeNow.unixtime() != 0) m_next_sync = DateTime(0);
                 else delay(100);
-            } while (m_next_sync.unixtime() == 1);
+            } while (m_next_sync.unixtime() == 1 && ++attempt_count < 10);
+            if (attempt_count == 10) m_last_error = Error::NO_CONNECTION;
             // set the next sync time
-            if (m_sync_interval != 0) {
+            else if (m_sync_interval != 0) {
                 // to n hours from now
                 m_next_sync = DateTime(timeNow) + TimeSpan(0, m_sync_interval, 0, 0);
             }
         }
         // else log errors
-        else {
+
+        if (m_last_error != Error::OK) {
             print_module_label();
-            if (m_last_error != Error::OK) 
-                LPrint("Could not synchronize RTC due to error ", static_cast<uint8_t>(m_last_error), "\n");
-            else if (!(m_internet->is_connected()))
-                LPrint("Could not synchronize RTC due to lack of internet");
+            LPrint("Could not synchronize RTC due to error ", static_cast<uint8_t>(m_last_error), "\n");
+        }
+        else if (!(m_internet->is_connected())) {
+            print_module_label();
+            LPrint("Could not synchronize RTC due to lack of internet");
         }
     }
 }

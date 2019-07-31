@@ -52,22 +52,7 @@ public:
 		// InternetPlats
 		InternetPlat=7000,	Ethernet,
 		// PublishPlats
-		PublishPlat=8000,	GoogleSheets, MaxPub,
-		// SubscribePlats
-		SubscribePlats=9000, MaxSub
-	};
 
-	enum class Category {
-		Unknown=0,			// Unknown	
-		Other=1,			// Other
-		Sensor=2,			// Sensors
-		L_RTC=3,			// RTC
-		Actuator=4,			// Actuators
-		LogPlat=5,			// LogPlats
-		CommPlat=6,			// CommPlats
-		InternetPlat=7,		// InternetPlats
-		PublishPlat=8,		// PublishPlats
-		SubscribePlat=9		// PublishPlats
 	};
 
 protected:

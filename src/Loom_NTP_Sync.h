@@ -23,11 +23,9 @@ public:
 
 	/// NTP Sync module constructor.
 	///
-	/// \param[in]	module_name				String | <"NTP1"> | null | NTP synchronizer module name
 	/// \param[in]  internet_module_index	Int | <0> | [0-5] | Index from zero of of the desired internet platform based on the JSON configuration
 	/// \param[in]  sync_interval_hours		Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
 	LoomNTPSync(
-		const char*			module_name				= "NTP1",
 		const uint			internet_module_index	= 0,
 		const uint			sync_interval_hours		= 0
 	);
@@ -62,6 +60,7 @@ private:
 	
 	/// the actual synchronization function
 	DateTime m_sync_rtc();
+	
 	/// enumerate errors
 	enum class Error {
 		OK,
@@ -70,7 +69,9 @@ private:
 		INVAL_TIME,     ///< Retrieved a time that was invalid
 		INVAL_RTC,      ///< Failed to find a RTC
 		NON_START,      ///< No attempt was made to sync
+		NO_CONNECTION, ///< Repeated attempts were made to sync, but there was no response
 	};
+	
 	/// Store the Internet Plat from second stage contsruction
 	const uint m_internet_module_index;
 	/// Store the sync interval, in hours
