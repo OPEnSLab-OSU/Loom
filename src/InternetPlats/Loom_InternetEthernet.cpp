@@ -95,10 +95,6 @@ bool Loom_Ethernet_I::is_connected()
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::ClientSession Loom_Ethernet_I::connect_to_domain(const char* domain) {
-Client& Loom_Ethernet_I::connect_to_domain(const char* domain) 
-{
-	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
-
 	// if the socket is somehow still open, close it
 	if (m_client.connected()) m_client.stop();
 	// * the rainbow connection *
@@ -110,12 +106,13 @@ Client& Loom_Ethernet_I::connect_to_domain(const char* domain)
 		m_is_connected = false;
 		return ClientSession();
 	}
-
+	m_is_connected = true;
+	// return a pointer to the client for data reception
+	return LoomInternetPlat::ClientSession(&m_client);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::UDPPtr Loom_Ethernet_I::open_socket(const uint port)
-void Loom_Ethernet_I::m_send_NTP_packet(byte packet_buffer[])
 {
 	// create the unique pointer
 	UDPPtr ptr = UDPPtr(new EthernetUDP());

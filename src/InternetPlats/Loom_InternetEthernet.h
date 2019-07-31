@@ -17,7 +17,6 @@ protected:
 	
 	SSLClient<EthernetClient> m_client;		/// Underlying Ethernet SSLclient instance
 
-	
 	byte			m_mac[6];				/// The Ethernet MAC address
 	IPAddress		m_ip;					/// The devices IP address
 	
@@ -51,9 +50,18 @@ public:
 /*@{*/ //======================================================================
 
 	// remember to close the socket!
+	ClientSession connect_to_domain(const char* domain) override;
 
+	/// Connect to internet
+	void connect() override;
 
+	/// Whether or not connected to internet
+	/// \return True if connect, false otherwise
+	bool is_connected() override;
 
+	/// Open a UDP socket for sending and recieving incoming data (WARNING: Be careful about recieving data from an open socket!)
+	/// \returns A UDP socket for transmitting and recieving, remember to close the socket when you are done!
+	UDPPtr open_socket(const uint port) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

@@ -314,17 +314,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Add a module to be managed.
-	/// Overloaded as to sort by module type
-	void		add_module(Loom_Interrupt_Manager* interrupt_manager);
-	void		add_module(Loom_Sleep_Manager* sleep_manager);
-	void		add_module(LoomRTC* rtc);
 	void		add_module(LoomModule* module);
-	void		add_module(LoomSensor* sensor);
-	void		add_module(LoomActuator* actuator);
-	void		add_module(LoomCommPlat* comm_plat);
-	void		add_module(LoomInternetPlat* internet_plat);
-	void 		add_module(LoomPublishPlat* publish_module); 
-	void		add_module(LoomLogPlat* log_plat);
 
 //=============================================================================
 ///@name	GETTERS

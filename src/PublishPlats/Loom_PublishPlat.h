@@ -51,7 +51,6 @@ public:
 	/// Accesses Json from LoomManager
 	void publish();
 
-
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -67,6 +66,7 @@ protected:
 	virtual bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) = 0;
 
 private:
+
 	LoomInternetPlat* m_internet;
 	const uint m_internet_index;
 
@@ -74,5 +74,6 @@ private:
 	bool m_validate_json(const JsonObjectConst json);
 	/// Print a JSON error
 	void m_print_json_error(const char* str);
+	
 };
 

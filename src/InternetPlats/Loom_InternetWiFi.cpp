@@ -84,7 +84,7 @@ LoomInternetPlat::UDPPtr Loom_WiFi_I::open_socket(const uint port)
 	// create the unique pointer
 	UDPPtr ptr = UDPPtr(new WiFiUDP());
 	// use the object created to open a UDP socket
-	if(ptr && ptr->begin(port)) return std::move(ptr);
+	if (ptr && ptr->begin(port)) return std::move(ptr);
 	// return a nullptr if any of that failed
 	return UDPPtr();
 }
