@@ -46,16 +46,6 @@ void Loom_Relay::package(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Relay::dispatch(JsonObject json)
 {
-	// if ( strcmp(json["module"], module_name) == 0 ) {
-	// 	JsonArray params = json["params"];
-	// 	return functionRoute(
-	// 		json["func"],
-	// 		"set", [this, params]() { if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } } 
-	// 	);
-	// } else {
-	// 	return false;
-	// }
-
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];
 		switch( (char)json["func"] ) {

@@ -58,15 +58,6 @@ void Loom_Servo::package(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Servo::dispatch(JsonObject json)
 {
-	// if ( strcmp(json["module"], module_name) == 0 ) {
-	// 	JsonArray params = json["params"];
-	// 	return functionRoute(
-	// 		json["func"],
-	// 		"set_degree", [this, params]() { if (params.size() >= 2) { set_degree( EXPAND_ARRAY(params, 2) ); } } 
-	// 	);
-	// } else {
-	// 	return false;
-	// }
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];
 		switch( (char)json["func"] ) {
@@ -74,7 +65,6 @@ bool Loom_Servo::dispatch(JsonObject json)
 		}
 	}
 	return false;
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
