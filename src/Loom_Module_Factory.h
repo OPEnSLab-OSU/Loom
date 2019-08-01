@@ -22,8 +22,11 @@
 #include "InternetPlats/Loom_InternetWiFi.h"
 
 // PublishPlats
-
 #include "PublishPlats/Loom_GoogleSheets.h"
+#include "PublishPlats/Loom_Max_Pub.h"
+
+// SubscribePlats
+#include "SubscribePlats/Loom_Max_Sub.h"
 
 // LogPlats
 #include "LogPlats/Loom_OLED.h"

@@ -7,26 +7,54 @@
 LoomPublishPlat::LoomPublishPlat(	
 		const char*			module_name,
 		LoomModule::Type	module_type,
-		uint8_t				internet_index
+		// uint8_t				internet_index
+		LoomModule::Type	internet_type
 	) 
 	: LoomModule( module_name, module_type )
 	, m_internet( nullptr )
-	, m_internet_index( internet_index ) 
+	, internet_type( internet_type )
+	// , m_internet_index( internet_index ) 
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomPublishPlat::second_stage_ctor() 
 {
 	// check to see if we have a device manager
-	if (device_manager == nullptr) { print_module_label(); LPrint("No Device Manager!\n"); return; }
+	if (device_manager == nullptr) { 
+		print_module_label(); 
+		LPrint("No Device Manager!\n"); 
+		return; 
+	}
+
 	// check if internet platform exist
-	LoomModule* temp = (LoomModule*)&(device_manager->InternetPlat(m_internet_index));
-	if (temp->get_module_type() == LoomModule::Type::Ethernet) m_internet = (LoomInternetPlat*)temp;
+	// LoomModule* temp = (LoomModule*)&(device_manager->InternetPlat(m_internet_index));
+
+	LoomInternetPlat* temp;
+	switch (internet_type) {
+		case LoomModule::Type::Ethernet: 
+			temp = (LoomInternetPlat*)&(device_manager->Ethernet() );
+			break;
+		case LoomModule::Type::WiFi: 
+			temp = (LoomInternetPlat*)&(device_manager->WiFi() );
+			break;
+		default:
+			temp = nullptr;
+	}
+	
+	
+	print_module_label();
+	// if (temp->category() == LoomModule::Category::InternetPlat) {
+	if (temp != nullptr && temp->get_module_type() != LoomModule::Type::Unknown) {
+		LPrintln("Found internet module: ", temp->get_module_name() , " (", (int)temp->get_module_type() , ")");
+		// m_internet = temp;
+		m_internet = temp;
+	}
 	else {
-		print_module_label();
-		LPrint("Unable to find internet platform, intstead got: ", (int)(temp->get_module_type()), " using index ", m_internet_index, "\n");
+		// LPrint("Unable to find internet platform, intstead got: ", (int)(temp->get_module_type()), " using index ", m_internet_index, "\n");
+		LPrintln("Unable to find internet platform");
 		return;
 	}
+
 	// made it here, guess we're good to go!
 	print_module_label();
 	LPrint("Ready\n");
@@ -36,7 +64,7 @@ void LoomPublishPlat::second_stage_ctor()
 bool LoomPublishPlat::publish(const JsonObject json) 
 {
 	// check validity
-	if(m_internet == nullptr  || !m_validate_json(json)){
+	if (m_internet == nullptr  || !m_validate_json(json)){
 		print_module_label();
 		LPrint("Could not publish without ");
 		if(m_internet == nullptr) LPrint("internet module\n");
@@ -48,30 +76,29 @@ bool LoomPublishPlat::publish(const JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomPublishPlat::publish()
+bool LoomPublishPlat::publish()
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
 		if (strcmp(tmp["type"], "data") == 0 ) {
-			publish(tmp);
+			return publish(tmp);
 		}
 	}
+	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomPublishPlat::print_config() 
 {
 	LoomModule::print_config();
-	// print internet stuff
-	LPrint("\tInternet Index: ", m_internet_index);
+	LPrintln("\tInternet Type: ", (int)internet_type);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomPublishPlat::print_state() 
 {
 	LoomModule::print_state();
-	// print internet stuff
-	LPrint("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());
+	LPrintln("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());
 }
 
 ///////////////////////////////////////////////////////////////////////////////

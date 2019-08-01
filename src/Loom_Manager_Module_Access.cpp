@@ -91,6 +91,19 @@ LoomInternetPlat& LoomManager::InternetPlat(const uint8_t idx)
 	return *(LoomInternetPlat*)(&global_stub);
 }
 
+Loom_Ethernet_I& LoomManager::Ethernet(uint8_t idx) 
+{
+	LoomModule* tmp = find_module(LoomModule::Type::Ethernet, idx);
+	return (*(Loom_Ethernet_I*)( (tmp) ? tmp : &global_stub ));
+}
+
+Loom_WiFi_I& LoomManager::WiFi(uint8_t idx) 
+{
+	LoomModule* tmp = find_module(LoomModule::Type::WiFi, idx);
+	return (*(Loom_WiFi_I*)( (tmp) ? tmp : &global_stub ));
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // --- PublishPlats ---
 
@@ -100,6 +113,29 @@ LoomPublishPlat& LoomManager::PublishPlat(const uint8_t idx)
 	// else return *(modules[idx]);
 	return *(LoomPublishPlat*)(&global_stub);
 }
+
+Loom_GoogleSheets& LoomManager::GoogleSheets(uint8_t idx) 
+{
+	LoomModule* tmp = find_module(LoomModule::Type::GoogleSheets, idx);
+	return (*(Loom_GoogleSheets*)( (tmp) ? tmp : &global_stub ));
+}
+
+Loom_MaxPub& LoomManager::MaxPub(uint8_t idx) 
+{
+	LoomModule* tmp = find_module(LoomModule::Type::MaxPub, idx);
+	return (*(Loom_MaxPub*)( (tmp) ? tmp : &global_stub ));
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// --- SubscribePlats ---
+
+Loom_MaxSub& LoomManager::MaxSub(uint8_t idx) 
+{
+	LoomModule* tmp = find_module(LoomModule::Type::MaxSub, idx);
+	return (*(Loom_MaxSub*)( (tmp) ? tmp : &global_stub ));
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // --- LogPlats ---

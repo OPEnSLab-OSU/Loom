@@ -235,7 +235,12 @@ public:
 	uint32_t get_time()
 	{ LPrintln(error_msg); return 0; }
 
-
+	///////////////////////////////////////////////////////////////////////////////
+	// Publishing Platforms
+	bool publish(const JsonObject json)
+	{ LPrintln(error_msg); return false; }
+	bool publish()
+	{ LPrintln(error_msg); return false; }
 
 	///////////////////////////////////////////////////////////////////////////////
 	// Mulitplexer

@@ -31,11 +31,20 @@ public:
 	/// \param[in]  device_id		String | <"Mine"> | null | Identifier to use for the device in the spreadsheet.
 	Loom_GoogleSheets(	
 						const char*		module_name,
-						const uint8_t	internet_index,
+						// const uint8_t	internet_index,
+						LoomModule::Type	internet_type,
 						const char*		script_url,
 						const char*		sheet_id,
 						const char*		tab_id = "Data",
 						const char*		device_id = "Mine"
+
+						// char*		module_name,
+						// // uint8_t	internet_index,
+						// LoomModule::Type	internet_type,
+						// char*		script_url,
+						// char*		sheet_id,
+						// char*		tab_id = "Data",
+						// char*		device_id = "Mine"
 					);
 
 	/// Constructor that takes Json Array, extracts args
@@ -50,16 +59,23 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	/// Send JSON data to a google sheet
-	/// \param[in] json The JSON data, formatted according to publish();
-	/// \param[in] plat A pointer to an internet platform
-	bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
+	// /// Send JSON data to a google sheet
+	// /// \param[in] json The JSON data, formatted according to publish();
+	// /// \param[in] plat A pointer to an internet platform
+	// bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
 	void print_config() override;
+
+protected:
+
+	/// Send JSON data to a google sheet
+	/// \param[in] json The JSON data, formatted according to publish();
+	/// \param[in] plat A pointer to an internet platform
+	bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
 
 private:
 	/// Private utility send function

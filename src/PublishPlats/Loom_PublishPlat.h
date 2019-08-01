@@ -13,6 +13,13 @@
 class LoomPublishPlat : public LoomModule
 {
 
+protected:
+
+	LoomInternetPlat* m_internet;
+	// const uint m_internet_index;
+
+	LoomModule::Type	internet_type;
+
 public:
 
 //=============================================================================
@@ -26,7 +33,8 @@ public:
 	LoomPublishPlat( 
 		const char*			module_name,
 		LoomModule::Type	module_type,
-		const uint8_t		internet_index
+		LoomModule::Type	internet_type
+		// const uint8_t		internet_index
 	);
 
 	/// Destructor
@@ -49,7 +57,7 @@ public:
 
 	/// Version of log for use with LoomManager.
 	/// Accesses Json from LoomManager
-	void publish();
+	bool publish();
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -65,10 +73,10 @@ protected:
 	/// \param[in]	plat	Internet platform to send on
 	virtual bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) = 0;
 
-private:
+	// Switch to: ?
+	// virtual bool send_to_internet(const JsonObject json) = 0;
 
-	LoomInternetPlat* m_internet;
-	const uint m_internet_index;
+private:
 
 	/// Check that the JSON supplied meets the format criteria required by publish()
 	bool m_validate_json(const JsonObjectConst json);

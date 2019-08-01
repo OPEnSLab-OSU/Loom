@@ -100,7 +100,6 @@ void Loom_WiFi_I::print_config()
 void Loom_WiFi_I::print_state()
 {
 	LoomInternetPlat::print_state();	
-	
 	LPrintln("\tConnected:          : ", (is_connected()) ? "True" : "False" );
 	LPrintln("\tSSID:               : ", SSID );
 	LPrintln("\tRSSi:               : ", WiFi.RSSI(), " dBm" );

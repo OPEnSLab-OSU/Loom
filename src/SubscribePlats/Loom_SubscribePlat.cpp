@@ -6,18 +6,65 @@
 ///////////////////////////////////////////////////////////////////////////////
 LoomSubscribePlat::LoomSubscribePlat(	
 		const char*			module_name,
-		LoomModule::Type	module_type
-	// 	uint8_t				internet_index
+		LoomModule::Type	module_type,
+		LoomModule::Type	internet_type
 	) 
 	: LoomModule( module_name, module_type )
-	, internetPlat( nullptr )
-	, internet_index( internet_index ) 
+	, m_internet( nullptr )
+	, internet_type( internet_type ) 
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomSubscribePlat::second_stage_ctor() 
 {
+	// check to see if we have a device manager
+	if (device_manager == nullptr) { 
+		print_module_label(); 
+		LPrint("No Device Manager!\n"); 
+		return; 
+	}
 
+	// check if internet platform exists
+	LoomInternetPlat* temp;
+	switch (internet_type) {
+		case LoomModule::Type::Ethernet: 
+			temp = (LoomInternetPlat*)&(device_manager->Ethernet() );
+			break;
+		case LoomModule::Type::WiFi: 
+			temp = (LoomInternetPlat*)&(device_manager->WiFi() );
+			break;
+		default:
+			temp = nullptr;
+	}
+	
+	print_module_label();
+	if (temp != nullptr && temp->get_module_type() != LoomModule::Type::Unknown) {
+		LPrintln("Found internet module: ", temp->get_module_name() , " (", (int)temp->get_module_type() , ")");
+		m_internet = temp;
+	}
+	else {
+		LPrintln("Unable to find internet platform");
+		return;
+	}
+
+	// made it here, guess we're good to go!
+	print_module_label();
+	LPrint("Ready\n");
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomSubscribePlat::print_config() 
+{
+	LoomModule::print_config();
+	LPrintln("\tInternet Type: ", (int)internet_type);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomSubscribePlat::print_state() 
+{
+	LoomModule::print_state();
+	LPrintln("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -31,37 +78,3 @@ bool LoomSubscribePlat::subscribe()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomSubscribePlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
-{
-	if (print_verbosity == Verbosity::V_HIGH) {
-		print_module_label();
-		LPrintln("Received: ", (const char*)buffer);
-		print_module_label();
-		LPrintln("Len: ", strlen(buffer));
-	}
-
-	messageJson.clear();
-
-	if (deserializeMsgPack(messageJson, buffer) != DeserializationError::Ok ) {
-		print_module_label();
-		LPrintln("Failed to parse MsgPack");
-		return false;
-	}
-
-	bool status = json.set(messageJson.as<JsonObject>());
-	if (!status) return false;
-
-	if (print_verbosity == Verbosity::V_HIGH) {
-		print_module_label();
-		LPrintln("\nInternal messageJson:");
-		serializeJsonPretty(messageJson, Serial);
-
-		// LPrintln("\nJson passed in:");
-		// serializeJsonPretty(json, Serial);
-		LPrintln();
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-

@@ -25,12 +25,17 @@ const Factory::NameModulePair Factory::LookupTable[] =
 	{"Bluetooth",			Construct<Loom_Bluetooth>,				ConstructDefault<Loom_Bluetooth> },
 	
 	// InternetPlat
-	{"Ethernet",			Construct<Loom_Ethernet_I>,				ConstructDefault<Loom_Ethernet_I> },
+	// {"Ethernet",			Construct<Loom_Ethernet_I>,				ConstructDefault<Loom_Ethernet_I> },
 	// {"Ethernet",			Construct<Loom_Ethernet_I>,				nullptr },
-	{"Loom_WiFi",			Construct<Loom_WiFi_I>,					ConstructDefault<Loom_WiFi_I> },
+	{"WiFi",				Construct<Loom_WiFi_I>,					ConstructDefault<Loom_WiFi_I> },
 
 	// PublishPlat
-	{"GoogleSheets",		Construct<Loom_GoogleSheets>,			nullptr},
+	{"GoogleSheets",		Construct<Loom_GoogleSheets>,			nullptr },
+	// {"MaxPub",				Construct<Loom_MaxPub>,					ConstructDefault<Loom_MaxPub> },
+	{"MaxPub",				Construct<Loom_MaxPub>,					nullptr },
+
+	// {"MaxSub",				Construct<Loom_MaxSub>,					ConstructDefault<Loom_MaxSub> },
+	{"MaxSub",				Construct<Loom_MaxSub>,					nullptr },
 
 	// LogPlat
 	{"OLED",				Construct<Loom_OLED>,					ConstructDefault<Loom_OLED> },

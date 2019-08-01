@@ -103,6 +103,7 @@ LoomModule::Category LoomModule::category()
 		case 6 : return Category::CommPlat;		// CommPlats
 		case 7 : return Category::InternetPlat;	// InternetPlats
 		case 8 : return Category::PublishPlat;	// PublishPlats
+		case 9 : return Category::SubscribePlat;// SubscribePlats
 		default: return Category::Unknown;		// Unknown	
 	}
 }

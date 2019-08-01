@@ -15,16 +15,16 @@ class LoomSubscribePlat : public LoomModule
 
 protected:
 
-	LoomInternetPlat*	internetPlat;
+	LoomInternetPlat*	m_internet;
 	
-	const uint8_t		internet_index;
+	LoomModule::Type	internet_type;
 
 
 	// Subscribe Platforms need their own JsonDocument because an incoming message
 	// can only be deserialized into JsonDocuments, not JsonObjects.
 	// And it seemed bad design to pass around references to the LoomManager's
 	// internal JsonDocument. 
-	// Especially as the LoomManager is intended to be non-mandatory for usage of Loom
+	// Also as the LoomManager is intended to be non-mandatory for usage of Loom
 	StaticJsonDocument<1000> messageJson;	/// Document to read incoming data into
 
 public:
@@ -36,11 +36,10 @@ public:
 	/// Loom Subscribe Platform module constructor.
 	///
 	/// \param[in]	module_name			String | <"Internet-Plat"> | null | Subscribe platform module name
-	/// \param[in]  internet_index		Int | <0> | [0-5] | Index from zero of of the desired internet platform based on the JSON configuration
 	LoomSubscribePlat( 
 		const char*			module_name,
-		LoomModule::Type	module_type
-		// const uint8_t		internet_index
+		LoomModule::Type	module_type,
+		LoomModule::Type	internet_type
 	);
 
 	/// Destructor
@@ -56,7 +55,7 @@ public:
 	void		package(JsonObject json) override { /* do nothing for now */ }
 	bool		dispatch(JsonObject json) override { /* do nothing for now */}
 
-	virtual bool subscribe(const JsonObject json) = 0;
+	virtual bool subscribe(JsonObject json) = 0;
 
 	/// Version of log for use with LoomManager.
 	/// Accesses Json from LoomManager
@@ -67,18 +66,11 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	// virtual void print_state();
-	// virtual void print_config();
+	virtual void print_config();
+	virtual void print_state();
 
 protected:
 
-	/// Deserialize a MessagePack buffer into a JsonObject.
-	/// Also clears the json, contains prints and error checks.
-	/// \param[in]	buffer		Buffer to deserialize
-	/// \param[out]	json		JsonObject to deserialize into
-	/// \param[in]	max_len		Length of buffer
-	/// return True if success
-	bool msgpack_buffer_to_json(const char* buffer, JsonObject json);
 
 };
 

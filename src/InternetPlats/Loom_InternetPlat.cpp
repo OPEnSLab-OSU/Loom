@@ -10,7 +10,8 @@ LoomInternetPlat::LoomInternetPlat(
 	: LoomModule( module_name, module_type ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb) {
+LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb) 
+{
 	// * the rainbow connection *
 	ClientSession client = connect_to_domain(domain);
 	if (!client) return ClientSession();
@@ -22,9 +23,9 @@ LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domai
 	return std::move(client);
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb) {
+void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb) 
+{
 	/// print the initial http request
 	client.print(verb);
 	client.print(" ");
@@ -66,7 +67,9 @@ static void print_unix_time(unsigned long epoch)
 	LPrintln(epoch % 60); // print the second
 }
 
-uint32_t LoomInternetPlat::get_time() {
+///////////////////////////////////////////////////////////////////////////////
+uint32_t LoomInternetPlat::get_time() 
+{
 	auto udp_dev = open_socket(localPort);
 	
 	if (!udp_dev) {
@@ -108,7 +111,8 @@ uint32_t LoomInternetPlat::get_time() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const {
+void LoomInternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const 
+{
 	// set all bytes in the buffer to 0
 	memset(packet_buffer, 0, NTP_PACKET_SIZE);
 	// Initialize values needed to form NTP request

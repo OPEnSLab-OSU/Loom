@@ -121,6 +121,9 @@ void LoomManager::add_module(LoomModule* module)
 	modules.emplace_back(module);
 	module->link_device_manager(this);
 
+
+// Add the following operations to second stage construction
+
 	// If is RTC
 	if (  (module->category() == LoomModule::Category::L_RTC) 
 	   && (interrupt_manager != nullptr) ) {
@@ -153,6 +156,7 @@ void LoomManager::add_module(LoomModule* module)
 			this->interrupt_manager->link_sleep_manager(this->sleep_manager);
 		}
 	}
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -233,11 +237,12 @@ void LoomManager::set_package_verbosity(Verbosity v, bool set_modules)
 void LoomManager::measure()
 {	
 	for (auto module : modules) {	
-		if (module->get_module_type() == LoomModule::Type::Multiplexer) {
-			((Loom_Multiplexer*)module)->measure();
-		} else if ( module->category() == LoomModule::Category::Sensor ) {
+		if ( module->category() == LoomModule::Category::Sensor ) {
 			((LoomSensor*)module)->measure();
 		}
+		else if (module->get_module_type() == LoomModule::Type::Multiplexer) {
+			((Loom_Multiplexer*)module)->measure();
+		} 
 		else if (module->get_module_type() == LoomModule::Type::NTP) {
 			((LoomNTPSync*)module)->measure();
 		}
@@ -287,13 +292,17 @@ void LoomManager::add_device_ID_to_json(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 JsonObject LoomManager::internal_json(bool clear)
 {
-	if (clear) doc.clear(); 
+	if (clear) {
+		// doc.clear(); 
+		return doc.to<JsonObject>(); // clears in the process
+	} else {
+		return doc.as<JsonObject>();
+	}
 
-	return doc.as<JsonObject>();
 	
+	// doc["type"] = "unknown"; // JsonObject::set wont work if there is not anything in object
 	// LPrintln("\nDOC MemoryUsage in internal_json: ", doc.memoryUsage());
 
-	// doc["type"] = "unknown";
 	// return doc.as<JsonObject>();
 
 }

@@ -67,7 +67,7 @@ public:
 		CommPlat=6,			// CommPlats
 		InternetPlat=7,		// InternetPlats
 		PublishPlat=8,		// PublishPlats
-		SubscribePlat=9		// PublishPlats
+		SubscribePlat=9		// SubscribePlats
 	};
 
 protected:

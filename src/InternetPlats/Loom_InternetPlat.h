@@ -23,9 +23,11 @@ protected:
 	void write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb);
 
 public:
+
 //=============================================================================
 ///@name	TYPES
 /*@{*/ //======================================================================
+	
 	/// Close the socket and delete the UDP object when the unique ptr dissapears
 	struct UDPDeletor {
 		void operator() (UDP* p) {
@@ -110,5 +112,7 @@ public:
 	uint32_t get_time();
 	
 private:
+
 	void m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const;
+
 };

@@ -62,7 +62,6 @@ void Loom_Ethernet_I::print_config()
 void Loom_Ethernet_I::print_state()
 {
 	LoomInternetPlat::print_state();	
-	print_module_label();
 	LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 

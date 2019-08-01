@@ -65,9 +65,17 @@ class Loom_SD;
 
 // InternetPlats
 class LoomInternetPlat;
+class Loom_Ethernet_I;
+class Loom_WiFi_I;
 
-// Publish plat
+// PublishPlats
 class LoomPublishPlat;
+class Loom_GoogleSheets;
+class Loom_MaxPub;
+
+// SubscribePlats
+class LoomSubscribePlat;
+class Loom_MaxSub;
 
 // RTC
 class Loom_DS3231;
@@ -129,7 +137,7 @@ protected:
 	Verbosity	print_verbosity;		/// Print detail verbosity
 	Verbosity	package_verbosity;		/// Package detail verbosity
 
-	StaticJsonDocument<1500> doc;		/// Json data
+	StaticJsonDocument<2000> doc;		/// Json data
 
 public:
 
@@ -407,65 +415,73 @@ public:
 /*@{*/ //======================================================================
 
 	// Other
-	Loom_Sleep_Manager&			SleepManager(uint8_t idx = 0);
-	Loom_Interrupt_Manager&		InterruptManager(uint8_t idx = 0);
-	Loom_Multiplexer&			Multiplexer(uint8_t idx = 0);
+	Loom_Sleep_Manager&			SleepManager(const uint8_t idx = 0);
+	Loom_Interrupt_Manager&		InterruptManager(const uint8_t idx = 0);
+	Loom_Multiplexer&			Multiplexer(const uint8_t idx = 0);
 
 	// CommPlats
-	Loom_LoRa&			LoRa(uint8_t idx = 0);
-	Loom_nRF&			nRF(uint8_t idx = 0);
-	Loom_Bluetooth& 	Bluetooth(uint8_t idx = 0); 
+	Loom_LoRa&			LoRa(const uint8_t idx = 0);
+	Loom_nRF&			nRF(const uint8_t idx = 0);
+	Loom_Bluetooth& 	Bluetooth(const uint8_t idx = 0); 
 
-	// Loom_SlipSerial&	SlipSerial(uint8_t idx = 0);
+	// Loom_SlipSerial&	SlipSerial(const uint8_t idx = 0);
 
 	// LogPlats
-	Loom_OLED&			OLED(uint8_t idx = 0);
-	Loom_SD&			SDCARD(uint8_t idx = 0);
+	Loom_OLED&			OLED(const uint8_t idx = 0);
+	Loom_SD&			SDCARD(const uint8_t idx = 0);
 
 	// InternetPlats
 	LoomInternetPlat&	InternetPlat(const uint8_t idx = 0);
+	Loom_Ethernet_I&	Ethernet(const uint8_t idx = 0);
+	Loom_WiFi_I&		WiFi(const uint8_t idx = 0);
 
 	// PublishPlats
 	LoomPublishPlat& 	PublishPlat(const uint8_t idx = 0);
+	Loom_GoogleSheets&	GoogleSheets(const uint8_t idx = 0);
+	Loom_MaxPub&		MaxPub(const uint8_t idx = 0);
+
+	// SubscribePlats
+	Loom_MaxSub&		MaxSub(const uint8_t idx = 0);
+
 
 	// RTC
-	Loom_DS3231&		DS3231(uint8_t idx = 0);
-	Loom_PCF8523&		PCF8523(uint8_t idx = 0);
+	Loom_DS3231&		DS3231(const uint8_t idx = 0);
+	Loom_PCF8523&		PCF8523(const uint8_t idx = 0);
 
 	// Actuators
-	Loom_Neopixel&		Neopixel(uint8_t idx = 0);
-	Loom_Relay&			Relay(uint8_t idx = 0);
-	Loom_Servo&			Servo(uint8_t idx = 0);
-	Loom_Stepper&		Stepper(uint8_t idx = 0);
+	Loom_Neopixel&		Neopixel(const uint8_t idx = 0);
+	Loom_Relay&			Relay(const uint8_t idx = 0);
+	Loom_Servo&			Servo(const uint8_t idx = 0);
+	Loom_Stepper&		Stepper(const uint8_t idx = 0);
 
 	// Sensors
-	Loom_Analog&		Analog(uint8_t idx = 0);
-	Loom_Digital&		Digital(uint8_t idx = 0);
+	Loom_Analog&		Analog(const uint8_t idx = 0);
+	Loom_Digital&		Digital(const uint8_t idx = 0);
 
 	// I2C
-	Loom_AS7262&		AS7262(uint8_t idx = 0);
-	Loom_AS7263&		AS7263(uint8_t idx = 0);
-	Loom_AS7265X&		AS7265X(uint8_t idx = 0);
-	Loom_FXAS21002&		FXAS21002(uint8_t idx = 0);
-	Loom_FXOS8700&		FXOS8700(uint8_t idx = 0);
-	Loom_LIS3DH&		LIS3DH(uint8_t idx = 0);
-	Loom_MB1232&		MB1232(uint8_t idx = 0);
-	Loom_MMA8451&		MMA8451(uint8_t idx = 0);
-	Loom_MPU6050&		MPU6050(uint8_t idx = 0);
-	Loom_MS5803&		MS5803(uint8_t idx = 0);
-	Loom_SHT31D&		SHT31D(uint8_t idx = 0);
-	Loom_TMP007&		TMP007(uint8_t idx = 0);
-	Loom_TSL2561&		TSL2561(uint8_t idx = 0);
-	Loom_TSL2591&		TSL2591(uint8_t idx = 0);
-	Loom_ZXGesture&		ZXGesture(uint8_t idx = 0);
+	Loom_AS7262&		AS7262(const uint8_t idx = 0);
+	Loom_AS7263&		AS7263(const uint8_t idx = 0);
+	Loom_AS7265X&		AS7265X(const uint8_t idx = 0);
+	Loom_FXAS21002&		FXAS21002(const uint8_t idx = 0);
+	Loom_FXOS8700&		FXOS8700(const uint8_t idx = 0);
+	Loom_LIS3DH&		LIS3DH(const uint8_t idx = 0);
+	Loom_MB1232&		MB1232(const uint8_t idx = 0);
+	Loom_MMA8451&		MMA8451(const uint8_t idx = 0);
+	Loom_MPU6050&		MPU6050(const uint8_t idx = 0);
+	Loom_MS5803&		MS5803(const uint8_t idx = 0);
+	Loom_SHT31D&		SHT31D(const uint8_t idx = 0);
+	Loom_TMP007&		TMP007(const uint8_t idx = 0);
+	Loom_TSL2561&		TSL2561(const uint8_t idx = 0);
+	Loom_TSL2591&		TSL2591(const uint8_t idx = 0);
+	Loom_ZXGesture&		ZXGesture(const uint8_t idx = 0);
 
 	// SDI12
-	Loom_Decagon5TM&	Decagon5TM(uint8_t idx = 0);
-	Loom_DecagonGS3&	DecagonGS3(uint8_t idx = 0);
+	Loom_Decagon5TM&	Decagon5TM(const uint8_t idx = 0);
+	Loom_DecagonGS3&	DecagonGS3(const uint8_t idx = 0);
 
 	// SPI
-	Loom_MAX31855&		MAX31855(uint8_t idx = 0);
-	Loom_MAX31856&		MAX31856(uint8_t idx = 0);
+	Loom_MAX31855&		MAX31855(const uint8_t idx = 0);
+	Loom_MAX31856&		MAX31856(const uint8_t idx = 0);
 
 protected:
 
