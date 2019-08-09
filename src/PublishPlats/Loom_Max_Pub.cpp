@@ -9,7 +9,6 @@ Loom_MaxPub::Loom_MaxPub(
 	)   
 	: LoomPublishPlat( "MaxPub", Type::MaxPub, internet_type )
 	, remoteIP({192,168,1,255})
-	// , remoteIP({192,168,0,14})
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -93,6 +92,8 @@ void Loom_MaxPub::set_ip(IPAddress ip)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MaxPub::set_ip()
 {
+	print_module_label();
+	LPrintln("Received command to set IP to send to");
 	Loom_MaxSub* temp;
 	if (device_manager && (temp = (Loom_MaxSub*)&(device_manager->MaxSub())) ) {
 		IPAddress ip = temp->get_remote_IP();

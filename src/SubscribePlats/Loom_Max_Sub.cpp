@@ -10,8 +10,7 @@ Loom_MaxSub::Loom_MaxSub(
 	)   
 	: LoomSubscribePlat( "MaxSub", Type::MaxSub, internet_type )
 	, auto_dispatch(auto_dispatch)
-{
-} 
+{}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxSub::Loom_MaxSub(JsonArrayConst p) 
