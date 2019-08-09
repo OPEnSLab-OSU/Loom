@@ -1,0 +1,37 @@
+"{\
+	'general':\
+	{\
+		'name':'Device',\
+		'instance':1\
+	},\
+	'components':[\
+		{\
+			'name':'Analog',\
+			'params':'default'\
+		},\
+		{\
+			'name':'Digital',\
+			'params':'default'\
+		},\
+		{\
+			'name':'WiFi',\
+			'params':[\
+				'<ssid>',\
+				'<password>'\
+			]\
+		},\
+		{\
+			'name':'MaxPub',\
+			'params':[\
+				7002\
+			]\
+		},\
+		{\
+			'name':'MaxSub',\
+			'params':[\
+				7002,\
+				true\
+			]\
+		}\
+	]\
+}"
