@@ -88,12 +88,12 @@ bool LoomManager::parse_config_json(JsonObject config)
 	if (general.containsKey("name")) {
 		snprintf(this->device_name, 20, "%s", general["name"].as<const char*>());
 	}
-	if (general.containsKey("family")) {
-		snprintf(this->family, 20, "%s", general["family"].as<const char*>());
-	}
-	if (general.containsKey("family_num")) {
-		this->family_num = general["family_num"];
-	}
+	// if (general.containsKey("family")) {
+	// 	snprintf(this->family, 20, "%s", general["family"].as<const char*>());
+	// }
+	// if (general.containsKey("family_num")) {
+	// 	this->family_num = general["family_num"];
+	// }
 	if (general.containsKey("instance")) {
 		this->instance = general["instance"];
 	}

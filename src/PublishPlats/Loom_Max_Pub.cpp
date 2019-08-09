@@ -1,107 +1,126 @@
 
 #include "Loom_Max_Pub.h"
+#include "../SubscribePlats/Loom_Max_Sub.h"
+
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxPub::Loom_MaxPub(
-		// uint8_t		internet_index,
-		LoomModule::Type	internet_type,
-		uint16_t	port
+		LoomModule::Type	internet_type
 	)   
-	// : LoomPublishPlat( "MaxPub", Type::MaxPub, internet_index )
 	: LoomPublishPlat( "MaxPub", Type::MaxPub, internet_type )
-	, UDP_port(port)
-	// , UDP_Inst( (m_internet != nullptr) ? m_internet->open_socket(port) : nullptr )
-{
-
-}	
+	, remoteIP({192,168,1,255})
+	// , remoteIP({192,168,0,14})
+{}
 
 ///////////////////////////////////////////////////////////////////////////////
-// void Loom_MaxPub::second_stage_ctor() 
-// {
-	// superclass LoomPublishPlat will have obtained pointer to internet module if possible 
+void Loom_MaxPub::second_stage_ctor() 
+{
+	LoomPublishPlat::second_stage_ctor();
 
-	// Get UDP object
-	// if (m_internet != nullptr) {
-	// 	UDP_Inst = m_internet->open_socket(UDP_port);
-	// } else {
-	// 	print_module_label();
-	// 	LPrintln("Has no internet module to get UDP instance from");
-	// }
-// }
+	UDP_port = UDP_SEND_OFFSET + ((device_manager) ? device_manager->get_instance_num() : 0);
+
+	// Get new UDP pointer	
+	if (m_internet != nullptr) {
+		UDP_Inst = m_internet->open_socket(UDP_port);
+	} else {
+		print_module_label();
+		LPrintln("No internet platform, could not get UDP object");
+	}
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxPub::Loom_MaxPub(JsonArrayConst p)
-	// : Loom_MaxPub( EXPAND_ARRAY(p, 2) ) {}
-	: Loom_MaxPub( (LoomModule::Type)(int)p[0], p[1] ) {}
+	: Loom_MaxPub( (LoomModule::Type)(int)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MaxPub::print_config()
 {
 	LoomPublishPlat::print_config();
-	LPrintln("\tUDP Port : ", UDP_port);
+	LPrintln("\tUDP Port  : ", UDP_port);
+	LPrintln("\tRemote IP : ", remoteIP);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MaxPub::print_state()
 {
 	LoomPublishPlat::print_state();
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MaxPub::set_port(uint16_t port)
 {
 	UDP_port = port;
-
-	// Get new UDP pointer	
-	// if (m_internet != nullptr) {
-	// 	UDP_Inst = m_internet->open_socket(UDP_port);
-	// }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat)
 {
-	// Get UDP object
-	auto UDP_Inst = (m_internet != nullptr) ? m_internet->open_socket(UDP_port) : nullptr;
-	// if (m_internet != nullptr) {
-	// 	LPrintln("Got UDP");
-	// } else {
-		// print_module_label();
-		// LPrintln("Has no internet module to get UDP instance from");
-		// return false;
-	// }	
+	if (!UDP_Inst) {
+		// Try to get UDP 
+		UDP_Inst = (m_internet != nullptr) ? m_internet->open_socket(UDP_port) : nullptr;
+		// Check if still null
+		if (!UDP_Inst) {
+			LPrintln("UDP_Inst is still null");
+			return false;
+		}
+	}
 
-	delay(50);
-
-	// Send Json
-	// serializeJson(json, std::ostream& output);
-	
 	if (!UDP_Inst) {
 		LPrintln("UDP_Inst was null");
 		return false;
 	}
 
-	// serializeJson(json, buffer );
+	if (print_verbosity == Verbosity::V_HIGH) {
+		print_module_label();
+		LPrintln("Sending to remoteIP: ", remoteIP);
+	}
 
-	UDP_Inst->beginPacket("255.255.255.255", UDP_port);
-	// UDP_Inst->beginPacket("192.168.1.2", UDP_port);
-
+	// Send Json	
+	UDP_Inst->beginPacket(remoteIP, UDP_port);
 	serializeJson(json, (*UDP_Inst) );
-// 
-	// UDP_Inst->write( (const uint8_t*)"testStringA", 12 );
-	// UDP_Inst->write( (const uint8_t*)"'testStrin'", 12 );
-
-	UDP_Inst->endPacket();		// Mark the end of the OSC Packet
-
-
-
-
-	// bndl->send(UdpDevice);    	// Send the bytes to the SLIP stream
-
-
-
+	UDP_Inst->endPacket(); // Mark the end of the OSC Packet
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_MaxPub::set_ip(IPAddress ip)
+{
+	remoteIP = ip;
+	print_module_label();
+	LPrintln("Set remote IP to: ", ip);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_MaxPub::set_ip()
+{
+	Loom_MaxSub* temp;
+	if (device_manager && (temp = (Loom_MaxSub*)&(device_manager->MaxSub())) ) {
+		IPAddress ip = temp->get_remote_IP();
+		if (ip[0] != 0) {
+			set_ip(ip);
+		} else {
+			print_module_label();
+			LPrintln("IP was invalid");
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool Loom_MaxPub::dispatch(JsonObject json)
+{
+	JsonArray params = json["params"];
+	switch( (char)json["func"] ) {
+		case 's': set_ip(); return true;
+	}
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+

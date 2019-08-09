@@ -60,6 +60,9 @@ public:
 	/// \returns A UDP socket for transmitting and recieving, remember to close the socket when you are done!
 	UDPPtr open_socket(const uint port) override;
 
+	void package(JsonObject json) override;
+
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================

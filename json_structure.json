@@ -7,9 +7,7 @@
 {
 	"general": {
 		"name": "Device",
-		"family": "Loom",
 		"instance": 1,
-		"family_num": 0
 	},
 	"components": [
 		{
@@ -34,10 +32,8 @@
 {
 	"type" : "data",
 	"id" : {
-		"name" : "SomeDevice",
-		"instance" : "1",
-		"family" : "Loom",
-		"family_num" : 1
+		"name" : "Device",
+		"instance" : 1,
 	},
 	"timestamp" : {
 		"date" : "some_date",
@@ -67,19 +63,17 @@
 // = = = Command Object = = =
 
 {
-	"source" : { ... },
-	"destination" : {
+	"src" : { ... },
+	"dst" : {
 		"name" : "Device",
-		"family" : "Loom",
 		"instance" : 1,
-		"family_num" : 0
 	},
 	"type" : "command",
 	"commands" :
 	[
 		{ 
-			"name" : "moduleA",
-			"func" : "actuation_functionA",
+			"module" : "moduleA",
+			"func" : "s",
 			"params" : 
 			[
 				"param1",
@@ -88,8 +82,8 @@
 			]
 		},
 		{ 
-			"name" : "moduleB",
-			"func" : "actuation_functionB",
+			"module" : "moduleB",
+			"func" : "s",
 			"params" : 
 			[
 				"param1",

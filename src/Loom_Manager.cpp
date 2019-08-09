@@ -34,21 +34,21 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 ///////////////////////////////////////////////////////////////////////////////
 LoomManager::LoomManager( 
 		const char*		device_name, 
-		const char*		family, 
-		uint8_t			family_num,
+		// const char*		family, 
+		// uint8_t			family_num,
 		uint8_t			instance, 
 		DeviceType		device_type, 
 		Verbosity		print_verbosity, 
 		Verbosity		package_verbosity
 	)
 	: instance(instance)
-	, family_num(family_num)
+	// , family_num(family_num)
 	, print_verbosity(print_verbosity)
 	, package_verbosity(package_verbosity)
 	, device_type(device_type)
 {
 	snprintf(this->device_name, 20, "%s", device_name);
-	snprintf(this->family, 20, "%s", family);
+	// snprintf(this->family, 20, "%s", family);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -69,8 +69,8 @@ void LoomManager::print_config(bool print_modules_config)
 	print_device_label();
 	LPrintln("Config:");
 	LPrintln("\tDevice Name         : ", device_name );
-	LPrintln("\tFamily              : ", family );
-	LPrintln("\tFamily Number       : ", family_num );
+	// LPrintln("\tFamily              : ", family );
+	// LPrintln("\tFamily Number       : ", family_num );
 	LPrintln("\tInstance Number     : ", instance );
 	LPrintln("\tDevice Type         : ", enum_device_type_string(device_type) );
 	LPrintln("\tInstance Number     : ", instance );
@@ -200,10 +200,10 @@ const char* LoomManager::get_device_name()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void  LoomManager::set_family(const char* family) 
-{ 
-	snprintf(this->family, 20, "%s", family); 
-}
+// void  LoomManager::set_family(const char* family) 
+// { 
+// 	snprintf(this->family, 20, "%s", family); 
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::set_print_verbosity(Verbosity v, bool set_modules)
@@ -285,8 +285,8 @@ void LoomManager::add_device_ID_to_json(JsonObject json)
 	JsonObject timestamp = json.createNestedObject("id");
 	timestamp["name"]		= device_name;
 	timestamp["instance"]	= instance;
-	timestamp["family"]		= family;
-	timestamp["family_num"]	= family_num;
+	// timestamp["family"]		= family;
+	// timestamp["family_num"]	= family_num;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -307,6 +307,7 @@ JsonObject LoomManager::internal_json(bool clear)
 
 }
 
+///////////////////////////////////////////////////////////////////////////////
 bool LoomManager::publish_all(const JsonObject json)
 {
 	// bool result = true;
@@ -318,16 +319,26 @@ bool LoomManager::publish_all(const JsonObject json)
 	// return (publish_modules.size() > 0) && result;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::dispatch(JsonObject json)
 {
-	if ( strcmp(json["type"], "command") == 0 )	{
+	print_device_label();
+	LPrintln("Processing command");
+	serializeJsonPretty(json, Serial);
+	LPrintln();
+	// return;
 
+	if ( strcmp(json["type"], "command") == 0 )	{
+		LPrintln("Is command");
 		for ( JsonObject cmd : json["commands"].as<JsonArray>() ) {
+			LPrintln("Try to dispatch to: ", cmd["module"].as<const char*>() );
 			for (auto module : modules) {
-				if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-					if ( module->dispatch( json ) ) continue;
+				if ( (module != nullptr) && 
+					 ( ((LoomModule*)module)->get_active() ) &&
+					 ( strcmp(cmd["module"].as<const char*>(), module->get_module_name() ) == 0 )
+					){
+					LPrintln("Found module");
+					if ( module->dispatch( cmd ) ) break; // move to next command
 				}
 			}
 		}
@@ -427,8 +438,8 @@ void LoomManager::get_config()
 	JsonObject general_info 	= json.createNestedObject("general");
 	general_info["name"]		= device_name;
 	general_info["instance"]	= instance;
-	general_info["family"]		= family;
-	general_info["family_num"]	= family_num;
+	// general_info["family"]		= family;
+	// general_info["family_num"]	= family_num;
 
 	// Start array for modules to add config objects to
 	JsonArray components = json.createNestedArray("components");

@@ -45,12 +45,12 @@ void Loom_Stepper::print_config()
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Stepper::dispatch(JsonObject json)
 {
-	if ( strcmp(json["module"], module_name) == 0 ) {
+	// if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];
 		switch( (char)json["func"] ) {
 			case 's': if (params.size() >= 4) { move_steps( EXPAND_ARRAY(params, 4) ); } return true;
 		}
-	}
+	// }
 	return false;
 }
 

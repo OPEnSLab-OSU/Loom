@@ -47,7 +47,6 @@ void Loom_WiFi_I::connect()
 		LPrintln("Connection failed!");
 		return;
 	}
-	print_module_label();
 	print_state();
 }
 
@@ -105,6 +104,19 @@ void Loom_WiFi_I::print_state()
 	LPrintln("\tRSSi:               : ", WiFi.RSSI(), " dBm" );
 	LPrintln("\tIP Address:         : ", IPAddress(WiFi.localIP()) );
 	LPrintln();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_WiFi_I::package(JsonObject json)
+{
+	//JsonObject data = get_module_data_object(json, module_name);
+	auto ip = IPAddress(WiFi.localIP());
+	JsonArray tmp = json["id"].createNestedArray("ip");
+	tmp.add(ip[0]);
+	tmp.add(ip[1]);
+	tmp.add(ip[2]);
+	tmp.add(ip[3]);
+	//data["IP"] = WiFi.localIP();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

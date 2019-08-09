@@ -1,6 +1,10 @@
 #pragma once
 
 #include "Loom_PublishPlat.h"
+#include "Loom_Manager.h"
+
+
+#define UDP_SEND_OFFSET 8000
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -14,8 +18,10 @@ class Loom_MaxPub : public LoomPublishPlat
 protected:
 	
 	uint16_t	UDP_port;				/// Which UDP port to transmit on
-	
-	// LoomInternetPlat::UDPPtr UDP_Inst;	/// Pointer to UDP object
+	IPAddress	remoteIP;				/// Which IP address to send to
+
+
+	LoomInternetPlat::UDPPtr UDP_Inst;	/// Pointer to UDP object
 
 public:
 
@@ -26,17 +32,15 @@ public:
 	/// Constructor
 	///
 	Loom_MaxPub(
-		// uint8_t		internet_index	= 0,
-		LoomModule::Type	internet_type,
-		uint16_t			port	
+		LoomModule::Type	internet_type
 	);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]  p     The array of constuctor args to expand
 	Loom_MaxPub( JsonArrayConst p );
-
-	// void second_stage_ctor() override;
+// 
+	void second_stage_ctor() override;
 
 	/// Destructor
 	~Loom_MaxPub() = default;
@@ -45,6 +49,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+	bool		dispatch(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -63,7 +68,16 @@ public:
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
+	/// Set the UDP port to send on
+	/// \param[in]	port	The UDP port to send on
 	void		set_port(uint16_t port);
+
+	/// Set the IP address to send to
+	/// \param[in]	ip	The IP address to set to
+	void		set_ip(IPAddress ip);
+
+	/// Set the IP addres to send to by getting remote IP from MaxSub if available
+	void		set_ip();
 
 protected:
 

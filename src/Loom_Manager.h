@@ -114,8 +114,8 @@ protected:
 
 	char		device_name[20];	/// The name of the device
 	uint8_t		instance;			/// The instance / channel ID within the subnet
-	char		family[20];			/// The family the device belongs to
-	uint8_t		family_num;			/// The subnet of the family
+	// char		family[20];			/// The family the device belongs to
+	// uint8_t		family_num;			/// The subnet of the family
 
 	/// Device type (Hub / Node)
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
@@ -156,8 +156,8 @@ public:
 	/// \param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
 	LoomManager(
 			const char*		device_name			= "Device",
-			const char*		family				= "Loom",
-			uint8_t			family_num			= 1,
+			// const char*		family				= "Loom",
+			// uint8_t			family_num			= 1,
 			uint8_t			instance			= 1,
 			DeviceType		device_type			= DeviceType::NODE,
 			Verbosity		print_verbosity		= Verbosity::V_HIGH,
@@ -268,7 +268,8 @@ public:
 		} 
 		JsonObject json = doc.as<JsonObject>();
 		if (strcmp(json["type"], "data") == 0 ) {
-			package_json(json, module, key, val);
+			JsonObject data = get_module_data_object(json, module);
+			data[key] = val;
 			return true;
 		} else {
 			return false;
@@ -347,11 +348,11 @@ public:
 
 	/// Get device family name.
 	/// \return Family name
-	const char*	get_family() { return family; }
+	// const char*	get_family() { return family; }
 
-	/// Get device family number.
-	/// \return Family number
-	uint8_t		get_family_num() { return family_num; }
+	// /// Get device family number.
+	// /// \return Family number
+	// uint8_t		get_family_num() { return family_num; }
 
 	/// Get device instance number.
 	/// \return Family number
@@ -373,13 +374,13 @@ public:
 	/// \param[in]	device_name		The new device name
 	void 		set_device_name(const char* device_name);
 
-	/// Set device family name.
-	/// \param[out]	family	Family name
-	void		set_family(const char* family);
+	// /// Set device family name.
+	// /// \param[out]	family	Family name
+	// void		set_family(const char* family);
 	
-	/// Set device family number.
-	/// \param[in]	n	New family number
-	void		set_family_num(uint8_t n) { family_num = n; }
+	// /// Set device family number.
+	// /// \param[in]	n	New family number
+	// void		set_family_num(uint8_t n) { family_num = n; }
 	
 	/// Set device instance number.
 	/// \param[in]	n	New instance number

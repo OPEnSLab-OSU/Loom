@@ -1,14 +1,17 @@
 
 #include "Loom_Max_Sub.h"
 
+#include "../Loom_Manager.h"
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxSub::Loom_MaxSub(
 		LoomModule::Type	internet_type,
-		uint16_t	port
+		bool				auto_dispatch
 	)   
 	: LoomSubscribePlat( "MaxSub", Type::MaxSub, internet_type )
-	, UDP_port(port)
-{} 
+	, auto_dispatch(auto_dispatch)
+{
+} 
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxSub::Loom_MaxSub(JsonArrayConst p) 
@@ -19,6 +22,8 @@ void Loom_MaxSub::second_stage_ctor()
 {
 	LoomSubscribePlat::second_stage_ctor();
 
+	UDP_port = UDP_RECEIVE_OFFSET + ((device_manager) ? device_manager->get_instance_num() : 0);
+
 	// Get new UDP pointer	
 	if (m_internet != nullptr) {
 		UDP_Inst = m_internet->open_socket(UDP_port);
@@ -28,10 +33,10 @@ void Loom_MaxSub::second_stage_ctor()
 	}
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_MaxSub::subscribe(JsonObject json)
 {
+	// Make sure UDP object exists
 	if (!UDP_Inst) {
 		// Try to get UDP 
 		UDP_Inst = (m_internet != nullptr) ? m_internet->open_socket(UDP_port) : nullptr;
@@ -42,6 +47,7 @@ bool Loom_MaxSub::subscribe(JsonObject json)
 		}
 	}
 
+	// If packet available
 	if ( UDP_Inst->parsePacket() ) {
 
 		messageJson.clear();
@@ -59,9 +65,26 @@ bool Loom_MaxSub::subscribe(JsonObject json)
 
 		if (print_verbosity == Verbosity::V_HIGH) {
 			print_module_label();
+			LPrint("From IP: ");
+			IPAddress remote = UDP_Inst->remoteIP();
+			for (auto i=0; i < 4; i++) {
+				LPrint(remote[i]);
+				if (i < 3) {
+					LPrint(".");
+				} else {
+					LPrintln();
+				}
+			}
+
+			print_module_label();
 			LPrintln("Internal messageJson:");
 			serializeJsonPretty(messageJson, Serial);
 			LPrintln();
+		}
+
+		// If auto dispatch, have device manager dispatch command
+		if (auto_dispatch && device_manager != nullptr) {
+			device_manager->dispatch();
 		}
 
 		return true;
@@ -89,4 +112,6 @@ void Loom_MaxSub::set_port(uint16_t port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+
 
