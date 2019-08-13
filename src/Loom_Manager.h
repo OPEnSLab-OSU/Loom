@@ -115,6 +115,10 @@ protected:
 	char		device_name[20];	/// The name of the device
 	uint8_t		instance;			/// The instance / channel ID within the subnet
 
+	uint16_t	interval;			/// Default value for pause()/nap().
+									/// Used so that manager can control interval, rather than code in .ino
+
+
 	/// Device type (Hub / Node)
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
@@ -150,12 +154,14 @@ public:
 	/// \param[in]	device_type					Set(DeviceType) | <1> | {0("Hub"), 1("Node"), 2("Repeater")} | Device's topological type
 	/// \param[in]	print_verbosity				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
 	/// \param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
+	/// \param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause/nap for
 	LoomManager(
 			const char*		device_name			= "Device",
 			uint8_t			instance			= 1,
 			DeviceType		device_type			= DeviceType::NODE,
 			Verbosity		print_verbosity		= Verbosity::V_HIGH,
-			Verbosity		package_verbosity	= Verbosity::V_LOW
+			Verbosity		package_verbosity	= Verbosity::V_LOW,
+			uint16_t		interval			= 1000
 		);
 
 	//// Destructor
@@ -198,7 +204,6 @@ public:
 	/// Generally used to save configuration to SD
 	void		get_config();
 
-
 	/// Measure data of all managed sensors
 	void		measure();  
 
@@ -233,12 +238,23 @@ public:
 	/// Uses internal json
 	void		dispatch();
 
-	/// Pause for up to 16 seconds.
+	/// Pause for up to 16000 milliseconds.
 	/// You can use this instead of delay to put the device into a 
 	/// semi-low power state.
 	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
 	/// \param[in]	ms	Number of milliseconds to pause
-	void		pause(uint16_t ms);
+	void		nap(uint16_t ms);
+
+	/// Pause for up to 16000 milliseconds.
+	/// Uses interval member as value
+	void		nap() { nap(interval); }
+
+	/// Delay milliseconds.
+	void		pause(uint16_t ms) { delay(ms); }
+
+	/// Delay milliseconds based on interval member.
+	/// Uses interval member as value
+	void		pause() { delay(interval); }
 
 	/// Iterate over modules, calling power up method
 	void 		power_up();
@@ -293,6 +309,7 @@ public:
 	/// \param[in]	config_file		File to save configuration to
 	/// \return True is success, false if fail or file not found
 	// bool		save_SD_config(const char* config_file);
+
 
 
 //=============================================================================
@@ -373,6 +390,11 @@ public:
 	/// \param[in]	v	New package verbosity
 	/// \param[in]	set_modules	Whether or not to also apply setting to modules
 	void		set_package_verbosity(Verbosity v, bool set_modules = false);
+
+	/// Set default time to use for .pause() \ .delay().
+	/// Pause and delay can still take explicit times, but if not provided, 
+	/// this value will be used
+	void		set_interval(uint16_t ms);
 
 //=============================================================================
 ///@name	MISCELLANEOUS
@@ -488,6 +510,9 @@ private:
 	/// Free modules.
 	/// Used in destructor or when switching configuration
 	void free_modules();
+
+	/// Run dispatch on any commands directed to the manager
+	bool dispatch_self(JsonObject json);
 
 };
 
