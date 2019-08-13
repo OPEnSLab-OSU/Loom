@@ -31,6 +31,7 @@ public:
 
 	/// Constructor
 	///
+	/// \param[in]  internet_type	Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
 	Loom_MaxPub(
 		LoomModule::Type	internet_type
 	);
