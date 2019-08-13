@@ -49,7 +49,7 @@ constexpr static char time_server[] = "pool.ntp.org"; 	// pool.ntp.org NTP serve
 static void print_unix_time(unsigned long epoch) 
 {
 	// print Unix time:
-	LPrintln("Epoch:", epoch);
+	LPrint("Epoch:", epoch, "(");
 
 
 	// print the hour, minute and second:
@@ -64,7 +64,8 @@ static void print_unix_time(unsigned long epoch)
 		// In the first 10 seconds of each minute, we'll want a leading '0'
 		LPrint('0');
 	}
-	LPrintln(epoch % 60); // print the second
+	LPrint(epoch % 60); // print the second
+	LPrintln(")");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -103,6 +104,8 @@ uint32_t LoomInternetPlat::get_time()
 		const unsigned long seventyYears = 2208988800UL;
 		// subtract seventy years:
 		epoch = secsSince1900 - seventyYears;
+		
+		print_module_label();
 		print_unix_time(epoch);
 	}
 	else LPrint("Failed to parse UDP packet!\n");
