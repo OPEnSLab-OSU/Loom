@@ -295,13 +295,18 @@ JsonObject LoomManager::internal_json(bool clear)
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomManager::publish_all(const JsonObject json)
 {
-	// bool result = true;
-	// for (auto publisher : publish_modules) {
-	// 	if ( (publisher != nullptr) && ( publisher->get_active() ) ){
-	// 		result &= publisher->publish( json );
-	// 	}
-	// }
-	// return (publish_modules.size() > 0) && result;
+	bool result = true;
+	bool found = false;
+	for (auto publisher : modules) {
+		if ( (publisher != nullptr) 
+			&& (publisher->category() == LoomModule::Category::PublishPlat) 
+			&& ( publisher->get_active() ) ){
+
+			found |= true;
+			result &= static_cast<LoomPublishPlat*>(publisher)->publish( json );
+		}
+	}
+	return found && result;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

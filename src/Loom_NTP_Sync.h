@@ -9,6 +9,7 @@
 
 // ### (LoomModule) | dependencies: [] | conflicts: []
 /// Glue code to synchronize an RTC using an InternetPlat. Always synchronizes the RTC from Loom_Interrupt_Manager::get_RTC_module().
+/// THIS MODULE DOES NOT FUNCTION, AND WILL BE REWRITTEN DURING LATER STAGES
 // ###
 class LoomNTPSync : public LoomModule
 {

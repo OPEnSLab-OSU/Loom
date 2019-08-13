@@ -2,15 +2,18 @@
 #include "Loom_InternetEthernet.h"
 #include "Loom_Trust_Anchors.h"
 
-
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Ethernet_I::Loom_Ethernet_I(	
 		const char*				module_name,
 		const JsonArrayConst	mac,
-		const JsonArrayConst	ip
+		const JsonArrayConst	ip,
+		const char*				cli_cert,
+		const char*				cli_key
 	) 
 	: LoomInternetPlat( "Ethernet", Type::Ethernet )
-	, m_client( EthernetClient(), TAs, (size_t)TAs_NUM, A7, SSL_ERROR )
+	, m_cli_cert(std::move(SSLObj::make_vector_pem(cli_cert, (cli_cert ? strlen(cli_cert) : 0))))
+	, m_cli_key(std::move(SSLObj::make_vector_pem(cli_key, (cli_key ? strlen(cli_key) : 0))))
+	, m_client( EthernetClient(), TAs, (size_t)TAs_NUM, A7, SSL_ERROR)
 	, m_mac{}
 	, m_ip()
 	, m_is_connected(false)
@@ -21,6 +24,43 @@ Loom_Ethernet_I::Loom_Ethernet_I(
 	}
 	if (!ip.isNull()) this->m_ip = IPAddress(ip[0], ip[1], ip[2], ip[3]);
 
+	// set mutual auth, if needed
+	if (cli_cert && cli_key) {
+		print_module_label();
+		if (cli_cert && !m_cli_cert.size()) LPrintln("Failed to decode client certificate");
+		else if (cli_key && !m_cli_key.size()) LPrintln("Failed to decode client private key");
+		else if (m_cli_key[5] != 0x04 || m_cli_key[6] >= m_cli_key.size() - 6) LPrintln("Failed to extractclient private key");
+		else {
+			LPrintln("Adding mutual auth! Public key: ");
+			LPrintln(cli_cert);
+			LPrintln(m_cli_cert.size());
+			// we need to extract the private key from the ASN1 object given to us
+			// to do that, some ASN.1 parsing!
+			// get the tag and length of the first octet string, and verify it's reasonable
+			const unsigned char length = m_cli_key[6];
+			// delete everything around the key that we don't need
+			m_cli_key.erase(m_cli_key.begin(), m_cli_key.begin() + 7);
+			m_cli_key.erase(m_cli_key.begin() + length, m_cli_key.end());
+			// shrink it
+			m_cli_key.shrink_to_fit();
+			// setup the certificate
+			const br_x509_certificate cert = {
+				m_cli_cert.data(), 
+				m_cli_cert.size()
+			};
+			const SSLClientParameters params = {
+				&cert,
+				1,
+				{
+					BR_EC_secp256r1,
+					m_cli_key.data(), 
+					m_cli_key.size()
+				}
+			};
+			m_client.setMutualAuthParams(&params);
+		}
+	}
+	
 	// try to connect to internet
 	connect();
 
@@ -40,7 +80,7 @@ Loom_Ethernet_I::Loom_Ethernet_I(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Ethernet_I::Loom_Ethernet_I(JsonArrayConst p)
-	: Loom_Ethernet_I( EXPAND_ARRAY(p, 3) ) {}
+	: Loom_Ethernet_I( EXPAND_ARRAY(p, 5) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Ethernet_I::print_config()
@@ -79,9 +119,6 @@ void Loom_Ethernet_I::connect()
 	}
 	else m_ip = Ethernet.localIP();
 	m_is_connected = true;
-
-	print_module_label();
-	LPrintln("Connect to Ethernet ", (m_is_connected) ? "successful" : "failed" );
 
 	if (!m_is_connected) m_client.stop();
 }

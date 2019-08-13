@@ -14,7 +14,8 @@ class Loom_Ethernet_I : public LoomInternetPlat
 {
 
 protected:
-	
+	std::vector<unsigned char> m_cli_cert;					/// The client certificate, if one is provided (DER format)
+	std::vector<unsigned char> m_cli_key;					/// The client private key, if one if provided (DER format)
 	SSLClient<EthernetClient> m_client;		/// Underlying Ethernet SSLclient instance
 
 	byte			m_mac[6];				/// The Ethernet MAC address
@@ -30,11 +31,11 @@ public:
 
 	/// Constructor
 	Loom_Ethernet_I(	
-			// const JsonArrayConst	mac,
-			// const JsonArrayConst 	ip
 			const char* 			module_name	= "Ethernet",
 			const JsonArrayConst	mac			= JsonArray(),
-			const JsonArrayConst 	ip			= JsonArray()
+			const JsonArrayConst 	ip			= JsonArray(),
+			const char*				cli_cert	= nullptr,
+			const char*				cli_key		= nullptr
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -69,6 +70,5 @@ public:
 
 	void		print_config() override;
 	void		print_state() override;
-
 };
 

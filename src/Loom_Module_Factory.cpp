@@ -25,7 +25,7 @@ const Factory::NameModulePair Factory::LookupTable[] =
 	{"Bluetooth",			Construct<Loom_Bluetooth>,				ConstructDefault<Loom_Bluetooth> },
 	
 	// InternetPlat
-	// {"Ethernet",			Construct<Loom_Ethernet_I>,				ConstructDefault<Loom_Ethernet_I> },
+	{"Ethernet",			Construct<Loom_Ethernet_I>,				ConstructDefault<Loom_Ethernet_I> },
 	// {"Ethernet",			Construct<Loom_Ethernet_I>,				nullptr },
 	{"WiFi",				Construct<Loom_WiFi_I>,					ConstructDefault<Loom_WiFi_I> },
 
@@ -72,7 +72,7 @@ const Factory::NameModulePair Factory::LookupTable[] =
 	{"MAX31856",			Construct<Loom_MAX31856>,				ConstructDefault<Loom_MAX31856> },
 
 	// Other
-	{"NTP_Sync", 			Construct<LoomNTPSync>,					ConstructDefault<LoomNTPSync> }
+	// {"NTP_Sync", 			Construct<LoomNTPSync>,					ConstructDefault<LoomNTPSync> } DOES NOT FUNCTION YET
 };
 
 ///////////////////////////////////////////////////////////////////////////////
