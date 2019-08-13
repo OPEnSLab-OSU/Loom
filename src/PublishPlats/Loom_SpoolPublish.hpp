@@ -28,7 +28,7 @@ public:
                       const char* spool_url,
                       const char* device_data_endpoint,
                       const char* device_id,
-                      );
+                    );
     
     Loom_SpoolPublish( JsonVariant p );
     

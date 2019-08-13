@@ -34,7 +34,7 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
     print_module_label();
     // serialize the data, checking for an error
     // not sure if this is the right way to check if there is a overflow
-    if (serializeJson(json, m_buffer) < 0) {
+    if (serializeJson(json, m_buffer) == 0) {
         LPrint("Buffer overflow during serialize!\n");
         return false;
     }
