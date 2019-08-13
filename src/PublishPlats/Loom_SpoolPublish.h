@@ -10,8 +10,6 @@
 
 class Loom_SpoolPublish : public LoomPublishPlat {
     
-protected:
-    
 public:
     
     /// Loom Google Sheets Platform module constructor.
@@ -24,40 +22,34 @@ public:
     /// \param[in]  device_id       String | <"Mine"> | null | Identifier to use for the device in the spreadsheet.
     Loom_SpoolPublish(
                       const char* module_name,
-                      const uint  internet_index,
                       const char* spool_url,
                       const char* device_data_endpoint,
                       const char* device_id,
                     );
     
-    Loom_SpoolPublish( JsonVariant p );
+    Loom_SpoolPublish( JsonArrayConst p );
     
     /// Destructor
     ~Loom_SpoolPublish() = default;
     
     void print_config() override;
     
+    
+protected:
+    
     // remember to close the socket!
     bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
     
+    
 private:
-    // Get the number of bytes left in buffer from a given pointer in buffer
-    size_t m_buffer_left(const char* buffer_index) const {
-        const char* end_buffer = &(m_buffer[sizeof(m_buffer) - 1]);
-        if (buffer_index >= end_buffer) return 0;
-        return end_buffer - buffer_index;
-    }
     
-    // storage for all those strings we're going to need above
-    // main string buffer, the front of which stores our URL
-    // do not edit this directly, use m_url_end instead.
-    char m_buffer[768];
-    // store a pointer to where we can actually add data
-    char* m_data_start;
+    bool Loom_SpoolPublish
     
-    // the url to
+    // the spool url
     char* spool_url;
+
 };
+
 
 
 #endif
