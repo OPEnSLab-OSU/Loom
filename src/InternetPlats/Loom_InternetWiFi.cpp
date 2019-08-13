@@ -78,6 +78,27 @@ LoomInternetPlat::ClientSession Loom_WiFi_I::connect_to_domain(const char* domai
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+LoomInternetPlat::ClientSession Loom_WiFi_I::connect_to_ip(const IPAddress& ip, const uint16_t port)
+{
+	// if the socket is somehow still open, close it
+	if (client.connected()) client.stop();
+	// * the rainbow connection *
+	int status = client.connect(ip, port);
+	if (!status) {
+		// log fail, and return
+		print_module_label();
+		LPrint("Wifi connect failed with error ", status, '\n');
+		return ClientSession();
+	}
+	else {
+		print_module_label();
+		LPrint("WiFi connected to IP'\n");
+	}
+	// return a pointer to the client for data reception
+	return LoomInternetPlat::ClientSession(&client);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::UDPPtr Loom_WiFi_I::open_socket(const uint port) 
 {
 	// create the unique pointer

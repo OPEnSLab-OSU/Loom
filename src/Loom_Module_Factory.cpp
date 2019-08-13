@@ -27,10 +27,11 @@ const Factory::NameModulePair Factory::LookupTable[] =
 	// InternetPlat
 	{"Ethernet",			Construct<Loom_Ethernet_I>,				ConstructDefault<Loom_Ethernet_I> },
 	// {"Ethernet",			Construct<Loom_Ethernet_I>,				nullptr },
-	{"WiFi",				Construct<Loom_WiFi_I>,					ConstructDefault<Loom_WiFi_I> },
+	// {"WiFi",				Construct<Loom_WiFi_I>,					ConstructDefault<Loom_WiFi_I> },
 
 	// PublishPlat
 	{"GoogleSheets",		Construct<Loom_GoogleSheets>,			nullptr },
+	{"Spool",				Construct<Loom_SpoolPublish>,			nullptr },
 	// {"MaxPub",				Construct<Loom_MaxPub>,					ConstructDefault<Loom_MaxPub> },
 	{"MaxPub",				Construct<Loom_MaxPub>,					nullptr },
 
