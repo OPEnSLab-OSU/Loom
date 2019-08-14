@@ -21,10 +21,11 @@ public:
     /// \param[in]  tab_id          String | <"Data"> | null | Name of the tab that the device will put data into.
     /// \param[in]  device_id       String | <"Mine"> | null | Identifier to use for the device in the spreadsheet.
     Loom_SpoolPublish(
-                      const char* module_name,
-                      const char* spool_url,
-                      const char* device_data_endpoint,
-                      const char* device_id,
+                    const char* module_name,
+                    const LoomModule::Type	internet_type,
+                    const char* spool_domain,
+                    const char* device_data_endpoint,
+                    const char* device_id
                     );
     
     Loom_SpoolPublish( JsonArrayConst p );
@@ -42,14 +43,8 @@ protected:
     
     
 private:
-    
-    bool Loom_SpoolPublish
-    
     // the spool url
-    char* spool_url;
-
+    const String m_spool_domain;
+    const String m_device_data_endpoint;
+    const String m_device_id;
 };
-
-
-
-#endif

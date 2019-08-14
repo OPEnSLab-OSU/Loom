@@ -5,18 +5,34 @@
 // --- CONSTRUCTOR --
 Loom_SpoolPublish::Loom_SpoolPublish(
                                      const char* module_name,
-                                     const char* spool_url,
+                                     const LoomModule::Type	internet_type,
+                                     const char* spool_domain,
                                      const char* device_data_endpoint,
-                                     const char* device_id,
-                                     ) : LoomPublishPlat(module_name, internet_index), spool_url(spool_url), device_data_endpoint(device_data_endpoint), device_id(device_id) {
+                                     const char* device_id
+                                     ) 
+    : LoomPublishPlat(module_name, LoomModule::Type::SpoolPub, internet_type)
+    , m_spool_domain(spool_domain)
+    , m_device_data_endpoint(device_data_endpoint)
+    , m_device_id(device_id) {
 
     print_module_label();
 }
 
 /////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR --
-Loom_SpoolPublish::Loom_SpoolPublish(JsonVariant p)
-: Loom_SpoolPublish( EXPAND_ARRAY(p, 4) ) {}
+Loom_SpoolPublish::Loom_SpoolPublish(JsonArrayConst p)
+: Loom_SpoolPublish( p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4] ) {}
+
+/////////////////////////////////////////////////////////////////////
+void Loom_SpoolPublish::print_config() {
+    LoomPublishPlat::print_config();
+    print_module_label();
+    LPrint("Domain: ", m_spool_domain, '\n');
+    print_module_label();
+    LPrint("URL: ", m_device_data_endpoint, '\n');
+    print_module_label();
+    LPrint("Device ID: ", m_device_id, '\n');
+}
 
 /////////////////////////////////////////////////////////////////////
 bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat* plat) {
@@ -24,38 +40,40 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
     // serialize the data, checking for an error
     // not sure if this is the right way to check if there is a overflow
     
-    auto network = plat->connect_to_domain(spool_url);
-    
+    // TODO: Spool domain
+    auto network = plat->connect_to_ip(IPAddress(192,168,0,1), 443);
+    // auto network = plat->connect_to_ip(m_spool_domain);
+
     if (!network) {
         print_module_label();
         LPrintln("Could not connect to Spool instance.");
         return false;
     }
     
-    //write to the spool
-    
     // POST DEVICE_DATA_ENDPOINT
     network -> print("POST ");
-    network -> print(device_data_endpoint);
+    network -> print(m_device_data_endpoint);
+    network -> println(" HTTP/1.1");
     
     //Headers
-    network -> print("\r\nContent-Type: application/json);
-    network -> print("\r\ncache-conrtol: no-cache")
+    network -> println("Content-Type: application/json");
+    network -> println("cache-conrtol: no-cache");
     
     //print the body
-    network -> print("{\"device_id\": ");
-    network -> print(device_id);
-    network -> print("\"data\": ")
+    network -> println();
+    network -> print("{\"device_id\":");
+    network -> print(m_device_id);
+    network -> print(",\"data\":");
     
     serializeJson(json, *network);
+
+    network -> println("}");
     
     if (!network->connected()) {
         print_module_label();
         LPrintln("Internet disconnected during transmission!");
         return false;
     }
-    // flush all that
-    network->flush();
     
     // all done!
     print_module_label();
