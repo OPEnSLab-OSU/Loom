@@ -57,24 +57,31 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
     
     //Headers
     network -> println("Content-Type: application/json");
-    network -> println("cache-conrtol: no-cache");
-    
+    network -> print("Content-Length: ");
+    // Equivalent to:
+    // strlen("{\"device_id\":\"") + m_device_id + strlen("\",\"data\":") + json + strlen("}")
+    network -> println(14 + m_device_id.length() + 9 + measureJson(json) + 1);
+    network -> print("Host: ");
+    network -> println(m_spool_domain);
+
     //print the body
     network -> println();
-    network -> print("{\"device_id\":");
+    network -> print("{\"device_id\":\"");
     network -> print(m_device_id);
-    network -> print(",\"data\":");
+    network -> print("\",\"data\":");
     
     serializeJson(json, *network);
 
     network -> println("}");
-    
+
     if (!network->connected()) {
         print_module_label();
         LPrintln("Internet disconnected during transmission!");
         return false;
     }
-    
+
+    network -> flush();
+
     // all done!
     print_module_label();
     LPrint("Published successfully!\n");
