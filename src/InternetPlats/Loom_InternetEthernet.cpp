@@ -2,6 +2,23 @@
 #include "Loom_InternetEthernet.h"
 #include "Loom_Trust_Anchors.h"
 
+static std::vector<unsigned char> make_key_from_asn1(std::vector<unsigned char> asn1) {
+	// we need to extract the private key from the ASN1 object given to us
+	// to do that, some ASN.1 parsing!
+	// get the tag and length of the first octet string, and verify it's reasonable
+	if (asn1[5] != 0x04 
+		|| asn1.size() < 6 
+		|| asn1[6] >= asn1.size() - 6) return {};
+
+	const unsigned char length = asn1[6];
+	// delete everything around the key that we don't need
+	asn1.erase(asn1.begin(), asn1.begin() + 7);
+	asn1.erase(asn1.begin() + length, asn1.end());
+	// shrink it
+	asn1.shrink_to_fit();
+	return asn1;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Ethernet_I::Loom_Ethernet_I(	
 		const char*				module_name,
@@ -11,8 +28,18 @@ Loom_Ethernet_I::Loom_Ethernet_I(
 		const char*				cli_key
 	) 
 	: LoomInternetPlat( "Ethernet", Type::Ethernet )
-	, m_cli_cert(std::move(SSLObj::make_vector_pem(cli_cert, (cli_cert ? strlen(cli_cert) : 0))))
-	, m_cli_key(std::move(SSLObj::make_vector_pem(cli_key, (cli_key ? strlen(cli_key) : 0))))
+	, m_cli_cert(SSLObj::make_vector_pem(cli_cert, (cli_cert ? strlen(cli_cert) : 0)))
+	, m_cli_key(make_key_from_asn1(SSLObj::make_vector_pem(cli_key, (cli_key ? strlen(cli_key) : 0))))
+	, m_cert({ m_cli_cert.data(), m_cli_cert.size() })
+	, m_params({
+		&m_cert,
+		1,
+		{
+			BR_EC_secp256r1,
+			m_cli_key.data(), 
+			m_cli_key.size()
+		}
+	})
 	, m_client( EthernetClient(), TAs, (size_t)TAs_NUM, A7, SSL_ERROR)
 	, m_mac{}
 	, m_ip()
@@ -29,35 +56,11 @@ Loom_Ethernet_I::Loom_Ethernet_I(
 		print_module_label();
 		if (cli_cert && !m_cli_cert.size()) LPrintln("Failed to decode client certificate");
 		else if (cli_key && !m_cli_key.size()) LPrintln("Failed to decode client private key");
-		else if (m_cli_key[5] != 0x04 || m_cli_key[6] >= m_cli_key.size() - 6) LPrintln("Failed to extractclient private key");
 		else {
 			LPrintln("Adding mutual auth! Public key: ");
 			LPrintln(cli_cert);
-			LPrintln(m_cli_cert.size());
-			// we need to extract the private key from the ASN1 object given to us
-			// to do that, some ASN.1 parsing!
-			// get the tag and length of the first octet string, and verify it's reasonable
-			const unsigned char length = m_cli_key[6];
-			// delete everything around the key that we don't need
-			m_cli_key.erase(m_cli_key.begin(), m_cli_key.begin() + 7);
-			m_cli_key.erase(m_cli_key.begin() + length, m_cli_key.end());
-			// shrink it
-			m_cli_key.shrink_to_fit();
 			// setup the certificate
-			const br_x509_certificate cert = {
-				m_cli_cert.data(), 
-				m_cli_cert.size()
-			};
-			const SSLClientParameters params = {
-				&cert,
-				1,
-				{
-					BR_EC_secp256r1,
-					m_cli_key.data(), 
-					m_cli_key.size()
-				}
-			};
-			m_client.setMutualAuthParams(&params);
+			m_client.setMutualAuthParams(&m_params);
 		}
 	}
 	
@@ -135,6 +138,24 @@ LoomInternetPlat::ClientSession Loom_Ethernet_I::connect_to_domain(const char* d
 	if (m_client.connected()) m_client.stop();
 	// * the rainbow connection *
 	int status = m_client.connect(domain, 443);
+	if (!status) {
+		// log fail, and return
+		print_module_label();
+		LPrint("Ethernet connect failed with error ", m_client.getWriteError(), "\n");
+		m_is_connected = false;
+		return ClientSession();
+	}
+	m_is_connected = true;
+	// return a pointer to the client for data reception
+	return LoomInternetPlat::ClientSession(&m_client);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+LoomInternetPlat::ClientSession Loom_Ethernet_I::connect_to_ip(const IPAddress& ip, const uint16_t port) {
+	// if the socket is somehow still open, close it
+	if (m_client.connected()) m_client.stop();
+	// * the rainbow connection *
+	int status = m_client.connect(ip, port);
 	if (!status) {
 		// log fail, and return
 		print_module_label();

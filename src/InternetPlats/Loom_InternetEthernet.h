@@ -16,6 +16,9 @@ class Loom_Ethernet_I : public LoomInternetPlat
 protected:
 	std::vector<unsigned char> m_cli_cert;					/// The client certificate, if one is provided (DER format)
 	std::vector<unsigned char> m_cli_key;					/// The client private key, if one if provided (DER format)
+	const br_x509_certificate m_cert;
+	const SSLClientParameters m_params;
+
 	SSLClient<EthernetClient> m_client;		/// Underlying Ethernet SSLclient instance
 
 	byte			m_mac[6];				/// The Ethernet MAC address
@@ -52,6 +55,9 @@ public:
 
 	// remember to close the socket!
 	ClientSession connect_to_domain(const char* domain) override;
+
+	// remember to close the socket!
+	ClientSession connect_to_ip(const IPAddress& ip, const uint16_t port) override;
 
 	/// Connect to internet
 	void connect() override;

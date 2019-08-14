@@ -31,6 +31,7 @@ const Factory::NameModulePair Factory::LookupTable[] =
 
 	// PublishPlat
 	{"GoogleSheets",		Construct<Loom_GoogleSheets>,			nullptr },
+	{"Spool",				Construct<Loom_SpoolPublish>,			nullptr },
 	// {"MaxPub",				Construct<Loom_MaxPub>,					ConstructDefault<Loom_MaxPub> },
 	{"MaxPub",				Construct<Loom_MaxPub>,					nullptr },
 
