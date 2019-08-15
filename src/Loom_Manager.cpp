@@ -37,12 +37,14 @@ LoomManager::LoomManager(
 		uint8_t			instance, 
 		DeviceType		device_type, 
 		Verbosity		print_verbosity, 
-		Verbosity		package_verbosity
+		Verbosity		package_verbosity,
+		uint16_t		interval
 	)
 	: instance(instance)
 	, print_verbosity(print_verbosity)
 	, package_verbosity(package_verbosity)
 	, device_type(device_type)
+	, interval(interval)
 {
 	snprintf(this->device_name, 20, "%s", device_name);
 }
@@ -67,6 +69,7 @@ void LoomManager::print_config(bool print_modules_config)
 	LPrintln("\tDevice Name         : ", device_name );
 	LPrintln("\tInstance Number     : ", instance );
 	LPrintln("\tDevice Type         : ", enum_device_type_string(device_type) );
+	LPrintln("\tInterval            : ", interval );
 
 	list_modules();
 
@@ -313,9 +316,18 @@ void LoomManager::dispatch(JsonObject json)
 	LPrintln();
 	// return;
 
+	// If is command
 	if ( strcmp(json["type"], "command") == 0 )	{
-		// LPrintln("Is command");
+
+		// For each command
 		for ( JsonObject cmd : json["commands"].as<JsonArray>() ) {
+
+			// Check if command is for manager 
+			if ( strcmp(cmd["module"].as<const char*>(), "Manager" ) == 0) {
+				if (dispatch_self(cmd)) break;
+			}
+
+			// Otherwise iterate over modules until module to handle command is found
 			// LPrintln("Try to dispatch to: ", cmd["module"].as<const char*>() );
 			for (auto module : modules) {
 				if ( (module != nullptr) && 
@@ -334,6 +346,16 @@ void LoomManager::dispatch(JsonObject json)
 void LoomManager::dispatch()
 {
 	dispatch( internal_json() );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::dispatch_self(JsonObject json)
+{
+	JsonArray params = json["params"];
+	switch( (char)json["func"] ) {
+		case 'i': if (params.size() >= 1) { set_interval( EXPAND_ARRAY(params, 1) ); } return true;
+	}
+	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -366,12 +388,13 @@ void LoomManager::flash_LED(uint8_t sequence[3])
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::pause(uint16_t ms)
+void LoomManager::nap(uint16_t ms)
 {
 	Serial.end();
 	USBDevice.detach();
 
-	uint16_t sleepMS = Watchdog.sleep(ms);
+	// Sleep, with max time of 16000 milliseconds
+	uint16_t sleepMS = Watchdog.sleep( (ms <= 16000) ? ms : 16000); 
 
 	USBDevice.attach();
 	Serial.begin(SERIAL_BAUD);
@@ -454,6 +477,23 @@ LoomModule*	LoomManager::find_module(LoomModule::Type type, uint8_t idx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomManager::set_interval(uint16_t ms) 
+{
+	interval = ms; 
+	print_device_label();
+	LPrintln("Set interval to: ", interval);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
 
 
 

@@ -38,7 +38,13 @@ void Loom_WiFi_I::connect()
 	do {
 		print_module_label();
 		LPrintln("Trying to connect to : ", SSID);
-		status = WiFi.begin(SSID, pass);
+
+		// Check if password provided
+		if (pass == nullptr || pass[0] == '\0' ) {
+			status = WiFi.begin(SSID);			
+		} else {
+			status = WiFi.begin(SSID, pass);
+		}
 		attempt_count++;
 	} while (status != WL_CONNECTED && attempt_count < 5);
 
