@@ -57,7 +57,6 @@ class Loom_MAX31856;
 class Loom_LoRa;
 class Loom_nRF;
 class Loom_Bluetooth;
-class Loom_SlipSerial;
 
 // LogPlats
 class Loom_OLED;
