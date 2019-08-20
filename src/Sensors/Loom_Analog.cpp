@@ -161,10 +161,14 @@ void Loom_Analog::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	data["Vbat"] = battery;
-	char buf[3];
+	char buf[12];
 	for (auto i = 0; i < ANALOG_COUNT; i++) {
 		if (pin_enabled[i]) {
-			sprintf(buf, "%s%d", "A", i);
+			if (!enable_conversions || conversions[i] == Conversion::NONE) {
+				sprintf(buf, "%s%d", "A", i);
+			} else {
+				sprintf(buf, "%s", conversion_name(get_conversion(i)));
+			}
 			data[buf] = (!enable_conversions || conversions[i] == Conversion::NONE) 
 						 ? analog_vals[i]
 						 : convert(i, analog_vals[i]);
