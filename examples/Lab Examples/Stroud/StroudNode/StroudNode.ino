@@ -36,10 +36,7 @@ void setup()
 		Loom.parse_config(json_config);
 	}
 
-	// if (use_max) {		// For extra print info
-	// 	Loom.MaxPub().set_print_verbosity(Verbosity::V_HIGH);
-	// 	Loom.MaxSub().set_print_verbosity(Verbosity::V_HIGH);
-	// }
+	Loom.set_print_verbosity(Verbosity::V_HIGH, true);
 
 	Loom.print_config(true);				// Print config
 
@@ -63,6 +60,9 @@ void loop()
 	Loom.display_data();		// Print data (will not work properly if using nap instead of pause below)
 	Loom.add_data("Packet", "Number", i++);		// Add packet number (not necessary)
 
+	Loom.SDCARD().log();		// Log to SD
+
+
 	if (Loom.has_module(LoomModule::Type::MaxPub)) {
 		Loom.MaxPub().publish();					// Send data to Max
 	}
@@ -70,7 +70,7 @@ void loop()
 		Loom.MaxSub().subscribe();					// Receive any messages from Max
 	} 
 	if ( Loom.has_module(LoomModule::Type::GoogleSheets) ) {
-		Loom.GoogleSheets().publish();
+		Loom.GoogleSheets().publish();				// Send data to Google Sheets
 	}
 
 	// Loom.pause(); 				// Wait (delay) based on 'interval' value in config

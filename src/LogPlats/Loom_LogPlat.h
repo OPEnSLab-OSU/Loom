@@ -46,7 +46,8 @@ public:
 
 	/// Version of log for use with LoomManager.
 	/// Accesses Json from LoomManager
-	void			log();
+	void	log();		
+	// virtual void	log();		
 
 //=============================================================================
 ///@name	PRINT INFORMATION

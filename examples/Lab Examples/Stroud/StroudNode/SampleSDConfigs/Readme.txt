@@ -4,6 +4,7 @@ They will not work as provided, you must fill out/configure the following as nee
 - Device name 
 - Instance number
 - Interval
+- SD default save file
 - WiFi SSID
 - WiFi Password
 - Google script

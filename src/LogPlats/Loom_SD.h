@@ -66,6 +66,9 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+
+	// void		log() override;  
+
 	void		log(JsonObject json) override { save_json(json, default_file); }
 
 	/// Version of logging for use with LoomManager.

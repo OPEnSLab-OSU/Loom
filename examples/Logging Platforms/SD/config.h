@@ -32,6 +32,5 @@
 			'name':'PCF8523',\
 			'params':'default'\
 		}\
-
 	]\
 }"
