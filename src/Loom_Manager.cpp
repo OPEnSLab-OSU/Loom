@@ -107,8 +107,8 @@ void LoomManager::add_module(LoomModule* module)
 
 	print_device_label();
 
-	if (module == nullptr) {
-		LPrintln("Cannot add null module");
+	if (module == nullptr || !module->get_active()) {
+		LPrintln("Cannot add null/inactive module");
 		return;
 	}
 
@@ -169,7 +169,7 @@ void LoomManager::list_modules()
 			LPrintln("\t", LoomModule::enum_category_string(category), "s");//, " (", modules.size(), "):");
 			last_category = category;
 		}
-		if ( (module != nullptr) && ( module->get_active()) ) {
+		if ( module != nullptr ) {
 			LPrintln( "\t\t[", module->get_active() ? "+" : "-" , "] ", module->get_module_name() );
 		}
 	}	
@@ -354,6 +354,7 @@ bool LoomManager::dispatch_self(JsonObject json)
 	JsonArray params = json["params"];
 	switch( (char)json["func"] ) {
 		case 'i': if (params.size() >= 1) { set_interval( EXPAND_ARRAY(params, 1) ); } return true;
+		case 'j': if (params.size() >= 1) { parse_config_SD( EXPAND_ARRAY(params, 1) ); } return true;
 	}
 	return false;
 }
@@ -446,8 +447,6 @@ void LoomManager::get_config()
 	JsonObject general_info 	= json.createNestedObject("general");
 	general_info["name"]		= device_name;
 	general_info["instance"]	= instance;
-	// general_info["family"]		= family;
-	// general_info["family_num"]	= family_num;
 
 	// Start array for modules to add config objects to
 	JsonArray components = json.createNestedArray("components");
@@ -482,6 +481,15 @@ void LoomManager::set_interval(uint16_t ms)
 	interval = ms; 
 	print_device_label();
 	LPrintln("Set interval to: ", interval);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::has_module(LoomModule::Type type)
+{
+	for (auto module : modules) {
+		if (module->get_module_type() == type) return true;
+	}
+	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

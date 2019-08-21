@@ -44,7 +44,7 @@ public:
 	void second_stage_ctor() override;
 
 	/// Destructor
-	~Loom_MaxSub() = default;
+	~Loom_MaxSub() { if (UDP_Inst) UDP_Inst->stop(); }
 
 //=============================================================================
 ///@name	OPERATION

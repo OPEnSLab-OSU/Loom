@@ -49,6 +49,8 @@ void Loom_GoogleSheets::print_config()
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat* plat) 
 {
+	LPrintln("In Send to Internet");
+
     // connect to script.google.com
     auto network = plat->connect_to_domain("script.google.com");
     // check if we connected
@@ -90,6 +92,7 @@ bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat
     // all done!
     print_module_label();
     LPrint("Published successfully!\n");
+
     return true;
 }
 

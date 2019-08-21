@@ -33,11 +33,11 @@ Loom_WiFi_I::Loom_WiFi_I(JsonArrayConst p)
 void Loom_WiFi_I::connect()
 {
 	// Try to connect, attempting the connection up to 5 times (this number is arbitrary)
-	int attempt_count = 0;
+	uint8_t attempt_count = 0;
 	uint8_t status = 0;
 	do {
 		print_module_label();
-		LPrintln("Trying to connect to : ", SSID);
+		LPrintln("Trying to connect to: ", SSID);
 
 		// Check if password provided
 		if (pass == nullptr || pass[0] == '\0' ) {
@@ -46,6 +46,7 @@ void Loom_WiFi_I::connect()
 			status = WiFi.begin(SSID, pass);
 		}
 		attempt_count++;
+		delay(2000);
 	} while (status != WL_CONNECTED && attempt_count < 5);
 
 	if (attempt_count == 5) {

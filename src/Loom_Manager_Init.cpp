@@ -40,14 +40,15 @@ bool LoomManager::parse_config_SD(const char* config_file)
 	LPrintln("Read config from file: '", config_file, "'");
 
 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
-	if (!SD.begin(SD_CS)) {
+	delay(25);
+	if (!SD.begin(SD_CS)) {	// Make sure we can communicate with SD
 		print_device_label();
 		LPrintln("SD failed to begin");
 		return false;
 	}
 
 	File file = SD.open(config_file);
-	if (!file) {
+	if (!file) {	// Make sure file exists
 		print_device_label();
 		LPrintln("Failed to open '", config_file, "'");
 		return false;
@@ -57,7 +58,7 @@ bool LoomManager::parse_config_SD(const char* config_file)
 	DeserializationError error = deserializeJson(doc, file);
 	
 	// Test if parsing succeeds.
-	if (error) {
+	if (error) { // Make sure json was valid
 		print_device_label();
 		LPrintln("deserializeJson() failed: ", error.c_str());
 		return false;
@@ -117,9 +118,9 @@ bool LoomManager::parse_config_json(JsonObject config)
 	// Sort modules by type
 	std::sort(modules.begin(), modules.end(), module_sort_comp());
 	
-
+	// Run second stage constructors
 	for (auto module : modules) {
-		if ( (module != nullptr) && module->get_active() ) {
+		if ( module != nullptr ) {
 			module->second_stage_ctor();
 		}
 	}	

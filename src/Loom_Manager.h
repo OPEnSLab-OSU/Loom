@@ -186,7 +186,8 @@ public:
 	
 	/// Parse a JSON configuration on SD card specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
-	/// and added to manager lists for managing
+	/// and added to manager lists for managing.
+	/// Json should be on a single line in a .txt file.
 	/// \param[in]	json_config		Configuration
 	/// \return True if success
 	bool		parse_config_SD(const char* config_file);
@@ -309,6 +310,9 @@ public:
 	/// \return True is success, false if fail or file not found
 	// bool		save_SD_config(const char* config_file);
 
+	/// Determine if the manager has a module of the specified type
+	///	\param[in]	type	Module type to check for
+	bool has_module(LoomModule::Type type);
 
 
 //=============================================================================

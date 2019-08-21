@@ -2,6 +2,10 @@
 #include "Loom_Module_Factory.h"
 
 
+
+
+
+
 const Factory::NameModulePair Factory::LookupTable[] =
 {
 	// InterruptManager
@@ -26,13 +30,13 @@ const Factory::NameModulePair Factory::LookupTable[] =
 	
 	// InternetPlat
 	// {"Ethernet",			Construct<Loom_Ethernet_I>,				ConstructDefault<Loom_Ethernet_I> },
-	{"Ethernet",			Construct<Loom_Ethernet_I>,				nullptr },
+	// {"Ethernet",			Construct<Loom_Ethernet_I>,				nullptr },
 	{"WiFi",				Construct<Loom_WiFi_I>,					ConstructDefault<Loom_WiFi_I> },
 
 	// PublishPlat
 	{"GoogleSheets",		Construct<Loom_GoogleSheets>,			nullptr },
 	{"MaxPub",				Construct<Loom_MaxPub>,					nullptr },
-
+	// SubscribePlat
 	{"MaxSub",				Construct<Loom_MaxSub>,					nullptr },
 
 	// LogPlat
@@ -73,6 +77,87 @@ const Factory::NameModulePair Factory::LookupTable[] =
 	{"NTP_Sync", 			Construct<LoomNTPSync>,					ConstructDefault<LoomNTPSync> }
 };
 
+
+
+////////////////////////////////////////////////////////
+
+
+// const Factory::NameModulePair Factory::LookupTable[] =
+// {
+// 	// InterruptManager
+// 	{"Interrupt_Manager",	Construct<Loom_Interrupt_Manager>,		ConstructDefault<Loom_Interrupt_Manager> },
+
+// 	// SleepManager
+// 	{"Sleep_Manager",		Construct<Loom_Sleep_Manager>,			ConstructDefault<Loom_Sleep_Manager> },
+	
+// 	// Multiplexer
+// 	{"Multiplexer",			Construct<Loom_Multiplexer>,			ConstructDefault<Loom_Multiplexer> },
+	
+// 	// Actuator
+// 	{"Neopixel",			Construct<Loom_Neopixel>,				ConstructDefault<Loom_Neopixel> },
+// 	{"Relay",				Construct<Loom_Relay>,					ConstructDefault<Loom_Relay> },
+// 	{"Servo",				Construct<Loom_Servo>,					ConstructDefault<Loom_Servo> },
+// 	{"Stepper",				Construct<Loom_Stepper>,				ConstructDefault<Loom_Stepper> },
+		
+// 	// // CommPlat
+// 	{"LoRa",				Construct<Loom_LoRa>,					ConstructDefault<Loom_LoRa> },
+// 	{"nRF",					Construct<Loom_nRF>,					ConstructDefault<Loom_nRF> },
+// 	{"Bluetooth",			Construct<Loom_Bluetooth>,				ConstructDefault<Loom_Bluetooth> },
+	
+// 	// InternetPlat
+// 	// {"Ethernet",			Construct<Loom_Ethernet_I>,				ConstructDefault<Loom_Ethernet_I> },
+// 	// {"Ethernet",			Construct<Loom_Ethernet_I>,				nullptr },
+// 	{"WiFi",				Construct<Loom_WiFi_I>,					ConstructDefault<Loom_WiFi_I> },
+
+// 	// PublishPlat
+// 	{"GoogleSheets",		Construct<Loom_GoogleSheets>,			nullptr },
+// 	{"MaxPub",				Construct<Loom_MaxPub>,					nullptr },
+
+// 	{"MaxSub",				Construct<Loom_MaxSub>,					nullptr },
+
+// 	// LogPlat
+// 	{"OLED",				Construct<Loom_OLED>,					ConstructDefault<Loom_OLED> },
+// 	{"SD",					Construct<Loom_SD>,						ConstructDefault<Loom_SD> },
+	
+// 	// Rtc
+// 	{"DS3231",				Construct<Loom_DS3231>,					ConstructDefault<Loom_DS3231> },
+// 	{"PCF8523",				Construct<Loom_PCF8523>,				ConstructDefault<Loom_PCF8523> },
+	
+// 	// Sensor
+// 	{"Analog",				Construct<Loom_Analog>,					ConstructDefault<Loom_Analog> },
+// 	{"Digital",				Construct<Loom_Digital>,				ConstructDefault<Loom_Digital> },
+
+// 	// Other
+// 	{"NTP_Sync", 			Construct<LoomNTPSync>,					ConstructDefault<LoomNTPSync> }
+// };
+
+
+
+
+
+
+// auto test = std::make_tuple(
+// 			Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi_I>,			ConstructDefault<Loom_WiFi_I> },
+// 			Factory::NameModulePair{"Analog",		Construct<Loom_Analog>,			ConstructDefault<Loom_Analog> }
+// 	);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////
 LoomModule* Factory::Create(JsonVariant module)
 {
@@ -83,6 +168,7 @@ LoomModule* Factory::Create(JsonVariant module)
 
 			if (module["params"].is<JsonArray>()) {
 				// Generate according to list of parameters
+				LPrintln("[Factory] Creating: ", name);
 				return elem.Construct(module["params"]);
 			} else if ( module["params"].is<const char*>() && strcmp(module["params"], "default") == 0 ) {
 				// Generate using default parameters
@@ -106,6 +192,10 @@ LoomModule* Factory::Create(JsonVariant module)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 
 
