@@ -26,7 +26,7 @@ public:
 	/// \param[in]  internet_module_index	Int | <0> | [0-5] | Index from zero of of the desired internet platform based on the JSON configuration
 	/// \param[in]  sync_interval_hours		Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
 	LoomNTPSync(
-		const uint			internet_module_index	= 0,
+		// const uint			internet_module_index	= 0,
 		const uint			sync_interval_hours		= 0
 	);
 
@@ -73,7 +73,7 @@ private:
 	};
 	
 	/// Store the Internet Plat from second stage contsruction
-	const uint m_internet_module_index;
+	// const uint m_internet_module_index;
 	/// Store the sync interval, in hours
 	const uint m_sync_interval;
 	/// Store the Internet Plat from second stage contsruction

@@ -31,7 +31,6 @@ protected:
 	TimeZone	timezone;			/// The TimeZone to use
 
 	bool		use_utc_time;		/// Whether or not use UTC time, else local time
-	bool		get_internet_time;	/// Whether or not to try to get the time over an enabled internet platform
 
 	char		datestring[20];		/// Latest saved string of the Date (year/month/day)
 	char		timestring[20];		/// Latest saved string of the time (hour:minute:second)
@@ -47,8 +46,7 @@ public:
 			const char*			module_name,
 			LoomModule::Type	module_type,
 			TimeZone			timezone,
-			bool				use_utc_time,
-			bool				get_internet_time
+			bool				use_utc_time
 		);
 
 	/// Destructor
@@ -67,7 +65,8 @@ public:
 
 	/// Set time to provided timezone
 	/// \param[in]	time	Time to set to
-	virtual void	time_adjust(DateTime time) = 0;
+	/// \param[in]	is_utc	True if 'time' is in UTC, false if local
+	void			time_adjust(DateTime time, bool is_utc=true);
 
 	/// Get timestamp
 	/// \param[out]	header		Column header(s) of timestamp element
@@ -168,6 +167,9 @@ protected:
 	// polymorphic, they have to manager their own 
 
 	/// Begin auxiliary function that subclasses need to implement
+	virtual void	_adjust(DateTime time) = 0;
+
+	/// Begin auxiliary function that subclasses need to implement
 	virtual bool	_begin() = 0;
 
 	/// Initialization auxiliary function that subclasses need to implement
@@ -187,14 +189,6 @@ protected:
 	/// Check if current RTC time is valid (not necessarily correct)
 	/// \return	True if valid
 	bool			rtc_validity_check();
-
-
-
-// needs to reference and internet connectivity class to get unix time
-
-	/// Try to set RTC to time from internet 
-	/// \return	True if success
-	bool			set_rtc_from_internet_time(); 
 
 };
 

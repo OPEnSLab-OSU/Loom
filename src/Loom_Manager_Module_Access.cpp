@@ -84,12 +84,12 @@ Loom_Bluetooth& LoomManager::Bluetooth(uint8_t idx)
 ///////////////////////////////////////////////////////////////////////////////
 // --- InternetPlats --- 
 
-LoomInternetPlat& LoomManager::InternetPlat(const uint8_t idx)
-{
-	// if (idx >= modules.size()) return *(LoomInternetPlat*)(&global_stub);
-	// else return *(modules[idx]);
-	return *(LoomInternetPlat*)(&global_stub);
-}
+// LoomInternetPlat& LoomManager::InternetPlat(const uint8_t idx)
+// {
+// 	// if (idx >= modules.size()) return *(LoomInternetPlat*)(&global_stub);
+// 	// else return *(modules[idx]);
+// 	return *(LoomInternetPlat*)(&global_stub);
+// }
 
 Loom_Ethernet_I& LoomManager::Ethernet(uint8_t idx) 
 {
@@ -107,12 +107,12 @@ Loom_WiFi_I& LoomManager::WiFi(uint8_t idx)
 ///////////////////////////////////////////////////////////////////////////////
 // --- PublishPlats ---
 
-LoomPublishPlat& LoomManager::PublishPlat(const uint8_t idx)
-{
-	// if (idx >= modules.size()) return *(LoomPublishPlat*)(&global_stub);
-	// else return *(modules[idx]);
-	return *(LoomPublishPlat*)(&global_stub);
-}
+// LoomPublishPlat& LoomManager::PublishPlat(const uint8_t idx)
+// {
+// 	// if (idx >= modules.size()) return *(LoomPublishPlat*)(&global_stub);
+// 	// else return *(modules[idx]);
+// 	return *(LoomPublishPlat*)(&global_stub);
+// }
 
 Loom_GoogleSheets& LoomManager::GoogleSheets(uint8_t idx) 
 {

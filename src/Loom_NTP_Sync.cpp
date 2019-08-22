@@ -5,11 +5,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomNTPSync::LoomNTPSync(	
-        const uint          internet_module_index,
+        // const uint          internet_module_index,
         const uint          sync_interval_hours
     ) 
     : LoomModule( "NTP", Type::NTP )
-    , m_internet_module_index( internet_module_index )
+    // , m_internet_module_index( internet_module_index )
     , m_sync_interval( sync_interval_hours )
     , m_internet( nullptr )
     , m_rtc( nullptr )
@@ -19,7 +19,8 @@ LoomNTPSync::LoomNTPSync(
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomNTPSync::LoomNTPSync(JsonArrayConst p)
-	: LoomNTPSync( EXPAND_ARRAY(p, 2) ) {}
+	// : LoomNTPSync( EXPAND_ARRAY(p, 2) ) {}
+    : LoomNTPSync( (uint)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomNTPSync::second_stage_ctor() 
@@ -27,12 +28,16 @@ void LoomNTPSync::second_stage_ctor()
     // check to see if we have a device manager
     if (device_manager == nullptr) { m_last_error = Error::INVAL_DEVICE_MANAGE; return; }
     // check if internet platform exist
-    LoomModule* temp = (LoomModule*)&(device_manager->InternetPlat(m_internet_module_index));
-    if (temp->category() == LoomModule::Category::InternetPlat) m_internet = (LoomInternetPlat*)temp;
+    // LoomModule* temp = (LoomModule*)&(device_manager->InternetPlat(m_internet_module_index));
+
+    // Try to get internet platform from manager
+    LoomModule* temp = device_manager->find_module_by_category(LoomModule::Category::InternetPlat, 0);
+    // if (temp->category() == LoomModule::Category::InternetPlat) m_internet = (LoomInternetPlat*)temp;
+    if (temp != nullptr) m_internet = (LoomInternetPlat*)temp;
     else {
         m_last_error = Error::INVAL_INTERNET;
         print_module_label();
-        LPrint("Unable to find internet platform, instead got: ", (int)(temp->get_module_type()), " using index ", m_internet_module_index, "\n");
+        LPrint("Unable to find internet platform");//, instead got: ", (int)(temp->get_module_type()), " using index ", m_internet_module_index, "\n");
         return;
     }
     // same for RTC
@@ -42,7 +47,10 @@ void LoomNTPSync::second_stage_ctor()
         if (m_internet->is_connected()) {
             print_module_label();
             LPrintln("Setting RTC time");
-            m_rtc->time_adjust(m_internet->get_time());
+            m_rtc->time_adjust(m_internet->get_time(), true); // true to indicate this time is UTC
+
+            // If only set to sync once, set next sync time in past
+            if (m_sync_interval == 0) m_next_sync = DateTime(0);
         }
     } else {
         m_last_error = Error::INVAL_RTC;

@@ -5,10 +5,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DS3231::Loom_DS3231(
 		TimeZone		timezone,
-		bool			use_utc_time,
-		bool			get_internet_time
+		bool			use_utc_time
 	)
-	: LoomRTC( "DS3231", Type::DS3231, timezone, use_utc_time, get_internet_time )
+	: LoomRTC( "DS3231", Type::DS3231, timezone, use_utc_time )
 {
 	init();
 
@@ -21,7 +20,7 @@ Loom_DS3231::Loom_DS3231(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DS3231::Loom_DS3231(JsonArrayConst p)
-	: Loom_DS3231((TimeZone)(int)p[0], p[1], p[2]) {}
+	: Loom_DS3231( (TimeZone)(int)p[0], p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_DS3231::_begin()
@@ -33,18 +32,7 @@ bool Loom_DS3231::_begin()
 void Loom_DS3231::print_config()
 {
 	LoomRTC::print_config();
-
 	// will print out alarm info
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_DS3231::time_adjust(DateTime time)
-{
-	rtc_inst.adjust(time);
-
-	print_module_label();
-	LPrint("Adjusted time to: "); 
-	print_DateTime(time);	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
