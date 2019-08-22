@@ -10,7 +10,7 @@ LoomManager Loom{};
 
 
 
-bool use_max; 
+bool use_max; 							// True if using Max, false for Google Sheets
 
 
 void setup() 
@@ -47,7 +47,7 @@ void setup()
 }
 
 
-int i = 0;
+int packet_num = 0;
 
 void loop() 
 {
@@ -58,7 +58,7 @@ void loop()
 
 	Loom.package();				// Build Json from data
 	Loom.display_data();		// Print data (will not work properly if using nap instead of pause below)
-	Loom.add_data("Packet", "Number", i++);		// Add packet number (not necessary)
+	Loom.add_data("Packet", "Number", packet_num++);		// Add packet number (not necessary)
 
 	Loom.SDCARD().log();		// Log to SD
 
@@ -74,7 +74,9 @@ void loop()
 	}
 
 	// Loom.pause(); 				// Wait (delay) based on 'interval' value in config
-	Loom.nap(); 				// Wait (sleepy dog) based on 'interval' value in config
+	Loom.nap(); 		// Wait (sleepy dog) based on 'interval' value in config
+						// Using nap will require a double tap to the reset button
+						// to put the device back into bootloader mode to reupload code
 }
 
 
