@@ -1,11 +1,12 @@
 
 #include "Loom_Interrupt_Manager.h"
+#include "Loom_Sleep_Manager.h"
 #include "RTC/Loom_RTC.h"
+#include "Loom_Manager.h"
 
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
-#include "Loom_Manager.h"
 
 
 bool Loom_Interrupt_Manager::interrupt_triggered[InteruptRange] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -122,9 +123,23 @@ void Loom_Interrupt_Manager::link_device_manager(LoomManager* LM)
 {
 	LoomModule::link_device_manager(LM);
 
-	// If no currently linked RTC object, try to get one from Manager
-	if ( (RTC_Inst == nullptr) && (LM != nullptr) ){
-		RTC_Inst = LM->get_rtc_module();
+	if ( LM ){
+
+		// Set manager's interrupt manager 
+		LM->interrupt_manager = this;
+
+		// Get RTC from manager if needed
+		if ( !RTC_Inst ) {
+			RTC_Inst = LM->get_rtc_module();
+		}
+
+		// Link to sleep manager
+		auto sleep_manager = LM->get_sleep_manager(); 
+		if ( sleep_manager ) {
+			link_sleep_manager(sleep_manager);
+			sleep_manager->link_interrupt_manager(this);
+
+		}
 	}
 }
 

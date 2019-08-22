@@ -2,6 +2,7 @@
 #include "Loom_RTC.h"
 #include "Loom_Manager.h"
 #include "../InternetPlats/Loom_InternetPlat.h"
+#include "../Loom_Interrupt_Manager.h"
 
 
 #define EI_NOTEXTERNAL
@@ -318,12 +319,11 @@ void LoomRTC::convert_local_to_utc(bool to_utc)
 	}
 
 	DateTime utc = now() + TimeSpan(0, (int)adj, min, 0);
-	time_adjust(utc);
 
 	print_module_label();
-	LPrintln("Time adjusted to ", (to_utc) ? "UTC" : "Local" , ": ");
-	print_time();
-	LPrintln();
+	LPrintln("Adjusting time to ", (to_utc) ? "UTC" : "Local");
+
+	time_adjust(utc);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -346,3 +346,22 @@ bool LoomRTC::rtc_validity_check()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomRTC::link_device_manager(LoomManager* LM)
+{
+	LoomModule::link_device_manager(LM);
+
+	if (LM) {
+		// Set manager's interrupt manager 
+		LM->rtc_module = this;
+
+		auto interrupt_manager = LM->get_interrupt_manager();
+		if (interrupt_manager) {
+			interrupt_manager->set_RTC_module( this );
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+

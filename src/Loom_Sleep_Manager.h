@@ -116,6 +116,8 @@ public:
 ///@name	MISCELLANEOUS
 /*@{*/ //======================================================================
 
+	void 		link_device_manager(LoomManager* LM) override;
+
 	/// Convert enum of sleep mode to a c-string
 	/// \param[in]	m	Sleep to get string of
 	/// \return C-string of sleep mode

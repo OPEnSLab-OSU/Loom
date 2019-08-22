@@ -116,43 +116,6 @@ void LoomManager::add_module(LoomModule* module)
 
 	modules.emplace_back(module);
 	module->link_device_manager(this);
-
-
-// Add the following operations to second stage construction
-
-	// If is RTC
-	if (  (module->category() == LoomModule::Category::L_RTC) 
-	   && (interrupt_manager != nullptr) ) {
-		interrupt_manager->set_RTC_module( (LoomRTC*)module );
-	}
-
-	// If is Interrupt manager
-	if (module->get_module_type() == LoomModule::Type::Interrupt_Manager) {
-		this->interrupt_manager = (Loom_Interrupt_Manager*)module; 
-
-		// Point new interrupt manager to existing RTC
-		if (rtc_module != nullptr) {
-			this->interrupt_manager->set_RTC_module(rtc_module);
-		}
-
-		// Point existing sleep manager to new interrupt manager
-		if (sleep_manager != nullptr) {
-			this->interrupt_manager->link_sleep_manager(this->sleep_manager);
-			this->sleep_manager->link_interrupt_manager(this->interrupt_manager);
-		}
-	}
-
-	// If is Sleep manager
-	if (module->get_module_type() == LoomModule::Type::Sleep_Manager) {
-		this->sleep_manager = (Loom_Sleep_Manager*)module; 
-
-		// Point existing interrupt_manager manager to new sleep manager
-		if (this->interrupt_manager != nullptr) {
-			this->sleep_manager->link_interrupt_manager(this->interrupt_manager);
-			this->interrupt_manager->link_sleep_manager(this->sleep_manager);
-		}
-	}
-	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -298,13 +261,18 @@ JsonObject LoomManager::internal_json(bool clear)
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomManager::publish_all(const JsonObject json)
 {
-	// bool result = true;
-	// for (auto publisher : publish_modules) {
-	// 	if ( (publisher != nullptr) && ( publisher->get_active() ) ){
-	// 		result &= publisher->publish( json );
-	// 	}
-	// }
-	// return (publish_modules.size() > 0) && result;
+	bool result = true;
+	uint8_t count = 0;
+	for (auto module : modules) {
+		if ( (module != nullptr) &&
+			 (module->category() == LoomModule::Category::PublishPlat) &&
+			 (module->get_active()) 
+			) {
+			result &= ((LoomPublishPlat*)module)->publish( json );
+			count++;
+		}
+	}
+	return (count > 0) && result;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -140,6 +140,8 @@ public:
 //=============================================================================
 ///@name	MISCELLANEOUS
 /*@{*/ //======================================================================
+	
+	void 		link_device_manager(LoomManager* LM) override;
 
 	/// Get string of name associated with time zone enum
 	/// \return C-string of time zone

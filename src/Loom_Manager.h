@@ -495,6 +495,7 @@ private:
 	// Allow secondary managers to access private members of LoomManager
 	friend class Loom_Interrupt_Manager;
 	friend class Loom_Sleep_Manager;
+	friend class LoomRTC;
 	friend class Loom_SD;
 	friend class LoomNTPSync;
 
