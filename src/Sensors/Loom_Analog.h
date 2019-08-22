@@ -2,7 +2,6 @@
 
 #include "Loom_Sensor.h"
 
-
 #define VBATPIN A7			/// Battery pin
 #define ANALOG_COUNT 6		/// Number of analog pins
 
@@ -42,6 +41,10 @@ protected:
 
 	Conversion	conversions[ANALOG_COUNT];		/// Conversion (if any) to apply to analog value when printing / packaging
 
+	// the following will likely get a different implementation
+	float		temperature;					/// Temperature to use in conversions
+	float		pH_offset;						/// Offset to use in pH conversion
+
 public:
 
 //=============================================================================
@@ -78,7 +81,9 @@ public:
 			Conversion		convertA2			= Conversion::NONE,
 			Conversion		convertA3			= Conversion::NONE,
 			Conversion		convertA4			= Conversion::NONE,
-			Conversion		convertA5			= Conversion::NONE
+			Conversion		convertA5			= Conversion::NONE,
+			float			temperature			= 25.0,
+			float			pH_offset			= 0.0
 		);
 
 	/// Constructor that takes Json Array, extracts args
