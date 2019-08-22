@@ -91,16 +91,16 @@ Loom_Bluetooth& LoomManager::Bluetooth(uint8_t idx)
 // 	return *(LoomInternetPlat*)(&global_stub);
 // }
 
-Loom_Ethernet_I& LoomManager::Ethernet(uint8_t idx) 
+Loom_Ethernet& LoomManager::Ethernet(uint8_t idx) 
 {
 	LoomModule* tmp = find_module(LoomModule::Type::Ethernet, idx);
-	return (*(Loom_Ethernet_I*)( (tmp) ? tmp : &global_stub ));
+	return (*(Loom_Ethernet*)( (tmp) ? tmp : &global_stub ));
 }
 
-Loom_WiFi_I& LoomManager::WiFi(uint8_t idx) 
+Loom_WiFi& LoomManager::WiFi(uint8_t idx) 
 {
 	LoomModule* tmp = find_module(LoomModule::Type::WiFi, idx);
-	return (*(Loom_WiFi_I*)( (tmp) ? tmp : &global_stub ));
+	return (*(Loom_WiFi*)( (tmp) ? tmp : &global_stub ));
 }
 
 

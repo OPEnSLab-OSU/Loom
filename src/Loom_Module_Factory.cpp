@@ -29,9 +29,9 @@ const Factory::NameModulePair Factory::LookupTable[] =
 	{"Bluetooth",			Construct<Loom_Bluetooth>,				ConstructDefault<Loom_Bluetooth> },
 	
 	// InternetPlat
-	// {"Ethernet",			Construct<Loom_Ethernet_I>,				ConstructDefault<Loom_Ethernet_I> },
-	// {"Ethernet",			Construct<Loom_Ethernet_I>,				nullptr },
-	{"WiFi",				Construct<Loom_WiFi_I>,					ConstructDefault<Loom_WiFi_I> },
+	// {"Ethernet",			Construct<Loom_Ethernet>,				ConstructDefault<Loom_Ethernet> },
+	// {"Ethernet",			Construct<Loom_Ethernet>,				nullptr },
+	{"WiFi",				Construct<Loom_WiFi>,					ConstructDefault<Loom_WiFi> },
 
 	// PublishPlat
 	{"GoogleSheets",		Construct<Loom_GoogleSheets>,			nullptr },
@@ -105,9 +105,9 @@ const Factory::NameModulePair Factory::LookupTable[] =
 // 	{"Bluetooth",			Construct<Loom_Bluetooth>,				ConstructDefault<Loom_Bluetooth> },
 	
 // 	// InternetPlat
-// 	// {"Ethernet",			Construct<Loom_Ethernet_I>,				ConstructDefault<Loom_Ethernet_I> },
-// 	// {"Ethernet",			Construct<Loom_Ethernet_I>,				nullptr },
-// 	{"WiFi",				Construct<Loom_WiFi_I>,					ConstructDefault<Loom_WiFi_I> },
+// 	// {"Ethernet",			Construct<Loom_Ethernet>,				ConstructDefault<Loom_Ethernet> },
+// 	// {"Ethernet",			Construct<Loom_Ethernet>,				nullptr },
+// 	{"WiFi",				Construct<Loom_WiFi>,					ConstructDefault<Loom_WiFi> },
 
 // 	// PublishPlat
 // 	{"GoogleSheets",		Construct<Loom_GoogleSheets>,			nullptr },
@@ -137,7 +137,7 @@ const Factory::NameModulePair Factory::LookupTable[] =
 
 
 // auto test = std::make_tuple(
-// 			Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi_I>,			ConstructDefault<Loom_WiFi_I> },
+// 			Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
 // 			Factory::NameModulePair{"Analog",		Construct<Loom_Analog>,			ConstructDefault<Loom_Analog> }
 // 	);
 

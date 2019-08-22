@@ -10,7 +10,7 @@
 // ### (LoomModule) | dependencies: [] | conflicts: []
 /// InternetPlat built off of SSLClient running over an Ethernet Featherwing. Requires 7KB of free SRAM at runtime to use.
 // ###
-class Loom_Ethernet_I : public LoomInternetPlat
+class Loom_Ethernet : public LoomInternetPlat
 {
 
 protected:
@@ -29,7 +29,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	Loom_Ethernet_I(	
+	Loom_Ethernet(	
 			// const JsonArrayConst	mac,
 			// const JsonArrayConst 	ip
 			const char* 			module_name	= "Ethernet",
@@ -40,10 +40,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_Ethernet_I( JsonArrayConst p );
+	Loom_Ethernet( JsonArrayConst p );
 
 	/// Destructor
-	virtual ~Loom_Ethernet_I() = default;
+	virtual ~Loom_Ethernet() = default;
 
 //=============================================================================
 ///@name	OPERATION

@@ -297,16 +297,16 @@ public: //make private again later
 	// 		// Internet
 	// 		get<0>(
 	// 			std::make_tuple( // Both Ethernet and WiFi
-	// 				Factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet_I>,		ConstructDefault<Loom_Ethernet_I> },
-	// 				Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi_I>,			ConstructDefault<Loom_WiFi_I> },
+	// 				Factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
+	// 				Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
 	// 				Factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 	// 			),
 	// 			std::make_tuple( // Only WiFi
-	// 				Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi_I>,			ConstructDefault<Loom_WiFi_I> },
+	// 				Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
 	// 				Factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 	// 			),
 	// 			std::make_tuple( // Only Ethernet
-	// 				Factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet_I>,		ConstructDefault<Loom_Ethernet_I> },
+	// 				Factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
 	// 				Factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 	// 			),
 	// 			std::make_tuple() // No internet
@@ -399,9 +399,9 @@ public: //make private again later
 
 constexpr auto module_list = get<0>(
 	std::make_tuple(
-			Factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet_I>,		ConstructDefault<Loom_Ethernet_I> },
-			// Factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet_I>,		nullptr },
-			Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi_I>,			ConstructDefault<Loom_WiFi_I> },
+			Factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
+			// Factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		nullptr },
+			Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
 			Factory::NameModulePair{"Analog",		Construct<Loom_Analog>,			ConstructDefault<Loom_Analog> }
 		),
 	std::make_tuple()
@@ -453,15 +453,15 @@ constexpr auto modules_common = get<0>(
 // Internet
 constexpr auto modules_internet = get<0>(
 	std::make_tuple( // Both Ethernet and WiFi
-			Factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet_I>,		ConstructDefault<Loom_Ethernet_I> },
-			Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi_I>,			ConstructDefault<Loom_WiFi_I> }
+			Factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
+			Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> }
 		),
 	std::make_tuple( // Only WiFi
-			Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi_I>,			ConstructDefault<Loom_WiFi_I> },
+			Factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
 			Factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 		),
 	std::make_tuple( // Only Ethernet
-			Factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet_I>,		ConstructDefault<Loom_Ethernet_I> },
+			Factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
 			Factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 		),
 	std::make_tuple() // No internet

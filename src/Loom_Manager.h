@@ -64,8 +64,8 @@ class Loom_SD;
 
 // InternetPlats
 class LoomInternetPlat;
-class Loom_Ethernet_I;
-class Loom_WiFi_I;
+class Loom_Ethernet;
+class Loom_WiFi;
 
 // PublishPlats
 class LoomPublishPlat;
@@ -444,8 +444,8 @@ public:
 
 	// InternetPlats
 	LoomInternetPlat&	InternetPlat(const uint8_t idx = 0);
-	Loom_Ethernet_I&	Ethernet(const uint8_t idx = 0);
-	Loom_WiFi_I&		WiFi(const uint8_t idx = 0);
+	Loom_Ethernet&		Ethernet(const uint8_t idx = 0);
+	Loom_WiFi&		WiFi(const uint8_t idx = 0);
 
 	// PublishPlats
 	LoomPublishPlat& 	PublishPlat(const uint8_t idx = 0);
