@@ -432,7 +432,25 @@ LoomModule*	LoomManager::find_module(LoomModule::Type type, uint8_t idx)
 	uint8_t current = 0;
 
 	for (auto module : modules) {
-		if (type == ((LoomModule*)module)->get_module_type()) {
+		if (type == module->get_module_type()) {
+		// if (type == ((LoomModule*)module)->get_module_type()) {
+			if (current == idx) {
+				return (LoomModule*)module;
+			} else {
+				current++;
+			}
+		}
+	}
+	return nullptr;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+LoomModule*	LoomManager::find_module_by_category(LoomModule::Category category, uint8_t idx)
+{
+	uint8_t current = 0;
+
+	for (auto module : modules) {
+		if (category == module->category()) {
 			if (current == idx) {
 				return (LoomModule*)module;
 			} else {

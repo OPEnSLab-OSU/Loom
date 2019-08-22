@@ -418,6 +418,16 @@ public:
 ///@name	MODULE ACCESS 
 /*@{*/ //======================================================================
 
+	/// Auxiliary function to search a list of modules for a module of specified type
+	/// \param[in]	type	Type to search for
+	LoomModule*	find_module(LoomModule::Type type, uint8_t idx=0);
+
+	/// Auxiliary function to search a list of modules for a module of specified category
+	/// \param[in]	category	Category to search for
+	LoomModule*	find_module_by_category(LoomModule::Category category, uint8_t idx);
+
+	///////////////////////////////////////////////////////////////////////////
+
 	// Other
 	Loom_Sleep_Manager&			SleepManager(const uint8_t idx = 0);
 	Loom_Interrupt_Manager&		InterruptManager(const uint8_t idx = 0);
@@ -505,11 +515,6 @@ private:
 
 	/// Used to add device info to data object
 	void add_device_ID_to_json(JsonObject json);
-
-	///////////////////////////////////////////////////////////////////////////
-	/// Auxiliary function to search a list of modules for a module of specified type
-	/// \param[in]	type	Type to search for
-	LoomModule*	find_module(LoomModule::Type type, uint8_t idx);
 
 	/// Free modules.
 	/// Used in destructor or when switching configuration
