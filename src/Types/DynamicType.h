@@ -7,273 +7,338 @@
 
 #include "stdlib.h"
 #include "type_traits"
-#include "stdexcept"
-#include "iostream"
+#include <utility>
+//=== get_type_index ==//
+template <typename T, typename... Ts>
+struct get_type_index_impl;
 
-#define LOOM_DATA_BINARY_OP(type, op) a.as<type>() op b.as<type>()
-#define LOOM_DATA_AUTOCAST(type)  operator type() const { return as<type>(); }
+// base case
+// type not found
+template <typename T>
+struct get_type_index_impl<T> : std::integral_constant<std::size_t, 0>
+{};
 
-    // loom graph Data Types
-    enum type {t_int, t_float, t_none};
+// second case
+// type is at the beginning
+template <typename T, typename ... Tail>
+struct get_type_index_impl<T, T, Tail...> : std::integral_constant<std::size_t, 1>
+{};
 
-    // handy function to get the loom type from the actual type
-    template <typename _T>
-    type loomTypeOf() {
-        if (std::is_same<int, _T>::value) {
-            return t_int;
-        }
-        else if (std::is_same<float, _T>::value or std::is_same<double, _T>::value ) {
-                return t_float;
-        }
-        return t_none;
+// induction step
+// type not found at the beginning
+// the idea here is that if the type is at the beginning ^ will get called (No Head)
+template <typename T, typename Head, typename... Tail>
+struct get_type_index_impl<T, Head, Tail...> : std::integral_constant<std::size_t,
+        get_type_index_impl<T, Tail...>::value == 0u ?
+        0u :
+        1 + get_type_index_impl<T, Tail...>::value>
+{};
+
+// Wrapper struct to allow running functions on a specific Var for it's underlying type
+// Function is a function, Var is a weak class, Types is a weak_types object, and args is a list of argument types to call the function with
+// a struct to store a list of weak types
+
+template <typename ... Types>
+struct weak_types {
+
+};
+
+template <typename T>
+struct weak_type {
+    // initialize
+    constexpr weak_type(){}
+};
+
+// wraps type stuff
+template <typename ... Types>
+class type_id {
+public:
+
+    // make sure that the type is valid
+    template <typename T>
+    static constexpr bool valid(weak_type<T>) {
+        return get_type_index_impl<T, Types...>::value != 0u;
     }
 
-    // Loom var struct. Holds a pointer to either an int or a float with functionality to do basic arithmetic without knowing the underlying type.
-    struct var {
+    //empty type_id
+    constexpr type_id<Types...>() noexcept : value(0u){};
 
-        //TYPE
-        enum type type_id;
+    //type_id initializer
+    template <typename T>
+    constexpr type_id<Types...>(weak_type<T>) noexcept : value(get_type_index_impl<T, Types...>::value){
 
-        /// Constructor. Data type is infered from the data passed in.
-        template <class T>
-        var(T d)  {
-            type_id = loomTypeOf<T>();
-            if (type_id == t_none) {
-                return;
-            }
-            data = new T(d);
-        }
+    }
 
-        /// Destructor
-        ~var() {
-            delete data;
-            data = nullptr;
-        }
+    bool operator==(type_id<Types...> other) {
+        return value == other.value;
+    }
 
-        /// Copy Constructor
-        var(const var& data1) {
-            type_id = data1.type_id;
-            if (type_id == t_int) {
-                data = new int(data1.as<int>());
-            }
-            else if (type_id == t_float) {
-                data = new float(data1.as<float>());
-            }
-        }
+    std::size_t value;
+};
 
-        ///===============================================///
-        ///============= Operator Overloads =============///
-        ///=============================================///
+template <typename ... Types>
+class weak;
 
-        /// Assignment Operator
+template <typename ... Types>
+class weak {
 
-        var& operator=(const var& data1) {
-            type_id = data1.type_id;
-            delete data;
-            data = nullptr;
-            if (type_id == t_int) {
-                data = new int(data1.as<int>());
-            }
-            else if (type_id == t_float) {
-                data = new float(data1.as<float>());
-            }
-            return *this;
-        }
+    type_id<Types ...> current_type;
 
-        /// Comparison Operator
-        /// Note that this comparison operator doesn't ask if the underlying types are the same. i.e. 1 = 1.0f.
-        bool operator==(const var& data1) {
-            if (data1.type_id == t_int) {
-                return equals<int>(data1.as<int>());
-            }
-            else if (data1.type_id == t_float) {
-                return equals<float>(data1.as<float>());
-            }
-            return false;
-        }
+    void* storage;
 
-        bool operator < (const var& data1) {
-            if (data1.type_id == t_int) {
-                return lessThan(data1.as<int>());
-            }
-            else if (data1.type_id == t_float) {
-                return lessThan(data1.as<float>());
-            }
-            return false;
-        }
-
-        bool operator > (var& data1) {
-            return (data1 < *this);
-        }
-
-        bool operator >= (const var& data1) {
-            return !(*this < data1);
-        }
-
-        bool operator <= (var& data1) {
-            return !(*this > data1);
-        }
-
-        var& operator += (const var& data1) {
-            *this = *this+data1;
-            return *this;
-        }
-
-        var& operator -= (const var& data1) {
-            *this = *this - data1;
-            return *this;
-        }
-
-        var& operator++ () {
-            if (type_id == t_int) {
-                (*(int*)data)++;
-            }
-            else if (type_id == t_float) {
-                (*(float*)data)++;
-            }
-            return *this;
-        }
-
-        var operator++ (int n) {
-            var temp = *this;
-            ++*this;
-            return temp;
-        }
-
-        var& operator-- () {
-            if (type_id == t_int) {
-                (*(int*)data)--;
-            }
-            else if (type_id == t_float) {
-                (*(float*)data)--;
-            }
-            return *this;
-        }
-
-        var operator-- (int n) {
-            var temp = *this;
-            --*this;
-            return temp;
-        }
-
-        var operator +(const var& data1) {
-
-            if (type_id == t_int and data1.type_id == t_int) {
-                return add<int>(*this, data1);
-            }
-            else {
-                return add<float>(*this, data1);
-            }
-        }
-
-        var operator -(const var& data1) {
-            if (type_id == t_int and data1.type_id == t_int) {
-                return subtract<int>(*this, data1);
-            }
-            else {
-                return subtract<float>(*this, data1);
-            }
-        }
-
-        var operator /(const var&  data1) {
-            if (type_id == t_int and data1.type_id == t_int) {
-                return divide<int>(*this, data1);
-            }
-            else {
-                return divide<float>(*this, data1);
-            }
-        }
-
-        var operator *(const var& data1) {
-            if (type_id == t_int and data1.type_id == t_int) {
-                return multiply<int>(*this, data1);
-            }
-            else {
-                return multiply<float>(*this, data1);
-            }
-        }
-
-        ///======================================================///
-        ///===================== Auto Cast =====================///
-        ///====================================================///
-
-        LOOM_DATA_AUTOCAST(int)
-        LOOM_DATA_AUTOCAST(float)
-
-        ///======================================================///
-        ///============= Arithmetic Implementation =============///
-        ///====================================================///
-
-        template <typename T>
-        bool lessThan(T val1) {
-            if (type_id == t_int) {
-                return as<int>() < val1;
-            }
-            else if (type_id == t_float) {
-                return as<float>() < val1;
-            }
-            return false;
-        }
-
-        template <typename T>
-        bool equals(T val1) {
-            if (type_id == t_int) {
-                return as<int>() == val1;
-            }
-            else if (type_id == t_float) {
-                return as<float>() == val1;
-            }
-            return false;
-        }
-
-        template <typename _T>
-        static var add(const var& a,const var& b) {
-            return var(LOOM_DATA_BINARY_OP(_T, +));
-        }
-
-        template <typename _T>
-        static var subtract(const var& a,const var& b) {
-            return var(LOOM_DATA_BINARY_OP(_T, -));
-        }
-
-        template <typename _T>
-        static var multiply(const var&  a, const var& b) {
-            return var(LOOM_DATA_BINARY_OP(_T, *));
-        }
-
-        template <typename _T>
-        static var divide(const var& a,const var&  b) {
-            return var(LOOM_DATA_BINARY_OP(_T, /));
-        }
-
-        template <typename T>
-        T as() const {
-            if (loomTypeOf<int>() == type_id) {
-                return (T)*((int *) data);
-
-            } else if (loomTypeOf<float>() == type_id) {
-                return (T)*((float *) data);
-
-            }
-            return (T)0;
+    template < template<typename Type, typename ... Ts> class Functor, typename ... Ts>
+    class using_weak {
+        template <typename T, typename ... Args>
+        static auto call(weak<Types...>&& ptr, Args&&... args) -> decltype(Functor<T, Ts...>()(std::forward<weak<Types...>>(ptr).value(weak_type<T>{}), std::forward<Args>(args)...)) {
+            return Functor<T, Ts...>()(std::forward<weak<Types...>>(ptr).value(weak_type<T>{}), std::forward<Args>(args)...);
         };
 
-        template <typename T>
-        void set(T value) {
-            delete (T*)data;
-            data = nullptr;
-            type_id = loomTypeOf<T>();
-            data = new T(value);
-        }
+    public:
+        // out of types, do nothing
+        template <typename ... Args>
+        static void with(weak_types<>, weak<Types...>&&, Args&&...) {};
 
-        template <typename _T>
-        bool is() {
-            return loomTypeOf<_T>() == type_id;
-        }
-
-    private:
-        void* data = nullptr;
+        template <typename Head, typename ... Tail, typename ... Args>
+        static void with(weak_types<Head, Tail...>, weak<Types...>&& ptr, Args&&... args){
+            if (ptr.check(weak_type<Head>{})) {
+                //the type is Head, execute function with value as head
+                call<Head>(std::forward<weak<Types...>>(ptr), std::forward<Args>(args)...);
+            }
+            else {
+                // keep going down the type list.
+                with(weak_types<Tail...>{}, std::forward<weak<Types...>>(ptr), std::forward<Args>(args)...);
+            }
+        };
     };
 
+public:
+
+    template <typename ... Ts>
+    weak(Ts...){
+        // initialize with invalid type
+        current_type = type_id<Types...>();
+        storage = nullptr;
+    };
+
+    //// Constructor, Deconstructor, Copy, Move ////
+    template <typename T>
+    weak(T val) : weak() {
+        //set the type_id
+        current_type = type_id<Types...>(weak_type<T>());
+
+        // if the type is valid, store the value.
+        if (type_id<Types...>::valid(weak_type<T>())) {
+            // initializer
+            current_type = type_id<Types...>(weak_type<T>());
+
+            storage = new typename std::decay<T>::type(val);
+        };
+
+    }
+
+    /// Destructor
+    ~weak(){
+
+
+        // run functor on object
+        run<destroy>(&storage);
+
+    }
+
+    /// Copy Constructor
+    weak(weak<Types...>& ptr) {
+        // run the copier
+
+        ptr.template run<copy>(&storage, &current_type);
+    }
+
+    weak(weak<Types...>&& val) {
+        // move semantics
+    }
+
+
+    /*template <typename T>
+    weak<Types...>& operator=(const T& val) {
+        if (std::is_same<weak<Types...>, typename std::decay<T>::type>::value) {
+            // assign with underlying value
+
+
+        }
+
+    }*/
+
+    weak<Types...>& operator=(weak<Types...>&& ptr) {
+
+        // assign with underlying value
+        // check for self assignment
+        if (this == &ptr) {
+            return *this;
+        }
+
+        ptr.template run<copy>(&storage, &current_type);
+
+        return *this;
+
+    }
+
+    weak<Types...>& operator=(weak<Types...>& ptr) {
+
+        // assign with underlying value
+        // check for self assignment
+
+        if (this == &ptr) {
+            return *this;
+        }
+
+        ptr.template run<copy>(&storage, &current_type);
+
+        return *this;
+    }
+
+
+    template <typename T>
+    weak<Types...>& operator=(T&& val){
+
+        // otherwise assign normally
+        emplace(val);
+
+        return *this;
+
+    }
+
+    ///// returns the underlying pointer if the type is correct. Otherwise returns a nullptr;
+    template <typename T>
+    T&& value(weak_type<T> type) {
+
+        if (check(type)) {
+            return std::move(*(T*)storage);
+        }
+
+        return std::move((T)0);
+    };
+
+    template <typename T>
+    void emplace(T val) {
+        if (type_id<Types...>::valid(weak_type<T>{})) {
+
+            current_type = type_id<Types...>(weak_type<T>());
+
+            if (storage != nullptr) {
+                run<destroy>(&storage);
+            }
+
+            storage = new typename std::decay<T>::type(val);
+        }
+    }
+
+    type_id<Types...> type() {
+        return current_type;
+    }
+
+    template <typename Type>
+    bool check(weak_type<Type> check_type) {
+        return current_type == type_id<Types...>(weak_type<Type>{});
+    }
+
+    template <template<typename Type, typename ... Ts> class Functor, typename ... Ts, typename ... Args>
+    void run(Args... args) {
+        using_weak<Functor, Ts...>::with(weak_types<Types...>{}, std::move(*this), std::forward<Args>(args)...);
+    };
+
+    ///// Arithmetic Operators /////
+
+    /// Addition
+    /// Weak types
+
+    /// rvalue
+    weak<Types...> operator+ (weak<Types...>&& other) {
+        weak<Types...> added;
+
+        run<addTop>(&other, &added);
+
+        return added;
+    }
+
+    /// lvalue
+    weak<Types...> operator+ (weak<Types...>& other) {
+        weak<Types...> added;
+
+        run<addTop>(&other, &added);
+
+        return added;
+    }
+
+    /// Arithmetic Type
+    /// rvalue
+    template <typename T>
+    weak<Types...> operator+ (T&& val) {
+        weak<Types...> added;
+
+        run<addBottom, T>(val, &added);
+
+        return added;
+    }
+    /// lvalue
+    template <typename T>
+    weak<Types...> operator+ (T& val) {
+        weak<Types...> added;
+
+        run<addBottom, T>(val, &added);
+
+        return added;
+    }
+
+    /// Subtraction
+    /// Weak Types
+    weak<Types...> operator- (weak<Types...>& other){
+        return operator+(-1*other);
+    }
+
+    /// Multiplication
+    /// Weak Types
+    weak<Types...> operator* (weak<Types...>& other) {
+        return other;
+    }
+
+private:
+    //// Functors to destroy, copy, move, assign without knowing the underlying value
+    template <typename T>
+    struct destroy {
+        void operator() (T val, void** storage) {
+            delete (T*)*storage;
+            *storage = nullptr;
+        }
+    };
+
+    template <typename T>
+    struct copy {
+        void operator() (T val, void** storage, type_id<Types...>* current_type) {
+            // copy the underlying value
+            *current_type = type_id<Types...>(weak_type<T>{});
+
+            *storage = new T(val);
+
+        }
+    };
+
+    /// Addition implementation
+    template <typename T>
+    struct addTop {
+        void operator() (T val, weak<Types...>* other, weak<Types...>* adding) {
+            other -> run<addBottom, T>(val, adding);
+        }
+    };
+
+    template <typename T, typename V>
+    struct addBottom {
+        void operator() (T val, V val1, weak<Types...>* adding) {
+
+            auto plus = val + val1;
+            adding -> emplace(plus);
+        }
+    };
+
+    /// Multiplication implementation
+};
 
 #endif //UNTITLED_LOOMDATA_H
