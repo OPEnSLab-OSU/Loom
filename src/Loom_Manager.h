@@ -4,6 +4,8 @@
 #include "Loom_Translator.h"
 #include "Loom_Module.h"
 
+#include "Loom_Module_Factory.h"
+
 #include <ArduinoJson.h>
 
 // Need to undef max and min for vector to work
@@ -22,7 +24,10 @@ class LoomCommPlat;
 class LoomLogPlat;
 
 // Actuators
-class Loom_Neopixel; class Loom_Relay; class Loom_Servo; class Loom_Stepper;
+class Loom_Neopixel; 
+class Loom_Relay; 
+class Loom_Servo; 
+class Loom_Stepper;
 
 // Sensors
 class Loom_Analog;
@@ -86,6 +91,10 @@ class Loom_Interrupt_Manager;
 class Loom_Multiplexer;
 
 
+class FactoryBase;
+
+
+
 #define SERIAL_BAUD		115200
 #define MAX_SERIAL_WAIT	20000	/// Maximum number of milliseconds to wait for user given 'begin_serial(true)'
 #define SD_CS			10
@@ -99,6 +108,19 @@ class Loom_Multiplexer;
 // ###
 class LoomManager
 {
+
+private: 
+
+	FactoryBase* Factory;
+
+	// NewFactory<
+	// 	Enable::Internet::All,
+	// 	Enable::Sensors::Enabled,
+	// 	Enable::Radios::Disabled,
+	// 	Enable::Actuators::Disabled,
+	// 	Enable::Max::Disabled
+	// > ModuleFactory{};
+
 
 public:
 
@@ -155,6 +177,7 @@ public:
 	/// \param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
 	/// \param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause/nap for
 	LoomManager(
+			FactoryBase*	factory_ptr,
 			const char*		device_name			= "Device",
 			uint8_t			instance			= 1,
 			DeviceType		device_type			= DeviceType::NODE,

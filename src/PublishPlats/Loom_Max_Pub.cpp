@@ -1,6 +1,8 @@
 
 #include "Loom_Max_Pub.h"
 #include "../SubscribePlats/Loom_Max_Sub.h"
+#include "../Loom_Manager.h"
+
 
 
 ///////////////////////////////////////////////////////////////////////////////

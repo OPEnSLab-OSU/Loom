@@ -12,11 +12,6 @@
 
 
 
-Factory LoomFactory;
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomManager::parse_config(const char* json_config)
 {
@@ -115,7 +110,9 @@ bool LoomManager::parse_config_json(JsonObject config)
 
 	// Call module factory creating each module
 	for ( JsonVariant module : config["components"].as<JsonArray>()) {		
-		add_module(LoomFactory.Create(module));
+		if (Factory) {
+			add_module(Factory->Create(module));
+		}
 	}
 
 	// Sort modules by type

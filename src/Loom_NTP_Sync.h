@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Loom_Module.h"
 #include "./InternetPlats/Loom_InternetPlat.h"
 #include "./RTC/Loom_RTC.h"

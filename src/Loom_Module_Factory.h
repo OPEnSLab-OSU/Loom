@@ -69,12 +69,12 @@
 #include "Loom_Sleep_Manager.h"
 #include "Loom_Multiplexer.h" // this needs to be include after I2C sensors (due to conflict with enableInterrupt macro/function defined by EnableInterrupt library and AS726X sensors)
 
+// For functions that build constexpr lookup table 
+#include "Loom_Module_Factory_Aux.h"
 
 
-#undef min
-#undef max
-#include <array>
-#include <tuple>
+
+///////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -88,98 +88,23 @@ template<class T> LoomModule* Construct(JsonArrayConst p) { return new T(p); }
 
 
 
-///////////////////////////////////////////////////////////////////////////////
+namespace factory {
 
-///////////////////////////////////////////////////////////////////////////////
+	/// Function pointer to 'template<class T> LoomModule* Construct(JsonArrayConst p)'
+	using FactoryPtr = LoomModule* (*)(JsonArrayConst p);
+	using FactoryPtrDefault = LoomModule* (*)();
 
+	/// Struct to contain the elements of factory lookup table
+	typedef struct {
+		/// Module type to compare against
+		const char*			name;				
+		/// Pointer to 'template<class T> LoomModule* Create(JsonArrayConst p)' with the type T set
+		FactoryPtr			Construct;			
+		/// Pointer to 'template<class T> LoomModule* CreateDefault()' with the type T set
+		FactoryPtrDefault	ConstructDefault;	
+	} NameModulePair;
 
-
-
-
-// Fill in missing stuff
-namespace ersatz {
-
-template<std::size_t I, typename T> using tuple_element_t = typename std::tuple_element<I, T>::type;
-template<typename T> using remove_reference_t = typename std::remove_reference<T>::type;
-template<typename... T> using common_type_t = typename std::common_type<T...>::type;
-
-template<typename Int, Int... Seq> struct integer_sequence {
-	using value_type = Int;
-	static constexpr std::size_t size() noexcept { return sizeof...(Seq); }
-};
-
-template<std::size_t... Seq> using index_sequence = integer_sequence<std::size_t, Seq...>;
-
-template<typename Int, std::size_t Acc, Int... Seq> struct build_sequence { using type = typename build_sequence<Int, Acc - 1, Acc - 1, Seq...>::type; };
-template<typename Int, Int... Seq> struct build_sequence<Int, 0, Seq...> { using type = integer_sequence<Int, Seq...>; };
-
-template<typename Int, Int N> using make_integer_sequence = typename build_sequence<Int, N>::type;
-template<std::size_t N> using make_index_sequence = make_integer_sequence<std::size_t, N>;
-	
-} // ersatz
-
-template<
-	typename Tuple,
-	typename VTuple = ersatz::remove_reference_t<Tuple>,
-	std::size_t... Indices
->
-constexpr std::array<
-	ersatz::common_type_t<ersatz::tuple_element_t<Indices, VTuple>...>,
-	sizeof...(Indices)
->
-to_array(Tuple&& tuple, ersatz::index_sequence<Indices...>) 
-{
-	return { std::get<Indices>(std::forward<Tuple>(tuple))... };
-}
-
-template<typename Tuple, typename VTuple = ersatz::remove_reference_t<Tuple>>
-constexpr auto to_array(Tuple&& tuple) 
-{
-	return to_array(
-		std::forward<Tuple>(tuple),
-		ersatz::make_index_sequence<std::tuple_size<VTuple>::value> {} );
-}
-
-
-
-///////////////////////////////////////////////////////////////////////////////
-
-
-// probably rename to avoid confusion with normal get
-
-using namespace std;
-
-template<size_t index, typename T, typename... Ts>
-inline constexpr typename std::enable_if<index==0, T>::type
-get(T&& t, Ts&&... ts) {
-	return t;
-}
-
-template<size_t index, typename T, typename... Ts>
-inline constexpr typename std::enable_if<(index > 0) && index <= sizeof...(Ts),
-		  typename tuple_element<index, tuple<T, Ts...>>::type>::type
-get(T&& t, Ts&&... ts) {
-	return get<index-1>(std::forward<Ts>(ts)...);
-}
-
-// below is optional - just for getting a more readable compilation error
-// in case calling get with a bad index
-
-// inline template<long long index, typename... Ts>
-template<long long index, typename... Ts>
-constexpr bool index_ok() {
-	return index >= 0 && index < sizeof...(Ts);
-}
-
-template<long long index, typename T, typename... Ts>
-inline constexpr
-typename std::enable_if<!index_ok<index, T, Ts...>(), T>::type
-get(T&& t, Ts&&... ts) {
-	static_assert(index_ok<index, T, Ts...>(),
-		"bad index in call to get, smaller than zero or above pack size");
-	return t;
-}
-
+} // end factory
 
 
 
@@ -188,96 +113,8 @@ get(T&& t, Ts&&... ts) {
 ///////////////////////////////////////////////////////////////////////////////
 
 
-
-
-
-/// Function pointer to 'template<class T> LoomModule* Construct(JsonArrayConst p)'
-using FactoryPtr = LoomModule* (*)(JsonArrayConst p);
-using FactoryPtrDefault = LoomModule* (*)();
-
-/// Struct to contain the elements of factory lookup table
-typedef struct {
-	const char*			name;				// Module type to compare against
-	FactoryPtr			Construct;			// Pointer to 'template<class T> LoomModule* Create(JsonArrayConst p)' with the type T set
-	FactoryPtrDefault	ConstructDefault;	// Pointer to 'template<class T> LoomModule* CreateDefault()' with the type T set
-} NameModulePair;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////
-
-
-/// LoomModule Factory
-class Factory 
-{
-
-public:
-
-	/// Constructor
-	Factory() = default;
-	
-	/// Destructor
-	~Factory() = default;
-
-	/// Create a LoomModule accoding to Json parameters
-	/// \param[in]	module			Json of the module name and settings
-	/// \return The created LoomModule
-	LoomModule* Create(JsonVariant module);
-
-	/// Creates a LoomModule with its default parameters.
-	/// Usage example:
-	///		Loom_Relay r = FactoryInst.CreateDefault<Loom_Relay>();
-	/// \return The created LoomModule
-	template<class T> 
-	T* CreateDefault() {
-		return ConstructDefault<T>();
-	}
-
-
-
-public: //make private again later
-
-	// /// Function pointer to 'template<class T> LoomModule* Construct(JsonArrayConst p)'
-	// using FactoryPtr = LoomModule* (*)(JsonArrayConst p);
-	// using FactoryPtrDefault = LoomModule* (*)();
-
-	// /// Struct to contain the elements of factory lookup table
-	// typedef struct {
-	// 	const char*			name;				// Module type to compare against
-	// 	FactoryPtr			Construct;			// Pointer to 'template<class T> LoomModule* Create(JsonArrayConst p)' with the type T set
-	// 	FactoryPtrDefault	ConstructDefault;	// Pointer to 'template<class T> LoomModule* CreateDefault()' with the type T set
-	// } NameModulePair;
-
-	/// Factory lookup table
-	const static NameModulePair LookupTable[];
-
-
-
-
-};
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
+/// Blocks modules the can be toggled on/off or 
+/// selected between a variety of selection
 namespace Enable 
 {
 	enum class Internet {All, Ethernet, WiFi, None };
@@ -287,7 +124,9 @@ namespace Enable
 	enum class Max { Enabled, Disabled };
 }
 
-
+/// Possible sections to include.
+/// Factory concatenates selected block to form its lookup table 
+/// for module creation
 namespace Include
 {
 	// Empty block
@@ -295,89 +134,86 @@ namespace Include
 
 	// Common
 	constexpr auto Common = std::make_tuple( 
-				NameModulePair{"Interrupt_Manager",	Construct<Loom_Interrupt_Manager>,		ConstructDefault<Loom_Interrupt_Manager> },		// < 1%
-				NameModulePair{"Sleep_Manager",		Construct<Loom_Sleep_Manager>,			ConstructDefault<Loom_Sleep_Manager> },			// < 1%
-				NameModulePair{"Analog",			Construct<Loom_Analog>,					ConstructDefault<Loom_Analog> },				// 4%
-				NameModulePair{"Digital",			Construct<Loom_Digital>,				ConstructDefault<Loom_Digital> },				// < 1%	
+				factory::NameModulePair{"Interrupt_Manager",	Construct<Loom_Interrupt_Manager>,		ConstructDefault<Loom_Interrupt_Manager> },		// < 1%
+				factory::NameModulePair{"Sleep_Manager",		Construct<Loom_Sleep_Manager>,			ConstructDefault<Loom_Sleep_Manager> },			// < 1%
+				factory::NameModulePair{"Analog",		Construct<Loom_Analog>,			ConstructDefault<Loom_Analog> },				// 4%
+				factory::NameModulePair{"Digital",		Construct<Loom_Digital>,		ConstructDefault<Loom_Digital> },				// < 1%	
 				// LogPlat
-				NameModulePair{"OLED",				Construct<Loom_OLED>,					ConstructDefault<Loom_OLED> },					// 4%
-				NameModulePair{"SD",				Construct<Loom_SD>,						ConstructDefault<Loom_SD> },					// 3%
+				factory::NameModulePair{"OLED",			Construct<Loom_OLED>,			ConstructDefault<Loom_OLED> },					// 4%
+				factory::NameModulePair{"SD",			Construct<Loom_SD>,				ConstructDefault<Loom_SD> },					// 3%
 				// // RTC
-				NameModulePair{"DS3231",			Construct<Loom_DS3231>,					ConstructDefault<Loom_DS3231> },					// < 1%
-				NameModulePair{"PCF8523",			Construct<Loom_PCF8523>,				ConstructDefault<Loom_PCF8523> }				// < 1%
+				factory::NameModulePair{"DS3231",		Construct<Loom_DS3231>,			ConstructDefault<Loom_DS3231> },					// < 1%
+				factory::NameModulePair{"PCF8523",		Construct<Loom_PCF8523>,		ConstructDefault<Loom_PCF8523> }				// < 1%
 			);
 
 	// Radios
 	constexpr auto Radios = std::make_tuple( 
-				NameModulePair{"LoRa",			Construct<Loom_LoRa>,			ConstructDefault<Loom_LoRa> },				// 4%
-				NameModulePair{"nRF",			Construct<Loom_nRF>,			ConstructDefault<Loom_nRF> },				// 4%
-				NameModulePair{"Bluetooth",		Construct<Loom_Bluetooth>,		ConstructDefault<Loom_Bluetooth> }			// 1%
+				factory::NameModulePair{"LoRa",			Construct<Loom_LoRa>,			ConstructDefault<Loom_LoRa> },				// 4%
+				factory::NameModulePair{"nRF",			Construct<Loom_nRF>,			ConstructDefault<Loom_nRF> },				// 4%
+				factory::NameModulePair{"Bluetooth",	Construct<Loom_Bluetooth>,		ConstructDefault<Loom_Bluetooth> }			// 1%
 			);
 
 	// Max
 	constexpr auto Max = std::make_tuple( 
-				NameModulePair{"MaxPub",		Construct<Loom_MaxPub>,			nullptr },									// 1%
-				NameModulePair{"MaxSub",		Construct<Loom_MaxSub>,			nullptr }									// 16%   10% if all internet being used
+				factory::NameModulePair{"MaxPub",		Construct<Loom_MaxPub>,			nullptr },									// 1%
+				factory::NameModulePair{"MaxSub",		Construct<Loom_MaxSub>,			nullptr }									// 16%   10% if all internet being used
 			);
-
 
 	// Ethernet and WiFi
 	constexpr auto EthernetAndWiFi = std::make_tuple( 
-				NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
-				NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },				// 6%  (none if Max being used)
-				NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },									// 1%
-				NameModulePair{"NTP_Sync", 		Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
+				factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
+				factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },				// 6%  (none if Max being used)
+				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },									// 1%
+				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
 
 	// Ethernet
 	constexpr auto Ethernet = std::make_tuple( 
-				NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
-				NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },									// 1%
-				NameModulePair{"NTP_Sync", 		Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
+				factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
+				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },									// 1%
+				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
 
 	// WiFi
 	constexpr auto WiFi = std::make_tuple( 
-				NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
-				NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },									// 1%
-				NameModulePair{"NTP_Sync", 		Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
+				factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
+				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },									// 1%
+				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
-
 
 	// Sensors
 	constexpr auto Sensors = std::make_tuple(
-				NameModulePair{"Multiplexer",	Construct<Loom_Multiplexer>,	ConstructDefault<Loom_Multiplexer> },
+				factory::NameModulePair{"Multiplexer",	Construct<Loom_Multiplexer>,	ConstructDefault<Loom_Multiplexer> },
 				// I2C
-				NameModulePair{"AS7262",		Construct<Loom_AS7262>,			ConstructDefault<Loom_AS7262> },
-				NameModulePair{"AS7263",		Construct<Loom_AS7263>,			ConstructDefault<Loom_AS7263> },
-				NameModulePair{"AS7265X",		Construct<Loom_AS7265X>,		ConstructDefault<Loom_AS7265X> },
-				NameModulePair{"FXAS21002",		Construct<Loom_FXAS21002>,		ConstructDefault<Loom_FXAS21002> },
-				NameModulePair{"FXOS8700",		Construct<Loom_FXOS8700>,		ConstructDefault<Loom_FXOS8700> },
-				NameModulePair{"LIS3DH",		Construct<Loom_LIS3DH>,			ConstructDefault<Loom_LIS3DH> },
-				NameModulePair{"MB1232",		Construct<Loom_MB1232>,			ConstructDefault<Loom_MB1232> },
-				NameModulePair{"MMA8451",		Construct<Loom_MMA8451>,		ConstructDefault<Loom_MMA8451> },
-				NameModulePair{"MPU6050",		Construct<Loom_MPU6050>,		ConstructDefault<Loom_MPU6050> },
-				NameModulePair{"MS5803",		Construct<Loom_MS5803>,			ConstructDefault<Loom_MS5803> },
-				NameModulePair{"SHT31D",		Construct<Loom_SHT31D>,			ConstructDefault<Loom_SHT31D> },
-				NameModulePair{"TMP007",		Construct<Loom_TMP007>,			ConstructDefault<Loom_TMP007> },
-				NameModulePair{"TSL2561",		Construct<Loom_TSL2561>,		ConstructDefault<Loom_TSL2561> },
-				NameModulePair{"TSL2591",		Construct<Loom_TSL2591>,		ConstructDefault<Loom_TSL2591> },
-				NameModulePair{"ZXGesture",		Construct<Loom_ZXGesture>,		ConstructDefault<Loom_ZXGesture> },
+				factory::NameModulePair{"AS7262",		Construct<Loom_AS7262>,			ConstructDefault<Loom_AS7262> },
+				factory::NameModulePair{"AS7263",		Construct<Loom_AS7263>,			ConstructDefault<Loom_AS7263> },
+				factory::NameModulePair{"AS7265X",		Construct<Loom_AS7265X>,		ConstructDefault<Loom_AS7265X> },
+				factory::NameModulePair{"FXAS21002",	Construct<Loom_FXAS21002>,		ConstructDefault<Loom_FXAS21002> },
+				factory::NameModulePair{"FXOS8700",		Construct<Loom_FXOS8700>,		ConstructDefault<Loom_FXOS8700> },
+				factory::NameModulePair{"LIS3DH",		Construct<Loom_LIS3DH>,			ConstructDefault<Loom_LIS3DH> },
+				factory::NameModulePair{"MB1232",		Construct<Loom_MB1232>,			ConstructDefault<Loom_MB1232> },
+				factory::NameModulePair{"MMA8451",		Construct<Loom_MMA8451>,		ConstructDefault<Loom_MMA8451> },
+				factory::NameModulePair{"MPU6050",		Construct<Loom_MPU6050>,		ConstructDefault<Loom_MPU6050> },
+				factory::NameModulePair{"MS5803",		Construct<Loom_MS5803>,			ConstructDefault<Loom_MS5803> },
+				factory::NameModulePair{"SHT31D",		Construct<Loom_SHT31D>,			ConstructDefault<Loom_SHT31D> },
+				factory::NameModulePair{"TMP007",		Construct<Loom_TMP007>,			ConstructDefault<Loom_TMP007> },
+				factory::NameModulePair{"TSL2561",		Construct<Loom_TSL2561>,		ConstructDefault<Loom_TSL2561> },
+				factory::NameModulePair{"TSL2591",		Construct<Loom_TSL2591>,		ConstructDefault<Loom_TSL2591> },
+				factory::NameModulePair{"ZXGesture",	Construct<Loom_ZXGesture>,		ConstructDefault<Loom_ZXGesture> },
 				// SDI12
-				NameModulePair{"Decagon5TM",	Construct<Loom_Decagon5TM>,		ConstructDefault<Loom_Decagon5TM> },
-				NameModulePair{"DecagonGS3",	Construct<Loom_DecagonGS3>,		ConstructDefault<Loom_DecagonGS3> },
+				factory::NameModulePair{"Decagon5TM",	Construct<Loom_Decagon5TM>,		ConstructDefault<Loom_Decagon5TM> },
+				factory::NameModulePair{"DecagonGS3",	Construct<Loom_DecagonGS3>,		ConstructDefault<Loom_DecagonGS3> },
 				// SPI
-				NameModulePair{"MAX31855",		Construct<Loom_MAX31855>,		ConstructDefault<Loom_MAX31855> },
-				NameModulePair{"MAX31856",		Construct<Loom_MAX31856>,		ConstructDefault<Loom_MAX31856> }
+				factory::NameModulePair{"MAX31855",		Construct<Loom_MAX31855>,		ConstructDefault<Loom_MAX31855> },
+				factory::NameModulePair{"MAX31856",		Construct<Loom_MAX31856>,		ConstructDefault<Loom_MAX31856> }
 			);
-
 
 	// Actuators
 	constexpr auto Actuators = std::make_tuple( 
-				NameModulePair{"Neopixel",		Construct<Loom_Neopixel>,		ConstructDefault<Loom_Neopixel> },
-				NameModulePair{"Relay",			Construct<Loom_Relay>,			ConstructDefault<Loom_Relay> },
-				NameModulePair{"Servo",			Construct<Loom_Servo>,			ConstructDefault<Loom_Servo> },
-				NameModulePair{"Stepper",		Construct<Loom_Stepper>,		ConstructDefault<Loom_Stepper> }
+				factory::NameModulePair{"Neopixel",		Construct<Loom_Neopixel>,		ConstructDefault<Loom_Neopixel> },
+				factory::NameModulePair{"Relay",		Construct<Loom_Relay>,			ConstructDefault<Loom_Relay> },
+				factory::NameModulePair{"Servo",		Construct<Loom_Servo>,			ConstructDefault<Loom_Servo> },
+				factory::NameModulePair{"Stepper",		Construct<Loom_Stepper>,		ConstructDefault<Loom_Stepper> }
 			);
 
 } // end Include namespace
@@ -385,9 +221,38 @@ namespace Include
 
 
 
+///////////////////////////////////////////////////////////////////////////////
+
+/// Base class that factory is derived from.
+/// Purpose is to allow LoomManger to have a pointer to a LoomFactory, which 
+/// it cannot do directly because different parameter selections result in 
+/// different factory classes
+class FactoryBase
+{
+public:
+
+	virtual void print_table() = 0;
+
+	/// Creates a LoomModule with its default parameters.
+	/// Usage example:
+	///		Loom_Relay r = FactoryInst.CreateDefault<Loom_Relay>();
+	/// \return The created LoomModule
+	template<class T> 
+	static T* CreateDefault() { return ConstructDefault<T>(); }
+
+	virtual LoomModule* Create(JsonVariant module) = 0;
+};
 
 
-// make use of default parameters
+///////////////////////////////////////////////////////////////////////////////
+
+
+/// Factory is used by LoomManager when parsing Json to match module names to 
+/// their associated constructors, and calling with parameters from the Json.
+/// The template parameters are used to select whether certain blocks of 
+/// modules are included in the lookup table. This is computed at compile
+/// time to not include unnecessary module classes and supporting code, 
+/// thus reducing code size
 template<
 	Enable::Internet INTERNET	= Enable::Internet::All,
 	Enable::Sensors SENSORS		= Enable::Sensors::Enabled,
@@ -395,32 +260,32 @@ template<
 	Enable::Actuators ACTUATORS	= Enable::Actuators::Enabled,
 	Enable::Max MAX				= Enable::Max::Disabled
 >
-class NewFactory 
+class LoomFactory : public FactoryBase
 {
 
 private:
 
 	static constexpr auto LookupTable = tuple_cat(
 			Include::Common,
-			get<(int)INTERNET>(			
+			factory::select<(int)INTERNET>(			
 				Include::EthernetAndWiFi,
 				Include::Ethernet,
 				Include::WiFi,
 				Include::None
 			), 
-			get<(int)SENSORS>(		
+			factory::select<(int)SENSORS>(		
 				Include::Sensors,
 				Include::None
 			),
-			get<(int)RADIOS>(		
+			factory::select<(int)RADIOS>(		
 				Include::Radios,
 				Include::None
 			),
-			get<(int)ACTUATORS>(		
+			factory::select<(int)ACTUATORS>(		
 				Include::Actuators,
 				Include::None
 			),
-			get<(int)MAX>(		
+			factory::select<(int)MAX>(		
 				Include::Max,
 				Include::None
 			)
@@ -428,15 +293,54 @@ private:
 
 public:
 
-	static void print_table()
-	{
-		LPrintln("Module Lookup Table:\n");
+	/// Constructor
+	LoomFactory() = default;
+	
+	/// Destructor
+	~LoomFactory() = default;
 
-		for (auto item : to_array(LookupTable) ) {
+	/// Print the contents of the lookup table
+	void print_table()
+	{
+		LPrintln("[Factory] Module Lookup Table:\n");
+		for (auto item : factory::to_array(LookupTable) ) {
 			LPrintln(item.name);
 		}
 	}
 
+	/// Create a module based on a subset of a Json configuration.
+	/// Needs name and parameters to the constructor as an array (or the word 'default')
+	/// if that module has default values for all parameters
+	LoomModule* Create(JsonVariant module)
+	{
+		const char* name = module["name"];
+
+		for (auto elem : factory::to_array(LookupTable) ) {
+			if ( strcmp(name, elem.name) == 0 ) {
+
+				if (module["params"].is<JsonArray>()) {
+					// Generate according to list of parameters
+					LPrintln("[Factory] Creating: ", name);
+					return elem.Construct(module["params"]);
+				} else if ( module["params"].is<const char*>() && strcmp(module["params"], "default") == 0 ) {
+					// Generate using default parameters
+					if (elem.ConstructDefault == nullptr) {
+						LPrintln("[Factory] ", "No default constructor for module '", name, "'");
+						return nullptr;
+					} else {
+						return elem.ConstructDefault();
+					}
+				} else { 
+					// Invalid parameters
+					LPrintln("[Factory] ", "Invalid parameters in module '", name, "'");
+					return nullptr;
+				}
+			}
+		}
+
+		LPrintln("'", name, "' could not be created");
+		return nullptr;
+	}
 
 };
 

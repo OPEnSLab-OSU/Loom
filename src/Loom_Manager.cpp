@@ -33,6 +33,7 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomManager::LoomManager( 
+		FactoryBase*	factory_ptr,
 		const char*		device_name, 
 		uint8_t			instance, 
 		DeviceType		device_type, 
@@ -40,7 +41,8 @@ LoomManager::LoomManager(
 		Verbosity		package_verbosity,
 		uint16_t		interval
 	)
-	: instance(instance)
+	: Factory(factory_ptr)
+	, instance(instance)
 	, print_verbosity(print_verbosity)
 	, package_verbosity(package_verbosity)
 	, device_type(device_type)
