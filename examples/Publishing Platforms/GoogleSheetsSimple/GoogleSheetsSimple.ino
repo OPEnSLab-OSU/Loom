@@ -1,13 +1,22 @@
-
 #include <Loom.h>
 
-// Fill out the config with your google sheets values
+// Include configuration
 const char* json_config = 
 #include "config.h"
 ;
 
+// Set enabled modules
+LoomFactory<
+	Enable::Internet::All,
+	Enable::Sensors::Enabled,
+	Enable::Radios::Disabled,
+	Enable::Actuators::Enabled,
+	Enable::Max::Disabled
+> ModuleFactory{};
 
-LoomManager Loom{};
+LoomManager Loom{ &ModuleFactory };
+
+
 
 void setup() 
 {

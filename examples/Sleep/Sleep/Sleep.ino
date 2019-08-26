@@ -3,11 +3,24 @@
 
 #include <Loom.h>
 
-
 // Include configuration
 const char* json_config = 
 #include "config.h"
 ;
+
+// Set enabled modules
+LoomFactory<
+	Enable::Internet::Disabled,
+	Enable::Sensors::Enabled,
+	Enable::Radios::Disabled,
+	Enable::Actuators::Disabled,
+	Enable::Max::Disabled
+> ModuleFactory{};
+
+LoomManager Loom{ &ModuleFactory };
+
+
+
 
 // Detach interrupt on wake
 void wakeISR() { 
@@ -15,7 +28,6 @@ void wakeISR() {
 	LPrintln("Alarm went off"); 
 }
 
-LoomManager Loom{};
 
 
 void setup() 

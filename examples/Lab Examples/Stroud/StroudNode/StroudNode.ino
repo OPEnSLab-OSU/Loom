@@ -5,8 +5,16 @@ const char* json_config =
 #include "config.h"
 ;
 
+// Set enabled modules
+LoomFactory<
+	Enable::Internet::WiFi,
+	Enable::Sensors::Enabled,
+	Enable::Radios::Disabled,
+	Enable::Actuators::Enabled,
+	Enable::Max::Enabled
+> ModuleFactory{};
 
-LoomManager Loom{};
+LoomManager Loom{ &ModuleFactory };
 
 
 

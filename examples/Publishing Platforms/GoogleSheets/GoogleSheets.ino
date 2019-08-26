@@ -7,7 +7,18 @@ const char* json_config_pretty =
 ;
 
 
-LoomManager Manager("Manager", "Loom", 1, 1, LoomManager::DeviceType::NODE, Verbosity::V_HIGH, Verbosity::V_LOW);
+// Set enabled modules
+LoomFactory<
+	Enable::Internet::All,
+	Enable::Sensors::Enabled,
+	Enable::Radios::Disabled,
+	Enable::Actuators::Enabled,
+	Enable::Max::Disabled
+> ModuleFactory{};
+
+LoomManager Loom{ &ModuleFactory };
+
+
 
 void setup() 
 {

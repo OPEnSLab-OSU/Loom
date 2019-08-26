@@ -17,7 +17,17 @@ const char* json_config_pretty =
 ;
 
 
-LoomManager Loom{};
+// Set enabled modules
+LoomFactory<
+	Enable::Internet::Disabled,
+	Enable::Sensors::Enabled,
+	Enable::Radios::Enabled,
+	Enable::Actuators::Enabled,
+	Enable::Max::Enabled
+> ModuleFactory{};
+
+LoomManager Loom{ &ModuleFactory };
+
 
 
 void setup() 

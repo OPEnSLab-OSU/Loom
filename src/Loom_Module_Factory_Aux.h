@@ -6,11 +6,12 @@
 #include <tuple>
 
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+
 namespace factory {
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
 
 	namespace ersatz {
 
@@ -99,4 +100,7 @@ namespace factory {
 
 } // end factory
 
+
+
+#endif // DOXYGEN_SHOULD_SKIP_THIS
 

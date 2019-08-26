@@ -1,14 +1,23 @@
-
 #include <Loom.h>
-
-// #include "LowPower.h"
-
-
 
 // Include configuration
 const char* json_config = 
 #include "config.h"
 ;
+
+// Set enabled modules
+LoomFactory<
+	Enable::Internet::Disabled,
+	Enable::Sensors::Enabled,
+	Enable::Radios::Enabled,
+	Enable::Actuators::Enabled,
+	Enable::Max::Enabled
+> ModuleFactory{};
+
+LoomManager Loom{ &ModuleFactory };
+
+
+
 
 #define ALARM_PIN 6
 #define REED_PIN 11
@@ -30,10 +39,6 @@ void reedISR() {
 	reedFlag = true;
 	// LPrintln("\n\n", "Reed switch triggered", "\n"); 
 }
-
-
-
-LoomManager Loom{};
 
 
 

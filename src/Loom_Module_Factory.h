@@ -92,6 +92,8 @@ namespace factory {
 
 	/// Function pointer to 'template<class T> LoomModule* Construct(JsonArrayConst p)'
 	using FactoryPtr = LoomModule* (*)(JsonArrayConst p);
+
+	/// Function pointer to 'template<class T> LoomModule* ConstructDefault()'
 	using FactoryPtrDefault = LoomModule* (*)();
 
 	/// Struct to contain the elements of factory lookup table
@@ -113,75 +115,86 @@ namespace factory {
 ///////////////////////////////////////////////////////////////////////////////
 
 
+
 /// Blocks modules the can be toggled on/off or 
-/// selected between a variety of selection
+/// selected between a variety of selection.
+/// Below, in LoomFactory, the integer index (zero indexed) of the enums is 
+/// used to select between different includes, so make sure the includes
+/// correctly correspond to the index
 namespace Enable 
 {
-	enum class Internet {All, Ethernet, WiFi, None };
-	enum class Sensors { Enabled, Disabled };
+	enum class Internet  { 
+		All,			///< All internet modules enabled
+		Ethernet,		///< Only Ethernet relevant modules enabled
+		WiFi,			///< Only WiFi relevant modules enabled
+		Disabled		///< Internet modules disabled
+	};
+	
+	enum class Sensors   { Enabled, Disabled };
 	enum class Actuators { Enabled, Disabled };
-	enum class Radios { Enabled, Disabled };
-	enum class Max { Enabled, Disabled };
+	enum class Radios    { Enabled, Disabled };
+	enum class Max       { Enabled, Disabled };
 }
 
-/// Possible sections to include.
-/// Factory concatenates selected block to form its lookup table 
-/// for module creation
+/// Possible sections of the module lookup table to include.
+/// Factory concatenates selected blocks to form its lookup table 
+/// for module creation.
+/// Blocks are made up of tuples of NameModulePair 
 namespace Include
 {
-	// Empty block
+	/// Empty block (used if a block of modules is disabled)
 	constexpr auto None = std::make_tuple();
 
-	// Common
+	/// Common modules
 	constexpr auto Common = std::make_tuple( 
-				factory::NameModulePair{"Interrupt_Manager",	Construct<Loom_Interrupt_Manager>,		ConstructDefault<Loom_Interrupt_Manager> },		// < 1%
-				factory::NameModulePair{"Sleep_Manager",		Construct<Loom_Sleep_Manager>,			ConstructDefault<Loom_Sleep_Manager> },			// < 1%
-				factory::NameModulePair{"Analog",		Construct<Loom_Analog>,			ConstructDefault<Loom_Analog> },				// 4%
-				factory::NameModulePair{"Digital",		Construct<Loom_Digital>,		ConstructDefault<Loom_Digital> },				// < 1%	
+				factory::NameModulePair{"Interrupt_Manager",	Construct<Loom_Interrupt_Manager>,		ConstructDefault<Loom_Interrupt_Manager> },
+				factory::NameModulePair{"Sleep_Manager",		Construct<Loom_Sleep_Manager>,			ConstructDefault<Loom_Sleep_Manager> },
+				factory::NameModulePair{"Analog",		Construct<Loom_Analog>,			ConstructDefault<Loom_Analog> },
+				factory::NameModulePair{"Digital",		Construct<Loom_Digital>,		ConstructDefault<Loom_Digital> },
 				// LogPlat
-				factory::NameModulePair{"OLED",			Construct<Loom_OLED>,			ConstructDefault<Loom_OLED> },					// 4%
-				factory::NameModulePair{"SD",			Construct<Loom_SD>,				ConstructDefault<Loom_SD> },					// 3%
+				factory::NameModulePair{"OLED",			Construct<Loom_OLED>,			ConstructDefault<Loom_OLED> },	
+				factory::NameModulePair{"SD",			Construct<Loom_SD>,				ConstructDefault<Loom_SD> },
 				// // RTC
-				factory::NameModulePair{"DS3231",		Construct<Loom_DS3231>,			ConstructDefault<Loom_DS3231> },					// < 1%
-				factory::NameModulePair{"PCF8523",		Construct<Loom_PCF8523>,		ConstructDefault<Loom_PCF8523> }				// < 1%
+				factory::NameModulePair{"DS3231",		Construct<Loom_DS3231>,			ConstructDefault<Loom_DS3231> },
+				factory::NameModulePair{"PCF8523",		Construct<Loom_PCF8523>,		ConstructDefault<Loom_PCF8523> }
 			);
 
-	// Radios
+	/// Radios modules
 	constexpr auto Radios = std::make_tuple( 
-				factory::NameModulePair{"LoRa",			Construct<Loom_LoRa>,			ConstructDefault<Loom_LoRa> },				// 4%
-				factory::NameModulePair{"nRF",			Construct<Loom_nRF>,			ConstructDefault<Loom_nRF> },				// 4%
-				factory::NameModulePair{"Bluetooth",	Construct<Loom_Bluetooth>,		ConstructDefault<Loom_Bluetooth> }			// 1%
+				factory::NameModulePair{"LoRa",			Construct<Loom_LoRa>,			ConstructDefault<Loom_LoRa> },
+				factory::NameModulePair{"nRF",			Construct<Loom_nRF>,			ConstructDefault<Loom_nRF> },
+				factory::NameModulePair{"Bluetooth",	Construct<Loom_Bluetooth>,		ConstructDefault<Loom_Bluetooth> }
 			);
 
-	// Max
+	/// Max modules
 	constexpr auto Max = std::make_tuple( 
-				factory::NameModulePair{"MaxPub",		Construct<Loom_MaxPub>,			nullptr },									// 1%
-				factory::NameModulePair{"MaxSub",		Construct<Loom_MaxSub>,			nullptr }									// 16%   10% if all internet being used
+				factory::NameModulePair{"MaxPub",		Construct<Loom_MaxPub>,			nullptr },
+				factory::NameModulePair{"MaxSub",		Construct<Loom_MaxSub>,			nullptr }
 			);
 
-	// Ethernet and WiFi
+	/// Ethernet and WiFi modules
 	constexpr auto EthernetAndWiFi = std::make_tuple( 
 				factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
-				factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },				// 6%  (none if Max being used)
-				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },									// 1%
+				factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
+				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
 				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
 
-	// Ethernet
+	/// Ethernet modules
 	constexpr auto Ethernet = std::make_tuple( 
 				factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
-				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },									// 1%
+				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
 				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
 
-	// WiFi
+	/// WiFi modules
 	constexpr auto WiFi = std::make_tuple( 
 				factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
-				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },									// 1%
+				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
 				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
 
-	// Sensors
+	/// Sensor modules
 	constexpr auto Sensors = std::make_tuple(
 				factory::NameModulePair{"Multiplexer",	Construct<Loom_Multiplexer>,	ConstructDefault<Loom_Multiplexer> },
 				// I2C
@@ -208,7 +221,7 @@ namespace Include
 				factory::NameModulePair{"MAX31856",		Construct<Loom_MAX31856>,		ConstructDefault<Loom_MAX31856> }
 			);
 
-	// Actuators
+	/// Actuator modules
 	constexpr auto Actuators = std::make_tuple( 
 				factory::NameModulePair{"Neopixel",		Construct<Loom_Neopixel>,		ConstructDefault<Loom_Neopixel> },
 				factory::NameModulePair{"Relay",		Construct<Loom_Relay>,			ConstructDefault<Loom_Relay> },
@@ -260,11 +273,14 @@ template<
 	Enable::Actuators ACTUATORS	= Enable::Actuators::Enabled,
 	Enable::Max MAX				= Enable::Max::Disabled
 >
+
 class LoomFactory : public FactoryBase
 {
 
 private:
 
+	/// The factory's lookup table of modules that can be created, based on the 
+	/// enable values of the classes template parameters
 	static constexpr auto LookupTable = tuple_cat(
 			Include::Common,
 			factory::select<(int)INTERNET>(			
@@ -311,6 +327,8 @@ public:
 	/// Create a module based on a subset of a Json configuration.
 	/// Needs name and parameters to the constructor as an array (or the word 'default')
 	/// if that module has default values for all parameters
+	/// \param[in]	module		Subset of a Json configuration, used to identify module to create and with what parameters
+	/// \return	LoomModule if created, nullptr if it could not be created
 	LoomModule* Create(JsonVariant module)
 	{
 		const char* name = module["name"];
