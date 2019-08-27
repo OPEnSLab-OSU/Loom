@@ -23,6 +23,7 @@
 // PublishPlats
 #include "PublishPlats/Loom_GoogleSheets.h"
 #include "PublishPlats/Loom_Max_Pub.h"
+#include "PublishPlats/Loom_SpoolPublish.h"
 
 // SubscribePlats
 #include "SubscribePlats/Loom_Max_Sub.h"

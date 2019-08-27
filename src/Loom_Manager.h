@@ -251,7 +251,7 @@ public:
 	/// Publish.
 	/// Calls publish_all(const JsonObject json) with interal json
 	/// \return True if success
-	bool		publish_all() { publish_all(internal_json()); }
+	bool		publish_all() { return publish_all(internal_json()); }
 
 	/// Iterate over list of commands, forwarding to handling module
 	/// \param[in] json		Object containing commands

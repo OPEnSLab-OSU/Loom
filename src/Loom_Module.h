@@ -52,7 +52,7 @@ public:
 		// InternetPlats
 		InternetPlat=7000,	Ethernet, WiFi,
 		// PublishPlats
-		PublishPlat=8000,	GoogleSheets, MaxPub,
+		PublishPlat=8000,	GoogleSheets, MaxPub, SpoolPub,
 		// SubscribePlats
 		SubscribePlats=9000, MaxSub
 	};

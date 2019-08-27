@@ -63,7 +63,7 @@ bool Loom_WiFi::is_connected()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession Loom_WiFi::connect_to_domain(const char* domain)
+LoomInternetPlat::ClientSession Loom_WiFi_I::connect_to_domain(const char* domain)
 {
 	// if the socket is somehow still open, close it
 	if (client.connected()) client.stop();
@@ -84,7 +84,28 @@ LoomInternetPlat::ClientSession Loom_WiFi::connect_to_domain(const char* domain)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::UDPPtr Loom_WiFi::open_socket(const uint port) 
+LoomInternetPlat::ClientSession Loom_WiFi_I::connect_to_ip(const IPAddress& ip, const uint16_t port)
+{
+	// if the socket is somehow still open, close it
+	if (client.connected()) client.stop();
+	// * the rainbow connection *
+	int status = client.connect(ip, port);
+	if (!status) {
+		// log fail, and return
+		print_module_label();
+		LPrint("Wifi connect failed with error ", status, '\n');
+		return ClientSession();
+	}
+	else {
+		print_module_label();
+		LPrint("WiFi connected to IP'\n");
+	}
+	// return a pointer to the client for data reception
+	return LoomInternetPlat::ClientSession(&client);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+LoomInternetPlat::UDPPtr Loom_WiFi_I::open_socket(const uint port) 
 {
 	// create the unique pointer
 	UDPPtr ptr = UDPPtr(new WiFiUDP());
@@ -95,14 +116,14 @@ LoomInternetPlat::UDPPtr Loom_WiFi::open_socket(const uint port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi::print_config()
+void Loom_WiFi_I::print_config()
 {
 	LoomInternetPlat::print_config();
 	LPrint("\tSSID:               : ", SSID, '\n');
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi::print_state()
+void Loom_WiFi_I::print_state()
 {
 	LoomInternetPlat::print_state();	
 	LPrintln("\tConnected:          : ", (is_connected()) ? "True" : "False" );
@@ -113,7 +134,7 @@ void Loom_WiFi::print_state()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi::package(JsonObject json)
+void Loom_WiFi_I::package(JsonObject json)
 {
 	//JsonObject data = get_module_data_object(json, module_name);
 	auto ip = IPAddress(WiFi.localIP());

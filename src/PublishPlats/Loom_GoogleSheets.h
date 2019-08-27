@@ -79,4 +79,3 @@ private:
 	const String m_tab_id;
 	const String m_device_id;
 };
-
