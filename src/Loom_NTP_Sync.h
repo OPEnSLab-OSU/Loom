@@ -25,10 +25,8 @@ public:
 
 	/// NTP Sync module constructor.
 	///
-	/// \param[in]  internet_module_index	Int | <0> | [0-5] | Index from zero of of the desired internet platform based on the JSON configuration
 	/// \param[in]  sync_interval_hours		Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
 	LoomNTPSync(
-		// const uint			internet_module_index	= 0,
 		const uint			sync_interval_hours		= 0
 	);
 
@@ -77,15 +75,15 @@ private:
 	/// Store the Internet Plat from second stage contsruction
 	// const uint m_internet_module_index;
 	/// Store the sync interval, in hours
-	const uint m_sync_interval;
+	const uint			m_sync_interval;
 	/// Store the Internet Plat from second stage contsruction
-	LoomInternetPlat* m_internet;
+	LoomInternetPlat*	m_internet;
 	/// Store the RTC pointer so we can check the time
-	LoomRTC* m_rtc;
+	LoomRTC*			m_rtc;
 	/// Store when next to change the RTC
-	DateTime m_next_sync;
+	DateTime			m_next_sync;
 	/// Store if we've successfully accomplished our task
-	Error m_last_error;
+	Error				m_last_error;
 };
 
 

@@ -50,7 +50,7 @@ public:
 	ClientSession	connect_to_domain(const char* domain) override;
 
 	// remember to close the socket!
-	ClientSession connect_to_ip(const IPAddress& ip, const uint16_t port) override;
+	ClientSession	connect_to_ip(const IPAddress& ip, const uint16_t port) override;
 
 	/// Connect to internet
 	void			connect() override;
