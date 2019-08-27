@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Loom_PublishPlat.h"
-// #include "Loom_Manager.h"
 
 
 #define UDP_SEND_OFFSET 8000
@@ -19,7 +18,6 @@ protected:
 	
 	uint16_t	UDP_port;				/// Which UDP port to transmit on
 	IPAddress	remoteIP;				/// Which IP address to send to
-
 
 	LoomInternetPlat::UDPPtr UDP_Inst;	/// Pointer to UDP object
 

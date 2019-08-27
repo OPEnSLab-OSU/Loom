@@ -4,22 +4,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(
 		const char*			module_name,
-		// const uint8_t		internet_index,
 		LoomModule::Type	internet_type,
 		const char*			script_url,
 		const char*			sheet_id,
 		const char*			tab_id,
 		const char*			device_id
-
-		// char*			module_name,
-		// // uint8_t		internet_index,
-		// LoomModule::Type	internet_type,
-		// char*			script_url,
-		// char*			sheet_id,
-		// char*			tab_id,
-		// char*			device_id
 	)   
-	// : LoomPublishPlat( module_name, Type::GoogleSheets, internet_index )
 	: LoomPublishPlat( module_name, Type::GoogleSheets, internet_type )
 	, m_script_url(script_url)
 	, m_sheet_id(sheet_id)
@@ -33,7 +23,6 @@ Loom_GoogleSheets::Loom_GoogleSheets(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(JsonArrayConst p)
-	// : Loom_GoogleSheets( EXPAND_ARRAY(p, 6) ) {}
 	: Loom_GoogleSheets( p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////

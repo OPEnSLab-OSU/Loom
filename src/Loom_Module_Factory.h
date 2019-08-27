@@ -273,7 +273,6 @@ template<
 	Enable::Actuators ACTUATORS	= Enable::Actuators::Enabled,
 	Enable::Max MAX				= Enable::Max::Disabled
 >
-
 class LoomFactory : public FactoryBase
 {
 

@@ -435,7 +435,6 @@ LoomModule*	LoomManager::find_module(LoomModule::Type type, uint8_t idx)
 
 	for (auto module : modules) {
 		if (type == module->get_module_type()) {
-		// if (type == ((LoomModule*)module)->get_module_type()) {
 			if (current == idx) {
 				return (LoomModule*)module;
 			} else {

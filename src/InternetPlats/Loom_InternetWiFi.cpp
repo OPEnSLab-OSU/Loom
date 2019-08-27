@@ -2,7 +2,6 @@
 #include "Loom_InternetWiFi.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR ---
 Loom_WiFi::Loom_WiFi(	
 		const char* 	ssid,
 		const char* 	pass

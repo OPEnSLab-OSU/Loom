@@ -7,13 +7,11 @@
 LoomPublishPlat::LoomPublishPlat(	
 		const char*			module_name,
 		LoomModule::Type	module_type,
-		// uint8_t				internet_index
 		LoomModule::Type	internet_type
 	) 
 	: LoomModule( module_name, module_type )
 	, m_internet( nullptr )
 	, internet_type( internet_type )
-	// , m_internet_index( internet_index ) 
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -27,8 +25,6 @@ void LoomPublishPlat::second_stage_ctor()
 	}
 
 	// check if internet platform exist
-	// LoomModule* temp = (LoomModule*)&(device_manager->InternetPlat(m_internet_index));
-
 	LoomInternetPlat* temp;
 	switch (internet_type) {
 		case LoomModule::Type::Ethernet: 
@@ -50,7 +46,6 @@ void LoomPublishPlat::second_stage_ctor()
 		m_internet = temp;
 	}
 	else {
-		// LPrint("Unable to find internet platform, intstead got: ", (int)(temp->get_module_type()), " using index ", m_internet_index, "\n");
 		LPrintln("Unable to find internet platform");
 		return;
 	}

@@ -30,12 +30,6 @@ Loom_Ethernet::Loom_Ethernet(
 	} else {
 	 	LPrintln("Failed to connect to internet");
 	}
-
-
-	// LPrintln("Connected : ", is_connected());
-	// LPrintln("Time      : ", get_time());
-	// LPrintln("Time      : ", get_time());
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -468,7 +468,7 @@ public:
 	// InternetPlats
 	LoomInternetPlat&	InternetPlat(const uint8_t idx = 0);
 	Loom_Ethernet&		Ethernet(const uint8_t idx = 0);
-	Loom_WiFi&		WiFi(const uint8_t idx = 0);
+	Loom_WiFi&			WiFi(const uint8_t idx = 0);
 
 	// PublishPlats
 	LoomPublishPlat& 	PublishPlat(const uint8_t idx = 0);

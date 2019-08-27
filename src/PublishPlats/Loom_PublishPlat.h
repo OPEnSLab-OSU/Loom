@@ -34,7 +34,6 @@ public:
 		const char*			module_name,
 		LoomModule::Type	module_type,
 		LoomModule::Type	internet_type
-		// const uint8_t		internet_index
 	);
 
 	/// Destructor

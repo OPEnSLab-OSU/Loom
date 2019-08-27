@@ -61,7 +61,10 @@ Loom_Analog::Loom_Analog(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Analog::Loom_Analog(JsonArrayConst p)
-	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], (Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10], (Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13], p[14], p[15]) {}
+	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], 
+		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10], 
+		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13], 
+		p[14], p[15]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Analog::add_config(JsonObject json)
