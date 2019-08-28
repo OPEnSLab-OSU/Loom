@@ -23,11 +23,11 @@
 		},\
 		{\
 			'name':'DS3231',\
-			'params':[11,true,true,6]\
+			'params':[11,true]\
 		},\
 		{\
 			'name':'NTP_Sync',\
-			'params':['NTP1',0,0]\
+			'params':[0]\
 		},\
 		{\
 			'name':'GoogleSheets',\

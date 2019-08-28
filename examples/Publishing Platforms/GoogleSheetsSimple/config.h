@@ -23,11 +23,7 @@
 		},\
 		{\
 			'name':'NTP_Sync',\
-			'params':[\
-				'NTP1',\
-				0,\
-				0\
-			]\
+			'params':[0]\
 		},\
 		{\
 			'name':'GoogleSheets',\
