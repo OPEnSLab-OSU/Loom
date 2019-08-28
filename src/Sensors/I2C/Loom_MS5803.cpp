@@ -10,11 +10,15 @@ Loom_MS5803::Loom_MS5803(
 	: LoomI2CSensor( "MS5803", Type::MS5803, i2c_address, mux_port )
 	, inst_MS5803( MS_5803(i2c_address, 512) )
 {
+	LPrintln("A");
 
 	// inst_MS5803 = new MS_5803(i2c_address, 512);
 	bool setup = !inst_MS5803.initializeMS_5803(); // for some reason this library returns setup incorrectly
 
-	if (!setup) active = false;
+	LPrintln("B");
+
+
+	// if (!setup) active = false;
 
 	print_module_label();
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
