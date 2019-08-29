@@ -23,16 +23,18 @@ public:
 
 	/// Loom Google Sheets Platform module constructor.
 	/// Check out http://www.open-sensing.org/evaporometerblog/datalog for more information on these parameters.
-	/// \param[in]	module_name		String | <"Internet-Plat"> | null | Publish platform module name.
-	/// \param[in]  internet_type	Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
-	/// \param[in]  script_url		String | <""> | null | URL where the google sheets script is hosted, without domain (ex. /macros/s/AKfycby<more letters here>_k0n/exec).
-	/// \param[in]  sheet_id		String | <""> | null |ID Of the spreadsheet to put data in (script must have edit access).
-	/// \param[in]  tab_id			String | <"Data"> | null | Name of the tab that the device will put data into. 
+	/// \param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name.
+	/// \param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	/// \param[in]  script_url			String | <""> | null | URL where the google sheets script is hosted, without domain (ex. /macros/s/AKfycby<more letters here>_k0n/exec).
+	/// \param[in]  sheet_id			String | <""> | null |ID Of the spreadsheet to put data in (script must have edit access).
+	/// \param[in]  tab_matches_dev_id	Bool | <true> | null | Override tab_id with the name+instance number of the device. 
+	/// \param[in]  tab_id				String | <"Data"> | null | Name of the tab that the device will put data into. 
 	Loom_GoogleSheets(	
 						const char*			module_name,
 						LoomModule::Type	internet_type,
 						const char*			script_url,
 						const char*			sheet_id,
+						bool				tab_matches_dev_id,
 						const char*			tab_id = "Data"
 					);
 
@@ -75,4 +77,7 @@ private:
 	const String m_script_url;
 	const String m_sheet_id;
 	const String m_tab_id;
+
+	const bool tab_matches_dev_id;
+
 };

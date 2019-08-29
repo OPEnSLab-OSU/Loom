@@ -8,11 +8,13 @@ Loom_GoogleSheets::Loom_GoogleSheets(
 		LoomModule::Type	internet_type,
 		const char*			script_url,
 		const char*			sheet_id,
+		bool				tab_matches_dev_id,
 		const char*			tab_id
 	)   
 	: LoomPublishPlat( module_name, Type::GoogleSheets, internet_type )
 	, m_script_url(script_url)
 	, m_sheet_id(sheet_id)
+	, tab_matches_dev_id(tab_matches_dev_id)
 	, m_tab_id(tab_id)
 {   
 	/// Build the begining of the Google Sheets URL with all of the provided parameters
@@ -22,7 +24,7 @@ Loom_GoogleSheets::Loom_GoogleSheets(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(JsonArrayConst p)
-	: Loom_GoogleSheets( p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4] ) {}
+	: Loom_GoogleSheets( p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_GoogleSheets::print_config() 
@@ -36,8 +38,6 @@ void Loom_GoogleSheets::print_config()
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat* plat) 
 {
-	LPrintln("In Send to Internet");
-
 	// connect to script.google.com
 	auto network = plat->connect_to_domain("script.google.com");
 	// check if we connected
@@ -61,7 +61,17 @@ bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat
 	network->print("?key0=sheetID&val0=");
 	network->print(m_sheet_id);
 	network->print("&key1=tabID&val1=");
-	network->print(m_tab_id);
+
+	if (tab_matches_dev_id && device_manager) {
+		char buf[20];
+		device_manager->get_device_name(buf);
+		snprintf(buf, 20, "%s%d", buf, device_manager->get_instance_num());
+		network->print(buf);
+
+	} else {
+		network->print(m_tab_id);
+	}
+
 	network->print("&key2=deviceID&val2=");
 
 	// Get device ID from manager
