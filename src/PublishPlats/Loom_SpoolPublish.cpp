@@ -41,8 +41,7 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
     // not sure if this is the right way to check if there is a overflow
     
     // TODO: Spool domain
-    auto network = plat->connect_to_ip(IPAddress(192,168,0,1), 443);
-    // auto network = plat->connect_to_ip(m_spool_domain);
+    auto network = plat->connect_to_ip(m_spool_domain, 443);
 
     if (!network) {
         print_module_label();
