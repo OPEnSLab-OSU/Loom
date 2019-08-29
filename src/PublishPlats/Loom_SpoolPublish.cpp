@@ -40,7 +40,7 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
     // serialize the data, checking for an error
     // not sure if this is the right way to check if there is a overflow
     
-    auto network = plat->connect_to_domain(m_spool_domain);
+    auto network = plat->connect_to_domain(m_spool_domain.c_str());
 
     if (!network) {
         print_module_label();
