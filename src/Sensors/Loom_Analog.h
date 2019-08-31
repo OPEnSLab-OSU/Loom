@@ -44,6 +44,7 @@ protected:
 	// the following will likely get a different implementation
 	float		temperature;					/// Temperature to use in conversions
 	float		pH_offset;						/// Offset to use in pH conversion
+	float		pH_range;						/// Range to use in pH conversion
 
 public:
 
@@ -67,6 +68,9 @@ public:
 	/// \param[in]	convertA3			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A3
 	/// \param[in]	convertA4			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A4
 	/// \param[in]	convertA5			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A5
+	/// \param[in]	temperature			float | <25.0> | [0.-100.] | Temperature to using in conversions
+	/// \param[in]	pH_offset			float | <0.0> | [0.-14.] | Offset in pH calculation (b value in mx+b)
+	/// \param[in]	pH_range			float | <3.5> | [0.-10.] | Slope in pH calculation (x value in mx+b)
 	Loom_Analog(
 			uint8_t			num_samples			= 8,
 			uint8_t			read_resolution		= 12,
@@ -81,9 +85,12 @@ public:
 			Conversion		convertA2			= Conversion::NONE,
 			Conversion		convertA3			= Conversion::NONE,
 			Conversion		convertA4			= Conversion::NONE,
-			Conversion		convertA5			= Conversion::NONE,
-			float			temperature			= 25.0,
-			float			pH_offset			= 0.0
+			Conversion		convertA5			= Conversion::NONE
+			// uint16_t		pH_neutralAnalog	= 3000,
+			// uint16_t		pH_acidAnalog		= 3.5,
+			// float			temperature			= 25.0,
+			// float			pH_offset			= 0.0,
+			// float			pH_range			= 3.5
 		);
 
 	/// Constructor that takes Json Array, extracts args
