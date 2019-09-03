@@ -43,8 +43,8 @@ protected:
 
 	// the following will likely get a different implementation
 	float		temperature;					/// Temperature to use in conversions
-	float		pH_offset;						/// Offset to use in pH conversion
-	float		pH_range;						/// Range to use in pH conversion
+	// float		pH_offset;						/// Offset to use in pH conversion
+	// float		pH_range;						/// Range to use in pH conversion
 
 public:
 
@@ -85,10 +85,10 @@ public:
 			Conversion		convertA2			= Conversion::NONE,
 			Conversion		convertA3			= Conversion::NONE,
 			Conversion		convertA4			= Conversion::NONE,
-			Conversion		convertA5			= Conversion::NONE
+			Conversion		convertA5			= Conversion::NONE,
 			// uint16_t		pH_neutralAnalog	= 3000,
 			// uint16_t		pH_acidAnalog		= 3.5,
-			// float			temperature			= 25.0,
+			float			temperature			= 25.0
 			// float			pH_offset			= 0.0,
 			// float			pH_range			= 3.5
 		);
@@ -165,6 +165,10 @@ public:
 	/// Enable or disable all conversions
 	/// \param[in]	e		Enable state
 	void  		set_enable_conversions(bool e) { enable_conversions = e; }
+
+	/// Set temperature to use in conversions that require temperature compensation
+	/// \param[in]	temp	Temperature to use
+	void		set_temperature(float temp) { temperature = ((temp > 40.0) && (temp < 85.)) ? temp : 25.0; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS

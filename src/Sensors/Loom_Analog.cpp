@@ -19,9 +19,9 @@ Loom_Analog::Loom_Analog(
 		Conversion		convertA2,
 		Conversion		convertA3,
 		Conversion		convertA4,
-		Conversion		convertA5
+		Conversion		convertA5,
 
-	// 	float			temperature,
+		float			temperature
 	// 	float			pH_offset,
 	// 	float			pH_range
 	) 
@@ -30,7 +30,7 @@ Loom_Analog::Loom_Analog(
 	, enable_conversions(true)
 	, analog_vals{0}
 	, battery(0.)
-	// , temperature(temperature)
+	, temperature(temperature)
 	// , pH_offset(pH_offset)
 	// , pH_range(pH_range)
 {
@@ -71,7 +71,8 @@ Loom_Analog::Loom_Analog(
 Loom_Analog::Loom_Analog(JsonArrayConst p)
 	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], 
 		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10], 
-		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13]) 
+		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13],
+		p[14] )
 	{}
 
 
@@ -134,10 +135,9 @@ void Loom_Analog::print_config()
 			LPrint("A", i, ", ");
 		}
 	}
-	LPrint("\tpH Offset       : ", pH_offset);
-	LPrint("\tpH Range        : ", pH_range);
-
-	LPrintln();
+	// LPrintln("\tpH Offset       : ", pH_offset);
+	// LPrintln("\tpH Range        : ", pH_range);
+	LPrintln("\n\tTemperature        : ", temperature);
 
 	// print_config_struct();
 }
@@ -304,7 +304,7 @@ float Loom_Analog::convert_turbidity(uint16_t analog)
 
 float Loom_Analog::convert_EC(uint16_t analog)
 {
-	float temperature = 25.0;
+	// float temperature = 25.0;
 	float voltage = convert_voltage(analog);
 
 	// float compensation_coefficient = 1.0 + 0.02 * (EC_TEMP - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));

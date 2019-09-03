@@ -89,6 +89,8 @@ class Loom_PCF8523;
 class Loom_Sleep_Manager;
 class Loom_Interrupt_Manager;
 class Loom_Multiplexer;
+class LoomNTPSync;
+class LoomTempSync;
 
 
 class FactoryBase;
@@ -455,6 +457,8 @@ public:
 	Loom_Sleep_Manager&			SleepManager(const uint8_t idx = 0);
 	Loom_Interrupt_Manager&		InterruptManager(const uint8_t idx = 0);
 	Loom_Multiplexer&			Multiplexer(const uint8_t idx = 0);
+	LoomNTPSync&				NTP(const uint8_t idx = 0);
+	LoomTempSync&				TempSync(const uint8_t idx = 0);
 
 	// CommPlats
 	Loom_LoRa&			LoRa(const uint8_t idx = 0);

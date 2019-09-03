@@ -307,10 +307,20 @@ Loom_MAX31856& LoomManager::MAX31856(uint8_t idx)
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
+//    --- Other ---
 
+LoomNTPSync& LoomManager::NTP(uint8_t idx) 
+{
+	LoomModule* tmp = find_module(LoomModule::Type::NTP, idx);
+	return (*(LoomNTPSync*)( (tmp) ? tmp : &global_stub ));
+}
 
-
-
+LoomTempSync& LoomManager::TempSync(uint8_t idx) 
+{
+	LoomModule* tmp = find_module(LoomModule::Type::TempSync, idx);
+	return (*(LoomTempSync*)( (tmp) ? tmp : &global_stub ));
+}
 
 
 

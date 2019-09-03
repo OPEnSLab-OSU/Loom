@@ -192,14 +192,20 @@ void LoomManager::set_package_verbosity(Verbosity v, bool set_modules)
 void LoomManager::measure()
 {	
 	for (auto module : modules) {	
+		if ( !module->get_active() ) continue;
+
 		if ( module->category() == LoomModule::Category::Sensor ) {
 			((LoomSensor*)module)->measure();
 		}
-		else if (module->get_module_type() == LoomModule::Type::Multiplexer) {
+		else if (
+			(module->get_module_type() == LoomModule::Type::Multiplexer) ) {
 			((Loom_Multiplexer*)module)->measure();
 		} 
 		else if (module->get_module_type() == LoomModule::Type::NTP) {
 			((LoomNTPSync*)module)->measure();
+		}
+		else if (module->get_module_type() == LoomModule::Type::TempSync) {
+			((LoomTempSync*)module)->measure();
 		}
 	}
 }

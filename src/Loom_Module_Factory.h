@@ -64,6 +64,7 @@
 
 // Other
 #include "Loom_NTP_Sync.h"
+#include "Loom_Temperature_Sync.h"
 
 // General
 #include "Loom_Interrupt_Manager.h"
@@ -219,7 +220,9 @@ namespace Include
 				factory::NameModulePair{"DecagonGS3",	Construct<Loom_DecagonGS3>,		ConstructDefault<Loom_DecagonGS3> },
 				// SPI
 				factory::NameModulePair{"MAX31855",		Construct<Loom_MAX31855>,		ConstructDefault<Loom_MAX31855> },
-				factory::NameModulePair{"MAX31856",		Construct<Loom_MAX31856>,		ConstructDefault<Loom_MAX31856> }
+				factory::NameModulePair{"MAX31856",		Construct<Loom_MAX31856>,		ConstructDefault<Loom_MAX31856> },
+				// Other
+				factory::NameModulePair{"TempSync",		Construct<LoomTempSync>,		ConstructDefault<LoomTempSync> }
 			);
 
 	/// Actuator modules

@@ -32,7 +32,7 @@ public:
 	enum class Type {
 		Unknown = 0,
 		// Other
-		Other=1000,			Interrupt_Manager, Sleep_Manager, Multiplexer, NTP,
+		Other=1000,			Interrupt_Manager, Sleep_Manager, Multiplexer, NTP, TempSync,
 		// Sensors
 		Sensor=2000,		Analog, Digital,
 		// I2C
