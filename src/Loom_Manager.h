@@ -155,7 +155,7 @@ protected:
 
 	StaticJsonDocument<2000> doc;		/// Json data
 
-	uint		packet_number = 1;
+	uint		packet_number = 1;		/// Packet number, incremented each time package is called
 
 public:
 
