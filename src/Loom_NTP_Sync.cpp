@@ -106,7 +106,7 @@ void LoomNTPSync::measure()
 		}
 		else if (!(m_internet->is_connected())) {
 			print_module_label();
-			LPrint("Could not synchronize RTC due to lack of internet");
+			LPrintln("Could not synchronize RTC due to lack of internet");
 		}
 	}
 }

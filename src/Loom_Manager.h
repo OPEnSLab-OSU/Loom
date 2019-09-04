@@ -115,15 +115,6 @@ private:
 
 	FactoryBase* Factory;
 
-	// NewFactory<
-	// 	Enable::Internet::All,
-	// 	Enable::Sensors::Enabled,
-	// 	Enable::Radios::Disabled,
-	// 	Enable::Actuators::Disabled,
-	// 	Enable::Max::Disabled
-	// > ModuleFactory{};
-
-
 public:
 
 	/// Different general types of devices
@@ -157,12 +148,14 @@ protected:
 	LoomRTC*				rtc_module = nullptr;
 
 	// Vectors of Loom Modules, categorized by type
-	std::vector<LoomModule*>		modules;		/// Miscellaneous modules
+	std::vector<LoomModule*>		modules;
 
 	Verbosity	print_verbosity;		/// Print detail verbosity
 	Verbosity	package_verbosity;		/// Package detail verbosity
 
 	StaticJsonDocument<2000> doc;		/// Json data
+
+	uint		packet_number = 1;
 
 public:
 

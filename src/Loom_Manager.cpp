@@ -215,6 +215,9 @@ void LoomManager::package(JsonObject json)
 {
 	// Add device identification to json
 	add_device_ID_to_json(json);
+
+	// Add a packet number to json
+	add_data("Packet", "Number", packet_number++);
 	
 	for (auto module : modules) {
 		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
