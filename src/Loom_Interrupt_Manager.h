@@ -38,6 +38,8 @@ enum class ISR_Type {
 // ###
 class Loom_Interrupt_Manager : public LoomModule
 {
+public:
+    void Run() {}
 
 private:
 

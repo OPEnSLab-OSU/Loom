@@ -37,6 +37,7 @@ public:
 	virtual void	calibrate() {};
 
 	/// Take any relevant measurements
+    void Run() { measure(); }
 	virtual void	measure() = 0;
 	virtual void 	package(JsonObject json) override = 0;
 	virtual bool	dispatch(JsonObject) {}

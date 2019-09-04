@@ -56,6 +56,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+    void Run() {}
 	virtual bool	dispatch(JsonObject) override {}
 	virtual void 	package(JsonObject json) override;
 

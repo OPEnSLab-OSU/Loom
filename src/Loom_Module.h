@@ -8,6 +8,15 @@
 
 #include <ArduinoJson.h>
 
+#undef min
+#undef max
+
+#include <vector>
+
+#include "weak.h"
+
+using var = weak<int, float>;
+
 /// Different levels of verbosity (for printing or packaging)
 enum class Verbosity {
 	V_OFF,		///< Disable
@@ -58,7 +67,7 @@ public:
 	};
 
 	enum class Category {
-		Unknown=0,			// Unknown	
+		Unknown=0,			// Unknown
 		Other=1,			// Other
 		Sensor=2,			// Sensors
 		L_RTC=3,			// RTC
@@ -79,7 +88,7 @@ protected:
 	bool			active;				/// Whether or not the module should be treated as active
 	bool			print_debug;		/// Individually togglable debug statements
 	Verbosity		print_verbosity;	/// Print verbosity
-	Verbosity		package_verbosity;	/// Package verbosity 
+	Verbosity		package_verbosity;	/// Package verbosity
 
 public:
 
@@ -184,7 +193,7 @@ public:
 	virtual void	link_device_manager(LoomManager* LM);
 
 	/// Set print verbosity 
-	/// Controlls level of detail included in debug prints 
+	/// Controlls level of detail included in debug prints
 	void			set_print_verbosity(Verbosity v);
 
 	/// Set package verbosity.
@@ -224,6 +233,26 @@ protected:
 
 private:
 
+//=============================================================================
+///@name    Refaction Members
+/*@{*/ //======================================================================
+public:
+    
+/// Pointers to dependencies of this module, stored in a vector
+std::vector<LoomModule *> Dependencies;
+
+/// Vector with a shared index to Dependencies, indicating if the connection
+/// should pass on data
+std::vector<bool> DataBearing;
+
+/// Sets a provided module pointer to be a dependency
+int depend(LoomModule *, bool);
+
+/// Values to provide for neighboring modules
+std::vector<var> Values;
+    
+/// Generic Execution Command
+virtual void Run() = 0;
 
 };
 
@@ -238,6 +267,3 @@ struct module_sort_comp {
        return left->get_module_type() < right->get_module_type();
     }
 };
-
-
-

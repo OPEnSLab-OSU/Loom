@@ -84,6 +84,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+    void Run() {}
 	void		measure();
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject) override {}

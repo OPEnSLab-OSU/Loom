@@ -52,6 +52,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+    void Run() {}
 	void		package(JsonObject json) override { /* do nothing for now */ }
 	bool		dispatch(JsonObject json) override { /* do nothing for now */}
 

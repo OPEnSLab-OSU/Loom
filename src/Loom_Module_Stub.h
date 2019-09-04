@@ -34,6 +34,7 @@ public:
 	/// \cond DO_NOT_DOCUMENT
 
 	// Loom Module
+    void Run() {}
 	LoomModule::Type get_module_type()
 	{ return LoomModule::Type::Unknown; }
 	LoomManager*	get_device_manager()

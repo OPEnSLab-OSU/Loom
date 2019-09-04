@@ -70,6 +70,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+    void Run() {}
 	virtual void package(JsonObject json) override { /* do nothing for now */ }
 	virtual bool dispatch(JsonObject json) override { /* do nothing for now */}
 
