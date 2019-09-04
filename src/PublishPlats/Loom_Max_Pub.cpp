@@ -1,6 +1,8 @@
 
 #include "Loom_Max_Pub.h"
 #include "../SubscribePlats/Loom_Max_Sub.h"
+#include "../Loom_Manager.h"
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -59,14 +61,10 @@ bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat
 		UDP_Inst = (m_internet != nullptr) ? m_internet->open_socket(UDP_port) : nullptr;
 		// Check if still null
 		if (!UDP_Inst) {
-			LPrintln("UDP_Inst is still null");
+			print_module_label();
+			LPrintln("UDP_Inst is null");
 			return false;
 		}
-	}
-
-	if (!UDP_Inst) {
-		LPrintln("UDP_Inst was null");
-		return false;
 	}
 
 	if (print_verbosity == Verbosity::V_HIGH) {

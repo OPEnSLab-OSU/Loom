@@ -2,14 +2,12 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'family':'Loom',\
-		'instance':1,\
-		'family_num':0\
+		'instance':1\
 	},\
 	'components':[\
 		{\
 			'name':'DS3231',\
-			'params':[11,false,false,6]\
+			'params':[11,true]\
 		},\
 		{\
 			'name':'Interrupt_Manager',\

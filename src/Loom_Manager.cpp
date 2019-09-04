@@ -33,16 +33,20 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomManager::LoomManager( 
+		FactoryBase*	factory_ptr,
 		const char*		device_name, 
 		uint8_t			instance, 
 		DeviceType		device_type, 
 		Verbosity		print_verbosity, 
-		Verbosity		package_verbosity
+		Verbosity		package_verbosity,
+		uint16_t		interval
 	)
-	: instance(instance)
+	: Factory(factory_ptr)
+	, instance(instance)
 	, print_verbosity(print_verbosity)
 	, package_verbosity(package_verbosity)
 	, device_type(device_type)
+	, interval(interval)
 {
 	snprintf(this->device_name, 20, "%s", device_name);
 }
@@ -67,6 +71,7 @@ void LoomManager::print_config(bool print_modules_config)
 	LPrintln("\tDevice Name         : ", device_name );
 	LPrintln("\tInstance Number     : ", instance );
 	LPrintln("\tDevice Type         : ", enum_device_type_string(device_type) );
+	LPrintln("\tInterval            : ", interval );
 
 	list_modules();
 
@@ -104,8 +109,8 @@ void LoomManager::add_module(LoomModule* module)
 
 	print_device_label();
 
-	if (module == nullptr) {
-		LPrintln("Cannot add null module");
+	if (module == nullptr || !module->get_active()) {
+		LPrintln("Cannot add null/inactive module");
 		return;
 	}
 
@@ -113,43 +118,6 @@ void LoomManager::add_module(LoomModule* module)
 
 	modules.emplace_back(module);
 	module->link_device_manager(this);
-
-
-// Add the following operations to second stage construction
-
-	// If is RTC
-	if (  (module->category() == LoomModule::Category::L_RTC) 
-	   && (interrupt_manager != nullptr) ) {
-		interrupt_manager->set_RTC_module( (LoomRTC*)module );
-	}
-
-	// If is Interrupt manager
-	if (module->get_module_type() == LoomModule::Type::Interrupt_Manager) {
-		this->interrupt_manager = (Loom_Interrupt_Manager*)module; 
-
-		// Point new interrupt manager to existing RTC
-		if (rtc_module != nullptr) {
-			this->interrupt_manager->set_RTC_module(rtc_module);
-		}
-
-		// Point existing sleep manager to new interrupt manager
-		if (sleep_manager != nullptr) {
-			this->interrupt_manager->link_sleep_manager(this->sleep_manager);
-			this->sleep_manager->link_interrupt_manager(this->interrupt_manager);
-		}
-	}
-
-	// If is Sleep manager
-	if (module->get_module_type() == LoomModule::Type::Sleep_Manager) {
-		this->sleep_manager = (Loom_Sleep_Manager*)module; 
-
-		// Point existing interrupt_manager manager to new sleep manager
-		if (this->interrupt_manager != nullptr) {
-			this->sleep_manager->link_interrupt_manager(this->interrupt_manager);
-			this->interrupt_manager->link_sleep_manager(this->sleep_manager);
-		}
-	}
-	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -166,7 +134,7 @@ void LoomManager::list_modules()
 			LPrintln("\t", LoomModule::enum_category_string(category), "s");//, " (", modules.size(), "):");
 			last_category = category;
 		}
-		if ( (module != nullptr) && ( module->get_active()) ) {
+		if ( module != nullptr ) {
 			LPrintln( "\t\t[", module->get_active() ? "+" : "-" , "] ", module->get_module_name() );
 		}
 	}	
@@ -224,14 +192,20 @@ void LoomManager::set_package_verbosity(Verbosity v, bool set_modules)
 void LoomManager::measure()
 {	
 	for (auto module : modules) {	
+		if ( !module->get_active() ) continue;
+
 		if ( module->category() == LoomModule::Category::Sensor ) {
 			((LoomSensor*)module)->measure();
 		}
-		else if (module->get_module_type() == LoomModule::Type::Multiplexer) {
+		else if (
+			(module->get_module_type() == LoomModule::Type::Multiplexer) ) {
 			((Loom_Multiplexer*)module)->measure();
 		} 
 		else if (module->get_module_type() == LoomModule::Type::NTP) {
 			((LoomNTPSync*)module)->measure();
+		}
+		else if (module->get_module_type() == LoomModule::Type::TempSync) {
+			((LoomTempSync*)module)->measure();
 		}
 	}
 }
@@ -241,6 +215,9 @@ void LoomManager::package(JsonObject json)
 {
 	// Add device identification to json
 	add_device_ID_to_json(json);
+
+	// Add a packet number to json
+	add_data("Packet", "Number", packet_number++);
 	
 	for (auto module : modules) {
 		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
@@ -296,17 +273,17 @@ JsonObject LoomManager::internal_json(bool clear)
 bool LoomManager::publish_all(const JsonObject json)
 {
 	bool result = true;
-	bool found = false;
-	for (auto publisher : modules) {
-		if ( (publisher != nullptr) 
-			&& (publisher->category() == LoomModule::Category::PublishPlat) 
-			&& ( publisher->get_active() ) ){
-
-			found |= true;
-			result &= static_cast<LoomPublishPlat*>(publisher)->publish( json );
+	uint8_t count = 0;
+	for (auto module : modules) {
+		if ( (module != nullptr) &&
+			 (module->category() == LoomModule::Category::PublishPlat) &&
+			 (module->get_active()) 
+			) {
+			result &= ((LoomPublishPlat*)module)->publish( json );
+			count++;
 		}
 	}
-	return found && result;
+	return (count > 0) && result;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -318,9 +295,18 @@ void LoomManager::dispatch(JsonObject json)
 	LPrintln();
 	// return;
 
+	// If is command
 	if ( strcmp(json["type"], "command") == 0 )	{
-		// LPrintln("Is command");
+
+		// For each command
 		for ( JsonObject cmd : json["commands"].as<JsonArray>() ) {
+
+			// Check if command is for manager 
+			if ( strcmp(cmd["module"].as<const char*>(), "Manager" ) == 0) {
+				if (dispatch_self(cmd)) break;
+			}
+
+			// Otherwise iterate over modules until module to handle command is found
 			// LPrintln("Try to dispatch to: ", cmd["module"].as<const char*>() );
 			for (auto module : modules) {
 				if ( (module != nullptr) && 
@@ -339,6 +325,17 @@ void LoomManager::dispatch(JsonObject json)
 void LoomManager::dispatch()
 {
 	dispatch( internal_json() );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::dispatch_self(JsonObject json)
+{
+	JsonArray params = json["params"];
+	switch( (char)json["func"] ) {
+		case 'i': if (params.size() >= 1) { set_interval( EXPAND_ARRAY(params, 1) ); } return true;
+		case 'j': if (params.size() >= 1) { parse_config_SD( EXPAND_ARRAY(params, 1) ); } return true;
+	}
+	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -371,12 +368,13 @@ void LoomManager::flash_LED(uint8_t sequence[3])
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::pause(uint16_t ms)
+void LoomManager::nap(uint16_t ms)
 {
 	Serial.end();
 	USBDevice.detach();
 
-	uint16_t sleepMS = Watchdog.sleep(ms);
+	// Sleep, with max time of 16000 milliseconds
+	uint16_t sleepMS = Watchdog.sleep( (ms <= 16000) ? ms : 16000); 
 
 	USBDevice.attach();
 	Serial.begin(SERIAL_BAUD);
@@ -428,8 +426,6 @@ void LoomManager::get_config()
 	JsonObject general_info 	= json.createNestedObject("general");
 	general_info["name"]		= device_name;
 	general_info["instance"]	= instance;
-	// general_info["family"]		= family;
-	// general_info["family_num"]	= family_num;
 
 	// Start array for modules to add config objects to
 	JsonArray components = json.createNestedArray("components");
@@ -447,7 +443,7 @@ LoomModule*	LoomManager::find_module(LoomModule::Type type, uint8_t idx)
 	uint8_t current = 0;
 
 	for (auto module : modules) {
-		if (type == ((LoomModule*)module)->get_module_type()) {
+		if (type == module->get_module_type()) {
 			if (current == idx) {
 				return (LoomModule*)module;
 			} else {
@@ -459,6 +455,49 @@ LoomModule*	LoomManager::find_module(LoomModule::Type type, uint8_t idx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+LoomModule*	LoomManager::find_module_by_category(LoomModule::Category category, uint8_t idx)
+{
+	uint8_t current = 0;
+
+	for (auto module : modules) {
+		if (category == module->category()) {
+			if (current == idx) {
+				return (LoomModule*)module;
+			} else {
+				current++;
+			}
+		}
+	}
+	return nullptr;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomManager::set_interval(uint16_t ms) 
+{
+	interval = ms; 
+	print_device_label();
+	LPrintln("Set interval to: ", interval);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::has_module(LoomModule::Type type)
+{
+	for (auto module : modules) {
+		if (module->get_module_type() == type) return true;
+	}
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
 
 
 

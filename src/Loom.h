@@ -38,7 +38,6 @@ This is the Doxygen generated documentation of the Loom library code.
 // Communiciation Platforms
 #include "CommPlats/Loom_LoRa.h"
 #include "CommPlats/Loom_nRF.h"
-//#include "Loom_SlipSerial.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Logging Platforrms
@@ -48,7 +47,7 @@ This is the Doxygen generated documentation of the Loom library code.
 ///////////////////////////////////////////////////////////////////////////////
 // Internet Platforms
 #include "InternetPlats/Loom_InternetWiFi.h"
-// #include "InternetPlats/Loom_InternetEthernet.h"
+#include "InternetPlats/Loom_InternetEthernet.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Mulitplexer
@@ -106,8 +105,3 @@ This is the Doxygen generated documentation of the Loom library code.
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
-// Device Manager
-// #include "Loom_Manager.h"
-
-#include "Loom_Module_Factory.h"

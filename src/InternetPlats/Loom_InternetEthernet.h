@@ -10,12 +10,16 @@
 // ### (LoomModule) | dependencies: [] | conflicts: []
 /// InternetPlat built off of SSLClient running over an Ethernet Featherwing. Requires 7KB of free SRAM at runtime to use.
 // ###
-class Loom_Ethernet_I : public LoomInternetPlat
+class Loom_Ethernet : public LoomInternetPlat
 {
 
 protected:
-	std::vector<unsigned char> m_cli_cert;					/// The client certificate, if one is provided (DER format)
-	std::vector<unsigned char> m_cli_key;					/// The client private key, if one if provided (DER format)
+
+	std::vector<unsigned char> m_cli_cert;	/// The client certificate, if one is provided (DER format)
+	std::vector<unsigned char> m_cli_key;	/// The client private key, if one if provided (DER format)
+	const br_x509_certificate m_cert;
+	const SSLClientParameters m_params;
+
 	SSLClient<EthernetClient> m_client;		/// Underlying Ethernet SSLclient instance
 
 	byte			m_mac[6];				/// The Ethernet MAC address
@@ -30,7 +34,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	Loom_Ethernet_I(	
+	Loom_Ethernet(	
 			const char* 			module_name	= "Ethernet",
 			const JsonArrayConst	mac			= JsonArray(),
 			const JsonArrayConst 	ip			= JsonArray(),
@@ -41,10 +45,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_Ethernet_I( JsonArrayConst p );
+	Loom_Ethernet( JsonArrayConst p );
 
 	/// Destructor
-	virtual ~Loom_Ethernet_I() = default;
+	virtual ~Loom_Ethernet() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -52,6 +56,9 @@ public:
 
 	// remember to close the socket!
 	ClientSession connect_to_domain(const char* domain) override;
+
+	// remember to close the socket!
+	ClientSession connect_to_ip(const IPAddress& ip, const uint16_t port) override;
 
 	/// Connect to internet
 	void connect() override;

@@ -113,6 +113,17 @@ void Loom_SD::log(const char* filename)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+// void Loom_SD::log() 
+// {
+// 	if (device_manager != nullptr) {
+// 		JsonObject tmp = device_manager->internal_json();
+// 		if (strcmp(tmp["type"], "data") == 0 ) {
+// 			save_json(tmp, default_file);
+// 		}
+// 	}
+// }
+
+///////////////////////////////////////////////////////////////////////////////
 
 // Note that timestamp implementation may change with blocks of data in json
 // Format:

@@ -11,8 +11,6 @@
 #include <algorithm>
 
 
-Factory LoomFactory;
-
 
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomManager::parse_config(const char* json_config)
@@ -40,14 +38,15 @@ bool LoomManager::parse_config_SD(const char* config_file)
 	LPrintln("Read config from file: '", config_file, "'");
 
 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
-	if (!SD.begin(SD_CS)) {
+	delay(25);
+	if (!SD.begin(SD_CS)) {	// Make sure we can communicate with SD
 		print_device_label();
 		LPrintln("SD failed to begin");
 		return false;
 	}
 
 	File file = SD.open(config_file);
-	if (!file) {
+	if (!file) {	// Make sure file exists
 		print_device_label();
 		LPrintln("Failed to open '", config_file, "'");
 		return false;
@@ -57,7 +56,7 @@ bool LoomManager::parse_config_SD(const char* config_file)
 	DeserializationError error = deserializeJson(doc, file);
 	
 	// Test if parsing succeeds.
-	if (error) {
+	if (error) { // Make sure json was valid
 		print_device_label();
 		LPrintln("deserializeJson() failed: ", error.c_str());
 		return false;
@@ -88,14 +87,11 @@ bool LoomManager::parse_config_json(JsonObject config)
 	if (general.containsKey("name")) {
 		snprintf(this->device_name, 20, "%s", general["name"].as<const char*>());
 	}
-	// if (general.containsKey("family")) {
-	// 	snprintf(this->family, 20, "%s", general["family"].as<const char*>());
-	// }
-	// if (general.containsKey("family_num")) {
-	// 	this->family_num = general["family_num"];
-	// }
 	if (general.containsKey("instance")) {
 		this->instance = general["instance"];
+	}
+	if (general.containsKey("interval")) {
+		this->interval = general["interval"];
 	}
 	if (general.containsKey("device_type")) {
 		this->device_type = (DeviceType)(int)general["device_type"];
@@ -114,15 +110,17 @@ bool LoomManager::parse_config_json(JsonObject config)
 
 	// Call module factory creating each module
 	for ( JsonVariant module : config["components"].as<JsonArray>()) {		
-		add_module(LoomFactory.Create(module));
+		if (Factory) {
+			add_module(Factory->Create(module));
+		}
 	}
 
 	// Sort modules by type
 	std::sort(modules.begin(), modules.end(), module_sort_comp());
 	
-
+	// Run second stage constructors
 	for (auto module : modules) {
-		if ( (module != nullptr) && module->get_active() ) {
+		if ( module != nullptr ) {
 			module->second_stage_ctor();
 		}
 	}	

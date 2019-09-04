@@ -19,13 +19,20 @@ Loom_Analog::Loom_Analog(
 		Conversion		convertA2,
 		Conversion		convertA3,
 		Conversion		convertA4,
-		Conversion		convertA5	
+		Conversion		convertA5,
+
+		float			temperature
+	// 	float			pH_offset,
+	// 	float			pH_range
 	) 
 	: LoomSensor( "Analog", Type::Analog, num_samples )
 	, read_resolution(read_resolution)
 	, enable_conversions(true)
 	, analog_vals{0}
 	, battery(0.)
+	, temperature(temperature)
+	// , pH_offset(pH_offset)
+	// , pH_range(pH_range)
 {
 	// Set Analog Read Resolution
 	analogReadResolution(read_resolution);
@@ -55,18 +62,24 @@ Loom_Analog::Loom_Analog(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+// Loom_Analog::Loom_Analog(JsonArrayConst p)
+// 	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], 
+// 		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10], 
+// 		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13], 
+// 		p[14], p[15], p[16]) {}
+
 Loom_Analog::Loom_Analog(JsonArrayConst p)
-	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], (Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10], (Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13]) {}
+	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], 
+		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10], 
+		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13],
+		p[14] )
+	{}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Analog::add_config(JsonObject json)
 {
-	// add_config_aux(json, module_name,
-	// 	module_name, num_samples, read_resolution,
-	// 	pin_enabled[0], pin_enabled[1], pin_enabled[2], pin_enabled[3], pin_enabled[4], pin_enabled[5],
-	// 	(int)conversions[0], (int)conversions[1], (int)conversions[2], (int)conversions[3], (int)conversions[4], (int)conversions[5]
-	// );
-
 	JsonArray params = add_config_temp(json, module_name);
 	params.add(module_name);
 	params.add(num_samples);
@@ -122,7 +135,9 @@ void Loom_Analog::print_config()
 			LPrint("A", i, ", ");
 		}
 	}
-	LPrintln();
+	// LPrintln("\tpH Offset       : ", pH_offset);
+	// LPrintln("\tpH Range        : ", pH_range);
+	LPrintln("\n\tTemperature        : ", temperature);
 
 	// print_config_struct();
 }
@@ -161,10 +176,14 @@ void Loom_Analog::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	data["Vbat"] = battery;
-	char buf[3];
+	char buf[12];
 	for (auto i = 0; i < ANALOG_COUNT; i++) {
 		if (pin_enabled[i]) {
-			sprintf(buf, "%s%d", "A", i);
+			if (!enable_conversions || conversions[i] == Conversion::NONE) {
+				sprintf(buf, "%s%d", "A", i);
+			} else {
+				sprintf(buf, "%s", conversion_name(get_conversion(i)));
+			}
 			data[buf] = (!enable_conversions || conversions[i] == Conversion::NONE) 
 						 ? analog_vals[i]
 						 : convert(i, analog_vals[i]);
@@ -248,33 +267,48 @@ float Loom_Analog::convert_thermistor(uint16_t analog)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-#define PH_Offset 0.0
+// #define PH_Offset 0.0
 
 float Loom_Analog::convert_pH(uint16_t analog)
 {
-	float voltage = convert_voltage(analog);
-
-	return 3.5*voltage + PH_Offset;
+	// float voltage = convert_voltage(analog);
+	// return pH_range*voltage + pH_offset;
+	return 1000.*convert_voltage(analog); // return millivolts
 }
+
+
+// float DFRobot_PH::readPH(uint16_t voltage)
+// {
+// 	float slope = (7.0-4.0)/((this->_neutralVoltage-1500.0)/3.0 - (this->_acidVoltage-1500.0)/3.0);  // two point: (_neutralVoltage,7.0),(_acidVoltage,4.0)
+// 	float intercept = 7.0 - slope*(this->_neutralVoltage-1500.0)/3.0;
+// 	//Serial.print("slope:");
+// 	//Serial.print(slope);
+// 	//Serial.print(",intercept:");
+// 	//Serial.println(intercept);
+// 	return slope*(voltage-1500.0)/3.0 + intercept;  //y = mx + b
+// }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 float Loom_Analog::convert_turbidity(uint16_t analog)
 {
-	float voltage = convert_voltage(analog);
-
+	// float voltage = convert_voltage(analog);
 	// LPrintln("turbidity voltage: ", voltage);
+	// return -1120.4 * (voltage * voltage) + (5742.3 * voltage) - 4352.9;
 
-	return -1120.4 * (voltage * voltage) + (5742.3 * voltage) - 4352.9;
+	return analog; // turbidity values are fairly qualitative, just returning the analog value for now
 }	
 
 ///////////////////////////////////////////////////////////////////////////////
-#define EC_TEMP 25
+// #define EC_TEMP 25
 
 float Loom_Analog::convert_EC(uint16_t analog)
 {
+	// float temperature = 25.0;
 	float voltage = convert_voltage(analog);
 
-	float compensation_coefficient = 1.0 + 0.02 * (EC_TEMP - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
+	// float compensation_coefficient = 1.0 + 0.02 * (EC_TEMP - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
+	float compensation_coefficient = 1.0 + 0.02 * (temperature - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
 	float comp_volt = voltage / compensation_coefficient;  			// temperature compensation
 	float EC = ( 133.42 * comp_volt * comp_volt * comp_volt - 255.86 * comp_volt * comp_volt + 857.39 * comp_volt ); //convert voltage value to EC value
 	

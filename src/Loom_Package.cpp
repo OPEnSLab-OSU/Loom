@@ -35,6 +35,8 @@ JsonObject get_module_data_object(JsonObject json, const char* module_name)
 ///////////////////////////////////////////////////////////////////////////////
 void package_json_timestamp(JsonObject json, const char* date, const char* time)
 {
+	// Note that if the keys are the same as the ones added by the Google script 
+	// for received time, only one value will be kept
 	JsonObject timestamp = json.createNestedObject("timestamp");
 	timestamp["date"] = date;
 	timestamp["time"] = time;
@@ -76,11 +78,6 @@ void flatten_json_data_array(JsonObject json)
 		}
 	}
 }
-
-///////////////////////////////////////////////////////////////////////////////
-/// @private (hide from Doxygen)
-/// Termination of recursive add_config_aux
-// void add_config_aux2(JsonArray parameters) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 JsonArray add_config_temp(JsonObject json, const char* module_name)

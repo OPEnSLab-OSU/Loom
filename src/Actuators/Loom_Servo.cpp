@@ -58,14 +58,10 @@ void Loom_Servo::package(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Servo::dispatch(JsonObject json)
 {
-	LPrintln("In servo dispatch");
-
-	// if ( strcmp(json["module"], module_name) == 0 ) {
-		JsonArray params = json["params"];
-		switch( (char)json["func"] ) {
-			case 's': if (params.size() >= 2) { set_degree( EXPAND_ARRAY(params, 2) ); } return true;
-		}
-	// }
+	JsonArray params = json["params"];
+	switch( (char)json["func"] ) {
+		case 's': if (params.size() >= 2) { set_degree( EXPAND_ARRAY(params, 2) ); } return true;
+	}
 	return false;
 }
 

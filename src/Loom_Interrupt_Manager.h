@@ -22,7 +22,6 @@ class Loom_Sleep_Manager;
 // when returning function pointers
 /// Typedef to for ISR function pointer readability
 using ISRFuncPtr = void (*)();
-// using ISRFuncPtr = void *();
 
 
 enum class ISR_Type { 

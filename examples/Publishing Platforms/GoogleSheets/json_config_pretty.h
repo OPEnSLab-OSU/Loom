@@ -2,9 +2,7 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'family':'Loom',\
-		'instance':1,\
-		'family_num':0\
+		'instance':1\
 	},\
 	'components':[\
 		{\
@@ -43,42 +41,36 @@
 				false\
 			]\
 		},\
-    {\
-      'name':'Ethernet',\
-      'params':[\
-        'Ether1',\
-        [<your-mac-address>],\
-        [192,168,0,1]\
-      ]\
-    },\
-    {\
-      'name':'DS3231',\
-      'params':[\
-        12,\
-        true,\
-        false,\
-        6\
-       ]\
-    },\
-    {\
-      'name':'NTP_Sync',\
-      'params':[\
-        'NTP1',\
-        0,\
-        0\
-       ]\
-    },\
-    {\
-      'name':'GoogleSheets',\
-      'params':[\
-        'Goog',\
-        0,\
-        '/macros/s/<your-url>/exec',\
-        '<your-sheet-id',\
-        '<your-Tab-id>',\
-        '<your-device-id>'\
-       ]\
-    },\
+		{\
+			'name':'Ethernet',\
+			'params':[\
+				'Ether1',\
+				[<your-mac-address>],\
+				[192,168,0,1]\
+				]\
+		},\
+		{\
+			'name':'DS3231',\
+			'params':[\
+				12,\
+				true\
+			 ]\
+		},\
+		{\
+			'name':'NTP_Sync',\
+			'params':[0]\
+		},\
+		{\
+			'name':'GoogleSheets',\
+			'params':[\
+				'Goog',\
+				0,\
+				'/macros/s/<your-url>/exec',\
+				'<your-sheet-id',\
+				'<your-Tab-id>',\
+				'<your-device-id>'\
+			 ]\
+		},\
 		{\
 			'name':'Interrupt_Manager',\
 			'params':'default'\

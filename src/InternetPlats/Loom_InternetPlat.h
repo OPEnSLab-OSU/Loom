@@ -19,7 +19,7 @@ class LoomInternetPlat : public LoomModule
 
 protected:	
 	
-	/// Utility function to write an http reqest based on parameters specified by LoomInternetPlat::httpo_request to a Client class
+	/// Utility function to write an http reqest based on parameters specified by LoomInternetPlat::http_request to a Client class
 	void write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb);
 
 public:
@@ -101,6 +101,12 @@ public:
 	/// \param[in]	domain	The domain to connect to "www.google.com"
 	/// \returns A client reference. The client::connected method will return true if the connection succeeded, and false otherwise.
 	virtual ClientSession connect_to_domain(const char* domain) = 0;
+
+	/// Connect to a domain, but don't write any HTTP stuff, Let the module figure that out.
+	/// \param[in]	ip	The IPAddress to connect to
+	/// \param[in] port	The port to connect to
+	/// \returns A client reference. The client::connected method will return true if the connection succeeded, and false otherwise.
+	virtual ClientSession connect_to_ip(const IPAddress& ip, const uint16_t port) = 0;
 
 	/// Open a UDP socket for sending and recieving incoming data (WARNING: Be careful about recieving data from an open socket!)
 	/// \returns A UDP socket for transmitting and recieving, or a nullptr if opening the socket failed. The socket will automatically

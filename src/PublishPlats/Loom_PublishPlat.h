@@ -15,8 +15,7 @@ class LoomPublishPlat : public LoomModule
 
 protected:
 
-	LoomInternetPlat* m_internet;
-	// const uint m_internet_index;
+	LoomInternetPlat*	m_internet;
 
 	LoomModule::Type	internet_type;
 
@@ -34,7 +33,6 @@ public:
 		const char*			module_name,
 		LoomModule::Type	module_type,
 		LoomModule::Type	internet_type
-		// const uint8_t		internet_index
 	);
 
 	/// Destructor

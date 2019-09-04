@@ -38,12 +38,34 @@ void Loom_Sleep_Manager::print_config()
 	LPrintln("\tSleep Mode    : ", enum_sleep_mode_string(sleep_mode) );
 	LPrintln("\tUse LED       : ", (use_LED) ? "Enabled" : "Disabled" );
 	LPrintln("\tDelay on Wake : ", (delay_on_wake) ? "Enabled" : "Disabled" );
+
+		LPrintln("\t\t Interrupt? ", interrupt_manager ? "+" : "-");
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::print_state()
 {
 	LoomModule::print_state();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_Sleep_Manager::link_device_manager(LoomManager* LM)
+{
+	LoomModule::link_device_manager(LM);
+
+	if ( LM ){
+
+		// Set manager's sleep manager 
+		LM->sleep_manager = this;
+
+		// Link to interrupt manager
+		auto interrupt_manager = LM->get_interrupt_manager(); 
+		if ( interrupt_manager ) {
+			link_interrupt_manager(interrupt_manager);
+			interrupt_manager->link_sleep_manager(this);
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

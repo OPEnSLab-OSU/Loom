@@ -1,7 +1,8 @@
+#pragma once
+
 #include "Loom_Module.h"
 #include "./InternetPlats/Loom_InternetPlat.h"
 #include "./RTC/Loom_RTC.h"
-#include "Loom_Interrupt_Manager.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -9,7 +10,6 @@
 
 // ### (LoomModule) | dependencies: [] | conflicts: []
 /// Glue code to synchronize an RTC using an InternetPlat. Always synchronizes the RTC from Loom_Interrupt_Manager::get_RTC_module().
-/// THIS MODULE DOES NOT FUNCTION, AND WILL BE REWRITTEN DURING LATER STAGES
 // ###
 class LoomNTPSync : public LoomModule
 {
@@ -24,10 +24,8 @@ public:
 
 	/// NTP Sync module constructor.
 	///
-	/// \param[in]  internet_module_index	Int | <0> | [0-5] | Index from zero of of the desired internet platform based on the JSON configuration
 	/// \param[in]  sync_interval_hours		Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
 	LoomNTPSync(
-		const uint			internet_module_index	= 0,
 		const uint			sync_interval_hours		= 0
 	);
 
@@ -74,17 +72,17 @@ private:
 	};
 	
 	/// Store the Internet Plat from second stage contsruction
-	const uint m_internet_module_index;
+	// const uint m_internet_module_index;
 	/// Store the sync interval, in hours
-	const uint m_sync_interval;
+	const uint			m_sync_interval;
 	/// Store the Internet Plat from second stage contsruction
-	LoomInternetPlat* m_internet;
+	LoomInternetPlat*	m_internet;
 	/// Store the RTC pointer so we can check the time
-	LoomRTC* m_rtc;
+	LoomRTC*			m_rtc;
 	/// Store when next to change the RTC
-	DateTime m_next_sync;
+	DateTime			m_next_sync;
 	/// Store if we've successfully accomplished our task
-	Error m_last_error;
+	Error				m_last_error;
 };
 
 

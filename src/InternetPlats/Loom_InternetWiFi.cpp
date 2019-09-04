@@ -2,8 +2,7 @@
 #include "Loom_InternetWiFi.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR ---
-Loom_WiFi_I::Loom_WiFi_I(	
+Loom_WiFi::Loom_WiFi(	
 		const char* 	ssid,
 		const char* 	pass
 	) 
@@ -26,20 +25,27 @@ Loom_WiFi_I::Loom_WiFi_I(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_WiFi_I::Loom_WiFi_I(JsonArrayConst p)
-	: Loom_WiFi_I( EXPAND_ARRAY(p, 2) ) {}
+Loom_WiFi::Loom_WiFi(JsonArrayConst p)
+	: Loom_WiFi( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi_I::connect()
+void Loom_WiFi::connect()
 {
 	// Try to connect, attempting the connection up to 5 times (this number is arbitrary)
-	int attempt_count = 0;
+	uint8_t attempt_count = 0;
 	uint8_t status = 0;
 	do {
 		print_module_label();
-		LPrintln("Trying to connect to : ", SSID);
-		status = WiFi.begin(SSID, pass);
+		LPrintln("Trying to connect to: ", SSID);
+
+		// Check if password provided
+		if (pass == nullptr || pass[0] == '\0' ) {
+			status = WiFi.begin(SSID);			
+		} else {
+			status = WiFi.begin(SSID, pass);
+		}
 		attempt_count++;
+		delay(2000);
 	} while (status != WL_CONNECTED && attempt_count < 5);
 
 	if (attempt_count == 5) {
@@ -51,13 +57,13 @@ void Loom_WiFi_I::connect()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_WiFi_I::is_connected()
+bool Loom_WiFi::is_connected()
 {
 	return WiFi.status() == WL_CONNECTED;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession Loom_WiFi_I::connect_to_domain(const char* domain)
+LoomInternetPlat::ClientSession Loom_WiFi::connect_to_domain(const char* domain)
 {
 	// if the socket is somehow still open, close it
 	if (client.connected()) client.stop();
@@ -78,7 +84,28 @@ LoomInternetPlat::ClientSession Loom_WiFi_I::connect_to_domain(const char* domai
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::UDPPtr Loom_WiFi_I::open_socket(const uint port) 
+LoomInternetPlat::ClientSession Loom_WiFi::connect_to_ip(const IPAddress& ip, const uint16_t port)
+{
+	// if the socket is somehow still open, close it
+	if (client.connected()) client.stop();
+	// * the rainbow connection *
+	int status = client.connect(ip, port);
+	if (!status) {
+		// log fail, and return
+		print_module_label();
+		LPrint("Wifi connect failed with error ", status, '\n');
+		return ClientSession();
+	}
+	else {
+		print_module_label();
+		LPrint("WiFi connected to IP'\n");
+	}
+	// return a pointer to the client for data reception
+	return LoomInternetPlat::ClientSession(&client);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+LoomInternetPlat::UDPPtr Loom_WiFi::open_socket(const uint port) 
 {
 	// create the unique pointer
 	UDPPtr ptr = UDPPtr(new WiFiUDP());
@@ -89,14 +116,14 @@ LoomInternetPlat::UDPPtr Loom_WiFi_I::open_socket(const uint port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi_I::print_config()
+void Loom_WiFi::print_config()
 {
 	LoomInternetPlat::print_config();
 	LPrint("\tSSID:               : ", SSID, '\n');
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi_I::print_state()
+void Loom_WiFi::print_state()
 {
 	LoomInternetPlat::print_state();	
 	LPrintln("\tConnected:          : ", (is_connected()) ? "True" : "False" );
@@ -107,7 +134,7 @@ void Loom_WiFi_I::print_state()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi_I::package(JsonObject json)
+void Loom_WiFi::package(JsonObject json)
 {
 	//JsonObject data = get_module_data_object(json, module_name);
 	auto ip = IPAddress(WiFi.localIP());

@@ -1,0 +1,1 @@
+{'general':{'name':'DEVICE_NAME','instance':1,'interval':500},'components':[{'name':'Analog','params':[8,12,false,true,true,false,false,false,0,3,0,0,0,0]},{'name':'MaxPub','params':[7002]},{'name':'MaxSub','params':[7002,true]},{'name':'MS5803','params':[119,255]},{'name':'WiFi','params':['SSID','PASSWORD']},{'name':'SD','params':[true,1000,10,'hydro1.csv']}]}

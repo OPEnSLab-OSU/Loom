@@ -2,6 +2,7 @@
 #include "Loom_RTC.h"
 #include "Loom_Manager.h"
 #include "../InternetPlats/Loom_InternetPlat.h"
+#include "../Loom_Interrupt_Manager.h"
 
 
 #define EI_NOTEXTERNAL
@@ -67,13 +68,11 @@ LoomRTC::LoomRTC(
 		const char*			module_name,
 		LoomModule::Type	module_type,
 		TimeZone			timezone,
-		bool				use_utc_time,
-		bool				get_internet_time
+		bool				use_utc_time
 	) 
 	: LoomModule( module_name, module_type )
 	, timezone(timezone)
 	, use_utc_time(use_utc_time)
-	, get_internet_time(get_internet_time)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -81,7 +80,6 @@ void LoomRTC::print_config()
 {
 	LoomModule::print_config();
 	LPrintln("\tUse UTC Time      : ", use_utc_time);
-	LPrintln("\tGet Internet Time : ", get_internet_time);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -211,31 +209,6 @@ void LoomRTC::init()
 	LPrintln("Current Time (before possible reset)");
 	print_time();
 
-	// bool internet_time_success = false;
-
-	// // Try to set the time from internet
-	// if (get_internet_time) { 
-	// 	internet_time_success = set_rtc_from_internet_time();
-	// }
-
-	// // If unable to set time via internet, default to normal behavior
-	// if (!internet_time_success) {
-
-	// 	// The following section checks if RTC is running, else sets 
-	// 	// the time to the time that the sketch was compiled
-	// 	if (!_initialized()) {
-	// 		print_module_label();
-	// 		LPrintln("RTC was not initialized");
-	// 		set_rtc_to_compile_time();
-	// 	}
-
-	// 	// Make sure the RTC time is even valid, if not, set to compile time
-	// 	rtc_validity_check();
-
-	// } // of if (!internet_time_success)
-
-
-
 	// The following section checks if RTC is running, else sets 
 	// the time to the time that the sketch was compiled
 	if (!_initialized()) {
@@ -256,7 +229,7 @@ void LoomRTC::init()
 void LoomRTC::set_rtc_to_compile_time()
 {
 	// This sets to local time zone
-	time_adjust( DateTime(F(__DATE__), F(__TIME__)) );
+	_adjust( DateTime(F(__DATE__), F(__TIME__)) );
 	
 	print_module_label();
 	LPrintln("Time set to compile time:");
@@ -265,43 +238,6 @@ void LoomRTC::set_rtc_to_compile_time()
 	// Adjust to UTC time if enabled
 	if (use_utc_time) convert_local_to_utc();
 }
-
-///////////////////////////////////////////////////////////////////////////////
-bool LoomRTC::set_rtc_from_internet_time()
-{
-	uint32_t unixTime = 0;
-	bool internet_time_success = false;
-
-	// Check device manager for an internet platform
-	// Query platform for time
-	if (device_manager != nullptr) {
-		if (device_manager->InternetPlat(0).is_connected() ) {
-			unixTime = device_manager->InternetPlat(0).get_time();
-			print_module_label();
-			LPrintln("Unix Time: ", unixTime);
-		}
-	}
-
-
-	if (unixTime != 0) {
-		// Set to UTC time
-		time_adjust(DateTime(unixTime));
-
-		print_module_label();
-		LPrintln("Time set to:");
-		print_time();
-
-		// If not using UTC Time convert to local
-		if (!use_utc_time) convert_local_to_utc(false);
-
-		internet_time_success = true;
-	} 
-
-	print_module_label();
-	LPrintln("Set time from internet ", (internet_time_success) ? "successful" : "failed");
-
-	return internet_time_success;
-} 
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomRTC::convert_local_to_utc(bool to_utc)
@@ -317,13 +253,12 @@ void LoomRTC::convert_local_to_utc(bool to_utc)
 		min = -30; 
 	}
 
-	DateTime utc = now() + TimeSpan(0, (int)adj, min, 0);
-	time_adjust(utc);
+	DateTime utc_time = now() + TimeSpan(0, (int)adj, min, 0);
 
 	print_module_label();
-	LPrintln("Time adjusted to ", (to_utc) ? "UTC" : "Local" , ": ");
-	print_time();
-	LPrintln();
+	LPrintln("Adjusting time to ", (to_utc) ? "UTC" : "Local");
+
+	_adjust(utc_time);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -346,3 +281,35 @@ bool LoomRTC::rtc_validity_check()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomRTC::link_device_manager(LoomManager* LM)
+{
+	LoomModule::link_device_manager(LM);
+
+	if (LM) {
+		// Set manager's interrupt manager 
+		LM->rtc_module = this;
+
+		auto interrupt_manager = LM->get_interrupt_manager();
+		if (interrupt_manager) {
+			interrupt_manager->set_RTC_module( this );
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomRTC::time_adjust(DateTime time, bool is_utc)
+{
+	_adjust(time);
+
+	// Check if source time is not in desired mode
+	if (use_utc_time != is_utc) {
+		convert_local_to_utc(use_utc_time);
+	}
+
+	print_module_label();
+	LPrint("Adjusted time to: "); 
+	print_DateTime(now());	
+}
+
+///////////////////////////////////////////////////////////////////////////////
+

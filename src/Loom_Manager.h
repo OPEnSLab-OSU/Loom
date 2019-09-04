@@ -4,6 +4,8 @@
 #include "Loom_Translator.h"
 #include "Loom_Module.h"
 
+#include "Loom_Module_Factory.h"
+
 #include <ArduinoJson.h>
 
 // Need to undef max and min for vector to work
@@ -22,7 +24,10 @@ class LoomCommPlat;
 class LoomLogPlat;
 
 // Actuators
-class Loom_Neopixel; class Loom_Relay; class Loom_Servo; class Loom_Stepper;
+class Loom_Neopixel; 
+class Loom_Relay; 
+class Loom_Servo; 
+class Loom_Stepper;
 
 // Sensors
 class Loom_Analog;
@@ -57,7 +62,6 @@ class Loom_MAX31856;
 class Loom_LoRa;
 class Loom_nRF;
 class Loom_Bluetooth;
-class Loom_SlipSerial;
 
 // LogPlats
 class Loom_OLED;
@@ -65,8 +69,8 @@ class Loom_SD;
 
 // InternetPlats
 class LoomInternetPlat;
-class Loom_Ethernet_I;
-class Loom_WiFi_I;
+class Loom_Ethernet;
+class Loom_WiFi;
 
 // PublishPlats
 class LoomPublishPlat;
@@ -85,6 +89,12 @@ class Loom_PCF8523;
 class Loom_Sleep_Manager;
 class Loom_Interrupt_Manager;
 class Loom_Multiplexer;
+class LoomNTPSync;
+class LoomTempSync;
+
+
+class FactoryBase;
+
 
 
 #define SERIAL_BAUD		115200
@@ -101,6 +111,10 @@ class Loom_Multiplexer;
 class LoomManager
 {
 
+private: 
+
+	FactoryBase* Factory;
+
 public:
 
 	/// Different general types of devices
@@ -114,6 +128,10 @@ protected:
 
 	char		device_name[20];	/// The name of the device
 	uint8_t		instance;			/// The instance / channel ID within the subnet
+
+	uint16_t	interval;			/// Default value for pause()/nap().
+									/// Used so that manager can control interval, rather than code in .ino
+
 
 	/// Device type (Hub / Node)
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
@@ -130,12 +148,14 @@ protected:
 	LoomRTC*				rtc_module = nullptr;
 
 	// Vectors of Loom Modules, categorized by type
-	std::vector<LoomModule*>		modules;		/// Miscellaneous modules
+	std::vector<LoomModule*>		modules;
 
 	Verbosity	print_verbosity;		/// Print detail verbosity
 	Verbosity	package_verbosity;		/// Package detail verbosity
 
 	StaticJsonDocument<2000> doc;		/// Json data
+
+	uint		packet_number = 1;		/// Packet number, incremented each time package is called
 
 public:
 
@@ -150,12 +170,15 @@ public:
 	/// \param[in]	device_type					Set(DeviceType) | <1> | {0("Hub"), 1("Node"), 2("Repeater")} | Device's topological type
 	/// \param[in]	print_verbosity				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
 	/// \param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
+	/// \param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause/nap for
 	LoomManager(
+			FactoryBase*	factory_ptr,
 			const char*		device_name			= "Device",
 			uint8_t			instance			= 1,
 			DeviceType		device_type			= DeviceType::NODE,
 			Verbosity		print_verbosity		= Verbosity::V_HIGH,
-			Verbosity		package_verbosity	= Verbosity::V_LOW
+			Verbosity		package_verbosity	= Verbosity::V_LOW,
+			uint16_t		interval			= 1000
 		);
 
 	//// Destructor
@@ -181,7 +204,8 @@ public:
 	
 	/// Parse a JSON configuration on SD card specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
-	/// and added to manager lists for managing
+	/// and added to manager lists for managing.
+	/// Json should be on a single line in a .txt file.
 	/// \param[in]	json_config		Configuration
 	/// \return True if success
 	bool		parse_config_SD(const char* config_file);
@@ -197,7 +221,6 @@ public:
 	/// Get complete configuration of the device.
 	/// Generally used to save configuration to SD
 	void		get_config();
-
 
 	/// Measure data of all managed sensors
 	void		measure();  
@@ -233,12 +256,23 @@ public:
 	/// Uses internal json
 	void		dispatch();
 
-	/// Pause for up to 16 seconds.
+	/// Pause for up to 16000 milliseconds.
 	/// You can use this instead of delay to put the device into a 
 	/// semi-low power state.
 	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
 	/// \param[in]	ms	Number of milliseconds to pause
-	void		pause(uint16_t ms);
+	void		nap(uint16_t ms);
+
+	/// Pause for up to 16000 milliseconds.
+	/// Uses interval member as value
+	void		nap() { nap(interval); }
+
+	/// Delay milliseconds.
+	void		pause(uint16_t ms) { delay(ms); }
+
+	/// Delay milliseconds based on interval member.
+	/// Uses interval member as value
+	void		pause() { delay(interval); }
 
 	/// Iterate over modules, calling power up method
 	void 		power_up();
@@ -293,6 +327,10 @@ public:
 	/// \param[in]	config_file		File to save configuration to
 	/// \return True is success, false if fail or file not found
 	// bool		save_SD_config(const char* config_file);
+
+	/// Determine if the manager has a module of the specified type
+	///	\param[in]	type	Module type to check for
+	bool has_module(LoomModule::Type type);
 
 
 //=============================================================================
@@ -374,6 +412,11 @@ public:
 	/// \param[in]	set_modules	Whether or not to also apply setting to modules
 	void		set_package_verbosity(Verbosity v, bool set_modules = false);
 
+	/// Set default time to use for .pause() \ .delay().
+	/// Pause and delay can still take explicit times, but if not provided, 
+	/// this value will be used
+	void		set_interval(uint16_t ms);
+
 //=============================================================================
 ///@name	MISCELLANEOUS
 /*@{*/ //======================================================================
@@ -393,10 +436,22 @@ public:
 ///@name	MODULE ACCESS 
 /*@{*/ //======================================================================
 
+	/// Auxiliary function to search a list of modules for a module of specified type
+	/// \param[in]	type	Type to search for
+	LoomModule*	find_module(LoomModule::Type type, uint8_t idx=0);
+
+	/// Auxiliary function to search a list of modules for a module of specified category
+	/// \param[in]	category	Category to search for
+	LoomModule*	find_module_by_category(LoomModule::Category category, uint8_t idx);
+
+	///////////////////////////////////////////////////////////////////////////
+
 	// Other
 	Loom_Sleep_Manager&			SleepManager(const uint8_t idx = 0);
 	Loom_Interrupt_Manager&		InterruptManager(const uint8_t idx = 0);
 	Loom_Multiplexer&			Multiplexer(const uint8_t idx = 0);
+	LoomNTPSync&				NTP(const uint8_t idx = 0);
+	LoomTempSync&				TempSync(const uint8_t idx = 0);
 
 	// CommPlats
 	Loom_LoRa&			LoRa(const uint8_t idx = 0);
@@ -409,8 +464,8 @@ public:
 
 	// InternetPlats
 	LoomInternetPlat&	InternetPlat(const uint8_t idx = 0);
-	Loom_Ethernet_I&	Ethernet(const uint8_t idx = 0);
-	Loom_WiFi_I&		WiFi(const uint8_t idx = 0);
+	Loom_Ethernet&		Ethernet(const uint8_t idx = 0);
+	Loom_WiFi&			WiFi(const uint8_t idx = 0);
 
 	// PublishPlats
 	LoomPublishPlat& 	PublishPlat(const uint8_t idx = 0);
@@ -470,6 +525,7 @@ private:
 	// Allow secondary managers to access private members of LoomManager
 	friend class Loom_Interrupt_Manager;
 	friend class Loom_Sleep_Manager;
+	friend class LoomRTC;
 	friend class Loom_SD;
 	friend class LoomNTPSync;
 
@@ -480,14 +536,12 @@ private:
 	/// Used to add device info to data object
 	void add_device_ID_to_json(JsonObject json);
 
-	///////////////////////////////////////////////////////////////////////////
-	/// Auxiliary function to search a list of modules for a module of specified type
-	/// \param[in]	type	Type to search for
-	LoomModule*	find_module(LoomModule::Type type, uint8_t idx);
-
 	/// Free modules.
 	/// Used in destructor or when switching configuration
 	void free_modules();
+
+	/// Run dispatch on any commands directed to the manager
+	bool dispatch_self(JsonObject json);
 
 };
 

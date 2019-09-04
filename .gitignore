@@ -3,3 +3,4 @@ html/
 latex/
 LoomTests
 .vscode
+*.DS_Store

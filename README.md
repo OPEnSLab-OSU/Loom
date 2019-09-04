@@ -92,7 +92,7 @@ Loom aims to follow [Semantic Versioning](https://semver.org)
 - [Loom Configurator](https://github.com/OPEnSLab-OSU/Loom_Configurator) A WebApp designed for designing and exporting loom configurations
 - [Loom-Network](https://github.com/OPEnSLab-OSU/Loom-Network) Arduino networking library designed for use with any wireless radio
 - [Loom-Auxilliary](https://github.com/OPEnSLab-OSU/Loom_Auxiliary) General Loom and lab non-code files
-- [Loom-Max](https://github.com/OPEnSLab-OSU/Loom-Max) MaxMSP interfaces for Loom interactivity
+- [Max-Loom2](https://github.com/OPEnSLab-OSU/Max-Loom2) MaxMSP interfaces for Loom interactivity
 
 #### Custom/Modified Libraries used by Loom
 

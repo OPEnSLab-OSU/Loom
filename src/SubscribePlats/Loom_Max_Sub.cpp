@@ -41,7 +41,7 @@ bool Loom_MaxSub::subscribe(JsonObject json)
 		UDP_Inst = (m_internet != nullptr) ? m_internet->open_socket(UDP_port) : nullptr;
 		// Check if still null
 		if (!UDP_Inst) {
-			LPrintln("UDP_Inst is still null");
+			LPrintln("UDP_Inst is null");
 			return false;
 		}
 	}

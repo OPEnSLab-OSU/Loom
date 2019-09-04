@@ -32,7 +32,7 @@ public:
 	enum class Type {
 		Unknown = 0,
 		// Other
-		Other=1000,			Interrupt_Manager, Sleep_Manager, Multiplexer, NTP,
+		Other=1000,			Interrupt_Manager, Sleep_Manager, Multiplexer, NTP, TempSync,
 		// Sensors
 		Sensor=2000,		Analog, Digital,
 		// I2C
@@ -48,11 +48,11 @@ public:
 		// LogPlats
 		LogPlat=5000,		OLED, SDCARD,
 		// CommPlats
-		CommPlat=6000,		LoRa, nRF, SlipSerial, Bluetooth,
+		CommPlat=6000,		LoRa, nRF, Bluetooth,
 		// InternetPlats
 		InternetPlat=7000,	Ethernet, WiFi,
 		// PublishPlats
-		PublishPlat=8000,	GoogleSheets, MaxPub,
+		PublishPlat=8000,	GoogleSheets, MaxPub, SpoolPub,
 		// SubscribePlats
 		SubscribePlats=9000, MaxSub
 	};

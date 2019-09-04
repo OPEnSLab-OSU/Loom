@@ -75,12 +75,10 @@ void Loom_Neopixel::print_state()
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Neopixel::dispatch(JsonObject json)
 {
-	// if ( strcmp(json["module"], module_name) == 0 ) {
 	JsonArray params = json["params"];
 	switch( (char)json["func"] ) {
 		case 's': if (params.size() >= 5) { set_color( EXPAND_ARRAY(params, 5) ); } return true;
 	}
-	// }
 	return false;
 }
 

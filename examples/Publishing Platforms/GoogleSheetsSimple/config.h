@@ -2,9 +2,7 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'family':'Loom',\
-		'instance':1,\
-		'family_num':0\
+		'instance':1\
 	},\
 	'components':[\
 		{\
@@ -25,11 +23,7 @@
 		},\
 		{\
 			'name':'NTP_Sync',\
-			'params':[\
-				'NTP1',\
-				0,\
-				0\
-			]\
+			'params':[0]\
 		},\
 		{\
 			'name':'GoogleSheets',\

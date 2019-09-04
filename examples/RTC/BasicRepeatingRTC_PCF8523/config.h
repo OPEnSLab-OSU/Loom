@@ -2,14 +2,12 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'family':'Loom',\
-		'instance':1,\
-		'family_num':0\
+		'instance':1\
 	},\
 	'components':[\
 		{\
 			'name':'PCF8523',\
-			'params':[11,true,false,6]\
+			'params':[11,true]\
 		},\
 		{\
 			'name':'Interrupt_Manager',\
