@@ -15,8 +15,6 @@
 
 #include "weak.h"
 
-using var = weak<int, float>;
-
 /// Different levels of verbosity (for printing or packaging)
 enum class Verbosity {
 	V_OFF,		///< Disable
@@ -36,6 +34,8 @@ class LoomModule
 
 public:
 
+    using var = weak<int, long, float, double, uint8_t, uint16_t, long unsigned int, String>;
+    
 	/// Enum to check against to when finding individual component
 	/// managed by a LoomManager
 	enum class Type {

@@ -36,7 +36,11 @@ Loom_TSL2591::Loom_TSL2591(
 			case 5 : inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_600MS);  // longest integration time (dim light) break;
 			default: LPrintln("Invalid timing level"); break;
 		}	
-	} 
+	}
+    
+    for(int i = 0; i < 3; i++) {
+        Values.push_back(var());
+    }
 
 	if (!setup) active = false;
 
@@ -53,17 +57,17 @@ void Loom_TSL2591::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\tVis  : ", vis);
-	LPrintln("\tIR   : ", ir);
-	LPrintln("\tFull : ", full);
+	LPrintln("\tVis  : ", Values[0].retrieve<uint16_t>().value_or(0));
+	LPrintln("\tIR   : ", Values[1].retrieve<uint16_t>().value_or(0));
+	LPrintln("\tFull : ", Values[2].retrieve<uint16_t>().value_or(0));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TSL2591::measure()
 {
-	vis  = inst_tsl2591.getLuminosity(TSL2591_VISIBLE);
-	ir   = inst_tsl2591.getLuminosity(TSL2591_INFRARED);
-	full = inst_tsl2591.getLuminosity(TSL2591_FULLSPECTRUM);
+	Values[0] = inst_tsl2591.getLuminosity(TSL2591_VISIBLE); //< Vis
+	Values[1] = inst_tsl2591.getLuminosity(TSL2591_INFRARED); //< Ir
+	Values[2] = inst_tsl2591.getLuminosity(TSL2591_FULLSPECTRUM); //< Full
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -71,9 +75,9 @@ void Loom_TSL2591::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	
-	data["Vis"]  = vis;
-	data["IR"]   = ir;
-	data["Full"] = full;
+	data["Vis"]  = Values[0].retrieve<uint16_t>().value_or(0);
+	data["IR"]   = Values[1].retrieve<uint16_t>().value_or(0);
+	data["Full"] = Values[2].retrieve<uint16_t>().value_or(0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

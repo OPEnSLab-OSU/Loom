@@ -20,6 +20,10 @@ Loom_AS7262::Loom_AS7262(
 {
 	inst_AS7262.begin(Wire, gain, mode);
 	inst_AS7262.setIntegrationTime(integration_time);
+    
+    for (int i = 0; i < 6; i++) {
+        Values.push_back(var());
+    }
 
 	print_module_label();
 	LPrintln("Initialized");
@@ -43,12 +47,12 @@ void Loom_AS7262::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\tViolet : ", color_vals[0]);
-	LPrintln("\tBlue   : ", color_vals[1]);
-	LPrintln("\tGreen  : ", color_vals[2]);
-	LPrintln("\tYellow : ", color_vals[3]);
-	LPrintln("\tOrange : ", color_vals[4]);
-	LPrintln("\tRed    : ", color_vals[5]);
+	LPrintln("\tViolet : ", Values[0].retrieve<uint16_t>().value_or(0));
+	LPrintln("\tBlue   : ", Values[1].retrieve<uint16_t>().value_or(0));
+	LPrintln("\tGreen  : ", Values[2].retrieve<uint16_t>().value_or(0));
+	LPrintln("\tYellow : ", Values[3].retrieve<uint16_t>().value_or(0));
+	LPrintln("\tOrange : ", Values[4].retrieve<uint16_t>().value_or(0));
+	LPrintln("\tRed    : ", Values[5].retrieve<uint16_t>().value_or(0));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -60,24 +64,24 @@ void Loom_AS7262::measure()
 		inst_AS7262.takeMeasurements();
 	}
 
-	color_vals[0] = inst_AS7262.getViolet();
-	color_vals[1] = inst_AS7262.getBlue();
-	color_vals[2] = inst_AS7262.getGreen();
-	color_vals[3] = inst_AS7262.getYellow();
-	color_vals[4] = inst_AS7262.getOrange();
-	color_vals[5] = inst_AS7262.getRed();	
+	Values[0] = inst_AS7262.getViolet();
+	Values[1] = inst_AS7262.getBlue();
+	Values[2] = inst_AS7262.getGreen();
+	Values[3] = inst_AS7262.getYellow();
+	Values[4] = inst_AS7262.getOrange();
+	Values[5] = inst_AS7262.getRed();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7262::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	data["Violet"]	= color_vals[0];
-	data["Blue"]	= color_vals[1];
-	data["Green"]	= color_vals[2];
-	data["Yellow"]	= color_vals[3];
-	data["Orange"]	= color_vals[4];
-	data["Red"]		= color_vals[5];
+	data["Violet"]	= Values[0].retrieve<uint16_t>().value_or(0);
+	data["Blue"]	= Values[1].retrieve<uint16_t>().value_or(0);
+	data["Green"]	= Values[2].retrieve<uint16_t>().value_or(0);
+	data["Yellow"]	= Values[3].retrieve<uint16_t>().value_or(0);
+	data["Orange"]	= Values[4].retrieve<uint16_t>().value_or(0);
+    data["Red"]		= Values[5].retrieve<uint16_t>().value_or(0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

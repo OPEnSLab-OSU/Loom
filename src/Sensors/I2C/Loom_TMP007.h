@@ -18,8 +18,8 @@ protected:
 
 	Adafruit_TMP007 inst_tmp007;	/// Underlying TMP007 sensor manager instance
 
-	float		object_temp;	/// Object temperature
-	float		die_temp;		/// Die temperature
+//    float        object_temp;    /// Object temperature
+//    float        die_temp;        /// Die temperature
 
 public:
 

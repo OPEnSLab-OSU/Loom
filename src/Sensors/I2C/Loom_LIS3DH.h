@@ -18,7 +18,7 @@ protected:
 
 	LIS3DH		inst_LIS3DH;	/// Underlying LIS3DH sensor manager instance
 
-	float		accel[3];		/// Measured acceleration values (x,y,z)(g's)
+	//float		accel[3];		/// Measured acceleration values (x,y,z)(g's)
 
 public:
 	

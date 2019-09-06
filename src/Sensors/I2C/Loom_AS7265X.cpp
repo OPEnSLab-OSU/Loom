@@ -72,6 +72,10 @@ Loom_AS7265X::Loom_AS7265X(
 		// inst_AS7265X.setIndicatorCurrent(AS7265X_INDICATOR_CURRENT_LIMIT_8MA); 	//Default
 		// //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	}
+    
+    for(int i = 0; i < 18; i++) {
+        Values.push_back(var());
+    }
 
 	if (!setup) active = false;
 
@@ -90,11 +94,11 @@ void Loom_AS7265X::print_measurements()
 	LPrintln("Measurements:");
 
 	// UV
-	for (auto i = 0; i < 6; i++) { LPrintln("\tA: ", uv[i]); }
+	for (auto i = 0; i < 6; i++) { LPrintln("\tA: ", Values[i].retrieve<uint16_t>().value_or(0)); }
 	// Color
-	for (auto i = 0; i < 6; i++) { LPrintln("\tG: ", color[i]); }
+	for (auto i = 0; i < 6; i++) { LPrintln("\tG: ", Values[i].retrieve<uint16_t>().value_or(0)); }
 	// NIR
-	for (auto i = 0; i < 6; i++) { LPrintln("\tR: ", nir[i]); }
+	for (auto i = 0; i < 6; i++) { LPrintln("\tR: ", Values[i].retrieve<uint16_t>().value_or(0)); }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -107,28 +111,28 @@ void Loom_AS7265X::measure()
 	}
 	
 	// UV
-	uv[0] = inst_AS7265X.getCalibratedA();
-	uv[1] = inst_AS7265X.getCalibratedB();
-	uv[2] = inst_AS7265X.getCalibratedC();
-	uv[3] = inst_AS7265X.getCalibratedD();
-	uv[4] = inst_AS7265X.getCalibratedE();
-	uv[5] = inst_AS7265X.getCalibratedF();
+	Values[0] = inst_AS7265X.getCalibratedA();
+	Values[1] = inst_AS7265X.getCalibratedB();
+	Values[2] = inst_AS7265X.getCalibratedC();
+	Values[3] = inst_AS7265X.getCalibratedD();
+	Values[4] = inst_AS7265X.getCalibratedE();
+	Values[5] = inst_AS7265X.getCalibratedF();
 
 	// Color
-	color[0] = inst_AS7265X.getCalibratedG();
-	color[1] = inst_AS7265X.getCalibratedH();
-	color[2] = inst_AS7265X.getCalibratedI();
-	color[3] = inst_AS7265X.getCalibratedJ();
-	color[4] = inst_AS7265X.getCalibratedK();
-	color[5] = inst_AS7265X.getCalibratedL();
+	Values[0+6] = inst_AS7265X.getCalibratedG();
+	Values[1+6] = inst_AS7265X.getCalibratedH();
+	Values[2+6] = inst_AS7265X.getCalibratedI();
+	Values[3+6] = inst_AS7265X.getCalibratedJ();
+	Values[4+6] = inst_AS7265X.getCalibratedK();
+	Values[5+6] = inst_AS7265X.getCalibratedL();
 
 	// NIR
-	nir[0] = inst_AS7265X.getCalibratedR();
-	nir[1] = inst_AS7265X.getCalibratedS();
-	nir[2] = inst_AS7265X.getCalibratedT();
-	nir[3] = inst_AS7265X.getCalibratedU();
-	nir[4] = inst_AS7265X.getCalibratedV();
-	nir[5] = inst_AS7265X.getCalibratedW();
+	Values[0+12] = inst_AS7265X.getCalibratedR();
+	Values[1+12] = inst_AS7265X.getCalibratedS();
+	Values[2+12] = inst_AS7265X.getCalibratedT();
+	Values[3+12] = inst_AS7265X.getCalibratedU();
+	Values[4+12] = inst_AS7265X.getCalibratedV();
+	Values[5+12] = inst_AS7265X.getCalibratedW();
 }
 
 
@@ -136,26 +140,26 @@ void Loom_AS7265X::measure()
 void Loom_AS7265X::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	data["a"] = uv[0];
-	data["b"] = uv[1];
-	data["c"] = uv[2];
-	data["d"] = uv[3];
-	data["e"] = uv[4];
-	data["f"] = uv[5];
+	data["a"] = Values[0].retrieve<uint16_t>().value_or(0);
+	data["b"] = Values[1].retrieve<uint16_t>().value_or(0);
+	data["c"] = Values[2].retrieve<uint16_t>().value_or(0);
+	data["d"] = Values[3].retrieve<uint16_t>().value_or(0);
+	data["e"] = Values[4].retrieve<uint16_t>().value_or(0);
+	data["f"] = Values[5].retrieve<uint16_t>().value_or(0);
 
-	data["g"] = color[0];
-	data["h"] = color[1];
-	data["i"] = color[2];
-	data["j"] = color[3];
-	data["k"] = color[4];
-	data["l"] = color[5];
+	data["g"] = Values[0+6].retrieve<uint16_t>().value_or(0);
+	data["h"] = Values[1+6].retrieve<uint16_t>().value_or(0);
+	data["i"] = Values[2+6].retrieve<uint16_t>().value_or(0);
+	data["j"] = Values[3+6].retrieve<uint16_t>().value_or(0);
+	data["k"] = Values[4+6].retrieve<uint16_t>().value_or(0);
+	data["l"] = Values[5+6].retrieve<uint16_t>().value_or(0);
 
-	data["r"] = nir[0];
-	data["s"] = nir[1];
-	data["t"] = nir[2];
-	data["u"] = nir[3];
-	data["v"] = nir[4];
-	data["w"] = nir[5];
+	data["r"] = Values[0+12].retrieve<uint16_t>().value_or(0);
+	data["s"] = Values[1+12].retrieve<uint16_t>().value_or(0);
+	data["t"] = Values[2+12].retrieve<uint16_t>().value_or(0);
+	data["u"] = Values[3+12].retrieve<uint16_t>().value_or(0);
+	data["v"] = Values[4+12].retrieve<uint16_t>().value_or(0);
+	data["w"] = Values[5+12].retrieve<uint16_t>().value_or(0);
 
 
 }

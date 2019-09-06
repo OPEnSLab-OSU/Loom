@@ -17,6 +17,11 @@ Loom_MS5803::Loom_MS5803(
 
 	print_module_label();
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
+    
+    // Allocate Enough Space for all the runtime values
+    for(int i = 0; i < 2; i++) {
+        Values.push_back(var());
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -28,17 +33,19 @@ void Loom_MS5803::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\tPressure    : ", pressure , " mbar");
-	LPrintln("\tTemperature : ", temp     , " C");
+	LPrintln("\tPressure    : ", Values[0].retrieve<float>().value_or(0) , " mbar");
+	LPrintln("\tTemperature : ", Values[1].retrieve<float>().value_or(0) , " C");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MS5803::measure()
 {
 	inst_MS5803.readSensor();
-
-	pressure = inst_MS5803.pressure();
-	temp     = inst_MS5803.temperature();
+    
+    // Push Data into Values
+    Values[0] = inst_MS5803.pressure();
+    Values[1] = inst_MS5803.temperature();
+    
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -46,8 +53,9 @@ void Loom_MS5803::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	
-	data["pressure"] = pressure;
-	data["temp"]     = temp;
+    // Retreive data and pass to JSON
+	data["pressure"] = Values[0].retrieve<float>().value_or(0);
+	data["temp"]     = Values[1].retrieve<float>().value_or(0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

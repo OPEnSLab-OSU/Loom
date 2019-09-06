@@ -13,6 +13,10 @@ Loom_FXAS21002::Loom_FXAS21002(
 	, inst_FXAS21002(Adafruit_FXAS21002C(0x0021002C))
 {
 	bool setup = inst_FXAS21002.begin();
+    
+    for(int i = 0; i < 3; i++) {
+        Values.push_back(var());
+    }
 
 	if (!setup) active = false;
 
@@ -29,9 +33,9 @@ void Loom_FXAS21002::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\tgx: ", gyro[0]);
-	LPrintln("\tgy: ", gyro[1]);
-	LPrintln("\tgz: ", gyro[2]);
+	LPrintln("\tgx: ", Values[0].retrieve<float>().value_or(0));
+	LPrintln("\tgy: ", Values[1].retrieve<float>().value_or(0));
+	LPrintln("\tgz: ", Values[2].retrieve<float>().value_or(0));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -40,18 +44,18 @@ void Loom_FXAS21002::measure()
 	sensors_event_t event;
 	inst_FXAS21002.getEvent(&event);
 
-	gyro[0] = event.gyro.x;
-	gyro[1] = event.gyro.y;
-	gyro[2] = event.gyro.z;
+	Values[0] = event.gyro.x;
+	Values[1] = event.gyro.y;
+	Values[2] = event.gyro.z;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_FXAS21002::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	data["gx"] = gyro[0];
-	data["gy"] = gyro[1];
-	data["gz"] = gyro[2];
+	data["gx"] = Values[0].retrieve<float>().value_or(0);
+	data["gy"] = Values[1].retrieve<float>().value_or(0);
+	data["gz"] = Values[2].retrieve<float>().value_or(0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

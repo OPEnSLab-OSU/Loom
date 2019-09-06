@@ -19,6 +19,10 @@ Loom_AS7263::Loom_AS7263(
 {
 	inst_AS7263.begin(Wire, gain, mode);
 	inst_AS7263.setIntegrationTime(integration_time);
+    
+    for(int i = 0; i < 6; i++) {
+        Values.push_back(var());
+    }
 
 	print_module_label();
 	LPrintln("Initialized");
@@ -42,12 +46,12 @@ void Loom_AS7263::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\tNIR R: ", nir_vals[0]);
-	LPrintln("\tNIR S: ", nir_vals[1]);
-	LPrintln("\tNIR T: ", nir_vals[2]);
-	LPrintln("\tNIR U: ", nir_vals[3]);
-	LPrintln("\tNIR V: ", nir_vals[4]);
-	LPrintln("\tNIR W: ", nir_vals[5]);
+	LPrintln("\tNIR R: ", Values[0].retrieve<uint16_t>().value_or(0));
+	LPrintln("\tNIR S: ", Values[1].retrieve<uint16_t>().value_or(0));
+	LPrintln("\tNIR T: ", Values[2].retrieve<uint16_t>().value_or(0));
+	LPrintln("\tNIR U: ", Values[3].retrieve<uint16_t>().value_or(0));
+	LPrintln("\tNIR V: ", Values[4].retrieve<uint16_t>().value_or(0));
+	LPrintln("\tNIR W: ", Values[5].retrieve<uint16_t>().value_or(0));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -59,24 +63,24 @@ void Loom_AS7263::measure()
 		inst_AS7263.takeMeasurements();
 	}
 
-	nir_vals[0] = inst_AS7263.getR();
-	nir_vals[1] = inst_AS7263.getS();
-	nir_vals[2] = inst_AS7263.getT();
-	nir_vals[3] = inst_AS7263.getU();
-	nir_vals[4] = inst_AS7263.getV();
-	nir_vals[5] = inst_AS7263.getW();	
+	Values[0] = inst_AS7263.getR();
+	Values[1] = inst_AS7263.getS();
+	Values[2] = inst_AS7263.getT();
+	Values[3] = inst_AS7263.getU();
+	Values[4] = inst_AS7263.getV();
+	Values[5] = inst_AS7263.getW();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7263::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	data["NIR_R"] = nir_vals[0];
-	data["NIR_S"] = nir_vals[1];
-	data["NIR_T"] = nir_vals[2];
-	data["NIR_U"] = nir_vals[3];
-	data["NIR_V"] = nir_vals[4];
-	data["NIR_W"] = nir_vals[5];
+	data["NIR_R"] = Values[0].retrieve<uint16_t>().value_or(0);
+	data["NIR_S"] = Values[1].retrieve<uint16_t>().value_or(0);
+	data["NIR_T"] = Values[2].retrieve<uint16_t>().value_or(0);
+	data["NIR_U"] = Values[3].retrieve<uint16_t>().value_or(0);
+	data["NIR_V"] = Values[4].retrieve<uint16_t>().value_or(0);
+	data["NIR_W"] = Values[5].retrieve<uint16_t>().value_or(0);
 
 }
 

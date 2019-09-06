@@ -20,16 +20,16 @@ protected:
 	// // /// Variables to save accel and gyro readings
 	// int16_t ax, ay, az, gx, gy, gz;
 
-	float temp;					/// Temperature
-
-	float accX, accY, accZ;		/// Acceleration values
-	float gyroX, gyroY, gyroZ;	/// Gyro values
-
-	float accAngleX, accAngleY;	/// Acceleration angle values
-
-	float gyroAngleX, gyroAngleY, gyroAngleZ; /// Gyro angle values
-
-	float angleX, angleY, angleZ;	/// Angle values
+//    Values[0] temp;                    /// Temperature
+//
+//    Values[1] accX, Values[2] accY, Values[3] accZ;        /// Acceleration values
+//    Values[4] gyroX, Values[5] gyroY, Values[6] gyroZ;    /// Gyro values
+//
+//    Values[7] accAngleX, Values[8] accAngleY;    /// Acceleration angle values
+//
+//    Values[9] gyroAngleX, Values[10] gyroAngleY, Values[11] gyroAngleZ; /// Gyro angle values
+//
+//    Values[12] angleX, Values[13] angleY, Values[14] angleZ;    /// Angle values
 
 public:
 

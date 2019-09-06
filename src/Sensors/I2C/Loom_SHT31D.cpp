@@ -10,6 +10,10 @@ Loom_SHT31D::Loom_SHT31D(
 	: LoomI2CSensor( "SHT31D", Type::SHT31D, i2c_address, mux_port )
 {
 	bool setup = inst_sht31d.begin(i2c_address);
+    
+    for(int i = 0; i < 2; i++) {
+        Values.push_back(var());
+    }
 
 	if (!setup) active = false;
 
@@ -26,8 +30,8 @@ void Loom_SHT31D::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\tTemp  : ", temp, " C");
-	LPrintln("\tHumid : ", humid);
+	LPrintln("\tTemp  : ", Values[0].retrieve<float>().value_or(0), " C");
+	LPrintln("\tHumid : ", Values[1].retrieve<float>().value_or(0));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -37,8 +41,8 @@ void Loom_SHT31D::measure()
 	float h = inst_sht31d.readHumidity();
 
 	if ((!isnan(t)) && (!isnan(h))) {
-		temp = t;
-		humid = h;
+		Values[0] = t;
+		Values[1] = h;
 	} else {
 		print_module_label();
 		LPrintln("Failed to read temp/humid");
@@ -50,8 +54,8 @@ void Loom_SHT31D::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	
-	data["temp"]  = temp;
-	data["humid"] = humid;
+	data["temp"]  = Values[0].retrieve<float>().value_or(0);
+	data["humid"] = Values[1].retrieve<float>().value_or(0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -18,9 +18,9 @@ protected:
 
 	AS7265X		inst_AS7265X;		/// Underlying AS7265X sensor manager instance
 
-	uint16_t	uv[6];				/// Measured UV bands values
-	uint16_t	color[6];			/// Measured color bands values
-	uint16_t	nir[6];				/// Measured near-infra-red bands values
+//    uint16_t    uv[6];                /// Measured UV bands values
+//    uint16_t    color[6];            /// Measured color bands values
+//    uint16_t    nir[6];                /// Measured near-infra-red bands values
 
 	bool		use_bulb;			/// Whether or not to use the bulb
 

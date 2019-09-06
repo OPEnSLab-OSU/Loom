@@ -127,3 +127,11 @@ const char* LoomModule::enum_category_string(Category c)
 
 ///////////////////////////////////////////////////////////////////////////////
 
+int LoomModule::depend(LoomModule *Dependency, bool DataFlag) {
+    // Append Dependency onto list of Dependencies
+    Dependencies.push_back(Dependency);
+    // Add flag indicating if data should be shared
+    DataBearing.push_back(DataFlag);
+}
+
+///////////////////////////////////////////////////////////////////////////////

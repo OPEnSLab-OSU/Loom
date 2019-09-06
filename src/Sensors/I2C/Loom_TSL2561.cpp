@@ -43,6 +43,10 @@ Loom_TSL2561::Loom_TSL2561(
 			case 3 : inst_TSL2561.setIntegrationTime(TSL2561_INTEGRATIONTIME_402MS); break;
 		}
 	}
+    
+    for(int i = 0; i < 3; i++) {
+        Values.push_back(var());
+    }
 
 	if (!setup) active = false;
 
@@ -59,8 +63,8 @@ void Loom_TSL2561::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\tLightIR   : ", lightIR,   " lux");
-	LPrintln("\tLightFull : ", lightFull, " lux");
+	LPrintln("\tLightIR   : ", Values[0].retrieve<uint16_t>().value_or(0), " lux");
+	LPrintln("\tLightFull : ", Values[1].retrieve<uint16_t>().value_or(0), " lux");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -72,20 +76,19 @@ void Loom_TSL2561::measure()
 		inst_TSL2561.getLuminosity(&Full_ar[i], &IR_ar[i]);
 	}
 
-	lightIR   = (IR_ar[0]   + IR_ar[1]   + IR_ar[2]   + IR_ar[3]   + IR_ar[4])   / 5;
-	lightFull = (Full_ar[0] + Full_ar[1] + Full_ar[2] + Full_ar[3] + Full_ar[4]) / 5;
+	Values[0] = (IR_ar[0]   + IR_ar[1]   + IR_ar[2]   + IR_ar[3]   + IR_ar[4])   / 5; // IR
+	Values[1] = (Full_ar[0] + Full_ar[1] + Full_ar[2] + Full_ar[3] + Full_ar[4]) / 5; // Full
+    Values[2] = inst_TSL2561.calculateLux(Values[0].retrieve<uint16_t>().value_or(1), Values[0].retrieve<uint16_t>().value_or(0)); // Lux
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TSL2561::package(JsonObject json)
 {
-	int lux = inst_TSL2561.calculateLux(lightFull, lightIR);
-
 	JsonObject data = get_module_data_object(json, module_name);
 	
-	data["IR"]   = lightIR;
-	data["Full"] = lightFull;
-	data["Lux"]  = lux;
+	data["IR"]   = Values[0].retrieve<uint16_t>().value_or(0);
+	data["Full"] = Values[1].retrieve<uint16_t>().value_or(0);
+	data["Lux"]  = Values[2].retrieve<int>().value_or(0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

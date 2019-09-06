@@ -21,8 +21,8 @@ protected:
 
 	uint16_t	MS_PROM[8];		/// Read calibration data stored on sensor
 
-	float		pressure;		/// Measure pressure (mbar)
-	float		temp;			/// Measured temperature (C)
+///             Values[0]       /// Measure pressure (mbar)
+///             Values[1]       /// Measured temperature (C)
 
 public:
 	
@@ -64,7 +64,7 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	float		get_temperature() { return temp; }
+	float		get_temperature() { return Values[1].retrieve<float>().value_or(0); }
 
 private:
 

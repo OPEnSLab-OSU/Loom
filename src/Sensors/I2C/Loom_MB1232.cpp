@@ -21,6 +21,10 @@ Loom_MB1232::Loom_MB1232(
 	
 	Wire.requestFrom(i2c_address, byte(2));
 	bool setup = (Wire.available() >= 2);
+    
+    for(int i = 0; i < 1; i++) {
+        Values.push_back(var());
+    }
 
 	if (!setup) active = false;
 
@@ -37,7 +41,7 @@ void Loom_MB1232::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\tRange: ", range, " cm");
+	LPrintln("\tRange: ", Values[0].retrieve<float>().value_or(0), " cm");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -59,7 +63,7 @@ void Loom_MB1232::measure()
 		byte low  = Wire.read();
 		byte tmp  = Wire.read();
 		
-		range = (high * 256) + low;
+		Values[0] = (high * 256) + low;
 	} else {
 		print_module_label();
 		LPrintln("Error reading from mb1232 (range)");
@@ -72,8 +76,7 @@ void Loom_MB1232::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	
-	data["range"] = range;
-}
+	data["range"] = Values[0].retrieve<uint16_t>().value_or(0);
 
 ///////////////////////////////////////////////////////////////////////////////
 

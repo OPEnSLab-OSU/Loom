@@ -94,9 +94,9 @@ void Loom_ZXGesture::measure()
 				// LPrintln("Position data unavailable for zxgesturesensor");
 				
 				// Send 255 to indicate that no object is detected
-				pos[0] = 255; 
+				pos[0] = 255;
 				pos[1] = 255;
-			}			
+			}
 			break;
 		
 

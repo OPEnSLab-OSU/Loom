@@ -22,6 +22,10 @@ Loom_MPU6050::Loom_MPU6050(
 		mpu6050.calcGyroOffsets(true);
 		LPrintln();
 	}
+    
+    for (int i = 0; i < 15; i++) {
+        Values.push_back(var());
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -44,30 +48,30 @@ void Loom_MPU6050::print_measurements()
 	print_module_label();
 	LPrintln("Measurements:");
 
-	LPrintln("\taccX   : ", accX);
-	LPrintln("\taccY   : ", accY);
-	LPrintln("\taccZ   : ", accZ);
+	LPrintln("\taccX   : ", Values[1].retrieve<float>().value_or(0));
+	LPrintln("\taccY   : ", Values[2].retrieve<float>().value_or(0));
+	LPrintln("\taccZ   : ", Values[3].retrieve<float>().value_or(0));
 
-	LPrintln("\tgyroX  : ", gyroX);
-	LPrintln("\tgyroY  : ", gyroY);
-	LPrintln("\tgyroZ  : ", gyroZ);
+	LPrintln("\tgyroX  : ", Values[4].retrieve<float>().value_or(0));
+	LPrintln("\tgyroY  : ", Values[5].retrieve<float>().value_or(0));
+	LPrintln("\tgyroZ  : ", Values[6].retrieve<float>().value_or(0));
 
-	LPrintln("\troll  : ", angleX);
-	LPrintln("\tpitch : ", angleY);
-	LPrintln("\tyaw   : ", angleZ);
+	LPrintln("\troll  : ", Values[0].retrieve<float>().value_or(12));
+	LPrintln("\tpitch : ", Values[0].retrieve<float>().value_or(13));
+	LPrintln("\tyaw   : ", Values[0].retrieve<float>().value_or(14));
 	// LPrintln("\tangleX : ", angleX);
 	// LPrintln("\tangleY : ", angleY);
 	// LPrintln("\tangleZ : ", angleZ);
 
 	if (print_verbosity == Verbosity::V_HIGH) {
-		LPrintln("\ttemp       : ", temp);
+		LPrintln("\ttemp       : ", Values[0].retrieve<float>().value_or(0));
 
-		LPrintln("\taccAngleX  : ", accAngleX);
-		LPrintln("\taccAngleY  : ", accAngleY);
+		LPrintln("\taccAngleX  : ", Values[7].retrieve<float>().value_or(0));
+		LPrintln("\taccAngleY  : ", Values[8].retrieve<float>().value_or(0));
 
-		LPrintln("\tgyroAngleX : ", gyroAngleX);
-		LPrintln("\tgyroAngleY : ", gyroAngleY);
-		LPrintln("\tgyroAngleZ : ", gyroAngleZ);
+		LPrintln("\tgyroAngleX : ", Values[4].retrieve<float>().value_or(0));
+		LPrintln("\tgyroAngleY : ", Values[5].retrieve<float>().value_or(0));
+		LPrintln("\tgyroAngleZ : ", Values[6].retrieve<float>().value_or(0));
 	}
 
 }
@@ -77,26 +81,26 @@ void Loom_MPU6050::measure()
 {
 	mpu6050.update();
 
-	temp = mpu6050.getTemp();
+     Values[0] = mpu6050.getTemp();
 
-	accX = mpu6050.getAccX();
-	accY = mpu6050.getAccY();
-	accZ = mpu6050.getAccZ();
+     Values[1] = mpu6050.getAccX();
+     Values[2] = mpu6050.getAccY();
+     Values[3] = mpu6050.getAccZ();
 
-	gyroX = mpu6050.getGyroX();
-	gyroY = mpu6050.getGyroY();
-	gyroZ = mpu6050.getGyroZ();
+     Values[4] = mpu6050.getGyroX();
+     Values[5] = mpu6050.getGyroY();
+     Values[6] = mpu6050.getGyroZ();
 
-	accAngleX = mpu6050.getAccAngleX();
-	accAngleY = mpu6050.getAccAngleY();
+     Values[7] = mpu6050.getAccAngleX();
+     Values[8] = mpu6050.getAccAngleY();
 
-	gyroAngleX = mpu6050.getGyroAngleX();
-	gyroAngleY = mpu6050.getGyroAngleY();
-	gyroAngleZ = mpu6050.getGyroAngleZ();
+     Values[9] = mpu6050.getGyroAngleX();
+     Values[10] = mpu6050.getGyroAngleY();
+     Values[11] = mpu6050.getGyroAngleZ();
 
-	angleX = mpu6050.getAngleX();
-	angleY = mpu6050.getAngleY();
-	angleZ = mpu6050.getAngleZ();
+     Values[12] = mpu6050.getAngleX();
+     Values[13] = mpu6050.getAngleY();
+     Values[14] = mpu6050.getAngleZ();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -104,30 +108,30 @@ void Loom_MPU6050::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	
-	data["ax"] = accX;
-	data["ay"] = accY;
-	data["az"] = accZ;
+	data["ax"] = Values[1].retrieve<float>().value_or(0); //< Print accX
+	data["ay"] = Values[2].retrieve<float>().value_or(0); //< Print accY
+	data["az"] = Values[3].retrieve<float>().value_or(0); //< Print accZ
 
-	data["gx"] = gyroX;
-	data["gy"] = gyroY;
-	data["gz"] = gyroZ;
+	data["gx"] = Values[4].retrieve<float>().value_or(0); //< Print gyroX
+	data["gy"] = Values[5].retrieve<float>().value_or(0); //< Print gyroY
+	data["gz"] = Values[6].retrieve<float>().value_or(0); //< Print gyroZ
 
-	data["roll"] = angleX;
-	data["pitch"] = angleY;
-	data["yaw"] = angleZ;
+	data["roll" ] = Values[12].retrieve<float>().value_or(0); //< Print angleX
+	data["pitch"] = Values[13].retrieve<float>().value_or(0); //< Print angleY
+    data["yaw"  ] = Values[14].retrieve<float>().value_or(0); //< Print angleZ
 	// data["angx"] = angleX;
 	// data["angy"] = angleY;
 	// data["angz"] = angleZ;
 
 	if (print_verbosity == Verbosity::V_HIGH) {
-		data["temp"]		= 	temp;
+		data["temp"]		= 	Values[0].retrieve<float>().value_or(0); //< Print temp
 
-		data["accAngleX"]	= 	accAngleX;
-		data["accAngleY"]	= 	accAngleY;
+		data["accAngleX"]	= 	Values[7].retrieve<float>().value_or(0); //< Print accAngleX
+		data["accAngleY"]	= 	Values[8].retrieve<float>().value_or(0); //< Print accAngleY
 
-		data["gyroAngleX"]	= 	gyroAngleX;
-		data["gyroAngleY"]	= 	gyroAngleY;
-		data["gyroAngleZ"]	=	gyroAngleZ;
+		data["gyroAngleX"]	= 	Values[9 ].retrieve<float>().value_or(0); //< Print gyroAngleX
+		data["gyroAngleY"]	= 	Values[10].retrieve<float>().value_or(0); //< Print gyroAngleY
+		data["gyroAngleZ"]	=	Values[11].retrieve<float>().value_or(0); //< Print gyroAngleZ
 	}
 
 }

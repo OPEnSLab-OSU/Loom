@@ -18,6 +18,10 @@ Loom_MMA8451::Loom_MMA8451(
 
 	// Configure interrupts
 	// configure_interrupts(); // not verified yet
+    
+    for(int i = 0; i < 4; i++) {
+        Values.push_back(var());
+    }
 
 	if (!setup) active = false;
 	print_module_label();
@@ -41,12 +45,12 @@ void Loom_MMA8451::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\tAccel X     : ", accel[0], " m/s^2");
-	LPrintln("\tAccel Y     : ", accel[1], " m/s^2");
-	LPrintln("\tAccel Z     : ", accel[2], " m/s^2");
+	LPrintln("\tAccel X     : ", Values[0].retrieve<float>().value_or(0), " m/s^2");
+	LPrintln("\tAccel Y     : ", Values[0].retrieve<float>().value_or(0), " m/s^2");
+	LPrintln("\tAccel Z     : ", Values[0].retrieve<float>().value_or(0), " m/s^2");
 	
 	LPrint("\tOrientation : ");
-	switch (orientation) {
+	switch (Values[0].retrieve<uint16_t>().value_or(0)) {
 		case MMA8451_PL_PUF: LPrintln("Portrait Up Front");		break;
 		case MMA8451_PL_PUB: LPrintln("Portrait Up Back");		break;
 		case MMA8451_PL_PDF: LPrintln("Portrait Down Front");	break;
@@ -68,12 +72,12 @@ void Loom_MMA8451::measure()
 	sensors_event_t event; 
 	MMA.getEvent(&event);
 
-	accel[0] = event.acceleration.x;
-	accel[1] = event.acceleration.y;
-	accel[2] = event.acceleration.z;
+	Values[0] = event.acceleration.x;
+	Values[1] = event.acceleration.y;
+	Values[2] = event.acceleration.z;
 
 	// Get the orientation of the sensor
-	orientation = MMA.getOrientation();
+	Values[3] = MMA.getOrientation();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -81,13 +85,13 @@ void Loom_MMA8451::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	
-	data["ax"] = accel[0];
-	data["ay"] = accel[1];
-	data["az"] = accel[2];
+    data["ax"] = Values[0].retrieve<float>().value_or(0);
+    data["ay"] = Values[1].retrieve<float>().value_or(0);
+    data["az"] = Values[2].retrieve<float>().value_or(0);
 
 	if (package_verbosity == Verbosity::V_HIGH) {
 		char buf[22];
-		switch (orientation) {
+		switch (Values[0].retrieve<uint16_t>().value_or(0)) {
 			case MMA8451_PL_PUF: strcpy(buf, "Portrait Up Front");		break;
 			case MMA8451_PL_PUB: strcpy(buf, "Portrait Up Back");		break;
 			case MMA8451_PL_PDF: strcpy(buf, "Portrait Down Front");	break;

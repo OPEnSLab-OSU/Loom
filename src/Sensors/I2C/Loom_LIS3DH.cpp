@@ -20,6 +20,10 @@ Loom_LIS3DH::Loom_LIS3DH(
 	inst_LIS3DH.settings.zAccelEnabled   = 1;
   
 	bool setup = inst_LIS3DH.begin();
+    
+    for (int i = 0; i < 3; i++) {
+        Values.push_back(var());
+    }
 
 	if (!setup) active = false;
 
@@ -36,17 +40,17 @@ void Loom_LIS3DH::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\tAccel X: ", accel[0]);
-	LPrintln("\tAccel Y: ", accel[1]);
-	LPrintln("\tAccel Z: ", accel[2]);
+	LPrintln("\tAccel X: ", Values[0].retrieve<float>().value_or(0));
+	LPrintln("\tAccel Y: ", Values[1].retrieve<float>().value_or(0));
+	LPrintln("\tAccel Z: ", Values[2].retrieve<float>().value_or(0));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_LIS3DH::measure()
 {
-	accel[0] = inst_LIS3DH.readFloatAccelX();
-	accel[1] = inst_LIS3DH.readFloatAccelY();
-	accel[2] = inst_LIS3DH.readFloatAccelZ();
+	Values[0] = inst_LIS3DH.readFloatAccelX();
+	Values[1] = inst_LIS3DH.readFloatAccelY();
+	Values[2] = inst_LIS3DH.readFloatAccelZ();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -54,9 +58,9 @@ void Loom_LIS3DH::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	
-	data["ax"] = accel[0];
-	data["ay"] = accel[1];
-	data["az"] = accel[2];
+	data["ax"] = Values[0].retrieve<float>().value_or(0);
+	data["ay"] = Values[1].retrieve<float>().value_or(0);
+	data["az"] = Values[2].retrieve<float>().value_or(0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
