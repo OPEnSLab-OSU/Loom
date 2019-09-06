@@ -56,9 +56,9 @@ void Loom_MPU6050::print_measurements()
 	LPrintln("\tgyroY  : ", Values[5].retrieve<float>().value_or(0));
 	LPrintln("\tgyroZ  : ", Values[6].retrieve<float>().value_or(0));
 
-	LPrintln("\troll  : ", Values[0].retrieve<float>().value_or(12));
-	LPrintln("\tpitch : ", Values[0].retrieve<float>().value_or(13));
-	LPrintln("\tyaw   : ", Values[0].retrieve<float>().value_or(14));
+	LPrintln("\troll  : ", Values[12].retrieve<float>().value_or(0));
+	LPrintln("\tpitch : ", Values[13].retrieve<float>().value_or(0));
+	LPrintln("\tyaw   : ", Values[14].retrieve<float>().value_or(0));
 	// LPrintln("\tangleX : ", angleX);
 	// LPrintln("\tangleY : ", angleY);
 	// LPrintln("\tangleZ : ", angleZ);

@@ -34,6 +34,10 @@ Loom_ZXGesture::Loom_ZXGesture(
 	} else {
 		LPrintln("Register Map Version: ", ver);
 	}
+    
+    for(int i = 0; i < 2; i++) {
+        Values.push_back(var());
+    }
 
 	if (!setup) active = false;
 
@@ -60,8 +64,8 @@ void Loom_ZXGesture::print_measurements()
 
 	switch (mode) {
 		case Mode::POS : 
-			LPrintln("\tZX: ", pos[0]);
-			LPrintln("\tZY: ", pos[1]);
+			LPrintln("\tZX: ", Values[0].retrieve<uint8_t>().value_or(255));
+			LPrintln("\tZY: ", Values[1].retrieve<uint8_t>().value_or(255));
 			break;
 		case Mode::GEST : 
 			LPrintln("\tGesture type : ", gesture_type.c_str());
@@ -82,8 +86,8 @@ void Loom_ZXGesture::measure()
 				z = inst_ZX.readZ();
 				
 				if ( (x != ZX_ERROR) && (z != ZX_ERROR) ) {
-					pos[0] = x;
-					pos[1] = z;
+					Values[0] = x;
+					Values[1] = z;
 					// LPrintln("zxgesturesensor X: ", pos[0]);
 					// LPrintln("zxgesturesensor Z: ", pos[1]);
 				} else {
@@ -94,8 +98,8 @@ void Loom_ZXGesture::measure()
 				// LPrintln("Position data unavailable for zxgesturesensor");
 				
 				// Send 255 to indicate that no object is detected
-				pos[0] = 255;
-				pos[1] = 255;
+				Values[0] = 255;
+				Values[1] = 255;
 			}
 			break;
 		
@@ -131,8 +135,8 @@ void Loom_ZXGesture::package(JsonObject json)
 
 	switch (mode) {
 		case Mode::POS : 		
-			data["zx"] = pos[0];
-			data["zy"] = pos[1];
+			data["zx"] = Values[0].retrieve<uint8_t>().value_or(255);
+			data["zy"] = Values[1].retrieve<uint8_t>().value_or(255);
 			break;
 		case Mode::GEST : 
 			data["type"]  = gesture_type.c_str();

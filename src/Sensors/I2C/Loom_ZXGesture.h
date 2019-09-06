@@ -31,7 +31,7 @@ protected:
 	Mode			mode;
 
 	/// Measured positions (x, y pos)
-	uint8_t			pos[2];
+	//uint8_t			pos[2];
 
 	/// Last read gesture type
 	GestureType		gesture;
