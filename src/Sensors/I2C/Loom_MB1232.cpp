@@ -77,6 +77,7 @@ void Loom_MB1232::package(JsonObject json)
 	JsonObject data = get_module_data_object(json, module_name);
 	
 	data["range"] = Values[0].retrieve<uint16_t>().value_or(0);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
