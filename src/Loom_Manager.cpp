@@ -109,8 +109,12 @@ void LoomManager::add_module(LoomModule* module)
 
 	print_device_label();
 
-	if (module == nullptr || !module->get_active()) {
-		LPrintln("Cannot add null/inactive module");
+	if (module == nullptr) {
+		LPrintln("Cannot add null module");
+		return;
+	} else if (!module->get_active()) {
+		LPrintln("Cannot add inactive module");
+		delete module;
 		return;
 	}
 

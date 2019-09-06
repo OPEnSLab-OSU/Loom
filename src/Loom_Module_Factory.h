@@ -267,7 +267,7 @@ public:
 /// Factory is used by LoomManager when parsing Json to match module names to 
 /// their associated constructors, and calling with parameters from the Json.
 /// The template parameters are used to select whether certain blocks of 
-/// modules are included in the lookup table. This is computed at compile
+/// modules are included in the lookup table. This is determined at compile
 /// time to not include unnecessary module classes and supporting code, 
 /// thus reducing code size
 template<

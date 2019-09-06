@@ -13,9 +13,11 @@
   ·
   <a href="https://openslab-osu.github.io/Loom/html/index.html">Documentation</a>
   ·
-  <a href="https://wiki.open-sensing.org/doku.php?id=loom">Wiki</a>
+  <a href="https://github.com/OPEnSLab-OSU/Loom/wiki">Wiki</a>
   ·
   <a href=https://github.com/OPEnSLab-OSU/Loom/wiki/Quick-Start>Quick Start</a>
+     ·
+  <a href=https://github.com/OPEnSLab-OSU/Loom/wiki/Configuration>Configuration</a>
 </p>
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3266419.svg)](https://doi.org/10.5281/zenodo.3266419)
