@@ -36,6 +36,6 @@ void loop()
 	// Send to address 1
 	Loom.LoRa().send(1);
 
-	delay(2000);
+	Loom.pause();
 }
 

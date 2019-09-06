@@ -34,5 +34,5 @@ void loop()
 		Loom.SDCARD().log("received.csv");
 	}
 
-	delay(100);
+	Loom.pause();
 }

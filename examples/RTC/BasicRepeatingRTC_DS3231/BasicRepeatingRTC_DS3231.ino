@@ -49,7 +49,7 @@ void loop()
 	if (alarmFlag) {
 		digitalWrite(LED_BUILTIN, HIGH);
 		LPrintln("Alarm triggered, resetting alarm");
-		delay(1000);
+		Loom.pause(1000);
 		
 		// Don't call RTC_alarm_duration before reconnect_interrupt 
 		// unless sleeping or calling:

@@ -2,7 +2,8 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'instance':1\
+		'instance':1,\
+		'interval':500\
 	},\
 	'components':[\
 		{\

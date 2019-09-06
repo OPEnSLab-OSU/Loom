@@ -2,7 +2,7 @@
 #include <Loom.h>
 
 // Define config in .ino
-const char* json_config = "{\"general\":{\"device_name\":\"Device\",\"family\":\"Loom\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"parameters\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]},{\"name\":\"Loom_Digital\",\"parameters\":[\"Digital\",true,true,false,false,false,false,false,false,false,false,false,false]},{\"name\":\"Loom_Interrupt_Manager\",\"parameters\":[\"Interrupt-Manager\",0]},{\"name\":\"Loom_Relay\",\"parameters\":[\"Relay\",10]}]}";
+const char* json_config = "{\"general\":{\"device_name\":\"Device\",\"family\":\"Loom\",\"instance_num\":1,\"family_num\":0},\"components\":[{\"name\":\"Loom_Analog\",\"params\":[\"Analog\",8,12,true,true,true,true,true,true,0,0,0,0,0,0]},{\"name\":\"Loom_Digital\",\"params\":[\"Digital\",true,true,false,false,false,false,false,false,false,false,false,false,25.0]},{\"name\":\"Loom_Interrupt_Manager\",\"params\":[\"Interrupt-Manager\",0]},{\"name\":\"Loom_Relay\",\"params\":[\"Relay\",10]}]}";
 
 // Define config in external file,
 // compact and in same format as above

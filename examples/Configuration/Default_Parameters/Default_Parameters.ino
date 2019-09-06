@@ -33,5 +33,5 @@ void loop()
 	Loom.package();
 	Loom.display_data();
 
-	delay(2000);
+	Loom.pause();
 }

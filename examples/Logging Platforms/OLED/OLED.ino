@@ -34,6 +34,5 @@ void loop()
 	Loom.package();
 	Loom.display_data();
 	Loom.OLED().log();
-
-	delay(2000);
+	Loom.pause();
 }

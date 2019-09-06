@@ -38,9 +38,7 @@ void loop()
 	Loom.package();
 	Loom.display_data();
 
-	// Loom.publish_all();
 	Loom.PublishPlat(0).publish();
 
-
-	delay(10000);
+	Loom.pause();
 }

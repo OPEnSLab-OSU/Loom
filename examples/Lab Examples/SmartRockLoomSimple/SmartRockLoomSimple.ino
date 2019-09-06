@@ -71,7 +71,7 @@ void loop()
 	digitalWrite(LED_BUILTIN, HIGH);
 
 	digitalWrite(10, HIGH);
-	delay(200);
+	Loom.pause(200);
 
 	Loom.measure();
 
@@ -83,7 +83,7 @@ void loop()
 	Loom.SDCARD().log();
 
 	
-	delay(500);
+	Loom.pause(500);
 	Loom.InterruptManager().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
 	Loom.InterruptManager().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
 	Loom.InterruptManager().RTC_alarm_duration(TimeSpan(600));

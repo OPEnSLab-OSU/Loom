@@ -2,39 +2,17 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'instance':1\
+		'instance':1,\
+		'interval':2000\
 	},\
 	'components':[\
 		{\
 			'name':'Analog',\
-			'params':[\
-				8,\
-				12,\
-				true,\
-				true,\
-				true,\
-				true,\
-				true,\
-				true,\
-				0,\
-				0,\
-				0,\
-				0,\
-				0,\
-				0\
-			]\
+			'params':'default'
 		},\
 		{\
 			'name':'nRF',\
-			'params':[\
-				120,\
-				00,\
-				1,\
-				0,\
-				3,\
-				200,\
-				1\
-			]\
+			'params':[120,00,1,0,3,200,1]
 		}\
 	]\
 }"

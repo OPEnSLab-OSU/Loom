@@ -55,7 +55,7 @@ void loop()
 	if (alarmFlag) {
 		digitalWrite(LED_BUILTIN, HIGH);
 		LPrintln("Alarm triggered, resetting alarm");
-		delay(1000);
+		Loom.pause(1000);
 		
 		Loom.InterruptManager().RTC_alarm_duration(TimeSpan(10)); 
 
@@ -65,6 +65,6 @@ void loop()
 
 	LPrintln("Count: ", count);
 	Loom.PCF8523().print_time();
-	delay(1000);
+	Loom.pause(1000);
 
 }

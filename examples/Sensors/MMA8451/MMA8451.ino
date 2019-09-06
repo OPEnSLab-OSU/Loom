@@ -33,6 +33,5 @@ void loop()
 	Loom.package();
 	Loom.MMA8451().print_measurements();
 	Loom.display_data();
-
-	delay(2000);
+	Loom.pause();
 }

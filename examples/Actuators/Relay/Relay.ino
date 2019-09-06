@@ -31,7 +31,7 @@ void setup()
 void loop() 
 {
 	Loom.Relay().set(true);
-	delay(2000);
+	Loom.pause(2000);
 	Loom.Relay().set(false);
-	delay(2000);
+	Loom.pause(2000);
 }

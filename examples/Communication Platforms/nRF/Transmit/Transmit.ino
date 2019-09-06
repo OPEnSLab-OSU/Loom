@@ -38,5 +38,5 @@ void loop()
 	// Loom.nRF().send(01);
 	Loom.nRF().broadcast();
 
-	delay(2000);
+	Loom.pause();
 }

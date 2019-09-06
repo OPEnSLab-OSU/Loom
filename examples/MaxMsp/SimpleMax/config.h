@@ -2,7 +2,8 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'instance':1\
+		'instance':1,\
+		'interval':500\
 	},\
 	'components':[\
 		{\
@@ -22,16 +23,11 @@
 		},\
 		{\
 			'name':'MaxPub',\
-			'params':[\
-				7002\
-			]\
+			'params':[7002]\
 		},\
 		{\
 			'name':'MaxSub',\
-			'params':[\
-				7002,\
-				true\
-			]\
+			'params':[7002,true]\
 		}\
 	]\
 }"

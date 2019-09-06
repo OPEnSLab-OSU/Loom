@@ -40,5 +40,5 @@ void loop()
 	Loom.display_data();
 	Loom.MaxPub().publish();
 	Loom.MaxSub().subscribe();
-	delay(500);
+	Loom.pause();
 }

@@ -35,6 +35,6 @@ void loop()
 		Loom.SDCARD().log("nrf.csv");
 	}
 
-	delay(100);
+	Loom.pause();
 
 }
