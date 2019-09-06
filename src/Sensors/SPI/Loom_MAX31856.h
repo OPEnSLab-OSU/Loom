@@ -22,8 +22,8 @@ protected:
 	/// Raw value
 	// float voltage;
 
-	float temperature;				/// Measured temperature
-	float cj_temp;					/// Measured cold junction temperature
+//    float temperature;                /// Measured temperature
+//    float cj_temp;                    /// Measured cold junction temperature
 
 public:
 	

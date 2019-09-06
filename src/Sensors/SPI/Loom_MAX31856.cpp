@@ -21,6 +21,10 @@ Loom_MAX31856::Loom_MAX31856(
 
 	// Software Serial
 	// inst_max = new Adafruit_MAX31856(SPI_a, SPI_b, SPI_c, SPI_d);
+    
+    for(int i = 0; i < 2; i++) {
+        Values.push_back(var());
+    }
 
 	inst_max.begin();
 	inst_max.setThermocoupleType(MAX31856_TCTYPE_K);
@@ -56,7 +60,7 @@ void Loom_MAX31856::print_config()
 void Loom_MAX31856::print_measurements() 
 {
 	print_module_label();
-	LPrintln("\tTemp: ", temperature, " C");
+	LPrintln("\tTemp: ", Values[0].retrieve<float>().value_or(0), " C");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -87,8 +91,8 @@ void Loom_MAX31856::measure()
 		} 
 	}
 
-	cj_temp = cj / num_samples;
-	temperature   = temp / num_samples;
+	Values[1] = cj / num_samples;
+	Values[0] = temp / num_samples;
 
 }
 
@@ -96,7 +100,7 @@ void Loom_MAX31856::measure()
 void Loom_MAX31856::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	data["temp"] = temperature;
+	data["temp"] = Values[0].retrieve<float>().value_or(0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

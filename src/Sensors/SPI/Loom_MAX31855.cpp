@@ -12,6 +12,10 @@ Loom_MAX31855::Loom_MAX31855(
 	, inst_max(CS_pin)
 {
 	inst_max.begin();
+    
+    for (int i = 0; i < 2; i++) {
+        Values.push_back(var());
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -23,8 +27,8 @@ void Loom_MAX31855::print_measurements()
 {
 	print_module_label();
 	LPrintln();
-	LPrintln("\tTemperature   : ", temperature, " °C");
-	LPrintln("\tInternal Temp : ", internal_temp, " °C");
+	LPrintln("\tTemperature   : ", Values[0].retrieve<float>().value_or(0), " °C");
+	LPrintln("\tInternal Temp : ", Values[1].retrieve<float>().value_or(0), " °C");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -45,18 +49,18 @@ void Loom_MAX31855::measure()
 		}
 	}
 
-	internal_temp = int_temp / num_samples;
-	temperature   = temp / num_samples;
+	Values[1] = int_temp / num_samples;
+	Values[0]   = temp / num_samples;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MAX31855::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	data["temp"] = temperature;
+	data["temp"] = Values[0].retrieve<float>().value_or(0);
 
 	if (package_verbosity == Verbosity::V_HIGH) {
-		data["internal"] = internal_temp;
+		data["internal"] = Values[1].retrieve<float>().value_or(0);
 	}
 }
 
