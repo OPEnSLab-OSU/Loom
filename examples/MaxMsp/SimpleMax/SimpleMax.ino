@@ -9,7 +9,7 @@ const char* json_config =
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::Disabled,
+	Enable::Internet::WiFi,
 	Enable::Sensors::Enabled,
 	Enable::Radios::Enabled,
 	Enable::Actuators::Enabled,
@@ -23,12 +23,10 @@ LoomManager Loom{ &ModuleFactory };
 void setup() 
 { 
 	Loom.begin_LED();
-	Loom.begin_serial(true);
+	Loom.begin_serial(false);
 	Loom.parse_config(json_config);
 	Loom.print_config(true);
 
-	// Loom.MaxSub().set_print_verbosity(Verbosity::V_HIGH);
-	// Loom.MaxPub().set_print_verbosity(Verbosity::V_HIGH);
 	
 	LPrintln("\n ** Setup Complete ** ");
 }

@@ -1,0 +1,33 @@
+"{\
+	'general':\
+	{\
+		'name':'Neopixel',\
+		'instance':1,\
+		'interval':500\
+	},\
+	'components':[\
+		{\
+			'name':'Analog',\
+			'params':[8,12,0,0,0,1,1,1,0,0,0,0,0,0,25.0]\
+		},\
+		{\
+			'name':'Neopixel',\
+			'params':[true,true,true]\
+		}\
+		{\
+			'name':'WiFi',\
+			'params':[\
+				'<ssid>',\
+				'<password>'\
+			]\
+		},\
+		{\
+			'name':'MaxPub',\
+			'params':[7002]\
+		},\
+		{\
+			'name':'MaxSub',\
+			'params':[7002,true]\
+		}\
+	]\
+}"

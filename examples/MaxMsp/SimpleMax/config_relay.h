@@ -1,0 +1,33 @@
+"{\
+	'general':\
+	{\
+		'name':'Relay',\
+		'instance':1,\
+		'interval':500\
+	},\
+	'components':[\
+		{\
+			'name':'Analog',\
+			'params':'default'\
+		},\
+		{\
+			'name':'Relay',\
+			'params':[10]\
+		},\
+		{\
+			'name':'WiFi',\
+			'params':[\
+				'<ssid>',\
+				'<password>'\
+			]\
+		},\
+		{\
+			'name':'MaxPub',\
+			'params':[7002]\
+		},\
+		{\
+			'name':'MaxSub',\
+			'params':[7002,true]\
+		}\
+	]\
+}"
