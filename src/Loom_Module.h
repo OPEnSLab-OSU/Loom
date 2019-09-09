@@ -34,8 +34,8 @@ class LoomModule
 
 public:
 
-    using var = weak<int, long, float, double, uint8_t, uint16_t, long unsigned int, String>;
-    
+    using var = weak<int, long, float, double, uint8_t, uint16_t, long unsigned int, String, bool>;
+
 	/// Enum to check against to when finding individual component
 	/// managed by a LoomManager
 	enum class Type {
@@ -48,7 +48,7 @@ public:
 		I2C=2100,			AS7262, AS7263, AS7265X, FXAS21002, FXOS8700, LIS3DH, MB1232, MMA8451, MPU6050, MS5803, SHT31D, TMP007, TSL2561, TSL2591, ZXGesture,
 		// SDI12
 		SDI12=2200,			Decagon5TM, DecagonGS3,
-		// SPI	
+		// SPI
 		SPI=2300,			MAX31855, MAX31856,
 		// RTC
 		L_RTC=3000,			DS3231, PCF8523,
@@ -120,7 +120,7 @@ public:
 	/// \param[out]	json	Object to put data into
 	virtual void 	package(JsonObject json) = 0;
 
-	/// Route command to driver 
+	/// Route command to driver
 	virtual bool	dispatch(JsonObject json) = 0;
 
 	/// Turn off any hardware
@@ -159,7 +159,7 @@ public:
 	/// Copy module name into buffer
 	/// \param[out]	buf	The buffer to copy module name into
 	void			get_module_name(char* buf);
-	
+
 	/// Get module name
 	/// \return	Module name
 	const char*		get_module_name() { return module_name; }
@@ -186,13 +186,13 @@ public:
 
 	/// Add pointer back to device manager.
 	/// Generally only called when device manager links module
-	/// to provide pointer both directions. 
+	/// to provide pointer both directions.
 	/// Derived modules may override this for increased function,
 	/// such as linking a submanager or RTC module.
 	/// \param[in]	LM	LoomManager to point to
 	virtual void	link_device_manager(LoomManager* LM);
 
-	/// Set print verbosity 
+	/// Set print verbosity
 	/// Controlls level of detail included in debug prints
 	void			set_print_verbosity(Verbosity v);
 
@@ -216,7 +216,7 @@ public:
 	/// Get string of name associated with verbosity enum
 	/// \return String of verbosity
 	static const char*	enum_verbosity_string(Verbosity v);
-	
+
 	static const char*	enum_category_string(Category c);
 
 	Category			category();
@@ -234,10 +234,10 @@ protected:
 private:
 
 //=============================================================================
-///@name    Refaction Members
+///@name    Refactor Members
 /*@{*/ //======================================================================
 public:
-    
+
 /// Pointers to dependencies of this module, stored in a vector
 std::vector<LoomModule *> Dependencies;
 
@@ -250,7 +250,7 @@ int depend(LoomModule *, bool);
 
 /// Values to provide for neighboring modules
 std::vector<var> Values;
-    
+
 /// Generic Execution Command
 virtual void Run() = 0;
 
@@ -263,7 +263,7 @@ virtual void Run() = 0;
 
 // Used by LoomManager to sort modules in its vector
 struct module_sort_comp {
-    bool operator() (LoomModule* left, LoomModule* right) const { 
+    bool operator() (LoomModule* left, LoomModule* right) const {
        return left->get_module_type() < right->get_module_type();
     }
 };

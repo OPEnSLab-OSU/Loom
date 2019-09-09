@@ -5,8 +5,8 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Stepper::Loom_Stepper() 
-	: LoomActuator( "Stepper", Type::Stepper ) 
+Loom_Stepper::Loom_Stepper()
+	: LoomActuator( "Stepper", Type::Stepper )
 {
 	AFMS = new Adafruit_MotorShield();
 	for (auto i = 0; i < NUM_STEPPERS; i++){
@@ -14,16 +14,16 @@ Loom_Stepper::Loom_Stepper()
 	}
 
 	AFMS->begin();
-	
+
 	yield();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Stepper::Loom_Stepper(JsonArrayConst p)
-	: Loom_Stepper() {} 
+	: Loom_Stepper() {}
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Stepper::~Loom_Stepper() 
+Loom_Stepper::~Loom_Stepper()
 {
 	delete AFMS;
 }
@@ -37,7 +37,7 @@ void Loom_Stepper::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Stepper::print_config() 
+void Loom_Stepper::print_config()
 {
 	LoomModule::print_config();
 }
@@ -70,3 +70,24 @@ void Loom_Stepper::move_steps(uint8_t motor, uint16_t steps, uint8_t speed, bool
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+void Loom_Stepper::Run() {
+	int argNum = 4;
+	var args[argNum];
+	int i = 0;
+
+	for(auto dependency : Dependencies) {
+		for(auto value : dependency->Values) {
+			if(i < argNum) {
+				args[i] = value;
+				i++;
+			}
+		}
+	}
+
+	move_steps(
+		args[0].retrieve<uint8_t>().value_or(0),
+		args[1].retrieve<uint16_t>().value_or(0),
+		args[2].retrieve<uint8_t>().value_or(0),
+		args[3].retrieve<bool>().value_or(0));
+}

@@ -19,6 +19,11 @@
 
 #include <Adafruit_SleepyDog.h>
 
+#undef min
+#undef max
+
+#include <vector>
+#include <queue>
 
 ///////////////////////////////////////////////////////////////////////////////
 const char* LoomManager::enum_device_type_string(DeviceType t)
@@ -32,12 +37,12 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomManager::LoomManager( 
+LoomManager::LoomManager(
 		FactoryBase*	factory_ptr,
-		const char*		device_name, 
-		uint8_t			instance, 
-		DeviceType		device_type, 
-		Verbosity		print_verbosity, 
+		const char*		device_name,
+		uint8_t			instance,
+		DeviceType		device_type,
+		Verbosity		print_verbosity,
 		Verbosity		package_verbosity,
 		uint16_t		interval
 	)
@@ -52,7 +57,7 @@ LoomManager::LoomManager(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomManager::~LoomManager() 
+LoomManager::~LoomManager()
 {
 	free_modules();
 }
@@ -64,7 +69,7 @@ void LoomManager::print_device_label()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::print_config(bool print_modules_config) 
+void LoomManager::print_config(bool print_modules_config)
 {
 	print_device_label();
 	LPrintln("Config:");
@@ -79,7 +84,7 @@ void LoomManager::print_config(bool print_modules_config)
 	if (print_modules_config) {
 		for (auto module : modules) {
 			module->print_config();
-		} 
+		}
 	}
 }
 
@@ -95,7 +100,7 @@ void LoomManager::begin_serial(bool wait_for_monitor)
 	Serial.begin(SERIAL_BAUD);
 
 	if (wait_for_monitor) {
-		unsigned long start = millis();	
+		unsigned long start = millis();
 		while( !Serial && ((millis() - start) < MAX_SERIAL_WAIT) );
 		delay(1000);
 	}
@@ -118,6 +123,8 @@ void LoomManager::add_module(LoomModule* module)
 
 	modules.emplace_back(module);
 	module->link_device_manager(this);
+
+	sorted = false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -137,7 +144,7 @@ void LoomManager::list_modules()
 		if ( module != nullptr ) {
 			LPrintln( "\t\t[", module->get_active() ? "+" : "-" , "] ", module->get_module_name() );
 		}
-	}	
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -149,7 +156,7 @@ void LoomManager::set_device_name(const char* device_name)
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::get_device_name(char* buf)
 {
-	sprintf(buf, "%s", device_name); 
+	sprintf(buf, "%s", device_name);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -184,14 +191,14 @@ void LoomManager::set_package_verbosity(Verbosity v, bool set_modules)
 			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
 				((LoomModule*)module)->set_package_verbosity(v);
 			}
-		}	
+		}
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::measure()
-{	
-	for (auto module : modules) {	
+{
+	for (auto module : modules) {
 		if ( !module->get_active() ) continue;
 
 		if ( module->category() == LoomModule::Category::Sensor ) {
@@ -200,7 +207,7 @@ void LoomManager::measure()
 		else if (
 			(module->get_module_type() == LoomModule::Type::Multiplexer) ) {
 			((Loom_Multiplexer*)module)->measure();
-		} 
+		}
 		else if (module->get_module_type() == LoomModule::Type::NTP) {
 			((LoomNTPSync*)module)->measure();
 		}
@@ -211,14 +218,14 @@ void LoomManager::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::package(JsonObject json) 
+void LoomManager::package(JsonObject json)
 {
 	// Add device identification to json
 	add_device_ID_to_json(json);
 
 	// Add a packet number to json
 	add_data("Packet", "Number", packet_number++);
-	
+
 	for (auto module : modules) {
 		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
 			((LoomModule*)module)->package( json );
@@ -255,13 +262,13 @@ void LoomManager::add_device_ID_to_json(JsonObject json)
 JsonObject LoomManager::internal_json(bool clear)
 {
 	if (clear) {
-		// doc.clear(); 
+		// doc.clear();
 		return doc.to<JsonObject>(); // clears in the process
 	} else {
 		return doc.as<JsonObject>();
 	}
 
-	
+
 	// doc["type"] = "unknown"; // JsonObject::set wont work if there is not anything in object
 	// LPrintln("\nDOC MemoryUsage in internal_json: ", doc.memoryUsage());
 
@@ -277,7 +284,7 @@ bool LoomManager::publish_all(const JsonObject json)
 	for (auto module : modules) {
 		if ( (module != nullptr) &&
 			 (module->category() == LoomModule::Category::PublishPlat) &&
-			 (module->get_active()) 
+			 (module->get_active())
 			) {
 			result &= ((LoomPublishPlat*)module)->publish( json );
 			count++;
@@ -301,7 +308,7 @@ void LoomManager::dispatch(JsonObject json)
 		// For each command
 		for ( JsonObject cmd : json["commands"].as<JsonArray>() ) {
 
-			// Check if command is for manager 
+			// Check if command is for manager
 			if ( strcmp(cmd["module"].as<const char*>(), "Manager" ) == 0) {
 				if (dispatch_self(cmd)) break;
 			}
@@ -309,7 +316,7 @@ void LoomManager::dispatch(JsonObject json)
 			// Otherwise iterate over modules until module to handle command is found
 			// LPrintln("Try to dispatch to: ", cmd["module"].as<const char*>() );
 			for (auto module : modules) {
-				if ( (module != nullptr) && 
+				if ( (module != nullptr) &&
 					 ( ((LoomModule*)module)->get_active() ) &&
 					 ( strcmp(cmd["module"].as<const char*>(), module->get_module_name() ) == 0 )
 					){
@@ -355,7 +362,7 @@ void LoomManager::flash_LED(uint8_t count, uint8_t time_high, uint8_t time_low, 
 		delay(time_high);
 		digitalWrite(LED_BUILTIN, LOW);
 		delay(time_low);
-	} 
+	}
 	if (end_high) {
 		digitalWrite(LED_BUILTIN, HIGH);
 	}
@@ -374,7 +381,7 @@ void LoomManager::nap(uint16_t ms)
 	USBDevice.detach();
 
 	// Sleep, with max time of 16000 milliseconds
-	uint16_t sleepMS = Watchdog.sleep( (ms <= 16000) ? ms : 16000); 
+	uint16_t sleepMS = Watchdog.sleep( (ms <= 16000) ? ms : 16000);
 
 	USBDevice.attach();
 	Serial.begin(SERIAL_BAUD);
@@ -401,7 +408,7 @@ void LoomManager::power_up()
 		if ( module != nullptr ){
 			((LoomModule*)module)->power_up();
 		}
-	}	
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -412,7 +419,7 @@ void LoomManager::power_down()
 		if ( module != nullptr ){
 			((LoomModule*)module)->power_down();
 		}
-	}	
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -434,7 +441,7 @@ void LoomManager::get_config()
 		if ( module != nullptr ){
 			((LoomModule*)module)->add_config(json);
 		}
-	}	
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -472,9 +479,9 @@ LoomModule*	LoomManager::find_module_by_category(LoomModule::Category category, 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_interval(uint16_t ms) 
+void LoomManager::set_interval(uint16_t ms)
 {
-	interval = ms; 
+	interval = ms;
 	print_device_label();
 	LPrintln("Set interval to: ", interval);
 }
@@ -490,15 +497,99 @@ bool LoomManager::has_module(LoomModule::Type type)
 
 ///////////////////////////////////////////////////////////////////////////////
 
+void LoomManager::sort() {
+    //std::cout << "Module list unordered. Sorting..." << std::endl;
+    std::vector<LoomModule *> L;                    // Starts empty and is filled in sorted order
+    std::queue<LoomModule *> S;                     // Set of nodes with no incoming edges
+    std::vector<std::vector<LoomModule *>> Edges;   // Initially fills with a copy of all incoming edges
 
+    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // // List all modules and their dependencies
+    // std::cout << " - Pre-Sort Order:" << std::endl;
+    // std::cout << " + ";
+    // for(auto module : modules) {
+    //     std::cout << module->name << "{";
+    //     for(auto depend : module->Dependencies) {
+    //         std::cout << depend->name << ",";
+    //     }std::cout << "}, ";
+    // }
+    // std::cout << std::endl << std::endl;
+    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+    //Interate over all contained modules
+    for(int i = 0; i < modules.size(); i++) {
 
+        //If module has no dependencies
+        if(modules[i]->Dependencies.size() == 0) {
 
+            //Add inbound edgeless module to S
+            S.push(modules[i]);
 
+            //Remove module from origional list
+            modules.erase(modules.begin()+(i));
 
+            //Reduce index by one to acomodate for the removal of an element
+            i--;
 
+            //Otherwise, if module has dependencies
+        } else {
+            //Save copy of dependencies for later processing
+            Edges.push_back(modules[i]->Dependencies);
+        }
+    }
 
+    //Placeholder used for moving modules between lists
+    LoomModule *placeholder;
 
+    //Repeat as long as there are modules without dependencies in S
+    while(S.size() != 0) {
 
+        placeholder = S.front();    // Copy dependency-less module off of front of queue
+        L.push_back(S.front());     // Copy the next module from S to L
+        S.pop();                    // Remove that same module from S
 
+        //For every unsorted, module with dependencies
+        for(int i = 0; i < Edges.size(); i++) {
 
+            //For every dependency in that modules list of dependencies
+            for(int j = 0; j < Edges[i].size(); j++) {
+
+                //Check for a match
+                if(Edges[i][j] == placeholder) {
+                    //Break that symbolic dependency relationship
+                    Edges[i].erase(Edges[i].begin()+j);
+
+                    //If this module has no dependencies left
+                    if(Edges[i].size() == 0) {
+                        Edges.erase(Edges.begin()+i);
+
+                        //Copy this newly dependencyless module onto S
+                        S.push(modules[i]);
+                        //Erase the same module from the unsorted list
+                        modules.erase(modules.begin()+i);
+                    }
+                }
+            }
+        }
+    }
+    //Sorting is complete, move the sorted list into the origional list's possition
+    modules = L;
+
+		//Modify flag
+		sorted = true;
+
+    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // // List all modules and their dependencies
+    // std::cout << " - Post-Sort Order:" << std::endl;
+    // std::cout << " + ";
+    // for(auto module : modules) {
+    //     std::cout << module->name << "{";
+    //     for(auto depend : module->Dependencies) {
+    //         std::cout << depend->name << ",";
+    //     }std::cout << "}, ";
+    // }
+    // std::cout << std::endl << std::endl;
+    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+}
+
+///////////////////////////////////////////////////////////////////////////////

@@ -13,12 +13,12 @@ class Loom_Relay : public LoomActuator
 {
 
 protected:
-	
+
 	byte 	pin;	/// The digital pin the relay is connect to
 	bool	on;		/// Whether the relay is on or off
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -42,6 +42,8 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+	void Run();
+
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
 	void		add_config(JsonObject json) override;
@@ -59,7 +61,3 @@ public:
 private:
 
 };
-
-
-
-

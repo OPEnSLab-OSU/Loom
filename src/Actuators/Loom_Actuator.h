@@ -13,14 +13,14 @@ class LoomActuator : public LoomModule
 protected:
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
 	/// Constructor
-	LoomActuator( 
-			const char*			module_name, 
+	LoomActuator(
+			const char*			module_name,
 			LoomModule::Type	module_type
 		);
 
@@ -31,7 +31,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-    void Run() {}
+  virtual void Run() = 0;
 	virtual bool	dispatch(JsonObject) override = 0;
 	virtual void 	package(JsonObject json) override {}
 
@@ -44,4 +44,3 @@ public:
 private:
 
 };
-

@@ -26,7 +26,7 @@ protected:
 	Adafruit_StepperMotor*	motors[NUM_STEPPERS];		/// Array of stepper controllers
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -46,6 +46,8 @@ public:
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
+
+	void Run();
 
 	bool		dispatch(JsonObject json) override;
 	void		add_config(JsonObject json) override;
@@ -67,4 +69,3 @@ public:
 private:
 
 };
-

@@ -22,7 +22,7 @@ protected:
 	uint8_t				color_vals[3][3];	/// The associated color values (RGB) for each of the 3 Neopixels
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -49,6 +49,8 @@ public:
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
+
+	void Run();
 
 	bool		dispatch(JsonObject json) override;
 	void		add_config(JsonObject json) override;
@@ -81,5 +83,3 @@ private:
 
 
 };
-
-

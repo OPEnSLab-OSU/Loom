@@ -2,14 +2,14 @@
 #include "Loom_Servo.h"
 
 /// This is the 'minimum' pulse length count (out of 4096)
-#define SERVOMIN  150	
+#define SERVOMIN  150
 /// This is the 'maximum' pulse length count (out of 4096)
-#define SERVOMAX  600	
+#define SERVOMAX  600
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Servo::Loom_Servo() 
-	: LoomActuator( "Servo", Type::Servo ) 
+Loom_Servo::Loom_Servo()
+	: LoomActuator( "Servo", Type::Servo )
 	, positions{}
 {
 	servo_driver.begin();
@@ -18,7 +18,7 @@ Loom_Servo::Loom_Servo()
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Servo::Loom_Servo(JsonArrayConst p)
-	: Loom_Servo() {} 
+	: Loom_Servo() {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Servo::add_config(JsonObject json)
@@ -29,7 +29,7 @@ void Loom_Servo::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Servo::print_config() 
+void Loom_Servo::print_config()
 {
 	LoomModule::print_config();
 }
@@ -67,11 +67,11 @@ bool Loom_Servo::dispatch(JsonObject json)
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Servo::set_degree(uint8_t servo, uint8_t degree)
-{	
+{
 	if (servo < NUM_SERVOS) {
 		servo_driver.setPWM(servo, 0, map(degree, 0, 180, SERVOMIN, SERVOMAX));
-		positions[servo]          = degree;		
-	}	
+		positions[servo]          = degree;
+	}
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
@@ -81,3 +81,21 @@ void Loom_Servo::set_degree(uint8_t servo, uint8_t degree)
 
 ///////////////////////////////////////////////////////////////////////////////
 
+void Loom_Servo::Run() {
+	int argNum = 2;
+	var args[argNum];
+	int i = 0;
+
+	for(auto dependency : Dependencies) {
+		for(auto value : dependency->Values) {
+			if(i < argNum) {
+				args[i] = value;
+				i++;
+			}
+		}
+	}
+
+	set_degree(
+		args[0].retrieve<uint8_t>().value_or(0),
+		args[1].retrieve<uint8_t>().value_or(0));
+}

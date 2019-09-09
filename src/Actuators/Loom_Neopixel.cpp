@@ -6,20 +6,20 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Neopixel::Loom_Neopixel(
-		bool			enableA0, 
-		bool			enableA1, 
+		bool			enableA0,
+		bool			enableA1,
 		bool			enableA2
-	) 
+	)
 	: LoomActuator("Neopixel", Type::Neopixel)
 	, pin_enabled( {enableA0, enableA1, enableA2} )
 	, pixels( { Adafruit_NeoPixel(1, 14, NEO_GRB + NEO_KHZ800),
 				Adafruit_NeoPixel(1, 15, NEO_GRB + NEO_KHZ800),
 				Adafruit_NeoPixel(1, 16, NEO_GRB + NEO_KHZ800)
-			} ) 
+			} )
 	, color_vals{}
 {
 	// Set pin mode on enabled pins (pins A0-A5 = 14-19)
-	for (auto i = 0; i < 3; i++) { 
+	for (auto i = 0; i < 3; i++) {
 		if (pin_enabled[i]) pinMode(14+i, OUTPUT);
 	}
 
@@ -29,11 +29,11 @@ Loom_Neopixel::Loom_Neopixel(
 			pixels[i].begin(); // This initializes the NeoPixel library.
 			pixels[i].show();  // Initialize all pixels to 'off'
 		}
-	}		
+	}
 
 	print_module_label();
 	LPrintln("Setup");
-} 
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Neopixel::Loom_Neopixel(JsonArrayConst p)
@@ -49,7 +49,7 @@ void Loom_Neopixel::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::print_config() 
+void Loom_Neopixel::print_config()
 {
 	LoomActuator::print_config();
 
@@ -99,7 +99,7 @@ void Loom_Neopixel::enable_pin(uint8_t port, bool state)
 void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uint8_t green, uint8_t blue)
 {
 	if ( pin_enabled[port] ) {
-		
+
 		// Update color vars
 		color_vals[port][0] = (red > 0)   ? ( (red < 255)   ? red   : 255 ) : 0;
 		color_vals[port][1] = (green > 0) ? ( (green < 255) ? green : 255 ) : 0;
@@ -115,7 +115,7 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 			LPrint("Set Neopixel on Port: ", port, ", Chain #: ", chain_num);
 			LPrint(" to R: ", color_vals[port][0]);
 			LPrint(  ", G: ", color_vals[port][1]);
-			LPrintln(", B: ", color_vals[port][2]);			
+			LPrintln(", B: ", color_vals[port][2]);
 		}
 	} else {
 		if (print_verbosity == Verbosity::V_HIGH) {
@@ -127,3 +127,24 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 
 ///////////////////////////////////////////////////////////////////////////////
 
+void Loom_Neopixel::Run() {
+	int argNum = 5;
+	var args[argNum];
+	int i = 0;
+
+	for(auto dependency : Dependencies) {
+		for(auto value : dependency->Values) {
+			if(i < argNum) {
+				args[i] = value;
+				i++;
+			}
+		}
+	}
+
+	set_color(
+		args[0].retrieve<uint8_t>().value_or(0),
+		args[1].retrieve<uint8_t>().value_or(0),
+		args[2].retrieve<uint8_t>().value_or(0),
+		args[3].retrieve<uint8_t>().value_or(0),
+		args[4].retrieve<uint8_t>().value_or(0));
+}

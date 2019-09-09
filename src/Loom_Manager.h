@@ -24,9 +24,9 @@ class LoomCommPlat;
 class LoomLogPlat;
 
 // Actuators
-class Loom_Neopixel; 
-class Loom_Relay; 
-class Loom_Servo; 
+class Loom_Neopixel;
+class Loom_Relay;
+class Loom_Servo;
 class Loom_Stepper;
 
 // Sensors
@@ -111,7 +111,7 @@ class FactoryBase;
 class LoomManager
 {
 
-private: 
+private:
 
 	FactoryBase* Factory;
 
@@ -147,7 +147,7 @@ protected:
 	/// Used for convenience, another pointer can exist in modules vector
 	LoomRTC*				rtc_module = nullptr;
 
-	// Vectors of Loom Modules, categorized by type
+	// Vectors of Loom Modules
 	std::vector<LoomModule*>		modules;
 
 	Verbosity	print_verbosity;		/// Print detail verbosity
@@ -201,7 +201,7 @@ public:
 	/// \param[in]	json_config		Configuration
 	/// \return True if success
 	bool		parse_config(const char* json_config);
-	
+
 	/// Parse a JSON configuration on SD card specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
 	/// and added to manager lists for managing.
@@ -223,7 +223,7 @@ public:
 	void		get_config();
 
 	/// Measure data of all managed sensors
-	void		measure();  
+	void		measure();
 
 	/// Package data of all modules into provide JsonObject.
 	/// How detailed data is can be modified with package_verbosity
@@ -257,7 +257,7 @@ public:
 	void		dispatch();
 
 	/// Pause for up to 16000 milliseconds.
-	/// You can use this instead of delay to put the device into a 
+	/// You can use this instead of delay to put the device into a
 	/// semi-low power state.
 	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
 	/// \param[in]	ms	Number of milliseconds to pause
@@ -281,10 +281,10 @@ public:
 	void 		power_down();
 
 	/// Append to a Json object of data.
-	/// If object is non-empty and contains non-data, 
+	/// If object is non-empty and contains non-data,
 	/// will not add and will return false.
 	/// Only call this after package, otherwise the data will be overriden
-	/// \param[in]	module	Which module to add data to (will create if it doesn't exist) 
+	/// \param[in]	module	Which module to add data to (will create if it doesn't exist)
 	/// \param[in]	key		Key of data to add
 	/// \param[in]	val		Value of data to add
 	/// \return True if success
@@ -293,7 +293,7 @@ public:
 	{
 		if ( doc.isNull() ) {
 			doc["type"] = "data";
-		} 
+		}
 		JsonObject json = doc.as<JsonObject>();
 		if (strcmp(json["type"], "data") == 0 ) {
 			JsonObject data = get_module_data_object(json, module);
@@ -307,7 +307,7 @@ public:
 	/// Get a data value from Json object of data
 	/// \param[in]	module	LoomModule key is associated with
 	/// \param[in]	key		Key of data value to find
-	/// \return Data value if found 
+	/// \return Data value if found
 	template<typename T>
 	T get_data_as(const char* module, const char* key)
 	{
@@ -332,16 +332,21 @@ public:
 	///	\param[in]	type	Module type to check for
 	bool has_module(LoomModule::Type type);
 
+	/// Flag indicating if the vector of modules is in need of sorting
+	bool sorted;
+
+	/// Topologically sort vector of module pointers.
+	void sort();
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
-	
+
 	/// Print the devices current configuration.
-	/// Lists modules. Optionally also prints 
+	/// Lists modules. Optionally also prints
 	/// configuration of linked modules.
 	void		print_config(bool print_modules_config = false);
-	
+
 	// 	void print_state()
 
 	/// Print the linked modules
@@ -373,7 +378,7 @@ public:
 	/// Get the device name, copies into provided buffer.
 	/// \param[out]	buf		The buffer copy device name into
 	void 		get_device_name(char* buf);
-	
+
 	/// Get the device name
 	/// \return String literal of device name.
 	const char*	get_device_name();
@@ -397,7 +402,7 @@ public:
 	/// Set the device name.
 	/// \param[in]	device_name		The new device name
 	void 		set_device_name(const char* device_name);
-	
+
 	/// Set device instance number.
 	/// \param[in]	n	New instance number
 	void		set_instance_num(uint8_t n) { instance = n; }
@@ -406,14 +411,14 @@ public:
 	/// \param[in]	v			New print verbosity
 	/// \param[in]	set_modules	Whether or not to also apply setting to modules
 	void		set_print_verbosity(Verbosity v, bool set_modules = false);
-		
+
 	/// Set package verbosity.
 	/// \param[in]	v	New package verbosity
 	/// \param[in]	set_modules	Whether or not to also apply setting to modules
 	void		set_package_verbosity(Verbosity v, bool set_modules = false);
 
 	/// Set default time to use for .pause() \ .delay().
-	/// Pause and delay can still take explicit times, but if not provided, 
+	/// Pause and delay can still take explicit times, but if not provided,
 	/// this value will be used
 	void		set_interval(uint16_t ms);
 
@@ -423,8 +428,8 @@ public:
 
 	/// Flash the built in LED
 	/// \param[in]	count		Number of times to flash
-	/// \param[in]	time_high	Milliseconds to stay on for 
-	/// \param[in]	time_low	Milliseconds to stay off for 
+	/// \param[in]	time_high	Milliseconds to stay on for
+	/// \param[in]	time_low	Milliseconds to stay off for
 	void		flash_LED(uint8_t count, uint8_t time_high, uint8_t time_low, bool end_high=false);
 	void		flash_LED(uint8_t sequence[3]);
 
@@ -433,7 +438,7 @@ public:
 	const static char* enum_device_type_string(DeviceType t);
 
 //=============================================================================
-///@name	MODULE ACCESS 
+///@name	MODULE ACCESS
 /*@{*/ //======================================================================
 
 	/// Auxiliary function to search a list of modules for a module of specified type
@@ -456,7 +461,7 @@ public:
 	// CommPlats
 	Loom_LoRa&			LoRa(const uint8_t idx = 0);
 	Loom_nRF&			nRF(const uint8_t idx = 0);
-	Loom_Bluetooth& 	Bluetooth(const uint8_t idx = 0); 
+	Loom_Bluetooth& 	Bluetooth(const uint8_t idx = 0);
 
 	// LogPlats
 	Loom_OLED&			OLED(const uint8_t idx = 0);
@@ -544,5 +549,3 @@ private:
 	bool dispatch_self(JsonObject json);
 
 };
-
-

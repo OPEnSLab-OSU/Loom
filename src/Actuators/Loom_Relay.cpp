@@ -3,10 +3,10 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Relay::Loom_Relay( 
-		byte			pin 
-	) 
-	: LoomActuator( "Relay", Type::Relay ) 
+Loom_Relay::Loom_Relay(
+		byte			pin
+	)
+	: LoomActuator( "Relay", Type::Relay )
 	, pin(pin)
 	, on(false)
 {
@@ -17,7 +17,7 @@ Loom_Relay::Loom_Relay(
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Relay::Loom_Relay(JsonArrayConst p)
 	: Loom_Relay( (byte)p[0] ) {}
-// explicitly cast because with only one parameter, JsonVariant p[0] can 
+// explicitly cast because with only one parameter, JsonVariant p[0] can
 // implicitly cast to either JsonArrayConst or byte of regular constructor
 
 
@@ -56,12 +56,12 @@ bool Loom_Relay::dispatch(JsonObject json)
 
 	JsonArray params = json["params"];
 	// switch( json["func"].as<const char*>()[0] ) { // works
-	// switch( json["func"].as<unsigned char>() ) { 
+	// switch( json["func"].as<unsigned char>() ) {
 	switch( json["func"].as<char>() ) {
 		// case 's': if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } return true;
 		case 115: if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } return true;
 	}
-	
+
 	return false;
 }
 
@@ -77,6 +77,24 @@ void Loom_Relay::set(bool state)
 		print_module_label();
 		LPrintln("Set relay on pin ", pin, (on) ? " High" : " Low");
 	}
+}
+
+void Loom_Relay::Run() {
+	int argNum = 1;
+	var args[argNum];
+	int i = 0;
+
+	for(auto dependency : Dependencies) {
+		for(auto value : dependency->Values) {
+			if(i < argNum) {
+				args[i] = value;
+				i++;
+			}
+		}
+	}
+
+	set(
+		args[0].retrieve<bool>().value_or(0));
 }
 
 ///////////////////////////////////////////////////////////////////////////////

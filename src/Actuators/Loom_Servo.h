@@ -26,7 +26,7 @@ protected:
 	uint8_t		positions[NUM_SERVOS];					/// Positions of the servos
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -47,6 +47,8 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+	void Run();
+
 	void		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
 	void		add_config(JsonObject json) override;
@@ -66,4 +68,3 @@ public:
 private:
 
 };
-
