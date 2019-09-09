@@ -17,12 +17,12 @@ class Loom_MS5803 : public LoomI2CSensor
 
 protected:
 
-	MS_5803		inst_MS5803;	/// Underlying MS5803 sensor manager instance
+	MS_5803		inst_MS5803;	///< Underlying MS5803 sensor manager instance
 
-	uint16_t	MS_PROM[8];		/// Read calibration data stored on sensor
+	uint16_t	MS_PROM[8];		///< Read calibration data stored on sensor
 
-	float		pressure;		/// Measure pressure (mbar)
-	float		temp;			/// Measured temperature (C)
+	float		pressure;		///< Measure pressure (mbar)
+	float		temp;			///< Measured temperature (C)
 
 public:
 	
@@ -64,6 +64,10 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
+	/// Get the temperature reading.
+	/// Used by the LoomTempSync module to provide temperature
+	/// to other modules.
+	/// \return	The measured temperature
 	float		get_temperature() { return temp; }
 
 private:

@@ -8,19 +8,18 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 // ### (LoomModule) | dependencies: [] | conflicts: []
-/// InternetPlat built off of SSLClient running over an Ethernet Featherwing. Requires 7KB of free SRAM at runtime to use.
+/// InternetPlat built off of SSLClient running over an Ethernet Featherwing. 
+/// Requires 7KB of free SRAM at runtime to use.
 // ###
 class Loom_WiFi : public LoomInternetPlat
 {
 
 protected:
+	
+	const String	SSID;	///< Host WiFi network name
+	const String	pass;	///< Host WiFi network password
 
-	/// Host WiFi network name
-	const String	SSID;
-	/// Host WiFi network password
-	const String	pass;
-	/// SSLClient object for WiFi
-	WiFiSSLClient client;
+	WiFiSSLClient client;	///< SSLClient object for WiFi
 
 public:
 
@@ -29,6 +28,8 @@ public:
 /*@{*/ //======================================================================
 	
 	/// Constructor
+	/// \param[in]	ssid	WiFi network name
+	/// \param[in]	pass	WiFi network password. Leave as empty string if network has no password.
 	Loom_WiFi(	
 			const char* 	ssid		= "",
 			const char* 	pass		= ""

@@ -16,13 +16,13 @@ class Loom_TSL2561 : public LoomI2CSensor
 
 protected:
 
-	Adafruit_TSL2561_Unified	inst_TSL2561;		/// Underlying TSL2561 sensor manager instance
+	Adafruit_TSL2561_Unified	inst_TSL2561;	///< Underlying TSL2561 sensor manager instance
 
-	uint8_t 	gain;			/// Gain level
-	uint8_t 	resolution;		/// Sensor resolution setting
+	uint8_t 	gain;			///< Gain level
+	uint8_t 	resolution;		///< Sensor resolution setting
 
-	uint16_t	lightIR;		/// Measured infra-red lux
-	uint16_t	lightFull;		/// Measure full spectrum lux
+	uint16_t	lightIR;		///< Measured infra-red lux
+	uint16_t	lightFull;		///< Measure full spectrum lux
 
 public:
 	

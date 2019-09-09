@@ -24,10 +24,10 @@ class Loom_SD : public LoomLogPlat
 protected:
 
 		// File sdFile;
-		byte		chip_select;		/// Chip select pin
-		bool		sd_found;			/// Whether or not the SD hardware was found
-		char		default_file[16];	/// String of file to write to if not filename explicitly provided
-		LoomRTC*	RTC_Inst;			/// Pointer to an RTC object for timestamps
+		byte		chip_select;		///< Chip select pin
+		bool		sd_found;			///< Whether or not the SD hardware was found
+		char		default_file[16];	///< String of file to write to if not filename explicitly provided
+		LoomRTC*	RTC_Inst;			///< Pointer to an RTC object for timestamps
 
 		// SD_Version 		version;
 		// byte 			reset_pin;
@@ -142,92 +142,6 @@ public:
 /*@{*/ //======================================================================
 
 
-
-	/// Save array to SD card.
-	/// Takes array of generic type
-	/// \param[in]	file		The file to save array to
-	/// \param[in]	data		The array of data to save
-	/// \param[in]	len			Length of the incoming array
-	/// \param[in]	delimiter	Delimiter to use
-	/// \param[in]	timestamp	Timestamp setting to use.
-	///							Options:
-	///							   0: no timestamp added
-	///							   1: only date added
-	///							   2: only time added
-	///							   3: both date and time added (two fields)
-	///							   4: both date and time added (combined field)
-	/// \param[in]	has_keys	True if data is assumed to have keys (alternating key-values)
-	/// \param[in]	device_id	Device ID to label row with
-	// template <typename T>
-	// bool save_array(const char *file, T data [], int len, char delimiter, int timestamp, bool has_keys, char* device_id) 
-	// {
-	// 	if ( !sd_found || !check_millis() ) return false;
-
-	// 	digitalWrite(8, HIGH); 	// if using LoRa
-
-	// 	bool got_timestamp = false;
-
-	// 	SD.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
-	// 	File sdFile = SD.open(file, FILE_WRITE);
-
-	// 	// If file successfully opened
-	// 	if (sdFile) {
-	// 		LPrint("Saving array to SD file: '", file, "' ...");
-	// 		char time_key[30], time_val[30];
-
-	// 		if (timestamp) {
-	// 			if (device_manager != NULL) {
-	// 				// LoomRTC* rtc = device_manager->get_rtc_module(0);
-	// 				if (RTC_Inst != NULL) {
-	// 					LPrintln("RTC Object: ", RTC_Inst->get_module_name() );
-	// 					RTC_Inst->get_timestamp(time_key, time_val, delimiter, timestamp);
-	// 					got_timestamp = true; 
-	// 				}
-	// 			}
-	// 		}
-
-	// 		// Array is assumed to have alternating keys and values
-	// 		if (has_keys) {
-	// 			// Check if at first row (create header)
-	// 			if ( sdFile.position() == 0) {
-	// 				// Add timestamp header
-	// 				if (got_timestamp) sdFile.print(time_key); 
-	// 				// Add address header if address was provided
-	// 				if (strlen(device_id) > 0) SD_print_aux(sdFile, "Device", delimiter); 
-	// 				// LPrint keys
-	// 				for (int i = 0; i < len-2; i+=2) 
-	// 					SD_print_aux(sdFile, data[i], delimiter);
-	// 				sdFile.println(data[len-2]);
-	// 			}
-	// 			// Add timestamp
-	// 			if (got_timestamp) sdFile.print(time_val); 
-	// 			// Add device ID if provided
-	// 			if (strlen(device_id) > 0) SD_print_aux(sdFile, device_id, delimiter); 
-	// 			// LPrint values 
-	// 			for (int i = 1; i < len-2; i+=2) 
-	// 				SD_print_aux(sdFile, data[i], delimiter); 
-	// 			sdFile.println(data[len-1]);
-	// 		} 
-	// 		// Array is assume to only have values
-	// 		else {
-	// 			if (got_timestamp) sdFile.print(time_val); 
-	// 			// Add device ID if provided
-	// 			if (strlen(device_id) > 0) SD_print_aux(sdFile, device_id, delimiter); 
-	// 			for (int i = 0; i < len-1; i++) 
-	// 				SD_print_aux(sdFile, data[i], delimiter);
-	// 			sdFile.println(data[len-1]);
-	// 		}
-	// 		sdFile.close();
-	// 		LPrintln("Done");
-	// 		return true;
-	// 	} 
-	// 	// If file could not be opened
-	// 	else {
-	// 		LPrintln("Error opening: ", file);
-	// 		return false;
-	// 	}
-	// }
-
 private:
 
 	/// Print the files on the SD card.
@@ -251,11 +165,11 @@ private:
 		}
 	}
 
-	/// Create Header Row 1 (Categories)
+	/// Aux method to create header row 1 (Categories)
 	void _write_json_header_part1(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents);
-	/// Create Header Row 2 (Column names)
+	/// Aux method to create Header row 2 (Column names)
 	void _write_json_header_part2(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents);
-	/// Write data values
+	/// Aux method to write data values
 	void _write_json_data(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents);
 
 };

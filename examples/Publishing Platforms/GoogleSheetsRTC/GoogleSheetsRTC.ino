@@ -38,7 +38,7 @@ void loop()
 	Loom.package();
 	Loom.display_data();
 
-	Loom.PublishPlat(0).publish();
+	Loom.GoogleSheets().publish();
 
 	Loom.pause();
 }

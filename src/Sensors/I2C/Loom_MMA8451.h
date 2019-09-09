@@ -16,12 +16,12 @@ class Loom_MMA8451 : public LoomI2CSensor
 
 protected:
 
-	Adafruit_MMA8451 MMA;			/// Underlying MMA8451 sensor manager instance
+	Adafruit_MMA8451 MMA;			///< Underlying MMA8451 sensor manager instance
 
-	float			accel[3];		///	Acceleration values for each axis
-	uint8_t			orientation;	/// Orientation
+	float			accel[3];		///< Acceleration values for each axis
+	uint8_t			orientation;	///< Orientation
 
-	mma8451_range_t	range; 			/// Range setting (2/4/8 G)
+	mma8451_range_t	range; 			///< Range setting (2/4/8 G)
 
 public:
 

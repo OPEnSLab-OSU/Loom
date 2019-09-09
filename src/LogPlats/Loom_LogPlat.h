@@ -12,9 +12,9 @@ class LoomLogPlat : public LoomModule
 
 protected:
 
-	bool			enable_rate_filter;		/// Whether or not to enable a minimum delay between logging
-	uint16_t		min_filter_delay;		/// Minimum delay between logging (milliseconds) 	
-	unsigned long	last_log_millis;		/// Value of millis() at last executed log time
+	bool			enable_rate_filter;		///< Whether or not to enable a minimum delay between logging
+	uint16_t		min_filter_delay;		///< Minimum delay between logging (milliseconds) 	
+	unsigned long	last_log_millis;		///< Value of millis() at last executed log time
 
 public:
 	
@@ -23,11 +23,15 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
+	/// \param[in]	module_name			Name of the module (provided by derived classes)
+	/// \param[in] 	module_type			Type of the module (provided by derived classes)
+	/// \param[in] 	enable_rate_filter	Whether or not to impose maximum update rate
+	/// \param[in] 	min_filter_delay	Minimum update delay, if enable_rate_filter enabled
 	LoomLogPlat(	
 			const char*			module_name,
 			LoomModule::Type	module_type,
-			bool				enable_rate_filter 		= true,
-			uint16_t			min_filter_delay 		= 1000
+			bool				enable_rate_filter 	= true,
+			uint16_t			min_filter_delay 	= 1000
 	   );
 
 	/// Destructor
@@ -37,7 +41,8 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	virtual bool	dispatch(JsonObject json) override {}
+	/// No package necessary for logging platforms.
+	/// implement with empty body.
 	virtual void 	package(JsonObject json) override {}
 
 	/// Log a Json object
@@ -45,15 +50,15 @@ public:
 	virtual void	log(JsonObject json) = 0;
 
 	/// Version of log for use with LoomManager.
-	/// Accesses Json from LoomManager
-	void	log();		
-	// virtual void	log();		
+	/// Accesses Json from LoomManager.
+	/// Calls derived classes implementations of log(JsonObject json)
+	void			log();		
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_config();
+	virtual void	print_config() override;
 
 protected:
 

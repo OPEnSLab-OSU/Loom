@@ -7,9 +7,9 @@
 #include <RTCCounter.h>
 
 
-#define InteruptRange 16		/// Number of interrupts
-#define MaxTimerCount 2			/// Maximum number of timers
-#define MaxStopWatchCount 2		/// Maximum numbr of stopwatches
+#define InteruptRange 16		///< Number of interrupts
+#define MaxTimerCount 2			///< Maximum number of timers
+#define MaxStopWatchCount 2		///< Maximum numbr of stopwatches
 
 
 
@@ -18,15 +18,14 @@ class LoomRTC;
 class Loom_Sleep_Manager;
 
 
-// Used to make function signatures easier to read
-// when returning function pointers
-/// Typedef to for ISR function pointer readability
+/// Used to make function signatures easier to read
+/// when returning function pointers
 using ISRFuncPtr = void (*)();
 
 
 enum class ISR_Type { 
-	IMMEDIATE, 
-	CHECK_FLAG 
+	IMMEDIATE, 		///< Run ISR immediately
+	CHECK_FLAG		///< Run ISR when run_pending_ISRs() is called
 };
 
 
@@ -76,6 +75,7 @@ protected:
 
 	/// Pointer to an RTC object for managing timers / timed interrupts	
 	LoomRTC*		RTC_Inst;					
+	
 	/// Pointer to a Sleep Manager object
 	Loom_Sleep_Manager* Sleep_Manager;	
 
@@ -135,8 +135,9 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+	/// No package necessary.
+	/// Implement with empty body.
 	void 		package(JsonObject json) override {}
-	bool		dispatch(JsonObject) override {}
 
 	/// Run any waiting ISRs.
 	/// Flag was set by a top half ISR
@@ -259,10 +260,10 @@ public:
 
 	/// Get whether the internal timer has elapsed
 	/// \return True if timer elapsed, false otherwise
-	bool		get_internal_timer_flag();
+	bool		get_internal_timer_flag() { return rtcCounter.getFlag(); }
 
 	/// Clear internal timer flag
-	void		clear_internal_timer_flag();
+	void		clear_internal_timer_flag() { rtcCounter.clearFlag(); }
 
 	/// Enable or disable internal timer.
 	/// Disabling does not remove settings, use unregister_interal_timer for that behavior
@@ -294,7 +295,7 @@ public:
 
 	/// Return pointer to the currently linked RTC object
 	/// \return		Current RTC object
-	LoomRTC*	get_RTC_module();
+	LoomRTC*	get_RTC_module() { return RTC_Inst; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -321,7 +322,7 @@ public:
 
 	/// Set the RTC module to use for timers
 	/// \param[in]	RTC_Inst	Pointer to the RTC object
-	void		set_RTC_module(LoomRTC* RTC_Inst);
+	void		set_RTC_module(LoomRTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS

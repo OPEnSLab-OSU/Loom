@@ -8,9 +8,11 @@
 #include <EnableInterrupt.h>
 
 
+///////////////////////////////////////////////////////////////////////////////
 
 bool Loom_Interrupt_Manager::interrupt_triggered[InteruptRange] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
+///////////////////////////////////////////////////////////////////////////////
 
 const ISRFuncPtr Loom_Interrupt_Manager::default_ISRs[InteruptRange] =
 {
@@ -19,7 +21,6 @@ const ISRFuncPtr Loom_Interrupt_Manager::default_ISRs[InteruptRange] =
 	default_ISR_8,  default_ISR_9,  default_ISR_10, default_ISR_11,
 	default_ISR_12, default_ISR_13, default_ISR_14, default_ISR_15
 };
-
 
 ///////////////////////////////////////////////////////////////////////////////
 const char* Loom_Interrupt_Manager::interrupt_type_to_string(uint8_t type)
@@ -41,7 +42,6 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 	: LoomModule( "InterruptManager", Type::Interrupt_Manager )
 	, RTC_Inst(RTC_Inst)
 {
-	// this->module_type = LoomModule::Type::Interrupt_Manager;
 
 	interrupts_enabled = true;
 
@@ -54,9 +54,6 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 	for (auto i = 0; i < MaxStopWatchCount; i++) {
 		stopwatch_settings[i] = {0, false};
 	}
-
-	// this->RTC_Inst = RTC_Inst;
-
 
 	// Setup the RTCCounter for internal timer
 	rtcCounter.begin();
@@ -291,18 +288,6 @@ void Loom_Interrupt_Manager::interrupt_reset(byte pin)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::set_RTC_module(LoomRTC* RTC_Inst)
-{
-	this->RTC_Inst = RTC_Inst;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-LoomRTC* Loom_Interrupt_Manager::get_RTC_module()
-{
-	return RTC_Inst;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 bool Loom_Interrupt_Manager::RTC_alarm_duration(TimeSpan duration)
 {
 	return (RTC_Inst) ? RTC_alarm_at(RTC_Inst->now() + duration) : false;
@@ -325,7 +310,6 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 	print_module_label();
 	LPrint("Will set alarm for : ");
 	RTC_Inst->print_DateTime(future_time);
-
 
 	// Don't set alarm at time in the past
 	DateTime now = RTC_Inst->now();
@@ -430,11 +414,6 @@ void Loom_Interrupt_Manager::clear_timer(uint8_t timer_num)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Configure internal timer
-/// \param[in]	duration		How long timer should take (seconds)
-/// \param[in]	ISR				ISR to run after timer goes off
-/// \param[in]	repeat			Whether or not to be a repeating alarm
-/// \param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
 void Loom_Interrupt_Manager::register_internal_timer(uint duration, ISRFuncPtr ISR, bool repeat, ISR_Type run_type)		
 {
 	internal_timer.ISR		= ISR;
@@ -459,9 +438,6 @@ void Loom_Interrupt_Manager::register_internal_timer(uint duration, ISRFuncPtr I
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Run a delayed (flag based) ISR if the interal timer elapsed.
-/// Is not needed if using ISR_Type::IMMEDIATE ISR
-/// \return	True if flag was set and ISR run
 bool Loom_Interrupt_Manager::run_pending_internal_timer_ISR()
 {
 	if ( (internal_timer.run_type == ISR_Type::CHECK_FLAG) &&
@@ -473,21 +449,6 @@ bool Loom_Interrupt_Manager::run_pending_internal_timer_ISR()
 		return true;
 	}
 	return false;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-/// Get whether the internal timer has elapsed
-/// \return True if timer elapsed, false otherwise
-bool Loom_Interrupt_Manager::get_internal_timer_flag()
-{
-	return rtcCounter.getFlag();
-}
-
-///////////////////////////////////////////////////////////////////////////////
-/// Clear internal timer flag
-void Loom_Interrupt_Manager::clear_internal_timer_flag()
-{
-	rtcCounter.clearFlag();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

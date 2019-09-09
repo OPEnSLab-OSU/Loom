@@ -14,8 +14,8 @@ class Loom_Relay : public LoomActuator
 
 protected:
 	
-	byte 	pin;	/// The digital pin the relay is connect to
-	bool	on;		/// Whether the relay is on or off
+	byte 	pin;	///< The digital pin the relay is connect to
+	bool	on;		///< Whether the relay is on or off
 
 public:
 	
@@ -23,7 +23,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// Relay module constructor.
+	/// Constructor.
 	///
 	/// \param[in]	pin						Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to control the relay
 	Loom_Relay(

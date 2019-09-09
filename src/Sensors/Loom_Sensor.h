@@ -12,7 +12,8 @@ class LoomSensor : public LoomModule
 
 protected:
 
-	uint8_t		num_samples;	/// How many samples to take
+	/// How many samples to take and average each call to measure()
+	uint8_t		num_samples;	
 
 public:
 	
@@ -20,6 +21,10 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
+	/// Constructor
+	/// \param[in]	module_name		Name of the module (provided by derived classes)
+	/// \param[in]	module_type		Type of the module (provided by derived classes)
+	/// \param[in]	num_samples		The number of samples to take and average
 	LoomSensor(	
 			const char*			module_name,
 			LoomModule::Type	module_type,
@@ -38,14 +43,15 @@ public:
 
 	/// Take any relevant measurements
 	virtual void	measure() = 0;
-	virtual void 	package(JsonObject json) override = 0;
-	virtual bool	dispatch(JsonObject) {}
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
 	virtual void	print_config() override;
+
+	/// Print the last set of measurements taken.
+	/// Does not package the data.
 	virtual void	print_measurements() = 0; 
 
 //=============================================================================

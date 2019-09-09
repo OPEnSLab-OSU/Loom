@@ -18,9 +18,7 @@ Loom_LoRa::Loom_LoRa(
 	, driver( RH_RF95(RFM95_CS, RFM95_INT) )
 
 { 
-	// this->driver         = new RH_RF95(RFM95_CS, RFM95_INT);
-	// this->manager        = new RHReliableDatagram(*driver, address);
-	this->manager        = new RHReliableDatagram(driver, address);
+	this->manager = new RHReliableDatagram(driver, address);
 
 	pinMode(8, INPUT_PULLUP);
 	pinMode(RFM95_RST, OUTPUT);
@@ -63,7 +61,6 @@ Loom_LoRa::Loom_LoRa(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::~Loom_LoRa() 
 {
-	// delete driver;
 	delete manager;
 }
 

@@ -17,9 +17,11 @@ class Loom_Bluetooth : public LoomCommPlat
 
 protected:
 
-	Adafruit_BluefruitLE_SPI BLE;		/// Bluetooth manager instance
+	Adafruit_BluefruitLE_SPI BLE;	///< Bluetooth manager instance
 
-	uint8_t spi_CS, spi_IRQ, spi_RST;
+	uint8_t spi_CS;		///< SPI chip select pin
+	uint8_t spi_IRQ;	///< SPI IRQ pin
+	uint8_t spi_RST;	///< SPI reset pin
 
 public:
 	
@@ -27,8 +29,12 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// Bluetooth module constructor
+	/// Constructor
 	///
+	/// \param[in] 	max_message_len		The maximum possible message length
+	/// \param[in] 	spi_CS				SPI chip select pin
+	/// \param[in] 	spi_IRQ				SPI IRQ pin
+	/// \param[in] 	spi_RST				SPI reset pin
 	Loom_Bluetooth(
 			uint16_t 		max_message_len		= 120,
 			uint8_t			spi_CS				= 8,
@@ -48,7 +54,10 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+	/// Currently no implementation
 	bool		receive(JsonObject json) override {}
+
+	/// Currently no implementation
 	bool		send(JsonObject json, uint8_t destination) override {}
 	void		add_config(JsonObject json) override;
 
@@ -63,6 +72,7 @@ public:
 
 	/// Gets a command from the ble interface, or times out. 
 	/// This is used in combination with parseCommand if the return value is valid.
+	/// \param[in]	max_timeout		Maximum number of milliseconds to wait for command
 	/// \return Status where:
 	/// -1: user never wrote a command, timed out
 	/// -2: user entered an invalid command
@@ -86,14 +96,16 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	/// Bluetooth currently does not use addresses
+	/// Bluetooth currently does not use addresses.
+	/// Override with empty body
 	uint8_t		get_address() override {}
 
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
-	/// Bluetooth currently does not use addresses
+	/// Bluetooth currently does not use addresses.
+	/// Override with empty body
 	void		set_address(uint8_t addr) override {}
 
 private:

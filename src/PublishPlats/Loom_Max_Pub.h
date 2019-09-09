@@ -3,7 +3,7 @@
 #include "Loom_PublishPlat.h"
 
 
-#define UDP_SEND_OFFSET 8000
+#define UDP_SEND_OFFSET 8000		///< UDP sending port is this value + device instance number
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -16,10 +16,10 @@ class Loom_MaxPub : public LoomPublishPlat
 
 protected:
 	
-	uint16_t	UDP_port;				/// Which UDP port to transmit on
-	IPAddress	remoteIP;				/// Which IP address to send to
+	uint16_t	UDP_port;				///< Which UDP port to transmit on
+	IPAddress	remoteIP;				///< Which IP address to send to
 
-	LoomInternetPlat::UDPPtr UDP_Inst;	/// Pointer to UDP object
+	LoomInternetPlat::UDPPtr UDP_Inst;	///< Pointer to UDP object
 
 public:
 
@@ -36,9 +36,9 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]  p     The array of constuctor args to expand
+	/// \param[in]  p	The array of constuctor args to expand
 	Loom_MaxPub( JsonArrayConst p );
-// 
+ 
 	void second_stage_ctor() override;
 
 	/// Destructor
@@ -61,6 +61,8 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
+	/// Get UDP port device is listening on
+	/// \return UDP port
 	uint16_t	get_port() { return UDP_port; }
 
 //=============================================================================

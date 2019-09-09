@@ -16,17 +16,17 @@ class Loom_AS7265X : public LoomI2CSensor
 
 protected:
 
-	AS7265X		inst_AS7265X;		/// Underlying AS7265X sensor manager instance
+	AS7265X		inst_AS7265X;		///< Underlying AS7265X sensor manager instance
 
-	uint16_t	uv[6];				/// Measured UV bands values
-	uint16_t	color[6];			/// Measured color bands values
-	uint16_t	nir[6];				/// Measured near-infra-red bands values
+	uint16_t	uv[6];				///< Measured UV bands values
+	uint16_t	color[6];			///< Measured color bands values
+	uint16_t	nir[6];				///< Measured near-infra-red bands values
 
-	bool		use_bulb;			/// Whether or not to use the bulb
+	bool		use_bulb;			///< Whether or not to use the bulb
 
-	uint8_t		gain;				/// Gain setting
-	uint8_t		mode;				/// Sensor mode
-	uint8_t		integration_time;	/// Integration time setting
+	uint8_t		gain;				///< Gain setting
+	uint8_t		mode;				///< Sensor mode
+	uint8_t		integration_time;	///< Integration time setting
 
 public:
 	
@@ -86,7 +86,7 @@ public:
 	void		set_gain(uint8_t gain) { inst_AS7265X.setGain(gain); }
 
 	/// Set mode.
-	/// 4 channel, other 4 channel, 6 chan, or 6 chan one shot
+	/// 4 channel, other 4 channel, 6 chan, or 6 chan one shot.
 	/// \param[in]	mode	Mode
 	void		set_mode(uint8_t mode) { inst_AS7265X.setMeasurementMode(mode); }
 

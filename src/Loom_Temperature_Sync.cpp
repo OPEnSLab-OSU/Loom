@@ -58,11 +58,10 @@ void LoomTempSync::print_config()
 	LoomModule::print_config();
 	LPrintln("\tSource Type: ", (int)source_type); 
 	LPrintln("\tDependant Type: ", (int)dependant_type); 
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomTempSync::measure() 
+void LoomTempSync::sync_temp() 
 {
 	if (source && source->get_active() && dependant && dependant->get_active() ) {
 		float temp = 25.0;
@@ -78,8 +77,5 @@ void LoomTempSync::measure()
 
 	}
 }
-
-///////////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////////

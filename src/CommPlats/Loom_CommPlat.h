@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+
+/// Abstract base of communication platform modules
+
+/// All communication platform modules inherit from this class.
+
+///////////////////////////////////////////////////////////////////////////////
+
+
 #pragma once
 
 #include "Loom_Module.h"
@@ -6,21 +15,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
-/// Abstract base of communication platform modules
 class LoomCommPlat : public LoomModule
 {
 
 protected:
 
-	uint16_t	max_message_len;			/// The maximum message length
-	int16_t		signal_strength;			/// Rssi for Lora (need to determine what the other platforms use)
+	uint16_t	max_message_len;	///< The maximum message length
+	int16_t		signal_strength;	///< RSSI for Lora (need to determine what the other platforms use)
 
-	// CommPlatforms need their own JsonDocument because an incoming message
-	// can only be deserialized into JsonDocuments, not JsonObjects.
-	// And it seemed bad design to pass around references to the LoomManager's
-	// internal JsonDocument. 
-	// Especially as the LoomManager is intended to be non-mandatory for usage of Loom
-	StaticJsonDocument<1500> messageJson;	/// Document to read incoming data into
+	/// Document to read incoming data into.
+	/// CommPlatforms need their own JsonDocument because an incoming message
+	/// can only be deserialized into JsonDocuments, not JsonObjects.
+	/// And it seemed bad design to pass around references to the LoomManager's
+	/// internal JsonDocument. 
+	/// Especially as the LoomManager is intended to be non-mandatory for usage of Loom
+	StaticJsonDocument<1500> messageJson;
 
 public:
 	
@@ -29,6 +38,9 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
+	/// \param[in]	module_name		Name of the module (provided by derived classes)
+	/// \param[in] 	module_type		Type of the module (provided by derived classes)
+	/// \param[in] 	max_message_len	The maximum possible message length
 	LoomCommPlat(
 			const char*			module_name,
 			LoomModule::Type	module_type,
@@ -42,7 +54,6 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	virtual bool	dispatch(JsonObject) override {}
 	virtual void 	package(JsonObject json) override {};
 
 	/// Build json from packet if any exists
@@ -75,10 +86,12 @@ public:
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager
 	/// \param[in]	destination		Address of destination device
-	/// \return True if packet sent successfully
+	/// \return True if packet sent successfully, false otherwise
 	bool			send(uint8_t destination);
 
-	/// Broadcast data to all that can receive
+	/// Broadcast data to all that can receive.
+	/// Derived classes can optionally provide an implementation for this,
+	/// As supported by the radio/platform's library
 	/// \param[in]	json	Json object to send
 	virtual void	broadcast(JsonObject json) {};
 
@@ -96,12 +109,19 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
+	/// Get the address of this device.
+	/// Each platform may have a different addressing scheme
+	/// \return The address of this device
 	virtual uint8_t	get_address() = 0;
 
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
+	/// Set the address of this device.
+	/// Each platform may have a different addressing scheme.
+	/// Changing the device's address is not recommended.
+	/// \param[in]	a 	The address to set this device to
 	virtual void	set_address(uint8_t a) = 0;
 
 protected:

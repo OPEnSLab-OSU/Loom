@@ -2,8 +2,8 @@
 
 #include "Loom_Sensor.h"
 
-#define VBATPIN A7			/// Battery pin
-#define ANALOG_COUNT 6		/// Number of analog pins
+#define VBATPIN A7			///< Battery pin
+#define ANALOG_COUNT 6		///< Number of analog pins
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -33,18 +33,26 @@ public:
 
 protected:
 
-	uint8_t		read_resolution;				/// Which resolution to read at (generally use 12 or 10)
-	bool		pin_enabled[ANALOG_COUNT];		/// Whether pins A0-A5 are enabled for analog reading
-	uint16_t	analog_vals[ANALOG_COUNT];		/// Last known analog readings for pin A0-A5
-	float		battery;						/// Battery voltage
-	bool		enable_conversions;				/// Enable or disable all conversions
+	/// Which resolution to read at (generally use 12 or 10)
+	uint8_t		read_resolution;	
 
-	Conversion	conversions[ANALOG_COUNT];		/// Conversion (if any) to apply to analog value when printing / packaging
+	/// Whether pins A0-A5 are enabled for analog reading
+	bool		pin_enabled[ANALOG_COUNT];
 
-	// the following will likely get a different implementation
-	float		temperature;					/// Temperature to use in conversions
-	// float		pH_offset;						/// Offset to use in pH conversion
-	// float		pH_range;						/// Range to use in pH conversion
+	/// Last known analog readings for pin A0-A5
+	uint16_t	analog_vals[ANALOG_COUNT];
+
+	/// Battery voltage
+	float		battery;
+
+	/// Enable or disable all conversions	
+	bool		enable_conversions;
+
+	/// Conversion (if any) to apply to analog value when printing / packaging
+	Conversion	conversions[ANALOG_COUNT];
+
+	/// Temperature to use in conversions
+	float		temperature;					
 
 public:
 
@@ -86,11 +94,7 @@ public:
 			Conversion		convertA3			= Conversion::NONE,
 			Conversion		convertA4			= Conversion::NONE,
 			Conversion		convertA5			= Conversion::NONE,
-			// uint16_t		pH_neutralAnalog	= 3000,
-			// uint16_t		pH_acidAnalog		= 3.5,
 			float			temperature			= 25.0
-			// float			pH_offset			= 0.0,
-			// float			pH_range			= 3.5
 		);
 
 	/// Constructor that takes Json Array, extracts args

@@ -121,12 +121,6 @@ void Loom_Ethernet::connect()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Ethernet::is_connected()
-{
-	return  m_is_connected;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::ClientSession Loom_Ethernet::connect_to_domain(const char* domain) {
 	// if the socket is somehow still open, close it
 	if (m_client.connected()) m_client.stop();

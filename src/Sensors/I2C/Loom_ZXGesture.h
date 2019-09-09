@@ -35,8 +35,10 @@ protected:
 
 	/// Last read gesture type
 	GestureType		gesture;
+
 	/// String labelling last read gesture type
 	String			gesture_type;
+	
 	/// The speed of the last measured gesture
 	uint8_t			gesture_speed;
 

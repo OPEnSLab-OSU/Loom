@@ -16,14 +16,14 @@ class Loom_AS7263 : public LoomI2CSensor
 
 protected:
 
-	AS726X		inst_AS7263;		/// Underlying AS7263 sensor manager instance
+	AS726X		inst_AS7263;		///< Underlying AS7263 sensor manager instance
 
-	uint16_t	nir_vals[6];		/// Measured near-infra-red band values (r,s,t,u,v,w)
+	uint16_t	nir_vals[6];		///< Measured near-infra-red band values (r,s,t,u,v,w)
 	
-	bool		use_bulb;			/// Whether or not to use bulb
-	uint8_t		gain;				/// Gain setting
-	uint8_t		mode;				/// Sensor read mode
-	uint8_t		integration_time;	/// Integration time setting
+	bool		use_bulb;			///< Whether or not to use bulb
+	uint8_t		gain;				///< Gain setting
+	uint8_t		mode;				///< Sensor read mode
+	uint8_t		integration_time;	///< Integration time setting
 
 public:
 	
@@ -75,20 +75,19 @@ public:
 /*@{*/ //======================================================================
 
 	/// Set whether not bulb is used for active light source
-	/// \param[in]	enable	Whether or not to enable 
+	/// \param[in]	enable	Whether or not to enable bulb
 	void		enable_bulb(bool enable) { use_bulb = enable; }
 
 	/// Set gain.
-	/// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
-	/// \param[in]	gain	Gain level: 
+	/// \param[in]	gain	Gain level: 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
 	void		set_gain(uint8_t gain) { inst_AS7263.setGain(gain); }
 
 	/// Set mode.
-	/// 0: Continuous reading of STUV
-	/// 1: Continuous reading of RTUX
-	/// 2: Continuous reading of all channels (power-on default)
-	/// 3: One-shot reading of all channels
 	/// \param[in]	mode	Mode
+	///		0: Continuous reading of STUV
+	///		1: Continuous reading of RTUX
+	///		2: Continuous reading of all channels (power-on default)
+	///		3: One-shot reading of all channels
 	void		set_mode(uint8_t mode) { inst_AS7263.setMeasurementMode(mode); }
 
 	/// Set integration time.

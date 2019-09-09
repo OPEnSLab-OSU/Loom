@@ -22,8 +22,6 @@ Loom_Analog::Loom_Analog(
 		Conversion		convertA5,
 
 		float			temperature
-	// 	float			pH_offset,
-	// 	float			pH_range
 	) 
 	: LoomSensor( "Analog", Type::Analog, num_samples )
 	, read_resolution(read_resolution)
@@ -31,8 +29,6 @@ Loom_Analog::Loom_Analog(
 	, analog_vals{0}
 	, battery(0.)
 	, temperature(temperature)
-	// , pH_offset(pH_offset)
-	// , pH_range(pH_range)
 {
 	// Set Analog Read Resolution
 	analogReadResolution(read_resolution);

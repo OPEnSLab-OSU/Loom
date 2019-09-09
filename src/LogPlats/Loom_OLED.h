@@ -37,14 +37,15 @@ public:
 	};
 
 protected:
-		Adafruit_SSD1306	display;			/// Underlying OLED controller
-		Version				version;			/// What type the OLED is (FeatherWing or breakout)
-		byte				reset_pin;			/// The reset pin (only applies to breakout version)
+
+		Adafruit_SSD1306	display;			///< Underlying OLED controller
+		Version				version;			///< What type the OLED is (FeatherWing or breakout)
+		byte				reset_pin;			///< The reset pin (only applies to breakout version)
 		
-		Format				display_format;		/// How to display the data on OLED
-		uint				scroll_duration;	/// The duration to complete a full cycle through a bundle of data (milliseconds)(non-blocking)
-		byte				freeze_pin;			/// Which pin to check if display should freeze
-		FreezeType			freeze_behavior;	/// What 'freezing' behavior should be followed
+		Format				display_format;		///< How to display the data on OLED
+		uint				scroll_duration;	///< The duration to complete a full cycle through a bundle of data (milliseconds)(non-blocking)
+		byte				freeze_pin;			///< Which pin to check if display should freeze
+		FreezeType			freeze_behavior;	///< What 'freezing' behavior should be followed
 
 public:
 	
@@ -111,7 +112,7 @@ public:
 	uint			get_scroll_duration() { return scroll_duration; }
 
 	/// Get the digital pin use to freeze the display
-	/// return	The freeze pin
+	/// \return	The freeze pin
 	byte			get_freeze_pin() { return freeze_pin; }
 
 	/// Get the current freeze behavior
@@ -131,7 +132,7 @@ public:
 	void			set_scroll_duration(uint duration) { scroll_duration = duration; }
 
 	/// Set the digital pin to use to freeze the display
-	/// param[in]	pin		The pin to use
+	/// \param[in]	pin		The pin to use
 	void			set_freeze_pin(byte pin);
 
 	/// Set the freezing behavior of the display
@@ -142,15 +143,18 @@ public:
 ///@name	MISCELLANEOUS
 /*@{*/ //======================================================================
 
-	/// Get c-string of name associated with OLED version enum
+	/// Get c-string of name associated with OLED::Version enum
+	/// \param[in]	v	OLED::Version value to get string of
 	/// \return C-string of OLED version
 	const static char* enum_oled_version_string(Version v);
 	
-	/// Get c-string of name associated with OLED format enum
+	/// Get c-string of name associated with OLED:Format enum
+	/// \param[in]	f	OLED::Format value to get string of
 	/// \return C-string of OLED format
 	const static char* enum_oled_format_string(Format f);
 
 	/// Get c-string of name associated with OLED freeze behavior enum
+	/// \param[in]	f	FreezeType to get string of
 	/// \return C-string of OLED freeze behavior
 	const static char* enum_oled_freeze_string(FreezeType f);
 

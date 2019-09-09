@@ -21,9 +21,9 @@ class Loom_Servo : public LoomActuator
 
 protected:
 
-	Adafruit_PWMServoDriver servo_driver;	/// Underlying servo driver instance
+	Adafruit_PWMServoDriver servo_driver;	///< Underlying servo driver instance
 
-	uint8_t		positions[NUM_SERVOS];					/// Positions of the servos
+	uint8_t		positions[NUM_SERVOS];		///< Positions of the servos
 
 public:
 	
@@ -31,8 +31,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// Servo module constructor
-	///
+	/// Constructor
 	Loom_Servo();
 
 	/// Constructor that takes Json Array, extracts args

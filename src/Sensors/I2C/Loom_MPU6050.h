@@ -17,19 +17,26 @@ class Loom_MPU6050 : public LoomI2CSensor
 
 protected:
 
-	// // /// Variables to save accel and gyro readings
-	// int16_t ax, ay, az, gx, gy, gz;
+	float temp;				///< Temperature
 
-	float temp;					/// Temperature
+	float accX;				///< X-axis acceleration value
+	float accY;				///< Y-axis acceleration value
+	float accZ;				///< Z-axis acceleration value
 
-	float accX, accY, accZ;		/// Acceleration values
-	float gyroX, gyroY, gyroZ;	/// Gyro values
+	float gyroX;			///< X-axis gyro value
+	float gyroY;			///< Y-axis gyro value
+	float gyroZ;			///< Z-axis gyro value
 
-	float accAngleX, accAngleY;	/// Acceleration angle values
+	float accAngleX;		///< X-axis acceleration angle
+	float accAngleY;		///< Y-axis acceleration angle
 
-	float gyroAngleX, gyroAngleY, gyroAngleZ; /// Gyro angle values
+	float gyroAngleX;		///< X-axis acceleration angle
+	float gyroAngleY;		///< Y-axis acceleration angle
+	float gyroAngleZ; 		///< Z-axis acceleration angle
 
-	float angleX, angleY, angleZ;	/// Angle values
+	float angleX;			///< X-axis angle
+	float angleY;			///< Y-axis angle
+	float angleZ;			///< Z-axis angle
 
 public:
 

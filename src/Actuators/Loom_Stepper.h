@@ -22,8 +22,11 @@ class Loom_Stepper : public LoomActuator
 
 protected:
 
-	Adafruit_MotorShield*	AFMS;			/// Underlying motor shield controller
-	Adafruit_StepperMotor*	motors[NUM_STEPPERS];		/// Array of stepper controllers
+	/// Underlying motor shield controller
+	Adafruit_MotorShield*	AFMS;	
+
+	/// Array of stepper controllers
+	Adafruit_StepperMotor*	motors[NUM_STEPPERS];		
 
 public:
 	
@@ -31,8 +34,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// Stepper module constructor
-	///
+	/// Constructor
 	Loom_Stepper();
 
 	/// Constructor that takes Json Array, extracts args
@@ -62,6 +64,8 @@ public:
 /*@{*/ //======================================================================
 
 	void		print_config() override;
+
+	/// Override with empty body as no state to print
 	void		print_state() override {}
 
 private:

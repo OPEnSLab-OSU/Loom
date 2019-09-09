@@ -20,10 +20,10 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// Temp Sync module constructor.
+	/// Constructor.
 	///
-	/// \param[in]  source		
-	/// \param[in]  dependant		
+	/// \param[in]  source		Module type to get temperature from
+	/// \param[in]  dependant	Module type to forward temperature to
 	LoomTempSync(
 		const LoomModule::Type		source		= LoomModule::Type::MS5803,
 		const LoomModule::Type		dependant	= LoomModule::Type::Analog		// might be an array in the future
@@ -34,19 +34,25 @@ public:
 	/// \param[in]	p		The array of constuctor args to expand
 	LoomTempSync(JsonArrayConst p);
 
-	/// Destructor
+	/// Destructor.
 	~LoomTempSync() = default;
 
-	/// Verify that source and dependant exist, sync temperatures
+	/// Verify that source and dependant modules exist, sync temperatures
 	void	second_stage_ctor() override;
 
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	void		measure();
+	/// Sync the temperature.
+	/// Simply calls synchronization implementation LoomTempSync::sync_temp().
+	/// Allows the module to run regularly by emulating a sensor, which have
+	/// thier measure methods called regularly.
+	void		measure() { sync_temp(); }
+
+	/// No package necessary.
+	/// Implement with empty body.
 	void 		package(JsonObject json) override { /* do nothing */ };
-	bool		dispatch(JsonObject) override { /* do nothing */}
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -58,11 +64,11 @@ private:
 
 	void		sync_temp();
 	
-	LoomModule*	source;
-	LoomModule* dependant;
+	LoomModule*	source;			///< Pointer to module to get temperature from
+	LoomModule* dependant;		///< Pointer to module to forward temperature to
 
-	LoomModule::Type source_type;
-	LoomModule::Type dependant_type;
+	LoomModule::Type source_type;		///< Type of source module
+	LoomModule::Type dependant_type;	///< Type of dependant module
 };
 
 

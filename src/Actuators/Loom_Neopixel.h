@@ -16,10 +16,10 @@ class Loom_Neopixel : public LoomActuator
 
 protected:
 
-	Adafruit_NeoPixel	pixels[3];			/// Array of Neopixel instances to manage up to 3 Neopixels
+	Adafruit_NeoPixel	pixels[3];			///< Array of Neopixel instances to manage up to 3 Neopixels
 
-	bool				pin_enabled[3];		/// Whether pins A0-A2 are enabled
-	uint8_t				color_vals[3][3];	/// The associated color values (RGB) for each of the 3 Neopixels
+	bool				pin_enabled[3];		///< Whether pins A0-A2 are enabled
+	uint8_t				color_vals[3][3];	///< The associated color values (RGB) for each of the 3 Neopixels
 
 public:
 	
@@ -27,7 +27,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// Neopixel module constructor
+	/// Constructor
 	///
 	/// \param[in]	enableA0			Bool | <false> | {true, false} | Whether or not to use pin A0 for Neopixel
 	/// \param[in]	enableA1			Bool | <false> | {true, false} | Whether or not to use pin A1 for Neopixel
@@ -72,7 +72,7 @@ public:
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
-	/// Enable or disable pin for use with Neopixel
+	/// enable or disable pin for use with Neopixel
 	/// \param[in]	port	Port to configure (0-2)
 	/// \param[in]	state	Enable or disable
 	void		enable_pin(uint8_t port, bool state);

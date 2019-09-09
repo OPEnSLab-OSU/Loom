@@ -14,6 +14,10 @@ class Loom_SpoolPublish : public LoomPublishPlat
 	
 public:
 	
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
+
 	/// Loom Spool publishing platform
 	Loom_SpoolPublish(
 			const char* module_name,
@@ -23,19 +27,24 @@ public:
 			const char* device_id
 		);
 	
+	/// Constructor that takes Json Array, extracts args
+	/// and delegates to regular constructor
+	/// \param[in]  p     The array of constuctor args to expand
 	Loom_SpoolPublish( JsonArrayConst p );
 	
 	/// Destructor
 	~Loom_SpoolPublish() = default;
 	
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
 	void print_config() override;
-	
 	
 protected:
 	
 	// remember to close the socket!
 	bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
-	
 	
 private:
 

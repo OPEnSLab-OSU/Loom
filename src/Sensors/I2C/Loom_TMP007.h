@@ -16,10 +16,10 @@ class Loom_TMP007 : public LoomI2CSensor
 
 protected:
 
-	Adafruit_TMP007 inst_tmp007;	/// Underlying TMP007 sensor manager instance
+	Adafruit_TMP007 inst_tmp007;	///< Underlying TMP007 sensor manager instance
 
-	float		object_temp;	/// Object temperature
-	float		die_temp;		/// Die temperature
+	float		object_temp;		///< Object temperature
+	float		die_temp;			///< Die temperature
 
 public:
 
@@ -50,7 +50,6 @@ public:
 
 	void		measure() override;
 	void 		package(JsonObject json) override;
-	void		calibrate() override {};
 
 //=============================================================================
 ///@name	PRINT INFORMATION

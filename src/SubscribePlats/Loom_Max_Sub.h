@@ -3,7 +3,7 @@
 #include "Loom_SubscribePlat.h"
 
 
-#define UDP_RECEIVE_OFFSET 9000
+#define UDP_RECEIVE_OFFSET 9000		///< UDP receiving port is this value + device instance number
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -16,12 +16,10 @@ class Loom_MaxSub : public LoomSubscribePlat
 
 protected:
 	
-	uint16_t	UDP_port;				/// Which UDP port to receive on
-	bool		auto_dispatch;			/// True to immediately call LoomManager::dispatch() when packet received
+	uint16_t	UDP_port;				///< Which UDP port to receive on
+	bool		auto_dispatch;			///< True to immediately call LoomManager::dispatch() when packet received
 
-	//IPAddress	remoteIP				/// IP address of source of last received UDP packet
-
-	LoomInternetPlat::UDPPtr UDP_Inst;	/// Pointer to UDP object
+	LoomInternetPlat::UDPPtr UDP_Inst;	///< Pointer to UDP object
 
 public:
 
@@ -29,8 +27,10 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// Constructor.
+	/// Constructor
 	///
+	/// \param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	/// \param[in]	auto_dispatch		True to immediately call LoomManager::dispatch() when packet received
 	Loom_MaxSub(
 		LoomModule::Type	internet_type,
 		bool				auto_dispatch	
@@ -50,7 +50,11 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	bool	subscribe(JsonObject json) override;
+	/// No package necessary for subscribe platforms.
+	/// Implement with empty body.
+	void		package(JsonObject json) override { /* do nothing for now */ }	
+
+	bool		subscribe(JsonObject json) override;
 
 	using LoomSubscribePlat::subscribe;
 
@@ -58,7 +62,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void	print_config() override;
+	void		print_config() override;
 
 //=============================================================================
 ///@name	GETTERS

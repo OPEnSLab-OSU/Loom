@@ -23,17 +23,17 @@ public:
 
 private: 
 	
-	const static char*	daysOfTheWeek[];		/// Array of strings the days of the week
-	const static float	timezone_adjustment[];	/// Timezone hour adjustment associated with each TimeZone enum
+	const static char*	daysOfTheWeek[];		///< Array of strings the days of the week
+	const static float	timezone_adjustment[];	///< Timezone hour adjustment associated with each TimeZone enum
 
 protected:
 
-	TimeZone	timezone;			/// The TimeZone to use
+	TimeZone	timezone;			///< The TimeZone to use
 
-	bool		use_utc_time;		/// Whether or not use UTC time, else local time
+	bool		use_utc_time;		///< Whether or not use UTC time, else local time
 
-	char		datestring[20];		/// Latest saved string of the Date (year/month/day)
-	char		timestring[20];		/// Latest saved string of the time (hour:minute:second)
+	char		datestring[20];		///< Latest saved string of the Date (year/month/day)
+	char		timestring[20];		///< Latest saved string of the time (hour:minute:second)
 
 public:
 	
@@ -42,6 +42,10 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
+	/// \param[in]	module_name		Name of the module (provided by derived classes)
+	/// \param[in]	module_type		Type of the module (provided by derived classes)
+	/// \param[in]	timezone		Which timezone device is in
+	/// \param[in]	use_utc_time	True for UTC time, false for local time
 	LoomRTC(	
 			const char*			module_name,
 			LoomModule::Type	module_type,
@@ -56,7 +60,8 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	virtual bool	dispatch(JsonObject) override {}
+	/// Adds a timestamp to the provided data Json
+	/// \param[out]	json	Object to add timestamp to
 	virtual void 	package(JsonObject json) override;
 
 	/// Get DateTime of current time
@@ -83,7 +88,6 @@ public:
 	/// \param[in]	duration	TimeSpan of duration before alarm goes off
 	// virtual void	set_alarm(TimeSpan duration) = 0;
 	void			set_alarm(TimeSpan duration) { set_alarm(now()+duration); }
-
 
 	/// Clear alarms
 	virtual void	clear_alarms() = 0;
@@ -120,18 +124,23 @@ public:
 	/// Get string of date
 	/// \return	Date string
 	const char*		get_datestring(); 
+	
 	/// Get string of date
 	/// \param[out]	buf		Buffer to fill
 	void			get_datestring(char* buf); 
+	
 	/// Get string of time
 	/// \return	Time string
 	const char*		get_timestring();
+	
 	/// Get string of time
 	/// \param[out]	buf		Buffer to fill]	
 	void			get_timestring(char* buf);
+	
 	/// Get string of weekday
 	/// \return	Weekday string
 	const char*		get_weekday() { return (const char*)daysOfTheWeek[ now().dayOfTheWeek() ]; }
+	
 	/// Get string of weekday
 	/// \param[out]	buf		Buffer to fill
 	void			get_weekday(char* buf);
@@ -140,22 +149,12 @@ public:
 ///@name	MISCELLANEOUS
 /*@{*/ //======================================================================
 	
-	void 		link_device_manager(LoomManager* LM) override;
+	void 			link_device_manager(LoomManager* LM) override;
 
 	/// Get string of name associated with time zone enum
+	/// \param[in]	t	TimeZone value to get string of
 	/// \return C-string of time zone
 	static char*	enum_timezone_string(TimeZone t);
-
-
-
-
-// Might be obsolete
-	// Static because ISRs need to be static if they are class methods
-	// Interrupt pin is also static, as that pin is referenced 
-	// static void		RTC_Wake_ISR();
-
-
-	
 
 protected:
 
@@ -163,16 +162,20 @@ protected:
 	/// Called by subclass constructors 
 	void			init();
 
+
 	// Because subclasses use use members that are not
-	// polymorphic, they have to manager their own 
+	// polymorphic, the following _method are wrappers to 
+	// the classes similarly named methods
 
 	/// Begin auxiliary function that subclasses need to implement
 	virtual void	_adjust(DateTime time) = 0;
 
-	/// Begin auxiliary function that subclasses need to implement
+	/// Begin auxiliary function that subclasses need to implement.
+	///	\return True if begin worked without issue, false otherwise
 	virtual bool	_begin() = 0;
 
-	/// Initialization auxiliary function that subclasses need to implement
+	/// Initialization auxiliary function that subclasses need to implement.
+	/// \return True if RTC is initialized / did not lose power 
 	virtual bool	_initialized() = 0;
 
 	/// Read the RTC, update time and date strings

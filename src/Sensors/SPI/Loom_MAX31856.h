@@ -17,13 +17,10 @@ class Loom_MAX31856 : public LoomSPISensor
 
 protected:
 
-	Adafruit_MAX31856 inst_max;	/// Underlying MAX31856 sensor manager instance
+	Adafruit_MAX31856 inst_max;		///< Underlying MAX31856 sensor manager instance
 
-	/// Raw value
-	// float voltage;
-
-	float temperature;				/// Measured temperature
-	float cj_temp;					/// Measured cold junction temperature
+	float temperature;				///< Measured temperature
+	float cj_temp;					///< Measured cold junction temperature
 
 public:
 	

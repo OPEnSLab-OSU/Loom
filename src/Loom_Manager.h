@@ -126,11 +126,11 @@ public:
 
 protected:
 
-	char		device_name[20];	/// The name of the device
-	uint8_t		instance;			/// The instance / channel ID within the subnet
+	char		device_name[20];	///< The name of the device
+	uint8_t		instance;			///< The instance / channel ID within the subnet
 
-	uint16_t	interval;			/// Default value for pause()/nap().
-									/// Used so that manager can control interval, rather than code in .ino
+	uint16_t	interval;			///< Default value for pause()/nap().
+									///< Used so that manager can control interval, rather than code in .ino
 
 
 	/// Device type (Hub / Node)
@@ -147,15 +147,15 @@ protected:
 	/// Used for convenience, another pointer can exist in modules vector
 	LoomRTC*				rtc_module = nullptr;
 
-	// Vectors of Loom Modules, categorized by type
+	/// Vectors of LoomModule pointers
 	std::vector<LoomModule*>		modules;
 
-	Verbosity	print_verbosity;		/// Print detail verbosity
-	Verbosity	package_verbosity;		/// Package detail verbosity
+	Verbosity	print_verbosity;		///< Print detail verbosity
+	Verbosity	package_verbosity;		///< Package detail verbosity
 
-	StaticJsonDocument<2000> doc;		/// Json data
+	StaticJsonDocument<2000> doc;		///< Json data
 
-	uint		packet_number = 1;		/// Packet number, incremented each time package is called
+	uint		packet_number = 1;		///< Packet number, incremented each time package is called
 
 public:
 

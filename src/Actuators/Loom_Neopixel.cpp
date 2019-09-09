@@ -1,8 +1,6 @@
 
 #include "Loom_Neopixel.h"
 
-#include <Adafruit_NeoPixel.h>
-
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Neopixel::Loom_Neopixel(

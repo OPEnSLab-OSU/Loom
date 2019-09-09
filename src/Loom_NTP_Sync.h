@@ -14,8 +14,6 @@
 class LoomNTPSync : public LoomModule
 {
 
-protected:
-
 public:
 
 //=============================================================================
@@ -44,6 +42,9 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+	/// Sync the time if necessary or enabled.
+	/// Allows the module to run regularly by emulating a sensor, which have
+	/// thier measure methods called regularly.
 	void		measure();
 	void 		package(JsonObject json) override { /* do nothing */ };
 	bool		dispatch(JsonObject) override { /* do nothing */}
@@ -57,30 +58,33 @@ public:
 
 private:
 	
-	/// the actual synchronization function
+	/// The actual synchronization function
+	/// \return Time obtained from InternetPlat
 	DateTime m_sync_rtc();
 	
 	/// enumerate errors
 	enum class Error {
 		OK,
-		INVAL_DEVICE_MANAGE, ///< Failed to recieve a Loom Device Manager
-		INVAL_INTERNET, ///< Failed to find the correct internet object
-		INVAL_TIME,     ///< Retrieved a time that was invalid
-		INVAL_RTC,      ///< Failed to find a RTC
-		NON_START,      ///< No attempt was made to sync
-		NO_CONNECTION, ///< Repeated attempts were made to sync, but there was no response
+		INVAL_DEVICE_MANAGE,	///< Failed to recieve a Loom Device Manager
+		INVAL_INTERNET,			///< Failed to find the correct internet object
+		INVAL_TIME,				///< Retrieved a time that was invalid
+		INVAL_RTC,				///< Failed to find a RTC
+		NON_START,				///< No attempt was made to sync
+		NO_CONNECTION,			///< Repeated attempts were made to sync, but there was no response
 	};
 	
-	/// Store the Internet Plat from second stage contsruction
-	// const uint m_internet_module_index;
 	/// Store the sync interval, in hours
 	const uint			m_sync_interval;
+	
 	/// Store the Internet Plat from second stage contsruction
 	LoomInternetPlat*	m_internet;
+	
 	/// Store the RTC pointer so we can check the time
 	LoomRTC*			m_rtc;
+	
 	/// Store when next to change the RTC
 	DateTime			m_next_sync;
+	
 	/// Store if we've successfully accomplished our task
 	Error				m_last_error;
 };

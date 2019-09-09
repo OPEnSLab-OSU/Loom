@@ -17,10 +17,10 @@ enum class I2C_Selection {
 
 
 // move to configuration?
-const I2C_Selection i2c_0x1C = I2C_Selection::L_MMA8451;	// TSL2561 / TSL2591
-const I2C_Selection i2c_0x1D = I2C_Selection::L_MMA8451;	// TSL2561 / TSL2591
-const I2C_Selection i2c_0x29 = I2C_Selection::L_TSL2591;	// TSL2561 / TSL2591
-const I2C_Selection i2c_0x49 = I2C_Selection::L_AS7265X;	// TSL2561 / AS7262 / AS7263 / AS7265X
+const I2C_Selection i2c_0x1C = I2C_Selection::L_MMA8451;	///< TSL2561 / TSL2591
+const I2C_Selection i2c_0x1D = I2C_Selection::L_MMA8451;	///< TSL2561 / TSL2591
+const I2C_Selection i2c_0x29 = I2C_Selection::L_TSL2591;	///< TSL2561 / TSL2591
+const I2C_Selection i2c_0x49 = I2C_Selection::L_AS7265X;	///< TSL2561 / AS7262 / AS7263 / AS7265X
 
 
 // Maybe query DeviceManager if RTC is in use, if not, query 0x68 
@@ -43,15 +43,15 @@ private:
 
 protected:
 
-	LoomI2CSensor**	sensors;			/// Array of I2C sensor objects
+	LoomI2CSensor**	sensors;			///< Array of I2C sensor objects
 
-	byte			i2c_address;		/// The multiplexer's I2C address
+	byte			i2c_address;		///< The multiplexer's I2C address
 
-	uint8_t			num_ports;			/// The number of ports on the multiplexer
-	bool			dynamic_list;		/// Whether or not sensor list is dynamic (refresh sensor list periodically)
-	uint			update_period;		/// Interval to update sensor list at
+	uint8_t			num_ports;			///< The number of ports on the multiplexer
+	bool			dynamic_list;		///< Whether or not sensor list is dynamic (refresh sensor list periodically)
+	uint			update_period;		///< Interval to update sensor list at
 
-	unsigned long	last_update_time;	/// When the sensor list was last updated
+	unsigned long	last_update_time;	///< When the sensor list was last updated
 
 public:
 
@@ -107,6 +107,9 @@ public:
 
 	void		print_config() override;
 	void		print_state() override;
+
+	/// Prints measurements of all connected sensors.
+	/// Calls implementations of LoomI2CSensor::print_measurements()
 	void		print_measurements();
 
 //=============================================================================

@@ -16,10 +16,10 @@ class Loom_MAX31855 : public LoomSPISensor
 
 protected:
 
-	Adafruit_MAX31855 inst_max;		/// Underlying MAX31855 sensor manager instance
+	Adafruit_MAX31855 inst_max;		///< Underlying MAX31855 sensor manager instance
 
-	float temperature;				/// Measured temperature
-	float internal_temp;			/// Measured internal temperature
+	float temperature;				///< Measured temperature
+	float internal_temp;			///< Measured internal temperature
 
 public:
 	

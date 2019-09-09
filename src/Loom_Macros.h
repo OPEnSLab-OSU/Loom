@@ -2,7 +2,7 @@
 
 // If LOOM_DEBUG was never specified elsewhere, default to enabled
 #ifndef LOOM_DEBUG
-	#define LOOM_DEBUG 1
+	#define LOOM_DEBUG 1	///< 1 to enable debug prints (and all LPrint(), LPrintln() calls), 0 to disable
 #endif
 
 
@@ -21,13 +21,20 @@
 #define EXPAND_ARRAY12(x) EXPAND_ARRAY11(x), x[11]
 #define EXPAND_ARRAY13(x) EXPAND_ARRAY12(x), x[12]
 /// \endcond
+
+/// Expand an array into individual arguments.
+/// Use by module constructors, expanding the JsonArray into arguments to 
+/// Call regular constructor with.
+/// \param[in]	x	Array to expand
+/// \param[in]	i	Number of elements to expand.
+/// 				Do not use with a value larger than the size of the array
 #define EXPAND_ARRAY(x, i) EXPAND_ARRAY##i(x)
 
 
 
 /// \cond DO_NOT_DOCUMENT
 /// Macros to expand variadics.
-/// For use in LPrint functions
+/// For use in LPrint, LPrintln, and LPrintlnAll functions
 #define VARIADIC_DETAIL_CAT2(a, b) a ## b
 #define VARIADIC_DETAIL_CAT(a, b) VARIADIC_DETAIL_CAT2(a, b)
 

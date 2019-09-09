@@ -20,19 +20,17 @@ class Loom_nRF : public LoomCommPlat
 
 protected:
 
-	RF24				radio;				/// Underlying nRF24L01(+) radio object
-	RF24Network*		network;			/// Network layer manager for radio
-	// RF24*			radio;				/// Underlying nRF24L01(+) radio object
-	// RF24Network*		network;			/// Network layer manager for radio
+	RF24				radio;				///< Underlying nRF24L01(+) radio object
+	RF24Network*		network;			///< Network layer manager for radio
 
-	uint8_t				address;			/// Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
+	uint8_t				address;			///< Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
 
-	uint8_t				data_rate;			/// Data rate
-	uint8_t				power_level;		/// Power level to send at
-	uint8_t				retry_count;		/// Number of transmission retries allowed
-	uint16_t			retry_timeout;		/// Delay between transmission retries (in milliseconds)
+	uint8_t				data_rate;			///< Data rate
+	uint8_t				power_level;		///< Power level to send at
+	uint8_t				retry_count;		///< Number of transmission retries allowed
+	uint16_t			retry_timeout;		///< Delay between transmission retries (in milliseconds)
 
-	uint8_t				multicast_level;	/// Which level(s) of the network to broadcast to
+	uint8_t				multicast_level;	///< Which level(s) of the network to broadcast to
 
 public:
 
@@ -112,11 +110,6 @@ public:
 	/// depth to broadcast through network tree
 	/// \param[in]	level 	Multicast level to set to
 	void		set_multicast_level(uint8_t level) { multicast_level = level; }
-
-
-//=============================================================================
-///@name	MISCELLANEOUS
-/*@{*/ //======================================================================
 
 private:
 

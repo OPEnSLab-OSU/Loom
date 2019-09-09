@@ -12,9 +12,6 @@
 class Loom_GoogleSheets : public LoomPublishPlat 
 {
 
-protected:
-	
-	
 public:
 
 //=============================================================================
@@ -22,7 +19,8 @@ public:
 /*@{*/ //======================================================================
 
 	/// Loom Google Sheets Platform module constructor.
-	/// Check out http://www.open-sensing.org/evaporometerblog/datalog for more information on these parameters.
+	/// Check out https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets
+	/// (or http://www.open-sensing.org/evaporometerblog/datalog) for more information on these parameters.
 	/// \param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name.
 	/// \param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
 	/// \param[in]  script_url			String | <""> | null | URL where the google sheets script is hosted, without domain (ex. /macros/s/AKfycby<more letters here>_k0n/exec).
@@ -35,7 +33,7 @@ public:
 						const char*			script_url,
 						const char*			sheet_id,
 						bool				tab_matches_dev_id,
-						const char*			tab_id = "Data"
+						const char*			tab_id				= "Data"
 					);
 
 	/// Constructor that takes Json Array, extracts args
@@ -50,11 +48,6 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	// /// Send JSON data to a google sheet
-	// /// \param[in] json The JSON data, formatted according to publish();
-	// /// \param[in] plat A pointer to an internet platform
-	// bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
-
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -66,18 +59,21 @@ protected:
 	/// Send JSON data to a google sheet
 	/// \param[in] json The JSON data, formatted according to publish();
 	/// \param[in] plat A pointer to an internet platform
+	/// \return True if success
 	bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
 
 private:
+
 	/// Private utility send function
 	bool m_serialize_internet_impl(const JsonObject json, Print& write);
 	
 	// use dynamic memory to store the varibles from the user
 	// since most of these strings will be smaller than the maximum size
-	const String m_script_url;
-	const String m_sheet_id;
-	const String m_tab_id;
 
-	const bool tab_matches_dev_id;
+	const String m_script_url;	///< ID of Google script 
+	const String m_sheet_id;	///< ID of Google Sheets spreadsheet 
+	const String m_tab_id;		///< Name of tab of spreadsheet 
+
+	const bool tab_matches_dev_id;	///< Whether or not tab of spreadsheet should be based on device name + instance
 
 };

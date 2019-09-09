@@ -6,9 +6,7 @@
 Loom_MAX31856::Loom_MAX31856(	
 		const char*		module_name,
 		uint8_t			num_samples, 
-		
 		uint8_t			CS_pin,
-
 		uint8_t			SPI_a,
 		uint8_t			SPI_b,
 		uint8_t			SPI_c,

@@ -19,8 +19,8 @@ class Loom_Digital : public LoomSensor
 
 protected:
 
-	bool		pin_enabled[DIGITAL_COUNT];		/// Array of which pins are enabled
-	bool		digital_vals[DIGITAL_COUNT];	/// Array of last read digital values
+	bool		pin_enabled[DIGITAL_COUNT];		///< Array of which pins are enabled
+	bool		digital_vals[DIGITAL_COUNT];	///< Array of last read digital values
 
 public:
 	
@@ -113,6 +113,7 @@ private:
 
 	/// Convert pin number to index in manager arrays
 	/// \param[in]	pin		Pin to convert to index
+	/// \return Index
 	uint8_t		pin_to_index(uint8_t pin);
 
 };
