@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Decagon_5TM.h
+/// @brief		File for the Loom_Decagon5TM definition. Incomplete.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 
 #include "Loom_SDI12_Sensor.h"

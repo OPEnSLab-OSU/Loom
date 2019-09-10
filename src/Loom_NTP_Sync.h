@@ -1,6 +1,16 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_NTP_Sync.h
+/// @brief		File for the LoomNTPSync definition.
+/// @author		Noah Koontz
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 
-#include "Loom_Module.h"
+#include "Loom_Manager.h"
 #include "./InternetPlats/Loom_InternetPlat.h"
 #include "./RTC/Loom_RTC.h"
 

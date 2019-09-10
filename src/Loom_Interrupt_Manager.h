@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Interrupt_Manager.h
+/// @brief		File for the Loom_Interrupt_Manager definition and supporting enum
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 
 #include "Loom_Module.h"
@@ -33,8 +43,18 @@ enum class ISR_Type {
 
 
 // ### (LoomModule) | dependencies: [] | conflicts: []
-/// Submanager for managing interrupts, timers, and stopwatches
+// Submanager for managing interrupts, timers, and stopwatches
 // ###
+
+
+///////////////////////////////////////////////////////////////////////////////
+///
+/// Submanager for managing interrupts, timers, and stopwatches.
+///
+/// @par Resources
+///	- [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___interrupt___manager.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_Interrupt_Manager : public LoomModule
 {
 

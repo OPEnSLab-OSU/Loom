@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Interrupt_Manager.cpp
+/// @brief		Loom_Interrupt_Manager method implementation
+/// @details	
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_Interrupt_Manager.h"
 #include "Loom_Sleep_Manager.h"

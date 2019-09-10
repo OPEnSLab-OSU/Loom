@@ -1,3 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Multiplexer.h
+/// @brief		File for the Loom_Multiplexer definition, supporting enums, and 
+///				I2C address selection for conflicts.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 
 #include "Loom_Module.h"

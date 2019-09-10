@@ -1,11 +1,12 @@
 ///////////////////////////////////////////////////////////////////////////////
-
-/// Abstract base class of internet platform modules.
-
-/// All internet modules inherit from this class.
-
+///
+/// @file		Loom_InternetPlat.h
+/// @brief		File for the LoomInternetPlat definition.
+/// @author		Noah Koontz
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
 ///////////////////////////////////////////////////////////////////////////////
-
 
 #pragma once
 

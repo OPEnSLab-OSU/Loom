@@ -1,3 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Macros.h
+/// @brief		File contains general purpose Loom macros
+/// @details	
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 
 // If LOOM_DEBUG was never specified elsewhere, default to enabled

@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Package.h
+/// @brief		File for packaging data into JsonObject, and extracting data from it
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 
 #include <Arduino.h>

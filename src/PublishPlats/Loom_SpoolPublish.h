@@ -1,9 +1,14 @@
-//
-//  Loom_SpoolPublish.hpp
-//  
-//
-//  Created by Eli Winkelman on 8/7/19.
-//
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_SpoolPublish.h
+/// @brief		File for the Loom_SpoolPublish definition.
+/// @author		Eli Winkelman
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#pragma once
 
 #include "Loom_PublishPlat.h"
 #include "ArduinoJson.h"
