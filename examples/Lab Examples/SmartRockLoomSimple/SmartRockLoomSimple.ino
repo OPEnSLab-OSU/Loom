@@ -1,3 +1,26 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This example is the code used for the OPEnS Lab's Smart Rock 
+
+// It is using the following modules:
+// - DS3231 RTC
+// - Interrupt Manager
+// - Sleep Manager
+// - Analog (for turbitidy, electrical conductivity, pH, total dissolved solids)
+// - SD 
+// - MS5803 pressure sensor
+
+// Normal operation is:
+// - Collect data
+// - Log data to SD card
+// - Set alarm for next wake time
+// - Go to sleep until alarm
+
+// You can also wake the Smart Rock by putting a magnet near the reed switch.
+// This will also trigger data logging and then return to sleep
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <Loom.h>
 
 // Include configuration
@@ -19,8 +42,8 @@ LoomManager Loom{ &ModuleFactory };
 
 
 
-#define ALARM_PIN 6
-#define REED_PIN 11
+#define ALARM_PIN 6		// Wire interrupt on RTC to this pin
+#define REED_PIN 11		// Wire reed switch to this pin
 
 
 volatile bool alarmFlag = false;

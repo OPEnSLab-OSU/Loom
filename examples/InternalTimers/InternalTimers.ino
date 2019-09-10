@@ -1,3 +1,35 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This example is used to demonstrate a few different use cases of the 
+// processor's internal timers, manager via Loom
+
+// In setup, there are 4 different timer configurations, uncomment one, and
+// comment the rest out. The options are:
+//		- Repeating immediate ISR timer
+//		- Single immediate ISR timer
+//		- Repeating delayed ISR timer
+//		- Single delayed ISR timer
+
+// Repeating means that the timer will restart after triggering, single will
+// not.
+
+// Immediate means that the ISR will run immediately when the timer elapses.
+
+// Delayed means that a flag will be set when the timer elapses, but the ISR
+// will not be run until you poll which flags have been set, with:
+//		Loom.InterruptManager().run_pending_ISRs();
+// This options is better if you have a large ISR, it contains delays, prints
+// statements, or calls to copmlex functions
+
+// The ISR being used for this example is toggle() below, which simply switches
+// the state of the built-in LED when the timer elapses.
+
+// For more details about the usage of the interrupt manager, see the 
+// documentation: 
+// https://openslab-osu.github.io/Loom/html/class_loom___interrupt___manager.html
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <Loom.h>
 
 // Include configuration
@@ -26,7 +58,9 @@ void toggle()
 	digitalWrite(LED_BUILTIN, state ? HIGH : LOW);
 	state = !state;
 	count++;
-	LPrintln("Toggle");
+	LPrintln("Toggle");	// Generally not good practice to put a print in an ISR
+						// it is only used here to make the program behavior 
+						// more obvious
 }
 
 

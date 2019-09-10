@@ -1,6 +1,20 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This example demonstrates how you might make use of Loom features / modules
+// but without using the LoomManager.
+
+// We do not generally recommend this usage of Loom, and support may not be as
+// complete as it would be if using the manager.
+// However, it may give you more control if you do not want all of the automation
+// of the LoomManager.
+
+// See the wiki for more details about using Loom without the manager:
+// https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-without-LoomManager
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <Loom.h>
 #include <ArduinoJson.h>
-
 
 Loom_Analog Analog{};			// Analog module with default settings
 Loom_Relay  Relay("Relay", 10);	// Relay module with provided settings (i.e. relay on pin 10) 

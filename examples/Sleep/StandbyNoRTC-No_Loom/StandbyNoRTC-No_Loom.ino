@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This example demonstrates how to use the M0's internal timers to repeatedly
+// wake the device.
+
+// It is based on the RTCCounter > SleepRTCBlink example:
+// https://github.com/GabrielNotman/RTCCounter
+
+// Original description:
 /*
  * RTC Counter Periodic Wakeup example
  * Created by Gabriel Notman
@@ -9,6 +18,8 @@
  * 
  * Created 05 November 2018
  */
+
+///////////////////////////////////////////////////////////////////////////////
 
 
 #include <RTCCounter.h>

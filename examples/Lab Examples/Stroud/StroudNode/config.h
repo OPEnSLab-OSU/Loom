@@ -48,6 +48,10 @@
 			'params':[\
 				7002\
 			]\
+		},\
+		{\
+			'name':'TempSync',\
+/*ms5803,analog*/'params':[2110,2001]\
 		}\
 	]\
 }"
