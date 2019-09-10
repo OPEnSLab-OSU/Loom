@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_ZXGesture.h
-/// @brief		File for the Loom_ZXGesture definition.
+/// @brief		File for Loom_ZXGesture definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

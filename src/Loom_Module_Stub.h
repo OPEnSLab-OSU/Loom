@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Module_Stub.h
-/// @brief		File for the Loom_Module_Stub definition and implementation.
+/// @brief		File for Loom_Module_Stub definition and implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

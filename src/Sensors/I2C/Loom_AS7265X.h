@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_AS7265X.h
-/// @brief		File for the Loom_AS7265X definition.
+/// @brief		File for Loom_AS7265X definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_CommPlat.h
-/// @brief		File for the LoomCommPlat definition.
+/// @brief		File for LoomCommPlat definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

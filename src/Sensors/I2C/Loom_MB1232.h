@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_MB1232.h
-/// @brief		File for the Loom_MB1232 definition.
+/// @brief		File for Loom_MB1232 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

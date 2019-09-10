@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_InternetWifi.h
-/// @brief		File for the Loom_WiFi definition.
+/// @brief		File for Loom_WiFi definition.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

@@ -1,5 +1,5 @@
 
-// This is given its own file for the sake of separating the section of code that
+// This is given its own File for sake of separating the section of code that
 // will change with module additions from the rest of the implementation of Loom_Manager
 
 #include "Loom_Module.h"

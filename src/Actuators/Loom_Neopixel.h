@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Neopixel.h
-/// @brief		File for the Loom_Neopixel definition.
+/// @brief		File for Loom_Neopixel definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

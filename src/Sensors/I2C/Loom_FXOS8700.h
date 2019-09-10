@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_FXOS8700.h
-/// @brief		File for the Loom_FXOS8700 definition.
+/// @brief		File for Loom_FXOS8700 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

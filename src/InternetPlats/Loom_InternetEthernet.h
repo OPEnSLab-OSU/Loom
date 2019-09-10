@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_InternetEthernet.h
-/// @brief		File for the Loom_Ethernet definition.
+/// @brief		File for Loom_Ethernet definition.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

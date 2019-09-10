@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_DS3231.h
-/// @brief		File for the Loom_DS3231 definition.
+/// @brief		File for Loom_DS3231 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

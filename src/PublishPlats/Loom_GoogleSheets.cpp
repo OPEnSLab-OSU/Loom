@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_GoogleSheets.cpp
+/// @brief		File for Loom_GoogleSheets implementation.
+/// @author		Noah Koontz
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_GoogleSheets.h"
 #include "../Loom_Manager.h"

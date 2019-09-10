@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_LIS3DH.h
-/// @brief		File for the Loom_LIS3DH definition.
+/// @brief		File for Loom_LIS3DH definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

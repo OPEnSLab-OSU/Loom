@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Max_Pub.h
-/// @brief		File for the Loom_MaxPub definition.
+/// @brief		File for Loom_MaxPub definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

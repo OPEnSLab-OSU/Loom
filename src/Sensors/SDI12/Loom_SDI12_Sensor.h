@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		LoomSDI12Sensor.h
-/// @brief		File for the Loom_SDI12_Sensor definition. Incomplete.
+/// @brief		File for Loom_SDI12_Sensor definition. Incomplete.
 /// @author		
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

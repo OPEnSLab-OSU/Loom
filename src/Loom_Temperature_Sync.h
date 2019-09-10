@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Temperature_Sync.h
-/// @brief		File for the LoomTempSync definition.
+/// @brief		File for LoomTempSync definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

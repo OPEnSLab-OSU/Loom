@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_MAX31855.h
-/// @brief		File for the Loom_MAX31855 definition.
+/// @brief		File for Loom_MAX31855 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

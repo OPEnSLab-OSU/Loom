@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Temperature_Sync.cpp
+/// @brief		File for Loom_Temperature_Sync implementation.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_Temperature_Sync.h"
 #include "Loom_Manager.h"

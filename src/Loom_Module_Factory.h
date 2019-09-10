@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Module_Factory.h
-/// @brief		File for the LoomFactory, FactoryBase definition and implementations.
+/// @brief		File for LoomFactory, FactoryBase definition and implementations.
 ///				Also includes all the supporting code to build the LoomFactory lookup table.
 /// @author		Luke Goertzen
 /// @date		2019

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Interrupt_Manager.h
-/// @brief		File for the Loom_Interrupt_Manager definition and supporting enum
+/// @brief		File for Loom_Interrupt_Manager definition and supporting enum
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

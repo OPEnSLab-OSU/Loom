@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_SHT31D.h
-/// @brief		File for the Loom_SHT31D definition.
+/// @brief		File for Loom_SHT31D definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

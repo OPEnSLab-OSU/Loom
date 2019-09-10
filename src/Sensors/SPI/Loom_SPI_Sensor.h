@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_SPI_Sensor.h
-/// @brief		File for the LoomSPISensor definition.
+/// @brief		File for LoomSPISensor definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

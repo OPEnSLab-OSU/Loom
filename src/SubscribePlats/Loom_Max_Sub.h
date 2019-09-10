@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Max_Sub.h
-/// @brief		File for the Loom_MaxSub definition.
+/// @brief		File for Loom_MaxSub definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Bluetooth.h
-/// @brief		File for the Loom_Bluetooth definition. Needs more work.
+/// @brief		File for Loom_Bluetooth definition. Needs more work.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

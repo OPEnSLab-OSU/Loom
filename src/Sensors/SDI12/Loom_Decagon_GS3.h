@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Decagon_GS3.h
-/// @brief		File for the Loom_DecagonGS3 definition. Incomplete.
+/// @brief		File for Loom_DecagonGS3 definition. Incomplete.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

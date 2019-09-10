@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_InternetEthernet.cpp
+/// @brief		File for Loom_Ethernet implementation.
+/// @author		Noah Koontz
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_InternetEthernet.h"
 #include "Loom_Trust_Anchors.h"

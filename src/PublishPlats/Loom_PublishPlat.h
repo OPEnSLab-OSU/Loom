@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_PublishPlat.h
-/// @brief		File for the LoomPublishPlat definition.
+/// @brief		File for LoomPublishPlat definition.
 /// @author		Noah Koontz
 /// @author		Luke Goertzen
 /// @date		2019

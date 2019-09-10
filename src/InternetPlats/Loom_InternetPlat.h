@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_InternetPlat.h
-/// @brief		File for the LoomInternetPlat definition.
+/// @brief		File for LoomInternetPlat definition.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_GoogleSheets.h
-/// @brief		File for the Loom_GoogleSheets definition.
+/// @brief		File for Loom_GoogleSheets definition.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
