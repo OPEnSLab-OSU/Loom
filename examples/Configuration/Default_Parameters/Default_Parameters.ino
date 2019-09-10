@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This example is used to demonstrate how to specify modules to use default
+// configuration parameters in the config (see config.h file)
+
+// Other than that, this example is largely the same as the 'Basic' example
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <Loom.h>
 
 // Include configuration

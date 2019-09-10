@@ -1,3 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This example expands upon GoogleSheetsSimple, so if you haven't looked at 
+// that one, start there.
+
+// This example add RTC synchronization to time obtained from the internet 
+// using the NTP_Sync module
+// (Google Sheets logging is not necessary for this synchronization)
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <Loom.h>
 
 // Include configuration

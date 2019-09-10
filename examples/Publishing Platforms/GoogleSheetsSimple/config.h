@@ -23,10 +23,6 @@
 			]\
 		},\
 		{\
-			'name':'NTP_Sync',\
-			'params':[0]\
-		},\
-		{\
 			'name':'GoogleSheets',\
 			'params':[\
 				'Goog',\

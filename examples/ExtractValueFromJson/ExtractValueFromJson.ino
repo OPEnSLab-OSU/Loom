@@ -1,3 +1,24 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This is a simple example demonstrating how to extract data as collected 
+// by Loom in the measure(), package() sequence.
+
+// The data is stored in a JsonObject which you can get directly using 
+// 		JsonObject data = Loom.internal_json();
+
+// You can also pass a JsonObject to Loom.package to be filled:
+// 		JsonObject data;
+// 		Loom.package(data);
+
+// We recommend the usage shown below if you only need values individual keys.
+// You need the module name and the data key to get the data.
+// You should also know the type of the data, but you can cast it to a different 
+// type if needed
+
+// This is not a full example program and only collects data once.
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <Loom.h>
 
 // Include configuration
@@ -49,5 +70,5 @@ void setup()
 
 void loop() 
 {
-
+	// No loop code for this example
 }

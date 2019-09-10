@@ -1,3 +1,19 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This is a basic example of receiving data via nRF. 
+// While you can do a variety of things with the received data, this example
+// simply prints it and logs it to an SD Card 
+
+// The corresponding example is nRF > Transmit
+
+// These two examples are the Loom equivalent of the basic RX / TX nRF 
+// examples
+
+// See https://openslab-osu.github.io/Loom/html/class_loom__n_r_f.html
+// for details of nRF config options
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <Loom.h>
 
 // Include configuration
@@ -35,6 +51,8 @@ void loop()
 		Loom.SDCARD().log("nrf.csv");
 	}
 
-	Loom.pause();
+	Loom.pause();	// Pause according to 'interval' in config
+					// This controls the frequency of checking
+					// for incoming data
 
 }
