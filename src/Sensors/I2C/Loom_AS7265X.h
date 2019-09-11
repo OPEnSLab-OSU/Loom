@@ -54,12 +54,12 @@ public:
 
 	/// Constructor
 	///
-	/// \param[in]	i2c_address				Set(Int) | <0x49> | {0x49} | I2C address
-	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	/// \param[in]	use_bulb				Bool | <false> | {true, false} | Whether or not to use bulb
-	/// \param[in]	gain					Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
-	/// \param[in]	mode					Set(Int) | <3> | { 0("4 channels out of 6"), 1("Different 4 channels out of 6"), 2("All 6 channels continuously"), 3("One-shot reading of all channels") } | Read mode
-	/// \param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
+	/// @param[in]	i2c_address				Set(Int) | <0x49> | {0x49} | I2C address
+	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
+	/// @param[in]	use_bulb				Bool | <false> | {true, false} | Whether or not to use bulb
+	/// @param[in]	gain					Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
+	/// @param[in]	mode					Set(Int) | <3> | { 0("4 channels out of 6"), 1("Different 4 channels out of 6"), 2("All 6 channels continuously"), 3("One-shot reading of all channels") } | Read mode
+	/// @param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
 	Loom_AS7265X(
 			byte			i2c_address			= 0x49,
 			uint8_t			mux_port			= 255,
@@ -71,7 +71,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_AS7265X(JsonArrayConst p);
 
 	/// Destructor
@@ -95,17 +95,17 @@ public:
 /*@{*/ //======================================================================
 
 	/// Set whether not bulb is used for active light source
-	/// \param[in]	enable	Whether or not to enable 
+	/// @param[in]	enable	Whether or not to enable 
 	void		enable_bulb(bool e) { use_bulb = e; }
 
 	/// Set gain.
 	/// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
-	/// \param[in]	gain	Gain level: 
+	/// @param[in]	gain	Gain level: 
 	void		set_gain(uint8_t gain) { inst_AS7265X.setGain(gain); }
 
 	/// Set mode.
 	/// 4 channel, other 4 channel, 6 chan, or 6 chan one shot.
-	/// \param[in]	mode	Mode
+	/// @param[in]	mode	Mode
 	void		set_mode(uint8_t mode) { inst_AS7265X.setMeasurementMode(mode); }
 
 	/// Set integration time.

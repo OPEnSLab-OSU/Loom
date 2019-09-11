@@ -74,10 +74,10 @@ public:
 
 	/// Multiplexer module constructor.
 	///
-	/// \param[in]	i2c_address				Set(Int) | <0x71> | {0x71} | I2C address
-	/// \param[in]	num_ports				Int | <8> | [1-8] | Number of ports available
-	/// \param[in]	dynamic_list			Bool | <true> | {true, false} | Whether or not to automatically check for new sensors
-	/// \param[in]	update_period			Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
+	/// @param[in]	i2c_address				Set(Int) | <0x71> | {0x71} | I2C address
+	/// @param[in]	num_ports				Int | <8> | [1-8] | Number of ports available
+	/// @param[in]	dynamic_list			Bool | <true> | {true, false} | Whether or not to automatically check for new sensors
+	/// @param[in]	update_period			Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
 	Loom_Multiplexer(
 			byte			i2c_address			= 0x71,
 			uint8_t			num_ports			= 8,
@@ -87,7 +87,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_Multiplexer(JsonArrayConst p);
 
 	/// Destructor
@@ -104,7 +104,7 @@ public:
 	bool		dispatch(JsonObject) override {}
 
 	/// Populate a bundle with a list of sensors currently attached
-	/// \param[out]	json	Json object to populate with sensor list
+	/// @param[out]	json	Json object to populate with sensor list
 	void		get_sensor_list(JsonObject json);
 
 	/// Update sensor list.
@@ -112,8 +112,8 @@ public:
 	void		refresh_sensors();
 
 	/// Get the sensor object for sensor on provided port
-	/// \param[port]	port	The port of the multiplexer to get sensor object for
-	/// \return			The pointer to LoomI2CSensor on port, Null if no sensor
+	/// @param[port]	port	The port of the multiplexer to get sensor object for
+	/// @return			The pointer to LoomI2CSensor on port, Null if no sensor
 	LoomI2CSensor*	get_sensor(uint8_t port) { return sensors[port]; }
 
 //=============================================================================
@@ -132,11 +132,11 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get whether or not sensors are updated dynamically
-	/// \return	True if dynamic
+	/// @return	True if dynamic
 	bool		get_is_dynamic() { return dynamic_list; }
 
 	/// Get the sensor list update period.
-	/// \return	The update period
+	/// @return	The update period
 	int			get_update_period() { return update_period; }
 
 //=============================================================================
@@ -144,12 +144,12 @@ public:
 /*@{*/ //======================================================================
 
 	/// Set whether or not to periodically update list of attached sensors
-	/// \param[in]	dynamic		The setting to set
+	/// @param[in]	dynamic		The setting to set
 	void		set_is_dynamic(bool dynamic) { dynamic_list = dynamic; }
 
 	/// Set the sensor list update period.
 	/// Requires dynamic_list to be enabled
-	/// \param[in]	period	New update period
+	/// @param[in]	period	New update period
 	void		set_update_period(uint period) { update_period = period; }
 
 //=============================================================================
@@ -159,18 +159,18 @@ public:
 private:
 
 	/// Select communication with sensor at index port
-	/// \param[in]	port	The port to open I2C communication on
+	/// @param[in]	port	The port to open I2C communication on
 	void			tca_select(uint8_t port);
 
 	/// Create appropriate instance to manage sensor.
 	/// Compares I2C address to known sensors and generates corresponding sensor instance
-	/// \param[in]	i2c_address		The I2C address to match to sensor class
-	/// \return		Pointer to the generated I2C sensor object, Null if no match for that address
+	/// @param[in]	i2c_address		The I2C address to match to sensor class
+	/// @return		Pointer to the generated I2C sensor object, Null if no match for that address
 	LoomI2CSensor*	generate_sensor_object(byte i2c_address, uint8_t port);
 
 	/// Determine the I2C address of the sensor (if any) on port.
-	/// \param[in]	port	The port to get sensor address of
-	/// \return		The I2C address of sensor, 0x00 if no sensor found
+	/// @param[in]	port	The port to get sensor address of
+	/// @return		The I2C address of sensor, 0x00 if no sensor found
 	byte			get_i2c_on_port(uint8_t port);
 
 };

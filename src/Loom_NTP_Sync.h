@@ -39,14 +39,14 @@ public:
 
 	/// NTP Sync module constructor.
 	///
-	/// \param[in]  sync_interval_hours		Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
+	/// @param[in]  sync_interval_hours		Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
 	LoomNTPSync(
 		const uint			sync_interval_hours		= 0
 	);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	LoomNTPSync(JsonArrayConst p);
 
 	/// Destructor
@@ -76,7 +76,7 @@ public:
 private:
 	
 	/// The actual synchronization function
-	/// \return Time obtained from InternetPlat
+	/// @return Time obtained from InternetPlat
 	DateTime m_sync_rtc();
 	
 	/// enumerate errors

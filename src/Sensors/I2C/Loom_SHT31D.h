@@ -45,8 +45,8 @@ public:
 
 	/// Constructor
 	///
-	/// \param[in]	i2c_address				Set(Int) | <0x44> | {0x44, 0x45} | I2C address
-	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
+	/// @param[in]	i2c_address				Set(Int) | <0x44> | {0x44, 0x45} | I2C address
+	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	Loom_SHT31D(
 			byte			i2c_address		= 0x44,
 			uint8_t			mux_port		= 255
@@ -54,7 +54,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_SHT31D( JsonArrayConst p );
 
 	/// Destructor
@@ -80,7 +80,7 @@ public:
 	/// Get the temperature reading.
 	/// Used by the LoomTempSync module to provide temperature
 	/// to other modules.
-	/// \return	The measured temperature
+	/// @return	The measured temperature
 	float		get_temperature() { return temp; }
 	
 private:

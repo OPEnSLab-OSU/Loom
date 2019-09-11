@@ -38,9 +38,9 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	/// \param[in]	module_name		Name of the module (provided by derived classes)
-	/// \param[in]	module_type		Type of the module (provided by derived classes)
-	/// \param[in]	num_samples		The number of samples to take and average
+	/// @param[in]	module_name		Name of the module (provided by derived classes)
+	/// @param[in]	module_type		Type of the module (provided by derived classes)
+	/// @param[in]	num_samples		The number of samples to take and average
 	LoomSensor(	
 			const char*			module_name,
 			LoomModule::Type	module_type,
@@ -75,7 +75,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get the number of samples sensor is set to take
-	/// \return		Number of samples
+	/// @return		Number of samples
 	uint8_t			get_num_samples() { return num_samples; }
 
 //=============================================================================
@@ -83,7 +83,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Set the number of samples to take
-	/// \param[in]	n	Number of samples to take
+	/// @param[in]	n	Number of samples to take
 	void			set_num_samples(uint8_t n) { num_samples = n; }
 
 private:

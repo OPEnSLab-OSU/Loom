@@ -57,7 +57,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_Stepper(JsonArrayConst p);
 
 	/// Destructor
@@ -71,10 +71,10 @@ public:
 	void		add_config(JsonObject json) override;
 
 	/// Move specified stepper specified steps, speed, and direction
-	/// \param[in]	motor		Which stepper to move (0-3)
-	/// \param[in]	steps		Number of steps to rotate
-	///	\param[in]	speed		Speed to move at (0-255)
-	/// \param[in]	clockwise 	True to rotate clockwise, false for counterclock-wise
+	/// @param[in]	motor		Which stepper to move (0-3)
+	/// @param[in]	steps		Number of steps to rotate
+	///	@param[in]	speed		Speed to move at (0-255)
+	/// @param[in]	clockwise 	True to rotate clockwise, false for counterclock-wise
 	void		move_steps(uint8_t motor, uint16_t steps, uint8_t speed, bool clockwise);
 
 //=============================================================================

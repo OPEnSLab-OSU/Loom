@@ -49,9 +49,9 @@ public:
 
 	/// Constructor
 	///
-	/// \param[in]	i2c_address				Set(Int) | <0x1D> | {0x1C, 0x1D} | I2C address
-	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	/// \param[in]	range					Set() | <"MMA8451"> | null | MMA8451 module name
+	/// @param[in]	i2c_address				Set(Int) | <0x1D> | {0x1C, 0x1D} | I2C address
+	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
+	/// @param[in]	range					Set() | <"MMA8451"> | null | MMA8451 module name
 	Loom_MMA8451(
 			byte			i2c_address		= 0x1D,
 			uint8_t			mux_port		= 255,
@@ -60,7 +60,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_MMA8451(JsonArrayConst p);
 	
 	/// Destructor

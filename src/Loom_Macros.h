@@ -36,8 +36,8 @@
 /// Expand an array into individual arguments.
 /// Use by module constructors, expanding the JsonArray into arguments to 
 /// Call regular constructor with.
-/// \param[in]	x	Array to expand
-/// \param[in]	i	Number of elements to expand.
+/// @param[in]	x	Array to expand
+/// @param[in]	i	Number of elements to expand.
 /// 				Do not use with a value larger than the size of the array
 #define EXPAND_ARRAY(x, i) EXPAND_ARRAY##i(x)
 

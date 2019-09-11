@@ -57,9 +57,9 @@ public:
 
 	/// Constructor
 	///
-	/// \param[in]	i2c_address				Set(Int) | <0x10> | {0x10, 0x11} | I2C address
-	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	/// \param[in]	mode					Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
+	/// @param[in]	i2c_address				Set(Int) | <0x10> | {0x10, 0x11} | I2C address
+	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
+	/// @param[in]	mode					Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
 	Loom_ZXGesture(
 			byte			i2c_address		= 0x10,
 			uint8_t			mux_port		= 255,
@@ -68,7 +68,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_ZXGesture(JsonArrayConst p);
 
 	/// Destructor

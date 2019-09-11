@@ -112,8 +112,8 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	/// \param[in]	module_name		Name of the module (provided by derived classes)
-	/// \param[in]	module_type		Type of the module (provided by derived classes)
+	/// @param[in]	module_name		Name of the module (provided by derived classes)
+	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	LoomModule( 
 		const char*		module_name		= "Unknown", 
 		Type			module_type		= Type::Unknown
@@ -134,7 +134,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Package a modules measurements or state.
-	/// \param[out]	json	Object to put data into
+	/// @param[out]	json	Object to put data into
 	virtual void 	package(JsonObject json) = 0;
 
 	/// Route command to driver 
@@ -148,7 +148,7 @@ public:
 
 	/// Add configuration information to JsonObject.
 	/// LoomManager iterates over modules to build complete configuration
-	/// \param[in]	json	Json configuration object to add to
+	/// @param[in]	json	Json configuration object to add to
 	virtual void	add_config(JsonObject json) {}//= 0;
 
 //=============================================================================
@@ -166,31 +166,31 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get module type
-	/// \return Module type
+	/// @return Module type
 	Type			get_module_type() { return module_type; }
 
 	/// Get the device manager class if linked
-	/// \return Pointer to the LoomManager, Null if not linked
+	/// @return Pointer to the LoomManager, Null if not linked
 	LoomManager*	get_device_manager() { return device_manager; }
 
 	/// Copy module name into buffer
-	/// \param[out]	buf	The buffer to copy module name into
+	/// @param[out]	buf	The buffer to copy module name into
 	void			get_module_name(char* buf);
 	
 	/// Get module name
-	/// \return	Module name
+	/// @return	Module name
 	const char*		get_module_name() { return module_name; }
 
 	/// Get print verbosity
-	/// \return		The current verbosity setting
+	/// @return		The current verbosity setting
 	Verbosity		get_print_verbosity() { return print_verbosity; }
 
 	/// Get package verbosity
-	/// \return		The current verbosity setting
+	/// @return		The current verbosity setting
 	Verbosity		get_package_verbosity() { return package_verbosity; }
 
 	/// Get whether or not the module should be treated as active
-	/// \return		Whether or not the module is active
+	/// @return		Whether or not the module is active
 	bool			get_active() { return active; }
 
 	/// Get the category of the module.
@@ -205,7 +205,7 @@ public:
 	/// to provide pointer both directions. 
 	/// Derived modules may override this for increased function,
 	/// such as linking a submanager or RTC module.
-	/// \param[in]	LM	LoomManager to point to
+	/// @param[in]	LM	LoomManager to point to
 	virtual void	link_device_manager(LoomManager* LM);
 
 	/// Set print verbosity 
@@ -214,11 +214,11 @@ public:
 
 	/// Set package verbosity.
 	/// Controlls level of detail included in bundles
-	/// \param[in]	v	The verbosity setting
+	/// @param[in]	v	The verbosity setting
 	void			set_package_verbosity(Verbosity v);
 
 	/// Set whether or not the module should be treated as active
-	/// \param[in]	enable	Whether or not to enable module
+	/// @param[in]	enable	Whether or not to enable module
 	void			set_active(bool enable);
 
 //=============================================================================
@@ -226,13 +226,13 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get string of name associated with verbosity enum
-	/// \param[in]	v	Verbosity value to get string representation of
-	/// \return String of verbosity
+	/// @param[in]	v	Verbosity value to get string representation of
+	/// @return String of verbosity
 	static const char*	enum_verbosity_string(Verbosity v);
 	
 	/// Get string of the category associated with a Category
-	/// \param[in]	c	Category value to get string representation of
-	/// \return String of category
+	/// @param[in]	c	Category value to get string representation of
+	/// @return String of category
 	static const char*	enum_category_string(Category c);
 
 protected:

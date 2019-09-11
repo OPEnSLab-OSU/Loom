@@ -178,12 +178,12 @@ public:
 
 	/// Loom Manager constructor.
 	///
-	/// \param[in]	device_name					String | <"Default"> | null | Manager name
-	/// \param[in]	instance					Int | <1> | [0-99] | Device instance number on its subnet
-	/// \param[in]	device_type					Set(DeviceType) | <1> | {0("Hub"), 1("Node"), 2("Repeater")} | Device's topological type
-	/// \param[in]	print_verbosity				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
-	/// \param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
-	/// \param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause/nap for
+	/// @param[in]	device_name					String | <"Default"> | null | Manager name
+	/// @param[in]	instance					Int | <1> | [0-99] | Device instance number on its subnet
+	/// @param[in]	device_type					Set(DeviceType) | <1> | {0("Hub"), 1("Node"), 2("Repeater")} | Device's topological type
+	/// @param[in]	print_verbosity				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
+	/// @param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
+	/// @param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause/nap for
 	LoomManager(
 			FactoryBase*	factory_ptr,
 			const char*		device_name			= "Device",
@@ -205,30 +205,30 @@ public:
 	void		begin_LED();
 
 	/// Begin Serial, optionally wait for user.
-	/// \param[in]	wait_for_monitor	True to wait for serial monitor to open
+	/// @param[in]	wait_for_monitor	True to wait for serial monitor to open
 	void		begin_serial(bool wait_for_monitor = false);
 
 	/// Parse a JSON configuration string specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
 	/// and added to manager lists for managing
-	/// \param[in]	json_config		Configuration
-	/// \return True if success
+	/// @param[in]	json_config		Configuration
+	/// @return True if success
 	bool		parse_config(const char* json_config);
 	
 	/// Parse a JSON configuration on SD card specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
 	/// and added to manager lists for managing.
 	/// Json should be on a single line in a .txt file.
-	/// \param[in]	json_config		Configuration
-	/// \return True if success
+	/// @param[in]	json_config		Configuration
+	/// @return True if success
 	bool		parse_config_SD(const char* config_file);
 
 	/// Parse a JSON configuration object specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
 	/// and added to manager lists for managing.
 	/// Called by parse_config and parse_config_SD
-	/// \param[in]	json_config		Configuration
-	/// \return True if success
+	/// @param[in]	json_config		Configuration
+	/// @return True if success
 	bool		parse_config_json(JsonObject config);
 
 	/// Get complete configuration of the device.
@@ -240,7 +240,7 @@ public:
 
 	/// Package data of all modules into provide JsonObject.
 	/// How detailed data is can be modified with package_verbosity
-	/// \param[out]	json	JsonObject of packaged data of enabled modules
+	/// @param[out]	json	JsonObject of packaged data of enabled modules
 	void		package(JsonObject json);
 
 	/// Measure and package data.
@@ -248,21 +248,21 @@ public:
 	void		record() { measure(); package(); }
 
 	/// Package data of all modules into JsonObject and return
-	/// \return JsonObject of packaged data of enabled modules
+	/// @return JsonObject of packaged data of enabled modules
 	JsonObject	package();
 
 	/// Publish
-	/// \param[in]	json	Data object to publish
-	/// \return True if success
+	/// @param[in]	json	Data object to publish
+	/// @return True if success
 	bool		publish_all(const JsonObject json);
 
 	/// Publish.
 	/// Calls publish_all(const JsonObject json) with interal json
-	/// \return True if success
+	/// @return True if success
 	bool		publish_all() { return publish_all(internal_json()); }
 
 	/// Iterate over list of commands, forwarding to handling module
-	/// \param[in] json		Object containing commands
+	/// @param[in] json		Object containing commands
 	void		dispatch(JsonObject json);
 
 	/// Iterate over list of commands, forwarding to handling module.
@@ -273,7 +273,7 @@ public:
 	/// You can use this instead of delay to put the device into a 
 	/// semi-low power state.
 	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
-	/// \param[in]	ms	Number of milliseconds to pause
+	/// @param[in]	ms	Number of milliseconds to pause
 	void		nap(uint16_t ms);
 
 	/// Pause for up to 16000 milliseconds.
@@ -297,10 +297,10 @@ public:
 	/// If object is non-empty and contains non-data, 
 	/// will not add and will return false.
 	/// Only call this after package, otherwise the data will be overriden
-	/// \param[in]	module	Which module to add data to (will create if it doesn't exist) 
-	/// \param[in]	key		Key of data to add
-	/// \param[in]	val		Value of data to add
-	/// \return True if success
+	/// @param[in]	module	Which module to add data to (will create if it doesn't exist) 
+	/// @param[in]	key		Key of data to add
+	/// @param[in]	val		Value of data to add
+	/// @return True if success
 	template<typename T>
 	bool add_data(const char* module, const char* key, T val)
 	{
@@ -318,9 +318,9 @@ public:
 	}
 
 	/// Get a data value from Json object of data
-	/// \param[in]	module	LoomModule key is associated with
-	/// \param[in]	key		Key of data value to find
-	/// \return Data value if found 
+	/// @param[in]	module	LoomModule key is associated with
+	/// @param[in]	key		Key of data value to find
+	/// @return Data value if found 
 	template<typename T>
 	T get_data_as(const char* module, const char* key)
 	{
@@ -337,12 +337,12 @@ public:
 	}
 
 	/// Save current configuration to SD.
-	/// \param[in]	config_file		File to save configuration to
-	/// \return True is success, false if fail or file not found
+	/// @param[in]	config_file		File to save configuration to
+	/// @return True is success, false if fail or file not found
 	// bool		save_SD_config(const char* config_file);
 
 	/// Determine if the manager has a module of the specified type
-	///	\param[in]	type	Module type to check for
+	///	@param[in]	type	Module type to check for
 	bool has_module(LoomModule::Type type);
 
 
@@ -375,32 +375,32 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get device type
-	/// \return Device type (Hub/Node)
+	/// @return Device type (Hub/Node)
 	DeviceType	get_device_type() { return device_type; }
 
 	/// Return reference to internal json object
-	/// \param[in]	clear	Whether or not to empty Json before returning it
-	/// \return Reference to internal json object
+	/// @param[in]	clear	Whether or not to empty Json before returning it
+	/// @return Reference to internal json object
 	JsonObject	internal_json(bool clear = false);
 
 	/// Get the device name, copies into provided buffer.
-	/// \param[out]	buf		The buffer copy device name into
+	/// @param[out]	buf		The buffer copy device name into
 	void 		get_device_name(char* buf);
 	
 	/// Get the device name
-	/// \return String literal of device name.
+	/// @return String literal of device name.
 	const char*	get_device_name();
 
 	/// Get device instance number.
-	/// \return Family number
+	/// @return Family number
 	uint8_t		get_instance_num() { return instance; }
 
 	/// Get print verbosity.
-	/// \return print verbosity
+	/// @return print verbosity
 	Verbosity	get_print_verbosity() { return print_verbosity; }
 
 	/// Get package verbosity.
-	/// \return package verbosity
+	/// @return package verbosity
 	Verbosity	get_package_verbosity() { return package_verbosity; }
 
 //=============================================================================
@@ -408,21 +408,21 @@ public:
 /*@{*/ //======================================================================
 
 	/// Set the device name.
-	/// \param[in]	device_name		The new device name
+	/// @param[in]	device_name		The new device name
 	void 		set_device_name(const char* device_name);
 	
 	/// Set device instance number.
-	/// \param[in]	n	New instance number
+	/// @param[in]	n	New instance number
 	void		set_instance_num(uint8_t n) { instance = n; }
 
 	/// Set print verbosity.
-	/// \param[in]	v			New print verbosity
-	/// \param[in]	set_modules	Whether or not to also apply setting to modules
+	/// @param[in]	v			New print verbosity
+	/// @param[in]	set_modules	Whether or not to also apply setting to modules
 	void		set_print_verbosity(Verbosity v, bool set_modules = false);
 		
 	/// Set package verbosity.
-	/// \param[in]	v	New package verbosity
-	/// \param[in]	set_modules	Whether or not to also apply setting to modules
+	/// @param[in]	v	New package verbosity
+	/// @param[in]	set_modules	Whether or not to also apply setting to modules
 	void		set_package_verbosity(Verbosity v, bool set_modules = false);
 
 	/// Set default time to use for .pause() \ .delay().
@@ -435,14 +435,14 @@ public:
 /*@{*/ //======================================================================
 
 	/// Flash the built in LED
-	/// \param[in]	count		Number of times to flash
-	/// \param[in]	time_high	Milliseconds to stay on for 
-	/// \param[in]	time_low	Milliseconds to stay off for 
+	/// @param[in]	count		Number of times to flash
+	/// @param[in]	time_high	Milliseconds to stay on for 
+	/// @param[in]	time_low	Milliseconds to stay off for 
 	void		flash_LED(uint8_t count, uint8_t time_high, uint8_t time_low, bool end_high=false);
 	void		flash_LED(uint8_t sequence[3]) { flash_LED(sequence[0], sequence[1], sequence[2]); }
 
 	/// Get c-string of name associated with device type enum
-	/// \return C-string of device type
+	/// @return C-string of device type
 	const static char* enum_device_type_string(DeviceType t);
 
 //=============================================================================
@@ -450,11 +450,11 @@ public:
 /*@{*/ //======================================================================
 
 	/// Auxiliary function to search a list of modules for a module of specified type
-	/// \param[in]	type	Type to search for
+	/// @param[in]	type	Type to search for
 	LoomModule*	find_module(LoomModule::Type type, uint8_t idx=0);
 
 	/// Auxiliary function to search a list of modules for a module of specified category
-	/// \param[in]	category	Category to search for
+	/// @param[in]	category	Category to search for
 	LoomModule*	find_module_by_category(LoomModule::Category category, uint8_t idx);
 
 	///////////////////////////////////////////////////////////////////////////

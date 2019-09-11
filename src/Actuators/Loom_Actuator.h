@@ -34,8 +34,8 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	/// \param[in]	module_name		Name of the module (provided by derived classes)
-	/// \param[in] 	module_type		Type of the module (provided by derived classes)
+	/// @param[in]	module_name		Name of the module (provided by derived classes)
+	/// @param[in] 	module_type		Type of the module (provided by derived classes)
 	LoomActuator( 
 			const char*			module_name, 
 			LoomModule::Type	module_type

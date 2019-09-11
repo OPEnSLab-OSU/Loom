@@ -63,7 +63,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_Ethernet( JsonArrayConst p );
 
 	/// Destructor
@@ -83,13 +83,13 @@ public:
 	void connect() override;
 
 	/// Whether or not connected to internet
-	/// \return True if connect, false otherwise
+	/// @return True if connect, false otherwise
 	bool is_connected() override { m_is_connected; }
 
 	/// Open a UDP socket for sending and recieving incoming data.
 	/// @warning Be careful about recieving data from an open socket!
-	/// \param[in]	port	Port to open socket with
-	/// \returns A UDP socket for transmitting and recieving, remember to close the socket when you are done!
+	/// @param[in]	port	Port to open socket with
+	/// @returns A UDP socket for transmitting and recieving, remember to close the socket when you are done!
 	UDPPtr open_socket(const uint port) override;
 
 //=============================================================================

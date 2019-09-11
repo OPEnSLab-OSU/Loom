@@ -43,11 +43,11 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	/// \param[in]	module_name		Name of the module (provided by derived classes)
-	/// \param[in]	module_type		Type of the module (provided by derived classes)
-	/// \param[in]	i2c_address		The i2c address of the sensor 
-	/// \param[in]	mux_portx		The port of the sensor if used with a multiplexer, 255 if not 
-	/// \param[in]	num_samples		The number of samples to take and average
+	/// @param[in]	module_name		Name of the module (provided by derived classes)
+	/// @param[in]	module_type		Type of the module (provided by derived classes)
+	/// @param[in]	i2c_address		The i2c address of the sensor 
+	/// @param[in]	mux_portx		The port of the sensor if used with a multiplexer, 255 if not 
+	/// @param[in]	num_samples		The number of samples to take and average
 	LoomI2CSensor(
 			const char*			module_name, 
 			LoomModule::Type	module_type,
@@ -75,7 +75,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get the sensor's I2C address
-	/// \return	The sensor's I2C address
+	/// @return	The sensor's I2C address
 	byte			get_i2c_address() { return i2c_address; }; 	
 
 private:

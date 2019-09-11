@@ -63,10 +63,10 @@ public:
 
 	/// Sleep Manager module constructor.
 	///
-	/// \param[in]	use_LED				Bool | <true> | {true, false} | Whether or not to use LED to indicate wake state
-	/// \param[in]	delay_on_wake		Bool | <false> | {true, false} | Whether or not to delay upon waking to allow time to open Serial Monitor
-	/// \param[in]	sleep_mode			Set(Mode) | <1> | { 0("Idle"), 1("Standby"), 2("SleepyDog"), 3("Opens Low Power")} | Which Mode to use
-	/// \param[in]	power_off_pin		Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to power off board
+	/// @param[in]	use_LED				Bool | <true> | {true, false} | Whether or not to use LED to indicate wake state
+	/// @param[in]	delay_on_wake		Bool | <false> | {true, false} | Whether or not to delay upon waking to allow time to open Serial Monitor
+	/// @param[in]	sleep_mode			Set(Mode) | <1> | { 0("Idle"), 1("Standby"), 2("SleepyDog"), 3("Opens Low Power")} | Which Mode to use
+	/// @param[in]	power_off_pin		Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to power off board
 	Loom_Sleep_Manager(
 			bool			use_LED				= true,
 			bool			delay_on_wake		= false,
@@ -76,7 +76,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_Sleep_Manager(JsonArrayConst p);
 
 	/// Destructor
@@ -92,7 +92,7 @@ public:
 
 	/// Put into low power state.
 	/// On wake, program will continue from where it went to sleep
-	/// \return Whether or not sleep was successful
+	/// @return Whether or not sleep was successful
 	bool		sleep();
 
 	/// Turn board off.
@@ -110,7 +110,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get the current sleep mode
-	/// \return		The current sleep mode
+	/// @return		The current sleep mode
 	Mode		get_sleep_mode() { return sleep_mode; }
 
 //=============================================================================
@@ -118,11 +118,11 @@ public:
 /*@{*/ //======================================================================
 
 	/// Set pointer to interrupt manager
-	/// \param[in]	IM	Pointer to an interrupt manager	
+	/// @param[in]	IM	Pointer to an interrupt manager	
 	void 		link_interrupt_manager(Loom_Interrupt_Manager* IM) { interrupt_manager = IM; }
 
 	/// Set the sleep mode to use
-	/// \param[in]	mode	The Mode to set to
+	/// @param[in]	mode	The Mode to set to
 	void		set_sleep_mode(Mode mode) { sleep_mode = mode; }
 
 //=============================================================================
@@ -132,8 +132,8 @@ public:
 	void 		link_device_manager(LoomManager* LM) override;
 
 	/// Convert enum of sleep mode to a c-string
-	/// \param[in]	m	Sleep to get string of
-	/// \return C-string of sleep mode
+	/// @param[in]	m	Sleep to get string of
+	/// @return C-string of sleep mode
 	const static char* enum_sleep_mode_string(Mode m);
 	
 private:

@@ -64,9 +64,9 @@ public:
 
 	/// Constructor
 	///
-	/// \param[in]	i2c_address				Set(Int) | <0x69> | {0x68, 0x69} | I2C address
-	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	/// \param[in]	calibrate				Bool | <true> | {true, false} | Whether or not to calibrate at start
+	/// @param[in]	i2c_address				Set(Int) | <0x69> | {0x68, 0x69} | I2C address
+	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
+	/// @param[in]	calibrate				Bool | <true> | {true, false} | Whether or not to calibrate at start
 	Loom_MPU6050(
 			byte			i2c_address		= 0x69,
 			uint8_t			mux_port		= 255,
@@ -75,7 +75,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_MPU6050(JsonArrayConst p);
 	
 	/// Destructor

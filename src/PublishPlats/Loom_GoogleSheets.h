@@ -35,12 +35,12 @@ public:
 	/// Loom Google Sheets Platform module constructor.
 	/// Check out https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets
 	/// (or http://www.open-sensing.org/evaporometerblog/datalog) for more information on these parameters.
-	/// \param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name.
-	/// \param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
-	/// \param[in]  script_url			String | <""> | null | URL where the google sheets script is hosted, without domain (ex. /macros/s/AKfycby<more letters here>_k0n/exec).
-	/// \param[in]  sheet_id			String | <""> | null |ID Of the spreadsheet to put data in (script must have edit access).
-	/// \param[in]  tab_matches_dev_id	Bool | <true> | null | Override tab_id with the name+instance number of the device. 
-	/// \param[in]  tab_id				String | <"Data"> | null | Name of the tab that the device will put data into. 
+	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name.
+	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	/// @param[in]  script_url			String | <""> | null | URL where the google sheets script is hosted, without domain (ex. /macros/s/AKfycby<more letters here>_k0n/exec).
+	/// @param[in]  sheet_id			String | <""> | null |ID Of the spreadsheet to put data in (script must have edit access).
+	/// @param[in]  tab_matches_dev_id	Bool | <true> | null | Override tab_id with the name+instance number of the device. 
+	/// @param[in]  tab_id				String | <"Data"> | null | Name of the tab that the device will put data into. 
 	Loom_GoogleSheets(	
 						const char*			module_name,
 						LoomModule::Type	internet_type,
@@ -52,7 +52,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]  p     The array of constuctor args to expand
+	/// @param[in]  p     The array of constuctor args to expand
 	Loom_GoogleSheets( JsonArrayConst p );
 
 	/// Destructor
@@ -71,9 +71,9 @@ public:
 protected:
 
 	/// Send JSON data to a google sheet
-	/// \param[in] json The JSON data, formatted according to publish();
-	/// \param[in] plat A pointer to an internet platform
-	/// \return True if success
+	/// @param[in] json The JSON data, formatted according to publish();
+	/// @param[in] plat A pointer to an internet platform
+	/// @return True if success
 	bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
 
 private:

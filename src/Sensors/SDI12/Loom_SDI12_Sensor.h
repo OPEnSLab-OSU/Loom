@@ -35,9 +35,9 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	/// \param[in]	module_name		Name of the module (provided by derived classes)
-	/// \param[in]	module_type		Type of the module (provided by derived classes)
-	/// \param[in]	num_samples		The number of samples to take and average
+	/// @param[in]	module_name		Name of the module (provided by derived classes)
+	/// @param[in]	module_type		Type of the module (provided by derived classes)
+	/// @param[in]	num_samples		The number of samples to take and average
 	LoomSDI12Sensor(	
 			const char*			module_name,
 			LoomModule::Type	module_type,

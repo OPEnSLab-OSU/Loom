@@ -92,11 +92,11 @@
 
 
 /// Creates a LoomModule with default parameters
-/// \return The created LoomModule
+/// @return The created LoomModule
 template<class T> LoomModule* ConstructDefault() { return new T(); }
 
 /// Creates a LoomModule with Json array of parameters
-/// \return The created LoomModule
+/// @return The created LoomModule
 template<class T> LoomModule* Construct(JsonArrayConst p) { return new T(p); }
 
 
@@ -268,7 +268,7 @@ public:
 	/// Creates a LoomModule with its default parameters.
 	/// Usage example:
 	///		Loom_Relay r = FactoryInst.CreateDefault<Loom_Relay>();
-	/// \return The created LoomModule
+	/// @return The created LoomModule
 	template<class T> 
 	static T* CreateDefault() { return ConstructDefault<T>(); }
 
@@ -349,8 +349,8 @@ public:
 	/// Create a module based on a subset of a Json configuration.
 	/// Needs name and parameters to the constructor as an array (or the word 'default')
 	/// if that module has default values for all parameters
-	/// \param[in]	module		Subset of a Json configuration, used to identify module to create and with what parameters
-	/// \return	LoomModule if created, nullptr if it could not be created
+	/// @param[in]	module		Subset of a Json configuration, used to identify module to create and with what parameters
+	/// @return	LoomModule if created, nullptr if it could not be created
 	LoomModule* Create(JsonVariant module)
 	{
 		const char* name = module["name"];

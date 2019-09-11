@@ -36,14 +36,14 @@ public:
 
 	/// Decagon 5TM module constructor
 	///
-	/// \param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
+	/// @param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
 	Loom_Decagon5TM(
 			uint8_t			num_samples		= 1
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_Decagon5TM(JsonArrayConst p);
 
 	/// Destructor

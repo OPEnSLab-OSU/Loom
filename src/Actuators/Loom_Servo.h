@@ -53,7 +53,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_Servo(JsonArrayConst p);
 
 	/// Destructor
@@ -68,8 +68,8 @@ public:
 	void		add_config(JsonObject json) override;
 
 	/// Set servo position.
-	/// \param[in]	servo		The servo number to control
-	/// \param[in]	degree		The position to set the servo to
+	/// @param[in]	servo		The servo number to control
+	/// @param[in]	degree		The position to set the servo to
 	void		set_degree(uint8_t servo, uint8_t degree);
 
 //=============================================================================

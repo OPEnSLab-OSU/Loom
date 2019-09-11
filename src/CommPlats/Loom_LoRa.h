@@ -59,11 +59,11 @@ public:
 
 	/// LoRa module constructor
 	///
-	/// \param[in]	max_message_len				Set(Int) | <255> | {255("Max length")} | The maximum possible message length
-	/// \param[in]	address						Int | <01> | [0-99] | This device's LoRa address
-	/// \param[in]	power_level					Int | <23> | [5-23] | Transmission power level, low to high power
-	/// \param[in]	retry_count					Int | <3> | [0-15] | Max number of transmission retries
-	/// \param[in]	retry_timeout				Int | <200>| [20-500] | Delay between retransmissions (ms)
+	/// @param[in]	max_message_len				Set(Int) | <255> | {255("Max length")} | The maximum possible message length
+	/// @param[in]	address						Int | <01> | [0-99] | This device's LoRa address
+	/// @param[in]	power_level					Int | <23> | [5-23] | Transmission power level, low to high power
+	/// @param[in]	retry_count					Int | <3> | [0-15] | Max number of transmission retries
+	/// @param[in]	retry_timeout				Int | <200>| [20-500] | Delay between retransmissions (ms)
 	Loom_LoRa(
 			uint16_t		max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
 			uint8_t			address				= 0,
@@ -74,7 +74,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_LoRa(JsonArrayConst p);
 
 	/// Destructor

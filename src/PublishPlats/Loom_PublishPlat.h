@@ -47,9 +47,9 @@ public:
 
 	/// Constructor.
 	///
-	/// \param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
-	/// \param[in]	module_type			Type of the module (provided by derived classes)
-	/// \param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
+	/// @param[in]	module_type			Type of the module (provided by derived classes)
+	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
 	LoomPublishPlat( 
 		const char*			module_name,
 		LoomModule::Type	module_type,
@@ -71,14 +71,14 @@ public:
 	void	package(JsonObject json) override { /* do nothing for now */ }
 
 	/// Publish data.
-	/// \param[in] json JSON object to publish. MUST be formatted as 
+	/// @param[in] json JSON object to publish. MUST be formatted as 
 	/// 	{ "contents" : [ { "module": "module_name", "data" : {...} }, ... ], "timestamp"(optional) : {...} }
-	/// \returns Whether or not the publish succeded
+	/// @returns Whether or not the publish succeded
 	bool	publish(const JsonObject json);
 
 	/// Version of log for use with LoomManager.
 	/// Accesses Json from LoomManager
-	/// \return True if success
+	/// @return True if success
 	bool	publish();
 
 //=============================================================================
@@ -91,9 +91,9 @@ public:
 protected:
 
 	/// Send JSON to the internet, assumes that a valid internet plat was found and can be used
-	/// \param[in]	json	Json object to send
-	/// \param[in]	plat	Internet platform to send on
-	/// \return True if success
+	/// @param[in]	json	Json object to send
+	/// @param[in]	plat	Internet platform to send on
+	/// @return True if success
 	virtual bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) = 0;
 
 	// Switch to: ?
@@ -102,11 +102,11 @@ protected:
 private:
 
 	/// Check that the JSON supplied meets the format criteria required by publish()
-	/// \param[in]	json	Json to validate
+	/// @param[in]	json	Json to validate
 	bool m_validate_json(const JsonObjectConst json);
 
 	/// Print a JSON error
-	/// \param[in]	str		Error string to print
+	/// @param[in]	str		Error string to print
 	void m_print_json_error(const char* str);
 	
 };

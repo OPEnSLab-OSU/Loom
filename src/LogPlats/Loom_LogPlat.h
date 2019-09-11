@@ -40,10 +40,10 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	/// \param[in]	module_name			Name of the module (provided by derived classes)
-	/// \param[in] 	module_type			Type of the module (provided by derived classes)
-	/// \param[in] 	enable_rate_filter	Whether or not to impose maximum update rate
-	/// \param[in] 	min_filter_delay	Minimum update delay, if enable_rate_filter enabled
+	/// @param[in]	module_name			Name of the module (provided by derived classes)
+	/// @param[in] 	module_type			Type of the module (provided by derived classes)
+	/// @param[in] 	enable_rate_filter	Whether or not to impose maximum update rate
+	/// @param[in] 	min_filter_delay	Minimum update delay, if enable_rate_filter enabled
 	LoomLogPlat(	
 			const char*			module_name,
 			LoomModule::Type	module_type,
@@ -63,7 +63,7 @@ public:
 	virtual void 	package(JsonObject json) override {}
 
 	/// Log a Json object
-	/// \param[in] json		Json Object to log
+	/// @param[in] json		Json Object to log
 	virtual void	log(JsonObject json) = 0;
 
 	/// Version of log for use with LoomManager.
@@ -81,7 +81,7 @@ protected:
 
 	/// Check against millis to determine if time since last
 	/// log exceeds min time 
-	/// \return True if enough time has elapsed
+	/// @return True if enough time has elapsed
 	bool			check_millis();
 
 };

@@ -53,9 +53,9 @@ public:
 
 	/// Constructor.
 	///
-	/// \param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
-	/// \param[in]	module_type			Type of the module (provided by derived classes)
-	/// \param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
+	/// @param[in]	module_type			Type of the module (provided by derived classes)
+	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
 	LoomSubscribePlat( 
 		const char*			module_name,
 		LoomModule::Type	module_type,
@@ -73,13 +73,13 @@ public:
 /*@{*/ //======================================================================
 
 	/// Request / try to receive data from platform subscribed to 
-	/// \param[out]	json	Received data 
-	/// \return True if received anything
+	/// @param[out]	json	Received data 
+	/// @return True if received anything
 	virtual bool	subscribe(JsonObject json) = 0;
 
 	/// Version of log for use with LoomManager.
 	/// Accesses Json from LoomManager
-	/// \return True if received anything
+	/// @return True if received anything
 	bool			subscribe();
 
 //=============================================================================

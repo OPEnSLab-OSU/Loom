@@ -19,9 +19,9 @@
 ///   1: every element on different line
 ///   2: every element on same line
 ///   3: 5 elements per line
-/// \param[in]	data	Array to print
-/// \param[in]	len		Length of array
-/// \param[in]	format	Display formatting
+/// @param[in]	data	Array to print
+/// @param[in]	len		Length of array
+/// @param[in]	format	Display formatting
 template<typename T> 
 void print_array(T data [], int len, int format=1)
 {
