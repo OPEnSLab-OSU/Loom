@@ -130,7 +130,6 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 			LPrintln("Neopixel not enabled on port ", port);
 		}
 	}
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

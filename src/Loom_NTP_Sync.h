@@ -63,7 +63,7 @@ public:
 	/// Allows the module to run regularly by emulating a sensor, which have
 	/// thier measure methods called regularly.
 	void		measure();
-	void 		package(JsonObject json) override { /* do nothing */ };
+	void		package(JsonObject json) override { /* do nothing */ };
 	bool		dispatch(JsonObject) override { /* do nothing */}
 
 //=============================================================================

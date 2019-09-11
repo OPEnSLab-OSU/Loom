@@ -139,7 +139,6 @@ void Loom_AS7265X::measure()
 	nir[5] = inst_AS7265X.getCalibratedW();
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7265X::package(JsonObject json)
 {
@@ -164,8 +163,6 @@ void Loom_AS7265X::package(JsonObject json)
 	data["u"] = nir[3];
 	data["v"] = nir[4];
 	data["w"] = nir[5];
-
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

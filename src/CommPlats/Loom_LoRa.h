@@ -42,14 +42,14 @@ class Loom_LoRa : public LoomCommPlat
 
 protected:
 
-	RH_RF95				driver;				///<	Underlying rf95 object
-	RHReliableDatagram*	manager;			///< Manager for driver
+	RH_RF95				driver;			///< Underlying rf95 object
+	RHReliableDatagram*	manager;		///< Manager for driver
 
-	uint8_t				address;			///< Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
+	uint8_t				address;		///< Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
 
-	uint8_t				power_level;		///< Power level to send at
-	uint8_t				retry_count;		///< Number of transmission retries allowed
-	uint16_t			retry_timeout;		///< Delay between transmission retries (in milliseconds)
+	uint8_t				power_level;	///< Power level to send at
+	uint8_t				retry_count;	///< Number of transmission retries allowed
+	uint16_t			retry_timeout;	///< Delay between transmission retries (in milliseconds)
 
 public:
 

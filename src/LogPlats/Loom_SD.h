@@ -16,8 +16,6 @@
 #include <SD.h>
 #include "../RTC/Loom_RTC.h"
 
-// Forward declare existence of RTC class
-// class LoomRTC;
 
 // See if there is any difference to use the SD breakout
 // enum SD_Version { FEATHERWING, BREAKOUT };
@@ -39,7 +37,6 @@ class Loom_SD : public LoomLogPlat
 
 protected:
 
-		// File sdFile;
 		byte		chip_select;		///< Chip select pin
 		bool		sd_found;			///< Whether or not the SD hardware was found
 		char		default_file[16];	///< String of file to write to if not filename explicitly provided

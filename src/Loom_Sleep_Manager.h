@@ -88,7 +88,7 @@ public:
 
 	/// No package necessary.
 	/// Implement with empty body.
-	void 		package(JsonObject json) override {}
+	void		package(JsonObject json) override {}
 
 	/// Put into low power state.
 	/// On wake, program will continue from where it went to sleep

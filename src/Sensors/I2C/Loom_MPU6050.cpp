@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_MPU6050.h"
 
 // Unfortunately cannot be inside Loom_MPU6050 class
@@ -64,9 +65,6 @@ void Loom_MPU6050::print_measurements()
 	LPrintln("\troll  : ", angleX);
 	LPrintln("\tpitch : ", angleY);
 	LPrintln("\tyaw   : ", angleZ);
-	// LPrintln("\tangleX : ", angleX);
-	// LPrintln("\tangleY : ", angleY);
-	// LPrintln("\tangleZ : ", angleZ);
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		LPrintln("\ttemp       : ", temp);
@@ -124,9 +122,6 @@ void Loom_MPU6050::package(JsonObject json)
 	data["roll"] = angleX;
 	data["pitch"] = angleY;
 	data["yaw"] = angleZ;
-	// data["angx"] = angleX;
-	// data["angy"] = angleY;
-	// data["angz"] = angleZ;
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		data["temp"]		= 	temp;

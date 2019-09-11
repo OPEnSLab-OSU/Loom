@@ -49,7 +49,7 @@ public:
 	/// @param[in]	mux_portx		The port of the sensor if used with a multiplexer, 255 if not 
 	/// @param[in]	num_samples		The number of samples to take and average
 	LoomI2CSensor(
-			const char*			module_name, 
+			const char*			module_name,
 			LoomModule::Type	module_type,
 			byte				i2c_address,
 			uint8_t				mux_port	= 255,	// Default to 255 (not on mux)

@@ -185,9 +185,6 @@ void Loom_nRF::broadcast(JsonObject json)
 void Loom_nRF::set_address(uint8_t addr)    // Need to test this
 { 
 	address = addr;
-	// delete network;
-
-	// network = new RF24Network(*radio);
 	network->begin(90, address);
 }
 

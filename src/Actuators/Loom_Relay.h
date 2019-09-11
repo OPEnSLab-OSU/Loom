@@ -57,7 +57,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
 	void		add_config(JsonObject json) override;
 

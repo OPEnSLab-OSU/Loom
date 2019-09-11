@@ -16,8 +16,8 @@
 #include <RF24Network.h>
 #include <RF24.h>
 
-/// Max nRF message size
-#define NRF_MESSAGE_SIZE 120
+
+#define NRF_MESSAGE_SIZE 120	///< Max nRF message size
 
 
 ///////////////////////////////////////////////////////////////////////////////

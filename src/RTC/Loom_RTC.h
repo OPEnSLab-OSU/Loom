@@ -118,16 +118,16 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void 	print_config() override;
-	virtual void 	print_state() override;
+	virtual void	print_config() override;
+	virtual void	print_state() override;
 
 	/// Print an arbitrary DateTime object
 	/// @param[in]	time	Time to print
-	static void 	print_DateTime(DateTime time);
+	static void		print_DateTime(DateTime time);
 
 	/// Print the current time
 	/// @param[in]	verbose		True for multile lines, false for short display
-	void 			print_time(bool verbose=false);
+	void			print_time(bool verbose=false);
 
 //=============================================================================
 ///@name	GETTERS

@@ -76,7 +76,6 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
 	void		print_state() override;
 
 private:

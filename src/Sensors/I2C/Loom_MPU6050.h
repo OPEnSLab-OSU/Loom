@@ -50,7 +50,7 @@ protected:
 
 	float gyroAngleX;		///< X-axis acceleration angle
 	float gyroAngleY;		///< Y-axis acceleration angle
-	float gyroAngleZ; 		///< Z-axis acceleration angle
+	float gyroAngleZ;		///< Z-axis acceleration angle
 
 	float angleX;			///< X-axis angle
 	float angleY;			///< Y-axis angle
@@ -86,7 +86,7 @@ public:
 /*@{*/ //======================================================================
 
 	void		measure() override;
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
 	void		calibrate() override;
 
 //=============================================================================
@@ -95,21 +95,6 @@ public:
 
 	void		print_state() override;
 	void		print_measurements() override;
-
-//=============================================================================
-///@name	GETTERS
-/*@{*/ //======================================================================
-
-
-//=============================================================================
-///@name	SETTERS
-/*@{*/ //======================================================================
-
-
-//=============================================================================
-///@name	MISCELLANEOUS
-/*@{*/ //======================================================================
-
 
 private:
 

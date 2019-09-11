@@ -50,10 +50,10 @@ public:
 
 	/// Constructor
 	///
-	/// @param[in]	i2c_address				Set(Int) | <0x29> | {0x29} | I2C address
-	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	/// @param[in]	gain_level				Set(Int) | <1> | { 1 } | Gain level
-	/// @param[in]	timing_level			Set(Int) | <0> | { 0 } | Timing level
+	/// @param[in]	i2c_address			Set(Int) | <0x29> | {0x29} | I2C address
+	/// @param[in]	mux_port			Int | <255> | [0-16] | Port on multiplexer
+	/// @param[in]	gain_level			Set(Int) | <1> | { 1 } | Gain level
+	/// @param[in]	timing_level		Set(Int) | <0> | { 0 } | Timing level
 	Loom_TSL2591(
 			byte			i2c_address			= 0x29,
 			uint8_t			mux_port			= 255,
@@ -74,7 +74,7 @@ public:
 /*@{*/ //======================================================================
 
 	void		measure() override;
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

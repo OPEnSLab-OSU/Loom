@@ -29,7 +29,7 @@ class Loom_MB1232 : public LoomI2CSensor
 
 protected:
 
-	uint16_t range;		///< Measure distance (cm)
+	uint16_t	range;		///< Measure distance (cm)
 
 public:
 	
@@ -59,7 +59,7 @@ public:
 /*@{*/ //======================================================================
 
 	void		measure() override;
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

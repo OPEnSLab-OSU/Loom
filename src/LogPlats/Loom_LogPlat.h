@@ -47,9 +47,9 @@ public:
 	LoomLogPlat(	
 			const char*			module_name,
 			LoomModule::Type	module_type,
-			bool				enable_rate_filter 	= true,
-			uint16_t			min_filter_delay 	= 1000
-	   );
+			bool				enable_rate_filter	= true,
+			uint16_t			min_filter_delay	= 1000
+		);
 
 	/// Destructor
 	virtual ~LoomLogPlat() = default;

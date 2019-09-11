@@ -81,8 +81,6 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-
 	/// Override with empty body as no state to print
 	void		print_state() override {}
 

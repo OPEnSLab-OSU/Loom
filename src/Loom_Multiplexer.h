@@ -100,7 +100,7 @@ public:
 	/// Call measure on all connected sensors
 	void		measure();
 	
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
 	bool		dispatch(JsonObject) override {}
 
 	/// Populate a bundle with a list of sensors currently attached

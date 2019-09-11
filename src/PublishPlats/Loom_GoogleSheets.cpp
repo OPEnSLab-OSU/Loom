@@ -8,8 +8,10 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_GoogleSheets.h"
 #include "../Loom_Manager.h"
+
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(
@@ -26,7 +28,7 @@ Loom_GoogleSheets::Loom_GoogleSheets(
 	, tab_matches_dev_id(tab_matches_dev_id)
 	, m_tab_id(tab_id)
 {   
-	/// Build the begining of the Google Sheets URL with all of the provided parameters
+	// Build the begining of the Google Sheets URL with all of the provided parameters
 	print_module_label();
 	LPrint("Google sheets ready with url: ", m_script_url, '\n');
 } 

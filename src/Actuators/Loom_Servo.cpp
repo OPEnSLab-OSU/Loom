@@ -11,10 +11,8 @@
 
 #include "Loom_Servo.h"
 
-/// This is the 'minimum' pulse length count (out of 4096)
-#define SERVOMIN  150	
-/// This is the 'maximum' pulse length count (out of 4096)
-#define SERVOMAX  600	
+#define SERVOMIN  150	///< This is the 'minimum' pulse length count (out of 4096)
+#define SERVOMAX  600	///< This is the 'maximum' pulse length count (out of 4096)
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -36,12 +34,6 @@ void Loom_Servo::add_config(JsonObject json)
 	// add_config_aux(json, module_name,
 	// 	module_name, servo_count
 	// );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_Servo::print_config() 
-{
-	LoomModule::print_config();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

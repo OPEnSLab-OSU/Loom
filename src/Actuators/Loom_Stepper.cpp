@@ -47,12 +47,6 @@ void Loom_Stepper::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Stepper::print_config() 
-{
-	LoomModule::print_config();
-}
-
-///////////////////////////////////////////////////////////////////////////////
 bool Loom_Stepper::dispatch(JsonObject json)
 {
 	JsonArray params = json["params"];
