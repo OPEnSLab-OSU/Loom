@@ -8,17 +8,23 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_RTC.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomRTC) | dependencies: [] | conflicts: []
-/// PCF8523 RTC module
-// ###
+///
+/// PCF8523 RTC module.
+///
+/// OPEnS Lab usually uses the PCF8523 on the Adafruit Adalogger Featherwing
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___p_c_f8523.html)
+/// - [Product Page: Adafruit Adalogger Featherwing - RTC + SD](https://www.adafruit.com/product/2922)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_PCF8523 : public LoomRTC
 {
 

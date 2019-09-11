@@ -9,13 +9,14 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Module.h"
 #include "Sensors/I2C/Loom_I2C_Sensor.h"
 
 
-// // I2C Address Conflict Selection
+/// I2C Address Conflict Selection
 enum class I2C_Selection {
 	L_TSL2561,		///< TSL2561
 	L_TSL2591,		///< TSL2591
@@ -38,12 +39,13 @@ const I2C_Selection i2c_0x49 = I2C_Selection::L_AS7265X;	///< TSL2561 / AS7262 /
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
-/// Multiplexer manager for interfacing with
-/// multiple I2C sensors
-// ###
+///
+/// Multiplexer manager for interfacing with multiple I2C sensors
+///
+/// @par Resources
+/// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___multiplexer.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_Multiplexer : public LoomModule
 {
 private:
@@ -95,7 +97,9 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+	/// Call measure on all connected sensors
 	void		measure();
+	
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject) override {}
 

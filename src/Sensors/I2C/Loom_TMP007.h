@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
@@ -16,11 +17,15 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// TMP007 thermopile temperature sensor module
-// ###
+///
+/// TMP007 thermopile temperature sensor module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___t_m_p007.html)
+/// - [Product Page: Contact-less Infrared Thermopile Sensor Breakout - TMP007](https://www.adafruit.com/product/2023)
+/// - [Dependency: Adafruit_TMP007_Library](https://github.com/adafruit/Adafruit_TMP007_Library)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_TMP007 : public LoomI2CSensor
 {
 

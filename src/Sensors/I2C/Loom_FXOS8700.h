@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
@@ -16,11 +17,18 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// FXOS8700 3-Axis Acceleromter/Magnetometer sensor module
-// ###
+///
+/// FXOS8700 3-Axis Acceleromter/Magnetometer sensor module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___f_x_o_s8700.html)
+/// - [Product Page: Adafruit Precision NXP 9-DOF Breakout Board - FXOS8700 + FXAS21002](https://www.adafruit.com/product/3463)
+/// - [Dependency: Adafruit_FXOS8700](https://github.com/adafruit/Adafruit_FXOS8700)
+/// - [Dependency: Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS)
+/// - [Dependency: Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+/// - [Datasheet: FXOS8700CQ](https://cdn-learn.adafruit.com/assets/assets/000/043/458/original/FXOS8700CQ.pdf?1499125614)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_FXOS8700 : public LoomI2CSensor
 {
 
@@ -37,7 +45,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// FXOS8700 module constructor
+	/// Constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x1F> | {0x1C, 0x1D, 0x1E, 0x1F} | I2C address
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer

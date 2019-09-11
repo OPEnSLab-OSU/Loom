@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Module.h"
@@ -24,11 +25,13 @@ class Loom_Interrupt_Manager;
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
-/// Submanager to manage sleep functionality
-// ###
+///
+/// Submanager to manage sleep functionality.
+///
+/// @par Resources
+/// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___sleep___manager.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_Sleep_Manager : public LoomModule
 {
 

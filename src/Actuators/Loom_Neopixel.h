@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Actuator.h"
@@ -16,11 +17,15 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomActuator) | dependencies: [] | conflicts: []
+///
 /// Neopixel tri-color LED actuator module
-// ###
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___neopixel.html)
+/// - [Product Page: Adafruit Neopixel](https://www.adafruit.com/category/168)
+/// - [Dependency](https://github.com/adafruit/Adafruit_NeoPixel)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_Neopixel : public LoomActuator
 {
 
@@ -39,9 +44,9 @@ public:
 
 	/// Constructor
 	///
-	/// \param[in]	enableA0			Bool | <false> | {true, false} | Whether or not to use pin A0 for Neopixel
-	/// \param[in]	enableA1			Bool | <false> | {true, false} | Whether or not to use pin A1 for Neopixel
-	/// \param[in]	enableA2			Bool | <true> | {true, false} | Whether or not to use pin A2 for Neopixel
+	/// \param[in]	enableA0		Bool | <false> | {true, false} | Whether or not to use pin A0 for Neopixel
+	/// \param[in]	enableA1		Bool | <false> | {true, false} | Whether or not to use pin A1 for Neopixel
+	/// \param[in]	enableA2		Bool | <true> | {true, false} | Whether or not to use pin A2 for Neopixel
 	Loom_Neopixel(
 			bool			enableA0		= false,
 			bool			enableA1		= false,

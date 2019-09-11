@@ -8,17 +8,21 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_PublishPlat.h"
-#include "ArduinoJson.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
+///
 /// Module taking in and translating JSON into data understood by the Google Sheets script API.
-// ###
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___google_sheets.html)
+/// - [wiki: Using Loom with Google Sheets](https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_GoogleSheets : public LoomPublishPlat 
 {
 
@@ -80,9 +84,9 @@ private:
 	// use dynamic memory to store the varibles from the user
 	// since most of these strings will be smaller than the maximum size
 
-	const String m_script_url;	///< ID of Google script 
-	const String m_sheet_id;	///< ID of Google Sheets spreadsheet 
-	const String m_tab_id;		///< Name of tab of spreadsheet 
+	const String m_script_url;		///< ID of Google script 
+	const String m_sheet_id;		///< ID of Google Sheets spreadsheet 
+	const String m_tab_id;			///< Name of tab of spreadsheet 
 
 	const bool tab_matches_dev_id;	///< Whether or not tab of spreadsheet should be based on device name + instance
 

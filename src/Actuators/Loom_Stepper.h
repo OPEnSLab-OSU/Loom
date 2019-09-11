@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Actuator.h"
@@ -22,11 +23,18 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomActuator) | dependencies: [] | conflicts: []
-/// Stepper actuator module
-// ###
+///
+/// Stepper actuator module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___stepper.html)
+/// - [Product Page: Adafruit Stepper Feather](https://www.adafruit.com/product/2927)
+/// - [Dependency: Adafruit-PWM-Servo-Driver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
+/// - [Dependency: Adafruit_Motor_Shield_V2_Library](https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library)
+/// - [Datasheet: Motor Driver](https://cdn-shop.adafruit.com/datasheets/TB6612FNG_datasheet_en_20121101.pdf)
+/// - [Product Page: Adafruit Stepper Motor](https://www.adafruit.com/product/324)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_Stepper : public LoomActuator
 {
 

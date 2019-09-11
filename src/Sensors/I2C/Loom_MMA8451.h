@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
@@ -15,12 +16,19 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_MMA8451.h>
 
+
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// MMA8451 accelerometer
-// ###
+///
+/// MMA8451 accelerometer sensor module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___m_m_a8451.html)
+/// - [Product Page: Adafruit Triple-Axis Accelerometer - ±2/4/8g @ 14-bit - MMA8451](https://www.adafruit.com/product/2019)
+/// - [Dependency: Adafruit_MMA8451_Library](https://github.com/adafruit/Adafruit_MMA8451_Library)
+/// - [Dependency: Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+/// - [Datasheet: Xtrinsic MMA8451Q 3-Axis, 14-bit/8-bit Digital Accelerometer](https://cdn-shop.adafruit.com/datasheets/MMA8451Q-1.pdf)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_MMA8451 : public LoomI2CSensor
 {
 

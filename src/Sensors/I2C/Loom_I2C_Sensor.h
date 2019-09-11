@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "../Loom_Sensor.h"
@@ -15,16 +16,20 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-/// Abstract root for I2C sensor modules
+///
+/// Abstract root for I2C sensor modules.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_i2_c_sensor.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomI2CSensor : public LoomSensor
 {
 
 protected:
 	
 	/// The sensor's I2C address.
-	/// If the sesnor supports mutliple, make sure this matches
+	/// If the sensor supports mutliple, make sure this matches
 	/// the current configuration of the i2c address 
 	byte	i2c_address;	
 

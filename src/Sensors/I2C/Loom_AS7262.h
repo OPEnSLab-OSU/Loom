@@ -8,19 +8,27 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
 
-#include "AS726X.h"
+#include <AS726X.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// AS7262 Visible spectrum spectral sensor module
-// ###
+///
+/// AS7262 Visible spectrum spectral sensor module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___a_s7262.html)
+/// - [Product Page: SparkFun Spectral Sensor Breakout - AS7262 Visible](https://www.sparkfun.com/products/14347)
+/// - [Dependency: Sparkfun AS726X Arduino Library](https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X/tree/master/Libraries/Arduino)
+/// - [Hookup Guide: AS726X NIR/VIS Spectral Sensor](https://learn.sparkfun.com/tutorials/as726x-nirvi)
+/// - [Hardware GitHub](https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X)
+/// - [Datasheet: AS7262](https://cdn.sparkfun.com/assets/f/b/c/c/f/AS7262.pdf)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_AS7262 : public LoomI2CSensor
 {
 
@@ -41,7 +49,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// AS7262 module constructor
+	/// Constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x49> | {0x49} | I2C address
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer

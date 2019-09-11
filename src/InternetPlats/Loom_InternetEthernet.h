@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_InternetPlat.h"
@@ -16,11 +17,18 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
+///
 /// InternetPlat built off of SSLClient running over an Ethernet Featherwing.
-/// Requires 7KB of free SRAM at runtime to use.
-// ###
+/// 
+/// @attention	Requires 7KB of free SRAM at runtime to use.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___ethernet.html)
+/// - [Product Page: Adafruit Ethernet Featherwing](https://www.adafruit.com/product/3201)
+/// - [Dependency: EthernetLarge](https://github.com/OPEnSLab-OSU/EthernetLarge) OPEbS Lab fork of Arduino Ethernet library
+/// - [Dependency: SSLClient](https://github.com/OPEnSLab-OSU/SSLClient)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_Ethernet : public LoomInternetPlat
 {
 
@@ -78,7 +86,8 @@ public:
 	/// \return True if connect, false otherwise
 	bool is_connected() override { m_is_connected; }
 
-	/// Open a UDP socket for sending and recieving incoming data (WARNING: Be careful about recieving data from an open socket!)
+	/// Open a UDP socket for sending and recieving incoming data.
+	/// @warning Be careful about recieving data from an open socket!
 	/// \param[in]	port	Port to open socket with
 	/// \returns A UDP socket for transmitting and recieving, remember to close the socket when you are done!
 	UDPPtr open_socket(const uint port) override;

@@ -8,18 +8,26 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Module.h"
 #include "./InternetPlats/Loom_InternetPlat.h"
 #include "./RTC/Loom_RTC.h"
 
+
+///////////////////////////////////////////////////////////////////////////////
+///
+/// Glue code to synchronize an RTC using an InternetPlat. 
+/// Always synchronizes the RTC from Loom_Interrupt_Manager::get_RTC_module().
+///
+/// @note	Requires a LoomRTC and LoomInternetPlat module to work.
+///
+/// @par Resources
+/// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom_n_t_p_sync.html)
+///
 ///////////////////////////////////////////////////////////////////////////////
 
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
-/// Glue code to synchronize an RTC using an InternetPlat. Always synchronizes the RTC from Loom_Interrupt_Manager::get_RTC_module().
-// ###
 class LoomNTPSync : public LoomModule
 {
 

@@ -8,12 +8,21 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_PublishPlat.h"
 #include "ArduinoJson.h"
 
 
+///////////////////////////////////////////////////////////////////////////////
+///
+/// Loom Spool publishing platform.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___spool_publish.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_SpoolPublish : public LoomPublishPlat 
 {
 	
@@ -23,7 +32,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// Loom Spool publishing platform
+	/// Constructor
 	Loom_SpoolPublish(
 			const char* module_name,
 			const LoomModule::Type	internet_type,
@@ -48,13 +57,12 @@ public:
 	
 protected:
 	
-	// remember to close the socket!
+	/// @warning	Remember to close the socket!
 	bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
 	
 private:
 
-	// the spool url
-	const String m_spool_domain;
+	const String m_spool_domain;			///< The Spool URL
 	const String m_device_data_endpoint;
 	const String m_device_id;
 

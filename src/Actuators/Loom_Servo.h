@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Actuator.h"
@@ -21,11 +22,17 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomActuator) | dependencies: [] | conflicts: []
+///
 /// Servo actuator module
-// ###
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___servo.html)
+/// - [Product Page: Adafruit Servo Featherwing](https://www.adafruit.com/product/2928)
+/// - [Dependency: Adafruit-PWM-Servo-Driver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
+/// - [Datasheet](https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf)
+/// - [Product Page: Adafruit Servo](https://www.adafruit.com/product/169)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_Servo : public LoomActuator
 {
 

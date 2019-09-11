@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_LogPlat.h"
@@ -16,11 +17,17 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomLogPlat) | dependencies: [] | conflicts: []
+///
 /// OLED logging platform module.
-// ###
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___o_l_e_d.html)
+/// - [Product Page: Adafruit Featherwing OLED – 128x32](https://www.adafruit.com/product/2900)
+/// - [Product Page: Adafruit Monochrome 128x32 I2C OLED](https://www.adafruit.com/product/2927)
+/// - [Dependency: Adafruit_SSD1306](https://github.com/adafruit/Adafruit_SSD1306)
+/// - [Dependency: Adafruit-GFX-Library](https://github.com/adafruit/Adafruit-GFX-Library)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_OLED : public LoomLogPlat
 {
 

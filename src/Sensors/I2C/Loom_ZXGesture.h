@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
@@ -16,11 +17,18 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// ZXGesture position / gesture sensor module
-// ###
+///
+/// ZXGesture position / gesture sensor module.
+///
+/// @note	Only position or gestures can be measured at a given time, not both.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___z_x_gesture.html)
+/// - [Product Page: Sparkfun ZX Distance and Gesture Sensor](https://www.sparkfun.com/products/13162)
+/// - [Dependency: SparkFun ZX Distance and Gesture Sensor Arduino Library](https://github.com/sparkfun/SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library)
+/// - [Datasheet: ZX SparkFun Sensor Datasheet](https://cdn.sparkfun.com/assets/learn_tutorials/3/4/5/XYZ_Interactive_Technologies_-_ZX_SparkFun_Sensor_Datasheet.pdf)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_ZXGesture : public LoomI2CSensor
 {
 
@@ -34,23 +42,12 @@ public:
 
 protected:
 
-	/// Underlying ZX sensor manager instance
-	ZX_Sensor		inst_ZX;
-
-	/// Sensor mode (read positions or gesture - mutually exclusive)
-	Mode			mode;
-
-	/// Measured positions (x, y pos)
-	uint8_t			pos[2];
-
-	/// Last read gesture type
-	GestureType		gesture;
-
-	/// String labelling last read gesture type
-	String			gesture_type;
-	
-	/// The speed of the last measured gesture
-	uint8_t			gesture_speed;
+	ZX_Sensor		inst_ZX;		///< Underlying ZX sensor manager instance
+	Mode			mode;			///< Sensor mode (read positions or gesture - mutually exclusive)
+	uint8_t			pos[2];			///< Measured positions (x, y pos)
+	GestureType		gesture;		///< Last read gesture type
+	String			gesture_type;	///< String labelling last read gesture type
+	uint8_t			gesture_speed;	///< The speed of the last measured gesture
 
 public:
 	
@@ -58,7 +55,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// ZXGesture module constructor
+	/// Constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x10> | {0x10, 0x11} | I2C address
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer

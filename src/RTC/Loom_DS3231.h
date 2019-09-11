@@ -8,17 +8,22 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_RTC.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
+///
+/// DS3231 RTC module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___d_s3231.html)
+/// - [Product Page: Adafruit DS3231 Precision RTC FeatherWing](https://www.adafruit.com/product/3028)
+///
+///////////////////////////////////////////////////////////////////////////////
 
-
-// ### (LoomRTC) | dependencies: [] | conflicts: []
-/// DS3231 RTC module
-// ###
 class Loom_DS3231 : public LoomRTC
 {
 

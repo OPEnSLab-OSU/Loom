@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_SPI_Sensor.h"
@@ -16,11 +17,15 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomSPISensor) | dependencies: [] | conflicts: []
+///
 /// MAX31855 thermocouple temperature module.
-// ###
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___m_a_x31856.html)
+/// - [Product Page: Thermocouple Amplifier MAX31855 breakout board](https://www.adafruit.com/product/269)
+/// - [Dependency: Adafruit-MAX31855-library](https://github.com/adafruit/Adafruit-MAX31855-library)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_MAX31855 : public LoomSPISensor
 {
 

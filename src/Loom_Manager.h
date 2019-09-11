@@ -8,12 +8,12 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Misc.h"
 #include "Loom_Translator.h"
 #include "Loom_Module.h"
-
 #include "Loom_Module_Factory.h"
 
 #include <ArduinoJson.h>
@@ -107,17 +107,20 @@ class FactoryBase;
 
 
 
-#define SERIAL_BAUD		115200
-#define MAX_SERIAL_WAIT	20000	/// Maximum number of milliseconds to wait for user given 'begin_serial(true)'
-#define SD_CS			10
+#define SERIAL_BAUD		115200	///< Serial Baud Rate
+#define MAX_SERIAL_WAIT	20000	///< Maximum number of milliseconds to wait for user given 'begin_serial(true)'
+#define SD_CS			10		///< SD chip select used in parse_config_SD(). 
+								///< You can still instantiate a Loom_SD module with a different chip select 
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### () | dependencies: [] | conflicts: []
-/// Manager class to simplify with enabled modules
-// ###
+///
+/// Manager to contain Loom modules and provide users with a simpler API.
+///
+/// @par Resources
+/// - [LoomManager Documentation](https://openslab-osu.github.io/Loom/html/class_loom_manager.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomManager
 {
 

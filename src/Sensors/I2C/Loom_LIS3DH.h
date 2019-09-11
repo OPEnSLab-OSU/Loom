@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
@@ -16,12 +17,20 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
+///
 /// LIS3DH Accelerometer sensor module.
-/// Needs more work on properly implementing support for the sensors interrupts 
-// ###
+///
+/// @note	Needs more work on properly implementing support for the sensors interrupts 
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___l_i_s3_d_h.html)
+/// - [Product Page: SparkFun Triple Axis Accelerometer Breakout - LIS3DH](https://www.sparkfun.com/products/13963)
+/// - [Dependency: Sparkfun LIS3DH Arduino Library](https://github.com/sparkfun/SparkFun_LIS3DH_Arduino_Library)
+/// - [Hookup Guide: LIS3DH](https://learn.sparkfun.com/tutorials/lis3dh-hookup-guide)
+/// - [Hardware GitHub](https://github.com/sparkfun/LIS3DH_Breakout)
+/// - [Datasheet: LIS3DH](https://cdn.sparkfun.com/assets/f/b/c/c/f/AS7262.pdf)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_LIS3DH : public LoomI2CSensor
 {
 
@@ -37,7 +46,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// LIS3DH module constructor
+	/// Constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x19> | {0x19} | I2C address
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer

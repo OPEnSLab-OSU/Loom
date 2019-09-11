@@ -8,17 +8,20 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_SDI12_Sensor.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomSDI12Sensor) | dependencies: [] | conflicts: []
-/// Decagon 5TM soil moisture sensor module
-// ###
+///
+/// Decagon 5TM soil moisture sensor module. Incomplete.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___decagon5_t_m.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_Decagon5TM : public LoomSDI12Sensor
 {
 

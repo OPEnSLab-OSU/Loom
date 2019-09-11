@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_LogPlat.h"
@@ -23,11 +24,16 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomLogPlat) | dependencies: [] | conflicts: []
-/// SD logging platform module
-// ###
+///
+/// SD logging platform module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___s_d.html)
+/// - [Product Page: Adafruit Adalogger Featherwing](https://www.adafruit.com/product/2922)
+/// - [Product Page: Adafruit SD Breakout](https://www.adafruit.com/product/254)
+/// - [Dependency: SD](https://github.com/arduino-libraries/SD)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_SD : public LoomLogPlat
 {
 

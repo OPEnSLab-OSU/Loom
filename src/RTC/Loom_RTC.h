@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Module.h"
@@ -16,9 +17,14 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-/// Abstract base of RTC modules
+///
+/// Abstract base class of RTC modules.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_r_t_c.html)
+/// - [Dependency: OPEnS_RTC](https://github.com/OPEnSLab-OSU/OPEnS_RTC)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomRTC : public LoomModule
 {
 

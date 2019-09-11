@@ -8,17 +8,27 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Module.h"
 
+
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
+///
 /// Used to synchronize temperatures between sensors that read sensors
-/// and modules that need it
-// ###
+/// and modules that need it.
+///
+/// @note	Sources include:
+///	- Loom_MS5803 (code: 2110)
+///	- Loom_SHT31D (code: 2111)
+/// @note	Dependants include:
+///	- Loom_Analog (code 2001)
+///
+/// @par Resources
+/// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom_temp_sync.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomTempSync : public LoomModule
 {
 

@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_CommPlat.h"
@@ -16,9 +17,9 @@
 #include <RHReliableDatagram.h>
 
 // LoRa Chip pins
-#define RFM95_CS  8		/// LoRa hip select pin
-#define RFM95_RST 4		/// LoRa reset pin
-#define RFM95_INT 3		/// LoRa interrupt pin
+#define RFM95_CS  8		//< LoRa hip select pin
+#define RFM95_RST 4		///< LoRa reset pin
+#define RFM95_INT 3		///< LoRa interrupt pin
 
 /// LoRa radio frequence.
 /// Hardware specific, Tx must match Rx
@@ -26,11 +27,16 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomCommPlat) | dependencies: [] | conflicts: []
-/// LoRa communication platform module
-// ###
+///
+/// LoRa communication platform module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___lo_ra.html)
+/// - [Product Page: Adafruit Feather M0 LoRa](https://www.adafruit.com/product/3178)
+/// - [Documentation: RadioHead Library](https://www.airspayce.com/mikem/arduino/RadioHead/index.html)
+/// - [Dependency: RadioHead](https://github.com/adafruit/RadioHead)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_LoRa : public LoomCommPlat
 {
 

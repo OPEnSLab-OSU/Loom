@@ -9,6 +9,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Module.h"
@@ -16,11 +17,15 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
+///
 /// Abstract internet publishing module, implementing google sheets and mongodb functionality
-// ###
+///
+/// All actuator modules inherit from this class.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_publish_plat.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomPublishPlat : public LoomModule
 {
 

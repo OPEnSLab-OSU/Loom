@@ -8,19 +8,27 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
 
-#include "SparkFun_AS7265X.h"
+#include <SparkFun_AS7265X.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// AS72625X 3 Spectrum (Visible, near IR, UV) spectral sensor module
-// ###
+///
+/// AS72625X 3 Spectrum (Visible, near IR, UV) spectral sensor module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___a_s7265_x.html)
+/// - [Product Page: SparkFun Triad Spectroscopy Sensor - AS7265x](https://www.sparkfun.com/products/15050)
+/// - [Dependency: SparkFun_AS7265x_Arduino_Library](https://github.com/sparkfun/SparkFun_AS7265x_Arduino_Library)
+/// - [Datasheet: AS72625X](https://cdn.sparkfun.com/assets/c/2/9/0/a/AS7265x_Datasheet.pdf)
+/// - [Hookup Guide: Spectral Triad (AS7265x)](https://learn.sparkfun.com/tutorials/spectral-triad-as7265x-hookup-guide)
+/// - [Hardware GitHub](https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS7265x)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_AS7265X : public LoomI2CSensor
 {
 
@@ -44,7 +52,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// AS72625X module constructor
+	/// Constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x49> | {0x49} | I2C address
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer

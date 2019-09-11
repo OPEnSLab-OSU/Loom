@@ -8,17 +8,22 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// MB1232 Sonar sensor module
-// ###
+///
+/// MB1232 Sonar sensor module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___m_b1232.html)
+/// - [Product Page: MB1232 I2CXL-MaxSonar-EZ3](https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm)
+/// - [Datasheet: I2CXL-MaxSonar- EZTM Series](https://www.maxbotix.com/documents/I2CXL-MaxSonar-EZ_Datasheet.pdf)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_MB1232 : public LoomI2CSensor
 {
 
@@ -32,7 +37,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// MB1232 module constructor
+	/// Constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x70> | {0x70} | I2C address
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer

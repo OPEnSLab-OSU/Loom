@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Module.h"
@@ -22,7 +23,6 @@
 #define MaxStopWatchCount 2		///< Maximum numbr of stopwatches
 
 
-
 // Specify that LoomRTC exists, defined in own file
 class LoomRTC;
 class Loom_Sleep_Manager;
@@ -32,7 +32,7 @@ class Loom_Sleep_Manager;
 /// when returning function pointers
 using ISRFuncPtr = void (*)();
 
-
+/// Enum of different ISR run behavior
 enum class ISR_Type { 
 	IMMEDIATE, 		///< Run ISR immediately
 	CHECK_FLAG		///< Run ISR when run_pending_ISRs() is called
@@ -40,19 +40,11 @@ enum class ISR_Type {
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
-// Submanager for managing interrupts, timers, and stopwatches
-// ###
-
-
-///////////////////////////////////////////////////////////////////////////////
 ///
 /// Submanager for managing interrupts, timers, and stopwatches.
 ///
 /// @par Resources
-///	- [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___interrupt___manager.html)
+/// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___interrupt___manager.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Interrupt_Manager : public LoomModule

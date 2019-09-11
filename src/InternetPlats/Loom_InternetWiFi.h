@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_InternetPlat.h"
@@ -16,11 +17,18 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
-/// InternetPlat built off of SSLClient running over an Ethernet Featherwing. 
-/// Requires 7KB of free SRAM at runtime to use.
-// ###
+///
+/// WiFi InternetPlat
+///
+/// @attention	Requires 7KB of free SRAM at runtime to use.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___wifi.html)
+/// - [Product Page: Adafruit Feather M0 WiFi](https://www.adafruit.com/product/3010)
+/// - [Dependency: WiFi201](https://github.com/OPEnSLab-OSU/WiFi201) OPEbS Lab fork of Arduino WiFi101 library
+/// - [Dependency: WiFi101](https://github.com/arduino-libraries/WiFi101)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_WiFi : public LoomInternetPlat
 {
 
@@ -70,7 +78,8 @@ public:
 	/// \return True if connect, false otherwise
 	bool			is_connected() override;
 
-	/// Open a UDP socket for sending and recieving incoming data (WARNING: Be careful about recieving data from an open socket!)
+	/// Open a UDP socket for sending and recieving incoming data.
+	/// @warning Be careful about recieving data from an open socket!
 	/// \returns A UDP socket for transmitting and recieving, remember to close the socket when you are done!
 	UDPPtr			open_socket(const uint port) override;
 

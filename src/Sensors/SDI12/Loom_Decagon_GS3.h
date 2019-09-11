@@ -8,17 +8,20 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_SDI12_Sensor.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomSDI12Sensor) | dependencies: [] | conflicts: []
-/// Decagon GS3 Soil Moisture sensor module
-// ###
+///
+/// Decagon GS3 soil moisture sensor module. Incomplete.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___decagon_g_s3.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_DecagonGS3 : public LoomSDI12Sensor
 {
 

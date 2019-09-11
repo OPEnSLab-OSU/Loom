@@ -8,19 +8,25 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_PublishPlat.h"
 
 
-#define UDP_SEND_OFFSET 8000		///< UDP sending port is this value + device instance number
+#define UDP_SEND_OFFSET 8000	///< UDP sending port is this value + device instance number
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
+///
 /// Module taking in and translating JSON into data understood by the Google Sheets script API.
-// ###
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___max_pub.html)
+/// - [Max 8](https://cycling74.com)
+/// - [Loom Max Patches](https://github.com/OPEnSLab-OSU/Max-Loom2)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_MaxPub : public LoomPublishPlat 
 {
 

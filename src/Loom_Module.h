@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Misc.h"
@@ -29,10 +30,14 @@ class LoomManager; // Specify that LoomManager exists, defined in own file
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
+///
 /// Abstract root of Loom component modules inheritance hierarchy.
 /// All modules in Loom inherit from LoomModule
+///
+/// @par Resources
+/// - [LoomModule Documentation](https://openslab-osu.github.io/Loom/html/class_loom_module.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomModule
 {
 

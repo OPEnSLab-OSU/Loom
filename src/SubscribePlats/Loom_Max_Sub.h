@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_SubscribePlat.h"
@@ -17,10 +18,15 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
-/// Module taking in and translating JSON into data understood by the Google Sheets script API.
-// ###
+///
+/// Module for receiving data from Max
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___max_sub.html)
+/// - [Max 8](https://cycling74.com)
+/// - [Loom Max Patches](https://github.com/OPEnSLab-OSU/Max-Loom2)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_MaxSub : public LoomSubscribePlat 
 {
 

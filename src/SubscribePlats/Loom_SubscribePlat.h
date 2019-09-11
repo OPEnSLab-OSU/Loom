@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Module.h"
@@ -15,11 +16,15 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
-/// Abstract internet publishing module, implementing google sheets and mongodb functionality
-// ###
+///
+/// Abstract subscribe platform module.
+///
+/// All SubscribePlat modules inherit from this class.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_subscribe_plat.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomSubscribePlat : public LoomModule
 {
 
@@ -76,7 +81,6 @@ public:
 	/// Accesses Json from LoomManager
 	/// \return True if received anything
 	bool			subscribe();
-
 
 //=============================================================================
 ///@name	PRINT INFORMATION

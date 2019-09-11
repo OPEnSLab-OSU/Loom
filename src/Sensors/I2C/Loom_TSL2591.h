@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
@@ -16,11 +17,17 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// TSL2591 Lux sensor module
-// ###
+///
+/// TSL2591 Lux sensor module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___t_s_l2591.html)
+/// - [Product Page: Adafruit TSL2591 High Dynamic Range Digital Light Sensor](https://www.adafruit.com/product/1980)
+/// - [Dependency: Adafruit_TSL2591_Library](https://github.com/adafruit/Adafruit_TSL2591_Library)
+/// - [Dependency: Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+/// - [Datasheet: TSL2591](https://cdn-shop.adafruit.com/datasheets/TSL25911_Datasheet_EN_v1.pdf)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_TSL2591 : public LoomI2CSensor
 {
 
@@ -41,7 +48,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// TSL2591 module constructor
+	/// Constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x29> | {0x29} | I2C address
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer

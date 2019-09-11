@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_SPI_Sensor.h"
@@ -16,12 +17,15 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomSPISensor) | dependencies: [] | conflicts: []
-/// MAX31856 thermocouple module.
-/// Measures temperature.
-// ###
+///
+/// MAX31856 thermocouple module. Measures temperature.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___m_a_x31856.html)
+/// - [Product Page: Adafruit Universal Thermocouple Amplifier MAX31856 Breakout](https://www.adafruit.com/product/3263)
+/// - [Dependency: Adafruit_MAX31856](https://github.com/adafruit/Adafruit_MAX31856)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_MAX31856 : public LoomSPISensor
 {
 

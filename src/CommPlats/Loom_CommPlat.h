@@ -15,14 +15,14 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////////////////
-
+///
 /// Abstract base of communication platform modules
-
+///
 /// All communication platform modules inherit from this class.
-
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_comm_plat.html)
+///
 ///////////////////////////////////////////////////////////////////////////////
 class LoomCommPlat : public LoomModule
 {
@@ -48,8 +48,8 @@ public:
 
 	/// Constructor
 	/// \param[in]	module_name		Name of the module (provided by derived classes)
-	/// \param[in] 	module_type		Type of the module (provided by derived classes)
-	/// \param[in] 	max_message_len	The maximum possible message length
+	/// \param[in]	module_type		Type of the module (provided by derived classes)
+	/// \param[in]	max_message_len	The maximum possible message length
 	LoomCommPlat(
 			const char*			module_name,
 			LoomModule::Type	module_type,

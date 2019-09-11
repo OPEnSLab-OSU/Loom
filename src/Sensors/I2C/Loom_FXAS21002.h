@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
@@ -16,11 +17,18 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// FXAS21002 3-Axis Gyroscope snesor module
-// ###
+///
+/// FXAS21002 3-Axis Gyroscope snesor module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___f_x_a_s21002.html)
+/// - [Product Page: Adafruit Precision NXP 9-DOF Breakout Board - FXOS8700 + FXAS21002](https://www.adafruit.com/product/3463)
+/// - [Dependency: Adafruit_FXAS21002C](https://github.com/adafruit/Adafruit_FXAS21002C)
+/// - [Dependency: Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS)
+/// - [Dependency: Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+/// - [Datasheet: 3-Axis Digital Angular Rate Gyroscope](https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_FXAS21002 : public LoomI2CSensor
 {
 
@@ -36,7 +44,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// FXAS21002 module constructor
+	/// Constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x20> | {0x20, 0x21} | I2C address
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer

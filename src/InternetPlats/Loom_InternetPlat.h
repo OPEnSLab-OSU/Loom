@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_Module.h"
@@ -20,11 +21,15 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomInternetPlat) | dependencies: [] | conflicts: []
-/// Abstract internet communication module, implementing wifi and ethernet.
-// ###
+///
+/// Abstract internet communication module.
+///
+/// All internet modules inherit from this class.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_internet_plat.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomInternetPlat : public LoomModule
 {
 
@@ -115,17 +120,20 @@ public:
 							{ return http_request(domain, url, body, "POST"); }
 
 	/// Connect to a domain, but don't write any HTTP stuff, Let the module figure that out.
+	/// @attention	Remember to close the socket!
 	/// \param[in]	domain	The domain to connect to "www.google.com"
 	/// \returns A client reference. The client::connected method will return true if the connection succeeded, and false otherwise.
 	virtual ClientSession	connect_to_domain(const char* domain) = 0;
 
 	/// Connect to a domain, but don't write any HTTP stuff, Let the module figure that out.
+	/// @attention	Remember to close the socket!
 	/// \param[in]	ip		The IPAddress to connect to
 	/// \param[in]	port	The port to connect to
 	/// \returns A client reference. The client::connected method will return true if the connection succeeded, and false otherwise.
 	virtual ClientSession	connect_to_ip(const IPAddress& ip, const uint16_t port) = 0;
 
-	/// Open a UDP socket for sending and recieving incoming data (WARNING: Be careful about recieving data from an open socket!)
+	/// Open a UDP socket for sending and recieving incoming data.
+	/// @warning Be careful about recieving data from an open socket!
 	/// \returns A UDP socket for transmitting and recieving, or a nullptr if opening the socket failed. The socket will automatically
 	/// close when the pointer is destructed.
 	virtual UDPPtr			open_socket(const uint port) = 0;

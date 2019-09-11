@@ -8,20 +8,30 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
 
-// #include <MS5803_01.h>
 #include <MS5803_02.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// MS5803 Atmospheric Pressure / Temperature sensor module
-// ###
+///
+/// MS5803 Atmospheric Pressure / Temperature sensor module.
+///
+/// @attention	Library is modified to support different I2C addresses and will not 
+///				compile with Loom without the change.
+///				The modifed verision can be found in the [Loom_Auxiliary](https://github.com/OPEnSLab-OSU/Loom_Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip) 
+///				repository
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___m_s5803.html)
+/// - [Product Page: MS580302BA01-00 Miniature Altimeter Module](https://www.digikey.com/product-detail/en/te-connectivity-measurement-specialties/MS580302BA01-00/223-1624-5-ND/5277629)
+/// - [Dependency: MS5803_2](https://github.com/millerlp/MS5803_02)
+/// - [Datasheet: MS5803-02BA](https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=MS5803-02BA&DocType=Data+Sheet&DocLang=English)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_MS5803 : public LoomI2CSensor
 {
 
@@ -40,7 +50,7 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// MS5803 module constructor
+	/// Constructor
 	///
 	/// \param[in]	i2c_address				Set(Int) | <0x76> | {0x76, 0x77} | I2C address (0x76 if CSB (pin 3) is High, 0x77 if CSB is Low)
 	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer

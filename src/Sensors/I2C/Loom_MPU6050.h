@@ -8,20 +8,28 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
 
 #include <MPU6050_tockn.h>	
-// Need to modify line 7 of MPU6050_tockn.h to have I2C address of 0x69
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// MPU6050 6 axis gyroscope and accelerometer
-// ###
+///
+/// MPU6050 6 axis gyroscope and accelerometer  sensor module.
+///
+/// @attention	Need to modify line 7 of MPU6050_tockn.h to have I2C address of 0x69
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___m_p_u6050.html)
+/// - [Product Page: Amazon –Gy-521 MPU-6050 MPU6050 Module 3 Axis Analog Gyro Sensors+ 3 Axis Accelerometer Module](https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40/)
+/// - [Dependency: MPU6050_tockn](https://github.com/tockn/MPU6050_tockn)
+/// - [Previous Dependency: MPU6050](https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/MPU6050)
+/// - [Datasheet: MPU6050](https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_MPU6050 : public LoomI2CSensor
 {
 
