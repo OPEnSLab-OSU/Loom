@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Translator.cpp
-/// @brief		File for implementation of translator functions.
+/// @file		Loom_Package.cpp
+/// @brief		File for implementation of packaging functions.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0

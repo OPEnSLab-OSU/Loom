@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Manager.h
-/// @brief		File for Loom_Manager definition.
+/// @brief		File for LoomManager definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -242,7 +242,7 @@ public:
 
 	/// Measure and package data.
 	/// Convenience function, current just calls measure then package
-	void		record();
+	void		record() { measure(); package(); }
 
 	/// Package data of all modules into JsonObject and return
 	/// \return JsonObject of packaged data of enabled modules
@@ -264,7 +264,7 @@ public:
 
 	/// Iterate over list of commands, forwarding to handling module.
 	/// Uses internal json
-	void		dispatch();
+	void		dispatch() { dispatch( internal_json() ); }
 
 	/// Pause for up to 16000 milliseconds.
 	/// You can use this instead of delay to put the device into a 
@@ -436,7 +436,7 @@ public:
 	/// \param[in]	time_high	Milliseconds to stay on for 
 	/// \param[in]	time_low	Milliseconds to stay off for 
 	void		flash_LED(uint8_t count, uint8_t time_high, uint8_t time_low, bool end_high=false);
-	void		flash_LED(uint8_t sequence[3]);
+	void		flash_LED(uint8_t sequence[3]) { flash_LED(sequence[0], sequence[1], sequence[2]); }
 
 	/// Get c-string of name associated with device type enum
 	/// \return C-string of device type
@@ -528,7 +528,7 @@ public:
 protected:
 
 	/// Print the device name as '[device_name]'
-	void				print_device_label();
+	void				print_device_label() { LPrint("[", device_name, "] "); }
 
 private:
 

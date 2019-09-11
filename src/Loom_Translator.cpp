@@ -1,7 +1,16 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Translator.cpp
+/// @brief		File for definitions of general purpose functions to convert the 
+///				type of single values or arrays
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_Translator.h"
 #include "Loom_Macros.h"
-
 
 //=============================================================================
 ///@name	CONVERSION BETWEEN ARRAY FORMATS
