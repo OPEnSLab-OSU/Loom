@@ -54,7 +54,7 @@ bool LoomManager::parse_config_SD(const char* config_file)
 
 	DynamicJsonDocument doc(2048);
 	DeserializationError error = deserializeJson(doc, file);
-	
+
 	// Test if parsing succeeds.
 	if (error) { // Make sure json was valid
 		print_device_label();
@@ -109,7 +109,7 @@ bool LoomManager::parse_config_json(JsonObject config)
 	}
 
 	// Call module factory creating each module
-	for ( JsonVariant module : config["components"].as<JsonArray>()) {		
+	for ( JsonVariant module : config["components"].as<JsonArray>()) {
 		if (Factory) {
 			add_module(Factory->Create(module));
 		}
@@ -117,13 +117,13 @@ bool LoomManager::parse_config_json(JsonObject config)
 
 	// Sort modules by type
 	std::sort(modules.begin(), modules.end(), module_sort_comp());
-	
+
 	// Run second stage constructors
 	for (auto module : modules) {
 		if ( module != nullptr ) {
 			module->second_stage_ctor();
 		}
-	}	
+	}
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		LPrintln("= = = = = = = = = = = = = = = = =");
@@ -134,12 +134,3 @@ bool LoomManager::parse_config_json(JsonObject config)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-

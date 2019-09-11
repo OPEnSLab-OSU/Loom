@@ -8,11 +8,15 @@
 	"general": {
 		"name": "Device",
 		"instance": 1,
+		"entryModule" : "/* Insert Module Name */"
 	},
 	"components": [
 		{
 			"name": "moduleA",
-			"params": "default"
+			"params": "default",
+			"depends" : [
+				// Module name
+			]
 		},
 		{
 			"name": "moduleB",
@@ -41,18 +45,18 @@
 	},
 	"contents" :
 	[
-		{ 
+		{
 			"module" : "moduleA",
-			"data" : [ 
-				{"key1" : "val1"}, 
-				{"key2" : "val2"}, 
+			"data" : [
+				{"key1" : "val1"},
+				{"key2" : "val2"},
 				{"key3" : "val3"}
 			]
 		},
-		{ 
+		{
 			"module" : "moduleB",
-			"data" : [ 
-				{"key1" : "val1"}, 
+			"data" : [
+				{"key1" : "val1"},
 				{"key2" : "val2"}
 			]
 		}
@@ -71,20 +75,20 @@
 	"type" : "command",
 	"commands" :
 	[
-		{ 
+		{
 			"module" : "moduleA",
 			"func" : "s",
-			"params" : 
+			"params" :
 			[
 				"param1",
 				"param2",
 				"param3"
 			]
 		},
-		{ 
+		{
 			"module" : "moduleB",
 			"func" : "s",
-			"params" : 
+			"params" :
 			[
 				"param1",
 				"param2"
@@ -92,4 +96,3 @@
 		}
 	]
 }
-

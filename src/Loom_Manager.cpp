@@ -25,6 +25,7 @@
 #include <vector>
 #include <queue>
 
+
 ///////////////////////////////////////////////////////////////////////////////
 const char* LoomManager::enum_device_type_string(DeviceType t)
 {
@@ -114,8 +115,12 @@ void LoomManager::add_module(LoomModule* module)
 
 	print_device_label();
 
-	if (module == nullptr || !module->get_active()) {
-		LPrintln("Cannot add null/inactive module");
+	if (module == nullptr) {
+		LPrintln("Cannot add null module");
+		return;
+	} else if (!module->get_active()) {
+		LPrintln("Cannot add inactive module");
+		delete module;
 		return;
 	}
 
@@ -496,6 +501,9 @@ bool LoomManager::has_module(LoomModule::Type type)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+namespace std {
+void __throw_bad_alloc() {}
+}
 
 void LoomManager::sort() {
     //std::cout << "Module list unordered. Sorting..." << std::endl;
@@ -574,8 +582,6 @@ void LoomManager::sort() {
     }
     //Sorting is complete, move the sorted list into the origional list's possition
     modules = L;
-
-		//Modify flag
 		sorted = true;
 
     // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -593,3 +599,11 @@ void LoomManager::sort() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+LoomModule* LoomManager::operator [] (const char * name) {
+	for(auto module : modules) {
+		if(!std::strncmp(name, module->module_name, strlen(name)));
+			return module;
+		}
+	return NULL;
+}

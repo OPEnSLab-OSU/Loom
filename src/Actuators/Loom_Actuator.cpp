@@ -2,9 +2,9 @@
 #include "Loom_Actuator.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomActuator::LoomActuator( 
+LoomActuator::LoomActuator(
 		const char*			module_name,
-		LoomModule::Type	module_type 
+		LoomModule::Type	module_type
 	) : LoomModule( module_name, module_type ) {}
 
 ///////////////////////////////////////////////////////////////////////////////

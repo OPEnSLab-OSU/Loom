@@ -449,6 +449,8 @@ public:
 	/// \param[in]	category	Category to search for
 	LoomModule*	find_module_by_category(LoomModule::Category category, uint8_t idx);
 
+	LoomModule* operator [] (const char * name);
+
 	///////////////////////////////////////////////////////////////////////////
 
 	// Other
