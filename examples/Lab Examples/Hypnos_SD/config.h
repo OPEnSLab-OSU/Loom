@@ -4,7 +4,7 @@
 		'name':'Device',\
 		'instance':1,\
 		'interval':5000,\
-    'print_verbosity' : 2\
+		'print_verbosity':2\
 	},\
 	'components':[\
 		{\
