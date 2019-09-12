@@ -493,114 +493,6 @@ bool LoomManager::has_module(LoomModule::Type type)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-namespace std {
-void __throw_bad_alloc() {}
-}
-
-void LoomManager::sort() {
-    //std::cout << "Module list unordered. Sorting..." << std::endl;
-    std::vector<LoomModule *> L;                    // Starts empty and is filled in sorted order
-    std::queue<LoomModule *> S;                     // Set of nodes with no incoming edges
-    std::vector<std::vector<LoomModule *>> Edges;   // Initially fills with a copy of all incoming edges
-
-    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // // List all modules and their dependencies
-    // std::cout << " - Pre-Sort Order:" << std::endl;
-    // std::cout << " + ";
-    // for(auto module : modules) {
-    //     std::cout << module->name << "{";
-    //     for(auto depend : module->Dependencies) {
-    //         std::cout << depend->name << ",";
-    //     }std::cout << "}, ";
-    // }
-    // std::cout << std::endl << std::endl;
-    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    //Interate over all contained modules
-    for(int i = 0; i < modules.size(); i++) {
-
-        //If module has no dependencies
-        if(modules[i]->Dependencies.size() == 0) {
-
-            //Add inbound edgeless module to S
-            S.push(modules[i]);
-
-            //Remove module from origional list
-            modules.erase(modules.begin()+(i));
-
-            //Reduce index by one to acomodate for the removal of an element
-            i--;
-
-            //Otherwise, if module has dependencies
-        } else {
-            //Save copy of dependencies for later processing
-            Edges.push_back(modules[i]->Dependencies);
-        }
-    }
-
-    //Placeholder used for moving modules between lists
-    LoomModule *placeholder;
-
-    //Repeat as long as there are modules without dependencies in S
-    while(S.size() != 0) {
-
-        placeholder = S.front();    // Copy dependency-less module off of front of queue
-        L.push_back(S.front());     // Copy the next module from S to L
-        S.pop();                    // Remove that same module from S
-
-        //For every unsorted, module with dependencies
-        for(int i = 0; i < Edges.size(); i++) {
-
-            //For every dependency in that modules list of dependencies
-            for(int j = 0; j < Edges[i].size(); j++) {
-
-                //Check for a match
-                if(Edges[i][j] == placeholder) {
-                    //Break that symbolic dependency relationship
-                    Edges[i].erase(Edges[i].begin()+j);
-
-                    //If this module has no dependencies left
-                    if(Edges[i].size() == 0) {
-                        Edges.erase(Edges.begin()+i);
-
-                        //Copy this newly dependencyless module onto S
-                        S.push(modules[i]);
-                        //Erase the same module from the unsorted list
-                        modules.erase(modules.begin()+i);
-                    }
-                }
-            }
-        }
-    }
-    //Sorting is complete, move the sorted list into the origional list's possition
-    modules = L;
-		sorted = true;
-
-    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // // List all modules and their dependencies
-    // std::cout << " - Post-Sort Order:" << std::endl;
-    // std::cout << " + ";
-    // for(auto module : modules) {
-    //     std::cout << module->name << "{";
-    //     for(auto depend : module->Dependencies) {
-    //         std::cout << depend->name << ",";
-    //     }std::cout << "}, ";
-    // }
-    // std::cout << std::endl << std::endl;
-    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-LoomModule* LoomManager::operator [] (const char * name) {
-	for(auto module : modules) {
-		if(!std::strncmp(name, module->module_name, strlen(name)));
-			return module;
-		}
-	return NULL;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 
 bool LoomManager::parse_config(const char* json_config)
 {
@@ -723,3 +615,114 @@ bool LoomManager::parse_config_json(JsonObject config)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+LoomModule* LoomManager::operator [] (const char * name) {
+	char *buf;
+	for(auto module : modules) {
+		module->get_module_name(buf);
+		if(!std::strncmp(name, buf, strlen(name)));
+			return module;
+		}
+	return NULL;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+namespace std {
+void __throw_bad_alloc() {}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void LoomManager::sort() {
+    //std::cout << "Module list unordered. Sorting..." << std::endl;
+    std::vector<LoomModule *> L;                    // Starts empty and is filled in sorted order
+    std::queue<LoomModule *> S;                     // Set of nodes with no incoming edges
+    std::vector<std::vector<LoomModule *>> Edges;   // Initially fills with a copy of all incoming edges
+
+    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // // List all modules and their dependencies
+    // std::cout << " - Pre-Sort Order:" << std::endl;
+    // std::cout << " + ";
+    // for(auto module : modules) {
+    //     std::cout << module->name << "{";
+    //     for(auto depend : module->Dependencies) {
+    //         std::cout << depend->name << ",";
+    //     }std::cout << "}, ";
+    // }
+    // std::cout << std::endl << std::endl;
+    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    //Interate over all contained modules
+    for(int i = 0; i < modules.size(); i++) {
+
+        //If module has no dependencies
+        if(modules[i]->Dependencies.size() == 0) {
+
+            //Add inbound edgeless module to S
+            S.push(modules[i]);
+
+            //Remove module from origional list
+            modules.erase(modules.begin()+(i));
+
+            //Reduce index by one to acomodate for the removal of an element
+            i--;
+
+            //Otherwise, if module has dependencies
+        } else {
+            //Save copy of dependencies for later processing
+            Edges.push_back(modules[i]->Dependencies);
+        }
+    }
+
+    //Placeholder used for moving modules between lists
+    LoomModule *placeholder;
+
+    //Repeat as long as there are modules without dependencies in S
+    while(S.size() != 0) {
+
+        placeholder = S.front();    // Copy dependency-less module off of front of queue
+        L.push_back(S.front());     // Copy the next module from S to L
+        S.pop();                    // Remove that same module from S
+
+        //For every unsorted, module with dependencies
+        for(int i = 0; i < Edges.size(); i++) {
+
+            //For every dependency in that modules list of dependencies
+            for(int j = 0; j < Edges[i].size(); j++) {
+
+                //Check for a match
+                if(Edges[i][j] == placeholder) {
+                    //Break that symbolic dependency relationship
+                    Edges[i].erase(Edges[i].begin()+j);
+
+                    //If this module has no dependencies left
+                    if(Edges[i].size() == 0) {
+                        Edges.erase(Edges.begin()+i);
+
+                        //Copy this newly dependencyless module onto S
+                        S.push(modules[i]);
+                        //Erase the same module from the unsorted list
+                        modules.erase(modules.begin()+i);
+                    }
+                }
+            }
+        }
+    }
+    //Sorting is complete, move the sorted list into the origional list's possition
+    modules = L;
+		sorted = true;
+
+    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // // List all modules and their dependencies
+    // std::cout << " - Post-Sort Order:" << std::endl;
+    // std::cout << " + ";
+    // for(auto module : modules) {
+    //     std::cout << module->name << "{";
+    //     for(auto depend : module->Dependencies) {
+    //         std::cout << depend->name << ",";
+    //     }std::cout << "}, ";
+    // }
+    // std::cout << std::endl << std::endl;
+    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+}

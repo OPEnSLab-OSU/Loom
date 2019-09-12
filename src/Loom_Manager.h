@@ -535,6 +535,10 @@ public:
 	Loom_MAX31855&		MAX31855(const uint8_t idx = 0);
 	Loom_MAX31856&		MAX31856(const uint8_t idx = 0);
 
+protected:
+	/// Print the device name as '[device_name]'
+	void				print_device_label();
+
 private:
 
 	// Allow secondary managers to access private members of LoomManager
