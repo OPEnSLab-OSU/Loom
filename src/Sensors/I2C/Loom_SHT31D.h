@@ -81,7 +81,7 @@ public:
 	/// Used by the LoomTempSync module to provide temperature
 	/// to other modules.
 	/// @return	The measured temperature
-	float		get_temperature() { return temp; }
+	float		get_temperature() { return Values[0].retrieve<float>().value_or(0); }
 
 private:
 

@@ -38,7 +38,7 @@ public:
 //=============================================================================
 ///@name	TYPES
 /*@{*/ //======================================================================
-	
+
 	/// Close the socket and delete the UDP object when the unique ptr dissapears
 	struct UDPDeletor {
 		void operator() (UDP* p) {
@@ -71,8 +71,8 @@ public:
 	/// Loom Internet Platform module constructor.
 	///
 	/// @param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
-	LoomInternetPlat( 
-			const char*			module_name,  
+	LoomInternetPlat(
+			const char*			module_name,
 			LoomModule::Type	module_type
 		);
 
@@ -82,8 +82,6 @@ public:
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
-
-<<<<<<< HEAD
 
     	void Run() {}
 
@@ -115,12 +113,12 @@ public:
 
 	/// Make HTTP GET request.
 	/// See http_request() for parameter and return details.
-	ClientSession			http_get_request(const char* domain, const char* url, const char* body = nullptr) 
+	ClientSession			http_get_request(const char* domain, const char* url, const char* body = nullptr)
 							{ return http_request(domain, url, body, "GET"); }
 
 	/// Make HTTP POST request.
 	/// See http_request() for parameter and return details.
-	ClientSession			http_post_request(const char* domain, const char* url, const char* body = nullptr) 
+	ClientSession			http_post_request(const char* domain, const char* url, const char* body = nullptr)
 							{ return http_request(domain, url, body, "POST"); }
 
 	/// Connect to a domain, but don't write any HTTP stuff, Let the module figure that out.
@@ -145,9 +143,9 @@ public:
 	/// make NTP request to get UTC time, using the UDP function above
 	/// @returns a unix timestamp if success, or 0 if failure.
 	uint32_t				get_time();
-	
-protected:	
-	
+
+protected:
+
 	/// Utility function to write an http reqest based on parameters specified by LoomInternetPlat::http_request to a Client class.
 	/// See http_request() for parameter details.
 	void	write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb);
