@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This example expands upon GoogleSheetsSimple, so if you haven't looked at 
+// This example expands upon GoogleSheetsEthernet, so if you haven't looked at 
 // that one, start there.
 
 // This example add RTC synchronization to time obtained from the internet 

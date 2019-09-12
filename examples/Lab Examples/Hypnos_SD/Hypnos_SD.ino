@@ -7,6 +7,9 @@
 // - DS3231 RTC
 // - Ability to power of peripherals
 
+// Further details about the Hypnos board can be found here:
+// https://github.com/OPEnSLab-OSU/OPEnS-Lab-Home/wiki/Hypnos
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
