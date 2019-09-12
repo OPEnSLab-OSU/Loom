@@ -109,8 +109,8 @@ class FactoryBase;
 
 #define SERIAL_BAUD		115200	///< Serial Baud Rate
 #define MAX_SERIAL_WAIT	20000	///< Maximum number of milliseconds to wait for user given 'begin_serial(true)'
-#define SD_CS			10		///< SD chip select used in parse_config_SD(). 
-								///< You can still instantiate a Loom_SD module with a different chip select 
+#define SD_CS			10		///< SD chip select used in parse_config_SD().
+								///< You can still instantiate a Loom_SD module with a different chip select
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -160,11 +160,7 @@ protected:
 	/// Used for convenience, another pointer can exist in modules vector
 	LoomRTC*				rtc_module = nullptr;
 
-<<<<<<< HEAD
-	// Vectors of Loom Modules
-=======
 	/// Vectors of LoomModule pointers
->>>>>>> develop
 	std::vector<LoomModule*>		modules;
 
 	Verbosity	print_verbosity;		///< Print detail verbosity
@@ -301,17 +297,10 @@ public:
 	/// If object is non-empty and contains non-data,
 	/// will not add and will return false.
 	/// Only call this after package, otherwise the data will be overriden
-<<<<<<< HEAD
-	/// \param[in]	module	Which module to add data to (will create if it doesn't exist)
-	/// \param[in]	key		Key of data to add
-	/// \param[in]	val		Value of data to add
-	/// \return True if success
-=======
-	/// @param[in]	module	Which module to add data to (will create if it doesn't exist) 
+	/// @param[in]	module	Which module to add data to (will create if it doesn't exist)
 	/// @param[in]	key		Key of data to add
 	/// @param[in]	val		Value of data to add
 	/// @return True if success
->>>>>>> develop
 	template<typename T>
 	bool add_data(const char* module, const char* key, T val)
 	{
@@ -329,15 +318,9 @@ public:
 	}
 
 	/// Get a data value from Json object of data
-<<<<<<< HEAD
-	/// \param[in]	module	LoomModule key is associated with
-	/// \param[in]	key		Key of data value to find
-	/// \return Data value if found
-=======
 	/// @param[in]	module	LoomModule key is associated with
 	/// @param[in]	key		Key of data value to find
-	/// @return Data value if found 
->>>>>>> develop
+	/// @return Data value if found
 	template<typename T>
 	T get_data_as(const char* module, const char* key)
 	{
@@ -457,15 +440,9 @@ public:
 /*@{*/ //======================================================================
 
 	/// Flash the built in LED
-<<<<<<< HEAD
-	/// \param[in]	count		Number of times to flash
-	/// \param[in]	time_high	Milliseconds to stay on for
-	/// \param[in]	time_low	Milliseconds to stay off for
-=======
 	/// @param[in]	count		Number of times to flash
-	/// @param[in]	time_high	Milliseconds to stay on for 
-	/// @param[in]	time_low	Milliseconds to stay off for 
->>>>>>> develop
+	/// @param[in]	time_high	Milliseconds to stay on for
+	/// @param[in]	time_low	Milliseconds to stay off for
 	void		flash_LED(uint8_t count, uint8_t time_high, uint8_t time_low, bool end_high=false);
 	void		flash_LED(uint8_t sequence[3]) { flash_LED(sequence[0], sequence[1], sequence[2]); }
 

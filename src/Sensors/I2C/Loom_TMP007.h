@@ -33,13 +33,8 @@ protected:
 
 	Adafruit_TMP007 inst_tmp007;	///< Underlying TMP007 sensor manager instance
 
-<<<<<<< HEAD
 //    float        object_temp;    /// Object temperature
 //    float        die_temp;        /// Die temperature
-=======
-	float		object_temp;		///< Object temperature
-	float		die_temp;			///< Die temperature
->>>>>>> develop
 
 public:
 
@@ -60,7 +55,7 @@ public:
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
 	Loom_TMP007(JsonArrayConst p);
-	
+
 	/// Destructor
 	virtual ~Loom_TMP007() = default;
 
@@ -80,7 +75,3 @@ public:
 private:
 
 };
-
-
-
-

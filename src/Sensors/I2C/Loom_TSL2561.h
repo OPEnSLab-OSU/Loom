@@ -38,17 +38,12 @@ protected:
 	uint8_t 	gain;			///< Gain level
 	uint8_t 	resolution;		///< Sensor resolution setting
 
-<<<<<<< HEAD
 //    Values[0]    lightIR;        /// Measured infra-red lux
 //    Values[1]    lightFull;      /// Measure full spectrum lux
 //    Values[2]    Lux             /// Measure calculated lux value
-=======
-	uint16_t	lightIR;		///< Measured infra-red lux
-	uint16_t	lightFull;		///< Measure full spectrum lux
->>>>>>> develop
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -90,5 +85,3 @@ public:
 private:
 
 };
-
-

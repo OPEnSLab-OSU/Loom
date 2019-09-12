@@ -64,10 +64,8 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-<<<<<<< HEAD
-    void        Run() {}
-	void		measure();
-=======
+	void 		Run() {}
+
 	/// Sync the temperature.
 	/// Simply calls synchronization implementation LoomTempSync::sync_temp().
 	/// Allows the module to run regularly by emulating a sensor, which have
@@ -76,7 +74,6 @@ public:
 
 	/// No package necessary.
 	/// Implement with empty body.
->>>>>>> develop
 	void 		package(JsonObject json) override { /* do nothing */ };
 
 //=============================================================================
@@ -88,12 +85,10 @@ public:
 private:
 
 	void		sync_temp();
-	
+
 	LoomModule*	source;			///< Pointer to module to get temperature from
 	LoomModule* dependant;		///< Pointer to module to forward temperature to
 
 	LoomModule::Type source_type;		///< Type of source module
 	LoomModule::Type dependant_type;	///< Type of dependant module
 };
-
-

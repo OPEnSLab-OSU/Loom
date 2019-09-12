@@ -31,19 +31,14 @@ class Loom_SHT31D : public LoomI2CSensor
 {
 
 protected:
-	
+
 	Adafruit_SHT31	inst_sht31d;	///< Underlying SHT31D sensor manager instance
 
-<<<<<<< HEAD
 //    Values[0]        temp;                /// Measured temperature (C)
 //    Values[1]        humid;                /// Measured humidity (%)
-=======
-	float			temp;			///< Measured temperature (C)
-	float			humid;			///< Measured humidity (%)
->>>>>>> develop
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -87,9 +82,7 @@ public:
 	/// to other modules.
 	/// @return	The measured temperature
 	float		get_temperature() { return temp; }
-	
+
 private:
 
 };
-
-

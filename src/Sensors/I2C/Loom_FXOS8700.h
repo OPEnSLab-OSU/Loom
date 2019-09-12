@@ -36,16 +36,11 @@ protected:
 
 	Adafruit_FXOS8700	inst_FXOS8700;		///< Underlying FXOS8700 sensor manager instance
 
-<<<<<<< HEAD
 //    float        accel[3];                    /// Measured acceleration values (x,y,z) (g's)
 //    float        mag[3];                        /// Measured magnetic field values (x,y,z) (T)
-=======
-	float		accel[3];					///< Measured acceleration values (x,y,z) (g's)
-	float		mag[3];						///< Measured magnetic field values (x,y,z) (T)
->>>>>>> develop
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -83,5 +78,3 @@ public:
 private:
 
 };
-
-

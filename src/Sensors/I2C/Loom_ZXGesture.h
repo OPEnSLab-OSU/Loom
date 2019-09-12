@@ -42,33 +42,15 @@ public:
 
 protected:
 
-<<<<<<< HEAD
-	/// Underlying ZX sensor manager instance
-	ZX_Sensor		inst_ZX;
-
-	/// Sensor mode (read positions or gesture - mutually exclusive)
-	Mode			mode;
-
-	/// Measured positions (x, y pos)
-	//uint8_t			pos[2];
-
-	/// Last read gesture type
-	GestureType		gesture;
-	/// String labelling last read gesture type
-	String			gesture_type;
-	/// The speed of the last measured gesture
-	uint8_t			gesture_speed;
-=======
 	ZX_Sensor		inst_ZX;		///< Underlying ZX sensor manager instance
 	Mode			mode;			///< Sensor mode (read positions or gesture - mutually exclusive)
 	uint8_t			pos[2];			///< Measured positions (x, y pos)
 	GestureType		gesture;		///< Last read gesture type
 	String			gesture_type;	///< String labelling last read gesture type
 	uint8_t			gesture_speed;	///< The speed of the last measured gesture
->>>>>>> develop
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -109,5 +91,3 @@ public:
 private:
 
 };
-
-

@@ -46,9 +46,9 @@ public:
 	};
 
 protected:
-	
-	Loom_Interrupt_Manager* interrupt_manager;	///< Pointer to interrupt_manager instance 
-	
+
+	Loom_Interrupt_Manager* interrupt_manager;	///< Pointer to interrupt_manager instance
+
 	bool 		use_LED;			///< Whether or not to use LED to indicate wake status
 	bool		delay_on_wake;		///< Whether to provide delay on wake.
 									///< Used to allow user to restart Serial Monitor
@@ -86,12 +86,10 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-<<<<<<< HEAD
-    void        Run() {}
-=======
+	void        Run() {}
+
 	/// No package necessary.
 	/// Implement with empty body.
->>>>>>> develop
 	void 		package(JsonObject json) override {}
 
 	/// Put into low power state.
@@ -122,7 +120,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Set pointer to interrupt manager
-	/// @param[in]	IM	Pointer to an interrupt manager	
+	/// @param[in]	IM	Pointer to an interrupt manager
 	void 		link_interrupt_manager(Loom_Interrupt_Manager* IM) { interrupt_manager = IM; }
 
 	/// Set the sleep mode to use
@@ -139,7 +137,7 @@ public:
 	/// @param[in]	m	Sleep to get string of
 	/// @return C-string of sleep mode
 	const static char* enum_sleep_mode_string(Mode m);
-	
+
 private:
 
 	/// Handles pre-sleep operations
@@ -148,6 +146,3 @@ private:
 	/// Handles post-sleep operations
 	void		post_sleep();
 };
-
-
-

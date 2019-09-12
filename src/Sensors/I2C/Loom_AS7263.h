@@ -36,19 +36,15 @@ protected:
 
 	AS726X		inst_AS7263;		///< Underlying AS7263 sensor manager instance
 
-<<<<<<< HEAD
 	//uint16_t	nir_vals[6];		/// Measured near-infra-red band values (r,s,t,u,v,w)
-=======
-	uint16_t	nir_vals[6];		///< Measured near-infra-red band values (r,s,t,u,v,w)
->>>>>>> develop
-	
+
 	bool		use_bulb;			///< Whether or not to use bulb
 	uint8_t		gain;				///< Gain setting
 	uint8_t		mode;				///< Sensor read mode
 	uint8_t		integration_time;	///< Integration time setting
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -120,5 +116,3 @@ public:
 private:
 
 };
-
-

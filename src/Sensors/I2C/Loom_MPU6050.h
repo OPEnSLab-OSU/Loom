@@ -13,7 +13,7 @@
 
 #include "Loom_I2C_Sensor.h"
 
-#include <MPU6050_tockn.h>	
+#include <MPU6050_tockn.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,6 @@ protected:
 
 	float temp;				///< Temperature
 
-<<<<<<< HEAD
 //    Values[0] temp;                    /// Temperature
 //
 //    Values[1] accX, Values[2] accY, Values[3] accZ;        /// Acceleration values
@@ -48,26 +47,6 @@ protected:
 //    Values[9] gyroAngleX, Values[10] gyroAngleY, Values[11] gyroAngleZ; /// Gyro angle values
 //
 //    Values[12] angleX, Values[13] angleY, Values[14] angleZ;    /// Angle values
-=======
-	float accX;				///< X-axis acceleration value
-	float accY;				///< Y-axis acceleration value
-	float accZ;				///< Z-axis acceleration value
-
-	float gyroX;			///< X-axis gyro value
-	float gyroY;			///< Y-axis gyro value
-	float gyroZ;			///< Z-axis gyro value
-
-	float accAngleX;		///< X-axis acceleration angle
-	float accAngleY;		///< Y-axis acceleration angle
-
-	float gyroAngleX;		///< X-axis acceleration angle
-	float gyroAngleY;		///< Y-axis acceleration angle
-	float gyroAngleZ; 		///< Z-axis acceleration angle
-
-	float angleX;			///< X-axis angle
-	float angleY;			///< Y-axis angle
-	float angleZ;			///< Z-axis angle
->>>>>>> develop
 
 public:
 
@@ -90,7 +69,7 @@ public:
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
 	Loom_MPU6050(JsonArrayConst p);
-	
+
 	/// Destructor
 	virtual ~Loom_MPU6050() = default;
 
@@ -127,7 +106,3 @@ public:
 private:
 
 };
-
-
-
-

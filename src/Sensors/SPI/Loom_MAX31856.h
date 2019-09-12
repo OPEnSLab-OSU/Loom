@@ -33,16 +33,11 @@ protected:
 
 	Adafruit_MAX31856 inst_max;		///< Underlying MAX31856 sensor manager instance
 
-<<<<<<< HEAD
 //    float temperature;                /// Measured temperature
 //    float cj_temp;                    /// Measured cold junction temperature
-=======
-	float temperature;				///< Measured temperature
-	float cj_temp;					///< Measured cold junction temperature
->>>>>>> develop
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -94,4 +89,3 @@ private:
 
 
 };
-

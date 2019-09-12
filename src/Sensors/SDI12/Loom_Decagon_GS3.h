@@ -27,18 +27,12 @@ class Loom_DecagonGS3 : public LoomSDI12Sensor
 
 protected:
 
-<<<<<<< HEAD
 //    float        dielec_perm;    /// Measured dielectric permativity
 //    float        temp;            /// Measured temperature
 //    float        elec_cond;        /// Measure electrical conductivity
-=======
-	float		dielec_perm;	///< Measured dielectric permativity
-	float		temp;			///< Measured temperature
-	float		elec_cond;		///< Measure electrical conductivity
->>>>>>> develop
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -75,5 +69,3 @@ public:
 private:
 
 };
-
-

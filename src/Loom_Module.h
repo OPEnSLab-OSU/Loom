@@ -18,15 +18,12 @@
 
 #include <ArduinoJson.h>
 
-<<<<<<< HEAD
 #undef min
 #undef max
 
 #include <vector>
 
 #include "weak.h"
-=======
->>>>>>> develop
 
 /// Different levels of verbosity (for printing or packaging)
 enum class Verbosity {
@@ -89,22 +86,10 @@ public:
 	/// Enum to classify modules.
 	/// Similar LoomModule::Type but represents the astract classes rather than
 	/// the leaf node modules in the inheritance tree.
-	/// For a given module, its category often shares a name with the abstract 
-	/// class it is derived from 
+	/// For a given module, its category often shares a name with the abstract
+	/// class it is derived from
 	enum class Category {
-<<<<<<< HEAD
-		Unknown=0,			// Unknown
-		Other=1,			// Other
-		Sensor=2,			// Sensors
-		L_RTC=3,			// RTC
-		Actuator=4,			// Actuators
-		LogPlat=5,			// LogPlats
-		CommPlat=6,			// CommPlats
-		InternetPlat=7,		// InternetPlats
-		PublishPlat=8,		// PublishPlats
-		SubscribePlat=9		// SubscribePlats
-=======
-		Unknown=0,			///< Unknown	
+		Unknown=0,			///< Unknown
 		Other=1,			///< Other
 		Sensor=2,			///< Sensors
 		L_RTC=3,			///< RTC
@@ -114,23 +99,10 @@ public:
 		InternetPlat=7,		///< InternetPlats
 		PublishPlat=8,		///< PublishPlats
 		SubscribePlat=9		///< SubscribePlats
->>>>>>> develop
 	};
 
 protected:
 
-<<<<<<< HEAD
-	const Type		module_type;		/// Module type (hub / node)
-	LoomManager*	device_manager;		/// Pointer to manager
-	const String	module_name_base;	/// The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
-public:
-	const char* 	module_name;
-protected:
-	bool			active;				/// Whether or not the module should be treated as active
-	bool			print_debug;		/// Individually togglable debug statements
-	Verbosity		print_verbosity;	/// Print verbosity
-	Verbosity		package_verbosity;	/// Package verbosity
-=======
 	const Type		module_type;		///< Module type (hub / node)
 	LoomManager*	device_manager;		///< Pointer to manager.
 										///< LoomManager provides to any modules passed to add_module
@@ -139,8 +111,7 @@ protected:
 	bool			active;				///< Whether or not the module should be treated as active.
 										///< If inactive at setup (due to failed initialization, module will be deleted)
 	Verbosity		print_verbosity;	///< Print verbosity
-	Verbosity		package_verbosity;	///< Package verbosity 
->>>>>>> develop
+	Verbosity		package_verbosity;	///< Package verbosity
 
 public:
 
@@ -151,8 +122,8 @@ public:
 	/// Constructor
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
-	LoomModule( 
-		const char*		module_name		= "Unknown", 
+	LoomModule(
+		const char*		module_name		= "Unknown",
 		Type			module_type		= Type::Unknown
 	);
 
@@ -174,13 +145,8 @@ public:
 	/// @param[out]	json	Object to put data into
 	virtual void 	package(JsonObject json) = 0;
 
-<<<<<<< HEAD
 	/// Route command to driver
-	virtual bool	dispatch(JsonObject json) = 0;
-=======
-	/// Route command to driver 
 	virtual bool	dispatch(JsonObject json) {};
->>>>>>> develop
 
 	/// Turn off any hardware
 	virtual void	power_down() {}
@@ -271,14 +237,10 @@ public:
 	/// @param[in]	v	Verbosity value to get string representation of
 	/// @return String of verbosity
 	static const char*	enum_verbosity_string(Verbosity v);
-<<<<<<< HEAD
 
-=======
-	
 	/// Get string of the category associated with a Category
 	/// @param[in]	c	Category value to get string representation of
 	/// @return String of category
->>>>>>> develop
 	static const char*	enum_category_string(Category c);
 
 protected:

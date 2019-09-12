@@ -33,16 +33,11 @@ protected:
 
 	Adafruit_MAX31855 inst_max;		///< Underlying MAX31855 sensor manager instance
 
-<<<<<<< HEAD
 //    float temperature;                /// Measured temperature
 //    float internal_temp;            /// Measured internal temperature
-=======
-	float temperature;				///< Measured temperature
-	float internal_temp;			///< Measured internal temperature
->>>>>>> develop
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -83,4 +78,3 @@ private:
 
 
 };
-

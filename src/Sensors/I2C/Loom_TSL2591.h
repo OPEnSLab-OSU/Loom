@@ -35,21 +35,15 @@ protected:
 
 	Adafruit_TSL2591	inst_tsl2591;		///< Underlying TSL2591 sensor manager instance
 
-<<<<<<< HEAD
 //    Values[0]            vis;                /// Measured visable lux
 //    Values[1]            ir;                    /// Measured infra-red lux
 //    Values[2]            full;                /// Measured full spectrum lux
-=======
-	uint16_t			vis;				///< Measured visable lux
-	uint16_t			ir;					///< Measured infra-red lux
-	uint16_t			full;				///< Measured full spectrum lux
->>>>>>> develop
 
 	uint8_t				gain_level;			///< Sensor gain level setting to use
 	uint8_t				timing_level;		///< Sensor integration time setting
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -91,5 +85,3 @@ public:
 private:
 
 };
-
-

@@ -36,13 +36,8 @@ protected:
 
 	Adafruit_MMA8451 MMA;			///< Underlying MMA8451 sensor manager instance
 
-<<<<<<< HEAD
 //    float            accel[3];        ///    Acceleration values for each axis
 //    uint8_t            orientation;    /// Orientation
-=======
-	float			accel[3];		///< Acceleration values for each axis
-	uint8_t			orientation;	///< Orientation
->>>>>>> develop
 
 	mma8451_range_t	range; 			///< Range setting (2/4/8 G)
 
@@ -67,7 +62,7 @@ public:
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
 	Loom_MMA8451(JsonArrayConst p);
-	
+
 	/// Destructor
 	virtual ~Loom_MMA8451() = default;
 
@@ -109,7 +104,3 @@ public:
 private:
 
 };
-
-
-
-

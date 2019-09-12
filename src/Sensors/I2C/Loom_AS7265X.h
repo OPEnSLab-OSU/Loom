@@ -36,15 +36,9 @@ protected:
 
 	AS7265X		inst_AS7265X;		///< Underlying AS7265X sensor manager instance
 
-<<<<<<< HEAD
 //    uint16_t    uv[6];                /// Measured UV bands values
 //    uint16_t    color[6];            /// Measured color bands values
 //    uint16_t    nir[6];                /// Measured near-infra-red bands values
-=======
-	uint16_t	uv[6];				///< Measured UV bands values
-	uint16_t	color[6];			///< Measured color bands values
-	uint16_t	nir[6];				///< Measured near-infra-red bands values
->>>>>>> develop
 
 	bool		use_bulb;			///< Whether or not to use the bulb
 
@@ -53,7 +47,7 @@ protected:
 	uint8_t		integration_time;	///< Integration time setting
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -101,12 +95,12 @@ public:
 /*@{*/ //======================================================================
 
 	/// Set whether not bulb is used for active light source
-	/// @param[in]	enable	Whether or not to enable 
+	/// @param[in]	enable	Whether or not to enable
 	void		enable_bulb(bool e) { use_bulb = e; }
 
 	/// Set gain.
 	/// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
-	/// @param[in]	gain	Gain level: 
+	/// @param[in]	gain	Gain level:
 	void		set_gain(uint8_t gain) { inst_AS7265X.setGain(gain); }
 
 	/// Set mode.
@@ -122,5 +116,3 @@ public:
 private:
 
 };
-
-

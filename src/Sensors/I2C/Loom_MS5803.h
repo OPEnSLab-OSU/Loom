@@ -20,9 +20,9 @@
 ///
 /// MS5803 Atmospheric Pressure / Temperature sensor module.
 ///
-/// @attention	Library is modified to support different I2C addresses and will not 
+/// @attention	Library is modified to support different I2C addresses and will not
 ///				compile with Loom without the change.
-///				The modifed verision can be found in the [Loom_Auxiliary](https://github.com/OPEnSLab-OSU/Loom_Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip) 
+///				The modifed verision can be found in the [Loom_Auxiliary](https://github.com/OPEnSLab-OSU/Loom_Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip)
 ///				repository
 ///
 /// @par Resources
@@ -41,16 +41,11 @@ protected:
 
 	uint16_t	MS_PROM[8];		///< Read calibration data stored on sensor
 
-<<<<<<< HEAD
 ///             Values[0]       /// Measure pressure (mbar)
 ///             Values[1]       /// Measured temperature (C)
-=======
-	float		pressure;		///< Measure pressure (mbar)
-	float		temp;			///< Measured temperature (C)
->>>>>>> develop
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -89,19 +84,8 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-<<<<<<< HEAD
 	float		get_temperature() { return Values[1].retrieve<float>().value_or(0); }
-=======
-	/// Get the temperature reading.
-	/// Used by the LoomTempSync module to provide temperature
-	/// to other modules.
-	/// @return	The measured temperature
-	float		get_temperature() { return temp; }
->>>>>>> develop
 
 private:
 
 };
-
-
-

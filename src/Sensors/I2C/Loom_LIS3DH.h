@@ -20,7 +20,7 @@
 ///
 /// LIS3DH Accelerometer sensor module.
 ///
-/// @note	Needs more work on properly implementing support for the sensors interrupts 
+/// @note	Needs more work on properly implementing support for the sensors interrupts
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___l_i_s3_d_h.html)
@@ -38,14 +38,10 @@ protected:
 
 	LIS3DH		inst_LIS3DH;	///< Underlying LIS3DH sensor manager instance
 
-<<<<<<< HEAD
 	//float		accel[3];		/// Measured acceleration values (x,y,z)(g's)
-=======
-	float		accel[3];		///< Measured acceleration values (x,y,z)(g's)
->>>>>>> develop
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -83,6 +79,3 @@ public:
 private:
 
 };
-
-
-

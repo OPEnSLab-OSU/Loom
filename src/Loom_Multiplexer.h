@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Multiplexer.h
-/// @brief		File for Loom_Multiplexer definition, supporting enums, and 
+/// @brief		File for Loom_Multiplexer definition, supporting enums, and
 ///				I2C address selection for conflicts.
 /// @author		Luke Goertzen
 /// @date		2019
@@ -35,7 +35,7 @@ const I2C_Selection i2c_0x29 = I2C_Selection::L_TSL2591;	///< TSL2561 / TSL2591
 const I2C_Selection i2c_0x49 = I2C_Selection::L_AS7265X;	///< TSL2561 / AS7262 / AS7263 / AS7265X
 
 
-// Maybe query DeviceManager if RTC is in use, if not, query 0x68 
+// Maybe query DeviceManager if RTC is in use, if not, query 0x68
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -97,13 +97,10 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-<<<<<<< HEAD
-    void Run() {}
-=======
-	/// Call measure on all connected sensors
->>>>>>> develop
+  void Run() {}
+
 	void		measure();
-	
+
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject) override {}
 
@@ -178,8 +175,3 @@ private:
 	byte			get_i2c_on_port(uint8_t port);
 
 };
-
-
-
-
-

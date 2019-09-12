@@ -29,14 +29,10 @@ class Loom_MB1232 : public LoomI2CSensor
 
 protected:
 
-<<<<<<< HEAD
 	//uint16_t range;		/// Measure distance (cm)
-=======
-	uint16_t range;		///< Measure distance (cm)
->>>>>>> develop
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -74,6 +70,3 @@ public:
 private:
 
 };
-
-
-
