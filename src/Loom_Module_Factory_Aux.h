@@ -1,3 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Module_Factory_Aux.h
+/// @brief		File for constexpr functions LoomFactory makes use of to build
+///				its lookup table
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 
 #undef min
@@ -13,7 +24,8 @@ namespace factory {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-	namespace ersatz {
+
+	namespace to_array_aux {
 
 	template<std::size_t I, typename T> using tuple_element_t = typename std::tuple_element<I, T>::type;
 	template<typename T> using remove_reference_t = typename std::remove_reference<T>::type;
@@ -32,28 +44,29 @@ namespace factory {
 	template<typename Int, Int N> using make_integer_sequence = typename build_sequence<Int, N>::type;
 	template<std::size_t N> using make_index_sequence = make_integer_sequence<std::size_t, N>;
 		
-	} // ersatz
+	} // to_array_aux
 
 	template<
 		typename Tuple,
-		typename VTuple = ersatz::remove_reference_t<Tuple>,
+		typename VTuple = to_array_aux::remove_reference_t<Tuple>,
 		std::size_t... Indices
 	>
 	constexpr std::array<
-		ersatz::common_type_t<ersatz::tuple_element_t<Indices, VTuple>...>,
+		to_array_aux::common_type_t<to_array_aux::tuple_element_t<Indices, VTuple>...>,
 		sizeof...(Indices)
 	>
-	to_array(Tuple&& tuple, ersatz::index_sequence<Indices...>) 
+	to_array(Tuple&& tuple, to_array_aux::index_sequence<Indices...>) 
 	{
 		return { std::get<Indices>(std::forward<Tuple>(tuple))... };
 	}
 
-	template<typename Tuple, typename VTuple = ersatz::remove_reference_t<Tuple>>
+	/// Converts a tupe to an std::array
+	template<typename Tuple, typename VTuple = to_array_aux::remove_reference_t<Tuple>>
 	constexpr auto to_array(Tuple&& tuple) 
 	{
 		return to_array(
 			std::forward<Tuple>(tuple),
-			ersatz::make_index_sequence<std::tuple_size<VTuple>::value> {} );
+			to_array_aux::make_index_sequence<std::tuple_size<VTuple>::value> {} );
 	}
 
 

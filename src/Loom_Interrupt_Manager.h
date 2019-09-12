@@ -1,3 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Interrupt_Manager.h
+/// @brief		File for Loom_Interrupt_Manager definition and supporting enum
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+
 #pragma once
 
 #include "Loom_Module.h"
@@ -7,10 +18,9 @@
 #include <RTCCounter.h>
 
 
-#define InteruptRange 16		/// Number of interrupts
-#define MaxTimerCount 2			/// Maximum number of timers
-#define MaxStopWatchCount 2		/// Maximum numbr of stopwatches
-
+#define InteruptRange 16		///< Number of interrupts
+#define MaxTimerCount 2			///< Maximum number of timers
+#define MaxStopWatchCount 2		///< Maximum numbr of stopwatches
 
 
 // Specify that LoomRTC exists, defined in own file
@@ -18,24 +28,25 @@ class LoomRTC;
 class Loom_Sleep_Manager;
 
 
-// Used to make function signatures easier to read
-// when returning function pointers
-/// Typedef to for ISR function pointer readability
+/// Used to make function signatures easier to read
+/// when returning function pointers
 using ISRFuncPtr = void (*)();
 
-
+/// Enum of different ISR run behavior
 enum class ISR_Type { 
-	IMMEDIATE, 
-	CHECK_FLAG 
+	IMMEDIATE, 		///< Run ISR immediately
+	CHECK_FLAG		///< Run ISR when run_pending_ISRs() is called
 };
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomModule) | dependencies: [] | conflicts: []
-/// Submanager for managing interrupts, timers, and stopwatches
-// ###
+///
+/// Submanager for managing interrupts, timers, and stopwatches.
+///
+/// @par Resources
+/// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___interrupt___manager.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_Interrupt_Manager : public LoomModule
 {
 public:
@@ -78,6 +89,7 @@ protected:
 
 	/// Pointer to an RTC object for managing timers / timed interrupts	
 	LoomRTC*		RTC_Inst;					
+	
 	/// Pointer to a Sleep Manager object
 	Loom_Sleep_Manager* Sleep_Manager;	
 
@@ -120,14 +132,14 @@ public:
 
 	/// Interrupt Manager module constructor.
 	///
-	/// \param[in]	RTC_Inst		Set(Int) | <0> | {0("Null")} | OLED module name
+	/// @param[in]	RTC_Inst		Set(Int) | <0> | {0("Null")} | OLED module name
 	Loom_Interrupt_Manager(
 			LoomRTC*		RTC_Inst		= nullptr
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_Interrupt_Manager(JsonArrayConst p);
 
 	/// Destructor
@@ -137,8 +149,9 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+	/// No package necessary.
+	/// Implement with empty body.
 	void 		package(JsonObject json) override {}
-	bool		dispatch(JsonObject) override {}
 
 	/// Run any waiting ISRs.
 	/// Flag was set by a top half ISR
@@ -149,27 +162,27 @@ public:
 /*@{*/ //======================================================================
 
 	/// Register an ISR to an interrupt pin and its configuration
-	/// \param[in]	pin			Which pin to connect the interrupt on
-	/// \param[in]	ISR			ISR	function (Null if no interrupt linked)
-	/// \param[in]	signal_type	Low, High, Change, Falling, Rising
-	/// \param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
+	/// @param[in]	pin			Which pin to connect the interrupt on
+	/// @param[in]	ISR			ISR	function (Null if no interrupt linked)
+	/// @param[in]	signal_type	Low, High, Change, Falling, Rising
+	/// @param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
 	void		register_ISR(byte pin, ISRFuncPtr ISR, byte signal_type, ISR_Type run_type);
 
 	/// If an ISR dettaches interrupt, use this to reattach according to 
 	/// previous settings.
 	/// Effectively to running register_ISR with previous settings
-	/// \param[in]	pin			Which pin to reconnect the interrupt on
+	/// @param[in]	pin			Which pin to reconnect the interrupt on
 	bool		reconnect_interrupt(byte pin);
 
 
 	/// Restores pin to default ISR, disables interrupt
-	/// \param[in]	pin				The pin to unregister ISRs for
-	/// \param[in]	signal_type		What signal to configure default ISR to (default LOW)
+	/// @param[in]	pin				The pin to unregister ISRs for
+	/// @param[in]	signal_type		What signal to configure default ISR to (default LOW)
 	void		unregister_ISR(byte pin, byte signal_type=LOW);
 
 	/// Detaches then reattacheds interrupt according to settings.
 	/// used to clear pending interrupts
-	/// \param[in]	pin 	Pin to reset interrupts for ...
+	/// @param[in]	pin 	Pin to reset interrupts for ...
 	void		interrupt_reset(byte pin);
 
 //=============================================================================
@@ -180,39 +193,39 @@ public:
 
 	// sleep_for
 	/// Set RTC alarm an amount of time from now
-	/// \param[in]	duration	How long before the alarm should go off
+	/// @param[in]	duration	How long before the alarm should go off
 	bool		RTC_alarm_duration(TimeSpan duration);
 
 	/// Set RTC alarm an amount of time from now
-	/// \param[in]	days		Days into the future the alarm should be set
-	/// \param[in]	hours		Hours into the future the alarm should be set
-	/// \param[in]	minutes		Minutes into the future the alarm should be set
-	/// \param[in]	seconds		Seconds into the future the alarm should be set
+	/// @param[in]	days		Days into the future the alarm should be set
+	/// @param[in]	hours		Hours into the future the alarm should be set
+	/// @param[in]	minutes		Minutes into the future the alarm should be set
+	/// @param[in]	seconds		Seconds into the future the alarm should be set
 	bool		RTC_alarm_duration(uint8_t days, uint8_t hours, uint8_t minutes, uint8_t seconds);
 
 	// sleep_until
 	/// Set RTC alarm for a specific time.
 	/// Increments to next day at given hour, min, sec if specified time is in past
-	/// \param[in]	future_time		Time to set alarm for
+	/// @param[in]	future_time		Time to set alarm for
 	bool		RTC_alarm_at(DateTime future_time);
 
 	/// Set RTC alarm for a specific time.
 	/// Forwards to RTC_alarm_at that takes DateTime object
-	/// \param[in]	hour		Hour to set alarm for
-	/// \param[in]	minute		Minute to set alarm for
-	/// \param[in]	second		Second to set alarm for
+	/// @param[in]	hour		Hour to set alarm for
+	/// @param[in]	minute		Minute to set alarm for
+	/// @param[in]	second		Second to set alarm for
 	bool		RTC_alarm_at(uint8_t hour, uint8_t minute, uint8_t second);
 
 // // sleep_for
 	/// Set RTC alarm an amount of time from last alarm time
-	/// \param[in]	duration	How long before the alarm should go off
+	/// @param[in]	duration	How long before the alarm should go off
 	bool		RTC_alarm_duration_from_last(TimeSpan duration);
 
 	/// Set RTC alarm an amount of time from last alarm time
-	/// \param[in]	days		Days into the future the alarm should be set
-	/// \param[in]	hours		Hours into the future the alarm should be set
-	/// \param[in]	minutes		Minutes into the future the alarm should be set
-	/// \param[in]	seconds		Seconds into the future the alarm should be set
+	/// @param[in]	days		Days into the future the alarm should be set
+	/// @param[in]	hours		Hours into the future the alarm should be set
+	/// @param[in]	minutes		Minutes into the future the alarm should be set
+	/// @param[in]	seconds		Seconds into the future the alarm should be set
 	bool		RTC_alarm_duration_from_last(uint8_t days, uint8_t hours, uint8_t minutes, uint8_t seconds);
 
 
@@ -226,14 +239,14 @@ public:
 	void		check_timers();
 
 	/// Configure specified timer
-	/// \param[in]	timer_num		Timer to set
-	/// \param[in]	duration		How long timer should take (seconds)
-	/// \param[in]	ISR				ISR to run after timer goes off
-	/// \param[in]	repeat			Whether or not to be a repeating alarm
+	/// @param[in]	timer_num		Timer to set
+	/// @param[in]	duration		How long timer should take (seconds)
+	/// @param[in]	ISR				ISR to run after timer goes off
+	/// @param[in]	repeat			Whether or not to be a repeating alarm
 	void		register_timer(uint8_t timer_num, unsigned long duration, ISRFuncPtr ISR, bool repeat);
 
 	/// Clear specified timer 
-	/// \param[in]	timer_num		Timer to clear
+	/// @param[in]	timer_num		Timer to clear
 	void		clear_timer(uint8_t timer_num);
 
 //=============================================================================
@@ -248,27 +261,27 @@ public:
 	// uses https://github.com/GabrielNotman/RTCCounter
 
 	/// Configure internal timer
-	/// \param[in]	duration		How long timer should take (seconds)
-	/// \param[in]	ISR				ISR to run after timer goes off
-	/// \param[in]	repeat			Whether or not to be a repeating alarm
-	/// \param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
+	/// @param[in]	duration		How long timer should take (seconds)
+	/// @param[in]	ISR				ISR to run after timer goes off
+	/// @param[in]	repeat			Whether or not to be a repeating alarm
+	/// @param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
 	void		register_internal_timer(uint duration, ISRFuncPtr ISR, bool repeat, ISR_Type run_type);		
 
 	/// Run a delayed (flag based) ISR if the interal timer elapsed.
 	/// Is not needed if using ISR_Type::IMMEDIATE ISR
-	/// \return	True if flag was set and ISR run
+	/// @return	True if flag was set and ISR run
 	bool		run_pending_internal_timer_ISR();
 
 	/// Get whether the internal timer has elapsed
-	/// \return True if timer elapsed, false otherwise
-	bool		get_internal_timer_flag();
+	/// @return True if timer elapsed, false otherwise
+	bool		get_internal_timer_flag() { return rtcCounter.getFlag(); }
 
 	/// Clear internal timer flag
-	void		clear_internal_timer_flag();
+	void		clear_internal_timer_flag() { rtcCounter.clearFlag(); }
 
 	/// Enable or disable internal timer.
 	/// Disabling does not remove settings, use unregister_interal_timer for that behavior
-	/// \param[in]	enable	True to enable timer, false to disable
+	/// @param[in]	enable	True to enable timer, false to disable
 	void		internal_timer_enable(bool enable);
 
 	/// Clear and disable internal timer, remove ISR
@@ -286,17 +299,17 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get global interrupt enable state
-	/// \return		Global interrupt enable state
+	/// @return		Global interrupt enable state
 	bool		get_interrupts_enabled();
 
 	/// Get pin interrupt enable state
-	/// \param[in]	pin		Pin to the the enable state of
-	/// \return		The enable state
+	/// @param[in]	pin		Pin to the the enable state of
+	/// @return		The enable state
 	bool		get_enable_interrupt(byte pin);
 
 	/// Return pointer to the currently linked RTC object
-	/// \return		Current RTC object
-	LoomRTC*	get_RTC_module();
+	/// @return		Current RTC object
+	LoomRTC*	get_RTC_module() { return RTC_Inst; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -305,33 +318,33 @@ public:
 	/// Link a device manager.
 	/// Overrides default by getting RTC pointer from 
 	/// device manager if possible
-	/// \param[in]	LM		Manager to link 
+	/// @param[in]	LM		Manager to link 
 	void 		link_device_manager(LoomManager* LM) override;
 
 	/// Set pointer to sleep Manager
-	/// \param[in]	SM		Pointer to sleep manager
+	/// @param[in]	SM		Pointer to sleep manager
 	void 		link_sleep_manager(Loom_Sleep_Manager* SM);
 
 	/// All interrupts enable/disable
-	/// \param[in]	state	Enable state to apply to all interrupts
+	/// @param[in]	state	Enable state to apply to all interrupts
 	void		set_interrupts_enabled(bool state);
 
 	/// Per interrupt enable
-	/// \param[in]	pin		Interrupt pin to change enable state of
-	/// \param[in]	state	The enable state to set pin to
+	/// @param[in]	pin		Interrupt pin to change enable state of
+	/// @param[in]	state	The enable state to set pin to
 	void		set_enable_interrupt(byte pin, bool state);
 
 	/// Set the RTC module to use for timers
-	/// \param[in]	RTC_Inst	Pointer to the RTC object
-	void		set_RTC_module(LoomRTC* RTC_Inst);
+	/// @param[in]	RTC_Inst	Pointer to the RTC object
+	void		set_RTC_module(LoomRTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS
 /*@{*/ //======================================================================
 
 	/// Get c-string of name associated with interrupt type enum
-	/// \param[in]	type	Interrupt type 
-	/// \return C-string of interrupt type
+	/// @param[in]	type	Interrupt type 
+	/// @return C-string of interrupt type
 	const static char* interrupt_type_to_string(uint8_t type);
 
 

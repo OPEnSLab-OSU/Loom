@@ -2,18 +2,13 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'instance':1\
+		'instance':1,\
+		'interval':100\
 	},\
 	'components':[\
 		{\
 			'name':'LoRa',\
-			'params':[\
-				255,\
-				1,\
-				23,\
-				3,\
-				200\
-			]\
+			'params':[255,1,23,3,200]\
 		},\
 		{\
 			'name':'SD',\

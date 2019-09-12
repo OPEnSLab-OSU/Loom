@@ -1,7 +1,7 @@
 "{\
 	'general':\
 	{\
-		'name':'Device',\
+		'name':'Stepper',\
 		'instance':1,\
 		'interval':500\
 	},\
@@ -11,7 +11,7 @@
 			'params':'default'\
 		},\
 		{\
-			'name':'Digital',\
+			'name':'Stepper',\
 			'params':'default'\
 		},\
 		{\

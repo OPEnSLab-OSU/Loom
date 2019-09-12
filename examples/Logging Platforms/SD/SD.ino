@@ -41,5 +41,5 @@ void loop()
 	// Or log to a specific file (does not change what default file is set to)	
 	// Loom.SDCARD().log("specific.csv");
 
-	delay(5000);	
+	Loom.pause();	
 }

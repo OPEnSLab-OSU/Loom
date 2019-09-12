@@ -2,7 +2,8 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'instance':1\
+		'instance':1,\
+		'interval':10000\
 	},\
 	'components':[\
 		{\
@@ -20,10 +21,6 @@
 				[<your-mac-address>],\
 				[192,168,0,1]\
 			]\
-		},\
-		{\
-			'name':'NTP_Sync',\
-			'params':[0]\
 		},\
 		{\
 			'name':'GoogleSheets',\

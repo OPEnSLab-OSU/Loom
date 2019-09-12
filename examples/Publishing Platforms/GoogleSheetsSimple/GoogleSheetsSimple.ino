@@ -1,3 +1,21 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This is the simplest example of logging data to Google Google Sheets
+
+// The only difference between this example an 'Basic' is the LoomFactory
+// settings, the line: 
+//		Loom.GoogleSheets().publish();
+// and the configuration.
+
+// In the config, you need:
+// - MAC address for the Ethernet module (you could also replace Ethenet with WiFi)
+//		You can use 'default' instead of a parameter list for Ethenet if you
+//		are not on a network that restricts to only registered MAC addresses
+// - For Google sheets parameters, see:
+//   https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <Loom.h>
 
 // Include configuration
@@ -35,9 +53,7 @@ void loop()
 	Loom.package();
 	Loom.display_data();
 
-	// Loom.publish_all();
-	Loom.PublishPlat(0).publish();
+	Loom.GoogleSheets().publish();
 
-
-	delay(10000);
+	Loom.pause();
 }

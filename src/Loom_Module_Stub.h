@@ -1,30 +1,46 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Module_Stub.h
+/// @brief		File for Loom_Module_Stub definition and implementation.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+
 #pragma once
 
 #include "Loom_Module.h"
 
-// For OLED enums
-#include "LogPlats/Loom_OLED.h"
-// For Analog Enums
-#include "Sensors/Loom_Analog.h"
-// For DateTime/TimeSpan objects
-#include "RTC/Loom_RTC.h"
-// For Sleep Enums
-#include "Loom_Sleep_Manager.h"
-// For Interrupt Enums
-#include "Loom_Interrupt_Manager.h"
+#include "LogPlats/Loom_OLED.h"		// For OLED enums
+#include "Sensors/Loom_Analog.h"	// For Analog Enums
+#include "RTC/Loom_RTC.h"			// For DateTime/TimeSpan objects
+#include "Loom_Sleep_Manager.h"		// For Sleep Enums
+#include "Loom_Interrupt_Manager.h"	// For Interrupt Enums
 
 
-
-/// NOTE: This module is broken, as it attempts to implement member functions
-/// of classes it does not inherit from. If you need to check if you
-/// recieved a stub module, check the modules type using
-/// (LoomModule*)(module)->get_module_type().
-
+///////////////////////////////////////////////////////////////////////////////
+///
+/// Stub class to return pointer to instead of nullptr.
+///
+/// @note	Ideally we find a different implementation for similar behavior.
+///
+/// @note	This module is broken, as it attempts to implement member functions
+///			of classes it does not inherit from. If you need to check if you
+///			received a stub module, check the modules type using
+///			(LoomModule*)(module)->get_module_type().
+///
+/// @par Resources
+/// - [Loom_Module_Stub Documentation](https://openslab-osu.github.io/Loom/html/class_loom___module___stub.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_Module_Stub : public LoomModule
 {
 
 private: 
 
+	/// Default error message
 	const char* error_msg = "No valid module found";
 
 public:

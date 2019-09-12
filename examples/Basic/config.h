@@ -2,7 +2,8 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'instance':1\
+		'instance':1,\
+		'interval':2000\
 	},\
 	'components':[\
 		{\
@@ -21,7 +22,8 @@
 				0,\
 				0,\
 				0,\
-				0\
+				0,\
+				25.0\
 			]\
 		}\
 	]\

@@ -1,3 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Digital.h
+/// @brief		File for Loom_Digital definition.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+
 #pragma once
 
 #include "Loom_Sensor.h"
@@ -5,22 +16,24 @@
 /// Number of digital pins
 #define DIGITAL_COUNT 12
 
-// Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
-
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomSensor) | dependencies: [] | conflicts: []
-/// Digital pin manager module
-// ###
+///
+/// Digital pin manager module.
+///
+/// Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___digital.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_Digital : public LoomSensor
 {
 
 protected:
 
-	bool		pin_enabled[DIGITAL_COUNT];		/// Array of which pins are enabled
-	bool		digital_vals[DIGITAL_COUNT];	/// Array of last read digital values
+	bool		pin_enabled[DIGITAL_COUNT];		///< Array of which pins are enabled
+	bool		digital_vals[DIGITAL_COUNT];	///< Array of last read digital values
 
 public:
 	
@@ -30,18 +43,18 @@ public:
 
 	/// Digital manager module constructor
 	///
-	/// \param[in]	enable5				Bool | <true> | {true, false} | Enable pin 5 for managing
-	/// \param[in]	enable6				Bool | <true> | {true, false} | Enable pin 6 for managing
-	/// \param[in]	enable9				Bool | <false> | {true, false} | Enable pin 9 for managing
-	/// \param[in]	enable10			Bool | <false> | {true, false} | Enable pin 10 for managing
-	/// \param[in]	enable11			Bool | <false> | {true, false} | Enable pin 11 for managing
-	/// \param[in]	enable12			Bool | <false> | {true, false} | Enable pin 12 for managing
-	/// \param[in]	enableA0			Bool | <false> | {true, false} | Enable pin A0 for managing
-	/// \param[in]	enableA1			Bool | <false> | {true, false} | Enable pin A1 for managing
-	/// \param[in]	enableA2			Bool | <false> | {true, false} | Enable pin A2 for managing
-	/// \param[in]	enableA3			Bool | <false> | {true, false} | Enable pin A3 for managing
-	/// \param[in]	enableA4			Bool | <false> | {true, false} | Enable pin A4 for managing
-	/// \param[in]	enableA5			Bool | <false> | {true, false} | Enable pin A5 for managing
+	/// @param[in]	enable5				Bool | <true> | {true, false} | Enable pin 5 for managing
+	/// @param[in]	enable6				Bool | <true> | {true, false} | Enable pin 6 for managing
+	/// @param[in]	enable9				Bool | <false> | {true, false} | Enable pin 9 for managing
+	/// @param[in]	enable10			Bool | <false> | {true, false} | Enable pin 10 for managing
+	/// @param[in]	enable11			Bool | <false> | {true, false} | Enable pin 11 for managing
+	/// @param[in]	enable12			Bool | <false> | {true, false} | Enable pin 12 for managing
+	/// @param[in]	enableA0			Bool | <false> | {true, false} | Enable pin A0 for managing
+	/// @param[in]	enableA1			Bool | <false> | {true, false} | Enable pin A1 for managing
+	/// @param[in]	enableA2			Bool | <false> | {true, false} | Enable pin A2 for managing
+	/// @param[in]	enableA3			Bool | <false> | {true, false} | Enable pin A3 for managing
+	/// @param[in]	enableA4			Bool | <false> | {true, false} | Enable pin A4 for managing
+	/// @param[in]	enableA5			Bool | <false> | {true, false} | Enable pin A5 for managing
 	Loom_Digital(
 			bool				enable5			= true,
 			bool				enable6			= true,
@@ -59,7 +72,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_Digital(JsonArrayConst p);
 
 	/// Destructor
@@ -85,11 +98,11 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get value on digital pin
-	/// \return		True if HIGH, false if LOW
+	/// @return		True if HIGH, false if LOW
 	bool		get_digital_val(uint8_t pin);
 
 	/// Get if pin is enabled in manager
-	/// \return 	Enable state of pin
+	/// @return 	Enable state of pin
 	bool		get_pin_enabled(uint8_t pin);
 
 //=============================================================================
@@ -97,13 +110,13 @@ public:
 /*@{*/ //======================================================================
 
 	/// Set digital value of pin
-	/// \param[in]	pin		Pin to set value of
-	/// \param[in]	state	State to set pin to
+	/// @param[in]	pin		Pin to set value of
+	/// @param[in]	state	State to set pin to
 	void		set_digital_val(uint8_t pin, bool state);
 
 	/// Set pin enable state in manager
-	/// \param[in]	pin		Pin to set enable state of
-	/// \param[in]	e		Enable state to set to
+	/// @param[in]	pin		Pin to set enable state of
+	/// @param[in]	e		Enable state to set to
 	void		set_pin_enabled(uint8_t pin, bool e);
 
 private:
@@ -112,7 +125,8 @@ private:
 	static uint8_t pin_nums[DIGITAL_COUNT];
 
 	/// Convert pin number to index in manager arrays
-	/// \param[in]	pin		Pin to convert to index
+	/// @param[in]	pin		Pin to convert to index
+	/// @return Index
 	uint8_t		pin_to_index(uint8_t pin);
 
 };

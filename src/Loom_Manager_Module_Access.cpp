@@ -1,13 +1,22 @@
-
-// This is given its own file for the sake of separating the section of code that
-// will change with module additions from the rest of the implementation of Loom_Manager
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Manager_Module_Access.cpp
+/// @brief		File for LoomManager module access method implementations.
+/// @details	This is given its own File for sake of separating the section 
+///				of code that will change with module additions from the rest of 
+///				the implementation of Loom_Manager. 
+///				This implementation is not great and should be changed
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_Module.h"
 #include "Loom_Manager.h"
 #include "Loom_Module_Stub.h"
 
-// Global stub to reference if user tries to access 
-// object that does not exist
+/// Global stub to reference if user tries to access a module that does not exist
 Loom_Module_Stub global_stub;
 
 

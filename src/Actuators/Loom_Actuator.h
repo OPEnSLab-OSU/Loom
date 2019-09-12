@@ -1,16 +1,31 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Actuator.h
+/// @brief		File for LoomActuator definition.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+
 #pragma once
 
 #include "Loom_Module.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-/// Abstract base class of actuator modules
+///
+/// Abstract base class of actuator modules.
+///
+/// All actuator modules inherit from this class.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_actuator.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomActuator : public LoomModule
 {
-
-protected:
 
 public:
 
@@ -19,8 +34,15 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
+<<<<<<< HEAD
 	LoomActuator(
 			const char*			module_name,
+=======
+	/// @param[in]	module_name		Name of the module (provided by derived classes)
+	/// @param[in] 	module_type		Type of the module (provided by derived classes)
+	LoomActuator( 
+			const char*			module_name, 
+>>>>>>> develop
 			LoomModule::Type	module_type
 		);
 
@@ -31,15 +53,11 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-  virtual void Run() = 0;
-	virtual bool	dispatch(JsonObject) override = 0;
+	/// Passes on Generic Execution function
+  	virtual void Run() = 0;
+
+	/// Not all actuators need a package method, implement with empty body
 	virtual void 	package(JsonObject json) override {}
-
-//=============================================================================
-///@name	PRINT INFORMATION
-/*@{*/ //======================================================================
-
-	virtual void	print_state() override = 0;
 
 private:
 

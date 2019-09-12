@@ -1,6 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_LoRa.cpp
+/// @brief		File for Loom_LoRa implementation.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_LoRa.h"
-
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::Loom_LoRa( 	
@@ -18,9 +26,7 @@ Loom_LoRa::Loom_LoRa(
 	, driver( RH_RF95(RFM95_CS, RFM95_INT) )
 
 { 
-	// this->driver         = new RH_RF95(RFM95_CS, RFM95_INT);
-	// this->manager        = new RHReliableDatagram(*driver, address);
-	this->manager        = new RHReliableDatagram(driver, address);
+	this->manager = new RHReliableDatagram(driver, address);
 
 	pinMode(8, INPUT_PULLUP);
 	pinMode(RFM95_RST, OUTPUT);
@@ -63,7 +69,6 @@ Loom_LoRa::Loom_LoRa(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::~Loom_LoRa() 
 {
-	// delete driver;
 	delete manager;
 }
 

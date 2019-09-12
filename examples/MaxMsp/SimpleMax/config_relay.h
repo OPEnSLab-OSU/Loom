@@ -1,7 +1,7 @@
 "{\
 	'general':\
 	{\
-		'name':'Device',\
+		'name':'Relay',\
 		'instance':1,\
 		'interval':500\
 	},\
@@ -11,8 +11,8 @@
 			'params':'default'\
 		},\
 		{\
-			'name':'Digital',\
-			'params':'default'\
+			'name':'Relay',\
+			'params':[10]\
 		},\
 		{\
 			'name':'WiFi',\

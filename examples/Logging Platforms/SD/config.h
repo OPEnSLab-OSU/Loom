@@ -2,27 +2,13 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'instance':1\
+		'instance':1,\
+		'interval':5000\
 	},\
 	'components':[\
 		{\
 			'name':'Analog',\
-			'params':[\
-				8,\
-				12,\
-				true,\
-				true,\
-				true,\
-				true,\
-				true,\
-				true,\
-				0,\
-				0,\
-				0,\
-				0,\
-				0,\
-				0\
-			]\
+			'params':'default'\
 		},\
 		{\
 			'name':'SD',\

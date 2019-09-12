@@ -1,22 +1,25 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Module.cpp
+/// @brief		File for LoomModule implementation.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_Module.h"
 
-
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule::LoomModule( const char* module_name, Type type )
+LoomModule::LoomModule( const char* module_name, Type module_type )
 	: module_name_base(module_name)
 	, module_name(module_name_base.c_str())
-	, module_type(type)
+	, module_type(module_type)
 	, active(true)
-	, print_debug(true)
 	, print_verbosity(Verbosity::V_LOW)
 	, package_verbosity(Verbosity::V_LOW)
 	, device_manager(nullptr)
 {}
-
-///////////////////////////////////////////////////////////////////////////////
-LoomModule::LoomModule( ) 
-	: LoomModule("Unknown", Type::Unknown) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomModule::link_device_manager(LoomManager* LM)
@@ -37,7 +40,6 @@ void LoomModule::print_config()
 	print_module_label();
 	LPrintln("Config:");
 	LPrintln("\tModule Active    : ", (active)      ? "Enabled" : "Disabled" );
-	LPrintln("\tPrint Debug      : ", (print_debug) ? "Enabled" : "Disabled" );
 	LPrintln("\tPrint Verbosity  : ", enum_verbosity_string(print_verbosity) );
 	LPrintln("\tPackage Verbosity: ", enum_verbosity_string(package_verbosity) );
 }

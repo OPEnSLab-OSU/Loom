@@ -1,3 +1,10 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This is a basic example to test the MPU6050 accelerometer / gyroscope sensor
+
+///////////////////////////////////////////////////////////////////////////////
+
+
 #include <Loom.h>
 
 // Include configuration
@@ -35,5 +42,5 @@ void loop()
 	// Loom.package();
 	// Loom.display_data();
 
-	delay(500);
+	Loom.pause();
 }

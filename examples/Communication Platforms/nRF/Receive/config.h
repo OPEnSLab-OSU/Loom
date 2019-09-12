@@ -2,20 +2,13 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'instance':1\
+		'instance':1,\
+		'interval':100\
 	},\
 	'components':[\
 		{\
 			'name':'nRF',\
-			'params':[\
-				120,\
-				01,\
-				1,\
-				0,\
-				3,\
-				200,\
-				1\
-			]\
+			'params':[120,01,1,0,3,200,1]\
 		},\
 		{\
 			'name':'SD',\

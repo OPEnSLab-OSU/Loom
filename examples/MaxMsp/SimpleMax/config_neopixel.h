@@ -1,19 +1,19 @@
 "{\
 	'general':\
 	{\
-		'name':'Device',\
+		'name':'Neopixel',\
 		'instance':1,\
 		'interval':500\
 	},\
 	'components':[\
 		{\
 			'name':'Analog',\
-			'params':'default'\
+			'params':[8,12,0,0,0,1,1,1,0,0,0,0,0,0,25.0]\
 		},\
 		{\
-			'name':'Digital',\
-			'params':'default'\
-		},\
+			'name':'Neopixel',\
+			'params':[true,true,true]\
+		}\
 		{\
 			'name':'WiFi',\
 			'params':[\

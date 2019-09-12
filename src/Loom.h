@@ -7,8 +7,6 @@ This is the Doxygen generated documentation of the Loom library code.
 - [Github](https://github.com/OPEnSLab-OSU/Loom)
 - [Loom Wiki](https://github.com/OPEnSLab-OSU/Loom/wiki)
 - [Project Website](http://www.open-sensing.org/project-loom)
-- [Lab Wiki](https://wiki.open-sensing.org/doku.php?id=loom)
-
 
 */
 

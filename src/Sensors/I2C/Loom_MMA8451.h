@@ -1,3 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_MMA.h
+/// @brief		File for Loom_MMA definition.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
@@ -5,23 +16,35 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_MMA8451.h>
 
+
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// MMA8451 accelerometer
-// ###
+///
+/// MMA8451 accelerometer sensor module.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___m_m_a8451.html)
+/// - [Product Page: Adafruit Triple-Axis Accelerometer - ±2/4/8g @ 14-bit - MMA8451](https://www.adafruit.com/product/2019)
+/// - [Dependency: Adafruit_MMA8451_Library](https://github.com/adafruit/Adafruit_MMA8451_Library)
+/// - [Dependency: Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+/// - [Datasheet: Xtrinsic MMA8451Q 3-Axis, 14-bit/8-bit Digital Accelerometer](https://cdn-shop.adafruit.com/datasheets/MMA8451Q-1.pdf)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_MMA8451 : public LoomI2CSensor
 {
 
 protected:
 
-	Adafruit_MMA8451 MMA;			/// Underlying MMA8451 sensor manager instance
+	Adafruit_MMA8451 MMA;			///< Underlying MMA8451 sensor manager instance
 
+<<<<<<< HEAD
 //    float            accel[3];        ///    Acceleration values for each axis
 //    uint8_t            orientation;    /// Orientation
+=======
+	float			accel[3];		///< Acceleration values for each axis
+	uint8_t			orientation;	///< Orientation
+>>>>>>> develop
 
-	mma8451_range_t	range; 			/// Range setting (2/4/8 G)
+	mma8451_range_t	range; 			///< Range setting (2/4/8 G)
 
 public:
 
@@ -31,9 +54,9 @@ public:
 
 	/// Constructor
 	///
-	/// \param[in]	i2c_address				Set(Int) | <0x1D> | {0x1C, 0x1D} | I2C address
-	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	/// \param[in]	range					Set() | <"MMA8451"> | null | MMA8451 module name
+	/// @param[in]	i2c_address				Set(Int) | <0x1D> | {0x1C, 0x1D} | I2C address
+	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
+	/// @param[in]	range					Set() | <"MMA8451"> | null | MMA8451 module name
 	Loom_MMA8451(
 			byte			i2c_address		= 0x1D,
 			uint8_t			mux_port		= 255,
@@ -42,7 +65,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_MMA8451(JsonArrayConst p);
 	
 	/// Destructor

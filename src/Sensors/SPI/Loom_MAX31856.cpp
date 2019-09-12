@@ -1,14 +1,20 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_MAX31856.cpp
+/// @brief		File for Loom_MAX31856 implementation.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_MAX31856.h"
-
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MAX31856::Loom_MAX31856(	
 		const char*		module_name,
 		uint8_t			num_samples, 
-		
 		uint8_t			CS_pin,
-
 		uint8_t			SPI_a,
 		uint8_t			SPI_b,
 		uint8_t			SPI_c,

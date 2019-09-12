@@ -1,3 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_I2C_Sensor.h
+/// @brief		File for LoomI2CSensor definition.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+
 #pragma once
 
 #include "../Loom_Sensor.h"
@@ -5,16 +16,25 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-/// Abstract root for I2C sensor modules
+///
+/// Abstract root for I2C sensor modules.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_i2_c_sensor.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomI2CSensor : public LoomSensor
 {
 
 protected:
+	
+	/// The sensor's I2C address.
+	/// If the sensor supports mutliple, make sure this matches
+	/// the current configuration of the i2c address 
+	byte	i2c_address;	
 
-	byte	i2c_address;	/// The sensor's I2C address
-	uint8_t	port_num;		/// Used with multiplexer, keep track of port it is on
+	/// Used with multiplexer, keep track of port it is on
+	uint8_t	port_num;		
 
 public:
 	
@@ -23,7 +43,12 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	LoomI2CSensor( 	
+	/// @param[in]	module_name		Name of the module (provided by derived classes)
+	/// @param[in]	module_type		Type of the module (provided by derived classes)
+	/// @param[in]	i2c_address		The i2c address of the sensor 
+	/// @param[in]	mux_portx		The port of the sensor if used with a multiplexer, 255 if not 
+	/// @param[in]	num_samples		The number of samples to take and average
+	LoomI2CSensor(
 			const char*			module_name, 
 			LoomModule::Type	module_type,
 			byte				i2c_address,
@@ -38,9 +63,6 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	virtual void	measure() = 0;
-	virtual void 	package(JsonObject json) override = 0;
-	virtual void	print_measurements() = 0; 
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -53,13 +75,14 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get the sensor's I2C address
-	/// \return	The sensor's I2C address
+	/// @return	The sensor's I2C address
 	byte			get_i2c_address() { return i2c_address; }; 	
 
 private:
 
-	// Allow Multiplexer to access private methods of I2C sensor modules
+	/// Allow Multiplexer to access private methods of I2C sensor modules
 	friend class Loom_Multiplexer;
+
 };
 
 

@@ -1,18 +1,23 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_nRF.cpp
+/// @brief		File for Loom_nRF implementation.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_nRF.h"
-
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_nRF::Loom_nRF( 	
 		uint16_t		max_message_len,
-		
 		uint8_t			address,
-
 		uint8_t			data_rate,
 		uint8_t			power_level,
 		uint8_t			retry_count,
 		uint16_t		retry_timeout,
-
 		uint8_t			multicast_level	
 	)
 	: LoomCommPlat( "nRF", Type::nRF, max_message_len )
@@ -22,7 +27,6 @@ Loom_nRF::Loom_nRF(
 	, retry_timeout(retry_timeout)
 	, multicast_level(multicast_level)
 	, radio( RF24(5,6) )
-	// , network( RF24Network(radio) )
 {
 	// Create nRF manager objects
 	// radio	= new RF24(5,6);

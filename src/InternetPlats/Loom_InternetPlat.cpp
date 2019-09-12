@@ -1,6 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_InternetPlat.cpp
+/// @brief		File for LoomInternetPlat implementation.
+/// @author		Noah Koontz
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
-#include "Loom_InternetPlat.h"
-
+#include "Loom_InternetPlat.h"\
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::LoomInternetPlat(	
@@ -26,7 +34,7 @@ LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domai
 ///////////////////////////////////////////////////////////////////////////////
 void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb) 
 {
-	/// print the initial http request
+	// print the initial http request
 	client.print(verb);
 	client.print(" ");
 	client.print(url == nullptr ? "/" : url);
@@ -34,10 +42,10 @@ void LoomInternetPlat::write_http_request(Stream& client, const char* domain, co
 	client.print("HTTP/1.1\r\nUser-Agent: LoomOverSSLClient\r\nHost: ");
 	client.print(domain);
 	client.print("\r\nConnection: close\r\n");
-	/// add the optional body
+	// add the optional body
 	if(body != nullptr) client.print(body);
 	client.print("\r\n");
-	/// all ready to go!
+	// all ready to go!
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -119,15 +127,15 @@ void LoomInternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) con
 	// set all bytes in the buffer to 0
 	memset(packet_buffer, 0, NTP_PACKET_SIZE);
 	// Initialize values needed to form NTP request
-	packet_buffer[0] = 0b11100011;   // LI, Version, Mode
-	packet_buffer[1] = 0;     		// Stratum, or type of clock
-	packet_buffer[2] = 6;     		// Polling Interval
-	packet_buffer[3] = 0xEC;  		// Peer Clock Precision
+	packet_buffer[0] = 0b11100011;	// LI, Version, Mode
+	packet_buffer[1] = 0;			// Stratum, or type of clock
+	packet_buffer[2] = 6;			// Polling Interval
+	packet_buffer[3] = 0xEC;		// Peer Clock Precision
 	// 8 bytes of zero for Root Delay & Root Dispersion
-	packet_buffer[12]  = 49;
-	packet_buffer[13]  = 0x4E;
-	packet_buffer[14]  = 49;
-	packet_buffer[15]  = 52;
+	packet_buffer[12] = 49;
+	packet_buffer[13] = 0x4E;
+	packet_buffer[14] = 49;
+	packet_buffer[15] = 52;
 
 	// all NTP fields have been given values, now
 	// you can send a packet requesting a timestamp:
@@ -137,3 +145,5 @@ void LoomInternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) con
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+

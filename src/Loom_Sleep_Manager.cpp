@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Sleep_Manager.cpp
+/// @brief		File for Loom_Sleep_Manager implementation.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_Sleep_Manager.h"
 #include "RTC/Loom_RTC.h"
@@ -12,7 +21,8 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 		bool 			delay_on_wake, 
 		Mode			sleep_mode,
 		byte			power_off_pin
-	) : LoomModule( "SleepManager", Type::Sleep_Manager )
+	) 
+	: LoomModule( "SleepManager", Type::Sleep_Manager )
 	, use_LED(use_LED)
 	, delay_on_wake(delay_on_wake)
 	, sleep_mode(Mode::STANDBY)
@@ -26,12 +36,6 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(JsonArrayConst p)
 	: Loom_Sleep_Manager(p[0], p[1], (Mode)(int)p[2], p[3]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::link_interrupt_manager(Loom_Interrupt_Manager* IM)
-{
-	interrupt_manager = IM;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::print_config()
 {
 	LoomModule::print_config();
@@ -41,12 +45,6 @@ void Loom_Sleep_Manager::print_config()
 
 		LPrintln("\t\t Interrupt? ", interrupt_manager ? "+" : "-");
 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::print_state()
-{
-	LoomModule::print_state();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

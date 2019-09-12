@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This is a basic example of settings a repeating alarm with the DS3231 RTC.
+
+// This program can be used as a base to an RTC interrupt driven program
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <Loom.h>
 
 // Include configuration
@@ -49,7 +57,7 @@ void loop()
 	if (alarmFlag) {
 		digitalWrite(LED_BUILTIN, HIGH);
 		LPrintln("Alarm triggered, resetting alarm");
-		delay(1000);
+		Loom.pause(1000);
 		
 		// Don't call RTC_alarm_duration before reconnect_interrupt 
 		// unless sleeping or calling:

@@ -1,3 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_Module_Factory.h
+/// @brief		File for LoomFactory, FactoryBase definition and implementations.
+///				Also includes all the supporting code to build the LoomFactory lookup table.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 
 #include "Loom_Module.h"
@@ -81,11 +92,11 @@
 
 
 /// Creates a LoomModule with default parameters
-/// \return The created LoomModule
+/// @return The created LoomModule
 template<class T> LoomModule* ConstructDefault() { return new T(); }
 
 /// Creates a LoomModule with Json array of parameters
-/// \return The created LoomModule
+/// @return The created LoomModule
 template<class T> LoomModule* Construct(JsonArrayConst p) { return new T(p); }
 
 
@@ -237,13 +248,17 @@ namespace Include
 
 
 
-
 ///////////////////////////////////////////////////////////////////////////////
-
+///
 /// Base class that factory is derived from.
 /// Purpose is to allow LoomManger to have a pointer to a LoomFactory, which 
 /// it cannot do directly because different parameter selections result in 
 /// different factory classes
+///
+/// @par Resources
+/// - [FactoryBase Documentation](https://openslab-osu.github.io/Loom/html/class_factory_base.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class FactoryBase
 {
 public:
@@ -253,7 +268,7 @@ public:
 	/// Creates a LoomModule with its default parameters.
 	/// Usage example:
 	///		Loom_Relay r = FactoryInst.CreateDefault<Loom_Relay>();
-	/// \return The created LoomModule
+	/// @return The created LoomModule
 	template<class T> 
 	static T* CreateDefault() { return ConstructDefault<T>(); }
 
@@ -262,14 +277,18 @@ public:
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
+///
 /// Factory is used by LoomManager when parsing Json to match module names to 
 /// their associated constructors, and calling with parameters from the Json.
 /// The template parameters are used to select whether certain blocks of 
-/// modules are included in the lookup table. This is computed at compile
+/// modules are included in the lookup table. This is determined at compile
 /// time to not include unnecessary module classes and supporting code, 
 /// thus reducing code size
+///
+/// @par Resources
+/// - [LoomFactory Documentation](https://openslab-osu.github.io/Loom/html/class_loom_factory.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 template<
 	Enable::Internet INTERNET	= Enable::Internet::All,
 	Enable::Sensors SENSORS		= Enable::Sensors::Enabled,
@@ -330,8 +349,8 @@ public:
 	/// Create a module based on a subset of a Json configuration.
 	/// Needs name and parameters to the constructor as an array (or the word 'default')
 	/// if that module has default values for all parameters
-	/// \param[in]	module		Subset of a Json configuration, used to identify module to create and with what parameters
-	/// \return	LoomModule if created, nullptr if it could not be created
+	/// @param[in]	module		Subset of a Json configuration, used to identify module to create and with what parameters
+	/// @return	LoomModule if created, nullptr if it could not be created
 	LoomModule* Create(JsonVariant module)
 	{
 		const char* name = module["name"];

@@ -1,28 +1,53 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_MS5803.h
+/// @brief		File for Loom_MS5803 definition.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+
 #pragma once
 
 #include "Loom_I2C_Sensor.h"
 
-// #include <MS5803_01.h>
 #include <MS5803_02.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// MS5803 Atmospheric Pressure / Temperature sensor module
-// ###
+///
+/// MS5803 Atmospheric Pressure / Temperature sensor module.
+///
+/// @attention	Library is modified to support different I2C addresses and will not 
+///				compile with Loom without the change.
+///				The modifed verision can be found in the [Loom_Auxiliary](https://github.com/OPEnSLab-OSU/Loom_Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip) 
+///				repository
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___m_s5803.html)
+/// - [Product Page: MS580302BA01-00 Miniature Altimeter Module](https://www.digikey.com/product-detail/en/te-connectivity-measurement-specialties/MS580302BA01-00/223-1624-5-ND/5277629)
+/// - [Dependency: MS5803_2](https://github.com/millerlp/MS5803_02)
+/// - [Datasheet: MS5803-02BA](https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=MS5803-02BA&DocType=Data+Sheet&DocLang=English)
+///
+///////////////////////////////////////////////////////////////////////////////
 class Loom_MS5803 : public LoomI2CSensor
 {
 
 protected:
 
-	MS_5803		inst_MS5803;	/// Underlying MS5803 sensor manager instance
+	MS_5803		inst_MS5803;	///< Underlying MS5803 sensor manager instance
 
-	uint16_t	MS_PROM[8];		/// Read calibration data stored on sensor
+	uint16_t	MS_PROM[8];		///< Read calibration data stored on sensor
 
+<<<<<<< HEAD
 ///             Values[0]       /// Measure pressure (mbar)
 ///             Values[1]       /// Measured temperature (C)
+=======
+	float		pressure;		///< Measure pressure (mbar)
+	float		temp;			///< Measured temperature (C)
+>>>>>>> develop
 
 public:
 	
@@ -30,10 +55,10 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// MS5803 module constructor
+	/// Constructor
 	///
-	/// \param[in]	i2c_address				Set(Int) | <0x76> | {0x76, 0x77} | I2C address (0x76 if CSB (pin 3) is High, 0x77 if CSB is Low)
-	/// \param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
+	/// @param[in]	i2c_address				Set(Int) | <0x76> | {0x76, 0x77} | I2C address (0x76 if CSB (pin 3) is High, 0x77 if CSB is Low)
+	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	Loom_MS5803(
 			byte			i2c_address		= 0x76,
 			uint8_t			mux_port		= 255
@@ -41,7 +66,7 @@ public:
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
-	/// \param[in]	p		The array of constuctor args to expand
+	/// @param[in]	p		The array of constuctor args to expand
 	Loom_MS5803(JsonArrayConst p);
 
 	/// Destructor
@@ -64,7 +89,15 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
+<<<<<<< HEAD
 	float		get_temperature() { return Values[1].retrieve<float>().value_or(0); }
+=======
+	/// Get the temperature reading.
+	/// Used by the LoomTempSync module to provide temperature
+	/// to other modules.
+	/// @return	The measured temperature
+	float		get_temperature() { return temp; }
+>>>>>>> develop
 
 private:
 

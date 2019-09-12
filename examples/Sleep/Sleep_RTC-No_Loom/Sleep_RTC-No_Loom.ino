@@ -1,3 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This example demonstrates how to put the Feather M0 into sleep mode.
+
+// The device sleeps for 5 seconds then wakes for 3 pretenting to do work,
+// it then returns to sleep.
+
+// This codes is what the Loom implementation of sleep-wake operation 
+// (in the Sleep and Interrupt managers) is partially based off of 
+
+///////////////////////////////////////////////////////////////////////////////
 
 #include "LowPower.h" 		// Sparkfun low power library found here https://github.com/rocketscream/Low-Power
 #include <OPEnS_RTC.h>

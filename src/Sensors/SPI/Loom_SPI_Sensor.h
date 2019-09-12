@@ -1,9 +1,27 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_SPI_Sensor.h
+/// @brief		File for LoomSPISensor definition.
+/// @author		Luke Goertzen
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+
 #pragma once
 
 #include "../Loom_Sensor.h"
 
 
-/// Abstract base class for SPI sensor modules 
+///////////////////////////////////////////////////////////////////////////////
+///
+/// Abstract base class for SPI sensor modules.
+///
+/// @par Resources
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_s_p_i_sensor.html)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomSPISensor : public LoomSensor
 {
 
@@ -16,6 +34,10 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
+	/// Constructor
+	/// @param[in]	module_name		Name of the module (provided by derived classes)
+	/// @param[in]	module_type		Type of the module (provided by derived classes)
+	/// @param[in]	num_samples		The number of samples to take and average
 	LoomSPISensor(	
 			const char*			module_name,
 			LoomModule::Type	module_type,
@@ -28,11 +50,6 @@ public:
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
-
-	virtual void	calibrate() override {};
-	virtual void	measure() override = 0;
-	virtual void 	package(JsonObject json) override = 0;
-	virtual bool	dispatch(JsonObject) override {}
 
 //=============================================================================
 ///@name	PRINT INFORMATION

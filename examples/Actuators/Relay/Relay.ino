@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This is simple example that is used to toggle a relay on and off for 2 
+// seconds each.
+
+// The only configuration value the relay needs is the pin of the relay
+// which is currently set to pin 10 in the config
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <Loom.h>
 
 // Include configuration
@@ -31,7 +41,7 @@ void setup()
 void loop() 
 {
 	Loom.Relay().set(true);
-	delay(2000);
+	Loom.pause(2000);
 	Loom.Relay().set(false);
-	delay(2000);
+	Loom.pause(2000);
 }

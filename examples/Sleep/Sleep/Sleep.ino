@@ -1,5 +1,13 @@
-// Example to put device to sleep and wake via 
-// DS3231 RTC alarm connected to pin 6
+///////////////////////////////////////////////////////////////////////////////
+
+// This example demonstrates how to put device to sleep and wake via 
+// DS3231 RTC alarm connected to pin 6.
+
+// The built-in LED will blink once the device is awake.
+
+// This is not a repeating sleep-wake cycle example.
+
+///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 

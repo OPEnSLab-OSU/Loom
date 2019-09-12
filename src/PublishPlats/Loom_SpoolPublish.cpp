@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_SpoolPublish.cpp
+/// @brief		File for Loom_SpoolPublish implementation.
+/// @author		Eli Winkelman
+/// @date		2019
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_SpoolPublish.h"
 
@@ -12,10 +21,7 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 	: LoomPublishPlat(module_name, LoomModule::Type::SpoolPub, internet_type)
 	, m_spool_domain(spool_domain)
 	, m_device_data_endpoint(device_data_endpoint)
-	, m_device_id(device_id) {
-
-	print_module_label();
-}
+	, m_device_id(device_id) {}
 
 /////////////////////////////////////////////////////////////////////
 Loom_SpoolPublish::Loom_SpoolPublish(JsonArrayConst p)
@@ -87,3 +93,10 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 	LPrint("Published successfully!\n");
 	return true;
 }
+
+/////////////////////////////////////////////////////////////////////
+
+
+
+
+
