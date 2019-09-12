@@ -16,8 +16,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXOS8700::Loom_FXOS8700(
-		byte			i2c_address, 
-		uint8_t			mux_port
+		const byte			i2c_address, 
+		const uint8_t		mux_port
 	)
 	: LoomI2CSensor( "FXOS8700", Type::FXOS8700, i2c_address, mux_port )
 	, inst_FXOS8700(Adafruit_FXOS8700(0x8700A, 0x8700B))

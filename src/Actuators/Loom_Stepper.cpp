@@ -57,7 +57,7 @@ bool Loom_Stepper::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Stepper::move_steps(uint8_t motor, uint16_t steps, uint8_t speed, bool clockwise)
+void Loom_Stepper::move_steps(const uint8_t motor, const uint16_t steps, const uint8_t speed, const bool clockwise)
 {
 	if (motor < NUM_STEPPERS) {
 		motors[motor]->setSpeed( (speed > 0) ? speed : 0);

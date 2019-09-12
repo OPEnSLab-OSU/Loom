@@ -42,8 +42,8 @@ public:
 	/// @param[in]	i2c_address				Set(Int) | <0x70> | {0x70} | I2C address
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	Loom_MB1232(
-			byte			i2c_address		= 0x70,
-			uint8_t			mux_port		= 255
+			const byte			i2c_address		= 0x70,
+			const uint8_t		mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args

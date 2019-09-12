@@ -16,19 +16,19 @@ byte Loom_Digital::pin_nums[DIGITAL_COUNT] = {5, 6, 9, 10, 11, 12, 14, 15, 16, 1
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Digital::Loom_Digital(	
-		bool				enable5,
-		bool				enable6,
-		bool				enable9,
-		bool				enable10,
-		bool				enable11,
-		bool				enable12,
+		const bool		enable5,
+		const bool		enable6,
+		const bool		enable9,
+		const bool		enable10,
+		const bool		enable11,
+		const bool		enable12,
 
-		bool				enableA0,
-		bool				enableA1,
-		bool				enableA2,
-		bool				enableA3,
-		bool				enableA4,
-		bool				enableA5
+		const bool		enableA0,
+		const bool		enableA1,
+		const bool		enableA2,
+		const bool		enableA3,
+		const bool		enableA4,
+		const bool		enableA5
 	) 
 	: LoomSensor( "Digital", Type::Digital, 1 )
 {
@@ -146,7 +146,7 @@ void Loom_Digital::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Digital::get_digital_val(uint8_t pin)
+bool Loom_Digital::get_digital_val(const uint8_t pin)
 {
 	if (pin_enabled[ pin_to_index(pin) ]) {
 		pinMode(pin, INPUT_PULLUP);
@@ -157,7 +157,7 @@ bool Loom_Digital::get_digital_val(uint8_t pin)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Digital::set_digital_val(uint8_t pin, bool state)
+void Loom_Digital::set_digital_val(const uint8_t pin, const bool state)
 {
 	if (pin_enabled[ pin_to_index(pin) ]) {
 		pinMode(pin, OUTPUT);
@@ -166,19 +166,19 @@ void Loom_Digital::set_digital_val(uint8_t pin, bool state)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Digital::get_pin_enabled(uint8_t pin)
+bool Loom_Digital::get_pin_enabled(const uint8_t pin)
 {
 	return pin_enabled[ pin_to_index(pin) ];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Digital::set_pin_enabled(uint8_t pin, bool e)
+void Loom_Digital::set_pin_enabled(const uint8_t pin, const bool e)
 {
 	pin_enabled[ pin_to_index(pin) ] = e;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint8_t Loom_Digital::pin_to_index(uint8_t pin)
+uint8_t Loom_Digital::pin_to_index(const uint8_t pin)
 {
 	for (int i = 0; i < DIGITAL_COUNT; i++) {
 		if (pin_nums[i] == pin) return i;

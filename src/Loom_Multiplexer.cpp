@@ -59,10 +59,10 @@ const byte Loom_Multiplexer::known_addresses[] =
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Multiplexer::Loom_Multiplexer(	
-		byte			i2c_address,
-		uint8_t			num_ports,
-		bool			dynamic_list,	
-		uint 			update_period
+		const byte			i2c_address,
+		const uint8_t		num_ports,
+		const bool			dynamic_list,	
+		const uint			update_period
 	) 
 	: LoomModule( "Multiplexer", Type::Multiplexer ) 
 	, i2c_address(i2c_address)
@@ -106,7 +106,7 @@ Loom_Multiplexer::~Loom_Multiplexer()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(byte i2c_address, uint8_t port)
+LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, const uint8_t port)
 {
 	switch (i2c_address) {
 		case 0x10 : return new Loom_ZXGesture(i2c_address, port);	// ZXGesture
@@ -307,7 +307,7 @@ void Loom_Multiplexer::refresh_sensors()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-byte Loom_Multiplexer::get_i2c_on_port(uint8_t port)
+byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port)
 {
 	tca_select(port);
 	byte addr;
@@ -331,7 +331,7 @@ byte Loom_Multiplexer::get_i2c_on_port(uint8_t port)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::tca_select(uint8_t port) 
+void Loom_Multiplexer::tca_select(const uint8_t port) 
 {
 	if (port < num_ports) {
 		Wire.beginTransmission(i2c_address);

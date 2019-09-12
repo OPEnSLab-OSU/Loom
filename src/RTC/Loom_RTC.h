@@ -63,10 +63,10 @@ public:
 	/// @param[in]	timezone		Which timezone device is in
 	/// @param[in]	use_utc_time	True for UTC time, false for local time
 	LoomRTC(	
-			const char*			module_name,
-			LoomModule::Type	module_type,
-			TimeZone			timezone,
-			bool				use_utc_time
+			const char*				module_name,
+			const LoomModule::Type	module_type,
+			const TimeZone			timezone,
+			const bool				use_utc_time
 		);
 
 	/// Destructor
@@ -87,14 +87,14 @@ public:
 	/// Set time to provided timezone
 	/// @param[in]	time	Time to set to
 	/// @param[in]	is_utc	True if 'time' is in UTC, false if local
-	void			time_adjust(DateTime time, bool is_utc=true);
+	void			time_adjust(const DateTime time, const bool is_utc=true);
 
 	/// Get timestamp
 	/// @param[out]	header		Column header(s) of timestamp element
 	/// @param[out]	timestamp	String to fill with timestamp element(s)
 	/// @param[in]	delimiter	Delimiter to use
 	/// @param[in]	format		How to format timestamp (0: no timestamp added, 1: only date added, 2: only time added, 3: both date and time added (two fields), 4: both date and time added (combined field) ), 
-	void			get_timestamp(char* header, char* timestamp, char delimiter, uint8_t format=3);
+	void			get_timestamp(char* header, char* timestamp, const char delimiter, const uint8_t format=3);
 
 	/// Set an alarm to go off at the specified time
 	/// @param[in]	time	DateTime of time alarm should go off
@@ -103,7 +103,7 @@ public:
 	/// Set an alarm for a duration
 	/// @param[in]	duration	TimeSpan of duration before alarm goes off
 	// virtual void	set_alarm(TimeSpan duration) = 0;
-	void			set_alarm(TimeSpan duration) { set_alarm(now()+duration); }
+	void			set_alarm(const TimeSpan duration) { set_alarm(now()+duration); }
 
 	/// Clear alarms
 	virtual void	clear_alarms() = 0;
@@ -127,7 +127,7 @@ public:
 
 	/// Print the current time
 	/// @param[in]	verbose		True for multile lines, false for short display
-	void			print_time(bool verbose=false);
+	void			print_time(const bool verbose=false);
 
 //=============================================================================
 ///@name	GETTERS
@@ -170,7 +170,7 @@ public:
 	/// Get string of name associated with time zone enum
 	/// @param[in]	t	TimeZone value to get string of
 	/// @return C-string of time zone
-	static char*	enum_timezone_string(TimeZone t);
+	static char*	enum_timezone_string(const TimeZone t);
 
 protected:
 
@@ -184,7 +184,7 @@ protected:
 	// the classes similarly named methods
 
 	/// Begin auxiliary function that subclasses need to implement
-	virtual void	_adjust(DateTime time) = 0;
+	virtual void	_adjust(const DateTime time) = 0;
 
 	/// Begin auxiliary function that subclasses need to implement.
 	///	@return True if begin worked without issue, false otherwise
@@ -203,7 +203,7 @@ protected:
 	/// Convert time between local and UTC.
 	/// Uses current timezone setting
 	/// @param[in]	to_utc	True to switch to UTC, false to go to local from UTC
-	void			convert_local_to_utc(bool to_utc=true);
+	void			convert_local_to_utc(const bool to_utc=true);
 
 	/// Check if current RTC time is valid (not necessarily correct)
 	/// @return	True if valid

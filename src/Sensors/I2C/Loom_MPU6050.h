@@ -68,9 +68,9 @@ public:
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	/// @param[in]	calibrate				Bool | <true> | {true, false} | Whether or not to calibrate at start
 	Loom_MPU6050(
-			byte			i2c_address		= 0x69,
-			uint8_t			mux_port		= 255,
-			bool			calibrate		= true
+			const byte			i2c_address		= 0x69,
+			const uint8_t		mux_port		= 255,
+			const bool			calibrate		= true
 		);
 
 	/// Constructor that takes Json Array, extracts args

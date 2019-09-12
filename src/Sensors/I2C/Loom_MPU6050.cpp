@@ -18,9 +18,9 @@ MPU6050 mpu6050(Wire);
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MPU6050::Loom_MPU6050(
-		byte			i2c_address, 
-		uint8_t			mux_port,
-		bool			calibrate
+		const byte			i2c_address, 
+		const uint8_t		mux_port,
+		const bool			calibrate
 	) 
 	: LoomI2CSensor( "MPU6050", Type::MPU6050, i2c_address, mux_port )
 {

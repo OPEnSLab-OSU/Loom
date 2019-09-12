@@ -12,9 +12,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomSensor::LoomSensor(	
-		const char*			module_name,
-		LoomModule::Type	module_type,
-		uint8_t				num_samples 
+		const char*					module_name,
+		const LoomModule::Type		module_type,
+		const uint8_t				num_samples 
 	) 
 	: LoomModule( module_name, module_type ) 
 	, num_samples(num_samples)

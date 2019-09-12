@@ -24,8 +24,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MS5803::Loom_MS5803(
-		byte			i2c_address, 
-		uint8_t			mux_port
+		const byte			i2c_address, 
+		const uint8_t			mux_port
 	)
 	: LoomI2CSensor( "MS5803", Type::MS5803, i2c_address, mux_port )
 	, inst_MS5803( MS_5803(i2c_address, 512) )

@@ -12,7 +12,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DecagonGS3::Loom_DecagonGS3(	
-		uint8_t			num_samples 
+		const uint8_t			num_samples 
 	) 
 	: LoomSDI12Sensor( "GS3", Type::DecagonGS3, num_samples ) 
 {

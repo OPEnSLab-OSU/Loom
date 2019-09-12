@@ -12,9 +12,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MMA8451::Loom_MMA8451(
-		byte			i2c_address, 
-		uint8_t			mux_port,
-		mma8451_range_t	range
+		const byte				i2c_address, 
+		const uint8_t			mux_port,
+		const mma8451_range_t	range
 	) 
 	: LoomI2CSensor( "MMA8451", Type::MMA8451, i2c_address, mux_port )
 	, range{range}

@@ -75,7 +75,7 @@ public:
 	/// @param[in]	steps		Number of steps to rotate
 	///	@param[in]	speed		Speed to move at (0-255)
 	/// @param[in]	clockwise 	True to rotate clockwise, false for counterclock-wise
-	void		move_steps(uint8_t motor, uint16_t steps, uint8_t speed, bool clockwise);
+	void		move_steps(const uint8_t motor, const uint16_t steps, const uint8_t speed, const bool clockwise);
 
 //=============================================================================
 ///@name	PRINT INFORMATION

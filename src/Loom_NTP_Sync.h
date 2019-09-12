@@ -41,7 +41,7 @@ public:
 	///
 	/// @param[in]  sync_interval_hours		Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
 	LoomNTPSync(
-		const uint			sync_interval_hours		= 0
+		const uint		sync_interval_hours		= 0
 	);
 
 	/// Constructor that takes Json Array, extracts args

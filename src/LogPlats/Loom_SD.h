@@ -58,10 +58,10 @@ public:
 	/// @param[in]	chip_select					Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
 	/// @param[in]	default_file				String | <"test.csv"> | null | File to write to if none explicity provided (should be < 8 characters w/out extension)
 	Loom_SD(
-			bool			enable_rate_filter	= true,
-			uint16_t		min_filter_delay	= 1000,
-			byte			chip_select			= 10,
-			const char*		default_file		= "test.csv"
+			const bool			enable_rate_filter	= true,
+			const uint16_t		min_filter_delay	= 1000,
+			const byte			chip_select			= 10,
+			const char*			default_file		= "test.csv"
 
 			// SD_Version 		version 			= FEATHERWING,
 			// byte 			reset_pin 			= A2
@@ -161,7 +161,7 @@ private:
 	/// Recursive for nested folders
 	/// @param[in]	dir			File to treat at root
 	/// @param[in]	numTabs		Number of tabs to prepend to properly show nesting
-	void		print_directory(File dir, uint8_t numTabs);
+	void		print_directory(File dir, const uint8_t numTabs);
 
 	/// Auxiliary funcntion to print data element, delimiter, and (optionally) space
 	/// @param[in]	sdFile		File to write to
@@ -169,7 +169,7 @@ private:
 	/// @param[in]	delimiter	Delimiter to use
 	/// @param[in]	add_space	True to add space after delimiter
 	template <typename T>
-	void		SD_print_aux(File sdFile, T data, char delimiter, bool add_space=true)
+	void		SD_print_aux(File sdFile, T data, const char delimiter, const bool add_space=true)
 	{
 		sdFile.print(data);
 		sdFile.print(delimiter);

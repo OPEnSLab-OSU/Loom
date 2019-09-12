@@ -116,7 +116,7 @@ public:
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	LoomModule( 
 		const char*		module_name		= "Unknown", 
-		Type			module_type		= Type::Unknown
+		const Type		module_type		= Type::Unknown
 	);
 
 	/// Destructor
@@ -194,7 +194,7 @@ public:
 	bool			get_active() { return active; }
 
 	/// Get the category of the module.
-	Category			category();
+	Category		category();
 
 //=============================================================================
 ///@name	SETTERS
@@ -210,16 +210,16 @@ public:
 
 	/// Set print verbosity 
 	/// Controlls level of detail included in debug prints 
-	void			set_print_verbosity(Verbosity v);
+	void			set_print_verbosity(const Verbosity v);
 
 	/// Set package verbosity.
 	/// Controlls level of detail included in bundles
 	/// @param[in]	v	The verbosity setting
-	void			set_package_verbosity(Verbosity v);
+	void			set_package_verbosity(const Verbosity v);
 
 	/// Set whether or not the module should be treated as active
 	/// @param[in]	enable	Whether or not to enable module
-	void			set_active(bool enable);
+	void			set_active(const bool enable) { active = enable; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS
@@ -228,12 +228,12 @@ public:
 	/// Get string of name associated with verbosity enum
 	/// @param[in]	v	Verbosity value to get string representation of
 	/// @return String of verbosity
-	static const char*	enum_verbosity_string(Verbosity v);
+	static const char*	enum_verbosity_string(const Verbosity v);
 	
 	/// Get string of the category associated with a Category
 	/// @param[in]	c	Category value to get string representation of
 	/// @return String of category
-	static const char*	enum_category_string(Category c);
+	static const char*	enum_category_string(const Category c);
 
 protected:
 
@@ -243,7 +243,7 @@ protected:
 
 	/// Print the module name as a label.
 	/// Used for matching debug prints to corresponding module
-	void			print_module_label();
+	void			print_module_label() const;
 
 private:
 

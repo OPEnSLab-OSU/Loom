@@ -47,7 +47,7 @@ public:
 	///
 	/// @param[in]  internet_type	Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
 	Loom_MaxPub(
-		LoomModule::Type	internet_type
+		const LoomModule::Type		internet_type
 	);
 
 	/// Constructor that takes Json Array, extracts args
@@ -86,11 +86,11 @@ public:
 
 	/// Set the UDP port to send on
 	/// @param[in]	port	The UDP port to send on
-	void		set_port(uint16_t port);
+	void		set_port(const uint16_t port);
 
 	/// Set the IP address to send to
 	/// @param[in]	ip	The IP address to set to
-	void		set_ip(IPAddress ip);
+	void		set_ip(const IPAddress ip);
 
 	/// Set the IP addres to send to by getting remote IP from MaxSub if available
 	void		set_ip();

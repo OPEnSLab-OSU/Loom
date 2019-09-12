@@ -54,10 +54,10 @@ public:
 	/// @param[in]	gain				Set(Int) | <1> | {1, 16} | Gain level
 	/// @param[in]	resolution			Set(Int) | <3> | { 1("Low"), 2("Med"), 3("High") } | Resolution
 	Loom_TSL2561(
-			byte			i2c_address		= 0x39,
-			uint8_t			mux_port		= 255,
-			uint8_t			gain			= 1,
-			uint8_t			resolution		= 3
+			const byte			i2c_address		= 0x39,
+			const uint8_t		mux_port		= 255,
+			const uint8_t		gain			= 1,
+			const uint8_t		resolution		= 3
 		);
 
 	/// Constructor that takes Json Array, extracts args

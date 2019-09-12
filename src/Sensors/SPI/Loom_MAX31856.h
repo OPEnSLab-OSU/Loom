@@ -53,12 +53,12 @@ public:
 	/// @param[in]	SPI_d				Set(Int) | <13> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used for Software Serial d
 	Loom_MAX31856(
 			const char*		module_name			= "MAX31856",
-			uint8_t			num_samples			= 1,
-			uint8_t			CS_pin				= 10,
-			uint8_t			SPI_a				= 10,
-			uint8_t			SPI_b				= 11,
-			uint8_t			SPI_c				= 12,
-			uint8_t			SPI_d				= 13
+			const uint8_t	num_samples			= 1,
+			const uint8_t	CS_pin				= 10,
+			const uint8_t	SPI_a				= 10,
+			const uint8_t	SPI_b				= 11,
+			const uint8_t	SPI_c				= 12,
+			const uint8_t	SPI_d				= 13
 
 			// type
 		);

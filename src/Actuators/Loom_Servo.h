@@ -70,7 +70,7 @@ public:
 	/// Set servo position.
 	/// @param[in]	servo		The servo number to control
 	/// @param[in]	degree		The position to set the servo to
-	void		set_degree(uint8_t servo, uint8_t degree);
+	void		set_degree(const uint8_t servo, const uint8_t degree);
 
 //=============================================================================
 ///@name	PRINT INFORMATION

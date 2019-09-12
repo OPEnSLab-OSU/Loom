@@ -15,9 +15,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomPublishPlat::LoomPublishPlat(	
-		const char*			module_name,
-		LoomModule::Type	module_type,
-		LoomModule::Type	internet_type
+		const char*				module_name,
+		const LoomModule::Type	module_type,
+		const LoomModule::Type	internet_type
 	) 
 	: LoomModule( module_name, module_type )
 	, m_internet( nullptr )

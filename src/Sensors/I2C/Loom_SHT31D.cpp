@@ -14,8 +14,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SHT31D::Loom_SHT31D(
-		byte			i2c_address,
-		uint8_t			mux_port
+		const byte			i2c_address,
+		const uint8_t		mux_port
 	)
 	: LoomI2CSensor( "SHT31D", Type::SHT31D, i2c_address, mux_port )
 {

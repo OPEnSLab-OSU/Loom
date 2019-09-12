@@ -53,10 +53,10 @@ public:
 	/// @param[in] 	spi_IRQ				SPI IRQ pin
 	/// @param[in] 	spi_RST				SPI reset pin
 	Loom_Bluetooth(
-			uint16_t 		max_message_len		= 120,
-			uint8_t			spi_CS				= 8,
-			uint8_t			spi_IRQ				= 7,
-			uint8_t			spi_RST				= 4
+			const uint16_t 		max_message_len		= 120,
+			const uint8_t		spi_CS				= 8,
+			const uint8_t		spi_IRQ				= 7,
+			const uint8_t		spi_RST				= 4
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -75,12 +75,12 @@ public:
 	bool		receive(JsonObject json) override {}
 
 	/// Currently no implementation
-	bool		send(JsonObject json, uint8_t destination) override {}
+	bool		send(JsonObject json, const uint8_t destination) override {}
 	void		add_config(JsonObject json) override;
 
 	/// Allow a phone to connect
 	/// @param[in] connect_timeout		Max time to allow user to try to connect
-	void	 	connect(uint16_t connect_timeout);
+	void	 	connect(const uint16_t connect_timeout);
 
 	/// Receive a command from user
 	/// @return Status 
@@ -94,7 +94,7 @@ public:
 	/// -1: user never wrote a command, timed out
 	/// -2: user entered an invalid command
 	/// 0 or positive integer: index in COMMAND_TABLE that matches the user-entered command
-	int8_t		getCommand( uint16_t max_timeout );
+	int8_t		getCommand(const uint16_t max_timeout );
 
 //=============================================================================
 ///@name	TESTING METHODS
@@ -123,7 +123,7 @@ public:
 
 	/// Bluetooth currently does not use addresses.
 	/// Override with empty body
-	void		set_address(uint8_t addr) override {}
+	void		set_address(const uint8_t addr) override {}
 
 private:
 

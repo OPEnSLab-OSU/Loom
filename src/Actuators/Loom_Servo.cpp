@@ -68,7 +68,7 @@ bool Loom_Servo::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Servo::set_degree(uint8_t servo, uint8_t degree)
+void Loom_Servo::set_degree(const uint8_t servo, const uint8_t degree)
 {	
 	if (servo < NUM_SERVOS) {
 		servo_driver.setPWM(servo, 0, map(degree, 0, 180, SERVOMIN, SERVOMAX));

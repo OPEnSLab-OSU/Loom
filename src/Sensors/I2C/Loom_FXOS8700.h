@@ -50,8 +50,8 @@ public:
 	/// @param[in]	i2c_address				Set(Int) | <0x1F> | {0x1C, 0x1D, 0x1E, 0x1F} | I2C address
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	Loom_FXOS8700(
-			byte			i2c_address		= 0x1F,
-			uint8_t			mux_port		= 255
+			const byte			i2c_address		= 0x1F,
+			const uint8_t		mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args

@@ -31,10 +31,10 @@ protected:
 	/// The sensor's I2C address.
 	/// If the sensor supports mutliple, make sure this matches
 	/// the current configuration of the i2c address 
-	byte	i2c_address;	
+	const byte		i2c_address;	
 
 	/// Used with multiplexer, keep track of port it is on
-	uint8_t	port_num;		
+	const uint8_t	port_num;		
 
 public:
 	
@@ -49,11 +49,11 @@ public:
 	/// @param[in]	mux_portx		The port of the sensor if used with a multiplexer, 255 if not 
 	/// @param[in]	num_samples		The number of samples to take and average
 	LoomI2CSensor(
-			const char*			module_name,
-			LoomModule::Type	module_type,
-			byte				i2c_address,
-			uint8_t				mux_port	= 255,	// Default to 255 (not on mux)
-			uint8_t				num_samples	= 1		 
+			const char*					module_name,
+			const LoomModule::Type		module_type,
+			const byte					i2c_address,
+			const uint8_t				mux_port	= 255,	// Default to 255 (not on mux)
+			const uint8_t				num_samples	= 1		 
 		);
 
 	/// Destructor

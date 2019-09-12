@@ -55,10 +55,10 @@ public:
 	/// @param[in]	gain_level			Set(Int) | <1> | { 1 } | Gain level
 	/// @param[in]	timing_level		Set(Int) | <0> | { 0 } | Timing level
 	Loom_TSL2591(
-			byte			i2c_address			= 0x29,
-			uint8_t			mux_port			= 255,
-			uint8_t			gain_level			= 1,
-			uint8_t			timing_level		= 0
+			const byte			i2c_address			= 0x29,
+			const uint8_t		mux_port			= 255,
+			const uint8_t		gain_level			= 1,
+			const uint8_t		timing_level		= 0
 		);
 
 	/// Constructor that takes Json Array, extracts args

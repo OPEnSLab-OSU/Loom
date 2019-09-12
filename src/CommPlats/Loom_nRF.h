@@ -63,13 +63,13 @@ public:
 	/// @param[in]	retry_timeout 		Int | <200> | [20-500] | Delay between retransmissions (ms)
 	/// @param[in]	multicast_level		Int | <1> | [1-3] | How many levels to propogate message through heirarchy
 	Loom_nRF(
-			uint16_t		max_message_len		= 120,
-			uint8_t			address 			= 0,
-			uint8_t			data_rate			= 1,
-			uint8_t			power_level			= 0,
-			uint8_t			retry_count 		= 3,
-			uint16_t		retry_timeout 		= 200,
-			uint8_t			multicast_level		= 1
+			const uint16_t		max_message_len		= 120,
+			const uint8_t		address 			= 0,
+			const uint8_t		data_rate			= 1,
+			const uint8_t		power_level			= 0,
+			const uint8_t		retry_count 		= 3,
+			const uint16_t		retry_timeout 		= 200,
+			const uint8_t		multicast_level		= 1
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -85,7 +85,7 @@ public:
 /*@{*/ //======================================================================
 
 	bool		receive(JsonObject json) override;
-	bool		send(JsonObject json, uint8_t destination) override;
+	bool		send(JsonObject json, const uint8_t destination) override;
 	void		broadcast(JsonObject json) override;
 	void		add_config(JsonObject json) override;
 
@@ -118,13 +118,13 @@ public:
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
-	void		set_address(uint8_t addr) override;
+	void		set_address(const uint8_t addr) override;
 
 	/// Set multicast(broadcast) level.
 	/// nRF has varying degrees of broadcast corresponding to 
 	/// depth to broadcast through network tree
 	/// @param[in]	level 	Multicast level to set to
-	void		set_multicast_level(uint8_t level) { multicast_level = level; }
+	void		set_multicast_level(const uint8_t level) { multicast_level = level; }
 
 private:
 

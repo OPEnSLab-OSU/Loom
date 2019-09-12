@@ -16,7 +16,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxPub::Loom_MaxPub(
-		LoomModule::Type	internet_type
+		const LoomModule::Type	internet_type
 	)   
 	: LoomPublishPlat( "MaxPub", Type::MaxPub, internet_type )
 	, remoteIP({192,168,1,255})
@@ -51,7 +51,7 @@ void Loom_MaxPub::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_port(uint16_t port)
+void Loom_MaxPub::set_port(const uint16_t port)
 {
 	UDP_port = port;
 	UDP_Inst = (m_internet != nullptr) ? m_internet->open_socket(UDP_port) : nullptr;
@@ -83,7 +83,7 @@ bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_ip(IPAddress ip)
+void Loom_MaxPub::set_ip(const IPAddress ip)
 {
 	remoteIP = ip;
 	print_module_label();

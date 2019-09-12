@@ -41,7 +41,7 @@ public:
 	///
 	/// @param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
 	Loom_DecagonGS3(
-			uint8_t			num_samples		= 1
+			const uint8_t		num_samples		= 1
 		);
 
 	/// Constructor that takes Json Array, extracts args

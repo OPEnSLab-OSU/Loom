@@ -14,8 +14,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DS3231::Loom_DS3231(
-		TimeZone		timezone,
-		bool			use_utc_time
+		const TimeZone		timezone,
+		const bool			use_utc_time
 	)
 	: LoomRTC( "DS3231", Type::DS3231, timezone, use_utc_time )
 {

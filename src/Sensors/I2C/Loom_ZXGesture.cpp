@@ -14,9 +14,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ZXGesture::Loom_ZXGesture(
-		byte			i2c_address, 
-		uint8_t			mux_port, 
-		Mode			mode
+		const byte			i2c_address, 
+		const uint8_t		mux_port, 
+		const Mode			mode
 	)
 	: LoomI2CSensor( "ZXGesture", Type::ZXGesture, i2c_address, mux_port )
 	, mode(mode)

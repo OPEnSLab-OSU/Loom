@@ -33,7 +33,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomManager::enum_device_type_string(DeviceType t)
+const char* LoomManager::enum_device_type_string(const DeviceType t)
 {
 	switch(t) {
 		case DeviceType::HUB      : return "Hub";
@@ -45,13 +45,13 @@ const char* LoomManager::enum_device_type_string(DeviceType t)
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomManager::LoomManager( 
-		FactoryBase*	factory_ptr,
-		const char*		device_name, 
-		uint8_t			instance, 
-		DeviceType		device_type, 
-		Verbosity		print_verbosity, 
-		Verbosity		package_verbosity,
-		uint16_t		interval
+		FactoryBase*			factory_ptr,
+		const char*				device_name, 
+		const uint8_t			instance, 
+		const DeviceType		device_type, 
+		const Verbosity			print_verbosity, 
+		const Verbosity			package_verbosity,
+		const uint16_t			interval
 	)
 	: Factory(factory_ptr)
 	, instance(instance)
@@ -70,7 +70,7 @@ LoomManager::~LoomManager()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::print_config(bool print_modules_config) 
+void LoomManager::print_config(const bool print_modules_config) 
 {
 	print_device_label();
 	LPrintln("Config:");
@@ -96,7 +96,7 @@ void LoomManager::begin_LED()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::begin_serial(bool wait_for_monitor)
+void LoomManager::begin_serial(const bool wait_for_monitor)
 {
 	Serial.begin(SERIAL_BAUD);
 
@@ -171,7 +171,7 @@ const char* LoomManager::get_device_name()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_print_verbosity(Verbosity v, bool set_modules)
+void LoomManager::set_print_verbosity(const Verbosity v, const bool set_modules)
 {
 	print_verbosity = v;
 
@@ -185,7 +185,7 @@ void LoomManager::set_print_verbosity(Verbosity v, bool set_modules)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_package_verbosity(Verbosity v, bool set_modules)
+void LoomManager::set_package_verbosity(const Verbosity v, const bool set_modules)
 {
 	package_verbosity = v;
 
@@ -255,7 +255,7 @@ void LoomManager::add_device_ID_to_json(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-JsonObject LoomManager::internal_json(bool clear)
+JsonObject LoomManager::internal_json(const bool clear)
 {
 	if (clear) {
 		// doc.clear(); 
@@ -345,7 +345,7 @@ void LoomManager::display_data()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::flash_LED(uint8_t count, uint8_t time_high, uint8_t time_low, bool end_high)
+void LoomManager::flash_LED(const uint8_t count, const uint8_t time_high, const uint8_t time_low, const bool end_high)
 {
 	for (int i = 0; i < count; i++) {
 		digitalWrite(LED_BUILTIN, HIGH);
@@ -359,7 +359,7 @@ void LoomManager::flash_LED(uint8_t count, uint8_t time_high, uint8_t time_low, 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::nap(uint16_t ms)
+void LoomManager::nap(const uint16_t ms)
 {
 	Serial.end();
 	USBDevice.detach();
@@ -429,7 +429,7 @@ void LoomManager::get_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule*	LoomManager::find_module(LoomModule::Type type, uint8_t idx)
+LoomModule*	LoomManager::find_module(const LoomModule::Type type, const uint8_t idx)
 {
 	uint8_t current = 0;
 
@@ -446,7 +446,7 @@ LoomModule*	LoomManager::find_module(LoomModule::Type type, uint8_t idx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule*	LoomManager::find_module_by_category(LoomModule::Category category, uint8_t idx)
+LoomModule*	LoomManager::find_module_by_category(const LoomModule::Category category, const uint8_t idx)
 {
 	uint8_t current = 0;
 
@@ -463,7 +463,7 @@ LoomModule*	LoomManager::find_module_by_category(LoomModule::Category category, 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_interval(uint16_t ms) 
+void LoomManager::set_interval(const uint16_t ms) 
 {
 	interval = ms; 
 	print_device_label();
@@ -471,7 +471,7 @@ void LoomManager::set_interval(uint16_t ms)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::has_module(LoomModule::Type type)
+bool LoomManager::has_module(const LoomModule::Type type)
 {
 	for (auto module : modules) {
 		if (module->get_module_type() == type) return true;
@@ -601,15 +601,6 @@ bool LoomManager::parse_config_json(JsonObject config)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
 
 
 

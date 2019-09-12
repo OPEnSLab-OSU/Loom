@@ -56,18 +56,18 @@ public:
 	/// @param[in]	enableA4			Bool | <false> | {true, false} | Enable pin A4 for managing
 	/// @param[in]	enableA5			Bool | <false> | {true, false} | Enable pin A5 for managing
 	Loom_Digital(
-			bool				enable5			= true,
-			bool				enable6			= true,
-			bool				enable9			= false,
-			bool				enable10		= false,
-			bool				enable11		= false,
-			bool				enable12		= false,
-			bool				enableA0		= false,
-			bool				enableA1		= false,
-			bool				enableA2		= false,
-			bool				enableA3		= false,
-			bool				enableA4		= false,
-			bool				enableA5		= false
+			const bool		enable5			= true,
+			const bool		enable6			= true,
+			const bool		enable9			= false,
+			const bool		enable10		= false,
+			const bool		enable11		= false,
+			const bool		enable12		= false,
+			const bool		enableA0		= false,
+			const bool		enableA1		= false,
+			const bool		enableA2		= false,
+			const bool		enableA3		= false,
+			const bool		enableA4		= false,
+			const bool		enableA5		= false
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -99,11 +99,11 @@ public:
 
 	/// Get value on digital pin
 	/// @return		True if HIGH, false if LOW
-	bool		get_digital_val(uint8_t pin);
+	bool		get_digital_val(const uint8_t pin);
 
 	/// Get if pin is enabled in manager
 	/// @return 	Enable state of pin
-	bool		get_pin_enabled(uint8_t pin);
+	bool		get_pin_enabled(const uint8_t pin);
 
 //=============================================================================
 ///@name	SETTERS
@@ -112,12 +112,12 @@ public:
 	/// Set digital value of pin
 	/// @param[in]	pin		Pin to set value of
 	/// @param[in]	state	State to set pin to
-	void		set_digital_val(uint8_t pin, bool state);
+	void		set_digital_val(const uint8_t pin, const bool state);
 
 	/// Set pin enable state in manager
 	/// @param[in]	pin		Pin to set enable state of
 	/// @param[in]	e		Enable state to set to
-	void		set_pin_enabled(uint8_t pin, bool e);
+	void		set_pin_enabled(const uint8_t pin, const bool e);
 
 private:
 
@@ -127,7 +127,7 @@ private:
 	/// Convert pin number to index in manager arrays
 	/// @param[in]	pin		Pin to convert to index
 	/// @return Index
-	uint8_t		pin_to_index(uint8_t pin);
+	uint8_t		pin_to_index(const uint8_t pin);
 
 };
 

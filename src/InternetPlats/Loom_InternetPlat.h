@@ -72,8 +72,8 @@ public:
 	///
 	/// @param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
 	LoomInternetPlat( 
-			const char*			module_name,  
-			LoomModule::Type	module_type
+			const char*				module_name,  
+			const LoomModule::Type	module_type
 		);
 
 	/// Destructor

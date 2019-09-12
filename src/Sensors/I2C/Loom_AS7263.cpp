@@ -14,12 +14,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7263::Loom_AS7263(
-		byte			i2c_address, 
-		uint8_t			mux_port,
-		bool			use_bulb, 
-		uint8_t			gain, 
-		uint8_t			mode, 
-		uint8_t			integration_time
+		const byte			i2c_address, 
+		const uint8_t		mux_port,
+		const bool			use_bulb, 
+		const uint8_t		gain, 
+		const uint8_t		mode, 
+		const uint8_t		integration_time
 	)
 	: LoomI2CSensor( "AS7263", Type::AS7263, i2c_address, mux_port )
 	, use_bulb(use_bulb)

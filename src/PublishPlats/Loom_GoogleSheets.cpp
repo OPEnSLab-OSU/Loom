@@ -15,12 +15,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(
-		const char*			module_name,
-		LoomModule::Type	internet_type,
-		const char*			script_url,
-		const char*			sheet_id,
-		bool				tab_matches_dev_id,
-		const char*			tab_id
+		const char*				module_name,
+		const LoomModule::Type	internet_type,
+		const char*				script_url,
+		const char*				sheet_id,
+		const bool				tab_matches_dev_id,
+		const char*				tab_id
 	)   
 	: LoomPublishPlat( module_name, Type::GoogleSheets, internet_type )
 	, m_script_url(script_url)

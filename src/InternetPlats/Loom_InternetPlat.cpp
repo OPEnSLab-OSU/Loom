@@ -12,8 +12,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::LoomInternetPlat(	
-		const char*			module_name,
-		LoomModule::Type	module_type
+		const char*				module_name,
+		const LoomModule::Type	module_type
 	) 
 	: LoomModule( module_name, module_type ) {}
 

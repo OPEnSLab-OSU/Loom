@@ -13,12 +13,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MAX31856::Loom_MAX31856(	
 		const char*		module_name,
-		uint8_t			num_samples, 
-		uint8_t			CS_pin,
-		uint8_t			SPI_a,
-		uint8_t			SPI_b,
-		uint8_t			SPI_c,
-		uint8_t			SPI_d
+		const uint8_t	num_samples, 
+		const uint8_t	CS_pin,
+		const uint8_t	SPI_a,
+		const uint8_t	SPI_b,
+		const uint8_t	SPI_c,
+		const uint8_t	SPI_d
 	) : LoomSPISensor( module_name, Type::MAX31856, num_samples ) 
 	, inst_max( Adafruit_MAX31856(SPI_a, SPI_b, SPI_c, SPI_d) )
 {

@@ -14,8 +14,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LIS3DH::Loom_LIS3DH(
-		byte			i2c_address, 
-		uint8_t			mux_port
+		const byte			i2c_address, 
+		const uint8_t		mux_port
 	) 
 	: LoomI2CSensor( "LIS3DH", Type::LIS3DH, i2c_address, mux_port )
 	, inst_LIS3DH( LIS3DH(I2C_MODE, i2c_address) )

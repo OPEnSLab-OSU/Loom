@@ -42,13 +42,13 @@ public:
 	/// @param[in]  tab_matches_dev_id	Bool | <true> | null | Override tab_id with the name+instance number of the device. 
 	/// @param[in]  tab_id				String | <"Data"> | null | Name of the tab that the device will put data into. 
 	Loom_GoogleSheets(	
-						const char*			module_name,
-						LoomModule::Type	internet_type,
-						const char*			script_url,
-						const char*			sheet_id,
-						bool				tab_matches_dev_id,
-						const char*			tab_id				= "Data"
-					);
+			const char*				module_name,
+			const LoomModule::Type	internet_type,
+			const char*				script_url,
+			const char*				sheet_id,
+			const bool				tab_matches_dev_id,
+			const char*				tab_id				= "Data"
+		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor

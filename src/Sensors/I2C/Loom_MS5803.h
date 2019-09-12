@@ -55,8 +55,8 @@ public:
 	/// @param[in]	i2c_address				Set(Int) | <0x76> | {0x76, 0x77} | I2C address (0x76 if CSB (pin 3) is High, 0x77 if CSB is Low)
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	Loom_MS5803(
-			byte			i2c_address		= 0x76,
-			uint8_t			mux_port		= 255
+			const byte			i2c_address		= 0x76,
+			const uint8_t		mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args

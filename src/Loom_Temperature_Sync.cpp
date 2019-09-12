@@ -81,8 +81,6 @@ void LoomTempSync::sync_temp()
 		if ( dependant_type == LoomModule::Type::Analog ) {
 			( (Loom_Analog*)dependant )->set_temperature(temp);
 		}
-
-
 	}
 }
 

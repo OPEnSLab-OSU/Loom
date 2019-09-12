@@ -17,10 +17,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SD::Loom_SD(		
-		bool			enable_rate_filter, 
-		uint16_t		min_filter_delay, 
-		byte			chip_select, 
-		const char*		default_file
+		const bool			enable_rate_filter, 
+		const uint16_t		min_filter_delay, 
+		const byte			chip_select, 
+		const char*			default_file
 	)
 	: LoomLogPlat( "SD", Type::SDCARD, enable_rate_filter, min_filter_delay )
 	, chip_select(chip_select)
@@ -298,7 +298,7 @@ void Loom_SD::_write_json_data(File sdFile, JsonObject dev_id, JsonObject timest
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::print_directory(File dir, uint8_t numTabs) 
+void Loom_SD::print_directory(File dir, const uint8_t numTabs) 
 {
 	if ( !sd_found ) return;
 

@@ -65,11 +65,11 @@ public:
 	/// @param[in]	retry_count					Int | <3> | [0-15] | Max number of transmission retries
 	/// @param[in]	retry_timeout				Int | <200>| [20-500] | Delay between retransmissions (ms)
 	Loom_LoRa(
-			uint16_t		max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
-			uint8_t			address				= 0,
-			uint8_t			power_level 		= 23,
-			uint8_t			retry_count			= 3,
-			uint16_t		retry_timeout		= 200
+			const uint16_t		max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
+			const uint8_t		address				= 0,
+			const uint8_t		power_level 		= 23,
+			const uint8_t		retry_count			= 3,
+			const uint16_t		retry_timeout		= 200
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -85,7 +85,7 @@ public:
 /*@{*/ //======================================================================
 
 	bool		receive(JsonObject json) override;
-	bool		send(JsonObject json, uint8_t destination) override;
+	bool		send(JsonObject json, const uint8_t destination) override;
 	void		add_config(JsonObject json) override;
 
 	// manually expose superclass version of log() that gets json from
@@ -112,7 +112,7 @@ public:
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
-	void		set_address(uint8_t addr) override;
+	void		set_address(const uint8_t addr) override;
 
 private:
 

@@ -14,7 +14,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Relay::Loom_Relay( 
-		byte			pin 
+		const byte		pin 
 	) 
 	: LoomActuator( "Relay", Type::Relay ) 
 	, pin(pin)
@@ -76,7 +76,7 @@ bool Loom_Relay::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::set(bool state)
+void Loom_Relay::set(const bool state)
 {
 	LPrintln("In set");
 

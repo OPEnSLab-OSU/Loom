@@ -16,8 +16,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXAS21002::Loom_FXAS21002(
-		byte			i2c_address, 
-		uint8_t			mux_port
+		const byte			i2c_address, 
+		const uint8_t		mux_port
 	)
 	: LoomI2CSensor( "FXAS21002", Type::FXAS21002, i2c_address, mux_port )
 	, inst_FXAS21002(Adafruit_FXAS21002C(0x0021002C))

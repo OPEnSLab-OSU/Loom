@@ -18,8 +18,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MB1232::Loom_MB1232(
-		byte			i2c_address,
-		uint8_t			mux_port
+		const byte			i2c_address,
+		const uint8_t		mux_port
 	)
 	: LoomI2CSensor( "MB1232", Type::MB1232, i2c_address, mux_port )
 {	

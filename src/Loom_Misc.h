@@ -23,7 +23,7 @@
 /// @param[in]	len		Length of array
 /// @param[in]	format	Display formatting
 template<typename T> 
-void print_array(T data [], int len, int format=1)
+void print_array(const T data [], const int len, const int format=1)
 {
 	#if LOOM_DEBUG == 1
 		for (int i = 0; i < len; i++) {
@@ -37,6 +37,6 @@ void print_array(T data [], int len, int format=1)
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @private (hide from Doxygen)
-void print_array(String data [], int len, int format=1);
+void print_array(const String data [], const int len, const int format=1);
 
 ///////////////////////////////////////////////////////////////////////////////
