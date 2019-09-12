@@ -33,7 +33,7 @@ Loom_TMP007::Loom_TMP007(JsonArrayConst p)
 	: Loom_TMP007( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_TMP007::print_measurements()
+void Loom_TMP007::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

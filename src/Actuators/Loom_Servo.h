@@ -76,7 +76,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_state() override;
+	void		print_state() const override;
 
 private:
 

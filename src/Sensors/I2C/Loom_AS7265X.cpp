@@ -92,7 +92,7 @@ Loom_AS7265X::Loom_AS7265X(JsonArrayConst p)
 	: Loom_AS7265X( EXPAND_ARRAY(p, 6) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::print_measurements()
+void Loom_AS7265X::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

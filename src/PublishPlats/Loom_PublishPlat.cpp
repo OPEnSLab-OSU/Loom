@@ -93,21 +93,21 @@ bool LoomPublishPlat::publish()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomPublishPlat::print_config() 
+void LoomPublishPlat::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tInternet Type: ", (int)internet_type);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomPublishPlat::print_state() 
+void LoomPublishPlat::print_state() const
 {
 	LoomModule::print_state();
 	LPrintln("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomPublishPlat::m_validate_json(const JsonObjectConst json)
+bool LoomPublishPlat::m_validate_json(const JsonObjectConst json) const
 {
 	// check if we got an object at all
 	if (json.isNull()) 
@@ -135,7 +135,7 @@ bool LoomPublishPlat::m_validate_json(const JsonObjectConst json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomPublishPlat::m_print_json_error(const char* str)
+void LoomPublishPlat::m_print_json_error(const char* str) const
 {
 	print_module_label();
 	LPrint("Publish data is invalid: ", str, "\n");

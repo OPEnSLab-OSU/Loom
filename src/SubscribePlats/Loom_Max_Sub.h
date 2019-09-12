@@ -78,7 +78,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
+	void		print_config() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -86,11 +86,11 @@ public:
 
 	/// Get the UDP port currently receiving on
 	/// @return UDP port being used
-	uint16_t	get_port() { return UDP_port; }
+	uint16_t	get_port() const { return UDP_port; }
 
 	/// Get the last IP address received from
 	/// @return Last IP address
-	IPAddress	get_remote_IP() { return (UDP_Inst) ? UDP_Inst->remoteIP() : IPAddress(0,0,0,0); }
+	IPAddress	get_remote_IP() const { return (UDP_Inst) ? UDP_Inst->remoteIP() : IPAddress(0,0,0,0); }
 
 //=============================================================================
 ///@name	SETTERS

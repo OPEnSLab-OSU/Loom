@@ -43,7 +43,7 @@ Loom_MB1232::Loom_MB1232(JsonArrayConst p)
 	: Loom_MB1232( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MB1232::print_measurements()
+void Loom_MB1232::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

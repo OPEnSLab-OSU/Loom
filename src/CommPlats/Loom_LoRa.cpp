@@ -82,7 +82,7 @@ void Loom_LoRa::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::print_config() 
+void Loom_LoRa::print_config() const
 {
 	LoomCommPlat::print_config();
 

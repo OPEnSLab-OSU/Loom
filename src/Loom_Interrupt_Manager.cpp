@@ -78,7 +78,7 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(JsonArrayConst p)
 	: Loom_Interrupt_Manager( nullptr ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::print_config()
+void Loom_Interrupt_Manager::print_config() const
 {
 	LoomModule::print_config();
 
@@ -119,7 +119,7 @@ void Loom_Interrupt_Manager::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::print_state()
+void Loom_Interrupt_Manager::print_state() const
 {
 	LoomModule::print_state();
 }
@@ -166,29 +166,11 @@ void Loom_Interrupt_Manager::run_pending_ISRs() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::set_interrupts_enabled(const bool state)
-{
-	interrupts_enabled = state;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::get_interrupts_enabled()
-{
-	return interrupts_enabled;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::set_enable_interrupt(const byte pin, const bool state)
 {
 	if (pin < InteruptRange) {
 		int_settings[pin].enabled = state;
 	} 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::get_enable_interrupt(const byte pin)
-{
-	return (pin < InteruptRange) ? int_settings[pin].enabled : false; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -345,7 +327,6 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 	// Tell RTC_Inst to set RTC time at future_time
 	// Then call sleep_until_interrupt on pin, because that is what it is
 	RTC_Inst->set_alarm(future_time);
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -443,7 +424,6 @@ void Loom_Interrupt_Manager::register_internal_timer(const uint duration, const 
 		// Timer is for exact time, need to offset by adding current time
 		rtcCounter.setAlarmEpoch(duration + rtcCounter.getEpoch());
 	}
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -114,7 +114,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void			print_config() override;
+	void			print_config() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -122,19 +122,19 @@ public:
 
 	/// Get the current OLED display organization.
 	/// @return		The current Format being used
-	Format			get_display_format() { return display_format; }
+	Format			get_display_format() const { return display_format; }
 
 	/// Get the current scroll duration.
 	/// @return		The current scroll duration
-	uint			get_scroll_duration() { return scroll_duration; }
+	uint			get_scroll_duration() const { return scroll_duration; }
 
 	/// Get the digital pin use to freeze the display
 	/// @return	The freeze pin
-	byte			get_freeze_pin() { return freeze_pin; }
+	byte			get_freeze_pin() const { return freeze_pin; }
 
 	/// Get the current freeze behavior
 	/// @return		The current freeze behavior
-	FreezeType		get_freeze_behavior() { return freeze_behavior; }
+	FreezeType		get_freeze_behavior() const { return freeze_behavior; }
 
 //=============================================================================
 ///@name	SETTERS

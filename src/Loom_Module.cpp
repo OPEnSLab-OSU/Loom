@@ -35,7 +35,7 @@ void LoomModule::print_module_label() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::print_config()
+void LoomModule::print_config() const 
 {
 	print_module_label();
 	LPrintln("Config:");
@@ -45,14 +45,14 @@ void LoomModule::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::print_state() 
+void LoomModule::print_state() const
 {
 	print_module_label();
 	LPrintln("State:");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::get_module_name(char* buf) 
+void LoomModule::get_module_name(char* buf) const
 { 
 	module_name_base.toCharArray(buf, 20);
 }
@@ -88,7 +88,7 @@ const char* LoomModule::enum_verbosity_string(const Verbosity v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule::Category LoomModule::category() 
+LoomModule::Category LoomModule::category() const
 {
 	switch( (int)module_type / 1000 ) {
 		case 1 : return Category::Other;		// Other

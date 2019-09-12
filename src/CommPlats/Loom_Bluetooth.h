@@ -107,7 +107,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
+	void		print_config() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -115,7 +115,7 @@ public:
 
 	/// Bluetooth currently does not use addresses.
 	/// Override with empty body
-	uint8_t		get_address() override {}
+	uint8_t		get_address() const override {}
 
 //=============================================================================
 ///@name	SETTERS

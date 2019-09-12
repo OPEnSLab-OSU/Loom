@@ -42,7 +42,7 @@ Loom_LIS3DH::Loom_LIS3DH(JsonArrayConst p)
 	: Loom_LIS3DH( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LIS3DH::print_measurements()
+void Loom_LIS3DH::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

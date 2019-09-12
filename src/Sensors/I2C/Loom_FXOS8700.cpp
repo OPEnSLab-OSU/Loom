@@ -35,7 +35,7 @@ Loom_FXOS8700::Loom_FXOS8700(JsonArrayConst p)
 	: Loom_FXOS8700( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_FXOS8700::print_measurements()
+void Loom_FXOS8700::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

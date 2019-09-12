@@ -43,7 +43,7 @@ Loom_MaxPub::Loom_MaxPub(JsonArrayConst p)
 	: Loom_MaxPub( (LoomModule::Type)(int)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::print_config()
+void Loom_MaxPub::print_config() const
 {
 	LoomPublishPlat::print_config();
 	LPrintln("\tUDP Port  : ", UDP_port);

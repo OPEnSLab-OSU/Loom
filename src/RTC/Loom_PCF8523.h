@@ -59,7 +59,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	DateTime	now() override { return rtc_inst.now(); }
+	DateTime	now() const override { return rtc_inst.now(); }
 	void		set_alarm(DateTime time) override;
 	void		clear_alarms() override { rtc_inst.clear_rtc_interrupt_flags(); }
 
@@ -67,7 +67,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
+	void		print_config() const override;
 
 protected:
 

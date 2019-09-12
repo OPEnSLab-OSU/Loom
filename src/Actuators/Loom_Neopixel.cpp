@@ -57,7 +57,7 @@ void Loom_Neopixel::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::print_config() 
+void Loom_Neopixel::print_config() const
 {
 	LoomActuator::print_config();
 
@@ -67,7 +67,7 @@ void Loom_Neopixel::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::print_state()
+void Loom_Neopixel::print_state() const
 {
 	LPrintln(module_name, " State:");
 	for (auto i = 0; i < 3; i++) {

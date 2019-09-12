@@ -73,7 +73,7 @@ Loom_MS5803::Loom_MS5803(JsonArrayConst p)
 	: Loom_MS5803( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MS5803::print_measurements()
+void Loom_MS5803::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

@@ -43,7 +43,7 @@ void Loom_Bluetooth::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Bluetooth::print_config() 
+void Loom_Bluetooth::print_config() const
 {
 	LoomCommPlat::print_config();
 }

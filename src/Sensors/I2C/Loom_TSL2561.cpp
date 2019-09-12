@@ -65,7 +65,7 @@ Loom_TSL2561::Loom_TSL2561(JsonArrayConst p)
 	: Loom_TSL2561( EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_TSL2561::print_measurements()
+void Loom_TSL2561::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

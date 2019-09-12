@@ -98,7 +98,7 @@ void Loom_Analog::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-float Loom_Analog::convert(const uint8_t pin, const uint16_t analog)
+float Loom_Analog::convert(const uint8_t pin, const uint16_t analog) const
 {
 	switch(conversions[pin]) {
 		case Conversion::VOLTAGE 		: return convert_voltage(analog);
@@ -113,7 +113,7 @@ float Loom_Analog::convert(const uint8_t pin, const uint16_t analog)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_Analog::conversion_name(const Conversion conversion)
+const char* Loom_Analog::conversion_name(const Conversion conversion) const
 {
 	switch(conversion) {
 		case Conversion::VOLTAGE 		: return "voltage";
@@ -128,7 +128,7 @@ const char* Loom_Analog::conversion_name(const Conversion conversion)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Analog::print_config()
+void Loom_Analog::print_config() const
 {
 	LoomSensor::print_config();
 
@@ -139,15 +139,11 @@ void Loom_Analog::print_config()
 			LPrint("A", i, ", ");
 		}
 	}
-	// LPrintln("\tpH Offset       : ", pH_offset);
-	// LPrintln("\tpH Range        : ", pH_range);
 	LPrintln("\n\tTemperature        : ", temperature);
-
-	// print_config_struct();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Analog::print_measurements()
+void Loom_Analog::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -196,7 +192,7 @@ void Loom_Analog::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-int Loom_Analog::get_analog_val(const uint8_t pin) 
+int Loom_Analog::get_analog_val(const uint8_t pin) const
 {
 	return ( (pin >= 0) && (pin < ANALOG_COUNT) ) ? analog_vals[pin] : -1;
 }
@@ -211,7 +207,7 @@ void Loom_Analog::set_pin_enabled(const uint8_t pin, const bool e)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint16_t Loom_Analog::read_analog(const uint8_t chnl)
+uint16_t Loom_Analog::read_analog(const uint8_t chnl) const
 {
 	int i = num_samples;
 	int reading = 0;
@@ -231,7 +227,7 @@ uint16_t Loom_Analog::read_analog(const uint8_t chnl)
 } 
 
 ///////////////////////////////////////////////////////////////////////////////
-float Loom_Analog::convert_voltage(const uint16_t analog)
+float Loom_Analog::convert_voltage(const uint16_t analog) const
 {
 	return analog*3.3/pow(2, read_resolution);
 }
@@ -244,7 +240,7 @@ float Loom_Analog::convert_voltage(const uint16_t analog)
 // #define SERIESRESISTOR 	10000    
 #define SERIESRESISTOR 		29330  	// the value of the 'other' resistor
 #define range_resol  		4095
-float Loom_Analog::convert_thermistor(const uint16_t analog)
+float Loom_Analog::convert_thermistor(const uint16_t analog) const
 {
 	float average = analog;
 
@@ -273,7 +269,7 @@ float Loom_Analog::convert_thermistor(const uint16_t analog)
 ///////////////////////////////////////////////////////////////////////////////
 // #define PH_Offset 0.0
 
-float Loom_Analog::convert_pH(const uint16_t analog)
+float Loom_Analog::convert_pH(const uint16_t analog) const
 {
 	// float voltage = convert_voltage(analog);
 	// return pH_range*voltage + pH_offset;
@@ -294,7 +290,7 @@ float Loom_Analog::convert_pH(const uint16_t analog)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-float Loom_Analog::convert_turbidity(const uint16_t analog)
+float Loom_Analog::convert_turbidity(const uint16_t analog) const
 {
 	// float voltage = convert_voltage(analog);
 	// LPrintln("turbidity voltage: ", voltage);
@@ -306,7 +302,7 @@ float Loom_Analog::convert_turbidity(const uint16_t analog)
 ///////////////////////////////////////////////////////////////////////////////
 // #define EC_TEMP 25
 
-float Loom_Analog::convert_EC(const uint16_t analog)
+float Loom_Analog::convert_EC(const uint16_t analog) const
 {
 	// float temperature = 25.0;
 	float voltage = convert_voltage(analog);
@@ -320,14 +316,14 @@ float Loom_Analog::convert_EC(const uint16_t analog)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-float Loom_Analog::convert_TDS(const uint16_t analog)
+float Loom_Analog::convert_TDS(const uint16_t analog) const
 {
 	return convert_EC(analog)/2.;
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
-float Loom_Analog::convert_salinity(const uint16_t analog)
+float Loom_Analog::convert_salinity(const uint16_t analog) const
 {
 	// Probably doesn't actually give a value of any worth right now...
 	return (analog-76) / .0928;

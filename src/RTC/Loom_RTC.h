@@ -82,7 +82,7 @@ public:
 
 	/// Get DateTime of current time
 	/// @return	DateTime
-	virtual DateTime now() = 0;
+	virtual DateTime now() const = 0;
 
 	/// Set time to provided timezone
 	/// @param[in]	time	Time to set to
@@ -118,8 +118,8 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_config() override;
-	virtual void	print_state() override;
+	virtual void	print_config() const override;
+	virtual void	print_state() const override;
 
 	/// Print an arbitrary DateTime object
 	/// @param[in]	time	Time to print

@@ -55,7 +55,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_measurements() override = 0;
+	virtual void	print_measurements() const override = 0;
 
 private:
 

@@ -100,7 +100,7 @@ bool Loom_MaxSub::subscribe(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxSub::print_config()
+void Loom_MaxSub::print_config() const
 {
 	LoomSubscribePlat::print_config();
 	LPrintln("\tUDP Port : ", UDP_port);

@@ -90,8 +90,8 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-	void		print_measurements() override;
+	void		print_config() const override;
+	void		print_measurements() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -99,11 +99,11 @@ public:
 
 	/// Get value on digital pin
 	/// @return		True if HIGH, false if LOW
-	bool		get_digital_val(const uint8_t pin);
+	bool		get_digital_val(const uint8_t pin) const;
 
 	/// Get if pin is enabled in manager
 	/// @return 	Enable state of pin
-	bool		get_pin_enabled(const uint8_t pin);
+	bool		get_pin_enabled(const uint8_t pin) const;
 
 //=============================================================================
 ///@name	SETTERS
@@ -122,12 +122,12 @@ public:
 private:
 
 	/// Used to convert pin number to index in member arrays
-	static uint8_t pin_nums[DIGITAL_COUNT];
+	const static uint8_t pin_nums[DIGITAL_COUNT];
 
 	/// Convert pin number to index in manager arrays
 	/// @param[in]	pin		Pin to convert to index
 	/// @return Index
-	uint8_t		pin_to_index(const uint8_t pin);
+	uint8_t		pin_to_index(const uint8_t pin) const;
 
 };
 

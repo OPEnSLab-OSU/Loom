@@ -120,7 +120,7 @@ void Loom_nRF::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::print_config() 
+void Loom_nRF::print_config() const
 {
 	LoomCommPlat::print_config();
 

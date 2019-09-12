@@ -89,7 +89,7 @@ Loom_Ethernet::Loom_Ethernet(JsonArrayConst p)
 	: Loom_Ethernet( EXPAND_ARRAY(p, 5) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Ethernet::print_config()
+void Loom_Ethernet::print_config() const
 {
 	LoomInternetPlat::print_config();
 	LPrint('\t', "MAC:                : [");
@@ -105,7 +105,7 @@ void Loom_Ethernet::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Ethernet::print_state()
+void Loom_Ethernet::print_state() const
 {
 	LoomInternetPlat::print_state();	
 	LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );

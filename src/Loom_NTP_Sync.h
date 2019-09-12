@@ -70,8 +70,8 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-	void		print_state() override;	
+	void		print_config() const override;
+	void		print_state() const override;	
 
 private:
 	

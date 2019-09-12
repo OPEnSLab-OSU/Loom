@@ -35,7 +35,7 @@ bool Loom_PCF8523::_begin()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_PCF8523::print_config()
+void Loom_PCF8523::print_config() const
 {
 	LoomRTC::print_config();
 	// will print out alarm info

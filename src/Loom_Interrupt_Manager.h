@@ -272,10 +272,10 @@ public:
 
 	/// Get whether the internal timer has elapsed
 	/// @return True if timer elapsed, false otherwise
-	bool		get_internal_timer_flag() { return rtcCounter.getFlag(); }
+	bool		get_internal_timer_flag() const { return rtcCounter.getFlag(); }
 
 	/// Clear internal timer flag
-	void		clear_internal_timer_flag() { rtcCounter.clearFlag(); }
+	void		clear_internal_timer_flag() const { rtcCounter.clearFlag(); }
 
 	/// Enable or disable internal timer.
 	/// Disabling does not remove settings, use unregister_interal_timer for that behavior
@@ -289,8 +289,8 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-	void		print_state() override;
+	void		print_config() const override;
+	void		print_state() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -298,16 +298,16 @@ public:
 
 	/// Get global interrupt enable state
 	/// @return		Global interrupt enable state
-	bool		get_interrupts_enabled();
+	bool		get_interrupts_enabled() const { return interrupts_enabled; }
 
 	/// Get pin interrupt enable state
 	/// @param[in]	pin		Pin to the the enable state of
 	/// @return		The enable state
-	bool		get_enable_interrupt(const byte pin);
+	bool		get_enable_interrupt(const byte pin) const { return (pin < InteruptRange) ? int_settings[pin].enabled : false; }
 
 	/// Return pointer to the currently linked RTC object
 	/// @return		Current RTC object
-	LoomRTC*	get_RTC_module() { return RTC_Inst; }
+	LoomRTC*	get_RTC_module() const { return RTC_Inst; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -325,7 +325,7 @@ public:
 
 	/// All interrupts enable/disable
 	/// @param[in]	state	Enable state to apply to all interrupts
-	void		set_interrupts_enabled(const bool state);
+	void		set_interrupts_enabled(const bool state) { interrupts_enabled = state; }
 
 	/// Per interrupt enable
 	/// @param[in]	pin		Interrupt pin to change enable state of

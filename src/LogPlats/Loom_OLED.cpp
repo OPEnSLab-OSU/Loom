@@ -80,7 +80,7 @@ Loom_OLED::Loom_OLED(JsonArrayConst p)
 	: Loom_OLED(p[0], p[1], (Version)(int)p[2], p[3], (Format)(int)p[4], p[5], p[6], (FreezeType)(int)p[7]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_OLED::print_config() 
+void Loom_OLED::print_config() const
 {
 	LoomLogPlat::print_config();
 

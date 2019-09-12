@@ -85,8 +85,8 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_state() override;
-	virtual void	print_config() override;
+	virtual void	print_state() const override;
+	virtual void	print_config() const override;
 
 protected:
 
@@ -103,11 +103,11 @@ private:
 
 	/// Check that the JSON supplied meets the format criteria required by publish()
 	/// @param[in]	json	Json to validate
-	bool m_validate_json(const JsonObjectConst json);
+	bool m_validate_json(const JsonObjectConst json) const;
 
 	/// Print a JSON error
 	/// @param[in]	str		Error string to print
-	void m_print_json_error(const char* str);
+	void m_print_json_error(const char* str) const;
 	
 };
 

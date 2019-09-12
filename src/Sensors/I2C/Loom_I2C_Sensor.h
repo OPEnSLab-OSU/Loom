@@ -68,7 +68,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_config() override;
+	virtual void	print_config() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -76,7 +76,7 @@ public:
 
 	/// Get the sensor's I2C address
 	/// @return	The sensor's I2C address
-	byte			get_i2c_address() { return i2c_address; }; 	
+	byte			get_i2c_address() const { return i2c_address; }; 	
 
 private:
 

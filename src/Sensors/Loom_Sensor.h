@@ -64,11 +64,11 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_config() override;
+	virtual void	print_config() const override;
 
 	/// Print the last set of measurements taken.
 	/// Does not package the data.
-	virtual void	print_measurements() = 0; 
+	virtual void	print_measurements() const = 0; 
 
 //=============================================================================
 ///@name	GETTERS
@@ -76,7 +76,7 @@ public:
 
 	/// Get the number of samples sensor is set to take
 	/// @return		Number of samples
-	uint8_t			get_num_samples() { return num_samples; }
+	uint8_t			get_num_samples() const { return num_samples; }
 
 //=============================================================================
 ///@name	SETTERS

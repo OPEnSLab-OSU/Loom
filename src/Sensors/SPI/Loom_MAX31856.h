@@ -59,8 +59,6 @@ public:
 			const uint8_t	SPI_b				= 11,
 			const uint8_t	SPI_c				= 12,
 			const uint8_t	SPI_d				= 13
-
-			// type
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -82,8 +80,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-	void		print_measurements() override;
+	void		print_measurements() const override;
 
 private:
 

@@ -82,7 +82,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Override with empty body as no state to print
-	void		print_state() override {}
+	void		print_state() const override {}
 
 private:
 

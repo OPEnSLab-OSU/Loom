@@ -38,14 +38,14 @@ Loom_MMA8451::Loom_MMA8451(JsonArrayConst p)
 	: Loom_MMA8451(p[0], p[1], (mma8451_range_t)(int)p[2]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MMA8451::print_config()
+void Loom_MMA8451::print_config() const
 {
 	LoomI2CSensor::print_config();
-	LPrintln("\tRange               : ", 2 << MMA.getRange(), "G" );
+	// LPrintln("\tRange               : ", 2 << MMA.getRange(), "G" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MMA8451::print_measurements()
+void Loom_MMA8451::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

@@ -29,10 +29,9 @@ Loom_MAX31855::Loom_MAX31855(JsonArrayConst p)
 	: Loom_MAX31855( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MAX31855::print_measurements() 
+void Loom_MAX31855::print_measurements() const 
 {
 	print_module_label();
-	LPrintln();
 	LPrintln("\tTemperature   : ", temperature, " °C");
 	LPrintln("\tInternal Temp : ", internal_temp, " °C");
 }

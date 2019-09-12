@@ -114,18 +114,18 @@ public:
 	/// Get the sensor object for sensor on provided port
 	/// @param[port]	port	The port of the multiplexer to get sensor object for
 	/// @return			The pointer to LoomI2CSensor on port, Null if no sensor
-	LoomI2CSensor*	get_sensor(uint8_t port) { return sensors[port]; }
+	LoomI2CSensor*	get_sensor(uint8_t port) const { return sensors[port]; }
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-	void		print_state() override;
+	void		print_config() const override;
+	void		print_state() const override;
 
 	/// Prints measurements of all connected sensors.
-	/// Calls implementations of LoomI2CSensor::print_measurements()
-	void		print_measurements();
+	/// Calls implementations of LoomI2CSensor::print_measurements() const
+	void		print_measurements() const;
 
 //=============================================================================
 ///@name	GETTERS
@@ -133,11 +133,11 @@ public:
 
 	/// Get whether or not sensors are updated dynamically
 	/// @return	True if dynamic
-	bool		get_is_dynamic() { return dynamic_list; }
+	bool		get_is_dynamic() const { return dynamic_list; }
 
 	/// Get the sensor list update period.
 	/// @return	The update period
-	int			get_update_period() { return update_period; }
+	int			get_update_period() const { return update_period; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -160,7 +160,7 @@ private:
 
 	/// Select communication with sensor at index port
 	/// @param[in]	port	The port to open I2C communication on
-	void			tca_select(const uint8_t port);
+	void			tca_select(const uint8_t port) const;
 
 	/// Create appropriate instance to manage sensor.
 	/// Compares I2C address to known sensors and generates corresponding sensor instance
@@ -171,7 +171,7 @@ private:
 	/// Determine the I2C address of the sensor (if any) on port.
 	/// @param[in]	port	The port to get sensor address of
 	/// @return		The I2C address of sensor, 0x00 if no sensor found
-	byte			get_i2c_on_port(const uint8_t port);
+	byte			get_i2c_on_port(const uint8_t port) const;
 
 };
 

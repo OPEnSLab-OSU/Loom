@@ -35,7 +35,7 @@ Loom_FXAS21002::Loom_FXAS21002(JsonArrayConst p)
 	: Loom_FXAS21002( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_FXAS21002::print_measurements()
+void Loom_FXAS21002::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

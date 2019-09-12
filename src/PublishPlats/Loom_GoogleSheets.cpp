@@ -38,7 +38,7 @@ Loom_GoogleSheets::Loom_GoogleSheets(JsonArrayConst p)
 	: Loom_GoogleSheets( p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_GoogleSheets::print_config() 
+void Loom_GoogleSheets::print_config() const
 {
 	LoomPublishPlat::print_config();
 	LPrint("\t URL: ", m_script_url, "\n");

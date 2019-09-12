@@ -153,7 +153,7 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, 
 
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::print_config()
+void Loom_Multiplexer::print_config() const
 {
 	LoomModule::print_config();
 
@@ -164,7 +164,7 @@ void Loom_Multiplexer::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::print_state()
+void Loom_Multiplexer::print_state() const
 {
 	print_module_label();
 	LPrintln("Attached Sensors:");
@@ -195,7 +195,7 @@ void Loom_Multiplexer::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::print_measurements()
+void Loom_Multiplexer::print_measurements() const
 {
 	for (auto i = 0; i < num_ports; i++) {
 		if (sensors[i] != nullptr) {
@@ -307,7 +307,7 @@ void Loom_Multiplexer::refresh_sensors()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port)
+byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port) const
 {
 	tca_select(port);
 	byte addr;
@@ -331,7 +331,7 @@ byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::tca_select(const uint8_t port) 
+void Loom_Multiplexer::tca_select(const uint8_t port) const 
 {
 	if (port < num_ports) {
 		Wire.beginTransmission(i2c_address);

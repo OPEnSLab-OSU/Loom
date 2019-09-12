@@ -70,7 +70,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
+	void		print_config() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -78,7 +78,7 @@ public:
 
 	/// Get UDP port device is listening on
 	/// @return UDP port
-	uint16_t	get_port() { return UDP_port; }
+	uint16_t	get_port() const { return UDP_port; }
 
 //=============================================================================
 ///@name	SETTERS

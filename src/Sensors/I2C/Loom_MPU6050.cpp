@@ -39,7 +39,7 @@ Loom_MPU6050::Loom_MPU6050(JsonArrayConst p)
 	: Loom_MPU6050( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::print_state()
+void Loom_MPU6050::print_state() const
 {
 	LoomI2CSensor::print_state();
 
@@ -49,7 +49,7 @@ void Loom_MPU6050::print_state()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::print_measurements()
+void Loom_MPU6050::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

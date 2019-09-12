@@ -27,7 +27,7 @@ LoomLogPlat::LoomLogPlat(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomLogPlat::print_config() 
+void LoomLogPlat::print_config() const
 {
 	LoomModule::print_config();
 

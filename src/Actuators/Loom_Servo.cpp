@@ -37,7 +37,7 @@ void Loom_Servo::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Servo::print_state()
+void Loom_Servo::print_state() const 
 {
 	print_module_label();
 	LPrintln("\tServo Positions:" );

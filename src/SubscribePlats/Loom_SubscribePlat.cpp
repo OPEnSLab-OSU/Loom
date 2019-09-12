@@ -51,14 +51,14 @@ void LoomSubscribePlat::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSubscribePlat::print_config() 
+void LoomSubscribePlat::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tInternet Type: ", (int)internet_type);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSubscribePlat::print_state() 
+void LoomSubscribePlat::print_state() const
 {
 	LoomModule::print_state();
 	LPrintln("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());

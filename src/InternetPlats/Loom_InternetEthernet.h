@@ -84,7 +84,7 @@ public:
 
 	/// Whether or not connected to internet
 	/// @return True if connect, false otherwise
-	bool is_connected() override { m_is_connected; }
+	bool is_connected() const override { m_is_connected; }
 
 	/// Open a UDP socket for sending and recieving incoming data.
 	/// @warning Be careful about recieving data from an open socket!
@@ -96,7 +96,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-	void		print_state() override;
+	void		print_config() const override;
+	void		print_state() const override;
 };
 

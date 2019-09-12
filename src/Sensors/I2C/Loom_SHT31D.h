@@ -71,7 +71,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_measurements() override;
+	void		print_measurements() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -81,7 +81,7 @@ public:
 	/// Used by the LoomTempSync module to provide temperature
 	/// to other modules.
 	/// @return	The measured temperature
-	float		get_temperature() { return temp; }
+	float		get_temperature() const { return temp; }
 	
 private:
 

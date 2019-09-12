@@ -26,7 +26,7 @@ LoomI2CSensor::LoomI2CSensor(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomI2CSensor::print_config()
+void LoomI2CSensor::print_config() const
 {
 	LoomSensor::print_config();
 	LPrint("\tI2C Address         : ");

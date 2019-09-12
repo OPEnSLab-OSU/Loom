@@ -103,7 +103,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
+	void		print_config() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -111,7 +111,7 @@ public:
 
 	/// Get the current sleep mode
 	/// @return		The current sleep mode
-	Mode		get_sleep_mode() { return sleep_mode; }
+	Mode		get_sleep_mode() const { return sleep_mode; }
 
 //=============================================================================
 ///@name	SETTERS

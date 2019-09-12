@@ -85,17 +85,17 @@ LoomRTC::LoomRTC(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_config()
+void LoomRTC::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tUse UTC Time      : ", use_utc_time);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_state()
+void LoomRTC::print_state() const
 {
 	LoomModule::print_state();
-	print_time();
+	// print_time();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -124,7 +124,7 @@ void LoomRTC::print_time(const bool verbose)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_DateTime(const DateTime time) 
+void LoomRTC::print_DateTime(const DateTime time)
 {
 	LPrint(time.year());   LPrint('/');
 	LPrint(time.month());  LPrint('/');

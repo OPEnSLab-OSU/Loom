@@ -23,7 +23,7 @@ LoomCommPlat::LoomCommPlat(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomCommPlat::print_config() 
+void LoomCommPlat::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tMax Message Length  : ", max_message_len );
@@ -89,7 +89,7 @@ void LoomCommPlat::broadcast()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len)
+bool LoomCommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len) const
 {
 	memset(buffer, '\0', sizeof(buffer));
 

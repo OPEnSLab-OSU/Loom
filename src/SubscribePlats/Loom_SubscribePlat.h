@@ -86,8 +86,8 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_config() override;
-	virtual void	print_state() override;
+	virtual void	print_config() const override;
+	virtual void	print_state() const override;
 
 protected:
 

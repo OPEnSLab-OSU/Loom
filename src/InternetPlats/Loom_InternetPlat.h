@@ -92,7 +92,7 @@ public:
 
 	/// Get if connected to internet
 	/// @return True if connected
-	virtual bool	is_connected() = 0;
+	virtual bool	is_connected() const = 0;
 
 	/// Make HTTP request
 	/// @param[in]	domain	The domain to connect to (e.g "www.google.com")

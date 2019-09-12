@@ -40,7 +40,7 @@ Loom_SD::Loom_SD(JsonArrayConst p)
 	: Loom_SD( EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::print_config() 
+void Loom_SD::print_config() const
 {
 	LoomLogPlat::print_config();
 
@@ -71,7 +71,7 @@ void Loom_SD::set_default_file(const char* filename)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::empty_file(const char* file)
+void Loom_SD::empty_file(const char* file) const
 {
 	if ( !sd_found ) return;
 
@@ -184,7 +184,7 @@ bool Loom_SD::save_json(JsonObject json, const char* file)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::_write_json_header_part1(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents)
+void Loom_SD::_write_json_header_part1(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const
 {
 	// Print device indentifcation headers
 	if (!dev_id.isNull()) { 
@@ -218,7 +218,7 @@ void Loom_SD::_write_json_header_part1(File sdFile, JsonObject dev_id, JsonObjec
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::_write_json_header_part2(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents)
+void Loom_SD::_write_json_header_part2(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const
 {
 	// Print device indentifcation headers
 	if (!dev_id.isNull()) { 
@@ -251,7 +251,7 @@ void Loom_SD::_write_json_header_part2(File sdFile, JsonObject dev_id, JsonObjec
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::_write_json_data(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents)
+void Loom_SD::_write_json_data(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const
 {
 	if (!dev_id.isNull()) { 
 		for (JsonPair dataPoint : dev_id) {
@@ -298,7 +298,7 @@ void Loom_SD::_write_json_data(File sdFile, JsonObject dev_id, JsonObject timest
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::print_directory(File dir, const uint8_t numTabs) 
+void Loom_SD::print_directory(File dir, const uint8_t numTabs) const
 {
 	if ( !sd_found ) return;
 

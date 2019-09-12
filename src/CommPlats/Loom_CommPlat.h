@@ -112,7 +112,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_config() override;
+	virtual void	print_config() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -121,7 +121,7 @@ public:
 	/// Get the address of this device.
 	/// Each platform may have a different addressing scheme
 	/// @return The address of this device
-	virtual uint8_t	get_address() = 0;
+	virtual uint8_t	get_address() const = 0;
 
 //=============================================================================
 ///@name	SETTERS
@@ -141,7 +141,7 @@ protected:
 	/// @param[out]	buffer		Buffer to fill with MessagePack of json
 	/// @param[in]	max_len		Length of buffer
 	/// return True if success
-	bool	json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len);
+	bool	json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len) const;
 
 	/// Deserialize a MessagePack buffer into a JsonObject.
 	/// Also clears the json, contains prints and error checks.

@@ -100,13 +100,13 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
+	void		print_config() const override;
 
 //=============================================================================
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	uint8_t		get_address() override { return address; }
+	uint8_t		get_address() const override { return address; }
 
 //=============================================================================
 ///@name	SETTERS

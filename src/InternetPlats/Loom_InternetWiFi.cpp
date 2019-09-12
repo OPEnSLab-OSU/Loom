@@ -66,7 +66,7 @@ void Loom_WiFi::connect()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_WiFi::is_connected()
+bool Loom_WiFi::is_connected() const
 {
 	return WiFi.status() == WL_CONNECTED;
 }
@@ -125,14 +125,14 @@ LoomInternetPlat::UDPPtr Loom_WiFi::open_socket(const uint port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi::print_config()
+void Loom_WiFi::print_config() const
 {
 	LoomInternetPlat::print_config();
 	LPrint("\tSSID:               : ", SSID, '\n');
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi::print_state()
+void Loom_WiFi::print_state() const
 {
 	LoomInternetPlat::print_state();	
 	LPrintln("\tConnected:          : ", (is_connected()) ? "True" : "False" );

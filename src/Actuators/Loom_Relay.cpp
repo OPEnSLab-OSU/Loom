@@ -40,7 +40,7 @@ void Loom_Relay::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::print_state()
+void Loom_Relay::print_state() const
 {
 	print_module_label();
 	LPrintln("\tRelay ", pin, (on) ? " On" : " Off" );

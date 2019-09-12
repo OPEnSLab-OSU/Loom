@@ -61,7 +61,7 @@ void LoomTempSync::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomTempSync::print_config() 
+void LoomTempSync::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tSource Type: ", (int)source_type); 

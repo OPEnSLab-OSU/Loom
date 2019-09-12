@@ -11,7 +11,7 @@
 #include "Loom_Digital.h"
 
 // Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
-byte Loom_Digital::pin_nums[DIGITAL_COUNT] = {5, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19};
+const uint8_t Loom_Digital::pin_nums[DIGITAL_COUNT] = {5, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19};
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@ void Loom_Digital::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Digital::print_config()
+void Loom_Digital::print_config() const
 {
 	LoomSensor::print_config();
 
@@ -96,7 +96,7 @@ void Loom_Digital::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Digital::print_measurements()
+void Loom_Digital::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -146,7 +146,7 @@ void Loom_Digital::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Digital::get_digital_val(const uint8_t pin)
+bool Loom_Digital::get_digital_val(const uint8_t pin) const
 {
 	if (pin_enabled[ pin_to_index(pin) ]) {
 		pinMode(pin, INPUT_PULLUP);
@@ -166,7 +166,7 @@ void Loom_Digital::set_digital_val(const uint8_t pin, const bool state)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Digital::get_pin_enabled(const uint8_t pin)
+bool Loom_Digital::get_pin_enabled(const uint8_t pin) const
 {
 	return pin_enabled[ pin_to_index(pin) ];
 }
@@ -178,7 +178,7 @@ void Loom_Digital::set_pin_enabled(const uint8_t pin, const bool e)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint8_t Loom_Digital::pin_to_index(const uint8_t pin)
+uint8_t Loom_Digital::pin_to_index(const uint8_t pin) const
 {
 	for (int i = 0; i < DIGITAL_COUNT; i++) {
 		if (pin_nums[i] == pin) return i;

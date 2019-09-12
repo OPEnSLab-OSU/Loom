@@ -40,7 +40,7 @@ Loom_AS7262::Loom_AS7262(JsonArrayConst p)
 	: Loom_AS7262( EXPAND_ARRAY(p, 6) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7262::print_config()
+void Loom_AS7262::print_config() const
 {
 	LoomI2CSensor::print_config();	
 	LPrintln("\tGain     : ", gain);
@@ -49,7 +49,7 @@ void Loom_AS7262::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7262::print_measurements()
+void Loom_AS7262::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

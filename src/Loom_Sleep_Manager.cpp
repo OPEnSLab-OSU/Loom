@@ -36,7 +36,7 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(JsonArrayConst p)
 	: Loom_Sleep_Manager(p[0], p[1], (Mode)(int)p[2], p[3]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::print_config()
+void Loom_Sleep_Manager::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tSleep Mode    : ", enum_sleep_mode_string(sleep_mode) );

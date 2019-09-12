@@ -156,10 +156,10 @@ public:
 /*@{*/ //======================================================================
 
 	/// Display the configuration settings of the module
-	virtual void	print_config();
+	virtual void	print_config() const;
 
 	/// Display current state of the module
-	virtual void	print_state();
+	virtual void	print_state() const;
 
 //=============================================================================
 ///@name	GETTERS
@@ -167,34 +167,34 @@ public:
 
 	/// Get module type
 	/// @return Module type
-	Type			get_module_type() { return module_type; }
+	Type			get_module_type() const { return module_type; }
 
 	/// Get the device manager class if linked
 	/// @return Pointer to the LoomManager, Null if not linked
-	LoomManager*	get_device_manager() { return device_manager; }
+	LoomManager*	get_device_manager() const { return device_manager; }
 
 	/// Copy module name into buffer
 	/// @param[out]	buf	The buffer to copy module name into
-	void			get_module_name(char* buf);
+	void			get_module_name(char* buf) const;
 	
 	/// Get module name
 	/// @return	Module name
-	const char*		get_module_name() { return module_name; }
+	const char*		get_module_name() const { return module_name; }
 
 	/// Get print verbosity
 	/// @return		The current verbosity setting
-	Verbosity		get_print_verbosity() { return print_verbosity; }
+	Verbosity		get_print_verbosity() const { return print_verbosity; }
 
 	/// Get package verbosity
 	/// @return		The current verbosity setting
-	Verbosity		get_package_verbosity() { return package_verbosity; }
+	Verbosity		get_package_verbosity() const { return package_verbosity; }
 
 	/// Get whether or not the module should be treated as active
 	/// @return		Whether or not the module is active
-	bool			get_active() { return active; }
+	bool			get_active() const { return active; }
 
 	/// Get the category of the module.
-	Category		category();
+	Category		category() const;
 
 //=============================================================================
 ///@name	SETTERS

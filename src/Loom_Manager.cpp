@@ -45,7 +45,7 @@ const char* LoomManager::enum_device_type_string(const DeviceType t)
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomManager::LoomManager( 
-		FactoryBase*			factory_ptr,
+		const FactoryBase*			factory_ptr,
 		const char*				device_name, 
 		const uint8_t			instance, 
 		const DeviceType		device_type, 
@@ -90,13 +90,7 @@ void LoomManager::print_config(const bool print_modules_config)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::begin_LED()
-{
-	pinMode(LED_BUILTIN, OUTPUT);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::begin_serial(const bool wait_for_monitor)
+void LoomManager::begin_serial(const bool wait_for_monitor) const
 {
 	Serial.begin(SERIAL_BAUD);
 
@@ -131,7 +125,7 @@ void LoomManager::add_module(LoomModule* module)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::list_modules()
+void LoomManager::list_modules() const
 {
 	print_device_label();
 	LPrintln("Modules:");
@@ -157,13 +151,13 @@ void LoomManager::set_device_name(const char* device_name)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::get_device_name(char* buf)
+void LoomManager::get_device_name(char* buf) const
 {
 	sprintf(buf, "%s", device_name); 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomManager::get_device_name()
+const char* LoomManager::get_device_name() const
 {
 	char name[20];
 	get_device_name(name);
@@ -336,7 +330,7 @@ bool LoomManager::dispatch_self(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::display_data()
+void LoomManager::display_data() const
 {
 	print_device_label();
 	LPrintln("Json:");
@@ -345,7 +339,7 @@ void LoomManager::display_data()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::flash_LED(const uint8_t count, const uint8_t time_high, const uint8_t time_low, const bool end_high)
+void LoomManager::flash_LED(const uint8_t count, const uint8_t time_high, const uint8_t time_low, const bool end_high) const
 {
 	for (int i = 0; i < count; i++) {
 		digitalWrite(LED_BUILTIN, HIGH);
@@ -359,7 +353,7 @@ void LoomManager::flash_LED(const uint8_t count, const uint8_t time_high, const 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::nap(const uint16_t ms)
+void LoomManager::nap(const uint16_t ms) const
 {
 	Serial.end();
 	USBDevice.detach();
@@ -429,7 +423,7 @@ void LoomManager::get_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule*	LoomManager::find_module(const LoomModule::Type type, const uint8_t idx)
+LoomModule*	LoomManager::find_module(const LoomModule::Type type, const uint8_t idx) const
 {
 	uint8_t current = 0;
 
@@ -446,7 +440,7 @@ LoomModule*	LoomManager::find_module(const LoomModule::Type type, const uint8_t 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule*	LoomManager::find_module_by_category(const LoomModule::Category category, const uint8_t idx)
+LoomModule*	LoomManager::find_module_by_category(const LoomModule::Category category, const uint8_t idx) const
 {
 	uint8_t current = 0;
 
@@ -471,7 +465,7 @@ void LoomManager::set_interval(const uint16_t ms)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::has_module(const LoomModule::Type type)
+bool LoomManager::has_module(const LoomModule::Type type) const
 {
 	for (auto module : modules) {
 		if (module->get_module_type() == type) return true;
