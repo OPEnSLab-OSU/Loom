@@ -133,7 +133,6 @@ void Loom_Neopixel::set_color(const uint8_t port, const uint8_t chain_num, const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
 void Loom_Neopixel::Run() {
 	int argNum = 5;
 	var args[argNum];
@@ -155,3 +154,5 @@ void Loom_Neopixel::Run() {
 		args[3].retrieve<uint8_t>().value_or(0),
 		args[4].retrieve<uint8_t>().value_or(0));
 }
+
+///////////////////////////////////////////////////////////////////////////////

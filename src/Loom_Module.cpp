@@ -29,12 +29,6 @@ void LoomModule::link_device_manager(LoomManager* LM)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::print_module_label() const 
-{
-	LPrint("[", module_name, "] ");
-}
-
-///////////////////////////////////////////////////////////////////////////////
 void LoomModule::print_config() const 
 {
 	print_module_label();

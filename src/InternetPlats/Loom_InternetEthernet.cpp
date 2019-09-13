@@ -8,8 +8,10 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_InternetEthernet.h"
 #include "Loom_Trust_Anchors.h"
+
 
 static std::vector<unsigned char> make_key_from_asn1(std::vector<unsigned char> asn1) {
 	// we need to extract the private key from the ASN1 object given to us

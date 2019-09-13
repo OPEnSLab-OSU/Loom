@@ -58,7 +58,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-    	void Run() {}
+	void Run() {}
 
 	/// No package necessary for logging platforms.
 	/// implement with empty body.

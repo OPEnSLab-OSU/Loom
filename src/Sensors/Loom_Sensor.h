@@ -22,7 +22,6 @@
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_sensor.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-
 class LoomSensor : public LoomModule
 {
 

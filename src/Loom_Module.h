@@ -251,7 +251,7 @@ protected:
 
 	/// Print the module name as a label.
 	/// Used for matching debug prints to corresponding module
-	void			print_module_label() const;
+	void			print_module_label() const { LPrint("[", module_name, "] "); }
 
 private:
 
@@ -260,21 +260,21 @@ private:
 /*@{*/ //======================================================================
 public:
 
-/// Pointers to dependencies of this module, stored in a vector
-std::vector<LoomModule *> Dependencies;
+	/// Pointers to dependencies of this module, stored in a vector
+	std::vector<LoomModule *> Dependencies;
 
-/// Vector with a shared index to Dependencies, indicating if the connection
-/// should pass on data
-std::vector<bool> DataBearing;
+	/// Vector with a shared index to Dependencies, indicating if the connection
+	/// should pass on data
+	std::vector<bool> DataBearing;
 
-/// Sets a provided module pointer to be a dependency
-int depend(LoomModule *, bool);
+	/// Sets a provided module pointer to be a dependency
+	int depend(LoomModule *, bool);
 
-/// Values to provide for neighboring modules
-std::vector<var> Values;
+	/// Values to provide for neighboring modules
+	std::vector<var> Values;
 
-/// Generic Execution Command
-virtual void Run() = 0;
+	/// Generic Execution Command
+	virtual void Run() = 0;
 
 };
 

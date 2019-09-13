@@ -89,6 +89,7 @@ void Loom_Relay::set(const bool state)
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::Run() {
 	int argNum = 1;
 	var args[argNum];

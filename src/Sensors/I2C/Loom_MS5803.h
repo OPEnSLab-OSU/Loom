@@ -84,7 +84,7 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	float		get_temperature() { return Values[1].retrieve<float>().value_or(0); }
+	float		get_temperature() const { return Values[1].retrieve<float>().value_or(0); }
 
 private:
 
