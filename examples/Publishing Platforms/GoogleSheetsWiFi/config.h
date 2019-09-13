@@ -16,7 +16,7 @@
 		},\
 		{\
 			'name':'WiFi',\
-			'params':['OSU_Access','']\
+			'params':['<ssid>','<password>']\
 		},\
 		{\
 			'name':'GoogleSheets',\
