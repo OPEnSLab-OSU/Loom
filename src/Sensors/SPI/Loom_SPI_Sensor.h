@@ -39,9 +39,9 @@ public:
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	num_samples		The number of samples to take and average
 	LoomSPISensor(	
-			const char*			module_name,
-			LoomModule::Type	module_type,
-			uint8_t				num_samples		= 1
+			const char*					module_name,
+			const LoomModule::Type		module_type,
+			const uint8_t				num_samples		= 1
 		);
 
 	/// Destructor
@@ -55,7 +55,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_measurements() override = 0;
+	virtual void	print_measurements() const override = 0;
 
 private:
 

@@ -74,13 +74,13 @@ public:
 
 	/// No package necessary.
 	/// Implement with empty body.
-	void 		package(JsonObject json) override { /* do nothing */ };
+	void		package(JsonObject json) override { /* do nothing */ };
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
+	void		print_config() const override;
 
 private:
 

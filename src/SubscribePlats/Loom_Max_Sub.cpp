@@ -14,8 +14,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxSub::Loom_MaxSub(
-		LoomModule::Type	internet_type,
-		bool				auto_dispatch
+		const LoomModule::Type	internet_type,
+		const bool				auto_dispatch
 	)   
 	: LoomSubscribePlat( "MaxSub", Type::MaxSub, internet_type )
 	, auto_dispatch(auto_dispatch)
@@ -100,14 +100,14 @@ bool Loom_MaxSub::subscribe(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxSub::print_config()
+void Loom_MaxSub::print_config() const
 {
 	LoomSubscribePlat::print_config();
 	LPrintln("\tUDP Port : ", UDP_port);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxSub::set_port(uint16_t port)
+void Loom_MaxSub::set_port(const uint16_t port)
 {
 	UDP_port = port;
 

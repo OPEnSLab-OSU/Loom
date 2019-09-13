@@ -151,7 +151,7 @@ public:
 
 	/// No package necessary.
 	/// Implement with empty body.
-	void 		package(JsonObject json) override {}
+	void		package(JsonObject json) override {}
 
 	/// Run any waiting ISRs.
 	/// Flag was set by a top half ISR
@@ -166,24 +166,24 @@ public:
 	/// @param[in]	ISR			ISR	function (Null if no interrupt linked)
 	/// @param[in]	signal_type	Low, High, Change, Falling, Rising
 	/// @param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
-	void		register_ISR(byte pin, ISRFuncPtr ISR, byte signal_type, ISR_Type run_type);
+	void		register_ISR(const byte pin, ISRFuncPtr ISR, const byte signal_type, ISR_Type run_type);
 
 	/// If an ISR dettaches interrupt, use this to reattach according to 
 	/// previous settings.
 	/// Effectively to running register_ISR with previous settings
 	/// @param[in]	pin			Which pin to reconnect the interrupt on
-	bool		reconnect_interrupt(byte pin);
+	bool		reconnect_interrupt(const byte pin);
 
 
 	/// Restores pin to default ISR, disables interrupt
 	/// @param[in]	pin				The pin to unregister ISRs for
 	/// @param[in]	signal_type		What signal to configure default ISR to (default LOW)
-	void		unregister_ISR(byte pin, byte signal_type=LOW);
+	void		unregister_ISR(const byte pin, const byte signal_type=LOW);
 
 	/// Detaches then reattacheds interrupt according to settings.
 	/// used to clear pending interrupts
 	/// @param[in]	pin 	Pin to reset interrupts for ...
-	void		interrupt_reset(byte pin);
+	void		interrupt_reset(const byte pin);
 
 //=============================================================================
 ///@name	RTC ALARM METHODS
@@ -194,14 +194,14 @@ public:
 	// sleep_for
 	/// Set RTC alarm an amount of time from now
 	/// @param[in]	duration	How long before the alarm should go off
-	bool		RTC_alarm_duration(TimeSpan duration);
+	bool		RTC_alarm_duration(const TimeSpan duration);
 
 	/// Set RTC alarm an amount of time from now
 	/// @param[in]	days		Days into the future the alarm should be set
 	/// @param[in]	hours		Hours into the future the alarm should be set
 	/// @param[in]	minutes		Minutes into the future the alarm should be set
 	/// @param[in]	seconds		Seconds into the future the alarm should be set
-	bool		RTC_alarm_duration(uint8_t days, uint8_t hours, uint8_t minutes, uint8_t seconds);
+	bool		RTC_alarm_duration(const uint8_t days, const uint8_t hours, const uint8_t minutes, const uint8_t seconds);
 
 	// sleep_until
 	/// Set RTC alarm for a specific time.
@@ -214,19 +214,19 @@ public:
 	/// @param[in]	hour		Hour to set alarm for
 	/// @param[in]	minute		Minute to set alarm for
 	/// @param[in]	second		Second to set alarm for
-	bool		RTC_alarm_at(uint8_t hour, uint8_t minute, uint8_t second);
+	bool		RTC_alarm_at(const uint8_t hour, const uint8_t minute, const uint8_t second);
 
 // // sleep_for
 	/// Set RTC alarm an amount of time from last alarm time
 	/// @param[in]	duration	How long before the alarm should go off
-	bool		RTC_alarm_duration_from_last(TimeSpan duration);
+	bool		RTC_alarm_duration_from_last(const TimeSpan duration);
 
 	/// Set RTC alarm an amount of time from last alarm time
 	/// @param[in]	days		Days into the future the alarm should be set
 	/// @param[in]	hours		Hours into the future the alarm should be set
 	/// @param[in]	minutes		Minutes into the future the alarm should be set
 	/// @param[in]	seconds		Seconds into the future the alarm should be set
-	bool		RTC_alarm_duration_from_last(uint8_t days, uint8_t hours, uint8_t minutes, uint8_t seconds);
+	bool		RTC_alarm_duration_from_last(const uint8_t days, const uint8_t hours, const uint8_t minutes, const uint8_t seconds);
 
 
 //=============================================================================
@@ -243,11 +243,11 @@ public:
 	/// @param[in]	duration		How long timer should take (seconds)
 	/// @param[in]	ISR				ISR to run after timer goes off
 	/// @param[in]	repeat			Whether or not to be a repeating alarm
-	void		register_timer(uint8_t timer_num, unsigned long duration, ISRFuncPtr ISR, bool repeat);
+	void		register_timer(const uint8_t timer_num, const unsigned long duration, const ISRFuncPtr ISR, const bool repeat);
 
 	/// Clear specified timer 
 	/// @param[in]	timer_num		Timer to clear
-	void		clear_timer(uint8_t timer_num);
+	void		clear_timer(const uint8_t timer_num);
 
 //=============================================================================
 ///@name	STOPWATCH METHODS
@@ -265,7 +265,7 @@ public:
 	/// @param[in]	ISR				ISR to run after timer goes off
 	/// @param[in]	repeat			Whether or not to be a repeating alarm
 	/// @param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
-	void		register_internal_timer(uint duration, ISRFuncPtr ISR, bool repeat, ISR_Type run_type);		
+	void		register_internal_timer(const uint duration, const ISRFuncPtr ISR, const bool repeat, const ISR_Type run_type);		
 
 	/// Run a delayed (flag based) ISR if the interal timer elapsed.
 	/// Is not needed if using ISR_Type::IMMEDIATE ISR
@@ -274,15 +274,15 @@ public:
 
 	/// Get whether the internal timer has elapsed
 	/// @return True if timer elapsed, false otherwise
-	bool		get_internal_timer_flag() { return rtcCounter.getFlag(); }
+	bool		get_internal_timer_flag() const { return rtcCounter.getFlag(); }
 
 	/// Clear internal timer flag
-	void		clear_internal_timer_flag() { rtcCounter.clearFlag(); }
+	void		clear_internal_timer_flag() const { rtcCounter.clearFlag(); }
 
 	/// Enable or disable internal timer.
 	/// Disabling does not remove settings, use unregister_interal_timer for that behavior
 	/// @param[in]	enable	True to enable timer, false to disable
-	void		internal_timer_enable(bool enable);
+	void		internal_timer_enable(const bool enable);
 
 	/// Clear and disable internal timer, remove ISR
 	void		unregister_internal_timer();
@@ -291,8 +291,8 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-	void		print_state() override;
+	void		print_config() const override;
+	void		print_state() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -300,16 +300,16 @@ public:
 
 	/// Get global interrupt enable state
 	/// @return		Global interrupt enable state
-	bool		get_interrupts_enabled();
+	bool		get_interrupts_enabled() const { return interrupts_enabled; }
 
 	/// Get pin interrupt enable state
 	/// @param[in]	pin		Pin to the the enable state of
 	/// @return		The enable state
-	bool		get_enable_interrupt(byte pin);
+	bool		get_enable_interrupt(const byte pin) const { return (pin < InteruptRange) ? int_settings[pin].enabled : false; }
 
 	/// Return pointer to the currently linked RTC object
 	/// @return		Current RTC object
-	LoomRTC*	get_RTC_module() { return RTC_Inst; }
+	LoomRTC*	get_RTC_module() const { return RTC_Inst; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -327,12 +327,12 @@ public:
 
 	/// All interrupts enable/disable
 	/// @param[in]	state	Enable state to apply to all interrupts
-	void		set_interrupts_enabled(bool state);
+	void		set_interrupts_enabled(const bool state) { interrupts_enabled = state; }
 
 	/// Per interrupt enable
 	/// @param[in]	pin		Interrupt pin to change enable state of
 	/// @param[in]	state	The enable state to set pin to
-	void		set_enable_interrupt(byte pin, bool state);
+	void		set_enable_interrupt(const byte pin, const bool state);
 
 	/// Set the RTC module to use for timers
 	/// @param[in]	RTC_Inst	Pointer to the RTC object
@@ -345,7 +345,7 @@ public:
 	/// Get c-string of name associated with interrupt type enum
 	/// @param[in]	type	Interrupt type 
 	/// @return C-string of interrupt type
-	const static char* interrupt_type_to_string(uint8_t type);
+	const static char* interrupt_type_to_string(const uint8_t type);
 
 
 private:

@@ -44,11 +44,11 @@ public:
 
 	/// Constructor
 	///
-	/// @param[in]	i2c_address				Set(Int) | <0x40> | {0x40, 0x41, 0x42, 0x43, 0x46, 0x47, 0x48} | I2C address
-	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
+	/// @param[in]	i2c_address			Set(Int) | <0x40> | {0x40, 0x41, 0x42, 0x43, 0x46, 0x47, 0x48} | I2C address
+	/// @param[in]	mux_port			Int | <255> | [0-16] | Port on multiplexer
 	Loom_TMP007(
-			byte			i2c_address		= 0x40,
-			uint8_t			mux_port		= 255
+			const byte		i2c_address		= 0x40,
+			const uint8_t	mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -64,13 +64,13 @@ public:
 /*@{*/ //======================================================================
 
 	void		measure() override;
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_measurements() override;
+	void		print_measurements() const override;
 
 private:
 

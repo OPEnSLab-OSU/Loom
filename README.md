@@ -27,6 +27,8 @@
 - [Introduction](#introduction)
 - [Objectives](#objectives)
 - [Key Features](#key-features)
+- [Arduino Setup](#arduino-setup)
+- [Installing Loom](#installing-loom)
 - [Quick Start](#quick-start)
 - [Hardware Support](#hardware-support)
 - [Documentation](#documentation)
@@ -60,6 +62,14 @@ Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team 
 - Variety of sensors and actuators supported 
 - Remote data logging to SD and internet in near real time
 
+## Arduino Setup
+
+[Arduino Setup Guide](https://github.com/OPEnSLab-OSU/Loom/wiki/Arduino-Setup)
+
+## Installing Loom
+
+ [Loom Installation Guide](https://github.com/OPEnSLab-OSU/Loom/wiki/Loom-Installation)
+
 ## Quick Start
 
  [Quick Start Guide](https://github.com/OPEnSLab-OSU/Loom/wiki/Quick-Start)
@@ -70,7 +80,7 @@ Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team 
 
 ## Documentation
 
-[Wiki](https://wiki.open-sensing.org/doku.php?id=loom) for general documentation not contained in GitHub readmes
+[Wiki](https://wiki.open-sensing.org/doku.php?id=loom) for general documentation not on GitHub or in Doxygen document
 
 [Doxygen generated documentation](https://openslab-osu.github.io/Loom/html/index.html) for documentation of the code and how to use
 

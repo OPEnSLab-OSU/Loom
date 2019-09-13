@@ -49,11 +49,11 @@ public:
 	///
 	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
 	/// @param[in]	module_type			Type of the module (provided by derived classes)
-	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform.
-	LoomPublishPlat(
-		const char*			module_name,
-		LoomModule::Type	module_type,
-		LoomModule::Type	internet_type
+	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	LoomPublishPlat( 
+		const char*				module_name,
+		const LoomModule::Type	module_type,
+		const LoomModule::Type	internet_type
 	);
 
 	/// Destructor
@@ -87,8 +87,8 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_state() override;
-	virtual void	print_config() override;
+	virtual void	print_state() const override;
+	virtual void	print_config() const override;
 
 protected:
 
@@ -105,10 +105,11 @@ private:
 
 	/// Check that the JSON supplied meets the format criteria required by publish()
 	/// @param[in]	json	Json to validate
-	bool m_validate_json(const JsonObjectConst json);
+	bool m_validate_json(const JsonObjectConst json) const;
 
 	/// Print a JSON error
 	/// @param[in]	str		Error string to print
-	void m_print_json_error(const char* str);
-
+	void m_print_json_error(const char* str) const;
+	
 };
+

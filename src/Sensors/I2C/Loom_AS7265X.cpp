@@ -12,12 +12,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7265X::Loom_AS7265X(
-		byte			i2c_address, 
-		uint8_t			mux_port,
-		bool			use_bulb, 
-		uint8_t			gain, 
-		uint8_t			mode, 
-		uint8_t			integration_time
+		const byte			i2c_address, 
+		const uint8_t		mux_port,
+		const bool			use_bulb, 
+		const uint8_t		gain, 
+		const uint8_t		mode, 
+		const uint8_t		integration_time
 	)
 	: LoomI2CSensor( "AS7265X", Type::AS7265X, i2c_address, mux_port )
 	, use_bulb(use_bulb)
@@ -96,7 +96,7 @@ Loom_AS7265X::Loom_AS7265X(JsonArrayConst p)
 	: Loom_AS7265X( EXPAND_ARRAY(p, 6) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::print_measurements()
+void Loom_AS7265X::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -142,7 +142,6 @@ void Loom_AS7265X::measure()
 	Values[4+12] = inst_AS7265X.getCalibratedV();
 	Values[5+12] = inst_AS7265X.getCalibratedW();
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7265X::package(JsonObject json)

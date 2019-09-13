@@ -14,10 +14,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Neopixel::Loom_Neopixel(
-		bool			enableA0,
-		bool			enableA1,
-		bool			enableA2
-	)
+		const bool		enableA0, 
+		const bool		enableA1, 
+		const bool		enableA2
+	) 
 	: LoomActuator("Neopixel", Type::Neopixel)
 	, pin_enabled( {enableA0, enableA1, enableA2} )
 	, pixels( { Adafruit_NeoPixel(1, 14, NEO_GRB + NEO_KHZ800),
@@ -57,7 +57,7 @@ void Loom_Neopixel::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::print_config()
+void Loom_Neopixel::print_config() const
 {
 	LoomActuator::print_config();
 
@@ -67,7 +67,7 @@ void Loom_Neopixel::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::print_state()
+void Loom_Neopixel::print_state() const
 {
 	LPrintln(module_name, " State:");
 	for (auto i = 0; i < 3; i++) {
@@ -91,7 +91,7 @@ bool Loom_Neopixel::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::enable_pin(uint8_t port, bool state)
+void Loom_Neopixel::enable_pin(const uint8_t port, const bool state)
 {
 	pin_enabled[port] = state;
 	if (state) {
@@ -104,7 +104,7 @@ void Loom_Neopixel::enable_pin(uint8_t port, bool state)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uint8_t green, uint8_t blue)
+void Loom_Neopixel::set_color(const uint8_t port, const uint8_t chain_num, const uint8_t red, const uint8_t green, const uint8_t blue)
 {
 	if ( pin_enabled[port] ) {
 
@@ -130,7 +130,6 @@ void Loom_Neopixel::set_color( uint8_t port, uint8_t chain_num, uint8_t red, uin
 			LPrintln("Neopixel not enabled on port ", port);
 		}
 	}
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

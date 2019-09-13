@@ -60,9 +60,9 @@ public:
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	/// @param[in]	calibrate				Bool | <true> | {true, false} | Whether or not to calibrate at start
 	Loom_MPU6050(
-			byte			i2c_address		= 0x69,
-			uint8_t			mux_port		= 255,
-			bool			calibrate		= true
+			const byte			i2c_address		= 0x69,
+			const uint8_t		mux_port		= 255,
+			const bool			calibrate		= true
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -78,30 +78,15 @@ public:
 /*@{*/ //======================================================================
 
 	void		measure() override;
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
 	void		calibrate() override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_state() override;
-	void		print_measurements() override;
-
-//=============================================================================
-///@name	GETTERS
-/*@{*/ //======================================================================
-
-
-//=============================================================================
-///@name	SETTERS
-/*@{*/ //======================================================================
-
-
-//=============================================================================
-///@name	MISCELLANEOUS
-/*@{*/ //======================================================================
-
+	void		print_state() const override;
+	void		print_measurements() const override;
 
 private:
 

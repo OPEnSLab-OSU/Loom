@@ -32,7 +32,7 @@
 /// @param[out]	values		The array to be filled with the values for 'key_values'
 /// @param[in]	kv_len		The length of the 'key_value' array
 /// @param[in]	assoc_len	The length of the 'keys' and 'values' arrays (should be the same)
-void convert_array_key_value_to_assoc(String key_values [], String keys [], String values [], int kv_len, int assoc_len);
+void convert_array_key_value_to_assoc(const String key_values [], String keys [], String values [], const int kv_len, const int assoc_len);
 
 /// Converts pair of associated key and value arrays to equivalent key-value array.
 /// Converts incoming associated arrays formatted as:
@@ -46,7 +46,7 @@ void convert_array_key_value_to_assoc(String key_values [], String keys [], Stri
 /// @param[out]	key_values	The flat array of keys and values to be filled by combining 'keys' and 'values'
 /// @param[in]	assoc_len	The length of the 'keys' and 'values' arrays (should be the same)
 /// @param[in]	kv_len		The length of the 'key_value' array
-void convert_array_assoc_to_key_value(String keys [], String values [], String key_values [], int assoc_len, int kv_len);
+void convert_array_assoc_to_key_value(const String keys [], String values [], String key_values [], const int assoc_len, const int kv_len);
 
 /// Overloaded version of convert_array_assoc_to_key_value to convert output type.
 /// Converts incoming associated arrays formatted as:
@@ -61,7 +61,7 @@ void convert_array_assoc_to_key_value(String keys [], String values [], String k
 /// @param[in]	assoc_len	The length of the 'keys' and 'values' arrays (should be the same)
 /// @param[in]	kv_len		The length of the 'key_value' array
 template <typename T>
-void convert_array_assoc_to_key_value(String keys [], T values [], String key_values [], int assoc_len, int kv_len)
+void convert_array_assoc_to_key_value(const String keys [], const T values [], String key_values [], const int assoc_len, const int kv_len)
 {
 	if ( kv_len < 2*assoc_len ) {
 		#if LOOM_DEBUG == 1
@@ -70,7 +70,7 @@ void convert_array_assoc_to_key_value(String keys [], T values [], String key_va
 		return;
 	}
 
-	for (int i = 0; i < assoc_len; i++) {
+	for (auto i = 0; i < assoc_len; i++) {
 		key_values[i*2]   = keys[i];
 		key_values[i*2+1] = String(values[i]);
 	}
@@ -93,11 +93,11 @@ float		convert_string_to_float(const char* s);
 /// Convert a String to int.
 /// @param[in]	s	C-string to try to convert
 /// @return 		The converted int
-int			convert_string_to_int(String s);
+int			convert_string_to_int(const String s);
 /// Convert a String to float.
 /// @param[in]	s	C-string to try to convert
 /// @return 		The converted float
-float		convert_string_to_float(String s);
+float		convert_string_to_float(const String s);
 
 
 
@@ -116,7 +116,7 @@ float		convert_string_to_float(String s);
 /// @param[out]	dest	Outgoing array
 /// @param[in]	count	Number of elements in array
 template <typename Tin>
-void		convert_array(Tin src[], String dest[], int count)
+void		convert_array(const Tin src[], String dest[], const int count)
 {
 	for (int i = 0; i < count; i++) {
 		dest[i] = String(src[i]);
@@ -128,7 +128,7 @@ void		convert_array(Tin src[], String dest[], int count)
 /// @param[out]	dest	Outgoing array
 /// @param[in]	count	Number of elements in array
 template <typename Tin, typename Tout>
-void		convert_array(Tin src [], Tout dest[], int count)
+void		convert_array(const Tin src [], Tout dest[], const int count)
 {
 	String tmps[count];
 	convert_array(src, tmps, count);

@@ -8,16 +8,18 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_AS7262.h"
+
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7262::Loom_AS7262(
-		byte			i2c_address, 
-		uint8_t			mux_port,
-		bool			use_bulb, 
-		uint8_t			gain, 
-		uint8_t			mode, 
-		uint8_t			integration_time
+		const byte			i2c_address, 
+		const uint8_t		mux_port,
+		const bool			use_bulb, 
+		const uint8_t		gain, 
+		const uint8_t		mode, 
+		const uint8_t		integration_time
 	)
 	: LoomI2CSensor( "AS7262", Type::AS7262, i2c_address, mux_port )
 	, use_bulb(use_bulb)
@@ -42,7 +44,7 @@ Loom_AS7262::Loom_AS7262(JsonArrayConst p)
 	: Loom_AS7262( EXPAND_ARRAY(p, 6) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7262::print_config()
+void Loom_AS7262::print_config() const
 {
 	LoomI2CSensor::print_config();	
 	LPrintln("\tGain     : ", gain);
@@ -51,7 +53,7 @@ void Loom_AS7262::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7262::print_measurements()
+void Loom_AS7262::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

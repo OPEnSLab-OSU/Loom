@@ -1,7 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This is a basic example that demonstrates how to log data to an SD card
-// using Loom.
+// This is a basic example that demonstrates usage of the Hypnos board.
+
+// The Hypnos board includes
+// - SD
+// - DS3231 RTC
+// - Ability to power of peripherals
+
+// Further details about the Hypnos board can be found here:
+// https://github.com/OPEnSLab-OSU/OPEnS-Lab-Home/wiki/Hypnos
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -27,6 +34,14 @@ LoomManager Loom{ &ModuleFactory };
 
 void setup() 
 {
+	// Needs to be done for Hypno Board
+	pinMode(5, OUTPUT);		// Enable control of 5V rail 
+	pinMode(6, OUTPUT);		// Enable control of 3V rail 
+
+	//See Above
+	digitalWrite(5, LOW);	// Disable 5V rail
+	digitalWrite(6, HIGH);	// Enable 3V rail
+
 	Loom.begin_serial(true);
 	Loom.parse_config(json_config);
 	Loom.print_config();
@@ -40,13 +55,10 @@ void loop()
 	Loom.measure();
 	Loom.package();
 	Loom.display_data();
-	
+
 	// Log using default filename as provided in configuration
 	// in this case, 'datafile.csv'
 	Loom.SDCARD().log();
-
-	// Or log to a specific file (does not change what default file is set to)	
-	// Loom.SDCARD().log("specific.csv");
 
 	Loom.pause();	
 }

@@ -48,8 +48,8 @@ public:
 	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
 	/// @param[in]	auto_dispatch		True to immediately call LoomManager::dispatch() when packet received
 	Loom_MaxSub(
-		LoomModule::Type	internet_type,
-		bool				auto_dispatch	
+		const LoomModule::Type	internet_type,
+		const bool				auto_dispatch	
 	); 
 
 	/// Constructor that takes Json Array, extracts args
@@ -78,7 +78,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
+	void		print_config() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -86,11 +86,11 @@ public:
 
 	/// Get the UDP port currently receiving on
 	/// @return UDP port being used
-	uint16_t	get_port() { return UDP_port; }
+	uint16_t	get_port() const { return UDP_port; }
 
 	/// Get the last IP address received from
 	/// @return Last IP address
-	IPAddress	get_remote_IP() { return (UDP_Inst) ? UDP_Inst->remoteIP() : IPAddress(0,0,0,0); }
+	IPAddress	get_remote_IP() const { return (UDP_Inst) ? UDP_Inst->remoteIP() : IPAddress(0,0,0,0); }
 
 //=============================================================================
 ///@name	SETTERS
@@ -100,7 +100,7 @@ public:
 	/// Changing the port from automatic port setting (based on instance number)
 	/// may make the device stop receiving from Max MSP
 	/// @param[in]	port	Port to set to
-	void		set_port(uint16_t port);
+	void		set_port(const uint16_t port);
 
 private:
 

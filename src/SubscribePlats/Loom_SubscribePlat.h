@@ -31,12 +31,12 @@ class LoomSubscribePlat : public LoomModule
 protected:
 
 	/// Pointer to internet platform to use to publish
-	LoomInternetPlat*	m_internet;
-
+	LoomInternetPlat*		m_internet;
+	
 	/// Type of internet platform used to publish.
 	/// Needed because finding the module for m_internet happens in second_stage_ctor(),
 	/// rather than the regular constructor.
-	LoomModule::Type	internet_type;
+	const LoomModule::Type	internet_type;
 
 	/// Subscribe Platforms need their own JsonDocument because an incoming message
 	/// can only be deserialized into JsonDocuments, not JsonObjects.
@@ -55,11 +55,11 @@ public:
 	///
 	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
 	/// @param[in]	module_type			Type of the module (provided by derived classes)
-	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform.
-	LoomSubscribePlat(
-		const char*			module_name,
-		LoomModule::Type	module_type,
-		LoomModule::Type	internet_type
+	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	LoomSubscribePlat( 
+		const char*				module_name,
+		const LoomModule::Type	module_type,
+		const LoomModule::Type	internet_type
 	);
 
 	/// Destructor
@@ -88,8 +88,8 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_config() override;
-	virtual void	print_state() override;
+	virtual void	print_config() const override;
+	virtual void	print_state() const override;
 
 protected:
 

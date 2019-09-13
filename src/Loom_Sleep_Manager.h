@@ -68,10 +68,10 @@ public:
 	/// @param[in]	sleep_mode			Set(Mode) | <1> | { 0("Idle"), 1("Standby"), 2("SleepyDog"), 3("Opens Low Power")} | Which Mode to use
 	/// @param[in]	power_off_pin		Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to power off board
 	Loom_Sleep_Manager(
-			bool			use_LED				= true,
-			bool			delay_on_wake		= false,
-			Mode			sleep_mode			= Mode::STANDBY,
-			byte			power_off_pin		= A5
+			const bool		use_LED				= true,
+			const bool		delay_on_wake		= false,
+			const Mode		sleep_mode			= Mode::STANDBY,
+			const byte		power_off_pin		= A5
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -90,7 +90,7 @@ public:
 
 	/// No package necessary.
 	/// Implement with empty body.
-	void 		package(JsonObject json) override {}
+	void		package(JsonObject json) override {}
 
 	/// Put into low power state.
 	/// On wake, program will continue from where it went to sleep
@@ -105,7 +105,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
+	void		print_config() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -113,7 +113,7 @@ public:
 
 	/// Get the current sleep mode
 	/// @return		The current sleep mode
-	Mode		get_sleep_mode() { return sleep_mode; }
+	Mode		get_sleep_mode() const { return sleep_mode; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -125,7 +125,7 @@ public:
 
 	/// Set the sleep mode to use
 	/// @param[in]	mode	The Mode to set to
-	void		set_sleep_mode(Mode mode) { sleep_mode = mode; }
+	void		set_sleep_mode(const Mode mode) { sleep_mode = mode; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS
@@ -136,8 +136,8 @@ public:
 	/// Convert enum of sleep mode to a c-string
 	/// @param[in]	m	Sleep to get string of
 	/// @return C-string of sleep mode
-	const static char* enum_sleep_mode_string(Mode m);
-
+	const static char* enum_sleep_mode_string(const Mode m);
+	
 private:
 
 	/// Handles pre-sleep operations

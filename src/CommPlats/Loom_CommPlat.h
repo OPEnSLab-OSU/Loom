@@ -51,9 +51,9 @@ public:
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	max_message_len	The maximum possible message length
 	LoomCommPlat(
-			const char*			module_name,
-			LoomModule::Type	module_type,
-			uint16_t			max_message_len
+			const char*				module_name,
+			const LoomModule::Type	module_type,
+			const uint16_t			max_message_len
 		);
 
 	/// Destructor
@@ -86,19 +86,19 @@ public:
 	/// Accesses Json from LoomManager
 	/// @param[out]	max_wait_time	Maximum number of milliseconds to block for
 	/// @return True if packet received	
-	bool			receive_blocking(uint max_wait_time);
+	bool			receive_blocking(const uint max_wait_time);
 
 	/// Send json to a specific address
 	/// @param[in]	json			Json package to send
 	/// @param[in]	destination		Device to send to
 	/// @return True if packet sent successfully
-	virtual bool	send(JsonObject json, uint8_t destination) {}
+	virtual bool	send(JsonObject json, const uint8_t destination) {}
 
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager
 	/// @param[in]	destination		Address of destination device
 	/// @return True if packet sent successfully, false otherwise
-	bool			send(uint8_t destination);
+	bool			send(const uint8_t destination);
 
 	/// Broadcast data to all that can receive.
 	/// Derived classes can optionally provide an implementation for this,
@@ -114,7 +114,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_config() override;
+	virtual void	print_config() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -123,7 +123,7 @@ public:
 	/// Get the address of this device.
 	/// Each platform may have a different addressing scheme
 	/// @return The address of this device
-	virtual uint8_t	get_address() = 0;
+	virtual uint8_t	get_address() const = 0;
 
 //=============================================================================
 ///@name	SETTERS
@@ -133,7 +133,7 @@ public:
 	/// Each platform may have a different addressing scheme.
 	/// Changing the device's address is not recommended.
 	/// @param[in]	a 	The address to set this device to
-	virtual void	set_address(uint8_t a) = 0;
+	virtual void	set_address(const uint8_t a) = 0;
 
 protected:
 
@@ -143,7 +143,7 @@ protected:
 	/// @param[out]	buffer		Buffer to fill with MessagePack of json
 	/// @param[in]	max_len		Length of buffer
 	/// return True if success
-	bool	json_to_msgpack_buffer(JsonObjectConst json, char* buffer, uint16_t max_len);
+	bool	json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len) const;
 
 	/// Deserialize a MessagePack buffer into a JsonObject.
 	/// Also clears the json, contains prints and error checks.

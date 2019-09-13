@@ -8,12 +8,14 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_DS3231.h"
+
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DS3231::Loom_DS3231(
-		TimeZone		timezone,
-		bool			use_utc_time
+		const TimeZone		timezone,
+		const bool			use_utc_time
 	)
 	: LoomRTC( "DS3231", Type::DS3231, timezone, use_utc_time )
 {
@@ -37,7 +39,7 @@ bool Loom_DS3231::_begin()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_DS3231::print_config()
+void Loom_DS3231::print_config() const
 {
 	LoomRTC::print_config();
 	// will print out alarm info

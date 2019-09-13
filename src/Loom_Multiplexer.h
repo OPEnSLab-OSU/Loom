@@ -79,10 +79,10 @@ public:
 	/// @param[in]	dynamic_list			Bool | <true> | {true, false} | Whether or not to automatically check for new sensors
 	/// @param[in]	update_period			Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
 	Loom_Multiplexer(
-			byte			i2c_address			= 0x71,
-			uint8_t			num_ports			= 8,
-			bool			dynamic_list		= true,
-			uint			update_period		= 5000
+			const byte			i2c_address			= 0x71,
+			const uint8_t		num_ports			= 8,
+			const bool			dynamic_list		= true,
+			const uint			update_period		= 5000
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -100,8 +100,8 @@ public:
   void Run() {}
 
 	void		measure();
-
-	void 		package(JsonObject json) override;
+	
+	void		package(JsonObject json) override;
 	bool		dispatch(JsonObject) override {}
 
 	/// Populate a bundle with a list of sensors currently attached
@@ -115,18 +115,18 @@ public:
 	/// Get the sensor object for sensor on provided port
 	/// @param[port]	port	The port of the multiplexer to get sensor object for
 	/// @return			The pointer to LoomI2CSensor on port, Null if no sensor
-	LoomI2CSensor*	get_sensor(uint8_t port) { return sensors[port]; }
+	LoomI2CSensor*	get_sensor(uint8_t port) const { return sensors[port]; }
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-	void		print_state() override;
+	void		print_config() const override;
+	void		print_state() const override;
 
 	/// Prints measurements of all connected sensors.
-	/// Calls implementations of LoomI2CSensor::print_measurements()
-	void		print_measurements();
+	/// Calls implementations of LoomI2CSensor::print_measurements() const
+	void		print_measurements() const;
 
 //=============================================================================
 ///@name	GETTERS
@@ -134,11 +134,11 @@ public:
 
 	/// Get whether or not sensors are updated dynamically
 	/// @return	True if dynamic
-	bool		get_is_dynamic() { return dynamic_list; }
+	bool		get_is_dynamic() const { return dynamic_list; }
 
 	/// Get the sensor list update period.
 	/// @return	The update period
-	int			get_update_period() { return update_period; }
+	int			get_update_period() const { return update_period; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -146,12 +146,12 @@ public:
 
 	/// Set whether or not to periodically update list of attached sensors
 	/// @param[in]	dynamic		The setting to set
-	void		set_is_dynamic(bool dynamic) { dynamic_list = dynamic; }
+	void		set_is_dynamic(const bool dynamic) { dynamic_list = dynamic; }
 
 	/// Set the sensor list update period.
 	/// Requires dynamic_list to be enabled
 	/// @param[in]	period	New update period
-	void		set_update_period(uint period) { update_period = period; }
+	void		set_update_period(const uint period) { update_period = period; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS
@@ -161,17 +161,17 @@ private:
 
 	/// Select communication with sensor at index port
 	/// @param[in]	port	The port to open I2C communication on
-	void			tca_select(uint8_t port);
+	void			tca_select(const uint8_t port) const;
 
 	/// Create appropriate instance to manage sensor.
 	/// Compares I2C address to known sensors and generates corresponding sensor instance
 	/// @param[in]	i2c_address		The I2C address to match to sensor class
 	/// @return		Pointer to the generated I2C sensor object, Null if no match for that address
-	LoomI2CSensor*	generate_sensor_object(byte i2c_address, uint8_t port);
+	LoomI2CSensor*	generate_sensor_object(const byte i2c_address, const uint8_t port);
 
 	/// Determine the I2C address of the sensor (if any) on port.
 	/// @param[in]	port	The port to get sensor address of
 	/// @return		The I2C address of sensor, 0x00 if no sensor found
-	byte			get_i2c_on_port(uint8_t port);
+	byte			get_i2c_on_port(const uint8_t port) const;
 
 };

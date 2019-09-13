@@ -8,14 +8,16 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_FXOS8700.h"
 
 #include <Adafruit_Sensor.h>
 
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXOS8700::Loom_FXOS8700(
-		byte			i2c_address, 
-		uint8_t			mux_port
+		const byte			i2c_address, 
+		const uint8_t		mux_port
 	)
 	: LoomI2CSensor( "FXOS8700", Type::FXOS8700, i2c_address, mux_port )
 	, inst_FXOS8700(Adafruit_FXOS8700(0x8700A, 0x8700B))
@@ -37,7 +39,7 @@ Loom_FXOS8700::Loom_FXOS8700(JsonArrayConst p)
 	: Loom_FXOS8700( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_FXOS8700::print_measurements()
+void Loom_FXOS8700::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

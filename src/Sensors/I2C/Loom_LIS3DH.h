@@ -51,8 +51,8 @@ public:
 	/// @param[in]	i2c_address				Set(Int) | <0x19> | {0x19} | I2C address
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	Loom_LIS3DH(
-			byte			i2c_address		= 0x19,
-			uint8_t			mux_port		= 255
+			const byte		i2c_address		= 0x19,
+			const uint8_t	mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -68,13 +68,13 @@ public:
 /*@{*/ //======================================================================
 
 	void		measure() override;
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_measurements() override;
+	void		print_measurements() const override;
 
 private:
 

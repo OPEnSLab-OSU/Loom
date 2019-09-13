@@ -8,16 +8,18 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_TSL2591.h"
 
 #include <Adafruit_Sensor.h>
 
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TSL2591::Loom_TSL2591(
-		byte			i2c_address, 
-		uint8_t			mux_port,
-		uint8_t			gain_level, 
-		uint8_t			timing_level
+		const byte			i2c_address, 
+		const uint8_t		mux_port,
+		const uint8_t		gain_level, 
+		const uint8_t		timing_level
 	)
 	: LoomI2CSensor( "TSL2591", Type::TSL2591, i2c_address, mux_port )
 	, gain_level(gain_level)
@@ -61,7 +63,7 @@ Loom_TSL2591::Loom_TSL2591(JsonArrayConst p)
 	: Loom_TSL2591( EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_TSL2591::print_measurements()
+void Loom_TSL2591::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

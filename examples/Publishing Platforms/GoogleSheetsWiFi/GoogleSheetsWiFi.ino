@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This is the simplest example of logging data to Google Google Sheets
+// This is the simplest example of logging data to Google Sheets
 
 // The only difference between this example an 'Basic' is the LoomFactory
 // settings, the line: 
@@ -8,9 +8,7 @@
 // and the configuration.
 
 // In the config, you need:
-// - MAC address for the Ethernet module (you could also replace Ethenet with WiFi)
-//		You can use 'default' instead of a parameter list for Ethenet if you
-//		are not on a network that restricts to only registered MAC addresses
+// - WiFi network name and password (or '' if no password)
 // - For Google sheets parameters, see:
 //   https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets
 
@@ -25,7 +23,7 @@ const char* json_config =
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::All,
+	Enable::Internet::WiFi,
 	Enable::Sensors::Enabled,
 	Enable::Radios::Disabled,
 	Enable::Actuators::Enabled,
@@ -44,7 +42,6 @@ void setup()
 
 	LPrintln("\n ** Setup Complete ** "); 
 }
-
 
 
 void loop() 

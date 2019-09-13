@@ -13,9 +13,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomSubscribePlat::LoomSubscribePlat(	
-		const char*			module_name,
-		LoomModule::Type	module_type,
-		LoomModule::Type	internet_type
+		const char*				module_name,
+		const LoomModule::Type	module_type,
+		const LoomModule::Type	internet_type
 	) 
 	: LoomModule( module_name, module_type )
 	, m_internet( nullptr )
@@ -51,14 +51,14 @@ void LoomSubscribePlat::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSubscribePlat::print_config() 
+void LoomSubscribePlat::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tInternet Type: ", (int)internet_type);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSubscribePlat::print_state() 
+void LoomSubscribePlat::print_state() const
 {
 	LoomModule::print_state();
 	LPrintln("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());

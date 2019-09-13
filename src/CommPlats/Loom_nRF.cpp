@@ -12,13 +12,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_nRF::Loom_nRF( 	
-		uint16_t		max_message_len,
-		uint8_t			address,
-		uint8_t			data_rate,
-		uint8_t			power_level,
-		uint8_t			retry_count,
-		uint16_t		retry_timeout,
-		uint8_t			multicast_level	
+		const uint16_t		max_message_len,
+		const uint8_t		address,
+		const uint8_t		data_rate,
+		const uint8_t		power_level,
+		const uint8_t		retry_count,
+		const uint16_t		retry_timeout,
+		const uint8_t		multicast_level	
 	)
 	: LoomCommPlat( "nRF", Type::nRF, max_message_len )
 	, data_rate(data_rate)
@@ -120,7 +120,7 @@ void Loom_nRF::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::print_config() 
+void Loom_nRF::print_config() const
 {
 	LoomCommPlat::print_config();
 
@@ -149,7 +149,7 @@ bool Loom_nRF::receive(JsonObject json)
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
-bool Loom_nRF::send(JsonObject json, uint8_t destination) 
+bool Loom_nRF::send(JsonObject json, const uint8_t destination) 
 {
 	char buffer[max_message_len];
 	bool to_msgpack = json_to_msgpack_buffer(json, buffer, max_message_len);
@@ -182,12 +182,9 @@ void Loom_nRF::broadcast(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::set_address(uint8_t addr)    // Need to test this
+void Loom_nRF::set_address(const uint8_t addr)    // Need to test this
 { 
 	address = addr;
-	// delete network;
-
-	// network = new RF24Network(*radio);
 	network->begin(90, address);
 }
 

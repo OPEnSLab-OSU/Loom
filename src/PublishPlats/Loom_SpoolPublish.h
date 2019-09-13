@@ -34,11 +34,11 @@ public:
 
 	/// Constructor
 	Loom_SpoolPublish(
-			const char* module_name,
+			const char*				module_name,
 			const LoomModule::Type	internet_type,
-			const char* spool_domain,
-			const char* device_data_endpoint,
-			const char* device_id
+			const char*				spool_domain,
+			const char*				device_data_endpoint,
+			const char*				device_id
 		);
 	
 	/// Constructor that takes Json Array, extracts args
@@ -53,7 +53,7 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void print_config() override;
+	void print_config() const override;
 	
 protected:
 	

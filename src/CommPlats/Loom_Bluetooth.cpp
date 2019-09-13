@@ -12,10 +12,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Bluetooth::Loom_Bluetooth( 	
-		uint16_t 		max_message_len,
-		uint8_t			spi_CS,
-		uint8_t			spi_IRQ,
-		uint8_t			spi_RST
+		const uint16_t 		max_message_len,
+		const uint8_t		spi_CS,
+		const uint8_t		spi_IRQ,
+		const uint8_t		spi_RST
 
 	)
 	: LoomCommPlat( "Bluetooth", Type::Bluetooth, max_message_len )
@@ -43,13 +43,13 @@ void Loom_Bluetooth::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Bluetooth::print_config() 
+void Loom_Bluetooth::print_config() const
 {
 	LoomCommPlat::print_config();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Bluetooth::connect(uint16_t connect_timeout)
+void Loom_Bluetooth::connect(const uint16_t connect_timeout)
 {
 	uint32_t timeout = millis();
 
@@ -63,7 +63,7 @@ void Loom_Bluetooth::connect(uint16_t connect_timeout)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-int8_t Loom_Bluetooth::getCommand( uint16_t max_timeout )
+int8_t Loom_Bluetooth::getCommand(const uint16_t max_timeout )
 {
 	// printCommands();
 	BLE.println("Enter Command.");

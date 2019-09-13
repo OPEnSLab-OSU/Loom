@@ -8,12 +8,14 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_LIS3DH.h"
+
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LIS3DH::Loom_LIS3DH(
-		byte			i2c_address, 
-		uint8_t			mux_port
+		const byte			i2c_address, 
+		const uint8_t		mux_port
 	) 
 	: LoomI2CSensor( "LIS3DH", Type::LIS3DH, i2c_address, mux_port )
 	, inst_LIS3DH( LIS3DH(I2C_MODE, i2c_address) )
@@ -44,7 +46,7 @@ Loom_LIS3DH::Loom_LIS3DH(JsonArrayConst p)
 	: Loom_LIS3DH( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LIS3DH::print_measurements()
+void Loom_LIS3DH::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

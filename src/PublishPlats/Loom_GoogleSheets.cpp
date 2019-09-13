@@ -8,17 +8,19 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_GoogleSheets.h"
 #include "../Loom_Manager.h"
 
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(
-		const char*			module_name,
-		LoomModule::Type	internet_type,
-		const char*			script_url,
-		const char*			sheet_id,
-		bool				tab_matches_dev_id,
-		const char*			tab_id
+		const char*				module_name,
+		const LoomModule::Type	internet_type,
+		const char*				script_url,
+		const char*				sheet_id,
+		const bool				tab_matches_dev_id,
+		const char*				tab_id
 	)   
 	: LoomPublishPlat( module_name, Type::GoogleSheets, internet_type )
 	, m_script_url(script_url)
@@ -26,7 +28,7 @@ Loom_GoogleSheets::Loom_GoogleSheets(
 	, tab_matches_dev_id(tab_matches_dev_id)
 	, m_tab_id(tab_id)
 {   
-	/// Build the begining of the Google Sheets URL with all of the provided parameters
+	// Build the begining of the Google Sheets URL with all of the provided parameters
 	print_module_label();
 	LPrint("Google sheets ready with url: ", m_script_url, '\n');
 } 
@@ -36,7 +38,7 @@ Loom_GoogleSheets::Loom_GoogleSheets(JsonArrayConst p)
 	: Loom_GoogleSheets( p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_GoogleSheets::print_config() 
+void Loom_GoogleSheets::print_config() const
 {
 	LoomPublishPlat::print_config();
 	LPrint("\t URL: ", m_script_url, "\n");

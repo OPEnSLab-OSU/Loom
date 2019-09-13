@@ -8,13 +8,15 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_MAX31855.h"
+
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MAX31855::Loom_MAX31855(	
-		const char*		module_name,
-		uint8_t			num_samples, 
-		uint8_t			CS_pin
+		const char*			module_name,
+		const uint8_t		num_samples, 
+		const uint8_t		CS_pin
 	) 
 	: LoomSPISensor( module_name, Type::MAX31855, num_samples ) 
 	, inst_max(CS_pin)
@@ -31,7 +33,7 @@ Loom_MAX31855::Loom_MAX31855(JsonArrayConst p)
 	: Loom_MAX31855( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MAX31855::print_measurements() 
+void Loom_MAX31855::print_measurements() const 
 {
 	print_module_label();
 	LPrintln();

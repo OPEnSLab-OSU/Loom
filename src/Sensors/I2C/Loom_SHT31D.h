@@ -45,11 +45,11 @@ public:
 
 	/// Constructor
 	///
-	/// @param[in]	i2c_address				Set(Int) | <0x44> | {0x44, 0x45} | I2C address
-	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
+	/// @param[in]	i2c_address			Set(Int) | <0x44> | {0x44, 0x45} | I2C address
+	/// @param[in]	mux_port			Int | <255> | [0-16] | Port on multiplexer
 	Loom_SHT31D(
-			byte			i2c_address		= 0x44,
-			uint8_t			mux_port		= 255
+			const byte			i2c_address		= 0x44,
+			const uint8_t		mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -65,13 +65,13 @@ public:
 /*@{*/ //======================================================================
 
 	void		measure() override;
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_measurements() override;
+	void		print_measurements() const override;
 
 //=============================================================================
 ///@name	GETTERS

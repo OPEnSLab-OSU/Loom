@@ -13,12 +13,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MAX31856::Loom_MAX31856(	
 		const char*		module_name,
-		uint8_t			num_samples, 
-		uint8_t			CS_pin,
-		uint8_t			SPI_a,
-		uint8_t			SPI_b,
-		uint8_t			SPI_c,
-		uint8_t			SPI_d
+		const uint8_t	num_samples, 
+		const uint8_t	CS_pin,
+		const uint8_t	SPI_a,
+		const uint8_t	SPI_b,
+		const uint8_t	SPI_c,
+		const uint8_t	SPI_d
 	) : LoomSPISensor( module_name, Type::MAX31856, num_samples ) 
 	, inst_max( Adafruit_MAX31856(SPI_a, SPI_b, SPI_c, SPI_d) )
 {
@@ -41,29 +41,7 @@ Loom_MAX31856::Loom_MAX31856(JsonArrayConst p)
 	: Loom_MAX31856( EXPAND_ARRAY(p, 7) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MAX31856::print_config()
-{
-	LoomSPISensor::print_config();
-	
-	LPrint("Thermocouple type: ");
-	switch ( inst_max.getThermocoupleType() ) {
-		case MAX31856_TCTYPE_B  : LPrint("B"); break;
-		case MAX31856_TCTYPE_E  : LPrint("E"); break;
-		case MAX31856_TCTYPE_J  : LPrint("J"); break;
-		case MAX31856_TCTYPE_K  : LPrint("K"); break;
-		case MAX31856_TCTYPE_N  : LPrint("N"); break;
-		case MAX31856_TCTYPE_R  : LPrint("R"); break;
-		case MAX31856_TCTYPE_S  : LPrint("S"); break;
-		case MAX31856_TCTYPE_T  : LPrint("T"); break;
-		case MAX31856_VMODE_G8  : LPrint("Voltage x8 Gain mode"); break;
-		case MAX31856_VMODE_G32 : LPrint("Voltage x8 Gain mode"); break;
-		default: LPrint("Unknown"); break;
-	}
-	LPrintln(" Type");
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_MAX31856::print_measurements() 
+void Loom_MAX31856::print_measurements() const 
 {
 	print_module_label();
 	LPrintln("\tTemp: ", Values[0].retrieve<float>().value_or(0), " C");

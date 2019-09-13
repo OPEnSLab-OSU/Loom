@@ -8,13 +8,15 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_ZXGesture.h"
+
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ZXGesture::Loom_ZXGesture(
-		byte			i2c_address, 
-		uint8_t			mux_port, 
-		Mode			mode
+		const byte			i2c_address, 
+		const uint8_t		mux_port, 
+		const Mode			mode
 	)
 	: LoomI2CSensor( "ZXGesture", Type::ZXGesture, i2c_address, mux_port )
 	, mode(mode)
@@ -58,14 +60,14 @@ Loom_ZXGesture::Loom_ZXGesture(JsonArrayConst p)
 	: Loom_ZXGesture(p[0], p[1], (Mode)(int)p[2]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_ZXGesture::print_config()
+void Loom_ZXGesture::print_config() const
 {
 	LoomI2CSensor::print_config();
 	LPrintln("\tMode             : ", (mode == Mode::POS) ? "Position" : "Gesture" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_ZXGesture::print_measurements()
+void Loom_ZXGesture::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

@@ -48,9 +48,9 @@ public:
 	/// @param[in]	enableA1		Bool | <false> | {true, false} | Whether or not to use pin A1 for Neopixel
 	/// @param[in]	enableA2		Bool | <true> | {true, false} | Whether or not to use pin A2 for Neopixel
 	Loom_Neopixel(
-			bool			enableA0		= false,
-			bool			enableA1		= false,
-			bool			enableA2		= true
+			const bool		enableA0		= false,
+			const bool		enableA1		= false,
+			const bool		enableA2		= true
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -76,14 +76,14 @@ public:
 	/// @param[in]	red			The red value (0-255)
 	/// @param[in]	green		The green value (0-255)
 	/// @param[in]	blue		The blue value (0-255)
-	void		set_color(uint8_t port, uint8_t chain_num, uint8_t red, uint8_t green, uint8_t blue);
+	void		set_color(const uint8_t port, const uint8_t chain_num, const uint8_t red, const uint8_t green, const uint8_t blue);
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-	void		print_state() override;
+	void		print_config() const override;
+	void		print_state() const override;
 
 //=============================================================================
 ///@name	SETTERS
@@ -92,7 +92,7 @@ public:
 	/// enable or disable pin for use with Neopixel
 	/// @param[in]	port	Port to configure (0-2)
 	/// @param[in]	state	Enable or disable
-	void		enable_pin(uint8_t port, bool state);
+	void		enable_pin(const uint8_t port, const bool state);
 
 private:
 

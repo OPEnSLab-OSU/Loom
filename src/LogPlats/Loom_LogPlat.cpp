@@ -8,15 +8,17 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_LogPlat.h"
 #include "Loom_Manager.h"
 
+
 ///////////////////////////////////////////////////////////////////////////////
 LoomLogPlat::LoomLogPlat( 
-		const char*			module_name, 
-		LoomModule::Type	module_type,
-		bool				enable_rate_filter,
-		uint16_t			min_filter_delay
+		const char*				module_name, 
+		const LoomModule::Type	module_type,
+		const bool				enable_rate_filter,
+		const uint16_t			min_filter_delay
 	)
 	: LoomModule( module_name, module_type )
 	, enable_rate_filter(enable_rate_filter)
@@ -25,7 +27,7 @@ LoomLogPlat::LoomLogPlat(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomLogPlat::print_config() 
+void LoomLogPlat::print_config() const
 {
 	LoomModule::print_config();
 

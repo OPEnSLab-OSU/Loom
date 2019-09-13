@@ -8,12 +8,14 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_SHT31D.h"
+
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SHT31D::Loom_SHT31D(
-		byte			i2c_address,
-		uint8_t			mux_port
+		const byte			i2c_address,
+		const uint8_t		mux_port
 	)
 	: LoomI2CSensor( "SHT31D", Type::SHT31D, i2c_address, mux_port )
 {
@@ -34,7 +36,7 @@ Loom_SHT31D::Loom_SHT31D(JsonArrayConst p)
 	: Loom_SHT31D( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SHT31D::print_measurements()
+void Loom_SHT31D::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");

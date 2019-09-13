@@ -8,12 +8,14 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_PCF8523.h"
+
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_PCF8523::Loom_PCF8523(	
-		TimeZone		timezone,
-		bool			use_utc_time
+		const TimeZone		timezone,
+		const bool			use_utc_time
 	)
 	: LoomRTC( "PCF8523", Type::PCF8523, timezone, use_utc_time )
 {
@@ -33,7 +35,7 @@ bool Loom_PCF8523::_begin()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_PCF8523::print_config()
+void Loom_PCF8523::print_config() const
 {
 	LoomRTC::print_config();
 	// will print out alarm info

@@ -61,9 +61,9 @@ public:
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	/// @param[in]	mode					Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
 	Loom_ZXGesture(
-			byte			i2c_address		= 0x10,
-			uint8_t			mux_port		= 255,
-			Mode			mode			= Mode::POS
+			const byte			i2c_address		= 0x10,
+			const uint8_t		mux_port		= 255,
+			const Mode			mode			= Mode::POS
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -79,14 +79,14 @@ public:
 /*@{*/ //======================================================================
 
 	void		measure() override;
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-	void		print_measurements() override;
+	void		print_config() const override;
+	void		print_measurements() const override;
 
 private:
 

@@ -12,7 +12,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Decagon5TM::Loom_Decagon5TM(	
-		uint8_t			num_samples 
+		const uint8_t		num_samples 
 	) 
 	: LoomSDI12Sensor( "5TM", Type::Decagon5TM, num_samples ) 
 {
@@ -24,13 +24,13 @@ Loom_Decagon5TM::Loom_Decagon5TM(JsonArrayConst p)
 	: Loom_Decagon5TM( (uint8_t)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Decagon5TM::print_config()
+void Loom_Decagon5TM::print_config() const
 {
 	LoomSDI12Sensor::print_config();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Decagon5TM::print_measurements()
+void Loom_Decagon5TM::print_measurements() const
 {
 
 }

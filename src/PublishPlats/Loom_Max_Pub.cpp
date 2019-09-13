@@ -8,13 +8,15 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_Max_Pub.h"
 #include "../SubscribePlats/Loom_Max_Sub.h"
 #include "../Loom_Manager.h"
 
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxPub::Loom_MaxPub(
-		LoomModule::Type	internet_type
+		const LoomModule::Type	internet_type
 	)   
 	: LoomPublishPlat( "MaxPub", Type::MaxPub, internet_type )
 	, remoteIP({192,168,1,255})
@@ -41,7 +43,7 @@ Loom_MaxPub::Loom_MaxPub(JsonArrayConst p)
 	: Loom_MaxPub( (LoomModule::Type)(int)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::print_config()
+void Loom_MaxPub::print_config() const
 {
 	LoomPublishPlat::print_config();
 	LPrintln("\tUDP Port  : ", UDP_port);
@@ -49,15 +51,10 @@ void Loom_MaxPub::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::print_state()
-{
-	LoomPublishPlat::print_state();
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_port(uint16_t port)
+void Loom_MaxPub::set_port(const uint16_t port)
 {
 	UDP_port = port;
+	UDP_Inst = (m_internet != nullptr) ? m_internet->open_socket(UDP_port) : nullptr;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -85,9 +82,8 @@ bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat
 	UDP_Inst->endPacket(); // Mark the end of the OSC Packet
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_ip(IPAddress ip)
+void Loom_MaxPub::set_ip(const IPAddress ip)
 {
 	remoteIP = ip;
 	print_module_label();

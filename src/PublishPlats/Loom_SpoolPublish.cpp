@@ -8,7 +8,9 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_SpoolPublish.h"
+
 
 /////////////////////////////////////////////////////////////////////
 Loom_SpoolPublish::Loom_SpoolPublish(
@@ -28,7 +30,7 @@ Loom_SpoolPublish::Loom_SpoolPublish(JsonArrayConst p)
 : Loom_SpoolPublish( p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4] ) {}
 
 /////////////////////////////////////////////////////////////////////
-void Loom_SpoolPublish::print_config() 
+void Loom_SpoolPublish::print_config() const
 {
 	LoomPublishPlat::print_config();
 	print_module_label();

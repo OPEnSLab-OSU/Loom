@@ -16,8 +16,6 @@
 #include <SD.h>
 #include "../RTC/Loom_RTC.h"
 
-// Forward declare existence of RTC class
-// class LoomRTC;
 
 // See if there is any difference to use the SD breakout
 // enum SD_Version { FEATHERWING, BREAKOUT };
@@ -39,8 +37,7 @@ class Loom_SD : public LoomLogPlat
 
 protected:
 
-		// File sdFile;
-		byte		chip_select;		///< Chip select pin
+		const byte	chip_select;		///< Chip select pin
 		bool		sd_found;			///< Whether or not the SD hardware was found
 		char		default_file[16];	///< String of file to write to if not filename explicitly provided
 		LoomRTC*	RTC_Inst;			///< Pointer to an RTC object for timestamps
@@ -61,10 +58,10 @@ public:
 	/// @param[in]	chip_select					Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
 	/// @param[in]	default_file				String | <"test.csv"> | null | File to write to if none explicity provided (should be < 8 characters w/out extension)
 	Loom_SD(
-			bool			enable_rate_filter	= true,
-			uint16_t		min_filter_delay	= 1000,
-			byte			chip_select			= 10,
-			const char*		default_file		= "test.csv"
+			const bool			enable_rate_filter	= true,
+			const uint16_t		min_filter_delay	= 1000,
+			const byte			chip_select			= 10,
+			const char*			default_file		= "test.csv"
 
 			// SD_Version 		version 			= FEATHERWING,
 			// byte 			reset_pin 			= A2
@@ -104,20 +101,20 @@ public:
 
 	/// Delete a file
 	/// @param[in]	file	Name of file to delete
-	void		delete_file(const char* file) { if (sd_found) SD.remove(file); }
+	void		delete_file(const char* file) const { if (sd_found) SD.remove(file); }
 
 	/// Clear a file (remove contents but not file itself)
 	/// @param[in]	file	Name of file to empty
-	void		empty_file(const char* file);
+	void		empty_file(const char* file) const;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
+	void		print_config() const override;
 
 	/// List current files on the SD card
-	void		list_files() { if (sd_found) print_directory(SD.open("/"), 0); }
+	void		list_files() const { if (sd_found) print_directory(SD.open("/"), 0); }
 
 	/// Print the contents of a particular file
 	/// @param[in]	file 	Name of file to print
@@ -129,11 +126,11 @@ public:
 
 	/// Return pointer to the currently linked RTC object
 	/// @return		Current RTC object
-	LoomRTC*	get_RTC_module() { return RTC_Inst; }
+	LoomRTC*	get_RTC_module() const { return RTC_Inst; }
 
 	/// Get the current default file to write to
 	/// @return Default file
-	const char*	get_default_file() { return default_file; }
+	const char*	get_default_file() const { return default_file; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -164,7 +161,7 @@ private:
 	/// Recursive for nested folders
 	/// @param[in]	dir			File to treat at root
 	/// @param[in]	numTabs		Number of tabs to prepend to properly show nesting
-	void		print_directory(File dir, uint8_t numTabs);
+	void		print_directory(File dir, const uint8_t numTabs) const;
 
 	/// Auxiliary funcntion to print data element, delimiter, and (optionally) space
 	/// @param[in]	sdFile		File to write to
@@ -172,7 +169,7 @@ private:
 	/// @param[in]	delimiter	Delimiter to use
 	/// @param[in]	add_space	True to add space after delimiter
 	template <typename T>
-	void		SD_print_aux(File sdFile, T data, char delimiter, bool add_space=true)
+	void		SD_print_aux(File sdFile, T data, const char delimiter, const bool add_space=true) const
 	{
 		sdFile.print(data);
 		sdFile.print(delimiter);
@@ -182,11 +179,11 @@ private:
 	}
 
 	/// Aux method to create header row 1 (Categories)
-	void _write_json_header_part1(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents);
+	void _write_json_header_part1(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const;
 	/// Aux method to create Header row 2 (Column names)
-	void _write_json_header_part2(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents);
+	void _write_json_header_part2(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const;
 	/// Aux method to write data values
-	void _write_json_data(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents);
+	void _write_json_data(File sdFile, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const;
 
 };
 

@@ -263,7 +263,7 @@ class FactoryBase
 {
 public:
 
-	virtual void print_table() = 0;
+	virtual void print_table() const = 0;
 
 	/// Creates a LoomModule with its default parameters.
 	/// Usage example:
@@ -272,7 +272,7 @@ public:
 	template<class T> 
 	static T* CreateDefault() { return ConstructDefault<T>(); }
 
-	virtual LoomModule* Create(JsonVariant module) = 0;
+	virtual LoomModule* Create(JsonVariant module) const = 0;
 };
 
 
@@ -338,7 +338,7 @@ public:
 	~LoomFactory() = default;
 
 	/// Print the contents of the lookup table
-	void print_table()
+	void print_table() const
 	{
 		LPrintln("[Factory] Module Lookup Table:\n");
 		for (auto item : factory::to_array(LookupTable) ) {
@@ -351,7 +351,7 @@ public:
 	/// if that module has default values for all parameters
 	/// @param[in]	module		Subset of a Json configuration, used to identify module to create and with what parameters
 	/// @return	LoomModule if created, nullptr if it could not be created
-	LoomModule* Create(JsonVariant module)
+	LoomModule* Create(JsonVariant module) const
 	{
 		const char* name = module["name"];
 

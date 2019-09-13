@@ -71,9 +71,9 @@ public:
 	/// Loom Internet Platform module constructor.
 	///
 	/// @param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
-	LoomInternetPlat(
-			const char*			module_name,
-			LoomModule::Type	module_type
+	LoomInternetPlat( 
+			const char*				module_name,  
+			const LoomModule::Type	module_type
 		);
 
 	/// Destructor
@@ -94,7 +94,7 @@ public:
 
 	/// Get if connected to internet
 	/// @return True if connected
-	virtual bool	is_connected() = 0;
+	virtual bool	is_connected() const = 0;
 
 	/// Make HTTP request
 	/// @param[in]	domain	The domain to connect to (e.g "www.google.com")

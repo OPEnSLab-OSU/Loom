@@ -67,7 +67,7 @@ void LoomNTPSync::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::print_config() 
+void LoomNTPSync::print_config() const
 {
 	print_module_label();
 	if (m_sync_interval == 0) LPrintln("\tNTPSync set to synchronize once.");
@@ -75,7 +75,7 @@ void LoomNTPSync::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::print_state() 
+void LoomNTPSync::print_state() const 
 {
 	print_module_label();
 	if (m_last_error != Error::OK) LPrint("\tNTPSync in error state: ", static_cast<uint8_t>(m_last_error), "\n");

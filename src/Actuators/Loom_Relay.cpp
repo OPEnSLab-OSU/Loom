@@ -13,10 +13,10 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Relay::Loom_Relay(
-		byte			pin
-	)
-	: LoomActuator( "Relay", Type::Relay )
+Loom_Relay::Loom_Relay( 
+		const byte		pin 
+	) 
+	: LoomActuator( "Relay", Type::Relay ) 
 	, pin(pin)
 	, on(false)
 {
@@ -40,7 +40,7 @@ void Loom_Relay::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::print_state()
+void Loom_Relay::print_state() const
 {
 	print_module_label();
 	LPrintln("\tRelay ", pin, (on) ? " On" : " Off" );
@@ -76,7 +76,7 @@ bool Loom_Relay::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::set(bool state)
+void Loom_Relay::set(const bool state)
 {
 	LPrintln("In set");
 

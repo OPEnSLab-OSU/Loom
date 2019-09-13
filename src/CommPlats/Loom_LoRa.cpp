@@ -12,11 +12,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::Loom_LoRa( 	
-		uint16_t		max_message_len,
-		uint8_t			address,
-		uint8_t			power_level,
-		uint8_t			retry_count,
-		uint16_t		retry_timeout 	
+		const uint16_t		max_message_len,
+		const uint8_t		address,
+		const uint8_t		power_level,
+		const uint8_t		retry_count,
+		const uint16_t		retry_timeout 	
 	)
 	: LoomCommPlat( "LoRa", Type::LoRa, max_message_len )
 	, address(address)
@@ -82,7 +82,7 @@ void Loom_LoRa::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::print_config() 
+void Loom_LoRa::print_config() const
 {
 	LoomCommPlat::print_config();
 
@@ -93,7 +93,7 @@ void Loom_LoRa::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::set_address(uint8_t addr)    // Need to test this
+void Loom_LoRa::set_address(const uint8_t addr)    // Need to test this
 { 
 	address = addr;
 	delete manager;
@@ -140,7 +140,7 @@ bool Loom_LoRa::receive(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::send(JsonObject json, uint8_t destination) 
+bool Loom_LoRa::send(JsonObject json, const uint8_t destination) 
 {
 	char buffer[max_message_len];
 	bool to_msgpack = json_to_msgpack_buffer(json, buffer, max_message_len);

@@ -61,12 +61,12 @@ public:
 	/// @param[in]	mode					Set(Int) | <3> | { 0("4 channels out of 6"), 1("Different 4 channels out of 6"), 2("All 6 channels continuously"), 3("One-shot reading of all channels") } | Read mode
 	/// @param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
 	Loom_AS7265X(
-			byte			i2c_address			= 0x49,
-			uint8_t			mux_port			= 255,
-			bool			use_bulb			= false,
-			uint8_t			gain				= 64,
-			uint8_t			mode				= AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT,	// 4 channel, other 4 channel, 6 chan, or 6 chan one shot // AS7265X_Mode,
-			uint8_t			integration_time	= 50
+			const byte			i2c_address			= 0x49,
+			const uint8_t		mux_port			= 255,
+			const bool			use_bulb			= false,
+			const uint8_t		gain				= 64,
+			const uint8_t		mode				= AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT,	// 4 channel, other 4 channel, 6 chan, or 6 chan one shot // AS7265X_Mode,
+			const uint8_t		integration_time	= 50
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -82,36 +82,36 @@ public:
 /*@{*/ //======================================================================
 
 	void		measure() override;
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_measurements() override;
+	void		print_measurements() const override;
 
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
 	/// Set whether not bulb is used for active light source
-	/// @param[in]	enable	Whether or not to enable
-	void		enable_bulb(bool e) { use_bulb = e; }
+	/// @param[in]	enable	Whether or not to enable 
+	void		enable_bulb(const bool e) { use_bulb = e; }
 
 	/// Set gain.
 	/// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
-	/// @param[in]	gain	Gain level:
-	void		set_gain(uint8_t gain) { inst_AS7265X.setGain(gain); }
+	/// @param[in]	gain	Gain level: 
+	void		set_gain(const uint8_t gain) { inst_AS7265X.setGain(gain); }
 
 	/// Set mode.
 	/// 4 channel, other 4 channel, 6 chan, or 6 chan one shot.
 	/// @param[in]	mode	Mode
-	void		set_mode(uint8_t mode) { inst_AS7265X.setMeasurementMode(mode); }
+	void		set_mode(const uint8_t mode) { inst_AS7265X.setMeasurementMode(mode); }
 
 	/// Set integration time.
 	/// 50 * 2.8ms = 140ms. 0 to 255 is valid.  (49 is default)
 	/// If you use Mode 2 or 3 (all the colors) then integration time is double. 140*2 = 280ms between readings.
-	void		set_integration_time(uint8_t time) { inst_AS7265X.setIntegrationCycles(time); }
+	void		set_integration_time(const uint8_t time) { inst_AS7265X.setIntegrationCycles(time); }
 
 private:
 

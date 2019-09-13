@@ -42,9 +42,9 @@ public:
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	num_samples		The number of samples to take and average
 	LoomSensor(	
-			const char*			module_name,
-			LoomModule::Type	module_type,
- 			uint8_t				num_samples
+			const char*				module_name,
+			const LoomModule::Type	module_type,
+ 			const uint8_t			num_samples
 		);
 
 	/// Destructor
@@ -65,11 +65,11 @@ public:
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	virtual void	print_config() override;
+	virtual void	print_config() const override;
 
 	/// Print the last set of measurements taken.
 	/// Does not package the data.
-	virtual void	print_measurements() = 0; 
+	virtual void	print_measurements() const = 0; 
 
 //=============================================================================
 ///@name	GETTERS
@@ -77,7 +77,7 @@ public:
 
 	/// Get the number of samples sensor is set to take
 	/// @return		Number of samples
-	uint8_t			get_num_samples() { return num_samples; }
+	uint8_t			get_num_samples() const { return num_samples; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -85,7 +85,7 @@ public:
 
 	/// Set the number of samples to take
 	/// @param[in]	n	Number of samples to take
-	void			set_num_samples(uint8_t n) { num_samples = n; }
+	void			set_num_samples(const uint8_t n) { num_samples = n; }
 
 private:
 

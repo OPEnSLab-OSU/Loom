@@ -8,12 +8,14 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Loom_OLED.h"
 
 #include <Adafruit_GFX.h>
 
+
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_OLED::enum_oled_version_string(Version v)
+const char* Loom_OLED::enum_oled_version_string(const Version v)
 {
 	switch(v) {
 		case Version::FEATHERWING : return "FeatherWing";
@@ -22,7 +24,7 @@ const char* Loom_OLED::enum_oled_version_string(Version v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_OLED::enum_oled_format_string(Format f)
+const char* Loom_OLED::enum_oled_format_string(const Format f)
 {
 	switch(f) {
 		case Format::FOUR   : return "OLED 4 Elements";
@@ -32,7 +34,7 @@ const char* Loom_OLED::enum_oled_format_string(Format f)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_OLED::enum_oled_freeze_string(FreezeType f)
+const char* Loom_OLED::enum_oled_freeze_string(const FreezeType f)
 {
 	switch(f) {
 		case FreezeType::DISABLE : return "Freeze Disabled";
@@ -43,14 +45,14 @@ const char* Loom_OLED::enum_oled_freeze_string(FreezeType f)
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_OLED::Loom_OLED(	
-		bool			enable_rate_filter, 
-		uint16_t		min_filter_delay, 
-		Version			version, 
-		byte			reset_pin, 
-		Format			display_format, 
-		uint16_t		scroll_duration, 
-		byte			freeze_pin, 
-		FreezeType		freeze_behavior
+		const bool			enable_rate_filter, 
+		const uint16_t		min_filter_delay, 
+		const Version		version, 
+		const byte			reset_pin, 
+		const Format		display_format, 
+		const uint16_t		scroll_duration, 
+		const byte			freeze_pin, 
+		const FreezeType	freeze_behavior
 	)
 	: LoomLogPlat( "OLED", Type::OLED, enable_rate_filter, min_filter_delay )
 	, version(version)
@@ -78,7 +80,7 @@ Loom_OLED::Loom_OLED(JsonArrayConst p)
 	: Loom_OLED(p[0], p[1], (Version)(int)p[2], p[3], (Format)(int)p[4], p[5], p[6], (FreezeType)(int)p[7]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_OLED::print_config() 
+void Loom_OLED::print_config() const
 {
 	LoomLogPlat::print_config();
 
@@ -98,7 +100,7 @@ void Loom_OLED::print_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_OLED::set_freeze_pin(byte pin) 
+void Loom_OLED::set_freeze_pin(const byte pin) 
 {
 	freeze_pin = pin;
 	if (freeze_behavior != FreezeType::DISABLE) {

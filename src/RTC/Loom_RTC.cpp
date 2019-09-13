@@ -74,10 +74,10 @@ char* LoomRTC::enum_timezone_string(TimeZone t)
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomRTC::LoomRTC(	
-		const char*			module_name,
-		LoomModule::Type	module_type,
-		TimeZone			timezone,
-		bool				use_utc_time
+		const char*				module_name,
+		const LoomModule::Type	module_type,
+		const TimeZone			timezone,
+		const bool				use_utc_time
 	) 
 	: LoomModule( module_name, module_type )
 	, timezone(timezone)
@@ -85,17 +85,17 @@ LoomRTC::LoomRTC(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_config()
+void LoomRTC::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tUse UTC Time      : ", use_utc_time);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_state()
+void LoomRTC::print_state() const
 {
 	LoomModule::print_state();
-	print_time();
+	// print_time();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -106,7 +106,7 @@ void LoomRTC::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_time(bool verbose)
+void LoomRTC::print_time(const bool verbose)
 {
 	read_rtc();
 	print_module_label();
@@ -124,7 +124,7 @@ void LoomRTC::print_time(bool verbose)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_DateTime(DateTime time) 
+void LoomRTC::print_DateTime(const DateTime time)
 {
 	LPrint(time.year());   LPrint('/');
 	LPrint(time.month());  LPrint('/');
@@ -180,7 +180,7 @@ void LoomRTC::get_weekday(char* buf)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::get_timestamp(char* header, char* timestamp, char delimiter, uint8_t format)
+void LoomRTC::get_timestamp(char* header, char* timestamp, const char delimiter, const uint8_t format)
 {
 	switch (format) {
 		case 1 :
@@ -249,7 +249,7 @@ void LoomRTC::set_rtc_to_compile_time()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::convert_local_to_utc(bool to_utc)
+void LoomRTC::convert_local_to_utc(const bool to_utc)
 {
 	float adj = ( (to_utc) ? 1. : -1. ) * timezone_adjustment[(int)timezone];
 	int min;
@@ -306,7 +306,7 @@ void LoomRTC::link_device_manager(LoomManager* LM)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::time_adjust(DateTime time, bool is_utc)
+void LoomRTC::time_adjust(const DateTime time, const bool is_utc)
 {
 	_adjust(time);
 

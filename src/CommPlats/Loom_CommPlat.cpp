@@ -13,9 +13,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomCommPlat::LoomCommPlat( 
-		const char*			module_name, 
-		LoomModule::Type	module_type,
-		uint16_t			max_message_len 
+		const char*				module_name, 
+		const LoomModule::Type	module_type,
+		const uint16_t			max_message_len 
 	) 
 	: LoomModule( module_name, module_type )
 	, max_message_len(max_message_len)
@@ -23,7 +23,7 @@ LoomCommPlat::LoomCommPlat(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomCommPlat::print_config() 
+void LoomCommPlat::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tMax Message Length  : ", max_message_len );
@@ -41,7 +41,7 @@ bool LoomCommPlat::receive()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::receive_blocking(JsonObject json, uint max_wait_time)
+bool LoomCommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
 {
 	unsigned long start_time = millis();
 	do {
@@ -55,7 +55,7 @@ bool LoomCommPlat::receive_blocking(JsonObject json, uint max_wait_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::receive_blocking(uint max_wait_time)
+bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 {
 	if (device_manager != nullptr) {
 		// Loom_Manager's json needs to be cleared (passing true to internal_json)
@@ -66,7 +66,7 @@ bool LoomCommPlat::receive_blocking(uint max_wait_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::send(uint8_t destination)
+bool LoomCommPlat::send(const uint8_t destination)
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
@@ -89,7 +89,7 @@ void LoomCommPlat::broadcast()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, uint16_t max_len)
+bool LoomCommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len) const
 {
 	memset(buffer, '\0', sizeof(buffer));
 

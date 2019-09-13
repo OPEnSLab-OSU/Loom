@@ -41,7 +41,7 @@ public:
 	///
 	/// @param[in]  sync_interval_hours		Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
 	LoomNTPSync(
-		const uint			sync_interval_hours		= 0
+		const uint		sync_interval_hours		= 0
 	);
 
 	/// Constructor that takes Json Array, extracts args
@@ -65,15 +65,15 @@ public:
 	/// Allows the module to run regularly by emulating a sensor, which have
 	/// thier measure methods called regularly.
 	void		measure();
-	void 		package(JsonObject json) override { /* do nothing */ };
+	void		package(JsonObject json) override { /* do nothing */ };
 	bool		dispatch(JsonObject) override { /* do nothing */}
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-	void		print_state() override;
+	void		print_config() const override;
+	void		print_state() const override;	
 
 private:
 

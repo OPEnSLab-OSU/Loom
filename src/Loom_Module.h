@@ -122,9 +122,9 @@ public:
 	/// Constructor
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
-	LoomModule(
-		const char*		module_name		= "Unknown",
-		Type			module_type		= Type::Unknown
+	LoomModule( 
+		const char*		module_name		= "Unknown", 
+		const Type		module_type		= Type::Unknown
 	);
 
 	/// Destructor
@@ -164,10 +164,10 @@ public:
 /*@{*/ //======================================================================
 
 	/// Display the configuration settings of the module
-	virtual void	print_config();
+	virtual void	print_config() const;
 
 	/// Display current state of the module
-	virtual void	print_state();
+	virtual void	print_state() const;
 
 //=============================================================================
 ///@name	GETTERS
@@ -175,34 +175,34 @@ public:
 
 	/// Get module type
 	/// @return Module type
-	Type			get_module_type() { return module_type; }
+	Type			get_module_type() const { return module_type; }
 
 	/// Get the device manager class if linked
 	/// @return Pointer to the LoomManager, Null if not linked
-	LoomManager*	get_device_manager() { return device_manager; }
+	LoomManager*	get_device_manager() const { return device_manager; }
 
 	/// Copy module name into buffer
 	/// @param[out]	buf	The buffer to copy module name into
-	void			get_module_name(char* buf);
-
+	void			get_module_name(char* buf) const;
+	
 	/// Get module name
 	/// @return	Module name
-	const char*		get_module_name() { return module_name; }
+	const char*		get_module_name() const { return module_name; }
 
 	/// Get print verbosity
 	/// @return		The current verbosity setting
-	Verbosity		get_print_verbosity() { return print_verbosity; }
+	Verbosity		get_print_verbosity() const { return print_verbosity; }
 
 	/// Get package verbosity
 	/// @return		The current verbosity setting
-	Verbosity		get_package_verbosity() { return package_verbosity; }
+	Verbosity		get_package_verbosity() const { return package_verbosity; }
 
 	/// Get whether or not the module should be treated as active
 	/// @return		Whether or not the module is active
-	bool			get_active() { return active; }
+	bool			get_active() const { return active; }
 
 	/// Get the category of the module.
-	Category			category();
+	Category		category() const;
 
 //=============================================================================
 ///@name	SETTERS
@@ -216,18 +216,18 @@ public:
 	/// @param[in]	LM	LoomManager to point to
 	virtual void	link_device_manager(LoomManager* LM);
 
-	/// Set print verbosity
-	/// Controlls level of detail included in debug prints
-	void			set_print_verbosity(Verbosity v);
+	/// Set print verbosity 
+	/// Controlls level of detail included in debug prints 
+	void			set_print_verbosity(const Verbosity v);
 
 	/// Set package verbosity.
 	/// Controlls level of detail included in bundles
 	/// @param[in]	v	The verbosity setting
-	void			set_package_verbosity(Verbosity v);
+	void			set_package_verbosity(const Verbosity v);
 
 	/// Set whether or not the module should be treated as active
 	/// @param[in]	enable	Whether or not to enable module
-	void			set_active(bool enable);
+	void			set_active(const bool enable) { active = enable; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS
@@ -236,12 +236,12 @@ public:
 	/// Get string of name associated with verbosity enum
 	/// @param[in]	v	Verbosity value to get string representation of
 	/// @return String of verbosity
-	static const char*	enum_verbosity_string(Verbosity v);
-
+	static const char*	enum_verbosity_string(const Verbosity v);
+	
 	/// Get string of the category associated with a Category
 	/// @param[in]	c	Category value to get string representation of
 	/// @return String of category
-	static const char*	enum_category_string(Category c);
+	static const char*	enum_category_string(const Category c);
 
 protected:
 
@@ -251,7 +251,7 @@ protected:
 
 	/// Print the module name as a label.
 	/// Used for matching debug prints to corresponding module
-	void			print_module_label();
+	void			print_module_label() const;
 
 private:
 

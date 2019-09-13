@@ -11,7 +11,7 @@
 #include "Loom_Misc.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-void print_array(String data [], int len, int format)
+void print_array(const String data [], const int len, const int format)
 {
 	#if LOOM_DEBUG == 1
 		for (int i = 0; i < len; i++) {

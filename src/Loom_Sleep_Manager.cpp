@@ -17,10 +17,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager( 
-		bool			use_LED, 
-		bool 			delay_on_wake, 
-		Mode			sleep_mode,
-		byte			power_off_pin
+		const bool		use_LED, 
+		const bool		delay_on_wake, 
+		const Mode		sleep_mode,
+		const byte		power_off_pin
 	) 
 	: LoomModule( "SleepManager", Type::Sleep_Manager )
 	, use_LED(use_LED)
@@ -36,15 +36,13 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(JsonArrayConst p)
 	: Loom_Sleep_Manager(p[0], p[1], (Mode)(int)p[2], p[3]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::print_config()
+void Loom_Sleep_Manager::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tSleep Mode    : ", enum_sleep_mode_string(sleep_mode) );
 	LPrintln("\tUse LED       : ", (use_LED) ? "Enabled" : "Disabled" );
 	LPrintln("\tDelay on Wake : ", (delay_on_wake) ? "Enabled" : "Disabled" );
-
-		LPrintln("\t\t Interrupt? ", interrupt_manager ? "+" : "-");
-
+	LPrintln("\t\t Interrupt? ", interrupt_manager ? "+" : "-");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -146,7 +144,7 @@ void Loom_Sleep_Manager::post_sleep()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_Sleep_Manager::enum_sleep_mode_string(Mode m)
+const char* Loom_Sleep_Manager::enum_sleep_mode_string(const Mode m)
 {
 	switch(m) {
 		case Mode::IDLE				: return "Idle";

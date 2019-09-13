@@ -58,12 +58,12 @@ public:
 	/// @param[in]	mode					Set(Int) | <3> | { 0("Continuous reading of VBGY"), 1("Continuous reading of GYOR"), 2("Continuous reading all channels"), 3("One-shot reading of all channels") } | Read mode
 	/// @param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
 	Loom_AS7262(
-			byte			i2c_address			= 0x49,
-			uint8_t			mux_port			= 255,
-			bool			use_bulb			= false,
-			uint8_t			gain				= 1,
-			uint8_t			mode				= 3,
-			uint8_t			integration_time	= 50
+			const byte			i2c_address			= 0x49,
+			const uint8_t		mux_port			= 255,
+			const bool			use_bulb			= false,
+			const uint8_t		gain				= 1,
+			const uint8_t		mode				= 3,
+			const uint8_t		integration_time	= 50
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -79,26 +79,26 @@ public:
 /*@{*/ //======================================================================
 
 	void		measure() override;
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-	void		print_config() override;
-	void		print_measurements() override;
+	void		print_config() const override;
+	void		print_measurements() const override;
 
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================
 
 	/// Set whether not bulb is used for active light source
-	/// @param[in]	enable	Whether or not to enable
-	void		enable_bulb(bool enable) { use_bulb = enable; }
+	/// @param[in]	enable	Whether or not to enable 
+	void		enable_bulb(const bool enable) { use_bulb = enable; }
 
 	/// Set gain.
 	/// @param[in]	gain	Gain level: 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
-	void		set_gain(uint8_t gain) { inst_AS7262.setGain(gain); }
+	void		set_gain(const uint8_t gain) { inst_AS7262.setGain(gain); }
 
 	/// Set mode.
 	/// @param[in]	mode	Mode.
@@ -106,12 +106,12 @@ public:
 	///		1: Continuous reading of GYOR
 	///		2: Continuous reading of all channels (power-on default)
 	///		3: One-shot reading of all channels
-	void		set_mode(uint8_t mode) { inst_AS7262.setMeasurementMode(mode); }
+	void		set_mode(const uint8_t mode) { inst_AS7262.setMeasurementMode(mode); }
 
 	/// Set integration time.
 	/// Time will be 2.8ms * [integration value]  (0-255), 50 is default
 	/// @param[in]	time	Integration time
-	void		set_integration_time(uint8_t time) { inst_AS7262.setIntegrationTime(time); }
+	void		set_integration_time(const uint8_t time) { inst_AS7262.setIntegrationTime(time); }
 
 private:
 

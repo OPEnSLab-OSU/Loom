@@ -126,7 +126,7 @@ class LoomManager
 
 private:
 
-	FactoryBase* Factory;
+	const FactoryBase* Factory;
 
 public:
 
@@ -144,7 +144,6 @@ protected:
 
 	uint16_t	interval;			///< Default value for pause()/nap().
 									///< Used so that manager can control interval, rather than code in .ino
-
 
 	/// Device type (Hub / Node)
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
@@ -185,13 +184,13 @@ public:
 	/// @param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
 	/// @param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause/nap for
 	LoomManager(
-			FactoryBase*	factory_ptr,
-			const char*		device_name			= "Device",
-			uint8_t			instance			= 1,
-			DeviceType		device_type			= DeviceType::NODE,
-			Verbosity		print_verbosity		= Verbosity::V_HIGH,
-			Verbosity		package_verbosity	= Verbosity::V_LOW,
-			uint16_t		interval			= 1000
+			const FactoryBase*		factory_ptr,
+			const char*			device_name			= "Device",
+			const uint8_t		instance			= 1,
+			const DeviceType	device_type			= DeviceType::NODE,
+			const Verbosity		print_verbosity		= Verbosity::V_HIGH,
+			const Verbosity		package_verbosity	= Verbosity::V_LOW,
+			const uint16_t		interval			= 1000
 		);
 
 	//// Destructor
@@ -202,11 +201,11 @@ public:
 /*@{*/ //======================================================================
 
 	/// Begin LED
-	void		begin_LED();
+	void		begin_LED() const { pinMode(LED_BUILTIN, OUTPUT);}
 
 	/// Begin Serial, optionally wait for user.
 	/// @param[in]	wait_for_monitor	True to wait for serial monitor to open
-	void		begin_serial(bool wait_for_monitor = false);
+	void		begin_serial(const bool wait_for_monitor = false) const;
 
 	/// Parse a JSON configuration string specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
@@ -274,18 +273,18 @@ public:
 	/// semi-low power state.
 	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
 	/// @param[in]	ms	Number of milliseconds to pause
-	void		nap(uint16_t ms);
+	void		nap(const uint16_t ms) const;
 
 	/// Pause for up to 16000 milliseconds.
 	/// Uses interval member as value
-	void		nap() { nap(interval); }
+	void		nap() const { nap(interval); }
 
 	/// Delay milliseconds.
-	void		pause(uint16_t ms) { delay(ms); }
+	void		pause(const uint16_t ms) const { delay(ms); }
 
 	/// Delay milliseconds based on interval member.
 	/// Uses interval member as value
-	void		pause() { delay(interval); }
+	void		pause() const { delay(interval); }
 
 	/// Iterate over modules, calling power up method
 	void 		power_up();
@@ -302,7 +301,7 @@ public:
 	/// @param[in]	val		Value of data to add
 	/// @return True if success
 	template<typename T>
-	bool add_data(const char* module, const char* key, T val)
+	bool add_data(const char* module, const char* key, const T val)
 	{
 		if ( doc.isNull() ) {
 			doc["type"] = "data";
@@ -343,7 +342,7 @@ public:
 
 	/// Determine if the manager has a module of the specified type
 	///	@param[in]	type	Module type to check for
-	bool has_module(LoomModule::Type type);
+	bool		has_module(const LoomModule::Type type) const;
 
 	/// Flag indicating if the vector of modules is in need of sorting
 	bool sorted;
@@ -358,15 +357,15 @@ public:
 	/// Print the devices current configuration.
 	/// Lists modules. Optionally also prints
 	/// configuration of linked modules.
-	void		print_config(bool print_modules_config = false);
-
+	void		print_config(const bool print_modules_config = false);
+	
 	// 	void print_state()
 
 	/// Print the linked modules
-	void 		list_modules();
+	void 		list_modules() const;
 
 	/// Print out the internal JSON object
-	void		display_data();
+	void		display_data() const;
 
 //=============================================================================
 ///@name	ADD MODULE TO MANAGER
@@ -381,32 +380,32 @@ public:
 
 	/// Get device type
 	/// @return Device type (Hub/Node)
-	DeviceType	get_device_type() { return device_type; }
+	DeviceType	get_device_type() const { return device_type; }
 
 	/// Return reference to internal json object
 	/// @param[in]	clear	Whether or not to empty Json before returning it
 	/// @return Reference to internal json object
-	JsonObject	internal_json(bool clear = false);
+	JsonObject	internal_json(const bool clear = false);
 
 	/// Get the device name, copies into provided buffer.
 	/// @param[out]	buf		The buffer copy device name into
-	void 		get_device_name(char* buf);
-
+	void 		get_device_name(char* buf) const;
+	
 	/// Get the device name
 	/// @return String literal of device name.
-	const char*	get_device_name();
+	const char*	get_device_name() const;
 
 	/// Get device instance number.
 	/// @return Family number
-	uint8_t		get_instance_num() { return instance; }
+	uint8_t		get_instance_num() const { return instance; }
 
 	/// Get print verbosity.
 	/// @return print verbosity
-	Verbosity	get_print_verbosity() { return print_verbosity; }
+	Verbosity	get_print_verbosity() const { return print_verbosity; }
 
 	/// Get package verbosity.
 	/// @return package verbosity
-	Verbosity	get_package_verbosity() { return package_verbosity; }
+	Verbosity	get_package_verbosity() const { return package_verbosity; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -418,22 +417,22 @@ public:
 
 	/// Set device instance number.
 	/// @param[in]	n	New instance number
-	void		set_instance_num(uint8_t n) { instance = n; }
+	void		set_instance_num(const uint8_t n) { instance = n; }
 
 	/// Set print verbosity.
 	/// @param[in]	v			New print verbosity
 	/// @param[in]	set_modules	Whether or not to also apply setting to modules
-	void		set_print_verbosity(Verbosity v, bool set_modules = false);
-
+	void		set_print_verbosity(const Verbosity v, const bool set_modules = false);
+		
 	/// Set package verbosity.
 	/// @param[in]	v	New package verbosity
 	/// @param[in]	set_modules	Whether or not to also apply setting to modules
-	void		set_package_verbosity(Verbosity v, bool set_modules = false);
+	void		set_package_verbosity(const Verbosity v, const bool set_modules = false);
 
 	/// Set default time to use for .pause() \ .delay().
 	/// Pause and delay can still take explicit times, but if not provided,
 	/// this value will be used
-	void		set_interval(uint16_t ms);
+	void		set_interval(const uint16_t ms);
 
 //=============================================================================
 ///@name	MISCELLANEOUS
@@ -441,14 +440,14 @@ public:
 
 	/// Flash the built in LED
 	/// @param[in]	count		Number of times to flash
-	/// @param[in]	time_high	Milliseconds to stay on for
-	/// @param[in]	time_low	Milliseconds to stay off for
-	void		flash_LED(uint8_t count, uint8_t time_high, uint8_t time_low, bool end_high=false);
-	void		flash_LED(uint8_t sequence[3]) { flash_LED(sequence[0], sequence[1], sequence[2]); }
+	/// @param[in]	time_high	Milliseconds to stay on for 
+	/// @param[in]	time_low	Milliseconds to stay off for 
+	void		flash_LED(const uint8_t count, const uint8_t time_high, const uint8_t time_low, const bool end_high=false) const;
+	void		flash_LED(const uint8_t sequence[3]) const { flash_LED(sequence[0], sequence[1], sequence[2]); }
 
 	/// Get c-string of name associated with device type enum
 	/// @return C-string of device type
-	const static char* enum_device_type_string(DeviceType t);
+	const static char* enum_device_type_string(const DeviceType t);
 
 //=============================================================================
 ///@name	MODULE ACCESS
@@ -456,11 +455,11 @@ public:
 
 	/// Auxiliary function to search a list of modules for a module of specified type
 	/// @param[in]	type	Type to search for
-	LoomModule*	find_module(LoomModule::Type type, uint8_t idx=0);
+	LoomModule*	find_module(const LoomModule::Type type, const uint8_t idx=0) const;
 
 	/// Auxiliary function to search a list of modules for a module of specified category
 	/// @param[in]	category	Category to search for
-	LoomModule*	find_module_by_category(LoomModule::Category category, uint8_t idx);
+	LoomModule*	find_module_by_category(const LoomModule::Category category, const uint8_t idx) const;
 
 	LoomModule* operator [] (const char * name);
 
@@ -537,7 +536,7 @@ public:
 
 protected:
 	/// Print the device name as '[device_name]'
-	void				print_device_label();
+	void				print_device_label() const { LPrint("[", device_name, "] "); }
 
 private:
 

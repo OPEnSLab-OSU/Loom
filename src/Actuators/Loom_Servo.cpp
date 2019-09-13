@@ -11,10 +11,8 @@
 
 #include "Loom_Servo.h"
 
-/// This is the 'minimum' pulse length count (out of 4096)
-#define SERVOMIN  150
-/// This is the 'maximum' pulse length count (out of 4096)
-#define SERVOMAX  600
+#define SERVOMIN  150	///< This is the 'minimum' pulse length count (out of 4096)
+#define SERVOMAX  600	///< This is the 'maximum' pulse length count (out of 4096)
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -39,13 +37,7 @@ void Loom_Servo::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Servo::print_config()
-{
-	LoomModule::print_config();
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_Servo::print_state()
+void Loom_Servo::print_state() const 
 {
 	print_module_label();
 	LPrintln("\tServo Positions:" );
@@ -76,8 +68,8 @@ bool Loom_Servo::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Servo::set_degree(uint8_t servo, uint8_t degree)
-{
+void Loom_Servo::set_degree(const uint8_t servo, const uint8_t degree)
+{	
 	if (servo < NUM_SERVOS) {
 		servo_driver.setPWM(servo, 0, map(degree, 0, 180, SERVOMIN, SERVOMAX));
 		positions[servo]          = degree;

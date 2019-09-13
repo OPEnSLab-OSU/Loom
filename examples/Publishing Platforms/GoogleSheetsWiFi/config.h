@@ -1,9 +1,9 @@
 "{\
 	'general':\
 	{\
-		'name':'Device',\
-		'instance':1,\
-		'interval':10000\
+		'device_name':'Device',\
+		'instance_num':1,\
+		'interval':3000\
 	},\
 	'components':[\
 		{\
@@ -15,26 +15,14 @@
 			'params':'default'\
 		},\
 		{\
-			'name':'Ethernet',\
-			'params':[\
-				'Ether1',\
-				[<your-mac-address>],\
-				[192,168,0,1]\
-			]\
-		},\
-		{\
-			'name':'DS3231',\
-			'params':[11,true]\
-		},\
-		{\
-			'name':'NTP_Sync',\
-			'params':[0]\
+			'name':'WiFi',\
+			'params':['<ssid>','<password>']\
 		},\
 		{\
 			'name':'GoogleSheets',\
 			'params':[\
 				'Goog',\
-				7001,\
+				7002,\
 				'/macros/s/<your-script-id>/exec',\
 				'<your-sheet-id>',\
 /*true to autoname tab*/				true,\
