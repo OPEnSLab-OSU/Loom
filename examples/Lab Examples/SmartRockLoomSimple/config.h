@@ -23,7 +23,7 @@
 		},\
 		{\
 			'name':'SD',\
-			'params':[true,1000,4,'data19.csv']\
+			'params':[true,1000,4,'data',true]\
 		},\
 		{\
 			'name':'MS5803',\

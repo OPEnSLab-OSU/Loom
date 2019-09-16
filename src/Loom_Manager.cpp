@@ -27,7 +27,7 @@
 
 #include <Adafruit_SleepyDog.h>
 #include <ArduinoJson.h>
-#include <SD.h>
+#include <SdFat.h>
 #include <algorithm>
 
 
@@ -495,18 +495,21 @@ bool LoomManager::parse_config(const char* json_config)
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomManager::parse_config_SD(const char* config_file)
 {
+	SdFat sd;	// File system object
+
 	print_device_label();
 	LPrintln("Read config from file: '", config_file, "'");
 
 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
 	delay(25);
-	if (!SD.begin(SD_CS)) {	// Make sure we can communicate with SD
+	// if (!SD.begin(SD_CS)) {	// Make sure we can communicate with SD
+	if ( !sd.begin(SD_CS, SD_SCK_MHZ(50)) ) {	// Make sure we can communicate with SD
 		print_device_label();
 		LPrintln("SD failed to begin");
 		return false;
 	}
 
-	File file = SD.open(config_file);
+	File file = sd.open(config_file);
 	if (!file) {	// Make sure file exists
 		print_device_label();
 		LPrintln("Failed to open '", config_file, "'");

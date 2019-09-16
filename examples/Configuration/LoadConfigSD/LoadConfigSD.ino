@@ -20,6 +20,8 @@
 // are the core part of this example, and all that you would have to add to a 
 // different example to add SD config support
 
+// Put the included config.txt on the SD card.
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

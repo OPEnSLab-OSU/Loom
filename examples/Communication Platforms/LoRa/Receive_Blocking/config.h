@@ -11,7 +11,7 @@
 		},\
 		{\
 			'name':'SD',\
-			'params':[true,1000,10,'datafile.csv']\
+			'params':[true,1000,10,'datafile',false]\
 		}\
 	]\
 }"
