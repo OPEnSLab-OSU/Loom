@@ -51,13 +51,13 @@ const char* LoomManager::enum_device_type_string(const DeviceType t)
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomManager::LoomManager(
-		FactoryBase*	factory_ptr,
+		const FactoryBase*	factory_ptr,
 		const char*		device_name,
-		uint8_t			instance,
-		DeviceType		device_type,
-		Verbosity		print_verbosity,
-		Verbosity		package_verbosity,
-		uint16_t		interval
+		const uint8_t			instance,
+		const DeviceType		device_type,
+		const Verbosity		print_verbosity,
+		const Verbosity		package_verbosity,
+		const uint16_t		interval
 	)
 	: Factory(factory_ptr)
 	, instance(instance)
@@ -76,7 +76,7 @@ LoomManager::~LoomManager()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
+void LoomManager::print_config(const bool print_modules_config)
 {
 	print_device_label();
 	LPrintln("Config:");
@@ -465,7 +465,7 @@ LoomModule*	LoomManager::find_module_by_category(const LoomModule::Category cate
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_interval(const uint16_t ms) 
+void LoomManager::set_interval(const uint16_t ms)
 {
 	interval = ms;
 	print_device_label();
@@ -525,7 +525,7 @@ bool LoomManager::parse_config_SD(const char* config_file)
 	DynamicJsonDocument doc(2048);
 	DeserializationError error = deserializeJson(doc, file);
 
-	
+
 	// Test if parsing succeeds.
 	if (error) { // Make sure json was valid
 		print_device_label();

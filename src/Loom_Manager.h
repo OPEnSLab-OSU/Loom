@@ -358,7 +358,7 @@ public:
 	/// Lists modules. Optionally also prints
 	/// configuration of linked modules.
 	void		print_config(const bool print_modules_config = false);
-	
+
 	// 	void print_state()
 
 	/// Print the linked modules
@@ -390,7 +390,7 @@ public:
 	/// Get the device name, copies into provided buffer.
 	/// @param[out]	buf		The buffer copy device name into
 	void 		get_device_name(char* buf) const;
-	
+
 	/// Get the device name
 	/// @return String literal of device name.
 	const char*	get_device_name() const;
@@ -423,7 +423,7 @@ public:
 	/// @param[in]	v			New print verbosity
 	/// @param[in]	set_modules	Whether or not to also apply setting to modules
 	void		set_print_verbosity(const Verbosity v, const bool set_modules = false);
-		
+
 	/// Set package verbosity.
 	/// @param[in]	v	New package verbosity
 	/// @param[in]	set_modules	Whether or not to also apply setting to modules
@@ -440,8 +440,8 @@ public:
 
 	/// Flash the built in LED
 	/// @param[in]	count		Number of times to flash
-	/// @param[in]	time_high	Milliseconds to stay on for 
-	/// @param[in]	time_low	Milliseconds to stay off for 
+	/// @param[in]	time_high	Milliseconds to stay on for
+	/// @param[in]	time_low	Milliseconds to stay off for
 	void		flash_LED(const uint8_t count, const uint8_t time_high, const uint8_t time_low, const bool end_high=false) const;
 	void		flash_LED(const uint8_t sequence[3]) const { flash_LED(sequence[0], sequence[1], sequence[2]); }
 
