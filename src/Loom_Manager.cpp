@@ -604,5 +604,72 @@ bool LoomManager::parse_config_json(JsonObject config)
 
 
 
+///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::parse_config_serial()
+{
+	flash_LED(4, 200, 100, true);
+	
+	LPrintln("Waiting for config over Serial");
+
+	while(!Serial.available());
+
+
+
+	// Might need to be even larger
+	DynamicJsonDocument doc(2048);
+	DeserializationError error = deserializeJson(doc, Serial);
+
+	// Test if parsing succeeds.
+	if (error) {
+		print_device_label();
+		LPrintln("deserializeJson() failed: ", error.c_str());
+		return false;
+	}
+
+	bool status = parse_config_json( doc.as<JsonObject>() );
+	doc.clear();
+
+	flash_LED(12, 50, 25, false);
+	// flash_LED(12, 50, 25, true);
+	// delay(3000);
+	// digitalWrite(LED_BUILTIN, LOW);
+	// LPrintln("Received config");
+
+	return status;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::check_serial_for_config()
+{
+	if (Serial.available()) {
+		// return parse_config_serial();
+
+		DynamicJsonDocument doc(2048);
+		DeserializationError error = deserializeJson(doc, Serial);
+
+		// Test if parsing succeeds.
+		if (error) {
+			print_device_label();
+			LPrintln("deserializeJson() failed: ", error.c_str());
+			return false;
+		}
+
+		bool status = parse_config_json( doc.as<JsonObject>() );
+		doc.clear();
+
+		flash_LED(12, 50, 25, false);
+		return status;
+	}
+	return false;
+}
+
+
+
+
+
+
+
+
+
 
 

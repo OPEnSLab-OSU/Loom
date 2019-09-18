@@ -222,6 +222,13 @@ public:
 	/// @return True if success
 	bool		parse_config_SD(const char* config_file);
 
+
+
+	bool		parse_config_serial();
+	bool		check_serial_for_config();
+
+
+
 	/// Parse a JSON configuration object specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
 	/// and added to manager lists for managing.
