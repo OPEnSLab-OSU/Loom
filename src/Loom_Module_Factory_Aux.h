@@ -62,7 +62,12 @@ namespace factory {
 
 	/// Converts a tupe to an std::array
 	template<typename Tuple, typename VTuple = to_array_aux::remove_reference_t<Tuple>>
-	constexpr auto to_array(Tuple&& tuple) 
+	constexpr auto to_array(Tuple&& tuple) -> decltype( 
+			to_array(
+				std::forward<Tuple>(tuple),
+				to_array_aux::make_index_sequence<std::tuple_size<VTuple>::value> {} 
+			)
+		)
 	{
 		return to_array(
 			std::forward<Tuple>(tuple),
