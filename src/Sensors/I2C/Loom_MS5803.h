@@ -41,8 +41,8 @@ protected:
 
 	uint16_t	MS_PROM[8];		///< Read calibration data stored on sensor
 
-	float		pressure;		///< Measure pressure (mbar)
-	float		temp;			///< Measured temperature (C)
+	float		pressure;		///< Measure pressure. Units: mbar.
+	float		temp;			///< Measured temperature. Units: °C.
 
 public:
 	

@@ -35,26 +35,26 @@ class Loom_MPU6050 : public LoomI2CSensor
 
 protected:
 
-	float temp;				///< Temperature
+	float temp;				///< Temperature. Units: °C
 
-	float accX;				///< X-axis acceleration value
-	float accY;				///< Y-axis acceleration value
-	float accZ;				///< Z-axis acceleration value
+	float accX;				///< X-axis acceleration value. Units: g.
+	float accY;				///< Y-axis acceleration value. Units: g.
+	float accZ;				///< Z-axis acceleration value. Units: g.
 
-	float gyroX;			///< X-axis gyro value
-	float gyroY;			///< Y-axis gyro value
-	float gyroZ;			///< Z-axis gyro value
+	float gyroX;			///< X-axis gyro value. Units: °/s.
+	float gyroY;			///< Y-axis gyro value. Units: °/s.
+	float gyroZ;			///< Z-axis gyro value. Units: °/s.
 
 	float accAngleX;		///< X-axis acceleration angle
 	float accAngleY;		///< Y-axis acceleration angle
 
-	float gyroAngleX;		///< X-axis acceleration angle
-	float gyroAngleY;		///< Y-axis acceleration angle
-	float gyroAngleZ;		///< Z-axis acceleration angle
+	float gyroAngleX;		///< X-axis acceleration angle. 
+	float gyroAngleY;		///< Y-axis acceleration angle. 
+	float gyroAngleZ;		///< Z-axis acceleration angle. 
 
-	float angleX;			///< X-axis angle
-	float angleY;			///< Y-axis angle
-	float angleZ;			///< Z-axis angle
+	float angleX;			///< X-axis angle.
+	float angleY;			///< Y-axis angle.
+	float angleZ;			///< Z-axis angle.
 
 public:
 

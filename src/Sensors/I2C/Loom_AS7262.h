@@ -36,7 +36,8 @@ protected:
 
 	AS726X		inst_AS7262;		///< Underlying AS7262 sensor manager instance
 
-	uint16_t	color_vals[6];		///< Measured color  band values (violet, blue, green, yellow, orange, red)
+	uint16_t	color_vals[6];		///< Measured color band values (violet, blue, green, yellow, orange, red).
+									///< Units: counts / (μW/cm^2).
 
 	bool		use_bulb;			///< Whether or not to use bulb
 	uint8_t		gain;				///< Gain setting

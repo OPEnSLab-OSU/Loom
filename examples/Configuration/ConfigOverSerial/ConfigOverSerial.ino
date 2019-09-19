@@ -61,8 +61,8 @@ void setup()
 	Loom.print_config();
 
 
-	LPrintln("\n ** Setup Complete ** ");
-}
+}	LPrintln("\n ** Setup Complete ** ");
+
 
 
 void loop() 

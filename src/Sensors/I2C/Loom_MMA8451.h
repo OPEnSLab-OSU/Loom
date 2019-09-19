@@ -36,7 +36,7 @@ protected:
 
 	Adafruit_MMA8451 MMA;			///< Underlying MMA8451 sensor manager instance
 
-	float			accel[3];		///< Acceleration values for each axis
+	float			accel[3];		///< Acceleration values for each axis. Units: g
 	uint8_t			orientation;	///< Orientation
 
 	mma8451_range_t	range;			///< Range setting (2/4/8 G)

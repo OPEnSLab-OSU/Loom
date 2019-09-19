@@ -34,8 +34,8 @@ protected:
 	
 	Adafruit_SHT31	inst_sht31d;	///< Underlying SHT31D sensor manager instance
 
-	float			temp;			///< Measured temperature (C)
-	float			humid;			///< Measured humidity (%)
+	float			temp;			///< Measured temperature. Units: C.
+	float			humid;			///< Measured humidity Units: %.
 
 public:
 	

@@ -5,7 +5,7 @@
 // The only difference between this example an 'Basic' is the LoomFactory
 // settings, the line: 
 //		Loom.GoogleSheets().publish();
-// and the configuration.
+// and the configuration, enabling logging to Google Sheets.
 
 // In the config, you need:
 // - WiFi network name and password (or '' if no password)

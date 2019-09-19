@@ -38,8 +38,8 @@ protected:
 	uint8_t 	gain;			///< Gain level
 	uint8_t 	resolution;		///< Sensor resolution setting
 
-	uint16_t	lightIR;		///< Measured infra-red lux
-	uint16_t	lightFull;		///< Measure full spectrum lux
+	uint16_t	lightIR;		///< Measured infra-red. Units: lux.
+	uint16_t	lightFull;		///< Measure full spectrum. Units: lux.
 
 public:
 	

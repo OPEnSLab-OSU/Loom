@@ -36,7 +36,9 @@ protected:
 
 	AS726X		inst_AS7263;		///< Underlying AS7263 sensor manager instance
 
-	uint16_t	nir_vals[6];		///< Measured near-infra-red band values (r,s,t,u,v,w)
+	uint16_t	nir_vals[6];		///< Measured near-infra-red band values (r,s,t,u,v,w).
+									///< Units: counts / (μW/cm^2).
+
 	
 	bool		use_bulb;			///< Whether or not to use bulb
 	uint8_t		gain;				///< Gain setting

@@ -5,7 +5,7 @@
 // The only difference between this example an 'Basic' is the LoomFactory
 // settings, the line: 
 //		Loom.GoogleSheets().publish();
-// and the configuration.
+// and the configuration, enabling logging to Google Sheets.
 
 // In the config, you need:
 // - MAC address for the Ethernet module (you could also replace Ethenet with WiFi)
