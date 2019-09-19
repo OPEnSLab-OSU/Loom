@@ -9,14 +9,12 @@
   <br>
   <a href="http://www.open-sensing.org/project-loom">Project Page</a>
   ·
-  <a href="https://github.com/OPEnSLab-OSU/Loom/wiki">Loom Wiki</a>
+  <a href="https://github.com/OPEnSLab-OSU/Loom/wiki">Wiki</a>
   ·
   <a href="https://openslab-osu.github.io/Loom/html/index.html">Documentation</a>
   ·
-  <a href="https://github.com/OPEnSLab-OSU/Loom/wiki">Wiki</a>
-  ·
   <a href=https://github.com/OPEnSLab-OSU/Loom/wiki/Quick-Start>Quick Start</a>
-     ·
+  ·
   <a href=https://github.com/OPEnSLab-OSU/Loom/wiki/Configuration>Configuration</a>
 </p>
 
