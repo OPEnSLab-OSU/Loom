@@ -113,7 +113,6 @@ Loom aims to follow [Semantic Versioning](https://semver.org)
 
 
 - [OPEnS_RTC](https://github.com/OPEnSLab-OSU/OPEnS_RTC) A modified arduino library for with support for a variety of RTCs
-- [WiFi201](https://github.com/OPEnSLab-OSU/WiFi201) Upgraded WiFi library for the Arduino WiFi Shield 101 and MKR1000 board
 - [SSLClient](https://github.com/OPEnSLab-OSU/SSLClient) Arduino library to add SSL functionality to any Client class 
 - [EthernetLarge](https://github.com/OPEnSLab-OSU/EthernetLarge) Ethernet Library for Arduino, modified to support larger buffers for SSLClient
 
