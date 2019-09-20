@@ -113,7 +113,7 @@ float Loom_Analog::convert(const uint8_t pin, const uint16_t analog) const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_Analog::conversion_name(const Conversion conversion) const
+const char* Loom_Analog::conversion_name(const Conversion conversion)
 {
 	switch(conversion) {
 		case Conversion::VOLTAGE 		: return "voltage";

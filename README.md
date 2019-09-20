@@ -9,12 +9,12 @@
   <br>
   <a href="http://www.open-sensing.org/project-loom">Project Page</a>
   ·
-  <a href="https://github.com/OPEnSLab-OSU/Loom/wiki">Wiki</a>
-  ·
   <a href="https://openslab-osu.github.io/Loom/html/index.html">Documentation</a>
   ·
-  <a href=https://github.com/OPEnSLab-OSU/Loom/wiki/Quick-Start>Quick Start</a>
+  <a href="https://github.com/OPEnSLab-OSU/Loom/wiki">Lab Wiki</a>
   ·
+  <a href=https://github.com/OPEnSLab-OSU/Loom/wiki/Quick-Start>Quick Start</a>
+   ·
   <a href=https://github.com/OPEnSLab-OSU/Loom/wiki/Configuration>Configuration</a>
 </p>
 
@@ -28,6 +28,7 @@
 - [Arduino Setup](#arduino-setup)
 - [Installing Loom](#installing-loom)
 - [Quick Start](#quick-start)
+- [Common Pin Allocations](#common-pin-allocations)
 - [Hardware Support](#hardware-support)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
@@ -62,7 +63,7 @@ Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team 
 
 ## Arduino Setup
 
-[Arduino Setup Guide](https://github.com/OPEnSLab-OSU/Loom/wiki/Arduino-Setup)
+[Arduino IDE Setup Guide](https://github.com/OPEnSLab-OSU/Loom/wiki/Arduino-Setup)
 
 ## Installing Loom
 
@@ -71,6 +72,10 @@ Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team 
 ## Quick Start
 
  [Quick Start Guide](https://github.com/OPEnSLab-OSU/Loom/wiki/Quick-Start)
+
+## Common Pin Allocations
+
+[Common Pin Allocations](https://github.com/OPEnSLab-OSU/Loom/wiki/Common-Pin-Allocations)
 
 ## Hardware Support
 

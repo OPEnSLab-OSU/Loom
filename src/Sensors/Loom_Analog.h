@@ -90,8 +90,6 @@ public:
 	/// @param[in]	convertA4			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A4
 	/// @param[in]	convertA5			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A5
 	/// @param[in]	temperature			float | <25.0> | [0.-100.] | Temperature to using in conversions
-	/// @param[in]	pH_offset			float | <0.0> | [0.-14.] | Offset in pH calculation (b value in mx+b)
-	/// @param[in]	pH_range			float | <3.5> | [0.-10.] | Slope in pH calculation (x value in mx+b)
 	Loom_Analog(
 			const uint8_t		num_samples			= 8,
 			const uint8_t		read_resolution		= 12,
@@ -193,7 +191,7 @@ public:
 
 	/// Get string of name associated with conversion enum
 	/// @return String of conversion
-	const char*	conversion_name(const Conversion conversion) const;
+	static const char*	conversion_name(const Conversion conversion);
 
 private:
 
