@@ -16,9 +16,6 @@ addons:
 # Build your code e.g. by calling make
 script:
   - doxygen Doxyfile
-  - mkdir tmp
-  - mv html/ tmp
-  - mv tmp html
 
 # Generate and deploy documentation
 deploy:
