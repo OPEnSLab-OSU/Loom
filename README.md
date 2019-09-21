@@ -38,7 +38,7 @@
 
 ## Introduction
 
-Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team of 20+ Computer Science and Electrical Engineering students to create a fully open source, modular, user friendly, sensor/actuator Arduino library and ecosystem. The project enables environmental research and conservation communities to overcome significant technical hurdles for creating new environmental, agricultural, and ecological instrumentation to measure, monitor, automate, and understand our world. 
+Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team of 20+ Computer Science and Electrical Engineering students to create a fully open source, modular, user friendly, sensor/actuator Arduino library and ecosystem. The project enables environmental research and conservation communities to overcome significant technical hurdles for creating new environmental, agricultural, and ecological instrumentation to measure, monitor, automate, and understand our world.
 
 ## Objectives
 
