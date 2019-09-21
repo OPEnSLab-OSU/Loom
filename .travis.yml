@@ -16,6 +16,9 @@ addons:
 # Build your code e.g. by calling make
 script:
   - doxygen Doxyfile
+  - mkdir tmp
+  - mv html/ tmp
+  - mv tmp html
 
 # Generate and deploy documentation
 deploy:
@@ -23,6 +26,6 @@ deploy:
   skip_cleanup: true
   local_dir: html
   github_token: $GH_REPO_TOKEN
-  target_branch: gh-pages/html
+  target_branch: gh-pages
   on:
     branch: master
