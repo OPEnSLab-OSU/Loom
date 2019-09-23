@@ -16,17 +16,18 @@ addons:
 # Build your code e.g. by calling make
 script:
   - doxygen Doxyfile
-  - mkdir tmp
-  - mv html/ tmp
-  - mv tmp html
+  - mkdir ToDeploy
+  - mv html/ ToDeploy
+  - git checkout origin/gh-pages -- Aux/
+  - mv Aux/ ToDeploy
+  - echo $'<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n<html><head><meta http-equiv=Refresh content=\"0;url=html/index.html\"></head></html>' > ToDeploy/index.html
 
 # Generate and deploy documentation
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: html
+  local_dir: ToDeploy
   github_token: $GH_REPO_TOKEN
   target_branch: gh-pages
-  keep_history: true
   on:
     branch: master
