@@ -27,5 +27,6 @@ deploy:
   local_dir: html
   github_token: $GH_REPO_TOKEN
   target_branch: gh-pages
+  keep_history: true
   on:
     branch: master
