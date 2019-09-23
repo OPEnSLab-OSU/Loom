@@ -6,12 +6,20 @@ branches:
   only:
     - master
 
+notifications:
+  email: false
+
 # Install dependencies
 addons:
   apt:
     packages:
       - doxygen
       - graphviz
+
+# To allow access to gh-pages branch
+install:
+  - git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+  - git fetch --unshallow --tags
 
 # Build your code e.g. by calling make
 script:
