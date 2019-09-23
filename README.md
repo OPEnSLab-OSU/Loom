@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/OPEnSLab-OSU/Loom/blob/gh-pages/OPEnSLogo.png" alt="logo" width="100" height="100">
+    <img src="https://github.com/OPEnSLab-OSU/Loom/blob/gh-pages/Aux/OPEnSLogo.png" alt="logo" width="100" height="100">
   </a>
 </p>
 
