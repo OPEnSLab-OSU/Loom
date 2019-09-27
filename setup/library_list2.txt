@@ -1,0 +1,4 @@
+https://github.com/OPEnSLab-OSU/EthernetLarge/archive/master.zip
+https://github.com/OPEnSLab-OSU/OPEnS_RTC/archive/v1.0.0.zip
+http://www.airspayce.com/mikem/arduino/RadioHead/RadioHead-1.94.zip
+https://github.com/OPEnSLab-OSU/Loom_Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip?raw=true
