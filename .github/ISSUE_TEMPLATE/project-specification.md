@@ -2,7 +2,7 @@
 name: Project Specification
 about: Contains information needed to develop a deployment ready device with Loom.
 title: ''
-labels: ''
+labels: Project Specification
 assignees: ''
 
 ---

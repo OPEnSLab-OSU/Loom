@@ -2,7 +2,7 @@
 name: Implementation Request
 about: Describes a new item to integrate into Loom.
 title: ''
-labels: ''
+labels: Implementation Request
 assignees: ''
 
 ---
