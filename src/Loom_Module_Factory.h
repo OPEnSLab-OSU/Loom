@@ -89,7 +89,86 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
+///Forward declare any classes that will be served to created objects
+class Scope;
 
+/// A generic registry/factory that collects constructors of a give base type and allows for any number
+/// of base classes as static singleton templates will only create new instances of a new type is introduced
+template<typename T>
+class Registry {
+public:
+    using FactoryFunction   = T*(*)(Scope*);///< Pointer to function of type //* void T::funct (void) *//
+    using FactoryPair       = struct {      ///<  *Needed as an alternative to std::map
+        const char* name;           				///< Name of module that will be used to make a new copy
+        const FactoryFunction ctor; 				///< Pointer to the Creation function which will be used to CTOR
+    };                                      ///< Struct binding a name (char*) to a specific FactoryFunction
+    
+    static bool add(const char*, const FactoryFunction);///< Adds a new Factory Pair derived from args to lookup table
+    template<class U>
+    static bool add(const char*);
+    static T* create(const char*, Scope* scope);        ///< Returns an instance of type T created by using the FactoryFunction coresponding to the provided name
+    static T* create(JsonVariant, Scope*);              ///< Returns an instance of type T created from provided JSON
+    
+private:
+    /// Use Meyer's singleton to prevent SIOF
+    static std::vector<FactoryPair>& getFactoryTable();
+};
+
+template<typename T>
+template<class U>
+bool Registry<T>::add(const char* name) {
+    return add(name, U::Create);
+}
+
+template<typename T>
+bool Registry<T>::add(const char* name, const Registry<T>::FactoryFunction ctor) {
+    auto lookUp = getFactoryTable();
+    for(auto elem : lookUp) {
+        ///Add string processing for fuzzy search and debug suggestions
+        if(!strcmp(name, elem.name)) {
+            ///On match, fail. Items two items cannot have the same creation name;
+            return false;
+        }
+    }   ///< No match found, exiting for
+    getFactoryTable().push_back(FactoryPair{name, ctor});
+    return true;
+}
+
+template<typename T>
+T* Registry<T>::create(const char* name, Scope* scope) {
+    auto lookUp = getFactoryTable();
+    for(auto elem : lookUp) {
+        ///Add string processing for fuzzy search and debug suggestions
+        if(!strcmp(name, elem.name)) {
+            ///On match, return a *new* item of type name
+            return elem.ctor(scope);
+        }
+    }   ///< No match found, exiting for
+    return nullptr;
+}
+
+template<typename T>
+T* Registry<T>::create(JsonVariant target, Scope* scope) {
+    const char* name = target["name"].as<char*>();
+    auto lookUp = getFactoryTable();
+    
+    for(auto elem : lookUp) {
+        if(!strcmp(name, elem.name)) {
+            return elem.ctor(scope);
+        }
+    }
+    return nullptr;
+}
+
+/// This function explots C++'s treatment of static initialization, where the compiler only expects a single instance to ever exist
+/// Due to this behavior, we can use this 
+template<typename T>
+std::vector<typename Registry<T>::FactoryPair>& Registry<T>::getFactoryTable() {
+    static std::vector<FactoryPair> lookUpTable;
+    return lookUpTable;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 
 /// Creates a LoomModule with default parameters
 /// @return The created LoomModule
