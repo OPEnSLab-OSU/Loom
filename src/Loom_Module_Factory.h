@@ -92,16 +92,26 @@
 ///Forward declare any classes that will be served to created objects
 class Scope;
 
+/// Creates a new T, returned as S*. S must be base of T
+/// @return The created T
+template<class S, class T> S* ConstructDefault(Scope* scope) { return new T(scope); }
+
+/// Creates a new T, returned as S*. S must be base of T
+/// @return The created T
+template<class S, class T> S* Construct(Scope* scope, JsonArrayConst p) { return new T(scope, p); }
+
 /// A generic registry/factory that collects constructors of a give base type and allows for any number
 /// of base classes as static singleton templates will only create new instances of a new type is introduced
 template<typename T>
 class Registry {
 public:
     using FactoryFunction   = T*(*)(Scope*);///< Pointer to function of type //* void T::funct (void) *//
+		using FactoryFunctionJson = LoomModule* (*)(Scope*, JsonArrayConst);
     using FactoryPair       = struct {      ///<  *Needed as an alternative to std::map
         const char* name;           				///< Name of module that will be used to make a new copy
         const FactoryFunction ctor; 				///< Pointer to the Creation function which will be used to CTOR
-    };                                      ///< Struct binding a name (char*) to a specific FactoryFunction
+				const FactoryFunctionJson ctorJson; ///< Pointer to the CreationJSON function which will be used to CTOR form JSON
+    };
     
     static bool add(const char*, const FactoryFunction);///< Adds a new Factory Pair derived from args to lookup table
     template<class U>
@@ -117,7 +127,7 @@ private:
 template<typename T>
 template<class U>
 bool Registry<T>::add(const char* name) {
-    return add(name, U::Create);
+    return add(name, ConstructDefault<T, U>);
 }
 
 template<typename T>
