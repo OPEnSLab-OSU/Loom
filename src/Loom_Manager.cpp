@@ -45,7 +45,6 @@ const char* LoomManager::enum_device_type_string(const DeviceType t)
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomManager::LoomManager( 
-		const FactoryBase*			factory_ptr,
 		const char*				device_name, 
 		const uint8_t			instance, 
 		const DeviceType		device_type, 
@@ -53,8 +52,7 @@ LoomManager::LoomManager(
 		const Verbosity			package_verbosity,
 		const uint16_t			interval
 	)
-	: Factory(factory_ptr)
-	, instance(instance)
+	: instance(instance)
 	, print_verbosity(print_verbosity)
 	, package_verbosity(package_verbosity)
 	, device_type(device_type)
@@ -572,11 +570,9 @@ bool LoomManager::parse_config_json(JsonObject config)
 		LPrintln("= = = = = Generate Objects = = = = =\n");
 	}
 
-	// Call module factory creating each module
+	// Call registry to create each module
 	for ( JsonVariant module : config["components"].as<JsonArray>()) {		
-		if (Factory) {
-			add_module(Factory->Create(module));
-		}
+		add_module(Registry<LoomModule>::create(module, nullptr));
 	}
 
 	// Sort modules by type
