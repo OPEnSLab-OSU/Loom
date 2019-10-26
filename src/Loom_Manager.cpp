@@ -8,22 +8,11 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Loom_Module.h"
+#pragma once
+
+// #include "Loom_Module.h"
 #include "Loom_Manager.h"
 #include "Loom_Module_Factory.h"
-#include "Loom_Macros.h"
-#include "Loom_Interrupt_Manager.h"
-#include "Loom_Sleep_Manager.h"
-
-#include "Sensors/Loom_Sensor.h"
-#include "Loom_Multiplexer.h"
-#include "Actuators/Loom_Actuator.h"
-#include "CommPlats/Loom_CommPlat.h"
-#include "InternetPlats/Loom_InternetPlat.h"
-#include "LogPlats/Loom_LogPlat.h"
-#include "RTC/Loom_RTC.h"
-#include "PublishPlats/Loom_PublishPlat.h"
-#include "Loom_NTP_Sync.h"
 
 #include <Adafruit_SleepyDog.h>
 #include <ArduinoJson.h>

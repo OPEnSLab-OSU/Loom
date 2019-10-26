@@ -11,11 +11,10 @@
 
 #pragma once
 
-#include "Loom_Module.h"
-
+// Include dependencies
 #include <ArduinoJson.h>
 
-
+// === Include child elements to be registered ===
 // Actuators
 #include "Actuators/Loom_Neopixel.h"
 #include "Actuators/Loom_Relay.h"
@@ -81,11 +80,6 @@
 #include "Loom_Interrupt_Manager.h"
 #include "Loom_Sleep_Manager.h"
 #include "Loom_Multiplexer.h" // this needs to be include after I2C sensors (due to conflict with enableInterrupt macro/function defined by EnableInterrupt library and AS726X sensors)
-
-// For functions that build constexpr lookup table 
-// #include "Loom_Module_Factory_Aux.h"
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 

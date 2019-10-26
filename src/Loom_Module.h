@@ -12,7 +12,6 @@
 #pragma once
 
 #include "Loom_Misc.h"
-#include "Loom_Translator.h"
 #include "Loom_Macros.h"
 #include "Loom_Package.h"
 

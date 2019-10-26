@@ -12,9 +12,7 @@
 #pragma once
 
 #include "Loom_Misc.h"
-#include "Loom_Translator.h"
-#include "Loom_Module.h"
-// #include "Loom_Module_Factory.h"
+#include "Loom_Module_Factory.h"
 
 #include <ArduinoJson.h>
 
