@@ -13,6 +13,9 @@
 
 #include <Adafruit_GFX.h>
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_OLED::Loom_OLED_Registered = (false) ? Registry<LoomModule>::add<Loom_OLED>("Loom_OLED") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 const char* Loom_OLED::enum_oled_version_string(const Version v)

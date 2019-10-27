@@ -29,7 +29,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_SHT31D : public LoomI2CSensor
 {
-
+	static bool Loom_SHT31D_Registered;
 protected:
 	
 	Adafruit_SHT31	inst_sht31d;	///< Underlying SHT31D sensor manager instance

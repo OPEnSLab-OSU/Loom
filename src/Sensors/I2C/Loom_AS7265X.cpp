@@ -10,6 +10,10 @@
 
 #include "Loom_AS7265X.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_AS7265X::Loom_AS7265X_Registered = (false) ? Registry<LoomModule>::add<Loom_AS7265X>("Loom_AS7265X") : false;
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7265X::Loom_AS7265X(
 		const byte			i2c_address, 

@@ -11,6 +11,9 @@
 
 #include "Loom_DS3231.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_DS3231::Loom_DS3231_Registered = (false) ? Registry<LoomModule>::add<Loom_DS3231>("Loom_DS3231") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DS3231::Loom_DS3231(

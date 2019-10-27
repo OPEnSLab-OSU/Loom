@@ -26,7 +26,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Relay : public LoomActuator
 {
-
+	static bool Loom_Relay_Registered;
 protected:
 	
 	byte 	pin;	///< The digital pin the relay is connect to

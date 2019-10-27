@@ -29,7 +29,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MaxSub : public LoomSubscribePlat 
 {
-
+	static bool Loom_MaxSub_Registered;
 protected:
 	
 	uint16_t	UDP_port;				///< Which UDP port to receive on

@@ -13,6 +13,9 @@
 #include "../SubscribePlats/Loom_Max_Sub.h"
 #include "../Loom_Manager.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_MaxPub::Loom_MaxPub_Registered = (false) ? Registry<LoomModule>::addNoDefault<Loom_MaxPub>("Loom_MaxPub") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxPub::Loom_MaxPub(

@@ -11,6 +11,10 @@
 
 #include "Loom_MPU6050.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_MPU6050::Loom_MPU6050_Registered = (false) ? Registry<LoomModule>::add<Loom_MPU6050>("Loom_MPU6050") : false;
+
 // Unfortunately cannot be inside Loom_MPU6050 class
 // For some reason Wire is not recognized like that
 MPU6050 mpu6050(Wire);

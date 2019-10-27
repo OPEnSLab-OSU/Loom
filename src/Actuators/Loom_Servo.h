@@ -35,6 +35,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Servo : public LoomActuator
 {
+	static bool Loom_Servo_Registered;
 
 protected:
 

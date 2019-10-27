@@ -28,7 +28,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class LoomPublishPlat : public LoomModule
 {
-
 protected:
 
 	/// Pointer to internet platform to use to publish

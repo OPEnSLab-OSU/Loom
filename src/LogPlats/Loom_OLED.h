@@ -30,7 +30,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_OLED : public LoomLogPlat
 {
-
+	static bool Loom_OLED_Registered;
 public:
 
 	/// Different forms of the OLED display

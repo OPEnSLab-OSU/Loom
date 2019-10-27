@@ -10,6 +10,9 @@
 
 #include "Loom_MS5803.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_MS5803::Loom_MS5803_Registered = (false) ? Registry<LoomModule>::add<Loom_MS5803>("Loom_MS5803") : false;
 
 // #include <setjmp.h>     /* jmp_buf, setjmp, longjmp */
 // #include <RTCCounter.h>

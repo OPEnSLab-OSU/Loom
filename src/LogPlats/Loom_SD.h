@@ -34,7 +34,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_SD : public LoomLogPlat
 {
-
+	static bool Loom_SD_Registered;
 protected:
 
 		SdFat sd;						///< File system object

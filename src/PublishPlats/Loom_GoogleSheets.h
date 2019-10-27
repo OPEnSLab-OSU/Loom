@@ -25,7 +25,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_GoogleSheets : public LoomPublishPlat 
 {
-
+	static bool Loom_GoogleSheets_Registered;
 public:
 
 //=============================================================================

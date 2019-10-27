@@ -10,6 +10,10 @@
 
 #include "Loom_Decagon_5TM.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_Decagon5TM::Loom_Decagon5TM_Registered = (false) ? Registry<LoomModule>::add<Loom_Decagon5TM>("Loom_Decagon5TM") : false;
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Decagon5TM::Loom_Decagon5TM(	
 		const uint8_t		num_samples 

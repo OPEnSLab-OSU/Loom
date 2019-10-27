@@ -33,7 +33,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_LIS3DH : public LoomI2CSensor
 {
-
+	static bool Loom_LIS3DH_Registered;
 protected:
 
 	LIS3DH		inst_LIS3DH;	///< Underlying LIS3DH sensor manager instance

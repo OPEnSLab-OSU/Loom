@@ -11,6 +11,9 @@
 
 #include "Loom_SHT31D.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_SHT31D::Loom_SHT31D_Registered = (false) ? Registry<LoomModule>::add<Loom_SHT31D>("Loom_SHT31D") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SHT31D::Loom_SHT31D(

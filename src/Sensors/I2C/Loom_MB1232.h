@@ -26,7 +26,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MB1232 : public LoomI2CSensor
 {
-
+	static bool Loom_MB1232_Registered;
 protected:
 
 	uint16_t	range;		///< Measure distance. Units: cm.

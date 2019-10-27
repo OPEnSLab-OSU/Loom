@@ -11,6 +11,9 @@
 
 #include "Loom_LIS3DH.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_LIS3DH::Loom_LIS3DH_Registered = (false) ? Registry<LoomModule>::add<Loom_LIS3DH>("Loom_LIS3DH") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LIS3DH::Loom_LIS3DH(

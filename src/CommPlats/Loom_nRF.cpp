@@ -10,6 +10,10 @@
 
 #include "Loom_nRF.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_nRF::Loom_nRF_Registered = (false) ? Registry<LoomModule>::add<Loom_nRF>("Loom_nRF") : false;
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_nRF::Loom_nRF( 	
 		const uint16_t		max_message_len,

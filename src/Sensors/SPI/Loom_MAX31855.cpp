@@ -11,6 +11,9 @@
 
 #include "Loom_MAX31855.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_MAX31855::Loom_MAX31855_Registered = (false) ? Registry<LoomModule>::add<Loom_MAX31855>("Loom_MAX31855") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MAX31855::Loom_MAX31855(	

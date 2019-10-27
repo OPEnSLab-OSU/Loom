@@ -13,6 +13,9 @@
 
 #include <Wire.h>
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_Stepper::Loom_Stepper_Registered = (false) ? Registry<LoomModule>::add<Loom_Stepper>("Loom_Stepper") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Stepper::Loom_Stepper() 

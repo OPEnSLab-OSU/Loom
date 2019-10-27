@@ -39,7 +39,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_LoRa : public LoomCommPlat
 {
-
+	static bool Loom_LoRa_Registered;
 protected:
 
 	RH_RF95				driver;			///< Underlying rf95 object

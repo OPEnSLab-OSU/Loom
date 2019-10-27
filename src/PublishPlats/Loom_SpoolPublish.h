@@ -12,8 +12,6 @@
 #pragma once
 
 #include "Loom_PublishPlat.h"
-#include "ArduinoJson.h"
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -25,7 +23,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_SpoolPublish : public LoomPublishPlat 
 {
-	
+	static bool Loom_SpoolPublish_Registered;
 public:
 	
 //=============================================================================

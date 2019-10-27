@@ -11,9 +11,12 @@
 
 #include "Loom_Servo.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_Servo::Loom_Servo_Registered = (false) ? Registry<LoomModule>::add<Loom_Servo>("Loom_Servo") : false;
+
 #define SERVOMIN  150	///< This is the 'minimum' pulse length count (out of 4096)
 #define SERVOMAX  600	///< This is the 'maximum' pulse length count (out of 4096)
-
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Servo::Loom_Servo() 

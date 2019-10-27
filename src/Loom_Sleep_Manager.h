@@ -34,7 +34,7 @@ class Loom_Interrupt_Manager;
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Sleep_Manager : public LoomModule
 {
-
+	static bool Loom_Sleep_Manager_Registered;
 public:
 
 	/// Different options available to sleep in

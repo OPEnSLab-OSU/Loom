@@ -27,7 +27,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Analog : public LoomSensor
 {
-	
+	static bool Loom_Analog_Registered;
 public:
 
 	/// Different types of conversions from

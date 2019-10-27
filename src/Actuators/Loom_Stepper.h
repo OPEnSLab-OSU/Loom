@@ -37,7 +37,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Stepper : public LoomActuator
 {
-
+	static bool Loom_Stepper_Registered;
 protected:
 
 	/// Underlying motor shield controller

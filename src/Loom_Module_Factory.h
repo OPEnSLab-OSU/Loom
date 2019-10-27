@@ -88,28 +88,32 @@ class Scope;
 
 /// Creates a new T, returned as S*. S must be base of T
 /// @return The created T
-template<class S, class T> S* ConstructDefault(Scope* scope) { return new T(scope); }
+template<class S, class T> S* ConstructDefault() { return new T(); }
 
 /// Creates a new T, returned as S*. S must be base of T
 /// @return The created T
-template<class S, class T> S* Construct(Scope* scope, JsonArrayConst p) { return new T(scope, p); }
+template<class S, class T> S* ConstructDefaultJson(JsonArrayConst p) { return new T(p); }
 
 /// A generic registry/factory that collects constructors of a give base type and allows for any number
 /// of base classes as static singleton templates will only create new instances of a new type is introduced
 template<typename T>
 class Registry {
 public:
-    using FactoryFunction   = T*(*)(Scope*);///< Pointer to function of type //* void T::funct (void) *//
-		using FactoryFunctionJson = LoomModule* (*)(Scope*, JsonArrayConst);
-    using FactoryPair       = struct {      ///<  *Needed as an alternative to std::map
+    using FactoryFunction       = T*(*)();          ///< Pointer to function of type //* void T::funct (void) *//
+	using FactoryFunctionJson   = LoomModule* (*)(JsonArrayConst);
+    using FactoryPair           = struct {          ///<  *Needed as an alternative to std::map
         const char* name;           				///< Name of module that will be used to make a new copy
         const FactoryFunction ctor; 				///< Pointer to the Creation function which will be used to CTOR
-				const FactoryFunctionJson ctorJson; ///< Pointer to the CreationJSON function which will be used to CTOR form JSON
+		const FactoryFunctionJson ctorJson;         ///< Pointer to the CreationJSON function which will be used to CTOR form JSON
     };
     
-    static bool add(const char*, const FactoryFunction);///< Adds a new Factory Pair derived from args to lookup table
+    static bool add(const char*, const FactoryFunction, const FactoryFunctionJson);///< Adds a new Factory Pair derived from args to lookup table
     template<class U>
     static bool add(const char*);
+    template<class U>
+    static bool addNoJson(const char*);
+    template<class U>
+    static bool addNoDefault(const char*);
     static T* create(const char*, Scope* scope);        ///< Returns an instance of type T created by using the FactoryFunction coresponding to the provided name
     static T* create(JsonVariant, Scope*);              ///< Returns an instance of type T created from provided JSON
     
@@ -118,14 +122,28 @@ private:
     static std::vector<FactoryPair>& getFactoryTable();
 };
 
+// Registers a module that hasn't implemented a default constructor
 template<typename T>
 template<class U>
-bool Registry<T>::add(const char* name) {
-    return add(name, ConstructDefault<T, U>);
+bool Registry<T>::addNoDefault(const char* name) {
+    return add(name, nullptr, ConstructDefaultJson<T, U>);
+}
+
+// Registers a module that hasn't implemented a JSON constructor
+template<typename T>
+template<class U>
+bool Registry<T>::addNoJson(const char* name) {
+    return add(name, ConstructDefault<T, U>, nullptr);
 }
 
 template<typename T>
-bool Registry<T>::add(const char* name, const Registry<T>::FactoryFunction ctor) {
+template<class U>
+bool Registry<T>::add(const char* name) {
+    return add(name, ConstructDefault<T, U>, ConstructDefaultJson<T, U>);
+}
+
+template<typename T>
+bool Registry<T>::add(const char* name, const Registry<T>::FactoryFunction ctor, const Registry<T>::FactoryFunctionJson ctorJson) {
     auto lookUp = getFactoryTable();
     for(auto elem : lookUp) {
         ///Add string processing for fuzzy search and debug suggestions
@@ -134,7 +152,7 @@ bool Registry<T>::add(const char* name, const Registry<T>::FactoryFunction ctor)
             return false;
         }
     }   ///< No match found, exiting for
-    getFactoryTable().push_back(FactoryPair{name, ctor});
+    getFactoryTable().push_back(FactoryPair{name, ctor, ctorJson});
     return true;
 }
 
@@ -145,7 +163,7 @@ T* Registry<T>::create(const char* name, Scope* scope) {
         ///Add string processing for fuzzy search and debug suggestions
         if(!strcmp(name, elem.name)) {
             ///On match, return a *new* item of type name
-            return elem.ctor(scope);
+            return elem.ctor();
         }
     }   ///< No match found, exiting for
     return nullptr;
@@ -158,7 +176,7 @@ T* Registry<T>::create(JsonVariant target, Scope* scope) {
     
     for(auto elem : lookUp) {
         if(!strcmp(name, elem.name)) {
-            return elem.ctor(scope);
+            return elem.ctor();
         }
     }
     return nullptr;
@@ -173,11 +191,3 @@ std::vector<typename Registry<T>::FactoryPair>& Registry<T>::getFactoryTable() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-/// Creates a LoomModule with default parameters
-/// @return The created LoomModule
-template<class T> LoomModule* ConstructDefault() { return new T(); }
-
-/// Creates a LoomModule with Json array of parameters
-/// @return The created LoomModule
-template<class T> LoomModule* Construct(JsonArrayConst p) { return new T(p); }

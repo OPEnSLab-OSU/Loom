@@ -24,7 +24,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_DecagonGS3 : public LoomSDI12Sensor
 {
-
+	static bool Loom_DecagonGS3_Registered;
 protected:
 
 	float		dielec_perm;	///< Measured dielectric permativity

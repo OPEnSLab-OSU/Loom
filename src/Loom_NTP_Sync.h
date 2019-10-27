@@ -30,7 +30,7 @@
 
 class LoomNTPSync : public LoomModule
 {
-
+	static bool LoomNTPSync_Registered;
 public:
 
 //=============================================================================

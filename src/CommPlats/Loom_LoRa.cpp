@@ -10,6 +10,10 @@
 
 #include "Loom_LoRa.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_LoRa::Loom_LoRa_Registered = (false) ? Registry<LoomModule>::add<Loom_LoRa>("Loom_LoRa") : false;
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::Loom_LoRa( 	
 		const uint16_t		max_message_len,

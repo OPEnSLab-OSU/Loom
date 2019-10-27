@@ -12,6 +12,10 @@
 #include "Loom_Manager.h"
 #include "Sensors/Loom_Analog.h"
 
+#include "Loom_Module_Factory.h"
+
+bool LoomTempSync::LoomTempSync_Registered = (false) ? Registry<LoomModule>::add<LoomTempSync>("LoomTempSync") : false;
+
 ///////////////////////////////////////////////////////////////////////////////
 LoomTempSync::LoomTempSync(   
 		const LoomModule::Type		source,

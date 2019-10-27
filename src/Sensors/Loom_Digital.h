@@ -29,7 +29,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Digital : public LoomSensor
 {
-
+	static bool Loom_Digital_Registered;
 protected:
 
 	bool		pin_enabled[DIGITAL_COUNT];		///< Array of which pins are enabled

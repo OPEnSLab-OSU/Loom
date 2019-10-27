@@ -31,7 +31,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class LoomTempSync : public LoomModule
 {
-
+	static bool LoomTempSync_Registered;
 protected:
 
 public:

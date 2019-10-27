@@ -32,7 +32,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_nRF : public LoomCommPlat
 {
-
+	static bool Loom_nRF_Registered;
 protected:
 
 	RF24				radio;				///< Underlying nRF24L01(+) radio object

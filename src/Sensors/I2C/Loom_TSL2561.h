@@ -30,7 +30,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_TSL2561 : public LoomI2CSensor
 {
-
+	static bool Loom_TSL2561_Registered;
 protected:
 
 	Adafruit_TSL2561_Unified	inst_TSL2561;	///< Underlying TSL2561 sensor manager instance

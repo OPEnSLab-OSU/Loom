@@ -14,6 +14,9 @@
 #include <Adafruit_SleepyDog.h>
 #include <LowPower.h>
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_Sleep_Manager::Loom_Sleep_Manager_Registered = (false) ? Registry<LoomModule>::add<Loom_Sleep_Manager>("Loom_Sleep_Manager") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager( 

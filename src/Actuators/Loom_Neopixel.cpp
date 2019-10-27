@@ -11,6 +11,9 @@
 
 #include "Loom_Neopixel.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_Neopixel::Loom_Neopixel_Registered = (false) ? Registry<LoomModule>::add<Loom_Neopixel>("Loom_Neopixel") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Neopixel::Loom_Neopixel(

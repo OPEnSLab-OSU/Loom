@@ -10,6 +10,10 @@
 
 #include "Loom_Analog.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_Analog::Loom_Analog_Registered = (false) ? Registry<LoomModule>::add<Loom_Analog>("Loom_Analog") : false;
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Analog::Loom_Analog(	
 		const uint8_t			num_samples,

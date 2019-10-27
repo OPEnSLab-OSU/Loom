@@ -31,7 +31,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_AS7263 : public LoomI2CSensor
 {
-
+	static bool Loom_AS7263_Registered;
 protected:
 
 	AS726X		inst_AS7263;		///< Underlying AS7263 sensor manager instance

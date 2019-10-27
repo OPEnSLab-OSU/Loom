@@ -31,7 +31,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Bluetooth : public LoomCommPlat
 {
-
+	static bool Loom_Bluetooth_Registered;
 protected:
 
 	Adafruit_BluefruitLE_SPI BLE;	///< Bluetooth manager instance

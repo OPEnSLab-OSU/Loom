@@ -11,6 +11,9 @@
 
 #include "Loom_SpoolPublish.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_SpoolPublish::Loom_SpoolPublish_Registered = (false) ? Registry<LoomModule>::addNoDefault<Loom_SpoolPublish>("Loom_SpoolPublish") : false;
 
 /////////////////////////////////////////////////////////////////////
 Loom_SpoolPublish::Loom_SpoolPublish(

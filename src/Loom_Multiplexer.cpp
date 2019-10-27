@@ -29,7 +29,9 @@
 
 #include <Wire.h>
 
+#include "Loom_Module_Factory.h"
 
+bool Loom_Multiplexer::Loom_Multiplexer_Registered = (false) ? Registry<LoomModule>::add<Loom_Multiplexer>("Loom_Multiplexer") : false;
 
 // Used to optimize searching for sensors:
 // search addresses in array rather than 0-127 

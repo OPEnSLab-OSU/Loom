@@ -12,6 +12,9 @@
 #include "Loom_GoogleSheets.h"
 #include "../Loom_Manager.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_GoogleSheets::Loom_GoogleSheets_Registered = (false) ? Registry<LoomModule>::addNoDefault<Loom_GoogleSheets>("Loom_GoogleSheets") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(

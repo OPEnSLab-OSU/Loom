@@ -11,6 +11,10 @@
 #include "Loom_InternetEthernet.h"
 #include "Loom_Trust_Anchors.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_Ethernet::Loom_Ethernet_Registered = (false) ? Registry<LoomModule>::add<Loom_Ethernet>("Loom_Ethernet") : false;
+
 static std::vector<unsigned char> make_key_from_asn1(std::vector<unsigned char> asn1) {
 	// we need to extract the private key from the ASN1 object given to us
 	// to do that, some ASN.1 parsing!

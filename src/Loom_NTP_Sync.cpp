@@ -11,6 +11,10 @@
 #include "Loom_NTP_Sync.h"
 #include "Loom_Manager.h"
 
+#include "Loom_Module_Factory.h"
+
+bool LoomNTPSync::LoomNTPSync_Registered = (false) ? Registry<LoomModule>::add<LoomNTPSync>("LoomNTPSync") : false;
+
 ///////////////////////////////////////////////////////////////////////////////
 LoomNTPSync::LoomNTPSync(   
 		const uint          sync_interval_hours

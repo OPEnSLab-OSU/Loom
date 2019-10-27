@@ -31,7 +31,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_ZXGesture : public LoomI2CSensor
 {
-
+	static bool Loom_ZXGesture_Registered;
 public:
 
 	/// Different modes of the ZX gesture sensor

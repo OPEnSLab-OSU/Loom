@@ -49,7 +49,7 @@ const I2C_Selection i2c_0x49 = I2C_Selection::L_AS7265X;	///< TSL2561 / AS7262 /
 class Loom_Multiplexer : public LoomModule
 {
 private:
-
+	static bool Loom_Multiplexer_Registered;
 	/// List of known I2C addresses used by Loom.
 	/// Used to avoid checking addresses that no sensors in Loom use
 	const static byte known_addresses[];

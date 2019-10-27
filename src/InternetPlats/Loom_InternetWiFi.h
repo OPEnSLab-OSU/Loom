@@ -31,7 +31,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_WiFi : public LoomInternetPlat
 {
-
+	static bool Loom_WiFi_Registered;
 protected:
 	
 	const String	SSID;	///< Host WiFi network name

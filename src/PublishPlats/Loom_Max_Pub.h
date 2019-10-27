@@ -29,7 +29,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MaxPub : public LoomPublishPlat 
 {
-
+	static bool Loom_MaxPub_Registered;
 protected:
 	
 	uint16_t	UDP_port;				///< Which UDP port to transmit on

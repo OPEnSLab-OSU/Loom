@@ -14,6 +14,9 @@
 
 #include <SPI.h>
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_SD::Loom_SD_Registered = (false) ? Registry<LoomModule>::add<Loom_SD>("Loom_SD") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SD::Loom_SD(		

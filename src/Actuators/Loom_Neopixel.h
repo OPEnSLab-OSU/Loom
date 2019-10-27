@@ -28,7 +28,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Neopixel : public LoomActuator
 {
-
+	static bool Loom_Neopixel_Registered;
 protected:
 
 	Adafruit_NeoPixel	pixels[3];			///< Array of Neopixel instances to manage up to 3 Neopixels

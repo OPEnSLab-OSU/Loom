@@ -11,6 +11,9 @@
 
 #include "Loom_TMP007.h"
 
+#include "Loom_Module_Factory.h"
+
+bool Loom_TMP007::Loom_TMP007_Registered = (false) ? Registry<LoomModule>::add<Loom_TMP007>("Loom_TMP007") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TMP007::Loom_TMP007(

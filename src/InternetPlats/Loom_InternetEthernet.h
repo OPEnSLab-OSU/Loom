@@ -31,7 +31,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Ethernet : public LoomInternetPlat
 {
-
+	static bool Loom_Ethernet_Registered;
 protected:
 
 	std::vector<unsigned char>	m_cli_cert;	///< The client certificate, if one is provided (DER format)
