@@ -30,6 +30,7 @@
 #include <Wire.h>
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
 bool Loom_Multiplexer::Loom_Multiplexer_Registered = (false) ? Registry<LoomModule>::add<Loom_Multiplexer>("Loom_Multiplexer") : false;
 

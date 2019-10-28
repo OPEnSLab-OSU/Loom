@@ -12,8 +12,9 @@
 #include "Loom_MPU6050.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_MPU6050::Loom_MPU6050_Registered = (false) ? Registry<LoomModule>::add<Loom_MPU6050>("Loom_MPU6050") : false;
+bool Loom_MPU6050::Loom_MPU6050_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_MPU6050>("Loom_MPU6050") : false;
 
 // Unfortunately cannot be inside Loom_MPU6050 class
 // For some reason Wire is not recognized like that

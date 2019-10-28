@@ -12,8 +12,9 @@
 #include "Loom_MAX31855.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_MAX31855::Loom_MAX31855_Registered = (false) ? Registry<LoomModule>::add<Loom_MAX31855>("Loom_MAX31855") : false;
+bool Loom_MAX31855::Loom_MAX31855_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_MAX31855>("Loom_MAX31855") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MAX31855::Loom_MAX31855(	

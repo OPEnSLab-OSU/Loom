@@ -11,8 +11,9 @@
 #include "Loom_Analog.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_Analog::Loom_Analog_Registered = (false) ? Registry<LoomModule>::add<Loom_Analog>("Loom_Analog") : false;
+bool Loom_Analog::Loom_Analog_Registered = (Flags::Common) ? Registry<LoomModule>::add<Loom_Analog>("Loom_Analog") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Analog::Loom_Analog(	

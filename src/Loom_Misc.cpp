@@ -24,3 +24,13 @@ void print_array(const String data [], const int len, const int format)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+bool Flags::InternetAll = false;				///< All internet modules enabled
+bool Flags::InternetEthernet = false;		///< Only Ethernet relevant modules enabled
+bool Flags::InternetWiFi = false;				///< Only WiFi relevant modules enabled
+
+bool Flags::Sensors = false;
+bool Flags::Actuators = false;
+bool Flags::Radios = false;
+bool Flags::Max = false;
+bool Flags::Common = false;

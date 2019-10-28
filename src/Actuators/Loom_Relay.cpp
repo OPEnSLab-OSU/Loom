@@ -12,8 +12,9 @@
 #include "Loom_Relay.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_Relay::Loom_Relay_Registered = (false) ? Registry<LoomModule>::add<Loom_Relay>("Loom_Relay") : false;
+bool Loom_Relay::Loom_Relay_Registered = (Flags::Actuators) ? Registry<LoomModule>::add<Loom_Relay>("Loom_Relay") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Relay::Loom_Relay( 

@@ -11,8 +11,9 @@
 #include "Loom_Decagon_GS3.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_DecagonGS3::Loom_DecagonGS3_Registered = (false) ? Registry<LoomModule>::add<Loom_DecagonGS3>("Loom_DecagonGS3") : false;
+bool Loom_DecagonGS3::Loom_DecagonGS3_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_DecagonGS3>("Loom_DecagonGS3") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DecagonGS3::Loom_DecagonGS3(	

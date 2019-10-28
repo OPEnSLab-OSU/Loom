@@ -11,8 +11,9 @@
 #include "Loom_InternetWiFi.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_WiFi::Loom_WiFi_Registered = (false) ? Registry<LoomModule>::add<Loom_WiFi>("Loom_WiFi") : false;
+bool Loom_WiFi::Loom_WiFi_Registered = (Flags::InternetWiFi || Flags::InternetAll) ? Registry<LoomModule>::add<Loom_WiFi>("Loom_WiFi") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_WiFi::Loom_WiFi(	

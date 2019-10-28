@@ -11,8 +11,9 @@
 #include "Loom_Decagon_5TM.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_Decagon5TM::Loom_Decagon5TM_Registered = (false) ? Registry<LoomModule>::add<Loom_Decagon5TM>("Loom_Decagon5TM") : false;
+bool Loom_Decagon5TM::Loom_Decagon5TM_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_Decagon5TM>("Loom_Decagon5TM") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Decagon5TM::Loom_Decagon5TM(	

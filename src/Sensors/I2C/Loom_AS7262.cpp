@@ -12,9 +12,11 @@
 #include "Loom_AS7262.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_AS7262::Loom_AS7262_Registered = (false) ? Registry<LoomModule>::add<Loom_AS7262>("Loom_AS7262") : false;
+bool Loom_AS7262::Loom_AS7262_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_AS7262>("Loom_AS7262") : false;
 
+//bool [modulename]::[registrationvariablename] = (flags) ? Registry<LoomModule>::add<[Module name]>("[Module name]") : false;
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7262::Loom_AS7262(
 		const byte			i2c_address, 

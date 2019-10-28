@@ -12,8 +12,9 @@
 #include "Loom_PCF8523.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_PCF8523::Loom_PCF8523_Registered = (false) ? Registry<LoomModule>::add<Loom_PCF8523>("Loom_PCF8523") : false;
+bool Loom_PCF8523::Loom_PCF8523_Registered = (Flags::Common) ? Registry<LoomModule>::add<Loom_PCF8523>("Loom_PCF8523") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_PCF8523::Loom_PCF8523(	

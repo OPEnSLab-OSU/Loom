@@ -12,8 +12,10 @@
 #include "Loom_Neopixel.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_Neopixel::Loom_Neopixel_Registered = (false) ? Registry<LoomModule>::add<Loom_Neopixel>("Loom_Neopixel") : false;
+
+bool Loom_Neopixel::Loom_Neopixel_Registered = (Flags::Actuators) ? Registry<LoomModule>::add<Loom_Neopixel>("Loom_Neopixel") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Neopixel::Loom_Neopixel(

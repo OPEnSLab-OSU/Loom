@@ -49,7 +49,7 @@ enum class ISR_Type {
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Interrupt_Manager : public LoomModule
 {
-
+	static bool Loom_Interrupt_Manager_Registered;
 private:
 
 	/// Contains information defining an interrupt's configuration

@@ -13,8 +13,9 @@
 #include "../Loom_Manager.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_GoogleSheets::Loom_GoogleSheets_Registered = (false) ? Registry<LoomModule>::addNoDefault<Loom_GoogleSheets>("Loom_GoogleSheets") : false;
+bool Loom_GoogleSheets::Loom_GoogleSheets_Registered = (Flags::InternetWiFi || Flags::InternetEthernet || Flags::InternetAll) ? Registry<LoomModule>::addNoDefault<Loom_GoogleSheets>("Loom_GoogleSheets") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(

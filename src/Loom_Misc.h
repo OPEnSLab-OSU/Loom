@@ -13,6 +13,19 @@
 #include <Arduino.h>
 #include "Loom_Macros.h"
 
+namespace Flags {
+	extern bool InternetAll;				///< All internet modules enabled
+	extern bool InternetEthernet;		///< Only Ethernet relevant modules enabled
+	extern bool InternetWiFi;				///< Only WiFi relevant modules enabled
+	
+	extern bool Sensors;
+	extern bool Actuators;
+	extern bool Radios;
+	extern bool Max;
+
+	extern bool Common;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 /// Print an array.
 /// 3 Options

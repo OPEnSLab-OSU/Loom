@@ -12,8 +12,9 @@
 #include "Loom_Manager.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool LoomNTPSync::LoomNTPSync_Registered = (false) ? Registry<LoomModule>::add<LoomNTPSync>("LoomNTPSync") : false;
+bool LoomNTPSync::LoomNTPSync_Registered = (Flags::InternetWiFi || Flags::InternetEthernet || Flags::InternetAll) ? Registry<LoomModule>::add<LoomNTPSync>("LoomNTPSync") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomNTPSync::LoomNTPSync(   

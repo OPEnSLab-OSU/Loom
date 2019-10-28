@@ -12,8 +12,9 @@
 #include "Loom_AS7263.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_AS7263::Loom_AS7263_Registered = (false) ? Registry<LoomModule>::add<Loom_AS7263>("Loom_AS7263") : false;
+bool Loom_AS7263::Loom_AS7263_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_AS7263>("Loom_AS7263") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7263::Loom_AS7263(

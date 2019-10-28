@@ -11,8 +11,9 @@
 #include "Loom_Bluetooth.h"
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_Bluetooth::Loom_Bluetooth_Registered = (false) ? Registry<LoomModule>::add<Loom_Bluetooth>("Loom_Bluetooth") : false;
+bool Loom_Bluetooth::Loom_Bluetooth_Registered = (Flags::Radios) ? Registry<LoomModule>::add<Loom_Bluetooth>("Loom_Bluetooth") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Bluetooth::Loom_Bluetooth( 	

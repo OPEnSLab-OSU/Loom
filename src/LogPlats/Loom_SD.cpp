@@ -15,8 +15,9 @@
 #include <SPI.h>
 
 #include "Loom_Module_Factory.h"
+#include "Loom_Misc.h"
 
-bool Loom_SD::Loom_SD_Registered = (false) ? Registry<LoomModule>::add<Loom_SD>("Loom_SD") : false;
+bool Loom_SD::Loom_SD_Registered = (Flags::Common) ? Registry<LoomModule>::add<Loom_SD>("Loom_SD") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SD::Loom_SD(		
