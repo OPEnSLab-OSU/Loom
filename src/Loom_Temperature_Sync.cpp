@@ -8,6 +8,8 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#pragma once
+
 #include "Loom_Temperature_Sync.h"
 #include "Loom_Manager.h"
 #include "Sensors/Loom_Analog.h"

@@ -8,6 +8,8 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#pragma once
+
 #include "Loom_Interrupt_Manager.h"
 #include "Loom_Sleep_Manager.h"
 #include "RTC/Loom_RTC.h"

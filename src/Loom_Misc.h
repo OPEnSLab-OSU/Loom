@@ -14,16 +14,25 @@
 #include "Loom_Macros.h"
 
 namespace Flags {
-	extern bool InternetAll;				///< All internet modules enabled
-	extern bool InternetEthernet;		///< Only Ethernet relevant modules enabled
-	extern bool InternetWiFi;				///< Only WiFi relevant modules enabled
-	
-	extern bool Sensors;
-	extern bool Actuators;
-	extern bool Radios;
-	extern bool Max;
 
-	extern bool Common;
+	constexpr bool defaultTrue(bool val = true) {
+		return val;
+	}
+
+	constexpr bool defaultFalse(bool val = false) {
+		return val;
+	}
+
+	constexpr bool InternetAll = defaultTrue(false);				///< All internet modules enabled
+	constexpr bool InternetEthernet = defaultTrue(false);		///< Only Ethernet relevant modules enabled
+	constexpr bool InternetWiFi = defaultTrue(false);				///< Only WiFi relevant modules enabled
+	
+	constexpr bool Sensors = defaultTrue(false);
+	constexpr bool Actuators = defaultTrue(false);
+	constexpr bool Radios = defaultTrue(false);
+	constexpr bool Max = defaultTrue(false);
+
+	constexpr bool Common = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

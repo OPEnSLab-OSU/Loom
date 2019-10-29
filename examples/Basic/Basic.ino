@@ -24,18 +24,18 @@ const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-// LoomFactory<
-// 	Enable::Internet::Disabled,
-// 	Enable::Sensors::Enabled,
-// 	Enable::Radios::Disabled,
-// 	Enable::Actuators::Disabled,
-// 	Enable::Max::Disabled
-// > ModuleFactory{};
+const bool InternetAll = false;				///< All internet modules enabled
+const bool InternetEthernet = false;		///< Only Ethernet relevant modules enabled
+const bool InternetWiFi = false;				///< Only WiFi relevant modules enabled
+
+const bool Sensors = false;
+const bool Actuators = false;
+const bool Radios = false;
+const bool Max = false;
+
+const bool Common = false;
 
 LoomManager Loom{};
-
-
 
 void setup() 
 { 
