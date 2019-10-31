@@ -66,6 +66,7 @@
 #include "Sensors/I2C/Loom_TSL2561.h"
 #include "Sensors/I2C/Loom_TSL2591.h"
 #include "Sensors/I2C/Loom_ZXGesture.h"
+#include "Sensors/I2C/Loom_STEMMA.h"
 
 #include "Sensors/SDI12/Loom_Decagon_5TM.h"
 #include "Sensors/SDI12/Loom_Decagon_GS3.h"
@@ -226,6 +227,7 @@ namespace Include
 				factory::NameModulePair{"TSL2561",		Construct<Loom_TSL2561>,		ConstructDefault<Loom_TSL2561> },
 				factory::NameModulePair{"TSL2591",		Construct<Loom_TSL2591>,		ConstructDefault<Loom_TSL2591> },
 				factory::NameModulePair{"ZXGesture",	Construct<Loom_ZXGesture>,		ConstructDefault<Loom_ZXGesture> },
+                factory::NameModulePair{"STEMMA",       Construct<Loom_STEMMA>,         ConstructDefault<Loom_STEMMA> },
 				// SDI12
 				factory::NameModulePair{"Decagon5TM",	Construct<Loom_Decagon5TM>,		ConstructDefault<Loom_Decagon5TM> },
 				factory::NameModulePair{"DecagonGS3",	Construct<Loom_DecagonGS3>,		ConstructDefault<Loom_DecagonGS3> },
