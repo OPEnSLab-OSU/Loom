@@ -4,18 +4,21 @@
 #include "Adafruit_seesaw.h"
 
 ///////////////////////////////////////////////////////////////////////////////
+///
+/// Adafruit Stemma soil moisture sensor.
+///
+/// @par Resources
+/// - [Product Page: https://learn.adafruit.com/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor/arduino-test]
 
-
-// ### (LoomI2CSensor) | dependencies: [] | conflicts: []
-/// Class description
-// ###
 class Loom_STEMMA : public LoomI2CSensor
 {
 
 protected:
 
-    // Protected members here (are inherited)
+    /// Adafruit Seesaw object.
     Adafruit_seesaw ss;
+    
+    /// Sensor data objects
     float temperature;
     uint16_t capacitive;
     
@@ -28,6 +31,7 @@ public:
     /// Constructor
     ///
     /// @param[in] i2c_address              Set(Int) | <0x36> | {0x36} | I2C address
+    /// @param[in] mux_port                     Int | <255> | [0-16] | Port on multiplexer
     Loom_STEMMA(
             byte                i2c_address        = 0x36,
             const uint8_t       mux_port           = 255
@@ -53,28 +57,6 @@ public:
 /*@{*/ //======================================================================
 
     void        print_measurements() const override;
-
-//=============================================================================
-///@name    GETTERS
-/*@{*/ //======================================================================
-
-
-//=============================================================================
-///@name    SETTERS
-/*@{*/ //======================================================================
-
-
-//=============================================================================
-///@name    MISCELLANEOUS
-/*@{*/ //======================================================================
-
-
-
-private:
-
-    // Private members (are not inherited)
-
-    // Auxiliary functions
 
 };
 
