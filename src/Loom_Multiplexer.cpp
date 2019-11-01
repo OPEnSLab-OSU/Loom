@@ -26,6 +26,7 @@
 #include "Sensors/I2C/Loom_TSL2561.h"
 #include "Sensors/I2C/Loom_TSL2591.h"
 #include "Sensors/I2C/Loom_ZXGesture.h"
+#include "Sensors/I2C/Loom_STEMMA.h"
 
 #include <Wire.h>
 
@@ -45,6 +46,7 @@ const byte Loom_Multiplexer::known_addresses[] =
 	0x20, ///< FXAS21002
 	0x21, ///< FXAS21002
 	0x29, ///< TSL2561 / TSL2591
+    0x36, ///< STEMMA
 	0x39, ///< TSL2561
 	0x40, ///< TMP007
 	0x44, ///< SHT31D
@@ -129,7 +131,7 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, 
 		case 0x29 : // TSL2561 / TSL2591
 			if (i2c_0x29 == I2C_Selection::L_TSL2561) return new Loom_TSL2561(i2c_address, port);	// TSL2561
 			if (i2c_0x29 == I2C_Selection::L_TSL2591) return new Loom_TSL2591(i2c_address, port);	// TSL2591
-
+        case 0x36 : return new Loom_STEMMA(i2c_address, port); // STEMMA
 		case 0x39 : return new Loom_TSL2561(i2c_address, port);	// TSL2561
 		case 0x40 : return new Loom_TMP007(i2c_address, port);	// TMP007
 		case 0x44 : return new Loom_SHT31D(i2c_address, port);	// SHT31D
