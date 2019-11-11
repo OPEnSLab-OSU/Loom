@@ -143,6 +143,7 @@ public:
 	virtual UDPPtr			open_socket(const uint port) = 0;
 
 	virtual void connect() = 0;
+	virtual void disconnect() {}
 	virtual bool is_connected() const = 0;
 
 	/// Set mutual auth (mutual TLS) parameters, such as the client certificate and key

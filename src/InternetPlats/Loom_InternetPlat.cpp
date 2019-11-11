@@ -59,7 +59,7 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* 
 		return ClientSession();
 	}
 	// I guess we are connected! lets go
-	Client& client = get_client();
+	SSLClient& client = get_client();
 	// if the socket is somehow still open, close it
 	if (client.connected()) client.stop();
 	// and clear a write error if there is any
@@ -67,10 +67,19 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* 
 	// * the rainbow connection *
 	int status = client.connect(domain, 443);
 	if (!status) {
-		// log fail, and return
+		// log fail, attempt repair, and return
 		print_module_label();
 		LPrint("Connect failed with error ", client.getWriteError(), "\n");
 		print_state();
+		// if the underlying client is unhappy, we may need to reset the connection
+		if (client.getWriteError() == SSLClient::SSL_CLIENT_WRTIE_ERROR) {
+			print_module_label();
+			LPrint("Attempting to cycle the connection: ");
+			disconnect();
+			delay(500);
+			connect();
+			print_state();
+		}
 		return ClientSession();
 	}
 	// return a pointer to the client for data reception
@@ -87,7 +96,7 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_ip(const IPAddress&
 		print_state();
 		return ClientSession();
 	}
-	Client& client = get_client();
+	SSLClient& client = get_client();
 	// if the socket is somehow still open, close it
 	if (client.connected()) client.stop();
 	// and clear a write error if there is any
@@ -99,6 +108,15 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_ip(const IPAddress&
 		print_module_label();
 		LPrint("Connect failed with error ", client.getWriteError(), "\n");
 		print_state();
+		// if the underlying client is unhappy, we may need to reset the connection
+		if (client.getWriteError() == SSLClient::SSL_CLIENT_WRTIE_ERROR) {
+			print_module_label();
+			LPrint("Attempting to cycle the connection: ");
+			disconnect();
+			delay(500);
+			connect();
+			print_state();
+		}
 		return ClientSession();
 	}
 	// return a pointer to the client for data reception

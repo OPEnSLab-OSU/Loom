@@ -1,0 +1,37 @@
+"{\
+  'general':\
+  {\
+    'name':'Device',\
+    'instance':1,\
+    'interval':30000\
+  },\
+  'components':[\
+    {\
+      'name':'Analog',\
+      'params':'default'\
+    },\
+    {\
+      'name':'Digital',\
+      'params':'default'\
+    },\
+    {\
+        'name':'WiFi',\
+        'params':[\
+            'AGU',\
+            ''\
+        ]\
+    },\
+    {\
+      'name':'Spool',\
+      'params':[\
+        'Spool',\
+        7002,\
+        'spool.open-sensing.org',\
+        '/device/data',\
+        '',\
+        '',\
+        ''\
+      ]\
+    }\
+  ]\
+}"

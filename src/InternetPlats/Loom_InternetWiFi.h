@@ -73,6 +73,9 @@ public:
 	/// Connect to internet
 	void			connect() override;
 
+	/// Disconnect from the internet
+	void 			disconnect() override;
+
 	/// Whether or not connected to internet
 	/// @return True if connect, false otherwise
 	bool			is_connected() const override;

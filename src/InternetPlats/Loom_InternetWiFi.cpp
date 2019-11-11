@@ -41,6 +41,8 @@ Loom_WiFi::Loom_WiFi(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_WiFi::connect()
 {
+	// clear the write error
+	m_base_client.clearWriteError();
 	// Try to connect, attempting the connection up to 5 times (this number is arbitrary)
 	uint8_t attempt_count = 0;
 	uint8_t last_status = 0;
@@ -75,6 +77,13 @@ void Loom_WiFi::connect()
 		return;
 	}
 	print_state();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_WiFi::disconnect() {
+	// tell the wifi it's time to stop
+	WiFi.disconnect();
+	delay(200);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

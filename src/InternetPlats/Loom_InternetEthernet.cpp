@@ -74,6 +74,9 @@ void Loom_Ethernet::connect()
 	// initialize ethernet shield for Feather
 	Ethernet.init(10);
 
+	// clear the write error
+	m_base_client.clearWriteError();
+
 	if (Ethernet.begin(m_mac) == 0) {
 		print_module_label();
 		LPrintln("Failed to configure Ethernet using DHCP");

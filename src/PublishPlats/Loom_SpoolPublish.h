@@ -66,8 +66,8 @@ private:
 	const String m_spool_domain;			///< The Spool URL
 	const String m_device_data_endpoint;
 	const String m_device_id;
-	std::vector<unsigned char>	m_cli_cert;	///< The client certificate, if one is provided (DER format)
-	std::vector<unsigned char>	m_cli_key;	///< The client private key, if one if provided (DER format)
+	const std::vector<unsigned char>	m_cli_cert;	///< The client certificate, if one is provided (DER format)
+	const std::vector<unsigned char>	m_cli_key;	///< The client private key, if one if provided (DER format)
 	const br_x509_certificate	m_cert;
 	const SSLClientParameters	m_params;
 };
