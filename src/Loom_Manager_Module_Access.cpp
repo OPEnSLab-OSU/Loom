@@ -291,6 +291,12 @@ Loom_ZXGesture& LoomManager::ZXGesture(const uint8_t idx)
 	return (*(Loom_ZXGesture*)( (tmp) ? tmp : &global_stub ));
 }
 
+Loom_STEMMA& LoomManager::STEMMA(const uint8_t idx)
+{
+    LoomModule* tmp = find_module(LoomModule::Type::STEMMA, idx);
+    return (*(Loom_STEMMA*)( (tmp) ? tmp : &global_stub ));
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //    --- SDI12 Sensors ---
 

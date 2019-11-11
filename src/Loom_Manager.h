@@ -59,6 +59,7 @@ class Loom_TMP007;
 class Loom_TSL2561;
 class Loom_TSL2591;
 class Loom_ZXGesture;
+class Loom_STEMMA;
 
 // SDI12
 class Loom_Decagon5TM;
@@ -526,7 +527,7 @@ public:
 	Loom_TSL2561&		TSL2561(const uint8_t idx = 0);
 	Loom_TSL2591&		TSL2591(const uint8_t idx = 0);
 	Loom_ZXGesture&		ZXGesture(const uint8_t idx = 0);
-
+    Loom_STEMMA&        STEMMA(const uint8_t idx = 0);
 	// SDI12
 	Loom_Decagon5TM&	Decagon5TM(const uint8_t idx = 0);
 	Loom_DecagonGS3&	DecagonGS3(const uint8_t idx = 0);
