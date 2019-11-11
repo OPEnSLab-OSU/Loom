@@ -190,6 +190,7 @@ namespace Include
 				factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
 				factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
 				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
+				factory::NameModulePair{"Spool",		Construct<Loom_SpoolPublish>,	nullptr },
 				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
 
@@ -197,6 +198,7 @@ namespace Include
 	constexpr auto Ethernet = std::make_tuple( 
 				factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
 				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
+				factory::NameModulePair{"Spool",		Construct<Loom_SpoolPublish>,	nullptr },
 				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
 
@@ -204,6 +206,7 @@ namespace Include
 	constexpr auto WiFi = std::make_tuple( 
 				factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
 				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
+				factory::NameModulePair{"Spool",		Construct<Loom_SpoolPublish>,	nullptr },
 				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
 

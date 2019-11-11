@@ -489,6 +489,7 @@ public:
 	// PublishPlats
 	LoomPublishPlat& 	PublishPlat(const uint8_t idx = 0);
 	Loom_GoogleSheets&	GoogleSheets(const uint8_t idx = 0);
+	Loom_SpoolPublish&  Spool(const uint8_t idx = 0);
 	Loom_MaxPub&		MaxPub(const uint8_t idx = 0);
 
 	// SubscribePlats

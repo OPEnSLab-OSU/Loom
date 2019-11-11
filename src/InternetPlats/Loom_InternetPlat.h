@@ -15,6 +15,7 @@
 
 #include "Client.h"
 #include "Udp.h"
+#include "SSLClient.h"
 #undef min
 #undef max
 #include <memory>
@@ -32,6 +33,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 class LoomInternetPlat : public LoomModule
 {
+
+protected:	
+	
+	/// Utility function to write an http reqest based on parameters specified by LoomInternetPlat::http_request to a Client class.
+	/// See http_request() for parameter details.
+	void write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb);
+
+	/// Get the underlying SSLClient implementation, which we will use for all of the other requests
+	virtual SSLClient& get_client() = 0;
+	virtual const SSLClient& get_client() const = 0;
 
 public:
 
@@ -87,13 +98,6 @@ public:
 	/// implement with empty body.
 	virtual void	package(JsonObject json) override { /* do nothing for now */ }
 
-	/// Try to connect to internet
-	virtual void	connect() = 0;
-
-	/// Get if connected to internet
-	/// @return True if connected
-	virtual bool	is_connected() const = 0;
-
 	/// Make HTTP request
 	/// @param[in]	domain	The domain to connect to (e.g "www.google.com")
 	/// @param[in]	url		The URL string to send with the http request, not including the domain (ex. "/arduino?thing=otherthing").
@@ -123,14 +127,14 @@ public:
 	/// @attention	Remember to close the socket!
 	/// @param[in]	domain	The domain to connect to "www.google.com"
 	/// @returns A client reference. The client::connected method will return true if the connection succeeded, and false otherwise.
-	virtual ClientSession	connect_to_domain(const char* domain) = 0;
+	virtual ClientSession	connect_to_domain(const char* domain);
 
 	/// Connect to a domain, but don't write any HTTP stuff, Let the module figure that out.
 	/// @attention	Remember to close the socket!
 	/// @param[in]	ip		The IPAddress to connect to
 	/// @param[in]	port	The port to connect to
 	/// @returns A client reference. The client::connected method will return true if the connection succeeded, and false otherwise.
-	virtual ClientSession	connect_to_ip(const IPAddress& ip, const uint16_t port) = 0;
+	virtual ClientSession	connect_to_ip(const IPAddress& ip, const uint16_t port);
 
 	/// Open a UDP socket for sending and recieving incoming data.
 	/// @warning Be careful about recieving data from an open socket!
@@ -138,15 +142,18 @@ public:
 	/// close when the pointer is destructed.
 	virtual UDPPtr			open_socket(const uint port) = 0;
 
+	virtual void connect() = 0;
+	virtual bool is_connected() const = 0;
+
+	/// Set mutual auth (mutual TLS) parameters, such as the client certificate and key
+	/// @param[in] cli_cert The client certificate to use, only ECC EC_secp256r1 is supported
+	/// @param[in] cli_key The client private key to use, only ECC EC_secp256r1 is supported
+	virtual void 			set_mutual_auth(const SSLClientParameters& params) { get_client().setMutualAuthParams(&params); };
+
 	/// make NTP request to get UTC time, using the UDP function above
 	/// @returns a unix timestamp if success, or 0 if failure.
 	uint32_t				get_time();
-	
-protected:	
-	
-	/// Utility function to write an http reqest based on parameters specified by LoomInternetPlat::http_request to a Client class.
-	/// See http_request() for parameter details.
-	void	write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb);
+
 
 private:
 

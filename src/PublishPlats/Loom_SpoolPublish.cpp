@@ -11,6 +11,22 @@
 
 #include "Loom_SpoolPublish.h"
 
+static std::vector<unsigned char> make_key_from_asn1(std::vector<unsigned char> asn1) {
+	// we need to extract the private key from the ASN1 object given to us
+	// to do that, some ASN.1 parsing!
+	// get the tag and length of the first octet string, and verify it's reasonable
+	if (asn1[5] != 0x04 
+		|| asn1.size() < 6 
+		|| asn1[6] >= asn1.size() - 6) return {};
+
+	const unsigned char length = asn1[6];
+	// delete everything around the key that we don't need
+	asn1.erase(asn1.begin(), asn1.begin() + 7);
+	asn1.erase(asn1.begin() + length, asn1.end());
+	// shrink it
+	asn1.shrink_to_fit();
+	return asn1;
+}
 
 /////////////////////////////////////////////////////////////////////
 Loom_SpoolPublish::Loom_SpoolPublish(
@@ -18,16 +34,30 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 		const LoomModule::Type	internet_type,
 		const char*				spool_domain,
 		const char*				device_data_endpoint,
-		const char*				device_id
+		const char*				device_id,
+		const char* 			cli_cert,
+		const char*				cli_key
 	) 
 	: LoomPublishPlat(module_name, LoomModule::Type::SpoolPub, internet_type)
 	, m_spool_domain(spool_domain)
 	, m_device_data_endpoint(device_data_endpoint)
-	, m_device_id(device_id) {}
+	, m_device_id(device_id)
+	, m_cli_cert(SSLObj::make_vector_pem(cli_cert, (cli_cert ? strlen(cli_cert) : 0)))
+	, m_cli_key(make_key_from_asn1(SSLObj::make_vector_pem(cli_key, (cli_key ? strlen(cli_key) : 0))))
+	, m_cert({ m_cli_cert.data(), m_cli_cert.size() })
+	, m_params({
+		&m_cert,
+		1,
+		{
+			BR_EC_secp256r1,
+			m_cli_key.data(), 
+			m_cli_key.size()
+		}
+	}) {}
 
 /////////////////////////////////////////////////////////////////////
 Loom_SpoolPublish::Loom_SpoolPublish(JsonArrayConst p)
-: Loom_SpoolPublish( p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4] ) {}
+: Loom_SpoolPublish( p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5], p[6] ) {}
 
 /////////////////////////////////////////////////////////////////////
 void Loom_SpoolPublish::print_config() const
@@ -47,7 +77,14 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 	print_module_label();
 	// serialize the data, checking for an error
 	// not sure if this is the right way to check if there is a overflow
-	
+	// set mutual auth, if needed
+	if (!m_cli_cert.size()) LPrintln("Failed to decode client certificate");
+	else if (!m_cli_key.size()) LPrintln("Failed to decode client private key");
+	else {
+		LPrintln("Adding mutual auth!");
+		// setup the certificate
+		plat->set_mutual_auth(m_params);
+	}
 	// TODO: Spool domain
 	auto network = plat->connect_to_ip(IPAddress(192,168,0,1), 443);
 	// auto network = plat->connect_to_ip(m_spool_domain);

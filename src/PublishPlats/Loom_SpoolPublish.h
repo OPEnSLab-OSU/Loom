@@ -38,7 +38,9 @@ public:
 			const LoomModule::Type	internet_type,
 			const char*				spool_domain,
 			const char*				device_data_endpoint,
-			const char*				device_id
+			const char*				device_id,
+			const char* 			cli_cert,
+			const char*				cli_key
 		);
 	
 	/// Constructor that takes Json Array, extracts args
@@ -61,9 +63,11 @@ protected:
 	bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
 	
 private:
-
 	const String m_spool_domain;			///< The Spool URL
 	const String m_device_data_endpoint;
 	const String m_device_id;
-
+	std::vector<unsigned char>	m_cli_cert;	///< The client certificate, if one is provided (DER format)
+	std::vector<unsigned char>	m_cli_key;	///< The client private key, if one if provided (DER format)
+	const br_x509_certificate	m_cert;
+	const SSLClientParameters	m_params;
 };
