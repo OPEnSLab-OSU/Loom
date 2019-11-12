@@ -1,6 +1,6 @@
 #include "SpoolKeyCache.h"
 
-static FlashStorage(flash_keys, SpoolKeys);
+FlashStorage(flash_keys, SpoolKeys);
 static constexpr unsigned long build_time = UNIX_TIMESTAMP_UTC;
 
 static bool is_valid_cert_char(const char c) {
@@ -12,6 +12,12 @@ static bool is_valid_cert_char(const char c) {
           || c == '='
           || (c >= 'A' && c <= 'Z')
           || (c >= 'a' && c <= 'z');
+}
+
+static bool is_valid_id_char(const char c) {
+  return (c >= '0' && c <= '9')
+    || (c >= 'A' && c <= 'Z')
+    || (c >= 'a' && c <= 'z');
 }
 
 static void get_x509_input(char* dest, size_t max_size, const char* name) {

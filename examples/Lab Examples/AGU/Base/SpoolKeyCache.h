@@ -5,6 +5,7 @@
 /// from serial monitor input.
 #pragma once
 #include <FlashStorage.h>
+#include "time_macros.h"
 
 struct SpoolKeys {
   bool valid;
