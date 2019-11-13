@@ -28,57 +28,6 @@ LoomFactory<
 
 LoomManager Loom{ &ModuleFactory };
 
-void setup() {
-	// TODO: hypnos control
-	// TODO: verify with eli that the device IDs are actually only alphanumerical
-
-	// put your setup code here, to run once:
-	Serial.begin(115200);
-	while(!Serial);
-
-	// handle the spool credentials
-	SpoolKeys keys;
-	getKeys(keys);
-
-	Serial.print("Loaded keys for id \"");
-	Serial.print(keys.id);
-	Serial.print("\" from time ");
-	Serial.println(keys.timestamp);
-
-	// read the JSON config from an SD card
-	StaticJsonDocument<2048> doc;
-	read_config_from_sd(doc, 10, "data.json");
-
-	// inject the spool credentials into this config
-	JsonObject spoolComponent = doc.as<JsonObject>()["components"].createNestedObject();
-	if (!spoolComponent.isNull())
-		make_spool_component(spoolComponent, keys);
-	else
-		Serial.println("Could not make spool conponent, are we out of memory?");
-
-	Loom.parse_config_json(doc.as<JsonObject>());
-	Loom.print_config();
-
-	LPrintln("\n ** Setup Complete ** "); 
-}
-
-void loop() {
-	// put your main code here, to run repeatedly:
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
-
-	if(!Loom.Spool().publish()){
-		pinMode(13, OUTPUT);
-		digitalWrite(13, HIGH);
-		Serial.println("Broke! press any key to continue...");
-		while(!Serial.available());
-		while(Serial.available()) Serial.read();
-	}
-
-	Loom.pause();
-}
-
 ///
 /// Popolates obj to with the following items:
 /// {
@@ -109,7 +58,7 @@ void make_spool_component(JsonObject obj, const SpoolKeys& credentials) {
 }
 
 bool read_config_from_sd(JsonDocument& doc, const int cs, const char* fname) {
-  	SdFat sd;	// File system object
+	SdFat sd;	// File system object
 
 	LPrintln("Read config from file: '", fname, "'");
 	if ( !sd.begin(cs, SD_SCK_MHZ(50)) ) {	// Make sure we can communicate with SD
@@ -124,7 +73,7 @@ bool read_config_from_sd(JsonDocument& doc, const int cs, const char* fname) {
 	}
 
 	DeserializationError error = deserializeJson(doc, file);
-	
+
 	// Test if parsing succeeds.
 	if (error) { // Make sure json was valid
 		LPrintln("deserializeJson() failed: ", error.c_str());
@@ -132,4 +81,62 @@ bool read_config_from_sd(JsonDocument& doc, const int cs, const char* fname) {
 	}
 
 	return true;
+}
+
+void setup() {
+	// TODO: hypnos control
+	// TODO: verify with eli that the device IDs are actually only alphanumerical
+	// Needs to be done for Hypno Board
+	pinMode(5, OUTPUT);   // Enable control of 3.3V rail 
+	pinMode(6, OUTPUT);   // Enable control of 5V rail 
+
+	//See Above
+	digitalWrite(5, LOW); // Enable 3.3V rail
+	digitalWrite(6, HIGH);  // Enable 5V rail
+
+	// put your setup code here, to run once:
+	Serial.begin(115200);
+	while(!Serial);
+
+	// handle the spool credentials
+	SpoolKeys keys;
+	getKeys(keys);
+
+	Serial.print("Loaded keys for id \"");
+	Serial.print(keys.id);
+	Serial.print("\" from time ");
+	Serial.println(keys.timestamp);
+
+	// read the JSON config from an SD card
+	StaticJsonDocument<2048> doc;
+	read_config_from_sd(doc, 10, "data.json");
+
+	// inject the spool credentials into this config
+	JsonObject spoolComponent = doc.as<JsonObject>()["components"].createNestedObject();
+	if (!spoolComponent.isNull())
+		make_spool_component(spoolComponent, keys);
+	else
+		Serial.println("Could not make spool conponent, are we out of memory?");
+
+	Loom.parse_config_json(doc.as<JsonObject>());
+	// DO NOT PRINT THE CONFIG! this will leak the secrets to the serial monitor
+
+	LPrintln("\n ** Setup Complete ** "); 
+}
+
+void loop() {
+	// put your main code here, to run repeatedly:
+	Loom.measure();
+	Loom.package();
+	Loom.display_data();
+
+	if(!Loom.Spool().publish()){
+		pinMode(13, OUTPUT);
+		digitalWrite(13, HIGH);
+		Serial.println("Broke! press any key to continue...");
+		while(!Serial.available());
+		while(Serial.available()) Serial.read();
+	}
+
+	Loom.pause();
 }

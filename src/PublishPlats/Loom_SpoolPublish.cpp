@@ -87,9 +87,7 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 		// setup the certificate
 		plat->set_mutual_auth(m_params);
 	}
-	// TODO: Spool domain
-	auto network = plat->connect_to_ip(IPAddress(192,168,0,1), 443);
-	// auto network = plat->connect_to_ip(m_spool_domain);
+	auto network = plat->connect_to_domain(m_spool_domain.c_str());
 
 	if (!network) {
 		print_module_label();
