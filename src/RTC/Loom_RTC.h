@@ -32,7 +32,7 @@ public:
 
 	/// Different time zones
 	enum class TimeZone { 
-		WAT, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
+		WAT = 0, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
 		ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
 		ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
 	};
