@@ -26,7 +26,7 @@ const char* LoomRTC::daysOfTheWeek[] =
 const float LoomRTC::timezone_adjustment[] =
 	{
 		1  /* WAT */, 2    /* AT  */, 3     /* ADT */, 4   /* AST */, 4   /* EDT */, 5  /* EST */, 5  /* CDT */,
-		6  /* CST */, 6    /* MDT */, 7     /* MST */, 7   /* PDT */, 7   /* PST */, 8  /* ALDT*/, 9  /* ALST*/,
+		6  /* CST */, 6    /* MDT */, 7     /* MST */, 7   /* PDT */, 8   /* PST */, 8  /* ALDT*/, 9  /* ALST*/,
 		10 /* HST */, 11   /* SST */, 0     /* GMT */, -1  /* BST */, -1  /* CET */, -2 /* CEST*/, -2 /* EET */,
 		-3 /* EEST*/, -3   /* BT  */, -4    /* ZP4 */, -5  /* ZP5 */, -6  /* ZP6 */, -7 /* ZP7 */, -8 /* AWST*/,
 		-9 /* AWDT*/, -9.5 /* ACST*/, -10.5 /* ACDT*/, -10 /* AEST*/, -11 /* AEDT*/
@@ -275,13 +275,11 @@ bool LoomRTC::rtc_validity_check()
 {
 	DateTime time_check = now();
 	int y = time_check.year();
-	int m = time_check.month();
-	int d = time_check.day();
 
 	// A basic validity check of date
-	if ( (y < 2018) || (y > 2050) || (m < 1) || (m > 12) || (d < 1) || (d > 31) ) {
+	if ( (y < 2018) || (y > 2050)) {
 		print_module_label();
-		LPrintln("RTC Time is invalid");
+		LPrint("RTC Time is invalid: ", y, '\n');
 		set_rtc_to_compile_time();
 		return false;
 	}
