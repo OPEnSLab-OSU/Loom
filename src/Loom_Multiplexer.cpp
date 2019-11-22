@@ -71,7 +71,7 @@ Loom_Multiplexer::Loom_Multiplexer(
 	, num_ports(num_ports)
 	, update_period(update_period)
 	, sensors(new LoomI2CSensor*[num_ports])
-	, control_port(0)
+	, control_port(num_ports)
 {
 	// Begin I2C 
 	Wire.begin();
