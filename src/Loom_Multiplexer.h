@@ -65,6 +65,9 @@ protected:
 	bool			dynamic_list;		///< Whether or not sensor list is dynamic (refresh sensor list periodically)
 	uint			update_period;		///< Interval to update sensor list at
 
+	uint8_t control_port;			//< Mux port to be used as a control
+	byte 		control_address;	//< Address at control_port to be ignored by refresh
+
 	unsigned long	last_update_time;	///< When the sensor list was last updated
 
 public:
