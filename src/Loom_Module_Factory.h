@@ -67,6 +67,7 @@
 #include "Sensors/I2C/Loom_TSL2561.h"
 #include "Sensors/I2C/Loom_TSL2591.h"
 #include "Sensors/I2C/Loom_ZXGesture.h"
+#include "Sensors/I2C/Loom_STEMMA.h"
 
 
 
@@ -193,6 +194,7 @@ namespace Include
 				factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
 				factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
 				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
+				factory::NameModulePair{"Spool",		Construct<Loom_SpoolPublish>,	nullptr },
 				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
 
@@ -200,6 +202,7 @@ namespace Include
 	constexpr auto Ethernet = std::make_tuple( 
 				factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
 				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
+				factory::NameModulePair{"Spool",		Construct<Loom_SpoolPublish>,	nullptr },
 				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
 
@@ -207,6 +210,7 @@ namespace Include
 	constexpr auto WiFi = std::make_tuple( 
 				factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
 				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
+				factory::NameModulePair{"Spool",		Construct<Loom_SpoolPublish>,	nullptr },
 				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
 
@@ -230,6 +234,7 @@ namespace Include
 				factory::NameModulePair{"TSL2561",		Construct<Loom_TSL2561>,		ConstructDefault<Loom_TSL2561> },
 				factory::NameModulePair{"TSL2591",		Construct<Loom_TSL2591>,		ConstructDefault<Loom_TSL2591> },
 				factory::NameModulePair{"ZXGesture",	Construct<Loom_ZXGesture>,		ConstructDefault<Loom_ZXGesture> },
+                factory::NameModulePair{"STEMMA",       Construct<Loom_STEMMA>,         ConstructDefault<Loom_STEMMA> },
 				// SDI12
 				factory::NameModulePair{"Decagon5TM",	Construct<Loom_Decagon5TM>,		ConstructDefault<Loom_Decagon5TM> },
 				factory::NameModulePair{"DecagonGS3",	Construct<Loom_DecagonGS3>,		ConstructDefault<Loom_DecagonGS3> },

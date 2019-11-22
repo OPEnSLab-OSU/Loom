@@ -14,6 +14,7 @@
 #include "Loom_InternetPlat.h"
 #include "EthernetLarge.h"
 #include "SSLClient.h"
+#include "Loom_Trust_Anchors.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -34,18 +35,17 @@ class Loom_Ethernet : public LoomInternetPlat
 
 protected:
 
-	std::vector<unsigned char>	m_cli_cert;	///< The client certificate, if one is provided (DER format)
-	std::vector<unsigned char>	m_cli_key;	///< The client private key, if one if provided (DER format)
-	const br_x509_certificate	m_cert;
-	const SSLClientParameters	m_params;
-
-	SSLClient<EthernetClient> m_client;		///< Underlying Ethernet SSLclient instance
+	EthernetClient m_base_client;
+	SSLClient m_client;		///< Underlying Ethernet SSLclient instance
 
 	byte			m_mac[6];				///< The Ethernet MAC address
 	IPAddress		m_ip;					///< The devices IP address
 	
 	bool			m_is_connected;			///< Whether or not ethernet initialized successfully
 	
+	SSLClient& get_client() override { return m_client; }
+	const SSLClient& get_client() const { return m_client; }
+
 public:
 	
 //==============================================================================
@@ -56,9 +56,7 @@ public:
 	Loom_Ethernet(	
 			const char* 			module_name	= "Ethernet",
 			const JsonArrayConst	mac			= JsonArray(),
-			const JsonArrayConst 	ip			= JsonArray(),
-			const char*				cli_cert	= nullptr,
-			const char*				cli_key		= nullptr
+			const JsonArrayConst 	ip			= JsonArray()
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -72,13 +70,6 @@ public:
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
-
-	// remember to close the socket!
-	ClientSession connect_to_domain(const char* domain) override;
-
-	// remember to close the socket!
-	ClientSession connect_to_ip(const IPAddress& ip, const uint16_t port) override;
-
 	/// Connect to internet
 	void connect() override;
 

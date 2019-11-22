@@ -8,7 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Loom_InternetPlat.h"\
+#include "Loom_InternetPlat.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::LoomInternetPlat(	
@@ -46,6 +46,81 @@ void LoomInternetPlat::write_http_request(Stream& client, const char* domain, co
 	if(body != nullptr) client.print(body);
 	client.print("\r\n");
 	// all ready to go!
+}
+
+///////////////////////////////////////////////////////////////////////////////
+LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* domain) {
+	// if we're not currently connected to the internet, try to bring it back
+	if (!is_connected()) connect();
+	if (!is_connected()) {
+		print_module_label();
+		LPrint("Did not attempt to connect, as we are not connected to the internet\n");
+		print_state();
+		return ClientSession();
+	}
+	// I guess we are connected! lets go
+	SSLClient& client = get_client();
+	// if the socket is somehow still open, close it
+	if (client.connected()) client.stop();
+	// and clear a write error if there is any
+	if (client.getWriteError()) client.clearWriteError();
+	// * the rainbow connection *
+	int status = client.connect(domain, 443);
+	if (!status) {
+		// log fail, attempt repair, and return
+		print_module_label();
+		LPrint("Connect failed with error ", client.getWriteError(), "\n");
+		print_state();
+		// if the underlying client is unhappy, we may need to reset the connection
+		if (client.getWriteError() == SSLClient::SSL_CLIENT_WRTIE_ERROR) {
+			print_module_label();
+			LPrint("Attempting to cycle the connection: ");
+			disconnect();
+			delay(500);
+			connect();
+			print_state();
+		}
+		return ClientSession();
+	}
+	// return a pointer to the client for data reception
+	return LoomInternetPlat::ClientSession(&client);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_ip(const IPAddress& ip, const uint16_t port) {
+	// if we're not currently connected to the internet, try to bring it back
+	if (!is_connected()) connect();
+	if (!is_connected()) {
+		print_module_label();
+		LPrint("Did not attempt to connect, as we are not connected to the internet\n");
+		print_state();
+		return ClientSession();
+	}
+	SSLClient& client = get_client();
+	// if the socket is somehow still open, close it
+	if (client.connected()) client.stop();
+	// and clear a write error if there is any
+	if (client.getWriteError()) client.clearWriteError();
+	// * the rainbow connection *
+	int status = client.connect(ip, port);
+	if (!status) {
+		// log fail, and return
+		print_module_label();
+		LPrint("Connect failed with error ", client.getWriteError(), "\n");
+		print_state();
+		// if the underlying client is unhappy, we may need to reset the connection
+		if (client.getWriteError() == SSLClient::SSL_CLIENT_WRTIE_ERROR) {
+			print_module_label();
+			LPrint("Attempting to cycle the connection: ");
+			disconnect();
+			delay(500);
+			connect();
+			print_state();
+		}
+		return ClientSession();
+	}
+	// return a pointer to the client for data reception
+	return LoomInternetPlat::ClientSession(&client);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -143,7 +218,3 @@ void LoomInternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) con
 	udp_dev.write(packet_buffer, NTP_PACKET_SIZE);
 	udp_dev.endPacket();
 }
-
-///////////////////////////////////////////////////////////////////////////////
-
-

@@ -74,7 +74,7 @@ This is the Doxygen generated documentation of the Loom library code.
 #include "Sensors/I2C/Loom_TSL2561.h"
 #include "Sensors/I2C/Loom_TSL2591.h"
 #include "Sensors/I2C/Loom_ZXGesture.h"
-
+#include "Sensors/I2C/Loom_STEMMA.h"
 ///////////////////////////////////////////////////////////////////////////////
 // SPI Sensors
 #include "Sensors/SPI/Loom_MAX31855.h"

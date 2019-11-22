@@ -18,7 +18,8 @@ Loom_WiFi::Loom_WiFi(
 	: LoomInternetPlat( "WiFi", Type::WiFi )
 	, SSID(ssid)
 	, pass(pass)
-	, client()
+	, m_base_client()
+	, m_client(m_base_client, TAs, (size_t)TAs_NUM, A7, 1, SSLClient::SSL_INFO)
 {
 	// Configure pins for Adafruit ATWINC1500 Feather
 	WiFi.setPins(8,7,4,2);      
@@ -40,8 +41,11 @@ Loom_WiFi::Loom_WiFi(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_WiFi::connect()
 {
+	// clear the write error
+	m_base_client.clearWriteError();
 	// Try to connect, attempting the connection up to 5 times (this number is arbitrary)
 	uint8_t attempt_count = 0;
+	uint8_t last_status = 0;
 	uint8_t status = 0;
 	do {
 		print_module_label();
@@ -54,6 +58,16 @@ void Loom_WiFi::connect()
 			status = WiFi.begin(SSID, pass);
 		}
 		attempt_count++;
+
+		// debug print!
+		if (last_status != status) {
+			print_module_label();
+			const char* text = m_wifi_status_to_string(status);
+			if (text != nullptr)
+				LPrint("Status changed to: ", text, '\n');
+			else
+				LPrint("Status changed to: ", status, '\n');
+		}
 		delay(2000);
 	} while (status != WL_CONNECTED && attempt_count < 5);
 
@@ -66,51 +80,16 @@ void Loom_WiFi::connect()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_WiFi::disconnect() {
+	// tell the wifi it's time to stop
+	WiFi.disconnect();
+	delay(200);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 bool Loom_WiFi::is_connected() const
 {
 	return WiFi.status() == WL_CONNECTED;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession Loom_WiFi::connect_to_domain(const char* domain)
-{
-	// if the socket is somehow still open, close it
-	if (client.connected()) client.stop();
-	// * the rainbow connection *
-	int status = client.connect(domain, 443);
-	if (!status) {
-		// log fail, and return
-		print_module_label();
-		LPrint("Wifi connect failed with error ", status, '\n');
-		return ClientSession();
-	}
-	else {
-		print_module_label();
-		LPrint("WiFi connected to domain: ", domain, '\n');
-	}
-	// return a pointer to the client for data reception
-	return LoomInternetPlat::ClientSession(&client);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession Loom_WiFi::connect_to_ip(const IPAddress& ip, const uint16_t port)
-{
-	// if the socket is somehow still open, close it
-	if (client.connected()) client.stop();
-	// * the rainbow connection *
-	int status = client.connect(ip, port);
-	if (!status) {
-		// log fail, and return
-		print_module_label();
-		LPrint("Wifi connect failed with error ", status, '\n');
-		return ClientSession();
-	}
-	else {
-		print_module_label();
-		LPrint("WiFi connected to IP'\n");
-	}
-	// return a pointer to the client for data reception
-	return LoomInternetPlat::ClientSession(&client);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -134,7 +113,12 @@ void Loom_WiFi::print_config() const
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_WiFi::print_state() const
 {
-	LoomInternetPlat::print_state();	
+	LoomInternetPlat::print_state();
+	const char* text = m_wifi_status_to_string(WiFi.status());
+	if (text != nullptr)
+		LPrintln("\tWireless state      :", text );	
+	else
+	LPrintln("\tWireless state      :", WiFi.status() );	
 	LPrintln("\tConnected:          : ", (is_connected()) ? "True" : "False" );
 	LPrintln("\tSSID:               : ", SSID );
 	LPrintln("\tRSSi:               : ", WiFi.RSSI(), " dBm" );
@@ -143,16 +127,19 @@ void Loom_WiFi::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi::package(JsonObject json)
-{
-	//JsonObject data = get_module_data_object(json, module_name);
-	auto ip = IPAddress(WiFi.localIP());
-	JsonArray tmp = json["id"].createNestedArray("ip");
-	tmp.add(ip[0]);
-	tmp.add(ip[1]);
-	tmp.add(ip[2]);
-	tmp.add(ip[3]);
-	//data["IP"] = WiFi.localIP();
+const char* Loom_WiFi::m_wifi_status_to_string(const uint8_t status) {
+	switch (status) {
+		case WL_NO_SHIELD: return "NO_SHIELD";
+		case WL_IDLE_STATUS: return "IDLE_STATUS";
+		case WL_NO_SSID_AVAIL: return "NO_SSID_AVAIL";
+		case WL_SCAN_COMPLETED: return "SCAN_COMPLETED";
+		case WL_CONNECTED: return "CONNECTED";
+		case WL_CONNECT_FAILED: return "CONNECT_FAILED";
+		case WL_CONNECTION_LOST: return "CONNECTION_LOST";
+		case WL_DISCONNECTED: return "DISCONNECTED";
+		// AP states (WL_AP_* and WL_PROVISIONING_*) are ignored for now
+		default: return nullptr;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

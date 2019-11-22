@@ -14,7 +14,8 @@
 #include "Loom_InternetPlat.h"
 #include <WiFi101.h>
 #include <WiFiUdp.h>
-
+#include "SSLClient.h"
+#include "Loom_Trust_Anchors.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -37,7 +38,11 @@ protected:
 	const String	SSID;	///< Host WiFi network name
 	const String	pass;	///< Host WiFi network password
 
-	WiFiSSLClient client;	///< SSLClient object for WiFi
+	WiFiClient m_base_client;	///< SSLClient object for WiFi
+	SSLClient m_client;		///< Underlying Wifi SSLclient instance
+
+	SSLClient& get_client() override { return m_client; }
+	const SSLClient& get_client() const override { return m_client; }
 
 public:
 
@@ -65,14 +70,11 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	// remember to close the socket!
-	ClientSession	connect_to_domain(const char* domain) override;
-
-	// remember to close the socket!
-	ClientSession	connect_to_ip(const IPAddress& ip, const uint16_t port) override;
-
 	/// Connect to internet
 	void			connect() override;
+
+	/// Disconnect from the internet
+	void 			disconnect() override;
 
 	/// Whether or not connected to internet
 	/// @return True if connect, false otherwise
@@ -83,8 +85,6 @@ public:
 	/// @returns A UDP socket for transmitting and recieving, remember to close the socket when you are done!
 	UDPPtr			open_socket(const uint port) override;
 
-	void			package(JsonObject json) override;
-
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -93,5 +93,6 @@ public:
 	void			print_state() const override;
 	
 private:
-
+	/// Converts wifi status codes (WL_*) into human readable strings
+	static const char* m_wifi_status_to_string(const uint8_t status);
 };
