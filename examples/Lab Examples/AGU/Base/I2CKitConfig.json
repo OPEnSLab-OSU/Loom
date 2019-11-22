@@ -36,6 +36,24 @@
     {
       "name": "Multiplexer",
       "params": "default"
+    },
+    {
+      "name": "WiFi",
+      "params": [
+        "<ssid>",
+        "<password>"
+      ]
+    },
+    {
+      "name": "GoogleSheets",
+      "params": [
+        "Goog",
+        7002,
+        "/macros/s/<your-script-id>/exec",
+        "<your-sheet-id>",
+        true,
+        "<your-tab-name>"
+      ]
     }
   ]
 }
