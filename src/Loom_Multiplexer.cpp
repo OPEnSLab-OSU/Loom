@@ -73,9 +73,10 @@ Loom_Multiplexer::Loom_Multiplexer(
 	, sensors(new LoomI2CSensor*[num_ports])
 	, control_port(0)
 {
-	// Begin I2C 
+    
+    // Begin I2C
 	Wire.begin();
-
+    
 	// Create sensor array of 'num_ports' size
 	// sensors = new LoomI2CSensor*[num_ports];
 
@@ -83,9 +84,8 @@ Loom_Multiplexer::Loom_Multiplexer(
 	for (auto i = 0; i < num_ports; i++) {
 		sensors[i] = nullptr;
 	}
-
-	control_address = get_i2c_on_port(control_port);
-
+    
+    i2c_conflicts = find_i2c_conflicts();
 	// Update sensor list and display   -- currently removed because Mux should be linked to DeviceManager before polling sensors
 	// refresh_sensors();
 	// print_state();
@@ -113,7 +113,7 @@ Loom_Multiplexer::~Loom_Multiplexer()
 ///////////////////////////////////////////////////////////////////////////////
 LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, const uint8_t port)
 {
-	if(i2c_address != control_address) {
+	
 		LPrintln("Adding Sensor at address:", i2c_address);
 		switch (i2c_address) {
 			case 0x10 : return new Loom_ZXGesture(i2c_address, port);	// ZXGesture
@@ -161,9 +161,7 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, 
 
 			default : return nullptr;
 		}
-	} else {
-		return nullptr;
-	}
+
 }
 
 
@@ -253,6 +251,9 @@ void Loom_Multiplexer::refresh_sensors()
 {
 	byte previous, current;
 
+    // update conflicts
+    i2c_conflicts = find_i2c_conflicts();
+    
 	for (auto i = 0; i < num_ports; i++) {
 
 		// LPrintln("TCA Port: ", i);
@@ -263,7 +264,7 @@ void Loom_Multiplexer::refresh_sensors()
 		// LPrintln_Hex(previous);
 
 		current = get_i2c_on_port(i);
-
+        
 		// LPrint("Current I2C on port ", i, " : ");
 		// LPrintln_Dec_Hex(current);
 
@@ -332,9 +333,8 @@ byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port) const
 	for (auto j = 0; j < sizeof(known_addresses)/sizeof(known_addresses[0]); j++) {
 		
 		addr = known_addresses[j];
-		
-		if (addr == this->i2c_address) continue;
-
+        if (i2c_conflict(addr) || addr == this->i2c_address) {continue;}
+        
 		Wire.beginTransmission(addr);
 		byte error = Wire.endTransmission();
 
@@ -344,6 +344,40 @@ byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port) const
 	return 0x00; // No sensor found
 }
 
+bool Loom_Multiplexer::i2c_conflict(byte addr) const {
+    for (byte conflict : i2c_conflicts) {
+        
+        if (conflict == addr) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+std::vector<byte> Loom_Multiplexer::find_i2c_conflicts() {
+    
+    LPrintln("Finding i2c conflicts dynamically.");
+    
+    tca_select(control_port);
+    std::vector<byte> i2c_conflicts;
+    byte addr;
+    for (auto j = 0; j < sizeof(known_addresses)/sizeof(known_addresses[0]); j++) {
+        
+        addr = known_addresses[j];
+        
+        Wire.beginTransmission(addr);
+        byte error = Wire.endTransmission();
+
+        if (error == 0) {
+            LPrint("Found i2c conflict at address ");
+            LPrintln(addr);
+            i2c_conflicts.push_back(addr);
+        }
+    }
+    
+    return i2c_conflicts;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::tca_select(const uint8_t port) const 
