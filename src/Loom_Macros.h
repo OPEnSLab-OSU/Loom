@@ -31,6 +31,8 @@
 #define EXPAND_ARRAY11(x) EXPAND_ARRAY10(x), x[10]
 #define EXPAND_ARRAY12(x) EXPAND_ARRAY11(x), x[11]
 #define EXPAND_ARRAY13(x) EXPAND_ARRAY12(x), x[12]
+#define EXPAND_ARRAY14(x) EXPAND_ARRAY13(x), x[13]
+#define EXPAND_ARRAY15(x) EXPAND_ARRAY14(x), x[14]
 /// \endcond
 
 /// Expand an array into individual arguments.
