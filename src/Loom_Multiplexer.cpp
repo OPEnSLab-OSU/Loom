@@ -71,7 +71,7 @@ Loom_Multiplexer::Loom_Multiplexer(
 	, num_ports(num_ports)
 	, update_period(update_period)
 	, sensors(new LoomI2CSensor*[num_ports])
-	, control_port(num_ports)
+	, control_port(num_ports-1)
 {
     
     // Begin I2C
@@ -356,9 +356,7 @@ bool Loom_Multiplexer::i2c_conflict(byte addr) const {
 }
 
 std::vector<byte> Loom_Multiplexer::find_i2c_conflicts() {
-    
-    LPrintln("Finding i2c conflicts dynamically.");
-    
+        
     tca_select(control_port);
     std::vector<byte> i2c_conflicts;
     byte addr;
@@ -370,8 +368,6 @@ std::vector<byte> Loom_Multiplexer::find_i2c_conflicts() {
         byte error = Wire.endTransmission();
 
         if (error == 0) {
-            LPrint("Found i2c conflict at address ");
-            LPrintln(addr);
             i2c_conflicts.push_back(addr);
         }
     }
