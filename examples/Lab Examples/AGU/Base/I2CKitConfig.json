@@ -4,14 +4,6 @@
   },
   "components": [
     {
-      "name": "Analog",
-      "params": "default"
-    },
-    {
-      "name": "Digital",
-      "params": "default"
-    },
-    {
       "name": "OLED",
       "params": [
         "true",
