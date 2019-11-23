@@ -72,7 +72,7 @@ protected:
 	uint8_t control_port;			//< Mux port to be used as a control
 
 	unsigned long	last_update_time;	///< When the sensor list was last updated
-    std::vector<byte> i2c_conflicts;
+    std::vector<byte> i2c_conflicts; ///< List of I2C address conflicts
     
 public:
 
@@ -181,8 +181,14 @@ private:
 	/// @return		The I2C address of sensor, 0x00 if no sensor found
 	byte			get_i2c_on_port(const uint8_t port) const;
     
+    /// Checks for an I2C conflict with this address
+    /// @param[in] address              The I2C address to check for conflicts
+    /// @return     True if there is a conflict, false otherwise
     bool i2c_conflict(byte address) const;
 
+    /// Find all I2C conflicts
+    /// Loops through known addresses and checks if they are being used outside of the multiplexer
+    /// @return     A vector of conflicting I2C addresses
     std::vector<byte> find_i2c_conflicts();
 };
 

@@ -333,6 +333,8 @@ byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port) const
 	for (auto j = 0; j < sizeof(known_addresses)/sizeof(known_addresses[0]); j++) {
 		
 		addr = known_addresses[j];
+        
+        // if this address is on the conflict list, skip it
         if (i2c_conflict(addr) || addr == this->i2c_address) {continue;}
         
 		Wire.beginTransmission(addr);
@@ -360,6 +362,7 @@ std::vector<byte> Loom_Multiplexer::find_i2c_conflicts() {
     tca_select(control_port);
     std::vector<byte> i2c_conflicts;
     byte addr;
+    // go through all the potentially conflicting sensors and find the ones that respond to blacklist them.
     for (auto j = 0; j < sizeof(known_addresses)/sizeof(known_addresses[0]); j++) {
         
         addr = known_addresses[j];
