@@ -102,7 +102,7 @@ Loom_Multiplexer::Loom_Multiplexer(JsonArrayConst p)
 Loom_Multiplexer::~Loom_Multiplexer() 
 {
 	// Free any sensors
-	for (auto i = 0; i < num_ports; i++) {
+	for (auto i = 0U; i < num_ports; i++) {
 		if (sensors[i] != nullptr) {
 			delete sensors[i];
 		}
@@ -182,7 +182,7 @@ void Loom_Multiplexer::print_state() const
 	print_module_label();
 	LPrintln("Attached Sensors:");
 
-	for (auto i = 0; i < num_ports; i++) {
+	for (auto i = 0U; i < num_ports; i++) {
 		LPrint("\tPort ", i, ": ");
 		if (sensors[i] != nullptr) {
 			LPrint_Dec_Hex(sensors[i]->get_i2c_address());
@@ -199,7 +199,7 @@ void Loom_Multiplexer::measure()
 {
 	refresh_sensors();
 
-	for (auto i = 0; i < num_ports; i++) {
+	for (auto i = 0U; i < num_ports; i++) {
 		if (sensors[i] != nullptr) {
 			tca_select(i);
 			sensors[i]->measure();
@@ -210,7 +210,7 @@ void Loom_Multiplexer::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::print_measurements() const
 {
-	for (auto i = 0; i < num_ports; i++) {
+	for (auto i = 0U; i < num_ports; i++) {
 		if (sensors[i] != nullptr) {
 			tca_select(i);
 			sensors[i]->print_measurements();
@@ -221,7 +221,7 @@ void Loom_Multiplexer::print_measurements() const
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::package(JsonObject json)
 {
-	for (auto i = 0; i < num_ports; i++) {
+	for (auto i = 0U; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
 			tca_select(i);
 			sensors[i]->package(json);
@@ -238,7 +238,7 @@ void Loom_Multiplexer::get_sensor_list(JsonObject json)
 	JsonObject list = json.createNestedObject("MuxSensors");
 
 	char tmp[3];
-	for (auto i = 0; i < num_ports; i++) {
+	for (auto i = 0U; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
 			itoa(i, tmp, 10);
 			list[tmp] = sensors[i]->get_module_name();
@@ -330,12 +330,12 @@ byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port) const
 
 	// Iterate through known addresses try to get confirmation from sensor
 	// for (auto addr = 1; addr <= 127; addr++) {
-	for (auto j = 0; j < sizeof(known_addresses)/sizeof(known_addresses[0]); j++) {
+	for (auto j = 0U; j < sizeof(known_addresses)/sizeof(known_addresses[0]); j++) {
 		
 		addr = known_addresses[j];
         
         // if this address is on the conflict list, skip it
-        if (i2c_conflict(addr) || addr == this->i2c_address) {continue;}
+        if (i2c_conflict(addr) || addr == this->i2c_address) { continue; }
         
 		Wire.beginTransmission(addr);
 		byte error = Wire.endTransmission();
@@ -347,13 +347,9 @@ byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port) const
 }
 
 bool Loom_Multiplexer::i2c_conflict(byte addr) const {
-    for (byte conflict : i2c_conflicts) {
-        
-        if (conflict == addr) {
+    for (byte conflict : i2c_conflicts)
+        if (conflict == addr)
             return true;
-        }
-    }
-    
     return false;
 }
 
