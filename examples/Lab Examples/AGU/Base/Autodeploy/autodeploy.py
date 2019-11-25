@@ -10,6 +10,7 @@ from functools import partial
 from colorama import init, Fore, Back
 import multiprocessing
 import subprocess
+import threading
 import time
 
 init(autoreset=True)
@@ -52,12 +53,16 @@ def build_sketch(cli, bin_path, sketch):
 def f(printed, level):
     return str(level.value) + printed + str(Level.INFO.value)
 
+CLICK_MUTEX = threading.Lock()
+def print_serial_status(level, address, msg):
+    with CLICK_MUTEX:
+        click.echo(f'{ f(address, level) }: {msg}')
+
 def get_serial_ports(cli, exclude):
     boards_all = cli.board.list()
     print(boards_all)
-    boards_filtered = filter(lambda board: 
-        board["address"] not in exclude and board["boards"][0]["FQBN"] is FQBN, boards_all)
-    return list(map(lambda board: board["address"], boards_all))
+    return [board["address"] for board in boards_all if
+        board["address"] not in exclude and FQBN in board["boards"][0]["FQBN"]]
 
 def poll_serial_port(address):
     try:
@@ -69,12 +74,12 @@ def poll_serial_port(address):
             try:
                 status = serial_port.readline().decode()
             except serial.SerialTimeoutException:
-                click.echo(f'{ f(address, Level.WARN) }: No status from port')
+                print_serial_status(Level.WARN, address, 'No status from port')
                 return Status.NOT_FLASHED
             # else if we get an invalid status, same reason
             result = STATUS_RES.parse(status)
             if result is None:
-                click.echo(f'{ f(address, Level.WARN) }: Invalid status: "{ status.rstrip() }"')
+                print_serial_status(Level.WARN, address, f'Invalid status: "{ status.rstrip() }"')
                 return Status.NOT_FLASHED
             # else the device is flashed! check the status
             click.echo(f'{ f(address, Level.OK) }: Mode: '
@@ -86,26 +91,26 @@ def poll_serial_port(address):
                 return Status.OK
     except serial.SerialTimeoutException:
         # uh oh, looks like the serial port didn't open
-        click.echo(f'{ f(address, Level.WARN) }: Hung, or not compiled with Serial.')
+        print_serial_status(Level.WARN, address, f'Hung, or not compiled with Serial.')
         return Status.HUNG
 
 def reset_board_bootloader(address):
     # stolen from http://markparuzel.com/?p=230
     ser = serial.Serial(timeout=2, inter_byte_timeout=2)
     ser.port = address
-    ser.open(); 
+    ser.open()
     ser.baudrate = 1200 # This is magic.
     ser.rts = True
     ser.dtr = False
     ser.close()
 
 def upload_serial_port(bossac_path, bin_path, address):
-    click.echo(f'{ f(address, Level.INFO) }: Starting upload...')
+    print_serial_status(Level.INFO, address, 'Starting upload...')
     result = subprocess.run([bossac_path, f'--port={address}', '--force_usb_port=true', '-e', '-w', '-v', '-R', bin_path], capture_output=True)
     if result.returncode is not 0:
-        click.echo(f'{ f(address, Level.ERROR) }: Upload failed with error: {result.stderr}')
+        print_serial_status(Level.ERROR, address, f'Upload failed with error: {result.stderr}')
         return False
-    click.echo(f'{ f(address, Level.OK) }: Upload succeded')
+    print_serial_status(Level.OK, address, 'Upload succeded')
     return True
 
 # Click setup and commands:
@@ -140,23 +145,31 @@ def upload(ports_exclude, disable_diagnostics, cli_path, bossac_path, bin_path, 
         return
     # get every serial port
     ports = get_serial_ports(ARDUINO, ports_exclude)
-    # for port in ports:
-    #     poll_serial_port(port)
-    click.echo(f("Uploading sketch to all ports...", Level.INFO))
-    # reset every board into bootloader mode
+    if len(ports) == 0:
+        click.echo(f("No ports found!", Level.ERROR))
     for port in ports:
-        reset_board_bootloader(port)
-    time.sleep(1)
-    # find all the ports created from that, and use those as upload ports
-    upload_ports = get_serial_ports(ARDUINO, ports_exclude)
-    # upload to all devices in parellel
-    with multiprocessing.Pool(processes=5) as pool:
-        upload_bound = partial(upload_serial_port, bossac_path, bin_path)
-        async_tasks = []
-        for port in upload_ports:
-            async_tasks.append(pool.apply_async(upload_bound, (port,)))
-        result = list(map(lambda task: task.get(15), async_tasks))
-        print(result)
+        poll_serial_port(port)
+    click.echo(f("Uploading sketch to all ports...", Level.INFO))
+    attempts = 0
+    while len(ports) > 0 and attempts < 4:
+        # reset every board into bootloader mode
+        for port in ports:
+            reset_board_bootloader(port)
+        time.sleep(2)
+        # find all the ports created from that, and use those as upload ports
+        upload_ports = get_serial_ports(ARDUINO, ports_exclude)
+        # upload to all devices in parellel
+        result = []
+        with multiprocessing.Pool(processes=5) as pool:
+            upload_bound = partial(upload_serial_port, bossac_path, bin_path)
+            async_tasks = []
+            for port in upload_ports:
+                async_tasks.append(pool.apply_async(upload_bound, (port,)))
+            result = [task.get(15) for task in async_tasks]
+            
+        # filter the ports that didn't work, and try again
+        ports = list(port for i,port in enumerate(upload_ports) if result[i] is False)
+        attempts = attempts + 1
 
 @loom_autodeploy.command(short_help='Run diagnostics on all Loom kits.')
 @click.option('--ports-exclude', '-e', default=None,
