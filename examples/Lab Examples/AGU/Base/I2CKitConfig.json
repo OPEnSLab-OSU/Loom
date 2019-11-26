@@ -1,6 +1,8 @@
 {
   "general": {
-    "name:": "I2CKit"
+    "name:": "I2CKit",
+    "instance" ${instance},
+    "interval": 1000
   },
   "components": [
     {
@@ -40,19 +42,31 @@
     {
       "name": "WiFi",
       "params": [
-        "<ssid>",
-        "<password>"
+        "${wifi_ssid}",
+        "${wifi_password}"
+      ]
+    },
+    {
+      "name": "Spool",
+      "params": [
+          "Spool",
+          7002,
+          "spool.open-sensing.org",
+          "/api/device/data",
+          "${spool_coord_id}",
+          "${spool_dev_id}",
+          "${spool_cert}",
+          "${spool_key}"
       ]
     },
     {
       "name": "GoogleSheets",
       "params": [
-        "Goog",
-        7002,
-        "/macros/s/<your-script-id>/exec",
-        "<your-sheet-id>",
-        true,
-        "<your-tab-name>"
+          "Goog",
+          7002,
+          "${sheets_url}",
+          "${sheet_id}",
+          true
       ]
     }
   ]

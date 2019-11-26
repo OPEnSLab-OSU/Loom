@@ -13,6 +13,7 @@ import multiprocessing
 import subprocess
 import threading
 import time
+import json
 
 init(autoreset=True)
 
@@ -24,12 +25,13 @@ BAUD = 115200
 
 STATUS = b'R\r\n'
 DIAGNOSE = b'D\r\n'
-# configuration (JSON object), Spool coordinator ID, Spool device ID, Spool public key, Spool private key
-FLASH = 'F:"{json}","{coord_id}","{dev_id}","{pub_key}","{priv_key}"\r\n'
+FLASH_MODE = b'M\r\n'
 START_LOOM = b'S\r\n'
 
 # F:OK
-FLASH_RES = b'F:OK'
+FLASH_RES = b'F:OK\r\n'
+# M:OK
+FLASH_MODE_RES = b'M:OK\r\n'
 # R:(Device name),(Device in bootloader mode, 0 or 1),(Last Build Time ctime),(Last Bootloader Time ctime)\r\n
 STATUS_RES = parse.compile('R:"{device_name:l}",{mode_boot:d=1},"{build_time:tc}","{boot_time:tc}"\r\n')
 # D:(Sensor name),(success, 0 or 1),(string error)\r\n
@@ -41,7 +43,7 @@ class Status(enum.Enum):
     OK = 0
     BOOTLOADER = 1
     NOT_FLASHED = 2
-    LOAD_READY = 3
+    CONFIG_READY = 3
     HUNG = 4
 
 class Type(enum.Enum):
@@ -119,6 +121,19 @@ def poll_serial_port(address, pid):
         print_serial_status(Level.WARN, address, f'Hung, or not compiled with Serial.')
         return Status.HUNG
 
+def set_serial_port_flash_mode(address):
+    with serial.Serial(address, BAUD, timeout=2, write_timeout=2, inter_byte_timeout=2) as serial_port:
+        try:
+            serial_port.write(FLASH_MODE)
+            status = serial_port.readline()
+            if status != FLASH_MODE_RES:
+                print_serial_status(Level.ERROR, f'Recieved invalid status {status.decode()}')
+                return False
+        except serial.SerialTimeoutException:
+            print_serial_status(Level.ERROR, address, 'Timeout when setting to flash mode')
+            return False
+    return True
+
 def reset_board_bootloader(address):
     # stolen from http://markparuzel.com/?p=230
     ser = serial.Serial(timeout=2, inter_byte_timeout=2)
@@ -136,6 +151,9 @@ def upload_serial_port(bossac_path, bin_path, address):
         return False
     print_serial_status(Level.OK, address, 'Upload succeded')
     return True
+
+def flash_config(address, json):
+    pass
 
 # Click setup and commands:
 @click.group()
@@ -233,6 +251,7 @@ def upload(ports_exclude, disable_diagnostics, cli_path, bossac_path, bin_path, 
     # check the status of every serial port
     for address,pid in get_serial_ports(ports_exclude):
         poll_serial_port(address, pid)
+    return True
 
 @loom_autodeploy.command(short_help='Upload configuration to all Loom kits.')
 @click.option('--ports-exclude', '-e', default=None,
@@ -241,8 +260,43 @@ def upload(ports_exclude, disable_diagnostics, cli_path, bossac_path, bin_path, 
               help='Location of the arduino-cli to use')
 @click.argument('config', type=click.File('r'))
 @click.argument('variables', type=click.File('r'))
-def flash()
-
+def flash(ports_exclude, arduino_cli_location, config, variables):
+    # check that the varibles file is valid JSON
+    varient_json = None
+    try:
+        varient_json = json.load(variables)
+    except json.JSONDecodeError as e:
+        click.echo(f(f'Invalid json, error: {e}', Level.ERROR))
+        return False
+    # get the number of ports, and check the status of each
+    ports = get_serial_ports(ports_exclude)
+    # get every serial port
+    click.echo(f("Polling all serial ports...", Level.INFO))
+    ports = get_serial_ports(ports_exclude)
+    if len(ports) == 0:
+        click.echo(f("No ports found!", Level.ERROR))
+    # check the status of every serial port
+    all_status = [(address, poll_serial_port(address, pid)) for address, pid in ports]
+    # set all the ports into load mode, and ignore ports in bootloader mode or with an incorrect state
+    load_ports = []
+    for address, status in all_status:
+        if status == Status.CONFIG_READY:
+            load_ports.append(address)
+        elif status == Status.OK:
+            if set_serial_port_flash_mode(address)
+                load_ports.append(address)
+            else:
+               print_serial_status(Level.WARN, f'Ignoring port {address}, could not set to flash mode') 
+        else:
+            print_serial_status(Level.WARN, f'Ignoring port {address} with status {status}')
+    if len(load_ports) == 0:
+        click.echo(f("Found no valid ports!", Level.INFO))
+        return True
+    # flash the config information
+    click.echo(f("Sending config...", Level.INFO))
+    for address,config in zip(load_ports, varient_json["varients"]):
+        pass
+        # merge the global JSON with the varient JSON
 
 @loom_autodeploy.command(short_help='Run diagnostics on all Loom kits.')
 @click.option('--ports-exclude', '-e', default=None,
