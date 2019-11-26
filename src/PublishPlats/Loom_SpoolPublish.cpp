@@ -34,7 +34,8 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 		const LoomModule::Type	internet_type,
 		const char*				spool_domain,
 		const char*				device_data_endpoint,
-		const char*				device_id,
+		const char*             coordinator_id,
+        const char*             device_id
 		const char* 			cli_cert,
 		const char*				cli_key
 	) 
@@ -42,6 +43,7 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 	, m_spool_domain(spool_domain)
 	, m_device_data_endpoint(device_data_endpoint)
 	, m_device_id(device_id)
+    , m_coordinator_id(coordinator_id)
 	, m_cli_cert(SSLObj::make_vector_pem(cli_cert, (cli_cert ? strlen(cli_cert) : 0)))
 	, m_cli_key(make_key_from_asn1(SSLObj::make_vector_pem(cli_key, (cli_key ? strlen(cli_key) : 0))))
 	, m_cert{ const_cast<unsigned char*>(m_cli_cert.data()), m_cli_cert.size() }
@@ -59,7 +61,8 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 
 /////////////////////////////////////////////////////////////////////
 Loom_SpoolPublish::Loom_SpoolPublish(JsonArrayConst p)
-: Loom_SpoolPublish( p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5], p[6] ) {}
+: Loom_SpoolPublish(p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5], p[6], p[7] ) {}
+
 
 /////////////////////////////////////////////////////////////////////
 void Loom_SpoolPublish::print_config() const
@@ -70,11 +73,11 @@ void Loom_SpoolPublish::print_config() const
 	print_module_label();
 	LPrint("URL: ", m_device_data_endpoint, '\n');
 	print_module_label();
-	LPrint("Device ID: ", m_device_id, '\n');
+	LPrint("Coordinator Id: ", m_coordinator_id, '\n');
 }
 
 /////////////////////////////////////////////////////////////////////
-bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat* plat) 
+bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat* plat)
 {
 	print_module_label();
 	// serialize the data, checking for an error
@@ -104,15 +107,17 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 	network -> println("Content-Type: application/json");
 	network -> print("Content-Length: ");
 	// Equivalent to:
-	// strlen("{\"device_id\":\"") + m_device_id + strlen("\",\"data\":") + json + strlen("}")
-	network -> println(14 + m_device_id.length() + 9 + measureJson(json) + 1);
+	// strlen("\",\"device_id\":") + m_device_id + strlen("{\"coordinator_id\":\"") + m_coordinator_id + strlen("\",\"data\":") + json + strlen("}")
+	network -> println(14 + m_device_id.length() + 19 + m_coordinator_id.length() + 9 + measureJson(json) + 1);
 	network -> print("Host: ");
 	network -> println(m_spool_domain);
 
 	//print the body
 	network -> println();
-	network -> print("{\"device_id\":\"");
-	network -> print(m_device_id);
+	network -> print("{\"coordinator_id\":\"");
+	network -> print(m_coordinator_id);
+    network -> print("\",\"device_id\":");
+    network -> print(m_device_id);
 	network -> print("\",\"data\":");
 	
 	serializeJson(json, *network);
