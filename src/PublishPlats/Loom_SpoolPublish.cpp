@@ -35,7 +35,7 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 		const char*				spool_domain,
 		const char*				device_data_endpoint,
 		const char*             coordinator_id,
-        const char*             device_id
+        const char*             device_id,
 		const char* 			cli_cert,
 		const char*				cli_key
 	) 
