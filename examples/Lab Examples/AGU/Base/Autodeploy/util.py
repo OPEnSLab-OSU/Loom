@@ -146,11 +146,11 @@ def upload_serial_port(bossac_path, bin_path, address):
     print_serial_status(Level.OK, address, 'Upload succeded')
     return True
 
-def flash_config(address, send_json):
+def flash_config(address, sub_json, config):
     # echo!
-    print_serial_status(Level.INFO, address, f'Sending values "{json.dumps(send_json)}"')
+    print_serial_status(Level.INFO, address, f'Sending values "{json.dumps(sub_json)}"')
     # send all these key/value pairs to the device
-    send_bytes = bytes('F:' + ','.join([f'"{key}":"{value}"' for key,value in send_json.items()]) + '\r\n', 'utf8')
+    send_bytes = bytes(f'F:\'{config}\',' + ','.join([f'\'{key}\':\'{value}\'' for key,value in sub_json.items()]) + '\r\n', 'utf8')
     return send_serial_command(address, send_bytes, FLASH_RES)
 
              

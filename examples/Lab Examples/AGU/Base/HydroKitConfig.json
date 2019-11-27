@@ -1,7 +1,7 @@
 {
   "general": {
     "name:": "HydroKit",
-    "instance" ${instance},
+    "instance": ${instance},
     "interval": 1000
   },
   "components": [

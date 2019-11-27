@@ -116,8 +116,8 @@ def upload(ports_exclude, disable_diagnostics, cli_path, bossac_path, bin_path, 
               help='Location of the arduino-cli to use')
 @click.option('--force-no-start', '-s', default=False
               help='Don\'t start the sketch after sending it to the device')
-@click.argument('config', type=click.File('r'))
-@click.argument('variables', type=click.File('r'))
+@click.argument('config', type=click.File('r', encoding="utf8"))
+@click.argument('variables', type=click.File('r', encoding="utf8"))
 """
 def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables):
     # check that the varibles file is valid JSON
@@ -159,10 +159,10 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
     if abs(diff) > 0:
         if diff < 0:
             click.echo(f(f'Ignoring excess ports: '
-                + ', '.join([address for i,address in load_ports if i >= len(varient_json["varients"])]), Level.WARN))
+                + ', '.join([address for i,address in enumerate(load_ports) if i >= len(varient_json["varients"])]), Level.WARN))
         else:
             click.echo(f(f'Ignoring excess varients: '
-                + ', '.join([json.dumps(var) for i,var in varient_json["varients"] if i >= len(load_ports)]), Level.WARN))
+                + ', '.join([json.dumps(var) for i,var in enumerate(varient_json["varients"]) if i >= len(load_ports)]), Level.WARN))
     # flash!
     now = time.ctime()
     results = []
@@ -171,10 +171,10 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
         device_config = {**varient_json["global"], **varient}
         device_config["stamp"] = now
         # send the config
-        results.append(flash_config(address, device_config))
+        results.append(flash_config(address, device_config, "".join(config.read().split())))
     # start the sketch, if requested
     if force_no_start != True:
-        for i,address in enumerate(local_ports):
+        for i,address in enumerate(load_ports):
             # for every device that succeded, start it, and fail if it fails to start
             if results[i] == True:
                 if send_serial_command(address, START_LOOM, START_RES) == False:
