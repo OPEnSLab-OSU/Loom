@@ -3,157 +3,11 @@
 # Author: Noah Koontz
 import click
 import pyduinocli
-import serial
-from serial.tools.list_ports import comports
-import parse
-import enum
-from functools import partial
-from colorama import init, Fore, Back
 import multiprocessing
-import subprocess
-import threading
 import time
 import json
-
-init(autoreset=True)
-
-FQBN = "adafruit:samd:adafruit_feather_m0"
-PID_SKETCH = 32779
-PID_BOOTLOADER = 11
-VID = 9114
-BAUD = 115200
-
-STATUS = b'R\r\n'
-DIAGNOSE = b'D\r\n'
-FLASH_MODE = b'M\r\n'
-START_LOOM = b'S\r\n'
-
-# F:OK
-FLASH_RES = b'F:OK\r\n'
-# M:OK
-FLASH_MODE_RES = b'M:OK\r\n'
-# R:(Device name),(Device in bootloader mode, 0 or 1),(Last Build Time ctime),(Last Bootloader Time ctime)\r\n
-STATUS_RES = parse.compile('R:"{device_name:l}",{mode_boot:d=1},"{build_time:tc}","{boot_time:tc}"\r\n')
-# D:(Sensor name),(success, 0 or 1),(string error)\r\n
-DIAGNOSE_RES = parse.compile('D:"{sensor_name:l}",{success:d=1},"{error:l}"\r\n')
-# S:OK
-START_RES = b'S:OK\r\n'
-
-class Status(enum.Enum):
-    OK = 0
-    BOOTLOADER = 1
-    NOT_FLASHED = 2
-    CONFIG_READY = 3
-    HUNG = 4
-
-class Type(enum.Enum):
-    ANY = 0
-    BOOTLOADER_ONLY = 1
-    SKETCH_ONLY = 2
-
-class Level(enum.Enum):
-    OK = Back.GREEN + Fore.BLACK
-    INFO = Back.RESET + Fore.RESET
-    WARN = Back.YELLOW + Fore.BLACK
-    ERROR = Back.RED + Fore.BLACK
-
-# functions to find and check serial ports
-def build_sketch(cli, bin_path, sketch):
-    """./arduino-cli/arduino-cli.exe compile -b adafruit:samd:adafruit_feather_m0 -o loom.bin ../../Base"""
-    try:
-        cli.compile(sketch, fqbn=FQBN, output=bin_path)
-    except pyduinocli.errors.arduinoerror.ArduinoError as e:
-        return e
-    return True
-
-def f(printed, level):
-    return str(level.value) + printed + str(Level.INFO.value)
-
-CLICK_MUTEX = threading.Lock()
-def print_serial_status(level, address, msg):
-    with CLICK_MUTEX:
-        click.echo(f'{ f(address, level) }: {msg}')
-        time.sleep(0.25)
-
-def get_serial_ports(exclude):
-    boards_all = comports()
-    # get the COM port, if the PID matches the sketch or bootloader and the VID is adafruit
-    return [ (board.device, board.pid) for board in boards_all 
-        if board.device not in exclude
-        and board.vid == VID
-        and (board.pid == PID_SKETCH or board.pid == PID_BOOTLOADER)]
-
-def poll_serial_port(address, pid):
-    try:
-        if pid == PID_BOOTLOADER:
-            print_serial_status(Level.INFO, address, 'Bootloader mode')
-            return Status.BOOTLOADER
-        # else poll the device
-        elif pid == PID_SKETCH:
-            with serial.Serial(address, BAUD, timeout=2, write_timeout=2, inter_byte_timeout=2) as serial_port:
-                # poll the device
-                serial_port.write(STATUS)
-                status = None
-                # if the read times out, the device probably just isn't flashed
-                try:
-                    status = serial_port.readline().decode()
-                except serial.SerialTimeoutException:
-                    print_serial_status(Level.WARN, address, 'No status from port')
-                    return Status.NOT_FLASHED
-                # else if we get an invalid status, same reason
-                result = STATUS_RES.parse(status)
-                if result is None:
-                    print_serial_status(Level.WARN, address, f'Invalid status: "{ status.rstrip() }"')
-                    return Status.NOT_FLASHED
-                # else the device is flashed! check the status
-                print_serial_status(Level.INFO, address, 'Mode: '
-                    + ("Bootloader" if result["mode_boot"] else "Sketch")
-                    + f', Built: { result["build_time"] }, Boot: { result["boot_time"] }')
-                if result["mode_boot"]:
-                    return Status.LOAD_READY
-                else:
-                    return Status.OK
-        else:
-            print_serial_status(Level.ERROR, address, f'Unknown PID {pid}')
-            return Status.HUNG
-    except serial.SerialTimeoutException:
-        # uh oh, looks like the serial port didn't open
-        print_serial_status(Level.WARN, address, f'Hung, or not compiled with Serial.')
-        return Status.HUNG
-
-def set_serial_port_flash_mode(address):
-    with serial.Serial(address, BAUD, timeout=2, write_timeout=2, inter_byte_timeout=2) as serial_port:
-        try:
-            serial_port.write(FLASH_MODE)
-            status = serial_port.readline()
-            if status != FLASH_MODE_RES:
-                print_serial_status(Level.ERROR, f'Recieved invalid status {status.decode()}')
-                return False
-        except serial.SerialTimeoutException:
-            print_serial_status(Level.ERROR, address, 'Timeout when setting to flash mode')
-            return False
-    return True
-
-def reset_board_bootloader(address):
-    # stolen from http://markparuzel.com/?p=230
-    ser = serial.Serial(timeout=2, inter_byte_timeout=2)
-    ser.port = address
-    ser.open()
-    ser.baudrate = 1200 # This is magic.
-    ser.rts = True
-    ser.dtr = False
-    ser.close()
-
-def upload_serial_port(bossac_path, bin_path, address):
-    result = subprocess.run([bossac_path, f'--port={address}', '--force_usb_port=true', '-e', '-w', '-v', '-R', bin_path], capture_output=True)
-    if result.returncode != 0:
-        print_serial_status(Level.ERROR, address, f'Upload failed with error: {result.stderr}')
-        return False
-    print_serial_status(Level.OK, address, 'Upload succeded')
-    return True
-
-def flash_config(address, json):
-    pass
+from functools import partial
+from util import *
 
 # Click setup and commands:
 @click.group()
@@ -162,6 +16,7 @@ def loom_autodeploy():
     Automatically uploads and configures AGU Loom Kits as fast as possible.
     """
     pass
+
 """
 @loom_autodeploy.command(short_help='Upload the Base sketch and configuration to a Loom Kit, and run diagnostics on all kits.')
 @click.option('--ports-exclude', '-e', default=[], multiple=True,
@@ -253,14 +108,18 @@ def upload(ports_exclude, disable_diagnostics, cli_path, bossac_path, bin_path, 
         poll_serial_port(address, pid)
     return True
 
+"""
 @loom_autodeploy.command(short_help='Upload configuration to all Loom kits.')
 @click.option('--ports-exclude', '-e', default=None,
               help='COM ports to exclude during the upload process')
 @click.option('--arduino-cli-location', '-a', type=click.Path(exists=True, dir_okay=False), default="./arduino-cli/arduino-cli.exe",
               help='Location of the arduino-cli to use')
+@click.option('--force-no-start', '-s', default=False
+              help='Don\'t start the sketch after sending it to the device')
 @click.argument('config', type=click.File('r'))
 @click.argument('variables', type=click.File('r'))
-def flash(ports_exclude, arduino_cli_location, config, variables):
+"""
+def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables):
     # check that the varibles file is valid JSON
     varient_json = None
     try:
@@ -275,6 +134,7 @@ def flash(ports_exclude, arduino_cli_location, config, variables):
     ports = get_serial_ports(ports_exclude)
     if len(ports) == 0:
         click.echo(f("No ports found!", Level.ERROR))
+        return False
     # check the status of every serial port
     all_status = [(address, poll_serial_port(address, pid)) for address, pid in ports]
     # set all the ports into load mode, and ignore ports in bootloader mode or with an incorrect state
@@ -283,7 +143,7 @@ def flash(ports_exclude, arduino_cli_location, config, variables):
         if status == Status.CONFIG_READY:
             load_ports.append(address)
         elif status == Status.OK:
-            if set_serial_port_flash_mode(address)
+            if send_serial_command(address, FLASH_MODE, FLASH_MODE_RES):
                 load_ports.append(address)
             else:
                print_serial_status(Level.WARN, f'Ignoring port {address}, could not set to flash mode') 
@@ -294,16 +154,54 @@ def flash(ports_exclude, arduino_cli_location, config, variables):
         return True
     # flash the config information
     click.echo(f("Sending config...", Level.INFO))
-    for address,config in zip(load_ports, varient_json["varients"]):
-        pass
+    # warn if extra ports/varients are present
+    diff = len(varient_json["varients"]) - len(load_ports)
+    if abs(diff) > 0:
+        if diff < 0:
+            click.echo(f(f'Ignoring excess ports: '
+                + ', '.join([address for i,address in load_ports if i >= len(varient_json["varients"])]), Level.WARN))
+        else:
+            click.echo(f(f'Ignoring excess varients: '
+                + ', '.join([json.dumps(var) for i,var in varient_json["varients"] if i >= len(load_ports)]), Level.WARN))
+    # flash!
+    now = time.ctime()
+    results = []
+    for address,varient in zip(load_ports, varient_json["varients"]):
         # merge the global JSON with the varient JSON
+        device_config = {**varient_json["global"], **varient}
+        device_config["stamp"] = now
+        # send the config
+        results.append(flash_config(address, device_config))
+    # start the sketch, if requested
+    if force_no_start != True:
+        for i,address in enumerate(local_ports):
+            # for every device that succeded, start it, and fail if it fails to start
+            if results[i] == True:
+                if send_serial_command(address, START_LOOM, START_RES) == False:
+                    results[i] = False
+    # print the results!
+    success = sum([1 for r in results if r == True])
+    click.echo(f(f'{success} COM ports succeded', Level.OK))
+    if abs(diff) > 0:
+        if diff < 0:
+            click.echo(f(f'{abs(diff)} COM ports excluded', Level.WARN))
+        else:
+            click.echo(f(f'{diff} varients excluded', Level.WARN))
+    possible_ports = min(len(varient_json["varients"]), len(load_ports))
+    if success != possible_ports:
+        click.echo(f(f'{possible_ports - success} COM ports failed', Level.ERROR))
+    # check the status of every serial port
+    for address,pid in get_serial_ports(ports_exclude):
+        poll_serial_port(address, pid)
+    return True
+
 
 @loom_autodeploy.command(short_help='Run diagnostics on all Loom kits.')
 @click.option('--ports-exclude', '-e', default=None,
               help='COM ports to exclude during the upload process')
 @click.option('--arduino-cli-location', '-a', type=click.Path(exists=True, dir_okay=False), default="./arduino-cli/arduino-cli.exe",
               help='Location of the arduino-cli to use') 
-@click.argument('config', type=click.File('r'))
+@click.argument('config', type=click.File('r', encoding='utf8'))
 def diagnose(port_exclude, cli_path, config):
     """
     Run diagnostics on Loom kits
@@ -312,4 +210,5 @@ def diagnose(port_exclude, cli_path, config):
 
 if __name__ == '__main__':
     # loom_autodeploy()
-    upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "./mock.bin", False, "mock-sketch", "../config.json")
+    # upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "./mock.bin", False, "mock-sketch", "../config.json")
+    flash([], "./arduino-cli/arduino-cli.exe", False, open("../HydroKitConfig.json", "r", encoding="utf8"),  open("../HydroKitVarients.json", "r", encoding="utf8"))
