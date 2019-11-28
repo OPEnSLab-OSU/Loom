@@ -51,9 +51,9 @@ static bool json_sub(const char* input, char* output, const size_t max) {
 	unsigned int key_start = get_keys_from_cmd(input, max, sub_obj);
 	if (!key_start) return false;
 	// copy the input JSON into the output, until we hid a substitution "${" or EOF
-	unsigned int input_index = 2;
+	unsigned int input_index = 1;
 	unsigned int output_index = 0;
-	while (input_index < key_start - 1 && output_index < max) {
+	while (input_index < key_start - 1 && output_index < max - 1) {
 		// copy JSON into the buffer until we encounter a '$'
 		if (input[input_index] == '$' && input[input_index + 1] == '{') {
 			// find the key in the JSON
@@ -78,7 +78,7 @@ static bool json_sub(const char* input, char* output, const size_t max) {
 				// for loop copy, replacing '\r' and '\n' with the real character
 				{
 					size_t val_index = 0;
-					bool escape_next = true;
+					bool escape_next = false;
 					while (value[val_index] != '\0') {
 						if (escape_next) {
 							if (value[val_index] == 'r')
@@ -96,6 +96,7 @@ static bool json_sub(const char* input, char* output, const size_t max) {
 		}
 		else output[output_index++] = input[input_index++];
 	}
+	output[output_index] = '\0';
 	return true;
 }
 
