@@ -146,9 +146,9 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
             if send_serial_command(address, FLASH_MODE, FLASH_MODE_RES):
                 load_ports.append(address)
             else:
-               print_serial_status(Level.WARN, f'Ignoring port {address}, could not set to flash mode') 
+               print_serial_status(Level.WARN, address, f'Ignoring port, could not set to flash mode') 
         else:
-            print_serial_status(Level.WARN, f'Ignoring port {address} with status {status}')
+            print_serial_status(Level.WARN, address, f'Ignoring port with status {status}')
     if len(load_ports) == 0:
         click.echo(f("Found no valid ports!", Level.INFO))
         return True

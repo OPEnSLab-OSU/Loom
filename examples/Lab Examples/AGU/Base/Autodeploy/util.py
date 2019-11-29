@@ -147,10 +147,14 @@ def upload_serial_port(bossac_path, bin_path, address):
     return True
 
 def flash_config(address, sub_json, config):
-    # echo!
-    print_serial_status(Level.INFO, address, f'Sending values "{json.dumps(sub_json)}"')
+    # escape the newlines in the sub_json, and copy them into a new dictionary
+    escaped_json = { k:(v.replace('\r', '\\r').replace('\n', '\\n') if isinstance(v, str) else v) for k,v in sub_json.items() }
     # send all these key/value pairs to the device
-    send_bytes = bytes(f'F:\'{config}\',' + ','.join([f'\'{key}\':\'{value}\'' for key,value in sub_json.items()]) + '\r\n', 'utf8')
-    return send_serial_command(address, send_bytes, FLASH_RES)
+    keys_str = ','.join([f'\'{key}\':\'{value}\'' for key,value in escaped_json.items()])
+    send_str = f'F:\'{config}\',' + keys_str
+    # echo!
+    print_serial_status(Level.INFO, address, f'Sending command "{send_str}"')
+    # away we go!
+    return send_serial_command(address, bytes(send_str + '\r\n', 'utf8'), FLASH_RES)
 
              

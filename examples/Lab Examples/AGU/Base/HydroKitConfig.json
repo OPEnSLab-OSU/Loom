@@ -86,7 +86,7 @@
       "params": [
           "Goog",
           7002,
-          "${sheets_url}",
+          "${sheet_url}",
           "${sheet_id}",
           true
       ]

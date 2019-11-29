@@ -1,7 +1,7 @@
 {
   "general": {
     "name:": "I2CKit",
-    "instance" ${instance},
+    "instance": ${instance},
     "interval": 1000
   },
   "components": [
@@ -64,7 +64,7 @@
       "params": [
           "Goog",
           7002,
-          "${sheets_url}",
+          "${sheet_url}",
           "${sheet_id}",
           true
       ]
