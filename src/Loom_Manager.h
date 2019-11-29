@@ -410,6 +410,10 @@ public:
 	/// @return package verbosity
 	Verbosity	get_package_verbosity() const { return package_verbosity; }
 
+	/// Get sampling interval.
+	/// @return sampling interval, in ms
+	uint16_t 	get_interval() const { return interval; }
+
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================

@@ -26,19 +26,20 @@ START_LOOM = b'S\r\n'
 FLASH_RES = b'F:OK\r\n'
 # M:OK
 FLASH_MODE_RES = b'M:OK\r\n'
-# R:(Device name),(Device in bootloader mode, 0 or 1),(Last Build Time ctime),(Last Bootloader Time ctime)\r\n
-STATUS_RES = parse.compile('R:"{device_name:l}",{mode_boot:d=1},"{build_time:tc}","{boot_time:tc}"\r\n')
+# R:(Device name),(Device has been flashed, 0 or 1),(Last Build Time ctime),(Last Bootloader Time ctime)\r\n
+STATUS_RES = parse.compile('R:"{device_name:w}",{is_flashed:d=1},"{build_time:tc}","{boot_time:tc}"\r\n')
 # D:(Sensor name),(success, 0 or 1),(string error)\r\n
 DIAGNOSE_RES = parse.compile('D:"{sensor_name:l}",{success:d=1},"{error:l}"\r\n')
 # S:OK
 START_RES = b'S:OK\r\n'
+# error
+ERROR_RES = b'ERROR\r\n'
 
 class Status(enum.Enum):
     OK = 0
     BOOTLOADER = 1
     NOT_FLASHED = 2
-    CONFIG_READY = 3
-    HUNG = 4
+    HUNG = 3
 
 class Type(enum.Enum):
     ANY = 0
@@ -86,27 +87,29 @@ def poll_serial_port(address, pid):
         elif pid == PID_SKETCH:
             with serial.Serial(address, BAUD, timeout=2, write_timeout=2, inter_byte_timeout=2) as serial_port:
                 # poll the device
-                serial_port.write(STATUS)
                 status = None
-                # if the read times out, the device probably just isn't flashed
-                try:
-                    status = serial_port.readline().decode()
-                except serial.SerialTimeoutException:
-                    print_serial_status(Level.WARN, address, 'No status from port')
-                    return Status.NOT_FLASHED
-                # else if we get an invalid status, same reason
-                result = STATUS_RES.parse(status)
-                if result is None:
+                result = None
+                attempts = 0
+                while result is None and status != "ERROR\r\n" and attempts < 5:
+                    serial_port.write(STATUS)
+                    time.sleep(0.25)
+                    # if the read times out, the device probably just isn't flashed
+                    try:
+                        status = serial_port.readline().decode()
+                    except serial.SerialTimeoutException:
+                        print_serial_status(Level.WARN, address, 'No status from port')
+                        return Status.NOT_FLASHED
+                    # else if we get an invalid status, same reason
+                    result = STATUS_RES.parse(status)
+                    attempts = attempts + 1
+                if status == ERROR_RES or result is None:
                     print_serial_status(Level.WARN, address, f'Invalid status: "{ status.rstrip() }"')
                     return Status.NOT_FLASHED
                 # else the device is flashed! check the status
-                print_serial_status(Level.INFO, address, 'Mode: '
-                    + ("Bootloader" if result["mode_boot"] else "Sketch")
-                    + f', Built: { result["build_time"] }, Boot: { result["boot_time"] }')
-                if result["mode_boot"]:
-                    return Status.CONFIG_READY
-                else:
-                    return Status.OK
+                print_serial_status(Level.INFO, address, f'Instance: { result["device_name"] }, '
+                    + f'Flashed: { "Yes" if int(result["is_flashed"]) == 1 else "No" }, '
+                    + f'Built: { result["build_time"] }, Boot: { result["boot_time"] }')
+                return Status.OK
         else:
             print_serial_status(Level.ERROR, address, f'Unknown PID {pid}')
             return Status.HUNG
@@ -119,7 +122,11 @@ def send_serial_command(address, cmd, response):
     with serial.Serial(address, BAUD, timeout=2, write_timeout=2, inter_byte_timeout=2) as serial_port:
         try:
             serial_port.write(cmd)
-            status = serial_port.readline()
+            status = None
+            attempts = 0
+            while status != response and status != ERROR_RES and attempts < 20:
+                status = serial_port.readline()
+                attempts = attempts + 1
             if status != response:
                 print_serial_status(Level.ERROR, address, f'Recieved invalid status {status.decode()} when sensing command {cmd.decode().rstrip()}')
                 return False

@@ -140,13 +140,8 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
     # set all the ports into load mode, and ignore ports in bootloader mode or with an incorrect state
     load_ports = []
     for address, status in all_status:
-        if status == Status.CONFIG_READY:
+        if status == Status.OK:
             load_ports.append(address)
-        elif status == Status.OK:
-            if send_serial_command(address, FLASH_MODE, FLASH_MODE_RES):
-                load_ports.append(address)
-            else:
-               print_serial_status(Level.WARN, address, f'Ignoring port, could not set to flash mode') 
         else:
             print_serial_status(Level.WARN, address, f'Ignoring port with status {status}')
     if len(load_ports) == 0:
@@ -166,12 +161,16 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
     # flash!
     now = time.ctime()
     results = []
+    config_stripped = "".join(config.read().split())
     for address,varient in zip(load_ports, varient_json["varients"]):
         # merge the global JSON with the varient JSON
         device_config = {**varient_json["global"], **varient}
         device_config["stamp"] = now
         # send the config
-        results.append(flash_config(address, device_config, "".join(config.read().split())))
+        results.append(flash_config(address, device_config, config_stripped))
+        # wait a bit
+        time.sleep(0.5)
+    click.echo(f("Flash done! restarting...", Level.OK))
     # start the sketch, if requested
     if force_no_start != True:
         for i,address in enumerate(load_ports):
@@ -179,6 +178,7 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
             if results[i] == True:
                 if send_serial_command(address, START_LOOM, START_RES) == False:
                     results[i] = False
+                    time.sleep(0.1)
     # print the results!
     success = sum([1 for r in results if r == True])
     click.echo(f(f'{success} COM ports succeded', Level.OK))
@@ -191,6 +191,7 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
     if success != possible_ports:
         click.echo(f(f'{possible_ports - success} COM ports failed', Level.ERROR))
     # check the status of every serial port
+    time.sleep(3)
     for address,pid in get_serial_ports(ports_exclude):
         poll_serial_port(address, pid)
     return True
@@ -210,5 +211,5 @@ def diagnose(port_exclude, cli_path, config):
 
 if __name__ == '__main__':
     # loom_autodeploy()
-    # upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "./mock.bin", False, "mock-sketch", "../config.json")
+    # upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "Loom.bin", False, "../../Base", "../config.json")
     flash([], "./arduino-cli/arduino-cli.exe", False, open("../HydroKitConfig.json", "r", encoding="utf8"),  open("../HydroKitVarients.json", "r", encoding="utf8"))

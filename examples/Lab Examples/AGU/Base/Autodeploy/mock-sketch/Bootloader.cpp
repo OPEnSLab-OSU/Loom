@@ -1,19 +1,27 @@
 #include "Bootloader.h"
 
+// Generic template
+template < class T >
+    static inline Print & operator << (Print & stream, T arg) {
+        stream.print(arg);
+        return stream;
+    }
+
 constexpr char STATUS = 'R';
 constexpr char DIAGNOSE = 'D';
 constexpr char START_LOOM = 'S';
 constexpr char FLASH_LOOM = 'F';
 constexpr char TIME[] = __TIMESTAMP__;
-constexpr char FILE_NAME = 'cfg.json';
+constexpr char FILE_NAME[] = "cfg.json";
 
-struct BootProps {
+typedef struct {
     bool is_written;
+    int instance;
     char last_write[25];
     char json_secrets[512];
-}
+}  BootProps;
 
-FlashStorage(flash_keys, BootProps);
+FlashStorage(flashkeys, BootProps);
 static BootProps mem_keys = {};
 
 // system reset definitions
@@ -102,8 +110,10 @@ static bool json_sub(const char* input, const size_t max, const JsonObjectConst&
 								output[output_index++] = '\n';
 							escape_next = false;
 						}
-						else if (value[val_index] == '\\') escape_next = true;
-						else output[output_index++] = value[val_index];
+						else if (value[val_index] == '\\') 
+                            escape_next = true;
+						else 
+                            output[output_index++] = value[val_index];
 						val_index++;
 					}
 				}
@@ -115,84 +125,99 @@ static bool json_sub(const char* input, const size_t max, const JsonObjectConst&
 	return true;
 }
 
+static bool print_error(const char* error) {
+    Serial.println(error);
+    return false;
+}
+
 static bool run_flash_cmd(const char* input, const size_t max) {
     // find the splitting point
 	size_t idx = find_keys_in_cmd(input, max);
 	if (!idx)
-		return false;
+		return print_error("Could not split keys and json");
 	// serialize the substitution keys into a "dictionary"
 	StaticJsonDocument<512> sub_doc;
 	JsonObject keys = sub_doc.to<JsonObject>();
 	if (!parse_keys(&input[idx], sizeof(input) - idx, keys))
-		return false;
+		return print_error("Could not parse keys");
     const char* stamp = keys["stamp"].as<const char*>();
+    const int instance = keys["instance"];
     if (stamp == nullptr)
-        return false;
+        return print_error("No timestamp present");
+    // SD card update
+    {
+        SdFat sd;
+        File file;
+        if(!sd.begin(10, SD_SCK_MHZ(50)))
+            return print_error("Could not open SDcard");
+        if(!file.open(FILE_NAME, O_WRONLY | O_CREAT))
+            return print_error("Could not open file");
+        file.write(&input[1], idx - 3);
+        if (!file.sync() || file.getWriteError())
+            return print_error("Writing to SD card failed");
+        file.close();
+    }
     // flash storage update
     {
         BootProps props = {};
         props.is_written = true;
+        props.instance = instance;
         strncpy(props.last_write, stamp, sizeof(props.last_write));
         if(!serializeJson(sub_doc, props.json_secrets, sizeof(props.json_secrets)))
-            return false;
-        flash_keys.write(&props);
-    }
-    // SD card update
-    {
-        SdFat card;
-        File file;
-        sd.begin(10, SD_SCK_MHZ(50));
-        if(!file.open(FILE_NAME, O_WRONLY))
-            return false;
-        file.write(&input[1], idx - 3);
-        if (!file.sync() || file.getWriteError())
-            return false
-        file.close();
+            return print_error("JSON serialization failed");
+        flashkeys.write(props);
     }
     return true;
 }
 
-static void load_flash_keys() {
-    flash_keys.read(&mem_keys);
+static void load_flashkeys() {
+    flashkeys.read(&mem_keys);
 }
 
-void Bootloader::get_config(JsonDocument& doc) {
-    if (!mem.is_written)
-        load_flash_keys();
+bool Bootloader::get_config(JsonDocument& doc) {
+    if (!mem_keys.is_written)
+        load_flashkeys();
+    if (!mem_keys.is_written)
+        return false;
     // load the config from SD
     char json[2048];
     int read;
     {
-        SdFat card;
+        SdFat sd;
         File file;
         sd.begin(10, SD_SCK_MHZ(50));
         if(!file.open(FILE_NAME, O_READ))
             return false;
-        read = file.read(json, sizeof(json);
+        read = file.read(json, sizeof(json));
         if (read < 1)
             return false;
         file.close();
     }
     // deserialize the substitution keys
     StaticJsonDocument<512> sub_keys;
-    deserializeJson(sub_keys, mem.json_secrets);
+    deserializeJson(sub_keys, mem_keys.json_secrets);
     // run the substitution
-	char output[2048];
-	if (!json_sub(json, read, keys, output))
-		return false;
-	// deserialize the JSON
-	deserializeJson(doc, static_cast<const char*>(output));
+    {
+        char output[2048];
+        const JsonObjectConst sub_obj = sub_keys.as<JsonObjectConst>();
+	    if (!json_sub(json, read, sub_obj, output))
+		    return false;
+	    // deserialize the JSON
+	    deserializeJson(doc, static_cast<const char*>(output));
+    }
 	return !doc.as<JsonObjectConst>().isNull();
 }
 
-bool Bootloader::run_bootloader() {
-    if (!mem.is_written)
-        load_flash_keys();
+void Bootloader::run_bootloader() {
+    if (!mem_keys.is_written)
+        load_flashkeys();
     // check the serial bus for tranmissions so we can respond!
     if (Serial && Serial.available()) {
         const char first = Serial.read();
-        if (first == STATUS)
-            Serial << "R:\"mydevice\",0,\"" << TIME << "\",\"" << mem.last_write << "\"\r\n";
+        if (first == STATUS) {
+            Serial << "R:\"" << mem_keys.instance << "\"," << mem_keys.is_written << ",\"" << TIME << "\",\"";
+            Serial << static_cast<const char*>(mem_keys.is_written ? mem_keys.last_write : TIME) << "\"\r\n";
+        }
         else if (first == DIAGNOSE) {
             // Serial << "D:\"mysensor\",1,\"\"\r\n";
             // Serial << "D:\"othersensor\",0,\"Device Id Incorrect\"\r\n";
@@ -218,17 +243,19 @@ bool Bootloader::run_bootloader() {
                 }
             }
             // parse the input, and make sure it's all valid
-            StaticJsonDocument<2048> doc;
-            if (input[0] != ':' || !run_flash_cmd(&input[1], sizeof(input) - 1, doc))
+            if (input[0] != ':' || !run_flash_cmd(&input[1], sizeof(input) - 1))
                 Serial << "ERROR\r\n";
             else
                 Serial << "F:OK\r\n";
+            // return b/c we already flushed the input buffer
+            return;
         } else if (first == START_LOOM){
             Serial << "S:OK\r\n";
             Serial.flush();
             Serial.end();
             // reset!
             RESET();
+            return;
         }
         else
             Serial << "ERROR\r\n";

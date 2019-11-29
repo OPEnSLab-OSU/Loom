@@ -4,7 +4,6 @@
 #include "FlashStorage.h"
 
 namespace Bootloader {
-    bool is_sketch();
-    void get_config(JsonDocument& doc);
+    bool get_config(JsonDocument& doc);
     void run_bootloader();
 }
