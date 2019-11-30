@@ -115,6 +115,7 @@ def send_serial_command(address, cmd, response):
                     # if the read times out, the device probably just isn't flashed
                     try:
                         status = serial_port.readline()
+                        print(status)
                     except serial.SerialTimeoutException:
                         print_serial_status(Level.WARN, address, 'No status from port')
                         return Status.NOT_FLASHED

@@ -124,7 +124,6 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
     # get the number of ports, and check the status of each
     ports = get_serial_ports(ports_exclude)
     # get every serial port
-    click.echo(f("Polling all serial ports...", Level.INFO))
     ports = get_serial_ports(ports_exclude)
     if len(ports) == 0:
         click.echo(f("No ports found!", Level.ERROR))
@@ -167,7 +166,7 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
     if force_no_start != True:
         for i,address in enumerate(load_ports):
             # for every device that succeded, start it, and fail if it fails to start
-            if results[i] == Status.OK:
+            if i < len(varient_json["varients"]) and results[i] == Status.OK:
                 if send_serial_command(address, START_LOOM, START_RES) != Status.OK:
                     results[i] = False
     # print the results!
@@ -199,9 +198,9 @@ def diagnose(port_exclude, cli_path, config):
     Run diagnostics on Loom kits
     """
     pass
-
+//
 if __name__ == '__main__':
     # loom_autodeploy()
-    upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "Loom.bin", True, "../../Base", "../config.json")
+    upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "Loom.bin", False, "../../Base", "../config.json")
     time.sleep(1)
     flash([], "./arduino-cli/arduino-cli.exe", False, open("../HydroKitConfig.json", "r", encoding="utf8"),  open("../HydroKitVarients.json", "r", encoding="utf8"))

@@ -126,7 +126,7 @@ static bool json_sub(const char* input, const size_t max, const JsonObjectConst&
 }
 
 static bool print_error(const char* error) {
-    Serial.println(error);
+    // Serial.println(error);
     return false;
 }
 
