@@ -15,7 +15,7 @@ FQBN = "adafruit:samd:adafruit_feather_m0"
 PID_SKETCH = 32779
 PID_BOOTLOADER = 11
 VID = 9114
-BAUD = 115200
+BAUD = 9600
 
 STATUS = b'R\r\n'
 DIAGNOSE = b'D\r\n'
@@ -40,6 +40,7 @@ class Status(enum.Enum):
     BOOTLOADER = 1
     NOT_FLASHED = 2
     HUNG = 3
+    ERROR = 4
 
 class Type(enum.Enum):
     ANY = 0
@@ -79,70 +80,79 @@ def get_serial_ports(exclude):
         and (board.pid == PID_SKETCH or board.pid == PID_BOOTLOADER)]
 
 def poll_serial_port(address, pid):
+    if pid == PID_BOOTLOADER:
+        print_serial_status(Level.INFO, address, 'Bootloader mode')
+        return Status.BOOTLOADER
+    if pid != PID_SKETCH:
+        print_serial_status(Level.ERROR, address, f'Unknown PID {pid}')
+        return Status.HUNG
+    
+    result = send_serial_command(address, STATUS, STATUS_RES)
+    if isinstance(result, parse.Result):
+        print_serial_status(Level.INFO, address, f'Instance: { result["device_name"] }, '
+            + f'Flashed: { "Yes" if int(result["is_flashed"]) == 1 else "No" }, '
+            + f'Built: { result["build_time"] }, Flashed: { result["boot_time"] }')
+        return Status.OK
+    else:
+        print_serial_status(Level.WARN, address, f'Status {result}')
+        return result
+
+def send_serial_command(address, cmd, response):
     try:
-        if pid == PID_BOOTLOADER:
-            print_serial_status(Level.INFO, address, 'Bootloader mode')
-            return Status.BOOTLOADER
         # else poll the device
-        elif pid == PID_SKETCH:
-            with serial.Serial(address, BAUD, timeout=2, write_timeout=2, inter_byte_timeout=2) as serial_port:
-                # poll the device
-                status = None
-                result = None
-                attempts = 0
-                while result is None and status != "ERROR\r\n" and attempts < 5:
-                    serial_port.write(STATUS)
-                    time.sleep(0.25)
+        with serial.Serial(address, BAUD, timeout=2, write_timeout=2, inter_byte_timeout=2) as serial_port:
+            # poll the device
+            result_decoded = None
+            status = None
+            attempt = 0
+            while attempt < 5 and result_decoded is None and status != ERROR_RES:
+                # flush the serial buffer
+                serial_port.reset_input_buffer()
+                # write the status command
+                serial_port.write(cmd)
+                serial_port.flush()
+                while True:
                     # if the read times out, the device probably just isn't flashed
                     try:
-                        status = serial_port.readline().decode()
+                        status = serial_port.readline()
                     except serial.SerialTimeoutException:
                         print_serial_status(Level.WARN, address, 'No status from port')
                         return Status.NOT_FLASHED
                     # else if we get an invalid status, same reason
-                    result = STATUS_RES.parse(status)
-                    attempts = attempts + 1
-                if status == ERROR_RES or result is None:
-                    print_serial_status(Level.WARN, address, f'Invalid status: "{ status.rstrip() }"')
-                    return Status.NOT_FLASHED
-                # else the device is flashed! check the status
-                print_serial_status(Level.INFO, address, f'Instance: { result["device_name"] }, '
-                    + f'Flashed: { "Yes" if int(result["is_flashed"]) == 1 else "No" }, '
-                    + f'Built: { result["build_time"] }, Boot: { result["boot_time"] }')
-                return Status.OK
-        else:
-            print_serial_status(Level.ERROR, address, f'Unknown PID {pid}')
-            return Status.HUNG
+                    if isinstance(response, parse.Parser):
+                        result_decoded = response.parse(status.decode())
+                    else:
+                        result_decoded = (response == status)
+                    if result_decoded is not None or serial_port.inWaiting() == 0 or status == ERROR_RES:
+                        break
+                attempt = attempt + 1
+            if result_decoded is None:
+                print_serial_status(Level.WARN, address, f'Invalid response: "{ status.rstrip() }" when sensing command "{ cmd.decode().rstrip() }"')
+                return Status.NOT_FLASHED
+            elif status == ERROR_RES:
+                print_serial_status(Level.ERROR, address, f'Error status on command "{ cmd.decode().rstrip() }"')
+                return Status.ERROR
+            return result_decoded if isinstance(response, parse.Parser) else Status.OK
     except serial.SerialTimeoutException:
         # uh oh, looks like the serial port didn't open
         print_serial_status(Level.WARN, address, f'Hung, or not compiled with Serial.')
         return Status.HUNG
-
-def send_serial_command(address, cmd, response):
-    with serial.Serial(address, BAUD, timeout=2, write_timeout=2, inter_byte_timeout=2) as serial_port:
-        try:
-            serial_port.write(cmd)
-            status = None
-            attempts = 0
-            while status != response and status != ERROR_RES and attempts < 20:
-                status = serial_port.readline()
-                attempts = attempts + 1
-            if status != response:
-                print_serial_status(Level.ERROR, address, f'Recieved invalid status {status.decode()} when sensing command {cmd.decode().rstrip()}')
-                return False
-        except serial.SerialTimeoutException:
-            print_serial_status(Level.ERROR, address, f'Timeout when sending command {cmd.decode()}')
-            return False
-    return True
 
 def reset_board_bootloader(address):
     # stolen from http://markparuzel.com/?p=230
     ser = serial.Serial(timeout=2, inter_byte_timeout=2)
     ser.port = address
     ser.open()
+    time.sleep(0.1)
     ser.baudrate = 1200 # This is magic.
+    ser.flush()
+    time.sleep(0.1)
     ser.rts = True
+    ser.flush()
+    time.sleep(0.1)
     ser.dtr = False
+    ser.flush()
+    time.sleep(0.1)
     ser.close()
 
 def upload_serial_port(bossac_path, bin_path, address):

@@ -54,19 +54,16 @@ def upload(ports_exclude, disable_diagnostics, cli_path, bossac_path, bin_path, 
     ports = get_serial_ports(ports_exclude)
     if len(ports) == 0:
         click.echo(f("No ports found!", Level.ERROR))
-    # check the status of every serial port
-    for address,pid in ports:
-        poll_serial_port(address, pid)
     # reset all serial ports into booloader mode
     click.echo(f("Resetting all ports into bootloader mode...", Level.INFO))
     attempts = 0
     ports_to_reset = [address for address,pid in ports if pid != PID_BOOTLOADER]
-    while attempts < 5 and len(ports_to_reset) > 0:
+    while attempts < 20 and len(ports_to_reset) > 0:
         if len(ports_to_reset) == 0:
             break
         for address in ports_to_reset:
             reset_board_bootloader(address)
-        time.sleep(2)
+        time.sleep(0.5)
         ports_to_reset = [address for address,pid in get_serial_ports(ports_exclude) if pid != PID_BOOTLOADER]
         attempts = attempts + 1
     # tell the user to manually reset all the devices that didn't take for some reason
@@ -79,6 +76,7 @@ def upload(ports_exclude, disable_diagnostics, cli_path, bossac_path, bin_path, 
     click.echo(f("Uploading sketch to all ports...", Level.INFO))
     attempts = 0
     # find all the ports created from that, and use those as upload ports
+    time.sleep(2)
     all_ports = get_serial_ports(ports_exclude)
     upload_ports = []
     for address,pid in all_ports:
@@ -97,15 +95,11 @@ def upload(ports_exclude, disable_diagnostics, cli_path, bossac_path, bin_path, 
         result = [task.get(15) for task in async_tasks]
     # print the result
     success = sum([1 for r in result if r == True])
-    click.echo(f(f'{success} COM ports succeded', Level.OK))
+    click.echo(f(f'{success} COM ports succeeded', Level.OK))
     if len(result) != len(all_ports):
         click.echo(f(f'{len(all_ports) - len(result)} COM ports excluded', Level.WARN))
     if success != len(result):
         click.echo(f(f'{len(result) - success} COM ports failed', Level.ERROR))
-    time.sleep(1)
-    # check the status of every serial port
-    for address,pid in get_serial_ports(ports_exclude):
-        poll_serial_port(address, pid)
     return True
 
 """
@@ -168,19 +162,16 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
         device_config["stamp"] = now
         # send the config
         results.append(flash_config(address, device_config, config_stripped))
-        # wait a bit
-        time.sleep(0.5)
     click.echo(f("Flash done! restarting...", Level.OK))
     # start the sketch, if requested
     if force_no_start != True:
         for i,address in enumerate(load_ports):
             # for every device that succeded, start it, and fail if it fails to start
-            if results[i] == True:
-                if send_serial_command(address, START_LOOM, START_RES) == False:
+            if results[i] == Status.OK:
+                if send_serial_command(address, START_LOOM, START_RES) != Status.OK:
                     results[i] = False
-                    time.sleep(0.1)
     # print the results!
-    success = sum([1 for r in results if r == True])
+    success = sum([1 for r in results if r == Status.OK])
     click.echo(f(f'{success} COM ports succeded', Level.OK))
     if abs(diff) > 0:
         if diff < 0:
@@ -190,8 +181,8 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
     possible_ports = min(len(varient_json["varients"]), len(load_ports))
     if success != possible_ports:
         click.echo(f(f'{possible_ports - success} COM ports failed', Level.ERROR))
+    time.sleep(1)
     # check the status of every serial port
-    time.sleep(3)
     for address,pid in get_serial_ports(ports_exclude):
         poll_serial_port(address, pid)
     return True
@@ -211,5 +202,6 @@ def diagnose(port_exclude, cli_path, config):
 
 if __name__ == '__main__':
     # loom_autodeploy()
-    # upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "Loom.bin", False, "../../Base", "../config.json")
+    upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "Loom.bin", True, "../../Base", "../config.json")
+    time.sleep(1)
     flash([], "./arduino-cli/arduino-cli.exe", False, open("../HydroKitConfig.json", "r", encoding="utf8"),  open("../HydroKitVarients.json", "r", encoding="utf8"))

@@ -41,7 +41,11 @@ void setup() {
 
 	// put your setup code here, to run once:
 	Serial.begin(115200);
-	while(!Serial);
+
+	// delay 5 seconds, running the bootloader during that time, so we can report back status
+	uint32_t start = millis();
+	while(millis() - start < 5000) 
+		Bootloader::run_bootloader();
 
 	// get the config
     StaticJsonDocument<2048> doc;
