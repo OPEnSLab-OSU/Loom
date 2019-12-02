@@ -59,6 +59,18 @@ std::vector<byte> Loom_Multiplexer::known_addresses =
 	0x77  ///< MS5803
 };
 
+std::vector<byte> Loom_Multiplexer::alt_addresses = {
+	0x70,
+	0x71,
+	0x72,
+	0x73,
+	0x74,
+	0x75,
+	0x76,
+	0x77,
+	0x78
+};
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Multiplexer::Loom_Multiplexer(	
 		const byte			i2c_address,
@@ -75,6 +87,25 @@ Loom_Multiplexer::Loom_Multiplexer(
     
 	// Begin I2C
 	Wire.begin();
+
+	Wire.beginTransmission(this->i2c_address);
+	if(Wire.endTransmission() ) { //< Test on this address
+		//< Test Failed
+		LPrintln("Multiplexer not found on specified port. Checking alternate addresses.");
+		this->active = false;
+
+		//< Check all alternate addresses
+		for(auto address : alt_addresses) {
+			Wire.beginTransmission(address);
+			if(Wire.endTransmission()) {
+				continue;
+			} else {
+				active = true;
+				this->i2c_address = address;
+				LPrintln("*** Multiplexer found at: ", address, ", update your config. ***");
+			}
+		}
+	}
 
 	// Initialize array of sensors to Null pointrs
 	for (auto i = 0; i < num_ports; i++) {
@@ -109,7 +140,6 @@ Loom_Multiplexer::~Loom_Multiplexer()
 ///////////////////////////////////////////////////////////////////////////////
 LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, const uint8_t port)
 {
-	
 		LPrintln("Adding Sensor at address:", i2c_address);
 		switch (i2c_address) {
 			case 0x10 : return new Loom_ZXGesture(i2c_address, port);	break;// ZXGesture

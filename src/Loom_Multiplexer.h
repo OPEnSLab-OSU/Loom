@@ -72,6 +72,8 @@ protected:
 	unsigned long	last_update_time;	///< When the sensor list was last updated
     std::vector<byte> i2c_conflicts; ///< List of I2C address conflicts
     
+	static std::vector<byte> alt_addresses;
+
 public:
 
 //=============================================================================
