@@ -1,0 +1,95 @@
+{
+  "general": {
+    "name:": "HydroKit",
+    "instance": ${instance},
+    "interval": 10000
+  },
+  "components": [
+    {
+      "name": "Analog",
+      "params": [
+        8,
+        12,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        0,
+        3,
+        4,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "MS5803",
+      "params": [
+        119,
+        255
+      ]
+    },
+    {
+      "name": "OLED",
+      "params": [
+        "true",
+        "300",
+        "0",
+        "16",
+        "2",
+        "6000",
+        "10",
+        "2"
+      ]
+    },
+    {
+      "name": "DS3231",
+      "params": [
+        11,
+        true
+      ]
+    },
+    {
+      "name": "SD",
+      "params": [
+        true,
+        1000,
+        10,
+        "test",
+        true
+      ]
+    },
+    {
+      "name": "WiFi",
+      "params": [
+        "${wifi_ssid}",
+        "${wifi_password}"
+      ]
+    },
+    {
+      "name": "Spool",
+      "params": [
+          "Spool",
+          7002,
+          "spool.open-sensing.org",
+          "/api/device/data",
+          "${spool_coord_id}",
+          "${spool_dev_id}",
+          "${spool_cert}",
+          "${spool_key}"
+      ]
+    },
+    {
+      "name": "GoogleSheets",
+      "params": [
+          "Goog",
+          7002,
+          "${sheet_url}",
+          "${sheet_id}",
+          true
+      ]
+    }
+  ]
+}

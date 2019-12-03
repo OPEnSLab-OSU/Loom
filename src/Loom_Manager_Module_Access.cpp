@@ -129,6 +129,12 @@ Loom_GoogleSheets& LoomManager::GoogleSheets(const uint8_t idx)
 	return (*(Loom_GoogleSheets*)( (tmp) ? tmp : &global_stub ));
 }
 
+Loom_SpoolPublish& LoomManager::Spool(const uint8_t idx) 
+{
+	LoomModule* tmp = find_module(LoomModule::Type::SpoolPub, idx);
+	return (*(Loom_SpoolPublish*)( (tmp) ? tmp : &global_stub ));
+}
+
 Loom_MaxPub& LoomManager::MaxPub(const uint8_t idx) 
 {
 	LoomModule* tmp = find_module(LoomModule::Type::MaxPub, idx);

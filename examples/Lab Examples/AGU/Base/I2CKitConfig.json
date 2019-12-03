@@ -1,0 +1,73 @@
+{
+  "general": {
+    "name:": "I2CKit",
+    "instance": ${instance},
+    "interval": 10000
+  },
+  "components": [
+    {
+      "name": "OLED",
+      "params": [
+        "true",
+        "300",
+        "0",
+        "16",
+        "2",
+        "6000",
+        "10",
+        "2"
+      ]
+    },
+    {
+      "name": "DS3231",
+      "params": [
+        11,
+        true
+      ]
+    },
+    {
+      "name": "SD",
+      "params": [
+        true,
+        1000,
+        10,
+        "test",
+        true
+      ]
+    },
+    {
+      "name": "Multiplexer",
+      "params": "default"
+    },
+    {
+      "name": "WiFi",
+      "params": [
+        "${wifi_ssid}",
+        "${wifi_password}"
+      ]
+    },
+    {
+      "name": "Spool",
+      "params": [
+          "Spool",
+          7002,
+          "spool.open-sensing.org",
+          "/api/device/data",
+          "${spool_coord_id}",
+          "${spool_dev_id}",
+          "${spool_cert}",
+          "${spool_key}"
+      ]
+    },
+    {
+      "name": "GoogleSheets",
+      "params": [
+          "Goog",
+          7002,
+          "${sheet_url}",
+          "${sheet_id}",
+          true
+      ]
+    }
+  ]
+}

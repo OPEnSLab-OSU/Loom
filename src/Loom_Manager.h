@@ -410,6 +410,10 @@ public:
 	/// @return package verbosity
 	Verbosity	get_package_verbosity() const { return package_verbosity; }
 
+	/// Get sampling interval.
+	/// @return sampling interval, in ms
+	uint16_t 	get_interval() const { return interval; }
+
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================
@@ -490,6 +494,7 @@ public:
 	// PublishPlats
 	LoomPublishPlat& 	PublishPlat(const uint8_t idx = 0);
 	Loom_GoogleSheets&	GoogleSheets(const uint8_t idx = 0);
+	Loom_SpoolPublish&  Spool(const uint8_t idx = 0);
 	Loom_MaxPub&		MaxPub(const uint8_t idx = 0);
 
 	// SubscribePlats

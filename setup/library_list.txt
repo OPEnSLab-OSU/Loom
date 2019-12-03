@@ -17,6 +17,7 @@
 "Adafruit TSL2591 Library"
 "Adafruit Unified Sensor"
 "Adafruit VC0706 Serial Camera Library"
+"Adafruit seesaw Library"
 "ArduinoJson"
 "AsyncDelay"
 "EnableInterrupt"

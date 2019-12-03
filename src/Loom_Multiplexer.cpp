@@ -83,6 +83,7 @@ Loom_Multiplexer::Loom_Multiplexer(
 	, num_ports(num_ports)
 	, update_period(update_period)
 	, sensors(new LoomI2CSensor*[num_ports])
+	, control_port(num_ports)
 {
     
 	// Begin I2C
@@ -113,6 +114,7 @@ Loom_Multiplexer::Loom_Multiplexer(
 	}
     
 	i2c_conflicts = find_i2c_conflicts();
+
 	// Update sensor list and display   -- currently removed because Mux should be linked to DeviceManager before polling sensors
 	// refresh_sensors();
 	// print_state();
@@ -142,9 +144,9 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, 
 {
 		LPrintln("Adding Sensor at address:", i2c_address);
 		switch (i2c_address) {
-			case 0x10 : return new Loom_ZXGesture(i2c_address, port);	break;// ZXGesture
+			case 0x10 : return new Loom_ZXGesture(i2c_address, port);	break;  // ZXGesture
 			case 0x11 : return new Loom_ZXGesture(i2c_address, port);	break;	// ZXGesture
-			case 0x19 : return new Loom_LIS3DH(i2c_address, port);		break;		// LIS3DH
+			case 0x19 : return new Loom_LIS3DH(i2c_address, port);		break;	// LIS3DH
 
 			case 0x1C : // MMA8451 / FXOS8700
 				if (i2c_0x1C == I2C_Selection::L_MMA8451)  return new Loom_MMA8451(i2c_address, port);	// MMA8451
@@ -187,7 +189,6 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, 
 
 			default : return nullptr;
 		}
-
 }
 
 
