@@ -18,7 +18,7 @@
 #undef min
 #undef max
 #include <vector>
-
+#include <array>
 
 /// I2C Address Conflict Selection
 enum class I2C_Selection {
@@ -57,7 +57,7 @@ private:
 
 	/// List of known I2C addresses used by Loom.
 	/// Used to avoid checking addresses that no sensors in Loom use
-	const static byte known_addresses[];
+	const static std::array<byte, 21> known_addresses;
 
 protected:
 
@@ -69,11 +69,11 @@ protected:
 	bool			dynamic_list;		///< Whether or not sensor list is dynamic (refresh sensor list periodically)
 	uint			update_period;		///< Interval to update sensor list at
 
-	uint8_t control_port;			//< Mux port to be used as a control
-
 	unsigned long	last_update_time;	///< When the sensor list was last updated
     std::vector<byte> i2c_conflicts; ///< List of I2C address conflicts
     
+	const static std::array<byte, 9> alt_addresses;
+
 public:
 
 //=============================================================================
@@ -87,7 +87,7 @@ public:
 	/// @param[in]	dynamic_list			Bool | <true> | {true, false} | Whether or not to automatically check for new sensors
 	/// @param[in]	update_period			Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
 	Loom_Multiplexer(
-			const byte			i2c_address			= 0x71,
+			const byte			i2c_address			= 0x70,
 			const uint8_t		num_ports			= 8,
 			const bool			dynamic_list		= true,
 			const uint			update_period		= 5000
@@ -169,6 +169,8 @@ private:
 	/// Select communication with sensor at index port
 	/// @param[in]	port	The port to open I2C communication on
 	void			tca_select(const uint8_t port) const;
+
+	void			tca_deselect() const;
 
 	/// Create appropriate instance to manage sensor.
 	/// Compares I2C address to known sensors and generates corresponding sensor instance
