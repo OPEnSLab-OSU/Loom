@@ -124,14 +124,15 @@ DateTime LoomNTPSync::m_sync_rtc()
 {
 	// it is presumed that the objects this function needs are in working order
 	// get the current time from the internet
-	const DateTime time = DateTime(m_internet->get_time());
-	if (time.unixtime() == 0) {
+	const unsigned long epoch = m_internet->get_time();
+	if (epoch == 0 || epoch > 4131551103UL) {
 		// invalid time, ignore
 		print_module_label();
 		LPrint("Failed to fetch time for RTC! Will try again. \n");
-		return time;
+		return DateTime(0);
 	}
 	// send it to the rtc
+	const DateTime time(epoch);
 	m_rtc->time_adjust(time);
 	// log boi
 	print_module_label();

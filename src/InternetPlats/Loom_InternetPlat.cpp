@@ -72,7 +72,7 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* 
 		LPrint("Connect failed with error ", client.getWriteError(), "\n");
 		print_state();
 		// if the underlying client is unhappy, we may need to reset the connection
-		if (client.getWriteError() == SSLClient::SSL_CLIENT_WRTIE_ERROR) {
+		if (client.getWriteError() == SSLClient::SSL_CLIENT_WRTIE_ERROR || client.getWriteError() == SSLClient::SSL_CLIENT_CONNECT_FAIL) {
 			print_module_label();
 			LPrint("Attempting to cycle the connection: ");
 			disconnect();
@@ -192,7 +192,10 @@ uint32_t LoomInternetPlat::get_time()
 		print_unix_time(epoch);
 	}
 	else LPrint("Failed to parse UDP packet!\n");
-
+	if (epoch > 4131551103UL) {
+		LPrint("Failed to parse UDP packet!\n");
+		return 0;
+	}
 	return epoch;
 }
 
