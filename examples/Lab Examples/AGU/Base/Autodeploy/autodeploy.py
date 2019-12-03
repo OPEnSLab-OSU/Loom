@@ -45,8 +45,9 @@ def upload(ports_exclude, disable_diagnostics, cli_path, bossac_path, bin_path, 
     # build the sketch if requested
     if disable_build != True:
         click.echo(f("Building sketch...", Level.INFO))
-        if build_sketch(ARDUINO, bin_path, sketch) != True:
-            click.echo(f(f'Error building sketch: {e}', Level.ERROR))
+        res = build_sketch(ARDUINO, bin_path, sketch)
+        if res != True:
+            click.echo(f(f'Error building sketch: {res}', Level.ERROR))
             return False
         click.echo(f("Done building sketch!", Level.OK))
     # get every serial port
@@ -143,20 +144,22 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
     # flash the config information
     click.echo(f("Sending config...", Level.INFO))
     # warn if extra ports/varients are present
+    config_ports = [address for address in load_ports if address in varient_json["varients"]]
     diff = len(varient_json["varients"]) - len(load_ports)
     if abs(diff) > 0:
         if diff < 0:
             click.echo(f(f'Ignoring excess ports: '
-                + ', '.join([address for i,address in enumerate(load_ports) if i >= len(varient_json["varients"])]), Level.WARN))
+                + ', '.join([address for address in load_ports if address not in config_ports]), Level.WARN))
         else:
             click.echo(f(f'Ignoring excess varients: '
-                + ', '.join([json.dumps(var) for i,var in enumerate(varient_json["varients"]) if i >= len(load_ports)]), Level.WARN))
+                + ', '.join([address for address in varient_json["varients"].keys() if address not in config_ports]), Level.WARN))
     # flash!
     now = time.ctime()
     results = []
     config_stripped = "".join(config.read().split())
-    for address,varient in zip(load_ports, varient_json["varients"]):
+    for address in config_ports:
         # merge the global JSON with the varient JSON
+        varient = varient_json["varients"][address]
         device_config = {**varient_json["global"], **varient}
         device_config["stamp"] = now
         # send the config
@@ -164,9 +167,9 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
     click.echo(f("Flash done! restarting...", Level.OK))
     # start the sketch, if requested
     if force_no_start != True:
-        for i,address in enumerate(load_ports):
+        for i,address in enumerate(config_ports):
             # for every device that succeded, start it, and fail if it fails to start
-            if i < len(varient_json["varients"]) and results[i] == Status.OK:
+            if results[i] == Status.OK:
                 if send_serial_command(address, START_LOOM, START_RES) != Status.OK:
                     results[i] = False
     # print the results!
@@ -177,10 +180,9 @@ def flash(ports_exclude, arduino_cli_location, force_no_start, config, variables
             click.echo(f(f'{abs(diff)} COM ports excluded', Level.WARN))
         else:
             click.echo(f(f'{diff} varients excluded', Level.WARN))
-    possible_ports = min(len(varient_json["varients"]), len(load_ports))
-    if success != possible_ports:
-        click.echo(f(f'{possible_ports - success} COM ports failed', Level.ERROR))
-    time.sleep(1)
+    if success != len(config_ports):
+        click.echo(f(f'{len(config_ports) - success} COM ports failed', Level.ERROR))
+    time.sleep(2)
     # check the status of every serial port
     for address,pid in get_serial_ports(ports_exclude):
         poll_serial_port(address, pid)
@@ -202,6 +204,6 @@ def diagnose(port_exclude, cli_path, config):
 if __name__ == '__main__':
     # loom_autodeploy()
     # upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "mock.bin", False, "mock-sketch", "../config.json")
-    upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "Loom.bin", False, "../../Base", "../config.json")
+    upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "Loom.bin", True, "../../Base", "../config.json")
     time.sleep(1)
     flash([], "./arduino-cli/arduino-cli.exe", False, open("../HydroKitConfig.json", "r", encoding="utf8"),  open("../HydroKitVarients.json", "r", encoding="utf8"))

@@ -46,7 +46,7 @@ void setup() {
 
 	// delay 5 seconds, running the bootloader during that time, so we can report back status
 	uint32_t start = millis();
-	while(millis() - start < 30000) 
+	while(millis() - start < 10000) 
 		Bootloader::run_bootloader();
 
 	// get the config
@@ -57,7 +57,11 @@ void setup() {
 	if (did_serialize) {
 		Loom.set_print_verbosity(Verbosity::V_LOW);
 		Loom.parse_config_json(doc.as<JsonObject>());
-		LPrintln("\n ** Setup Complete ** "); 
+		LPrintln("\n ** Setup Complete ** ");
+	}
+	else {
+		Serial.println("Serialization error: ");
+		Serial.println(did_serialize);
 	}
 }
 
@@ -69,6 +73,8 @@ void loop() {
 		Loom.package();
 		Loom.display_data();
 		Loom.OLED().log();
+		Loom.SDCARD().log();
+		Loom.GoogleSheets().publish();
 
 		/*
 		if(!Loom.Spool().publish()){

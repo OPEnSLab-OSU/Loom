@@ -34,7 +34,7 @@ DIAGNOSE_RES = parse.compile('D:"{sensor_name:l}",{success:d=1},"{error:l}"\r\n'
 # S:OK
 START_RES = b'S:OK\r\n'
 # error
-ERROR_RES = b'ERROR\r\n'
+ERROR_RES = b'ERROR'
 
 class Status(enum.Enum):
     OK = 0
@@ -106,7 +106,7 @@ def send_serial_command(address, cmd, response):
             result_decoded = None
             status = None
             attempt = 0
-            while attempt < 5 and result_decoded is None and status != ERROR_RES:
+            while attempt < 5 and result_decoded is None and (status is None or ERROR_RES not in status):
                 # flush the serial buffer
                 serial_port.reset_input_buffer()
                 # write the status command
@@ -116,7 +116,6 @@ def send_serial_command(address, cmd, response):
                     # if the read times out, the device probably just isn't flashed
                     try:
                         status = serial_port.readline()
-                        print(status)
                     except serial.SerialTimeoutException:
                         print_serial_status(Level.WARN, address, 'No status from port')
                         return Status.NOT_FLASHED
@@ -125,14 +124,14 @@ def send_serial_command(address, cmd, response):
                         result_decoded = response.parse(status.decode())
                     else:
                         result_decoded = (response == status)
-                    if result_decoded is not None or serial_port.inWaiting() == 0 or status == ERROR_RES:
+                    if result_decoded is not None or serial_port.inWaiting() == 0 or ERROR_RES in status:
                         break
                 attempt = attempt + 1
             if result_decoded is None:
-                print_serial_status(Level.WARN, address, f'Invalid response: "{ status.rstrip() }" when sensing command "{ cmd.decode().rstrip() }"')
+                print_serial_status(Level.WARN, address, f'Invalid response: "{ status.decode().rstrip() if status is not None else status }" when sensing command "{ cmd.decode().rstrip() }"')
                 return Status.NOT_FLASHED
-            elif status == ERROR_RES:
-                print_serial_status(Level.ERROR, address, f'Error status on command "{ cmd.decode().rstrip() }"')
+            elif ERROR_RES in status:
+                print_serial_status(Level.ERROR, address, f'Error status "{ status.decode().rstrip() }"')
                 return Status.ERROR
             return result_decoded if isinstance(response, parse.Parser) else Status.OK
     except serial.SerialTimeoutException:
@@ -145,16 +144,12 @@ def reset_board_bootloader(address):
     ser = serial.Serial(timeout=2, inter_byte_timeout=2)
     ser.port = address
     ser.open()
-    time.sleep(0.1)
     ser.baudrate = 1200 # This is magic.
     ser.flush()
-    time.sleep(0.1)
     ser.rts = True
     ser.flush()
-    time.sleep(0.1)
     ser.dtr = False
     ser.flush()
-    time.sleep(0.1)
     ser.close()
 
 def upload_serial_port(bossac_path, bin_path, address):

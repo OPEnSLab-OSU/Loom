@@ -552,7 +552,11 @@ bool LoomManager::parse_config_json(JsonObject config)
 		snprintf(this->device_name, 20, "%s", general["name"].as<const char*>());
 	}
 	if (general.containsKey("instance")) {
-		this->instance = general["instance"];
+		const JsonVariantConst inst = general["instance"];
+		if (inst.is<int>())
+			this->instance = general["instance"];
+		else if (inst.is<const char*>())
+			this->instance = atoi(inst.as<const char*>());
 	}
 	if (general.containsKey("interval")) {
 		this->interval = general["interval"];

@@ -69,11 +69,17 @@ static bool parse_keys(const char* input, const size_t max, JsonObject& keys) {
 	return true;
 }
 
-static bool json_sub(const char* input, const size_t max, const JsonObjectConst& sub_obj, char* output) {
+static bool print_error(const char* error) {
+    Serial.print("ERROR:");
+    Serial.println(error);
+    return false;
+}
+
+static bool json_sub(const char* input, const size_t max, const JsonObjectConst& sub_obj, char* output, const size_t output_max) {
 	// copy the input JSON into the output, until we hid a substitution "${" or EOF
 	unsigned int input_index = 0;
 	unsigned int output_index = 0;
-	while (input_index < max && output_index < max - 1) {
+	while (input_index < max && output_index < output_max - 1) {
 		// copy JSON into the buffer until we encounter a '$'
 		if (input[input_index] == '$' && input[input_index + 1] == '{') {
 			// find the key in the JSON
@@ -84,7 +90,7 @@ static bool json_sub(const char* input, const size_t max, const JsonObjectConst&
 				unsigned int key_index = 0;
 				while (input[input_index] != '}') {
 					if (input_index >= max - 2 || key_index >= sizeof(key) - 2) 
-						return false;
+						return print_error("error 1");
 					key[key_index++] = input[input_index++];
 				}
 				key[key_index] = '\0';
@@ -95,9 +101,9 @@ static bool json_sub(const char* input, const size_t max, const JsonObjectConst&
 			{
 				const char* value = sub_obj[key];
 				if (value == nullptr) 
-					return false;
-				if (strnlen(value, 1023) + output_index > max) 
-					return false;
+					return print_error(key);
+				if (strnlen(value, 1023) + output_index > output_max) 
+					return print_error("error 3");
 				// for loop copy, replacing '\r' and '\n' with the real character
 				{
 					size_t val_index = 0;
@@ -119,15 +125,11 @@ static bool json_sub(const char* input, const size_t max, const JsonObjectConst&
 				}
 			}
 		}
+        else if (input[input_index] == '\0') break;
 		else output[output_index++] = input[input_index++];
 	}
 	output[output_index] = '\0';
 	return true;
-}
-
-static bool print_error(const char* error) {
-    // Serial.println(error);
-    return false;
 }
 
 static bool run_flash_cmd(const char* input, const size_t max) {
@@ -146,13 +148,19 @@ static bool run_flash_cmd(const char* input, const size_t max) {
         return print_error("No timestamp present");
     // SD card update
     {
+        // convert the JSON to be pretty printed
+        StaticJsonDocument<2048> doc;
+        if (deserializeJson(doc, &input[1], idx - 3))
+            return print_error("Could not deserialize input");
+        // write it to the sdcard
         SdFat sd;
         File file;
         if(!sd.begin(10, SD_SCK_MHZ(50)))
             return print_error("Could not open SDcard");
-        if(!file.open(FILE_NAME, O_WRONLY | O_CREAT))
+        if(!file.open(FILE_NAME, O_WRONLY | O_CREAT | O_TRUNC))
             return print_error("Could not open file");
-        file.write(&input[1], idx - 3);
+        if(serializeJsonPretty(doc, file) <= 0)
+            return print_error("Serialization failed");
         if (!file.sync() || file.getWriteError())
             return print_error("Writing to SD card failed");
         file.close();
@@ -163,7 +171,7 @@ static bool run_flash_cmd(const char* input, const size_t max) {
         props.is_written = true;
         props.instance = instance;
         strncpy(props.last_write, stamp, sizeof(props.last_write));
-        if(!serializeJson(sub_doc, props.json_secrets, sizeof(props.json_secrets)))
+        if(serializeJson(sub_doc, props.json_secrets, sizeof(props.json_secrets)) <= 0)
             return print_error("JSON serialization failed");
         flashkeys.write(props);
     }
@@ -187,10 +195,13 @@ bool Bootloader::get_config(JsonDocument& doc) {
         File file;
         sd.begin(10, SD_SCK_MHZ(50));
         if(!file.open(FILE_NAME, O_READ))
-            return false;
-        read = file.read(json, sizeof(json));
-        if (read < 1)
-            return false;
+            return print_error("Could not open file");
+        StaticJsonDocument<2048> buf;
+        if(deserializeJson(buf, file))
+            return print_error("Deserialization of file json failed");
+        read = serializeJson(buf, json);
+        if (read <= 1)
+            return print_error("Could not read from file");
         file.close();
     }
     // deserialize the substitution keys
@@ -200,8 +211,8 @@ bool Bootloader::get_config(JsonDocument& doc) {
     {
         char output[2048];
         const JsonObjectConst sub_obj = sub_keys.as<JsonObjectConst>();
-	    if (!json_sub(json, read, sub_obj, output))
-		    return false;
+	    if (!json_sub(json, read, sub_obj, output, sizeof(output)))
+		    return print_error("Json substitution failed");
 	    // deserialize the JSON
 	    deserializeJson(doc, static_cast<const char*>(output));
     }
