@@ -198,9 +198,10 @@ def diagnose(port_exclude, cli_path, config):
     Run diagnostics on Loom kits
     """
     pass
-//
+
 if __name__ == '__main__':
     # loom_autodeploy()
+    # upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "mock.bin", False, "mock-sketch", "../config.json")
     upload([], False, "./arduino-cli/arduino-cli.exe", "./bossac/bossac.exe", "Loom.bin", False, "../../Base", "../config.json")
     time.sleep(1)
     flash([], "./arduino-cli/arduino-cli.exe", False, open("../HydroKitConfig.json", "r", encoding="utf8"),  open("../HydroKitVarients.json", "r", encoding="utf8"))

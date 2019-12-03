@@ -46,7 +46,7 @@ void setup() {
 
 	// delay 5 seconds, running the bootloader during that time, so we can report back status
 	uint32_t start = millis();
-	while(millis() - start < 10000) 
+	while(millis() - start < 30000) 
 		Bootloader::run_bootloader();
 
 	// get the config
@@ -68,6 +68,7 @@ void loop() {
 		Loom.measure();
 		Loom.package();
 		Loom.display_data();
+		Loom.OLED().log();
 
 		/*
 		if(!Loom.Spool().publish()){

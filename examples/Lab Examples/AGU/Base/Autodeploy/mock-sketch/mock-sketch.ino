@@ -4,6 +4,13 @@
 
 
 void setup() {
+    // Needs to be done for Hypno Board
+	pinMode(5, OUTPUT);   // Enable control of 3.3V rail 
+	pinMode(6, OUTPUT);   // Enable control of 5V rail 
+
+	//See Above
+	digitalWrite(5, LOW); // Enable 3.3V rail
+	digitalWrite(6, HIGH);  // Enable 5V rail
     // put your setup code here, to run once:
     Serial.begin(9600);
     while(!Serial);
