@@ -34,7 +34,7 @@
 
 // Used to optimize searching for sensors:
 // search addresses in array rather than 0-127 
-const byte Loom_Multiplexer::known_addresses[] = 
+const std::array<byte, 21> Loom_Multiplexer::known_addresses = 
 {
 	0x10, ///< ZXGESTURESENSOR
 	0x11, ///< ZXGESTURESENSOR
@@ -46,7 +46,7 @@ const byte Loom_Multiplexer::known_addresses[] =
 	0x20, ///< FXAS21002
 	0x21, ///< FXAS21002
 	0x29, ///< TSL2561 / TSL2591
-    0x36, ///< STEMMA
+	0x36, ///< STEMMA
 	0x39, ///< TSL2561
 	0x40, ///< TMP007
 	0x44, ///< SHT31D
@@ -57,6 +57,18 @@ const byte Loom_Multiplexer::known_addresses[] =
 	0x70, ///< MB1232
 	0x76, ///< MS5803
 	0x77  ///< MS5803
+};
+
+const std::array<byte, 9>  Loom_Multiplexer::alt_addresses = {
+	0x70,
+	0x71,
+	0x72,
+	0x73,
+	0x74,
+	0x75,
+	0x76,
+	0x77,
+	0x78
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -73,18 +85,35 @@ Loom_Multiplexer::Loom_Multiplexer(
 	, sensors(new LoomI2CSensor*[num_ports])
 	, control_port(num_ports)
 {
-	// Begin I2C 
+    
+	// Begin I2C
 	Wire.begin();
 
-	// Create sensor array of 'num_ports' size
-	// sensors = new LoomI2CSensor*[num_ports];
+	Wire.beginTransmission(this->i2c_address);
+	if(Wire.endTransmission() ) { //< Test on this address
+		//< Test Failed
+		LPrintln("Multiplexer not found on specified port. Checking alternate addresses.");
+		this->active = false;
+
+		//< Check all alternate addresses
+		for(auto address : alt_addresses) {
+			Wire.beginTransmission(address);
+			if(Wire.endTransmission()) {
+				continue;
+			} else {
+				active = true;
+				this->i2c_address = address;
+				LPrintln("*** Multiplexer found at: ", address, ", update your config. ***");
+			}
+		}
+	}
 
 	// Initialize array of sensors to Null pointrs
 	for (auto i = 0; i < num_ports; i++) {
 		sensors[i] = nullptr;
 	}
-
-	control_address = get_i2c_on_port(control_port);
+    
+	i2c_conflicts = find_i2c_conflicts();
 
 	// Update sensor list and display   -- currently removed because Mux should be linked to DeviceManager before polling sensors
 	// refresh_sensors();
@@ -102,7 +131,7 @@ Loom_Multiplexer::Loom_Multiplexer(JsonArrayConst p)
 Loom_Multiplexer::~Loom_Multiplexer() 
 {
 	// Free any sensors
-	for (auto i = 0; i < num_ports; i++) {
+	for (auto i = 0U; i < num_ports; i++) {
 		if (sensors[i] != nullptr) {
 			delete sensors[i];
 		}
@@ -113,12 +142,11 @@ Loom_Multiplexer::~Loom_Multiplexer()
 ///////////////////////////////////////////////////////////////////////////////
 LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, const uint8_t port)
 {
-	if(i2c_address != control_address) {
 		LPrintln("Adding Sensor at address:", i2c_address);
 		switch (i2c_address) {
-			case 0x10 : return new Loom_ZXGesture(i2c_address, port);	// ZXGesture
-			case 0x11 : return new Loom_ZXGesture(i2c_address, port);	// ZXGesture
-			case 0x19 : return new Loom_LIS3DH(i2c_address, port);		// LIS3DH
+			case 0x10 : return new Loom_ZXGesture(i2c_address, port);	break;  // ZXGesture
+			case 0x11 : return new Loom_ZXGesture(i2c_address, port);	break;	// ZXGesture
+			case 0x19 : return new Loom_LIS3DH(i2c_address, port);		break;	// LIS3DH
 
 			case 0x1C : // MMA8451 / FXOS8700
 				if (i2c_0x1C == I2C_Selection::L_MMA8451)  return new Loom_MMA8451(i2c_address, port);	// MMA8451
@@ -130,21 +158,21 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, 
 				if (i2c_0x1D == I2C_Selection::L_FXOS8700) return new Loom_FXOS8700(i2c_address, port);	// FXOS8700
 			break;
 
-			case 0x1E : return new Loom_FXOS8700(i2c_address, port);		// FXOS8700
-			case 0x1F : return new Loom_FXOS8700(i2c_address, port);		// FXOS8700
-			case 0x20 : return new Loom_FXAS21002(i2c_address, port);		// FXAS21002
-			case 0x21 : return new Loom_FXAS21002(i2c_address, port);		// FXAS21002
+			case 0x1E : return new Loom_FXOS8700(i2c_address, port);	break;		// FXOS8700
+			case 0x1F : return new Loom_FXOS8700(i2c_address, port);	break;		// FXOS8700
+			case 0x20 : return new Loom_FXAS21002(i2c_address, port);	break;		// FXAS21002
+			case 0x21 : return new Loom_FXAS21002(i2c_address, port);	break;		// FXAS21002
 
 			case 0x29 : // TSL2561 / TSL2591
 				if (i2c_0x29 == I2C_Selection::L_TSL2561) return new Loom_TSL2561(i2c_address, port);	// TSL2561
 				if (i2c_0x29 == I2C_Selection::L_TSL2591) return new Loom_TSL2591(i2c_address, port);	// TSL2591
 			break;
 
-			case 0x36 : return new Loom_STEMMA(i2c_address, port); // STEMMA
-			case 0x39 : return new Loom_TSL2561(i2c_address, port);	// TSL2561
-			case 0x40 : return new Loom_TMP007(i2c_address, port);	// TMP007
-			case 0x44 : return new Loom_SHT31D(i2c_address, port);	// SHT31D
-			case 0x45 : return new Loom_SHT31D(i2c_address, port);	// SHT31D
+			case 0x36 : return new Loom_STEMMA(i2c_address, port);	break; // STEMMA
+			case 0x39 : return new Loom_TSL2561(i2c_address, port);	break;	// TSL2561
+			case 0x40 : return new Loom_TMP007(i2c_address, port);	break;	// TMP007
+			case 0x44 : return new Loom_SHT31D(i2c_address, port);	break;	// SHT31D
+			case 0x45 : return new Loom_SHT31D(i2c_address, port);	break;	// SHT31D
 			
 			case 0x49 : // TSL2561 / AS726X / AS7265X
 				if (i2c_0x49 == I2C_Selection::L_TSL2561) return new Loom_TSL2561(i2c_address, port);	// TSL2561
@@ -153,17 +181,14 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, 
 				if (i2c_0x49 == I2C_Selection::L_AS7265X) return new Loom_AS7265X(i2c_address, port);	// AS7265X
 			break;
 
-			case 0x68 : return new Loom_MPU6050(i2c_address, port);	// MPU6050
-			case 0x69 : return new Loom_MPU6050(i2c_address, port);	// MPU6050
-			case 0x70 : return new Loom_MB1232(i2c_address, port);	// MB1232
-			case 0x76 : return new Loom_MS5803(i2c_address, port);	// MS5803
-			case 0x77 : return new Loom_MS5803(i2c_address, port);	// MS5803
+			case 0x68 : return new Loom_MPU6050(i2c_address, port);	break;	// MPU6050
+			case 0x69 : return new Loom_MPU6050(i2c_address, port);	break;	// MPU6050
+			case 0x70 : return new Loom_MB1232(i2c_address, port);	break;	// MB1232
+			case 0x76 : return new Loom_MS5803(i2c_address, port);	break;	// MS5803
+			case 0x77 : return new Loom_MS5803(i2c_address, port);	break;	// MS5803
 
 			default : return nullptr;
 		}
-	} else {
-		return nullptr;
-	}
 }
 
 
@@ -184,7 +209,7 @@ void Loom_Multiplexer::print_state() const
 	print_module_label();
 	LPrintln("Attached Sensors:");
 
-	for (auto i = 0; i < num_ports; i++) {
+	for (auto i = 0U; i < num_ports; i++) {
 		LPrint("\tPort ", i, ": ");
 		if (sensors[i] != nullptr) {
 			LPrint_Dec_Hex(sensors[i]->get_i2c_address());
@@ -201,7 +226,7 @@ void Loom_Multiplexer::measure()
 {
 	refresh_sensors();
 
-	for (auto i = 0; i < num_ports; i++) {
+	for (auto i = 0U; i < num_ports; i++) {
 		if (sensors[i] != nullptr) {
 			tca_select(i);
 			sensors[i]->measure();
@@ -212,7 +237,7 @@ void Loom_Multiplexer::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::print_measurements() const
 {
-	for (auto i = 0; i < num_ports; i++) {
+	for (auto i = 0U; i < num_ports; i++) {
 		if (sensors[i] != nullptr) {
 			tca_select(i);
 			sensors[i]->print_measurements();
@@ -223,7 +248,7 @@ void Loom_Multiplexer::print_measurements() const
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::package(JsonObject json)
 {
-	for (auto i = 0; i < num_ports; i++) {
+	for (auto i = 0U; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
 			tca_select(i);
 			sensors[i]->package(json);
@@ -240,7 +265,7 @@ void Loom_Multiplexer::get_sensor_list(JsonObject json)
 	JsonObject list = json.createNestedObject("MuxSensors");
 
 	char tmp[3];
-	for (auto i = 0; i < num_ports; i++) {
+	for (auto i = 0U; i < num_ports; i++) {
 		if (sensors[i] != NULL) {
 			itoa(i, tmp, 10);
 			list[tmp] = sensors[i]->get_module_name();
@@ -253,6 +278,9 @@ void Loom_Multiplexer::refresh_sensors()
 {
 	byte previous, current;
 
+    // update conflicts
+    i2c_conflicts = find_i2c_conflicts();
+    
 	for (auto i = 0; i < num_ports; i++) {
 
 		// LPrintln("TCA Port: ", i);
@@ -263,7 +291,7 @@ void Loom_Multiplexer::refresh_sensors()
 		// LPrintln_Hex(previous);
 
 		current = get_i2c_on_port(i);
-
+        
 		// LPrint("Current I2C on port ", i, " : ");
 		// LPrintln_Dec_Hex(current);
 
@@ -329,12 +357,10 @@ byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port) const
 
 	// Iterate through known addresses try to get confirmation from sensor
 	// for (auto addr = 1; addr <= 127; addr++) {
-	for (auto j = 0; j < sizeof(known_addresses)/sizeof(known_addresses[0]); j++) {
-		
-		addr = known_addresses[j];
-		
-		if (addr == this->i2c_address) continue;
-
+	for (const auto addr : known_addresses) {
+        // if this address is on the conflict list, skip it
+        if (i2c_conflict(addr) || addr == this->i2c_address) { continue; }
+        
 		Wire.beginTransmission(addr);
 		byte error = Wire.endTransmission();
 
@@ -344,6 +370,33 @@ byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port) const
 	return 0x00; // No sensor found
 }
 
+bool Loom_Multiplexer::i2c_conflict(byte addr) const {
+    for (byte conflict : i2c_conflicts)
+        if (conflict == addr)
+            return true;
+    return false;
+}
+
+std::vector<byte> Loom_Multiplexer::find_i2c_conflicts() {
+        
+    tca_deselect();
+    std::vector<byte> i2c_conflicts_local;
+    byte addr;
+    // go through all the potentially conflicting sensors and find the ones that respond to blacklist them.
+    for (auto j = 0; j < known_addresses.size(); j++) {
+        
+        addr = known_addresses[j];
+        
+        Wire.beginTransmission(addr);
+        byte error = Wire.endTransmission();
+
+        if (error == 0) {
+            i2c_conflicts_local.push_back(addr);
+        }
+    }
+    
+    return i2c_conflicts_local;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::tca_select(const uint8_t port) const 
@@ -353,6 +406,14 @@ void Loom_Multiplexer::tca_select(const uint8_t port) const
 		Wire.write(1 << port);
 		Wire.endTransmission();  
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_Multiplexer::tca_deselect() const 
+{
+	Wire.beginTransmission(i2c_address);
+	Wire.write(0);
+	Wire.endTransmission();  
 }
 
 ///////////////////////////////////////////////////////////////////////////////

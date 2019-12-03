@@ -15,6 +15,10 @@
 #include "Loom_Module.h"
 #include "Sensors/I2C/Loom_I2C_Sensor.h"
 
+#undef min
+#undef max
+#include <vector>
+#include <array>
 
 /// I2C Address Conflict Selection
 enum class I2C_Selection {
@@ -53,7 +57,7 @@ private:
 
 	/// List of known I2C addresses used by Loom.
 	/// Used to avoid checking addresses that no sensors in Loom use
-	const static byte known_addresses[];
+	const static std::array<byte, 21> known_addresses;
 
 protected:
 
@@ -69,6 +73,9 @@ protected:
 	byte 		control_address;	//< Address at control_port to be ignored by refresh
 
 	unsigned long	last_update_time;	///< When the sensor list was last updated
+    std::vector<byte> i2c_conflicts; ///< List of I2C address conflicts
+    
+	const static std::array<byte, 9> alt_addresses;
 
 public:
 
@@ -166,6 +173,8 @@ private:
 	/// @param[in]	port	The port to open I2C communication on
 	void			tca_select(const uint8_t port) const;
 
+	void			tca_deselect() const;
+
 	/// Create appropriate instance to manage sensor.
 	/// Compares I2C address to known sensors and generates corresponding sensor instance
 	/// @param[in]	i2c_address		The I2C address to match to sensor class
@@ -176,7 +185,16 @@ private:
 	/// @param[in]	port	The port to get sensor address of
 	/// @return		The I2C address of sensor, 0x00 if no sensor found
 	byte			get_i2c_on_port(const uint8_t port) const;
+    
+    /// Checks for an I2C conflict with this address
+    /// @param[in] address              The I2C address to check for conflicts
+    /// @return     True if there is a conflict, false otherwise
+    bool i2c_conflict(byte address) const;
 
+    /// Find all I2C conflicts
+    /// Loops through known addresses and checks if they are being used outside of the multiplexer
+    /// @return     A vector of conflicting I2C addresses
+    std::vector<byte> find_i2c_conflicts();
 };
 
 
