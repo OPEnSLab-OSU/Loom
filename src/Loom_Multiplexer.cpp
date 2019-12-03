@@ -34,7 +34,7 @@
 
 // Used to optimize searching for sensors:
 // search addresses in array rather than 0-127 
-std::vector<byte> Loom_Multiplexer::known_addresses = 
+const std::array<byte, 21> Loom_Multiplexer::known_addresses = 
 {
 	0x10, ///< ZXGESTURESENSOR
 	0x11, ///< ZXGESTURESENSOR
@@ -59,7 +59,7 @@ std::vector<byte> Loom_Multiplexer::known_addresses =
 	0x77  ///< MS5803
 };
 
-std::vector<byte> Loom_Multiplexer::alt_addresses = {
+const std::array<byte, 9>  Loom_Multiplexer::alt_addresses = {
 	0x70,
 	0x71,
 	0x72,
@@ -356,10 +356,7 @@ byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port) const
 
 	// Iterate through known addresses try to get confirmation from sensor
 	// for (auto addr = 1; addr <= 127; addr++) {
-	for (auto j = 0U; j < sizeof(known_addresses)/sizeof(known_addresses[0]); j++) {
-		
-		addr = known_addresses[j];
-        
+	for (const auto addr : known_addresses) {
         // if this address is on the conflict list, skip it
         if (i2c_conflict(addr) || addr == this->i2c_address) { continue; }
         
@@ -382,7 +379,7 @@ bool Loom_Multiplexer::i2c_conflict(byte addr) const {
 std::vector<byte> Loom_Multiplexer::find_i2c_conflicts() {
         
     tca_deselect();
-    std::vector<byte> i2c_conflicts;
+    std::vector<byte> i2c_conflicts_local;
     byte addr;
     // go through all the potentially conflicting sensors and find the ones that respond to blacklist them.
     for (auto j = 0; j < known_addresses.size(); j++) {
@@ -393,11 +390,11 @@ std::vector<byte> Loom_Multiplexer::find_i2c_conflicts() {
         byte error = Wire.endTransmission();
 
         if (error == 0) {
-            i2c_conflicts.push_back(addr);
+            i2c_conflicts_local.push_back(addr);
         }
     }
     
-    return i2c_conflicts;
+    return i2c_conflicts_local;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

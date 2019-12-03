@@ -18,7 +18,7 @@
 #undef min
 #undef max
 #include <vector>
-
+#include <array>
 
 /// I2C Address Conflict Selection
 enum class I2C_Selection {
@@ -57,7 +57,7 @@ private:
 
 	/// List of known I2C addresses used by Loom.
 	/// Used to avoid checking addresses that no sensors in Loom use
-	static std::vector<byte> known_addresses;
+	const static std::array<byte, 21> known_addresses;
 
 protected:
 
@@ -72,7 +72,7 @@ protected:
 	unsigned long	last_update_time;	///< When the sensor list was last updated
     std::vector<byte> i2c_conflicts; ///< List of I2C address conflicts
     
-	static std::vector<byte> alt_addresses;
+	const static std::array<byte, 9> alt_addresses;
 
 public:
 
