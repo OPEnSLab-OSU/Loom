@@ -87,7 +87,7 @@ public:
 	/// @param[in]	dynamic_list			Bool | <true> | {true, false} | Whether or not to automatically check for new sensors
 	/// @param[in]	update_period			Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
 	Loom_Multiplexer(
-			const byte			i2c_address			= 0x70,
+			const byte			i2c_address			= 0x71,
 			const uint8_t		num_ports			= 8,
 			const bool			dynamic_list		= true,
 			const uint			update_period		= 5000
