@@ -47,14 +47,9 @@ void LoomNTPSync::second_stage_ctor()
 	LoomRTC* rtc_temp = device_manager->get_rtc_module();
 	if (rtc_temp != nullptr) {
 		m_rtc = rtc_temp;
-		if (m_internet->is_connected()) {
-			print_module_label();
-			LPrintln("Setting RTC time");
-			m_rtc->time_adjust(m_internet->get_time(), true); // true to indicate this time is UTC
-
-			// If only set to sync once, set next sync time in past
-			if (m_sync_interval == 0) m_next_sync = DateTime(0);
-		}
+		print_module_label();
+		LPrint("Running NTP...\n");
+		measure();
 	} else {
 		m_last_error = Error::INVAL_RTC;
 		print_module_label();
@@ -89,7 +84,7 @@ void LoomNTPSync::measure()
 	// if a sync is requested
 	if (m_next_sync.unixtime() != 0 && m_rtc->now().secondstime() > m_next_sync.secondstime()) {
 		// if the engine is operating correctly
-		if (m_last_error == Error::OK && m_internet->is_connected()) {
+		if ((m_last_error == Error::OK || m_last_error == Error::NON_START) && m_internet->is_connected()) {
 			// synchronize the RTC
 			DateTime timeNow;
 			int attempt_count = 0;
@@ -134,6 +129,7 @@ DateTime LoomNTPSync::m_sync_rtc()
 	// send it to the rtc
 	const DateTime time(epoch);
 	m_rtc->time_adjust(time);
+	m_last_error = Error::OK;
 	// log boi
 	print_module_label();
 	LPrint("Synchronized RTC to ", time.unixtime(), "\n");
