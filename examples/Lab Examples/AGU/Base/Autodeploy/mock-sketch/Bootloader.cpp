@@ -11,6 +11,8 @@ constexpr char STATUS = 'R';
 constexpr char DIAGNOSE = 'D';
 constexpr char START_LOOM = 'S';
 constexpr char FLASH_LOOM = 'F';
+constexpr char WIPE_SD = 'W';
+constexpr char WRITE_JSON_FILE = 'C';
 constexpr char TIME[] = __TIMESTAMP__;
 constexpr char FILE_NAME[] = "cfg.json";
 
@@ -69,11 +71,17 @@ static bool parse_keys(const char* input, const size_t max, JsonObject& keys) {
 	return true;
 }
 
-static bool json_sub(const char* input, const size_t max, const JsonObjectConst& sub_obj, char* output) {
+static bool print_error(const char* error) {
+    Serial.print("ERROR:");
+    Serial.println(error);
+    return false;
+}
+
+static bool json_sub(const char* input, const size_t max, const JsonObjectConst& sub_obj, char* output, const size_t output_max) {
 	// copy the input JSON into the output, until we hid a substitution "${" or EOF
 	unsigned int input_index = 0;
 	unsigned int output_index = 0;
-	while (input_index < max && output_index < max - 1) {
+	while (input_index < max && output_index < output_max - 1) {
 		// copy JSON into the buffer until we encounter a '$'
 		if (input[input_index] == '$' && input[input_index + 1] == '{') {
 			// find the key in the JSON
@@ -84,7 +92,7 @@ static bool json_sub(const char* input, const size_t max, const JsonObjectConst&
 				unsigned int key_index = 0;
 				while (input[input_index] != '}') {
 					if (input_index >= max - 2 || key_index >= sizeof(key) - 2) 
-						return false;
+						return print_error("error 1");
 					key[key_index++] = input[input_index++];
 				}
 				key[key_index] = '\0';
@@ -95,9 +103,9 @@ static bool json_sub(const char* input, const size_t max, const JsonObjectConst&
 			{
 				const char* value = sub_obj[key];
 				if (value == nullptr) 
-					return false;
-				if (strnlen(value, 1023) + output_index > max) 
-					return false;
+					return print_error(key);
+				if (strnlen(value, 1023) + output_index > output_max) 
+					return print_error("error 3");
 				// for loop copy, replacing '\r' and '\n' with the real character
 				{
 					size_t val_index = 0;
@@ -119,59 +127,98 @@ static bool json_sub(const char* input, const size_t max, const JsonObjectConst&
 				}
 			}
 		}
+        else if (input[input_index] == '\0') break;
 		else output[output_index++] = input[input_index++];
 	}
 	output[output_index] = '\0';
 	return true;
 }
 
-static bool print_error(const char* error) {
-    Serial.println(error);
-    return false;
-}
-
 static bool run_flash_cmd(const char* input, const size_t max) {
-    // find the splitting point
-	size_t idx = find_keys_in_cmd(input, max);
-	if (!idx)
-		return print_error("Could not split keys and json");
 	// serialize the substitution keys into a "dictionary"
 	StaticJsonDocument<512> sub_doc;
 	JsonObject keys = sub_doc.to<JsonObject>();
-	if (!parse_keys(&input[idx], sizeof(input) - idx, keys))
+	if (!parse_keys(input, max, keys))
 		return print_error("Could not parse keys");
     const char* stamp = keys["stamp"].as<const char*>();
     const int instance = keys["instance"];
     if (stamp == nullptr)
         return print_error("No timestamp present");
-    // SD card update
-    {
-        SdFat sd;
-        File file;
-        if(!sd.begin(10, SD_SCK_MHZ(50)))
-            return print_error("Could not open SDcard");
-        if(!file.open(FILE_NAME, O_WRONLY | O_CREAT))
-            return print_error("Could not open file");
-        file.write(&input[1], idx - 3);
-        if (!file.sync() || file.getWriteError())
-            return print_error("Writing to SD card failed");
-        file.close();
-    }
-    // flash storage update
-    {
-        BootProps props = {};
-        props.is_written = true;
-        props.instance = instance;
-        strncpy(props.last_write, stamp, sizeof(props.last_write));
-        if(!serializeJson(sub_doc, props.json_secrets, sizeof(props.json_secrets)))
-            return print_error("JSON serialization failed");
-        flashkeys.write(props);
-    }
+    BootProps props = {};
+    props.is_written = true;
+    props.instance = instance;
+    strncpy(props.last_write, stamp, sizeof(props.last_write));
+    if(serializeJson(sub_doc, props.json_secrets, sizeof(props.json_secrets)) <= 0)
+        return print_error("JSON serialization failed");
+    flashkeys.write(props);
     return true;
 }
 
 static void load_flashkeys() {
     flashkeys.read(&mem_keys);
+}
+
+static bool wipe_sd() {
+    Sd2Card sd;
+    if(!sd.begin(10, SD_SCK_MHZ(50)))
+        return print_error("Could not open SDcard");
+    Bootloader::format_sd_fat32(sd);
+    return true;
+}
+
+static bool run_file_command(char* input, const size_t max) {
+    // find the placement of the second single quote in the string
+    size_t index = 1;
+    while(input[index] != '\'') {
+        if (input[index] == '\0' || ++index >= max)
+            return print_error("Could not find end quote for file");
+    }
+    // take the next '' and use it as the filename
+    size_t name_index_start = index + 3;
+    size_t name_index_end = name_index_start;
+    while (input[name_index_end] != '\'') {
+        if (input[name_index_end] == '\0' || ++name_index_end >= max)
+            return print_error("Could not find end quote for name");
+    }
+    // replace the end quote with a null terminator for simplicity
+    input[name_index_end] = '\0';
+    // convert the JSON to be pretty printed
+    StaticJsonDocument<2048> doc;
+    if (deserializeJson(doc, &input[1], index - 1))
+        return print_error("Could not deserialize input");
+    // write it to the sdcard
+    SdFat sd;
+    File file;
+    if(!sd.begin(10, SD_SCK_MHZ(50)))
+        return print_error("Could not open SDcard");
+    if(!file.open(&input[name_index_start], O_WRONLY | O_CREAT | O_TRUNC))
+        return print_error("Could not open file");
+    if(serializeJsonPretty(doc, file) <= 0)
+        return print_error("Serialization failed");
+    if (!file.sync() || file.getWriteError())
+        return print_error("Writing to SD card failed");
+    file.close();
+    return true;
+}
+
+static void get_input(char* input, const size_t max) {
+    size_t index = 0;
+    while (index < max) {
+        if (Serial.available()) {
+            char c = static_cast<char>(Serial.read());
+            if (c == '\n') {
+                // clear the carrage return and newline
+                if (index > 0 && input[index - 1] == '\r')
+                    input[index - 1] = '\0';
+                else
+                    input[index] = '\0';
+                // all done
+                break;
+            }
+            // else add it to the input buffer
+            input[index++] = c;
+        }
+    }
 }
 
 bool Bootloader::get_config(JsonDocument& doc) {
@@ -187,10 +234,13 @@ bool Bootloader::get_config(JsonDocument& doc) {
         File file;
         sd.begin(10, SD_SCK_MHZ(50));
         if(!file.open(FILE_NAME, O_READ))
-            return false;
-        read = file.read(json, sizeof(json));
-        if (read < 1)
-            return false;
+            return print_error("Could not open file");
+        StaticJsonDocument<2048> buf;
+        if(deserializeJson(buf, file))
+            return print_error("Deserialization of file json failed");
+        read = serializeJson(buf, json);
+        if (read <= 1)
+            return print_error("Could not read from file");
         file.close();
     }
     // deserialize the substitution keys
@@ -200,8 +250,8 @@ bool Bootloader::get_config(JsonDocument& doc) {
     {
         char output[2048];
         const JsonObjectConst sub_obj = sub_keys.as<JsonObjectConst>();
-	    if (!json_sub(json, read, sub_obj, output))
-		    return false;
+	    if (!json_sub(json, read, sub_obj, output, sizeof(output)))
+		    return print_error("Json substitution failed");
 	    // deserialize the JSON
 	    deserializeJson(doc, static_cast<const char*>(output));
     }
@@ -225,23 +275,7 @@ void Bootloader::run_bootloader() {
             Serial << "ERROR\r\n";
         } else if (first == FLASH_LOOM) {
             char input[2048];
-            uint16_t index = 0;
-            while (index < sizeof(input)) {
-                if (Serial.available()) {
-                    char c = static_cast<char>(Serial.read());
-                    if (c == '\n') {
-                        // clear the carrage return and newline
-                        if (index > 0 && input[index - 1] == '\r')
-                            input[index - 1] = '\0';
-                        else
-                            input[index] = '\0';
-                        // all done
-                        break;
-                    }
-                    // else add it to the input buffer
-                    input[index++] = c;
-                }
-            }
+            get_input(input, sizeof(input));
             // parse the input, and make sure it's all valid
             if (input[0] != ':' || !run_flash_cmd(&input[1], sizeof(input) - 1))
                 Serial << "ERROR\r\n";
@@ -249,6 +283,18 @@ void Bootloader::run_bootloader() {
                 Serial << "F:OK\r\n";
             // return b/c we already flushed the input buffer
             return;
+        } else if (first == WIPE_SD) {
+            if (!wipe_sd())
+                Serial << "ERROR\r\n";
+            else 
+                Serial << "W:OK\r\n";
+        } else if (first == WRITE_JSON_FILE) {
+            char input[2048];
+            get_input(input, sizeof(input));
+            if (input[0] != ':' || !run_file_command(&input[1], sizeof(input) - 1))
+                Serial << "ERROR\r\n";
+            else
+                Serial << "C:OK\r\n";
         } else if (first == START_LOOM){
             Serial << "S:OK\r\n";
             Serial.flush();

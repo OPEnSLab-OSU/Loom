@@ -1,8 +1,8 @@
 {
   "general": {
-    "name:": "I2CKit",
-    "instance": ${instance},
-    "interval": 10000
+    "name": "I2CKit",
+    "instance": "${instance}",
+    "interval": 5000
   },
   "components": [
     {
@@ -47,19 +47,6 @@
       ]
     },
     {
-      "name": "Spool",
-      "params": [
-          "Spool",
-          7002,
-          "spool.open-sensing.org",
-          "/api/device/data",
-          "${spool_coord_id}",
-          "${spool_dev_id}",
-          "${spool_cert}",
-          "${spool_key}"
-      ]
-    },
-    {
       "name": "GoogleSheets",
       "params": [
           "Goog",
@@ -67,6 +54,12 @@
           "${sheet_url}",
           "${sheet_id}",
           true
+      ]
+    },
+    {
+      "name": "NTP_Sync",
+      "params": [
+          "default"
       ]
     }
   ]

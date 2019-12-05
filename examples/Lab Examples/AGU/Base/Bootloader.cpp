@@ -11,6 +11,8 @@ constexpr char STATUS = 'R';
 constexpr char DIAGNOSE = 'D';
 constexpr char START_LOOM = 'S';
 constexpr char FLASH_LOOM = 'F';
+constexpr char WIPE_SD = 'W';
+constexpr char WRITE_JSON_FILE = 'C';
 constexpr char TIME[] = __TIMESTAMP__;
 constexpr char FILE_NAME[] = "cfg.json";
 
@@ -133,53 +135,90 @@ static bool json_sub(const char* input, const size_t max, const JsonObjectConst&
 }
 
 static bool run_flash_cmd(const char* input, const size_t max) {
-    // find the splitting point
-	size_t idx = find_keys_in_cmd(input, max);
-	if (!idx)
-		return print_error("Could not split keys and json");
 	// serialize the substitution keys into a "dictionary"
 	StaticJsonDocument<512> sub_doc;
 	JsonObject keys = sub_doc.to<JsonObject>();
-	if (!parse_keys(&input[idx], sizeof(input) - idx, keys))
+	if (!parse_keys(input, max, keys))
 		return print_error("Could not parse keys");
     const char* stamp = keys["stamp"].as<const char*>();
     const int instance = keys["instance"];
     if (stamp == nullptr)
         return print_error("No timestamp present");
-    // SD card update
-    {
-        // convert the JSON to be pretty printed
-        StaticJsonDocument<2048> doc;
-        if (deserializeJson(doc, &input[1], idx - 3))
-            return print_error("Could not deserialize input");
-        // write it to the sdcard
-        SdFat sd;
-        File file;
-        if(!sd.begin(10, SD_SCK_MHZ(50)))
-            return print_error("Could not open SDcard");
-        if(!file.open(FILE_NAME, O_WRONLY | O_CREAT | O_TRUNC))
-            return print_error("Could not open file");
-        if(serializeJsonPretty(doc, file) <= 0)
-            return print_error("Serialization failed");
-        if (!file.sync() || file.getWriteError())
-            return print_error("Writing to SD card failed");
-        file.close();
-    }
-    // flash storage update
-    {
-        BootProps props = {};
-        props.is_written = true;
-        props.instance = instance;
-        strncpy(props.last_write, stamp, sizeof(props.last_write));
-        if(serializeJson(sub_doc, props.json_secrets, sizeof(props.json_secrets)) <= 0)
-            return print_error("JSON serialization failed");
-        flashkeys.write(props);
-    }
+    BootProps props = {};
+    props.is_written = true;
+    props.instance = instance;
+    strncpy(props.last_write, stamp, sizeof(props.last_write));
+    if(serializeJson(sub_doc, props.json_secrets, sizeof(props.json_secrets)) <= 0)
+        return print_error("JSON serialization failed");
+    flashkeys.write(props);
     return true;
 }
 
 static void load_flashkeys() {
     flashkeys.read(&mem_keys);
+}
+
+static bool wipe_sd() {
+    Sd2Card sd;
+    if(!sd.begin(10, SD_SCK_MHZ(50)))
+        return print_error("Could not open SDcard");
+    Bootloader::format_sd_fat32(sd);
+    return true;
+}
+
+static bool run_file_command(char* input, const size_t max) {
+    // find the placement of the second single quote in the string
+    size_t index = 1;
+    while(input[index] != '\'') {
+        if (input[index] == '\0' || ++index >= max)
+            return print_error("Could not find end quote for file");
+    }
+    // take the next '' and use it as the filename
+    size_t name_index_start = index + 3;
+    size_t name_index_end = name_index_start;
+    while (input[name_index_end] != '\'') {
+        if (input[name_index_end] == '\0' || ++name_index_end >= max)
+            return print_error("Could not find end quote for name");
+    }
+    // replace the end quote with a null terminator for simplicity
+    input[name_index_end] = '\0';
+    // convert the JSON to be pretty printed
+    StaticJsonDocument<2048> doc;
+    if (deserializeJson(doc, &input[1], index - 1))
+        return print_error("Could not deserialize input");
+    // write it to the sdcard
+    SdFat sd;
+    File file;
+    if(!sd.begin(10, SD_SCK_MHZ(50)))
+        return print_error("Could not open SDcard");
+    if(!file.open(&input[name_index_start], O_WRONLY | O_CREAT | O_TRUNC))
+        return print_error("Could not open file");
+    if(serializeJsonPretty(doc, file) <= 0)
+        return print_error("Serialization failed");
+    if (!file.sync() || file.getWriteError())
+        return print_error("Writing to SD card failed");
+    file.close();
+    return true;
+}
+
+static void get_input(char* input, const size_t max) {
+    size_t index = 0;
+    while (index < max) {
+        if (Serial.available()) {
+            char c = static_cast<char>(Serial.read());
+            if (c == '\n') {
+                // clear the carrage return and newline
+                if (index > 0 && input[index - 1] == '\r')
+                    input[index - 1] = '\0';
+                else
+                    input[index] = '\0';
+                // all done
+                break;
+            }
+            // else add it to the input buffer
+            input[index++] = c;
+        }
+    }
 }
 
 bool Bootloader::get_config(JsonDocument& doc) {
@@ -236,23 +275,7 @@ void Bootloader::run_bootloader() {
             Serial << "ERROR\r\n";
         } else if (first == FLASH_LOOM) {
             char input[2048];
-            uint16_t index = 0;
-            while (index < sizeof(input)) {
-                if (Serial.available()) {
-                    char c = static_cast<char>(Serial.read());
-                    if (c == '\n') {
-                        // clear the carrage return and newline
-                        if (index > 0 && input[index - 1] == '\r')
-                            input[index - 1] = '\0';
-                        else
-                            input[index] = '\0';
-                        // all done
-                        break;
-                    }
-                    // else add it to the input buffer
-                    input[index++] = c;
-                }
-            }
+            get_input(input, sizeof(input));
             // parse the input, and make sure it's all valid
             if (input[0] != ':' || !run_flash_cmd(&input[1], sizeof(input) - 1))
                 Serial << "ERROR\r\n";
@@ -260,6 +283,18 @@ void Bootloader::run_bootloader() {
                 Serial << "F:OK\r\n";
             // return b/c we already flushed the input buffer
             return;
+        } else if (first == WIPE_SD) {
+            if (!wipe_sd())
+                Serial << "ERROR\r\n";
+            else 
+                Serial << "W:OK\r\n";
+        } else if (first == WRITE_JSON_FILE) {
+            char input[2048];
+            get_input(input, sizeof(input));
+            if (input[0] != ':' || !run_file_command(&input[1], sizeof(input) - 1))
+                Serial << "ERROR\r\n";
+            else
+                Serial << "C:OK\r\n";
         } else if (first == START_LOOM){
             Serial << "S:OK\r\n";
             Serial.flush();

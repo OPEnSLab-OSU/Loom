@@ -22,6 +22,9 @@ STATUS = b'R\r\n'
 DIAGNOSE = b'D\r\n'
 FLASH_MODE = b'M\r\n'
 START_LOOM = b'S\r\n'
+WIPE_SD = b'W\r\n'
+
+CFG_NAME = "cfg.json"
 
 # F:OK
 FLASH_RES = b'F:OK\r\n'
@@ -33,6 +36,10 @@ STATUS_RES = parse.compile('R:"{device_name:w}",{is_flashed:d=1},"{build_time:tc
 DIAGNOSE_RES = parse.compile('D:"{sensor_name:l}",{success:d=1},"{error:l}"\r\n')
 # S:OK
 START_RES = b'S:OK\r\n'
+# C:OK
+WRITE_FILE_RES = b'C:OK\r\n'
+# W:OK
+WIPE_SD_RES = b'W:OK\r\n'
 # error
 ERROR_RES = b'ERROR'
 
@@ -98,10 +105,10 @@ def poll_serial_port(address, pid):
         print_serial_status(Level.WARN, address, f'Status {result}')
         return result
 
-def send_serial_command(address, cmd, response):
+def send_serial_command(address, cmd, response, timeout=2):
     try:
         # else poll the device
-        with serial.Serial(address, BAUD, timeout=2, write_timeout=2, inter_byte_timeout=2) as serial_port:
+        with serial.Serial(address, BAUD, timeout=timeout, write_timeout=timeout, inter_byte_timeout=timeout) as serial_port:
             # poll the device
             result_decoded = None
             status = None
@@ -160,15 +167,21 @@ def upload_serial_port(bossac_path, bin_path, address):
     print_serial_status(Level.OK, address, 'Upload succeded')
     return True
 
-def flash_config(address, sub_json, config):
+def write_config(address, config_str, fname):
+    command = f'C:\'{config_str}\',\'{fname}\''
+    # echo!
+    print_serial_status(Level.INFO, address, f'Sending command "{command}"')
+    # away we go!
+    return send_serial_command(address, bytes(command + '\r\n', 'utf8'), WRITE_FILE_RES)
+
+def flash_config(address, sub_json):
     # escape the newlines in the sub_json, and copy them into a new dictionary
     escaped_json = { k:(v.replace('\r', '\\r').replace('\n', '\\n') if isinstance(v, str) else v) for k,v in sub_json.items() }
     # send all these key/value pairs to the device
-    keys_str = ','.join([f'\'{key}\':\'{value}\'' for key,value in escaped_json.items()])
-    send_str = f'F:\'{config}\',' + keys_str
+    keys_str = 'F:' + ','.join([f'\'{key}\':\'{value}\'' for key,value in escaped_json.items()])
     # echo!
-    print_serial_status(Level.INFO, address, f'Sending command "{send_str}"')
+    print_serial_status(Level.INFO, address, f'Sending command "{keys_str}"')
     # away we go!
-    return send_serial_command(address, bytes(send_str + '\r\n', 'utf8'), FLASH_RES)
+    return send_serial_command(address, bytes(keys_str + '\r\n', 'utf8'), FLASH_RES)
 
              
