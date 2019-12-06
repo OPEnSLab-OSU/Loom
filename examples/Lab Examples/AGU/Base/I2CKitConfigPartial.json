@@ -1,0 +1,66 @@
+{
+    "general": {
+      "name": "I2CKit",
+      "instance": "${instance}",
+      "interval": 5000
+    },
+    "components": [
+      {
+        "name": "OLED",
+        "params": [
+          "true",
+          "300",
+          "0",
+          "16",
+          "2",
+          "6000",
+          "10",
+          "2"
+        ]
+      },
+      {
+        "name": "DS3231",
+        "params": [
+          11,
+          true
+        ]
+      },
+      {
+        "name": "SD",
+        "params": [
+          true,
+          1000,
+          10,
+          "test",
+          true
+        ]
+      },
+      {
+        "name": "Multiplexer",
+        "params": "default"
+      },
+      {
+        "name": "WiFi",
+        "params": [
+          "${wifi_ssid}",
+          "${wifi_password}"
+        ]
+      },
+      {
+        "name": "GoogleSheets",
+        "params": [
+            "Goog",
+            7002,
+            "${sheet_url}",
+            "${sheet_id}",
+            true
+        ]
+      },
+      {
+        "name": "NTP_Sync",
+        "params": [
+            "default"
+        ]
+      }
+    ]
+  }

@@ -1,36 +1,10 @@
 {
   "general": {
-    "name": "HydroKit",
+    "name": "I2CKit",
     "instance": "${instance}",
-    "interval": 5000
+    "interval": 8000
   },
   "components": [
-    {
-      "name": "Analog",
-      "params": [
-        8,
-        12,
-        false,
-        true,
-        true,
-        false,
-        false,
-        false,
-        0,
-        3,
-        4,
-        0,
-        0,
-        0
-      ]
-    },
-    {
-      "name": "MS5803",
-      "params": [
-        119,
-        255
-      ]
-    },
     {
       "name": "OLED",
       "params": [
@@ -57,9 +31,13 @@
         true,
         1000,
         10,
-        "test",
+        "myfilename",
         true
       ]
+    },
+    {
+      "name": "Multiplexer",
+      "params": "default"
     },
     {
       "name": "WiFi",
