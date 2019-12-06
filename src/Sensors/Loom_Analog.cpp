@@ -267,13 +267,20 @@ float Loom_Analog::convert_thermistor(const uint16_t analog) const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// #define PH_Offset 0.0
+#define PH_Offset 0.0
 
 float Loom_Analog::convert_pH(const uint16_t analog) const
 {
 	// float voltage = convert_voltage(analog);
 	// return pH_range*voltage + pH_offset;
-	return 1000.*convert_voltage(analog); // return millivolts
+
+	// return 1000.*convert_voltage(analog); // return millivolts
+
+	float voltage = convert_voltage(analog);
+	
+	float pHValue = 3.5*voltage + PH_Offset;
+
+	return pHValue;
 }
 
 
