@@ -58,6 +58,7 @@ This is the Doxygen generated documentation of the Loom library code.
 
 ///////////////////////////////////////////////////////////////////////////////
 // I2C Sensors
+#include "Sensors/I2C/Loom_ADS1115.h"
 #include "Sensors/I2C/Loom_AS7262.h"
 #include "Sensors/I2C/Loom_AS7263.h"
 #include "Sensors/I2C/Loom_AS7265X.h"

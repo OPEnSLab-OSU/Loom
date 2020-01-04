@@ -51,6 +51,7 @@
 #include "Sensors/Loom_Analog.h"
 #include "Sensors/Loom_Digital.h"
 
+#include "Sensors/I2C/Loom_ADS1115.h"
 #include "Sensors/I2C/Loom_AS7262.h"
 #include "Sensors/I2C/Loom_AS7263.h"
 #include "Sensors/I2C/Loom_AS7265X.h"
@@ -67,6 +68,8 @@
 #include "Sensors/I2C/Loom_TSL2591.h"
 #include "Sensors/I2C/Loom_ZXGesture.h"
 #include "Sensors/I2C/Loom_STEMMA.h"
+
+
 
 #include "Sensors/SDI12/Loom_Decagon_5TM.h"
 #include "Sensors/SDI12/Loom_Decagon_GS3.h"
@@ -215,6 +218,7 @@ namespace Include
 	constexpr auto Sensors = std::make_tuple(
 				factory::NameModulePair{"Multiplexer",	Construct<Loom_Multiplexer>,	ConstructDefault<Loom_Multiplexer> },
 				// I2C
+				factory::NameModulePair{"ADS1115",		Construct<Loom_ADS1115>,			ConstructDefault<Loom_ADS1115> },
 				factory::NameModulePair{"AS7262",		Construct<Loom_AS7262>,			ConstructDefault<Loom_AS7262> },
 				factory::NameModulePair{"AS7263",		Construct<Loom_AS7263>,			ConstructDefault<Loom_AS7263> },
 				factory::NameModulePair{"AS7265X",		Construct<Loom_AS7265X>,		ConstructDefault<Loom_AS7265X> },

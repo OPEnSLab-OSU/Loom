@@ -44,6 +44,7 @@ class Loom_Analog;
 class Loom_Digital;
 
 // I2C
+class Loom_ADS1115;
 class Loom_AS7262;
 class Loom_AS7263;
 class Loom_AS7265X;
@@ -516,6 +517,7 @@ public:
 	Loom_Digital&		Digital(const uint8_t idx = 0);
 
 	// I2C
+	Loom_ADS1115&		ADS1115(const uint8_t idx = 0);
 	Loom_AS7262&		AS7262(const uint8_t idx = 0);
 	Loom_AS7263&		AS7263(const uint8_t idx = 0);
 	Loom_AS7265X&		AS7265X(const uint8_t idx = 0);

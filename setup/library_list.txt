@@ -35,3 +35,4 @@
 "SSLClient"
 "WiFi101"
 "SparkFun ZX Distance and Gesture Sensor"
+"I2CDev"

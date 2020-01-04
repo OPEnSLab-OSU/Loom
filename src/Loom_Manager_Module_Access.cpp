@@ -200,7 +200,12 @@ Loom_Digital& LoomManager::Digital(const uint8_t idx)
 
 ///////////////////////////////////////////////////////////////////////////////
 //    --- I2C Sensors ---
-
+Loom_ADS1115& LoomManager::ADS1115(const uint8_t idx)
+{
+	LoomModule* tmp = find_module(LoomModule::Type::ADS1115, idx);
+	return (*(Loom_ADS1115*)( (tmp) ? tmp : &global_stub ));
+	
+}
 Loom_AS7262& LoomManager::AS7262(const uint8_t idx) 
 {
 	LoomModule* tmp = find_module(LoomModule::Type::AS7262, idx);
