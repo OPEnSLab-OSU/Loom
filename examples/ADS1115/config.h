@@ -8,7 +8,7 @@
 	'components':[\
 		{\
 			'name':'ADS1115',\
-			'params':"default"\
+			'params':'default'\
 		}\
 	]\
 }"
