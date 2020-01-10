@@ -50,6 +50,8 @@ void LoomInternetPlat::write_http_request(Stream& client, const char* domain, co
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* domain) {
+	pinMode(8, OUTPUT);
+	digitalWrite(8, HIGH);
 	// if we're not currently connected to the internet, try to bring it back
 	if (!is_connected()) connect();
 	if (!is_connected()) {
@@ -88,6 +90,8 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* 
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_ip(const IPAddress& ip, const uint16_t port) {
+	pinMode(8, OUTPUT);
+	digitalWrite(8, HIGH);
 	// if we're not currently connected to the internet, try to bring it back
 	if (!is_connected()) connect();
 	if (!is_connected()) {
