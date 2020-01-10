@@ -12,7 +12,6 @@
 #pragma once
 
 #include "Loom_Misc.h"
-#include "Loom_Translator.h"
 #include "Loom_Module.h"
 #include "Loom_Module_Factory.h"
 
@@ -21,7 +20,7 @@
 // Need to undef max and min for vector to work
 #undef max
 #undef min
-#include <vector>
+// #include <vector>
 
 
 // Forward declarations, specify that these classes
