@@ -114,6 +114,8 @@ void Loom_Ethernet::print_state() const
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Ethernet::connect()
 {
+	pinMode(8, OUTPUT);
+	digitalWrite(8, HIGH);
 	// initialize ethernet shield for Feather
 	Ethernet.init(10);
 
@@ -131,6 +133,8 @@ void Loom_Ethernet::connect()
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::ClientSession Loom_Ethernet::connect_to_domain(const char* domain) {
+	pinMode(8, OUTPUT);
+	digitalWrite(8, HIGH);
 	// if the socket is somehow still open, close it
 	if (m_client.connected()) m_client.stop();
 	// * the rainbow connection *
@@ -149,6 +153,8 @@ LoomInternetPlat::ClientSession Loom_Ethernet::connect_to_domain(const char* dom
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::ClientSession Loom_Ethernet::connect_to_ip(const IPAddress& ip, const uint16_t port) {
+	pinMode(8, OUTPUT);
+	digitalWrite(8, HIGH);
 	// if the socket is somehow still open, close it
 	if (m_client.connected()) m_client.stop();
 	// * the rainbow connection *
@@ -168,6 +174,8 @@ LoomInternetPlat::ClientSession Loom_Ethernet::connect_to_ip(const IPAddress& ip
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::UDPPtr Loom_Ethernet::open_socket(const uint port)
 {
+	pinMode(8, OUTPUT);
+	digitalWrite(8, HIGH);
 	// create the unique pointer
 	UDPPtr ptr = UDPPtr(new EthernetUDP());
 	// use the object created to open a UDP socket

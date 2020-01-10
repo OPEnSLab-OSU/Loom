@@ -118,6 +118,9 @@ void Loom_LoRa::set_address(const uint8_t addr)    // Need to test this
 	print_module_label();
 	LPrintln("\tSet max retry count ", retry_count);
 	manager->setRetries(retry_count);
+
+	// deselect the LoRa modem to prevent a conflict with other devices on the SPI bus
+	digitalWrite(8, HIGH);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
