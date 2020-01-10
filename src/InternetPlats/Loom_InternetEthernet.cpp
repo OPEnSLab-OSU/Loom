@@ -71,6 +71,8 @@ void Loom_Ethernet::print_state() const
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Ethernet::connect()
 {
+	pinMode(8, OUTPUT);
+	digitalWrite(8, HIGH);
 	// initialize ethernet shield for Feather
 	Ethernet.init(10);
 
@@ -92,6 +94,8 @@ void Loom_Ethernet::connect()
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::UDPPtr Loom_Ethernet::open_socket(const uint port)
 {
+	pinMode(8, OUTPUT);
+	digitalWrite(8, HIGH);
 	// create the unique pointer
 	UDPPtr ptr = UDPPtr(new EthernetUDP());
 	// use the object created to open a UDP socket
