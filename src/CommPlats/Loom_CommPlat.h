@@ -40,6 +40,12 @@ protected:
 	/// Especially as the LoomManager is intended to be non-mandatory for usage of Loom
 	StaticJsonDocument<1500> messageJson;
 
+	// counters for determining packet drop rate
+	// used only for debug
+	uint32_t total_packet_count;
+	uint32_t total_drop_count;
+	bool last_ten_dropped[10];
+	uint8_t last_ten_dropped_idx;
 public:
 	
 //=============================================================================
@@ -113,6 +119,7 @@ public:
 /*@{*/ //======================================================================
 
 	virtual void	print_config() const override;
+	virtual void	print_state() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -122,6 +129,22 @@ public:
 	/// Each platform may have a different addressing scheme
 	/// @return The address of this device
 	virtual uint8_t	get_address() const = 0;
+
+	/// Get the packet drop rate since the start of operation.
+	/// Keep in mind that this drop rate will not account for retransmissions
+	/// done internally by RadioHead (ex Reliable datagram), but rather will
+	/// count data packets that were discarded. This rate will also ignore
+	/// broadcasts, since they are nearly impossible to quantify.
+	/// @return The drop rate from 0 (no drops) to 100 (100% drop)
+	float get_drop_rate() const;
+
+	/// Get the packet drop rate of the last ten send() calls.
+	/// Keep in mind that this drop rate will not account for retransmissions
+	/// done internally by RadioHead (ex Reliable datagram), but rather will
+	/// count data packets that were discarded. This rate will also ignore
+	/// broadcasts, since they are nearly impossible to quantify.
+	/// @return The drop rate from 0 (no drops) to 100 (100% drop)
+	float get_last_ten_drop_rate() const;
 
 //=============================================================================
 ///@name	SETTERS
@@ -140,7 +163,7 @@ protected:
 	/// @param[in]	json		JsonObject to serialize
 	/// @param[out]	buffer		Buffer to fill with MessagePack of json
 	/// @param[in]	max_len		Length of buffer
-	/// return True if success
+	/// @return True if success
 	bool	json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len) const;
 
 	/// Deserialize a MessagePack buffer into a JsonObject.
@@ -148,8 +171,12 @@ protected:
 	/// @param[in]	buffer		Buffer to deserialize
 	/// @param[out]	json		JsonObject to deserialize into
 	/// @param[in]	max_len		Length of buffer
-	/// return True if success
+	/// @return True if success
 	bool	msgpack_buffer_to_json(const char* buffer, JsonObject json);
+
+	/// Add the result of a packet to the drop_rate tracker
+	/// @param[in] did_drop		Whether or not the packet dropped during transmission.
+	void	add_packet_result(const bool did_drop);
 
 };
 

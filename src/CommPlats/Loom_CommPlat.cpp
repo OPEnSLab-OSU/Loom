@@ -20,6 +20,10 @@ LoomCommPlat::LoomCommPlat(
 	: LoomModule( module_name, module_type )
 	, max_message_len(max_message_len)
 	, signal_strength(0)
+	, total_packet_count(0)
+	, total_drop_count(0)
+	, last_ten_dropped{}
+	, last_ten_dropped_idx(0)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -27,6 +31,32 @@ void LoomCommPlat::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tMax Message Length  : ", max_message_len );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomCommPlat::print_state() const
+{
+	LoomModule::print_state();
+	LPrintln("\tDrop Rate Since Start  : ", get_drop_rate() );
+	LPrintln("\tCurrent Drop Rate  : ", get_last_ten_drop_rate() );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+float LoomCommPlat::get_drop_rate() const
+{
+	return (total_packet_count == 0)
+		? 0.0f
+		: static_cast<float>(total_drop_count)*100.0f/static_cast<float>(total_packet_count);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+float LoomCommPlat::get_last_ten_drop_rate() const
+{
+	uint8_t total = 0;
+	for (uint8_t i = 0; i < 10; i++)
+		if (last_ten_dropped[i])
+			total++;
+	return static_cast<float>(total)*100.0f/10.0f;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -71,7 +101,9 @@ bool LoomCommPlat::send(const uint8_t destination)
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
 		if (strcmp(tmp["type"], "data") == 0 ) {
-			return send(tmp, destination);
+			const bool result = send(tmp, destination);
+			add_packet_result(!result);
+			return result;
 		}
 	} 
 	return false;
@@ -137,6 +169,15 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomCommPlat::add_packet_result(const bool did_drop) {
+	// shift last_ten_dropped by one
+	last_ten_dropped[last_ten_dropped_idx++] = did_drop;
+	if (last_ten_dropped_idx >= 10)
+		last_ten_dropped_idx = 0;
+	// add one to the packet total, and maybe one to the drop count
+	total_packet_count++;
+	if (did_drop)
+		total_drop_count++;
+}
 
-
-
+///////////////////////////////////////////////////////////////////////////////
