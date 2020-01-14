@@ -53,10 +53,11 @@ float LoomCommPlat::get_drop_rate() const
 float LoomCommPlat::get_last_ten_drop_rate() const
 {
 	uint8_t total = 0;
-	for (uint8_t i = 0; i < 10; i++)
+	uint8_t min_pak = static_cast<uint8_t>(total_packet_count < 10U ? total_packet_count : 10U);
+	for (uint8_t i = 0; i < min_pak; i++)
 		if (last_ten_dropped[i])
 			total++;
-	return static_cast<float>(total)*100.0f/10.0f;
+	return static_cast<float>(total)*100.0f/static_cast<float>(min_pak);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
