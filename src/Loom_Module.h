@@ -17,14 +17,6 @@
 
 #include <ArduinoJson.h>
 
-
-/// Different levels of verbosity (for printing or packaging)
-enum class Verbosity {
-	V_OFF,		///< Disable
-	V_LOW, 		///< Minimal/Stardard
-	V_HIGH 		///< Full details
-};
-
 class LoomManager; // Specify that LoomManager exists, defined in own file
 
 

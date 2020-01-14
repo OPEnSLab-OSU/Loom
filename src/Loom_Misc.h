@@ -11,7 +11,13 @@
 #pragma once
 
 #include <Arduino.h>
-#include "Loom_Macros.h"
+
+/// Different levels of verbosity (for printing or packaging)
+enum class Verbosity {
+	V_OFF,		///< Disable
+	V_LOW, 		///< Minimal/Stardard
+	V_HIGH 		///< Full details
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Print an array.
