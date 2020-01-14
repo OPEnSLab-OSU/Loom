@@ -94,7 +94,7 @@ public:
 
 protected:
 
-	const Type		module_type;		///< Module type (hub / node)
+	const Type		module_type;		///< Module type
 	LoomManager*	device_manager;		///< Pointer to manager.
 										///< LoomManager provides to any modules passed to add_module
 	const String	module_name_base;	///< The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)

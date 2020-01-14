@@ -149,15 +149,9 @@ protected:
 	/// Device type (Hub / Node)
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
-	// Sub Managers
-	/// Pointer to an interrupt manager.
-	/// Used for convenience, another pointer can exist in modules vector
+	// Sub Managers, so placed here for ease of access.
 	Loom_Interrupt_Manager*	interrupt_manager = nullptr;
-	/// Pointer to a sleep manager.
-	/// Used for convenience, another pointer can exist in modules vector
 	Loom_Sleep_Manager*		sleep_manager = nullptr;
-	/// RTC object pointer.
-	/// Used for convenience, another pointer can exist in modules vector
 	LoomRTC*				rtc_module = nullptr;
 
 	/// Vectors of LoomModule pointers
