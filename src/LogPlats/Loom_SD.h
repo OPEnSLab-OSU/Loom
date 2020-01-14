@@ -83,6 +83,8 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+	//Re-initialize SD card after power-up
+	void		power_up(const int);
 
 	// void		log() override;  
 

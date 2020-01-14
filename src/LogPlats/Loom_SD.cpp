@@ -43,6 +43,13 @@ Loom_SD::Loom_SD(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_SD::power_up(const int chip_select)
+{
+	digitalWrite(8, HIGH);
+	sd.begin(chip_select, SD_SCK_MHZ(50));
+}
+
+///////////////////////////////////////////////////////////////////////////////
 Loom_SD::Loom_SD(JsonArrayConst p)
 	: Loom_SD( EXPAND_ARRAY(p, 5) ) {}
 

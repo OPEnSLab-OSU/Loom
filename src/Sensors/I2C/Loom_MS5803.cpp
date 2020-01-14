@@ -84,6 +84,7 @@ void Loom_MS5803::print_measurements() const
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MS5803::measure()
 {
+	inst_MS5803.initializeMS_5803();
 	inst_MS5803.readSensor();
 
 	pressure = inst_MS5803.pressure();

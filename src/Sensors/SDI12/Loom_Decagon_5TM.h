@@ -27,7 +27,6 @@ class Loom_Decagon5TM : public LoomSDI12Sensor
 
 protected:
 
-
 public:
 	
 //=============================================================================

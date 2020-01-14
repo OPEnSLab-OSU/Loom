@@ -240,6 +240,23 @@ JsonObject LoomManager::package()
 	return json;
 }
 
+void LoomManager::add_tip_count(int tipCount)
+{
+	//Add tipCount to json
+	add_data("Tip", "Count", tipCount);
+}
+
+void LoomManager::add_teros1(String data)
+{
+
+	add_data("Teros_1", "Moisture", data);
+}
+
+void LoomManager::add_teros2(String data)
+{
+	add_data("Teros_2", "Moisture", data);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_device_ID_to_json(JsonObject json)
 {

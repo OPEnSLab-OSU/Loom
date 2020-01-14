@@ -146,15 +146,15 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, 
 			case 0x11 : return new Loom_ZXGesture(i2c_address, port);	break;	// ZXGesture
 			case 0x19 : return new Loom_LIS3DH(i2c_address, port);		break;		// LIS3DH
 
-			case 0x1C : // MMA8451 / FXOS8700
-				if (i2c_0x1C == I2C_Selection::L_MMA8451)  return new Loom_MMA8451(i2c_address, port);	// MMA8451
-				if (i2c_0x1C == I2C_Selection::L_FXOS8700) return new Loom_FXOS8700(i2c_address, port);	// FXOS8700
-			break;
+			// case 0x1C : // MMA8451 / FXOS8700
+			// 	if (i2c_0x1C == I2C_Selection::L_MMA8451)  return new Loom_MMA8451(i2c_address, port);	// MMA8451
+			// 	if (i2c_0x1C == I2C_Selection::L_FXOS8700) return new Loom_FXOS8700(i2c_address, port);	// FXOS8700
+			// break;
 
-			case 0x1D : // MMA8451 / FXOS8700
-				if (i2c_0x1D == I2C_Selection::L_MMA8451)  return new Loom_MMA8451(i2c_address, port);	// MMA8451
-				if (i2c_0x1D == I2C_Selection::L_FXOS8700) return new Loom_FXOS8700(i2c_address, port);	// FXOS8700
-			break;
+			// case 0x1D : // MMA8451 / FXOS8700
+			// 	if (i2c_0x1D == I2C_Selection::L_MMA8451)  return new Loom_MMA8451(i2c_address, port);	// MMA8451
+			// 	if (i2c_0x1D == I2C_Selection::L_FXOS8700) return new Loom_FXOS8700(i2c_address, port);	// FXOS8700
+			// break;
 
 			case 0x1E : return new Loom_FXOS8700(i2c_address, port);	break;		// FXOS8700
 			case 0x1F : return new Loom_FXOS8700(i2c_address, port);	break;		// FXOS8700

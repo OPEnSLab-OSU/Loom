@@ -258,6 +258,14 @@ public:
 	/// @return JsonObject of packaged data of enabled modules
 	JsonObject	package();
 
+	///Add tipping bucket count to json
+	void 		add_tip_count(int tipCount);
+
+	///Add teros data to json
+	void		add_teros1(String data);
+
+	void 		add_teros2(String data);
+
 	/// Publish
 	/// @param[in]	json	Data object to publish
 	/// @return True if success
