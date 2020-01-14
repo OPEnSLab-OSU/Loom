@@ -12,6 +12,8 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
+/// @param[out]		json			Object to add data to
+/// @param[in]		module_name		Name of module calling package
 JsonObject get_module_data_object(JsonObject json, const char* module_name)
 {
 	JsonArray contents = json["contents"];
@@ -42,6 +44,9 @@ JsonObject get_module_data_object(JsonObject json, const char* module_name)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+/// @param[out]		json	Object to add timestamp to
+/// @param[in]		date 	Time string of timestamp
+/// @param[in]		time	Date string of timestamp
 void package_json_timestamp(JsonObject json, const char* date, const char* time)
 {
 	// Note that if the keys are the same as the ones added by the Google script 
@@ -52,6 +57,7 @@ void package_json_timestamp(JsonObject json, const char* date, const char* time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+/// @param[out]		json	Object to flatten data of
 void flatten_json_data_object(JsonObject json)
 {
 	// Get / Create array for module data blocks
@@ -70,6 +76,7 @@ void flatten_json_data_object(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+/// @param[out]		json	Object to flatten data of
 void flatten_json_data_array(JsonObject json)
 {
 	// Get / Create array for module data blocks
