@@ -20,4 +20,5 @@ This is the Doxygen generated documentation of the Loom library code.
 
 ///////////////////////////////////////////////////////////////////////////////
 // Core Classes
+#include "Loom_Module_Factory.h"
 #include "Loom_Manager.h"

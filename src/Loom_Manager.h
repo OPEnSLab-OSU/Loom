@@ -12,7 +12,6 @@
 #pragma once
 
 #include "Loom_Misc.h"
-#include "Loom_Module_Factory.h"
 
 #include <ArduinoJson.h>
 
@@ -84,6 +83,7 @@ class Loom_WiFi;
 
 // PublishPlats
 class LoomPublishPlat;
+class Loom_SpoolPublish;
 class Loom_GoogleSheets;
 class Loom_MaxPub;
 

@@ -85,28 +85,8 @@ Loom_Multiplexer::Loom_Multiplexer(
 	, sensors(new LoomI2CSensor*[num_ports])
 	, control_port(num_ports)
 {
-    
-	// Begin I2C
-	Wire.begin();
-
-	Wire.beginTransmission(this->i2c_address);
-	if(Wire.endTransmission() ) { //< Test on this address
-		//< Test Failed
-		LPrintln("Multiplexer not found on specified port. Checking alternate addresses.");
-		this->active = false;
-
-		//< Check all alternate addresses
-		for(auto address : alt_addresses) {
-			Wire.beginTransmission(address);
-			if(Wire.endTransmission()) {
-				continue;
-			} else {
-				active = true;
-				this->i2c_address = address;
-				LPrintln("*** Multiplexer found at: ", address, ", update your config. ***");
-			}
-		}
-	}
+	// Start Multiplexer
+  this->power_up();
 
 	// Initialize array of sensors to Null pointrs
 	for (auto i = 0; i < num_ports; i++) {
@@ -417,3 +397,33 @@ void Loom_Multiplexer::tca_deselect() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+void Loom_Multiplexer::power_up() {
+// Begin I2C
+	Wire.begin();
+
+	Wire.beginTransmission(this->i2c_address);
+	if(Wire.endTransmission() ) { //< Test on this address
+		//< Test Failed
+		LPrintln("Multiplexer not found on specified port. Checking alternate addresses.");
+		this->active = false;
+
+		//< Check all alternate addresses
+		for(auto address : alt_addresses) {
+			Wire.beginTransmission(address);
+			if(Wire.endTransmission()) {
+				continue;
+			} else {
+				active = true;
+				this->i2c_address = address;
+				LPrintln("*** Multiplexer found at: ", address, ", update your config. ***");
+			}
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void Loom_Multiplexer::power_down() {
+
+}

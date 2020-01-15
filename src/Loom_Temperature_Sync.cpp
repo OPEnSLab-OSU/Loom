@@ -12,6 +12,8 @@
 #include "Loom_Manager.h"
 #include "Sensors/Loom_Analog.h"
 
+#include "Sensors/I2C/Loom_MS5803.h"
+
 ///////////////////////////////////////////////////////////////////////////////
 LoomTempSync::LoomTempSync(   
 		const LoomModule::Type		source,

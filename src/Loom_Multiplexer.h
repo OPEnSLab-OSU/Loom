@@ -13,12 +13,14 @@
 #pragma once
 
 #include "Loom_Module.h"
-#include "Sensors/I2C/Loom_I2C_Sensor.h"
+// #include "Sensors/I2C/Loom_I2C_Sensor.h"
 
 #undef min
 #undef max
 #include <vector>
 #include <array>
+
+class LoomI2CSensor;
 
 /// I2C Address Conflict Selection
 enum class I2C_Selection {
@@ -126,6 +128,10 @@ public:
 	/// @param[port]	port	The port of the multiplexer to get sensor object for
 	/// @return			The pointer to LoomI2CSensor on port, Null if no sensor
 	LoomI2CSensor*	get_sensor(uint8_t port) const { return sensors[port]; }
+
+	void power_up();
+
+	void power_down();
 
 //=============================================================================
 ///@name	PRINT INFORMATION
