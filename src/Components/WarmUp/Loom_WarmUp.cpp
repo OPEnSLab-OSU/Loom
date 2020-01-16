@@ -14,9 +14,8 @@
 #include "Loom_Manager.h"
 
 WarmUp::WarmUp(LoomManager* manager, int period) 
-  : manager(static_cast<Loom_WarmUp_Manager*>(manager->find_module(LoomModule::Type::WarmUp_Manager)))
-  , period(period) {
-
+  : period(period) {
+    static_cast<Loom_WarmUp_Manager*>(manager->find_module(LoomModule::Type::WarmUp_Manager))->Register_WarmUp(this);
   }
 
 int WarmUp::get_period() {

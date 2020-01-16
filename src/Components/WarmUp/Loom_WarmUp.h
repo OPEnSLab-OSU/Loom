@@ -21,9 +21,6 @@ class WarmUp {
     int get_period();
 
   private:
-    /// Pointer to manager, utility tbd
-    Loom_WarmUp_Manager* manager;
-
     /// MS till sensor is ready to take readings
     int period;
 
