@@ -40,6 +40,28 @@ protected:
 	/// Especially as the LoomManager is intended to be non-mandatory for usage of Loom
 	StaticJsonDocument<1500> messageJson;
 
+//=============================================================================
+///@name	RADIO IMPLEMENTATION
+/*@{*/ //======================================================================
+
+	/// Receive, but block until packet received, or timeout reached
+	/// @param[out]	json			Json object to fill with incoming data
+	/// @param[out]	max_wait_time	Maximum number of milliseconds to block for (can be zero for non-blocking)
+	/// @return True if packet received
+	virtual bool recieve_blocking_impl(JsonObject json, uint max_wait_time) {}
+
+	/// Send json to a specific address
+	/// @param[in]	json			Json package to send
+	/// @param[in]	destination		Device to send to
+	/// @return True if packet sent successfully
+	virtual bool send_impl(JsonObject json, const uint8_t destination) {}
+
+	/// Broadcast data to all that can receive.
+	/// Derived classes can optionally provide an implementation for this,
+	/// As supported by the radio/platform's library
+	/// @param[in]	json	Json object to send
+	virtual void broadcast_impl(JsonObject json) {}
+
 public:
 	
 //=============================================================================
@@ -65,20 +87,15 @@ public:
 
 	virtual void 	package(JsonObject json) override {};
 
-	/// Build json from packet if any exists
-	/// @param[out]	json	Json object to fill with incoming data
-	virtual bool	receive(JsonObject json) {}
-
-	/// Version of send for use with LoomManager.
-	/// Accesses Json from LoomManager
-	/// @return True if packet received
-	bool			receive();
-
 	/// Receive, but block until packet received, or timeout reached
 	/// @param[out]	json			Json object to fill with incoming data
 	/// @param[out]	max_wait_time	Maximum number of milliseconds to block for
 	/// @return True if packet received
-	bool			receive_blocking(JsonObject json, uint max_wait_time);
+	bool	receive_blocking(JsonObject json, uint max_wait_time) { recieve_blocking_impl(json, max_wait_time); }
+
+	/// Build json from packet if any exists
+	/// @param[out]	json	Json object to fill with incoming data
+	bool			receive(JsonObject json) { receive_blocking(json, 0); }
 
 	/// Version of receive_blocking for use with LoomManager.
 	/// Accesses Json from LoomManager
@@ -90,7 +107,7 @@ public:
 	/// @param[in]	json			Json package to send
 	/// @param[in]	destination		Device to send to
 	/// @return True if packet sent successfully
-	virtual bool	send(JsonObject json, const uint8_t destination) {}
+	bool	send(JsonObject json, const uint8_t destination) { send_impl(json, destination); }
 
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager
@@ -102,7 +119,7 @@ public:
 	/// Derived classes can optionally provide an implementation for this,
 	/// As supported by the radio/platform's library
 	/// @param[in]	json	Json object to send
-	virtual void	broadcast(JsonObject json) {};
+	void	broadcast(JsonObject json) { broadcast_impl(json); }
 
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager

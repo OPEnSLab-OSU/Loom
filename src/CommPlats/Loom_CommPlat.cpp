@@ -41,20 +41,6 @@ bool LoomCommPlat::receive()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
-{
-	unsigned long start_time = millis();
-	do {
-		if ( receive(json) ) {
-			return true;
-		}
-	} while ( (millis() - start_time) < max_wait_time );
-	print_module_label();
-	LPrintln("Timeout of ", max_wait_time, "ms reached");
-	return false;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 {
 	if (device_manager != nullptr) {
