@@ -69,8 +69,6 @@
 #include "Sensors/I2C/Loom_ZXGesture.h"
 #include "Sensors/I2C/Loom_STEMMA.h"
 
-
-
 #include "Sensors/SDI12/Loom_Decagon_5TM.h"
 #include "Sensors/SDI12/Loom_Decagon_GS3.h"
 
@@ -82,6 +80,7 @@
 #include "Loom_Temperature_Sync.h"
 
 // General
+#include "Components/WarmUp/Loom_WarmUp_Manager.h"
 #include "Loom_Interrupt_Manager.h"
 #include "Loom_Sleep_Manager.h"
 #include "Loom_Multiplexer.h" // this needs to be include after I2C sensors (due to conflict with enableInterrupt macro/function defined by EnableInterrupt library and AS726X sensors)
@@ -165,6 +164,7 @@ namespace Include
 	/// Common modules
 	constexpr auto Common = std::make_tuple( 
 				factory::NameModulePair{"Interrupt_Manager",	Construct<Loom_Interrupt_Manager>,		ConstructDefault<Loom_Interrupt_Manager> },
+				factory::NameModulePair{"WarmUp_Manager", Construct<Loom_WarmUp_Manager>, ConstructDefault<Loom_WarmUp_Manager> },
 				factory::NameModulePair{"Sleep_Manager",		Construct<Loom_Sleep_Manager>,			ConstructDefault<Loom_Sleep_Manager> },
 				factory::NameModulePair{"Analog",		Construct<Loom_Analog>,			ConstructDefault<Loom_Analog> },
 				factory::NameModulePair{"Digital",		Construct<Loom_Digital>,		ConstructDefault<Loom_Digital> },
