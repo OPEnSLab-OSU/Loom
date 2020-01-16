@@ -15,12 +15,19 @@
 #include "Loom_Module.h"
 #include "Loom_Manager.h"
 
+#include "Components/WarmUp/Loom_WarmUp_Manager.h"
 #include "Loom_Interrupt_Manager.h"
 #include "Loom_Sleep_Manager.h"
 #include "RTC/Loom_RTC.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // --- General ---
+
+Loom_WarmUp_Manager& LoomManager::WarmUpManager(const uint8_t idx)
+{
+	LoomModule* tmp = warmup_manager;
+	return (*(Loom_WarmUp_Manager*)( (tmp) ? tmp : nullptr ));
+}
 
 Loom_Interrupt_Manager& LoomManager::InterruptManager(const uint8_t idx) 
 {

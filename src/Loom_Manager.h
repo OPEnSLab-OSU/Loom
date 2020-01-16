@@ -12,6 +12,7 @@
 #pragma once
 
 #include "Loom_Misc.h"
+#include "Loom_Module.h"
 
 #include <ArduinoJson.h>
 
@@ -96,6 +97,7 @@ class Loom_DS3231;
 class Loom_PCF8523;
 
 // Other
+class Loom_WarmUp_Manager;
 class Loom_Sleep_Manager;
 class Loom_Interrupt_Manager;
 class Loom_Multiplexer;
@@ -149,6 +151,7 @@ protected:
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
 	// Sub Managers, so placed here for ease of access.
+	Loom_WarmUp_Manager* warmup_manager = nullptr;
 	Loom_Interrupt_Manager*	interrupt_manager = nullptr;
 	Loom_Sleep_Manager*		sleep_manager = nullptr;
 	LoomRTC*				rtc_module = nullptr;
@@ -464,6 +467,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 
 	// Other
+	Loom_WarmUp_Manager&		WarmUpManager(const uint8_t idx = 0);
 	Loom_Sleep_Manager&			SleepManager(const uint8_t idx = 0);
 	Loom_Interrupt_Manager&		InterruptManager(const uint8_t idx = 0);
 	Loom_Multiplexer&			Multiplexer(const uint8_t idx = 0);
