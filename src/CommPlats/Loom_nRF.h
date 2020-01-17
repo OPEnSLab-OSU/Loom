@@ -47,6 +47,28 @@ protected:
 
 	uint8_t				multicast_level;	///< Which level(s) of the network to broadcast to
 
+//=============================================================================
+///@name	RADIO IMPLEMENTATION
+/*@{*/ //======================================================================
+
+	/// Receive, but block until packet received, or timeout reached
+	/// @param[out]	json			Json object to fill with incoming data
+	/// @param[in]	max_wait_time	Maximum number of milliseconds to block for (can be zero for non-blocking)
+	/// @return True if packet received
+	bool receive_blocking_impl(JsonObject json, uint max_wait_time) override;
+
+	/// Send json to a specific address
+	/// @param[in]	json			Json package to send
+	/// @param[in]	destination		Device to send to
+	/// @return True if packet sent successfully
+	bool send_impl(JsonObject json, const uint8_t destination) override;
+
+	/// Broadcast data to all that can receive.
+	/// Derived classes can optionally provide an implementation for this,
+	/// As supported by the radio/platform's library
+	/// @param[in]	json	Json object to send
+	void broadcast_impl(JsonObject json) override;
+
 public:
 
 //=============================================================================
@@ -84,17 +106,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	bool		receive(JsonObject json) override;
-	bool		send(JsonObject json, const uint8_t destination) override;
-	void		broadcast(JsonObject json) override;
 	void		add_config(JsonObject json) override;
-
-	// manually expose superclass version of log() that gets json from
-	// linked LoomManager, calling this classes implementation of 
-	// 'send(JsonObject)' and 'send(JsonObject, uint8_t)', which is pure virtual in superclass
-	using LoomCommPlat::send; 
-	using LoomCommPlat::receive; 
-	using LoomCommPlat::broadcast; 
 
 //=============================================================================
 ///@name	PRINT INFORMATION

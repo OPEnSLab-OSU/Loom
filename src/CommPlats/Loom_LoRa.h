@@ -43,13 +43,30 @@ class Loom_LoRa : public LoomCommPlat
 protected:
 
 	RH_RF95				driver;			///< Underlying rf95 object
-	RHReliableDatagram*	manager;		///< Manager for driver
+	RHReliableDatagram	manager;		///< Manager for driver
 
 	uint8_t				address;		///< Device Address    (should this be part of LoomCommPlat? – maybe not as each platform handles addresses differently)
 
 	uint8_t				power_level;	///< Power level to send at
 	uint8_t				retry_count;	///< Number of transmission retries allowed
 	uint16_t			retry_timeout;	///< Delay between transmission retries (in milliseconds)
+
+
+//=============================================================================
+///@name	RADIO IMPLEMENTATION
+/*@{*/ //======================================================================
+
+	/// Receive, but block until packet received, or timeout reached
+	/// @param[out]	json			Json object to fill with incoming data
+	/// @param[in]	max_wait_time	Maximum number of milliseconds to block for (can be zero for non-blocking)
+	/// @return True if packet received
+	bool receive_blocking_impl(JsonObject json, uint max_wait_time) override;
+
+	/// Send json to a specific address
+	/// @param[in]	json			Json package to send
+	/// @param[in]	destination		Device to send to
+	/// @return True if packet sent successfully
+	bool send_impl(JsonObject json, const uint8_t destination) override;
 
 public:
 
@@ -78,23 +95,13 @@ public:
 	Loom_LoRa(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_LoRa();
+	~Loom_LoRa() = default;
 
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	bool		receive(JsonObject json) override;
-	bool		send(JsonObject json, const uint8_t destination) override;
 	void		add_config(JsonObject json) override;
-
-	// manually expose superclass version of log() that gets json from
-	// linked LoomManager, calling this classes implementation of 
-	// 'send(JsonObject)' and 'send(JsonObject, uint8_t)', which is pure virtual in superclass
-	using LoomCommPlat::send; 
-	using LoomCommPlat::receive; 
-	using LoomCommPlat::broadcast; 
-
 
 //=============================================================================
 ///@name	PRINT INFORMATION

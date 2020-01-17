@@ -13,7 +13,6 @@
 
 #include "Loom_Module.h"
 
-
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Abstract base of communication platform modules
@@ -40,6 +39,35 @@ protected:
 	/// Especially as the LoomManager is intended to be non-mandatory for usage of Loom
 	StaticJsonDocument<1500> messageJson;
 
+	// counters for determining packet drop rate
+	// used only for debug
+	uint32_t total_packet_count;
+	uint32_t total_drop_count;
+	bool last_ten_dropped[10];
+	uint8_t last_ten_dropped_idx;
+
+//=============================================================================
+///@name	RADIO IMPLEMENTATION
+/*@{*/ //======================================================================
+
+	/// Receive, but block until packet received, or timeout reached
+	/// @param[out]	json			Json object to fill with incoming data
+	/// @param[out]	max_wait_time	Maximum number of milliseconds to block for (can be zero for non-blocking)
+	/// @return True if packet received
+	virtual bool receive_blocking_impl(JsonObject json, uint max_wait_time) {}
+
+	/// Send json to a specific address
+	/// @param[in]	json			Json package to send
+	/// @param[in]	destination		Device to send to
+	/// @return True if packet sent successfully
+	virtual bool send_impl(JsonObject json, const uint8_t destination) {}
+
+	/// Broadcast data to all that can receive.
+	/// Derived classes can optionally provide an implementation for this,
+	/// As supported by the radio/platform's library
+	/// @param[in]	json	Json object to send
+	virtual void broadcast_impl(JsonObject json) {}
+
 public:
 	
 //=============================================================================
@@ -65,20 +93,20 @@ public:
 
 	virtual void 	package(JsonObject json) override {};
 
+	/// Receive, but block until packet received, or timeout reached
+	/// @param[out]	json			Json object to fill with incoming data
+	/// @param[in]	max_wait_time	Maximum number of milliseconds to block for
+	/// @return True if packet received
+	bool			receive_blocking(JsonObject json, uint max_wait_time);
+
 	/// Build json from packet if any exists
 	/// @param[out]	json	Json object to fill with incoming data
-	virtual bool	receive(JsonObject json) {}
+	bool			receive(JsonObject json) { return receive_blocking(json, 0); }
 
-	/// Version of send for use with LoomManager.
+	/// Version of receive for use with LoomManager.
 	/// Accesses Json from LoomManager
 	/// @return True if packet received
 	bool			receive();
-
-	/// Receive, but block until packet received, or timeout reached
-	/// @param[out]	json			Json object to fill with incoming data
-	/// @param[out]	max_wait_time	Maximum number of milliseconds to block for
-	/// @return True if packet received
-	bool			receive_blocking(JsonObject json, uint max_wait_time);
 
 	/// Version of receive_blocking for use with LoomManager.
 	/// Accesses Json from LoomManager
@@ -90,7 +118,7 @@ public:
 	/// @param[in]	json			Json package to send
 	/// @param[in]	destination		Device to send to
 	/// @return True if packet sent successfully
-	virtual bool	send(JsonObject json, const uint8_t destination) {}
+	bool			send(JsonObject json, const uint8_t destination);
 
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager
@@ -102,7 +130,7 @@ public:
 	/// Derived classes can optionally provide an implementation for this,
 	/// As supported by the radio/platform's library
 	/// @param[in]	json	Json object to send
-	virtual void	broadcast(JsonObject json) {};
+	void			broadcast(JsonObject json) { broadcast_impl(json); }
 
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager
@@ -113,6 +141,7 @@ public:
 /*@{*/ //======================================================================
 
 	virtual void	print_config() const override;
+	virtual void	print_state() const override;
 
 //=============================================================================
 ///@name	GETTERS
@@ -122,6 +151,22 @@ public:
 	/// Each platform may have a different addressing scheme
 	/// @return The address of this device
 	virtual uint8_t	get_address() const = 0;
+
+	/// Get the packet drop rate since the start of operation.
+	/// Keep in mind that this drop rate will not account for retransmissions
+	/// done internally by RadioHead (ex Reliable datagram), but rather will
+	/// count data packets that were discarded. This rate will also ignore
+	/// broadcasts, since they are nearly impossible to quantify.
+	/// @return The drop rate from 0 (no drops) to 100 (100% drop)
+	float get_drop_rate() const;
+
+	/// Get the packet drop rate of the last ten send() calls.
+	/// Keep in mind that this drop rate will not account for retransmissions
+	/// done internally by RadioHead (ex Reliable datagram), but rather will
+	/// count data packets that were discarded. This rate will also ignore
+	/// broadcasts, since they are nearly impossible to quantify.
+	/// @return The drop rate from 0 (no drops) to 100 (100% drop)
+	float get_last_ten_drop_rate() const;
 
 //=============================================================================
 ///@name	SETTERS
@@ -140,7 +185,7 @@ protected:
 	/// @param[in]	json		JsonObject to serialize
 	/// @param[out]	buffer		Buffer to fill with MessagePack of json
 	/// @param[in]	max_len		Length of buffer
-	/// return True if success
+	/// @return True if success
 	bool	json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len) const;
 
 	/// Deserialize a MessagePack buffer into a JsonObject.
@@ -148,8 +193,12 @@ protected:
 	/// @param[in]	buffer		Buffer to deserialize
 	/// @param[out]	json		JsonObject to deserialize into
 	/// @param[in]	max_len		Length of buffer
-	/// return True if success
+	/// @return True if success
 	bool	msgpack_buffer_to_json(const char* buffer, JsonObject json);
+
+	/// Add the result of a packet to the drop_rate tracker
+	/// @param[in] did_drop		Whether or not the packet dropped during transmission.
+	void	add_packet_result(const bool did_drop);
 
 };
 

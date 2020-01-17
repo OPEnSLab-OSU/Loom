@@ -82,7 +82,7 @@ private:
 	/// enumerate errors
 	enum class Error {
 		OK,
-		INVAL_DEVICE_MANAGE,	///< Failed to recieve a Loom Device Manager
+		INVAL_DEVICE_MANAGE,	///< Failed to receive a Loom Device Manager
 		INVAL_INTERNET,			///< Failed to find the correct internet object
 		INVAL_TIME,				///< Retrieved a time that was invalid
 		INVAL_RTC,				///< Failed to find a RTC

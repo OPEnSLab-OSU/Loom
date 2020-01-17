@@ -20,6 +20,10 @@ LoomCommPlat::LoomCommPlat(
 	: LoomModule( module_name, module_type )
 	, max_message_len(max_message_len)
 	, signal_strength(0)
+	, total_packet_count(0)
+	, total_drop_count(0)
+	, last_ten_dropped{}
+	, last_ten_dropped_idx(0)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -27,6 +31,33 @@ void LoomCommPlat::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tMax Message Length  : ", max_message_len );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomCommPlat::print_state() const
+{
+	LoomModule::print_state();
+	LPrintln("\tDrop Rate Since Start  : ", get_drop_rate() );
+	LPrintln("\tCurrent Drop Rate  : ", get_last_ten_drop_rate() );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+float LoomCommPlat::get_drop_rate() const
+{
+	return (total_packet_count == 0)
+		? 0.0f
+		: static_cast<float>(total_drop_count)*100.0f/static_cast<float>(total_packet_count);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+float LoomCommPlat::get_last_ten_drop_rate() const
+{
+	uint8_t total = 0;
+	uint8_t min_pak = static_cast<uint8_t>(total_packet_count < 10U ? total_packet_count : 10U);
+	for (uint8_t i = 0; i < min_pak; i++)
+		if (last_ten_dropped[i])
+			total++;
+	return static_cast<float>(total)*100.0f/static_cast<float>(min_pak);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -43,15 +74,9 @@ bool LoomCommPlat::receive()
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
 {
-	unsigned long start_time = millis();
-	do {
-		if ( receive(json) ) {
-			return true;
-		}
-	} while ( (millis() - start_time) < max_wait_time );
-	print_module_label();
-	LPrintln("Timeout of ", max_wait_time, "ms reached");
-	return false;
+	bool status = receive_blocking_impl(json, max_wait_time);
+	LPrintln("Recieve " , (status) ? "successful" : "failed" );
+	return status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -66,13 +91,20 @@ bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) { 
+	bool status = send_impl(json, destination);
+	add_packet_result(!status);
+	LPrintln("Send " , (status) ? "successful" : "failed" );
+	return status;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::send(const uint8_t destination)
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
-		if (strcmp(tmp["type"], "data") == 0 ) {
+		if (strcmp(tmp["type"], "data") == 0 )
 			return send(tmp, destination);
-		}
 	} 
 	return false;
 }
@@ -137,6 +169,15 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomCommPlat::add_packet_result(const bool did_drop) {
+	// shift last_ten_dropped by one
+	last_ten_dropped[last_ten_dropped_idx++] = did_drop;
+	if (last_ten_dropped_idx >= 10)
+		last_ten_dropped_idx = 0;
+	// add one to the packet total, and maybe one to the drop count
+	total_packet_count++;
+	if (did_drop)
+		total_drop_count++;
+}
 
-
-
+///////////////////////////////////////////////////////////////////////////////
