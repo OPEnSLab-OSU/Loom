@@ -72,6 +72,10 @@ public:
 /*@{*/ //======================================================================
 
 	/// Currently no implementation
+	bool		receive(JsonObject json) override {}
+
+	/// Currently no implementation
+	bool		send(JsonObject json, const uint8_t destination) override {}
 	void		add_config(JsonObject json) override;
 
 	/// Allow a phone to connect

@@ -132,25 +132,24 @@ void Loom_nRF::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_nRF::receive_blocking_impl(JsonObject json, uint max_wait_time) 
+bool Loom_nRF::receive(JsonObject json) 
 {
-	const unsigned long start_time = millis();
-	do {
-		network->update();                      // Check the network regularly
+	network->update();                      // Check the network regularly
 
-		while ( network->available() ) {        // Is there anything ready for us?
-			RF24NetworkHeader header;          // If so, grab it and print it out
-			char buffer[max_message_len];
-			memset(buffer, '\0', max_message_len);
-			if (network->read(header, &buffer, max_message_len-1) )
-				return msgpack_buffer_to_json(buffer, json);
+	while ( network->available() ) {        // Is there anything ready for us?
+		RF24NetworkHeader header;          // If so, grab it and print it out
+		char buffer[max_message_len];
+		memset(buffer, '\0', max_message_len);
+		if (network->read(header, &buffer, max_message_len-1) ) {
+			bool status = msgpack_buffer_to_json(buffer, json);
+			return status;
 		}
-	} while ( (millis() - start_time) < max_wait_time );
+	}
 	return false;
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
-bool Loom_nRF::send_impl(JsonObject json, const uint8_t destination) 
+bool Loom_nRF::send(JsonObject json, const uint8_t destination) 
 {
 	char buffer[max_message_len];
 	bool to_msgpack = json_to_msgpack_buffer(json, buffer, max_message_len);
@@ -165,7 +164,7 @@ bool Loom_nRF::send_impl(JsonObject json, const uint8_t destination)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::broadcast_impl(JsonObject json)
+void Loom_nRF::broadcast(JsonObject json)
 {
 	char buffer[max_message_len];
 	bool to_msgpack = json_to_msgpack_buffer(json, buffer, max_message_len);
