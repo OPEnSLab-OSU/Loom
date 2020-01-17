@@ -54,7 +54,7 @@ protected:
 	/// @param[out]	json			Json object to fill with incoming data
 	/// @param[out]	max_wait_time	Maximum number of milliseconds to block for (can be zero for non-blocking)
 	/// @return True if packet received
-	virtual bool recieve_blocking_impl(JsonObject json, uint max_wait_time) {}
+	virtual bool receive_blocking_impl(JsonObject json, uint max_wait_time) {}
 
 	/// Send json to a specific address
 	/// @param[in]	json			Json package to send
@@ -95,13 +95,18 @@ public:
 
 	/// Receive, but block until packet received, or timeout reached
 	/// @param[out]	json			Json object to fill with incoming data
-	/// @param[out]	max_wait_time	Maximum number of milliseconds to block for
+	/// @param[in]	max_wait_time	Maximum number of milliseconds to block for
 	/// @return True if packet received
-	bool	receive_blocking(JsonObject json, uint max_wait_time) { recieve_blocking_impl(json, max_wait_time); }
+	bool			receive_blocking(JsonObject json, uint max_wait_time);
 
 	/// Build json from packet if any exists
 	/// @param[out]	json	Json object to fill with incoming data
-	bool			receive(JsonObject json) { receive_blocking(json, 0); }
+	bool			receive(JsonObject json) { return receive_blocking(json, 0); }
+
+	/// Version of receive for use with LoomManager.
+	/// Accesses Json from LoomManager
+	/// @return True if packet received
+	bool			receive();
 
 	/// Version of receive_blocking for use with LoomManager.
 	/// Accesses Json from LoomManager
@@ -113,7 +118,7 @@ public:
 	/// @param[in]	json			Json package to send
 	/// @param[in]	destination		Device to send to
 	/// @return True if packet sent successfully
-	bool	send(JsonObject json, const uint8_t destination) { send_impl(json, destination); }
+	bool			send(JsonObject json, const uint8_t destination);
 
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager
@@ -125,7 +130,7 @@ public:
 	/// Derived classes can optionally provide an implementation for this,
 	/// As supported by the radio/platform's library
 	/// @param[in]	json	Json object to send
-	void	broadcast(JsonObject json) { broadcast_impl(json); }
+	void			broadcast(JsonObject json) { broadcast_impl(json); }
 
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager

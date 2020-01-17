@@ -102,10 +102,10 @@ bool Loom_LoRa::receive_blocking_impl(JsonObject json, uint max_wait_time)
 	uint8_t from;
 	char buffer[max_message_len];
 	memset(buffer, '\0', max_message_len);
-	if (timeout == 0)
-		status = manager.recvfromAck((uint8_t*)buffer, &len, &from);
+	if (max_wait_time == 0)
+		status = manager.recvfromAck( (uint8_t*)buffer, &len, &from );
 	else 
-		status = manager.recvfromAckTimeout( (uint8_t*)buffer, &len, max_wait_time, &from) ) {
+		status = manager.recvfromAckTimeout( (uint8_t*)buffer, &len, max_wait_time, &from );
 	
 	if (status) {
 		signal_strength = driver.lastRssi();

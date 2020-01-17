@@ -53,9 +53,9 @@ protected:
 
 	/// Receive, but block until packet received, or timeout reached
 	/// @param[out]	json			Json object to fill with incoming data
-	/// @param[out]	max_wait_time	Maximum number of milliseconds to block for (can be zero for non-blocking)
+	/// @param[in]	max_wait_time	Maximum number of milliseconds to block for (can be zero for non-blocking)
 	/// @return True if packet received
-	bool recieve_blocking_impl(JsonObject json, uint max_wait_time) override;
+	bool receive_blocking_impl(JsonObject json, uint max_wait_time) override;
 
 	/// Send json to a specific address
 	/// @param[in]	json			Json package to send

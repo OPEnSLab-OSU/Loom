@@ -72,6 +72,14 @@ bool LoomCommPlat::receive()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+bool LoomCommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
+{
+	bool status = receive_blocking_impl(json, max_wait_time);
+	LPrintln("Recieve " , (status) ? "successful" : "failed" );
+	return status;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 {
 	if (device_manager != nullptr) {
@@ -83,15 +91,20 @@ bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) { 
+	bool status = send_impl(json, destination);
+	add_packet_result(!status);
+	LPrintln("Send " , (status) ? "successful" : "failed" );
+	return status;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::send(const uint8_t destination)
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
-		if (strcmp(tmp["type"], "data") == 0 ) {
-			const bool result = send(tmp, destination);
-			add_packet_result(!result);
-			return result;
-		}
+		if (strcmp(tmp["type"], "data") == 0 )
+			return send(tmp, destination);
 	} 
 	return false;
 }
