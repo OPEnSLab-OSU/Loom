@@ -50,6 +50,9 @@ class Loom_WarmUp_Manager : public LoomModule {
     /// State of system, either containing 'cold' items or completely warmed up
     bool warm;
 
+    /// Lenth of longest items to warm up
+    int warm_duration;
+
     /// Time stamp for begining of warming period
     unsigned long start_time;
 };

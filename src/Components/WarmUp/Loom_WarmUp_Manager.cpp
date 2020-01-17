@@ -14,7 +14,8 @@
 Loom_WarmUp_Manager::Loom_WarmUp_Manager() 
   : LoomModule("WarmUp_Manager", LoomModule::Type::WarmUp_Manager)
   , warm(false)
-  , start_time(0) {
+  , start_time(0)
+  , warm_duration(0) {
 
 }
 
@@ -26,11 +27,27 @@ Loom_WarmUp_Manager::Loom_WarmUp_Manager(JsonArrayConst)
 void Loom_WarmUp_Manager::warming_Begin() {
   start_time = millis();
 
-  int warmupTime = 0;
-
   for(WarmUp* elem : Interfaces) {
-    warmupTime = (warmupTime > elem->get_period()) ? warmupTime : elem->get_period();
+    warm_duration = (warm_duration > elem->get_period()) ? warm_duration : elem->get_period();
   }
 
   return;
+}
+
+void Loom_WarmUp_Manager::warming_Reset() {
+  warm = false;
+  start_time = 0;
+  return;
+}
+
+bool Loom_WarmUp_Manager::is_warm() {
+  if(!warm) {
+    return false;
+  } else {
+    if(millis() >= start_time+warm_duration) {
+      return warm = true;;
+    } else {
+      return false;
+    }
+  }
 }
