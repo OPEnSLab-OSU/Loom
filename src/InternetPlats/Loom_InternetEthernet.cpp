@@ -49,7 +49,7 @@ Loom_Ethernet::Loom_Ethernet(
 			m_cli_key.size()
 		}
 	})
-	, m_client( EthernetClient(), TAs, (size_t)TAs_NUM, A7, SSL_ERROR)
+	, m_client( EthernetClient(), TAs, (size_t)TAs_NUM, A7, SSL_ERROR )
 	, m_mac{}
 	, m_ip()
 	, m_is_connected(false)
