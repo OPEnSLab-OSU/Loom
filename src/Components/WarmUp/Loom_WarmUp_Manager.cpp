@@ -9,13 +9,28 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "Loom_WarmUp_Manager.h"
+#include "Loom_WarmUp.h"
 
 Loom_WarmUp_Manager::Loom_WarmUp_Manager() 
-  : LoomModule("WarmUp_Manager", LoomModule::Type::WarmUp_Manager) {
+  : LoomModule("WarmUp_Manager", LoomModule::Type::WarmUp_Manager)
+  , warm(false)
+  , start_time(0) {
 
 }
 
 Loom_WarmUp_Manager::Loom_WarmUp_Manager(JsonArrayConst) 
   : Loom_WarmUp_Manager() {
 
+}
+
+void Loom_WarmUp_Manager::warming_Begin() {
+  start_time = millis();
+
+  int warmupTime = 0;
+
+  for(WarmUp* elem : Interfaces) {
+    warmupTime = (warmupTime > elem->get_period()) ? warmupTime : elem->get_period();
+  }
+
+  return;
 }

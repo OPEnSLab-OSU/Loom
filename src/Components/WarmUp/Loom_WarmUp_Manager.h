@@ -31,9 +31,25 @@ class Loom_WarmUp_Manager : public LoomModule {
       Interfaces.push_back(static_cast<WarmUp*>(t));
     }
 
+    /// Start a warming timer
+    void warming_Begin();
+
+    /// Reset warming to false, indicates a need to reheat in the near future
+    void warming_Reset();
+
+    /// Updates and returns state
+    bool is_warm();
+
+    /// An unfortunate consequence of inheriting from a bloated base class
     void package(JsonObject) {return;}
 
   private:
     /// Collection of LoomModule* cast to WarmUp* to access members in an encapsulated fasion
     std::vector<WarmUp*> Interfaces;
+
+    /// State of system, either containing 'cold' items or completely warmed up
+    bool warm;
+
+    /// Time stamp for begining of warming period
+    unsigned long start_time;
 };
