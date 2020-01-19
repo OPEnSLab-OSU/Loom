@@ -22,8 +22,8 @@ class WarmUp;
 class Loom_WarmUp_Manager : public LoomModule {
   public:
     ///Constructor
-    Loom_WarmUp_Manager();
-    Loom_WarmUp_Manager(JsonArrayConst);
+    Loom_WarmUp_Manager(LoomManager* manager);
+    Loom_WarmUp_Manager(LoomManager* manager, JsonArrayConst);
 
     /// Registers a module as a WarmUp Interface providing access;
     template<typename T>

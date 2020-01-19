@@ -11,16 +11,18 @@
 #include "Loom_WarmUp_Manager.h"
 #include "Loom_WarmUp.h"
 
-Loom_WarmUp_Manager::Loom_WarmUp_Manager() 
-  : LoomModule("WarmUp_Manager", LoomModule::Type::WarmUp_Manager)
+Loom_WarmUp_Manager::Loom_WarmUp_Manager(
+    LoomManager* manager
+  ) 
+  : LoomModule(manager, "WarmUp_Manager", LoomModule::Type::WarmUp_Manager)
   , warm(false)
   , start_time(0)
   , warm_duration(0) {
 
 }
 
-Loom_WarmUp_Manager::Loom_WarmUp_Manager(JsonArrayConst) 
-  : Loom_WarmUp_Manager() {
+Loom_WarmUp_Manager::Loom_WarmUp_Manager(LoomManager* manager, JsonArrayConst) 
+  : Loom_WarmUp_Manager(manager) {
 
 }
 
