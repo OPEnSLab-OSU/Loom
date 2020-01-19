@@ -50,7 +50,8 @@ public:
 
 	/// Constructor
 	Loom_ADS1115(
-		const byte				i2c_address = 0x2A, 
+LoomManager* manager,
+const byte i2c_address = 0x2A, 
 		const uint8_t 			mux_port = 255,
 		const char*				module_name="ADS1115",
 		const int				analog0=0,
@@ -70,7 +71,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_ADS1115(JsonArrayConst p);
+	Loom_ADS1115(LoomManager* manager, JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~Loom_ADS1115() = default;

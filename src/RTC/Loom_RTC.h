@@ -62,7 +62,8 @@ public:
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	timezone		Which timezone device is in
 	/// @param[in]	use_utc_time	True for UTC time, false for local time
-	LoomRTC(	
+	LoomRTC(
+			LoomManager* manager,
 			const char*				module_name,
 			const LoomModule::Type	module_type,
 			const TimeZone			timezone,

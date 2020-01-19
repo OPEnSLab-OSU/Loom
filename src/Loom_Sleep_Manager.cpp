@@ -17,12 +17,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager( 
-		const bool		use_LED, 
-		const bool		delay_on_wake, 
-		const Mode		sleep_mode,
-		const byte		power_off_pin
+		LoomManager* 	manager,
+		const bool					use_LED, 
+		const bool					delay_on_wake, 
+		const Mode					sleep_mode,
+		const byte					power_off_pin
 	) 
-	: LoomModule( "SleepManager", Type::Sleep_Manager )
+	: LoomModule(manager, "SleepManager", Type::Sleep_Manager )
 	, use_LED(use_LED)
 	, delay_on_wake(delay_on_wake)
 	, sleep_mode(Mode::STANDBY)
@@ -32,8 +33,8 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Sleep_Manager::Loom_Sleep_Manager(JsonArrayConst p)
-	: Loom_Sleep_Manager(p[0], p[1], (Mode)(int)p[2], p[3]) {}
+Loom_Sleep_Manager::Loom_Sleep_Manager(LoomManager* manager, JsonArrayConst p)
+	: Loom_Sleep_Manager(manager, p[0], p[1], (Mode)(int)p[2], p[3]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::print_config() const

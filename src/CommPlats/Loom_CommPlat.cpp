@@ -13,11 +13,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomCommPlat::LoomCommPlat( 
-		const char*				module_name, 
+		LoomManager* 			manager,
+		const char*							module_name, 
 		const LoomModule::Type	module_type,
-		const uint16_t			max_message_len 
+		const uint16_t					max_message_len 
 	) 
-	: LoomModule( module_name, module_type )
+	: LoomModule(manager, module_name, module_type )
 	, max_message_len(max_message_len)
 	, signal_strength(0)
 	, total_packet_count(0)

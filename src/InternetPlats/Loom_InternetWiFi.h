@@ -53,7 +53,8 @@ public:
 	/// Constructor
 	/// @param[in]	ssid	WiFi network name
 	/// @param[in]	pass	WiFi network password. Leave as empty string if network has no password.
-	Loom_WiFi(	
+	Loom_WiFi(
+			LoomManager* manager,
 			const char* 	ssid		= "",
 			const char* 	pass		= ""
 		);
@@ -61,7 +62,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_WiFi( JsonArrayConst p );
+	Loom_WiFi(LoomManager* manager, JsonArrayConst p );
 
 	/// Destructor
 	virtual ~Loom_WiFi() = default;

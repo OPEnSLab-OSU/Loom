@@ -48,14 +48,15 @@ public:
 	/// @param[in]	i2c_address			Set(Int) | <0x44> | {0x44, 0x45} | I2C address
 	/// @param[in]	mux_port			Int | <255> | [0-16] | Port on multiplexer
 	Loom_SHT31D(
-			const byte			i2c_address		= 0x44,
+LoomManager* manager,
+const byte i2c_address		= 0x44,
 			const uint8_t		mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_SHT31D( JsonArrayConst p );
+	Loom_SHT31D( LoomManager* manager, JsonArrayConst p );
 
 	/// Destructor
 	~Loom_SHT31D() = default;

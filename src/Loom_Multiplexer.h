@@ -92,6 +92,7 @@ public:
 	/// @param[in]	dynamic_list			Bool | <true> | {true, false} | Whether or not to automatically check for new sensors
 	/// @param[in]	update_period			Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
 	Loom_Multiplexer(
+			LoomManager* manager,
 			const byte			i2c_address			= 0x71,
 			const uint8_t		num_ports			= 8,
 			const bool			dynamic_list		= true,
@@ -101,7 +102,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Multiplexer(JsonArrayConst p);
+	Loom_Multiplexer(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_Multiplexer();

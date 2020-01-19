@@ -24,14 +24,15 @@ public:
 
 	/// Constructor
 	LoomInternetPlatTemplate(
-			const char*		module_name			= "InternetPlatTemplate",
+			LoomManager* manager,
+const char* module_name			= "InternetPlatTemplate",
 			int				ex_param			= 42
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomInternetPlatTemplate(JsonArrayConst p);
+	LoomInternetPlatTemplate(LoomManager* manager, JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomInternetPlatTemplate() = default;

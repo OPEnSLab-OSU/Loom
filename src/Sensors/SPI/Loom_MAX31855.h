@@ -48,7 +48,8 @@ public:
 	/// @param[in]	num_samples			Set(Int) | <4> | {1, 2, 4, 8, 16} | How many samples to take and average
 	/// @param[in]	CS_pin				Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used for chip select
 	Loom_MAX31855(
-			const char*			module_name			= "MAX31855",
+			LoomManager* manager,
+			const char* module_name			= "MAX31855",
 			const uint8_t		num_samples			= 4,
 			const uint8_t		CS_pin				= 10
 		);
@@ -56,7 +57,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_MAX31855(JsonArrayConst p);
+	Loom_MAX31855(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_MAX31855() = default;

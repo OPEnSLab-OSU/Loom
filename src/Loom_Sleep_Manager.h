@@ -68,6 +68,7 @@ public:
 	/// @param[in]	sleep_mode			Set(Mode) | <1> | { 0("Idle"), 1("Standby"), 2("SleepyDog"), 3("Opens Low Power")} | Which Mode to use
 	/// @param[in]	power_off_pin		Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to power off board
 	Loom_Sleep_Manager(
+			LoomManager* manager,
 			const bool		use_LED				= true,
 			const bool		delay_on_wake		= false,
 			const Mode		sleep_mode			= Mode::STANDBY,
@@ -77,7 +78,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Sleep_Manager(JsonArrayConst p);
+	Loom_Sleep_Manager(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_Sleep_Manager() = default;

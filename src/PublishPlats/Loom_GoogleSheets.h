@@ -41,7 +41,8 @@ public:
 	/// @param[in]  sheet_id			String | <""> | null |ID Of the spreadsheet to put data in (script must have edit access).
 	/// @param[in]  tab_matches_dev_id	Bool | <true> | null | Override tab_id with the name+instance number of the device. 
 	/// @param[in]  tab_id				String | <"Data"> | null | Name of the tab that the device will put data into. 
-	Loom_GoogleSheets(	
+	Loom_GoogleSheets(
+			LoomManager* manager,
 			const char*				module_name,
 			const LoomModule::Type	internet_type,
 			const char*				script_url,
@@ -53,7 +54,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]  p     The array of constuctor args to expand
-	Loom_GoogleSheets( JsonArrayConst p );
+	Loom_GoogleSheets(LoomManager* manager, JsonArrayConst p );
 
 	/// Destructor
 	~Loom_GoogleSheets() = default;

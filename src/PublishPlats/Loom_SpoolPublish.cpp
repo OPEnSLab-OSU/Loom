@@ -30,6 +30,7 @@ static std::vector<unsigned char> make_key_from_asn1(std::vector<unsigned char> 
 
 /////////////////////////////////////////////////////////////////////
 Loom_SpoolPublish::Loom_SpoolPublish(
+		LoomManager* manager,
 		const char*				module_name,
 		const LoomModule::Type	internet_type,
 		const char*				spool_domain,
@@ -39,7 +40,7 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 		const char* 			cli_cert,
 		const char*				cli_key
 	) 
-	: LoomPublishPlat(module_name, LoomModule::Type::SpoolPub, internet_type)
+	: LoomPublishPlat(manager, module_name, LoomModule::Type::SpoolPub, internet_type)
 	, m_spool_domain(spool_domain)
 	, m_device_data_endpoint(device_data_endpoint)
 	, m_device_id(device_id)
@@ -60,8 +61,8 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 	} {}
 
 /////////////////////////////////////////////////////////////////////
-Loom_SpoolPublish::Loom_SpoolPublish(JsonArrayConst p)
-: Loom_SpoolPublish(p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5], p[6], p[7] ) {}
+Loom_SpoolPublish::Loom_SpoolPublish(LoomManager* manager, JsonArrayConst p)
+: Loom_SpoolPublish(manager, p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5], p[6], p[7] ) {}
 
 
 /////////////////////////////////////////////////////////////////////

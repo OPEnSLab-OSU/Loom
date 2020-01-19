@@ -97,27 +97,27 @@
 
 /// Creates a LoomModule with default parameters
 /// @return The created LoomModule
-template<class T> LoomModule* ConstructDefault(const LoomManager* manager) { return new T(manager); }
+template<class T> LoomModule* ConstructDefault(LoomManager* manager) { return new T(manager); }
 
 /// Creates a LoomModule with Json array of parameters
 /// @return The created LoomModule
-template<class T> LoomModule* Construct(const LoomManager* manager, JsonArrayConst p) { return new T(manager, p); }
+template<class T> LoomModule* Construct(LoomManager* manager, JsonArrayConst p) { return new T(manager, p); }
 
 
 
 namespace factory {
 
-	/// Function pointer to 'template<class T> LoomModule* Construct(const LoomManager* manager, JsonArrayConst p)'
-	using FactoryPtr = LoomModule* (*)(const LoomManager* manager, JsonArrayConst p);
+	/// Function pointer to 'template<class T> LoomModule* Construct(LoomManager* manager, LoomManager* manager, JsonArrayConst p)'
+	using FactoryPtr = LoomModule* (*)(LoomManager* manager, JsonArrayConst p);
 
 	/// Function pointer to 'template<class T> LoomModule* ConstructDefault()'
-	using FactoryPtrDefault = LoomModule* (*)(const LoomManager* manager);
+	using FactoryPtrDefault = LoomModule* (*)(LoomManager* manager);
 
 	/// Struct to contain the elements of factory lookup table
 	typedef struct {
 		/// Module type to compare against
 		const char*			name;				
-		/// Pointer to 'template<class T> LoomModule* Create(const LoomManager* manager, JsonArrayConst p)' with the type T set
+		/// Pointer to 'template<class T> LoomModule* Create(LoomManager* manager, JsonArrayConst p)' with the type T set
 		FactoryPtr			Construct;			
 		/// Pointer to 'template<class T> LoomModule* CreateDefault()' with the type T set
 		FactoryPtrDefault	ConstructDefault;	
@@ -281,7 +281,7 @@ public:
 	template<class T> 
 	static T* CreateDefault() { return ConstructDefault<T>(); }
 
-	virtual LoomModule* Create(const LoomManager* manager, JsonVariant module) const = 0;
+	virtual LoomModule* Create(LoomManager* manager, JsonVariant module) const = 0;
 };
 
 
@@ -360,7 +360,7 @@ public:
 	/// if that module has default values for all parameters
 	/// @param[in]	module		Subset of a Json configuration, used to identify module to create and with what parameters
 	/// @return	LoomModule if created, nullptr if it could not be created
-	LoomModule* Create(const LoomManager* manager, JsonVariant module) const
+	LoomModule* Create(LoomManager* manager, JsonVariant module) const
 	{
 		const char* name = module["name"];
 

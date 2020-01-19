@@ -16,14 +16,15 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_SD::Loom_SD(		
+Loom_SD::Loom_SD(
+		LoomManager* manager,
 		const bool			enable_rate_filter, 
 		const uint16_t		min_filter_delay, 
 		const byte			chip_select, 
 		const char*			default_file,
 		const bool			number_files
 	)
-	: LoomLogPlat( "SD", Type::SDCARD, enable_rate_filter, min_filter_delay )
+	: LoomLogPlat(manager, "SD", Type::SDCARD, enable_rate_filter, min_filter_delay )
 	, chip_select(chip_select)
 {
 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
@@ -43,8 +44,8 @@ Loom_SD::Loom_SD(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_SD::Loom_SD(JsonArrayConst p)
-	: Loom_SD( EXPAND_ARRAY(p, 5) ) {}
+Loom_SD::Loom_SD(LoomManager* manager, JsonArrayConst p)
+	: Loom_SD(manager, EXPAND_ARRAY(p, 5) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_SD::update_filename(const char* default_file, const bool number_files)

@@ -50,14 +50,15 @@ public:
 	/// @param[in]	i2c_address				Set(Int) | <0x1F> | {0x1C, 0x1D, 0x1E, 0x1F} | I2C address
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	Loom_FXOS8700(
-			const byte			i2c_address		= 0x1F,
+LoomManager* manager,
+const byte i2c_address		= 0x1F,
 			const uint8_t		mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_FXOS8700(JsonArrayConst p);
+	Loom_FXOS8700(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_FXOS8700() = default;

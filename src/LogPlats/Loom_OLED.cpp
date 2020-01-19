@@ -45,6 +45,7 @@ const char* Loom_OLED::enum_oled_freeze_string(const FreezeType f)
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_OLED::Loom_OLED(	
+		LoomManager* manager,
 		const bool			enable_rate_filter, 
 		const uint16_t		min_filter_delay, 
 		const Version		version, 
@@ -54,7 +55,7 @@ Loom_OLED::Loom_OLED(
 		const byte			freeze_pin, 
 		const FreezeType	freeze_behavior
 	)
-	: LoomLogPlat( "OLED", Type::OLED, enable_rate_filter, min_filter_delay )
+	: LoomLogPlat(manager, "OLED", Type::OLED, enable_rate_filter, min_filter_delay )
 	, version(version)
 	, reset_pin(reset_pin)
 	, display_format(display_format)
@@ -76,8 +77,8 @@ Loom_OLED::Loom_OLED(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_OLED::Loom_OLED(JsonArrayConst p)
-	: Loom_OLED(p[0], p[1], (Version)(int)p[2], p[3], (Format)(int)p[4], p[5], p[6], (FreezeType)(int)p[7]) {}
+Loom_OLED::Loom_OLED(LoomManager* manager, JsonArrayConst p)
+	: Loom_OLED(manager, p[0], p[1], (Version)(int)p[2], p[3], (Format)(int)p[4], p[5], p[6], (FreezeType)(int)p[7]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_OLED::print_config() const

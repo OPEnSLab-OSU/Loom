@@ -13,20 +13,21 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MAX31855::Loom_MAX31855(	
-		const char*			module_name,
+Loom_MAX31855::Loom_MAX31855(
+		LoomManager* manager,
+		const char* module_name,
 		const uint8_t		num_samples, 
 		const uint8_t		CS_pin
 	) 
-	: LoomSPISensor( module_name, Type::MAX31855, num_samples ) 
+	: LoomSPISensor(manager, module_name, Type::MAX31855, num_samples ) 
 	, inst_max(CS_pin)
 {
 	inst_max.begin();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MAX31855::Loom_MAX31855(JsonArrayConst p)
-	: Loom_MAX31855( EXPAND_ARRAY(p, 3) ) {}
+Loom_MAX31855::Loom_MAX31855(LoomManager* manager, JsonArrayConst p)
+	: Loom_MAX31855(manager, EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MAX31855::print_measurements() const 

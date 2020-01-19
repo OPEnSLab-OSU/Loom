@@ -34,6 +34,7 @@ public:
     /// @param[in] i2c_address              Set(Int) | <0x36> | {0x36} | I2C address
     /// @param[in] mux_port                     Int | <255> | [0-16] | Port on multiplexer
     Loom_STEMMA(
+            LoomManager* manager,
             byte                i2c_address        = 0x36,
             const uint8_t       mux_port           = 255
         );
@@ -41,7 +42,7 @@ public:
     /// Constructor that takes Json Array, extracts args
     /// and delegates to regular constructor
     /// \param[in]    p        The array of constuctor args to expand
-    Loom_STEMMA(JsonArrayConst p);
+    Loom_STEMMA(LoomManager* manager, JsonArrayConst p);
     
     /// Destructor
     virtual ~Loom_STEMMA() = default;

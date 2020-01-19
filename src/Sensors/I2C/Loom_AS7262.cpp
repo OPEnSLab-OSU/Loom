@@ -14,14 +14,15 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7262::Loom_AS7262(
-		const byte			i2c_address, 
+LoomManager* manager,
+const byte i2c_address, 
 		const uint8_t		mux_port,
 		const bool			use_bulb, 
 		const uint8_t		gain, 
 		const uint8_t		mode, 
 		const uint8_t		integration_time
 	)
-	: LoomI2CSensor( "AS7262", Type::AS7262, i2c_address, mux_port )
+	: LoomI2CSensor(manager, "AS7262", Type::AS7262, i2c_address, mux_port )
 	, use_bulb(use_bulb)
 	, gain(gain)
 	, mode(mode)
@@ -36,8 +37,8 @@ Loom_AS7262::Loom_AS7262(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_AS7262::Loom_AS7262(JsonArrayConst p)
-	: Loom_AS7262( EXPAND_ARRAY(p, 6) ) {}
+Loom_AS7262::Loom_AS7262(LoomManager* manager, JsonArrayConst p)
+	: Loom_AS7262(manager, EXPAND_ARRAY(p, 6) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7262::print_config() const

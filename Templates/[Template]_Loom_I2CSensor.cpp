@@ -5,7 +5,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 LoomI2CSensorTemplate::LoomI2CSensorTemplate(
 		byte			i2c_address, 
-		const char*		module_name 
+		LoomManager* manager,
+const char* module_name 
 	) 
 	: LoomI2CSensor( module_name, i2c_address )
 {
@@ -15,7 +16,7 @@ LoomI2CSensorTemplate::LoomI2CSensorTemplate(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomI2CSensorTemplate::LoomI2CSensorTemplate(JsonArrayConst p)
+LoomI2CSensorTemplate::LoomI2CSensorTemplate(LoomManager* manager, JsonArrayConst p)
 	: LoomI2CSensorTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////

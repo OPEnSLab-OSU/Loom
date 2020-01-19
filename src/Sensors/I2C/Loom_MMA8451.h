@@ -53,7 +53,8 @@ public:
 	/// @param[in]	mux_port			Int | <255> | [0-16] | Port on multiplexer
 	/// @param[in]	range				Set() | <"MMA8451"> | null | MMA8451 module name
 	Loom_MMA8451(
-			const byte				i2c_address		= 0x1D,
+LoomManager* manager,
+const byte i2c_address		= 0x1D,
 			const uint8_t			mux_port		= 255,
 			const mma8451_range_t	range			= MMA8451_RANGE_2_G
 		);
@@ -61,7 +62,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_MMA8451(JsonArrayConst p);
+	Loom_MMA8451(LoomManager* manager, JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~Loom_MMA8451() = default;

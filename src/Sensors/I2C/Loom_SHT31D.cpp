@@ -14,10 +14,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SHT31D::Loom_SHT31D(
-		const byte			i2c_address,
+LoomManager* manager,
+const byte i2c_address,
 		const uint8_t		mux_port
 	)
-	: LoomI2CSensor( "SHT31D", Type::SHT31D, i2c_address, mux_port )
+	: LoomI2CSensor(manager, "SHT31D", Type::SHT31D, i2c_address, mux_port )
 {
 	bool setup = inst_sht31d.begin(i2c_address);
 
@@ -28,8 +29,8 @@ Loom_SHT31D::Loom_SHT31D(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_SHT31D::Loom_SHT31D(JsonArrayConst p)
-	: Loom_SHT31D( EXPAND_ARRAY(p, 2) ) {}
+Loom_SHT31D::Loom_SHT31D(LoomManager* manager, JsonArrayConst p)
+	: Loom_SHT31D(manager, EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_SHT31D::print_measurements() const

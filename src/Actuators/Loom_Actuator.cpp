@@ -14,10 +14,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomActuator::LoomActuator( 
-		const char*				module_name,
+		LoomManager* 			manager,
+		const char*							module_name,
 		const LoomModule::Type	module_type 
 	) 
-	: LoomModule( module_name, module_type )
+	: LoomModule(manager, module_name, module_type )
 {}
 
 ///////////////////////////////////////////////////////////////////////////////

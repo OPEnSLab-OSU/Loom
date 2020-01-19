@@ -4,7 +4,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlatTemplate::LoomInternetPlatTemplate(
-		const char*		module_name, 
+		LoomManager* manager,
+const char* module_name, 
 		int				ex_param
 	) 
 	: LoomInternetPlat( module_name )
@@ -15,7 +16,7 @@ LoomInternetPlatTemplate::LoomInternetPlatTemplate(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlatTemplate::LoomInternetPlatTemplate(JsonArrayConst p)
+LoomInternetPlatTemplate::LoomInternetPlatTemplate(LoomManager* manager, JsonArrayConst p)
 	: LoomInternetPlatTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -12,10 +12,11 @@
 #include "Loom_Manager.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomNTPSync::LoomNTPSync(   
+LoomNTPSync::LoomNTPSync(
+		LoomManager* 	manager,
 		const uint          sync_interval_hours
 	) 
-	: LoomModule( "NTP", Type::NTP )
+	: LoomModule(manager, "NTP", Type::NTP )
 	, m_sync_interval( sync_interval_hours )
 	, m_internet( nullptr )
 	, m_rtc( nullptr )
@@ -24,8 +25,8 @@ LoomNTPSync::LoomNTPSync(
 	{}
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomNTPSync::LoomNTPSync(JsonArrayConst p)
-	: LoomNTPSync( (uint)p[0] ) {}
+LoomNTPSync::LoomNTPSync(LoomManager* manager, JsonArrayConst p)
+	: LoomNTPSync(manager, (uint)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomNTPSync::second_stage_ctor() 
