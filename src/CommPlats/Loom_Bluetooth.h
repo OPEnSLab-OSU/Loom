@@ -53,6 +53,7 @@ public:
 	/// @param[in] 	spi_IRQ				SPI IRQ pin
 	/// @param[in] 	spi_RST				SPI reset pin
 	Loom_Bluetooth(
+			LoomManager* manager,
 			const uint16_t 		max_message_len		= 120,
 			const uint8_t		spi_CS				= 8,
 			const uint8_t		spi_IRQ				= 7,
@@ -62,7 +63,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Bluetooth(JsonArrayConst p);
+	Loom_Bluetooth(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_Bluetooth() = default;

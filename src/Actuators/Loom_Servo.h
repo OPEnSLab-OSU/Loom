@@ -49,12 +49,12 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	Loom_Servo();
+	Loom_Servo(LoomManager* manager);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Servo(JsonArrayConst p);
+	Loom_Servo(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_Servo() = default;

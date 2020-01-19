@@ -12,10 +12,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_WiFi::Loom_WiFi(	
+		LoomManager* manager,
 		const char* 	ssid,
 		const char* 	pass
 	) 
-	: LoomInternetPlat( "WiFi", Type::WiFi )
+	: LoomInternetPlat(manager, "WiFi", Type::WiFi )
 	, SSID(ssid)
 	, pass(pass)
 	, m_base_client()
@@ -35,8 +36,8 @@ Loom_WiFi::Loom_WiFi(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_WiFi::Loom_WiFi(JsonArrayConst p)
-	: Loom_WiFi( EXPAND_ARRAY(p, 2) ) {}
+Loom_WiFi::Loom_WiFi(LoomManager* manager, JsonArrayConst p)
+	: Loom_WiFi(manager, EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_WiFi::connect()

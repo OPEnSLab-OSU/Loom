@@ -580,7 +580,7 @@ bool LoomManager::parse_config_json(JsonObject config)
 	// Call module factory creating each module
 	for ( JsonVariant module : config["components"].as<JsonArray>()) {		
 		if (Factory) {
-			add_module(Factory->Create(module));
+			add_module(Factory->Create(this, module));
 		}
 	}
 

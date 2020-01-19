@@ -11,14 +11,15 @@
 #include "Loom_Bluetooth.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Bluetooth::Loom_Bluetooth( 	
+Loom_Bluetooth::Loom_Bluetooth(
+		LoomManager* manager,
 		const uint16_t 		max_message_len,
 		const uint8_t		spi_CS,
 		const uint8_t		spi_IRQ,
 		const uint8_t		spi_RST
 
 	)
-	: LoomCommPlat( "Bluetooth", Type::Bluetooth, max_message_len )
+	: LoomCommPlat(manager, "Bluetooth", Type::Bluetooth, max_message_len )
 	, spi_CS(spi_CS)
 	, spi_IRQ(spi_IRQ)
 	, spi_RST(spi_RST)
@@ -30,8 +31,8 @@ Loom_Bluetooth::Loom_Bluetooth(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Bluetooth::Loom_Bluetooth(JsonArrayConst p)
-	: Loom_Bluetooth( EXPAND_ARRAY(p, 4) ) {}
+Loom_Bluetooth::Loom_Bluetooth(LoomManager* manager, JsonArrayConst p)
+	: Loom_Bluetooth(manager, EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Bluetooth::add_config(JsonObject json)

@@ -24,14 +24,15 @@ public:
 
 	/// Constructor
 	LoomSensorTemplate(
-			const char*		module_name		= "SensorTemplate",
+			LoomManager* manager,
+const char* module_name		= "SensorTemplate",
 			int 			num_samples		= 4
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomSensorTemplate(JsonArrayConst p);
+	LoomSensorTemplate(LoomManager* manager, JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomSensorTemplate() = default;

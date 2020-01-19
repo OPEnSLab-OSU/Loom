@@ -106,6 +106,7 @@ public:
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	LoomModule( 
+		LoomManager* manager,
 		const char*		module_name		= "Unknown", 
 		const Type		module_type		= Type::Unknown
 	);

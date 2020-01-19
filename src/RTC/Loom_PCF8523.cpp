@@ -13,19 +13,20 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_PCF8523::Loom_PCF8523(	
+Loom_PCF8523::Loom_PCF8523(
+		LoomManager* manager,
 		const TimeZone		timezone,
 		const bool			use_utc_time
 	)
-	: LoomRTC( "PCF8523", Type::PCF8523, timezone, use_utc_time )
+	: LoomRTC(manager, "PCF8523", Type::PCF8523, timezone, use_utc_time )
 {
 	init();
 	clear_alarms();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_PCF8523::Loom_PCF8523(JsonArrayConst p)
-	: Loom_PCF8523( (TimeZone)(int)p[0], p[1] ) {}
+Loom_PCF8523::Loom_PCF8523(LoomManager* manager, JsonArrayConst p)
+	: Loom_PCF8523(manager, (TimeZone)(int)p[0], p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_PCF8523::_begin()

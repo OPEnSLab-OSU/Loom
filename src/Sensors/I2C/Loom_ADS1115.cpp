@@ -3,7 +3,8 @@
 //ADS1115 ADS1115(i2c_address);
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ADS1115::Loom_ADS1115(
-			const byte			i2c_address,// =0x2A, 
+LoomManager* manager,
+const byte i2c_address,// =0x2A, 
 			const uint8_t 		mux_port,
 			const char*			module_name,// = "ADS1115",
 			const int				analog0,
@@ -21,7 +22,7 @@ Loom_ADS1115::Loom_ADS1115(
 			
 		 
 	) 
-	: LoomI2CSensor( "ADS1115", LoomModule::Type::ADS1115 , i2c_address, mux_port)
+	: LoomI2CSensor(manager, "ADS1115", LoomModule::Type::ADS1115 , i2c_address, mux_port)
 {
 
 	Adafruit_ADS1115 ads1115;
@@ -35,8 +36,8 @@ Loom_ADS1115::Loom_ADS1115(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_ADS1115::Loom_ADS1115(JsonArrayConst p)
-	: Loom_ADS1115( EXPAND_ARRAY(p, 15) ) {}
+Loom_ADS1115::Loom_ADS1115(LoomManager* manager, JsonArrayConst p)
+	: Loom_ADS1115(manager, EXPAND_ARRAY(p, 15) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_ADS1115::print_config() const

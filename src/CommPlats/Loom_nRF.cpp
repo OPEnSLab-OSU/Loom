@@ -11,7 +11,8 @@
 #include "Loom_nRF.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_nRF::Loom_nRF( 	
+Loom_nRF::Loom_nRF(
+		LoomManager* manager,
 		const uint16_t		max_message_len,
 		const uint8_t		address,
 		const uint8_t		data_rate,
@@ -20,7 +21,7 @@ Loom_nRF::Loom_nRF(
 		const uint16_t		retry_timeout,
 		const uint8_t		multicast_level	
 	)
-	: LoomCommPlat( "nRF", Type::nRF, max_message_len )
+	: LoomCommPlat(manager, "nRF", Type::nRF, max_message_len )
 	, data_rate(data_rate)
 	, power_level(power_level)
 	, retry_count(retry_count)
@@ -99,8 +100,8 @@ Loom_nRF::Loom_nRF(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_nRF::Loom_nRF(JsonArrayConst p)
-	: Loom_nRF( EXPAND_ARRAY(p, 7) ) {}
+Loom_nRF::Loom_nRF(LoomManager* manager, JsonArrayConst p)
+	: Loom_nRF(manager, EXPAND_ARRAY(p, 7) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_nRF::~Loom_nRF() 

@@ -132,13 +132,14 @@ public:
 	///
 	/// @param[in]	RTC_Inst		Set(Int) | <0> | {0("Null")} | OLED module name
 	Loom_Interrupt_Manager(
+			LoomManager* manager,
 			LoomRTC*		RTC_Inst		= nullptr
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Interrupt_Manager(JsonArrayConst p);
+	Loom_Interrupt_Manager(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_Interrupt_Manager() = default;

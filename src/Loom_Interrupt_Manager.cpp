@@ -46,9 +46,10 @@ const char* Loom_Interrupt_Manager::interrupt_type_to_string(const uint8_t type)
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Interrupt_Manager::Loom_Interrupt_Manager( 
+		LoomManager* manager,
 		LoomRTC*		RTC_Inst
 	) 
-	: LoomModule( "InterruptManager", Type::Interrupt_Manager )
+	: LoomModule(manager, "InterruptManager", Type::Interrupt_Manager )
 	, RTC_Inst(RTC_Inst)
 {
 
@@ -74,8 +75,8 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Interrupt_Manager::Loom_Interrupt_Manager(JsonArrayConst p)
-	: Loom_Interrupt_Manager( nullptr ) {}
+Loom_Interrupt_Manager::Loom_Interrupt_Manager(LoomManager* manager, JsonArrayConst p)
+	: Loom_Interrupt_Manager(manager, nullptr ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::print_config() const

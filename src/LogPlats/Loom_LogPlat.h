@@ -45,7 +45,8 @@ public:
 	/// @param[in] 	enable_rate_filter	Whether or not to impose maximum update rate
 	/// @param[in] 	min_filter_delay	Minimum update delay, if enable_rate_filter enabled
 	LoomLogPlat(	
-			const char*				module_name,
+			LoomManager* manager,
+			const char* module_name,
 			const LoomModule::Type	module_type,
 			const bool				enable_rate_filter	= true,
 			const uint16_t			min_filter_delay	= 1000

@@ -82,6 +82,7 @@ public:
 	/// @param[in]	retry_count					Int | <3> | [0-15] | Max number of transmission retries
 	/// @param[in]	retry_timeout				Int | <200>| [20-500] | Delay between retransmissions (ms)
 	Loom_LoRa(
+			LoomManager* device_manager,
 			const uint16_t		max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
 			const uint8_t		address				= 0,
 			const uint8_t		power_level 		= 23,
@@ -92,7 +93,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_LoRa(JsonArrayConst p);
+	Loom_LoRa(LoomManager* device_manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_LoRa() = default;

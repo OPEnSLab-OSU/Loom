@@ -25,13 +25,14 @@ public:
 	/// Constructor
 	LoomI2CSensorTemplate(
 			byte			i2c_address		= 0x2A,
-			const char*		module_name		= "I2CSensorTemplate"
+			LoomManager* manager,
+const char* module_name		= "I2CSensorTemplate"
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomI2CSensorTemplate(JsonArrayConst p);
+	LoomI2CSensorTemplate(LoomManager* manager, JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomI2CSensorTemplate() = default;

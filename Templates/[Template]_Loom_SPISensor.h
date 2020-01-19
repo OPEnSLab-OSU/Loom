@@ -24,14 +24,15 @@ public:
 
 	/// Constructor
 	LoomSPISensorTemplate(
-			const char*		module_name		= "SPISensorTemplate"
+			LoomManager* manager,
+const char* module_name		= "SPISensorTemplate"
 			int				num_samples		= 1
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomSPISensorTemplate(JsonArrayConst p);
+	LoomSPISensorTemplate(LoomManager* manager, JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomSPISensorTemplate() = default;

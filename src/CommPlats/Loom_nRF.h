@@ -85,6 +85,7 @@ public:
 	/// @param[in]	retry_timeout 		Int | <200> | [20-500] | Delay between retransmissions (ms)
 	/// @param[in]	multicast_level		Int | <1> | [1-3] | How many levels to propogate message through heirarchy
 	Loom_nRF(
+			LoomManager* manager,
 			const uint16_t		max_message_len		= 120,
 			const uint8_t		address 			= 0,
 			const uint8_t		data_rate			= 1,
@@ -97,7 +98,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_nRF(JsonArrayConst p);
+	Loom_nRF(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_nRF();

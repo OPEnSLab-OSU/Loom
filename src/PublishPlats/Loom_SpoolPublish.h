@@ -34,6 +34,7 @@ public:
 
 	/// Constructor
 	Loom_SpoolPublish(
+			LoomManager* manager,
 			const char*				module_name,
 			const LoomModule::Type	internet_type,
 			const char*				spool_domain,
@@ -48,7 +49,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]  p     The array of constuctor args to expand
-	Loom_SpoolPublish( JsonArrayConst p );
+	Loom_SpoolPublish( LoomManager* manager, JsonArrayConst p );
 	
 	/// Destructor
 	~Loom_SpoolPublish() = default;

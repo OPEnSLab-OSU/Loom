@@ -91,6 +91,7 @@ public:
 	/// @param[in]	convertA5			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A5
 	/// @param[in]	temperature			float | <25.0> | [0.-100.] | Temperature to using in conversions
 	Loom_Analog(
+			LoomManager* manager,
 			const uint8_t		num_samples			= 8,
 			const uint8_t		read_resolution		= 12,
 			const bool			enableA0			= true,
@@ -111,7 +112,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Analog(JsonArrayConst p);
+	Loom_Analog(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_Analog() = default;

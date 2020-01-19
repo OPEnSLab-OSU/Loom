@@ -61,7 +61,8 @@ public:
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	/// @param[in]	mode					Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
 	Loom_ZXGesture(
-			const byte			i2c_address		= 0x10,
+LoomManager* manager,
+const byte i2c_address		= 0x10,
 			const uint8_t		mux_port		= 255,
 			const Mode			mode			= Mode::POS
 		);
@@ -69,7 +70,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_ZXGesture(JsonArrayConst p);
+	Loom_ZXGesture(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_ZXGesture() = default;

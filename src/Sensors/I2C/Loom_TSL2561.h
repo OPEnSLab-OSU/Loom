@@ -54,7 +54,8 @@ public:
 	/// @param[in]	gain				Set(Int) | <1> | {1, 16} | Gain level
 	/// @param[in]	resolution			Set(Int) | <3> | { 1("Low"), 2("Med"), 3("High") } | Resolution
 	Loom_TSL2561(
-			const byte			i2c_address		= 0x39,
+LoomManager* manager,
+const byte i2c_address		= 0x39,
 			const uint8_t		mux_port		= 255,
 			const uint8_t		gain			= 1,
 			const uint8_t		resolution		= 3
@@ -63,7 +64,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_TSL2561(JsonArrayConst p);
+	Loom_TSL2561(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_TSL2561() = default;

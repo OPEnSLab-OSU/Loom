@@ -60,7 +60,8 @@ public:
 	/// @param[in]	mode						Set(Int) | <3> | { 0("Continuous reading of STUV"), 1("Continuous reading of RTUX"), 2("Continuous reading all channels"), 3("One-shot reading of all channels") } | Read mode
 	/// @param[in]	integration_time			Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
 	Loom_AS7263(
-			const byte			i2c_address			= 0x49,
+LoomManager* manager,
+const byte i2c_address			= 0x49,
 			const uint8_t		mux_port			= 255,
 			const bool			use_bulb			= false,
 			const uint8_t		gain				= 1,
@@ -71,7 +72,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_AS7263(JsonArrayConst p);
+	Loom_AS7263(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
 	~Loom_AS7263() = default;

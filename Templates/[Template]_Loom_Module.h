@@ -24,14 +24,15 @@ public:
 
 	/// Constructor
 	LoomModuleTemplate(
-			const char*		module_name		= "ModuleTemplate",
+			LoomManager* manager,
+const char* module_name		= "ModuleTemplate",
 			int 			ex_param		= 42
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomModuleTemplate(JsonArrayConst p);
+	LoomModuleTemplate(LoomManager* manager, JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomModuleTemplate() = default;

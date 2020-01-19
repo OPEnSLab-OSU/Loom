@@ -15,12 +15,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomLogPlat::LoomLogPlat( 
-		const char*				module_name, 
+		LoomManager* 			manager,
+		const char* 						module_name, 
 		const LoomModule::Type	module_type,
-		const bool				enable_rate_filter,
-		const uint16_t			min_filter_delay
+		const bool							enable_rate_filter,
+		const uint16_t					min_filter_delay
 	)
-	: LoomModule( module_name, module_type )
+	: LoomModule(manager, module_name, module_type )
 	, enable_rate_filter(enable_rate_filter)
 	, min_filter_delay(min_filter_delay)
 	, last_log_millis(0)

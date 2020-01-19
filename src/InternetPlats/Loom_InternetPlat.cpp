@@ -12,10 +12,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::LoomInternetPlat(	
-		const char*				module_name,
+		LoomManager* 			manager,
+		const char* 						module_name,
 		const LoomModule::Type	module_type
 	) 
-	: LoomModule( module_name, module_type ) {}
+	: LoomModule(manager, module_name, module_type ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb) 
