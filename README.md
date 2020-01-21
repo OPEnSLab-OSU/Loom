@@ -104,9 +104,9 @@ Loom aims to follow [Semantic Versioning](https://semver.org)
 - [Project Page](http://www.open-sensing.org/project-loom) for Loom on OPEnS lab website
 - [GitHub Organization](https://github.com/OPEnSLab-OSU) for all OPEnS Lab projects
 - [Loomify](https://github.com/OPEnSLab-OSU/Loomify) An npm package to drive the backend Loom Tag Format parsing and Loom Library github interactions.
-- [Loom Configurator](https://github.com/OPEnSLab-OSU/Loom_Configurator) A WebApp designed for designing and exporting loom configurations
+- [Loom Configurator](https://github.com/OPEnSLab-OSU/Configurator) A WebApp designed for designing and exporting loom configurations
 - [Loom-Network](https://github.com/OPEnSLab-OSU/Loom-Network) Arduino networking library designed for use with any wireless radio
-- [Loom-Auxilliary](https://github.com/OPEnSLab-OSU/Loom_Auxiliary) General Loom and lab non-code files
+- [Loom-Auxilliary](https://github.com/OPEnSLab-OSU/Auxiliary) General Loom and lab non-code files
 - [Max-Loom2](https://github.com/OPEnSLab-OSU/Max-Loom2) MaxMSP interfaces for Loom interactivity
 
 #### Custom/Modified Libraries used by Loom
