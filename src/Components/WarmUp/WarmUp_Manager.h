@@ -26,10 +26,7 @@ class Loom_WarmUp_Manager : public LoomModule {
     Loom_WarmUp_Manager(LoomManager* manager, JsonArrayConst);
 
     /// Registers a module as a WarmUp Interface providing access;
-    template<typename T>
-    void Register_WarmUp(T t) {
-      Interfaces.push_back(static_cast<WarmUp*>(t));
-    }
+    void Register_WarmUp(WarmUp* registree);
 
     /// Start a warming timer
     void warming_Begin();

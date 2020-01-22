@@ -26,6 +26,10 @@ Loom_WarmUp_Manager::Loom_WarmUp_Manager(LoomManager* manager, JsonArrayConst)
 
 }
 
+void Loom_WarmUp_Manager::Register_WarmUp(WarmUp* registree){
+  Interfaces.push_back(static_cast<WarmUp*>(registree));
+}
+
 void Loom_WarmUp_Manager::warming_Begin() {
   start_time = millis();
 
