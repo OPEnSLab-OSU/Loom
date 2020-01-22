@@ -22,7 +22,7 @@
 ///
 /// @attention	Library is modified to support different I2C addresses and will not 
 ///				compile with Loom without the change.
-///				The modifed verision can be found in the [Loom_Auxiliary](https://github.com/OPEnSLab-OSU/Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip) 
+///				The modifed verision can be found in the [Loom_Auxiliary](https://github.com/OPEnSLab-OSU/Loom_Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip) 
 ///				repository
 ///
 /// @par Resources
