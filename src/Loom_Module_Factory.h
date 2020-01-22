@@ -77,6 +77,8 @@
 #include "Sensors/SPI/Loom_MAX31855.h"
 #include "Sensors/SPI/Loom_MAX31856.h"
 
+#include "Sensors/SERIAL/Loom_K30.h"
+
 // Other
 #include "Loom_NTP_Sync.h"
 #include "Loom_Temperature_Sync.h"
@@ -235,12 +237,15 @@ namespace Include
 				factory::NameModulePair{"TSL2591",		Construct<Loom_TSL2591>,		ConstructDefault<Loom_TSL2591> },
 				factory::NameModulePair{"ZXGesture",	Construct<Loom_ZXGesture>,		ConstructDefault<Loom_ZXGesture> },
                 factory::NameModulePair{"STEMMA",       Construct<Loom_STEMMA>,         ConstructDefault<Loom_STEMMA> },
+                                             
 				// SDI12
 				factory::NameModulePair{"Decagon5TM",	Construct<Loom_Decagon5TM>,		ConstructDefault<Loom_Decagon5TM> },
 				factory::NameModulePair{"DecagonGS3",	Construct<Loom_DecagonGS3>,		ConstructDefault<Loom_DecagonGS3> },
 				// SPI
 				factory::NameModulePair{"MAX31855",		Construct<Loom_MAX31855>,		ConstructDefault<Loom_MAX31855> },
 				factory::NameModulePair{"MAX31856",		Construct<Loom_MAX31856>,		ConstructDefault<Loom_MAX31856> },
+                // SERIAL
+                factory::NameModulePair{"K30",        Construct<Loom_K30>,        ConstructDefault<Loom_K30> },
 				// Other
 				factory::NameModulePair{"TempSync",		Construct<LoomTempSync>,		ConstructDefault<LoomTempSync> }
 			);

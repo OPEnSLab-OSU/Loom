@@ -86,6 +86,10 @@ This is the Doxygen generated documentation of the Loom library code.
 #include "Sensors/SDI12/Loom_Decagon_5TM.h"
 
 ///////////////////////////////////////////////////////////////////////////////
+// Serial Sensors
+#include "Sensors/SERIAL/Loom_K30.h"
+
+///////////////////////////////////////////////////////////////////////////////
 // RTC
 #include "RTC/Loom_DS3231.h"
 #include "RTC/Loom_PCF8523.h"
