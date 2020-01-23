@@ -166,7 +166,7 @@ namespace Include
 	/// Common modules
 	constexpr auto Common = std::make_tuple( 
 				factory::NameModulePair{"Interrupt_Manager",	Construct<Loom_Interrupt_Manager>,		ConstructDefault<Loom_Interrupt_Manager> },
-				factory::NameModulePair{"WarmUp_Manager", Construct<Loom_WarmUp_Manager>, ConstructDefault<Loom_WarmUp_Manager> },
+				factory::NameModulePair{"WarmUp_Manager", Construct<WarmUp_Manager>, ConstructDefault<WarmUp_Manager> },
 				factory::NameModulePair{"Sleep_Manager",		Construct<Loom_Sleep_Manager>,			ConstructDefault<Loom_Sleep_Manager> },
 				factory::NameModulePair{"Analog",		Construct<Loom_Analog>,			ConstructDefault<Loom_Analog> },
 				factory::NameModulePair{"Digital",		Construct<Loom_Digital>,		ConstructDefault<Loom_Digital> },

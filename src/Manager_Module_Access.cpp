@@ -23,10 +23,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 // --- General ---
 
-Loom_WarmUp_Manager& LoomManager::WarmUpManager(const uint8_t idx)
+WarmUp_Manager& LoomManager::WarmUpManager(const uint8_t idx)
 {
 	LoomModule* tmp = warmup_manager;
-	return (*(Loom_WarmUp_Manager*)( (tmp) ? tmp : nullptr ));
+	return (*(WarmUp_Manager*)( (tmp) ? tmp : nullptr ));
 }
 
 Loom_Interrupt_Manager& LoomManager::InterruptManager(const uint8_t idx) 
