@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Power.h
+/// @brief  Header file for Loom Module Power mixin, which provides an interface
+///         for modules to specify a specific behavior for power up and power down.
+/// @author		C. Greyston Brady
+/// @date		2020
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 class LoomManager;
 

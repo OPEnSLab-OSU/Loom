@@ -1,12 +1,22 @@
-#include <ArduinoJson.h>
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Power_Manager.h
+/// @brief  Header file for Loom Module Power Manager, which is responsible 
+///         for handeling any power up or down behaviors.
+/// @author		C. Greyston Brady
+/// @date		2020
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Module.h"
+
+#include <ArduinoJson.h>
 
 #undef min
 #undef max
 #include <vector>
 
-class LoomManager;
 class Power;
 
 class Power_Manager : public LoomModule {
@@ -17,10 +27,7 @@ class Power_Manager : public LoomModule {
     Power_Manager(LoomManager*, JsonArrayConst p);
 
     // Interface Registration
-    template<typename T>
-    void Register_Power(T t) {
-      Interfaces.push_back(static_cast<Power*>(t));
-    };
+    void Register_Power(Power* registree);
 
     // === Macromanagement ===
     // Power up all registered interfaces
@@ -32,6 +39,9 @@ class Power_Manager : public LoomModule {
     // Derivative functions
 
   protected:
+    // Macro state of power interfaces
+    bool powered;
+
     // List of Interfaces to manager
     std::vector<Power*> Interfaces;
 };

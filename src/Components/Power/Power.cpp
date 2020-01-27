@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		WarmUp.cpp
+/// @brief	Source file for Loom Module Power mixin interface.
+/// @author		C. Greyston Brady
+/// @date		  2020
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 #include "Power.h"
 
 #include "Power_Manager.h"
@@ -10,5 +20,5 @@ Power::Power(LoomManager* manager)
 }
 
 bool Power::get_power() {
-  return powered;
+  return this->powered;
 }

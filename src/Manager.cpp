@@ -383,22 +383,24 @@ void LoomManager::free_modules()
 void LoomManager::power_up()
 {
 	// Iterate over list of modules powering them on
-	for (auto module : modules) {
-		if ( module != nullptr ){
-			((LoomModule*)module)->power_up();
-		}
-	}	
+	// for (auto module : modules) {
+	// 	if ( module != nullptr ){
+	// 		((LoomModule*)module)->power_up();
+	// 	}
+	// }	
+	Power_Manager->power_up();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::power_down()
 {
 	// Iterate over list of modules powering them off
-	for (auto module : modules) {
-		if ( module != nullptr ){
-			((LoomModule*)module)->power_down();
-		}
-	}	
+	// for (auto module : modules) {
+	// 	if ( module != nullptr ){
+	// 		((LoomModule*)module)->power_down();
+	// 	}
+	// }	
+	Power_Manager->power_down();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

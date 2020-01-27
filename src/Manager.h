@@ -96,6 +96,7 @@ class Loom_DS3231;
 class Loom_PCF8523;
 
 // Other
+class Power_Manager;
 class WarmUp_Manager;
 class Loom_Sleep_Manager;
 class Loom_Interrupt_Manager;
@@ -150,6 +151,7 @@ protected:
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
 	// Sub Managers, so placed here for ease of access.
+	Power_Manager* power_manager = nullptr;
 	WarmUp_Manager* warmup_manager = nullptr;
 	Loom_Interrupt_Manager*	interrupt_manager = nullptr;
 	Loom_Sleep_Manager*		sleep_manager = nullptr;

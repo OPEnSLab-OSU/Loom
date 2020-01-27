@@ -15,7 +15,7 @@
 
 #undef min;
 #undef max;
-#include <vector>;
+#include <vector>
 
 class WarmUp;
 

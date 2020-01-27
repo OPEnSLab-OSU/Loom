@@ -132,11 +132,11 @@ public:
 	/// Route command to driver 
 	virtual bool	dispatch(JsonObject json) {};
 
-	/// Turn off any hardware
-	virtual void	power_down() {}
+	// /// Turn off any hardware
+	// virtual void	power_down() {}
 
-	/// Turn on any hardware
-	virtual void	power_up() {}
+	// /// Turn on any hardware
+	// virtual void	power_up() {}
 
 	/// Add configuration information to JsonObject.
 	/// LoomManager iterates over modules to build complete configuration
