@@ -10,15 +10,13 @@
 Loom_K30::Loom_K30(
                    const char* module_name,
                    int num_samples)
-: Loom_Serial_Sensor(module_name, num_samples)
+: LoomSerialSensor(module_name, Type::K30, num_samples)
 {
     LPrintln ("Initializing K30");
-    this -> module_type = ModuleType::K30;
-    
     LPrintln("K30 Initialization Finished");
 }
 
-Loom_K30::Loom_K30(JsonVariant p)
+Loom_K30::Loom_K30(JsonArrayConst p)
 : Loom_K30(EXPAND_ARRAY(p, 2))
 {}
 
@@ -74,13 +72,15 @@ void Loom_K30::measure() {
     LPrintln("Finished Measuring.");
 }
 
-void Loom_K30::print_measurements() {
+void Loom_K30::print_measurements() const {
     print_module_label();
     LPrintln("Measurements:");
     LPrintln("C02 Levels: ", C02_levels);
 }
 
 void Loom_K30::package(JsonObject json) {
-    package_json(json, module_name,
-                 "C02", C02_levels);
+    JsonObject data = get_module_data_object(json, module_name);
+    
+    data["C02"] = C02_levels;
+    
 }

@@ -35,8 +35,6 @@ public:
     ///@name    PRINT INFORMATION
     /*@{*/ //======================================================================
     virtual void print_config() const override;
-    virtual void measure() = 0;
-    virtual void package(JsonObject json) = 0;
     
     //=============================================================================
     ///@name    SETTERS

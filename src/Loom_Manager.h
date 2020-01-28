@@ -71,7 +71,7 @@ class Loom_MAX31855;
 class Loom_MAX31856;
 
 // SERIAL
-class K30;
+class Loom_K30;
 
 // CommPlats
 class Loom_LoRa;

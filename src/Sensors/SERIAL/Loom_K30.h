@@ -9,7 +9,7 @@
 
 #include "Loom_Serial_Sensor.h"
 
-class Loom_K30 : public Loom_Serial_Sensor
+class Loom_K30 : public LoomSerialSensor
 {
     
 protected:
@@ -37,13 +37,13 @@ public:
         int         num_samples = 1
              );
     
-    Loom_K30(JsonVariant p);
+    Loom_K30(JsonArrayConst p);
     
     /// Destructor
-    virtual ~Loom_K30();
+    virtual ~Loom_K30() = default;
     
     /// Inherited Methods
-    void print_measurements() override;
+    void print_measurements() const override;
     void measure() override;
     void package(JsonObject json) override;
     
