@@ -124,21 +124,12 @@ void Loom_ADS1115::measure()
 void Loom_ADS1115::package(JsonObject json)
 {
 		JsonObject data = get_module_data_object(json, module_name);
-		data["i2c_address"] =i2c_address;
-		data["mux_port"]=mux_port;
-		data["module_name"]=module_name;
 		data["analog0"]=analog0;
 		data["analog1"]=analog1;
 		data["analog2"]=analog2;
 		data["analog3"]=analog3;
 		data["diff0"]=diff0;
 		data["diff1"]=diff1;
-		data["analog_0_enabled"]=analog_0_enabled;
-		data["analog_1_enabled"]=analog_1_enabled;
-		data["analog_2_enabled"]=analog_2_enabled;
-		data["analog_3_enabled"]=analog_3_enabled;
-		data["diff_0_enabled"]=diff_0_enabled;
-		data["diff_1_enabled"]=diff_1_enabled;
 	
 	// keys must be c-strings
 	// values can be int, float, bool, c-string
