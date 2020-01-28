@@ -43,8 +43,6 @@ const char* module_name		= "CommPlatTemplate",
 
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
-	void		power_down() override {} 
-	void		power_up() override {}
 
 	bool		receive(JsonObject json) override;
 	bool		send(JsonObject json, uint16_t destination) override;

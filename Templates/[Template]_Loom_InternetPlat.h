@@ -43,8 +43,6 @@ const char* module_name			= "InternetPlatTemplate",
 
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
-	void		power_down() override {} 
-	void		power_up() override {}
 
 	void 		connect() override;
 	bool 		is_connected() override;

@@ -14,6 +14,7 @@
 #include "Macros.h"
 #include "Interrupt_Manager.h"
 #include "Sleep_Manager.h"
+#include "Components/Power/Power_Manager.h"
 
 #include "Sensors/Sensor.h"
 #include "Multiplexer.h"
@@ -381,26 +382,14 @@ void LoomManager::free_modules()
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::power_up()
-{
-	// Iterate over list of modules powering them on
-	// for (auto module : modules) {
-	// 	if ( module != nullptr ){
-	// 		((LoomModule*)module)->power_up();
-	// 	}
-	// }	
-	Power_Manager->power_up();
+{	
+	power_manager->power_up();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::power_down()
 {
-	// Iterate over list of modules powering them off
-	// for (auto module : modules) {
-	// 	if ( module != nullptr ){
-	// 		((LoomModule*)module)->power_down();
-	// 	}
-	// }	
-	Power_Manager->power_down();
+	power_manager->power_down();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

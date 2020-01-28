@@ -44,8 +44,6 @@ const char* module_name			= "PublishPlatTemplate",
 
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
-	void		power_down() override {} 
-	void		power_up() override {}
 
 	bool		send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
 

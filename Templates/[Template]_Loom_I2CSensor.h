@@ -45,8 +45,6 @@ const char* module_name		= "I2CSensorTemplate"
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
 	void		calibrate() override;
-	void		power_down() override {} 
-	void		power_up() override {}
 
 //=============================================================================
 ///@name	PRINT INFORMATION
