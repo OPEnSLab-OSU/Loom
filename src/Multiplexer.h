@@ -13,6 +13,7 @@
 #pragma once
 
 #include "Module.h"
+#include "Components/Power/Power.h"
 // #include "Sensors/I2C/I2C_Sensor.h"
 
 #undef min
@@ -53,7 +54,7 @@ const I2C_Selection i2c_0x36 = I2C_Selection::L_STEMMA;
 /// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___multiplexer.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Multiplexer : public LoomModule
+class Loom_Multiplexer : public LoomModule, public Power
 {
 private:
 

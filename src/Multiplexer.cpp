@@ -80,6 +80,7 @@ Loom_Multiplexer::Loom_Multiplexer(
 		const uint					update_period
 	) 
 	: LoomModule(manager, "Multiplexer", Type::Multiplexer ) 
+	, Power(manager)
 	, i2c_address(i2c_address)
 	, num_ports(num_ports)
 	, update_period(update_period)
