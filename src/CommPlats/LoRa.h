@@ -104,6 +104,9 @@ public:
 
 	void		add_config(JsonObject json) override;
 
+	void 		power_up() override;
+	void 		power_down() override;
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
