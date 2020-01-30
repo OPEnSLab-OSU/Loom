@@ -1,0 +1,31 @@
+{
+  "general": {
+    "name":"Device",
+    "instance":1,
+    "interval":30000
+  },
+  "components": [
+    {
+      "name": "Analog",
+      "params": "default"
+    },
+    {
+      "name": "Digital",
+      "params": "default"
+    },
+    {
+			"name": "SD",
+			"params": "default"
+		},
+		{
+		  "name": "DS3231",
+			"params": "default"
+		},
+    {
+      "name": "WiFi",
+      "params": [
+        "AGU"
+      ]
+    }
+  ]
+}
