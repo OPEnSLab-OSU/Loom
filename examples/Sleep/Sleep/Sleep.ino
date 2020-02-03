@@ -50,12 +50,7 @@ void setup()
 	// Register ISR to call on wake
 	Loom.InterruptManager().register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);
 	
-	// Set an alarm 15 seconds into the future
-	Loom.InterruptManager().RTC_alarm_duration(0, 0, 0, 15);
 
-	// Go to sleep
-	LPrintln("Going to sleep");
-	Loom.SleepManager().sleep();
 	// LowPower.standby();
 	digitalWrite(LED_BUILTIN, LOW);
 
@@ -69,6 +64,13 @@ void loop()
 	delay(500);
 	digitalWrite(LED_BUILTIN, LOW);
 	delay(500);
+
+	// Set an alarm 15 seconds into the future
+	Loom.InterruptManager().RTC_alarm_duration(0, 0, 0, 15);
+
+	// Go to sleep
+	LPrintln("Going to sleep");
+	Loom.SleepManager().sleep();
 
 	// This wont be seen unless you close and reopen Serial Monitor
 	LPrintln("Awake");

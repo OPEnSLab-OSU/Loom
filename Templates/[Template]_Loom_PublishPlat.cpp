@@ -4,7 +4,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomPublishPlatTemplate::LoomPublishPlatTemplate(
-		const char*		module_name, 
+		LoomManager* manager,
+const char* module_name, 
 		uint			internet_index, 
 		int				ex_param, 
 	) 
@@ -16,7 +17,7 @@ LoomPublishPlatTemplate::LoomPublishPlatTemplate(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomPublishPlatTemplate::LoomPublishPlatTemplate(JsonArrayConst p)
+LoomPublishPlatTemplate::LoomPublishPlatTemplate(LoomManager* manager, JsonArrayConst p)
 	: LoomPublishPlatTemplate( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////

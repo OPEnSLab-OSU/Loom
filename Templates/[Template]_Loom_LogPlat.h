@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Loom_LogPlat.h"
+#include "LogPlat.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -24,7 +24,8 @@ public:
 
 	/// Constructor
 	LoomLogPlatTemplate(
-			const char*		module_name				= "LogPlatTemplate",
+			LoomManager* manager,
+const char* module_name				= "LogPlatTemplate",
 			bool			enable_rate_filter		= true,
 			uint			min_filter_delay		= 1000		
 		);
@@ -32,7 +33,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomLogPlatTemplate(JsonArrayConst p);
+	LoomLogPlatTemplate(LoomManager* manager, JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomLogPlatTemplate() = default;
