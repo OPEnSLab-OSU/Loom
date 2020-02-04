@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SPI_Sensor.h"
+#include "Loom_SPI_Sensor.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -24,15 +24,14 @@ public:
 
 	/// Constructor
 	LoomSPISensorTemplate(
-			LoomManager* manager,
-const char* module_name		= "SPISensorTemplate"
+			const char*		module_name		= "SPISensorTemplate"
 			int				num_samples		= 1
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomSPISensorTemplate(LoomManager* manager, JsonArrayConst p);
+	LoomSPISensorTemplate(JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomSPISensorTemplate() = default;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PublishPlat.h"
+#include "Loom_PublishPlat.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -24,8 +24,7 @@ public:
 
 	/// Constructor
 	LoomPublishPlatTemplate(
-			LoomManager* manager,
-const char* module_name			= "PublishPlatTemplate",
+			const char*		module_name			= "PublishPlatTemplate",
 			uint			internet_index		= 1,
 			int				ex_param			= 42
 		);
@@ -33,7 +32,7 @@ const char* module_name			= "PublishPlatTemplate",
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomPublishPlatTemplate(LoomManager* manager, JsonArrayConst p);
+	LoomPublishPlatTemplate(JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomPublishPlatTemplate() = default;

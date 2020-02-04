@@ -1,6 +1,6 @@
 #pragma once
 
-#include "InternetPlat.h"
+#include "Loom_InternetPlat.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -24,15 +24,14 @@ public:
 
 	/// Constructor
 	LoomInternetPlatTemplate(
-			LoomManager* manager,
-const char* module_name			= "InternetPlatTemplate",
+			const char*		module_name			= "InternetPlatTemplate",
 			int				ex_param			= 42
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomInternetPlatTemplate(LoomManager* manager, JsonArrayConst p);
+	LoomInternetPlatTemplate(JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomInternetPlatTemplate() = default;

@@ -4,11 +4,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomModuleTemplate::LoomModuleTemplate(
-		LoomManager* manager,
-		const char* module_name, 
+		const char*		module_name, 
 		int				ex_param
 	) 
-	: LoomModule(manager, module_name )
+	: LoomModule( module_name )
 {
 	this->module_type = LoomModule::Type::ModuleTemplateType;
 
@@ -16,7 +15,7 @@ LoomModuleTemplate::LoomModuleTemplate(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModuleTemplate::LoomModuleTemplate(LoomManager* manager, JsonArrayConst p)
+LoomModuleTemplate::LoomModuleTemplate(JsonArrayConst p)
 	: LoomModuleTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////

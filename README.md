@@ -22,7 +22,6 @@
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
 - [Objectives](#objectives)
 - [Key Features](#key-features)
@@ -35,7 +34,6 @@
 - [Contributing](#contributing)
 - [Versioning](#versioning)
 - [Resources](#resources)
-    - [Custom/Modified Libraries used by Loom](#custommodified-libraries-used-by-loom)
 - [License](#license)
 
 ## Introduction

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Actuator.h"
+#include "Loom_Actuator.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -24,15 +24,14 @@ public:
 
 	/// Constructor
 	LoomActuatorTemplate(
-LoomManager* manager,
-const char* module_name		= "ActuatorTemplate",
+			const char*		module_name		= "ActuatorTemplate",
 			int 			ex_param		= 42
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomActuatorTemplate(LoomManager* manager, JsonArrayConst p);
+	LoomActuatorTemplate(JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomActuatorTemplate() = default;

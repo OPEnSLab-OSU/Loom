@@ -4,8 +4,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomSDI12SensorTemplate::LoomSDI12SensorTemplate(
-		LoomManager* manager,
-const char* module_name,
+		const char*		module_name,
 		int				num_samples
 	) 
 	: LoomSDI12Sensor( module_name, num_samples )
@@ -16,7 +15,7 @@ const char* module_name,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomSDI12SensorTemplate::LoomSDI12SensorTemplate(LoomManager* manager, JsonArrayConst p)
+LoomSDI12SensorTemplate::LoomSDI12SensorTemplate(JsonArrayConst p)
 	: LoomSDI12SensorTemplate( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////

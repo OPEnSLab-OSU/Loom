@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Module.h"
+#include "Loom_Module.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -24,15 +24,14 @@ public:
 
 	/// Constructor
 	LoomModuleTemplate(
-			LoomManager* manager,
-const char* module_name		= "ModuleTemplate",
+			const char*		module_name		= "ModuleTemplate",
 			int 			ex_param		= 42
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomModuleTemplate(LoomManager* manager, JsonArrayConst p);
+	LoomModuleTemplate(JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomModuleTemplate() = default;

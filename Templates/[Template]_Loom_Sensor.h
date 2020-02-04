@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Sensor.h"
+#include "Loom_Sensor.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -24,15 +24,14 @@ public:
 
 	/// Constructor
 	LoomSensorTemplate(
-			LoomManager* manager,
-const char* module_name		= "SensorTemplate",
+			const char*		module_name		= "SensorTemplate",
 			int 			num_samples		= 4
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomSensorTemplate(LoomManager* manager, JsonArrayConst p);
+	LoomSensorTemplate(JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomSensorTemplate() = default;

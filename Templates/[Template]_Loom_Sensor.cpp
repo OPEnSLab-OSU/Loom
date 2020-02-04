@@ -4,8 +4,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomSensorTemplate::LoomSensorTemplate(
-		LoomManager* manager,
-const char* module_name, 
+		const char*		module_name, 
 		int 			num_samples
 	) 
 	: LoomSensor( module_name, num_samples )
@@ -16,7 +15,7 @@ const char* module_name,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomSensorTemplate::LoomSensorTemplate(LoomManager* manager, JsonArrayConst p)
+LoomSensorTemplate::LoomSensorTemplate(JsonArrayConst p)
 	: LoomSensorTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CommPlat.h"
+#include "Loom_CommPlat.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -24,15 +24,14 @@ public:
 
 	/// Constructor
 	LoomCommPlatTemplate(
-LoomManager* manager,
-const char* module_name		= "CommPlatTemplate",
+			const char*		module_name		= "CommPlatTemplate",
 			uint			max_message_len	= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomCommPlatTemplate(LoomManager* manager, JsonArrayConst p);
+	LoomCommPlatTemplate(JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomCommPlatTemplate() = default;

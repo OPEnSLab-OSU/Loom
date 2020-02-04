@@ -4,8 +4,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomCommPlatTemplate::LoomCommPlatTemplate(
-LoomManager* manager,
-const char* module_name, 
+		const char*		module_name, 
 		uint			max_message_len
 	) 
 	: LoomCommPlat( module_name, max_message_len )
@@ -16,7 +15,7 @@ const char* module_name,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomCommPlatTemplate::LoomCommPlatTemplate(LoomManager* manager, JsonArrayConst p)
+LoomCommPlatTemplate::LoomCommPlatTemplate(JsonArrayConst p)
 	: LoomCommPlatTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////

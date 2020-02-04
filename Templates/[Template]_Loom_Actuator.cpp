@@ -4,9 +4,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomActuatorTemplate::LoomActuatorTemplate(
-		LoomManager*	manager,
 		const char*		module_name, 
-		int						ex_param
+		int				ex_param
 	) 
 	: LoomActuator( module_name )
 {
@@ -16,7 +15,7 @@ LoomActuatorTemplate::LoomActuatorTemplate(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomActuatorTemplate::LoomActuatorTemplate(LoomManager* manager, JsonArrayConst p)
+LoomActuatorTemplate::LoomActuatorTemplate(JsonArrayConst p)
 	: LoomActuatorTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
