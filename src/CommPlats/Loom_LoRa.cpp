@@ -133,4 +133,7 @@ bool Loom_LoRa::send_impl(JsonObject json, const uint8_t destination)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
+float Loom_LoRa::get_rssi()
+{ 
+	return driver.lastRssi();
+}
