@@ -15,7 +15,7 @@ LoomSPISensorTemplate::LoomSPISensorTemplate(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomSPISensorTemplate::LoomSPISensorTemplate(JsonArrayConst p)
+LoomSPISensorTemplate::LoomSPISensorTemplate(LoomManager* manager, JsonArrayConst p)
 	: LoomSPISensorTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
