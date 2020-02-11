@@ -353,6 +353,18 @@ void Loom_SD::_write_json_data(File& file, JsonObject dev_id, JsonObject timesta
 	file.println();
 }
 
+///////////////////////////////////////////////////////////////////////////////
+void Loom_SD::power_up() {
+	digitalWrite(8, HIGH); // LoRa fix
+	// re-begin SD
+	sd.begin(chip_select, SD_SCK_MHZ(50));
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_SD::power_down() {
+	// do nothing
+}
+
 // ///////////////////////////////////////////////////////////////////////////////
 // void Loom_SD::print_directory(File dir, const uint8_t numTabs) const
 // {
