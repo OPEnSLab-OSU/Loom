@@ -67,6 +67,10 @@ void loop()
 	digitalWrite(5, LOW); // Disable 3.3V rail
   	digitalWrite(6, HIGH);  // Disable 5V rail
 
+	// As it turns out, if the SD card is initialized and you change
+	// the states of the pins to ANY VALUE, the SD card will fail to
+	// write. As a result, we ensure that the board has been turned
+	// off at least once before we make any changes to the pin states
 	if (rtc_flag) {
 		pinMode(23, OUTPUT);
 		pinMode(24, OUTPUT);
@@ -81,7 +85,6 @@ void loop()
 
 	Loom.SDCARD().log();
 
-	// Loom.InterruptManager().get_RTC_module()->clear_alarms();
 	rtc_flag = false;
 	// set the RTC alarm to a duration of 10 seconds with TimeSpan
 	Loom.InterruptManager().RTC_alarm_duration(TimeSpan(0,0,0,10));
