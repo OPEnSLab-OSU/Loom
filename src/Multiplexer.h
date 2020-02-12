@@ -130,9 +130,9 @@ public:
 	/// @return			The pointer to LoomI2CSensor on port, Null if no sensor
 	LoomI2CSensor*	get_sensor(uint8_t port) const { return sensors[port]; }
 
-	void power_up();
+	void power_up() override;
 
-	void power_down();
+	void power_down() override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

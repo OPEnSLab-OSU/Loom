@@ -115,6 +115,9 @@ public:
 	/// Clear a file (remove contents but not file itself)
 	/// @param[in]	filename	Name of file to empty
 	void		empty_file(const char* name);
+	
+	void		power_up() override;
+	void 		power_down() override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
