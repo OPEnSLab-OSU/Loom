@@ -107,12 +107,24 @@ void Loom_Sleep_Manager::pre_sleep()
 	Serial.end();
 	USBDevice.detach();
 
+	// Disable SysTick Interrupt
+	// See https://community.atmel.com/comment/2616121#comment-2616121
+	// calls to delay() and Serial.xx() will not work after this line
+	SysTick->CTRL = 0;
+
 	digitalWrite(LED_BUILTIN, LOW);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::post_sleep()
 {
+	// Reenable SysTick Interrupt
+	// See https://community.atmel.com/comment/2616121#comment-2616121
+	// calls to delay() and Serial.xx() will begin working after this line
+	SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk
+				| SysTick_CTRL_TICKINT_Msk
+				| SysTick_CTRL_ENABLE_Msk;
+
 	// Prevent double trigger of alarm interrupt
 	if (interrupt_manager) {
 		interrupt_manager->get_RTC_module()->clear_alarms();
