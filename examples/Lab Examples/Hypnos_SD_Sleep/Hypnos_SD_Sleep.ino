@@ -52,7 +52,7 @@ void setup()
 	digitalWrite(6, HIGH);	// Enable 5V rail
   digitalWrite(13, LOW);
 
-	Loom.begin_serial(false);
+	Loom.begin_serial(true);
 	Loom.parse_config(json_config);
 	Loom.print_config();
 
