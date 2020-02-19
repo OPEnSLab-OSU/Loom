@@ -181,9 +181,9 @@ void Loom_Analog::package(JsonObject json)
 	for (auto i = 0; i < ANALOG_COUNT; i++) {
 		if (pin_enabled[i]) {
 			if (!enable_conversions || conversions[i] == Conversion::NONE) {
-				sprintf(buf, "%s%d", "A", i);
+				sprintf(buf, "%s[%d]", "A", i);
 			} else {
-				sprintf(buf, "%s", conversion_name(get_conversion(i)));
+				sprintf(buf, "%s[%d]", conversion_name(get_conversion(i)), i);
 			}
 			data[buf] = (!enable_conversions || conversions[i] == Conversion::NONE) 
 						 ? analog_vals[i]
