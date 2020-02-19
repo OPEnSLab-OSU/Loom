@@ -55,7 +55,7 @@ private:
 	/// Contains information defining an interrupt's configuration
 	struct IntDetails {
 		ISRFuncPtr	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
-		byte		type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
+		uint32_t		type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
 		ISR_Type	run_type;		///< True if ISR is called directly upon interrupt, false if called next check of flags
 		bool		enabled;		///< Whether or not this interrupt is enabled
 	};
@@ -165,24 +165,24 @@ public:
 	/// @param[in]	ISR			ISR	function (Null if no interrupt linked)
 	/// @param[in]	signal_type	Low, High, Change, Falling, Rising
 	/// @param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
-	void		register_ISR(const byte pin, ISRFuncPtr ISR, const byte signal_type, ISR_Type run_type);
+	void		register_ISR(const uint32_t pin, ISRFuncPtr ISR, const uint32_t signal_type, ISR_Type run_type);
 
 	/// If an ISR dettaches interrupt, use this to reattach according to 
 	/// previous settings.
 	/// Effectively to running register_ISR with previous settings
 	/// @param[in]	pin			Which pin to reconnect the interrupt on
-	bool		reconnect_interrupt(const byte pin);
+	bool		reconnect_interrupt(const uint32_t pin);
 
 
 	/// Restores pin to default ISR, disables interrupt
 	/// @param[in]	pin				The pin to unregister ISRs for
 	/// @param[in]	signal_type		What signal to configure default ISR to (default LOW)
-	void		unregister_ISR(const byte pin, const byte signal_type=LOW);
+	void		unregister_ISR(const uint32_t pin, const uint32_t signal_type=LOW);
 
 	/// Detaches then reattacheds interrupt according to settings.
 	/// used to clear pending interrupts
 	/// @param[in]	pin 	Pin to reset interrupts for ...
-	void		interrupt_reset(const byte pin);
+	void		interrupt_reset(const uint32_t pin);
 
 //=============================================================================
 ///@name	RTC ALARM METHODS
@@ -304,7 +304,7 @@ public:
 	/// Get pin interrupt enable state
 	/// @param[in]	pin		Pin to the the enable state of
 	/// @return		The enable state
-	bool		get_enable_interrupt(const byte pin) const { return (pin < InteruptRange) ? int_settings[pin].enabled : false; }
+	bool		get_enable_interrupt(const uint32_t pin) const { return (pin < InteruptRange) ? int_settings[pin].enabled : false; }
 
 	/// Return pointer to the currently linked RTC object
 	/// @return		Current RTC object
@@ -331,7 +331,7 @@ public:
 	/// Per interrupt enable
 	/// @param[in]	pin		Interrupt pin to change enable state of
 	/// @param[in]	state	The enable state to set pin to
-	void		set_enable_interrupt(const byte pin, const bool state);
+	void		set_enable_interrupt(const uint32_t pin, const bool state);
 
 	/// Set the RTC module to use for timers
 	/// @param[in]	RTC_Inst	Pointer to the RTC object
