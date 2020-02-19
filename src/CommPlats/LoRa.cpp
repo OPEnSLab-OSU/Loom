@@ -148,3 +148,32 @@ float Loom_LoRa::get_rssi()
 { 
 	return driver.lastRssi();
 }
+
+///////////////////////////////////////////////////////////////////////////////
+bool Loom_LoRa::send_raw(uint8_t* bytes, const uint8_t len, const uint8_t destination) {
+	bool is_sent = manager.sendtoWait(bytes, len, destination);
+
+	print_module_label();
+	LPrintln("Send " , (is_sent) ? "successful" : "failed" );
+	signal_strength = driver.lastRssi();
+	driver.sleep();
+	return is_sent;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool Loom_LoRa::receive_blocking_raw(uint8_t* dest, const uint8_t maxlen, const uint max_wait_time) {
+	bool status;
+	uint8_t len = maxlen;
+	uint8_t from;
+	memset(dest, '\0', maxlen);
+	if (max_wait_time == 0)
+		status = manager.recvfromAck( dest, &len, &from );
+	else 
+		status = manager.recvfromAckTimeout( dest, &len, max_wait_time, &from );
+	
+	if (status)
+		signal_strength = driver.lastRssi();
+
+	driver.sleep();
+	return status;
+}
