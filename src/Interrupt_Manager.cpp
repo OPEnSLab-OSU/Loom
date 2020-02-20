@@ -184,6 +184,12 @@ void Loom_Interrupt_Manager::register_ISR(const uint32_t pin, const ISRFuncPtr I
 		LPrint(" to be triggered on ", signal_type);
 		LPrintln(" and is ", (run_type==ISR_Type::IMMEDIATE) ? "immediate" : "delay" );
 
+		if (pin >= InterruptRange) {
+			LPrintln("Cannot register an interrupt on pin number greater than 16");
+			// TODO: THROW ERROR
+			return;
+		}
+
 		// Save interrupt details
 		int_settings[pin] = { ISR, signal_type, run_type, (ISR) ? true : false };
 
