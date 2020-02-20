@@ -87,7 +87,26 @@ Loom_Multiplexer::Loom_Multiplexer(
 	, control_port(num_ports)
 {
 	// Start Multiplexer
-  this->power_up();
+  	Wire.begin();
+
+	Wire.beginTransmission(this->i2c_address);
+	if(Wire.endTransmission() ) { //< Test on this address
+		//< Test Failed
+		LPrintln("Multiplexer not found on specified port. Checking alternate addresses.");
+		this->active = false;
+
+		//< Check all alternate addresses
+		for(auto address : alt_addresses) {
+			Wire.beginTransmission(address);
+			if(Wire.endTransmission()) {
+				continue;
+			} else {
+				active = true;
+				this->i2c_address = address;
+				LPrintln("*** Multiplexer found at: ", address, ", update your config. ***");
+			}
+		}
+	}
 
 	// Initialize array of sensors to Null pointrs
 	for (auto i = 0; i < num_ports; i++) {
@@ -203,6 +222,8 @@ void Loom_Multiplexer::print_state() const
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Multiplexer::measure()
 {
+	LPrintln("Hello!");
+	
 	refresh_sensors();
 
 	for (auto i = 0U; i < num_ports; i++) {
@@ -266,13 +287,13 @@ void Loom_Multiplexer::refresh_sensors()
 		// tca_select(i);
 
 		previous = (sensors[i] != nullptr) ? sensors[i]->get_i2c_address() : 0x00;
-		// LPrint("\tPrevious: 0x");
-		// LPrintln_Hex(previous);
+		LPrint("\tPrevious: 0x");
+		LPrintln_Hex(previous);
 
 		current = get_i2c_on_port(i);
         
-		// LPrint("Current I2C on port ", i, " : ");
-		// LPrintln_Dec_Hex(current);
+		LPrint("Current I2C on port ", i, " : ");
+		LPrintln_Dec_Hex(current);
 
 		// Cases:
 		// No change (prev = current)
@@ -400,6 +421,7 @@ void Loom_Multiplexer::tca_deselect() const
 void Loom_Multiplexer::power_up() {
 // Begin I2C
 	Wire.begin();
+	/*
 
 	Wire.beginTransmission(this->i2c_address);
 	if(Wire.endTransmission() ) { //< Test on this address
@@ -419,6 +441,7 @@ void Loom_Multiplexer::power_up() {
 			}
 		}
 	}
+	*/
 }
 
 ///////////////////////////////////////////////////////////////////////////////
