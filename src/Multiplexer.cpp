@@ -421,6 +421,9 @@ void Loom_Multiplexer::power_up() {
 			}
 		}
 	}
+	//< Test succeded
+	else
+		this->active = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
