@@ -74,12 +74,23 @@ bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat
 	network->print(m_sheet_id);
 	network->print("&key1=tabID&val1=");
 
-	if (tab_matches_dev_id && device_manager) {
-		char buf[20];
-		device_manager->get_device_name(buf);
-		snprintf(buf, 20, "%s%d", buf, device_manager->get_instance_num());
-		network->print(buf);
+	const JsonObjectConst id = json["id"];
+	const char* dev_name = id["name"].as<const char*>();
+	const int dev_instance = id["instance"].as<int>();
 
+	if (tab_matches_dev_id) {
+		// The following code has been replaced for SitkaNet specifically
+		// char buf[20];
+		// device_manager->get_device_name(buf);
+		// snprintf(buf, 20, "%s%d", buf, device_manager->get_instance_num());
+		// network->print(buf);
+		// Do not use the following code unless you are on the SitkaNet project
+		if (dev_name && dev_instance) {
+			network->print(dev_name);
+			network->print(dev_instance);
+		}
+		else
+			network->print("unknown");
 	} else {
 		network->print(m_tab_id);
 	}
@@ -87,14 +98,14 @@ bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat
 	network->print("&key2=deviceID&val2=");
 
 	// Get device ID from manager
-	if (device_manager) {
-		char buf[20];
-		device_manager->get_device_name(buf);
-		snprintf(buf, 20, "%s%d", buf, device_manager->get_instance_num());
-		network->print(buf);
-	} else {
-		network->print("Unknown");
+	// The following code has been replaced for SitkaNet specifically
+	// Do not use the following code unless you are on the SitkaNet project
+	if (dev_name && dev_instance) {
+		network->print(dev_name);
+		network->print(dev_instance);
 	}
+	else
+		network->print("unknown");
 
 	network->print("&key3=full_data&val3=");
 	// next print the body data, converted in real time
