@@ -49,7 +49,7 @@ void Loom_GoogleSheets::print_config() const
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat* plat) 
-{
+{	
 	// connect to script.google.com
 	auto network = plat->connect_to_domain("script.google.com");
 	// check if we connected
