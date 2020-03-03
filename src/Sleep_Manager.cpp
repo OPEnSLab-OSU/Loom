@@ -66,24 +66,6 @@ void Loom_Sleep_Manager::link_device_manager(LoomManager* LM)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::powerDown()
-{
-	// Call manager to coordinate modules saving to flash
-
-// to be implemented
-
-	// Use manager to power all modules off
-	if (device_manager != nullptr) {
-		device_manager->power_down();
-	}
-
-	LPrintln("Powering Off");
-	digitalWrite(power_off_pin, HIGH);
-	delay(50); // Sometimes the board takes several milliseconds to fully power off
-	LPrintln("This should not be printed");
-}
-
-///////////////////////////////////////////////////////////////////////////////
 bool Loom_Sleep_Manager::sleep()
 {
 		pre_sleep();
@@ -97,13 +79,8 @@ bool Loom_Sleep_Manager::sleep()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Sleep_Manager::pre_sleep()
 {
-	// Use manager to power all modules off
-	if (device_manager != nullptr) {
-		device_manager->power_down();
-	}
-
 	LPrintln("\nEntering STANDBY");
-	delay(50);
+	Serial.flush();
 	Serial.end();
 	USBDevice.detach();
 
@@ -125,34 +102,9 @@ void Loom_Sleep_Manager::post_sleep()
 				| SysTick_CTRL_TICKINT_Msk
 				| SysTick_CTRL_ENABLE_Msk;
 
-	// Prevent double trigger of alarm interrupt
-	if (interrupt_manager) {
-		interrupt_manager->get_RTC_module()->clear_alarms();
-	}
-
 	if (use_LED) {
 		digitalWrite(LED_BUILTIN, HIGH);
 	}
-
-	// Use manager to power all active modules up
-	if (device_manager != nullptr) {
-		device_manager->power_up();
-	}
-
-
-	#if LOOM_DEBUG == 1
-		USBDevice.attach();
-		Serial.begin(115200);
-		if (delay_on_wake) {
-			// Give user 5s to reopen Serial monitor!
-			// Note that the serial may still take a few seconds 
-			// to fully setup after the LED turns on
-			delay(5000); 
-		}
-		LPrintln("WAKE");
-	#endif
-
-	// Set wake time
 
 }
 

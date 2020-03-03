@@ -96,10 +96,6 @@ public:
 	/// @return Whether or not sleep was successful
 	bool		sleep();
 
-	/// Turn board off.
-	/// Program will restart from setup on wake.
-	void		powerDown();
-
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
