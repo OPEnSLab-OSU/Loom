@@ -313,6 +313,9 @@ public:
 		if (strcmp(json["type"], "data") == 0 ) {
 			JsonObject data = get_module_data_object(json, module);
 			data[key] = val;
+			// print an error if the JSON is full
+			if (doc.memoryUsage() > doc.capacity() - 10)
+				LPrintln("Warning: JSON document overflowed! Loom does not have enough memory for the number of sensors you are reading, please use less sensors or submit an issue.");
 			return true;
 		} else {
 			return false;

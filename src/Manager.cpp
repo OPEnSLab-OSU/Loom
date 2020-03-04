@@ -238,6 +238,10 @@ JsonObject LoomManager::package()
 	doc["type"] = "data";
 	JsonObject json = doc.as<JsonObject>();
 	package(json);
+	// print an error if the JSON is full
+	if (doc.memoryUsage() > doc.capacity() - 10)
+		LPrintln("Warning: JSON document overflowed! Loom does not have enough memory for the number of sensors you are reading, please use less sensors or submit an issue.");
+
 	return json;
 }
 
