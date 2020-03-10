@@ -174,14 +174,15 @@ bool Loom_SD::dump_file(const char* name)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::log(const char* name)
+bool Loom_SD::log(const char* name)
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
 		if (strcmp(tmp["type"], "data") == 0 ) {
-			save_json(tmp, name);
+			return save_json(tmp, name);
 		}
 	}
+	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -228,8 +229,10 @@ bool Loom_SD::save_json(JsonObject json, const char* name)
 
 	// Force data to SD and update the directory entry to avoid data loss.
 	if (!file.sync() || file.getWriteError()) {
+		file.close();
 		print_module_label();
 		LPrintln("write error");
+		return false;
 	}
 
 	file.close();

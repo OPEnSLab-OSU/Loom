@@ -167,7 +167,7 @@ void Loom_Interrupt_Manager::run_pending_ISRs() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::set_enable_interrupt(const byte pin, const bool state)
+void Loom_Interrupt_Manager::set_enable_interrupt(const uint32_t pin, const bool state)
 {
 	if (pin < InteruptRange) {
 		int_settings[pin].enabled = state;
@@ -175,7 +175,7 @@ void Loom_Interrupt_Manager::set_enable_interrupt(const byte pin, const bool sta
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::register_ISR(const byte pin, const ISRFuncPtr ISR, const byte signal_type, const ISR_Type run_type)
+void Loom_Interrupt_Manager::register_ISR(const uint32_t pin, const ISRFuncPtr ISR, const uint32_t signal_type, const ISR_Type run_type)
 {
 	if (pin < InteruptRange) {
 
@@ -207,10 +207,14 @@ void Loom_Interrupt_Manager::register_ISR(const byte pin, const ISRFuncPtr ISR, 
 		// Ensure triggered flag false 
 		interrupt_triggered[pin] = false;
 	}
+	else {
+		LPrintln("Cannot register an interrupt on pin number greater than 16");
+		// TODO: THROW ERROR
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::reconnect_interrupt(const byte pin)
+bool Loom_Interrupt_Manager::reconnect_interrupt(const uint32_t pin)
 {
 	IntDetails settings = int_settings[pin];
 
@@ -226,7 +230,7 @@ bool Loom_Interrupt_Manager::reconnect_interrupt(const byte pin)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::unregister_ISR(const byte pin, const byte signal_type)
+void Loom_Interrupt_Manager::unregister_ISR(const uint32_t pin, const uint32_t signal_type)
 {
 	// Set interrupt to be the default
 	if (pin < InteruptRange) {
@@ -268,7 +272,7 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::interrupt_reset(const byte pin)
+void Loom_Interrupt_Manager::interrupt_reset(const uint32_t pin)
 {
 	detachInterrupt(digitalPinToInterrupt(pin));
 	delay(20);

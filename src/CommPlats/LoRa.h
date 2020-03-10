@@ -70,6 +70,19 @@ protected:
 
 public:
 
+	/// Escape hatch for sending raw bytes
+	/// @param[in] raw		Bytes to send
+	/// @param[in] len		Number of bytes to send (MUST be less than 251)
+	/// @param[in] destination		Address of device to send to
+	/// @return True if packet sent successfully
+	bool send_raw(uint8_t* bytes, const uint8_t len, const uint8_t destination);
+
+	/// Escape hatch for receiving raw bytes
+	/// @param[out] dest	Pointer to byte array to store data
+	/// @param[in] maxlen	Maximum length of packet that can be recieved
+	/// @param[in] max_wait_time Maximum number of milliseconds to block for
+	bool receive_blocking_raw(uint8_t* dest, const uint8_t maxlen, const uint max_wait_time);
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
