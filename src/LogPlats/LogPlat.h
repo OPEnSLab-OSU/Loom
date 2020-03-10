@@ -65,12 +65,12 @@ public:
 
 	/// Log a Json object
 	/// @param[in] json		Json Object to log
-	virtual void	log(JsonObject json) = 0;
+	virtual bool	log(JsonObject json) = 0;
 
 	/// Version of log for use with LoomManager.
 	/// Accesses Json from LoomManager.
 	/// Calls derived classes implementations of log(JsonObject json)
-	void			log();		
+	bool			log();		
 
 //=============================================================================
 ///@name	PRINT INFORMATION
