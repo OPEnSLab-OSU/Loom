@@ -104,7 +104,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	void			log(JsonObject json) override;
+	bool			log(JsonObject json) override;
 
 	// manually expose superclass version of log() that gets json from
 	// linked LoomManager, calling this classes implementation of 

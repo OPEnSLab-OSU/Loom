@@ -110,13 +110,15 @@ void Loom_OLED::set_freeze_pin(const byte pin)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_OLED::log(JsonObject json) 
+bool Loom_OLED::log(JsonObject json) 
 {
-	if ( !check_millis() ) return;
+	if ( !check_millis() ) 
+		return false;
 	
 	// If freeze complete, check button if no display update needed
 	if (freeze_behavior == FreezeType::DATA) {
-		if (digitalRead(freeze_pin) == 0) return; 			
+		if (digitalRead(freeze_pin) == 0) 
+			return false; 			
 	}
 
 	display.clearDisplay();
@@ -192,7 +194,8 @@ void Loom_OLED::log(JsonObject json)
 	}
 
 	// Update display
-	display.display();	
+	display.display();
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

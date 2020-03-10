@@ -87,12 +87,12 @@ public:
 
 	// void		log() override;  
 
-	void		log(JsonObject json) override { save_json(json, filename); }
+	bool		log(JsonObject json) override { return save_json(json, filename); }
 
 	/// Version of logging for use with LoomManager.
 	/// Accesses Json from LoomManager
 	/// @param[in]	filename	Name of file to write to
-	void		log(const char* name);
+	bool		log(const char* name);
 
 	// manually expose superclass version of log() that gets json from
 	// linked LoomManager, calling this classes implementation of 

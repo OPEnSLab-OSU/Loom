@@ -52,14 +52,15 @@ bool LoomLogPlat::check_millis()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomLogPlat::log()
+bool LoomLogPlat::log()
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
 		if (strcmp(tmp["type"], "data") == 0 ) {
-			log(tmp);
+			return log(tmp);
 		}
 	}
+	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
