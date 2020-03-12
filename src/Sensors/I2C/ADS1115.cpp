@@ -3,66 +3,46 @@
 //ADS1115 ADS1115(i2c_address);
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ADS1115::Loom_ADS1115(
-	LoomManager* manager,
-	const 	byte i2c_address = ADS1015_ADDRESS, 
-	const	uint8_t 		mux_port = 255,
-	const 	bool 			analog_0_enabled = false,
-	const 	bool 			analog_1_enabled = false,
-	const 	bool 			analog_2_enabled = false,
-	const 	bool 			analog_3_enabled = false,
-	const 	bool 			diff_0_enabled = false,
-	const 	bool 			diff_1_enabled = false,
-	const	Gain			gain = Gain::GAIN_TWOTHIRDS)
+		LoomManager* manager,
+		const 	byte i2c_address,
+		const	uint8_t 		mux_port,
+		const 	bool 			analog_0_enabled,
+		const 	bool 			analog_1_enabled,
+		const 	bool 			analog_2_enabled,
+		const 	bool 			analog_3_enabled,
+		const 	bool 			diff_0_enabled,
+		const 	bool 			diff_1_enabled,
+		const	Gain			gain
+	)
 	: LoomI2CSensor(manager, "ADS1115", LoomModule::Type::ADS1115 , i2c_address, mux_port)
 	, ads1115(i2c_address)
 	, analog_enabled{ analog_0_enabled, analog_1_enabled, analog_2_enabled, analog_3_enabled }
 	, diff_enabled{ diff_0_enabled, diff_one_enabled }
-	, absolute_reads{}
+	, analog_reads{}
 	, diff_reads()
 {
-
-	// TODO: set gain here
-	ads1115.begin();//used ads1115 before
-	//bool setup = adc0.begin();//used ads1115 before
-
-	//if (!setup) active = false;
-
-	//print_module_label();
-	//LPrintln("Initialize ", (setup) ? "sucessful" : "failed");//everything before duplicated from SHT31D
+	// Gain is an internal value in this driver, so this function
+	// does not actually write to the I2C bus
+	ads1115.setGain(gain);
+	ads1115.begin();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ADS1115::Loom_ADS1115(LoomManager* manager, JsonArrayConst p)
-	: Loom_ADS1115(manager, EXPAND_ARRAY(p, 15) ) {}
+	: Loom_ADS1115(manager, p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], (Gain)(uint32_t)p[8] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_ADS1115::print_config() const
 {			
 	LPrintln('\t', "i2c_address: ", i2c_address);
-	//byte			i2c_address		= 0x2A,
 	LPrintln('\t', "module_name: ", "ADS1115" );
-	//const char*		module_name		= "I2CSensorTemplate"
-	LPrintln('\t', "Using Analog 0: ",analog_0_enabled);
-	//int				analog0			= 0;
-	LPrintln('\t', "Using Analog 1 : ",analog_1_enabled);
-	//int				analog1			= 0;
-	LPrintln('\t', "Using Analog 2 : ",analog_2_enabled);
-	//int				analog2			= 0;
-	LPrintln('\t', "Using Analog 3 : ",analog_3_enabled);
-	//int				analog3			= 0;
-	LPrintln('\t', "Using differential Measurements A0 and A1 : ", diff_0_enabled );
-	//int				diff0			= 0;
-	LPrintln('\t', "Using differential Measurements A2 and A3 : ", diff_1_enabled );
-	//int				diff1			= 0;
+	LPrintln('\t', "Using Analog 0: ", analog_enabled[0]);
+	LPrintln('\t', "Using Analog 1 : ", analog_enabled[1]);
+	LPrintln('\t', "Using Analog 2 : ", analog_enabled[2]);
+	LPrintln('\t', "Using Analog 3 : ", analog_enabled[3]);
+	LPrintln('\t', "Using differential Measurements A0 and A1 : ", diff_enabled[0] );
+	LPrintln('\t', "Using differential Measurements A2 and A3 : ", diff_enabled[1] );
 }
-
-///////////////////////////////////////////////////////////////////////////////
-//void Loom_ADS1115::print_state()
-//{
-//	//ADS1115::print_state();
-//	// print information about Loom_ADS1115 state 
-//	return;
-//}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_ADS1115::print_measurements() const
@@ -70,76 +50,38 @@ void Loom_ADS1115::print_measurements() const
 	print_module_label();
 	LPrintln("************************ \n");
 	LPrintln("Measurements for simple: \n");
-	LPrintln("\t", "A0  : ", analog0);
-	LPrintln("\t", "A1  : ", analog1);
-	LPrintln("\t", "A2  : ", analog2);
-	LPrintln("\t", "A3  : ", analog3);
-	LPrintln("Measurements for derivative: \n");
-	LPrintln("\t", "DA0  : ", diff0);
-	LPrintln("\t", "DA1  : ", diff1);
+	if (analog_enabled[0]) LPrintln("\t", "A0  : ", analog_reads[0]);
+	if (analog_enabled[1]) LPrintln("\t", "A1  : ", analog_reads[1]);
+	if (analog_enabled[2]) LPrintln("\t", "A2  : ", analog_reads[2]);
+	if (analog_enabled[3]) LPrintln("\t", "A3  : ", analog_reads[3]);
+	if (diff_enabled[0] || diff_enabled[1]) {
+		LPrintln("Measurements for derivative: \n");
+		if (diff_enabled[0]) LPrintln("\t", "DA0  : ", diff_reads[0]);
+		if (diff_enabled[1]) LPrintln("\t", "DA1  : ", diff_reads[1]);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_ADS1115::measure()
 { 
-	if(analog_0_enabled == true){ 
-		analog0 = ads1115.readADC_SingleEnded(0);
+	for (uint8_t i = 0; i < 4; i++) {
+		if (analog_enabled[i])
+			analog_reads[i] = ads1115.readADC_SingleEnded(i);
 	}
-    if(analog_1_enabled == true){ 
-		analog1 = ads1115.readADC_SingleEnded(1);
-	}
-    
-	if(analog_2_enabled == true){ 
-	  analog2 = ads1115.readADC_SingleEnded(2);
-	}
-
-	if(analog_3_enabled == true){ 
-	  analog3 = ads1115.readADC_SingleEnded(3);
-	}
-	if(diff_0_enabled == true){ 
-	  diff0 = ads1115.readADC_Differential_0_1();
-	}
-	if(diff_1_enabled == true){ 
-	  diff1 = ads1115.readADC_Differential_2_3();
-	}
+	if (diff_enabled[0])
+		diff_reads[0] = ads1115.readADC_Differential_0_1();
+	if (diff_enabled[1])
+		diff_reads[1] = ads1115.readADC_Differential_2_3();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_ADS1115::package(JsonObject json)
 {
 		JsonObject data = get_module_data_object(json, module_name);
-		data["analog0"]=analog0;
-		data["analog1"]=analog1;
-		data["analog2"]=analog2;
-		data["analog3"]=analog3;
-		data["diff0"]=diff0;
-		data["diff1"]=diff1;
-	
-	// keys must be c-strings
-	// values can be int, float, bool, c-string
+		if (analog_enabled[0]) data["analog0"] = analog_reads[0];
+		if (analog_enabled[1]) data["analog1"] = analog_reads[1];
+		if (analog_enabled[2]) data["analog2"] = analog_reads[2];
+		if (analog_enabled[3]) data["analog3"] = analog_reads[3];
+		if (diff_enabled[0]) data["diff0"] = diff_reads[0];
+		if (diff_enabled[1]) data["diff1"] = diff_reads[1];
 }
-/*
-///////////////////////////////////////////////////////////////////////////////
-bool Loom_ADS1115::dispatch(JsonObject json)
-{
-	if ( strcmp(json["module"], module_name) == 0 ) {
-		JsonArray params = json["params"];
-		return functionRoute(
-			json["func"],
-			"method_to_run", [this, params]() { if (params.size() >= 8) { method_to_run( EXPAND_ARRAY(params, 8) ); } else { LPrintln("Not enough parameters"); } } 
-		);
-		// The `5`s in the above command correspond to the number of parameters to `method_to_run`
-		// Change to match the parameters of your method
-	} else {
-		return false;
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_ADS1115::calibrate()
-{
-return;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-	*/

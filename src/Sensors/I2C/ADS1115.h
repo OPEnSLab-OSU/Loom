@@ -37,7 +37,7 @@ protected:
 	Adafruit_ADS1115 	ads1115;
 	const bool			analog_enabled[4];
 	const bool			diff_enabled[2];
-	uint16_t			absolute_reads[4];
+	uint16_t			analog_reads[4];
 	int16_t				diff_reads[2];
 
 public:
@@ -55,14 +55,24 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
+	///
+	/// @param[in]	i2c_address				Set(Int) | <0x10> | {0x10, 0x11} | I2C address
+	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
+	/// @param[in]	analog_0_enabled		Bool | <true> | {true, false} | Enable A0 for reading
+	/// @param[in]	analog_1_enabled		Bool | <true> | {true, false} | Enable A1 for reading
+	/// @param[in]	analog_2_enabled		Bool | <true> | {true, false} | Enable A2 for reading
+	/// @param[in]	analog_3_enabled		Bool | <true> | {true, false} | Enable A3 for reading
+	/// @param[in]	diff_0_enabled			Bool | <false> | {true, false} | Enable a differential measurement between A0 and A1
+	/// @param[in]	diff_1_enabled			Bool | <false> | {true, false} | Enable a differential measurement between A2 and A3
+	/// @param[in]	Fain					Set(Gain) | <0> | {0x0000("GAIN_TWOTHIRDS"), 0x0200("GAIN_ONE"), 0x0400("GAIN_TWO" ), 0x0600("GAIN_FOUR"), 0x0800("GAIN_EIGHT"), 0x0A00("GAIN_SIXTEEN")} | The gain setting for the ADS1115. Please do not change this number unless you are familiar with the ADS1115, as an incorrect setting will destroy the ADC!.
 	Loom_ADS1115(
 		LoomManager* manager,
 		const 	byte i2c_address = ADS1015_ADDRESS, 
 		const	uint8_t 		mux_port = 255,
-		const 	bool 			analog_0_enabled = false,
-		const 	bool 			analog_1_enabled = false,
-		const 	bool 			analog_2_enabled = false,
-		const 	bool 			analog_3_enabled = false,
+		const 	bool 			analog_0_enabled = true,
+		const 	bool 			analog_1_enabled = true,
+		const 	bool 			analog_2_enabled = true,
+		const 	bool 			analog_3_enabled = true,
 		const 	bool 			diff_0_enabled = false,
 		const 	bool 			diff_1_enabled = false,
 		const	Gain			gain = Gain::GAIN_TWOTHIRDS 
@@ -88,7 +98,6 @@ public:
 /*@{*/ //======================================================================
 
 	void		print_config() const override;
-//	void		print_state()const override;
 	void		print_measurements() const override;
 
 //=============================================================================
