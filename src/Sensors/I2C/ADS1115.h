@@ -48,7 +48,7 @@ public:
 		GAIN_FOUR         = ADS1015_REG_CONFIG_PGA_1_024V,
 		GAIN_EIGHT        = ADS1015_REG_CONFIG_PGA_0_512V,
 		GAIN_SIXTEEN      = ADS1015_REG_CONFIG_PGA_0_256V
-	}
+	};
 
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR

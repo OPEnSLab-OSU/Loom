@@ -17,13 +17,13 @@ Loom_ADS1115::Loom_ADS1115(
 	: LoomI2CSensor(manager, "ADS1115", LoomModule::Type::ADS1115 , i2c_address, mux_port)
 	, ads1115(i2c_address)
 	, analog_enabled{ analog_0_enabled, analog_1_enabled, analog_2_enabled, analog_3_enabled }
-	, diff_enabled{ diff_0_enabled, diff_one_enabled }
+	, diff_enabled{ diff_0_enabled, diff_1_enabled }
 	, analog_reads{}
 	, diff_reads()
 {
 	// Gain is an internal value in this driver, so this function
 	// does not actually write to the I2C bus
-	ads1115.setGain(gain);
+	ads1115.setGain(static_cast<adsGain_t>(static_cast<uint32_t>(gain)));
 	ads1115.begin();
 }
 
