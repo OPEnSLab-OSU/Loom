@@ -147,11 +147,6 @@ public:
 	virtual void disconnect() {}
 	virtual bool is_connected() const = 0;
 
-	/// Set mutual auth (mutual TLS) parameters, such as the client certificate and key
-	/// @param[in] cli_cert The client certificate to use, only ECC EC_secp256r1 is supported
-	/// @param[in] cli_key The client private key to use, only ECC EC_secp256r1 is supported
-	virtual void 			set_mutual_auth(const SSLClientParameters& params) { get_client().setMutualAuthParams(&params); };
-
 	/// make NTP request to get UTC time, using the UDP function above
 	/// @returns a unix timestamp if success, or 0 if failure.
 	uint32_t				get_time();
