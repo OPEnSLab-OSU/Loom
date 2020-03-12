@@ -3,29 +3,25 @@
 //ADS1115 ADS1115(i2c_address);
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ADS1115::Loom_ADS1115(
-LoomManager* manager,
-const byte i2c_address,// =0x2A, 
-			const uint8_t 		mux_port,
-			const char*			module_name,// = "ADS1115",
-			const int				analog0,
-			const int				analog1,
-			const int				analog2,
-			const int				analog3,
-			const int				diff0,
-			const int				diff1,
-			const bool 			analog_0_enabled,
-			const bool 			analog_1_enabled,
-			const bool 			analog_2_enabled,
-			const bool 			analog_3_enabled,
-			const bool 			diff_0_enabled,
-			const bool 			diff_1_enabled
-			
-		 
-	) 
+	LoomManager* manager,
+	const 	byte i2c_address = ADS1015_ADDRESS, 
+	const	uint8_t 		mux_port = 255,
+	const 	bool 			analog_0_enabled = false,
+	const 	bool 			analog_1_enabled = false,
+	const 	bool 			analog_2_enabled = false,
+	const 	bool 			analog_3_enabled = false,
+	const 	bool 			diff_0_enabled = false,
+	const 	bool 			diff_1_enabled = false,
+	const	Gain			gain = Gain::GAIN_TWOTHIRDS)
 	: LoomI2CSensor(manager, "ADS1115", LoomModule::Type::ADS1115 , i2c_address, mux_port)
+	, ads1115(i2c_address)
+	, analog_enabled{ analog_0_enabled, analog_1_enabled, analog_2_enabled, analog_3_enabled }
+	, diff_enabled{ diff_0_enabled, diff_one_enabled }
+	, absolute_reads{}
+	, diff_reads()
 {
 
-	Adafruit_ADS1115 ads1115;
+	// TODO: set gain here
 	ads1115.begin();//used ads1115 before
 	//bool setup = adc0.begin();//used ads1115 before
 
@@ -41,22 +37,23 @@ Loom_ADS1115::Loom_ADS1115(LoomManager* manager, JsonArrayConst p)
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_ADS1115::print_config() const
-{			LPrintln('\t', "i2c_address: ", i2c_address);
-			//byte			i2c_address		= 0x2A,
-			LPrintln('\t', "module_name: ", "ADS1115" );
-			//const char*		module_name		= "I2CSensorTemplate"
-			LPrintln('\t', "Using Analog 0: ",analog_0_enabled);
-			//int				analog0			= 0;
-			LPrintln('\t', "Using Analog 1 : ",analog_1_enabled);
-			//int				analog1			= 0;
-			LPrintln('\t', "Using Analog 2 : ",analog_2_enabled);
-			//int				analog2			= 0;
-			LPrintln('\t', "Using Analog 3 : ",analog_3_enabled);
-			//int				analog3			= 0;
-			LPrintln('\t', "Using differential Measurements A0 and A1 : ", diff_0_enabled );
-			//int				diff0			= 0;
-			LPrintln('\t', "Using differential Measurements A2 and A3 : ", diff_1_enabled );
-			//int				diff1			= 0;
+{			
+	LPrintln('\t', "i2c_address: ", i2c_address);
+	//byte			i2c_address		= 0x2A,
+	LPrintln('\t', "module_name: ", "ADS1115" );
+	//const char*		module_name		= "I2CSensorTemplate"
+	LPrintln('\t', "Using Analog 0: ",analog_0_enabled);
+	//int				analog0			= 0;
+	LPrintln('\t', "Using Analog 1 : ",analog_1_enabled);
+	//int				analog1			= 0;
+	LPrintln('\t', "Using Analog 2 : ",analog_2_enabled);
+	//int				analog2			= 0;
+	LPrintln('\t', "Using Analog 3 : ",analog_3_enabled);
+	//int				analog3			= 0;
+	LPrintln('\t', "Using differential Measurements A0 and A1 : ", diff_0_enabled );
+	//int				diff0			= 0;
+	LPrintln('\t', "Using differential Measurements A2 and A3 : ", diff_1_enabled );
+	//int				diff1			= 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -85,39 +82,26 @@ void Loom_ADS1115::print_measurements() const
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_ADS1115::measure()
 { 
-	
-  
-
-
-	if(analog_0_enabled==true){ 
-	analog0 = ads1115.readADC_SingleEnded(0);
-   
+	if(analog_0_enabled == true){ 
+		analog0 = ads1115.readADC_SingleEnded(0);
 	}
-    if(analog_1_enabled==true){ 
-	analog1 = ads1115.readADC_SingleEnded(1);
-
+    if(analog_1_enabled == true){ 
+		analog1 = ads1115.readADC_SingleEnded(1);
 	}
     
-	if(analog_2_enabled==true){ 
+	if(analog_2_enabled == true){ 
 	  analog2 = ads1115.readADC_SingleEnded(2);
-
 	}
 
-	if(analog_3_enabled==true){ 
+	if(analog_3_enabled == true){ 
 	  analog3 = ads1115.readADC_SingleEnded(3);
-
 	}
-	if(diff_0_enabled==true){ 
+	if(diff_0_enabled == true){ 
 	  diff0 = ads1115.readADC_Differential_0_1();
-
 	}
-	if(diff_1_enabled==true){ 
+	if(diff_1_enabled == true){ 
 	  diff1 = ads1115.readADC_Differential_2_3();
-
 	}
-	
-
-	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
