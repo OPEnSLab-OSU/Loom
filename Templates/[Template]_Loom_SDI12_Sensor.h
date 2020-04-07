@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Loom_SDI12_Sensor.h"
+#include "SDI12_Sensor.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -24,14 +24,15 @@ public:
 
 	/// Constructor
 	LoomSDI12SensorTemplate(
-			const char*		module_name		= "SDI12SensorTemplate",
+			LoomManager* manager,
+const char* module_name		= "SDI12SensorTemplate",
 			int				num_samples		= 1
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomSDI12SensorTemplate(JsonArrayConst p);
+	LoomSDI12SensorTemplate(LoomManager* manager, JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~LoomSDI12SensorTemplate() = default;

@@ -13,8 +13,6 @@
 // package, display, and wait (according to 'interval' in the config).
 // Other examples simply build off of this sequence
 
-// The configuration currently expects the relay is connected to pin 10
-
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
@@ -51,6 +49,6 @@ void loop()
 {
 	Loom.measure();
 	Loom.package();
-	Loom.ADS1115().print_measurements();
+	Loom.display_data();
 	Loom.pause();
 }

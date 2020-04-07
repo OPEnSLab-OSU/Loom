@@ -4,7 +4,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomLogPlatTemplate::LoomLogPlatTemplate(
-		const char*		module_name, 
+		LoomManager* manager,
+const char* module_name, 
 		bool			enable_rate_filter, 
 		uint			min_filter_delay, 
 	) 
@@ -16,7 +17,7 @@ LoomLogPlatTemplate::LoomLogPlatTemplate(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomLogPlatTemplate::LoomLogPlatTemplate(JsonArrayConst p)
+LoomLogPlatTemplate::LoomLogPlatTemplate(LoomManager* manager, JsonArrayConst p)
 	: LoomLogPlatTemplate( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
