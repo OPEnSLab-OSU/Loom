@@ -1,13 +1,16 @@
-//
-//  Loom_K30.cpp
-//  
-//
-//  Created by Eli Winkelman on 1/21/20.
-//
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		K30.h
+/// @brief		File for K30 Co2 Sensor implementation. 
+/// @author		Eli Winkelman and Kenneth Kang
+/// @date		2020
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "K30.h"
 
-Loom_K30::Loom_K30(
+K30::K30(
                    const char* module_name,
                    int num_samples)
 : LoomSerialSensor(module_name, Type::K30, num_samples)
@@ -16,11 +19,11 @@ Loom_K30::Loom_K30(
     LPrintln("K30 Initialization Finished");
 }
 
-Loom_K30::Loom_K30(JsonArrayConst p)
-: Loom_K30(EXPAND_ARRAY(p, 2))
+K30::K30(JsonArrayConst p)
+: K30(EXPAND_ARRAY(p, 2))
 {}
 
-void Loom_K30::sendSensorRequest(byte request[7]) {
+void K30::sendSensorRequest(byte request[7]) {
     
     if (sensor_serial == nullptr) {
         LPrintln("Serial is not set, cannot send request");
@@ -55,7 +58,7 @@ void Loom_K30::sendSensorRequest(byte request[7]) {
     LPrintln("Finished Sending Request to K30 sensor");
 }
 
-int Loom_K30::readSensorResponse(byte packet[7]){
+int K30::readSensorResponse(byte packet[7]){
     LPrintln("Reading sensor response");
     int high = packet[3];                        //high byte for value is 4th byte in packet in the packet
     int low = packet[4];                         //low byte for value is 5th byte in the packet
@@ -65,20 +68,20 @@ int Loom_K30::readSensorResponse(byte packet[7]){
     
 }
 
-void Loom_K30::measure() {
+void K30::measure() {
     LPrintln("Measuring...");
     sendSensorRequest(read_C02);
     C02_levels = readSensorResponse(sensor_response);
     LPrintln("Finished Measuring.");
 }
 
-void Loom_K30::print_measurements() const {
+void K30::print_measurements() const {
     print_module_label();
     LPrintln("Measurements:");
     LPrintln("C02 Levels: ", C02_levels);
 }
 
-void Loom_K30::package(JsonObject json) {
+void K30::package(JsonObject json) {
     JsonObject data = get_module_data_object(json, module_name);
     
     data["C02"] = C02_levels;

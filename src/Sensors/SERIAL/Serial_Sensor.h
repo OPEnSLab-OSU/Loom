@@ -1,6 +1,13 @@
-//
-// Created by Eli Winkelman on 1/7/20.
-//
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Serial_Sensor.h
+/// @brief		File for Serial Sensor definition. 
+/// @author		Eli Winkelman and Kenneth Kang
+/// @date		2020
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 
 #include "../Sensor.h"

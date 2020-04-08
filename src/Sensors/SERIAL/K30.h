@@ -1,15 +1,18 @@
-//
-//  Loom_K30.hpp
-//  
-//
-//  Created by Eli Winkelman on 1/21/20.
-//
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		K30.h
+/// @brief		File for K30 Co2 Sensor definition. 
+/// @author		Eli Winkelman and Kenneth Kang
+/// @date		2020
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
 #include "Serial_Sensor.h"
 
-class Loom_K30 : public LoomSerialSensor
+class K30 : public LoomSerialSensor
 {
     
 protected:
@@ -32,15 +35,15 @@ public:
     /// Constructor
     /// \param[in]      module_name The name of the module
     /// \param[in]      num_samples The number of samples to take and average
-    Loom_K30(
+    K30(
         const char* module_name = "K30",
         int         num_samples = 1
              );
     
-    Loom_K30(JsonArrayConst p);
+    K30(JsonArrayConst p);
     
     /// Destructor
-    virtual ~Loom_K30() = default;
+    virtual ~K30() = default;
     
     /// Inherited Methods
     void print_measurements() const override;

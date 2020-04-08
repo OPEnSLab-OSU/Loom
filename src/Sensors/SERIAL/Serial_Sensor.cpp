@@ -1,6 +1,12 @@
-//
-// Created by Eli Winkelman on 1/7/20.
-//
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Serial_Sensor.cpp
+/// @brief		File for Serial Sensor implementation. 
+/// @author		Eli Winkelman and Kenneth Kang
+/// @date		2020
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "Serial_Sensor.h"
 
