@@ -5,7 +5,7 @@
 //  Created by Eli Winkelman on 1/21/20.
 //
 
-#include "Loom_K30.h"
+#include "K30.h"
 
 Loom_K30::Loom_K30(
                    const char* module_name,

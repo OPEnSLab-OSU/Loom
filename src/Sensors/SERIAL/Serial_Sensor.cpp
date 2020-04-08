@@ -2,7 +2,7 @@
 // Created by Eli Winkelman on 1/7/20.
 //
 
-#include "Loom_Serial_Sensor.h"
+#include "Serial_Sensor.h"
 
 ////////////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---

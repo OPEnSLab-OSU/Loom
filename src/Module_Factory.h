@@ -76,7 +76,7 @@
 #include "Sensors/SPI/MAX31855.h"
 #include "Sensors/SPI/MAX31856.h"
 
-#include "Sensors/SERIAL/Loom_K30.h"
+#include "Sensors/SERIAL/K30.h"
 
 // Other
 #include "NTP_Sync.h"

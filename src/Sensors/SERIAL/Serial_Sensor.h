@@ -3,7 +3,7 @@
 //
 #pragma once
 
-#include "../Loom_Sensor.h"
+#include "../Sensor.h"
 
 class LoomSerialSensor : public LoomSensor {
 

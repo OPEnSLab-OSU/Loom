@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Loom_Serial_Sensor.h"
+#include "Serial_Sensor.h"
 
 class Loom_K30 : public LoomSerialSensor
 {
