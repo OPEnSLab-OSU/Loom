@@ -10,17 +10,17 @@
 
 #include "K30.h"
 
-K30::K30(
+K30::K30(LoomManager* manager,
                    const char* module_name,
                    int num_samples)
-: LoomSerialSensor(module_name, Type::K30, num_samples)
+: LoomSerialSensor(manager, module_name, Type::K30, num_samples)
 {
     LPrintln ("Initializing K30");
     LPrintln("K30 Initialization Finished");
 }
 
-K30::K30(JsonArrayConst p)
-: K30(EXPAND_ARRAY(p, 2))
+K30::K30(LoomManager* manager, JsonArrayConst p)
+: K30(manager, EXPAND_ARRAY(p, 2))
 {}
 
 void K30::sendSensorRequest(byte request[7]) {

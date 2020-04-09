@@ -35,12 +35,12 @@ public:
     /// Constructor
     /// \param[in]      module_name The name of the module
     /// \param[in]      num_samples The number of samples to take and average
-    K30(
+    K30(LoomManager* manager, 
         const char* module_name = "K30",
         int         num_samples = 1
              );
     
-    K30(JsonArrayConst p);
+    K30(LoomManager* manager, JsonArrayConst p);
     
     /// Destructor
     virtual ~K30() = default;
