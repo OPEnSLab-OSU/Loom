@@ -243,7 +243,7 @@ namespace Include
 				factory::NameModulePair{"MAX31855",		Construct<Loom_MAX31855>,		ConstructDefault<Loom_MAX31855> },
 				factory::NameModulePair{"MAX31856",		Construct<Loom_MAX31856>,		ConstructDefault<Loom_MAX31856> },
                 // SERIAL
-                factory::NameModulePair{"K30",        Construct<Loom_K30>,        ConstructDefault<Loom_K30> },
+                factory::NameModulePair{"K30",        Construct<K30>,        ConstructDefault<K30> },
 				// Other
 				factory::NameModulePair{"TempSync",		Construct<LoomTempSync>,		ConstructDefault<LoomTempSync> }
 			);
