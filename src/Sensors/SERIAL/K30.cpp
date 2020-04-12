@@ -10,7 +10,7 @@
 
 #include "K30.h"
 
-K30::K30(LoomManager* manager,
+Loom_K30::Loom_K30(LoomManager* manager,
                    const char* module_name,
                    int num_samples)
 : LoomSerialSensor(manager, module_name, Type::K30, num_samples)
@@ -19,11 +19,11 @@ K30::K30(LoomManager* manager,
     LPrintln("K30 Initialization Finished");
 }
 
-K30::K30(LoomManager* manager, JsonArrayConst p)
+Loom_K30::Loom_K30(LoomManager* manager, JsonArrayConst p)
 : K30(manager, EXPAND_ARRAY(p, 2))
 {}
 
-void K30::sendSensorRequest(byte request[7]) {
+void Loom_K30::sendSensorRequest(byte request[7]) {
     
     if (sensor_serial == nullptr) {
         LPrintln("Serial is not set, cannot send request");
@@ -58,7 +58,7 @@ void K30::sendSensorRequest(byte request[7]) {
     LPrintln("Finished Sending Request to K30 sensor");
 }
 
-int K30::readSensorResponse(byte packet[7]){
+int Loom_K30::readSensorResponse(byte packet[7]){
     LPrintln("Reading sensor response");
     int high = packet[3];                        //high byte for value is 4th byte in packet in the packet
     int low = packet[4];                         //low byte for value is 5th byte in the packet
@@ -68,20 +68,20 @@ int K30::readSensorResponse(byte packet[7]){
     
 }
 
-void K30::measure() {
+void Loom_K30::measure() {
     LPrintln("Measuring...");
     sendSensorRequest(read_C02);
     C02_levels = readSensorResponse(sensor_response);
     LPrintln("Finished Measuring.");
 }
 
-void K30::print_measurements() const {
+void Loom_K30::print_measurements() const {
     print_module_label();
     LPrintln("Measurements:");
     LPrintln("C02 Levels: ", C02_levels);
 }
 
-void K30::package(JsonObject json) {
+void Loom_K30::package(JsonObject json) {
     JsonObject data = get_module_data_object(json, module_name);
     
     data["C02"] = C02_levels;
