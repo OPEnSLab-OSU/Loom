@@ -16,6 +16,7 @@ class Loom_K30 : public LoomSerialSensor
 {
     
 protected:
+
     float C02_levels;
     //Command packet to read Co2 (see app note)
     byte read_C02[7] = {0xFE, 0X44, 0X00, 0X08, 0X02, 0X9F, 0X25};  //Command packet to read Co2 (see app note)

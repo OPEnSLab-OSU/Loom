@@ -15,8 +15,12 @@ Loom_K30::Loom_K30(LoomManager* manager,
                    int num_samples)
 : LoomSerialSensor(manager, module_name, Type::K30, num_samples)
 {
-    LPrintln ("Initializing K30");
-    LPrintln("K30 Initialization Finished");
+    // if(!setup) active = false;           //Want to add that feature in the SERIAL Sensor
+    print_module_label();
+    //LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
+    LPrintln("Initialize K30");
+    LPrintln("Finished Initialize K30")
+
 }
 
 Loom_K30::Loom_K30(LoomManager* manager, JsonArrayConst p)
