@@ -20,7 +20,7 @@ Loom_K30::Loom_K30(LoomManager* manager,
 }
 
 Loom_K30::Loom_K30(LoomManager* manager, JsonArrayConst p)
-: K30(manager, EXPAND_ARRAY(p, 2))
+: Loom_K30(manager, EXPAND_ARRAY(p, 2))
 {}
 
 void Loom_K30::sendSensorRequest(byte request[7]) {
