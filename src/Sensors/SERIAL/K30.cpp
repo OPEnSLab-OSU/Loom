@@ -19,7 +19,7 @@ Loom_K30::Loom_K30(LoomManager* manager,
     print_module_label();
     //LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
     LPrintln("Initialize K30");
-    LPrintln("Finished Initialize K30")
+    LPrintln("Finished Initialize K30");
 
 }
 
