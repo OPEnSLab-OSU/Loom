@@ -15,10 +15,10 @@ Loom_K30::Loom_K30(LoomManager* manager,
                    int num_samples)
 : LoomSerialSensor(manager, module_name, Type::K30, num_samples)
 {
-    // if(!setup) active = false;           //Want to add that feature in the SERIAL Sensor
     print_module_label();
-    //LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
-    LPrintln("Initialize K30");
+    LPrintln("Initializing K30");
+
+    print_module_label();
     LPrintln("Finished Initialize K30");
 
 }
@@ -35,9 +35,10 @@ void Loom_K30::sendSensorRequest(byte request[7]) {
     }
     
     LPrintln("Sending Request to K30 Sensor");
+    delay(100);
     while (!sensor_serial -> available()) //keep sending request until we start to get a response
     {
-        LPrintln("sensor_serial Unavailable, Sending Request");
+        LPrintln("Sensor_Serial Available, retrieving response");  //This doesn't make sense: in line 41 and line 49 
         sensor_serial -> write(request, 7);
         delay(50);
     }
@@ -45,7 +46,7 @@ void Loom_K30::sendSensorRequest(byte request[7]) {
     int timeout = 0; //set a timeoute counter
     while (sensor_serial -> available() < 7 ) //Wait to get a 7 byte response
     {
-        LPrintln("sensor_serial Available, retrieving response");
+        LPrintln("Sensor_Serial Unavailable, Sending response");
         timeout++;
         if (timeout > 10)   //if it takes to long there was probably an error
         {
@@ -63,20 +64,16 @@ void Loom_K30::sendSensorRequest(byte request[7]) {
 }
 
 int Loom_K30::readSensorResponse(byte packet[7]){
-    LPrintln("Reading sensor response");
     int high = packet[3];                        //high byte for value is 4th byte in packet in the packet
     int low = packet[4];                         //low byte for value is 5th byte in the packet
     unsigned long val = high * 256 + low;        //Combine high byte and low byte with this formula to get value
-    LPrintln("Finished Reading Sensor response");
     return val;
     
 }
 
 void Loom_K30::measure() {
-    LPrintln("Measuring...");
     sendSensorRequest(read_C02);
     C02_levels = readSensorResponse(sensor_response);
-    LPrintln("Finished Measuring.");
 }
 
 void Loom_K30::print_measurements() const {
