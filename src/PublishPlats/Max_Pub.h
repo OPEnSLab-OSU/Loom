@@ -27,11 +27,11 @@
 /// - [Loom Max Patches](https://github.com/OPEnSLab-OSU/Max-Loom2)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_MaxPub : public LoomPublishPlat 
+class Loom_MaxPub : public LoomPublishPlat
 {
 
 protected:
-	
+
 	uint16_t	UDP_port;				///< Which UDP port to transmit on
 	IPAddress	remoteIP;				///< Which IP address to send to
 
@@ -45,7 +45,7 @@ public:
 
 	/// Constructor
 	///
-	/// @param[in]  internet_type	Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	/// @param[in]  internet_type	Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform.
 	Loom_MaxPub(
 		LoomManager* manager,
 		const LoomModule::Type		internet_type
@@ -55,7 +55,7 @@ public:
 	/// and delegates to regular constructor
 	/// @param[in]  p	The array of constuctor args to expand
 	Loom_MaxPub(LoomManager* manager, JsonArrayConst p );
- 
+
 	void second_stage_ctor() override;
 
 	/// Destructor
@@ -103,4 +103,3 @@ protected:
 private:
 
 };
-

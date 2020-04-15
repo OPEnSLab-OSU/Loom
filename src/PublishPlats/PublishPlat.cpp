@@ -14,41 +14,43 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomPublishPlat::LoomPublishPlat(	
+LoomPublishPlat::LoomPublishPlat(
 		LoomManager* 			manager,
 		const char*							module_name,
 		const LoomModule::Type	module_type,
 		const LoomModule::Type	internet_type
-	) 
+	)
 	: LoomModule(manager, module_name, module_type )
 	, m_internet( nullptr )
 	, internet_type( internet_type )
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomPublishPlat::second_stage_ctor() 
+void LoomPublishPlat::second_stage_ctor()
 {
 	// check to see if we have a device manager
-	if (device_manager == nullptr) { 
-		print_module_label(); 
-		LPrint("No Device Manager!\n"); 
-		return; 
+	if (device_manager == nullptr) {
+		print_module_label();
+		LPrint("No Device Manager!\n");
+		return;
 	}
 
 	// check if internet platform exist
 	LoomInternetPlat* temp;
 	switch (internet_type) {
-		case LoomModule::Type::Ethernet: 
+		case LoomModule::Type::Ethernet:
 			temp = (LoomInternetPlat*)&(device_manager->Ethernet() );
 			break;
-		case LoomModule::Type::WiFi: 
+		case LoomModule::Type::WiFi:
 			temp = (LoomInternetPlat*)&(device_manager->WiFi() );
 			break;
+		case LoomModule::Type::LTE:
+			temp = (LoomInternetPlat*)&(device_manager->LTE() );
 		default:
 			temp = nullptr;
 	}
-	
-	
+
+
 	print_module_label();
 	// if (temp->category() == LoomModule::Category::InternetPlat) {
 	if (temp != nullptr && temp->get_module_type() != LoomModule::Type::Unknown) {
@@ -67,7 +69,7 @@ void LoomPublishPlat::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomPublishPlat::publish(const JsonObject json) 
+bool LoomPublishPlat::publish(const JsonObject json)
 {
 	// check validity
 	if (m_internet == nullptr  || !m_validate_json(json)){
@@ -111,10 +113,10 @@ void LoomPublishPlat::print_state() const
 bool LoomPublishPlat::m_validate_json(const JsonObjectConst json) const
 {
 	// check if we got an object at all
-	if (json.isNull()) 
+	if (json.isNull())
 		m_print_json_error("root json is null");
 	// check that a timestamp exists, and if it does ensure that it's an object
-	else if (!json["timestamp"].isNull() && !json["timestamp"].is<JsonObject>()) 
+	else if (!json["timestamp"].isNull() && !json["timestamp"].is<JsonObject>())
 		m_print_json_error("timestamp is not object");
 	// check if the contents exist and is an array
 	else if (json["contents"].isNull() || !json["contents"].is<JsonArray>())
@@ -143,10 +145,3 @@ void LoomPublishPlat::m_print_json_error(const char* str) const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-

@@ -30,6 +30,7 @@
 // InternetPlats
 #include "InternetPlats/InternetEthernet.h"
 #include "InternetPlats/InternetWiFi.h"
+#include "InternetPlats/InternetLTE.h"
 
 // PublishPlats
 #include "PublishPlats/GoogleSheets.h"
@@ -86,7 +87,7 @@
 #include "Sleep_Manager.h"
 #include "Multiplexer.h" // this needs to be include after I2C sensors (due to conflict with enableInterrupt macro/function defined by EnableInterrupt library and AS726X sensors)
 
-// For functions that build constexpr lookup table 
+// For functions that build constexpr lookup table
 #include "Module_Factory_Aux.h"
 
 
@@ -116,11 +117,11 @@ namespace factory {
 	/// Struct to contain the elements of factory lookup table
 	typedef struct {
 		/// Module type to compare against
-		const char*			name;				
+		const char*			name;
 		/// Pointer to 'template<class T> LoomModule* Create(LoomManager* manager, JsonArrayConst p)' with the type T set
-		FactoryPtr			Construct;			
+		FactoryPtr			Construct;
 		/// Pointer to 'template<class T> LoomModule* CreateDefault()' with the type T set
-		FactoryPtrDefault	ConstructDefault;	
+		FactoryPtrDefault	ConstructDefault;
 	} NameModulePair;
 
 } // end factory
@@ -133,20 +134,21 @@ namespace factory {
 
 
 
-/// Blocks modules the can be toggled on/off or 
+/// Blocks modules the can be toggled on/off or
 /// selected between a variety of selection.
-/// Below, in LoomFactory, the integer index (zero indexed) of the enums is 
+/// Below, in LoomFactory, the integer index (zero indexed) of the enums is
 /// used to select between different includes, so make sure the includes
 /// correctly correspond to the index
-namespace Enable 
+namespace Enable
 {
-	enum class Internet  { 
+	enum class Internet  {
 		All,			///< All internet modules enabled
 		Ethernet,		///< Only Ethernet relevant modules enabled
 		WiFi,			///< Only WiFi relevant modules enabled
+		LTE,			///< Only LTE relevant modules enabled
 		Disabled		///< Internet modules disabled
 	};
-	
+
 	enum class Sensors   { Enabled, Disabled };
 	enum class Actuators { Enabled, Disabled };
 	enum class Radios    { Enabled, Disabled };
@@ -154,23 +156,23 @@ namespace Enable
 }
 
 /// Possible sections of the module lookup table to include.
-/// Factory concatenates selected blocks to form its lookup table 
+/// Factory concatenates selected blocks to form its lookup table
 /// for module creation.
-/// Blocks are made up of tuples of NameModulePair 
+/// Blocks are made up of tuples of NameModulePair
 namespace Include
 {
 	/// Empty block (used if a block of modules is disabled)
 	constexpr auto None = std::make_tuple();
 
 	/// Common modules
-	constexpr auto Common = std::make_tuple( 
+	constexpr auto Common = std::make_tuple(
 				factory::NameModulePair{"Interrupt_Manager",	Construct<Loom_Interrupt_Manager>,		ConstructDefault<Loom_Interrupt_Manager> },
 				factory::NameModulePair{"WarmUp_Manager", Construct<Loom_WarmUp_Manager>, ConstructDefault<Loom_WarmUp_Manager> },
 				factory::NameModulePair{"Sleep_Manager",		Construct<Loom_Sleep_Manager>,			ConstructDefault<Loom_Sleep_Manager> },
 				factory::NameModulePair{"Analog",		Construct<Loom_Analog>,			ConstructDefault<Loom_Analog> },
 				factory::NameModulePair{"Digital",		Construct<Loom_Digital>,		ConstructDefault<Loom_Digital> },
 				// LogPlat
-				factory::NameModulePair{"OLED",			Construct<Loom_OLED>,			ConstructDefault<Loom_OLED> },	
+				factory::NameModulePair{"OLED",			Construct<Loom_OLED>,			ConstructDefault<Loom_OLED> },
 				factory::NameModulePair{"SD",			Construct<Loom_SD>,				ConstructDefault<Loom_SD> },
 				// // RTC
 				factory::NameModulePair{"DS3231",		Construct<Loom_DS3231>,			ConstructDefault<Loom_DS3231> },
@@ -178,20 +180,20 @@ namespace Include
 			);
 
 	/// Radios modules
-	constexpr auto Radios = std::make_tuple( 
+	constexpr auto Radios = std::make_tuple(
 				factory::NameModulePair{"LoRa",			Construct<Loom_LoRa>,			ConstructDefault<Loom_LoRa> },
 				factory::NameModulePair{"nRF",			Construct<Loom_nRF>,			ConstructDefault<Loom_nRF> },
 				factory::NameModulePair{"Bluetooth",	Construct<Loom_Bluetooth>,		ConstructDefault<Loom_Bluetooth> }
 			);
 
 	/// Max modules
-	constexpr auto Max = std::make_tuple( 
+	constexpr auto Max = std::make_tuple(
 				factory::NameModulePair{"MaxPub",		Construct<Loom_MaxPub>,			nullptr },
 				factory::NameModulePair{"MaxSub",		Construct<Loom_MaxSub>,			nullptr }
 			);
 
 	/// Ethernet and WiFi modules
-	constexpr auto EthernetAndWiFi = std::make_tuple( 
+	constexpr auto EthernetAndWiFi = std::make_tuple(
 				factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
 				factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
 				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
@@ -199,18 +201,25 @@ namespace Include
 			);
 
 	/// Ethernet modules
-	constexpr auto Ethernet = std::make_tuple( 
+	constexpr auto Ethernet = std::make_tuple(
 				factory::NameModulePair{"Ethernet",		Construct<Loom_Ethernet>,		ConstructDefault<Loom_Ethernet> },
 				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
 				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
 
 	/// WiFi modules
-	constexpr auto WiFi = std::make_tuple( 
+	constexpr auto WiFi = std::make_tuple(
 				factory::NameModulePair{"WiFi",			Construct<Loom_WiFi>,			ConstructDefault<Loom_WiFi> },
 				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
 				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 			);
+
+	/// LTE modules
+	constexpr auto LTE = std::make_tuple(
+		factory::NameModulePair{"LTE",			Construct<Loom_LTE>,			ConstructDefault<Loom_LTE> },
+		factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
+		factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
+	);
 
 	/// Sensor modules
 	constexpr auto Sensors = std::make_tuple(
@@ -244,7 +253,7 @@ namespace Include
 			);
 
 	/// Actuator modules
-	constexpr auto Actuators = std::make_tuple( 
+	constexpr auto Actuators = std::make_tuple(
 				factory::NameModulePair{"Neopixel",		Construct<Loom_Neopixel>,		ConstructDefault<Loom_Neopixel> },
 				factory::NameModulePair{"Relay",		Construct<Loom_Relay>,			ConstructDefault<Loom_Relay> },
 				factory::NameModulePair{"Servo",		Construct<Loom_Servo>,			ConstructDefault<Loom_Servo> },
@@ -258,8 +267,8 @@ namespace Include
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Base class that factory is derived from.
-/// Purpose is to allow LoomManger to have a pointer to a LoomFactory, which 
-/// it cannot do directly because different parameter selections result in 
+/// Purpose is to allow LoomManger to have a pointer to a LoomFactory, which
+/// it cannot do directly because different parameter selections result in
 /// different factory classes
 ///
 /// @par Resources
@@ -276,7 +285,7 @@ public:
 	/// Usage example:
 	///		Loom_Relay r = FactoryInst.CreateDefault<Loom_Relay>();
 	/// @return The created LoomModule
-	template<class T> 
+	template<class T>
 	static T* CreateDefault() { return ConstructDefault<T>(); }
 
 	virtual LoomModule* Create(LoomManager* manager, JsonVariant module) const = 0;
@@ -285,11 +294,11 @@ public:
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// Factory is used by LoomManager when parsing Json to match module names to 
+/// Factory is used by LoomManager when parsing Json to match module names to
 /// their associated constructors, and calling with parameters from the Json.
-/// The template parameters are used to select whether certain blocks of 
+/// The template parameters are used to select whether certain blocks of
 /// modules are included in the lookup table. This is determined at compile
-/// time to not include unnecessary module classes and supporting code, 
+/// time to not include unnecessary module classes and supporting code,
 /// thus reducing code size
 ///
 /// @par Resources
@@ -308,29 +317,30 @@ class LoomFactory : public FactoryBase
 
 private:
 
-	/// The factory's lookup table of modules that can be created, based on the 
+	/// The factory's lookup table of modules that can be created, based on the
 	/// enable values of the classes template parameters
 	static constexpr auto LookupTable = tuple_cat(
 			Include::Common,
-			factory::select<(int)INTERNET>(			
+			factory::select<(int)INTERNET>(
 				Include::EthernetAndWiFi,
 				Include::Ethernet,
 				Include::WiFi,
+				Include::LTE,
 				Include::None
-			), 
-			factory::select<(int)SENSORS>(		
+			),
+			factory::select<(int)SENSORS>(
 				Include::Sensors,
 				Include::None
 			),
-			factory::select<(int)RADIOS>(		
+			factory::select<(int)RADIOS>(
 				Include::Radios,
 				Include::None
 			),
-			factory::select<(int)ACTUATORS>(		
+			factory::select<(int)ACTUATORS>(
 				Include::Actuators,
 				Include::None
 			),
-			factory::select<(int)MAX>(		
+			factory::select<(int)MAX>(
 				Include::Max,
 				Include::None
 			)
@@ -340,7 +350,7 @@ public:
 
 	/// Constructor
 	LoomFactory() = default;
-	
+
 	/// Destructor
 	~LoomFactory() = default;
 
@@ -377,7 +387,7 @@ public:
 					} else {
 						return elem.ConstructDefault(manager);
 					}
-				} else { 
+				} else {
 					// Invalid parameters
 					LPrintln("[Factory] ", "Invalid parameters in module '", name, "'");
 					return nullptr;
@@ -390,10 +400,3 @@ public:
 	}
 
 };
-
-
-
-
-
-
-
