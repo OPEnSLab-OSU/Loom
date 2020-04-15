@@ -5,7 +5,7 @@
 
 // In this example of program, it will measure the CO2 level and display on the Serial Monitor.
 // Note that the K30 sensor needs at least 6 minutes of warm up to get accurate measurements.
-// Therefore, make sure warm up the K30 sensor before record data values. 
+// Therefore, make sure let it on for 6 minutes to warm up the K30 sensor before record data values. 
 
 // As you might see, there are some syntax that came from outside of the Loom language, 
 // so take a look the link and the code carefully.  

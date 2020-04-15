@@ -38,7 +38,7 @@ void Loom_K30::sendSensorRequest(byte request[7]) {
     delay(100);
     while (!sensor_serial -> available()) //keep sending request until we start to get a response
     {
-        LPrintln("Sensor_Serial Available, retrieving response");  //This doesn't make sense: in line 41 and line 49 
+        LPrintln("Sensor_Serial Available, retrieving response");  // TODO:This doesn't make sense: in line 41 and line 49 
         sensor_serial -> write(request, 7);
         delay(50);
     }
