@@ -340,6 +340,16 @@ Loom_MAX31856& LoomManager::MAX31856(const uint8_t idx)
 
 
 ///////////////////////////////////////////////////////////////////////////////
+//    --- SERIAL Sensors ---
+
+Loom_K30& LoomManager::K30(const uint8_t idx)
+{
+    LoomModule* tmp = find_module(LoomModule::Type::K30, idx);
+    return (*(Loom_K30*)( (tmp) ? tmp : nullptr ));
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 //    --- Other ---
 
 LoomNTPSync& LoomManager::NTP(const uint8_t idx) 
