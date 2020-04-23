@@ -38,7 +38,7 @@ void Loom_K30::sendSensorRequest(byte request[7]) {
     delay(100);
     while (!sensor_serial -> available()) //keep sending request until we start to get a response
     {
-        LPrintln("Sensor_Serial Available, retrieving response");  // TODO:This doesn't make sense: in line 41 and line 49 
+        LPrintln("Sensor_Serial Unavailable, Trying to send request again");  // TODO:This doesn't make sense: in line 41 and line 49 
         sensor_serial -> write(request, 7);
         delay(50);
     }
@@ -46,7 +46,7 @@ void Loom_K30::sendSensorRequest(byte request[7]) {
     int timeout = 0; //set a timeoute counter
     while (sensor_serial -> available() < 7 ) //Wait to get a 7 byte response
     {
-        LPrintln("Sensor_Serial Unavailable, Sending response");
+        LPrintln("Sensor_Serial Available, Retrieving Response");
         timeout++;
         if (timeout > 10)   //if it takes to long there was probably an error
         {
