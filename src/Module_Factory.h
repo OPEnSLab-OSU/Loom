@@ -145,6 +145,7 @@ namespace Enable
 		All,			///< All internet modules enabled
 		Ethernet,		///< Only Ethernet relevant modules enabled
 		WiFi,			///< Only WiFi relevant modules enabled
+		LTE,
 		Disabled		///< Internet modules disabled
 	};
 
@@ -219,6 +220,10 @@ namespace Include
 		factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
 		factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 	);
+				factory::NameModulePair{"LTE",			Construct<Loom_LTE>,			ConstructDefault<Loom_LTE> },
+				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
+				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
+			);
 
 	/// Sensor modules
 	constexpr auto Sensors = std::make_tuple(
