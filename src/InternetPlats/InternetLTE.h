@@ -22,7 +22,7 @@
 ///
 /// LTE InternetPlat
 ///
-///
+/// @attention	Requires 7KB of free SRAM at runtime to use.
 ///
 /// @par Resources
 /// - [Module Documentation]
