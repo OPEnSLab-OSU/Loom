@@ -329,6 +329,7 @@ private:
 				Include::EthernetAndWiFi,
 				Include::Ethernet,
 				Include::LTE,
+				Include::WiFi,
 				Include::None
 			),
 			factory::select<(int)SENSORS>(
