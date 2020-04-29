@@ -220,10 +220,6 @@ namespace Include
 		factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
 		factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 	);
-				factory::NameModulePair{"LTE",			Construct<Loom_LTE>,			ConstructDefault<Loom_LTE> },
-				factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
-				factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
-			);
 
 	/// Sensor modules
 	constexpr auto Sensors = std::make_tuple(
@@ -328,8 +324,8 @@ private:
 			factory::select<(int)INTERNET>(
 				Include::EthernetAndWiFi,
 				Include::Ethernet,
-				Include::LTE,
 				Include::WiFi,
+				Include::LTE,
 				Include::None
 			),
 			factory::select<(int)SENSORS>(
