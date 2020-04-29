@@ -99,7 +99,12 @@ bool Loom_LTE::is_connected() const
 
 LoomInternetPlat::UDPPtr Loom_LTE::open_socket(const uint port)
 {
-  return UDPPtr(); //Currently does UDP socket is not supported on this plat, always fails
+  // create the unique pointer
+  	UDPPtr ptr = UDPPtr();
+  	// use the object created to open a UDP socket
+  	if (ptr && ptr->begin(port)) return std::move(ptr);
+  	// return a nullptr if any of that failed
+  	return UDPPtr();
 }
 
 
@@ -115,10 +120,10 @@ void Loom_LTE::print_config() const
 void Loom_LTE::print_state() const
 {
   LoomInternetPlat::print_state();
-  LPrintln("/tConnected : ", (modem.isGprsConnected()) ? "True" : "False" );
-  LPrintln("/tAPN : ", APN );
-  LPrintln("/tSignal State : ", modem.getSignalQuality()); //Signal quality report
-  LPrintln("/tIP Address : ", modem.localIP());
+  LPrintln("\tConnected : ", (modem.isGprsConnected()) ? "True" : "False" );
+  LPrintln("\tAPN : ", APN );
+  LPrintln("\tSignal State : ", modem.getSignalQuality()); //Signal quality report
+  LPrintln("\tIP Address : ", modem.localIP());
 
 }
 
