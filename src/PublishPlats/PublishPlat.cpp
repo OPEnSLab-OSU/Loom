@@ -46,6 +46,7 @@ void LoomPublishPlat::second_stage_ctor()
 			break;
 		case LoomModule::Type::LTE:
 			temp = (LoomInternetPlat*)&(device_manager->LTE() );
+			break;
 		default:
 			temp = nullptr;
 	}
