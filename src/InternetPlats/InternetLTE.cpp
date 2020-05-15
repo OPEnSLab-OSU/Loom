@@ -18,18 +18,29 @@ Loom_LTE::Loom_LTE(
     LoomManager* manager,
     const char* apn,
     const char* user,
-    const char* pass
+    const char* pass,
+    const int analog_pin
   )
   : LoomInternetPlat(manager, "LTE", Type::LTE)
   , APN(apn)
   , gprsUser(user)
   , gprsPass(pass)
+  , powerPin(analog_pin)
   , m_base_client(modem)
   , m_client(m_base_client, TAs, (size_t)TAs_NUM, A5, 1, SSLClient::SSL_INFO)
 {
+
   //sets baud rate for SARA-R4 and restarts module
   SerialAT.begin(115200);
+  pinMode(powerPin, OUTPUT);
+  digitalWrite(powerPin, HIGH);
+  delay(5000);
+  digitalWrite(powerPin, LOW);
+  delay(5000);
   modem.restart();
+  delay(1000);
+
+
 
   String present = modem.getModemInfo();
 

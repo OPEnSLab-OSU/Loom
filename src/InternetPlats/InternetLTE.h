@@ -40,6 +40,7 @@ class Loom_LTE: public LoomInternetPlat
     const char* APN; ///< LTE Network name
     const char* gprsUser; ///< GPRS username crendtial
     const char* gprsPass; ///< GPRS password credenital
+    const int powerPin;   ///< Wired analog pin to power on LTE shield
 
     TinyGsmClient m_base_client;  ///< SSLClient object for LTE
     SSLClient m_client;           ///< Underlying LTE SSLClient instance
@@ -57,11 +58,14 @@ class Loom_LTE: public LoomInternetPlat
     	/// @param[in]	APN LTE network name
       /// @param[in]	gprsUser	GPRS username. Leave as empty unless you have GPRS credentials
     	/// @param[in]	gprsPass	GPRS password. Leave as empty unless you have GPRS credentials
+      /// @param[in] powerPin analog pin on the feather M0 that drives pin 5 on LTE shield to power on and off
+
     Loom_LTE(
         LoomManager* manager,
         const char* APN = "",
         const char* gprsUser = "",
-        const char* gprsPass = ""
+        const char* gprsPass = "",
+        const int powerPin = A3
     );
 
     /// Constructor that takes Json Array, extracts args

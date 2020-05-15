@@ -16,7 +16,7 @@
 		},\
 		{\
 			'name':'LTE',\
-			'params':['<apn>','<username>','<password>']\
+			'params':['<apn>','<username>','<password>', '<analog_pin>'\
 		},\
 		{\
 			'name':'GoogleSheets',\
