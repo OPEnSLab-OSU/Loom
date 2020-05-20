@@ -145,7 +145,7 @@ namespace Enable
 		All,			///< All internet modules enabled
 		Ethernet,		///< Only Ethernet relevant modules enabled
 		WiFi,			///< Only WiFi relevant modules enabled
-		LTE,
+		LTE,			///< Only LTE relevant modules enabled
 		Disabled		///< Internet modules disabled
 	};
 

@@ -4,7 +4,7 @@
 /// @brief		File for Loom_LTE implementation.
 /// @author		Adam Kerr, based on work by Noah Koontz
 /// @date		2020
-///
+/// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -32,11 +32,13 @@ Loom_LTE::Loom_LTE(
 
   //sets baud rate for SARA-R4 and restarts module
   SerialAT.begin(115200);
+  //Uses Analog pin wired to Pin 5 on LTE shield to turn on the LTE shield.
   pinMode(powerPin, OUTPUT);
   digitalWrite(powerPin, HIGH);
   delay(5000);
   digitalWrite(powerPin, LOW);
   delay(5000);
+  //Restarts the LTE.
   modem.restart();
   delay(1000);
 
@@ -110,7 +112,7 @@ bool Loom_LTE::is_connected() const
 
 LoomInternetPlat::UDPPtr Loom_LTE::open_socket(const uint port)
 {
-  // create the unique pointer
+  //Since the TinyGSM library currently does not support UDP socket functionality, this method will always return a null pointer and fail.
   	UDPPtr ptr = UDPPtr();
   	// use the object created to open a UDP socket
   	if (ptr && ptr->begin(port)) return std::move(ptr);

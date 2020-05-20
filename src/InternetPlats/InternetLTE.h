@@ -4,7 +4,7 @@
 /// @brief		File for Loom_LTE definition.
 /// @author		Adam Kerr, based on work by Noah Koontz
 /// @date		2020
-///
+/// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -90,7 +90,7 @@ class Loom_LTE: public LoomInternetPlat
     /// @return True if connected, false otherwise
     bool      is_connected() const override;
 
-    /// Fails everytime, there is no UDP socket functionality for SARA yet
+    /// Fails everytime, there is no UDP socket functionality in the TinyGSM library
     /// @returns a UDP socket for transmitting and recieving
     UDPPtr open_socket(const uint port) override;
 
