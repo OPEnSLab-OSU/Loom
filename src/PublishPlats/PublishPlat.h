@@ -37,7 +37,7 @@ protected:
 	/// Type of internet platform used to publish.
 	/// Needed because finding the module for m_internet happens in second_stage_ctor(),
 	/// rather than the regular constructor.
-	LoomModule::Type	internet_type;	
+	LoomModule::Type	internet_type;
 
 public:
 
@@ -49,7 +49,7 @@ public:
 	///
 	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
 	/// @param[in]	module_type			Type of the module (provided by derived classes)
-	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform. 
 	LoomPublishPlat(
 		LoomManager* manager,
 		const char*				module_name,
@@ -72,7 +72,7 @@ public:
 	void	package(JsonObject json) override { /* do nothing for now */ }
 
 	/// Publish data.
-	/// @param[in] json JSON object to publish. MUST be formatted as 
+	/// @param[in] json JSON object to publish. MUST be formatted as
 	/// 	{ "contents" : [ { "module": "module_name", "data" : {...} }, ... ], "timestamp"(optional) : {...} }
 	/// @returns Whether or not the publish succeded
 	bool	publish(const JsonObject json);
@@ -109,6 +109,5 @@ private:
 	/// Print a JSON error
 	/// @param[in]	str		Error string to print
 	void m_print_json_error(const char* str) const;
-	
-};
 
+};

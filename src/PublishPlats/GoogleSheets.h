@@ -23,7 +23,7 @@
 /// - [wiki: Using Loom with Google Sheets](https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_GoogleSheets : public LoomPublishPlat 
+class Loom_GoogleSheets : public LoomPublishPlat
 {
 
 public:
@@ -36,11 +36,11 @@ public:
 	/// Check out https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets
 	/// (or http://www.open-sensing.org/evaporometerblog/datalog) for more information on these parameters.
 	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name.
-	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform. 
 	/// @param[in]  script_url			String | <""> | null | URL where the google sheets script is hosted, without domain (ex. /macros/s/AKfycby<more letters here>_k0n/exec).
 	/// @param[in]  sheet_id			String | <""> | null |ID Of the spreadsheet to put data in (script must have edit access).
-	/// @param[in]  tab_matches_dev_id	Bool | <true> | null | Override tab_id with the name+instance number of the device. 
-	/// @param[in]  tab_id				String | <"Data"> | null | Name of the tab that the device will put data into. 
+	/// @param[in]  tab_matches_dev_id	Bool | <true> | null | Override tab_id with the name+instance number of the device.
+	/// @param[in]  tab_id				String | <"Data"> | null | Name of the tab that the device will put data into.
 	Loom_GoogleSheets(
 			LoomManager* manager,
 			const char*				module_name,
@@ -81,13 +81,13 @@ private:
 
 	/// Private utility send function
 	bool m_serialize_internet_impl(const JsonObject json, Print& write);
-	
+
 	// use dynamic memory to store the varibles from the user
 	// since most of these strings will be smaller than the maximum size
 
-	const String m_script_url;		///< ID of Google script 
-	const String m_sheet_id;		///< ID of Google Sheets spreadsheet 
-	const String m_tab_id;			///< Name of tab of spreadsheet 
+	const String m_script_url;		///< ID of Google script
+	const String m_sheet_id;		///< ID of Google Sheets spreadsheet
+	const String m_tab_id;			///< Name of tab of spreadsheet
 
 	const bool tab_matches_dev_id;	///< Whether or not tab of spreadsheet should be based on device name + instance
 

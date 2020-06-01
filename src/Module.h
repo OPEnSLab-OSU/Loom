@@ -48,7 +48,7 @@ public:
 		I2C=2100,			ADS1115, AS7262, AS7263, AS7265X, FXAS21002, FXOS8700, LIS3DH, MB1232, MMA8451, MPU6050, MS5803, SHT31D, TMP007, TSL2561, TSL2591, ZXGesture, STEMMA,
 		// SDI12
 		SDI12=2200,			Decagon5TM, DecagonGS3,
-		// SPI	
+		// SPI
 		SPI=2300,			MAX31855, MAX31856,
         // SERIAL
         L_SERIAL=2400,        K30,
@@ -61,7 +61,7 @@ public:
 		// CommPlats
 		CommPlat=6000,		LoRa, nRF, Bluetooth,
 		// InternetPlats
-		InternetPlat=7000,	Ethernet, WiFi,
+		InternetPlat=7000,	Ethernet, WiFi, LTE,
 		// PublishPlats
 		PublishPlat=8000,	GoogleSheets, MaxPub, SpoolPub,
 		// SubscribePlats
@@ -71,10 +71,10 @@ public:
 	/// Enum to classify modules.
 	/// Similar LoomModule::Type but represents the astract classes rather than
 	/// the leaf node modules in the inheritance tree.
-	/// For a given module, its category often shares a name with the abstract 
-	/// class it is derived from 
+	/// For a given module, its category often shares a name with the abstract
+	/// class it is derived from
 	enum class Category {
-		Unknown=0,			///< Unknown	
+		Unknown=0,			///< Unknown
 		Other=1,			///< Other
 		Sensor=2,			///< Sensors
 		L_RTC=3,			///< RTC
@@ -96,7 +96,7 @@ protected:
 	bool			active;				///< Whether or not the module should be treated as active.
 										///< If inactive at setup (due to failed initialization, module will be deleted)
 	Verbosity		print_verbosity;	///< Print verbosity
-	Verbosity		package_verbosity;	///< Package verbosity 
+	Verbosity		package_verbosity;	///< Package verbosity
 
 public:
 
@@ -107,9 +107,9 @@ public:
 	/// Constructor
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
-	LoomModule( 
+	LoomModule(
 		LoomManager* manager,
-		const char*		module_name		= "Unknown", 
+		const char*		module_name		= "Unknown",
 		const Type		module_type		= Type::Unknown
 	);
 
@@ -131,7 +131,7 @@ public:
 	/// @param[out]	json	Object to put data into
 	virtual void 	package(JsonObject json) = 0;
 
-	/// Route command to driver 
+	/// Route command to driver
 	virtual bool	dispatch(JsonObject json) {};
 
 	/// Turn off any hardware
@@ -170,7 +170,7 @@ public:
 	/// Copy module name into buffer
 	/// @param[out]	buf	The buffer to copy module name into
 	void			get_module_name(char* buf) const;
-	
+
 	/// Get module name
 	/// @return	Module name
 	const char*		get_module_name() const { return module_name; }
@@ -196,14 +196,14 @@ public:
 
 	/// Add pointer back to device manager.
 	/// Generally only called when device manager links module
-	/// to provide pointer both directions. 
+	/// to provide pointer both directions.
 	/// Derived modules may override this for increased function,
 	/// such as linking a submanager or RTC module.
 	/// @param[in]	LM	LoomManager to point to
 	virtual void	link_device_manager(LoomManager* LM);
 
-	/// Set print verbosity 
-	/// Controlls level of detail included in debug prints 
+	/// Set print verbosity
+	/// Controlls level of detail included in debug prints
 	void			set_print_verbosity(const Verbosity v);
 
 	/// Set package verbosity.
@@ -223,7 +223,7 @@ public:
 	/// @param[in]	v	Verbosity value to get string representation of
 	/// @return String of verbosity
 	static const char*	enum_verbosity_string(const Verbosity v);
-	
+
 	/// Get string of the category associated with a Category
 	/// @param[in]	c	Category value to get string representation of
 	/// @return String of category
@@ -251,7 +251,7 @@ private:
 
 /// Used by LoomManager to sort modules in its vector
 struct module_sort_comp {
-    bool operator() (LoomModule* left, LoomModule* right) const { 
+    bool operator() (LoomModule* left, LoomModule* right) const {
        return left->get_module_type() < right->get_module_type();
     }
 };
