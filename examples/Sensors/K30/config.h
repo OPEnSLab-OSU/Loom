@@ -4,4 +4,10 @@
     {'name':'K30','params':'default'},\
     {'name':'SD','params':[true,1000,10,'K30_',true]}\
   ]\
+<<<<<<< HEAD
 }"
+=======
+}"
+    
+   
+>>>>>>> master
