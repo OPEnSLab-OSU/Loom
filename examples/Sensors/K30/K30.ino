@@ -37,8 +37,6 @@ LoomManager Loom{ &ModuleFactory };
 // Create Serial SERCOM for K30 Sensor: RX pin 12, TX pin 11
 Uart Serial2 = Uart(&sercom1, 12, 11, SERCOM_RX_PAD_3, UART_TX_PAD_0);
 
-int timer = 0; // Setting up the timer
-
 void setup() {
   
   Serial2.begin(9600);
@@ -55,15 +53,12 @@ void setup() {
 
   LPrintln("\n ** Setup Complete ** ");
 
+  warmUpTimer();
+
 }
 
 void loop() {  
 
-  if (timer == 0){ // This will only pass once at the beginning to start the timer for warm up
-    warmUpTimer();
-    timer = 1; // Once the timer is done, it will never do the time again
-  }
-  
   Loom.measure(); // Sample attached sensors
   Loom.package(); // Format data for display and SD
   Loom.display_data(); // display printed JSON formatted data on serial monitor
