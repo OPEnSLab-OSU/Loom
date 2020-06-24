@@ -65,7 +65,7 @@ class Loom_LTE: public LoomInternetPlat
         const char* APN = "",
         const char* gprsUser = "",
         const char* gprsPass = "",
-        const int powerPin = A3
+        const int powerPin = A5
     );
 
     /// Constructor that takes Json Array, extracts args
@@ -93,6 +93,9 @@ class Loom_LTE: public LoomInternetPlat
     /// Fails everytime, there is no UDP socket functionality in the TinyGSM library
     /// @returns a UDP socket for transmitting and recieving
     UDPPtr open_socket(const uint port) override;
+
+    void power_up() override;
+    void power_down() override;
 
     //=============================================================================
     ///@name	PRINT INFORMATION

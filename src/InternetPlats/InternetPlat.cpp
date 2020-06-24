@@ -11,15 +11,15 @@
 #include "InternetPlat.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::LoomInternetPlat(	
+LoomInternetPlat::LoomInternetPlat(
 		LoomManager* 			manager,
 		const char* 						module_name,
 		const LoomModule::Type	module_type
-	) 
+	)
 	: LoomModule(manager, module_name, module_type ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb) 
+LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb)
 {
 	// * the rainbow connection *
 	ClientSession client = connect_to_domain(domain);
@@ -33,7 +33,7 @@ LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domai
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb) 
+void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb)
 {
 	// print the initial http request
 	client.print(verb);
@@ -77,7 +77,7 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* 
 		// if the underlying client is unhappy, we may need to reset the connection
 		if (client.getWriteError() == SSLClient::SSL_CLIENT_WRTIE_ERROR || client.getWriteError() == SSLClient::SSL_CLIENT_CONNECT_FAIL) {
 			print_module_label();
-			LPrint("Attempting to cycle the connection: ");
+			LPrintln("Attempting to cycle the connection: ");
 			disconnect();
 			delay(500);
 			connect();
@@ -134,7 +134,7 @@ constexpr static int NTP_PACKET_SIZE = 48; 			// NTP time stamp is in the first 
 /// Static NTP time server
 constexpr static char time_server[] = "pool.ntp.org"; 	// pool.ntp.org NTP server
 
-static void print_unix_time(unsigned long epoch) 
+static void print_unix_time(unsigned long epoch)
 {
 	// print Unix time:
 	LPrint("Epoch:", epoch, "(");
@@ -157,10 +157,10 @@ static void print_unix_time(unsigned long epoch)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint32_t LoomInternetPlat::get_time() 
+uint32_t LoomInternetPlat::get_time()
 {
 	auto udp_dev = open_socket(localPort);
-	
+
 	if (!udp_dev) {
 		LPrint("Failed to open UDP for NTP!\n");
 		return 0;
@@ -192,7 +192,7 @@ uint32_t LoomInternetPlat::get_time()
 		const unsigned long seventyYears = 2208988800UL;
 		// subtract seventy years:
 		epoch = secsSince1900 - seventyYears;
-		
+
 		print_module_label();
 		print_unix_time(epoch);
 	}
@@ -205,7 +205,7 @@ uint32_t LoomInternetPlat::get_time()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const 
+void LoomInternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const
 {
 	// set all bytes in the buffer to 0
 	memset(packet_buffer, 0, NTP_PACKET_SIZE);
