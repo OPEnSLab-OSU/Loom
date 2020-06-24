@@ -16,14 +16,14 @@
 #include <Loom.h>
 #include <ArduinoJson.h>
 
-Loom_Analog Analog{};			// Analog module with default settings
-Loom_Relay  Relay("Relay", 10);	// Relay module with provided settings (i.e. relay on pin 10) 
+Loom_Analog Analog();			// Analog module with default settings
+Loom_Relay  Relay("Relay", 10);	// Relay module with provided settings (i.e. relay on pin 10)
 
 StaticJsonDocument<400> doc;	// Json document for data
 
 
-void setup() 
-{ 
+void setup()
+{
 	Serial.begin(115200);
 	while (!Serial);
 	delay(1000);
@@ -35,7 +35,7 @@ void setup()
 }
 
 
-void loop() 
+void loop()
 {
 	// Setup Json document for data
 	doc.clear();
