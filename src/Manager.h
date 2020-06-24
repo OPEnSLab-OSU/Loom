@@ -67,6 +67,9 @@ class Loom_DecagonGS3;
 class Loom_MAX31855;
 class Loom_MAX31856;
 
+// SERIAL
+class Loom_K30;
+
 // CommPlats
 class Loom_LoRa;
 class Loom_nRF;
@@ -541,6 +544,9 @@ public:
 	// SPI
 	Loom_MAX31855&		MAX31855(const uint8_t idx = 0);
 	Loom_MAX31856&		MAX31856(const uint8_t idx = 0);
+    
+    //SERIAL
+    Loom_K30&           K30(const uint8_t idx = 0);
 
 protected:
 

@@ -50,6 +50,8 @@ public:
 		SDI12=2200,			Decagon5TM, DecagonGS3,
 		// SPI
 		SPI=2300,			MAX31855, MAX31856,
+        // SERIAL
+        L_SERIAL=2400,        K30,
 		// RTC
 		L_RTC=3000,			DS3231, PCF8523,
 		// Actuators
