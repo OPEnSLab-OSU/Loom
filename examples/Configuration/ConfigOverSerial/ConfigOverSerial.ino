@@ -18,7 +18,7 @@
 // Sending the configuration over Serial can be be done in a variety of ways,
 // and may look slightly different depending on operating system.
 
-// If you configuration is already in a text file as a JSON, you can use a command 
+// If you configuration is already in a text file as a JSON, you can use a command
 // from the command line that may look like:
 // > cat config.txt > /dev/cu.usbmodem14101
 
@@ -26,14 +26,14 @@
 // > cat config.json > /dev/cu.usbmodem14101
 
 // Or, to send a smaller JSON string from a .json file with jq:
-// > cat JsonTest.json | jq --compact-output '.' | tr -d '\n' > /dev/cu.usbmodem14101 
+// > cat JsonTest.json | jq --compact-output '.' | tr -d '\n' > /dev/cu.usbmodem14101
 
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
@@ -50,8 +50,8 @@ LoomManager Loom{ &ModuleFactory };
 
 
 
-void setup() 
-{ 
+void setup()
+{
 	Loom.begin_LED();
 	Loom.begin_serial(false);
 
@@ -60,12 +60,12 @@ void setup()
 
 	Loom.print_config();
 
+	LPrintln("\n ** Setup Complete ** ");
+}
 
-}	LPrintln("\n ** Setup Complete ** ");
 
 
-
-void loop() 
+void loop()
 {
 	Loom.check_serial_for_config();	// Check if a new config has been sent via Serial
 
@@ -75,5 +75,3 @@ void loop()
 
 	Loom.pause();
 }
-
-

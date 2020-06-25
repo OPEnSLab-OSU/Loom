@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This example expands upon GoogleSheetsEthernet, so if you haven't looked at 
+// This example expands upon GoogleSheetsEthernet, so if you haven't looked at
 // that one, start there.
 
-// This example add RTC synchronization to time obtained from the internet 
+// This example add RTC synchronization to time obtained from the internet
 // using the NTP_Sync module
 // (Google Sheets logging is not necessary for this synchronization)
 
@@ -12,7 +12,7 @@
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
@@ -29,21 +29,20 @@ LoomManager Loom{ &ModuleFactory };
 
 
 
-void setup() 
+void setup()
 {
 	Loom.begin_serial(true);
 	Loom.parse_config(json_config);
 	Loom.print_config();
 
 
-	LPrintln("\nEpoch: ", Loom.InternetPlat(0).get_time() );
 
-	LPrintln("\n ** Setup Complete ** "); 
+	LPrintln("\n ** Setup Complete ** ");
 }
 
 
 
-void loop() 
+void loop()
 {
 	Loom.measure();
 	Loom.package();

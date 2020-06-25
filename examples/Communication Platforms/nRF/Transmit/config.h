@@ -8,11 +8,11 @@
 	'components':[\
 		{\
 			'name':'Analog',\
-			'params':'default'
+			'params': 'default'\
 		},\
 		{\
 			'name':'nRF',\
-			'params':[120,00,1,0,3,200,1]
+			'params': 'default'\
 		}\
 	]\
 }"
