@@ -35,8 +35,7 @@ void setup()
 	Loom.parse_config(json_config);
 	Loom.print_config();
 
-	LoomModule* tmp = Loom.find_module(LoomModule::Type::Ethernet, 1);
-	LPrintln("\nEpoch: ", (*(Loom_Ethernet*)( (tmp) ? tmp : nullptr )).get_time());
+
 
 	LPrintln("\n ** Setup Complete ** ");
 }

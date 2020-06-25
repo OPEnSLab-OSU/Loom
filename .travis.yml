@@ -1,6 +1,16 @@
 # This will run on Travis' 'new' container-based infrastructure
-sudo: false 
+sudo: false
+language: c
+env:
+  global:
+    - ADDITIONAL_URLS="https://adafruit.github.io/arduino-board-index/package_adafruit_index.json,https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json,https://github.com/stm32duino/BoardManagerFiles/raw/master/STM32/package_stm_index.json"
+    - DOXYFILE=$TRAVIS_BUILD_DIR/.travis/Doxyfile
+    - CORE="adafruit:samd" BOARD="adafruit:samd:adafruit_feather_m0"
 
+cache:
+    directories:
+      - ~/arduino_ide
+      - ~/.arduino15/packages/
 # Whitelist
 branches:
   only:
@@ -16,19 +26,108 @@ addons:
       - doxygen
       - graphviz
 
+jobs:
+  include:
+    - stage: "Build"
+      name: "Feather M0"
+
+
+    - stage: "Deploy"
+      if: tag is present
+      env: CORE="arduino:samd"
+      script: skip
+      before_deploy:
+        - mkdir tmp-bin
+        - cp library.properties library.properties.old
+        - echo "dot_a_linkage=true" >> library.properties
+        - rm -rf /tmp/arduino-sketch*
+        #Precompiles
+        - arduino-cli compile --fqbn arduino:samd:mzero_bl $PWD/examples/Basic
+        - mkdir tmp-bin/cortex-m0plus
+        - cp "$(find /tmp/ -maxdepth 1 -type d -name "arduino-sketch*" -print | head -n 1)/libraries/Basic/Basic.a" tmp-bin/cortex-m0plus/Basic.a
+        - rm -rf /tmp/arduino-sketch*
+        #Bundles precompiles up
+        - mv library.properties.old library.properties
+        - echo "precompiled=true" >> library.properties
+        - mv tmp-bin/* src/
+        - rm -rf tmp-bin
+        - rm -rf .git
+        - find src/ -iname "*.c" -delete
+        - find src/ -iname "*.cpp" -delete
+        - zip -r LTE-Hypnos-Example-precompiled.zip .
+      deploy:
+        provider: releases
+        api_key: $GITHUB_TOKEN
+        skip_cleanup: true
+        file: "LTE-Hypnos-Example-precompiled.zip"
+        on:
+          tags: true
+
+
 # To allow access to gh-pages branch
 install:
+  #Doxygen
   - git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
   - git fetch --unshallow --tags
+  #Installs Ardunio CLI and proper board properties, along with Loom Dependencies
+  - curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=/usr/bin sudo sh
+  - arduino-cli core update-index --additional-urls $ADDITIONAL_URLS
+  - arduino-cli core install arduino:samd -v
+  - arduino-cli core install $CORE -v --additional-urls $ADDITIONAL_URLS
+  - mkdir -p $HOME/Arduino/libraries
+  - git clone https://github.com/OPEnSLab-OSU/Loom_Auxiliary.git
+  - unzip ./Loom_Auxiliary/Dependencies/All_Dependencies.zip -d ./Loom_Auxiliary
+  - cp -a ./Loom_Auxiliary/All_Dependencies/. $HOME/Arduino/libraries/
+  - ln -s $PWD $HOME/Arduino/libraries/.
 
 # Build your code e.g. by calling make
 script:
+  #Doxygen
   - doxygen Doxyfile
   - mkdir ToDeploy
   - mv html/ ToDeploy
   - git checkout remotes/origin/gh-pages -- Aux/
   - mv Aux/ ToDeploy
   - echo $'<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n<html><head><meta http-equiv=Refresh content=\"0;url=html/index.html\"></head></html>' > ToDeploy/index.html
+  #Compiles Examples
+script:
+  #Compiling all lab examples
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/Basic
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/Actuators/Relay
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Communication Platforms'/LoRa/Receive
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Communication Platforms'/LoRa/Receive_Blocking
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Communication Platforms'/LoRa/Transmit
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Communication Platforms'/nRF/Receive
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Communication Platforms'/nRF/Transmit
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/Configuration/ConfigOverSerial
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/Configuration/Default_Parameters
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/Configuration/JsonConfig
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/Configuration/LoadConfigSD
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/ExtractValueFromJson
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/InternalTimers
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/AGU/Base
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/Hypnos_SD
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/Hypnos_SD_Sleep
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/Ishield
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/SmartRockLoomSimple
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/Stroud/StroudNode
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Logging Platforms'/OLED
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Logging Platforms'/SD
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/MaxMsp/SimpleMax
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Publishing Platforms'/GoogleSheetsEthernet
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Publishing Platforms'/GoogleSheetsLTE
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Publishing Platforms'/GoogleSheetsRTC
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/'Publishing Platforms'/GoogleSheetsWiFi
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/RTC/BasicRepeatingRTC_DS3231
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/RTC/BasicRepeatingRTC_PCF8523
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/Sensors/ADS1115
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/Sensors/K30
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/Sensors/MMA8451
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/Sensors/MPU6050
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/Sensors/Multiplexer
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/Sleep/Sleep
+  - arduino-cli compile --fqbn $BOARD $PWD/examples/WiFiFirmwareUpdater
+
 
 # Generate and deploy documentation
 deploy:
