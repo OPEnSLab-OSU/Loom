@@ -89,8 +89,6 @@ script:
   - git checkout remotes/origin/gh-pages -- Aux/
   - mv Aux/ ToDeploy
   - echo $'<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n<html><head><meta http-equiv=Refresh content=\"0;url=html/index.html\"></head></html>' > ToDeploy/index.html
-  #Compiles Examples
-script:
   #Compiling all lab examples
   - arduino-cli compile --fqbn $BOARD $PWD/examples/Basic
   - arduino-cli compile --fqbn $BOARD $PWD/examples/Actuators/Relay
