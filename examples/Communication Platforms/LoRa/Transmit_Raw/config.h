@@ -1,0 +1,36 @@
+"{\
+	'general':\
+	{\
+		'name':'LoRa_Raw_Transmit',\
+		'instance':1,\
+		'interval':2000\
+	},\
+	'components':[\
+		{\
+			'name':'LoRa',\
+			'params':[\
+				255,\
+				0,\
+				23,\
+				3,\
+				200\
+			]\
+		},\
+        {\
+            'name':'TSL2591',\
+            'params':'default'\
+        },\
+        {\
+            'name':'SHT31D',\
+            'params':'default'\
+        },\
+        {\
+            'name':'STEMMA',\
+            'params':'default'\
+        },\
+        {\
+            'name':'DS3231',\
+            'params':'default'\
+        }\
+	]\
+}"
