@@ -72,19 +72,19 @@ int Loom_K30::readSensorResponse(byte packet[7]){
 }
 
 void Loom_K30::measure() {
-    sendSensorRequest(read_C02);
-    C02_levels = readSensorResponse(sensor_response);
+    sendSensorRequest(read_CO2);
+    CO2_levels = readSensorResponse(sensor_response);
 }
 
 void Loom_K30::print_measurements() const {
     print_module_label();
     LPrintln("Measurements:");
-    LPrintln("C02 Levels: ", C02_levels);
+    LPrintln("CO2 Levels: ", CO2_levels);
 }
 
 void Loom_K30::package(JsonObject json) {
     JsonObject data = get_module_data_object(json, module_name);
     
-    data["C02"] = C02_levels;
+    data["CO2"] = CO2_levels;
     
 }
