@@ -82,7 +82,7 @@ static bool get_data_point_from_contents_int(const JsonArrayConst& contents, con
 // to unreadable values.
 
 // The reason why we convert that binary code(unreadable values) 
-// can hold more data information than JSON (readable values).
+// is because it hold more data information than JSON (readable values).
 
 //                          Things to know to modify the function
 // 1. Make sure what type of values that the sensor returns.
@@ -233,9 +233,9 @@ static JsonObject make_module_object(const JsonArray& contents, const char* name
 // 1. Change the name from Loom_Base to something you want to use.
 //    However, this name must also match the files in Transmit_Raw.ino and LoomJSON.h
 
-// 2. Insert the following code where it says "You should modify."
+// 2. Insert the following code after it says "You should modify."
 
-    // 2.a Make a new {} under Package Number {} part
+    // 2.a To make a new module, make a new {} under Package Number {} part
 
     // 2.b Inside the {}, write const JsonObject data = make_module_object(contents, "[name]");
     //     While the [name] will be the Sensor name. Make sure to follow the config.h print order
