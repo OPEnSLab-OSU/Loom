@@ -17,7 +17,8 @@ arduino_setup()
 	arduino-cli core install arduino:samd
 
 	# Install Adafruit SAMD board profiles
-	arduino-cli core install adafruit:samd --additional-urls "https://adafruit.github.io/arduino-board-index/package_adafruit_index.json, https://github.com/OPEnSLab-OSU/Loom_Auxiliary/raw/master/package_loom_index.json"
+	arduino-cli core install adafruit:samd --additional-urls https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
+	arduino-cli core install adafruit:samd --additional-urls https://github.com/OPEnSLab-OSU/Loom_Auxiliary/raw/master/package_loom_index.json
 
 	# Create Arduino folder
 	mkdir -p ~/Documents/Arduino/libraries
