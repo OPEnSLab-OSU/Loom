@@ -28,7 +28,7 @@ addons:
 
 install:
   #Installs Ardunio CLI and proper boards
-- curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=/usr/bin sudo sh
+  - curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=/usr/bin sudo sh
   - arduino-cli core update-index --additional-urls $ADDITIONAL_URLS
   - arduino-cli core install arduino:samd -v
   - arduino-cli core install $CORE -v --additional-urls https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
