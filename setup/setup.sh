@@ -4,14 +4,14 @@
 # Download Arduino CLI to assist in installation
 download_arduino_cli()
 {
-	curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=/usr/local/bin sh
+	curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
 }
 
 # Setup Arduino cores and board profiles
 arduino_setup()
 {
 	# Update core index
-	arduino-cli core update-index
+	arduino-cli core update-index --additional-urls https://adafruit.github.io/arduino-board-index/package_adafruit_index.json,https://github.com/OPEnSLab-OSU/Loom_Auxiliary/raw/master/package_loom_index.json
 
 	# Install Arduino SAMD board profiles
 	arduino-cli core install arduino:samd
