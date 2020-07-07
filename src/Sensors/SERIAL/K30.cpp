@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		K30.cpp
-/// @brief		File for K30 Co2 Sensor implementation. 
+/// @brief		File for K30 CO2 Sensor implementation. 
 /// @author		Eli Winkelman and Kenneth Kang
 /// @date		2020
 /// @copyright	GNU General Public License v3.0

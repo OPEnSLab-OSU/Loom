@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		K30.h
-/// @brief		File for K30 Co2 Sensor definition. 
+/// @brief		File for K30 CO2 Sensor definition. 
 /// @author		Eli Winkelman and Kenneth Kang
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
