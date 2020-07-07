@@ -12,6 +12,18 @@
 
 #include "Serial_Sensor.h"
 
+///////////////////////////////////////////////////////////////////////////////
+///
+/// K30 CO2 sensor module.
+///
+/// @par Resources
+/// - [Module Documentation](https://github.com/OPEnSLab-OSU/OPEnS-Lab-Home/wiki/K30-CO2-Sensor-(SE-0018))
+/// - [Product Page: CO2Meter K30 10,000ppm CO2 Sensor](https://www.co2meter.com/products/k-30-co2-sensor-module?variant=8463942)
+/// - [Datasheet: TSL2591](http://co2meters.com/Documentation/Datasheets/DS_SE_0118_CM_0024_Revised9%20(1).pdf)
+/// - [Arduino UART Interface to K30 Sensor](http://co2meters.com/Documentation/Other/AN_SE_0018_AN_126_Revised8.pdf)
+///
+///////////////////////////////////////////////////////////////////////////////
+
 class Loom_K30 : public LoomSerialSensor
 {
     
@@ -33,6 +45,11 @@ protected:
     
     
 public:
+
+//=============================================================================
+///@name	CONSTRUCTORS / DESTRUCTOR
+/*@{*/ //======================================================================
+
     /// Constructor
     /// \param[in]      module_name The name of the module
     /// \param[in]      num_samples The number of samples to take and average
@@ -46,10 +63,19 @@ public:
     /// Destructor
     virtual ~Loom_K30() = default;
     
-    /// Inherited Methods
-    void print_measurements() const override;
-    void measure() override;
-    void package(JsonObject json) override;
+//=============================================================================
+///@name	PRINT INFORMATION
+/*@{*/ //======================================================================
+
+    void        print_measurements()   const override;
+
+
+//=============================================================================
+///@name	OPERATION
+/*@{*/ //======================================================================
+
+    void        measure() override;
+    void        package(JsonObject json) override;
     
 };
 

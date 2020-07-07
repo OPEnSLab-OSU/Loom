@@ -5,6 +5,7 @@
 /// @author		Eli Winkelman and Kenneth Kang
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
+/// Abstract root for Serial/UART sensor modules.
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
