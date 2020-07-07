@@ -27,20 +27,15 @@ Loom_LTE::Loom_LTE(
   , gprsPass(pass)
   , powerPin(analog_pin)
   , m_base_client(modem)
-  , m_client(m_base_client, TAs, (size_t)TAs_NUM, A5, 1, SSLClient::SSL_INFO)
+  , m_client(m_base_client, TAs, (size_t)TAs_NUM, A7, 1, SSLClient::SSL_INFO)
 {
 
   //sets baud rate for SARA-R4 and restarts module
   SerialAT.begin(115200);
   //Uses Analog pin wired to Pin 5 on LTE shield to turn on the LTE shield.
   pinMode(powerPin, OUTPUT);
-  digitalWrite(powerPin, HIGH);
-  delay(5000);
-  digitalWrite(powerPin, LOW);
-  delay(5000);
-  //Restarts the LTE.
-  modem.restart();
-  delay(1000);
+  power_up();
+
 
 
 
@@ -138,6 +133,27 @@ void Loom_LTE::print_state() const
   LPrintln("\tSignal State : ", modem.getSignalQuality()); //Signal quality report
   LPrintln("\tIP Address : ", modem.localIP());
 
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_LTE::power_up()
+{
+  if(!is_connected()){
+    LPrintln("Power up function");
+    digitalWrite(powerPin, LOW);
+    delay(10000);
+    modem.restart();
+    delay(10000);
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_LTE::power_down()
+{
+  LPrintln("Power down function");
+  modem.poweroff();
+  digitalWrite(powerPin, HIGH);
+  delay(5000);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
