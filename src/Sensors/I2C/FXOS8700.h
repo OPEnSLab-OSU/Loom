@@ -27,6 +27,7 @@
 /// - [Dependency: Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS)
 /// - [Dependency: Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
 /// - [Datasheet: FXOS8700CQ](https://cdn-learn.adafruit.com/assets/assets/000/043/458/original/FXOS8700CQ.pdf?1499125614)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#fxos8700-3-axis-accelerometermagentometer)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_FXOS8700 : public LoomI2CSensor

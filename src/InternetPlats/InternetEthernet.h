@@ -28,6 +28,7 @@
 /// - [Product Page: Adafruit Ethernet Featherwing](https://www.adafruit.com/product/3201)
 /// - [Dependency: EthernetLarge](https://github.com/OPEnSLab-OSU/EthernetLarge) OPEbS Lab fork of Arduino Ethernet library
 /// - [Dependency: SSLClient](https://github.com/OPEnSLab-OSU/SSLClient)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ethernet)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Ethernet : public LoomInternetPlat

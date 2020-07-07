@@ -20,6 +20,7 @@
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___decagon5_t_m.html)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sdi-12-sensors)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Decagon5TM : public LoomSDI12Sensor

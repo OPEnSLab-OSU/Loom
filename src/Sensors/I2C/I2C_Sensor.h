@@ -21,6 +21,7 @@
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_i2_c_sensor.html)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#i2c-sensors)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class LoomI2CSensor : public LoomSensor

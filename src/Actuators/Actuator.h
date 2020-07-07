@@ -22,6 +22,7 @@
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_actuator.html)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#actuators)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class LoomActuator : public LoomModule

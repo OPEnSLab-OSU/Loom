@@ -31,6 +31,7 @@
 /// - [Dependency: Adafruit-PWM-Servo-Driver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
 /// - [Datasheet](https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf)
 /// - [Product Page: Adafruit Servo](https://www.adafruit.com/product/169)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#servos-8-channel-pwm-or-servo-featherwing)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Servo : public LoomActuator

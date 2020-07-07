@@ -23,6 +23,7 @@
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_r_t_c.html)
 /// - [Dependency: OPEnS_RTC](https://github.com/OPEnSLab-OSU/OPEnS_RTC)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#data-logging)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class LoomRTC : public LoomModule

@@ -25,6 +25,7 @@
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___digital.html)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#spi-sensors)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Digital : public LoomSensor

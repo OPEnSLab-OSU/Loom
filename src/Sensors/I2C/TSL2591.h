@@ -26,6 +26,7 @@
 /// - [Dependency: Adafruit_TSL2591_Library](https://github.com/adafruit/Adafruit_TSL2591_Library)
 /// - [Dependency: Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
 /// - [Datasheet: TSL2591](https://cdn-shop.adafruit.com/datasheets/TSL25911_Datasheet_EN_v1.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#tsl2591-light-sensor)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_TSL2591 : public LoomI2CSensor

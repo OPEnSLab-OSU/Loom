@@ -27,6 +27,7 @@
 /// - [Dependency: Adafruit_MMA8451_Library](https://github.com/adafruit/Adafruit_MMA8451_Library)
 /// - [Dependency: Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
 /// - [Datasheet: Xtrinsic MMA8451Q 3-Axis, 14-bit/8-bit Digital Accelerometer](https://cdn-shop.adafruit.com/datasheets/MMA8451Q-1.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mma8451-triple-axis-accelerometer)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MMA8451 : public LoomI2CSensor

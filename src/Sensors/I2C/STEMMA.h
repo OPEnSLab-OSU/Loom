@@ -9,7 +9,9 @@
 ///
 /// @par Resources
 /// - [Product Page: https://learn.adafruit.com/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor/arduino-test]
+///	- [Hardware Support](Missing)
 ///
+//////////////////////////////////////////////////////////////////////////////
 
 class Loom_STEMMA : public LoomI2CSensor
 {

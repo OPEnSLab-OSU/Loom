@@ -30,6 +30,7 @@
 /// - [Product Page: Adafruit Adalogger Featherwing](https://www.adafruit.com/product/2922)
 /// - [Product Page: Adafruit SD Breakout](https://www.adafruit.com/product/254)
 /// - [Dependency: SD](https://github.com/arduino-libraries/SD)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sd-card)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_SD : public LoomLogPlat

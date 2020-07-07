@@ -27,6 +27,7 @@
 /// - [Product Page: Sparkfun ZX Distance and Gesture Sensor](https://www.sparkfun.com/products/13162)
 /// - [Dependency: SparkFun ZX Distance and Gesture Sensor Arduino Library](https://github.com/sparkfun/SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library)
 /// - [Datasheet: ZX SparkFun Sensor Datasheet](https://cdn.sparkfun.com/assets/learn_tutorials/3/4/5/XYZ_Interactive_Technologies_-_ZX_SparkFun_Sensor_Datasheet.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#zx-distance-and-gesture-sensor)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_ZXGesture : public LoomI2CSensor
