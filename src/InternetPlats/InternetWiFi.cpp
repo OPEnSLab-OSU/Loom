@@ -11,11 +11,11 @@
 #include "InternetWiFi.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_WiFi::Loom_WiFi(	
+Loom_WiFi::Loom_WiFi(
 		LoomManager* manager,
 		const char* 	ssid,
 		const char* 	pass
-	) 
+	)
 	: LoomInternetPlat(manager, "WiFi", Type::WiFi )
 	, SSID(ssid)
 	, pass(pass)
@@ -23,8 +23,8 @@ Loom_WiFi::Loom_WiFi(
 	, m_client(m_base_client, TAs, (size_t)TAs_NUM, A7, 1, SSLClient::SSL_INFO)
 {
 	// Configure pins for Adafruit ATWINC1500 Feather
-	WiFi.setPins(8,7,4,2);      
-		
+	WiFi.setPins(8,7,4,2);
+
 	// Check for the presence of the shield, else disable WiFi module
 	if (WiFi.status() == WL_NO_SHIELD) {
 		print_module_label();
@@ -54,7 +54,7 @@ void Loom_WiFi::connect()
 
 		// Check if password provided
 		if (pass == nullptr || pass[0] == '\0' ) {
-			status = WiFi.begin(SSID);			
+			status = WiFi.begin(SSID);
 		} else {
 			status = WiFi.begin(SSID, pass);
 		}
@@ -94,7 +94,7 @@ bool Loom_WiFi::is_connected() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::UDPPtr Loom_WiFi::open_socket(const uint port) 
+LoomInternetPlat::UDPPtr Loom_WiFi::open_socket(const uint port)
 {
 	// create the unique pointer
 	UDPPtr ptr = UDPPtr(new WiFiUDP());
@@ -117,9 +117,9 @@ void Loom_WiFi::print_state() const
 	LoomInternetPlat::print_state();
 	const char* text = m_wifi_status_to_string(WiFi.status());
 	if (text != nullptr)
-		LPrintln("\tWireless state      :", text );	
+		LPrintln("\tWireless state      :", text );
 	else
-	LPrintln("\tWireless state      :", WiFi.status() );	
+	LPrintln("\tWireless state      :", WiFi.status() );
 	LPrintln("\tConnected:          : ", (is_connected()) ? "True" : "False" );
 	LPrintln("\tSSID:               : ", SSID );
 	LPrintln("\tRSSi:               : ", WiFi.RSSI(), " dBm" );
@@ -141,6 +141,19 @@ const char* Loom_WiFi::m_wifi_status_to_string(const uint8_t status) {
 		// AP states (WL_AP_* and WL_PROVISIONING_*) are ignored for now
 		default: return nullptr;
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_WiFi::package(JsonObject json)
+{
+	//JsonObject data = get_module_data_object(json, module_name);
+	auto ip = IPAddress(WiFi.localIP());
+	JsonArray tmp = json["id"].createNestedArray("ip");
+	tmp.add(ip[0]);
+	tmp.add(ip[1]);
+	tmp.add(ip[2]);
+	tmp.add(ip[3]);
+	//data["IP"] = WiFi.localIP();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

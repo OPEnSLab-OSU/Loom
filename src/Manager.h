@@ -147,7 +147,7 @@ protected:
 	char		device_name[20];	///< The name of the device
 	uint8_t		instance;			///< The instance / channel ID within the subnet
 
-	uint16_t	interval;			///< Default value for pause()/nap().
+	uint16_t	interval;			///< Default value for pause()
 									///< Used so that manager can control interval, rather than code in .ino
 
 	/// Device type (Hub / Node)
@@ -182,7 +182,7 @@ public:
 	/// @param[in]	device_type					Set(DeviceType) | <1> | {0("Hub"), 1("Node"), 2("Repeater")} | Device's topological type
 	/// @param[in]	print_verbosity				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
 	/// @param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
-	/// @param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause/nap for
+	/// @param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause
 	LoomManager(
 			const FactoryBase*		factory_ptr,
 			const char*			device_name			= "Device",
@@ -274,17 +274,6 @@ public:
 	/// Iterate over list of commands, forwarding to handling module.
 	/// Uses internal json
 	void		dispatch() { dispatch( internal_json() ); }
-
-	/// Pause for up to 16000 milliseconds.
-	/// You can use this instead of delay to put the device into a
-	/// semi-low power state.
-	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
-	/// @param[in]	ms	Number of milliseconds to pause
-	void		nap(const uint16_t ms) const;
-
-	/// Pause for up to 16000 milliseconds.
-	/// Uses interval member as value
-	void		nap() const { nap(interval); }
 
 	/// Delay milliseconds.
 	void		pause(const uint16_t ms) const { delay(ms); }
@@ -544,7 +533,7 @@ public:
 	// SPI
 	Loom_MAX31855&		MAX31855(const uint8_t idx = 0);
 	Loom_MAX31856&		MAX31856(const uint8_t idx = 0);
-    
+
     //SERIAL
     Loom_K30&           K30(const uint8_t idx = 0);
 
