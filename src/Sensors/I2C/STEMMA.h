@@ -9,7 +9,7 @@
 ///
 /// @par Resources
 /// - [Product Page: https://learn.adafruit.com/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor/arduino-test]
-///	- [Hardware Support](Missing)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#stemma-soil-sensor)
 ///
 //////////////////////////////////////////////////////////////////////////////
 
