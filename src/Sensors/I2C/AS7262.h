@@ -27,6 +27,7 @@
 /// - [Hookup Guide: AS726X NIR/VIS Spectral Sensor](https://learn.sparkfun.com/tutorials/as726x-nirvi)
 /// - [Hardware GitHub](https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X)
 /// - [Datasheet: AS7262](https://cdn.sparkfun.com/assets/f/b/c/c/f/AS7262.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7262-spectral-sensor-visible)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_AS7262 : public LoomI2CSensor

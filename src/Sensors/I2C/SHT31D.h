@@ -25,6 +25,7 @@
 /// - [Product Page: Adafruit Sensirion SHT31-D - Temperature & Humidity Sensor](https://www.adafruit.com/product/2857)
 /// - [Dependency: Adafruit_SHT31](https://github.com/adafruit/Adafruit_SHT31)
 /// - [Datasheet: Datasheet SHT3x-DIS](https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sht31-d-temperature--humidity)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_SHT31D : public LoomI2CSensor

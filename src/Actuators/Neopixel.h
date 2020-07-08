@@ -24,6 +24,7 @@
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___neopixel.html)
 /// - [Product Page: Adafruit Neopixel](https://www.adafruit.com/category/168)
 /// - [Dependency](https://github.com/adafruit/Adafruit_NeoPixel)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#neopixel)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Neopixel : public LoomActuator

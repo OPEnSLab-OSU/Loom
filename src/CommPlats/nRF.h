@@ -28,6 +28,7 @@
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom__n_r_f.html)
 /// - [Dependency: RF24](https://github.com/nRF24/RF24) optimized fork
 /// - [Dependency: RF24Network](https://github.com/nRF24/RF24Network) optimized fork
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#nrf)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_nRF : public LoomCommPlat

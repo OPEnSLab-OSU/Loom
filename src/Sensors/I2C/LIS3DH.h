@@ -29,6 +29,7 @@
 /// - [Hookup Guide: LIS3DH](https://learn.sparkfun.com/tutorials/lis3dh-hookup-guide)
 /// - [Hardware GitHub](https://github.com/sparkfun/LIS3DH_Breakout)
 /// - [Datasheet: LIS3DH](https://cdn.sparkfun.com/assets/f/b/c/c/f/AS7262.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#lis3dh-accelerometer)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_LIS3DH : public LoomI2CSensor

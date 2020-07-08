@@ -27,6 +27,7 @@
 /// - [Dependency: Adafruit_AHRS](https://github.com/adafruit/Adafruit_AHRS)
 /// - [Dependency: Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
 /// - [Datasheet: 3-Axis Digital Angular Rate Gyroscope](https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#fxas21002-3-axis-gyroscope)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_FXAS21002 : public LoomI2CSensor

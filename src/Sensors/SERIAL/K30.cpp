@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		K30.h
-/// @brief		File for K30 Co2 Sensor implementation. 
+/// @file		K30.cpp
+/// @brief		File for K30 CO2 Sensor implementation. 
 /// @author		Eli Winkelman and Kenneth Kang
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
@@ -23,9 +23,13 @@ Loom_K30::Loom_K30(LoomManager* manager,
 
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 Loom_K30::Loom_K30(LoomManager* manager, JsonArrayConst p)
 : Loom_K30(manager, EXPAND_ARRAY(p, 2))
 {}
+
+///////////////////////////////////////////////////////////////////////////////
 
 void Loom_K30::sendSensorRequest(byte request[7]) {
     
@@ -38,7 +42,7 @@ void Loom_K30::sendSensorRequest(byte request[7]) {
     delay(100);
     while (!sensor_serial -> available()) //keep sending request until we start to get a response
     {
-        LPrintln("Sensor_Serial Unavailable, Trying to send request again");  // TODO:This doesn't make sense: in line 41 and line 49 
+        LPrintln("Sensor_Serial Available, Retrieving Response");  // TODO:This doesn't make sense: in line 41 and line 49 
         sensor_serial -> write(request, 7);
         delay(50);
     }
@@ -46,7 +50,7 @@ void Loom_K30::sendSensorRequest(byte request[7]) {
     int timeout = 0; //set a timeoute counter
     while (sensor_serial -> available() < 7 ) //Wait to get a 7 byte response
     {
-        LPrintln("Sensor_Serial Available, Retrieving Response");
+        LPrintln("Sensor_Serial Unavailable, Trying to send request again");
         timeout++;
         if (timeout > 10)   //if it takes to long there was probably an error
         {
@@ -63,6 +67,8 @@ void Loom_K30::sendSensorRequest(byte request[7]) {
     LPrintln("Finished Sending Request to K30 sensor");
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 int Loom_K30::readSensorResponse(byte packet[7]){
     int high = packet[3];                        //high byte for value is 4th byte in packet in the packet
     int low = packet[4];                         //low byte for value is 5th byte in the packet
@@ -71,20 +77,28 @@ int Loom_K30::readSensorResponse(byte packet[7]){
     
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 void Loom_K30::measure() {
-    sendSensorRequest(read_C02);
-    C02_levels = readSensorResponse(sensor_response);
+    sendSensorRequest(read_CO2);
+    CO2_levels = readSensorResponse(sensor_response);
 }
+
+///////////////////////////////////////////////////////////////////////////////
 
 void Loom_K30::print_measurements() const {
     print_module_label();
     LPrintln("Measurements:");
-    LPrintln("C02 Levels: ", C02_levels);
+    LPrintln("CO2 Levels: ", CO2_levels);
 }
+
+///////////////////////////////////////////////////////////////////////////////
 
 void Loom_K30::package(JsonObject json) {
     JsonObject data = get_module_data_object(json, module_name);
     
-    data["C02"] = C02_levels;
+    data["CO2"] = CO2_levels;
     
 }
+
+///////////////////////////////////////////////////////////////////////////////

@@ -28,6 +28,7 @@
 /// - [Product Page: Adafruit Feather M0 WiFi](https://www.adafruit.com/product/3010)
 /// - [Dependency: WiFi201](https://github.com/OPEnSLab-OSU/WiFi201) OPEbS Lab fork of Arduino WiFi101 library
 /// - [Dependency: WiFi101](https://github.com/arduino-libraries/WiFi101)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#wifi)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_WiFi : public LoomInternetPlat

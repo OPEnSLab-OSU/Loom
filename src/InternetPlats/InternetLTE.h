@@ -29,6 +29,7 @@
 /// - [Product Page: Adafruit Feather M0 Bluefruit LE](https://www.adafruit.com/product/2995)
 /// - [Dependency: TinyGSM](https://github.com/vshymanskyy/TinyGSM)
 /// - [Dependency: ArduinoHttpClient](//https://github.com/arduino-libraries/ArduinoHttpClient)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#cellular)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 

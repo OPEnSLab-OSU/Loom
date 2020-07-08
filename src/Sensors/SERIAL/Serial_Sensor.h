@@ -12,6 +12,13 @@
 
 #include "../Sensor.h"
 
+///////////////////////////////////////////////////////////////////////////////
+///
+/// Abstract root for Serial/UART sensor modules.
+/// @par Resources
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#serial-sensors)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomSerialSensor : public LoomSensor {
 
 protected:

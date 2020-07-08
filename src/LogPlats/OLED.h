@@ -26,6 +26,7 @@
 /// - [Product Page: Adafruit Monochrome 128x32 I2C OLED](https://www.adafruit.com/product/2927)
 /// - [Dependency: Adafruit_SSD1306](https://github.com/adafruit/Adafruit_SSD1306)
 /// - [Dependency: Adafruit-GFX-Library](https://github.com/adafruit/Adafruit-GFX-Library)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#oled-display)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_OLED : public LoomLogPlat

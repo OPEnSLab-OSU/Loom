@@ -26,6 +26,7 @@
 /// - [Dependency: Adafruit_TSL2561](https://github.com/adafruit/Adafruit_TSL2561)
 /// - [Dependency: Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
 /// - [Datasheet: Light-To-Digital Converter](https://cdn-shop.adafruit.com/datasheets/TSL2561.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#tsl2561-luminosity-sensor)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_TSL2561 : public LoomI2CSensor

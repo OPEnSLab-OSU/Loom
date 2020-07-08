@@ -28,6 +28,7 @@
 /// - [Dependency: MPU6050_tockn](https://github.com/tockn/MPU6050_tockn)
 /// - [Previous Dependency: MPU6050](https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/MPU6050)
 /// - [Datasheet: MPU6050](https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mpu6050-accelerometer--gyroscope)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MPU6050 : public LoomI2CSensor
