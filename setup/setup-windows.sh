@@ -20,6 +20,8 @@ arduino_setup()
 	arduino-cli core install adafruit:samd@1.5.7 --additional-urls https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
 	arduino-cli core install loom:samd --additional-urls https://github.com/OPEnSLab-OSU/Loom_Auxiliary/raw/master/package_loom_index.json
 
+	echo "boardsmanager.additional.urls=https://adafruit.github.io/arduino-board-index/package_adafruit_index.json,https://github.com/OPEnSLab-OSU/Loom_Auxiliary/raw/master/package_loom_index.json" > $LOCALAPPDATA/Arduino15/preferences.txt
+
 	# Create Arduino folder
 	mkdir -p ~/Documents/Arduino/libraries
 }
