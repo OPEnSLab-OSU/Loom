@@ -1,6 +1,6 @@
 # This will run on Travis' 'new' container-based infrastructure
 sudo: false
-language: c
+language: python
 env:
   global:
     - ADDITIONAL_URLS="https://adafruit.github.io/arduino-board-index/package_adafruit_index.json,https://github.com/OPEnSLab-OSU/Loom_Auxiliary/raw/master/package_loom_index.json"
@@ -37,29 +37,6 @@ install:
 
 jobs:
   include:
-    - stage: "Doxygen"
-      install:
-        # To allow access to gh-pages branch
-        - git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
-        - git fetch --unshallow --tags
-      # Build your code e.g. by calling make
-      script:
-        - doxygen Doxyfile
-        - mkdir ToDeploy
-        - mv html/ ToDeploy
-        - git checkout remotes/origin/gh-pages -- Aux/
-        - mv Aux/ ToDeploy
-        - echo $'<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n<html><head><meta http-equiv=Refresh content=\"0;url=html/index.html\"></head></html>' > ToDeploy/index.html
-        # Generate and deploy documentation
-      deploy:
-        provider: pages
-        skip_cleanup: true
-        local_dir: ToDeploy
-        github_token: $GH_REPO_TOKEN
-        target_branch: gh-pages
-        on:
-          branch: master
-
     - stage: "Basic"
       script:
         - arduino-cli compile --warnings all --fqbn $BOARD $PWD/examples/Basic
@@ -109,3 +86,29 @@ jobs:
         - arduino-cli compile --fqbn $BOARD $PWD/examples/Sensors/Multiplexer
         - arduino-cli compile --fqbn $BOARD $PWD/examples/Sleep/Sleep
         - arduino-cli compile --fqbn $BOARD $PWD/examples/WiFiFirmwareUpdater
+
+    - stage: "Doxygen"
+      before_install:
+        - export PYTHONPATH=$PYTHONPATH:$(pwd)
+      install:
+        - git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+        - git fetch --tags
+        - git clone git://github.com/mosra/m.css
+        - pip install jinja2 Pygments
+      script:
+        - mkdir ToDeploy
+        - doxygen Doxyfile
+        - mv doxygenV2/html ToDeploy
+        - python ./m.css/documentation/doxygen.py ./Doxyfile-mcss
+        - mv doxygenV2/ ToDeploy
+        - git checkout remotes/origin/gh-pages -- Aux/
+        - mv Aux/ ToDeploy
+        - echo $'<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n<html><head><meta http-equiv=Refresh content=\"0;url=doxygenV2/html/index.html\"></head></html>' > ToDeploy/index.html
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        local_dir: ToDeploy
+        github_token: $GH_REPO_TOKEN
+        target_branch: gh-pages
+        on:
+          branch: master
