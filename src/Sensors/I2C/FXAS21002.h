@@ -18,7 +18,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// FXAS21002 3-Axis Gyroscope snesor module.
+/// FXAS21002 3-Axis Gyroscope sensor module.
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___f_x_a_s21002.html)
