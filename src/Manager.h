@@ -69,6 +69,7 @@ class Loom_MAX31856;
 
 // SERIAL
 class Loom_K30;
+class Loom_RFID;
 
 // CommPlats
 class Loom_LoRa;
@@ -536,7 +537,7 @@ public:
 	Loom_TSL2561&		TSL2561(const uint8_t idx = 0);
 	Loom_TSL2591&		TSL2591(const uint8_t idx = 0);
 	Loom_ZXGesture&		ZXGesture(const uint8_t idx = 0);
-    Loom_STEMMA&        STEMMA(const uint8_t idx = 0);
+  Loom_STEMMA&        STEMMA(const uint8_t idx = 0);
 	// SDI12
 	Loom_Decagon5TM&	Decagon5TM(const uint8_t idx = 0);
 	Loom_DecagonGS3&	DecagonGS3(const uint8_t idx = 0);
@@ -544,9 +545,10 @@ public:
 	// SPI
 	Loom_MAX31855&		MAX31855(const uint8_t idx = 0);
 	Loom_MAX31856&		MAX31856(const uint8_t idx = 0);
-    
-    //SERIAL
-    Loom_K30&           K30(const uint8_t idx = 0);
+
+  //SERIAL
+  Loom_K30&           K30(const uint8_t idx = 0);
+	Loom_RFID&          RFID(const uint8_t idx = 0);
 
 protected:
 

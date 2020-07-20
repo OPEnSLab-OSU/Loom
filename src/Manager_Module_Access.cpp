@@ -112,7 +112,7 @@ Loom_Ethernet& LoomManager::Ethernet(const uint8_t idx)
 	return (*(Loom_Ethernet*)( (tmp) ? tmp : nullptr ));
 }
 
-Loom_WiFi& LoomManager::WiFi(const uint8_t idx) 
+Loom_WiFi& LoomManager::WiFi(const uint8_t idx)
 {
 	LoomModule* tmp = find_module(LoomModule::Type::WiFi, idx);
 	return (*(Loom_WiFi*)( (tmp) ? tmp : nullptr ));
@@ -352,6 +352,12 @@ Loom_K30& LoomManager::K30(const uint8_t idx)
 {
     LoomModule* tmp = find_module(LoomModule::Type::K30, idx);
     return (*(Loom_K30*)( (tmp) ? tmp : nullptr ));
+}
+
+Loom_RFID& LoomManager::RFID(const uint8_t idx)
+{
+    LoomModule* tmp = find_module(LoomModule::Type::RFID, idx);
+    return (*(Loom_RFID*)( (tmp) ? tmp : nullptr ));
 }
 
 
