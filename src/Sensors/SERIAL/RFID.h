@@ -56,7 +56,7 @@ public:
  } tag;
 
 protected:
-  boolean     setupNano();
+  bool     setupNano();
   void        moistureTagMeasurement();
   void        addNewTag(int i, byte EPCHeader, byte EPCFertigate);
   void        updateData(int i, int rssi, long freq, long moisture, byte tagEPCBytes, byte EPCFertigate);

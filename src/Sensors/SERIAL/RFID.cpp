@@ -72,7 +72,7 @@ Loom_RFID::~Loom_RFID(){
 
 ///////////////////////////////////////////////////////////////////////////////
 
-boolean Loom_RFID::setupNano(){
+bool Loom_RFID::setupNano(){
   delay(200);
   nano.enableDebugging();
   nano.begin(rfid_serial);
@@ -148,7 +148,6 @@ void Loom_RFID::updateData(int i, int rssi, long freq, long moisture, byte tagEP
 ///////////////////////////////////////////////////////////////////////////////
 
 void Loom_RFID::measure(){
-  LPrintln("Measuring definitely happened here");
   switch (type)
   {
     case MeasureType::Moisture:
