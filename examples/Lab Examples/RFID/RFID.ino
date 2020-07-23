@@ -17,7 +17,7 @@
 #include <Loom.h>
 
 #define RELAY_SWITCH A0
-#define FERTIGATE_SWITCH A2
+//#define FERTIGATE_SWITCH A2
 #define RELAY_RSSI_THRESHOLD -80
 #define RSSI_THRESHOLD -60
 #define WET 16
@@ -47,23 +47,41 @@ LoomManager Loom{ &ModuleFactory };
 char color[10];
 int sketch_index=-1;
 bool _debug_serial = true;
+bool results = false;
+Loom_RFID* rfid;
+//uint8_t fertigate_state = 0;
 
 void setup()
 {
+	pinMode(RELAY_SWITCH, OUTPUT);
+	//pinMode(FERTIGATE_SWITCH, INPUT_PULLUP);
+
   Loom.begin_serial(true);
 	Loom.parse_config(json_config);
 	Loom.print_config();
 	LPrintln("\n ** Setup Complete ** ");
+
+	rfid = (Loom_RFID*)Loom.find_module(LoomModule::Type::RFID);
 }
 
 void loop()
 {
+	//readFertigateSwitch();
   Loom.measure();
-  sketch_index = Loom.RFID().getTagIndex();
-	LPrintln("Tag Index Measured: ", sketch_index);
-  if(Loom.RFID().isUpdatedIndex()) state_machine(sketch_index);
-  else LPrintln("State machine not invoked");
-  if(sketch_index!=-1) setColor(Loom.RFID().getTag(sketch_index));
+ 	sketch_index = rfid->getTagIndex();
+	if(sketch_index!=-1){
+		Loom_RFID::tag found_tag = rfid->getTag(sketch_index);
+		results = rfid->isUpdatedIndex();
+		LPrintln("Tag Index Measured: ", sketch_index);
+	  //if((results && !fertigate_state) || (results && found_tag.fertigate == 0xFF))
+		if(results)
+			state_machine(found_tag, sketch_index);
+	  else LPrintln("State machine not invoked");
+
+		int moisture = found_tag.moisture, rssi = found_tag.rssi;
+		setColor(moisture, rssi);
+	}
+	else if(rfid->get_error_counter() < 10) setColor(-1, -1);
 
 	// Figure out where all of this code will go?
   // Loom.package();
@@ -72,8 +90,7 @@ void loop()
   // Loom.pause();
 }
 
-void setColor(Loom_RFID::tag found_tag){
-  int moisture = found_tag.moisture, rssi = found_tag.rssi;
+void setColor(int moisture, int rssi){
   if(moisture >= 0 && rssi >= RSSI_THRESHOLD){
       if(moisture <= WET){
            for(int i = 0; i < NUMPIXELS; i++){
@@ -109,9 +126,17 @@ void turnOffRelay(){
 	digitalWrite(RELAY_SWITCH, LOW);
 }
 
+//void readFertigateSwitch(){
+//	if(digitalRead(FERTIGATE_SWITCH) == HIGH){
+//		fertigate_state = 1;
+//	}
+//	else{
+//		fertigate_state = 0;
+//	}
+//}
 
-void state_machine(int i){
-  Loom_RFID::tag found_tag = Loom.RFID().getTag(i);
+
+void state_machine(Loom_RFID::tag found_tag, int i){
 
   switch(found_tag.state){
     case Loom_RFID::State::COMPARE_THRESHOLD:
@@ -128,7 +153,7 @@ void state_machine(int i){
                  LPrintln();
               }
               found_tag.state = Loom_RFID::State::DRY_CYCLE;
-              Loom.RFID().setTag(i, found_tag);
+              rfid->setTag(i, found_tag);
            }
            else if(found_tag.threshold == MIN_VALUE){
               if(_debug_serial){
@@ -136,7 +161,7 @@ void state_machine(int i){
                  LPrintln();
               }
               found_tag.state = Loom_RFID::State::WET_CYCLE;
-              Loom.RFID().setTag(i, found_tag);
+              rfid->setTag(i, found_tag);
            }
 
            break;
@@ -160,7 +185,7 @@ void state_machine(int i){
            	 if(found_tag.rssi > RELAY_RSSI_THRESHOLD){
               	turnOnRelay();
               	found_tag.state = Loom_RFID::State::COMPARE_THRESHOLD;
-                Loom.RFID().setTag(i, found_tag);
+                rfid->setTag(i, found_tag);
            	 }
            	 else
            	 	turnOffRelay();
@@ -168,7 +193,7 @@ void state_machine(int i){
            else if(found_tag.moisture <= found_tag.threshold){
               found_tag.threshold = MAX_VALUE;
               found_tag.state = Loom_RFID::State::COMPARE_THRESHOLD;
-              Loom.RFID().setTag(i, found_tag);
+              rfid->setTag(i, found_tag);
               turnOffRelay();
            }
 
@@ -192,17 +217,17 @@ void state_machine(int i){
             if(found_tag.moisture > found_tag.threshold){
             	  if(found_tag.rssi > RELAY_RSSI_THRESHOLD){
             	  		found_tag.threshold = MIN_VALUE;
-                    Loom.RFID().setTag(i, found_tag);
+                    rfid->setTag(i, found_tag);
                 		turnOnRelay();
                 		found_tag.state = Loom_RFID::State::COMPARE_THRESHOLD;
-                    Loom.RFID().setTag(i, found_tag);
+                    rfid->setTag(i, found_tag);
 
             	  }
 
             }
             else if(found_tag.moisture <= found_tag.threshold){
               found_tag.state = Loom_RFID::State::COMPARE_THRESHOLD;
-              Loom.RFID().setTag(i, found_tag);
+              rfid->setTag(i, found_tag);
               turnOffRelay();
             }
   }

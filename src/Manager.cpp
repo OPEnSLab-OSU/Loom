@@ -26,7 +26,7 @@
 #include "NTP_Sync.h"
 //#include "I2Cdev.h"
 
-#include <Adafruit_SleepyDog.h>
+
 #include <ArduinoJson.h>
 #include <SdFat.h>
 #include <algorithm>
@@ -45,12 +45,12 @@ const char* LoomManager::enum_device_type_string(const DeviceType t)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomManager::LoomManager( 
+LoomManager::LoomManager(
 		const FactoryBase*			factory_ptr,
-		const char*				device_name, 
-		const uint8_t			instance, 
-		const DeviceType		device_type, 
-		const Verbosity			print_verbosity, 
+		const char*				device_name,
+		const uint8_t			instance,
+		const DeviceType		device_type,
+		const Verbosity			print_verbosity,
 		const Verbosity			package_verbosity,
 		const uint16_t			interval
 	)
@@ -65,13 +65,13 @@ LoomManager::LoomManager(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomManager::~LoomManager() 
+LoomManager::~LoomManager()
 {
 	free_modules();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::print_config(const bool print_modules_config) 
+void LoomManager::print_config(const bool print_modules_config)
 {
 	print_device_label();
 	LPrintln("Config:");
@@ -86,7 +86,7 @@ void LoomManager::print_config(const bool print_modules_config)
 	if (print_modules_config) {
 		for (auto module : modules) {
 			module->print_config();
-		} 
+		}
 	}
 }
 
@@ -96,7 +96,7 @@ void LoomManager::begin_serial(const bool wait_for_monitor) const
 	Serial.begin(SERIAL_BAUD);
 
 	if (wait_for_monitor) {
-		unsigned long start = millis();	
+		unsigned long start = millis();
 		while( !Serial && ((millis() - start) < MAX_SERIAL_WAIT) );
 		delay(1000);
 	}
@@ -142,7 +142,7 @@ void LoomManager::list_modules() const
 		if ( module != nullptr ) {
 			LPrintln( "\t\t[", module->get_active() ? "+" : "-" , "] ", module->get_module_name() );
 		}
-	}	
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -154,7 +154,7 @@ void LoomManager::set_device_name(const char* device_name)
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::get_device_name(char* buf) const
 {
-	sprintf(buf, "%s", device_name); 
+	sprintf(buf, "%s", device_name);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -189,14 +189,14 @@ void LoomManager::set_package_verbosity(const Verbosity v, const bool set_module
 			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
 				((LoomModule*)module)->set_package_verbosity(v);
 			}
-		}	
+		}
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::measure()
-{	
-	for (auto module : modules) {	
+{
+	for (auto module : modules) {
 		if ( !module->get_active() ) continue;
 
 		if ( module->category() == LoomModule::Category::Sensor ) {
@@ -205,7 +205,7 @@ void LoomManager::measure()
 		else if (
 			(module->get_module_type() == LoomModule::Type::Multiplexer) ) {
 			((Loom_Multiplexer*)module)->measure();
-		} 
+		}
 		else if (module->get_module_type() == LoomModule::Type::NTP) {
 			((LoomNTPSync*)module)->measure();
 		}
@@ -216,14 +216,14 @@ void LoomManager::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::package(JsonObject json) 
+void LoomManager::package(JsonObject json)
 {
 	// Add device identification to json
 	add_device_ID_to_json(json);
 
 	// Add a packet number to json
 	add_data("Packet", "Number", packet_number++);
-	
+
 	for (auto module : modules) {
 		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
 			((LoomModule*)module)->package( json );
@@ -257,13 +257,13 @@ void LoomManager::add_device_ID_to_json(JsonObject json)
 JsonObject LoomManager::internal_json(const bool clear)
 {
 	if (clear) {
-		// doc.clear(); 
+		// doc.clear();
 		return doc.to<JsonObject>(); // clears in the process
 	} else {
 		return doc.as<JsonObject>();
 	}
 
-	
+
 	// doc["type"] = "unknown"; // JsonObject::set wont work if there is not anything in object
 	// LPrintln("\nDOC MemoryUsage in internal_json: ", doc.memoryUsage());
 
@@ -279,7 +279,7 @@ bool LoomManager::publish_all(const JsonObject json)
 	for (auto module : modules) {
 		if ( (module != nullptr) &&
 			 (module->category() == LoomModule::Category::PublishPlat) &&
-			 (module->get_active()) 
+			 (module->get_active())
 			) {
 			result &= ((LoomPublishPlat*)module)->publish( json );
 			count++;
@@ -303,7 +303,7 @@ void LoomManager::dispatch(JsonObject json)
 		// For each command
 		for ( JsonObject cmd : json["commands"].as<JsonArray>() ) {
 
-			// Check if command is for manager 
+			// Check if command is for manager
 			if ( strcmp(cmd["module"].as<const char*>(), "Manager" ) == 0) {
 				if (dispatch_self(cmd)) break;
 			}
@@ -311,7 +311,7 @@ void LoomManager::dispatch(JsonObject json)
 			// Otherwise iterate over modules until module to handle command is found
 			// LPrintln("Try to dispatch to: ", cmd["module"].as<const char*>() );
 			for (auto module : modules) {
-				if ( (module != nullptr) && 
+				if ( (module != nullptr) &&
 					 ( ((LoomModule*)module)->get_active() ) &&
 					 ( strcmp(cmd["module"].as<const char*>(), module->get_module_name() ) == 0 )
 					){
@@ -351,23 +351,10 @@ void LoomManager::flash_LED(const uint8_t count, const uint8_t time_high, const 
 		delay(time_high);
 		digitalWrite(LED_BUILTIN, LOW);
 		delay(time_low);
-	} 
+	}
 	if (end_high) {
 		digitalWrite(LED_BUILTIN, HIGH);
 	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::nap(const uint16_t ms) const
-{
-	Serial.end();
-	USBDevice.detach();
-
-	// Sleep, with max time of 16000 milliseconds
-	uint16_t sleepMS = Watchdog.sleep( (ms <= 16000) ? ms : 16000); 
-
-	USBDevice.attach();
-	Serial.begin(SERIAL_BAUD);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -391,7 +378,7 @@ void LoomManager::power_up()
 		if ( module != nullptr ){
 			((LoomModule*)module)->power_up();
 		}
-	}	
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -402,7 +389,7 @@ void LoomManager::power_down()
 		if ( module != nullptr ){
 			((LoomModule*)module)->power_down();
 		}
-	}	
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -424,7 +411,7 @@ void LoomManager::get_config()
 		if ( module != nullptr ){
 			((LoomModule*)module)->add_config(json);
 		}
-	}	
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -462,9 +449,9 @@ LoomModule*	LoomManager::find_module_by_category(const LoomModule::Category cate
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_interval(const uint16_t ms) 
+void LoomManager::set_interval(const uint16_t ms)
 {
-	interval = ms; 
+	interval = ms;
 	print_device_label();
 	LPrintln("Set interval to: ", interval);
 }
@@ -523,7 +510,7 @@ bool LoomManager::parse_config_SD(const char* config_file)
 
 	DynamicJsonDocument doc(2048);
 	DeserializationError error = deserializeJson(doc, file);
-	
+
 	// Test if parsing succeeds.
 	if (error) { // Make sure json was valid
 		print_device_label();
@@ -582,7 +569,7 @@ bool LoomManager::parse_config_json(JsonObject config)
 	}
 
 	// Call module factory creating each module
-	for ( JsonVariant module : config["components"].as<JsonArray>()) {		
+	for ( JsonVariant module : config["components"].as<JsonArray>()) {
 		if (Factory) {
 			add_module(Factory->Create(this, module));
 		}
@@ -590,13 +577,13 @@ bool LoomManager::parse_config_json(JsonObject config)
 
 	// Sort modules by type
 	std::sort(modules.begin(), modules.end(), module_sort_comp());
-	
+
 	// Run second stage constructors
 	for (auto module : modules) {
 		if ( module != nullptr ) {
 			module->second_stage_ctor();
 		}
-	}	
+	}
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		LPrintln("= = = = = = = = = = = = = = = = =");
@@ -617,7 +604,7 @@ bool LoomManager::parse_config_json(JsonObject config)
 bool LoomManager::parse_config_serial()
 {
 	flash_LED(4, 200, 100, true);
-	
+
 	LPrintln("Waiting for config over Serial");
 
 	while(!Serial.available());
@@ -671,14 +658,3 @@ bool LoomManager::check_serial_for_config()
 	}
 	return false;
 }
-
-
-
-
-
-
-
-
-
-
-

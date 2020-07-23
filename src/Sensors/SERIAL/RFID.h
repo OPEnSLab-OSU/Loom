@@ -69,6 +69,7 @@ protected:
   const int           MIN_VAL;      ///< Defines the minumum value for the tag measurements to be considered in the low state
   tag *               rfid_tags;    ///< The array of tags that have been found by the RFID Reader
   int                 tag_counter;  ///< The counter for the number of tags that have been found by the RFID Reader
+  int                 error_counter;  ///< The counter for the number of times a tag is found but there is an error reading
   int                 index;        ///< The index of the last RFID tag that has been read
   boolean             updated;      ///< Defnies whether or not the last RFID tag was previously found and now updated
 
@@ -114,6 +115,7 @@ public:
     int         getTagIndex();
     void        setTag(int i, tag t);
     tag         getTag(int i);
+    int         get_error_counter() { return error_counter;}
 
 
 //=============================================================================

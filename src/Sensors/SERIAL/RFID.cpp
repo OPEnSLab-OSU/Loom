@@ -29,6 +29,7 @@ Loom_RFID::Loom_RFID(LoomManager* manager,
   , rfid_serial(&sercom1, RX, TX, SERCOM_RX_PAD_0, UART_TX_PAD_2)
 {
   tag_counter = 0;
+  error_counter=0;
   index=-1;
   updated=false;
   rfid_tags = new tag[num_tags];
@@ -197,11 +198,9 @@ void Loom_RFID::moistureTagMeasurement(){
           }
 
         }
-        //timeout_counter=0;
+        error_counter=0;
       }
-      else{
-        //Time out functionality here? Don't implement? Talk to Nick?
-      }
+      else error_counter++;
     }
     else if(responseType == ERROR_CORRUPT_RESPONSE)
       LPrintln("Bad CRC");
