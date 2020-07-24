@@ -85,6 +85,31 @@ bool LoomPublishPlat::publish(const JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+uint8_t LoomPublishPlat::publish_batch()
+{
+	// check to make sure we have BatchSD module connected
+	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
+		// retrieve the Batch SD module
+		uint8_t drop_count = 0;
+		Loom_BatchSD* batch = (Loom_BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
+		int packets = batch->get_packet_counter();
+		JsonObject tmp;
+		// For all the jsons stored in the batch, run the publish function using the json
+		for(int i=0; i < packets; i++){
+			tmp = batch->get_batch_json(i);
+			if(!publish(tmp)) drop_count++;
+			//delay(1000);
+		}
+		// Clear the batch for the next batching to start
+		batch->clear_batch_log();
+		batch->add_drop_count(drop_count);
+		return drop_count;
+	}
+	return -1;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 bool LoomPublishPlat::publish()
 {
 	if (device_manager != nullptr) {

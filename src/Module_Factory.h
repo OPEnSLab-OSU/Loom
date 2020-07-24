@@ -42,6 +42,7 @@
 // LogPlats
 #include "LogPlats/OLED.h"
 #include "LogPlats/SD.h"
+#include "LogPlats/BatchSD.h"
 
 // // RTC
 #include "RTC/DS3231.h"
@@ -176,6 +177,7 @@ namespace Include
 				// LogPlat
 				factory::NameModulePair{"OLED",			Construct<Loom_OLED>,			ConstructDefault<Loom_OLED> },
 				factory::NameModulePair{"SD",			Construct<Loom_SD>,				ConstructDefault<Loom_SD> },
+				factory::NameModulePair{"BatchSD",			Construct<Loom_BatchSD>,				ConstructDefault<Loom_BatchSD> },
 				// // RTC
 				factory::NameModulePair{"DS3231",		Construct<Loom_DS3231>,			ConstructDefault<Loom_DS3231> },
 				factory::NameModulePair{"PCF8523",		Construct<Loom_PCF8523>,		ConstructDefault<Loom_PCF8523> }
@@ -244,7 +246,7 @@ namespace Include
 				factory::NameModulePair{"TSL2591",		Construct<Loom_TSL2591>,		ConstructDefault<Loom_TSL2591> },
 				factory::NameModulePair{"ZXGesture",	Construct<Loom_ZXGesture>,		ConstructDefault<Loom_ZXGesture> },
                 factory::NameModulePair{"STEMMA",       Construct<Loom_STEMMA>,         ConstructDefault<Loom_STEMMA> },
-                                             
+
 				// SDI12
 				factory::NameModulePair{"Decagon5TM",	Construct<Loom_Decagon5TM>,		ConstructDefault<Loom_Decagon5TM> },
 				factory::NameModulePair{"DecagonGS3",	Construct<Loom_DecagonGS3>,		ConstructDefault<Loom_DecagonGS3> },
