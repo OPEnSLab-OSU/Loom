@@ -89,7 +89,7 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 	else {
 		LPrintln("Adding mutual auth!");
 		// setup the certificate
-		plat->set_mutual_auth(m_params);
+		plat->set_mutual_auth(&m_params);
 	}
 	auto network = plat->connect_to_domain(m_spool_domain.c_str());
 
