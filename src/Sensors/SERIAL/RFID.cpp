@@ -33,6 +33,7 @@ Loom_RFID::Loom_RFID(LoomManager* manager,
   index=-1;
   updated=false;
   rfid_tags = new tag[num_tags];
+  print_module_label();
   LPrintln("Begining RFID Serial at 115200bps");
   rfid_serial.begin(115200);
   while(!rfid_serial);
@@ -40,18 +41,22 @@ Loom_RFID::Loom_RFID(LoomManager* manager,
   int count = 0;
 
   while(!setupNano() && count<5){
+    print_module_label();
     LPrintln("Module is not responding, check the wiring");
     count++;
     delay(1000);
   }
   if(count == 5){
+    print_module_label();
     LPrintln("Failed to setup Nano after five attemps");
     return;
   }
   else{
+    print_module_label();
     LPrintln("Setting RFID Region and read power");
     nano.setRegion(REGION_NORTHAMERICA);
     nano.setReadPower(2600);
+    print_module_label();
     LPrintln("RFID Reader is staring to read");
     nano.startReading();
   }
@@ -67,6 +72,7 @@ p[0], (int)p[1], (int)p[2], (int)p[3], (int)p[4], (int)p[5], (int)p[6])
 ///////////////////////////////////////////////////////////////////////////////
 
 Loom_RFID::~Loom_RFID(){
+  print_module_label();
   LPrintln("RFID Destructor Called");
   delete[] rfid_tags;
 }
@@ -83,6 +89,7 @@ bool Loom_RFID::setupNano(){
   //About 200ms from power on the module will send its firmware version at 115200. We need to ignore this.
   while(rfid_serial.available()) rfid_serial.read();
   delay(100);
+  print_module_label();
   LPrintln("Getting RFID Tag Reader Version...");
   nano.getVersion();
 
@@ -90,16 +97,19 @@ bool Loom_RFID::setupNano(){
 	{
 	 	//This happens if the baud rate is correct but the module is doing a ccontinuous read
 	 	nano.stopReading();
+    print_module_label();
 	 	LPrintln("Module continuously reading. Asking it to stop...");
 	 	delay(1500);
 	}
   else{
     //The module did not respond so assume it's just been powered on and communicating at 115200bps
+    print_module_label();
     LPrintln("Setting Baud...");
     nano.setBaud(115200); //Tell the module to go to the chosen baud rate. Ignore the response msg
   }
 
   //Test the connection
+  print_module_label();
   LPrintln("Getting Version...");
   nano.getVersion();
   delay(200);
@@ -111,10 +121,12 @@ bool Loom_RFID::setupNano(){
   }
 
   LPrintln_Hex(nano.msg[0]);
+  print_module_label();
   LPrintln("Setting Tag Protocol...");
   //The M6E has these settings no matter what
   nano.setTagProtocol(); //Set protocol to GEN2
 
+  print_module_label();
   LPrintln("Setting Antenna Port...");
   nano.setAntennaPort(); //Set TX/RX antenna ports to 1
   nano.disableDebugging();
@@ -152,13 +164,16 @@ void Loom_RFID::measure(){
   switch (type)
   {
     case MeasureType::Moisture:
+      print_module_label();
       LPrintln("Moisture tags will be measured");
       moistureTagMeasurement();
       break;
     case MeasureType::Unknown:
+      print_module_label();
       LPrintln("Unknown measure type");
       break;
     default:
+      print_module_label();
       LPrintln("No known declared measure type");
       break;
   }
@@ -173,8 +188,10 @@ void Loom_RFID::moistureTagMeasurement(){
   if(nano.check() == true){
     byte responseType = nano.parseResponse();
 
-    if(responseType == RESPONSE_IS_KEEPALIVE)
+    if(responseType == RESPONSE_IS_KEEPALIVE){
+      print_module_label();
       LPrintln("Nano is Scanning");
+    }
     else if(responseType == RESPONSE_IS_TAGFOUND){
       index=-1;
       updated=false;
@@ -202,10 +219,14 @@ void Loom_RFID::moistureTagMeasurement(){
       }
       else error_counter++;
     }
-    else if(responseType == ERROR_CORRUPT_RESPONSE)
+    else if(responseType == ERROR_CORRUPT_RESPONSE){
+      print_module_label();
       LPrintln("Bad CRC");
-    else
+    }
+    else{
+      print_module_label();
       LPrintln("Nano is Scanning...");
+    }
   }
 }
 
@@ -231,6 +252,7 @@ void Loom_RFID::package(JsonObject json){
 void Loom_RFID::print_measurements() const{
   print_module_label();
   char EPCHeader_Hex[3];
+  print_module_label();
   LPrintln("Measurements:");
   for(int i=0; i<tag_counter; i++){
     itoa(rfid_tags[i].EPCHeaderName, EPCHeader_Hex, 16);
@@ -260,6 +282,7 @@ Loom_RFID::tag Loom_RFID::getTag(int i){
   if(i >= 0 && i <tag_counter)
     return rfid_tags[i];
   else{
+    print_module_label();
     LPrintln("No found tag at this index");
     tag emptyTag;
     return emptyTag;
@@ -272,6 +295,7 @@ void Loom_RFID::setTag(int i, tag t){
   if(i >= 0 && i <tag_counter)
     rfid_tags[i] = t;
   else{
+    print_module_label();  
     LPrintln("No found tag at this index");
     return;
   }
