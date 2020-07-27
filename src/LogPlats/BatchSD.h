@@ -37,6 +37,7 @@ protected:
   int batch_counter;      ///< Current batch count value
   int packet_counter;     ///< Current packet count value in a batch
   int drop_count;         ///< Current count of packets that failed to be sent
+  DynamicJsonDocument doc;
 public:
 
 //=============================================================================
@@ -132,7 +133,7 @@ private:
   /// Creates the proper file name of the file from the batch
   /// @param[in] index    The index of the file in the batch
   /// @return The file name to be used for file in batch
-  char* create_file_name(int index);
+  void create_file_name(int index, char* name);
 
   /// Get the packet drop rate from the current batch
   /// Keep in mind that this drop rate will not account for retransmissions

@@ -93,6 +93,8 @@ uint8_t LoomPublishPlat::publish_batch()
 		uint8_t drop_count = 0;
 		Loom_BatchSD* batch = (Loom_BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
 		int packets = batch->get_packet_counter();
+		print_module_label();
+		LPrintln("Packets in batch to publish: ", packets);
 		JsonObject tmp;
 		// For all the jsons stored in the batch, run the publish function using the json
 		for(int i=0; i < packets; i++){

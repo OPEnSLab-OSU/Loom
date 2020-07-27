@@ -25,6 +25,7 @@ Loom_BatchSD::Loom_BatchSD(
     )
     : LoomLogPlat(manager, "BatchSD", Type::BATCHSD, enable_rate_filter, min_filter_delay )
     , chip_select(chip_select)
+    , doc(2048)
 {
   digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
 
@@ -59,15 +60,17 @@ void Loom_BatchSD::print_config() const
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_BatchSD::dump_batch(int index){
   #if LOOM_DEBUG == 1
-    char* file_name = create_file_name(index);
-    digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
+    char file_name[30];
+    create_file_name(index, file_name);
+    //digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
 
-    sd.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
+    //sd.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
 
 
     File file = sd.open(file_name, O_READ);
 
     if (file) {
+      print_module_label();
       LPrintln("Contents of file: ", file_name);
 
       // read from the file until there's nothing else in it:
@@ -78,6 +81,7 @@ bool Loom_BatchSD::dump_batch(int index){
       return true;
     } else {
       // if the file didn't open, print an error:
+      print_module_label();
       LPrintln("Error opening ", file_name);
       return false;
     }
@@ -86,13 +90,15 @@ bool Loom_BatchSD::dump_batch(int index){
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_BatchSD::clear_batch_log(){
-  char* file_name;
+  print_module_label();
+  LPrintln("Clearing batch log");
+  char file_name[30];
   digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
-  sd.begin(chip_select);
+  //sd.begin(chip_select);
 
   // For all the packets stored in the batch, create the file name and remove from SD
   for(int i=0; i<packet_counter;i++){
-    file_name = create_file_name(i);
+    create_file_name(i, file_name);
     sd.remove(file_name);
   }
 
@@ -112,45 +118,78 @@ bool Loom_BatchSD::store_batch(){
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_BatchSD::store_batch_json(JsonObject json){
   // Create file name and add which Batch the packet is from to json
-  char* file_name = create_file_name(packet_counter);
+  char file_name[30];
+  create_file_name(packet_counter, file_name);
   json["Batch"] = batch_counter;
   digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
-  sd.begin(chip_select);
+  //sd.begin(chip_select);
 
   // Write json to batch file
-  File file = sd.open(file_name);
+  File file;
+  if( (!file.open(file_name, O_WRONLY | O_CREAT)) ){
+    print_module_label();
+    LPrintln("Error opening: ", file_name);
+    return false;
+  }
+  else {
+    print_module_label();
+    LPrintln("Writing to: ", file_name);
+  }
+
   serializeJson(json, file);
 
-  if (!file.sync() || file.getWriteError()) {
+  if (!file.sync()) {
 		file.close();
 		print_module_label();
-		LPrintln("Write Error");
+		LPrintln("Sync Error");
 		return false;
 	}
+  else if(file.getWriteError()){
+    file.close();
+    print_module_label();
+    LPrintln("Write Error");
+    return false;
+  }
   file.close();
   packet_counter++;
+  print_module_label();
+  LPrintln("Done writing to Batch");
   return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 JsonObject Loom_BatchSD::get_batch_json(int index){
-  // Create a JsonDocument to read the file and the file name
-  DynamicJsonDocument doc(2048);
-  char* file_name = create_file_name(index);
+  doc.clear();
+
+  char file_name[30];
+  create_file_name(index, file_name);
 
   digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
-  sd.begin(chip_select);
+  //sd.begin(chip_select);
 
   if(index <= packet_counter || index < 0){
-    File file = sd.open(file_name);
-    if(!file) LPrintln("Failed to open '", file_name, "'");
+    print_module_label();
+    LPrintln("Retrieving Packet in file ", file_name);
+    File file = sd.open(file_name, O_READ);
+    if(!file) {
+      print_module_label();
+      LPrintln("Failed to open '", file_name, "'");
+    }
 
     DeserializationError error = deserializeJson(doc, file);
-    if(error) LPrintln("deserializeJson() failed: ", error.c_str());
+    if(error) {
+      print_module_label();
+      LPrintln("deserializeJson() failed: ", error.c_str());
+    }
 
-    else return doc.to<JsonObject>();
+    else {
+      return doc.as<JsonObject>();
+    }
   }
-  else LPrintln("Get Batch Error: Index is out of range");
+  else {
+    print_module_label();
+    LPrintln("Get Batch Error: Index is out of range");
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -165,15 +204,13 @@ void Loom_BatchSD::power_down(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-char* Loom_BatchSD::create_file_name(int index){
-  String file = "Batches/Batch_";
+void Loom_BatchSD::create_file_name(int index, char* name){
+  String file = "Batches/Batch-";
   file = file + batch_counter;
-  file = file + ".";
+  file = file + "-";
   file = file + index;
   file = file + ".json";
-  char name[file.length()];
-  file.toCharArray(name, file.length());
-  return name;
+  file.toCharArray(name, file.length()+1);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

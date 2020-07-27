@@ -130,6 +130,8 @@ uint8_t LoomCommPlat::send_batch(const uint8_t destination, uint8_t delay_time){
 		uint8_t drop_count = 0;
 		Loom_BatchSD* batch = (Loom_BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
 		int packets = batch->get_packet_counter();
+		print_module_label();
+		LPrintln("Packets to send: ", packets);
 		JsonObject tmp;
 		// For all the jsons stored in the batch, run the sebd function using the json
 		for(int i=0; i < packets; i++){
@@ -164,6 +166,8 @@ void LoomCommPlat::broadcast_batch(uint8_t delay_time)
 		// retrieve the Batch SD module
 		Loom_BatchSD* batch = (Loom_BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
 		int packets = batch->get_packet_counter();
+		print_module_label();
+		LPrintln("Packets to broadcast: ", packets);
 		JsonObject tmp;
 		// For all the jsons stored in the batch, run the sebd function using the json
 		for(int i=0; i < packets; i++){
