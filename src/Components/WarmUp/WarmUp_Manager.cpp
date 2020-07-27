@@ -11,6 +11,8 @@
 #include "WarmUp_Manager.h"
 #include "WarmUp.h"
 
+char* Loom_WarmUp_Manager::name = "WarmUp_Manager";
+
 Loom_WarmUp_Manager::Loom_WarmUp_Manager(
     LoomManager* manager
   ) 

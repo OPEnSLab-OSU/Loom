@@ -13,7 +13,7 @@
 
 #include <Wire.h>
 
-
+char* Loom_Stepper::name = "Stepper";
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Stepper::Loom_Stepper(LoomManager* manager) 
 	: LoomActuator(manager, "Stepper", Type::Stepper ) 

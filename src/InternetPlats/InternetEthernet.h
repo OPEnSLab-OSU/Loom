@@ -47,7 +47,8 @@ protected:
 	const SSLClient& get_client() const { return m_client; }
 
 public:
-	
+
+	static char* name;
 //==============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================

@@ -35,9 +35,10 @@ protected:
 
 	bool				pin_enabled[3];		///< Whether pins A0-A2 are enabled
 	uint8_t				color_vals[3][3];	///< The associated color values (RGB) for each of the 3 Neopixels
-
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================

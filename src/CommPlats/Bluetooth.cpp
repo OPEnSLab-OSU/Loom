@@ -10,6 +10,7 @@
 
 #include "Bluetooth.h"
 
+char* Loom_Bluetooth::name = "Bluetooth";
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Bluetooth::Loom_Bluetooth(
 		LoomManager* manager,

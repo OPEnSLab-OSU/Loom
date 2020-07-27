@@ -12,7 +12,7 @@
 #define SerialAT Serial1
 TinyGsm modem(SerialAT);
 
-
+char* Loom_LTE::name = "LTE";
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LTE::Loom_LTE(
     LoomManager* manager,

@@ -43,7 +43,8 @@ protected:
 	uint8_t		positions[NUM_SERVOS];		///< Positions of the servos
 
 public:
-	
+
+	static char* name;
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================

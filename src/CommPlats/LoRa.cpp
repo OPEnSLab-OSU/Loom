@@ -10,6 +10,7 @@
 
 #include "LoRa.h"
 
+char* Loom_LoRa::name = "LoRa";
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::Loom_LoRa(
 		LoomManager* device_manager,

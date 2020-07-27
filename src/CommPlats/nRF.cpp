@@ -10,6 +10,7 @@
 
 #include "nRF.h"
 
+char* Loom_nRF::name = "nRF";
 ///////////////////////////////////////////////////////////////////////////////
 Loom_nRF::Loom_nRF(
 		LoomManager* manager,

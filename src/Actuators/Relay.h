@@ -33,7 +33,8 @@ protected:
 	bool	on;		///< Whether the relay is on or off
 
 public:
-	
+
+	static char* name;
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================

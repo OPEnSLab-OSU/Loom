@@ -70,6 +70,8 @@ protected:
 
 public:
 
+    static char* name;
+
 	/// Escape hatch for sending raw bytes
 	/// @param[in] raw		Bytes to send
 	/// @param[in] len		Number of bytes to send (MUST be less than 251)

@@ -11,6 +11,7 @@
 #include "InternetEthernet.h"
 #include "Trust_Anchors.h"
 
+char* Loom_Ethernet::name = "Ethernet";
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Ethernet::Loom_Ethernet(	
 		LoomManager* manager,

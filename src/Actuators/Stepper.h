@@ -47,7 +47,8 @@ protected:
 	Adafruit_StepperMotor*	motors[NUM_STEPPERS];		
 
 public:
-	
+
+	static char* name;
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================

@@ -71,6 +71,7 @@ const std::array<byte, 9>  Loom_Multiplexer::alt_addresses = {
 	0x78
 };
 
+char* Loom_Multiplexer::name = "Multiplexer";
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Multiplexer::Loom_Multiplexer(	
 		LoomManager* 	manager,

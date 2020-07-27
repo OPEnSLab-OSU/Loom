@@ -21,6 +21,8 @@ class WarmUp;
 
 class Loom_WarmUp_Manager : public LoomModule {
   public:
+
+    static char* name;
     ///Constructor
     Loom_WarmUp_Manager(LoomManager* manager);
     Loom_WarmUp_Manager(LoomManager* manager, JsonArrayConst);

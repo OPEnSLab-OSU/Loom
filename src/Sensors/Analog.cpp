@@ -10,6 +10,7 @@
 
 #include "Analog.h"
 
+char* Loom_Analog::name = "Analog";
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Analog::Loom_Analog(
 		LoomManager* manager,

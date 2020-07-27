@@ -50,6 +50,7 @@ class Loom_LTE: public LoomInternetPlat
 
   public:
 
+    static char* name;
     //==============================================================================
     ///@name	CONSTRUCTORS / DESTRUCTOR
     /*@{*/ //======================================================================

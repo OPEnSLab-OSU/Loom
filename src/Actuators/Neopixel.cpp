@@ -11,7 +11,7 @@
 
 #include "Neopixel.h"
 
-
+char* Loom_Neopixel::name = "Neopixel";
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Neopixel::Loom_Neopixel(
 		LoomManager* 	manager,

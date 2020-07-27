@@ -42,6 +42,7 @@ public:
 			const LoomModule::Type	module_type
 		);
 
+
 	/// Destructor
 	virtual ~LoomActuator() = default;
 

@@ -107,7 +107,7 @@ template<class T> LoomModule* ConstructDefault(LoomManager* manager) { return ne
 template<class T> LoomModule* Construct(LoomManager* manager, JsonArrayConst p) { return new T(manager, p); }
 
 
-
+/*
 namespace factory {
 
 	/// Function pointer to 'template<class T> LoomModule* Construct(LoomManager* manager, LoomManager* manager, JsonArrayConst p)'
@@ -127,7 +127,7 @@ namespace factory {
 	} NameModulePair;
 
 } // end factory
-
+*/
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -135,7 +135,7 @@ namespace factory {
 ///////////////////////////////////////////////////////////////////////////////
 
 
-
+/*
 /// Blocks modules the can be toggled on/off or
 /// selected between a variety of selection.
 /// Below, in LoomFactory, the integer index (zero indexed) of the enums is
@@ -156,7 +156,8 @@ namespace Enable
 	enum class Radios    { Enabled, Disabled };
 	enum class Max       { Enabled, Disabled };
 }
-
+*/
+/*
 /// Possible sections of the module lookup table to include.
 /// Factory concatenates selected blocks to form its lookup table
 /// for module creation.
@@ -266,7 +267,7 @@ namespace Include
 			);
 
 } // end Include namespace
-
+*/
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -280,7 +281,7 @@ namespace Include
 /// - [FactoryBase Documentation](https://openslab-osu.github.io/Loom/html/class_factory_base.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class FactoryBase
+/*class FactoryBase
 {
 public:
 
@@ -294,9 +295,73 @@ public:
 	static T* CreateDefault() { return ConstructDefault<T>(); }
 
 	virtual LoomModule* Create(LoomManager* manager, JsonVariant module) const = 0;
+};*/
+
+
+class FactoryBase
+{
+public:
+    virtual void print_table() const = 0;
+
+    template <class T>
+    static T* CreateDefault() { return ConstructDefault<T>(); }
+
+    virtual LoomModule* Create(LoomManager* manager, JsonVariant module) const = 0;
 };
 
+template <typename ... Ts>
+class LoomFactory : public FactoryBase {
+public:
+    LoomModule* Create(LoomManager* manager, JsonVariant module) const {
+        return nullptr;
+    }
 
+    void print_table() const {
+        return;
+    }
+};
+
+template <typename U, typename ... Ts>
+class LoomFactory<U, Ts...> : public LoomFactory<Ts...> {
+public:
+
+    void print_table() const {
+        LPrintln(U::name);
+        LoomFactory<Ts...>::print_table();
+    }
+
+    /**
+            Creates a new instance of U if U::name is the name of the class requested. If not, searches the list of U's dependencies and creates them if their names match.
+     and checks the next type in the list otherwise.
+     */
+    LoomModule* Create(LoomManager* manager, JsonVariant module) const {
+
+        const char* name = module["name"];
+
+        if (!strcmp(name, U::name)) {
+            if (module["params"].is<JsonArray>()) {
+					// Generate according to list of parameters
+					LPrintln("[Factory] Creating: ", name);
+					return Construct<U>(manager, module["params"]);
+			} else if ( module["params"].is<const char*>() && strcmp(module["params"], "default") == 0 ) {
+					// Generate using default parameters
+
+				LoomModule* defaultInstance = ConstructDefault<U>(manager);
+				if (defaultInstance == nullptr) {
+					LPrintln("[Factory] ", "No default constructor for module '", name, "'");
+				}
+				return defaultInstance;
+			} else {
+				// Invalid parameters
+				LPrintln("[Factory] ", "Invalid parameters in module '", name, "'");
+				return nullptr;
+			}
+		}
+        return LoomFactory<Ts...>::Create(manager, module);
+    }
+};
+
+/*
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Factory is used by LoomManager when parsing Json to match module names to
@@ -405,3 +470,4 @@ public:
 	}
 
 };
+*/
