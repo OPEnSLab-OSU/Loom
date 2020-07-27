@@ -152,7 +152,7 @@ public:
 	/// @returns a unix timestamp if success, or 0 if failure.
 	uint32_t				get_time();
 
-	void set_mutual_auth(const SSLClientParameters* m_params) {
+	void set_mutual_auth(const SSLClientParameters& m_params) {
 		get_client().setMutualAuthParams(m_params);
 	}
 

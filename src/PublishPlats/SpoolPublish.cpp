@@ -45,20 +45,7 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 	, m_device_data_endpoint(device_data_endpoint)
 	, m_device_id(device_id)
     , m_coordinator_id(coordinator_id)
-	, m_cli_cert(SSLObj::make_vector_pem(cli_cert, (cli_cert ? strlen(cli_cert) : 0)))
-	, m_cli_key(make_key_from_asn1(SSLObj::make_vector_pem(cli_key, (cli_key ? strlen(cli_key) : 0))))
-	, m_cert{ const_cast<unsigned char*>(m_cli_cert.data()), m_cli_cert.size() }
-	, m_params{
-		&m_cert,
-		1,
-		{
-			BR_EC_secp256r1,
-			// the bearssl type is in C which does not have const, but bearssl promises no modification, so we const_cast here
-			// this allows us to keep const on the massive m_cli_key vector, hopefully saving some memory?
-			const_cast<unsigned char*>(m_cli_key.data()), 
-			m_cli_key.size()
-		}
-	} {}
+ {m_params =  new SSLClientParameters::fromPEM(cli_cert, sizeof(cli_cert), cli_key, sizeof(cli_key));}
 
 /////////////////////////////////////////////////////////////////////
 Loom_SpoolPublish::Loom_SpoolPublish(LoomManager* manager, JsonArrayConst p)
