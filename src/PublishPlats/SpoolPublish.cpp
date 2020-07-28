@@ -15,8 +15,8 @@ static std::vector<unsigned char> make_key_from_asn1(std::vector<unsigned char> 
 	// we need to extract the private key from the ASN1 object given to us
 	// to do that, some ASN.1 parsing!
 	// get the tag and length of the first octet string, and verify it's reasonable
-	if (asn1[5] != 0x04 
-		|| asn1.size() < 6 
+	if (asn1[5] != 0x04
+		|| asn1.size() < 6
 		|| asn1[6] >= asn1.size() - 6) return {};
 
 	const unsigned char length = asn1[6];
@@ -36,16 +36,20 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 		const char*				spool_domain,
 		const char*				device_data_endpoint,
 		const char*             coordinator_id,
-        const char*             device_id,
+    const char*             device_id,
 		const char* 			cli_cert,
 		const char*				cli_key
-	) 
+	)
 	: LoomPublishPlat(manager, module_name, LoomModule::Type::SpoolPub, internet_type)
 	, m_spool_domain(spool_domain)
 	, m_device_data_endpoint(device_data_endpoint)
 	, m_device_id(device_id)
-    , m_coordinator_id(coordinator_id)
- {m_params =  new SSLClientParameters::fromPEM(cli_cert, sizeof(cli_cert), cli_key, sizeof(cli_key));}
+  , m_coordinator_id(coordinator_id)
+	// The last item in this chain always trys to be constructed as SSLClientParameters?
+	// No idea where this is coming from.
+ {
+	 //m_params =  SSLClientParameters::fromPEM(cli_cert, sizeof(cli_cert), cli_key, sizeof(cli_key));
+ }
 
 /////////////////////////////////////////////////////////////////////
 Loom_SpoolPublish::Loom_SpoolPublish(LoomManager* manager, JsonArrayConst p)
@@ -76,7 +80,7 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 	else {
 		LPrintln("Adding mutual auth!");
 		// setup the certificate
-		plat->set_mutual_auth(&m_params);
+		plat->set_mutual_auth(m_params);
 	}
 	auto network = plat->connect_to_domain(m_spool_domain.c_str());
 
@@ -85,12 +89,12 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 		LPrintln("Could not connect to Spool instance.");
 		return false;
 	}
-	
+
 	// POST DEVICE_DATA_ENDPOINT
 	network -> print("POST ");
 	network -> print(m_device_data_endpoint);
 	network -> println(" HTTP/1.1");
-	
+
 	//Headers
 	network -> println("Content-Type: application/json");
 	network -> print("Content-Length: ");
@@ -107,7 +111,7 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
     network -> print("\",\"device_id\":");
     network -> print(m_device_id);
 	network -> print("\",\"data\":");
-	
+
 	serializeJson(json, *network);
 
 	network -> println("}");
