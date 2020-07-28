@@ -36,7 +36,7 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 		const char*				spool_domain,
 		const char*				device_data_endpoint,
 		const char*             coordinator_id,
-    const char*             device_id,
+    	const char*             device_id,
 		const char* 			cli_cert,
 		const char*				cli_key
 	)
@@ -44,11 +44,12 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 	, m_spool_domain(spool_domain)
 	, m_device_data_endpoint(device_data_endpoint)
 	, m_device_id(device_id)
-  , m_coordinator_id(coordinator_id)
+  	, m_coordinator_id(coordinator_id)
+	, m_params(SSLClientParameters::fromPEM(cli_cert, sizeof(cli_cert), cli_key, sizeof(cli_key)))
 	// The last item in this chain always trys to be constructed as SSLClientParameters?
 	// No idea where this is coming from.
  {
-	 //m_params =  SSLClientParameters::fromPEM(cli_cert, sizeof(cli_cert), cli_key, sizeof(cli_key));
+	//m_params =  SSLClientParameters::fromPEM(cli_cert, sizeof(cli_cert), cli_key, sizeof(cli_key));
  }
 
 /////////////////////////////////////////////////////////////////////
