@@ -21,11 +21,12 @@
 // 	longjmp(env,101);
 // }
 
+char* Loom_MS5803::name = "MS5803";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MS5803::Loom_MS5803(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t			mux_port
 	)
 	: LoomI2CSensor(manager, "MS5803", Type::MS5803, i2c_address, mux_port )
@@ -95,14 +96,9 @@ void Loom_MS5803::measure()
 void Loom_MS5803::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	
+
 	data["pressure"] = pressure;
 	data["temp"]     = temp;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-

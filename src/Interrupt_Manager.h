@@ -33,7 +33,7 @@ class Loom_Sleep_Manager;
 using ISRFuncPtr = void (*)();
 
 /// Enum of different ISR run behavior
-enum class ISR_Type { 
+enum class ISR_Type {
 	IMMEDIATE, 		///< Run ISR immediately
 	CHECK_FLAG		///< Run ISR when run_pending_ISRs() is called
 };
@@ -85,24 +85,24 @@ private:
 
 protected:
 
-	/// Pointer to an RTC object for managing timers / timed interrupts	
-	LoomRTC*		RTC_Inst;					
-	
+	/// Pointer to an RTC object for managing timers / timed interrupts
+	LoomRTC*		RTC_Inst;
+
 	/// Pointer to a Sleep Manager object
-	Loom_Sleep_Manager* Sleep_Manager;	
+	Loom_Sleep_Manager* Sleep_Manager;
 
 	// = = = Interrupts = = =
 
 	/// List of interrupts configurations
-	IntDetails		int_settings[InteruptRange];		
-	
+	IntDetails		int_settings[InteruptRange];
+
 	/// Flags set by interrupts, indicating ISR bottom
 	/// half should be called if not Null
 	static bool 	interrupt_triggered[InteruptRange];
 
 	/// Enable or disable all interrupts 	-- currently only disables bottom halves
-	bool			interrupts_enabled;			
-	
+	bool			interrupts_enabled;
+
 	// = = = Interal Timer = = =
 
 	InternalTimerDetails	internal_timer;
@@ -110,7 +110,7 @@ protected:
 	// = = = Timers = = =
 
 	/// Last time an alarm went off
-	DateTime		last_alarm_time;			
+	DateTime		last_alarm_time;
 
 	// millis timers
 	AsyncDelay		timers[MaxTimerCount];
@@ -123,7 +123,9 @@ protected:
 
 	// interrupt_triggered equivalent for timers, also support immediate and delayed
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -167,7 +169,7 @@ public:
 	/// @param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
 	void		register_ISR(const uint32_t pin, ISRFuncPtr ISR, const uint32_t signal_type, ISR_Type run_type);
 
-	/// If an ISR dettaches interrupt, use this to reattach according to 
+	/// If an ISR dettaches interrupt, use this to reattach according to
 	/// previous settings.
 	/// Effectively to running register_ISR with previous settings
 	/// @param[in]	pin			Which pin to reconnect the interrupt on
@@ -244,7 +246,7 @@ public:
 	/// @param[in]	repeat			Whether or not to be a repeating alarm
 	void		register_timer(const uint8_t timer_num, const unsigned long duration, const ISRFuncPtr ISR, const bool repeat);
 
-	/// Clear specified timer 
+	/// Clear specified timer
 	/// @param[in]	timer_num		Timer to clear
 	void		clear_timer(const uint8_t timer_num);
 
@@ -264,7 +266,7 @@ public:
 	/// @param[in]	ISR				ISR to run after timer goes off
 	/// @param[in]	repeat			Whether or not to be a repeating alarm
 	/// @param[in]	run_type	Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked
-	void		register_internal_timer(const uint duration, const ISRFuncPtr ISR, const bool repeat, const ISR_Type run_type);		
+	void		register_internal_timer(const uint duration, const ISRFuncPtr ISR, const bool repeat, const ISR_Type run_type);
 
 	/// Run a delayed (flag based) ISR if the interal timer elapsed.
 	/// Is not needed if using ISR_Type::IMMEDIATE ISR
@@ -315,9 +317,9 @@ public:
 /*@{*/ //======================================================================
 
 	/// Link a device manager.
-	/// Overrides default by getting RTC pointer from 
+	/// Overrides default by getting RTC pointer from
 	/// device manager if possible
-	/// @param[in]	LM		Manager to link 
+	/// @param[in]	LM		Manager to link
 	void 		link_device_manager(LoomManager* LM) override;
 
 	/// Set pointer to sleep Manager
@@ -342,7 +344,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get c-string of name associated with interrupt type enum
-	/// @param[in]	type	Interrupt type 
+	/// @param[in]	type	Interrupt type
 	/// @return C-string of interrupt type
 	const static char* interrupt_type_to_string(const uint8_t type);
 
@@ -379,5 +381,3 @@ private:
 	const static ISRFuncPtr default_ISRs[InteruptRange];
 
 };
-
-

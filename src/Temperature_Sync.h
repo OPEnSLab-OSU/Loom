@@ -36,6 +36,8 @@ protected:
 
 public:
 
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -84,12 +86,10 @@ public:
 private:
 
 	void		sync_temp();
-	
+
 	LoomModule*	source;			///< Pointer to module to get temperature from
 	LoomModule* dependant;		///< Pointer to module to forward temperature to
 
 	LoomModule::Type source_type;		///< Type of source module
 	LoomModule::Type dependant_type;	///< Type of dependant module
 };
-
-

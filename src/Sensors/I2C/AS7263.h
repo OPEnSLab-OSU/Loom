@@ -39,14 +39,16 @@ protected:
 	uint16_t	nir_vals[6];		///< Measured near-infra-red band values (r,s,t,u,v,w).
 									///< Units: counts / (μW/cm^2).
 
-	
+
 	bool		use_bulb;			///< Whether or not to use bulb
 	uint8_t		gain;				///< Gain setting
 	uint8_t		mode;				///< Sensor read mode
 	uint8_t		integration_time;	///< Integration time setting
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -119,5 +121,3 @@ const byte i2c_address			= 0x49,
 private:
 
 };
-
-

@@ -58,14 +58,16 @@ protected:
 		Adafruit_SSD1306	display;			///< Underlying OLED controller
 		Version				version;			///< What type the OLED is (FeatherWing or breakout)
 		byte				reset_pin;			///< The reset pin (only applies to breakout version)
-		
+
 		Format				display_format;		///< How to display the data on OLED
 		uint				scroll_duration;	///< The duration to complete a full cycle through a bundle of data (milliseconds)(non-blocking)
 		byte				freeze_pin;			///< Which pin to check if display should freeze
 		FreezeType			freeze_behavior;	///< What 'freezing' behavior should be followed
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -107,9 +109,9 @@ public:
 	bool			log(JsonObject json) override;
 
 	// manually expose superclass version of log() that gets json from
-	// linked LoomManager, calling this classes implementation of 
+	// linked LoomManager, calling this classes implementation of
 	// 'log(JsonObject json)', which is pure virtual in superclass
-	using LoomLogPlat::log; 
+	using LoomLogPlat::log;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -165,7 +167,7 @@ public:
 	/// @param[in]	v	OLED::Version value to get string of
 	/// @return C-string of OLED version
 	const static char* enum_oled_version_string(const Version v);
-	
+
 	/// Get c-string of name associated with OLED:Format enum
 	/// @param[in]	f	OLED::Format value to get string of
 	/// @return C-string of OLED format
@@ -183,5 +185,3 @@ private:
 	unsigned long	previous_time;
 
 };
-
-

@@ -15,14 +15,15 @@
 // For some reason Wire is not recognized like that
 MPU6050 mpu6050(Wire);
 
+char* Loom_MPU6050::name = "MPU6050";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MPU6050::Loom_MPU6050(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t		mux_port,
 		const bool			calibrate
-	) 
+	)
 	: LoomI2CSensor(manager, "MPU6050", Type::MPU6050, i2c_address, mux_port )
 {
 	Wire.begin();
@@ -111,7 +112,7 @@ void Loom_MPU6050::measure()
 void Loom_MPU6050::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	
+
 	data["ax"] = accX;
 	data["ay"] = accY;
 	data["az"] = accZ;
@@ -146,8 +147,3 @@ void Loom_MPU6050::calibrate()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-

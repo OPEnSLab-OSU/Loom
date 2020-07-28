@@ -10,12 +10,14 @@
 
 #include "Decagon_5TM.h"
 
+char* Loom_Decagon5TM::name = "Decagon5TM";
+
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Decagon5TM::Loom_Decagon5TM(	
+Loom_Decagon5TM::Loom_Decagon5TM(
 		LoomManager* manager,
-		const uint8_t		num_samples 
-	) 
-	: LoomSDI12Sensor(manager, "5TM", Type::Decagon5TM, num_samples ) 
+		const uint8_t		num_samples
+	)
+	: LoomSDI12Sensor(manager, "Decagon5TM", Type::Decagon5TM, num_samples )
 {
 
 }
@@ -49,5 +51,3 @@ void Loom_Decagon5TM::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-

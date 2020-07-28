@@ -13,6 +13,7 @@
 
 #include <Adafruit_GFX.h>
 
+char* Loom_OLED::name = "OLED";
 
 ///////////////////////////////////////////////////////////////////////////////
 const char* Loom_OLED::enum_oled_version_string(const Version v)
@@ -29,7 +30,7 @@ const char* Loom_OLED::enum_oled_format_string(const Format f)
 	switch(f) {
 		case Format::FOUR   : return "OLED 4 Elements";
 		case Format::EIGHT  : return "OLED 8 Elements";
-		case Format::SCROLL : return "OLED Scroll"; 
+		case Format::SCROLL : return "OLED Scroll";
 	}
 }
 
@@ -44,15 +45,15 @@ const char* Loom_OLED::enum_oled_freeze_string(const FreezeType f)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_OLED::Loom_OLED(	
+Loom_OLED::Loom_OLED(
 		LoomManager* manager,
-		const bool			enable_rate_filter, 
-		const uint16_t		min_filter_delay, 
-		const Version		version, 
-		const byte			reset_pin, 
-		const Format		display_format, 
-		const uint16_t		scroll_duration, 
-		const byte			freeze_pin, 
+		const bool			enable_rate_filter,
+		const uint16_t		min_filter_delay,
+		const Version		version,
+		const byte			reset_pin,
+		const Format		display_format,
+		const uint16_t		scroll_duration,
+		const byte			freeze_pin,
 		const FreezeType	freeze_behavior
 	)
 	: LoomLogPlat(manager, "OLED", Type::OLED, enable_rate_filter, min_filter_delay )
@@ -87,7 +88,7 @@ void Loom_OLED::print_config() const
 
 	LPrintln("\tOLED Version        : ", enum_oled_version_string(version) );
 	if (version == Version::BREAKOUT) {
-		LPrintln("\tReset Pin           : ", reset_pin );		
+		LPrintln("\tReset Pin           : ", reset_pin );
 	}
 
 	LPrintln("\tDisplay Format      : ", enum_oled_format_string(display_format) );
@@ -101,7 +102,7 @@ void Loom_OLED::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_OLED::set_freeze_pin(const byte pin) 
+void Loom_OLED::set_freeze_pin(const byte pin)
 {
 	freeze_pin = pin;
 	if (freeze_behavior != FreezeType::DISABLE) {
@@ -110,15 +111,15 @@ void Loom_OLED::set_freeze_pin(const byte pin)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_OLED::log(JsonObject json) 
+bool Loom_OLED::log(JsonObject json)
 {
-	if ( !check_millis() ) 
+	if ( !check_millis() )
 		return false;
-	
+
 	// If freeze complete, check button if no display update needed
 	if (freeze_behavior == FreezeType::DATA) {
-		if (digitalRead(freeze_pin) == 0) 
-			return false; 			
+		if (digitalRead(freeze_pin) == 0)
+			return false;
 	}
 
 	display.clearDisplay();
@@ -176,7 +177,7 @@ bool Loom_OLED::log(JsonObject json)
 				} else {
 					time = millis();
 					previous_time = time;
-				}		
+				}
 			} else {
 				time = millis();
 			}
@@ -199,4 +200,3 @@ bool Loom_OLED::log(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-

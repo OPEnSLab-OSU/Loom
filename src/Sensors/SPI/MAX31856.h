@@ -37,7 +37,9 @@ protected:
 	float cj_temp;					///< Measured cold junction temperature
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -87,4 +89,3 @@ private:
 
 
 };
-

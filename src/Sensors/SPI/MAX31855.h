@@ -37,7 +37,9 @@ protected:
 	float internal_temp;			///< Measured internal temperature
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -78,4 +80,3 @@ public:
 private:
 
 };
-

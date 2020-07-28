@@ -36,7 +36,9 @@ protected:
 	bool		digital_vals[DIGITAL_COUNT];	///< Array of last read digital values
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -131,4 +133,3 @@ private:
 	uint8_t		pin_to_index(const uint8_t pin) const;
 
 };
-

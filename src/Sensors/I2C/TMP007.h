@@ -38,6 +38,8 @@ protected:
 
 public:
 
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -56,7 +58,7 @@ const byte i2c_address		= 0x40,
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
 	Loom_TMP007(LoomManager* manager, JsonArrayConst p);
-	
+
 	/// Destructor
 	virtual ~Loom_TMP007() = default;
 
@@ -76,7 +78,3 @@ const byte i2c_address		= 0x40,
 private:
 
 };
-
-
-
-

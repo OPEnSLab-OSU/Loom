@@ -1,19 +1,21 @@
 
 #include "STEMMA.h"
 
+char* Loom_STEMMA::name = "STEMMA";
+
 Loom_STEMMA::Loom_STEMMA(
 LoomManager* manager,
 const byte i2c_address,
                          const uint8_t  mux_port
         )
 : LoomI2CSensor(manager, "STEMMA", Type::STEMMA, i2c_address, mux_port) {
-    
+
     ss = Adafruit_seesaw();
-    
+
     LPrintln(i2c_address);
     // Try to setup sensor
     bool setup = ss.begin(i2c_address);
-        
+
     if (!setup) active = false;
 
     print_module_label();
@@ -38,7 +40,7 @@ void Loom_STEMMA::measure() {
 
 void Loom_STEMMA::package(JsonObject json) {
     JsonObject data = get_module_data_object(json, module_name);
-    
+
     data["temperature"] = temperature;
     data["capactive"] = capacitive;
 }

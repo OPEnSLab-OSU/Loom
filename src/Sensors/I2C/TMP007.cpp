@@ -11,13 +11,14 @@
 
 #include "TMP007.h"
 
+char* Loom_TMP007::name = "TMP007";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TMP007::Loom_TMP007(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t		mux_port
-	) 
+	)
 	: LoomI2CSensor(manager, "TMP007", Type::TMP007, i2c_address, mux_port )
 	, inst_tmp007( Adafruit_TMP007(i2c_address) )
 {
@@ -53,10 +54,9 @@ void Loom_TMP007::measure()
 void Loom_TMP007::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	
+
 	data["objTemp"] = object_temp;
 	data["dieTemp"] = die_temp;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-	

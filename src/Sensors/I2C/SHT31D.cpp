@@ -11,6 +11,7 @@
 
 #include "SHT31D.h"
 
+char* Loom_SHT31D::name = "SHT31D";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SHT31D::Loom_SHT31D(
@@ -60,10 +61,9 @@ void Loom_SHT31D::measure()
 void Loom_SHT31D::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	
+
 	data["temp"]  = temp;
 	data["humid"] = humid;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-

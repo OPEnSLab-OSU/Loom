@@ -15,6 +15,7 @@
 #define ChangeAddressCommand1 	0xAA	///< These are the two commands that need to be sent in sequence to change the sensor address
 #define ChangeAddressCommand2 	0xA5	///< These are the two commands that need to be sent in sequence to change the sensor address
 
+char* Loom_MB1232::name = "MB1232";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MB1232::Loom_MB1232(
@@ -23,13 +24,13 @@ const byte i2c_address,
 		const uint8_t		mux_port
 	)
 	: LoomI2CSensor(manager, "MB1232", Type::MB1232, i2c_address, mux_port )
-{	
+{
 	Wire.beginTransmission(i2c_address);
 
 	Wire.write(RangeCommand);
 	Wire.endTransmission();
 	delay(100);
-	
+
 	Wire.requestFrom(i2c_address, byte(2));
 	bool setup = (Wire.available() >= 2);
 
@@ -59,7 +60,7 @@ void Loom_MB1232::measure()
 	Wire.write(RangeCommand);
 	Wire.endTransmission();
 	delay(100);
-	
+
 	Wire.requestFrom(0x70, byte(2));
 	if (Wire.available() >= 2) {
 		// The sensor communicates two bytes, each a range. The
@@ -69,22 +70,20 @@ void Loom_MB1232::measure()
 		byte high = Wire.read();
 		byte low  = Wire.read();
 		byte tmp  = Wire.read();
-		
+
 		range = (high * 256) + low;
 	} else {
 		print_module_label();
 		LPrintln("Error reading from mb1232 (range)");
-	}  
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MB1232::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	
+
 	data["range"] = range;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-

@@ -11,17 +11,19 @@
 #include "NTP_Sync.h"
 #include "Manager.h"
 
+char* LoomNTPSync::name = "NTP";
+
 ///////////////////////////////////////////////////////////////////////////////
 LoomNTPSync::LoomNTPSync(
 		LoomManager* 	manager,
 		const uint          sync_interval_hours
-	) 
+	)
 	: LoomModule(manager, "NTP", Type::NTP )
 	, m_sync_interval( sync_interval_hours )
 	, m_internet( nullptr )
 	, m_rtc( nullptr )
 	, m_next_sync( 1 )
-	, m_last_error( LoomNTPSync::Error::NON_START ) 
+	, m_last_error( LoomNTPSync::Error::NON_START )
 	{}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -29,7 +31,7 @@ LoomNTPSync::LoomNTPSync(LoomManager* manager, JsonArrayConst p)
 	: LoomNTPSync(manager, (uint)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::second_stage_ctor() 
+void LoomNTPSync::second_stage_ctor()
 {
 	// check to see if we have a device manager
 	if (device_manager == nullptr) { m_last_error = Error::INVAL_DEVICE_MANAGE; return; }
@@ -71,7 +73,7 @@ void LoomNTPSync::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::print_state() const 
+void LoomNTPSync::print_state() const
 {
 	print_module_label();
 	if (m_last_error != Error::OK) LPrint("\tNTPSync in error state: ", static_cast<uint8_t>(m_last_error), "\n");
@@ -80,7 +82,7 @@ void LoomNTPSync::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::measure() 
+void LoomNTPSync::measure()
 {
 	// if a sync is requested
 	if (m_next_sync.unixtime() != 0 && m_rtc->now().secondstime() > m_next_sync.secondstime()) {
@@ -116,7 +118,7 @@ void LoomNTPSync::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DateTime LoomNTPSync::m_sync_rtc() 
+DateTime LoomNTPSync::m_sync_rtc()
 {
 	// it is presumed that the objects this function needs are in working order
 	// get the current time from the internet

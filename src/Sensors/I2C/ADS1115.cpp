@@ -1,5 +1,7 @@
 #include "ADS1115.h"
 
+char* Loom_ADS1115::name = "ADS1115";
+
 //ADS1115 ADS1115(i2c_address);
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ADS1115::Loom_ADS1115(
@@ -33,7 +35,7 @@ Loom_ADS1115::Loom_ADS1115(LoomManager* manager, JsonArrayConst p)
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_ADS1115::print_config() const
-{			
+{
 	LPrintln('\t', "i2c_address: ", i2c_address);
 	LPrintln('\t', "module_name: ", "ADS1115" );
 	LPrintln('\t', "Using Analog 0: ", analog_enabled[0]);
@@ -63,7 +65,7 @@ void Loom_ADS1115::print_measurements() const
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_ADS1115::measure()
-{ 
+{
 	for (uint8_t i = 0; i < 4; i++) {
 		if (analog_enabled[i])
 			analog_reads[i] = ads1115.readADC_SingleEnded(i);

@@ -32,7 +32,9 @@ protected:
 	float		elec_cond;		///< Measure electrical conductivity
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -70,5 +72,3 @@ public:
 private:
 
 };
-
-

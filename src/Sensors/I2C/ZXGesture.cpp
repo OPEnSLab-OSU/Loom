@@ -11,12 +11,13 @@
 
 #include "ZXGesture.h"
 
+char* Loom_ZXGesture::name = "ZXGesture";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ZXGesture::Loom_ZXGesture(
 LoomManager* manager,
-const byte i2c_address, 
-		const uint8_t		mux_port, 
+const byte i2c_address,
+		const uint8_t		mux_port,
 		const Mode			mode
 	)
 	: LoomI2CSensor(manager, "ZXGesture", Type::ZXGesture, i2c_address, mux_port )
@@ -35,7 +36,7 @@ const byte i2c_address,
 	} else {
 		LPrintln("Model Version: ", ver);
 	}
-	
+
 	// Read the register map version and ensure the library will work
 	ver = inst_ZX.getRegMapVersion();
 	print_module_label();
@@ -70,14 +71,14 @@ void Loom_ZXGesture::print_measurements() const
 	LPrintln("Measurements:");
 
 	switch (mode) {
-		case Mode::POS : 
+		case Mode::POS :
 			LPrintln("\tZX: ", pos[0]);
 			LPrintln("\tZY: ", pos[1]);
 			break;
-		case Mode::GEST : 
+		case Mode::GEST :
 			LPrintln("\tGesture type : ", gesture_type.c_str());
 			LPrintln("\tGesture speed: ", gesture_speed);
-			break; 
+			break;
 	}
 }
 
@@ -87,11 +88,11 @@ void Loom_ZXGesture::measure()
 	uint8_t x, z;
 
 	switch (mode) {
-		case Mode::POS : 
+		case Mode::POS :
 			if ( inst_ZX.positionAvailable() ) {
 				x = inst_ZX.readX();
 				z = inst_ZX.readZ();
-				
+
 				if ( (x != ZX_ERROR) && (z != ZX_ERROR) ) {
 					pos[0] = x;
 					pos[1] = z;
@@ -100,28 +101,28 @@ void Loom_ZXGesture::measure()
 				} else {
 					print_module_label();
 					LPrintln("Error occurred while reading position data");
-				}	
+				}
 			} else {
 				// LPrintln("Position data unavailable for zxgesturesensor");
-				
+
 				// Send 255 to indicate that no object is detected
-				pos[0] = 255; 
+				pos[0] = 255;
 				pos[1] = 255;
-			}			
+			}
 			break;
-		
+
 
 		case Mode::GEST :
 			if ( inst_ZX.gestureAvailable() ) {
 				gesture       = inst_ZX.readGesture();
 				gesture_speed = inst_ZX.readGestureSpeed();
-				
+
 				switch (gesture) {
 					case RIGHT_SWIPE : gesture_type = "Right Swipe"; break;
 					case LEFT_SWIPE  : gesture_type = "Left Swipe";  break;
 					case UP_SWIPE    : gesture_type = "Up Swipe";    break;
-					
-					case NO_GESTURE  : 
+
+					case NO_GESTURE  :
 					default: gesture_type = "No Gesture"; break;
 				}
 
@@ -130,7 +131,7 @@ void Loom_ZXGesture::measure()
 				gesture_type  = "No Gesture";
 				gesture_speed = 0;
 			}
-			break; 
+			break;
 	}
 }
 
@@ -141,18 +142,15 @@ void Loom_ZXGesture::package(JsonObject json)
 	JsonObject data = get_module_data_object(json, module_name);
 
 	switch (mode) {
-		case Mode::POS : 		
+		case Mode::POS :
 			data["zx"] = pos[0];
 			data["zy"] = pos[1];
 			break;
-		case Mode::GEST : 
+		case Mode::GEST :
 			data["type"]  = gesture_type.c_str();
-			data["speed"] = (int)gesture_speed;		
-			break; 
+			data["speed"] = (int)gesture_speed;
+			break;
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-

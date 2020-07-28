@@ -46,6 +46,8 @@ protected:
 
 public:
 
+	static char*        name;
+	
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -95,7 +97,7 @@ const byte i2c_address			= 0x49,
 /*@{*/ //======================================================================
 
 	/// Set whether not bulb is used for active light source
-	/// @param[in]	enable	Whether or not to enable 
+	/// @param[in]	enable	Whether or not to enable
 	void		enable_bulb(const bool enable) { use_bulb = enable; }
 
 	/// Set gain.
@@ -118,4 +120,3 @@ const byte i2c_address			= 0x49,
 private:
 
 };
-

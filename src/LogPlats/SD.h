@@ -48,7 +48,9 @@ protected:
 		// byte 			reset_pin;
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -85,7 +87,7 @@ public:
 /*@{*/ //======================================================================
 
 
-	// void		log() override;  
+	// void		log() override;
 
 	bool		log(JsonObject json) override { return save_json(json, filename); }
 
@@ -95,13 +97,13 @@ public:
 	bool		log(const char* name);
 
 	// manually expose superclass version of log() that gets json from
-	// linked LoomManager, calling this classes implementation of 
+	// linked LoomManager, calling this classes implementation of
 	// 'log(JsonObject json)', which is pure virtual in superclass
-	using LoomLogPlat::log; 
+	using LoomLogPlat::log;
 
 	/// Save data to SD card in CSV format.
 	/// Format:
-	/// Identification Date Time ModuleA key1 val1 key2 val2 ... ModuleB key1 val1 ...   
+	/// Identification Date Time ModuleA key1 val1 key2 val2 ... ModuleB key1 val1 ...
 	/// @param[in]	json		The data to be saved
 	/// @param[in]	filename	The file to save to
 	bool		save_json(JsonObject json, const char* name);
@@ -113,7 +115,7 @@ public:
 	/// Clear a file (remove contents but not file itself)
 	/// @param[in]	filename	Name of file to empty
 	void		empty_file(const char* name);
-	
+
 	void		power_up() override;
 	void 		power_down() override;
 
@@ -196,7 +198,7 @@ private:
 	void _write_json_data(File& file, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const;
 
 	/// When instantiating the SD module, you provide a file name base, to which a number is appended.
-	/// This number represents the run number, starting at 0. 
+	/// This number represents the run number, starting at 0.
 	/// For example, if you use the file name base 'data', the first run will generate a file named: 'data00.csv'.
 	/// The next run of the program will produce 'data01.csv' and so on
 	/// @param[in]	default_file	File name base if using file numbers, or complete file name if not using numbers
@@ -205,5 +207,3 @@ private:
 	bool update_filename(const char* default_file, const bool number_files);
 
 };
-
-

@@ -40,7 +40,9 @@ protected:
 	float		mag[3];						///< Measured magnetic field values (x,y,z). Units: μT
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -79,5 +81,3 @@ const byte i2c_address		= 0x1F,
 private:
 
 };
-
-

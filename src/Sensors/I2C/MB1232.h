@@ -32,7 +32,9 @@ protected:
 	uint16_t	range;		///< Measure distance. Units: cm.
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -71,6 +73,3 @@ const byte i2c_address		= 0x70,
 private:
 
 };
-
-
-

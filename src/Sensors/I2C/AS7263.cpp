@@ -11,15 +11,16 @@
 
 #include "AS7263.h"
 
+char* Loom_AS7263::name = "AS7263";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7263::Loom_AS7263(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t		mux_port,
-		const bool			use_bulb, 
-		const uint8_t		gain, 
-		const uint8_t		mode, 
+		const bool			use_bulb,
+		const uint8_t		gain,
+		const uint8_t		mode,
 		const uint8_t		integration_time
 	)
 	: LoomI2CSensor(manager, "AS7263", Type::AS7263, i2c_address, mux_port )
@@ -42,7 +43,7 @@ Loom_AS7263::Loom_AS7263(LoomManager* manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7263::print_config() const
 {
-	LoomI2CSensor::print_config();	
+	LoomI2CSensor::print_config();
 	LPrintln("\tGain     : ", gain);
 	LPrintln("\tMode     : ", mode);
 	LPrintln("\tUse Bulb : ", (use_bulb) ? "True" : "False");
@@ -75,7 +76,7 @@ void Loom_AS7263::measure()
 	nir_vals[2] = inst_AS7263.getT();
 	nir_vals[3] = inst_AS7263.getU();
 	nir_vals[4] = inst_AS7263.getV();
-	nir_vals[5] = inst_AS7263.getW();	
+	nir_vals[5] = inst_AS7263.getW();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -91,4 +92,3 @@ void Loom_AS7263::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-

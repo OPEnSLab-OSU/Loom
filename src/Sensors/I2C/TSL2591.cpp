@@ -13,13 +13,14 @@
 
 #include <Adafruit_Sensor.h>
 
+char* Loom_TSL2591::name = "TSL2591";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TSL2591::Loom_TSL2591(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t		mux_port,
-		const uint8_t		gain_level, 
+		const uint8_t		gain_level,
 		const uint8_t		timing_level
 	)
 	: LoomI2CSensor(manager, "TSL2591", Type::TSL2591, i2c_address, mux_port )
@@ -28,7 +29,7 @@ const byte i2c_address,
 	, inst_tsl2591( Adafruit_TSL2591(i2c_address) )
 {
 	bool setup = inst_tsl2591.begin();
-		
+
 	if (setup) {
 		switch(gain_level) {
 			case 0 : inst_tsl2591.setGain(TSL2591_GAIN_LOW);    break;  // 1x gain (bright light)
@@ -37,7 +38,7 @@ const byte i2c_address,
 			case 3 : inst_tsl2591.setGain(TSL2591_GAIN_MAX);    break;  // 9876x gain
 			default: LPrintln("Invalid gain level."); break;
 		}
-	  
+
 		switch(timing_level) {
 			case 0 : inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_100MS); break; // shortest integration time (bright light)
 			case 1 : inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_200MS); break;
@@ -46,8 +47,8 @@ const byte i2c_address,
 			case 4 : inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_500MS); break;
 			case 5 : inst_tsl2591.setTiming(TSL2591_INTEGRATIONTIME_600MS);  // longest integration time (dim light) break;
 			default: LPrintln("Invalid timing level"); break;
-		}	
-	} 
+		}
+	}
 
 	if (!setup) active = false;
 
@@ -81,12 +82,10 @@ void Loom_TSL2591::measure()
 void Loom_TSL2591::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	
+
 	data["Vis"]  = vis;
 	data["IR"]   = ir;
 	data["Full"] = full;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-

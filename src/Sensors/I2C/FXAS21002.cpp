@@ -13,11 +13,12 @@
 
 #include <Adafruit_Sensor.h>
 
+char* Loom_FXAS21002::name = "FXAS21002";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXAS21002::Loom_FXAS21002(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t		mux_port
 	)
 	: LoomI2CSensor(manager, "FXAS21002", Type::FXAS21002, i2c_address, mux_port )
@@ -66,6 +67,3 @@ void Loom_FXAS21002::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-

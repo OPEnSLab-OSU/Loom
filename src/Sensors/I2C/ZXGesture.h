@@ -50,7 +50,9 @@ protected:
 	uint8_t			gesture_speed;	///< The speed of the last measured gesture
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -92,5 +94,3 @@ const byte i2c_address		= 0x10,
 private:
 
 };
-
-

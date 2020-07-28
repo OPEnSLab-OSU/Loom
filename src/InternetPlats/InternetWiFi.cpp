@@ -10,6 +10,8 @@
 
 #include "InternetWiFi.h"
 
+char* Loom_WiFi::name = "WiFi";
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_WiFi::Loom_WiFi(
 		LoomManager* manager,

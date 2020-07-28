@@ -13,6 +13,7 @@
 
 #include <LowPower.h>
 
+char* Loom_Sleep_Manager::name = "SleepManager";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager(

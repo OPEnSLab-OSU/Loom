@@ -18,12 +18,14 @@ protected:
 
     /// Adafruit Seesaw object.
     Adafruit_seesaw ss;
-    
+
     /// Sensor data objects
     float temperature;
     uint16_t capacitive;
-    
+
 public:
+
+	static char*        name;
 
 //=============================================================================
 ///@name    CONSTRUCTORS / DESTRUCTOR
@@ -43,7 +45,7 @@ public:
     /// and delegates to regular constructor
     /// \param[in]    p        The array of constuctor args to expand
     Loom_STEMMA(LoomManager* manager, JsonArrayConst p);
-    
+
     /// Destructor
     virtual ~Loom_STEMMA() = default;
 
@@ -61,7 +63,3 @@ public:
     void        print_measurements() const override;
 
 };
-
-
-
-

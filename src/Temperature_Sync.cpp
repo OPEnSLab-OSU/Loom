@@ -14,12 +14,14 @@
 
 #include "Sensors/I2C/MS5803.h"
 
+char* LoomTempSync::name = "TempSync";
+
 ///////////////////////////////////////////////////////////////////////////////
-LoomTempSync::LoomTempSync(   
+LoomTempSync::LoomTempSync(
 		LoomManager* 				manager,
 		const LoomModule::Type		source,
 		const LoomModule::Type		dependant
-	) 
+	)
 	: LoomModule(manager, "TempSync", Type::TempSync )
 	, source_type(source)
 	, dependant_type(dependant)
@@ -30,7 +32,7 @@ LoomTempSync::LoomTempSync(LoomManager* manager, JsonArrayConst p)
 	: LoomTempSync(manager, (LoomModule::Type)(int)p[0], (LoomModule::Type)(int)p[1] ) {}
 
 /////////////////////////////////////////////////////////////////////////////
-void LoomTempSync::second_stage_ctor() 
+void LoomTempSync::second_stage_ctor()
 {
 	bool setup = true;
 
@@ -38,7 +40,7 @@ void LoomTempSync::second_stage_ctor()
 	if (device_manager != nullptr) {
 		// source
 		LoomModule* tmp = device_manager->find_module(source_type);
-		if (tmp != nullptr) { 
+		if (tmp != nullptr) {
 			print_module_label();
 			LPrintln("Found source (", (int)source_type, ")");
 			source = tmp;
@@ -47,7 +49,7 @@ void LoomTempSync::second_stage_ctor()
 		}
 		// dependant
 		tmp = device_manager->find_module(dependant_type);
-		if (tmp != nullptr) { 
+		if (tmp != nullptr) {
 			print_module_label();
 			LPrintln("Found dependant (", (int)dependant_type, ")");
 			dependant = tmp;
@@ -67,12 +69,12 @@ void LoomTempSync::second_stage_ctor()
 void LoomTempSync::print_config() const
 {
 	LoomModule::print_config();
-	LPrintln("\tSource Type: ", (int)source_type); 
-	LPrintln("\tDependant Type: ", (int)dependant_type); 
+	LPrintln("\tSource Type: ", (int)source_type);
+	LPrintln("\tDependant Type: ", (int)dependant_type);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomTempSync::sync_temp() 
+void LoomTempSync::sync_temp()
 {
 	if (source && source->get_active() && dependant && dependant->get_active() ) {
 		float temp = 25.0;

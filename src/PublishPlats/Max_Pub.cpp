@@ -13,24 +13,25 @@
 #include "../SubscribePlats/Max_Sub.h"
 #include "../Manager.h"
 
+char* Loom_MaxPub::name = "MaxPub";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxPub::Loom_MaxPub(
 		LoomManager* manager,
 		const LoomModule::Type	internet_type
-	)   
+	)
 	: LoomPublishPlat(manager, "MaxPub", Type::MaxPub, internet_type )
 	, remoteIP({192,168,1,255})
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::second_stage_ctor() 
+void Loom_MaxPub::second_stage_ctor()
 {
 	LoomPublishPlat::second_stage_ctor();
 
 	UDP_port = UDP_SEND_OFFSET + ((device_manager) ? device_manager->get_instance_num() : 0);
 
-	// Get new UDP pointer	
+	// Get new UDP pointer
 	if (m_internet != nullptr) {
 		UDP_Inst = m_internet->open_socket(UDP_port);
 	} else {
@@ -62,7 +63,7 @@ void Loom_MaxPub::set_port(const uint16_t port)
 bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat)
 {
 	if (!UDP_Inst) {
-		// Try to get UDP 
+		// Try to get UDP
 		UDP_Inst = (m_internet != nullptr) ? m_internet->open_socket(UDP_port) : nullptr;
 		// Check if still null
 		if (!UDP_Inst) {
@@ -77,7 +78,7 @@ bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat
 		LPrintln("Sending to remoteIP: ", remoteIP);
 	}
 
-	// Send Json	
+	// Send Json
 	UDP_Inst->beginPacket(remoteIP, UDP_port);
 	serializeJson(json, (*UDP_Inst) );
 	UDP_Inst->endPacket(); // Mark the end of the OSC Packet
@@ -119,11 +120,3 @@ bool Loom_MaxPub::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-

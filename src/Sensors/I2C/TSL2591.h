@@ -43,7 +43,9 @@ protected:
 	uint8_t				timing_level;		///< Sensor integration time setting
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -86,5 +88,3 @@ const byte i2c_address			= 0x29,
 private:
 
 };
-
-
