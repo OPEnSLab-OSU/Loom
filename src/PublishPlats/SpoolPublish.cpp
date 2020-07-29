@@ -45,13 +45,10 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 	, m_device_data_endpoint(device_data_endpoint)
 	, m_device_id(device_id)
   	, m_coordinator_id(coordinator_id)
-
 	, m_params(SSLClientParameters::fromPEM(cli_cert, sizeof(cli_cert), cli_key, sizeof(cli_key)))
-	// The last item in this chain always trys to be constructed as SSLClientParameters?
-	// No idea where this is coming from.
  {
-	//m_cli_cert = cli_cert;
-	//m_cli_key = cli_key;
+	LPrintln(cli_cert);
+	LPrintln(cli_key);
  }
 
 /////////////////////////////////////////////////////////////////////
@@ -78,13 +75,14 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 	// serialize the data, checking for an error
 	// not sure if this is the right way to check if there is a overflow
 	// set mutual auth, if needed
-	//if (!m_cli_cert.size()) LPrintln("Failed to decode client certificate");
-	//else if (!m_cli_key.size()) LPrintln("Failed to decode client private key");
-	//else {
-		LPrintln("Adding mutual auth!");
+	
+	//if (!(*(m_params.getCertChain())).data_len) LPrintln("Failed to decode client certificate");
+	if (!(*(m_params.getECKey())).xlen) LPrintln("Failed to decode client private key");
+	
+	LPrintln("Adding mutual auth!");
 		// setup the certificate
 		plat->set_mutual_auth(m_params);
-	//}
+
 	auto network = plat->connect_to_domain(m_spool_domain.c_str());
 
 	if (!network) {
