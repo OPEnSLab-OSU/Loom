@@ -112,7 +112,7 @@ Loom_Ethernet& LoomManager::Ethernet(const uint8_t idx)
 	return (*(Loom_Ethernet*)( (tmp) ? tmp : nullptr ));
 }
 
-Loom_WiFi& LoomManager::WiFi(const uint8_t idx) 
+Loom_WiFi& LoomManager::WiFi(const uint8_t idx)
 {
 	LoomModule* tmp = find_module(LoomModule::Type::WiFi, idx);
 	return (*(Loom_WiFi*)( (tmp) ? tmp : nullptr ));
@@ -173,9 +173,9 @@ Loom_OLED& LoomManager::OLED(const uint8_t idx)
 	return (*(Loom_OLED*)( (tmp) ? tmp : nullptr ));
 }
 
-Loom_SD& LoomManager::SDCARD(const uint8_t idx)
+Loom_SD& LoomManager::SD(const uint8_t idx)
 {
-	LoomModule* tmp = find_module(LoomModule::Type::SDCARD, idx);
+	LoomModule* tmp = find_module(LoomModule::Type::SD, idx);
 	return (*(Loom_SD*)( (tmp) ? tmp : nullptr ));
 }
 
@@ -358,14 +358,14 @@ Loom_K30& LoomManager::K30(const uint8_t idx)
 ///////////////////////////////////////////////////////////////////////////////
 //    --- Other ---
 
-LoomNTPSync& LoomManager::NTP(const uint8_t idx)
+Loom_NTP_Sync& LoomManager::NTP(const uint8_t idx)
 {
 	LoomModule* tmp = find_module(LoomModule::Type::NTP, idx);
-	return (*(LoomNTPSync*)( (tmp) ? tmp : nullptr ));
+	return (*(Loom_NTP_Sync*)( (tmp) ? tmp : nullptr ));
 }
 
-LoomTempSync& LoomManager::TempSync(const uint8_t idx)
+Loom_Temp_Sync& LoomManager::TempSync(const uint8_t idx)
 {
 	LoomModule* tmp = find_module(LoomModule::Type::TempSync, idx);
-	return (*(LoomTempSync*)( (tmp) ? tmp : nullptr ));
+	return (*(Loom_Temp_Sync*)( (tmp) ? tmp : nullptr ));
 }

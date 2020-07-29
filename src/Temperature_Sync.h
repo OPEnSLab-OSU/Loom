@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Temperature_Sync.h
-/// @brief		File for LoomTempSync definition.
+/// @brief		File for Loom_Temp_Sync definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -29,7 +29,7 @@
 /// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom_temp_sync.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomTempSync : public LoomModule
+class Loom_Temp_Sync : public LoomModule
 {
 
 protected:
@@ -46,7 +46,7 @@ public:
 	///
 	/// @param[in]  source		Module type to get temperature from
 	/// @param[in]  dependant	Module type to forward temperature to
-	LoomTempSync(
+	Loom_Temp_Sync(
 		LoomManager* manager,
 		const LoomModule::Type		source		= LoomModule::Type::MS5803,
 		const LoomModule::Type		dependant	= LoomModule::Type::Analog		// might be an array in the future
@@ -55,10 +55,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	LoomTempSync(LoomManager* manager, JsonArrayConst p);
+	Loom_Temp_Sync(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor.
-	~LoomTempSync() = default;
+	~Loom_Temp_Sync() = default;
 
 	/// Verify that source and dependant modules exist, sync temperatures
 	void	second_stage_ctor() override;
@@ -68,7 +68,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Sync the temperature.
-	/// Simply calls synchronization implementation LoomTempSync::sync_temp().
+	/// Simply calls synchronization implementation Loom_Temp_Sync::sync_temp().
 	/// Allows the module to run regularly by emulating a sensor, which have
 	/// thier measure methods called regularly.
 	void		measure() { sync_temp(); }

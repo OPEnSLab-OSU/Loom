@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_AS7262.h
+/// @file		Loom_ADS115.h
 /// @brief		File for Loom_ADS1115 definition.
 /// @author		Noah Koontz
 /// @date		2020
@@ -46,7 +46,7 @@ protected:
 public:
 
 	static char*        name;
-		
+
 	enum class Gain : uint32_t {
 		GAIN_TWOTHIRDS    = ADS1015_REG_CONFIG_PGA_6_144V,
 		GAIN_ONE          = ADS1015_REG_CONFIG_PGA_4_096V,

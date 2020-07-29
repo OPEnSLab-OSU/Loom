@@ -25,7 +25,7 @@ Loom_SD::Loom_SD(
 		const char*			default_file,
 		const bool			number_files
 	)
-	: LoomLogPlat(manager, "SD", Type::SDCARD, enable_rate_filter, min_filter_delay )
+	: LoomLogPlat(manager, "SD", Type::SD, enable_rate_filter, min_filter_delay )
 	, chip_select(chip_select)
 {
 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI

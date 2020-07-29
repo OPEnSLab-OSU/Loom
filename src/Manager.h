@@ -104,8 +104,8 @@ class Loom_WarmUp_Manager;
 class Loom_Sleep_Manager;
 class Loom_Interrupt_Manager;
 class Loom_Multiplexer;
-class LoomNTPSync;
-class LoomTempSync;
+class Loom_NTP_Sync;
+class Loom_Temp_Sync;
 
 
 class FactoryBase;
@@ -466,8 +466,8 @@ public:
 	Loom_Sleep_Manager&			SleepManager(const uint8_t idx = 0);
 	Loom_Interrupt_Manager&		InterruptManager(const uint8_t idx = 0);
 	Loom_Multiplexer&			Multiplexer(const uint8_t idx = 0);
-	LoomNTPSync&				NTP(const uint8_t idx = 0);
-	LoomTempSync&				TempSync(const uint8_t idx = 0);
+	Loom_NTP_Sync&				NTP(const uint8_t idx = 0);
+	Loom_Temp_Sync&				TempSync(const uint8_t idx = 0);
 
 	// CommPlats
 	Loom_LoRa&			LoRa(const uint8_t idx = 0);
@@ -476,7 +476,7 @@ public:
 
 	// LogPlats
 	Loom_OLED&			OLED(const uint8_t idx = 0);
-	Loom_SD&			SDCARD(const uint8_t idx = 0);
+	Loom_SD&			SD(const uint8_t idx = 0);
 
 	// InternetPlats
 	LoomInternetPlat&	InternetPlat(const uint8_t idx = 0);
@@ -549,7 +549,7 @@ private:
 	friend class Loom_Sleep_Manager;
 	friend class LoomRTC;
 	friend class Loom_SD;
-	friend class LoomNTPSync;
+	friend class Loom_NTP_Sync;
 
 	Loom_Interrupt_Manager*	get_interrupt_manager() { return interrupt_manager; }
 	Loom_Sleep_Manager*		get_sleep_manager() { return sleep_manager; }

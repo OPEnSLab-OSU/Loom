@@ -28,7 +28,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-class LoomNTPSync : public LoomModule
+class Loom_NTP_Sync : public LoomModule
 {
 
 public:
@@ -42,7 +42,7 @@ public:
 	/// NTP Sync module constructor.
 	///
 	/// @param[in]  sync_interval_hours		Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
-	LoomNTPSync(
+	Loom_NTP_Sync(
 		LoomManager* manager,
 		const uint		sync_interval_hours		= 0
 	);
@@ -50,10 +50,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	LoomNTPSync(LoomManager* manager, JsonArrayConst p);
+	Loom_NTP_Sync(LoomManager* manager, JsonArrayConst p);
 
 	/// Destructor
-	~LoomNTPSync() = default;
+	~Loom_NTP_Sync() = default;
 
 	/// Sync the RTC using NTP from the internet platform specified
 	void	second_stage_ctor() override;

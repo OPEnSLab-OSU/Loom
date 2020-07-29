@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Temperature_Sync.cpp
-/// @brief		File for LoomTempSync implementation.
+/// @brief		File for Loom_Temp_Sync implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -14,10 +14,10 @@
 
 #include "Sensors/I2C/MS5803.h"
 
-char* LoomTempSync::name = "TempSync";
+char* Loom_Temp_Sync::name = "TempSync";
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomTempSync::LoomTempSync(
+Loom_Temp_Sync::Loom_Temp_Sync(
 		LoomManager* 				manager,
 		const LoomModule::Type		source,
 		const LoomModule::Type		dependant
@@ -28,11 +28,11 @@ LoomTempSync::LoomTempSync(
 	{}
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomTempSync::LoomTempSync(LoomManager* manager, JsonArrayConst p)
-	: LoomTempSync(manager, (LoomModule::Type)(int)p[0], (LoomModule::Type)(int)p[1] ) {}
+Loom_Temp_Sync::Loom_Temp_Sync(LoomManager* manager, JsonArrayConst p)
+	: Loom_Temp_Sync(manager, (LoomModule::Type)(int)p[0], (LoomModule::Type)(int)p[1] ) {}
 
 /////////////////////////////////////////////////////////////////////////////
-void LoomTempSync::second_stage_ctor()
+void Loom_Temp_Sync::second_stage_ctor()
 {
 	bool setup = true;
 
@@ -66,7 +66,7 @@ void LoomTempSync::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomTempSync::print_config() const
+void Loom_Temp_Sync::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tSource Type: ", (int)source_type);
@@ -74,7 +74,7 @@ void LoomTempSync::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomTempSync::sync_temp()
+void Loom_Temp_Sync::sync_temp()
 {
 	if (source && source->get_active() && dependant && dependant->get_active() ) {
 		float temp = 25.0;
