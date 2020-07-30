@@ -10,13 +10,15 @@
 
 #include "MMA8451.h"
 
+char* Loom_MMA8451::name = "MMA8451";
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MMA8451::Loom_MMA8451(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t			mux_port,
 		const mma8451_range_t	range
-	) 
+	)
 	: LoomI2CSensor(manager, "MMA8451", Type::MMA8451, i2c_address, mux_port )
 	, range{range}
 {
@@ -53,7 +55,7 @@ void Loom_MMA8451::print_measurements() const
 	LPrintln("\tAccel X     : ", accel[0], " m/s^2");
 	LPrintln("\tAccel Y     : ", accel[1], " m/s^2");
 	LPrintln("\tAccel Z     : ", accel[2], " m/s^2");
-	
+
 	LPrint("\tOrientation : ");
 	switch (orientation) {
 		case MMA8451_PL_PUF: LPrintln("Portrait Up Front");		break;
@@ -74,7 +76,7 @@ void Loom_MMA8451::measure()
 	MMA.read();
 
 	// Get a new sensor event
-	sensors_event_t event; 
+	sensors_event_t event;
 	MMA.getEvent(&event);
 
 	accel[0] = event.acceleration.x;
@@ -89,7 +91,7 @@ void Loom_MMA8451::measure()
 void Loom_MMA8451::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	
+
 	data["ax"] = accel[0];
 	data["ay"] = accel[1];
 	data["az"] = accel[2];
@@ -214,4 +216,4 @@ void Loom_MMA8451::package(JsonObject json)
 // }
 
 // ///////////////////////////////////////////////////////////////////////////////
-// 	
+//

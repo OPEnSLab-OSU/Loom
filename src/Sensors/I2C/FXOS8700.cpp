@@ -13,11 +13,12 @@
 
 #include <Adafruit_Sensor.h>
 
+char* Loom_FXOS8700::name = "FXOS8700";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXOS8700::Loom_FXOS8700(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t		mux_port
 	)
 	: LoomI2CSensor(manager, "FXOS8700", Type::FXOS8700, i2c_address, mux_port )
@@ -67,7 +68,7 @@ void Loom_FXOS8700::measure()
 void Loom_FXOS8700::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	
+
 	data["ax"] = accel[0];
 	data["ay"] = accel[1];
 	data["az"] = accel[2];
@@ -78,5 +79,3 @@ void Loom_FXOS8700::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-

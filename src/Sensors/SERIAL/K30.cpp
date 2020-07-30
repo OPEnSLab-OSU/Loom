@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		K30.h
-/// @brief		File for K30 Co2 Sensor implementation. 
+/// @brief		File for K30 Co2 Sensor implementation.
 /// @author		Eli Winkelman and Kenneth Kang
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
@@ -9,6 +9,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "K30.h"
+
+char* Loom_K30::name = "K30";
 
 Loom_K30::Loom_K30(LoomManager* manager,
                    const char* module_name,
@@ -28,21 +30,21 @@ Loom_K30::Loom_K30(LoomManager* manager, JsonArrayConst p)
 {}
 
 void Loom_K30::sendSensorRequest(byte request[7]) {
-    
+
     if (sensor_serial == nullptr) {
         LPrintln("Serial is not set, cannot send request");
         return;
     }
-    
+
     LPrintln("Sending Request to K30 Sensor");
     delay(100);
     while (!sensor_serial -> available()) //keep sending request until we start to get a response
     {
-        LPrintln("Sensor_Serial Available, retrieving response");  // TODO:This doesn't make sense: in line 41 and line 49 
+        LPrintln("Sensor_Serial Available, retrieving response");  // TODO:This doesn't make sense: in line 41 and line 49
         sensor_serial -> write(request, 7);
         delay(50);
     }
-    
+
     int timeout = 0; //set a timeoute counter
     while (sensor_serial -> available() < 7 ) //Wait to get a 7 byte response
     {
@@ -68,7 +70,7 @@ int Loom_K30::readSensorResponse(byte packet[7]){
     int low = packet[4];                         //low byte for value is 5th byte in the packet
     unsigned long val = high * 256 + low;        //Combine high byte and low byte with this formula to get value
     return val;
-    
+
 }
 
 void Loom_K30::measure() {
@@ -84,7 +86,7 @@ void Loom_K30::print_measurements() const {
 
 void Loom_K30::package(JsonObject json) {
     JsonObject data = get_module_data_object(json, module_name);
-    
+
     data["C02"] = C02_levels;
-    
+
 }

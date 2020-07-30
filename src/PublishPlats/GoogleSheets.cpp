@@ -13,6 +13,8 @@
 #include "../Manager.h"
 
 
+char* Loom_GoogleSheets::name = "GoogleSheets";
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(
 		LoomManager* manager,
@@ -22,17 +24,17 @@ Loom_GoogleSheets::Loom_GoogleSheets(
 		const char*				sheet_id,
 		const bool				tab_matches_dev_id,
 		const char*				tab_id
-	)   
+	)
 	: LoomPublishPlat(manager, module_name, Type::GoogleSheets, internet_type )
 	, m_script_url(script_url)
 	, m_sheet_id(sheet_id)
 	, tab_matches_dev_id(tab_matches_dev_id)
 	, m_tab_id(tab_id)
-{   
+{
 	// Build the begining of the Google Sheets URL with all of the provided parameters
 	print_module_label();
 	LPrint("Google sheets ready with url: ", m_script_url, '\n');
-} 
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(LoomManager* manager, JsonArrayConst p)
@@ -48,7 +50,7 @@ void Loom_GoogleSheets::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat* plat) 
+bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat* plat)
 {
 	// connect to script.google.com
 	auto network = plat->connect_to_domain("script.google.com");
@@ -63,7 +65,7 @@ bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat
 	network->print("GET ");
 	// construct the URL from a bunch of different segments
 	// start with the sheet metadata base, referenced from the following snprintf statement:
-	/* const int printed = snprintf(m_buffer, sizeof(m_buffer), "%s?key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s&key3=full_data&val3=", 
+	/* const int printed = snprintf(m_buffer, sizeof(m_buffer), "%s?key0=sheetID&val0=%s&key1=tabID&val1=%s&key2=deviceID&val2=%s&key3=full_data&val3=",
 		script_url,				// URL of the script
 		sheet_id,				// Spreadsheet ID
 		tab_id,					// Tab to write to
@@ -117,7 +119,7 @@ bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_GoogleSheets::m_serialize_internet_impl(const JsonObject json, Print& write) 
+bool Loom_GoogleSheets::m_serialize_internet_impl(const JsonObject json, Print& write)
 {
 	// step one: package timestamp
 	const JsonObject time_obj = json["timestamp"];

@@ -10,12 +10,14 @@
 
 #include "Decagon_GS3.h"
 
+char* Loom_DecagonGS3::name = "DecagonGS3";
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DecagonGS3::Loom_DecagonGS3(
 		LoomManager* manager,
-		const uint8_t			num_samples 
-	) 
-	: LoomSDI12Sensor(manager, "GS3", Type::DecagonGS3, num_samples ) 
+		const uint8_t			num_samples
+	)
+	: LoomSDI12Sensor(manager, "DecagonGS3", Type::DecagonGS3, num_samples )
 {
 
 }
@@ -49,5 +51,3 @@ void Loom_DecagonGS3::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-

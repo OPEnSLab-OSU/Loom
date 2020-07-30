@@ -42,7 +42,9 @@ protected:
 	uint16_t	lightFull;		///< Measure full spectrum. Units: lux.
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -85,5 +87,3 @@ const byte i2c_address		= 0x39,
 private:
 
 };
-
-

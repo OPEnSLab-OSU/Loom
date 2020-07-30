@@ -11,15 +11,16 @@
 
 #include "MAX31855.h"
 
+char* Loom_MAX31855::name = "MAX31855";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MAX31855::Loom_MAX31855(
 		LoomManager* manager,
 		const char* module_name,
-		const uint8_t		num_samples, 
+		const uint8_t		num_samples,
 		const uint8_t		CS_pin
-	) 
-	: LoomSPISensor(manager, module_name, Type::MAX31855, num_samples ) 
+	)
+	: LoomSPISensor(manager, module_name, Type::MAX31855, num_samples )
 	, inst_max(CS_pin)
 {
 	inst_max.begin();
@@ -30,7 +31,7 @@ Loom_MAX31855::Loom_MAX31855(LoomManager* manager, JsonArrayConst p)
 	: Loom_MAX31855(manager, EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MAX31855::print_measurements() const 
+void Loom_MAX31855::print_measurements() const
 {
 	print_module_label();
 	LPrintln("\tTemperature   : ", temperature, " °C");
@@ -38,7 +39,7 @@ void Loom_MAX31855::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MAX31855::measure() 
+void Loom_MAX31855::measure()
 {
 	int i = num_samples;
 	float int_temp = 0, temp = 0, t;
@@ -71,4 +72,3 @@ void Loom_MAX31855::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-

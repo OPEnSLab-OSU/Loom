@@ -12,28 +12,30 @@
 
 #include "../Manager.h"
 
+char* Loom_MaxSub::name = "MaxSub";
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxSub::Loom_MaxSub(
 		LoomManager* manager,
 		const LoomModule::Type	internet_type,
 		const bool				auto_dispatch
-	)   
+	)
 	: LoomSubscribePlat(manager, "MaxSub", Type::MaxSub, internet_type )
 	, auto_dispatch(auto_dispatch)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxSub::Loom_MaxSub(LoomManager* manager, JsonArrayConst p) 
+Loom_MaxSub::Loom_MaxSub(LoomManager* manager, JsonArrayConst p)
 	: Loom_MaxSub(manager, (LoomModule::Type)(int)p[0], p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxSub::second_stage_ctor() 
+void Loom_MaxSub::second_stage_ctor()
 {
 	LoomSubscribePlat::second_stage_ctor();
 
 	UDP_port = UDP_RECEIVE_OFFSET + ((device_manager) ? device_manager->get_instance_num() : 0);
 
-	// Get new UDP pointer	
+	// Get new UDP pointer
 	if (m_internet != nullptr) {
 		UDP_Inst = m_internet->open_socket(UDP_port);
 	} else {
@@ -47,7 +49,7 @@ bool Loom_MaxSub::subscribe(JsonObject json)
 {
 	// Make sure UDP object exists
 	if (!UDP_Inst) {
-		// Try to get UDP 
+		// Try to get UDP
 		UDP_Inst = (m_internet != nullptr) ? m_internet->open_socket(UDP_port) : nullptr;
 		// Check if still null
 		if (!UDP_Inst) {
@@ -68,7 +70,7 @@ bool Loom_MaxSub::subscribe(JsonObject json)
 
 		bool status = json.set(messageJson.as<JsonObject>());
 		if (!status) {
-			LPrintln("Json set error");	
+			LPrintln("Json set error");
 			return false;
 		}
 
@@ -121,6 +123,3 @@ void Loom_MaxSub::set_port(const uint16_t port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-

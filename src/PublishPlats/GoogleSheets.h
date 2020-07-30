@@ -28,6 +28,7 @@ class Loom_GoogleSheets : public LoomPublishPlat
 
 public:
 
+	static char*        name;
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -36,7 +37,7 @@ public:
 	/// Check out https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets
 	/// (or http://www.open-sensing.org/evaporometerblog/datalog) for more information on these parameters.
 	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name.
-	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform. 
+	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform.
 	/// @param[in]  script_url			String | <""> | null | URL where the google sheets script is hosted, without domain (ex. /macros/s/AKfycby<more letters here>_k0n/exec).
 	/// @param[in]  sheet_id			String | <""> | null |ID Of the spreadsheet to put data in (script must have edit access).
 	/// @param[in]  tab_matches_dev_id	Bool | <true> | null | Override tab_id with the name+instance number of the device.

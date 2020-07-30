@@ -17,6 +17,7 @@
 
 #include <EnableInterrupt.h>
 
+char* Loom_Interrupt_Manager::name = "InterruptManager";
 
 ///////////////////////////////////////////////////////////////////////////////
 

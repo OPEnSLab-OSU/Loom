@@ -31,7 +31,9 @@ protected:
 	RTC_DS3231	rtc_inst;	///< Underlying DS3231 manager instance
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -75,4 +77,3 @@ protected:
 	void		_adjust(const DateTime time) override { rtc_inst.adjust(time); }
 
 };
-

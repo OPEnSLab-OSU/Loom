@@ -20,9 +20,9 @@
 ///
 /// MS5803 Atmospheric Pressure / Temperature sensor module.
 ///
-/// @attention	Library is modified to support different I2C addresses and will not 
+/// @attention	Library is modified to support different I2C addresses and will not
 ///				compile with Loom without the change.
-///				The modifed verision can be found in the [Loom_Auxiliary](https://github.com/OPEnSLab-OSU/Loom_Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip) 
+///				The modifed verision can be found in the [Loom_Auxiliary](https://github.com/OPEnSLab-OSU/Loom_Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip)
 ///				repository
 ///
 /// @par Resources
@@ -45,7 +45,9 @@ protected:
 	float		temp;			///< Measured temperature. Units: °C.
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -94,6 +96,3 @@ const byte i2c_address		= 0x76,
 private:
 
 };
-
-
-

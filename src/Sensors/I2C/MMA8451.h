@@ -43,6 +43,8 @@ protected:
 
 public:
 
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -63,7 +65,7 @@ const byte i2c_address		= 0x1D,
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
 	Loom_MMA8451(LoomManager* manager, JsonArrayConst p);
-	
+
 	/// Destructor
 	virtual ~Loom_MMA8451() = default;
 
@@ -105,7 +107,3 @@ const byte i2c_address		= 0x1D,
 private:
 
 };
-
-
-
-

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_NTP_Sync.cpp
-/// @brief		File for LoomNTPSync implementation.
+/// @brief		File for Loom_NTP_Sync implementation.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -11,25 +11,27 @@
 #include "NTP_Sync.h"
 #include "Manager.h"
 
+char* Loom_NTP_Sync::name = "NTP";
+
 ///////////////////////////////////////////////////////////////////////////////
-LoomNTPSync::LoomNTPSync(
+Loom_NTP_Sync::Loom_NTP_Sync(
 		LoomManager* 	manager,
 		const uint          sync_interval_hours
-	) 
+	)
 	: LoomModule(manager, "NTP", Type::NTP )
 	, m_sync_interval( sync_interval_hours )
 	, m_internet( nullptr )
 	, m_rtc( nullptr )
 	, m_next_sync( 1 )
-	, m_last_error( LoomNTPSync::Error::NON_START ) 
+	, m_last_error( Loom_NTP_Sync::Error::NON_START )
 	{}
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomNTPSync::LoomNTPSync(LoomManager* manager, JsonArrayConst p)
-	: LoomNTPSync(manager, (uint)p[0] ) {}
+Loom_NTP_Sync::Loom_NTP_Sync(LoomManager* manager, JsonArrayConst p)
+	: Loom_NTP_Sync(manager, (uint)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::second_stage_ctor() 
+void Loom_NTP_Sync::second_stage_ctor()
 {
 	// check to see if we have a device manager
 	if (device_manager == nullptr) { m_last_error = Error::INVAL_DEVICE_MANAGE; return; }
@@ -63,7 +65,7 @@ void LoomNTPSync::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::print_config() const
+void Loom_NTP_Sync::print_config() const
 {
 	print_module_label();
 	if (m_sync_interval == 0) LPrintln("\tNTPSync set to synchronize once.");
@@ -71,7 +73,7 @@ void LoomNTPSync::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::print_state() const 
+void Loom_NTP_Sync::print_state() const
 {
 	print_module_label();
 	if (m_last_error != Error::OK) LPrint("\tNTPSync in error state: ", static_cast<uint8_t>(m_last_error), "\n");
@@ -80,7 +82,7 @@ void LoomNTPSync::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::measure() 
+void Loom_NTP_Sync::measure()
 {
 	// if a sync is requested
 	if (m_next_sync.unixtime() != 0 && m_rtc->now().secondstime() > m_next_sync.secondstime()) {
@@ -116,7 +118,7 @@ void LoomNTPSync::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DateTime LoomNTPSync::m_sync_rtc() 
+DateTime Loom_NTP_Sync::m_sync_rtc()
 {
 	// it is presumed that the objects this function needs are in working order
 	// get the current time from the internet

@@ -1,27 +1,45 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		Loom_STEMMA.cpp
+/// @brief		File for Loom_STEMMA implementation.
+/// @author		Gresyton Brady
+/// @date		2020
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 
 #include "STEMMA.h"
 
+char* Loom_STEMMA::name = "STEMMA";
+
+
+///////////////////////////////////////////////////////////////////////////////
 Loom_STEMMA::Loom_STEMMA(
 LoomManager* manager,
 const byte i2c_address,
                          const uint8_t  mux_port
         )
 : LoomI2CSensor(manager, "STEMMA", Type::STEMMA, i2c_address, mux_port) {
-    
+
     ss = Adafruit_seesaw();
-    
+
     LPrintln(i2c_address);
     // Try to setup sensor
     bool setup = ss.begin(i2c_address);
-        
+
     if (!setup) active = false;
 
     print_module_label();
     LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 Loom_STEMMA::Loom_STEMMA(LoomManager* manager, JsonArrayConst p)
 : Loom_STEMMA(manager, EXPAND_ARRAY(p, 2) ) {}
+
+///////////////////////////////////////////////////////////////////////////////
 
 void Loom_STEMMA::print_measurements() const
 {
@@ -31,14 +49,18 @@ void Loom_STEMMA::print_measurements() const
     LPrintln("\tCapacitive: ", capacitive);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 void Loom_STEMMA::measure() {
     temperature = ss.getTemp();
     capacitive = ss.touchRead(0);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 void Loom_STEMMA::package(JsonObject json) {
     JsonObject data = get_module_data_object(json, module_name);
-    
+
     data["temperature"] = temperature;
     data["capactive"] = capacitive;
 }

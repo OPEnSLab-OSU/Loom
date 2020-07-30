@@ -207,10 +207,10 @@ void LoomManager::measure()
 			((Loom_Multiplexer*)module)->measure();
 		}
 		else if (module->get_module_type() == LoomModule::Type::NTP) {
-			((LoomNTPSync*)module)->measure();
+			((Loom_NTP_Sync*)module)->measure();
 		}
 		else if (module->get_module_type() == LoomModule::Type::TempSync) {
-			((LoomTempSync*)module)->measure();
+			((Loom_Temp_Sync*)module)->measure();
 		}
 	}
 }

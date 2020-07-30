@@ -27,11 +27,11 @@
 /// - [Loom Max Patches](https://github.com/OPEnSLab-OSU/Max-Loom2)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_MaxSub : public LoomSubscribePlat 
+class Loom_MaxSub : public LoomSubscribePlat
 {
 
 protected:
-	
+
 	uint16_t	UDP_port;				///< Which UDP port to receive on
 	bool		auto_dispatch;			///< True to immediately call LoomManager::dispatch() when packet received
 
@@ -39,19 +39,21 @@ protected:
 
 public:
 
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
 	/// Constructor
 	///
-	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform.
 	/// @param[in]	auto_dispatch		True to immediately call LoomManager::dispatch() when packet received
 	Loom_MaxSub(
 		LoomManager* manager,
 		const LoomModule::Type	internet_type,
-		const bool				auto_dispatch	
-	); 
+		const bool				auto_dispatch
+	);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
@@ -69,7 +71,7 @@ public:
 
 	/// No package necessary for subscribe platforms.
 	/// Implement with empty body.
-	void		package(JsonObject json) override { /* do nothing for now */ }	
+	void		package(JsonObject json) override { /* do nothing for now */ }
 
 	bool		subscribe(JsonObject json) override;
 
@@ -107,4 +109,3 @@ private:
 
 
 };
-

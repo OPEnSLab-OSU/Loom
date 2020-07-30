@@ -10,17 +10,19 @@
 
 #include "MAX31856.h"
 
+char* Loom_MAX31856::name = "MAX31856";
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MAX31856::Loom_MAX31856(
 		LoomManager* manager,
 		const char* module_name,
-		const uint8_t	num_samples, 
+		const uint8_t	num_samples,
 		const uint8_t	CS_pin,
 		const uint8_t	SPI_a,
 		const uint8_t	SPI_b,
 		const uint8_t	SPI_c,
 		const uint8_t	SPI_d
-	) : LoomSPISensor(manager, module_name, Type::MAX31856, num_samples ) 
+	) : LoomSPISensor(manager, module_name, Type::MAX31856, num_samples )
 	, inst_max( Adafruit_MAX31856(SPI_a, SPI_b, SPI_c, SPI_d) )
 {
 	// Hardware Serial
@@ -38,14 +40,14 @@ Loom_MAX31856::Loom_MAX31856(LoomManager* manager, JsonArrayConst p)
 	: Loom_MAX31856(manager, EXPAND_ARRAY(p, 7) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MAX31856::print_measurements() const 
+void Loom_MAX31856::print_measurements() const
 {
 	print_module_label();
 	LPrintln("\tTemp: ", temperature, " C");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MAX31856::measure() 
+void Loom_MAX31856::measure()
 {
 	// cj_temp = inst_max.readCJTemperature();
 	// temperature = inst_max.readThermocoupleTemperature();
@@ -69,7 +71,7 @@ void Loom_MAX31856::measure()
 			if (fault & MAX31856_FAULT_OVUV)    LPrintln("Over/Under Voltage Fault");
 			if (fault & MAX31856_FAULT_OPEN)    LPrintln("Thermocouple Open Fault");
 			break;
-		} 
+		}
 	}
 
 	cj_temp = cj / num_samples;
@@ -85,4 +87,3 @@ void Loom_MAX31856::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-

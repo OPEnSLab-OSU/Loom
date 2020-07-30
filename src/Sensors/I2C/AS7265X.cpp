@@ -10,14 +10,16 @@
 
 #include "AS7265X.h"
 
+char* Loom_AS7265X::name = "AS7265X";
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7265X::Loom_AS7265X(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t		mux_port,
-		const bool			use_bulb, 
-		const uint8_t		gain, 
-		const uint8_t		mode, 
+		const bool			use_bulb,
+		const uint8_t		gain,
+		const uint8_t		mode,
 		const uint8_t		integration_time
 	)
 	: LoomI2CSensor(manager, "AS7265X", Type::AS7265X, i2c_address, mux_port )
@@ -58,13 +60,13 @@ const byte i2c_address,
 		// //White LED has max forward current of 120mA
 		// inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_12_5MA, AS7265x_LED_WHITE); 		//Default
 		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_25MA, AS7265x_LED_WHITE); 		//Allowed
-		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_50MA, AS7265x_LED_WHITE); 		//Allowed 
+		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_50MA, AS7265x_LED_WHITE); 		//Allowed
 		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_100MA, AS7265x_LED_WHITE); 	//Allowed
 
 		// //UV LED has max forward current of 30mA so do not set the drive current higher
 		// inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_12_5MA, AS7265x_LED_UV); 		//Default
 
-		// //IR LED has max forward current of 65mA 
+		// //IR LED has max forward current of 65mA
 		// inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_12_5MA, AS7265x_LED_IR); 		//Default
 		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_25MA, AS7265x_LED_IR); 		//Allowed
 		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_50MA, AS7265x_LED_IR); 		//Allowed
@@ -114,7 +116,7 @@ void Loom_AS7265X::measure()
 	} else {
 		inst_AS7265X.takeMeasurements();
 	}
-	
+
 	// UV
 	uv[0] = inst_AS7265X.getCalibratedA();
 	uv[1] = inst_AS7265X.getCalibratedB();
@@ -167,6 +169,3 @@ void Loom_AS7265X::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-

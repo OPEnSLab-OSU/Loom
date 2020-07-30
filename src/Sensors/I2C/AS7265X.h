@@ -47,7 +47,9 @@ protected:
 	uint8_t		integration_time;	///< Integration time setting
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -96,12 +98,12 @@ const byte i2c_address			= 0x49,
 /*@{*/ //======================================================================
 
 	/// Set whether not bulb is used for active light source
-	/// @param[in]	enable	Whether or not to enable 
+	/// @param[in]	enable	Whether or not to enable
 	void		enable_bulb(const bool e) { use_bulb = e; }
 
 	/// Set gain.
 	/// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
-	/// @param[in]	gain	Gain level: 
+	/// @param[in]	gain	Gain level:
 	void		set_gain(const uint8_t gain) { inst_AS7265X.setGain(gain); }
 
 	/// Set mode.
@@ -117,5 +119,3 @@ const byte i2c_address			= 0x49,
 private:
 
 };
-
-

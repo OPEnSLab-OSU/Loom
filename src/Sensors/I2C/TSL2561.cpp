@@ -13,24 +13,25 @@
 
 #include <Adafruit_Sensor.h>
 
+char* Loom_TSL2561::name = "TSL2561";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TSL2561::Loom_TSL2561(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t		mux_port,
-		const uint8_t		gain, 
+		const uint8_t		gain,
 		const uint8_t		resolution
 	)
 	: LoomI2CSensor(manager, "TSL2561", Type::TSL2561, i2c_address, mux_port )
 	, gain(gain)
 	, resolution(resolution)
-	, inst_TSL2561( (i2c_address == 0x29) 
-						? Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW, 29) 
-						: ( (i2c_address == 39) 
+	, inst_TSL2561( (i2c_address == 0x29)
+						? Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW, 29)
+						: ( (i2c_address == 39)
 								? Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 39)
 								: Adafruit_TSL2561_Unified(TSL2561_ADDR_HIGH , 49)
-						  )  
+						  )
 				  )
 {
 	// switch (i2c_address) {
@@ -93,12 +94,10 @@ void Loom_TSL2561::package(JsonObject json)
 	int lux = inst_TSL2561.calculateLux(lightFull, lightIR);
 
 	JsonObject data = get_module_data_object(json, module_name);
-	
+
 	data["IR"]   = lightIR;
 	data["Full"] = lightFull;
 	data["Lux"]  = lux;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-

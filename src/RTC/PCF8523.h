@@ -33,7 +33,9 @@ protected:
 	PCF8523		rtc_inst;		///< Underlying PCF8523 manager instance
 
 public:
-	
+
+	static char*        name;
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -77,5 +79,3 @@ protected:
 	void		_adjust(const DateTime time) override { rtc_inst.adjust(time); }
 
 };
-
-				

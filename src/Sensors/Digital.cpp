@@ -13,9 +13,10 @@
 // Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
 const uint8_t Loom_Digital::pin_nums[DIGITAL_COUNT] = {5, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19};
 
+char* Loom_Digital::name = "Digital";
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Digital::Loom_Digital(	
+Loom_Digital::Loom_Digital(
 		LoomManager* manager,
 		const bool		enable5,
 		const bool		enable6,
@@ -30,12 +31,12 @@ Loom_Digital::Loom_Digital(
 		const bool		enableA3,
 		const bool		enableA4,
 		const bool		enableA5
-	) 
+	)
 	: LoomSensor(manager, "Digital", Type::Digital, 1 )
 {
-	// Zero out array of measurements 
-	for (int i = 0; i < DIGITAL_COUNT; i++) { 
-		digital_vals[i] = 0; 
+	// Zero out array of measurements
+	for (int i = 0; i < DIGITAL_COUNT; i++) {
+		digital_vals[i] = 0;
 	}
 
 	// Set enabled pins
@@ -81,13 +82,13 @@ void Loom_Digital::print_config() const
 
 	LPrint("\tEnabled Pins        : ");
 	// 5,6,9,10,11,12
-	for (int i = 0; i < 6; i++) { 
+	for (int i = 0; i < 6; i++) {
 		if (pin_enabled[i]) {
 			LPrint(pin_nums[i], ", ");
 		}
 	}
 	// A0-A5
-	for (int i = 0; i < 6; i++) { 
+	for (int i = 0; i < 6; i++) {
 		if (pin_enabled[i+6]) {
 			LPrint("A", i, ", ");
 		}
@@ -102,13 +103,13 @@ void Loom_Digital::print_measurements() const
 	print_module_label();
 	LPrintln("Measurements:");
 	// 5,6,9,10,11,12
-	for (int i = 0; i < 6; i++) { 
+	for (int i = 0; i < 6; i++) {
 		if (pin_enabled[i]) {
 			LPrintln("\t", pin_nums[i], ": ", digital_vals[i]);
 		}
 	}
 	// A0-A5
-	for (int i = 0; i < 6; i++) { 
+	for (int i = 0; i < 6; i++) {
 		if (pin_enabled[i+6]) {
 			LPrintln("\t", "A", i, ": ", digital_vals[i+6]);
 		}
@@ -131,14 +132,14 @@ void Loom_Digital::package(JsonObject json)
 	char buf[3];
 
 	// 5,6,9,10,11,12
-	for (auto i = 0; i < 6; i++) { 
+	for (auto i = 0; i < 6; i++) {
 		if (pin_enabled[i]) {
 			sprintf(buf, "%d", pin_nums[i]);
 			data[buf] = digital_vals[i];
 		}
 	}
 	// A0-A5
-	for (auto i = 0; i < 6; i++) { 
+	for (auto i = 0; i < 6; i++) {
 		if (pin_enabled[i+6]) {
 			sprintf(buf, "%s%d", "A", i);
 			data[buf] = digital_vals[i];
@@ -162,8 +163,8 @@ void Loom_Digital::set_digital_val(const uint8_t pin, const bool state)
 {
 	if (pin_enabled[ pin_to_index(pin) ]) {
 		pinMode(pin, OUTPUT);
-		digitalWrite(pin, (state) ? HIGH : LOW ); 
-	}	
+		digitalWrite(pin, (state) ? HIGH : LOW );
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -188,7 +189,3 @@ uint8_t Loom_Digital::pin_to_index(const uint8_t pin) const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-

@@ -11,16 +11,17 @@
 
 #include "LIS3DH.h"
 
+char* Loom_LIS3DH::name = "LIS3DH";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LIS3DH::Loom_LIS3DH(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t		mux_port
-	) 
+	)
 	: LoomI2CSensor(manager, "LIS3DH", Type::LIS3DH, i2c_address, mux_port )
 	, inst_LIS3DH( LIS3DH(I2C_MODE, i2c_address) )
-	
+
 {
 	inst_LIS3DH.settings.adcEnabled      = 1;
 	inst_LIS3DH.settings.tempEnabled     = 1;
@@ -29,7 +30,7 @@ const byte i2c_address,
 	inst_LIS3DH.settings.xAccelEnabled   = 1;
 	inst_LIS3DH.settings.yAccelEnabled   = 1;
 	inst_LIS3DH.settings.zAccelEnabled   = 1;
-  
+
 	bool setup = inst_LIS3DH.begin();
 
 	if (!setup) active = false;
@@ -64,13 +65,10 @@ void Loom_LIS3DH::measure()
 void Loom_LIS3DH::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
-	
+
 	data["ax"] = accel[0];
 	data["ay"] = accel[1];
 	data["az"] = accel[2];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
