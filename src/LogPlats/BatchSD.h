@@ -93,6 +93,8 @@ public:
   void    power_up() override;
   void    power_down() override;
 
+  void    package() override;
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
