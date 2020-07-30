@@ -222,7 +222,7 @@ float Loom_BatchSD::get_drop_rate() const
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_BatchSD::package(JsonObject json) {
-  JsonObject data = get_module_data_object(json, "BatchSD");
+  JsonObject data = get_module_data_object(json, "Batch");
 
-  data["Batch"] = batch_counter;
+  data["Number"] = batch_counter+1;
 }
