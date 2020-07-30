@@ -143,7 +143,7 @@ public:
 	/// @param[in]	destination		Address of destination device
 	/// @param[in] 	delay_time		The amount of time between each packet in the batch being sent
 	/// @return true if the packet sent successfully
-	uint8_t		send_batch(const uint8_t destination, uint8_t delay_time);
+	uint8_t		send_batch(const uint8_t destination, int delay_time);
 
 
 	/// Broadcast data to all that can receive.
@@ -158,7 +158,7 @@ public:
 
 	///	Broadcasts all the jsons stored in the batch
 	/// @param[in] 	delay_time		The amount of time between each packet in the batch being broadcasted
-	void 			broadcast_batch(uint8_t delay_time);
+	void 			broadcast_batch(int delay_time);
 
 //=============================================================================
 ///@name	PRINT INFORMATION
