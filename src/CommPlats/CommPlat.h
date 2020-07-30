@@ -158,7 +158,7 @@ public:
 
 	///	Broadcasts all the jsons stored in the batch
 	/// @param[in] 	delay_time		The amount of time between each packet in the batch being broadcasted
-	void 			broadcast_batch(uint8_t delay_time = 5000);
+	void 			broadcast_batch(uint8_t delay_time);
 
 //=============================================================================
 ///@name	PRINT INFORMATION
