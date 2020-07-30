@@ -93,7 +93,7 @@ public:
   void    power_up() override;
   void    power_down() override;
 
-  void    package();
+  void    package(JsonObject json);
 
 //=============================================================================
 ///@name	PRINT INFORMATION
