@@ -35,8 +35,8 @@
     {\
 			'name':'Bluetooth',\
 			'params':'default'\
-		},\ */
-    {\
+		},\
+  */ {\
       'name':'Ethernet',\
       'params':[\
         'Ether1',\

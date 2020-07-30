@@ -20,7 +20,7 @@ const char* json_config =
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::Ethernet,
+	Enable::Internet::Ethernet, // To save storage, use 'Disabled' for any sections that are not included in the config.h file
 	Enable::Sensors::Enabled,
 	Enable::Radios::Enabled,
 	Enable::Actuators::Disabled,
