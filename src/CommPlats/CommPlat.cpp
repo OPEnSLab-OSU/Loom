@@ -123,7 +123,7 @@ bool LoomCommPlat::send(const uint8_t destination)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint8_t LoomCommPlat::send_batch(const uint8_t destination, uint8_t delay_time){
+uint8_t LoomCommPlat::send_batch(const uint8_t destination, int delay_time){
 	// check to make sure we have BatchSD module connected
 	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
 		// retrieve the Batch SD module
@@ -137,8 +137,7 @@ uint8_t LoomCommPlat::send_batch(const uint8_t destination, uint8_t delay_time){
 		for(int i=0; i < packets; i++){
 			tmp = batch->get_batch_json(i);
 			if(!send(tmp, destination)) drop_count++;;
-			LPrintln("Pausing Loom");
-			device_manager->pause();
+			device_manager->pause(delay_time);
 		}
 		// Clear the batch for the next batching to start
 		batch->clear_batch_log();
@@ -160,7 +159,7 @@ void LoomCommPlat::broadcast()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomCommPlat::broadcast_batch(uint8_t delay_time)
+void LoomCommPlat::broadcast_batch(int delay_time)
 {
 	// check to make sure we have BatchSD module connected
 	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
@@ -174,7 +173,7 @@ void LoomCommPlat::broadcast_batch(uint8_t delay_time)
 		for(int i=0; i < packets; i++){
 			tmp = batch->get_batch_json(i);
 			broadcast(tmp);
-			delay(delay_time);
+			device_manager->pause(delay_time);
 		}
 		// Clear the batch for the next batching to start
 		batch->clear_batch_log();
