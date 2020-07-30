@@ -137,7 +137,8 @@ uint8_t LoomCommPlat::send_batch(const uint8_t destination, uint8_t delay_time){
 		for(int i=0; i < packets; i++){
 			tmp = batch->get_batch_json(i);
 			if(!send(tmp, destination)) drop_count++;;
-			delay(delay_time);
+			LPrintln("Pausing Loom");
+			device_manager->pause();
 		}
 		// Clear the batch for the next batching to start
 		batch->clear_batch_log();

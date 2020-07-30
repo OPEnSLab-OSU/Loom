@@ -114,7 +114,7 @@ bool Loom_BatchSD::store_batch(){
   JsonObject data = get_module_data_object(obj, "Batch");
   data["Batch#"] = batch_counter;
   if(obj.isNull() || obj.size()==0) return false;
-  return store_batch_json(obj);
+  return store_batch_json(device_manager->internal_json(false));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
