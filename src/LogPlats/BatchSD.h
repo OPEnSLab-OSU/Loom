@@ -93,6 +93,7 @@ public:
   void    power_up() override;
   void    power_down() override;
 
+  using LoomLogPlat::package;
   void    package() override;
 
 //=============================================================================
