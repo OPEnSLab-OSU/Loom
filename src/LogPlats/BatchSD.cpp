@@ -111,10 +111,8 @@ void Loom_BatchSD::clear_batch_log(){
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_BatchSD::store_batch(){
   JsonObject obj = device_manager->internal_json(false);
-  JsonObject data = get_module_data_object(obj, "Batch");
-  data["Batch#"] = batch_counter;
   if(obj.isNull() || obj.size()==0) return false;
-  return store_batch_json(device_manager->internal_json(false));
+  return store_batch_json(obj);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -223,3 +221,8 @@ float Loom_BatchSD::get_drop_rate() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_BatchSD::package(JsonObject json) {
+  JsonObject data = get_module_data_object(json, "BatchSD");
+
+  data["Batch"] = batch_counter;
+}
