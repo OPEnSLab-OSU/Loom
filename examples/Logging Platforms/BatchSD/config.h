@@ -14,7 +14,7 @@
 			'name':'SD',\
 			'params':[true,1000,10,'data',true]\
 		},\
-    {
+    {\
       'name':'BatchSD',\
       'params': [true, 1000, 10]\
     },\
