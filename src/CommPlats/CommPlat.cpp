@@ -123,7 +123,7 @@ bool LoomCommPlat::send(const uint8_t destination)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint8_t LoomCommPlat::send_batch(const uint8_t destination, uint8_t delay_time){
+uint8_t LoomCommPlat::send_batch(const uint8_t destination, uint8_t delay_time = 0){
 	// check to make sure we have BatchSD module connected
 	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
 		// retrieve the Batch SD module

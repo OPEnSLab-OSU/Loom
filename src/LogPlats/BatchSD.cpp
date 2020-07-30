@@ -110,6 +110,7 @@ void Loom_BatchSD::clear_batch_log(){
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_BatchSD::store_batch(){
+  device_manager->add_data("Batch", "Batch#", batch_counter);
   JsonObject obj = device_manager->internal_json(false);
   if(obj.isNull() || obj.size()==0) return false;
   return store_batch_json(obj);
@@ -120,7 +121,6 @@ bool Loom_BatchSD::store_batch_json(JsonObject json){
   // Create file name and add which Batch the packet is from to json
   char file_name[30];
   create_file_name(packet_counter, file_name);
-  json["Batch"] = batch_counter;
   digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
   //sd.begin(chip_select);
 
