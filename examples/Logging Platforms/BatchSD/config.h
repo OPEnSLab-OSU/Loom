@@ -30,7 +30,6 @@
 	/*not used if previous param is true*/	'<your-tab-name>'\
 	      			]\
 	    	}\
-		
 /*    		{\
       			'name':'nRF',\
       			'params':[120,01,1,0,3,200,1]\
