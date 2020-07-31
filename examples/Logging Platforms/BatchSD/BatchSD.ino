@@ -20,7 +20,7 @@ const char* json_config =
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::Ethernet, // To save storage, use 'Disabled' for any sections that are not included in the config.h file
+	Enable::Internet::LTE, // To save storage, use 'Disabled' for any sections that are not included in the config.h file
 	Enable::Sensors::Enabled,
 	Enable::Radios::Enabled,
 	Enable::Actuators::Disabled,
@@ -55,13 +55,16 @@ void loop()
 	Loom.log_all();
   counter++;
 
+	// For every ten packets in the batch, publish using GoogleSheets
   if(counter%max_packets == 0){
     Loom.GoogleSheets().publish_batch();
     // Send to address 1, the second parameter defines the delay between sends and the default is 0. This applies for the functions down belows
-    //Loom.LoRa().send_batch(1, 0);
-    //Loom.Bluetooth().send_batch(1, 0);
-    //Loom.nRF().send_batch(1, 0);
-    //Loom.nRF().broadcast_batch(0);
+		// With Transmitting with LoRa, if the hub receiving is publishing immediately to GoogleSheets, LoRa will need at least 4000ms of delay
+		// Depending on how the hub process the packets receieved, it may need more or less time than 4000ms, so feel free to tinker with the timing
+		//Loom.LoRa().send_batch(1, 4000);
+    //Loom.Bluetooth().send_batch(1, 4000);
+    //Loom.nRF().send_batch(1, 4000);
+    //Loom.nRF().broadcast_batch(4000);
   }
 
 
