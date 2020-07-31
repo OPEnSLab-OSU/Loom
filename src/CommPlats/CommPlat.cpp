@@ -12,12 +12,12 @@
 #include "Manager.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomCommPlat::LoomCommPlat( 
+LoomCommPlat::LoomCommPlat(
 		LoomManager* 			manager,
-		const char*							module_name, 
+		const char*							module_name,
 		const LoomModule::Type	module_type,
-		const uint16_t					max_message_len 
-	) 
+		const uint16_t					max_message_len
+	)
 	: LoomModule(manager, module_name, module_type )
 	, max_message_len(max_message_len)
 	, signal_strength(0)
@@ -68,7 +68,7 @@ bool LoomCommPlat::receive()
 		// Loom_Manager's json needs to be cleared (passing true to internal_json)
 		// in order to copy over correctly
 		return receive( device_manager->internal_json(true) );
-	} 
+	}
 	return false;
 }
 
@@ -87,12 +87,24 @@ bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 		// Loom_Manager's json needs to be cleared (passing true to internal_json)
 		// in order to copy over correctly
 		return receive_blocking( device_manager->internal_json(true), max_wait_time );
-	} 
+	}
 	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) { 
+bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
+	bool receive_results=false;
+	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
+		Loom_BatchSD* batch = (Loom_BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
+		receive_results = receive_blocking(max_wait_time);
+		if(!receive_results) return false;
+		return batch->store_batch();
+	}
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
 	bool status = send_impl(json, destination);
 	add_packet_result(!status);
 	LPrintln("Send " , (status) ? "successful" : "failed" );
@@ -106,8 +118,33 @@ bool LoomCommPlat::send(const uint8_t destination)
 		JsonObject tmp = device_manager->internal_json();
 		if (strcmp(tmp["type"], "data") == 0 )
 			return send(tmp, destination);
-	} 
+	}
 	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+uint8_t LoomCommPlat::send_batch(const uint8_t destination, int delay_time){
+	// check to make sure we have BatchSD module connected
+	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
+		// retrieve the Batch SD module
+		uint8_t drop_count = 0;
+		Loom_BatchSD* batch = (Loom_BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
+		int packets = batch->get_packet_counter();
+		print_module_label();
+		LPrintln("Packets to send: ", packets);
+		JsonObject tmp;
+		// For all the jsons stored in the batch, run the sebd function using the json
+		for(int i=0; i < packets; i++){
+			tmp = batch->get_batch_json(i);
+			if(!send(tmp, destination)) drop_count++;;
+			device_manager->pause(delay_time);
+		}
+		// Clear the batch for the next batching to start
+		batch->clear_batch_log();
+		batch->add_drop_count(drop_count);
+		return drop_count;
+	}
+	return -1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -118,8 +155,31 @@ void LoomCommPlat::broadcast()
 		if (strcmp(tmp["type"], "data") == 0 ) {
 			broadcast(tmp);
 		}
-	} 
+	}
 }
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomCommPlat::broadcast_batch(int delay_time)
+{
+	// check to make sure we have BatchSD module connected
+	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
+		// retrieve the Batch SD module
+		Loom_BatchSD* batch = (Loom_BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
+		int packets = batch->get_packet_counter();
+		print_module_label();
+		LPrintln("Packets to broadcast: ", packets);
+		JsonObject tmp;
+		// For all the jsons stored in the batch, run the sebd function using the json
+		for(int i=0; i < packets; i++){
+			tmp = batch->get_batch_json(i);
+			broadcast(tmp);
+			device_manager->pause(delay_time);
+		}
+		// Clear the batch for the next batching to start
+		batch->clear_batch_log();
+	}
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len) const

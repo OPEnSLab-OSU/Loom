@@ -78,6 +78,7 @@ class Loom_Bluetooth;
 // LogPlats
 class Loom_OLED;
 class Loom_SD;
+class Loom_BatchSD;
 
 // InternetPlats
 class LoomInternetPlat;
@@ -266,6 +267,16 @@ public:
 	/// Calls publish_all(const JsonObject json) with interal json
 	/// @return True if success
 	bool		publish_all() { return publish_all(internal_json()); }
+
+	/// Log
+	/// @param[in]	json	Data object to log
+	/// @return True if success
+	bool		log_all(const JsonObject json);
+
+	/// Log.
+	/// Calls log_all(const JsonObject json) with interal json
+	/// @return True if success
+	bool		log_all() { return log_all(internal_json()); }
 
 	/// Iterate over list of commands, forwarding to handling module
 	/// @param[in] json		Object containing commands
@@ -477,6 +488,7 @@ public:
 	// LogPlats
 	Loom_OLED&			OLED(const uint8_t idx = 0);
 	Loom_SD&			SDCARD(const uint8_t idx = 0);
+	Loom_BatchSD&	BATCHSD(const uint8_t idx = 0);
 
 	// InternetPlats
 	LoomInternetPlat&	InternetPlat(const uint8_t idx = 0);
@@ -549,6 +561,7 @@ private:
 	friend class Loom_Sleep_Manager;
 	friend class LoomRTC;
 	friend class Loom_SD;
+	friend class Loom_BatchSD;
 	friend class LoomNTPSync;
 
 	Loom_Interrupt_Manager*	get_interrupt_manager() { return interrupt_manager; }

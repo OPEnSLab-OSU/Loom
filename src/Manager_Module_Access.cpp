@@ -112,7 +112,7 @@ Loom_Ethernet& LoomManager::Ethernet(const uint8_t idx)
 	return (*(Loom_Ethernet*)( (tmp) ? tmp : nullptr ));
 }
 
-Loom_WiFi& LoomManager::WiFi(const uint8_t idx) 
+Loom_WiFi& LoomManager::WiFi(const uint8_t idx)
 {
 	LoomModule* tmp = find_module(LoomModule::Type::WiFi, idx);
 	return (*(Loom_WiFi*)( (tmp) ? tmp : nullptr ));
@@ -177,6 +177,12 @@ Loom_SD& LoomManager::SDCARD(const uint8_t idx)
 {
 	LoomModule* tmp = find_module(LoomModule::Type::SDCARD, idx);
 	return (*(Loom_SD*)( (tmp) ? tmp : nullptr ));
+}
+
+Loom_BatchSD& LoomManager::BATCHSD(const uint8_t idx)
+{
+	LoomModule* tmp = find_module(LoomModule::Type::BATCHSD, idx);
+	return (*(Loom_BatchSD*)( (tmp) ? tmp : nullptr ));
 }
 
 ///////////////////////////////////////////////////////////////////////////////

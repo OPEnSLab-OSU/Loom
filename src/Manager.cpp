@@ -289,6 +289,23 @@ bool LoomManager::publish_all(const JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::log_all(const JsonObject json)
+{
+	bool result = true;
+	uint8_t count = 0;
+	for(auto module : modules) {
+		if( (module!=nullptr) &&
+		(module->category() == LoomModule::Category::LogPlat) &&
+		(module->get_active())
+		){
+			result &= ((LoomLogPlat*)module)->log( json );
+			count++;
+		}
+	}
+	return (count > 0) && result;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void LoomManager::dispatch(JsonObject json)
 {
 	print_device_label();
