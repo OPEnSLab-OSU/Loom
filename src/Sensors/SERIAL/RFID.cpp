@@ -65,8 +65,8 @@ Loom_RFID::Loom_RFID(LoomManager* manager,
 ///////////////////////////////////////////////////////////////////////////////
 
 Loom_RFID::Loom_RFID(LoomManager* manager, JsonArrayConst p)
-: Loom_RFID(manager, (MeasureType)(int)
-p[0], (int)p[1], (int)p[2], (int)p[3], (int)p[4], (int)p[5], (int)p[6])
+: Loom_RFID(manager, (MeasureType)(int)p[0],
+(int)p[1], (int)p[2], (int)p[3], (int)p[4], (int)p[5], (int)p[6])
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -259,18 +259,6 @@ void Loom_RFID::print_measurements() const{
     LPrintln("\t\tMoisture   :", rfid_tags[i].moisture);
     LPrintln("\t\tEPC        :", EPCHeader_Hex);
   }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int Loom_RFID::getTagIndex(){
-  return index;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-boolean Loom_RFID::isUpdatedIndex(){
-  return updated;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

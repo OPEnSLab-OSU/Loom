@@ -111,10 +111,10 @@ public:
 
     void        measure() override;
     void        package(JsonObject json) override;
-    boolean     isUpdatedIndex();
-    int         getTagIndex();
     void        setTag(int i, tag t);
     tag         getTag(int i);
+    boolean     isUpdatedIndex() { return updated; }
+    int         getTagIndex() { return index; }
     int         get_error_counter() { return error_counter;}
 
 
