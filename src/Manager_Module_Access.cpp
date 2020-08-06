@@ -364,8 +364,8 @@ Loom_NTP_Sync& LoomManager::NTP(const uint8_t idx)
 	return (*(Loom_NTP_Sync*)( (tmp) ? tmp : nullptr ));
 }
 
-Loom_Temp_Sync& LoomManager::TempSync(const uint8_t idx)
+Loom_Temp_Sync& LoomManager::Temp_Sync(const uint8_t idx)
 {
-	LoomModule* tmp = find_module(LoomModule::Type::TempSync, idx);
+	LoomModule* tmp = find_module(LoomModule::Type::Temp_Sync, idx);
 	return (*(Loom_Temp_Sync*)( (tmp) ? tmp : nullptr ));
 }

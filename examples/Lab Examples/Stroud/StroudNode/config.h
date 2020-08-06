@@ -50,7 +50,7 @@
 			]\
 		},\
 		{\
-			'name':'TempSync',\
+			'name':'Temp_Sync',\
 /*ms5803,analog*/'params':[2110,2001]\
 		}\
 	]\

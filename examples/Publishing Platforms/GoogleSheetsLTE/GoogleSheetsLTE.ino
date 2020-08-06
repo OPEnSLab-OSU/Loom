@@ -20,11 +20,10 @@ const char* json_config =
 ;
 
 LoomFactory<
-  Enable::Internet::LTE,
-  Enable::Sensors::Enabled,
-  Enable::Radios::Disabled,
-  Enable::Actuators::Enabled,
-  Enable::Max::Disabled
+  Loom_Analog,
+  Loom_Digital,
+  Loom_GoogleSheets,
+  Loom_LTE
 > ModuleFactory{};
 
 

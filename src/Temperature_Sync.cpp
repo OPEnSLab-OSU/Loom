@@ -14,7 +14,7 @@
 
 #include "Sensors/I2C/MS5803.h"
 
-char* Loom_Temp_Sync::name = "TempSync";
+char* Loom_Temp_Sync::name = "Temp_Sync";
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Temp_Sync::Loom_Temp_Sync(
@@ -22,7 +22,7 @@ Loom_Temp_Sync::Loom_Temp_Sync(
 		const LoomModule::Type		source,
 		const LoomModule::Type		dependant
 	)
-	: LoomModule(manager, "TempSync", Type::TempSync )
+	: LoomModule(manager, "Temp_Sync", Type::Temp_Sync )
 	, source_type(source)
 	, dependant_type(dependant)
 	{}

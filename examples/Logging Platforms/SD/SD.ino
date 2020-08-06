@@ -8,24 +8,22 @@
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
+	Loom_SD,
+	Loom_Analog,
+	Loom_PCF8523
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };
 
 
 
-void setup() 
+void setup()
 {
 	Loom.begin_serial(true);
 	Loom.parse_config(json_config);
@@ -35,18 +33,18 @@ void setup()
 }
 
 
-void loop() 
+void loop()
 {
 	Loom.measure();
 	Loom.package();
 	Loom.display_data();
-	
+
 	// Log using default filename as provided in configuration
 	// in this case, 'datafile.csv'
-	Loom.SDCARD().log();
+	Loom.SD().log();
 
-	// Or log to a specific file (does not change what default file is set to)	
-	// Loom.SDCARD().log("specific.csv");
+	// Or log to a specific file (does not change what default file is set to)
+	// Loom.SD().log("specific.csv");
 
-	Loom.pause();	
+	Loom.pause();
 }

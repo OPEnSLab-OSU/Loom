@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This example is used to demonstrate a few different use cases of the 
+// This example is used to demonstrate a few different use cases of the
 // processor's internal timers, manager via Loom
 
 // In setup, there are 4 different timer configurations, uncomment one, and
@@ -24,8 +24,8 @@
 // The ISR being used for this example is toggle() below, which simply switches
 // the state of the built-in LED when the timer elapses.
 
-// For more details about the usage of the interrupt manager, see the 
-// documentation: 
+// For more details about the usage of the interrupt manager, see the
+// documentation:
 // https://openslab-osu.github.io/Loom/html/class_loom___interrupt___manager.html
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -33,17 +33,13 @@
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
+	Loom_Interrupt_Manager
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };
@@ -59,13 +55,13 @@ void toggle()
 	state = !state;
 	count++;
 	LPrintln("Toggle");	// Generally not good practice to put a print in an ISR
-						// it is only used here to make the program behavior 
+						// it is only used here to make the program behavior
 						// more obvious
 }
 
 
-void setup() 
-{ 
+void setup()
+{
 	Loom.begin_LED();
 	Loom.begin_serial(true);
 	Loom.parse_config(json_config);
@@ -79,7 +75,7 @@ void setup()
 	// Repeating alarm, runs ISR immediately on timer elapsed
 	// Toggles the LED every 5 seconds
 	Loom.InterruptManager().register_internal_timer(5, toggle, true, ISR_Type::IMMEDIATE);
-	
+
 	// 2)
 	// Single alarm, runs ISR immediately on timer elapsed
 	// Turns LED on after 5 seconds
@@ -100,7 +96,7 @@ void setup()
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
 	// Only needed with configuration 3 and 4
 	// Loom.InterruptManager().run_pending_ISRs();
@@ -108,10 +104,7 @@ void loop()
 	// Demonstrating disabling alarm,
 	// In this case, only after ISR triggers 5 times
 	if (count > 4) {
-		Loom.InterruptManager().internal_timer_enable(false);		
+		Loom.InterruptManager().internal_timer_enable(false);
 	}
 
 }
-
-
-

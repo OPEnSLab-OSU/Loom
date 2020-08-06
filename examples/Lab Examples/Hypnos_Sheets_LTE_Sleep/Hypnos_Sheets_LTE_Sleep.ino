@@ -7,11 +7,12 @@ const char* json_config =
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::LTE,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
+	Loom_SD,
+	Loom_DS3231,
+	Loom_Interrupt_Manager,
+	Loom_Sleep_Manager,
+	Loom_LTE,
+	Loom_GoogleSheets
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };

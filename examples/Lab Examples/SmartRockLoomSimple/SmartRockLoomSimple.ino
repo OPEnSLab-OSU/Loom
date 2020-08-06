@@ -1,13 +1,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This example is the code used for the OPEnS Lab's Smart Rock 
+// This example is the code used for the OPEnS Lab's Smart Rock
 
 // It is using the following modules:
 // - DS3231 RTC
 // - Interrupt Manager
 // - Sleep Manager
 // - Analog (for turbitidy, electrical conductivity, pH, total dissolved solids)
-// - SD 
+// - SD
 // - MS5803 pressure sensor
 
 // Normal operation is:
@@ -24,17 +24,18 @@
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
+	Loom_Analog,
+	Loom_SD,
+	Loom_DS3231,
+	Loom_Interrupt_Manager,
+	Loom_Sleep_Manager,
+	Loom_MS5803
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };
@@ -50,28 +51,28 @@ volatile bool alarmFlag = false;
 volatile bool reedFlag = false;
 
 
-void alarmISR() { 
-	detachInterrupt(digitalPinToInterrupt(ALARM_PIN)); 
-	// detachInterrupt(digitalPinToInterrupt(REED_PIN)); 
+void alarmISR() {
+	detachInterrupt(digitalPinToInterrupt(ALARM_PIN));
+	// detachInterrupt(digitalPinToInterrupt(REED_PIN));
 	alarmFlag = true;
 	// LPrintln("\n\n", "Alarm went off", "\n");
 }
-void reedISR() { 
-	// detachInterrupt(digitalPinToInterrupt(ALARM_PIN)); 
+void reedISR() {
+	// detachInterrupt(digitalPinToInterrupt(ALARM_PIN));
 	detachInterrupt(digitalPinToInterrupt(REED_PIN));
 	reedFlag = true;
-	// LPrintln("\n\n", "Reed switch triggered", "\n"); 
+	// LPrintln("\n\n", "Reed switch triggered", "\n");
 }
 
 
 
-void setup() 
+void setup()
 {
 	Loom.begin_LED();
 	Loom.flash_LED(10, 200, 200, true);
 	Loom.begin_serial();
 
-	pinMode(10, OUTPUT);   
+	pinMode(10, OUTPUT);
 
 	Loom.parse_config(json_config);
 	Loom.print_config();
@@ -86,7 +87,7 @@ void setup()
 }
 
 
-void loop() 
+void loop()
 {
 	LPrintln("AlarmFlag : ", alarmFlag);
 	LPrintln("ReedFlag  : ", reedFlag);
@@ -103,9 +104,9 @@ void loop()
 	Loom.package();
 	Loom.add_data("wakeType", "type", alarmFlag ? "alarm" : "reed");
 	Loom.display_data();
-	Loom.SDCARD().log();
+	Loom.SD().log();
 
-	
+
 	Loom.pause(500);
 	Loom.InterruptManager().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
 	Loom.InterruptManager().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
@@ -118,6 +119,6 @@ void loop()
 
 	// Go to sleep
 	Loom.SleepManager().sleep();
-	// 
-	
+	//
+
 }

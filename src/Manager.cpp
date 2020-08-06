@@ -209,7 +209,7 @@ void LoomManager::measure()
 		else if (module->get_module_type() == LoomModule::Type::NTP) {
 			((Loom_NTP_Sync*)module)->measure();
 		}
-		else if (module->get_module_type() == LoomModule::Type::TempSync) {
+		else if (module->get_module_type() == LoomModule::Type::Temp_Sync) {
 			((Loom_Temp_Sync*)module)->measure();
 		}
 	}

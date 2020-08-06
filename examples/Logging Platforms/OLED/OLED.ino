@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This is a basic example that demonstrates how use an OLED display with 
+// This is a basic example that demonstrates how use an OLED display with
 // Loom to display data
 
 // See the documentation for details on OLED configuration options and methods:
@@ -11,25 +11,22 @@
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
+	Loom_Analog,
+	Loom_OLED
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };
 
 
 
-void setup() 
-{ 
+void setup()
+{
 	Loom.begin_LED();
 	Loom.begin_serial(true);
 	Loom.parse_config(json_config);
@@ -38,7 +35,7 @@ void setup()
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
 	Loom.measure();
 	Loom.package();

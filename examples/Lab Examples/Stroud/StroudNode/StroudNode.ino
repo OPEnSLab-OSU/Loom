@@ -55,11 +55,7 @@ const char* json_config =
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::WiFi,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
+Loom_Analog,Loom_MS5803,Loom_WiFi,Loom_MaxSub,Loom_MaxPub,Loom_Temp_Sync
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };
@@ -107,7 +103,7 @@ void loop()
 	Loom.package();				// Build Json from data
 	Loom.display_data();		// Print data (will not work properly if using nap instead of pause below)
 
-	Loom.SDCARD().log();		// Log to SD
+	Loom.SD().log();		// Log to SD
 
 	// The following if statements are a means of having both Max and GoogleSheets modes
 	// work with the same code. If a module exists, it will use it, otherwise it was

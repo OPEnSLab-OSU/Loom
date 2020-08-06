@@ -3,7 +3,7 @@
 // This is the simplest example of logging data to Google Sheets
 
 // The only difference between this example an 'Basic' is the LoomFactory
-// settings, the line: 
+// settings, the line:
 //		Loom.GoogleSheets().publish();
 // and the configuration, enabling logging to Google Sheets.
 
@@ -17,34 +17,33 @@
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::WiFi,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Disabled
+	Loom_Analog,
+	Loom_Digital,
+	Loom_GoogleSheets,
+	Loom_WiFi
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };
 
 
 
-void setup() 
+void setup()
 {
 	Loom.begin_serial(true);
 	Loom.parse_config(json_config);
 	Loom.print_config();
 
-	LPrintln("\n ** Setup Complete ** "); 
+	LPrintln("\n ** Setup Complete ** ");
 }
 
 
-void loop() 
+void loop()
 {
 	Loom.measure();
 	Loom.package();

@@ -11,13 +11,13 @@
 // The size of each configuration is listed at the end of setup
 // Note that the pretty formatting takes up more space in memory
 
-// Change the variable passed to Loom.parse_config() to include a different 
+// Change the variable passed to Loom.parse_config() to include a different
 // configuration
 
 // The purpose of this example is simply the different include methods, so
-// there is no code in the loop. 
+// there is no code in the loop.
 
-// You can also load a configuration from an SD card, see the 
+// You can also load a configuration from an SD card, see the
 // Configuration >  LoadConfigSD example for how to do that
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -29,31 +29,30 @@ const char* json_config = "{\"general\":{\"device_name\":\"Device\",\"family\":\
 
 // Define config in external file,
 // compact and in same format as above
-const char* json_config_compact = 
+const char* json_config_compact =
 #include "json_config_compact.h"
 ;
 
-// Define config in external file, 
+// Define config in external file,
 // formatted for readability at size cost
-const char* json_config_pretty = 
+const char* json_config_pretty =
 #include "json_config_pretty.h"
 ;
 
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
+	Loom_Analog,
+	Loom_Digital,
+	Loom_Interrupt_Manager,
+	Loom_Relay
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };
 
 
 
-void setup() 
+void setup()
 {
 	Loom.begin_serial(true);
 
@@ -75,9 +74,7 @@ void setup()
 
 
 
-void loop() 
+void loop()
 {
 	// No program here, example is for how to include json config
 }
-
-

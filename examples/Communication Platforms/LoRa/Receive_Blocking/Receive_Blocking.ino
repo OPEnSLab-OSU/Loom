@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This is a basic example of receiving data via LoRa. 
+// This is a basic example of receiving data via LoRa.
 // This particular example blocks while waiting for data
 // While you can do a variety of things with the received data, this example
-// simply prints it and logs it to an SD Card 
+// simply prints it and logs it to an SD Card
 
 // The corresponding example is LoRa > Transmit
 
@@ -11,10 +11,10 @@
 // for details of LoRa config options
 
 // There is a similar receiving example that, unlike this one, will not
-// block / wait for a packet before continuing, that example is 
+// block / wait for a packet before continuing, that example is
 // LoRa > Receive
 
-// The maximum time to wait for a packet is provided in milliseconds, 
+// The maximum time to wait for a packet is provided in milliseconds,
 // 5000 in this case
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -22,25 +22,22 @@
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
+	Loom_SD,
+	Loom_LoRa
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };
 
 
 
-void setup() 
-{ 
+void setup()
+{
 	Loom.begin_serial();
 	Loom.parse_config(json_config);
 	Loom.print_config();
@@ -48,10 +45,10 @@ void setup()
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
 	if (Loom.LoRa().receive_blocking(5000)) {
 		Loom.display_data();
-		Loom.SDCARD().log("received.csv");
+		Loom.SD().log("received.csv");
 	}
 }

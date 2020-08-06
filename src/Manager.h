@@ -467,7 +467,7 @@ public:
 	Loom_Interrupt_Manager&		InterruptManager(const uint8_t idx = 0);
 	Loom_Multiplexer&			Multiplexer(const uint8_t idx = 0);
 	Loom_NTP_Sync&				NTP(const uint8_t idx = 0);
-	Loom_Temp_Sync&				TempSync(const uint8_t idx = 0);
+	Loom_Temp_Sync&				Temp_Sync(const uint8_t idx = 0);
 
 	// CommPlats
 	Loom_LoRa&			LoRa(const uint8_t idx = 0);

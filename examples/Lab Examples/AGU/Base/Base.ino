@@ -19,11 +19,12 @@
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::WiFi,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
+	Loom_Analog,
+	Loom_Digital,
+	Loom_SD,
+	Loom_OLED,
+	Loom_DS3231,
+	Loom_WiFi
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };
@@ -34,8 +35,8 @@ void setup() {
 	// TODO: hypnos control
 	// TODO: verify with eli that the device IDs are actually only alphanumerical
 	// Needs to be done for Hypno Board
-	pinMode(5, OUTPUT);   // Enable control of 3.3V rail 
-	pinMode(6, OUTPUT);   // Enable control of 5V rail 
+	pinMode(5, OUTPUT);   // Enable control of 3.3V rail
+	pinMode(6, OUTPUT);   // Enable control of 5V rail
 
 	//See Above
 	digitalWrite(5, LOW); // Enable 3.3V rail
@@ -46,13 +47,13 @@ void setup() {
 
 	// delay 5 seconds, running the bootloader during that time, so we can report back status
 	uint32_t start = millis();
-	while(millis() - start < 10000) 
+	while(millis() - start < 10000)
 		Bootloader::run_bootloader();
 
 	// get the config
     StaticJsonDocument<2048> doc;
     did_serialize = Bootloader::get_config(doc);
-	
+
 	// start Loom!
 	if (did_serialize) {
 		Loom.set_print_verbosity(Verbosity::V_LOW);
@@ -73,7 +74,7 @@ void loop() {
 		Loom.package();
 		Loom.display_data();
 		Loom.OLED().log();
-		Loom.SDCARD().log();
+		Loom.SD().log();
 		Loom.GoogleSheets().publish();
 
 		/*
@@ -87,6 +88,6 @@ void loop() {
 	}
 
 	const uint32_t start = millis();
-	while (millis() - start < static_cast<uint32_t>(Loom.get_interval())) 
+	while (millis() - start < static_cast<uint32_t>(Loom.get_interval()))
 		Bootloader::run_bootloader();
 }

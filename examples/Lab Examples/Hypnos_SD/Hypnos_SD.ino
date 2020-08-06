@@ -15,28 +15,26 @@
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
+	Loom_Analog,
+	Loom_SD,
+	Loom_DS3231
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };
 
 
 
-void setup() 
+void setup()
 {
 	// Needs to be done for Hypno Board
-	pinMode(5, OUTPUT);		// Enable control of 3.3V rail 
-	pinMode(6, OUTPUT);		// Enable control of 5V rail 
+	pinMode(5, OUTPUT);		// Enable control of 3.3V rail
+	pinMode(6, OUTPUT);		// Enable control of 5V rail
 
 	//See Above
 	digitalWrite(5, LOW);	// Enable 3.3V rail
@@ -50,7 +48,7 @@ void setup()
 }
 
 
-void loop() 
+void loop()
 {
 	Loom.measure();
 	Loom.package();
@@ -58,7 +56,7 @@ void loop()
 
 	// Log using default filename as provided in configuration
 	// in this case, 'datafile.csv'
-	Loom.SDCARD().log();
+	Loom.SD().log();
 
-	Loom.pause();	
+	Loom.pause();
 }

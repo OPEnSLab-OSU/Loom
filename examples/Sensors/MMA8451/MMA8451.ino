@@ -7,25 +7,22 @@
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
 // Set enabled modules
 LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
+	Loom_Analog,
+	Loom_MMA8451
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };
 
 
 
-void setup() 
-{ 
+void setup()
+{
 	Loom.begin_serial(true);
 	Loom.parse_config(json_config);
 	Loom.print_config(true);
@@ -33,7 +30,7 @@ void setup()
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
 	Loom.measure();
 	Loom.package();
