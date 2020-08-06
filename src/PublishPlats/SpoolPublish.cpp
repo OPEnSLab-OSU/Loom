@@ -2,8 +2,8 @@
 ///
 /// @file		Loom_SpoolPublish.cpp
 /// @brief		File for Loom_SpoolPublish implementation.
-/// @author		Eli Winkelman
-/// @date		2019
+/// @author		Eli Winkelman, Maddie Smith, and Kenneth Kang
+/// @date		2020
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
