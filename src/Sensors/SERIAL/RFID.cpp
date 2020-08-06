@@ -233,17 +233,14 @@ void Loom_RFID::moistureTagMeasurement(){
 ///////////////////////////////////////////////////////////////////////////////
 
 void Loom_RFID::package(JsonObject json){
-  JsonObject data = get_module_data_object(json, module_name);
   char EPCHeader_Hex[3];
-  JsonArray array = data.createNestedArray("Tags");
-
   for(int i=0; i<tag_counter;i++){
-     JsonObject tag = array.createNestedObject();
+     JsonObject data = get_module_data_object(json, "RFID Tag " + i);
      itoa(rfid_tags[i].EPCHeaderName, EPCHeader_Hex, 16);
-     tag["RSSI"] = rfid_tags[i].rssi;
-     tag["Frequency"] = rfid_tags[i].freq;
-     tag["Moisture"] = rfid_tags[i].moisture;
-     tag["EPC"] = EPCHeader_Hex;
+     data["RSSI"] = rfid_tags[i].rssi;
+     data["Frequency"] = rfid_tags[i].freq;
+     data["Moisture"] = rfid_tags[i].moisture;
+     data["EPC"] = EPCHeader_Hex;
   }
 }
 
@@ -295,7 +292,7 @@ void Loom_RFID::setTag(int i, tag t){
   if(i >= 0 && i <tag_counter)
     rfid_tags[i] = t;
   else{
-    print_module_label();  
+    print_module_label();
     LPrintln("No found tag at this index");
     return;
   }
