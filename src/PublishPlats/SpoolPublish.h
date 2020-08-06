@@ -40,7 +40,8 @@ public:
 			const char*				spool_domain,
 			const char*				device_data_endpoint,
 			const char*             coordinator_id,
-      const char*             device_id,
+      		const char*             device_id,
+			const char* 			data_run,
 			const char* 			cli_cert,
 			const char*				cli_key
 
@@ -70,6 +71,7 @@ private:
 	const String m_device_data_endpoint;
 	const String m_coordinator_id;
 	const String m_device_id;
+	const String m_data_run;
 
 	const std::vector<unsigned char>	m_cli_cert;	///< The client certificate, if one is provided (DER format)
 	const std::vector<unsigned char>	m_cli_key;	///< The client private key, if one if provided (DER format)

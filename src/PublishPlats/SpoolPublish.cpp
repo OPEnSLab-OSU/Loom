@@ -37,6 +37,7 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 		const char*				device_data_endpoint,
 		const char*             coordinator_id,
     	const char*             device_id,
+		const char* 			data_run,
 		const char* 			cli_cert,
 		const char*				cli_key
 	)
@@ -45,7 +46,8 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 	, m_device_data_endpoint(device_data_endpoint)
 	, m_device_id(device_id)
   	, m_coordinator_id(coordinator_id)
-	, m_params(SSLClientParameters::fromPEM(cli_cert, sizeof(cli_cert), cli_key, sizeof(cli_key)))
+	, m_data_run(data_run)
+	, m_params(SSLClientParameters::fromPEM(cli_cert, strlen(cli_cert), cli_key, strlen(cli_key)))
  {
 	LPrintln(cli_cert);
 	LPrintln(cli_key);
@@ -53,7 +55,7 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 
 /////////////////////////////////////////////////////////////////////
 Loom_SpoolPublish::Loom_SpoolPublish(LoomManager* manager, JsonArrayConst p)
-: Loom_SpoolPublish(manager, p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5], p[6], p[7] ) {}
+: Loom_SpoolPublish(manager, p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8] ) {}
 
 
 /////////////////////////////////////////////////////////////////////
@@ -71,14 +73,20 @@ void Loom_SpoolPublish::print_config() const
 /////////////////////////////////////////////////////////////////////
 bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat* plat)
 {
-	print_module_label();
 	// serialize the data, checking for an error
 	// not sure if this is the right way to check if there is a overflow
 	// set mutual auth, if needed
 	
-	//if (!(*(m_params.getCertChain())).data_len) LPrintln("Failed to decode client certificate");
-	if (!(*(m_params.getECKey())).xlen) LPrintln("Failed to decode client private key");
+	if (m_params.getCertChain() == nullptr || !(m_params.getCertChain() -> data_len)) {
+		print_module_label();
+		LPrintln("Failed to decode client certificate");
+	}
+	if (m_params.getECKey() == nullptr || !(m_params.getECKey() -> xlen)) {
+		print_module_label();
+		LPrintln("Failed to decode client private key");
+	} 
 	
+	print_module_label();
 	LPrintln("Adding mutual auth!");
 		// setup the certificate
 		plat->set_mutual_auth(m_params);
@@ -100,8 +108,8 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 	network -> println("Content-Type: application/json");
 	network -> print("Content-Length: ");
 	// Equivalent to:
-	// strlen("\",\"device_id\":") + m_device_id + strlen("{\"coordinator_id\":\"") + m_coordinator_id + strlen("\",\"data\":") + json + strlen("}")
-	network -> println(14 + m_device_id.length() + 19 + m_coordinator_id.length() + 9 + measureJson(json) + 1);
+	// strlen("\",\"device_id\":\""") + m_device_id + strlen("{\"coordinator_id\":\"") + m_coordinator_id + strlen("\",\"data_run\":\"") + m_data_run + strlen("\"strlen("\",\"data\":") + json + strlen("}")
+	network -> println(15 + m_device_id.length() + 19 + m_coordinator_id.length() + 14 + m_data_run.length() + 9 + measureJson(json) + 1);
 	network -> print("Host: ");
 	network -> println(m_spool_domain);
 
@@ -109,13 +117,17 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 	network -> println();
 	network -> print("{\"coordinator_id\":\"");
 	network -> print(m_coordinator_id);
-    network -> print("\",\"device_id\":");
+    network -> print("\",\"device_id\":\"");
     network -> print(m_device_id);
+	network -> print("\",\"data_run\":\"");
+	network -> print(m_data_run);
 	network -> print("\",\"data\":");
 
 	serializeJson(json, *network);
 
 	network -> println("}");
+	//network -> println("}");
+	network -> println();
 
 	if (!network->connected()) {
 		print_module_label();
