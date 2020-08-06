@@ -1,0 +1,40 @@
+"{\
+	'general':\
+	{\
+		'name':'Device',\
+		'instance':1,\
+		'interval':10000\
+	},\
+	'components':[\
+		{\
+			'name':'Analog',\
+			'params':'default'\
+		},\
+		{\
+			'name':'Digital',\
+			'params':'default'\
+		},\
+		{\
+			'name':'Ethernet',\
+			'params':[\
+				'Ether1',\
+				[<your-mac-address>],\
+				[192,168,0,1]\
+			]\
+		},\
+		{\
+			'name':'Spool',\
+			'params':[\
+				                                                                                'Spool1',\
+				                                                                                7001,\
+				                                                                                'device.open-sensing.org',\
+				                                                                                '/api/device/data',\
+/*same as device-id*/                                                                           '<coordinator-id>',/
+                                                                                                '<device-id>',/
+                                                                                                '101',/
+/*must include '-----BEGIN CERTIFICATE-----\n' and '\n-----END CERTIFICATE-----\n' part*/       '<certificate>',\
+/*must include '-----BEGIN EC PRIVATE KEY-----\n' and '\n-----END EC PRIVATE KEY-----\n' part*/ '<private-key>'\
+			]\
+		}\
+	]\
+}"
