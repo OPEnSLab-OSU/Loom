@@ -37,13 +37,13 @@ public:
 	/// Check out https://github.com/OPEnSLab-OSU/Spool/wiki for more information on these parameters.
 	/// @param[in]	module_name				String | <"Internet-Plat"> | null | Publish platform module name.
 	/// @param[in]  internet_type			Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform. 
-	/// @param[in]  spool_domain			String | <"device.open-sensing.org"> | device.open-sensing.org | URL where the Spool is hosted. 
-	/// @param[in]  device_data_endpoint	String | <"/api/device/data"> | /api/device/data |.
-	/// @param[in]  coordinator_id			String | <""> | null | .
-	/// @param[in]  device_id				String | <""> | null | .
-	/// @param[in]  data_run				String | <"101"> | 101 | .
-	/// @param[in]  cli_cert				String | <""> | null | .
-	/// @param[in]  cli_key					String | <""> | null | .
+	/// @param[in]  spool_domain			String | <"device.open-sensing.org"> | device.open-sensing.org | URL where Spool UI is hosted. 
+	/// @param[in]  device_data_endpoint	String | <"/api/device/data"> | /api/device/data | URL where device data is sent by the API.
+	/// @param[in]  coordinator_id			String | <""> | null | ID for the coordinator device on the network.
+	/// @param[in]  device_id				String | <""> | null | ID for the device which will publish data.
+	/// @param[in]  data_run				String | <"101"> | 101 | Data run to categorize the sensor model/trial for data collection.
+	/// @param[in]  cli_cert				String | <""> | null | Client certificate used to authenticate the SSH client.
+	/// @param[in]  cli_key					String | <""> | null | Client key used to authenticate the SSH client.
 	//TODO: Need to fill the description from coordinator_id to cli_key.
 	Loom_SpoolPublish(
 			LoomManager* manager,
@@ -94,7 +94,4 @@ private:
 	const std::vector<unsigned char>	m_cli_key;	///< The client private key, if one if provided (DER format)
 	br_x509_certificate	m_cert;
 	const SSLClientParameters	m_params;
-
-
-
 };
