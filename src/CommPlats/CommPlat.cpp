@@ -76,7 +76,6 @@ bool LoomCommPlat::receive()
 bool LoomCommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
 {
 	bool status = receive_blocking_impl(json, max_wait_time);
-	LPrintln("Recieve " , (status) ? "successful" : "failed" );
 	return status;
 }
 
@@ -107,7 +106,6 @@ bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
 bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
 	bool status = send_impl(json, destination);
 	add_packet_result(!status);
-	LPrintln("Send " , (status) ? "successful" : "failed" );
 	return status;
 }
 
@@ -227,6 +225,7 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 		// LPrintln("\nJson passed in:");
 		// serializeJsonPretty(json, Serial);
 	}
+	return status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
