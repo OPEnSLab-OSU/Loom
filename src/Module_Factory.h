@@ -11,6 +11,7 @@
 
 #pragma once
 
+#include <type_traits>
 #include "Module.h"
 
 #include <ArduinoJson.h>
@@ -69,8 +70,6 @@
 #include "Sensors/I2C/ZXGesture.h"
 #include "Sensors/I2C/STEMMA.h"
 
-
-
 #include "Sensors/SDI12/Decagon_5TM.h"
 #include "Sensors/SDI12/Decagon_GS3.h"
 
@@ -92,17 +91,27 @@
 // For functions that build constexpr lookup table
 #include "Module_Factory_Aux.h"
 
+///////////////////////////////////////////////////////////////////////////////
+/// Checks whether type T has a usable constructor T(LoomManager*);
+/// Usage example:
+///         has_loom_default_constructor<Loom_Googlesheets>::value // false
+///         has_loom_default_constructor<Loom_Analog>::value // true
+template <class T, class=void>
+struct has_loom_default_constructor : std::false_type {};
+
+template <class T>
+struct has_loom_default_constructor<T, decltype(T(std::declval<LoomManager*>()), void(0))> : std::true_type {};
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Creates a LoomModule with default parameters
-/// @return The created LoomModule
-template<class T> LoomModule* ConstructDefault(LoomManager* manager) { return new T(manager); }
+/// @return The created LoomModule or a nullptr if there is no default loom constructor for the specificied loom module
+template<class T, typename std::enable_if<has_loom_default_constructor<T>::value, T>::type* = nullptr> LoomModule* ConstructDefault(LoomManager* manager) { return new T(manager); }
+
+template<class T, typename std::enable_if<!has_loom_default_constructor<T>::value, T>::type* = nullptr> LoomModule* ConstructDefault(LoomManager* manager) { return nullptr; }
 
 /// Creates a LoomModule with Json array of parameters
 /// @return The created LoomModule
 template<class T> LoomModule* Construct(LoomManager* manager, JsonArrayConst p) { return new T(manager, p); }
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
