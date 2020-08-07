@@ -40,7 +40,7 @@ Loom_RFID::Loom_RFID(LoomManager* manager,
 
   int count = 0;
 
-  while(!setupNano() && count<5){
+  while(!setup_nano() && count<5){
     print_module_label();
     LPrintln("Module is not responding, check the wiring");
     count++;
@@ -48,7 +48,7 @@ Loom_RFID::Loom_RFID(LoomManager* manager,
   }
   if(count == 5){
     print_module_label();
-    LPrintln("Failed to setup Nano after five attemps");
+    LPrintln("Failed to setup Nano after five attempts");
     return;
   }
   else{
@@ -79,7 +79,7 @@ Loom_RFID::~Loom_RFID(){
 
 ///////////////////////////////////////////////////////////////////////////////
 
-bool Loom_RFID::setupNano(){
+bool Loom_RFID::setup_nano(){
   delay(200);
   nano.enableDebugging();
   nano.begin(rfid_serial);
@@ -136,7 +136,7 @@ bool Loom_RFID::setupNano(){
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Loom_RFID::addNewTag(int i, byte EPCHeader, byte EPCFertigate){
+void Loom_RFID::add_new_tag(int i, byte EPCHeader, byte EPCFertigate){
    i++;
    tag newTag;
    newTag.EPCHeaderName = EPCHeader;
@@ -144,12 +144,12 @@ void Loom_RFID::addNewTag(int i, byte EPCHeader, byte EPCFertigate){
    newTag.threshold     = MIN_VAL;
    newTag.state         = State::COMPARE_THRESHOLD;
 
-   rfid_tags[i] = newTag;
+   set_tag(i, newTag);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Loom_RFID::updateData(int i, int rssi, long freq, long moisture, byte tagEPCBytes, byte EPCFertigate){
+void Loom_RFID::update_data(int i, int rssi, long freq, long moisture, byte tagEPCBytes, byte EPCFertigate){
    rfid_tags[i].fertigate   = EPCFertigate;
    rfid_tags[i].rssi        = rssi;
    rfid_tags[i].moisture    = moisture;
@@ -166,7 +166,7 @@ void Loom_RFID::measure(){
     case MeasureType::Moisture:
       print_module_label();
       LPrintln("Moisture tags will be measured");
-      moistureTagMeasurement();
+      moisture_tag_measurement();
       break;
     case MeasureType::Unknown:
       print_module_label();
@@ -181,7 +181,7 @@ void Loom_RFID::measure(){
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Loom_RFID::moistureTagMeasurement(){
+void Loom_RFID::moisture_tag_measurement(){
   int rssi, timeout_counter = 0;
   long freq, moisture;
   byte tagEPCBytes, EPCHeader, EPCFertigate;
@@ -207,11 +207,11 @@ void Loom_RFID::moistureTagMeasurement(){
           index=i;
           if(rfid_tags[i].EPCHeaderName == EPCHeader){
             updated=true;
-            updateData(i, rssi, freq, moisture, tagEPCBytes, EPCFertigate);
+            update_data(i, rssi, freq, moisture, tagEPCBytes, EPCFertigate);
           }
           else if(i == tag_counter && tag_counter < num_tags){
-            addNewTag(i, EPCHeader, EPCFertigate);
             tag_counter++;
+            add_new_tag(i, EPCHeader, EPCFertigate);
           }
 
         }
@@ -263,7 +263,7 @@ void Loom_RFID::print_measurements() const{
 
 ///////////////////////////////////////////////////////////////////////////////
 
-Loom_RFID::tag Loom_RFID::getTag(int i){
+Loom_RFID::tag Loom_RFID::get_tag(int i){
   if(i >= 0 && i <tag_counter)
     return rfid_tags[i];
   else{
@@ -276,7 +276,7 @@ Loom_RFID::tag Loom_RFID::getTag(int i){
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Loom_RFID::setTag(int i, tag t){
+void Loom_RFID::set_tag(int i, tag t){
   if(i >= 0 && i <tag_counter)
     rfid_tags[i] = t;
   else{

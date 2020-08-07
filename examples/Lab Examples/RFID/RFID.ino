@@ -68,10 +68,10 @@ void loop()
 {
 	//readFertigateSwitch();
   Loom.measure();
- 	sketch_index = rfid->getTagIndex();
+ 	sketch_index = rfid->get_tag_index();
 	if(sketch_index!=-1){
-		Loom_RFID::tag found_tag = rfid->getTag(sketch_index);
-		results = rfid->isUpdatedIndex();
+		Loom_RFID::tag found_tag = rfid->get_tag(sketch_index);
+		results = rfid->is_updated_index();
 		LPrintln("Tag Index Measured: ", sketch_index);
 	  //if((results && !fertigate_state) || (results && found_tag.fertigate == 0xFF))
 		if(results)
@@ -153,7 +153,7 @@ void state_machine(Loom_RFID::tag found_tag, int i){
                  LPrintln();
               }
               found_tag.state = Loom_RFID::State::DRY_CYCLE;
-              rfid->setTag(i, found_tag);
+              rfid->set_tag(i, found_tag);
            }
            else if(found_tag.threshold == MIN_VALUE){
               if(_debug_serial){
@@ -161,7 +161,7 @@ void state_machine(Loom_RFID::tag found_tag, int i){
                  LPrintln();
               }
               found_tag.state = Loom_RFID::State::WET_CYCLE;
-              rfid->setTag(i, found_tag);
+              rfid->set_tag(i, found_tag);
            }
 
            break;
@@ -185,7 +185,7 @@ void state_machine(Loom_RFID::tag found_tag, int i){
            	 if(found_tag.rssi > RELAY_RSSI_THRESHOLD){
               	turnOnRelay();
               	found_tag.state = Loom_RFID::State::COMPARE_THRESHOLD;
-                rfid->setTag(i, found_tag);
+                rfid->set_tag(i, found_tag);
            	 }
            	 else
            	 	turnOffRelay();
@@ -193,7 +193,7 @@ void state_machine(Loom_RFID::tag found_tag, int i){
            else if(found_tag.moisture <= found_tag.threshold){
               found_tag.threshold = MAX_VALUE;
               found_tag.state = Loom_RFID::State::COMPARE_THRESHOLD;
-              rfid->setTag(i, found_tag);
+              rfid->set_tag(i, found_tag);
               turnOffRelay();
            }
 
@@ -217,17 +217,15 @@ void state_machine(Loom_RFID::tag found_tag, int i){
             if(found_tag.moisture > found_tag.threshold){
             	  if(found_tag.rssi > RELAY_RSSI_THRESHOLD){
             	  		found_tag.threshold = MIN_VALUE;
-                    rfid->setTag(i, found_tag);
+										found_tag.state = Loom_RFID::State::COMPARE_THRESHOLD;
+                    rfid->set_tag(i, found_tag);
                 		turnOnRelay();
-                		found_tag.state = Loom_RFID::State::COMPARE_THRESHOLD;
-                    rfid->setTag(i, found_tag);
-
             	  }
 
             }
             else if(found_tag.moisture <= found_tag.threshold){
               found_tag.state = Loom_RFID::State::COMPARE_THRESHOLD;
-              rfid->setTag(i, found_tag);
+              rfid->set_tag(i, found_tag);
               turnOffRelay();
             }
   }

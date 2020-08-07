@@ -31,12 +31,12 @@ class Loom_RFID : public LoomSerialSensor
 
 public:
 
-  enum class MeasureType {
+  enum class MeasureType { // Enum class to define what RFID tag measurements will be made
     Unknown,
     Moisture
   };
 
-  enum class State {
+  enum class State { // Enum class to define what state each RFID tag is in
     COMPARE_THRESHOLD,
     WET_CYCLE,
     DRY_CYCLE,
@@ -56,10 +56,10 @@ public:
  } tag;
 
 protected:
-  bool     setupNano();
-  void        moistureTagMeasurement();
-  void        addNewTag(int i, byte EPCHeader, byte EPCFertigate);
-  void        updateData(int i, int rssi, long freq, long moisture, byte tagEPCBytes, byte EPCFertigate);
+  bool        setup_nano();
+  void        moisture_tag_measurement();
+  void        add_new_tag(int i, byte EPCHeader, byte EPCFertigate);
+  void        update_data(int i, int rssi, long freq, long moisture, byte tagEPCBytes, byte EPCFertigate);
 
   Uart                rfid_serial;  ///< Uart connect used by the RFID reader
   RFID                nano;         ///< Underlying RFID nano tag reader instance
@@ -111,11 +111,20 @@ public:
 
     void        measure() override;
     void        package(JsonObject json) override;
-    void        setTag(int i, tag t);
-    tag         getTag(int i);
-    boolean     isUpdatedIndex() { return updated; }
-    int         getTagIndex() { return index; }
-    int         get_error_counter() { return error_counter;}
+
+    /// Sets the tag in the array of tags
+    /// @param[in]	i	The index in the array to set the tag to
+    /// @param[in]	t The tag that will be used to set in the array
+    void        set_tag(int i, tag t);
+
+    /// Retrieves the tag found in the array of tags if the index is in bounds
+    /// @param[in]	i	The index of the tag in the array to return
+    /// @return		The tag found in the array of tags
+    tag         get_tag(int i);
+
+    boolean     is_updated_index() { return updated; }
+    int         get_tag_index() { return index; }
+    int         get_error_counter() { return error_counter; }
 
 
 //=============================================================================
