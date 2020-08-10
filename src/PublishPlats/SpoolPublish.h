@@ -22,7 +22,7 @@
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___spool_publish.html)
 /// - [WiKi: Using Spool with Loom](https://github.com/OPEnSLab-OSU/Spool/wiki)
-/// 
+///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_SpoolPublish : public LoomPublishPlat
 {
@@ -36,25 +36,25 @@ public:
 	/// Loom Spool Platform module constructor.
 	/// Check out https://github.com/OPEnSLab-OSU/Spool/wiki for more information on these parameters.
 	/// @param[in]	module_name				String | <"Internet-Plat"> | null | Publish platform module name.
-	/// @param[in]  internet_type			Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform. 
-	/// @param[in]  spool_domain			String | <"device.open-sensing.org"> | device.open-sensing.org | URL where Spool UI is hosted. 
+	/// @param[in]  internet_type			Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform.
+	/// @param[in]  spool_domain			String | <"device.open-sensing.org"> | device.open-sensing.org | URL where Spool UI is hosted.
 	/// @param[in]  device_data_endpoint	String | <"/api/device/data"> | /api/device/data | URL where device data is sent by the API.
 	/// @param[in]  coordinator_id			String | <""> | null | ID for the coordinator device on the network.
 	/// @param[in]  device_id				String | <""> | null | ID for the device which will publish data.
 	/// @param[in]  data_run				String | <"101"> | 101 | Data run to categorize the sensor model/trial for data collection.
-	/// @param[in]  cli_cert				String | <""> | null | Client certificate used to authenticate the SSH client.
-	/// @param[in]  cli_key					String | <""> | null | Client key used to authenticate the SSH client.
+	/// @param[in]  cli_cert				String | <""> | null | Client certificate used to authenticate the SSL client.
+	/// @param[in]  cli_key					String | <""> | null | Client key used to authenticate the SSL client.
 	Loom_SpoolPublish(
 			LoomManager* manager,
 			const char*				module_name,
 			const LoomModule::Type	internet_type,
-			const char*				spool_domain					= "device.open-sensing.org",
-			const char*				device_data_endpoint			= "/api/device/data",
 			const char*             coordinator_id,
-      		const char*             device_id,
-			const char* 			data_run						= "101",
+    	const char*             device_id,
+			const char* 			data_run,
 			const char* 			cli_cert,
-			const char*				cli_key
+			const char*				cli_key,
+			const char*				spool_domain					= "device.open-sensing.org",
+			const char*				device_data_endpoint			= "/api/device/data"
 
 		);
 
@@ -82,7 +82,7 @@ protected:
 	bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
 
 private:
-	
+
 	const String m_spool_domain;			///< The Spool URL
 	const String m_device_data_endpoint;
 	const String m_coordinator_id;

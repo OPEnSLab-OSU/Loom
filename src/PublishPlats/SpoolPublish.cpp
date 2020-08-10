@@ -11,6 +11,37 @@
 
 #include "SpoolPublish.h"
 
+/////////////////////////////////////////////////////////////////////
+Loom_SpoolPublish::Loom_SpoolPublish(
+		LoomManager* manager,
+		const char*				module_name,
+		const LoomModule::Type	internet_type,
+		const char*             coordinator_id,
+    	const char*             device_id,
+		const char* 			data_run,
+		const char* 			cli_cert,
+		const char*				cli_key,
+		const char*				spool_domain,
+		const char*				device_data_endpoint
+	)
+	: LoomPublishPlat(manager, module_name, LoomModule::Type::SpoolPub, internet_type)
+	, m_spool_domain(spool_domain)
+	, m_device_data_endpoint(device_data_endpoint)
+	, m_device_id(device_id)
+  , m_coordinator_id(coordinator_id)
+	, m_data_run(data_run)
+	, m_params(SSLClientParameters::fromPEM(cli_cert, strlen(cli_cert), cli_key, strlen(cli_key)))
+ {
+	LPrintln(cli_cert);
+	LPrintln(cli_key);
+ }
+
+/////////////////////////////////////////////////////////////////////
+Loom_SpoolPublish::Loom_SpoolPublish(LoomManager* manager, JsonArrayConst p)
+: Loom_SpoolPublish(manager, p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8] ) {}
+
+
+/////////////////////////////////////////////////////////////////////
 static std::vector<unsigned char> make_key_from_asn1(std::vector<unsigned char> asn1) {
 	// we need to extract the private key from the ASN1 object given to us
 	// to do that, some ASN.1 parsing!
@@ -27,36 +58,6 @@ static std::vector<unsigned char> make_key_from_asn1(std::vector<unsigned char> 
 	asn1.shrink_to_fit();
 	return asn1;
 }
-
-/////////////////////////////////////////////////////////////////////
-Loom_SpoolPublish::Loom_SpoolPublish(
-		LoomManager* manager,
-		const char*				module_name,
-		const LoomModule::Type	internet_type,
-		const char*				spool_domain,
-		const char*				device_data_endpoint,
-		const char*             coordinator_id,
-    	const char*             device_id,
-		const char* 			data_run,
-		const char* 			cli_cert,
-		const char*				cli_key
-	)
-	: LoomPublishPlat(manager, module_name, LoomModule::Type::SpoolPub, internet_type)
-	, m_spool_domain(spool_domain)
-	, m_device_data_endpoint(device_data_endpoint)
-	, m_device_id(device_id)
-  	, m_coordinator_id(coordinator_id)
-	, m_data_run(data_run)
-	, m_params(SSLClientParameters::fromPEM(cli_cert, strlen(cli_cert), cli_key, strlen(cli_key)))
- {
-	LPrintln(cli_cert);
-	LPrintln(cli_key);
- }
-
-/////////////////////////////////////////////////////////////////////
-Loom_SpoolPublish::Loom_SpoolPublish(LoomManager* manager, JsonArrayConst p)
-: Loom_SpoolPublish(manager, p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8] ) {}
-
 
 /////////////////////////////////////////////////////////////////////
 void Loom_SpoolPublish::print_config() const
@@ -76,7 +77,7 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 	// serialize the data, checking for an error
 	// not sure if this is the right way to check if there is a overflow
 	// set mutual auth, if needed
-	
+
 	if (m_params.getCertChain() == nullptr || !(m_params.getCertChain() -> data_len)) {
 		print_module_label();
 		LPrintln("Failed to decode client certificate");
@@ -84,8 +85,8 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 	if (m_params.getECKey() == nullptr || !(m_params.getECKey() -> xlen)) {
 		print_module_label();
 		LPrintln("Failed to decode client private key");
-	} 
-	
+	}
+
 	print_module_label();
 	LPrintln("Adding mutual auth!");
 		// setup the certificate
