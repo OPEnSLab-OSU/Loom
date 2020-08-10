@@ -44,7 +44,6 @@ public:
 	/// @param[in]  data_run				String | <"101"> | 101 | Data run to categorize the sensor model/trial for data collection.
 	/// @param[in]  cli_cert				String | <""> | null | Client certificate used to authenticate the SSH client.
 	/// @param[in]  cli_key					String | <""> | null | Client key used to authenticate the SSH client.
-	//TODO: Need to fill the description from coordinator_id to cli_key.
 	Loom_SpoolPublish(
 			LoomManager* manager,
 			const char*				module_name,
