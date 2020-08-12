@@ -28,10 +28,15 @@ Loom_SpoolPublish::Loom_SpoolPublish(
 	, m_spool_domain(spool_domain)
 	, m_device_data_endpoint(device_data_endpoint)
 	, m_device_id(device_id)
-  , m_coordinator_id(coordinator_id)
+  	, m_coordinator_id(coordinator_id)
 	, m_data_run(data_run)
 	, m_params(SSLClientParameters::fromPEM(cli_cert, strlen(cli_cert), cli_key, strlen(cli_key)))
  {
+	LPrintln(m_device_id);
+	LPrintln(m_coordinator_id);
+	LPrintln(m_spool_domain);
+	LPrintln(m_data_run);
+	LPrintln(m_device_data_endpoint);
 	LPrintln(cli_cert);
 	LPrintln(cli_key);
  }
@@ -81,10 +86,12 @@ bool Loom_SpoolPublish::send_to_internet(const JsonObject json, LoomInternetPlat
 	if (m_params.getCertChain() == nullptr || !(m_params.getCertChain() -> data_len)) {
 		print_module_label();
 		LPrintln("Failed to decode client certificate");
+		return false;
 	}
 	if (m_params.getECKey() == nullptr || !(m_params.getECKey() -> xlen)) {
 		print_module_label();
 		LPrintln("Failed to decode client private key");
+		return false;
 	}
 
 	print_module_label();
