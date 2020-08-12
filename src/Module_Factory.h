@@ -224,6 +224,7 @@ namespace Include
 	constexpr auto LTE = std::make_tuple(
 		factory::NameModulePair{"LTE",			Construct<Loom_LTE>,			ConstructDefault<Loom_LTE> },
 		factory::NameModulePair{"GoogleSheets",	Construct<Loom_GoogleSheets>,	nullptr },
+		factory::NameModulePair{"Spool",		Construct<Loom_SpoolPublish>,	nullptr },
 		factory::NameModulePair{"NTP_Sync", 	Construct<LoomNTPSync>,			ConstructDefault<LoomNTPSync> }
 	);
 
@@ -248,7 +249,7 @@ namespace Include
 				factory::NameModulePair{"TSL2591",		Construct<Loom_TSL2591>,		ConstructDefault<Loom_TSL2591> },
 				factory::NameModulePair{"ZXGesture",	Construct<Loom_ZXGesture>,		ConstructDefault<Loom_ZXGesture> },
                 factory::NameModulePair{"STEMMA",       Construct<Loom_STEMMA>,         ConstructDefault<Loom_STEMMA> },
-                                             
+
 				// SDI12
 				factory::NameModulePair{"Decagon5TM",	Construct<Loom_Decagon5TM>,		ConstructDefault<Loom_Decagon5TM> },
 				factory::NameModulePair{"DecagonGS3",	Construct<Loom_DecagonGS3>,		ConstructDefault<Loom_DecagonGS3> },

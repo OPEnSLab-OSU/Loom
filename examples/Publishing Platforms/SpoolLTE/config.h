@@ -7,7 +7,7 @@
 	},\
 	'components':[\
 		{\
-			'name':'Analog',\
+			'name':'Digital',\
 			'params':'default'\
 		},\
 		{\
