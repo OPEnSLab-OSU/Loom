@@ -12,11 +12,11 @@
     },\
     {\
       'name':'RFID',\
-      'params':['Moisture', 10,	26,	17, 12,	11]\
+      'params':'default'\
     },\
 		{\
 			'name':'WiFi',\
-			'params':['test','test']\
+			'params':['garden-wifi-name','garden-wifi-password']\
 		}\
 	]\
 }"

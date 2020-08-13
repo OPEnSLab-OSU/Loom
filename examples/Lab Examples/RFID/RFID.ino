@@ -15,6 +15,7 @@
 
 
 #include <Loom.h>
+#include "wiring_private.h"
 
 #define RELAY_SWITCH A0
 //#define FERTIGATE_SWITCH A2
@@ -26,6 +27,9 @@
 #define NUMPIXELS 1
 #define MAX_VALUE 26
 #define MIN_VALUE 17
+
+#define TX 10
+#define RX 11
 
 
 // Include configuration
@@ -44,6 +48,10 @@ LoomFactory<
 
 LoomManager Loom{ &ModuleFactory };
 
+Uart rfid_serial = Uart(&sercom1, RX, TX, SERCOM_RX_PAD_0, UART_TX_PAD_2 );
+
+
+
 char color[10];
 int sketch_index=-1;
 bool _debug_serial = true;
@@ -51,17 +59,28 @@ bool results = false;
 Loom_RFID* rfid;
 //uint8_t fertigate_state = 0;
 
+void SERCOM1_Handler() {
+   rfid_serial.IrqHandler();
+}
+
 void setup()
 {
 	pinMode(RELAY_SWITCH, OUTPUT);
 	//pinMode(FERTIGATE_SWITCH, INPUT_PULLUP);
 
+	rfid_serial.begin(115200);
+
+	pinPeripheral(TX, PIO_SERCOM);
+	pinPeripheral(RX, PIO_SERCOM);
+
   Loom.begin_serial(true);
 	Loom.parse_config(json_config);
 	Loom.print_config();
 	LPrintln("\n ** Setup Complete ** ");
-
+	Loom.RFID().set_serial(&rfid_serial);
+	Loom.RFID().setup_nano();
 	rfid = (Loom_RFID*)Loom.find_module(LoomModule::Type::RFID);
+
 }
 
 void loop()

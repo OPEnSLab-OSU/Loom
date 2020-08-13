@@ -13,12 +13,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 Loom_RFID::Loom_RFID(LoomManager* manager,
-                    MeasureType t,
                     int tags,
                     int max,
                     int min,
-                    int RX,
-                    int TX,
+                    MeasureType t,
                     int num_samples
                     )
 : LoomSerialSensor(manager, "RFID", Type::RFID, num_samples)
@@ -26,47 +24,18 @@ Loom_RFID::Loom_RFID(LoomManager* manager,
   , num_tags(tags)
   , MAX_VAL(max)
   , MIN_VAL(min)
-  , rfid_serial(&sercom1, RX, TX, SERCOM_RX_PAD_0, UART_TX_PAD_2)
 {
   tag_counter = 0;
-  error_counter=0;
+  error_counter = 0;
   index=-1;
   updated=false;
   rfid_tags = new tag[num_tags];
-  print_module_label();
-  LPrintln("Begining RFID Serial at 115200bps");
-  rfid_serial.begin(115200);
-  while(!rfid_serial);
-
-  int count = 0;
-
-  while(!setup_nano() && count<5){
-    print_module_label();
-    LPrintln("Module is not responding, check the wiring");
-    count++;
-    delay(1000);
-  }
-  if(count == 5){
-    print_module_label();
-    LPrintln("Failed to setup Nano after five attempts");
-    return;
-  }
-  else{
-    print_module_label();
-    LPrintln("Setting RFID Region and read power");
-    nano.setRegion(REGION_NORTHAMERICA);
-    nano.setReadPower(2600);
-    print_module_label();
-    LPrintln("RFID Reader is staring to read");
-    nano.startReading();
-  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 Loom_RFID::Loom_RFID(LoomManager* manager, JsonArrayConst p)
-: Loom_RFID(manager, (MeasureType)(int)p[0],
-(int)p[1], (int)p[2], (int)p[3], (int)p[4], (int)p[5], (int)p[6])
+: Loom_RFID(manager, (int)p[0], (int)p[1], (int)p[2], (MeasureType)(int)p[3], (int)p[4])
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -78,16 +47,49 @@ Loom_RFID::~Loom_RFID(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_RFID::setup_nano(){
+  if(is_setup) return;
+  int count = 0;
 
-bool Loom_RFID::setup_nano(){
+  while(!setup_nano_impl() && count<5){
+    print_module_label();
+    LPrintln("Module is not responding, check the wiring");
+    count++;
+    delay(1000);
+  }
+  if(count == 5){
+    print_module_label();
+    LPrintln("Failed to setup Nano after five attempts");
+    return;
+  }
+  else{
+    is_setup = true;
+    print_module_label();
+    LPrintln("Setting RFID Region and read power");
+    nano.setRegion(REGION_NORTHAMERICA);
+    nano.setReadPower(2600);
+    print_module_label();
+    LPrintln("RFID Reader is starting to read");
+    nano.startReading();
+  }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+bool Loom_RFID::setup_nano_impl(){
+  print_module_label();
+  LPrintln("Beginning Nano setup");
   delay(200);
   nano.enableDebugging();
-  nano.begin(rfid_serial);
+  nano.begin(*sensor_serial);
+
   //Test to see if we are already connected to a module
 	//This would be the case if the Arduino has been reprogrammed and the module has stayed powered
-  while(!rfid_serial);
+  while(sensor_serial == nullptr);
+
   //About 200ms from power on the module will send its firmware version at 115200. We need to ignore this.
-  while(rfid_serial.available()) rfid_serial.read();
+  while(sensor_serial->available()) sensor_serial->read();
   delay(100);
   print_module_label();
   LPrintln("Getting RFID Tag Reader Version...");
@@ -116,6 +118,7 @@ bool Loom_RFID::setup_nano(){
   nano.getVersion();
 
   if (nano.msg[0] != ALL_GOOD){
+    print_module_label();
     LPrintln_Hex(nano.msg[0]);
     return false; //Something is not right
   }
@@ -161,6 +164,7 @@ void Loom_RFID::update_data(int i, int rssi, long freq, long moisture, byte tagE
 ///////////////////////////////////////////////////////////////////////////////
 
 void Loom_RFID::measure(){
+  if(!is_setup) setup_nano();
   switch (type)
   {
     case MeasureType::Moisture:

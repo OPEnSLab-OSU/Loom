@@ -56,12 +56,11 @@ public:
  } tag;
 
 protected:
-  bool        setup_nano();
+  bool        setup_nano_impl();
   void        moisture_tag_measurement();
   void        add_new_tag(int i, byte EPCHeader, byte EPCFertigate);
   void        update_data(int i, int rssi, long freq, long moisture, byte tagEPCBytes, byte EPCFertigate);
 
-  Uart                rfid_serial;  ///< Uart connect used by the RFID reader
   RFID                nano;         ///< Underlying RFID nano tag reader instance
   const MeasureType   type;         ///< Defines the type of RFID tag the reader should measure and package data for
   const int           num_tags;     ///< Defines the number of RFID tags the reader should expect to measure
@@ -72,6 +71,7 @@ protected:
   int                 error_counter;  ///< The counter for the number of times a tag is found but there is an error reading
   int                 index;        ///< The index of the last RFID tag that has been read
   boolean             updated;      ///< Defnies whether or not the last RFID tag was previously found and now updated
+  boolean             is_setup = false; ///< Defines whether or not the serial has been set
 
 public:
 //=============================================================================
@@ -88,12 +88,10 @@ public:
     /// @param[in] TX   The RX pin that is being used on the Feather M0 to connect with the RFID Tag Reader
     /// @param[in] num_samples    Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
     Loom_RFID(LoomManager* manager,
-        MeasureType t = MeasureType::Moisture,
         int tags=10,
         int max=26,
         int min=17,
-        int RX=12,
-        int TX=11,
+        MeasureType t = MeasureType::Moisture,
         int num_samples = 1
         );
 
@@ -109,6 +107,7 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
+    void        setup_nano();
     void        measure() override;
     void        package(JsonObject json) override;
 
