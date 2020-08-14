@@ -31,7 +31,7 @@ Loom_Analog::Loom_Analog(
 		const Conversion		convertA5,
 
 		const float				temperature
-	) 
+	)
 	: LoomSensor(manager, "Analog", Type::Analog, num_samples )
 	, read_resolution(read_resolution)
 	, enable_conversions(true)
@@ -68,14 +68,14 @@ Loom_Analog::Loom_Analog(
 
 ///////////////////////////////////////////////////////////////////////////////
 // Loom_Analog::Loom_Analog(LoomManager* manager, JsonArrayConst p)
-// 	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], 
-// 		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10], 
-// 		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13], 
+// 	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7],
+// 		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10],
+// 		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13],
 // 		p[14], p[15], p[16]) {}
 
 Loom_Analog::Loom_Analog(LoomManager* manager, JsonArrayConst p)
-	: Loom_Analog(manager, p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], 
-		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10], 
+	: Loom_Analog(manager, p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7],
+		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10],
 		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13],
 		p[14] )
 	{}
@@ -109,7 +109,7 @@ float Loom_Analog::convert(const uint8_t pin, const uint16_t analog) const
 		case Conversion::EC 			: return convert_EC(analog);
 		case Conversion::TDS 			: return convert_TDS(analog);
 		case Conversion::SALINITY 		: return convert_salinity(analog);
-		default							: return (float)analog;  
+		default							: return (float)analog;
 	}
 }
 
@@ -124,7 +124,7 @@ const char* Loom_Analog::conversion_name(const Conversion conversion)
 		case Conversion::EC 			: return "EC";
 		case Conversion::TDS 			: return "TDS";
 		case Conversion::SALINITY 		: return "salinity";
-		default							: return "analog";  
+		default							: return "analog";
 	}
 }
 
@@ -135,7 +135,7 @@ void Loom_Analog::print_config() const
 
 	LPrintln("\tAnalog Resolution : ", read_resolution);
 	LPrint("\tEnabled Pins        : ");
-	for (auto i = 0; i < ANALOG_COUNT; i++) { 
+	for (auto i = 0; i < ANALOG_COUNT; i++) {
 		if (pin_enabled[i]) {
 			LPrint("A", i, ", ");
 		}
@@ -185,11 +185,11 @@ void Loom_Analog::package(JsonObject json)
 			} else {
 				sprintf(buf, "%s[%d]", conversion_name(get_conversion(i)), i);
 			}
-			data[buf] = (!enable_conversions || conversions[i] == Conversion::NONE) 
+			data[buf] = (!enable_conversions || conversions[i] == Conversion::NONE)
 						 ? analog_vals[i]
 						 : convert(i, analog_vals[i]);
 		}
-	}	
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -214,7 +214,7 @@ uint16_t Loom_Analog::read_analog(const uint8_t chnl) const
 	int reading = 0;
 
 	while (i--) {
-		reading += analogRead(chnl); 
+		reading += analogRead(chnl);
 	}
 
 	switch (num_samples) {
@@ -225,7 +225,7 @@ uint16_t Loom_Analog::read_analog(const uint8_t chnl) const
 		case 16: return (reading >> 4); // Divide by 16
 		default: return (reading);
 	}
-} 
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 float Loom_Analog::convert_voltage(const uint16_t analog) const
@@ -238,7 +238,7 @@ float Loom_Analog::convert_voltage(const uint16_t analog) const
 #define THERMISTORNOMINAL 	10000   // resistance at 25 degrees C
 #define TEMPERATURENOMINAL 	25   	// temp. for nominal resistance (almost always 25 C)
 #define BCOEFFICIENT 		3950  	// The beta coefficient of the thermistor (usually 3000-4000)
-// #define SERIESRESISTOR 	10000    
+// #define SERIESRESISTOR 	10000
 #define SERIESRESISTOR 		29330  	// the value of the 'other' resistor
 #define range_resol  		4095
 float Loom_Analog::convert_thermistor(const uint16_t analog) const
@@ -250,12 +250,12 @@ float Loom_Analog::convert_thermistor(const uint16_t analog) const
 		average = SERIESRESISTOR / average;
 	#endif
 	#if reverse_connect == 1
-		average = range_resol / average - 1; 
+		average = range_resol / average - 1;
 		average = SERIESRESISTOR * average;
 	#endif
-	// Serial.print("Thermistor resistance "); 
+	// Serial.print("Thermistor resistance ");
 	// Serial.println(average);
- 
+
 	float steinhart;
 	steinhart = average / THERMISTORNOMINAL;     // (R/Ro)
 	steinhart = log(steinhart);                  // ln(R/Ro)
@@ -278,7 +278,7 @@ float Loom_Analog::convert_pH(const uint16_t analog) const
 	// return 1000.*convert_voltage(analog); // return millivolts
 
 	float voltage = convert_voltage(analog);
-	
+
 	float pHValue = 3.5*voltage + PH_Offset;
 
 	return pHValue;
@@ -304,8 +304,12 @@ float Loom_Analog::convert_turbidity(const uint16_t analog) const
 	// LPrintln("turbidity voltage: ", voltage);
 	// return -1120.4 * (voltage * voltage) + (5742.3 * voltage) - 4352.9;
 
-	return analog; // turbidity values are fairly qualitative, just returning the analog value for now
-}	
+	float voltage = analog * (5.0 / 1024.0); // Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5V)
+  float turbidity = (-1120.4 * voltage * voltage) + (5742.3 * voltage)  - 4352.9;
+
+	// return analog // turbidity values are fairly qualitative, just returning the analog value for now
+	return turbidity;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // #define EC_TEMP 25
@@ -319,7 +323,7 @@ float Loom_Analog::convert_EC(const uint16_t analog) const
 	float compensation_coefficient = 1.0 + 0.02 * (temperature - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
 	float comp_volt = voltage / compensation_coefficient;  			// temperature compensation
 	float EC = ( 133.42 * comp_volt * comp_volt * comp_volt - 255.86 * comp_volt * comp_volt + 857.39 * comp_volt ); //convert voltage value to EC value
-	
+
 	return EC;
 }
 
@@ -336,4 +340,3 @@ float Loom_Analog::convert_salinity(const uint16_t analog) const
 	// Probably doesn't actually give a value of any worth right now...
 	return (analog-76) / .0928;
 }
-

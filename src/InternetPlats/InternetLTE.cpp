@@ -65,13 +65,16 @@ void Loom_LTE::connect()
   uint8_t attempt_count = 0;
 
   do {
+      print_module_label();
       LPrint("Trying to connect to: ");
       LPrintln(APN);
       //Connects with username and password, even if not provided. TinyGSM handles
       if(modem.gprsConnect(APN, gprsUser, gprsPass)){
+        print_module_label();
         LPrintln("Success");
       }
       else{
+        print_module_label();
         LPrintln("Fail");
         delay(10000);
         attempt_count++;
@@ -81,6 +84,7 @@ void Loom_LTE::connect()
     } while(!modem.isGprsConnected() && attempt_count < 5);
 
     if(attempt_count == 5){
+      print_module_label();
       LPrintln("Connection failed!");
       return;
     }
@@ -139,6 +143,7 @@ void Loom_LTE::print_state() const
 void Loom_LTE::power_up()
 {
   if(!is_connected()){
+    print_module_label();
     LPrintln("Power up function");
     digitalWrite(powerPin, LOW);
     delay(10000);
@@ -150,6 +155,7 @@ void Loom_LTE::power_up()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_LTE::power_down()
 {
+  print_module_label();
   LPrintln("Power down function");
   modem.poweroff();
   digitalWrite(powerPin, HIGH);

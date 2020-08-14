@@ -57,7 +57,7 @@ public:
 		// Actuators
 		Actuator=4000,		Neopixel, Relay, Servo, Stepper,
 		// LogPlats
-		LogPlat=5000,		OLED, SDCARD,
+		LogPlat=5000,		OLED, SDCARD, BATCHSD,
 		// CommPlats
 		CommPlat=6000,		LoRa, nRF, Bluetooth,
 		// InternetPlats

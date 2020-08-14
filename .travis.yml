@@ -62,11 +62,13 @@ jobs:
         - arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/Hypnos_SD
         - arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/Hypnos_SD_Sleep
         - arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/Ishield
+        #- arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/RFID
         - arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/SmartRockLoomSimple
-        - arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/Stroud/StroudNode
+        #- arduino-cli compile --fqbn $BOARD $PWD/examples/'Lab Examples'/Stroud/StroudNode
 
     - stage: "Logging Platforms, Publishing Platforms, and Max"
       script:
+        #- arduino-cli compile --fqbn $BOARD $PWD/examples/'Logging Platforms'/BatchSD        
         - arduino-cli compile --fqbn $BOARD $PWD/examples/'Logging Platforms'/OLED
         - arduino-cli compile --fqbn $BOARD $PWD/examples/'Logging Platforms'/SD
         - arduino-cli compile --fqbn $BOARD $PWD/examples/MaxMsp/SimpleMax

@@ -12,6 +12,7 @@
 #pragma once
 
 #include "Module.h"
+#include "../LogPlats/BatchSD.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -36,7 +37,7 @@ protected:
 	/// CommPlatforms need their own JsonDocument because an incoming message
 	/// can only be deserialized into JsonDocuments, not JsonObjects.
 	/// And it seemed bad design to pass around references to the LoomManager's
-	/// internal JsonDocument. 
+	/// internal JsonDocument.
 	/// Especially as the LoomManager is intended to be non-mandatory for usage of Loom
 	StaticJsonDocument<1500> messageJson;
 
@@ -70,7 +71,7 @@ protected:
 	virtual void broadcast_impl(JsonObject json) {}
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -105,6 +106,15 @@ public:
 	/// @param[out]	json	Json object to fill with incoming data
 	bool			receive(JsonObject json) { return receive_blocking(json, 0); }
 
+	///	Receive and immediately create a batch file from JSON receieved
+	/// @return True if packet was recieved and stored in batch
+	bool			receive_batch() { return receive_batch_blocking(0); }
+
+	/// Receive, and block until packet recieved or timeout, and immediately create a batch file from JSON receieved
+	/// @param[in] max_wait_time	Maximum number of milliseconds to block for
+	/// @return True if packet was recieved and stored in batch
+	bool			receive_batch_blocking(uint max_wait_time);
+
 	/// Version of receive for use with LoomManager.
 	/// Accesses Json from LoomManager
 	/// @return True if packet received
@@ -113,7 +123,7 @@ public:
 	/// Version of receive_blocking for use with LoomManager.
 	/// Accesses Json from LoomManager
 	/// @param[out]	max_wait_time	Maximum number of milliseconds to block for
-	/// @return True if packet received	
+	/// @return True if packet received
 	bool			receive_blocking(const uint max_wait_time);
 
 	/// Send json to a specific address
@@ -128,6 +138,14 @@ public:
 	/// @return True if packet sent successfully, false otherwise
 	bool			send(const uint8_t destination);
 
+
+	/// Sends all the jsons stored in the batch
+	/// @param[in]	destination		Address of destination device
+	/// @param[in] 	delay_time		The amount of time between each packet in the batch being sent
+	/// @return true if the packet sent successfully
+	uint8_t		send_batch(const uint8_t destination, int delay_time);
+
+
 	/// Broadcast data to all that can receive.
 	/// Derived classes can optionally provide an implementation for this,
 	/// As supported by the radio/platform's library
@@ -137,6 +155,10 @@ public:
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager
 	void			broadcast();
+
+	///	Broadcasts all the jsons stored in the batch
+	/// @param[in] 	delay_time		The amount of time between each packet in the batch being broadcasted
+	void 			broadcast_batch(int delay_time);
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -203,10 +225,3 @@ protected:
 	void	add_packet_result(const bool did_drop);
 
 };
-
-
-
-
-
-
-

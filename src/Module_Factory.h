@@ -43,6 +43,7 @@
 // LogPlats
 #include "LogPlats/OLED.h"
 #include "LogPlats/SD.h"
+#include "LogPlats/BatchSD.h"
 
 // // RTC
 #include "RTC/DS3231.h"
@@ -177,6 +178,7 @@ namespace Include
 				// LogPlat
 				factory::NameModulePair{"OLED",			Construct<Loom_OLED>,			ConstructDefault<Loom_OLED> },
 				factory::NameModulePair{"SD",			Construct<Loom_SD>,				ConstructDefault<Loom_SD> },
+				factory::NameModulePair{"BatchSD",			Construct<Loom_BatchSD>,				ConstructDefault<Loom_BatchSD> },
 				// // RTC
 				factory::NameModulePair{"DS3231",		Construct<Loom_DS3231>,			ConstructDefault<Loom_DS3231> },
 				factory::NameModulePair{"PCF8523",		Construct<Loom_PCF8523>,		ConstructDefault<Loom_PCF8523> }

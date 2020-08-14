@@ -4,7 +4,7 @@
 
 // The device expects to have:
 // - Feather M0 WiFi
-// - OPEnS Lab hydro board (not necessary if you wire manually and don't need 
+// - OPEnS Lab hydro board (not necessary if you wire manually and don't need
 //		to turn sensors off)
 // - Adafruit Adalogger Featherwing
 // - MS5803 pressure sensor
@@ -17,7 +17,7 @@
 // - Max realtime visualization and interactivity over WiFi
 //		- Collects data
 //		- Log to SD and sends data to Max
-//		- Can receive commands from Max (such as actuation or loading a 
+//		- Can receive commands from Max (such as actuation or loading a
 //			different configuration from SD)
 // - Google Sheets logging over WiFi
 //		- Collects data
@@ -27,14 +27,14 @@
 // - Max if switch is LOW
 // - Google sheets is switch is HIGH
 
-// The device makes use of the SD configurations, selecting its configuration 
+// The device makes use of the SD configurations, selecting its configuration
 // based on the state of the switch.
 // If it fails to load the configuration from SD, it will default to the configuration
-// in the config.h file, which is for Max operation 
+// in the config.h file, which is for Max operation
 
 // The provided configurations should be copied to a micro SD card to be used on the device.
 // They will not work as provided, you must fill out/configure the following as needed:
-// - Device name 
+// - Device name
 // - Instance number
 // - Interval
 // - SD default save file
@@ -49,7 +49,7 @@
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
@@ -66,10 +66,10 @@ LoomManager Loom{ &ModuleFactory };
 
 
 
-void setup() 
-{ 
+void setup()
+{
 	pinMode(9, INPUT_PULLUP);			// To detect mode
-	// pinMode(10, OUTPUT);				// To be able to turn sensor on/off 
+	// pinMode(10, OUTPUT);				// To be able to turn sensor on/off
 										// Not currently being used due to conflict with SD CS pin
 
 	Loom.begin_LED();					// LED setup
@@ -79,8 +79,8 @@ void setup()
 	bool use_max = digitalRead(9) == 0; 		// High to use Max, Low to use Google Sheets
 	LPrintln("In ", use_max ? "Max" : "GoogleSheets", " mode");
 
-	bool load_success = (use_max) 
-				? Loom.parse_config_SD("Max.txt") 
+	bool load_success = (use_max)
+				? Loom.parse_config_SD("Max.txt")
 				: Loom.parse_config_SD("Google.txt");
 
 	// If SD config failed, use #include'd config from above
@@ -97,7 +97,7 @@ void setup()
 }
 
 
-void loop() 
+void loop()
 {
 	// digitalWrite(10, HIGH);	// Turn on sensors
 	// Loom.pause(100);			// Warmup time
@@ -110,7 +110,7 @@ void loop()
 	Loom.SDCARD().log();		// Log to SD
 
 	// The following if statements are a means of having both Max and GoogleSheets modes
-	// work with the same code. If a module exists, it will use it, otherwise it was 
+	// work with the same code. If a module exists, it will use it, otherwise it was
 	// probably not instantiated for this mode and will skip it.
 
 	if (Loom.has_module(LoomModule::Type::MaxPub)) {
@@ -118,14 +118,11 @@ void loop()
 	}
 	if (Loom.has_module(LoomModule::Type::MaxSub)) {
 		Loom.MaxSub().subscribe();					// Receive any messages from Max
-	} 
+	}
 	if ( Loom.has_module(LoomModule::Type::GoogleSheets) ) {
 		Loom.GoogleSheets().publish();				// Send data to Google Sheets
 	}
 
-	// Loom.pause(); 				// Wait (delay) based on 'interval' value in config
-	Loom.nap(); 				// Wait (sleepy dog) based on 'interval' value in config
+	Loom.pause(); 				// Wait (delay) based on 'interval' value in config
+	//Loom.nap(); 				// Wait (sleepy dog) based on 'interval' value in config
 }
-
-
-
