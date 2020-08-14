@@ -68,7 +68,7 @@ public:
 	/// @param[in]	analog_3_enabled		Bool | <true> | {true, false} | Enable A3 for reading
 	/// @param[in]	diff_0_enabled			Bool | <false> | {true, false} | Enable a differential measurement between A0 and A1
 	/// @param[in]	diff_1_enabled			Bool | <false> | {true, false} | Enable a differential measurement between A2 and A3
-	/// @param[in]	Fain					Set(Gain) | <0> | {0x0000("GAIN_TWOTHIRDS"), 0x0200("GAIN_ONE"), 0x0400("GAIN_TWO" ), 0x0600("GAIN_FOUR"), 0x0800("GAIN_EIGHT"), 0x0A00("GAIN_SIXTEEN")} | The gain setting for the ADS1115. Please do not change this number unless you are familiar with the ADS1115, as an incorrect setting will destroy the ADC!.
+	/// @param[in]	Gain					Set(Gain) | <0> | {0x0000("GAIN_TWOTHIRDS"), 0x0200("GAIN_ONE"), 0x0400("GAIN_TWO" ), 0x0600("GAIN_FOUR"), 0x0800("GAIN_EIGHT"), 0x0A00("GAIN_SIXTEEN")} | The gain setting for the ADS1115. Please do not change this number unless you are familiar with the ADS1115, as an incorrect setting will destroy the ADC!.
 	Loom_ADS1115(
 		LoomManager* manager,
 		const 	byte i2c_address = ADS1015_ADDRESS, 

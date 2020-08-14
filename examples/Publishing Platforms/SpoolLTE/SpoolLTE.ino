@@ -13,6 +13,7 @@
 //      to avoid manually turning the shield on.
 
 // - For Spool parameters, see:
+//   https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Spool
 //   https://github.com/OPEnSLab-OSU/Spool/wiki
 
 ///////////////////////////////////////////////////////////////////////////////

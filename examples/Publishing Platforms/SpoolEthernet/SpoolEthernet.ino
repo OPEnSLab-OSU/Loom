@@ -14,6 +14,7 @@
 //    You can use 'default' instead of a parameter list for Ethenet if you
 //    are not on a network that restricts to only registered MAC addresses
 // - For Spool parameters, see:
+//      https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Spool
 //      https://github.com/OPEnSLab-OSU/Spool/wiki
 
 ///////////////////////////////////////////////////////////////////////////////

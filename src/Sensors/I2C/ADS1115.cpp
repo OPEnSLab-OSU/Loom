@@ -24,6 +24,7 @@ Loom_ADS1115::Loom_ADS1115(
 	// Gain is an internal value in this driver, so this function
 	// does not actually write to the I2C bus
 	ads1115.setGain(static_cast<adsGain_t>(static_cast<uint32_t>(gain)));
+	LPrintln(static_cast<adsGain_t>(static_cast<uint32_t>(gain)));
 	ads1115.begin();
 }
 

@@ -12,6 +12,7 @@
 // In the config, you need:
 // - WiFi network name and password (or '' if no password)
 // - For Spool parameters, see:
+//   https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Spool
 //   https://github.com/OPEnSLab-OSU/Spool/wiki
 
 ///////////////////////////////////////////////////////////////////////////////
