@@ -16,6 +16,8 @@ const char* json_config =
 #include "config.h"
 ;
 
+#define RTC_INT_PIN 6
+
 // Set enabled modules
 LoomFactory<
 	Enable::Internet::Disabled,
@@ -28,15 +30,11 @@ LoomFactory<
 LoomManager Loom{ &ModuleFactory };
 
 
-
-
 // Detach interrupt on wake
 void wakeISR() { 
-	detachInterrupt(6); 
+	detachInterrupt(RTC_INT_PIN); 
 	LPrintln("Alarm went off"); 
 }
-
-
 
 void setup() 
 {
@@ -48,7 +46,7 @@ void setup()
 	Loom.parse_config(json_config);
 
 	// Register ISR to call on wake
-	Loom.InterruptManager().register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);
+	Loom.InterruptManager().register_ISR(RTC_INT_PIN, wakeISR, LOW, ISR_Type::IMMEDIATE);
 	
 
 	// LowPower.standby();
