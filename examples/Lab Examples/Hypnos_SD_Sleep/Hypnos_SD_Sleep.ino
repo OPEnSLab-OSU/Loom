@@ -20,13 +20,17 @@ const char* json_config =
 #include "config.h"
 ;
 
+#define RTC_INT_PIN 12
+#define HYPNOS3 5
+#define HYPNOS5 6
+
 // Set enabled modules
 LoomFactory<
 	Enable::Internet::Disabled,
 	Enable::Sensors::Enabled,
 	Enable::Radios::Enabled,
 	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
+	Enable::Max::Disabled
 > ModuleFactory{};
 
 LoomManager Loom{ &ModuleFactory };
@@ -35,29 +39,29 @@ volatile bool rtc_flag = false;
 
 void wakeISR_RTC() {
 	// disable the interrupt
-	detachInterrupt(12);
+	detachInterrupt(RTC_INT_PIN);
 	rtc_flag = true;
 }
 
 void setup() 
 {
 	// Needs to be done for Hypno Board
-	pinMode(5, OUTPUT);		// Enable control of 3.3V rail 
-	pinMode(6, OUTPUT);		// Enable control of 5V rail 
-	pinMode(12, INPUT_PULLUP);		// Enable waiting for RTC interrupt, MUST use a pullup since signal is active low
-  pinMode(13, OUTPUT);
+	pinMode(HYPNOS3, OUTPUT);		// Enable control of 3.3V rail 
+	pinMode(HYPNOS5, OUTPUT);		// Enable control of 5V rail 
+	pinMode(RTC_INT_PIN, INPUT_PULLUP);		// Enable waiting for RTC interrupt, MUST use a pullup since signal is active low
+    pinMode(13, OUTPUT);
 
 	//See Above
-	digitalWrite(5, LOW);	// Enable 3.3V rail
-	digitalWrite(6, HIGH);	// Enable 5V rail
-  digitalWrite(13, LOW);
+	digitalWrite(HYPNOS3, LOW);	// Enable 3.3V rail
+	digitalWrite(HYPNOS5, HIGH);	// Enable 5V rail
+    digitalWrite(13, LOW);
 
 	Loom.begin_serial(true);
 	Loom.parse_config(json_config);
 	Loom.print_config();
 
 	// Register an interrupt on the RTC alarm pin
-	Loom.InterruptManager().register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
+	Loom.InterruptManager().register_ISR(RTC_INT_PIN, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
 
 	LPrintln("\n ** Setup Complete ** ");
 	Serial.flush();
@@ -66,8 +70,8 @@ void setup()
 
 void loop() 
 {
-	digitalWrite(5, LOW); // Disable 3.3V rail
-  digitalWrite(6, HIGH);  // Disable 5V rail
+	digitalWrite(HYPNOS3, LOW); // Enable 3.3V rail
+  digitalWrite(HYPNOS5, HIGH);  // Enable 5V rail
   digitalWrite(13, HIGH);
 
 	// As it turns out, if the SD card is initialized and you change
@@ -92,11 +96,11 @@ void loop()
 
 	// set the RTC alarm to a duration of 10 seconds with TimeSpan
 	Loom.InterruptManager().RTC_alarm_duration(TimeSpan(0,0,0,10));
-	Loom.InterruptManager().reconnect_interrupt(12);
+	Loom.InterruptManager().reconnect_interrupt(RTC_INT_PIN);
 
-  digitalWrite(13, LOW);
-	digitalWrite(5, HIGH); // Enable 3.3V rail
-	digitalWrite(6, LOW);  // Enable 5V rail
+    digitalWrite(13, LOW);
+	digitalWrite(HYPNOS3, HIGH); // Disable 3.3V rail
+	digitalWrite(HYPNOS5, LOW);  // Disable 5V rail
 	pinMode(23, INPUT);
 	pinMode(24, INPUT);
 	pinMode(10, INPUT);
@@ -104,7 +108,7 @@ void loop()
 	// Sleep Manager autmatically calls power_down on every sensor before sleeping
 	// And power_up after waking.
 
-  rtc_flag = false;
+    rtc_flag = false;
 	Loom.SleepManager().sleep();
 	while (!rtc_flag);
 }
