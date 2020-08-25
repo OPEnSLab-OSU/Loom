@@ -213,7 +213,7 @@ public:
 	/// and added to manager lists for managing
 	/// @param[in]	json_config		Configuration
 	/// @return True if success
-	bool		parse_config(const char* json_config);
+	bool		parse_config(const char* json_config, bool release = true);
 
 	/// Parse a JSON configuration on SD card specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
@@ -221,12 +221,12 @@ public:
 	/// Json should be on a single line in a .txt file.
 	/// @param[in]	json_config		Configuration
 	/// @return True if success
-	bool		parse_config_SD(const char* config_file);
+	bool		parse_config_SD(const char* config_file, bool release = true);
 
 
 
-	bool		parse_config_serial();
-	bool		check_serial_for_config();
+	bool		parse_config_serial(bool release = true);
+	bool		check_serial_for_config(bool release = true);
 
 
 
@@ -236,7 +236,7 @@ public:
 	/// Called by parse_config and parse_config_SD
 	/// @param[in]	json_config		Configuration
 	/// @return True if success
-	bool		parse_config_json(JsonObject config);
+	bool		parse_config_json(JsonObject config, bool release = true);
 
 	/// Get complete configuration of the device.
 	/// Generally used to save configuration to SD

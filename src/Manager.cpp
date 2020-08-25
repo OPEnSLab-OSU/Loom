@@ -483,7 +483,7 @@ bool LoomManager::has_module(const LoomModule::Type type) const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::parse_config(const char* json_config)
+bool LoomManager::parse_config(const char* json_config, bool release)
 {
 	// Might need to be even larger
 	DynamicJsonDocument doc(2048);
@@ -496,13 +496,13 @@ bool LoomManager::parse_config(const char* json_config)
 		return false;
 	}
 
-	bool status = parse_config_json( doc.as<JsonObject>() );
+	bool status = parse_config_json( doc.as<JsonObject>() , release);
 	doc.clear();
 	return status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::parse_config_SD(const char* config_file)
+bool LoomManager::parse_config_SD(const char* config_file, bool release)
 {
 	SdFat sd;	// File system object
 
@@ -535,16 +535,16 @@ bool LoomManager::parse_config_SD(const char* config_file)
 		return false;
 	}
 
-	bool status = parse_config_json( doc.as<JsonObject>() );
+	bool status = parse_config_json( doc.as<JsonObject>() , release);
 	doc.clear();
 	return status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::parse_config_json(JsonObject config)
+bool LoomManager::parse_config_json(JsonObject config, bool release)
 {
 	// Remove current modules
-	free_modules();
+	if(release) free_modules();
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 
@@ -618,7 +618,7 @@ bool LoomManager::parse_config_json(JsonObject config)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::parse_config_serial()
+bool LoomManager::parse_config_serial(bool release)
 {
 	flash_LED(4, 200, 100, true);
 
@@ -639,7 +639,7 @@ bool LoomManager::parse_config_serial()
 		return false;
 	}
 
-	bool status = parse_config_json( doc.as<JsonObject>() );
+	bool status = parse_config_json( doc.as<JsonObject>() , release);
 	doc.clear();
 
 	flash_LED(12, 50, 25, false);
@@ -652,7 +652,7 @@ bool LoomManager::parse_config_serial()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::check_serial_for_config()
+bool LoomManager::check_serial_for_config(bool release)
 {
 	if (Serial.available()) {
 		// return parse_config_serial();
@@ -667,7 +667,7 @@ bool LoomManager::check_serial_for_config()
 			return false;
 		}
 
-		bool status = parse_config_json( doc.as<JsonObject>() );
+		bool status = parse_config_json( doc.as<JsonObject>() , release);
 		doc.clear();
 
 		flash_LED(12, 50, 25, false);
