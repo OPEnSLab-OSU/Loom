@@ -129,6 +129,18 @@ public:
 	/// @return True if packet received
 	bool			receive_blocking(const uint max_wait_time);
 
+	/// Giving the header of the Package from the other board
+	/// @param[in] json				json of the headers if it came in split
+	/// @return	JsonObject			it will return the headers of the package
+	JsonObject 		pre_merge_receive_blocking(JsonObject json);
+
+	/// It will merge all the small packages into one big package
+	/// @param[in]	json			The header of the package
+	///	@param[in]	loop			How many small packages are coming
+	///	@param[out] max_wait_time	Maximum number of milliseconds to block for
+	/// @return True if all package are receive and merged, false otherwise
+	bool			merge_json(JsonObject json, const uint8_t loop, const uint max_wait_time);
+
 	/// Send json to a specific address
 	/// @param[in]	json			Json package to send
 	/// @param[in]	destination		Device to send to
@@ -153,13 +165,14 @@ public:
 	/// small mulitple jsons with how many will it be splited into
 	/// @param[in]	json			The original message pacakge
 	/// @param[in]	destination		Address of destination device
-	void	 		split_send_notification(JsonObject json, const uint8_t destination); 
+	/// @return true if able to send notification to the other board, false otherwise
+	bool	 		split_send_notification(JsonObject json, const uint8_t destination); 
 
 	/// The actual processing spliting into small json 
 	/// @param[in]	json			The original message package
 	/// @param[in]	destination		Address of destination device
 	/// @param[in]	index			Json array Contents part location
-	/// @return true if all of them send completely, else false
+	/// @return true if all of them send completely, false otherwise
 	bool			split_send(JsonObject json, const uint8_t destination, const uint8_t index);
 
 	/// Broadcast data to all that can receive.

@@ -76,6 +76,12 @@ bool LoomCommPlat::receive()
 bool LoomCommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
 {
 	bool status = receive_blocking_impl(json, max_wait_time);
+	
+	JsonObject checker = device_manager -> internal_json();
+	if(!(checker["Num_Package"].isNull())){
+		status = merge_json(pre_merge_receive_blocking(checker), checker["Num_Package"], max_wait_time);
+	}
+	
 	return status;
 }
 
@@ -88,6 +94,53 @@ bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 		return receive_blocking( device_manager->internal_json(true), max_wait_time );
 	}
 	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+JsonObject LoomCommPlat::pre_merge_receive_blocking(JsonObject json){
+
+	JsonObject newJson = doc.to<JsonObject>();
+	newJson["type"] = json["type"];
+	JsonObject information = newJson.createNestedObject("id");
+	information["name"] = json["id"]["name"];
+	information["instance"] = json["id"]["instance"];
+	if(!(json["timestamp"].isNull())){
+		JsonObject timestamp = newJson.createNestedObject("timestamp");
+		timestamp["date"] = json["timestamp"]["date"];
+		timestamp["time"] = json["timestamp"]["time"];
+	}
+	return newJson;
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint max_wait_time){
+	JsonArray newContents = json["contents"];
+	newContents = json.createNestedArray("contents");
+	uint8_t Loop = loop;
+	
+	while(Loop > 0){
+		bool status = receive_blocking_impl(device_manager -> internal_json(true), max_wait_time);
+		JsonObject values = device_manager -> internal_json();
+		
+		JsonObject compenent = newContents.createNestedObject();
+		compenent["module"] = values["contents"]["module"];
+
+		JsonObject data = compenent.createNestedObject("data");
+		JsonObject old_data = values["contents"]["data"];
+		for(JsonPair kv: old_data){
+			compenent["data"][kv.key()] = kv.value();
+		}
+		Loop--;
+	}
+	
+	serializeJsonPretty(json, Serial);
+
+	// TODO: Just need to know how to update the internal_json
+	device_manager -> internal_json(false) = json; // This doens't change it...
+
+	return true;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -105,14 +158,16 @@ bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
 ///////////////////////////////////////////////////////////////////////////////
 bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
 	uint16_t sizeJsonObject = JSON_OBJECT_SIZE(json.size());
-	LPrintln("\nJSON_Object Size:", JSON_OBJECT_SIZE(json.size()));
-
+	bool prestatus;
 	bool status;
 	
-	if (sizeJsonObject >= 2){ // Need to change to 251
+	if (sizeJsonObject >= 2){ // TODO: Need to change to 251, 2 for testing purpose
 		LPrintln("Large JSON, Need to split the Package");
-		split_send_notification(json, destination);
-		status = split_send(json, destination, 0);	
+		prestatus = split_send_notification(json, destination);
+		if (prestatus) status = split_send(json, destination, 0);
+		else{
+			status = false;	
+		}
 	}
 	else{
 		status = send_impl(json, destination);
@@ -158,7 +213,7 @@ uint8_t LoomCommPlat::send_batch(const uint8_t destination, int delay_time){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomCommPlat::split_send_notification(JsonObject json, const uint8_t destination) {
+bool LoomCommPlat::split_send_notification(JsonObject json, const uint8_t destination) {
 		
 
 	uint8_t numPackage = json["contents"].size();
@@ -174,8 +229,8 @@ void LoomCommPlat::split_send_notification(JsonObject json, const uint8_t destin
 	}
 	object["Num_Package"] = numPackage;
 	LPrintln("Sending ", numPackage, " more package to the other board");
-	send_impl(object, destination);
-	doc.clear();
+	bool status = send_impl(object, destination);
+	return status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -183,9 +238,7 @@ bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const 
 	int contentIndex = index;
 	
 	JsonObject tmp = doc.to<JsonObject>();
-	JsonArray contents = tmp["contents"];			
-	contents = tmp.createNestedArray("contents");
-	JsonObject compenent = contents.createNestedObject();
+	JsonObject compenent = tmp.createNestedObject("contents");
 
 	compenent["module"] = json["contents"][contentIndex]["module"];
 	JsonObject data = compenent.createNestedObject("data");
@@ -194,8 +247,6 @@ bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const 
 	for (JsonPair kv : old_data){
 		compenent["data"][kv.key()] = kv.value();
 	}
-
-	serializeJsonPretty(tmp, Serial);
 
 	bool status = send_impl(tmp, destination);
 	if(!status) return false;
