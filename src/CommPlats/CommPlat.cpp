@@ -133,8 +133,6 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint ma
 		}
 		Loop--;
 	}
-	
-	serializeJsonPretty(json, Serial);
 
 	device_manager -> internal_json().set(json);
 
@@ -156,11 +154,14 @@ bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
 
 ///////////////////////////////////////////////////////////////////////////////
 bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
-	uint16_t sizeJsonObject = JSON_OBJECT_SIZE(json.size());
+	uint16_t sizeJsonObject = JSON_OBJECT_SIZE(json["type"].size()) + JSON_OBJECT_SIZE(json["id"].size()) + JSON_OBJECT_SIZE(json["contents"].size());
+	if (!(json["timestamp"].isNull())){
+		sizeJsonObject = sizeJsonObject + JSON_OBJECT_SIZE(json["timestamp"].size());
+	}
 	bool prestatus;
 	bool status;
 	
-	if (sizeJsonObject >= 2){ // TODO: Need to change to 251, 2 for testing purpose
+	if (sizeJsonObject >= 251){
 		LPrintln("Large JSON, Need to split the Package");
 		prestatus = split_send_notification(json, destination);
 		if (prestatus) status = split_send(json, destination, 0);
@@ -253,6 +254,7 @@ bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const 
 	contentIndex++;
 	
 	if(json["contents"][contentIndex].isNull()) return true;
+	device_manager -> pause(500);
 	split_send(json, destination, contentIndex);
 
 }
