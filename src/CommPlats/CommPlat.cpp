@@ -121,6 +121,7 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint ma
 	
 	while(Loop > 0){
 		bool status = receive_blocking_impl(device_manager -> internal_json(true), max_wait_time);
+		if(!status) return false;
 		JsonObject values = device_manager -> internal_json();
 		
 		JsonObject compenent = newContents.createNestedObject();
@@ -268,7 +269,7 @@ bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const 
 	contentIndex++;
 	
 	if(json["contents"][contentIndex].isNull()) return true;
-	device_manager -> pause(500);
+	//device_manager -> pause();
 	split_send(json, destination, contentIndex);
 
 }
