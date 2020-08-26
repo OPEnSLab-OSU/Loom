@@ -154,13 +154,10 @@ bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
 
 ///////////////////////////////////////////////////////////////////////////////
 bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
-	uint16_t sizeJsonObject = JSON_OBJECT_SIZE(json["type"].size()) + JSON_OBJECT_SIZE(json["id"].size()) + JSON_OBJECT_SIZE(json["contents"].size());
-	if (!(json["timestamp"].isNull())){
-		sizeJsonObject = sizeJsonObject + JSON_OBJECT_SIZE(json["timestamp"].size());
-	}
+	uint16_t sizeJsonObject = determine_json_size(json);
 	bool prestatus;
 	bool status;
-	
+
 	if (sizeJsonObject >= 251){
 		LPrintln("Large JSON, Need to split the Package");
 		prestatus = split_send_notification(json, destination);
@@ -210,6 +207,23 @@ uint8_t LoomCommPlat::send_batch(const uint8_t destination, int delay_time){
 		return drop_count;
 	}
 	return -1;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+uint16_t LoomCommPlat::determine_json_size(JsonObject json){
+	uint16_t jsonObjectSize;
+	jsonObjectSize = JSON_OBJECT_SIZE(json.size());
+	jsonObjectSize += JSON_OBJECT_SIZE(json["id"].size());
+	if (!(json["timestamp"].isNull())){
+		jsonObjectSize +=JSON_OBJECT_SIZE(json["timestamp"].size());
+	}
+	jsonObjectSize += JSON_ARRAY_SIZE(json["contents"].size());
+
+	// Not sure if I need to add values for each data element from the contents array
+	// But for now, it seems to detect better than before
+		
+	return jsonObjectSize;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

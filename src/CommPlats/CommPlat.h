@@ -160,6 +160,10 @@ public:
 	/// @return true if the packet sent successfully
 	uint8_t			send_batch(const uint8_t destination, int delay_time);
 
+	/// Return the size of the json to determing wether to send as split or not
+	///	@param[in]	json			Json that will the measurement of the size
+	///	@return	uint16_t of the value of the json size
+	uint16_t 		determine_json_size(JsonObject json);
 
 	/// If the json is over 251, then it let the user the know that it will be sending 
 	/// small mulitple jsons with how many will it be splited into
