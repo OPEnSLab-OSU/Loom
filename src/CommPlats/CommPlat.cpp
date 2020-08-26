@@ -136,8 +136,7 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint ma
 	
 	serializeJsonPretty(json, Serial);
 
-	// TODO: Just need to know how to update the internal_json
-	device_manager -> internal_json(false) = json; // This doens't change it...
+	device_manager -> internal_json().set(json);
 
 	return true;
 
