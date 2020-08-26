@@ -13,6 +13,8 @@
 
 #include "Module.h"
 #include "../LogPlats/BatchSD.h"
+#include <Arduino.h>
+#include <ArduinoJson.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -47,6 +49,7 @@ protected:
 	uint32_t total_drop_count;
 	bool last_ten_dropped[10];
 	uint8_t last_ten_dropped_idx;
+	StaticJsonDocument<2000> doc;
 
 //=============================================================================
 ///@name	RADIO IMPLEMENTATION
@@ -143,8 +146,21 @@ public:
 	/// @param[in]	destination		Address of destination device
 	/// @param[in] 	delay_time		The amount of time between each packet in the batch being sent
 	/// @return true if the packet sent successfully
-	uint8_t		send_batch(const uint8_t destination, int delay_time);
+	uint8_t			send_batch(const uint8_t destination, int delay_time);
 
+
+	/// If the json is over 251, then it let the user the know that it will be sending 
+	/// small mulitple jsons with how many will it be splited into
+	/// @param[in]	json			The original message pacakge
+	/// @param[in]	destination		Address of destination device
+	void	 		split_send_notification(JsonObject json, const uint8_t destination); 
+
+	/// The actual processing spliting into small json 
+	/// @param[in]	json			The original message package
+	/// @param[in]	destination		Address of destination device
+	/// @param[in]	index			Json array Contents part location
+	/// @return true if all of them send completely, else false
+	bool			split_send(JsonObject json, const uint8_t destination, const uint8_t index);
 
 	/// Broadcast data to all that can receive.
 	/// Derived classes can optionally provide an implementation for this,
@@ -159,6 +175,7 @@ public:
 	///	Broadcasts all the jsons stored in the batch
 	/// @param[in] 	delay_time		The amount of time between each packet in the batch being broadcasted
 	void 			broadcast_batch(int delay_time);
+
 
 //=============================================================================
 ///@name	PRINT INFORMATION

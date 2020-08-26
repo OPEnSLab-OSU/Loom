@@ -104,7 +104,19 @@ bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
 
 ///////////////////////////////////////////////////////////////////////////////
 bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
-	bool status = send_impl(json, destination);
+	uint16_t sizeJsonObject = JSON_OBJECT_SIZE(json.size());
+	LPrintln("\nJSON_Object Size:", JSON_OBJECT_SIZE(json.size()));
+
+	bool status;
+	
+	if (sizeJsonObject >= 2){ // Need to change to 251
+		LPrintln("Large JSON, Need to split the Package");
+		split_send_notification(json, destination);
+		status = split_send(json, destination, 0);	
+	}
+	else{
+		status = send_impl(json, destination);
+	}
 	add_packet_result(!status);
 	return status;
 }
@@ -143,6 +155,56 @@ uint8_t LoomCommPlat::send_batch(const uint8_t destination, int delay_time){
 		return drop_count;
 	}
 	return -1;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomCommPlat::split_send_notification(JsonObject json, const uint8_t destination) {
+		
+
+	uint8_t numPackage = json["contents"].size();
+	JsonObject object = doc.to<JsonObject>();
+	object["type"] = json["type"];
+	JsonObject information = object.createNestedObject("id");
+	information["name"] = json["id"]["name"];
+	information["instance"] = json["id"]["instance"];
+	if(!(json["timestamp"].isNull())){
+		JsonObject timestamp = object.createNestedObject("timestamp");
+		timestamp["date"] = json["timestamp"]["date"];
+		timestamp["time"] = json["timestamp"]["time"];
+	}
+	object["Num_Package"] = numPackage;
+	LPrintln("Sending ", numPackage, " more package to the other board");
+	send_impl(object, destination);
+	doc.clear();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const uint8_t index){
+	int contentIndex = index;
+	
+	JsonObject tmp = doc.to<JsonObject>();
+	JsonArray contents = tmp["contents"];			
+	contents = tmp.createNestedArray("contents");
+	JsonObject compenent = contents.createNestedObject();
+
+	compenent["module"] = json["contents"][contentIndex]["module"];
+	JsonObject data = compenent.createNestedObject("data");
+
+	JsonObject old_data = json["contents"][contentIndex]["data"];
+	for (JsonPair kv : old_data){
+		compenent["data"][kv.key()] = kv.value();
+	}
+
+	serializeJsonPretty(tmp, Serial);
+
+	bool status = send_impl(tmp, destination);
+	if(!status) return false;
+	
+	contentIndex++;
+	
+	if(json["contents"][contentIndex].isNull()) return true;
+	split_send(json, destination, contentIndex);
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -240,4 +302,4 @@ void LoomCommPlat::add_packet_result(const bool did_drop) {
 		total_drop_count++;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+
