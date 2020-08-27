@@ -77,6 +77,7 @@ bool LoomCommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
 {
 	bool status = receive_blocking_impl(json, max_wait_time);
 	
+	// If there is a value called "Num_Package", then it will recognize that there are more packages 
 	JsonObject checker = device_manager -> internal_json();
 	if(!(checker["Num_Package"].isNull())){
 		status = merge_json(pre_merge_receive_blocking(checker), checker["Num_Package"], max_wait_time);
@@ -99,6 +100,7 @@ bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 ///////////////////////////////////////////////////////////////////////////////
 JsonObject LoomCommPlat::pre_merge_receive_blocking(JsonObject json){
 
+	// This will get the timestamp(if RTC is used), device id, and other information that is not part of the contents array
 	JsonObject newJson = doc.to<JsonObject>();
 	newJson["type"] = json["type"];
 	JsonObject information = newJson.createNestedObject("id");
@@ -109,19 +111,29 @@ JsonObject LoomCommPlat::pre_merge_receive_blocking(JsonObject json){
 		timestamp["date"] = json["timestamp"]["date"];
 		timestamp["time"] = json["timestamp"]["time"];
 	}
+	// Note that this json doesn't have the Num_Package value
 	return newJson;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint max_wait_time){
+	
+	// In the json, it will create contents jsonarray to add the upcoming small packages
 	JsonArray newContents = json["contents"];
 	newContents = json.createNestedArray("contents");
+	// Loop value is determine by "Num_Package" value
 	uint8_t Loop = loop;
 	
 	while(Loop > 0){
+		// Receive a package from the other board
 		bool status = receive_blocking_impl(device_manager -> internal_json(true), max_wait_time);
-		if(!status) return false;
+		// If it fails at least once, return false
+		if(!status){ 
+			Loop = 0;
+			return false;
+		}
+		// Add json package into a the new created json 
 		JsonObject values = device_manager -> internal_json();
 		
 		JsonObject compenent = newContents.createNestedObject();
@@ -135,6 +147,7 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint ma
 		Loop--;
 	}
 
+	// Once the json is complete, change the internal_json to the big json
 	device_manager -> internal_json().set(json);
 
 	return true;
@@ -159,6 +172,7 @@ bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
 	bool prestatus;
 	bool status;
 
+	// If json package size is over 251, then send into multiple packages
 	if (sizeJsonObject >= 251){
 		LPrintln("Large JSON, Need to split the Package");
 		prestatus = split_send_notification(json, destination);
@@ -167,6 +181,7 @@ bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
 			status = false;	
 		}
 	}
+	// Else, just send as it is
 	else{
 		status = send_impl(json, destination);
 	}
@@ -212,12 +227,16 @@ uint8_t LoomCommPlat::send_batch(const uint8_t destination, int delay_time){
 
 ///////////////////////////////////////////////////////////////////////////////
 uint16_t LoomCommPlat::determine_json_size(JsonObject json){
-	uint16_t jsonObjectSize;
-	jsonObjectSize = JSON_OBJECT_SIZE(json.size());
+	
+	// Calculate the size of the JSON Package
+	uint16_t jsonObjectSize = JSON_OBJECT_SIZE(json.size());
 	jsonObjectSize += JSON_OBJECT_SIZE(json["id"].size());
+	
+	// If there is a timestamp(using RTC), then add that space 
 	if (!(json["timestamp"].isNull())){
 		jsonObjectSize +=JSON_OBJECT_SIZE(json["timestamp"].size());
 	}
+	
 	jsonObjectSize += JSON_ARRAY_SIZE(json["contents"].size());
 
 	// Not sure if I need to add values for each data element from the contents array
@@ -230,7 +249,8 @@ uint16_t LoomCommPlat::determine_json_size(JsonObject json){
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::split_send_notification(JsonObject json, const uint8_t destination) {
 		
-
+	
+	// This process will copy information about device id, and timestamp from the original package
 	uint8_t numPackage = json["contents"].size();
 	JsonObject object = doc.to<JsonObject>();
 	object["type"] = json["type"];
@@ -242,14 +262,18 @@ bool LoomCommPlat::split_send_notification(JsonObject json, const uint8_t destin
 		timestamp["date"] = json["timestamp"]["date"];
 		timestamp["time"] = json["timestamp"]["time"];
 	}
+	// Create a small json package that have the information about the upcoming package number
 	object["Num_Package"] = numPackage;
 	LPrintln("Sending ", numPackage, " more package to the other board");
+	// Sending this small package to the other board
 	bool status = send_impl(object, destination);
 	return status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const uint8_t index){
+	
+	// This will send each module from the contents array 
 	int contentIndex = index;
 	
 	JsonObject tmp = doc.to<JsonObject>();
@@ -263,13 +287,14 @@ bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const 
 		compenent["data"][kv.key()] = kv.value();
 	}
 
+	// Send the small package
 	bool status = send_impl(tmp, destination);
 	if(!status) return false;
 	
 	contentIndex++;
-	
+	// If there no more contents in the original json package, then it will return true
 	if(json["contents"][contentIndex].isNull()) return true;
-	//device_manager -> pause();
+	// else, it will keep creating and sending small json packages
 	split_send(json, destination, contentIndex);
 
 }
