@@ -25,6 +25,7 @@ LoomCommPlat::LoomCommPlat(
 	, total_drop_count(0)
 	, last_ten_dropped{}
 	, last_ten_dropped_idx(0)
+	, mergeJson(2048)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -101,7 +102,8 @@ bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 JsonObject LoomCommPlat::pre_merge_receive_blocking(JsonObject json){
 
 	// This will get the timestamp(if RTC is used), device id, and other information that is not part of the contents array
-	JsonObject newJson = doc.to<JsonObject>();
+	mergoJson.clear();
+	JsonObject newJson = mergeJson.to<JsonObject>();
 	newJson["type"] = json["type"];
 	JsonObject information = newJson.createNestedObject("id");
 	information["name"] = json["id"]["name"];
@@ -112,7 +114,9 @@ JsonObject LoomCommPlat::pre_merge_receive_blocking(JsonObject json){
 		timestamp["time"] = json["timestamp"]["time"];
 	}
 	// Note that this json doesn't have the Num_Package value
+		
 	return newJson;
+
 
 }
 
@@ -124,7 +128,8 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint ma
 	newContents = json.createNestedArray("contents");
 	// Loop value is determine by "Num_Package" value
 	uint8_t Loop = loop;
-	
+
+
 	while(Loop > 0){
 		// Receive a package from the other board
 		bool status = receive_blocking_impl(device_manager -> internal_json(true), max_wait_time);
@@ -133,12 +138,11 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint ma
 			Loop = 0;
 			return false;
 		}
+
 		// Add json package into a the new created json 
 		JsonObject values = device_manager -> internal_json();
-		
 		JsonObject compenent = newContents.createNestedObject();
 		compenent["module"] = values["contents"]["module"];
-
 		JsonObject data = compenent.createNestedObject("data");
 		JsonObject old_data = values["contents"]["data"];
 		for(JsonPair kv: old_data){
@@ -148,8 +152,10 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint ma
 	}
 
 	// Once the json is complete, change the internal_json to the big json
-	device_manager -> internal_json().set(json);
-
+	device_manager -> internal_json(true).set(json);
+	mergeJson.clear();
+	LPrintln("\nSIZE of New JSON:" , determine_json_size(json));
+	LPrintln(json.memoryUsage());
 	return true;
 
 }
@@ -169,6 +175,8 @@ bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
 ///////////////////////////////////////////////////////////////////////////////
 bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
 	uint16_t sizeJsonObject = determine_json_size(json);
+	LPrintln(json.memoryUsage());
+
 	bool prestatus;
 	bool status;
 
@@ -252,7 +260,7 @@ bool LoomCommPlat::split_send_notification(JsonObject json, const uint8_t destin
 	
 	// This process will copy information about device id, and timestamp from the original package
 	uint8_t numPackage = json["contents"].size();
-	JsonObject object = doc.to<JsonObject>();
+	JsonObject object = mergeJson.to<JsonObject>();
 	object["type"] = json["type"];
 	JsonObject information = object.createNestedObject("id");
 	information["name"] = json["id"]["name"];
@@ -267,6 +275,7 @@ bool LoomCommPlat::split_send_notification(JsonObject json, const uint8_t destin
 	LPrintln("Sending ", numPackage, " more package to the other board");
 	// Sending this small package to the other board
 	bool status = send_impl(object, destination);
+	mergeJson.clear();
 	return status;
 }
 
@@ -275,8 +284,10 @@ bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const 
 	
 	// This will send each module from the contents array 
 	int contentIndex = index;
+
+	mergeJson.clear();
 	
-	JsonObject tmp = doc.to<JsonObject>();
+	JsonObject tmp = mergeJson.to<JsonObject>();
 	JsonObject compenent = tmp.createNestedObject("contents");
 
 	compenent["module"] = json["contents"][contentIndex]["module"];

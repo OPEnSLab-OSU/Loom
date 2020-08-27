@@ -42,14 +42,15 @@ protected:
 	/// internal JsonDocument.
 	/// Especially as the LoomManager is intended to be non-mandatory for usage of Loom
 	StaticJsonDocument<1500> messageJson;
-
+	DynamicJsonDocument mergeJson;
 	// counters for determining packet drop rate
 	// used only for debug
 	uint32_t total_packet_count;
 	uint32_t total_drop_count;
 	bool last_ten_dropped[10];
 	uint8_t last_ten_dropped_idx;
-	StaticJsonDocument<2000> doc;
+
+
 
 //=============================================================================
 ///@name	RADIO IMPLEMENTATION
