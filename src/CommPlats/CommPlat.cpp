@@ -102,7 +102,7 @@ bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 JsonObject LoomCommPlat::pre_merge_receive_blocking(JsonObject json){
 
 	// This will get the timestamp(if RTC is used), device id, and other information that is not part of the contents array
-	mergoJson.clear();
+	mergeJson.clear();
 	JsonObject newJson = mergeJson.to<JsonObject>();
 	newJson["type"] = json["type"];
 	JsonObject information = newJson.createNestedObject("id");
@@ -114,7 +114,6 @@ JsonObject LoomCommPlat::pre_merge_receive_blocking(JsonObject json){
 		timestamp["time"] = json["timestamp"]["time"];
 	}
 	// Note that this json doesn't have the Num_Package value
-		
 	return newJson;
 
 
@@ -134,6 +133,7 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint ma
 		// Receive a package from the other board
 		bool status = receive_blocking_impl(device_manager -> internal_json(true), max_wait_time);
 		// If it fails at least once, return false
+			
 		if(!status){ 
 			Loop = 0;
 			return false;
@@ -154,8 +154,7 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint ma
 	// Once the json is complete, change the internal_json to the big json
 	device_manager -> internal_json(true).set(json);
 	mergeJson.clear();
-	LPrintln("\nSIZE of New JSON:" , determine_json_size(json));
-	LPrintln(json.memoryUsage());
+	determine_json_size(json);
 	return true;
 
 }
@@ -174,15 +173,15 @@ bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
 
 ///////////////////////////////////////////////////////////////////////////////
 bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
+	
 	uint16_t sizeJsonObject = determine_json_size(json);
-	LPrintln(json.memoryUsage());
 
 	bool prestatus;
 	bool status;
 
-	// If json package size is over 251, then send into multiple packages
-	if (sizeJsonObject >= 251){
-		LPrintln("Large JSON, Need to split the Package");
+	// If json package size is over 252, then send into multiple packages
+	// This is not correct, I believe... Need to find a better way...
+	if (sizeJsonObject >= 252){
 		prestatus = split_send_notification(json, destination);
 		if (prestatus) status = split_send(json, destination, 0);
 		else{
@@ -237,7 +236,12 @@ uint8_t LoomCommPlat::send_batch(const uint8_t destination, int delay_time){
 uint16_t LoomCommPlat::determine_json_size(JsonObject json){
 	
 	// Calculate the size of the JSON Package
+	// https://arduinojson.org/v6/assistant/
+
+	// Calculate the Total Number of JSON Object (Outside)
 	uint16_t jsonObjectSize = JSON_OBJECT_SIZE(json.size());
+	
+	// Calculate Internal Json from the Object id
 	jsonObjectSize += JSON_OBJECT_SIZE(json["id"].size());
 	
 	// If there is a timestamp(using RTC), then add that space 
@@ -245,10 +249,21 @@ uint16_t LoomCommPlat::determine_json_size(JsonObject json){
 		jsonObjectSize +=JSON_OBJECT_SIZE(json["timestamp"].size());
 	}
 	
-	jsonObjectSize += JSON_ARRAY_SIZE(json["contents"].size());
+	// Add Number of Element in Array and Module name Object per Element in the Array
+	jsonObjectSize += JSON_ARRAY_SIZE(json["contents"].size()) + JSON_OBJECT_SIZE(json["contents"].size());
 
-	// Not sure if I need to add values for each data element from the contents array
-	// But for now, it seems to detect better than before
+	// Add Data Object per module
+	int index = 0;
+	while(!(json["contents"][index]["data"].isNull())){
+		jsonObjectSize += JSON_OBJECT_SIZE(json["contents"][index]["data"].size());
+		index += 1;
+	}
+
+	// Made the calculations, but don't know what to use to get accurate.
+	// For now, it is using the jsonObjectSize as the filter. 
+
+	LPrintln("\nTotal Json Size: ",jsonObjectSize);
+	LPrintln("\nTotal Json Memory: ", json.memoryUsage());
 		
 	return jsonObjectSize;
 
@@ -272,9 +287,10 @@ bool LoomCommPlat::split_send_notification(JsonObject json, const uint8_t destin
 	}
 	// Create a small json package that have the information about the upcoming package number
 	object["Num_Package"] = numPackage;
-	LPrintln("Sending ", numPackage, " more package to the other board");
+	LPrintln("Sending ", numPackage, " more package to the other board due to the size of the package");
 	// Sending this small package to the other board
 	bool status = send_impl(object, destination);
+
 	mergeJson.clear();
 	return status;
 }
@@ -306,6 +322,7 @@ bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const 
 	// If there no more contents in the original json package, then it will return true
 	if(json["contents"][contentIndex].isNull()) return true;
 	// else, it will keep creating and sending small json packages
+	
 	split_send(json, destination, contentIndex);
 
 }
