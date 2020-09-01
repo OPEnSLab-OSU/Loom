@@ -8,8 +8,11 @@
 /// Adafruit Stemma soil moisture sensor.
 ///
 /// @par Resources
-/// - [Product Page: https://learn.adafruit.com/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor/arduino-test]
+/// - [Product Page] (https://learn.adafruit.com/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor/arduino-test)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#stemma-soil-sensor)
+/// - [DataSheet](https://cdn-learn.adafruit.com/downloads/pdf/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor.pdf?timestamp=1594765200)
 ///
+//////////////////////////////////////////////////////////////////////////////
 
 class Loom_STEMMA : public LoomI2CSensor
 {

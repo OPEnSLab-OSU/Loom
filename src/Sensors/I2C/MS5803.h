@@ -30,6 +30,7 @@
 /// - [Product Page: MS580302BA01-00 Miniature Altimeter Module](https://www.digikey.com/product-detail/en/te-connectivity-measurement-specialties/MS580302BA01-00/223-1624-5-ND/5277629)
 /// - [Dependency: MS5803_2](https://github.com/millerlp/MS5803_02)
 /// - [Datasheet: MS5803-02BA](https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=MS5803-02BA&DocType=Data+Sheet&DocLang=English)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ms5803-atmospheric-pressure--temperature-sensor)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MS5803 : public LoomI2CSensor

@@ -27,6 +27,7 @@
 /// - [Datasheet: AS72625X](https://cdn.sparkfun.com/assets/c/2/9/0/a/AS7265x_Datasheet.pdf)
 /// - [Hookup Guide: Spectral Triad (AS7265x)](https://learn.sparkfun.com/tutorials/spectral-triad-as7265x-hookup-guide)
 /// - [Hardware GitHub](https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS7265x)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7265x-spectral-sensor-triad-visible-near-infrared-ultraviolet)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_AS7265X : public LoomI2CSensor

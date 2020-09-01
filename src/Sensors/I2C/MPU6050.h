@@ -27,7 +27,8 @@
 /// - [Product Page: Amazon –Gy-521 MPU-6050 MPU6050 Module 3 Axis Analog Gyro Sensors+ 3 Axis Accelerometer Module](https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40/)
 /// - [Dependency: MPU6050_tockn](https://github.com/tockn/MPU6050_tockn)
 /// - [Previous Dependency: MPU6050](https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/MPU6050)
-/// - [Datasheet: MPU6050](https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf)
+/// - [Datasheet: MPU6050](https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mpu6050-accelerometer--gyroscope)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MPU6050 : public LoomI2CSensor

@@ -26,8 +26,7 @@
 - [Introduction](#introduction)
 - [Objectives](#objectives)
 - [Key Features](#key-features)
-- [Arduino Setup](#arduino-setup)
-- [Installing Loom](#installing-loom)
+- [Installing Arduino and Loom](#installing-arduino-and-loom)
 - [Quick Start](#quick-start)
 - [Common Pin Allocations](#common-pin-allocations)
 - [Hardware Support](#hardware-support)
@@ -63,13 +62,11 @@ Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team 
 - Variety of sensors and actuators supported 
 - Remote data logging to SD and internet in near real time
 
-## Arduino Setup
+## Installing Arduino and Loom
 
-[Arduino IDE Setup Guide](https://github.com/OPEnSLab-OSU/Loom/wiki/Arduino-Setup)
+[Installing Arduino and Loom Quick Setup](https://github.com/OPEnSLab-OSU/Loom/wiki/Arduino-and-Loom-Quick-Setup)
 
-## Installing Loom
-
- [Loom Installation Guide](https://github.com/OPEnSLab-OSU/Loom/wiki/Loom-Installation)
+[Installing Arduino and Loom Manual Setup](https://github.com/OPEnSLab-OSU/Loom/wiki/Arduino-and-Loom-Manual-Setup)
 
 ## Quick Start
 
@@ -87,7 +84,10 @@ Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team 
 
 [Wiki](https://wiki.open-sensing.org/doku.php?id=loom) for general documentation not on GitHub or in Doxygen document
 
-[Doxygen generated documentation](https://openslab-osu.github.io/Loom/html/index.html) for documentation of the code and how to use
+[Doxygen generated documentation Version 1](https://openslab-osu.github.io/Loom/html/index.html) for more verbose documentation that is designed for developers
+
+[Doxygen generated documentation Version 2](https://openslab-osu.github.io/Loom/index.html) for more user-friendly documenation that is designed for end-users
+
 
 ***Note***: The documentation does not currently update automatically, if would want to be sure you have the most up to date version of the documentation, you can run Doxygen to manually generate a local copy of the documentation. See the Doxygen website on how to [Install Doxygen](http://www.doxygen.nl/manual/install.html) and [Doxygen Usage](http://www.doxygen.nl/manual/doxygen_usage.html). 
 

@@ -31,9 +31,9 @@ class LoomCommPlat;
 class LoomLogPlat;
 
 // Actuators
-class Loom_Neopixel; 
-class Loom_Relay; 
-class Loom_Servo; 
+class Loom_Neopixel;
+class Loom_Relay;
+class Loom_Servo;
 class Loom_Stepper;
 
 // Sensors
@@ -67,6 +67,9 @@ class Loom_DecagonGS3;
 class Loom_MAX31855;
 class Loom_MAX31856;
 
+// SERIAL
+class Loom_K30;
+
 // CommPlats
 class Loom_LoRa;
 class Loom_nRF;
@@ -75,11 +78,13 @@ class Loom_Bluetooth;
 // LogPlats
 class Loom_OLED;
 class Loom_SD;
+class Loom_BatchSD;
 
 // InternetPlats
 class LoomInternetPlat;
 class Loom_Ethernet;
 class Loom_WiFi;
+class Loom_LTE;
 
 // PublishPlats
 class LoomPublishPlat;
@@ -110,8 +115,8 @@ class FactoryBase;
 
 #define SERIAL_BAUD		115200	///< Serial Baud Rate
 #define MAX_SERIAL_WAIT	20000	///< Maximum number of milliseconds to wait for user given 'begin_serial(true)'
-#define SD_CS			10		///< SD chip select used in parse_config_SD(). 
-								///< You can still instantiate a Loom_SD module with a different chip select 
+#define SD_CS			10		///< SD chip select used in parse_config_SD().
+								///< You can still instantiate a Loom_SD module with a different chip select
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -125,7 +130,7 @@ class FactoryBase;
 class LoomManager
 {
 
-private: 
+private:
 
 	const FactoryBase* Factory;
 
@@ -143,7 +148,7 @@ protected:
 	char		device_name[20];	///< The name of the device
 	uint8_t		instance;			///< The instance / channel ID within the subnet
 
-	uint16_t	interval;			///< Default value for pause()/nap().
+	uint16_t	interval;			///< Default value for pause()
 									///< Used so that manager can control interval, rather than code in .ino
 
 	/// Device type (Hub / Node)
@@ -178,7 +183,7 @@ public:
 	/// @param[in]	device_type					Set(DeviceType) | <1> | {0("Hub"), 1("Node"), 2("Repeater")} | Device's topological type
 	/// @param[in]	print_verbosity				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
 	/// @param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
-	/// @param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause/nap for
+	/// @param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause
 	LoomManager(
 			const FactoryBase*		factory_ptr,
 			const char*			device_name			= "Device",
@@ -209,7 +214,7 @@ public:
 	/// @param[in]	json_config		Configuration
 	/// @return True if success
 	bool		parse_config(const char* json_config);
-	
+
 	/// Parse a JSON configuration on SD card specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
 	/// and added to manager lists for managing.
@@ -238,7 +243,7 @@ public:
 	void		get_config();
 
 	/// Measure data of all managed sensors
-	void		measure();  
+	void		measure();
 
 	/// Package data of all modules into provide JsonObject.
 	/// How detailed data is can be modified with package_verbosity
@@ -263,6 +268,16 @@ public:
 	/// @return True if success
 	bool		publish_all() { return publish_all(internal_json()); }
 
+	/// Log
+	/// @param[in]	json	Data object to log
+	/// @return True if success
+	bool		log_all(const JsonObject json);
+
+	/// Log.
+	/// Calls log_all(const JsonObject json) with interal json
+	/// @return True if success
+	bool		log_all() { return log_all(internal_json()); }
+
 	/// Iterate over list of commands, forwarding to handling module
 	/// @param[in] json		Object containing commands
 	void		dispatch(JsonObject json);
@@ -270,17 +285,6 @@ public:
 	/// Iterate over list of commands, forwarding to handling module.
 	/// Uses internal json
 	void		dispatch() { dispatch( internal_json() ); }
-
-	/// Pause for up to 16000 milliseconds.
-	/// You can use this instead of delay to put the device into a 
-	/// semi-low power state.
-	/// Use Loom_Sleep_Manager for extended, complete low-power sleep.
-	/// @param[in]	ms	Number of milliseconds to pause
-	void		nap(const uint16_t ms) const;
-
-	/// Pause for up to 16000 milliseconds.
-	/// Uses interval member as value
-	void		nap() const { nap(interval); }
 
 	/// Delay milliseconds.
 	void		pause(const uint16_t ms) const { delay(ms); }
@@ -296,10 +300,10 @@ public:
 	void 		power_down();
 
 	/// Append to a Json object of data.
-	/// If object is non-empty and contains non-data, 
+	/// If object is non-empty and contains non-data,
 	/// will not add and will return false.
 	/// Only call this after package, otherwise the data will be overriden
-	/// @param[in]	module	Which module to add data to (will create if it doesn't exist) 
+	/// @param[in]	module	Which module to add data to (will create if it doesn't exist)
 	/// @param[in]	key		Key of data to add
 	/// @param[in]	val		Value of data to add
 	/// @return True if success
@@ -308,7 +312,7 @@ public:
 	{
 		if ( doc.isNull() ) {
 			doc["type"] = "data";
-		} 
+		}
 		JsonObject json = doc.as<JsonObject>();
 		if (strcmp(json["type"], "data") == 0 ) {
 			JsonObject data = get_module_data_object(json, module);
@@ -325,7 +329,7 @@ public:
 	/// Get a data value from Json object of data
 	/// @param[in]	module	LoomModule key is associated with
 	/// @param[in]	key		Key of data value to find
-	/// @return Data value if found 
+	/// @return Data value if found
 	template<typename T>
 	T get_data_as(const char* module, const char* key)
 	{
@@ -354,12 +358,12 @@ public:
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
-	
+
 	/// Print the devices current configuration.
-	/// Lists modules. Optionally also prints 
+	/// Lists modules. Optionally also prints
 	/// configuration of linked modules.
 	void		print_config(const bool print_modules_config = false);
-	
+
 	// 	void print_state()
 
 	/// Print the linked modules
@@ -391,7 +395,7 @@ public:
 	/// Get the device name, copies into provided buffer.
 	/// @param[out]	buf		The buffer copy device name into
 	void 		get_device_name(char* buf) const;
-	
+
 	/// Get the device name
 	/// @return String literal of device name.
 	const char*	get_device_name() const;
@@ -419,7 +423,7 @@ public:
 	/// Set the device name.
 	/// @param[in]	device_name		The new device name
 	void 		set_device_name(const char* device_name);
-	
+
 	/// Set device instance number.
 	/// @param[in]	n	New instance number
 	void		set_instance_num(const uint8_t n) { instance = n; }
@@ -428,14 +432,14 @@ public:
 	/// @param[in]	v			New print verbosity
 	/// @param[in]	set_modules	Whether or not to also apply setting to modules
 	void		set_print_verbosity(const Verbosity v, const bool set_modules = false);
-		
+
 	/// Set package verbosity.
 	/// @param[in]	v	New package verbosity
 	/// @param[in]	set_modules	Whether or not to also apply setting to modules
 	void		set_package_verbosity(const Verbosity v, const bool set_modules = false);
 
 	/// Set default time to use for .pause() \ .delay().
-	/// Pause and delay can still take explicit times, but if not provided, 
+	/// Pause and delay can still take explicit times, but if not provided,
 	/// this value will be used
 	void		set_interval(const uint16_t ms);
 
@@ -445,8 +449,8 @@ public:
 
 	/// Flash the built in LED
 	/// @param[in]	count		Number of times to flash
-	/// @param[in]	time_high	Milliseconds to stay on for 
-	/// @param[in]	time_low	Milliseconds to stay off for 
+	/// @param[in]	time_high	Milliseconds to stay on for
+	/// @param[in]	time_low	Milliseconds to stay off for
 	void		flash_LED(const uint8_t count, const uint8_t time_high, const uint8_t time_low, const bool end_high=false) const;
 	void		flash_LED(const uint8_t sequence[3]) const { flash_LED(sequence[0], sequence[1], sequence[2]); }
 
@@ -455,7 +459,7 @@ public:
 	const static char* enum_device_type_string(const DeviceType t);
 
 //=============================================================================
-///@name	MODULE ACCESS 
+///@name	MODULE ACCESS
 /*@{*/ //======================================================================
 
 	/// Auxiliary function to search a list of modules for a module of specified type
@@ -479,16 +483,18 @@ public:
 	// CommPlats
 	Loom_LoRa&			LoRa(const uint8_t idx = 0);
 	Loom_nRF&			nRF(const uint8_t idx = 0);
-	Loom_Bluetooth& 	Bluetooth(const uint8_t idx = 0); 
+	Loom_Bluetooth& 	Bluetooth(const uint8_t idx = 0);
 
 	// LogPlats
 	Loom_OLED&			OLED(const uint8_t idx = 0);
 	Loom_SD&			SDCARD(const uint8_t idx = 0);
+	Loom_BatchSD&	BATCHSD(const uint8_t idx = 0);
 
 	// InternetPlats
 	LoomInternetPlat&	InternetPlat(const uint8_t idx = 0);
 	Loom_Ethernet&		Ethernet(const uint8_t idx = 0);
 	Loom_WiFi&			WiFi(const uint8_t idx = 0);
+	Loom_LTE&				LTE(const uint8_t idx = 0);
 
 	// PublishPlats
 	LoomPublishPlat& 	PublishPlat(const uint8_t idx = 0);
@@ -540,6 +546,9 @@ public:
 	Loom_MAX31855&		MAX31855(const uint8_t idx = 0);
 	Loom_MAX31856&		MAX31856(const uint8_t idx = 0);
 
+    //SERIAL
+    Loom_K30&           K30(const uint8_t idx = 0);
+
 protected:
 
 	/// Print the device name as '[device_name]'
@@ -552,6 +561,7 @@ private:
 	friend class Loom_Sleep_Manager;
 	friend class LoomRTC;
 	friend class Loom_SD;
+	friend class Loom_BatchSD;
 	friend class LoomNTPSync;
 
 	Loom_Interrupt_Manager*	get_interrupt_manager() { return interrupt_manager; }
@@ -569,5 +579,3 @@ private:
 	bool dispatch_self(JsonObject json);
 
 };
-
-

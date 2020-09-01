@@ -27,6 +27,7 @@
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___bluetooth.html)
 /// - [Product Page: Adafruit Feather M0 Bluefruit LE](https://www.adafruit.com/product/2995)
 /// - [Dependency: Adafruit_BluefruitLE_nRF51](https://github.com/adafruit/Adafruit_BluefruitLE_nRF51)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#bluetooth)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Bluetooth : public LoomCommPlat

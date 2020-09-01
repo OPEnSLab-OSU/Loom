@@ -22,6 +22,7 @@
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___relay.html)
 /// - [Product Page: Adafruit Latching Relay Featherwing](https://www.adafruit.com/product/3191)
 /// - [Relay Datasheet](https://cdn-shop.adafruit.com/product-files/3191/G5LE-14-DC3-Omron-datasheet-10841140.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#relay)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Relay : public LoomActuator

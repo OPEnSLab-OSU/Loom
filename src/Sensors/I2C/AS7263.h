@@ -27,6 +27,7 @@
 /// - [Hookup Guide: AS726X NIR/VIS Spectral Sensor](https://learn.sparkfun.com/tutorials/as726x-nirvi)
 /// - [Hardware GitHub](https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X)
 /// - [Datasheet: AS7263](https://cdn.sparkfun.com/assets/1/b/7/3/b/AS7263.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7263-spectral-sensor-near-infrared)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_AS7263 : public LoomI2CSensor

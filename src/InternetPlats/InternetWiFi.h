@@ -28,13 +28,14 @@
 /// - [Product Page: Adafruit Feather M0 WiFi](https://www.adafruit.com/product/3010)
 /// - [Dependency: WiFi201](https://github.com/OPEnSLab-OSU/WiFi201) OPEbS Lab fork of Arduino WiFi101 library
 /// - [Dependency: WiFi101](https://github.com/arduino-libraries/WiFi101)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#wifi)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_WiFi : public LoomInternetPlat
 {
 
 protected:
-	
+
 	const String	SSID;	///< Host WiFi network name
 	const String	pass;	///< Host WiFi network password
 
@@ -49,7 +50,7 @@ public:
 //==============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
-	
+
 	/// Constructor
 	/// @param[in]	ssid	WiFi network name
 	/// @param[in]	pass	WiFi network password. Leave as empty string if network has no password.
@@ -86,13 +87,16 @@ public:
 	/// @returns A UDP socket for transmitting and recieving, remember to close the socket when you are done!
 	UDPPtr			open_socket(const uint port) override;
 
+	/// Package IP with ID for MaxMSP implementation
+	void			package(JsonObject json) override;
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
 	void			print_config() const override;
 	void			print_state() const override;
-	
+
 private:
 	/// Converts wifi status codes (WL_*) into human readable strings
 	static const char* m_wifi_status_to_string(const uint8_t status);

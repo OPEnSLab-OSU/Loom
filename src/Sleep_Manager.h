@@ -41,14 +41,13 @@ public:
 	enum class Mode {
 		IDLE, 			///< Idle
 		STANDBY, 		///< Standby
-		SLEEPYDOG, 		///< SleepyDog (sleep 'hack')
 		OPENS_LOWPOWER	///< OPEnS board to shut board off completely
 	};
 
 protected:
-	
-	Loom_Interrupt_Manager* interrupt_manager;	///< Pointer to interrupt_manager instance 
-	
+
+	Loom_Interrupt_Manager* interrupt_manager;	///< Pointer to interrupt_manager instance
+
 	bool 		use_LED;			///< Whether or not to use LED to indicate wake status
 	bool		delay_on_wake;		///< Whether to provide delay on wake.
 									///< Used to allow user to restart Serial Monitor
@@ -65,7 +64,7 @@ public:
 	///
 	/// @param[in]	use_LED				Bool | <true> | {true, false} | Whether or not to use LED to indicate wake state
 	/// @param[in]	delay_on_wake		Bool | <false> | {true, false} | Whether or not to delay upon waking to allow time to open Serial Monitor
-	/// @param[in]	sleep_mode			Set(Mode) | <1> | { 0("Idle"), 1("Standby"), 2("SleepyDog"), 3("Opens Low Power")} | Which Mode to use
+	/// @param[in]	sleep_mode			Set(Mode) | <1> | { 0("Idle"), 1("Standby"), 2("Opens Low Power")} | Which Mode to use
 	/// @param[in]	power_off_pin		Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to power off board
 	Loom_Sleep_Manager(
 			LoomManager* manager,
@@ -115,7 +114,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Set pointer to interrupt manager
-	/// @param[in]	IM	Pointer to an interrupt manager	
+	/// @param[in]	IM	Pointer to an interrupt manager
 	void 		link_interrupt_manager(Loom_Interrupt_Manager* IM) { interrupt_manager = IM; }
 
 	/// Set the sleep mode to use
@@ -132,7 +131,7 @@ public:
 	/// @param[in]	m	Sleep to get string of
 	/// @return C-string of sleep mode
 	const static char* enum_sleep_mode_string(const Mode m);
-	
+
 private:
 
 	/// Handles pre-sleep operations
@@ -141,6 +140,3 @@ private:
 	/// Handles post-sleep operations
 	void		post_sleep();
 };
-
-
-

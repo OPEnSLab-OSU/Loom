@@ -11,18 +11,17 @@
 #include "Sleep_Manager.h"
 #include "RTC/RTC.h"
 
-#include <Adafruit_SleepyDog.h>
 #include <LowPower.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Sleep_Manager::Loom_Sleep_Manager( 
+Loom_Sleep_Manager::Loom_Sleep_Manager(
 		LoomManager* 	manager,
-		const bool					use_LED, 
-		const bool					delay_on_wake, 
+		const bool					use_LED,
+		const bool					delay_on_wake,
 		const Mode					sleep_mode,
 		const byte					power_off_pin
-	) 
+	)
 	: LoomModule(manager, "SleepManager", Type::Sleep_Manager )
 	, use_LED(use_LED)
 	, delay_on_wake(delay_on_wake)
@@ -53,11 +52,11 @@ void Loom_Sleep_Manager::link_device_manager(LoomManager* LM)
 
 	if ( LM ){
 
-		// Set manager's sleep manager 
+		// Set manager's sleep manager
 		LM->sleep_manager = this;
 
 		// Link to interrupt manager
-		auto interrupt_manager = LM->get_interrupt_manager(); 
+		auto interrupt_manager = LM->get_interrupt_manager();
 		if ( interrupt_manager ) {
 			link_interrupt_manager(interrupt_manager);
 			interrupt_manager->link_sleep_manager(this);
@@ -114,11 +113,9 @@ const char* Loom_Sleep_Manager::enum_sleep_mode_string(const Mode m)
 	switch(m) {
 		case Mode::IDLE				: return "Idle";
 		case Mode::STANDBY			: return "Standby";
-		case Mode::SLEEPYDOG		: return "SleepyDog";
 		case Mode::OPENS_LOWPOWER	: return "OPEnS_Lowpower";
 		default : return "";
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-

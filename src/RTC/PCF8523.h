@@ -23,6 +23,7 @@
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___p_c_f8523.html)
 /// - [Product Page: Adafruit Adalogger Featherwing - RTC + SD](https://www.adafruit.com/product/2922)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#adalogger--pcf8523-rtc)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_PCF8523 : public LoomRTC

@@ -26,6 +26,7 @@
 /// - [Dependency: Adafruit ADS1X15 Arduino Library](https://github.com/adafruit/Adafruit_ADS1X15)
 /// - [Hookup Guide: ADS1115 Assembly and Wiring](https://learn.adafruit.com/adafruit-4-channel-adc-breakouts/assembly-and-wiring)
 /// - [Datasheet: ADS1115](https://cdn-shop.adafruit.com/datasheets/ads1115.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ads1115-16-bit-adc)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_ADS1115 : public LoomI2CSensor
