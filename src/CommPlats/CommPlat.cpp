@@ -102,7 +102,6 @@ bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 JsonObject LoomCommPlat::pre_merge_receive_blocking(JsonObject json){
 
 	// This will get the timestamp(if RTC is used), device id, and other information that is not part of the contents array
-	mergeJson.clear();
 	JsonObject newJson = mergeJson.to<JsonObject>();
 	newJson["type"] = json["type"];
 	JsonObject information = newJson.createNestedObject("id");
@@ -125,26 +124,28 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint ma
 	// In the json, it will create contents jsonarray to add the upcoming small packages
 	JsonArray newContents = json["contents"];
 	newContents = json.createNestedArray("contents");
+
 	// Loop value is determine by "Num_Package" value
 	uint8_t Loop = loop;
 
+	bool increased = false;
+
 
 	while(Loop > 0){
+
 		// Receive a package from the other board
 		bool status = receive_blocking_impl(device_manager -> internal_json(true), max_wait_time);
+	
 		// If it fails at least once, return false
-			
 		if(!status){ 
 			Loop = 0;
 			return false;
 		}
 
-		// Add json package into a the new created json 
-		JsonObject values = device_manager -> internal_json();
 		JsonObject compenent = newContents.createNestedObject();
-		compenent["module"] = values["contents"]["module"];
+		compenent["module"] = device_manager -> internal_json()["contents"]["module"];
 		JsonObject data = compenent.createNestedObject("data");
-		JsonObject old_data = values["contents"]["data"];
+		JsonObject old_data = device_manager -> internal_json()["contents"]["data"];
 		for(JsonPair kv: old_data){
 			compenent["data"][kv.key()] = kv.value();
 		}
@@ -152,9 +153,12 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint ma
 	}
 
 	// Once the json is complete, change the internal_json to the big json
+	// It can't reach the full capacity of sending and receiving because of deserializeMsgPack takes up memory
+	// Need to find a solution so that it can take even bigger pacakge than before. Todo!
+	// For now, we will let the user if there going to be package drops or not in the determining_fail function
 	device_manager -> internal_json(true).set(json);
 	mergeJson.clear();
-	determine_json_size(json);
+	LPrintln("Json Object Memory: ", json.memoryUsage());
 	return true;
 
 }
@@ -174,14 +178,14 @@ bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
 ///////////////////////////////////////////////////////////////////////////////
 bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
 	
-	uint16_t sizeJsonObject = determine_json_size(json);
-
+	char buffer[max_message_len];
+	uint16_t sizeJsonObject = serializeMsgPack(json, buffer, max_message_len);
 	bool prestatus;
 	bool status;
 
 	// If json package size is over 252, then send into multiple packages
-	// This is not correct, I believe... Need to find a better way...
 	if (sizeJsonObject >= 252){
+		//show_package_fail(json);
 		prestatus = split_send_notification(json, destination);
 		if (prestatus) status = split_send(json, destination, 0);
 		else{
@@ -231,6 +235,85 @@ uint8_t LoomCommPlat::send_batch(const uint8_t destination, int delay_time){
 	}
 	return -1;
 }
+///////////////////////////////////////////////////////////////////////////////
+void LoomCommPlat::show_package_fail(JsonObject json){
+	char buffer[max_message_len];
+	int index = 0;
+
+	mergeJson.clear();
+
+	LPrintln("Zero?: ", mergeJson.memoryUsage());
+
+	uint8_t numPackage = json["contents"].size();
+	JsonObject object = mergeJson.to<JsonObject>();
+	object["type"] = json["type"];
+	JsonObject information = object.createNestedObject("id");
+	information["name"] = json["id"]["name"];
+	information["instance"] = json["id"]["instance"];
+	if(!(json["timestamp"].isNull())){
+		JsonObject timestamp = object.createNestedObject("timestamp");
+		timestamp["date"] = json["timestamp"]["date"];
+		timestamp["time"] = json["timestamp"]["time"];
+	}
+	// Create a small json package that have the information about the upcoming package number
+	object["Num_Package"] = numPackage;
+
+	mock_send_receive(object, buffer, max_message_len);
+
+	uint16_t totalSize = mergeJson.memoryUsage();
+
+	LPrintln("Before contents: ", totalSize);
+
+	while(!(json["contents"][index].isNull())){
+		mergeJson.clear();
+		char buffer2[max_message_len];
+	
+		JsonObject object = mergeJson.to<JsonObject>();
+		JsonObject compenent = object.createNestedObject("contents");
+
+		compenent["module"] = json["contents"][index]["module"];
+		JsonObject data = compenent.createNestedObject("data");
+
+		JsonObject old_data = json["contents"][index]["data"];
+		for (JsonPair kv : old_data){
+			compenent["data"][kv.key()] = kv.value();
+		}
+
+		mock_send_receive(object, buffer2, max_message_len);
+
+		LPrintln("After Mock: ", mergeJson.memoryUsage());
+
+		totalSize += mergeJson.memoryUsage();
+		index += 1;
+
+	}
+
+	LPrintln("Json Total Size: ", totalSize);
+
+}
+///////////////////////////////////////////////////////////////////////////////
+void LoomCommPlat::mock_send_receive(JsonObject json, char* buffer, const uint16_t max_len){
+	
+	memset(buffer, '\0', sizeof(buffer));
+	
+	serializeMsgPack(json, buffer, max_len);
+	print_module_label();
+	LPrintln(buffer);
+	LPrintln("MsgPack size: ", measureMsgPack(json));
+
+	LPrintln("Send Mock Complete: ", mergeJson.memoryUsage());
+
+	mergeJson.clear();
+
+	if (deserializeMsgPack(mergeJson, buffer) != DeserializationError::Ok ) {
+		print_module_label();
+		LPrintln("Failed to parse MsgPack: Can't determine");
+		
+	}
+
+	LPrintln("Receive Mock: ", mergeJson.memoryUsage());
+	
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 uint16_t LoomCommPlat::determine_json_size(JsonObject json){
@@ -258,12 +341,6 @@ uint16_t LoomCommPlat::determine_json_size(JsonObject json){
 		jsonObjectSize += JSON_OBJECT_SIZE(json["contents"][index]["data"].size());
 		index += 1;
 	}
-
-	// Made the calculations, but don't know what to use to get accurate.
-	// For now, it is using the jsonObjectSize as the filter. 
-
-	LPrintln("\nTotal Json Size: ",jsonObjectSize);
-	LPrintln("\nTotal Json Memory: ", json.memoryUsage());
 		
 	return jsonObjectSize;
 
@@ -387,6 +464,11 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 		LPrintln("Len: ", strlen(buffer));
 	}
 
+	print_module_label();
+	LPrintln("Received: ", (const char*)buffer);
+	print_module_label();
+	LPrintln("Len: ", strlen(buffer));
+
 	messageJson.clear();
 
 	if (deserializeMsgPack(messageJson, buffer) != DeserializationError::Ok ) {
@@ -394,6 +476,8 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 		LPrintln("Failed to parse MsgPack");
 		return false;
 	}
+
+	LPrintln("MessageJson Memory: ", messageJson.memoryUsage());
 
 	bool status = json.set(messageJson.as<JsonObject>());
 	if (!status) return false;

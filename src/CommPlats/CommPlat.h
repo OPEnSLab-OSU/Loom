@@ -166,6 +166,11 @@ public:
 	///	@return	uint16_t of the value of the json size
 	uint16_t 		determine_json_size(JsonObject json);
 
+
+	void			show_package_fail(JsonObject json);
+
+	void			mock_send_receive(JsonObject json, char* buffer, const uint16_t max_len);
+
 	/// If the json is over 251, then it let the user the know that it will be sending 
 	/// small mulitple jsons with how many will it be splited into
 	/// @param[in]	json			The original message pacakge
