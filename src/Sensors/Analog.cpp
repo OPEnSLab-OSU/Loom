@@ -304,11 +304,8 @@ float Loom_Analog::convert_turbidity(const uint16_t analog) const
 	// LPrintln("turbidity voltage: ", voltage);
 	// return -1120.4 * (voltage * voltage) + (5742.3 * voltage) - 4352.9;
 
-	float voltage = analog * (5.0 / 1024.0); // Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5V)
-  float turbidity = (-1120.4 * voltage * voltage) + (5742.3 * voltage)  - 4352.9;
 
-	// return analog // turbidity values are fairly qualitative, just returning the analog value for now
-	return turbidity;
+	return analog // turbidity values are fairly qualitative, just returning the analog value for now
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -319,12 +316,17 @@ float Loom_Analog::convert_EC(const uint16_t analog) const
 	// float temperature = 25.0;
 	float voltage = convert_voltage(analog);
 
-	// float compensation_coefficient = 1.0 + 0.02 * (EC_TEMP - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
-	float compensation_coefficient = 1.0 + 0.02 * (temperature - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
-	float comp_volt = voltage / compensation_coefficient;  			// temperature compensation
-	float EC = ( 133.42 * comp_volt * comp_volt * comp_volt - 255.86 * comp_volt * comp_volt + 857.39 * comp_volt ); //convert voltage value to EC value
+	//old block of code don't use for now
+	//float compensation_coefficient = 1.0 + 0.02 * (EC_TEMP - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
+	//float compensation_coefficient = 1.0 + 0.02 * (temperature - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
+	//float comp_volt = voltage / compensation_coefficient;  			// temperature compensation
 
-	return EC;
+	//newer block of code
+	float EC = ( 133.42 * voltage * voltage * voltage - 255.86 * voltage * voltage + 857.39 * voltage ); //convert voltage value to EC value
+	float compensation_coefficient = 1.0 + 0.02 * (temperature - 25.0);
+	float compensationEC = EC/compensation_coefficient;
+
+	return compensationEC;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
