@@ -305,7 +305,7 @@ float Loom_Analog::convert_turbidity(const uint16_t analog) const
 	// return -1120.4 * (voltage * voltage) + (5742.3 * voltage) - 4352.9;
 
 
-	return analog // turbidity values are fairly qualitative, just returning the analog value for now
+	return analog; // turbidity values are fairly qualitative, just returning the analog value for now
 }
 
 ///////////////////////////////////////////////////////////////////////////////
