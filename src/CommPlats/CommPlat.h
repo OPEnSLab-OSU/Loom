@@ -154,7 +154,6 @@ public:
 	/// @return True if packet sent successfully, false otherwise
 	bool			send(const uint8_t destination);
 
-
 	/// Sends all the jsons stored in the batch
 	/// @param[in]	destination		Address of destination device
 	/// @param[in] 	delay_time		The amount of time between each packet in the batch being sent
@@ -165,11 +164,6 @@ public:
 	///	@param[in]	json			Json that will the measurement of the size
 	///	@return	uint16_t of the value of the json size
 	uint16_t 		determine_json_size(JsonObject json);
-
-
-	void			show_package_fail(JsonObject json);
-
-	void			mock_send_receive(JsonObject json, char* buffer, const uint16_t max_len);
 
 	/// If the json is over 251, then it let the user the know that it will be sending 
 	/// small mulitple jsons with how many will it be splited into
