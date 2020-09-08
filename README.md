@@ -18,7 +18,7 @@
   <a href=https://github.com/OPEnSLab-OSU/Loom/wiki/Configuration>Configuration</a>
 </p>
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3266419.svg)](https://doi.org/10.5281/zenodo.3266419)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4012710.svg)](https://doi.org/10.5281/zenodo.4012710)
 
 ## Table of Contents
 

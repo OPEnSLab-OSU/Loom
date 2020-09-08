@@ -1,0 +1,64 @@
+{
+    "creators": [
+        {
+            "affiliation": "Openly Published Environmental Sensing (OPEnS) Lab, Oregon State University",
+            "name": "Goertzen, Luke"
+        },
+        {
+            "affiliation": "Openly Published Environmental Sensing (OPEnS) Lab, Oregon State University",
+            "name": "Selbie, William"
+        },
+        {
+            "affiliation": "Openly Published Environmental Sensing (OPEnS) Lab, Oregon State University",
+            "name": "Swope, Trevor"
+        },
+        {
+            "affiliation": "Openly Published Environmental Sensing (OPEnS) Lab, Oregon State University",
+            "name": "Koontz, Noah"
+        },
+        {
+            "affiliation": "Openly Published Environmental Sensing (OPEnS) Lab, Oregon State University",
+            "name": "noblek"
+        },
+        {
+            "affiliation": "Openly Published Environmental Sensing (OPEnS) Lab, Oregon State University",
+            "name": "leedongj"
+        },
+        {
+            "affiliation": "Openly Published Environmental Sensing (OPEnS) Lab, Oregon State University",
+            "name": "Kang, Kenneth"
+        },
+        {
+            "affiliation": "Openly Published Environmental Sensing (OPEnS) Lab, Oregon State University",
+            "name": "Kerr, Adam"
+        },
+        {
+            "affiliation": "Openly Published Environmental Sensing (OPEnS) Lab, Oregon State University",
+            "name": "Brady, C. Greyston"
+        },
+        {
+            "affiliation": "Openly Published Environmental Sensing (OPEnS) Lab, Oregon State University",
+            "name": "Winkelman, Eli"
+        },
+        {
+            "affiliation": "Department of Biological & Ecological Engineering, Oregon State University",
+            "name": "Selker, John S."
+        },
+        {
+            "affiliation": "Openly Published Environmental Sensing (OPEnS) Lab, Oregon State University",
+            "name": "Udell, Chester J."
+        }
+    ],
+    "description": "Arduino library for Internet of Things Rapid Prototyping in environmental sensing.",
+    "keywords": [
+        "Arduino Library", 
+        "Enviromental Sensing",
+        "Arduino", 
+        "Open source software", 
+        "Feather M0"
+    ],
+    "license": {
+        "id": "gpl-3.0"
+    },
+    "title": "Loom"
+}

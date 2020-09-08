@@ -135,6 +135,7 @@ void Loom_nRF::print_config() const
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_nRF::receive_blocking_impl(JsonObject json, uint max_wait_time) 
 {
+	bool status = false;
 	const unsigned long start_time = millis();
 	do {
 		network->update();                      // Check the network regularly
@@ -144,10 +145,13 @@ bool Loom_nRF::receive_blocking_impl(JsonObject json, uint max_wait_time)
 			char buffer[max_message_len];
 			memset(buffer, '\0', max_message_len);
 			if (network->read(header, &buffer, max_message_len-1) )
-				return msgpack_buffer_to_json(buffer, json);
+				status = msgpack_buffer_to_json(buffer, json);
 		}
 	} while ( (millis() - start_time) < max_wait_time );
-	return false;
+	
+	print_module_label();
+	LPrintln("Receive ", (status) ? "successful" : "failed");
+	return status;
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
