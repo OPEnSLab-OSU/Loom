@@ -23,7 +23,6 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#spi-sensors)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-
 class LoomSensor : public LoomModule
 {
 

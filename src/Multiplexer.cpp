@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "Multiplexer.h"
 
 // I2C Sensor files
@@ -29,7 +30,6 @@
 #include "Sensors/I2C/STEMMA.h"
 
 #include <Wire.h>
-
 
 
 // Used to optimize searching for sensors:

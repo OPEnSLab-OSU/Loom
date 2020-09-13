@@ -14,7 +14,6 @@
 #include "CommPlat.h"
 
 #include <Adafruit_BluefruitLE_SPI.h>
-#include <Adafruit_BluefruitLE_UART.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////

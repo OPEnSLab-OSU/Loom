@@ -14,8 +14,8 @@
 #include "InternetPlat.h"
 #include <WiFi101.h>
 #include <WiFiUdp.h>
-#include "SSLClient.h"
-#include "Trust_Anchors.h"
+#include <SSLClient.h>
+
 
 ///////////////////////////////////////////////////////////////////////////////
 ///

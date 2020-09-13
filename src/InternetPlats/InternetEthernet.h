@@ -12,9 +12,9 @@
 #pragma once
 
 #include "InternetPlat.h"
-#include "EthernetLarge.h"
-#include "SSLClient.h"
-#include "Trust_Anchors.h"
+
+#include <EthernetLarge.h>
+#include <SSLClient.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////

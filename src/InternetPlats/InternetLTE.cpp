@@ -8,7 +8,10 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+
 #include "InternetLTE.h"
+#include "Trust_Anchors.h"
+
 #define SerialAT Serial1
 TinyGsm modem(SerialAT);
 

@@ -26,7 +26,6 @@
 #include "NTP_Sync.h"
 //#include "I2Cdev.h"
 
-
 #include <ArduinoJson.h>
 #include <SdFat.h>
 #include <algorithm>

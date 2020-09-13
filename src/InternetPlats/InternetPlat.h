@@ -13,9 +13,9 @@
 
 #include "Module.h"
 
-#include "Client.h"
-#include "Udp.h"
-#include "SSLClient.h"
+#include <Client.h>
+#include <Udp.h>
+#include <SSLClient.h>
 #undef min
 #undef max
 #include <memory>

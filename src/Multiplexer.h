@@ -20,6 +20,10 @@
 #include <vector>
 #include <array>
 
+
+///////////////////////////////////////////////////////////////////////////////
+
+
 class LoomI2CSensor;
 
 /// I2C Address Conflict Selection
