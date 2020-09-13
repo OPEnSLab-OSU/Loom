@@ -13,6 +13,22 @@
 
 #include <Arduino.h>
 
+namespace Flags
+{
+	constexpr bool defaultTrue(bool val = true) { return val; }
+	constexpr bool defaultFalse(bool val = false) { return val; }
+
+	constexpr bool InternetAll      = defaultTrue(false);	  ///< All internet modules enabled
+	constexpr bool InternetEthernet = defaultTrue(false); ///< Only Ethernet relevant modules enabled
+	constexpr bool InternetWiFi     = defaultTrue(false);	  ///< Only WiFi relevant modules enabled
+
+	constexpr bool Sensors          = defaultTrue(false);
+	constexpr bool Actuators        = defaultTrue(false);
+	constexpr bool Radios           = defaultTrue(false);
+	constexpr bool Max              = defaultTrue(false);
+
+	constexpr bool Common           = true;
+} // namespace Flags
 
 ///////////////////////////////////////////////////////////////////////////////
 

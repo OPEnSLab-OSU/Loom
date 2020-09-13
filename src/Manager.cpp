@@ -11,19 +11,19 @@
 #include "Module.h"
 #include "Manager.h"
 #include "Module_Factory.h"
-#include "Macros.h"
-#include "Interrupt_Manager.h"
-#include "Sleep_Manager.h"
+// #include "Macros.h"
+// #include "Interrupt_Manager.h"
+// #include "Sleep_Manager.h"
 
-#include "Sensors/Sensor.h"
-#include "Multiplexer.h"
-#include "Actuators/Actuator.h"
-#include "CommPlats/CommPlat.h"
-#include "InternetPlats/InternetPlat.h"
-#include "LogPlats/LogPlat.h"
-#include "RTC/RTC.h"
-#include "PublishPlats/PublishPlat.h"
-#include "NTP_Sync.h"
+// #include "Sensors/Sensor.h"
+// #include "Multiplexer.h"
+// #include "Actuators/Actuator.h"
+// #include "CommPlats/CommPlat.h"
+// #include "InternetPlats/InternetPlat.h"
+// #include "LogPlats/LogPlat.h"
+// #include "RTC/RTC.h"
+// #include "PublishPlats/PublishPlat.h"
+// #include "NTP_Sync.h"
 //#include "I2Cdev.h"
 
 #include <ArduinoJson.h>
@@ -45,7 +45,7 @@ const char* LoomManager::enum_device_type_string(const DeviceType t)
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomManager::LoomManager(
-		const FactoryBase*			factory_ptr,
+		// const FactoryBase*			factory_ptr,
 		const char*				device_name,
 		const uint8_t			instance,
 		const DeviceType		device_type,
@@ -53,8 +53,8 @@ LoomManager::LoomManager(
 		const Verbosity			package_verbosity,
 		const uint16_t			interval
 	)
-	: Factory(factory_ptr)
-	, instance(instance)
+	// : Factory(factory_ptr)
+	: instance(instance)
 	, print_verbosity(print_verbosity)
 	, package_verbosity(package_verbosity)
 	, device_type(device_type)
@@ -584,11 +584,12 @@ bool LoomManager::parse_config_json(JsonObject config)
 		LPrintln("= = = = = Generate Objects = = = = =\n");
 	}
 
-	// Call module factory creating each module
+	// Call registry to create each module
 	for ( JsonVariant module : config["components"].as<JsonArray>()) {
-		if (Factory) {
-			add_module(Factory->Create(this, module));
-		}
+		// if (Factory) {
+		// 	add_module(Factory->Create(this, module));
+		// }
+		add_module(Registry<LoomModule>::create(module, nullptr));
 	}
 
 	// Sort modules by type

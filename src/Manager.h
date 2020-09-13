@@ -109,7 +109,7 @@ class LoomNTPSync;
 class LoomTempSync;
 
 
-class FactoryBase;
+// class FactoryBase;
 
 
 
@@ -130,9 +130,9 @@ class FactoryBase;
 class LoomManager
 {
 
-private:
+// private:
 
-	const FactoryBase* Factory;
+	// const FactoryBase* Factory;
 
 public:
 
@@ -185,7 +185,7 @@ public:
 	/// @param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
 	/// @param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause
 	LoomManager(
-			const FactoryBase*		factory_ptr,
+			// const FactoryBase*		factory_ptr,
 			const char*			device_name			= "Device",
 			const uint8_t		instance			= 1,
 			const DeviceType	device_type			= DeviceType::NODE,

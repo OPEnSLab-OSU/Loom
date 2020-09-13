@@ -10,10 +10,16 @@ This is the Doxygen generated documentation of the Loom library code.
 
 */
 
-
-
+#pragma once
 
 #define LOOM_DEBUG 1
+
+// Find a better home for this thing at some point...
+// Fix for undefined std::__throw_bad_alloc()
+namespace std {
+    void __throw_bad_alloc() { return; }
+} 
+
 
 // Preamble will only need to include leaves in the hierarchy
 // abstract (non-leaves) already included by leaves
