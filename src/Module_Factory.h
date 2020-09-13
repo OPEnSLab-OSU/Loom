@@ -22,7 +22,7 @@
 #undef min
 #include <vector>
 
-// // Actuators
+// Actuators
 // #include "Actuators/Neopixel.h"
 // #include "Actuators/Relay.h"
 // #include "Actuators/Servo.h"
@@ -95,9 +95,6 @@
 // #include "Interrupt_Manager.h"
 // #include "Sleep_Manager.h"
 // #include "Multiplexer.h" // this needs to be include after I2C sensors (due to conflict with enableInterrupt macro/function defined by EnableInterrupt library and AS726X sensors)
-
-// // For functions that build constexpr lookup table
-// #include "Module_Factory_Aux.h"
 
 
 

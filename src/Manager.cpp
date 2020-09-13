@@ -590,7 +590,8 @@ bool LoomManager::parse_config_json(JsonObject config)
 		// if (Factory) {
 		// 	add_module(Factory->Create(this, module));
 		// }
-		add_module(Registry<LoomModule>::create(module, this));
+		// add_module(Registry<LoomModule>::create(module, this));
+		add_module(Registry<LoomModule>::create(module["name"].as<char *>(), this));
 	}
 
 	// Sort modules by type

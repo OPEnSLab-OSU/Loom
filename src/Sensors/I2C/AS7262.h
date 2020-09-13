@@ -13,6 +13,7 @@
 
 #include "I2C_Sensor.h"
 
+#undef enableInterrupt
 #include <AS726X.h>
 
 
