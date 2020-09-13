@@ -13,10 +13,12 @@
 #include "Sleep_Manager.h"
 #include "RTC/RTC.h"
 #include "Manager.h"
+#include "Module_Factory.h"
 
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
+bool Loom_Interrupt_Manager::Loom_Interrupt_Manager_Registered = (Flags::Common) ? Registry<LoomModule>::add<Loom_Interrupt_Manager>("Loom_Interrupt_Manager") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 

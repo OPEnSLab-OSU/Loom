@@ -37,8 +37,10 @@
 
 class Loom_LTE: public LoomInternetPlat
 {
+private:
+    static bool Loom_LTE_Registered;
 
-  protected:
+protected:
 
     const char* APN; ///< LTE Network name
     const char* gprsUser; ///< GPRS username crendtial
@@ -51,7 +53,7 @@ class Loom_LTE: public LoomInternetPlat
     SSLClient& get_client() override {return m_client;}
     const SSLClient& get_client() const override {return m_client;}
 
-  public:
+public:
 
     //==============================================================================
     ///@name	CONSTRUCTORS / DESTRUCTOR

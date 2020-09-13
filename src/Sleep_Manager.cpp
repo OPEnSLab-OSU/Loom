@@ -15,8 +15,7 @@
 
 #include <LowPower.h>
 
-
-bool Loom_Sleep_Manager::Loom_Sleep_Manager_Registered = (false) ? Registry<LoomModule>::add<Loom_Sleep_Manager>("Loom_Sleep_Manager") : false;
+bool Loom_Sleep_Manager::Loom_Sleep_Manager_Registered = (Flags::Common) ? Registry<LoomModule>::add<Loom_Sleep_Manager>("Loom_Sleep_Manager") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager(

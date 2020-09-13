@@ -11,10 +11,12 @@
 
 #include "InternetLTE.h"
 #include "Trust_Anchors.h"
+#include "Module_Factory.h"
 
 #define SerialAT Serial1
 TinyGsm modem(SerialAT);
 
+bool Loom_LTE::Loom_LTE_Registered = (Flags::InternetLTE || Flags::InternetAll) ? Registry<LoomModule>::add<Loom_LTE>("Loom_LTE") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LTE::Loom_LTE(

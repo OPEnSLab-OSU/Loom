@@ -12,7 +12,7 @@
 #include "ZXGesture.h"
 #include "Module_Factory.h"
 
-bool Loom_ZXGesture::Loom_ZXGesture_Registered = (false) ? Registry<LoomModule>::add<Loom_ZXGesture>("Loom_ZXGesture") : false;
+bool Loom_ZXGesture::Loom_ZXGesture_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_ZXGesture>("Loom_ZXGesture") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ZXGesture::Loom_ZXGesture(

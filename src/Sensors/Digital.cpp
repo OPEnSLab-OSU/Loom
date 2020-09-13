@@ -15,7 +15,7 @@
 // Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
 const uint8_t Loom_Digital::pin_nums[DIGITAL_COUNT] = {5, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19};
 
-bool Loom_Digital::Loom_Digital_Registered = (false) ? Registry<LoomModule>::add<Loom_Digital>("Loom_Digital") : false;
+bool Loom_Digital::Loom_Digital_Registered = (Flags::Common) ? Registry<LoomModule>::add<Loom_Digital>("Loom_Digital") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Digital::Loom_Digital(	

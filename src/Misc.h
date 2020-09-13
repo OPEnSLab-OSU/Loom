@@ -13,14 +13,16 @@
 
 #include <Arduino.h>
 
+// Move flags to different file
 namespace Flags
 {
-	constexpr bool defaultTrue(bool val = true) { return val; }
+	constexpr bool defaultTrue( bool val = true)  { return val; }
 	constexpr bool defaultFalse(bool val = false) { return val; }
 
 	constexpr bool InternetAll      = defaultTrue(false);	  ///< All internet modules enabled
 	constexpr bool InternetEthernet = defaultTrue(false); ///< Only Ethernet relevant modules enabled
 	constexpr bool InternetWiFi     = defaultTrue(false);	  ///< Only WiFi relevant modules enabled
+	constexpr bool InternetLTE      = defaultTrue(false);	  ///< Only WiFi relevant modules enabled
 
 	constexpr bool Sensors          = defaultTrue(false);
 	constexpr bool Actuators        = defaultTrue(false);

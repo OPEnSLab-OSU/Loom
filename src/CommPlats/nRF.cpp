@@ -11,7 +11,7 @@
 #include "nRF.h"
 #include "Module_Factory.h"
 
-bool Loom_nRF::Loom_nRF_Registered = (false) ? Registry<LoomModule>::add<Loom_nRF>("Loom_nRF") : false;
+bool Loom_nRF::Loom_nRF_Registered = (Flags::Radios) ? Registry<LoomModule>::add<Loom_nRF>("Loom_nRF") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_nRF::Loom_nRF(

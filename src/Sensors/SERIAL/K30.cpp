@@ -12,7 +12,7 @@
 #include "K30.h"
 #include "Module_Factory.h"
 
-bool Loom_K30::Loom_K30_Registered = (false) ? Registry<LoomModule>::addNoDefault<Loom_K30>("Loom_K30") : false;
+bool Loom_K30::Loom_K30_Registered = (Flags::Sensors) ? Registry<LoomModule>::addNoDefault<Loom_K30>("Loom_K30") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_K30::Loom_K30(LoomManager* manager,
