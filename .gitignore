@@ -4,3 +4,4 @@ latex/
 LoomTests
 .vscode
 *.DS_Store
+doxygenV2/
