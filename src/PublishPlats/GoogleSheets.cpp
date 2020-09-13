@@ -13,7 +13,7 @@
 #include "../Manager.h"
 #include "Module_Factory.h"
 
-bool Loom_GoogleSheets::Loom_GoogleSheets_Registered = (Flags::InternetWiFi || Flags::InternetEthernet || Flags::InternetAll || Flags::InternetLTE) ? Registry<LoomModule>::addNoDefault<Loom_GoogleSheets>("Loom_GoogleSheets") : false;
+bool Loom_GoogleSheets::Loom_GoogleSheets_Registered = (Flags::InternetWiFi || Flags::InternetEthernet || Flags::InternetAll || Flags::InternetLTE) ? Registry<LoomModule>::addNoDefault<Loom_GoogleSheets>("GoogleSheets") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(

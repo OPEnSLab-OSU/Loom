@@ -1,7 +1,7 @@
 #include "ADS1115.h"
 #include "Module_Factory.h"
 
-bool Loom_ADS1115::Loom_ADS1115_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_ADS1115>("Loom_ADS1115") : false;
+bool Loom_ADS1115::Loom_ADS1115_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_ADS1115>("ADS1115") : false;
 //ADS1115 ADS1115(i2c_address);
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ADS1115::Loom_ADS1115(

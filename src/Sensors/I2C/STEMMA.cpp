@@ -2,7 +2,7 @@
 #include "STEMMA.h"
 #include "Module_Factory.h"
 
-bool Loom_STEMMA::Loom_STEMMA_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_STEMMA>("Loom_STEMMA") : false;
+bool Loom_STEMMA::Loom_STEMMA_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_STEMMA>("STEMMA") : false;
 
 Loom_STEMMA::Loom_STEMMA(
 LoomManager* manager,
