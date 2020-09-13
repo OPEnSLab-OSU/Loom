@@ -75,6 +75,8 @@ public:
 
 private:
 
+	static bool Loom_Relay_Registered;
+
 };
 
 

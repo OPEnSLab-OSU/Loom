@@ -11,7 +11,9 @@
 
 #include "NTP_Sync.h"
 #include "Manager.h"
+#include "Module_Factory.h"
 
+bool LoomNTPSync::LoomNTPSync_Registered = (false) ? Registry<LoomModule>::add<LoomNTPSync>("LoomNTPSync") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomNTPSync::LoomNTPSync(

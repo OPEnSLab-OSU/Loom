@@ -133,6 +133,8 @@ public:
 	const static char* enum_sleep_mode_string(const Mode m);
 
 private:
+	
+	static bool Loom_Sleep_Manager_Registered;
 
 	/// Handles pre-sleep operations
 	void		pre_sleep();

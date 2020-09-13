@@ -10,7 +10,9 @@
 
 
 #include "Decagon_GS3.h"
+#include "Module_Factory.h"
 
+bool Loom_DecagonGS3::Loom_DecagonGS3_Registered = (false) ? Registry<LoomModule>::add<Loom_DecagonGS3>("Loom_DecagonGS3") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DecagonGS3::Loom_DecagonGS3(

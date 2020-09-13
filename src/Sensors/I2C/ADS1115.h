@@ -31,11 +31,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_ADS1115 : public LoomI2CSensor
 {
-protected:
-	///< Underlying ADS1115 sensor manager instance
+private:
+	static bool Loom_ADS1115_Registered;
 
-	// Protected members here (are inherited)
-	Adafruit_ADS1115 	ads1115;
+protected :
+		///< Underlying ADS1115 sensor manager instance
+
+		// Protected members here (are inherited)
+		Adafruit_ADS1115 ads1115;
 	const bool			analog_enabled[4];
 	const bool			diff_enabled[2];
 	// NOTE: There is an error in the adafruit driver, as the single-ended inputs return unsigned numbers

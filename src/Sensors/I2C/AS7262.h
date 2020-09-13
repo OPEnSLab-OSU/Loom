@@ -32,6 +32,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_AS7262 : public LoomI2CSensor
 {
+private:
+	static bool Loom_AS7262_Registered;
 
 protected:
 

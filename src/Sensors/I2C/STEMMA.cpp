@@ -1,5 +1,8 @@
 
 #include "STEMMA.h"
+#include "Module_Factory.h"
+
+bool Loom_STEMMA::Loom_STEMMA_Registered = (false) ? Registry<LoomModule>::add<Loom_STEMMA>("Loom_STEMMA") : false;
 
 Loom_STEMMA::Loom_STEMMA(
 LoomManager* manager,

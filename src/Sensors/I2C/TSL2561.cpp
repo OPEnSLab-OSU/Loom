@@ -10,9 +10,11 @@
 
 
 #include "TSL2561.h"
+#include "Module_Factory.h"
 
 #include <Adafruit_Sensor.h>
 
+bool Loom_TSL2561::Loom_TSL2561_Registered = (false) ? Registry<LoomModule>::add<Loom_TSL2561>("Loom_TSL2561") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TSL2561::Loom_TSL2561(

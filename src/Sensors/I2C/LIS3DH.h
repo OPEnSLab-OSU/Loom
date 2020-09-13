@@ -34,6 +34,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_LIS3DH : public LoomI2CSensor
 {
+private:
+	static bool Loom_LIS3DH_Registered;
 
 protected:
 

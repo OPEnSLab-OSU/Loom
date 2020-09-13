@@ -11,7 +11,9 @@
 
 #include "Max_Sub.h"
 #include "../Manager.h"
+#include "Module_Factory.h"
 
+bool Loom_MaxSub::Loom_MaxSub_Registered = (false) ? Registry<LoomModule>::addNoDefault<Loom_MaxSub>("Loom_MaxSub") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxSub::Loom_MaxSub(

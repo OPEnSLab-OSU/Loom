@@ -10,7 +10,9 @@
 
 
 #include "AS7263.h"
+#include "Module_Factory.h"
 
+bool Loom_AS7263::Loom_AS7263_Registered = (false) ? Registry<LoomModule>::add<Loom_AS7263>("Loom_AS7263") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7263::Loom_AS7263(

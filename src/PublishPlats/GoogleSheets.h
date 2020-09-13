@@ -78,6 +78,8 @@ protected:
 	bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
 
 private:
+	
+	static bool Loom_GoogleSheets_Registered;
 
 	/// Private utility send function
 	bool m_serialize_internet_impl(const JsonObject json, Print& write);

@@ -11,7 +11,9 @@
 
 #include "InternetWiFi.h"
 #include "Trust_Anchors.h"
+#include "Module_Factory.h"
 
+bool Loom_WiFi::Loom_WiFi_Registered = (false) ? Registry<LoomModule>::add<Loom_WiFi>("Loom_WiFi") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_WiFi::Loom_WiFi(

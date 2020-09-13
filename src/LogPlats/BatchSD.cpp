@@ -11,8 +11,11 @@
 
 #include "BatchSD.h"
 #include "Manager.h"
+#include "Module_Factory.h"
 
 #include <SPI.h>
+
+bool Loom_BatchSD::Loom_BatchSD_Registered = (false) ? Registry<LoomModule>::add<Loom_BatchSD>("Loom_BatchSD") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 

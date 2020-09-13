@@ -180,6 +180,8 @@ public:
 
 private:
 
+	static bool Loom_Multiplexer_Registered;
+	
 	/// Select communication with sensor at index port
 	/// @param[in]	port	The port to open I2C communication on
 	void			tca_select(const uint8_t port) const;

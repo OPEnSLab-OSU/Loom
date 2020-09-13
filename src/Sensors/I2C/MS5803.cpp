@@ -10,6 +10,7 @@
 
 
 #include "MS5803.h"
+#include "Module_Factory.h"
 
 
 // #include <setjmp.h>     /* jmp_buf, setjmp, longjmp */
@@ -22,6 +23,8 @@
 // 	longjmp(env,101);
 // }
 
+
+bool Loom_MS5803::Loom_MS5803_Registered = (false) ? Registry<LoomModule>::add<Loom_MS5803>("Loom_MS5803") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MS5803::Loom_MS5803(

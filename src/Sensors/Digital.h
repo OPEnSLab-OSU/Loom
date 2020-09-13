@@ -30,6 +30,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Digital : public LoomSensor
 {
+private:
+	static bool Loom_Digital_Registered;
 
 protected:
 

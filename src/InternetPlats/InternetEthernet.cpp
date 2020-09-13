@@ -11,7 +11,9 @@
 
 #include "InternetEthernet.h"
 #include "Trust_Anchors.h"
+#include "Module_Factory.h"
 
+bool Loom_Ethernet::Loom_Ethernet_Registered = (false) ? Registry<LoomModule>::add<Loom_Ethernet>("Loom_Ethernet") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Ethernet::Loom_Ethernet(	

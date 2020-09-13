@@ -91,5 +91,10 @@ public:
 
 	void		print_config() const override;
 	void		print_state() const override;
+
+private:
+
+	static bool Loom_Ethernet_Registered;
+	
 };
 

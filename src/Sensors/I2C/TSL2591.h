@@ -31,6 +31,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_TSL2591 : public LoomI2CSensor
 {
+private:
+	static bool Loom_TSL2591_Registered;
 
 protected:
 

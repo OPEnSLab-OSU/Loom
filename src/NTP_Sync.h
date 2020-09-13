@@ -75,7 +75,9 @@ public:
 	void		print_state() const override;	
 
 private:
-	
+
+	static bool LoomNTPSync_Registered;
+
 	/// The actual synchronization function
 	/// @return Time obtained from InternetPlat
 	DateTime m_sync_rtc();
@@ -105,6 +107,7 @@ private:
 	
 	/// Store if we've successfully accomplished our task
 	Error				m_last_error;
+	
 };
 
 

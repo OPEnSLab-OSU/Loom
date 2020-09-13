@@ -141,6 +141,8 @@ public:
 
 private:
 
+	static bool Loom_LoRa_Registered;
+	
 };
 
 

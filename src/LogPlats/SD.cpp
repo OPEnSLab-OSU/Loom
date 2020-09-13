@@ -11,9 +11,11 @@
 
 #include "SD.h"
 #include "Manager.h"
+#include "Module_Factory.h"
 
 #include <SPI.h>
 
+bool Loom_SD::Loom_SD_Registered = (false) ? Registry<LoomModule>::add<Loom_SD>("Loom_SD") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SD::Loom_SD(

@@ -31,13 +31,16 @@
 
 class Loom_BatchSD : public LoomLogPlat
 {
+
 protected:
+
   SdFat sd;               ///< File System Object
   const byte chip_select; ///< Chip select pin
   int batch_counter;      ///< Current batch count value
   int packet_counter;     ///< Current packet count value in a batch
   int drop_count;         ///< Current count of packets that failed to be sent
   DynamicJsonDocument doc;
+
 public:
 
 //=============================================================================
@@ -132,6 +135,8 @@ public:
 
 private:
 
+  static bool Loom_BatchSD_Registered;
+
   /// Creates the proper file name of the file from the batch
   /// @param[in] index    The index of the file in the batch
   /// @return The file name to be used for file in batch
@@ -142,4 +147,5 @@ private:
   /// Drops are considered to be failed trainsmission or publishes used in either the Communication or Publish platforms
   /// @return The drop rate from 0 (no drops) to 100 (100% drop)
   float get_drop_rate() const;
+
 };

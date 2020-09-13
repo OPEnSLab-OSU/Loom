@@ -30,6 +30,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_TMP007 : public LoomI2CSensor
 {
+private:
+	static bool Loom_TMP007_Registered;
 
 protected:
 

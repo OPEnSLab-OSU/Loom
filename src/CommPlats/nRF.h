@@ -142,6 +142,8 @@ public:
 
 private:
 
+	static bool Loom_nRF_Registered;
+	
 };
 
 

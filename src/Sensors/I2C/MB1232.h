@@ -27,6 +27,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MB1232 : public LoomI2CSensor
 {
+private:
+	static bool Loom_MB1232_Registered;
 
 protected:
 

@@ -179,6 +179,8 @@ public:
 
 private:
 
+	static bool Loom_OLED_Registered;
+
 	/// Last display update time.
 	/// Used to manage scrolling
 	unsigned long	previous_time;

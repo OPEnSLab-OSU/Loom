@@ -168,6 +168,8 @@ public:
 
 private:
 
+	static bool Loom_SD_Registered;
+
 	/// Print the files on the SD card.
 	/// Recursive for nested folders
 	/// @param[in]	dir			File to treat at root

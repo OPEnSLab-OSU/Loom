@@ -10,9 +10,11 @@
 
 
 #include "FXOS8700.h"
+#include "Module_Factory.h"
 
 #include <Adafruit_Sensor.h>
 
+bool Loom_FXOS8700::Loom_FXOS8700_Registered = (false) ? Registry<LoomModule>::add<Loom_FXOS8700>("Loom_FXOS8700") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXOS8700::Loom_FXOS8700(

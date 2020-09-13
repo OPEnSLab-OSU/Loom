@@ -9,6 +9,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "Bluetooth.h"
+#include "Module_Factory.h"
+
+bool Loom_Bluetooth::Loom_Bluetooth_Registered = (false) ? Registry<LoomModule>::add<Loom_Bluetooth>("Loom_Bluetooth") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Bluetooth::Loom_Bluetooth(

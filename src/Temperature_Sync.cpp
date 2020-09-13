@@ -13,7 +13,9 @@
 #include "Manager.h"
 #include "Sensors/Analog.h"
 #include "Sensors/I2C/MS5803.h"
+#include "Module_Factory.h"
 
+bool LoomTempSync::LoomTempSync_Registered = (false) ? Registry<LoomModule>::add<LoomTempSync>("LoomTempSync") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomTempSync::LoomTempSync(   

@@ -10,9 +10,11 @@
 
 
 #include "FXAS21002.h"
+#include "Module_Factory.h"
 
 #include <Adafruit_Sensor.h>
 
+bool Loom_FXAS21002::Loom_FXAS21002_Registered = (false) ? Registry<LoomModule>::add<Loom_FXAS21002>("Loom_FXAS21002") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXAS21002::Loom_FXAS21002(

@@ -102,4 +102,5 @@ protected:
 
 private:
 
+	static bool Loom_MaxPub_Registered;
 };

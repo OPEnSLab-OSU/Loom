@@ -11,9 +11,12 @@
 
 #include "Sleep_Manager.h"
 #include "RTC/RTC.h"
+#include "Module_Factory.h"
 
 #include <LowPower.h>
 
+
+bool Loom_Sleep_Manager::Loom_Sleep_Manager_Registered = (false) ? Registry<LoomModule>::add<Loom_Sleep_Manager>("Loom_Sleep_Manager") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Sleep_Manager::Loom_Sleep_Manager(

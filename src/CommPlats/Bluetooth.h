@@ -124,5 +124,7 @@ public:
 
 private:
 
+	static bool Loom_Bluetooth_Registered;
+
 };
 

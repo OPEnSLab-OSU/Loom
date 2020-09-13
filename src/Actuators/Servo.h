@@ -81,5 +81,7 @@ public:
 
 private:
 
+	static bool Loom_Servo_Registered;
+
 };
 

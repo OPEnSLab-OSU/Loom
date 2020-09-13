@@ -10,6 +10,7 @@
 
 
 #include "Multiplexer.h"
+#include "Module_Factory.h"
 
 // I2C Sensor files
 #include "Sensors/I2C/AS7262.h"
@@ -31,6 +32,7 @@
 
 #include <Wire.h>
 
+bool Loom_Multiplexer::Loom_Multiplexer_Registered = (false) ? Registry<LoomModule>::add<Loom_Multiplexer>("Loom_Multiplexer") : false;
 
 // Used to optimize searching for sensors:
 // search addresses in array rather than 0-127 

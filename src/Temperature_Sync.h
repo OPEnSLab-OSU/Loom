@@ -83,6 +83,8 @@ public:
 
 private:
 
+	static bool LoomTempSync_Registered;
+
 	void		sync_temp();
 	
 	LoomModule*	source;			///< Pointer to module to get temperature from

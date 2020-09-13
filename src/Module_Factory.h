@@ -453,12 +453,16 @@ public:
 	};
 
 	static bool add(const char *, const FactoryFunction, const FactoryFunctionJson); ///< Adds a new Factory Pair derived from args to lookup table
+	
 	template <class U>
 	static bool add(const char *);
+	
 	template <class U>
 	static bool addNoJson(const char *);
+	
 	template <class U>
 	static bool addNoDefault(const char *);
+	
 	static T *create(const char *, Scope *scope); ///< Returns an instance of type T created by using the FactoryFunction coresponding to the provided name
 	static T *create(JsonVariant, Scope *);		  ///< Returns an instance of type T created from provided JSON
 
