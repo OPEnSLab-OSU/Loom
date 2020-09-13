@@ -11,20 +11,21 @@
 // #include "Module.h"
 #include "Manager.h"
 #include "Module_Factory.h"
-// #include "Macros.h"
-// #include "Interrupt_Manager.h"
-// #include "Sleep_Manager.h"
+#include "Macros.h"
+#include "Interrupt_Manager.h"
+#include "Sleep_Manager.h"
 
-// #include "Sensors/Sensor.h"
-// #include "Multiplexer.h"
-// #include "Actuators/Actuator.h"
-// #include "CommPlats/CommPlat.h"
-// #include "InternetPlats/InternetPlat.h"
-// #include "LogPlats/LogPlat.h"
-// #include "RTC/RTC.h"
-// #include "PublishPlats/PublishPlat.h"
-// #include "NTP_Sync.h"
-//#include "I2Cdev.h"
+#include "Sensors/Sensor.h"
+#include "Multiplexer.h"
+#include "Actuators/Actuator.h"
+#include "CommPlats/CommPlat.h"
+#include "InternetPlats/InternetPlat.h"
+#include "LogPlats/LogPlat.h"
+#include "RTC/RTC.h"
+#include "PublishPlats/PublishPlat.h"
+#include "NTP_Sync.h"
+#include "Temperature_Sync.h"
+// #include "I2Cdev.h"
 
 #include <ArduinoJson.h>
 #include <SdFat.h>
@@ -589,7 +590,7 @@ bool LoomManager::parse_config_json(JsonObject config)
 		// if (Factory) {
 		// 	add_module(Factory->Create(this, module));
 		// }
-		add_module(Registry<LoomModule>::create(module, nullptr));
+		add_module(Registry<LoomModule>::create(module, this));
 	}
 
 	// Sort modules by type

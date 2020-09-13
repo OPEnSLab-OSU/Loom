@@ -15,80 +15,86 @@
 
 // === Include child elements to be registered ===
 
+#include "Module.h"
 
-// Actuators
-#include "Actuators/Neopixel.h"
-#include "Actuators/Relay.h"
-#include "Actuators/Servo.h"
-#include "Actuators/Stepper.h"
+// Need to undef max and min for vector to work
+#undef max
+#undef min
+#include <vector>
 
-// CommPlats
-#include "CommPlats/LoRa.h"
-#include "CommPlats/nRF.h"
-#include "CommPlats/Bluetooth.h"
+// // Actuators
+// #include "Actuators/Neopixel.h"
+// #include "Actuators/Relay.h"
+// #include "Actuators/Servo.h"
+// #include "Actuators/Stepper.h"
 
-// InternetPlats
-#include "InternetPlats/InternetEthernet.h"
-#include "InternetPlats/InternetWiFi.h"
-#include "InternetPlats/InternetLTE.h"
+// // CommPlats
+// #include "CommPlats/LoRa.h"
+// #include "CommPlats/nRF.h"
+// #include "CommPlats/Bluetooth.h"
 
-// PublishPlats
-#include "PublishPlats/GoogleSheets.h"
-#include "PublishPlats/Max_Pub.h"
+// // InternetPlats
+// #include "InternetPlats/InternetEthernet.h"
+// #include "InternetPlats/InternetWiFi.h"
+// #include "InternetPlats/InternetLTE.h"
 
-// SubscribePlats
-#include "SubscribePlats/Max_Sub.h"
+// // PublishPlats
+// #include "PublishPlats/GoogleSheets.h"
+// #include "PublishPlats/Max_Pub.h"
 
-// LogPlats
-#include "LogPlats/OLED.h"
-#include "LogPlats/SD.h"
-#include "LogPlats/BatchSD.h"
+// // SubscribePlats
+// #include "SubscribePlats/Max_Sub.h"
 
-// // RTC
-#include "RTC/DS3231.h"
-#include "RTC/PCF8523.h"
+// // LogPlats
+// #include "LogPlats/OLED.h"
+// #include "LogPlats/SD.h"
+// #include "LogPlats/BatchSD.h"
 
-// Sensors
-#include "Sensors/Analog.h"
-#include "Sensors/Digital.h"
+// // // RTC
+// #include "RTC/DS3231.h"
+// #include "RTC/PCF8523.h"
 
-#include "Sensors/I2C/ADS1115.h"
-#include "Sensors/I2C/AS7262.h"
-#include "Sensors/I2C/AS7263.h"
-#include "Sensors/I2C/AS7265X.h"
-#include "Sensors/I2C/FXAS21002.h"
-#include "Sensors/I2C/FXOS8700.h"
-#include "Sensors/I2C/LIS3DH.h"
-#include "Sensors/I2C/MB1232.h"
-#include "Sensors/I2C/MMA8451.h"
-#include "Sensors/I2C/MPU6050.h"
-#include "Sensors/I2C/MS5803.h"
-#include "Sensors/I2C/SHT31D.h"
-#include "Sensors/I2C/TMP007.h"
-#include "Sensors/I2C/TSL2561.h"
-#include "Sensors/I2C/TSL2591.h"
-#include "Sensors/I2C/ZXGesture.h"
-#include "Sensors/I2C/STEMMA.h"
+// // Sensors
+// #include "Sensors/Analog.h"
+// #include "Sensors/Digital.h"
+
+// #include "Sensors/I2C/ADS1115.h"
+// #include "Sensors/I2C/AS7262.h"
+// #include "Sensors/I2C/AS7263.h"
+// #include "Sensors/I2C/AS7265X.h"
+// #include "Sensors/I2C/FXAS21002.h"
+// #include "Sensors/I2C/FXOS8700.h"
+// #include "Sensors/I2C/LIS3DH.h"
+// #include "Sensors/I2C/MB1232.h"
+// #include "Sensors/I2C/MMA8451.h"
+// #include "Sensors/I2C/MPU6050.h"
+// #include "Sensors/I2C/MS5803.h"
+// #include "Sensors/I2C/SHT31D.h"
+// #include "Sensors/I2C/TMP007.h"
+// #include "Sensors/I2C/TSL2561.h"
+// #include "Sensors/I2C/TSL2591.h"
+// #include "Sensors/I2C/ZXGesture.h"
+// #include "Sensors/I2C/STEMMA.h"
 
 
 
-#include "Sensors/SDI12/Decagon_5TM.h"
-#include "Sensors/SDI12/Decagon_GS3.h"
+// #include "Sensors/SDI12/Decagon_5TM.h"
+// #include "Sensors/SDI12/Decagon_GS3.h"
 
-#include "Sensors/SPI/MAX31855.h"
-#include "Sensors/SPI/MAX31856.h"
+// #include "Sensors/SPI/MAX31855.h"
+// #include "Sensors/SPI/MAX31856.h"
 
-#include "Sensors/SERIAL/K30.h"
+// #include "Sensors/SERIAL/K30.h"
 
-// Other
-#include "NTP_Sync.h"
-#include "Temperature_Sync.h"
+// // Other
+// #include "NTP_Sync.h"
+// #include "Temperature_Sync.h"
 
-// General
-#include "Components/WarmUp/WarmUp_Manager.h"
-#include "Interrupt_Manager.h"
-#include "Sleep_Manager.h"
-#include "Multiplexer.h" // this needs to be include after I2C sensors (due to conflict with enableInterrupt macro/function defined by EnableInterrupt library and AS726X sensors)
+// // General
+// #include "Components/WarmUp/WarmUp_Manager.h"
+// #include "Interrupt_Manager.h"
+// #include "Sleep_Manager.h"
+// #include "Multiplexer.h" // this needs to be include after I2C sensors (due to conflict with enableInterrupt macro/function defined by EnableInterrupt library and AS726X sensors)
 
 // // For functions that build constexpr lookup table
 // #include "Module_Factory_Aux.h"
@@ -424,18 +430,28 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
+// /// Creates a LoomModule with default parameters
+// /// @return The created LoomModule
+// template<class T> LoomModule* ConstructDefault(LoomManager* manager) { return new T(manager); }
+
+// /// Creates a LoomModule with Json array of parameters
+// /// @return The created LoomModule
+// template<class T> LoomModule* Construct(LoomManager* manager, JsonArrayConst p) { return new T(manager, p); }
+
+
 ///Forward declare any classes that will be served to created objects
-class Scope;
+// class Scope;
+class LoomManager;
 
 /// Creates a new T, returned as S*. S must be base of T
 /// @return The created T
 template <class S, class T>
-S *ConstructDefault() { return new T(); }
+S *ConstructDefault(LoomManager *manager) { return new T(manager); }
 
 /// Creates a new T, returned as S*. S must be base of T
 /// @return The created T
 template <class S, class T>
-S *ConstructDefaultJson(JsonArrayConst p) { return new T(p); }
+S *ConstructDefaultJson(LoomManager* manager, JsonArrayConst p) { return new T(manager, p); }
 
 /// A generic registry/factory that collects constructors of a give base type and allows for any number
 /// of base classes as static singleton templates will only create new instances of a new type is introduced
@@ -443,8 +459,8 @@ template <typename T>
 class Registry
 {
 public:
-	using FactoryFunction = T *(*)(); ///< Pointer to function of type //* void T::funct (void) *//
-	using FactoryFunctionJson = LoomModule *(*)(JsonArrayConst);
+	using FactoryFunction = T *(*)(LoomManager*); ///< Pointer to function of type //* void T::funct (void) *//
+	using FactoryFunctionJson = LoomModule *(*)(LoomManager*, JsonArrayConst);
 	using FactoryPair = struct
 	{										///<  *Needed as an alternative to std::map
 		const char *name;					///< Name of module that will be used to make a new copy
@@ -462,9 +478,9 @@ public:
 	
 	template <class U>
 	static bool addNoDefault(const char *);
-	
-	static T *create(const char *, Scope *scope); ///< Returns an instance of type T created by using the FactoryFunction coresponding to the provided name
-	static T *create(JsonVariant, Scope *);		  ///< Returns an instance of type T created from provided JSON
+
+	static T *create(const char *, LoomManager *scope); ///< Returns an instance of type T created by using the FactoryFunction coresponding to the provided name
+	static T *create(JsonVariant, LoomManager *);		///< Returns an instance of type T created from provided JSON
 
 private:
 	/// Use Meyer's singleton to prevent SIOF
@@ -512,7 +528,7 @@ bool Registry<T>::add(const char *name, const Registry<T>::FactoryFunction ctor,
 }
 
 template <typename T>
-T *Registry<T>::create(const char *name, Scope *scope)
+T *Registry<T>::create(const char *name, LoomManager* scope)
 {
 	auto lookUp = getFactoryTable();
 	for (auto elem : lookUp)
@@ -521,14 +537,14 @@ T *Registry<T>::create(const char *name, Scope *scope)
 		if (!strcmp(name, elem.name))
 		{
 			///On match, return a *new* item of type name
-			return elem.ctor();
+			return elem.ctor(scope);
 		}
 	} ///< No match found, exiting for
 	return nullptr;
 }
 
 template <typename T>
-T *Registry<T>::create(JsonVariant target, Scope *scope)
+T *Registry<T>::create(JsonVariant target, LoomManager* scope)
 {
 	const char *name = target["name"].as<char *>();
 	auto lookUp = getFactoryTable();
@@ -537,7 +553,7 @@ T *Registry<T>::create(JsonVariant target, Scope *scope)
 	{
 		if (!strcmp(name, elem.name))
 		{
-			return elem.ctor();
+			return elem.ctor(scope);
 		}
 	}
 	return nullptr;

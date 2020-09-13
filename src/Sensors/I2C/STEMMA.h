@@ -22,7 +22,7 @@
 class Loom_STEMMA : public LoomI2CSensor
 {
 private:
-    static bool Loom_SHT31D_Registered;
+    static bool Loom_STEMMA_Registered;
 
 protected:
 

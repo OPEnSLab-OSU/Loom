@@ -11,6 +11,7 @@
 
 #pragma once
 
+#include "Module.h"
 #include "Misc.h"
 
 #include <ArduinoJson.h>
@@ -23,7 +24,7 @@
 
 // Forward declarations, specify that these classes
 // exist but are defined in their own respective files
-class LoomModule;
+// class LoomModule;
 class LoomSensor;
 class LoomActuator;
 class LoomRTC;

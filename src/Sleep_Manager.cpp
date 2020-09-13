@@ -26,6 +26,7 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 		const Mode					sleep_mode,
 		const byte					power_off_pin
 	)
+	// : LoomModule(manager, "SleepManager", Type::Sleep_Manager )
 	: LoomModule(manager, "SleepManager", Type::Sleep_Manager )
 	, use_LED(use_LED)
 	, delay_on_wake(delay_on_wake)
