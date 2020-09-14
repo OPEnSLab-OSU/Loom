@@ -24,7 +24,7 @@
 // 	longjmp(env,101);
 // }
 
-const bool Loom_MS5803::Loom_MS5803_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_MS5803>("MS5803") : false;
+const bool Loom_MS5803::Loom_MS5803_Registered = Registry<LoomModule>::add<Loom_MS5803>("MS5803");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MS5803::Loom_MS5803(

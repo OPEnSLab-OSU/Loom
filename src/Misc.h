@@ -19,10 +19,10 @@ namespace Flags
 	constexpr bool defaultTrue( bool val = true)  { return val; }
 	constexpr bool defaultFalse(bool val = false) { return val; }
 
-	const bool InternetAll      = defaultTrue(false);	  ///< All internet modules enabled
-	const bool InternetEthernet = defaultTrue(false); ///< Only Ethernet relevant modules enabled
-	const bool InternetWiFi     = defaultTrue(false);	  ///< Only WiFi relevant modules enabled
-	const bool InternetLTE      = defaultTrue(false);	  ///< Only WiFi relevant modules enabled
+	const bool InternetAll      = defaultTrue(true);	  ///< All internet modules enabled
+	const bool InternetEthernet = defaultTrue(true); ///< Only Ethernet relevant modules enabled
+	const bool InternetWiFi     = defaultTrue(true);	  ///< Only WiFi relevant modules enabled
+	const bool InternetLTE      = defaultTrue(true);	  ///< Only WiFi relevant modules enabled
 
 	const bool Sensors          = defaultTrue(true);
 	const bool Actuators        = defaultTrue(true);

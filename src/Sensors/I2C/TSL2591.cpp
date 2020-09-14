@@ -15,7 +15,7 @@
 
 #include <Adafruit_Sensor.h>
 
-const bool Loom_TSL2591::Loom_TSL2591_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_TSL2591>("TSL2591") : false;
+const bool Loom_TSL2591::Loom_TSL2591_Registered = Registry<LoomModule>::add<Loom_TSL2591>("TSL2591");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TSL2591::Loom_TSL2591(

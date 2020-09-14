@@ -14,7 +14,7 @@
 #include "Bluetooth.h"
 #include "Module_Factory.h"
 
-const bool Loom_Bluetooth::Loom_Bluetooth_Registered = (Flags::Radios) ? Registry<LoomModule>::add<Loom_Bluetooth>("Bluetooth") : false;
+const bool Loom_Bluetooth::Loom_Bluetooth_Registered = Registry<LoomModule>::add<Loom_Bluetooth>("Bluetooth");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Bluetooth::Loom_Bluetooth(

@@ -17,7 +17,7 @@
 #define SerialAT Serial1
 TinyGsm modem(SerialAT);
 
-const bool Loom_LTE::Loom_LTE_Registered = (Flags::InternetLTE || Flags::InternetAll) ? Registry<LoomModule>::add<Loom_LTE>("LTE") : false;
+const bool Loom_LTE::Loom_LTE_Registered = Registry<LoomModule>::add<Loom_LTE>("LTE");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LTE::Loom_LTE(

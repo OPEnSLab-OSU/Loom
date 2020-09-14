@@ -15,7 +15,7 @@
 
 #include <SPI.h>
 
-const bool Loom_SD::Loom_SD_Registered = (Flags::Common) ? Registry<LoomModule>::add<Loom_SD>("SD") : false;
+const bool Loom_SD::Loom_SD_Registered = Registry<LoomModule>::add<Loom_SD>("SD");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SD::Loom_SD(

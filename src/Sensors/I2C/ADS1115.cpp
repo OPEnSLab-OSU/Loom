@@ -14,7 +14,7 @@
 #include "ADS1115.h"
 #include "Module_Factory.h"
 
-const bool Loom_ADS1115::Loom_ADS1115_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_ADS1115>("ADS1115") : false;
+const bool Loom_ADS1115::Loom_ADS1115_Registered = Registry<LoomModule>::add<Loom_ADS1115>("ADS1115");
 //ADS1115 ADS1115(i2c_address);
 
 ///////////////////////////////////////////////////////////////////////////////

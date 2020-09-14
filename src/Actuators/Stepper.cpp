@@ -15,7 +15,7 @@
 
 #include <Wire.h>
 
-const bool Loom_Stepper::Loom_Stepper_Registered = (Flags::Actuators) ? Registry<LoomModule>::add<Loom_Stepper>("Stepper") : false;
+const bool Loom_Stepper::Loom_Stepper_Registered = Registry<LoomModule>::add<Loom_Stepper>("Stepper");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Stepper::Loom_Stepper(LoomManager* manager) 

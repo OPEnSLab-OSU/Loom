@@ -16,7 +16,7 @@
 #include "Sensors/I2C/MS5803.h"
 #include "Module_Factory.h"
 
-bool LoomTempSync::LoomTempSync_Registered = (Flags::Common) ? Registry<LoomModule>::add<LoomTempSync>("LoomTempSync") : false;
+bool LoomTempSync::LoomTempSync_Registered = Registry<LoomModule>::add<LoomTempSync>("LoomTempSync");
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomTempSync::LoomTempSync(   

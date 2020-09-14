@@ -13,7 +13,7 @@
 #include "MMA8451.h"
 #include "Module_Factory.h"
 
-const bool Loom_MMA8451::Loom_MMA8451_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_MMA8451>("MMA8451") : false;
+const bool Loom_MMA8451::Loom_MMA8451_Registered = Registry<LoomModule>::add<Loom_MMA8451>("MMA8451");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MMA8451::Loom_MMA8451(

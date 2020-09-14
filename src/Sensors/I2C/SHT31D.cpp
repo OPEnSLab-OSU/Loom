@@ -13,7 +13,7 @@
 #include "SHT31D.h"
 #include "Module_Factory.h"
 
-const bool Loom_SHT31D::Loom_SHT31D_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_SHT31D>("SHT31D") : false;
+const bool Loom_SHT31D::Loom_SHT31D_Registered = Registry<LoomModule>::add<Loom_SHT31D>("SHT31D");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_SHT31D::Loom_SHT31D(

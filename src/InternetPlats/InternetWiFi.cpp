@@ -14,7 +14,7 @@
 #include "Trust_Anchors.h"
 #include "Module_Factory.h"
 
-const bool Loom_WiFi::Loom_WiFi_Registered = (Flags::InternetWiFi || Flags::InternetAll) ? Registry<LoomModule>::add<Loom_WiFi>("WiFi") : false;
+const bool Loom_WiFi::Loom_WiFi_Registered = Registry<LoomModule>::add<Loom_WiFi>("WiFi");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_WiFi::Loom_WiFi(
