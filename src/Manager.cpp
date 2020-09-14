@@ -202,6 +202,7 @@ void LoomManager::measure()
 		if ( module->category() == LoomModule::Category::Sensor ) {
 			((LoomSensor*)module)->measure();
 		}
+		
 #ifdef LOOM_INCLUDE_SENSORS
 		else if (
 			(module->get_module_type() == LoomModule::Type::Multiplexer) ) {
@@ -211,9 +212,13 @@ void LoomManager::measure()
 			((LoomTempSync*)module)->measure();
 		}
 #endif // ifdef LOOM_INCLUDE_SENSORS
+
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 		else if (module->get_module_type() == LoomModule::Type::NTP) {
 			((LoomNTPSync*)module)->measure();
 		}
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+
 	}
 }
 

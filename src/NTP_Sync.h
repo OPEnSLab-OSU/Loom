@@ -8,13 +8,12 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 #pragma once
 
 #include "Module.h"
 #include "./InternetPlats/InternetPlat.h"
 #include "./RTC/RTC.h"
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -110,4 +109,5 @@ private:
 	
 };
 
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 

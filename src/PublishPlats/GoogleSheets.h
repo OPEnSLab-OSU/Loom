@@ -8,11 +8,10 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 #pragma once
 
 #include "PublishPlat.h"
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -94,3 +93,5 @@ private:
 	const bool tab_matches_dev_id;	///< Whether or not tab of spreadsheet should be based on device name + instance
 
 };
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

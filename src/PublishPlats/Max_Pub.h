@@ -8,7 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifdef LOOM_INCLUDE_MAX
+#if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
 #pragma once
 
 #include "PublishPlat.h"
@@ -103,5 +103,4 @@ private:
 	static const bool Loom_MaxPub_Registered;
 };
 
-#endif // ifdef LOOM_INCLUDE_MAX
-
+#endif // if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))

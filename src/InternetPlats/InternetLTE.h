@@ -8,7 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_LTE
 #pragma once
 
 #define TINY_GSM_MODEM_SARAR4
@@ -18,7 +18,6 @@
 #include <SSLClient.h>
 
 #include "InternetPlat.h"
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -109,5 +108,6 @@ public:
     void      print_config() const override;
     void      print_state() const override;
 
-
 };
+
+#endif // ifdef LOOM_INCLUDE_LTE

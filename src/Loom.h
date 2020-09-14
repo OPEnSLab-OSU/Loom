@@ -45,16 +45,26 @@ namespace std {
 #endif
 
 // InternetPlats
-#include "InternetPlats/InternetEthernet.h"
-#include "InternetPlats/InternetWiFi.h"
-#include "InternetPlats/InternetLTE.h"
+#ifdef LOOM_INCLUDE_WIFI
+    #include "InternetPlats/InternetEthernet.h"
+#endif
+#ifdef LOOM_INCLUDE_ETHERNET
+    #include "InternetPlats/InternetWiFi.h"
+#endif
+#ifdef LOOM_INCLUDE_LTE
+    #include "InternetPlats/InternetLTE.h"
+#endif
 
 // PublishPlats
-#include "PublishPlats/GoogleSheets.h"
-#include "PublishPlats/Max_Pub.h"
+#if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
+    #include "PublishPlats/GoogleSheets.h"
+    #include "PublishPlats/Max_Pub.h"
+#endif
 
 // SubscribePlats
-#include "SubscribePlats/Max_Sub.h"
+#if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
+    #include "SubscribePlats/Max_Sub.h"
+#endif
 
 // LogPlats
 #include "LogPlats/OLED.h"
@@ -97,13 +107,15 @@ namespace std {
     #include "Sensors/SERIAL/K30.h"
     
     #include "Temperature_Sync.h"
+    #include "Multiplexer.h" // this needs to be include after I2C sensors (due to conflict with enableInterrupt macro/function defined by EnableInterrupt library and AS726X sensors)
 #endif
 
 // Other
-#include "NTP_Sync.h"
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+    #include "NTP_Sync.h"
+#endif
 
 // General
 #include "Components/WarmUp/WarmUp_Manager.h"
 #include "Interrupt_Manager.h"
 #include "Sleep_Manager.h"
-#include "Multiplexer.h" // this needs to be include after I2C sensors (due to conflict with enableInterrupt macro/function defined by EnableInterrupt library and AS726X sensors)

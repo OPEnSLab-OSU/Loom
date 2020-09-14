@@ -8,7 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifdef LOOM_INCLUDE_MAX
+#if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
 
 #include "Max_Sub.h"
 #include "../Manager.h"
@@ -126,5 +126,4 @@ void Loom_MaxSub::set_port(const uint16_t port)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-#endif // ifdef LOOM_INCLUDE_MAX
-
+#endif // if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))

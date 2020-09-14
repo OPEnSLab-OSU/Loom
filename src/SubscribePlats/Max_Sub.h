@@ -8,13 +8,12 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifdef LOOM_INCLUDE_MAX
+#if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
 #pragma once
 
 #include "SubscribePlat.h"
 
 #define UDP_RECEIVE_OFFSET 9000		///< UDP receiving port is this value + device instance number
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -108,4 +107,4 @@ private:
 
 };
 
-#endif // ifdef LOOM_INCLUDE_MAX
+#endif // if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))

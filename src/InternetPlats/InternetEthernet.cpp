@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_ETHERNET
 
 #include "InternetEthernet.h"
 #include "Trust_Anchors.h"
@@ -110,3 +111,5 @@ LoomInternetPlat::UDPPtr Loom_Ethernet::open_socket(const uint port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_ETHERNET

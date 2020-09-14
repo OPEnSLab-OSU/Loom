@@ -8,7 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifdef LOOM_INCLUDE_MAX
+#if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
 
 #include "Max_Pub.h"
 #include "../SubscribePlats/Max_Sub.h"
@@ -123,5 +123,4 @@ bool Loom_MaxPub::dispatch(JsonObject json)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-#endif // ifdef LOOM_INCLUDE_MAX
-
+#endif // if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
