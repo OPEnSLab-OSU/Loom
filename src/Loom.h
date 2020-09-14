@@ -12,7 +12,6 @@ This is the Doxygen generated documentation of the Loom library code.
 
 #pragma once
 
-#define LOOM_DEBUG 1
 
 // Find a better home for this thing at some point...
 // Fix for undefined std::__throw_bad_alloc()

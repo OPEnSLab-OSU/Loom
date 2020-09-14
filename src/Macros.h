@@ -12,9 +12,9 @@
 #pragma once
 
 // If LOOM_DEBUG was never specified elsewhere, default to enabled
-#ifndef LOOM_DEBUG
-	#define LOOM_DEBUG 1	///< 1 to enable debug prints (and all LPrint(), LPrintln() calls), 0 to disable
-#endif
+// #ifndef LOOM_DEBUG
+// 	#define LOOM_DEBUG 1	///< 1 to enable debug prints (and all LPrint(), LPrintln() calls), 0 to disable
+// #endif
 
 
 /// \cond DO_NOT_DOCUMENT
