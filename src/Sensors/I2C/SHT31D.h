@@ -31,7 +31,7 @@
 class Loom_SHT31D : public LoomI2CSensor
 {
 private:
-	static bool Loom_SHT31D_Registered;
+	static const bool Loom_SHT31D_Registered;
 
 protected:
 	

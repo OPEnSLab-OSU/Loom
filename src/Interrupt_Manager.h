@@ -51,7 +51,7 @@ class Loom_Interrupt_Manager : public LoomModule
 {
 
 private:
-	static bool Loom_Interrupt_Manager_Registered;
+	static const bool Loom_Interrupt_Manager_Registered;
 
 	/// Contains information defining an interrupt's configuration
 	struct IntDetails {

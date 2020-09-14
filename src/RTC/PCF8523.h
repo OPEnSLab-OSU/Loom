@@ -29,7 +29,7 @@
 class Loom_PCF8523 : public LoomRTC
 {
 private:
-	static bool Loom_PCF8523_Registered;
+	static const bool Loom_PCF8523_Registered;
 
 protected:
 

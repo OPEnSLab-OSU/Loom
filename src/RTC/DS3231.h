@@ -27,7 +27,7 @@
 class Loom_DS3231 : public LoomRTC
 {
 private:
-	static bool Loom_DS3231_Registered;
+	static const bool Loom_DS3231_Registered;
 
 protected:
 

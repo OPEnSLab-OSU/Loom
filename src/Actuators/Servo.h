@@ -81,7 +81,7 @@ public:
 
 private:
 
-	static bool Loom_Servo_Registered;
+	static const bool Loom_Servo_Registered;
 
 };
 

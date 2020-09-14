@@ -11,7 +11,7 @@
 #include "LoRa.h"
 #include "Module_Factory.h"
 
-bool Loom_LoRa::Loom_LoRa_Registered = (Flags::Radios) ? Registry<LoomModule>::add<Loom_LoRa>("LoRa") : false;
+const bool Loom_LoRa::Loom_LoRa_Registered = (Flags::Radios) ? Registry<LoomModule>::add<Loom_LoRa>("LoRa") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::Loom_LoRa(

@@ -32,7 +32,7 @@
 class Loom_ADS1115 : public LoomI2CSensor
 {
 private:
-	static bool Loom_ADS1115_Registered;
+	static const bool Loom_ADS1115_Registered;
 
 protected :
 		///< Underlying ADS1115 sensor manager instance

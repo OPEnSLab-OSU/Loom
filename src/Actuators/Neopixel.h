@@ -96,7 +96,7 @@ public:
 
 private:
 
-	static bool Loom_Neopixel_Registered;
+	static const bool Loom_Neopixel_Registered;
 };
 
 

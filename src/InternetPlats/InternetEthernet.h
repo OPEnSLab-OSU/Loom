@@ -94,7 +94,7 @@ public:
 
 private:
 
-	static bool Loom_Ethernet_Registered;
+	static const bool Loom_Ethernet_Registered;
 	
 };
 

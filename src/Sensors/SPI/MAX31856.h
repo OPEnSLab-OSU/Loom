@@ -29,7 +29,7 @@
 class Loom_MAX31856 : public LoomSPISensor
 {
 private:
-	static bool Loom_MAX31856_Registered;
+	static const bool Loom_MAX31856_Registered;
 
 protected:
 

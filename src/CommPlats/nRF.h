@@ -142,7 +142,7 @@ public:
 
 private:
 
-	static bool Loom_nRF_Registered;
+	static const bool Loom_nRF_Registered;
 	
 };
 

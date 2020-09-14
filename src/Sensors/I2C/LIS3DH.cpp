@@ -12,7 +12,7 @@
 #include "LIS3DH.h"
 #include "Module_Factory.h"
 
-bool Loom_LIS3DH::Loom_LIS3DH_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_LIS3DH>("LIS3DH") : false;
+const bool Loom_LIS3DH::Loom_LIS3DH_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_LIS3DH>("LIS3DH") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LIS3DH::Loom_LIS3DH(

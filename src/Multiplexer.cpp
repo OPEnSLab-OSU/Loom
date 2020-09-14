@@ -32,7 +32,7 @@
 
 #include <Wire.h>
 
-bool Loom_Multiplexer::Loom_Multiplexer_Registered = (false) ? Registry<LoomModule>::add<Loom_Multiplexer>("Multiplexer") : false;
+const bool Loom_Multiplexer::Loom_Multiplexer_Registered = (false) ? Registry<LoomModule>::add<Loom_Multiplexer>("Multiplexer") : false;
 
 // Used to optimize searching for sensors:
 // search addresses in array rather than 0-127 

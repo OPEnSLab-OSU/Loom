@@ -36,7 +36,7 @@
 class Loom_MS5803 : public LoomI2CSensor
 {
 private:
-	static bool Loom_MS5803_Registered;
+	static const bool Loom_MS5803_Registered;
 
 protected:
 

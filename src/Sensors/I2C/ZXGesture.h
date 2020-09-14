@@ -33,7 +33,7 @@
 class Loom_ZXGesture : public LoomI2CSensor
 {
 private:
-	static bool Loom_ZXGesture_Registered;
+	static const bool Loom_ZXGesture_Registered;
 
 public:
 

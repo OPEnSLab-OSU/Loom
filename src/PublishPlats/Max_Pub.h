@@ -102,5 +102,5 @@ protected:
 
 private:
 
-	static bool Loom_MaxPub_Registered;
+	static const bool Loom_MaxPub_Registered;
 };

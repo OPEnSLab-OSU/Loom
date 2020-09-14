@@ -168,7 +168,7 @@ public:
 
 private:
 
-	static bool Loom_SD_Registered;
+	static const bool Loom_SD_Registered;
 
 	/// Print the files on the SD card.
 	/// Recursive for nested folders

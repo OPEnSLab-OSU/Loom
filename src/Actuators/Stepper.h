@@ -87,7 +87,7 @@ public:
 
 private:
 
-	static bool Loom_Stepper_Registered;
+	static const bool Loom_Stepper_Registered;
 	
 };
 

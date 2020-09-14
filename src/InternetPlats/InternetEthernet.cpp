@@ -13,7 +13,7 @@
 #include "Trust_Anchors.h"
 #include "Module_Factory.h"
 
-bool Loom_Ethernet::Loom_Ethernet_Registered = (Flags::InternetEthernet || Flags::InternetAll) ? Registry<LoomModule>::add<Loom_Ethernet>("Ethernet") : false;
+const bool Loom_Ethernet::Loom_Ethernet_Registered = (Flags::InternetEthernet || Flags::InternetAll) ? Registry<LoomModule>::add<Loom_Ethernet>("Ethernet") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Ethernet::Loom_Ethernet(	

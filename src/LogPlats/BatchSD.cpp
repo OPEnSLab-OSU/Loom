@@ -15,7 +15,7 @@
 
 #include <SPI.h>
 
-bool Loom_BatchSD::Loom_BatchSD_Registered = (false) ? Registry<LoomModule>::add<Loom_BatchSD>("BatchSD") : false;
+const bool Loom_BatchSD::Loom_BatchSD_Registered = (false) ? Registry<LoomModule>::add<Loom_BatchSD>("BatchSD") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 

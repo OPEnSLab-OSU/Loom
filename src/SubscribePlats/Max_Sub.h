@@ -30,7 +30,7 @@
 class Loom_MaxSub : public LoomSubscribePlat 
 {
 private:
-	static bool Loom_MaxSub_Registered;
+	static const bool Loom_MaxSub_Registered;
 
 protected:
 	

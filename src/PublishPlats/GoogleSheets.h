@@ -79,7 +79,7 @@ protected:
 
 private:
 	
-	static bool Loom_GoogleSheets_Registered;
+	static const bool Loom_GoogleSheets_Registered;
 
 	/// Private utility send function
 	bool m_serialize_internet_impl(const JsonObject json, Print& write);

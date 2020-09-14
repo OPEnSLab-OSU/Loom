@@ -12,7 +12,7 @@
 #include "Module_Factory.h"
 #include "AS7265X.h"
 
-bool Loom_AS7265X::Loom_AS7265X_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_AS7265X>("AS7265X") : false;
+const bool Loom_AS7265X::Loom_AS7265X_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_AS7265X>("AS7265X") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7265X::Loom_AS7265X(

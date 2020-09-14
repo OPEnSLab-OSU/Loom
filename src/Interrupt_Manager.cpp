@@ -18,7 +18,7 @@
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
-bool Loom_Interrupt_Manager::Loom_Interrupt_Manager_Registered = (Flags::Common) ? Registry<LoomModule>::add<Loom_Interrupt_Manager>("Interrupt_Manager") : false;
+const bool Loom_Interrupt_Manager::Loom_Interrupt_Manager_Registered = (Flags::Common) ? Registry<LoomModule>::add<Loom_Interrupt_Manager>("Interrupt_Manager") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 

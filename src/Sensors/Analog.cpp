@@ -12,7 +12,7 @@
 #include "Analog.h"
 #include "Module_Factory.h"
 
-bool Loom_Analog::Loom_Analog_Registered = (Flags::Common) ? Registry<LoomModule>::add<Loom_Analog>("Analog") : false;
+const bool Loom_Analog::Loom_Analog_Registered = (Flags::Common) ? Registry<LoomModule>::add<Loom_Analog>("Analog") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Analog::Loom_Analog(

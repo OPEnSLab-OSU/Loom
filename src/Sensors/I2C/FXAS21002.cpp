@@ -14,7 +14,7 @@
 
 #include <Adafruit_Sensor.h>
 
-bool Loom_FXAS21002::Loom_FXAS21002_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_FXAS21002>("FXAS21002") : false;
+const bool Loom_FXAS21002::Loom_FXAS21002_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_FXAS21002>("FXAS21002") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXAS21002::Loom_FXAS21002(

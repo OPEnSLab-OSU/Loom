@@ -34,7 +34,7 @@
 class Loom_MPU6050 : public LoomI2CSensor
 {
 private:
-	static bool Loom_MPU6050_Registered;
+	static const bool Loom_MPU6050_Registered;
 
 protected:
 

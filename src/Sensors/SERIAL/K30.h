@@ -29,7 +29,7 @@
 class Loom_K30 : public LoomSerialSensor
 {
 private:
-    static bool Loom_K30_Registered;
+    static const bool Loom_K30_Registered;
 
 protected:
 

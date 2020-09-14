@@ -33,7 +33,7 @@
 class Loom_FXAS21002 : public LoomI2CSensor
 {
 private:
-	static bool Loom_FXAS21002_Registered;
+	static const bool Loom_FXAS21002_Registered;
 
 protected:
 	

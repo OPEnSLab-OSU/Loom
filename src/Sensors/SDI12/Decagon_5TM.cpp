@@ -12,7 +12,7 @@
 #include "Decagon_5TM.h"
 #include "Module_Factory.h"
 
-bool Loom_Decagon5TM::Loom_Decagon5TM_Registered = (false) ? Registry<LoomModule>::add<Loom_Decagon5TM>("Decagon5TM") : false;
+const bool Loom_Decagon5TM::Loom_Decagon5TM_Registered = (false) ? Registry<LoomModule>::add<Loom_Decagon5TM>("Decagon5TM") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Decagon5TM::Loom_Decagon5TM(	

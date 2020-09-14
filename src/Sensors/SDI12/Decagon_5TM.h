@@ -26,7 +26,7 @@
 class Loom_Decagon5TM : public LoomSDI12Sensor
 {
 private:
-	static bool Loom_Decagon5TM_Registered;
+	static const bool Loom_Decagon5TM_Registered;
 
 protected:
 

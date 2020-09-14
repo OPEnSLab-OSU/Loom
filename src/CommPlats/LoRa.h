@@ -141,7 +141,7 @@ public:
 
 private:
 
-	static bool Loom_LoRa_Registered;
+	static const bool Loom_LoRa_Registered;
 	
 };
 

@@ -135,7 +135,7 @@ public:
 
 private:
 
-  static bool Loom_BatchSD_Registered;
+  static const bool Loom_BatchSD_Registered;
 
   /// Creates the proper file name of the file from the batch
   /// @param[in] index    The index of the file in the batch
