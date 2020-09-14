@@ -8,14 +8,12 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_MAX
 #pragma once
 
 #include "PublishPlat.h"
 
-
 #define UDP_SEND_OFFSET 8000	///< UDP sending port is this value + device instance number
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -104,3 +102,6 @@ private:
 
 	static const bool Loom_MaxPub_Registered;
 };
+
+#endif // ifdef LOOM_INCLUDE_MAX
+

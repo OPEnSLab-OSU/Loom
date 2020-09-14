@@ -8,11 +8,10 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_MAX
 #pragma once
 
 #include "SubscribePlat.h"
-
 
 #define UDP_RECEIVE_OFFSET 9000		///< UDP receiving port is this value + device instance number
 
@@ -107,6 +106,6 @@ public:
 
 private:
 
-
 };
 
+#endif // ifdef LOOM_INCLUDE_MAX

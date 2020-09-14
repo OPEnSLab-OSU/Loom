@@ -8,12 +8,13 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_MAX
 
 #include "Max_Sub.h"
 #include "../Manager.h"
 #include "Module_Factory.h"
 
-const bool Loom_MaxSub::Loom_MaxSub_Registered = (false) ? Registry<LoomModule>::addNoDefault<Loom_MaxSub>("MaxSub") : false;
+const bool Loom_MaxSub::Loom_MaxSub_Registered = (Flags::InternetWiFi || Flags::InternetEthernet || Flags::InternetAll) ? Registry<LoomModule>::addNoDefault<Loom_MaxSub>("MaxSub") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxSub::Loom_MaxSub(
@@ -125,5 +126,5 @@ void Loom_MaxSub::set_port(const uint16_t port)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#endif // ifdef LOOM_INCLUDE_MAX
 
