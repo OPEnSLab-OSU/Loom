@@ -1,8 +1,22 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		ADS1115.cpp
+/// @brief		File for Loom_ADS1115 implementation.
+/// @author		
+/// @date		
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#ifdef LOOM_INCLUDE_SENSORS
+#pragma once
+
 #include "ADS1115.h"
 #include "Module_Factory.h"
 
 const bool Loom_ADS1115::Loom_ADS1115_Registered = (Flags::Sensors) ? Registry<LoomModule>::add<Loom_ADS1115>("ADS1115") : false;
 //ADS1115 ADS1115(i2c_address);
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ADS1115::Loom_ADS1115(
 		LoomManager* manager,
@@ -87,3 +101,8 @@ void Loom_ADS1115::package(JsonObject json)
 		if (diff_enabled[0]) data["diff0"] = diff_reads[0];
 		if (diff_enabled[1]) data["diff1"] = diff_reads[1];
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_SENSORS
+

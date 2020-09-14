@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "ZXGesture.h"
 #include "Module_Factory.h"
@@ -137,7 +138,6 @@ void Loom_ZXGesture::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
 void Loom_ZXGesture::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
@@ -156,5 +156,6 @@ void Loom_ZXGesture::package(JsonObject json)
 
 ///////////////////////////////////////////////////////////////////////////////
 
+#endif // ifdef LOOM_INCLUDE_SENSORS
 
 

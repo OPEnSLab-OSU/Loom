@@ -8,9 +8,9 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "Serial_Sensor.h"
-
 
 ////////////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
@@ -40,3 +40,5 @@ void LoomSerialSensor::print_config() const
 void LoomSerialSensor::set_serial(Stream *stream) {
     sensor_serial = stream;
 }
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

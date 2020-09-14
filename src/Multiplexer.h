@@ -9,7 +9,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "Module.h"
@@ -18,7 +18,6 @@
 #undef max
 #include <vector>
 #include <array>
-
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -209,7 +208,5 @@ private:
     std::vector<byte> find_i2c_conflicts();
 };
 
-
-
-
+#endif // ifdef LOOM_INCLUDE_SENSORS
 

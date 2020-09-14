@@ -8,13 +8,12 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
 #include <Adafruit_TSL2591.h>
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -89,5 +88,8 @@ const byte i2c_address			= 0x29,
 private:
 
 };
+
+#endif // ifdef LOOM_INCLUDE_SENSORS
+
 
 

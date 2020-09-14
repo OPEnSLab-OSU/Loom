@@ -8,11 +8,10 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "../Sensor.h"
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -21,7 +20,8 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#serial-sensors)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomSerialSensor : public LoomSensor {
+class LoomSerialSensor : public LoomSensor 
+{
 
 protected:
 
@@ -62,4 +62,7 @@ public:
     void set_serial(Stream* stream);
     
 private:
+
 };
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

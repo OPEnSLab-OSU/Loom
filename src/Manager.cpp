@@ -202,15 +202,17 @@ void LoomManager::measure()
 		if ( module->category() == LoomModule::Category::Sensor ) {
 			((LoomSensor*)module)->measure();
 		}
+#ifdef LOOM_INCLUDE_SENSORS
 		else if (
 			(module->get_module_type() == LoomModule::Type::Multiplexer) ) {
 			((Loom_Multiplexer*)module)->measure();
 		}
-		else if (module->get_module_type() == LoomModule::Type::NTP) {
-			((LoomNTPSync*)module)->measure();
-		}
 		else if (module->get_module_type() == LoomModule::Type::TempSync) {
 			((LoomTempSync*)module)->measure();
+		}
+#endif // ifdef LOOM_INCLUDE_SENSORS
+		else if (module->get_module_type() == LoomModule::Type::NTP) {
+			((LoomNTPSync*)module)->measure();
 		}
 	}
 }

@@ -8,14 +8,13 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
 #undef enableInterrupt
 #include <AS726X.h>
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -122,4 +121,6 @@ const byte i2c_address			= 0x49,
 private:
 
 };
+
+#endif // ifdef LOOM_INCLUDE_SENSORS
 

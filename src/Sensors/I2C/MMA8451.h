@@ -8,14 +8,13 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
 #include <Adafruit_Sensor.h>
 #include <Adafruit_MMA8451.h>
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -104,11 +103,10 @@ const byte i2c_address		= 0x1D,
 /*@{*/ //======================================================================
 
 
-
 private:
 
 };
 
-
+#endif // ifdef LOOM_INCLUDE_SENSORS
 
 

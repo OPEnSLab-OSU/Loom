@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "Multiplexer.h"
 #include "Module_Factory.h"
@@ -433,3 +434,5 @@ void Loom_Multiplexer::power_up() {
 void Loom_Multiplexer::power_down() {
 
 }
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

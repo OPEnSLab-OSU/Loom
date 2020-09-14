@@ -8,13 +8,12 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
 #include <Adafruit_ADS1015.h>
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -122,7 +121,6 @@ public:
 /*@{*/ //======================================================================
 
 
-
 private:
 
 	// Private members (are not inherited)
@@ -131,6 +129,6 @@ private:
 
 };
 
-
+#endif // ifdef LOOM_INCLUDE_SENSORS
 
 

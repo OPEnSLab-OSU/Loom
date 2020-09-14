@@ -1,4 +1,6 @@
 
+#ifdef LOOM_INCLUDE_SENSORS
+
 #include "STEMMA.h"
 #include "Module_Factory.h"
 
@@ -45,3 +47,5 @@ void Loom_STEMMA::package(JsonObject json) {
     data["temperature"] = temperature;
     data["capactive"] = capacitive;
 }
+
+#endif // ifdef LOOM_INCLUDE_SENSORS
