@@ -372,11 +372,6 @@ bool LoomCommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, co
 
 	bool status = serializeMsgPack(json, buffer, max_len);
 
-	// For size comparison 
-	print_module_label();
-	LPrintln(buffer);
-	LPrintln("MsgPack size: ", measureMsgPack(json));
-
 	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
 		LPrintln(buffer);
@@ -393,7 +388,7 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 		print_module_label();
 		LPrintln("Received: ", (const char*)buffer);
 		print_module_label();
-		LPrintln("Len: ", strlen(buffer));
+		LPrintln("Received Json Memory Usage: ", measureMsgPack(messageJson));
 	}
 
 	messageJson.clear();
@@ -403,13 +398,6 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 		LPrintln("Failed to parse MsgPack");
 		return false;
 	}
-
-	// For size comparison of Json: it shows an increase json memory uage than transmit
-	print_module_label();
-	LPrintln("Received: ", (const char*)buffer);
-	print_module_label();
-	LPrintln("Len: ", strlen(buffer));
-	LPrintln("Received Json Memory Usage: ", messageJson.memoryUsage());
 	
 	bool status = json.set(messageJson.as<JsonObject>());
 	if (!status) return false;
