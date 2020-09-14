@@ -8,7 +8,6 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #pragma once
 
 #include "Module.h"
@@ -110,9 +109,6 @@ class LoomNTPSync;
 class LoomTempSync;
 
 
-// class FactoryBase;
-
-
 
 #define SERIAL_BAUD		115200	///< Serial Baud Rate
 #define MAX_SERIAL_WAIT	20000	///< Maximum number of milliseconds to wait for user given 'begin_serial(true)'
@@ -186,7 +182,6 @@ public:
 	/// @param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
 	/// @param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause
 	LoomManager(
-			// const FactoryBase*		factory_ptr,
 			const char*			device_name			= "Device",
 			const uint8_t		instance			= 1,
 			const DeviceType	device_type			= DeviceType::NODE,

@@ -8,7 +8,6 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-// #include "Module.h"
 #include "Manager.h"
 #include "Module_Factory.h"
 #include "Macros.h"
@@ -32,7 +31,6 @@
 #include <algorithm>
 
 
-
 ///////////////////////////////////////////////////////////////////////////////
 const char* LoomManager::enum_device_type_string(const DeviceType t)
 {
@@ -46,7 +44,6 @@ const char* LoomManager::enum_device_type_string(const DeviceType t)
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomManager::LoomManager(
-		// const FactoryBase*			factory_ptr,
 		const char*				device_name,
 		const uint8_t			instance,
 		const DeviceType		device_type,
@@ -54,7 +51,6 @@ LoomManager::LoomManager(
 		const Verbosity			package_verbosity,
 		const uint16_t			interval
 	)
-	// : Factory(factory_ptr)
 	: instance(instance)
 	, print_verbosity(print_verbosity)
 	, package_verbosity(package_verbosity)
@@ -202,7 +198,7 @@ void LoomManager::measure()
 		if ( module->category() == LoomModule::Category::Sensor ) {
 			((LoomSensor*)module)->measure();
 		}
-		
+
 #ifdef LOOM_INCLUDE_SENSORS
 		else if (
 			(module->get_module_type() == LoomModule::Type::Multiplexer) ) {
