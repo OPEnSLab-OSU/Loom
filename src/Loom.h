@@ -30,15 +30,19 @@ namespace std {
 #include "Manager.h"
 
 // Actuators
-#include "Actuators/Neopixel.h"
-#include "Actuators/Relay.h"
-#include "Actuators/Servo.h"
-#include "Actuators/Stepper.h"
+#ifdef LOOM_INCLUDE_ACTUATORS
+    #include "Actuators/Neopixel.h"
+    #include "Actuators/Relay.h"
+    #include "Actuators/Servo.h"
+    #include "Actuators/Stepper.h"
+#endif
 
 // CommPlats
-#include "CommPlats/LoRa.h"
-#include "CommPlats/nRF.h"
-#include "CommPlats/Bluetooth.h"
+#ifdef LOOM_INCLUDE_RADIOS
+    #include "CommPlats/LoRa.h"
+    #include "CommPlats/nRF.h"
+    #include "CommPlats/Bluetooth.h"
+#endif
 
 // InternetPlats
 #include "InternetPlats/InternetEthernet.h"
@@ -65,35 +69,38 @@ namespace std {
 #include "Sensors/Analog.h"
 #include "Sensors/Digital.h"
 
-#include "Sensors/I2C/ADS1115.h"
-#include "Sensors/I2C/AS7262.h"
-#include "Sensors/I2C/AS7263.h"
-#include "Sensors/I2C/AS7265X.h"
-#include "Sensors/I2C/FXAS21002.h"
-#include "Sensors/I2C/FXOS8700.h"
-#include "Sensors/I2C/LIS3DH.h"
-#include "Sensors/I2C/MB1232.h"
-#include "Sensors/I2C/MMA8451.h"
-#include "Sensors/I2C/MPU6050.h"
-#include "Sensors/I2C/MS5803.h"
-#include "Sensors/I2C/SHT31D.h"
-#include "Sensors/I2C/TMP007.h"
-#include "Sensors/I2C/TSL2561.h"
-#include "Sensors/I2C/TSL2591.h"
-#include "Sensors/I2C/ZXGesture.h"
-#include "Sensors/I2C/STEMMA.h"
+#ifdef LOOM_INCLUDE_SENSORS
+    #include "Sensors/I2C/ADS1115.h"
+    #include "Sensors/I2C/AS7262.h"
+    #include "Sensors/I2C/AS7263.h"
+    #include "Sensors/I2C/AS7265X.h"
+    #include "Sensors/I2C/FXAS21002.h"
+    #include "Sensors/I2C/FXOS8700.h"
+    #include "Sensors/I2C/LIS3DH.h"
+    #include "Sensors/I2C/MB1232.h"
+    #include "Sensors/I2C/MMA8451.h"
+    #include "Sensors/I2C/MPU6050.h"
+    #include "Sensors/I2C/MS5803.h"
+    #include "Sensors/I2C/SHT31D.h"
+    #include "Sensors/I2C/TMP007.h"
+    #include "Sensors/I2C/TSL2561.h"
+    #include "Sensors/I2C/TSL2591.h"
+    #include "Sensors/I2C/ZXGesture.h"
+    #include "Sensors/I2C/STEMMA.h"
 
-#include "Sensors/SDI12/Decagon_5TM.h"
-#include "Sensors/SDI12/Decagon_GS3.h"
+    #include "Sensors/SDI12/Decagon_5TM.h"
+    #include "Sensors/SDI12/Decagon_GS3.h"
 
-#include "Sensors/SPI/MAX31855.h"
-#include "Sensors/SPI/MAX31856.h"
+    #include "Sensors/SPI/MAX31855.h"
+    #include "Sensors/SPI/MAX31856.h"
 
-#include "Sensors/SERIAL/K30.h"
+    #include "Sensors/SERIAL/K30.h"
+    
+    #include "Temperature_Sync.h"
+#endif
 
 // Other
 #include "NTP_Sync.h"
-#include "Temperature_Sync.h"
 
 // General
 #include "Components/WarmUp/WarmUp_Manager.h"
