@@ -8,6 +8,9 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_RADIOS
+#pragma once
+
 #include "Bluetooth.h"
 #include "Module_Factory.h"
 
@@ -133,3 +136,8 @@ bool Loom_Bluetooth::test_send_str(const char* string)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_RADIOS
+
+
+

@@ -8,7 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_RADIOS
 #pragma once
 
 #include "Module.h"
@@ -225,3 +225,5 @@ protected:
 	void	add_packet_result(const bool did_drop);
 
 };
+
+#endif // ifdef LOOM_INCLUDE_RADIOS

@@ -8,6 +8,8 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_RADIOS
+
 #include "LoRa.h"
 #include "Module_Factory.h"
 
@@ -174,3 +176,10 @@ bool Loom_LoRa::receive_blocking_raw(uint8_t* dest, const uint8_t maxlen, const 
 	driver.sleep();
 	return status;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_RADIOS
+
+
+

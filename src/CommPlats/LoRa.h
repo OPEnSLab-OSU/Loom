@@ -8,7 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_RADIOS
 #pragma once
 
 #include "CommPlat.h"
@@ -24,7 +24,6 @@
 /// LoRa radio frequence.
 /// Hardware specific, Tx must match Rx
 #define RF95_FREQ 915.0
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -145,4 +144,5 @@ private:
 	
 };
 
+#endif // ifdef LOOM_INCLUDE_RADIOS
 

@@ -8,7 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_RADIOS
 #pragma once
 
 #include "CommPlat.h"
@@ -146,4 +146,5 @@ private:
 	
 };
 
+#endif // ifdef LOOM_INCLUDE_RADIOS
 
