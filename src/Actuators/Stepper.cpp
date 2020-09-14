@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_ACTUATORS
 
 #include "Stepper.h"
 #include "Module_Factory.h"
@@ -76,3 +77,5 @@ void Loom_Stepper::move_steps(const uint8_t motor, const uint16_t steps, const u
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

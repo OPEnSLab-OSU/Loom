@@ -8,13 +8,12 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_ACTUATORS
 #pragma once
 
 #include "Actuator.h"
 
 #include <Adafruit_NeoPixel.h>
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -99,4 +98,4 @@ private:
 	static const bool Loom_Neopixel_Registered;
 };
 
-
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

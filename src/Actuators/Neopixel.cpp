@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_ACTUATORS
 
 #include "Neopixel.h"
 #include "Module_Factory.h"
@@ -137,3 +138,4 @@ void Loom_Neopixel::set_color(const uint8_t port, const uint8_t chain_num, const
 
 ///////////////////////////////////////////////////////////////////////////////
 
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

@@ -8,7 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_ACTUATORS
 #pragma once
 
 #include "Actuator.h"
@@ -91,3 +91,4 @@ private:
 	
 };
 
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

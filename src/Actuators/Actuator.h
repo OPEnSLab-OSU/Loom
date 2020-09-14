@@ -8,7 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_ACTUATORS
 #pragma once
 
 #include "Module.h"
@@ -57,3 +57,4 @@ private:
 
 };
 
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

@@ -8,18 +8,16 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_ACTUATORS
 #pragma once
 
 #include "Actuator.h"
 
 #include <Adafruit_PWMServoDriver.h>
 
-
 /// Number of possible servos.
 /// Dependent on servo controller breakout.
 #define NUM_SERVOS 8
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -85,3 +83,4 @@ private:
 
 };
 
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

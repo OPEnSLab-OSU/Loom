@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_ACTUATORS
 
 #include "Servo.h"
 #include "Module_Factory.h"
@@ -86,3 +87,4 @@ void Loom_Servo::set_degree(const uint8_t servo, const uint8_t degree)
 
 ///////////////////////////////////////////////////////////////////////////////
 
+#endif // ifdef LOOM_INCLUDE_ACTUATORS
