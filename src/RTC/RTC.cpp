@@ -138,18 +138,18 @@ LoomRTC::LoomRTC(
 		const char*							module_name,
 		const LoomModule::Type	module_type,
 		const TimeZone					timezone,
-		const bool							use_utc_time
+		const bool							use_local_time
 	) 
 	: LoomModule(manager, module_name, module_type )
 	, timezone(timezone)
-	, use_utc_time(use_utc_time)
+	, use_local_time(use_local_time)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomRTC::print_config() const
 {
 	LoomModule::print_config();
-	LPrintln("\tUse UTC Time      : ", use_utc_time);
+	LPrintln("\tUse UTC Time      : ", use_local_time);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -306,7 +306,13 @@ void LoomRTC::set_rtc_to_compile_time()
 	print_time();
 
 	// Adjust to UTC time if enabled
-	if (use_utc_time) convert_local_to_utc();
+	if (!use_local_time) convert_local_to_utc();
+	/*
+	else {
+		// Add a function that will do the calculation for daylight saving 
+		// Look at GitHub issue and function of convert_local_to_utc
+	}
+	*/
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -332,13 +338,18 @@ void LoomRTC::convert_local_to_utc(const bool to_utc)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomRTC::convert_daylight_to_standard(){
+	
+}
+
+///////////////////////////////////////////////////////////////////////////////
 bool LoomRTC::rtc_validity_check()
 {
 	DateTime time_check = now();
 	int y = time_check.year();
 
 	// A basic validity check of date
-	if ( (y < 2018) || (y > 2050)) {
+	if ( (y < 2019) || (y > 2050)) {
 		print_module_label();
 		LPrint("RTC Time is invalid: ", y, '\n');
 		set_rtc_to_compile_time();
@@ -365,13 +376,13 @@ void LoomRTC::link_device_manager(LoomManager* LM)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::time_adjust(const DateTime time, const bool is_utc)
+void LoomRTC::time_adjust(const DateTime time, const bool is_local)
 {
 	_adjust(time);
 
 	// Check if source time is not in desired mode
-	if (use_utc_time != is_utc) {
-		convert_local_to_utc(use_utc_time);
+	if (use_local_time != is_local) {
+		convert_local_to_utc(false);
 	}
 
 	print_module_label();

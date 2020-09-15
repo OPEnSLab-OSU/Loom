@@ -16,9 +16,9 @@
 Loom_PCF8523::Loom_PCF8523(
 		LoomManager* manager,
 		const TimeZone		timezone,
-		const bool			use_utc_time
+		const bool			use_local_time
 	)
-	: LoomRTC(manager, "PCF8523", Type::PCF8523, timezone, use_utc_time )
+	: LoomRTC(manager, "PCF8523", Type::PCF8523, timezone, use_local_time )
 {
 	init();
 	clear_alarms();

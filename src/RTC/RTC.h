@@ -47,7 +47,7 @@ protected:
 
 	TimeZone	timezone;			///< The TimeZone to use
 
-	bool		use_utc_time;		///< Whether or not use UTC time, else local time
+	bool		use_local_time;		///< Whether or not use local time, else UTC time
 
 	char		datestring[20];		///< Latest saved string of the Date (year/month/day)
 	char		timestring[20];		///< Latest saved string of the time (hour:minute:second)
@@ -62,13 +62,13 @@ public:
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	timezone		Which timezone device is in
-	/// @param[in]	use_utc_time	True for UTC time, false for local time
+	/// @param[in]	use_local_time	True for local time, false for UTC time
 	LoomRTC(
 			LoomManager* manager,
 			const char*				module_name,
 			const LoomModule::Type	module_type,
 			const TimeZone			timezone,
-			const bool				use_utc_time
+			const bool				use_local_time
 		);
 
 	/// Destructor
@@ -210,6 +210,9 @@ protected:
 	/// Check if current RTC time is valid (not necessarily correct)
 	/// @return	True if valid
 	bool			rtc_validity_check();
+
+
+	void 			convert_daylight_to_standard();
 
 };
 
