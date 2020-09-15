@@ -14,7 +14,7 @@
 #include "../Manager.h"
 #include "Module_Factory.h"
 
-const bool Loom_GoogleSheets::Loom_GoogleSheets_Registered = (Flags::InternetWiFi || Flags::InternetEthernet || Flags::InternetAll || Flags::InternetLTE) ? Registry<LoomModule>::addNoDefault<Loom_GoogleSheets>("GoogleSheets") : false;
+const bool Loom_GoogleSheets::Loom_GoogleSheets_Registered = Registry<LoomModule>::addNoDefault<Loom_GoogleSheets>("GoogleSheets");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(

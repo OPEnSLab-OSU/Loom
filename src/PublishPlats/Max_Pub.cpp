@@ -15,7 +15,7 @@
 #include "../Manager.h"
 #include "Module_Factory.h"
 
-const bool Loom_MaxPub::Loom_MaxPub_Registered = (Flags::InternetWiFi || Flags::InternetEthernet || Flags::InternetAll) ? Registry<LoomModule>::addNoDefault<Loom_MaxPub>("MaxPub") : false;
+const bool Loom_MaxPub::Loom_MaxPub_Registered = Registry<LoomModule>::addNoDefault<Loom_MaxPub>("MaxPub");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxPub::Loom_MaxPub(

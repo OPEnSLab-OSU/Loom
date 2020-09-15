@@ -14,7 +14,7 @@
 #include "../Manager.h"
 #include "Module_Factory.h"
 
-const bool Loom_MaxSub::Loom_MaxSub_Registered = (Flags::InternetWiFi || Flags::InternetEthernet || Flags::InternetAll) ? Registry<LoomModule>::addNoDefault<Loom_MaxSub>("MaxSub") : false;
+const bool Loom_MaxSub::Loom_MaxSub_Registered = Registry<LoomModule>::addNoDefault<Loom_MaxSub>("MaxSub") : false;
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxSub::Loom_MaxSub(
