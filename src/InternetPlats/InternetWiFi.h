@@ -87,7 +87,9 @@ public:
 	UDPPtr			open_socket(const uint port) override;
 
 	/// Package IP with ID for MaxMSP implementation
+#ifdef LOOM_INCLUDE_MAX
 	void			package(JsonObject json) override;
+#endif
 
 //=============================================================================
 ///@name	PRINT INFORMATION

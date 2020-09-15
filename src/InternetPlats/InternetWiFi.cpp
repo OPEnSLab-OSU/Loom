@@ -150,6 +150,8 @@ const char* Loom_WiFi::m_wifi_status_to_string(const uint8_t status) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+#ifdef LOOM_INCLUDE_MAX
+
 void Loom_WiFi::package(JsonObject json)
 {
 	//JsonObject data = get_module_data_object(json, module_name);
@@ -161,6 +163,8 @@ void Loom_WiFi::package(JsonObject json)
 	tmp.add(ip[3]);
 	//data["IP"] = WiFi.localIP();
 }
+
+#endif // ifdef LOOM_INCLUDE_MAX
 
 ///////////////////////////////////////////////////////////////////////////////
 
