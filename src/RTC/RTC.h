@@ -33,9 +33,9 @@ public:
 
 	/// Different time zones
 	enum class TimeZone { 
-		WAT = 0, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
-		ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
-		ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
+		WAT = 0, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, AKDT, 
+		AKST, HST, SST, GMT, BST, CET, EET, EEST, BRT, ZP4, ZP5, 
+		ZP6, ZP7, AWST, ACST, AEST 
 	};
 
 private: 
@@ -67,7 +67,7 @@ public:
 			LoomManager* manager,
 			const char*				module_name,
 			const LoomModule::Type	module_type,
-			const TimeZone			timezone,
+			TimeZone			timezone,
 			const bool				use_local_time
 		);
 
@@ -211,8 +211,14 @@ protected:
 	/// @return	True if valid
 	bool			rtc_validity_check();
 
-
+	/// Convert time between daylight saving time and standard time
 	void 			convert_daylight_to_standard();
+
+	/// Convert the time in the US daylight saving and standard
+	void 			us_daylight_to_standard();
+
+	///	Convert the time in the EU summer time and standard
+	void			eu_daylight_to_standard();
 
 };
 

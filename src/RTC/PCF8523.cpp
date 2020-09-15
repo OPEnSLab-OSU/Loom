@@ -15,7 +15,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_PCF8523::Loom_PCF8523(
 		LoomManager* manager,
-		const TimeZone		timezone,
+		TimeZone		timezone,
 		const bool			use_local_time
 	)
 	: LoomRTC(manager, "PCF8523", Type::PCF8523, timezone, use_local_time )

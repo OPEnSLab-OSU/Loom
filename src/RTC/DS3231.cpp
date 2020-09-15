@@ -15,7 +15,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DS3231::Loom_DS3231(
 		LoomManager* manager,
-		const TimeZone		timezone,
+		TimeZone		timezone,
 		const bool			use_local_time
 	)
 	: LoomRTC(manager, "DS3231", Type::DS3231, timezone, use_local_time )
