@@ -8,7 +8,6 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #pragma once
 
 #include "LogPlat.h"
@@ -16,10 +15,8 @@
 #include <SdFat.h>
 #include "../RTC/RTC.h"
 
-
 // See if there is any difference to use the SD breakout
 // enum SD_Version { FEATHERWING, BREAKOUT };
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -167,8 +164,6 @@ public:
 
 
 private:
-
-	static const bool Loom_SD_Registered;
 
 	/// Print the files on the SD card.
 	/// Recursive for nested folders

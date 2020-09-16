@@ -140,8 +140,6 @@ public:
 
 private:
 
-	static const bool Loom_LoRa_Registered;
-	
 };
 
 #endif // ifdef LOOM_INCLUDE_RADIOS

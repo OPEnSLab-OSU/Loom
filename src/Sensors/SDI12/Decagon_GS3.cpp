@@ -13,7 +13,9 @@
 #include "Decagon_GS3.h"
 #include "Module_Factory.h"
 
-const bool Loom_DecagonGS3::Loom_DecagonGS3_Registered = Registry<LoomModule>::add<Loom_DecagonGS3>("DecagonGS3");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_DecagonGS3, "DecagonGS3");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DecagonGS3::Loom_DecagonGS3(

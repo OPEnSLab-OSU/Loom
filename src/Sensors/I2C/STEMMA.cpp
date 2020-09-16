@@ -4,8 +4,11 @@
 #include "STEMMA.h"
 #include "Module_Factory.h"
 
-const bool Loom_STEMMA::Loom_STEMMA_Registered = Registry<LoomModule>::add<Loom_STEMMA>("STEMMA");
+///////////////////////////////////////////////////////////////////////////////
 
+REGISTER(LoomModule, Loom_STEMMA, "STEMMA");
+
+///////////////////////////////////////////////////////////////////////////////
 Loom_STEMMA::Loom_STEMMA(
 LoomManager* manager,
 const byte i2c_address,

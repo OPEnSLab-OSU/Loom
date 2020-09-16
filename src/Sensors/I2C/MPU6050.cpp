@@ -17,7 +17,9 @@
 // For some reason Wire is not recognized like that
 MPU6050 mpu6050(Wire);
 
-const bool Loom_MPU6050::Loom_MPU6050_Registered = Registry<LoomModule>::add<Loom_MPU6050>("MPU6050");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_MPU6050, "MPU6050");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MPU6050::Loom_MPU6050(

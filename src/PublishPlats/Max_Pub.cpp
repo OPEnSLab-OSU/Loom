@@ -15,7 +15,9 @@
 #include "../Manager.h"
 #include "Module_Factory.h"
 
-const bool Loom_MaxPub::Loom_MaxPub_Registered = Registry<LoomModule>::addNoDefault<Loom_MaxPub>("MaxPub");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER_NODEFAULT(LoomModule, Loom_MaxPub, "MaxPub");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxPub::Loom_MaxPub(

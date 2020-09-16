@@ -15,7 +15,9 @@
 
 #include <Adafruit_Sensor.h>
 
-const bool Loom_FXAS21002::Loom_FXAS21002_Registered = Registry<LoomModule>::add<Loom_FXAS21002>("FXAS21002");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_FXAS21002, "FXAS21002");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXAS21002::Loom_FXAS21002(

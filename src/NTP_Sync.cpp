@@ -14,7 +14,9 @@
 #include "Manager.h"
 #include "Module_Factory.h"
 
-bool LoomNTPSync::LoomNTPSync_Registered = Registry<LoomModule>::add<LoomNTPSync>("LoomNTPSync");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_NTPSync, "NTPSync");
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomNTPSync::LoomNTPSync(

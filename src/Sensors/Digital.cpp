@@ -8,14 +8,15 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #include "Digital.h"
 #include "Module_Factory.h"
 
 // Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
 const uint8_t Loom_Digital::pin_nums[DIGITAL_COUNT] = {5, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19};
 
-const bool Loom_Digital::Loom_Digital_Registered = Registry<LoomModule>::add<Loom_Digital>("Digital");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_Digital, "Digital");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Digital::Loom_Digital(	

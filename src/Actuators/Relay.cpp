@@ -13,7 +13,9 @@
 #include "Relay.h"
 #include "Module_Factory.h"
 
-const bool Loom_Relay::Loom_Relay_Registered = Registry<LoomModule>::add<Loom_Relay>("Relay");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_Relay, "Relay");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Relay::Loom_Relay( 

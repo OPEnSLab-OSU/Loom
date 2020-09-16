@@ -29,9 +29,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_TMP007 : public LoomI2CSensor
 {
-private:
-	static const bool Loom_TMP007_Registered;
-
 protected:
 
 	Adafruit_TMP007 inst_tmp007;	///< Underlying TMP007 sensor manager instance

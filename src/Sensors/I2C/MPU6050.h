@@ -32,9 +32,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MPU6050 : public LoomI2CSensor
 {
-private:
-	static const bool Loom_MPU6050_Registered;
-
 protected:
 
 	float temp;				///< Temperature. Units: °C

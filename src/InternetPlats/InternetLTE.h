@@ -36,9 +36,6 @@
 
 class Loom_LTE: public LoomInternetPlat
 {
-private:
-    static const bool Loom_LTE_Registered;
-
 protected:
 
     const char* APN; ///< LTE Network name

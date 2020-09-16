@@ -13,7 +13,9 @@
 #include "LoRa.h"
 #include "Module_Factory.h"
 
-const bool Loom_LoRa::Loom_LoRa_Registered = Registry<LoomModule>::add<Loom_LoRa>("LoRa");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_LoRa, "LoRa");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LoRa::Loom_LoRa(

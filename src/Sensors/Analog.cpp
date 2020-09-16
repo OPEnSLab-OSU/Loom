@@ -12,7 +12,9 @@
 #include "Analog.h"
 #include "Module_Factory.h"
 
-const bool Loom_Analog::Loom_Analog_Registered = Registry<LoomModule>::add<Loom_Analog>("Analog");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_Analog, "Analog");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Analog::Loom_Analog(
@@ -43,6 +45,9 @@ Loom_Analog::Loom_Analog(
 	, battery(0.)
 	, temperature(temperature)
 {
+
+	LPrintln("REGULAR ANALOG CTOR");
+
 	// Set Analog Read Resolution
 	analogReadResolution(read_resolution);
 
@@ -82,7 +87,11 @@ Loom_Analog::Loom_Analog(LoomManager* manager, JsonArrayConst p)
 		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10],
 		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13],
 		p[14] )
-	{}
+{
+	LPrintln("JSON ANALOG CTOR");
+	serializeJsonPretty(p, Serial);
+	LPrintln("\n");
+}
 
 
 

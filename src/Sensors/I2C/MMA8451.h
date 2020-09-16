@@ -31,9 +31,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MMA8451 : public LoomI2CSensor
 {
-private:
-	static const bool Loom_MMA8451_Registered;
-
 protected:
 
 	Adafruit_MMA8451 MMA;			///< Underlying MMA8451 sensor manager instance

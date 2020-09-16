@@ -123,8 +123,6 @@ public:
 
 private:
 
-	static const bool Loom_Bluetooth_Registered;
-
 };
 
 #endif // ifdef LOOM_INCLUDE_RADIOS

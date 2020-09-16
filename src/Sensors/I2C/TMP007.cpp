@@ -13,7 +13,9 @@
 #include "TMP007.h"
 #include "Module_Factory.h"
 
-const bool Loom_TMP007::Loom_TMP007_Registered = Registry<LoomModule>::add<Loom_TMP007>("TMP007");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_TMP007, "TMP007");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TMP007::Loom_TMP007(

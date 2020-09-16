@@ -100,8 +100,6 @@ public:
 
 private:
 
-	static const bool Loom_WiFi_Registered;
-
 	/// Converts wifi status codes (WL_*) into human readable strings
 	static const char* m_wifi_status_to_string(const uint8_t status);
 };

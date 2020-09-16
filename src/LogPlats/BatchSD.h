@@ -8,13 +8,11 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #pragma once
 
 #include "LogPlat.h"
 
 #include <SdFat.h>
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -131,11 +129,7 @@ public:
 ///@name	MISCELLANEOUS
 /*@{*/ //======================================================================
 
-
-
 private:
-
-  static const bool Loom_BatchSD_Registered;
 
   /// Creates the proper file name of the file from the batch
   /// @param[in] index    The index of the file in the batch

@@ -28,9 +28,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_PCF8523 : public LoomRTC
 {
-private:
-	static const bool Loom_PCF8523_Registered;
-
 protected:
 
 	PCF8523		rtc_inst;		///< Underlying PCF8523 manager instance

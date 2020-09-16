@@ -13,7 +13,9 @@
 #include "LIS3DH.h"
 #include "Module_Factory.h"
 
-const bool Loom_LIS3DH::Loom_LIS3DH_Registered = Registry<LoomModule>::add<Loom_LIS3DH>("LIS3DH");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_LIS3DH, "LIS3DH");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LIS3DH::Loom_LIS3DH(

@@ -13,7 +13,9 @@
 #include "MAX31855.h"
 #include "Module_Factory.h"
 
-const bool Loom_MAX31855::Loom_MAX31855_Registered = Registry<LoomModule>::add<Loom_MAX31855>("MAX31855");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_MAX31855, "MAX31855");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MAX31855::Loom_MAX31855(

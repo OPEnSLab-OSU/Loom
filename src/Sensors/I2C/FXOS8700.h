@@ -31,8 +31,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_FXOS8700 : public LoomI2CSensor
 {
-private:
-	static const bool Loom_FXOS8700_Registered;
 protected:
 
 	Adafruit_FXOS8700	inst_FXOS8700;		///< Underlying FXOS8700 sensor manager instance

@@ -13,7 +13,9 @@
 #include "Module_Factory.h"
 #include "AS7265X.h"
 
-const bool Loom_AS7265X::Loom_AS7265X_Registered = Registry<LoomModule>::add<Loom_AS7265X>("AS7265X");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_AS7265X, "AS7265X");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7265X::Loom_AS7265X(

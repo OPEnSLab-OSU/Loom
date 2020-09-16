@@ -8,13 +8,11 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #pragma once
 
 #include "LogPlat.h"
 
 #include <Adafruit_SSD1306.h>
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -178,8 +176,6 @@ public:
 	const static char* enum_oled_freeze_string(const FreezeType f);
 
 private:
-
-	static const bool Loom_OLED_Registered;
 
 	/// Last display update time.
 	/// Used to manage scrolling

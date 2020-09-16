@@ -8,7 +8,6 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #pragma once
 
 #include "Module.h"
@@ -51,7 +50,6 @@ class Loom_Interrupt_Manager : public LoomModule
 {
 
 private:
-	static const bool Loom_Interrupt_Manager_Registered;
 
 	/// Contains information defining an interrupt's configuration
 	struct IntDetails {

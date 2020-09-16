@@ -134,8 +134,6 @@ public:
 
 private:
 	
-	static const bool Loom_Sleep_Manager_Registered;
-
 	/// Handles pre-sleep operations
 	void		pre_sleep();
 

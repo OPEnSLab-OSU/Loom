@@ -14,7 +14,9 @@
 #include "Trust_Anchors.h"
 #include "Module_Factory.h"
 
-const bool Loom_Ethernet::Loom_Ethernet_Registered = Registry<LoomModule>::add<Loom_Ethernet>("Ethernet");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_Ethernet, "Ethernet");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Ethernet::Loom_Ethernet(	

@@ -75,8 +75,6 @@ public:
 
 private:
 
-	static bool LoomNTPSync_Registered;
-
 	/// The actual synchronization function
 	/// @return Time obtained from InternetPlat
 	DateTime m_sync_rtc();

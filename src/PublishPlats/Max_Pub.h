@@ -100,7 +100,6 @@ protected:
 
 private:
 
-	static const bool Loom_MaxPub_Registered;
 };
 
 #endif // if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))

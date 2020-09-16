@@ -26,9 +26,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_DS3231 : public LoomRTC
 {
-private:
-	static const bool Loom_DS3231_Registered;
-
 protected:
 
 	RTC_DS3231	rtc_inst;	///< Underlying DS3231 manager instance

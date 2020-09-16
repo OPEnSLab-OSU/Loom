@@ -95,7 +95,6 @@ public:
 
 private:
 
-	static const bool Loom_Neopixel_Registered;
 };
 
 #endif // ifdef LOOM_INCLUDE_ACTUATORS

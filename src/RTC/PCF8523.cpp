@@ -12,7 +12,9 @@
 #include "PCF8523.h"
 #include "Module_Factory.h"
 
-const bool Loom_PCF8523::Loom_PCF8523_Registered = Registry<LoomModule>::add<Loom_PCF8523>("PCF8523");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_PCF8523, "PCF8523");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_PCF8523::Loom_PCF8523(

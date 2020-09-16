@@ -19,9 +19,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_STEMMA : public LoomI2CSensor
 {
-private:
-    static const bool Loom_STEMMA_Registered;
-
 protected:
 
     /// Adafruit Seesaw object.

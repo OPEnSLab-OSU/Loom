@@ -34,9 +34,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MS5803 : public LoomI2CSensor
 {
-private:
-	static const bool Loom_MS5803_Registered;
-
 protected:
 
 	MS_5803		inst_MS5803;	///< Underlying MS5803 sensor manager instance

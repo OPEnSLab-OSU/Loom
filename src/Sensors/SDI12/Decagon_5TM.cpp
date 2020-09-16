@@ -13,7 +13,9 @@
 #include "Decagon_5TM.h"
 #include "Module_Factory.h"
 
-const bool Loom_Decagon5TM::Loom_Decagon5TM_Registered = Registry<LoomModule>::add<Loom_Decagon5TM>("Decagon5TM");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_Decagon5TM, "Decagon5TM");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Decagon5TM::Loom_Decagon5TM(	

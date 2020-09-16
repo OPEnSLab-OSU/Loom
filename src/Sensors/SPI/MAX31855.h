@@ -27,9 +27,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MAX31855 : public LoomSPISensor
 {
-private:
-	static const bool Loom_MAX31855_Registered;
-
 protected:
 
 	Adafruit_MAX31855 inst_max;		///< Underlying MAX31855 sensor manager instance

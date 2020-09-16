@@ -13,7 +13,9 @@
 #include "K30.h"
 #include "Module_Factory.h"
 
-const bool Loom_K30::Loom_K30_Registered = Registry<LoomModule>::addNoDefault<Loom_K30>("K30");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER_NODEFAULT(LoomModule, Loom_K30, "K30");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_K30::Loom_K30(LoomManager* manager,

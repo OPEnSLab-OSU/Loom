@@ -13,7 +13,9 @@
 #include "Neopixel.h"
 #include "Module_Factory.h"
 
-const bool Loom_Neopixel::Loom_Neopixel_Registered = Registry<LoomModule>::add<Loom_Neopixel>("Neopixel");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_Neopixel, "Neopixel");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Neopixel::Loom_Neopixel(

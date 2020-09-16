@@ -16,9 +16,7 @@
 #include <RF24Network.h>
 #include <RF24.h>
 
-
 #define NRF_MESSAGE_SIZE 120	///< Max nRF message size
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -142,8 +140,6 @@ public:
 
 private:
 
-	static const bool Loom_nRF_Registered;
-	
 };
 
 #endif // ifdef LOOM_INCLUDE_RADIOS

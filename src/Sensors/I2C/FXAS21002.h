@@ -31,9 +31,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_FXAS21002 : public LoomI2CSensor
 {
-private:
-	static const bool Loom_FXAS21002_Registered;
-
 protected:
 	
 	Adafruit_FXAS21002C		inst_FXAS21002;		///< Underlying FXAS21002 sensor manager instance

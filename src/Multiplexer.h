@@ -177,8 +177,6 @@ public:
 /*@{*/ //======================================================================
 
 private:
-
-	static const bool Loom_Multiplexer_Registered;
 	
 	/// Select communication with sensor at index port
 	/// @param[in]	port	The port to open I2C communication on

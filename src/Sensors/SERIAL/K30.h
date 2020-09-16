@@ -27,20 +27,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_K30 : public LoomSerialSensor
 {
-    
-private:
-    static const bool Loom_K30_Registered;
-
-protected:
+    protected:
 
     float CO2_levels;
     //Command packet to read Co2 (see app note)
     byte read_CO2[7] = {0xFE, 0X44, 0X00, 0X08, 0X02, 0X9F, 0X25};  //Command packet to read Co2 (see app note)
     //create an array to store the response
     byte sensor_response[7] = {0, 0, 0, 0, 0, 0, 0};
-    
-    //
-    
+
     //Using pin 12 for Rx and pin 11 for Tx
     Uart* K30_Serial = nullptr; //Sets up a virtual serial port
     

@@ -33,7 +33,11 @@
 
 #include <Wire.h>
 
-const bool Loom_Multiplexer::Loom_Multiplexer_Registered = Registry<LoomModule>::add<Loom_Multiplexer>("Multiplexer");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_Multiplexer, "Multiplexer");
+
+///////////////////////////////////////////////////////////////////////////////
 
 // Used to optimize searching for sensors:
 // search addresses in array rather than 0-127 

@@ -21,7 +21,6 @@
 /// Dependent on stepper controller breakout.
 #define NUM_STEPPERS 2
 
-
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Stepper actuator module.
@@ -87,8 +86,6 @@ public:
 
 private:
 
-	static const bool Loom_Stepper_Registered;
-	
 };
 
 #endif // ifdef LOOM_INCLUDE_ACTUATORS

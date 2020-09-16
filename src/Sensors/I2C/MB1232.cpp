@@ -17,7 +17,9 @@
 #define ChangeAddressCommand1 	0xAA	///< These are the two commands that need to be sent in sequence to change the sensor address
 #define ChangeAddressCommand2 	0xA5	///< These are the two commands that need to be sent in sequence to change the sensor address
 
-const bool Loom_MB1232::Loom_MB1232_Registered = Registry<LoomModule>::add<Loom_MB1232>("MB1232");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_MB1232, "MB1232");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MB1232::Loom_MB1232(

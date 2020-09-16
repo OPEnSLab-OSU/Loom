@@ -12,7 +12,9 @@
 #include "DS3231.h"
 #include "Module_Factory.h"
 
-const bool Loom_DS3231::Loom_DS3231_Registered = Registry<LoomModule>::add<Loom_DS3231>("DS3231");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_DS3231, "DS3231");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DS3231::Loom_DS3231(

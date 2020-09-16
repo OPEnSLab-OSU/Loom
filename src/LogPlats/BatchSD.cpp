@@ -8,23 +8,22 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #include "BatchSD.h"
 #include "Manager.h"
 #include "Module_Factory.h"
 
 #include <SPI.h>
 
-const bool Loom_BatchSD::Loom_BatchSD_Registered = Registry<LoomModule>::add<Loom_BatchSD>("BatchSD");
-
 ///////////////////////////////////////////////////////////////////////////////
 
+REGISTER(LoomModule, Loom_BatchSD, "BatchSD");
+
+///////////////////////////////////////////////////////////////////////////////
 Loom_BatchSD::Loom_BatchSD(
     LoomManager* manager,
     const bool			enable_rate_filter,
     const uint16_t		min_filter_delay,
     const byte			chip_select
-
     )
     : LoomLogPlat(manager, "BatchSD", Type::BATCHSD, enable_rate_filter, min_filter_delay )
     , chip_select(chip_select)
@@ -229,3 +228,5 @@ void Loom_BatchSD::package(JsonObject json) {
 
   data["Number"] = batch_counter+1;
 }
+
+///////////////////////////////////////////////////////////////////////////////

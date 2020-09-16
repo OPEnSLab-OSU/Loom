@@ -53,7 +53,6 @@ public:
 		const FactoryFunctionJson ctorJson; ///< Pointer to the CreationJSON function which will be used to CTOR form JSON
 	};
 
-	static bool add(const char*, const FactoryFunction, const FactoryFunctionJson); ///< Adds a new Factory Pair derived from args to lookup table
 	
 	template <class U>
 	static bool add(const char*);
@@ -65,11 +64,13 @@ public:
 	static bool addNoDefault(const char*);
 
 	static T* create(const char*, LoomManager *scope); ///< Returns an instance of type T created by using the FactoryFunction coresponding to the provided name
-	static T* create(JsonVariant, LoomManager *);		///< Returns an instance of type T created from provided JSON
+	static T *create(JsonVariant, LoomManager *);   ///< Returns an instance of type T created from provided JSON
 
 	static void print_registry();
 
 private:
+
+	static bool add(const char*, const FactoryFunction, const FactoryFunctionJson); ///< Adds a new Factory Pair derived from args to lookup table
 
 	/// Use Meyer's singleton to prevent SIOF
 	static std::vector<FactoryPair>& getFactoryTable();
@@ -124,7 +125,7 @@ T* Registry<T>::create(const char* name, LoomManager* scope)
 	auto lookUp = getFactoryTable();
 	for (auto elem : lookUp) {
 		// Add string processing for fuzzy search and debug suggestions?
-		if (!strcmp(name, elem.name)) {
+		if (!strcmp(name, elem.name) && elem.ctor) {
 			return elem.ctor(scope); // On match, return a *new* item of type name
 		}
 	} // No match found, exiting for
@@ -133,14 +134,31 @@ T* Registry<T>::create(const char* name, LoomManager* scope)
 
 ///////////////////////////////////////////////////////////////////////////////
 template <typename T>
-T* Registry<T>::create(JsonVariant target, LoomManager* scope)
+T *Registry<T>::create(JsonVariant target, LoomManager *scope)
 {
 	const char *name = target["name"].as<char *>();
 	auto lookUp = getFactoryTable();
 
+	LPrintln("HERE");
+	LPrintln("name: ", name);
+	serializeJsonPretty(target, Serial);
+
+// if no params array, create default if elem.ctor not nullptr
+
+
 	for (auto elem : lookUp) {
-		if (!strcmp(name, elem.name)) {
-			return elem.ctor(scope);
+		if (!strcmp(name, elem.name) && elem.ctorJson) 
+		{
+			// ADD MORE ERROR CHECKING HERE
+			if (target.containsKey("params")) {
+				// JsonArrayConst params = target["params"].as<JsonArrayConst>();
+				// return elem.ctorJson(scope, params);
+				return elem.ctorJson(scope, target["params"].as<JsonArrayConst>());
+			} else {
+				return nullptr;
+			}
+
+					
 		}
 	}
 	return nullptr;
@@ -171,5 +189,16 @@ void Registry<T>::print_registry()
 		LPrintln(" - ", elem.name);
 	}
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+#define REGISTER(Factory, ModuleName, Key) \
+	static const bool ModuleName##_entry = Registry<Factory>::add<ModuleName>(Key)
+
+#define REGISTER_NODEFAULT(Factory, ModuleName, Key) \
+	static const bool ModuleName##_entry = Registry<Factory>::addNoDefault<ModuleName>(Key)
+
+#define REGISTER_NOJSON(Factory, ModuleName, Key) \
+	static const bool ModuleName##_entry = Registry<Factory>::addNoJson<ModuleName>(Key)
 
 ///////////////////////////////////////////////////////////////////////////////

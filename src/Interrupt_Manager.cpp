@@ -8,7 +8,6 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #include "Interrupt_Manager.h"
 #include "Sleep_Manager.h"
 #include "RTC/RTC.h"
@@ -18,14 +17,15 @@
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
-const bool Loom_Interrupt_Manager::Loom_Interrupt_Manager_Registered = Registry<LoomModule>::add<Loom_Interrupt_Manager>("Interrupt_Manager");
+///////////////////////////////////////////////////////////////////////////////
+
+REGISTER(LoomModule, Loom_Interrupt_Manager, "Interrupt_Manager");
 
 ///////////////////////////////////////////////////////////////////////////////
 
 bool Loom_Interrupt_Manager::interrupt_triggered[InteruptRange] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 ///////////////////////////////////////////////////////////////////////////////
-
 const ISRFuncPtr Loom_Interrupt_Manager::default_ISRs[InteruptRange] =
 {
 	default_ISR_0,  default_ISR_1,  default_ISR_2,  default_ISR_3,

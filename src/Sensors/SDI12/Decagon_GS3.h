@@ -24,8 +24,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_DecagonGS3 : public LoomSDI12Sensor
 {
-private:
-	static const bool Loom_DecagonGS3_Registered;
 
 protected:
 
