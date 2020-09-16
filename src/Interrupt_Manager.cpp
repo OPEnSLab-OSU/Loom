@@ -45,10 +45,10 @@ const char* Loom_Interrupt_Manager::interrupt_type_to_string(const uint8_t type)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Interrupt_Manager::Loom_Interrupt_Manager( 
+Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 		LoomManager* manager,
 		LoomRTC*		RTC_Inst
-	) 
+	)
 	: LoomModule(manager, "InterruptManager", Type::Interrupt_Manager )
 	, RTC_Inst(RTC_Inst)
 {
@@ -56,7 +56,7 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 	interrupts_enabled = true;
 
 	for (auto i = 0; i < InteruptRange; i++) {
-		int_settings[i] = {nullptr, 0, ISR_Type::IMMEDIATE, true};
+		int_settings[i] = {0, nullptr, 0, ISR_Type::IMMEDIATE, true};
 	}
 	for (auto i = 0; i < MaxTimerCount; i++) {
 		timer_settings[i] = {nullptr, 0, false, false};
@@ -87,8 +87,8 @@ void Loom_Interrupt_Manager::print_config() const
 
 	// print out registered interrupts
 	LPrintln("\tRegistered ISRs     : " );
-	for (auto i = 0; i < InteruptRange; i++) {
-		LPrint("\t\tPin ", i, " | ISR: ", (int_settings[i].run_type == ISR_Type::IMMEDIATE) ? "Immediate" : "Check Flag");
+	for (auto i = 0; i < int_count; i++) {
+		LPrint("\t\tPin ", int_settings[i].pin, " | ISR: ", (int_settings[i].run_type == ISR_Type::IMMEDIATE) ? "Immediate" : "Check Flag");
 		LPrintln(" | Type: ", interrupt_type_to_string(int_settings[i].type), " | ", (int_settings[i].enabled) ? "Enabled" : "Disabled" );
 
 	}
@@ -132,7 +132,7 @@ void Loom_Interrupt_Manager::link_device_manager(LoomManager* LM)
 
 	if ( LM ){
 
-		// Set manager's interrupt manager 
+		// Set manager's interrupt manager
 		LM->interrupt_manager = this;
 
 		// Get RTC from manager if needed
@@ -141,7 +141,7 @@ void Loom_Interrupt_Manager::link_device_manager(LoomManager* LM)
 		}
 
 		// Link to sleep manager
-		auto sleep_manager = LM->get_sleep_manager(); 
+		auto sleep_manager = LM->get_sleep_manager();
 		if ( sleep_manager ) {
 			link_sleep_manager(sleep_manager);
 			sleep_manager->link_interrupt_manager(this);
@@ -169,73 +169,98 @@ void Loom_Interrupt_Manager::run_pending_ISRs() {
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::set_enable_interrupt(const uint32_t pin, const bool state)
 {
-	if (pin < InteruptRange) {
-		int_settings[pin].enabled = state;
-	} 
+	int i;
+	for(i = 0; i < int_count; i++){
+		if(int_settings[i].pin == pin){
+			int_settings[i].enabled = state;
+			break;
+		}
+	}
+	if(int_count == i){
+		print_module_label();
+		LPrintln("Error: Pin ", pin, " has not been registered yet");
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::register_ISR(const uint32_t pin, const ISRFuncPtr ISR, const uint32_t signal_type, const ISR_Type run_type)
 {
-	if (pin < InteruptRange) {
+	int i;
+	print_module_label();
+	LPrint("Registering ISR on pin ", pin);
+	LPrint(" to be triggered on ", signal_type);
+	LPrintln(" and is ", (run_type==ISR_Type::IMMEDIATE) ? "immediate" : "delay" );
 
-		print_module_label();
-		LPrint("Registering ISR on pin ", pin);
-		LPrint(" to be triggered on ", signal_type);
-		LPrintln(" and is ", (run_type==ISR_Type::IMMEDIATE) ? "immediate" : "delay" );
-
-		// Save interrupt details
-		int_settings[pin] = { ISR, signal_type, run_type, (ISR) ? true : false };
-
-		// Set pin mode
-		pinMode(pin, INPUT_PULLUP);
-
-		// If ISR provided
-		if (ISR != nullptr) {
-
-			ISRFuncPtr tmpISR = (run_type==ISR_Type::IMMEDIATE) ? ISR : default_ISRs[pin];
-
-			attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (signal_type<5) ? signal_type : 0 );
-			attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (signal_type<5) ? signal_type : 0 );
-
-		} 
-		// If no ISR, detach interrupt pin
-		else {
-			detachInterrupt(digitalPinToInterrupt(pin));
+	// Save interrupt details
+	for(i = 0; i < int_count; i++){
+		if(int_settings[i].pin == pin){
+				int_settings[i] = { pin, ISR, signal_type, run_type, (ISR) ? true : false };
+				break;
 		}
+	}
+	if(i == int_count) {
+		int_settings[i] = { pin, ISR, signal_type, run_type, (ISR) ? true : false };
+		int_count++;
+	}
 
-		// Ensure triggered flag false 
-		interrupt_triggered[pin] = false;
+
+
+	// Set pin mode
+	pinMode(pin, INPUT_PULLUP);
+
+	// If ISR provided
+	if (ISR != nullptr) {
+
+		ISRFuncPtr tmpISR = (run_type==ISR_Type::IMMEDIATE) ? ISR : default_ISRs[i];
+
+		attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (signal_type<5) ? signal_type : 0 );
+		attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (signal_type<5) ? signal_type : 0 );
+
 	}
+	// If no ISR, detach interrupt pin
 	else {
-		LPrintln("Cannot register an interrupt on pin number greater than 16");
-		// TODO: THROW ERROR
+		detachInterrupt(digitalPinToInterrupt(pin));
 	}
+
+	// Ensure triggered flag false
+	interrupt_triggered[i] = false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Interrupt_Manager::reconnect_interrupt(const uint32_t pin)
 {
-	IntDetails settings = int_settings[pin];
+	int i;
+	IntDetails settings;
+	for(i = 0; i < int_count; i++){
+		if(int_settings[i].pin == pin){
+	 		settings = int_settings[i];
+			break;
+		}
+	}
+
+	if(i == int_count) {
+		print_module_label();
+		LPrintln("Error: Pin ", pin, " has not been registered yet");
+		return false;
+	}
 
 	// Set pin mode
 	// pinMode(pin, INPUT_PULLUP);  // was causing freezing
 
 	// If ISR provided
 	if (settings.ISR != nullptr) {
-		ISRFuncPtr tmpISR = (settings.run_type == ISR_Type::IMMEDIATE) ? settings.ISR : default_ISRs[pin];
+		ISRFuncPtr tmpISR = (settings.run_type == ISR_Type::IMMEDIATE) ? settings.ISR : default_ISRs[i];
 		attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (settings.type<5) ? settings.type : 0 );
 		attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (settings.type<5) ? settings.type : 0 );
-	} 
+	}
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::unregister_ISR(const uint32_t pin, const uint32_t signal_type)
 {
 	// Set interrupt to be the default
-	if (pin < InteruptRange) {
-		register_ISR(pin, nullptr, signal_type, ISR_Type::IMMEDIATE);
-	}
+	register_ISR(pin, nullptr, signal_type, ISR_Type::IMMEDIATE);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -244,7 +269,7 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 	if (interrupts_enabled) {
 
 		// For each interrupt pin
-		for (int i = 0; i < InteruptRange; i++) {
+		for (int i = 0; i < int_count; i++) {
 
 			// If pin enabled and bottom half ISR provided
 			// ISR will be Null if no interrupt on that pin,
@@ -264,7 +289,7 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 				// }
 
 
-				// // set triggered flag false 
+				// // set triggered flag false
 				interrupt_triggered[i] = false;
 			}
 		}
@@ -274,12 +299,21 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::interrupt_reset(const uint32_t pin)
 {
+	int i;
 	detachInterrupt(digitalPinToInterrupt(pin));
 	delay(20);
 
-	if (int_settings[pin].ISR != nullptr) {
-		// Attach interrupt with specified type
-		attachInterrupt(digitalPinToInterrupt(pin), int_settings[pin].ISR, (int_settings[pin].type<5) ? int_settings[pin].type : 0 );
+
+	for(i = 0; i < int_count; i++){
+		if (int_settings[i].pin == pin && int_settings[i].ISR != nullptr) {
+			// Attach interrupt with specified type
+			attachInterrupt(digitalPinToInterrupt(pin), int_settings[i].ISR, (int_settings[i].type<5) ? int_settings[i].type : 0 );
+			break;
+		}
+	}
+	if(i == int_count){
+		print_module_label();
+		LPrintln("Error: Pin ", pin, " has not been registered yet");
 	}
 }
 
@@ -313,13 +347,13 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 		print_module_label();
 		LPrintln("Wont wake from alarm in the past, increasing time to following day");
 		// future_time = future + TimeSpan(1,0,0,0);    // might not work if DateTime is several days in past
-		
+
 		// Adjust future_time to be following day at same time intended
-		future_time = DateTime(	now.year(), 
-								now.month(), 
-								now.day(), 
-								future_time.hour(), 
-								future_time.minute(), 
+		future_time = DateTime(	now.year(),
+								now.month(),
+								now.day(),
+								future_time.hour(),
+								future_time.minute(),
 								future_time.second() )
 								+ TimeSpan(1,0,0,0);
 
@@ -345,7 +379,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(const uint8_t hour, const uint8_t minu
 	// Call RTC_alarm_at(DateTime future_time) with that time today
 	// That function will adjust to following day if necessary
 	DateTime now = RTC_Inst->now();
-	return RTC_alarm_at( DateTime(now.year(), now.month(), now.day(), hour, minute, second) ); 
+	return RTC_alarm_at( DateTime(now.year(), now.month(), now.day(), hour, minute, second) );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -369,7 +403,7 @@ void Loom_Interrupt_Manager::check_timers()
 		if ( (timer_settings[i].enabled) && (timers[i].isExpired()) ){
 			// Run associated ISR
 			timer_settings[i].ISR();
-			
+
 			// If set to repeat, start again, else disable
 			if (timer_settings[i].repeat) {
 				timers[i].repeat();
@@ -409,7 +443,7 @@ void Loom_Interrupt_Manager::clear_timer(const uint8_t timer_num)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::register_internal_timer(const uint duration, const ISRFuncPtr ISR, const bool repeat, const ISR_Type run_type)		
+void Loom_Interrupt_Manager::register_internal_timer(const uint duration, const ISRFuncPtr ISR, const bool repeat, const ISR_Type run_type)
 {
 	internal_timer.ISR		= ISR;
 	internal_timer.run_type	= run_type;
@@ -466,7 +500,7 @@ void Loom_Interrupt_Manager::internal_timer_enable(const bool enable)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::unregister_internal_timer()
 {
-	rtcCounter.disableAlarm();  
+	rtcCounter.disableAlarm();
 	rtcCounter.detachInterrupt();
 
 	internal_timer.ISR		= nullptr;
