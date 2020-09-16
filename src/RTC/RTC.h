@@ -49,6 +49,8 @@ protected:
 
 	bool		use_local_time;		///< Whether or not use local time, else UTC time
 
+	bool		converted;			///< Whether or not converted daylight saving / summer time or not
+
 	char		datestring[20];		///< Latest saved string of the Date (year/month/day)
 	char		timestring[20];		///< Latest saved string of the time (hour:minute:second)
 

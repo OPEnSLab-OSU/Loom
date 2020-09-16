@@ -131,6 +131,7 @@ LoomRTC::LoomRTC(
 	: LoomModule(manager, module_name, module_type )
 	, timezone(timezone)
 	, use_local_time(use_local_time)
+	, converted(false)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -279,7 +280,6 @@ void LoomRTC::init()
 	// Make sure the RTC time is even valid, if not, set to compile time
 	rtc_validity_check();
 
-
 	// Query Time and print
 	print_time();
 }
@@ -299,6 +299,7 @@ void LoomRTC::set_rtc_to_compile_time()
 
 	// Adjust to daylight saving time or standard time if local time is enabled
 	else{
+		converted = false;
 		convert_daylight_to_standard();
 	}
 	
@@ -355,77 +356,97 @@ void LoomRTC::convert_daylight_to_standard(){
 void LoomRTC::us_daylight_to_standard(){
 	DateTime time = now();
 	if(time.dayOfTheWeek() == 0 && time.month() == 3 && 
-	   time.day() >= 8 && time.day() <= 16 && time.hour() == 2 && 
-	   time.minute() == 0 && time.second() == 0){
+	   time.day() >= 8 && time.day() <= 16 && time.hour() >= 2 && 
+	   time.minute() >= 0 && time.second() >= 0 && converted == false){
 		   print_module_label();
 		   LPrintln("Switch to Daylight Saving Time");
 		   time = time + TimeSpan(0, 1, 0, 0);
 			_adjust(time);
+			converted = true;
 		   	switch(timezone) {
 				case TimeZone::AST :
 					timezone = TimeZone::ADT;
+					LPrintln("Switched from AST to ADT");
 					break;
 				
 				case TimeZone::EST :
 					timezone = TimeZone::EDT;
+					LPrintln("Switched from EST to EDT");
 					break;
 
 				case TimeZone::CST :
 					timezone = TimeZone::CDT;
+					LPrintln("Switched from CST to CDT");
 					break;
 
 				case TimeZone::MST :
 					timezone = TimeZone::MDT;
+					LPrintln("Switched from MST to MDT");
 					break;
 
 				case TimeZone::PST :
 					timezone = TimeZone::PDT;
+					LPrintln("Switched from PST to PDT");
 					break;
 
 				case TimeZone::AKST :
 					timezone = TimeZone::AKDT;
+					LPrintln("Switched from AKST to AKDT");
 					break;
 				
 				default:
-					LPrintln("Something went wrong, please submit a Github issue");
+					LPrintln("If you get false time read, please submit a Github issue. If not, ignore this message.");
+					break;
 			   }
 		
 	   }
 	else if(time.dayOfTheWeek() == 0 && time.month() == 11 && 
-	   		time.day() >= 1 && time.day() <= 8 && time.hour() == 2 && 
-	   		time.minute() == 0 && time.second() == 0){
+	   		time.day() >= 1 && time.day() <= 8 && time.hour() >= 2 && 
+	   		time.minute() >= 0 && time.second() >= 0 && converted == false){
 				print_module_label();
 				LPrintln("Switch to Standard Time");
 				time = time + TimeSpan(0, -1, 0, 0);
-				_adjust(time);				
+				_adjust(time);	
+				converted = true;
+				print_module_label();			
 				switch(timezone) {
 					case TimeZone::ADT :
 						timezone = TimeZone::AST;
+						LPrintln("Switched from ADT to AST");
 						break;
 				
 					case TimeZone::EDT :
 						timezone = TimeZone::EST;
+						LPrintln("Switched from EDT to EST");
 						break;
 
 					case TimeZone::CDT :
 						timezone = TimeZone::CST;
+						LPrintln("Switched from CDT to CST");
 						break;
 
 					case TimeZone::MDT :
 						timezone = TimeZone::MST;
+						LPrintln("Switched from MDT to MST");
 						break;
 
 					case TimeZone::PDT :
 						timezone = TimeZone::PST;
+						LPrintln("Switched from PDT to PST");
 						break;
 
 					case TimeZone::AKDT :
 						timezone = TimeZone::AKST;
+						LPrintln("Switched from AKDT to AKST");
 						break;
 					
 					default:
-						LPrintln("Something went wrong, please submit a Github issue");
+						LPrintln("If you get false time read, please submit a Github issue. If not, ignore this message.");
+						break;
 			   }
+		}
+		else if (!(time.dayOfTheWeek() == 0) && converted == true){
+			converted = false;
 		}
 }
 
@@ -434,45 +455,59 @@ void LoomRTC::eu_daylight_to_standard(){
 
 	DateTime time = now();
 	if(time.dayOfTheWeek() == 0 && time.month() == 3 && 
-	   time.day() >= 25 && time.day() <= 31 && time.hour() == 1 && 
-	   time.minute() == 0 && time.second() == 0){
+	   time.day() >= 25 && time.day() <= 31 && time.hour() >= 1 && 
+	   time.minute() >= 0 && time.second() >= 0 && converted == false){
 		   print_module_label();
 		   LPrintln("Switch to Summer Time");
 		   time = time + TimeSpan(0, 1, 0, 0);
 		   _adjust(time);
+			converted = true;
+		   print_module_label();
 				switch(timezone) {
 					case TimeZone::GMT :
 						timezone = TimeZone::BST;
+						LPrintln("Switched from GMT to BST");
 						break;
 
 					case TimeZone::EET :
 						timezone = TimeZone::EEST;
+						LPrintln("Switched from EET to EEST");
 						break;
 
 					default:
-						LPrintln("Something went wrong, please submit a Github issue");
+						LPrintln("If you get false time read, please submit a Github issue. If not, ignore this message.");
+						break;
 				}
 	   }
 	else if(time.dayOfTheWeek() == 0 && time.month() == 10 && 
-	   		time.day() >= 25 && time.day() <= 31 && time.hour() == 1 && 
-	   		time.minute() == 0 && time.second() == 0){
+	   		time.day() >= 25 && time.day() <= 31 && time.hour() >= 1 && 
+	   		time.minute() >= 0 && time.second() >= 0 && converted == false){
 				print_module_label();
 				LPrintln("Switch to Standard Time");
 				time = time + TimeSpan(0, -1, 0, 0);
 				_adjust(time);
+				converted = true;
+				print_module_label();
 				switch(timezone) {
 					case TimeZone::BST :
 						timezone = TimeZone::GMT;
+						LPrintln("Switched from BST to GMT");
 						break;
 
 					case TimeZone::EEST :
 						timezone = TimeZone::EET;
+						LPrintln("Switched from EEST to EET");
 						break;
 				
 					default:
-						LPrintln("Something went wrong, please submit a Github issue");				
+						LPrintln("If you get false time read, please submit a Github issue. If not, ignore this message.");		
+						break;		
 				}
 			}
+	
+	else if (!(time.dayOfTheWeek() == 0) && converted == true){
+		converted = false;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
