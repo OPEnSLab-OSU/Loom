@@ -11,6 +11,10 @@
 #include "PublishPlat.h"
 #include "Manager.h"
 
+// #include "../InternetPlats/InternetWiFi.h"
+// #include "../InternetPlats/InternetEthernet.h"
+// #include "../InternetPlats/InternetLTE.h"
+
 ///////////////////////////////////////////////////////////////////////////////
 LoomPublishPlat::LoomPublishPlat(
 		const char*				module_name,
@@ -36,13 +40,13 @@ void LoomPublishPlat::second_stage_ctor()
 	LoomInternetPlat* temp;
 	switch (internet_type) {
 		case LoomModule::Type::Ethernet:
-			temp = (LoomInternetPlat*)&(device_manager->Ethernet() );
+			temp = (LoomInternetPlat*)(device_manager->find_module(LoomModule::Type::Ethernet));
 			break;
 		case LoomModule::Type::WiFi:
-			temp = (LoomInternetPlat*)&(device_manager->WiFi() );
+			temp = (LoomInternetPlat*)(device_manager->find_module(LoomModule::Type::WiFi));
 			break;
 		case LoomModule::Type::LTE:
-			temp = (LoomInternetPlat*)&(device_manager->LTE() );
+			temp = (LoomInternetPlat*)(device_manager->find_module(LoomModule::Type::LTE));
 			break;
 		default:
 			temp = nullptr;

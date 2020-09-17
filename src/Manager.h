@@ -23,91 +23,10 @@
 
 // Forward declarations, specify that these classes
 // exist but are defined in their own respective files
-// class LoomModule;
-class LoomSensor;
-class LoomActuator;
 class LoomRTC;
-class LoomCommPlat;
-class LoomLogPlat;
-
-// Actuators
-class Loom_Neopixel;
-class Loom_Relay;
-class Loom_Servo;
-class Loom_Stepper;
-
-// Sensors
-class Loom_Analog;
-class Loom_Digital;
-
-// I2C
-class Loom_ADS1115;
-class Loom_AS7262;
-class Loom_AS7263;
-class Loom_AS7265X;
-class Loom_FXAS21002;
-class Loom_FXOS8700;
-class Loom_LIS3DH;
-class Loom_MB1232;
-class Loom_MMA8451;
-class Loom_MPU6050;
-class Loom_MS5803;
-class Loom_SHT31D;
-class Loom_TMP007;
-class Loom_TSL2561;
-class Loom_TSL2591;
-class Loom_ZXGesture;
-class Loom_STEMMA;
-
-// SDI12
-class Loom_Decagon5TM;
-class Loom_DecagonGS3;
-
-// SPI
-class Loom_MAX31855;
-class Loom_MAX31856;
-
-// SERIAL
-class Loom_K30;
-
-// CommPlats
-class Loom_LoRa;
-class Loom_nRF;
-class Loom_Bluetooth;
-
-// LogPlats
-class Loom_OLED;
-class Loom_SD;
-class Loom_BatchSD;
-
-// InternetPlats
-class LoomInternetPlat;
-class Loom_Ethernet;
-class Loom_WiFi;
-class Loom_LTE;
-
-// PublishPlats
-class LoomPublishPlat;
-class Loom_SpoolPublish;
-class Loom_GoogleSheets;
-class Loom_MaxPub;
-
-// SubscribePlats
-class LoomSubscribePlat;
-class Loom_MaxSub;
-
-// RTC
-class Loom_DS3231;
-class Loom_PCF8523;
-
-// Other
-class Loom_WarmUp_Manager;
 class Loom_Sleep_Manager;
 class Loom_Interrupt_Manager;
-class Loom_Multiplexer;
-class LoomNTPSync;
-class LoomTempSync;
-
+class Loom_WarmUp_Manager;
 
 
 #define SERIAL_BAUD		115200	///< Serial Baud Rate
@@ -126,10 +45,6 @@ class LoomTempSync;
 ///////////////////////////////////////////////////////////////////////////////
 class LoomManager
 {
-
-// private:
-
-	// const FactoryBase* Factory;
 
 public:
 
@@ -152,10 +67,10 @@ protected:
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
 
 	// Sub Managers, so placed here for ease of access.
-	Loom_WarmUp_Manager* warmup_manager = nullptr;
-	Loom_Interrupt_Manager*	interrupt_manager = nullptr;
-	Loom_Sleep_Manager*		sleep_manager = nullptr;
-	LoomRTC*				rtc_module = nullptr;
+	Loom_WarmUp_Manager*	warmup_manager		= nullptr;
+	Loom_Interrupt_Manager*	interrupt_manager	= nullptr;
+	Loom_Sleep_Manager*		sleep_manager		= nullptr;
+	LoomRTC*				rtc_module			= nullptr;
 
 	/// Vectors of LoomModule pointers
 	std::vector<LoomModule*>		modules;
@@ -486,89 +401,10 @@ public:
 		return nullptr;
 	}
 
-	///////////////////////////////////////////////////////////////////////////
-
-	// Other
-	Loom_WarmUp_Manager&		WarmUpManager(const uint8_t idx = 0);
-	Loom_Sleep_Manager&			SleepManager(const uint8_t idx = 0);
-	Loom_Interrupt_Manager&		InterruptManager(const uint8_t idx = 0);
-	Loom_Multiplexer&			Multiplexer(const uint8_t idx = 0);
-	LoomNTPSync&				NTP(const uint8_t idx = 0);
-	LoomTempSync&				TempSync(const uint8_t idx = 0);
-
-	// CommPlats
-	Loom_LoRa&			LoRa(const uint8_t idx = 0);
-	Loom_nRF&			nRF(const uint8_t idx = 0);
-	Loom_Bluetooth& 	Bluetooth(const uint8_t idx = 0);
-
-	// LogPlats
-	Loom_OLED&			OLED(const uint8_t idx = 0);
-	Loom_SD&			SDCARD(const uint8_t idx = 0);
-	Loom_BatchSD&	BATCHSD(const uint8_t idx = 0);
-
-	// InternetPlats
-	LoomInternetPlat&	InternetPlat(const uint8_t idx = 0);
-	Loom_Ethernet&		Ethernet(const uint8_t idx = 0);
-	Loom_WiFi&			WiFi(const uint8_t idx = 0);
-	Loom_LTE&				LTE(const uint8_t idx = 0);
-
-	// PublishPlats
-	LoomPublishPlat& 	PublishPlat(const uint8_t idx = 0);
-	Loom_GoogleSheets&	GoogleSheets(const uint8_t idx = 0);
-	Loom_SpoolPublish&  Spool(const uint8_t idx = 0);
-	Loom_MaxPub&		MaxPub(const uint8_t idx = 0);
-
-	// SubscribePlats
-	Loom_MaxSub&		MaxSub(const uint8_t idx = 0);
-
-
-	// RTC
-	Loom_DS3231&		DS3231(const uint8_t idx = 0);
-	Loom_PCF8523&		PCF8523(const uint8_t idx = 0);
-
-	// Actuators
-	Loom_Neopixel&		Neopixel(const uint8_t idx = 0);
-	Loom_Relay&			Relay(const uint8_t idx = 0);
-	Loom_Servo&			Servo(const uint8_t idx = 0);
-	Loom_Stepper&		Stepper(const uint8_t idx = 0);
-
-	// Sensors
-	Loom_Analog&		Analog(const uint8_t idx = 0);
-	Loom_Digital&		Digital(const uint8_t idx = 0);
-
-	// I2C
-	Loom_ADS1115&		ADS1115(const uint8_t idx = 0);
-	Loom_AS7262&		AS7262(const uint8_t idx = 0);
-	Loom_AS7263&		AS7263(const uint8_t idx = 0);
-	Loom_AS7265X&		AS7265X(const uint8_t idx = 0);
-	Loom_FXAS21002&		FXAS21002(const uint8_t idx = 0);
-	Loom_FXOS8700&		FXOS8700(const uint8_t idx = 0);
-	Loom_LIS3DH&		LIS3DH(const uint8_t idx = 0);
-	Loom_MB1232&		MB1232(const uint8_t idx = 0);
-	Loom_MMA8451&		MMA8451(const uint8_t idx = 0);
-	Loom_MPU6050&		MPU6050(const uint8_t idx = 0);
-	Loom_MS5803&		MS5803(const uint8_t idx = 0);
-	Loom_SHT31D&		SHT31D(const uint8_t idx = 0);
-	Loom_TMP007&		TMP007(const uint8_t idx = 0);
-	Loom_TSL2561&		TSL2561(const uint8_t idx = 0);
-	Loom_TSL2591&		TSL2591(const uint8_t idx = 0);
-	Loom_ZXGesture&		ZXGesture(const uint8_t idx = 0);
-    Loom_STEMMA&        STEMMA(const uint8_t idx = 0);
-	// SDI12
-	Loom_Decagon5TM&	Decagon5TM(const uint8_t idx = 0);
-	Loom_DecagonGS3&	DecagonGS3(const uint8_t idx = 0);
-
-	// SPI
-	Loom_MAX31855&		MAX31855(const uint8_t idx = 0);
-	Loom_MAX31856&		MAX31856(const uint8_t idx = 0);
-
-    //SERIAL
-    Loom_K30&           K30(const uint8_t idx = 0);
-
 protected:
 
 	/// Print the device name as '[device_name]'
-	void				print_device_label() const { LPrint("[", device_name, "] "); }
+	void print_device_label() const { LPrint("[", device_name, "] "); }
 
 private:
 
