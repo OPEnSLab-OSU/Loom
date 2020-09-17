@@ -51,6 +51,11 @@ protected:
 
 	bool		converted;			///< Whether or not converted daylight saving / summer time or not
 
+	DateTime	local_time;
+
+	char		local_datestring[20];
+	char		local_timestring[20];
+
 	char		datestring[20];		///< Latest saved string of the Date (year/month/day)
 	char		timestring[20];		///< Latest saved string of the time (hour:minute:second)
 
@@ -201,6 +206,10 @@ protected:
 	/// Read the RTC, update time and date strings
 	void			read_rtc();
 
+	/// Read local time if local time is enable to read 
+	/// It will be updated on contents array in the data json
+	void			local_rtc();
+
 	/// Set the RTC time to compile time
 	void			set_rtc_to_compile_time();
 
@@ -214,13 +223,16 @@ protected:
 	bool			rtc_validity_check();
 
 	/// Convert time between daylight saving time and standard time
-	void 			convert_daylight_to_standard();
+	/// @param[in] local_time 	The updated version of local time after convertion of daylight saving / summer time or standard time
+	DateTime 		convert_daylight_to_standard(DateTime local_time);
 
 	/// Convert the time in the US daylight saving and standard
-	void 			us_daylight_to_standard();
+	/// @param[in]	local_time 	The updated local_time based on us daylight saving
+	DateTime 		us_daylight_to_standard(DateTime local_time);
 
 	///	Convert the time in the EU summer time and standard
-	void			eu_daylight_to_standard();
+	/// @param[in]	local_time 	The updated local_time based on eu summmer time 
+	DateTime		eu_daylight_to_standard(DateTime local_time);
 
 };
 

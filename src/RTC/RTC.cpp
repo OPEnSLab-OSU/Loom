@@ -25,6 +25,7 @@ const char* LoomRTC::daysOfTheWeek[] =
 ///////////////////////////////////////////////////////////////////////////////
 const float LoomRTC::timezone_adjustment[] =
 	{
+		// All of the number represents the difference between UTC 
 		1  /* WAT */,
 
 		2  /* AT  */,
@@ -132,6 +133,7 @@ LoomRTC::LoomRTC(
 	, timezone(timezone)
 	, use_local_time(use_local_time)
 	, converted(false)
+	, local_time(0)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -153,6 +155,15 @@ void LoomRTC::package(JsonObject json)
 {
 	read_rtc();
 	package_json_timestamp(json, datestring, timestring);
+	if (use_local_time){
+		local_rtc();
+		JsonObject data = get_module_data_object(json, "Local Time");
+		sprintf(local_datestring, "%d/%d/%d", local_time.year(), local_time.month(), local_time.day());
+		sprintf(local_timestring, "%d:%d:%d", local_time.hour(), local_time.minute(), local_time.second());
+		data["date"] = local_datestring;
+		data["time"] = local_timestring;
+		data["TimeZone"] = enum_timezone_string(timezone);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -187,9 +198,26 @@ void LoomRTC::print_DateTime(const DateTime time)
 ///////////////////////////////////////////////////////////////////////////////
 void LoomRTC::read_rtc()
 {
-	convert_daylight_to_standard();
 	get_datestring();
 	get_timestring();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void LoomRTC::local_rtc(){
+	local_time = now();
+	float adj = -1. * timezone_adjustment[(int)timezone];
+	int min;
+
+	if ( (adj-(int)adj) == 0 ) { 
+		min = 0;
+	} else if ( (adj-(int)adj) > 0 ) { 
+		min = 30;
+	} else { 
+		min = -30; 
+	}
+
+	local_time = local_time + TimeSpan(0, (int)adj, min, 0);
+	local_time = convert_daylight_to_standard(local_time);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -294,15 +322,14 @@ void LoomRTC::set_rtc_to_compile_time()
 	LPrintln("Time set to compile time:");
 	print_time();
 
-	// Adjust to UTC time
-	if (!use_local_time) convert_local_to_utc();
-
-	// Adjust to daylight saving time or standard time if local time is enabled
-	else{
-		converted = false;
-		convert_daylight_to_standard();
-	}
+	// Adjust to UTC time as default time
+	convert_local_to_utc();
 	
+	// If local time is enable, measure local time 
+	if(use_local_time){
+		local_rtc();
+	}
+		
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -328,7 +355,7 @@ void LoomRTC::convert_local_to_utc(const bool to_utc)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::convert_daylight_to_standard(){
+DateTime LoomRTC::convert_daylight_to_standard(DateTime local_time){
 	/*
 	if(timezone == TimeZone::WAT || timezone == TimeZone::AT || 
 	   timezone == TimeZone::HST || timezone == TimeZone::BRT || 
@@ -343,25 +370,26 @@ void LoomRTC::convert_daylight_to_standard(){
 		timezone == TimeZone::MDT || timezone == TimeZone::MST ||
 		timezone == TimeZone::PDT || timezone == TimeZone::PST ||
 		timezone == TimeZone::AKDT || timezone == TimeZone::AKST){
-			us_daylight_to_standard();
+			local_time = us_daylight_to_standard(local_time);
 		}
 	else if (timezone == TimeZone::BST || timezone == TimeZone::GMT ||
 			 timezone == TimeZone::EEST || timezone == TimeZone::EET ){
-			eu_daylight_to_standard();
+			local_time = eu_daylight_to_standard(local_time);
 		}
+
+	return local_time;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::us_daylight_to_standard(){
-	DateTime time = now();
+DateTime LoomRTC::us_daylight_to_standard(DateTime local_time){
+	DateTime time = local_time;
 	if(time.dayOfTheWeek() == 0 && time.month() == 3 && 
 	   time.day() >= 8 && time.day() <= 16 && time.hour() >= 2 && 
 	   time.minute() >= 0 && time.second() >= 0 && converted == false){
 		   print_module_label();
 		   LPrintln("Switch to Daylight Saving Time");
 		   time = time + TimeSpan(0, 1, 0, 0);
-			_adjust(time);
 			converted = true;
 		   	switch(timezone) {
 				case TimeZone::AST :
@@ -406,7 +434,6 @@ void LoomRTC::us_daylight_to_standard(){
 				print_module_label();
 				LPrintln("Switch to Standard Time");
 				time = time + TimeSpan(0, -1, 0, 0);
-				_adjust(time);	
 				converted = true;
 				print_module_label();			
 				switch(timezone) {
@@ -445,23 +472,23 @@ void LoomRTC::us_daylight_to_standard(){
 						break;
 			   }
 		}
-		else if (!(time.dayOfTheWeek() == 0) && converted == true){
+		else if ((time.dayOfTheWeek() != 0) && converted == true){
 			converted = false;
 		}
+	return time;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::eu_daylight_to_standard(){
+DateTime LoomRTC::eu_daylight_to_standard(DateTime local_time){
 
-	DateTime time = now();
+	DateTime time = local_time;
 	if(time.dayOfTheWeek() == 0 && time.month() == 3 && 
 	   time.day() >= 25 && time.day() <= 31 && time.hour() >= 1 && 
 	   time.minute() >= 0 && time.second() >= 0 && converted == false){
 		   print_module_label();
 		   LPrintln("Switch to Summer Time");
 		   time = time + TimeSpan(0, 1, 0, 0);
-		   _adjust(time);
-			converted = true;
+		   converted = true;
 		   print_module_label();
 				switch(timezone) {
 					case TimeZone::GMT :
@@ -485,7 +512,6 @@ void LoomRTC::eu_daylight_to_standard(){
 				print_module_label();
 				LPrintln("Switch to Standard Time");
 				time = time + TimeSpan(0, -1, 0, 0);
-				_adjust(time);
 				converted = true;
 				print_module_label();
 				switch(timezone) {
@@ -505,9 +531,11 @@ void LoomRTC::eu_daylight_to_standard(){
 				}
 			}
 	
-	else if (!(time.dayOfTheWeek() == 0) && converted == true){
+	else if ((time.dayOfTheWeek() != 0) && converted == true){
 		converted = false;
 	}
+
+	return time;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
