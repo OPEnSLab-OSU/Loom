@@ -466,6 +466,26 @@ public:
 	/// @param[in]	category	Category to search for
 	LoomModule*	find_module_by_category(const LoomModule::Category category, const uint8_t idx) const;
 
+	/// Subscript operator to access modules the manager is maintaining.
+	/// Works like find_module() without the option for an index
+	/// @param[in]	type	Type to search for
+	LoomModule* operator[](const LoomModule::Type type) const { return find_module(type); };
+
+	template <typename T>
+	T* get(const uint8_t idx=0) {
+		uint8_t count = 0;
+		for (auto module : modules) {
+			if ( dynamic_cast<T*>(module) ) {
+				if (count < idx) {
+					count++;
+				} else {
+					return dynamic_cast<T*>(module);
+				}
+			}
+		}
+		return nullptr;
+	}
+
 	///////////////////////////////////////////////////////////////////////////
 
 	// Other
