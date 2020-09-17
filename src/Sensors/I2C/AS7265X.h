@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_AS7265X.h
-/// @brief		File for Loom_AS7265X definition.
+/// @file		AS7265X.h
+/// @brief		File for AS7265X definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -29,7 +29,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7265x-spectral-sensor-triad-visible-near-infrared-ultraviolet)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_AS7265X : public LoomI2CSensor
+class AS7265X : public I2CSensor
 {
 protected:
 
@@ -59,7 +59,7 @@ public:
 	/// @param[in]	gain					Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
 	/// @param[in]	mode					Set(Int) | <3> | { 0("4 channels out of 6"), 1("Different 4 channels out of 6"), 2("All 6 channels continuously"), 3("One-shot reading of all channels") } | Read mode
 	/// @param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
-	Loom_AS7265X(
+	AS7265X(
 			const byte			i2c_address			= 0x49,
 			const uint8_t		mux_port			= 255,
 			const bool			use_bulb			= false,
@@ -71,10 +71,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_AS7265X(JsonArrayConst p);
+	AS7265X(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_AS7265X() = default;
+	~AS7265X() = default;
 
 //=============================================================================
 ///@name	OPERATION

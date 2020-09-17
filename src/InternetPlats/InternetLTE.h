@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_IntenertLTE.h
-/// @brief		File for Loom_LTE definition.
+/// @brief		File for LTE definition.
 /// @author		Adam Kerr, based on work by Noah Koontz
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
@@ -34,7 +34,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-class Loom_LTE: public LoomInternetPlat
+class LTE: public InternetPlat
 {
 protected:
 
@@ -61,7 +61,7 @@ public:
     	/// @param[in]	gprsPass	GPRS password. Leave as empty unless you have GPRS credentials
       /// @param[in] powerPin analog pin on the feather M0 that drives pin 5 on LTE shield to power on and off
 
-    Loom_LTE(
+    LTE(
         const char* APN      = "",
         const char* gprsUser = "",
         const char* gprsPass = "",
@@ -71,10 +71,10 @@ public:
     /// Constructor that takes Json Array, extracts args
 	  /// and delegates to regular constructor
 	  /// @param[in]	p		The array of constuctor args to expand
-    Loom_LTE(JsonArrayConst p);
+    LTE(JsonArrayConst p);
 
     /// Destructor
-    virtual ~Loom_LTE() = default;
+    virtual ~LTE() = default;
 
     //=============================================================================
     ///@name	OPERATION

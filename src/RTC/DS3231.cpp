@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_DS3231.cpp
-/// @brief		File for Loom_DS3231 implementation.
+/// @file		DS3231.cpp
+/// @brief		File for DS3231 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -14,14 +14,14 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_DS3231, "DS3231");
+REGISTER(LoomModule, DS3231, "DS3231");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_DS3231::Loom_DS3231(
+DS3231::DS3231(
 		const TimeZone	timezone,
 		const bool		use_utc_time
 	)
-	: LoomRTC("DS3231", Type::DS3231, timezone, use_utc_time)
+	: L_RTC("DS3231", Type::DS3231, timezone, use_utc_time)
 {
 	init();
 
@@ -33,24 +33,24 @@ Loom_DS3231::Loom_DS3231(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_DS3231::Loom_DS3231(JsonArrayConst p)
-	: Loom_DS3231((TimeZone)(int)p[0], p[1] ) {}
+DS3231::DS3231(JsonArrayConst p)
+	: DS3231((TimeZone)(int)p[0], p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_DS3231::_begin()
+bool DS3231::_begin()
 {
 	return rtc_inst.begin();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_DS3231::print_config() const
+void DS3231::print_config() const
 {
-	LoomRTC::print_config();
+	L_RTC::print_config();
 	// will print out alarm info
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_DS3231::set_alarm(DateTime time)
+void DS3231::set_alarm(DateTime time)
 {
 	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
@@ -64,7 +64,7 @@ void Loom_DS3231::set_alarm(DateTime time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_DS3231::clear_alarms()
+void DS3231::clear_alarms()
 {
 	print_module_label();
 	LPrintln("Clearing DS3231 alarms");

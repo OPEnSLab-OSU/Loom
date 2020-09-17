@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SDI12_Sensor.cpp
-/// @brief		File for LoomSDI12Sensor implementation.
+/// @file		SDI12_Sensor.cpp
+/// @brief		File for SDI12Sensor implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -13,12 +13,12 @@
 #include "SDI12_Sensor.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomSDI12Sensor::LoomSDI12Sensor(
+SDI12Sensor::SDI12Sensor(
 		const char*				module_name,
 		const LoomModule::Type	module_type,
 		const uint8_t			num_samples 
 	) 
-	: LoomSensor(module_name, module_type, num_samples) {}
+	: Sensor(module_name, module_type, num_samples) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 

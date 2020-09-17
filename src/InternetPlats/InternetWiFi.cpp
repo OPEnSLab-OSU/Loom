@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_InternetWiFi.cpp
-/// @brief		File for Loom_WiFi implementation.
+/// @brief		File for WiFi implementation.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -16,14 +16,14 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_WiFi, "WiFi");
+REGISTER(LoomModule, WiFi, "WiFi");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_WiFi::Loom_WiFi(
+WiFi::WiFi(
 		const char* 	ssid,
 		const char* 	pass
 	)
-	: LoomInternetPlat("WiFi", Type::WiFi)
+	: InternetPlat("WiFi", Type::WiFi)
 	, SSID(ssid)
 	, pass(pass)
 	, m_base_client()
@@ -43,11 +43,11 @@ Loom_WiFi::Loom_WiFi(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_WiFi::Loom_WiFi(JsonArrayConst p)
-	: Loom_WiFi(EXPAND_ARRAY(p, 2) ) {}
+WiFi::WiFi(JsonArrayConst p)
+	: WiFi(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi::connect()
+void WiFi::connect()
 {
 	// clear the write error
 	m_base_client.clearWriteError();
@@ -88,20 +88,20 @@ void Loom_WiFi::connect()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi::disconnect() {
+void WiFi::disconnect() {
 	// tell the wifi it's time to stop
 	WiFi.disconnect();
 	delay(200);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_WiFi::is_connected() const
+bool WiFi::is_connected() const
 {
 	return WiFi.status() == WL_CONNECTED;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::UDPPtr Loom_WiFi::open_socket(const uint port)
+InternetPlat::UDPPtr WiFi::open_socket(const uint port)
 {
 	// create the unique pointer
 	UDPPtr ptr = UDPPtr(new WiFiUDP());
@@ -112,16 +112,16 @@ LoomInternetPlat::UDPPtr Loom_WiFi::open_socket(const uint port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi::print_config() const
+void WiFi::print_config() const
 {
-	LoomInternetPlat::print_config();
+	InternetPlat::print_config();
 	LPrint("\tSSID:               : ", SSID, '\n');
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_WiFi::print_state() const
+void WiFi::print_state() const
 {
-	LoomInternetPlat::print_state();
+	InternetPlat::print_state();
 	const char* text = m_wifi_status_to_string(WiFi.status());
 	if (text != nullptr)
 		LPrintln("\tWireless state      :", text );
@@ -135,7 +135,7 @@ void Loom_WiFi::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_WiFi::m_wifi_status_to_string(const uint8_t status) {
+const char* WiFi::m_wifi_status_to_string(const uint8_t status) {
 	switch (status) {
 		case WL_NO_SHIELD: return "NO_SHIELD";
 		case WL_IDLE_STATUS: return "IDLE_STATUS";
@@ -153,7 +153,7 @@ const char* Loom_WiFi::m_wifi_status_to_string(const uint8_t status) {
 ///////////////////////////////////////////////////////////////////////////////
 #ifdef LOOM_INCLUDE_MAX
 
-void Loom_WiFi::package(JsonObject json)
+void WiFi::package(JsonObject json)
 {
 	//JsonObject data = get_module_data_object(json, module_name);
 	auto ip = IPAddress(WiFi.localIP());

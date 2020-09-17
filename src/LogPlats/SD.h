@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SD.h
-/// @brief		File for Loom_SD definition.
+/// @file		SD.h
+/// @brief		File for SD definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -30,7 +30,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sd-card)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_SD : public LoomLogPlat
+class SD : public LogPlat
 {
 
 protected:
@@ -40,7 +40,7 @@ protected:
 
 		const byte	chip_select;		///< Chip select pin
 		char		filename[13];		///< String of file to write to if not filename explicitly provided (should not exceed 6 characters)
-		LoomRTC*	RTC_Inst;			///< Pointer to an RTC object for timestamps
+		L_RTC*	RTC_Inst;			///< Pointer to an L_RTC object for timestamps
 
 		// SD_Version 		version;
 		// byte 			reset_pin;
@@ -58,7 +58,7 @@ public:
 	/// @param[in]	chip_select					Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
 	/// @param[in]	default_file_base			String | <"test"> | null | File to write to if none explicity provided (should be <= 6 characters, don't add extension)
 	/// @param[in]	number_files				Bool | <true> | {true, false} | True to number files with run number, false to not.
-	Loom_SD(
+	SD(
 			const bool			enable_rate_filter	= true,
 			const uint16_t		min_filter_delay	= 1000,
 			const byte			chip_select			= 10,
@@ -72,10 +72,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_SD(JsonArrayConst p);
+	SD(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_SD() = default;
+	~SD() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -86,15 +86,15 @@ public:
 
 	bool		log(JsonObject json) override { return save_json(json, filename); }
 
-	/// Version of logging for use with LoomManager.
-	/// Accesses Json from LoomManager
+	/// Version of logging for use with Manager.
+	/// Accesses Json from Manager
 	/// @param[in]	filename	Name of file to write to
 	bool		log(const char* name);
 
 	// manually expose superclass version of log() that gets json from
-	// linked LoomManager, calling this classes implementation of 
+	// linked Manager, calling this classes implementation of 
 	// 'log(JsonObject json)', which is pure virtual in superclass
-	using LoomLogPlat::log; 
+	using LogPlat::log; 
 
 	/// Save data to SD card in CSV format.
 	/// Format:
@@ -131,9 +131,9 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	/// Return pointer to the currently linked RTC object
-	/// @return		Current RTC object
-	LoomRTC*	get_RTC_module() const { return RTC_Inst; }
+	/// Return pointer to the currently linked L_RTC object
+	/// @return		Current L_RTC object
+	L_RTC*	get_RTC_module() const { return RTC_Inst; }
 
 	/// Get the current default file to write to
 	/// @return Default file
@@ -146,12 +146,12 @@ public:
 	/// Add pointer back to device manager.
 	/// Generally only called when device manager links module
 	/// to provide pointer both directions
-	/// @param[in]	LM	LoomManager to point to
-	void		link_device_manager(LoomManager* LM) override;
+	/// @param[in]	LM	Manager to point to
+	void		link_device_manager(Manager* LM) override;
 
-	/// Set the RTC module to use for timers
-	/// @param[in]	RTC_Inst	Pointer to the RTC object
-	void		set_RTC_module(LoomRTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
+	/// Set the L_RTC module to use for timers
+	/// @param[in]	RTC_Inst	Pointer to the L_RTC object
+	void		set_RTC_module(L_RTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
 
 	/// Set default file to write to
 	/// @param[in]	filename	New default file (max 8 characters excluding extension)

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_AS7262.cpp
-/// @brief		File for Loom_AS7262 implementation.
+/// @file		AS7262.cpp
+/// @brief		File for AS7262 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -15,10 +15,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_AS7262, "AS7262");
+REGISTER(LoomModule, AS7262, "AS7262");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_AS7262::Loom_AS7262(
+AS7262::AS7262(
 		const byte			i2c_address, 
 		const uint8_t		mux_port,
 		const bool			use_bulb, 
@@ -26,7 +26,7 @@ Loom_AS7262::Loom_AS7262(
 		const uint8_t		mode, 
 		const uint8_t		integration_time
 	)
-	: LoomI2CSensor("AS7262", Type::AS7262, i2c_address, mux_port)
+	: I2CSensor("AS7262", Type::AS7262, i2c_address, mux_port)
 	, use_bulb(use_bulb)
 	, gain(gain)
 	, mode(mode)
@@ -41,20 +41,20 @@ Loom_AS7262::Loom_AS7262(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_AS7262::Loom_AS7262(JsonArrayConst p)
-	: Loom_AS7262(EXPAND_ARRAY(p, 6) ) {}
+AS7262::AS7262(JsonArrayConst p)
+	: AS7262(EXPAND_ARRAY(p, 6) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7262::print_config() const
+void AS7262::print_config() const
 {
-	LoomI2CSensor::print_config();	
+	I2CSensor::print_config();	
 	LPrintln("\tGain     : ", gain);
 	LPrintln("\tMode     : ", mode);
 	LPrintln("\tUse Bulb : ", (use_bulb) ? "True" : "False");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7262::print_measurements() const
+void AS7262::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -67,7 +67,7 @@ void Loom_AS7262::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7262::measure()
+void AS7262::measure()
 {
 	if (use_bulb) {
 		inst_AS7262.takeMeasurementsWithBulb();
@@ -84,7 +84,7 @@ void Loom_AS7262::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7262::package(JsonObject json)
+void AS7262::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	data["Violet"]	= color_vals[0];

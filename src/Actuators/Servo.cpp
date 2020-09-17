@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Servo.cpp
-/// @brief		File for Loom_Servo implementation.
+/// @file		Servo.cpp
+/// @brief		File for Servo implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -19,11 +19,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_Servo, "Servo");
+REGISTER(LoomModule, Servo, "Servo");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Servo::Loom_Servo() 
-	: LoomActuator("Servo", Type::Servo) 
+Servo::Servo() 
+	: Actuator("Servo", Type::Servo) 
 	, positions{}
 {
 	servo_driver.begin();
@@ -31,11 +31,11 @@ Loom_Servo::Loom_Servo()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Servo::Loom_Servo(JsonArrayConst p)
-	: Loom_Servo() {} 
+Servo::Servo(JsonArrayConst p)
+	: Servo() {} 
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Servo::add_config(JsonObject json)
+void Servo::add_config(JsonObject json)
 {
 	// add_config_aux(json, module_name,
 	// 	module_name, servo_count
@@ -43,7 +43,7 @@ void Loom_Servo::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Servo::print_state() const 
+void Servo::print_state() const 
 {
 	print_module_label();
 	LPrintln("\tServo Positions:" );
@@ -53,7 +53,7 @@ void Loom_Servo::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Servo::package(JsonObject json)
+void Servo::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	char buf[8];
@@ -64,7 +64,7 @@ void Loom_Servo::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Servo::dispatch(JsonObject json)
+bool Servo::dispatch(JsonObject json)
 {
 	JsonArray params = json["params"];
 	switch( (char)json["func"] ) {
@@ -74,7 +74,7 @@ bool Loom_Servo::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Servo::set_degree(const uint8_t servo, const uint8_t degree)
+void Servo::set_degree(const uint8_t servo, const uint8_t degree)
 {	
 	if (servo < NUM_SERVOS) {
 		servo_driver.setPWM(servo, 0, map(degree, 0, 180, SERVOMIN, SERVOMAX));

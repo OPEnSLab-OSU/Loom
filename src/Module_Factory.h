@@ -22,7 +22,7 @@
 
 ///Forward declare any classes that will be served the created objects
 // class Scope;
-// class LoomManager;
+// class Manager;
 
 ///////////////////////////////////////////////////////////////////////////////
 

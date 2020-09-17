@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_CommPlat.h
-/// @brief		File for LoomCommPlat definition.
+/// @brief		File for CommPlat definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -25,7 +25,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#telecommunication-capabilities)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomCommPlat : public LoomModule
+class CommPlat : public LoomModule
 {
 
 protected:
@@ -36,9 +36,9 @@ protected:
 	/// Document to read incoming data into.
 	/// CommPlatforms need their own JsonDocument because an incoming message
 	/// can only be deserialized into JsonDocuments, not JsonObjects.
-	/// And it seemed bad design to pass around references to the LoomManager's
+	/// And it seemed bad design to pass around references to the Manager's
 	/// internal JsonDocument.
-	/// Especially as the LoomManager is intended to be non-mandatory for usage of Loom
+	/// Especially as the Manager is intended to be non-mandatory for usage of Loom
 	StaticJsonDocument<1500> messageJson;
 
 	// counters for determining packet drop rate
@@ -80,14 +80,14 @@ public:
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	max_message_len	The maximum possible message length
-	LoomCommPlat(
+	CommPlat(
 			const char*				module_name,
 			const LoomModule::Type	module_type,
 			const uint16_t			max_message_len
 		);
 
 	/// Destructor
-	virtual ~LoomCommPlat() = default;
+	virtual ~CommPlat() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -114,13 +114,13 @@ public:
 	/// @return True if packet was recieved and stored in batch
 	bool			receive_batch_blocking(uint max_wait_time);
 
-	/// Version of receive for use with LoomManager.
-	/// Accesses Json from LoomManager
+	/// Version of receive for use with Manager.
+	/// Accesses Json from Manager
 	/// @return True if packet received
 	bool			receive();
 
-	/// Version of receive_blocking for use with LoomManager.
-	/// Accesses Json from LoomManager
+	/// Version of receive_blocking for use with Manager.
+	/// Accesses Json from Manager
 	/// @param[out]	max_wait_time	Maximum number of milliseconds to block for
 	/// @return True if packet received
 	bool			receive_blocking(const uint max_wait_time);
@@ -131,8 +131,8 @@ public:
 	/// @return True if packet sent successfully
 	bool			send(JsonObject json, const uint8_t destination);
 
-	/// Version of send for use with LoomManager.
-	/// Accesses Json from LoomManager
+	/// Version of send for use with Manager.
+	/// Accesses Json from Manager
 	/// @param[in]	destination		Address of destination device
 	/// @return True if packet sent successfully, false otherwise
 	bool			send(const uint8_t destination);
@@ -151,8 +151,8 @@ public:
 	/// @param[in]	json	Json object to send
 	void			broadcast(JsonObject json) { broadcast_impl(json); }
 
-	/// Version of send for use with LoomManager.
-	/// Accesses Json from LoomManager
+	/// Version of send for use with Manager.
+	/// Accesses Json from Manager
 	void			broadcast();
 
 	///	Broadcasts all the jsons stored in the batch

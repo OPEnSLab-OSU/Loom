@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Servo.h
-/// @brief		File for Loom_Servo definition.
+/// @file		Servo.h
+/// @brief		File for Servo definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -32,7 +32,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#servos-8-channel-pwm-or-servo-featherwing)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Servo : public LoomActuator
+class Servo : public Actuator
 {
 
 protected:
@@ -48,15 +48,15 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	Loom_Servo();
+	Servo();
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Servo(JsonArrayConst p);
+	Servo(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Servo() = default;
+	~Servo() = default;
 
 //=============================================================================
 ///@name	OPERATION

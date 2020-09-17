@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_MAX31856.cpp
-/// @brief		File for Loom_MAX31856 implementation.
+/// @file		MAX31856.cpp
+/// @brief		File for MAX31856 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -15,10 +15,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_MAX31856, "MAX31856");
+REGISTER(LoomModule, MAX31856, "MAX31856");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MAX31856::Loom_MAX31856(
+MAX31856::MAX31856(
 		const char*		module_name,
 		const uint8_t	num_samples, 
 		const uint8_t	CS_pin,
@@ -27,7 +27,7 @@ Loom_MAX31856::Loom_MAX31856(
 		const uint8_t	SPI_c,
 		const uint8_t	SPI_d
 	) 
-	: LoomSPISensor(module_name, Type::MAX31856, num_samples) 
+	: SPISensor(module_name, Type::MAX31856, num_samples) 
 	, inst_max( Adafruit_MAX31856(SPI_a, SPI_b, SPI_c, SPI_d) )
 {
 	// Hardware Serial
@@ -41,18 +41,18 @@ Loom_MAX31856::Loom_MAX31856(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MAX31856::Loom_MAX31856(JsonArrayConst p)
-	: Loom_MAX31856(EXPAND_ARRAY(p, 7) ) {}
+MAX31856::MAX31856(JsonArrayConst p)
+	: MAX31856(EXPAND_ARRAY(p, 7) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MAX31856::print_measurements() const 
+void MAX31856::print_measurements() const 
 {
 	print_module_label();
 	LPrintln("\tTemp: ", temperature, " C");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MAX31856::measure() 
+void MAX31856::measure() 
 {
 	// cj_temp = inst_max.readCJTemperature();
 	// temperature = inst_max.readThermocoupleTemperature();
@@ -85,7 +85,7 @@ void Loom_MAX31856::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MAX31856::package(JsonObject json)
+void MAX31856::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	data["temp"] = temperature;

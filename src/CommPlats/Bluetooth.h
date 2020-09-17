@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Bluetooth.h
-/// @brief		File for Loom_Bluetooth definition. Needs more work.
+/// @file		Bluetooth.h
+/// @brief		File for Bluetooth definition. Needs more work.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -28,7 +28,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#bluetooth)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Bluetooth : public LoomCommPlat
+class Bluetooth : public CommPlat
 {
 
 protected:
@@ -51,7 +51,7 @@ public:
 	/// @param[in] 	spi_CS				SPI chip select pin
 	/// @param[in] 	spi_IRQ				SPI IRQ pin
 	/// @param[in] 	spi_RST				SPI reset pin
-	Loom_Bluetooth(
+	Bluetooth(
 			const uint16_t 		max_message_len		= 120,
 			const uint8_t		spi_CS				= 8,
 			const uint8_t		spi_IRQ				= 7,
@@ -61,10 +61,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Bluetooth(JsonArrayConst p);
+	Bluetooth(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Bluetooth() = default;
+	~Bluetooth() = default;
 
 //=============================================================================
 ///@name	OPERATION

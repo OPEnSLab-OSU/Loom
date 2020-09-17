@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_ZXGesture.cpp
-/// @brief		File for Loom_ZXGesture implementation.
+/// @file		ZXGesture.cpp
+/// @brief		File for ZXGesture implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -15,15 +15,15 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_ZXGesture, "ZXGesture");
+REGISTER(LoomModule, ZXGesture, "ZXGesture");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_ZXGesture::Loom_ZXGesture(
+ZXGesture::ZXGesture(
 		const byte		i2c_address, 
 		const uint8_t	mux_port, 
 		const Mode		mode
 	)
-	: LoomI2CSensor("ZXGesture", Type::ZXGesture, i2c_address, mux_port)
+	: I2CSensor("ZXGesture", Type::ZXGesture, i2c_address, mux_port)
 	, mode(mode)
 	, inst_ZX( ZX_Sensor(i2c_address) )
 {
@@ -57,18 +57,18 @@ Loom_ZXGesture::Loom_ZXGesture(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_ZXGesture::Loom_ZXGesture(JsonArrayConst p)
-	: Loom_ZXGesture(p[0], p[1], (Mode)(int)p[2]) {}
+ZXGesture::ZXGesture(JsonArrayConst p)
+	: ZXGesture(p[0], p[1], (Mode)(int)p[2]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_ZXGesture::print_config() const
+void ZXGesture::print_config() const
 {
-	LoomI2CSensor::print_config();
+	I2CSensor::print_config();
 	LPrintln("\tMode             : ", (mode == Mode::POS) ? "Position" : "Gesture" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_ZXGesture::print_measurements() const
+void ZXGesture::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -86,7 +86,7 @@ void Loom_ZXGesture::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_ZXGesture::measure()
+void ZXGesture::measure()
 {
 	uint8_t x, z;
 
@@ -139,7 +139,7 @@ void Loom_ZXGesture::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_ZXGesture::package(JsonObject json)
+void ZXGesture::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 

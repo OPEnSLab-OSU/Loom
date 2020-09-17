@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_LIS3DH.h
-/// @brief		File for Loom_LIS3DH definition.
+/// @file		LIS3DH.h
+/// @brief		File for LIS3DH definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -31,7 +31,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#lis3dh-accelerometer)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_LIS3DH : public LoomI2CSensor
+class LIS3DH : public I2CSensor
 {
 protected:
 
@@ -49,7 +49,7 @@ public:
 	///
 	/// @param[in]	i2c_address				Set(Int) | <0x19> | {0x19} | I2C address
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	Loom_LIS3DH(
+	LIS3DH(
 			const byte		i2c_address	= 0x19,
 			const uint8_t	mux_port	= 255
 		);
@@ -57,10 +57,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_LIS3DH(JsonArrayConst p);
+	LIS3DH(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_LIS3DH() = default;
+	~LIS3DH() = default;
 
 //=============================================================================
 ///@name	OPERATION

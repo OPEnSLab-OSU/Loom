@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Temperature_Sync.cpp
-/// @brief		File for LoomTempSync implementation.
+/// @brief		File for TempSync implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -18,10 +18,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, LoomTempSync, "TempSync");
+REGISTER(LoomModule, TempSync, "TempSync");
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomTempSync::LoomTempSync(   
+TempSync::TempSync(   
 		const LoomModule::Type		source,
 		const LoomModule::Type		dependant
 	) 
@@ -31,11 +31,11 @@ LoomTempSync::LoomTempSync(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomTempSync::LoomTempSync(JsonArrayConst p)
-	: LoomTempSync( (LoomModule::Type)(int)p[0], (LoomModule::Type)(int)p[1] ) {}
+TempSync::TempSync(JsonArrayConst p)
+	: TempSync( (LoomModule::Type)(int)p[0], (LoomModule::Type)(int)p[1] ) {}
 
 /////////////////////////////////////////////////////////////////////////////
-void LoomTempSync::second_stage_ctor() 
+void TempSync::second_stage_ctor() 
 {
 	bool setup = true;
 
@@ -69,7 +69,7 @@ void LoomTempSync::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomTempSync::print_config() const
+void TempSync::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tSource Type: ", (int)source_type); 
@@ -77,7 +77,7 @@ void LoomTempSync::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomTempSync::sync_temp() 
+void TempSync::sync_temp() 
 {
 	if (source && source->get_active() && dependant && dependant->get_active() ) {
 		float temp = 25.0;

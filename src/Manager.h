@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Manager.h
-/// @brief		File for LoomManager definition.
+/// @brief		File for Manager definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -20,19 +20,18 @@
 #undef min
 #include <vector>
 
-
 // Forward declarations, specify that these classes
 // exist but are defined in their own respective files
-class LoomRTC;
-class Loom_Sleep_Manager;
-class Loom_Interrupt_Manager;
-class Loom_WarmUp_Manager;
+class L_RTC;
+class SleepManager;
+class InterruptManager;
+class WarmUpManager;
 
 
 #define SERIAL_BAUD		115200	///< Serial Baud Rate
 #define MAX_SERIAL_WAIT	20000	///< Maximum number of milliseconds to wait for user given 'begin_serial(true)'
 #define SD_CS			10		///< SD chip select used in parse_config_SD().
-								///< You can still instantiate a Loom_SD module with a different chip select
+								///< You can still instantiate a SD module with a different chip select
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -40,10 +39,10 @@ class Loom_WarmUp_Manager;
 /// Manager to contain Loom modules and provide users with a simpler API.
 ///
 /// @par Resources
-/// - [LoomManager Documentation](https://openslab-osu.github.io/Loom/html/class_loom_manager.html)
+/// - [Manager Documentation](https://openslab-osu.github.io/Loom/html/class_loom_manager.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomManager
+class Manager
 {
 
 public:
@@ -64,13 +63,13 @@ protected:
 									///< Used so that manager can control interval, rather than code in .ino
 
 	/// Device type (Hub / Node)
-	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of LoomManager
+	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of Manager
 
 	// Sub Managers, so placed here for ease of access.
-	Loom_WarmUp_Manager*	warmup_manager		= nullptr;
-	Loom_Interrupt_Manager*	interrupt_manager	= nullptr;
-	Loom_Sleep_Manager*		sleep_manager		= nullptr;
-	LoomRTC*				rtc_module			= nullptr;
+	WarmUpManager*	warmup_manager		= nullptr;
+	InterruptManager*	interrupt_manager	= nullptr;
+	SleepManager*		sleep_manager		= nullptr;
+	L_RTC*				rtc_module			= nullptr;
 
 	/// Vectors of LoomModule pointers
 	std::vector<LoomModule*>		modules;
@@ -96,7 +95,7 @@ public:
 	/// @param[in]	print_verbosity				Set(Verbosity) | <1> | {0("Off"), 1("Low"), 2("High")} | How detailed prints to the Serial Monitor should be
 	/// @param[in]	package_verbosity			Set(Verbosity) | <2> | {0("Off"), 1("Low"), 2("High")} | How detailed to package data
 	/// @param[in]	interval					Int | <1> | [0-60000] | Default milliseconds to pause
-	LoomManager(
+	Manager(
 			const char*			device_name			= "Device",
 			const uint8_t		instance			= 1,
 			const DeviceType	device_type			= DeviceType::NODE,
@@ -106,7 +105,7 @@ public:
 		);
 
 	//// Destructor
-	virtual ~LoomManager();
+	virtual ~Manager();
 
 //=============================================================================
 ///@name	OPERATION
@@ -408,17 +407,17 @@ protected:
 
 private:
 
-	// Allow secondary managers to access private members of LoomManager
-	friend class Loom_Interrupt_Manager;
-	friend class Loom_Sleep_Manager;
-	friend class LoomRTC;
-	friend class Loom_SD;
-	friend class Loom_BatchSD;
-	friend class LoomNTPSync;
+	// Allow secondary managers to access private members of Manager
+	friend class InterruptManager;
+	friend class SleepManager;
+	friend class L_RTC;
+	friend class SD;
+	friend class BatchSD;
+	friend class NTPSync;
 
-	Loom_Interrupt_Manager*	get_interrupt_manager() { return interrupt_manager; }
-	Loom_Sleep_Manager*		get_sleep_manager() { return sleep_manager; }
-	LoomRTC*				get_rtc_module() { return rtc_module; }
+	InterruptManager*	get_interrupt_manager() { return interrupt_manager; }
+	SleepManager*		get_sleep_manager() { return sleep_manager; }
+	L_RTC*				get_rtc_module() { return rtc_module; }
 
 	/// Used to add device info to data object
 	void add_device_ID_to_json(JsonObject json);

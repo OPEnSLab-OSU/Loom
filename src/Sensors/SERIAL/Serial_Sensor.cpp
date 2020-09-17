@@ -14,29 +14,29 @@
 
 ////////////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
-LoomSerialSensor::LoomSerialSensor(
+SerialSensor::SerialSensor(
         const char*            module_name,
         const LoomModule::Type module_type,
         const uint8_t          num_samples
     )
-    : LoomSensor(module_name, module_type, num_samples) {}
+    : Sensor(module_name, module_type, num_samples) {}
 
 ////////////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
-LoomSerialSensor::~LoomSerialSensor() {
+SerialSensor::~SerialSensor() {
     delete sensor_serial;
 }
 
 ////////////////////////////////////////////////////////////////////////////
 // -- PUBLIC METHODS --
-void LoomSerialSensor::print_config() const
+void SerialSensor::print_config() const
 {
-    LoomSensor::print_config();
+    Sensor::print_config();
     LPrint('\t', "Serial Set         : ");
     LPrintln(sensor_serial != nullptr);
 }
 
-void LoomSerialSensor::set_serial(Stream *stream) {
+void SerialSensor::set_serial(Stream *stream) {
     sensor_serial = stream;
 }
 

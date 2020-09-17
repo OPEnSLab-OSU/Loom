@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Stepper.h
-/// @brief		File for Loom_Stepper definition.
+/// @file		Stepper.h
+/// @brief		File for Stepper definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -35,7 +35,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#stepper-motors-dc-motor--stepper-featherwing)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Stepper : public LoomActuator
+class Stepper : public Actuator
 {
 
 protected:
@@ -53,15 +53,15 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	Loom_Stepper();
+	Stepper();
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Stepper(JsonArrayConst p);
+	Stepper(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Stepper();
+	~Stepper();
 
 //=============================================================================
 ///@name	OPERATION

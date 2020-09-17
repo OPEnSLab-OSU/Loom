@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Max_Sub.cpp
-/// @brief		File for Loom_MaxSub implementation.
+/// @brief		File for MaxSub implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -16,25 +16,25 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER_NODEFAULT(LoomModule, Loom_MaxSub, "MaxSub");
+REGISTER_NODEFAULT(LoomModule, MaxSub, "MaxSub");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxSub::Loom_MaxSub(
+MaxSub::MaxSub(
 		const LoomModule::Type	internet_type,
 		const bool				auto_dispatch
 	)   
-	: LoomSubscribePlat("MaxSub", Type::MaxSub, internet_type)
+	: SubscribePlat("MaxSub", Type::MaxSub, internet_type)
 	, auto_dispatch(auto_dispatch)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxSub::Loom_MaxSub(JsonArrayConst p) 
-	: Loom_MaxSub((LoomModule::Type)(int)p[0], p[1] ) {}
+MaxSub::MaxSub(JsonArrayConst p) 
+	: MaxSub((LoomModule::Type)(int)p[0], p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxSub::second_stage_ctor() 
+void MaxSub::second_stage_ctor() 
 {
-	LoomSubscribePlat::second_stage_ctor();
+	SubscribePlat::second_stage_ctor();
 
 	UDP_port = UDP_RECEIVE_OFFSET + ((device_manager) ? device_manager->get_instance_num() : 0);
 
@@ -48,7 +48,7 @@ void Loom_MaxSub::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_MaxSub::subscribe(JsonObject json)
+bool MaxSub::subscribe(JsonObject json)
 {
 	// Make sure UDP object exists
 	if (!UDP_Inst) {
@@ -106,14 +106,14 @@ bool Loom_MaxSub::subscribe(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxSub::print_config() const
+void MaxSub::print_config() const
 {
-	LoomSubscribePlat::print_config();
+	SubscribePlat::print_config();
 	LPrintln("\tUDP Port : ", UDP_port);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxSub::set_port(const uint16_t port)
+void MaxSub::set_port(const uint16_t port)
 {
 	UDP_port = port;
 

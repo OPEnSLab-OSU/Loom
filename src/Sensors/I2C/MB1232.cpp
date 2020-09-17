@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_MB1232.cpp
-/// @brief		File for Loom_MB1232 implementation.
+/// @file		MB1232.cpp
+/// @brief		File for MB1232 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -19,14 +19,14 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_MB1232, "MB1232");
+REGISTER(LoomModule, MB1232, "MB1232");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MB1232::Loom_MB1232(
+MB1232::MB1232(
 		const byte		i2c_address,
 		const uint8_t	mux_port
 	)
-	: LoomI2CSensor("MB1232", Type::MB1232, i2c_address, mux_port)
+	: I2CSensor("MB1232", Type::MB1232, i2c_address, mux_port)
 {	
 	Wire.beginTransmission(i2c_address);
 
@@ -44,11 +44,11 @@ Loom_MB1232::Loom_MB1232(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MB1232::Loom_MB1232(JsonArrayConst p)
-	: Loom_MB1232(EXPAND_ARRAY(p, 2) ) {}
+MB1232::MB1232(JsonArrayConst p)
+	: MB1232(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MB1232::print_measurements() const
+void MB1232::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -56,7 +56,7 @@ void Loom_MB1232::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MB1232::measure()
+void MB1232::measure()
 {
 	Wire.beginTransmission(i2c_address);
 
@@ -82,7 +82,7 @@ void Loom_MB1232::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MB1232::package(JsonObject json)
+void MB1232::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	

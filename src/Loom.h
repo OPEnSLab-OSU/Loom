@@ -70,7 +70,7 @@ namespace std {
 #include "LogPlats/SD.h"
 #include "LogPlats/BatchSD.h"
 
-// // RTC
+// // L_RTC
 #include "RTC/DS3231.h"
 #include "RTC/PCF8523.h"
 
@@ -115,6 +115,6 @@ namespace std {
 #endif
 
 // General
-#include "Components/WarmUp/WarmUp_Manager.h"
-#include "Interrupt_Manager.h"
-#include "Sleep_Manager.h"
+#include "Components/WarmUp/WarmUpManager.h"
+#include "InterruptManager.h"
+#include "SleepManager.h"

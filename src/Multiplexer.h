@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Multiplexer.h
-/// @brief		File for Loom_Multiplexer definition, supporting enums, and 
+/// @file		Multiplexer.h
+/// @brief		File for Multiplexer definition, supporting enums, and 
 ///				I2C address selection for conflicts.
 /// @author		Luke Goertzen
 /// @date		2019
@@ -22,7 +22,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
-class LoomI2CSensor;
+class I2CSensor;
 
 /// I2C Address Conflict Selection
 enum class I2C_Selection {
@@ -44,7 +44,7 @@ const I2C_Selection i2c_0x29 = I2C_Selection::L_TSL2591;	///< TSL2561 / TSL2591
 const I2C_Selection i2c_0x49 = I2C_Selection::L_AS7265X;	///< TSL2561 / AS7262 / AS7263 / AS7265X
 const I2C_Selection i2c_0x36 = I2C_Selection::L_STEMMA;
 
-// Maybe query DeviceManager if RTC is in use, if not, query 0x68 
+// Maybe query DeviceManager if L_RTC is in use, if not, query 0x68 
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -55,7 +55,7 @@ const I2C_Selection i2c_0x36 = I2C_Selection::L_STEMMA;
 /// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___multiplexer.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Multiplexer : public LoomModule
+class Multiplexer : public LoomModule
 {
 private:
 
@@ -65,7 +65,7 @@ private:
 
 protected:
 
-	LoomI2CSensor**	sensors;			///< Array of I2C sensor objects
+	I2CSensor**	sensors;			///< Array of I2C sensor objects
 
 	byte			i2c_address;		///< The multiplexer's I2C address
 
@@ -93,7 +93,7 @@ public:
 	/// @param[in]	num_ports				Int | <8> | [1-8] | Number of ports available
 	/// @param[in]	dynamic_list			Bool | <true> | {true, false} | Whether or not to automatically check for new sensors
 	/// @param[in]	update_period			Int | <5000> | [500-30000] | The time between sensor list updates (if dynamic_list enabled)
-	Loom_Multiplexer(
+	Multiplexer(
 			const byte			i2c_address			= 0x71,
 			const uint8_t		num_ports			= 8,
 			const bool			dynamic_list		= true,
@@ -103,10 +103,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Multiplexer(JsonArrayConst p);
+	Multiplexer(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Multiplexer();
+	~Multiplexer();
 
 //=============================================================================
 ///@name	OPERATION
@@ -128,8 +128,8 @@ public:
 
 	/// Get the sensor object for sensor on provided port
 	/// @param[port]	port	The port of the multiplexer to get sensor object for
-	/// @return			The pointer to LoomI2CSensor on port, Null if no sensor
-	LoomI2CSensor*	get_sensor(uint8_t port) const { return sensors[port]; }
+	/// @return			The pointer to I2CSensor on port, Null if no sensor
+	I2CSensor*	get_sensor(uint8_t port) const { return sensors[port]; }
 
 	void power_up() override;
 
@@ -143,7 +143,7 @@ public:
 	void		print_state() const override;
 
 	/// Prints measurements of all connected sensors.
-	/// Calls implementations of LoomI2CSensor::print_measurements() const
+	/// Calls implementations of I2CSensor::print_measurements() const
 	void		print_measurements() const;
 
 //=============================================================================
@@ -187,7 +187,7 @@ private:
 	/// Compares I2C address to known sensors and generates corresponding sensor instance
 	/// @param[in]	i2c_address		The I2C address to match to sensor class
 	/// @return		Pointer to the generated I2C sensor object, Null if no match for that address
-	LoomI2CSensor*	generate_sensor_object(const byte i2c_address, const uint8_t port);
+	I2CSensor*	generate_sensor_object(const byte i2c_address, const uint8_t port);
 
 	/// Determine the I2C address of the sensor (if any) on port.
 	/// @param[in]	port	The port to get sensor address of

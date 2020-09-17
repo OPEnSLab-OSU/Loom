@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_nRF.cpp
-/// @brief		File for Loom_nRF implementation.
+/// @file		nRF.cpp
+/// @brief		File for nRF implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -15,10 +15,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_nRF, "nRF");
+REGISTER(LoomModule, nRF, "nRF");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_nRF::Loom_nRF(
+nRF::nRF(
 		const uint16_t		max_message_len,
 		const uint8_t		address,
 		const uint8_t		data_rate,
@@ -27,7 +27,7 @@ Loom_nRF::Loom_nRF(
 		const uint16_t		retry_timeout,
 		const uint8_t		multicast_level	
 	)
-	: LoomCommPlat("nRF", Type::nRF, max_message_len)
+	: CommPlat("nRF", Type::nRF, max_message_len)
 	, data_rate(data_rate)
 	, power_level(power_level)
 	, retry_count(retry_count)
@@ -106,18 +106,18 @@ Loom_nRF::Loom_nRF(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_nRF::Loom_nRF(JsonArrayConst p)
-	: Loom_nRF(EXPAND_ARRAY(p, 7) ) {}
+nRF::nRF(JsonArrayConst p)
+	: nRF(EXPAND_ARRAY(p, 7) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_nRF::~Loom_nRF() 
+nRF::~nRF() 
 {
 	delete network;
 // 	delete radio;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::add_config(JsonObject json)
+void nRF::add_config(JsonObject json)
 {
 	// add_config_aux(json, module_name,
 	// 	module_name,
@@ -127,9 +127,9 @@ void Loom_nRF::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::print_config() const
+void nRF::print_config() const
 {
-	LoomCommPlat::print_config();
+	CommPlat::print_config();
 
 	LPrintln("\tAddress          : ", address );
 	LPrintln("\tData Rate        : ", data_rate );
@@ -139,7 +139,7 @@ void Loom_nRF::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_nRF::receive_blocking_impl(JsonObject json, uint max_wait_time) 
+bool nRF::receive_blocking_impl(JsonObject json, uint max_wait_time) 
 {
 	const unsigned long start_time = millis();
 	do {
@@ -157,7 +157,7 @@ bool Loom_nRF::receive_blocking_impl(JsonObject json, uint max_wait_time)
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
-bool Loom_nRF::send_impl(JsonObject json, const uint8_t destination) 
+bool nRF::send_impl(JsonObject json, const uint8_t destination) 
 {
 	char buffer[max_message_len];
 	bool to_msgpack = json_to_msgpack_buffer(json, buffer, max_message_len);
@@ -172,7 +172,7 @@ bool Loom_nRF::send_impl(JsonObject json, const uint8_t destination)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::broadcast_impl(JsonObject json)
+void nRF::broadcast_impl(JsonObject json)
 {
 	char buffer[max_message_len];
 	bool to_msgpack = json_to_msgpack_buffer(json, buffer, max_message_len);
@@ -190,7 +190,7 @@ void Loom_nRF::broadcast_impl(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::set_address(const uint8_t addr)    // Need to test this
+void nRF::set_address(const uint8_t addr)    // Need to test this
 { 
 	address = addr;
 	network->begin(90, address);

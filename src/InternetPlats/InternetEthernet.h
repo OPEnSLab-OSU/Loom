@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_InternetEthernet.h
-/// @brief		File for Loom_Ethernet definition.
+/// @brief		File for Ethernet definition.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -30,7 +30,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ethernet)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Ethernet : public LoomInternetPlat
+class Ethernet : public InternetPlat
 {
 
 protected:
@@ -53,7 +53,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	Loom_Ethernet(	
+	Ethernet(	
 			const char* 			module_name	= "Ethernet",
 			const JsonArrayConst	mac			= JsonArray(),
 			const JsonArrayConst	ip			= JsonArray()
@@ -62,10 +62,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Ethernet(JsonArrayConst p );
+	Ethernet(JsonArrayConst p );
 
 	/// Destructor
-	virtual ~Loom_Ethernet() = default;
+	virtual ~Ethernet() = default;
 
 //=============================================================================
 ///@name	OPERATION

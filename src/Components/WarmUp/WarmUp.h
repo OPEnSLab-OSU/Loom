@@ -10,13 +10,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 // Forward Declarations
-class WarmUp_Manager;
-class LoomManager;
+class WarmUpManager;
+class Manager;
 
 class WarmUp {
   public:
     /// Constructor
-    WarmUp(LoomManager* manager, int period = 0);
+    WarmUp(Manager* manager, int period = 0);
 
     int get_period();
 

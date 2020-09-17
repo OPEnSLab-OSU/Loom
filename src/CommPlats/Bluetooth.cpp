@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Bluetooth.cpp
-/// @brief		File for Loom_Bluetooth implementation. Needs more work.
+/// @file		Bluetooth.cpp
+/// @brief		File for Bluetooth implementation. Needs more work.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -16,17 +16,17 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_Bluetooth, "Bluetooth");
+REGISTER(LoomModule, Bluetooth, "Bluetooth");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Bluetooth::Loom_Bluetooth(
+Bluetooth::Bluetooth(
 		const uint16_t	max_message_len,
 		const uint8_t	spi_CS,
 		const uint8_t	spi_IRQ,
 		const uint8_t	spi_RST
 
 	)
-	: LoomCommPlat("Bluetooth", Type::Bluetooth, max_message_len)
+	: CommPlat("Bluetooth", Type::Bluetooth, max_message_len)
 	, spi_CS(spi_CS)
 	, spi_IRQ(spi_IRQ)
 	, spi_RST(spi_RST)
@@ -38,11 +38,11 @@ Loom_Bluetooth::Loom_Bluetooth(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Bluetooth::Loom_Bluetooth(JsonArrayConst p)
-	: Loom_Bluetooth( EXPAND_ARRAY(p, 4) ) {}
+Bluetooth::Bluetooth(JsonArrayConst p)
+	: Bluetooth( EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Bluetooth::add_config(JsonObject json)
+void Bluetooth::add_config(JsonObject json)
 {
 	// add_config_aux(json, module_name,
 	// 	module_name, 
@@ -51,13 +51,13 @@ void Loom_Bluetooth::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Bluetooth::print_config() const
+void Bluetooth::print_config() const
 {
-	LoomCommPlat::print_config();
+	CommPlat::print_config();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Bluetooth::connect(const uint16_t connect_timeout)
+void Bluetooth::connect(const uint16_t connect_timeout)
 {
 	uint32_t timeout = millis();
 
@@ -71,7 +71,7 @@ void Loom_Bluetooth::connect(const uint16_t connect_timeout)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-int8_t Loom_Bluetooth::getCommand(const uint16_t max_timeout )
+int8_t Bluetooth::getCommand(const uint16_t max_timeout )
 {
 	// printCommands();
 	BLE.println("Enter Command.");
@@ -115,7 +115,7 @@ int8_t Loom_Bluetooth::getCommand(const uint16_t max_timeout )
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Bluetooth::test_send(const uint8_t val)
+bool Bluetooth::test_send(const uint8_t val)
 {
 	if ( BLE.isConnected() ) {
 		BLE.print(val);
@@ -126,7 +126,7 @@ bool Loom_Bluetooth::test_send(const uint8_t val)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Bluetooth::test_send_str(const char* string)
+bool Bluetooth::test_send_str(const char* string)
 {
 	if ( BLE.isConnected() ) {
 		BLE.print(string);

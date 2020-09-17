@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_TSL2561.cpp
-/// @brief		File for Loom_TSL2561 implementation.
+/// @file		TSL2561.cpp
+/// @brief		File for TSL2561 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -17,16 +17,16 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_TSL2561, "TSL2561");
+REGISTER(LoomModule, TSL2561, "TSL2561");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_TSL2561::Loom_TSL2561(
+TSL2561::TSL2561(
 		const byte		i2c_address, 
 		const uint8_t	mux_port,
 		const uint8_t	gain, 
 		const uint8_t	resolution
 	)
-	: LoomI2CSensor("TSL2561", Type::TSL2561, i2c_address, mux_port)
+	: I2CSensor("TSL2561", Type::TSL2561, i2c_address, mux_port)
 	, gain(gain)
 	, resolution(resolution)
 	, inst_TSL2561( (i2c_address == 0x29) 
@@ -66,11 +66,11 @@ Loom_TSL2561::Loom_TSL2561(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_TSL2561::Loom_TSL2561(JsonArrayConst p)
-	: Loom_TSL2561(EXPAND_ARRAY(p, 4) ) {}
+TSL2561::TSL2561(JsonArrayConst p)
+	: TSL2561(EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_TSL2561::print_measurements() const
+void TSL2561::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -79,7 +79,7 @@ void Loom_TSL2561::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_TSL2561::measure()
+void TSL2561::measure()
 {
 	uint16_t IR_ar[5], Full_ar[5];
 
@@ -92,7 +92,7 @@ void Loom_TSL2561::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_TSL2561::package(JsonObject json)
+void TSL2561::package(JsonObject json)
 {
 	int lux = inst_TSL2561.calculateLux(lightFull, lightIR);
 

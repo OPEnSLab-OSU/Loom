@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_OLED.cpp
-/// @brief		File for Loom_OLED implementation.
+/// @file		OLED.cpp
+/// @brief		File for OLED implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -15,10 +15,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_OLED, "OLED");
+REGISTER(LoomModule, OLED, "OLED");
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_OLED::enum_oled_version_string(const Version v)
+const char* OLED::enum_oled_version_string(const Version v)
 {
 	switch(v) {
 		case Version::FEATHERWING : return "FeatherWing";
@@ -27,7 +27,7 @@ const char* Loom_OLED::enum_oled_version_string(const Version v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_OLED::enum_oled_format_string(const Format f)
+const char* OLED::enum_oled_format_string(const Format f)
 {
 	switch(f) {
 		case Format::FOUR   : return "OLED 4 Elements";
@@ -37,7 +37,7 @@ const char* Loom_OLED::enum_oled_format_string(const Format f)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_OLED::enum_oled_freeze_string(const FreezeType f)
+const char* OLED::enum_oled_freeze_string(const FreezeType f)
 {
 	switch(f) {
 		case FreezeType::DISABLE : return "Freeze Disabled";
@@ -47,7 +47,7 @@ const char* Loom_OLED::enum_oled_freeze_string(const FreezeType f)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_OLED::Loom_OLED(	
+OLED::OLED(	
 		const bool			enable_rate_filter, 
 		const uint16_t		min_filter_delay, 
 		const Version		version, 
@@ -57,7 +57,7 @@ Loom_OLED::Loom_OLED(
 		const byte			freeze_pin, 
 		const FreezeType	freeze_behavior
 	)
-	: LoomLogPlat("OLED", Type::OLED, enable_rate_filter, min_filter_delay)
+	: LogPlat("OLED", Type::OLED, enable_rate_filter, min_filter_delay)
 	, version(version)
 	, reset_pin(reset_pin)
 	, display_format(display_format)
@@ -79,13 +79,13 @@ Loom_OLED::Loom_OLED(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_OLED::Loom_OLED(JsonArrayConst p)
-	: Loom_OLED(p[0], p[1], (Version)(int)p[2], p[3], (Format)(int)p[4], p[5], p[6], (FreezeType)(int)p[7]) {}
+OLED::OLED(JsonArrayConst p)
+	: OLED(p[0], p[1], (Version)(int)p[2], p[3], (Format)(int)p[4], p[5], p[6], (FreezeType)(int)p[7]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_OLED::print_config() const
+void OLED::print_config() const
 {
-	LoomLogPlat::print_config();
+	LogPlat::print_config();
 
 	LPrintln("\tOLED Version        : ", enum_oled_version_string(version) );
 	if (version == Version::BREAKOUT) {
@@ -103,7 +103,7 @@ void Loom_OLED::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_OLED::set_freeze_pin(const byte pin) 
+void OLED::set_freeze_pin(const byte pin) 
 {
 	freeze_pin = pin;
 	if (freeze_behavior != FreezeType::DISABLE) {
@@ -112,7 +112,7 @@ void Loom_OLED::set_freeze_pin(const byte pin)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_OLED::log(JsonObject json) 
+bool OLED::log(JsonObject json) 
 {
 	if ( !check_millis() ) 
 		return false;

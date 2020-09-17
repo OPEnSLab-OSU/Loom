@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Sleep_Manager.cpp
-/// @brief		File for Loom_Sleep_Manager implementation.
+/// @file		SleepManager.cpp
+/// @brief		File for SleepManager implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -9,7 +9,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
-#include "Sleep_Manager.h"
+#include "SleepManager.h"
+#include "InterruptManager.h"
 #include "RTC/RTC.h"
 #include "Module_Factory.h"
 
@@ -17,17 +18,16 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_Sleep_Manager, "Sleep_Manager");
+REGISTER(LoomModule, SleepManager, "SleepManager");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Sleep_Manager::Loom_Sleep_Manager(
+SleepManager::SleepManager(
 		const bool		use_LED,
 		const bool		delay_on_wake,
 		const Mode		sleep_mode,
 		const byte		power_off_pin
 	)
-	// : LoomModule("SleepManager", Type::Sleep_Manager )
-	: LoomModule("SleepManager", Type::Sleep_Manager )
+	: LoomModule("SleepManager", Type::SleepManager )
 	, use_LED(use_LED)
 	, delay_on_wake(delay_on_wake)
 	, sleep_mode(Mode::STANDBY)
@@ -37,11 +37,11 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Sleep_Manager::Loom_Sleep_Manager(JsonArrayConst p)
-	: Loom_Sleep_Manager(p[0], p[1], (Mode)(int)p[2], p[3]) {}
+SleepManager::SleepManager(JsonArrayConst p)
+	: SleepManager(p[0], p[1], (Mode)(int)p[2], p[3]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::print_config() const
+void SleepManager::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tSleep Mode    : ", enum_sleep_mode_string(sleep_mode) );
@@ -51,7 +51,7 @@ void Loom_Sleep_Manager::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::link_device_manager(LoomManager* LM)
+void SleepManager::link_device_manager(Manager* LM)
 {
 	LoomModule::link_device_manager(LM);
 
@@ -70,7 +70,7 @@ void Loom_Sleep_Manager::link_device_manager(LoomManager* LM)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Sleep_Manager::sleep()
+bool SleepManager::sleep()
 {
 		pre_sleep();
 
@@ -81,7 +81,7 @@ bool Loom_Sleep_Manager::sleep()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::pre_sleep()
+void SleepManager::pre_sleep()
 {
 	LPrintln("\nEntering STANDBY");
 	Serial.flush();
@@ -97,7 +97,7 @@ void Loom_Sleep_Manager::pre_sleep()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::post_sleep()
+void SleepManager::post_sleep()
 {
 	// Reenable SysTick Interrupt
 	// See https://community.atmel.com/comment/2616121#comment-2616121
@@ -113,7 +113,7 @@ void Loom_Sleep_Manager::post_sleep()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_Sleep_Manager::enum_sleep_mode_string(const Mode m)
+const char* SleepManager::enum_sleep_mode_string(const Mode m)
 {
 	switch(m) {
 		case Mode::IDLE				: return "Idle";

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_MAX31856.h
-/// @brief		File for Loom_MAX31856 definition.
+/// @file		MAX31856.h
+/// @brief		File for MAX31856 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -25,7 +25,7 @@
 /// - [Dependency: Adafruit_MAX31856](https://github.com/adafruit/Adafruit_MAX31856)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_MAX31856 : public LoomSPISensor
+class MAX31856 : public SPISensor
 {
 protected:
 
@@ -49,7 +49,7 @@ public:
 	/// @param[in]	SPI_b				Set(Int) | <11> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used for Software Serial b
 	/// @param[in]	SPI_c				Set(Int) | <12> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used for Software Serial c
 	/// @param[in]	SPI_d				Set(Int) | <13> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used for Software Serial d
-	Loom_MAX31856(
+	MAX31856(
 			const char*		module_name		= "MAX31856",
 			const uint8_t	num_samples		= 1,
 			const uint8_t	CS_pin			= 10,
@@ -62,10 +62,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_MAX31856(JsonArrayConst p);
+	MAX31856(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_MAX31856() = default;
+	~MAX31856() = default;
 
 //=============================================================================
 ///@name	OPERATION

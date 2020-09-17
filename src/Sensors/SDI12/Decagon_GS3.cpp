@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Decagon_GS3.cpp
-/// @brief		File for Loom_DecagonGS3 implementation. Incomplete.
+/// @brief		File for DecagonGS3 implementation. Incomplete.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -16,39 +16,39 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 // Uncomment once implemented
-// REGISTER(LoomModule, Loom_DecagonGS3, "DecagonGS3");
+// REGISTER(LoomModule, DecagonGS3, "DecagonGS3");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_DecagonGS3::Loom_DecagonGS3(const uint8_t num_samples)
-	: LoomSDI12Sensor("GS3", Type::DecagonGS3, num_samples) 
+DecagonGS3::DecagonGS3(const uint8_t num_samples)
+	: SDI12Sensor("GS3", Type::DecagonGS3, num_samples) 
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_DecagonGS3::Loom_DecagonGS3(JsonArrayConst p)
-	: Loom_DecagonGS3((uint8_t)p[0] ) {}
+DecagonGS3::DecagonGS3(JsonArrayConst p)
+	: DecagonGS3((uint8_t)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_DecagonGS3::print_config() const
+void DecagonGS3::print_config() const
 {
-	LoomSDI12Sensor::print_config();
+	SDI12Sensor::print_config();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_DecagonGS3::print_measurements() const
-{
-
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_DecagonGS3::measure()
+void DecagonGS3::print_measurements() const
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_DecagonGS3::package(JsonObject json)
+void DecagonGS3::measure()
+{
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void DecagonGS3::package(JsonObject json)
 {
 	// package_json(json, module_name, "Temp", temperature);
 }

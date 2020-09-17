@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Relay.cpp
-/// @brief		File for Loom_Relay implementation.
+/// @file		Relay.cpp
+/// @brief		File for Relay implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -15,11 +15,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_Relay, "Relay");
+REGISTER(LoomModule, Relay, "Relay");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Relay::Loom_Relay(const byte pin)
-	: LoomActuator("Relay", Type::Relay) 
+Relay::Relay(const byte pin)
+	: Actuator("Relay", Type::Relay) 
 	, pin(pin)
 	, on(false)
 {
@@ -28,14 +28,14 @@ Loom_Relay::Loom_Relay(const byte pin)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Relay::Loom_Relay(JsonArrayConst p)
-	: Loom_Relay((byte)p[0] ) {}
+Relay::Relay(JsonArrayConst p)
+	: Relay((byte)p[0] ) {}
 // explicitly cast because with only one parameter, JsonVariant p[0] can 
 // implicitly cast to either JsonArrayConst or byte of regular constructor
 
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::add_config(JsonObject json)
+void Relay::add_config(JsonObject json)
 {
 	// add_config_aux(json, module_name,
 	// 	module_name, pin
@@ -43,21 +43,21 @@ void Loom_Relay::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::print_state() const
+void Relay::print_state() const
 {
 	print_module_label();
 	LPrintln("\tRelay ", pin, (on) ? " On" : " Off" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::package(JsonObject json)
+void Relay::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	data["on"] = on;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Relay::dispatch(JsonObject json)
+bool Relay::dispatch(JsonObject json)
 {
 // 	LPrintln("Command sent to relay is:");
 // 	serializeJsonPretty(json, Serial);
@@ -79,7 +79,7 @@ bool Loom_Relay::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::set(const bool state)
+void Relay::set(const bool state)
 {
 	LPrintln("In set");
 

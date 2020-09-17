@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_OLED.h
-/// @brief		File for Loom_OLED definition.
+/// @file		OLED.h
+/// @brief		File for OLED definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -27,7 +27,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#oled-display)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_OLED : public LoomLogPlat
+class OLED : public LogPlat
 {
 
 public:
@@ -79,7 +79,7 @@ public:
 	/// @param[in]	scroll_duration			Int | <6000> | [500-30000] | The time (ms) to complete full scroll cycle if display_format is SCROLL
 	/// @param[in]	freeze_pin				Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to pause the display
 	/// @param[in]	freeze_behavior			Set(FreezeType) | <2> | {O("Disable"), 1("Pause Data"), 2("Pause Data and Scroll")} | How freezing the display should behave
-	Loom_OLED(
+	OLED(
 			const bool			enable_rate_filter		= true,
 			const uint16_t		min_filter_delay		= 300,
 			const Version		type					= Version::FEATHERWING,
@@ -93,10 +93,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_OLED(JsonArrayConst p);
+	OLED(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_OLED() = default;
+	~OLED() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -105,9 +105,9 @@ public:
 	bool			log(JsonObject json) override;
 
 	// manually expose superclass version of log() that gets json from
-	// linked LoomManager, calling this classes implementation of 
+	// linked Manager, calling this classes implementation of 
 	// 'log(JsonObject json)', which is pure virtual in superclass
-	using LoomLogPlat::log; 
+	using LogPlat::log; 
 
 //=============================================================================
 ///@name	PRINT INFORMATION

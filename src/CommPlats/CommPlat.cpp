@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_CommPlat.cpp
-/// @brief		File for LoomCommPlat implementation.
+/// @brief		File for CommPlat implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -14,7 +14,7 @@
 #include "Manager.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomCommPlat::LoomCommPlat(
+CommPlat::CommPlat(
 		const char*				module_name,
 		const LoomModule::Type	module_type,
 		const uint16_t			max_message_len
@@ -29,14 +29,14 @@ LoomCommPlat::LoomCommPlat(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomCommPlat::print_config() const
+void CommPlat::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tMax Message Length  : ", max_message_len );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomCommPlat::print_state() const
+void CommPlat::print_state() const
 {
 	LoomModule::print_state();
 	LPrintln("\tDrop Rate Since Start  : ", get_drop_rate() );
@@ -44,7 +44,7 @@ void LoomCommPlat::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-float LoomCommPlat::get_drop_rate() const
+float CommPlat::get_drop_rate() const
 {
 	return (total_packet_count == 0)
 		? 0.0f
@@ -52,7 +52,7 @@ float LoomCommPlat::get_drop_rate() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-float LoomCommPlat::get_last_ten_drop_rate() const
+float CommPlat::get_last_ten_drop_rate() const
 {
 	uint8_t total = 0;
 	uint8_t min_pak = static_cast<uint8_t>(total_packet_count < 10U ? total_packet_count : 10U);
@@ -63,7 +63,7 @@ float LoomCommPlat::get_last_ten_drop_rate() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::receive()
+bool CommPlat::receive()
 {
 	if (device_manager != nullptr) {
 		// Loom_Manager's json needs to be cleared (passing true to internal_json)
@@ -74,7 +74,7 @@ bool LoomCommPlat::receive()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
+bool CommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
 {
 	bool status = receive_blocking_impl(json, max_wait_time);
 	LPrintln("Recieve " , (status) ? "successful" : "failed" );
@@ -82,7 +82,7 @@ bool LoomCommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::receive_blocking(const uint max_wait_time)
+bool CommPlat::receive_blocking(const uint max_wait_time)
 {
 	if (device_manager != nullptr) {
 		// Loom_Manager's json needs to be cleared (passing true to internal_json)
@@ -93,10 +93,10 @@ bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
+bool CommPlat::receive_batch_blocking(uint max_wait_time){
 	bool receive_results=false;
 	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
-		Loom_BatchSD* batch = (Loom_BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
+		BatchSD* batch = (BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
 		receive_results = receive_blocking(max_wait_time);
 		if(!receive_results) return false;
 		return batch->store_batch();
@@ -105,7 +105,7 @@ bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
+bool	CommPlat::send(JsonObject json, const uint8_t destination) {
 	bool status = send_impl(json, destination);
 	add_packet_result(!status);
 	LPrintln("Send " , (status) ? "successful" : "failed" );
@@ -113,7 +113,7 @@ bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::send(const uint8_t destination)
+bool CommPlat::send(const uint8_t destination)
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
@@ -124,12 +124,12 @@ bool LoomCommPlat::send(const uint8_t destination)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint8_t LoomCommPlat::send_batch(const uint8_t destination, int delay_time){
+uint8_t CommPlat::send_batch(const uint8_t destination, int delay_time){
 	// check to make sure we have BatchSD module connected
 	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
 		// retrieve the Batch SD module
 		uint8_t drop_count = 0;
-		Loom_BatchSD* batch = (Loom_BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
+		BatchSD* batch = (BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
 		int packets = batch->get_packet_counter();
 		print_module_label();
 		LPrintln("Packets to send: ", packets);
@@ -149,7 +149,7 @@ uint8_t LoomCommPlat::send_batch(const uint8_t destination, int delay_time){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomCommPlat::broadcast()
+void CommPlat::broadcast()
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
@@ -160,12 +160,12 @@ void LoomCommPlat::broadcast()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomCommPlat::broadcast_batch(int delay_time)
+void CommPlat::broadcast_batch(int delay_time)
 {
 	// check to make sure we have BatchSD module connected
 	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
 		// retrieve the Batch SD module
-		Loom_BatchSD* batch = (Loom_BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
+		BatchSD* batch = (BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
 		int packets = batch->get_packet_counter();
 		print_module_label();
 		LPrintln("Packets to broadcast: ", packets);
@@ -183,7 +183,7 @@ void LoomCommPlat::broadcast_batch(int delay_time)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len) const
+bool CommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len) const
 {
 	memset(buffer, '\0', sizeof(buffer));
 
@@ -199,7 +199,7 @@ bool LoomCommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, co
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
+bool CommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 {
 	if (print_verbosity == Verbosity::V_HIGH) {
 		print_module_label();
@@ -231,7 +231,7 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomCommPlat::add_packet_result(const bool did_drop) {
+void CommPlat::add_packet_result(const bool did_drop) {
 	// shift last_ten_dropped by one
 	last_ten_dropped[last_ten_dropped_idx++] = did_drop;
 	if (last_ten_dropped_idx >= 10)

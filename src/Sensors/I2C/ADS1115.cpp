@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		ADS1115.cpp
-/// @brief		File for Loom_ADS1115 implementation.
+/// @brief		File for ADS1115 implementation.
 /// @author		
 /// @date		
 /// @copyright	GNU General Public License v3.0
@@ -18,10 +18,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_ADS1115, "ADS1115");
+REGISTER(LoomModule, ADS1115, "ADS1115");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_ADS1115::Loom_ADS1115(
+ADS1115::ADS1115(
 		const 	byte		i2c_address,
 		const	uint8_t 	mux_port,
 		const 	bool		analog_0_enabled,
@@ -32,7 +32,7 @@ Loom_ADS1115::Loom_ADS1115(
 		const 	bool		diff_1_enabled,
 		const	Gain		gain
 	)
-	: LoomI2CSensor("ADS1115", LoomModule::Type::ADS1115 , i2c_address, mux_port)
+	: I2CSensor("ADS1115", LoomModule::Type::ADS1115 , i2c_address, mux_port)
 	, ads1115(i2c_address)
 	, analog_enabled{ analog_0_enabled, analog_1_enabled, analog_2_enabled, analog_3_enabled }
 	, diff_enabled{ diff_0_enabled, diff_1_enabled }
@@ -46,11 +46,11 @@ Loom_ADS1115::Loom_ADS1115(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_ADS1115::Loom_ADS1115(JsonArrayConst p)
-	: Loom_ADS1115(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], (Gain)(uint32_t)p[8] ) {}
+ADS1115::ADS1115(JsonArrayConst p)
+	: ADS1115(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], (Gain)(uint32_t)p[8] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_ADS1115::print_config() const
+void ADS1115::print_config() const
 {			
 	LPrintln('\t', "i2c_address: ", i2c_address);
 	LPrintln('\t', "module_name: ", "ADS1115" );
@@ -63,7 +63,7 @@ void Loom_ADS1115::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_ADS1115::print_measurements() const
+void ADS1115::print_measurements() const
 {
 	print_module_label();
 	LPrintln("************************ \n");
@@ -80,7 +80,7 @@ void Loom_ADS1115::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_ADS1115::measure()
+void ADS1115::measure()
 { 
 	for (uint8_t i = 0; i < 4; i++) {
 		if (analog_enabled[i])
@@ -93,7 +93,7 @@ void Loom_ADS1115::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_ADS1115::package(JsonObject json)
+void ADS1115::package(JsonObject json)
 {
 		JsonObject data = get_module_data_object(json, module_name);
 		if (analog_enabled[0]) data["analog0"] = analog_reads[0];

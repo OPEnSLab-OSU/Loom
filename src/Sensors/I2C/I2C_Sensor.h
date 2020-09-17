@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_I2C_Sensor.h
-/// @brief		File for LoomI2CSensor definition.
+/// @brief		File for I2CSensor definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -23,7 +23,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#i2c-sensors)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomI2CSensor : public LoomSensor
+class I2CSensor : public Sensor
 {
 protected:
 	
@@ -47,7 +47,7 @@ public:
 	/// @param[in]	i2c_address		The i2c address of the sensor 
 	/// @param[in]	mux_portx		The port of the sensor if used with a multiplexer, 255 if not 
 	/// @param[in]	num_samples		The number of samples to take and average
-	LoomI2CSensor(
+	I2CSensor(
 			const char*				module_name,
 			const LoomModule::Type	module_type,
 			const byte				i2c_address,
@@ -56,7 +56,7 @@ public:
 		);
 
 	/// Destructor
-	virtual ~LoomI2CSensor() = default;
+	virtual ~I2CSensor() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -80,7 +80,7 @@ public:
 private:
 
 	/// Allow Multiplexer to access private methods of I2C sensor modules
-	friend class Loom_Multiplexer;
+	friend class Multiplexer;
 
 };
 

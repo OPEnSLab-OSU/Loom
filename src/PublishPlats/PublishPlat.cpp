@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_PublishPlat.cpp
-/// @brief		File for LoomPublishPlat implementation.
+/// @brief		File for PublishPlat implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -16,7 +16,7 @@
 // #include "../InternetPlats/InternetLTE.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomPublishPlat::LoomPublishPlat(
+PublishPlat::PublishPlat(
 		const char*				module_name,
 		const LoomModule::Type	module_type,
 		const LoomModule::Type	internet_type
@@ -27,7 +27,7 @@ LoomPublishPlat::LoomPublishPlat(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomPublishPlat::second_stage_ctor()
+void PublishPlat::second_stage_ctor()
 {
 	// check to see if we have a device manager
 	if (device_manager == nullptr) {
@@ -37,16 +37,16 @@ void LoomPublishPlat::second_stage_ctor()
 	}
 
 	// check if internet platform exist
-	LoomInternetPlat* temp;
+	InternetPlat* temp;
 	switch (internet_type) {
 		case LoomModule::Type::Ethernet:
-			temp = (LoomInternetPlat*)(device_manager->find_module(LoomModule::Type::Ethernet));
+			temp = (InternetPlat*)(device_manager->find_module(LoomModule::Type::Ethernet));
 			break;
 		case LoomModule::Type::WiFi:
-			temp = (LoomInternetPlat*)(device_manager->find_module(LoomModule::Type::WiFi));
+			temp = (InternetPlat*)(device_manager->find_module(LoomModule::Type::WiFi));
 			break;
 		case LoomModule::Type::LTE:
-			temp = (LoomInternetPlat*)(device_manager->find_module(LoomModule::Type::LTE));
+			temp = (InternetPlat*)(device_manager->find_module(LoomModule::Type::LTE));
 			break;
 		default:
 			temp = nullptr;
@@ -71,7 +71,7 @@ void LoomPublishPlat::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomPublishPlat::publish(const JsonObject json)
+bool PublishPlat::publish(const JsonObject json)
 {
 	// check validity
 	if (m_internet == nullptr  || !m_validate_json(json)){
@@ -86,13 +86,13 @@ bool LoomPublishPlat::publish(const JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint8_t LoomPublishPlat::publish_batch()
+uint8_t PublishPlat::publish_batch()
 {
 	// check to make sure we have BatchSD module connected
 	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
 		// retrieve the Batch SD module
 		uint8_t drop_count = 0;
-		Loom_BatchSD* batch = (Loom_BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
+		BatchSD* batch = (BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
 		int packets = batch->get_packet_counter();
 		print_module_label();
 		LPrintln("Packets in batch to publish: ", packets);
@@ -113,7 +113,7 @@ uint8_t LoomPublishPlat::publish_batch()
 
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomPublishPlat::publish()
+bool PublishPlat::publish()
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
@@ -125,21 +125,21 @@ bool LoomPublishPlat::publish()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomPublishPlat::print_config() const
+void PublishPlat::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tInternet Type: ", (int)internet_type);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomPublishPlat::print_state() const
+void PublishPlat::print_state() const
 {
 	LoomModule::print_state();
 	LPrintln("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomPublishPlat::m_validate_json(const JsonObjectConst json) const
+bool PublishPlat::m_validate_json(const JsonObjectConst json) const
 {
 	// check if we got an object at all
 	if (json.isNull())
@@ -167,7 +167,7 @@ bool LoomPublishPlat::m_validate_json(const JsonObjectConst json) const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomPublishPlat::m_print_json_error(const char* str) const
+void PublishPlat::m_print_json_error(const char* str) const
 {
 	print_module_label();
 	LPrint("Publish data is invalid: ", str, "\n");

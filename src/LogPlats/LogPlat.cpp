@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_LogPlat.cpp
-/// @brief		File for LoomLogPlat implementation.
+/// @brief		File for LogPlat implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -12,7 +12,7 @@
 #include "Manager.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomLogPlat::LoomLogPlat( 
+LogPlat::LogPlat( 
 		const char*				module_name, 
 		const LoomModule::Type	module_type,
 		const bool				enable_rate_filter,
@@ -25,7 +25,7 @@ LoomLogPlat::LoomLogPlat(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomLogPlat::print_config() const
+void LogPlat::print_config() const
 {
 	LoomModule::print_config();
 
@@ -36,7 +36,7 @@ void LoomLogPlat::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomLogPlat::check_millis() 
+bool LogPlat::check_millis() 
 {
 	if ( (millis() > min_filter_delay) && ( (millis()-last_log_millis) < min_filter_delay ) ) {
 		print_module_label();
@@ -49,7 +49,7 @@ bool LoomLogPlat::check_millis()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomLogPlat::log()
+bool LogPlat::log()
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();

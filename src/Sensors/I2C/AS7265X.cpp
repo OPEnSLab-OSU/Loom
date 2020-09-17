@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_AS7265X.cpp
-/// @brief		File for Loom_AS7265X implementation.
+/// @file		AS7265X.cpp
+/// @brief		File for AS7265X implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -15,10 +15,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_AS7265X, "AS7265X");
+REGISTER(LoomModule, AS7265X, "AS7265X");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_AS7265X::Loom_AS7265X(
+AS7265X::AS7265X(
 		const byte			i2c_address, 
 		const uint8_t		mux_port,
 		const bool			use_bulb, 
@@ -26,7 +26,7 @@ Loom_AS7265X::Loom_AS7265X(
 		const uint8_t		mode, 
 		const uint8_t		integration_time
 	)
-	: LoomI2CSensor("AS7265X", Type::AS7265X, i2c_address, mux_port)
+	: I2CSensor("AS7265X", Type::AS7265X, i2c_address, mux_port)
 	, use_bulb(use_bulb)
 	, gain(gain)
 	, mode(mode)
@@ -95,11 +95,11 @@ Loom_AS7265X::Loom_AS7265X(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_AS7265X::Loom_AS7265X(JsonArrayConst p)
-	: Loom_AS7265X(EXPAND_ARRAY(p, 6) ) {}
+AS7265X::AS7265X(JsonArrayConst p)
+	: AS7265X(EXPAND_ARRAY(p, 6) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::print_measurements() const
+void AS7265X::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -113,7 +113,7 @@ void Loom_AS7265X::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::measure()
+void AS7265X::measure()
 {
 	if (use_bulb) {
 		inst_AS7265X.takeMeasurementsWithBulb();
@@ -147,7 +147,7 @@ void Loom_AS7265X::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::package(JsonObject json)
+void AS7265X::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	data["a"] = uv[0];

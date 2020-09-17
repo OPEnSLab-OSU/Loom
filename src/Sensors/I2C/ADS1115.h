@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_AS7262.h
-/// @brief		File for Loom_ADS1115 definition.
+/// @file		AS7262.h
+/// @brief		File for ADS1115 definition.
 /// @author		Noah Koontz
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
@@ -28,7 +28,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ads1115-16-bit-adc)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_ADS1115 : public LoomI2CSensor
+class ADS1115 : public I2CSensor
 {
 protected :
 		///< Underlying ADS1115 sensor manager instance
@@ -68,7 +68,7 @@ public:
 	/// @param[in]	diff_0_enabled			Bool | <false> | {true, false} | Enable a differential measurement between A0 and A1
 	/// @param[in]	diff_1_enabled			Bool | <false> | {true, false} | Enable a differential measurement between A2 and A3
 	/// @param[in]	Fain				 	Set(Gain) | <0> | {0x0000("GAIN_TWOTHIRDS"), 0x0200("GAIN_ONE"), 0x0400("GAIN_TWO" ), 0x0600("GAIN_FOUR"), 0x0800("GAIN_EIGHT"), 0x0A00("GAIN_SIXTEEN")} | The gain setting for the ADS1115. Please do not change this number unless you are familiar with the ADS1115, as an incorrect setting will destroy the ADC!.
-	Loom_ADS1115(
+	ADS1115(
 		const	byte		i2c_address			= ADS1015_ADDRESS, 
 		const	uint8_t		mux_port			= 255,
 		const	bool		analog_0_enabled	= true,
@@ -83,10 +83,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	Loom_ADS1115(JsonArrayConst p);
+	ADS1115(JsonArrayConst p);
 	
 	/// Destructor
-	virtual ~Loom_ADS1115() = default;
+	virtual ~ADS1115() = default;
 
 //=============================================================================
 ///@name	OPERATION

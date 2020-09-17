@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Stepper.cpp
-/// @brief		File for Loom_Stepper implementation.
+/// @file		Stepper.cpp
+/// @brief		File for Stepper implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -17,11 +17,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_Stepper, "Stepper");
+REGISTER(LoomModule, Stepper, "Stepper");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Stepper::Loom_Stepper() 
-	: LoomActuator("Stepper", Type::Stepper ) 
+Stepper::Stepper() 
+	: Actuator("Stepper", Type::Stepper ) 
 {
 	AFMS = new Adafruit_MotorShield();
 	for (auto i = 0; i < NUM_STEPPERS; i++){
@@ -34,17 +34,17 @@ Loom_Stepper::Loom_Stepper()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Stepper::Loom_Stepper(JsonArrayConst p)
-	: Loom_Stepper() {} 
+Stepper::Stepper(JsonArrayConst p)
+	: Stepper() {} 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Stepper::~Loom_Stepper() 
+Stepper::~Stepper() 
 {
 	delete AFMS;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Stepper::add_config(JsonObject json)
+void Stepper::add_config(JsonObject json)
 {
 	// add_config_aux(json, module_name,
 	// 	module_name, stepper_count
@@ -52,7 +52,7 @@ void Loom_Stepper::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Stepper::dispatch(JsonObject json)
+bool Stepper::dispatch(JsonObject json)
 {
 	JsonArray params = json["params"];
 	switch( (char)json["func"] ) {
@@ -62,7 +62,7 @@ bool Loom_Stepper::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Stepper::move_steps(const uint8_t motor, const uint16_t steps, const uint8_t speed, const bool clockwise)
+void Stepper::move_steps(const uint8_t motor, const uint16_t steps, const uint8_t speed, const bool clockwise)
 {
 	if (motor < NUM_STEPPERS) {
 		motors[motor]->setSpeed( (speed > 0) ? speed : 0);

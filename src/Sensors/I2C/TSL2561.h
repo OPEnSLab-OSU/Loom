@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_TSL2561.h
-/// @brief		File for Loom_TSL2561 definition.
+/// @file		TSL2561.h
+/// @brief		File for TSL2561 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -28,7 +28,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#tsl2561-luminosity-sensor)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_TSL2561 : public LoomI2CSensor
+class TSL2561 : public I2CSensor
 {
 protected:
 
@@ -52,7 +52,7 @@ public:
 	/// @param[in]	mux_port			Int | <255> | [0-16] | Port on multiplexer
 	/// @param[in]	gain				Set(Int) | <1> | {1, 16} | Gain level
 	/// @param[in]	resolution			Set(Int) | <3> | { 1("Low"), 2("Med"), 3("High") } | Resolution
-	Loom_TSL2561(
+	TSL2561(
 			const byte		i2c_address	= 0x39,
 			const uint8_t	mux_port	= 255,
 			const uint8_t	gain		= 1,
@@ -62,10 +62,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_TSL2561(JsonArrayConst p);
+	TSL2561(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_TSL2561() = default;
+	~TSL2561() = default;
 
 //=============================================================================
 ///@name	OPERATION

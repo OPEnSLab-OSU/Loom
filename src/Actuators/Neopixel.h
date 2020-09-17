@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Neopixel.h
-/// @brief		File for Loom_Neopixel definition.
+/// @file		Neopixel.h
+/// @brief		File for Neopixel definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -26,7 +26,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#neopixel)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Neopixel : public LoomActuator
+class Neopixel : public Actuator
 {
 
 protected:
@@ -47,7 +47,7 @@ public:
 	/// @param[in]	enableA0		Bool | <false> | {true, false} | Whether or not to use pin A0 for Neopixel
 	/// @param[in]	enableA1		Bool | <false> | {true, false} | Whether or not to use pin A1 for Neopixel
 	/// @param[in]	enableA2		Bool | <true> | {true, false} | Whether or not to use pin A2 for Neopixel
-	Loom_Neopixel(
+	Neopixel(
 			const bool enableA0 = false,
 			const bool enableA1 = false,
 			const bool enableA2 = true
@@ -56,10 +56,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Neopixel(JsonArrayConst p);
+	Neopixel(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Neopixel() = default;
+	~Neopixel() = default;
 
 //=============================================================================
 ///@name	OPERATION

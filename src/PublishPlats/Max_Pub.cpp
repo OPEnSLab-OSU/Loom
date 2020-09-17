@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Max_Pub.cpp
-/// @brief		File for Loom_MaxPub implementation.
+/// @brief		File for MaxPub implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -17,20 +17,20 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER_NODEFAULT(LoomModule, Loom_MaxPub, "MaxPub");
+REGISTER_NODEFAULT(LoomModule, MaxPub, "MaxPub");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxPub::Loom_MaxPub(
+MaxPub::MaxPub(
 		const LoomModule::Type internet_type
 	)   
-	: LoomPublishPlat("MaxPub", Type::MaxPub, internet_type)
+	: PublishPlat("MaxPub", Type::MaxPub, internet_type)
 	, remoteIP({192,168,1,255})
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::second_stage_ctor() 
+void MaxPub::second_stage_ctor() 
 {
-	LoomPublishPlat::second_stage_ctor();
+	PublishPlat::second_stage_ctor();
 
 	UDP_port = UDP_SEND_OFFSET + ((device_manager) ? device_manager->get_instance_num() : 0);
 
@@ -44,26 +44,26 @@ void Loom_MaxPub::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxPub::Loom_MaxPub(JsonArrayConst p)
-	: Loom_MaxPub((LoomModule::Type)(int)p[0] ) {}
+MaxPub::MaxPub(JsonArrayConst p)
+	: MaxPub((LoomModule::Type)(int)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::print_config() const
+void MaxPub::print_config() const
 {
-	LoomPublishPlat::print_config();
+	PublishPlat::print_config();
 	LPrintln("\tUDP Port  : ", UDP_port);
 	LPrintln("\tRemote IP : ", remoteIP);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_port(const uint16_t port)
+void MaxPub::set_port(const uint16_t port)
 {
 	UDP_port = port;
 	UDP_Inst = (m_internet != nullptr) ? m_internet->open_socket(UDP_port) : nullptr;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat)
+bool MaxPub::send_to_internet(const JsonObject json, InternetPlat* plat)
 {
 	if (!UDP_Inst) {
 		// Try to get UDP 
@@ -88,7 +88,7 @@ bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_ip(const IPAddress ip)
+void MaxPub::set_ip(const IPAddress ip)
 {
 	remoteIP = ip;
 	print_module_label();
@@ -96,12 +96,12 @@ void Loom_MaxPub::set_ip(const IPAddress ip)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_ip()
+void MaxPub::set_ip()
 {
 	print_module_label();
 	LPrintln("Received command to set IP to send to");
-	Loom_MaxSub* temp;
-	if (device_manager && (temp = (Loom_MaxSub*)&(device_manager->MaxSub())) ) {
+	MaxSub* temp;
+	if (device_manager && (temp = (MaxSub*)&(device_manager->MaxSub())) ) {
 		IPAddress ip = temp->get_remote_IP();
 		if (ip[0] != 0) {
 			set_ip(ip);
@@ -113,7 +113,7 @@ void Loom_MaxPub::set_ip()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_MaxPub::dispatch(JsonObject json)
+bool MaxPub::dispatch(JsonObject json)
 {
 	JsonArray params = json["params"];
 	switch( (char)json["func"] ) {

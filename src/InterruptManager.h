@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Interrupt_Manager.h
-/// @brief		File for Loom_Interrupt_Manager definition and supporting enum
+/// @file		InterruptManager.h
+/// @brief		File for InterruptManager definition and supporting enum
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -22,9 +22,9 @@
 #define MaxStopWatchCount 2		///< Maximum numbr of stopwatches
 
 
-// Specify that LoomRTC exists, defined in own file
-class LoomRTC;
-class Loom_Sleep_Manager;
+// Specify that L_RTC exists, defined in own file
+class L_RTC;
+class SleepManager;
 
 
 /// Used to make function signatures easier to read
@@ -46,7 +46,7 @@ enum class ISR_Type {
 /// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___interrupt___manager.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Interrupt_Manager : public LoomModule
+class InterruptManager : public LoomModule
 {
 
 private:
@@ -85,10 +85,10 @@ private:
 protected:
 
 	/// Pointer to an RTC object for managing timers / timed interrupts	
-	LoomRTC*		RTC_Inst;					
+	L_RTC*		RTC_Inst;					
 	
 	/// Pointer to a Sleep Manager object
-	Loom_Sleep_Manager* Sleep_Manager;	
+	SleepManager* SleepMngr;	
 
 	// = = = Interrupts = = =
 
@@ -130,17 +130,17 @@ public:
 	/// Interrupt Manager module constructor.
 	///
 	/// @param[in]	RTC_Inst		Set(Int) | <0> | {0("Null")} | OLED module name
-	Loom_Interrupt_Manager(
-			LoomRTC* RTC_Ins = nullptr
+	InterruptManager(
+			L_RTC* RTC_Ins = nullptr
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Interrupt_Manager(JsonArrayConst p);
+	InterruptManager(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Interrupt_Manager() = default;
+	~InterruptManager() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -306,7 +306,7 @@ public:
 
 	/// Return pointer to the currently linked RTC object
 	/// @return		Current RTC object
-	LoomRTC*	get_RTC_module() const { return RTC_Inst; }
+	L_RTC*	get_RTC_module() const { return RTC_Inst; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -316,11 +316,11 @@ public:
 	/// Overrides default by getting RTC pointer from 
 	/// device manager if possible
 	/// @param[in]	LM		Manager to link 
-	void 		link_device_manager(LoomManager* LM) override;
+	void 		link_device_manager(Manager* LM) override;
 
 	/// Set pointer to sleep Manager
 	/// @param[in]	SM		Pointer to sleep manager
-	void 		link_sleep_manager(Loom_Sleep_Manager* SM);
+	void 		link_sleep_manager(SleepManager* SM);
 
 	/// All interrupts enable/disable
 	/// @param[in]	state	Enable state to apply to all interrupts
@@ -333,7 +333,7 @@ public:
 
 	/// Set the RTC module to use for timers
 	/// @param[in]	RTC_Inst	Pointer to the RTC object
-	void		set_RTC_module(LoomRTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
+	void		set_RTC_module(L_RTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS

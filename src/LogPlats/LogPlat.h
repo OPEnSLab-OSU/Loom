@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_LogPlat.h
-/// @brief		File for LoomLogPlat definition.
+/// @brief		File for LogPlat definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -23,7 +23,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#data-logging)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomLogPlat : public LoomModule
+class LogPlat : public LoomModule
 {
 
 protected:
@@ -43,7 +43,7 @@ public:
 	/// @param[in] 	module_type			Type of the module (provided by derived classes)
 	/// @param[in] 	enable_rate_filter	Whether or not to impose maximum update rate
 	/// @param[in] 	min_filter_delay	Minimum update delay, if enable_rate_filter enabled
-	LoomLogPlat(	
+	LogPlat(	
 			const char*				module_name,
 			const LoomModule::Type	module_type,
 			const bool				enable_rate_filter	= true,
@@ -51,7 +51,7 @@ public:
 		);
 
 	/// Destructor
-	virtual ~LoomLogPlat() = default;
+	virtual ~LogPlat() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -65,8 +65,8 @@ public:
 	/// @param[in] json		Json Object to log
 	virtual bool	log(JsonObject json) = 0;
 
-	/// Version of log for use with LoomManager.
-	/// Accesses Json from LoomManager.
+	/// Version of log for use with Manager.
+	/// Accesses Json from Manager.
 	/// Calls derived classes implementations of log(JsonObject json)
 	bool			log();		
 

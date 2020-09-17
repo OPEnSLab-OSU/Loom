@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_WarmUp_Manager.cpp
+/// @file		WarmUpManager.cpp
 /// @brief	Source file for Loom Module Warmup Manager.
 /// @author		C. Greyston Brady
 /// @date		  2020
@@ -8,21 +8,21 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "WarmUp_Manager.h"
+#include "WarmUpManager.h"
 #include "WarmUp.h"
 
-Loom_WarmUp_Manager::Loom_WarmUp_Manager() 
-  : LoomModule("WarmUp_Manager", LoomModule::Type::WarmUp_Manager)
+WarmUpManager::WarmUpManager() 
+  : LoomModule("WarmUpManager", LoomModule::Type::WarmUpManager)
   , warm(false)
   , start_time(0)
   , warm_duration(0) {
 
 }
 
-Loom_WarmUp_Manager::Loom_WarmUp_Manager(JsonArrayConst p) 
-  : Loom_WarmUp_Manager() {}
+WarmUpManager::WarmUpManager(JsonArrayConst p) 
+  : WarmUpManager() {}
 
-void Loom_WarmUp_Manager::warming_Begin() {
+void WarmUpManager::warming_Begin() {
   start_time = millis();
 
   for(WarmUp* elem : Interfaces) {
@@ -32,13 +32,13 @@ void Loom_WarmUp_Manager::warming_Begin() {
   return;
 }
 
-void Loom_WarmUp_Manager::warming_Reset() {
+void WarmUpManager::warming_Reset() {
   warm = false;
   start_time = 0;
   return;
 }
 
-bool Loom_WarmUp_Manager::is_warm() {
+bool WarmUpManager::is_warm() {
   if(!warm) {
     return false;
   } else {

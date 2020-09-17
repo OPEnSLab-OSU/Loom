@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_SubscribePlat.cpp
-/// @brief		File for LoomSubscribePlat implementation.
+/// @brief		File for SubscribePlat implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -12,7 +12,7 @@
 #include "Manager.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomSubscribePlat::LoomSubscribePlat(	
+SubscribePlat::SubscribePlat(	
 		const char*				module_name,
 		const LoomModule::Type	module_type,
 		const LoomModule::Type	internet_type
@@ -23,7 +23,7 @@ LoomSubscribePlat::LoomSubscribePlat(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSubscribePlat::second_stage_ctor() 
+void SubscribePlat::second_stage_ctor() 
 {
 	// check to see if we have a device manager
 	if (device_manager == nullptr) { 
@@ -32,7 +32,7 @@ void LoomSubscribePlat::second_stage_ctor()
 		return; 
 	}
 
-	LoomInternetPlat* temp = (LoomInternetPlat*)device_manager->find_module(internet_type);
+	InternetPlat* temp = (InternetPlat*)device_manager->find_module(internet_type);
 
 	print_module_label();
 	if (temp != nullptr && temp->get_module_type() != LoomModule::Type::Unknown) {
@@ -51,21 +51,21 @@ void LoomSubscribePlat::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSubscribePlat::print_config() const
+void SubscribePlat::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tInternet Type: ", (int)internet_type);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSubscribePlat::print_state() const
+void SubscribePlat::print_state() const
 {
 	LoomModule::print_state();
 	LPrintln("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomSubscribePlat::subscribe()
+bool SubscribePlat::subscribe()
 {
 	// call normal subscribe (implemented by derived classes)
 	if (device_manager != nullptr) {

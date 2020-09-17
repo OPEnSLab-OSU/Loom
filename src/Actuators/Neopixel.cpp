@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Neopixel.cpp
-/// @brief		File for Loom_Neopixel implementation.
+/// @file		Neopixel.cpp
+/// @brief		File for Neopixel implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -15,15 +15,15 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_Neopixel, "Neopixel");
+REGISTER(LoomModule, Neopixel, "Neopixel");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Neopixel::Loom_Neopixel(
+Neopixel::Neopixel(
 		const bool enableA0, 
 		const bool enableA1, 
 		const bool enableA2
 	) 
-	: LoomActuator("Neopixel", Type::Neopixel)
+	: Actuator("Neopixel", Type::Neopixel)
 	, pin_enabled( {enableA0, enableA1, enableA2} )
 	, pixels( { Adafruit_NeoPixel(1, 14, NEO_GRB + NEO_KHZ800),
 				Adafruit_NeoPixel(1, 15, NEO_GRB + NEO_KHZ800),
@@ -49,11 +49,11 @@ Loom_Neopixel::Loom_Neopixel(
 } 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Neopixel::Loom_Neopixel(JsonArrayConst p)
-	: Loom_Neopixel(EXPAND_ARRAY(p, 3) ) {}
+Neopixel::Neopixel(JsonArrayConst p)
+	: Neopixel(EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::add_config(JsonObject json)
+void Neopixel::add_config(JsonObject json)
 {
 	// add_config_aux(json, module_name,
 	// 	module_name,
@@ -62,9 +62,9 @@ void Loom_Neopixel::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::print_config() const
+void Neopixel::print_config() const
 {
-	LoomActuator::print_config();
+	Actuator::print_config();
 
 	for (auto i = 0; i < 3; i++) {
 		LPrintln("\tNeopixel ", i, ": ", (pin_enabled[i]) ? "Enabled" : "Disabled" );
@@ -72,7 +72,7 @@ void Loom_Neopixel::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::print_state() const
+void Neopixel::print_state() const
 {
 	LPrintln(module_name, " State:");
 	for (auto i = 0; i < 3; i++) {
@@ -86,7 +86,7 @@ void Loom_Neopixel::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Neopixel::dispatch(JsonObject json)
+bool Neopixel::dispatch(JsonObject json)
 {
 	JsonArray params = json["params"];
 	switch( (char)json["func"] ) {
@@ -96,7 +96,7 @@ bool Loom_Neopixel::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::enable_pin(const uint8_t port, const bool state)
+void Neopixel::enable_pin(const uint8_t port, const bool state)
 {
 	pin_enabled[port] = state;
 	if (state) {
@@ -109,7 +109,7 @@ void Loom_Neopixel::enable_pin(const uint8_t port, const bool state)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::set_color(const uint8_t port, const uint8_t chain_num, const uint8_t red, const uint8_t green, const uint8_t blue)
+void Neopixel::set_color(const uint8_t port, const uint8_t chain_num, const uint8_t red, const uint8_t green, const uint8_t blue)
 {
 	if ( pin_enabled[port] ) {
 		

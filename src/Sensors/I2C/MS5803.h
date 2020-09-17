@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_MS5803.h
-/// @brief		File for Loom_MS5803 definition.
+/// @file		MS5803.h
+/// @brief		File for MS5803 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -32,7 +32,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ms5803-atmospheric-pressure--temperature-sensor)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_MS5803 : public LoomI2CSensor
+class MS5803 : public I2CSensor
 {
 protected:
 
@@ -53,7 +53,7 @@ public:
 	///
 	/// @param[in]	i2c_address				Set(Int) | <0x76> | {0x76, 0x77} | I2C address (0x76 if CSB (pin 3) is High, 0x77 if CSB is Low)
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	Loom_MS5803(
+	MS5803(
 			const byte		i2c_address	= 0x76,
 			const uint8_t	mux_port	= 255
 		);
@@ -61,10 +61,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_MS5803(JsonArrayConst p);
+	MS5803(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_MS5803() = default;
+	~MS5803() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -84,7 +84,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get the temperature reading.
-	/// Used by the LoomTempSync module to provide temperature
+	/// Used by the TempSync module to provide temperature
 	/// to other modules.
 	/// @return	The measured temperature
 	float		get_temperature() const { return temp; }

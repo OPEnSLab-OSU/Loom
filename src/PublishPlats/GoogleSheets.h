@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_GoogleSheets.h
-/// @brief		File for Loom_GoogleSheets definition.
+/// @file		GoogleSheets.h
+/// @brief		File for GoogleSheets definition.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -22,7 +22,7 @@
 /// - [wiki: Using Loom with Google Sheets](https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_GoogleSheets : public LoomPublishPlat
+class GoogleSheets : public PublishPlat
 {
 
 public:
@@ -40,7 +40,7 @@ public:
 	/// @param[in]  sheet_id			String | <""> | null |ID Of the spreadsheet to put data in (script must have edit access).
 	/// @param[in]  tab_matches_dev_id	Bool | <true> | null | Override tab_id with the name+instance number of the device.
 	/// @param[in]  tab_id				String | <"Data"> | null | Name of the tab that the device will put data into.
-	Loom_GoogleSheets(
+	GoogleSheets(
 			const char*				module_name,
 			const LoomModule::Type	internet_type,
 			const char*				script_url,
@@ -52,10 +52,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]  p     The array of constuctor args to expand
-	Loom_GoogleSheets(JsonArrayConst p );
+	GoogleSheets(JsonArrayConst p );
 
 	/// Destructor
-	~Loom_GoogleSheets() = default;
+	~GoogleSheets() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -73,7 +73,7 @@ protected:
 	/// @param[in] json The JSON data, formatted according to publish();
 	/// @param[in] plat A pointer to an internet platform
 	/// @return True if success
-	bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
+	bool send_to_internet(const JsonObject json, InternetPlat* plat) override;
 
 private:
 	

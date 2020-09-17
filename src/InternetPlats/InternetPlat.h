@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_InternetPlat.h
-/// @brief		File for LoomInternetPlat definition.
+/// @brief		File for InternetPlat definition.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -30,12 +30,12 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#internet-capabilities)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomInternetPlat : public LoomModule
+class InternetPlat : public LoomModule
 {
 
 protected:	
 	
-	/// Utility function to write an http reqest based on parameters specified by LoomInternetPlat::http_request to a Client class.
+	/// Utility function to write an http reqest based on parameters specified by InternetPlat::http_request to a Client class.
 	/// See http_request() for parameter details.
 	void write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb);
 
@@ -81,13 +81,13 @@ public:
 	/// Loom Internet Platform module constructor.
 	///
 	/// @param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
-	LoomInternetPlat(
+	InternetPlat(
 			const char*				module_name,  
 			const LoomModule::Type	module_type
 		);
 
 	/// Destructor
-	virtual ~LoomInternetPlat() = default;
+	virtual ~InternetPlat() = default;
 
 //=============================================================================
 ///@name	OPERATION

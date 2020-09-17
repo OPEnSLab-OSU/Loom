@@ -25,7 +25,7 @@ LoomModule::LoomModule(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::link_device_manager(LoomManager* LM)
+void LoomModule::link_device_manager(Manager* LM)
 {
 	// Don't check if nullptr, as the intent may be to clear link to manager
 	device_manager = LM; 
@@ -96,7 +96,7 @@ LoomModule::Category LoomModule::category() const
 	switch( (int)module_type / 1000 ) {
 		case 1 : return Category::Other;		// Other
 		case 2 : return Category::Sensor;		// Sensors
-		case 3 : return Category::L_RTC;		// RTC
+		case 3 : return Category::L_RTC;		// L_RTC
 		case 4 : return Category::Actuator;		// Actuators
 		case 5 : return Category::LogPlat;		// LogPlats
 		case 6 : return Category::CommPlat;		// CommPlats
@@ -113,7 +113,7 @@ const char* LoomModule::enum_category_string(const Category c)
 	switch ( (int)c ) {
 		case 1 : return "Other";		// Other
 		case 2 : return "Sensor";		// Sensors
-		case 3 : return "RTC";			// RTC
+		case 3 : return "L_RTC";			// L_RTC
 		case 4 : return "Actuator";		// Actuators
 		case 5 : return "LogPlat";		// LogPlats
 		case 6 : return "CommPlat";		// CommPlats

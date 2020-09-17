@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Relay.h
-/// @brief		File for Loom_Relay definition.
+/// @file		Relay.h
+/// @brief		File for Relay definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -24,7 +24,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#relay)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Relay : public LoomActuator
+class Relay : public Actuator
 {
 
 protected:
@@ -41,17 +41,17 @@ public:
 	/// Constructor.
 	///
 	/// @param[in]	pin		Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to control the relay
-	Loom_Relay(
+	Relay(
 			const byte	pin = 10
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Relay(JsonArrayConst p);
+	Relay(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Relay() = default;
+	~Relay() = default;
 
 //=============================================================================
 ///@name	OPERATION

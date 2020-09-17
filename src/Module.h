@@ -16,7 +16,7 @@
 
 #include <ArduinoJson.h>
 
-class LoomManager; // Specify that LoomManager exists, defined in own file
+class Manager; // Specify that Manager exists, defined in own file
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -33,13 +33,13 @@ class LoomModule
 public:
 
 	/// Enum to check against to when finding individual component
-	/// managed by a LoomManager.
+	/// managed by a Manager.
 	/// Used because we cannot use dynamic_cast to check type of modules
 	/// (rtti disabled by Arduino IDE)
 	enum class Type {
 		Unknown = 0,
 		// Other
-		Other=1000,			Interrupt_Manager, Sleep_Manager, Multiplexer, NTP, TempSync, WarmUp_Manager,
+		Other=1000,			InterruptManager, SleepManager, Multiplexer, NTP, TempSync, WarmUpManager,
 		// Sensors
 		Sensor=2000,		Analog, Digital,
 		// I2C
@@ -50,7 +50,7 @@ public:
 		SPI=2300,			MAX31855, MAX31856,
         // SERIAL
         L_SERIAL=2400,        K30,
-		// RTC
+		// L_RTC
 		L_RTC=3000,			DS3231, PCF8523,
 		// Actuators
 		Actuator=4000,		Neopixel, Relay, Servo, Stepper,
@@ -75,7 +75,7 @@ public:
 		Unknown=0,			///< Unknown
 		Other=1,			///< Other
 		Sensor=2,			///< Sensors
-		L_RTC=3,			///< RTC
+		L_RTC=3,			///< L_RTC
 		Actuator=4,			///< Actuators
 		LogPlat=5,			///< LogPlats
 		CommPlat=6,			///< CommPlats
@@ -87,8 +87,8 @@ public:
 protected:
 
 	const Type		module_type;		///< Module type
-	LoomManager*	device_manager;		///< Pointer to manager.
-										///< LoomManager provides to any modules passed to add_module
+	Manager*	device_manager;		///< Pointer to manager.
+										///< Manager provides to any modules passed to add_module
 	const String	module_name_base;	///< The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
 	const char* 	module_name;
 	bool			active;				///< Whether or not the module should be treated as active.
@@ -138,7 +138,7 @@ public:
 	virtual void	power_up() {}
 
 	/// Add configuration information to JsonObject.
-	/// LoomManager iterates over modules to build complete configuration
+	/// Manager iterates over modules to build complete configuration
 	/// @param[in]	json	Json configuration object to add to
 	virtual void	add_config(JsonObject json) {}//= 0;
 
@@ -161,8 +161,8 @@ public:
 	Type			get_module_type() const { return module_type; }
 
 	/// Get the device manager class if linked
-	/// @return Pointer to the LoomManager, Null if not linked
-	LoomManager*	get_device_manager() const { return device_manager; }
+	/// @return Pointer to the Manager, Null if not linked
+	Manager*	get_device_manager() const { return device_manager; }
 
 	/// Copy module name into buffer
 	/// @param[out]	buf	The buffer to copy module name into
@@ -195,9 +195,9 @@ public:
 	/// Generally only called when device manager links module
 	/// to provide pointer both directions.
 	/// Derived modules may override this for increased function,
-	/// such as linking a submanager or RTC module.
-	/// @param[in]	LM	LoomManager to point to
-	virtual void	link_device_manager(LoomManager* LM);
+	/// such as linking a submanager or L_RTC module.
+	/// @param[in]	LM	Manager to point to
+	virtual void	link_device_manager(Manager* LM);
 
 	/// Set print verbosity
 	/// Controlls level of detail included in debug prints
@@ -246,7 +246,7 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 
 
-/// Used by LoomManager to sort modules in its vector
+/// Used by Manager to sort modules in its vector
 struct module_sort_comp {
     bool operator() (LoomModule* left, LoomModule* right) const {
        return left->get_module_type() < right->get_module_type();

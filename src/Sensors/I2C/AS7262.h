@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_AS7262.h
-/// @brief		File for Loom_AS7262 definition.
+/// @file		AS7262.h
+/// @brief		File for AS7262 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -30,7 +30,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7262-spectral-sensor-visible)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_AS7262 : public LoomI2CSensor
+class AS7262 : public I2CSensor
 {
 protected:
 
@@ -58,7 +58,7 @@ public:
 	/// @param[in]	gain					Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
 	/// @param[in]	mode					Set(Int) | <3> | { 0("Continuous reading of VBGY"), 1("Continuous reading of GYOR"), 2("Continuous reading all channels"), 3("One-shot reading of all channels") } | Read mode
 	/// @param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
-	Loom_AS7262(
+	AS7262(
 			const byte			i2c_address			= 0x49,
 			const uint8_t		mux_port			= 255,
 			const bool			use_bulb			= false,
@@ -70,10 +70,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_AS7262(JsonArrayConst p);
+	AS7262(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_AS7262() = default;
+	~AS7262() = default;
 
 //=============================================================================
 ///@name	OPERATION

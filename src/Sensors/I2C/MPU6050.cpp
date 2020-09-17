@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_MPU6050.cpp
-/// @brief		File for Loom_MPU6050 implementation.
+/// @file		MPU6050.cpp
+/// @brief		File for MPU6050 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -13,21 +13,21 @@
 #include "MPU6050.h"
 #include "Module_Factory.h"
 
-// Unfortunately cannot be inside Loom_MPU6050 class
+// Unfortunately cannot be inside MPU6050 class
 // For some reason Wire is not recognized like that
 MPU6050 mpu6050(Wire);
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_MPU6050, "MPU6050");
+REGISTER(LoomModule, MPU6050, "MPU6050");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MPU6050::Loom_MPU6050(
+MPU6050::MPU6050(
 		const byte		i2c_address, 
 		const uint8_t	mux_port,
 		const bool		calibrate
 	)
-	: LoomI2CSensor("MPU6050", Type::MPU6050, i2c_address, mux_port )
+	: I2CSensor("MPU6050", Type::MPU6050, i2c_address, mux_port )
 {
 	Wire.begin();
 	mpu6050.begin();
@@ -40,13 +40,13 @@ Loom_MPU6050::Loom_MPU6050(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MPU6050::Loom_MPU6050(JsonArrayConst p)
-	: Loom_MPU6050(EXPAND_ARRAY(p, 3) ) {}
+MPU6050::MPU6050(JsonArrayConst p)
+	: MPU6050(EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::print_state() const
+void MPU6050::print_state() const
 {
-	LoomI2CSensor::print_state();
+	I2CSensor::print_state();
 
 	LPrintln("\tgyroXoffset : ", mpu6050.getGyroXoffset() );
 	LPrintln("\tgyroYoffset : ", mpu6050.getGyroYoffset() );
@@ -54,7 +54,7 @@ void Loom_MPU6050::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::print_measurements() const
+void MPU6050::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -85,7 +85,7 @@ void Loom_MPU6050::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::measure()
+void MPU6050::measure()
 {
 	mpu6050.update();
 
@@ -112,7 +112,7 @@ void Loom_MPU6050::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::package(JsonObject json)
+void MPU6050::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	
@@ -142,7 +142,7 @@ void Loom_MPU6050::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::calibrate()
+void MPU6050::calibrate()
 {
 	print_module_label();
 	mpu6050.calcGyroOffsets(true);

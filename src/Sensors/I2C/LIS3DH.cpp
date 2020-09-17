@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_LIS3DH.cpp
-/// @brief		File for Loom_LIS3DH implementation.
+/// @file		LIS3DH.cpp
+/// @brief		File for LIS3DH implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -15,14 +15,14 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_LIS3DH, "LIS3DH");
+REGISTER(LoomModule, LIS3DH, "LIS3DH");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_LIS3DH::Loom_LIS3DH(
+LIS3DH::LIS3DH(
 		const byte		i2c_address, 
 		const uint8_t	mux_port
 	) 
-	: LoomI2CSensor("LIS3DH", Type::LIS3DH, i2c_address, mux_port)
+	: I2CSensor("LIS3DH", Type::LIS3DH, i2c_address, mux_port)
 	, inst_LIS3DH( LIS3DH(I2C_MODE, i2c_address) )
 	
 {
@@ -43,11 +43,11 @@ Loom_LIS3DH::Loom_LIS3DH(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_LIS3DH::Loom_LIS3DH(JsonArrayConst p)
-	: Loom_LIS3DH(EXPAND_ARRAY(p, 2) ) {}
+LIS3DH::LIS3DH(JsonArrayConst p)
+	: LIS3DH(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LIS3DH::print_measurements() const
+void LIS3DH::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -57,7 +57,7 @@ void Loom_LIS3DH::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LIS3DH::measure()
+void LIS3DH::measure()
 {
 	accel[0] = inst_LIS3DH.readFloatAccelX();
 	accel[1] = inst_LIS3DH.readFloatAccelY();
@@ -65,7 +65,7 @@ void Loom_LIS3DH::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LIS3DH::package(JsonObject json)
+void LIS3DH::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	

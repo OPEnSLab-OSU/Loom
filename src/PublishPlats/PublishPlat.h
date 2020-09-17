@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_PublishPlat.h
-/// @brief		File for LoomPublishPlat definition.
+/// @brief		File for PublishPlat definition.
 /// @author		Noah Koontz
 /// @author		Luke Goertzen
 /// @date		2019
@@ -25,13 +25,13 @@
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_publish_plat.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomPublishPlat : public LoomModule
+class PublishPlat : public LoomModule
 {
 
 protected:
 
 	/// Pointer to internet platform to use to publish
-	LoomInternetPlat*	m_internet;
+	InternetPlat*	m_internet;
 
 	/// Type of internet platform used to publish.
 	/// Needed because finding the module for m_internet happens in second_stage_ctor(),
@@ -49,14 +49,14 @@ public:
 	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
 	/// @param[in]	module_type			Type of the module (provided by derived classes)
 	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform.
-	LoomPublishPlat(
+	PublishPlat(
 		const char*				module_name,
 		const LoomModule::Type	module_type,
 		const LoomModule::Type	internet_type
 	);
 
 	/// Destructor
-	virtual ~LoomPublishPlat() = default;
+	virtual ~PublishPlat() = default;
 
 	/// Grab the internet platform specified by the ctor parameters
 	void second_stage_ctor() override;
@@ -79,8 +79,8 @@ public:
 	/// @returns Whether or not the publishes succeded or not
 	uint8_t publish_batch();
 
-	/// Version of log for use with LoomManager.
-	/// Accesses Json from LoomManager
+	/// Version of log for use with Manager.
+	/// Accesses Json from Manager
 	/// @return True if success
 	bool	publish();
 
@@ -97,7 +97,7 @@ protected:
 	/// @param[in]	json	Json object to send
 	/// @param[in]	plat	Internet platform to send on
 	/// @return True if success
-	virtual bool send_to_internet(const JsonObject json, LoomInternetPlat* plat) = 0;
+	virtual bool send_to_internet(const JsonObject json, InternetPlat* plat) = 0;
 
 	// Switch to: ?
 	// virtual bool send_to_internet(const JsonObject json) = 0;

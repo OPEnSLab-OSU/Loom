@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_MMA8451.cpp
-/// @brief		File for Loom_MMA8451 implementation.
+/// @file		MMA8451.cpp
+/// @brief		File for MMA8451 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -15,15 +15,15 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_MMA8451, "MMA8451");
+REGISTER(LoomModule, MMA8451, "MMA8451");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MMA8451::Loom_MMA8451(
+MMA8451::MMA8451(
 		const byte				i2c_address, 
 		const uint8_t			mux_port,
 		const mma8451_range_t	range
 	) 
-	: LoomI2CSensor("MMA8451", Type::MMA8451, i2c_address, mux_port)
+	: I2CSensor("MMA8451", Type::MMA8451, i2c_address, mux_port)
 	, range{range}
 {
 	bool setup = MMA.begin(i2c_address);
@@ -41,18 +41,18 @@ Loom_MMA8451::Loom_MMA8451(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MMA8451::Loom_MMA8451(JsonArrayConst p)
-	: Loom_MMA8451(p[0], p[1], (mma8451_range_t)(int)p[2]) {}
+MMA8451::MMA8451(JsonArrayConst p)
+	: MMA8451(p[0], p[1], (mma8451_range_t)(int)p[2]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MMA8451::print_config() const
+void MMA8451::print_config() const
 {
-	LoomI2CSensor::print_config();
+	I2CSensor::print_config();
 	// LPrintln("\tRange               : ", 2 << MMA.getRange(), "G" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MMA8451::print_measurements() const
+void MMA8451::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -74,7 +74,7 @@ void Loom_MMA8451::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MMA8451::measure()
+void MMA8451::measure()
 {
 	// Update sensor
 	MMA.read();
@@ -92,7 +92,7 @@ void Loom_MMA8451::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MMA8451::package(JsonObject json)
+void MMA8451::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	
@@ -118,19 +118,19 @@ void Loom_MMA8451::package(JsonObject json)
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
-// void Loom_MMA8451::enable_interrupts(bool enable)
+// void MMA8451::enable_interrupts(bool enable)
 // {
 
 // }
 
 // ///////////////////////////////////////////////////////////////////////////////
-// void Loom_MMA8451::set_transient_int_threshold(uint8_t range)
+// void MMA8451::set_transient_int_threshold(uint8_t range)
 // {
 // 	MMA.setTransientIntThreshold(range);
 // }
 
 // ///////////////////////////////////////////////////////////////////////////////
-// void Loom_MMA8451::configure_interrupts()
+// void MMA8451::configure_interrupts()
 // {
 // 	uint8_t dataToWrite = 0;
 // 	// MMA8451_REG_CTRL_REG2

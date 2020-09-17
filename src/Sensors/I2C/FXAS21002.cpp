@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_FXAS21002.cpp
-/// @brief		File for Loom_FXAS21002 implementation.
+/// @file		FXAS21002.cpp
+/// @brief		File for FXAS21002 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -17,14 +17,14 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_FXAS21002, "FXAS21002");
+REGISTER(LoomModule, FXAS21002, "FXAS21002");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_FXAS21002::Loom_FXAS21002(
+FXAS21002::FXAS21002(
 		const byte		i2c_address, 
 		const uint8_t	mux_port
 	)
-	: LoomI2CSensor("FXAS21002", Type::FXAS21002, i2c_address, mux_port)
+	: I2CSensor("FXAS21002", Type::FXAS21002, i2c_address, mux_port)
 	, inst_FXAS21002(Adafruit_FXAS21002C(0x0021002C))
 {
 	bool setup = inst_FXAS21002.begin();
@@ -36,11 +36,11 @@ Loom_FXAS21002::Loom_FXAS21002(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_FXAS21002::Loom_FXAS21002(JsonArrayConst p)
-	: Loom_FXAS21002(EXPAND_ARRAY(p, 2) ) {}
+FXAS21002::FXAS21002(JsonArrayConst p)
+	: FXAS21002(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_FXAS21002::print_measurements() const
+void FXAS21002::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -50,7 +50,7 @@ void Loom_FXAS21002::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_FXAS21002::measure()
+void FXAS21002::measure()
 {
 	sensors_event_t event;
 	inst_FXAS21002.getEvent(&event);
@@ -61,7 +61,7 @@ void Loom_FXAS21002::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_FXAS21002::package(JsonObject json)
+void FXAS21002::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	data["gx"] = gyro[0];

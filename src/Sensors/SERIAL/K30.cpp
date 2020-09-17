@@ -15,13 +15,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER_NODEFAULT(LoomModule, Loom_K30, "K30");
+REGISTER_NODEFAULT(LoomModule, K30, "K30");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_K30::Loom_K30(
+K30::K30(
         const char* module_name,
         int num_samples)
-    : LoomSerialSensor(module_name, Type::K30, num_samples)
+    : SerialSensor(module_name, Type::K30, num_samples)
 {
     print_module_label();
     LPrintln("Initializing K30");
@@ -33,13 +33,13 @@ Loom_K30::Loom_K30(
 
 ///////////////////////////////////////////////////////////////////////////////
 
-Loom_K30::Loom_K30(JsonArrayConst p)
-: Loom_K30(EXPAND_ARRAY(p, 2))
+K30::K30(JsonArrayConst p)
+: K30(EXPAND_ARRAY(p, 2))
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Loom_K30::sendSensorRequest(byte request[7]) {
+void K30::sendSensorRequest(byte request[7]) {
     
     if (sensor_serial == nullptr) {
         LPrintln("Serial is not set, cannot send request");
@@ -77,7 +77,7 @@ void Loom_K30::sendSensorRequest(byte request[7]) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-int Loom_K30::readSensorResponse(byte packet[7]){
+int K30::readSensorResponse(byte packet[7]){
     int high = packet[3];                        //high byte for value is 4th byte in packet in the packet
     int low = packet[4];                         //low byte for value is 5th byte in the packet
     unsigned long val = high * 256 + low;        //Combine high byte and low byte with this formula to get value
@@ -87,14 +87,14 @@ int Loom_K30::readSensorResponse(byte packet[7]){
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Loom_K30::measure() {
+void K30::measure() {
     sendSensorRequest(read_CO2);
     CO2_levels = readSensorResponse(sensor_response);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Loom_K30::print_measurements() const {
+void K30::print_measurements() const {
     print_module_label();
     LPrintln("Measurements:");
     LPrintln("CO2 Levels: ", CO2_levels);
@@ -102,7 +102,7 @@ void Loom_K30::print_measurements() const {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Loom_K30::package(JsonObject json) {
+void K30::package(JsonObject json) {
     JsonObject data = get_module_data_object(json, module_name);
     
     data["CO2"] = CO2_levels;

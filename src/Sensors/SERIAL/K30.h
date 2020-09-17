@@ -25,7 +25,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#k30-co2-sensor)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_K30 : public LoomSerialSensor
+class K30 : public SerialSensor
 {
     protected:
 
@@ -51,15 +51,15 @@ public:
     /// Constructor
     /// \param[in]      module_name The name of the module
     /// \param[in]      num_samples The number of samples to take and average
-    Loom_K30(
+    K30(
             const char* module_name = "K30",
             int         num_samples = 1
          );
     
-    Loom_K30(JsonArrayConst p);
+    K30(JsonArrayConst p);
     
     /// Destructor
-    virtual ~Loom_K30() = default;
+    virtual ~K30() = default;
     
 //=============================================================================
 ///@name	PRINT INFORMATION

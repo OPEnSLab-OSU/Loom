@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_RTC.h
-/// @brief		File for LoomRTC definition.
+/// @brief		File for L_RTC definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -18,7 +18,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// Abstract base class of RTC modules.
+/// Abstract base class of L_RTC modules.
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_r_t_c.html)
@@ -26,7 +26,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#data-logging)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomRTC : public LoomModule
+class L_RTC : public LoomModule
 {
 
 public:
@@ -63,7 +63,7 @@ public:
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	timezone		Which timezone device is in
 	/// @param[in]	use_utc_time	True for UTC time, false for local time
-	LoomRTC(
+	L_RTC(
 			const char*				module_name,
 			const LoomModule::Type	module_type,
 			const TimeZone			timezone,
@@ -71,7 +71,7 @@ public:
 		);
 
 	/// Destructor
-	virtual ~LoomRTC() = default;
+	virtual ~L_RTC() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -134,7 +134,7 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 	
-	/// Get the pin the RTC interrupt is assumed to be connected to
+	/// Get the pin the L_RTC interrupt is assumed to be connected to
 	/// @return	Interrupt pin
 	// byte			get_interrupt_pin();
 
@@ -166,7 +166,7 @@ public:
 ///@name	MISCELLANEOUS
 /*@{*/ //======================================================================
 	
-	void 			link_device_manager(LoomManager* LM) override;
+	void 			link_device_manager(Manager* LM) override;
 
 	/// Get string of name associated with time zone enum
 	/// @param[in]	t	TimeZone value to get string of
@@ -175,7 +175,7 @@ public:
 
 protected:
 
-	/// Initialize RTC.
+	/// Initialize L_RTC.
 	/// Called by subclass constructors 
 	void			init();
 
@@ -192,13 +192,13 @@ protected:
 	virtual bool	_begin() = 0;
 
 	/// Initialization auxiliary function that subclasses need to implement.
-	/// @return True if RTC is initialized / did not lose power 
+	/// @return True if L_RTC is initialized / did not lose power 
 	virtual bool	_initialized() = 0;
 
-	/// Read the RTC, update time and date strings
+	/// Read the L_RTC, update time and date strings
 	void			read_rtc();
 
-	/// Set the RTC time to compile time
+	/// Set the L_RTC time to compile time
 	void			set_rtc_to_compile_time();
 
 	/// Convert time between local and UTC.
@@ -206,7 +206,7 @@ protected:
 	/// @param[in]	to_utc	True to switch to UTC, false to go to local from UTC
 	void			convert_local_to_utc(const bool to_utc=true);
 
-	/// Check if current RTC time is valid (not necessarily correct)
+	/// Check if current L_RTC time is valid (not necessarily correct)
 	/// @return	True if valid
 	bool			rtc_validity_check();
 

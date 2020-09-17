@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_BatchSD.cpp
-/// @brief		File for Loom_BatchSD implementation.
+/// @file		BatchSD.cpp
+/// @brief		File for BatchSD implementation.
 /// @author		Adam Kerr
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
@@ -16,15 +16,15 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_BatchSD, "BatchSD");
+REGISTER(LoomModule, BatchSD, "BatchSD");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_BatchSD::Loom_BatchSD(
+BatchSD::BatchSD(
     const bool      enable_rate_filter,
     const uint16_t	min_filter_delay,
     const byte			chip_select
     )
-    : LoomLogPlat("BatchSD", Type::BATCHSD, enable_rate_filter, min_filter_delay )
+    : LogPlat("BatchSD", Type::BATCHSD, enable_rate_filter, min_filter_delay )
     , chip_select(chip_select)
     , doc(2048)
 {
@@ -45,13 +45,13 @@ Loom_BatchSD::Loom_BatchSD(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_BatchSD::Loom_BatchSD(JsonArrayConst p)
-  : Loom_BatchSD( EXPAND_ARRAY(p, 3) ) {}
+BatchSD::BatchSD(JsonArrayConst p)
+  : BatchSD( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_BatchSD::print_config() const
+void BatchSD::print_config() const
 {
-  LoomLogPlat::print_config();
+  LogPlat::print_config();
   LPrintln("\tCurrent Batch     : ", batch_counter);
   LPrintln("\tCurrent Packet    : ", packet_counter);
   LPrintln("\tPacket Drops      : ", drop_count);
@@ -59,7 +59,7 @@ void Loom_BatchSD::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_BatchSD::dump_batch(int index){
+bool BatchSD::dump_batch(int index){
   #if LOOM_DEBUG == 1
     char file_name[30];
     create_file_name(index, file_name);
@@ -90,7 +90,7 @@ bool Loom_BatchSD::dump_batch(int index){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_BatchSD::clear_batch_log(){
+void BatchSD::clear_batch_log(){
   print_module_label();
   LPrintln("Clearing batch log");
   char file_name[30];
@@ -110,14 +110,14 @@ void Loom_BatchSD::clear_batch_log(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_BatchSD::store_batch(){
+bool BatchSD::store_batch(){
   JsonObject obj = device_manager->internal_json(false);
   if(obj.isNull() || obj.size()==0) return false;
   return store_batch_json(obj);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_BatchSD::store_batch_json(JsonObject json){
+bool BatchSD::store_batch_json(JsonObject json){
   // Create file name and add which Batch the packet is from to json
   char file_name[30];
   create_file_name(packet_counter, file_name);
@@ -158,7 +158,7 @@ bool Loom_BatchSD::store_batch_json(JsonObject json){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-JsonObject Loom_BatchSD::get_batch_json(int index){
+JsonObject BatchSD::get_batch_json(int index){
   doc.clear();
 
   char file_name[30];
@@ -193,18 +193,18 @@ JsonObject Loom_BatchSD::get_batch_json(int index){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_BatchSD::power_up() {
+void BatchSD::power_up() {
   digitalWrite(8, HIGH);
   sd.begin(chip_select, SD_SCK_MHZ(50));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_BatchSD::power_down(){
+void BatchSD::power_down(){
   //do nothing
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_BatchSD::create_file_name(int index, char* name){
+void BatchSD::create_file_name(int index, char* name){
   String file = "Batches/Batch-";
   file = file + batch_counter;
   file = file + "-";
@@ -214,7 +214,7 @@ void Loom_BatchSD::create_file_name(int index, char* name){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-float Loom_BatchSD::get_drop_rate() const
+float BatchSD::get_drop_rate() const
 {
 	return (packet_counter == 0)
 		? 0.0f
@@ -222,7 +222,7 @@ float Loom_BatchSD::get_drop_rate() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_BatchSD::package(JsonObject json) {
+void BatchSD::package(JsonObject json) {
   JsonObject data = get_module_data_object(json, "Batch");
 
   data["Number"] = batch_counter+1;

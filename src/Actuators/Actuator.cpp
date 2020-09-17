@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Actuator.cpp
-/// @brief		File for LoomActuator implementation.
+/// @brief		File for Actuator implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -13,7 +13,7 @@
 #include "Actuator.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomActuator::LoomActuator( 
+Actuator::Actuator( 
 		const char*            module_name,
 		const LoomModule::Type module_type 
 	) 

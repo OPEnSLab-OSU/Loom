@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Sensor.h
-/// @brief		File for LoomSensor definition.
+/// @brief		File for Sensor definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -21,7 +21,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#spi-sensors)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomSensor : public LoomModule
+class Sensor : public LoomModule
 {
 
 protected:
@@ -39,14 +39,14 @@ public:
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	num_samples		The number of samples to take and average
-	LoomSensor(
+	Sensor(
 			const char*				module_name,
 			const LoomModule::Type	module_type,
  			const uint8_t			num_samples
 		);
 
 	/// Destructor
-	virtual ~LoomSensor() = default;
+	virtual ~Sensor() = default;
 
 //=============================================================================
 ///@name	OPERATION

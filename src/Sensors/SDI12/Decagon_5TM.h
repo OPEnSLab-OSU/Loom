@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Decagon_5TM.h
-/// @brief		File for Loom_Decagon5TM definition. Incomplete.
+/// @brief		File for Decagon5TM definition. Incomplete.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -22,7 +22,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sdi-12-sensors)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Decagon5TM : public LoomSDI12Sensor
+class Decagon5TM : public SDI12Sensor
 {
 protected:
 
@@ -35,17 +35,17 @@ public:
 	/// Decagon 5TM module constructor
 	///
 	/// @param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
-	Loom_Decagon5TM(
+	Decagon5TM(
 			const uint8_t	num_samples	= 1
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Decagon5TM(JsonArrayConst p);
+	Decagon5TM(JsonArrayConst p);
 
 	/// Destructor
- 	~Loom_Decagon5TM() = default;
+ 	~Decagon5TM() = default;
 
 //=============================================================================
 ///@name	OPERATION

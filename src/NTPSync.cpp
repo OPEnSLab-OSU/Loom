@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_NTP_Sync.cpp
-/// @brief		File for LoomNTPSync implementation.
+/// @brief		File for NTPSync implementation.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -16,10 +16,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, LoomNTPSync, "NTPSync");
+REGISTER(LoomModule, NTPSync, "NTPSync");
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomNTPSync::LoomNTPSync(
+NTPSync::NTPSync(
 		const uint sync_interval_hours
 	) 
 	: LoomModule("NTP", Type::NTP)
@@ -27,15 +27,15 @@ LoomNTPSync::LoomNTPSync(
 	, m_internet( nullptr )
 	, m_rtc( nullptr )
 	, m_next_sync( 1 )
-	, m_last_error( LoomNTPSync::Error::NON_START ) 
+	, m_last_error( NTPSync::Error::NON_START ) 
 	{}
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomNTPSync::LoomNTPSync(JsonArrayConst p)
-	: LoomNTPSync((uint)p[0] ) {}
+NTPSync::NTPSync(JsonArrayConst p)
+	: NTPSync((uint)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::second_stage_ctor() 
+void NTPSync::second_stage_ctor() 
 {
 	// check to see if we have a device manager
 	if (device_manager == nullptr) { m_last_error = Error::INVAL_DEVICE_MANAGE; return; }
@@ -51,7 +51,7 @@ void LoomNTPSync::second_stage_ctor()
 		return;
 	}
 	// same for RTC
-	LoomRTC* rtc_temp = device_manager->get_rtc_module();
+	L_RTC* rtc_temp = device_manager->get_rtc_module();
 	if (rtc_temp != nullptr) {
 		m_rtc = rtc_temp;
 		print_module_label();
@@ -69,7 +69,7 @@ void LoomNTPSync::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::print_config() const
+void NTPSync::print_config() const
 {
 	print_module_label();
 	if (m_sync_interval == 0) LPrintln("\tNTPSync set to synchronize once.");
@@ -77,7 +77,7 @@ void LoomNTPSync::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::print_state() const 
+void NTPSync::print_state() const 
 {
 	print_module_label();
 	if (m_last_error != Error::OK) LPrint("\tNTPSync in error state: ", static_cast<uint8_t>(m_last_error), "\n");
@@ -86,7 +86,7 @@ void LoomNTPSync::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::measure() 
+void NTPSync::measure() 
 {
 	// if a sync is requested
 	if (m_next_sync.unixtime() != 0 && m_rtc->now().secondstime() > m_next_sync.secondstime()) {
@@ -122,7 +122,7 @@ void LoomNTPSync::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DateTime LoomNTPSync::m_sync_rtc() 
+DateTime NTPSync::m_sync_rtc() 
 {
 	// it is presumed that the objects this function needs are in working order
 	// get the current time from the internet

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_MAX31855.h
-/// @brief		File for Loom_MAX31855 definition.
+/// @file		MAX31855.h
+/// @brief		File for MAX31855 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -25,7 +25,7 @@
 /// - [Dependency: Adafruit-MAX31855-library](https://github.com/adafruit/Adafruit-MAX31855-library)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_MAX31855 : public LoomSPISensor
+class MAX31855 : public SPISensor
 {
 protected:
 
@@ -45,7 +45,7 @@ public:
 	/// @param[in]	module_name			String | <"MAX31856"> | null | MAX31856 module name
 	/// @param[in]	num_samples			Set(Int) | <4> | {1, 2, 4, 8, 16} | How many samples to take and average
 	/// @param[in]	CS_pin				Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used for chip select
-	Loom_MAX31855(
+	MAX31855(
 			const char*		module_name	= "MAX31855",
 			const uint8_t	num_samples	= 4,
 			const uint8_t	CS_pin		= 10
@@ -54,10 +54,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_MAX31855(JsonArrayConst p);
+	MAX31855(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_MAX31855() = default;
+	~MAX31855() = default;
 
 //=============================================================================
 ///@name	OPERATION

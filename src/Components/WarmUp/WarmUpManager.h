@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_WarmUp_Manager.h
+/// @file		WarmUpManager.h
 /// @brief  Header file for Loom Module WarmUp Manager, which is responsible 
 ///         for handeling any WarmUp related behaviors.
 /// @author		C. Greyston Brady
@@ -19,11 +19,11 @@
 
 class WarmUp;
 
-class Loom_WarmUp_Manager : public LoomModule {
+class WarmUpManager : public LoomModule {
   public:
     ///Constructor
-    Loom_WarmUp_Manager();
-    Loom_WarmUp_Manager(JsonArrayConst p);
+    WarmUpManager();
+    WarmUpManager(JsonArrayConst p);
 
     /// Registers a module as a WarmUp Interface providing access;
     template<typename T>

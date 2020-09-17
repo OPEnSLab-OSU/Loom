@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_InternetWifi.h
-/// @brief		File for Loom_WiFi definition.
+/// @brief		File for WiFi definition.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -30,7 +30,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#wifi)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_WiFi : public LoomInternetPlat
+class WiFi : public InternetPlat
 {
 
 protected:
@@ -53,7 +53,7 @@ public:
 	/// Constructor
 	/// @param[in]	ssid	WiFi network name
 	/// @param[in]	pass	WiFi network password. Leave as empty string if network has no password.
-	Loom_WiFi(
+	WiFi(
 			const char* 	ssid	= "",
 			const char* 	pass	= ""
 		);
@@ -61,10 +61,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_WiFi(JsonArrayConst p );
+	WiFi(JsonArrayConst p );
 
 	/// Destructor
-	virtual ~Loom_WiFi() = default;
+	virtual ~WiFi() = default;
 
 //=============================================================================
 ///@name	OPERATION

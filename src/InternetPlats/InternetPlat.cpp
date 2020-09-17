@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_InternetPlat.cpp
-/// @brief		File for LoomInternetPlat implementation.
+/// @brief		File for InternetPlat implementation.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -11,14 +11,14 @@
 #include "InternetPlat.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::LoomInternetPlat(
+InternetPlat::InternetPlat(
 		const char*				module_name,
 		const LoomModule::Type	module_type
 	)
 	: LoomModule(module_name, module_type ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb)
+InternetPlat::ClientSession InternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb)
 {
 	// * the rainbow connection *
 	ClientSession client = connect_to_domain(domain);
@@ -32,7 +32,7 @@ LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domai
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb)
+void InternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb)
 {
 	// print the initial http request
 	client.print(verb);
@@ -49,7 +49,7 @@ void LoomInternetPlat::write_http_request(Stream& client, const char* domain, co
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* domain) {
+InternetPlat::ClientSession InternetPlat::connect_to_domain(const char* domain) {
 	pinMode(8, OUTPUT);
 	digitalWrite(8, HIGH);
 	// if we're not currently connected to the internet, try to bring it back
@@ -85,11 +85,11 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* 
 		return ClientSession();
 	}
 	// return a pointer to the client for data reception
-	return LoomInternetPlat::ClientSession(&client);
+	return InternetPlat::ClientSession(&client);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_ip(const IPAddress& ip, const uint16_t port) {
+InternetPlat::ClientSession InternetPlat::connect_to_ip(const IPAddress& ip, const uint16_t port) {
 	pinMode(8, OUTPUT);
 	digitalWrite(8, HIGH);
 	// if we're not currently connected to the internet, try to bring it back
@@ -124,7 +124,7 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_ip(const IPAddress&
 		return ClientSession();
 	}
 	// return a pointer to the client for data reception
-	return LoomInternetPlat::ClientSession(&client);
+	return InternetPlat::ClientSession(&client);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -156,7 +156,7 @@ static void print_unix_time(unsigned long epoch)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint32_t LoomInternetPlat::get_time()
+uint32_t InternetPlat::get_time()
 {
 	auto udp_dev = open_socket(localPort);
 
@@ -204,7 +204,7 @@ uint32_t LoomInternetPlat::get_time()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const
+void InternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const
 {
 	// set all bytes in the buffer to 0
 	memset(packet_buffer, 0, NTP_PACKET_SIZE);

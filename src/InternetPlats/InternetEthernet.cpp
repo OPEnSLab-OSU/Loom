@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_InternetEthernet.cpp
-/// @brief		File for Loom_Ethernet implementation.
+/// @brief		File for Ethernet implementation.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -16,15 +16,15 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_Ethernet, "Ethernet");
+REGISTER(LoomModule, Ethernet, "Ethernet");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Ethernet::Loom_Ethernet(	
+Ethernet::Ethernet(	
 		const char*				module_name,
 		const JsonArrayConst	mac,
 		const JsonArrayConst	ip
 	) 
-	: LoomInternetPlat("Ethernet", Type::Ethernet )
+	: InternetPlat("Ethernet", Type::Ethernet )
 	, m_base_client()
 	, m_client(m_base_client, TAs, (size_t)TAs_NUM, A7, 1, SSLClient::SSL_ERROR)
 	, m_mac{}
@@ -49,13 +49,13 @@ Loom_Ethernet::Loom_Ethernet(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Ethernet::Loom_Ethernet(JsonArrayConst p)
-	: Loom_Ethernet( EXPAND_ARRAY(p, 3) ) {}
+Ethernet::Ethernet(JsonArrayConst p)
+	: Ethernet( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Ethernet::print_config() const
+void Ethernet::print_config() const
 {
-	LoomInternetPlat::print_config();
+	InternetPlat::print_config();
 	LPrint('\t', "MAC:                : [");
 	for (auto i = 0; i < 6; i++) {
 		LPrint_Hex(m_mac[i]);
@@ -69,14 +69,14 @@ void Loom_Ethernet::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Ethernet::print_state() const
+void Ethernet::print_state() const
 {
-	LoomInternetPlat::print_state();	
+	InternetPlat::print_state();	
 	LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Ethernet::connect()
+void Ethernet::connect()
 {
 	pinMode(8, OUTPUT);
 	digitalWrite(8, HIGH);
@@ -99,7 +99,7 @@ void Loom_Ethernet::connect()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::UDPPtr Loom_Ethernet::open_socket(const uint port)
+InternetPlat::UDPPtr Ethernet::open_socket(const uint port)
 {
 	pinMode(8, OUTPUT);
 	digitalWrite(8, HIGH);

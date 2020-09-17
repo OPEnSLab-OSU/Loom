@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SHT31D.h
-/// @brief		File for Loom_SHT31D definition.
+/// @file		SHT31D.h
+/// @brief		File for SHT31D definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -27,7 +27,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sht31-d-temperature--humidity)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_SHT31D : public LoomI2CSensor
+class SHT31D : public I2CSensor
 {
 protected:
 	
@@ -46,7 +46,7 @@ public:
 	///
 	/// @param[in]	i2c_address			Set(Int) | <0x44> | {0x44, 0x45} | I2C address
 	/// @param[in]	mux_port			Int | <255> | [0-16] | Port on multiplexer
-	Loom_SHT31D(
+	SHT31D(
 			const byte		i2c_address	= 0x44,
 			const uint8_t	mux_port	= 255
 		);
@@ -54,10 +54,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_SHT31D(JsonArrayConst p);
+	SHT31D(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_SHT31D() = default;
+	~SHT31D() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -77,7 +77,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Get the temperature reading.
-	/// Used by the LoomTempSync module to provide temperature
+	/// Used by the TempSync module to provide temperature
 	/// to other modules.
 	/// @return	The measured temperature
 	float		get_temperature() const { return temp; }
