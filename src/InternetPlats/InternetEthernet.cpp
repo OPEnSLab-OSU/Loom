@@ -20,12 +20,11 @@ REGISTER(LoomModule, Loom_Ethernet, "Ethernet");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Ethernet::Loom_Ethernet(	
-		LoomManager* manager,
-		const char* module_name,
+		const char*				module_name,
 		const JsonArrayConst	mac,
 		const JsonArrayConst	ip
 	) 
-	: LoomInternetPlat(manager, "Ethernet", Type::Ethernet )
+	: LoomInternetPlat("Ethernet", Type::Ethernet )
 	, m_base_client()
 	, m_client(m_base_client, TAs, (size_t)TAs_NUM, A7, 1, SSLClient::SSL_ERROR)
 	, m_mac{}
@@ -50,8 +49,8 @@ Loom_Ethernet::Loom_Ethernet(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Ethernet::Loom_Ethernet(LoomManager* manager, JsonArrayConst p)
-	: Loom_Ethernet(manager, EXPAND_ARRAY(p, 3) ) {}
+Loom_Ethernet::Loom_Ethernet(JsonArrayConst p)
+	: Loom_Ethernet( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Ethernet::print_config() const

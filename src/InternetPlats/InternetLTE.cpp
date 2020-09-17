@@ -23,13 +23,12 @@ REGISTER(LoomModule, Loom_LTE, "LTE");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LTE::Loom_LTE(
-    LoomManager* manager,
     const char* apn,
     const char* user,
     const char* pass,
     const int analog_pin
   )
-  : LoomInternetPlat(manager, "LTE", Type::LTE)
+  : LoomInternetPlat("LTE", Type::LTE)
   , APN(apn)
   , gprsUser(user)
   , gprsPass(pass)
@@ -62,8 +61,8 @@ Loom_LTE::Loom_LTE(
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_LTE::Loom_LTE(LoomManager* manager, JsonArrayConst p)
-  : Loom_LTE(manager, EXPAND_ARRAY(p, 3) ) {}
+Loom_LTE::Loom_LTE(JsonArrayConst p)
+  : Loom_LTE(EXPAND_ARRAY(p, 3) ) {}
 
 
 ///////////////////////////////////////////////////////////////////////////////

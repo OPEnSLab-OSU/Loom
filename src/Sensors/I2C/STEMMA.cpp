@@ -10,12 +10,11 @@ REGISTER(LoomModule, Loom_STEMMA, "STEMMA");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_STEMMA::Loom_STEMMA(
-LoomManager* manager,
-const byte i2c_address,
-                         const uint8_t  mux_port
-        )
-: LoomI2CSensor(manager, "STEMMA", Type::STEMMA, i2c_address, mux_port) {
-    
+        const byte i2c_address,
+        const uint8_t  mux_port
+    )
+    : LoomI2CSensor("STEMMA", Type::STEMMA, i2c_address, mux_port) 
+{
     ss = Adafruit_seesaw();
     
     LPrintln(i2c_address);
@@ -28,8 +27,8 @@ const byte i2c_address,
     LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
-Loom_STEMMA::Loom_STEMMA(LoomManager* manager, JsonArrayConst p)
-: Loom_STEMMA(manager, EXPAND_ARRAY(p, 2) ) {}
+Loom_STEMMA::Loom_STEMMA(JsonArrayConst p)
+: Loom_STEMMA( EXPAND_ARRAY(p, 2) ) {}
 
 void Loom_STEMMA::print_measurements() const
 {

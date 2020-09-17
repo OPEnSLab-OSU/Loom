@@ -13,12 +13,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomPublishPlat::LoomPublishPlat(
-		LoomManager* 			manager,
-		const char*							module_name,
+		const char*				module_name,
 		const LoomModule::Type	module_type,
 		const LoomModule::Type	internet_type
 	)
-	: LoomModule(manager, module_name, module_type )
+	: LoomModule(module_name, module_type )
 	, m_internet( nullptr )
 	, internet_type( internet_type )
 {}

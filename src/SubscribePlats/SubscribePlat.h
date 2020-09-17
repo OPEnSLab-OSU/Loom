@@ -55,7 +55,6 @@ public:
 	/// @param[in]	module_type			Type of the module (provided by derived classes)
 	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
 	LoomSubscribePlat(
-		LoomManager* manager,
 		const char*				module_name,
 		const LoomModule::Type	module_type,
 		const LoomModule::Type	internet_type

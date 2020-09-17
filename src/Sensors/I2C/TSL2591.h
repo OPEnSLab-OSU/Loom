@@ -54,17 +54,16 @@ public:
 	/// @param[in]	gain_level			Set(Int) | <1> | { 1 } | Gain level
 	/// @param[in]	timing_level		Set(Int) | <0> | { 0 } | Timing level
 	Loom_TSL2591(
-LoomManager* manager,
-const byte i2c_address			= 0x29,
-			const uint8_t		mux_port			= 255,
-			const uint8_t		gain_level			= 1,
-			const uint8_t		timing_level		= 0
+			const byte		i2c_address		= 0x29,
+			const uint8_t	mux_port		= 255,
+			const uint8_t	gain_level		= 1,
+			const uint8_t	timing_level	= 0
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_TSL2591(LoomManager* manager, JsonArrayConst p);
+	Loom_TSL2591(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_TSL2591() = default;

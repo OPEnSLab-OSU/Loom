@@ -18,11 +18,10 @@ REGISTER(LoomModule, Loom_DS3231, "DS3231");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DS3231::Loom_DS3231(
-		LoomManager* manager,
-		const TimeZone		timezone,
-		const bool			use_utc_time
+		const TimeZone	timezone,
+		const bool		use_utc_time
 	)
-	: LoomRTC(manager, "DS3231", Type::DS3231, timezone, use_utc_time )
+	: LoomRTC("DS3231", Type::DS3231, timezone, use_utc_time)
 {
 	init();
 
@@ -34,8 +33,8 @@ Loom_DS3231::Loom_DS3231(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_DS3231::Loom_DS3231(LoomManager* manager, JsonArrayConst p)
-	: Loom_DS3231(manager, (TimeZone)(int)p[0], p[1] ) {}
+Loom_DS3231::Loom_DS3231(JsonArrayConst p)
+	: Loom_DS3231((TimeZone)(int)p[0], p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_DS3231::_begin()

@@ -74,13 +74,12 @@ char* LoomRTC::enum_timezone_string(TimeZone t)
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomRTC::LoomRTC(	
-		LoomManager* 			manager,
-		const char*							module_name,
+		const char*				module_name,
 		const LoomModule::Type	module_type,
-		const TimeZone					timezone,
-		const bool							use_utc_time
+		const TimeZone			timezone,
+		const bool				use_utc_time
 	) 
-	: LoomModule(manager, module_name, module_type )
+	: LoomModule(module_name, module_type )
 	, timezone(timezone)
 	, use_utc_time(use_utc_time)
 {}

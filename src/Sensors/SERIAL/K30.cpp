@@ -18,10 +18,10 @@
 REGISTER_NODEFAULT(LoomModule, Loom_K30, "K30");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_K30::Loom_K30(LoomManager* manager,
-                   const char* module_name,
-                   int num_samples)
-: LoomSerialSensor(manager, module_name, Type::K30, num_samples)
+Loom_K30::Loom_K30(
+        const char* module_name,
+        int num_samples)
+    : LoomSerialSensor(module_name, Type::K30, num_samples)
 {
     print_module_label();
     LPrintln("Initializing K30");
@@ -33,8 +33,8 @@ Loom_K30::Loom_K30(LoomManager* manager,
 
 ///////////////////////////////////////////////////////////////////////////////
 
-Loom_K30::Loom_K30(LoomManager* manager, JsonArrayConst p)
-: Loom_K30(manager, EXPAND_ARRAY(p, 2))
+Loom_K30::Loom_K30(JsonArrayConst p)
+: Loom_K30(EXPAND_ARRAY(p, 2))
 {}
 
 ///////////////////////////////////////////////////////////////////////////////

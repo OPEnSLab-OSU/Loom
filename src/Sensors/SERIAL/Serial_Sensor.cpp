@@ -15,12 +15,11 @@
 ////////////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 LoomSerialSensor::LoomSerialSensor(
-        LoomManager* Manager,
-        const char*        module_name,
+        const char*            module_name,
         const LoomModule::Type module_type,
-        const uint8_t       num_samples
+        const uint8_t          num_samples
     )
-    : LoomSensor(Manager, module_name, module_type, num_samples ) {}
+    : LoomSensor(module_name, module_type, num_samples) {}
 
 ////////////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---

@@ -31,8 +31,8 @@ class Loom_Digital : public LoomSensor
 
 protected:
 
-	bool		pin_enabled[DIGITAL_COUNT];		///< Array of which pins are enabled
-	bool		digital_vals[DIGITAL_COUNT];	///< Array of last read digital values
+	bool	pin_enabled[DIGITAL_COUNT];		///< Array of which pins are enabled
+	bool	digital_vals[DIGITAL_COUNT];	///< Array of last read digital values
 
 public:
 	
@@ -55,7 +55,6 @@ public:
 	/// @param[in]	enableA4			Bool | <false> | {true, false} | Enable pin A4 for managing
 	/// @param[in]	enableA5			Bool | <false> | {true, false} | Enable pin A5 for managing
 	Loom_Digital(
-			LoomManager* manager,
 			const bool		enable5			= true,
 			const bool		enable6			= true,
 			const bool		enable9			= false,
@@ -73,7 +72,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Digital(LoomManager* manager, JsonArrayConst p);
+	Loom_Digital(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_Digital() = default;

@@ -22,19 +22,19 @@
 
 ///Forward declare any classes that will be served the created objects
 // class Scope;
-class LoomManager;
+// class LoomManager;
 
 ///////////////////////////////////////////////////////////////////////////////
 
 /// Creates a new T, returned as S*. S must be base of T
 /// @return The created T
 template <class S, class T>
-S* ConstructDefault(LoomManager *manager) { return new T(manager); }
+S* ConstructDefault() { return new T(); }
 
 /// Creates a new T, returned as S*. S must be base of T
 /// @return The created T
 template <class S, class T>
-S* ConstructDefaultJson(LoomManager* manager, JsonArrayConst p) { return new T(manager, p); }
+S* ConstructDefaultJson(JsonArrayConst p) { return new T(p); }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// A generic registry/factory that collects constructors of a give base type and allows for any number
@@ -44,8 +44,8 @@ class Registry
 {
 
 public:
-	using FactoryFunction = T *(*)(LoomManager*); ///< Pointer to function of type //* void T::funct (void) *//
-	using FactoryFunctionJson = LoomModule *(*)(LoomManager*, JsonArrayConst);
+	using FactoryFunction = T *(*)(); ///< Pointer to function of type //* void T::funct (void) *//
+	using FactoryFunctionJson = LoomModule *(*)(JsonArrayConst);
 	using FactoryPair = struct
 	{										///<  *Needed as an alternative to std::map
 		const char* name;					///< Name of module that will be used to make a new copy
@@ -63,8 +63,8 @@ public:
 	template <class U>
 	static bool addNoDefault(const char*);
 
-	static T* create(const char*, LoomManager *scope); ///< Returns an instance of type T created by using the FactoryFunction coresponding to the provided name
-	static T *create(JsonVariant, LoomManager *);   ///< Returns an instance of type T created from provided JSON
+	static T* create(const char*);	///< Returns an instance of type T created by using the FactoryFunction coresponding to the provided name
+	static T *create(JsonVariant);	///< Returns an instance of type T created from provided JSON
 
 	static void print_registry();
 
@@ -120,13 +120,13 @@ bool Registry<T>::add(const char* name, const Registry<T>::FactoryFunction ctor,
 
 ///////////////////////////////////////////////////////////////////////////////
 template <typename T>
-T* Registry<T>::create(const char* name, LoomManager* scope)
+T* Registry<T>::create(const char* name)
 {
 	auto lookUp = getFactoryTable();
 	for (auto elem : lookUp) {
 		// Add string processing for fuzzy search and debug suggestions?
 		if (!strcmp(name, elem.name) && elem.ctor) {
-			return elem.ctor(scope); // On match, return a *new* item of type name
+			return elem.ctor(); // On match, return a *new* item of type name
 		}
 	} // No match found, exiting for
 	return nullptr;
@@ -134,7 +134,7 @@ T* Registry<T>::create(const char* name, LoomManager* scope)
 
 ///////////////////////////////////////////////////////////////////////////////
 template <typename T>
-T *Registry<T>::create(JsonVariant target, LoomManager *scope)
+T *Registry<T>::create(JsonVariant target)
 {
 	const char* name = target["name"].as<const char*>();
 
@@ -144,13 +144,13 @@ T *Registry<T>::create(JsonVariant target, LoomManager *scope)
 			// Parameters are provided and a ctor exists to accept json parameters
 			if (elem.ctorJson && target["params"].is<JsonArray>()) {
 				// Generate according to list of parameters
-				return elem.ctorJson(scope, target["params"].as<JsonArrayConst>());
+				return elem.ctorJson(target["params"].as<JsonArrayConst>());
 			}
 
 			// 'params' key exists, but simply specifies 'default' (for legacy configs)
 			else if (target["params"].is<const char*>() && strcmp(target["params"], "default") == 0 ) {
 				if (elem.ctor) {
-					return elem.ctor(scope);
+					return elem.ctor();
 				} else {
 					LPrintln("Module [", name, "] does not have default settings, please provides params");
 					return nullptr;
@@ -161,7 +161,7 @@ T *Registry<T>::create(JsonVariant target, LoomManager *scope)
 			// If 'params' does exist and wasn't covered by the above two cases, assume there is 
 			// something wrong with the parameters and let the else case catch it instead
 			else if (elem.ctor && !target["params"]) {
-				return elem.ctor(scope);
+				return elem.ctor();
 			}
 
 			// Something was wrong with the config or the user specified to use a ctor

@@ -30,11 +30,10 @@ REGISTER(LoomModule, Loom_MS5803, "MS5803");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MS5803::Loom_MS5803(
-LoomManager* manager,
-const byte i2c_address, 
-		const uint8_t			mux_port
+		const byte		i2c_address, 
+		const uint8_t	mux_port
 	)
-	: LoomI2CSensor(manager, "MS5803", Type::MS5803, i2c_address, mux_port )
+	: LoomI2CSensor("MS5803", Type::MS5803, i2c_address, mux_port)
 	, inst_MS5803( MS_5803(i2c_address, 512) )
 {
 
@@ -76,8 +75,8 @@ const byte i2c_address,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MS5803::Loom_MS5803(LoomManager* manager, JsonArrayConst p)
-	: Loom_MS5803(manager, EXPAND_ARRAY(p, 2) ) {}
+Loom_MS5803::Loom_MS5803(JsonArrayConst p)
+	: Loom_MS5803( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MS5803::print_measurements() const

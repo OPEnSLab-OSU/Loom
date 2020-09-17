@@ -22,8 +22,8 @@
 REGISTER(LoomModule, Loom_Servo, "Servo");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Servo::Loom_Servo(LoomManager* manager) 
-	: LoomActuator(manager, "Servo", Type::Servo ) 
+Loom_Servo::Loom_Servo() 
+	: LoomActuator("Servo", Type::Servo) 
 	, positions{}
 {
 	servo_driver.begin();
@@ -31,8 +31,8 @@ Loom_Servo::Loom_Servo(LoomManager* manager)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Servo::Loom_Servo(LoomManager* manager, JsonArrayConst p)
-	: Loom_Servo(manager) {} 
+Loom_Servo::Loom_Servo(JsonArrayConst p)
+	: Loom_Servo() {} 
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Servo::add_config(JsonObject json)

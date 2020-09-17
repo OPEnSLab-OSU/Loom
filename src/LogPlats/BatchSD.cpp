@@ -20,12 +20,11 @@ REGISTER(LoomModule, Loom_BatchSD, "BatchSD");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_BatchSD::Loom_BatchSD(
-    LoomManager* manager,
-    const bool			enable_rate_filter,
-    const uint16_t		min_filter_delay,
+    const bool      enable_rate_filter,
+    const uint16_t	min_filter_delay,
     const byte			chip_select
     )
-    : LoomLogPlat(manager, "BatchSD", Type::BATCHSD, enable_rate_filter, min_filter_delay )
+    : LoomLogPlat("BatchSD", Type::BATCHSD, enable_rate_filter, min_filter_delay )
     , chip_select(chip_select)
     , doc(2048)
 {
@@ -46,8 +45,8 @@ Loom_BatchSD::Loom_BatchSD(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_BatchSD::Loom_BatchSD(LoomManager* manager, JsonArrayConst p)
-  : Loom_BatchSD(manager,EXPAND_ARRAY(p, 3)) {}
+Loom_BatchSD::Loom_BatchSD(JsonArrayConst p)
+  : Loom_BatchSD( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_BatchSD::print_config() const

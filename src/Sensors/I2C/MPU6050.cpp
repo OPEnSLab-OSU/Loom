@@ -23,12 +23,11 @@ REGISTER(LoomModule, Loom_MPU6050, "MPU6050");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MPU6050::Loom_MPU6050(
-LoomManager* manager,
-const byte i2c_address, 
-		const uint8_t		mux_port,
-		const bool			calibrate
-	) 
-	: LoomI2CSensor(manager, "MPU6050", Type::MPU6050, i2c_address, mux_port )
+		const byte		i2c_address, 
+		const uint8_t	mux_port,
+		const bool		calibrate
+	)
+	: LoomI2CSensor("MPU6050", Type::MPU6050, i2c_address, mux_port )
 {
 	Wire.begin();
 	mpu6050.begin();
@@ -41,8 +40,8 @@ const byte i2c_address,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MPU6050::Loom_MPU6050(LoomManager* manager, JsonArrayConst p)
-	: Loom_MPU6050(manager, EXPAND_ARRAY(p, 3) ) {}
+Loom_MPU6050::Loom_MPU6050(JsonArrayConst p)
+	: Loom_MPU6050(EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MPU6050::print_state() const

@@ -16,14 +16,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_NTPSync, "NTPSync");
+REGISTER(LoomModule, LoomNTPSync, "NTPSync");
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomNTPSync::LoomNTPSync(
-		LoomManager* 	manager,
-		const uint          sync_interval_hours
+		const uint sync_interval_hours
 	) 
-	: LoomModule(manager, "NTP", Type::NTP )
+	: LoomModule("NTP", Type::NTP)
 	, m_sync_interval( sync_interval_hours )
 	, m_internet( nullptr )
 	, m_rtc( nullptr )
@@ -32,8 +31,8 @@ LoomNTPSync::LoomNTPSync(
 	{}
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomNTPSync::LoomNTPSync(LoomManager* manager, JsonArrayConst p)
-	: LoomNTPSync(manager, (uint)p[0] ) {}
+LoomNTPSync::LoomNTPSync(JsonArrayConst p)
+	: LoomNTPSync((uint)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomNTPSync::second_stage_ctor() 

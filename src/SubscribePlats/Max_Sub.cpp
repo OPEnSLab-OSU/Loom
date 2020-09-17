@@ -20,17 +20,16 @@ REGISTER_NODEFAULT(LoomModule, Loom_MaxSub, "MaxSub");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxSub::Loom_MaxSub(
-		LoomManager* manager,
 		const LoomModule::Type	internet_type,
 		const bool				auto_dispatch
 	)   
-	: LoomSubscribePlat(manager, "MaxSub", Type::MaxSub, internet_type )
+	: LoomSubscribePlat("MaxSub", Type::MaxSub, internet_type)
 	, auto_dispatch(auto_dispatch)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxSub::Loom_MaxSub(LoomManager* manager, JsonArrayConst p) 
-	: Loom_MaxSub(manager, (LoomModule::Type)(int)p[0], p[1] ) {}
+Loom_MaxSub::Loom_MaxSub(JsonArrayConst p) 
+	: Loom_MaxSub((LoomModule::Type)(int)p[0], p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MaxSub::second_stage_ctor() 

@@ -59,7 +59,6 @@ public:
 	/// @param[in]	default_file_base			String | <"test"> | null | File to write to if none explicity provided (should be <= 6 characters, don't add extension)
 	/// @param[in]	number_files				Bool | <true> | {true, false} | True to number files with run number, false to not.
 	Loom_SD(
-			LoomManager* manager,
 			const bool			enable_rate_filter	= true,
 			const uint16_t		min_filter_delay	= 1000,
 			const byte			chip_select			= 10,
@@ -73,7 +72,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_SD(LoomManager* manager, JsonArrayConst p);
+	Loom_SD(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_SD() = default;

@@ -19,11 +19,10 @@ REGISTER(LoomModule, Loom_TMP007, "TMP007");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TMP007::Loom_TMP007(
-LoomManager* manager,
-const byte i2c_address, 
-		const uint8_t		mux_port
+		const byte		i2c_address, 
+		const uint8_t	mux_port
 	) 
-	: LoomI2CSensor(manager, "TMP007", Type::TMP007, i2c_address, mux_port )
+	: LoomI2CSensor("TMP007", Type::TMP007, i2c_address, mux_port)
 	, inst_tmp007( Adafruit_TMP007(i2c_address) )
 {
 	bool setup = inst_tmp007.begin();
@@ -35,8 +34,8 @@ const byte i2c_address,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_TMP007::Loom_TMP007(LoomManager* manager, JsonArrayConst p)
-	: Loom_TMP007(manager, EXPAND_ARRAY(p, 2) ) {}
+Loom_TMP007::Loom_TMP007(JsonArrayConst p)
+	: Loom_TMP007(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TMP007::print_measurements() const

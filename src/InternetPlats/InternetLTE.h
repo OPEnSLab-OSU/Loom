@@ -62,17 +62,16 @@ public:
       /// @param[in] powerPin analog pin on the feather M0 that drives pin 5 on LTE shield to power on and off
 
     Loom_LTE(
-        LoomManager* manager,
-        const char* APN = "",
+        const char* APN      = "",
         const char* gprsUser = "",
         const char* gprsPass = "",
-        const int powerPin = A5
+        const int   powerPin = A5
     );
 
     /// Constructor that takes Json Array, extracts args
 	  /// and delegates to regular constructor
 	  /// @param[in]	p		The array of constuctor args to expand
-    Loom_LTE(LoomManager* manager, JsonArrayConst p);
+    Loom_LTE(JsonArrayConst p);
 
     /// Destructor
     virtual ~Loom_LTE() = default;

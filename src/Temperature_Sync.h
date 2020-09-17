@@ -44,7 +44,6 @@ public:
 	/// @param[in]  source		Module type to get temperature from
 	/// @param[in]  dependant	Module type to forward temperature to
 	LoomTempSync(
-		LoomManager* manager,
 		const LoomModule::Type		source		= LoomModule::Type::MS5803,
 		const LoomModule::Type		dependant	= LoomModule::Type::Analog		// might be an array in the future
 	);
@@ -52,7 +51,7 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	LoomTempSync(LoomManager* manager, JsonArrayConst p);
+	LoomTempSync(JsonArrayConst p);
 
 	/// Destructor.
 	~LoomTempSync() = default;

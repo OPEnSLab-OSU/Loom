@@ -52,16 +52,15 @@ public:
   /// @param[in]	min_filter_delay			Int | <1000> | [100-5000] | Minimum update delay, if enable_rate_filter enabled
   /// @param[in]	chip_select					Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
   Loom_BatchSD(
-    LoomManager* manager,
-    const bool			enable_rate_filter	= true,
-    const uint16_t		min_filter_delay	= 1000,
-    const byte			chip_select			= 10
+    const bool		  enable_rate_filter = true,
+    const uint16_t	min_filter_delay   = 1000,
+    const byte			chip_select			   = 10
   );
 
   /// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-  Loom_BatchSD(LoomManager* manager, JsonArrayConst p);
+  Loom_BatchSD(JsonArrayConst p);
 
 	/// Destructor
   ~Loom_BatchSD() = default;

@@ -20,7 +20,6 @@ REGISTER(LoomModule, Loom_Digital, "Digital");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Digital::Loom_Digital(	
-		LoomManager* manager,
 		const bool		enable5,
 		const bool		enable6,
 		const bool		enable9,
@@ -35,7 +34,7 @@ Loom_Digital::Loom_Digital(
 		const bool		enableA4,
 		const bool		enableA5
 	) 
-	: LoomSensor(manager, "Digital", Type::Digital, 1 )
+	: LoomSensor("Digital", Type::Digital, 1)
 {
 	// Zero out array of measurements 
 	for (int i = 0; i < DIGITAL_COUNT; i++) { 
@@ -60,8 +59,8 @@ Loom_Digital::Loom_Digital(
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Digital::Loom_Digital(LoomManager* manager, JsonArrayConst p)
-	: Loom_Digital(manager, EXPAND_ARRAY(p, 12) ) {}
+Loom_Digital::Loom_Digital(JsonArrayConst p)
+	: Loom_Digital(EXPAND_ARRAY(p, 12) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Digital::add_config(JsonObject json)

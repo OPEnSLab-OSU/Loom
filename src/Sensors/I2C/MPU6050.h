@@ -67,16 +67,15 @@ public:
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	/// @param[in]	calibrate				Bool | <true> | {true, false} | Whether or not to calibrate at start
 	Loom_MPU6050(
-LoomManager* manager,
-const byte i2c_address		= 0x69,
-			const uint8_t		mux_port		= 255,
-			const bool			calibrate		= true
+			const byte		i2c_address	= 0x69,
+			const uint8_t	mux_port	= 255,
+			const bool		calibrate	= true
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_MPU6050(LoomManager* manager, JsonArrayConst p);
+	Loom_MPU6050(JsonArrayConst p);
 	
 	/// Destructor
 	virtual ~Loom_MPU6050() = default;

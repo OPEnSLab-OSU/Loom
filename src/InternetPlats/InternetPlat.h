@@ -81,9 +81,8 @@ public:
 	/// Loom Internet Platform module constructor.
 	///
 	/// @param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
-	LoomInternetPlat( 
-			LoomManager* manager,
-			const char* module_name,  
+	LoomInternetPlat(
+			const char*				module_name,  
 			const LoomModule::Type	module_type
 		);
 

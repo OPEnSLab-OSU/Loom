@@ -37,9 +37,8 @@ public:
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in] 	module_type		Type of the module (provided by derived classes)
 	LoomActuator( 
-			LoomManager* 			manager,
-			const char*							module_name, 
-			const LoomModule::Type	module_type
+			const char*             module_name, 
+			const LoomModule::Type  module_type
 		);
 
 	/// Destructor
@@ -50,7 +49,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Not all actuators need a package method, implement with empty body
-	virtual void 	package(JsonObject json) override {}
+	virtual void package(JsonObject json) override {}
 
 private:
 

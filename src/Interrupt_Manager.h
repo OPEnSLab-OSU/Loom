@@ -54,7 +54,7 @@ private:
 	/// Contains information defining an interrupt's configuration
 	struct IntDetails {
 		ISRFuncPtr	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
-		uint32_t		type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
+		uint32_t	type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
 		ISR_Type	run_type;		///< True if ISR is called directly upon interrupt, false if called next check of flags
 		bool		enabled;		///< Whether or not this interrupt is enabled
 	};
@@ -131,14 +131,13 @@ public:
 	///
 	/// @param[in]	RTC_Inst		Set(Int) | <0> | {0("Null")} | OLED module name
 	Loom_Interrupt_Manager(
-			LoomManager* manager,
-			LoomRTC*		RTC_Inst		= nullptr
+			LoomRTC* RTC_Ins = nullptr
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Interrupt_Manager(LoomManager* manager, JsonArrayConst p);
+	Loom_Interrupt_Manager(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_Interrupt_Manager() = default;

@@ -22,18 +22,17 @@ REGISTER(LoomModule, LoomTempSync, "TempSync");
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomTempSync::LoomTempSync(   
-		LoomManager* 				manager,
 		const LoomModule::Type		source,
 		const LoomModule::Type		dependant
 	) 
-	: LoomModule(manager, "TempSync", Type::TempSync )
+	: LoomModule("TempSync", Type::TempSync)
 	, source_type(source)
 	, dependant_type(dependant)
-	{}
+{}
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomTempSync::LoomTempSync(LoomManager* manager, JsonArrayConst p)
-	: LoomTempSync(manager, (LoomModule::Type)(int)p[0], (LoomModule::Type)(int)p[1] ) {}
+LoomTempSync::LoomTempSync(JsonArrayConst p)
+	: LoomTempSync( (LoomModule::Type)(int)p[0], (LoomModule::Type)(int)p[1] ) {}
 
 /////////////////////////////////////////////////////////////////////////////
 void LoomTempSync::second_stage_ctor() 

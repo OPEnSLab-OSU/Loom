@@ -54,16 +54,15 @@ public:
 
 	/// Constructor
 	Loom_Ethernet(	
-			LoomManager* manager,
-			const char* module_name	= "Ethernet",
+			const char* 			module_name	= "Ethernet",
 			const JsonArrayConst	mac			= JsonArray(),
-			const JsonArrayConst 	ip			= JsonArray()
+			const JsonArrayConst	ip			= JsonArray()
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Ethernet(LoomManager* manager, JsonArrayConst p );
+	Loom_Ethernet(JsonArrayConst p );
 
 	/// Destructor
 	virtual ~Loom_Ethernet() = default;

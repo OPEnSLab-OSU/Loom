@@ -12,9 +12,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomModule::LoomModule(
-	LoomManager* 	manager,
-	const char* 				module_name, 
-	const Type 					module_type 
+		const char*	module_name, 
+		const Type	module_type 
 	)
 	: module_name_base(module_name)
 	, module_name(module_name_base.c_str())
@@ -22,14 +21,14 @@ LoomModule::LoomModule(
 	, active(true)
 	, print_verbosity(Verbosity::V_LOW)
 	, package_verbosity(Verbosity::V_LOW)
-	, device_manager(manager)
+	, device_manager(nullptr)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomModule::link_device_manager(LoomManager* LM)
 {
-	if (LM == nullptr) return;
-	device_manager = LM;
+	// Don't check if nullptr, as the intent may be to clear link to manager
+	device_manager = LM; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -81,8 +81,7 @@ public:
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	max_message_len	The maximum possible message length
 	LoomCommPlat(
-			LoomManager* manager,
-			const char* module_name,
+			const char*				module_name,
 			const LoomModule::Type	module_type,
 			const uint16_t			max_message_len
 		);

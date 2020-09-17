@@ -18,7 +18,6 @@ REGISTER(LoomModule, Loom_Analog, "Analog");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Analog::Loom_Analog(
-		LoomManager* manager,
 		const uint8_t			num_samples,
 		const uint8_t			read_resolution,
 
@@ -38,7 +37,7 @@ Loom_Analog::Loom_Analog(
 
 		const float				temperature
 	)
-	: LoomSensor(manager, "Analog", Type::Analog, num_samples )
+	: LoomSensor("Analog", Type::Analog, num_samples)
 	, read_resolution(read_resolution)
 	, enable_conversions(true)
 	, analog_vals{0}
@@ -76,14 +75,14 @@ Loom_Analog::Loom_Analog(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Loom_Analog::Loom_Analog(LoomManager* manager, JsonArrayConst p)
+// Loom_Analog::Loom_Analog(JsonArrayConst p)
 // 	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7],
 // 		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10],
 // 		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13],
 // 		p[14], p[15], p[16]) {}
 
-Loom_Analog::Loom_Analog(LoomManager* manager, JsonArrayConst p)
-	: Loom_Analog(manager, p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7],
+Loom_Analog::Loom_Analog(JsonArrayConst p)
+	: Loom_Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7],
 		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10],
 		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13],
 		p[14] )

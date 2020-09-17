@@ -22,18 +22,17 @@ REGISTER(LoomModule, Loom_ADS1115, "ADS1115");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ADS1115::Loom_ADS1115(
-		LoomManager* manager,
-		const 	byte i2c_address,
-		const	uint8_t 		mux_port,
-		const 	bool 			analog_0_enabled,
-		const 	bool 			analog_1_enabled,
-		const 	bool 			analog_2_enabled,
-		const 	bool 			analog_3_enabled,
-		const 	bool 			diff_0_enabled,
-		const 	bool 			diff_1_enabled,
-		const	Gain			gain
+		const 	byte		i2c_address,
+		const	uint8_t 	mux_port,
+		const 	bool		analog_0_enabled,
+		const 	bool		analog_1_enabled,
+		const 	bool		analog_2_enabled,
+		const 	bool		analog_3_enabled,
+		const 	bool		diff_0_enabled,
+		const 	bool		diff_1_enabled,
+		const	Gain		gain
 	)
-	: LoomI2CSensor(manager, "ADS1115", LoomModule::Type::ADS1115 , i2c_address, mux_port)
+	: LoomI2CSensor("ADS1115", LoomModule::Type::ADS1115 , i2c_address, mux_port)
 	, ads1115(i2c_address)
 	, analog_enabled{ analog_0_enabled, analog_1_enabled, analog_2_enabled, analog_3_enabled }
 	, diff_enabled{ diff_0_enabled, diff_1_enabled }
@@ -47,8 +46,8 @@ Loom_ADS1115::Loom_ADS1115(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_ADS1115::Loom_ADS1115(LoomManager* manager, JsonArrayConst p)
-	: Loom_ADS1115(manager, p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], (Gain)(uint32_t)p[8] ) {}
+Loom_ADS1115::Loom_ADS1115(JsonArrayConst p)
+	: Loom_ADS1115(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], (Gain)(uint32_t)p[8] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_ADS1115::print_config() const

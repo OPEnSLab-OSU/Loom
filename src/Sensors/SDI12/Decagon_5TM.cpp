@@ -15,21 +15,19 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Loom_Decagon5TM, "Decagon5TM");
+// Uncomment once implemented
+// REGISTER(LoomModule, Loom_Decagon5TM, "Decagon5TM");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Decagon5TM::Loom_Decagon5TM(	
-		LoomManager* manager,
-		const uint8_t		num_samples 
-	) 
-	: LoomSDI12Sensor(manager, "5TM", Type::Decagon5TM, num_samples ) 
+Loom_Decagon5TM::Loom_Decagon5TM(const uint8_t num_samples)
+	: LoomSDI12Sensor("5TM", Type::Decagon5TM, num_samples) 
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Decagon5TM::Loom_Decagon5TM(LoomManager* manager, JsonArrayConst p)
-	: Loom_Decagon5TM(manager, (uint8_t)p[0] ) {}
+Loom_Decagon5TM::Loom_Decagon5TM(JsonArrayConst p)
+	: Loom_Decagon5TM((uint8_t)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Decagon5TM::print_config() const

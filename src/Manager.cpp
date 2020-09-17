@@ -590,7 +590,7 @@ bool LoomManager::parse_config_json(JsonObject config)
 
 	// Call registry to create each module
 	for ( JsonVariant module : config["components"].as<JsonArray>()) {
-		add_module(Registry<LoomModule>::create(module, this));
+		add_module(Registry<LoomModule>::create(module));
 	}
 
 	// Sort modules by type

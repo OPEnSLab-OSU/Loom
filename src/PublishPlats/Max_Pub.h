@@ -45,14 +45,13 @@ public:
 	///
 	/// @param[in]  internet_type	Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform.
 	Loom_MaxPub(
-		LoomManager* manager,
-		const LoomModule::Type		internet_type
+		const LoomModule::Type internet_type
 	);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]  p	The array of constuctor args to expand
-	Loom_MaxPub(LoomManager* manager, JsonArrayConst p );
+	Loom_MaxPub(JsonArrayConst p);
 
 	void second_stage_ctor() override;
 

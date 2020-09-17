@@ -40,8 +40,7 @@ public:
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	num_samples		The number of samples to take and average
 	LoomSensor(
-			LoomManager* manager,
-			const char* module_name,
+			const char*				module_name,
 			const LoomModule::Type	module_type,
  			const uint8_t			num_samples
 		);

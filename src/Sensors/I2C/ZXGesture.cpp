@@ -19,12 +19,11 @@ REGISTER(LoomModule, Loom_ZXGesture, "ZXGesture");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_ZXGesture::Loom_ZXGesture(
-LoomManager* manager,
-const byte i2c_address, 
-		const uint8_t		mux_port, 
-		const Mode			mode
+		const byte		i2c_address, 
+		const uint8_t	mux_port, 
+		const Mode		mode
 	)
-	: LoomI2CSensor(manager, "ZXGesture", Type::ZXGesture, i2c_address, mux_port )
+	: LoomI2CSensor("ZXGesture", Type::ZXGesture, i2c_address, mux_port)
 	, mode(mode)
 	, inst_ZX( ZX_Sensor(i2c_address) )
 {
@@ -58,8 +57,8 @@ const byte i2c_address,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_ZXGesture::Loom_ZXGesture(LoomManager* manager, JsonArrayConst p)
-	: Loom_ZXGesture(manager, p[0], p[1], (Mode)(int)p[2]) {}
+Loom_ZXGesture::Loom_ZXGesture(JsonArrayConst p)
+	: Loom_ZXGesture(p[0], p[1], (Mode)(int)p[2]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_ZXGesture::print_config() const

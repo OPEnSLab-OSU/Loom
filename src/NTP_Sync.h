@@ -40,14 +40,13 @@ public:
 	///
 	/// @param[in]  sync_interval_hours		Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
 	LoomNTPSync(
-		LoomManager* manager,
 		const uint		sync_interval_hours		= 0
 	);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	LoomNTPSync(LoomManager* manager, JsonArrayConst p);
+	LoomNTPSync(JsonArrayConst p);
 
 	/// Destructor
 	~LoomNTPSync() = default;

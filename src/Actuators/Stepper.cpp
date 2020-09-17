@@ -20,8 +20,8 @@
 REGISTER(LoomModule, Loom_Stepper, "Stepper");
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Stepper::Loom_Stepper(LoomManager* manager) 
-	: LoomActuator(manager, "Stepper", Type::Stepper ) 
+Loom_Stepper::Loom_Stepper() 
+	: LoomActuator("Stepper", Type::Stepper ) 
 {
 	AFMS = new Adafruit_MotorShield();
 	for (auto i = 0; i < NUM_STEPPERS; i++){
@@ -34,8 +34,8 @@ Loom_Stepper::Loom_Stepper(LoomManager* manager)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Stepper::Loom_Stepper(LoomManager* manager, JsonArrayConst p)
-	: Loom_Stepper(manager) {} 
+Loom_Stepper::Loom_Stepper(JsonArrayConst p)
+	: Loom_Stepper() {} 
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Stepper::~Loom_Stepper() 

@@ -21,10 +21,9 @@ REGISTER_NODEFAULT(LoomModule, Loom_MaxPub, "MaxPub");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxPub::Loom_MaxPub(
-		LoomManager* manager,
-		const LoomModule::Type	internet_type
+		const LoomModule::Type internet_type
 	)   
-	: LoomPublishPlat(manager, "MaxPub", Type::MaxPub, internet_type )
+	: LoomPublishPlat("MaxPub", Type::MaxPub, internet_type)
 	, remoteIP({192,168,1,255})
 {}
 
@@ -45,8 +44,8 @@ void Loom_MaxPub::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxPub::Loom_MaxPub(LoomManager* manager, JsonArrayConst p)
-	: Loom_MaxPub(manager, (LoomModule::Type)(int)p[0] ) {}
+Loom_MaxPub::Loom_MaxPub(JsonArrayConst p)
+	: Loom_MaxPub((LoomModule::Type)(int)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MaxPub::print_config() const

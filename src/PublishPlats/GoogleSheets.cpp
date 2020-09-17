@@ -20,7 +20,6 @@ REGISTER_NODEFAULT(LoomModule, Loom_GoogleSheets, "GoogleSheets");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_GoogleSheets::Loom_GoogleSheets(
-		LoomManager* manager,
 		const char*				module_name,
 		const LoomModule::Type	internet_type,
 		const char*				script_url,
@@ -28,7 +27,7 @@ Loom_GoogleSheets::Loom_GoogleSheets(
 		const bool				tab_matches_dev_id,
 		const char*				tab_id
 	)   
-	: LoomPublishPlat(manager, module_name, Type::GoogleSheets, internet_type )
+	: LoomPublishPlat(module_name, Type::GoogleSheets, internet_type)
 	, m_script_url(script_url)
 	, m_sheet_id(sheet_id)
 	, tab_matches_dev_id(tab_matches_dev_id)
@@ -40,8 +39,8 @@ Loom_GoogleSheets::Loom_GoogleSheets(
 } 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_GoogleSheets::Loom_GoogleSheets(LoomManager* manager, JsonArrayConst p)
-	: Loom_GoogleSheets(manager, p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5] ) {}
+Loom_GoogleSheets::Loom_GoogleSheets(JsonArrayConst p)
+	: Loom_GoogleSheets(p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_GoogleSheets::print_config() const

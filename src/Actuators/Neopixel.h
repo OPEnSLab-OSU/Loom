@@ -48,16 +48,15 @@ public:
 	/// @param[in]	enableA1		Bool | <false> | {true, false} | Whether or not to use pin A1 for Neopixel
 	/// @param[in]	enableA2		Bool | <true> | {true, false} | Whether or not to use pin A2 for Neopixel
 	Loom_Neopixel(
-			LoomManager* 	manager,
-			const bool					enableA0		= false,
-			const bool					enableA1		= false,
-			const bool					enableA2		= true
+			const bool enableA0 = false,
+			const bool enableA1 = false,
+			const bool enableA2 = true
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Neopixel(LoomManager* manager, JsonArrayConst p);
+	Loom_Neopixel(JsonArrayConst p);
 
 	/// Destructor
 	~Loom_Neopixel() = default;

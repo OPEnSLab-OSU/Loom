@@ -21,11 +21,10 @@ REGISTER(LoomModule, Loom_FXOS8700, "FXOS8700");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_FXOS8700::Loom_FXOS8700(
-LoomManager* manager,
-const byte i2c_address, 
-		const uint8_t		mux_port
+		const byte		i2c_address, 
+		const uint8_t	mux_port
 	)
-	: LoomI2CSensor(manager, "FXOS8700", Type::FXOS8700, i2c_address, mux_port )
+	: LoomI2CSensor("FXOS8700", Type::FXOS8700, i2c_address, mux_port)
 	, inst_FXOS8700(Adafruit_FXOS8700(0x8700A, 0x8700B))
 {
 	bool setup = inst_FXOS8700.begin(ACCEL_RANGE_4G);
@@ -37,8 +36,8 @@ const byte i2c_address,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_FXOS8700::Loom_FXOS8700(LoomManager* manager, JsonArrayConst p)
-	: Loom_FXOS8700(manager, EXPAND_ARRAY(p, 2) ) {}
+Loom_FXOS8700::Loom_FXOS8700(JsonArrayConst p)
+	: Loom_FXOS8700(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_FXOS8700::print_measurements() const

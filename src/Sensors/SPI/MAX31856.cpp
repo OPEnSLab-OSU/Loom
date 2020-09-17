@@ -19,15 +19,15 @@ REGISTER(LoomModule, Loom_MAX31856, "MAX31856");
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MAX31856::Loom_MAX31856(
-		LoomManager* manager,
-		const char* module_name,
+		const char*		module_name,
 		const uint8_t	num_samples, 
 		const uint8_t	CS_pin,
 		const uint8_t	SPI_a,
 		const uint8_t	SPI_b,
 		const uint8_t	SPI_c,
 		const uint8_t	SPI_d
-	) : LoomSPISensor(manager, module_name, Type::MAX31856, num_samples ) 
+	) 
+	: LoomSPISensor(module_name, Type::MAX31856, num_samples) 
 	, inst_max( Adafruit_MAX31856(SPI_a, SPI_b, SPI_c, SPI_d) )
 {
 	// Hardware Serial
@@ -41,8 +41,8 @@ Loom_MAX31856::Loom_MAX31856(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MAX31856::Loom_MAX31856(LoomManager* manager, JsonArrayConst p)
-	: Loom_MAX31856(manager, EXPAND_ARRAY(p, 7) ) {}
+Loom_MAX31856::Loom_MAX31856(JsonArrayConst p)
+	: Loom_MAX31856(EXPAND_ARRAY(p, 7) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MAX31856::print_measurements() const 
