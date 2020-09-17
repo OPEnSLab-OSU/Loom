@@ -136,38 +136,49 @@ T* Registry<T>::create(const char* name, LoomManager* scope)
 template <typename T>
 T *Registry<T>::create(JsonVariant target, LoomManager *scope)
 {
-	const char *name = target["name"].as<char *>();
-	auto lookUp = getFactoryTable();
+	const char* name = target["name"].as<const char*>();
 
-	LPrintln("HERE");
-	LPrintln("name: ", name);
-	serializeJsonPretty(target, Serial);
+	for (auto elem : getFactoryTable()) {
+		if (strcmp(name, elem.name) == 0) {
 
-// if no params array, create default if elem.ctor not nullptr
-
-
-	for (auto elem : lookUp) {
-		if (!strcmp(name, elem.name) && elem.ctorJson) 
-		{
-			// ADD MORE ERROR CHECKING HERE
-			if (target.containsKey("params")) {
-				// JsonArrayConst params = target["params"].as<JsonArrayConst>();
-				// return elem.ctorJson(scope, params);
+			// Parameters are provided and a ctor exists to accept json parameters
+			if (elem.ctorJson && target["params"].is<JsonArray>()) {
+				// Generate according to list of parameters
 				return elem.ctorJson(scope, target["params"].as<JsonArrayConst>());
-			} else {
-				return nullptr;
 			}
 
-					
+			// 'params' key exists, but simply specifies 'default' (for legacy configs)
+			else if (target["params"].is<const char*>() && strcmp(target["params"], "default") == 0 ) {
+				if (elem.ctor) {
+					return elem.ctor(scope);
+				} else {
+					LPrintln("Module [", name, "] does not have default settings, please provides params");
+					return nullptr;
+				}
+			}
+
+			// 'params' key omitted, assume default settings if default ctor available
+			// If 'params' does exist and wasn't covered by the above two cases, assume there is 
+			// something wrong with the parameters and let the else case catch it instead
+			else if (elem.ctor && !target["params"]) {
+				return elem.ctor(scope);
+			}
+
+			// Something was wrong with the config or the user specified to use a ctor
+			// that didn't exist
+			else {
+				LPrintln("Check the config for component: ", name);
+				return nullptr;
+			}			
 		}
-	}
+	} // No match found, exiting for
 	return nullptr;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// This function exploits C++'s treatment of static initialization, where 
 /// the compiler only expects a single instance to ever exist 
-/// Due to this behavior, we can use this
+/// Due to this behavior, we can use this:
 template <typename T>
 std::vector<typename Registry<T>::FactoryPair>& Registry<T>::getFactoryTable()
 {
@@ -182,8 +193,7 @@ template <typename T>
 void Registry<T>::print_registry()
 {
 	auto lookUp = getFactoryTable();
-	LPrint(typeid(T).name()+2);
-	LPrintln(" Factory [", lookUp.size(), " classes]");
+	LPrintln(typeid(T).name()+2, " Factory [", lookUp.size(), " classes]");
 
 	for (auto elem : lookUp) {
 		LPrintln(" - ", elem.name);
