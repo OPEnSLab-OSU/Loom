@@ -45,16 +45,16 @@ private:
 
 protected:
 
-	TimeZone	timezone;			///< The TimeZone to use
+	TimeZone	timezone;				///< The TimeZone to use
 
-	bool		use_local_time;		///< Whether or not use local time, else UTC time
+	bool		use_local_time;			///< Whether or not use local time, else UTC time
 
-	bool		converted;			///< Whether or not converted daylight saving / summer time or not
+	bool		converted;				///< Whether or not converted daylight saving / summer time or not
 
-	DateTime	local_time;
+	DateTime	local_time;				///< DateTime variable for the Local Time 
 
-	char		local_datestring[20];
-	char		local_timestring[20];
+	char		local_datestring[20];	///< Latest saved string of Local Date (year/month/day)
+	char		local_timestring[20];	///< Latest saved string of Local time (hour:minute:second)
 
 	char		datestring[20];		///< Latest saved string of the Date (year/month/day)
 	char		timestring[20];		///< Latest saved string of the time (hour:minute:second)
