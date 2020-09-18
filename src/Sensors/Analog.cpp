@@ -44,9 +44,6 @@ Analog::Analog(
 	, battery(0.)
 	, temperature(temperature)
 {
-
-	LPrintln("REGULAR ANALOG CTOR");
-
 	// Set Analog Read Resolution
 	analogReadResolution(read_resolution);
 
@@ -75,24 +72,11 @@ Analog::Analog(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Analog::Analog(JsonArrayConst p)
-// 	: Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7],
-// 		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10],
-// 		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13],
-// 		p[14], p[15], p[16]) {}
-
 Analog::Analog(JsonArrayConst p)
 	: Analog(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7],
 		(Conversion)(int)p[8], (Conversion)(int)p[9], (Conversion)(int)p[10],
 		(Conversion)(int)p[11], (Conversion)(int)p[12], (Conversion)(int)p[13],
-		p[14] )
-{
-	LPrintln("JSON ANALOG CTOR");
-	serializeJsonPretty(p, Serial);
-	LPrintln("\n");
-}
-
-
+		p[14]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Analog::add_config(JsonObject json)
@@ -107,7 +91,6 @@ void Analog::add_config(JsonObject json)
 	for (auto i = 0; i < 6; i++) {
 		params.add((int)conversions[i]);
 	}
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
