@@ -39,26 +39,12 @@
 
 
 
-/// \cond DO_NOT_DOCUMENT
-/// Macros to expand variadics.
-/// For use in LPrint, LPrintln, and LPrintlnAll functions
-#define VARIADIC_DETAIL_CAT2(a, b) a ## b
-#define VARIADIC_DETAIL_CAT(a, b) VARIADIC_DETAIL_CAT2(a, b)
-
-#define VARIADIC_EXPAND(...) \
-    int VARIADIC_DETAIL_CAT(libutil_expando, __COUNTER__) [] = { 0, \
-      ((__VA_ARGS__), 0)... \
-    } \
-    /**/
-/// \endcond
-
-
 /// Print variable number of arguments (no newline)
 template <typename... Types> 
 void LPrint(Types... vars) 
 {
 	#if LOOM_DEBUG == 1
-		VARIADIC_EXPAND(Serial.print(vars));
+		(Serial.print(vars), ...);
 	#endif
 }
 
@@ -68,7 +54,7 @@ template <typename... Types>
 void LPrintln(Types... vars) 
 {		
 	#if LOOM_DEBUG == 1
-		VARIADIC_EXPAND(Serial.print(vars));
+		(Serial.print(vars), ...);
 		Serial.println();
 	#endif
 }
@@ -79,7 +65,7 @@ template <typename... Types>
 void LPrintlnAll(Types... vars) 
 {
 	#if LOOM_DEBUG == 1
-		VARIADIC_EXPAND(Serial.println(vars));
+		(Serial.println(vars), ...);
 		Serial.println();
 	#endif
 }
