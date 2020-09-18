@@ -20,7 +20,7 @@
 /// Glue code to synchronize an RTC using an InternetPlat. 
 /// Always synchronizes the RTC from InterruptManager::get_RTC_module().
 ///
-/// @note	Requires a RTC and LoomInternetPlat module to work.
+/// @note	Requires a RTC and InternetPlat module to work.
 ///
 /// @par Resources
 /// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom_n_t_p_sync.html)

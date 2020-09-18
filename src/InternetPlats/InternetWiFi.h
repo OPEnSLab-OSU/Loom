@@ -30,7 +30,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#wifi)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class WiFi : public InternetPlat
+class L_WiFi : public InternetPlat
 {
 
 protected:
@@ -53,7 +53,7 @@ public:
 	/// Constructor
 	/// @param[in]	ssid	WiFi network name
 	/// @param[in]	pass	WiFi network password. Leave as empty string if network has no password.
-	WiFi(
+	L_WiFi(
 			const char* 	ssid	= "",
 			const char* 	pass	= ""
 		);
@@ -61,10 +61,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	WiFi(JsonArrayConst p );
+	L_WiFi(JsonArrayConst p );
 
 	/// Destructor
-	virtual ~WiFi() = default;
+	virtual ~L_WiFi() = default;
 
 //=============================================================================
 ///@name	OPERATION

@@ -15,6 +15,8 @@
 #include "../Manager.h"
 #include "Module_Factory.h"
 
+#define UDP_SEND_OFFSET 8000 ///< UDP sending port is this value + device instance number
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER_NODEFAULT(LoomModule, MaxPub, "MaxPub");
@@ -101,7 +103,7 @@ void MaxPub::set_ip()
 	print_module_label();
 	LPrintln("Received command to set IP to send to");
 	MaxSub* temp;
-	if (device_manager && (temp = (MaxSub*)&(device_manager->MaxSub())) ) {
+	if (device_manager && ( temp = (device_manager->get<MaxSub>())) ) {
 		IPAddress ip = temp->get_remote_IP();
 		if (ip[0] != 0) {
 			set_ip(ip);

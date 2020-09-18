@@ -10,7 +10,7 @@
 
 #ifdef LOOM_INCLUDE_SENSORS
 
-#include "Temperature_Sync.h"
+#include "TemperatureSync.h"
 #include "Manager.h"
 #include "Sensors/Analog.h"
 #include "Sensors/I2C/MS5803.h"

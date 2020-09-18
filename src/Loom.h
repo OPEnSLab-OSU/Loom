@@ -105,13 +105,13 @@ namespace std {
 
     #include "Sensors/SERIAL/K30.h"
     
-    #include "Temperature_Sync.h"
+    #include "TemperatureSync.h"
     #include "Multiplexer.h" // this needs to be include after I2C sensors (due to conflict with enableInterrupt macro/function defined by EnableInterrupt library and AS726X sensors)
 #endif
 
 // Other
 #if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
-    #include "NTP_Sync.h"
+    #include "NTPSync.h"
 #endif
 
 // General

@@ -10,7 +10,7 @@
 
 #if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 
-#include "NTP_Sync.h"
+#include "NTPSync.h"
 #include "Manager.h"
 #include "Module_Factory.h"
 
@@ -43,7 +43,7 @@ void NTPSync::second_stage_ctor()
 
 	// Try to get internet platform from manager
 	LoomModule* temp = device_manager->find_module_by_category(LoomModule::Category::InternetPlat, 0);
-	if (temp != nullptr) m_internet = (LoomInternetPlat*)temp;
+	if (temp != nullptr) m_internet = (InternetPlat*)temp;
 	else {
 		m_last_error = Error::INVAL_INTERNET;
 		print_module_label();

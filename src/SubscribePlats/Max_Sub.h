@@ -13,8 +13,6 @@
 
 #include "SubscribePlat.h"
 
-#define UDP_RECEIVE_OFFSET 9000		///< UDP receiving port is this value + device instance number
-
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Module for receiving data from Max

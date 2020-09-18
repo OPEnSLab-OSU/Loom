@@ -59,27 +59,27 @@ void MPU6050::print_measurements() const
 	print_module_label();
 	LPrintln("Measurements:");
 
-	LPrintln("\taccX   : ", accX);
-	LPrintln("\taccY   : ", accY);
-	LPrintln("\taccZ   : ", accZ);
+	LPrintln("\taccX   : ", acc[0]]);
+	LPrintln("\taccY   : ", acc[1]);
+	LPrintln("\taccZ   : ", acc[2]);
 
-	LPrintln("\tgyroX  : ", gyroX);
-	LPrintln("\tgyroY  : ", gyroY);
-	LPrintln("\tgyroZ  : ", gyroZ);
+	LPrintln("\tgyroX  : ", gyro[0]);
+	LPrintln("\tgyroY  : ", gyro[1]);
+	LPrintln("\tgyroZ  : ", gyro[2]);
 
-	LPrintln("\troll  : ", angleX);
-	LPrintln("\tpitch : ", angleY);
-	LPrintln("\tyaw   : ", angleZ);
+	LPrintln("\troll  : ", angle[0]);
+	LPrintln("\tpitch : ", angle[1]);
+	LPrintln("\tyaw   : ", angle[2]);
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		LPrintln("\ttemp       : ", temp);
 
-		LPrintln("\taccAngleX  : ", accAngleX);
-		LPrintln("\taccAngleY  : ", accAngleY);
+		LPrintln("\taccAngleX  : ", accAngle[0]);
+		LPrintln("\taccAngleY  : ", accAngle[1]);
 
-		LPrintln("\tgyroAngleX : ", gyroAngleX);
-		LPrintln("\tgyroAngleY : ", gyroAngleY);
-		LPrintln("\tgyroAngleZ : ", gyroAngleZ);
+		LPrintln("\tgyroAngleX : ", gyroAngle[0]);
+		LPrintln("\tgyroAngleY : ", gyroAngle[1]);
+		LPrintln("\tgyroAngleZ : ", gyroAngle[2]);
 	}
 
 }
@@ -91,24 +91,24 @@ void MPU6050::measure()
 
 	temp = mpu6050.getTemp();
 
-	accX = mpu6050.getAccX();
-	accY = mpu6050.getAccY();
-	accZ = mpu6050.getAccZ();
+	acc[0] = mpu6050.getAccX();
+	acc[1] = mpu6050.getAccY();
+	acc[2] = mpu6050.getAccZ();
 
-	gyroX = mpu6050.getGyroX();
-	gyroY = mpu6050.getGyroY();
-	gyroZ = mpu6050.getGyroZ();
+	gyro[0] = mpu6050.getGyroX();
+	gyro[1] = mpu6050.getGyroY();
+	gyro[2] = mpu6050.getGyroZ();
 
-	accAngleX = mpu6050.getAccAngleX();
-	accAngleY = mpu6050.getAccAngleY();
+	accAngle[0] = mpu6050.getAccAngleX();
+	accAngle[1] = mpu6050.getAccAngleY();
 
-	gyroAngleX = mpu6050.getGyroAngleX();
-	gyroAngleY = mpu6050.getGyroAngleY();
-	gyroAngleZ = mpu6050.getGyroAngleZ();
+	gyroAngle[0] = mpu6050.getGyroAngleX();
+	gyroAngle[1] = mpu6050.getGyroAngleY();
+	gyroAngle[2] = mpu6050.getGyroAngleZ();
 
-	angleX = mpu6050.getAngleX();
-	angleY = mpu6050.getAngleY();
-	angleZ = mpu6050.getAngleZ();
+	angle[0] = mpu6050.getAngleX();
+	angle[1] = mpu6050.getAngleY();
+	angle[2] = mpu6050.getAngleZ();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -116,27 +116,27 @@ void MPU6050::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	
-	data["ax"] = accX;
-	data["ay"] = accY;
-	data["az"] = accZ;
+	data["ax"] = acc[0];
+	data["ay"] = acc[1];
+	data["az"] = acc[2];
 
-	data["gx"] = gyroX;
-	data["gy"] = gyroY;
-	data["gz"] = gyroZ;
+	data["gx"] = gyro[0];
+	data["gy"] = gyro[1];
+	data["gz"] = gyro[2];
 
-	data["roll"] = angleX;
-	data["pitch"] = angleY;
-	data["yaw"] = angleZ;
+	data["roll"]  = angle[0];
+	data["pitch"] = angle[1];
+	data["yaw"]   = angle[2];
 
 	if (print_verbosity == Verbosity::V_HIGH) {
 		data["temp"]		= 	temp;
 
-		data["accAngleX"]	= 	accAngleX;
-		data["accAngleY"]	= 	accAngleY;
+		data["accAngleX"]	= 	accAngle[0];
+		data["accAngleY"]	= 	accAngle[1];
 
-		data["gyroAngleX"]	= 	gyroAngleX;
-		data["gyroAngleY"]	= 	gyroAngleY;
-		data["gyroAngleZ"]	=	gyroAngleZ;
+		data["gyroAngleX"]	= 	gyroAngle[0];
+		data["gyroAngleY"]	= 	gyroAngle[1];
+		data["gyroAngleZ"]	=	gyroAngle[2];
 	}
 
 }

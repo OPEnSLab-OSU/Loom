@@ -14,6 +14,8 @@
 #include "../Manager.h"
 #include "Module_Factory.h"
 
+#define UDP_RECEIVE_OFFSET 9000 ///< UDP receiving port is this value + device instance number
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER_NODEFAULT(LoomModule, MaxSub, "MaxSub");

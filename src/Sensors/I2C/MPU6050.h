@@ -36,24 +36,11 @@ protected:
 
 	float temp;				///< Temperature. Units: °C
 
-	float accX;				///< X-axis acceleration value. Units: g.
-	float accY;				///< Y-axis acceleration value. Units: g.
-	float accZ;				///< Z-axis acceleration value. Units: g.
-
-	float gyroX;			///< X-axis gyro value. Units: °/s.
-	float gyroY;			///< Y-axis gyro value. Units: °/s.
-	float gyroZ;			///< Z-axis gyro value. Units: °/s.
-
-	float accAngleX;		///< X-axis acceleration angle
-	float accAngleY;		///< Y-axis acceleration angle
-
-	float gyroAngleX;		///< X-axis acceleration angle. 
-	float gyroAngleY;		///< Y-axis acceleration angle. 
-	float gyroAngleZ;		///< Z-axis acceleration angle. 
-
-	float angleX;			///< X-axis angle.
-	float angleY;			///< Y-axis angle.
-	float angleZ;			///< Z-axis angle.
+	float acc[3];			///< Acceleration values. (x, y, z) Units: g.
+	float gyro[3];			///< Gyro values. (x, y, z) Units: °/s.
+	float accAngle[2];		///< X-axis acceleration angle (x, y)
+	float gyroAngle[3];		///< Acceleration angles (x, y, z).
+	float angle[3];			///< X-axis angle. (x, y, z)
 
 public:
 

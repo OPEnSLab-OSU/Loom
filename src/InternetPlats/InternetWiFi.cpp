@@ -16,10 +16,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, WiFi, "WiFi");
+REGISTER(LoomModule, L_WiFi, "WiFi");
 
 ///////////////////////////////////////////////////////////////////////////////
-WiFi::WiFi(
+L_WiFi::L_WiFi(
 		const char* 	ssid,
 		const char* 	pass
 	)
@@ -43,11 +43,11 @@ WiFi::WiFi(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-WiFi::WiFi(JsonArrayConst p)
-	: WiFi(EXPAND_ARRAY(p, 2) ) {}
+L_WiFi::L_WiFi(JsonArrayConst p)
+	: L_WiFi(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void WiFi::connect()
+void L_WiFi::connect()
 {
 	// clear the write error
 	m_base_client.clearWriteError();
@@ -88,20 +88,21 @@ void WiFi::connect()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void WiFi::disconnect() {
+void L_WiFi::disconnect() 
+{
 	// tell the wifi it's time to stop
 	WiFi.disconnect();
 	delay(200);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool WiFi::is_connected() const
+bool L_WiFi::is_connected() const
 {
 	return WiFi.status() == WL_CONNECTED;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-InternetPlat::UDPPtr WiFi::open_socket(const uint port)
+InternetPlat::UDPPtr L_WiFi::open_socket(const uint port)
 {
 	// create the unique pointer
 	UDPPtr ptr = UDPPtr(new WiFiUDP());
@@ -112,14 +113,14 @@ InternetPlat::UDPPtr WiFi::open_socket(const uint port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void WiFi::print_config() const
+void L_WiFi::print_config() const
 {
 	InternetPlat::print_config();
 	LPrint("\tSSID:               : ", SSID, '\n');
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void WiFi::print_state() const
+void L_WiFi::print_state() const
 {
 	InternetPlat::print_state();
 	const char* text = m_wifi_status_to_string(WiFi.status());
@@ -135,7 +136,8 @@ void WiFi::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* WiFi::m_wifi_status_to_string(const uint8_t status) {
+const char *L_WiFi::m_wifi_status_to_string(const uint8_t status)
+{
 	switch (status) {
 		case WL_NO_SHIELD: return "NO_SHIELD";
 		case WL_IDLE_STATUS: return "IDLE_STATUS";
@@ -153,7 +155,7 @@ const char* WiFi::m_wifi_status_to_string(const uint8_t status) {
 ///////////////////////////////////////////////////////////////////////////////
 #ifdef LOOM_INCLUDE_MAX
 
-void WiFi::package(JsonObject json)
+void L_WiFi::package(JsonObject json)
 {
 	//JsonObject data = get_module_data_object(json, module_name);
 	auto ip = IPAddress(WiFi.localIP());

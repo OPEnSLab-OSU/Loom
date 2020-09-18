@@ -13,8 +13,6 @@
 
 #include "PublishPlat.h"
 
-#define UDP_SEND_OFFSET 8000	///< UDP sending port is this value + device instance number
-
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Module taking in and translating JSON into data understood by the Google Sheets script API.
