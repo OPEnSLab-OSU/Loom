@@ -126,7 +126,7 @@ void SD::link_device_manager(Manager* LM)
 {
 	LoomModule::link_device_manager(LM);
 
-	// If no currently linked L_RTC object, try to get one from Manager
+	// If no currently linked RTC object, try to get one from Manager
 	if ( (RTC_Inst == NULL) && (LM != NULL) ){
 		RTC_Inst = LM->get_rtc_module();
 	}

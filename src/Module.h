@@ -16,6 +16,8 @@
 
 #include <ArduinoJson.h>
 
+#undef RTC // to avoid our class/enum elem from colliding with an Arduino RTC macro
+
 class Manager; // Specify that Manager exists, defined in own file
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -50,8 +52,8 @@ public:
 		SPI=2300,			MAX31855, MAX31856,
         // SERIAL
         L_SERIAL=2400,        K30,
-		// L_RTC
-		L_RTC=3000,			DS3231, PCF8523,
+		// RTC
+		RTC=3000,			DS3231, PCF8523,
 		// Actuators
 		Actuator=4000,		Neopixel, Relay, Servo, Stepper,
 		// LogPlats
@@ -75,7 +77,7 @@ public:
 		Unknown=0,			///< Unknown
 		Other=1,			///< Other
 		Sensor=2,			///< Sensors
-		L_RTC=3,			///< L_RTC
+		RTC=3,			///< RTC
 		Actuator=4,			///< Actuators
 		LogPlat=5,			///< LogPlats
 		CommPlat=6,			///< CommPlats
@@ -195,7 +197,7 @@ public:
 	/// Generally only called when device manager links module
 	/// to provide pointer both directions.
 	/// Derived modules may override this for increased function,
-	/// such as linking a submanager or L_RTC module.
+	/// such as linking a submanager or RTC module.
 	/// @param[in]	LM	Manager to point to
 	virtual void	link_device_manager(Manager* LM);
 

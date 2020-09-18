@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_RTC.cpp
-/// @brief		File for L_RTC implementation.
+/// @brief		File for RTC implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -19,11 +19,11 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* L_RTC::daysOfTheWeek[] = 
+const char* RTC::daysOfTheWeek[] = 
 	{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 ///////////////////////////////////////////////////////////////////////////////
-const float L_RTC::timezone_adjustment[] =
+const float RTC::timezone_adjustment[] =
 	{
 		1  /* WAT */, 2    /* AT  */, 3     /* ADT */, 4   /* AST */, 4   /* EDT */, 5  /* EST */, 5  /* CDT */,
 		6  /* CST */, 6    /* MDT */, 7     /* MST */, 7   /* PDT */, 8   /* PST */, 8  /* ALDT*/, 9  /* ALST*/,
@@ -33,7 +33,7 @@ const float L_RTC::timezone_adjustment[] =
 	};
 
 ///////////////////////////////////////////////////////////////////////////////
-char* L_RTC::enum_timezone_string(TimeZone t)
+char* RTC::enum_timezone_string(TimeZone t)
 {
 	switch(t) {
 		case TimeZone::WAT  : return "WAT";
@@ -73,7 +73,7 @@ char* L_RTC::enum_timezone_string(TimeZone t)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-L_RTC::L_RTC(	
+RTC::RTC(	
 		const char*				module_name,
 		const LoomModule::Type	module_type,
 		const TimeZone			timezone,
@@ -85,28 +85,28 @@ L_RTC::L_RTC(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::print_config() const
+void RTC::print_config() const
 {
 	LoomModule::print_config();
 	LPrintln("\tUse UTC Time      : ", use_utc_time);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::print_state() const
+void RTC::print_state() const
 {
 	LoomModule::print_state();
 	// print_time();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::package(JsonObject json)
+void RTC::package(JsonObject json)
 {
 	read_rtc();
 	package_json_timestamp(json, datestring, timestring);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::print_time(const bool verbose)
+void RTC::print_time(const bool verbose)
 {
 	read_rtc();
 	print_module_label();
@@ -124,7 +124,7 @@ void L_RTC::print_time(const bool verbose)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::print_DateTime(const DateTime time)
+void RTC::print_DateTime(const DateTime time)
 {
 	LPrint(time.year());   LPrint('/');
 	LPrint(time.month());  LPrint('/');
@@ -135,14 +135,14 @@ void L_RTC::print_DateTime(const DateTime time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::read_rtc()
+void RTC::read_rtc()
 {
 	get_datestring();
 	get_timestring();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* L_RTC::get_datestring()
+const char* RTC::get_datestring()
 {
 	DateTime time = now();
 	sprintf(datestring, "%d/%d/%d", time.year(), time.month(), time.day() );
@@ -150,7 +150,7 @@ const char* L_RTC::get_datestring()
 } 
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::get_datestring(char* buf)
+void RTC::get_datestring(char* buf)
 {
 	DateTime time = now();
 	sprintf(buf, "%d/%d/%d", time.year(), time.month(), time.day() );
@@ -158,7 +158,7 @@ void L_RTC::get_datestring(char* buf)
 } 
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* L_RTC::get_timestring()
+const char* RTC::get_timestring()
 {
 	DateTime time = now();
 	sprintf(timestring, "%d:%d:%d", time.hour(), time.minute(), time.second() );
@@ -166,7 +166,7 @@ const char* L_RTC::get_timestring()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::get_timestring(char* buf)
+void RTC::get_timestring(char* buf)
 {
 	DateTime time = now();
 	sprintf(buf, "%d:%d:%d", time.hour(), time.minute(), time.second() );
@@ -174,13 +174,13 @@ void L_RTC::get_timestring(char* buf)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::get_weekday(char* buf)
+void RTC::get_weekday(char* buf)
 {
 	strcpy( buf, daysOfTheWeek[ now().dayOfTheWeek() ] );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::get_timestamp(char* header, char* timestamp, const char delimiter, const uint8_t format)
+void RTC::get_timestamp(char* header, char* timestamp, const char delimiter, const uint8_t format)
 {
 	switch (format) {
 		case 1 :
@@ -206,11 +206,11 @@ void L_RTC::get_timestamp(char* header, char* timestamp, const char delimiter, c
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::init()
+void RTC::init()
 {
 	if (!_begin()) {
 		print_module_label();
-		LPrintln("L_RTC not found");
+		LPrintln("RTC not found");
 		return;
 	}
 
@@ -218,15 +218,15 @@ void L_RTC::init()
 	LPrintln("Current Time (before possible reset)");
 	print_time();
 
-	// The following section checks if L_RTC is running, else sets 
+	// The following section checks if RTC is running, else sets 
 	// the time to the time that the sketch was compiled
 	if (!_initialized()) {
 		print_module_label();
-		LPrintln("L_RTC was not initialized");
+		LPrintln("RTC was not initialized");
 		set_rtc_to_compile_time();
 	}
 
-	// Make sure the L_RTC time is even valid, if not, set to compile time
+	// Make sure the RTC time is even valid, if not, set to compile time
 	rtc_validity_check();
 
 
@@ -235,7 +235,7 @@ void L_RTC::init()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::set_rtc_to_compile_time()
+void RTC::set_rtc_to_compile_time()
 {
 	// This sets to local time zone
 	_adjust( DateTime(F(__DATE__), F(__TIME__)) );
@@ -249,7 +249,7 @@ void L_RTC::set_rtc_to_compile_time()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::convert_local_to_utc(const bool to_utc)
+void RTC::convert_local_to_utc(const bool to_utc)
 {
 	float adj = ( (to_utc) ? 1. : -1. ) * timezone_adjustment[(int)timezone];
 	int min;
@@ -271,7 +271,7 @@ void L_RTC::convert_local_to_utc(const bool to_utc)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool L_RTC::rtc_validity_check()
+bool RTC::rtc_validity_check()
 {
 	DateTime time_check = now();
 	int y = time_check.year();
@@ -279,7 +279,7 @@ bool L_RTC::rtc_validity_check()
 	// A basic validity check of date
 	if ( (y < 2018) || (y > 2050)) {
 		print_module_label();
-		LPrint("L_RTC Time is invalid: ", y, '\n');
+		LPrint("RTC Time is invalid: ", y, '\n');
 		set_rtc_to_compile_time();
 		return false;
 	}
@@ -288,7 +288,7 @@ bool L_RTC::rtc_validity_check()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::link_device_manager(Manager* LM)
+void RTC::link_device_manager(Manager* LM)
 {
 	LoomModule::link_device_manager(LM);
 
@@ -304,7 +304,7 @@ void L_RTC::link_device_manager(Manager* LM)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_RTC::time_adjust(const DateTime time, const bool is_utc)
+void RTC::time_adjust(const DateTime time, const bool is_utc)
 {
 	_adjust(time);
 

@@ -44,7 +44,7 @@ const I2C_Selection i2c_0x29 = I2C_Selection::L_TSL2591;	///< TSL2561 / TSL2591
 const I2C_Selection i2c_0x49 = I2C_Selection::L_AS7265X;	///< TSL2561 / AS7262 / AS7263 / AS7265X
 const I2C_Selection i2c_0x36 = I2C_Selection::L_STEMMA;
 
-// Maybe query DeviceManager if L_RTC is in use, if not, query 0x68 
+// Maybe query DeviceManager if RTC is in use, if not, query 0x68 
 
 
 ///////////////////////////////////////////////////////////////////////////////

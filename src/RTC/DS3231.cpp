@@ -21,7 +21,7 @@ DS3231::DS3231(
 		const TimeZone	timezone,
 		const bool		use_utc_time
 	)
-	: L_RTC("DS3231", Type::DS3231, timezone, use_utc_time)
+	: RTC("DS3231", Type::DS3231, timezone, use_utc_time)
 {
 	init();
 
@@ -45,7 +45,7 @@ bool DS3231::_begin()
 ///////////////////////////////////////////////////////////////////////////////
 void DS3231::print_config() const
 {
-	L_RTC::print_config();
+	RTC::print_config();
 	// will print out alarm info
 }
 

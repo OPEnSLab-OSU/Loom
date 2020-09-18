@@ -21,7 +21,7 @@ PCF8523::PCF8523(
 		const TimeZone	timezone,
 		const bool		use_utc_time
 	)
-	: L_RTC("PCF8523", Type::PCF8523, timezone, use_utc_time)
+	: RTC("PCF8523", Type::PCF8523, timezone, use_utc_time)
 {
 	init();
 	clear_alarms();
@@ -41,7 +41,7 @@ bool PCF8523::_begin()
 ///////////////////////////////////////////////////////////////////////////////
 void PCF8523::print_config() const
 {
-	L_RTC::print_config();
+	RTC::print_config();
 	// will print out alarm info
 }
 

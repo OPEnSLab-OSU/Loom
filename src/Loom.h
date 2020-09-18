@@ -70,7 +70,7 @@ namespace std {
 #include "LogPlats/SD.h"
 #include "LogPlats/BatchSD.h"
 
-// // L_RTC
+// // RTC
 #include "RTC/DS3231.h"
 #include "RTC/PCF8523.h"
 

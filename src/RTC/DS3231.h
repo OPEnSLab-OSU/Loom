@@ -16,15 +16,15 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// DS3231 L_RTC module.
+/// DS3231 RTC module.
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___d_s3231.html)
-/// - [Product Page: Adafruit DS3231 Precision L_RTC FeatherWing](https://www.adafruit.com/product/3028)
+/// - [Product Page: Adafruit DS3231 Precision RTC FeatherWing](https://www.adafruit.com/product/3028)
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ds3231-rtc)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class DS3231 : public L_RTC
+class DS3231 : public RTC
 {
 protected:
 

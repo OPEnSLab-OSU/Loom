@@ -8,25 +8,23 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #pragma once
 
 #include "RTC.h"
 
-
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// PCF8523 L_RTC module.
+/// PCF8523 RTC module.
 ///
 /// OPEnS Lab usually uses the PCF8523 on the Adafruit Adalogger Featherwing
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___p_c_f8523.html)
-/// - [Product Page: Adafruit Adalogger Featherwing - L_RTC + SD](https://www.adafruit.com/product/2922)
+/// - [Product Page: Adafruit Adalogger Featherwing - RTC + SD](https://www.adafruit.com/product/2922)
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#adalogger--pcf8523-rtc)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class PCF8523 : public L_RTC
+class PCF8523 : public RTC
 {
 protected:
 

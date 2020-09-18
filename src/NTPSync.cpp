@@ -51,7 +51,7 @@ void NTPSync::second_stage_ctor()
 		return;
 	}
 	// same for RTC
-	L_RTC* rtc_temp = device_manager->get_rtc_module();
+	RTC* rtc_temp = device_manager->get_rtc_module();
 	if (rtc_temp != nullptr) {
 		m_rtc = rtc_temp;
 		print_module_label();

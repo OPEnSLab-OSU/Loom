@@ -20,7 +20,7 @@
 /// Glue code to synchronize an RTC using an InternetPlat. 
 /// Always synchronizes the RTC from InterruptManager::get_RTC_module().
 ///
-/// @note	Requires a L_RTC and LoomInternetPlat module to work.
+/// @note	Requires a RTC and LoomInternetPlat module to work.
 ///
 /// @par Resources
 /// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom_n_t_p_sync.html)
@@ -96,7 +96,7 @@ private:
 	InternetPlat*	m_internet;
 	
 	/// Store the RTC pointer so we can check the time
-	L_RTC*			m_rtc;
+	RTC*			m_rtc;
 	
 	/// Store when next to change the RTC
 	DateTime			m_next_sync;

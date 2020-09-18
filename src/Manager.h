@@ -22,7 +22,7 @@
 
 // Forward declarations, specify that these classes
 // exist but are defined in their own respective files
-class L_RTC;
+class RTC;
 class SleepManager;
 class InterruptManager;
 class WarmUpManager;
@@ -69,7 +69,7 @@ protected:
 	WarmUpManager*	warmup_manager		= nullptr;
 	InterruptManager*	interrupt_manager	= nullptr;
 	SleepManager*		sleep_manager		= nullptr;
-	L_RTC*				rtc_module			= nullptr;
+	RTC*				rtc_module			= nullptr;
 
 	/// Vectors of LoomModule pointers
 	std::vector<LoomModule*>		modules;
@@ -410,14 +410,14 @@ private:
 	// Allow secondary managers to access private members of Manager
 	friend class InterruptManager;
 	friend class SleepManager;
-	friend class L_RTC;
+	friend class RTC;
 	friend class SD;
 	friend class BatchSD;
 	friend class NTPSync;
 
 	InterruptManager*	get_interrupt_manager() { return interrupt_manager; }
 	SleepManager*		get_sleep_manager() { return sleep_manager; }
-	L_RTC*				get_rtc_module() { return rtc_module; }
+	RTC*				get_rtc_module() { return rtc_module; }
 
 	/// Used to add device info to data object
 	void add_device_ID_to_json(JsonObject json);

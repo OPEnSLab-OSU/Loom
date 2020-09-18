@@ -22,8 +22,8 @@
 #define MaxStopWatchCount 2		///< Maximum numbr of stopwatches
 
 
-// Specify that L_RTC exists, defined in own file
-class L_RTC;
+// Specify that RTC exists, defined in own file
+class RTC;
 class SleepManager;
 
 
@@ -85,7 +85,7 @@ private:
 protected:
 
 	/// Pointer to an RTC object for managing timers / timed interrupts	
-	L_RTC*		RTC_Inst;					
+	RTC*		RTC_Inst;					
 	
 	/// Pointer to a Sleep Manager object
 	SleepManager* SleepMngr;	
@@ -131,7 +131,7 @@ public:
 	///
 	/// @param[in]	RTC_Inst		Set(Int) | <0> | {0("Null")} | OLED module name
 	InterruptManager(
-			L_RTC* RTC_Ins = nullptr
+			RTC* RTC_Ins = nullptr
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -306,7 +306,7 @@ public:
 
 	/// Return pointer to the currently linked RTC object
 	/// @return		Current RTC object
-	L_RTC*	get_RTC_module() const { return RTC_Inst; }
+	RTC*	get_RTC_module() const { return RTC_Inst; }
 
 //=============================================================================
 ///@name	SETTERS
@@ -333,7 +333,7 @@ public:
 
 	/// Set the RTC module to use for timers
 	/// @param[in]	RTC_Inst	Pointer to the RTC object
-	void		set_RTC_module(L_RTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
+	void		set_RTC_module(RTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS

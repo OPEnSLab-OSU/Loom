@@ -40,7 +40,7 @@ protected:
 
 		const byte	chip_select;		///< Chip select pin
 		char		filename[13];		///< String of file to write to if not filename explicitly provided (should not exceed 6 characters)
-		L_RTC*	RTC_Inst;			///< Pointer to an L_RTC object for timestamps
+		RTC*	RTC_Inst;			///< Pointer to an RTC object for timestamps
 
 		// SD_Version 		version;
 		// byte 			reset_pin;
@@ -131,9 +131,9 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	/// Return pointer to the currently linked L_RTC object
-	/// @return		Current L_RTC object
-	L_RTC*	get_RTC_module() const { return RTC_Inst; }
+	/// Return pointer to the currently linked RTC object
+	/// @return		Current RTC object
+	RTC*	get_RTC_module() const { return RTC_Inst; }
 
 	/// Get the current default file to write to
 	/// @return Default file
@@ -149,9 +149,9 @@ public:
 	/// @param[in]	LM	Manager to point to
 	void		link_device_manager(Manager* LM) override;
 
-	/// Set the L_RTC module to use for timers
-	/// @param[in]	RTC_Inst	Pointer to the L_RTC object
-	void		set_RTC_module(L_RTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
+	/// Set the RTC module to use for timers
+	/// @param[in]	RTC_Inst	Pointer to the RTC object
+	void		set_RTC_module(RTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
 
 	/// Set default file to write to
 	/// @param[in]	filename	New default file (max 8 characters excluding extension)

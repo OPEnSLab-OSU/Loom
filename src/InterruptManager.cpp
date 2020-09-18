@@ -49,7 +49,7 @@ const char* InterruptManager::interrupt_type_to_string(const uint8_t type)
 
 ///////////////////////////////////////////////////////////////////////////////
 InterruptManager::InterruptManager( 
-		L_RTC* RTC_Inst
+		RTC* RTC_Inst
 	) 
 	: LoomModule("InterruptManager", Type::InterruptManager )
 	, RTC_Inst(RTC_Inst)
