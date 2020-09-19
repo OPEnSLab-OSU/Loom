@@ -17,9 +17,9 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 Actuator::Actuator( 
 		const char*            module_name,
-		const LoomModule::Type module_type 
+		const Module::Type module_type 
 	) 
-	: LoomModule(module_name, module_type )
+	: Module(module_name, module_type )
 {}
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -21,7 +21,7 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, InterruptManager, "InterruptManager");
+REGISTER(Module, InterruptManager, "InterruptManager");
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -53,7 +53,7 @@ const char* InterruptManager::interrupt_type_to_string(const uint8_t type)
 InterruptManager::InterruptManager( 
 		RTC* RTC_Inst
 	) 
-	: LoomModule("InterruptManager", Type::InterruptManager )
+	: Module("InterruptManager", Type::InterruptManager )
 	, RTC_Inst(RTC_Inst)
 {
 
@@ -85,7 +85,7 @@ InterruptManager::InterruptManager(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void InterruptManager::print_config() const
 {
-	LoomModule::print_config();
+	Module::print_config();
 
 	LPrintln("\tInterrupts Enabled  : ", (interrupts_enabled) ? "True" : "False" );
 
@@ -126,13 +126,13 @@ void InterruptManager::print_config() const
 ///////////////////////////////////////////////////////////////////////////////
 void InterruptManager::print_state() const
 {
-	LoomModule::print_state();
+	Module::print_state();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void InterruptManager::link_device_manager(Manager* LM)
 {
-	LoomModule::link_device_manager(LM);
+	Module::link_device_manager(LM);
 
 	if ( LM ){
 

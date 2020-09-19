@@ -37,7 +37,7 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, Multiplexer, "Multiplexer");
+REGISTER(Module, Multiplexer, "Multiplexer");
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -87,7 +87,7 @@ Multiplexer::Multiplexer(
 		const bool		dynamic_list,	
 		const uint		update_period
 	) 
-	: LoomModule("Multiplexer", Type::Multiplexer) 
+	: Module("Multiplexer", Type::Multiplexer) 
 	, i2c_address(i2c_address)
 	, num_ports(num_ports)
 	, update_period(update_period)
@@ -184,7 +184,7 @@ I2CSensor* Multiplexer::generate_sensor_object(const byte i2c_address, const uin
 ///////////////////////////////////////////////////////////////////////////////
 void Multiplexer::print_config() const
 {
-	LoomModule::print_config();
+	Module::print_config();
 
 	LPrint("\tI2C Address        : ");
 	LPrintln_Hex(i2c_address);

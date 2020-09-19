@@ -21,11 +21,11 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER_NODEFAULT(LoomModule, MaxPub, "MaxPub");
+REGISTER_NODEFAULT(Module, MaxPub, "MaxPub");
 
 ///////////////////////////////////////////////////////////////////////////////
 MaxPub::MaxPub(
-		const LoomModule::Type internet_type
+		const Module::Type internet_type
 	)   
 	: PublishPlat("MaxPub", Type::MaxPub, internet_type)
 	, remoteIP({192,168,1,255})
@@ -49,7 +49,7 @@ void MaxPub::second_stage_ctor()
 
 ///////////////////////////////////////////////////////////////////////////////
 MaxPub::MaxPub(JsonArrayConst p)
-	: MaxPub((LoomModule::Type)(int)p[0] ) {}
+	: MaxPub((Module::Type)(int)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void MaxPub::print_config() const

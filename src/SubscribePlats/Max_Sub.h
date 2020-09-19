@@ -43,10 +43,10 @@ public:
 
 	/// Constructor
 	///
-	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	/// @param[in]  internet_type		Set(Module::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
 	/// @param[in]	auto_dispatch		True to immediately call Manager::dispatch() when packet received
 	MaxSub(
-		const LoomModule::Type	internet_type,
+		const Module::Type	internet_type,
 		const bool				auto_dispatch	
 	); 
 

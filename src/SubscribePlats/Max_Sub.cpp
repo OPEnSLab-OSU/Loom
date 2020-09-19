@@ -20,11 +20,11 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER_NODEFAULT(LoomModule, MaxSub, "MaxSub");
+REGISTER_NODEFAULT(Module, MaxSub, "MaxSub");
 
 ///////////////////////////////////////////////////////////////////////////////
 MaxSub::MaxSub(
-		const LoomModule::Type	internet_type,
+		const Module::Type	internet_type,
 		const bool				auto_dispatch
 	)   
 	: SubscribePlat("MaxSub", Type::MaxSub, internet_type)
@@ -33,7 +33,7 @@ MaxSub::MaxSub(
 
 ///////////////////////////////////////////////////////////////////////////////
 MaxSub::MaxSub(JsonArrayConst p) 
-	: MaxSub((LoomModule::Type)(int)p[0], p[1] ) {}
+	: MaxSub((Module::Type)(int)p[0], p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void MaxSub::second_stage_ctor() 

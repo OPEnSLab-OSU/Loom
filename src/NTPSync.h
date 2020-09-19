@@ -29,7 +29,7 @@ namespace Loom {
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-class NTPSync : public LoomModule
+class NTPSync : public Module
 {
 
 public:

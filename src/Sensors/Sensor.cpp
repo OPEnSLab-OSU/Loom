@@ -15,17 +15,17 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 Sensor::Sensor(	
 		const char*				module_name,
-		const LoomModule::Type	module_type,
+		const Module::Type	module_type,
 		const uint8_t			num_samples 
 	) 
-	: LoomModule(module_name, module_type) 
+	: Module(module_name, module_type) 
 	, num_samples(num_samples)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Sensor::print_config() const
 {
-	LoomModule::print_config();
+	Module::print_config();
 	LPrintln("\tNum Samples         : ", num_samples);
 }
 

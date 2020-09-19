@@ -14,7 +14,7 @@
 using namespace Loom;
 
 WarmUpManager::WarmUpManager() 
-  : LoomModule("WarmUpManager", LoomModule::Type::WarmUpManager)
+  : Module("WarmUpManager", Module::Type::WarmUpManager)
   , warm(false)
   , start_time(0)
   , warm_duration(0) {

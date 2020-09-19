@@ -18,7 +18,7 @@ using namespace Loom;
 // --- CONSTRUCTOR ---
 SerialSensor::SerialSensor(
         const char*            module_name,
-        const LoomModule::Type module_type,
+        const Module::Type module_type,
         const uint8_t          num_samples
     )
     : Sensor(module_name, module_type, num_samples) {}

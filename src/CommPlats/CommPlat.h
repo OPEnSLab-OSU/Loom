@@ -27,7 +27,7 @@ namespace Loom {
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#telecommunication-capabilities)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class CommPlat : public LoomModule
+class CommPlat : public Module
 {
 
 protected:
@@ -84,7 +84,7 @@ public:
 	/// @param[in]	max_message_len	The maximum possible message length
 	CommPlat(
 			const char*				module_name,
-			const LoomModule::Type	module_type,
+			const Module::Type	module_type,
 			const uint16_t			max_message_len
 		);
 

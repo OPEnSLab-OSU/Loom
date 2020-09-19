@@ -15,9 +15,9 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 InternetPlat::InternetPlat(
 		const char*				module_name,
-		const LoomModule::Type	module_type
+		const Module::Type	module_type
 	)
-	: LoomModule(module_name, module_type ) {}
+	: Module(module_name, module_type ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 InternetPlat::ClientSession InternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb)

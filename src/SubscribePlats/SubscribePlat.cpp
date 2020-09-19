@@ -16,10 +16,10 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 SubscribePlat::SubscribePlat(	
 		const char*				module_name,
-		const LoomModule::Type	module_type,
-		const LoomModule::Type	internet_type
+		const Module::Type	module_type,
+		const Module::Type	internet_type
 	) 
-	: LoomModule(module_name, module_type)
+	: Module(module_name, module_type)
 	, m_internet( nullptr )
 	, internet_type( internet_type ) 
 {}
@@ -37,7 +37,7 @@ void SubscribePlat::second_stage_ctor()
 	InternetPlat* temp = (InternetPlat*)device_manager->find_module(internet_type);
 
 	print_module_label();
-	if (temp != nullptr && temp->get_module_type() != LoomModule::Type::Unknown) {
+	if (temp != nullptr && temp->get_module_type() != Module::Type::Unknown) {
 		LPrintln("Found internet module: ", temp->get_module_name() , " (", (int)temp->get_module_type() , ")");
 		m_internet = temp;
 	}
@@ -55,14 +55,14 @@ void SubscribePlat::second_stage_ctor()
 ///////////////////////////////////////////////////////////////////////////////
 void SubscribePlat::print_config() const
 {
-	LoomModule::print_config();
+	Module::print_config();
 	LPrintln("\tInternet Type: ", (int)internet_type);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void SubscribePlat::print_state() const
 {
-	LoomModule::print_state();
+	Module::print_state();
 	LPrintln("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());
 }
 

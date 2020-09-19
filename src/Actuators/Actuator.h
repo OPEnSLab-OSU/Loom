@@ -28,7 +28,7 @@ namespace Loom {
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#actuators)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Actuator : public LoomModule
+class Actuator : public Module
 {
 
 public:
@@ -42,7 +42,7 @@ public:
 	/// @param[in] 	module_type		Type of the module (provided by derived classes)
 	Actuator( 
 			const char*             module_name, 
-			const LoomModule::Type  module_type
+			const Module::Type  module_type
 		);
 
 	/// Destructor

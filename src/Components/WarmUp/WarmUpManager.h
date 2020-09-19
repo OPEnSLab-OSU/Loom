@@ -23,7 +23,7 @@ namespace Loom {
 
 class WarmUp;
 
-class WarmUpManager : public LoomModule {
+class WarmUpManager : public Module {
   public:
     ///Constructor
     WarmUpManager();
@@ -48,7 +48,7 @@ class WarmUpManager : public LoomModule {
     void package(JsonObject) {return;}
 
   private:
-    /// Collection of LoomModule* cast to WarmUp* to access members in an encapsulated fasion
+    /// Collection of Module* cast to WarmUp* to access members in an encapsulated fasion
     std::vector<WarmUp*> Interfaces;
 
     /// State of system, either containing 'cold' items or completely warmed up

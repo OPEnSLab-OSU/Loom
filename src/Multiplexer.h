@@ -56,7 +56,7 @@ const I2C_Selection i2c_0x36 = I2C_Selection::L_STEMMA;
 /// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___multiplexer.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Multiplexer : public LoomModule
+class Multiplexer : public Module
 {
 private:
 

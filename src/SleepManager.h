@@ -30,7 +30,7 @@ class InterruptManager;
 /// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___sleep___manager.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class SleepManager : public LoomModule
+class SleepManager : public Module
 {
 
 public:

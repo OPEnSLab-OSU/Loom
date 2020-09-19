@@ -30,7 +30,7 @@ namespace Loom {
 /// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom_temp_sync.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class TempSync : public LoomModule
+class TempSync : public Module
 {
 
 protected:
@@ -46,8 +46,8 @@ public:
 	/// @param[in]  source		Module type to get temperature from
 	/// @param[in]  dependant	Module type to forward temperature to
 	TempSync(
-		const LoomModule::Type		source		= LoomModule::Type::MS5803,
-		const LoomModule::Type		dependant	= LoomModule::Type::Analog		// might be an array in the future
+		const Module::Type		source		= Module::Type::MS5803,
+		const Module::Type		dependant	= Module::Type::Analog		// might be an array in the future
 	);
 
 	/// Constructor that takes Json Array, extracts args
@@ -85,11 +85,11 @@ private:
 
 	void		sync_temp();
 	
-	LoomModule*	source;			///< Pointer to module to get temperature from
-	LoomModule* dependant;		///< Pointer to module to forward temperature to
+	Module*	source;			///< Pointer to module to get temperature from
+	Module* dependant;		///< Pointer to module to forward temperature to
 
-	LoomModule::Type source_type;		///< Type of source module
-	LoomModule::Type dependant_type;	///< Type of dependant module
+	Module::Type source_type;		///< Type of source module
+	Module::Type dependant_type;	///< Type of dependant module
 };
 
 

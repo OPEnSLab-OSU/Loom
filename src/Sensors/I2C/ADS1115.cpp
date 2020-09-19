@@ -20,7 +20,7 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, ADS1115, "ADS1115");
+REGISTER(Module, ADS1115, "ADS1115");
 
 ///////////////////////////////////////////////////////////////////////////////
 ADS1115::ADS1115(
@@ -34,7 +34,7 @@ ADS1115::ADS1115(
 		const 	bool		diff_1_enabled,
 		const	Gain		gain
 	)
-	: I2CSensor("ADS1115", LoomModule::Type::ADS1115 , i2c_address, mux_port)
+	: I2CSensor("ADS1115", Module::Type::ADS1115 , i2c_address, mux_port)
 	, ads1115(i2c_address)
 	, analog_enabled{ analog_0_enabled, analog_1_enabled, analog_2_enabled, analog_3_enabled }
 	, diff_enabled{ diff_0_enabled, diff_1_enabled }

@@ -74,8 +74,8 @@ protected:
 	SleepManager*		sleep_manager		= nullptr;
 	RTC*				rtc_module			= nullptr;
 
-	/// Vectors of LoomModule pointers
-	std::vector<LoomModule*>		modules;
+	/// Vectors of Module pointers
+	std::vector<Module*>		modules;
 
 	Verbosity	print_verbosity;		///< Print detail verbosity
 	Verbosity	package_verbosity;		///< Package detail verbosity
@@ -240,7 +240,7 @@ public:
 	}
 
 	/// Get a data value from Json object of data
-	/// @param[in]	module	LoomModule key is associated with
+	/// @param[in]	module	Module key is associated with
 	/// @param[in]	key		Key of data value to find
 	/// @return Data value if found
 	template<typename T>
@@ -265,7 +265,7 @@ public:
 
 	/// Determine if the manager has a module of the specified type
 	///	@param[in]	type	Module type to check for
-	bool		has_module(const LoomModule::Type type) const;
+	bool		has_module(const Module::Type type) const;
 
 
 //=============================================================================
@@ -290,7 +290,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Add a module to be managed.
-	void		add_module(LoomModule* module);
+	void		add_module(Module* module);
 
 //=============================================================================
 ///@name	GETTERS
@@ -377,16 +377,16 @@ public:
 
 	/// Auxiliary function to search a list of modules for a module of specified type
 	/// @param[in]	type	Type to search for
-	LoomModule*	find_module(const LoomModule::Type type, const uint8_t idx=0) const;
+	Module*	find_module(const Module::Type type, const uint8_t idx=0) const;
 
 	/// Auxiliary function to search a list of modules for a module of specified category
 	/// @param[in]	category	Category to search for
-	LoomModule*	find_module_by_category(const LoomModule::Category category, const uint8_t idx) const;
+	Module*	find_module_by_category(const Module::Category category, const uint8_t idx) const;
 
 	/// Subscript operator to access modules the manager is maintaining.
 	/// Works like find_module() without the option for an index
 	/// @param[in]	type	Type to search for
-	LoomModule* operator[](const LoomModule::Type type) const { return find_module(type); };
+	Module* operator[](const Module::Type type) const { return find_module(type); };
 
 	template <typename T>
 	T* get(const uint8_t idx=0) {

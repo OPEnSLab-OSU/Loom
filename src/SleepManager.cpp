@@ -20,7 +20,7 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, SleepManager, "SleepManager");
+REGISTER(Module, SleepManager, "SleepManager");
 
 ///////////////////////////////////////////////////////////////////////////////
 SleepManager::SleepManager(
@@ -29,7 +29,7 @@ SleepManager::SleepManager(
 		const Mode		sleep_mode,
 		const byte		power_off_pin
 	)
-	: LoomModule("SleepManager", Type::SleepManager )
+	: Module("SleepManager", Type::SleepManager )
 	, use_LED(use_LED)
 	, delay_on_wake(delay_on_wake)
 	, sleep_mode(Mode::STANDBY)
@@ -45,7 +45,7 @@ SleepManager::SleepManager(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void SleepManager::print_config() const
 {
-	LoomModule::print_config();
+	Module::print_config();
 	LPrintln("\tSleep Mode    : ", enum_sleep_mode_string(sleep_mode) );
 	LPrintln("\tUse LED       : ", (use_LED) ? "Enabled" : "Disabled" );
 	LPrintln("\tDelay on Wake : ", (delay_on_wake) ? "Enabled" : "Disabled" );
@@ -55,7 +55,7 @@ void SleepManager::print_config() const
 ///////////////////////////////////////////////////////////////////////////////
 void SleepManager::link_device_manager(Manager* LM)
 {
-	LoomModule::link_device_manager(LM);
+	Module::link_device_manager(LM);
 
 	if ( LM ){
 

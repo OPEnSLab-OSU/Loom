@@ -49,7 +49,7 @@ enum class ISR_Type {
 /// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___interrupt___manager.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class InterruptManager : public LoomModule
+class InterruptManager : public Module
 {
 
 private:

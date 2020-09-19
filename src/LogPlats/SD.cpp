@@ -18,7 +18,7 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, SD, "SD");
+REGISTER(Module, SD, "SD");
 
 ///////////////////////////////////////////////////////////////////////////////
 SD::SD(
@@ -126,7 +126,7 @@ void SD::print_config() const
 ///////////////////////////////////////////////////////////////////////////////
 void SD::link_device_manager(Manager* LM)
 {
-	LoomModule::link_device_manager(LM);
+	Module::link_device_manager(LM);
 
 	// If no currently linked RTC object, try to get one from Manager
 	if ( (RTC_Inst == NULL) && (LM != NULL) ){

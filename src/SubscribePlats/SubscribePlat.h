@@ -25,7 +25,7 @@ namespace Loom {
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_subscribe_plat.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class SubscribePlat : public LoomModule
+class SubscribePlat : public Module
 {
 
 protected:
@@ -36,7 +36,7 @@ protected:
 	/// Type of internet platform used to publish.
 	/// Needed because finding the module for m_internet happens in second_stage_ctor(),
 	/// rather than the regular constructor.
-	const LoomModule::Type	internet_type;
+	const Module::Type	internet_type;
 
 	/// Subscribe Platforms need their own JsonDocument because an incoming message
 	/// can only be deserialized into JsonDocuments, not JsonObjects.
@@ -55,11 +55,11 @@ public:
 	///
 	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
 	/// @param[in]	module_type			Type of the module (provided by derived classes)
-	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
+	/// @param[in]  internet_type		Set(Module::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
 	SubscribePlat(
 		const char*				module_name,
-		const LoomModule::Type	module_type,
-		const LoomModule::Type	internet_type
+		const Module::Type	module_type,
+		const Module::Type	internet_type
 	);
 
 	/// Destructor

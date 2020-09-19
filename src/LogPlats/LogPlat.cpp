@@ -16,11 +16,11 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 LogPlat::LogPlat( 
 		const char*				module_name, 
-		const LoomModule::Type	module_type,
+		const Module::Type	module_type,
 		const bool				enable_rate_filter,
 		const uint16_t			min_filter_delay
 	)
-	: LoomModule(module_name, module_type)
+	: Module(module_name, module_type)
 	, enable_rate_filter(enable_rate_filter)
 	, min_filter_delay(min_filter_delay)
 	, last_log_millis(0)
@@ -29,7 +29,7 @@ LogPlat::LogPlat(
 ///////////////////////////////////////////////////////////////////////////////
 void LogPlat::print_config() const
 {
-	LoomModule::print_config();
+	Module::print_config();
 
 	LPrintln("\tEnable Log Filter   : ", (enable_rate_filter) ? "Enabled" : "Disabled" );
 	if (enable_rate_filter) {

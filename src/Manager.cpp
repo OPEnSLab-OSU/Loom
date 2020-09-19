@@ -102,7 +102,7 @@ void Manager::begin_serial(const bool wait_for_monitor) const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Manager::add_module(LoomModule* module)
+void Manager::add_module(Module* module)
 {
 
 	print_device_label();
@@ -116,7 +116,7 @@ void Manager::add_module(LoomModule* module)
 		return;
 	}
 
-	LPrintln("Adding Module: ", ((LoomModule*)module)->get_module_name() );
+	LPrintln("Adding Module: ", ((Module*)module)->get_module_name() );
 
 	modules.emplace_back(module);
 	module->link_device_manager(this);
@@ -128,12 +128,12 @@ void Manager::list_modules() const
 	print_device_label();
 	LPrintln("Modules:");
 
-	auto last_category = LoomModule::Category::Unknown;
+	auto last_category = Module::Category::Unknown;
 
 	for (auto module : modules) {
 		auto category = module->category();
 		if ( category != last_category ) {
-			LPrintln("\t", LoomModule::enum_category_string(category), "s");//, " (", modules.size(), "):");
+			LPrintln("\t", Module::enum_category_string(category), "s");//, " (", modules.size(), "):");
 			last_category = category;
 		}
 		if ( module != nullptr ) {
@@ -169,8 +169,8 @@ void Manager::set_print_verbosity(const Verbosity v, const bool set_modules)
 
 	if (set_modules) {
 		for (auto module : modules) {
-			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-				((LoomModule*)module)->set_print_verbosity(v);
+			if ( (module != nullptr) && ( ((Module*)module)->get_active() ) ){
+				((Module*)module)->set_print_verbosity(v);
 			}
 		}
 	}
@@ -183,8 +183,8 @@ void Manager::set_package_verbosity(const Verbosity v, const bool set_modules)
 
 	if (set_modules) {
 		for (auto module : modules) {
-			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-				((LoomModule*)module)->set_package_verbosity(v);
+			if ( (module != nullptr) && ( ((Module*)module)->get_active() ) ){
+				((Module*)module)->set_package_verbosity(v);
 			}
 		}
 	}
@@ -196,22 +196,22 @@ void Manager::measure()
 	for (auto module : modules) {
 		if ( !module->get_active() ) continue;
 
-		if ( module->category() == LoomModule::Category::Sensor ) {
+		if ( module->category() == Module::Category::Sensor ) {
 			((Sensor*)module)->measure();
 		}
 
 #ifdef LOOM_INCLUDE_SENSORS
 		else if (
-			(module->get_module_type() == LoomModule::Type::Multiplexer) ) {
+			(module->get_module_type() == Module::Type::Multiplexer) ) {
 			((Multiplexer*)module)->measure();
 		}
-		else if (module->get_module_type() == LoomModule::Type::TempSync) {
+		else if (module->get_module_type() == Module::Type::TempSync) {
 			((TempSync*)module)->measure();
 		}
 #endif // ifdef LOOM_INCLUDE_SENSORS
 
 #if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
-		else if (module->get_module_type() == LoomModule::Type::NTP) {
+		else if (module->get_module_type() == Module::Type::NTP) {
 			((NTPSync*)module)->measure();
 		}
 #endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
@@ -229,8 +229,8 @@ void Manager::package(JsonObject json)
 	add_data("Packet", "Number", packet_number++);
 
 	for (auto module : modules) {
-		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-			((LoomModule*)module)->package( json );
+		if ( (module != nullptr) && ( ((Module*)module)->get_active() ) ){
+			((Module*)module)->package( json );
 		}
 	}
 }
@@ -282,7 +282,7 @@ bool Manager::publish_all(const JsonObject json)
 	uint8_t count = 0;
 	for (auto module : modules) {
 		if ( (module != nullptr) &&
-			 (module->category() == LoomModule::Category::PublishPlat) &&
+			 (module->category() == Module::Category::PublishPlat) &&
 			 (module->get_active())
 			) {
 			result &= ((PublishPlat*)module)->publish( json );
@@ -299,7 +299,7 @@ bool Manager::log_all(const JsonObject json)
 	uint8_t count = 0;
 	for(auto module : modules) {
 		if( (module!=nullptr) &&
-		(module->category() == LoomModule::Category::LogPlat) &&
+		(module->category() == Module::Category::LogPlat) &&
 		(module->get_active())
 		){
 			result &= ((LogPlat*)module)->log( json );
@@ -333,7 +333,7 @@ void Manager::dispatch(JsonObject json)
 			// LPrintln("Try to dispatch to: ", cmd["module"].as<const char*>() );
 			for (auto module : modules) {
 				if ( (module != nullptr) &&
-					 ( ((LoomModule*)module)->get_active() ) &&
+					 ( ((Module*)module)->get_active() ) &&
 					 ( strcmp(cmd["module"].as<const char*>(), module->get_module_name() ) == 0 )
 					){
 					// LPrintln("Found module");
@@ -397,7 +397,7 @@ void Manager::power_up()
 	// Iterate over list of modules powering them on
 	for (auto module : modules) {
 		if ( module != nullptr ){
-			((LoomModule*)module)->power_up();
+			((Module*)module)->power_up();
 		}
 	}
 }
@@ -408,7 +408,7 @@ void Manager::power_down()
 	// Iterate over list of modules powering them off
 	for (auto module : modules) {
 		if ( module != nullptr ){
-			((LoomModule*)module)->power_down();
+			((Module*)module)->power_down();
 		}
 	}
 }
@@ -430,20 +430,20 @@ void Manager::get_config()
 
 	for (auto module : modules) {
 		if ( module != nullptr ){
-			((LoomModule*)module)->add_config(json);
+			((Module*)module)->add_config(json);
 		}
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule*	Manager::find_module(const LoomModule::Type type, const uint8_t idx) const
+Module*	Manager::find_module(const Module::Type type, const uint8_t idx) const
 {
 	uint8_t current = 0;
 
 	for (auto module : modules) {
 		if (type == module->get_module_type()) {
 			if (current == idx) {
-				return (LoomModule*)module;
+				return (Module*)module;
 			} else {
 				current++;
 			}
@@ -453,14 +453,14 @@ LoomModule*	Manager::find_module(const LoomModule::Type type, const uint8_t idx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule*	Manager::find_module_by_category(const LoomModule::Category category, const uint8_t idx) const
+Module*	Manager::find_module_by_category(const Module::Category category, const uint8_t idx) const
 {
 	uint8_t current = 0;
 
 	for (auto module : modules) {
 		if (category == module->category()) {
 			if (current == idx) {
-				return (LoomModule*)module;
+				return (Module*)module;
 			} else {
 				current++;
 			}
@@ -478,7 +478,7 @@ void Manager::set_interval(const uint16_t ms)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Manager::has_module(const LoomModule::Type type) const
+bool Manager::has_module(const Module::Type type) const
 {
 	for (auto module : modules) {
 		if (module->get_module_type() == type) return true;
@@ -591,7 +591,7 @@ bool Manager::parse_config_json(JsonObject config)
 
 	// Call registry to create each module
 	for ( JsonVariant module : config["components"].as<JsonArray>()) {
-		add_module(Registry<LoomModule>::create(module));
+		add_module(Registry<Module>::create(module));
 	}
 
 	// Sort modules by type

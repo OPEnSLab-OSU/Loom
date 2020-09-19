@@ -18,10 +18,10 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 CommPlat::CommPlat(
 		const char*				module_name,
-		const LoomModule::Type	module_type,
+		const Module::Type	module_type,
 		const uint16_t			max_message_len
 	)
-	: LoomModule(module_name, module_type)
+	: Module(module_name, module_type)
 	, max_message_len(max_message_len)
 	, signal_strength(0)
 	, total_packet_count(0)
@@ -33,14 +33,14 @@ CommPlat::CommPlat(
 ///////////////////////////////////////////////////////////////////////////////
 void CommPlat::print_config() const
 {
-	LoomModule::print_config();
+	Module::print_config();
 	LPrintln("\tMax Message Length  : ", max_message_len );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void CommPlat::print_state() const
 {
-	LoomModule::print_state();
+	Module::print_state();
 	LPrintln("\tDrop Rate Since Start  : ", get_drop_rate() );
 	LPrintln("\tCurrent Drop Rate  : ", get_last_ten_drop_rate() );
 }
@@ -97,8 +97,8 @@ bool CommPlat::receive_blocking(const uint max_wait_time)
 ///////////////////////////////////////////////////////////////////////////////
 bool CommPlat::receive_batch_blocking(uint max_wait_time){
 	bool receive_results=false;
-	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
-		BatchSD* batch = (BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
+	if(device_manager != nullptr && device_manager->has_module(Module::Type::BATCHSD)){
+		BatchSD* batch = (BatchSD*)device_manager->find_module(Module::Type::BATCHSD);
 		receive_results = receive_blocking(max_wait_time);
 		if(!receive_results) return false;
 		return batch->store_batch();
@@ -128,10 +128,10 @@ bool CommPlat::send(const uint8_t destination)
 ///////////////////////////////////////////////////////////////////////////////
 uint8_t CommPlat::send_batch(const uint8_t destination, int delay_time){
 	// check to make sure we have BatchSD module connected
-	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
+	if(device_manager != nullptr && device_manager->has_module(Module::Type::BATCHSD)){
 		// retrieve the Batch SD module
 		uint8_t drop_count = 0;
-		BatchSD* batch = (BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
+		BatchSD* batch = (BatchSD*)device_manager->find_module(Module::Type::BATCHSD);
 		int packets = batch->get_packet_counter();
 		print_module_label();
 		LPrintln("Packets to send: ", packets);
@@ -165,9 +165,9 @@ void CommPlat::broadcast()
 void CommPlat::broadcast_batch(int delay_time)
 {
 	// check to make sure we have BatchSD module connected
-	if(device_manager != nullptr && device_manager->has_module(LoomModule::Type::BATCHSD)){
+	if(device_manager != nullptr && device_manager->has_module(Module::Type::BATCHSD)){
 		// retrieve the Batch SD module
-		BatchSD* batch = (BatchSD*)device_manager->find_module(LoomModule::Type::BATCHSD);
+		BatchSD* batch = (BatchSD*)device_manager->find_module(Module::Type::BATCHSD);
 		int packets = batch->get_packet_counter();
 		print_module_label();
 		LPrintln("Packets to broadcast: ", packets);

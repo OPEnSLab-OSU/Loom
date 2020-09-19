@@ -75,11 +75,11 @@ char* RTC::enum_timezone_string(TimeZone t)
 ///////////////////////////////////////////////////////////////////////////////
 RTC::RTC(	
 		const char*				module_name,
-		const LoomModule::Type	module_type,
+		const Module::Type	module_type,
 		const TimeZone			timezone,
 		const bool				use_utc_time
 	) 
-	: LoomModule(module_name, module_type )
+	: Module(module_name, module_type )
 	, timezone(timezone)
 	, use_utc_time(use_utc_time)
 {}
@@ -87,14 +87,14 @@ RTC::RTC(
 ///////////////////////////////////////////////////////////////////////////////
 void RTC::print_config() const
 {
-	LoomModule::print_config();
+	Module::print_config();
 	LPrintln("\tUse UTC Time      : ", use_utc_time);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void RTC::print_state() const
 {
-	LoomModule::print_state();
+	Module::print_state();
 	// print_time();
 }
 
@@ -290,7 +290,7 @@ bool RTC::rtc_validity_check()
 ///////////////////////////////////////////////////////////////////////////////
 void RTC::link_device_manager(Manager* LM)
 {
-	LoomModule::link_device_manager(LM);
+	Module::link_device_manager(LM);
 
 	if (LM) {
 		// Set manager's interrupt manager 

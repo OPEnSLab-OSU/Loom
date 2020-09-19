@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Module.h
-/// @brief		File for LoomModule definition.
+/// @brief		File for Module definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -25,13 +25,13 @@ class Manager; // Specify that Manager exists, defined in own file
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Abstract root of Loom component modules inheritance hierarchy.
-/// All modules in Loom inherit from LoomModule
+/// All modules in Loom inherit from Module
 ///
 /// @par Resources
-/// - [LoomModule Documentation](https://openslab-osu.github.io/Loom/html/class_loom_module.html)
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_module.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomModule
+class Module
 {
 
 public:
@@ -71,7 +71,7 @@ public:
 	};
 
 	/// Enum to classify modules.
-	/// Similar LoomModule::Type but represents the astract classes rather than
+	/// Similar Module::Type but represents the astract classes rather than
 	/// the leaf node modules in the inheritance tree.
 	/// For a given module, its category often shares a name with the abstract
 	/// class it is derived from
@@ -109,13 +109,13 @@ public:
 	/// Constructor
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
-	LoomModule(
+	Module(
 		const char*		module_name		= "Unknown",
 		const Type		module_type		= Type::Unknown
 	);
 
 	/// Destructor
-	virtual ~LoomModule() = default;
+	virtual ~Module() = default;
 
 	/// Second stage construction.
 	/// Perform any actions that need all of the devices to be
@@ -252,7 +252,7 @@ private:
 
 /// Used by Manager to sort modules in its vector
 struct module_sort_comp {
-    bool operator() (LoomModule* left, LoomModule* right) const {
+    bool operator() (Module* left, Module* right) const {
        return left->get_module_type() < right->get_module_type();
     }
 };

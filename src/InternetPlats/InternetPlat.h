@@ -32,7 +32,7 @@ namespace Loom {
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#internet-capabilities)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class InternetPlat : public LoomModule
+class InternetPlat : public Module
 {
 
 protected:	
@@ -85,7 +85,7 @@ public:
 	/// @param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
 	InternetPlat(
 			const char*				module_name,  
-			const LoomModule::Type	module_type
+			const Module::Type	module_type
 		);
 
 	/// Destructor

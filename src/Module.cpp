@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Module.cpp
-/// @brief		File for LoomModule implementation.
+/// @brief		File for Module implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -13,7 +13,7 @@
 using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule::LoomModule(
+Module::Module(
 		const char*	module_name, 
 		const Type	module_type 
 	)
@@ -27,20 +27,20 @@ LoomModule::LoomModule(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::link_device_manager(Manager* LM)
+void Module::link_device_manager(Manager* LM)
 {
 	// Don't check if nullptr, as the intent may be to clear link to manager
 	device_manager = LM; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::print_module_label() const 
+void Module::print_module_label() const 
 {
 	LPrint("[", module_name, "] ");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::print_config() const 
+void Module::print_config() const 
 {
 	print_module_label();
 	LPrintln("Config:");
@@ -50,20 +50,20 @@ void LoomModule::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::print_state() const
+void Module::print_state() const
 {
 	print_module_label();
 	LPrintln("State:");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::get_module_name(char* buf) const
+void Module::get_module_name(char* buf) const
 { 
 	module_name_base.toCharArray(buf, 20);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::set_print_verbosity(const Verbosity v) 
+void Module::set_print_verbosity(const Verbosity v) 
 { 
 	print_verbosity = v; 
 	if (print_verbosity == Verbosity::V_HIGH) {
@@ -73,7 +73,7 @@ void LoomModule::set_print_verbosity(const Verbosity v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModule::set_package_verbosity(const Verbosity v) 
+void Module::set_package_verbosity(const Verbosity v) 
 { 
 	package_verbosity = v;
 	if (print_verbosity == Verbosity::V_HIGH) { 
@@ -83,7 +83,7 @@ void LoomModule::set_package_verbosity(const Verbosity v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomModule::enum_verbosity_string(const Verbosity v)
+const char* Module::enum_verbosity_string(const Verbosity v)
 {
 	switch(v) {
 		case Verbosity::V_OFF  : return "Off";
@@ -93,7 +93,7 @@ const char* LoomModule::enum_verbosity_string(const Verbosity v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule::Category LoomModule::category() const
+Module::Category Module::category() const
 {
 	switch( (int)module_type / 1000 ) {
 		case 1 : return Category::Other;		// Other
@@ -110,7 +110,7 @@ LoomModule::Category LoomModule::category() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomModule::enum_category_string(const Category c) 
+const char* Module::enum_category_string(const Category c) 
 {
 	switch ( (int)c ) {
 		case 1 : return "Other";		// Other

@@ -49,7 +49,7 @@ class Registry
 
 public:
 	using FactoryFunction = T *(*)(); ///< Pointer to function of type //* void T::funct (void) *//
-	using FactoryFunctionJson = LoomModule *(*)(JsonArrayConst);
+	using FactoryFunctionJson = Module *(*)(JsonArrayConst);
 	using FactoryPair = struct
 	{										///<  *Needed as an alternative to std::map
 		const char* name;					///< Name of module that will be used to make a new copy

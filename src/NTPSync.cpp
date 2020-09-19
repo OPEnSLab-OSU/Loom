@@ -18,13 +18,13 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, NTPSync, "NTPSync");
+REGISTER(Module, NTPSync, "NTPSync");
 
 ///////////////////////////////////////////////////////////////////////////////
 NTPSync::NTPSync(
 		const uint sync_interval_hours
 	) 
-	: LoomModule("NTP", Type::NTP)
+	: Module("NTP", Type::NTP)
 	, m_sync_interval( sync_interval_hours )
 	, m_internet( nullptr )
 	, m_rtc( nullptr )
@@ -44,7 +44,7 @@ void NTPSync::second_stage_ctor()
 	// check if internet platform exist
 
 	// Try to get internet platform from manager
-	LoomModule* temp = device_manager->find_module_by_category(LoomModule::Category::InternetPlat, 0);
+	Module* temp = device_manager->find_module_by_category(Module::Category::InternetPlat, 0);
 	if (temp != nullptr) m_internet = (InternetPlat*)temp;
 	else {
 		m_last_error = Error::INVAL_INTERNET;

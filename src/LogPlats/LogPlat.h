@@ -25,7 +25,7 @@ namespace Loom {
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#data-logging)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LogPlat : public LoomModule
+class LogPlat : public Module
 {
 
 protected:
@@ -47,7 +47,7 @@ public:
 	/// @param[in] 	min_filter_delay	Minimum update delay, if enable_rate_filter enabled
 	LogPlat(	
 			const char*				module_name,
-			const LoomModule::Type	module_type,
+			const Module::Type	module_type,
 			const bool				enable_rate_filter	= true,
 			const uint16_t			min_filter_delay	= 1000
 		);

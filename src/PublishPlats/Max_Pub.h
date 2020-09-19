@@ -43,9 +43,9 @@ public:
 
 	/// Constructor
 	///
-	/// @param[in]  internet_type	Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform.
+	/// @param[in]  internet_type	Set(Module::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform.
 	MaxPub(
-		const LoomModule::Type internet_type
+		const Module::Type internet_type
 	);
 
 	/// Constructor that takes Json Array, extracts args

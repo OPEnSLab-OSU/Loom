@@ -17,7 +17,7 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 I2CSensor::I2CSensor(
 		const char*				module_name, 
-		const LoomModule::Type	module_type,
+		const Module::Type	module_type,
 		const byte				i2c_address,
 		const uint8_t			mux_port,
 		const uint8_t			num_samples
