@@ -29,11 +29,11 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7265x-spectral-sensor-triad-visible-near-infrared-ultraviolet)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class AS7265X : public I2CSensor
+class L_AS7265X : public I2CSensor
 {
 protected:
 
-	AS7265X		inst_AS7265X;		///< Underlying AS7265X sensor manager instance
+	AS7265X inst_AS7265X; ///< Underlying AS7265X sensor manager instance
 
 	uint16_t	uv[6];				///< Measured UV bands values. Units: counts / (μW/cm^2)
 	uint16_t	color[6];			///< Measured color bands values. Units: counts / (μW/cm^2)

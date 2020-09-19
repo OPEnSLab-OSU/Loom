@@ -10,15 +10,15 @@
 
 #ifdef LOOM_INCLUDE_SENSORS
 
-#include "LIS3DH.h"
+#include "L_LIS3DH.h"
 #include "Module_Factory.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, LIS3DH, "LIS3DH");
+REGISTER(LoomModule, L_LIS3DH, "LIS3DH");
 
 ///////////////////////////////////////////////////////////////////////////////
-LIS3DH::LIS3DH(
+L_LIS3DH::L_LIS3DH(
 		const byte		i2c_address, 
 		const uint8_t	mux_port
 	) 
@@ -43,11 +43,11 @@ LIS3DH::LIS3DH(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LIS3DH::LIS3DH(JsonArrayConst p)
-	: LIS3DH(EXPAND_ARRAY(p, 2) ) {}
+L_LIS3DH::L_LIS3DH(JsonArrayConst p)
+	: L_LIS3DH(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LIS3DH::print_measurements() const
+void L_LIS3DH::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -57,7 +57,7 @@ void LIS3DH::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LIS3DH::measure()
+void L_LIS3DH::measure()
 {
 	accel[0] = inst_LIS3DH.readFloatAccelX();
 	accel[1] = inst_LIS3DH.readFloatAccelY();
@@ -65,7 +65,7 @@ void LIS3DH::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LIS3DH::package(JsonObject json)
+void L_LIS3DH::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	

@@ -13,8 +13,6 @@
 
 #include "I2C_Sensor.h"
 
-#include <MPU6050_tockn.h>	
-
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// MPU6050 6 axis gyroscope and accelerometer  sensor module.
@@ -30,7 +28,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mpu6050-accelerometer--gyroscope)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class MPU6050 : public I2CSensor
+class L_MPU6050 : public I2CSensor
 {
 protected:
 

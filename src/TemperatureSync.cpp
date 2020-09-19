@@ -83,11 +83,11 @@ void TempSync::sync_temp()
 		float temp = 25.0;
 
 		if (source_type == LoomModule::Type::MS5803) {
-			temp = ( (Loom_MS5803*)source )->get_temperature();
+			temp = ( (MS5803*)source )->get_temperature();
 		}
 
 		if ( dependant_type == LoomModule::Type::Analog ) {
-			( (Loom_Analog*)dependant )->set_temperature(temp);
+			( (Analog*)dependant )->set_temperature(temp);
 		}
 	}
 }

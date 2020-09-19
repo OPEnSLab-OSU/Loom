@@ -31,11 +31,11 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#lis3dh-accelerometer)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LIS3DH : public I2CSensor
+class L_LIS3DH : public I2CSensor
 {
 protected:
 
-	LIS3DH		inst_LIS3DH;	///< Underlying LIS3DH sensor manager instance
+	LIS3DH inst_LIS3DH; ///< Underlying LIS3DH sensor manager instance
 
 	float		accel[3];		///< Measured acceleration values (x,y,z). Units: g.
 

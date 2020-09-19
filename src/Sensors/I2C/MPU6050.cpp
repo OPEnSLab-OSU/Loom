@@ -13,16 +13,18 @@
 #include "MPU6050.h"
 #include "Module_Factory.h"
 
+#include <MPU6050_tockn.h>
+
 // Unfortunately cannot be inside MPU6050 class
 // For some reason Wire is not recognized like that
-MPU6050 mpu6050(Wire);
+MPU6050_tockn::MPU6050 mpu6050(Wire);
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(LoomModule, MPU6050, "MPU6050");
+REGISTER(LoomModule, L_MPU6050, "MPU6050");
 
 ///////////////////////////////////////////////////////////////////////////////
-MPU6050::MPU6050(
+L_MPU6050::L_MPU6050(
 		const byte		i2c_address, 
 		const uint8_t	mux_port,
 		const bool		calibrate
@@ -40,11 +42,11 @@ MPU6050::MPU6050(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-MPU6050::MPU6050(JsonArrayConst p)
-	: MPU6050(EXPAND_ARRAY(p, 3) ) {}
+L_MPU6050::L_MPU6050(JsonArrayConst p)
+	: L_MPU6050(EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void MPU6050::print_state() const
+void L_MPU6050::print_state() const
 {
 	I2CSensor::print_state();
 
@@ -54,12 +56,12 @@ void MPU6050::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void MPU6050::print_measurements() const
+void L_MPU6050::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
 
-	LPrintln("\taccX   : ", acc[0]]);
+	LPrintln("\taccX   : ", acc[0]);
 	LPrintln("\taccY   : ", acc[1]);
 	LPrintln("\taccZ   : ", acc[2]);
 
@@ -85,7 +87,7 @@ void MPU6050::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void MPU6050::measure()
+void L_MPU6050::measure()
 {
 	mpu6050.update();
 
@@ -112,7 +114,7 @@ void MPU6050::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void MPU6050::package(JsonObject json)
+void L_MPU6050::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	
@@ -142,7 +144,7 @@ void MPU6050::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void MPU6050::calibrate()
+void L_MPU6050::calibrate()
 {
 	print_module_label();
 	mpu6050.calcGyroOffsets(true);
