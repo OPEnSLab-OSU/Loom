@@ -9,9 +9,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
+
 #pragma once
 
 #include "SubscribePlat.h"
+
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -100,5 +103,7 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))

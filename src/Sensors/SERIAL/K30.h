@@ -13,6 +13,8 @@
 
 #include "Serial_Sensor.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// K30 CO2 sensor module.
@@ -76,5 +78,7 @@ public:
     void        package(JsonObject json) override;
     
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS

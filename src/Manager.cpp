@@ -30,6 +30,7 @@
 #include <SdFat.h>
 #include <algorithm>
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 const char* Manager::enum_device_type_string(const DeviceType t)

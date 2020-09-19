@@ -14,6 +14,8 @@
 #include "../Sensor.h"
 #include <Wire.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Abstract root for I2C sensor modules.
@@ -83,6 +85,8 @@ private:
 	friend class Multiplexer;
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

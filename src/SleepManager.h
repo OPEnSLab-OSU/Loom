@@ -8,7 +8,6 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #pragma once
 
 #include "Module.h"
@@ -19,9 +18,9 @@
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
+namespace Loom {
 
 class InterruptManager;
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -138,3 +137,7 @@ private:
 	/// Handles post-sleep operations
 	void		post_sleep();
 };
+
+
+}; // namespace Loom
+

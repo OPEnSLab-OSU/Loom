@@ -15,6 +15,8 @@
 
 #include <Adafruit_TMP007.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// TMP007 thermopile temperature sensor module.
@@ -75,6 +77,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

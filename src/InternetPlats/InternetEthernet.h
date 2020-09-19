@@ -16,6 +16,8 @@
 #include <EthernetLarge.h>
 #include <SSLClient.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// InternetPlat built off of SSLClient running over an Ethernet Featherwing.
@@ -93,5 +95,7 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_ETHERNET

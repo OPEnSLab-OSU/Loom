@@ -12,6 +12,8 @@
 
 #include "Sensor.h"
 
+namespace Loom {
+
 /// Number of digital pins
 #define DIGITAL_COUNT 12
 
@@ -130,3 +132,4 @@ private:
 
 };
 
+}; // namespace Loom

@@ -14,6 +14,8 @@
 
 #include <OPEnS_RTC.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Abstract base class of RTC modules.
@@ -210,4 +212,4 @@ protected:
 
 };
 
-
+}; // namespace Loom

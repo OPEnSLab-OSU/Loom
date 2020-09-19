@@ -13,6 +13,8 @@
 #include "Neopixel.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, Neopixel, "Neopixel");

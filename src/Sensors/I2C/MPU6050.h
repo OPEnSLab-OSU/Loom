@@ -13,6 +13,8 @@
 
 #include "I2C_Sensor.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// MPU6050 6 axis gyroscope and accelerometer  sensor module.
@@ -83,6 +85,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

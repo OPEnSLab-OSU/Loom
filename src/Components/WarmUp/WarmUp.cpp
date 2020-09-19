@@ -13,6 +13,8 @@
 #include "WarmUpManager.h"
 #include "Manager.h"
 
+using namespace Loom;
+
 WarmUp::WarmUp(Manager* manager, int period) 
   : period(period) {
     static_cast<WarmUpManager*>(manager->find_module(LoomModule::Type::WarmUpManager))->Register_WarmUp(this);

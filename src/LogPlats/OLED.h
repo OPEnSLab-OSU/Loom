@@ -14,6 +14,8 @@
 
 #include <Adafruit_SSD1306.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// OLED logging platform module.
@@ -182,4 +184,4 @@ private:
 
 };
 
-
+}; // namespace Loom

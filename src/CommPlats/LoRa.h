@@ -16,6 +16,8 @@
 #include <RH_RF95.h>
 #include <RHReliableDatagram.h>
 
+namespace Loom {
+
 // LoRa Chip pins
 #define RFM95_CS  8		//< LoRa hip select pin
 #define RFM95_RST 4		///< LoRa reset pin
@@ -140,6 +142,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_RADIOS
 

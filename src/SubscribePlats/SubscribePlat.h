@@ -13,6 +13,8 @@
 #include "Module.h"
 #include "../InternetPlats/InternetPlat.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Abstract subscribe platform module.
@@ -90,4 +92,7 @@ public:
 protected:
 
 };
+
+
+}; // namespace Loom
 

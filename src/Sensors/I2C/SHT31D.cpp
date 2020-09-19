@@ -13,6 +13,8 @@
 #include "SHT31D.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, SHT31D, "SHT31D");

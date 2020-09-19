@@ -15,6 +15,8 @@
 
 #include <ZX_Sensor.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// ZXGesture position / gesture sensor module.
@@ -90,5 +92,7 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS

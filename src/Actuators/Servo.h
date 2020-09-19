@@ -15,10 +15,14 @@
 
 #include <Adafruit_PWMServoDriver.h>
 
+namespace Loom {
+
 /// Number of possible servos.
 /// Dependent on servo controller breakout.
 #define NUM_SERVOS 8
 
+///////////////////////////////////////////////////////////////////////////////
+///
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Servo actuator module
@@ -80,5 +84,7 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_ACTUATORS

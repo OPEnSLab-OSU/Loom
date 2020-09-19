@@ -15,6 +15,8 @@
 
 #include <SparkFun_AS7265X.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// AS72625X 3 Spectrum (Visible, near IR, UV) spectral sensor module.
@@ -115,5 +117,7 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS

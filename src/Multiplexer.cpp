@@ -33,6 +33,8 @@
 
 #include <Wire.h>
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, Multiplexer, "Multiplexer");
@@ -434,8 +436,7 @@ void Multiplexer::power_up() {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Multiplexer::power_down() {
+void Multiplexer::power_down() { }
 
-}
 
 #endif // ifdef LOOM_INCLUDE_SENSORS

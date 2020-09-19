@@ -11,6 +11,8 @@
 #include "LogPlat.h"
 #include "Manager.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 LogPlat::LogPlat( 
 		const char*				module_name, 

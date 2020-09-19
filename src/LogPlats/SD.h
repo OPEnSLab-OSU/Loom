@@ -18,6 +18,8 @@
 // See if there is any difference to use the SD breakout
 // enum SD_Version { FEATHERWING, BREAKOUT };
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// SD logging platform module.
@@ -204,3 +206,4 @@ private:
 };
 
 
+}; // namespace Loom

@@ -10,6 +10,8 @@
 
 #include "InternetPlat.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 InternetPlat::InternetPlat(
 		const char*				module_name,

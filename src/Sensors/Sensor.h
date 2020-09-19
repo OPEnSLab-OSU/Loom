@@ -12,6 +12,8 @@
 
 #include "Module.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Abstract root of Loom sensor modules hierarchy
@@ -88,3 +90,5 @@ private:
 
 };
 
+
+}; // namespace Loom

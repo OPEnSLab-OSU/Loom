@@ -12,6 +12,8 @@
 
 #include "Serial_Sensor.h"
 
+using namespace Loom;
+
 ////////////////////////////////////////////////////////////////////////////
 // --- CONSTRUCTOR ---
 SerialSensor::SerialSensor(

@@ -19,8 +19,9 @@
 #include <vector>
 #include <array>
 
-///////////////////////////////////////////////////////////////////////////////
+namespace Loom {
 
+///////////////////////////////////////////////////////////////////////////////
 
 class I2CSensor;
 
@@ -204,6 +205,9 @@ private:
     /// @return     A vector of conflicting I2C addresses
     std::vector<byte> find_i2c_conflicts();
 };
+
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

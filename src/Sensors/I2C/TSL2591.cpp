@@ -15,6 +15,8 @@
 
 #include <Adafruit_Sensor.h>
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, TSL2591, "TSL2591");

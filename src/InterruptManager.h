@@ -16,6 +16,9 @@
 #include <AsyncDelay.h>
 #include <RTCCounter.h>
 
+namespace Loom {
+
+///////////////////////////////////////////////////////////////////////////////
 
 #define InteruptRange 16		///< Number of interrupts
 #define MaxTimerCount 2			///< Maximum number of timers
@@ -378,4 +381,4 @@ private:
 
 };
 
-
+}; // namespace Loom

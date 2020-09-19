@@ -11,6 +11,9 @@
 
 #pragma once
 
+namespace Loom {
+
+
 /// \cond DO_NOT_DOCUMENT
 #define EXPAND_ARRAY1(x) x[0]
 #define EXPAND_ARRAY2(x)  EXPAND_ARRAY1(x),  x[1]
@@ -80,9 +83,4 @@ void LPrintlnAll(Types... vars)
 #define LPrintln_Dec_Hex(X)    (LOOM_DEBUG==0) ? :  Serial.print(X); Serial.print(" (0x"); Serial.print(X, HEX); Serial.println(")")
 
 
-
-
-
-
-
-
+}; // namespace Loom

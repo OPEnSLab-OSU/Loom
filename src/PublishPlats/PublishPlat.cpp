@@ -11,9 +11,7 @@
 #include "PublishPlat.h"
 #include "Manager.h"
 
-// #include "../InternetPlats/InternetWiFi.h"
-// #include "../InternetPlats/InternetEthernet.h"
-// #include "../InternetPlats/InternetLTE.h"
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 PublishPlat::PublishPlat(

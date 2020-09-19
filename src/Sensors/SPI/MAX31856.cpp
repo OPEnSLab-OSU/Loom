@@ -13,6 +13,8 @@
 #include "MAX31856.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, MAX31856, "MAX31856");

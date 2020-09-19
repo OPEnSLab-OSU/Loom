@@ -13,6 +13,8 @@
 #include "Decagon_GS3.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 // Uncomment once implemented

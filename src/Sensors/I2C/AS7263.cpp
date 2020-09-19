@@ -13,6 +13,8 @@
 #include "AS7263.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, AS7263, "AS7263");

@@ -16,6 +16,8 @@
 #undef enableInterrupt
 #include <AS726X.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// AS7262 Visible spectrum spectral sensor module.
@@ -117,6 +119,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

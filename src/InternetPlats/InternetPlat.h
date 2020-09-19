@@ -19,6 +19,8 @@
 #undef max
 #include <memory>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Abstract internet communication module.
@@ -155,3 +157,5 @@ private:
 	void	m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const;
 
 };
+
+}; // namespace Loom

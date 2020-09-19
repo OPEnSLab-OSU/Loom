@@ -13,6 +13,8 @@
 
 #include "PublishPlat.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Module taking in and translating JSON into data understood by the Google Sheets script API.
@@ -98,5 +100,8 @@ protected:
 private:
 
 };
+
+
+}; // namespace Loom
 
 #endif // if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))

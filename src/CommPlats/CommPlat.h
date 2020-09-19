@@ -14,6 +14,8 @@
 #include "Module.h"
 #include "../LogPlats/BatchSD.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Abstract base of communication platform modules
@@ -224,5 +226,7 @@ protected:
 	void	add_packet_result(const bool did_drop);
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_RADIOS

@@ -20,6 +20,10 @@
 #undef min
 #include <vector>
 
+namespace Loom {
+
+///////////////////////////////////////////////////////////////////////////////
+
 // Forward declarations, specify that these classes
 // exist but are defined in their own respective files
 class RTC;
@@ -32,7 +36,6 @@ class WarmUpManager;
 #define MAX_SERIAL_WAIT	20000	///< Maximum number of milliseconds to wait for user given 'begin_serial(true)'
 #define SD_CS			10		///< SD chip select used in parse_config_SD().
 								///< You can still instantiate a SD module with a different chip select
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -430,3 +433,5 @@ private:
 	bool dispatch_self(JsonObject json);
 
 };
+
+}; // namespace Loom

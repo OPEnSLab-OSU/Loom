@@ -13,6 +13,8 @@
 
 #include "../Sensor.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Abstract base class for SPI sensor modules.
@@ -59,6 +61,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

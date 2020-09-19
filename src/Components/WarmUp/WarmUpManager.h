@@ -9,6 +9,8 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#pragma once
+
 #include "Module.h"
 
 #include <ArduinoJson.h>
@@ -16,6 +18,8 @@
 #undef min;
 #undef max;
 #include <vector>;
+
+namespace Loom {
 
 class WarmUp;
 
@@ -56,3 +60,6 @@ class WarmUpManager : public LoomModule {
     /// Time stamp for begining of warming period
     unsigned long start_time;
 };
+
+
+}; // namespace Loom

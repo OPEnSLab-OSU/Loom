@@ -13,6 +13,8 @@
 
 #include "Module.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Used to synchronize temperatures between sensors that read sensors
@@ -89,5 +91,8 @@ private:
 	LoomModule::Type source_type;		///< Type of source module
 	LoomModule::Type dependant_type;	///< Type of dependant module
 };
+
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS

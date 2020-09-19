@@ -13,6 +13,8 @@
 #include "L_LIS3DH.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, L_LIS3DH, "LIS3DH");

@@ -15,6 +15,8 @@
 #include "../Manager.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 #define UDP_SEND_OFFSET 8000 ///< UDP sending port is this value + device instance number
 
 ///////////////////////////////////////////////////////////////////////////////

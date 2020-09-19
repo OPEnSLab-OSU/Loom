@@ -15,6 +15,8 @@
 
 #include <Adafruit_FXOS8700.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// FXOS8700 3-Axis Acceleromter/Magnetometer sensor module.
@@ -77,5 +79,7 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS

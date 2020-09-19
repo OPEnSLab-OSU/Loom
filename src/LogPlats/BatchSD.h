@@ -14,6 +14,8 @@
 
 #include <SdFat.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Batch SD logging platform module.
@@ -142,3 +144,5 @@ private:
   float get_drop_rate() const;
 
 };
+
+}; // namespace Loom

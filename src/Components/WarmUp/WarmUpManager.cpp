@@ -11,6 +11,8 @@
 #include "WarmUpManager.h"
 #include "WarmUp.h"
 
+using namespace Loom;
+
 WarmUpManager::WarmUpManager() 
   : LoomModule("WarmUpManager", LoomModule::Type::WarmUpManager)
   , warm(false)

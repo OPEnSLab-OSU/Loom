@@ -15,6 +15,8 @@
 #include "../InternetPlats/InternetPlat.h"
 #include "../LogPlats/BatchSD.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Abstract internet publishing module, implementing google sheets and mongodb functionality
@@ -113,3 +115,5 @@ private:
 	void m_print_json_error(const char* str) const;
 
 };
+
+}; // namespace Loom

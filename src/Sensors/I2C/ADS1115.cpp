@@ -16,6 +16,8 @@
 
 //ADS1115 ADS1115(i2c_address);
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, ADS1115, "ADS1115");

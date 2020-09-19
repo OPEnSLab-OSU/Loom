@@ -13,6 +13,8 @@
 #include "MMA8451.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, MMA8451, "MMA8451");

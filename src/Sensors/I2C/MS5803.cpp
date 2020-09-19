@@ -13,16 +13,7 @@
 #include "MS5803.h"
 #include "Module_Factory.h"
 
-
-// #include <setjmp.h>     /* jmp_buf, setjmp, longjmp */
-// #include <RTCCounter.h>
-
-// jmp_buf env;
-// void escape() {
-// 	Serial.println("escape");
-// 	delay(50);
-// 	longjmp(env,101);
-// }
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 

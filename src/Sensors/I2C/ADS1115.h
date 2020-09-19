@@ -15,6 +15,8 @@
 
 #include <Adafruit_ADS1015.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// ADS1115 External ADC sensor module.
@@ -124,6 +126,8 @@ private:
 	// Auxiliary functions
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

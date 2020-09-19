@@ -16,6 +16,8 @@
 #include "Sensors/I2C/MS5803.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, TempSync, "TempSync");

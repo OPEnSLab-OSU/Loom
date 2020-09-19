@@ -17,6 +17,8 @@
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, InterruptManager, "InterruptManager");

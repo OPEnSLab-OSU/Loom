@@ -19,6 +19,9 @@
 #undef min
 #include <vector>
 
+namespace Loom {
+
+///////////////////////////////////////////////////////////////////////////////
 
 ///Forward declare any classes that will be served the created objects
 // class Scope;
@@ -35,6 +38,7 @@ S* ConstructDefault() { return new T(); }
 /// @return The created T
 template <class S, class T>
 S* ConstructDefaultJson(JsonArrayConst p) { return new T(p); }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// A generic registry/factory that collects constructors of a give base type and allows for any number
@@ -212,3 +216,5 @@ void Registry<T>::print_registry()
 	static const bool ModuleName##_entry = Registry<Factory>::addNoJson<ModuleName>(Key)
 
 ///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

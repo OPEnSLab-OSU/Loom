@@ -14,6 +14,8 @@
 #include "Trust_Anchors.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, Ethernet, "Ethernet");

@@ -12,6 +12,8 @@
 
 #include "Module.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Abstract base of logging platforms.
@@ -85,4 +87,4 @@ protected:
 
 };
 
-
+}; // namespace Loom

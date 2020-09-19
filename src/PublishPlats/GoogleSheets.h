@@ -13,6 +13,8 @@
 
 #include "PublishPlat.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Module taking in and translating JSON into data understood by the Google Sheets script API.
@@ -90,5 +92,7 @@ private:
 	const bool tab_matches_dev_id;	///< Whether or not tab of spreadsheet should be based on device name + instance
 
 };
+
+}; // namespace Loom
 
 #endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

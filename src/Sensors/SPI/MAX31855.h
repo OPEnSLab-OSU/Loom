@@ -15,6 +15,8 @@
 
 #include <Adafruit_MAX31855.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// MAX31855 thermocouple temperature module.
@@ -75,6 +77,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

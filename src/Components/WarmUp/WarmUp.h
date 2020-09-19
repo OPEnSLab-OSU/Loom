@@ -9,6 +9,10 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#pragma once
+
+namespace Loom {
+
 // Forward Declarations
 class WarmUpManager;
 class Manager;
@@ -25,3 +29,5 @@ class WarmUp {
     int period;
 
 };
+
+}; // namespace Loom

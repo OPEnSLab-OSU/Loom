@@ -15,6 +15,8 @@
 
 #include <Adafruit_FXAS21002C.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// FXAS21002 3-Axis Gyroscope sensor module.
@@ -76,6 +78,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

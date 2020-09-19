@@ -13,6 +13,8 @@
 #include "LoRa.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, LoRa, "LoRa");

@@ -15,6 +15,8 @@
 
 #include <MPU6050_tockn.h>
 
+using namespace Loom;
+
 // Unfortunately cannot be inside MPU6050 class
 // For some reason Wire is not recognized like that
 MPU6050_tockn::MPU6050 mpu6050(Wire);

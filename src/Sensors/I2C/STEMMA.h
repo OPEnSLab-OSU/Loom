@@ -16,6 +16,8 @@
 
 #include <Adafruit_seesaw.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 class STEMMA : public I2CSensor
 {
@@ -65,6 +67,8 @@ public:
     void        print_measurements() const override;
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

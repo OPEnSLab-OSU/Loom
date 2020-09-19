@@ -15,6 +15,8 @@
 
 #include <MS5803_02.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// MS5803 Atmospheric Pressure / Temperature sensor module.
@@ -92,6 +94,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

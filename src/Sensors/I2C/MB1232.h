@@ -13,6 +13,8 @@
 
 #include "I2C_Sensor.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// MB1232 Sonar sensor module.
@@ -69,6 +71,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

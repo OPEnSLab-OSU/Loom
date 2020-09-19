@@ -10,6 +10,8 @@
 
 #include "Sensor.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 Sensor::Sensor(	
 		const char*				module_name,

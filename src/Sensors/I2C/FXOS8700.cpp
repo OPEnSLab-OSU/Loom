@@ -15,6 +15,8 @@
 
 #include <Adafruit_Sensor.h>
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, FXOS8700, "FXOS8700");

@@ -15,6 +15,8 @@
 
 #include <SparkFunLIS3DH.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// LIS3DH Accelerometer sensor module.
@@ -78,6 +80,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

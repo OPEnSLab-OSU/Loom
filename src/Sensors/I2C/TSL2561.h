@@ -15,6 +15,8 @@
 
 #include <Adafruit_TSL2561_U.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// TSL2561 Luminosity sensor module.
@@ -83,5 +85,7 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS

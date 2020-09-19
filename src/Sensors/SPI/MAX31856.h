@@ -15,6 +15,8 @@
 
 #include <Adafruit_MAX31856.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// MAX31856 thermocouple module. Measures temperature.
@@ -84,6 +86,8 @@ private:
 
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

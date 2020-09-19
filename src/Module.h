@@ -18,6 +18,8 @@
 
 #undef RTC // to avoid our class/enum elem from colliding with an Arduino RTC macro
 
+namespace Loom {
+
 class Manager; // Specify that Manager exists, defined in own file
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -254,3 +256,6 @@ struct module_sort_comp {
        return left->get_module_type() < right->get_module_type();
     }
 };
+
+
+}; // namespace Loom

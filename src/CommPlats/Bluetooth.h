@@ -15,6 +15,8 @@
 
 #include <Adafruit_BluefruitLE_SPI.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Bluetooth communication platform module.
@@ -123,5 +125,7 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_RADIOS

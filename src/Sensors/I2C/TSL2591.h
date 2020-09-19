@@ -15,6 +15,8 @@
 
 #include <Adafruit_TSL2591.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// TSL2591 Lux sensor module.
@@ -84,6 +86,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

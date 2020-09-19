@@ -16,6 +16,8 @@
 
 #include <LowPower.h>
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, SleepManager, "SleepManager");

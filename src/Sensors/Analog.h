@@ -12,6 +12,8 @@
 
 #include "Sensor.h"
 
+namespace Loom {
+
 #define VBATPIN A7			///< Battery pin
 #define ANALOG_COUNT 6		///< Number of analog pins
 
@@ -241,4 +243,4 @@ private:
 
 };
 
-
+}; // namespace Loom

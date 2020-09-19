@@ -16,6 +16,8 @@
 #include <WiFiUdp.h>
 #include <SSLClient.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// WiFi InternetPlat
@@ -102,5 +104,7 @@ private:
 	/// Converts wifi status codes (WL_*) into human readable strings
 	static const char* m_wifi_status_to_string(const uint8_t status);
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_WIFI

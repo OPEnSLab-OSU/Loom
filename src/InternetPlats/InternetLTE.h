@@ -19,6 +19,8 @@
 
 #include "InternetPlat.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// LTE InternetPlat
@@ -105,5 +107,7 @@ public:
     void      print_state() const override;
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_LTE

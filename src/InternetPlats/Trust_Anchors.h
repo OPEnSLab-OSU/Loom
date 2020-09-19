@@ -1,6 +1,8 @@
 #ifndef _CERTIFICATES_H_
 #define _CERTIFICATES_H_
 
+namespace Loom {
+
 #ifdef __cplusplus
 extern "C"
 {
@@ -126,5 +128,8 @@ static const br_x509_trust_anchor TAs[] = {
 #ifdef __cplusplus
 } /* extern "C" */
 #endif
+
+
+}; // namespace Loom
 
 #endif /* ifndef _CERTIFICATES_H_ */

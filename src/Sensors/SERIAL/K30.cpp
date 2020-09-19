@@ -13,6 +13,8 @@
 #include "K30.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER_NODEFAULT(LoomModule, K30, "K30");

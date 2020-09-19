@@ -15,6 +15,8 @@
 
 #include <Adafruit_SHT31.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// SHT31D Temperature / Humidty sensor module
@@ -85,6 +87,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

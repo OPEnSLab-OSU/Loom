@@ -13,6 +13,8 @@
 #include "TMP007.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, TMP007, "TMP007");

@@ -11,6 +11,8 @@
 #include "SubscribePlat.h"
 #include "Manager.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 SubscribePlat::SubscribePlat(	
 		const char*				module_name,

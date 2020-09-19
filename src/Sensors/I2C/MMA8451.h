@@ -16,6 +16,8 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_MMA8451.h>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// MMA8451 accelerometer sensor module.
@@ -102,6 +104,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 

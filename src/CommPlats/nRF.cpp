@@ -13,6 +13,8 @@
 #include "nRF.h"
 #include "Module_Factory.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 REGISTER(LoomModule, nRF, "nRF");

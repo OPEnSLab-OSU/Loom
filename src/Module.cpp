@@ -10,6 +10,8 @@
 
 #include "Module.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 LoomModule::LoomModule(
 		const char*	module_name, 

@@ -12,6 +12,8 @@
 
 #include "SDI12_Sensor.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 SDI12Sensor::SDI12Sensor(
 		const char*				module_name,

@@ -12,6 +12,8 @@
 
 #include "Actuator.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 Actuator::Actuator( 
 		const char*            module_name,

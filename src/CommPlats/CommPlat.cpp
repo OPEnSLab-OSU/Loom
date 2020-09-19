@@ -13,6 +13,8 @@
 #include "CommPlat.h"
 #include "Manager.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 CommPlat::CommPlat(
 		const char*				module_name,

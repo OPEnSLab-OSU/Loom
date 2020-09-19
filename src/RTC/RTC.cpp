@@ -13,10 +13,10 @@
 #include "../InternetPlats/InternetPlat.h"
 #include "../InterruptManager.h"
 
-
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 const char* RTC::daysOfTheWeek[] = 

@@ -13,6 +13,8 @@
 
 #include "SDI12_Sensor.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Decagon 5TM soil moisture sensor module. Incomplete.
@@ -64,6 +66,8 @@ public:
 private:
 
 };
+
+}; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 
