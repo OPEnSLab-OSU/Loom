@@ -21,7 +21,7 @@ ZXGesture::ZXGesture(
 		const uint8_t	mux_port, 
 		const Mode		mode
 	)
-	: I2CSensor("ZXGesture", Type::ZXGesture, i2c_address, mux_port)
+	: I2CSensor("ZXGesture", i2c_address, mux_port)
 	, mode(mode)
 	, inst_ZX( ZX_Sensor(i2c_address) )
 {

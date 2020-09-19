@@ -11,7 +11,7 @@ STEMMA::STEMMA(
         const byte i2c_address,
         const uint8_t  mux_port
     )
-    : I2CSensor("STEMMA", Type::STEMMA, i2c_address, mux_port) 
+    : I2CSensor("STEMMA", i2c_address, mux_port) 
 {
     ss = Adafruit_seesaw();
     

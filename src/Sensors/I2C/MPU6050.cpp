@@ -27,7 +27,7 @@ Loom::MPU6050::MPU6050(
 		const uint8_t	mux_port,
 		const bool		calibrate
 	)
-	: I2CSensor("MPU6050", Type::MPU6050, i2c_address, mux_port )
+	: I2CSensor("MPU6050", i2c_address, mux_port )
 {
 	Wire.begin();
 	mpu_inst.begin();

@@ -24,7 +24,7 @@ TSL2561::TSL2561(
 		const uint8_t	gain, 
 		const uint8_t	resolution
 	)
-	: I2CSensor("TSL2561", Type::TSL2561, i2c_address, mux_port)
+	: I2CSensor("TSL2561", i2c_address, mux_port)
 	, gain(gain)
 	, resolution(resolution)
 	, inst_TSL2561( (i2c_address == 0x29) 

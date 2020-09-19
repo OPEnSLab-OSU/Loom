@@ -17,7 +17,7 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 Decagon5TM::Decagon5TM(const uint8_t num_samples)
-	: SDI12Sensor("5TM", Type::Decagon5TM, num_samples) 
+	: SDI12Sensor("5TM", num_samples) 
 {
 
 }

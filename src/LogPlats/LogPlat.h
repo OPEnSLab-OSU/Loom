@@ -47,7 +47,6 @@ public:
 	/// @param[in] 	min_filter_delay	Minimum update delay, if enable_rate_filter enabled
 	LogPlat(	
 			const char*				module_name,
-			const Module::Type	module_type,
 			const bool				enable_rate_filter	= true,
 			const uint16_t			min_filter_delay	= 1000
 		);

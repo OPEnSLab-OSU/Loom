@@ -24,7 +24,7 @@ AS7262::AS7262(
 		const uint8_t		mode, 
 		const uint8_t		integration_time
 	)
-	: I2CSensor("AS7262", Type::AS7262, i2c_address, mux_port)
+	: I2CSensor("AS7262", i2c_address, mux_port)
 	, use_bulb(use_bulb)
 	, gain(gain)
 	, mode(mode)

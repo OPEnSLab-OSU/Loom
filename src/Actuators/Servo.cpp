@@ -22,7 +22,7 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 Servo::Servo() 
-	: Actuator("Servo", Type::Servo) 
+	: Actuator("Servo") 
 	, positions{}
 {
 	servo_driver.begin();

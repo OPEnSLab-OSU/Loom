@@ -22,16 +22,15 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 MaxSub::MaxSub(
-		const Module::Type	internet_type,
-		const bool				auto_dispatch
+		const bool auto_dispatch
 	)   
-	: SubscribePlat("MaxSub", Type::MaxSub, internet_type)
+	: SubscribePlat("MaxSub")
 	, auto_dispatch(auto_dispatch)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
 MaxSub::MaxSub(JsonArrayConst p) 
-	: MaxSub((Module::Type)(int)p[0], p[1] ) {}
+	: MaxSub( (const bool)p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void MaxSub::second_stage_ctor() 

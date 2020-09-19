@@ -42,7 +42,6 @@ public:
         /// @param[in]    num_samples        The number of samples to take and average
     SerialSensor(
             const char*            module_name,
-            const Module::Type module_type,
             const uint8_t          num_samples
     );
     

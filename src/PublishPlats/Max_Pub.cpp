@@ -22,10 +22,8 @@ using namespace Loom;
 #define UDP_SEND_OFFSET 8000 ///< UDP sending port is this value + device instance number
 
 ///////////////////////////////////////////////////////////////////////////////
-MaxPub::MaxPub(
-		const Module::Type internet_type
-	)   
-	: PublishPlat("MaxPub", Type::MaxPub, internet_type)
+MaxPub::MaxPub()   
+	: PublishPlat("MaxPub")
 	, remoteIP({192,168,1,255})
 {}
 
@@ -47,7 +45,7 @@ void MaxPub::second_stage_ctor()
 
 ///////////////////////////////////////////////////////////////////////////////
 MaxPub::MaxPub(JsonArrayConst p)
-	: MaxPub((Module::Type)(int)p[0] ) {}
+	: MaxPub() {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void MaxPub::print_config() const

@@ -34,7 +34,7 @@ Analog::Analog(
 
 		const float				temperature
 	)
-	: Sensor("Analog", Type::Analog, num_samples)
+	: Sensor("Analog", num_samples)
 	, read_resolution(read_resolution)
 	, enable_conversions(true)
 	, analog_vals{0}

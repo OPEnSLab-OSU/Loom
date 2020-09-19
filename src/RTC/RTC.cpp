@@ -75,11 +75,10 @@ char* RTC::enum_timezone_string(TimeZone t)
 ///////////////////////////////////////////////////////////////////////////////
 RTC::RTC(	
 		const char*				module_name,
-		const Module::Type	module_type,
 		const TimeZone			timezone,
 		const bool				use_utc_time
 	) 
-	: Module(module_name, module_type )
+	: Module(module_name)
 	, timezone(timezone)
 	, use_utc_time(use_utc_time)
 {}

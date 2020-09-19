@@ -21,7 +21,7 @@ MMA8451::MMA8451(
 		const uint8_t			mux_port,
 		const mma8451_range_t	range
 	) 
-	: I2CSensor("MMA8451", Type::MMA8451, i2c_address, mux_port)
+	: I2CSensor("MMA8451", i2c_address, mux_port)
 	, range{range}
 {
 	bool setup = MMA.begin(i2c_address);

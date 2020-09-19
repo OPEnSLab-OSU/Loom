@@ -55,7 +55,7 @@ OLED::OLED(
 		const byte			freeze_pin, 
 		const FreezeType	freeze_behavior
 	)
-	: LogPlat("OLED", Type::OLED, enable_rate_filter, min_filter_delay)
+	: LogPlat("OLED", enable_rate_filter, min_filter_delay)
 	, version(version)
 	, reset_pin(reset_pin)
 	, display_format(display_format)

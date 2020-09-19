@@ -19,7 +19,7 @@ using namespace Loom;
 K30::K30(
         const char* module_name,
         int num_samples)
-    : SerialSensor(module_name, Type::K30, num_samples)
+    : SerialSensor(module_name, num_samples)
 {
     print_module_label();
     LPrintln("Initializing K30");

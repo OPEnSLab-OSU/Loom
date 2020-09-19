@@ -17,7 +17,7 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 Relay::Relay(const byte pin)
-	: Actuator("Relay", Type::Relay) 
+	: Actuator("Relay") 
 	, pin(pin)
 	, on(false)
 {

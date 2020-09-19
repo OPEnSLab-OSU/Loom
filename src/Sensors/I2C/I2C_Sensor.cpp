@@ -17,12 +17,11 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 I2CSensor::I2CSensor(
 		const char*				module_name, 
-		const Module::Type	module_type,
 		const byte				i2c_address,
 		const uint8_t			mux_port,
 		const uint8_t			num_samples
 	) 
-	: Sensor((mux_port != 255)  ? (String(module_name)+'_'+String(mux_port)).c_str() : module_name, module_type, num_samples)
+	: Sensor((mux_port != 255)  ? (String(module_name)+'_'+String(mux_port)).c_str() : module_name, num_samples)
 	, i2c_address(i2c_address)
 	, port_num(mux_port)
 {}

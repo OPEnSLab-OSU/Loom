@@ -49,7 +49,7 @@ const char* InterruptManager::interrupt_type_to_string(const uint8_t type)
 InterruptManager::InterruptManager( 
 		RTC* RTC_Inst
 	) 
-	: Module("InterruptManager", Type::InterruptManager )
+	: Module("InterruptManager")
 	, RTC_Inst(RTC_Inst)
 {
 

@@ -24,7 +24,7 @@ SD::SD(
 		const char*			default_file,
 		const bool			number_files
 	)
-	: LogPlat("SD", Type::SDCARD, enable_rate_filter, min_filter_delay)
+	: LogPlat("SD", enable_rate_filter, min_filter_delay)
 	, chip_select(chip_select)
 {
 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI

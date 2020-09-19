@@ -34,7 +34,7 @@ Digital::Digital(
 		const bool		enableA4,
 		const bool		enableA5
 	) 
-	: Sensor("Digital", Type::Digital, 1)
+	: Sensor("Digital", 1)
 {
 	// Zero out array of measurements 
 	for (int i = 0; i < DIGITAL_COUNT; i++) { 

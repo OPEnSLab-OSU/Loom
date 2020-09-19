@@ -51,7 +51,6 @@ public:
 	/// @param[in]	num_samples		The number of samples to take and average
 	I2CSensor(
 			const char*				module_name,
-			const Module::Type	module_type,
 			const byte				i2c_address,
 			const uint8_t			mux_port	= 255,	// Default to 255 (not on mux)
 			const uint8_t			num_samples	= 1		 

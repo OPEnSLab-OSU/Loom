@@ -23,7 +23,7 @@ LoRa::LoRa(
 		const uint8_t		retry_count,
 		const uint16_t		retry_timeout 	
 	)
-	: CommPlat("LoRa", Type::LoRa, max_message_len)
+	: CommPlat("LoRa", max_message_len)
 	, address(address)
 	, power_level( ( (power_level >= 5) && (power_level <= 23) ) ? power_level : 23 )
 	, retry_count(retry_count)

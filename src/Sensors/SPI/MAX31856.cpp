@@ -25,7 +25,7 @@ MAX31856::MAX31856(
 		const uint8_t	SPI_c,
 		const uint8_t	SPI_d
 	) 
-	: SPISensor(module_name, Type::MAX31856, num_samples) 
+	: SPISensor(module_name, num_samples) 
 	, inst_max( Adafruit_MAX31856(SPI_a, SPI_b, SPI_c, SPI_d) )
 {
 	// Hardware Serial

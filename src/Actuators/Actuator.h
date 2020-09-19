@@ -39,8 +39,7 @@ public:
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in] 	module_type		Type of the module (provided by derived classes)
 	Actuator( 
-			const char*             module_name, 
-			const Module::Type  module_type
+			const char* module_name 
 		);
 
 	/// Destructor

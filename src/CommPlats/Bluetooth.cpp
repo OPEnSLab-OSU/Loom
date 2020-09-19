@@ -24,7 +24,7 @@ Bluetooth::Bluetooth(
 		const uint8_t	spi_RST
 
 	)
-	: CommPlat("Bluetooth", Type::Bluetooth, max_message_len)
+	: CommPlat("Bluetooth", max_message_len)
 	, spi_CS(spi_CS)
 	, spi_IRQ(spi_IRQ)
 	, spi_RST(spi_RST)

@@ -24,7 +24,7 @@ Loom::AS7265X::AS7265X(
 		const uint8_t		mode, 
 		const uint8_t		integration_time
 	)
-	: I2CSensor("AS7265X", Type::AS7265X, i2c_address, mux_port)
+	: I2CSensor("AS7265X", i2c_address, mux_port)
 	, use_bulb(use_bulb)
 	, gain(gain)
 	, mode(mode)

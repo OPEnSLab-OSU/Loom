@@ -15,10 +15,9 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 Sensor::Sensor(	
 		const char*				module_name,
-		const Module::Type	module_type,
 		const uint8_t			num_samples 
 	) 
-	: Module(module_name, module_type) 
+	: Module(module_name) 
 	, num_samples(num_samples)
 {}
 

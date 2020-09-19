@@ -25,7 +25,7 @@ SleepManager::SleepManager(
 		const Mode		sleep_mode,
 		const byte		power_off_pin
 	)
-	: Module("SleepManager", Type::SleepManager )
+	: Module("SleepManager")
 	, use_LED(use_LED)
 	, delay_on_wake(delay_on_wake)
 	, sleep_mode(Mode::STANDBY)

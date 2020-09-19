@@ -26,7 +26,7 @@ MB1232::MB1232(
 		const byte		i2c_address,
 		const uint8_t	mux_port
 	)
-	: I2CSensor("MB1232", Type::MB1232, i2c_address, mux_port)
+	: I2CSensor("MB1232", i2c_address, mux_port)
 {	
 	Wire.beginTransmission(i2c_address);
 

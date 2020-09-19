@@ -267,7 +267,7 @@ public:
 
 	/// Determine if the manager has a module of the specified type
 	///	@param[in]	type	Module type to check for
-	bool		has_module(const Module::Type type) const;
+	// bool		has_module(const Module::Type type) const;
 
 
 //=============================================================================
@@ -379,16 +379,16 @@ public:
 
 	/// Auxiliary function to search a list of modules for a module of specified type
 	/// @param[in]	type	Type to search for
-	Module*	find_module(const Module::Type type, const uint8_t idx=0) const;
+	// Module*	find_module(const Module::Type type, const uint8_t idx=0) const;
 
 	/// Auxiliary function to search a list of modules for a module of specified category
 	/// @param[in]	category	Category to search for
-	Module*	find_module_by_category(const Module::Category category, const uint8_t idx) const;
+	// Module*	find_module_by_category(const Module::Category category, const uint8_t idx) const;
 
 	/// Subscript operator to access modules the manager is maintaining.
 	/// Works like find_module() without the option for an index
 	/// @param[in]	type	Type to search for
-	Module* operator[](const Module::Type type) const { return find_module(type); };
+	// Module* operator[](const Module::Type type) const { return find_module(type); };
 
 	template <typename T>
 	T* get(const uint8_t idx=0) const {

@@ -83,7 +83,7 @@ Multiplexer::Multiplexer(
 		const bool		dynamic_list,	
 		const uint		update_period
 	) 
-	: Module("Multiplexer", Type::Multiplexer) 
+	: Module("Multiplexer") 
 	, i2c_address(i2c_address)
 	, num_ports(num_ports)
 	, update_period(update_period)

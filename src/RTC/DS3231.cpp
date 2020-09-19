@@ -19,7 +19,7 @@ DS3231::DS3231(
 		const TimeZone	timezone,
 		const bool		use_utc_time
 	)
-	: RTC("DS3231", Type::DS3231, timezone, use_utc_time)
+	: RTC("DS3231", timezone, use_utc_time)
 {
 	init();
 

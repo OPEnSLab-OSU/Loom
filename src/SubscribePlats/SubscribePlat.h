@@ -37,7 +37,7 @@ protected:
 	/// Type of internet platform used to publish.
 	/// Needed because finding the module for m_internet happens in second_stage_ctor(),
 	/// rather than the regular constructor.
-	const Module::Type	internet_type;
+	// const Module::Type	internet_type;
 
 	/// Subscribe Platforms need their own JsonDocument because an incoming message
 	/// can only be deserialized into JsonDocuments, not JsonObjects.
@@ -58,9 +58,7 @@ public:
 	/// @param[in]	module_type			Type of the module (provided by derived classes)
 	/// @param[in]  internet_type		Set(Module::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
 	SubscribePlat(
-		const char*				module_name,
-		const Module::Type	module_type,
-		const Module::Type	internet_type
+		const char* module_name
 	);
 
 	/// Destructor

@@ -21,7 +21,7 @@ WiFi::WiFi(
 		const char* 	ssid,
 		const char* 	pass
 	)
-	: InternetPlat("WiFi", Type::WiFi)
+	: InternetPlat("WiFi")
 	, SSID(ssid)
 	, pass(pass)
 	, m_base_client()

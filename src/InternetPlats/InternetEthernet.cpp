@@ -22,7 +22,7 @@ Ethernet::Ethernet(
 		const JsonArrayConst	mac,
 		const JsonArrayConst	ip
 	) 
-	: InternetPlat("Ethernet", Type::Ethernet )
+	: InternetPlat("Ethernet")
 	, m_base_client()
 	, m_client(m_base_client, TAs, (size_t)TAs_NUM, A7, 1, SSLClient::SSL_ERROR)
 	, m_mac{}

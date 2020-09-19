@@ -17,10 +17,9 @@ using namespace Loom;
 ////////////////////////////////////////////////////////////////////////////
 SerialSensor::SerialSensor(
         const char*            module_name,
-        const Module::Type module_type,
         const uint8_t          num_samples
     )
-    : Sensor(module_name, module_type, num_samples) {}
+    : Sensor(module_name, num_samples) {}
 
 ////////////////////////////////////////////////////////////////////////////
 SerialSensor::~SerialSensor() {

@@ -22,7 +22,7 @@ FXAS21002::FXAS21002(
 		const byte		i2c_address, 
 		const uint8_t	mux_port
 	)
-	: I2CSensor("FXAS21002", Type::FXAS21002, i2c_address, mux_port)
+	: I2CSensor("FXAS21002", i2c_address, mux_port)
 	, inst_FXAS21002(Adafruit_FXAS21002C(0x0021002C))
 {
 	bool setup = inst_FXAS21002.begin();

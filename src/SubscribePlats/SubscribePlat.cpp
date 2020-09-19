@@ -17,13 +17,10 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 SubscribePlat::SubscribePlat(	
-		const char*				module_name,
-		const Module::Type	module_type,
-		const Module::Type	internet_type
+		const char* module_name
 	) 
-	: Module(module_name, module_type)
+	: Module(module_name)
 	, m_internet( nullptr )
-	, internet_type( internet_type ) 
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -36,16 +33,50 @@ void SubscribePlat::second_stage_ctor()
 		return; 
 	}
 
-	InternetPlat* temp = (InternetPlat*)device_manager->find_module(internet_type);
+	// InternetPlat* temp = (InternetPlat*)device_manager->find_module(internet_type);
 
-	print_module_label();
-	if (temp != nullptr && temp->get_module_type() != Module::Type::Unknown) {
-		LPrintln("Found internet module: ", temp->get_module_name() , " (", (int)temp->get_module_type() , ")");
-		m_internet = temp;
-	}
-	else {
+	// print_module_label();
+	// if (temp != nullptr && temp->get_module_type() != Module::Type::Unknown) {
+	// 	LPrintln("Found internet module: ", temp->get_module_name() , " (", (int)temp->get_module_type() , ")");
+	// 	m_internet = temp;
+	// }
+	// else {
+	// 	LPrintln("Unable to find internet platform");
+	// 	return;
+	// }
+
+
+	// Check for InternetPlat, in preference of
+	// Ethernet > WiFi > LTE
+	// Else set to nullptr
+
+	// If which InternetPlat is used in the event of multiple being present
+	// the below code could make use of a single 
+	// `if (temp = device_manager->get<InternetPlat>())`
+
+	// print_module_label();
+
+	// InternetPlat* temp;
+	// // Note the single equal signs are intentional
+	// if (temp = device_manager->get<Loom::Ethernet>()) {
+	// 	LPrintln("Found Etherent module");
+	// } 
+	// else if (temp = device_manager->get<Loom::WiFi>()) {
+	// 	LPrintln("Found WiFi module");
+	// }
+	// else if (temp = device_manager->get<Loom::LTE>()) {
+	// 	LPrintln("Found LTE module");
+	// } else {
+	// 	LPrintln("Unable to find internet platform");
+	// 	temp = nullptr;
+	// }
+
+	// m_internet = temp;
+
+	m_internet = device_manager->get<InternetPlat>();
+	if (!m_internet) {
+		print_module_label();
 		LPrintln("Unable to find internet platform");
-		return;
 	}
 
 	// made it here, guess we're good to go!
@@ -58,7 +89,7 @@ void SubscribePlat::second_stage_ctor()
 void SubscribePlat::print_config() const
 {
 	Module::print_config();
-	LPrintln("\tInternet Type: ", (int)internet_type);
+	// LPrintln("\tInternet Type: ", (int)internet_type);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

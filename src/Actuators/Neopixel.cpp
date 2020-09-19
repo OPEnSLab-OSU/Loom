@@ -21,7 +21,7 @@ Neopixel::Neopixel(
 		const bool enableA1, 
 		const bool enableA2
 	) 
-	: Actuator("Neopixel", Type::Neopixel)
+	: Actuator("Neopixel")
 	, pin_enabled( {enableA0, enableA1, enableA2} )
 	, pixels( { Adafruit_NeoPixel(1, 14, NEO_GRB + NEO_KHZ800),
 				Adafruit_NeoPixel(1, 15, NEO_GRB + NEO_KHZ800),

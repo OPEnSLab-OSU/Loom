@@ -85,8 +85,7 @@ public:
 	///
 	/// @param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
 	InternetPlat(
-			const char*				module_name,  
-			const Module::Type	module_type
+			const char*	module_name
 		);
 
 	/// Destructor

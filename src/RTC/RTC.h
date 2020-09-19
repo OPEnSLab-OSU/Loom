@@ -65,7 +65,6 @@ public:
 	/// @param[in]	use_utc_time	True for UTC time, false for local time
 	RTC(
 			const char*				module_name,
-			const Module::Type	module_type,
 			const TimeZone			timezone,
 			const bool				use_utc_time
 		);

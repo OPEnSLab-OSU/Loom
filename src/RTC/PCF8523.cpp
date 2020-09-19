@@ -18,7 +18,7 @@ PCF8523::PCF8523(
 		const TimeZone	timezone,
 		const bool		use_utc_time
 	)
-	: RTC("PCF8523", Type::PCF8523, timezone, use_utc_time)
+	: RTC("PCF8523", timezone, use_utc_time)
 {
 	init();
 	clear_alarms();

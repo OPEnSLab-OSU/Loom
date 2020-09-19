@@ -28,7 +28,7 @@ LTE::LTE(
     const char* pass,
     const int analog_pin
   )
-  : InternetPlat("LTE", Type::LTE)
+  : InternetPlat("LTE")
   , APN(apn)
   , gprsUser(user)
   , gprsPass(pass)

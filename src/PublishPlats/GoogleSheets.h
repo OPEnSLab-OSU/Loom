@@ -44,7 +44,6 @@ public:
 	/// @param[in]  tab_id				String | <"Data"> | null | Name of the tab that the device will put data into.
 	GoogleSheets(
 			const char*				module_name,
-			const Module::Type	internet_type,
 			const char*				script_url,
 			const char*				sheet_id,
 			const bool				tab_matches_dev_id,

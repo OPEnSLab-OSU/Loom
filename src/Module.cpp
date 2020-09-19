@@ -14,12 +14,10 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 Module::Module(
-		const char*	module_name, 
-		const Type	module_type 
+		const char*	module_name
 	)
 	: module_name_base(module_name)
 	, module_name(module_name_base.c_str())
-	, module_type(module_type)
 	, active(true)
 	, print_verbosity(Verbosity::V_LOW)
 	, package_verbosity(Verbosity::V_LOW)
@@ -93,38 +91,38 @@ const char* Module::enum_verbosity_string(const Verbosity v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Module::Category Module::category() const
-{
-	switch( (int)module_type / 1000 ) {
-		case 1 : return Category::Other;		// Other
-		case 2 : return Category::Sensor;		// Sensors
-		case 3 : return Category::RTC;		// RTC
-		case 4 : return Category::Actuator;		// Actuators
-		case 5 : return Category::LogPlat;		// LogPlats
-		case 6 : return Category::CommPlat;		// CommPlats
-		case 7 : return Category::InternetPlat;	// InternetPlats
-		case 8 : return Category::PublishPlat;	// PublishPlats
-		case 9 : return Category::SubscribePlat;// SubscribePlats
-		default: return Category::Unknown;		// Unknown	
-	}
-}
+// Module::Category Module::category() const
+// {
+// 	switch( (int)module_type / 1000 ) {
+// 		case 1 : return Category::Other;		// Other
+// 		case 2 : return Category::Sensor;		// Sensors
+// 		case 3 : return Category::RTC;		// RTC
+// 		case 4 : return Category::Actuator;		// Actuators
+// 		case 5 : return Category::LogPlat;		// LogPlats
+// 		case 6 : return Category::CommPlat;		// CommPlats
+// 		case 7 : return Category::InternetPlat;	// InternetPlats
+// 		case 8 : return Category::PublishPlat;	// PublishPlats
+// 		case 9 : return Category::SubscribePlat;// SubscribePlats
+// 		default: return Category::Unknown;		// Unknown	
+// 	}
+// }
 
-///////////////////////////////////////////////////////////////////////////////
-const char* Module::enum_category_string(const Category c) 
-{
-	switch ( (int)c ) {
-		case 1 : return "Other";		// Other
-		case 2 : return "Sensor";		// Sensors
-		case 3 : return "RTC";			// RTC
-		case 4 : return "Actuator";		// Actuators
-		case 5 : return "LogPlat";		// LogPlats
-		case 6 : return "CommPlat";		// CommPlats
-		case 7 : return "InternetPlat";	// InternetPlats
-		case 8 : return "PublishPlat";	// PublishPlats
-		case 9 : return "SubscribePlat";// SubscribePlats
-		default: return "Unknown";		// Unknown	
-	}
-}
+// ///////////////////////////////////////////////////////////////////////////////
+// const char* Module::enum_category_string(const Category c) 
+// {
+// 	switch ( (int)c ) {
+// 		case 1 : return "Other";		// Other
+// 		case 2 : return "Sensor";		// Sensors
+// 		case 3 : return "RTC";			// RTC
+// 		case 4 : return "Actuator";		// Actuators
+// 		case 5 : return "LogPlat";		// LogPlats
+// 		case 6 : return "CommPlat";		// CommPlats
+// 		case 7 : return "InternetPlat";	// InternetPlats
+// 		case 8 : return "PublishPlat";	// PublishPlats
+// 		case 9 : return "SubscribePlat";// SubscribePlats
+// 		default: return "Unknown";		// Unknown	
+// 	}
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
 

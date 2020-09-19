@@ -24,7 +24,7 @@ TSL2591::TSL2591(
 		const uint8_t	gain_level, 
 		const uint8_t	timing_level
 	)
-	: I2CSensor("TSL2591", Type::TSL2591, i2c_address, mux_port)
+	: I2CSensor("TSL2591", i2c_address, mux_port)
 	, gain_level(gain_level)
 	, timing_level(timing_level)
 	, inst_tsl2591( Adafruit_TSL2591(i2c_address) )

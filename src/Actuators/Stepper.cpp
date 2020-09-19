@@ -19,7 +19,7 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 Stepper::Stepper() 
-	: Actuator("Stepper", Type::Stepper ) 
+	: Actuator("Stepper") 
 {
 	AFMS = new Adafruit_MotorShield();
 	for (auto i = 0; i < NUM_STEPPERS; i++){

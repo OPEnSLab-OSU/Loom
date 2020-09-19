@@ -43,57 +43,57 @@ public:
 	/// managed by a Manager.
 	/// Used because we cannot use dynamic_cast to check type of modules
 	/// (rtti disabled by Arduino IDE)
-	enum class Type {
-		Unknown = 0,
-		// Other
-		Other=1000,			InterruptManager, SleepManager, Multiplexer, NTP, TempSync, WarmUpManager,
-		// Sensors
-		Sensor=2000,		Analog, Digital,
-		// I2C
-		I2C=2100,			ADS1115, AS7262, AS7263, AS7265X, FXAS21002, FXOS8700, LIS3DH, MB1232, MMA8451, MPU6050, MS5803, SHT31D, TMP007, TSL2561, TSL2591, ZXGesture, STEMMA,
-		// SDI12
-		SDI12=2200,			Decagon5TM, DecagonGS3,
-		// SPI
-		SPI=2300,			MAX31855, MAX31856,
-        // SERIAL
-        L_SERIAL=2400,        K30,
-		// RTC
-		RTC=3000,			DS3231, PCF8523,
-		// Actuators
-		Actuator=4000,		Neopixel, Relay, Servo, Stepper,
-		// LogPlats
-		LogPlat=5000,		OLED, SDCARD, BATCHSD,
-		// CommPlats
-		CommPlat=6000,		LoRa, nRF, Bluetooth,
-		// InternetPlats
-		InternetPlat=7000,	Ethernet, WiFi, LTE,
-		// PublishPlats
-		PublishPlat=8000,	GoogleSheets, MaxPub, SpoolPub,
-		// SubscribePlats
-		SubscribePlats=9000, MaxSub
-	};
+	// enum class Type {
+	// 	Unknown = 0,
+	// 	// Other
+	// 	Other=1000,			InterruptManager, SleepManager, Multiplexer, NTP, TempSync, WarmUpManager,
+	// 	// Sensors
+	// 	Sensor=2000,		Analog, Digital,
+	// 	// I2C
+	// 	I2C=2100,			ADS1115, AS7262, AS7263, AS7265X, FXAS21002, FXOS8700, LIS3DH, MB1232, MMA8451, MPU6050, MS5803, SHT31D, TMP007, TSL2561, TSL2591, ZXGesture, STEMMA,
+	// 	// SDI12
+	// 	SDI12=2200,			Decagon5TM, DecagonGS3,
+	// 	// SPI
+	// 	SPI=2300,			MAX31855, MAX31856,
+    //     // SERIAL
+    //     L_SERIAL=2400,        K30,
+	// 	// RTC
+	// 	RTC=3000,			DS3231, PCF8523,
+	// 	// Actuators
+	// 	Actuator=4000,		Neopixel, Relay, Servo, Stepper,
+	// 	// LogPlats
+	// 	LogPlat=5000,		OLED, SDCARD, BATCHSD,
+	// 	// CommPlats
+	// 	CommPlat=6000,		LoRa, nRF, Bluetooth,
+	// 	// InternetPlats
+	// 	InternetPlat=7000,	Ethernet, WiFi, LTE,
+	// 	// PublishPlats
+	// 	PublishPlat=8000,	GoogleSheets, MaxPub, SpoolPub,
+	// 	// SubscribePlats
+	// 	SubscribePlats=9000, MaxSub
+	// };
 
 	/// Enum to classify modules.
 	/// Similar Module::Type but represents the astract classes rather than
 	/// the leaf node modules in the inheritance tree.
 	/// For a given module, its category often shares a name with the abstract
 	/// class it is derived from
-	enum class Category {
-		Unknown=0,			///< Unknown
-		Other=1,			///< Other
-		Sensor=2,			///< Sensors
-		RTC=3,			///< RTC
-		Actuator=4,			///< Actuators
-		LogPlat=5,			///< LogPlats
-		CommPlat=6,			///< CommPlats
-		InternetPlat=7,		///< InternetPlats
-		PublishPlat=8,		///< PublishPlats
-		SubscribePlat=9		///< SubscribePlats
-	};
+	// enum class Category {
+	// 	Unknown=0,			///< Unknown
+	// 	Other=1,			///< Other
+	// 	Sensor=2,			///< Sensors
+	// 	RTC=3,			///< RTC
+	// 	Actuator=4,			///< Actuators
+	// 	LogPlat=5,			///< LogPlats
+	// 	CommPlat=6,			///< CommPlats
+	// 	InternetPlat=7,		///< InternetPlats
+	// 	PublishPlat=8,		///< PublishPlats
+	// 	SubscribePlat=9		///< SubscribePlats
+	// };
 
 protected:
 
-	const Type		module_type;		///< Module type
+	// const Type		module_type;		///< Module type
 	Manager*	device_manager;		///< Pointer to manager.
 										///< Manager provides to any modules passed to add_module
 	const String	module_name_base;	///< The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
@@ -113,8 +113,7 @@ public:
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	Module(
-		const char*		module_name		= "Unknown",
-		const Type		module_type		= Type::Unknown
+		const char*		module_name		= "Unknown"
 	);
 
 	/// Destructor
@@ -165,7 +164,7 @@ public:
 
 	/// Get module type
 	/// @return Module type
-	Type			get_module_type() const { return module_type; }
+	// Type			get_module_type() const { return module_type; }
 
 	/// Get the device manager class if linked
 	/// @return Pointer to the Manager, Null if not linked
@@ -192,7 +191,7 @@ public:
 	bool			get_active() const { return active; }
 
 	/// Get the category of the module.
-	Category		category() const;
+	// Category		category() const;
 
 //=============================================================================
 ///@name	SETTERS
@@ -231,7 +230,7 @@ public:
 	/// Get string of the category associated with a Category
 	/// @param[in]	c	Category value to get string representation of
 	/// @return String of category
-	static const char*	enum_category_string(const Category c);
+	// static const char*	enum_category_string(const Category c);
 
 protected:
 
@@ -253,11 +252,11 @@ private:
 
 
 /// Used by Manager to sort modules in its vector
-struct module_sort_comp {
-    bool operator() (Module* left, Module* right) const {
-       return left->get_module_type() < right->get_module_type();
-    }
-};
+// struct module_sort_comp {
+//     bool operator() (Module* left, Module* right) const {
+//        return left->get_module_type() < right->get_module_type();
+//     }
+// };
 
 ///////////////////////////////////////////////////////////////////////////////
 

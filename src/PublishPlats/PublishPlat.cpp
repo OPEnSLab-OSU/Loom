@@ -16,54 +16,96 @@
 using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
+
+// class Etherent;
+// class WiFi;
+// class LTE:
+
+///////////////////////////////////////////////////////////////////////////////
 PublishPlat::PublishPlat(
-		const char*				module_name,
-		const Module::Type	module_type,
-		const Module::Type	internet_type
+		const char* module_name
 	)
-	: Module(module_name, module_type )
+	: Module(module_name)
 	, m_internet( nullptr )
-	, internet_type( internet_type )
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void PublishPlat::second_stage_ctor()
 {
 	// check to see if we have a device manager
-	if (device_manager == nullptr) {
+	if (device_manager) {
 		print_module_label();
 		LPrint("No Device Manager!\n");
 		return;
 	}
 
 	// check if internet platform exist
-	InternetPlat* temp;
-	switch (internet_type) {
-		case Module::Type::Ethernet:
-			temp = (InternetPlat*)(device_manager->find_module(Module::Type::Ethernet));
-			break;
-		case Module::Type::WiFi:
-			temp = (InternetPlat*)(device_manager->find_module(Module::Type::WiFi));
-			break;
-		case Module::Type::LTE:
-			temp = (InternetPlat*)(device_manager->find_module(Module::Type::LTE));
-			break;
-		default:
-			temp = nullptr;
-	}
+	// InternetPlat* temp;
+	// switch (internet_type) {
+	// 	case Module::Type::Ethernet:
+	// 		temp = (InternetPlat*)(device_manager->find_module(Module::Type::Ethernet));
+	// 		break;
+	// 	case Module::Type::WiFi:
+	// 		temp = (InternetPlat*)(device_manager->find_module(Module::Type::WiFi));
+	// 		break;
+	// 	case Module::Type::LTE:
+	// 		temp = (InternetPlat*)(device_manager->find_module(Module::Type::LTE));
+	// 		break;
+	// 	default:
+	// 		temp = nullptr;
+	// }
+
+	// InternetPlat* temp;
+	// if !(   (temp = device_manager->get<Loom::Ethernet>()) 
+	//      || (temp = device_manager->get<Loom::WiFi>())
+	//      || (temp = device_manager->get<Loom::LTE>())
+	//    ) {
+	// 	temp = nullptr;
+	// }
 
 
-	print_module_label();
-	// if (temp->category() == Module::Category::InternetPlat) {
-	if (temp != nullptr && temp->get_module_type() != Module::Type::Unknown) {
-		LPrintln("Found internet module: ", temp->get_module_name() , " (", (int)temp->get_module_type() , ")");
-		// m_internet = temp;
-		m_internet = temp;
-	}
-	else {
+
+	// Check for InternetPlat, in preference of
+	// Ethernet > WiFi > LTE
+	// Else set to nullptr
+
+	// If which InternetPlat is used in the event of multiple being present
+	// the below code could make use of a single 
+	// `if (temp = device_manager->get<InternetPlat>())`
+
+	// InternetPlat* temp;
+	// // Note the single equal signs are intentional
+	// if (temp = device_manager->get<Loom::Ethernet>()) {
+	// 	LPrintln("Found Etherent module");
+	// } 
+	// else if (temp = device_manager->get<Loom::WiFi>()) {
+	// 	LPrintln("Found WiFi module");
+	// }
+	// else if (temp = device_manager->get<Loom::LTE>()) {
+	// 	LPrintln("Found LTE module");
+	// } else {
+	// 	LPrintln("Unable to find internet platform");
+	// 	temp = nullptr;
+	// }
+
+
+	m_internet = device_manager->get<InternetPlat>();
+	if (!m_internet) {
+		print_module_label();
 		LPrintln("Unable to find internet platform");
-		return;
 	}
+
+	// if (temp->category() == Module::Category::InternetPlat) {
+	// if (temp != nullptr && temp->get_module_type() != Module::Type::Unknown) {
+	// if (!temp) {
+	// 	LPrintln("Found internet module: ", temp->get_module_name() , " (", (int)temp->get_module_type() , ")");
+	// 	// m_internet = temp;
+	// 	m_internet = temp;
+	// }
+	// else {
+	// 	LPrintln("Unable to find internet platform");
+	// 	return;
+	// }
 
 	// made it here, guess we're good to go!
 	print_module_label();
@@ -88,11 +130,32 @@ bool PublishPlat::publish(const JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 uint8_t PublishPlat::publish_batch()
 {
+	// // check to make sure we have BatchSD module connected
+	// if(device_manager != nullptr && device_manager->has_module(Module::Type::BATCHSD)){
+	// 	// retrieve the Batch SD module
+	// 	uint8_t drop_count = 0;
+	// 	BatchSD* batch = (BatchSD*)device_manager->find_module(Module::Type::BATCHSD);
+	// 	int packets = batch->get_packet_counter();
+	// 	print_module_label();
+	// 	LPrintln("Packets in batch to publish: ", packets);
+	// 	JsonObject tmp;
+	// 	// For all the jsons stored in the batch, run the publish function using the json
+	// 	for(int i=0; i < packets; i++){
+	// 		tmp = batch->get_batch_json(i);
+	// 		if(!publish(tmp)) drop_count++;
+	// 		//delay(1000);
+	// 	}
+	// 	// Clear the batch for the next batching to start
+	// 	batch->clear_batch_log();
+	// 	batch->add_drop_count(drop_count);
+	// 	return drop_count;
+	// }
+	// return -1;
+
+	BatchSD* batch;
 	// check to make sure we have BatchSD module connected
-	if(device_manager != nullptr && device_manager->has_module(Module::Type::BATCHSD)){
-		// retrieve the Batch SD module
+	if (device_manager && (batch = device_manager->get<BatchSD>()) ) {
 		uint8_t drop_count = 0;
-		BatchSD* batch = (BatchSD*)device_manager->find_module(Module::Type::BATCHSD);
 		int packets = batch->get_packet_counter();
 		print_module_label();
 		LPrintln("Packets in batch to publish: ", packets);
@@ -128,7 +191,7 @@ bool PublishPlat::publish()
 void PublishPlat::print_config() const
 {
 	Module::print_config();
-	LPrintln("\tInternet Type: ", (int)internet_type);
+	// LPrintln("\tInternet Type: ", (int)internet_type);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

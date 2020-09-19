@@ -128,14 +128,14 @@ void Manager::list_modules() const
 	print_device_label();
 	LPrintln("Modules:");
 
-	auto last_category = Module::Category::Unknown;
+	// auto last_category = Module::Category::Unknown;
 
 	for (auto module : modules) {
-		auto category = module->category();
-		if ( category != last_category ) {
-			LPrintln("\t", Module::enum_category_string(category), "s");//, " (", modules.size(), "):");
-			last_category = category;
-		}
+		// auto category = module->category();
+		// if ( category != last_category ) {
+		// 	LPrintln("\t", Module::enum_category_string(category), "s");//, " (", modules.size(), "):");
+		// 	last_category = category;
+		// }
 		if ( module != nullptr ) {
 			LPrintln( "\t\t[", module->get_active() ? "+" : "-" , "] ", module->get_module_name() );
 		}
@@ -196,21 +196,26 @@ void Manager::measure()
 	for (auto module : modules) {
 		if ( !module->get_active() ) continue;
 
-#ifdef LOOM_INCLUDE_SENSORS
-		if ( module->category() == Module::Category::Sensor ) {
+		// if ( module->category() == Module::Category::Sensor ) {
+		// Not within LOOM_INCLUDE_SENSORS as Analog and Digital are always enabled
+		if (dynamic_cast<Loom::Sensor*>(module)) {
 			((Sensor*)module)->measure();
 		}
-		else if (
-			(module->get_module_type() == Module::Type::Multiplexer) ) {
+
+#ifdef LOOM_INCLUDE_SENSORS
+		//else if (module->get_module_type() == Module::Type::Multiplexer) ) {
+		else if (dynamic_cast<Loom::Multiplexer*>(module) ) {
 			((Multiplexer*)module)->measure();
 		}
-		else if (module->get_module_type() == Module::Type::TempSync) {
-			((TempSync*)module)->measure();
-		}
+		// else if (module->get_module_type() == Module::Type::TempSync) {
+		// else if (dynamic_cast<Loom::TempSync*>(module)) {
+		// 	((TempSync*)module)->measure();
+		// }
 #endif // ifdef LOOM_INCLUDE_SENSORS
 
 #if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
-		else if (module->get_module_type() == Module::Type::NTP) {
+		// else if (module->get_module_type() == Module::Type::NTP) {
+		else if (dynamic_cast<Loom::NTPSync*>(module)) {
 			((NTPSync*)module)->measure();
 		}
 #endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
@@ -280,13 +285,26 @@ JsonObject Manager::internal_json(const bool clear)
 
 bool Manager::publish_all(const JsonObject json)
 {
+	// bool result = true;
+	// uint8_t count = 0;
+	// for (auto module : modules) {
+	// 	if ( (module != nullptr) &&
+	// 		 (module->category() == Module::Category::PublishPlat) &&
+	// 		 (module->get_active())
+	// 		) {
+	// 		result &= ((PublishPlat*)module)->publish( json );
+	// 		count++;
+	// 	}
+	// }
+	// return (count > 0) && result;
+
 	bool result = true;
 	uint8_t count = 0;
 	for (auto module : modules) {
-		if ( (module != nullptr) &&
-			 (module->category() == Module::Category::PublishPlat) &&
-			 (module->get_active())
-			) {
+		if ((module != nullptr) &&
+			(dynamic_cast<PublishPlat*>(module)) &&
+			(module->get_active()))
+		{
 			result &= ((PublishPlat*)module)->publish( json );
 			count++;
 		}
@@ -303,7 +321,8 @@ bool Manager::log_all(const JsonObject json)
 	uint8_t count = 0;
 	for(auto module : modules) {
 		if( (module!=nullptr) &&
-		(module->category() == Module::Category::LogPlat) &&
+		// (module->category() == Module::Category::LogPlat) &&
+		(dynamic_cast<Loom::LogPlat*>(module)) &&
 		(module->get_active())
 		){
 			result &= ((LogPlat*)module)->log( json );
@@ -440,38 +459,38 @@ void Manager::get_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Module*	Manager::find_module(const Module::Type type, const uint8_t idx) const
-{
-	uint8_t current = 0;
+// Module*	Manager::find_module(const Module::Type type, const uint8_t idx) const
+// {
+// 	uint8_t current = 0;
 
-	for (auto module : modules) {
-		if (type == module->get_module_type()) {
-			if (current == idx) {
-				return (Module*)module;
-			} else {
-				current++;
-			}
-		}
-	}
-	return nullptr;
-}
+// 	for (auto module : modules) {
+// 		if (type == module->get_module_type()) {
+// 			if (current == idx) {
+// 				return (Module*)module;
+// 			} else {
+// 				current++;
+// 			}
+// 		}
+// 	}
+// 	return nullptr;
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
-Module*	Manager::find_module_by_category(const Module::Category category, const uint8_t idx) const
-{
-	uint8_t current = 0;
+// Module*	Manager::find_module_by_category(const Module::Category category, const uint8_t idx) const
+// {
+// 	uint8_t current = 0;
 
-	for (auto module : modules) {
-		if (category == module->category()) {
-			if (current == idx) {
-				return (Module*)module;
-			} else {
-				current++;
-			}
-		}
-	}
-	return nullptr;
-}
+// 	for (auto module : modules) {
+// 		if (category == module->category()) {
+// 			if (current == idx) {
+// 				return (Module*)module;
+// 			} else {
+// 				current++;
+// 			}
+// 		}
+// 	}
+// 	return nullptr;
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Manager::set_interval(const uint16_t ms)
@@ -482,13 +501,13 @@ void Manager::set_interval(const uint16_t ms)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Manager::has_module(const Module::Type type) const
-{
-	for (auto module : modules) {
-		if (module->get_module_type() == type) return true;
-	}
-	return false;
-}
+// bool Manager::has_module(const Module::Type type) const
+// {
+// 	for (auto module : modules) {
+// 		if (module->get_module_type() == type) return true;
+// 	}
+// 	return false;
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Manager::parse_config(const char* json_config)
@@ -599,7 +618,7 @@ bool Manager::parse_config_json(JsonObject config)
 	}
 
 	// Sort modules by type
-	std::sort(modules.begin(), modules.end(), module_sort_comp());
+	// std::sort(modules.begin(), modules.end(), module_sort_comp());
 
 	// Run second stage constructors
 	for (auto module : modules) {

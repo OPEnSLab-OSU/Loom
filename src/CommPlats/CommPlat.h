@@ -84,7 +84,6 @@ public:
 	/// @param[in]	max_message_len	The maximum possible message length
 	CommPlat(
 			const char*				module_name,
-			const Module::Type	module_type,
 			const uint16_t			max_message_len
 		);
 

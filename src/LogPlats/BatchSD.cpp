@@ -22,7 +22,7 @@ BatchSD::BatchSD(
     const uint16_t	min_filter_delay,
     const byte			chip_select
     )
-    : LogPlat("BatchSD", Type::BATCHSD, enable_rate_filter, min_filter_delay )
+    : LogPlat("BatchSD", enable_rate_filter, min_filter_delay )
     , chip_select(chip_select)
     , doc(2048)
 {

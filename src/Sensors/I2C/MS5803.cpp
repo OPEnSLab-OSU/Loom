@@ -20,7 +20,7 @@ MS5803::MS5803(
 		const byte		i2c_address, 
 		const uint8_t	mux_port
 	)
-	: I2CSensor("MS5803", Type::MS5803, i2c_address, mux_port)
+	: I2CSensor("MS5803", i2c_address, mux_port)
 	, inst_MS5803( MS_5803(i2c_address, 512) )
 {
 

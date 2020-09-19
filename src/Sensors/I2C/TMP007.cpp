@@ -20,7 +20,7 @@ TMP007::TMP007(
 		const byte		i2c_address, 
 		const uint8_t	mux_port
 	) 
-	: I2CSensor("TMP007", Type::TMP007, i2c_address, mux_port)
+	: I2CSensor("TMP007", i2c_address, mux_port)
 	, inst_tmp007( Adafruit_TMP007(i2c_address) )
 {
 	bool setup = inst_tmp007.begin();

@@ -22,7 +22,7 @@ FXOS8700::FXOS8700(
 		const byte		i2c_address, 
 		const uint8_t	mux_port
 	)
-	: I2CSensor("FXOS8700", Type::FXOS8700, i2c_address, mux_port)
+	: I2CSensor("FXOS8700", i2c_address, mux_port)
 	, inst_FXOS8700(Adafruit_FXOS8700(0x8700A, 0x8700B))
 {
 	bool setup = inst_FXOS8700.begin(ACCEL_RANGE_4G);

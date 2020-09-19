@@ -25,7 +25,7 @@ nRF::nRF(
 		const uint16_t		retry_timeout,
 		const uint8_t		multicast_level	
 	)
-	: CommPlat("nRF", Type::nRF, max_message_len)
+	: CommPlat("nRF", max_message_len)
 	, data_rate(data_rate)
 	, power_level(power_level)
 	, retry_count(retry_count)

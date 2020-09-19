@@ -17,7 +17,7 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 DecagonGS3::DecagonGS3(const uint8_t num_samples)
-	: SDI12Sensor("GS3", Type::DecagonGS3, num_samples) 
+	: SDI12Sensor("GS3", num_samples) 
 {
 
 }

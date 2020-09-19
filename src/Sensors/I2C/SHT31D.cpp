@@ -20,7 +20,7 @@ SHT31D::SHT31D(
 		const byte		i2c_address,
 		const uint8_t	mux_port
 	)
-	: I2CSensor("SHT31D", Type::SHT31D, i2c_address, mux_port)
+	: I2CSensor("SHT31D", i2c_address, mux_port)
 {
 	bool setup = inst_sht31d.begin(i2c_address);
 

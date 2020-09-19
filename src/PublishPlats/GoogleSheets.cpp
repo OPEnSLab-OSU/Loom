@@ -19,13 +19,12 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 GoogleSheets::GoogleSheets(
 		const char*				module_name,
-		const Module::Type	internet_type,
 		const char*				script_url,
 		const char*				sheet_id,
 		const bool				tab_matches_dev_id,
 		const char*				tab_id
 	)   
-	: PublishPlat(module_name, Type::GoogleSheets, internet_type)
+	: PublishPlat(module_name)
 	, m_script_url(script_url)
 	, m_sheet_id(sheet_id)
 	, tab_matches_dev_id(tab_matches_dev_id)
@@ -38,7 +37,7 @@ GoogleSheets::GoogleSheets(
 
 ///////////////////////////////////////////////////////////////////////////////
 GoogleSheets::GoogleSheets(JsonArrayConst p)
-	: GoogleSheets(p[0], (Module::Type)(int)p[1], p[2], p[3], p[4], p[5] ) {}
+	: GoogleSheets(p[0], p[2], p[3], p[4], p[5] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void GoogleSheets::print_config() const

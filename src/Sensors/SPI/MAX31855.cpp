@@ -21,7 +21,7 @@ MAX31855::MAX31855(
 		const uint8_t	num_samples, 
 		const uint8_t	CS_pin
 	) 
-	: SPISensor(module_name, Type::MAX31855, num_samples) 
+	: SPISensor(module_name, num_samples) 
 	, inst_max(CS_pin)
 {
 	inst_max.begin();

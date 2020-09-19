@@ -18,10 +18,9 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 CommPlat::CommPlat(
 		const char*				module_name,
-		const Module::Type	module_type,
 		const uint16_t			max_message_len
 	)
-	: Module(module_name, module_type)
+	: Module(module_name)
 	, max_message_len(max_message_len)
 	, signal_strength(0)
 	, total_packet_count(0)
@@ -95,19 +94,32 @@ bool CommPlat::receive_blocking(const uint max_wait_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool CommPlat::receive_batch_blocking(uint max_wait_time){
-	bool receive_results=false;
-	if(device_manager != nullptr && device_manager->has_module(Module::Type::BATCHSD)){
-		BatchSD* batch = (BatchSD*)device_manager->find_module(Module::Type::BATCHSD);
+bool CommPlat::receive_batch_blocking(uint max_wait_time)
+{
+	// bool receive_results=false;
+	// if(device_manager != nullptr && device_manager->has_module(Module::Type::BATCHSD)){
+	// 	BatchSD* batch = (BatchSD*)device_manager->find_module(Module::Type::BATCHSD);
+	// 	receive_results = receive_blocking(max_wait_time);
+	// 	if(!receive_results) return false;
+	// 	return batch->store_batch();
+	// }
+	// return false;
+
+	bool receive_results = false;
+	BatchSD* batch;
+	if (device_manager && (batch = device_manager->get<BatchSD>()) ) {
 		receive_results = receive_blocking(max_wait_time);
-		if(!receive_results) return false;
+		if (!receive_results) {
+			return false;
+		}
 		return batch->store_batch();
 	}
 	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool	CommPlat::send(JsonObject json, const uint8_t destination) {
+bool CommPlat::send(JsonObject json, const uint8_t destination) 
+{
 	bool status = send_impl(json, destination);
 	add_packet_result(!status);
 	LPrintln("Send " , (status) ? "successful" : "failed" );
@@ -128,10 +140,31 @@ bool CommPlat::send(const uint8_t destination)
 ///////////////////////////////////////////////////////////////////////////////
 uint8_t CommPlat::send_batch(const uint8_t destination, int delay_time){
 	// check to make sure we have BatchSD module connected
-	if(device_manager != nullptr && device_manager->has_module(Module::Type::BATCHSD)){
-		// retrieve the Batch SD module
+	// if(device_manager != nullptr && device_manager->has_module(Module::Type::BATCHSD)){
+	// 	// retrieve the Batch SD module
+	// 	uint8_t drop_count = 0;
+	// 	BatchSD* batch = (BatchSD*)device_manager->find_module(Module::Type::BATCHSD);
+	// 	int packets = batch->get_packet_counter();
+	// 	print_module_label();
+	// 	LPrintln("Packets to send: ", packets);
+	// 	JsonObject tmp;
+	// 	// For all the jsons stored in the batch, run the sebd function using the json
+	// 	for(int i=0; i < packets; i++){
+	// 		tmp = batch->get_batch_json(i);
+	// 		if(!send(tmp, destination)) drop_count++;;
+	// 		device_manager->pause(delay_time);
+	// 	}
+	// 	// Clear the batch for the next batching to start
+	// 	batch->clear_batch_log();
+	// 	batch->add_drop_count(drop_count);
+	// 	return drop_count;
+	// }
+	// return -1;
+
+	BatchSD* batch;
+	// check to make sure we have BatchSD module connected
+	if (device_manager && (batch = device_manager->get<BatchSD>()) ) {
 		uint8_t drop_count = 0;
-		BatchSD* batch = (BatchSD*)device_manager->find_module(Module::Type::BATCHSD);
 		int packets = batch->get_packet_counter();
 		print_module_label();
 		LPrintln("Packets to send: ", packets);
@@ -164,10 +197,27 @@ void CommPlat::broadcast()
 ///////////////////////////////////////////////////////////////////////////////
 void CommPlat::broadcast_batch(int delay_time)
 {
+	// // check to make sure we have BatchSD module connected
+	// if(device_manager != nullptr && device_manager->has_module(Module::Type::BATCHSD)){
+	// 	// retrieve the Batch SD module
+	// 	BatchSD* batch = (BatchSD*)device_manager->find_module(Module::Type::BATCHSD);
+	// 	int packets = batch->get_packet_counter();
+	// 	print_module_label();
+	// 	LPrintln("Packets to broadcast: ", packets);
+	// 	JsonObject tmp;
+	// 	// For all the jsons stored in the batch, run the sebd function using the json
+	// 	for(int i=0; i < packets; i++){
+	// 		tmp = batch->get_batch_json(i);
+	// 		broadcast(tmp);
+	// 		device_manager->pause(delay_time);
+	// 	}
+	// 	// Clear the batch for the next batching to start
+	// 	batch->clear_batch_log();
+	// }
+
+	BatchSD* batch;
 	// check to make sure we have BatchSD module connected
-	if(device_manager != nullptr && device_manager->has_module(Module::Type::BATCHSD)){
-		// retrieve the Batch SD module
-		BatchSD* batch = (BatchSD*)device_manager->find_module(Module::Type::BATCHSD);
+	if (device_manager && (batch = device_manager->get<BatchSD>()) ) {
 		int packets = batch->get_packet_counter();
 		print_module_label();
 		LPrintln("Packets to broadcast: ", packets);
