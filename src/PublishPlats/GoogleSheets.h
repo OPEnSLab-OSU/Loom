@@ -93,6 +93,8 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+
 }; // namespace Loom
 
 #endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

@@ -42,4 +42,6 @@ void SerialSensor::set_serial(Stream *stream) {
     sensor_serial = stream;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 #endif // ifdef LOOM_INCLUDE_SENSORS

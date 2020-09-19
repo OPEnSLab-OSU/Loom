@@ -14,6 +14,8 @@
 
 namespace Loom {
 
+///////////////////////////////////////////////////////////////////////////////
+
 #define VBATPIN A7			///< Battery pin
 #define ANALOG_COUNT 6		///< Number of analog pins
 
@@ -242,5 +244,7 @@ private:
 	float		convert_salinity(const uint16_t analog) const;
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom

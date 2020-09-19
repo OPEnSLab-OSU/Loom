@@ -52,4 +52,6 @@ void STEMMA::package(JsonObject json) {
     data["capactive"] = capacitive;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 #endif // ifdef LOOM_INCLUDE_SENSORS

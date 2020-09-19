@@ -23,3 +23,4 @@ WarmUp::WarmUp(Manager* manager, int period)
 int WarmUp::get_period() {
   return this->period;
 }
+

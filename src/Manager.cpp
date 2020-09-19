@@ -613,13 +613,6 @@ bool Manager::parse_config_json(JsonObject config)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////
 bool Manager::parse_config_serial()
 {
 	flash_LED(4, 200, 100, true);
@@ -627,7 +620,6 @@ bool Manager::parse_config_serial()
 	LPrintln("Waiting for config over Serial");
 
 	while(!Serial.available());
-
 
 
 	// Might need to be even larger
@@ -677,3 +669,4 @@ bool Manager::check_serial_for_config()
 	}
 	return false;
 }
+

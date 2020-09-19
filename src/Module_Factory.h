@@ -23,12 +23,6 @@ namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-///Forward declare any classes that will be served the created objects
-// class Scope;
-// class Manager;
-
-///////////////////////////////////////////////////////////////////////////////
-
 /// Creates a new T, returned as S*. S must be base of T
 /// @return The created T
 template <class S, class T>

@@ -129,6 +129,7 @@ static const br_x509_trust_anchor TAs[] = {
 } /* extern "C" */
 #endif
 
+///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom
 

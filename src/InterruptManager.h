@@ -24,11 +24,9 @@ namespace Loom {
 #define MaxTimerCount 2			///< Maximum number of timers
 #define MaxStopWatchCount 2		///< Maximum numbr of stopwatches
 
-
 // Specify that RTC exists, defined in own file
 class RTC;
 class SleepManager;
-
 
 /// Used to make function signatures easier to read
 /// when returning function pointers
@@ -39,7 +37,6 @@ enum class ISR_Type {
 	IMMEDIATE, 		///< Run ISR immediately
 	CHECK_FLAG		///< Run ISR when run_pending_ISRs() is called
 };
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -380,5 +377,7 @@ private:
 	const static ISRFuncPtr default_ISRs[InteruptRange];
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom

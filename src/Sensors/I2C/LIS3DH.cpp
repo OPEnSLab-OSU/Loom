@@ -80,4 +80,3 @@ void L_LIS3DH::package(JsonObject json)
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
 
-

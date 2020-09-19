@@ -51,5 +51,4 @@ void print_array(const String data [], const int len, const int format=1);
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
 }; // namespace Loom

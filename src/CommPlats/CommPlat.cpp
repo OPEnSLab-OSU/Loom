@@ -183,7 +183,6 @@ void CommPlat::broadcast_batch(int delay_time)
 	}
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 bool CommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len) const
 {

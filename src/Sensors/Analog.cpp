@@ -331,10 +331,10 @@ float Analog::convert_TDS(const uint16_t analog) const
 	return convert_EC(analog)/2.;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 float Analog::convert_salinity(const uint16_t analog) const
 {
 	// Probably doesn't actually give a value of any worth right now...
 	return (analog-76) / .0928;
 }
+

@@ -34,13 +34,11 @@ K30::K30(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
 K30::K30(JsonArrayConst p)
 : K30(EXPAND_ARRAY(p, 2))
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-
 void K30::sendSensorRequest(byte request[7]) {
     
     if (sensor_serial == nullptr) {
@@ -78,7 +76,6 @@ void K30::sendSensorRequest(byte request[7]) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
 int K30::readSensorResponse(byte packet[7]){
     int high = packet[3];                        //high byte for value is 4th byte in packet in the packet
     int low = packet[4];                         //low byte for value is 5th byte in the packet
@@ -88,14 +85,12 @@ int K30::readSensorResponse(byte packet[7]){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
 void K30::measure() {
     sendSensorRequest(read_CO2);
     CO2_levels = readSensorResponse(sensor_response);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
 void K30::print_measurements() const {
     print_module_label();
     LPrintln("Measurements:");
@@ -103,7 +98,6 @@ void K30::print_measurements() const {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
 void K30::package(JsonObject json) {
     JsonObject data = get_module_data_object(json, module_name);
     

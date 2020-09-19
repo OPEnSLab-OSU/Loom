@@ -13,6 +13,7 @@
 
 namespace Loom {
 
+///////////////////////////////////////////////////////////////////////////////
 
 /// \cond DO_NOT_DOCUMENT
 #define EXPAND_ARRAY1(x) x[0]
@@ -40,8 +41,7 @@ namespace Loom {
 /// 				Do not use with a value larger than the size of the array
 #define EXPAND_ARRAY(x, i) EXPAND_ARRAY##i(x)
 
-
-
+///////////////////////////////////////////////////////////////////////////////
 /// Print variable number of arguments (no newline)
 template <typename... Types> 
 void LPrint(Types... vars) 
@@ -51,7 +51,8 @@ void LPrint(Types... vars)
 	#endif
 }
 
-/// Print variable number of arguments 
+///////////////////////////////////////////////////////////////////////////////
+/// Print variable number of arguments
 /// with newline after last element
 template <typename... Types> 
 void LPrintln(Types... vars) 
@@ -62,7 +63,8 @@ void LPrintln(Types... vars)
 	#endif
 }
 
-/// Print variable number of arguments 
+///////////////////////////////////////////////////////////////////////////////
+/// Print variable number of arguments
 /// with newline after each element
 template <typename... Types> 
 void LPrintlnAll(Types... vars) 
@@ -73,6 +75,7 @@ void LPrintlnAll(Types... vars)
 	#endif
 }
 
+///////////////////////////////////////////////////////////////////////////////
 /// LPrint Hexadeximal number to Serial if LOOM_DEBUG enabled, no newline
 #define LPrint_Hex(X)      (LOOM_DEBUG==0) ? :  Serial.print(X, HEX)
 /// LPrint Hexadeximal number to Serial if LOOM_DEBUG enabled, newline added
@@ -82,5 +85,6 @@ void LPrintlnAll(Types... vars)
 /// LPrint Hexadeximal number to Serial in form: DEC (0xHEX) if LOOM_DEBUG enabled, newline added
 #define LPrintln_Dec_Hex(X)    (LOOM_DEBUG==0) ? :  Serial.print(X); Serial.print(" (0x"); Serial.print(X, HEX); Serial.println(")")
 
+///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom

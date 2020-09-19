@@ -227,3 +227,4 @@ void InternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const
 	udp_dev.write(packet_buffer, NTP_PACKET_SIZE);
 	udp_dev.endPacket();
 }
+

@@ -180,7 +180,6 @@ I2CSensor* Multiplexer::generate_sensor_object(const byte i2c_address, const uin
 		}
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 void Multiplexer::print_config() const
 {
@@ -438,5 +437,6 @@ void Multiplexer::power_up() {
 
 void Multiplexer::power_down() { }
 
+///////////////////////////////////////////////////////////////////////////////
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
