@@ -1,6 +1,8 @@
 #ifndef _CERTIFICATES_H_
 #define _CERTIFICATES_H_
 
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+
 namespace Loom {
 
 #ifdef __cplusplus
@@ -133,4 +135,5 @@ static const br_x509_trust_anchor TAs[] = {
 
 }; // namespace Loom
 
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 #endif /* ifndef _CERTIFICATES_H_ */

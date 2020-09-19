@@ -15,7 +15,6 @@
 using namespace Loom;
 
 ////////////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR ---
 SerialSensor::SerialSensor(
         const char*            module_name,
         const Module::Type module_type,
@@ -24,13 +23,11 @@ SerialSensor::SerialSensor(
     : Sensor(module_name, module_type, num_samples) {}
 
 ////////////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
 SerialSensor::~SerialSensor() {
     delete sensor_serial;
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// -- PUBLIC METHODS --
 void SerialSensor::print_config() const
 {
     Sensor::print_config();

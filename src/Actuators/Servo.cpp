@@ -15,12 +15,10 @@
 
 using namespace Loom;
 
-#define SERVOMIN  150	///< This is the 'minimum' pulse length count (out of 4096)
-#define SERVOMAX  600	///< This is the 'maximum' pulse length count (out of 4096)
-
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(Module, Servo, "Servo");
+#define SERVOMIN  150	///< This is the 'minimum' pulse length count (out of 4096)
+#define SERVOMAX  600	///< This is the 'maximum' pulse length count (out of 4096)
 
 ///////////////////////////////////////////////////////////////////////////////
 Servo::Servo() 

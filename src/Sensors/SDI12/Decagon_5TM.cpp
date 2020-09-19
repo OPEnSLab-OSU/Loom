@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Decagon_5TM.cpp
+/// @file		Decagon_5TM.cpp
 /// @brief		File for Decagon5TM implementation. Incomplete.
 /// @author		Luke Goertzen
 /// @date		2019
@@ -14,11 +14,6 @@
 #include "Module_Factory.h"
 
 using namespace Loom;
-
-///////////////////////////////////////////////////////////////////////////////
-
-// Uncomment once implemented
-// REGISTER(Module, Decagon5TM, "Decagon5TM");
 
 ///////////////////////////////////////////////////////////////////////////////
 Decagon5TM::Decagon5TM(const uint8_t num_samples)

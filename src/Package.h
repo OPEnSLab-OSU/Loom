@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Package.h
+/// @file		Package.h
 /// @brief		File for functions to package data into JsonObject, 
 ///				and extracting data from it
 /// @author		Luke Goertzen

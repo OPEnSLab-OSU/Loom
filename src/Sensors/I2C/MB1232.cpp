@@ -15,13 +15,11 @@
 
 using namespace Loom;
 
+///////////////////////////////////////////////////////////////////////////////
+
 #define RangeCommand    		0x51	///< The Sensor ranging command has a value of 0x51
 #define ChangeAddressCommand1 	0xAA	///< These are the two commands that need to be sent in sequence to change the sensor address
 #define ChangeAddressCommand2 	0xA5	///< These are the two commands that need to be sent in sequence to change the sensor address
-
-///////////////////////////////////////////////////////////////////////////////
-
-REGISTER(Module, MB1232, "MB1232");
 
 ///////////////////////////////////////////////////////////////////////////////
 MB1232::MB1232(

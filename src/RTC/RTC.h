@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_RTC.h
+/// @file		RTC.h
 /// @brief		File for RTC definition.
 /// @author		Luke Goertzen
 /// @date		2019

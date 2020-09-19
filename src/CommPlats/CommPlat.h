@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_CommPlat.h
+/// @file		CommPlat.h
 /// @brief		File for CommPlat definition.
 /// @author		Luke Goertzen
 /// @date		2019

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_WarmUp.h
+/// @file		WarmUp.h
 /// @brief  Header file for Loom Module WarmUp mixin, which provides an interface
 ///         for modules to specify a delay before sensor is ready to take measurements.
 /// @author		C. Greyston Brady

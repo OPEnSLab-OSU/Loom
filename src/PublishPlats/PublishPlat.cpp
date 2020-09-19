@@ -1,12 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_PublishPlat.cpp
+/// @file		PublishPlat.cpp
 /// @brief		File for PublishPlat implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
+
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 
 #include "PublishPlat.h"
 #include "Manager.h"
@@ -172,3 +174,5 @@ void PublishPlat::m_print_json_error(const char* str) const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

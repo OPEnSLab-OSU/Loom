@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_PublishPlat.h
+/// @file		PublishPlat.h
 /// @brief		File for PublishPlat definition.
 /// @author		Noah Koontz
 /// @author		Luke Goertzen
@@ -9,6 +9,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 #pragma once
 
 #include "Module.h"
@@ -119,3 +120,6 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+

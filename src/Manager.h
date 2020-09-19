@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Manager.h
+/// @file		Manager.h
 /// @brief		File for Manager definition.
 /// @author		Luke Goertzen
 /// @date		2019
@@ -171,6 +171,7 @@ public:
 	/// @return JsonObject of packaged data of enabled modules
 	JsonObject	package();
 
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 	/// Publish
 	/// @param[in]	json	Data object to publish
 	/// @return True if success
@@ -180,6 +181,7 @@ public:
 	/// Calls publish_all(const JsonObject json) with interal json
 	/// @return True if success
 	bool		publish_all() { return publish_all(internal_json()); }
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 
 	/// Log
 	/// @param[in]	json	Data object to log
@@ -389,7 +391,7 @@ public:
 	Module* operator[](const Module::Type type) const { return find_module(type); };
 
 	template <typename T>
-	T* get(const uint8_t idx=0) {
+	T* get(const uint8_t idx=0) const {
 		uint8_t count = 0;
 		for (auto module : modules) {
 			if ( dynamic_cast<T*>(module) ) {

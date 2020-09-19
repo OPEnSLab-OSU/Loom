@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Sensor.h
+/// @file		Sensor.h
 /// @brief		File for Sensor definition.
 /// @author		Luke Goertzen
 /// @date		2019

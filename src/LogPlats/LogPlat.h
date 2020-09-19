@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_LogPlat.h
+/// @file		LogPlat.h
 /// @brief		File for LogPlat definition.
 /// @author		Luke Goertzen
 /// @date		2019

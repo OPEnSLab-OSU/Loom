@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_I2C_Sensor.h
+/// @file		I2C_Sensor.h
 /// @brief		File for I2CSensor definition.
 /// @author		Luke Goertzen
 /// @date		2019

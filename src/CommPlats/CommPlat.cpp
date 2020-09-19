@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_CommPlat.cpp
+/// @file		CommPlat.cpp
 /// @brief		File for CommPlat implementation.
 /// @author		Luke Goertzen
 /// @date		2019

@@ -37,10 +37,6 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(Module, Multiplexer, "Multiplexer");
-
-///////////////////////////////////////////////////////////////////////////////
-
 // Used to optimize searching for sensors:
 // search addresses in array rather than 0-127 
 const std::array<byte, 21> Multiplexer::known_addresses = 

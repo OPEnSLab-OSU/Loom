@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_WarmUp.cpp
+/// @file		WarmUp.cpp
 /// @brief	Source file for Loom Module Warmup mixin interface.
 /// @author		C. Greyston Brady
 /// @date		  2020

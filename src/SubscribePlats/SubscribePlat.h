@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SubscribePlat.h
+/// @file		SubscribePlat.h
 /// @brief		File for SubscribePlat definition.
 /// @author		Luke Goertzen
 /// @date		2019
@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 #pragma once
 
 #include "Module.h"
@@ -97,3 +98,4 @@ protected:
 
 }; // namespace Loom
 
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

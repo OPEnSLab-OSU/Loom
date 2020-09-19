@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Module.h
+/// @file		Module.h
 /// @brief		File for Module definition.
 /// @author		Luke Goertzen
 /// @date		2019
@@ -11,8 +11,9 @@
 #pragma once
 
 #include "Misc.h"
-#include "Macros.h"
 #include "Package.h"
+#include "Module_Factory.h"
+#include "Macros.h"
 
 #include <ArduinoJson.h>
 

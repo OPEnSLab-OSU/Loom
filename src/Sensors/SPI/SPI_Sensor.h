@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SPI_Sensor.h
+/// @file		SPI_Sensor.h
 /// @brief		File for SPISensor definition.
 /// @author		Luke Goertzen
 /// @date		2019

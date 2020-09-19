@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SPI_Sensor.cpp
+/// @file		SPI_Sensor.cpp
 /// @brief		File for SPISensor implementation.
 /// @author		Luke Goertzen
 /// @date		2019

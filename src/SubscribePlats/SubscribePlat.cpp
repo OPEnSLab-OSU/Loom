@@ -1,12 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SubscribePlat.cpp
+/// @file		SubscribePlat.cpp
 /// @brief		File for SubscribePlat implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
+
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 
 #include "SubscribePlat.h"
 #include "Manager.h"
@@ -77,3 +79,5 @@ bool SubscribePlat::subscribe()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

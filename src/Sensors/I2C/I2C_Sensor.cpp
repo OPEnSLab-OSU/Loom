@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_I2C_Sensor.cpp
+/// @file		I2C_Sensor.cpp
 /// @brief		File for I2CSensor implementation.
 /// @author		Luke Goertzen
 /// @date		2019

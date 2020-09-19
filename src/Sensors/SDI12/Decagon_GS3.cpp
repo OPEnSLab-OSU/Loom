@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Decagon_GS3.cpp
+/// @file		Decagon_GS3.cpp
 /// @brief		File for DecagonGS3 implementation. Incomplete.
 /// @author		Luke Goertzen
 /// @date		2019
@@ -14,11 +14,6 @@
 #include "Module_Factory.h"
 
 using namespace Loom;
-
-///////////////////////////////////////////////////////////////////////////////
-
-// Uncomment once implemented
-// REGISTER(Module, DecagonGS3, "DecagonGS3");
 
 ///////////////////////////////////////////////////////////////////////////////
 DecagonGS3::DecagonGS3(const uint8_t num_samples)

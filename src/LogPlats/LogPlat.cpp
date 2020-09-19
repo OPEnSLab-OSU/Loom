@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_LogPlat.cpp
+/// @file		LogPlat.cpp
 /// @brief		File for LogPlat implementation.
 /// @author		Luke Goertzen
 /// @date		2019

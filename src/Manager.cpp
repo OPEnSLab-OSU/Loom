@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Manager.cpp
+/// @file		Manager.cpp
 /// @brief		File for Manager method implementations.
 /// @author		Luke Goertzen
 /// @date		2019
@@ -196,11 +196,10 @@ void Manager::measure()
 	for (auto module : modules) {
 		if ( !module->get_active() ) continue;
 
+#ifdef LOOM_INCLUDE_SENSORS
 		if ( module->category() == Module::Category::Sensor ) {
 			((Sensor*)module)->measure();
 		}
-
-#ifdef LOOM_INCLUDE_SENSORS
 		else if (
 			(module->get_module_type() == Module::Type::Multiplexer) ) {
 			((Multiplexer*)module)->measure();
@@ -276,6 +275,9 @@ JsonObject Manager::internal_json(const bool clear)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+
 bool Manager::publish_all(const JsonObject json)
 {
 	bool result = true;
@@ -291,6 +293,8 @@ bool Manager::publish_all(const JsonObject json)
 	}
 	return (count > 0) && result;
 }
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Manager::log_all(const JsonObject json)

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_IntenertLTE.cpp
+/// @file		IntenertLTE.cpp
 /// @brief		File for LTE implementation.
 /// @author		Adam Kerr, based on work by Noah Koontz
 /// @date		2020
@@ -16,12 +16,10 @@
 
 using namespace Loom;
 
-#define SerialAT Serial1
-TinyGsm modem(SerialAT);
-
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(Module, LTE, "LTE");
+#define SerialAT Serial1
+TinyGsm modem(SerialAT);
 
 ///////////////////////////////////////////////////////////////////////////////
 LTE::LTE(

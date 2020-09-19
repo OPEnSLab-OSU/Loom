@@ -13,12 +13,10 @@
 
 using namespace Loom;
 
-// Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
-const uint8_t Digital::pin_nums[DIGITAL_COUNT] = {5, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19};
-
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(Module, Digital, "Digital");
+// Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
+const uint8_t Digital::pin_nums[DIGITAL_COUNT] = {5, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19};
 
 ///////////////////////////////////////////////////////////////////////////////
 Digital::Digital(	

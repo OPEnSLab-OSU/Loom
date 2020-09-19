@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_InternetWiFi.cpp
+/// @file		InternetWiFi.cpp
 /// @brief		File for WiFi implementation.
 /// @author		Noah Koontz
 /// @date		2019
@@ -17,11 +17,7 @@
 using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-
-REGISTER(Module, L_WiFi, "WiFi");
-
-///////////////////////////////////////////////////////////////////////////////
-L_WiFi::L_WiFi(
+WiFi::WiFi(
 		const char* 	ssid,
 		const char* 	pass
 	)
@@ -32,10 +28,10 @@ L_WiFi::L_WiFi(
 	, m_client(m_base_client, TAs, (size_t)TAs_NUM, A7, 1, SSLClient::SSL_INFO)
 {
 	// Configure pins for Adafruit ATWINC1500 Feather
-	WiFi.setPins(8,7,4,2);
+	::WiFi.setPins(8,7,4,2);
 
 	// Check for the presence of the shield, else disable WiFi module
-	if (WiFi.status() == WL_NO_SHIELD) {
+	if (::WiFi.status() == WL_NO_SHIELD) {
 		print_module_label();
 		LPrintln("WiFi shield not present");
 		return;
@@ -45,11 +41,11 @@ L_WiFi::L_WiFi(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-L_WiFi::L_WiFi(JsonArrayConst p)
-	: L_WiFi(EXPAND_ARRAY(p, 2) ) {}
+WiFi::WiFi(JsonArrayConst p)
+	: WiFi(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_WiFi::connect()
+void WiFi::connect()
 {
 	// clear the write error
 	m_base_client.clearWriteError();
@@ -63,9 +59,9 @@ void L_WiFi::connect()
 
 		// Check if password provided
 		if (pass == nullptr || pass[0] == '\0' ) {
-			status = WiFi.begin(SSID);
+			status = ::WiFi.begin(SSID);
 		} else {
-			status = WiFi.begin(SSID, pass);
+			status = ::WiFi.begin(SSID, pass);
 		}
 		attempt_count++;
 
@@ -90,21 +86,21 @@ void L_WiFi::connect()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_WiFi::disconnect() 
+void WiFi::disconnect() 
 {
 	// tell the wifi it's time to stop
-	WiFi.disconnect();
+	::WiFi.disconnect();
 	delay(200);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool L_WiFi::is_connected() const
+bool WiFi::is_connected() const
 {
-	return WiFi.status() == WL_CONNECTED;
+	return ::WiFi.status() == WL_CONNECTED;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-InternetPlat::UDPPtr L_WiFi::open_socket(const uint port)
+InternetPlat::UDPPtr WiFi::open_socket(const uint port)
 {
 	// create the unique pointer
 	UDPPtr ptr = UDPPtr(new WiFiUDP());
@@ -115,30 +111,30 @@ InternetPlat::UDPPtr L_WiFi::open_socket(const uint port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_WiFi::print_config() const
+void WiFi::print_config() const
 {
 	InternetPlat::print_config();
 	LPrint("\tSSID:               : ", SSID, '\n');
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_WiFi::print_state() const
+void WiFi::print_state() const
 {
 	InternetPlat::print_state();
-	const char* text = m_wifi_status_to_string(WiFi.status());
+	const char* text = m_wifi_status_to_string(::WiFi.status());
 	if (text != nullptr)
 		LPrintln("\tWireless state      :", text );
 	else
-	LPrintln("\tWireless state      :", WiFi.status() );
+	LPrintln("\tWireless state      :", ::WiFi.status() );
 	LPrintln("\tConnected:          : ", (is_connected()) ? "True" : "False" );
 	LPrintln("\tSSID:               : ", SSID );
-	LPrintln("\tRSSi:               : ", WiFi.RSSI(), " dBm" );
-	LPrintln("\tIP Address:         : ", IPAddress(WiFi.localIP()) );
+	LPrintln("\tRSSi:               : ", ::WiFi.RSSI(), " dBm" );
+	LPrintln("\tIP Address:         : ", IPAddress(::WiFi.localIP()) );
 	LPrintln();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char *L_WiFi::m_wifi_status_to_string(const uint8_t status)
+const char *WiFi::m_wifi_status_to_string(const uint8_t status)
 {
 	switch (status) {
 		case WL_NO_SHIELD: return "NO_SHIELD";
@@ -157,20 +153,20 @@ const char *L_WiFi::m_wifi_status_to_string(const uint8_t status)
 ///////////////////////////////////////////////////////////////////////////////
 #ifdef LOOM_INCLUDE_MAX
 
-void L_WiFi::package(JsonObject json)
+void WiFi::package(JsonObject json)
 {
 	//JsonObject data = get_module_data_object(json, module_name);
-	auto ip = IPAddress(WiFi.localIP());
+	auto ip = IPAddress(::WiFi.localIP());
 	JsonArray tmp = json["id"].createNestedArray("ip");
 	tmp.add(ip[0]);
 	tmp.add(ip[1]);
 	tmp.add(ip[2]);
 	tmp.add(ip[3]);
-	//data["IP"] = WiFi.localIP();
+	//data["IP"] = ::WiFi.localIP();
 }
 
-#endif // ifdef LOOM_INCLUDE_MAX
-
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_MAX
 
 #endif // ifdef LOOM_INCLUDE_WIFI

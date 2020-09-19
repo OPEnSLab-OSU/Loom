@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Max_Pub.cpp
+/// @file		Max_Pub.cpp
 /// @brief		File for MaxPub implementation.
 /// @author		Luke Goertzen
 /// @date		2019
@@ -17,11 +17,9 @@
 
 using namespace Loom;
 
-#define UDP_SEND_OFFSET 8000 ///< UDP sending port is this value + device instance number
-
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER_NODEFAULT(Module, MaxPub, "MaxPub");
+#define UDP_SEND_OFFSET 8000 ///< UDP sending port is this value + device instance number
 
 ///////////////////////////////////////////////////////////////////////////////
 MaxPub::MaxPub(

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Misc.h
+/// @file		Misc.h
 /// @brief		File for miscellaneous global Loom function declarations.
 /// @author		Luke Goertzen
 /// @date		2019

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Actuator.cpp
+/// @file		Actuator.cpp
 /// @brief		File for Actuator implementation.
 /// @author		Luke Goertzen
 /// @date		2019

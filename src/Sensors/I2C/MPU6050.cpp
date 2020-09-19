@@ -17,16 +17,12 @@
 
 using namespace Loom;
 
-// Unfortunately cannot be inside MPU6050 class
-// For some reason Wire is not recognized like that
-MPU6050_tockn::MPU6050 mpu6050(Wire);
-
 ///////////////////////////////////////////////////////////////////////////////
 
-REGISTER(Module, L_MPU6050, "MPU6050");
+::MPU6050 mpu_inst(Wire);
 
 ///////////////////////////////////////////////////////////////////////////////
-L_MPU6050::L_MPU6050(
+Loom::MPU6050::MPU6050(
 		const byte		i2c_address, 
 		const uint8_t	mux_port,
 		const bool		calibrate
@@ -34,31 +30,31 @@ L_MPU6050::L_MPU6050(
 	: I2CSensor("MPU6050", Type::MPU6050, i2c_address, mux_port )
 {
 	Wire.begin();
-	mpu6050.begin();
+	mpu_inst.begin();
 
 	if (calibrate) {
 		print_module_label();
-		mpu6050.calcGyroOffsets(true);
+		mpu_inst.calcGyroOffsets(true);
 		LPrintln();
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-L_MPU6050::L_MPU6050(JsonArrayConst p)
-	: L_MPU6050(EXPAND_ARRAY(p, 3) ) {}
+Loom::MPU6050::MPU6050(JsonArrayConst p)
+	: MPU6050(EXPAND_ARRAY(p, 3)) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_MPU6050::print_state() const
+void Loom::MPU6050::print_state() const
 {
 	I2CSensor::print_state();
 
-	LPrintln("\tgyroXoffset : ", mpu6050.getGyroXoffset() );
-	LPrintln("\tgyroYoffset : ", mpu6050.getGyroYoffset() );
-	LPrintln("\tgyroZoffset : ", mpu6050.getGyroZoffset() );
+	LPrintln("\tgyroXoffset : ", mpu_inst.getGyroXoffset() );
+	LPrintln("\tgyroYoffset : ", mpu_inst.getGyroYoffset() );
+	LPrintln("\tgyroZoffset : ", mpu_inst.getGyroZoffset() );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_MPU6050::print_measurements() const
+void Loom::MPU6050::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -89,34 +85,34 @@ void L_MPU6050::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_MPU6050::measure()
+void Loom::MPU6050::measure()
 {
-	mpu6050.update();
+	mpu_inst.update();
 
-	temp = mpu6050.getTemp();
+	temp = mpu_inst.getTemp();
 
-	acc[0] = mpu6050.getAccX();
-	acc[1] = mpu6050.getAccY();
-	acc[2] = mpu6050.getAccZ();
+	acc[0] = mpu_inst.getAccX();
+	acc[1] = mpu_inst.getAccY();
+	acc[2] = mpu_inst.getAccZ();
 
-	gyro[0] = mpu6050.getGyroX();
-	gyro[1] = mpu6050.getGyroY();
-	gyro[2] = mpu6050.getGyroZ();
+	gyro[0] = mpu_inst.getGyroX();
+	gyro[1] = mpu_inst.getGyroY();
+	gyro[2] = mpu_inst.getGyroZ();
 
-	accAngle[0] = mpu6050.getAccAngleX();
-	accAngle[1] = mpu6050.getAccAngleY();
+	accAngle[0] = mpu_inst.getAccAngleX();
+	accAngle[1] = mpu_inst.getAccAngleY();
 
-	gyroAngle[0] = mpu6050.getGyroAngleX();
-	gyroAngle[1] = mpu6050.getGyroAngleY();
-	gyroAngle[2] = mpu6050.getGyroAngleZ();
+	gyroAngle[0] = mpu_inst.getGyroAngleX();
+	gyroAngle[1] = mpu_inst.getGyroAngleY();
+	gyroAngle[2] = mpu_inst.getGyroAngleZ();
 
-	angle[0] = mpu6050.getAngleX();
-	angle[1] = mpu6050.getAngleY();
-	angle[2] = mpu6050.getAngleZ();
+	angle[0] = mpu_inst.getAngleX();
+	angle[1] = mpu_inst.getAngleY();
+	angle[2] = mpu_inst.getAngleZ();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_MPU6050::package(JsonObject json)
+void Loom::MPU6050::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	
@@ -146,10 +142,10 @@ void L_MPU6050::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_MPU6050::calibrate()
+void Loom::MPU6050::calibrate()
 {
 	print_module_label();
-	mpu6050.calcGyroOffsets(true);
+	mpu_inst.calcGyroOffsets(true);
 	LPrintln();
 }
 

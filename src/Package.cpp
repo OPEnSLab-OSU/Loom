@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Package.cpp
+/// @file		Package.cpp
 /// @brief		File for implementation of packaging functions.
 /// @author		Luke Goertzen
 /// @date		2019

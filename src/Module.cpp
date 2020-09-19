@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Module.cpp
+/// @file		Module.cpp
 /// @brief		File for Module implementation.
 /// @author		Luke Goertzen
 /// @date		2019

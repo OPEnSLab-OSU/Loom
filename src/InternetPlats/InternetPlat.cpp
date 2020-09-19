@@ -1,12 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_InternetPlat.cpp
+/// @file		InternetPlat.cpp
 /// @brief		File for InternetPlat implementation.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
+
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 
 #include "InternetPlat.h"
 
@@ -227,4 +229,8 @@ void InternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const
 	udp_dev.write(packet_buffer, NTP_PACKET_SIZE);
 	udp_dev.endPacket();
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 

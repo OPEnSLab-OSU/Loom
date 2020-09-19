@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Sensor.cpp
+/// @file		Sensor.cpp
 /// @brief		File for Sensor implementation.
 /// @author		Luke Goertzen
 /// @date		2019

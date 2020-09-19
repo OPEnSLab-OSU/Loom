@@ -27,10 +27,10 @@ namespace Loom {
 /// - [Dependency: MPU6050_tockn](https://github.com/tockn/MPU6050_tockn)
 /// - [Previous Dependency: MPU6050](https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/MPU6050)
 /// - [Datasheet: MPU6050](https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf)
-///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mpu6050-accelerometer--gyroscope)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mpu_inst-accelerometer--gyroscope)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class L_MPU6050 : public I2CSensor
+class MPU6050 : public I2CSensor
 {
 protected:
 
@@ -86,6 +86,8 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, MPU6050, "MPU6050");
 ///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom

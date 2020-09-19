@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_InternetPlat.h
+/// @file		InternetPlat.h
 /// @brief		File for InternetPlat definition.
 /// @author		Noah Koontz
 /// @date		2019
@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 #pragma once
 
 #include "Module.h"
@@ -161,3 +162,5 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

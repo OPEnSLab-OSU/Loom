@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_RTC.cpp
+/// @file		RTC.cpp
 /// @brief		File for RTC implementation.
 /// @author		Luke Goertzen
 /// @date		2019

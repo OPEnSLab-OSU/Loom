@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Module_Factory.h
+/// @file		Module_Factory.h
 /// @brief		File for LoomFactory, FactoryBase definition and implementations.
 ///				Also includes all the supporting code to build the LoomFactory lookup table.
 /// @author		Luke Goertzen
@@ -11,7 +11,8 @@
 
 #pragma once
 
-#include "Module.h"
+// #include "Module.h"
+#include "Macros.h"
 #include <ArduinoJson.h>
 
 // Need to undef max and min for vector to work
@@ -42,8 +43,8 @@ class Registry
 {
 
 public:
-	using FactoryFunction = T *(*)(); ///< Pointer to function of type //* void T::funct (void) *//
-	using FactoryFunctionJson = Module *(*)(JsonArrayConst);
+	using FactoryFunction = T* (*)(); ///< Pointer to function of type //* void T::funct (void) *//
+	using FactoryFunctionJson = T* (*)(JsonArrayConst);
 	using FactoryPair = struct
 	{										///<  *Needed as an alternative to std::map
 		const char* name;					///< Name of module that will be used to make a new copy
@@ -191,7 +192,7 @@ template <typename T>
 void Registry<T>::print_registry()
 {
 	auto lookUp = getFactoryTable();
-	LPrintln(typeid(T).name()+2, " Factory [", lookUp.size(), " classes]");
+	LPrintln(typeid(T).name(), " Factory [", lookUp.size(), " classes]");
 
 	for (auto elem : lookUp) {
 		LPrintln(" - ", elem.name);

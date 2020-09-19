@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_InternetEthernet.cpp
+/// @file		Internet::Ethernet.cpp
 /// @brief		File for Ethernet implementation.
 /// @author		Noah Koontz
 /// @date		2019
@@ -15,10 +15,6 @@
 #include "Module_Factory.h"
 
 using namespace Loom;
-
-///////////////////////////////////////////////////////////////////////////////
-
-REGISTER(Module, Ethernet, "Ethernet");
 
 ///////////////////////////////////////////////////////////////////////////////
 Ethernet::Ethernet(	
@@ -83,18 +79,18 @@ void Ethernet::connect()
 	pinMode(8, OUTPUT);
 	digitalWrite(8, HIGH);
 	// initialize ethernet shield for Feather
-	Ethernet.init(10);
+	::Ethernet.init(10);
 
 	// clear the write error
 	m_base_client.clearWriteError();
 
-	if (Ethernet.begin(m_mac) == 0) {
+	if (::Ethernet.begin(m_mac) == 0) {
 		print_module_label();
 		LPrintln("Failed to configure Ethernet using DHCP");
 		// try to congifure using IP address instead of DHCP:
-		Ethernet.begin(m_mac, m_ip);
+		::Ethernet.begin(m_mac, m_ip);
 	}
-	else m_ip = Ethernet.localIP();
+	else m_ip = ::Ethernet.localIP();
 	m_is_connected = true;
 
 	if (!m_is_connected) m_client.stop();

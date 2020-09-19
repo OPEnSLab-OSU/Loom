@@ -16,11 +16,7 @@
 using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-
-REGISTER(Module, L_AS7265X, "AS7265X");
-
-///////////////////////////////////////////////////////////////////////////////
-L_AS7265X::L_AS7265X(
+Loom::AS7265X::AS7265X(
 		const byte			i2c_address, 
 		const uint8_t		mux_port,
 		const bool			use_bulb, 
@@ -97,11 +93,11 @@ L_AS7265X::L_AS7265X(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-L_AS7265X::L_AS7265X(JsonArrayConst p)
-	: L_AS7265X(EXPAND_ARRAY(p, 6) ) {}
+Loom::AS7265X::AS7265X(JsonArrayConst p)
+	: AS7265X(EXPAND_ARRAY(p, 6)) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_AS7265X::print_measurements() const
+void Loom::AS7265X::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -115,7 +111,7 @@ void L_AS7265X::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_AS7265X::measure()
+void Loom::AS7265X::measure()
 {
 	if (use_bulb) {
 		inst_AS7265X.takeMeasurementsWithBulb();
@@ -149,7 +145,7 @@ void L_AS7265X::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void L_AS7265X::package(JsonObject json)
+void Loom::AS7265X::package(JsonObject json)
 {
 	JsonObject data = get_module_data_object(json, module_name);
 	data["a"] = uv[0];
