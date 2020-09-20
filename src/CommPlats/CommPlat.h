@@ -138,9 +138,8 @@ public:
 	/// It will merge all the small packages into one big package
 	/// @param[in]	json			The header of the package
 	///	@param[in]	loop			How many small packages are coming
-	///	@param[out] max_wait_time	Maximum number of milliseconds to block for
 	/// @return True if all package are receive and merged, false otherwise
-	bool			merge_json(JsonObject json, const uint8_t loop, const uint max_wait_time);
+	bool			merge_json(JsonObject json, const uint8_t loop);
 
 	/// Send json to a specific address
 	/// @param[in]	json			Json package to send
