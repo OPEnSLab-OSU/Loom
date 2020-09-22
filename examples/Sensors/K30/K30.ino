@@ -45,7 +45,7 @@ void setup() {
   Loom.parse_config(json_config);
   Loom.print_config();
 
-  //Assign pins 10 & 11 SERCOM functionality
+  //Assign pins 12 & 11 SERCOM functionality
   pinPeripheral(11, PIO_SERCOM);
   pinPeripheral(12, PIO_SERCOM);
   
