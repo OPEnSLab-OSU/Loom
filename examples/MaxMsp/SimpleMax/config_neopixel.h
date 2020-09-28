@@ -13,7 +13,7 @@
 		{\
 			'name':'Neopixel',\
 			'params':[true,true,true]\
-		}\
+		},\
 		{\
 			'name':'WiFi',\
 			'params':[\
