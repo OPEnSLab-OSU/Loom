@@ -394,11 +394,12 @@ public:
 	T* get(const uint8_t idx=0) const {
 		uint8_t count = 0;
 		for (auto module : modules) {
-			if ( dynamic_cast<T*>(module) ) {
+			auto tmp = dynamic_cast<T*>(module);
+			if ( tmp ) {
 				if (count < idx) {
 					count++;
 				} else {
-					return dynamic_cast<T*>(module);
+					return tmp;
 				}
 			}
 		}
