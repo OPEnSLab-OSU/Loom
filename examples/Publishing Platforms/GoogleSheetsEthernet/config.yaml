@@ -1,0 +1,23 @@
+general:
+  name: Device
+  instance: 1
+  interval: 10000
+components:
+  - name: Analog
+  - name: Digital
+  - name: Ethernet
+    params:
+      - Ether1
+      - - <your-mac-address>
+      - - 192
+        - 168
+        - 0
+        - 1
+  - name: GoogleSheets
+    params:
+      - Goog
+      - 7001
+      - /macros/s/<your-script-id>/exec
+      - <your-sheet-id>
+      - true # true to autoname tab
+      - <your-tab-name> # not used if previous param is true

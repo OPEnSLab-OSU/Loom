@@ -1,0 +1,40 @@
+general:
+  name: Hydro
+  instance: 1
+  interval: 500
+components:
+  - name: Analog
+    params:
+      - 8 # Samples
+      - 12 # Resolutiom
+      - false
+      - true # pH probe
+      - true # Turbidity probe
+      - false
+      - false
+      - false
+      - 0
+      - 3 # pH
+      - 0 # Turbidity
+      - 0
+      - 0
+      - 0
+  - name: MS5803
+    params:
+      - 119
+      - 255
+  - name: WiFi
+    params:
+      - ssid # needed
+      - pass # needed
+  - name: MaxSub
+    params:
+      - 7002
+      - true
+  - name: MaxPub
+    params:
+      - 7002
+  - name: TempSync
+    params:
+      - 2110 # MS5803
+      - 2001 # Analog

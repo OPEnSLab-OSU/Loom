@@ -1,0 +1,21 @@
+general:
+  name: Device
+  instance: 1
+  interval: 100
+components:
+  - name: nRF
+    params:
+      - 120
+      - 01
+      - 1
+      - 0
+      - 3
+      - 200
+      - 1
+  - name: SD
+    params:
+      - true
+      - 1000
+      - 10
+      - datafile
+      - false

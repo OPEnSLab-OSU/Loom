@@ -1,0 +1,19 @@
+general:
+  device_name: Device
+  instance_num: 1
+  interval: 3000
+components:
+  - name: Analog
+  - name: Digital
+  - name: WiFi
+    params:
+      - <ssid>
+      - <password>
+  - name: GoogleSheets
+    params:
+      - Goog
+      - 7001
+      - /macros/s/<your-script-id>/exec
+      - <your-sheet-id>
+      - true # true to autoname tab
+      - <your-tab-name> # not used if previous param is true

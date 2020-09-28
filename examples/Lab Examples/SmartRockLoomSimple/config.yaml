@@ -1,0 +1,42 @@
+general:
+  name: Device
+  instance: 1
+components:
+  - name: DS3231
+    params:
+      - 11
+      - true
+  - name: Interrupt_Manager
+    params: default
+  - name: Sleep_Manager
+    params:
+      - true
+      - false
+      - 1
+      - 19
+  - name: Analog
+    params:
+      - 8
+      - 12
+      - true
+      - true
+      - false
+      - false
+      - false
+      - false
+      - 7
+      - 4
+      - 0
+      - 0
+      - 0
+      - 0
+  - name: SD
+    params:
+      - true
+      - 1000
+      - 4
+      - data
+      - true
+  - name: MS5803
+    params:
+      - 119
