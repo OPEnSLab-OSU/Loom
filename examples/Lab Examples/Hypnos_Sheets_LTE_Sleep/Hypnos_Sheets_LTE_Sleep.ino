@@ -1,20 +1,17 @@
 #include <Loom.h>
 
-// Include configuration
-const char* json_config =
-#include "config.h"
-;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::LTE,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > LTE
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+
+using namespace Loom;
+
+Loom::Manager Exec{};
 
 volatile bool rtc_flag = false;
 
@@ -30,21 +27,21 @@ void setup()
 	pinMode(5, OUTPUT);		// Enable control of 3.3V rail
 	pinMode(6, OUTPUT);		// Enable control of 5V rail
 	pinMode(12, INPUT_PULLUP);		// Enable waiting for RTC interrupt, MUST use a pullup since signal is active low
-  pinMode(13, OUTPUT);
+	pinMode(13, OUTPUT);
 
 	//See Above
 	digitalWrite(5, LOW);	// Enable 3.3V rail
 	digitalWrite(6, HIGH);	// Enable 5V rail
-  digitalWrite(13, LOW);
+	digitalWrite(13, LOW);
 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Exec.begin_serial(true);
+	Exec.parse_config(LCONFIG);
+	Exec.print_config();
 
-  delay(5000);
+	delay(5000);
 	// Register an interrupt on the RTC alarm pin
-	Loom.InterruptManager().register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
-  delay(5000);
+	Exec.get<Loom::InterruptManager>().register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
+	delay(5000);
 
 	LPrintln("\n ** Setup Complete ** ");
 	Serial.flush();
@@ -67,18 +64,18 @@ if (rtc_flag) {
 
   // delay(1000);
 
-  Loom.power_up();
+  Exec.power_up();
 }
 
-Loom.measure();
-Loom.package();
-Loom.display_data();
+Exec.measure();
+Exec.package();
+Exec.display_data();
 
-Loom.GoogleSheets().publish();
+Exec.get<Loom::GoogleSheets>().publish();
 
 // set the RTC alarm to a duration of five minutes with TimeSpan
-Loom.InterruptManager().RTC_alarm_duration(TimeSpan(0,0,5,0));
-Loom.InterruptManager().reconnect_interrupt(12);
+Exec.get<Loom::InterruptManager>().RTC_alarm_duration(TimeSpan(0,0,5,0));
+Exec.get<Loom::InterruptManager>().reconnect_interrupt(12);
 
 
 digitalWrite(13, LOW);
@@ -91,8 +88,8 @@ pinMode(10, INPUT);
 
 
 rtc_flag = false;
-Loom.power_down();
-Loom.SleepManager().sleep();
-Loom.power_up();
+Exec.power_down();
+Exec.get<Loom::SleepManager>().sleep();
+Exec.power_up();
 while (!rtc_flag);
 }

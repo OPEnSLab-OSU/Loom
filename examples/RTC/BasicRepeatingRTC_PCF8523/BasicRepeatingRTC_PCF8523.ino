@@ -15,23 +15,17 @@
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
-
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
-
-LoomManager Loom{ &ModuleFactory };
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
 
+using namespace Loom;
+
+Loom::Manager Exec{};
 
 
 #define ALARM_PIN 6
@@ -39,7 +33,7 @@ LoomManager Loom{ &ModuleFactory };
 volatile bool alarmFlag = false;
 volatile int count = 0;
 void alarmISR() { 
-	Loom.InterruptManager().get_RTC_module()->clear_alarms();
+	Exec.get<Loom::InterruptManager>().get_RTC_module()->clear_alarms();
 	count++;
 	alarmFlag = true;
 }
@@ -47,13 +41,13 @@ void alarmISR() {
 
 void setup() 
 { 
-	Loom.begin_LED();
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Exec.begin_LED();
+	Exec.begin_serial(true);
+	Exec.parse_config(LCONFIG);
+	Exec.print_config();
 
-	Loom.InterruptManager().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Loom.InterruptManager().RTC_alarm_duration(TimeSpan(10));
+	Exec.get<Loom::InterruptManager>().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>().RTC_alarm_duration(TimeSpan(10));
 	digitalWrite(LED_BUILTIN, LOW);
 
 	LPrintln("\n ** Setup Complete ** ");
@@ -64,16 +58,16 @@ void loop()
 	if (alarmFlag) {
 		digitalWrite(LED_BUILTIN, HIGH);
 		LPrintln("Alarm triggered, resetting alarm");
-		Loom.pause(1000);
+		Exec.pause(1000);
 		
-		Loom.InterruptManager().RTC_alarm_duration(TimeSpan(10)); 
+		Exec.get<Loom::InterruptManager>().RTC_alarm_duration(TimeSpan(10)); 
 
 		digitalWrite(LED_BUILTIN, LOW);
 		alarmFlag = false;
 	}
 
 	LPrintln("Count: ", count);
-	Loom.PCF8523().print_time();
-	Loom.pause(1000);
+	Exec.get<Loom::PCF8523>().print_time();
+	Exec.pause(1000);
 
 }

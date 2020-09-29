@@ -8,41 +8,34 @@
 
 // In config, instance number is number to set ModuleCore to in Max MSP
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
+// In Tools menu, set:
+// Internet  > WiFi
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Enabled
+// Max       > Enabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::WiFi,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
-> ModuleFactory{};
+using namespace Loom;
 
-LoomManager Loom{ &ModuleFactory };
-
+Loom::Manager Exec{};
 
 
 void setup() 
 { 
-	Loom.begin_LED();
-	Loom.begin_serial(false);
-	Loom.parse_config(json_config);
-	Loom.print_config(true);
+	Exec.begin_LED();
+	Exec.begin_serial(false);
+	Exec.parse_config(LCONFIG);
+	Exec.print_config(true);
 
-	
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
-	Loom.MaxPub().publish();
-	Loom.MaxSub().subscribe();
-	Loom.pause();
+	Exec.measure();
+	Exec.package();
+	Exec.display_data();
+	Exec.get<Loom::MaxPub>().publish();
+	Exec.get<Loom::MaxSub>().subscribe();
+	Exec.pause();
 }

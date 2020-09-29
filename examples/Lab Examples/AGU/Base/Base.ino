@@ -17,16 +17,16 @@
 #include <Loom.h>
 #include "Bootloader.h"
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::WiFi,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > WiFi
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
+
+Loom::Manager Exec{};
 
 bool did_serialize = false;
 
@@ -55,8 +55,8 @@ void setup() {
 	
 	// start Loom!
 	if (did_serialize) {
-		Loom.set_print_verbosity(Verbosity::V_LOW);
-		Loom.parse_config_json(doc.as<JsonObject>());
+		Exec.set_print_verbosity(Verbosity::V_LOW);
+		Exec.parse_config_json(doc.as<JsonObject>());
 		LPrintln("\n ** Setup Complete ** ");
 	}
 	else {
@@ -69,15 +69,15 @@ void loop() {
 	Bootloader::run_bootloader();
 	if (did_serialize) {
 		// put your main code here, to run repeatedly:
-		Loom.measure();
-		Loom.package();
-		Loom.display_data();
-		Loom.OLED().log();
-		Loom.SDCARD().log();
-		Loom.GoogleSheets().publish();
+		Exec.measure();
+		Exec.package();
+		Exec.display_data();
+		Exec.get<Loom::OLED>().log();
+		Exec.get<Loom::SD>().log();
+		Exec.GoogleSheets().publish();
 
 		/*
-		if(!Loom.Spool().publish()){
+		if(!Exec.get<Loom::Spool>().publish()){
 			pinMode(13, OUTPUT);
 			digitalWrite(13, HIGH);
 			Serial.println("Broke! press any key to continue...");
@@ -87,6 +87,6 @@ void loop() {
 	}
 
 	const uint32_t start = millis();
-	while (millis() - start < static_cast<uint32_t>(Loom.get_interval())) 
+	while (millis() - start < static_cast<uint32_t>(Exec.get_interval())) 
 		Bootloader::run_bootloader();
 }

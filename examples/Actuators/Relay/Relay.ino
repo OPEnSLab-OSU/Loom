@@ -10,29 +10,23 @@
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Enabled
+// Max       > Disabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+using namespace Loom;
 
-LoomManager Loom{ &ModuleFactory };
-
+Loom::Manager Exec{};
 
 
 void setup() 
 { 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Exec.begin_serial(true);
+	Exec.parse_config(LCONFIG);
+	Exec.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -40,8 +34,8 @@ void setup()
 
 void loop() 
 {
-	Loom.Relay().set(true);
-	Loom.pause(2000);
-	Loom.Relay().set(false);
-	Loom.pause(2000);
+	Exec.get<Loom::Relay>().set(true);
+	Exec.pause(2000);
+	Exec.get<Loom::Relay>().set(false);
+	Exec.pause(2000);
 }

@@ -21,21 +21,17 @@
 #include <Adafruit_SleepyDog.h>
 #include <Loom.h>
 
-// Include configuration
-const char* json_config =
-#include "config.h"
-;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Enabled
+// Max       > Enabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
+
+Loom::Manager Exec{};
 
 //This is the max amount of time that the Sleepy Dog library allows for napping, anything above this will be lowered down to 16000
 //You can change this value to anything you'd like, so long as it's under 16000
@@ -44,9 +40,9 @@ uint16_t ms = 16000;
 
 void setup()
 {
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Exec.begin_serial(true);
+	Exec.parse_config(LCONFIG);
+	Exec.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -54,27 +50,27 @@ void setup()
 
 void loop()
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
+	Exec.measure();
+	Exec.package();
+	Exec.display_data();
 
 
-  //This is where the napping process starts
+	//This is where the napping process starts
 	LPrintln("Detaching USB Device");
-  Serial.end();
-  USBDevice.detach();
+	Serial.end();
+	USBDevice.detach();
 
-  // Sleep, with max time of 16000 milliseconds
+	// Sleep, with max time of 16000 milliseconds
 	LPrintln("Napping");
-  uint16_t sleepMS = Watchdog.sleep( (ms <= 16000) ? ms : 16000);
+	uint16_t sleepMS = Watchdog.sleep( (ms <= 16000) ? ms : 16000);
 
-  //This is what occurs after waking up from the nap
-  USBDevice.attach();
-  Serial.begin(SERIAL_BAUD); //Serial Baud Rate is defined in Loom, you don't have to worry about it
+	//This is what occurs after waking up from the nap
+	USBDevice.attach();
+	Serial.begin(SERIAL_BAUD); //Serial Baud Rate is defined in Loom, you don't have to worry about it
 	LPrintln("Woke up from nap");
 	LPrintln("Slept for");
 	LPrintln(sleepMS);
 	LPrintln(" miliseconds");
 
-  //After reattaching and begining the Serial, loop will start over again
+	//After reattaching and begining the Serial, loop will start over again
 }

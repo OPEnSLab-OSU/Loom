@@ -4,11 +4,11 @@
 // by Loom in the measure(), package() sequence.
 
 // The data is stored in a JsonObject which you can get directly using 
-// 		JsonObject data = Loom.internal_json();
+// 		JsonObject data = Exec.internal_json();
 
-// You can also pass a JsonObject to Loom.package to be filled:
+// You can also pass a JsonObject to Exec.package to be filled:
 // 		JsonObject data;
-// 		Loom.package(data);
+// 		Exec.package(data);
 
 // We recommend the usage shown below if you only need values individual keys.
 // You need the module name and the data key to get the data.
@@ -21,51 +21,45 @@
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Enabled
+// Max       > Enabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
-> ModuleFactory{};
+using namespace Loom;
 
-LoomManager Loom{ &ModuleFactory };
-
+Loom::Manager Exec{};
 
 
 void setup() 
 { 
-	Loom.begin_LED();
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Exec.begin_LED();
+	Exec.begin_serial(true);
+	Exec.parse_config(LCONFIG);
+	Exec.print_config();
 
 
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
+	Exec.measure();
+	Exec.package();
+	Exec.display_data();
 
 	// Get analog A0 value
-	LPrintln("A0 Val: ", Loom.get_data_as<int>("Analog", "A0") );
+	LPrintln("A0 Val: ", Exec.get_data_as<int>("Analog", "A0") );
 	// Get analog casting to float
-	LPrintln("A0 Val: ", Loom.get_data_as<float>("Analog", "A0") );
+	LPrintln("A0 Val: ", Exec.get_data_as<float>("Analog", "A0") );
 	
 	// Get battery value
-	LPrintln("Vbat Val: ", Loom.get_data_as<float>("Analog", "Vbat") );
+	LPrintln("Vbat Val: ", Exec.get_data_as<float>("Analog", "Vbat") );
 	
 	// Get digital 6 value
-	LPrintln("D6 Val: ", Loom.get_data_as<int>("Digital", "6") );
+	LPrintln("D6 Val: ", Exec.get_data_as<int>("Digital", "6") );
 
 	// Try to get values that don't exist
-	LPrintln("Unknown Val 1: ", Loom.get_data_as<int>("Analog", "Unknown") );
-	LPrintln("Unknown Val 2: ", Loom.get_data_as<float>("Unknown", "Key") );
-	LPrintln("Unknown Val 3: ", Loom.get_data_as<const char*>("AlsoUnknown", "Data") );
+	LPrintln("Unknown Val 1: ", Exec.get_data_as<int>("Analog", "Unknown") );
+	LPrintln("Unknown Val 2: ", Exec.get_data_as<float>("Unknown", "Key") );
+	LPrintln("Unknown Val 3: ", Exec.get_data_as<const char*>("AlsoUnknown", "Data") );
 }
 
 void loop() 

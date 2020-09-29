@@ -23,23 +23,16 @@
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Enabled
+// Max       > Enabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
-> ModuleFactory{};
+using namespace Loom;
 
-LoomManager Loom{ &ModuleFactory };
-
-
+Loom::Manager Exec{};
 
 
 #define ALARM_PIN 6		// Wire interrupt on RTC to this pin
@@ -56,6 +49,7 @@ void alarmISR() {
 	alarmFlag = true;
 	// LPrintln("\n\n", "Alarm went off", "\n");
 }
+
 void reedISR() { 
 	// detachInterrupt(digitalPinToInterrupt(ALARM_PIN)); 
 	detachInterrupt(digitalPinToInterrupt(REED_PIN));
@@ -67,20 +61,20 @@ void reedISR() {
 
 void setup() 
 {
-	Loom.begin_LED();
-	Loom.flash_LED(10, 200, 200, true);
-	Loom.begin_serial();
+	Exec.begin_LED();
+	Exec.flash_LED(10, 200, 200, true);
+	Exec.begin_serial();
 
 	pinMode(10, OUTPUT);   
 
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Exec.parse_config(LCONFIG);
+	Exec.print_config();
 
 	// pinMode(ALARM_PIN, INPUT_PULLUP);
 	// pinMode(REED_PIN, INPUT_PULLUP);
 
-	Loom.InterruptManager().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Loom.InterruptManager().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -94,22 +88,21 @@ void loop()
 	digitalWrite(LED_BUILTIN, HIGH);
 
 	digitalWrite(10, HIGH);
-	Loom.pause(200);
+	Exec.pause(200);
 
-	Loom.measure();
+	Exec.measure();
 
 	digitalWrite(10, LOW);
 
-	Loom.package();
-	Loom.add_data("wakeType", "type", alarmFlag ? "alarm" : "reed");
-	Loom.display_data();
-	Loom.SDCARD().log();
+	Exec.package();
+	Exec.add_data("wakeType", "type", alarmFlag ? "alarm" : "reed");
+	Exec.display_data();
+	Exec.get<Loom::SD>().log();
 
-	
-	Loom.pause(500);
-	Loom.InterruptManager().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Loom.InterruptManager().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
-	Loom.InterruptManager().RTC_alarm_duration(TimeSpan(600));
+	Exec.pause(500);
+	Exec.get<Loom::InterruptManager>().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>().RTC_alarm_duration(TimeSpan(600));
 
 	// delay(4000);
 
@@ -117,7 +110,7 @@ void loop()
 	reedFlag = false;
 
 	// Go to sleep
-	Loom.SleepManager().sleep();
+	Exec.get<Loom::SleepManager>().sleep();
 	// 
 	
 }

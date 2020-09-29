@@ -11,23 +11,16 @@
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+using namespace Loom;
 
-LoomManager Loom{ &ModuleFactory };
-
-
+Loom::Manager Exec{};
 
 
 // Detach interrupt on wake
@@ -37,19 +30,17 @@ void wakeISR() {
 }
 
 
-
 void setup() 
 {
-	Loom.begin_LED();
+	Exec.begin_LED();
 	digitalWrite(LED_BUILTIN, HIGH);
-	// open Serial Monitor to continue, or use Loom.begin_serial();
+	// open Serial Monitor to continue, or use Exec.begin_serial();
 	// to continue without waiting on user 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
+	Exec.begin_serial(true);
+	Exec.parse_config(LCONFIG);
 
 	// Register ISR to call on wake
-	Loom.InterruptManager().register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);
-	
+	Exec.get<Loom::InterruptManager>().register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);
 
 	// LowPower.standby();
 	digitalWrite(LED_BUILTIN, LOW);
@@ -66,11 +57,11 @@ void loop()
 	delay(500);
 
 	// Set an alarm 15 seconds into the future
-	Loom.InterruptManager().RTC_alarm_duration(0, 0, 0, 15);
+	Exec.get<Loom::InterruptManager>().RTC_alarm_duration(0, 0, 0, 15);
 
 	// Go to sleep
 	LPrintln("Going to sleep");
-	Loom.SleepManager().sleep();
+	Exec.get<Loom::SleepManager>().sleep();
 
 	// This wont be seen unless you close and reopen Serial Monitor
 	LPrintln("Awake");

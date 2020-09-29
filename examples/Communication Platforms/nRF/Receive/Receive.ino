@@ -16,42 +16,36 @@
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Disabled
+// Max       > Disabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+using namespace Loom;
 
-LoomManager Loom{ &ModuleFactory };
-
+Loom::Manager Exec{};
 
 
 void setup() 
 { 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.nRF().set_print_verbosity(Verbosity::V_HIGH);
-	Loom.print_config();
+	Exec.begin_serial(true);
+	Exec.parse_config(LCONFIG);
+	Exec.nRF().set_print_verbosity(Verbosity::V_HIGH);
+	Exec.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	if (Loom.nRF().receive()) {
-		Loom.display_data();
-		Loom.SDCARD().log("nrf.csv");
+	if (Exec.get<Loom::nRF>().receive()) {
+		Exec.display_data();
+		Exec.get<Loom::SD>().log("nrf.csv");
 	}
 
-	Loom.pause();	// Pause according to 'interval' in config
+	Exec.pause();	// Pause according to 'interval' in config
 					// This controls the frequency of checking
 					// for incoming data
 

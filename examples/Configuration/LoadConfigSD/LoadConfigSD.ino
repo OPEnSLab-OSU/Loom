@@ -4,7 +4,7 @@
 
 // Make sure your SD Featherwing or breakout is setup correctly, an SD card
 // inserted and stores a configuration in a file with a name matching what is 
-// used in Loom.parse_config_SD() below.
+// used in Exec.parse_config_SD() below.
 
 // If the device fails to load the SD configuration, it will default to the 
 // configuration in the config.h file .
@@ -14,8 +14,8 @@
 // instantiate new ones according to the configuration on the SD card.
 
 // The lines:
-// 		if ( !Loom.parse_config_SD("config.txt") ) {
-// 			Loom.parse_config(json_config);
+// 		if ( !Exec.parse_config_SD("config.txt") ) {
+// 			Exec.parse_config(LCONFIG);
 //		}
 // are the core part of this example, and all that you would have to add to a 
 // different example to add SD config support
@@ -26,47 +26,41 @@
 
 #include <Loom.h>
 
-// Include configuration
-// Optional if reading config from SD
-// The following is what can be used if SD config not found
-const char* json_config = 
-#include "config.h"
-;
+// LCONFIG is used if SD config not found
 
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Enabled
+// Max       > Enabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
 
+Loom::Manager Exec{};
 
 
 void setup() 
 { 
-	Loom.begin_serial(true);
+	Exec.begin_serial(true);
 
 	// Get config from SD
-	// Else use '#include'd json_config above
-	if ( !Loom.parse_config_SD("config.txt") ) {
-		Loom.parse_config(json_config);
+	// Else use LCONFIG
+	if ( !Exec.parse_config_SD("config.txt") ) {
+		Exec.parse_config(LCONFIG);
 	}
 	
-	Loom.print_config();
+	Exec.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	// Loom.measure();
-	// Loom.package();
-	// Loom.display_data();
+	// Exec.measure();
+	// Exec.package();
+	// Exec.display_data();
 
 	// delay(2000);
 }

@@ -21,37 +21,36 @@
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
 
-LoomManager Loom{ &ModuleFactory };
+
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Disabled
+// Max       > Disabled
+
+
+using namespace Loom;
+
+Loom::Manager Exec{};
 
 
 
 void setup() 
 { 
-	Loom.begin_serial();
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Exec.begin_serial();
+	Exec.parse_config(LCONFIG);
+	Exec.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	if (Loom.LoRa().receive_blocking(5000)) {
-		Loom.display_data();
-		Loom.SDCARD().log("received.csv");
+	if (Exec.get<Loom::LoRa>().receive_blocking(5000)) {
+		Exec.display_data();
+		Exec.get<Loom::SD>().log("received.csv");
 	}
 }

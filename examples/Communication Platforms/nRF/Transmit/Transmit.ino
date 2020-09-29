@@ -17,43 +17,38 @@
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Disabled
+// Max       > Disabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
 
+Loom::Manager Exec{};
 
 
 void setup() 
 { 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.nRF().set_print_verbosity(Verbosity::V_HIGH);
-	Loom.print_config();
+	Exec.begin_serial(true);
+	Exec.parse_config(LCONFIG);
+	Exec.get<Loom::nRF>().set_print_verbosity(Verbosity::V_HIGH);
+	Exec.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
+	Exec.measure();
+	Exec.package();
+	Exec.display_data();
 
 	// Select on of the following
-	// Loom.nRF().send(01);		// Send to specific address
-	Loom.nRF().broadcast();		// Broadcast to all nRF devices
+	// Exec.nRF().send(01);		// Send to specific address
+	Exec.get<Loom::nRF>().broadcast(); // Broadcast to all nRF devices
 
-	Loom.pause();	// Delay between interations set with 'interval' in config
+	Exec.pause();	// Delay between interations set with 'interval' in config
 }

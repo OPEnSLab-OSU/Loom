@@ -11,7 +11,7 @@
 // The size of each configuration is listed at the end of setup
 // Note that the pretty formatting takes up more space in memory
 
-// Change the variable passed to Loom.parse_config() to include a different 
+// Change the variable passed to Exec.parse_config() to include a different 
 // configuration
 
 // The purpose of this example is simply the different include methods, so
@@ -39,32 +39,32 @@ const char* json_config_pretty =
 #include "json_config_pretty.h"
 ;
 
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Enabled
+// Max       > Enabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
-> ModuleFactory{};
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
 
+Loom::Manager Exec{};
 
 
 void setup() 
 {
-	Loom.begin_serial(true);
+	Exec.begin_serial(true);
 
 	LPrintln("\nConfig:\n", json_config, "\n");
 
 	// Parse one of the configs by selecting one of the below 3 lines
-	// Loom.parse_config(json_config);
-	// Loom.parse_config(json_config_compact);
-	Loom.parse_config(json_config_pretty);
+	// Exec.parse_config(LCONFIG);
+	// Exec.parse_config(json_config);
+	// Exec.parse_config(json_config_compact);
+	Exec.parse_config(json_config_pretty);
 
-	Loom.print_config();
+	Exec.print_config();
 
 	LPrintln("strlen json_config: ", strlen(json_config));
 	LPrintln("strlen json_config_compact: ", strlen(json_config_compact));

@@ -4,7 +4,7 @@
 
 // The only difference between this example an 'Basic' is the LoomFactory
 // settings, the line: 
-//		Loom.GoogleSheets().publish();
+//		Exec.GoogleSheets().publish();
 // and the configuration, enabling logging to Google Sheets.
 
 // In the config, you need:
@@ -18,42 +18,35 @@
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
+// In Tools menu, set:
+// Internet  > All
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Enabled
+// Max       > Disabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::All,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+using namespace Loom;
 
-LoomManager Loom{ &ModuleFactory };
-
+Loom::Manager Exec{};
 
 
 void setup() 
 {
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Exec.begin_serial(true);
+	Exec.parse_config(LCONFIG);
+	Exec.print_config();
 
 	LPrintln("\n ** Setup Complete ** "); 
 }
 
 
-
 void loop() 
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
+	Exec.measure();
+	Exec.package();
+	Exec.display_data();
 
-	Loom.GoogleSheets().publish();
+	Exec.get<Loom::GoogleSheets>().publish();
 
-	Loom.pause();
+	Exec.pause();
 }

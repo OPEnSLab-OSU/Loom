@@ -30,29 +30,23 @@
 
 #include "LoomJSON.h"
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Disabled
+// Max       > Disabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+using namespace Loom;
 
-LoomManager Loom{ &ModuleFactory };
-
+Loom::Manager Exec{};
 
 
 void setup() 
 { 
-	Loom.begin_serial();
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Exec.begin_serial();
+	Exec.parse_config(LCONFIG);
+	Exec.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -63,10 +57,10 @@ void loop()
     Loom_Base in_data;
 
     // This will wait an package for 5 seconds. If nothing comes, then it will wait 5 seconds again
-	if (Loom.LoRa().receive_blocking_raw(in_data.raw, sizeof(in_data.raw), 5000) {
-        JsonObject internal_json = Loom.internal_json(true);
+	if (Exec.get<Loom::LoRA>().receive_blocking_raw(in_data.raw, sizeof(in_data.raw), 5000)) {
+		JsonObject internal_json = Exec.internal_json(true);
         struct_to_json(in_data, internal_json);
-        Loom.display_data();
-		Loom.SDCARD().log("received.csv");
+        Exec.display_data();
+		Exec.get<Loom::SD>().log("received.csv");
 	}
 }
