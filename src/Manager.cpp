@@ -29,8 +29,16 @@
 #include <ArduinoJson.h>
 #include <SdFat.h>
 #include <algorithm>
+#include <ranges>
 
 using namespace Loom;
+
+///////////////////////////////////////////////////////////////////////////////
+
+auto module_exists = [](Module* module) { return module != nullptr; };
+auto module_active = [](Module* module) { return module->get_active(); };
+
+namespace views = std::views;
 
 ///////////////////////////////////////////////////////////////////////////////
 const char* Manager::enum_device_type_string(const DeviceType t)
@@ -81,7 +89,7 @@ void Manager::print_config(const bool print_modules_config)
 
 	// Print managed module's configs
 	if (print_modules_config) {
-		for (auto module : modules) {
+		for (auto module : modules | views::filter(module_exists)) {
 			module->print_config();
 		}
 	}
@@ -116,7 +124,7 @@ void Manager::add_module(Module* module)
 		return;
 	}
 
-	LPrintln("Adding Module: ", ((Module*)module)->get_module_name() );
+	LPrintln("Adding Module: ", module->get_module_name() );
 
 	modules.emplace_back(module);
 	module->link_device_manager(this);
@@ -130,15 +138,8 @@ void Manager::list_modules() const
 
 	// auto last_category = Module::Category::Unknown;
 
-	for (auto module : modules) {
-		// auto category = module->category();
-		// if ( category != last_category ) {
-		// 	LPrintln("\t", Module::enum_category_string(category), "s");//, " (", modules.size(), "):");
-		// 	last_category = category;
-		// }
-		if ( module != nullptr ) {
-			LPrintln( "\t\t[", module->get_active() ? "+" : "-" , "] ", module->get_module_name() );
-		}
+	for (auto module : modules | views::filter(module_exists) ) {
+		LPrintln( "\t\t[", module->get_active() ? "+" : "-" , "] ", module->get_module_name() );
 	}
 }
 
@@ -168,10 +169,8 @@ void Manager::set_print_verbosity(const Verbosity v, const bool set_modules)
 	print_verbosity = v;
 
 	if (set_modules) {
-		for (auto module : modules) {
-			if ( (module != nullptr) && ( ((Module*)module)->get_active() ) ){
-				((Module*)module)->set_print_verbosity(v);
-			}
+		for (auto module : modules | views::filter(module_exists) | views::filter(module_active)) {
+			module->set_print_verbosity(v);
 		}
 	}
 }
@@ -182,10 +181,8 @@ void Manager::set_package_verbosity(const Verbosity v, const bool set_modules)
 	package_verbosity = v;
 
 	if (set_modules) {
-		for (auto module : modules) {
-			if ( (module != nullptr) && ( ((Module*)module)->get_active() ) ){
-				((Module*)module)->set_package_verbosity(v);
-			}
+		for (auto module : modules | views::filter(module_exists) | views::filter(module_active)) {
+			module->set_package_verbosity(v);
 		}
 	}
 }
@@ -193,33 +190,26 @@ void Manager::set_package_verbosity(const Verbosity v, const bool set_modules)
 ///////////////////////////////////////////////////////////////////////////////
 void Manager::measure()
 {
-	for (auto module : modules) {
-		if ( !module->get_active() ) continue;
-
-		// if ( module->category() == Module::Category::Sensor ) {
+	for (auto module : modules | views::filter(module_exists) | views::filter(module_active)) {
 		// Not within LOOM_INCLUDE_SENSORS as Analog and Digital are always enabled
 		if (dynamic_cast<Loom::Sensor*>(module)) {
 			((Sensor*)module)->measure();
 		}
 
 #ifdef LOOM_INCLUDE_SENSORS
-		//else if (module->get_module_type() == Module::Type::Multiplexer) ) {
 		else if (dynamic_cast<Loom::Multiplexer*>(module) ) {
 			((Multiplexer*)module)->measure();
 		}
-		// else if (module->get_module_type() == Module::Type::TempSync) {
 		// else if (dynamic_cast<Loom::TempSync*>(module)) {
 		// 	((TempSync*)module)->measure();
 		// }
 #endif // ifdef LOOM_INCLUDE_SENSORS
 
 #if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
-		// else if (module->get_module_type() == Module::Type::NTP) {
 		else if (dynamic_cast<Loom::NTPSync*>(module)) {
 			((NTPSync*)module)->measure();
 		}
 #endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
-
 	}
 }
 
@@ -232,10 +222,8 @@ void Manager::package(JsonObject json)
 	// Add a packet number to json
 	add_data("Packet", "Number", packet_number++);
 
-	for (auto module : modules) {
-		if ( (module != nullptr) && ( ((Module*)module)->get_active() ) ){
-			((Module*)module)->package( json );
-		}
+	for (auto module : modules | views::filter(module_exists) | views::filter(module_active)) {
+		module->package(json);
 	}
 }
 
@@ -256,9 +244,9 @@ JsonObject Manager::package()
 ///////////////////////////////////////////////////////////////////////////////
 void Manager::add_device_ID_to_json(JsonObject json)
 {
-	JsonObject timestamp = json.createNestedObject("id");
-	timestamp["name"]		= device_name;
-	timestamp["instance"]	= instance;
+	JsonObject timestamp  = json.createNestedObject("id");
+	timestamp["name"]     = device_name;
+	timestamp["instance"] = instance;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -285,29 +273,13 @@ JsonObject Manager::internal_json(const bool clear)
 
 bool Manager::publish_all(const JsonObject json)
 {
-	// bool result = true;
-	// uint8_t count = 0;
-	// for (auto module : modules) {
-	// 	if ( (module != nullptr) &&
-	// 		 (module->category() == Module::Category::PublishPlat) &&
-	// 		 (module->get_active())
-	// 		) {
-	// 		result &= ((PublishPlat*)module)->publish( json );
-	// 		count++;
-	// 	}
-	// }
-	// return (count > 0) && result;
+	auto is_publish_plat = [](Module *module) { return dynamic_cast<Loom::PublishPlat*>(module) != nullptr; };
 
 	bool result = true;
 	uint8_t count = 0;
-	for (auto module : modules) {
-		if ((module != nullptr) &&
-			(dynamic_cast<PublishPlat*>(module)) &&
-			(module->get_active()))
-		{
-			result &= ((PublishPlat*)module)->publish( json );
-			count++;
-		}
+	for (auto module : modules | views::filter(module_exists) | views::filter(module_active) | views::filter(is_publish_plat) ) {
+		result &= ((PublishPlat*)module)->publish( json );
+		count++;
 	}
 	return (count > 0) && result;
 }
@@ -317,17 +289,13 @@ bool Manager::publish_all(const JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 bool Manager::log_all(const JsonObject json)
 {
+	auto is_log_plat = [](Module *module) { return dynamic_cast<Loom::LogPlat*>(module) != nullptr; };
+
 	bool result = true;
 	uint8_t count = 0;
-	for(auto module : modules) {
-		if( (module!=nullptr) &&
-		// (module->category() == Module::Category::LogPlat) &&
-		(dynamic_cast<Loom::LogPlat*>(module)) &&
-		(module->get_active())
-		){
-			result &= ((LogPlat*)module)->log( json );
-			count++;
-		}
+	for (auto module : modules | views::filter(module_exists) | views::filter(module_active) | views::filter(is_log_plat)) {
+		result &= ((LogPlat*)module)->log( json );
+		count++;
 	}
 	return (count > 0) && result;
 }
@@ -354,11 +322,8 @@ void Manager::dispatch(JsonObject json)
 
 			// Otherwise iterate over modules until module to handle command is found
 			// LPrintln("Try to dispatch to: ", cmd["module"].as<const char*>() );
-			for (auto module : modules) {
-				if ( (module != nullptr) &&
-					 ( ((Module*)module)->get_active() ) &&
-					 ( strcmp(cmd["module"].as<const char*>(), module->get_module_name() ) == 0 )
-					){
+			for (auto module : modules | views::filter(module_exists) | views::filter(module_active)) {
+				if ( strcmp(cmd["module"].as<const char*>(), module->get_module_name() ) == 0 ) {
 					// LPrintln("Found module");
 					if ( module->dispatch( cmd ) ) break; // move to next command
 				}
@@ -418,10 +383,8 @@ void Manager::free_modules()
 void Manager::power_up()
 {
 	// Iterate over list of modules powering them on
-	for (auto module : modules) {
-		if ( module != nullptr ){
-			((Module*)module)->power_up();
-		}
+	for (auto module : modules | views::filter(module_exists)) {
+		module->power_up();
 	}
 }
 
@@ -429,10 +392,8 @@ void Manager::power_up()
 void Manager::power_down()
 {
 	// Iterate over list of modules powering them off
-	for (auto module : modules) {
-		if ( module != nullptr ){
-			((Module*)module)->power_down();
-		}
+	for (auto module : modules | views::filter(module_exists)) {
+		module->power_down();
 	}
 }
 
@@ -451,10 +412,8 @@ void Manager::get_config()
 	// Start array for modules to add config objects to
 	JsonArray components = json.createNestedArray("components");
 
-	for (auto module : modules) {
-		if ( module != nullptr ){
-			((Module*)module)->add_config(json);
-		}
+	for (auto module : modules | views::filter(module_exists)) {
+		module->add_config(json);
 	}
 }
 
