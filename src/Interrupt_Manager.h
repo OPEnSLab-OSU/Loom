@@ -54,7 +54,7 @@ private:
 
 	/// Contains information defining an interrupt's configuration
 	struct IntDetails {
-		uint32_t	pin;
+		int	pin;
 		ISRFuncPtr	ISR;			///< Function pointer to ISR. Set null if no interrupt linked
 		uint32_t		type;			///< Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4
 		ISR_Type	run_type;		///< True if ISR is called directly upon interrupt, false if called next check of flags
@@ -348,6 +348,8 @@ public:
 	/// @param[in]	type	Interrupt type
 	/// @return C-string of interrupt type
 	const static char* interrupt_type_to_string(const uint8_t type);
+
+	uint32_t pin_to_interrupt(uint32_t pin);
 
 
 private:

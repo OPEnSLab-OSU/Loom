@@ -56,7 +56,7 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 	interrupts_enabled = true;
 
 	for (auto i = 0; i < InteruptRange; i++) {
-		int_settings[i] = {0, nullptr, 0, ISR_Type::IMMEDIATE, true};
+		int_settings[i] = {-1, nullptr, 0, ISR_Type::IMMEDIATE, true};
 	}
 	for (auto i = 0; i < MaxTimerCount; i++) {
 		timer_settings[i] = {nullptr, 0, false, false};
@@ -87,10 +87,11 @@ void Loom_Interrupt_Manager::print_config() const
 
 	// print out registered interrupts
 	LPrintln("\tRegistered ISRs     : " );
-	for (auto i = 0; i < int_count; i++) {
-		LPrint("\t\tPin ", int_settings[i].pin, " | ISR: ", (int_settings[i].run_type == ISR_Type::IMMEDIATE) ? "Immediate" : "Check Flag");
-		LPrintln(" | Type: ", interrupt_type_to_string(int_settings[i].type), " | ", (int_settings[i].enabled) ? "Enabled" : "Disabled" );
-
+	for (auto i = 0; i < 16; i++) {
+		if(int_settings[i].pin != -1){
+			LPrint("\t\tPin ", int_settings[i].pin, " | ISR: ", (int_settings[i].run_type == ISR_Type::IMMEDIATE) ? "Immediate" : "Check Flag");
+			LPrintln(" | Type: ", interrupt_type_to_string(int_settings[i].type), " | ", (int_settings[i].enabled) ? "Enabled" : "Disabled" );
+		}
 	}
 
 	// LPrint out registered timers
@@ -169,14 +170,14 @@ void Loom_Interrupt_Manager::run_pending_ISRs() {
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::set_enable_interrupt(const uint32_t pin, const bool state)
 {
-	int i;
-	for(i = 0; i < int_count; i++){
-		if(int_settings[i].pin == pin){
-			int_settings[i].enabled = state;
-			break;
-		}
+	int i = pin_to_interrupt(pin);
+	if(i == 16) {
+		print_module_label();
+		LPrintln("Error: Pin ", pin, " is not valid");
+		return;
 	}
-	if(int_count == i){
+	if(int_settings[i].pin == pin) int_settings[i].enabled = state;
+	else{
 		print_module_label();
 		LPrintln("Error: Pin ", pin, " has not been registered yet");
 	}
@@ -185,25 +186,26 @@ void Loom_Interrupt_Manager::set_enable_interrupt(const uint32_t pin, const bool
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::register_ISR(const uint32_t pin, const ISRFuncPtr ISR, const uint32_t signal_type, const ISR_Type run_type)
 {
-	int i;
-	print_module_label();
-	LPrint("Registering ISR on pin ", pin);
-	LPrint(" to be triggered on ", signal_type);
-	LPrintln(" and is ", (run_type==ISR_Type::IMMEDIATE) ? "immediate" : "delay" );
+	int i = pin_to_interrupt(pin);
+	if(i == 16) {
+		print_module_label();
+		LPrintln("Error: Pin ", pin, " is not valid");
+		return;
+	}
 
 	// Save interrupt details
-	for(i = 0; i < int_count; i++){
-		if(int_settings[i].pin == pin){
-				int_settings[i] = { pin, ISR, signal_type, run_type, (ISR) ? true : false };
-				break;
-		}
-	}
-	if(i == int_count) {
+	if(int_settings[i].pin == pin || int_settings[i].pin == -1){
+		print_module_label();
+		LPrint("Registering ISR on pin ", pin);
+		LPrint(" to be triggered on ", signal_type);
+		LPrintln(" and is ", (run_type==ISR_Type::IMMEDIATE) ? "immediate" : "delay" );
 		int_settings[i] = { pin, ISR, signal_type, run_type, (ISR) ? true : false };
-		int_count++;
 	}
-
-
+ 	else{
+		print_module_label();
+		LPrintln("Error: Pin ", pin, " cannot be attached since it conflicts with another interrupt pin");
+		return;
+	}
 
 	// Set pin mode
 	pinMode(pin, INPUT_PULLUP);
@@ -229,20 +231,20 @@ void Loom_Interrupt_Manager::register_ISR(const uint32_t pin, const ISRFuncPtr I
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Interrupt_Manager::reconnect_interrupt(const uint32_t pin)
 {
-	int i;
-	IntDetails settings;
-	for(i = 0; i < int_count; i++){
-		if(int_settings[i].pin == pin){
-	 		settings = int_settings[i];
-			break;
-		}
+	int i = pin_to_interrupt(pin);
+	if(i == 16) {
+		print_module_label();
+		LPrintln("Error: Pin ", pin, " is not valid");
+		return false;
 	}
-
-	if(i == int_count) {
+	IntDetails settings;
+	if(int_settings[i].pin == pin) settings = int_settings[i];
+	else{
 		print_module_label();
 		LPrintln("Error: Pin ", pin, " has not been registered yet");
 		return false;
 	}
+
 
 	// Set pin mode
 	// pinMode(pin, INPUT_PULLUP);  // was causing freezing
@@ -269,7 +271,7 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 	if (interrupts_enabled) {
 
 		// For each interrupt pin
-		for (int i = 0; i < int_count; i++) {
+		for (int i = 0; i < 16; i++) {
 
 			// If pin enabled and bottom half ISR provided
 			// ISR will be Null if no interrupt on that pin,
@@ -299,19 +301,22 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::interrupt_reset(const uint32_t pin)
 {
-	int i;
+	int i = pin_to_interrupt(pin);
+	if(i == 16) {
+		print_module_label();
+		LPrintln("Error: Pin ", pin, " is not valid");
+		return;
+	}
+
 	detachInterrupt(digitalPinToInterrupt(pin));
 	delay(20);
 
 
-	for(i = 0; i < int_count; i++){
-		if (int_settings[i].pin == pin && int_settings[i].ISR != nullptr) {
-			// Attach interrupt with specified type
-			attachInterrupt(digitalPinToInterrupt(pin), int_settings[i].ISR, (int_settings[i].type<5) ? int_settings[i].type : 0 );
-			break;
-		}
+	if (int_settings[i].pin == pin && int_settings[i].ISR != nullptr) {
+		// Attach interrupt with specified type
+		attachInterrupt(digitalPinToInterrupt(pin), int_settings[i].ISR, (int_settings[i].type<5) ? int_settings[i].type : 0 );
 	}
-	if(i == int_count){
+	else {
 		print_module_label();
 		LPrintln("Error: Pin ", pin, " has not been registered yet");
 	}
@@ -509,5 +514,24 @@ void Loom_Interrupt_Manager::unregister_internal_timer()
 	internal_timer.repeat	= false;
 	internal_timer.enabled	= false;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+uint32_t Loom_Interrupt_Manager::pin_to_interrupt(uint32_t pin){
+	if(pin == 11) return 0;
+	else if(pin == 13) return 1;
+	else if(pin == 10 || pin == A0 || pin == A5) return 2;
+	else if(pin == 12) return 3;
+	else if(pin == 6 || pin == A3) return 4;
+	else if(pin == A4) return 5;
+	else if(pin == SDA) return 6;
+	else if(pin == 9 || pin == SCL) return 7;
+	else if(pin == A1) return 8;
+	else if(pin == A2) return 9;
+	else if(pin == 23 || pin == 1) return 10;
+	else if(pin == 24 || pin == 0) return 11;
+	else if(pin == 5) return 15;
+	else return 16;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
