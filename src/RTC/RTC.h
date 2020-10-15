@@ -48,6 +48,14 @@ protected:
 	TimeZone	timezone;				///< The TimeZone to use
 
 	bool		use_local_time;			///< Whether or not use local time, else UTC time
+	bool		customize_start_time;
+	uint16_t	new_year;
+	uint8_t		new_month;
+	uint8_t		new_day;
+	uint8_t		new_hour;
+	uint8_t		new_min;
+	DateTime	new_time;
+
 
 	bool		converted;				///< Whether or not converted daylight saving / summer time or not
 
@@ -70,12 +78,24 @@ public:
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	timezone		Which timezone device is in
 	/// @param[in]	use_local_time	True for local time, false for UTC time
+	/// @param[in]	customize_start_time True for customize UTC time, false for complie time
+	/// @param[in]	new_year		The new year for the customize time
+	/// @param[in]	new_month		The new month for the customize time
+	/// @param[in]	new_day			The new day for the customize time
+	/// @param[in] 	new_hour		The new hour for the customize time
+	/// @param[in]	new_min			The new minutes for the customize time
 	LoomRTC(
 			LoomManager* manager,
 			const char*				module_name,
 			const LoomModule::Type	module_type,
 			TimeZone			timezone,
-			const bool				use_local_time
+			const bool				use_local_time,
+			const bool				customize_start_time,
+			const uint16_t			new_year,
+			const uint8_t			new_month,
+			const uint8_t			new_day,
+			const uint8_t			new_hour,
+			const uint8_t			new_min
 		);
 
 	/// Destructor
@@ -97,6 +117,10 @@ public:
 	/// @param[in]	time	Time to set to
 	/// @param[in]	is_utc	True if 'time' is in UTC, false if local
 	void			time_adjust(const DateTime time, const bool is_utc=true);
+
+	/// Set time based on user input time from the config
+	/// The user input time must be based on UTC, not Local Time
+	void 			customize_complie_time();
 
 	/// Get timestamp
 	/// @param[out]	header		Column header(s) of timestamp element

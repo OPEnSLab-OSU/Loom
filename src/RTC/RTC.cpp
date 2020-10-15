@@ -127,13 +127,27 @@ LoomRTC::LoomRTC(
 		const char*							module_name,
 		const LoomModule::Type	module_type,
 		TimeZone					timezone,
-		const bool							use_local_time
+		const bool							use_local_time,
+		const bool					customize_start_time,
+		const uint16_t			new_year,
+		const uint8_t			new_month,
+		const uint8_t			new_day,
+		const uint8_t			new_hour,
+		const uint8_t			new_min
 	) 
 	: LoomModule(manager, module_name, module_type )
 	, timezone(timezone)
 	, use_local_time(use_local_time)
 	, converted(false)
+	, customize_start_time(customize_start_time)
+	, new_year(new_year)
+	, new_month(new_month)
+	, new_day(new_day)
+	, new_hour(new_hour)
+	, new_min(new_min)
+	, new_time(0)
 	, local_time(0)
+
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -283,6 +297,16 @@ void LoomRTC::get_timestamp(char* header, char* timestamp, const char delimiter,
 			strcpy(timestamp, ""); 
 	}
 }
+///////////////////////////////////////////////////////////////////////////////
+void LoomRTC::customize_complie_time(){
+	if(customize_start_time){
+		print_module_label();
+		LPrintln("Changing time to user input time");
+		new_time = DateTime(new_year, new_month, new_day, new_hour, new_min, 0);
+		_adjust(new_time);
+		print_time();
+	}
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomRTC::init()
@@ -296,6 +320,10 @@ void LoomRTC::init()
 	print_module_label();
 	LPrintln("Current Time (before possible reset)");
 	print_time();
+	
+	// If the user enter a certain UTC time, then it will adjust to that time
+	customize_complie_time();
+
 
 	// The following section checks if RTC is running, else sets 
 	// the time to the time that the sketch was compiled
@@ -321,6 +349,9 @@ void LoomRTC::set_rtc_to_compile_time()
 	print_module_label();
 	LPrintln("Time set to compile time:");
 	print_time();
+
+	// If the user enter a certain UTC time, then it will adjust to that time
+	customize_complie_time();
 
 	// Adjust to UTC time as default time
 	convert_local_to_utc();
