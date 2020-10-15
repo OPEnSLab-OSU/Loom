@@ -157,11 +157,11 @@ void LoomRTC::package(JsonObject json)
 	package_json_timestamp(json, datestring, timestring);
 	if (use_local_time){
 		local_rtc();
-		JsonObject data = get_module_data_object(json, "Local Time");
+		JsonObject data = get_module_data_object(json, "LocalTime");
 		sprintf(local_datestring, "%d/%d/%d", local_time.year(), local_time.month(), local_time.day());
 		sprintf(local_timestring, "%d:%d:%d", local_time.hour(), local_time.minute(), local_time.second());
-		data["date"] = local_datestring;
-		data["time"] = local_timestring;
+		data["Date"] = local_datestring;
+		data["Time"] = local_timestring;
 		data["TimeZone"] = enum_timezone_string(timezone);
 	}
 }
