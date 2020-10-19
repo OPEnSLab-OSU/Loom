@@ -300,11 +300,18 @@ void LoomRTC::get_timestamp(char* header, char* timestamp, const char delimiter,
 ///////////////////////////////////////////////////////////////////////////////
 void LoomRTC::customize_complie_time(){
 	if(customize_start_time){
-		print_module_label();
-		LPrintln("Changing time to user input time");
+		DateTime last_time = now();
 		new_time = DateTime(new_year, new_month, new_day, new_hour, new_min, 0);
-		_adjust(new_time);
-		print_time();
+		
+		// Convert the time into approximate minute units: 518400 = 12 * 30 * 24 * 60
+		int x = 518400 * last_time.year() + 43200 * last_time.month() + 1440 * last_time.day() + 60 * last_time.hour() + last_time.minute();
+		int y = 518400 * new_time.year() + 43200 * new_time.month() + 1440 * new_time.day() + 60 * new_time.hour() + new_time.minute();
+		
+		if(x <= y){
+			print_module_label();
+			LPrintln("Changing time to user input time");
+			_adjust(new_time);
+		}
 	}
 }
 
