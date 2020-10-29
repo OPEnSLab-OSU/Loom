@@ -13,7 +13,6 @@
 #include "../InternetPlats/InternetPlat.h"
 #include "../Interrupt_Manager.h"
 
-
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
@@ -128,25 +127,14 @@ LoomRTC::LoomRTC(
 		const LoomModule::Type	module_type,
 		TimeZone					timezone,
 		const bool							use_local_time,
-		const bool					customize_start_time,
-		const uint16_t			new_year,
-		const uint8_t			new_month,
-		const uint8_t			new_day,
-		const uint8_t			new_hour,
-		const uint8_t			new_min
+		const bool				custom_time
 	) 
 	: LoomModule(manager, module_name, module_type )
 	, timezone(timezone)
 	, use_local_time(use_local_time)
 	, converted(false)
-	, customize_start_time(customize_start_time)
-	, new_year(new_year)
-	, new_month(new_month)
-	, new_day(new_day)
-	, new_hour(new_hour)
-	, new_min(new_min)
-	, new_time(0)
 	, local_time(0)
+	, custom_time(custom_time)
 
 {}
 
@@ -297,23 +285,6 @@ void LoomRTC::get_timestamp(char* header, char* timestamp, const char delimiter,
 			strcpy(timestamp, ""); 
 	}
 }
-///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::customize_complie_time(){
-	if(customize_start_time){
-		DateTime last_time = now();
-		new_time = DateTime(new_year, new_month, new_day, new_hour, new_min, 0);
-		
-		// Convert the time into approximate minute units: 518400 = 12 * 30 * 24 * 60
-		int x = 518400 * last_time.year() + 43200 * last_time.month() + 1440 * last_time.day() + 60 * last_time.hour() + last_time.minute();
-		int y = 518400 * new_time.year() + 43200 * new_time.month() + 1440 * new_time.day() + 60 * new_time.hour() + new_time.minute();
-		
-		if(x <= y){
-			print_module_label();
-			LPrintln("Changing time to user input time");
-			_adjust(new_time);
-		}
-	}
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomRTC::init()
@@ -327,17 +298,18 @@ void LoomRTC::init()
 	print_module_label();
 	LPrintln("Current Time (before possible reset)");
 	print_time();
-	
-	// If the user enter a certain UTC time, then it will adjust to that time
-	customize_complie_time();
-
 
 	// The following section checks if RTC is running, else sets 
 	// the time to the time that the sketch was compiled
 	if (!_initialized()) {
 		print_module_label();
 		LPrintln("RTC was not initialized");
-		set_rtc_to_compile_time();
+		if(Serial && custom_time){
+			set_rtc_to_computer_time();
+		}
+		else{
+			set_rtc_to_compile_time();
+		}
 	}
 
 	// Make sure the RTC time is even valid, if not, set to compile time
@@ -345,6 +317,91 @@ void LoomRTC::init()
 
 	// Query Time and print
 	print_time();
+}
+///////////////////////////////////////////////////////////////////////////////
+void LoomRTC::set_rtc_to_computer_time()
+{
+
+	// initialized variable for user input
+	String computer_year = "";
+	String computer_month = "";
+	String computer_day = "";
+	String computer_hour = "";
+	String computer_min = "";
+	String computer_sec = "";
+
+	// Let the user know that they should enter local time
+	print_module_label();
+	LPrintln("Enter your local time");
+
+	// Entering the year
+	print_module_label();
+	LPrintln("Enter the Year");
+	while(computer_year == ""){
+		computer_year = Serial.readStringUntil('\n');
+	}
+	print_module_label();
+	LPrintln("Year Entered: ", computer_year);
+	
+	// Entering the month
+	print_module_label();
+	LPrintln("Enter the Month");
+	while(computer_month == ""){
+		computer_month = Serial.readStringUntil('\n');
+	}
+	print_module_label();
+	LPrintln("Month Entered: ", computer_month);
+
+	// Entering the day
+	print_module_label();
+	LPrintln("Enter the Day");
+	while(computer_day  == ""){
+		computer_day = Serial.readStringUntil('\n');
+	}
+	print_module_label();
+	LPrintln("Day Entered: ", computer_day);
+
+	// Entering the hour
+	print_module_label();
+	LPrintln("Enter the Hour (0 ~ 23)");
+	while(computer_hour == ""){
+		computer_hour = Serial.readStringUntil('\n');
+	}
+	print_module_label();
+	LPrintln("Hour Entered: ", computer_hour);
+
+	// Entering the minute
+	print_module_label();
+	LPrintln("Enter the Minute (0 ~ 59)");
+	while(computer_min == ""){
+		computer_min = Serial.readStringUntil('\n');
+	}
+	print_module_label();
+	LPrintln("Minute Entered: ", computer_min);
+
+	// Entering the second
+	print_module_label();
+	LPrintln("Enter the Second (0 ~ 59)");
+	while(computer_sec == ""){
+		computer_sec = Serial.readStringUntil('\n');
+	}
+	print_module_label();
+	LPrintln("Second Entered: ", computer_sec);
+
+	// Adjust to user input time
+	_adjust(DateTime(computer_year.toInt(), computer_month.toInt(), computer_day.toInt(), computer_hour.toInt(), computer_min.toInt(), computer_sec.toInt()));
+		
+	print_module_label();
+	LPrintln("Time set to user input time:");
+	print_time();
+
+	// Adjust to UTC time as default time
+	convert_local_to_utc();
+
+	// If local time is enable, measure local time 
+	if(use_local_time){
+		local_rtc();
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -356,9 +413,6 @@ void LoomRTC::set_rtc_to_compile_time()
 	print_module_label();
 	LPrintln("Time set to compile time:");
 	print_time();
-
-	// If the user enter a certain UTC time, then it will adjust to that time
-	customize_complie_time();
 
 	// Adjust to UTC time as default time
 	convert_local_to_utc();

@@ -17,14 +17,9 @@ Loom_PCF8523::Loom_PCF8523(
 		LoomManager* manager,
 		TimeZone		timezone,
 		const bool			use_local_time,
-		const bool			customize_start_time,
-		const uint16_t			new_year,
-		const uint8_t			new_month,
-		const uint8_t			new_day,
-		const uint8_t			new_hour,
-		const uint8_t			new_min
+		const bool			custom_time
 	)
-	: LoomRTC(manager, "PCF8523", Type::PCF8523, timezone, use_local_time, customize_start_time, new_year, new_month, new_day, new_hour, new_min)
+	: LoomRTC(manager, "PCF8523", Type::PCF8523, timezone, use_local_time, custom_time)
 {
 	init();
 	clear_alarms();
@@ -32,7 +27,7 @@ Loom_PCF8523::Loom_PCF8523(
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_PCF8523::Loom_PCF8523(LoomManager* manager, JsonArrayConst p)
-	: Loom_PCF8523(manager, (TimeZone)(int)p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7]) {}
+	: Loom_PCF8523(manager, (TimeZone)(int)p[0], p[1], p[2]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_PCF8523::_begin()

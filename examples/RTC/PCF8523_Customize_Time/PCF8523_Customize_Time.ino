@@ -1,18 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This is a Basic example of RTC PCF8523, but able to customize complie Time.
+// This is a Basic example of RTC PCF8523, but able to customize Time.
 
-// You will be able to find how in the config.h file
-
-// The params will be [11,true, true, 2020, 10, 15, 16, 20]
+// The params will be [11, true, true]
 // 11 will be TimeZone that can be found in the documentation
 // true will be measure local time 
-// true will enable to have custom time for UTC
-// 2020 will be the new year value
-// 10 will be the new month value
-// 15 will be the new day value
-// 16(3PM) will be the new hour value
-// 20 will be the new minute value 
+// true will enable to have custom time for Local time input
+
+// You need to enter the year, month, day hour, minute, and seconds to get 
+// the most accurate time in the serial monitor. 
+// Note that hour is up to 23. In other words, 3PM is 15 not 3. 3 will be 3 AM.
 
 ///////////////////////////////////////////////////////////////////////////////
 
