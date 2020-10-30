@@ -7,7 +7,7 @@
 	'components':[\
 		{\
 			'name':'PCF8523',\
-			'params':[11,false]\
+			'params':[11,false, false]\
 		},\
 		{\
 			'name':'Interrupt_Manager',\

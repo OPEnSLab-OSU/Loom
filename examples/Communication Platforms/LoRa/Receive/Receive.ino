@@ -16,6 +16,8 @@
 // block / wait for a packet before continuing, that example is 
 // LoRa > Receive_Blocking
 
+// Documentation for LoRa: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___lo_ra.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

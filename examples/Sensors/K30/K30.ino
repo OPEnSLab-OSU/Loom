@@ -12,6 +12,8 @@
 // so take a look the link and the code carefully.  
 // https://learn.adafruit.com/using-atsamd21-sercom-to-add-more-spi-i2c-serial-ports/creating-a-new-serial
 
+// Documentation for K30: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___k30.htmls
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

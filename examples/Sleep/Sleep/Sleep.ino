@@ -7,6 +7,8 @@
 
 // This is not a repeating sleep-wake cycle example.
 
+// Documentation for Sleep Manager: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___sleep___manager.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

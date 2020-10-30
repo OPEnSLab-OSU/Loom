@@ -2,6 +2,8 @@
 
 // This is a basic example to test the MMA8451 accelerometer sensor
 
+// Documentation for MMA8451: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___m_m_a8451.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

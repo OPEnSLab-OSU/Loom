@@ -10,6 +10,9 @@
 // - For Google sheets parameters, see:
 //   https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets
 
+// Documentation for GoogleSheets: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___google_sheets.html
+// Documentation for LTE: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___l_t_e.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 

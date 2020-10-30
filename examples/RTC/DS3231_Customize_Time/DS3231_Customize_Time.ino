@@ -11,6 +11,8 @@
 // the most accurate time in the serial monitor.
 // Note that hour is up to 23. In other words, 3PM is 15 not 3. 3 will be 3 AM.
 
+// Documentation for DS3231 RTC: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___d_s3231.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

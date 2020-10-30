@@ -11,6 +11,8 @@
 // the most accurate time in the serial monitor. 
 // Note that hour is up to 23. In other words, 3PM is 15 not 3. 3 will be 3 AM.
 
+// Documentation for PCF8523 RTC: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___p_c_f8523.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

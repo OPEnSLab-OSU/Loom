@@ -4,6 +4,8 @@
 
 // This program can be used as a base to an RTC interrupt driven program
 
+// Documentation for DS3231 RTC: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___d_s3231.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
