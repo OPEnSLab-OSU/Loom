@@ -122,6 +122,9 @@ bool Loom_LoRa::receive_blocking_impl(JsonObject json, uint max_wait_time)
 		signal_strength = driver.lastRssi();
 		status = msgpack_buffer_to_json(buffer, json);
 	}
+	
+	print_module_label();
+	LPrintln("Receive ", (status) ? "successful" : "failed");
 
 	driver.sleep();
 	return status;

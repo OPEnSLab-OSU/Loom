@@ -25,6 +25,7 @@ LoomCommPlat::LoomCommPlat(
 	, total_drop_count(0)
 	, last_ten_dropped{}
 	, last_ten_dropped_idx(0)
+	, mergeJson(2048)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -76,7 +77,13 @@ bool LoomCommPlat::receive()
 bool LoomCommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
 {
 	bool status = receive_blocking_impl(json, max_wait_time);
-	LPrintln("Recieve " , (status) ? "successful" : "failed" );
+	
+	// If there is a value called "Num_Package", then it will recognize that there are more packages 
+	JsonObject checker = device_manager -> internal_json();
+	if(!(checker["Num_Package"].isNull())){
+		status = merge_json(pre_merge_receive_blocking(checker), checker["Num_Package"]);
+	}
+	
 	return status;
 }
 
@@ -89,6 +96,78 @@ bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 		return receive_blocking( device_manager->internal_json(true), max_wait_time );
 	}
 	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+JsonObject LoomCommPlat::pre_merge_receive_blocking(JsonObject json){
+
+	// This will get the timestamp(if RTC is used), device id, and other information that is not part of the contents array
+	JsonObject newJson = mergeJson.to<JsonObject>();
+	newJson["type"] = json["type"];
+	JsonObject information = newJson.createNestedObject("id");
+	information["name"] = json["id"]["name"];
+	information["instance"] = json["id"]["instance"];
+	if(!(json["timestamp"].isNull())){
+		JsonObject timestamp = newJson.createNestedObject("timestamp");
+		timestamp["date"] = json["timestamp"]["date"];
+		timestamp["time"] = json["timestamp"]["time"];
+	}
+	// Note that this json doesn't have the Num_Package value
+	return newJson;
+
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop){
+	
+	// In the json, it will create contents jsonarray to add the upcoming small packages
+	JsonArray newContents = json["contents"];
+	newContents = json.createNestedArray("contents");
+
+	// Loop value is determine by "Num_Package" value
+	uint8_t Loop = loop;
+
+	bool increased = false;
+
+
+	while(Loop > 0){
+
+		// Receive a package from the other board
+		bool status = receive_blocking_impl(device_manager -> internal_json(true), 1000);
+	
+		// If it fails at least once, return false
+		if(!status){ 
+			Loop = 0;
+			return false;
+		}
+
+		JsonObject compenent = newContents.createNestedObject();
+		compenent["module"] = device_manager -> internal_json()["contents"]["module"];
+		JsonObject data = compenent.createNestedObject("data");
+		JsonObject old_data = device_manager -> internal_json()["contents"]["data"];
+		for(JsonPair kv: old_data){
+			compenent["data"][kv.key()] = kv.value();
+		}
+		Loop--;
+	}
+
+	// Once the json is complete, change the internal_json to the big json
+	// It can't reach the full capacity of sending and receiving because of deserializeMsgPack takes up memory
+	// Need to find a solution so that it can take even bigger pacakge than before. Todo!
+	// For now, we will let the user if there going to be package drops or not in the if statment
+
+	if(json.memoryUsage() >= 2000){
+		print_module_label();
+		LPrintln("Some packages will be dropped during the tranmission");
+		print_module_label();
+		LPrintln("Reduce the size you are sending by this amount of bytes: ", json.memoryUsage() - 2000);
+	}
+
+	device_manager -> internal_json(true).set(json);
+	mergeJson.clear();
+	return true;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -105,9 +184,25 @@ bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
 
 ///////////////////////////////////////////////////////////////////////////////
 bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
-	bool status = send_impl(json, destination);
+	
+	char buffer[max_message_len];
+	uint16_t sizeJsonObject = serializeMsgPack(json, buffer, max_message_len);
+	bool prestatus;
+	bool status;
+
+	// If json package size is over 252, then send into multiple packages
+	if (sizeJsonObject >= 252){
+		prestatus = split_send_notification(json, destination);
+		if (prestatus) status = split_send(json, destination, 0);
+		else{
+			status = false;	
+		}
+	}
+	// Else, just send as it is
+	else{
+		status = send_impl(json, destination);
+	}
 	add_packet_result(!status);
-	LPrintln("Send " , (status) ? "successful" : "failed" );
 	return status;
 }
 
@@ -145,6 +240,95 @@ uint8_t LoomCommPlat::send_batch(const uint8_t destination, int delay_time){
 		return drop_count;
 	}
 	return -1;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+uint16_t LoomCommPlat::determine_json_size(JsonObject json){
+	
+	// Calculate the size of the JSON Package
+	// https://arduinojson.org/v6/assistant/
+
+	// Calculate the Total Number of JSON Object (Outside)
+	uint16_t jsonObjectSize = JSON_OBJECT_SIZE(json.size());
+	
+	// Calculate Internal Json from the Object id
+	jsonObjectSize += JSON_OBJECT_SIZE(json["id"].size());
+	
+	// If there is a timestamp(using RTC), then add that space 
+	if (!(json["timestamp"].isNull())){
+		jsonObjectSize +=JSON_OBJECT_SIZE(json["timestamp"].size());
+	}
+	
+	// Add Number of Element in Array and Module name Object per Element in the Array
+	jsonObjectSize += JSON_ARRAY_SIZE(json["contents"].size()) + JSON_OBJECT_SIZE(json["contents"].size());
+
+	// Add Data Object per module
+	int index = 0;
+	while(!(json["contents"][index]["data"].isNull())){
+		jsonObjectSize += JSON_OBJECT_SIZE(json["contents"][index]["data"].size());
+		index += 1;
+	}
+		
+	return jsonObjectSize;
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomCommPlat::split_send_notification(JsonObject json, const uint8_t destination) {
+		
+	
+	// This process will copy information about device id, and timestamp from the original package
+	uint8_t numPackage = json["contents"].size();
+	JsonObject object = mergeJson.to<JsonObject>();
+	object["type"] = json["type"];
+	JsonObject information = object.createNestedObject("id");
+	information["name"] = json["id"]["name"];
+	information["instance"] = json["id"]["instance"];
+	if(!(json["timestamp"].isNull())){
+		JsonObject timestamp = object.createNestedObject("timestamp");
+		timestamp["date"] = json["timestamp"]["date"];
+		timestamp["time"] = json["timestamp"]["time"];
+	}
+	// Create a small json package that have the information about the upcoming package number
+	object["Num_Package"] = numPackage;
+	LPrintln("Sending ", numPackage, " more package to the other board due to the size of the package");
+	// Sending this small package to the other board
+	bool status = send_impl(object, destination);
+
+	mergeJson.clear();
+	return status;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const uint8_t index){
+	
+	// This will send each module from the contents array 
+	int contentIndex = index;
+
+	mergeJson.clear();
+	
+	JsonObject tmp = mergeJson.to<JsonObject>();
+	JsonObject compenent = tmp.createNestedObject("contents");
+
+	compenent["module"] = json["contents"][contentIndex]["module"];
+	JsonObject data = compenent.createNestedObject("data");
+
+	JsonObject old_data = json["contents"][contentIndex]["data"];
+	for (JsonPair kv : old_data){
+		compenent["data"][kv.key()] = kv.value();
+	}
+
+	// Send the small package
+	bool status = send_impl(tmp, destination);
+	if(!status) return false;
+	
+	contentIndex++;
+	// If there no more contents in the original json package, then it will return true
+	if(json["contents"][contentIndex].isNull()) return true;
+	// else, it will keep creating and sending small json packages
+	
+	split_send(json, destination, contentIndex);
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -204,7 +388,7 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 		print_module_label();
 		LPrintln("Received: ", (const char*)buffer);
 		print_module_label();
-		LPrintln("Len: ", strlen(buffer));
+		LPrintln("Received Json Memory Usage: ", measureMsgPack(messageJson));
 	}
 
 	messageJson.clear();
@@ -214,7 +398,7 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 		LPrintln("Failed to parse MsgPack");
 		return false;
 	}
-
+	
 	bool status = json.set(messageJson.as<JsonObject>());
 	if (!status) return false;
 
@@ -227,6 +411,7 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 		// LPrintln("\nJson passed in:");
 		// serializeJsonPretty(json, Serial);
 	}
+	return status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -241,4 +426,4 @@ void LoomCommPlat::add_packet_result(const bool did_drop) {
 		total_drop_count++;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+
