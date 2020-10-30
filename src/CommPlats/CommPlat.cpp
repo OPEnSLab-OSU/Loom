@@ -81,7 +81,7 @@ bool LoomCommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
 	// If there is a value called "Num_Package", then it will recognize that there are more packages 
 	JsonObject checker = device_manager -> internal_json();
 	if(!(checker["Num_Package"].isNull())){
-		status = merge_json(pre_merge_receive_blocking(checker), checker["Num_Package"], max_wait_time);
+		status = merge_json(pre_merge_receive_blocking(checker), checker["Num_Package"]);
 	}
 	
 	return status;
@@ -119,7 +119,7 @@ JsonObject LoomCommPlat::pre_merge_receive_blocking(JsonObject json){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint max_wait_time){
+bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop){
 	
 	// In the json, it will create contents jsonarray to add the upcoming small packages
 	JsonArray newContents = json["contents"];
@@ -134,7 +134,7 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop, const uint ma
 	while(Loop > 0){
 
 		// Receive a package from the other board
-		bool status = receive_blocking_impl(device_manager -> internal_json(true), max_wait_time);
+		bool status = receive_blocking_impl(device_manager -> internal_json(true), 1000);
 	
 		// If it fails at least once, return false
 		if(!status){ 
@@ -388,7 +388,7 @@ bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 		print_module_label();
 		LPrintln("Received: ", (const char*)buffer);
 		print_module_label();
-		LPrintln("Len: ", strlen(buffer));
+		LPrintln("Received Json Memory Usage: ", measureMsgPack(messageJson));
 	}
 
 	messageJson.clear();
