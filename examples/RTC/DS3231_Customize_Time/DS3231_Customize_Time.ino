@@ -35,6 +35,14 @@ LoomManager Loom{ &ModuleFactory };
 
 void setup() 
 {
+  	// Needs to be done for Hypno Board
+	pinMode(5, OUTPUT);		// Enable control of 3.3V rail 
+	pinMode(6, OUTPUT);		// Enable control of 5V rail 
+
+	//See Above
+	digitalWrite(5, LOW);	// Enable 3.3V rail
+	digitalWrite(6, HIGH);	// Enable 5V rail
+  
   Loom.begin_serial(true);
   Loom.parse_config(json_config);
   Loom.print_config();

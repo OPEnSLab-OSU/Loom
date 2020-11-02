@@ -332,7 +332,7 @@ void LoomRTC::set_rtc_to_computer_time()
 
 	// Let the user know that they should enter local time
 	print_module_label();
-	LPrintln("Enter your local time");
+	LPrintln("Please use your local time, not UTC!");
 
 	// Entering the year
 	print_module_label();
