@@ -33,9 +33,9 @@ public:
 
 	/// Different time zones
 	enum class TimeZone { 
-		WAT = 0, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, ALDT, 
-		ALST, HST, SST, GMT, BST, CET, CEST, EET, EEST, BT, ZP4, ZP5, 
-		ZP6, ZP7, AWST, AWDT, ACST, ACDT, AEST, AEDT 
+		WAT = 0, AT, ADT, AST, EDT, EST, CDT, CST, MDT, MST, PDT, PST, AKDT, 
+		AKST, HST, SST, GMT, BST, CET, EET, EEST, BRT, ZP4, ZP5, 
+		ZP6, ZP7, AWST, ACST, AEST 
 	};
 
 private: 
@@ -45,12 +45,23 @@ private:
 
 protected:
 
-	TimeZone	timezone;			///< The TimeZone to use
+	TimeZone	timezone;				///< The TimeZone to use
 
-	bool		use_utc_time;		///< Whether or not use UTC time, else local time
+	bool		use_local_time;			///< Whether or not use local time, else UTC time
+
+	bool		converted;				///< Whether or not converted daylight saving / summer time or not
+
+	bool 		custom_time;
+
+	DateTime	local_time;				///< DateTime variable for the Local Time 
+
+	char		local_datestring[20];	///< Latest saved string of Local Date (year/month/day)
+	char		local_timestring[20];	///< Latest saved string of Local time (hour:minute:second)
 
 	char		datestring[20];		///< Latest saved string of the Date (year/month/day)
 	char		timestring[20];		///< Latest saved string of the time (hour:minute:second)
+
+	// time_t		computer_time = time(NULL);
 
 public:
 	
@@ -62,13 +73,16 @@ public:
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	timezone		Which timezone device is in
-	/// @param[in]	use_utc_time	True for UTC time, false for local time
+	/// @param[in]	use_local_time	True for local time, false for UTC time
+	/// @param[in]	custom_time		True for user input time, false otherwise
+
 	LoomRTC(
 			LoomManager* manager,
 			const char*				module_name,
 			const LoomModule::Type	module_type,
-			const TimeZone			timezone,
-			const bool				use_utc_time
+			TimeZone			timezone,
+			const bool				use_local_time,
+			const bool			custom_time
 		);
 
 	/// Destructor
@@ -199,8 +213,15 @@ protected:
 	/// Read the RTC, update time and date strings
 	void			read_rtc();
 
+	/// Read local time if local time is enable to read 
+	/// It will be updated on contents array in the data json
+	void			local_rtc();
+
 	/// Set the RTC time to compile time
 	void			set_rtc_to_compile_time();
+
+	/// Set the RTC time to computer time by user input if the board is connected to computer
+	void 			set_rtc_to_computer_time();
 
 	/// Convert time between local and UTC.
 	/// Uses current timezone setting
@@ -210,6 +231,18 @@ protected:
 	/// Check if current RTC time is valid (not necessarily correct)
 	/// @return	True if valid
 	bool			rtc_validity_check();
+
+	/// Convert time between daylight saving time and standard time
+	/// @param[in] local_time 	The updated version of local time after convertion of daylight saving / summer time or standard time
+	DateTime 		convert_daylight_to_standard(DateTime local_time);
+
+	/// Convert the time in the US daylight saving and standard
+	/// @param[in]	local_time 	The updated local_time based on us daylight saving
+	DateTime 		us_daylight_to_standard(DateTime local_time);
+
+	///	Convert the time in the EU summer time and standard
+	/// @param[in]	local_time 	The updated local_time based on eu summmer time 
+	DateTime		eu_daylight_to_standard(DateTime local_time);
 
 };
 

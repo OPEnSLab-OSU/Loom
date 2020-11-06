@@ -12,9 +12,9 @@
 // so take a look the link and the code carefully. 
 // The related syntax code came from the following website 
 // https://learn.adafruit.com/using-atsamd21-sercom-to-add-more-spi-i2c-serial-ports/creating-a-new-serial
-//
-// You are also able to use Hypnos board with this sensor since it will be using different pins 
-//
+
+// Documentation for K30: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___k30.htmls
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

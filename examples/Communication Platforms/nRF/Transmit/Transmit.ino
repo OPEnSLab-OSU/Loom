@@ -7,11 +7,10 @@
 // These two examples are the Loom equivalent of the basic RX / TX nRF 
 // examples
 
-// See https://openslab-osu.github.io/Loom/html/class_loom__n_r_f.html
-// for details of nRF config options
-
 // While you can send whatever data you collect, for the purposes of this 
 // example, only analog data is being collected
+
+// Documentation for nRF: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom__n_r_f.html
 
 ///////////////////////////////////////////////////////////////////////////////
 

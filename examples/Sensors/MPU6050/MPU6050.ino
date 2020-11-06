@@ -2,6 +2,8 @@
 
 // This is a basic example to test the MPU6050 accelerometer / gyroscope sensor
 
+// Documentation for MPU6050: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___m_p_u6050.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 

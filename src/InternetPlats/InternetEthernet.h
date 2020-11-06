@@ -77,6 +77,7 @@ public:
 
 	/// Whether or not connected to internet
 	/// @return True if connect, false otherwise
+
 	bool is_connected() const override {return m_is_connected; }
 
 	/// Open a UDP socket for sending and recieving incoming data.

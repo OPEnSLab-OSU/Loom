@@ -13,6 +13,8 @@
 // package, display, and wait (according to 'interval' in the config).
 // Other examples simply build off of this sequence
 
+// Documentation for ADS1115: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___a_d_s1115.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

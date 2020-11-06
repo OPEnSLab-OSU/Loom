@@ -11,6 +11,8 @@
 // - The interrupt is a constant low signal, rather than a squareware
 //		No need to detach the interrupts, just clear the alarms
 
+// Documentation for PCF8523 RTC: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___p_c_f8523.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

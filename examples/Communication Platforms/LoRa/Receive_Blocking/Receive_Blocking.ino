@@ -17,6 +17,8 @@
 // The maximum time to wait for a packet is provided in milliseconds, 
 // 5000 in this case
 
+// Documentation for LoRa: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___lo_ra.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

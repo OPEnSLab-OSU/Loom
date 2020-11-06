@@ -4,10 +4,12 @@
 // using a batch to be published or transmitted through the publishing or
 // communication platforms later. This sketch also logs data to an SD card
 // with a .csv file.
-//
+
 // For this sketch, you will need to remove the items not used from the config
 // file. nRF, Bluetooth, LoRa and GoogleSheets with Ethernet are all options listed
 // in the config file to transmit/publish the batch.
+
+// Documentation for BatchSD: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___batch_s_d.html
 
 ///////////////////////////////////////////////////////////////////////////////
 
