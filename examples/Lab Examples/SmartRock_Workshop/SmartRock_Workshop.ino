@@ -1,12 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This is a basic example that demonstrates usage of the Hypnos board
-// Deep sleep functionality.
+// This code is for the OPEnS Lab Smart Rock and Smart Rock Beta Group
 
-// The Hypnos board includes
+// Includes
 // - SD
 // - DS3231 RTC
-// - Ability to power of peripherals
+// - Deep Sleep functionality thanks to Hypnos (link below for more information)
+// - EC
+// - Turbidity
+// - Pressure
+// - Temp
 
 // Further details about the Hypnos board can be found here:
 // https://github.com/OPEnSLab-OSU/OPEnS-Lab-Home/wiki/Hypnos
@@ -75,19 +78,65 @@ void loop()
 {
   //re-enable pin upon wake up
   pinMode(switchPin, INPUT);
+
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  //Start of loop that prevents Smart Rock from going to sleep
+  //for calibration mode, where continuous data is logged to SD
+  NO_SLEEP:
   
-  /////////////////////////////////////////////
   //change interval depending the on position of pin
   //interval is the variable that gets passed to TimeSpan function below
   switchPos = digitalRead(switchPin);
+
+
+  //delay(1000) function further down in the sketch takes 1000 miliseconds (or 1 second) to
+  //ensure SD card has enough time to wake up before next data log
+  //minus 1 second from your desired interval time below to gaurantee actual desired inteval
+  //Example: 
+  // 1199 seconds == 19 minutes 59 seconds 
+  // 1199 seconds + delay() function = 1200 seconds
+  // 1200 seconds == 20 minutes
+
+  //sets all values to 0 upon start of loop
+  //do not modify these
   int secs = 0;
   int mins = 0;
+  int hours = 0;
+  int days = 0;
+  
   if (switchPos == HIGH) {
-    mins = 1200;
+
+    //modifiable 
+    //set desired seconds
+    secs = 1199;
+    
+    //set desired minutes
+    mins = 0;
+    
+    //set desired hours
+    hours = 0;
+    
+    //set desired days
+    days = 0;
+    
   }else{
-    secs = 1;
-  }
-  /////////////////////////////////////////////
+
+      Loom.measure();
+      Loom.package();
+      Loom.display_data();
+
+      // Log using default filename as provided in configuration
+      // in this case, 'datafile.csv'
+      Loom.SDCARD().log();
+
+      Loom.pause();
+      
+      //goes to the beginning of NO_SLEEP loop only if this else block is entered
+      goto NO_SLEEP;
+    }
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////
   
 	digitalWrite(5, LOW); // Disable 3.3V rail
   digitalWrite(6, HIGH);  // Disable 5V rail
@@ -114,7 +163,7 @@ void loop()
 	Loom.SDCARD().log();
 
 	// set the RTC alarm to a duration of 10 seconds with TimeSpan
-	Loom.InterruptManager().RTC_alarm_duration(TimeSpan(0,0,mins,secs));
+	Loom.InterruptManager().RTC_alarm_duration(TimeSpan(days,hours,mins,secs));
 	Loom.InterruptManager().reconnect_interrupt(12);
 
   digitalWrite(13, LOW);
