@@ -31,7 +31,7 @@ void loop()
 {
 	Exec.measure();
 	Exec.package();
-	Exec.get<Loom::MMA8451>().print_measurements();
+	Exec.get<Loom::MMA8451>()->print_measurements();
 	Exec.display_data();
 	Exec.pause();
 }

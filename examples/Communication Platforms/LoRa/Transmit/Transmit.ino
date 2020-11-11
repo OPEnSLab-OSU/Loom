@@ -45,7 +45,7 @@ void loop()
 	Exec.display_data();
 
 	// Send to address 1
-	Exec.get<Loom::LoRa>().send(1);
+	Exec.get<Loom::LoRa>()->send(1);
 
 	Exec.pause();	// Delay between interations set with 'interval' in config
 }

@@ -34,8 +34,8 @@ void setup()
 
 void loop() 
 {
-	Exec.get<Loom::Relay>().set(true);
+	Exec.get<Loom::Relay>()->set(true);
 	Exec.pause(2000);
-	Exec.get<Loom::Relay>().set(false);
+	Exec.get<Loom::Relay>()->set(false);
 	Exec.pause(2000);
 }

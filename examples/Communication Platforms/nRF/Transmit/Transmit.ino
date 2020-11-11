@@ -34,7 +34,7 @@ void setup()
 { 
 	Exec.begin_serial(true);
 	Exec.parse_config(LCONFIG);
-	Exec.get<Loom::nRF>().set_print_verbosity(Verbosity::V_HIGH);
+	Exec.get<Loom::nRF>()->set_print_verbosity(Verbosity::V_HIGH);
 	Exec.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
@@ -48,7 +48,7 @@ void loop()
 
 	// Select on of the following
 	// Exec.nRF().send(01);		// Send to specific address
-	Exec.get<Loom::nRF>().broadcast(); // Broadcast to all nRF devices
+	Exec.get<Loom::nRF>()->broadcast(); // Broadcast to all nRF devices
 
 	Exec.pause();	// Delay between interations set with 'interval' in config
 }

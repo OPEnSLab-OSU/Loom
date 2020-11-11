@@ -61,7 +61,7 @@ void loop()
 	Loom_Base out_struct;
     
     const JsonObjectConst internal_data = Exec.internal_json(false);
-	Exec.get<Loom::LoRa>().send_raw(out_struct.raw, sizeof(out_struct.raw), 1); // This raw data will be send to board id 1
+	Exec.get<Loom::LoRa>()->send_raw(out_struct.raw, sizeof(out_struct.raw), 1); // This raw data will be send to board id 1
 
 	Exec.pause();	// Delay between interations set with 'interval' in config
 }

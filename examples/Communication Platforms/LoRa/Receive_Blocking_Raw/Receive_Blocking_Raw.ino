@@ -57,10 +57,10 @@ void loop()
     Loom_Base in_data;
 
     // This will wait an package for 5 seconds. If nothing comes, then it will wait 5 seconds again
-	if (Exec.get<Loom::LoRA>().receive_blocking_raw(in_data.raw, sizeof(in_data.raw), 5000)) {
+	if (Exec.get<Loom::LoRA>()->receive_blocking_raw(in_data.raw, sizeof(in_data.raw), 5000)) {
 		JsonObject internal_json = Exec.internal_json(true);
         struct_to_json(in_data, internal_json);
         Exec.display_data();
-		Exec.get<Loom::SD>().log("received.csv");
+		Exec.get<Loom::SD>()->log("received.csv");
 	}
 }

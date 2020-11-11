@@ -37,6 +37,6 @@ void loop()
 	Exec.measure();
 	Exec.package();
 	Exec.display_data();
-	Exec.get<Loom::OLED>().log();
+	Exec.get<Loom::OLED>()->log();
 	Exec.pause();
 }

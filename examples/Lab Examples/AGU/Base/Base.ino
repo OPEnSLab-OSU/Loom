@@ -72,12 +72,12 @@ void loop() {
 		Exec.measure();
 		Exec.package();
 		Exec.display_data();
-		Exec.get<Loom::OLED>().log();
-		Exec.get<Loom::SD>().log();
+		Exec.get<Loom::OLED>()->log();
+		Exec.get<Loom::SD>()->log();
 		Exec.GoogleSheets().publish();
 
 		/*
-		if(!Exec.get<Loom::Spool>().publish()){
+		if(!Exec.get<Loom::Spool>()->publish()){
 			pinMode(13, OUTPUT);
 			digitalWrite(13, HIGH);
 			Serial.println("Broke! press any key to continue...");

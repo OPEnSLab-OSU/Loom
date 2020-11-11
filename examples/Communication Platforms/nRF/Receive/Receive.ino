@@ -40,9 +40,9 @@ void setup()
 
 void loop() 
 {
-	if (Exec.get<Loom::nRF>().receive()) {
+	if (Exec.get<Loom::nRF>()->receive()) {
 		Exec.display_data();
-		Exec.get<Loom::SD>().log("nrf.csv");
+		Exec.get<Loom::SD>()->log("nrf.csv");
 	}
 
 	Exec.pause();	// Pause according to 'interval' in config

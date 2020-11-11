@@ -73,8 +73,8 @@ void setup()
 	// pinMode(ALARM_PIN, INPUT_PULLUP);
 	// pinMode(REED_PIN, INPUT_PULLUP);
 
-	Exec.get<Loom::InterruptManager>().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Exec.get<Loom::InterruptManager>().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>()->register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -97,12 +97,12 @@ void loop()
 	Exec.package();
 	Exec.add_data("wakeType", "type", alarmFlag ? "alarm" : "reed");
 	Exec.display_data();
-	Exec.get<Loom::SD>().log();
+	Exec.get<Loom::SD>()->log();
 
 	Exec.pause(500);
-	Exec.get<Loom::InterruptManager>().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Exec.get<Loom::InterruptManager>().register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
-	Exec.get<Loom::InterruptManager>().RTC_alarm_duration(TimeSpan(600));
+	Exec.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>()->register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(600));
 
 	// delay(4000);
 
@@ -110,7 +110,7 @@ void loop()
 	reedFlag = false;
 
 	// Go to sleep
-	Exec.get<Loom::SleepManager>().sleep();
+	Exec.get<Loom::SleepManager>()->sleep();
 	// 
 	
 }

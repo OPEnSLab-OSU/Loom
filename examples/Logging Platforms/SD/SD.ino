@@ -37,10 +37,10 @@ void loop()
 	
 	// Log using default filename as provided in configuration
 	// in this case, 'datafile.csv'
-	Exec.get<Loom::SD>().log();
+	Exec.get<Loom::SD>()->log();
 
 	// Or log to a specific file (does not change what default file is set to)
-	// Exec.get<Loom::SD>().log("specific.csv");
+	// Exec.get<Loom::SD>()->log("specific.csv");
 
 	Exec.pause();	
 }

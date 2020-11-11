@@ -52,7 +52,7 @@ void loop()
 
 	// Log using default filename as provided in configuration
 	// in this case, 'datafile.csv'
-	Exec.get<Loom::SD>().log();
+	Exec.get<Loom::SD>()->log();
 
 	Exec.pause();	
 }

@@ -40,7 +40,7 @@ void setup()
 
 	delay(5000);
 	// Register an interrupt on the RTC alarm pin
-	Exec.get<Loom::InterruptManager>().register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>()->register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
 	delay(5000);
 
 	LPrintln("\n ** Setup Complete ** ");
@@ -71,11 +71,11 @@ Exec.measure();
 Exec.package();
 Exec.display_data();
 
-Exec.get<Loom::GoogleSheets>().publish();
+Exec.get<Loom::GoogleSheets>()->publish();
 
 // set the RTC alarm to a duration of five minutes with TimeSpan
-Exec.get<Loom::InterruptManager>().RTC_alarm_duration(TimeSpan(0,0,5,0));
-Exec.get<Loom::InterruptManager>().reconnect_interrupt(12);
+Exec.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(0,0,5,0));
+Exec.get<Loom::InterruptManager>()->reconnect_interrupt(12);
 
 
 digitalWrite(13, LOW);
@@ -89,7 +89,7 @@ pinMode(10, INPUT);
 
 rtc_flag = false;
 Exec.power_down();
-Exec.get<Loom::SleepManager>().sleep();
+Exec.get<Loom::SleepManager>()->sleep();
 Exec.power_up();
 while (!rtc_flag);
 }

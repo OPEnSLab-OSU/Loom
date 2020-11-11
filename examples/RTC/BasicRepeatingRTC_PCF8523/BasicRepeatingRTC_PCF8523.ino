@@ -33,7 +33,7 @@ Loom::Manager Exec{};
 volatile bool alarmFlag = false;
 volatile int count = 0;
 void alarmISR() { 
-	Exec.get<Loom::InterruptManager>().get_RTC_module()->clear_alarms();
+	Exec.get<Loom::InterruptManager>()->get_RTC_module()->clear_alarms();
 	count++;
 	alarmFlag = true;
 }
@@ -46,8 +46,8 @@ void setup()
 	Exec.parse_config(LCONFIG);
 	Exec.print_config();
 
-	Exec.get<Loom::InterruptManager>().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Exec.get<Loom::InterruptManager>().RTC_alarm_duration(TimeSpan(10));
+	Exec.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(10));
 	digitalWrite(LED_BUILTIN, LOW);
 
 	LPrintln("\n ** Setup Complete ** ");
@@ -60,14 +60,14 @@ void loop()
 		LPrintln("Alarm triggered, resetting alarm");
 		Exec.pause(1000);
 		
-		Exec.get<Loom::InterruptManager>().RTC_alarm_duration(TimeSpan(10)); 
+		Exec.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(10)); 
 
 		digitalWrite(LED_BUILTIN, LOW);
 		alarmFlag = false;
 	}
 
 	LPrintln("Count: ", count);
-	Exec.get<Loom::PCF8523>().print_time();
+	Exec.get<Loom::PCF8523>()->print_time();
 	Exec.pause(1000);
 
 }

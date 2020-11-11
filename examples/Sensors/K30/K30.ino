@@ -58,7 +58,7 @@ void loop() {
   Exec.measure(); // Sample attached sensors
   Exec.package(); // Format data for display and SD
   Exec.display_data(); // display printed JSON formatted data on serial monitor
-  Exec.get<Loom::SD>().log(); // Loggin K30 Data value into SDCard
+  Exec.get<Loom::SD>()->log(); // Loggin K30 Data value into SDCard
   Exec.pause();
 }
 

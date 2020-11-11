@@ -23,7 +23,7 @@ void setup()
 	Exec.begin_serial(true);
 	Exec.parse_config(LCONFIG);
 	Exec.print_config();
-	Exec.get<Loom::MPU6050>().print_state();
+	Exec.get<Loom::MPU6050>()->print_state();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -31,7 +31,7 @@ void setup()
 void loop() 
 {
 	Exec.measure();
-	Exec.get<Loom::MPU6050>().print_measurements();
+	Exec.get<Loom::MPU6050>()->print_measurements();
 	// Exec.package();
 	// Exec.display_data();
 

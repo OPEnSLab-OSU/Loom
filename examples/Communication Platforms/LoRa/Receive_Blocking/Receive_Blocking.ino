@@ -49,8 +49,8 @@ void setup()
 
 void loop() 
 {
-	if (Exec.get<Loom::LoRa>().receive_blocking(5000)) {
+	if (Exec.get<Loom::LoRa>()->receive_blocking(5000)) {
 		Exec.display_data();
-		Exec.get<Loom::SD>().log("received.csv");
+		Exec.get<Loom::SD>()->log("received.csv");
 	}
 }

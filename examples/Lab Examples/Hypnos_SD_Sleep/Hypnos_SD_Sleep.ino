@@ -52,7 +52,7 @@ void setup()
 	Exec.print_config();
 
 	// Register an interrupt on the RTC alarm pin
-	Exec.get<Loom::InterruptManager>().register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>()->register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
 
 	LPrintln("\n ** Setup Complete ** ");
 	Serial.flush();
@@ -83,11 +83,11 @@ void loop()
 	Exec.package();
 	Exec.display_data();
 
-	Exec.get<Loom::SD>().log();
+	Exec.get<Loom::SD>()->log();
 
 	// set the RTC alarm to a duration of 10 seconds with TimeSpan
-	Exec.get<Loom::InterruptManager>().RTC_alarm_duration(TimeSpan(0,0,0,10));
-	Exec.get<Loom::InterruptManager>().reconnect_interrupt(12);
+	Exec.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(0,0,0,10));
+	Exec.get<Loom::InterruptManager>()->reconnect_interrupt(12);
 
 	digitalWrite(13, LOW);
 	digitalWrite(5, HIGH); // Enable 3.3V rail
@@ -100,6 +100,6 @@ void loop()
 	// And power_up after waking.
 
 	rtc_flag = false;
-	Exec.get<Loom::SleepManager>().sleep();
+	Exec.get<Loom::SleepManager>()->sleep();
 	while (!rtc_flag);
 }

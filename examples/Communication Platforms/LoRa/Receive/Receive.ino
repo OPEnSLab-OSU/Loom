@@ -43,9 +43,9 @@ void setup()
 
 void loop() 
 {
-	if (Exec.get<Loom::LoRa>().receive()) {
+	if (Exec.get<Loom::LoRa>()->receive()) {
 		Exec.display_data();
-		Exec.get<Loom::SD>().log("received.csv");
+		Exec.get<Loom::SD>()->log("received.csv");
 	}
 
 	Exec.pause();	// Pause according to 'interval' in config

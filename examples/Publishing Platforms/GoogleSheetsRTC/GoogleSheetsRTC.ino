@@ -40,7 +40,7 @@ void loop()
 	Exec.package();
 	Exec.display_data();
 
-	Exec.get<Loom::GoogleSheets>().publish();
+	Exec.get<Loom::GoogleSheets>()->publish();
 
 	Exec.pause();
 }

@@ -35,7 +35,7 @@ void loop()
 	Exec.measure();
 	Exec.package();
 	Exec.display_data();
-	Exec.get<Loom::MaxPub>().publish();
-	Exec.get<Loom::MaxSub>().subscribe();
+	Exec.get<Loom::MaxPub>()->publish();
+	Exec.get<Loom::MaxSub>()->subscribe();
 	Exec.pause();
 }

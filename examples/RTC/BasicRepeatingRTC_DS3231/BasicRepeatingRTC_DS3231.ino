@@ -26,7 +26,7 @@ volatile bool alarmFlag = false;
 void alarmISR() { 
 	detachInterrupt(digitalPinToInterrupt(ALARM_PIN)); 
 
-	Exec.get<Loom::InterruptManager>().get_RTC_module()->clear_alarms();
+	Exec.get<Loom::InterruptManager>()->get_RTC_module()->clear_alarms();
 
 	alarmFlag = true;
 }
@@ -39,8 +39,8 @@ void setup()
 	Exec.parse_config(LCONFIG);
 	Exec.print_config();
 
-	Exec.get<Loom::InterruptManager>().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Exec.get<Loom::InterruptManager>().RTC_alarm_duration(TimeSpan(10));
+	Exec.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	Exec.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(10));
 	digitalWrite(LED_BUILTIN, LOW);
 
 	LPrintln("\n ** Setup Complete ** ");
@@ -55,11 +55,11 @@ void loop()
 		
 		// Don't call RTC_alarm_duration before reconnect_interrupt 
 		// unless sleeping or calling:
-		// Exec.get<Loom::InterruptManager>().get_RTC_module()->clear_alarms();
+		// Exec.get<Loom::InterruptManager>()->get_RTC_module()->clear_alarms();
 		// post sleep calls this, and in this example it is in the ISR
 		
-		Exec.get<Loom::InterruptManager>().reconnect_interrupt(ALARM_PIN); 
-		Exec.get<Loom::InterruptManager>().RTC_alarm_duration(TimeSpan(10)); 
+		Exec.get<Loom::InterruptManager>()->reconnect_interrupt(ALARM_PIN); 
+		Exec.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(10)); 
 
 		digitalWrite(LED_BUILTIN, LOW);
 		alarmFlag = false;

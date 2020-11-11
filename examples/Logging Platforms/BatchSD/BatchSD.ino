@@ -52,7 +52,7 @@ void loop()
 
 	// For every ten packets in the batch, publish using GoogleSheets
 	if(counter%max_packets == 0) {
-		Exec.get<Loom::GoogleSheets>().publish_batch();
+		Exec.get<Loom::GoogleSheets>()->publish_batch();
 		// Send to address 1, the second parameter defines the delay between sends and the default is 0. This applies for the functions down belows
 		// With Transmitting with LoRa, if the hub receiving is publishing immediately to GoogleSheets, LoRa will need at least 4000ms of delay
 		// Depending on how the hub process the packets receieved, it may need more or less time than 4000ms, so feel free to tinker with the timing
