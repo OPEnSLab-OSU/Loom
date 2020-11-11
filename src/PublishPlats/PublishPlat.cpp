@@ -33,7 +33,7 @@ PublishPlat::PublishPlat(
 void PublishPlat::second_stage_ctor()
 {
 	// check to see if we have a device manager
-	if (device_manager) {
+	if (!device_manager) {
 		print_module_label();
 		LPrint("No Device Manager!\n");
 		return;
