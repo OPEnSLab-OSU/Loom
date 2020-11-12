@@ -18,7 +18,7 @@
   <a href=https://github.com/OPEnSLab-OSU/Loom/wiki/Configuration>Configuration</a>
 </p>
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3266419.svg)](https://doi.org/10.5281/zenodo.3266419)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4012710.svg)](https://doi.org/10.5281/zenodo.4012710)
 
 ## Table of Contents
 
@@ -26,8 +26,7 @@
 - [Introduction](#introduction)
 - [Objectives](#objectives)
 - [Key Features](#key-features)
-- [Arduino Setup](#arduino-setup)
-- [Installing Loom](#installing-loom)
+- [Installing Arduino and Loom](#installing-arduino-and-loom)
 - [Quick Start](#quick-start)
 - [Common Pin Allocations](#common-pin-allocations)
 - [Hardware Support](#hardware-support)
@@ -63,13 +62,11 @@ Loom is an ongoing multidisciplinary collaboration of the OPEnS Lab with a team 
 - Variety of sensors and actuators supported 
 - Remote data logging to SD and internet in near real time
 
-## Arduino Setup
+## Installing Arduino and Loom
 
-[Arduino IDE Setup Guide](https://github.com/OPEnSLab-OSU/Loom/wiki/Arduino-Setup)
+[Installing Arduino and Loom Quick Setup](https://github.com/OPEnSLab-OSU/Loom/wiki/Arduino-and-Loom-Quick-Setup)
 
-## Installing Loom
-
- [Loom Installation Guide](https://github.com/OPEnSLab-OSU/Loom/wiki/Loom-Installation)
+[Installing Arduino and Loom Manual Setup](https://github.com/OPEnSLab-OSU/Loom/wiki/Arduino-and-Loom-Manual-Setup)
 
 ## Quick Start
 

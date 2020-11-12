@@ -28,6 +28,7 @@
 /// - [Product Page: Adafruit Ethernet Featherwing](https://www.adafruit.com/product/3201)
 /// - [Dependency: EthernetLarge](https://github.com/OPEnSLab-OSU/EthernetLarge) OPEbS Lab fork of Arduino Ethernet library
 /// - [Dependency: SSLClient](https://github.com/OPEnSLab-OSU/SSLClient)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ethernet)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Ethernet : public LoomInternetPlat
@@ -76,7 +77,8 @@ public:
 
 	/// Whether or not connected to internet
 	/// @return True if connect, false otherwise
-	bool is_connected() const override { m_is_connected; }
+
+	bool is_connected() const override {return m_is_connected; }
 
 	/// Open a UDP socket for sending and recieving incoming data.
 	/// @warning Be careful about recieving data from an open socket!

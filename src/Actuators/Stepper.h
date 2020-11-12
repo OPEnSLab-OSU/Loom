@@ -33,6 +33,7 @@
 /// - [Dependency: Adafruit_Motor_Shield_V2_Library](https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library)
 /// - [Datasheet: Motor Driver](https://cdn-shop.adafruit.com/datasheets/TB6612FNG_datasheet_en_20121101.pdf)
 /// - [Product Page: Adafruit Stepper Motor](https://www.adafruit.com/product/324)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#stepper-motors-dc-motor--stepper-featherwing)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Stepper : public LoomActuator

@@ -20,6 +20,7 @@
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_s_d_i12_sensor.html)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sdi-12-sensors)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class LoomSDI12Sensor : public LoomSensor

@@ -99,6 +99,7 @@ bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat
 	network->print("&key3=full_data&val3=");
 	// next print the body data, converted in real time
 	m_serialize_internet_impl(json, *network);
+
 	// that should finish off the URL, so print the rest of the HTTP request
 	network->print(" HTTP/1.1\r\nUser-Agent: LoomOverSSLClient\r\nHost: script.google.com\r\nConnection: close\r\n\r\n");
 	// all ready to go!

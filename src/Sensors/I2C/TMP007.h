@@ -24,6 +24,8 @@
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___t_m_p007.html)
 /// - [Product Page: Contact-less Infrared Thermopile Sensor Breakout - TMP007](https://www.adafruit.com/product/2023)
 /// - [Dependency: Adafruit_TMP007_Library](https://github.com/adafruit/Adafruit_TMP007_Library)
+/// - [DataSheet](https://cdn-shop.adafruit.com/datasheets/tmp007.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#tmp007-contact-less-infrared-thermopile-sensor)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_TMP007 : public LoomI2CSensor

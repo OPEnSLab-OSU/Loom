@@ -22,6 +22,7 @@
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___m_b1232.html)
 /// - [Product Page: MB1232 I2CXL-MaxSonar-EZ3](https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm)
 /// - [Datasheet: I2CXL-MaxSonar- EZTM Series](https://www.maxbotix.com/documents/I2CXL-MaxSonar-EZ_Datasheet.pdf)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mb1232-sonar)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MB1232 : public LoomI2CSensor

@@ -6,6 +6,8 @@
 // The code is essentially the same a 'Basic', the only real different is the
 // enabling of the Multiplexer in the configuration.
 
+// Documentation for Multiplexer: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___multiplexer.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

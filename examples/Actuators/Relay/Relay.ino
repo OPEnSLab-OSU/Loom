@@ -6,6 +6,8 @@
 // The only configuration value the relay needs is the pin of the relay
 // which is currently set to pin 10 in the config
 
+// Documentation for Relay: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___relay.html 
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

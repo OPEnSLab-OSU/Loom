@@ -13,6 +13,8 @@
 // While you can send whatever data you collect, for the purposes of this 
 // example, only analog data is being collected
 
+// Documentation for LoRa: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___lo_ra.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

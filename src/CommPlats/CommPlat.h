@@ -12,6 +12,9 @@
 #pragma once
 
 #include "Module.h"
+#include "../LogPlats/BatchSD.h"
+#include <Arduino.h>
+#include <ArduinoJson.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -21,6 +24,7 @@
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_comm_plat.html)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#telecommunication-capabilities)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class LoomCommPlat : public LoomModule
@@ -35,16 +39,18 @@ protected:
 	/// CommPlatforms need their own JsonDocument because an incoming message
 	/// can only be deserialized into JsonDocuments, not JsonObjects.
 	/// And it seemed bad design to pass around references to the LoomManager's
-	/// internal JsonDocument. 
+	/// internal JsonDocument.
 	/// Especially as the LoomManager is intended to be non-mandatory for usage of Loom
 	StaticJsonDocument<1500> messageJson;
-
+	DynamicJsonDocument mergeJson;
 	// counters for determining packet drop rate
 	// used only for debug
 	uint32_t total_packet_count;
 	uint32_t total_drop_count;
 	bool last_ten_dropped[10];
 	uint8_t last_ten_dropped_idx;
+
+
 
 //=============================================================================
 ///@name	RADIO IMPLEMENTATION
@@ -69,7 +75,7 @@ protected:
 	virtual void broadcast_impl(JsonObject json) {}
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -104,6 +110,15 @@ public:
 	/// @param[out]	json	Json object to fill with incoming data
 	bool			receive(JsonObject json) { return receive_blocking(json, 0); }
 
+	///	Receive and immediately create a batch file from JSON receieved
+	/// @return True if packet was recieved and stored in batch
+	bool			receive_batch() { return receive_batch_blocking(0); }
+
+	/// Receive, and block until packet recieved or timeout, and immediately create a batch file from JSON receieved
+	/// @param[in] max_wait_time	Maximum number of milliseconds to block for
+	/// @return True if packet was recieved and stored in batch
+	bool			receive_batch_blocking(uint max_wait_time);
+
 	/// Version of receive for use with LoomManager.
 	/// Accesses Json from LoomManager
 	/// @return True if packet received
@@ -112,8 +127,19 @@ public:
 	/// Version of receive_blocking for use with LoomManager.
 	/// Accesses Json from LoomManager
 	/// @param[out]	max_wait_time	Maximum number of milliseconds to block for
-	/// @return True if packet received	
+	/// @return True if packet received
 	bool			receive_blocking(const uint max_wait_time);
+
+	/// Giving the header of the Package from the other board
+	/// @param[in] json				json of the headers if it came in split
+	/// @return	JsonObject			it will return the headers of the package
+	JsonObject 		pre_merge_receive_blocking(JsonObject json);
+
+	/// It will merge all the small packages into one big package
+	/// @param[in]	json			The header of the package
+	///	@param[in]	loop			How many small packages are coming
+	/// @return True if all package are receive and merged, false otherwise
+	bool			merge_json(JsonObject json, const uint8_t loop);
 
 	/// Send json to a specific address
 	/// @param[in]	json			Json package to send
@@ -127,6 +153,31 @@ public:
 	/// @return True if packet sent successfully, false otherwise
 	bool			send(const uint8_t destination);
 
+	/// Sends all the jsons stored in the batch
+	/// @param[in]	destination		Address of destination device
+	/// @param[in] 	delay_time		The amount of time between each packet in the batch being sent
+	/// @return true if the packet sent successfully
+	uint8_t			send_batch(const uint8_t destination, int delay_time);
+
+	/// Return the size of the json to determing wether to send as split or not
+	///	@param[in]	json			Json that will the measurement of the size
+	///	@return	uint16_t of the value of the json size
+	uint16_t 		determine_json_size(JsonObject json);
+
+	/// If the json is over 251, then it let the user the know that it will be sending 
+	/// small mulitple jsons with how many will it be splited into
+	/// @param[in]	json			The original message pacakge
+	/// @param[in]	destination		Address of destination device
+	/// @return true if able to send notification to the other board, false otherwise
+	bool	 		split_send_notification(JsonObject json, const uint8_t destination); 
+
+	/// The actual processing spliting into small json 
+	/// @param[in]	json			The original message package
+	/// @param[in]	destination		Address of destination device
+	/// @param[in]	index			Json array Contents part location
+	/// @return true if all of them send completely, false otherwise
+	bool			split_send(JsonObject json, const uint8_t destination, const uint8_t index);
+
 	/// Broadcast data to all that can receive.
 	/// Derived classes can optionally provide an implementation for this,
 	/// As supported by the radio/platform's library
@@ -136,6 +187,11 @@ public:
 	/// Version of send for use with LoomManager.
 	/// Accesses Json from LoomManager
 	void			broadcast();
+
+	///	Broadcasts all the jsons stored in the batch
+	/// @param[in] 	delay_time		The amount of time between each packet in the batch being broadcasted
+	void 			broadcast_batch(int delay_time);
+
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -202,10 +258,3 @@ protected:
 	void	add_packet_result(const bool did_drop);
 
 };
-
-
-
-
-
-
-

@@ -12,6 +12,14 @@
 
 #include "../Sensor.h"
 
+///////////////////////////////////////////////////////////////////////////////
+///
+/// Abstract root for Serial/UART sensor modules.
+/// @par Resources
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#serial-sensors)
+/// - [Serial Sensor Setup](https://learn.adafruit.com/using-atsamd21-sercom-to-add-more-spi-i2c-serial-ports/creating-a-new-serial)
+///
+///////////////////////////////////////////////////////////////////////////////
 class LoomSerialSensor : public LoomSensor {
 
 protected:

@@ -33,7 +33,7 @@ Loom_Ethernet::Loom_Ethernet(
 	
 	// try to connect to internet
 	connect();
-
+	
 	print_module_label();
 	if (is_connected()) {
 	 	LPrintln("Successfully connected to internet");

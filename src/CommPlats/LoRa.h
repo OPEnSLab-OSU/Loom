@@ -35,6 +35,7 @@
 /// - [Product Page: Adafruit Feather M0 LoRa](https://www.adafruit.com/product/3178)
 /// - [Documentation: RadioHead Library](https://www.airspayce.com/mikem/arduino/RadioHead/index.html)
 /// - [Dependency: RadioHead](https://github.com/adafruit/RadioHead)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#lora)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_LoRa : public LoomCommPlat

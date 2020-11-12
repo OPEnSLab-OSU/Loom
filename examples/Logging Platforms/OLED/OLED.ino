@@ -4,7 +4,7 @@
 // Loom to display data
 
 // See the documentation for details on OLED configuration options and methods:
-// https://openslab-osu.github.io/Loom/html/class_loom___o_l_e_d.html
+// https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___o_l_e_d.html
 
 ///////////////////////////////////////////////////////////////////////////////
 

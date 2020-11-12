@@ -9,8 +9,7 @@
 // These two examples are the Loom equivalent of the basic RX / TX nRF 
 // examples
 
-// See https://openslab-osu.github.io/Loom/html/class_loom__n_r_f.html
-// for details of nRF config options
+// Documentation for nRF: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom__n_r_f.html
 
 ///////////////////////////////////////////////////////////////////////////////
 

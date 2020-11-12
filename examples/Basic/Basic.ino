@@ -15,6 +15,8 @@
 
 // The configuration currently expects the relay is connected to pin 10
 
+// Documentation for Analog: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___analog.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

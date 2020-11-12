@@ -14,6 +14,7 @@
 
 #include "Module.h"
 #include "../InternetPlats/InternetPlat.h"
+#include "../LogPlats/BatchSD.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -49,7 +50,7 @@ public:
 	///
 	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
 	/// @param[in]	module_type			Type of the module (provided by derived classes)
-	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform. 
+	/// @param[in]  internet_type		Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform.
 	LoomPublishPlat(
 		LoomManager* manager,
 		const char*				module_name,
@@ -76,6 +77,10 @@ public:
 	/// 	{ "contents" : [ { "module": "module_name", "data" : {...} }, ... ], "timestamp"(optional) : {...} }
 	/// @returns Whether or not the publish succeded
 	bool	publish(const JsonObject json);
+
+	/// Publish all the packets stored in the batch
+	/// @returns Whether or not the publishes succeded or not
+	uint8_t publish_batch();
 
 	/// Version of log for use with LoomManager.
 	/// Accesses Json from LoomManager

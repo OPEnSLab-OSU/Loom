@@ -3,6 +3,8 @@
 // This is a basic example that demonstrates how to log data to an SD card
 // using Loom.
 
+// Documentation for SD: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___s_d.html
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>

@@ -21,6 +21,7 @@
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___d_s3231.html)
 /// - [Product Page: Adafruit DS3231 Precision RTC FeatherWing](https://www.adafruit.com/product/3028)
+///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ds3231-rtc)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_DS3231 : public LoomRTC
@@ -38,13 +39,15 @@ public:
 
 	/// Constructor
 	///
-	/// @param[in]	timezone			Set(TimeZone) | <11> | { 0("WAT"), 1("AT"), 2("ADT"), 3("AST"), 4("EDT"), 5("EST"), 6("CDT"), 7("CST"), 8("MDT"), 9("MST"), 10("PDT"), 11("PST"), 12("ALDT"), 13("ALST"), 14("HST"), 15("SST"), 16("GMT"), 17("BST"), 18("CET"), 19("CEST"), 20("EET"), 21("EEST"), 22("BT"), 23("ZP4"), 24("ZP5"), 25("ZP6"), 26("ZP7"), 27("AWST"), 28("AWDT"), 29("ACST"), 30("ACDT"), 31("AEST"), 32("AEDT")} | Which timezone device is in
-	/// @param[in]	use_utc_time		Bool | <true> | {true, false} | True for UTC time, false for local time
+	/// @param[in]	timezone			Set(TimeZone) | <11> | { 0("WAT"), 1("AT"), 2("ADT"), 3("AST"), 4("EDT"), 5("EST"), 6("CDT"), 7("CST"), 8("MDT"), 9("MST"), 10("PDT"), 11("PST"), 12("AKDT"), 13("AKST"), 14("HST"), 15("SST"), 16("GMT"), 17("BST"), 18("CET"), 19("EET"), 20("EEST"), 21("BRT"), 22("ZP4"), 23("ZP5"), 24("ZP6"), 25("ZP7"), 26("AWST"), 27("ACST"), 28("AEST")} | Which timezone device is in
+	/// @param[in]	use_local_time		Bool | <false> | {true, false} | True for local time, false for UTC time
+	/// @param[in]	custom_time			Bool | <false> | {true, false} | True for user input local time, false otherwise
 	Loom_DS3231(
 			LoomManager* manager,
-			const TimeZone		timezone			= TimeZone::PST,
-			const bool			use_utc_time		= true
-		);
+			TimeZone		timezone			= TimeZone::PST,
+			const bool			use_local_time		= false,
+			const bool			custom_time			= false
+	);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
